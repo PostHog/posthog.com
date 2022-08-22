@@ -50,7 +50,11 @@ const ResponseButtons: React.FC<{ submitResponse: (helpful: boolean) => void }> 
     )
 }
 
-const ResponseFeedback: React.FC<{ title: string; onSubmit: (response: string) => void }> = ({ title, onSubmit }) => {
+const ResponseFeedback: React.FC<{ title: string; placeholder: string; onSubmit: (response: string) => void }> = ({
+    title,
+    placeholder,
+    onSubmit,
+}) => {
     const [feedback, setFeedback] = React.useState<string>('')
 
     const handleSubmit = (event: React.FormEvent) => {
@@ -61,20 +65,21 @@ const ResponseFeedback: React.FC<{ title: string; onSubmit: (response: string) =
 
     return (
         <motion.div initial={{ translateY: '10%', opacity: 0 }} animate={{ translateY: 0, opacity: 1 }}>
-            <form onSubmit={handleSubmit} className="w-full space-y-3">
+            <form onSubmit={handleSubmit} className="w-full space-y-4">
                 <h3 className=" text-xlfont-bold m-0">{title}</h3>
                 <textarea
                     className="w-full block bg-white p-1.5 rounded-sm shadow-sm border border-black/20 text-sm dark:bg-white/10 dark:text-white"
                     rows={3}
                     onChange={(event) => setFeedback(event.target.value)}
                     autoFocus
+                    placeholder={placeholder}
                 />
 
                 <button
-                    className="text-base font-bold px-4 py-2 rounded-sm shadow-sm bg-white text-black/70 hover:text-black/95 dark:bg-white/30 dark:text-white/90 dark:hover:bg-white/40 dark:hover:text-white/100 relative active:top-[1px] active:scale-[.98] transition-colors"
+                    className="text-base px-4 py-1.5 rounded-sm shadow-sm bg-white text-black/70 hover:text-black/95 dark:bg-white/30 dark:text-white/90 dark:hover:bg-white/40 dark:hover:text-white/100 relative active:top-[1px] active:scale-[.98] transition-colors cursor-pointer"
                     disabled={feedback.trim() === ''}
                 >
-                    Submit
+                    Send feedback
                 </button>
             </form>
         </motion.div>
@@ -122,9 +127,21 @@ export const DocsPageSurvey = () => {
         case 'base':
             return <ResponseButtons submitResponse={submitResponse} />
         case 'helpful':
-            return <ResponseFeedback title="What was most helpful?" onSubmit={submitFeedback} />
+            return (
+                <ResponseFeedback
+                    title="What was most helpful?"
+                    placeholder="Let us know what you found helpful"
+                    onSubmit={submitFeedback}
+                />
+            )
         case 'not-helpful':
-            return <ResponseFeedback title="What can we improve?" onSubmit={submitFeedback} />
+            return (
+                <ResponseFeedback
+                    title="What can we improve?"
+                    placeholder="Let us know what we can improve on"
+                    onSubmit={submitFeedback}
+                />
+            )
         case 'thanks':
             return <ResponseMessage />
     }
