@@ -22,11 +22,6 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
             url: '/marketplace',
         },
         {
-            title: 'Customer stories',
-            description: 'See how PostHog is supporting industry leaders',
-            url: '/customers',
-        },
-        {
             title: 'Contributors',
             description: 'Fix a bug, get credit for the merch store (and warm fuzzies)',
             url: '/contributors',
