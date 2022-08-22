@@ -4,6 +4,7 @@ import { ThumbsDown, ThumbsUp } from 'components/Icons/Icons'
 import { motion } from 'framer-motion'
 import { useValues } from 'kea'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
+import { button as callToAction } from 'components/CallToAction'
 
 const button = cntl`
     text-base
@@ -75,10 +76,7 @@ const ResponseFeedback: React.FC<{ title: string; placeholder: string; onSubmit:
                     placeholder={placeholder}
                 />
 
-                <button
-                    className="text-base px-4 py-1.5 rounded-sm font-semibold shadow-sm bg-white text-black/70 hover:text-black/95 dark:bg-white/30 dark:text-white/90 dark:hover:bg-white/40 dark:hover:text-white/100 relative active:top-[1px] active:scale-[.98] transition-colors cursor-pointer"
-                    disabled={feedback.trim() === ''}
-                >
+                <button className={callToAction()} disabled={feedback.trim() === ''}>
                     Send feedback
                 </button>
             </form>

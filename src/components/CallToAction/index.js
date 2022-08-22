@@ -49,7 +49,7 @@ const buttonTypes = {
     custom: '',
 }
 
-const button = (type = 'primary', width = 'auto', className = '', size = 'lg') => cntl`
+export const button = (type = 'primary', width = 'auto', className = '', size = 'lg') => cntl`
     text-center
     select-none
     rounded-sm
