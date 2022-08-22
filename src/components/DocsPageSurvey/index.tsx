@@ -65,7 +65,7 @@ const ResponseFeedback: React.FC<{ title: string; placeholder: string; onSubmit:
 
     return (
         <motion.div initial={{ translateY: '10%', opacity: 0 }} animate={{ translateY: 0, opacity: 1 }}>
-            <form onSubmit={handleSubmit} className="w-full space-y-4">
+            <form onSubmit={handleSubmit} className="w-full space-y-4 m-0">
                 <h3 className=" text-xlfont-bold m-0">{title}</h3>
                 <textarea
                     className="w-full block bg-white p-1.5 rounded-sm shadow-sm border border-black/20 text-sm dark:bg-white/10 dark:text-white"
