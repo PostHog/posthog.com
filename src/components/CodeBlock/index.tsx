@@ -45,6 +45,7 @@ export default function Tooltip({
 }
 
 interface CodeBlockProps {
+    showLineNumbers?: boolean
     children: {
         key?: string | null
         props: {
@@ -58,18 +59,19 @@ interface CodeBlockProps {
     }
 }
 
-export const CodeBlock = (props: CodeBlockProps) => {
+export const CodeBlock: React.FC<CodeBlockProps> = ({ children, showLineNumbers = false }) => {
     const { posthog } = useValues(posthogAnalyticsLogic)
-    const className = props.children.props.className || ''
+    const className = children.props.className || ''
     const matches = className.match(/language-(?<lang>.*)/)
-    const [code, setCode] = useState('')
-    const [projectName, setProjectName] = useState('')
-    const [hasBeenCopied, setHasBeenCopied] = useState(false)
-    const [tooltipVisible, setTooltipVisible] = useState(false)
-    const [copyToClipboardAvailable, setCopyToClipboardAvailable] = useState(false)
     const language = matches && matches.groups && matches.groups.lang ? matches.groups.lang : ''
     const codeBlockId = generateRandomHtmlId()
     const { websiteTheme } = useValues(layoutLogic)
+
+    const [code, setCode] = useState('')
+    const [projectName, setProjectName] = useState('')
+    const [copyToClipboardAvailable, setCopyToClipboardAvailable] = useState(false)
+    const [hasBeenCopied, setHasBeenCopied] = useState(false)
+    const [tooltipVisible, setTooltipVisible] = useState(false)
 
     useEffect(() => {
         // Browser check - no cookies on the server
@@ -77,7 +79,7 @@ export const CodeBlock = (props: CodeBlockProps) => {
             setProjectName(getCookie('ph_current_project_name') || '')
             const phToken = getCookie('ph_current_project_token')
             if (phToken) {
-                const updatedCode = props.children.props.children
+                const updatedCode = children.props.children
                     .trim()
                     .replace(/<ph_project_api_key>/g, phToken)
                     .replace(/<ph_instance_address>/g, 'https://app.posthog.com')
@@ -88,7 +90,7 @@ export const CodeBlock = (props: CodeBlockProps) => {
                 setCopyToClipboardAvailable(true)
             }
         }
-    }, [props])
+    }, [children])
 
     const highlightToken = async (token: string) => {
         if (!localStorage.getItem('token_autofilled')) {
@@ -117,7 +119,7 @@ export const CodeBlock = (props: CodeBlockProps) => {
     }
 
     const copyToClipboard = () => {
-        navigator.clipboard.writeText(code || props.children.props.children.trim())
+        navigator.clipboard.writeText(code || children.props.children.trim())
         setHasBeenCopied(true)
         setTooltipVisible(true)
         setTimeout(() => {
@@ -152,22 +154,29 @@ export const CodeBlock = (props: CodeBlockProps) => {
             <pre className="m-0 p-0 rounded-none">
                 <Highlight
                     {...defaultProps}
-                    code={code || props.children.props.children.trim()}
+                    code={code || children.props.children.trim()}
                     language={language as Language}
                     theme={websiteTheme === 'dark' ? darkTheme : lightTheme}
                 >
                     {({ className, style, tokens, getLineProps, getTokenProps }) => (
                         <div className="flex p-4" style={{ ...style }} id={codeBlockId}>
-                            <span className="select-none">
-                                {tokens.map((line, i) => (
-                                    <div key={i} {...getLineProps({ line, key: i })}>
-                                        <div className="inline-block w-4 text-right mr-4">{i + 1}</div>
-                                    </div>
-                                ))}
-                            </span>
+                            {showLineNumbers && (
+                                <span className="select-none flex flex-col text-white/80" aria-hidden="true">
+                                    {tokens.map((_, i) => (
+                                        <span
+                                            style={{ lineHeight: '20px' }}
+                                            className="inline-block w-4 text-right mr-4 align-middle"
+                                            key={i}
+                                        >
+                                            {i + 1}
+                                        </span>
+                                    ))}
+                                </span>
+                            )}
+
                             <code className={`${className} block rounded-none !m-0`}>
                                 {tokens.map((line, i) => (
-                                    <div key={i} {...getLineProps({ line, key: i })}>
+                                    <div key={i} className="h-[20px]" {...getLineProps({ line, key: i })}>
                                         {line.map((token, key) => {
                                             const { className, ...other } = getTokenProps({ token, key })
                                             return (
