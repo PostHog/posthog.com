@@ -30,6 +30,11 @@ main a,
     @apply text-red hover:text-red font-semibold;
 }
 
+a.no-hover {
+    /* override links in article-content so they don't have animated underlines on hover */
+    @apply !bg-none !pb-0;
+}
+
 p {
     font-variant-numeric: proportional-nums;
 }
@@ -172,11 +177,11 @@ h4 {
     }
     td,
     th {
-        @apply border-gray-accent-light dark:border-gray-accent-dark border-dashed border-b text-left pt-2;
+        @apply border-gray-accent-light dark:border-gray-accent-dark border-dashed border-b pt-2;
         padding-bottom: calc(0.5rem - 1px);
 
         &:not(:first-child) {
-            @apply pl-8;
+            @apply px-4;
         }
     }
 
@@ -995,4 +1000,34 @@ body.dark {
 
 .crumb-has-next::after {
     content: '→' !important;
+}
+
+.product-event-pipelines > ul {
+    @apply list-none m-0 p-0 grid grid-cols-3 xl:grid-cols-6 items-center border-t border-l border-dashed border-gray-accent-light;
+}
+
+@media (min-width: 1280px) {
+    .product-event-pipelines {
+        grid-template-columns: 1fr 64rem 1fr;
+        > ul {
+            grid-column: 2 / span 2;
+        }
+    }
+}
+
+.product-hogs-slider {
+    .slick-list {
+        @apply -mt-16 md:-mt-20 -mb-8 md:mb-0;
+    }
+    .slick-track {
+        @apply flex items-end;
+        .slick-slide {
+            @apply -ml-12;
+        }
+    }
+}
+
+iframe[src*='youtube.com'],
+iframe[src*='youtube-nocookie.com'] {
+    @apply aspect-video w-full h-auto;
 }

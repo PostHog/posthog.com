@@ -1022,41 +1022,6 @@
     status = 301
 
 [[redirects]]
-    from = "/product/funnels"
-    to = "/apps/funnels"
-    status = 301
-
-[[redirects]]
-    from = "/product/trends"
-    to = "/apps/trends"
-    status = 301
-
-[[redirects]]
-    from = "/product/session-recording"
-    to = "/apps/session-recording"
-    status = 301
-
-[[redirects]]
-    from = "/product/feature-flags"
-    to = "/apps/feature-flags"
-    status = 301
-
-[[redirects]]
-    from = "/product/heatmaps"
-    to = "/apps/heatmaps"
-    status = 301
-
-[[redirects]]
-    from = "/product/experimentation-suite"
-    to = "/apps/experimentation-suite"
-    status = 301
-
-[[redirects]]
-    from = "/product/collaboration"
-    to = "/apps/collaboration"
-    status = 301
-
-[[redirects]]
     from = "/heatmaps"
     to = "/apps/heatmaps"
 
@@ -1192,7 +1157,7 @@
     to = "/tutorials/how-to-segment-users"
 
 [build]
-    command = "GATSBY_DEPLOY_PRIME_URL=$DEPLOY_PRIME_URL gatsby build"
+    command = "GATSBY_DEPLOY_PRIME_URL=$DEPLOY_PRIME_URL GATSBY_CONTEXT=$CONTEXT gatsby build"
 
 # Added: 2022-02-04
 [[redirects]]
