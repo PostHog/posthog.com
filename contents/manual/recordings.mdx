@@ -113,7 +113,7 @@ For example, you may have `https://www.example.com` in the list. This will stop 
 
 If no domains are set here, PostHog will capture recordings on all domains.
 
-#### Posthog-js configurations
+#### `posthog-js` configurations
 
 If you had previously disabled session recordings, you may have set the `disable_session_recording` option to `true` in posthog-js.
 
@@ -123,7 +123,7 @@ You can read more about [posthog-js configurations here](/docs/integrate/client/
 
 #### Content security policy
 
-When recordings are enabled, PostHog-js will fetch a `recorder.js` script from the PostHog server. (This is not included in the default posthog-js to minimize the default bundle size)
+When recordings are enabled, postHog-js will fetch a `recorder.js` script from the PostHog server. (This is not included in the default posthog-js to minimize the default bundle size)
 
 Depending on your content security policy, this script may be blocked. If you have a `default-src`, `script-src`, `script-src-elem`, or `connect-src` directive in your CSP, you may need to add `https://app.posthog.com` (or your host URL if you are self hosted) to your list.
 
