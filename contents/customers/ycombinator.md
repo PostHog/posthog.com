@@ -1,8 +1,8 @@
 ---
 title: How Y Combinator is building the next generation of startups, with help from PostHog
 customer: Y Combinator
-logo: ../images/customers/ycombinator/yc_logo.png
-featuredImage: ../images/customers/ycombinator/featured_yc.jpeg
+logo: ../images/customers/ycombinator/yc_logo_b.png
+featuredImage: ../images/customers/ycombinator/featured.svg
 featuredCustomer: true
 industries:
     - SaaS, Education
