@@ -304,6 +304,10 @@
                             "url": "/handbook/engineering/release-new-version"
                         },
                         {
+                            "name": "Handling incidents",
+                            "url": "/handbook/engineering/incidents"
+                        },
+                        {
                             "name": "Bug prioritization",
                             "url": "/handbook/engineering/bug-prioritization"
                         }
