@@ -12,21 +12,14 @@ const Editions = ({ setDemoType }) => {
     return (
         <>
             <Intro title="Select edition" />
-            <div className="flex justify-center flex-col md:flex-row divide-y-1 md:divide-y-0 md:divide-x-1 divide-dashed divide-gray-accent-light">
-                <div className="md:pr-12 pb-12 md:pb-0">
-                    <h2 className="text-[15px] font-semibold mb-4 text-gray">Self-serve plans</h2>
+            <div className="max-w-[600px] mx-auto grid md:grid-cols-2 grid-cols-1 gap-x-6">
+                <div className="pb-6 md:pt-0 pt-6 justify-self-end w-full">
                     <div className="flex flex-col space-y-4">
-                        <Title title="PostHog Cloud" subtitle="Turnkey solution, pay per event" badge="Self-Serve" />
-                        <Title
-                            title="Self-Hosted"
-                            subtitle="Full access to your instance, pay per event"
-                            badge="Self-Serve"
-                        />
-                        <Title title="Open Source" subtitle="Free, limited to one project" badge="Self hosted" />
+                        <Title title="Open Source" subtitle="Free, limited to one project" />
                     </div>
                     <CallToAction
                         width="full"
-                        className="mt-7 shadow-lg"
+                        className="mt-4 box-border"
                         type="secondary"
                         onClick={() => setDemoType('group')}
                         event={{ name: 'book a demo: clicked group demo' }}
@@ -34,18 +27,16 @@ const Editions = ({ setDemoType }) => {
                         Join a group demo
                     </CallToAction>
                 </div>
-                <div className="md:pl-12 pt-12 md:pt-0">
-                    <h2 className="text-[15px] font-semibold mb-4 text-gray">Enterprise plans</h2>
-                    <div className="flex flex-col space-y-10">
-                        <div className="space-y-4 max-w-[280px]">
+                <div className="md:order-none order-first md:pl-6 pb-6 md:border-l md:border-b-0 border-b border-gray-accent-light border-dashed">
+                    <div className="flex flex-col md:space-y-10 space-y-6">
+                        <div className="space-y-4 w-full">
                             <Title
                                 title="PostHog Cloud"
                                 subtitle="For large userbases or event volumes, starts at $300/mo"
-                                badge="Enterprise"
                             />
                             <CallToAction
                                 width="full"
-                                className="mt-7"
+                                className="box-border"
                                 type="primary"
                                 onClick={() => setDemoType('scale')}
                                 event={{ name: 'book a demo: clicked scale demo' }}
@@ -53,15 +44,14 @@ const Editions = ({ setDemoType }) => {
                                 Book a personalized demo
                             </CallToAction>
                         </div>
-                        <div className="space-y-4 max-w-[280px]">
+                        <div className="space-y-4 w-full">
                             <Title
                                 title="Self-Hosted"
                                 subtitle="A focus on compliance and security, starts at $450/mo"
-                                badge="Enterprise"
                             />
                             <CallToAction
                                 width="full"
-                                className="mt-7"
+                                className="box-border"
                                 type="primary"
                                 onClick={() => setDemoType('enterprise')}
                                 event={{ name: 'book a demo: clicked enterprise demo' }}
@@ -69,6 +59,23 @@ const Editions = ({ setDemoType }) => {
                                 Book a personalized demo
                             </CallToAction>
                         </div>
+                    </div>
+                </div>
+                <div className="md:col-span-2 pt-6 border-t border-dashed border-gray-accent-light text-center">
+                    <h3 className="m-0">Not sure if PostHog is right for you?</h3>
+                    <p className="m-0 mt-1 text-black/50 font-medium text-sm">
+                        Book a quick QA with someone from the PostHog team!
+                    </p>
+                    <div className="md:max-w-[280px] w-full mx-auto">
+                        <CallToAction
+                            width="full"
+                            className="mt-4 box-border"
+                            type="secondary"
+                            onClick={() => setDemoType('enterprise')}
+                            event={{ name: 'book a demo: clicked enterprise demo' }}
+                        >
+                            Meet PostHog
+                        </CallToAction>
                     </div>
                 </div>
             </div>
