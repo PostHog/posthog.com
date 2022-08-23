@@ -7,13 +7,13 @@ const theme: PrismTheme = {
     },
     styles: [
         {
-            types: ['prolog', 'constant', 'builtin'],
+            types: ['prolog', 'constant', 'builtin', 'boolean'],
             style: {
                 color: 'rgb(189, 147, 249)',
             },
         },
         {
-            types: ['inserted', 'function'],
+            types: ['inserted', 'function', 'number'],
             style: {
                 color: 'rgb(242, 107, 44)',
             },

@@ -1,26 +1,17 @@
 import { Link } from 'react-scroll'
 import Scrollspy from 'react-scrollspy'
 import '@fontsource/source-code-pro'
-import CodeBlock from 'components/Home/CodeBlock'
+import { CodeBlock } from 'components/CodeBlock'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import 'core-js/features/array/at'
 import { graphql } from 'gatsby'
 import { getCookie, setCookie } from 'lib/utils'
 import * as OpenAPISampler from 'openapi-sampler'
-import Highlight, { defaultProps } from 'prism-react-renderer'
 import React, { useEffect, useRef, useState } from 'react'
-import { push as Menu } from 'react-burger-menu'
 import ReactMarkdown from 'react-markdown'
-import '../styles/api-docs.scss'
-import { Listbox } from '@headlessui/react'
-import { SelectorIcon } from '@heroicons/react/outline'
-import MainSidebar from 'components/Docs/MainSidebar'
-import Navigation from 'components/Docs/Navigation'
-import SectionLinks from 'components/SectionLinks'
-import PostLayout, { TableOfContents } from 'components/PostLayout'
+import PostLayout from 'components/PostLayout'
 import CommunityQuestions from 'components/CommunityQuestions'
-import { HandbookSidebar } from './Handbook'
 
 const mapVerbsColor = {
     get: 'blue',
@@ -33,6 +24,7 @@ const mapVerbsColor = {
 function Endpoints({ paths }) {
     const urlItems = []
     Object.entries(paths).map(([path, value]) => Object.keys(value).map((verb) => urlItems.push(pathID(verb, path))))
+
     return (
         <div>
             <h3>Endpoints</h3>
@@ -341,57 +333,20 @@ function RequestExample({ item, objects, exampleLanguage, setExampleLanguage }) 
             ]
         })
     }
-    const path = item.pathName.replaceAll('{', ':').replaceAll('}', '')
 
-    return (
-        <>
-            <div className="code-example flex items-center justify-between my-1.5">
-                <div className="text-gray">
-                    <code className={`text-${mapVerbsColor[item.httpVerb]}`}>{item.httpVerb.toUpperCase()} </code>
-                    <code>{path}</code>
-                </div>
+    const path: string = item.pathName.replaceAll('{', ':').replaceAll('}', '')
 
-                <Listbox as="div" className="relative" value={exampleLanguage} onChange={setExampleLanguage}>
-                    <Listbox.Button className="bg-white pl-2 pr-10 py-1 rounded-sm text-sm flex items-center ">
-                        <span className="text-gray-accent-dark font-normal">{exampleLanguage}</span>
-                        <SelectorIcon className="w-3 h-3 text-gray absolute right-1.5" />
-                    </Listbox.Button>
-                    <Listbox.Options
-                        as="ul"
-                        className="absolute right-0 top-full mt-1 bg-white list-none px-0 py-1 rounded-sm shadow focus:outline-none z-50"
-                    >
-                        {['curl', 'python'].map((option) => (
-                            <Listbox.Option
-                                key={option}
-                                value={option}
-                                className={({ active, selected }) =>
-                                    `${selected ? 'font-semibold' : ''} ${
-                                        active ? 'bg-orange text-white' : 'text-gray-accent-dark'
-                                    } w-full pl-3 pr-6 cursor-pointer`
-                                }
-                            >
-                                <span className="text-sm">{option}</span>
-                            </Listbox.Option>
-                        ))}
-                    </Listbox.Options>
-                </Listbox>
-            </div>
-
-            {exampleLanguage === 'curl' && (
-                <CodeBlock
-                    code={`export POSTHOG_PERSONAL_API_KEY=[your personal api key]
+    const curl = `
+export POSTHOG_PERSONAL_API_KEY=[your personal api key]
 curl ${item.httpVerb === 'delete' ? ' -X DELETE ' : item.httpVerb == 'patch' ? '-X PATCH ' : ''}${
-                        item.httpVerb === 'post' ? "\n    -H 'Content-Type: application/json'" : ''
-                    }\\
+        item.httpVerb === 'post' ? "\n    -H 'Content-Type: application/json'" : ''
+    }\\
     -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \\
-    https://app.posthog.com${path}${params.map((item) => `\\\n\t-d ${item[0]}=${JSON.stringify(item[1])}`)}`}
-                    language="bash"
-                    hideNumbers={true}
-                />
-            )}
-            {exampleLanguage === 'python' && (
-                <CodeBlock
-                    code={`api_key = "[your personal api key]"
+    https://app.posthog.com${path}${params.map((item) => `\\\n\t-d ${item[0]}=${JSON.stringify(item[1])}`)}
+    `
+
+    const python = `
+api_key = "[your personal api key]"
 project_id = "[your project id]"
 response = requests.${item.httpVerb}(
     "https://app.posthog.com${path}".format(
@@ -404,12 +359,45 @@ response = requests.${item.httpVerb}(
                   .replace('\n}', '\n\t}')}`
             : ''
     }
-)${item.httpVerb !== 'delete' ? '.json()' : ''}`}
-                    language="bash"
-                    hideNumbers={true}
-                />
-            )}
-        </>
+)${item.httpVerb !== 'delete' ? '.json()' : ''}
+    `
+
+    return (
+        <CodeBlock
+            title={
+                <div className="code-example flex text-xs space-x-1.5 my-1">
+                    <code className={`shrink-0 text-${mapVerbsColor[item.httpVerb]}`}>
+                        {item.httpVerb.toUpperCase()}{' '}
+                    </code>
+                    <code className="min-w-0 break-words">
+                        {path.split('/').map((token) => {
+                            if (token === '') {
+                                return <wbr />
+                            } else {
+                                return (
+                                    <>
+                                        <wbr />/{token}
+                                    </>
+                                )
+                            }
+                        })}
+                    </code>
+                </div>
+            }
+        >
+            {[
+                {
+                    name: 'cURL',
+                    language: 'bash',
+                    code: curl,
+                },
+                {
+                    name: 'Python',
+                    language: 'python',
+                    code: python,
+                },
+            ]}
+        </CodeBlock>
     )
 }
 
@@ -417,28 +405,22 @@ function ResponseExample({ objects, objectKey }) {
     if (!objectKey) {
         return 'No response'
     }
+
+    const response = JSON.stringify(
+        OpenAPISampler.sample(objects.schemas[objectKey], {}, { components: objects }),
+        null,
+        2
+    )
+
     return (
-        <Highlight
-            {...defaultProps}
-            code={JSON.stringify(
-                OpenAPISampler.sample(objects.schemas[objectKey], {}, { components: objects }),
-                null,
-                2
-            )}
-            language="json"
-        >
-            {({ className, tokens, getLineProps, getTokenProps }) => (
-                <pre className={className} style={{ background: '#24292E', margin: 0 }}>
-                    {tokens.map((line, i) => (
-                        <div {...getLineProps({ line, key: i })} key={i}>
-                            {line.map((token, key) => (
-                                <span {...getTokenProps({ token, key })} key={key} />
-                            ))}
-                        </div>
-                    ))}
-                </pre>
-            )}
-        </Highlight>
+        <CodeBlock showCopy={false} title={<span className="text-xs font-semibold">RESPONSE</span>}>
+            {[
+                {
+                    language: 'javascript',
+                    code: response,
+                },
+            ]}
+        </CodeBlock>
     )
 }
 
@@ -470,15 +452,7 @@ const pathDescription = (item) => {
     }
 }
 
-const SectionLinksTop = ({ previous, next }) => {
-    return <SectionLinks className="mt-9" previous={previous} next={next} />
-}
-
-export default function ApiEndpoint({
-    data,
-    pageContext: { slug, menu, previous, next, breadcrumb, breadcrumbBase, tableOfContents },
-    location,
-}) {
+export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, breadcrumbBase, tableOfContents } }) {
     const {
         components: { components },
     } = data
@@ -493,22 +467,12 @@ export default function ApiEndpoint({
         paths[item.path][item.httpVerb] = item.operationSpec
     })
     const objects = JSON.parse(components)
-    const mainEl = useRef()
 
-    const [menuOpen, setMenuOpen] = useState(false)
     const [exampleLanguage, setExampleLanguageState] = useState()
+
     const setExampleLanguage = (language) => {
         setCookie('api_docs_example_language', language)
         setExampleLanguageState(language)
-    }
-
-    const handleMobileMenuClick = () => {
-        setMenuOpen(!menuOpen)
-    }
-    const styles = {
-        bmOverlay: {
-            background: 'transparent',
-        },
     }
 
     useEffect(() => {

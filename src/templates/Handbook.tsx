@@ -1,7 +1,7 @@
 import { MDXProvider } from '@mdx-js/react'
 import { useLocation } from '@reach/router'
 import { Blockquote } from 'components/BlockQuote'
-import { CodeBlock } from 'components/CodeBlock'
+import { MdxCodeBlock } from 'components/CodeBlock'
 import { Heading } from 'components/Heading'
 import { InlineCode } from 'components/InlineCode'
 import Layout from 'components/Layout'
@@ -95,7 +95,7 @@ export default function Handbook({
         Team,
         inlineCode: InlineCode,
         blockquote: Blockquote,
-        pre: CodeBlock,
+        pre: MdxCodeBlock,
         h1: (props) => Heading({ as: 'h1', ...props }),
         h2: (props) => Heading({ as: 'h2', ...props }),
         h3: (props) => Heading({ as: 'h3', ...props }),
