@@ -48,7 +48,7 @@ const slides = [
         ),
     },
     {
-        label: 'AB tests and experiments',
+        label: 'A/B testing and experiments',
         url: 'ab-tests-and-experiments',
         image: (
             <StaticImage
@@ -176,10 +176,12 @@ const sliderSettings = {
 const Slide = ({ image, label }) => {
     return (
         <div className="relative group">
-            <div className="hover:scale-[1.1] transition-transform">{image}</div>
-            <span className="absolute left-0 top-0 text-white bg-primary rounded-md px-2 group-hover:visible invisible">
-                {label}
-            </span>
+            <div className="hover:scale-[1.1] transition-transform relative active:scale-[1.09]">{image}</div>
+            <div className="absolute left-0 bottom-4 right-0 group-hover:visible invisible flex justify-center">
+                <span className="text-black bg-tan/75 backdrop-blur shadow-xl text-lg rounded-md px-3">
+                    {label}
+                </span>
+            </div>
         </div>
     )
 }
