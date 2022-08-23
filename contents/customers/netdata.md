@@ -23,7 +23,7 @@ Netdata is an open source monitoring and troubleshooting platform used by engine
 
 ### Finding product market fit with analytics and empathy
 
-[Autocapture](/blog/is-autocapture-still-bad) enabled Netdata to start collecting data immediately, so the team could focus on moving towards product market fit, rather than complex instrumentation. Using autocapture alongside some custom events has enabled the team to  identify trends and iterate quickly. 
+[Autocapture](/blog/is-autocapture-still-bad) enabled Netdata to start collecting data immediately, so the team could focus on moving towards product market fit, rather than complex instrumentation. Using autocapture alongside some custom events has enabled the team to identify trends and iterate quickly. 
 
 “Whenever we launch a feature, we create a dashboard in PostHog,” said Andrew. “I have one for our anomaly detection feature, for example, which shows the funnel of how many people use it, how many get good results…this is our flagship machine-learning feature, and PostHog helps us make it better and understand how to achieve product market fit.”
 
