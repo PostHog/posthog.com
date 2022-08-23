@@ -30,10 +30,7 @@ const Editions = ({ setDemoType }) => {
                 <div className="md:order-none order-first md:pl-6 pb-6 md:border-l md:border-b-0 border-b border-gray-accent-light border-dashed">
                     <div className="flex flex-col md:space-y-10 space-y-6">
                         <div className="space-y-4 w-full">
-                            <Title
-                                title="PostHog Cloud"
-                                subtitle="For large userbases or event volumes, starts at $300/mo"
-                            />
+                            <Title title="PostHog Cloud" subtitle="For large userbases or event volumes" />
                             <CallToAction
                                 width="full"
                                 className="box-border"
@@ -45,10 +42,7 @@ const Editions = ({ setDemoType }) => {
                             </CallToAction>
                         </div>
                         <div className="space-y-4 w-full">
-                            <Title
-                                title="Self-Hosted"
-                                subtitle="A focus on compliance and security, starts at $450/mo"
-                            />
+                            <Title title="Self-Hosted" subtitle="A focus on compliance and security" />
                             <CallToAction
                                 width="full"
                                 className="box-border"
