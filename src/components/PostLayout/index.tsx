@@ -322,7 +322,6 @@ const Menu = ({
 export const TableOfContents = ({
     menu,
     handleLinkClick,
-    title = 'Table of contents',
     menuType = 'standard',
 }: {
     menu: IMenu[]
@@ -334,6 +333,7 @@ export const TableOfContents = ({
         standard: React.Fragment,
         scroll: Scrollspy,
     }[menuType]
+
     const wrapperProps = {
         standard: {},
         scroll: {
@@ -343,29 +343,24 @@ export const TableOfContents = ({
             currentClassName: 'bg-gray-accent-light',
         },
     }[menuType]
-    return (
-        <>
-            {title && (
-                <p className="text-black dark:text-white font-semibold opacity-25 m-0 mb-2 ml-3 text-[15px]">{title}</p>
-            )}
 
-            <nav>
-                <Wrapper {...wrapperProps}>
-                    {menu.map((menuItem) => {
-                        return (
-                            <Menu
-                                menuType={menuType}
-                                topLevel
-                                handleLinkClick={handleLinkClick}
-                                className="ml-0"
-                                key={menuItem.name}
-                                {...menuItem}
-                            />
-                        )
-                    })}
-                </Wrapper>
-            </nav>
-        </>
+    return (
+        <nav>
+            <Wrapper {...wrapperProps}>
+                {menu.map((menuItem) => {
+                    return (
+                        <Menu
+                            menuType={menuType}
+                            topLevel
+                            handleLinkClick={handleLinkClick}
+                            className="ml-0"
+                            key={menuItem.name}
+                            {...menuItem}
+                        />
+                    )
+                })}
+            </Wrapper>
+        </nav>
     )
 }
 
