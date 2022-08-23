@@ -63,6 +63,7 @@ import { MainNav } from './components/MainNav'
 import { MdxAnchorHeaders } from './components/MdxAnchorHeaders'
 import { Modal } from './components/Modal'
 import { NewsletterForm } from './components/NewsletterForm'
+import { NewsletterTutorial } from './components/NewsletterTutorial'
 import { NextSteps } from './components/NextSteps'
 import { NotFoundPage } from './components/NotFoundPage'
 import { OtherFeaturesBlock } from './components/OtherFeaturesBlock'
@@ -183,6 +184,7 @@ export const shortcodes = {
     MdxAnchorHeaders,
     Modal,
     NewsletterForm,
+    NewsletterTutorial,
     NextSteps,
     NotFoundPage,
     OtherFeaturesBlock,

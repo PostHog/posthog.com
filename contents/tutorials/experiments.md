@@ -99,3 +99,5 @@ And that's all! You should be good to run any experiment you want with these cha
 
 - [How to safely roll out new features using feature flags](/tutorials/feature-flags)
 - [Our guide to great open-source feature flags tools](/blog/best-open-source-feature-flag-tools)
+
+<NewsletterTutorial compact/>

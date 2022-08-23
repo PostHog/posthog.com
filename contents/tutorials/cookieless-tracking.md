@@ -72,3 +72,5 @@ posthog.init('<ph_project_api_key>', {
 
 Now that your PostHog deployment isn’t using cookies you can, optionally and if you’re not using cookies for any other services, completely remove your GDPR-required cookies acceptance banner. Good for you — they only annoy most users anyway. 
 
+<NewsletterTutorial compact/>
+
