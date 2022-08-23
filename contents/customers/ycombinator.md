@@ -17,7 +17,7 @@ toolsUsed:
     - Insights
 ---
 
-Y Combinator is the world’s top startup accelerator, helping to fund, train and guide the next generation of innovative businesses. Since 2005, thousands of successful companies have emerged from Y Combinator, including Dropbox, Airbnb, PagerDuty, Reddit, Amplitude…and PostHog. 
+Y Combinator is the world’s top startup accelerator, helping to fund, train and guide the next generation of innovative businesses. Since 2005, thousands of successful companies have emerged from Y Combinator, including Dropbox, Airbnb, PagerDuty, Reddit, Amplitude …and PostHog. 
 
 “Getting into Y Combinator’s W20 batch was so important for us,” said James Hawkins, PostHog’s co-founder and CEO. “The programme helped us in so many ways, from advice on [Hacker News launch](https://news.ycombinator.com/item?id=22376732) to [helping us find our first five hires](/blog/posthog-first-five)...It’s incredibly satisfying that the team continues to use PostHog themselves!”
 
