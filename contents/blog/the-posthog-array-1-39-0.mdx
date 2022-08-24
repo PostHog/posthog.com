@@ -86,7 +86,6 @@ Version 1.39 also adds hundreds of other improvements and fixes, including...
 
 -   **Improvement**: We've removed some axe violations on Home, to improve accessibility. And added accessibility testing to our workflow. Bonus: Check the PR for [a _fantastic_ Dad joke](https://github.com/PostHog/posthog/pull/11211#discussion_r941651022). 
 -   **Improvement**: When deleting persons, you can now choose to delete event data as well thanks to [a new person deletion flow](https://github.com/PostHog/posthog/pull/11347).
--   **Improvement**: We've [optimised the query behind loading property definitions](https://github.com/PostHog/posthog/pull/11037). For PostHog Cloud we saw a 75% reduction in API call time.
 -   **Improvement**: [We've separated the list of feature flags on an event from its event properties in the taxonomic filter](https://github.com/PostHog/posthog/pull/10668). Making it (approximately) 1,000,000% easier to find things when there are lots of feature flags.
 -   **Fix**: In a few unexpected cases we used to return a successful response to some invalid API requests to the capture endpoint. [Now we correctly return a `400 BAD REQUEST`](https://github.com/PostHog/posthog/pull/10999) which will help people with useful feedback during development
 
