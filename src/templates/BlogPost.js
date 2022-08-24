@@ -13,7 +13,7 @@ import { graphql } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
-import { CodeBlock } from '../components/CodeBlock'
+import { CodeBlockMdx } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
@@ -89,7 +89,7 @@ export default function BlogPost({ data, pageContext, location }) {
         h4: H4,
         h5: H5,
         h6: H6,
-        pre: CodeBlock,
+        pre: CodeBlockMdx,
         inlineCode: InlineCode,
         blockquote: Blockquote,
         img: ZoomImage,

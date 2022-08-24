@@ -11,7 +11,7 @@ import MobileSidebar from './MobileSidebar'
 import SectionLinks, { SectionLinksProps } from 'components/SectionLinks'
 import StickySidebar from './StickySidebar'
 import { Blockquote } from 'components/BlockQuote'
-import { CodeBlock } from 'components/CodeBlock'
+import { CodeBlockMdx } from 'components/CodeBlock'
 import CommunityQuestions from 'components/CommunityQuestions'
 import { Heading } from 'components/Heading'
 import { push as Menu } from 'react-burger-menu'
@@ -100,7 +100,7 @@ export default function DocsLayout({
         iframe: Iframe,
         inlineCode: InlineCode,
         blockquote: Blockquote,
-        pre: CodeBlock,
+        pre: CodeBlockMdx,
         h1: (props) => Heading({ as: 'h1', ...props }),
         h2: (props) => Heading({ as: 'h2', ...props }),
         h3: (props) => Heading({ as: 'h3', ...props }),

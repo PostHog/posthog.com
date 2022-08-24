@@ -11,7 +11,7 @@ import { ZoomImage } from 'components/ZoomImage'
 import { graphql } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
-import { CodeBlock } from '../components/CodeBlock'
+import { CodeBlockMdx } from '../components/CodeBlock'
 
 const QuestionSidebar = ({ question, location, title, pageViews, categories, slugs }) => {
     const days = Number(question.ts)
@@ -54,7 +54,7 @@ export default function Question({
     const components = {
         inlineCode: InlineCode,
         blockquote: Blockquote,
-        pre: CodeBlock,
+        pre: CodeBlockMdx,
         img: ZoomImage,
     }
     return (
