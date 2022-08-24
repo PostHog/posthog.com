@@ -70,8 +70,7 @@ export default function Handbook({
     const {
         body,
         frontmatter,
-        contributors,
-        fields: { slug },
+        fields: { slug, contributors },
     } = post
     const { title, hideAnchor, description, hideLastUpdated, features, github, installUrl, thumbnail, related } =
         frontmatter
@@ -123,7 +122,7 @@ export default function Handbook({
     return (
         <>
             <SEO
-                title={`${title} - Posthog ${breadcrumbBase.name}`}
+                title={`${title} - ${breadcrumbBase.name} - PostHog`}
                 description={description || excerpt}
                 article
                 image={`/og-images/${slug.replace(/\//g, '')}.jpeg`}
@@ -215,18 +214,14 @@ export const query = graphql`
             excerpt(pruneLength: 150)
             fields {
                 slug
-            }
-            contributors {
-                url
-                username
-                avatar {
-                    childImageSharp {
-                        gatsbyImageData(width: 38, height: 38)
+                contributors {
+                    url
+                    username
+                    avatar {
+                        childImageSharp {
+                            gatsbyImageData(width: 38, height: 38)
+                        }
                     }
-                }
-                teamData {
-                    name
-                    jobTitle
                 }
             }
             frontmatter {

@@ -54,9 +54,9 @@ const features: IProps[] = [
         disclaimer: 'Alternative to Hotjar, Logrocket, Matomo',
     },
     {
-        title: 'A/B tests & experiments',
+        title: 'A/B testing & experiments',
         disclaimer: 'Alternative to Optimizely, VWO, Google Optimize',
-        image: <StaticImage src="../components/Product/images/experimentation.png" alt="A/B tests & experiments" />,
+        image: <StaticImage src="../components/Product/images/experimentation.png" alt="A/B testing & experiments" />,
         features: [
             {
                 title: 'Experimentation Suite',
@@ -64,7 +64,7 @@ const features: IProps[] = [
                 url: '/product/experimentation',
             },
             {
-                title: 'Correlation Analysis',
+                title: 'Correlation analysis',
                 icon: ProductIcons.correlationAnalysis,
                 url: '/product/correlation-analysis',
             },

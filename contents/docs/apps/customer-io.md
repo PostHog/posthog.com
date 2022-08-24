@@ -26,6 +26,27 @@ You'll also need access to the relevant Customer.io account.
 3. Add your Customer.io site ID and token at the configuration step.
 4. Enable the app and watch your 'People' list get populated in Customer.io!
 
+### How do I match persons in PostHog with customers in Customer.io?
+
+We assume that you use the same ID to identify users in Customer.io as you use as distinct_id or in `posthog.identify()`.
+
+### How do I set properties on a Customer.io customer via PostHog?
+
+PostHog will send any property inside the `$set: {}` property to customer.io. In the example below, `email` and `userProperty` will be set on the customer
+
+```js
+posthog.capture(
+  'some event',
+  {
+    event_propery: 'this will not get sent',
+    $set: {
+      email: 'test@example.com',
+      userProperty: 'value'
+    }
+  }
+)
+```
+
 ### Is the source code for this app available?
 
 PostHog is open-source and so are all apps on the platform. The [source code for the Customer.io Connector](https://github.com/PostHog/customerio-plugin) is available on GitHub.
