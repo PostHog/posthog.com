@@ -8,7 +8,7 @@ hideAnchor: true
 categories: ['Release notes', 'Product updates']
 featuredImage: ../images/blog/posthog-array-blog.png
 featuredImageType: full
-excerpt: PostHog 1.39.0 moves person properties onto events, resulting in queries which are up to 400x faster. And that's just for starters!
+excerpt: PostHog 1.39.0 introduces a new beta option which could improve query speed by up to 400x. And that's just for starters!
 ---
 
 Want to know more about what we're up to? [Subscribe to HogMail, our newsletter](/newsletter), which we send out every two weeks!
@@ -19,7 +19,7 @@ Want to know more about what we're up to? [Subscribe to HogMail, our newsletter]
 
 **Release highlights:**
 
-- New: [Person properties have moved on to events](#new-person-properties-have-moved-on-to-events)
+- Beta: [Person properties on events](#beta-person-properties-have-moved-on-to-events)
 - New: Paul to add a highlight here
 - New: Paul to add a highlight here
 - New: Paul to add a highlight here
@@ -28,17 +28,21 @@ Want to know more about what we're up to? [Subscribe to HogMail, our newsletter]
 - Improved: Paul to add a highlight here
 - Apps: JOE to add
 
-### New: Person properties have moved on to events
+### Beta: Person properties on events
 
-We've made substantial changes to the way [persons](/manual/persons) and [events](/manual/events) work by moving all persons properties _onto_ events. It's a substantial change, months in the planning, which is critical to PostHog's ability to scale. 
+We're getting ready to make a substantial change to the way [persons](/manual/persons) and [events](/manual/events) work by essentially combining them and moving all persons properties _onto_ events. 1.39.0 gives you the chance to try the feature ahead of the full release by toggling your `actors_on_events_teams` [instance setting](/docs/self-host/configure/instance-settings).
+
+So, why have we moved person properties onto events? In part it's because it streamlines how we store data as we continue to scale, but it's also to unlock significant speed increases on queries involving both persons and events. Previously, PostHog stored personIDs and event information in separate tables, but this update simplifie
 
 A big benefit of this approach is that it enables significantly faster queries because we no longer have to compare multiple tables when running queries - everything is stored on the event. Some of our internal tests have shown a 400x increase in speed!
 
-This is a big change and one which we're planning to cover in more detail soon. Stay tuned to [the PostHog blog](/blog) for updates. 
+We'll share more about this shift once it's fully released to all users - keep and eye on [the PostHog blog](/blog) for updates. 
 
-### New: 
+### Improvement: Turbo properties
 
-Paul to add a highlight here. Just one or two sentences is enough. 
+Frustrated that it was taking a few seconds to load properties? You weren't the only one. Thankfully, version 1.39.0 addresses this by adding a limit so that PostHog doesn't always search through hundreds of thousands of properties for each query. The result? [Properties load much faster](https://github.com/PostHog/posthog/pull/11037). 
+
+Even better, this is just the starting point. We're aware that we need to do more to improve how properties work on PostHog, and we're working on it. 
 
 ### New: 
 
