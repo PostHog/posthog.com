@@ -33,15 +33,15 @@ You'll need this file to configure the Pub/Sub app for PostHog. You can find out
 
 ### Is the source code for this app available?
 
-PostHog is open-source and so are all apps on the platform. The [source code for the Google Cloud Pub/Sub Connector](https://github.com/vendasta/pubsub-plugin) is available on GitHub.
+PostHog is open-source and so are all apps on the platform. The [source code for the Google Cloud Pub/Sub Connector](https://github.com/PostHog/pubsub-plugin) is available on GitHub.
 
 ### Who created this app?
 
-We'd like to thank PostHog community member [Jesse Redl](https://github.com/vendasta/pubsub-plugin/commits?author=jredl-va) from [Vendasta](https://posthog.com/customers/vendasta) for creating the Pub/Sub Connector. Thanks, Jesse!
+We'd like to thank PostHog community member Jesse Redl from [Vendasta](https://posthog.com/customers/vendasta) for creating the Pub/Sub Connector. Thanks, Jesse!
 
 ### Who maintains this app?
 
-This app is maintained by the community. If you have issues with the app not functioning as intended, please [raise a bug report on the repo](https://github.com/vendasta/pubsub-plugin) to let us know!
+This app is maintained by the community. If you have issues with the app not functioning as intended, please [raise a bug report on the repo](https://github.com/PostHog/pubsub-plugin) to let us know!
 
 ### What if I have feedback on this app?
 
