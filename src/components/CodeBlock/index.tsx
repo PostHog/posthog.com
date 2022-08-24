@@ -60,7 +60,7 @@ export const CodeBlock = ({
 
     const codeBlockId = generateRandomHtmlId()
 
-    const [currentLanguage, setCurrentLanguage] = React.useState(children[0])
+    const [currentLanguage, setCurrentLanguage] = React.useState(children[0] || {})
     const [tooltipVisible, setTooltipVisible] = React.useState(false)
 
     const [projectName, setProjectName] = React.useState<string | null>(null)
