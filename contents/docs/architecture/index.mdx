@@ -84,7 +84,6 @@ flowchart TD
     AppServices-.Optional Utilization telemetry.->Telemetry(Posthog License Telemetry service)
 
     class K8s,ServicesDB,CH,ZK,AppServices,WorkerServices sgraph;
-
 ```
 
 No communication is needed into or out of this namespace other than the ingress controller for app and collecting data.

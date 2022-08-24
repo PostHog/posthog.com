@@ -755,10 +755,6 @@
                     "url": "/docs/self-host/deploy/troubleshooting"
                 },
                 {
-                    "name": "Architecture",
-                    "url": "/docs/self-host/architecture"
-                },
-                {
                     "name": "Managing hosting costs",
                     "url": "/docs/self-host/deploy/hosting-costs"
                 },
@@ -1097,6 +1093,28 @@
                 {
                     "name": "Data model",
                     "url": "/docs/data-model"
+                }
+            ]
+        },
+        {
+            "name": "How PostHog works",
+            "url": "",
+            "children": [
+                {
+                    "name": "Overview",
+                    "url": "/docs/architecture"
+                },
+                {
+                    "name": "Ingestion pipeline",
+                    "url": "/docs/architecture/ingestion-pipeline"
+                },
+                {
+                    "name": "Clickhouse",
+                    "url": "/docs/architecture/clickhouse"
+                },
+                {
+                    "name": "Querying data",
+                    "url": "/docs/architecture/queries"
                 }
             ]
         },
