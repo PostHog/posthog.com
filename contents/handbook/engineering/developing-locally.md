@@ -242,7 +242,7 @@ DEBUG=1 ./bin/migrate
 
 ### 6. Start PostHog
 
-Now start all of PostHog (backend, worker, app server, and frontend – simultaneously) with:
+Now start all of PostHog (backend, worker, plugin server, and frontend – simultaneously) with:
 
 ```bash
 ./bin/start
@@ -252,11 +252,13 @@ Open [http://localhost:8000](http://localhost:8000) to see the app.
 
 > **Note:** The first time you run this command you might get an error that says "layout.html is not defined". Make sure you wait until the frontend is finished compiling and try again.
 
-To see some data on the frontend, you should go to the `http://localhost:8000/demo` and play around with it. This will give you a Hogflix test project containing some data data in the app.
+To get some practical test data into your brand-new instance of PostHog, run `DEBUG=1 ./manage.py generate_demo_data`. For a list of useful arguments of the command, run `DEBUG=1 ./manage.py generate_demo_data --help`.
 
 ### 7. Develop
 
-This is it! You can now change PostHog in any way you want. To commit changes, create a new branch based on `master` for your intended change, and develop away. Just make sure not use to use `release-*` patterns in your branches unless putting out a new version of PostHog, as such branches have special handling related to releases.
+This is it! You can now change PostHog in any way you want. See [Project Structure](/handbook/engineering/project-structure) for an intro to the repository's contents.
+
+To commit changes, create a new branch based on `master` for your intended change, and develop away. Just make sure not use to use `release-*` patterns in your branches unless putting out a new version of PostHog, as such branches have special handling related to releases.
 
 ## Testing
 

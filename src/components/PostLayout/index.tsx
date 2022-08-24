@@ -470,7 +470,7 @@ export default function PostLayout({
     }
 
     useEffect(() => {
-        if (hash) {
+        if (hash && !hideSearch) {
             scroll.scrollMore(-50)
         }
     }, [])

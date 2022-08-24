@@ -8,6 +8,9 @@ import { graphql, useStaticQuery } from 'gatsby'
 import LogoVendasta from './vendasta.svg'
 import LogoHasura from './hasura.svg'
 import LogoPhantom from './phantom.svg'
+import { Link as ScrollLink } from 'react-scroll'
+import { useLocation } from '@reach/router'
+import { Hasura, Phantom, Vendasta } from './Icons'
 
 interface Features {
     title: string
@@ -88,10 +91,14 @@ const leftColMenuItems: LeftColMenuItems[] = [
     },
 ]
 
+const iconClasses = 'h-[25px] text-black dark:text-white'
+
 export default function Product({ referenceElement }: { referenceElement: HTMLDivElement }) {
     const {
         customers: { nodes: customers, totalCount },
     } = useStaticQuery(query)
+
+    const { pathname } = useLocation()
 
     return (
         <Wrapper borderRadius="0px 0.375rem 0.375rem" referenceElement={referenceElement} placement="bottom-start">
@@ -105,16 +112,25 @@ export default function Product({ referenceElement }: { referenceElement: HTMLDi
                                         <h3 className="text-[18px] font-bold m-0 text-black pl-2">{title}</h3>
                                     </div>
                                     <ol className="m-0 list-none p-0 mt-2">
-                                        {features.map(({ title, icon, url }: Features, index) => {
+                                        {features.map(({ title, icon, ...other }: Features) => {
+                                            const anchor = pathname?.startsWith('/product') && other.url?.includes('#')
+                                            const MenuLink = anchor ? ScrollLink : Link
+                                            const url: string | undefined = anchor
+                                                ? other.url?.split('#')[1]
+                                                : other.url
+
                                             return (
                                                 <li key={title}>
-                                                    <Link
-                                                        className="rounded-sm md:px-2 py-2 hover:bg-tan hover:bg-opacity-50 flex items-center space-x-2 relative active:top-[1px] active:scale-[.99]"
+                                                    <MenuLink
+                                                        smooth
+                                                        className="cursor-pointer rounded-sm md:px-2 py-2 hover:bg-tan hover:bg-opacity-50 flex items-center space-x-2 relative active:top-[1px] active:scale-[.99]"
                                                         to={url}
                                                     >
-                                                        <span className="w-5 h-5">{icon}</span>
+                                                        <span className="w-5 h-5 text-black dark:text-white">
+                                                            {icon}
+                                                        </span>
                                                         <h3 className="text-base m-0 opacity-70">{title}</h3>
-                                                    </Link>
+                                                    </MenuLink>
                                                 </li>
                                             )
                                         })}
@@ -134,7 +150,7 @@ export default function Product({ referenceElement }: { referenceElement: HTMLDi
                             className="rounded-sm py-2 mb-1 px-3 block hover:bg-tan hover:bg-opacity-50 relative active:top-[1px] active:scale-[.99]"
                             to="/customers/vendasta"
                         >
-                            <img className="h-[25px]" src={LogoVendasta} />
+                            <Vendasta className={iconClasses} />
                             <p className="text-sm opacity-50 m-0 text-black font-medium dark:text-white mt-1 leading-tight">
                                 How Vendesta replaced Snowplow and cut onboarding drop-off by 50%
                             </p>
@@ -143,7 +159,7 @@ export default function Product({ referenceElement }: { referenceElement: HTMLDi
                             className="rounded-sm py-2 mb-1 px-3 block hover:bg-tan hover:bg-opacity-50 relative active:top-[1px] active:scale-[.99]"
                             to="/customers/hasura"
                         >
-                            <img className="h-[25px]" src={LogoHasura} />
+                            <Hasura className={iconClasses} />
                             <p className="text-sm opacity-50 m-0 text-black font-medium dark:text-white mt-1 leading-tight">
                                 How Hasura improved conversion rates by 10-20% with PostHog
                             </p>
@@ -152,12 +168,11 @@ export default function Product({ referenceElement }: { referenceElement: HTMLDi
                             className="rounded-sm py-2 px-3 block hover:bg-tan hover:bg-opacity-50 relative active:top-[1px] active:scale-[.99]"
                             to="/customers/phantom"
                         >
-                            <img className="h-[25px]" src={LogoPhantom} />
+                            <Phantom className={iconClasses} />
                             <p className="text-sm opacity-50 m-0 text-black font-medium dark:text-white mt-1 leading-tight">
                                 How Phantom enhanced its product and cut failure rates by 90%
                             </p>
                         </Link>
-
                     </ol>
                     <CallToAction
                         className="mt-4 !w-full inline-flex items-center justify-center space-x-1"
