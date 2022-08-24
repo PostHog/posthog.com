@@ -1,4 +1,3 @@
-// import { replacePath } from './utils'
 const { replacePath } = require('./utils')
 const { createFilePath, createRemoteFileNode } = require(`gatsby-source-filesystem`)
 const fetch = require('node-fetch')
@@ -9,16 +8,9 @@ require('dotenv').config({
 const GitUrlParse = require('git-url-parse')
 const slugify = require('slugify')
 
-module.exports = exports.onCreateNode = async ({
-    node,
-    getNode,
-    actions,
-    store,
-    cache,
-    createNodeId,
-    createContentDigest,
-}) => {
-    const { createNodeField, createNode, createParentChildLink } = actions
+module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, cache, createNodeId }) => {
+    const { createNodeField, createNode } = actions
+
     if (node.internal.type === `MarkdownRemark` || node.internal.type === 'Mdx') {
         const parent = getNode(node.parent)
         if (parent.internal.type === 'Reply') return
@@ -28,17 +20,20 @@ module.exports = exports.onCreateNode = async ({
             name: `slug`,
             value: replacePath(slug),
         })
+
         // Create GitHub contributor nodes for handbook & docs
-        if (/^\/handbook|^\/docs/.test(slug) && process.env.GITHUB_API_KEY) {
+        if (/^\/handbook|^\/docs|^\/manual/.test(slug) && process.env.GITHUB_API_KEY) {
             const url = `https://api.github.com/repos/posthog/posthog.com/commits?path=/contents/${parent.relativePath}`
             let contributors = await fetch(url, {
                 headers: {
                     Authorization: `token ${process.env.GITHUB_API_KEY}`,
                 },
             }).then((res) => res.json())
+
             contributors = contributors.filter(
                 (contributor) => contributor && contributor.author && contributor.author.login
             )
+
             const contributorsNode = await Promise.all(
                 uniqBy(contributors, (contributor) => contributor.author.login).map(async (contributor) => {
                     const { author } = contributor
@@ -60,9 +55,15 @@ module.exports = exports.onCreateNode = async ({
                     }
                 })
             )
-            createNodeField({ node, name: 'contributors', value: contributorsNode })
+
+            createNodeField({
+                node,
+                name: `contributors`,
+                value: contributorsNode,
+            })
         }
     }
+
     if (node.internal.type === 'Plugin' && node.url.includes('github.com')) {
         const { name, owner } = GitUrlParse(node.url)
         const { download_url } = await fetch(`https://api.github.com/repos/${owner}/${name}/readme`, {
