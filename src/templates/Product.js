@@ -2,7 +2,7 @@ import { MDXProvider } from '@mdx-js/react'
 import Breadcrumbs from 'components/Breadcrumbs'
 import FooterCTA from 'components/FooterCTA'
 import CTA from 'components/Product/CTA'
-import { RightArrow } from 'components/Icons/Icons'
+import { Check2, Close, RightArrow } from 'components/Icons/Icons'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
 import { Section } from 'components/Section'
@@ -17,6 +17,7 @@ import { shortcodes } from '../mdxGlobalComponents'
 import SectionLinks from 'components/SectionLinks'
 import PostLayout from 'components/PostLayout'
 import { ProductIcons } from 'components/ProductIcons/ProductIcons'
+import { Check } from 'components/Icons/Icons'
 
 const features = [
     { name: 'Product analytics' },
@@ -189,7 +190,17 @@ export default function Product({ data, location }) {
                         <GatsbyImage image={getImage(featuredImage)} />
                     </Container>
                     <div className="article-content">
-                        <MDXProvider components={{ ...shortcodes, Section, TutorialsSlider, Documentation, Container }}>
+                        <MDXProvider
+                            components={{
+                                ...shortcodes,
+                                Section,
+                                TutorialsSlider,
+                                Documentation,
+                                Container,
+                                Check: (props) => <Check2 className="w-5 h-5 mx-auto" {...props} />,
+                                Close: (props) => <Close opacity="1" className="w-4 h-4 mx-auto" {...props} />,
+                            }}
+                        >
                             <MDXRenderer>{body}</MDXRenderer>
                         </MDXProvider>
                     </div>
