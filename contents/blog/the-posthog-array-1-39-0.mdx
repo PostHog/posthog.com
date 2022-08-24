@@ -50,6 +50,18 @@ Frustrated that it was taking a few seconds to load properties? You weren't the 
 
 Even better, this is just the starting point. We're aware that we need to do more to improve how properties work on PostHog, and we're working on it. 
 
+### New: Format your insights as containing durations
+
+If your event properties are sent as milliseconds or seconds you can now mark your insight as showing durations and get human readable durations
+
+![formatting an insight as a duration](../images/blog/array-1.39.0/duration-formatting.gif)
+
+### New: Big Bold Number Insight Type
+
+You can combine that with the new (and very exciting) big bold number insight type. For those times you need to track one big number.
+
+![the big bold number insight formatted as a duration](../images/blog/array-1.39.0/big-number.png)
+
 ### New: 
 
 Paul to add a highlight here. Just one or two sentences is enough. 
@@ -58,13 +70,11 @@ Paul to add a highlight here. Just one or two sentences is enough.
 
 Paul to add a highlight here. Just one or two sentences is enough. 
 
-### New: 
+### Improved: the history log now shows changes to Insights
 
-Paul to add a highlight here. Just one or two sentences is enough. 
+We've had feedback that people love seeing the activity on feature flags. So we've added it to insights too \o/
 
-### Improved: 
-
-Paul to add an improvement here. Just one or two sentences is enough. 
+![a view of the insights activity tab](../images/blog/array-1.39.0/insights-activity.png)
 
 ### Improved: 
 
@@ -79,8 +89,11 @@ Interested in building your own app? [Here's how to get started](/docs/apps)!
 ### Other improvements & fixes
 Version 1.39 also adds hundreds of other improvements and fixes, including...
 
--   **Improvement**:  We've removed some axe violations on Home, to improve accessibility. Bonus: Check the PR for [a _fantastic_ Dad joke](https://github.com/PostHog/posthog/pull/11211#discussion_r941651022). 
+-   **Improvement**: We've removed some axe violations on Home, to improve accessibility. And added accessibility testing to our workflow. Bonus: Check the PR for [a _fantastic_ Dad joke](https://github.com/PostHog/posthog/pull/11211#discussion_r941651022). 
 -   **Improvement**: When deleting persons, you can now choose to delete event data as well thanks to [a new person deletion flow](https://github.com/PostHog/posthog/pull/11347).
+-   **Improvement**: We've [optimised the query behind loading property definitions](https://github.com/PostHog/posthog/pull/11037). For PostHog Cloud we saw a 75% reduction in API call time.
+-   **Improvement**: [We've separated the list of feature flags on an event from its event properties in the taxonomic filter](https://github.com/PostHog/posthog/pull/10668). Making it (approximately) 1,000,000% easier to find things when there are lots of feature flags.
+
 
 View the commit log in GitHub for a full history of changes: [`release-1.37.0...release-1.38.0`](https://github.com/PostHog/posthog/compare/release-1.38.0...release-1.39.0).
 
