@@ -37,35 +37,35 @@ import ReactNativeConfigure from './client/react-native/snippets/configure.mdx'
 import Tab from "components/Tab"
 
 <Tab.Group>
-   <Tab.List>
-      <Tab>JavaScript</Tab>
-      <Tab>Android</Tab>
-      <Tab>iOS</Tab>
-      <Tab>Flutter</Tab>
-      <Tab>React Native</Tab>
-   </Tab.List>
+<Tab.List>
+<Tab>JavaScript</Tab>
+<Tab>Android</Tab>
+<Tab>iOS</Tab>
+<Tab>Flutter</Tab>
+<Tab>React Native</Tab>
+</Tab.List>
 
-   <Tab.Panels>
-      <Tab.Panel>
-         <JSInstall />
-      </Tab.Panel>
-      <Tab.Panel>
-         <AndroidInstall />
-         <AndroidConfigure />
-      </Tab.Panel>
-      <Tab.Panel>
-         <IOSInstall />
-         <IOSConfigure />
-      </Tab.Panel>
-      <Tab.Panel>
-         <FlutterPackage />
-         <FlutterInstall />
-      </Tab.Panel>
-      <Tab.Panel>
-         <ReactNativeInstall />
-         <ReactNativeConfigure />
-      </Tab.Panel>
-   </Tab.Panels>
+<Tab.Panels>
+<Tab.Panel>
+<JSInstall />
+</Tab.Panel>
+<Tab.Panel>
+<AndroidInstall />
+<AndroidConfigure />
+</Tab.Panel>
+<Tab.Panel>
+<IOSInstall />
+<IOSConfigure />
+</Tab.Panel>
+<Tab.Panel>
+<FlutterPackage />
+<FlutterInstall />
+</Tab.Panel>
+<Tab.Panel>
+<ReactNativeInstall />
+<ReactNativeConfigure />
+</Tab.Panel>
+</Tab.Panels>
 </Tab.Group>
 
 # Use autocapture
@@ -78,43 +78,22 @@ import JSCaptureIgnoreElements from './client/js/snippets/capture-ignore-element
 <JSAutoCapture />
 <JSCaptureIgnoreElements />
 
+import { CaptureUserEvents } from "./\_snippets/capture-user-events.tsx"
+
 # Capture user events
 
-import JSCapture from './client/js/snippets/capture.mdx'
-import AndroidCapture from './client/android/snippets/capture.mdx'
-import IOSCapture from './client/ios/snippets/capture.mdx'
-import ReactNativeCapture from './client/react-native/snippets/capture.mdx'
+This allows you to send more context than the default event info that PostHog captures whenever a user does something. In that case, you can send an event with any metadata you may wish to add.
 
-<Tab.Group>
-   <Tab.List>
-      <Tab>JavaScript</Tab>
-      <Tab>Android</Tab>
-      <Tab>iOS</Tab>
-      <Tab>Flutter</Tab>
-      <Tab>React Native</Tab>
-   </Tab.List>
+<CaptureUserEvents />
 
-   <Tab.Panels>
-      <Tab.Panel>
-         <JSCapture />
-      </Tab.Panel>
-      <Tab.Panel>
-         <AndroidCapture />
-         <p>For more information see the <a href="/docs/integrate/client/android#capture">Android capture docs</a>.</p>
-      </Tab.Panel>
-      <Tab.Panel>
-         <IOSCapture />
-         <p>For more information see the <a href="/docs/integrate/client/ios#capture">iOS capture docs</a>.</p>
-      </Tab.Panel>
-      <Tab.Panel>
-         <p>See the <a href="/docs/integrate/client/flutter">Flutter library docs</a> for more information.</p>
-      </Tab.Panel>
-      <Tab.Panel>
-         <ReactNativeCapture />
-         <p>For more information see the <a href="/docs/integrate/client/react-native#capture">React Native capture docs</a>.</p>
-      </Tab.Panel>
-   </Tab.Panels>
-</Tab.Group>
+A `capture` call requires:
+
+-   `event` to specify the event name
+    -   We recommend naming events with "[noun] [verb]", such as `movie played` or `movie updated`, in order to easily identify what your events mean later on (we know this from experience).
+
+Optionally you can submit:
+
+-   `properties`, which is an object with any information you'd like to add
 
 # Identify users
 
@@ -124,31 +103,32 @@ import IOSIdentify from './client/ios/snippets/identify.mdx'
 import ReactNativeIdentify from './client/react-native/snippets/identify.mdx'
 
 <Tab.Group>
-   <Tab.List>
-      <Tab>JavaScript</Tab>
-      <Tab>Android</Tab>
-      <Tab>iOS</Tab>
-      <Tab>Flutter</Tab>
-      <Tab>React Native</Tab>
-   </Tab.List>
+<Tab.List>
+<Tab>JavaScript</Tab>
+<Tab>Android</Tab>
+<Tab>iOS</Tab>
+<Tab>Flutter</Tab>
+<Tab>React Native</Tab>
+</Tab.List>
 
-   <Tab.Panels>
-      <Tab.Panel>
-         <JSIdentify />
-      </Tab.Panel>
-      <Tab.Panel>
-         <AndroidIdentify />
-      </Tab.Panel>
-      <Tab.Panel>
-         <IOSIdentify />
-      </Tab.Panel>
-      <Tab.Panel>
-         <p> See the <a href="/docs/integrate/client/flutter">Flutter library docs</a> for more information.</p>
-      </Tab.Panel>
-      <Tab.Panel>
-         <ReactNativeIdentify />
-      </Tab.Panel>
-   </Tab.Panels>
+<Tab.Panels>
+<Tab.Panel>
+<JSIdentify />
+</Tab.Panel>
+<Tab.Panel>
+<AndroidIdentify />
+</Tab.Panel>
+<Tab.Panel>
+<IOSIdentify />
+</Tab.Panel>
+<Tab.Panel>
+
+<p> See the <a href="/docs/integrate/client/flutter">Flutter library docs</a> for more information.</p>
+</Tab.Panel>
+<Tab.Panel>
+<ReactNativeIdentify />
+</Tab.Panel>
+</Tab.Panels>
 </Tab.Group>
 
 # Event ingestion nuances

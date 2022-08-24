@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import Highlight, { defaultProps, Language } from 'prism-react-renderer'
 import theme from './theme'
 import { generateRandomHtmlId, getCookie } from '../../lib/utils'
-import { Listbox } from '@headlessui/react'
+import { Listbox, Tab } from '@headlessui/react'
 import { SelectorIcon } from '@heroicons/react/outline'
 
 type CodeBlockProps = {
@@ -14,6 +14,7 @@ type CodeBlockProps = {
         code: string
     }[]
 
+    selectorStyle?: 'dropdown' | 'tabs'
     showTitle?: boolean
     showLineNumbers?: boolean
     showCopy?: boolean
@@ -49,18 +50,19 @@ export const MdxCodeBlock: React.FC<MdxCodeBlockProps> = ({ children }) => {
 
 export const CodeBlock = ({
     title,
-    children,
+    children: languages,
+    selectorStyle = 'dropdown',
     showTitle = true,
     showCopy = true,
     showLineNumbers = false,
 }: CodeBlockProps) => {
-    if (children.length < 0) {
+    if (languages.length < 0) {
         return null
     }
 
     const codeBlockId = generateRandomHtmlId()
 
-    const [currentLanguage, setCurrentLanguage] = React.useState(children[0] || {})
+    const [currentLanguage, setCurrentLanguage] = React.useState(languages[0] || {})
     const [tooltipVisible, setTooltipVisible] = React.useState(false)
 
     const [projectName, setProjectName] = React.useState<string | null>(null)
@@ -72,7 +74,7 @@ export const CodeBlock = ({
             setProjectName(getCookie('ph_current_project_name'))
             setProjectToken(getCookie('ph_current_project_token'))
         }
-    }, [children])
+    }, [])
 
     const copyToClipboard = () => {
         navigator.clipboard.writeText(currentLanguage.code)
@@ -86,10 +88,27 @@ export const CodeBlock = ({
     return (
         <div className="relative my-2 rounded overflow-hidden">
             <div className="bg-black/90 text-gray px-3 py-1.5 text-sm flex items-center w-full">
-                {showTitle && <div className="min-w-0 mr-8">{title || currentLanguage.name}</div>}
+                {selectorStyle === 'tabs' && languages.length > 1 ? (
+                    <Tab.Group onChange={(index) => setCurrentLanguage(languages[index])}>
+                        <Tab.List className="flex items-center space-x-5">
+                            {languages.map((option) => (
+                                <Tab
+                                    key={option.language}
+                                    className={({ selected }) =>
+                                        `cursor-pointer text-sm py-0.5 ${selected ? 'font-semibold text-white/70' : ''}`
+                                    }
+                                >
+                                    {option.name || option.language}
+                                </Tab>
+                            ))}
+                        </Tab.List>
+                    </Tab.Group>
+                ) : showTitle ? (
+                    <div className="min-w-0 mr-8">{title || currentLanguage.name}</div>
+                ) : null}
 
                 <div className="shrink-0 ml-auto flex items-center divide-x divide-gray-accent-dark">
-                    {children.length > 1 ? (
+                    {selectorStyle === 'dropdown' && languages.length > 1 ? (
                         <div className="relative mr-2">
                             <Listbox value={currentLanguage} onChange={setCurrentLanguage}>
                                 <Listbox.Button className="flex items-center space-x-1.5 text-gray">
@@ -99,7 +118,7 @@ export const CodeBlock = ({
                                 </Listbox.Button>
 
                                 <Listbox.Options className="absolute top-full right-0 mt-1 bg-black px-0 py-2 text-white list-none rounded text-xs focus:outline-none">
-                                    {children.map((option) => (
+                                    {languages.map((option) => (
                                         <Listbox.Option
                                             key={option.language}
                                             value={option}
