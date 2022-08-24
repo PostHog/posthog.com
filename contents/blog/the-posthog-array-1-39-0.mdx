@@ -30,7 +30,11 @@ Want to know more about what we're up to? [Subscribe to HogMail, our newsletter]
 
 ### New: Person properties have moved on to events
 
-Joe to add more detail here. 
+We've made substantial changes to the way [persons](/manual/persons) and [events](/manual/events) work by moving all persons properties _onto_ events. It's a substantial change, months in the planning, which is critical to PostHog's ability to scale. 
+
+A big benefit of this approach is that it enables significantly faster queries because we no longer have to compare multiple tables when running queries - everything is stored on the event. Some of our internal tests have shown a 400x increase in speed!
+
+This is a big change and one which we're planning to cover in more detail soon. Stay tuned to [the PostHog blog](/blog) for updates. 
 
 ### New: 
 
@@ -83,7 +87,6 @@ We always welcome contributions from our community and this time we want to than
 - [@MarkBennett](https://github.com/MarkBennett) for fixing his URL normalizer app.
 - [@danielthedifficult](https://github.com/danielthedifficult) for fixing some issues with our open source version. 
 - [@nemobsis](https://github.com/nemobis) for adding to our GA site.
-
 
 Do you want to get involved in making PostHog better? Check out our [contributing resources](/docs/contribute) to get started, or head to [our Slack group](/slack). We also have a [list of Good First Issues](https://github.com/PostHog/posthog/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) for ideas on where you can contribute!
 
