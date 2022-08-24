@@ -1,5 +1,5 @@
 ---
-date: 2022-08-29
+date: 2022-08-23
 title: 'Array 1.39.0: Moving person properties onto events'
 rootPage: /blog
 sidebar: Blog
@@ -30,53 +30,54 @@ Want to know more about what we're up to? [Subscribe to HogMail, our newsletter]
 
 ### Beta: Persons on events
 
-We're getting ready to make a substantial change to the way [persons](/manual/persons) and [events](/manual/events) work by essentially combining them and adding person ids and properties _onto_ events. 1.39.0 gives you the chance to try the feature ahead of the full release by [running an async migration](/docs/runbook/async-migrations) and toggling your `actors_on_events_teams` [instance setting](/docs/self-host/configure/instance-settings). 
+We're getting ready to make a substantial change to the way [persons](/manual/persons) and [events](/manual/events) work by essentially combining them and adding person ids and properties _onto_ events. 1.39.0 gives you the chance to try the feature ahead of the full release. Here's how:
 
-So, why have we moved person properties onto events? Feedback showed that users weren't able to create queries based on person properties at the time of an event. By putting person properties on events, this becomes the new default, while still enabling you to to filter insights based on the latest properties by using cohorts. 
+- **PostHog Cloud:** No action is needed, as we're rolling this test out steadily behind a feature flag. If you're eager to be included from the start, let us know in [Slack](/slack) to see about joining our beta group.
+-  **Self-hosted users:** First, you need to [run an async migration](/docs/runbook/async-migrations). Afterwards, change your `actors_on_events_teams` [instance setting](/docs/self-host/configure/instance-settings) to `true`. As with other instance settings, you'll need to be [a Staff user](/docs/self-host/configure/instance-settings#staff-users) to make changes.
 
-A big benefit of this approach is that it enables significantly faster queries because we no longer have to merge tables to get a result; we can just look up everything in the events table instead. One query in our internal tests showed a 400x increase in speed...but this beta will help us understand the improvement in real-world conditions. 
+Why are we doing this? Feedback showed that users weren't able to create queries based on person properties at the time of an event. By putting person properties on events, this becomes the new default, while still enabling you to to filter insights based on the latest properties by using cohorts. 
 
-We'll share more about this shift once it's fully released to all users - keep and eye on [the PostHog blog](/blog) for updates. 
+Also, it makes queries significantly faster because we no longer have to merge tables to get a result; we can just look up everything in the events table instead. One query in our internal tests showed a 400x increase in speed...but this beta will help us understand the improvement in real-world conditions. 
 
-### Improvement: Turbo properties
-
-Frustrated that it was taking a few seconds to load properties? You weren't the only one. Thankfully, version 1.39.0 addresses this by adding a limit so that PostHog doesn't always search through hundreds of thousands of properties for each query. The result? [Properties load much faster](https://github.com/PostHog/posthog/pull/11037). 
-
-Even better, this is just the starting point. We're aware that we need to do more to improve how properties work on PostHog, and we're working on it. 
+We'll share more about this update once it's fully released to all users - keep and eye on [the PostHog blog](/blog) for updates. 
 
 ### New: Format your insights to show durations
 
 ![formatting an insight as a duration](../images/blog/array-1.39.0/duration-formatting.gif)
 
-Do your event properties contain milliseconds or seconds? Then you can now make things easier by marking your insight as showing durations to get more readable duration formatting on your queries. It works especially well with...
+Do your event properties contain milliseconds or seconds? Then you can now make things easier by changing your Y-axis unit to show durations instead of the default `none`. It's a small addition, but one which makes insights much easier to read and share with others.
 
 ### New: Big, bold number chart type
 
 ![the big bold number insight formatted as a duration](../images/blog/array-1.39.0/big-number.png)
 
-This new, much requested and very exciting big bold number insight type does exactly what it says: simplifies a query down to a single number. Handy for those times when you need to track one big number.
+This new, much requested and _very_ exciting big bold number insight type does exactly what it says: simplifies a query result down to a single number. And it works great with durations too!
 
-### New: 
+### Improved: Turbo properties
 
-Paul to add a highlight here. Just one or two sentences is enough. 
+Frustrated that it was taking a few seconds to load properties? You weren't the only one. 
 
-### New: 
+Thankfully, version 1.39.0 addresses this by adding a limit so that PostHog doesn't always search through hundreds of thousands of properties for each query. The result? [Properties now load much faster](https://github.com/PostHog/posthog/pull/11037). 
 
-Paul to add a highlight here. Just one or two sentences is enough. 
-
-### Improved: the history log now shows changes to Insights
-
-We've had feedback that people love seeing the activity on feature flags. So we've added it to insights too \o/
+### Improved: History log now shows changes to Insights
 
 ![a view of the insights activity tab](../images/blog/array-1.39.0/insights-activity.png)
 
-### Instrumentation improvement: 
+We've had feedback from several users that they enjoy tracking changes to their feature flags in the history logs. So, we added the same functionality to insights too! Now you can snoop on who has been changing your insights and giving them funny names.
 
-We now automatically [comment all SQL queries generated by posthog](https://github.com/PostHog/posthog/pull/10433) with tags. This helps track down performance issues on self-hosted instances.
+## Improved: Client and server-side library improvements
+
+While we continue to recommend using Javascript if possible, we've made significant updates to our other client libraries so that Android, iOS, Flutter and React Native now all support feature flags. We've also updated our server-side libraries to have local feature flag evaluation.
+
+Check [our library docs](/docs/integrate/libraries) to find out more about what each library supports and how to deploy. 
+
+### Improved: Automatically comment SQL queries
+
+We've added [a new SQL commenter dependency](https://google.github.io/sqlcommenter/python/django/#0) which automatically comments all SQL queries generated by PostHog with tags. We've tried this a few times before with [different solutions](https://github.com/PostHog/posthog/pull/10433#issuecomment-1164125629), we're confident that _this_ time will definitely be the third time we've tried. 
 
 ### Apps: 
 
-Joe will add our newest apps here. 
+
 
 Interested in building your own app? [Here's how to get started](/docs/apps)!
 
