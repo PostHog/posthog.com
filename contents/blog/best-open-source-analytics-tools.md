@@ -27,7 +27,7 @@ We have separate guides on [open-source feature flag tools](/blog/best-open-sour
 > - Jun 16, 2022: Added Fathom Lite, Open Web Analytics, GrowthBook, OpenReplay
 > - Aug 24, 2022: Removed Fathom Lite, Open Web Analytics; added Apache Superset, Redash
 
-## The best open-source analytics tools
+## The best open source analytics tools
 
 This section is dedicated to tools that actively collect data on user behavior. These range from the very simple, such as the privacy-focused Plausible, to broad analytics tools like Matomo.
 
@@ -190,7 +190,7 @@ GrowthBook is ideal for engineering teams who want flexible, instant control ove
 
 GrowthBook is distributed under an MIT license and self-hosted is supported at no cost. The cloud version is free for up to three users, and $20 per user per month thereafter. 
 
-## The best open-source data and BI tools
+## The best open source data and BI tools
 
 This section is dedicated to data analytics tools that connect to data sources (e.g. data warehouses etc.) rather than actively collecting data. Most are focused on big data analytics and are thus tailored to more technical users, particularly engineering, dev ops, and data science teams.
 
