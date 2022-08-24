@@ -58,7 +58,7 @@ const Editions = ({ setDemoType }) => {
                 <div className="md:col-span-2 pt-6 border-t border-dashed border-gray-accent-light text-center">
                     <h3 className="m-0">Not sure if PostHog is right for you?</h3>
                     <p className="m-0 mt-1 text-black/50 font-medium text-sm">
-                        Book a quick QA with someone from the PostHog team!
+                        Book a quick Q&A with someone from the PostHog team!
                     </p>
                     <div className="md:max-w-[280px] w-full mx-auto">
                         <CallToAction
