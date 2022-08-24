@@ -74,7 +74,7 @@ Paid versions remove the project limit and add numerous paid-only features, incl
 [Matomo](https://matomo.org/) is an open-source platform for website analytics. It's one of the most popular open-source alternatives to Google Analytics for website owners and marketing teams. It even offers a data import tool for Google Analytics so you can bring your data with you. You can run it on-premise or use Matomo's own cloud hosting service.
 
 #### Who is Matomo for?
-Matomo is intended for marketing and website teams looking to track content performance and marketing attribution. It's suitable for both SMBs and enterprises – the EU runs a version on Matomo on all its websites.
+Matomo is intended for marketing and website teams looking to track content performance and marketing attribution. It's suitable for both SMBs and enterprises – the EU runs a version of Matomo on all its websites.
 
 #### Strengths
 - Google Analytics data importer
