@@ -8,7 +8,7 @@ We release a new version on the last Monday of every month.
 
 This consistency is important, as it means our community and our customers can look forward to new features at a predictable pace. There will always be more work that we want to do and if we get in a habit of pushing deadlines out, we'll push them further and further.
 
-Sprints do not line up with releases, so a release might fall in the middle of the sprint, for which we need to plan accordingly.  If a feature wouldn't be ready by the release date, cut down the scope, remove it or release it behind a feature flag.
+Sprints do not line up with releases, so a release might fall in the middle of the sprint, for which we need to plan accordingly. If a feature won't be ready by the release date then cut down the scope, remove it, or release it behind a feature flag.
 
 Code freezes and break the release happen on the Wednesday before that. Each month there will be a different release owner in charge of the release, to be updated under this [calendar](https://calendar.google.com/calendar/embed?src=c_n8hc1iedb0k8gqhuiv83jolm50%40group.calendar.google.com&ctz=America%2FNew_York).
 
