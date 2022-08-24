@@ -95,3 +95,29 @@ Note that the specifics of this may vary:
     exact number of pods vary according to [sharding settings](/docs/runbook/services/clickhouse/sharding-and-replication).
 
 Event ingestion is explained in more depth in our engineering handbook [here](/handbook/engineering/databases/event-ingestion).
+
+## Ingestion pipeline
+
+```mermaid
+graph TD
+    CLIENT[Client Library]
+    DECIDE["/decide API"]
+    CAPTURE[Capture API]
+    PLUGINS[Plugin server]
+    PERSONS["PostgreSQL (persons table)"]
+    Kafka2[Kafka]
+
+    CLIENT -..-> DECIDE
+
+    CLIENT -..-> CAPTURE
+    CAPTURE --> Kafka
+
+    Kafka <-..- PLUGINS
+
+    PLUGINS <--> PERSONS
+    PLUGINS --> Kafka2
+
+    Kafka2 <-..- ClickHouse
+```
+
+## Clickhouse
