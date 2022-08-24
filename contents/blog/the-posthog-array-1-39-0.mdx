@@ -39,7 +39,7 @@ Why are we doing this? Feedback showed that users weren't able to create queries
 
 Also, it makes queries significantly faster because we no longer have to merge tables to get a result; we can just look up everything in the events table instead. One query in our internal tests showed a 400x increase in speed...but this beta will help us understand the improvement in real-world conditions. 
 
-We'll share more about this update once it's fully released to all users - keep and eye on [the PostHog blog](/blog) for updates. 
+We'll share more about this update once it's fully released to all users - keep and eye on [the PostHog blog](/blog) for updates. For more information on how we've implemented this change behind the scenes, check out our [overview of the ingestion pipeline](/docs/architecture/ingestion-pipeline).
 
 ### New: Format your insights to show durations
 
@@ -86,7 +86,7 @@ Version 1.39 also adds hundreds of other improvements and fixes, including...
 
 -   **Improvement**: We've removed some axe violations on Home, to improve accessibility. And added accessibility testing to our workflow. Bonus: Check the PR for [a _fantastic_ Dad joke](https://github.com/PostHog/posthog/pull/11211#discussion_r941651022). 
 -   **Improvement**: When deleting persons, you can now choose to delete event data as well thanks to [a new person deletion flow](https://github.com/PostHog/posthog/pull/11347).
--   **Improvement**: We've [optimised the query behind loading property definitions](https://github.com/PostHog/posthog/pull/11037). For PostHog Cloud we saw a 75% reduction in API call time.
+-   **Improvement**: For users self-hosting PostHog, you can now set-up [monitoring and logging through Grafana](/docs/self-host/configure/monitoring-with-grafana) out of the box, which makes it much easier to monitor and troubleshoot your deployment.
 -   **Improvement**: [We've separated the list of feature flags on an event from its event properties in the taxonomic filter](https://github.com/PostHog/posthog/pull/10668). Making it (approximately) 1,000,000% easier to find things when there are lots of feature flags.
 -   **Fix**: In a few unexpected cases we used to return a successful response to some invalid API requests to the capture endpoint. [Now we correctly return a `400 BAD REQUEST`](https://github.com/PostHog/posthog/pull/10999) which will help people with useful feedback during development
 
