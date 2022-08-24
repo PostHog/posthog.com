@@ -12,6 +12,21 @@ module.exports = exports.createSchemaCustomization = async ({ actions, schema })
     type MdxFields {
       slug: String
       contributors: [Contributors]
+      appConfig: [AppConfig]
+    }
+    type AppConfig {
+      key: String!
+      name: String!
+      required: Boolean
+      type: String
+      hint: String
+      description: String
+    }
+    type Contributors {
+      avatar: File @link(from: "avatar___NODE")
+      url: String
+      username: String
+      teamData: TeamData
     }
     type Frontmatter {
       authorData: [AuthorsJson] @link(by: "handle", from: "author")
@@ -37,12 +52,6 @@ module.exports = exports.createSchemaCustomization = async ({ actions, schema })
       name: String
       fullName: String
       subject: String
-    }
-    type Contributors {
-      avatar: File @link(from: "avatar___NODE")
-      url: String
-      username: String
-      teamData: TeamData
     }
     type TeamData {
       name: String

@@ -62,14 +62,16 @@ export const HandbookSidebar = ({ contributors, title, location, related }) => {
 }
 
 type AppParametersProps = {
-    config: {
-        key: string
-        name: string | null
-        required: boolean | null
-        type: string | null
-        hint: string | null
-        description: string | null
-    }[]
+    config:
+        | {
+              key: string
+              name: string | null
+              required: boolean | null
+              type: string | null
+              hint: string | null
+              description: string | null
+          }[]
+        | null
 }
 
 export const AppParametersFactory: (params: AppParametersProps) => React.FC = ({ config }) => {
@@ -139,7 +141,7 @@ export default function Handbook({
     const {
         body,
         frontmatter,
-        fields: { slug, contributors },
+        fields: { slug, contributors, appConfig },
     } = post
     const { title, hideAnchor, description, hideLastUpdated, features, github, installUrl, thumbnail, related } =
         frontmatter
