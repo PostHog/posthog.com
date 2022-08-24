@@ -6,7 +6,7 @@ import { Heading } from 'components/Heading'
 import { InlineCode } from 'components/InlineCode'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
-import PostLayout, { Contributors, ShareLinks, SidebarSection } from 'components/PostLayout'
+import PostLayout, { Contributors, ShareLinks, SidebarSection, TableOfContents } from 'components/PostLayout'
 import { SEO } from 'components/seo'
 import Team from 'components/Team'
 import TestimonialsTable from 'components/TestimonialsTable'
@@ -139,8 +139,7 @@ export default function Handbook({
     const {
         body,
         frontmatter,
-        contributors,
-        fields: { slug, appConfig },
+        fields: { slug, contributors },
     } = post
     const { title, hideAnchor, description, hideLastUpdated, features, github, installUrl, thumbnail, related } =
         frontmatter
@@ -182,7 +181,7 @@ export default function Handbook({
     return (
         <>
             <SEO
-                title={`${title} - Posthog ${breadcrumbBase.name}`}
+                title={`${title} - ${breadcrumbBase.name} - PostHog`}
                 description={description || excerpt}
                 article
                 image={`/og-images/${slug.replace(/\//g, '')}.jpeg`}
@@ -277,18 +276,14 @@ export const query = graphql`
                     hint
                     description
                 }
-            }
-            contributors {
-                url
-                username
-                avatar {
-                    childImageSharp {
-                        gatsbyImageData(width: 38, height: 38)
+                contributors {
+                    url
+                    username
+                    avatar {
+                        childImageSharp {
+                            gatsbyImageData(width: 38, height: 38)
+                        }
                     }
-                }
-                teamData {
-                    name
-                    jobTitle
                 }
             }
             frontmatter {

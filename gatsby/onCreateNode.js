@@ -1,4 +1,3 @@
-// import { replacePath } from './utils'
 const { replacePath } = require('./utils')
 const { createFilePath, createRemoteFileNode } = require(`gatsby-source-filesystem`)
 const fetch = require('node-fetch')
@@ -9,16 +8,8 @@ require('dotenv').config({
 const GitUrlParse = require('git-url-parse')
 const slugify = require('slugify')
 
-module.exports = exports.onCreateNode = async ({
-    node,
-    getNode,
-    actions,
-    store,
-    cache,
-    createNodeId,
-    createContentDigest,
-}) => {
-    const { createNodeField, createNode, createParentChildLink } = actions
+module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, cache, createNodeId }) => {
+    const { createNodeField, createNode } = actions
 
     if (node.internal.type === `MarkdownRemark` || node.internal.type === 'Mdx') {
         const parent = getNode(node.parent)
@@ -32,7 +23,7 @@ module.exports = exports.onCreateNode = async ({
         })
 
         // Create GitHub contributor nodes for handbook & docs
-        if (/^\/handbook|^\/docs/.test(slug) && process.env.GITHUB_API_KEY) {
+        if (/^\/handbook|^\/docs|^\/manual/.test(slug) && process.env.GITHUB_API_KEY) {
             const url = `https://api.github.com/repos/posthog/posthog.com/commits?path=/contents/${parent.relativePath}`
             let contributors = await fetch(url, {
                 headers: {
@@ -65,7 +56,12 @@ module.exports = exports.onCreateNode = async ({
                     }
                 })
             )
-            node.contributors = contributorsNode
+
+            createNodeField({
+                node,
+                name: `contributors`,
+                value: contributorsNode,
+            })
         }
 
         if (/^\/docs\/apps/.test(slug) && node?.frontmatter?.github && process.env.GITHUB_API_KEY) {

@@ -11,7 +11,7 @@ export default function Contact(props) {
     const { posthog } = useValues(posthogAnalyticsLogic)
     const location = useLocation()
     const [activeTab, setActiveTab] = useState('demo')
-    const [demoType, setDemoType] = useState(props.demoType || 'group')
+    const [demoType, setDemoType] = useState(props.demoType || 'scale')
     const handleChipClick = (tab) => {
         setActiveTab(tab)
         posthog?.capture(`contact: clicked ${tab} button`)
@@ -26,7 +26,7 @@ export default function Contact(props) {
         if (tab === 'contact' || tab === 'demo') {
             setActiveTab(tab)
         }
-        if (demo && (demo === 'group' || demo === 'scale' || demo === 'enterprise')) {
+        if (demo && (demo === 'group' || demo === 'scale' || demo === 'enterprise' || demo === 'qa')) {
             setDemoType(demo)
         }
     }, [location])
@@ -55,6 +55,7 @@ export default function Contact(props) {
                                         scale: 'https://calendly.com/d/ckz-37j-jz9/posthog-scale-customer-success-demo',
                                         group: 'https://calendly.com/cameron-posthog/posthog-demo',
                                         enterprise: 'https://calendly.com/simon-posthog/enterprise-demo',
+                                        qa: 'https://calendly.com/cameron-posthog/15-minute-posthog-q-a',
                                     }[demoType]
                                 }
                             />

@@ -45,6 +45,7 @@ import { FeaturesSelfHost } from './components/FeaturesSelfHost'
 import { FloatedImage } from './components/FloatedImage'
 import { Footer } from './components/Footer'
 import { FooterCTA } from './components/FooterCTA'
+import { FullWidthBorderSlider } from './components/FullWidthBorderSlider'
 import { GDPRForm } from './components/GDPRForm'
 import { GithubIcon } from './components/GithubIcon'
 import { Heading } from './components/Heading'
@@ -90,6 +91,7 @@ import { ProductIcons } from './components/ProductIcons'
 import { ProductPage } from './components/ProductPage'
 import { ProductSectionHeader } from './components/ProductSectionHeader'
 import { Question } from './components/Question'
+import { Quote2 } from './components/Quote2'
 import { RocketHorizontalRule } from './components/RocketHorizontalRule'
 import { SearchBox } from './components/SearchBox'
 import { SectionLinks } from './components/SectionLinks'
@@ -163,6 +165,7 @@ export const shortcodes = {
     FloatedImage,
     Footer,
     FooterCTA,
+    FullWidthBorderSlider,
     GDPRForm,
     GithubIcon,
     Heading,
@@ -208,6 +211,7 @@ export const shortcodes = {
     ProductPage,
     ProductSectionHeader,
     Question,
+    Quote2,
     RocketHorizontalRule,
     SearchBox,
     SectionLinks,

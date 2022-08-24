@@ -74,9 +74,7 @@ const leftCol: IColumn[] = [
     },
 ]
 
-const rightCol: IColumn[] = [
-    { title: 'Enterprise package', section: enterpisePackage },
-]
+const rightCol: IColumn[] = [{ title: 'Enterprise package', section: enterpisePackage }]
 
 const Check = () => {
     return (
