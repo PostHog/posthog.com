@@ -128,12 +128,12 @@ Its session replay feature automatically captures events, and provides useful cl
 OpenReplay is primarily for developers, especially due to its focus on error tracking and bug fixing.
 
 #### Strengths
-- Privacy friendly
+- Privacy-friendly
 - Error tracking and bug fixing features
 - Performance tracking
 
 #### Open source license and monetization
-OpenReplay is available under the ELv2 license. An Enterprise version adds additional reporting features and dedicated support, but there's no public pricing. There's also a cloud version with prices based on sessions. 
+OpenReplay is available under the ELv2 license. An Enterprise version adds additional reporting features and dedicated support, but there's no public pricing. There's also a cloud version with pricing based on sessions. 
 
 ### Plausible Analytics
 ![Plausible Analytics - open source analytics tools](../images/blog/open-source-analytics-tools/plausible-screenshot.png)
@@ -143,22 +143,22 @@ OpenReplay is available under the ELv2 license. An Enterprise version adds addit
 - **Alternative to:** Google Analytics
 - [Plausible on Github](https://github.com/plausible/analytics/)
 
-[Plausible Analytics](https://plausible.io/) is focused on providing website analytics that don’t infringe on user privacy. That means Plausible doesn’t rely on cookies and is naturally compliant with regulations such as GDPR. 
+[Plausible Analytics](https://plausible.io/) is focused on providing website analytics that don’t infringe on user privacy. That means Plausible doesn’t rely on cookies and is naturally compliant with regulations like GDPR. 
 
 Unlike Matomo, Plausible is a very streamlined tool rather than a feature-equivalent Google Analytics alternative. As a result, it's a great fit for smaller teams who prefer ease of use to in-depth reporting, or hobby deployments if you just want basic analytics for a website or blog.
 
 #### Who is Plausible Analytics for?
-Plausible is intended for marketing teams and website owners who want to track top-level website metrics like pageviews, bounce rate and visit duration. 
+Plausible is intended for marketing teams and website owners who want to track top-level website metrics, such as pageviews, bounce rate and visit duration. 
 
 #### Strengths
 - Easy to use and focused on essential web metrics
 - Lightweight integration script won’t impact page performance
-- No cookies required, fully GDPR compliant out of the box 
+- No cookies required, GDPR compliant out of the box 
 
 #### Open source license and monetization
 Plausible Analytics is available under a AGPLv3 license and can be self-hosted via Docker. Pricing for its hosted version starts at €9 per month for 10,000 monthly pageviews.
 
-> **Also consider:** Plausible is one of a large subset of privacy-first analytics products that have proven popular in the wake the GDPR and less permissive attitudes to user tracking. [Umami](https://umami.is/) is another popular, open-source product in this space.   
+> **Also consider:** Plausible is one of a large subset of privacy-first analytics products that have proven popular in the wake of GDPR and less permissive attitudes to user tracking. [Umami](https://umami.is/) is another popular, open-source product in this space. Read our [GDPR analytics guide](/blog/best-gdpr-compliant-analytics-tools) for more options.   
 
 ### GrowthBook
 
@@ -192,7 +192,7 @@ GrowthBook is distributed under an MIT license and self-hosted is supported at n
 
 ## The best open-source data and BI tools
 
-This section is dedicate to data analytics tools that connect to data sources (e.g. data warehouses etc.) rather than actively collecting data. Most are focused on big data analytics and are thus tailored to more technical users, particularly engineering, dev ops, and data science teams.
+This section is dedicated to data analytics tools that connect to data sources (e.g. data warehouses etc.) rather than actively collecting data. Most are focused on big data analytics and are thus tailored to more technical users, particularly engineering, dev ops, and data science teams.
 
 ### Apache Spark
 ![Apache Spark - open source analytics tool](../images/blog/open-source-analytics-tools/apache-spark-screenshot.png)
@@ -304,7 +304,7 @@ Superset is ideal for enterprises with experienced in-house data teams. It can h
 - Large and active community
 - Powerful web-based SQL query editor
 - Huge range of charting options
-- Deck.GL integration for advanced geographic data viz
+- Deck.GL integration for advanced geographic dataviz
 
 #### Open source license and monetization
 
