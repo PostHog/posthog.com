@@ -78,7 +78,7 @@ Matomo is intended for marketing and website teams looking to track content perf
 
 #### Strengths
 - Google Analytics data importer
-- Easy to setup on Wordpress and WooCommerce
+- Easy to setup on WordPress and WooCommerce
 - Marketing metrics and attribution
 - Integrations with popular off-the-shelf CMS
 - Built-in GDPR and tag managers
