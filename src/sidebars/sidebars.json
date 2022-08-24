@@ -1105,6 +1105,10 @@
                     "url": "/docs/architecture"
                 },
                 {
+                    "name": "Data model",
+                    "url": "/docs/architecture/data-model"
+                },
+                {
                     "name": "Ingestion pipeline",
                     "url": "/docs/architecture/ingestion-pipeline"
                 },

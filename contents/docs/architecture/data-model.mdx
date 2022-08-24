@@ -1,0 +1,39 @@
+---
+title: Data model
+---
+
+This document provides a high-level overview of the various objects and primitives that make up the PostHog data model. For more information on exactly how data is stored in our database, check out the [Clickhouse overview](/docs/architecture/clickhouse).
+
+The two most-basic entities in PostHog are the [Event](#event) and [Person](#person) objects, and represent the core of our analytics functionalities.
+
+## Event
+
+An event is the most basic type of object in PostHog, and represents a single action that a user performed at a specific point in time. These events are sent either from one of our [libraries](/docs/integrate) or directly via our [API](/docs/api).
+
+Events consist of a number of different pieces of data:
+
+-  A unique `id` - In the form of a UUID
+-  The name of the event
+-  `distinct_id` - This corresponds to the unique ID of the client or device that sent this event
+-  `person_id` - This is the `id` of the [Person](#person) that sent this event
+-  Person properties - A snapshot of all the properties for the Person who sent this event at the time it was ingested
+-  `timestamp` - When the event was sent
+-  Any number of fields containing extra properties - This can be any arbitrary collection of key-value pairs
+
+Events are _only_ stored within Clickhouse, and once they have been written they can't be changed.
+This limitation comes from a trade-off in the design of Clickhouse: inserting data and running queries on large tables is extremely fast, but updating or deleting specific rows is generally not efficient.
+
+## Person
+
+In PostHog, a `Person` is an entity which sends events, and typically represents a 'User' in most implementations.
+
+Each person contains the following information:
+
+-   A unique `id` - In the form of a UUID
+-   Properties - A JSON object with all the properties for a user, which can be set using the `$set` and `$set_once` arguments
+-   Further internal fields - This includes things like `created_at` and which team this Person is connected to
+
+Persons are stored in PostgreSQL, but are additionally duplicated into Clickhouse for certain queries.
+The `properties` field on each Person object can be updated at any time, and as a result the PostgreSQL table represents the one source of truth for the most up-to-date values for the properties of a Person.
+
+Additionally, person properties are also stored on each event, with their value reflecting whatever the value was in PostgreSQL when the event was ingested. For more information on how person properties arekk added to events, take a look at [this step in the ingestion overview](/docs/architecture/ingestion-pipeline#3-person-processing)

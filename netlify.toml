@@ -2213,3 +2213,8 @@
 [[redirects]]
     from = "/docs/self-host/architecture"
     to = "/docs/architecture"
+
+# Added: 2022-08-24
+[[redirects]]
+    from = "/docs/data-model"
+    to = "/docs/architecture/data-model"
