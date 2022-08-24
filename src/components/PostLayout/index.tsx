@@ -118,7 +118,7 @@ export const Contributor = ({ image, name }: IContributor) => {
         <>
             <div className="w-[38px] h-[38px] relative rounded-full overflow-hidden">
                 {gatsbyImage ? (
-                    <GatsbyImage image={gatsbyImage} alt={name} />
+                    <GatsbyImage imgClassName="rounded-full" image={gatsbyImage} alt={name} />
                 ) : (
                     <svg width="38" height="38" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
