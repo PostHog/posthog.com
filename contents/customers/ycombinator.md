@@ -29,7 +29,7 @@ PostHog isn’t the only tool in Y Combinator’s stack, of course. Teams across
 
 “We were very thoughtful about what we wanted to use with Startup School and Cofounder Matching,” said Cat. “We chose PostHog so we wouldn’t lose a bunch of the traffic and data. We found that with Google Analytics and other platforms we would lose up to 30% of our data from users who would not allow third-party tracking, or used adblockers. Our users are very tech-savvy…very likely to block third-party cookies.”
 
-“Because Startup School is very wide reaching, it really matters to us that we have an accurate  understanding of what's happening. That meant PostHog was the obvious choice.”
+“Because Startup School is very wide reaching, it really matters to us that we have an accurate understanding of what's happening. That meant PostHog was the obvious choice.”
 
 Not only did PostHog enable Y Combinator to capture more data, it also provided a more powerful array of tools than other platforms. 
 
