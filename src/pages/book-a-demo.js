@@ -65,8 +65,8 @@ const Editions = ({ setDemoType }) => {
                             width="full"
                             className="mt-4 box-border"
                             type="secondary"
-                            onClick={() => setDemoType('enterprise')}
-                            event={{ name: 'book a demo: clicked enterprise demo' }}
+                            onClick={() => setDemoType('qa')}
+                            event={{ name: 'book a demo: clicked qa' }}
                         >
                             Meet PostHog
                         </CallToAction>
