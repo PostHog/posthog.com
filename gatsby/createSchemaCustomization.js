@@ -15,8 +15,8 @@ module.exports = exports.createSchemaCustomization = async ({ actions, schema })
       appConfig: [AppConfig]
     }
     type AppConfig {
-      key: String!
-      name: String!
+      key: String
+      name: String
       required: Boolean
       type: String
       hint: String
