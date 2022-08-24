@@ -22,7 +22,7 @@ The goal of this step is to be as simple as possible, so that we can reliably ge
 
 ## Ingestion
 
-Due to the design of Clickhouse, update operations are slow and undesireable, and so the first 4 steps of the ingestion pipeline are performing operations on our raw events to get it ready to be persisted in Clickhouse.
+Due to the design of Clickhouse, update operations are slow and undesirable, and so the first 4 steps of the ingestion pipeline are performing operations on our raw events to get it ready to be persisted in Clickhouse.
 
 The ingestion pipeline is made up of a number of different step:
 
@@ -40,7 +40,7 @@ Events are initially read from the `events_plugin_ingestion` Kafka topic, which 
 
 #### Why are events buffered?
 
-Since events coming in to PostHog can arrive in any order, we sometimes decide to delay the processing of specific events to fix edge cases that can potentialy arrive.
+Since events coming in to PostHog can arrive in any order, we sometimes decide to delay the processing of specific events to fix edge cases that can potentially arrive.
 It will become more obvious why this is necessary as we dive deeper into the event pipeline.
 
 #### Determining if an event should be buffered
@@ -126,7 +126,7 @@ For more information on exactly how events are stored in Clickhouse, check out [
 ### 6. Apps - `onEvent`
 
 The final step in the ingestion pipeline is calling the `onEvent` handler from any apps that we have enabled. This includes all of our export apps as well as some of our alerting/monitoring apps.
-It's worth noting that since this event has already been written to Clickhouse, it is effectively immutable at this point as we do not allow apps to directly update events. Any apps that need to tranform events should use the `processEvent` handler.
+It's worth noting that since this event has already been written to Clickhouse, it is effectively immutable at this point as we do not allow apps to directly update events. Any apps that need to transform events should use the `processEvent` handler.
 
 ## Kafka
 
