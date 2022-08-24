@@ -30,7 +30,7 @@ You'll also need access to the relevant Customer.io account.
 
 <AppParameters />
 
-### How do I match persons in PostHog with customers in Customer.io?
+### How do I match persons in PostHog with customers in Customer.io?
 
 We assume that you use the same ID to identify users in Customer.io as you use as distinct_id or in `posthog.identify()`.
 
