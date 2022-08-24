@@ -26,7 +26,11 @@ You'll also need access to the relevant Customer.io account.
 3. Add your Customer.io site ID and token at the configuration step.
 4. Enable the app and watch your 'People' list get populated in Customer.io!
 
-### How do I match persons in PostHog with customers in Customer.io?
+### Configuration
+
+<AppParameters />
+
+### How do I match persons in PostHog with customers in Customer.io?
 
 We assume that you use the same ID to identify users in Customer.io as you use as distinct_id or in `posthog.identify()`.
 

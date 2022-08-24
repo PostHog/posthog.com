@@ -23,6 +23,10 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 2. Search for 'Automatic Cohort Creator' and select the app, press Install.
 3. Follow the on-screen steps to configure the app.ß
 
+### Configuration
+
+<AppParameters />
+
 ### Is the source code for this app available?
 
 PostHog is open-source and so are all apps on the platform. The [source code for the Automatic Cohort Creator](https://github.com/PostHog/posthog-automatic-cohorts-plugin) is available on GitHub.

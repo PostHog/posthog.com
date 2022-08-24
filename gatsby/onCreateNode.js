@@ -15,6 +15,7 @@ module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, 
         const parent = getNode(node.parent)
         if (parent.internal.type === 'Reply') return
         const slug = createFilePath({ node, getNode, basePath: `pages` })
+
         createNodeField({
             node,
             name: `slug`,
@@ -62,6 +63,52 @@ module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, 
                 value: contributorsNode,
             })
         }
+
+        if (/^\/docs\/apps/.test(slug) && node?.frontmatter?.github && process.env.GITHUB_API_KEY) {
+            const { name, owner } = GitUrlParse(node.frontmatter.github)
+
+            try {
+                if (name && owner) {
+                    const repo = await fetch(`https://api.github.com/repos/${owner}/${name}`, {
+                        headers: {
+                            Authorization: `token ${process.env.GITHUB_API_KEY}`,
+                        },
+                    })
+
+                    if (repo.status !== 200) {
+                        throw `Got status code ${repo.status}`
+                    }
+
+                    const { default_branch } = await repo.json()
+
+                    const res = await fetch(
+                        `https://raw.githubusercontent.com/${owner}/${name}/${default_branch}/plugin.json`,
+                        {
+                            headers: {
+                                Authorization: `token ${process.env.GITHUB_API_KEY}`,
+                            },
+                        }
+                    )
+
+                    if (res.status !== 200) {
+                        throw `Got status code ${res.status}`
+                    }
+
+                    const body = await res.text()
+                    const { config } = JSON.parse(body)
+
+                    if (config) {
+                        createNodeField({
+                            node,
+                            name: `appConfig`,
+                            value: config,
+                        })
+                    }
+                }
+            } catch (error) {
+                console.error(`Error fetching plugin.json from ${owner}/${name}: ${error}`)
+            }
+        }
     }
 
     if (node.internal.type === 'Plugin' && node.url.includes('github.com')) {
@@ -82,15 +129,18 @@ module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, 
                 cache,
                 store,
             }))
+
         if (markdown) {
             node.markdown___NODE = markdown.id
             node.slug = `/integrations/${slugify(node.name, { lower: true })}`
         }
+
         const { default_branch } = await fetch(`https://api.github.com/repos/${owner}/${name}`, {
             headers: {
                 Authorization: `token ${process.env.GITHUB_API_KEY}`,
             },
         }).then((res) => res.json())
+
         const imageURL = `https://raw.githubusercontent.com/${owner}/${name}/${default_branch}/logo.png`
         let image
         try {

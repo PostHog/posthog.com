@@ -36,6 +36,10 @@ No. This app will only work on events ingested _after_ the app was enabled.
 
 This means it will register events as being the first if there were events that occurred before it was enabled. To mitigate this, you could consider renaming the relevant events and creating an action that matches both the old event name and the new one.
 
+### Configuration
+
+<AppParameters />
+
 ### Is the source code for this app available?
 
 PostHog is open-source and so are all apps on the platform. The [source code for the First Time Event Tracker](https://github.com/PostHog/first-time-event-tracker) is available on GitHub.
