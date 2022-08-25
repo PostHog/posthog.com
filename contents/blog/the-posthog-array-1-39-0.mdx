@@ -58,9 +58,13 @@ Do your event properties contain milliseconds or seconds? Then you can now make 
 
 This new, much requested and _very_ exciting big bold number insight type does exactly what it says: simplifies a query result down to a single number. And it works great with durations too!
 
-## Improved: New person deltion flow
+## Improved: New person deletion flow
 
-When deleting persons, you can now choose to delete event data as well thanks to [a new person deletion flow](https://github.com/PostHog/posthog/pull/11347).
+![delete karl oh no](../images/blog/array-1.39.0/person-deletion.png)
+
+Deleting persons from PostHog just got a lot easier, thanks to a new person deletion flow which also enables you to delete event data at the same time.
+
+This is especially handy for those times when you need to delete an individual for GDPR reasons - though, if you need to, you can choose to keep the events and just delete the person.
 
 ### Improved: Turbo properties
 
