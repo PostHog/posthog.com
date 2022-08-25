@@ -54,3 +54,5 @@ You can also create filters based on pre-prepared cohorts of users, which is esp
 ![Filter Internal Users Step 3](../images/tutorials/internal-users/step3.png)
 
 The internal and test user filter is controlled with a simple toggle whenever you create a new insight, or edit an existing one. Turn it on and everything in your filter group will be sifted out; turn it off and you’ll see results from all users together. Simple!
+
+<NewsletterTutorial compact/>

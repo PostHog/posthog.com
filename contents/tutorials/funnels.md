@@ -194,3 +194,5 @@ Following these steps will help you identify problems in your funnel, and verify
 For more inspiration, we recommend reading our guide [building an AARRR pirate funnel](/blog/aarrr-pirate-funnel) tutorial, and Neil Kakkar's blog on [what we've learned about running effective A/B tests](/blog/experiments) – Neil is our product leader for Experimentation, so he should know.
 
 Got a question about anything in this tutorial? Leave a question below, or [join our community Slack](/slack).
+
+<NewsletterTutorial compact/>
