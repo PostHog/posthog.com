@@ -46,7 +46,7 @@ Features include a comprehensive product analytics suite (e.g. trend analysis, d
 It’s entirely self-serve, with the ability to auto-capture event information out of the box. PostHog can also be self-hosted on your existing infrastructure, making it ideal if you don't want to share data with third parties. It's a good option if you're after an [open-source session recording tool](/blog/best-open-source-session-replay-tools), too. 
 
 #### Who is PostHog for?
-PostHog is useful for engineering, data science, and product teams. As an all-in-one platform, it can replace multiple tools (e.g. Mixpanel, LaunchDarkly, Hotjar) so you can simplify your tech stack. 
+PostHog is useful for engineering, data science, and product teams. As an all-in-one platform, it can replace multiple tools (e.g. Mixpanel, LaunchDarkly, Hotjar) so you can simplify your tech stack. [PostHog customers](/customers) include the likes of [Hasura](/customers/hasura), [Netdata](/customers/netdata), and [Phantom](/customers/phantom).  
 
 #### Strengths
 - All-in-one analytics suite
