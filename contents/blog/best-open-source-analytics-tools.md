@@ -1,5 +1,5 @@
 ---
-date: 2022-08-24
+date: 2022-08-25
 title: The best open-source analytics and data tools
 rootPage: /blog
 sidebar: Blog
@@ -24,8 +24,8 @@ We've chosen each entry carefully based on a broad range factors, such as popula
 We have separate guides on [open-source feature flag tools](/blog/best-open-source-feature-flag-tools) and [open-source AB testing products](/blog/best-open-source-ab-testing-tools).
 
 > **Changelog** 
-> - Jun 16, 2022: Added Fathom Lite, Open Web Analytics, GrowthBook, OpenReplay
-> - Aug 24, 2022: Removed Fathom Lite, Open Web Analytics; added Apache Superset, Redash
+> - **Jun 16, 2022:** Added Fathom Lite, Open Web Analytics, GrowthBook, OpenReplay
+> - **Aug 24, 2022:** Removed Fathom Lite, Open Web Analytics; added Apache Superset, Redash
 
 ## The best open source analytics tools
 
@@ -52,7 +52,8 @@ PostHog is useful for engineering, data science, and product teams. As an all-in
 - All-in-one analytics suite
 - Easy-to-use, no SQL required
 - Self-hosting and cloud-hosting available
-- Feature flags for running A/B tests
+- Feature flags for safely deploying changes
+- Multivariate experimentation suite for testing ideas
 - Session recording for gathering insights
 - Event pipelines to integrate with data warehouses
 - Built on highly-scalable ClickHouse OLAP database
@@ -309,3 +310,5 @@ Superset is ideal for enterprises with experienced in-house data teams. It can h
 #### Open source license and monetization
 
 Apache Superset is distributed under a Apache-2.0 license. There are no paid features or tiers.
+
+<NewsletterForm compact />
