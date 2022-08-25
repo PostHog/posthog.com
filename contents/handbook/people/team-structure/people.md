@@ -41,7 +41,7 @@ Every PostHog team member, as well as current, future and past candidates.
 * **Proposed Key Results:**
     * We have offers accepted by a senior product manager, 2x SREs, senior data engineer, developer advocate, and 4x full stack engineer.
     * We stay within 5% of forecast cash burn. 
-    * Ship 3 projects that make working at PostHog more seamless for the team - app management (Okta), migrate recruitment (Workable), one more TBD.
+    * Ship 3 projects that make working at PostHog more seamless for the team - app management (Okta), migrate recruitment (Workable), self-serve equity management (LTSE Equity).
 * **Rationale:**
     * Other teams depend on us hiring and retaining exceptional talent. And we need to do that without running out of money or forgetting to keep improving PostHog as a place to work. 
 
