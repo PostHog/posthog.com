@@ -34,9 +34,9 @@ We're getting ready to make a substantial change to the way [persons](/manual/pe
 - **PostHog Cloud:** No action is needed, as we're rolling this test out steadily behind a feature flag. If you're eager to be included from the start, let us know in [Slack](/slack) to see about joining our beta group.
 -  **Self-hosted users:** First, you need to [run an async migration](/docs/runbook/async-migrations). Afterwards, change your `actors_on_events_teams` [instance setting](/docs/self-host/configure/instance-settings) to `true`. As with other instance settings, you'll need to be [a Staff user](/docs/self-host/configure/instance-settings#staff-users) to make changes.
 
-Why are we doing this? Feedback showed that users weren't able to create queries based on person properties at the time of an event. By putting person properties on events, this becomes the new default, while still enabling you to to filter insights based on the latest properties using cohorts. 
+Why are we doing this? Firstly, it makes queries significantly faster because we no longer have to merge tables to get a result; we can just look up everything in the events table instead. One query in our internal tests showed a 400x increase in speed...but this beta will help us understand the improvement in real-world conditions. 
 
-Also, it makes queries significantly faster because we no longer have to merge tables to get a result; we can just look up everything in the events table instead. One query in our internal tests showed a 400x increase in speed...but this beta will help us understand the improvement in real-world conditions. 
+Secondly, feedback showed that users weren't able to create queries based on person properties at the time of an event. By putting person properties on events, this becomes the new default, while still enabling you to to filter insights based on the latest properties using cohorts. 
 
 There'll be some slight changes to how filtering by unique users or person properties work as a result of this change. For more information on this and to find out how we've implemented it change behind the scenes, check out our [overview of the ingestion pipeline](/docs/architecture/ingestion-pipeline).
 
