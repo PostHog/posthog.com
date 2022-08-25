@@ -35,7 +35,7 @@ We sell it through our [merch store](https://merch.posthog.com/) store on Shopif
 
 ### Individuals
 
-Create a gift card in [Shopify admin](https://posthog.myshopify.com/admin/gift_cards). You can either copy the code, or create a 'new customer' and send them the code directly.
+Create a gift card in [Shopify admin](https://posthog.myshopify.com/admin/gift_cards). You can either copy the code, or create a 'new customer' and send them the code directly. For contributions we tend to do $50, with no expiration date.
 
 Alternatively, if you want to send them a specific product via Printfection, you can create a 'New Order' under [this campaign](https://app.printfection.com/account/campaign/manage.php?storeid=304946). 
 
