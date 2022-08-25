@@ -1102,23 +1102,23 @@
             "children": [
                 {
                     "name": "Overview",
-                    "url": "/docs/architecture"
+                    "url": "/docs/how-posthog-works"
                 },
                 {
                     "name": "Data model",
-                    "url": "/docs/architecture/data-model"
+                    "url": "/docs/how-posthog-works/data-model"
                 },
                 {
                     "name": "Ingestion pipeline",
-                    "url": "/docs/architecture/ingestion-pipeline"
+                    "url": "/docs/how-posthog-works/ingestion-pipeline"
                 },
                 {
                     "name": "Clickhouse",
-                    "url": "/docs/architecture/clickhouse"
+                    "url": "/docs/how-posthog-works/clickhouse"
                 },
                 {
                     "name": "Querying data",
-                    "url": "/docs/architecture/queries"
+                    "url": "/docs/how-posthog-works/queries"
                 }
             ]
         },
