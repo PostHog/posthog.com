@@ -17,7 +17,7 @@ flowchart LR
     eventsmv["events_mv table<br/>(Materialized view)"]:::table
     events["events table<br/>(ReplacingMergeTree table engine)"]:::table
 
-    kafka_events -.clickhouse_events_proto topic.- Kafka
+    kafka_events -.clickhouse_events_json topic.- Kafka
     eventsmv --reads from--> kafka_events
     eventsmv --pushes data to--> events
 ```
@@ -53,7 +53,7 @@ flowchart LR
     events["events table</br/>(Distributed table engine)"]:::table
     sharded_events["sharded_events table<br/>(ReplicatedReplacingMergeTree table engine)"]:::table
 
-    kafka_events -.clickhouse_events_proto topic.- Kafka
+    kafka_events -.clickhouse_events_json topic.- Kafka
     eventsmv --reads from--> kafka_events
     eventsmv --pushes data to--> writable_events
     writable_events -.pushes data to.-> sharded_events

@@ -30,10 +30,12 @@ In PostHog, a `Person` is an entity which sends events, and typically represents
 Each person contains the following information:
 
 -   A unique `id` - In the form of a UUID
--   Properties - A JSON object with all the properties for a user, which can be set using the `$set` and `$set_once` arguments
--   Further internal fields - This includes things like `created_at` and which team this Person is connected to
+-   Properties - A JSON object with all the properties for a user, which can be altered using the `$set`, `$set_once`, and `$unset` arguments
+-   `created_at` - The timestamp of when this Person was created
+-   Further internal fields - This includes things like the `team_id` this Person is connected to
 
 Persons are stored in PostgreSQL, but are additionally duplicated into Clickhouse for certain queries.
 The `properties` field on each Person object can be updated at any time, and as a result the PostgreSQL table represents the one source of truth for the most up-to-date values for the properties of a Person.
 
-Additionally, person properties are also stored on each event, with their value reflecting whatever the value was in PostgreSQL when the event was ingested. For more information on how person properties arekk added to events, take a look at [this step in the ingestion overview](/docs/how-posthog-works/ingestion-pipeline#3-person-processing)
+Additionally, person properties are also stored directly on each event. Their value is determined during ingestion by looking up the Person who sent the event in PostgreSQL, and combining these values with any updates from the event itself.
+For more information on how person properties are added to events, take a look at [this step in the ingestion overview](/docs/architecture/ingestion-pipeline#3-person-processing)

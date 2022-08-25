@@ -111,15 +111,13 @@ For more information on exactly how this updating is done, check out this overvi
 Finally, now that we have our event and person all ready, we perform a few last processing steps before we write the event to Clickhouse.
 This is our last chance to change anything about the event, which can include:
 
--   Adding group properties if the event has been assigned to a Group
+-   Adding [group properties](/manual/group-analytics) if the event has been assigned to a Group
 -   Anonymizing IPs, if needed
--   Attaching the `person_id` for the Person who sent the event - this was determined in Step 3
--   Attaching person properties to the event
 
 ### 5. Writing to Clickhouse
 
-Now that we have our fully-processed event with all the person properties attached, we are ready to persist it by writing it to Clickhouse.
-This is done by writing our finalized event to a separate Kafka topic that Clickhouse will consume-from and then write to its tables.
+Now that we have our fully-processed event, the last step before we write to Clickhouse is to add the `person_id` and person properties to our event, both of which were determined in Step 3.
+Once we have all the person properties attached, we are ready to persist our event, which is done by sending it to a separate Kafka topic that Clickhouse will consume from and then write to its tables.
 
 For more information on exactly how events are stored in Clickhouse, check out [this reference](/docs/how-posthog-works/clickhouse)
 
