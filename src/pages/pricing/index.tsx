@@ -14,7 +14,7 @@ import ProductPillars from 'components/Pricing/ProductPillars/index'
 import Features from 'components/Pricing/Features/index'
 import AllPlans from 'components/Pricing/AllPlans'
 import GitHubButton from 'react-github-btn'
-import { animateScroll as scroll } from 'react-scroll'
+import { animateScroll as scroll, Link as ScrollLink } from 'react-scroll'
 import shape from './images/shape.svg'
 import Modal from 'components/Modal'
 import SelfHostOverlay from 'components/Pricing/Overlays/SelfHost'
@@ -121,12 +121,12 @@ const features = [
     { title: 'Dashboard tagging', icon: ProductIcons.dashboards },
 ]
 
-const Plan = ({ title, subtitle, features, limitations, pricing, cta, demo, setWhyCloudOpen }) => {
+const Plan = ({ title, subtitle, features, limitations, pricing, cta, demo, setWhyCloudOpen, className = '' }) => {
     return (
         <div
-            className={`relative flex flex-col w-1/3 py-8 rounded-md border-[3px] ${
+            className={`relative flex flex-col lg:w-1/3 py-8 rounded-md border-[3px] ${
                 title === 'PostHog Cloud' ? 'bg-white px-10 border-red' : 'border-transparent'
-            }`}
+            } ${className}`}
         >
             <div className="mb-5">
                 <h2 className="text-xl mb-1 flex items-center">
@@ -254,11 +254,14 @@ const Breakdown = ({ planName, ctas }) => {
 const PricingBreakdown = () => {
     return (
         <section className={`${section} mt-12 md:px-4`}>
-            <h2 className="text-2xl m-0 flex items-center mb-4 pb-4 border-b border-gray-accent-light border-dashed">
+            <h2
+                id="pricing-breakdown"
+                className="text-2xl m-0 flex items-center mb-4 pb-4 border-b border-gray-accent-light border-dashed"
+            >
                 Pricing breakdown
             </h2>
-            <div className="flex space-x-8 items-start">
-                <div className="grid grid-cols-2 flex-grow gap-x-8">
+            <div className="flex lg:space-x-8 lg:space-y-0 space-y-4 items-start lg:flex-row flex-col">
+                <div className="grid grid-cols-1 sm:grid-cols-2 flex-grow sm:gapy-y-0 gap-y-8 sm:gap-x-8">
                     <div className="flex flex-col">
                         <div>
                             <h4 className="text-base m-0 font-semibold text-black/50">Self-serve plans</h4>
@@ -316,7 +319,7 @@ const PricingBreakdown = () => {
                         />
                     </div>
                 </div>
-                <div className="max-w-[280px] w-full flex-shrink-0 bg-white p-4 rounded-md">
+                <div className="lg:max-w-[280px] w-full flex-shrink-0 bg-white p-4 rounded-md box-border">
                     <h4 className="text-base m-0 pb-1">Estimate your cost</h4>
                     <div>
                         <p className="text-sm font-bold m-0 text-black/60">Monthly event volume</p>
@@ -441,8 +444,9 @@ const PricingNew = (): JSX.Element => {
                 </div>
             </section>
 
-            <section className="flex px-4 space-x-6 max-w-6xl mx-auto">
+            <section className="flex px-4 lg:space-x-6 lg:space-y-0 space-y-4 max-w-6xl mx-auto lg:flex-row flex-col">
                 <Plan
+                    className="lg:order-none order-last"
                     title="PostHog Open Source"
                     subtitle="You host, free forever"
                     features={[
@@ -465,7 +469,8 @@ const PricingNew = (): JSX.Element => {
                                 <strong>Free</strong>
                             </p>
                             <p className="m-0 inline-block mb-[32px]">
-                                Hosting not included. <Link>Estimate your cost</Link>
+                                Hosting not included.{' '}
+                                <Link to="/docs/self-host/deploy/hosting-costs">Estimate your cost</Link>
                             </p>
                         </>
                     }
@@ -495,7 +500,9 @@ const PricingNew = (): JSX.Element => {
                                 First 1 million events free - every month!
                             </p>
                             <p className="m-0 mt-2 font-semibold">
-                                <Link>See pricing breakdown and volume discounts</Link>
+                                <ScrollLink smooth to="pricing-breakdown" className="cursor-pointer">
+                                    See pricing breakdown and volume discounts
+                                </ScrollLink>
                             </p>
                         </>
                     }
@@ -524,7 +531,9 @@ const PricingNew = (): JSX.Element => {
                                 First 1 million events free - every month!
                             </p>
                             <p className="m-0 mt-2 font-semibold">
-                                <Link>See pricing breakdown and volume discounts</Link>
+                                <ScrollLink smooth to="pricing-breakdown" className="cursor-pointer">
+                                    See pricing breakdown and volume discounts
+                                </ScrollLink>
                             </p>
                         </>
                     }
