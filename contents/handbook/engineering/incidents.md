@@ -28,10 +28,15 @@ Things that _shouldn’t_ be an incident
 ## What happens during an incident
 
 The person who raised the incident is the incident lead. It’s their responsibility to:
-- Make sure the right people join the zoom. This includes the current on call person (https://posthog.pagerduty.com/service-directory/P43Y0E8), people from Infra and the feature owner if relevant (https://posthog.com/handbook/engineering/feature-ownership)
+- Make sure the right people join the zoom. This includes [the current on call person](https://posthog.pagerduty.com/service-directory/P43Y0E8). Optionally, add people from Infra and [the feature owner](https://posthog.com/handbook/engineering/feature-ownership) if relevant. Also ping Tim and James G so they're aware.
 - take notes in the incident channel. This should include time stamps, and is a brain dump of everything that we know, and everything that we are or have tried. This will give us much more opportunity to learn from the incident afterwards.
+- Update the [status banner on app](https://app.posthog.com/feature_flags/984)
+- Update the [status page](https://uptimerobot.com/statuspage.php)
+- Update users in [#announcements](https://posthogusers.slack.com/archives/CT7HXDEG3)
 
 If the person who raised the incident is the best person to debug the issue, they should hand over the incident lead role to someone else on the call.
+
+[You can find all of our production runbooks + specific strategies for debugging outages here (internal)](https://github.com/PostHog/product-internal/tree/main/infrastructure/runbooks)
 
 ## When does an incident end?
 
@@ -43,7 +48,7 @@ Don't forget to type `/inc close` in the incident channel.
 
 24-48 hours after an incident, we should have a quick sync meeting with a small group of people involved in the incident, plus Tim. If you raised the incident, you can schedule this. If you don’t want to or can’t, Tim is happy to take over at this point, just let him know.
 
-Incident.io will automatically create an incident analysis doc that you can paste into a word doc. It'll have a timeline of everything that happened.
+Incident.io will automatically create an incident analysis doc that you can paste into a PR against the [incidents analysis repository](https://github.com/PostHog/incidents-analysis). It'll have a timeline of everything that happened.
 
 During the incident analysis session, we’ll walk through the entire timeline as it happened. While doing that, we want to answer the following types of questions:
 - In what ways did our systems surprise us?
