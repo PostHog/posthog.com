@@ -279,3 +279,5 @@ Essentially, the key steps to keep in mind for tracking navigation in SPAs are:
 1. Set your own properties and/or override `$current_url` to track pages as you like
 
 Following these steps, you can track navigation on your app just like any other website, ensuring you capture exactly how users are using your product. 
+
+<NewsletterTutorial compact/>

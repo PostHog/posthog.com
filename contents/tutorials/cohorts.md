@@ -119,3 +119,5 @@ Finally, you are also able to see how different cohorts perform on the same char
 ![Cohort breakdown](../images/tutorials/cohorts/trends-breakdown.png)
 
 This is a useful way of seeing metrics for different cohorts in one single chart, helping you determine what user groups perform better with respect to your KPIs, for example.
+
+<NewsletterTutorial compact/>

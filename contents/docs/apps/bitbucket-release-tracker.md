@@ -24,6 +24,10 @@ The BitBucket Release Tracker requires either PostHog Cloud, or a self-hosted Po
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
+### Configuration
+
+<AppParameters />
+
 ### Is the source code for this app available?
 
 PostHog is open-source and so are all apps on the platform. The [source code for the Bitbucket Release Tracker](https://github.com/PostHog/bitbucket-release-tracker) is available on GitHub.

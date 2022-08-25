@@ -24,6 +24,10 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 3. Search for 'Ingestion Alert'
 4. Select the app, press 'Install' and follow the on-screen instructions
 
+### Configuration
+
+<AppParameters />
+
 ### Why am I not getting ingestion alert notifications?
 
 If you do not have a lot of users, or they are all based in the same timezone you may legitimately have 'dead periods' where no events are generated. To prevent such dead periods causing alerts you can increase the threshold. You can also use the [heartbeat app](https://github.com/PostHog/posthog-heartbeat-plugin) to trigger events during dead periods if you wish to only monitor the ingestion pipeline.

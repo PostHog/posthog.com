@@ -26,6 +26,10 @@ You'll also need Sendgrid access, obviously.
 3. Add your Sendgrid API key at the configuration step.
 4. Enable the app and watch your contacts list get populated in Sendgrid!
 
+### Configuration
+
+<AppParameters />
+
 ### Is the source code for this app available?
 
 PostHog is open-source and so are all apps on the platform. The [source code for the Sendgrid Connector](https://github.com/PostHog/sendgrid-plugin) is available on GitHub.

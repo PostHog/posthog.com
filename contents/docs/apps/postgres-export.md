@@ -36,6 +36,10 @@ Finally, follow the steps below.
 2. Search for 'PostgreSQL' and select the app, press Install.
 3. Add the connection details at the plugin configuration step in PostHog.
 
+### Configuration
+
+<AppParameters />
+
 ### Is the source code for this app available?
 
 PostHog is open-source and so are all apps on the platform. The [source code for the Postgres Export app](https://github.com/PostHog/postgres-plugin) is available on GitHub.

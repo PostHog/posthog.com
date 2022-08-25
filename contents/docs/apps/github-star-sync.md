@@ -25,6 +25,10 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 4. Configure the by specifying a GitHub user/repo to sync.
 5. Optionally, add a personal API key to help with rate limits
 
+### Configuration
+
+<AppParameters />
+
 ### Is the source code for this app available?
 
 PostHog is open-source and so are all apps on the platform. The [source code for the GitHub Star Sync app](https://github.com/PostHog/github-star-sync-plugin) is available on GitHub.

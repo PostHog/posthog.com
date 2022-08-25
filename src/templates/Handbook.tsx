@@ -23,6 +23,7 @@ import { getCookie } from 'lib/utils'
 import { CallToAction } from 'components/CallToAction'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import CommunityQuestions from 'components/CommunityQuestions'
+import Markdown from 'markdown-to-jsx'
 
 export const HandbookSidebar = ({ contributors, title, location, related }) => {
     return (
@@ -60,17 +61,87 @@ export const HandbookSidebar = ({ contributors, title, location, related }) => {
     )
 }
 
+type AppParametersProps = {
+    config:
+        | {
+              key: string
+              name: string | null
+              required: boolean | null
+              type: string | null
+              hint: string | null
+              description: string | null
+          }[]
+        | null
+}
+
+export const AppParametersFactory: (params: AppParametersProps) => React.FC = ({ config }) => {
+    const AppParameters = () => {
+        if (!config) {
+            return null
+        }
+
+        return (
+            <table>
+                <thead>
+                    <tr>
+                        <th>Option</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {config.map((option) => {
+                        if (!option.name) {
+                            return null
+                        }
+
+                        return (
+                            <tr key={option.key}>
+                                <td>
+                                    <div className="mb-6">
+                                        <code className="dark:bg-gray-accent-dark dark:text-white bg-gray-accent-light text-inherit p-1 rounded">
+                                            {option.name}
+                                        </code>
+                                    </div>
+
+                                    {option.type && (
+                                        <div>
+                                            <strong>Type: </strong>
+                                            <span>{option.type}</span>
+                                        </div>
+                                    )}
+
+                                    <div>
+                                        <strong>Required: </strong>
+                                        <span>{option.required ? 'True' : 'False'}</span>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    {option.description || option.hint ? (
+                                        <Markdown>{option.description || option.hint}</Markdown>
+                                    ) : null}
+                                </td>
+                            </tr>
+                        )
+                    })}
+                </tbody>
+            </table>
+        )
+    }
+
+    return AppParameters
+}
+
 export default function Handbook({
-    data: { post, countries, nextPost },
+    data: { post, nextPost },
     pageContext: { menu, breadcrumb = [], breadcrumbBase, tableOfContents },
     location,
 }) {
     const { hash } = useLocation()
-    const [menuOpen, setMenuOpen] = useState(false)
     const {
         body,
         frontmatter,
-        fields: { slug, contributors },
+        fields: { slug, contributors, appConfig },
     } = post
     const { title, hideAnchor, description, hideLastUpdated, features, github, installUrl, thumbnail, related } =
         frontmatter
@@ -81,12 +152,6 @@ export default function Handbook({
 
     const [showCTA, setShowCTA] = React.useState<boolean>(
         typeof window !== 'undefined' ? Boolean(getCookie('ph_current_project_token')) : false
-    )
-
-    const TotalCountries = (props) => <span {...props}>{countries.group.length}</span>
-
-    const TotalTeam = (props) => (
-        <span {...props}>{countries.group.reduce((prev, curr) => prev + curr.totalCount, 0)}</span>
     )
 
     const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
@@ -104,14 +169,9 @@ export default function Handbook({
         h6: (props) => Heading({ as: 'h6', ...props }),
         img: ZoomImage,
         a: A,
-        TotalCountries,
-        TotalTeam,
         TestimonialsTable,
+        AppParameters: AppParametersFactory({ config: appConfig }),
         ...shortcodes,
-    }
-
-    const handleMobileMenuClick = () => {
-        setMenuOpen(!menuOpen)
     }
 
     useEffect(() => {
@@ -195,11 +255,6 @@ export default function Handbook({
 
 export const query = graphql`
     query HandbookQuery($id: String!, $nextURL: String!) {
-        countries: allMdx(filter: { fields: { slug: { regex: "/^/team/" } } }) {
-            group(field: frontmatter___country) {
-                totalCount
-            }
-        }
         nextPost: mdx(fields: { slug: { eq: $nextURL } }) {
             excerpt(pruneLength: 500)
             frontmatter {
@@ -215,6 +270,14 @@ export const query = graphql`
             excerpt(pruneLength: 150)
             fields {
                 slug
+                appConfig {
+                    key
+                    name
+                    required
+                    type
+                    hint
+                    description
+                }
                 contributors {
                     url
                     username
