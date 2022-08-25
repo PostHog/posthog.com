@@ -68,10 +68,10 @@ const sections = [
                 name: '1-2 million',
                 tiers: {
                     'Open Source': 'Free',
-                    'PostHog Cloud': '$0.00045',
-                    '+ Enterprise Cloud package': '$0.00045',
-                    'Self-Hosted': '$0.00045',
-                    '+ Enterprise package': '$0.00045',
+                    'PostHog Cloud': '$0.000450',
+                    '+ Enterprise Cloud package': '$0.000450',
+                    'Self-Hosted': '$0.000450',
+                    '+ Enterprise package': '$0.000450',
                 },
             },
             {
@@ -79,9 +79,9 @@ const sections = [
                 tiers: {
                     'Open Source': 'Free',
                     'PostHog Cloud': '$0.000225',
-                    '+ Enterprise Cloud package': '$0.00045',
+                    '+ Enterprise Cloud package': '$0.000450',
                     'Self-Hosted': '$0.000225',
-                    '+ Enterprise package': '$0.00045',
+                    '+ Enterprise package': '$0.000450',
                 },
             },
             {
@@ -89,9 +89,9 @@ const sections = [
                 tiers: {
                     'Open Source': 'Free',
                     'PostHog Cloud': '$0.000075',
-                    '+ Enterprise Cloud package': '$0.00009',
+                    '+ Enterprise Cloud package': '$0.000090',
                     'Self-Hosted': '$0.000075',
-                    '+ Enterprise package': '$0.00009',
+                    '+ Enterprise package': '$0.000090',
                 },
             },
             {
