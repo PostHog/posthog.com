@@ -40,9 +40,7 @@ If the person who raised the incident is the best person to debug the issue, the
 
 ## When does an incident end?
 
-When we’re confident whatever was broken before is not broken anymore. This is sometimes hard to tell when the problem is intermittent. In that case, tell people to drop off the zoom, but to stay near their computer. Check the relevant metrics every 15 minutes or so, until you’re confident the problem is fully resolved. 
-
-Don't forget to type `/inc close` in the incident channel.
+When we’ve identified the root cause of the issue and put a fix in place. Don't forget to type `/inc close` in the incident channel.
 
 ## What happens after an incident? (Incident analysis)
 
