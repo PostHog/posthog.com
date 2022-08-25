@@ -2218,3 +2218,9 @@
 [[redirects]]
     from = "/docs/data-model"
     to = "/docs/architecture/data-model"
+
+
+# Added: 2022-08-25
+[[redirects]]
+    from = "/docs/self-host/architecture"
+    to = "/docs/how-posthog-works"
