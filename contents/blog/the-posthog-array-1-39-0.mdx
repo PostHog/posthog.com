@@ -32,7 +32,7 @@ Want to know more about what we're up to? [Subscribe to HogMail, our newsletter]
 We're getting ready to make a substantial change to the way [persons](/manual/persons) and [events](/manual/events) work by essentially combining them and adding person ids and properties _onto_ events. 1.39.0 gives you the chance to try the feature ahead of the full release. Here's how:
 
 - **PostHog Cloud:** No action is needed, as we're rolling this test out steadily behind a feature flag. If you're eager to be included from the start, let us know in [Slack](/slack) to see about joining our beta group.
--  **Self-hosted users:** First, you need to [run an async migration](/docs/runbook/async-migrations). Afterwards, change your `actors_on_events_teams` [instance setting](/docs/self-host/configure/instance-settings) to `true`. As with other instance settings, you'll need to be [a Staff user](/docs/self-host/configure/instance-settings#staff-users) to make changes.
+-  **Self-hosted users:** First, you need to [run async migration number 0006](/docs/runbook/async-migrations). Afterwards, change your `PERSON_ON_EVENTS_ENABLED` [instance setting](/docs/self-host/configure/instance-settings) to `true`. As with other instance settings, you'll need to be [a Staff user](/docs/self-host/configure/instance-settings#staff-users) to make changes.
 
 Why are we doing this? Firstly, it makes queries significantly faster because we no longer have to merge tables to get a result; we can just look up everything in the events table instead. One query in our internal tests showed a 400x increase in speed...but this beta will help us understand the improvement in real-world conditions. 
 
