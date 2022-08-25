@@ -89,7 +89,7 @@ Version 1.39 also adds hundreds of other improvements and fixes, including...
 -   **Improvement**: When deleting persons, you can now choose to delete event data as well thanks to [a new person deletion flow](https://github.com/PostHog/posthog/pull/11347).
 -   **Improvement**: For users self-hosting PostHog, you can now set-up [monitoring and logging through Grafana](/docs/self-host/configure/monitoring-with-grafana) out of the box, which makes it much easier to monitor and troubleshoot your deployment.
 -   **Improvement**: [We've separated the list of feature flags on an event from its event properties in the taxonomic filter](https://github.com/PostHog/posthog/pull/10668). This makes it (approximately) 1,000,000% easier to find things when there are lots of feature flags.
-- **Improvement**: We've introduced [the snappy compression codec](https://google.github.io/snappy/) for compressing in-flight messages. No more 'message too large' errors!
+- **Improvement**: We've introduced [the snappy compression codec](https://google.github.io/snappy/) for compressing in-flight messages, which reduces some kafka topic sizes by up to 4x. No more 'message too large' errors!
 -   **Fix**: In a few unexpected cases we used to return a successful response to some invalid API requests to the capture endpoint. [Now we correctly return a `400 BAD REQUEST`](https://github.com/PostHog/posthog/pull/10999) which will help people with useful feedback during development
 
 View the commit log in GitHub for a full history of changes: [`release-1.38.0...release-1.39.0`](https://github.com/PostHog/posthog/compare/release-1.38.0...release-1.39.0).
