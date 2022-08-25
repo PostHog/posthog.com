@@ -28,6 +28,10 @@ You'll also need Mailboxlayer access and an API key.
 5. Add the API key to the config.
 6. Enable the app and watch the email scores come in!
 
+### Configuration
+
+<AppParameters />
+
 ### Is the source code for this app available?
 
 PostHog is open-source and so are all apps on the platform. The [source code for the Email Scoring app](https://github.com/PostHog/mailboxlayer-plugin) is available on GitHub.

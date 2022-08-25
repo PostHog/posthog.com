@@ -73,7 +73,7 @@ export default function EventPipelines() {
                     </p>
                     <p>
                         And if there’s no app for what you’re looking to do, there probably will be soon – or{' '}
-                        <Link to="/docs/apps/build">you can build it</Link>! 
+                        <Link to="/docs/apps/build">you can build it</Link>!
                     </p>
                 </>
             }

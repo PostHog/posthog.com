@@ -118,7 +118,7 @@ export const Contributor = ({ image, name }: IContributor) => {
         <>
             <div className="w-[38px] h-[38px] relative rounded-full overflow-hidden">
                 {gatsbyImage ? (
-                    <GatsbyImage image={gatsbyImage} alt={name} />
+                    <GatsbyImage imgClassName="rounded-full" image={gatsbyImage} alt={name} />
                 ) : (
                     <svg width="38" height="38" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -413,9 +413,9 @@ const SidebarAction = ({ children, title, width, className = '', href, onClick }
 
 const NextPost = ({ contentContainerClasses = '', excerpt, frontmatter, fields }: INextPost) => {
     return (
-        <div className="py-6 border-t border-gray-accent-light dark:border-gray-accent-dark border-dashed mt-5">
+        <div className="py-8 border-t border-gray-accent-light dark:border-gray-accent-dark border-dashed">
             <div className={contentContainerClasses}>
-                <p className="text-lg text-black/40 dark:text-white/40 m-0 font-bold pt-6">Next article</p>
+                <p className="text-lg text-black/40 dark:text-white/40 m-0 font-bold">Next article</p>
                 <h3 className="text-xl font-bold m-0 my-1">{frontmatter?.title}</h3>
                 <p className="relative max-h-24 overflow-hidden">
                     {excerpt}
@@ -429,7 +429,7 @@ const NextPost = ({ contentContainerClasses = '', excerpt, frontmatter, fields }
 
 const Survey = ({ contentContainerClasses = '' }) => {
     return (
-        <div className="pt-8 pb-6 border-t border-gray-accent-light dark:border-gray-accent-dark border-dashed mt-5">
+        <div className="py-8 border-t border-gray-accent-light dark:border-gray-accent-dark border-dashed">
             <div className={contentContainerClasses}>
                 <DocsPageSurvey />
             </div>
@@ -470,7 +470,7 @@ export default function PostLayout({
     }
 
     useEffect(() => {
-        if (hash) {
+        if (hash && !hideSearch) {
             scroll.scrollMore(-50)
         }
     }, [])

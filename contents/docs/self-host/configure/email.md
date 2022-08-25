@@ -21,7 +21,7 @@ To configure a remote email server, you will need to head over to [Instance sett
 - `EMAIL_HOST_USER`: Defaults to `null`. Credentials to connect to the host.
 - `EMAIL_HOST_PASSWORD`: Defaults to `null`. Credentials to connect to the host.
 - `EMAIL_USE_TLS`: Defaults to `false`. Whether to use TLS protocol when connecting to the host.
-- `EMAIL_USE_SSL`: Defaults to `false`. Whether to use SSL protocol when connecting to the host.
+- `EMAIL_USE_SSL`: Defaults to `false`. Whether to use SSL protocol when connecting to the host. If you're using **AWS SES** you should use this instead of TLS.
 - `EMAIL_DEFAULT_FROM`: Defaults to `root@localhost`. Email address that will appear as the sender in emails (`From` header).
 - `EMAIL_ENABLED`: Defaults to `true`. Whether email service is enabled or not.
 - `SITE_URL`: Defaults to `http://localhost:8000`. Not unique to the email service, but it needs to be set for emails to work properly. Principal URL of your PostHog instance.

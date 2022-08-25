@@ -75,6 +75,10 @@ The default separator for nested properties is two subsequent underscores (\_\_)
 
 When picking your separator, make sure it will not clash with your property naming patterns! There be dragons.
 
+### Configuration
+
+<AppParameters />
+
 ### Is the source code for this app available?
 
 PostHog is open-source and so are all apps on the platform. The [source code for the Property Flattener](https://github.com/PostHog/flatten-properties-plugin) is available on GitHub.
