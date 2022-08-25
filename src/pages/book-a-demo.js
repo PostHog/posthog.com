@@ -87,14 +87,14 @@ const Book = ({ demoType }) => {
     )
 }
 
-export default function SelfHost() {
+export default function SelfHost({ location }) {
     const initialCrumbs = [
         {
             title: 'Select edition',
         },
     ]
     const { posthog } = useValues(posthogAnalyticsLogic)
-    const [demoType, setDemoType] = useState(null)
+    const [demoType, setDemoType] = useState(location.state?.demoType)
     const [crumbs, setCrumbs] = useState(initialCrumbs)
 
     useEffect(() => {
