@@ -15,10 +15,11 @@ Events consist of a number of different pieces of data:
 -  A unique `id` - In the form of a UUID
 -  The name of the event
 -  `distinct_id` - This corresponds to the unique ID of the client or device that sent this event
+-  `properties` - This field contains a JSON object of all the properties specified for this event, including values such as the `$session_id`
 -  `person_id` - This is the `id` of the [Person](#person) that sent this event
 -  Person properties - A snapshot of all the properties for the Person who sent this event at the time it was ingested
 -  `timestamp` - When the event was sent
--  Any number of fields containing extra properties - This can be any arbitrary collection of key-value pairs
+-  Further internal fields - This includes things like the `team_id` this Event is connected to
 
 Events are _only_ stored within Clickhouse, and once they have been written they can't be changed.
 This limitation comes from a trade-off in the design of Clickhouse: inserting data and running queries on large tables is extremely fast, but updating or deleting specific rows is generally not efficient.
