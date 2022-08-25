@@ -15,9 +15,9 @@ To declare an incident, type `/incident` in the #incidents channel. This will cr
 Anyone can declare an incident, including non-engineers. If in doubt, check with your nearest engineer.
 
 Some things that should definitely be an incident
-- app.posthog.com being completely unavailable (not just for you)
+- `app.posthog.com` being completely unavailable (not just for you)
 - No insights can be created
-- Feature flags are not being returned at all, or /decide is down
+- Feature flags are not being returned at all, or `/decide` is down
 - Various alerts defined as critical, such as disk space full, OOM or >5 minute ingestion lag
 
 Things that _shouldn’t_ be an incident
