@@ -280,6 +280,13 @@ await client.getFeatureFlag('beta-feature', 'distinct id', {personProperties: {'
 
 > **Note:** New feature flag definitions are polled every 30 seconds by default, which means there will be up to a 30 second delay between you changing the flag definition, and it reflecting on your servers. You can change this default on the client by setting `featureFlagsPollingInterval` during client initialisation.
 
+This works for `getAllFlags` as well. It evaluates all flags locally if possible. If even one flag isn't locally evaluable, it falls back to decide.
+
+```js
+await client.getAllFlags('distinct id', {groups: {}, personProperties: {'is_authorized': True}, groupProperties: {}})
+# returns dict of flag key and value pairs. 
+```
+
 **Restricting evaluation to local only**
 
 Sometimes, performance might matter to you so much that you never want an HTTP request roundtrip delay when computing flags. In this case, you can set the `only_evaluate_locally` parameter to true, which tries to compute flags only with the properties it has. If it fails to compute a flag, it returns `None`, instead of going to PostHog's servers to get the value.
