@@ -1371,11 +1371,6 @@
     from = "/docs/user-guides/plugins"
     to = "/docs/apps"
 
-# Added: 2022-05-12
-[[redirects]]
-    from = "/product-features"
-    to = "/blog/posthog-vs-amplitude"
-
 # Added: 2022-05-13
 [[redirects]]
     from = "/docs/plugins/build/reference"
