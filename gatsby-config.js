@@ -74,9 +74,6 @@ module.exports = {
                 gatsbyRemarkPlugins: [
                     `gatsby-remark-static-images`,
                     { resolve: 'gatsby-remark-autolink-headers', options: { icon: false } },
-                    {
-                        resolve: require.resolve(`./plugins/gatsby-remark-mermaid`),
-                    },
                 ],
                 plugins: [`gatsby-remark-static-images`],
             },
@@ -229,7 +226,6 @@ module.exports = {
                             escapeEntities: {},
                         },
                     },
-                    `gatsby-remark-mermaid`,
                 ],
             },
         },
