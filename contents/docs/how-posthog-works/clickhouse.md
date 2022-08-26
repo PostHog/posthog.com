@@ -8,38 +8,6 @@ Instead of data being inserted directly into ClickHouse, it itself data from Kaf
 
 The following sections go more into depth in how this works exactly.
 
-### Non-sharded ClickHouse events ingestion
-
-```mermaid
-flowchart LR
-    classDef table fill:#f6e486,stroke:#ffc45d;
-    kafka_events["kafka_events table<br/>(Kafka table engine)"]:::table
-    eventsmv["events_mv table<br/>(Materialized view)"]:::table
-    events["events table<br/>(ReplacingMergeTree table engine)"]:::table
-
-    kafka_events -.clickhouse_events_json topic.- Kafka
-    eventsmv --reads from--> kafka_events
-    eventsmv --pushes data to--> events
-```
-
-#### `kafka_events` table
-
-`kafka_events` table is of [Kafka table engine](https://clickhouse.com/docs/en/engines/table-engines/integrations/kafka/)
-
-In essence it behaves as a kafka consumer group - reading from this table reads from the underlying kafka topic and advances the current offset.
-
-#### `events_mv` Materialized View
-
-`events_mv` table is a [Materialized View](https://clickhouse.com/docs/en/sql-reference/statements/create/view/#materialized).
-
-In this case it acts as a data pipe which periodically pulls from `kafka_events` and pushes the results into the (events) table.
-
-#### `events` table
-
-`events` table is of [ReplacingMergeTree table engine](https://clickhouse.com/docs/en/engines/table-engines/mergetree-family/replacingmergetree/). Insights and other features query this table for analytics results.
-
-Note that while `ReplacingMergeTree` is used, it's not an effective deduplication method and we should avoid writing duplicate data into the table.
-
 ### Sharded events ingestion
 
 Currently PostHog cloud has more than a single ClickHouse instance. To support this, sharding and a different schema for ClickHouse is used.
@@ -60,6 +28,18 @@ flowchart LR
 
     events -.reads from.-> sharded_events
 ```
+
+#### `kafka_events` table
+
+`kafka_events` table is of [Kafka table engine](https://clickhouse.com/docs/en/engines/table-engines/integrations/kafka/)
+
+In essence it behaves as a kafka consumer group - reading from this table reads from the underlying kafka topic and advances the current offset.
+
+#### `events_mv` Materialized View
+
+`events_mv` table is a [Materialized View](https://clickhouse.com/docs/en/sql-reference/statements/create/view/#materialized).
+
+In this case it acts as a data pipe which periodically pulls from `kafka_events` and pushes the results into the (events) table.
 
 #### `writable_events` table
 
@@ -105,6 +85,8 @@ This table:
 Similar to `writable_events`, `events` table is of [Distributed table engine](https://clickhouse.com/docs/en/engines/table-engines/special/distributed/).
 
 This table is being queried from app and for every query, figures out what shard(s) to query and aggregates the results from shards.
+
+Note that while `ReplacingMergeTree` is used, it's not an effective deduplication method and we should avoid writing duplicate data into the table.
 
 ### Persons ingestion
 
