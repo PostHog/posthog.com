@@ -41,7 +41,7 @@ We had no way of knowing that this new phone belonged to `user1` until they sent
 If we run our query now, we will get a result of `3` as there are now 3 different `person_id`'s that have sent this event.
 This is not ideal as we are now double counting `user1`, but unfortunately there is no efficient way to go back and update event `4` to have the correct `person_id`.
 
-While this may seem like troubling scenario, it is actually very rare to have this happen in practice!
+While this may seem like a troubling scenario, it is actually very rare to have this happen in practice!
 Within our [ingestion pipeline](/docs/how-posthog-works/ingestion-pipeline), we have a method to delay ingestion for specific events (in this case Event `4`), in order to prevent this scenario from happening in the first place.
 
 While these mitigations do catch the vast majority of issues, it is still possible for this to occur and will result in very slightly inflated numbers when counting the number of unique users.
@@ -49,7 +49,7 @@ While these mitigations do catch the vast majority of issues, it is still possib
 ## Filtering on person properties
 
 This section covers how PostHog filters out events based on Person properties.
-Since all the properties for a person are stored on each event, the proccess is actually quite straightforward.
+Since all the properties for a person are stored on each event, the process is actually quite straightforward.
 
 Let's walk through a simple example to see how this works in practice. Let's say we have ingested the following events:
 

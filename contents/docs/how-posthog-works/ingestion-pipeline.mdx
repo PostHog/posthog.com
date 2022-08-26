@@ -2,7 +2,7 @@
 title: Ingestion pipeline
 ---
 
-In it's simplest form, the PostHog ingestion pipeline is a collection of services which listen for events as they are sent in, process them, and then store them for later analysis.
+In its simplest form, the PostHog ingestion pipeline is a collection of services which listen for events as they are sent in, process them, and then store them for later analysis.
 This document gives an overview of how data ingestion works, as well as some of the caveats to be aware of when sending events to PostHog.
 
 ## Capture API
@@ -18,7 +18,7 @@ These consist of:
 -   Sending processed data to `events_plugin_ingestion` Kafka topic
 -   If any of these operations fail (other than checking for a valid API key), logging events to the Kafka `dead_letter_queue` table
 
-The goal of this step is to be as simple as possible, so that we can reliably get events into the ingestion pipeline, where Kafka can persist them unti they are able to be processed.
+The goal of this step is to be as simple as possible, so that we can reliably get events into the ingestion pipeline, where Kafka can persist them until they are able to be processed.
 
 ## Ingestion
 
@@ -40,7 +40,7 @@ Events are initially read from the `events_plugin_ingestion` Kafka topic, which 
 
 #### Why are events buffered?
 
-Since events coming in to PostHog can arrive in any order, we sometimes decide to delay the processing of specific events to fix edge cases that can potentially arrive.
+Since events coming into PostHog can arrive in any order, we sometimes decide to delay the processing of specific events to fix edge cases that can potentially arrive.
 There are two scenarios where events can arrive out of order that the event buffer is designed to handle:
 
 1. Events that are sent from the same library and session may arrive out of order due to network uncertainty
@@ -50,7 +50,7 @@ It will become more obvious why it is necessary to buffer events in these two ca
 
 #### Determining if an event should be buffered
 
-After an event is conusmed from Kafka, the plugin server will check a number of things in order to determine whether or not to buffer an event.
+After an event is consumed from Kafka, the plugin server will check a number of things in order to determine whether or not to buffer an event.
 If any of these conditions are true the event will not be buffered and will immediately move on to the [next step](#2-apps---processevent).
 
 -   If the `distinct_id` on the event is already associated with an existing Person
@@ -66,7 +66,7 @@ For more detail on this step, check out [this file](https://github.com/PostHog/p
 
 After the event buffer, we start the first of a few steps that augment or transform our raw event before it gets written into Clickhouse.
 This first step runs any workloads that come from [Apps](/apps) that you have installed and who have exported a `processEvent` function.
-This is the only chance for apps to transform or exclude an event before it is writtend into Clickhouse.
+This is the only chance for apps to transform or exclude an event before it is written into Clickhouse.
 
 An example of an app that uses the `processEvent` hook is the [GeoIP Enricher](https://github.com/PostHog/posthog-plugin-geoip). This app uses the `$ip` property to retrieve and add geographic information to each event as they are ingested.
 
