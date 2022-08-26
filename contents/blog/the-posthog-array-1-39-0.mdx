@@ -48,6 +48,14 @@ We've also updated our server-side libraries with local feature flag evaluation.
 
 Check [our library docs](/docs/integrate/libraries) to find out more about what each library supports and how to deploy.
 
+> Want to upgrade your libraries? The minimum version requirement is [PostHog 1.38.0](/blog/the-posthog-array-1-38-0)
+
+### New: Expo-compatible React Native library
+
+We've rewritten the React Native library completely, in Typescript. That brings it up to a 2.0 which has no external iOS or Android library dependencies and is fully [expo-compatible](https://expo.dev/). The upgraded library now support PostHog [autocapture](/docs/integrate/client/react-native), as well as the [feature flags](/manual/feature-flags) and [group analytics](/manual/group-analytics) upgrades mentioned above.
+
+> Want to upgrade your library? The minimum version requirement is [PostHog 1.38.0](/blog/the-posthog-array-1-38-0)
+
 ### New: Format your insights to show durations
 
 ![formatting an insight as a duration](../images/blog/array-1.39.0/duration-formatting.gif)
