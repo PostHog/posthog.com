@@ -39,8 +39,6 @@ import { DemoScheduler } from './components/DemoScheduler'
 import { DeployOption } from './components/DeployOption'
 import { DocsPageSurvey } from './components/DocsPageSurvey'
 import { FeatureAvailability } from './components/FeatureAvailability'
-import { FeaturesComparisonTable } from './components/FeaturesComparisonTable'
-import { FeaturesNav } from './components/FeaturesNav'
 import { FeaturesSelfHost } from './components/FeaturesSelfHost'
 import { FloatedImage } from './components/FloatedImage'
 import { Footer } from './components/Footer'
@@ -66,9 +64,7 @@ import { NewsletterForm } from './components/NewsletterForm'
 import { NewsletterTutorial } from './components/NewsletterTutorial'
 import { NextSteps } from './components/NextSteps'
 import { NotFoundPage } from './components/NotFoundPage'
-import { OtherFeaturesBlock } from './components/OtherFeaturesBlock'
 import { OverflowXSection } from './components/OverflowXSection'
-import { PageHeader } from './components/PageHeader'
 import { Popover } from './components/Popover'
 import { PostCard } from './components/PostCard'
 import { PostLayout } from './components/PostLayout'
@@ -160,8 +156,6 @@ export const shortcodes = {
     DeployOption,
     DocsPageSurvey,
     FeatureAvailability,
-    FeaturesComparisonTable,
-    FeaturesNav,
     FeaturesSelfHost,
     FloatedImage,
     Footer,
@@ -187,9 +181,7 @@ export const shortcodes = {
     NewsletterTutorial,
     NextSteps,
     NotFoundPage,
-    OtherFeaturesBlock,
     OverflowXSection,
-    PageHeader,
     Popover,
     PostCard,
     PostLayout,
