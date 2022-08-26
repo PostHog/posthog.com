@@ -34,7 +34,7 @@ To understand better how these scenarios can arise, let's take a look at some sp
 | --- | -------- | ------------------------ | ----------- |
 | 1   | other    | Alice                    | user-1      |
 | 2   | pageview | anon-1                   | user-2      |
-| 2   | identify | anon-1 (anon-id = Alice) | user-1      |
+| 2   | identify | Alice (anon-id = anon-1) | user-1      |
 
 In this case, we have a user Alice who sends an 'other' event on day `1` from her mobile phone.
 On day 2, Alice decides to view the homepage from her desktop where she isn't logged in. This results in the pageview event being associated with a newly created Person (`user-2`).
@@ -45,12 +45,12 @@ In this case, we’d show 1 unique user in the trend graph for pageviews, but si
 
 To continue the example, let's say that Alice views the homepage again now that she is logged in.
 
-| Day | Event    | distinct_id              | `person_id` |
-| --- | -------- | ------------------------ | ----------- |
-| 1   | other    | Alice                    | user-1      |
-| 2   | pageview | anon-1                   | user-2      |
-| 2   | identify | anon-1 (anon-id = Alice) | user-1      |
-| 2   | pageview | Alice                    | user-1      |
+| Day | Event    | distinct_id                       | `person_id` |
+| --- | -------- | --------------------------------- | ----------- |
+| 1   | other    | Alice                             | user-1      |
+| 2   | pageview | anon-1                            | user-2      |
+| 2   | identify | Alice (anon_distinct_id = anon-1) | user-1      |
+| 2   | pageview | Alice                             | user-1      |
 
 In this case, the trend graph would show 2 unique users (based on person_id = `user-1` and `user-2`) but the Person modal would only show `user-1` as `user-2` has been deleted.
 
