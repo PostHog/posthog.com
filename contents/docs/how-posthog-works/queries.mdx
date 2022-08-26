@@ -3,3 +3,71 @@ title: Querying data
 ---
 
 This page provides an overview of how queries are run when creating insights in PostHog.
+
+> **Note: ** This page is a work in progress and does not cover all the intricacies of how queries are run in PostHog
+
+## Insights counting unique persons
+
+This section covers how PostHog determines the number of unique users who performed a certain action, such as when creating a [Trends](/manual/trends) or [Funnel](/manual/funnel) insight.
+In this case, PostHog determines this number by counting the total number of unique `person_id`'s on events that match your filters.
+
+As an example, let's say that we have the following list of events:
+
+| ID  | Event       | `person_id` | Device ID |
+| --- | ----------- | ----------- | --------- |
+| 1   | viewed page | `user1`     | computer  |
+| 2   | viewed page | `user2`     | laptop    |
+| 3   | viewed page | `user1`     | computer  |
+
+In this case, if we ran a query asking for the number of unique users who viewed a page, we would get a result of `2`, as our table contains 2 unique `person_id`'s.
+
+Now, let's take a look at the same example again, but instead let's say `user1` decided to log in on their phone for the first time.
+Our list of events now looks like the following:
+
+| ID  | Event       | `person_id`    | Device ID |
+| --- | ----------- | -------------- | --------- |
+| 1   | viewed page | `user1`        | computer  |
+| 2   | viewed page | `user2`        | laptop    |
+| 3   | viewed page | `user1`        | computer  |
+| 4   | viewed page | `unknown-user` | phone     |
+| 5   | `$identify` | `user1`        | phone     |
+| 6   | viewed page | `user1`        | phone     |
+
+As you can see, in this case event `4` was sent _before_ the `$identify` call in event `5`, which means that we unwittingly created a new Person with `person_id` set as `unknown-user`.
+We had no way of knowing that this new phone belonged to `user1` until they sent an `$identify` event, which means that we now have an extra user.
+
+### Buffering events
+
+If we run our query now, we will get a result of `3` as there are now 3 different `person_id`'s that have sent this event.
+This is not ideal as we are now double counting `user1`, but unfortunately there is no efficient way to go back and update event `4` to have the correct `person_id`.
+
+While this may seem like troubling scenario, it is actually very rare to have this happen in practice!
+Within our [ingestion pipeline](/docs/how-posthog-works/ingestion-pipeline), we have a method to delay ingestion for specific events (in this case Event `4`), in order to prevent this scenario from happening in the first place.
+
+While these mitigations do catch the vast majority of issues, it is still possible for this to occur and will result in very slightly inflated numbers when counting the number of unique users.
+
+## Filtering on person properties
+
+This section covers how PostHog filters out events based on Person properties.
+Since all the properties for a person are stored on each event, the proccess is actually quite straightforward.
+
+Let's walk through a simple example to see how this works in practice. Let's say we have ingested the following events:
+
+| User ID | Event            | Subscription plan _(Property on each person)_ |
+| ------- | ---------------- | --------------------------------------------- |
+| 1       | clicked login    | `premium`                                     |
+| 2       | refreshed table  | `premium`                                     |
+| 3       | viewed docs      | `free`                                        |
+| 3       | upgraded plan    | `enterprise`                                  |
+| 3       | viewed dashboard | `enterprise`                                  |
+| 4       | logged out       | `free`                                        |
+
+> **Note: ** This isn't _exactly_ how person properties are stored within the events table, but it will help us to keep things simple. For detailed information, check out our [data model](/docs/how-posthog-works/data-model).
+
+In this case, let's say we only want to see only from users who are on the `premium` or `enterprise` plans.
+You may notice that over the course of this period, user `3` actually upgraded from the `free` plan to the `enterprise` plan.
+Despite this, the event they sent for when they viewed the docs still reflects that they were on the `free` plan at the time.
+
+In most cases this is exactly what we want, as it means that we can update the properties for a person without worrying about messing up our past data points!
+
+> **Note: ** If instead you do want to filter based on a person's current properties, you can do so by creating a [cohort](/manual/cohorts).
