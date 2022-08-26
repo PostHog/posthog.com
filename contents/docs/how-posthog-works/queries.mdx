@@ -13,38 +13,46 @@ In this case, PostHog determines this number by counting the total number of uni
 
 As an example, let's say that we have the following list of events:
 
-| ID  | Event       | `person_id` | Device ID |
-| --- | ----------- | ----------- | --------- |
-| 1   | viewed page | `user1`     | computer  |
-| 2   | viewed page | `user2`     | laptop    |
-| 3   | viewed page | `user1`     | computer  |
+| ID  | Event       | `person_id` |
+| --- | ----------- | ----------- |
+| 1   | viewed page | `user1`     |
+| 2   | viewed page | `user2`     |
+| 3   | viewed page | `user1`     |
 
 In this case, if we ran a query asking for the number of unique users who viewed a page, we would get a result of `2`, as our table contains 2 unique `person_id`'s.
 
-Now, let's take a look at the same example again, but instead let's say `user1` decided to log in on their phone for the first time.
-Our list of events now looks like the following:
+The way that we write the `person_id` to each event has some implications for the number of unique users that are displayed:
 
-| ID  | Event       | `person_id`    | Device ID |
-| --- | ----------- | -------------- | --------- |
-| 1   | viewed page | `user1`        | computer  |
-| 2   | viewed page | `user2`        | laptop    |
-| 3   | viewed page | `user1`        | computer  |
-| 4   | viewed page | `unknown-user` | phone     |
-| 5   | `$identify` | `user1`        | phone     |
-| 6   | viewed page | `user1`        | phone     |
+1. Some users are counted twice on the trend graph
+   To make queries fast we only look at the events table. However, it is not possible to determine whether two `person_id`'s were later merged into a single user, which results in them being counted separately.
+2. In the person modal, the count may be lower than the count displayed in the graph
+   To make retrieving the information for the person modal fast, we ignore persons who have been merged.
 
-As you can see, in this case event `4` was sent _before_ the `$identify` call in event `5`, which means that we unwittingly created a new Person with `person_id` set as `unknown-user`.
-We had no way of knowing that this new phone belonged to `user1` until they sent an `$identify` event, which means that we now have an extra user.
+To understand better how these scenarios can arise, let's take a look at some specific examples.
 
-### Buffering events
+| Day | Event    | distinct_id              | `person_id` |
+| --- | -------- | ------------------------ | ----------- |
+| 1   | other    | Alice                    | user-1      |
+| 2   | pageview | anon-1                   | user-2      |
+| 2   | identify | anon-1 (anon-id = Alice) | user-1      |
 
-If we run our query now, we will get a result of `3` as there are now 3 different `person_id`'s that have sent this event.
-This is not ideal as we are now double counting `user1`, but unfortunately there is no efficient way to go back and update event `4` to have the correct `person_id`.
+In this case, we have a user Alice who sends an 'other' event on day `1` from her mobile phone.
+On day 2, Alice decides to view the homepage from her desktop where she isn't logged in. This results in the pageview event being associated with a newly created Person (`user-2`).
+She then logs in to her account, which sends an identify event that merges `user-2` into `user-1`.
+This mean that we delete `user-2` from the persons table and all future events from `anon-1` will be tied to `user-1` (note that we never alter the events table to reflect this).
 
-While this may seem like a troubling scenario, it is actually very rare to have this happen in practice!
-Within our [ingestion pipeline](/docs/how-posthog-works/ingestion-pipeline), we have a method to delay ingestion for specific events (in this case Event `4`), in order to prevent this scenario from happening in the first place.
+In this case, we’d show 1 unique user in the trend graph for pageviews, but since `user-2` was deleted during the merge, we would show 0 users in the person modal.
 
-While these mitigations do catch the vast majority of issues, it is still possible for this to occur and will result in very slightly inflated numbers when counting the number of unique users.
+To continue the example, let's say that Alice views the homepage again now that she is logged in.
+
+| Day | Event    | distinct_id              | `person_id` |
+| --- | -------- | ------------------------ | ----------- |
+| 1   | other    | Alice                    | user-1      |
+| 2   | pageview | anon-1                   | user-2      |
+| 2   | identify | anon-1 (anon-id = Alice) | user-1      |
+| 2   | pageview | Alice                    | user-1      |
+
+In this case, the trend graph would show 2 unique users (based on person_id = `user-1` and `user-2`) but the Person modal would only show `user-1` as `user-2` has been deleted.
 
 ## Filtering on person properties
 
@@ -65,9 +73,32 @@ Let's walk through a simple example to see how this works in practice. Let's say
 > **Note: ** This isn't _exactly_ how person properties are stored within the events table, but it will help us to keep things simple. For detailed information, check out our [data model](/docs/how-posthog-works/data-model).
 
 In this case, let's say we only want to see only from users who are on the `premium` or `enterprise` plans.
-You may notice that over the course of this period, user `3` actually upgraded from the `free` plan to the `enterprise` plan.
-Despite this, the event they sent for when they viewed the docs still reflects that they were on the `free` plan at the time.
+To achieve this, we would filter based on the Subscription plan person property, which would match the following events.
+
+| User ID | Event            | Subscription plan _(Property on each person)_ |
+| ------- | ---------------- | --------------------------------------------- |
+| 1       | clicked login    | `premium`                                     |
+| 2       | refreshed table  | `premium`                                     |
+| 3       | upgraded plan    | `enterprise`                                  |
+| 3       | viewed dashboard | `enterprise`                                  |
+
+You may have notice that over the course of this period, user `3` actually upgraded from the `free` plan to the `enterprise` plan.
+Despite this, the event they sent for when they viewed the docs still reflects that they were on the `free` plan at the time, and is thus filtered out.
 
 In most cases this is exactly what we want, as it means that we can update the properties for a person without worrying about messing up our past data points!
 
-> **Note: ** If instead you do want to filter based on a person's current properties, you can do so by creating a [cohort](/manual/cohorts).
+However, if instead you do want to filter based on a person's current properties, you can do so by creating a [cohort](/manual/cohorts).
+
+To see this
+Let's say we want to get all events for users who are _currently_ on enterprise or premium plans.
+To do this, we'll create a cohort called 'Paid users' that matches all persons who have their 'plan' property set as either `premium` or `enterprise`.
+
+Then on the insight, we can filter by the cohort, which would match the following events.
+
+| User ID | Event            | Subscription plan _(Property on each person)_ |
+| ------- | ---------------- | --------------------------------------------- |
+| 1       | clicked login    | `premium`                                     |
+| 2       | refreshed table  | `premium`                                     |
+| 3       | viewed docs      | `free`                                        |
+| 3       | upgraded plan    | `enterprise`                                  |
+| 3       | viewed dashboard | `enterprise`                                  |
