@@ -53,7 +53,7 @@ The ingestion pipeline is made up of a number of different steps:
 2. [Apps - `processEvent`](#2-apps---processevent)
 3. [Person processing](#3-person-processing)
 4. [Event processing](#4-event-processing)
-5. [Writing to Clickhouse](#5-writing-to-clickhouse)
+5. [Writing to ClickHouse](#5-writing-to-clickhouse)
 6. [Apps - `onEvent`](#6-apps---onevent)
 
 Here is an overview of how events flow through the pipeline:
@@ -64,7 +64,7 @@ flowchart TD
     STEP2["Apps - processEvent"]
     STEP3["plugin-server - Person processing"]
     STEP4["plugin-server - Event processing"]
-    STEP5["plugin-server - Writing to Clickhouse"]
+    STEP5["plugin-server - Writing to ClickHouse"]
     STEP6["Apps - onEvent"]
     APPS1[/"GeoIP"/]
     APPS3[/"Property flattener"/]
@@ -100,9 +100,9 @@ The event buffer sits right at the beginning of the ingestion pipeline, and give
 
 ### 2. Apps - `processEvent`
 
-After the event buffer, we start the first of a few steps that augment or transform our raw event before it gets written into Clickhouse.
+After the event buffer, we start the first of a few steps that augment or transform our raw event before it gets written into ClickHouse.
 This first step runs any workloads that come from [Apps](/apps) that you have installed and who have exported a `processEvent` function.
-This is the only chance for apps to transform or exclude an event before it is written into Clickhouse.
+This is the only chance for apps to transform or exclude an event before it is written into ClickHouse.
 
 An example of an app that uses the `processEvent` hook is the [GeoIP Enricher](https://github.com/PostHog/posthog-plugin-geoip). This app uses the `$ip` property to retrieve and add geographic information to each event as they are ingested.
 
@@ -183,23 +183,23 @@ For more information on exactly how this updating is done, check out this overvi
 
 ### 4. Event processing
 
-Finally, now that we have our event and person all ready, we perform a few last processing steps before we write the event to Clickhouse.
+Finally, now that we have our event and person all ready, we perform a few last processing steps before we write the event to ClickHouse.
 This is our last chance to change anything about the event, which can include:
 
 -   Adding [group properties](/manual/group-analytics) if the event has been assigned to a Group
 -   Anonymizing IPs, if needed
 
-### 5. Writing to Clickhouse
+### 5. Writing to ClickHouse
 
-Now that we have our fully-processed event, the last step before we write to Clickhouse is to add the `person_id` and person properties to our event, both of which were determined in [Step 3](/docs/how-posthog-works/ingestion-pipeline#3-person-processing).
-Once we have all the person properties attached, we are ready to persist our event, which is done by sending it to a separate Kafka topic that Clickhouse will consume from and then write to its tables.
+Now that we have our fully-processed event, the last step before we write to ClickHouse is to add the `person_id` and person properties to our event, both of which were determined in [Step 3](/docs/how-posthog-works/ingestion-pipeline#3-person-processing).
+Once we have all the person properties attached, we are ready to persist our event, which is done by sending it to a separate Kafka topic that ClickHouse will consume from and then write to its tables.
 
-For more information on exactly how events are stored in Clickhouse, check out [this reference](/docs/how-posthog-works/clickhouse)
+For more information on exactly how events are stored in ClickHouse, check out [this reference](/docs/how-posthog-works/clickhouse)
 
 ### 6. Apps - `onEvent`
 
 The final step in the ingestion pipeline is calling the `onEvent` handler from any apps that we have enabled. This includes all of our export apps as well as some of our alerting/monitoring apps.
-It's worth noting that since this event has already been written to Clickhouse, it is effectively immutable at this point as we do not allow apps to directly update events. Any apps that need to transform events should use the `processEvent` handler.
+It's worth noting that since this event has already been written to ClickHouse, it is effectively immutable at this point as we do not allow apps to directly update events. Any apps that need to transform events should use the `processEvent` handler.
 
 ## Appendix
 

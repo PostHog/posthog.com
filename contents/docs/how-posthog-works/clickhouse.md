@@ -1,5 +1,5 @@
 ---
-title: Clickhouse
+title: ClickHouse
 ---
 
 ClickHouse is our main analytics backend.
