@@ -2209,7 +2209,7 @@
     from = "/docs/user-guides/subscriptions"
     to = "/manual/notifications-and-alerts"
 
-# Added: 2022-08/26
+# Added: 2022-08-26
 [[redirects]]
     from = "/product-features"
     to = "/product"
