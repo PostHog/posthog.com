@@ -127,7 +127,7 @@ Based on which type of event is currently being processed, we perform a number o
 
 #### 1.1 - `$identify` events
 
-In the case of an `$identify` event, the first step is to use the `$distinct_id` and `$anon_distinct_id` fields that are sent on every event to determine what actions we will need to take.
+In the case of an `$identify` event, the first step is to use the `$distinct_id` and `$anon_distinct_id` fields that are sent with the event to determine what actions we will need to take.
 
 -   `$anon_distinct_id` - The UUID associated with the client device that sent the event _(Only included for events sent from client-side libraries)_
 -   `$distinct_id` - The distinct identifier for whichever user sent the event (Email, UUID, etc.). This can be set by the sender or is defaulted to `$anon_distinct_id` if it is not set
@@ -230,7 +230,7 @@ There are two scenarios where events can arrive in suboptimal order that the eve
 1. Events that are sent from the same library and session may arrive out of order due to network uncertainty
 2. During the initial signup flow the backend event might arrive before frontend has identified the user
 
-It will become more obvious why it is necessary to buffer events in these two cases as we dive deeper into the example below.
+It will become more obvious why it is better to buffer events in these two cases as we dive deeper into the example below.
 
 Let's look at a initial sign-up flow (identify event is used to sign-up/log-in).
 
