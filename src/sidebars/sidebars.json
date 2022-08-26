@@ -1113,7 +1113,7 @@
                     "url": "/docs/how-posthog-works/ingestion-pipeline"
                 },
                 {
-                    "name": "Clickhouse",
+                    "name": "ClickHouse",
                     "url": "/docs/how-posthog-works/clickhouse"
                 },
                 {
