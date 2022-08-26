@@ -5,6 +5,28 @@ title: Ingestion pipeline
 In its simplest form, the PostHog ingestion pipeline is a collection of services which listen for events as they are sent in, process them, and then store them for later analysis.
 This document gives an overview of how data ingestion works, as well as some of the caveats to be aware of when sending events to PostHog.
 
+```mermaid
+graph TD
+    CLIENT[Client Library]
+    DECIDE["/decide API"]
+    CAPTURE[Capture API]
+    PLUGINS[Plugin server]
+    PERSONS["PostgreSQL (persons table)"]
+    Kafka2[Kafka]
+
+    CLIENT -..-> DECIDE
+
+    CLIENT -..-> CAPTURE
+    CAPTURE --> Kafka
+
+    Kafka <-..- PLUGINS
+
+    PLUGINS <--> PERSONS
+    PLUGINS --> Kafka2
+
+    Kafka2 <-..- ClickHouse
+```
+
 ## Capture API
 
 The Capture API represents the user-facing side of the ingestion pipeline, and is exposed as a number of API routes where events can be sent.
@@ -24,7 +46,7 @@ The goal of this step is to be as simple as possible, so that we can reliably ge
 
 Due to the design of Clickhouse, update operations are slow and undesirable, and so the first 4 steps of the ingestion pipeline are performing operations on our raw events to get it ready to be persisted in Clickhouse.
 
-The ingestion pipeline is made up of a number of different step:
+The ingestion pipeline is made up of a number of different steps:
 
 1. [Event buffer](#1-event-buffer)
 2. [Apps - `processEvent`](#2-apps---processevent)
@@ -32,6 +54,44 @@ The ingestion pipeline is made up of a number of different step:
 4. [Event processing](#4-event-processing)
 5. [Writing to Clickhouse](#5-writing-to-clickhouse)
 6. [Apps - `onEvent`](#6-apps---onevent)
+
+Here is an overview of how events flow through the pipeline:
+
+```mermaid
+flowchart TD
+    STEP1["plugin-server - Event buffer"]
+    STEP2["Apps - processEvent"]
+    STEP3["plugin-server - Person processing"]
+    STEP4["plugin-server - Event processing"]
+    STEP5["plugin-server - Writing to Clickhouse"]
+    STEP6["Apps - onEvent"]
+    APPS1[/"GeoIP"/]
+    APPS3[/"Property flattener"/]
+    APPS2[/"BigQuery Export"/]
+    APPS4[/"Snowflake Export"/]
+    PERSONS[("PostgreSQL")]
+    KafkaIn{{"Kafka - events_plugin_ingestion"}}
+    KafkaOut{{"Kafka - clickhouse_events_json"}}
+
+    KafkaIn --> STEP1
+
+    STEP1 --> STEP2
+    STEP1 --delay 60s--> STEP2
+    STEP2 --> STEP3
+    STEP3 --> STEP4
+    STEP4 --> STEP5
+    STEP5 --> STEP6
+
+    STEP2 <--> APPS1
+    STEP2 <--> APPS3
+    STEP6 --> APPS2
+    STEP6 --> APPS4
+
+    STEP5 --> KafkaOut
+
+    STEP3 <--> PERSONS
+
+```
 
 ### 1. Event buffer
 
