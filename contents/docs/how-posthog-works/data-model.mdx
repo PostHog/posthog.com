@@ -35,7 +35,7 @@ Each person contains the following information:
 -   `created_at` - The timestamp of when this Person was created
 -   Further internal fields - This includes things like the `team_id` this Person is connected to
 
-Persons are stored in PostgreSQL, but are additionally duplicated into Clickhouse for certain queries.
+Persons are stored in PostgreSQL, but are additionally replicated into Clickhouse for certain queries. For example, when viewing the global list of Perons from the dashboard, this information is retrieved from Clickhouse.
 The `properties` field on each Person object can be updated at any time, and as a result the PostgreSQL table represents the one source of truth for the most up-to-date values for the properties of a Person.
 
 Additionally, person properties are also stored directly on each event. Their value is determined during ingestion by looking up the Person who sent the event in PostgreSQL, and combining these values with any updates from the event itself.
