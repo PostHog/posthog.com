@@ -60,6 +60,55 @@ interface CodeBlockProps {
     }
 }
 
+export const MultiLanguage = ({ children, title, onChange, ...other }) => {
+    const languages =
+        other.languages ||
+        children?.map((child) => {
+            const language = child?.props?.children?.props?.className?.replace(/language-/, '')
+            return language
+        })
+    console.log(languages)
+    const [currentLanguage, setCurrentLanguage] = useState(other.currentLanguage || languages[0])
+
+    const handleChange = (e) => {
+        const language = e.target.value
+        setCurrentLanguage(language)
+        onChange && onChange(language)
+    }
+
+    useEffect(() => {
+        if (other.currentLanguage) {
+            setCurrentLanguage(other.currentLanguage)
+        }
+    }, [other.currentLanguage])
+
+    return (
+        <>
+            <div
+                className={`-mb-2 rounded-tl-md rounded-tr-md bg-gray-accent-light dark:bg-gray-accent-dark border-b border-gray-accent-light border-dashed p-2 flex ${
+                    title ? 'justify-between' : 'justify-end'
+                }`}
+            >
+                {title && <div>{title}</div>}
+                <select
+                    value={currentLanguage}
+                    className="py-1 px-2 rounded-md text-base font-semibold text-black"
+                    onChange={handleChange}
+                >
+                    {languages.map((language, index) => {
+                        return (
+                            <option key={language + index} value={language}>
+                                {language}
+                            </option>
+                        )
+                    })}
+                </select>
+            </div>
+            {children[languages.indexOf(currentLanguage)]}
+        </>
+    )
+}
+
 export const CodeBlock = (props: CodeBlockProps) => {
     const { posthog } = useValues(posthogAnalyticsLogic)
     const className = props.children.props.className || ''

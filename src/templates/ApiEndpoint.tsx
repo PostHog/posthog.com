@@ -1,7 +1,7 @@
 import { Link } from 'react-scroll'
 import Scrollspy from 'react-scrollspy'
 import '@fontsource/source-code-pro'
-import CodeBlock from 'components/Home/CodeBlock'
+import { CodeBlock, MultiLanguage } from 'components/CodeBlock'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import 'core-js/features/array/at'
@@ -342,56 +342,33 @@ function RequestExample({ item, objects, exampleLanguage, setExampleLanguage }) 
         })
     }
     const path = item.pathName.replaceAll('{', ':').replaceAll('}', '')
-
+    const languages = ['curl', 'python']
     return (
         <>
-            <div className="code-example flex items-center justify-between my-1.5">
-                <div className="text-gray">
-                    <code className={`text-${mapVerbsColor[item.httpVerb]}`}>{item.httpVerb.toUpperCase()} </code>
-                    <code>{path}</code>
-                </div>
-
-                <Listbox as="div" className="relative" value={exampleLanguage} onChange={setExampleLanguage}>
-                    <Listbox.Button className="bg-white pl-2 pr-10 py-1 rounded-sm text-sm flex items-center ">
-                        <span className="text-gray-accent-dark font-normal">{exampleLanguage}</span>
-                        <SelectorIcon className="w-3 h-3 text-gray absolute right-1.5" />
-                    </Listbox.Button>
-                    <Listbox.Options
-                        as="ul"
-                        className="absolute right-0 top-full mt-1 bg-white list-none px-0 py-1 rounded-sm shadow focus:outline-none z-50"
-                    >
-                        {['curl', 'python'].map((option) => (
-                            <Listbox.Option
-                                key={option}
-                                value={option}
-                                className={({ active, selected }) =>
-                                    `${selected ? 'font-semibold' : ''} ${
-                                        active ? 'bg-orange text-white' : 'text-gray-accent-dark'
-                                    } w-full pl-3 pr-6 cursor-pointer`
-                                }
-                            >
-                                <span className="text-sm">{option}</span>
-                            </Listbox.Option>
-                        ))}
-                    </Listbox.Options>
-                </Listbox>
-            </div>
-
-            {exampleLanguage === 'curl' && (
-                <CodeBlock
-                    code={`export POSTHOG_PERSONAL_API_KEY=[your personal api key]
+            <MultiLanguage
+                title={
+                    <>
+                        <code className={`text-${mapVerbsColor[item.httpVerb]}`}>{item.httpVerb.toUpperCase()} </code>
+                        <code>{path}</code>
+                    </>
+                }
+                languages={languages}
+                currentLanguage={exampleLanguage}
+                onChange={(language) => setExampleLanguage(language)}
+            >
+                <CodeBlock>
+                    <span>
+                        {`export POSTHOG_PERSONAL_API_KEY=[your personal api key]
 curl ${item.httpVerb === 'delete' ? ' -X DELETE ' : item.httpVerb == 'patch' ? '-X PATCH ' : ''}${
-                        item.httpVerb === 'post' ? "\n    -H 'Content-Type: application/json'" : ''
-                    }\\
+                            item.httpVerb === 'post' ? "\n    -H 'Content-Type: application/json'" : ''
+                        }\\
     -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \\
     https://app.posthog.com${path}${params.map((item) => `\\\n\t-d ${item[0]}=${JSON.stringify(item[1])}`)}`}
-                    language="bash"
-                    hideNumbers={true}
-                />
-            )}
-            {exampleLanguage === 'python' && (
-                <CodeBlock
-                    code={`api_key = "[your personal api key]"
+                    </span>
+                </CodeBlock>
+                <CodeBlock>
+                    <span>
+                        {`api_key = "[your personal api key]"
 project_id = "[your project id]"
 response = requests.${item.httpVerb}(
     "https://app.posthog.com${path}".format(
@@ -405,10 +382,9 @@ response = requests.${item.httpVerb}(
             : ''
     }
 )${item.httpVerb !== 'delete' ? '.json()' : ''}`}
-                    language="bash"
-                    hideNumbers={true}
-                />
-            )}
+                    </span>
+                </CodeBlock>
+            </MultiLanguage>
         </>
     )
 }
