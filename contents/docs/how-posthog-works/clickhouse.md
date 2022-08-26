@@ -8,9 +8,9 @@ Instead of data being inserted directly into ClickHouse, it itself data from Kaf
 
 The following sections go more into depth in how this works exactly.
 
-### Sharded events ingestion
+## Events
 
-Currently PostHog cloud has more than a single ClickHouse instance. To support this, sharding and a different schema for ClickHouse is used.
+In order to make PostHog easy to scale, we use a sharded ClickHouse setup.
 
 ```mermaid
 flowchart LR
@@ -31,19 +31,19 @@ flowchart LR
 
 #### `kafka_events` table
 
-`kafka_events` table is of [Kafka table engine](https://clickhouse.com/docs/en/engines/table-engines/integrations/kafka/)
+`kafka_events` table uses the [Kafka table engine](https://clickhouse.com/docs/en/engines/table-engines/integrations/kafka/)
 
-In essence it behaves as a kafka consumer group - reading from this table reads from the underlying kafka topic and advances the current offset.
+Tables using this engine set up Kafka consumers that consume data on read queries to the table, advancing the offset for the consumer group in Kafka.
 
 #### `events_mv` Materialized View
 
 `events_mv` table is a [Materialized View](https://clickhouse.com/docs/en/sql-reference/statements/create/view/#materialized).
 
-In this case it acts as a data pipe which periodically pulls from `kafka_events` and pushes the results into the (events) table.
+In this case it acts as a data pipe which periodically pulls data from `kafka_events` and pushes it into the target (events) table.
 
 #### `writable_events` table
 
-`writable_events` table is of [Distributed table engine](https://clickhouse.com/docs/en/engines/table-engines/special/distributed/).
+`writable_events` table uses the [Distributed table engine](https://clickhouse.com/docs/en/engines/table-engines/special/distributed/).
 
 The schema looks something like as follows:
 
@@ -72,7 +72,7 @@ This table:
 
 #### `sharded_events` table
 
-`sharded_events` table is a [Replicated](https://clickhouse.com/docs/en/engines/table-engines/mergetree-family/replication/)[ReplacingMergeTree](https://clickhouse.com/docs/en/engines/table-engines/mergetree-family/replacingmergetree/).
+`sharded_events` table uses the [Replicated](https://clickhouse.com/docs/en/engines/table-engines/mergetree-family/replication/)[ReplacingMergeTree](https://clickhouse.com/docs/en/engines/table-engines/mergetree-family/replacingmergetree/).
 
 This table:
 
@@ -82,15 +82,13 @@ This table:
 
 #### `events` table
 
-Similar to `writable_events`, `events` table is of [Distributed table engine](https://clickhouse.com/docs/en/engines/table-engines/special/distributed/).
+Similar to `writable_events`, the `events` table uses the [Distributed table engine](https://clickhouse.com/docs/en/engines/table-engines/special/distributed/).
 
 This table is being queried from app and for every query, figures out what shard(s) to query and aggregates the results from shards.
 
-Note that while `ReplacingMergeTree` is used, it's not an effective deduplication method and we should avoid writing duplicate data into the table.
+Note that even though the `ReplacingMergeTree` engine is used, we should avoid writing duplicate data into the table, as deduplication is not a guarantee.
 
-### Persons ingestion
-
-Persons ingestion works similarly to events, except there's two tables involved: `person` and `person_distinct_id`.
+## Persons
 
 Note that querying both tables _requires_ handling duplicated rows. Check out [PersonQuery code](https://github.com/PostHog/posthog/blob/master/ee/clickhouse/queries/person_query.py) for an example of how it's done.
 
