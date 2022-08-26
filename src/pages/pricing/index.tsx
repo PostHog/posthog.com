@@ -21,6 +21,7 @@ export async function getServerData(context) {
 
     const client = new PostHog('sTMFPsFhdP1Ssg')
     const featureFlag = await client.getFeatureFlag('highlight-open-source', distinctId)
+    console.log(featureFlag)
     return {
         props: { featureFlag },
     }
