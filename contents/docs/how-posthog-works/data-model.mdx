@@ -8,35 +8,44 @@ The two most-basic entities in PostHog are the [Event](#event) and [Person](#per
 
 ## Event
 
-An event is the most basic type of object in PostHog, and represents a single action that a user performed at a specific point in time. These events are sent either from one of our [libraries](/docs/integrate) or directly via our [API](/docs/api).
+An event is the most important object in PostHog, and represents a single action that a user performed at a specific point in time. These events are sent either from one of our [libraries](/docs/integrate) or directly via our [API](/docs/api).
 
-Events consist of a number of different pieces of data:
+Each event contains the following base fields:
 
--  A unique `id` - In the form of a UUID
--  The name of the event
--  `distinct_id` - This corresponds to the unique ID of the client or device that sent this event
--  `properties` - This field contains a JSON object of all the properties specified for this event, including values such as the `$session_id`
--  `person_id` - This is the `id` of the [Person](#person) that sent this event
--  Person properties - A snapshot of all the properties for the Person who sent this event at the time it was ingested
--  `timestamp` - When the event was sent
--  Further internal fields - This includes things like the `team_id` this Event is connected to
+| Property              | Type                   | Description                                                                                                                                                                 |
+| --------------------- | ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **uuid**              | `UUID`                 | ID of the event                                                                                                                                                             |
+| **team_id**           | `Int64`                | Foreign key which links to the team                                                                                                                                         |
+| **event**             | `VARCHAR`              | Name of the event                                                                                                                                                           |
+| **distinct_id**       | `VARCHAR`              | The unique or anonymous id of the user that triggered the event.<br />NOTE: migration `0024` adds indexes to this, which is necessary for /paths to work reasonably quickly |
+| **person_id**         | `UUID`                 | This is the `id` of the [Person](#person) that sent this event                                                                                                              |
+| **person_properties** | `VARCHAR`              | A JSON object of all the properties for the Person who sent this event at the time it was ingested                                                                          |
+| **properties**        | `VARCHAR`              | Any key: value pairs in a dict.<br />- `$current_url` - we use this in a couple of places (like /paths, /events) as the url the user was visiting at that time.             |
+| **timestamp**         | `DateTime64(6, 'UTC')` | Defaults to timezone.now if not set                                                                                                                                         |
+| **created_at**        | `DateTime64(6, 'UTC')` | The timestamp for when the event was inserted                                                                                                                               |
 
 Events are _only_ stored within Clickhouse, and once they have been written they can't be changed.
 This limitation comes from a trade-off in the design of Clickhouse: inserting data and running queries on large tables is extremely fast, but updating or deleting specific rows is generally not efficient.
+
+###
 
 ## Person
 
 In PostHog, a `Person` is an entity which sends events, and typically represents a 'User' in most implementations.
 
-Each person contains the following information:
+Each person contains the following base fields:
 
--   A unique `id` - In the form of a UUID
--   Properties - A JSON object with all the properties for a user, which can be altered using the `$set`, `$set_once`, and `$unset` arguments
--   `created_at` - The timestamp of when this Person was created
--   Further internal fields - This includes things like the `team_id` this Person is connected to
+| Property       | Type         | Description                                                                                                                  |
+| -------------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------- |
+| **id**         | `UUID`       | ID of the person. This is referenced by the `person_id` field on events                                                      |
+| **team_id**    | `Int64`      | Foreign key which links to the team                                                                                          |
+| **properties** | `VARCHAR`    | A JSON object with all the properties for a user, which can be altered using the `$set`, `$set_once`, and `$unset` arguments |
+| **created_at** | `DateTime64` | The timestamp for when the event was inserted                                                                                |
 
-Persons are stored in PostgreSQL, but are additionally replicated into Clickhouse for certain queries. For example, when viewing the global list of Perons from the dashboard, this information is retrieved from Clickhouse.
-The `properties` field on each Person object can be updated at any time, and as a result the PostgreSQL table represents the one source of truth for the most up-to-date values for the properties of a Person.
+Persons are stored in PostgreSQL, but are additionally replicated into Clickhouse for certain queries. For example, when viewing the global list of Persons from the dashboard, this information is retrieved from Clickhouse.
 
 Additionally, person properties are also stored directly on each event. Their value is determined during ingestion by looking up the Person who sent the event in PostgreSQL, and combining these values with any updates from the event itself.
+
+The `properties` field on each Person object can be updated at any time, and as a result the PostgreSQL table represents the one source of truth for the most up-to-date values for the properties of a Person.
+
 For more information on how person properties are added to events, take a look at [this step in the ingestion overview](/docs/architecture/ingestion-pipeline#3-person-processing)
