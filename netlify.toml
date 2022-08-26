@@ -1,5 +1,5 @@
 [functions]
-  included_files = ["!.cache/**"]
+  included_files = ["!.cache/query-engine/**"]
 
 [build.environment]
   NODE_VERSION = "16"
