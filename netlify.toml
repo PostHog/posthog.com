@@ -1,5 +1,5 @@
 [functions]
-  included_files = ["!.cache/query-engine/assets/**"]
+  included_files = ["!.cache/query-engine/assets/public/**","!.cache/query-engine/assets/og-images/**", "!.cache/query-engine/assets/chromium.br", "!.cache/query-engine/assets/bin/chromium.br", "!.cache/query-engine/assets/components/**", "!.cache/query-engine/assets/src", "!.cache/query-engine/assets/images" ]  
 
 [build.environment]
   NODE_VERSION = "16"
