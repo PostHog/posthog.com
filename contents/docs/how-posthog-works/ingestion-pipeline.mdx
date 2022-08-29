@@ -43,20 +43,9 @@ These consist of:
 The goal of this step is to be as simple as possible, so that we can reliably get events into the ingestion pipeline, where Kafka can persist them until they are able to be processed.
 Events are written to the `events_plugin_ingestion` Kafka topic, which is then consumed by the plugin-server.
 
-## Ingestion
+## Plugin server
 
-Ingestion is at the heart of the PostHog data pipeline, and is responsible for processing events coming in to PostHog and then writing them to storage.
-
-The ingestion pipeline is made up of a number of different steps:
-
-1. [Event buffer](#1-event-buffer)
-2. [Apps - `processEvent`](#2-apps---processevent)
-3. [Person processing](#3-person-processing)
-4. [Event processing](#4-event-processing)
-5. [Writing to ClickHouse](#5-writing-to-clickhouse)
-6. [Apps - `onEvent`](#6-apps---onevent)
-
-Here is an overview of how events flow through the pipeline:
+Within the plugin server events go through a number of different steps here is an overview:
 
 ```mermaid
 flowchart TD
@@ -94,6 +83,17 @@ flowchart TD
 
 ```
 
+In the sections below we will dive deeper into each step:
+
+1. [Event buffer](#1-event-buffer)
+2. [Apps - `processEvent`](#2-apps---processevent)
+3. [Person processing](#3-person-processing)
+4. [Event processing](#4-event-processing)
+5. [Writing to ClickHouse](#5-writing-to-clickhouse)
+6. [Apps - `onEvent`](#6-apps---onevent)
+
+If you would like to dive even deeper the related source code can be found [here](https://github.com/PostHog/posthog/blob/master/plugin-server/src/worker/ingestion/event-pipeline).
+
 ### 1. Event buffer
 
 The event buffer sits right at the beginning of the ingestion pipeline, and gives us the ability to selectively delay the processing of certain events. For more information, take a look at the [all about the event buffer](#all-about-the-event-buffer) section in the appendix.
@@ -106,7 +106,6 @@ This is the only chance for apps to transform or exclude an event before it is w
 
 An example of an app that uses the `processEvent` hook is the [GeoIP Enricher](https://github.com/PostHog/posthog-plugin-geoip). This app uses the `$ip` property to retrieve and add geographic information to each event as they are ingested.
 
-For more detail on this step, check out [this file](https://github.com/PostHog/posthog/blob/master/plugin-server/src/worker/ingestion/event-pipeline/2-pluginsProcessEventStep.ts) from the `plugin-server` codebase.
 
 ### 3. Person processing
 
@@ -121,11 +120,13 @@ This is one of the most complex steps in the entire pipeline, so to help make th
     3. All other events
 2. **Update person properties**
 
+Note that in case there were any changes to persons we will update the persons info in ClickHouse too.
+
 #### 1. Associate the event with a person
 
 Based on which type of event is currently being processed, we perform a number of different steps.
 
-#### 1.1 - `$identify` events
+#### 3.1.1 - `$identify` events
 
 In the case of an `$identify` event, the first step is to use the `$distinct_id` and `$anon_distinct_id` fields that are sent with the event to determine what actions we will need to take.
 
@@ -138,43 +139,40 @@ To determine what to do at this stage, we need to make a call to PostgreSQL to d
 | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
 | 1. Neither `$anon_distinct_id` nor `$distinct_id` have been associated with a Person       | Create a new Person and add a mapping in PostgreSQL to associate this `$distinct_id` with the new `person_id`      |
 | 2. _Only one_ of `$anon_distinct_id` and `$distinct_id` have been associated with a Person | Create a new mapping to associate the `$distinct_id` and `$anon_distinct_id` with the already existing `person_id` |
-| 3. _Both_ `$anon_distinct_id` _and_ `$distinct_id` have been associated with a Person      | We will [merge these two people](#merging-two-persons) and associate all future events with the first Person       |
+| 3. _Both_ `$anon_distinct_id` _and_ `$distinct_id` have been associated with a Person      | We will [merge these two people](#merging-two-persons) and associate all future events with the `person_id` that was associated with the `$distinct_id` |
 
-> **Note**: In the case of an event sent from the backend, there will be no `$anon_distinct_id` field present. Instead, the same lookups and checks will be performed, but only on the `$distinct_id` which is required for all backend events
+> **Note**: In the case the `$anon_distinct_id` is missing (e.g. events from backend libraries), we will treat this event like [all other events](#3.1.3---all-other-events).
 
 ###### Merging two Persons
 
-In the third scenario, where we have inadvertently created two Persons for the same user, we will need to merge them. In the case of an `$identify` call, we will create a mapping from the `distinct_id` of the anonymous user to the non-anonymous user.
-If there are any conflicts when merging Person properties for these two users, the values from the non-anonymous user will take precedence.
-We choose to prioritize the history of the non-anonymous user, as it is far more likely that this user will have a history of previous events associated with them that we want to preserve.
+In the third scenario, where we have inadvertently created two Persons for the same user, we will need to merge them. 
+In the case of an `$identify` call, we will merge the person tied to `$anon_distinct_id` (`person_2`) into the person identified by `distinct_id` (`person_1`). 
+This means that we'll associate `$anon_distinct_id` with `person_1`, delete `person_2` and all future events for `$anon_distinct_id` will be associated with `person_1`.
+
+If there are any conflicts when merging Person properties for these two persons, the values from the non-anonymous person (`person_1`) will take precedence.
+We choose to prioritize the history of the non-anonymous person (`person_1`), as it is far more likely that this person will have a history of previous events associated with the user that we want to preserve.
+For more information on exactly how the merging of properties is done, check out this overview of [user properties](/docs/integrate/user-properties).
 
 ###### Consequences of merging
 
 This scenario typically isn't ideal, as merging two users will only affect events that are sent in the future.
-As a result, we will be left with two separate Persons that should be associated with the same user, but instead will be treated as entirely unique users.
+As a result, we will be left with two separate `person_id`'s in the events table that should be associated with the same user, but instead will be treated as entirely unique users.
 The only way to fully 'merge' these two people would be to go back and rewrite the `person_id` field on past events, which is not practical or performant.
 
 For more information on how these merges can affect the results of your queries, take a look at this page on how [querying data](/data/how-posthog-works/queries) works.
 
-###### Avoiding a merge
+Avoiding this scenario is the primary goal of the event buffer: by [buffering certain events](#1-event-buffer), we can avoid creating a duplicate Person when other events arrive in suboptimal order from the user's initial sign-up flow.
 
-Avoiding this scenario is the primary goal of the event buffer: by [buffering certain events](#1-event-buffer), we can avoid creating a duplicate Person when other events arrive before an `$identify` call.
+#### 3.1.2 - `$alias` events
 
-On the integration side, the best way to avoid this scenario is to send `$identify` events as early into a user's session as possible.
-This really only presents an issue when a user is logging in for the first time from a new device, and does not present any problems with users logging out and logging back in on an already seen device and platform.
+The process of handling `$alias` events is almost identical to the process for `$identify` events, except that instead of merging `$anon_distinct_id` into `$distinct_id`, we allow you to pass in two arbitrary `$distinct_id`'s you would like to combine and merge the second one into the first one.
 
-#### 1.2 - `$alias` events
-
-The process of handling `$alias` events is almost identical to the process for `$identify` events, except that instead of using `$distinct_id` and `$anon_distinct_id` as our two identifiers, we allow you to pass in two arbitrary `$distinct_id`'s you would like to combine.
-
-It's worth noting that in the case that both `$distinct_id`'s already have different Persons they are associated with, the `$distinct_id` that was provided second will be merged into the Person associated with the first `$distinct_id`
-
-#### 1.3 - All other events
+#### 3.1.3 - All other events
 
 For all other types of events, the process is much more straightforward.
-If we have determined that this is a new `$distinct_id`, then we will create a new Person within PostgreSQL and associate them with this `$distinct_id`. Otherwise, we will retrieve the `person_id` associated with this `$distinct_id`, which will later be added as a field on the event in [Step 5](/docs/how-posthog-works/ingestion-pipeline#5-writing-to-clickhouse).
+If we have determined that this is a new `$distinct_id`, then we will create a new Person within PostgreSQL and associate them with this `$distinct_id`. Otherwise, we will retrieve the person associated with this `$distinct_id`.
 
-#### 2. Update person properties
+#### 3.2. Update person properties
 
 Now, once we have finished determining the Person who is associated with the event we are processing, we can finish by updating their properties within PostgreSQL.
 This step takes into account any `$set`, `$set_once` or `$unset` arguments provided on the event, and merges these with any existing values for the Person.
@@ -191,10 +189,9 @@ This is our last chance to change anything about the event, which can include:
 
 ### 5. Writing to ClickHouse
 
-Now that we have our fully-processed event, the last step before we write to ClickHouse is to add the `person_id` and person properties to our event, both of which were determined in [Step 3](/docs/how-posthog-works/ingestion-pipeline#3-person-processing).
-Once we have all the person properties attached, we are ready to persist our event, which is done by sending it to a separate Kafka topic that ClickHouse will consume from and then write to its tables.
+We combine the fully-processed event and the person from [Step 3](/docs/how-posthog-works/ingestion-pipeline#3-person-processing) and send it to a separate Kafka topic that ClickHouse will consume from and then write to the events table.
 
-For more information on exactly how events are stored in ClickHouse, check out [this reference](/docs/how-posthog-works/clickhouse)
+For more information on exactly how data is stored in ClickHouse, check out [this reference](/docs/how-posthog-works/clickhouse)
 
 ### 6. Apps - `onEvent`
 
@@ -257,9 +254,7 @@ As you can see, since we delayed the processing of event `2`, we were able to av
 
 A similar scenario can occur when events with non-anonymous `distinct_id` arrive before an identify call due to network uncertainty.
 
-When the buffer can't help us and we don't do anything else either.
 The buffer is designed to help with the initial sign-up flow, and has no effect on events that are sent after this point.
-
 As an example, let's take a look at the following series of events:
 
 | ID  | Event    | `distinct_id`                         | `person_id` | Details                                                            |

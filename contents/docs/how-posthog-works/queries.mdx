@@ -23,10 +23,10 @@ In this case, if we ran a query asking for the number of unique users who viewed
 
 The way that we write the `person_id` to each event has some implications for the number of unique users that are displayed:
 
-1. Some users are counted twice on the trend graph
+1. Some users are counted twice on the trend graph. 
    To make queries fast we only look at the events table. However, it is not possible to determine whether two `person_id`'s were later merged into a single user, which results in them being counted separately.
-2. In the person modal, the count may be lower than the count displayed in the graph
-   To make retrieving the information for the person modal fast, we ignore persons who have been merged.
+2. In the person modal, the count may be lower than the count displayed in the graph. 
+   To make retrieving the information for the person modal fast, we ignore persons who have been merged (and hence deleted).
 
 To understand better how these scenarios can arise, let's take a look at some specific examples.
 

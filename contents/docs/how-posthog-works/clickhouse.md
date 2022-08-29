@@ -4,7 +4,7 @@ title: ClickHouse
 
 ClickHouse is our main analytics backend.
 
-Instead of data being inserted directly into ClickHouse, it itself data from Kafka. This makes our ingestion pipeline more resilient towards outages.
+Instead of data being inserted directly into ClickHouse, it itself pulls data from Kafka. This makes our ingestion pipeline more resilient towards outages.
 
 The following sections go more into depth in how this works exactly.
 
@@ -89,6 +89,8 @@ This table is being queried from app and for every query, figures out what shard
 Note that even though the `ReplacingMergeTree` engine is used, we should avoid writing duplicate data into the table, as deduplication is not a guarantee.
 
 ## Persons
+
+The source of truth for person info and person to distinct_id mappings is in PostgreSQL, but to speed up queries we replicate it to ClickHouse. Both tables use the [ReplacingMergeTree](https://clickhouse.com/docs/en/engines/table-engines/mergetree-family/replacingmergetree/) and collapse by the `version` column, which is incremented every time a person is updated.
 
 Note that querying both tables _requires_ handling duplicated rows. Check out [PersonQuery code](https://github.com/PostHog/posthog/blob/master/ee/clickhouse/queries/person_query.py) for an example of how it's done.
 
