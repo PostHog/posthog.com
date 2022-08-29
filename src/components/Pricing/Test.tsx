@@ -19,7 +19,6 @@ import { CallToAction, TrackedCTA } from 'components/CallToAction'
 import { pricingSliderLogic } from 'components/Pricing/PricingSlider/pricingSliderLogic'
 import ProductIcons from 'components/ProductIcons'
 import { PricingSlider } from 'components/Pricing/PricingSlider'
-import { ServerIcon } from '@heroicons/react/outline'
 import Enterprise from './Modals/Enterprise'
 import AllPlansTest from './AllPlansTest'
 import { pricing, pricingLabels } from './constants'
@@ -119,7 +118,7 @@ const Plan = ({ title, subtitle, features, limitations, pricing, cta, demo, setW
     return (
         <div
             className={`relative flex flex-col lg:w-1/3 py-8 rounded-md border-[3px] ${
-                title === 'PostHog Cloud' ? 'bg-white px-10 border-red' : 'border-transparent'
+                title === 'PostHog Cloud' ? 'bg-white px-10 border-red' : 'border-transparent px-10 lg:px-0'
             } ${className}`}
         >
             <div className="mb-5">
@@ -272,13 +271,13 @@ const PricingBreakdown = () => {
                     <div className="flex flex-col">
                         <div>
                             <h4 className="text-base m-0 font-semibold text-black/50">Self-serve plans</h4>
-                            <ul className="list-none m-0 p-0 mt-2 mb-5">
+                            <ul className="list-none m-0 p-0 mt-2 mb-5 space-y-1">
                                 <li className="flex items-center text-base font-bold space-x-2">
-                                    <CloudIcon className="w-5 h-5 opacity-50" />
+                                    <CloudIcon className="w-5 h-5 opacity-50 ml-1" />
                                     <span>PostHog Cloud</span>
                                 </li>
-                                <li className="flex items-center text-base font-bold space-x-2">
-                                    <ServerIcon className="w-5 h-5 opacity-50" />
+                                <li className="flex items-center text-base font-bold space-x-1">
+                                    <SelfHostIcon className="w-5 h-5 inline-block opacity-50 mx-1" />
                                     <span>PostHog Self-Hosted</span>
                                 </li>
                             </ul>
@@ -303,11 +302,15 @@ const PricingBreakdown = () => {
                             <div className="mt-2 mb-5">
                                 <p className=" text-base font-bold m-0">
                                     <CloudIcon className="w-5 h-5 inline-block opacity-50" /> or{' '}
-                                    <ServerIcon className="w-5 h-5 inline-block opacity-50" /> with Enterprise package
+                                    <SelfHostIcon className="w-5 h-5 inline-block opacity-50 mx-1" />
+                                    with Enterprise package
                                 </p>
                                 <p className="text-sm text-black/50 m-0 mt-2">
-                                    Adds <strong>SSO, advanced permissions, dedicated Slack support</strong> to PostHog
-                                    Cloud or PostHog Self-Hosted
+                                    Adds{' '}
+                                    <strong className="font-semibold">
+                                        SSO, advanced permissions, and dedicated Slack support
+                                    </strong>{' '}
+                                    to PostHog Cloud or PostHog Self-Hosted
                                 </p>
                             </div>
                         </div>
@@ -315,7 +318,7 @@ const PricingBreakdown = () => {
                             planName="cloud-enterprise"
                             ctas={[
                                 {
-                                    children: 'Try Enterprise Cloud',
+                                    children: 'Enterprise Cloud - Get in touch',
                                     to: '/signup/cloud/enterprise',
                                 },
                                 {
@@ -326,7 +329,7 @@ const PricingBreakdown = () => {
                         />
                     </div>
                 </div>
-                <div className="lg:max-w-[280px] w-full flex-shrink-0 bg-white p-4 rounded-md box-border">
+                <div className="lg:max-w-[280px] w-full flex-shrink-0 bg-white p-5 rounded-md box-border">
                     <h4 className="text-base m-0 pb-1">Estimate your cost</h4>
                     <div>
                         <p className="text-sm font-bold m-0 text-black/60">Monthly event volume</p>
@@ -339,14 +342,13 @@ const PricingBreakdown = () => {
                             />
                         </div>
                         <p className="text-sm pb-0 m-0">
-                            Need help estimating your event volume?
-                            <br />
+                            Need help estimating your event volume?{' '}
                             <Link className="font-semibold" to="/blog/calculating-events-from-users">
-                                Read this guide
+                                Read this handy guide
                             </Link>
                         </p>
-                        <p className="mt-4 pt-4 border-t text-sm border-gray-accent-light border-dashed mb-0 text-center">
-                            B2C company with insane event volume?{' '}
+                        <p className="mt-4 pt-4 border-t text-sm border-gray-accent-light border-dashed mb-0">
+                            B2C company with insane event volume? <br className="lg:hidden" />
                             <Link to="/signup/b2c" className="font-bold text-red inline-block">
                                 Apply for a discount
                             </Link>
@@ -418,7 +420,7 @@ const Test = (): JSX.Element => {
             <SEO title="PostHog Pricing" description="First 1 million events are free - every month" />
             <section>
                 <div
-                    className={`grid lg:grid-cols-2 lg:mt-12 md:mt-18 lg:gap-x-4 gap-y-3 lg:gap-y-0 mb-4 md:px-4 ${section}`}
+                    className={`grid lg:grid-cols-2 lg:mt-12 md:mt-18 lg:gap-x-4 gap-y-3 lg:gap-y-0 mb-4 md:px-4 md:mb-16 ${section}`}
                 >
                     <div className="lg:order-2">
                         <StaticImage
@@ -499,11 +501,11 @@ const Test = (): JSX.Element => {
                             <p className="m-0">
                                 <strong>Free</strong>
                             </p>
-                            <p className="m-0 inline-block text-sm mb-[32px]">
+                            <p className="m-0 inline-block text-sm mb-4 lg:mb-[32px]">
                                 <span className="opacity-70">Hosting not included.</span>{' '}
                                 <Link to="/docs/self-host/deploy/hosting-costs">Estimate your cost</Link>
                             </p>
-                            <p className="my-1 text-sm">&nbsp;</p>
+                            <p className="my-1 text-sm hidden lg:block">&nbsp;</p>
                         </>
                     }
                 />
