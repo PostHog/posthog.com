@@ -23,10 +23,10 @@ In this case, if we ran a query asking for the number of unique users who viewed
 
 The way that we write the `person_id` to each event has some implications for the number of unique users that are displayed:
 
-1. Some users are counted twice on the trend graph
+1. Some users are counted twice on the trend graph. 
    To make queries fast we only look at the events table. However, it is not possible to determine whether two `person_id`'s were later merged into a single user, which results in them being counted separately.
-2. In the person modal, the count may be lower than the count displayed in the graph
-   To make retrieving the information for the person modal fast, we ignore persons who have been merged.
+2. In the person modal, the count may be lower than the count displayed in the graph. 
+   To make retrieving the information for the person modal fast, we ignore persons who have been merged (and hence deleted).
 
 To understand better how these scenarios can arise, let's take a look at some specific examples.
 
@@ -72,7 +72,7 @@ Let's walk through a simple example to see how this works in practice. Let's say
 
 > **Note: ** This isn't _exactly_ how person properties are stored within the events table, but it will help us to keep things simple. For detailed information, check out our [data model](/docs/how-posthog-works/data-model).
 
-In this case, let's say we only want to see only from users who are on the `premium` or `enterprise` plans.
+In this case, let's say we only want to see events from users while they were on the `premium` or `enterprise` plans.
 To achieve this, we would filter based on the Subscription plan person property, which would match the following events.
 
 | User ID | Event            | Subscription plan _(Property on each person)_ |
@@ -89,8 +89,7 @@ In most cases this is exactly what we want, as it means that we can update the p
 
 However, if instead you do want to filter based on a person's current properties, you can do so by creating a [cohort](/manual/cohorts).
 
-To see this
-Let's say we want to get all events for users who are _currently_ on enterprise or premium plans.
+To see this let's say we want to get all events for users who are _currently_ on `enterprise` or `premium` plans.
 To do this, we'll create a cohort called 'Paid users' that matches all persons who have their 'plan' property set as either `premium` or `enterprise`.
 
 Then on the insight, we can filter by the cohort, which would match the following events.
