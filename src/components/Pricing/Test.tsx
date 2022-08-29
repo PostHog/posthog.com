@@ -28,7 +28,7 @@ import { pricing, pricingLabels } from './constants'
 
 const Benefit = ({ children, icon }) => {
     return (
-        <li className="font-medium text-[15px] flex gap-x-1.5 items-center leading-tight">
+        <li className="font-medium text-[15px] flex gap-x-2 items-center leading-tight">
             {icon && <span className="w-[24px] flex justify-center items-center flex-shrink-0 mt-[2px]">{icon}</span>}
             <span>{children}</span>
         </li>
@@ -138,7 +138,7 @@ const Plan = ({ title, subtitle, features, limitations, pricing, cta, demo, setW
                 <p className="mb-2 text-sm text-black/50 leading-tight">{subtitle}</p>
             </div>
             <div className="mb-5">
-                <h3 className="mb-2 text-sm text-black/50 leading-tight">Features</h3>
+                <h3 className="mb-4 text-sm text-black/50 leading-tight">Features</h3>
                 <ul className="list-none p-0 m-0 grid gap-y-2">
                     {features.map(({ title, icon }) => {
                         return (
@@ -148,16 +148,28 @@ const Plan = ({ title, subtitle, features, limitations, pricing, cta, demo, setW
                         )
                     })}
                 </ul>
+
+                {title === 'PostHog Open Source' && (
+                    <div className="border border-dashed border-gray-accent-light p-3 rounded mt-4">
+                        <p className="text-sm mb-1">
+                            <strong>On a budget?</strong>
+                            <br />
+                            <em>PostHog Cloud</em> is cheaper* than <em>Open Source</em> since you don't have to pay
+                            hosting costs.
+                        </p>
+                        <p className="text-xs mb-0">*Free up to 1 million events/mo</p>
+                    </div>
+                )}
             </div>
-            <div className="mb-5">
-                <h3 className="mb-2 text-sm text-black/50 leading-tight">Project limitations</h3>
-                <ul className="list-none p-0 m-0 grid gap-y-3">
-                    {limitations.map((limitation, index) => {
-                        return <Benefit key={index}>{limitation}</Benefit>
-                    })}
-                </ul>
-            </div>
-            <div className="!mt-auto">
+            <div className="!mt-auto pt-4">
+                <div className="mb-5">
+                    <h3 className="mb-4 text-sm text-black/50 leading-tight">Project limitations</h3>
+                    <ul className="list-none p-0 m-0 grid gap-y-3">
+                        {limitations.map((limitation, index) => {
+                            return <Benefit key={index}>{limitation}</Benefit>
+                        })}
+                    </ul>
+                </div>
                 <h3 className="mb-2 text-sm text-black/50 leading-tight">Pricing</h3>
                 {pricing}
                 <div className="mt-4">
@@ -468,9 +480,9 @@ const Test = (): JSX.Element => {
                     features={[
                         { title: 'Basic product analytics', icon: ProductIcons.analytics },
                         { title: 'Session recording', icon: ProductIcons.sessionRecording },
-                        { title: 'Feature flags', icon: ProductIcons.featureFlags },
+                        { title: 'Basic feature flags', icon: ProductIcons.featureFlags },
                     ]}
-                    limitations={['1 project', 'No user permissions']}
+                    limitations={['1 project', 'No user permissions', ' ', ' ', ' ']}
                     cta={{
                         children: 'Deployment options',
                         to: '/signup/self-host/deploy',
@@ -485,10 +497,11 @@ const Test = (): JSX.Element => {
                             <p className="m-0">
                                 <strong>Free</strong>
                             </p>
-                            <p className="m-0 inline-block mb-[32px]">
-                                Hosting not included.{' '}
+                            <p className="m-0 inline-block text-sm mb-[32px]">
+                                <span className="opacity-70">Hosting not included.</span>{' '}
                                 <Link to="/docs/self-host/deploy/hosting-costs">Estimate your cost</Link>
                             </p>
+                            <p className="my-1 text-sm">&nbsp;</p>
                         </>
                     }
                 />
@@ -513,14 +526,15 @@ const Test = (): JSX.Element => {
                                 <strong>$0.00045</strong>
                                 <span className="text-[13px] opacity-50">/event</span>
                             </p>
-                            <p className="bg-yellow m-0 mt-2 inline-block px-2 rounded-sm font-bold">
-                                First 1 million events free - every month!
+                            <p className="bg-yellow/50 m-0 mt-1 inline-block px-2 py-1 rounded-sm font-semibold text-sm">
+                                First 1 million events free - every month
                             </p>
-                            <p className="m-0 mt-2 font-semibold">
+                            <p className="m-0 mt-2 font-semibold text-sm">
                                 <ScrollLink smooth to="pricing-breakdown" className="cursor-pointer">
                                     See pricing breakdown and volume discounts
                                 </ScrollLink>
                             </p>
+                            <p className="m-0 inline-block text-sm">&nbsp;</p>
                         </>
                     }
                 />
@@ -544,13 +558,18 @@ const Test = (): JSX.Element => {
                                 <strong>$0.00045</strong>
                                 <span className="text-[13px] opacity-50">/event</span>
                             </p>
-                            <p className="bg-yellow m-0 mt-2 inline-block px-2 rounded-sm font-bold">
-                                First 1 million events free - every month!
+                            <p className="bg-yellow/50 m-0 mt-1 inline-block px-2 py-1 rounded-sm font-semibold text-sm">
+                                First 1 million events free - every month
                             </p>
-                            <p className="m-0 mt-2 font-semibold">
+                            <p className="m-0 mt-2 font-semibold text-sm">
                                 <ScrollLink smooth to="pricing-breakdown" className="cursor-pointer">
                                     See pricing breakdown and volume discounts
                                 </ScrollLink>
+                            </p>
+
+                            <p className="m-0 inline-block text-sm">
+                                <span className="opacity-70">Hosting not included.</span>{' '}
+                                <Link to="/docs/self-host/deploy/hosting-costs">Estimate your cost</Link>
                             </p>
                         </>
                     }
