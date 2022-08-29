@@ -2208,3 +2208,8 @@
 [[redirects]]
     from = "/docs/user-guides/subscriptions"
     to = "/manual/notifications-and-alerts"
+
+# Added: 2022-08-29
+[[redirects]]
+    from = "/docs/how-posthog-works"
+    to = "/docs/self-host/architecture"
