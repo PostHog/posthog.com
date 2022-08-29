@@ -9,8 +9,8 @@ features:
     userIdentification: true
     autoCapture: false
     sessionRecording: false
-    featureFlags: false
-    groupAnalytics: false
+    featureFlags: true
+    groupAnalytics: true
 ---
 
 This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your mobile app.
@@ -138,6 +138,73 @@ posthog.capture("Dashboard", properties: ["fromIcon": "bottom"])
 Starting with iOS 14, Apple will further restrict apps that track users. Any references to Apple's AdSupport framework, even in strings, [will trip](https://github.com/PostHog/posthog-ios/issues/6) the App Store's static analysis.
 
 Hence **starting with posthog-ios version 1.2.0** we have removed all references to Apple's AdSupport framework.
+
+
+### Group analytics
+
+PostHog 1.31.0 introduced support for [group analytics](/docs/user-guides/group-analytics), which allows you to associate users and events with larger groups (teams, organizations, etc.). This feature requires a posthog-node version of `1.2.0` or above.
+
+> **Note: ** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
+
+-   Capture an event and associate it with a group
+
+```js
+// in objective-c
+[[PHGPostHog sharedPostHog] group:@"some-type" groupKey:@"some-key" properties:@{ @"name": @"some-company-name" }];
+```
+
+```js
+// in swift
+posthog.group( "some-type", groupKey: "some-key", properties: [
+    "name": "some-company-name"
+])
+```
+
+### Feature Flags
+
+PostHog v1.10.0 introduced [Feature Flags](/docs/user-guides/feature-flags), which allow you to safely deploy and roll back new features.
+
+Here's how you can use them:
+
+-   Check if a feature is enabled:
+
+```js
+// in objective-c
+[[PHGPosthog sharedPostHog] isFeatureEnabled:@"keyword"];
+```
+
+```js
+// in swift
+posthog.isFeatureEnabled('keyword')
+```
+
+-   Trigger a reload of the feature flags:
+
+```js
+// in objective-c
+[[PHGPosthog sharedPostHog] reloadFeatureFlags];
+```
+
+```js
+// in swift
+posthog.reloadFeatureFlags()
+```
+
+-   By default, this function will send a `$feature_flag_called` event to your instance every time it's called so you're able to do analytics. 
+
+**Get a flag value**
+
+If you're using multivariate feature flags, you can also get the value of the flag, as well as whether or not it is enabled. 
+
+```js
+// in objective-c
+[[PHGPosthog sharedPostHog] getFeatureFlag:@"some-flag"];
+```
+
+```js
+// in swift
+posthog.getFeatureFlag("some-flag")
+```
 
 ## All configuration options
 
