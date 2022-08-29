@@ -42,7 +42,7 @@ const Check = () => {
                 fillRule="evenodd"
                 clipRule="evenodd"
                 d="M2.9947 5.52548L6.4635 8.99428L14.7025 0.75528C15.2095 0.24824 16.0369 0.24824 16.5439 0.75528L17.3259 1.53732C17.833 2.04436 17.833 2.8717 17.3259 3.37872L7.46034 13.2443C6.95566 13.749 6.13534 13.7521 5.62674 13.2521L0.389145 8.10213C0.126645 7.84509 -0.00381509 7.52713 8.49096e-05 7.15995C0.00399111 6.79277 0.141491 6.47791 0.408685 6.22635L1.18056 5.49979C1.69306 5.01775 2.49696 5.02947 2.99462 5.52714L2.9947 5.52548Z"
-                fill="#BFBFBC"
+                fill="#000"
             />
         </svg>
     )
@@ -104,6 +104,7 @@ const B2C = () => {
 }
 
 const features = [
+    { title: 'Advanced product analytics', icon: ProductIcons.analytics },
     { title: 'Session recording', icon: ProductIcons.sessionRecording },
     { title: 'Multivariate feature flags', icon: ProductIcons.featureFlags },
     { title: 'Heatmaps', icon: ProductIcons.heatmaps },
@@ -401,7 +402,7 @@ const Test = (): JSX.Element => {
             <EnterpriseOverlay open={currentModal === 'enterprise'} setOpen={setCurrentModal} />
             <WhyCloud open={whyCloudOpen} setOpen={setWhyCloudOpen} />
             <Enterprise open={enterpriseModalOpen} setOpen={setEnterpriseModalOpen} />
-            <SEO title="PostHog Pricing" description="Find out how much it costs to use PostHog" />
+            <SEO title="PostHog Pricing" description="First 1 million events are free - every month" />
             <section>
                 <div
                     className={`grid lg:grid-cols-2 lg:mt-12 md:mt-18 lg:gap-x-4 gap-y-3 lg:gap-y-0 mb-4 md:px-4 ${section}`}
@@ -416,25 +417,46 @@ const Test = (): JSX.Element => {
                         />
                     </div>
                     <div className="lg:order-1">
-                        <h1 className="text-3xl sm:text-4xl md:text-5xl mt-0 mb-2">
-                            Pay per tracked event.
-                            <br />
-                            Get the whole hog.
+                        <h1 className="text-3xl sm:text-4xl md:text-5xl mt-0 mb-6">
+                            All versions of PostHog come with:
                         </h1>
-                        <h3 className="text-xl text-black/50 font-bold">
-                            Your first 1 million events are free. <span className="text-blue">Every month.</span>
-                        </h3>
+                        <div className="inline-grid grid-cols-2 gap-4">
+                            <ul className="m-0 p-0 space-y-2">
+                                <li className="flex items-center gap-2">
+                                    <span className="w-6 h-6 shrink-1">{ProductIcons.eventPipelines}</span>
+                                    <span className="grow-1 text-sm">Event pipelines</span>
+                                </li>
+                                <li className="flex items-center gap-2">
+                                    <span className="w-6 h-6 shrink-1">{ProductIcons.eventAutocapture}</span>
+                                    <span className="grow-1 text-sm">Event autocapture</span>
+                                </li>
+                                <li className="flex items-center gap-2">
+                                    <span className="w-6 h-6 shrink-1">{ProductIcons.dataWarehouse}</span>
+                                    <span className="grow-1 text-sm">Data warehouse sync</span>
+                                </li>
+                            </ul>
+                            <ul className="m-0 p-0 space-y-2">
+                                <li className="flex items-center gap-2 h-6">
+                                    <span className="w-4 shrink-1 opacity-50">
+                                        <Check />
+                                    </span>
+                                    <span className="grow-1 text-sm">Unlimited tracked events</span>
+                                </li>
+                                <li className="flex items-center gap-2 h-6">
+                                    <span className="w-4 shrink-1 opacity-50">
+                                        <Check />
+                                    </span>
+                                    <span className="grow-1 text-sm">Unlimited tracked users</span>
+                                </li>
+                                <li className="flex items-center gap-2 h-6">
+                                    <span className="w-4 shrink-1 opacity-50">
+                                        <Check />
+                                    </span>
+                                    <span className="grow-1 text-sm">Unlimited seats</span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            </section>
-
-            <section className="border-dashed border-gray-accent-light border-t border-b mb-8 hidden md:block">
-                <div className="max-w-6xl mx-auto flex items-center md:px-4">
-                    <p className="font-semibold text-sm text-black/50 text-right m-0">
-                        One price, <br />
-                        full product suite:
-                    </p>
-                    <ProductPillars />
                 </div>
             </section>
 
@@ -444,6 +466,7 @@ const Test = (): JSX.Element => {
                     title="PostHog Open Source"
                     subtitle="You host, free forever"
                     features={[
+                        { title: 'Basic product analytics', icon: ProductIcons.analytics },
                         { title: 'Session recording', icon: ProductIcons.sessionRecording },
                         { title: 'Feature flags', icon: ProductIcons.featureFlags },
                     ]}
