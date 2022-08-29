@@ -12,7 +12,7 @@ const PricingNew = () => {
     const [featureFlagEnabled, setFeatureFlagEnabled] = useState(false)
 
     useEffect(() => {
-        if (posthog && posthog.isFeatureEnabled && posthog.isFeatureEnabled('highlight-open-source')) {
+        if (posthog && posthog.getFeatureFlag && posthog.getFeatureFlag('highligh-open-source') === 'test') {
             setFeatureFlagEnabled(true)
         }
         setLoading(false)
