@@ -9,8 +9,6 @@ import cntl from 'cntl'
 import Link from 'components/Link'
 import { Info } from 'components/Icons/Icons'
 import { CloudIcon, SelfHostIcon } from 'components/Pricing/Calculator/index'
-import ProductPillars from 'components/Pricing/ProductPillars/index'
-import Features from 'components/Pricing/Features/index'
 import { animateScroll as scroll, Link as ScrollLink } from 'react-scroll'
 import SelfHostOverlay from 'components/Pricing/Overlays/SelfHost'
 import EnterpriseOverlay from 'components/Pricing/Overlays/Enterprise'
@@ -23,7 +21,7 @@ import ProductIcons from 'components/ProductIcons'
 import { PricingSlider } from 'components/Pricing/PricingSlider'
 import { ServerIcon } from '@heroicons/react/outline'
 import Enterprise from './Modals/Enterprise'
-import AllPlans from './AllPlans'
+import AllPlansTest from './AllPlansTest'
 import { pricing, pricingLabels } from './constants'
 
 const Benefit = ({ children, icon }) => {
@@ -107,6 +105,7 @@ const features = [
     { title: 'Advanced product analytics', icon: ProductIcons.analytics },
     { title: 'Session recording', icon: ProductIcons.sessionRecording },
     { title: 'Multivariate feature flags', icon: ProductIcons.featureFlags },
+    { title: 'API access', icon: ProductIcons.api },
     { title: 'Heatmaps', icon: ProductIcons.heatmaps },
     { title: 'A/B testing', icon: ProductIcons.abTesting },
     { title: 'Correlation analysis', icon: ProductIcons.correlationAnalysis },
@@ -153,7 +152,8 @@ const Plan = ({ title, subtitle, features, limitations, pricing, cta, demo, setW
                     <div className="border border-dashed border-gray-accent-light p-3 rounded mt-4">
                         <p className="text-sm mb-1">
                             <strong>On a budget?</strong>
-                            <br />
+                        </p>
+                        <p className="text-sm mb-1">
                             <em>PostHog Cloud</em> is cheaper* than <em>Open Source</em> since you don't have to pay
                             hosting costs.
                         </p>
@@ -206,7 +206,7 @@ const Breakdown = ({ planName, ctas }) => {
     const { cloudCost, cloudEnterpriseCost } = useValues(pricingSliderLogic)
     return (
         <div className="mt-auto">
-            <h4 className="text-base m-0 pb-1 font-semibold">
+            <h4 className="text-base m-0 pb-2 font-bold">
                 Pay per event <span className="font-normal">(monthly)</span>
             </h4>
 
@@ -274,11 +274,11 @@ const PricingBreakdown = () => {
                             <h4 className="text-base m-0 font-semibold text-black/50">Self-serve plans</h4>
                             <ul className="list-none m-0 p-0 mt-2 mb-5">
                                 <li className="flex items-center text-base font-bold space-x-2">
-                                    <CloudIcon className="w-5 h-5" />
+                                    <CloudIcon className="w-5 h-5 opacity-50" />
                                     <span>PostHog Cloud</span>
                                 </li>
                                 <li className="flex items-center text-base font-bold space-x-2">
-                                    <ServerIcon className="w-5 h-5" />
+                                    <ServerIcon className="w-5 h-5 opacity-50" />
                                     <span>PostHog Self-Hosted</span>
                                 </li>
                             </ul>
@@ -302,8 +302,8 @@ const PricingBreakdown = () => {
                             <h4 className="text-base m-0 font-semibold text-black/50">For enterprises</h4>
                             <div className="mt-2 mb-5">
                                 <p className=" text-base font-bold m-0">
-                                    <CloudIcon className="w-5 h-5 inline-block" /> or{' '}
-                                    <ServerIcon className="w-5 h-5 inline-block" /> with Enterprise package
+                                    <CloudIcon className="w-5 h-5 inline-block opacity-50" /> or{' '}
+                                    <ServerIcon className="w-5 h-5 inline-block opacity-50" /> with Enterprise package
                                 </p>
                                 <p className="text-sm text-black/50 m-0 mt-2">
                                     Adds <strong>SSO, advanced permissions, dedicated Slack support</strong> to PostHog
@@ -330,6 +330,7 @@ const PricingBreakdown = () => {
                     <h4 className="text-base m-0 pb-1">Estimate your cost</h4>
                     <div>
                         <p className="text-sm font-bold m-0 text-black/60">Monthly event volume</p>
+                        <div className="font-bold text-lg">999,999,999</div>
                         <div className="mb-8 mt-3">
                             <PricingSlider
                                 marks={[1000000, 2000000, 10000000, 100000000, 1000000000]}
@@ -481,6 +482,7 @@ const Test = (): JSX.Element => {
                         { title: 'Basic product analytics', icon: ProductIcons.analytics },
                         { title: 'Session recording', icon: ProductIcons.sessionRecording },
                         { title: 'Basic feature flags', icon: ProductIcons.featureFlags },
+                        { title: 'API access', icon: ProductIcons.api },
                     ]}
                     limitations={['1 project', 'No user permissions', ' ', ' ', ' ']}
                     cta={{
@@ -576,16 +578,11 @@ const Test = (): JSX.Element => {
                 />
             </section>
             <PricingBreakdown />
-            <section className={`${section} mt-12 md:px-4`}>
-                <h2 className="text-2xl m-0 flex items-center">What comes in PostHog?</h2>
-                <p className="m-0 text-black/50 font-medium mb-7">Get access to all features and no plan limits.</p>
-                <Features />
-            </section>
             <section className={`${section} mb-12 mt-12 md:mt-24 md:px-4`}>
                 <h2 className="text-2xl m-0 flex items-center border-b border-dashed border-gray-accent-light pb-4">
-                    Compare all plans
+                    Full plan comparison
                 </h2>
-                <AllPlans />
+                <AllPlansTest />
             </section>
             <section className={`${section} my-12  md:px-4`}>
                 <h2 className="text-2xl m-0 mb-6 pb-6 border-b border-gray-accent-light border-dashed">Questions</h2>
