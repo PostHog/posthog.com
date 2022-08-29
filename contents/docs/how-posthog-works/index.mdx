@@ -1,8 +1,5 @@
 ---
 title: Architecture
-sidebarTitle: Architecture
-sidebar: Docs
-showTitle: true
 ---
 
 This document gives an overview of how a deployed PostHog [Helm chart](https://github.com/PostHog/charts-clickhouse/) works on Kubernetes.
@@ -84,7 +81,6 @@ flowchart TD
     AppServices-.Optional Utilization telemetry.->Telemetry(Posthog License Telemetry service)
 
     class K8s,ServicesDB,CH,ZK,AppServices,WorkerServices sgraph;
-
 ```
 
 No communication is needed into or out of this namespace other than the ingress controller for app and collecting data.
@@ -96,3 +92,29 @@ Note that the specifics of this may vary:
     exact number of pods vary according to [sharding settings](/docs/runbook/services/clickhouse/sharding-and-replication).
 
 Event ingestion is explained in more depth in our engineering handbook [here](/handbook/engineering/databases/event-ingestion).
+
+## Ingestion pipeline
+
+```mermaid
+graph TD
+    CLIENT[Client Library]
+    DECIDE["/decide API"]
+    CAPTURE[Capture API]
+    PLUGINS[Plugin server]
+    PERSONS["PostgreSQL (persons table)"]
+    Kafka2[Kafka]
+
+    CLIENT -..-> DECIDE
+
+    CLIENT -..-> CAPTURE
+    CAPTURE --> Kafka
+
+    Kafka <-..- PLUGINS
+
+    PLUGINS <--> PERSONS
+    PLUGINS --> Kafka2
+
+    Kafka2 <-..- ClickHouse
+```
+
+## Clickhouse
