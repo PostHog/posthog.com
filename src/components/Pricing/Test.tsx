@@ -135,7 +135,10 @@ const Plan = ({ title, subtitle, features, limitations, pricing, cta, demo, setW
                 </h2>
                 <p className="mb-2 text-sm text-black/50 leading-tight">{subtitle}</p>
             </div>
-            <div className="mb-5">
+            <h3 className="mb-2 text-sm text-black/50 leading-tight">Pricing</h3>
+            {pricing}
+
+            <div className="my-5">
                 <h3 className="mb-4 text-sm text-black/50 leading-tight">Features</h3>
                 <ul className="list-none p-0 m-0 grid gap-y-2">
                     {features.map(({ title, icon }) => {
@@ -148,7 +151,7 @@ const Plan = ({ title, subtitle, features, limitations, pricing, cta, demo, setW
                 </ul>
 
                 {title === 'PostHog Open Source' && (
-                    <div className="border border-dashed border-gray-accent-light p-3 rounded mt-4">
+                    <div className="border border-dashed border-gray-accent-light p-3 rounded mt-6">
                         <p className="text-sm mb-1">
                             <strong>On a budget?</strong>
                         </p>
@@ -169,9 +172,7 @@ const Plan = ({ title, subtitle, features, limitations, pricing, cta, demo, setW
                         })}
                     </ul>
                 </div>
-                <h3 className="mb-2 text-sm text-black/50 leading-tight">Pricing</h3>
-                {pricing}
-                <div className="mt-4">
+                <div className="mt-8">
                     <TrackedCTA
                         event={{
                             name: `clicked ${cta.children}`,
@@ -530,8 +531,10 @@ const Test = (): JSX.Element => {
                                 <strong>$0.00045</strong>
                                 <span className="text-[13px] opacity-50">/event</span>
                             </p>
-                            <p className="bg-yellow/50 m-0 mt-1 inline-block px-2 py-1 rounded-sm font-semibold text-sm">
-                                First 1 million events free - every month
+                            <p className="m-0 mt-1 font-semibold text-sm">
+                                <span className="inline-block bg-yellow/50 px-2 py-1 rounded-sm">
+                                    First 1 million events free - every month
+                                </span>
                             </p>
                             <p className="m-0 mt-2 font-semibold text-sm">
                                 <ScrollLink smooth to="pricing-breakdown" className="cursor-pointer">
@@ -562,8 +565,10 @@ const Test = (): JSX.Element => {
                                 <strong>$0.00045</strong>
                                 <span className="text-[13px] opacity-50">/event</span>
                             </p>
-                            <p className="bg-yellow/50 m-0 mt-1 inline-block px-2 py-1 rounded-sm font-semibold text-sm">
-                                First 1 million events free - every month
+                            <p className="m-0 mt-1 font-semibold text-sm">
+                                <span className="inline-block bg-yellow/50 px-2 py-1 rounded-sm">
+                                    First 1 million events free - every month
+                                </span>
                             </p>
                             <p className="m-0 mt-2 font-semibold text-sm">
                                 <ScrollLink smooth to="pricing-breakdown" className="cursor-pointer">
