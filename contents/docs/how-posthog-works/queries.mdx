@@ -25,7 +25,7 @@ The way we write the `person_id` to each event has some implications for the num
 
 1. Some users are counted twice on the trend graph. 
    The source of truth for data is the events table. Since this is point-in-time data, it is not possible to determine whether two `person_id`'s were later merged into a single user, which results in them being counted separately.
-   > Note: This was never an issue pre PostHog version 1.39 because we'd join the latest person info to get this result. However, this doesn't scale well, and we've decided to not continue going down this route.
+   > Note: Before PostHog version 1.39.0, we would join with the persons table to get this result. However, as this does not scale well, we've decided to change to the new method of counting distinct `person_id`'s.
 2. In the person modal, the count may be lower than the count displayed in the graph. 
    Persons who've been merged into one have one of their old IDs deleted. We remove these people from the persons modal, as there's no place to link them to.
 
