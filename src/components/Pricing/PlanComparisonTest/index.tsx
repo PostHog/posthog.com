@@ -18,6 +18,12 @@ const tiers = [
         description: 'Quis suspendisse ut fermentum neque vivamus non tellus.',
     },
     {
+        name: 'Open Source',
+        href: '#',
+        priceMonthly: 59,
+        description: 'Orci volutpat ut sed sed neque, dui eget. Quis tristique non.',
+    },
+    {
         name: 'Self-Hosted',
         href: '#',
         priceMonthly: 59,
@@ -25,12 +31,6 @@ const tiers = [
     },
     {
         name: '+ Enterprise package',
-        href: '#',
-        priceMonthly: 59,
-        description: 'Orci volutpat ut sed sed neque, dui eget. Quis tristique non.',
-    },
-    {
-        name: 'Open Source',
         href: '#',
         priceMonthly: 59,
         description: 'Orci volutpat ut sed sed neque, dui eget. Quis tristique non.',
@@ -593,7 +593,7 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-export const PlanComparison = ({ className = '' }) => {
+export const PlanComparisonTest = ({ className = '' }) => {
     const [expanded] = useState(true)
 
     const displaySections = expanded ? sections : sections.slice(0, 1)
