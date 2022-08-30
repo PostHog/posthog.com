@@ -1371,6 +1371,11 @@
     from = "/docs/user-guides/plugins"
     to = "/docs/apps"
 
+# Added: 2022-05-12
+[[redirects]]
+    from = "/product-features"
+    to = "/blog/posthog-vs-amplitude"
+
 # Added: 2022-05-13
 [[redirects]]
     from = "/docs/plugins/build/reference"
@@ -2204,8 +2209,23 @@
     from = "/docs/user-guides/subscriptions"
     to = "/manual/notifications-and-alerts"
 
-# Added: 2022-08-26
+# Added: 2022-08-24
 [[redirects]]
-    from = "/product-features"
-    to = "/product"
-    status = 301
+    from = "/docs/data-model"
+    to = "/docs/how-posthog-works/data-model"
+
+
+# Added: 2022-08-25
+[[redirects]]
+    from = "/docs/self-host/architecture"
+    to = "/docs/how-posthog-works"
+
+# Added: 2022-08-29
+[[redirects]]
+    from = "/handbook/engineering/databases"
+    to = "/docs/how-posthog-works/ingestion-pipeline"
+
+# Added: 2022-08-29
+[[redirects]]
+    from = "/docs/architecture/ingestion-pipeline"
+    to = "/docs/how-posthog-works/ingestion-pipeline"
