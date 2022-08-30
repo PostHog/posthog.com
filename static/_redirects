@@ -1,4 +1,4 @@
-# redirects should be added in /netlify.toml
+# the _redirects file is new, but we haven't switched to it so netlify.toml is the redirect file of record for the time being
 /docs/integrations/android-integration /docs/libraries/android 301
 /docs/integrations/community /docs/libraries/community 301
 /docs/integrations/docusaurus-integration /docs/libraries/docusaurus 301
