@@ -1,6 +1,7 @@
 import { Check } from 'components/Icons/Icons'
 import Modal from 'components/Modal'
 import React from 'react'
+import { Link as ScrollLink } from 'react-scroll'
 
 const sections = [
     {
@@ -112,6 +113,16 @@ export default function Enterprise({ setOpen, open }: { setOpen: (open: boolean)
                         )
                     })}
                 </ul>
+                <p className="m-0 mt-2 font-semibold">
+                    <ScrollLink
+                        onClick={() => setOpen(false)}
+                        smooth
+                        to="pricing-breakdown"
+                        className="cursor-pointer text-red"
+                    >
+                        See pricing breakdown and volume discounts
+                    </ScrollLink>
+                </p>
             </div>
         </Modal>
     )

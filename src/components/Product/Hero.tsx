@@ -178,9 +178,7 @@ const Slide = ({ image, label }) => {
         <div className="relative group">
             <div className="hover:scale-[1.1] transition-transform relative active:scale-[1.09]">{image}</div>
             <div className="absolute left-0 bottom-4 right-0 group-hover:visible invisible flex justify-center">
-                <span className="text-black bg-tan/75 backdrop-blur shadow-xl text-lg rounded-md px-3">
-                    {label}
-                </span>
+                <span className="text-black bg-tan/75 backdrop-blur shadow-xl text-lg rounded-md px-3">{label}</span>
             </div>
         </div>
     )

@@ -281,3 +281,5 @@ export default {
 You can learn more about PostHog’s specific features to use in your Vue app by checking out PostHog’s [tutorials](https://posthog.com/tutorials). 
 
 You can the access the project used in this tutorial [on GitHub](https://github.com/mathexl/posthog-vue-demo).
+
+<NewsletterTutorial compact/>

@@ -60,6 +60,10 @@ Use the Share Dataset button to share your dataset with your new service account
 
 That's it! Once you've done the steps above, your data should start flowing from PostHog to BigQuery.
 
+### Configuration
+
+<AppParameters />
+
 ### Why am I seeing duplicate PostHog events in BigQuery?
 
 There's a very rare case when duplicate events appear in BigQuery. This happens due to network errors, where the export seems to have failed, yet it actually reaches BigQuery.

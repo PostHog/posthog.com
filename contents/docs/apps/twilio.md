@@ -31,6 +31,10 @@ To configure this app, you will need your Account SID and Auth Token from Twilio
 
 Additionally, you will need to know your Twilio Phone Number. Follow [Twilio's documentation for buying or finding your Twilio phone numbers](https://www.twilio.com/docs/usage/tutorials/how-to-use-your-free-trial-account#get-your-first-twilio-phone-number).
 
+### Configuration
+
+<AppParameters />
+
 ### Is the source code for this app available?
 
 PostHog is open-source and so are all apps on the platform. The [source code for the Twilio Connector app](https://github.com/PostHog/posthog-twilio-plugin) is available on GitHub.
