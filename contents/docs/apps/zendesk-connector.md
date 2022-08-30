@@ -44,6 +44,10 @@ Next, Head to the Admin section -> Manage -> User Fields. Click Add Fields and f
 -   Add field key, (you will be required to share this key in PostHog while setting up)
 -   Click Save.
 
+### Configuration
+
+<AppParameters />
+
 ### Is the source code for this app available?
 
 PostHog is open-source and so are all apps on the platform. The [source code for the Zendesk Connector](https://github.com/PostHog/posthog-zendesk-plugin) is available on GitHub.

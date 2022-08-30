@@ -1,21 +1,18 @@
 import { Check } from 'components/Icons/Icons'
 import Modal from 'components/Modal'
 import React from 'react'
+import { Link as ScrollLink } from 'react-scroll'
 
 const sections = [
     {
         title: 'Security & data management',
         description: `Access control and compliance`,
-        features: ['SSO SAML', 'Advanced permissioning', 'Private projects',  'SOC 2 compliance (coming soon)'],
+        features: ['SSO SAML', 'Advanced permissioning', 'Private projects', 'SOC 2 compliance (coming soon)'],
     },
     {
         title: 'Success',
         description: `With direct support from PostHog engineers, our success team will make sure your team accomplishes your objectives - not just when you start using PostHog, but on an ongoing basis.`,
-        features: [
-            'Dedicated Slack channel',
-            'Assisted dashboard configuration',
-            'Team training',
-        ],
+        features: ['Dedicated Slack channel', 'Assisted dashboard configuration', 'Team training'],
     },
 ]
 
@@ -85,7 +82,8 @@ export default function Enterprise({ setOpen, open }: { setOpen: (open: boolean)
                     </button>
                 </div>
                 <h3 className="text-lg !text-semibold/50 m-0 mt-2">
-                    Extra security, compliance, and data management tools. Plus priority support for your teams using PostHog.
+                    Extra security, compliance, and data management tools. Plus priority support for your teams using
+                    PostHog.
                 </h3>
                 <ul className="list-none m-0 p-0 mt-6">
                     {sections.map((section) => {
@@ -115,6 +113,16 @@ export default function Enterprise({ setOpen, open }: { setOpen: (open: boolean)
                         )
                     })}
                 </ul>
+                <p className="m-0 mt-2 font-semibold">
+                    <ScrollLink
+                        onClick={() => setOpen(false)}
+                        smooth
+                        to="pricing-breakdown"
+                        className="cursor-pointer text-red"
+                    >
+                        See pricing breakdown and volume discounts
+                    </ScrollLink>
+                </p>
             </div>
         </Modal>
     )

@@ -175,6 +175,8 @@ PostHog::capture(array(
 
 ### Feature flags
 
+#### How to check if a flag is enabled
+
 To check if a feature flag is enabled for a given user, use `isFeatureEnabled`, like so:
 
 ```js
@@ -182,6 +184,57 @@ if (PostHog::isFeatureEnabled('my-amazing-flag', 'some distinct id')) {
     // do something here
 }
 ```
+
+#### Get a flag value
+
+if you're using multivariate feature flags, you can also get not just whether the flag is enabled, but what value its enabled to.
+
+```js
+PostHog::getFeatureFlag('multivariate-flag', 'some distinct id');
+// returns string or true or false or null
+```
+
+#### Overriding server properties
+
+Sometimes, you might want to evaluate feature flags using properties that haven't been ingested yet, or were set incorrectly earlier. You can do so by setting properties the flag depends on with these calls.
+
+FOr example, if the `beta-feature` depends on the `is_authorized` property, and you know the value of the property, you can tell PostHog to use this property, like so:
+
+```js
+PostHog::getFeatureFlag('beta-feature', 'some distinct id', [], ["is_authorized" => true])
+// the third argument is for groups
+```
+
+The same holds for groups. If you have a group name `organisation`, you can add properties like so:
+
+```js
+PostHog::getFeatureFlag('beta-feature', 'some distinct id', ["organisation" => "some-company"], [], ["organisation" => ["is_authorized" => true]])
+```
+
+#### Getting all flag values
+
+You can also get all known flag values as well. This is useful when you want to seed a frontend client with initial known flags. Like all methods above, this also takes optional person and group properties, if known.
+
+```js
+PostHog::getAllFlags('distinct id')
+```
+
+#### Local Evaluation
+> **Note:** To enable local evaluation of feature flags you must also set a `personal_api_key` when configuring the integration, as described in the [Installation](#installation) section.
+> **Note:** This feature requires version 3.0 of the library, which in turn requires a minimum PostHog version of 1.38
+
+All feature flag evaluation requires an API request to your PostHog servers to get a response. However, where latency matters, you can evaluate flags locally. This is much faster, and requires two things to work:
+1. The library must be initialised with a personal API key
+2. You must know all person or group properties the flag depends on.
+Then, the flag can be evaluated locally. The method signature looks exactly like above.
+
+```js
+PostHog::getFeatureFlag('beta-feature', 'some distinct id', [], ["is_authorized" => true])
+// the third argument is for groups
+```
+
+**Restricting evaluation to local only**
+Sometimes, performance might matter to you so much that you never want an HTTP request roundtrip delay when computing flags. In this case, you can set the `onlyEvaluateLocally` parameter to true, which tries to compute flags only with the properties it has. If it fails to compute a flag, it returns `None`, instead of going to PostHog's servers to get the value.
 
 ### Group analytics
 

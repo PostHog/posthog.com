@@ -21,6 +21,10 @@ Not running 1.31.0? Find out [how to update your self-hosted PostHog deployment]
 
 To install the Variance app you'll need a Variance account. In your Variance account go to Variance > Integrations > Create a new PostHog connection. This will give you a Webhook URL and Authorization header value. You will then use those two values when installing the app in your PostHog instance. Don't forget to hit enable after you've added the configuration details.
 
+### Configuration
+
+<AppParameters />
+
 ### Is the source code for this app available?
 
 PostHog is open-source and so are all apps on the platform. The [source code for the Variance Connector](https://github.com/PostHog/posthog-variance-plugin) is available on GitHub.

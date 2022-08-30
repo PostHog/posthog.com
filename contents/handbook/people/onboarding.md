@@ -21,10 +21,12 @@ Coua will create the contract needed, depending on who is joining. Only James an
 ### US team member checklist
 - [ ] Create a contract using the Google Docs templates for [CIIA](https://docs.google.com/document/d/1r7Xc1ALf-JKUrL3g_oyzaQ8H3SOuVchBpJrGp7TINdc/edit?usp=sharing) and [Offer Letter](https://docs.google.com/document/d/1ZzF5hbVmTmKIYKxW7JkXzrBFFNrztkcNvcdO643r6sY/edit?usp=sharing) in the Legal Docs shared drive 
 - [ ] If we are employing someone in a new state for the first time, check the tax filing requirements on Gusto as soon as possible, as there can be a long lead time. We use [Middesk Agent](https://www.middesk.com/agent) to help with the registration, log in details are in the People Ops vault on 1Password. 
+- [ ] Hire the employee in Gusto
 
 ### UK team member checklist
 - [ ] Create a contract using the [Google Docs template](https://docs.google.com/document/d/15cdfWfGj5OWBpVST6VcMwb5TP5qLVPQd9SGWKSnB9bc/edit?usp=sharing) in the Legal Docs shared drive
-- [ ] Email Parallel to add them to our pension scheme and private healthcare 
+- [ ] Email DRG with signed new start form to add to payroll
+- [ ] Email Parallel to add them to our pension scheme and private healthcare if opted in
 
 ### Non-US nor UK team member checklist
 
@@ -38,7 +40,7 @@ Coua will create the contract needed, depending on who is joining. Only James an
 ### Everyone
 
 *   [ ] Confirm which team this person will be in
-*   [ ] See if in-person onboarding is an option and book it (people should book their own travel but Eltje to ask them for availability)
+*   [ ] See if in-person onboarding is an option in Cambridge and book it (Plops team to coordinate travel)
 *   [ ] Introduce new joiner to onboarding buddy
 
 ## One week before they join
@@ -47,37 +49,37 @@ Coua will create the contract needed, depending on who is joining. Only James an
 *   [ ] Create GSuite account for the team member
 *   [ ] Add team member to any relevant Google Groups
 *   [ ] Add the team member to [CharlieHR](https://posthog.charliehr.com/) and ask them to fill in all details, upload relevant docs (e.g. passport scan). Once they are on, manually change their profile so their holiday requests are auto-approved
+*   [ ] _(UK only)_ Send the team member the HMRC new starter form, pass it on to DRG once signed for payroll 
+*   [ ] _(UK only)_ Send a copy of their HMRC new starter form on CharlieHR to DRG, and include their salary and if they are full or part time
+*   [ ] _(UK only)_ Ask if they want to be part of our [private healthcare](https://posthog.com/handbook/people/benefits#private-health-insurance) and if they want to contribute our [pensions](https://posthog.com/handbook/people/benefits#pension-and-401k-contributions)
+*   [ ] _(UK only)_ Email Parallel to add them to our pension scheme and private healthcare if opted in
+*   [ ] _(US only)_ Hire the team member in [Gusto](https://app.gusto.com/)
 *   [ ] Add team member to 1Password
-*   [ ] Send team member a digital company card
-*   [ ] Team member to purchase any necessary equipment as per the [spending money](https://posthog.com/handbook/people/spending-money) guidelines
+*   [ ] Send team member a digital company credit card (Brex or Revolut)
+*   [ ] Check to see if a laptop is available at the hacker house (ship if outside of the UK or Europe), or have team member purchase laptop as per the [spending money](https://posthog.com/handbook/people/spending-money) guidelines
+*   [ ] Team member to purchase any other necessary equipment as per the [spending money](https://posthog.com/handbook/people/spending-money) guidelines
 *   [ ] Add calendar events for probation and 6-monthly performance reviews
-*   [ ] Give them $100 credit to spend on Shopify
+*   [ ] Give them $100 credit to spend on [PostHog merch store](https://merch.posthog.com/)
 *   [ ] Share the [Important Company Details](https://docs.google.com/spreadsheets/d/1k4o4VN5VSsgFZpVYrN28Ib0z_pCJFTJyQdfkZEHhOV0/edit?usp=sharing) sheet with them
 *   [ ] Add team member to the PostHog app
 *   [ ] Send them an invite to [Drata](https://app.drata.com/) to do security onboarding and their background check
 *   [ ] Add the team member's details to our hiring plan in Pry
-*   [ ] Add the team member's share options to Captable.io (if relevant)
+*   [ ] Add the team member's share options to LTSE Equity and create an account for self-management
 *   [ ] Add team member to the internal company Slack
-*   [ ] Add them to the virtual-coffee and #wellbeing channel on Slack
 *   [ ] Add them to all relevant [Slack channels](https://github.com/PostHog/company-internal/issues/234)
 *   [ ] Add team member to PostHog Users Slack
 *   [ ] Add team member to PostHog organization in GitHub
-*   [ ] Add team member to PostHog organization in Figma
+*   [ ] Add team member to PostHog organization in all relevant team apps
 *   [ ] Add team member and onboarding buddy to their onboarding issue on Github
-*   [ ] _(UK only)_ Send a copy of their HMRC new starter form on CharlieHR to DRG, and include their salary and if they are full or part time
-*   [ ] _(UK only)_ Ask if they want to be part of our [private healthcare](https://posthog.com/handbook/people/benefits#private-health-insurance) and if they want to contribute our [pensions](https://posthog.com/handbook/people/benefits#pension-and-401k-contributions)
-*   [ ] _(UK only)_ Send the team member the HMRC new starter form, pass it on to DRG once signed for payroll 
-*   [ ] (_US only)_ Add the team member to [Gusto](https://app.gusto.com/)
 *   [ ] Add the team member to the [compensation spreadsheet](https://docs.google.com/spreadsheets/d/1IqsNexQcxGNCdChskO8tnyICARW2TMZG5KL1g0FWflI/edit#gid=1302232181) so we can track pay changes appropriately
 *   [ ] [Sponsor a hedgehog](https://www.hertswildlifetrust.org.uk/shop#!/Hedgehog-Sponsorship/p/100527218/category=27439637) on their behalf!
 
-
 ## On their first day
 
-*   [ ] Book a weekly 1:1 with the team member
+*   [ ] Book Welcome/Intro session
+*   [ ] Book a weekly 1:1 with the team member based on location
 *   [ ] Send them these instructions on adding the [team time off cal](https://intercom.help/charliehr/en/articles/839648-importing-your-time-off-calendar-to-google-calendar) to their Gcal
 *   [ ] For the first week or so, book extra sessions as appropriate to provide extra help
-*   [ ] Book Welcome/Intro session
 *   [ ] (_UK only)_ Schedule a [right to work](https://www.gov.uk/guidance/coronavirus-covid-19-right-to-work-checks) check
 *   [ ] (_US only_) I-9 Check
 *   [ ] Team members should add themselves to the [customer interviews calendar](https://calendar.google.com/calendar/?cid=Y19tczllaWN1Ym92ZGgxYWhzNmtoY2xpNTQ3b0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t)
@@ -126,6 +128,7 @@ Add these if appropriate for the role:
 <input type="checkbox"/>  Heroku <br />
 <input type="checkbox"/>  Metabase <br />
 <input type="checkbox"/>  Add team member to Grafana, Sentry, and ask yourself if there are any other dev tools in use that the team member needs access to (then update this list) <br />
+<input type="checkbox"/>  Zendesk for customer support <br />
 
 ###### Team Platform
 <input type="checkbox"/>  Add team member to the [DigitalOcean](https://cloud.digitalocean.com) `PostHog` project (see [here](https://posthog.com/handbook/engineering/digitalocean) for more info) <br />
@@ -135,12 +138,12 @@ Add these if appropriate for the role:
 #### People, Ops or Customer Success
 
 <input type="checkbox"/>  Workable if they are involved in recruitment <br />
-<input type="checkbox"/>  Google Voice - an admin will need to issue them a licence, add the company address and assign them a number, then invite <br />
 <input type="checkbox"/>  Any relevant job boards we advertise on <br />
 <input type="checkbox"/>  Gusto, Deel and/or CharlieHR admin access if they are involved in people ops <br />
 <input type="checkbox"/>  Hubspot if they are involved in customer-facing roles (e.g. sales, user interviews) - get them to [connect their inbox](https://app.hubspot.com/crm-settings-email/6958578/email/connectedEmails) <br />
 <input type="checkbox"/>  Orbit (https://orbit.love/) for community management<br />
 <input type="checkbox"/>  Brex, Mercury, SVB, and Revolut - _keep access to a minimum here_ <br />
+<input type="checkbox"/>  Zendesk for customer support <br />
 
 #### Marketing
 
@@ -153,7 +156,7 @@ Add these if appropriate for the role:
 
 #### Product
 <input type="checkbox"/>  Orbit (https://orbit.love/) for community management<br />
-<input type="checkbox"/>  Papercups. This includes both <a href="https://app.papercups.io" target="_blank">app access</a> and the <a href="https://posthogusers.slack.com/archives/G01JXEDAL22" target="_blank">#customer_support</a> channel on Users Slack<br />
+<input type="checkbox"/>  Zendesk for customer support <br />
 
 
 ## Tools we use
@@ -168,6 +171,8 @@ We use a number of different tools to organise our work and communicate at PostH
 - Shopify - powers our merch store
 - Printfection - merch inventory management, [YC onboarding](/handbook/growth/sales/yc-onboarding) merch, and merch [drop-shipping for small events](https://github.com/PostHog/meta/issues/31)
 - CharlieHR - holiday tracking, personal details
+- Gusto - payroll and benefits (US)
+- Deel - contractor payroll (EU and special arrangements)
 
 ### Engineering
 - AWS
@@ -181,13 +186,13 @@ We use a number of different tools to organise our work and communicate at PostH
 
 ### Ops, People & CS
 - HubSpot - customer CRM
-- Papercups - our support platform
+- Zendesk - our support platform
 - Pry - financial modelling
-- Captable.io - cap table management
+- LTSE Equirt - cap table management
 - Fondo - US accounting
 - Calendly - external meeting scheduling (e.g. demos, sales)
-- Gusto - US payroll
-- Deel - international payroll and contracts
+- Gusto - US payroll and benefits management
+- Deel - international payroll and contracts management
 - Workable - recruitment tool
 
 ## Signatories

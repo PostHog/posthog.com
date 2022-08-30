@@ -133,7 +133,7 @@ export default function BlogPost({ data, pageContext, location }) {
                     featuredImageType={featuredImageType}
                     contributors={contributors}
                 />
-                <div className="">
+                <div className="article-content">
                     <MDXProvider components={components}>
                         <MDXRenderer>{body}</MDXRenderer>
                     </MDXProvider>
