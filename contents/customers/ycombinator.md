@@ -39,7 +39,7 @@ In addition to capturing more data, PostHog also provided a wider array of tools
 
 The level of control PostHog offers extends beyond just instrumentation, however. Cat’s team is also able to use the entire suite of insight tools to choose the appropriate key metric for each product. For Y Combinator Startup School, for example, the team uses [trends insights](/manual/trends) to monitor weekly users and engagement — while [funnels](/manual/funnels) are more useful for Co-Founder Matching because the product involves many discrete steps. 
 
-“PostHog has been really great for tracking feature adoption and running experiments too,” said Cat. “We’ve even used it to improve our matching algorithm by experimenting with how often we should show a random profile. Most of the time we show profiles we think are a good match, but we also throw in random profiles occasionally and we experimented with the pace of that. 
+“PostHog has been really great for tracking feature adoption and running experiments,” said Cat. “We’ve even used it to improve our matching algorithm by experimenting with how often we should show a random profile or remove stale profiles. We've experimented with the pace of that and it's had a significant impact."
 
 **“FOLLOW UP COMMENT HERE ON THE IMPACT IT HAD.”**
 
