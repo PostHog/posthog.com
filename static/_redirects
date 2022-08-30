@@ -405,3 +405,4 @@
 /plugins/* /apps/:splat 301
 /docs/tutorials/* /tutorials/:splat 301
 /integrations/* /apps/:splat 301
+docs/architecture/ingestion-pipeline docs/how-posthog-works/ingestion-pipeline 301
