@@ -2224,3 +2224,8 @@
 [[redirects]]
     from = "/handbook/engineering/databases"
     to = "/docs/how-posthog-works/ingestion-pipeline"
+
+# Added: 2022-08-29
+[[redirects]]
+    from = "/docs/architecture/ingestion-pipeline"
+    to = "/docs/how-posthog-works/ingestion-pipeline"
