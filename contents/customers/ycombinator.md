@@ -25,7 +25,7 @@ Y Combinator is the world’s top startup accelerator, helping to fund, train an
 
 ### How Y Combinator gathers 30% more data with PostHog than Google Analytics
 
-PostHog isn’t the only tool in Y Combinator’s stack, of course. Teams across the organization can each have their own processes, tools and OKRs to guide their progress. Some teams at YCombinator use Segment or Amplitude — but for the flagship Startup School project, PostHog was a clear choice. 
+PostHog isn’t the only tool in Y Combinator’s stack, of course. Teams across the organization can each have their own processes, tools and OKRs to guide their progress. Some teams at Y Combinator use Segment or Amplitude — but for the flagship Startup School project, PostHog was a clear choice. 
 
 “We were very thoughtful about what we wanted to use with Startup School and Cofounder Matching,” said Cat. “We chose PostHog so we wouldn’t lose a bunch of the traffic and data. We found that with Google Analytics and other platforms we would lose up to 30% of our data from users who would not allow third-party tracking, or used adblockers. Our users are very tech-savvy... very likely to block third-party cookies.”
 
