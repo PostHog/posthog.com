@@ -2209,7 +2209,18 @@
     from = "/docs/user-guides/subscriptions"
     to = "/manual/notifications-and-alerts"
 
+# Added: 2022-08-24
+[[redirects]]
+    from = "/docs/data-model"
+    to = "/docs/how-posthog-works/data-model"
+
+
+# Added: 2022-08-25
+[[redirects]]
+    from = "/docs/self-host/architecture"
+    to = "/docs/how-posthog-works"
+
 # Added: 2022-08-29
 [[redirects]]
-    from = "/docs/how-posthog-works"
-    to = "/docs/self-host/architecture"
+    from = "/handbook/engineering/databases"
+    to = "/docs/how-posthog-works/ingestion-pipeline"
