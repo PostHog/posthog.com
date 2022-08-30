@@ -2,9 +2,9 @@
 title: Querying data
 ---
 
-This page provides an overview of how queries are run when creating insights in PostHog.
+This page provides a high-level overview of how queries are run when creating insights in PostHog.
 
-> **Note: ** This page is a work in progress and does not cover all the intricacies of how queries are run in PostHog
+> **Note: ** This page does not cover all the intricacies of how queries are run in PostHog.
 
 ## Insights counting unique persons
 
@@ -21,12 +21,13 @@ As an example, let's say that we have the following list of events:
 
 In this case, if we ran a query asking for the number of unique users who viewed a page, we would get a result of `2`, as our table contains 2 unique `person_id`'s.
 
-The way that we write the `person_id` to each event has some implications for the number of unique users that are displayed:
+The way we write the `person_id` to each event has some implications for the number of unique users that are displayed:
 
 1. Some users are counted twice on the trend graph. 
-   To make queries fast we only look at the events table. However, it is not possible to determine whether two `person_id`'s were later merged into a single user, which results in them being counted separately.
+   The source of truth for data is the events table. Since this is point-in-time data, it is not possible to determine whether two `person_id`'s were later merged into a single user, which results in them being counted separately.
+   > Note: This was never an issue pre PostHog version 1.39 because we'd join the latest person info to get this result. However, this doesn't scale well, and we've decided to not continue going down this route.
 2. In the person modal, the count may be lower than the count displayed in the graph. 
-   To make retrieving the information for the person modal fast, we ignore persons who have been merged (and hence deleted).
+   Persons who've been merged into one have one of their old IDs deleted. We remove these people from the persons modal, as there's no place to link them to.
 
 To understand better how these scenarios can arise, let's take a look at some specific examples.
 
@@ -82,7 +83,7 @@ To achieve this, we would filter based on the Subscription plan person property,
 | 3       | upgraded plan    | `enterprise`                                  |
 | 3       | viewed dashboard | `enterprise`                                  |
 
-You may have notice that over the course of this period, user `3` actually upgraded from the `free` plan to the `enterprise` plan.
+You may have noticed that over the course of this period, user `3` actually upgraded from the `free` plan to the `enterprise` plan.
 Despite this, the event they sent for when they viewed the docs still reflects that they were on the `free` plan at the time, and is thus filtered out.
 
 In most cases this is exactly what we want, as it means that we can update the properties for a person without worrying about messing up our past data points!
@@ -101,3 +102,7 @@ Then on the insight, we can filter by the cohort, which would match the followin
 | 3       | viewed docs      | `free`                                        |
 | 3       | upgraded plan    | `enterprise`                                  |
 | 3       | viewed dashboard | `enterprise`                                  |
+
+## Filtering on group properties
+
+Group properties work exactly the same way as person properties, and are stored on each event.
