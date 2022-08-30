@@ -1,6 +1,3 @@
-[functions]
-  included_files = ["!.cache/query-engine/assets/**"]
-
 [build.environment]
   NODE_VERSION = "16"
   GATSBY_CPU_COUNT = "2"
