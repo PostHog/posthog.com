@@ -203,7 +203,7 @@ const Plan = ({ title, subtitle, features, limitations, pricing, cta, demo, setW
 
 const Breakdown = ({ planName, ctas }) => {
     const breakdown = pricing[planName]
-    const { cloudCost, cloudEnterpriseCost } = useValues(pricingSliderLogic)
+    const { cloudCost, cloudEnterpriseCost, eventNumber } = useValues(pricingSliderLogic)
     return (
         <div className="mt-auto">
             <h4 className="text-base m-0 pb-2 font-bold">
@@ -233,7 +233,7 @@ const Breakdown = ({ planName, ctas }) => {
             <div className="flex justify-between pt-2 mt-4">
                 <div className="flex flex-col">
                     <strong className="text-[16px]">Monthly estimate</strong>
-                    <span className="text-sm text-black/60">for 1,000,000 events/mo</span>
+                    <span className="text-sm text-black/60">for {eventNumber.toLocaleString()} events/mo</span>
                 </div>
                 <div>
                     <strong className="text-[18px] text-black">
@@ -259,6 +259,7 @@ const Breakdown = ({ planName, ctas }) => {
 }
 
 const PricingBreakdown = () => {
+    const { eventNumber } = useValues(pricingSliderLogic)
     return (
         <section className={`${section} mt-12 md:px-4`}>
             <h2
@@ -334,7 +335,7 @@ const PricingBreakdown = () => {
                     <h4 className="text-base m-0 pb-1">Estimate your cost</h4>
                     <div>
                         <p className="text-sm font-bold m-0 text-black/60">Monthly event volume</p>
-                        <div className="font-bold text-lg">999,999,999</div>
+                        <div className="font-bold text-lg">{eventNumber.toLocaleString()}</div>
                         <div className="mb-8 mt-3">
                             <PricingSlider
                                 marks={[1000000, 2000000, 10000000, 100000000, 1000000000]}
