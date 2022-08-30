@@ -6,6 +6,7 @@ import Header from '../Header'
 import RightCol from '../RightCol'
 import CallToAction from '../CallToAction'
 import { Wrapper } from '../Wrapper'
+import { createHubSpotContact, HubSpotUser } from 'lib/utils'
 
 interface ColMenuItems {
     title: string
@@ -86,6 +87,7 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                                 )}
                                 <div style={questionsLoading ? { display: 'none' } : {}}>
                                     <Squeak
+                                        onSignUp={(user: HubSpotUser) => createHubSpotContact(user)}
                                         onLoad={() => setQuestionsLoading(false)}
                                         limit={5}
                                         topics={false}

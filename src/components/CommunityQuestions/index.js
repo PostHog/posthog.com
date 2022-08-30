@@ -1,3 +1,4 @@
+import { createHubSpotContact } from 'lib/utils'
 import React from 'react'
 import { Squeak } from 'squeak-react'
 
@@ -8,6 +9,7 @@ export default function CommunityQuestions() {
                 Questions?
             </h3>
             <Squeak
+                onSignUp={(user) => createHubSpotContact(user)}
                 apiHost={
                     process.env.GATSBY_CONTEXT === 'production'
                         ? 'https://squeak.cloud'

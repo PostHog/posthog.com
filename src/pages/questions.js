@@ -12,6 +12,7 @@ import Icon from 'components/SupportImages/Icon'
 import { ZoomImage } from 'components/ZoomImage'
 import { motion } from 'framer-motion'
 import { GatsbyImage, getImage, StaticImage } from 'gatsby-plugin-image'
+import { createHubSpotContact } from 'lib/utils'
 import React, { useState } from 'react'
 import Scroll from 'react-scroll'
 import { Form, Squeak } from 'squeak-react'
@@ -296,6 +297,7 @@ export default function FAQ() {
                     <h3>Recent questions</h3>
                     <Element name="squeak-top" />
                     <Squeak
+                        onSignUp={(user) => createHubSpotContact(user)}
                         onSubmit={(_values, formType) =>
                             formType === 'question' && scroller.scrollTo('squeak-top', { smooth: true })
                         }
