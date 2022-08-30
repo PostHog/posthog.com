@@ -21,7 +21,7 @@ Y Combinator is the world’s top startup accelerator, helping to fund, train an
 
 "Many people find Y Combinator to be the the most productive period of their lives, which is definitely what we found”, said PostHog CEO James Hawkins in [a blogpost he wrote about his Y Combinator experience](/blog/moving-to-sf). Now, PostHog is used by Y Combinator to improve many of the products we benefitted from! 
 
-“We use PostHog for our [Startup Schoo](https://www.startupschool.org/)l, for our public [YC Startup Library](https://www.ycombinator.com/library), and for a product called [Co-Founder Matching](https://www.ycombinator.com/cofounder-matching),” said Cat Li, Product and Engineering Lead for Y Combinator Startup School. “PostHog is especially useful for Co-Founder Matching, which is like a dating app for co-founders.”
+“We use PostHog for our [Startup Schoo](https://www.startupschool.org/)l, for our public [YC Startup Library](https://www.ycombinator.com/library), and for a product called [Co-Founder Matching](https://www.ycombinator.com/cofounder-matching),” said Cat Li, Product and Engineering Lead for Y Combinator Startup School. “PostHog is especially useful for Co-Founder Matching, which is almost like a dating app for co-founders.”
 
 ### How Y Combinator gathers 30% more data with PostHog than Google Analytics
 
