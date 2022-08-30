@@ -1,3 +1,4 @@
+# redirects should be added in /netlify.toml
 /docs/integrations/android-integration /docs/libraries/android 301
 /docs/integrations/community /docs/libraries/community 301
 /docs/integrations/docusaurus-integration /docs/libraries/docusaurus 301
@@ -405,3 +406,4 @@
 /plugins/* /apps/:splat 301
 /docs/tutorials/* /tutorials/:splat 301
 /integrations/* /apps/:splat 301
+# redirects should be added in /netlify.toml
