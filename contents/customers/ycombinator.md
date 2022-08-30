@@ -33,7 +33,7 @@ PostHog isn’t the only tool in Y Combinator’s stack, of course. Teams across
 
 In addition to capturing more data, PostHog also provided a wider array of tools than other platforms, with multiple insight types, correlation analysis, and session recordings enabling Y Combinator to explore data from multiple approaches. 
 
-“Some tools, like Google Analytics, just weren’t robust enough,” said Cat. “As an engineer, I didn’t feel they offered enough detail or control. One thing we really liked about PostHog was that we had control over everything. We could autocapture a lot of events just by using the snippet, but the way we could configure server events too was great.”
+“Other tools, like Google Analytics, just weren’t robust enough,” said Cat. “As an engineer, I didn’t feel they offered enough detail or control. One thing we really liked about PostHog was that we had control over everything. We could autocapture a lot of events just by using the snippet, but we could also configure custom events too which was great.”
 
 ### How Y Combinator runs experiments to build better products
 
