@@ -37,7 +37,7 @@ How does SR work? One might initially guess that the browser’s screen-share AP
 
 Instead, SR uses DOM mutations – deltas at the HTML-level, instructions the browser needs to render, not the render itself. Specifically, SR was made possible in 2012 when the MutationObserver API was added to modern browsers, starting with Chrome 18.
 
-Prior to the Mutation API, modern browsers had MutationEvents. When a button changed color, that was a MutationEvent. When a node was removed, that was a MutationEvent. Unfortunately, MutationEvents were slow—every single tiny, itsy-bitsy change fired a MutationEvent at every parent node. In the 2000s, SR would’ve been impossibly slow. 
+Prior to the Mutation API, modern browsers had MutationEvents. When a button changed color, that was a MutationEvent. When a node was removed, that was a MutationEvent. Unfortunately, MutationEvents were slow – every single tiny, itsy-bitsy change fired a MutationEvent at every parent node. In the 2000s, SR would’ve been impossibly slow. 
 
 The [MutationObserver API](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) has a different approach. It batches node changes and dispatches a joint notification whenever it has capacity to. 
 
@@ -45,25 +45,21 @@ After Chrome 18 was released, commercial products such as [FullStory](https://fu
 
 Platforms like [PostHog](https://posthog.com), which champion open-source, community driven software, are the latest evolution in this vertical. 
 
-### Are there any more layers to this?
+### How session recording works in PostHog
 
-Sort of. PostHog is open source and is therefore transparent on its session recording implementation. PostHog’s frontend client, [posthog.js](https://github.com/PostHog/posthog-js), checks if session recording is enabled by the user; if so, it calls **recorder.js** from the PostHog host, which is a minified script of [rrweb](https://github.com/rrweb-io/rrweb), an open source SR library.
+PostHog is open source and is therefore transparent on its session recording implementation. PostHog’s frontend client, [posthog.js](https://github.com/PostHog/posthog-js), checks if session recording is enabled by the user; if so, it calls **recorder.js** from the PostHog host, which is a minified script of [rrweb](https://github.com/rrweb-io/rrweb), an open source SR library.
 
 According to PostHog’s [Rick Marron](https://github.com/rcmarron), rrweb takes a DOM snapshot after initialization, then relies on the MutationObserver API to track future events. It only resorts to taking another DOM snapshot if there has been inactivity for over 30 minutes or the tab changes. 
 
-### What to look for
+In this setup, there are *three* possible impacts of SR: (i) CPU performance, (ii) memory bandwidth, and (iii) network bandwidth. For SR, (ii) and (iii) are far more relevant – CPU is hardly impacted by JS-level subroutines and more user interactions; however, SR is a data product that’s relayed over the internet. 
 
-There are *three* possible impacts of SR: (i) CPU performance, (ii) memory bandwidth, and (iii) network bandwidth. For SR, (ii) and (iii) are far more relevant – CPU is hardly impacted by JS-level subroutines and more user interactions; however, SR is a data product that’s relayed over the internet. 
+## Testing session recording performance
 
-### Where to measure this
+Candidly, there is no perfect way to measure this. 
 
-Candidly, there is no perfect way to measure this. Websites with deep DOM trees may incur a bigger performance hit from SR than others; performance hits on the Google homepage will dramatically differ from Neopet’s GUI mania. Given the popularity of session recording in SaaS products, we’ll investigate SR’s impact on various components of a typical SaaS website. 
+Websites with deep DOM trees may incur a bigger performance hit from SR than others; performance hits on the Google homepage will dramatically differ from Neopet’s GUI mania. Given the popularity of session recording in SaaS products, we’ll investigate SR’s impact on various components of a typical SaaS website. 
 
 To simulate and measure the performance impact in the real world, I partnered with [Brevy](https://brevy.com), [CommandBar](https://commandbar.com), and [Explo](https://explo.com). Specifically, we implemented PostHog in Brevy’s internal app codebase, CommandBar’s Ghost/NextJS-powered [blog](https://commandbar.com/blog), and Explo’s React-engineered [auth page](https://app.explo.co/home).
-
-<NewsletterForm compact /> 
-
-## The Tests
 
 ### Memory: Short Term
 
@@ -75,7 +71,7 @@ For each tool, the beginning of a user’s journey was slightly different:
 - For CommandBar’s blog, that meant opening a new post.
 - For Explo’s auth page, that meant focusing on the first-name field.
 
-In all three cases, MutationObserver, Mutation ObserverRegistration, and all relevant subroutines *reportedly* had … *drumroll* … 0% impact on memory. Of course, that’s Chrome’s rounding. We can see the exact byte usage below: 
+In all three cases, MutationObserver, Mutation ObserverRegistration, and all relevant subroutines *reportedly* had... *drumroll* 0% impact on memory. Of course, that’s Chrome’s rounding. We can see the exact byte usage below: 
 
 **Simple Load: Brevy**
 
@@ -89,9 +85,10 @@ In all three cases, MutationObserver, Mutation ObserverRegistration, and all rel
 
 ![simple load explo](../images/blog/session-recording-performance/da84e696-b9e8-4c21-8d94-bc104b9f3c19/Screen_Shot_2022-08-31_at_12.11.19_AM.png)
 
-
->💡 **Shallow Side** is an object’s size 
-> **Retained Size** measures the cumulative size of an object and all objects it > actively references. 
+> **Shallow Side** is an object’s size. 
+>
+> **Retained Size** measures the cumulative size of an object and all objects it actively references. 
+>
 > **Retained Size** is more relevant when measuring an object’s heap impact.
 
 Quite obviously, MutationObserver made near-zero impact. For reference, Commandbar’s total heap was over 60,000,000 bytes (60MB) large. That makes MutationRecord’s footprint a … **+0.00043%** addition to memory. **Nothing**. 
@@ -114,7 +111,7 @@ Now, let’s examine rolling use. Remember, session recordings grow with time. I
 
 If you dig into the numbers, you’ll notice that there was a slight increase across the board. But just *slight*. Why? The deltas for MutationObserver are small, compressed representations of changes in the DOM tree. Even with heavy use, the allotted space barely moves. MutationObserver remains in zero-point-zero-zero territory. 
 
-> 💡 **Verdict:** MutationObserver has **no** discernible impact to page memory.
+> **Verdict:** MutationObserver has **no** discernible impact to page memory.
 
 ### Network: Transmission
 
@@ -145,6 +142,7 @@ All of the gzip-compressed transmissions? That’s **rrweb** / **PostHog** relay
 You will notice two things. 
 
 - These packets are **tiny** in comparison to anything else—300 or so bytes. Bytes, not kilobytes. That’s it!
+
 - These packets are transmitted often. Very, very often.
 
 Let’s dig into one of the requests. All were quite similar numerically to the below: 
@@ -153,15 +151,15 @@ Let’s dig into one of the requests. All were quite similar numerically to the 
 
 One of the packets from a CommandBar trial. 
 
-> 💡 **Queuing** — how long it took to add the request to the request queue.
+> **Queuing:** How long it took to add the request to the request queue.
 >
-> **Stalled** — how long the request waited in the queue before being dispatched, either due to other higher priority requests or the CPU being idle. 
+> **Stalled:** How long the request waited in the queue before being dispatched, either due to other higher priority requests or the CPU being idle. 
 >
-> **Request sent** — how long it took to send the request 
+> **Request sent:** How long it took to send the request 
 >
-> **Waiting for server response** — how long it took for the server, in this case [app.posthog.com](http://app.posthog.com), to reply over the internet. 
+> **Waiting for server response:** How long it took for the server, in this case [app.posthog.com](http://app.posthog.com), to reply over the internet. 
 >
-> **Content Download** — how long after the initial packet did it take to download the response, in this case, an acknowledgement of receipt.
+> **Content Download:** How long after the initial packet did it take to download the response, in this case, an acknowledgement of receipt.
 
 You should remember that these requests are dispatched asynchronously, so the leading contributor to the request speed – the ~40ms wait from [app.posthog.com](http://app.posthog.com) – isn’t blocking the page from operating. For the *most part*. 
 
@@ -175,7 +173,7 @@ So, hypothetically, there *is* a performance impact. A ~44ms wait is long enough
 
 Practically... this (almost) never happens. A lot of coincidence has to happen for SR to actually clog the pipes. More often, you’ll attribute a slow load or sluggish action to your mediocre WiFi router, and you would be likely right. 
 
-> 💡 **Verdict:** Session Recording **might rarely** impact browser network performance*.* But for all practical purposes, **it does not**.
+> **Verdict:** Session Recording **might rarely** impact browser network performance*.* But for all practical purposes, **it does not**.
 
 ## Conclusion
 
