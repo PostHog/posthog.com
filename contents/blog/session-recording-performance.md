@@ -75,15 +75,15 @@ In all three cases, MutationObserver, Mutation ObserverRegistration, and all rel
 
 **Simple Load: Brevy**
 
-![simple load brevy](../images/blog/session-recording-performance/7ebd913b-0c2f-4442-bce0-7b199287e43d/Screen_Shot_2022-08-30_at_10.30.24_PM.png)
+![simple load brevy](../images/blog/session-recording-performance/Screen_Shot_2022-08-30_at_10.30.24_PM.png)
 
 **Simple Load: Commandbar**
 
-![simple load commandbar](../images/blog/session-recording-performance/c2d17990-e60e-4e16-accd-d06d6bc117dc/Screen_Shot_2022-08-30_at_11.07.36_PM.png)
+![simple load commandbar](../images/blog/session-recording-performance/Screen_Shot_2022-08-30_at_11.07.36_PM.png)
 
 **Simple Load: Explo** 
 
-![simple load explo](../images/blog/session-recording-performance/da84e696-b9e8-4c21-8d94-bc104b9f3c19/Screen_Shot_2022-08-31_at_12.11.19_AM.png)
+![simple load explo](../images/blog/session-recording-performance/Screen_Shot_2022-08-31_at_12.11.19_AM.png)
 
 > **Shallow Side** is an object’s size. 
 >
@@ -99,7 +99,7 @@ Now, let’s examine rolling use. Remember, session recordings grow with time. I
 
 **Long Trial: Brevy** 
 
-![long trial brevy](../images/blog/session-recording-performance/9f8717c7-37c4-4a64-ab3a-eb0892627995/Screen_Shot_2022-08-30_at_10.32.07_PM.png)
+![long trial brevy](../images/blog/session-recording-performance/Screen_Shot_2022-08-30_at_10.32.07_PM.png)
 
 **Long Trial: Commandbar**
 
