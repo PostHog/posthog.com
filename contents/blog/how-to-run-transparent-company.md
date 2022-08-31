@@ -17,7 +17,7 @@ Most companies seem to share when necessary but not by default. I hope this piec
 
 It's worth noting that these are my views on how and why more startups should offer greater _internal_ transparency. I've focused on internal transparency because I believe it can be realistically practiced and helps the most people. I've written about startups because that's what I know.
 
-If you want to gain even more advantages here, I would encourage you though to share this stuff by default externally unless there's a good reason not to.
+If you want to gain even more of an advantage, I would encourage you to share this stuff externally by default unless there's a good reason not to.
 
 There are probably some startups where this doesn't work. Perhaps in design led companies, where control might be a competitive advantage and is more important than autonomy, or in companies that aren't managed consistently - you can't share a non-existent pay structure, for example (and, yes, it is hard work to implement something like that from very early, but we felt that work was worth it to prevent unfairness and employee churn).
 
