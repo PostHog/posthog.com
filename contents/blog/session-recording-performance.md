@@ -121,33 +121,33 @@ Let’s take a look at the Network tab on all three apps.
 
 ![Average Packet Size: 310 bytes](../images/blog/session-recording-performance/Screen_Shot_2022-08-31_at_1.45.10_AM.png)
 
-Average Packet Size: 310 bytes
+Average Response Payload: 310 bytes
 
 **Network Tab: Commandbar:** 
 
 ![Average Packet Size: 309 bytes](../images/blog/session-recording-performance/Screen_Shot_2022-08-30_at_11.14.03_PM.png)
 
-Average Packet Size: 309 bytes
+Average Response Payload: 309 bytes
 
 **Network Tab: Explo:** 
 
 ![Average Packet Size: 309 bytes](../images/blog/session-recording-performance/Screen_Shot_2022-08-31_at_12.12.48_AM.png)
 
-Average Packet Size: 309 bytes
+Average Response Payload: 309 bytes
 
 All of the gzip-compressed transmissions? That’s **rrweb** / **PostHog** relaying the mutation data to a PostHog host for storage. 
 
 You will notice two things. 
 
-- These packets are **tiny** in comparison to anything else—300 or so bytes. Bytes, not kilobytes. That’s it!
+- These payloads are **tiny** in comparison to anything else—300 or so bytes. Bytes, not kilobytes. That’s it!
 
-- These packets are transmitted often. Very, very often.
+- They are transmitted often. Very, very often.
 
 Let’s dig into one of the requests. All were quite similar numerically to the below: 
 
 ![One of the packets from a CommandBar trial. ](../images/blog/session-recording-performance/Screen_Shot_2022-08-30_at_11.14.35_PM.png)
 
-One of the packets from a CommandBar trial. 
+One of the payloads from a CommandBar trial. 
 
 > **Queuing:** How long it took to add the request to the request queue.
 >
