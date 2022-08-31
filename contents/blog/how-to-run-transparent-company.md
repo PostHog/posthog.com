@@ -31,7 +31,7 @@ Above all, it enables people to work autonomously. There are two ways to grow a 
 
 Transparency works particularly well in an all remote company. Like ours. That's because having this stuff written down and shared makes asynchronous work much easier.
 
-We didn't expect this, but hiring great has become much easier. Since we share most of the below publicly, people thinking about working here can build trust much more easily, and it makes us stand apart from the thousands of other startups. Transparency makes the whole company a joint project, between our team and the community around it too.
+We didn't expect this, but transparency makes hiring great talent much easier. Since we share most of the below publicly, potential hires can trust us much more easily, and it makes us stand apart from the thousands of other startups. Transparency makes the whole company a joint project, between our team and the community around it too.
 
 ## General communication
 
