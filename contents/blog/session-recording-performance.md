@@ -113,7 +113,7 @@ If you dig into the numbers, you’ll notice that there was a slight increase ac
 
 ### Network: Transmission
 
-Network is the bigger metric to interrogate. After all, computers have gotten faster, memory has gotten cheaper, but bad internet is still… pretty damn common. How badly does SessionRecording impact your internet speed? 
+Network is the bigger metric to interrogate. After all, computers are faster, memory is cheaper, but bad internet is still… pretty damn common. How badly does session recording impact your internet speed? 
 
 Let’s take a look at the Network tab on all three apps. 
 
@@ -121,33 +121,39 @@ Let’s take a look at the Network tab on all three apps.
 
 ![Average Packet Size: 310 bytes](../images/blog/session-recording-performance/Screen_Shot_2022-08-31_at_1.45.10_AM.png)
 
-Average Packet Size: 310 bytes
+Note, the package size (~310 Bytes) is mapping to the response, not the initial payload. 
 
 **Network Tab: Commandbar:** 
 
 ![Average Packet Size: 309 bytes](../images/blog/session-recording-performance/Screen_Shot_2022-08-30_at_11.14.03_PM.png)
 
-Average Packet Size: 309 bytes
-
 **Network Tab: Explo:** 
 
 ![Average Packet Size: 309 bytes](../images/blog/session-recording-performance/Screen_Shot_2022-08-31_at_12.12.48_AM.png)
 
-Average Packet Size: 309 bytes
+All of the gzip-compressed transmissions? That’s **rrweb** / **PostHog** relaying the mutation data to a PostHog host for storage.
 
-All of the gzip-compressed transmissions? That’s **rrweb** / **PostHog** relaying the mutation data to a PostHog host for storage. 
+You will notice two things:
 
-You will notice two things. 
+1. These packets receive only a tiny acknowledgment response.
 
-- These packets are **tiny** in comparison to anything else—300 or so bytes. Bytes, not kilobytes. That’s it!
+2. These packets are transmitted often. Very, very often.
 
-- These packets are transmitted often. Very, very often.
+The bigger question is the packet’s **payload**. While there wasn’t too much deviation, Brevy’s SR featured the largest packets over Explo and Commandbar’s. Let’s dig into them: 
 
-Let’s dig into one of the requests. All were quite similar numerically to the below: 
+![Screen Shot 2022-08-31 at 1.43.49 PM.png](../images/blog/session-recording-performance/Screen_Shot_2022-08-31_at_1.43.49_PM.png)
+
+![Screen Shot 2022-08-31 at 1.46.43 PM.png](../images/blog/session-recording-performance/Screen_Shot_2022-08-31_at_1.46.43_PM.png)
+
+![Screen Shot 2022-08-31 at 1.46.52 PM.png](../images/blog/session-recording-performance/Screen_Shot_2022-08-31_at_1.46.52_PM.png)
+
+I sampled 10 requests, which featured an average payload size of 2,799 bytes, the range spanning 457 bytes to 12,772 bytes. Predictably, the larger requests correlate to bigger changes in the DOM; smaller packets relay tiny things like a button’s changed state. 
+
+There was **one** notable exception – the 2nd packet, which transfers the initial snapshot of the page’s DOM. It transferred **269,358 bytes**, which is... tiny, in the realm of the media-rich internet. 
+
+Let’s dig into the actual timing around one of these requests. All featured a similar breakdown to the CommandBar below:
 
 ![One of the packets from a CommandBar trial. ](../images/blog/session-recording-performance/Screen_Shot_2022-08-30_at_11.14.35_PM.png)
-
-One of the packets from a CommandBar trial. 
 
 > **Queuing:** How long it took to add the request to the request queue.
 >
@@ -159,7 +165,7 @@ One of the packets from a CommandBar trial.
 >
 > **Content Download:** How long after the initial packet did it take to download the response, in this case, an acknowledgement of receipt.
 
-You should remember that these requests are dispatched asynchronously, so the leading contributor to the request speed – the ~40ms wait from [app.posthog.com](http://app.posthog.com) – isn’t blocking the page from operating. For the *most part*. 
+Remember that these requests are dispatched asynchronously, so the leading contributor to the request speed – the ~40ms wait from [app.posthog.com](http://app.posthog.com) – isn’t blocking the page from operating. For the *most part*. 
 
 Technically, [Chrome only permits 10 parallel connections](https://blog.bluetriangle.com/blocking-web-performance-villain) at once. Imagine **three** SR requests were dispatched in parallel (which appears to happen on rare occasion). By extension, only **seven** other requests can be made during that (very short) period. 
 
@@ -171,7 +177,7 @@ So, hypothetically, there *is* a performance impact. A ~44ms wait is long enough
 
 Practically... this (almost) never happens. A lot of coincidence has to happen for SR to actually clog the pipes. More often, you’ll attribute a slow load or sluggish action to your mediocre WiFi router, and you would be likely right. 
 
-> **Verdict:** Session Recording **might rarely** impact browser network performance*.* But for all practical purposes, **it does not**.
+> **Verdict:** Session Recording **might rarely** impact browser network performance. But for all practical purposes, **it does not**.
 
 ## Conclusion
 
