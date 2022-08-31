@@ -13,7 +13,7 @@
     ],
     "private": true,
     "scripts": {
-        "build": "gatsby build --log-pages",
+        "build": "gatsby clean && gatsby build --log-pages",
         "start": "TAILWIND_MODE=watch gatsby develop -H 0.0.0.0 -p 8001",
         "format": "prettier --write \"**/*.{html,js,ts,tsx,json,yml,css,scss}\"",
         "test": "echo \"Error: no test specified\" && exit 1",
