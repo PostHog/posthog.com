@@ -7,7 +7,7 @@ showTitle: true
 hideAnchor: true
 categories: ["CEO diaries", "Inside PostHog"]
 author: ["james-hawkins"]
-featuredImage: ../images/blog/posthog-ceo-diary-blog.png
+featuredImage: ../images/blog/transparency.jpeg
 featuredImageType: full
 ---
 
@@ -19,9 +19,9 @@ It's worth noting that these are my views on how and why more startups should of
 
 If you want to gain even more of an advantage, I would encourage you to share this stuff externally by default unless there's a good reason not to.
 
-There are probably some startups where this doesn't work. Perhaps in design led companies, where control might be a competitive advantage and is more important than autonomy, or in companies that aren't managed consistently - you can't share a non-existent pay structure, for example (and, yes, it is hard work to implement something like that from very early, but we felt that work was worth it to prevent unfairness and employee churn).
+There are probably some startups where this doesn't work – perhaps in design-led companies, where control might be a competitive advantage and is more important than autonomy, or in companies that aren't managed consistently. But the principles still apply, even if the execution might differ.
 
-## Why transparency matters
+### Why transparency matters
 
 This section is a bit effusive. Skip it if you're not in the mood for that.
 
@@ -43,37 +43,37 @@ Broadly for us this means:
 
 * Pull Requests > Issues > Public Slack Channels > Private groups or Slack DMs > Email
 
-We also use a weekly 30 mins all hands (including written notes) to highlight across everything being shared what really matters across all teams.
+We also use a weekly 30-minute all hands (including written notes) to highlight what really matters across all teams.
 
-It has:
+It covers:
 
-* Top level news - any major things to note (for example, strategy details or changes, new team members)
-* Revenue - this is an output of all the other teams working well
-* OKRs - are we on track or not for each key result, and any extra context
-* Handpicked list of any important policy changes from our handbook
-* Demos - if people have something cool to show that they built, they can show it off
+* **Top level news**, such as strategy details or changes, new team members, and rectruitment plans
+* **Revenue updates**, because this is an output of all the other teams working well
+* **OKR updates**, so we can share progress for each key result, and any extra context
+* **Important policy updates**, all of which is included in our online [company handbook](/handbook) 
+* **Demos** of coll things people have built or are working on
 
 ## How we share our financial performance
 
-* Fundraising
+### Fundraising
 
 We share why we are fundraising, or not, and what our goals are for the business that'll make this easier.
 
 If we are fundraising, we'll provide updates on the process. We'll share what our specific goals are for a term sheet, and how we're doing as we run the process.
 
-* Stock options
+### Stock options
 
 Everyone should know the percentage of the company they own, their strike price, the terms of their options, and the impact of fundraising on this stuff.
 
 At some stage, we'll do more here - letting people model what options are worth depending on how the company performs, for example.
 
-* Financial reports (profit/loss/balance etc)
+### Financial reports (profit/loss/balance etc)
 
 This should be copy pasta from your board slides. We share the monthly reports our accountants create with our team.
 
 ## How we build product openly
 
-We're split into small teams. Each small team runs their own sprints. They share:
+We're [split into small teams](/handbook/people/team-structure/why-small-teams). Each small team runs their own sprints. They share:
 
 * How last sprint went
 * What the plan is for the next sprint
@@ -93,7 +93,7 @@ Another really simple thing to share, with really high impact.
 
 ## How we are open around people topics
 
-* Pay structure
+### Pay structure
 
 Overall, our pay and communication around it, is designed to make pay "get out of the way". 
 
@@ -101,7 +101,7 @@ We have [a system for paying](../handbook/people/compensation) everyone here. Th
 
 We don't share individuals' pay details with each other as it's the only area we don't want employee feedback, and we don't make all changes at the same time. Quite simply, if people influence each others' pay, then it would make the process of giving and receiving direct feedback harder. We don't want people to have to be defensive with each other.
 
-* Hiring (and "not-hiring") decisions
+### Hiring (and "not-hiring") decisions
 
 This is a new one we're working to introduce.
 
@@ -109,24 +109,22 @@ When a candidate gets to the final stage of our hiring process, we share with th
 
 This let's our team level each other up at decision making, it increases accountability (and, thus, inclusivity).
 
-* Firing decisions (when for performance reasons)
+### Firing decisions (when for performance reasons)
 
 If someone leaves for performance reasons, we'll communicate to the rest of the company what went wrong. Sometimes that means running a post-mortem on the hiring process too, which is also shared.
 
 This sounds scary to share, but for the rest of the team, more clarity rather than less, is how you reduce uncertainty. And as a company when we make these decisions, it increases accountability.
 
-* Holidays
+### Holidays
 
 Sharing this one means people realize more easily if their colleagues are working or not. We use [CharlieHR](https://charliehr.com/) integrated with [Slack](https://slack.com/) to do this.
 
-* Personal readmes
+### Personal readmes
 
 These are a fun one - team members write out how they can help others, what their focus is, and quirks of working with them. We borrowed the idea from [Sid's at GitLab](https://about.gitlab.com/handbook/ceo/), but extended it to everyone. We make them optional, but quite a few people do them. [Joe's is particularly nicely written](../handbook/company/team/joe-martin). 
 
-# You don't have to do this all at once
+## Note: You don't have to do this all at once
 
-Some of this list may require you to improve your company's general processes and management to even be able to share them properly. That's fine. Ultimately, doing the things here, will create deep trust between your team, and it'll make you think through your decisions more carefully. That has to be worth it.
+Some of this list may require you to improve your company's general processes and management to even be able to share them properly. That's fine. Ultimately, doing the things here will create deep trust between your team, and it'll make you think through your decisions more carefully. That has to be worth it.
 
-<NewsletterForm
-compact
-/>
+<NewsletterForm compact />
