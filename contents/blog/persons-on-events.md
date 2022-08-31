@@ -8,7 +8,6 @@ hideAnchor: true
 categories: ['Release notes', 'Product updates']
 featuredImage: ../images/blog/posthog-array-blog.png
 featuredImageType: full
-Excerpt: We’re improving query performance with a substantial change to the way persons and events work on PostHog.
 ---
 
 In [our last product update](/blog/the-posthog-array-1-39-0) we announced a beta for a substantial change to the way we handle persons and events on PostHog. Today, after gathering your feedback and seeing the improvements to query performance, we’re rolling this change out to all PostHog users. 
