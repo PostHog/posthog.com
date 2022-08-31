@@ -199,7 +199,7 @@ Assuming Node.js is installed, run `yarn --cwd plugin-server` to install all req
     source env/bin/activate.fish
     ```
 
-1. Upgrade pip to the last version:
+1. Upgrade pip to the latest version:
 
     ```bash
     pip install -U pip
