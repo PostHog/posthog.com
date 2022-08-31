@@ -1,6 +1,6 @@
 ---
 date: 2022-08-31
-title: "Session Recording Demystified: Examining the (trivial) performance hit"
+title: "Benchmarking the (trivial) impact of session recording on performance"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
