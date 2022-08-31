@@ -7,14 +7,60 @@ import { SelectorIcon } from '@heroicons/react/outline'
 
 import theme from './theme'
 
-const languageMap: Record<string, { language: string; label: string }> = {
+const languageMap: Record<string, { language: string; label: React.ReactNode }> = {
     js: {
         language: 'javascript',
         label: 'JavaScript',
     },
+    jsx: {
+        language: 'jsx',
+        label: 'JSX',
+    },
+    shell: {
+        language: 'shell',
+        label: (
+            <div className="flex items-center space-x-1.5">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="w-3 h-3"
+                >
+                    <polyline points="4 17 10 11 4 5" />
+                    <line x1="12" y1="19" x2="20" y2="19" />
+                </svg>
+                <span className="font-semibold">Terminal</span>
+            </div>
+        ),
+    },
     bash: {
         language: 'bash',
-        label: 'Bash',
+        label: (
+            <div className="flex items-center space-x-1.5">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="w-3 h-3"
+                >
+                    <polyline points="4 17 10 11 4 5" />
+                    <line x1="12" y1="19" x2="20" y2="19" />
+                </svg>
+                <span className="font-semibold">Terminal</span>
+            </div>
+        ),
     },
     android: {
         language: 'clike',
@@ -25,18 +71,35 @@ const languageMap: Record<string, { language: string; label: string }> = {
         label: 'Ruby',
     },
     objectivec: {
-        language: 'clike',
+        language: 'objectivec',
         label: 'Objective-C',
     },
     html: {
         language: 'html',
         label: 'HTML',
     },
+    yaml: {
+        language: 'yaml',
+        label: 'YAML',
+    },
+    python: {
+        language: 'python',
+        label: 'Python',
+    },
+    ios: {
+        language: 'objectivec',
+        label: 'iOS',
+    },
+    'react-native': {
+        language: 'jsx',
+        label: 'React Native',
+    },
 }
 
 type LanguageOption = {
     label?: string
     language: string
+    file?: string
     code: string
 }
 
@@ -47,9 +110,19 @@ type CodeBlockProps = {
     showLineNumbers?: boolean
     showCopy?: boolean
 
-    onChange: (language: LanguageOption) => void
+    onChange?: (language: LanguageOption) => void
     currentLanguage: LanguageOption
     children: LanguageOption[]
+}
+
+type SingleCodeBlockProps = {
+    label?: React.ReactNode
+    showLabel?: boolean
+    showLineNumbers?: boolean
+    showCopy?: boolean
+
+    language: string
+    children: string
 }
 
 type MdxCodeBlock = {
@@ -93,6 +166,7 @@ export const MdxCodeBlock = ({ children, ...props }: MdxCodeBlock) => {
             const {
                 className = '',
                 label,
+                file,
                 children,
             } = child.props.mdxType === 'code' ? child.props : child.props.children.props
 
@@ -102,6 +176,7 @@ export const MdxCodeBlock = ({ children, ...props }: MdxCodeBlock) => {
             return {
                 label,
                 language,
+                file,
                 code: children as string,
             }
         })
@@ -115,7 +190,20 @@ export const MdxCodeBlock = ({ children, ...props }: MdxCodeBlock) => {
 
     return (
         <CodeBlock currentLanguage={currentLanguage} onChange={setCurrentLanguage} {...props}>
-            {children}
+            {languages}
+        </CodeBlock>
+    )
+}
+
+export const SingleCodeBlock = ({ label, language, children, ...props }: SingleCodeBlockProps) => {
+    const currentLanguage = {
+        language,
+        code: children,
+    }
+
+    return (
+        <CodeBlock label={label} currentLanguage={currentLanguage} {...props}>
+            {[currentLanguage]}
         </CodeBlock>
     )
 }
@@ -131,7 +219,7 @@ export const CodeBlock = ({
     currentLanguage,
     onChange,
 }: CodeBlockProps) => {
-    if (languages.length < 0) {
+    if (languages.length < 0 || !currentLanguage) {
         return null
     }
 
@@ -141,6 +229,10 @@ export const CodeBlock = ({
 
     const [projectName, setProjectName] = React.useState<string | null>(null)
     const [projectToken, setProjectToken] = React.useState<string | null>(null)
+
+    console.log(currentLanguage)
+
+    const displayName = label || languageMap[currentLanguage.language]?.label || currentLanguage.language
 
     React.useEffect(() => {
         // Browser check - no cookies on the server
@@ -163,7 +255,7 @@ export const CodeBlock = ({
         <div className="relative my-2">
             <div className="bg-black/90 text-gray px-3 py-1.5 text-sm flex items-center w-full rounded-t">
                 {selector === 'tabs' && languages.length > 1 ? (
-                    <Tab.Group onChange={(index) => onChange(languages[index])}>
+                    <Tab.Group onChange={(index) => onChange?.(languages[index])}>
                         <Tab.List className="flex items-center space-x-5">
                             {languages.map((option) => (
                                 <Tab
@@ -179,7 +271,28 @@ export const CodeBlock = ({
                     </Tab.Group>
                 ) : showLabel ? (
                     <div className="min-w-0 mr-8">
-                        {label || languageMap[currentLanguage.language]?.label || currentLanguage.language}
+                        {currentLanguage.file ? (
+                            <div className="flex items-center space-x-1.5">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    className="w-4 h-4"
+                                >
+                                    <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
+                                    <polyline points="13 2 13 9 20 9" />
+                                </svg>
+                                <span className="font-semibold">{currentLanguage.file}</span>
+                            </div>
+                        ) : (
+                            displayName
+                        )}
                     </div>
                 ) : null}
 
@@ -197,12 +310,12 @@ export const CodeBlock = ({
                                     <SelectorIcon className="w-4 h-4" />
                                 </Listbox.Button>
 
-                                <Listbox.Options className="absolute top-full right-0 mt-1 bg-black px-0 py-2 text-white list-none rounded text-xs focus:outline-none">
+                                <Listbox.Options className="absolute top-full right-0 mt-1 bg-black px-0 py-2 text-white list-none rounded text-xs focus:outline-none border border-white/10">
                                     {languages.map((option) => (
                                         <Listbox.Option
                                             key={option.language}
                                             value={option}
-                                            className="cursor-pointer text-sm hover:bg-black/40 w-full pl-8 pr-2 py-0.5"
+                                            className="cursor-pointer text-sm hover:bg-gray-accent-dark w-full pl-8 pr-2 py-0.5"
                                         >
                                             {option.label || option.language}
                                         </Listbox.Option>
@@ -255,11 +368,11 @@ export const CodeBlock = ({
             <Highlight
                 {...defaultProps}
                 code={currentLanguage.code.trim()}
-                language={(languageMap[currentLanguage.language]?.language || 'clike') as Language}
+                language={(languageMap[currentLanguage.language]?.language || currentLanguage.language) as Language}
                 theme={theme}
             >
                 {({ className, style, tokens, getLineProps, getTokenProps }) => (
-                    <pre className="w-full m-0 p-0 rounded-t-none rounded-b overflow-hidden" style={{ ...style }}>
+                    <pre className="w-full m-0 p-0 rounded-t-none rounded-b" style={{ ...style }}>
                         <div className="flex" id={codeBlockId}>
                             {showLineNumbers && (
                                 <pre className="m-0 py-4 pl-4 pr-2 inline-block">

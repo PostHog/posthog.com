@@ -2,8 +2,8 @@ import type { PrismTheme } from 'prism-react-renderer'
 
 const theme: PrismTheme = {
     plain: {
-        color: '#F8F8F2',
-        backgroundColor: '#2c2c2c',
+        color: '#F8F8F8',
+        backgroundColor: '#2C2C2C',
     },
     styles: [
         {
@@ -13,21 +13,9 @@ const theme: PrismTheme = {
             },
         },
         {
-            types: ['inserted', 'function', 'number'],
+            types: ['number', 'function'],
             style: {
-                color: 'rgb(242, 107, 44)',
-            },
-        },
-        {
-            types: ['deleted'],
-            style: {
-                color: 'rgb(255, 85, 85)',
-            },
-        },
-        {
-            types: ['changed'],
-            style: {
-                color: 'rgb(255, 184, 108)',
+                color: '#FF6308',
             },
         },
         {
@@ -37,28 +25,28 @@ const theme: PrismTheme = {
             },
         },
         {
-            types: ['string', 'char', 'tag', 'selector'],
+            types: ['string', 'char', 'attr-value'],
             style: {
-                color: 'rgb(15, 184, 88)',
+                color: '#e4a604',
+            },
+        },
+        {
+            types: ['tag', 'selector'],
+            style: {
+                color: '#4695FF',
             },
         },
         {
             types: ['keyword', 'variable'],
             style: {
-                color: 'rgb(84, 117, 247)',
+                color: '#4695FF',
                 fontStyle: 'italic',
             },
         },
         {
-            types: ['comment'],
+            types: ['comment', 'attr-name'],
             style: {
                 color: 'rgb(163, 162, 162)',
-            },
-        },
-        {
-            types: ['attr-name'],
-            style: {
-                color: 'rgb(241, 250, 140)',
             },
         },
     ],
