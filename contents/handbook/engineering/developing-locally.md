@@ -199,12 +199,13 @@ Assuming Node.js is installed, run `yarn --cwd plugin-server` to install all req
     source env/bin/activate.fish
     ```
 
-1. Install requirements with pip
+1. Upgrade pip to the last version:
 
-    Upgrade pip to the last version
-    ```
+    ```bash
     pip install -U pip
     ```
+
+1. Install requirements with pip
 
     If your workstation is ARM-based (e.g. Apple Silicon), the first time your run `pip install` you must pass it custom OpenSSL headers:
     - On macOS
