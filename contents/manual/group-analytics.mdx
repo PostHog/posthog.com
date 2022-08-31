@@ -210,7 +210,7 @@ You can change how group types are displayed in your Insights interface and thro
 
 The PostHog UI identifies a group using the `name` property. If no `name` property is found, it falls back to the group key.
 
-So, if you originally call group using...
+So, if you call `posthog.group` as below:
 
 ```
 posthog.group('the_example_group', 'group-uuid', {
