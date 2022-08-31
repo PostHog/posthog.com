@@ -21,7 +21,7 @@ If you want to gain even more of an advantage, I would encourage you to share th
 
 There are probably some startups where this doesn't work. Perhaps in design led companies, where control might be a competitive advantage and is more important than autonomy, or in companies that aren't managed consistently - you can't share a non-existent pay structure, for example (and, yes, it is hard work to implement something like that from very early, but we felt that work was worth it to prevent unfairness and employee churn).
 
-## Why this matters
+## Why transparency matters
 
 This section is a bit effusive. Skip it if you're not in the mood for that.
 
