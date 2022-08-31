@@ -206,6 +206,33 @@ import GroupsFeatureFlagsNode from './snippets/groups-flags-node.mdx'
 
 You can change how group types are displayed in your Insights interface and throughout PostHog on Project settings.
 
+## Naming groups
+
+The PostHog UI will identify a group within its type using its ID. Unless (or until) you send a `name` property for that group. And will then use that `name`.
+
+So, if you originally call group using...
+
+```
+posthog.group('the_example_group', 'group-uuid', {
+    uuid: 'group-uuid',
+    company_name: 'the company_name property',
+})
+```
+
+The UI will have an example_group tab and a group showing as 'group-uuid'.
+
+If either instead or subsequently you call...
+
+```
+posthog.group('the_example_group', 'group-uuid', {
+    uuid: 'group-uuid',
+    name: 'the name property',
+    company_name: 'the company_name property',
+})
+```
+
+Then you will see 'the name property' to identify that group.
+
 # Limitations
 
 -   A maximum of 5 group types can be created per project
