@@ -51,7 +51,7 @@ It covers:
 * **Revenue updates**, because this is an output of all the other teams working well
 * **OKR updates**, so we can share progress for each key result, and any extra context
 * **Important policy updates**, all of which is included in our online [company handbook](/handbook) 
-* **Demos** of coll things people have built or are working on
+* **Demos** of cool things people have built or are working on
 
 ## How we share our financial performance
 
