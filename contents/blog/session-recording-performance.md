@@ -6,7 +6,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: ["mathew-pregasen"]
-featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImage: ../images/blog/session-recording-performance/session recording.jpg
 featuredImageType: full
 categories: ["Inside PostHog", "Engineering"]
 ---
