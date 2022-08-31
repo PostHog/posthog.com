@@ -1,60 +1,135 @@
 import React from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import Highlight, { defaultProps, Language } from 'prism-react-renderer'
-import theme from './theme'
 import { generateRandomHtmlId, getCookie } from '../../lib/utils'
 import { Listbox, Tab } from '@headlessui/react'
 import { SelectorIcon } from '@heroicons/react/outline'
 
-type CodeBlockProps = {
-    title?: React.ReactNode
-    children: {
-        name?: string
-        language: Language
-        code: string
-    }[]
+import theme from './theme'
 
-    selectorStyle?: 'dropdown' | 'tabs'
-    showTitle?: boolean
+const languageMap: Record<string, { language: string; label: string }> = {
+    js: {
+        language: 'javascript',
+        label: 'JavaScript',
+    },
+    bash: {
+        language: 'bash',
+        label: 'Bash',
+    },
+    android: {
+        language: 'clike',
+        label: 'Android',
+    },
+    ruby: {
+        language: 'ocaml',
+        label: 'Ruby',
+    },
+    objectivec: {
+        language: 'clike',
+        label: 'Objective-C',
+    },
+    html: {
+        language: 'html',
+        label: 'HTML',
+    },
+}
+
+type LanguageOption = {
+    label?: string
+    language: string
+    code: string
+}
+
+type CodeBlockProps = {
+    label?: React.ReactNode
+    selector?: 'dropdown' | 'tabs'
+    showLabel?: boolean
     showLineNumbers?: boolean
     showCopy?: boolean
+
+    onChange: (language: LanguageOption) => void
+    currentLanguage: LanguageOption
+    children: LanguageOption[]
 }
 
-type MdxCodeBlockProps = {
-    children: {
-        key?: string | null
-        props: {
-            children: string
+type MdxCodeBlock = {
+    selector?: 'dropdown' | 'tabs'
+    showTitle?: boolean
+    showCopy?: boolean
+    children: MdxCodeBlockChildren[] | MdxCodeBlockChildren
+}
+
+// Optional metastring properties
+type MetaStringProps = {
+    metastring?: string
+    file?: string
+    showLineNumbers?: boolean
+    label?: string
+    unavailable?: boolean
+}
+
+type MdxCodeBlockChildren = {
+    props: {
+        mdxType: string
+        className: string
+        label?: string
+        children: {
+            key: string | null
+            props: {
+                className: string
+                mdxType: string
+                children: string
+            } & MetaStringProps
         }
-        [extraProps: string]: any // 'children' has other props that we don't use here
-    }
+    } & MetaStringProps
 }
 
-export const MdxCodeBlock: React.FC<MdxCodeBlockProps> = ({ children }) => {
-    const className = children.props.className || ''
-    const matches = className.match(/language-(?<lang>.*)/)
-    const language = matches && matches.groups && matches.groups.lang ? matches.groups.lang : ''
+export const MdxCodeBlock = ({ children, ...props }: MdxCodeBlock) => {
+    const childArray = Array.isArray(children) ? children : [children]
+
+    const languages = childArray
+        .filter((child) => child.props.mdxType === 'pre' || child.props.mdxType === 'code')
+        .map((child) => {
+            const {
+                className = '',
+                label,
+                children,
+            } = child.props.mdxType === 'code' ? child.props : child.props.children.props
+
+            const matches = className.match(/language-(?<lang>.*)/)
+            const language = matches && matches.groups && matches.groups.lang ? matches.groups.lang : ''
+
+            return {
+                label,
+                language,
+                code: children as string,
+            }
+        })
+
+    // This isn't great practice as it means hooks are renderered conditionally
+    if (languages.length === 0) {
+        return null
+    }
+
+    const [currentLanguage, setCurrentLanguage] = React.useState<LanguageOption>(languages[0])
 
     return (
-        <CodeBlock showTitle={true}>
-            {[
-                {
-                    name: language,
-                    language,
-                    code: children.props.children,
-                },
-            ]}
+        <CodeBlock currentLanguage={currentLanguage} onChange={setCurrentLanguage} {...props}>
+            {children}
         </CodeBlock>
     )
 }
 
 export const CodeBlock = ({
-    title,
-    children: languages,
-    selectorStyle = 'dropdown',
-    showTitle = true,
+    label,
+    selector = 'dropdown',
+    showLabel = true,
     showCopy = true,
     showLineNumbers = false,
+
+    children: languages,
+    currentLanguage,
+    onChange,
 }: CodeBlockProps) => {
     if (languages.length < 0) {
         return null
@@ -62,7 +137,6 @@ export const CodeBlock = ({
 
     const codeBlockId = generateRandomHtmlId()
 
-    const [currentLanguage, setCurrentLanguage] = React.useState(languages[0] || {})
     const [tooltipVisible, setTooltipVisible] = React.useState(false)
 
     const [projectName, setProjectName] = React.useState<string | null>(null)
@@ -86,10 +160,10 @@ export const CodeBlock = ({
     }
 
     return (
-        <div className="relative my-2 rounded overflow-hidden">
-            <div className="bg-black/90 text-gray px-3 py-1.5 text-sm flex items-center w-full">
-                {selectorStyle === 'tabs' && languages.length > 1 ? (
-                    <Tab.Group onChange={(index) => setCurrentLanguage(languages[index])}>
+        <div className="relative my-2">
+            <div className="bg-black/90 text-gray px-3 py-1.5 text-sm flex items-center w-full rounded-t">
+                {selector === 'tabs' && languages.length > 1 ? (
+                    <Tab.Group onChange={(index) => onChange(languages[index])}>
                         <Tab.List className="flex items-center space-x-5">
                             {languages.map((option) => (
                                 <Tab
@@ -98,21 +172,27 @@ export const CodeBlock = ({
                                         `cursor-pointer text-sm py-0.5 ${selected ? 'font-semibold text-white/70' : ''}`
                                     }
                                 >
-                                    {option.name || option.language}
+                                    {option.label || languageMap[option.language]?.label || option.language}
                                 </Tab>
                             ))}
                         </Tab.List>
                     </Tab.Group>
-                ) : showTitle ? (
-                    <div className="min-w-0 mr-8">{title || currentLanguage.name}</div>
+                ) : showLabel ? (
+                    <div className="min-w-0 mr-8">
+                        {label || languageMap[currentLanguage.language]?.label || currentLanguage.language}
+                    </div>
                 ) : null}
 
                 <div className="shrink-0 ml-auto flex items-center divide-x divide-gray-accent-dark">
-                    {selectorStyle === 'dropdown' && languages.length > 1 ? (
+                    {selector === 'dropdown' && languages.length > 1 ? (
                         <div className="relative mr-2">
-                            <Listbox value={currentLanguage} onChange={setCurrentLanguage}>
+                            <Listbox value={currentLanguage} onChange={(language) => onChange(language)}>
                                 <Listbox.Button className="flex items-center space-x-1.5 text-gray">
-                                    <span>{currentLanguage.name || currentLanguage.language}</span>
+                                    <span>
+                                        {currentLanguage.label ||
+                                            languageMap[currentLanguage.language]?.label ||
+                                            currentLanguage?.language}
+                                    </span>
 
                                     <SelectorIcon className="w-4 h-4" />
                                 </Listbox.Button>
@@ -124,7 +204,7 @@ export const CodeBlock = ({
                                             value={option}
                                             className="cursor-pointer text-sm hover:bg-black/40 w-full pl-8 pr-2 py-0.5"
                                         >
-                                            {option.name || option.language}
+                                            {option.label || option.language}
                                         </Listbox.Option>
                                     ))}
                                 </Listbox.Options>
@@ -175,11 +255,11 @@ export const CodeBlock = ({
             <Highlight
                 {...defaultProps}
                 code={currentLanguage.code.trim()}
-                language={currentLanguage.language}
+                language={(languageMap[currentLanguage.language]?.language || 'clike') as Language}
                 theme={theme}
             >
                 {({ className, style, tokens, getLineProps, getTokenProps }) => (
-                    <pre className="w-full m-0 p-0 rounded-none" style={{ ...style }}>
+                    <pre className="w-full m-0 p-0 rounded-t-none rounded-b overflow-hidden" style={{ ...style }}>
                         <div className="flex" id={codeBlockId}>
                             {showLineNumbers && (
                                 <pre className="m-0 py-4 pl-4 pr-2 inline-block">

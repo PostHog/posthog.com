@@ -161,6 +161,7 @@ export default function Handbook({
         inlineCode: InlineCode,
         blockquote: Blockquote,
         pre: MdxCodeBlock,
+        MultiLanguage: MdxCodeBlock,
         h1: (props) => Heading({ as: 'h1', ...props }),
         h2: (props) => Heading({ as: 'h2', ...props }),
         h3: (props) => Heading({ as: 'h3', ...props }),

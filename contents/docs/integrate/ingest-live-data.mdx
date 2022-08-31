@@ -78,13 +78,39 @@ import JSCaptureIgnoreElements from './client/js/snippets/capture-ignore-element
 <JSAutoCapture />
 <JSCaptureIgnoreElements />
 
-import { CaptureUserEvents } from "./\_snippets/capture-user-events.tsx"
-
 # Capture user events
 
 This allows you to send more context than the default event info that PostHog captures whenever a user does something. In that case, you can send an event with any metadata you may wish to add.
 
-<CaptureUserEvents />
+<MultiLanguage selector="tabs">
+
+```javascript
+posthog.capture('[event-name]', {property1: 'value', property2: 'another value'});
+```
+
+```android
+PostHog.with(this)
+       .capture("Button B Clicked", new Properties()
+                                        .putValue("color", "blue")
+                                        .putValue("icon", "new2-final"));
+```
+
+```ios
+// In swift
+posthog.capture("Signed Up", properties: ["plan": "Pro++"])
+
+// In objective-c
+[[PHGPostHog sharedPostHog] capture:@"Signed Up" properties:@{ @"plan": @"Pro++" }];
+```
+
+```react-native
+posthog.capture('Button B Clicked', {
+    color: "blue",
+    icon: "new2-final"
+})
+```
+
+</MultiLanguage>
 
 A `capture` call requires:
 
