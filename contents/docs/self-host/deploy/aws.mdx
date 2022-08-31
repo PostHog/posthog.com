@@ -33,7 +33,7 @@ First, we need to set up a Kubernetes cluster (see the official AWS [documentati
 
 Here's the minimal required `values.yaml` that we'll be using later. You can find an overview of the parameters that can be configured during installation under [chart configuration](/docs/self-host/deploy/configuration).
 
-```yaml
+```yaml file=values.yaml
 cloud: 'aws'
 ingress:
     hostname: <your-hostname>
@@ -46,7 +46,7 @@ cert-manager:
 Note: if you are planning to use our [GeoIP integration](https://posthog.com/integrations/geoip), please also add the snippet below
 to enable proxy protocol support in the load balancer and in the `nginx` ingress controller:
 
-```
+```yaml
 #
 # For AWS ELB in L4 (TCP) mode, we need to enable some additional config
 # in the ingress controller in order to get the proper IP address forwarded
