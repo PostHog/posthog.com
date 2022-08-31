@@ -19,7 +19,7 @@ One issue that’s been elusive is performance. Most SR providers will pledge th
 
 Today, we are going to scientifically explore if session recording impacts browser performance.
 
-> author profile here
+> Mathew Pregasen is an author and coder who works with early-stage startups. He was formerly CEO & Co-Founder of Quickcard (YC W20).
 
 ### A grounding rule: there is no such thing as no impact.
 
