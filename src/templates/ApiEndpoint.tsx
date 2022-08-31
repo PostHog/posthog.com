@@ -372,8 +372,6 @@ response = requests.${item.httpVerb}(
 
     const currentLanguage = languages.find((l) => l.language === exampleLanguage) || languages[0]
 
-    console.log(currentLanguage)
-
     return (
         <CodeBlock
             currentLanguage={currentLanguage}

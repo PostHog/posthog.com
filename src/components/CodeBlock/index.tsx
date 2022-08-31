@@ -230,8 +230,6 @@ export const CodeBlock = ({
     const [projectName, setProjectName] = React.useState<string | null>(null)
     const [projectToken, setProjectToken] = React.useState<string | null>(null)
 
-    console.log(currentLanguage)
-
     const displayName = label || languageMap[currentLanguage.language]?.label || currentLanguage.language
 
     React.useEffect(() => {
