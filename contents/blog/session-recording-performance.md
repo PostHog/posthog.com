@@ -1,6 +1,6 @@
 ---
 date: 2022-08-31
-title: "Demystifying session recording – examining the (trivial) performance hit"
+title: "Session Recording Demystified: Examining the (trivial) performance hit"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -87,9 +87,7 @@ In all three cases, MutationObserver, Mutation ObserverRegistration, and all rel
 
 > **Shallow Side** is an object’s size. 
 >
-> **Retained Size** measures the cumulative size of an object and all objects it actively references. 
->
-> **Retained Size** is more relevant when measuring an object’s heap impact.
+> **Retained Size** measures the cumulative size of an object and all objects it actively references and is more relevant when measuring an object’s heap impact.
 
 Quite obviously, MutationObserver made near-zero impact. For reference, Commandbar’s total heap was over 60,000,000 bytes (60MB) large. That makes MutationRecord’s footprint a … **+0.00043%** addition to memory. **Nothing**. 
 
@@ -137,7 +135,7 @@ Average Packet Size: 309 bytes
 
 Average Packet Size: 309 bytes
 
-All of the gzip-compressed transmissions? That’s **rrweb** / **PostHog** relaying the mutation data to a Posthog host for storage. 
+All of the gzip-compressed transmissions? That’s **rrweb** / **PostHog** relaying the mutation data to a PostHog host for storage. 
 
 You will notice two things. 
 
