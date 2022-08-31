@@ -1,7 +1,7 @@
 import { Link } from 'react-scroll'
 import Scrollspy from 'react-scrollspy'
 import '@fontsource/source-code-pro'
-import { CodeBlock } from 'components/CodeBlock'
+import { CodeBlock, SingleCodeBlock } from 'components/CodeBlock'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import 'core-js/features/array/at'
@@ -235,16 +235,16 @@ function Parameters({ item, objects }) {
     return (
         <>
             {pathParams?.length > 0 && (
-                <>
+                <div>
                     <h4>Path Parameters</h4>
                     <Params params={pathParams} objects={objects} />
-                </>
+                </div>
             )}
             {queryParams?.length > 0 && (
-                <>
+                <div>
                     <h4>Query Parameters</h4>
                     <Params params={queryParams} objects={objects} />
-                </>
+                </div>
             )}
         </>
     )
@@ -258,9 +258,8 @@ function RequestBody({ item, objects }) {
     const object = objects.schemas[objectKey]
 
     return (
-        <>
+        <div>
             <h4>Request Parameters</h4>
-            <br />
             <Params
                 params={Object.entries(object.properties)
                     .map(([name, schema]) => {
@@ -272,7 +271,7 @@ function RequestBody({ item, objects }) {
                     .filter((item) => !item.schema.readOnly)}
                 objects={objects}
             />
-        </>
+        </div>
     )
 }
 
@@ -288,7 +287,7 @@ function ResponseBody({ item, objects }) {
         <>
             <h4>Response</h4>
             <div className="response-wrapper">
-                <button className="mt-2 text-sm" onClick={() => setShowResponse(!showResponse)}>
+                <button className="mt-2 text-sm text-red font-semibold" onClick={() => setShowResponse(!showResponse)}>
                     {showResponse ? 'Hide' : 'Show'} response
                 </button>
                 <br />
@@ -338,44 +337,48 @@ function RequestExample({ item, objects, exampleLanguage, setExampleLanguage }) 
 
     const languages = [
         {
-            name: 'cURL',
+            label: 'cURL',
             language: 'bash',
             code: `
             export POSTHOG_PERSONAL_API_KEY=[your personal api key]
-            curl ${item.httpVerb === 'delete' ? ' -X DELETE ' : item.httpVerb == 'patch' ? '-X PATCH ' : ''}${
+curl ${item.httpVerb === 'delete' ? ' -X DELETE ' : item.httpVerb == 'patch' ? '-X PATCH ' : ''}${
                 item.httpVerb === 'post' ? "\n    -H 'Content-Type: application/json'" : ''
             }\\
-                -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \\
-                https://app.posthog.com${path}${params.map((item) => `\\\n\t-d ${item[0]}=${JSON.stringify(item[1])}`)}
-        `,
+    -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \\
+    https://app.posthog.com${path}${params.map((item) => `\\\n\t-d ${item[0]}=${JSON.stringify(item[1])}`)}
+            `,
         },
         {
-            name: 'Python',
+            label: 'Python',
             language: 'python',
             code: `
-            api_key = "[your personal api key]"
-            project_id = "[your project id]"
-            response = requests.${item.httpVerb}(
-                "https://app.posthog.com${path}".format(
-                    project_id=project_id${path.includes('{id}') ? ',\n\t\tid=response["id"]' : ''}
-                ),
-                headers={"Authorization": "Bearer {}".format(api_key)},${
-                    params.length > 0
-                        ? `\n\tdata=${JSON.stringify(Object.fromEntries(params), null, '\t')
-                              .replaceAll('\n', '\n\t')
-                              .replace('\n}', '\n\t}')}`
-                        : ''
-                }
-            )${item.httpVerb !== 'delete' ? '.json()' : ''}
-        `,
+api_key = "[your personal api key]"
+project_id = "[your project id]"
+response = requests.${item.httpVerb}(
+    "https://app.posthog.com${path}".format(
+        project_id=project_id${path.includes('{id}') ? ',\n\t\tid=response["id"]' : ''}
+    ),
+    headers={"Authorization": "Bearer {}".format(api_key)},${
+        params.length > 0
+            ? `\n\tdata=${JSON.stringify(Object.fromEntries(params), null, '\t')
+                  .replaceAll('\n', '\n\t')
+                  .replace('\n}', '\n\t}')}`
+            : ''
+    }
+)${item.httpVerb !== 'delete' ? '.json()' : ''}
+            `,
         },
     ]
 
+    const currentLanguage = languages.find((l) => l.language === exampleLanguage) || languages[0]
+
+    console.log(currentLanguage)
+
     return (
         <CodeBlock
-            currentLanguage={languages.find((l) => l.language === exampleLanguage)}
+            currentLanguage={currentLanguage}
             onChange={({ language }) => setExampleLanguage(language)}
-            title={
+            label={
                 <div className="code-example flex text-xs space-x-1.5 my-1">
                     <code className={`shrink-0 text-${mapVerbsColor[item.httpVerb]}`}>
                         {item.httpVerb.toUpperCase()}{' '}
@@ -413,14 +416,13 @@ function ResponseExample({ objects, objectKey }) {
     )
 
     return (
-        <CodeBlock showCopy={false} title={<span className="text-xs font-semibold">RESPONSE</span>}>
-            {[
-                {
-                    language: 'javascript',
-                    code: response,
-                },
-            ]}
-        </CodeBlock>
+        <SingleCodeBlock
+            showCopy={false}
+            label={<span className="text-xs font-semibold">RESPONSE</span>}
+            language="javascript"
+        >
+            {response}
+        </SingleCodeBlock>
     )
 }
 
@@ -515,7 +517,7 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
                                 className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start"
                                 id={pathID(item.httpVerb, item.pathName)}
                             >
-                                <div>
+                                <div className="space-y-6">
                                     <h2>{generateName(item)}</h2>
                                     <ReactMarkdown>
                                         {!item.description || item.description === items[0].operationSpec?.description
