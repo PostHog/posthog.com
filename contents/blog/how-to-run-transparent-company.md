@@ -1,5 +1,5 @@
 ---
-date: 2022-07-26
+date: 2022-08-31
 title: "How to run a transparent startup"
 rootPage: /blog
 sidebar: Blog
@@ -13,7 +13,7 @@ featuredImageType: full
 
 There really hasn't been a single situation where transparency hasn't been to our company's advantage.
 
-Most companies seem to share when necessary but not by default. I hope this piece changes that because, as a startup, you've done something wrong if you don't trust your own team.
+Most companies seem to share when necessary but not by default. I hope this post changes that because, as a startup, you've done something wrong if you don't trust your own team - so it should be possible for more people.
 
 It's worth noting that these are my views on how and why more startups should offer greater _internal_ transparency. I've focused on internal transparency because I believe it can be realistically practiced and helps the most people. I've written about startups because that's what I know.
 
@@ -33,9 +33,7 @@ Transparency works particularly well in an all remote company. Like ours. That's
 
 We didn't expect this, but transparency makes hiring great talent much easier. Since we share most of the below publicly, potential hires can trust us much more easily, and it makes us stand apart from the thousands of other startups. Transparency makes the whole company a joint project, between our team and the community around it too.
 
-## General communication
-
-### Tool minimalism
+## Avoiding context overload
 
 There will be so much context available, that you need to be more mindful of making it easy to find stuff.
 
@@ -45,9 +43,7 @@ Broadly for us this means:
 
 * Pull Requests > Issues > Public Slack Channels > Private groups or Slack DMs > Email
 
-### Highlighting what matters
-
-We use a weekly 30 mins all hands (including written notes) to highlight across everything being shared what really matters across all teams.
+We also use a weekly 30 mins all hands (including written notes) to highlight across everything being shared what really matters across all teams.
 
 It has:
 
@@ -57,7 +53,7 @@ It has:
 * Handpicked list of any important policy changes from our handbook
 * Demos - if people have something cool to show that they built, they can show it off
 
-## Finance
+## How we share our financial performance
 
 * Fundraising
 
@@ -75,7 +71,7 @@ At some stage, we'll do more here - letting people model what options are worth 
 
 This should be copy pasta from your board slides. We share the monthly reports our accountants create with our team.
 
-## Building product
+## How we build product openly
 
 We're split into small teams. Each small team runs their own sprints. They share:
 
@@ -86,19 +82,22 @@ We're split into small teams. Each small team runs their own sprints. They share
 
 We have an _executive_ small team too, which works exactly like all the other small teams. This is probably the _most_ impactful team's work to share with everyone else, yet it's probably the least likely to be shared in most companies.
 
-## Strategy
+## How we share our strategy
+
+Another really simple thing to share, with really high impact.
 
 * OKRs, including _why_ they were picked
 * Board meeting slides
 * Board meeting notes (since the meeting's primary purpose is to cover strategic topics, so the outcome matters too)
+* [Long-term vision](../handbook/strategy/strategy#tldr)
 
-## People
+## How we are open around people topics
 
 * Pay structure
 
 Overall, our pay and communication around it, is designed to make pay "get out of the way". 
 
-We have a system (TODO INSERT LINK TO CALCULATOR) for paying everyone here. This means we can justify for every team member exactly why they're paid. We proactively review every team member compared to this every few months and make adjustments if the market or their performance has changed.
+We have [a system for paying](../handbook/people/compensation) everyone here. This means we can justify for every team member exactly why they're paid. We proactively review every team member compared to this every few months and make adjustments if the market or their performance has changed.
 
 We don't share individuals' pay details with each other as it's the only area we don't want employee feedback, and we don't make all changes at the same time. Quite simply, if people influence each others' pay, then it would make the process of giving and receiving direct feedback harder. We don't want people to have to be defensive with each other.
 
@@ -118,13 +117,11 @@ This sounds scary to share, but for the rest of the team, more clarity rather th
 
 * Holidays
 
-Sharing this one means people realize more easily if their colleagues are working or not. We use CharlieHR integrated with Slack to do this.
+Sharing this one means people realize more easily if their colleagues are working or not. We use [CharlieHR](https://charliehr.com/) integrated with [Slack](https://slack.com/) to do this.
 
 * Personal readmes
 
-These are a fun one - team members write out how they can help others, what their focus is, and quirks of working with them. We borrowed the idea from Sid's at GitLab, but extended it to everyone. We make them optional, but quite a few people do them.
-
-TODO INSERT SOME EXAMPLE PERSONAL READMES
+These are a fun one - team members write out how they can help others, what their focus is, and quirks of working with them. We borrowed the idea from [Sid's at GitLab](https://about.gitlab.com/handbook/ceo/), but extended it to everyone. We make them optional, but quite a few people do them. [Joe's is particularly nicely written](../handbook/company/team/joe-martin). 
 
 # You don't have to do this all at once
 
