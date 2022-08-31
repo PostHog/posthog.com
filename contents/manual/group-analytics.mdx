@@ -208,7 +208,7 @@ You can change how group types are displayed in your Insights interface and thro
 
 ## Naming groups
 
-The PostHog UI will identify a group within its type using its ID. Unless (or until) you send a `name` property for that group. And will then use that `name`.
+The PostHog UI identifies a group using the `name` property. If no `name` property is found, it falls back to the group key.
 
 So, if you originally call group using...
 
