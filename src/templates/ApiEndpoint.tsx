@@ -336,34 +336,45 @@ function RequestExample({ item, objects, exampleLanguage, setExampleLanguage }) 
 
     const path: string = item.pathName.replaceAll('{', ':').replaceAll('}', '')
 
-    const curl = `
-export POSTHOG_PERSONAL_API_KEY=[your personal api key]
-curl ${item.httpVerb === 'delete' ? ' -X DELETE ' : item.httpVerb == 'patch' ? '-X PATCH ' : ''}${
-        item.httpVerb === 'post' ? "\n    -H 'Content-Type: application/json'" : ''
-    }\\
-    -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \\
-    https://app.posthog.com${path}${params.map((item) => `\\\n\t-d ${item[0]}=${JSON.stringify(item[1])}`)}
-    `
-
-    const python = `
-api_key = "[your personal api key]"
-project_id = "[your project id]"
-response = requests.${item.httpVerb}(
-    "https://app.posthog.com${path}".format(
-        project_id=project_id${path.includes('{id}') ? ',\n\t\tid=response["id"]' : ''}
-    ),
-    headers={"Authorization": "Bearer {}".format(api_key)},${
-        params.length > 0
-            ? `\n\tdata=${JSON.stringify(Object.fromEntries(params), null, '\t')
-                  .replaceAll('\n', '\n\t')
-                  .replace('\n}', '\n\t}')}`
-            : ''
-    }
-)${item.httpVerb !== 'delete' ? '.json()' : ''}
-    `
+    const languages = [
+        {
+            name: 'cURL',
+            language: 'bash',
+            code: `
+            export POSTHOG_PERSONAL_API_KEY=[your personal api key]
+            curl ${item.httpVerb === 'delete' ? ' -X DELETE ' : item.httpVerb == 'patch' ? '-X PATCH ' : ''}${
+                item.httpVerb === 'post' ? "\n    -H 'Content-Type: application/json'" : ''
+            }\\
+                -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \\
+                https://app.posthog.com${path}${params.map((item) => `\\\n\t-d ${item[0]}=${JSON.stringify(item[1])}`)}
+        `,
+        },
+        {
+            name: 'Python',
+            language: 'python',
+            code: `
+            api_key = "[your personal api key]"
+            project_id = "[your project id]"
+            response = requests.${item.httpVerb}(
+                "https://app.posthog.com${path}".format(
+                    project_id=project_id${path.includes('{id}') ? ',\n\t\tid=response["id"]' : ''}
+                ),
+                headers={"Authorization": "Bearer {}".format(api_key)},${
+                    params.length > 0
+                        ? `\n\tdata=${JSON.stringify(Object.fromEntries(params), null, '\t')
+                              .replaceAll('\n', '\n\t')
+                              .replace('\n}', '\n\t}')}`
+                        : ''
+                }
+            )${item.httpVerb !== 'delete' ? '.json()' : ''}
+        `,
+        },
+    ]
 
     return (
         <CodeBlock
+            currentLanguage={languages.find((l) => l.language === exampleLanguage)}
+            onChange={({ language }) => setExampleLanguage(language)}
             title={
                 <div className="code-example flex text-xs space-x-1.5 my-1">
                     <code className={`shrink-0 text-${mapVerbsColor[item.httpVerb]}`}>
@@ -385,18 +396,7 @@ response = requests.${item.httpVerb}(
                 </div>
             }
         >
-            {[
-                {
-                    name: 'cURL',
-                    language: 'bash',
-                    code: curl,
-                },
-                {
-                    name: 'Python',
-                    language: 'python',
-                    code: python,
-                },
-            ]}
+            {languages}
         </CodeBlock>
     )
 }
