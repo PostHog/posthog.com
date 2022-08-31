@@ -29,7 +29,7 @@ And then install the dependencies with the command: `php composer.phar install`
 
 In your app, set your API key before making any calls.
 
-```js
+```php
 PostHog::init("<ph_project_api_key>",
   array('host' => '<ph_instance_address>') // You can remove this line if you're using app.posthog.com
 );
@@ -55,7 +55,7 @@ Optionally you can submit:
 
 For example:
 
-```js
+```php
 PostHog::capture(array(
   'distinctId' => 'user:123',
   'event' => 'movie played',
@@ -74,7 +74,7 @@ To set properties on your users via an event, you can leverage the event propert
 
 **Example**
 
-```c
+```php
 PostHog::capture(array(
   'distinctId' => 'user:123',
   'event' => 'movie played',
@@ -94,7 +94,7 @@ When capturing an event, you can pass a property called `$set` as an event prope
 
 **Example**
 
-```c
+```php
 PostHog::capture(array(
   'distinctId' => 'user:123',
   'event' => 'movie played',
@@ -124,7 +124,7 @@ An `identify` call requires:
 
 For example:
 
-```js
+```php
 PostHog::identify(array(
   'distinctId' => 'user:123',
   'properties' => array(
@@ -152,7 +152,7 @@ An alias call requires:
 
 For example:
 
-```js
+```php
 PostHog::alias(array(
   'distinctId' => 'user:123',
   'alias' => 'user:12345'
@@ -163,7 +163,7 @@ PostHog::alias(array(
 
 If you're aiming for a full back-end implementation of PostHog, you can send pageviews from your backend
 
-```js
+```php
 PostHog::capture(array(
   'distinctId' => 'user:123',
   'event' => '$pageview',
@@ -179,7 +179,7 @@ PostHog::capture(array(
 
 To check if a feature flag is enabled for a given user, use `isFeatureEnabled`, like so:
 
-```js
+```php
 if (PostHog::isFeatureEnabled('my-amazing-flag', 'some distinct id')) {
     // do something here
 }
@@ -189,7 +189,7 @@ if (PostHog::isFeatureEnabled('my-amazing-flag', 'some distinct id')) {
 
 if you're using multivariate feature flags, you can also get not just whether the flag is enabled, but what value its enabled to.
 
-```js
+```php
 PostHog::getFeatureFlag('multivariate-flag', 'some distinct id');
 // returns string or true or false or null
 ```
@@ -200,14 +200,14 @@ Sometimes, you might want to evaluate feature flags using properties that haven'
 
 FOr example, if the `beta-feature` depends on the `is_authorized` property, and you know the value of the property, you can tell PostHog to use this property, like so:
 
-```js
+```php
 PostHog::getFeatureFlag('beta-feature', 'some distinct id', [], ["is_authorized" => true])
 // the third argument is for groups
 ```
 
 The same holds for groups. If you have a group name `organisation`, you can add properties like so:
 
-```js
+```php
 PostHog::getFeatureFlag('beta-feature', 'some distinct id', ["organisation" => "some-company"], [], ["organisation" => ["is_authorized" => true]])
 ```
 
@@ -215,7 +215,7 @@ PostHog::getFeatureFlag('beta-feature', 'some distinct id', ["organisation" => "
 
 You can also get all known flag values as well. This is useful when you want to seed a frontend client with initial known flags. Like all methods above, this also takes optional person and group properties, if known.
 
-```js
+```php
 PostHog::getAllFlags('distinct id')
 ```
 
@@ -228,7 +228,7 @@ All feature flag evaluation requires an API request to your PostHog servers to g
 2. You must know all person or group properties the flag depends on.
 Then, the flag can be evaluated locally. The method signature looks exactly like above.
 
-```js
+```php
 PostHog::getFeatureFlag('beta-feature', 'some distinct id', [], ["is_authorized" => true])
 // the third argument is for groups
 ```
@@ -244,7 +244,7 @@ PostHog 1.31.0 introduced support for [group analytics](/docs/user-guides/group-
 
 -   Capture an event and associate it with a group
 
-```js
+```php
 PostHog::capture(array(
     'distinctId' => '[distinct id]',
     'event' => 'some event',
@@ -254,7 +254,7 @@ PostHog::capture(array(
 
 -   Update properties on a group
 
-```js
+```php
 PostHog::groupIdentify(array(
     'groupType' => 'company',
     'groupKey' => 'id:5',
