@@ -236,25 +236,26 @@ export const CodeBlock = ({
                     ) : null}
 
                     {showCopy && (
-                        <div className="relative flex items-center justify-center inline-block pl-2">
+                        <div className="relative flex items-center justify-center pl-2">
                             <button
                                 onClick={copyToClipboard}
-                                className="text-gray dark:text-primary-dark p-1 -m-1 hover:bg-black/40 rounded"
+                                className="text-primary-dark/50 hover:text-primary-dark/75 p-1 -m-1 hover:bg-black/40 rounded relative hover:scale-[1.07] active:top-[.5px] active:scale-[.99]"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="24"
                                     height="24"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    className="w-4 h-4"
+                                    viewBox="0 0 18 18"
+                                    className="w-4 h-4 fill-current"
                                 >
-                                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
-                                    <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
+                                    <g clipPath="url(#a)">
+                                        <path d="M3.079 5.843h2.103V2.419c0-.58.236-1.106.618-1.487A2.1 2.1 0 0 1 7.287.313h7.634c.58 0 1.106.237 1.487.619a2.1 2.1 0 0 1 .618 1.487v7.633a2.1 2.1 0 0 1-.618 1.488 2.1 2.1 0 0 1-1.487.618h-2.103v3.424c0 .58-.236 1.106-.618 1.487a2.1 2.1 0 0 1-1.487.618H3.079c-.58 0-1.106-.236-1.487-.618a2.1 2.1 0 0 1-.618-1.487V7.948c0-.58.236-1.106.618-1.487a2.1 2.1 0 0 1 1.487-.618Zm3.28 0h4.354c.58 0 1.106.236 1.487.618a2.1 2.1 0 0 1 .618 1.487v3.033h2.103a.925.925 0 0 0 .655-.273.926.926 0 0 0 .274-.655V2.418a.925.925 0 0 0-.274-.656.926.926 0 0 0-.655-.273H7.287a.924.924 0 0 0-.655.273.926.926 0 0 0-.273.656v3.424Zm-.586 1.176H3.077a.924.924 0 0 0-.655.274.926.926 0 0 0-.273.655v7.634c0 .254.104.487.273.655.169.169.401.274.655.274h7.634a.924.924 0 0 0 .656-.274.926.926 0 0 0 .273-.655V7.948a.925.925 0 0 0-.273-.655.926.926 0 0 0-.656-.274h-4.94.002Z" />
+                                    </g>
+                                    <defs>
+                                        <clipPath id="a">
+                                            <path d="M0 0h18v18H0z" />
+                                        </clipPath>
+                                    </defs>
                                 </svg>
                             </button>
 
