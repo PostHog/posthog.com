@@ -14,6 +14,7 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
     const ProductTemplate = path.resolve(`src/templates/Product.js`)
     const HostHogTemplate = path.resolve(`src/templates/HostHog.js`)
     const Question = path.resolve(`src/templates/Question.js`)
+    const SqueakTopic = path.resolve(`src/templates/SqueakTopic.tsx`)
 
     // Tutorials
     const TutorialTemplate = path.resolve(`src/templates/tutorials/Tutorial.tsx`)
@@ -226,6 +227,13 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
             questions: allQuestion {
                 nodes {
                     id
+                }
+            }
+            squeakTopics: allSqueakTopic {
+                nodes {
+                    label
+                    topicId
+                    slug
                 }
             }
         }
@@ -477,6 +485,18 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
             component: Question,
             context: {
                 id,
+            },
+        })
+    })
+    result.data.squeakTopics.nodes.forEach((node) => {
+        const { id, slug, label } = node
+        createPage({
+            path: `questions/${slug}`,
+            component: SqueakTopic,
+            context: {
+                id,
+                topics: result.data.squeakTopics.nodes,
+                label,
             },
         })
     })

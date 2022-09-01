@@ -9,6 +9,7 @@ import { initKea, wrapElement } from './kea'
 import './src/styles/global.css'
 import HandbookLayout from './src/templates/Handbook'
 import Product from './src/templates/Product'
+import SqueakTopic from './src/templates/SqueakTopic'
 
 initKea(false)
 
@@ -18,9 +19,10 @@ export const onRouteUpdate = ({ location, prevLocation }) => {
     // Checking for prevLocation prevents this from happening twice
     if (typeof window !== 'undefined' && prevLocation) {
         var slug = location.pathname.substring(1)
-        var theme = /^handbook|^docs|^blog|^integrations|^tutorials|^questions|^manual|^using-posthog/.test(slug)
-            ? window.__theme
-            : 'light'
+        var theme =
+            /^handbook|^docs|^blog|^integrations|^tutorials|^questions|^manual|^using-posthog|^questions\//.test(slug)
+                ? window.__theme
+                : 'light'
         document.body.className = theme
     }
 }
@@ -31,6 +33,8 @@ export const wrapPageElement = ({ element, props }) => {
         <HandbookLayout {...props} />
     ) : /^product\//.test(slug) ? (
         <Product {...props} />
+    ) : /^questions\//.test(slug) ? (
+        <SqueakTopic {...props} />
     ) : (
         element
     )

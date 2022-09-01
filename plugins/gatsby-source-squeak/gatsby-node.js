@@ -1,5 +1,6 @@
 const { createRemoteFileNode } = require(`gatsby-source-filesystem`)
 const fetch = require('node-fetch')
+const slugify = require('slugify')
 
 exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }, pluginOptions) => {
     const { apiHost, organizationId } = pluginOptions
@@ -63,6 +64,26 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }, plu
         }
         createNode(node)
         replies && createReplies(node, replies)
+    })
+
+    const topics = await fetch(`https://squeak.cloud/api/topics?organizationId=${organizationId}`).then((res) =>
+        res.json()
+    )
+    topics.forEach((topic) => {
+        const { label, id } = topic
+        const node = {
+            id: createNodeId(`squeak-topic-${label}`),
+            parent: null,
+            children: [],
+            internal: {
+                type: `SqueakTopic`,
+                contentDigest: createContentDigest(topic),
+            },
+            label: label,
+            topicId: id,
+            slug: slugify(label, { lower: true }),
+        }
+        createNode(node)
     })
 }
 
