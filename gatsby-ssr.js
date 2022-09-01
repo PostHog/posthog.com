@@ -10,6 +10,7 @@ const React = require('react')
 import { initKea, wrapElement } from './kea'
 import HandbookLayout from './src/templates/Handbook'
 import Product from './src/templates/Product'
+import SqueakTopic from './src/templates/SqueakTopic'
 
 export const wrapPageElement = ({ element, props }) => {
     const slug = props.location.pathname.substring(1)

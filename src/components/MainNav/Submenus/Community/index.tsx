@@ -6,6 +6,10 @@ import Header from '../Header'
 import RightCol from '../RightCol'
 import CallToAction from '../CallToAction'
 import { Wrapper } from '../Wrapper'
+import { graphql, useStaticQuery } from 'gatsby'
+import slugify from 'slugify'
+import { labelOverrides } from '../../../../templates/SqueakTopic'
+import { sentenceCase } from 'lib/utils'
 
 interface ColMenuItems {
     title: string
@@ -14,7 +18,8 @@ interface ColMenuItems {
 }
 
 export default function Docs({ referenceElement }: { referenceElement: HTMLDivElement }) {
-    const [questionsLoading, setQuestionsLoading] = useState(true)
+    const { topicGroups } = useStaticQuery(query)
+
     const resources: ColMenuItems[] = [
         {
             title: 'Marketplace',
@@ -55,52 +60,46 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                 <div className="md:flex md:p-0 p-5">
                     <div className="md:border-r border-gray-accent-light border-dashed w-full md:w-[500px] lg:w-[650px]">
                         <div className="md:p-6 lg:px-9 md:pr-3 md:mb-0 mb-4">
-                            <div className="flex justify-between items-center mr-2">
-                                <h3 className="text-[18px] opacity-70 m-0 md:mr-6 text-black">Recent questions</h3>
-                                <CallToAction to="/questions">Ask a question</CallToAction>
-                            </div>
-                            <div className="h-[300px] overflow-auto overflow-x-hidden mt-4 -mr-3 pr-3">
-                                {questionsLoading && (
-                                    <div className="w-full h-full flex justify-center items-center">
-                                        <svg
-                                            className="animate-spin h-8 w-8 text-black dark:text-white"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                        >
-                                            <circle
-                                                className="opacity-25"
-                                                cx="12"
-                                                cy="12"
-                                                r="10"
-                                                stroke="currentColor"
-                                                strokeWidth="3"
-                                            ></circle>
-                                            <path
-                                                className="opacity-75 fill-gray-accent-light dark:fill-gray-accent-dark"
-                                                fill="currentColor"
-                                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                                            ></path>
-                                        </svg>
-                                    </div>
-                                )}
-                                <div style={questionsLoading ? { display: 'none' } : {}}>
-                                    <Squeak
-                                        onLoad={() => setQuestionsLoading(false)}
-                                        limit={5}
-                                        topics={false}
-                                        slug={null}
-                                        apiHost={
-                                            process.env.GATSBY_CONTEXT === 'production'
-                                                ? 'https://squeak.cloud'
-                                                : 'https://staging.squeak.cloud'
-                                        }
-                                        organizationId="a898bcf2-c5b9-4039-82a0-a00220a8c626"
-                                    />
+                            <div>
+                                <div className="flex justify-between items-center mr-2">
+                                    <h3 className="text-[18px] opacity-70 m-0 md:mr-6 text-black">
+                                        Community questions
+                                    </h3>
+                                    <CallToAction to="/questions">Ask a question</CallToAction>
                                 </div>
+                                <ul className="grid grid-cols-3 m-0 p-0 list-none mt-2">
+                                    {topicGroups.nodes.map(({ label, topics }) => {
+                                        return (
+                                            topics.length > 0 && (
+                                                <li>
+                                                    <h3 className="text-base opacity-70 m-0 md:mr-6 text-black">
+                                                        {label}
+                                                    </h3>
+                                                    <ul className="list-none m-0 p-0 mt-2 ">
+                                                        {topics.map(({ label }) => {
+                                                            return (
+                                                                <li key={label}>
+                                                                    <Link
+                                                                        className="text-sm font-bold text-red"
+                                                                        to={`/questions/${slugify(label, {
+                                                                            lower: true,
+                                                                        })}`}
+                                                                    >
+                                                                        {labelOverrides[label.toLowerCase()] ||
+                                                                            sentenceCase(label)}
+                                                                    </Link>
+                                                                </li>
+                                                            )
+                                                        })}
+                                                    </ul>
+                                                </li>
+                                            )
+                                        )
+                                    })}
+                                </ul>
                             </div>
 
-                            <div className="md:mr-2">
+                            <div className="md:mr-2 mt-2">
                                 <CallToAction to="/questions" className="!w-full mt-4">
                                     Browse recent questions
                                 </CallToAction>
@@ -164,3 +163,17 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
         </Wrapper>
     )
 }
+
+const query = graphql`
+    {
+        topicGroups: allSqueakTopicGroup {
+            nodes {
+                label
+                topics {
+                    id
+                    label
+                }
+            }
+        }
+    }
+`

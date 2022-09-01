@@ -19,7 +19,7 @@ interface IProps {
     }
 }
 
-const labelOverrides: Record<string, string> = {
+export const labelOverrides: Record<string, string> = {
     api: 'API',
     'migrating to posthog': 'Migrating to PostHog',
 }
@@ -48,8 +48,6 @@ export default function SqueakTopics({ pageContext: { label, topics } }: IProps)
             url: `/questions/${slug}`,
         }
     })
-
-    console.log(label, topics)
 
     return (
         <>

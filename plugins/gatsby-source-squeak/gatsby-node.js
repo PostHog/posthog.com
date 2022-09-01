@@ -85,6 +85,29 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }, plu
         }
         createNode(node)
     })
+
+    const topicGroups = await fetch(`https://squeak.cloud/api/topic-groups?organizationId=${organizationId}`).then(
+        (res) => res.json()
+    )
+
+    topicGroups.forEach((topicGroup) => {
+        const { label, id, Topic } = topicGroup
+
+        const node = {
+            id: createNodeId(`squeak-topic-group-${label}`),
+            parent: null,
+            children: [],
+            internal: {
+                type: `SqueakTopicGroup`,
+                contentDigest: createContentDigest(topicGroup),
+            },
+            label: label,
+            topicId: id,
+            topics: Topic,
+            slug: slugify(label, { lower: true }),
+        }
+        createNode(node)
+    })
 }
 
 exports.onCreateNode = async ({ node, actions, store, cache, createNodeId }) => {
