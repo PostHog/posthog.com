@@ -5,9 +5,9 @@ import React from 'react'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 import type { GatsbyLinkProps } from 'gatsby'
 import Tooltip from 'components/Tooltip'
-import { TooltipContent } from 'components/GlossaryElement'
+import { TooltipContent, TooltipContentProps } from 'components/GlossaryElement'
 
-interface Props {
+export interface Props {
     to: string
     children: React.ReactNode
     className?: string
@@ -18,6 +18,7 @@ interface Props {
     state?: any
     event?: string
     href?: string
+    glossary?: TooltipContentProps[]
 }
 
 export default function Link({
@@ -45,7 +46,7 @@ export default function Link({
     const url = to || href
     const internal = !disablePrefetch && url && /^\/(?!\/)/.test(url)
     const preview = glossary?.find((glossaryItem) => {
-        return glossaryItem.fields?.slug === url?.replace(/https:\/\/posthog.com|#.*/gi, '')
+        return glossaryItem?.slug === url?.replace(/https:\/\/posthog.com|#.*/gi, '')
     })
     return onClick && !url ? (
         <button onClick={handleClick} className={className}>
@@ -56,10 +57,10 @@ export default function Link({
             <Tooltip
                 content={
                     <TooltipContent
-                        title={preview.frontmatter?.title}
+                        title={preview.title}
                         slug={url}
-                        description={preview.excerpt}
-                        video={preview.frontmatter?.featuredVideo}
+                        description={preview.description}
+                        video={preview.video}
                     />
                 }
             >

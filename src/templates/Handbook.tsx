@@ -23,7 +23,7 @@ import { getCookie } from 'lib/utils'
 import { CallToAction } from 'components/CallToAction'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import CommunityQuestions from 'components/CommunityQuestions'
-import GlossaryElement from 'components/GlossaryElement'
+import { formatNode } from 'components/GlossaryElement'
 
 export const HandbookSidebar = ({ contributors, title, location, related }) => {
     return (
@@ -92,7 +92,11 @@ export default function Handbook({
     )
 
     const A = (props) => (
-        <Link {...props} glossary={glossary?.nodes} className="text-red hover:text-red font-semibold" />
+        <Link
+            {...props}
+            glossary={glossary?.nodes?.map(formatNode)}
+            className="text-red hover:text-red font-semibold"
+        />
     )
 
     const components = {
