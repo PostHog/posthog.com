@@ -57,7 +57,7 @@ Candidly, there is no perfect way to measure this.
 
 Websites with deep DOM trees may incur a bigger performance hit from SR than others; performance hits on the Google homepage will dramatically differ from Neopet’s GUI mania. Given the popularity of session recording in SaaS products, we’ll investigate SR’s impact on various components of a typical SaaS website. 
 
-To simulate and measure the performance impact in the real world, I partnered with [Brevy](https://brevy.com), [CommandBar](https://commandbar.com), and [Explo](https://explo.com). Specifically, we implemented PostHog in Brevy’s internal app codebase, CommandBar’s Ghost/NextJS-powered [blog](https://commandbar.com/blog), and Explo’s React-engineered [auth page](https://app.explo.co/home).
+To simulate and measure the performance impact in the real world, I partnered with [Brevy](https://brevy.com), [CommandBar](https://commandbar.com), and [Explo](https://explo.co). Specifically, we implemented PostHog in Brevy’s internal app codebase, CommandBar’s Ghost/NextJS-powered [blog](https://commandbar.com/blog), and Explo’s React-engineered [auth page](https://app.explo.co/home).
 
 ### Memory: Short Term
 
