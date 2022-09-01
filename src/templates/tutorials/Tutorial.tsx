@@ -17,7 +17,7 @@ import React, { useEffect, useState } from 'react'
 import { animateScroll as scroll } from 'react-scroll'
 import { shortcodes } from '../../mdxGlobalComponents'
 import slugify from 'slugify'
-import { CodeBlockMdx } from 'components/CodeBlock'
+import { MdxCodeBlock } from 'components/CodeBlock'
 import MobileSidebar from 'components/Docs/MobileSidebar'
 
 const ViewButton = ({ title, view, setView }) => {
@@ -79,7 +79,7 @@ export default function Tutorial({ data, pageContext: { pageViews, tableOfConten
     const components = {
         inlineCode: InlineCode,
         blockquote: Blockquote,
-        pre: CodeBlockMdx,
+        pre: MdxCodeBlock,
         img: ZoomImage,
         h1: (props) => Heading({ as: 'h1', ...props }),
         h2: (props) => Heading({ as: 'h2', ...props }),

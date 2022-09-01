@@ -9,7 +9,7 @@ import { SEO } from 'components/seo'
 import { graphql } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
-import { CodeBlockMdx } from '../components/CodeBlock'
+import { MdxCodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
 
 const articleWidth = {
@@ -26,7 +26,7 @@ export default function Plain({ data }) {
     const { body, excerpt } = pageData
     const { title, featuredImage, description, showTitle, width = 'sm', noindex, images } = pageData?.frontmatter
     const components = {
-        pre: CodeBlockMdx,
+        pre: MdxCodeBlock,
         Hero,
         Section,
         FeatureSnapshot,
