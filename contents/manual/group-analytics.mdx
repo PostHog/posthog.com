@@ -169,6 +169,33 @@ This will show how many organizations have made it through the funnel as opposed
 
 ![View Groups](../images/docs/user-guides/funnels/funnels-group-aggregation.png)
 
+### Naming groups
+
+The PostHog UI identifies a group using the `name` property. If no `name` property is found, it falls back to the group key.
+
+So, if you call `posthog.group` as below:
+
+```
+posthog.group('the_example_group', 'group-uuid', {
+    uuid: 'some-random-uuid',
+    company_name: 'the company_name property',
+})
+```
+
+The UI will have a `the_example_group` tab and a group showing up as 'group-uuid'.
+
+If instead you call
+
+```
+posthog.group('the_example_group', 'group-uuid', {
+    uuid: 'some-random-uuid',
+    name: 'the name property',
+    company_name: 'the company_name property',
+})
+```
+
+Then the group will show up as `the name property` instead of `group-uuid`.
+
 ## How to think about Feature Flags with groups
 
 Similar to insights, where you're aggregating events by group type, you can have Feature Flags that work on groups. This allows you to rollout a feature by company, instead of users. Preventing disruption when two users at the same company see a different experience.
@@ -205,33 +232,6 @@ import GroupsFeatureFlagsNode from './snippets/groups-flags-node.mdx'
 ## Renaming group types
 
 You can change how group types are displayed in your Insights interface and throughout PostHog on Project settings.
-
-## Naming groups
-
-The PostHog UI identifies a group using the `name` property. If no `name` property is found, it falls back to the group key.
-
-So, if you call `posthog.group` as below:
-
-```
-posthog.group('the_example_group', 'group-uuid', {
-    uuid: 'some-random-uuid',
-    company_name: 'the company_name property',
-})
-```
-
-The UI will have a `the_example_group` tab and a group showing up as 'group-uuid'.
-
-If instead you call
-
-```
-posthog.group('the_example_group', 'group-uuid', {
-    uuid: 'some-random-uuid',
-    name: 'the name property',
-    company_name: 'the company_name property',
-})
-```
-
-Then the group will show up as `the name property` instead of `group-uuid`.
 
 # Limitations
 
