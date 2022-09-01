@@ -26,6 +26,10 @@ You'll also need a Salesforce account to connect to, as well as the relevant lev
 3. Search for 'Salesforce'
 4. Select the app, press 'Install' and follow the on-screen instructions
 
+### Configuration
+
+<AppParameters />
+
 ### Is the source code for this app available?
 
 PostHog is open-source and so are all apps on the platform. The [source code for the Salesforce Connector](https://github.com/Vinovest/posthog-salesforce) is available on GitHub.

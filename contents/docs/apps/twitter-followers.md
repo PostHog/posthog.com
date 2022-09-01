@@ -31,6 +31,10 @@ To view your follower count as a PostHog Insight, do the following:
 3. A new dropdown will appear, titled 'Select property'. Select `follower_count`
 4. Visualize your follower count over time!
 
+### Configuration
+
+<AppParameters />
+
 ### Is the source code for this app available?
 
 PostHog is open-source and so are all apps on the platform. The [source code for the Twitter Followers Tracker](https://github.com/PostHog/twitter-followers-plugin) is available on GitHub.

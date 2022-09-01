@@ -49,3 +49,5 @@ Using Zapier’s workflow builder it’s very easy to create the workflow you wa
 As an output, we want to use Discord’s ‘Send Channel Message’ behavior as a result and specify the channel where we want to send a message — in this case a ‘Sales-Contacts’ channel.
 
 Once the workflow is created, we’re done. Now, whenever a user submits the form on PostHog’s Contact Sales page it will trigger the ‘_Submitted Contact Sales Form_’  action and send a notification to the ‘Sales-Contacts’ channel in our Discord chat. We can also track the action in PostHog using product analytics tools such as [funnels](/docs/user-guides/funnels), [trends](/docs/user-guides/trends) and [paths](/docs/user-guides/paths) to understand more about user behavior!
+
+<NewsletterTutorial compact/>

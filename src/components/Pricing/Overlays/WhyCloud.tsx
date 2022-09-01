@@ -14,7 +14,7 @@ const sections = [
     {
         title: 'Cheaper than self-hosting',
         features: [
-            'Because of economies of scale, we can offer lower prices for PostHog Cloud',
+            'Because of economies of scale, we can offer lower prices for PostHog Cloud.',
             'No need to pay for separate hosting',
         ],
     },
@@ -92,7 +92,7 @@ export default function WhyCloud({ setOpen, open }: { setOpen: (open: boolean) =
                 <h2 className="text-2xl m-0">Why we recommend PostHog Cloud</h2>
 
                 <h3 className="text-lg text-semibold opacity-50 m-0 mt-2">
-                    PostHog Cloud is the easiest way to try the PostHog suite.
+                    PostHog Cloud is the easiest (and cheapest) way to try the PostHog suite.
                 </h3>
                 <ul className="list-none m-0 p-0 mt-6">
                     {sections.map((section) => {

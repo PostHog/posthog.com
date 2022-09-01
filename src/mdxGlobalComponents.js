@@ -39,12 +39,11 @@ import { DemoScheduler } from './components/DemoScheduler'
 import { DeployOption } from './components/DeployOption'
 import { DocsPageSurvey } from './components/DocsPageSurvey'
 import { FeatureAvailability } from './components/FeatureAvailability'
-import { FeaturesComparisonTable } from './components/FeaturesComparisonTable'
-import { FeaturesNav } from './components/FeaturesNav'
 import { FeaturesSelfHost } from './components/FeaturesSelfHost'
 import { FloatedImage } from './components/FloatedImage'
 import { Footer } from './components/Footer'
 import { FooterCTA } from './components/FooterCTA'
+import { FullWidthBorderSlider } from './components/FullWidthBorderSlider'
 import { GDPRForm } from './components/GDPRForm'
 import { GithubIcon } from './components/GithubIcon'
 import { GlossaryElement } from './components/GlossaryElement'
@@ -63,20 +62,21 @@ import { MainNav } from './components/MainNav'
 import { MdxAnchorHeaders } from './components/MdxAnchorHeaders'
 import { Modal } from './components/Modal'
 import { NewsletterForm } from './components/NewsletterForm'
+import { NewsletterTutorial } from './components/NewsletterTutorial'
 import { NextSteps } from './components/NextSteps'
 import { NotFoundPage } from './components/NotFoundPage'
-import { OtherFeaturesBlock } from './components/OtherFeaturesBlock'
 import { OverflowXSection } from './components/OverflowXSection'
-import { PageHeader } from './components/PageHeader'
 import { Popover } from './components/Popover'
 import { PostCard } from './components/PostCard'
 import { PostLayout } from './components/PostLayout'
 import { AllPlans } from './components/Pricing/AllPlans'
+import { AllPlansTest } from './components/Pricing/AllPlansTest'
 import { Calculator } from './components/Pricing/Calculator'
 import { CloudVsSelfHost } from './components/Pricing/CloudVsSelfHost'
 import { FAQs } from './components/Pricing/FAQs'
 import { Features } from './components/Pricing/Features'
 import { PlanComparison } from './components/Pricing/PlanComparison'
+import { PlanComparisonTest } from './components/Pricing/PlanComparisonTest'
 import { PricingHero } from './components/Pricing/PricingHero'
 import { PricingSlider } from './components/Pricing/PricingSlider'
 import { PricingTable } from './components/Pricing/PricingTable'
@@ -91,6 +91,7 @@ import { ProductIcons } from './components/ProductIcons'
 import { ProductPage } from './components/ProductPage'
 import { ProductSectionHeader } from './components/ProductSectionHeader'
 import { Question } from './components/Question'
+import { Quote2 } from './components/Quote2'
 import { RocketHorizontalRule } from './components/RocketHorizontalRule'
 import { SearchBox } from './components/SearchBox'
 import { SectionLinks } from './components/SectionLinks'
@@ -158,12 +159,11 @@ export const shortcodes = {
     DeployOption,
     DocsPageSurvey,
     FeatureAvailability,
-    FeaturesComparisonTable,
-    FeaturesNav,
     FeaturesSelfHost,
     FloatedImage,
     Footer,
     FooterCTA,
+    FullWidthBorderSlider,
     GDPRForm,
     GithubIcon,
     GlossaryElement,
@@ -182,20 +182,21 @@ export const shortcodes = {
     MdxAnchorHeaders,
     Modal,
     NewsletterForm,
+    NewsletterTutorial,
     NextSteps,
     NotFoundPage,
-    OtherFeaturesBlock,
     OverflowXSection,
-    PageHeader,
     Popover,
     PostCard,
     PostLayout,
     AllPlans,
+    AllPlansTest,
     Calculator,
     CloudVsSelfHost,
     FAQs,
     Features,
     PlanComparison,
+    PlanComparisonTest,
     PricingHero,
     PricingSlider,
     PricingTable,
@@ -210,6 +211,7 @@ export const shortcodes = {
     ProductPage,
     ProductSectionHeader,
     Question,
+    Quote2,
     RocketHorizontalRule,
     SearchBox,
     SectionLinks,

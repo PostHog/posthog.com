@@ -38,6 +38,12 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
                 nodes {
                     fields {
                         slug
+                        contributors {
+                            username
+                            avatar {
+                                absolutePath
+                            }
+                        }
                     }
                     frontmatter {
                         title
@@ -51,12 +57,6 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
                     }
                     timeToRead
                     excerpt(pruneLength: 500)
-                    contributors {
-                        username
-                        avatar {
-                            absolutePath
-                        }
-                    }
                 }
             }
             tutorials: allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }) {
@@ -219,8 +219,8 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
         const { title } = post.frontmatter
         const { timeToRead, excerpt, fields, parent } = post
         const lastUpdated = parent && parent.fields && parent.fields.lastUpdated
-        if (!title || !timeToRead || !excerpt || !lastUpdated || !post.contributors) continue
-        const contributors = post.contributors.map((contributor) => {
+        if (!title || !timeToRead || !excerpt || !lastUpdated || !fields?.contributors) continue
+        const contributors = fields?.contributors.map((contributor) => {
             const { avatar, username } = contributor
             return {
                 username,

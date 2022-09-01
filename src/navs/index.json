@@ -2,7 +2,10 @@
     "main": [
         {
             "title": "Product",
-            "url": "/product"
+            "url": "/product",
+            "sub": {
+                "component": "Product"
+            }
         },
         {
             "title": "Pricing",

@@ -64,7 +64,7 @@ While there is value in the items on the right, we value the items on the left m
 
 **App-based platform vs one-stop-shop**
 
-* Apps-based platform_: integrate with the best services and data sources to solve customer problems faster
+* _Apps-based platform_: integrate with the best services and data sources to solve customer problems faster
 
 **Self-hosted vs. Cloud**
 
