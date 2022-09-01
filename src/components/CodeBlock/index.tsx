@@ -87,7 +87,7 @@ export const MdxCodeBlock = ({ children, ...props }: MdxCodeBlock) => {
 
             return {
                 label,
-                language,
+                language: language.toLowerCase(),
                 file,
                 code: children as string,
             }
