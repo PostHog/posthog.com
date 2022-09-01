@@ -45,7 +45,7 @@ Release is happening next Monday. Which means
 4. [ ] Update the `VERSION` value in `posthog/version.py` and add an appropriate entry in `posthog/versions.json`. Then commit those changes:
   ```bash
   git checkout release-[version]
-  git add posthog/version.py posthog/versions.json
+  git add posthog/version.py versions.json
   git commit -m "chore: Bump version to [version]"
   ```
 1. [ ] Publish the `release-[version]` branch:
