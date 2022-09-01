@@ -2229,3 +2229,8 @@
 [[redirects]]
     from = "/docs/architecture/ingestion-pipeline"
     to = "/docs/how-posthog-works/ingestion-pipeline"
+
+# Added: 2022-09-01
+[[redirects]]
+    from = "/blog/the-posthog-array-1-39-1"
+    to = "/blog/the-posthog-array-1-39-0"
