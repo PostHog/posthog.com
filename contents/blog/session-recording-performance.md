@@ -27,8 +27,6 @@ Some products in the SR space will boast that their platform incurs no performan
 
 Any script, no matter how lightweight, incurs *some* performance hit. The browser has to expend some (i) CPU and some (ii) Memory. And in the case of analytics software, some (iii) Network Bandwidth. 
 
-Paul Buchheit, inventor of Gmail, famously claimed that interactions must stay under 100ms to be magical.
-
 What matters is if the user can *notice* the performance hit. Paul Buchheit, the inventor of Gmail, famously [claimed](https://matthieuoger.com/2020/05/the-100ms-rule/) that interactions under 100ms are magic, while anything slower are sluggish. It’s an imperfect law, but serves as a decent heuristic. If a third-party script turns 90ms interactions into 110ms interactions, that’s noticeable. But 90ms to 92ms? That’s nothing.  
 
 ### A little history lesson
