@@ -263,5 +263,13 @@
         "image": "../../static/images/authors/grace.jpg",
         "link_type": "LinkedIn",
         "link_url": "https://www.linkedin.com/in/withgracetoo/"
+    },
+    {
+        "handle": "ian-vanagas",
+        "name": "Ian Vanagas",
+        "role": "Contibutor",
+        "image": "../../static/images/authors/contributor-posthog.png",
+        "link_type": "twitter",
+        "link_url": "https://twitter.com/ianvanagas"
     }
 ]
