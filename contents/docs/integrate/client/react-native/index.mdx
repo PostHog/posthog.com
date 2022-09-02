@@ -76,7 +76,7 @@ You can tweak how autocapture works by passing custom options.
 ```jsx
 <PostHogProvider apiKey="<ph_project_api_key>" autocapture={{
     captureTouches: true, // If you don't want to capture touch events set this to false
-    captureLifecycleEvents: true, // If you don't want to capture the Lifecycle Events (e.g. Application Opened)
+    captureLifecycleEvents: true, // If you don't want to capture the Lifecycle Events (e.g. Application Opened) set this to false
     captureScreens: true, // If you don't want to capture screen events set this to false
     ignoreLabels: [], // Any labels here will be ignored from the stack in touch events
     customLabelProp: "ph-label",
