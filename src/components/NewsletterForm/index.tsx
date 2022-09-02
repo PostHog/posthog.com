@@ -50,7 +50,7 @@ export const NewsletterForm = ({
                         <input
                             type="email"
                             name="EMAIL"
-                            className="block w-full px-4 py-2 flex-1 bg-white dark:bg-gray-accent-dark rounded-md border-0 font-semibold text-lg md:text-base outline-none max-w-sm"
+                            className="block w-full px-4 py-2 flex-1 bg-white rounded-sm border-0 font-semibold text-lg md:text-base outline-none max-w-sm"
                             id="mce-EMAIL"
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder="email@address.com"
@@ -68,7 +68,7 @@ export const NewsletterForm = ({
                         </div>
                         <input
                             type="submit"
-                            className="bg-red dark:bg-white text-white dark:text-black shrink-0 grow-0 basis-auto font-bold lg:mt-0 border-none cursor-pointer px-5 py-3 md:py-2 w-full rounded-md relative active:top-[1px] active:scale-[.99]"
+                            className="bg-red text-white shrink-0 grow-0 basis-auto font-bold lg:mt-0 border-none cursor-pointer px-5 py-3 md:py-2 w-full rounded-sm relative active:top-[1px] active:scale-[.99]"
                             value="Sign me up!"
                         />
                     </form>
