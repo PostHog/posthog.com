@@ -31,7 +31,7 @@ If features fail, PostHog makes it easy to turn them off. Breaking your flow wit
 
 As an example, the crypto wallet [Phantom](https://posthog.com/customers/phantom) uses PostHog Feature Flags as kill switches for all their features. This is because they can't deploy a new version of their Chrome Extension on demand. Feature Flags give them control of the user experience, limit feature failure, and save time.
 
-On top of Feature Flags, PostHog includes several other testing tools that are simple for you to set up and easy for non-engineers to use. They include [Session Recording](https://posthog.com/product/session-recording), [Heatmaps](https://posthog.com/product/heatmaps), [Multivariate Testing](https://posthog.com/product/experimentation-suite) and more. These create a positive feedback loop in product decisions that help features get tested faster. The team gets data on the quality of their decision and this helps them improve and speed up the next one.
+On top of Feature Flags, PostHog includes several other testing tools that are simple for you to set up and easy for non-engineers to use. They include [Session Recording](https://posthog.com/product/session-recording), [Heatmaps](https://posthog.com/product/heatmaps), [Multivariate Testing](https://posthog.com/product/experimentation-suite), and more. These create a positive feedback loop in product decisions that help features get tested faster. The team gets data on the quality of their decision and this helps them improve and speed up the next one.
 
 ## Simple, customizable data ingestion
 
@@ -49,7 +49,7 @@ Finally, PostHog can [transform and enrich data](https://posthog.com/apps), rath
 
 An unfortunately common task for engineers is writing internal queries or reports for data from sources like in-app usage, historical data, and third parties. This could include gathering a list of new users who've completed onboarding, combining it with a recent list pulled from your payment processor, and enriching it with geographic data. For an experienced engineer, this isn't hard to do but takes time and breaks your focus on work.
 
-For example, [Vendasta](https://posthog.com/customers/vendasta) had engineers spending a lot of time in the behavioural analytics platform Snowplow on simple requests like how many visitors per week. They knew this wouldn't scale well. When they moved to PostHog, non-engineers could discover insights themselves by accessing and analyzing product data. Among other benefits, this led to cutting onboarding drop-off by 50%.
+For example, [Vendasta](https://posthog.com/customers/vendasta) had engineers spending a lot of time in the behavioral analytics platform Snowplow on simple requests like how many visitors per week. They knew this wouldn't scale well. When they moved to PostHog, non-engineers could discover insights themselves by accessing and analyzing product data. Among other benefits, this led to cutting onboarding drop-off by 50%.
 
 With PostHog, Product Analytics from a variety of sources, such as in-app usage or external applications can all live in one place. Non-engineers can then analyze the data from all the sources as they like. No need to maintain or fix the connections to these sources. No need to have non-engineers searching for and potentially corrupting this data at its source.
 
