@@ -501,15 +501,6 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
         })
     })
 
-    result.data.squeakTopics.nodes.map(({ label, slug }) => {
-        if (!menu.some((menuItem) => menuItem.name === label)) {
-            menu.unshift({
-                name: label,
-                url: `/questions/${slug}`,
-            })
-        }
-    })
-
     result.data.squeakTopics.nodes.forEach((node) => {
         const { id, slug, label } = node
         createPage({
