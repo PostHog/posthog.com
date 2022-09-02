@@ -1,0 +1,173 @@
+---
+title: Markdown
+---
+
+## Codeblocks
+
+The PostHog website has a custom codeblock component that comes with a number of useful features built-in:
+
+- [Syntax highligting](#adding-syntax-highligting)
+- [Multiple snippets in a single codeblock](#multiple-code-snippets-in-one-block)
+- [Specifying which file a snippet is from](#specifying-which-file-a-snippet-is-from)
+
+### Basic codeblock
+
+Codeblocks in PostHog are created by enclosing your snippet using three backticks (\`\`\`) or three tildes (\~\~\~), as shown below:
+
+~~~mdx
+```
+{
+    "name": "Max the HedgeHog",
+    "age": 2
+}
+```
+~~~
+
+This will produce the following codeblock:
+
+```
+{
+    "name": "Max the HedgeHog",
+    "age": 2
+}
+```
+
+### Adding syntax highligting
+
+Syntax highligting can be added by specifying a language for the codeblock, which is done by appending the name of the language directly after the opening backticks or tildes as shown below:
+This will also automatically show which language the snippet is in, making it much clearer where snippets should be placed.
+
+~~~mdx
+```json
+{
+    "name": "Max the HedgeHog",
+    "age": 2
+}
+```
+~~~
+
+This will produce the following output:
+
+```json
+{
+    "name": "Max the HedgeHog",
+    "age": 2
+}
+```
+
+### Supported languages
+
+Here is a list of all the languages that are supported in codeblocks:
+
+##### Frontend
+
+|  |  |
+| -- | -- |
+| HTML | `html` |
+| CSS / SCSS / LESS | `css` / `less` |
+| JavaScript | `js` |
+| JSX | `jsx` |
+| TypeScript | `ts` |
+| TSX | `tsx` |
+| Swift | `swift` |
+| Dart | `dart` |
+| Objective-C | `objectivec` |
+
+##### Backend
+
+| | |
+| -- | -- |
+| Node.js | `node` |
+| Elixir | `elixir` |
+| Golang | `go` |
+| Java | `java` |
+| PHP | `php` |
+| Ruby | `ruby` |
+| Python | `python` |
+| C / C++ | `c` / `cpp`
+
+##### Misc.
+
+| | |
+| -- | -- |
+| Terminal | `bash` or `shell` |
+| JSON | `json` |
+| XML | `xml` |
+| SQL | `sql` |
+| GraphQL | `graphql` |
+| Markdown | `markdown` |
+| MDX | `mdx` |
+| YAML | `yaml` |
+| Git | `git` |
+
+> **Note:** If you want syntax highligting for a snippet in another language, feel free to add your language to the imports [here](https://github.com/PostHog/posthog.com/blob/149c7c2a99d66c4f961b538edb864c63ce186967/src/components/CodeBlock/languages.tsx#L6) and open a PR.
+
+
+### Multiple code snippets in one block
+
+With PostHog's `MultiLanguage` component, it's possible to group multiple code snippts together in a single block.
+
+This can be achieved by wrapping your snippets in the `MultiLanguage` component as shown below:
+
+~~~mdx
+<MultiLanguage>
+
+```js
+console.log("Hello world!")
+```
+
+```html
+<div>Hello world!</div>
+```
+
+</MultiLanguage>
+~~~
+
+> **Note:** Make sure to include empty lines between all your code snippets, as well as above and below the `MultiLanguage` tag
+
+This will render the follwing codeblock:
+
+<MultiLanguage>
+
+```js
+console.log("Hello world!")
+```
+
+```html
+<div>Hello world!</div>
+```
+
+</MultiLanguage>
+
+### Specifying which file a snippet is from
+
+You can specify a filename that a code snippet belongs to using the `file` parameter, which will be displayed in the top bar of the block.
+
+~~~mdx
+```yaml file=values.yaml
+cloud: 'aws'
+ingress:
+    hostname: <your-hostname>
+    nginx:
+        enabled: true
+cert-manager:
+    enabled: true
+```
+~~~
+
+> **Note:** Make sure **not** to surround your filename in quotes. Each parameter-value pair is delimited by spaces.
+
+This produces the follwing codeblock:
+
+```yaml file=values.yaml
+cloud: 'aws'
+ingress:
+    hostname: <your-hostname>
+    nginx:
+        enabled: true
+cert-manager:
+    enabled: true
+```
+
+
+
