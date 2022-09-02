@@ -6,7 +6,7 @@ title: Markdown
 
 The PostHog website has a custom codeblock component that comes with a number of useful features built-in:
 
-- [Syntax highligting](#adding-syntax-highligting)
+- [Syntax highlighting](#adding-syntax-highlighting)
 - [Multiple snippets in a single codeblock](#multiple-code-snippets-in-one-block)
 - [Specifying which file a snippet is from](#specifying-which-file-a-snippet-is-from)
 
@@ -32,9 +32,9 @@ This will produce the following codeblock:
 }
 ```
 
-### Adding syntax highligting
+### Adding syntax highlighting
 
-Syntax highligting can be added by specifying a language for the codeblock, which is done by appending the name of the language directly after the opening backticks or tildes as shown below:
+Syntax highlighting can be added by specifying a language for the codeblock, which is done by appending the name of the language directly after the opening backticks or tildes as shown below:
 This will also automatically show which language the snippet is in, making it much clearer where snippets should be placed.
 
 ~~~mdx
@@ -100,7 +100,7 @@ Here is a list of all the languages that are supported in codeblocks:
 | YAML | `yaml` |
 | Git | `git` |
 
-> **Note:** If you want syntax highligting for a snippet in another language, feel free to add your language to the imports [here](https://github.com/PostHog/posthog.com/blob/149c7c2a99d66c4f961b538edb864c63ce186967/src/components/CodeBlock/languages.tsx#L6) and open a PR.
+> **Note:** If you want syntax highlighting for a snippet in another language, feel free to add your language to the imports [here](https://github.com/PostHog/posthog.com/blob/149c7c2a99d66c4f961b538edb864c63ce186967/src/components/CodeBlock/languages.tsx#L6) and open a PR.
 
 
 ### Multiple code snippets in one block
@@ -125,7 +125,7 @@ console.log("Hello world!")
 
 > **Note:** Make sure to include empty lines between all your code snippets, as well as above and below the `MultiLanguage` tag
 
-This will render the follwing codeblock:
+This will render the following codeblock:
 
 <MultiLanguage>
 
@@ -157,7 +157,7 @@ cert-manager:
 
 > **Note:** Make sure **not** to surround your filename in quotes. Each parameter-value pair is delimited by spaces.
 
-This produces the follwing codeblock:
+This produces the following codeblock:
 
 ```yaml file=values.yaml
 cloud: 'aws'
