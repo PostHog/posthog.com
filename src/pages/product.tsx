@@ -61,7 +61,7 @@ const features: IProps[] = [
             {
                 title: 'Experimentation Suite',
                 icon: ProductIcons.experiments,
-                url: '/product/experimentation',
+                url: '/product/experimentation-suite',
             },
             {
                 title: 'Correlation analysis',
