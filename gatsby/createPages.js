@@ -14,6 +14,7 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
     const ProductTemplate = path.resolve(`src/templates/Product.js`)
     const HostHogTemplate = path.resolve(`src/templates/HostHog.js`)
     const Question = path.resolve(`src/templates/Question.js`)
+    const SqueakTopic = path.resolve(`src/templates/SqueakTopic.tsx`)
 
     // Tutorials
     const TutorialTemplate = path.resolve(`src/templates/tutorials/Tutorial.tsx`)
@@ -226,6 +227,22 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
             questions: allQuestion {
                 nodes {
                     id
+                }
+            }
+            squeakTopics: allSqueakTopic {
+                nodes {
+                    label
+                    topicId
+                    slug
+                }
+            }
+            squeakTopicGroups: allSqueakTopicGroup {
+                nodes {
+                    label
+                    topics {
+                        id
+                        label
+                    }
                 }
             }
         }
@@ -470,13 +487,30 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
             })
         }
     })
-    result.data.questions.nodes.forEach((node) => {
-        const { id } = node
+
+    const menu = []
+    result.data.squeakTopicGroups.nodes.forEach(({ label, topics }) => {
+        menu.push({ name: label })
+        topics.forEach(({ label }) => {
+            menu.push({
+                name: label,
+                url: `/questions/${slugify(label, {
+                    lower: true,
+                })}`,
+            })
+        })
+    })
+
+    result.data.squeakTopics.nodes.forEach((node) => {
+        const { id, slug, label } = node
         createPage({
-            path: `questions/${id}`,
-            component: Question,
+            path: `questions/${slug}`,
+            component: SqueakTopic,
             context: {
                 id,
+                topics: result.data.squeakTopics.nodes,
+                label,
+                menu,
             },
         })
     })
