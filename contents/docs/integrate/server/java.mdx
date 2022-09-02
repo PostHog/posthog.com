@@ -40,7 +40,7 @@ dependencies {
 
 All you need to do is add the `posthog` module to your `pom.xml`:
 
-```xml
+```xml file=pom.xml
 <dependency>
   <groupId>com.posthog.java</groupId>
   <artifactId>posthog</artifactId>
@@ -54,7 +54,7 @@ See the [com.posthog.java](https://search.maven.org/artifact/com.posthog.java/po
 
 ## Usage
 
-```js
+```java
 import com.posthog.java.PostHog;
 
 class Sample {
@@ -90,7 +90,7 @@ Optionally you can submit:
 
 For example:
 
-```js
+```java
 posthog.capture("distinct id", "movie played", new HashMap<String, Object>() {
   {
     put("movie_id", 123);
@@ -113,7 +113,7 @@ An `identify` call requires:
 
 For example:
 
-```js
+```java
 posthog.identify("distinct id", new HashMap<String, Object>() {
   {
     put("email", "john@doe.com");
@@ -139,7 +139,7 @@ An `alias` call requires:
 - `distinct id` the current unique id
 
 For example:
-```js
+```java
 posthog.alias("anonymous session id", "distinct id");
 ```
 
@@ -151,7 +151,7 @@ There are three options:
 
 ##### With the `capture` call
 
-```js
+```java
 posthog.capture("distinct id", "movie played", new HashMap<String, Object>() {
   {
     put("eventProperty", "value1");                    // event properties
@@ -172,7 +172,7 @@ posthog.capture("distinct id", "movie played", new HashMap<String, Object>() {
 
 ##### With the `identify` call
 
-```js
+```java
 posthog.identify("distinct id", new HashMap<String, Object>() {  // set
     {
       put("email", "john@doe.com");
@@ -187,7 +187,7 @@ posthog.identify("distinct id", new HashMap<String, Object>() {  // set
 
 ##### With `set` or `set_once` calls
 
-```js
+```java
 posthog.set("distinct id", new HashMap<String, Object>() {
   {
     put("email", "john@doe.com");
@@ -196,7 +196,7 @@ posthog.set("distinct id", new HashMap<String, Object>() {
 });
 ```
 
-```js
+```java
 posthog.setOnce("distinct id", new HashMap<String, Object>() {
   {
     put("user_first_location", "colorado");

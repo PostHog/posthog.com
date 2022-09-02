@@ -13,7 +13,7 @@ import { graphql } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
-import { CodeBlock } from '../components/CodeBlock'
+import { MdxCodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
 import { NewsletterForm } from 'components/NewsletterForm'
 
@@ -95,7 +95,7 @@ export default function BlogPost({ data, pageContext, location }) {
         h4: H4,
         h5: H5,
         h6: H6,
-        pre: CodeBlock,
+        pre: MdxCodeBlock,
         inlineCode: InlineCode,
         blockquote: Blockquote,
         img: ZoomImage,

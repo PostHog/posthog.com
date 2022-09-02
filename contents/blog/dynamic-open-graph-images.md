@@ -231,7 +231,7 @@ From there, we do some initial setup:
 
 After setup is complete, we finally iterate through each queried page, set the content of the Chromium page with an HTML string, screenshot the page, and save it. Here's what that looks like for blog posts:
 
-```
+```js
 for (const post of data.blog.nodes) {
     const { title, authorData, featuredImage } = post.frontmatter
     const image = fs.readFileSync(featuredImage.absolutePath, {
@@ -246,7 +246,7 @@ for (const post of data.blog.nodes) {
 
 **What's happening in this for...of loop, though?**
 
-```
+```js
 const image = fs.readFileSync(featuredImage.absolutePath, {
     encoding: 'base64',
 })
@@ -254,7 +254,7 @@ const image = fs.readFileSync(featuredImage.absolutePath, {
 
 Since the site isn't technically "live" yet, we don't have access to a public URL to insert into our HTML template. The workaround is embedding it in an `<img />` element as Base64. You'll see this workaround in a few other places in the code.
 
-```
+```js
 await createOG({
     html: blogTemplate({ title, authorData: authorData && authorData[0], image, font }),
     slug: post.fields.slug,
