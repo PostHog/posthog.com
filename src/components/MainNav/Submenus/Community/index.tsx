@@ -8,8 +8,6 @@ import CallToAction from '../CallToAction'
 import { Wrapper } from '../Wrapper'
 import { graphql, useStaticQuery } from 'gatsby'
 import slugify from 'slugify'
-import { labelOverrides } from '../../../../templates/SqueakTopic'
-import { sentenceCase } from 'lib/utils'
 
 interface ColMenuItems {
     title: string
@@ -85,8 +83,7 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                                                                             lower: true,
                                                                         })}`}
                                                                     >
-                                                                        {labelOverrides[label.toLowerCase()] ||
-                                                                            sentenceCase(label)}
+                                                                        {label}
                                                                     </Link>
                                                                 </li>
                                                             )

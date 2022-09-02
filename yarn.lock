@@ -21550,10 +21550,10 @@ sprintf-js@~1.0.2:
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
   integrity sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==
 
-squeak-react@3.0.0-pre.4:
-  version "3.0.0-pre.4"
-  resolved "https://registry.yarnpkg.com/squeak-react/-/squeak-react-3.0.0-pre.4.tgz#91fd53cf0c5c030a8e298cb828fec999b64be4ea"
-  integrity sha512-SFumhl9DKpJUEga3ddY3y2io7w3zFNw7QuX1ZYjawpQ5TAd686rM1fTyt1daQ8DZdsnEaktm0tneiPinKpD9uQ==
+squeak-react@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/squeak-react/-/squeak-react-3.0.3.tgz#8ced8e19887a9201dfd817f49a104db76b4dfbe5"
+  integrity sha512-PwEJpu1lyXouGMH0AIzlQCIdDOIrbyy3ghX/ASnOrNAkDWFjr9kkjDyzez468lZJROKwbHwvhA2of6TNDWjVVg==
   dependencies:
     formik "^2.2.9"
     gravatar "^1.8.2"

@@ -3,7 +3,6 @@ import { Slack } from 'components/Icons/Icons'
 import Layout from 'components/Layout'
 import PostLayout, { SidebarSection } from 'components/PostLayout'
 import { SEO } from 'components/seo'
-import { sentenceCase } from 'lib/utils'
 import React from 'react'
 import { Squeak } from 'squeak-react'
 
@@ -17,11 +16,6 @@ interface IProps {
         label: string
         topics: ITopic[]
     }
-}
-
-export const labelOverrides: Record<string, string> = {
-    api: 'API',
-    'migrating to posthog': 'Migrating to PostHog',
 }
 
 const TopicSidebar = () => {
@@ -41,21 +35,14 @@ const TopicSidebar = () => {
     )
 }
 
-export default function SqueakTopics({ pageContext: { label, topics } }: IProps) {
-    const menu = topics.map(({ label, slug }) => {
-        return {
-            name: labelOverrides[label.toLowerCase()] || sentenceCase(label),
-            url: `/questions/${slug}`,
-        }
-    })
-
+export default function SqueakTopics({ pageContext: { label, menu } }: IProps) {
     return (
         <>
-            <SEO title={`${labelOverrides[label.toLowerCase()] || sentenceCase(label)} - PostHog`} />
+            <SEO title={`${label} - PostHog`} />
             <Layout>
                 <PostLayout
                     title={label}
-                    menu={[{ name: 'Questions', url: '/questions', children: [{ name: 'Topics' }, ...menu] }]}
+                    menu={[{ name: 'Questions', url: '', children: menu }]}
                     sidebar={<TopicSidebar />}
                     hideSurvey
                 >

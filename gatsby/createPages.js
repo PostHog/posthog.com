@@ -236,6 +236,15 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
                     slug
                 }
             }
+            squeakTopicGroups: allSqueakTopicGroup {
+                nodes {
+                    label
+                    topics {
+                        id
+                        label
+                    }
+                }
+            }
         }
     `)
 
@@ -478,16 +487,29 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
             })
         }
     })
-    result.data.questions.nodes.forEach((node) => {
-        const { id } = node
-        createPage({
-            path: `questions/${id}`,
-            component: Question,
-            context: {
-                id,
-            },
+
+    const menu = []
+    result.data.squeakTopicGroups.nodes.forEach(({ label, topics }) => {
+        menu.push({ name: label })
+        topics.forEach(({ label }) => {
+            menu.push({
+                name: label,
+                url: `/questions/${slugify(label, {
+                    lower: true,
+                })}`,
+            })
         })
     })
+
+    result.data.squeakTopics.nodes.map(({ label, slug }) => {
+        if (!menu.some((menuItem) => menuItem.name === label)) {
+            menu.unshift({
+                name: label,
+                url: `/questions/${slug}`,
+            })
+        }
+    })
+
     result.data.squeakTopics.nodes.forEach((node) => {
         const { id, slug, label } = node
         createPage({
@@ -497,6 +519,7 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
                 id,
                 topics: result.data.squeakTopics.nodes,
                 label,
+                menu,
             },
         })
     })
