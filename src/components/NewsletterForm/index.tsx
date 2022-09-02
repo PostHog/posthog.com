@@ -79,7 +79,7 @@ export const NewsletterForm = ({
         <div className="w-full mx-auto my-12 text-center">
             <div className="flex w-full h-full p-1 border-t border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark">
                 <div className={classList}>
-                    <div className="flex flex-col md:flex-row space-x-4 items-center">
+                    <div className="flex flex-col md:flex-row md:space-x-4 items-center">
                         <figure className="shrink-0 grow-0 basis-12 m-0 text-black dark:text-white">
                             <svg
                                 className="block h-12 mb-0 fill-current"
@@ -95,7 +95,7 @@ export const NewsletterForm = ({
                             </svg>
                         </figure>
 
-                        <span className="flex flex-col space-x-2 md:flex-row flex-grow font-bold md:justify-start md:text-left">
+                        <span className="flex flex-col md:space-x-2 md:flex-row flex-grow font-bold md:justify-start md:text-left">
                             <span className="text-lg">The best of PostHog.</span>{' '}
                             <span className="text-sm md:text-lg">Delivered twice a month.</span>
                         </span>
