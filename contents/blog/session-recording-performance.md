@@ -27,8 +27,6 @@ Some products in the SR space will boast that their platform incurs no performan
 
 Any script, no matter how lightweight, incurs *some* performance hit. The browser has to expend some (i) CPU and some (ii) Memory. And in the case of analytics software, some (iii) Network Bandwidth. 
 
-Paul Buchheit, inventor of Gmail, famously claimed that interactions must stay under 100ms to be magical.
-
 What matters is if the user can *notice* the performance hit. Paul Buchheit, the inventor of Gmail, famously [claimed](https://matthieuoger.com/2020/05/the-100ms-rule/) that interactions under 100ms are magic, while anything slower are sluggish. It’s an imperfect law, but serves as a decent heuristic. If a third-party script turns 90ms interactions into 110ms interactions, that’s noticeable. But 90ms to 92ms? That’s nothing.  
 
 ### A little history lesson
@@ -59,7 +57,7 @@ Candidly, there is no perfect way to measure this.
 
 Websites with deep DOM trees may incur a bigger performance hit from SR than others; performance hits on the Google homepage will dramatically differ from Neopet’s GUI mania. Given the popularity of session recording in SaaS products, we’ll investigate SR’s impact on various components of a typical SaaS website. 
 
-To simulate and measure the performance impact in the real world, I partnered with [Brevy](https://brevy.com), [CommandBar](https://commandbar.com), and [Explo](https://explo.com). Specifically, we implemented PostHog in Brevy’s internal app codebase, CommandBar’s Ghost/NextJS-powered [blog](https://commandbar.com/blog), and Explo’s React-engineered [auth page](https://app.explo.co/home).
+To simulate and measure the performance impact in the real world, I partnered with [Brevy](https://brevy.com), [CommandBar](https://commandbar.com), and [Explo](https://explo.co). Specifically, we implemented PostHog in Brevy’s internal app codebase, CommandBar’s Ghost/NextJS-powered [blog](https://commandbar.com/blog), and Explo’s React-engineered [auth page](https://app.explo.co/home).
 
 ### Memory: Short Term
 
@@ -181,7 +179,7 @@ Practically... this (almost) never happens. A lot of coincidence has to happen f
 
 ## Conclusion
 
-Session Recording – albeit the perceived intensity of the data captured – has no discernible impact on your browser’s performance. This is entirely thanks to the MutationObserver API, introduced in 2012 underneath Anne van Kesteren, Aryeh Gregor, Ms2ger, Alex Russell, and Robin Berjon. 
+Session Recording – despite the perceived intensity of the data captured – has no discernible impact on your browser’s performance. This is entirely thanks to the MutationObserver API, introduced in 2012 underneath Anne van Kesteren, Aryeh Gregor, Ms2ger, Alex Russell, and Robin Berjon. 
 
 Marketers and product managers can continue to enjoy the benefits of Session Recording while remaining confident that their app’s performance isn’t suffering.
 

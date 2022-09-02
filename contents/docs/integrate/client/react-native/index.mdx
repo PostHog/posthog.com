@@ -37,8 +37,6 @@ Autocapture tracks these events:
 * **Application Opened** - once when the App is opened from a closed state
 * **Application Became Active** - when the App comes to the foreground (e.g. from the app switcher)
 * **Application Backgrounded** - when the App is sent to the background by the user
-* **Keyboard Shown** - when the keyboard appears for user input
-* **Keyboard Hidden** - when the keyboard is dismissed from user input
 * **$screen** - when the user navigates (if using @react-navigation/native)
 * **$autocapture** - touch events when the user interacts with the screen
 
@@ -78,6 +76,8 @@ You can tweak how autocapture works by passing custom options.
 ```jsx
 <PostHogProvider apiKey="<ph_project_api_key>" autocapture={{
     captureTouches: true, // If you don't want to capture touch events set this to false
+    captureLifecycleEvents: true, // If you don't want to capture the Lifecycle Events (e.g. Application Opened) set this to false
+    captureScreens: true, // If you don't want to capture screen events set this to false
     ignoreLabels: [], // Any labels here will be ignored from the stack in touch events
     customLabelProp: "ph-label",
     noCaptureProp: "ph-no-capture",
