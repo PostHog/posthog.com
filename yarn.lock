@@ -20814,10 +20814,10 @@ sprintf-js@~1.0.2:
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
   integrity sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==
 
-squeak-react@^3.0.4:
-  version "3.0.4"
-  resolved "https://registry.yarnpkg.com/squeak-react/-/squeak-react-3.0.4.tgz#d32337bf1c1bee774c397ca12695b17f6fd3ea39"
-  integrity sha512-338lrUz+uI2m+dPAPRJVT9W1pBLRUxyNA9Z/w/Otl5Px0nn+tKlAr3san3JnUI43fUL3XNjgENbLUOg9+Lbu2w==
+squeak-react@^3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/squeak-react/-/squeak-react-3.0.5.tgz#6d03fc3b4dfaaa20a4663368919edb49ea094e89"
+  integrity sha512-zUN3znSuVL1KDt0XwWvwoEnG1LEtb2Y+uClFHJeL7C3E9g9ZUAW4fqChgQQ/+0eRTESZfmhR4+7JIqGPzrB+AQ==
   dependencies:
     formik "^2.2.9"
     gravatar "^1.8.2"
@@ -21613,7 +21613,7 @@ tapable@^2.0, tapable@^2.0.0, tapable@^2.1.1, tapable@^2.2.0:
   resolved "https://registry.yarnpkg.com/tapable/-/tapable-2.2.1.tgz#1967a73ef4060a82f12ab96af86d52fdb76eeca0"
   integrity sha512-GNzQvQTOIP6RyTfE2Qxb8ZVlNmw0n88vp1szwWRimP02mnTsx3Wtn5qRdqY9w2XduFNUgvOwhNnQsjwCp+kqaQ==
 
-tar-fs@*, tar-fs@2.1.1, tar-fs@^2.0.0, tar-fs@^2.1.1:
+tar-fs@2.1.1, tar-fs@^2.0.0, tar-fs@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/tar-fs/-/tar-fs-2.1.1.tgz#489a15ab85f1f0befabb370b7de4f9eb5cbe8784"
   integrity sha512-V0r2Y9scmbDRLCNex/+hYzvp/zyYjvFbHPNgVTKfQvVrb6guiE/fxP+XblDNR011utopbkex2nM4dHNV6GDsng==
