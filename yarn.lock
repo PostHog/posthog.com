@@ -11108,6 +11108,13 @@ gatsby-sharp@^0.16.0:
     "@types/sharp" "^0.30.5"
     sharp "^0.30.7"
 
+gatsby-source-ashby@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/gatsby-source-ashby/-/gatsby-source-ashby-1.0.2.tgz#7e3533817362620f5d874d675058471b8745d702"
+  integrity sha512-gg7WDkARN/FUXod/KALtb11GtwYrreir+y6JOH57ngQEt+TKlddTYk88pBlFxykt09zOznB+i23IznfIPbg55g==
+  dependencies:
+    axios "^0.27.2"
+
 gatsby-source-filesystem@^4.20.0:
   version "4.22.0"
   resolved "https://registry.yarnpkg.com/gatsby-source-filesystem/-/gatsby-source-filesystem-4.22.0.tgz#c391874dcca605c1b7ca70ec879c3e736a7bd311"

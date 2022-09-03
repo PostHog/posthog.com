@@ -4,9 +4,9 @@ import React from 'react'
 export default function Jobs() {
     const data = useStaticQuery(query)
     const totalCount = data?.allJobs?.pageInfo?.totalCount
-    // In order to show job count, a valid Workable API key
-    // must be added as an environment variable WORKABLE_API_KEY.
-    // If no Workable API key is found, the job count is 0
+    // In order to show job count, a valid Ashby API key
+    // must be added as an environment variable ASHBY_API_KEY.
+    // If no Ashby API key is found, the job count is 0
     return (
         <div className="text-primary dark:text-white">
             <p>
@@ -18,8 +18,8 @@ export default function Jobs() {
 }
 
 const query = graphql`
-    query Jobs {
-        allJobs {
+    query Job {
+        allAshbyJob(filter: { isListed: { eq: true } }) {
             pageInfo {
                 totalCount
             }

@@ -112,8 +112,11 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                                 </Block>
                                 <Block title="Careers" cta={{ url: '/careers', label: 'Explore careers' }}>
                                     <p className="m-0 text-[14px] dark:text-white">
-                                        We're currently hiring for <strong>{jobs.totalCount} roles</strong>. We're
-                                        unlike any company you've ever worked for.
+                                        We're currently hiring for{' '}
+                                        <strong>
+                                            {jobs.totalCount} role{jobs.totalCount > 1 && 's'}
+                                        </strong>
+                                        . We're unlike any company you've ever worked for.
                                     </p>
                                 </Block>
                             </div>
@@ -135,7 +138,7 @@ const query = graphql`
                 fieldValue
             }
         }
-        jobs: allJobs {
+        jobs: allAshbyJob(filter: { isListed: { eq: true } }) {
             totalCount
         }
         sidebars: file(absolutePath: { regex: "//sidebars/sidebars.json$/" }) {
