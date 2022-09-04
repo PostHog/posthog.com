@@ -5,6 +5,8 @@ import { SEO } from 'components/seo'
 import { graphql } from 'gatsby'
 import React, { useRef, useState } from 'react'
 
+const allowedFileTypes = ['application/pdf']
+
 const JobSidebar = () => {
     return (
         <>
@@ -64,7 +66,7 @@ const components = {
                     placeholder={title}
                     name={title}
                     type="file"
-                    accept="application/pdf"
+                    accept={allowedFileTypes.join(',')}
                 />
                 <div className="absolute">
                     {fileName ? (
@@ -93,20 +95,28 @@ export default function JobApply({
     },
 }) {
     const [submitted, setSubmitted] = useState(false)
+    const [error, setError] = useState(null)
     const handleSubmit = (e) => {
         e.preventDefault()
         const data = new FormData(e.target)
         const form = new FormData()
+        let error = null
         for (const [name, value] of data) {
             const el = e.target.querySelector(`[name="${name}"]`)
             const path = el.dataset.path
             if (el.type === 'file') {
+                if (!allowedFileTypes.includes(value.type)) {
+                    error = `Allowed file types: ${allowedFileTypes.join(', ')}`
+                    break
+                }
                 form.append(name, value)
                 form.append(path, name)
             } else {
                 form.append(path, value)
             }
         }
+        setError(error)
+        if (error) return
         form.append('jobPostingId', id)
         fetch('/.netlify/functions/apply', {
             method: 'POST',
@@ -149,6 +159,7 @@ export default function JobApply({
                                         })
                                     })}
                                 </div>
+                                {error && <p className="font-bold text-red m-0 mt-4">{error}</p>}
                                 <button className={`${button()} mt-6`}>Submit application</button>
                             </form>
                         )}
