@@ -1030,3 +1030,18 @@ iframe[src*='youtube.com'],
 iframe[src*='youtube-nocookie.com'] {
     @apply aspect-video w-full h-auto;
 }
+
+.job-content {
+    h2,
+    h3,
+    h4,
+    h5 {
+        @apply text-2xl;
+    }
+    h1 {
+        @apply text-4xl;
+    }
+    p {
+        @apply !min-h-0;
+    }
+}

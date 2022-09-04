@@ -15,6 +15,8 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
     const HostHogTemplate = path.resolve(`src/templates/HostHog.js`)
     const Question = path.resolve(`src/templates/Question.js`)
     const SqueakTopic = path.resolve(`src/templates/SqueakTopic.tsx`)
+    const Job = path.resolve(`src/templates/Job.tsx`)
+    const JobApply = path.resolve(`src/templates/JobApply.tsx`)
 
     // Tutorials
     const TutorialTemplate = path.resolve(`src/templates/tutorials/Tutorial.tsx`)
@@ -243,6 +245,12 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
                         id
                         label
                     }
+                }
+            }
+            jobs: allAshbyJob {
+                nodes {
+                    id
+                    title
                 }
             }
         }
@@ -511,6 +519,26 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
                 topics: result.data.squeakTopics.nodes,
                 label,
                 menu,
+            },
+        })
+    })
+
+    result.data.jobs.nodes.forEach((node) => {
+        const { id, title } = node
+        const slug = `careers/${slugify(title, { lower: true })}`
+        createPage({
+            path: slug,
+            component: Job,
+            context: {
+                id,
+                slug,
+            },
+        })
+        createPage({
+            path: `${slug}/apply`,
+            component: JobApply,
+            context: {
+                id,
             },
         })
     })

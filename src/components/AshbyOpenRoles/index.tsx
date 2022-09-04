@@ -1,6 +1,8 @@
 import { RightArrow } from 'components/Icons/Icons'
+import Link from 'components/Link'
 import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
+import slugify from 'slugify'
 
 interface OpenRoleType {
     title: string
@@ -30,16 +32,16 @@ export default function AshbyOpenRoles() {
                             {jobs
                                 .filter((job: OpenRoleType) => job.departmentName === title)
                                 .map((job: OpenRoleType) => {
-                                    const { title, externalLink } = job
+                                    const { title } = job
                                     return (
                                         <li className="border-b border-dashed border-gray-accent-light" key={title}>
-                                            <a
+                                            <Link
                                                 className="px-4 py-3 text-lg text-primary hover:text-primary font-bold flex justify-between"
-                                                href={externalLink}
+                                                to={`/careers/${slugify(title, { lower: true })}`}
                                             >
                                                 <span>{title}</span>
                                                 <RightArrow className="w-[24px] h-[24px] opacity-50 group-hover:opacity-100 transition-opacity bounce" />
-                                            </a>
+                                            </Link>
                                         </li>
                                     )
                                 })}
