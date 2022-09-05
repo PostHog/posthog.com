@@ -127,7 +127,7 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
                     }
                 }
             }
-            careers: allAshbyJob(filter: { isListed: { eq: true } }) {
+            careers: allAshbyJobPosting(filter: { isListed: { eq: true } }) {
                 nodes {
                     title
                 }

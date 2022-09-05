@@ -16,7 +16,7 @@ import { TeamQuote } from '../components/TeamQuote'
 
 const IndexPage = () => {
     const data = useStaticQuery(query)
-    const latestJob = data?.allAshbyJob?.nodes && data.allAshbyJob.nodes[0]
+    const latestJob = data?.allAshbyJobPosting?.nodes && data.allAshbyJobPosting.nodes[0]
     const latestJobCreatedAt = latestJob && new Date(latestJob['publishedDate'])
 
     return (
@@ -145,7 +145,7 @@ const IndexPage = () => {
 
 const query = graphql`
     query CareersQuery {
-        allAshbyJob(sort: { fields: publishedDate, order: DESC }) {
+        allAshbyJobPosting(sort: { fields: publishedDate, order: DESC }) {
             nodes {
                 publishedDate
                 title

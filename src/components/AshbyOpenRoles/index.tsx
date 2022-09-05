@@ -16,7 +16,7 @@ interface DepartmentType {
 
 export default function AshbyOpenRoles() {
     const {
-        allAshbyJob: { departments, jobs },
+        allAshbyJobPosting: { departments, jobs },
     } = useStaticQuery(query)
     // In order to show open roles, a valid Ashby API key
     // must be added as an environment variable ASHBY_API_KEY.
@@ -55,7 +55,7 @@ export default function AshbyOpenRoles() {
 
 const query = graphql`
     query OpenRoles {
-        allAshbyJob(filter: { isListed: { eq: true } }) {
+        allAshbyJobPosting(filter: { isListed: { eq: true } }) {
             jobs: nodes {
                 title
                 externalLink

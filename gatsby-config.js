@@ -21,7 +21,6 @@ module.exports = {
             resolve: require.resolve(`../gatsby-source-ashby`),
             options: {
                 apiKey: process.env.ASHBY_API_KEY,
-                info: true,
             },
         },
         {

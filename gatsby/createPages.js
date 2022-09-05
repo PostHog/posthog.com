@@ -246,7 +246,7 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
                     }
                 }
             }
-            jobs: allAshbyJob {
+            jobs: allAshbyJobPosting {
                 nodes {
                     id
                     title

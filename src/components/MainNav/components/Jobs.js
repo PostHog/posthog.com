@@ -19,7 +19,7 @@ export default function Jobs() {
 
 const query = graphql`
     query Job {
-        allAshbyJob(filter: { isListed: { eq: true } }) {
+        allAshbyJobPosting(filter: { isListed: { eq: true } }) {
             pageInfo {
                 totalCount
             }

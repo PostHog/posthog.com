@@ -152,7 +152,7 @@ function Apply({ id, info }) {
 
 export default function Job({
     data: {
-        ashbyJob: { title, departmentName, info, id },
+        ashbyJobPosting: { title, departmentName, info, id },
     },
     pageContext: { slug },
 }) {
@@ -219,7 +219,7 @@ export default function Job({
 
 export const query = graphql`
     query JobQuery($id: String!) {
-        ashbyJob(id: { eq: $id }) {
+        ashbyJobPosting(id: { eq: $id }) {
             id
             title
             departmentName

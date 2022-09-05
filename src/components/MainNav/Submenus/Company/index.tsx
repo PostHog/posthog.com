@@ -138,7 +138,7 @@ const query = graphql`
                 fieldValue
             }
         }
-        jobs: allAshbyJob(filter: { isListed: { eq: true } }) {
+        jobs: allAshbyJobPosting(filter: { isListed: { eq: true } }) {
             totalCount
         }
         sidebars: file(absolutePath: { regex: "//sidebars/sidebars.json$/" }) {
