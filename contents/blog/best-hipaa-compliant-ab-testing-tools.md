@@ -42,7 +42,7 @@ These are the broad principles, but **please consult an expert** before making a
 
 ### PostHog
 
-IMAGE
+![posthog experimentation](../images/blog/hipaa-compliant-ab-testing/posthog.png)
 
 PostHog is an all-in-one platform that includes a [fully-featured experimentation](https://posthog.com/product/experimentation-suite) suite in addition to product analytics, session recording, and a feature flag system that also powers its testing features. It supports both A/B/n and multivariate experiments, which you can target by geography, cohorts, and user properties.
 
@@ -65,7 +65,7 @@ PostHog is priced on events and your [first 1 million events each month are free
 
 ### Kameleoon
 
-IMAGE
+![kameleoon](../images/blog/hipaa-compliant-ab-testing/kameleoon.png)
 
 Kameleoon is an A/B testing and personalization platform. It supports A/B and multivariate testing, and feature flags for managing the rollout of new features and running tests. In addition to testing, it features a real-time personalization engine that's particularly useful for e-commerce. It doesn't have any deeper analytics features, so you'll need to run it alongside another [HIPAA-compliant analytics tool](/blog/best-hipaa-compliant-analytics-tools) to gather deeper user behavior data.
 
@@ -86,7 +86,7 @@ Kameleoon doesn't publish pricing publicly, but conversion optimization consulta
 
 ### VWO
 
-IMAGE
+![vwo testing](../images/blog/hipaa-compliant-ab-testing/vwo-testing.png)
 
 VWO offers a range of different products. Its testing product, VWO Testing, includes visual and code editors. You can run both A/B and multivariate tests, though the latter is limited to its Pro and Enterprise plans.
 
@@ -111,7 +111,7 @@ VWO doesn't publish its pricing publicly, but it does offer a 14-day free trial.
 
 ### Adobe Target
 
-IMAGE
+![adobe target](../images/blog/hipaa-compliant-ab-testing/adobe.png)
 
 Adobe Target is part of Adobe's Experience Cloud, though it can be bought and used on its own. It supports A/B and multivariate tests, though unlike Kameleoon and PostHog it doesn't offer feature flagging as it's primarily aimed at marketing teams rather than product developers. To this end, it includes a visual editor so marketing teams can easily make changes to pages and run tests on conversion independently.
 
@@ -127,4 +127,3 @@ What [Adobe says](https://www.adobe.com/trust/compliance/hipaa-ready.html):
 #### How much does Adobe target cost?
 
 Adobe doesn't publish pricing for Adobe Target, but suffice it to say it probably won't be cheap given its typical clientele are multination corporations. As noted in its T&Cs, using its "HIPAA-Ready Service" may incur an additional cost above a normal subscription plan.
-
