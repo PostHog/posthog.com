@@ -124,6 +124,6 @@ What [Adobe says](https://www.adobe.com/trust/compliance/hipaa-ready.html):
 
 > "Adobe provides health care customers with services that are ready to accept PHI, referring to these services as HIPAA-Ready Services. These HIPAA-Ready Services have additional features and functionalities that allow for both customers, who are Covered Entities or Business Associates, and Adobe to comply with their respective HIPAA obligations. These additional features may increase your license or subscription costs."
 
-#### How much does Adobe target cost?
+#### How much does Adobe Target cost?
 
-Adobe doesn't publish pricing for Adobe Target, but suffice it to say it probably won't be cheap given its typical clientele are multination corporations. As noted in its T&Cs, using its "HIPAA-Ready Service" may incur an additional cost above a normal subscription plan.
+Adobe doesn't publish pricing for Adobe Target, but suffice it to say it probably won't be cheap given its typical clientele are multinational corporations. As noted in its T&Cs, using its "HIPAA-Ready Service" may incur an additional cost above a normal subscription plan.
