@@ -16,7 +16,6 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
     const Question = path.resolve(`src/templates/Question.js`)
     const SqueakTopic = path.resolve(`src/templates/SqueakTopic.tsx`)
     const Job = path.resolve(`src/templates/Job.tsx`)
-    const JobApply = path.resolve(`src/templates/JobApply.tsx`)
 
     // Tutorials
     const TutorialTemplate = path.resolve(`src/templates/tutorials/Tutorial.tsx`)
@@ -532,13 +531,6 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
             context: {
                 id,
                 slug,
-            },
-        })
-        createPage({
-            path: `${slug}/apply`,
-            component: JobApply,
-            context: {
-                id,
             },
         })
     })
