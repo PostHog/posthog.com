@@ -13,7 +13,7 @@ categories: ["CEO diaries", "Inside PostHog", "Open Source"]
 
 Open source projects have long battled with how to finance themselves. [PostHog](https://github.com/posthog/posthog) is lucky to have significant funding and wanted to share what we did to help other cool projects take off.
 
-For those who've not met us before, PostHog provide open source product analytics. We went through the YCombinator [W20 batch](https://www.ycombinator.com/companies?batch=w2020), which took place from January to March 2020. We have raised $3.025M in funding really quickly, and wanted to share what we did. We may well not be a typical company, but we would hope this gives some lessons learned regardless.
+For those who've not met us before, PostHog provide open source product analytics. We went through the Y Combinator [W20 batch](https://www.ycombinator.com/companies?batch=w2020), which took place from January to March 2020. We have raised $3.025M in funding really quickly, and wanted to share what we did. We may well not be a typical company, but we would hope this gives some lessons learned regardless.
 
 ## Why raise money at all
 
@@ -146,7 +146,7 @@ We had to shift from selling ourselves to investors, to having to let investors 
 
 It may have been luck, but we didn't have a single negative interaction the entire way through this process. People wanted to understand what we're working on, they were encouraging and very helpful - even when they said no in many cases. A lot of the meetings were very intense and direct, but those were the most helpful ones of all. If you can handle QA, you can handle VC!
 
-## The impact of coronavirus
+## The impact of coronavirus
 
 Coronavirus' impact made fundraising harder. We had started raising as the virus was spreading in China, but before it had affected the US significantly.
 
@@ -204,7 +204,7 @@ This was handy to store more context than is possible in as spreadsheet.
 
 The format was a single long document, with more detailed notes that I stored as a private repo. I just had 5-10 bullet points about each person I was meeting and their firm, that I would generate during the [planning process](#plan-the-meeting).
 
-### Captable management
+### Captable management
 
 We used [Pulley](https://pulley.com/) for this. [Captable.io](https://captable.io/) is a well known alternative. 
 

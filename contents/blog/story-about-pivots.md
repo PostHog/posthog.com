@@ -12,7 +12,7 @@ featuredImageType: full
 
 PostHog has pivoted _a lot_.
 
-After 5 pivots in 6 months, we got into [YCombinator](https://www.ycombinator.com/) last year, pivoted again whilst we were there and have now gone from the first commit to thousands of deployments, a team across 10 countries and $12M raised, in well under a year. We've a long way to go, but we're delighted at how it has gone so far.
+After 5 pivots in 6 months, we got into [Y Combinator](https://www.ycombinator.com/) last year, pivoted again whilst we were there and have now gone from the first commit to thousands of deployments, a team across 10 countries and $12M raised, in well under a year. We've a long way to go, but we're delighted at how it has gone so far.
 
 This is that story and what we learned from it.
 
@@ -127,7 +127,7 @@ I spoke with every developer or engineering leader I'd ever worked with, and man
 
 So we built a survey tool that integrated with git repositories. After each pull request, it would ask the developer to answer a few quick questions - did anything slow them down, what type of problem was it, and roughly how much time was wasted. The tool would then visualize the code base against time lost to help surface where to start.
 
-We got quite a lot of users, and we got into YCombinator with this idea. Three weeks into the batch, we had reached 600 users, with a 50% response rate to the surveys.
+We got quite a lot of users, and we got into Y Combinator with this idea. Three weeks into the batch, we had reached 600 users, with a 50% response rate to the surveys.
 
 We had started trying to charge people for the product. But we kept getting feedback that although it was a nice way to log issues, it just wasn't helping solve the problem. A few teams converted at very low order values with a lot of pushing, but it was clear we had a problem.
 
@@ -151,7 +151,7 @@ Those fickle engineers joining companies and leaving them whenever they want to 
 
 This idea didn't come from us, which doomed it before it even really started.
 
-This lasted all of 5 days. We had a bunch of meetings left over from (4) to validate it. Amusingly we had to do a YCombinator demo day dry run for this in front of 500 people who made up the YC batch.
+This lasted all of 5 days. We had a bunch of meetings left over from (4) to validate it. Amusingly we had to do a Y Combinator demo day dry run for this in front of 500 people who made up the YC batch.
 
 We had a wildly unenthusiastic response from prospective users. The lowlight was during one of the meetings that we resorted to asking the CTO of an 80 person start up what his biggest problem was, "I've not really got any". Noice, noice.
 
@@ -201,7 +201,7 @@ We implemented an important rule:
 
 We inclined to pivot _very_ frequently, whereas it's more typical for people to not want to do so until way too late. Know where you sit on this line. We had to add a small delay so we weren't acting impulsively.
 
-This is normally [the other way around](https://www.inc.com/scott-mautz/jeff-immelt-just-nailed-why-too-many-startups-pivot-their-business-too-late.html) - people don't start over soon enough. During YCombinator, we saw companies say they were pivoting almost every time we saw them, but without having built and tested their new thing. Those companies had a really tough time by the end of the batch.
+This is normally [the other way around](https://www.inc.com/scott-mautz/jeff-immelt-just-nailed-why-too-many-startups-pivot-their-business-too-late.html) - people don't start over soon enough. During Y Combinator, we saw companies say they were pivoting almost every time we saw them, but without having built and tested their new thing. Those companies had a really tough time by the end of the batch.
 
 I'm now glad we were so decisive.
 
