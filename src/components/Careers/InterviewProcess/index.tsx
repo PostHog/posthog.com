@@ -49,12 +49,12 @@ export const InterviewProcess = () => {
     }
     return (
         <div className="pt-24 mb-16 text-center" id="interview-process">
-            <Structure.Section width="3xl">
+            <Structure.Section width="5xl">
                 <Structure.SectionHeader
                     title="Get paid to try working here"
                     titleTag="h2"
                     leadText="We do 2-3 short interviews, then pay you to do some real life, or close to real life, work:"
-                    leadTextClassName="opacity-80"
+                    leadTextClassName=""
                 />
             </Structure.Section>
             <SliderNav

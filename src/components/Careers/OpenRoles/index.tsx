@@ -5,9 +5,9 @@ import { Structure } from '../../Structure'
 export const OpenRoles = () => {
     // Some of the styling overrides here lives in src/styles/workable-overrides.css
     return (
-        <div id="open-roles">
+        <div id="open-roles" className="mt-16">
             <Structure.Section width="5xl" className="">
-                <h2 className="text-center mb-12">Open roles</h2>
+                <h2 className="text-center text-5xl mb-12">Open roles</h2>
 
                 <div className="md:flex">
                     <div className="flex-1 max-w-md md:mr-16 md:mt-4 mb-12 md:mb-0 mx-auto">
