@@ -38,8 +38,6 @@ These are the broad principles, but **please consult an expert** before making a
 
 ## The best HIPAA-compliant A/B testing tools
 
-
-
 ### PostHog
 
 ![posthog experimentation](../images/blog/hipaa-compliant-ab-testing/posthog.png)
@@ -107,8 +105,6 @@ What [VWO says](https://vwo.com/compliance/hipaa/):
 
 VWO doesn't publish its pricing publicly, but it does offer a 14-day free trial.
 
-> **HIPAA password requirements:** HIPAA requires Covered Entities and Business Associates to have "creating, changing, and safeguarding passwords". Kameleoon and VWO state this means you must force users to update their passwords every 90 days, but this is based on [out of date advice](https://www.hipaajournal.com/what-are-the-hipaa-password-expiration-requirements/) first published in 2004. [Updated advice](https://www.hipaajournal.com/what-are-the-hipaa-password-expiration-requirements/) published by the National Institute of Standards and Technology in 2017 states "Verifiers SHOULD NOT require memorized secrets [passwords] to be changed arbitrarily (e.g., periodically)."  
-
 ### Adobe Target
 
 ![adobe target](../images/blog/hipaa-compliant-ab-testing/adobe.png)
@@ -127,3 +123,17 @@ What [Adobe says](https://www.adobe.com/trust/compliance/hipaa-ready.html):
 #### How much does Adobe Target cost?
 
 Adobe doesn't publish pricing for Adobe Target, but suffice it to say it probably won't be cheap given its typical clientele are multinational corporations. As noted in its T&Cs, using its "HIPAA-Ready Service" may incur an additional cost above a normal subscription plan.
+
+## FAQ
+
+### What are the password requirements under HIPAA?
+
+HIPAA requires Covered Entities and Business Associates to have "creating, changing, and safeguarding passwords". Kameleoon and VWO state this means you must force users to update their passwords every 90 days, but this is based on [out of date advice](https://www.hipaajournal.com/what-are-the-hipaa-password-expiration-requirements/) first published in 2004. [Updated advice](https://www.hipaajournal.com/what-are-the-hipaa-password-expiration-requirements/) published by the National Institute of Standards and Technology in 2017 states "Verifiers SHOULD NOT require memorized secrets [passwords] to be changed arbitrarily (e.g., periodically)."
+
+Why? It's logical, really. Research shows that, when required to change passwords frequently, users are more likely to use weaker, easy to rememeber passwords and make small, predictable changes than use a strong one. Anyone who's had to change their password every 30 days knows this is true already.
+
+### What's the difference between A/B and multivariate testing?
+
+**A/B testing** involves comparing the conversion rates of two or more different versions of the same page or user experience. Users are sent to one version or the other, and the outcomes are compared until a large enough sample has been achieved to measure the statistical significance of the results. A/B testing is sometimes called 'split testing' and you can test more than two pages, a process sometimes referred to as A/B/n testing.
+
+**Multivariate testing** is similar to A/B testing, but it tests more page elements together to understand how they interact with each other. One would, for example, use a multivariate test to compare all combinations of three different page headlines and three different CTA (call to action) when paired together. The basic process is similar to an A/B test, but instead of compariing whole page designs, your're comparing specific elements to each other.
