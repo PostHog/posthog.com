@@ -11,7 +11,7 @@ featuredImage: ../images/blog/transparency.jpeg
 featuredImageType: full
 ---
 
-Today I’d like to ~~rant~~ talk about how non-engineering people at startups – especially execs – seem to treat engineers like a fundamentally different type of human being. A whole new species, with a different set of personal motivations, goals, frustrations, and passions to the rest of the company.
+Today I’d like to ~~rant~~ talk about how non-engineering people at startups – especially execs – treat engineers like a fundamentally different type of human being. A whole new species, with a different set of personal motivations, goals, frustrations, and passions to the rest of the company.
 
 Why does this bizarre behavior occur? And why does it matter?
 
