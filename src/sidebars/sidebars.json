@@ -368,6 +368,10 @@
                         {
                             "name": "MDX setup",
                             "url": "/handbook/engineering/posthog-com/mdx-setup"
+                        },
+                        {
+                            "name": "Markdown",
+                            "url": "/handbook/engineering/posthog-com/markdown"
                         }
                     ]
                 },

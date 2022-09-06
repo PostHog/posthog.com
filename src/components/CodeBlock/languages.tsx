@@ -5,13 +5,14 @@ import Prism from 'prism-react-renderer/prism'
 
 require('prismjs/components/prism-php')
 require('prismjs/components/prism-ruby')
+require('prismjs/components/prism-java')
 require('prismjs/components/prism-swift')
 require('prismjs/components/prism-dart')
 require('prismjs/components/prism-elixir')
 
 type LanguageMap = {
     [key: string]: {
-        language: Language | 'html' | 'xml' | 'shell' | 'php' | 'ruby' | 'swift' | 'dart' | 'elixir'
+        language: Language | 'html' | 'xml' | 'shell' | 'php' | 'ruby' | 'swift' | 'dart' | 'elixir' | 'java'
         label: React.ReactNode
     }
 }
@@ -32,6 +33,10 @@ const languageMap: LanguageMap = {
     tsx: {
         language: 'jsx',
         label: 'TSX',
+    },
+    mdx: {
+        language: 'jsx',
+        label: 'MDX',
     },
     javascript: {
         language: 'javascript',
@@ -62,7 +67,7 @@ const languageMap: LanguageMap = {
         label: 'PHP',
     },
     java: {
-        language: 'cpp',
+        language: 'java',
         label: 'Java',
     },
     ruby: {
@@ -124,7 +129,7 @@ const languageMap: LanguageMap = {
         ),
     },
     android: {
-        language: 'clike',
+        language: 'java',
         label: 'Android',
     },
     objectivec: {
