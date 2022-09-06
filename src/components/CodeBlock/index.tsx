@@ -122,7 +122,7 @@ export const SingleCodeBlock = ({ label, language, children, ...props }: SingleC
 
 export const CodeBlock = ({
     label,
-    selector = 'dropdown',
+    selector = 'tabs',
     showLabel = true,
     showCopy = true,
     showLineNumbers = false,
