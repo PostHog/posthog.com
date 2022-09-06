@@ -138,13 +138,11 @@ PostHog 1.31.0 introduced support for [group analytics](/docs/user-guides/group-
 
 -   Capture an event and associate it with a group
 
-```js
-// in objective-c
+```objectivec
 [[PHGPostHog sharedPostHog] group:@"some-type" groupKey:@"some-key" properties:@{ @"name": @"some-company-name" }];
 ```
 
-```js
-// in swift
+```swift
 posthog.group( "some-type", groupKey: "some-key", properties: [
     "name": "some-company-name"
 ])
@@ -158,25 +156,21 @@ Here's how you can use them:
 
 -   Check if a feature is enabled:
 
-```js
-// in objective-c
+```objectivec
 [[PHGPosthog sharedPostHog] isFeatureEnabled:@"keyword"];
 ```
 
-```js
-// in swift
+```swift
 posthog.isFeatureEnabled('keyword')
 ```
 
 -   Trigger a reload of the feature flags:
 
-```js
-// in objective-c
+```objectivec
 [[PHGPosthog sharedPostHog] reloadFeatureFlags];
 ```
 
-```js
-// in swift
+```swift
 posthog.reloadFeatureFlags()
 ```
 
@@ -186,13 +180,11 @@ posthog.reloadFeatureFlags()
 
 If you're using multivariate feature flags, you can also get the value of the flag, as well as whether or not it is enabled. 
 
-```js
-// in objective-c
+```objectivec
 [[PHGPosthog sharedPostHog] getFeatureFlag:@"some-flag"];
 ```
 
-```js
-// in swift
+```swift
 posthog.getFeatureFlag("some-flag")
 ```
 
