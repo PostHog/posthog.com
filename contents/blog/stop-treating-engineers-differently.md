@@ -61,4 +61,10 @@ As a non-engineer, my one simple trick™ is to treat engineers as cultural cana
 
 Every time you hear someone saying ‘engineers don’t like X’ or ‘the engineering team have complained about Y’, **use that as an opportunity to think about how this applies to your whole organization**. Nine times out of 10, I’ll bet you find that you’re looking at a broader team culture issue, not an engineering one. 
 
+If you want to go further, I recommend checking out:
+
+- [The Pragmatic Engineer](https://newsletter.pragmaticengineer.com/) - Gergely is the gold standard in high quality writing about engineering culture
+- [Lenny's Newsletter](https://www.lennysnewsletter.com/) - yes I know Lenny is product-focused, but he covers a lot of the same culture ground
+- [Technically](https://technically.substack.com/) - Justin explains technical concepts really well, which can help you demystify engineering culture a lil' bit
+
 <NewsletterForm compact />
