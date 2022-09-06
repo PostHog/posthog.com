@@ -32,11 +32,10 @@ module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, 
             })
 
             if (res.status !== 200) {
-                throw `Got status code ${repo.status}`
+                console.error(`Got status code ${res.status}`)
             }
 
             let contributors = await res.json()
-
             contributors = contributors.filter(
                 (contributor) => contributor && contributor.author && contributor.author.login
             )
