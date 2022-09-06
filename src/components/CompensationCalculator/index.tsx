@@ -18,6 +18,24 @@ const formatCur = (val: number, currency = 'USD') => {
     return formatter.format(Math.round(val * (currencyData[currency] || 1))).replace('.00', '')
 }
 
+const Section = ({
+    title,
+    description,
+    children,
+}: {
+    title: string
+    description?: string
+    children: React.ReactNode
+}) => {
+    return (
+        <div>
+            <h3 className="text-lg m-0 mt-5">{title}</h3>
+            {description && <p className="text-sm mb-2 text-black/70">{description}</p>}
+            {children}
+        </div>
+    )
+}
+
 const Factor: React.FC = (props) => {
     return (
         <div className="px-1.5 bg-white dark:bg-gray-accent-dark rounded border border-black/10 text-gray-accent-dark dark:text-gray whitespace-nowrap text-2xs my-1">
@@ -26,8 +44,23 @@ const Factor: React.FC = (props) => {
     )
 }
 
-export const CompensationCalculator = () => {
-    const [job, setJob] = React.useState<string | null>('Full Stack Engineer')
+export const CompensationCalculator = ({
+    hideFormula = false,
+    hideJob = false,
+    initialJob,
+    descriptions = { role: null, location: null, level: null, step: null },
+}: {
+    hideFormula?: boolean
+    initialJob?: undefined | null | string
+    hideJob?: boolean
+    descriptions?: {
+        role?: string | null
+        location?: string | null
+        level?: string | null
+        step?: string | null
+    }
+}) => {
+    const [job, setJob] = React.useState<string | null>(initialJob || 'Full Stack Engineer')
     const [country, setCountry] = React.useState<string | null>('United States')
     const [region, setRegion] = React.useState<string | null>('San Francisco, California')
     const [level, setLevel] = React.useState<string | null>('Senior')
@@ -102,54 +135,56 @@ export const CompensationCalculator = () => {
     const currentLocation = findLocation(country, region)
 
     const countries = Array.from(new Set(locationFactor.map((l) => l.country)))
-
     return (
-        <div className="ph-no-capture space-y-4 py-4">
-            <Combobox label="Select a role" value={job} onChange={setItem('job')} options={Object.keys(sfBenchmark)} />
-
-            <Combobox label="Country" value={country} onChange={setItem('country')} options={countries} />
-
-            <Combobox
-                label="Region"
-                value={region}
-                onChange={setItem('region')}
-                options={locationFactor
-                    .filter((location) => location.country === country)
-                    .map((location) => location.area)}
-                display={(area) => (area ? `${area} ${findLocation(country, area)?.locationFactor}` : '')}
-            />
-
-            <RadioGroup as="div" className="block" value={level} onChange={setItem('level')}>
-                <RadioGroup.Label className="block text-sm">Level</RadioGroup.Label>
-                <div className="w-full max-w-xs md:max-w-full md:w-auto inline-flex flex-col items-stretch md:flex-row md:items-center bg-white dark:bg-gray-accent-dark rounded divide-y md:divide-y-0 md:divide-x divide-black/10 overflow-hidden shadow-sm border border-black/10 text-sm mt-1.5">
-                    {Object.entries(levelModifier).map(([level, modifier]) => (
-                        <RadioGroup.Option
-                            as="button"
-                            key={level}
-                            value={level}
-                            className={({ checked }) => `
+        <div className="ph-no-capture space-y-4">
+            {!hideJob && (
+                <Section title="Role" description={descriptions['role'] && descriptions['role']}>
+                    <Combobox value={job} onChange={setItem('job')} options={Object.keys(sfBenchmark)} />
+                </Section>
+            )}
+            <Section title={'Location'} description={descriptions['location'] && descriptions['location']}>
+                <div className="grid grid-cols-2 gap-x-4">
+                    <Combobox label="Country" value={country} onChange={setItem('country')} options={countries} />
+                    <Combobox
+                        label="Region"
+                        value={region}
+                        onChange={setItem('region')}
+                        options={locationFactor
+                            .filter((location) => location.country === country)
+                            .map((location) => location.area)}
+                        display={(area) => (area ? `${area} ${findLocation(country, area)?.locationFactor}` : '')}
+                    />
+                </div>
+            </Section>
+            <Section title="Level" description={descriptions['level'] && descriptions['level']}>
+                <RadioGroup as="div" className="block" value={level} onChange={setItem('level')}>
+                    <div className="w-full max-w-xs md:max-w-full md:w-auto inline-flex flex-col items-stretch md:flex-row md:items-center bg-white dark:bg-gray-accent-dark rounded divide-y md:divide-y-0 md:divide-x divide-black/10 overflow-hidden shadow-sm border border-black/10 text-sm mt-1.5">
+                        {Object.entries(levelModifier).map(([level, modifier]) => (
+                            <RadioGroup.Option
+                                as="button"
+                                key={level}
+                                value={level}
+                                className={({ checked }) => `
                                 px-4 py-1.5 whitespace-nowrap text-left md:text-center
                               ${checked ? 'bg-orange text-white' : 'hover:bg-black/10'}
                             `}
-                        >
-                            {level} <span>{modifier}</span>
-                        </RadioGroup.Option>
-                    ))}
-                </div>
-            </RadioGroup>
+                            >
+                                {level} <span>{modifier}</span>
+                            </RadioGroup.Option>
+                        ))}
+                    </div>
+                </RadioGroup>
+            </Section>
+            <Section title="Step" description={descriptions['step'] && descriptions['step']}>
+                <Combobox
+                    value={step}
+                    onChange={setItem('step')}
+                    options={Object.keys(stepModifier)}
+                    display={(step: string) => `${step} ${stepModifier[step]?.[0]} - ${stepModifier[step]?.[1]}`}
+                />
+            </Section>
 
-            <Combobox
-                label="Step"
-                value={step}
-                onChange={setItem('step')}
-                options={Object.keys(stepModifier)}
-                display={(step: string) => `${step} ${stepModifier[step]?.[0]} - ${stepModifier[step]?.[1]}`}
-            />
-
-            <div>
-                <label className="text-sm" htmlFor="compensation">
-                    Base salary
-                </label>
+            <Section title="Base salary">
                 <div className="text-2xl mt-1" id="compensation">
                     {job && country && region && currentLocation && level && step
                         ? formatCur(
@@ -170,7 +205,7 @@ export const CompensationCalculator = () => {
                           ' + equity'
                         : '--'}
                 </div>
-                {job && country && currentLocation && level && step && (
+                {!hideFormula && job && country && currentLocation && level && step && (
                     <div className="flex items-center flex-wrap space-x-2 text-gray">
                         <Factor>SF Benchmark: {formatCur(sfBenchmark[job], currentLocation?.currency)}</Factor>&nbsp;
                         <span>&times;</span>
@@ -181,7 +216,7 @@ export const CompensationCalculator = () => {
                         </Factor>
                     </div>
                 )}
-            </div>
+            </Section>
         </div>
     )
 }

@@ -8,6 +8,7 @@ import { countryCodeEmoji } from 'country-code-emoji'
 import Tooltip from 'components/Tooltip'
 import { kebabCase } from 'lib/utils'
 import Link from 'components/Link'
+import { CompensationCalculator } from 'components/CompensationCalculator'
 
 const JobSidebar = ({ team, teamLead }) => {
     return (
@@ -220,13 +221,16 @@ export default function Job({
     pageContext: { slug },
 }) {
     const timezone = parent?.customFields?.find(({ title, value }) => title === 'Timezone(s)')?.value
-    const [activeTab, setActiveTab] = useState('overview')
     return (
         <Layout>
             <SEO title={`${title} - PostHog`} />
             <div className="border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark">
                 <PostLayout
-                    tableOfContents={tableOfContents}
+                    tableOfContents={[
+                        ...tableOfContents,
+                        { value: 'Salary', url: 'salary', depth: 0 },
+                        { value: 'Apply', url: 'apply', depth: 0 },
+                    ]}
                     hideSearch
                     hideSurvey
                     sidebar={<JobSidebar team={team?.nodes} teamLead={teamLead} />}
@@ -252,10 +256,10 @@ export default function Job({
                                     </svg>
 
                                     <span className="grid">
-                                        <h4 className="text-lg m-0 font-normal leading-none">
+                                        <h4 className="text-base m-0 font-normal leading-none">
                                             <span>Department</span>
                                         </h4>
-                                        <p className="text-base m-0 mt-1">
+                                        <p className="text-sm m-0 mt-1">
                                             <strong className="text-black">{departmentName}</strong>
                                         </p>
                                     </span>
@@ -275,10 +279,10 @@ export default function Job({
                                     </svg>
 
                                     <span className="grid">
-                                        <h4 className="text-lg m-0 font-normal leading-none">
+                                        <h4 className="text-base m-0 font-normal leading-none">
                                             <span>Location</span>
                                         </h4>
-                                        <p className="text-base m-0 mt-1">
+                                        <p className="text-sm m-0 mt-1">
                                             <strong className="text-black">{locationName}</strong>
                                         </p>
                                     </span>
@@ -301,23 +305,51 @@ export default function Job({
                                         </svg>
 
                                         <span className="grid">
-                                            <h4 className="text-lg m-0 font-normal leading-none">
+                                            <h4 className="text-base m-0 font-normal leading-none">
                                                 <span>Timezone(s)</span>
                                             </h4>
-                                            <p className="text-base m-0 mt-1">
+                                            <p className="text-sm m-0 mt-1">
                                                 <strong className="text-black">{timezone}</strong>
                                             </p>
                                         </span>
                                     </li>
                                 )}
                             </ul>
-                            <div
-                                className="job-content mt-12 w-full flex-shrink-0 transition-all"
-                                dangerouslySetInnerHTML={{
-                                    __html: html,
-                                }}
-                            />
-                            <Apply id={id} info={info} />
+                            <div className="job-content mt-12 w-full flex-shrink-0 transition-all">
+                                <div
+                                    dangerouslySetInnerHTML={{
+                                        __html: html,
+                                    }}
+                                />
+
+                                <details open>
+                                    <summary>
+                                        <h2 id="salary">Salary</h2>
+                                    </summary>
+                                    <p>
+                                        We have a set system for compensation as part of being transparent. Salary
+                                        varies based on location and level of experience.{' '}
+                                        <Link to="/handbook/people/compensation">Learn more about compensation.</Link>
+                                    </p>
+                                    <div className="mb-6">
+                                        <CompensationCalculator
+                                            descriptions={{
+                                                step: `We hire into the Established step by default and believe there's a place to have incremental steps to allow for more flexibility.`,
+                                                location: `The benchmark for each role we are hiring for is based on the market rate in San Francisco.`,
+                                                level: `We pay more experienced team members a greater amount since it is reasonable to expect this correlates with an increase in skill`,
+                                            }}
+                                            hideFormula
+                                            initialJob={title}
+                                        />
+                                    </div>
+                                </details>
+                                <details open>
+                                    <summary>
+                                        <h2 id="apply">Apply</h2>
+                                    </summary>
+                                    <Apply id={id} info={info} />
+                                </details>
+                            </div>
                         </div>
                     </div>
                 </PostLayout>
