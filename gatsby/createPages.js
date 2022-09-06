@@ -250,6 +250,14 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
                 nodes {
                     id
                     title
+                    parent {
+                        ... on AshbyJob {
+                            customFields {
+                                value
+                                title
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -523,14 +531,16 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
     })
 
     result.data.jobs.nodes.forEach((node) => {
-        const { id, title } = node
+        const { id, title, parent } = node
         const slug = `careers/${slugify(title, { lower: true })}`
+        const team = parent?.customFields?.find(({ title, value }) => title === 'Team')?.value
         createPage({
             path: slug,
             component: Job,
             context: {
                 id,
                 slug,
+                team: team || '',
             },
         })
     })

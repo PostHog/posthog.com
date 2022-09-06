@@ -1,16 +1,69 @@
 import { button, CallToAction } from 'components/CallToAction'
 import Layout from 'components/Layout'
-import PostLayout, { ShareLinks, SidebarSection } from 'components/PostLayout'
+import PostLayout, { Contributor, ContributorImage, ShareLinks, SidebarSection } from 'components/PostLayout'
 import { SEO } from 'components/seo'
 import { graphql } from 'gatsby'
 import React, { useRef, useState } from 'react'
+import { countryCodeEmoji } from 'country-code-emoji'
+import Tooltip from 'components/Tooltip'
+import { kebabCase } from 'lib/utils'
+import Link from 'components/Link'
 
-const JobSidebar = () => {
+const JobSidebar = ({ team, teamLead }) => {
     return (
         <>
-            <SidebarSection>
-                <ShareLinks />
-            </SidebarSection>
+            {team?.length > 0 && (
+                <SidebarSection title="Meet your team">
+                    <ul className="list-none m-0 p-0 flex team-group">
+                        {team.map(({ frontmatter: { headshot, name, country, jobTitle } }) => {
+                            return (
+                                <li
+                                    key={name}
+                                    className="first:-ml-0 -ml-4 transition-all relative hover:scale-[1.2] active:scale-[1.1]"
+                                >
+                                    <Link to={`/handbook/company/team#${kebabCase(name) + '-' + kebabCase(jobTitle)}`}>
+                                        <Tooltip
+                                            className="whitespace-nowrap"
+                                            title={
+                                                <div className="flex space-x-1 items-center">
+                                                    <span>{name}</span>
+                                                    <span>{countryCodeEmoji(country)}</span>
+                                                </div>
+                                            }
+                                        >
+                                            <span className="relative">
+                                                <ContributorImage
+                                                    name={name}
+                                                    image={headshot}
+                                                    className="w-[50px] h-[50px]"
+                                                />
+                                            </span>
+                                        </Tooltip>
+                                    </Link>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                </SidebarSection>
+            )}
+            {teamLead && (
+                <SidebarSection title="Team lead">
+                    <Link
+                        to={`/handbook/company/team#${
+                            kebabCase(teamLead?.frontmatter?.name) + '-' + kebabCase(teamLead?.frontmatter?.jobTitle)
+                        }`}
+                        className="flex space-x-2 items-center"
+                    >
+                        <ContributorImage
+                            className="w-[40px] h-[40px]"
+                            image={teamLead?.frontmatter?.headshot}
+                            name={teamLead?.frontmatter?.name}
+                        />
+                        <p className="author text-base font-semibold m-0">{teamLead?.frontmatter?.name}</p>
+                        <span className="text-lg">{countryCodeEmoji(teamLead?.frontmatter?.country)}</span>
+                    </Link>
+                </SidebarSection>
+            )}
         </>
     )
 }
@@ -56,7 +109,7 @@ const components = {
         }
 
         return (
-            <div className="relative h-52 border border-gray-accent-light dark:border-gray-accent-dark border-dashed rounded-md flex justify-center items-center text-black/50 dark:text-white/50">
+            <div className="relative h-52 border border-gray-accent-light dark:border-gray-accent-dark border-dashed rounded-md flex justify-center items-center text-black/50 dark:text-white/50  bg-white">
                 <input
                     ref={inputRef}
                     onChange={handleDrop}
@@ -76,7 +129,7 @@ const components = {
                             <button
                                 onClick={() => inputRef?.current.click()}
                                 type="button"
-                                className={button('secondary', undefined, 'cursor-pointer', 'sm')}
+                                className={button('primary', undefined, 'cursor-pointer', 'sm')}
                             >
                                 Upload file
                             </button>
@@ -152,63 +205,119 @@ function Apply({ id, info }) {
 
 export default function Job({
     data: {
-        ashbyJobPosting: { title, departmentName, info, id },
+        team,
+        teamLead,
+        ashbyJobPosting: {
+            title,
+            departmentName,
+            info,
+            id,
+            locationName,
+            parent,
+            fields: { tableOfContents, html },
+        },
     },
     pageContext: { slug },
 }) {
+    const timezone = parent?.customFields?.find(({ title, value }) => title === 'Timezone(s)')?.value
     const [activeTab, setActiveTab] = useState('overview')
     return (
         <Layout>
             <SEO title={`${title} - PostHog`} />
             <div className="border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark">
-                <PostLayout hideSearch hideSurvey sidebar={<JobSidebar />} title="careers">
+                <PostLayout
+                    tableOfContents={tableOfContents}
+                    hideSearch
+                    hideSurvey
+                    sidebar={<JobSidebar team={team?.nodes} teamLead={teamLead} />}
+                    title="careers"
+                >
                     <div className="mb-8 relative">
                         <div>
                             <h1 className="m-0 text-5xl">{title}</h1>
-                            <h2 className="m-0 text-2xl text-black/50 dark:text-white/50 font-normal">
-                                {departmentName}
-                            </h2>
-                            <div className="grid grid-cols-2 w-full mt-6 sticky top-0 z-10 bg-tan dark:bg-primary">
-                                <button
-                                    onClick={() => setActiveTab('overview')}
-                                    className={`py-4 font-semibold opacity-70 hover:opacity-100 transition-all ${
-                                        activeTab === 'overview' ? 'text-red opacity-100' : ''
-                                    }`}
-                                >
-                                    Overview
-                                </button>
-                                <button
-                                    onClick={() => setActiveTab('apply')}
-                                    className={`py-4 font-semibold opacity-70 hover:opacity-100 transition-all ${
-                                        activeTab === 'apply' ? 'text-red opacity-100' : ''
-                                    }`}
-                                >
-                                    Apply
-                                </button>
-                                <div
-                                    style={{ transform: `translateX(${activeTab === 'overview' ? 0 : '100%'})` }}
-                                    className="absolute bottom-0 w-1/2 h-[2px] bg-red transition-all"
-                                />
-                            </div>
-                            <div className="flex overflow-hidden">
-                                <div
-                                    style={{
-                                        transform: `translateX(${activeTab === 'apply' ? '-100%' : 0})`,
-                                        maxHeight: activeTab === 'overview' ? 10000 : 0,
-                                    }}
-                                    className="job-content mt-12 w-full flex-shrink-0 transition-all"
-                                    dangerouslySetInnerHTML={{ __html: info?.descriptionHtml }}
-                                />
-                                <div
-                                    style={{
-                                        transform: `translateX(${activeTab === 'apply' ? '-100%' : 0})`,
-                                        maxHeight: activeTab === 'apply' ? 10000 : 0,
-                                    }}
-                                    className="w-full mt-12 flex-shrink-0 transition-all"
-                                >
-                                    <Apply id={id} info={info} />
-                                </div>
-                            </div>
+                            <ul className="list-none m-0 p-0 items-center text-black/50 dark:text-white/50 mt-6 flex space-x-6">
+                                <li className="flex space-x-2">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        fill="currentColor"
+                                        className="w-6 h-6"
+                                    >
+                                        <path
+                                            fillRule="evenodd"
+                                            d="M8.25 6.75a3.75 3.75 0 117.5 0 3.75 3.75 0 01-7.5 0zM15.75 9.75a3 3 0 116 0 3 3 0 01-6 0zM2.25 9.75a3 3 0 116 0 3 3 0 01-6 0zM6.31 15.117A6.745 6.745 0 0112 12a6.745 6.745 0 016.709 7.498.75.75 0 01-.372.568A12.696 12.696 0 0112 21.75c-2.305 0-4.47-.612-6.337-1.684a.75.75 0 01-.372-.568 6.787 6.787 0 011.019-4.38z"
+                                            clipRule="evenodd"
+                                        />
+                                        <path d="M5.082 14.254a8.287 8.287 0 00-1.308 5.135 9.687 9.687 0 01-1.764-.44l-.115-.04a.563.563 0 01-.373-.487l-.01-.121a3.75 3.75 0 013.57-4.047zM20.226 19.389a8.287 8.287 0 00-1.308-5.135 3.75 3.75 0 013.57 4.047l-.01.121a.563.563 0 01-.373.486l-.115.04c-.567.2-1.156.349-1.764.441z" />
+                                    </svg>
+
+                                    <span className="grid">
+                                        <h4 className="text-lg m-0 font-normal leading-none">
+                                            <span>Department</span>
+                                        </h4>
+                                        <p className="text-base m-0 mt-1">
+                                            <strong className="text-black">{departmentName}</strong>
+                                        </p>
+                                    </span>
+                                </li>
+                                <li className="flex space-x-2">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        fill="currentColor"
+                                        className="w-6 h-6"
+                                    >
+                                        <path
+                                            fillRule="evenodd"
+                                            d="M11.54 22.351l.07.04.028.016a.76.76 0 00.723 0l.028-.015.071-.041a16.975 16.975 0 001.144-.742 19.58 19.58 0 002.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 00-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 002.682 2.282 16.975 16.975 0 001.145.742zM12 13.5a3 3 0 100-6 3 3 0 000 6z"
+                                            clipRule="evenodd"
+                                        />
+                                    </svg>
+
+                                    <span className="grid">
+                                        <h4 className="text-lg m-0 font-normal leading-none">
+                                            <span>Location</span>
+                                        </h4>
+                                        <p className="text-base m-0 mt-1">
+                                            <strong className="text-black">{locationName}</strong>
+                                        </p>
+                                    </span>
+                                </li>
+                                {timezone && (
+                                    <li className="flex space-x-2">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            strokeWidth={1.5}
+                                            stroke="currentColor"
+                                            className="w-6 h-6"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                                            />
+                                        </svg>
+
+                                        <span className="grid">
+                                            <h4 className="text-lg m-0 font-normal leading-none">
+                                                <span>Timezone(s)</span>
+                                            </h4>
+                                            <p className="text-base m-0 mt-1">
+                                                <strong className="text-black">{timezone}</strong>
+                                            </p>
+                                        </span>
+                                    </li>
+                                )}
+                            </ul>
+                            <div
+                                className="job-content mt-12 w-full flex-shrink-0 transition-all"
+                                dangerouslySetInnerHTML={{
+                                    __html: html,
+                                }}
+                            />
+                            <Apply id={id} info={info} />
                         </div>
                     </div>
                 </PostLayout>
@@ -218,11 +327,58 @@ export default function Job({
 }
 
 export const query = graphql`
-    query JobQuery($id: String!) {
+    query JobQuery($id: String!, $team: String!) {
+        teamLead: mdx(frontmatter: { team: { in: [$team] }, teamLead: { eq: true } }) {
+            id
+            frontmatter {
+                name
+                country
+                jobTitle
+                headshot {
+                    id
+                    childImageSharp {
+                        gatsbyImageData
+                    }
+                }
+            }
+        }
+        team: allMdx(filter: { frontmatter: { team: { in: [$team] } } }) {
+            nodes {
+                id
+                frontmatter {
+                    name
+                    country
+                    jobTitle
+                    headshot {
+                        id
+                        childImageSharp {
+                            gatsbyImageData
+                        }
+                    }
+                }
+            }
+        }
         ashbyJobPosting(id: { eq: $id }) {
             id
             title
             departmentName
+            locationName
+            fields {
+                tableOfContents {
+                    value
+                    url
+                    depth
+                }
+                html
+            }
+            parent {
+                ... on AshbyJob {
+                    customFields {
+                        value
+                        title
+                    }
+                }
+            }
             info {
                 descriptionHtml
                 applicationFormDefinition {
