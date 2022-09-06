@@ -13,7 +13,7 @@ featuredImageType: full
 
 Today I’d like to ~~rant~~ talk about how non-engineering people at startups – especially execs – treat engineers like a fundamentally different type of human being. A whole new species, with a different set of personal motivations, goals, frustrations, and passions to the rest of the company.
 
-Why does this bizarre behavior occur? I think it's because non-engineers don't speak the language of technical work. Conversely, everyone at a startup has an opinion on recruitment and brand marketing because they're easily understoon by non-domain experts, but that’s a whole different rant...
+Why does this bizarre behavior occur? I think it's because non-engineers don't speak the language of technical work. Conversely, everyone at a startup has an opinion on recruitment and brand marketing because they're easily understood by non-domain experts, but that’s a whole different rant...
 
 Non-engineers have built up years of pre-baked assumptions about how engineers work and what they are like that don’t really stand up to scrutiny. These are some of the most commonly-repeated myths I’ve heard. I’ve focused on startup culture because that’s what I know, but I imagine some of this stuff is relevant to larger companies too. 
 
