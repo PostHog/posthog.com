@@ -32,7 +32,7 @@ module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, 
             })
 
             if (res.status !== 200) {
-                throw `Got status code ${repo.status}`
+                throw `Got status code ${res.status}`
             }
 
             let contributors = await res.json()
