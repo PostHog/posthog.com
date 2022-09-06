@@ -48,13 +48,11 @@ To set properties on your users via an event, you can leverage the event propert
 
 **Example**
 
-```c
-// in objective-c
+```objectivec
 [[PHGPostHog sharedPostHog] capture:@"Signed Up" properties:@{ @"plan": @"Pro++", @"$set":@{ @"userProp": "value1" } }];
 ```
 
-```c
-// in swift
+```swift
 posthog.capture("Signed Up", properties: ["plan": "Pro++", "$set": ["userProp": "value1"] ])
 ```
 
@@ -66,13 +64,11 @@ When capturing an event, you can pass a property called `$set` as an event prope
 
 **Example**
 
-```c
-// in objective-c
+```objectivec
 [[PHGPostHog sharedPostHog] capture:@"Signed Up" properties:@{ @"plan": @"Pro++", @"$set_once":@{ @"userProp": "value1" } }];
 ```
 
-```c
-// in swift
+```swift
 posthog.capture("Signed Up", properties: ["plan": "Pro++", "$set_once": ["userProp": "value1"] ])
 ```
 
@@ -92,13 +88,11 @@ configuration.flushAt = 1;
 You can also manually flush the queue:
 
 ```objectivec
-// in objective-c
 [[PHGPostHog sharedPostHog] capture:@"Logged Out"];
 [[PHGPostHog sharedPostHog] flush]
 ```
 
-```js
-// in swift
+```swift
 posthog.capture('Logged Out')
 posthog.flush()
 ```
@@ -108,12 +102,10 @@ posthog.flush()
 To reset the user's ID and anonymous ID, call `reset`. Usually you would do this right after the user logs out.
 
 ```objectivec
-// in objective-c
 [[PHGPostHog sharedPostHog] reset]
 ```
 
-```js
-// in swift
+```swift
 posthog.reset()
 ```
 
@@ -124,12 +116,10 @@ With `configuration.recordScreenViews` set as `YES`, PostHog will try to record 
 If you want to manually send a new screen capture event, use the `screen` function.
 
 ```objectivec
-// in objective-c
 [[PHGPostHog sharedPostHog] screen:@"Dashboard" properties:@{ @"fromIcon": @"bottom" }];
 ```
 
-```js
-// in swift
+```swift
 posthog.capture("Dashboard", properties: ["fromIcon": "bottom"])
 ```
 

@@ -22,7 +22,7 @@ To set up basic monitoring, we will need to enable the following two charts:
 
 which can be done by adding the following lines to our `values.yaml`
 
-```yaml
+```yaml file=values.yaml
 grafana:
     enabled: true
 prometheus:
@@ -31,7 +31,7 @@ prometheus:
 
 Next, we'll need to upgrade our deployment to spin-up the additional services, which can be done using the following command:
 
-```
+```shell
 helm upgrade -f values.yaml --timeout 30m --namespace posthog posthog posthog/posthog --atomic --wait --wait-for-jobs --debug
 ```
 
@@ -40,13 +40,13 @@ helm upgrade -f values.yaml --timeout 30m --namespace posthog posthog posthog/po
 Once our deployment is back up and running, we can now log in to Grafana to see our dashboards.
 By default, a single user is created with the username `admin` and an auto-generated password can be fetched by running:
 
-```
+```shell
 kubectl -n posthog get secret posthog-grafana -o jsonpath="{.data.admin-password}" | base64 --decode
 ```
 
 Next, we'll connect to Grafana by port-forwarding into the `posthog-grafana` service:
 
-```
+```shell
 kubectl -n posthog port-forward svc/posthog-grafana 8080:80
 ```
 
@@ -101,7 +101,7 @@ To set this up, we will need to enable the following two charts:
 
 which can be done by adding the following values to your configuration:
 
-```yaml
+```yaml file=values.yaml
 loki:
     enabled: true
 promtail:
@@ -110,7 +110,7 @@ promtail:
 
 Once again, we will need to upgrade our deployment for the new changes go into effect, which can be done by following command:
 
-```
+```shell
 helm upgrade -f values.yaml --timeout 30m --namespace posthog posthog posthog/posthog --atomic --wait --wait-for-jobs --debug
 ```
 

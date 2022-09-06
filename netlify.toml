@@ -2224,3 +2224,18 @@
 [[redirects]]
     from = "/handbook/engineering/databases"
     to = "/docs/how-posthog-works/ingestion-pipeline"
+
+# Added: 2022-08-29
+[[redirects]]
+    from = "/docs/architecture/ingestion-pipeline"
+    to = "/docs/how-posthog-works/ingestion-pipeline"
+
+# Added: 2022-09-01
+[[redirects]]
+    from = "/blog/the-posthog-array-1-39-1"
+    to = "/blog/the-posthog-array-1-39-0"
+    
+# Added: 2022-09-02    
+[[redirects]]
+    from = "/product/experimentation"
+    to = "/product/experimentation-suite"

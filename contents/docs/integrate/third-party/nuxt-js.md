@@ -28,13 +28,13 @@ the posthog object and make it available across our application.
 
 The first thing you want to do is to install the [posthog-js library](/docs/integrate/client/js) in your project - so add it using your package manager:
 
-```
+```shell
 yarn add posthog-js
 ```
 
 or
 
-```
+```shell
 npm install --save posthog-js
 ```
 
