@@ -36,7 +36,6 @@ module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, 
             }
 
             let contributors = await res.json()
-
             contributors = contributors.filter(
                 (contributor) => contributor && contributor.author && contributor.author.login
             )
