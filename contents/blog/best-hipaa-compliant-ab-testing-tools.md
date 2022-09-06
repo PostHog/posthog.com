@@ -16,23 +16,23 @@ What do Google Optimize, Optimizely, Convert, Webtrends Optimize and Splitbee ha
 1. They're popular A/B testing tools
 2. None of them are HIPAA compliant
 
-Anyone who develops a healthcare product or app will be painfully familiar with this problem. Most the mainstream tools either won't support you, or will charge you a fortune to agree to signing a BAA (Business Associate Agreement).
+Anyone who develops a healthcare product or app will be painfully familiar with this problem. Most of the mainstream tools either won't support you, or will charge you a fortune to agree to signing a BAA (Business Associate Agreement).
 
-Tempting as it might be to do without an experimentation capability in your stack, that would be a mistake. It's nearly impossible to eliminate second- and third-order effects without a robust testing system, and a good testing product will allow you to target specific user properties so you get actionable results.
+While it's tempting to make do without experimentation capability in your stack, that's a mistake. It's nearly impossible to eliminate second- and third-order effects without a robust testing system, and a good testing product will allow you to target specific user properties so you get actionable results.
 
-In this guide we'll outline your best options for HIPAA-compliant A/B testing, and some of the requirements for remaining HIPAA compliant while using these and other analytics tools. 
+In this guide we'll outline your best options for HIPAA-compliant A/B testing, and some of the requirements for remaining HIPAA-compliant while using these and other analytics tools. 
 
-## HIPAA compliance in AB testing
+## HIPAA compliance in A/B testing
 
-Within HIPAA there is the [Privacy Rule](https://www.hhs.gov/ocr/privacy/hipaa/administrative/privacyrule/index.html) and the [Security Rule](https://www.hhs.gov/ocr/privacy/hipaa/administrative/securityrule/index.html). Breaching either can result in hefty financial penalties, but for the sake of this guide we're mostly interested in the how the Privacy Rule impacts analytics and A/B testing.
+Within HIPAA, you need to follow the [Privacy Rule](https://www.hhs.gov/ocr/privacy/hipaa/administrative/privacyrule/index.html) and the [Security Rule](https://www.hhs.gov/ocr/privacy/hipaa/administrative/securityrule/index.html). Breaching either can result in hefty financial penalties, but for the sake of this guide we're mostly interested in the how the Privacy Rule impacts analytics and A/B testing.
 
 Within the Privacy Rule framework, there are three different ways to comply with HIPAA when adopting user analytics and experimentation tools:
 
-1. **Anonymize all PHI and identifiers:** This is an obvious starting point. There are two so-called '[De-indentification Standards](https://www.hhs.gov/hipaa/for-professionals/privacy/special-topics/de-identification/index.html#standard)' – 'Expert Determination', where an expert verifies that data isn't personally identifiable; and 'Safe Harbor' where all 18 types of identifier are removed. The former is preferable simply because applying the Safe Harbor approach can render data effectively useless for analytical purposes.
+1. **Anonymize all PHI and identifiers:** This is an obvious starting point. There are two so-called '[De-identification Standards](https://www.hhs.gov/hipaa/for-professionals/privacy/special-topics/de-identification/index.html#standard)' – 'Expert Determination', where an expert verifies that data isn't personally identifiable; and 'Safe Harbor' where all 18 types of identifier are removed. The former is preferable simply because applying the Safe Harbor approach can render data effectively useless for analytical purposes.
 
-2. **Sign a BAA with a third-party tool:** You must sign a BAA with any third-party platform that handles your protected health information (PHI). This can mean signing multiple agreements, though, such as one with your analytical partner, but also any tools you use for importing and exporting data from your data warehouse.
+2. **Sign a BAA with a third-party tool:** You must sign a BAA with any third-party platform that handles your protected health information (PHI). This can mean signing multiple agreements, though, such as one with your analytical partner, but also _any_ tools you use for importing and exporting data from your data warehouse.
 
-3. **Self-host and keep control of all your data:** The less common, but arguably most powerful option, is to self-host tools for analytics and experimentation on your own infrastructure. This reduces the number of BAA's and general legal shenanigans needed to generate user insights. The only downside is you'll need the expertise to manage self-hosted instances, or third-party support to do so.
+3. **Self-host and keep control of all your data:** The less common, but arguably most powerful option, is to self-host tools for analytics and experimentation on your own infrastructure. This reduces the number of BAAs and general legal wrangling needed to generate user insights. The only downside is you'll need the expertise to manage self-hosted instances, or third-party support to do so.
 
 These are the broad principles, but **please consult an expert** before making any final decision on how to implement tools in compliance with HIPAA. 
 
@@ -51,7 +51,7 @@ PostHog is open source, which means you can inspect the code yourself and extend
 - **Self-Hosting:** Yes
 - **BAA Available**: No
 
-PostHog doesn't currently offer a BAA PostHog Cloud, so using it in compliance with HIPAA means [self-hosting it](/docs/self-host) on your own infrastructure. The [PostHog Marketplace](/marketplace) includes several third-party providers who can support self-hosted deployment, or manage your instance entirely, if you need help.
+PostHog doesn't currently offer a BAA for PostHog Cloud, so using it in compliance with HIPAA means [self-hosting it](/docs/self-host) on your own infrastructure. The [PostHog Marketplace](/marketplace) includes several third-party providers who can support self-hosted deployment, or manage your instance entirely, if you need help.
 
 What [PostHog says](/docs/privacy/hipaa-compliance):
 
@@ -122,7 +122,7 @@ What [Adobe says](https://www.adobe.com/trust/compliance/hipaa-ready.html):
 
 #### How much does Adobe Target cost?
 
-Adobe doesn't publish pricing for Adobe Target, but suffice it to say it probably won't be cheap given its typical clientele are multinational corporations. As noted in its T&Cs, using its "HIPAA-Ready Service" may incur an additional cost above a normal subscription plan.
+Adobe doesn't publish pricing for Adobe Target, but suffice it to say it probably won't be cheap given its typical clients are multinational corporations. As noted in its T&Cs, using its "HIPAA-Ready Service" may incur an additional cost above a normal subscription plan.
 
 ## FAQ
 
