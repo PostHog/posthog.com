@@ -42,6 +42,7 @@ export default function Job({
     data: {
         team,
         teamLead,
+        teamInfo,
         allJobPostings,
         ashbyJobPosting: {
             title,
@@ -93,11 +94,18 @@ export default function Job({
                     ]}
                     hideSearch
                     hideSurvey
-                    sidebar={<Sidebar teamName={teamName} team={team?.nodes} teamLead={teamLead} />}
+                    sidebar={
+                        <Sidebar
+                            teamSlug={teamInfo?.fields?.slug}
+                            teamName={teamName}
+                            team={team?.nodes}
+                            teamLead={teamLead}
+                        />
+                    }
                     title="careers"
                     menu={menu}
                 >
-                    <div className="mb-8 relative">
+                    <div className="mb-8 relative mt-8 lg:mt-0">
                         <div>
                             <h1 className="m-0 text-5xl">{title}</h1>
                             <ul className="list-none m-0 p-0 md:items-center text-black/50 dark:text-white/50 mt-6 flex md:flex-row flex-col md:space-x-6 md:space-y-0 space-y-6">
@@ -155,7 +163,7 @@ export default function Job({
 }
 
 export const query = graphql`
-    query JobQuery($id: String!, $teamName: String!) {
+    query JobQuery($id: String!, $teamName: String!, $teamNameInfo: String!) {
         teamLead: mdx(frontmatter: { team: { in: [$teamName] }, teamLead: { eq: true } }) {
             id
             frontmatter {
@@ -227,6 +235,11 @@ export const query = graphql`
         allJobPostings: allAshbyJobPosting {
             nodes {
                 title
+            }
+        }
+        teamInfo: mdx(frontmatter: { title: { eq: $teamNameInfo } }) {
+            fields {
+                slug
             }
         }
     }

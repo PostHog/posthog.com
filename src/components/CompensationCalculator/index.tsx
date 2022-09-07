@@ -64,7 +64,7 @@ export const CompensationCalculator = ({
     const [country, setCountry] = React.useState<string | null>('United States')
     const [region, setRegion] = React.useState<string | null>('San Francisco, California')
     const [level, setLevel] = React.useState<string | null>('Senior')
-    const [step, setStep] = React.useState<string | null>('Thriving')
+    const [step, setStep] = React.useState<string | null>('Established')
 
     React.useEffect(() => {
         if (typeof window !== undefined) {

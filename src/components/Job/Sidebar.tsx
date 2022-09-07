@@ -21,9 +21,10 @@ interface ISidebarProps {
     team?: ITeam[]
     teamLead?: ITeam
     teamName?: string
+    teamSlug: string
 }
 
-export default function Sidebar({ team, teamLead, teamName }: ISidebarProps) {
+export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebarProps) {
     const teamLength = team?.length
     if (!team || !teamLength || !teamLead) return null
     const pineapplePercentage =
@@ -32,7 +33,10 @@ export default function Sidebar({ team, teamLead, teamName }: ISidebarProps) {
         Math.round((team.filter(({ frontmatter: { pineappleOnPizza } }) => pineappleOnPizza).length / teamLength) * 100)
     return (
         <>
-            <SidebarSection title={`Team ${teamName}`}>
+            <SidebarSection>
+                <h3 className="font-semibold text-sm m-0 mb-2">
+                    <Link to={teamSlug}>Team {teamName}</Link>
+                </h3>
                 <ul className="list-none m-0 p-0 flex flex-wrap team-group">
                     {team.map(({ frontmatter: { headshot, name, country, jobTitle } }) => {
                         return (

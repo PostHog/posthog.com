@@ -540,7 +540,8 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
             context: {
                 id,
                 slug,
-                teamName: team || '',
+                teamName: team,
+                teamNameInfo: `Team ${team}`,
             },
         })
     })
