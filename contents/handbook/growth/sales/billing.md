@@ -49,11 +49,22 @@ If a customer wants to have multiple licenses for multiple environments, but be 
 #### Yearly invoice
 
 1. (if user already created a license) Cancel their subscription in Stripe
-2. Manually create an invoice on the customer with the correct price. Either charge them using the method on file or send them 
+2. Manually create an invoice on the customer with the correct price. Either charge them using the method on file or send them an invoice with a payment link
 3. Once the invoice is created, add the following fields to the "metadata" section on the invoice:
    `amortize-until`, with the value being the month until which to amortize, ie `2023-03`
    `amortized-dollar-amount`, with the MRR we should account for with this invoice. Probably the total amount of the invoice divided by 12.
-4. (if user hasn't created a license yet) Manually create a license in https://license.posthog.com/admin/. You should link the stripe customer id, but you can leave everything else blank. Make sure you tick "Billing ready".
+4. (if we have agreed an overage rate with them) Set up a Price and Subscription to track and bill for the overage at the end of the contract:
+   1. Create a new Price against the relevant Stripe Product:
+      - Usage type - Metered usage
+      - Aggregation mode - Sum across all usage records during period
+      - Currency - USD
+      - Interval - Yearly
+      - Pricing - Graduated Pricing
+      - For the first tier set the upper limit as your contract event amount, with a flat fee of $0
+      - For the second tier set the overage price you have agreed
+      - Name - _Customer Name_ annual contract overage _YYYYMMDD_
+   2. Create a Subscription for the Customer using the above price
+5. (if user hasn't created a license yet) Manually create a license in https://license.posthog.com/admin/. You should link the stripe customer id, but you can leave everything else blank. Make sure you tick `Billing ready`.
 
 ### Cloud billing
 Cloud billing may be set up using self-serve. For this, the new user just needs to go to the [organization billing](https://app.posthog.com/organization/billing) page and select one of the available plans (internally please note these plans must have both `is_active` and `self_serve` set to `True`). Billing can also be set up from account creation, by adding the `plan_key` as a query string parameter (e.g. `https://app.posthog.com/signup?plan=standard`), this is helpful for redirections from landing sites where a plan has already been selected.
