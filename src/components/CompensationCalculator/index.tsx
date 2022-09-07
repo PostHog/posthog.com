@@ -76,7 +76,7 @@ export const CompensationCalculator = ({
                 step?: string | null
             } = JSON.parse(localStorage.getItem('posthog-saved-compensation') || '{}')
 
-            if (savedState?.job && sfBenchmark[savedState.job]) {
+            if (!initialJob && savedState?.job && sfBenchmark[savedState.job]) {
                 setJob(savedState?.job || null)
             }
 
