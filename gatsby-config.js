@@ -18,7 +18,7 @@ module.exports = {
     trailingSlash: 'never',
     plugins: [
         {
-            resolve: require.resolve(`../gatsby-source-ashby`),
+            resolve: `gatsby-source-ashby`,
             options: {
                 apiKey: process.env.ASHBY_API_KEY,
             },
