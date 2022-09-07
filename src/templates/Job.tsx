@@ -88,7 +88,7 @@ const InterviewProcess = () => {
     )
 }
 
-const JobSidebar = ({ team, teamLead }) => {
+const JobSidebar = ({ team, teamLead, teamName }) => {
     const teamLength = team?.length
     const pineapplePercentage =
         teamLength > 0 &&
@@ -96,7 +96,7 @@ const JobSidebar = ({ team, teamLead }) => {
     return (
         <>
             {team?.length > 0 && (
-                <SidebarSection title="Meet your team">
+                <SidebarSection title={`Team ${teamName}`}>
                     <ul className="list-none m-0 p-0 flex flex-wrap team-group">
                         {team.map(({ frontmatter: { headshot, name, country, jobTitle } }) => {
                             return (
@@ -323,7 +323,7 @@ export default function Job({
             fields: { tableOfContents, html },
         },
     },
-    pageContext: { slug },
+    pageContext: { teamName },
 }) {
     const timezone = parent?.customFields?.find(({ title, value }) => title === 'Timezone(s)')?.value
     return (
@@ -339,7 +339,7 @@ export default function Job({
                     ]}
                     hideSearch
                     hideSurvey
-                    sidebar={<JobSidebar team={team?.nodes} teamLead={teamLead} />}
+                    sidebar={<JobSidebar teamName={teamName} team={team?.nodes} teamLead={teamLead} />}
                     title="careers"
                     menu={[
                         {
@@ -504,8 +504,8 @@ export default function Job({
 }
 
 export const query = graphql`
-    query JobQuery($id: String!, $team: String!) {
-        teamLead: mdx(frontmatter: { team: { in: [$team] }, teamLead: { eq: true } }) {
+    query JobQuery($id: String!, $teamName: String!) {
+        teamLead: mdx(frontmatter: { team: { in: [$teamName] }, teamLead: { eq: true } }) {
             id
             frontmatter {
                 name
@@ -519,7 +519,7 @@ export const query = graphql`
                 }
             }
         }
-        team: allMdx(filter: { frontmatter: { team: { in: [$team] } } }) {
+        team: allMdx(filter: { frontmatter: { team: { in: [$teamName] } } }) {
             nodes {
                 id
                 frontmatter {
