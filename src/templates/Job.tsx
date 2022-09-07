@@ -9,6 +9,63 @@ import Tooltip from 'components/Tooltip'
 import { kebabCase } from 'lib/utils'
 import Link from 'components/Link'
 import { CompensationCalculator } from 'components/CompensationCalculator'
+import slugify from 'slugify'
+
+const interviewProcess = [
+    {
+        title: 'Application',
+        description:
+            'Our talent team will review your application to see how your skills and experience align with our needs.',
+        badge: 'You are here',
+    },
+    {
+        title: 'Culture interview',
+        description:
+            'Our goal is to explore your motivations to join our team, learn why you’d be a great fit, and answer questions about us.',
+        badge: '30-min video call',
+    },
+    {
+        title: 'Technical interview',
+        description: `You'll meet the hiring team who will evaluate skills needed to be successful in your role. No live coding.`,
+        badge: '45 minutes, varies by role',
+    },
+    {
+        title: 'PostHog SuperDay',
+        description: `You’ll join a standup, meet the team, and work on a task related to your role, offering a realistic view of what it’s like working at PostHog.`,
+        badge: 'Paid day of work',
+    },
+    {
+        title: 'Offer',
+        description: `If everyone’s happy, we’ll make you an offer to join us - YAY!`,
+        badge: 'Pop the champagne (after you sign)',
+    },
+]
+
+const InterviewProcess = () => {
+    return (
+        <>
+            <p>We do 2-3 short interviews, then pay you to do some real-life (or close to real-life) work.</p>
+            <ul className="list-none m-0 p-0 grid gap-y-4">
+                {interviewProcess.map(({ title, description, badge }, index) => {
+                    return (
+                        <li className="flex items-start space-x-4" key={title}>
+                            <div className="w-12 h-12 bg-gray-accent-light rounded-full flex items-center justify-center flex-shrink-0 font-semibold">
+                                <span>{index + 1}</span>
+                            </div>
+                            <div>
+                                <h5 className="m-0 flex items-center flex-wrap">
+                                    <span className="mr-2">{title}</span>
+                                    <span className="text-base opacity-50">{badge}</span>
+                                </h5>
+                                <p className="m-0">{description}</p>
+                            </div>
+                        </li>
+                    )
+                })}
+            </ul>
+        </>
+    )
+}
 
 const JobSidebar = ({ team, teamLead }) => {
     return (
@@ -25,6 +82,7 @@ const JobSidebar = ({ team, teamLead }) => {
                                     <Link to={`/handbook/company/team#${kebabCase(name) + '-' + kebabCase(jobTitle)}`}>
                                         <Tooltip
                                             className="whitespace-nowrap"
+                                            placement="left"
                                             title={
                                                 <div className="flex space-x-1 items-center">
                                                     <span>{name}</span>
@@ -36,7 +94,7 @@ const JobSidebar = ({ team, teamLead }) => {
                                                 <ContributorImage
                                                     name={name}
                                                     image={headshot}
-                                                    className="w-[50px] h-[50px]"
+                                                    className="w-[40px] h-[40px]"
                                                 />
                                             </span>
                                         </Tooltip>
@@ -212,6 +270,7 @@ export default function Job({
     data: {
         team,
         teamLead,
+        allJobPostings,
         ashbyJobPosting: {
             title,
             departmentName,
@@ -234,16 +293,40 @@ export default function Job({
                         ...tableOfContents,
                         { value: 'Salary', url: 'salary', depth: 0 },
                         { value: 'Apply', url: 'apply', depth: 0 },
+                        { value: 'Interview process', url: 'interview-process', depth: 0 },
                     ]}
                     hideSearch
                     hideSurvey
                     sidebar={<JobSidebar team={team?.nodes} teamLead={teamLead} />}
                     title="careers"
+                    menu={[
+                        {
+                            name: 'Work at PostHog',
+                        },
+                        {
+                            name: 'Careers home',
+                            url: '/careers',
+                        },
+                        {
+                            name: 'About us',
+                            url: '/handbook/company/story',
+                        },
+                        {
+                            name: 'Open roles',
+                            url: '',
+                            children: allJobPostings.nodes.map(({ title }) => {
+                                return {
+                                    name: title,
+                                    url: `/careers/${slugify(title, { lower: true })}`,
+                                }
+                            }),
+                        },
+                    ]}
                 >
                     <div className="mb-8 relative">
                         <div>
                             <h1 className="m-0 text-5xl">{title}</h1>
-                            <ul className="list-none m-0 p-0 items-center text-black/50 dark:text-white/50 mt-6 flex space-x-6">
+                            <ul className="list-none m-0 p-0 md:items-center text-black/50 dark:text-white/50 mt-6 flex md:flex-row flex-col md:space-x-6 md:space-y-0 space-y-6">
                                 <li className="flex space-x-2">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -349,15 +432,25 @@ export default function Job({
                                 </details>
                                 <details open>
                                     <summary>
+                                        <h2 id="interview-process">Interview process</h2>
+                                    </summary>
+                                    <div className="mb-6">
+                                        <InterviewProcess />
+                                    </div>
+                                </details>
+                                <details open>
+                                    <summary>
                                         <h2 id="apply">Apply</h2>
                                     </summary>
-                                    <h4 className="!text-lg mb-0">Now for the fun part!</h4>
-                                    <p>
-                                        Just fill out this painless form and we'll get back to you within a few days.
-                                        Thanks in advance!
-                                    </p>
-                                    <p className="opacity-50 font-bold">Bolded fields are required</p>
-                                    <Apply id={id} info={info} />
+                                    <div className="mb-6">
+                                        <h4 className="!text-lg mb-0">Now for the fun part!</h4>
+                                        <p>
+                                            Just fill out this painless form and we'll get back to you within a few
+                                            days. Thanks in advance!
+                                        </p>
+                                        <p className="opacity-50 font-bold">Bolded fields are required</p>
+                                        <Apply id={id} info={info} />
+                                    </div>
                                 </details>
                             </div>
                         </div>
@@ -435,6 +528,11 @@ export const query = graphql`
                         }
                     }
                 }
+            }
+        }
+        allJobPostings: allAshbyJobPosting {
+            nodes {
+                title
             }
         }
     }
