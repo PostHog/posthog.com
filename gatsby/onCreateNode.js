@@ -187,13 +187,21 @@ module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, 
                         .split('</h2>')
                         .join('</h2></summary>')}</summary></details></section>`
                 )
-                const headings = dom.querySelectorAll('h2')
-                for (let i = 0; i < headings.length; i++) {
-                    const node = headings[i]
-                    const textContent = node.textContent
-                    const id = slugify(textContent, { lower: true })
-                    tableOfContents.push({ value: textContent, url: id, depth: 0 })
-                    node.id = id
+                const details = dom.querySelectorAll('details')
+                for (let i = 0; i < details.length; i++) {
+                    const node = details[i]
+                    const heading = node.querySelector('h2')
+                    if (
+                        heading.textContent.toLowerCase() === 'benefits' ||
+                        heading.textContent.toLowerCase() === 'about posthog'
+                    ) {
+                        node.remove()
+                    } else {
+                        const textContent = heading.textContent
+                        const id = slugify(textContent, { lower: true })
+                        tableOfContents.push({ value: textContent, url: id, depth: 0 })
+                        heading.id = id
+                    }
                 }
                 html = dom.firstChild.outerHTML
             }
