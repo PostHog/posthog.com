@@ -182,15 +182,19 @@ function Apply({ id, info }) {
             <div className="grid grid-cols-1 gap-y-3 ">
                 {info?.applicationFormDefinition?.sections?.map(({ fields }) => {
                     return fields.map(({ field }) => {
+                        const required = !field?.isNullable
                         return (
                             <div key={field?.path}>
-                                <label className="opacity-70 mb-1 inline-block" htmlFor={field?.title}>
+                                <label
+                                    className={`opacity-70 mb-1 inline-block ${required ? 'font-bold' : ''}`}
+                                    htmlFor={field?.title}
+                                >
                                     {field?.title}
                                 </label>
                                 {components[field?.type?.toLowerCase()] &&
                                     components[field?.type?.toLowerCase()]({
                                         title: field?.title,
-                                        required: !field?.isNullable,
+                                        required,
                                         path: field?.path,
                                     })}
                             </div>
@@ -347,6 +351,12 @@ export default function Job({
                                     <summary>
                                         <h2 id="apply">Apply</h2>
                                     </summary>
+                                    <h4 className="!text-lg mb-0">Now for the fun part!</h4>
+                                    <p>
+                                        Just fill out this painless form and we'll get back to you within a few days.
+                                        Thanks in advance!
+                                    </p>
+                                    <p className="opacity-50 font-bold">Bolded fields are required</p>
                                     <Apply id={id} info={info} />
                                 </details>
                             </div>
