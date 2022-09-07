@@ -1,0 +1,103 @@
+import { ContributorImage, SidebarSection } from 'components/PostLayout'
+import React from 'react'
+import { countryCodeEmoji } from 'country-code-emoji'
+import Tooltip from 'components/Tooltip'
+import { kebabCase } from 'lib/utils'
+import Link from 'components/Link'
+
+import { ThumbDown, ThumbUp } from 'components/Icons/Icons'
+
+interface ITeam {
+    frontmatter: {
+        headshot: string
+        name: string
+        country: string
+        jobTitle: string
+        pineappleOnPizza: boolean
+    }
+}
+
+interface ISidebarProps {
+    team?: ITeam[]
+    teamLead?: ITeam
+    teamName?: string
+}
+
+export default function Sidebar({ team, teamLead, teamName }: ISidebarProps) {
+    const teamLength = team?.length
+    if (!team || !teamLength || !teamLead) return null
+    const pineapplePercentage =
+        teamLength &&
+        teamLength > 0 &&
+        Math.round((team.filter(({ frontmatter: { pineappleOnPizza } }) => pineappleOnPizza).length / teamLength) * 100)
+    return (
+        <>
+            <SidebarSection title={`Team ${teamName}`}>
+                <ul className="list-none m-0 p-0 flex flex-wrap team-group">
+                    {team.map(({ frontmatter: { headshot, name, country, jobTitle } }) => {
+                        return (
+                            <li
+                                key={name}
+                                className="first:-ml-0 -ml-4 transition-all relative hover:scale-[1.2] active:scale-[1.1] mb-1"
+                            >
+                                <Link to={`/handbook/company/team#${kebabCase(name) + '-' + kebabCase(jobTitle)}`}>
+                                    <Tooltip
+                                        placement="top-end"
+                                        className="whitespace-nowrap"
+                                        title={
+                                            <div className="flex space-x-1 items-center">
+                                                <span>{name}</span>
+                                                <span>{countryCodeEmoji(country)}</span>
+                                            </div>
+                                        }
+                                    >
+                                        <span className="relative">
+                                            <ContributorImage
+                                                name={name}
+                                                image={headshot}
+                                                className="w-[40px] h-[40px]"
+                                            />
+                                        </span>
+                                    </Tooltip>
+                                </Link>
+                            </li>
+                        )
+                    })}
+                </ul>
+            </SidebarSection>
+
+            <SidebarSection title="Team lead">
+                <Link
+                    to={`/handbook/company/team#${
+                        kebabCase(teamLead?.frontmatter?.name) + '-' + kebabCase(teamLead?.frontmatter?.jobTitle)
+                    }`}
+                    className="flex space-x-2 items-center"
+                >
+                    <ContributorImage
+                        className="w-[40px] h-[40px]"
+                        image={teamLead?.frontmatter?.headshot}
+                        name={teamLead?.frontmatter?.name}
+                    />
+                    <p className="author text-base font-semibold m-0">{teamLead?.frontmatter?.name}</p>
+                    <span className="text-lg">{countryCodeEmoji(teamLead?.frontmatter?.country)}</span>
+                </Link>
+            </SidebarSection>
+
+            <SidebarSection>
+                <h3 className="font-semibold flex space-x-2 items-center m-0 ">
+                    <span className="text-black dark:text-white font-semibold opacity-25 text-sm">Verdict:</span>{' '}
+                    {pineapplePercentage >= 50 ? <ThumbUp /> : <ThumbDown />}
+                </h3>
+                <p className="text-sm m-0 opacity-70 leading-tight mt-2 mb-3">
+                    {pineapplePercentage}% of this team prefers pineapple on pizza
+                </p>
+                <div className="h-4 w-full bg-gray-accent-light dark:bg-gray-accent-dark rounded-md relative overflow-hidden">
+                    <div
+                        style={{ width: `${pineapplePercentage}%` }}
+                        className={`${pineapplePercentage >= 50 ? 'bg-[#6AA84F]' : 'bg-red'} absolute inset-0 h-full`}
+                    />
+                </div>
+            </SidebarSection>
+        </>
+    )
+}
