@@ -72,17 +72,17 @@ const JobSidebar = ({ team, teamLead }) => {
         <>
             {team?.length > 0 && (
                 <SidebarSection title="Meet your team">
-                    <ul className="list-none m-0 p-0 flex team-group">
+                    <ul className="list-none m-0 p-0 flex flex-wrap team-group">
                         {team.map(({ frontmatter: { headshot, name, country, jobTitle } }) => {
                             return (
                                 <li
                                     key={name}
-                                    className="first:-ml-0 -ml-4 transition-all relative hover:scale-[1.2] active:scale-[1.1]"
+                                    className="first:-ml-0 -ml-4 transition-all relative hover:scale-[1.2] active:scale-[1.1] mb-1"
                                 >
                                     <Link to={`/handbook/company/team#${kebabCase(name) + '-' + kebabCase(jobTitle)}`}>
                                         <Tooltip
+                                            placement="top-end"
                                             className="whitespace-nowrap"
-                                            placement="left"
                                             title={
                                                 <div className="flex space-x-1 items-center">
                                                     <span>{name}</span>
