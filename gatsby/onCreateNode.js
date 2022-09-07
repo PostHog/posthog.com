@@ -175,27 +175,28 @@ module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, 
             name: `slug`,
             value: slug,
         })
-
         if (node.info.descriptionHtml) {
-            const dom = JSDOM.fragment(
-                `<section><details open><summary><h2>${node.info.descriptionHtml
-                    .split('<h2>')
-                    .slice(1)
-                    .join('</details><details open><summary><h2>')
-                    .split('</h2>')
-                    .join('</h2></summary>')}</summary></details></section>`
-            )
-            const headings = dom.querySelectorAll('h2')
+            let html = node.info.descriptionHtml
             const tableOfContents = []
-            for (let i = 0; i < headings.length; i++) {
-                const node = headings[i]
-                const textContent = node.textContent
-                const id = slugify(textContent, { lower: true })
-                tableOfContents.push({ value: textContent, url: id, depth: 0 })
-                node.id = id
+            if (html.includes('<h2>')) {
+                const dom = JSDOM.fragment(
+                    `<section><details open><summary><h2>${html
+                        .split('<h2>')
+                        .slice(1)
+                        .join('</details><details open><summary><h2>')
+                        .split('</h2>')
+                        .join('</h2></summary>')}</summary></details></section>`
+                )
+                const headings = dom.querySelectorAll('h2')
+                for (let i = 0; i < headings.length; i++) {
+                    const node = headings[i]
+                    const textContent = node.textContent
+                    const id = slugify(textContent, { lower: true })
+                    tableOfContents.push({ value: textContent, url: id, depth: 0 })
+                    node.id = id
+                }
+                html = dom.firstChild.outerHTML
             }
-
-            const html = dom.firstChild.outerHTML
             createNodeField({
                 node,
                 name: `tableOfContents`,

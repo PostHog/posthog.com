@@ -14,6 +14,14 @@ module.exports = exports.createSchemaCustomization = async ({ actions, schema })
       contributors: [Contributors]
       appConfig: [AppConfig]
     }
+    type AshbyJobPostingTableOfContents {
+      value: String
+      url: String
+      depth: Int
+    }
+    type AshbyJobPostingFields {
+      tableOfContents: [AshbyJobPostingTableOfContents]
+    }
     type AppConfig {
       key: String
       name: String
