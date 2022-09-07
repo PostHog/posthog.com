@@ -1,0 +1,108 @@
+---
+title: Querying data
+---
+
+This page provides a high-level overview of how queries are run when creating insights in PostHog.
+
+> **Note: ** This page does not cover all the intricacies of how queries are run in PostHog.
+
+## Insights counting unique persons
+
+This section covers how PostHog determines the number of unique users who performed a certain action, such as when creating a [Trends](/manual/trends) or [Funnel](/manual/funnel) insight.
+In this case, PostHog determines this number by counting the total number of unique `person_id`'s on events that match your filters.
+
+As an example, let's say that we have the following list of events:
+
+| ID  | Event       | `person_id` |
+| --- | ----------- | ----------- |
+| 1   | viewed page | `user1`     |
+| 2   | viewed page | `user2`     |
+| 3   | viewed page | `user1`     |
+
+In this case, if we ran a query asking for the number of unique users who viewed a page, we would get a result of `2`, as our table contains 2 unique `person_id`'s.
+
+The way we write the `person_id` to each event has some implications for the number of unique users that are displayed:
+
+1. Some users are counted twice on the trend graph. 
+   The source of truth for data is the events table. Since this is point-in-time data, it is not possible to determine whether two `person_id`'s were later merged into a single user, which results in them being counted separately.
+   > Note: Before PostHog version 1.39.0, we would join with the persons table to get this result. However, as this does not scale well, we've decided to change to the new method of counting distinct `person_id`'s.
+2. In the person modal, the count may be lower than the count displayed in the graph. 
+   Persons who've been merged into one have one of their old IDs deleted. We remove these people from the persons modal, as there's no place to link them to.
+
+To understand better how these scenarios can arise, let's take a look at some specific examples.
+
+| Day | Event    | distinct_id              | `person_id` |
+| --- | -------- | ------------------------ | ----------- |
+| 1   | other    | Alice                    | user-1      |
+| 2   | pageview | anon-1                   | user-2      |
+| 2   | identify | Alice (anon-id = anon-1) | user-1      |
+
+In this case, we have a user Alice who sends an 'other' event on day `1` from her mobile phone.
+On day 2, Alice decides to view the homepage from her desktop where she isn't logged in. This results in the pageview event being associated with a newly created Person (`user-2`).
+She then logs in to her account, which sends an identify event that merges `user-2` into `user-1`.
+This mean that we delete `user-2` from the persons table and all future events from `anon-1` will be tied to `user-1` (note that we never alter the events table to reflect this).
+
+In this case, we’d show 1 unique user in the trend graph for pageviews, but since `user-2` was deleted during the merge, we would show 0 users in the person modal.
+
+To continue the example, let's say that Alice views the homepage again now that she is logged in.
+
+| Day | Event    | distinct_id                       | `person_id` |
+| --- | -------- | --------------------------------- | ----------- |
+| 1   | other    | Alice                             | user-1      |
+| 2   | pageview | anon-1                            | user-2      |
+| 2   | identify | Alice (anon_distinct_id = anon-1) | user-1      |
+| 2   | pageview | Alice                             | user-1      |
+
+In this case, the trend graph would show 2 unique users (based on person_id = `user-1` and `user-2`) but the Person modal would only show `user-1` as `user-2` has been deleted.
+
+## Filtering on person properties
+
+This section covers how PostHog filters out events based on Person properties.
+Since all the properties for a person are stored on each event, the process is actually quite straightforward.
+
+Let's walk through a simple example to see how this works in practice. Let's say we have ingested the following events:
+
+| User ID | Event            | Subscription plan _(Property on each person)_ |
+| ------- | ---------------- | --------------------------------------------- |
+| 1       | clicked login    | `premium`                                     |
+| 2       | refreshed table  | `premium`                                     |
+| 3       | viewed docs      | `free`                                        |
+| 3       | upgraded plan    | `enterprise`                                  |
+| 3       | viewed dashboard | `enterprise`                                  |
+| 4       | logged out       | `free`                                        |
+
+> **Note: ** This isn't _exactly_ how person properties are stored within the events table, but it will help us to keep things simple. For detailed information, check out our [data model](/docs/how-posthog-works/data-model).
+
+In this case, let's say we only want to see events from users while they were on the `premium` or `enterprise` plans.
+To achieve this, we would filter based on the Subscription plan person property, which would match the following events.
+
+| User ID | Event            | Subscription plan _(Property on each person)_ |
+| ------- | ---------------- | --------------------------------------------- |
+| 1       | clicked login    | `premium`                                     |
+| 2       | refreshed table  | `premium`                                     |
+| 3       | upgraded plan    | `enterprise`                                  |
+| 3       | viewed dashboard | `enterprise`                                  |
+
+You may have noticed that over the course of this period, user `3` actually upgraded from the `free` plan to the `enterprise` plan.
+Despite this, the event they sent for when they viewed the docs still reflects that they were on the `free` plan at the time, and is thus filtered out.
+
+In most cases this is exactly what we want, as it means that we can update the properties for a person without worrying about messing up our past data points!
+
+However, if instead you do want to filter based on a person's current properties, you can do so by creating a [cohort](/manual/cohorts).
+
+To see this let's say we want to get all events for users who are _currently_ on `enterprise` or `premium` plans.
+To do this, we'll create a cohort called 'Paid users' that matches all persons who have their 'plan' property set as either `premium` or `enterprise`.
+
+Then on the insight, we can filter by the cohort, which would match the following events.
+
+| User ID | Event            | Subscription plan _(Property on each person)_ |
+| ------- | ---------------- | --------------------------------------------- |
+| 1       | clicked login    | `premium`                                     |
+| 2       | refreshed table  | `premium`                                     |
+| 3       | viewed docs      | `free`                                        |
+| 3       | upgraded plan    | `enterprise`                                  |
+| 3       | viewed dashboard | `enterprise`                                  |
+
+## Filtering on group properties
+
+Group properties work exactly the same way as person properties, and are stored on each event.

@@ -25,12 +25,17 @@ module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, 
         // Create GitHub contributor nodes for handbook & docs
         if (/^\/handbook|^\/docs|^\/manual/.test(slug) && process.env.GITHUB_API_KEY) {
             const url = `https://api.github.com/repos/posthog/posthog.com/commits?path=/contents/${parent.relativePath}`
-            let contributors = await fetch(url, {
+            const res = await fetch(url, {
                 headers: {
                     Authorization: `token ${process.env.GITHUB_API_KEY}`,
                 },
-            }).then((res) => res.json())
+            })
 
+            if (res.status !== 200) {
+                console.error(`Got status code ${res.status}`)
+            }
+
+            let contributors = await res.json()
             contributors = contributors.filter(
                 (contributor) => contributor && contributor.author && contributor.author.login
             )

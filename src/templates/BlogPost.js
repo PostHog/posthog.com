@@ -13,13 +13,14 @@ import { graphql } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
-import { CodeBlock } from '../components/CodeBlock'
+import { MdxCodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
+import { NewsletterForm } from 'components/NewsletterForm'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
 const Title = ({ children, className = '' }) => {
-    return <h1 className={`text-2xl lg:text-4xl mt-3 mb-0 lg:mb-5 lg:mt-0 ${className}`}>{children}</h1>
+    return <h1 className={`text-3xl md:text-4xl lg:text-4xl mt-3 mb-0 lg:mb-5 lg:mt-0 ${className}`}>{children}</h1>
 }
 
 const Intro = ({ featuredImage, title, featuredImageType, contributors }) => {
@@ -36,7 +37,7 @@ const Intro = ({ featuredImage, title, featuredImageType, contributors }) => {
                         image={getImage(featuredImage)}
                     />
                     {featuredImageType === 'full' && (
-                        <Title className="lg:absolute bottom-0 lg:text-white text-primary px-8">{title}</Title>
+                        <Title className="lg:absolute bottom-0 lg:text-white text-primary lg:px-8">{title}</Title>
                     )}
                 </div>
             )}
@@ -72,6 +73,11 @@ const BlogPostSidebar = ({ contributors, date, filePath, title, categories, loca
                     <Calendar className="h-[20px] w-[20px]" /> <time>{date}</time>
                 </Text>
             </SidebarSection>
+            <SidebarSection>
+                <div className="bg-gray-accent-light dark:bg-gray-accent-dark rounded">
+                    <NewsletterForm sidebar />
+                </div>
+            </SidebarSection>
         </>
     )
 }
@@ -89,7 +95,7 @@ export default function BlogPost({ data, pageContext, location }) {
         h4: H4,
         h5: H5,
         h6: H6,
-        pre: CodeBlock,
+        pre: MdxCodeBlock,
         inlineCode: InlineCode,
         blockquote: Blockquote,
         img: ZoomImage,

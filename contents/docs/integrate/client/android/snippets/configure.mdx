@@ -1,6 +1,6 @@
 The best place to initialize the client is in your `Application` subclass.
 
-```js
+```java
 public class SampleApp extends Application {
   private static final String POSTHOG_API_KEY = "<ph_project_api_key>";
   private static final String POSTHOG_HOST = "<ph_instance_address>";
@@ -12,7 +12,7 @@ public class SampleApp extends Application {
       .captureApplicationLifecycleEvents() // Record certain application events automatically!
       .recordScreenViews() // Record screen views automatically!
       .build();
-    
+
     // Set the initialized instance as a globally accessible instance.
     PostHog.setSingletonInstance(posthog);
 
