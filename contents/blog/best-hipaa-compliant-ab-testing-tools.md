@@ -1,5 +1,5 @@
 ---
-date: 2022-09-06
+date: 2022-09-07
 title: "The best HIPAA-compliant A/B testing tools"
 rootPage: /blog
 sidebar: Blog
