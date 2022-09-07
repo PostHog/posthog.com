@@ -163,34 +163,49 @@ module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, 
     }
 
     if (node.internal.type === 'AshbyJobPosting') {
-        const dom = JSDOM.fragment(
-            `<section><details open><summary><h2>${node.info.descriptionHtml
-                .split('<h2>')
-                .slice(1)
-                .join('</details><details open><summary><h2>')
-                .split('</h2>')
-                .join('</h2></summary>')}</summary></details></section>`
-        )
-        const headings = dom.querySelectorAll('h2')
-        const tableOfContents = []
-        for (let i = 0; i < headings.length; i++) {
-            const node = headings[i]
-            const textContent = node.textContent
-            const id = slugify(textContent, { lower: true })
-            tableOfContents.push({ value: textContent, url: id, depth: 0 })
-            node.id = id
-        }
+        const title = node.title.replace(' (Remote)', '')
+        const slug = `/careers/${slugify(title, { lower: true })}`
+        createNodeField({
+            node,
+            name: `title`,
+            value: title,
+        })
+        createNodeField({
+            node,
+            name: `slug`,
+            value: slug,
+        })
 
-        const html = dom.firstChild.outerHTML
-        createNodeField({
-            node,
-            name: `tableOfContents`,
-            value: tableOfContents,
-        })
-        createNodeField({
-            node,
-            name: `html`,
-            value: html,
-        })
+        if (node.info.descriptionHtml) {
+            const dom = JSDOM.fragment(
+                `<section><details open><summary><h2>${node.info.descriptionHtml
+                    .split('<h2>')
+                    .slice(1)
+                    .join('</details><details open><summary><h2>')
+                    .split('</h2>')
+                    .join('</h2></summary>')}</summary></details></section>`
+            )
+            const headings = dom.querySelectorAll('h2')
+            const tableOfContents = []
+            for (let i = 0; i < headings.length; i++) {
+                const node = headings[i]
+                const textContent = node.textContent
+                const id = slugify(textContent, { lower: true })
+                tableOfContents.push({ value: textContent, url: id, depth: 0 })
+                node.id = id
+            }
+
+            const html = dom.firstChild.outerHTML
+            createNodeField({
+                node,
+                name: `tableOfContents`,
+                value: tableOfContents,
+            })
+            createNodeField({
+                node,
+                name: `html`,
+                value: html,
+            })
+        }
     }
 }

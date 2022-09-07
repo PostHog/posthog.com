@@ -5,7 +5,6 @@ import { graphql } from 'gatsby'
 import React from 'react'
 import Link from 'components/Link'
 import { CompensationCalculator } from 'components/CompensationCalculator'
-import slugify from 'slugify'
 import InterviewProcess from 'components/Job/InterviewProcess'
 import Apply from 'components/Job/Apply'
 import Sidebar from 'components/Job/Sidebar'
@@ -46,18 +45,16 @@ export default function Job({
         teamInfo,
         allJobPostings,
         ashbyJobPosting: {
-            title,
             departmentName,
             info,
             id,
             locationName,
             parent,
-            fields: { tableOfContents, html },
+            fields: { tableOfContents, html, title },
         },
     },
     pageContext: { teamName },
 }) {
-    const jobTitle = title.replace(' (Remote)', '')
     const timezone = parent?.customFields?.find(({ title }) => title === 'Timezone(s)')?.value
     const menu = [
         {
@@ -74,10 +71,10 @@ export default function Job({
         {
             name: 'Open roles',
             url: '',
-            children: allJobPostings.nodes.map(({ title }) => {
+            children: allJobPostings.nodes.map(({ fields: { title, slug } }) => {
                 return {
                     name: title,
-                    url: `/careers/${slugify(title, { lower: true })}`,
+                    url: slug,
                 }
             }),
         },
@@ -90,7 +87,7 @@ export default function Job({
                 <PostLayout
                     tableOfContents={[
                         ...tableOfContents,
-                        { value: 'Salary', url: 'salary', depth: 0 },
+                        { ...(sfBenchmark[title] ? { value: 'Salary', url: 'salary', depth: 0 } : {}) },
                         { value: 'Interview process', url: 'interview-process', depth: 0 },
                         { value: 'Apply', url: 'apply', depth: 0 },
                     ]}
@@ -121,7 +118,7 @@ export default function Job({
                                         __html: html,
                                     }}
                                 />
-                                {sfBenchmark[jobTitle] && (
+                                {sfBenchmark[title] && (
                                     <Accordion title="Salary" id="salary">
                                         <p>
                                             We have a set system for compensation as part of being transparent. Salary
@@ -138,7 +135,7 @@ export default function Job({
                                                     level: `We pay more experienced team members a greater amount since it is reasonable to expect this correlates with an increase in skill`,
                                                 }}
                                                 hideFormula
-                                                initialJob={jobTitle}
+                                                initialJob={title}
                                             />
                                         </div>
                                     </Accordion>
@@ -203,7 +200,6 @@ export const query = graphql`
         }
         ashbyJobPosting(id: { eq: $id }) {
             id
-            title
             departmentName
             locationName
             fields {
@@ -213,6 +209,8 @@ export const query = graphql`
                     depth
                 }
                 html
+                title
+                slug
             }
             parent {
                 ... on AshbyJob {
@@ -240,7 +238,10 @@ export const query = graphql`
         }
         allJobPostings: allAshbyJobPosting {
             nodes {
-                title
+                fields {
+                    title
+                    slug
+                }
             }
         }
         teamInfo: mdx(frontmatter: { title: { eq: $teamNameInfo } }) {

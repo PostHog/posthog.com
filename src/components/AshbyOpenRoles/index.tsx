@@ -2,10 +2,12 @@ import { RightArrow } from 'components/Icons/Icons'
 import Link from 'components/Link'
 import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
-import slugify from 'slugify'
 
 interface OpenRoleType {
-    title: string
+    fields: {
+        title: string
+        slug: string
+    }
     externalLink: string
     departmentName: string
 }
@@ -32,12 +34,14 @@ export default function AshbyOpenRoles() {
                             {jobs
                                 .filter((job: OpenRoleType) => job.departmentName === title)
                                 .map((job: OpenRoleType) => {
-                                    const { title } = job
+                                    const {
+                                        fields: { title, slug },
+                                    } = job
                                     return (
                                         <li className="border-b border-dashed border-gray-accent-light" key={title}>
                                             <Link
                                                 className="px-4 py-3 text-lg text-primary hover:text-primary font-bold flex justify-between"
-                                                to={`/careers/${slugify(title, { lower: true })}`}
+                                                to={slug}
                                             >
                                                 <span>{title}</span>
                                                 <RightArrow className="w-[24px] h-[24px] opacity-50 group-hover:opacity-100 transition-opacity bounce" />
@@ -57,7 +61,10 @@ const query = graphql`
     query OpenRoles {
         allAshbyJobPosting(filter: { isListed: { eq: true } }) {
             jobs: nodes {
-                title
+                fields {
+                    title
+                    slug
+                }
                 externalLink
                 departmentName
             }
