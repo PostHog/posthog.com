@@ -10,6 +10,7 @@ import InterviewProcess from 'components/Job/InterviewProcess'
 import Apply from 'components/Job/Apply'
 import Sidebar from 'components/Job/Sidebar'
 import { Clock, Group, Location } from 'components/Icons/Icons'
+import { sfBenchmark } from 'components/CompensationCalculator/compensation_data/sf_benchmark'
 
 const Detail = ({ icon, title, value }: { icon: React.ReactNode; title: string; value: string }) => {
     return (
@@ -56,6 +57,7 @@ export default function Job({
     },
     pageContext: { teamName },
 }) {
+    const jobTitle = title.replace(' (Remote)', '')
     const timezone = parent?.customFields?.find(({ title }) => title === 'Timezone(s)')?.value
     const menu = [
         {
@@ -119,24 +121,28 @@ export default function Job({
                                         __html: html,
                                     }}
                                 />
-                                <Accordion title="Salary" id="salary">
-                                    <p>
-                                        We have a set system for compensation as part of being transparent. Salary
-                                        varies based on location and level of experience.{' '}
-                                        <Link to="/handbook/people/compensation">Learn more about compensation.</Link>
-                                    </p>
-                                    <div className="mb-6">
-                                        <CompensationCalculator
-                                            descriptions={{
-                                                step: `We hire into the Established step by default and believe there's a place to have incremental steps to allow for more flexibility.`,
-                                                location: `The benchmark for each role we are hiring for is based on the market rate in San Francisco.`,
-                                                level: `We pay more experienced team members a greater amount since it is reasonable to expect this correlates with an increase in skill`,
-                                            }}
-                                            hideFormula
-                                            initialJob={title.replace(' (Remote)', '')}
-                                        />
-                                    </div>
-                                </Accordion>
+                                {sfBenchmark[jobTitle] && (
+                                    <Accordion title="Salary" id="salary">
+                                        <p>
+                                            We have a set system for compensation as part of being transparent. Salary
+                                            varies based on location and level of experience.{' '}
+                                            <Link to="/handbook/people/compensation">
+                                                Learn more about compensation.
+                                            </Link>
+                                        </p>
+                                        <div className="mb-6">
+                                            <CompensationCalculator
+                                                descriptions={{
+                                                    step: `We hire into the Established step by default and believe there's a place to have incremental steps to allow for more flexibility.`,
+                                                    location: `The benchmark for each role we are hiring for is based on the market rate in San Francisco.`,
+                                                    level: `We pay more experienced team members a greater amount since it is reasonable to expect this correlates with an increase in skill`,
+                                                }}
+                                                hideFormula
+                                                initialJob={jobTitle}
+                                            />
+                                        </div>
+                                    </Accordion>
+                                )}
                                 <Accordion title="Interview process" id="interview-process">
                                     <div className="mb-6">
                                         <InterviewProcess />
