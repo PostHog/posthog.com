@@ -16,7 +16,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { animateScroll as scroll } from 'react-scroll'
+import { animateScroll as scroll, Link as ScrollLink } from 'react-scroll'
 import Scrollspy from 'react-scrollspy'
 import InternalSidebarLink from 'components/Docs/InternalSidebarLink'
 import SearchBar from 'components/Docs/SearchBar'
@@ -25,21 +25,9 @@ import { push as PushMenu } from 'react-burger-menu'
 import Tooltip from 'components/Tooltip'
 import { CallToAction } from 'components/CallToAction'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
-import { replacePath } from '../../../gatsby/utils'
+import { flattenMenu, replacePath } from '../../../gatsby/utils'
 import { IContributor, ICrumb, IMenu, INextPost, IProps, ISidebarAction, ITopic } from './types'
 import { Popover } from 'components/Popover'
-
-const Iframe = (props: any) => {
-    if (props.src && props.src.indexOf('youtube.com') !== -1) {
-        return (
-            <div style={{ position: 'relative', height: 0, paddingBottom: '56.25%' }}>
-                <iframe {...props} className="absolute top-0 left-0 w-full h-full" />
-            </div>
-        )
-    } else {
-        return <iframe {...props} />
-    }
-}
 
 const ShareLink = ({ children, url }: { children: React.ReactNode; url: string }) => {
     const width = 626
@@ -130,7 +118,7 @@ export const Contributor = ({ image, name }: IContributor) => {
         <>
             <div className="w-[38px] h-[38px] relative rounded-full overflow-hidden">
                 {gatsbyImage ? (
-                    <GatsbyImage image={gatsbyImage} alt={name} />
+                    <GatsbyImage imgClassName="rounded-full" image={gatsbyImage} alt={name} />
                 ) : (
                     <svg width="38" height="38" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -207,16 +195,26 @@ const Chevron = ({ open, className = '' }: { open: boolean; className: string })
     )
 }
 
-const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }: IMenu) => {
+const Menu = ({
+    name,
+    url,
+    children,
+    className = '',
+    handleLinkClick,
+    topLevel,
+    menuType = 'standard',
+    icon,
+}: IMenu) => {
     const location = useLocation()
     const pathname = replacePath(location?.pathname)
     const [isActive, setIsActive] = useState(false)
     const [open, setOpen] = useState<boolean | undefined>(false)
-    const buttonClasses = `mb-[1px] text-left flex justify-between items-center relative text-primary hover:text-primary dark:text-white dark:hover:text-white pl-3 pr-2 py-1 inline-block w-full rounded-sm text-[15px] leading-tight relative active:top-[0.5px] active:scale-[.99] ${
+    const buttonClasses = `mb-[1px] text-left flex justify-between items-center relative text-primary hover:text-primary dark:text-white dark:hover:text-white pl-3 pr-2 py-1.5 inline-block w-full rounded-sm text-[15px] leading-tight relative active:top-[0.5px] active:scale-[.99] cursor-pointer ${
         children || topLevel
             ? 'hover:bg-gray-accent-light active:bg-[#DBDCD6] dark:hover:bg-gray-accent-dark transition min-h-[36px]'
             : ''
     } ${children && open ? 'bg-gray-accent-light dark:bg-gray-accent-dark font-bold' : ''}`
+
     useEffect(() => {
         const isOpen = (children?: IMenu[]): boolean | undefined => {
             return (
@@ -245,12 +243,20 @@ const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }
     }
 
     const isWithChild = children && children.length > 0
-
+    const MenuLink = { standard: Link, scroll: ScrollLink }[menuType]
+    const menuLinkProps = {
+        standard: {},
+        scroll: { offset: -50, smooth: true, duration: 300, hashSpy: true, spy: true },
+    }[menuType]
     return (
-        <ul className={`list-none m-0 p-0 text-lg font-semibold overflow-hidden ml-4 ${className}`}>
+        <ul className={`list-none m-0 p-0 text-lg font-semibold overflow-hidden mb-[1px] ml-4 ${className}`}>
             <li>
-                {name && url ? (
-                    <Link
+                {(url === undefined || url === null) && name ? (
+                    <p className="text-black dark:text-white font-semibold opacity-25 m-0 mt-3 mb-1 ml-3 text-[15px]">
+                        {name}
+                    </p>
+                ) : name && url ? (
+                    <MenuLink
                         onClick={() => {
                             handleLinkClick && handleLinkClick()
                             if (isWithChild) {
@@ -261,6 +267,7 @@ const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }
                             !topLevel ? 'opacity-50' : ''
                         } hover:opacity-100 transition-opacity ${isActive || isWithChild ? 'opacity-100' : ''}`}
                         to={url}
+                        {...menuLinkProps}
                     >
                         <AnimatePresence>
                             {isActive && (
@@ -273,9 +280,16 @@ const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }
                                 />
                             )}
                         </AnimatePresence>
-                        <span>{name}</span>
+                        {icon ? (
+                            <span className="cursor-pointer flex items-center space-x-2 text-[17px] font-semibold text-black hover:text-black">
+                                <span className="w-[25px]">{icon}</span>
+                                <span>{name}</span>
+                            </span>
+                        ) : (
+                            <span>{name}</span>
+                        )}
                         {isWithChild && <Chevron open={open ?? false} />}
-                    </Link>
+                    </MenuLink>
                 ) : (
                     <button className={`${buttonClasses} !p-0`} onClick={() => setOpen(!open)}>
                         {isWithChild ? (
@@ -305,16 +319,38 @@ const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }
     )
 }
 
-const TableOfContents = ({ menu, handleLinkClick }: { menu: IMenu[]; handleLinkClick?: () => void }) => {
+export const TableOfContents = ({
+    menu,
+    handleLinkClick,
+    menuType = 'standard',
+}: {
+    menu: IMenu[]
+    handleLinkClick?: () => void
+    title?: string | boolean
+    menuType?: 'scroll' | 'standard'
+}) => {
+    const Wrapper = {
+        standard: React.Fragment,
+        scroll: Scrollspy,
+    }[menuType]
+
+    const wrapperProps = {
+        standard: {},
+        scroll: {
+            componentTag: 'div',
+            offset: -50,
+            items: flattenMenu(menu)?.map((navItem) => navItem.url),
+            currentClassName: 'bg-gray-accent-light',
+        },
+    }[menuType]
+
     return (
-        <>
-            <p className="text-black dark:text-white font-semibold opacity-25 m-0 mb-2 ml-3 text-[15px]">
-                Table of contents
-            </p>
-            <nav>
+        <nav>
+            <Wrapper {...wrapperProps}>
                 {menu.map((menuItem) => {
                     return (
                         <Menu
+                            menuType={menuType}
                             topLevel
                             handleLinkClick={handleLinkClick}
                             className="ml-0"
@@ -323,8 +359,8 @@ const TableOfContents = ({ menu, handleLinkClick }: { menu: IMenu[]; handleLinkC
                         />
                     )
                 })}
-            </nav>
-        </>
+            </Wrapper>
+        </nav>
     )
 }
 
@@ -377,9 +413,9 @@ const SidebarAction = ({ children, title, width, className = '', href, onClick }
 
 const NextPost = ({ contentContainerClasses = '', excerpt, frontmatter, fields }: INextPost) => {
     return (
-        <div className="py-6 border-t border-gray-accent-light dark:border-gray-accent-dark border-dashed mt-5">
+        <div className="py-8 border-t border-gray-accent-light dark:border-gray-accent-dark border-dashed">
             <div className={contentContainerClasses}>
-                <p className="text-lg text-black/40 dark:text-white/40 m-0 font-bold pt-6">Next article</p>
+                <p className="text-lg text-black/40 dark:text-white/40 m-0 font-bold">Next article</p>
                 <h3 className="text-xl font-bold m-0 my-1">{frontmatter?.title}</h3>
                 <p className="relative max-h-24 overflow-hidden">
                     {excerpt}
@@ -393,7 +429,7 @@ const NextPost = ({ contentContainerClasses = '', excerpt, frontmatter, fields }
 
 const Survey = ({ contentContainerClasses = '' }) => {
     return (
-        <div className="pt-8 pb-6 border-t border-gray-accent-light dark:border-gray-accent-dark border-dashed mt-5">
+        <div className="py-8 border-t border-gray-accent-light dark:border-gray-accent-dark border-dashed">
             <div className={contentContainerClasses}>
                 <DocsPageSurvey />
             </div>
@@ -406,6 +442,7 @@ export default function PostLayout({
     children,
     sidebar,
     contentWidth = 650,
+    menuWidth = 265,
     questions,
     menu,
     article = true,
@@ -414,7 +451,10 @@ export default function PostLayout({
     breadcrumb,
     hideSidebar,
     nextPost,
-    survey = true,
+    hideSurvey,
+    hideSearch,
+    contentContainerClassName,
+    menuType = 'standard',
 }: IProps) {
     const { hash, pathname } = useLocation()
     const breakpoints = useBreakpoint()
@@ -430,7 +470,7 @@ export default function PostLayout({
     }
 
     useEffect(() => {
-        if (hash) {
+        if (hash && !hideSearch) {
             scroll.scrollMore(-50)
         }
     }, [])
@@ -462,20 +502,24 @@ export default function PostLayout({
     }, [sidebar, hideSidebar])
 
     const toc = tableOfContents?.filter((item) => item.depth > -1 && item.depth < 2)
-    const contentContainerClasses = `px-5 lg:px-12 w-full transition-all ${
-        hideSidebar ? 'lg:max-w-5xl' : !fullWidthContent ? 'lg:max-w-3xl' : 'lg:max-w-full'
-    } ${menu ? 'mx-auto' : 'lg:ml-auto'}`
+    const contentContainerClasses =
+        contentContainerClassName ||
+        `px-5 lg:px-12 w-full transition-all ${
+            hideSidebar ? 'lg:max-w-5xl' : !fullWidthContent ? 'lg:max-w-3xl' : 'lg:max-w-full'
+        } ${menu ? 'mx-auto' : 'lg:ml-auto'}`
 
     return (
         <div id="menu-wrapper">
-            <div className="py-2 px-4 border-y border-dashed border-gray-accent-light dark:border-gray-accent-dark flex justify-between sticky top-[-2px] bg-tan dark:bg-primary z-30">
-                {menu && (
-                    <button onClick={handleMobileMenuClick} className="py-2 px-3 block lg:hidden">
-                        <MobileMenu style={{ transform: `rotate(${mobileMenuOpen ? '180deg' : '0deg'})` }} />
-                    </button>
-                )}
-                <SearchBar />
-            </div>
+            {!hideSearch && (
+                <div className="py-2 px-4 border-y border-dashed border-gray-accent-light dark:border-gray-accent-dark flex justify-between sticky top-[-2px] bg-tan dark:bg-primary z-30">
+                    {menu && (
+                        <button onClick={handleMobileMenuClick} className="py-2 px-3 block lg:hidden">
+                            <MobileMenu style={{ transform: `rotate(${mobileMenuOpen ? '180deg' : '0deg'})` }} />
+                        </button>
+                    )}
+                    <SearchBar />
+                </div>
+            )}
             {menu && (
                 <PushMenu
                     width="calc(100vw - 80px)"
@@ -496,22 +540,26 @@ export default function PostLayout({
                     isOpen={mobileMenuOpen}
                 >
                     <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark pt-6 px-6">
-                        <TableOfContents handleLinkClick={() => setMobileMenuOpen(false)} menu={menu} />
+                        <TableOfContents
+                            menuType={menuType}
+                            handleLinkClick={() => setMobileMenuOpen(false)}
+                            menu={menu}
+                        />
                     </div>
                 </PushMenu>
             )}
             <div
                 style={{
                     gridAutoColumns: menu
-                        ? `265px 1fr 1fr 265px`
+                        ? `${menuWidth}px 1fr 1fr 265px`
                         : `1fr minmax(auto, ${contentWidth}px) minmax(max-content, 1fr)`,
                 }}
                 className="w-full relative lg:grid lg:grid-flow-col items-start -mb-20"
             >
                 {menu && (
-                    <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:block hidden">
-                        <aside className="lg:sticky top-10 flex-shrink-0 w-full lg:max-w-[265px] justify-self-end px-2 lg:box-border my-10 lg:my-0 lg:pt-10 pb-4 mr-auto overflow-y-auto lg:h-[calc(100vh-40px)]">
-                            <TableOfContents menu={menu} />
+                    <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:block hidden relative z-20">
+                        <aside className="lg:sticky bg-tan dark:bg-primary top-10 flex-shrink-0 w-full justify-self-end px-4 lg:box-border my-10 lg:my-0 lg:py-4 mr-auto overflow-y-auto lg:h-[calc(100vh-40px)]">
+                            <TableOfContents menuType={menuType} menu={menu} />
                         </aside>
                     </div>
                 )}
@@ -522,10 +570,10 @@ export default function PostLayout({
                 >
                     <div className={contentContainerClasses}>
                         {breadcrumb && <Breadcrumb crumbs={breadcrumb} />}
-                        <div className={article ? 'article-content' : ''}>{children}</div>
-                        {questions && questions}
+                        <div>{children}</div>
+                        {questions}
                     </div>
-                    {survey && <Survey contentContainerClasses={contentContainerClasses} />}
+                    {!hideSurvey && <Survey contentContainerClasses={contentContainerClasses} />}
                     {nextPost && <NextPost {...nextPost} contentContainerClasses={contentContainerClasses} />}
                 </article>
                 {!hideSidebar && sidebar && (

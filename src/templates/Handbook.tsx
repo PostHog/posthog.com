@@ -6,7 +6,7 @@ import { Heading } from 'components/Heading'
 import { InlineCode } from 'components/InlineCode'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
-import PostLayout, { Contributors, ShareLinks, SidebarSection } from 'components/PostLayout'
+import PostLayout, { Contributors, ShareLinks, SidebarSection, TableOfContents } from 'components/PostLayout'
 import { SEO } from 'components/seo'
 import Team from 'components/Team'
 import TestimonialsTable from 'components/TestimonialsTable'
@@ -23,8 +23,9 @@ import { getCookie } from 'lib/utils'
 import { CallToAction } from 'components/CallToAction'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import CommunityQuestions from 'components/CommunityQuestions'
+import Markdown from 'markdown-to-jsx'
 
-export const HandbookSidebar = ({ contributors, title, location }) => {
+export const HandbookSidebar = ({ contributors, title, location, related }) => {
     return (
         <>
             {contributors && (
@@ -42,24 +43,108 @@ export const HandbookSidebar = ({ contributors, title, location }) => {
             <SidebarSection title="Share">
                 <ShareLinks title={title} href={location.href} />
             </SidebarSection>
+
+            {related && (
+                <SidebarSection title="Related articles">
+                    <ul className="p-0 space-y-1.5">
+                        {related.map(({ childMdx }) => (
+                            <li key={childMdx.fields.slug} className="list-none">
+                                <Link to={childMdx.fields.slug} className="text-sm block">
+                                    {childMdx.frontmatter.title}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                </SidebarSection>
+            )}
         </>
     )
 }
 
+type AppParametersProps = {
+    config:
+        | {
+              key: string
+              name: string | null
+              required: boolean | null
+              type: string | null
+              hint: string | null
+              description: string | null
+          }[]
+        | null
+}
+
+export const AppParametersFactory: (params: AppParametersProps) => React.FC = ({ config }) => {
+    const AppParameters = () => {
+        if (!config) {
+            return null
+        }
+
+        return (
+            <table>
+                <thead>
+                    <tr>
+                        <th>Option</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {config.map((option) => {
+                        if (!option.name) {
+                            return null
+                        }
+
+                        return (
+                            <tr key={option.key}>
+                                <td>
+                                    <div className="mb-6">
+                                        <code className="dark:bg-gray-accent-dark dark:text-white bg-gray-accent-light text-inherit p-1 rounded">
+                                            {option.name}
+                                        </code>
+                                    </div>
+
+                                    {option.type && (
+                                        <div>
+                                            <strong>Type: </strong>
+                                            <span>{option.type}</span>
+                                        </div>
+                                    )}
+
+                                    <div>
+                                        <strong>Required: </strong>
+                                        <span>{option.required ? 'True' : 'False'}</span>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    {option.description || option.hint ? (
+                                        <Markdown>{option.description || option.hint}</Markdown>
+                                    ) : null}
+                                </td>
+                            </tr>
+                        )
+                    })}
+                </tbody>
+            </table>
+        )
+    }
+
+    return AppParameters
+}
+
 export default function Handbook({
-    data: { post, countries, nextPost },
-    pageContext: { menu, next, previous, breadcrumb = [], breadcrumbBase, tableOfContents },
+    data: { post, nextPost },
+    pageContext: { menu, breadcrumb = [], breadcrumbBase, tableOfContents },
     location,
 }) {
     const { hash } = useLocation()
-    const [menuOpen, setMenuOpen] = useState(false)
     const {
         body,
         frontmatter,
-        contributors,
-        fields: { slug },
+        fields: { slug, contributors, appConfig },
     } = post
-    const { title, hideAnchor, description, hideLastUpdated, features, github, installUrl, thumbnail } = frontmatter
+    const { title, hideAnchor, description, hideLastUpdated, features, github, installUrl, thumbnail, related } =
+        frontmatter
     const { parent, excerpt } = post
     const lastUpdated = parent?.fields?.gitLogLatestDate
     const showToc = !hideAnchor && tableOfContents?.length > 0
@@ -69,26 +154,10 @@ export default function Handbook({
         typeof window !== 'undefined' ? Boolean(getCookie('ph_current_project_token')) : false
     )
 
-    const TotalCountries = (props) => <span {...props}>{countries.group.length}</span>
-
-    const TotalTeam = (props) => (
-        <span {...props}>{countries.group.reduce((prev, curr) => prev + curr.totalCount, 0)}</span>
-    )
     const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
-    const Iframe = (props) => {
-        if (props.src && props.src.indexOf('youtube.com') !== -1) {
-            return (
-                <div style={{ position: 'relative', height: 0, paddingBottom: '56.25%' }}>
-                    <iframe {...props} className="absolute top-0 left-0 w-full h-full" />
-                </div>
-            )
-        } else {
-            return <iframe {...props} />
-        }
-    }
+
     const components = {
         Team,
-        iframe: Iframe,
         inlineCode: InlineCode,
         blockquote: Blockquote,
         pre: CodeBlock,
@@ -100,14 +169,9 @@ export default function Handbook({
         h6: (props) => Heading({ as: 'h6', ...props }),
         img: ZoomImage,
         a: A,
-        TotalCountries,
-        TotalTeam,
         TestimonialsTable,
+        AppParameters: AppParametersFactory({ config: appConfig }),
         ...shortcodes,
-    }
-
-    const handleMobileMenuClick = () => {
-        setMenuOpen(!menuOpen)
     }
 
     useEffect(() => {
@@ -119,7 +183,7 @@ export default function Handbook({
     return (
         <>
             <SEO
-                title={`${title} - Posthog ${breadcrumbBase.name}`}
+                title={`${title} - ${breadcrumbBase.name} - PostHog`}
                 description={description || excerpt}
                 article
                 image={`/og-images/${slug.replace(/\//g, '')}.jpeg`}
@@ -134,7 +198,14 @@ export default function Handbook({
                         </div>
                     }
                     menu={menu}
-                    sidebar={<HandbookSidebar contributors={contributors} title={title} location={location} />}
+                    sidebar={
+                        <HandbookSidebar
+                            contributors={contributors}
+                            title={title}
+                            location={location}
+                            related={related}
+                        />
+                    }
                     tableOfContents={[...tableOfContents, { depth: 0, value: 'Questions?', url: 'squeak-questions' }]}
                     contentWidth="100%"
                     breadcrumb={[breadcrumbBase, ...(breadcrumb || [])]}
@@ -170,9 +241,11 @@ export default function Handbook({
                             {showToc && <MobileSidebar tableOfContents={tableOfContents} />}
                         </div>
                         {features && <LibraryFeatures availability={features} />}
-                        <MDXProvider components={components}>
-                            <MDXRenderer>{body}</MDXRenderer>
-                        </MDXProvider>
+                        <div className="article-content">
+                            <MDXProvider components={components}>
+                                <MDXRenderer>{body}</MDXRenderer>
+                            </MDXProvider>
+                        </div>
                     </section>
                 </PostLayout>
             </Layout>
@@ -182,11 +255,6 @@ export default function Handbook({
 
 export const query = graphql`
     query HandbookQuery($id: String!, $nextURL: String!) {
-        countries: allMdx(filter: { fields: { slug: { regex: "/^/team/" } } }) {
-            group(field: frontmatter___country) {
-                totalCount
-            }
-        }
         nextPost: mdx(fields: { slug: { eq: $nextURL } }) {
             excerpt(pruneLength: 500)
             frontmatter {
@@ -202,18 +270,22 @@ export const query = graphql`
             excerpt(pruneLength: 150)
             fields {
                 slug
-            }
-            contributors {
-                url
-                username
-                avatar {
-                    childImageSharp {
-                        gatsbyImageData(width: 38, height: 38)
-                    }
-                }
-                teamData {
+                appConfig {
+                    key
                     name
-                    jobTitle
+                    required
+                    type
+                    hint
+                    description
+                }
+                contributors {
+                    url
+                    username
+                    avatar {
+                        childImageSharp {
+                            gatsbyImageData(width: 38, height: 38)
+                        }
+                    }
                 }
             }
             frontmatter {
@@ -233,6 +305,16 @@ export const query = graphql`
                 thumbnail {
                     childImageSharp {
                         gatsbyImageData(placeholder: NONE, width: 36)
+                    }
+                }
+                related {
+                    childMdx {
+                        fields {
+                            slug
+                        }
+                        frontmatter {
+                            title
+                        }
                     }
                 }
                 installUrl

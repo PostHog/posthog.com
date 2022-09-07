@@ -11,7 +11,7 @@ Almost all PRs made to PostHog repositories will need a review from another engi
 #### What to look for:
   - Does the code fit into our coding conventions?
   - Is the code free of bugs?
-  - How will the solution perform with at huge scale?
+  - How will the solution perform at huge scale?
     - Are the database queries scalable (do they use the right indexes)?
     - Are the migrations safe?
   - Are there tests and do they test the right things?

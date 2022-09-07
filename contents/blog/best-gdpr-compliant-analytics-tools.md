@@ -58,7 +58,7 @@ PostHog is especially helpful for product teams that want to understand how user
 
 - **Open Source:** <span className="text-green text-lg">✔</span>
 - **Self Hosting:** <span className="text-green text-lg">✔</span>
-- **EU Cloud Hosting:** Coming Q4 2022
+- **EU Cloud Hosting:** Coming Q4 2022 – [join the waitlist](/signup/eu-cloud)
 - **Cookieless Tracking:** <span className="text-green text-lg">✔</span>
 
 PostHog can be deployed onto your own infrastructure, so you retain full control over who your data is shared with and where it is hosted. A cloud-hosted version of PostHog is also available, if you prefer, with servers hosted in the US – PostHog provides guidance on how to [use PostHog Cloud in compliance with GDPR](/docs/privacy/gdpr-compliance).
@@ -68,6 +68,8 @@ While PostHog uses cookies by default, it can be [configured not to use cookies]
 #### How much does PostHog cost?
 
 All paid editions of PostHog are [free to use up to 1 million events per month](/pricing). Paid plans include support for multiple projects, and advanced features like [A/B and multivariate testing](/docs/user-guides/experimentation), [Correlation Analysis](/docs/user-guides/correlation), [Cohorts](/user-guides/cohorts) and [Group Analytics](/docs/user-guides/group-analytics). The open source edition is free to self-host and includes the core product analytics features,  Session Recording and support for one project only.
+
+<GDPRForm />
 
 ### 2. Plausible
 
@@ -233,4 +235,5 @@ You can configure GoAccess to either not collect IP addresses or anonymize them,
 
 GoAccess is open source and has no paid tiers.
 
-<NewsletterForm compact />
+<GDPRForm />
+

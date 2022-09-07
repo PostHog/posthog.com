@@ -1,3 +1,7 @@
+[build.environment]
+  NODE_VERSION = "16"
+  GATSBY_CPU_COUNT = "2"
+
 [dev]
   command = "yarn start"
   port = 8888
@@ -21,7 +25,6 @@
   from = "/careers/*"
   to = "/careers"
   status = 200
-
 
 [[redirects]]
     from = "/docs/integrations/android-integration"
@@ -1019,41 +1022,6 @@
     status = 301
 
 [[redirects]]
-    from = "/product/funnels"
-    to = "/apps/funnels"
-    status = 301
-
-[[redirects]]
-    from = "/product/trends"
-    to = "/apps/trends"
-    status = 301
-
-[[redirects]]
-    from = "/product/session-recording"
-    to = "/apps/session-recording"
-    status = 301
-
-[[redirects]]
-    from = "/product/feature-flags"
-    to = "/apps/feature-flags"
-    status = 301
-
-[[redirects]]
-    from = "/product/heatmaps"
-    to = "/apps/heatmaps"
-    status = 301
-
-[[redirects]]
-    from = "/product/experimentation-suite"
-    to = "/apps/experimentation-suite"
-    status = 301
-
-[[redirects]]
-    from = "/product/collaboration"
-    to = "/apps/collaboration"
-    status = 301
-
-[[redirects]]
     from = "/heatmaps"
     to = "/apps/heatmaps"
 
@@ -1189,7 +1157,7 @@
     to = "/tutorials/how-to-segment-users"
 
 [build]
-    command = "GATSBY_DEPLOY_PRIME_URL=$DEPLOY_PRIME_URL gatsby build"
+    command = "GATSBY_DEPLOY_PRIME_URL=$DEPLOY_PRIME_URL GATSBY_CONTEXT=$CONTEXT gatsby build"
 
 # Added: 2022-02-04
 [[redirects]]
@@ -2006,197 +1974,6 @@
     from = "/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog"
     to = "/blog/aarrr-pirate-funnel"    
 
-# Added: 2022-08-12
-[[redirects]]
-    from = "/docs/integrate/proxy"
-    to = "/docs/cloud/proxy"
-
-
-# Added: 2022-08-12
-[[redirects]]
-    from = "/docs/runbook/async-migrations/0001-events-sample-by"
-    to = "/docs/self-host/configure/async-migrations/0001-events-sample-by"
-
-
-# Added: 2022-08-12
-[[redirects]]
-    from = "/docs/runbook/async-migrations/0002-events-sample-by"
-    to = "/docs/self-host/configure/async-migrations/0002-events-sample-by"
-
-
-# Added: 2022-08-12
-[[redirects]]
-    from = "/docs/runbook/async-migrations/0003-fill-person-distinct-id2"
-    to = "/docs/self-host/configure/async-migrations/0003-fill-person-distinct-id2"
-
-
-# Added: 2022-08-12
-[[redirects]]
-    from = "/docs/runbook/async-migrations"
-    to = "/docs/self-host/configure/async-migrations/overview"
-
-
-# Added: 2022-08-12
-[[redirects]]
-    from = "/docs/runbook/upgrading-posthog"
-    to = "/docs/self-host/configure/upgrading-posthog"
-
-
-# Added: 2022-08-12
-[[redirects]]
-    from = "/docs/runbook/upgrade-notes"
-    to = "/docs/self-host/deploy/upgrade-notes"
-
-
-# Added: 2022-08-12
-[[redirects]]
-    from = "/docs/runbook/disaster-recovery"
-    to = "/docs/self-host/disaster-recovery"
-
-
-# Added: 2022-08-12
-[[redirects]]
-    from = "/docs/migrate/migrate-between-cloud-and-self-hosted"
-    to = "/docs/self-host/migrate/migrate-between-cloud-and-self-hosted"
-
-
-# Added: 2022-08-12
-[[redirects]]
-    from = "/docs/migrate/migrate-from-amplitude"
-    to = "/docs/self-host/migrate/migrate-from-amplitude"
-
-
-# Added: 2022-08-12
-[[redirects]]
-    from = "/docs/migrate/migrate-to-another-self-hosted-instance"
-    to = "/docs/self-host/migrate/migrate-to-another-self-hosted-instance"
-
-
-# Added: 2022-08-12
-[[redirects]]
-    from = "/docs/runbook/services/postgresql/long-migrations"
-    to = "/docs/self-host/postgres-upgrade-migrations"
-
-
-# Added: 2022-08-12
-[[redirects]]
-    from = "/docs/runbook/services/clickhouse/backup"
-    to = "/docs/self-host/runbook/clickhouse/backup"
-
-
-# Added: 2022-08-12
-[[redirects]]
-    from = "/docs/runbook/services/clickhouse"
-    to = "/docs/self-host/runbook/clickhouse"
-
-
-# Added: 2022-08-12
-[[redirects]]
-    from = "/docs/runbook/services/clickhouse/kafka-engine"
-    to = "/docs/self-host/runbook/clickhouse/kafka-engine"
-
-
-# Added: 2022-08-12
-[[redirects]]
-    from = "/docs/runbook/services/clickhouse/resize-disk"
-    to = "/docs/self-host/runbook/clickhouse/resize-disk"
-
-
-# Added: 2022-08-12
-[[redirects]]
-    from = "/docs/runbook/services/clickhouse/restore"
-    to = "/docs/self-host/runbook/clickhouse/restore"
-
-
-# Added: 2022-08-12
-[[redirects]]
-    from = "/docs/runbook/services/clickhouse/sharding-and-replication"
-    to = "/docs/self-host/runbook/clickhouse/sharding-and-replication"
-
-
-# Added: 2022-08-12
-[[redirects]]
-    from = "/docs/runbook/services/clickhouse/vertical-scaling"
-    to = "/docs/self-host/runbook/clickhouse/vertical-scaling"
-
-
-# Added: 2022-08-12
-[[redirects]]
-    from = "/docs/runbook/services/kafka"
-    to = "/docs/self-host/runbook/kafka"
-
-
-# Added: 2022-08-12
-[[redirects]]
-    from = "/docs/runbook/services/kafka/log-retention"
-    to = "/docs/self-host/runbook/kafka/log-retention"
-
-
-# Added: 2022-08-12
-[[redirects]]
-    from = "/docs/runbook/services/kafka/resize-disk"
-    to = "/docs/self-host/runbook/kafka/resize-disk"
-
-
-# Added: 2022-08-12
-[[redirects]]
-    from = "/docs/runbook/services/minio"
-    to = "/docs/self-host/runbook/minio"
-
-
-# Added: 2022-08-12
-[[redirects]]
-    from = "/docs/runbook/services/plugin-server/diagrams/async-server"
-    to = "/docs/self-host/runbook/plugin-server/diagrams/async-server"
-
-
-# Added: 2022-08-12
-[[redirects]]
-    from = "/docs/runbook/services/plugin-server/diagrams/event-flow"
-    to = "/docs/self-host/runbook/plugin-server/diagrams/event-flow"
-
-
-# Added: 2022-08-12
-[[redirects]]
-    from = "/docs/runbook/services/plugin-server/diagrams/ingestion-server"
-    to = "/docs/self-host/runbook/plugin-server/diagrams/ingestion-server"
-
-
-# Added: 2022-08-12
-[[redirects]]
-    from = "/docs/runbook/services/plugin-server/diagrams/plugin-server"
-    to = "/docs/self-host/runbook/plugin-server/diagrams/plugin-server"
-
-
-# Added: 2022-08-12
-[[redirects]]
-    from = "/docs/runbook/services/plugin-server"
-    to = "/docs/self-host/runbook/plugin-server"
-
-
-# Added: 2022-08-12
-[[redirects]]
-    from = "/docs/runbook/services/postgresql"
-    to = "/docs/self-host/runbook/postgresql"
-
-
-# Added: 2022-08-12
-[[redirects]]
-    from = "/docs/runbook/services/postgresql/resize-disk"
-    to = "/docs/self-host/runbook/postgresql/resize-disk"
-
-
-# Added: 2022-08-12
-[[redirects]]
-    from = "/docs/runbook/services/redis"
-    to = "/docs/self-host/runbook/redis"
-
-
-# Added: 2022-08-12
-[[redirects]]
-    from = "/docs/runbook/services/zookeeper"
-    to = "/docs/self-host/runbook/zookeeper"
-
 # Added: 2022-08-08
 [[redirects]]
     from = "/docs/cloud/proxy"
@@ -2260,157 +2037,205 @@
     from = "/docs/plugins/build"
     to = "/docs/apps/build"
 
-# Added: 2022-08-17
+# Added: 2022-08-11
 [[redirects]]
-    from = "/manual/actions"
-    to = "/docs/user-guides/actions"
+    from = "/docs/user-guides/actions"
+    to = "/manual/actions"
 
 
-# Added: 2022-08-17
+# Added: 2022-08-11
 [[redirects]]
-    from = "/manual/annotations"
-    to = "/docs/user-guides/annotations"
+    from = "/docs/user-guides/annotations"
+    to = "/manual/annotations"
 
 
-# Added: 2022-08-17
+# Added: 2022-08-11
 [[redirects]]
-    from = "/manual/application-settings"
-    to = "/docs/user-guides/application-settings"
+    from = "/docs/user-guides/application-settings"
+    to = "/manual/application-settings"
 
 
-# Added: 2022-08-17
+# Added: 2022-08-11
 [[redirects]]
-    from = "/manual/cohorts"
-    to = "/docs/user-guides/cohorts"
+    from = "/docs/user-guides/cohorts"
+    to = "/manual/cohorts"
 
 
-# Added: 2022-08-17
+# Added: 2022-08-11
 [[redirects]]
-    from = "/manual/correlation"
-    to = "/docs/user-guides/correlation"
+    from = "/docs/user-guides/correlation"
+    to = "/manual/correlation"
 
 
-# Added: 2022-08-17
+# Added: 2022-08-11
 [[redirects]]
-    from = "/manual/dashboards"
-    to = "/docs/user-guides/dashboards"
+    from = "/docs/user-guides/dashboards"
+    to = "/manual/dashboards"
 
 
-# Added: 2022-08-17
+# Added: 2022-08-11
 [[redirects]]
-    from = "/manual/data-management"
-    to = "/docs/user-guides/data-management"
+    from = "/docs/user-guides/data-management"
+    to = "/manual/data-management"
 
 
-# Added: 2022-08-17
+# Added: 2022-08-11
 [[redirects]]
-    from = "/manual/events"
-    to = "/docs/user-guides/events"
+    from = "/docs/user-guides/events"
+    to = "/manual/events"
 
 
-# Added: 2022-08-17
+# Added: 2022-08-11
 [[redirects]]
-    from = "/manual/experimentation"
-    to = "/docs/user-guides/experimentation"
+    from = "/docs/user-guides/experimentation"
+    to = "/manual/experimentation"
 
 
-# Added: 2022-08-17
+# Added: 2022-08-11
 [[redirects]]
-    from = "/manual/feature-flags"
-    to = "/docs/user-guides/feature-flags"
+    from = "/docs/user-guides/feature-flags"
+    to = "/manual/feature-flags"
 
 
-# Added: 2022-08-17
+# Added: 2022-08-11
 [[redirects]]
-    from = "/manual/funnels"
-    to = "/docs/user-guides/funnels"
+    from = "/docs/user-guides/funnels"
+    to = "/manual/funnels"
 
 
-# Added: 2022-08-17
+# Added: 2022-08-11
 [[redirects]]
-    from = "/manual/group-analytics"
-    to = "/docs/user-guides/group-analytics"
+    from = "/docs/user-guides/group-analytics"
+    to = "/manual/group-analytics"
 
 
-# Added: 2022-08-17
+# Added: 2022-08-11
 [[redirects]]
-    from = "/manual/insights"
-    to = "/docs/user-guides/insights"
+    from = "/docs/user-guides"
+    to = "/using-posthog"
 
 
-# Added: 2022-08-17
+# Added: 2022-08-11
 [[redirects]]
-    from = "/manual/lifecycle"
-    to = "/docs/user-guides/lifecycle"
+    from = "/docs/user-guides/insights"
+    to = "/manual/insights"
 
 
-# Added: 2022-08-17
+# Added: 2022-08-11
 [[redirects]]
-    from = "/manual/organizations-and-projects"
-    to = "/docs/user-guides/organizations-and-projects"
+    from = "/docs/user-guides/lifecycle"
+    to = "/manual/lifecycle"
 
 
-# Added: 2022-08-17
+# Added: 2022-08-11
 [[redirects]]
-    from = "/manual/paths"
-    to = "/docs/user-guides/paths"
+    from = "/docs/user-guides/organizations-and-projects"
+    to = "/manual/organizations-and-projects"
 
 
-# Added: 2022-08-17
+# Added: 2022-08-11
 [[redirects]]
-    from = "/manual/persons"
-    to = "/docs/user-guides/persons"
+    from = "/docs/user-guides/paths"
+    to = "/manual/paths"
 
 
-# Added: 2022-08-17
+# Added: 2022-08-11
 [[redirects]]
-    from = "/manual/recordings"
-    to = "/docs/user-guides/recordings"
+    from = "/docs/user-guides/persons"
+    to = "/manual/persons"
 
 
-# Added: 2022-08-17
+# Added: 2022-08-11
 [[redirects]]
-    from = "/manual/retention"
-    to = "/docs/user-guides/retention"
+    from = "/docs/user-guides/recordings"
+    to = "/manual/recordings"
 
 
-# Added: 2022-08-17
+# Added: 2022-08-11
 [[redirects]]
-    from = "/manual/sessions"
-    to = "/docs/user-guides/sessions"
+    from = "/docs/user-guides/retention"
+    to = "/manual/retention"
 
 
-# Added: 2022-08-17
+# Added: 2022-08-11
 [[redirects]]
-    from = "/manual/sso"
-    to = "/docs/user-guides/sso"
+    from = "/docs/user-guides/sessions"
+    to = "/manual/sessions"
 
 
-# Added: 2022-08-17
+# Added: 2022-08-11
 [[redirects]]
-    from = "/manual/stickiness"
-    to = "/docs/user-guides/stickiness"
+    from = "/docs/user-guides/sso"
+    to = "/manual/sso"
 
 
-# Added: 2022-08-17
+# Added: 2022-08-11
 [[redirects]]
-    from = "/manual/notifications-and-alerts"
-    to = "/docs/user-guides/subscriptions"
+    from = "/docs/user-guides/stickiness"
+    to = "/manual/stickiness"
 
 
-# Added: 2022-08-17
+# Added: 2022-08-11
 [[redirects]]
-    from = "/manual/support"
-    to = "/docs/user-guides/support"
+    from = "/docs/user-guides/subscriptions"
+    to = "/manual/subscriptions"
 
 
-# Added: 2022-08-17
+# Added: 2022-08-11
 [[redirects]]
-    from = "/manual/trends"
-    to = "/docs/user-guides/trends"
+    from = "/docs/user-guides/support"
+    to = "/manual/support"
 
 
-# Added: 2022-08-17
+# Added: 2022-08-11
 [[redirects]]
-    from = "/manual/utm-segmentation"
-    to = "/docs/user-guides/utm-segmentation"
+    from = "/docs/user-guides/toolbar"
+    to = "/manual/toolbar"
+
+
+# Added: 2022-08-11
+[[redirects]]
+    from = "/docs/user-guides/trends"
+    to = "/manual/trends"
+
+
+# Added: 2022-08-11
+[[redirects]]
+    from = "/docs/user-guides/utm-segmentation"
+    to = "/manual/utm-segmentation"
+
+# Added: 2022-08-11
+[[redirects]]
+    from = "/docs/user-guides/subscriptions"
+    to = "/manual/notifications-and-alerts"
+
+# Added: 2022-08-24
+[[redirects]]
+    from = "/docs/data-model"
+    to = "/docs/how-posthog-works/data-model"
+
+
+# Added: 2022-08-25
+[[redirects]]
+    from = "/docs/self-host/architecture"
+    to = "/docs/how-posthog-works"
+
+# Added: 2022-08-29
+[[redirects]]
+    from = "/handbook/engineering/databases"
+    to = "/docs/how-posthog-works/ingestion-pipeline"
+
+# Added: 2022-08-29
+[[redirects]]
+    from = "/docs/architecture/ingestion-pipeline"
+    to = "/docs/how-posthog-works/ingestion-pipeline"
+
+# Added: 2022-09-01
+[[redirects]]
+    from = "/blog/the-posthog-array-1-39-1"
+    to = "/blog/the-posthog-array-1-39-0"
+    
+# Added: 2022-09-02    
+[[redirects]]
+    from = "/product/experimentation"
+    to = "/product/experimentation-suite"

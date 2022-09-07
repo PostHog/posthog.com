@@ -2,7 +2,10 @@
     "main": [
         {
             "title": "Product",
-            "url": "/product"
+            "url": "/product",
+            "sub": {
+                "component": "Product"
+            }
         },
         {
             "title": "Pricing",
@@ -17,7 +20,7 @@
         },
         {
             "title": "Using PostHog",
-            "url": "/docs/user-guides",
+            "url": "/using-posthog",
             "sub": {
                 "component": "UsingPostHog"
             }

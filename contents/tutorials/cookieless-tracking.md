@@ -21,6 +21,8 @@ These include:
 
 If you’re interested in trying cookie-less tracking, then this tutorial will explain how to do this by configuring posthog-js to use pgae memory instead.
 
+<GDPRForm />
+
 ## Step 1: Decide where to store the data
 
 It can be helpful first to know what data is being stored and why. Specifically, PostHog will usually store the following information in the user’s browser via a cookie:
@@ -69,4 +71,6 @@ posthog.init('<ph_project_api_key>', {
 ## Step 3: Remove your cookies acceptance banner
 
 Now that your PostHog deployment isn’t using cookies you can, optionally and if you’re not using cookies for any other services, completely remove your GDPR-required cookies acceptance banner. Good for you — they only annoy most users anyway. 
+
+<NewsletterTutorial compact/>
 

@@ -161,3 +161,5 @@ Additionally, by clicking a specific action on an element, you can update or del
 - [How to run Experiments without feature flags](/tutorials/experiments)
 - [How to build, analyze and optimize conversion funnels](/tutorials/funnels)
 - [B2B product metrics 101](/blog/b2b-saas-product-metrics)
+
+<NewsletterTutorial compact/>

@@ -1,21 +1,22 @@
-import { kea, BreakPointFunction } from 'kea'
+import { kea, BreakPointFunction, actions, reducers, listeners, selectors, events } from 'kea'
+import { loaders } from 'kea-loaders'
 import { Contributor } from 'types'
 import { ignoreContributors, mvpWinners } from '../pages-content/community-constants'
 
-export const contributorsLogic = kea({
-    actions: {
+export const contributorsLogic = kea([
+    actions({
         processSearchInput: (query: string) => ({ query }),
         setSearchQuery: (query: string) => ({ query }),
-    },
-    reducers: {
+    }),
+    reducers({
         searchQuery: [
             '',
             {
-                setSearchQuery: (_: null, { query }: { query: string }) => query,
+                setSearchQuery: (_, { query }: { query: string }) => query,
             },
         ],
-    },
-    listeners: ({ actions }) => ({
+    }),
+    listeners(({ actions }) => ({
         processSearchInput: async ({ query }: { query: string }, breakpoint: BreakPointFunction) => {
             // pause for 100ms and break if `setUsername`
             // was called again during this time
@@ -23,15 +24,8 @@ export const contributorsLogic = kea({
 
             actions.setSearchQuery(query)
         },
-    }),
-    selectors: {
-        filteredContributors: [
-            (s) => [s.searchQuery, s.contributors],
-            (searchQuery: string, contributors: Contributor[]) =>
-                contributors.filter((contributor: Contributor) => contributor.login.includes(searchQuery)),
-        ],
-    },
-    loaders: {
+    })),
+    loaders({
         contributors: [
             [] as Contributor[],
             {
@@ -76,13 +70,20 @@ export const contributorsLogic = kea({
                 },
             },
         ],
-    },
-    events: ({ actions }) => ({
+    }),
+    selectors(() => ({
+        filteredContributors: [
+            (s) => [s.searchQuery, s.contributors],
+            (searchQuery: string, contributors: Contributor[]) =>
+                contributors.filter((contributor: Contributor) => contributor.login.includes(searchQuery)),
+        ],
+    })),
+    events(({ actions }) => ({
         afterMount: () => {
             // only load in the frontend
             if (typeof window !== 'undefined') {
                 actions.loadContributors()
             }
         },
-    }),
-})
+    })),
+])

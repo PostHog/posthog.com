@@ -31,6 +31,10 @@ Workspace stats are sent into your PostHog instance as an `orbit love report` ev
 
 Refer to [Orbit's API documentation](https://docs.orbit.love/reference/about-the-orbit-api) for a full list of properties available in each report.
 
+### Configuration
+
+<AppParameters />
+
 ### Is the source code for this app available?
 
 PostHog is open-source and so are all apps on the platform. The [source code for the Orbit Connector](https://github.com/PostHog/posthog-orbit-love-plugin) is available on GitHub.

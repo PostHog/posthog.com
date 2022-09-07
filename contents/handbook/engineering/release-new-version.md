@@ -4,9 +4,13 @@ sidebar: Handbook
 showTitle: true
 ---
 
-At the moment, we release a new version every month ([unless it makes sense not to!](/blog/we-ship-whenever)). This might change in the future.
+We release a new version on the last Monday of every month.
 
-For consistency, releases happen on the last Monday of every month. Code freezes and break the release happen on the Wednesday before that. Each month there will be a different release owner in charge of the release, to be updated under this [calendar](https://calendar.google.com/calendar/embed?src=c_n8hc1iedb0k8gqhuiv83jolm50%40group.calendar.google.com&ctz=America%2FNew_York).
+This consistency is important, as it means our community and our customers can look forward to new features at a predictable pace. There will always be more work that we want to do and if we get in a habit of pushing deadlines out, we'll push them further and further.
+
+Sprints do not line up with releases, so a release might fall in the middle of the sprint, for which we need to plan accordingly. If a feature won't be ready by the release date then cut down the scope, remove it, or release it behind a feature flag.
+
+Code freezes and break the release happen on the Wednesday before that. Each month there will be a different release owner in charge of the release, to be updated under this [calendar](https://calendar.google.com/calendar/embed?src=c_n8hc1iedb0k8gqhuiv83jolm50%40group.calendar.google.com&ctz=America%2FNew_York).
 
 If we've shipped features that we want to feature in the release notes, we use the label `highlight` on our pull request. If after the code freeze we have important bugfixes that we want to get into the release, we add the label `release-[version]`. This makes it easier for the release owner to figure out changes for the release blog post and to cherry-pick commits between the Code Freeze and the Release.
 
@@ -41,7 +45,7 @@ Release is happening next Monday. Which means
 4. [ ] Update the `VERSION` value in `posthog/version.py` and add an appropriate entry in `posthog/versions.json`. Then commit those changes:
   ```bash
   git checkout release-[version]
-  git add posthog/version.py posthog/versions.json
+  git add posthog/version.py versions.json
   git commit -m "chore: Bump version to [version]"
   ```
 1. [ ] Publish the `release-[version]` branch:
