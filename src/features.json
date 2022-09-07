@@ -1,0 +1,18 @@
+{
+    "dashboards": {
+        "description": "",
+        "availability": {
+            "free": true,
+            "self-serve": true,
+            "enterprise": true
+        }
+    },
+    "group-analytics": {
+        "description": "",
+        "availability": {
+            "free": false,
+            "self-serve": true,
+            "enterprise": true
+        }
+    }
+}
