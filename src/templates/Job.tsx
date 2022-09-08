@@ -223,12 +223,6 @@ export default function Job({
                                 </Accordion>
                                 <Accordion title="Apply" id="apply">
                                     <div className="mb-6">
-                                        <h4 className="!text-lg mb-0">Now for the fun part!</h4>
-                                        <p>
-                                            Just fill out this painless form and we'll get back to you within a few
-                                            days. Thanks in advance!
-                                        </p>
-                                        <p className="opacity-50 font-bold">Bolded fields are required</p>
                                         <Apply id={id} info={info} />
                                     </div>
                                 </Accordion>
