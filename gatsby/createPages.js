@@ -542,7 +542,7 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
         let gitHubIssues = []
         if (issues) {
             for (const issue of issues) {
-                const { url, number, title, labels } = await fetch(
+                const { html_url, number, title, labels } = await fetch(
                     `https://api.github.com/repos/${repo}/issues/${issue.trim()}`,
                     {
                         headers: {
@@ -551,7 +551,7 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
                     }
                 ).then((res) => res.json())
                 gitHubIssues.push({
-                    url,
+                    url: html_url,
                     number,
                     title,
                     labels,
