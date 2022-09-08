@@ -1,17 +1,243 @@
 {
-    "dashboards": {
-        "description": "",
+    "insights": {
         "availability": {
             "free": true,
-            "self-serve": true,
+            "selfServe": true,
+            "enterprise": true
+        }
+    },
+    "dashboards": {
+        "features": {
+            "tagging": {
+                "free": false,
+                "selfServe": true,
+                "enterprise": true
+            }
+        }
+    },
+    "trends": {
+        "availability": {
+            "free": true,
+            "selfServe": true,
+            "enterprise": true
+        }
+    },
+    "funnels": {
+        "features": {
+            "correlation-analysis": {
+                "free": false,
+                "selfServe": true,
+                "enterprise": true
+            }
+        }
+    },
+    "retention": {
+        "availability": {
+            "free": true,
+            "selfServe": true,
+            "enterprise": true
+        }
+    },
+    "paths": {
+        "features": {
+            "view-cohort": {
+                "free": false,
+                "selfServe": true,
+                "enterprise": true
+            },
+            "end-point": {
+                "free": false,
+                "selfServe": true,
+                "enterprise": true
+            },
+            "max-paths": {
+                "free": false,
+                "selfServe": true,
+                "enterprise": true
+            },
+            "path-cleaning": {
+                "free": false,
+                "selfServe": true,
+                "enterprise": true
+            },
+            "view-funnel": {
+                "free": false,
+                "selfServe": true,
+                "enterprise": true
+            }
+        }
+    },
+    "stickiness": {
+        "availability": {
+            "free": true,
+            "selfServe": true,
+            "enterprise": true
+        }
+    },
+    "lifecycle": {
+        "availability": {
+            "free": true,
+            "selfServe": true,
             "enterprise": true
         }
     },
     "group-analytics": {
-        "description": "",
         "availability": {
             "free": false,
-            "self-serve": true,
+            "selfServe": true,
+            "enterprise": true
+        }
+    },
+    "recordings": {
+        "availability": {
+            "free": true,
+            "selfServe": true,
+            "enterprise": true
+        }
+    },
+    "feature-flags": {
+        "features": {
+            "multivariate-feature-flags": {
+                "free": false,
+                "selfServe": true,
+                "enterprise": true
+            }
+        }
+    },
+    "experimentation": {
+        "availability": {
+            "free": false,
+            "selfServe": true,
+            "enterprise": true
+        }
+    },
+    "calculated-events": {
+        "availability": {
+            "free": true,
+            "selfServe": true,
+            "enterprise": true
+        }
+    },
+    "annotations": {
+        "availability": {
+            "free": true,
+            "selfServe": true,
+            "enterprise": true
+        }
+    },
+    "cohorts": {
+        "availability": {
+            "free": true,
+            "selfServe": true,
+            "enterprise": true
+        }
+    },
+    "data-management": {
+        "availability": {
+            "free": true,
+            "selfServe": true,
+            "enterprise": true
+        }
+    },
+    "events": {
+        "availability": {
+            "free": true,
+            "selfServe": true,
+            "enterprise": true
+        }
+    },
+    "persons": {
+        "availability": {
+            "free": true,
+            "selfServe": true,
+            "enterprise": true
+        }
+    },
+    "sessions": {
+        "availability": {
+            "free": true,
+            "selfServe": true,
+            "enterprise": true
+        }
+    },
+    "utm-segmentation": {
+        "availability": {
+            "free": true,
+            "selfServe": true,
+            "enterprise": true
+        }
+    },
+    "organizations-and-projects": {
+        "features": {
+            "multiple-organizations": {
+                "free": false,
+                "selfServe": true,
+                "enterprise": true
+            },
+            "multiple-projects": {
+                "free": false,
+                "selfServe": true,
+                "enterprise": true
+            },
+            "permissions": {
+                "free": false,
+                "selfServe": true,
+                "enterprise": true
+            },
+            "private-projects": {
+                "free": false,
+                "selfServe": false,
+                "enterprise": true
+            }
+        }
+    },
+    "application-settings": {
+        "availability": {
+            "free": true,
+            "selfServe": true,
+            "enterprise": true
+        }
+    },
+    "sso": {
+        "features": {
+            "sso-enforcement": {
+                "free": false,
+                "selfServe": false,
+                "enterprise": true
+            },
+            "github-sso": {
+                "free": true,
+                "selfServe": true,
+                "enterprise": true
+            },
+            "gitlab-sso": {
+                "free": true,
+                "selfServe": true,
+                "enterprise": true
+            },
+            "google-sso": {
+                "free": true,
+                "selfServe": true,
+                "enterprise": true
+            },
+            "saml": {
+                "free": false,
+                "selfServe": false,
+                "enterprise": true
+            }
+        }
+    },
+    "toolbar": {
+        "availability": {
+            "free": true,
+            "selfServe": true,
+            "enterprise": true
+        }
+    },
+    "subscriptions": {
+        "availability": {
+            "free": false,
+            "selfServe": true,
             "enterprise": true
         }
     }
