@@ -126,9 +126,11 @@ export default function Job({
                                     <Accordion title="Salary" id="salary">
                                         <p>
                                             We have a set system for compensation as part of being transparent. Salary
-                                            varies based on location and level of experience.{' '}
+                                            varies based on location and level of experience.
+                                        </p>
+                                        <p>
                                             <Link to="/handbook/people/compensation">
-                                                Learn more about compensation.
+                                                Learn more about compensation
                                             </Link>
                                         </p>
                                         <div className="mb-6">
@@ -146,16 +148,23 @@ export default function Job({
                                     </Accordion>
                                 )}
                                 <Accordion title="Benefits" id="benefits">
-                                    <ul className="mb-6 list-none m-0 p-0 grid md:grid-cols-2 grid-cols-1 gap-6">
+                                    <ul className="list-none m-0 p-0 pb-4 grid md:grid-cols-2 grid-cols-1 gap-6">
                                         {benefits.map(({ title, image }) => {
                                             return (
-                                                <li key={title} className="flex space-x-4 items-start font-semibold">
+                                                <li
+                                                    key={title}
+                                                    className="flex space-x-4 items-start font-medium leading-tight text-[15px]"
+                                                >
                                                     <img className="max-w-[30px]" alt={title} src={image} />
                                                     <span>{title}</span>
                                                 </li>
                                             )
                                         })}
                                     </ul>
+                                    <p>
+                                        Get more details about all our benefits on the{' '}
+                                        <Link to="/careers#benefits">Careers page</Link>.
+                                    </p>
                                 </Accordion>
                                 <Accordion title="Interview process" id="interview-process">
                                     <div className="mb-6">
@@ -164,12 +173,14 @@ export default function Job({
                                 </Accordion>
                                 <Accordion title="Apply" id="apply">
                                     <div className="mb-6">
-                                        <h4 className="!text-lg mb-0">Now for the fun part!</h4>
+                                        <h4 className="!text-lg mb-0">(Now for the fun part...)</h4>
                                         <p>
                                             Just fill out this painless form and we'll get back to you within a few
                                             days. Thanks in advance!
                                         </p>
-                                        <p className="opacity-50 font-bold">Bolded fields are required</p>
+                                        <p className="opacity-50 text-sm">
+                                            <span className="font-bold">Bolded fields</span> are required
+                                        </p>
                                         <Apply id={id} info={info} />
                                     </div>
                                 </Accordion>

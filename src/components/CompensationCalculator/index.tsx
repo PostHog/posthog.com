@@ -185,7 +185,10 @@ export const CompensationCalculator = ({
             </Section>
 
             <Section title="Base salary">
-                <div className="text-2xl mt-1" id="compensation">
+                <div
+                    className="text-xl mt-1 mb-2 font-bold border-dashed border border-gray-accent-light p-3 rounded"
+                    id="compensation"
+                >
                     {job && country && region && currentLocation && level && step
                         ? formatCur(
                               sfBenchmark[job] *
@@ -202,7 +205,7 @@ export const CompensationCalculator = ({
                                   stepModifier[step][1],
                               currentLocation.currency
                           ) +
-                          ' + equity'
+                          ' plus equity'
                         : '--'}
                 </div>
                 {!hideFormula && job && country && currentLocation && level && step && (
