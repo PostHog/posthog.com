@@ -139,6 +139,7 @@ export default function Job({
                                                     level: `We pay more experienced team members a greater amount since it is reasonable to expect this correlates with an increase in skill`,
                                                 }}
                                                 hideFormula
+                                                hideRole
                                                 initialJob={title}
                                             />
                                         </div>

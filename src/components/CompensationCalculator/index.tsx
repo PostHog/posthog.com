@@ -46,13 +46,13 @@ const Factor: React.FC = (props) => {
 
 export const CompensationCalculator = ({
     hideFormula = false,
-    hideJob = false,
+    hideRole = false,
     initialJob,
     descriptions = { role: null, location: null, level: null, step: null },
 }: {
     hideFormula?: boolean
+    hideRole?: boolean
     initialJob?: undefined | null | string
-    hideJob?: boolean
     descriptions?: {
         role?: string | null
         location?: string | null
@@ -137,7 +137,7 @@ export const CompensationCalculator = ({
     const countries = Array.from(new Set(locationFactor.map((l) => l.country)))
     return (
         <div className="ph-no-capture space-y-4">
-            {!hideJob && (
+            {!hideRole && (
                 <Section title="Role" description={descriptions['role'] && descriptions['role']}>
                     <Combobox value={job} onChange={setItem('job')} options={Object.keys(sfBenchmark)} />
                 </Section>
