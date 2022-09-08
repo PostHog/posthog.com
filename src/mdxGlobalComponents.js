@@ -65,6 +65,7 @@ import { NewsletterForm } from './components/NewsletterForm'
 import { NewsletterTutorial } from './components/NewsletterTutorial'
 import { NextSteps } from './components/NextSteps'
 import { NotFoundPage } from './components/NotFoundPage'
+import { NotProductIcons } from './components/NotProductIcons'
 import { OverflowXSection } from './components/OverflowXSection'
 import { Popover } from './components/Popover'
 import { PostCard } from './components/PostCard'
@@ -183,6 +184,7 @@ export const shortcodes = {
     NewsletterTutorial,
     NextSteps,
     NotFoundPage,
+    NotProductIcons,
     OverflowXSection,
     Popover,
     PostCard,

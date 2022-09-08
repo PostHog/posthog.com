@@ -8,19 +8,19 @@ import { CompensationCalculator } from 'components/CompensationCalculator'
 import InterviewProcess from 'components/Job/InterviewProcess'
 import Apply from 'components/Job/Apply'
 import Sidebar from 'components/Job/Sidebar'
-import { Clock, Group, Location } from 'components/Icons/Icons'
 import { sfBenchmark } from 'components/CompensationCalculator/compensation_data/sf_benchmark'
 import { benefits } from 'components/Careers/Benefits'
+import NotProductIcons from 'components/NotProductIcons'
 
 const Detail = ({ icon, title, value }: { icon: React.ReactNode; title: string; value: string }) => {
     return (
         <li className="flex space-x-2">
-            {icon}
+            <span className="w-6 h-6">{icon}</span>
             <span className="grid">
-                <h4 className="text-base m-0 font-normal leading-none">
+                <h4 className="text-sm m-0 font-normal leading-none pt-1">
                     <span>{title}</span>
                 </h4>
-                <p className="text-sm m-0 mt-1">
+                <p className="text-[15px] m-0 mt-1">
                     <strong className="text-black">{value}</strong>
                 </p>
             </span>
@@ -109,10 +109,12 @@ export default function Job({
                     <div className="mb-8 relative mt-8 lg:mt-0">
                         <div>
                             <h1 className="m-0 text-5xl">{title}</h1>
-                            <ul className="list-none m-0 p-0 md:items-center text-black/50 dark:text-white/50 mt-6 flex md:flex-row flex-col md:space-x-6 md:space-y-0 space-y-6">
-                                <Detail title="Department" value={departmentName} icon={<Group />} />
-                                <Detail title="Location" value={locationName} icon={<Location />} />
-                                {timezone && <Detail title="Timezone(s)" value={timezone} icon={<Clock />} />}
+                            <ul className="list-none m-0 p-0 md:items-center text-black/50 dark:text-white/50 mt-6 flex md:flex-row flex-col md:space-x-12 md:space-y-0 space-y-6">
+                                <Detail title="Department" value={departmentName} icon={NotProductIcons.department} />
+                                <Detail title="Location" value={locationName} icon={NotProductIcons.location} />
+                                {timezone && (
+                                    <Detail title="Timezone(s)" value={timezone} icon={NotProductIcons.timezone} />
+                                )}
                             </ul>
                             <div className="job-content mt-12 w-full flex-shrink-0 transition-all">
                                 <div
