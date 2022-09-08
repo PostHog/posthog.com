@@ -1,5 +1,7 @@
 import { button } from 'components/CallToAction'
 import React, { useRef, useState } from 'react'
+import Confetti from 'react-confetti'
+import { createPortal } from 'react-dom'
 
 const allowedFileTypes = ['application/pdf']
 
@@ -114,34 +116,50 @@ export default function Apply({ id, info }) {
             .then((submission) => setSubmitted(true))
     }
     return submitted ? (
-        <p>Thanks for your submission!</p>
+        <div>
+            {createPortal(
+                <div className="fixed inset-0">
+                    <Confetti />
+                </div>,
+                document.body
+            )}
+
+            <p>Thanks for your submission!</p>
+        </div>
     ) : (
-        <form onSubmit={handleSubmit}>
-            <div className="grid grid-cols-1 gap-y-3 ">
-                {info?.applicationFormDefinition?.sections?.map(({ fields }) => {
-                    return fields.map(({ field }) => {
-                        const required = !field?.isNullable
-                        return (
-                            <div key={field?.path}>
-                                <label
-                                    className={`opacity-70 mb-1 inline-block ${required ? 'font-bold' : ''}`}
-                                    htmlFor={field?.title}
-                                >
-                                    {field?.title}
-                                </label>
-                                {components[field?.type?.toLowerCase()] &&
-                                    components[field?.type?.toLowerCase()]({
-                                        title: field?.title,
-                                        required,
-                                        path: field?.path,
-                                    })}
-                            </div>
-                        )
-                    })
-                })}
-            </div>
-            {error && <p className="font-bold text-red m-0 mt-4">{error}</p>}
-            <button className={`${button()} mt-6 shadow-none box-border !w-full`}>Submit</button>
-        </form>
+        <div>
+            <h4 className="!text-lg mb-0">(Now for the fun part...)</h4>
+            <p>Just fill out this painless form and we'll get back to you within a few days. Thanks in advance!</p>
+            <p className="opacity-50 text-sm">
+                <span className="font-bold">Bolded fields</span> are required
+            </p>
+            <form onSubmit={handleSubmit}>
+                <div className="grid grid-cols-1 gap-y-3 ">
+                    {info?.applicationFormDefinition?.sections?.map(({ fields }) => {
+                        return fields.map(({ field }) => {
+                            const required = !field?.isNullable
+                            return (
+                                <div key={field?.path}>
+                                    <label
+                                        className={`opacity-70 mb-1 inline-block ${required ? 'font-bold' : ''}`}
+                                        htmlFor={field?.title}
+                                    >
+                                        {field?.title}
+                                    </label>
+                                    {components[field?.type?.toLowerCase()] &&
+                                        components[field?.type?.toLowerCase()]({
+                                            title: field?.title,
+                                            required,
+                                            path: field?.path,
+                                        })}
+                                </div>
+                            )
+                        })
+                    })}
+                </div>
+                {error && <p className="font-bold text-red m-0 mt-4">{error}</p>}
+                <button className={`${button()} mt-6 shadow-none`}>Submit</button>
+            </form>
+        </div>
     )
 }

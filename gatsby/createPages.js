@@ -533,10 +533,31 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
         })
     })
 
-    result.data.jobs.nodes.forEach((node) => {
+    for (node of result.data.jobs.nodes) {
         const { id, parent } = node
         const slug = node.fields.slug
         const team = parent?.customFields?.find(({ title, value }) => title === 'Team')?.value
+        const issues = parent?.customFields?.find(({ title, value }) => title === 'Issues')?.value?.split(',')
+        const repo = parent?.customFields?.find(({ title, value }) => title === 'Repo')?.value
+        let gitHubIssues = []
+        if (issues) {
+            for (const issue of issues) {
+                const { url, number, title, labels } = await fetch(
+                    `https://api.github.com/repos/${repo}/issues/${issue.trim()}`,
+                    {
+                        headers: {
+                            Authorization: `token ${process.env.GITHUB_API_KEY}`,
+                        },
+                    }
+                ).then((res) => res.json())
+                gitHubIssues.push({
+                    url,
+                    number,
+                    title,
+                    labels,
+                })
+            }
+        }
         createPage({
             path: slug,
             component: Job,
@@ -545,7 +566,10 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
                 slug,
                 teamName: team,
                 teamNameInfo: `Team ${team}`,
+                objectives: `/handbook/people/team-structure/${slugify(team, { lower: true })}/objectives`,
+                mission: `/handbook/people/team-structure/${slugify(team, { lower: true })}/mission`,
+                gitHubIssues,
             },
         })
-    })
+    }
 }

@@ -11,6 +11,8 @@ import Sidebar from 'components/Job/Sidebar'
 import { sfBenchmark } from 'components/CompensationCalculator/compensation_data/sf_benchmark'
 import { benefits } from 'components/Careers/Benefits'
 import NotProductIcons from 'components/NotProductIcons'
+import { MDXProvider } from '@mdx-js/react'
+import { MDXRenderer } from 'gatsby-plugin-mdx'
 
 const Detail = ({ icon, title, value }: { icon: React.ReactNode; title: string; value: string }) => {
     return (
@@ -44,6 +46,8 @@ export default function Job({
         team,
         teamLead,
         teamInfo,
+        objectives,
+        mission,
         allJobPostings,
         ashbyJobPosting: {
             departmentName,
@@ -54,7 +58,7 @@ export default function Job({
             fields: { tableOfContents, html, title, slug },
         },
     },
-    pageContext: { teamName },
+    pageContext: { teamName, gitHubIssues },
 }) {
     const timezone = parent?.customFields?.find(({ title }) => title === 'Timezone(s)')?.value
     const menu = [
@@ -90,6 +94,16 @@ export default function Job({
                         ...tableOfContents,
                         { ...(sfBenchmark[title] ? { value: 'Salary', url: 'salary', depth: 0 } : {}) },
                         { value: 'Benefits', url: 'benefits', depth: 0 },
+                        {
+                            ...(gitHubIssues.length > 0
+                                ? { value: 'Typical tasks', url: 'typical-tasks', depth: 0 }
+                                : {}),
+                        },
+                        {
+                            ...(objectives
+                                ? { value: "Your team's mission and objectives", url: 'mission-objectives', depth: 0 }
+                                : {}),
+                        },
                         { value: 'Interview process', url: 'interview-process', depth: 0 },
                         { value: 'Apply', url: 'apply', depth: 0 },
                     ]}
@@ -166,6 +180,51 @@ export default function Job({
                                         <Link to="/careers#benefits">Careers page</Link>.
                                     </p>
                                 </Accordion>
+                                {gitHubIssues.length > 0 && (
+                                    <Accordion title="Typical tasks" id="typical-tasks">
+                                        <div className="mb-6">
+                                            <p>Here are a few open GitHub issues you could help solve</p>
+                                            <ul className="list-none !m-0 p-0 grid gap-y-3">
+                                                {gitHubIssues.map(({ url, number, title, labels }) => {
+                                                    return (
+                                                        <li key={title} className="flex items-center space-x-4">
+                                                            <span className="font-semibold opacity-50">#{number}</span>
+                                                            <Link to={url}>{title}</Link>
+                                                            {labels && labels.length > 0 && (
+                                                                <ul className="list-none !mt-0 !mb-0 p-0">
+                                                                    {labels.map(({ name, url }, index) => {
+                                                                        return (
+                                                                            <li key={name + index}>
+                                                                                <Link
+                                                                                    className="text-sm border-gray-accent-light dark:border-gray-accent-dark rounded-sm border py-1 px-2 bg-white text-black/70 dark:text-white/70 hover:text-black/70 dark:hover:text-white/70"
+                                                                                    to={url}
+                                                                                >
+                                                                                    {name}
+                                                                                </Link>
+                                                                            </li>
+                                                                        )
+                                                                    })}
+                                                                </ul>
+                                                            )}
+                                                        </li>
+                                                    )
+                                                })}
+                                            </ul>
+                                        </div>
+                                    </Accordion>
+                                )}
+                                {objectives && (
+                                    <Accordion title="Your team's mission and objectives" id="mission-objectives">
+                                        <div className="mb-6">
+                                            <MDXProvider components={{ HideFromJobPosting: () => null }}>
+                                                <MDXRenderer>{mission.body}</MDXRenderer>
+                                            </MDXProvider>
+                                            <MDXProvider components={{ HideFromJobPosting: () => null }}>
+                                                <MDXRenderer>{objectives.body}</MDXRenderer>
+                                            </MDXProvider>
+                                        </div>
+                                    </Accordion>
+                                )}
                                 <Accordion title="Interview process" id="interview-process">
                                     <div className="mb-6">
                                         <InterviewProcess />
@@ -173,14 +232,6 @@ export default function Job({
                                 </Accordion>
                                 <Accordion title="Apply" id="apply">
                                     <div className="mb-6">
-                                        <h4 className="!text-lg mb-0">(Now for the fun part...)</h4>
-                                        <p>
-                                            Just fill out this painless form and we'll get back to you within a few
-                                            days. Thanks in advance!
-                                        </p>
-                                        <p className="opacity-50 text-sm">
-                                            <span className="font-bold">Bolded fields</span> are required
-                                        </p>
                                         <Apply id={id} info={info} />
                                     </div>
                                 </Accordion>
@@ -194,7 +245,7 @@ export default function Job({
 }
 
 export const query = graphql`
-    query JobQuery($id: String!, $teamName: String!, $teamNameInfo: String!) {
+    query JobQuery($id: String!, $teamName: String!, $teamNameInfo: String!, $objectives: String!, $mission: String!) {
         teamLead: mdx(frontmatter: { team: { in: [$teamName] }, teamLead: { eq: true } }) {
             id
             frontmatter {
@@ -276,6 +327,12 @@ export const query = graphql`
             fields {
                 slug
             }
+        }
+        objectives: mdx(fields: { slug: { eq: $objectives } }) {
+            body
+        }
+        mission: mdx(fields: { slug: { eq: $mission } }) {
+            body
         }
     }
 `
