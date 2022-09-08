@@ -97,7 +97,3 @@ Yet, it can be hard to prioritize fixing these issues. Almost by definition any 
 In the short term I’m currently focusing on fixing known bugs as part of my current sprint, but the _only_ real way to prioritize extensibility is to look at it from a long-term perspective and I hope we can invest ongoing engineering efforts into PostHog in the future.
 
 _Enjoyed this? Subscribe to our [newsletter](https://posthog.com/newsletter) to hear more from us twice a month!_
-
-<NewsletterForm
-compact
-/>

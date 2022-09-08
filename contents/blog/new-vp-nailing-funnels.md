@@ -80,6 +80,3 @@ Read more about our strategy [here](https://posthog.com/handbook/company/team/ma
 
 _Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
 
-<NewsletterForm
-compact
-/>

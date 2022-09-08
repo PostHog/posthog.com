@@ -48,7 +48,3 @@ The experience I’ve had with GitHub, for example, ended up being the catalyst 
 These may be small projects, but they’re a million miles away from where I was before PostHog — and I’m excited to see how much farther working with code will push me to go!
 
 _Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
-
-<NewsletterForm
-compact
-/>

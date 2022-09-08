@@ -127,4 +127,3 @@ These are a fun one - team members write out how they can help others, what thei
 
 Some of this list may require you to improve your company's general processes and management to even be able to share them properly. That's fine. Ultimately, doing the things here will create deep trust between your team, and it'll make you think through your decisions more carefully. That has to be worth it.
 
-<NewsletterForm compact />

@@ -52,6 +52,3 @@ For now, we solve this in two ways for bigger enterprises: (i) you don't have to
 
 _Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
 
-<NewsletterForm
-compact
-/>
