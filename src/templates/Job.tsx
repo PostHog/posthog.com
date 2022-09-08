@@ -10,6 +10,7 @@ import Apply from 'components/Job/Apply'
 import Sidebar from 'components/Job/Sidebar'
 import { Clock, Group, Location } from 'components/Icons/Icons'
 import { sfBenchmark } from 'components/CompensationCalculator/compensation_data/sf_benchmark'
+import { benefits } from 'components/Careers/Benefits'
 
 const Detail = ({ icon, title, value }: { icon: React.ReactNode; title: string; value: string }) => {
     return (
@@ -88,6 +89,7 @@ export default function Job({
                     tableOfContents={[
                         ...tableOfContents,
                         { ...(sfBenchmark[title] ? { value: 'Salary', url: 'salary', depth: 0 } : {}) },
+                        { value: 'Benefits', url: 'benefits', depth: 0 },
                         { value: 'Interview process', url: 'interview-process', depth: 0 },
                         { value: 'Apply', url: 'apply', depth: 0 },
                     ]}
@@ -140,6 +142,18 @@ export default function Job({
                                         </div>
                                     </Accordion>
                                 )}
+                                <Accordion title="Benefits" id="benefits">
+                                    <ul className="mb-6 list-none m-0 p-0 grid md:grid-cols-2 grid-cols-1 gap-6">
+                                        {benefits.map(({ title, image }) => {
+                                            return (
+                                                <li key={title} className="flex space-x-4 items-start font-semibold">
+                                                    <img className="max-w-[30px]" alt={title} src={image} />
+                                                    <span>{title}</span>
+                                                </li>
+                                            )
+                                        })}
+                                    </ul>
+                                </Accordion>
                                 <Accordion title="Interview process" id="interview-process">
                                     <div className="mb-6">
                                         <InterviewProcess />
