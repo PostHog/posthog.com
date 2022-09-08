@@ -191,10 +191,7 @@ module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, 
                 for (let i = 0; i < details.length; i++) {
                     const node = details[i]
                     const heading = node.querySelector('h2')
-                    if (
-                        heading.textContent.toLowerCase() === 'benefits' ||
-                        heading.textContent.toLowerCase() === 'about posthog'
-                    ) {
+                    if (heading.textContent.toLowerCase() === 'benefits') {
                         node.remove()
                     } else {
                         const textContent = heading.textContent

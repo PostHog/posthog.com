@@ -163,7 +163,8 @@ export default function Apply({ id, info }) {
             <div className="fixed inset-0">
                 <Confetti />
             </div>
-            <p>Thanks for your submission!</p>
+            <h3>Thanks for your interest in joining PostHog!</h3>
+            <p>We will review your application as soon as possible and get back to you.</p>
         </>
     ) : (
         <Form info={info} id={id} setSubmitted={setSubmitted} />
