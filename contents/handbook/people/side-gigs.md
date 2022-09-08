@@ -24,6 +24,6 @@ Above everything else, if you are going above and beyond for PostHog and you're 
 
 ## Intellectual property
 
-Just to reassure you, PostHog won't try to claim ownership of any intellectual property (IP) you create in your personal time, e.g. if you are contributing to another open source project as a hobby. However, you need to be _really_ careful that you do not introduce any of PostHog's non-open source IP into any project that you work on - this can cause serious legal headaches. Using PostHog's [open source version](https://github.com/PostHog/posthog) in accordance with the MIT licence is fine. 
+Just to reassure you, PostHog won't try to claim ownership of any intellectual property (IP) you create in your personal time, e.g. if you are contributing to another open source project as a hobby. However, you need to be _really_ careful that you do not introduce any of PostHog's non-open source IP into any project that you work on - this can cause serious legal headaches. As a rule, anything from PostHog that is explicitly MIT-licensed is fine to use, anything else is not.
 
 If you are ever worried about this, please talk to Charles and he can help you figure out the best solution here. 
