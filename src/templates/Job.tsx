@@ -51,7 +51,7 @@ export default function Job({
             id,
             locationName,
             parent,
-            fields: { tableOfContents, html, title },
+            fields: { tableOfContents, html, title, slug },
         },
     },
     pageContext: { teamName },
@@ -83,7 +83,7 @@ export default function Job({
 
     return (
         <Layout>
-            <SEO title={`${title} - PostHog`} />
+            <SEO title={`${title} - PostHog`} image={`/og-images/${slug.replace(/\//g, '')}.jpeg`} />
             <div className="border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark">
                 <PostLayout
                     tableOfContents={[
