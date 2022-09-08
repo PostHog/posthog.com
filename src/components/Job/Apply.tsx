@@ -16,7 +16,7 @@ const components = {
         <input
             data-path={path}
             required={required}
-            className="w-full block bg-white p-1.5 rounded-sm shadow-sm border border-black/20 text-base dark:bg-white/10 dark:text-white"
+            className="w-full block bg-white box-border px-3 py-2 rounded-sm focus:shadow-xl border border-black/20 text-[17px] font-medium dark:bg-white box-border/10 dark:text-white"
             placeholder={title}
             name={title}
         />
@@ -25,7 +25,7 @@ const components = {
         <input
             data-path={path}
             required={required}
-            className="w-full block bg-white p-1.5 rounded-sm shadow-sm border border-black/20 text-base dark:bg-white/10 dark:text-white"
+            className="w-full block bg-white box-border px-3 py-2 rounded-sm focus:shadow-xl border border-black/20 text-[17px] font-medium dark:bg-white box-border/10 dark:text-white"
             type="email"
             placeholder={title}
             name={title}
@@ -36,7 +36,7 @@ const components = {
             rows={5}
             data-path={path}
             required={required}
-            className="w-full block bg-white p-1.5 rounded-sm shadow-sm border border-black/20 text-base dark:bg-white/10 dark:text-white"
+            className="w-full block bg-white box-border px-3 py-2 rounded-sm focus:shadow-xl border border-black/20 text-[17px] font-medium dark:bg-white/10 dark:text-white"
             placeholder={title}
             name={title}
         />
@@ -50,7 +50,7 @@ const components = {
         }
 
         return (
-            <div className="relative h-52 border border-gray-accent-light dark:border-gray-accent-dark border-dashed rounded-md flex justify-center items-center text-black/50 dark:text-white/50  bg-white">
+            <div className="relative h-24 w-full border border-gray-accent-light dark:border-gray-accent-dark border-dashed rounded-md flex justify-center items-center text-black/50 dark:text-white/50">
                 <input
                     ref={inputRef}
                     onChange={handleDrop}
@@ -66,7 +66,7 @@ const components = {
                     {fileName ? (
                         <p className="m-0">{fileName}</p>
                     ) : (
-                        <p className="flex space-x-1 items-center m-0">
+                        <p className="flex space-x-3 items-center !m-0">
                             <button
                                 onClick={() => inputRef?.current.click()}
                                 type="button"
@@ -74,7 +74,7 @@ const components = {
                             >
                                 Upload file
                             </button>
-                            <span>or drag and drop here</span>
+                            <span className="text-sm">or drag and drop here</span>
                         </p>
                     )}
                 </div>
@@ -128,9 +128,11 @@ export default function Apply({ id, info }) {
         </div>
     ) : (
         <div>
-            <h4 className="!text-lg mb-0">Now for the fun part!</h4>
+            <h4 className="!text-lg mb-0">(Now for the fun part...)</h4>
             <p>Just fill out this painless form and we'll get back to you within a few days. Thanks in advance!</p>
-            <p className="opacity-50 font-bold">Bolded fields are required</p>
+            <p className="opacity-50 text-sm">
+                <span className="font-bold">Bolded fields</span> are required
+            </p>
             <form onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 gap-y-3 ">
                     {info?.applicationFormDefinition?.sections?.map(({ fields }) => {

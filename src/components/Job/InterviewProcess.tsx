@@ -5,7 +5,7 @@ const interviewProcess = [
         title: 'Application',
         description:
             'Our talent team will review your application to see how your skills and experience align with our needs.',
-        badge: 'You are here',
+        badge: '(You are here)',
     },
     {
         title: 'Culture interview',
@@ -37,14 +37,17 @@ export default function InterviewProcess() {
             <ul className="list-none m-0 p-0 grid gap-y-6">
                 {interviewProcess.map(({ title, description, badge }, index) => {
                     return (
-                        <li className="flex items-start space-x-4" key={title}>
-                            <div className="w-12 h-12 bg-gray-accent-light rounded-full flex items-center justify-center flex-shrink-0 font-semibold">
+                        <li
+                            className="flex items-start space-x-4 first:border first:border-dashed first:border-gray-accent-light dark:first:border-gray-accent-dark first:pt-3 first:pb-2 first:px-3 first:-mx-3 first:rounded-md first:bg-white dark:first:bg-gray-accent-dark-hover"
+                            key={title}
+                        >
+                            <div className="w-12 h-12 bg-gray-accent-light dark:bg-gray-accent-dark rounded-full flex items-center justify-center flex-shrink-0 font-semibold">
                                 <span>{index + 1}</span>
                             </div>
                             <div>
-                                <h5 className="m-0 flex items-center flex-wrap">
+                                <h5 className="m-0 flex items-baseline flex-wrap">
                                     <span className="mr-2">{title}</span>
-                                    <span className="text-base opacity-50">{badge}</span>
+                                    <span className="text-sm font-normal opacity-50">{badge}</span>
                                 </h5>
                                 <p className="m-0">{description}</p>
                             </div>

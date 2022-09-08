@@ -140,9 +140,11 @@ export default function Job({
                                     <Accordion title="Salary" id="salary">
                                         <p>
                                             We have a set system for compensation as part of being transparent. Salary
-                                            varies based on location and level of experience.{' '}
+                                            varies based on location and level of experience.
+                                        </p>
+                                        <p>
                                             <Link to="/handbook/people/compensation">
-                                                Learn more about compensation.
+                                                Learn more about compensation
                                             </Link>
                                         </p>
                                         <div className="mb-6">
@@ -160,16 +162,23 @@ export default function Job({
                                     </Accordion>
                                 )}
                                 <Accordion title="Benefits" id="benefits">
-                                    <ul className="mb-6 list-none m-0 p-0 grid md:grid-cols-2 grid-cols-1 gap-6">
+                                    <ul className="list-none m-0 p-0 pb-4 grid md:grid-cols-2 grid-cols-1 gap-6">
                                         {benefits.map(({ title, image }) => {
                                             return (
-                                                <li key={title} className="flex space-x-4 items-start font-semibold">
+                                                <li
+                                                    key={title}
+                                                    className="flex space-x-4 items-start font-medium leading-tight text-[15px]"
+                                                >
                                                     <img className="max-w-[30px]" alt={title} src={image} />
                                                     <span>{title}</span>
                                                 </li>
                                             )
                                         })}
                                     </ul>
+                                    <p>
+                                        Get more details about all our benefits on the{' '}
+                                        <Link to="/careers#benefits">Careers page</Link>.
+                                    </p>
                                 </Accordion>
                                 {gitHubIssues.length > 0 && (
                                     <Accordion title="Typical tasks" id="typical-tasks">
