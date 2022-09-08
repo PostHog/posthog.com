@@ -17,13 +17,13 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 const Detail = ({ icon, title, value }: { icon: React.ReactNode; title: string; value: string }) => {
     return (
         <li className="flex space-x-2">
-            <span className="w-6 h-6">{icon}</span>
+            <span className="w-6 h-6 text-black dark:text-white">{icon}</span>
             <span className="grid">
                 <h4 className="text-sm m-0 font-normal leading-none pt-1">
                     <span>{title}</span>
                 </h4>
                 <p className="text-[15px] m-0 mt-1">
-                    <strong className="text-black">{value}</strong>
+                    <strong className="text-black dark:text-white">{value}</strong>
                 </p>
             </span>
         </li>
@@ -196,7 +196,7 @@ export default function Job({
                                                                         return (
                                                                             <li key={name + index}>
                                                                                 <Link
-                                                                                    className="text-sm border-gray-accent-light dark:border-gray-accent-dark rounded-sm border py-1 px-2 bg-white text-black/70 dark:text-white/70 hover:text-black/70 dark:hover:text-white/70"
+                                                                                    className="transition-all text-sm border-black/50 dark:border-white/50 hover:border-black/80 dark:hover:border-white/80 rounded-sm border py-1 px-2 bg-white dark:bg-black text-black/70 dark:text-white/70 hover:text-black/100 dark:hover:text-white/100"
                                                                                     to={url}
                                                                                 >
                                                                                     {name}

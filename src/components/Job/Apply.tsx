@@ -16,7 +16,7 @@ const components = {
         <input
             data-path={path}
             required={required}
-            className="w-full block bg-white box-border px-3 py-2 rounded-sm focus:shadow-xl border border-black/20 text-[17px] font-medium dark:bg-white box-border/10 dark:text-white"
+            className="w-full block !bg-white box-border px-3 py-2 rounded-sm focus:shadow-xl border border-black/20 text-[17px] font-medium dark:bg-white box-border/10 dark:text-white"
             placeholder={title}
             name={title}
         />
@@ -25,7 +25,7 @@ const components = {
         <input
             data-path={path}
             required={required}
-            className="w-full block bg-white box-border px-3 py-2 rounded-sm focus:shadow-xl border border-black/20 text-[17px] font-medium dark:bg-white box-border/10 dark:text-white"
+            className="w-full block !bg-white box-border px-3 py-2 rounded-sm focus:shadow-xl border border-black/20 text-[17px] font-medium dark:bg-white box-border/10 dark:text-white"
             type="email"
             placeholder={title}
             name={title}
@@ -36,7 +36,7 @@ const components = {
             rows={5}
             data-path={path}
             required={required}
-            className="w-full block bg-white box-border px-3 py-2 rounded-sm focus:shadow-xl border border-black/20 text-[17px] font-medium dark:bg-white/10 dark:text-white"
+            className="w-full block !bg-white box-border px-3 py-2 rounded-sm focus:shadow-xl border border-black/20 text-[17px] font-medium dark:bg-white/10 dark:text-white"
             placeholder={title}
             name={title}
         />
