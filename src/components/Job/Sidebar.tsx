@@ -43,7 +43,7 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
                         return (
                             <li
                                 key={name}
-                                className="first:-ml-0 -ml-2 transition-all relative hover:scale-[1.2] active:scale-[1.15] active:top-[.5px] mb-1 hover:z-20"
+                                className="first:-ml-0 -ml-2 transition-all relative hover:scale-[1.2] active:scale-[1.15] active:top-[.5px] mb-1 hover:z-20 odd:bg-red rounded-full"
                             >
                                 <Link to={`/handbook/company/team#${kebabCase(name) + '-' + kebabCase(jobTitle)}`}>
                                     <Tooltip
@@ -61,6 +61,7 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
                                                 name={name}
                                                 image={headshot}
                                                 className="!w-10 !h-10 border-2 border-solid border-white dark:border-gray-accent-dark"
+                                                imgClassName=""
                                             />
                                         </span>
                                     </Tooltip>
