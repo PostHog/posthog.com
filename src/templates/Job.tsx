@@ -191,7 +191,7 @@ export default function Job({
                                                             <span className="font-semibold opacity-50">#{number}</span>
                                                             <Link to={url}>{title}</Link>
                                                             {labels && labels.length > 0 && (
-                                                                <ul className="list-none !mt-0 !mb-0 p-0">
+                                                                <ul className="list-none !mt-0 !mb-0 p-0 flex items-center space-x-2">
                                                                     {labels.map(({ name, url }, index) => {
                                                                         return (
                                                                             <li key={name + index}>
