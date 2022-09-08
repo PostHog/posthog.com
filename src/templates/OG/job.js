@@ -129,8 +129,8 @@ module.exports = job = ({ role, timezone, font }) => {
                         ${role.replace(' (Remote)', '')}
                     </h2>
                 </div>
-                <div>
-                    <div style="display: flex; align-items: center; margin: 30px 0;">
+                <div style="margin-bottom: 41px;">
+                    <div style="display: flex; align-items: center;">
                         <svg style="width: 64px; opacity: .5" width="34" height="48" viewBox="0 0 34 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M16.5006 0C7.35177 0 0 7.34889 0 16.5006C0 25.6495 16.5006 48 16.5006 48C16.5006 48 33.0013 25.6495 33.0013 16.5006C33.0013 7.34889 25.6495 0 16.5006 0ZM16.5006 23.9986C12.3017 23.9986 8.99982 20.6996 8.99982 16.4978C8.99982 12.2988 12.2988 8.99694 16.5006 8.99694C20.6996 8.99694 24.0014 12.2959 24.0014 16.4978C24.0014 20.6995 20.6997 23.9986 16.5006 23.9986Z" fill="black"/>
                             </svg>
@@ -141,7 +141,7 @@ module.exports = job = ({ role, timezone, font }) => {
 
                     ${
                         timezone
-                            ? `<div style="display: flex; align-items: center; margin-top: 62px; margin-top: 10px;">
+                            ? `<div style="display: flex; align-items: center; margin-top: 30px;">
                                 <svg
                                     style="width: 64px; opacity: .5;"
                                     width="49"
