@@ -1033,11 +1033,21 @@ iframe[src*='youtube-nocookie.com'] {
 
 .job-content {
     details {
-        @apply mb-12;
+        @apply mb-4;
+
+        &[open] + details {
+            @apply mt-12;
+        }
+
+        summary {
+            @apply select-none;
+        }
     }
     section {
-        details:not(:first-child) {
-            @apply mt-8;
+        @apply mt-8 mb-8;
+
+        details:not([open]):last-child summary {
+            @apply mb-0;
         }
     }
     h2,
