@@ -124,7 +124,7 @@ module.exports = job = ({ role, timezone, font }) => {
             </svg>
             <h1 style="font-size: 36px; margin: 51px 0 10px 0; line-height: 64px; opacity: .5">We’re looking for a</h1>
             <h2 style="font-size: 84px; line-height: 84px; margin: 0; max-width: 730px;">
-                ${role.replace(' (Remote)')}
+                ${role.replace(' (Remote)', '')}
             </h2>
             <div style="display: flex; align-items: center; margin-top: 62px;">
                 <svg style="width: 64px;"  width="34" height="48" viewBox="0 0 34 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity: .5">
