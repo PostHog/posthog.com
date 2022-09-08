@@ -83,11 +83,11 @@ const components = {
     },
 }
 
-export default function Apply({ id, info }) {
-    const [submitted, setSubmitted] = useState(false)
+const Form = ({ setSubmitted, info, id }) => {
     const [error, setError] = useState(null)
     const handleSubmit = (e) => {
         e.preventDefault()
+        setSubmitted(true)
         const data = new FormData(e.target)
         const form = new FormData()
         let error = null
@@ -106,27 +106,18 @@ export default function Apply({ id, info }) {
             }
         }
         setError(error)
-        if (error) return
         form.append('jobPostingId', id)
+
         fetch('/.netlify/functions/apply', {
             method: 'POST',
             body: form,
         })
             .then((res) => res.json())
-            .then((submission) => setSubmitted(true))
+            .then(() => {
+                setSubmitted(true)
+            })
     }
-    return submitted ? (
-        <div>
-            {createPortal(
-                <div className="fixed inset-0">
-                    <Confetti />
-                </div>,
-                document.body
-            )}
-
-            <p>Thanks for your submission!</p>
-        </div>
-    ) : (
+    return (
         <div>
             <h4 className="!text-lg mb-0">(Now for the fun part...)</h4>
             <p>Just fill out this painless form and we'll get back to you within a few days. Thanks in advance!</p>
@@ -161,5 +152,20 @@ export default function Apply({ id, info }) {
                 <button className={`${button()} mt-6 shadow-none`}>Submit</button>
             </form>
         </div>
+    )
+}
+
+export default function Apply({ id, info }) {
+    const [submitted, setSubmitted] = useState(false)
+
+    return submitted ? (
+        <>
+            <div className="fixed inset-0">
+                <Confetti />
+            </div>
+            <p>Thanks for your submission!</p>
+        </>
+    ) : (
+        <Form info={info} id={id} setSubmitted={setSubmitted} />
     )
 }
