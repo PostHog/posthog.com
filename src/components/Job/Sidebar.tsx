@@ -4,6 +4,7 @@ import { countryCodeEmoji } from 'country-code-emoji'
 import Tooltip from 'components/Tooltip'
 import { kebabCase } from 'lib/utils'
 import Link from 'components/Link'
+import NotProductIcons from 'components/NotProductIcons'
 
 import { ThumbDown, ThumbUp } from 'components/Icons/Icons'
 
@@ -33,16 +34,16 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
         Math.round((team.filter(({ frontmatter: { pineappleOnPizza } }) => pineappleOnPizza).length / teamLength) * 100)
     return (
         <>
-            <SidebarSection>
+            <SidebarSection title="Meet your team">
                 <h3 className="font-semibold text-sm m-0 mb-2">
                     <Link to={teamSlug}>Team {teamName}</Link>
                 </h3>
-                <ul className="list-none m-0 p-0 flex flex-wrap team-group">
+                <ul className="list-none m-0 p-0 flex flex-wrap">
                     {team.map(({ frontmatter: { headshot, name, country, jobTitle } }) => {
                         return (
                             <li
                                 key={name}
-                                className="first:-ml-0 -ml-4 transition-all relative hover:scale-[1.2] active:scale-[1.1] mb-1"
+                                className="first:-ml-0 -ml-2 transition-all relative hover:scale-[1.2] active:scale-[1.15] active:top-[.5px] mb-1 hover:z-20"
                             >
                                 <Link to={`/handbook/company/team#${kebabCase(name) + '-' + kebabCase(jobTitle)}`}>
                                     <Tooltip
@@ -50,7 +51,7 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
                                         className="whitespace-nowrap"
                                         title={
                                             <div className="flex space-x-1 items-center">
-                                                <span>{name}</span>
+                                                <span className="text-xs">{name}</span>
                                                 <span>{countryCodeEmoji(country)}</span>
                                             </div>
                                         }
@@ -59,7 +60,7 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
                                             <ContributorImage
                                                 name={name}
                                                 image={headshot}
-                                                className="w-[40px] h-[40px]"
+                                                className="!w-10 !h-10 border-2 border-solid border-white dark:border-gray-accent-dark"
                                             />
                                         </span>
                                     </Tooltip>
@@ -87,11 +88,14 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
                 </Link>
             </SidebarSection>
 
-            <SidebarSection>
-                <h3 className="font-semibold flex space-x-2 items-center m-0 ">
-                    <span className="text-black dark:text-white font-semibold opacity-25 text-sm">Verdict:</span>{' '}
-                    {pineapplePercentage >= 50 ? <ThumbUp /> : <ThumbDown />}
-                </h3>
+            <SidebarSection title="Pineapple on pizza?">
+                <div className="space-x-1 flex items-center">
+                    <span className="w-6 h-6">{NotProductIcons.pineapple}</span>
+                    <span>+</span>
+                    <span className="w-5 h-5 relative top-[1px]">{NotProductIcons.pizza}</span>
+                    <span>?</span>
+                    <span className="text-sm">Verdict:</span> {pineapplePercentage >= 50 ? <ThumbUp /> : <ThumbDown />}
+                </div>
                 <p className="text-sm m-0 opacity-70 leading-tight mt-2 mb-3">
                     {pineapplePercentage}% of this team prefers pineapple on pizza
                 </p>
