@@ -9,7 +9,7 @@ export const AboutStory = () => {
         <section className="flex flex-col md:flex-row max-w-screen-xl mx-auto px-4 md:pl-8 md:pr-6">
             <div className="flex-1 flex flex-col justify-between">
                 <div>
-                    <h2 className="text-3xl">Our story</h2>
+                    <h2 className="text-4xl">Our story</h2>
                     <h4>PostHog was hatched in Y Combinator's W20 batch.</h4>
                     <YCBadge className="float-right md:hidden ml-4 mb-2 mr-2 w-[95px] h-[63px] md:mr-12" />
                     <p>We launched on Hacker News with our MVP – just 4 weeks after we started writing code.</p>
