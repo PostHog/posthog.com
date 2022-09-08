@@ -545,6 +545,8 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
                 slug,
                 teamName: team,
                 teamNameInfo: `Team ${team}`,
+                objectives: `/handbook/people/team-structure/${slugify(team, { lower: true })}/objectives`,
+                mission: `/handbook/people/team-structure/${slugify(team, { lower: true })}/mission`,
             },
         })
     })

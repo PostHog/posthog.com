@@ -11,6 +11,8 @@ import Sidebar from 'components/Job/Sidebar'
 import { sfBenchmark } from 'components/CompensationCalculator/compensation_data/sf_benchmark'
 import { benefits } from 'components/Careers/Benefits'
 import NotProductIcons from 'components/NotProductIcons'
+import { MDXProvider } from '@mdx-js/react'
+import { MDXRenderer } from 'gatsby-plugin-mdx'
 
 const Detail = ({ icon, title, value }: { icon: React.ReactNode; title: string; value: string }) => {
     return (
@@ -44,6 +46,8 @@ export default function Job({
         team,
         teamLead,
         teamInfo,
+        objectives,
+        mission,
         allJobPostings,
         ashbyJobPosting: {
             departmentName,
@@ -90,6 +94,11 @@ export default function Job({
                         ...tableOfContents,
                         { ...(sfBenchmark[title] ? { value: 'Salary', url: 'salary', depth: 0 } : {}) },
                         { value: 'Benefits', url: 'benefits', depth: 0 },
+                        {
+                            ...(objectives
+                                ? { value: "Your team's mission and objectives", url: 'mission-objectives', depth: 0 }
+                                : {}),
+                        },
                         { value: 'Interview process', url: 'interview-process', depth: 0 },
                         { value: 'Apply', url: 'apply', depth: 0 },
                     ]}
@@ -157,6 +166,18 @@ export default function Job({
                                         })}
                                     </ul>
                                 </Accordion>
+                                {objectives && (
+                                    <Accordion title="Your team's mission and objectives" id="mission-objectives">
+                                        <div className="mb-6">
+                                            <MDXProvider components={{ HideFromJobPosting: () => null }}>
+                                                <MDXRenderer>{mission.body}</MDXRenderer>
+                                            </MDXProvider>
+                                            <MDXProvider components={{ HideFromJobPosting: () => null }}>
+                                                <MDXRenderer>{objectives.body}</MDXRenderer>
+                                            </MDXProvider>
+                                        </div>
+                                    </Accordion>
+                                )}
                                 <Accordion title="Interview process" id="interview-process">
                                     <div className="mb-6">
                                         <InterviewProcess />
@@ -183,7 +204,7 @@ export default function Job({
 }
 
 export const query = graphql`
-    query JobQuery($id: String!, $teamName: String!, $teamNameInfo: String!) {
+    query JobQuery($id: String!, $teamName: String!, $teamNameInfo: String!, $objectives: String!, $mission: String!) {
         teamLead: mdx(frontmatter: { team: { in: [$teamName] }, teamLead: { eq: true } }) {
             id
             frontmatter {
@@ -265,6 +286,12 @@ export const query = graphql`
             fields {
                 slug
             }
+        }
+        objectives: mdx(fields: { slug: { eq: $objectives } }) {
+            body
+        }
+        mission: mdx(fields: { slug: { eq: $mission } }) {
+            body
         }
     }
 `
