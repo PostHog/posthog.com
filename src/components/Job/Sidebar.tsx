@@ -34,16 +34,32 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
         Math.round((team.filter(({ frontmatter: { pineappleOnPizza } }) => pineappleOnPizza).length / teamLength) * 100)
     return (
         <>
-            <SidebarSection title="Meet your team">
+            <SidebarSection title="Meet your team" className="-mt-2">
                 <h3 className="font-semibold text-sm m-0 mb-2">
-                    <Link to={teamSlug}>Team {teamName}</Link>
+                    <Link
+                        to={teamSlug}
+                        className="flex w-full justify-between items-center group leading-none rounded p-2 -mx-2 -my-1 hover:bg-gray-accent/50 
+                    relative
+                    active:top-[0.5px]
+                    active:scale-[.98]"
+                    >
+                        <span>Team {teamName}</span>
+                        <span className="opacity-0 group-hover:opacity-100 text-black/30 text-lg leading-none">
+                            &rarr;
+                        </span>
+                    </Link>
                 </h3>
                 <ul className="list-none m-0 p-0 flex flex-wrap">
                     {team.map(({ frontmatter: { headshot, name, country, jobTitle } }) => {
                         return (
                             <li
                                 key={name}
-                                className="first:-ml-0 -ml-2 transition-all relative hover:scale-[1.2] active:scale-[1.15] active:top-[.5px] mb-1 hover:z-20 odd:bg-red rounded-full"
+                                className="first:-ml-0 -ml-2 transition-all relative hover:scale-[1.2] active:scale-[1.15] active:top-[.5px] mb-1 hover:z-20 rounded-full 
+                                [&:nth-child(4n+1)]:bg-orange
+                                [&:nth-child(4n+2)]:bg-blue 
+                                [&:nth-child(4n+3)]:bg-red 
+                                [&:nth-child(4n+4)]:bg-yellow 
+                                "
                             >
                                 <Link to={`/handbook/company/team#${kebabCase(name) + '-' + kebabCase(jobTitle)}`}>
                                     <Tooltip
@@ -60,7 +76,7 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
                                             <ContributorImage
                                                 name={name}
                                                 image={headshot}
-                                                className="!w-10 !h-10 border-2 border-solid border-white dark:border-gray-accent-dark"
+                                                className="!w-10 !h-10 border-[2.5px] border-solid border-white dark:border-gray-accent-dark"
                                                 imgClassName=""
                                             />
                                         </span>
@@ -72,24 +88,27 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
                 </ul>
             </SidebarSection>
 
-            <SidebarSection title="Team lead">
+            <SidebarSection title="Team lead" className="-mt-2">
                 <Link
                     to={`/handbook/company/team#${
                         kebabCase(teamLead?.frontmatter?.name) + '-' + kebabCase(teamLead?.frontmatter?.jobTitle)
                     }`}
-                    className="flex space-x-2 items-center"
+                    className="flex space-x-2 items-center rounded p-1 -mx-1 -mt-1 hover:bg-gray-accent/50 
+                    relative
+                    active:top-[0.5px]
+                    active:scale-[.98]"
                 >
                     <ContributorImage
-                        className="w-[40px] h-[40px]"
+                        className="w-[40px] h-[40px] bg-orange border-2 border-white border-solid"
                         image={teamLead?.frontmatter?.headshot}
                         name={teamLead?.frontmatter?.name}
                     />
-                    <p className="author text-base font-semibold m-0">{teamLead?.frontmatter?.name}</p>
+                    <p className="author text-base font-semibold m-0 text-[15px]">{teamLead?.frontmatter?.name}</p>
                     <span className="text-lg">{countryCodeEmoji(teamLead?.frontmatter?.country)}</span>
                 </Link>
             </SidebarSection>
 
-            <SidebarSection title="Pineapple on pizza?">
+            <SidebarSection title="Pineapple on pizza?" className="-mt-2">
                 <div className="space-x-2 flex items-center mb-4 text-lg font-semibold">
                     <span className="w-8 h-8 relative top-[-1px] -mr-1">{NotProductIcons.pineapple}</span>
                     <span>+</span>
@@ -102,7 +121,7 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
                     )}
                 </div>
                 <p className="text-sm -mt-1 opacity-70 leading-tight mb-3">
-                    {pineapplePercentage}% of this team prefers pineapple on pizza
+                    <strong>{pineapplePercentage}%</strong> of this team prefer pineapple on pizza
                 </p>
                 <div className="h-2 w-full bg-white dark:bg-gray-accent-dark rounded-md relative overflow-hidden">
                     <div
