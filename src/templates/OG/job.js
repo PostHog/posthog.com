@@ -44,9 +44,9 @@ module.exports = job = ({ role, timezone, font }) => {
     </head>
 
     <body>
-        <section style="padding: 41px 45px 0px 45px;">
+        <section style="padding: 0px 45px 0px 45px;">
             <div style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
-                <div>
+                <div style="margin-top: 41px">
                     <svg width="251" height="48" viewBox="0 0 251 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_3154_131496)">
                             <path
