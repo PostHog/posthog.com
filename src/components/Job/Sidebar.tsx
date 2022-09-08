@@ -90,17 +90,21 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
             </SidebarSection>
 
             <SidebarSection title="Pineapple on pizza?">
-                <div className="space-x-1 flex items-center">
-                    <span className="w-6 h-6">{NotProductIcons.pineapple}</span>
+                <div className="space-x-2 flex items-center mb-4 text-lg font-semibold">
+                    <span className="w-8 h-8 relative top-[-1px] -mr-1">{NotProductIcons.pineapple}</span>
                     <span>+</span>
-                    <span className="w-5 h-5 relative top-[1px]">{NotProductIcons.pizza}</span>
-                    <span>?</span>
-                    <span className="text-sm">Verdict:</span> {pineapplePercentage >= 50 ? <ThumbUp /> : <ThumbDown />}
+                    <span className="w-7 h-7 relative top-[1px]">{NotProductIcons.pizza}</span>
+                    <span>=</span>
+                    {pineapplePercentage >= 50 ? (
+                        <ThumbUp className="w-8 h-8 fill-green" />
+                    ) : (
+                        <ThumbDown className="w-8 h-8 fill-green" />
+                    )}
                 </div>
-                <p className="text-sm m-0 opacity-70 leading-tight mt-2 mb-3">
+                <p className="text-sm -mt-1 opacity-70 leading-tight mb-3">
                     {pineapplePercentage}% of this team prefers pineapple on pizza
                 </p>
-                <div className="h-4 w-full bg-gray-accent-light dark:bg-gray-accent-dark rounded-md relative overflow-hidden">
+                <div className="h-2 w-full bg-white dark:bg-gray-accent-dark rounded-md relative overflow-hidden">
                     <div
                         style={{ width: `${pineapplePercentage}%` }}
                         className={`${pineapplePercentage >= 50 ? 'bg-[#6AA84F]' : 'bg-red'} absolute inset-0 h-full`}
