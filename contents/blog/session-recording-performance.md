@@ -1,6 +1,6 @@
 ---
 date: 2022-08-31
-title: "Benchmarking the (trivial) impact of session recording on performance"
+title: "Benchmarking the impact of session recording on performance"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
