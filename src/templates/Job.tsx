@@ -58,7 +58,7 @@ export default function Job({
             fields: { tableOfContents, html, title, slug },
         },
     },
-    pageContext: { teamName },
+    pageContext: { teamName, gitHubIssues },
 }) {
     const timezone = parent?.customFields?.find(({ title }) => title === 'Timezone(s)')?.value
     const menu = [
@@ -94,6 +94,11 @@ export default function Job({
                         ...tableOfContents,
                         { ...(sfBenchmark[title] ? { value: 'Salary', url: 'salary', depth: 0 } : {}) },
                         { value: 'Benefits', url: 'benefits', depth: 0 },
+                        {
+                            ...(gitHubIssues.length > 0
+                                ? { value: 'Typical tasks', url: 'typical-tasks', depth: 0 }
+                                : {}),
+                        },
                         {
                             ...(objectives
                                 ? { value: "Your team's mission and objectives", url: 'mission-objectives', depth: 0 }
@@ -166,6 +171,39 @@ export default function Job({
                                         })}
                                     </ul>
                                 </Accordion>
+                                {gitHubIssues.length > 0 && (
+                                    <Accordion title="Typical tasks" id="typical-tasks">
+                                        <div className="mb-6">
+                                            <p>Here are a few open GitHub issues you could help solve</p>
+                                            <ul className="list-none !m-0 p-0 grid gap-y-3">
+                                                {gitHubIssues.map(({ url, number, title, labels }) => {
+                                                    return (
+                                                        <li key={title} className="flex items-center space-x-4">
+                                                            <span className="font-semibold opacity-50">#{number}</span>
+                                                            <Link to={url}>{title}</Link>
+                                                            {labels && labels.length > 0 && (
+                                                                <ul className="list-none !mt-0 !mb-0 p-0">
+                                                                    {labels.map(({ name, url }, index) => {
+                                                                        return (
+                                                                            <li key={name + index}>
+                                                                                <Link
+                                                                                    className="text-sm border-gray-accent-light dark:border-gray-accent-dark rounded-sm border py-1 px-2 bg-white text-black/70 dark:text-white/70 hover:text-black/70 dark:hover:text-white/70"
+                                                                                    to={url}
+                                                                                >
+                                                                                    {name}
+                                                                                </Link>
+                                                                            </li>
+                                                                        )
+                                                                    })}
+                                                                </ul>
+                                                            )}
+                                                        </li>
+                                                    )
+                                                })}
+                                            </ul>
+                                        </div>
+                                    </Accordion>
+                                )}
                                 {objectives && (
                                     <Accordion title="Your team's mission and objectives" id="mission-objectives">
                                         <div className="mb-6">
