@@ -112,12 +112,12 @@ export const ShareLinks = ({ title, href }: { title: string; href: string }) => 
     )
 }
 
-export const ContributorImage = ({ image, name, className = '' }) => {
+export const ContributorImage = ({ image, name, className = '', imgClassName = '' }) => {
     const gatsbyImage = image && getImage(image)
     return (
         <div className={`w-[38px] h-[38px] relative rounded-full overflow-hidden ${className}`}>
             {gatsbyImage ? (
-                <GatsbyImage imgClassName="rounded-full bg-tan dark:bg-primary" image={gatsbyImage} alt={name} />
+                <GatsbyImage imgClassName={`rounded-full ${imgClassName}`} image={gatsbyImage} alt={name} />
             ) : (
                 <svg width="38" height="38" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
