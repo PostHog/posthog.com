@@ -21,3 +21,9 @@ If you are doing paid speaking, make it clear that you work for us, and the exce
 In a few cases, you may want your side gig to become your full time work one day. That is ok - please just let us know, so we can create a plan. We will try to match you with tasks at PostHog that will help your long term goals, while not impacting your work performance, and will create a timeframe for you that works. We know the key to motivated people is to help you achieve your long term goals, and to align this with what PostHog needs, whether or not you eventually achieve them with us.
 
 Above everything else, if you are going above and beyond for PostHog and you're still able to look after yourself properly, side gigs (whether paid or unpaid) are totally fine. We don't think that's possible beyond a certain level of time/energy commitment to them, but we are very happy for you to spend a little time on them each week.
+
+## Intellectual property
+
+Just to reassure you, PostHog won't try to claim ownership of any intellectual property (IP) you create in your personal time, e.g. if you are contributing to another open source project as a hobby. However, you need to be _really_ careful that you do not introduce any of PostHog's non-open source IP into any project that you work on - this can cause serious legal headaches. Using PostHog's [open source version](https://github.com/PostHog/posthog) in accordance with the MIT licence is fine. 
+
+If you are ever worried about this, please talk to Charles and he can help you figure out the best solution here. 
