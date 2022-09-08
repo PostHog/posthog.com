@@ -57,6 +57,3 @@ Best of all, because PostHog is entirely open source, you can build your own app
 Once you’ve built the insights you need, an essential step is adding them all to a PostHog dashboard so that you don’t need to check them one-by-one. Once you’ve pinned all your insights to a dashboard, you can easily check everything in one place and export it as an image if you need to include it in reports. 
 
 At PostHog, we’re not big fans of lengthy meetings and reports — instead, we’ve set up a subscription which sends the insights to a thread in a shared Slack channel every week. Don’t use Slack? You can subscribe by email too.
-
-<NewsletterForm compact />
-

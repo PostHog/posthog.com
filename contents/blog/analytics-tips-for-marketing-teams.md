@@ -55,5 +55,3 @@ Paths enable you to see the route every user takes between two points, as well a
 Maybe you want to share PostHog reports with the whole company, or maybe you’re just trying to cut down on time spent looking for credentials in 1Password. Either way, subscriptions are the solution. 
 
 Subscriptions are currently available via email, or Slack. In both cases, you’ll get regular updates from PostHog about each query on a dashboard so that you can see how results have changed since the last interval. Subscriptions work best for metrics you want to monitor closely over time, such as new customers or overall website traffic. 
-
-<NewsletterForm compact/>
