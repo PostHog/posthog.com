@@ -127,8 +127,8 @@ const Form = ({ setSubmitted, info, id }) => {
             <form onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 gap-y-3 ">
                     {info?.applicationFormDefinition?.sections?.map(({ fields }) => {
-                        return fields.map(({ field }) => {
-                            const required = !field?.isNullable
+                        return fields.map(({ field, isRequired }) => {
+                            const required = isRequired
                             return (
                                 <div key={field?.path}>
                                     <label

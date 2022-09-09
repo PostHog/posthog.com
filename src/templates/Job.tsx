@@ -304,6 +304,7 @@ export const query = graphql`
                 applicationFormDefinition {
                     sections {
                         fields {
+                            isRequired
                             field {
                                 type
                                 title
