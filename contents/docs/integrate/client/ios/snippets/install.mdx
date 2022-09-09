@@ -2,13 +2,13 @@ PostHog is available through [CocoaPods](http://cocoapods.org) and [Carthage](ht
 
 ### CocoaPods
 
-```ruby
+```ruby file=Podfile
 pod "PostHog", "~> 1.1"
 ```
 
 ### Carthage
 
-```
+```ruby file=Cartfile
 github "posthog/posthog-ios"
 ```
 
@@ -18,15 +18,15 @@ Add PostHog as a dependency in your Xcode project "Package Dependencies" and sel
 
 For a Swift Package Manager based project, add PostHog as a dependency in your "Package.swift" file's Package dependencies section:
 
-```
-  dependencies: [
-    .package(url: "https://github.com/PostHog/posthog-ios.git", from: "1.4.4")
-  ],
+```swift file=Package.swift
+dependencies: [
+  .package(url: "https://github.com/PostHog/posthog-ios.git", from: "1.4.4")
+],
 ```
 
 and then as a dependency for the Package target utilizing PostHog:
 
-```
+```swift
   .target(
     name: "myApp",
     dependencies: [.product(name: "PostHog", package: "posthog-ios")]),

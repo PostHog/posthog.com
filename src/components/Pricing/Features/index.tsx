@@ -29,7 +29,7 @@ const features: IFeature[] = [
 const dataStack: IFeature[] = [
     { title: 'Event pipelines', icon: ProductIcons.eventPipelines },
     { title: 'Data warehouse', icon: ProductIcons.dataWarehouse },
-    { title: 'SQL access', icon: ProductIcons.sql, enterpriseSelfHostOnly: true },
+    { title: 'SQL access', icon: ProductIcons.sql },
     { title: 'App library', icon: ProductIcons.appLibrary },
     { title: 'Event autocapture', icon: ProductIcons.eventAutocapture },
     { title: 'API', icon: ProductIcons.api },

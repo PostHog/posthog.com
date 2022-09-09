@@ -401,16 +401,6 @@ const sections = [
                 },
             },
             {
-                name: 'Ad blocker-resistant',
-                tiers: {
-                    'PostHog Cloud': false,
-                    'Open Source': true,
-                    'Self-Hosted': true,
-                    '+ Enterprise package': true,
-                    '+ Enterprise Cloud package': false,
-                },
-            },
-            {
                 name: 'Backup configuration',
                 tiers: {
                     'PostHog Cloud': false,

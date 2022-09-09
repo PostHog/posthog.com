@@ -14,6 +14,8 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
     const ProductTemplate = path.resolve(`src/templates/Product.js`)
     const HostHogTemplate = path.resolve(`src/templates/HostHog.js`)
     const Question = path.resolve(`src/templates/Question.js`)
+    const SqueakTopic = path.resolve(`src/templates/SqueakTopic.tsx`)
+    const Job = path.resolve(`src/templates/Job.tsx`)
 
     // Tutorials
     const TutorialTemplate = path.resolve(`src/templates/tutorials/Tutorial.tsx`)
@@ -228,6 +230,39 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
                     id
                 }
             }
+            squeakTopics: allSqueakTopic {
+                nodes {
+                    label
+                    topicId
+                    slug
+                }
+            }
+            squeakTopicGroups: allSqueakTopicGroup {
+                nodes {
+                    label
+                    topics {
+                        id
+                        label
+                    }
+                }
+            }
+            jobs: allAshbyJobPosting {
+                nodes {
+                    id
+                    title
+                    fields {
+                        slug
+                    }
+                    parent {
+                        ... on AshbyJob {
+                            customFields {
+                                value
+                                title
+                            }
+                        }
+                    }
+                }
+            }
         }
     `)
 
@@ -398,6 +433,7 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
             },
         })
     })
+
     result.data.apps.nodes.forEach((node) => {
         const { slug } = node.fields
         const { documentation } = node.frontmatter
@@ -470,14 +506,71 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
             })
         }
     })
-    result.data.questions.nodes.forEach((node) => {
-        const { id } = node
+
+    const menu = []
+    result.data.squeakTopicGroups.nodes.forEach(({ label, topics }) => {
+        menu.push({ name: label })
+        topics.forEach(({ label }) => {
+            menu.push({
+                name: label,
+                url: `/questions/${slugify(label, {
+                    lower: true,
+                })}`,
+            })
+        })
+    })
+
+    result.data.squeakTopics.nodes.forEach((node) => {
+        const { id, slug, label } = node
         createPage({
-            path: `questions/${id}`,
-            component: Question,
+            path: `questions/${slug}`,
+            component: SqueakTopic,
             context: {
                 id,
+                topics: result.data.squeakTopics.nodes,
+                label,
+                menu,
             },
         })
     })
+
+    for (node of result.data.jobs.nodes) {
+        const { id, parent } = node
+        const slug = node.fields.slug
+        const team = parent?.customFields?.find(({ title, value }) => title === 'Team')?.value
+        const issues = parent?.customFields?.find(({ title, value }) => title === 'Issues')?.value?.split(',')
+        const repo = parent?.customFields?.find(({ title, value }) => title === 'Repo')?.value
+        let gitHubIssues = []
+        if (issues) {
+            for (const issue of issues) {
+                const { html_url, number, title, labels } = await fetch(
+                    `https://api.github.com/repos/${repo}/issues/${issue.trim()}`,
+                    {
+                        headers: {
+                            Authorization: `token ${process.env.GITHUB_API_KEY}`,
+                        },
+                    }
+                ).then((res) => res.json())
+                gitHubIssues.push({
+                    url: html_url,
+                    number,
+                    title,
+                    labels,
+                })
+            }
+        }
+        createPage({
+            path: slug,
+            component: Job,
+            context: {
+                id,
+                slug,
+                teamName: team,
+                teamNameInfo: `Team ${team}`,
+                objectives: `/handbook/people/team-structure/${slugify(team, { lower: true })}/objectives`,
+                mission: `/handbook/people/team-structure/${slugify(team, { lower: true })}/mission`,
+                gitHubIssues,
+            },
+        })
+    }
 }
