@@ -33,7 +33,7 @@ To install and setup the Patterns Connector, follow the steps below...
 
 Alternatively, you can install the connector via [the GitHub repo](https://github.com/PostHog/posthog-patterns-app). 
 
-![PostHog and Patterns](contents/images/docs/apps/patterns/lead-scoring.png)
+![PostHog and Patterns](../images/docs/apps/patterns/lead-scoring.png)
 
 > Here is [an example Patterns app you can clone](https://studio.patterns.app/graph/o9mtaek8n33qasl1oa3a/nffx8k2ox23r0h5i6f6o/3evx4hiottnqeb0229ig?view=graph) that can be used to enrich, score, and prioritize new leads to your website —- this is common for optimizing a customer conversion funnel. 
 
@@ -41,7 +41,7 @@ Alternatively, you can install the connector via [the GitHub repo](https://gith
 
 The Posthog data extractor is an API integration configured in Patterns. You will need a [PostHog Personal API key](https://posthog.com/docs/api), and to have configured the Import PostHog Events component in Patterns. 
 
-![Patterns activity schema](contents/images/docs/apps/patterns/activity-schema.png)
+![Patterns activity schema](../images/docs/apps/patterns/activity-schema.png)
 
 Extracted data from PostHog can be used in Patterns for further analytics and in data pipelines via pre-built apps and activity schema. An activity schema is a single time series data structure, modeled as a table in your data warehouse, that describes events occurring within your business.
 
@@ -58,6 +58,4 @@ To export PostHog data to Patterns using the data extractor, follow the steps be
 5. Press run and your events will begin to backfill. 
 6. Set a schedule for every time you wish to pull updated data.
 
-There are hundreds of analytical questions which Patterns' activity schema can answer, such as conversion funnel analysis, modeling revenue, calculating cohort retention and churn, and calculating customer lifetime value (LTV). 
-
-> Clone [this Patterns App](https://studio.patterns.app/graph/o9mtaek8n33qasl1oa3a/y3h6varjgt80sqq907gt/3evx4hiottnqeb0229ig?view=graph&dashboardId=1hx9fc) to get access to these analytics out of the box. 
+> There are hundreds of  questions which Patterns' activity schema can answer, such as conversion funnel analysis, modeling revenue, and calculating customer lifetime value (LTV).  Clone [this Patterns App](https://studio.patterns.app/graph/o9mtaek8n33qasl1oa3a/y3h6varjgt80sqq907gt/3evx4hiottnqeb0229ig?view=graph&dashboardId=1hx9fc) to get access to these analytics out of the box. 
