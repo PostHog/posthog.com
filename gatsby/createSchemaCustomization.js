@@ -14,6 +14,14 @@ module.exports = exports.createSchemaCustomization = async ({ actions, schema })
       contributors: [Contributors]
       appConfig: [AppConfig]
     }
+    type AshbyJobPostingTableOfContents {
+      value: String
+      url: String
+      depth: Int
+    }
+    type AshbyJobPostingFields {
+      tableOfContents: [AshbyJobPostingTableOfContents]
+    }
     type AppConfig {
       key: String
       name: String
@@ -65,35 +73,6 @@ module.exports = exports.createSchemaCustomization = async ({ actions, schema })
       children: [SidebarNav]
       name: String
       url: String
-    }
-    type Jobs implements Node {
-      id: String
-      title: String
-      full_title: String
-      shortcode: String
-      application_url: String
-      state: String
-      department: String
-      department_hierarchy: [WorkableDepartmentHierarchy]
-      url: String
-      application_url: String
-      shortlink: String
-      location: WorkableLocation
-      created_at: String
-    }
-    type WorkableDepartmentHierarchy {
-      id: Int
-      name: String
-    }
-    type WorkableLocation {
-      location_str: String
-      country: String
-      country_code: String
-      region: String
-      region_code: String
-      city: String
-      zip_code: Int
-      telecommuting: Boolean
     }
     type Plugin implements Node {
       name: String,
