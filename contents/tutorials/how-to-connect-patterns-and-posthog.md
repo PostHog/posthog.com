@@ -18,7 +18,7 @@ There are two ways to connect PostHog and Patterns, so that you can calculate me
 
 The [Patterns Connector app](/apps/patterns-connector) is available from the PostHog app marketplace and requires PostHog 1.30.0 or above, or PostHog Cloud. You'll also need a Patterns account. 
 
-The Patterns Connector app steams event data from PostHog into Patterns in real-time. This makes it especially useful for building real-time notifications, syncing data with external systems to send emails, or enriching event data and sending it to your CRM.
+The Patterns Connector app streams event data from PostHog into Patterns in real-time. This makes it especially useful for building real-time notifications, syncing data with external systems to send emails, or enriching event data and sending it to your CRM.
 
 To install and setup the Patterns Connector, follow the steps below...
 
