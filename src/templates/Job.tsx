@@ -305,6 +305,7 @@ export const query = graphql`
                     sections {
                         fields {
                             isRequired
+                            descriptionPlain
                             field {
                                 type
                                 title

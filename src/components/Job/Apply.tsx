@@ -9,39 +9,40 @@ interface IResumeComponentProps {
     title: string
     required: boolean
     path: string
+    placeholder: string
 }
 
 const components = {
-    string: ({ title, required, path }: IResumeComponentProps) => (
+    string: ({ title, required, path, placeholder }: IResumeComponentProps) => (
         <input
             data-path={path}
             required={required}
             className="w-full block !bg-white box-border px-3 py-2 rounded-sm focus:shadow-xl border border-black/20 text-[17px] font-medium dark:bg-white box-border/10 dark:text-white"
-            placeholder={title}
+            placeholder={placeholder || title}
             name={title}
         />
     ),
-    email: ({ title, required, path }: IResumeComponentProps) => (
+    email: ({ title, required, path, placeholder }: IResumeComponentProps) => (
         <input
             data-path={path}
             required={required}
             className="w-full block !bg-white box-border px-3 py-2 rounded-sm focus:shadow-xl border border-black/20 text-[17px] font-medium dark:bg-white box-border/10 dark:text-white"
             type="email"
-            placeholder={title}
+            placeholder={placeholder || title}
             name={title}
         />
     ),
-    longtext: ({ title, required, path }: IResumeComponentProps) => (
+    longtext: ({ title, required, path, placeholder }: IResumeComponentProps) => (
         <textarea
             rows={5}
             data-path={path}
             required={required}
             className="w-full block !bg-white box-border px-3 py-2 rounded-sm focus:shadow-xl border border-black/20 text-[17px] font-medium dark:bg-white/10 dark:text-white"
-            placeholder={title}
+            placeholder={placeholder || title}
             name={title}
         />
     ),
-    file: ({ title, required, path }: IResumeComponentProps) => {
+    file: ({ title, required, path, placeholder }: IResumeComponentProps) => {
         const [fileName, setFileName] = useState()
         const inputRef = useRef(null)
 
@@ -57,7 +58,7 @@ const components = {
                     data-path={path}
                     required={required}
                     className="opacity-0 absolute w-full h-full inset-0 cursor-pointer"
-                    placeholder={title}
+                    placeholder={placeholder || title}
                     name={title}
                     type="file"
                     accept={allowedFileTypes.join(',')}
@@ -127,7 +128,7 @@ const Form = ({ setSubmitted, info, id }) => {
             <form onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 gap-y-3 ">
                     {info?.applicationFormDefinition?.sections?.map(({ fields }) => {
-                        return fields.map(({ field, isRequired }) => {
+                        return fields.map(({ field, isRequired, descriptionPlain }) => {
                             const required = isRequired
                             return (
                                 <div key={field?.path}>
@@ -142,6 +143,7 @@ const Form = ({ setSubmitted, info, id }) => {
                                             title: field?.title,
                                             required,
                                             path: field?.path,
+                                            placeholder: descriptionPlain,
                                         })}
                                 </div>
                             )
