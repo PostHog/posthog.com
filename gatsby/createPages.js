@@ -15,6 +15,7 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
     const HostHogTemplate = path.resolve(`src/templates/HostHog.js`)
     const Question = path.resolve(`src/templates/Question.js`)
     const SqueakTopic = path.resolve(`src/templates/SqueakTopic.tsx`)
+    const Job = path.resolve(`src/templates/Job.tsx`)
 
     // Tutorials
     const TutorialTemplate = path.resolve(`src/templates/tutorials/Tutorial.tsx`)
@@ -242,6 +243,23 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
                     topics {
                         id
                         label
+                    }
+                }
+            }
+            jobs: allAshbyJobPosting {
+                nodes {
+                    id
+                    title
+                    fields {
+                        slug
+                    }
+                    parent {
+                        ... on AshbyJob {
+                            customFields {
+                                value
+                                title
+                            }
+                        }
                     }
                 }
             }
@@ -514,4 +532,44 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
             },
         })
     })
+
+    for (node of result.data.jobs.nodes) {
+        const { id, parent } = node
+        const slug = node.fields.slug
+        const team = parent?.customFields?.find(({ title, value }) => title === 'Team')?.value
+        const issues = parent?.customFields?.find(({ title, value }) => title === 'Issues')?.value?.split(',')
+        const repo = parent?.customFields?.find(({ title, value }) => title === 'Repo')?.value
+        let gitHubIssues = []
+        if (issues) {
+            for (const issue of issues) {
+                const { html_url, number, title, labels } = await fetch(
+                    `https://api.github.com/repos/${repo}/issues/${issue.trim()}`,
+                    {
+                        headers: {
+                            Authorization: `token ${process.env.GITHUB_API_KEY}`,
+                        },
+                    }
+                ).then((res) => res.json())
+                gitHubIssues.push({
+                    url: html_url,
+                    number,
+                    title,
+                    labels,
+                })
+            }
+        }
+        createPage({
+            path: slug,
+            component: Job,
+            context: {
+                id,
+                slug,
+                teamName: team,
+                teamNameInfo: `Team ${team}`,
+                objectives: `/handbook/people/team-structure/${slugify(team, { lower: true })}/objectives`,
+                mission: `/handbook/people/team-structure/${slugify(team, { lower: true })}/mission`,
+                gitHubIssues,
+            },
+        })
+    }
 }

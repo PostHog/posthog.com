@@ -2239,3 +2239,9 @@
 [[redirects]]
     from = "/product/experimentation"
     to = "/product/experimentation-suite"
+
+
+# Added: 2022-09-08
+[[redirects]]
+    from = "/handbook/people/team-structure/app-east"
+    to = "/handbook/people/team-structure/app-east/objectives"
