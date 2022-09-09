@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['patterns']
 date: 2022-09-13
-featuredImage: 
+featuredImage: ../images/tutorials/banners/patterns-tutorial.png
 topics: ["apps"]
 ---
 
