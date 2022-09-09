@@ -1,6 +1,12 @@
 import React from 'react'
 
-const interviewProcess = [
+interface IInterviewProcess {
+    title: string
+    description: string
+    badge: string
+}
+
+const defaultInterviewProcess: IInterviewProcess[] = [
     {
         title: 'Application',
         description:
@@ -30,30 +36,46 @@ const interviewProcess = [
     },
 ]
 
-export default function InterviewProcess() {
+const roleInterviewProcess: Record<string, IInterviewProcess[]> = {
+    'Site Reliability Engineer - Kubernetes': [
+        defaultInterviewProcess[0],
+        defaultInterviewProcess[1],
+        {
+            title: 'Technical interview',
+            description: `You'll meet with an Engineer who will evaluate skills needed to be successful in your role.`,
+            badge: '1 hour',
+        },
+        defaultInterviewProcess[3],
+        defaultInterviewProcess[4],
+    ],
+}
+
+export default function InterviewProcess({ role }: { role?: string }) {
     return (
         <>
             <p>We do 2-3 short interviews, then pay you to do some real-life (or close to real-life) work.</p>
             <ul className="list-none m-0 p-0 grid gap-y-6">
-                {interviewProcess.map(({ title, description, badge }, index) => {
-                    return (
-                        <li
-                            className="flex items-start space-x-4 first:border first:border-dashed first:border-gray-accent-light dark:first:border-gray-accent-dark first:pt-3 first:pb-2 first:px-3 first:-mx-3 first:rounded-md first:bg-white dark:first:bg-gray-accent-dark-hover"
-                            key={title}
-                        >
-                            <div className="w-12 h-12 bg-gray-accent-light dark:bg-gray-accent-dark rounded-full flex items-center justify-center flex-shrink-0 font-semibold">
-                                <span>{index + 1}</span>
-                            </div>
-                            <div>
-                                <h5 className="m-0 flex items-baseline flex-wrap">
-                                    <span className="mr-2">{title}</span>
-                                    <span className="text-sm font-normal opacity-50">{badge}</span>
-                                </h5>
-                                <p className="m-0">{description}</p>
-                            </div>
-                        </li>
-                    )
-                })}
+                {((role && roleInterviewProcess[role.trim()]) || defaultInterviewProcess).map(
+                    ({ title, description, badge }, index) => {
+                        return (
+                            <li
+                                className="flex items-start space-x-4 first:border first:border-dashed first:border-gray-accent-light dark:first:border-gray-accent-dark first:pt-3 first:pb-2 first:px-3 first:-mx-3 first:rounded-md first:bg-white dark:first:bg-gray-accent-dark-hover"
+                                key={title}
+                            >
+                                <div className="w-12 h-12 bg-gray-accent-light dark:bg-gray-accent-dark rounded-full flex items-center justify-center flex-shrink-0 font-semibold">
+                                    <span>{index + 1}</span>
+                                </div>
+                                <div>
+                                    <h5 className="m-0 flex items-baseline flex-wrap">
+                                        <span className="mr-2">{title}</span>
+                                        <span className="text-sm font-normal opacity-50">{badge}</span>
+                                    </h5>
+                                    <p className="m-0">{description}</p>
+                                </div>
+                            </li>
+                        )
+                    }
+                )}
             </ul>
         </>
     )

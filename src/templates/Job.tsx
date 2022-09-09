@@ -227,7 +227,7 @@ export default function Job({
                                 )}
                                 <Accordion title="Interview process" id="interview-process">
                                     <div className="mb-6">
-                                        <InterviewProcess />
+                                        <InterviewProcess role={title} />
                                     </div>
                                 </Accordion>
                                 <Accordion title="Apply" id="apply">
