@@ -433,6 +433,7 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
             },
         })
     })
+
     result.data.apps.nodes.forEach((node) => {
         const { slug } = node.fields
         const { documentation } = node.frontmatter
