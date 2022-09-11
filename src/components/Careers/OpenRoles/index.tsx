@@ -1,9 +1,8 @@
-import WorkableOpenRoles from 'components/WorkableOpenRoles'
+import AshbyOpenRoles from 'components/AshbyOpenRoles'
 import React from 'react'
 import { Structure } from '../../Structure'
 
 export const OpenRoles = () => {
-    // Some of the styling overrides here lives in src/styles/workable-overrides.css
     return (
         <div id="open-roles">
             <Structure.Section width="5xl" className="">
@@ -42,7 +41,7 @@ export const OpenRoles = () => {
                         </p>
                     </div>
                     <div className="flex-1 max-w-md mx-auto">
-                        <WorkableOpenRoles />
+                        <AshbyOpenRoles />
                     </div>
                 </div>
             </Structure.Section>
