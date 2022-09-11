@@ -2,6 +2,7 @@ import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 import CallToAction from 'components/MainNav/Submenus/CallToAction'
 import { Link } from 'gatsby'
+import NotProductIcons from 'components/NotProductIcons'
 
 interface PopularPageProps {
     icon: string
@@ -13,18 +14,22 @@ const PopularPage = ({ icon, label, url }: PopularPageProps) => {
     return (
         <li
             className="border-r border-dashed border-gray-accent-dark last:border-r-0 pr-1 last:pr-0 list-none
-        [&:nth-child(1)>a>div]:!bg-red
-        [&:nth-child(2)>a>div]:!bg-blue
-        [&:nth-child(3)>a>div]:!bg-yellow
-        "
+          [&:nth-child(1)>a>div]:bg-red
+          [&:nth-child(2)>a>div]:bg-blue
+          [&:nth-child(3)>a>div]:bg-yellow"
         >
-            <Link to={url} className="text-white flex flex-col items-center hover:bg-white/10 rounded p-4">
+            <Link
+                to={url}
+                className="text-white flex flex-col items-center hover:bg-white/10 rounded p-4 group relative
+                    active:top-[0.5px]
+                    active:scale-[.98]"
+            >
                 <div
-                    className="w-12 h-12 rounded-full mb-2 hover:text-white
+                    className="w-12 h-12 rounded-full mb-2 flex justify-center items-center group-hover:text-white
                 
                 "
                 >
-                    {icon}
+                    <div className="w-8 h-8 box-border">{icon}</div>
                 </div>
                 <h4 className="text-center text-base leading-tight font-semibold">{label}</h4>
             </Link>
@@ -78,9 +83,21 @@ export const AboutTransparency = () => {
                     </h4>
                     <p className="opacity-70">Here are some popular pages from our company handbook:</p>
                     <ul className="p-0 m-0 gap-x-1 grid grid-cols-3">
-                        <PopularPage icon="icon name" label="Compensation calculator" url="/handbook/compensation" />
-                        <PopularPage icon="icon name" label="Company strategy" url="/handbook/strategy" />
-                        <PopularPage icon="icon name" label="Business model" url="/handbook/company/strategy" />
+                        <PopularPage
+                            icon={NotProductIcons.compensation}
+                            label="Compensation calculator"
+                            url="/handbook/people/compensation"
+                        />
+                        <PopularPage
+                            icon={NotProductIcons.strategy}
+                            label="Company strategy"
+                            url="/handbook/strategy/overview"
+                        />
+                        <PopularPage
+                            icon={NotProductIcons.businessModel}
+                            label="Business model"
+                            url="/handbook/strategy/business-model"
+                        />
                     </ul>
                 </div>
             </div>
