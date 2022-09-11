@@ -54,7 +54,8 @@ interface AboutAnchorScrollNavbarProps {
 }
 
 export const AboutAnchorScrollNavbar = ({ className = '' }: AboutAnchorScrollNavbarProps) => {
-    const baseClasses = 'space-x-2 w-full mx-auto justify-center p-3 sticky top-2 z-30 hidden md:inline-flex pb-12'
+    const baseClasses =
+        'space-x-2 w-full mx-auto justify-center p-3 sticky top-0 bg-tan/80 backdrop-blur border-b border-dashed border-gray-accent-light z-30 hidden md:inline-flex'
     const classList = mergeClassList(baseClasses, className)
 
     const [currentSection, setCurrentSection] = useState('why-were-here')
