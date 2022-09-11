@@ -5,6 +5,7 @@ import { AboutHero } from 'components/About/AboutHero'
 import { AboutAnchorScrollNavbar } from 'components/About/AboutAnchorScrollNavbar'
 import { AboutStory } from 'components/About/AboutStory'
 import { AboutTransparency } from 'components/About/AboutTransparency'
+import { AboutTeam } from 'components/About/AboutTeam'
 
 const AboutPage = () => {
     return (
@@ -19,6 +20,7 @@ const AboutPage = () => {
             <AboutAnchorScrollNavbar />
             <AboutStory />
             <AboutTransparency />
+            <AboutTeam />
         </Layout>
     )
 }
