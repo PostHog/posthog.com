@@ -15,7 +15,7 @@ We used [a template from GV](https://library.gv.com/the-three-hour-brand-sprint-
 
 ## 20 year roadmap
 
-This is _highly_ speculative from 10 years onwards - we only really think about our strategy in detail over the next [5 years](/handbook/strategy/strategy). Nobody should expect us to stick to this - the point is to push us to think about the really long term. We want PostHog to last into the 2040s, and further...
+This is _highly_ speculative from 10 years onwards - we only really think about our strategy in detail over the next [5 years](/handbook/strategy/overview). Nobody should expect us to stick to this - the point is to push us to think about the really long term. We want PostHog to last into the 2040s, and further...
 
 <img width="1148" alt="Screenshot 2021-12-03 at 11 12 29" src="https://user-images.githubusercontent.com/70321811/144593249-523bda63-b4be-4741-89f7-aa85b71a1b6e.png" />
 

@@ -8,7 +8,7 @@ This section of the Handbook covers customers who are interested in our paid clo
 
 ## Strategy
 
-We currently follow a 100% inbound sales model - our approach to [product-led growth](/handbook/strategy/strategy) means that we do not do outbound sales or cold outreach.
+We currently follow a 100% inbound sales model - our approach to [product-led growth](/handbook/strategy/overview) means that we do not do outbound sales or cold outreach.
 
 Our primary commercial focus is on customer success, not pushing sales through. We work with a smaller number of leads, but we know that the leads we receive are already pre-qualified and genuinely interested in potentially using PostHog. 
 

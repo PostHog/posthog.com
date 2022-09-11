@@ -8,7 +8,7 @@ Our approach is to provide internal Marketing-as-a-Service, aka MaaS. We are an 
 
 ## Marketing vision 
 
-PostHog's [vision](https://posthog.com/handbook/strategy/strategy#long-term-vision-for-2026) is to IPO in 2026 with $100m ARR. This is what we think marketing at PostHog will look like at that point. 
+PostHog's [vision](https://posthog.com/handbook/strategy/overview#long-term-vision-for-2026) is to IPO in 2026 with $100m ARR. This is what we think marketing at PostHog will look like at that point. 
 
 ### Things we want to be brilliant at
 
@@ -104,7 +104,7 @@ For these reasons, we:
 
 ## Marketing channels and tactics today
 
-The Marketing team's main focus is acquisition of [high quality signups](https://posthog.com/handbook/strategy/strategy#what-should-we-be-working-on-today). We have established that _word of mouth_ is the most effective way to do this - virtually all of our high quality signups have come organically. Here are the channels we use, in _rough_ order of priority:
+The Marketing team's main focus is acquisition of [high quality signups](https://posthog.com/handbook/strategy/overview#what-should-we-be-working-on-today). We have established that _word of mouth_ is the most effective way to do this - virtually all of our high quality signups have come organically. Here are the channels we use, in _rough_ order of priority:
  
 #### [Content](/handbook/growth/marketing/blog)
 
