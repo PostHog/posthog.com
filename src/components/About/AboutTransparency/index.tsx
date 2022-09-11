@@ -45,7 +45,7 @@ const Star = () => {
 
 export const AboutTransparency = () => {
     return (
-        <section className="bg-black pt-12 relative px-4 lg:px-8">
+        <section id="transparency" className="bg-black pt-12 relative px-4 lg:px-8">
             <div className="flex flex-col-reverse lg:flex-row items-center gap-8 max-w-5xl mx-auto text-white">
                 <aside className="basis-[60%] flex flex-col relative h-full">
                     <div className="border-2 border-white/50 border-solid px-8 py-6 max-w-sm">

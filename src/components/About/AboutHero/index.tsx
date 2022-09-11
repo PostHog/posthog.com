@@ -4,7 +4,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 export const AboutHero = () => {
     return (
         <>
-            <header className="pb-4 md:pb-8 px-4 md:px-12">
+            <header id="overview" className="pb-4 md:pb-8 px-4 md:px-12">
                 <h1 className="text-4xl md:text-6xl text-center mb-4">
                     We're a little hog-wild about <br className="hidden xl:block" />{' '}
                     <span className="text-red">helping you build successful products.</span>

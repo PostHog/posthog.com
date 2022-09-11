@@ -28,6 +28,14 @@ const ButtonLink = ({
 
 const inPageLinks = [
     {
+        label: 'Overview',
+        section: 'overview',
+    },
+    {
+        label: 'Our story',
+        section: 'story',
+    },
+    {
         label: 'Transparency',
         section: 'transparency',
     },
@@ -38,10 +46,6 @@ const inPageLinks = [
     {
         label: 'Benefits',
         section: 'benefits',
-    },
-    {
-        label: 'Open roles',
-        section: 'open-roles',
     },
 ]
 
@@ -60,26 +64,20 @@ export const AboutAnchorScrollNavbar = ({ className = '' }: AboutAnchorScrollNav
 
         const scrollHandler = () => {
             const sections = {
+                overview: document.getElementById('overview')!.offsetTop,
+                story: document.getElementById('story')!.offsetTop,
                 transparency: document.getElementById('transparency')!.offsetTop,
-                interviewProcess: document.getElementById('interview-process')!.offsetTop,
-                benefits: document.getElementById('benefits')!.offsetTop,
-                workingAtPosthog: document.getElementById('working-at-posthog')!.offsetTop,
-                openRoles: document.getElementById('open-roles')!.offsetTop,
             }
             const offset = window.scrollY
 
-            if (offset < sections.transparency - scrollThreshold) {
-                setCurrentSection('why-were-here')
-            } else if (offset < sections.interviewProcess - scrollThreshold) {
+            if (offset < sections.overview - scrollThreshold) {
+                setCurrentSection('overview')
+            } else if (offset < sections.story - scrollThreshold) {
+                setCurrentSection('story')
+            } else if (offset < sections.transparency - scrollThreshold) {
                 setCurrentSection('transparency')
-            } else if (offset < sections.benefits - scrollThreshold) {
-                setCurrentSection('interview-process')
-            } else if (offset < sections.workingAtPosthog - scrollThreshold) {
-                setCurrentSection('benefits')
-            } else if (offset < sections.openRoles - scrollThreshold) {
-                setCurrentSection('working-at-posthog')
             } else {
-                setCurrentSection('open-roles')
+                setCurrentSection('overview')
             }
         }
 

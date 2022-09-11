@@ -6,7 +6,7 @@ import { YCBadge } from './yc-badge'
 
 export const AboutStory = () => {
     return (
-        <section className="flex flex-col md:flex-row max-w-screen-xl mx-auto px-4 md:pl-8 md:pr-6">
+        <section id="story" className="flex flex-col md:flex-row max-w-screen-xl mx-auto px-4 md:pl-8 md:pr-6">
             <div className="flex-1 flex flex-col justify-between">
                 <div>
                     <h2 className="text-4xl">Our story</h2>
