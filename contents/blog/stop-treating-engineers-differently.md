@@ -1,13 +1,13 @@
 ---
-date: 2022-09-07
-title: "Startups, please stop treating engineers like a different kind of person"
+date: 2022-09-12
+title: "Startups, stop treating engineers like a different species"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 categories: ["Inside PostHog"]
 author: ["charles-cook"]
-featuredImage: ../images/blog/transparency.jpeg
+featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
 ---
 
