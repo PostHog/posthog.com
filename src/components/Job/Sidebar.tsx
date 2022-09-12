@@ -76,7 +76,7 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
                                             <ContributorImage
                                                 name={name}
                                                 image={headshot}
-                                                className="!w-10 !h-10 border-[2.5px] border-solid border-white dark:border-gray-accent-dark"
+                                                className="!w-10 !h-10 border-[2.5px] border-solid border-white dark:border-primary"
                                                 imgClassName=""
                                             />
                                         </span>
@@ -99,7 +99,7 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
                     active:scale-[.98]"
                 >
                     <ContributorImage
-                        className="w-[40px] h-[40px] bg-orange border-2 border-white border-solid"
+                        className="w-[40px] h-[40px] bg-orange border-2 border-white dark:border-primary border-solid"
                         image={teamLead?.frontmatter?.headshot}
                         name={teamLead?.frontmatter?.name}
                     />

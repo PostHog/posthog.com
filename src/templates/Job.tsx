@@ -167,7 +167,7 @@ export default function Job({
                                             return (
                                                 <li
                                                     key={title}
-                                                    className="flex space-x-4 items-start font-medium leading-tight text-[15px]"
+                                                    className="flex space-x-4 items-center font-medium leading-tight text-[15px]"
                                                 >
                                                     <img className="max-w-[30px]" alt={title} src={image} />
                                                     <span>{title}</span>
@@ -182,21 +182,30 @@ export default function Job({
                                 </Accordion>
                                 {gitHubIssues.length > 0 && (
                                     <Accordion title="Typical tasks" id="typical-tasks">
-                                        <div className="mb-6">
-                                            <p>Here are a few open GitHub issues you could help solve</p>
-                                            <ul className="list-none !m-0 p-0 grid gap-y-3">
+                                        <div className="mb-2">
+                                            <p>Here are some open GitHub issues you could help solve:</p>
+                                            <ul className="list-none !m-0 p-0 grid gap-y-4">
                                                 {gitHubIssues.map(({ url, number, title, labels }) => {
                                                     return (
-                                                        <li key={title} className="flex items-center space-x-4">
-                                                            <span className="font-semibold opacity-50">#{number}</span>
-                                                            <Link to={url}>{title}</Link>
+                                                        <li
+                                                            key={title}
+                                                            className="flex flex-col md:flex-row md:items-center"
+                                                        >
+                                                            <div className="flex space-x-2">
+                                                                <Link to={url} className="block w-[60px] md:w-auto">
+                                                                    <span className="font-semibold text-sm text-black/50 hover:text-black/75 dark:text-white/50 dark:hover:text-white/75 font-code">
+                                                                        #{number}
+                                                                    </span>
+                                                                </Link>
+                                                                <Link to={url}>{title}</Link>
+                                                            </div>
                                                             {labels && labels.length > 0 && (
-                                                                <ul className="list-none !mt-0 !mb-0 p-0 flex items-center space-x-2">
+                                                                <ul className="list-none !ml-[calc(60px+.25rem)] md:!ml-2 !mt-0 !mb-0 p-0 flex items-center space-x-1">
                                                                     {labels.map(({ name, url }, index) => {
                                                                         return (
                                                                             <li key={name + index}>
                                                                                 <Link
-                                                                                    className="transition-all text-sm border-black/50 dark:border-white/50 hover:border-black/80 dark:hover:border-white/80 rounded-sm border py-1 px-2 bg-white dark:bg-black text-black/70 dark:text-white/70 hover:text-black/100 dark:hover:text-white/100"
+                                                                                    className="transition-all text-sm rounded-sm py-1 px-[5px] bg-blue/10 hover:bg-blue/20 text-blue hover:text-blue dark:bg-white/10 dark:hover:bg-white/30 dark:text-white/75 dark:hover:text-white/100"
                                                                                     to={url}
                                                                                 >
                                                                                     {name}
@@ -227,7 +236,7 @@ export default function Job({
                                 )}
                                 <Accordion title="Interview process" id="interview-process">
                                     <div className="mb-6">
-                                        <InterviewProcess />
+                                        <InterviewProcess role={title} />
                                     </div>
                                 </Accordion>
                                 <Accordion title="Apply" id="apply">
@@ -304,6 +313,8 @@ export const query = graphql`
                 applicationFormDefinition {
                     sections {
                         fields {
+                            isRequired
+                            descriptionPlain
                             field {
                                 type
                                 title
