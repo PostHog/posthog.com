@@ -12,7 +12,7 @@ function multipartToAshby(event) {
 
         busboy.on('file', (name, filestream, file) => {
             filestream.on('data', (data) => {
-                formData[name] = {
+                formData[Buffer.from(name, 'latin1').toString('utf8')] = {
                     value: data,
                     options: {
                         filename: file.filename,
@@ -62,6 +62,6 @@ exports.handler = async (e) => {
 
     return {
         statusCode: 200,
-        body: JSON.stringify({ submission }),
+        body: submission,
     }
 }

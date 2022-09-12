@@ -1,7 +1,8 @@
 import { button } from 'components/CallToAction'
 import React, { useRef, useState } from 'react'
 import Confetti from 'react-confetti'
-import { createPortal } from 'react-dom'
+import { useValues } from 'kea'
+import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
 
 const allowedFileTypes = ['application/pdf']
 
@@ -84,10 +85,10 @@ const components = {
 }
 
 const Form = ({ setSubmitted, info, id }) => {
+    const { posthog } = useValues(posthogAnalyticsLogic)
     const [error, setError] = useState(null)
     const handleSubmit = (e) => {
         e.preventDefault()
-        setSubmitted(true)
         const data = new FormData(e.target)
         const form = new FormData()
         let error = null
@@ -113,8 +114,14 @@ const Form = ({ setSubmitted, info, id }) => {
             body: form,
         })
             .then((res) => res.json())
-            .then(() => {
-                setSubmitted(true)
+            .then((data) => {
+                if (!data?.success) {
+                    const errors = data?.errors?.join(', ')
+                    posthog?.capture(`Job application error: ${errors}`)
+                    setError("Whoops! Something went wrong. We're on it!")
+                } else {
+                    setSubmitted(true)
+                }
             })
     }
     return (
