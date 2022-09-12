@@ -2229,3 +2229,9 @@
 [[redirects]]
     from = "/docs/architecture/ingestion-pipeline"
     to = "/docs/how-posthog-works/ingestion-pipeline"
+
+
+# Added: 2022-09-12
+[[redirects]]
+    from = "/handbook/people/team-structure/app-east/objectives"
+    to = "/handbook/people/team-structure/app-east"
