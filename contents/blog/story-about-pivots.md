@@ -249,7 +249,3 @@ Those very early decisions are the most leveraged you will ever take for your st
 It turns out that PostHog has been about building something people want, that we also wanted to work on. If you're reading this article and having a tough time working out if you should pivot, drop us [an email](mailto:blog@posthog.com).
 
 _Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
-
-<NewsletterForm
-compact
-/>

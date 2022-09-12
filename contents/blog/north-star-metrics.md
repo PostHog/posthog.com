@@ -82,10 +82,6 @@ Are you trying to convert free users into paid users? If so, customer growth mig
 ### User experience
 User experience metrics are numerous and will differ depending on the business or product, but they will typically directly or indirectly reference retention. If people enjoy using a product, they're more likely to continue to use it and recommend it to a friend. It's a good choice for early-stage startups or businesses which rely on word-of-mouth growth.
 
- <NewsletterForm
-compact
-/>
-
 ## PostHog's North Star Metric
 As an open-source product analytics company, our ultimate mission is to "increase the number of successful products in the world". 
 

@@ -69,10 +69,6 @@ There are four key types of segmentation you can use to identify groups of users
 
 It's often necessary to combine multiple segmentation types when running analyses. You might, for example, look at the behaviour of older users in France, or early-adopters on mobile. 
 
- <NewsletterForm
-compact
-/>
-
 ## How can I segment my userbase?
 
 There are a variety tools available to help you segment users or use the segments to understand their behaviours within your product. These can include basic web analytics tools such as Google Analytics, or all-in-one product analytics tools such as PostHog. 

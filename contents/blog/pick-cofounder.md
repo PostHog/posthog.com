@@ -66,9 +66,3 @@ There are a few things PostHog did to guard against this:
 Having a co-founder is great - but it's far better to have no co-founder than to have the wrong one. Getting this right is perhaps the most crucial decision you'll take on your road to startup success.
 
 Loved this? Let us know on [Twitter](https://twitter.com/PostHog) or [LinkedIn](https://linkedin.com/company/posthog), or subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics.
-
-_Enjoyed this? Subscribe to our [newsletter](https://posthog.com/newsletter) to hear more from us twice a month!_
-
-<NewsletterForm
-compact
-/>

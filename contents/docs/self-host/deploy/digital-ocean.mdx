@@ -56,7 +56,7 @@ It's unfortunately [not yet possible to provide parameters to DigitalOcean 1-cli
 
 Create a `values.yaml` file in the current directory with the following content:
 
-```yaml
+```yaml file=values.yaml
 cloud: 'do'
 ingress:
     hostname: <your-hostname>
@@ -69,7 +69,7 @@ cert-manager:
 Note: if you are planning to use our [GeoIP integration](https://posthog.com/apps/geoip-enrichment), please also add the snippet below
 to enable proxy protocol support in the load balancer and in the `nginx` ingress controller:
 
-```yaml
+```yaml file=values.yaml
 #
 # For DigitalOcean LB (TCP) mode, we need to enable some additional config
 # in the ingress controller in order to get the proper IP address forwarded
@@ -151,7 +151,7 @@ First, we need to set up a Kubernetes cluster (see the official DigitalOcean [do
 
 Here's the minimal required `values.yaml` that we'll be using later. You can find an overview of the parameters that can be configured during installation under [configuration](/docs/self-host/deploy/configuration).
 
-```yaml
+```yaml file=values.yaml
 cloud: 'do'
 ingress:
     hostname: <your-hostname>
@@ -164,7 +164,7 @@ cert-manager:
 Note: if you are planning to use our [GeoIP integration](https://posthog.com/integrations/geoip), please also add the snippet below
 to enable proxy protocol support in the load balancer and in the `nginx` ingress controller:
 
-```
+```yaml file=values.yaml
 #
 # For DigitalOcean LB (TCP) mode, we need to enable some additional config
 # in the ingress controller in order to get the proper IP address forwarded

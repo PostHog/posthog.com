@@ -328,8 +328,5 @@ More hand holding is probably better if you have less experience or you need som
 
 _Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
 
-<NewsletterForm
-compact
-/>
 
 

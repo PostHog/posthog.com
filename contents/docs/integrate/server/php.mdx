@@ -233,6 +233,12 @@ PostHog::getFeatureFlag('beta-feature', 'some distinct id', [], ["is_authorized"
 // the third argument is for groups
 ```
 
+This works for `getAllFlags` as well. It evaluates all flags locally if possible. If even one flag isn't locally evaluable, it falls back to decide.
+
+```js
+PostHog::getAllFlags('distinct id', ["organisation" => "some-company"], [], ["organisation" => ["is_authorized" => true]])
+```
+
 **Restricting evaluation to local only**
 Sometimes, performance might matter to you so much that you never want an HTTP request roundtrip delay when computing flags. In this case, you can set the `onlyEvaluateLocally` parameter to true, which tries to compute flags only with the properties it has. If it fails to compute a flag, it returns `None`, instead of going to PostHog's servers to get the value.
 

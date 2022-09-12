@@ -58,7 +58,3 @@ When we were working, it sounds fluffy, but being surrounded by ambitious and im
 If you want to check out the product, check out the [PostHog repo](https://github.com/posthog/posthog). If you’d like to get updates from this blog, [email me](mailto:james@posthog.com), and I’ll add you to our mailing list.
 
 _Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
-
-<NewsletterForm
-compact
-/>

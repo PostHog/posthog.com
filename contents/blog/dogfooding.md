@@ -36,6 +36,3 @@ PostHog offers all the [tools](https://posthog.com/product) you need to identify
 
 _Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
 
-<NewsletterForm
-compact
-/>

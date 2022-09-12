@@ -1,6 +1,6 @@
 ---
 date: 2022-08-31
-title: "Benchmarking the (trivial) impact of session recording on performance"
+title: "Benchmarking the impact of session recording on performance"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -182,5 +182,3 @@ Practically... this (almost) never happens. A lot of coincidence has to happen f
 Session Recording – despite the perceived intensity of the data captured – has no discernible impact on your browser’s performance. This is entirely thanks to the MutationObserver API, introduced in 2012 underneath Anne van Kesteren, Aryeh Gregor, Ms2ger, Alex Russell, and Robin Berjon. 
 
 Marketers and product managers can continue to enjoy the benefits of Session Recording while remaining confident that their app’s performance isn’t suffering.
-
-<NewsletterForm compact />

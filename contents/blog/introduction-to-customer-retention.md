@@ -90,10 +90,6 @@ The third column, labelled Day 0, tells you how many users in that cohort used t
 
 The remaining columns tell you how many users from each cohort came back _each day_. We can see that five users used the product on 9 July and that 20% of them came back on days one (10 July), two (11 July) and three (12 July). After that, none of them came back. The empty cells which ‘staircase’ off the chart are due to not enough time having passed for those cohorts - the data doesn't exist yet.
 
- <NewsletterForm
-compact
-/>
-
 ## How to improve customer retention and reduce churn
 
 There are many tactics you can use to try and improve a flagging retention rate, all of which can be grouped into the following categories:

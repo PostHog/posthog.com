@@ -374,6 +374,7 @@ response = requests.${item.httpVerb}(
 
     return (
         <CodeBlock
+            selector="dropdown"
             currentLanguage={currentLanguage}
             onChange={({ language }) => setExampleLanguage(language)}
             label={

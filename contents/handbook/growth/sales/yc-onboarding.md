@@ -10,16 +10,15 @@ As a Y Combinator company ourselves, we want to support other YC companies that 
 
 Our YC deal provides the following:
 
-- One free year of PostHog Cloud with up to 3 million events per month *or* a $12K voucher towards PostHog Scale if they want to self-host PostHog.
-- Companies also get a $50 gift card to spend on our merch and enterprise support (i.e. a private Slack with our core team members).
+- 20 million events/month, free for 6 months (PostHog Cloud or Self Hosted)
+- Companies also get a $50 gift card to spend on our merch and dedicated support (i.e. a private Slack with our core team members).
 
 For current batch YC companies, we also offer:
 
-- 20 million events/month, free for a year (instead of 3m events/month)
-- $12K PostHog Scale voucher (instead of $12K)
+- 20 million events/month, free for a year (instead of 6 months)
 - Free group pairing session to help with setup
 - PostHog AirPods, a PostHog Timbuk2 Backpack, a $150 Open Collective gift card, or a $150 PostHog Merch gift card.
-- A referral scheme that let's you double-down on the above deal
+- A referral scheme that lets you double-down on the above deal
 
 > **Note:** Batch-specific deals will be updated here as new batches come along.
 
@@ -192,4 +191,4 @@ After they've gotten set up, if they are a promising company, [create a deal on 
 
 ## Responsibilities
 
-Cameron and Yakko handles YC onboarding calls, and Charles manages Printfection, Open Collective, and Shopify.
+Cameron handles YC onboarding calls, and Charles manages Printfection, Open Collective, and Shopify.
