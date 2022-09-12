@@ -6,21 +6,16 @@ showTitle: true
 hideAnchor: true
 ---
 
-## Our approach to hiring 
-
-Our goal is to build a [diverse](https://posthog.com/handbook/company/diversity), world-class team that allows us to act and iterate fast, with a high level of [autonomy and innovation](https://posthog.com/handbook/people/team-structure/why-small-teams).
-
 ## Hiring Process
 
 ### Summary of process for current live roles
 
 | **Position title**        | **Location we're happy to hire in** | **Small Team**        | **Manager** | **Interview Process**                                                                                                                          | **SuperDay Task**              |
 |---------------------------|----------------------------------------|-----------------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|
-| Senior Product Manager    | GMT -8:00 to +2:00                   | App West/East   | Tim G.      | 1) Culture Screen - Coua<br/> 2) Technical Screen - Marcus & Tim <br/> 3) SuperDay Assessment - Tim, Marcus, James H., Chris, & an Engineer      | [Senior Product Manager Task](https://github.com/PostHog/company-internal/blob/master/superdays/product-manager.md) |
 | Senior Data Engineer      | GMT -5:00 to +2:00                   | Ingestion       | James G.    | 1) Culture Screen - Coua<br/> 2) Technical Screen - James G. & Tim<br/> 3) SuperDay Assessment - James G., Tiina, James H. & Yakko                 | [Ingestion Task](https://github.com/PostHog/superday-ingestion) (download ZIP and send)  |
 | Site Reliability Engineer | GMT -8:00 to +2:00                   | Platform        | James G.    | 1) Culture Screen - Coua<br/> 2) Technical Screen - James G.<br/> 3) SuperDay Assessment - James G., Guido, Tiina, James H., & Karl    | [SRE Task](https://github.com/PostHog/sre-superday) (download ZIP and send) |
-| Full Stack Engineer       | GMT -8:00 to +2:00                   | App West/East   | Marius/Eric | 1) Culture Screen - Coua<br/> 2) Technical Screen - Marius/Eric & Tim<br/> 3) SuperDay Assessment - Marius/Eric, Tim, James H., Li, Neil, & Karl | Live Task (link not available) |
-| Technical Content Marketer       | GMT -8:00 to +2:00                   | Marketing   | Charles | 1) Culture Screen - Charles<br/> 2) Technical Screen - James H & Andy<br/> 3) SuperWeek Assessment - Charles, Andy, Tim, James H., Joe | [Technical Content Marketer Task](https://docs.google.com/document/d/1jR7lcNrF_-x-Pczaa5deGnIlkyHuXe2fARwBryie8sU/edit?usp=sharing) |
+| Full Stack Engineer       | GMT -8:00 to +2:00                   | Any App Team   | Marius/Eric/Ben | 1) Culture Screen - Coua<br/> 2) Technical Screen - Marius/Eric & Tim<br/> 3) SuperDay Assessment - Marius/Eric, Tim, James H., Li, Neil, & Karl | Live Task (link not available) |
+| Product Designer       | GMT -8:00 to +2:00                   | Design   | Cory/Chris | 1) Culture Screen - Coua<br/> 2) Technical interview & portfolio review - Cory<br/> 3) SuperDay Assessment - James, Tim, Lottie, Marius/Eric/Ben | Task TBC |
 
 Tasks are only available internally - please do not share these publicly. 
 
