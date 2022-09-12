@@ -35,7 +35,3 @@ We run one of the biggest PostHog instances ourselves, with >20 billion events. 
 
 Did you just read a sales pitch? Yes. Should you [immediately apply for the SRE role](https://apply.workable.com/posthog/j/071DD5C05A/) at PostHog? Also yes.
 
-
-<NewsletterForm
-compact
-/>

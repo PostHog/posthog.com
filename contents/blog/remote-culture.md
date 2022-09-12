@@ -158,7 +158,3 @@ And while it hasn't been the easiest, sometimes because of bureaucracy, sometime
 After all, we want to continue hiring talented 18-year-olds from Poland and experienced founders from Mexico. Because remote isn't what we do - it's who we are. 
 
 _Enjoyed this? Subscribe to our [newsletter](https://posthog.com/newsletter) to hear more from us twice a month!_
-
-<NewsletterForm
-compact
-/>
