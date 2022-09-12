@@ -703,11 +703,6 @@
     from = "/docs/self-host/deploy/proxy"
     to = "/docs/cloud/proxy"
 
-# Added: 2021-08-05
-[[redirects]]
-    from = "/docs/data-model"
-    to = "/docs/data-model"
-
 # Added: 2021-08-12
 [[redirects]]
     from = "/handbook/people/hiring-process/hiring-process"
