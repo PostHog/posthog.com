@@ -23,6 +23,7 @@
 *,
 a {
     @apply box-border;
+    font-variant-ligatures: none;
 }
 
 main a,
