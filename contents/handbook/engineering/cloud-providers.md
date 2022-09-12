@@ -10,7 +10,13 @@ showTitle: true
 
 Ask in the `#team-platform` Slack channel for someone to add you. Anyone who has edit access can do so.
 
-To give someone access: navigate to [IAM](https://console.aws.amazon.com/iamv2/home#/users) and use the `Add Users` button at the top right to add their PostHog email as username, pick `AWS Management Console access` and add them to the `Team` group, then Slack them the sign-in URL, username, and password.
+To give someone access (important to follow these steps!):
+1. navigate to [IAM](https://console.aws.amazon.com/iamv2/home#/users)
+2. Use the `Add Users` button at the top right to add their PostHog email as username and select 'password'.
+3. Important! Untick 'User must create a new password at next sign-in', as that'll cause issues with MFA.
+4. Pick `AWS Management Console access` and add them to the `Team` group
+5. Slack the username, password and console link to new user.
+6. User has to log in, set up MFA, log out, and then change password. They may need to log out again.
 
 #### IMPORTANT: You must log out and then log back in!
 
