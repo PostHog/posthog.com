@@ -8,13 +8,13 @@ There are many occasions when you will need to spend company money.
 
 PostHog is a lean organization - the less we spend, the more time we have to make sure the company takes off. However, it is more important you are productive, healthy, and happy.
 
-Please spend money in a way that you think is in the best interests of the company. 
+**Please spend money in a way that you think is in the best interests of the company. **
 
-If it's a trivial expense, just buy it. We provide you with a company card with a $1,000/month spending limit for this reason. We use Brex for everyone, and also provide UK team members with a Revolut card. 
+If it's a trivial expense, just buy it. We provide you with a company card with a $1,000/month spending limit for this reason. We use Brex for everyone, and also provide UK team members with an additional Revolut card. 
 
-You should use your Revolut card for UK-specific spending (i.e. ordering from UK sites, hotels/food/drink/... in the UK), and Brex for everything else. This is for UK accounts-reporting reasons, as we have a UK subsidiary and can claim VAT back on many of those purchases.
+You should use your Revolut card for UK-specific spending (i.e. ordering from UK sites, hotels/food/drink/... in the UK), and Brex for everything else. This lets us claim VAT back on UK spending. 
 
-For larger expenses which don't fit into the items here, please _raise a policy suggestion for it as a pull request in this doc_, so we can document our decision making into our policy rather than making everything case by case. If it's likely to just be a one-off, you can post in #ops in Slack instead. 
+For larger expenses which don't fit into the items here, please _raise a policy suggestion for it as a pull request on this page_, so we can document our decision making into our policy, rather than making everything case by case. If it's likely to just be a one-off, you can post in #team-people-and-ops in Slack instead. 
 
 ## Trivial expenses
 
@@ -26,18 +26,16 @@ This means expenses that are under $75 one off or under $20/month recurring that
 
 Make sure you *keep copies for all receipts*. If you expense something on a company card and cannot provide a receipt, this may be deducted from your pay.
 
-You should default to using your company card in all cases - it has no transaction fees. If using your personal card is unavoidable, please post in the #ops channel in Slack afterwards and tag Charles and Grace to get reimbursed manually. 
-
-PostHog uses Brex and Revolut's built-in expenses tracking feature. You'll find using their apps the easiest way to submit receipts.
+You should default to using your company card in all cases - it has no transaction fees. If using your personal card is unavoidable, please post in the #team-people-and-ops channel in Slack afterwards and tag Charles and Grace to get reimbursed manually. 
 
 ### Brex
 
 - Buy something on your Brex card.
 - If it's a digital invoice, just forward it to receipts@brex.com with a note explaining what it is for. If it's a physical receipt, respond to the Brex or SMS notification with a picture of your receipt and a note.
-- You _only_ need to submit receipts for purchases of $75 or more.
+- You _only_ need to submit receipts for purchases of $75 or more. However, you still need to keep copies of all of your receipts, in case we ever get audited. 
 - That's it!
 
-Make sure you forward digital invoices to Brex from your PostHog email address - it won't work if you send from another email address.
+Make sure you forward digital invoices to Brex from your PostHog email address - it won't work if you send from your personal email address.
 
 ### Revolut
 
@@ -47,16 +45,16 @@ Make sure you forward digital invoices to Brex from your PostHog email address -
 
 ### Your personal card
 
-- You shouldn't usually need to do this - if you can't use your PostHog card for some reason, ask Charles or Eltje to purchase it for you on theirs in the first instance. 
-- If you do need to use your personal card, just post the receipt in the #ops channel in Slack and tag Charles and Grace to get reimbursed manually.  
+- You shouldn't usually need to do this - if you can't use your PostHog card for some reason, ask Charles or Grace to purchase it for you on theirs in the first instance. 
+- If you do need to use your personal card, just post the receipt in the #team-people-and-ops channel in Slack and tag Charles and Grace to get reimbursed manually.  
 
-Accidentally bought something on the company card when it was a personal expense? Tried changing the payment method with the merchant and it's too late? Don't worry! Again, just post in #ops _as soon as you become aware_ and we will provide you with the relevant bank details for you to repay the company. 
+Accidentally bought something on the company card when it was a personal expense? Tried changing the payment method with the merchant and it's too late? Don't worry! Again, just post in #team-people-and-ops _as soon as you become aware_ and we will provide you with the relevant bank details for you to repay PostHog. 
 
 ## Making larger purchases
 
 If your purchase fits within the policy below, there is no need to ask. We _cannot_ pay you back for anything without a receipt if you use your personal card.
 
-You may not have enough space on your company card if you're a new starter, just ask Charles or Grace to increase your limit.
+If you don't have enough space on your company card, just ask Charles or Grace to increase your limit.
 
 ## Equipment
 
@@ -68,16 +66,16 @@ PostHog will provide you with office equipment. Please note that it remains Post
 
 We'd prefer you to use a laptop. This is so when we host meetups in real life, you can easily bring your work with you. We'd prefer everyone uses Apple laptops, just to keep life simpler - for example, that means everyone can use the same software, and as we get bigger, it'll mean we're dealing with one supplier, not many.
 
-* For most roles, we currently recommend a Macbook Air with an Apple Silicon (M1) processor and 16GB of RAM.
-* For full stack engineering roles, we recommend a Macbook Pro 14-inch M1, with the 10-core CPU, 14-core GPU upgrade and 32GB of RAM. By default grab the smallest SSD (512gb), but you can upgrade if you need to.
+* For engineering roles, we recommend a Macbook Pro 14-inch M1, with the 10-core CPU, 14-core GPU upgrade and 32GB of RAM. By default grab the smallest SSD (512gb), but you can upgrade if you need to.
+* For all other roles, we currently recommend a Macbook Air with an Apple Silicon (M1) processor and 16GB of RAM.
 
 These are just general guidelines - the most important thing is that you select the model that is appropriate for _your_ needs. If your requirements are different to the guidelines above please just ask.
 
 Apple offer multiple screen sizes. The larger screen sizes (15 inches +), are disproportionately more expensive. These make sense if you do a ton of work in coworking spaces or cafés where you do not have a second screen. If you are realistically going to do most of your work at home, it is more rational to pick a smaller laptop size, and to get a large (27 inch) monitor.
 
-When buying something at Apple we can get 3% cashback on purchases through Brex. You should be able to find that in the 'Rewards' tab on brex or ask Grace or Charles. Also, Amazon regularly offer discounts on Apple products of around 10%, so always worth a check before buying direct from Apple.
+When buying something at Apple we can get 3% cashback on purchases through Brex. You should be able to find that in the 'Rewards' tab on Brex or ask Grace or Charles. (Don't do this if you're in the UK though - use your Revolut card.)
 
-You may be asked if you wanted to purchase Apple Care - please don't buy this as it's not great value for money.
+Also, Amazon regularly offer discounts on Apple products of around 10%, so always worth a check before buying direct from Apple. If you buy from Apple, you may be asked if you wanted to purchase Apple Care - please don't buy this as it's not great value for money.
 
 ### Monitor
 
@@ -107,7 +105,7 @@ If you live in the UK, [Office Resale](https://www.officeresale.co.uk/) offer a 
 
 If you need to work in a noisy environment and don't already have noise cancelling headphones with a microphone, feel free to buy a pair.
 
-We would expect to spend $250 on noise cancelling headphones.
+We would expect to spend $250 on noise-cancelling headphones.
 
 ## Software
 
@@ -152,7 +150,7 @@ While PostHog will use the money saved from not having office space for real lif
 
 You can spend up to $200/month to work in cafés or coworking spaces. You must provide receipts if applicable, and in this case, they must only be for yourself.
 
-We have a company WeWork All Access account that allows you to book desks in any of their worldwide locations. If you wish to take advantage of this, post in #team-people-and-ops and we will add you. This membership costs $150 and is deducted from your monthly budget.
+We have a company WeWork All Access account that allows you to book desks in any of their worldwide locations. If you wish to take advantage of this, post in #team-people-and-ops and Grace or Tim will add you. This membership costs $150 and is deducted from your monthly budget.
 
 ## Meeting each other
 
@@ -164,24 +162,10 @@ We find that team members use this to visit each other when they live in geograp
 
 We offset all carbon emissions generated by team flights using [Wren](https://www.wren.co/), so if you book a flight to meet up with someone, then please let Grace know the departure and destination airports, and she'll log it accordingly. 
 
-## Celebrations and life events
+## Customer meetings
 
-It's important to us at PostHog to celebrate team member milestones and achievements.
-
-**Birthdays**
-
-We have a budget of $50 for a personalized birthday gift. Eltje will reach out to the team a week before the birthday to start a virtual birthday card and ask for gift ideas. 
-
-**Significant life events**
-
-For events like childbirth, weddings, return to work after extended sick leave or the loss of a loved one, Eltje will send flowers and a gift, the budget is $100. We will also send a virtual card.  
-
-## Client meetings
-
-If you are meeting a user for an interview or a potential customer, we would encourage you to pick up the bill.
-
-At PostHog's current stage, a fancy coffee shop is encouraged. A fancy lunch or dinner is not.
+If you are meeting a user for an interview or a potential customer, we would encourage you to pick up the bill. At PostHog's current stage, a fancy coffee shop is encouraged. A fancy lunch or dinner is not.
 
 ## Training
 
-We have a separate section on spending money on [training](/handbook/people/training) (which covers things like books and conferences).
+We have a separate section on spending money on [training](/handbook/people/training), which covers things like books and conferences.
