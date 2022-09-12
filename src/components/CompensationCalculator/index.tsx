@@ -30,7 +30,7 @@ const Section = ({
     return (
         <div>
             <h3 className="text-lg m-0 mt-5">{title}</h3>
-            {description && <p className="text-sm mb-2 text-black/70">{description}</p>}
+            {description && <p className="text-sm mb-2 text-black/70 dark:text-white/70">{description}</p>}
             {children}
         </div>
     )
