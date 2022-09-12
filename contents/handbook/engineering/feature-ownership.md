@@ -24,7 +24,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Application Performance Monitoring (APM) | [@pauldambra][@pauldambra]  | <span class="lemon-tag gh-tag">feature/apm</span>  |
 | Async migrations | [Ingestion (Team Platform)](/handbook/people/team-structure/platform)  | <span class="lemon-tag gh-tag">feature/async-migrations</span> |
 | Billing | [@timgl][@timgl]  |  <span class="lemon-tag gh-tag">feature/billing</span> |
-| Calculated Events (previously called actions) | [@pauldambra][@pauldambra]  | <span class="lemon-tag gh-tag">feature/actions</span> |
+| Calculated Events (previously called Actions) | [@pauldambra][@pauldambra]  | <span class="lemon-tag gh-tag">feature/actions</span> |
 | Cohorts | [@EDsCODE][@EDsCODE]  |  <span class="lemon-tag gh-tag">feature/cohorts</span>  |
 | Correlation Analysis | [@neilkakkar][@neilkakkar]  |  <span class="lemon-tag gh-tag">feature/correlation-analysis</span> |
 | Dashboards | [@Twixes][@Twixes]  |  <span class="lemon-tag gh-tag">feature/dashboards</span> |
