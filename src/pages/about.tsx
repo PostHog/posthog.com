@@ -6,6 +6,7 @@ import { AboutAnchorScrollNavbar } from 'components/About/AboutAnchorScrollNavba
 import { AboutStory } from 'components/About/AboutStory'
 import { AboutTransparency } from 'components/About/AboutTransparency'
 import { AboutTeam } from 'components/About/AboutTeam'
+import { AboutInvestors } from 'components/About/AboutInvestors'
 
 const AboutPage = () => {
     return (
@@ -21,6 +22,7 @@ const AboutPage = () => {
             <AboutStory />
             <AboutTransparency />
             <AboutTeam />
+            <AboutInvestors />
         </Layout>
     )
 }

@@ -2,6 +2,7 @@
 
 import { AboutAnchorScrollNavbar } from './components/About/AboutAnchorScrollNavbar'
 import { AboutHero } from './components/About/AboutHero'
+import { AboutInvestors } from './components/About/AboutInvestors'
 import { AboutStory } from './components/About/AboutStory'
 import { AboutTeam } from './components/About/AboutTeam'
 import { AboutTransparency } from './components/About/AboutTransparency'
@@ -126,6 +127,7 @@ import { ZoomImage } from './components/ZoomImage'
 export const shortcodes = {
     AboutAnchorScrollNavbar,
     AboutHero,
+    AboutInvestors,
     AboutStory,
     AboutTeam,
     AboutTransparency,
