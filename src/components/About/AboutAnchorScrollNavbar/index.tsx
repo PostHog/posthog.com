@@ -3,6 +3,7 @@ import scrollTo from 'gatsby-plugin-smoothscroll'
 import { mergeClassList } from '../../../lib/utils'
 import downIcon from '../../../images/icons/down-caret.svg'
 import Chip from 'components/Chip'
+import NotProductIcons from 'components/NotProductIcons'
 
 const ButtonLink = ({
     section,
@@ -55,7 +56,7 @@ interface AboutAnchorScrollNavbarProps {
 
 export const AboutAnchorScrollNavbar = ({ className = '' }: AboutAnchorScrollNavbarProps) => {
     const baseClasses =
-        'space-x-2 w-full mx-auto justify-center p-3 sticky top-[-1px] bg-tan/80 backdrop-blur border-t border-b border-dashed border-gray-accent-light z-30 hidden md:inline-flex'
+        'space-x-2 w-full mx-auto justify-center p-2 sticky top-[-1px] bg-tan/80 backdrop-blur border-t border-b border-dashed border-gray-accent-light z-30 hidden md:inline-flex'
     const classList = mergeClassList(baseClasses, className)
 
     const [currentSection, setCurrentSection] = useState('why-were-here')
@@ -105,7 +106,23 @@ export const AboutAnchorScrollNavbar = ({ className = '' }: AboutAnchorScrollNav
 
     return (
         <>
-            <div className={classList}>{navbarLinks}</div>
+            <div className={`${classList} mb-12`}>
+                <div className="divide-x divide-gray-accent-light divide-dashed flex">
+                    <div className="flex items-center space-x-2 px-4 py-2 font-bold hover:bg-gray-accent-light rounded mx-[1px]">
+                        <span className="w-5 h-5">{NotProductIcons.story}</span>
+                        <span>Our story</span>
+                    </div>
+                    <div className="flex items-center space-x-2 px-4 py-2 font-semibold hover:bg-gray-accent-light rounded mx-[1px] opacity-50">
+                        <span className="w-5 h-5">{NotProductIcons.transparency}</span>
+                        <span>Why we're different</span>
+                    </div>
+                    <div className="flex items-center space-x-2 px-4 py-2 font-semibold hover:bg-gray-accent-light rounded mx-[1px] opacity-50">
+                        <span className="w-5 h-5">{NotProductIcons.coreTeam}</span>
+                        <span>Core team</span>
+                    </div>
+                </div>
+                {navbarLinks}
+            </div>
 
             <div className="w-11/12 mb-8 sticky top-3 z-10 mx-auto block max-w-3xl md:hidden border border-1 border-tan/25 rounded">
                 <select

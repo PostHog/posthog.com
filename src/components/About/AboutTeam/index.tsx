@@ -20,7 +20,7 @@ const Dot = ({ classes }: DotProps) => {
 export const AboutTeam = () => {
     return (
         <section id="team" className="py-12 px-4">
-            <h3 className="text-5xl mb-1 text-center">
+            <h3 className="text-5xl mb-4 lg:mb-1 text-center">
                 We're a team of <span className="text-blue">30</span> from all over the world.
             </h3>
             <h4 className="font-semibold opacity-70 text-center">
@@ -33,7 +33,7 @@ export const AboutTeam = () => {
                 </CallToAction>
             </div>
 
-            <div className="relative">
+            <div className="relative scale-[150%] pt-20 pb-16 lg:py-0 lg:scale-100">
                 <Dot classes="top-[27%] left-[44%]" />
                 <Map className="w-[795px] h-[485px]" />
             </div>
