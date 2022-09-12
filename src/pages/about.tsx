@@ -7,6 +7,7 @@ import { AboutStory } from 'components/About/AboutStory'
 import { AboutTransparency } from 'components/About/AboutTransparency'
 import { AboutTeam } from 'components/About/AboutTeam'
 import { AboutInvestors } from 'components/About/AboutInvestors'
+import { AboutBlog } from 'components/About/AboutBlog'
 
 const AboutPage = () => {
     return (
@@ -23,6 +24,7 @@ const AboutPage = () => {
             <AboutTransparency />
             <AboutTeam />
             <AboutInvestors />
+            <AboutBlog />
         </Layout>
     )
 }

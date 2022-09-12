@@ -40,12 +40,12 @@ const inPageLinks = [
         section: 'transparency',
     },
     {
-        label: 'Interview process',
-        section: 'interview-process',
+        label: 'Team',
+        section: 'team',
     },
     {
-        label: 'Benefits',
-        section: 'benefits',
+        label: 'Investors',
+        section: 'investors',
     },
 ]
 

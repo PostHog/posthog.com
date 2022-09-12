@@ -1,6 +1,7 @@
 // AUTO GENERATED FILE
 
 import { AboutAnchorScrollNavbar } from './components/About/AboutAnchorScrollNavbar'
+import { AboutBlog } from './components/About/AboutBlog'
 import { AboutHero } from './components/About/AboutHero'
 import { AboutInvestors } from './components/About/AboutInvestors'
 import { AboutStory } from './components/About/AboutStory'
@@ -126,6 +127,7 @@ import { ZoomImage } from './components/ZoomImage'
 
 export const shortcodes = {
     AboutAnchorScrollNavbar,
+    AboutBlog,
     AboutHero,
     AboutInvestors,
     AboutStory,

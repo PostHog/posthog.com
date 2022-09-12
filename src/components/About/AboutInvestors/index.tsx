@@ -1,5 +1,4 @@
 import React from 'react'
-import { StaticImage } from 'gatsby-plugin-image'
 import NotProductIcons from 'components/NotProductIcons'
 
 interface InvestorProps {
@@ -55,7 +54,7 @@ const Investor = ({ SvgLogo, logo, width, height, photo, large, name, role }: In
 
 export const AboutInvestors = () => {
     return (
-        <section id="investors" className="-mt-16">
+        <section id="investors" className="-mt-16 mb-12">
             <h3 className="text-5xl mb-1 text-center">Investors</h3>
             <h4 className="font-semibold opacity-70 text-center mb-12">
                 Thanks a million! ($26 million, to be exact...)
@@ -90,7 +89,7 @@ export const AboutInvestors = () => {
                 <Investor name="Solomon Hykes" role="Docker Founder" photo="/images/investors/solomon-hykes.jpg" />
                 <Investor name="Rujul Zaparde" role="Flightcar Founder" photo="/images/investors/rujul-zaparde.jpg" />
 
-                <div className="py-4 px-4 flex flex-col justify-center">
+                <div className="py-4 px-4 flex flex-col justify-center border-t border-l border-dashed border-gray-accent-light">
                     <figure className="mb-2 mx-auto p-[2px] rounded-full bg-gray-accent-light border border-solid border-gray w-[50px] h-[50px] flex justify-center items-center">
                         <span className="inline-block w-8 h-8">{NotProductIcons.investors}</span>
                     </figure>
