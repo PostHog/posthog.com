@@ -1,5 +1,6 @@
 {
     "insights": {
+        "name": "Insights",
         "availability": {
             "free": true,
             "selfServe": true,
@@ -7,15 +8,36 @@
         }
     },
     "dashboards": {
+        "name": "Dashboards",
         "features": {
+            "multiple-dashboards": {
+                "name": "Multiple dashboards",
+                "free": true,
+                "selfServe": true,
+                "enterprise": true
+            },
+            "public-dashboards": {
+                "name": "Public shared dashboards",
+                "free": true,
+                "selfServe": true,
+                "enterprise": true
+            },
             "tagging": {
+                "name": "Tagging",
                 "free": false,
                 "selfServe": true,
+                "enterprise": true
+            },
+            "granular-permissions": {
+                "name": "Granular permissions",
+                "free": false,
+                "selfServe": false,
                 "enterprise": true
             }
         }
     },
     "trends": {
+        "name": "Trends",
         "availability": {
             "free": true,
             "selfServe": true,
@@ -23,8 +45,16 @@
         }
     },
     "funnels": {
+        "name": "Funnels",
         "features": {
+            "view-cohort": {
+                "name": "View cohorts",
+                "free": true,
+                "selfServe": true,
+                "enterprise": true
+            },
             "correlation-analysis": {
+                "name": "Correlation analysis",
                 "free": false,
                 "selfServe": true,
                 "enterprise": true
@@ -32,6 +62,7 @@
         }
     },
     "retention": {
+        "name": "Retention",
         "availability": {
             "free": true,
             "selfServe": true,
@@ -39,28 +70,34 @@
         }
     },
     "paths": {
+        "name": "Path analysis",
         "features": {
             "view-cohort": {
+                "name": "View cohorts",
                 "free": false,
                 "selfServe": true,
                 "enterprise": true
             },
             "end-point": {
+                "name": "View cohorts",
                 "free": false,
                 "selfServe": true,
                 "enterprise": true
             },
             "max-paths": {
+                "name": "Max paths",
                 "free": false,
                 "selfServe": true,
                 "enterprise": true
             },
             "path-cleaning": {
+                "name": "Path cleaning rules",
                 "free": false,
                 "selfServe": true,
                 "enterprise": true
             },
             "view-funnel": {
+                "name": "View in funnel",
                 "free": false,
                 "selfServe": true,
                 "enterprise": true
@@ -68,6 +105,7 @@
         }
     },
     "stickiness": {
+        "name": "Stickiness",
         "availability": {
             "free": true,
             "selfServe": true,
@@ -75,6 +113,7 @@
         }
     },
     "lifecycle": {
+        "name": "Lifecycle",
         "availability": {
             "free": true,
             "selfServe": true,
@@ -82,6 +121,7 @@
         }
     },
     "group-analytics": {
+        "name": "Group analytics",
         "availability": {
             "free": false,
             "selfServe": true,
@@ -89,6 +129,7 @@
         }
     },
     "recordings": {
+        "name": "Session recording",
         "availability": {
             "free": true,
             "selfServe": true,
@@ -96,8 +137,10 @@
         }
     },
     "feature-flags": {
+        "name": "Session recording",
         "features": {
             "multivariate-feature-flags": {
+                "name": "Multivariate feature flags",
                 "free": false,
                 "selfServe": true,
                 "enterprise": true
@@ -105,6 +148,7 @@
         }
     },
     "experimentation": {
+        "name": "Experiments",
         "availability": {
             "free": false,
             "selfServe": true,
@@ -112,6 +156,7 @@
         }
     },
     "calculated-events": {
+        "name": "Calculated events",
         "availability": {
             "free": true,
             "selfServe": true,
@@ -119,6 +164,7 @@
         }
     },
     "annotations": {
+        "name": "Annotations",
         "availability": {
             "free": true,
             "selfServe": true,
@@ -126,6 +172,7 @@
         }
     },
     "cohorts": {
+        "name": "Cohorts",
         "availability": {
             "free": true,
             "selfServe": true,
@@ -133,6 +180,7 @@
         }
     },
     "data-management": {
+        "name": "Data management",
         "availability": {
             "free": true,
             "selfServe": true,
@@ -140,6 +188,7 @@
         }
     },
     "events": {
+        "name": "Events",
         "availability": {
             "free": true,
             "selfServe": true,
@@ -147,6 +196,7 @@
         }
     },
     "persons": {
+        "name": "Persons",
         "availability": {
             "free": true,
             "selfServe": true,
@@ -154,6 +204,7 @@
         }
     },
     "sessions": {
+        "name": "Sessions",
         "availability": {
             "free": true,
             "selfServe": true,
@@ -161,6 +212,7 @@
         }
     },
     "utm-segmentation": {
+        "name": "UTM Segmentation",
         "availability": {
             "free": true,
             "selfServe": true,
@@ -168,23 +220,28 @@
         }
     },
     "organizations-and-projects": {
+        "name": "Organizations and Projects",
         "features": {
             "multiple-organizations": {
+                "name": "Multiple organizations",
                 "free": false,
                 "selfServe": true,
                 "enterprise": true
             },
             "multiple-projects": {
+                "name": "Multiple projects",
                 "free": false,
                 "selfServe": true,
                 "enterprise": true
             },
             "permissions": {
+                "name": "Permissions",
                 "free": false,
                 "selfServe": true,
                 "enterprise": true
             },
             "private-projects": {
+                "name": "Private projects",
                 "free": false,
                 "selfServe": false,
                 "enterprise": true
@@ -192,6 +249,7 @@
         }
     },
     "application-settings": {
+        "name": "Settings",
         "availability": {
             "free": true,
             "selfServe": true,
@@ -199,28 +257,34 @@
         }
     },
     "sso": {
+        "name": "SSO/SAML",
         "features": {
             "sso-enforcement": {
+                "name": "SSO enforcement",
                 "free": false,
                 "selfServe": false,
                 "enterprise": true
             },
             "github-sso": {
+                "name": "GitHub SSO",
                 "free": true,
                 "selfServe": true,
                 "enterprise": true
             },
             "gitlab-sso": {
+                "name": "GitLab SSO",
                 "free": true,
                 "selfServe": true,
                 "enterprise": true
             },
             "google-sso": {
+                "name": "Google SSO",
                 "free": true,
                 "selfServe": true,
                 "enterprise": true
             },
             "saml": {
+                "name": "SAML",
                 "free": false,
                 "selfServe": false,
                 "enterprise": true
@@ -228,6 +292,7 @@
         }
     },
     "toolbar": {
+        "name": "Toolbar",
         "availability": {
             "free": true,
             "selfServe": true,
@@ -235,6 +300,7 @@
         }
     },
     "subscriptions": {
+        "name": "Subscriptions",
         "availability": {
             "free": false,
             "selfServe": true,

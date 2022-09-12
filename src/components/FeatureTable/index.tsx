@@ -1,7 +1,7 @@
 import React from 'react'
 import features from '../../features.json'
 
-const FeatureTable = () => {
+export const FeatureTable = () => {
     const renderFeature = (availability: true | false | 'some' | string) => {
         switch (availability) {
             case true:
@@ -32,14 +32,14 @@ const FeatureTable = () => {
                 ? value.availability
                 : {
                       free: determineAvailability('free', value.features),
-                      selfServe: determineAvailability('free', value.features),
+                      selfServe: determineAvailability('selfServe', value.features),
                       enterprise: determineAvailability('enterprise', value.features),
                   }
 
         return (
-            <section key={feature} className="p-8">
-                <h2>{feature}</h2>
-                <table className="table-fixed border">
+            <section key={feature}>
+                <h2>{value.name}</h2>
+                <table className="table-fixed">
                     <tr>
                         <th className="py-4"></th>
                         <th>Free / Open source</th>
@@ -57,20 +57,21 @@ const FeatureTable = () => {
                 {'features' in value ? (
                     <>
                         <h5>Features</h5>
-                        <table className="table-fixed border">
-                            <tr className="border-b">
+                        <table className="table-fixed">
+                            <tr>
                                 <th className="py-4"></th>
                                 <th>Free / Open source</th>
                                 <th>Self-serve</th>
                                 <th>Enterprise</th>
                             </tr>
-                            {Object.entries(value.features).map(([feature, availability]) => {
+
+                            {Object.values(value.features).map(({ name, free, selfServe, enterprise }) => {
                                 return (
                                     <tr key={feature} className="text-center">
-                                        <td className="py-2">{feature}</td>
-                                        <td>{renderFeature(availability.free)}</td>
-                                        <td>{renderFeature(availability.selfServe)}</td>
-                                        <td>{renderFeature(availability.enterprise)}</td>
+                                        <td className="py-2">{name}</td>
+                                        <td>{renderFeature(free)}</td>
+                                        <td>{renderFeature(selfServe)}</td>
+                                        <td>{renderFeature(enterprise)}</td>
                                     </tr>
                                 )
                             })}
