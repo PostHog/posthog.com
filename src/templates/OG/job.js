@@ -173,7 +173,7 @@ module.exports = job = ({ role, timezone, font }) => {
                     }
                 </div>
             </div>
-           <img style="max-width: 490px; position: absolute; right: 30px; bottom: 13px;" src="data:image/jpeg;charset=utf-8;base64,${detectiveHog}" />
+           <img style="max-width: 499px; position: absolute; right: 30px; bottom: 13px;" src="data:image/jpeg;charset=utf-8;base64,${detectiveHog}" />
         </section>
     </body>
 </html>`
