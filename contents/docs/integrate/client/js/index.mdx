@@ -279,7 +279,7 @@ posthog.isFeatureEnabled('keyword', { send_event: false })
 
 #### Bootstrapping Flags
 
-There is a delay between the library being loaded and feature flags becoming available to use. For some cases, like redirecting users to a different page based on a feature flag, this is extremely detrimental, as the flags load after the redirect logic occurs, thus never working.
+There is a delay between loading the library and feature flags becoming available to use. For some cases, like redirecting users to a different page based on a feature flag, this is extremely detrimental, as the flags load after the redirect logic occurs, thus never working.
 
 In cases like these, where you want flags to be immediately available on page load, you can use the bootstrap library option.
 
