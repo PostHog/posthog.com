@@ -115,6 +115,15 @@ Every new joiner at PostHog has an onboarding buddy. If possible, a new joiner w
 - Please make sure you spend at least 3 days together, working through the [first week onboarding list](/handbook/people/onboarding#during-their-first-week) and spending time working on any role-specific tasks that are outlined in the new joiner's personal onboarding issue. 
 - You will remain the new joiner's main point of contact for the first few weeks, so please continue to check in with them at least once a week for the first month or so. 
 
+## In-person Onboarding 
+
+Occasionally, a new joiner will meet with members of their team in-person to go through the onboarding process. Upon acceptance of an offer, your Team Lead will notify the People & Operations team who will help you coordinate travel if necessary.
+
+In these cases, the process is:
+  - Preemptively create the new team member a Google account
+  - Issue them a Brex card to their work email with a sufficiently high temporary balance to cover travel costs
+  - Have the new team member book travel as usual
+
 ### Additional access
 
 Add these if appropriate for the role:
