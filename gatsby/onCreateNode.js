@@ -7,6 +7,7 @@ require('dotenv').config({
 })
 const GitUrlParse = require('git-url-parse')
 const slugify = require('slugify')
+const { JSDOM } = require('jsdom')
 
 module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, cache, createNodeId }) => {
     const { createNodeField, createNode } = actions
@@ -25,12 +26,17 @@ module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, 
         // Create GitHub contributor nodes for handbook & docs
         if (/^\/handbook|^\/docs|^\/manual/.test(slug) && process.env.GITHUB_API_KEY) {
             const url = `https://api.github.com/repos/posthog/posthog.com/commits?path=/contents/${parent.relativePath}`
-            let contributors = await fetch(url, {
+            const res = await fetch(url, {
                 headers: {
                     Authorization: `token ${process.env.GITHUB_API_KEY}`,
                 },
-            }).then((res) => res.json())
+            })
 
+            if (res.status !== 200) {
+                console.error(`Got status code ${res.status}`)
+            }
+
+            let contributors = await res.json()
             contributors = contributors.filter(
                 (contributor) => contributor && contributor.author && contributor.author.login
             )
@@ -158,6 +164,59 @@ module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, 
 
         if (image) {
             node.logo___NODE = image && image.id
+        }
+    }
+
+    if (node.internal.type === 'AshbyJobPosting') {
+        const title = node.title.replace(' (Remote)', '')
+        const slug = `/careers/${slugify(title, { lower: true })}`
+        createNodeField({
+            node,
+            name: `title`,
+            value: title,
+        })
+        createNodeField({
+            node,
+            name: `slug`,
+            value: slug,
+        })
+        if (node.info.descriptionHtml) {
+            let html = node.info.descriptionHtml
+            const tableOfContents = []
+            if (html.includes('<h2>')) {
+                const dom = JSDOM.fragment(
+                    `<section><details open><summary><h2>${html
+                        .split('<h2>')
+                        .slice(1)
+                        .join('</details><details open><summary><h2>')
+                        .split('</h2>')
+                        .join('</h2></summary>')}</summary></details></section>`
+                )
+                const details = dom.querySelectorAll('details')
+                for (let i = 0; i < details.length; i++) {
+                    const node = details[i]
+                    const heading = node.querySelector('h2')
+                    if (heading.textContent.toLowerCase() === 'benefits') {
+                        node.remove()
+                    } else {
+                        const textContent = heading.textContent
+                        const id = slugify(textContent, { lower: true })
+                        tableOfContents.push({ value: textContent, url: id, depth: 0 })
+                        heading.id = id
+                    }
+                }
+                html = dom.firstChild.outerHTML
+            }
+            createNodeField({
+                node,
+                name: `tableOfContents`,
+                value: tableOfContents,
+            })
+            createNodeField({
+                node,
+                name: `html`,
+                value: html,
+            })
         }
     }
 }

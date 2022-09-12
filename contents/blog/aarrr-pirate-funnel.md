@@ -238,4 +238,3 @@ Here's some recommended further reading around product growth and user engagemen
 
 - **[How to work out what your users really need](/blog/how-to-work-out-what-users-need):** How to use 1:1 customer interviews, surveys, metrics and session recordings to work out what your users really need.
 
-<NewsletterForm compact />

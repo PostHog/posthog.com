@@ -38,7 +38,3 @@ We’ve currently secured our brand name ('PostHog') and word mark in the four t
 The phrase 'open source' might denote a public codebase, but a brand name can definitely be trademarked. For example, we want people to [deploy our open source edition](https://github.com/PostHog/posthog) wherever they please, but we don't want them to slap the 'PostHog' name on random products. Besides, if you’re [raising money](https://posthog.com/blog/open-source-business-models) for your startup in the future, IP is a box that investors will want you to check as part of their diligence. 
 
 _Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
-
-<NewsletterForm
-compact
-/>

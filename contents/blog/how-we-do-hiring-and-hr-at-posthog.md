@@ -118,6 +118,3 @@ Write more inclusive job descriptions, hire for traits over skills, pay people w
 
 _Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
 
-<NewsletterForm
-compact
-/>

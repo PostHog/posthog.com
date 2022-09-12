@@ -311,4 +311,3 @@ Superset is ideal for enterprises with experienced in-house data teams. It can h
 
 Apache Superset is distributed under a Apache-2.0 license. There are no paid features or tiers.
 
-<NewsletterForm compact />

@@ -80,7 +80,3 @@ Finally, I’d like to share some mistakes we’ve made in our iterative journey
 
 _Enjoyed this? Subscribe to our [newsletter](https://posthog.com/newsletter) to hear more from us twice a month!_
 
-<NewsletterForm
-compact
-/>
-

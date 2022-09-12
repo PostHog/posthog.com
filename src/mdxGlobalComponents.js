@@ -7,6 +7,7 @@ import { AnimatedBurger } from './components/AnimatedBurger'
 import { Apps } from './components/Apps'
 import { AppsList } from './components/AppsList'
 import { ArrayCTA } from './components/ArrayCTA'
+import { AshbyOpenRoles } from './components/AshbyOpenRoles'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BlockQuote } from './components/BlockQuote'
 import { Blog } from './components/Blog'
@@ -64,6 +65,7 @@ import { NewsletterForm } from './components/NewsletterForm'
 import { NewsletterTutorial } from './components/NewsletterTutorial'
 import { NextSteps } from './components/NextSteps'
 import { NotFoundPage } from './components/NotFoundPage'
+import { NotProductIcons } from './components/NotProductIcons'
 import { OverflowXSection } from './components/OverflowXSection'
 import { Popover } from './components/Popover'
 import { PostCard } from './components/PostCard'
@@ -114,8 +116,6 @@ import { TotalTeam } from './components/TotalTeam'
 import { Tutorials } from './components/Tutorials'
 import { TutorialsSlider } from './components/TutorialsSlider'
 import { VisitLibrary } from './components/VisitLibrary'
-import { WorkableOpenRoles } from './components/WorkableOpenRoles'
-import { WorkableSnippet } from './components/WorkableSnippet'
 import { ZoomImage } from './components/ZoomImage'
 
 export const shortcodes = {
@@ -126,6 +126,7 @@ export const shortcodes = {
     Apps,
     AppsList,
     ArrayCTA,
+    AshbyOpenRoles,
     BasicHedgehogImage,
     BlockQuote,
     Blog,
@@ -183,6 +184,7 @@ export const shortcodes = {
     NewsletterTutorial,
     NextSteps,
     NotFoundPage,
+    NotProductIcons,
     OverflowXSection,
     Popover,
     PostCard,
@@ -233,7 +235,5 @@ export const shortcodes = {
     Tutorials,
     TutorialsSlider,
     VisitLibrary,
-    WorkableOpenRoles,
-    WorkableSnippet,
     ZoomImage,
 }
