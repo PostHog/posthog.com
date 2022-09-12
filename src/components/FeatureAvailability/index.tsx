@@ -1,114 +1,24 @@
 import React from 'react'
 import InfoIcon from '../InfoIcon/Index'
 import CheckIcon from '../../images/check.svg'
-import MinusIcon from '../../images/x.svg'
+import XIcon from '../../images/x.svg'
 import WarningIcon from '../../images/warning.svg'
 import Link from '../Link'
 
-type AvailablePlans = 'free' | 'standard' | 'enterpriseCloud' | 'startup' | 'openSource' | 'scale' | 'enterprise'
-
-interface PlanInterface {
-    key: AvailablePlans
-    name: string
+type FeatureAvailabilityProps = {
+    availability: unknown
 }
 
-const PLANS: Record<'cloud' | 'selfHosted', PlanInterface[]> = {
-    cloud: [
-        {
-            key: 'free',
-            name: 'Free',
-        },
-        {
-            key: 'startup',
-            name: 'Startup',
-        },
-        {
-            key: 'standard',
-            name: 'Self-Serve',
-        },
-        {
-            key: 'enterpriseCloud',
-            name: 'Enterprise',
-        },
-    ],
-    selfHosted: [
-        {
-            key: 'openSource',
-            name: 'Open-source',
-        },
-        {
-            key: 'scale',
-            name: 'Self-Serve',
-        },
-        {
-            key: 'enterprise',
-            name: 'Enterprise',
-        },
-    ],
-}
-
-interface FeatureAvailabilityProps {
-    allPlans?: boolean
-    availablePlans?: AvailablePlans[]
-    /* Restricted plan means there are some limitations to the specific functionality available for that feature.
-        Example: Paths is available for everyone, but advanced display features or end point selection is not available on free tiers.
-        TODO: Support clarifying restricions.
-    */
-    restrictedPlans?: AvailablePlans[]
-}
-
-function Plan({
-    available,
-    name,
-    restricted,
-}: {
-    available?: boolean
-    name: string
-    restricted?: boolean
-}): JSX.Element {
-    return (
-        <li
-            className={
-                restricted
-                    ? 'restricted flex items-center !text-sm space-y-2'
-                    : available
-                    ? 'flex items-center !text-sm space-y-2'
-                    : 'unavailable flex items-center !text-sm space-y-2'
-            }
-        >
-            {restricted ? (
-                <>
-                    <img src={WarningIcon} alt="Restriction apply" className="h-4 w-4 mr-2" aria-hidden="true" />
-                </>
-            ) : available ? (
-                <>
-                    <img src={CheckIcon} alt="Available" className="h-4 w-4 mr-2" aria-hidden="true" />
-                </>
-            ) : (
-                <>
-                    <img src={MinusIcon} alt="Not available" className="h-4 w-4 mr-2" aria-hidden="true" />
-                </>
-            )}
-            {name}
-            {restricted}
-        </li>
-    )
-}
-
-export function FeatureAvailability({
-    allPlans,
-    availablePlans,
-    restrictedPlans,
-}: FeatureAvailabilityProps): JSX.Element {
+export function FeatureAvailability(): JSX.Element {
     return (
         <div className="border-t border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark pt-4 pb-1 space-y-2 -mt-2 mb-5">
             <h6 className="text-primary/50 dark:text-primary-dark/50 !mt-0 mb-2 pb-1 font-semibold text-base">
                 Where is this feature available?
             </h6>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-3 gap-x-4">
                 <div>
                     <h5 className="flex items-center space-x-1 text-base !mt-0 mb-2">
-                        <span>Self-hosted plans</span>
+                        <span>Free / Open-source plan</span>
                         <Link
                             href="/pricing?realm=self-hosted"
                             className="!pb-0 group hover:!bg-none active:!bg-none focus:!bg-none"
@@ -116,20 +26,10 @@ export function FeatureAvailability({
                             <InfoIcon className="w-4 h-4 opacity-75 group-hover:opacity-100 relative transform transition-all group-hover:scale-[1.2] active:top-[1px] active:scale-[1.1]" />
                         </Link>
                     </h5>
-                    <ul className="p-0 mb-0">
-                        {PLANS.selfHosted.map((plan) => (
-                            <Plan
-                                key={plan.key}
-                                available={allPlans || availablePlans?.includes(plan.key)}
-                                name={plan.name}
-                                restricted={restrictedPlans?.includes(plan.key)}
-                            />
-                        ))}
-                    </ul>
                 </div>
-                <div className="col-span-2">
+                <div className="">
                     <h5 className="flex items-center space-x-1 text-base !mt-0 mb-2">
-                        <span>Cloud plans</span>
+                        <span>Self-serve</span>
                         <Link
                             href="/pricing?realm=cloud"
                             className="!pb-0 group hover:!bg-none active:!bg-none focus:!bg-none"
@@ -137,16 +37,30 @@ export function FeatureAvailability({
                             <InfoIcon className="w-4 h-4 opacity-75 group-hover:opacity-100 relative transform transition-all group-hover:scale-[1.2] active:top-[1px] active:scale-[1.1]" />
                         </Link>
                     </h5>
-                    <ul className="pl-0 mb-0 grid sm:grid-cols-2">
-                        {PLANS.cloud.map((plan) => (
-                            <Plan
-                                key={plan.key}
-                                available={allPlans || availablePlans?.includes(plan.key)}
-                                name={plan.name}
-                                restricted={restrictedPlans?.includes(plan.key)}
-                            />
-                        ))}
-                    </ul>
+                </div>
+
+                <div className="">
+                    <h5 className="flex items-center space-x-1 text-base !mt-0 mb-2">
+                        <span>Enterprise</span>
+                        <Link
+                            href="/pricing?realm=cloud"
+                            className="!pb-0 group hover:!bg-none active:!bg-none focus:!bg-none"
+                        >
+                            <InfoIcon className="w-4 h-4 opacity-75 group-hover:opacity-100 relative transform transition-all group-hover:scale-[1.2] active:top-[1px] active:scale-[1.1]" />
+                        </Link>
+                    </h5>
+                </div>
+
+                <div>
+                    <img src={CheckIcon} alt="Available" className="h-4 w-4 mr-2" aria-hidden="true" />
+                </div>
+
+                <div>
+                    <img src={WarningIcon} alt="Available" className="h-4 w-4 mr-2" aria-hidden="true" />
+                </div>
+
+                <div>
+                    <img src={XIcon} alt="Not available" className="h-4 w-4 mr-2" aria-hidden="true" />
                 </div>
             </div>
         </div>
