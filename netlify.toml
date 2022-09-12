@@ -2209,7 +2209,6 @@
     from = "/docs/data-model"
     to = "/docs/how-posthog-works/data-model"
 
-
 # Added: 2022-08-25
 [[redirects]]
     from = "/docs/self-host/architecture"
@@ -2235,7 +2234,7 @@
     from = "/product/experimentation"
     to = "/product/experimentation-suite"
 
-# Added: 2022-09-08
+    # Added: 2022-09-12
 [[redirects]]
-    from = "/handbook/people/team-structure/app-east"
-    to = "/handbook/people/team-structure/app-east/objectives"
+    from = "/handbook/people/team-structure/app-east/objectives"
+    to = "/handbook/people/team-structure/app-east"
