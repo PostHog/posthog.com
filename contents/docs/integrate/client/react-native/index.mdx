@@ -243,10 +243,8 @@ Alternatively you can call load the feature flags directly:
 ```js
 // Defaults to undefined if not loaded yet or if there was a problem loading
 posthog.getFeatureFlag("my-flag")
-// Provide an optional default if the flags are not loaded
-posthog.getFeatureFlag("my-flag", false) 
 // Multi variant feature flags are returned as a string
-posthog.getFeatureFlag("my-multivariant-flag", "control") 
+posthog.getFeatureFlag("my-multivariant-flag") 
 
 ```
 
@@ -254,6 +252,51 @@ PostHog will load feature flags when instantiated and will refresh whenever othe
 ```js
 posthog.reloadFeatureFlagsAsync()
   .then(refreshedFlags => console.log(refreshedFlags))
+```
+
+
+
+#### Bootstrapping Flags
+
+There is a delay between the library being loaded and feature flags becoming available to use. For some cases, like redirecting users to a different page based on a feature flag, this is extremely detrimental, as the flags load after the redirect logic occurs, thus never working.
+
+In cases like these, where you want flags to be immediately available on page load, you can use the bootstrap library option.
+
+This allows you to pass in a distinctID and feature flags during library initialisation, like so:
+
+
+```js
+const posthog = new PostHog('<ph_project_api_key>', {
+    host: 'https://app.posthog.com',
+    bootstrap: {
+        distinctID: 'your-anonymous-id',
+        featureFlags: {
+            'flag-1': true,
+            'variant-flag': 'control',
+            'other-flag': false
+        }
+    }
+})
+```
+
+To compute these flag values, use the corresponding `getAllFlags` method in your server-side library. Note that bootstrapping flags requires server-side initialisation.
+
+If the ID you're passing in is an identified ID (that is, an ID with which you've called `posthog.identify()` elsewhere), you can also pass in the `isIdentifiedID` bootstrap option, which ensures that this ID is treated as an identified ID in the library. This is helpful as it warns you when you try to do something wrong with this ID, like calling `identify` again.
+
+
+```js
+const posthog = new PostHog('<ph_project_api_key>', {
+    host: 'https://app.posthog.com',
+    bootstrap: {
+        distinctID: 'your-identified-id',
+        isIdentifiedID: true,
+        featureFlags: {
+            'flag-1': true,
+            'variant-flag': 'control',
+            'other-flag': false
+        }
+    }
+})
 ```
 
 
