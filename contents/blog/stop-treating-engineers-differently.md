@@ -19,13 +19,13 @@ Non-engineers have built up years of pre-baked assumptions about how engineers w
 
 > Charles is the VP Ops & Marketing at PostHog. As a tedious non-engineering executive type (boo), he has hired and managed several teams across multiple startups, both technical and non-technical. In previous lives he has had titles with words like ‘Director of Product’, ‘CTO’, and ‘Head of Special Projects’, whatever that means. Outside of PostHog, he is currently spending a disproportionate amount of time perfecting his homemade tiramisu recipe - it’s getting there. 
 
-## Engineers are worse communicators than non-engineers
+## Myth #1: Engineers are worse communicators than non-engineers
 
 This is my most-heard and least favorite. I’ve worked with loads of non-engineers who were awful communicators, and plenty of engineers who were stellar communicators. If you’re not able to articulate why you are doing what you are doing in _any_ role at a startup to people outside your direct team, I’ve found it’s reasonable to assume that you aren’t actually that good at your job. 
 
 **Why this matters:** When it comes to hiring especially, I think recruiters can give engineers a free pass on communication skills because their ‘on paper’ technical skills look impressive. Your team will not thank you for this later on. The best engineers I’ve worked with were _also_ able to articulate to a non-engineer why what they are working on matters - and vice versa. 
 
-## Engineers are motivated by different goals 
+## Myth #2: Engineers are motivated by different goals 
 
 Having conducted about ~800 job interviews, it turns out people by and large tend to say the same 3 things:
 
@@ -37,7 +37,7 @@ This whole simplistic ‘commercial people only want money and titles, engineers
 
 **Why this matters:** It causes startups to underinvest in their engineers’ development (this is more prevalent in those that see engineering as a [cost vs. profit center](https://newsletter.pragmaticengineer.com/p/profit-centers-cost-centers)). There’s a reason even ~~FAANG~~ MAMAA companies struggle with engineer retention, and it’s not just about $$$. 
 
-## Engineers hate meetings
+## Myth #3: Engineers hate meetings
 
 This should be reframed as ‘everyone thinks they hate meetings because 90% of the ones they attend are a waste of time’. Do you really think the junior sales rep sitting on a Zoom call with 30 other people giving status updates is excited to be there?
 
@@ -45,7 +45,7 @@ Meetings are a really important tool, [especially for managers](https://www.good
 
 **Why this matters:** It lets startups get away with packing their weeks with ineffective meetings for non-engineers. At PostHog at least, being mildly zealous about meeting-free Tuesdays and Thursdays means a) minimal low value meetings, and b) better communication because you’re forced to write stuff down properly. 
 
-## Engineers are allergic to process
+## Myth #4: Engineers are allergic to process
 
 Ah yes, non-engineers love writing policies and documentation, while engineers just want to YOLO merge in peace. Please. 
 
