@@ -71,7 +71,7 @@ In order to get coverage in multiple timezones, we usually clone a job post acro
 
 Workable will automatically add the role on our [careers page](https://posthog.com/careers). It will also 'helpfully' publish it on a bunch of other free but irrelevant job boards - you should manually remove all of those except for Workable and LinkedIn. [AngelList](https://angel.co/company/posthoghq/jobs) will also automatically pull all our new roles through. 
 
-As a Y Combinator company, we can post jobs periodically on the HackerNews front page at [https://news.ycombinator.com/submitjob](https://news.ycombinator.com/submitjob).
+As a Y Combinator company, we can post [jobs ads on the HackerNews front page](https://news.ycombinator.com/jobguide.html) for free at [https://news.ycombinator.com/submitjob](https://news.ycombinator.com/submitjob). This requires a founder's HackerNews account to do so. 
 
 We also add all roles to YC's [Work at a Startup](https://www.workatastartup.com/jobs). For certain roles, we also publish on other job boards:
 
