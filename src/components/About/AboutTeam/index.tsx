@@ -2,6 +2,7 @@ import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 import { CallToAction } from 'components/CallToAction'
 import { Map } from './Map'
+import { Avatar } from './Avatar'
 
 interface DotProps {
     classes: string
@@ -34,6 +35,7 @@ export const AboutTeam = () => {
             </div>
 
             <div className="relative scale-[150%] pt-20 pb-16 lg:py-0 lg:scale-100">
+                <Avatar />
                 <Dot classes="top-[27%] left-[44%]" />
                 <Map className="w-[795px] h-[485px]" />
             </div>
