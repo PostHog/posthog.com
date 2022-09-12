@@ -11,13 +11,13 @@ featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 ---
 
-[YCombinator](https://www.ycombinator.com/) (YC) is seen as the world's best, and most prolific, three-month accelerator program. Upwards of 7,000 founders have taken part. Yet, no one really talks about what happens afterwards.
+[Y Combinator](https://www.ycombinator.com/) (YC) is seen as the world's best, and most prolific, three-month accelerator program. Upwards of 7,000 founders have taken part. Yet, no one really talks about what happens afterwards.
 
-PostHog did YCombinator's Winter 2020 batch. We made the top companies list a year later when we closed a series B led by YC Continuity. We provide an [open-source product analytics suite](https://posthog.com/).
+PostHog did Y Combinator's Winter 2020 batch. We made the top companies list a year later when we closed a series B led by YC Continuity. We provide an [open-source product analytics suite](https://posthog.com/).
 
 So, what have the last two (and a bit) years like been for us, and how could they have been better?
 
-> James Hawkins is PostHog's Co-Founder & CEO. He launched PostHog with Tim Glaser in February 2020 as part the YCombinator W20 batch. He lives in Cambridge, England with his wife Fran, daughter Ruby, and Wally (a cat).
+> James Hawkins is PostHog's Co-Founder & CEO. He launched PostHog with Tim Glaser in February 2020 as part the Y Combinator W20 batch. He lives in Cambridge, England with his wife Fran, daughter Ruby, and Wally (a cat).
 
 ## The network
 
@@ -30,7 +30,7 @@ Ultimately, all these new contacts gave us access to many of the best founders a
 A benefit of many networks is emotional support, but being closely connected to other founders in particular can provide the opposite depending on how you react. When we were very small, we benefited greatly from [talking to founders or senior people at successful developer-focussed](a-chat-with-sid) [companies](ceo-diary-4#hiring-the-right-people--what-stripe-taught-me
 ). At other times, we've seen people we know well create multi billion dollar companies from scratch, faster than us. We should take lessons from them, but shouldn't blindly raise money as fast as possible to compete on valuation.
 
-The network brings customers. From time to time, the founder of a growth stage company will find and message us because of YCombinator. We're 100% inbound, but YC companies that do outbound sales potentially benefit even more from all these warm connections. We even started giving out [Allbirds](https://www.allbirds.com/) / [AirPods](https://www.apple.com/airpods/) to YC companies that pick us over our competitors (aka the San Francisco survival kit - although that needs updating now each batch is remote) - giving away shoes for free was amusingly profitable as a fraction of them convert to paying customers when they grow.
+The network brings customers. From time to time, the founder of a growth stage company will find and message us because of Y Combinator. We're 100% inbound, but YC companies that do outbound sales potentially benefit even more from all these warm connections. We even started giving out [Allbirds](https://www.allbirds.com/) / [AirPods](https://www.apple.com/airpods/) to YC companies that pick us over our competitors (aka the San Francisco survival kit - although that needs updating now each batch is remote) - giving away shoes for free was amusingly profitable as a fraction of them convert to paying customers when they grow.
 
 Finally, it helped us get to product market fit sooner. YC founders tend to give better (more direct) feedback when things aren't working, and are naturally a little more understanding. An amusing example of this was when we once signed up [Eric Migicovsky](https://twitter.com/ericmigi?lang=en) (Pebble founder / YC partner and now founder of [Beeper](https://www.beeper.com/)) - a year ago, he gave us so much direct feedback including "throw out your current interface" (I removed context for dramatic effect - he was very polite and constructive!) that it made us realize, at that time, we didn't have strong product market fit in his segment.
 

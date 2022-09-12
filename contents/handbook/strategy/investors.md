@@ -17,7 +17,7 @@ We brought on board Jason Warner (CTO GitHub) as an investor.
 
 ## Seed - March 2020
 
-We raised a $3M seed round, led by YCombinator and 1984 VC.
+We raised a $3M seed round, led by Y Combinator and 1984 VC.
 
 We are also grateful to work with the support of the following:
 

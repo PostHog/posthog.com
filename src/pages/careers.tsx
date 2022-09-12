@@ -88,7 +88,7 @@ const IndexPage = () => {
                 <TeamQuote
                     backgroundColor=""
                     textColor="text-primary"
-                    fontSize="text-2xl"
+                    fontSize="text-3xl"
                     width="max-w-4xl"
                     value={
                         <>
@@ -113,8 +113,8 @@ const IndexPage = () => {
                 />
                 <WorkingAtPostHog />
                 <TeamQuote
-                    backgroundColor=""
-                    textColor="text-primary"
+                    backgroundColor="bg-black"
+                    textColor="text-white"
                     fontSize="text-4xl"
                     width="max-w-4xl"
                     value={

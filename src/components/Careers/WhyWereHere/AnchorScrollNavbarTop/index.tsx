@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import scrollTo from 'gatsby-plugin-smoothscroll'
-import { mergeClassList } from '../../lib/utils'
-import downIcon from '../../images/icons/down-caret.svg'
-import Chip from 'components/Chip'
+import { mergeClassList } from '../../../../lib/utils'
 
 const ButtonLink = ({
     section,
@@ -20,17 +18,14 @@ const ButtonLink = ({
     }
 
     return (
-        <Chip active={section == currentSection} onClick={clickHandler}>
-            {children}
-        </Chip>
+      <span active={section == currentSection} onClick={clickHandler} className="block text-almost-black leading-tight font-medium hover:text-red dark:text-white dark:hover:text-red cursor-pointer hover:opacity-100 opacity-60 text-[14px] py-1 block relative active:top-[0.5px] active:scale-[.99]">
+        {children}
+      </span>
+        
     )
 }
 
 const inPageLinks = [
-    {
-        label: 'Introduction',
-        section: 'introduction',
-    },
     {
         label: 'Transparency',
         section: 'transparency',
@@ -57,22 +52,24 @@ const inPageLinks = [
     },
 ]
 
-interface AnchorScrollNavbarProps {
+interface AnchorScrollNavbarTopProps {
     className?: string
 }
 
-export const AnchorScrollNavbar = ({ className = '' }: AnchorScrollNavbarProps) => {
-    const baseClasses = 'space-x-2 w-full mx-auto justify-center p-3 sticky top-2 z-30 hidden md:inline-flex'
+export const AnchorScrollNavbarTop = ({ className = '' }: AnchorScrollNavbarTopProps) => {
+    const baseClasses = ''
     const classList = mergeClassList(baseClasses, className)
 
-    const [currentSection, setCurrentSection] = useState('why-were-here')
+    const [currentSection, setCurrentSection] = useState('transparency')
 
     useEffect(() => {
         const scrollThreshold = 100
 
         const scrollHandler = () => {
             const sections = {
+                introduction: document.getElementById('introduction')!.offsetTop,
                 transparency: document.getElementById('transparency')!.offsetTop,
+                whoWeHire: document.getElementById('who-we-hire')!.offsetTop,
                 interviewProcess: document.getElementById('interview-process')!.offsetTop,
                 benefits: document.getElementById('benefits')!.offsetTop,
                 workingAtPosthog: document.getElementById('working-at-posthog')!.offsetTop,
@@ -80,15 +77,17 @@ export const AnchorScrollNavbar = ({ className = '' }: AnchorScrollNavbarProps) 
             }
             const offset = window.scrollY
 
-            if (offset < sections.transparency - scrollThreshold) {
-                setCurrentSection('why-were-here')
+            if (offset < sections.introduction - scrollThreshold) {
+                setCurrentSection('introduction')
+            } else if (offset < sections.transparency - scrollThreshold) {
+              setCurrentSection('transparency')
+            } else if (offset < sections.whoWeHire - scrollThreshold) {
+              setCurrentSection('who-we-hire')
             } else if (offset < sections.interviewProcess - scrollThreshold) {
-                setCurrentSection('transparency')
+              setCurrentSection('interview-process')
             } else if (offset < sections.benefits - scrollThreshold) {
-                setCurrentSection('interview-process')
-            } else if (offset < sections.workingAtPosthog - scrollThreshold) {
                 setCurrentSection('benefits')
-            } else if (offset < sections.openRoles - scrollThreshold) {
+            } else if (offset < sections.workingAtPosthog - scrollThreshold) {
                 setCurrentSection('working-at-posthog')
             } else {
                 setCurrentSection('open-roles')
@@ -105,9 +104,13 @@ export const AnchorScrollNavbar = ({ className = '' }: AnchorScrollNavbarProps) 
     }, [])
 
     const navbarLinks = inPageLinks.map(({ label, section }) => (
-        <ButtonLink section={section} currentSection={currentSection} key={section}>
-            {label}
-        </ButtonLink>
+
+      <li className="relative leading-none m-0">
+            <ButtonLink section={section} currentSection={currentSection} key={section}>
+              {label}
+          </ButtonLink>
+      </li>
+        
     ))
 
     const selectOptions = inPageLinks.map(({ label, section }) => (
@@ -129,7 +132,6 @@ export const AnchorScrollNavbar = ({ className = '' }: AnchorScrollNavbarProps) 
                     {selectOptions}
                 </select>
 
-                <img src={downIcon} alt="expand menu" className="absolute top-2 right-2 mt-1" />
             </div>
         </>
     )
