@@ -4,14 +4,9 @@ import { countryCodeEmoji } from 'country-code-emoji'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
+import { kebabCase } from 'lib/utils'
 import React from 'react'
 import { shortcodes } from '../../mdxGlobalComponents'
-
-const kebabCase = (string) =>
-    string
-        .replace(/([a-z])([A-Z])/g, '$1-$2')
-        .replace(/[\s_]+/g, '-')
-        .toLowerCase()
 
 export default function Team() {
     const {

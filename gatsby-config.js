@@ -18,6 +18,12 @@ module.exports = {
     trailingSlash: 'never',
     plugins: [
         {
+            resolve: `gatsby-source-ashby`,
+            options: {
+                apiKey: process.env.ASHBY_API_KEY,
+            },
+        },
+        {
             resolve: `gatsby-source-squeak`,
             options: {
                 apiHost: 'https://squeak.cloud',
