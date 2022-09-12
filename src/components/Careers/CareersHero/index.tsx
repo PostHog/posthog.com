@@ -12,14 +12,20 @@ export const CareersHero = () => {
     return (
         <div className="careers-hero lg:pt-12 pb-12 md:pb-18">
             <div className="relative z-10 rounded">
-
                 <div className="md:absolute -top-8 xl:-top-6 2xl:-top-8 right-0 md:w-1/2 lg:w-[45%] 2xl:w-[45%]">
-                    <StaticImage src="../../../images/construction-hogs-with-text.png" alt="Construction hogs taking a lunch break" className="w-full h-full" placeholder="blurred" />
+                    <StaticImage
+                        src="../../../images/construction-hogs-with-text.png"
+                        alt="Construction hogs taking a lunch break"
+                        className="w-full h-full"
+                        placeholder="blurred"
+                    />
                 </div>
 
                 <div className="text-center md:text-left max-w-7xl mx-auto relative z-10 px-4 md:pr-0 lg:pl-8">
                     <h1 className="mb-0 pb-0 text-3xl md:text-4xl lg:text-5xl 2xl:text-6xl md:w-2/3 lg:w-[55%] xl:[w-2/3]">
-                        We're working to increase the number of successful products <br className="hidden md:block mdlg:hidden 2xl:block" />in the world.
+                        We're working to increase the number of successful products{' '}
+                        <br className="hidden md:block mdlg:hidden 2xl:block" />
+                        in the world.
                         <br />
                         <span className="text-red">We could use your help.</span>
                     </h1>
@@ -40,7 +46,7 @@ export const CareersHero = () => {
 
 const query = graphql`
     {
-        jobs: allJobs {
+        jobs: allAshbyJobPosting {
             totalCount
         }
     }
