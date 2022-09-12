@@ -2,9 +2,12 @@
 title: Insights
 sidebar: Docs
 showTitle: true
----
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
 
-<FeatureAvailability allPlans />
+---
 
 Insights allow you to visualize your Events and Actions in several different ways. Each type of Insight has its own manual in these Docs:
 

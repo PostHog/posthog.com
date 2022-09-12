@@ -6,14 +6,14 @@ import { Heading } from 'components/Heading'
 import { InlineCode } from 'components/InlineCode'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
-import PostLayout, { Contributors, ShareLinks, SidebarSection, TableOfContents } from 'components/PostLayout'
+import PostLayout, { Contributors, SidebarSection } from 'components/PostLayout'
 import { SEO } from 'components/seo'
 import Team from 'components/Team'
 import TestimonialsTable from 'components/TestimonialsTable'
 import { ZoomImage } from 'components/ZoomImage'
 import { graphql } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { animateScroll as scroll } from 'react-scroll'
 import { shortcodes } from '../mdxGlobalComponents'
 import MobileSidebar from 'components/Docs/MobileSidebar'
@@ -24,8 +24,22 @@ import { CallToAction } from 'components/CallToAction'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import CommunityQuestions from 'components/CommunityQuestions'
 import Markdown from 'markdown-to-jsx'
+import CheckIcon from '../images/check.svg'
+import XIcon from '../images/x.svg'
+import WarningIcon from '../images/warning.svg'
 
-export const HandbookSidebar = ({ contributors, title, location, related }) => {
+export const HandbookSidebar = ({ contributors, availability, related }) => {
+    const renderAvailabilityIcon = (availability: 'full' | 'partial' | 'none') => {
+        switch (availability) {
+            case 'full':
+                return <img src={CheckIcon} alt="Available" className="h-4 w-4" aria-hidden="true" />
+            case 'partial':
+                return <img src={WarningIcon} alt="Partially available" className="h-4 w-4" aria-hidden="true" />
+            case 'none':
+                return <img src={XIcon} alt="Not available" className="h-4 w-4" aria-hidden="true" />
+        }
+    }
+
     return (
         <>
             {contributors && (
@@ -40,9 +54,23 @@ export const HandbookSidebar = ({ contributors, title, location, related }) => {
                     />
                 </SidebarSection>
             )}
-            <SidebarSection title="Share">
-                <ShareLinks title={title} href={location.href} />
-            </SidebarSection>
+
+            {availability && (
+                <SidebarSection title="Feature availability" className="space-y-2">
+                    <div className="flex items-center justify-between font-bold">
+                        <span>Free / Open-source</span>
+                        {renderAvailabilityIcon(availability.free)}
+                    </div>
+                    <div className="flex items-center justify-between font-bold">
+                        <span>Self-serve</span>
+                        {renderAvailabilityIcon(availability.selfServe)}
+                    </div>
+                    <div className="flex items-center justify-between font-bold">
+                        <span>Enterprise</span>
+                        {renderAvailabilityIcon(availability.enterprise)}
+                    </div>
+                </SidebarSection>
+            )}
 
             {related && (
                 <SidebarSection title="Related articles">
@@ -143,8 +171,18 @@ export default function Handbook({
         frontmatter,
         fields: { slug, contributors, appConfig },
     } = post
-    const { title, hideAnchor, description, hideLastUpdated, features, github, installUrl, thumbnail, related } =
-        frontmatter
+    const {
+        title,
+        hideAnchor,
+        description,
+        hideLastUpdated,
+        features,
+        github,
+        availability,
+        installUrl,
+        thumbnail,
+        related,
+    } = frontmatter
     const { parent, excerpt } = post
     const lastUpdated = parent?.fields?.gitLogLatestDate
     const showToc = !hideAnchor && tableOfContents?.length > 0
@@ -202,12 +240,7 @@ export default function Handbook({
                     }
                     menu={menu}
                     sidebar={
-                        <HandbookSidebar
-                            contributors={contributors}
-                            title={title}
-                            location={location}
-                            related={related}
-                        />
+                        <HandbookSidebar contributors={contributors} availability={availability} related={related} />
                     }
                     tableOfContents={[...tableOfContents, { depth: 0, value: 'Questions?', url: 'squeak-questions' }]}
                     contentWidth="100%"
@@ -304,6 +337,11 @@ export const query = graphql`
                     sessionRecording
                     featureFlags
                     groupAnalytics
+                }
+                availability {
+                    free
+                    selfServe
+                    enterprise
                 }
                 thumbnail {
                     childImageSharp {

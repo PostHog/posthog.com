@@ -61,7 +61,7 @@ export const SidebarSection = ({
     className?: string
 }) => {
     return (
-        <div className={`py-4 px-5 lg:px-8 ${className}`}>
+        <div className={`py-4 px-6 ${className}`}>
             {title && <h3 className="text-black dark:text-white font-semibold opacity-25 m-0 mb-2 text-sm">{title}</h3>}
             {children}
         </div>
@@ -585,11 +585,11 @@ export default function PostLayout({
                 {!hideSidebar && sidebar && (
                     <aside
                         key={`${title}-sidebar`}
-                        className="flex-shrink-0 w-full justify-self-end my-10 lg:my-0 mr-auto h-full lg:px-0 px-5 box-border"
+                        className="flex-shrink-0 w-full justify-self-end my-10 lg:my-0 mr-auto h-full lg:px-0 px-4 box-border"
                     >
                         <div className="h-full flex flex-col divide-y divide-gray-accent-light dark:divide-gray-accent-dark divide-dashed">
                             <div className="relative h-full">
-                                <div ref={topSidebarSection} className="pt-6 top-10 sticky">
+                                <div ref={topSidebarSection} className="pt-4 top-10 sticky">
                                     {sidebar}
                                 </div>
                             </div>
@@ -598,7 +598,7 @@ export default function PostLayout({
                                 {view === 'Article' && toc?.length > 1 && !showTocButton && (
                                     <div
                                         style={{ visibility: showTocButton === null ? 'hidden' : 'visible' }}
-                                        className="px-5 lg:px-8 lg:pb-4 lg:block hidden"
+                                        className="px-4 lg:px-8 lg:pb-4 lg:block hidden"
                                     >
                                         <h4 className="text-black dark:text-white font-semibold opacity-25 m-0 mb-1 text-sm">
                                             Jump to:

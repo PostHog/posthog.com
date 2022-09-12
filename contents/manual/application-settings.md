@@ -2,9 +2,11 @@
 title: Settings & Billing
 sidebar: Docs
 showTitle: true
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
 ---
-
-<FeatureAvailability allPlans />
 
 This page documents all settings within the PostHog _application_. If you are self-hosting PostHog, a guide to configuring your _instance_ settings [can be found here](/docs/self-host/configure/instance-settings).
 
