@@ -86,7 +86,7 @@ const menu = [
     { name: 'Event pipelines', url: '/product#event-pipelines', icon: ProductIcons.eventPipelines },
     { name: 'Data warehouse', url: '/product#data-warehouse', icon: ProductIcons.dataWarehouse },
     { name: 'Self-hosting', url: '/product#self-hosting', icon: ProductIcons.selfHosting },
-    { name: 'API', url: 'api', icon: ProductIcons.api },
+    { name: 'API', url: '/product#api', icon: ProductIcons.api },
 ]
 
 const Container = ({ children }) => <div className="max-w-5xl mx-auto px-12">{children}</div>
