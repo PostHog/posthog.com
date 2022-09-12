@@ -158,7 +158,7 @@
             ]
         },
         {
-            "name": "People & ops",
+            "name": "People & Ops",
             "url": "",
             "children": [
                 {
@@ -188,6 +188,10 @@
                 {
                     "name": "Training",
                     "url": "/handbook/people/training"
+                },
+                {
+                    "name": "Side gigs",
+                    "url": "/handbook/people/side-gigs"
                 },
                 {
                     "name": "Feedback",
@@ -368,6 +372,10 @@
                         {
                             "name": "MDX setup",
                             "url": "/handbook/engineering/posthog-com/mdx-setup"
+                        },
+                        {
+                            "name": "Markdown",
+                            "url": "/handbook/engineering/posthog-com/markdown"
                         }
                     ]
                 },

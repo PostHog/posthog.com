@@ -24,13 +24,13 @@ To follow this tutorial along, you need to:
 ### Setup and tracking page views (automatically)
 The first thing you want to do is to install the [next-use-posthog library](https://github.com/Ismaaa/next-use-posthog) in your project - so add it using your package manager:
 
-```
+```shell
 yarn add next-use-posthog
 ```
 
 or
 
-```
+```shell
 npm install --save next-use-posthog
 ```
 
@@ -71,13 +71,13 @@ export default MyApp
 
 The first thing you want to do is to install the [posthog-js library](/docs/integrate/client/js) in your project - so add it using your package manager:
 
-```
+```shell
 yarn add posthog-js
 ```
 
 or
 
-```
+```shell
 npm install --save posthog-js
 ```
 

@@ -7,29 +7,25 @@ topics:
     - bigquery-export
 ---
 
-### What does the BigQuery Export app do?
+This app streams events from PostHog into BigQuery as they are ingested.
 
-This app streams events from PostHog directly into a BigQuery service account, as they are ingested. This is especially useful if you have an existing data warehouse or data lake running in BigQuery.
-
-### What are the requirements for this app?
+## Installation
 
 The BigQuery Export app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
-You'll also need access to the BigQuery instance you want to export to.
+### Enabling the app
 
-### How do I install the BigQuery export app for PostHog?
-
-1. Visit the 'Apps' page in your instance of PostHog.
-2. Search for 'BigQuery' and select the app, press Install.
-3. Follow the configuration steps:
-    1. Upload your Google Cloud key `.json` file. (See below for permissions and how to retrieve this.)
+1. Visit the 'Apps' page from PostHog.
+2. Search for 'BigQuery' and select the 'BigQuery Export' app.
+3. Click on the blue settings icon and follow the [configuration](#setting-up-bigquery-access) steps:
+    1. Upload your Google Cloud key `.json` file. (See below for instructions on how to retrieve this.)
     2. Enter your Dataset ID
     3. Enter your Table ID
 4. Watch events roll into BigQuery
 
-### How do I setup BigQuery permissions for PostHog?
+### Setting up BigQuery access
 
 To set the right permissions up for the BigQuery plugin, you'll need:
 
@@ -42,11 +38,11 @@ Here's how to set these up so that the app has access only to the table it needs
 
 2. Create a role which has only the specific permissions the PostHog BigQuery app requires (listed below), or use the built in `BigQuery DataOwner` permission. If you create a custom role, you will need:
 
-    - bigquery.datasets.get
-    - bigquery.tables.create
-    - bigquery.tables.get
-    - bigquery.tables.list
-    - bigquery.tables.updateData
+    - `bigquery.datasets.get`
+    - `bigquery.tables.create`
+    - `bigquery.tables.get`
+    - `bigquery.tables.list`
+    - `bigquery.tables.updateData`
 
 3. Create a dataset within a BigQuery project (ours is called `posthog`, but any name will do).
 
@@ -60,19 +56,68 @@ Use the Share Dataset button to share your dataset with your new service account
 
 That's it! Once you've done the steps above, your data should start flowing from PostHog to BigQuery.
 
+### Event schema
+
+Here is a summary of all the fields that are exported to BigQuery.
+
+| Field                 | Type        | Description                                                                             |
+| --------------------- | ----------- | --------------------------------------------------------------------------------------- |
+| uuid                  | `STRING`    | The unique ID of the event within PostHog                                               |
+| event                 | `STRING`    | The name of the event that was sent                                                     |
+| properties            | `STRING`    | A JSON object with all the properties sent along with an event                          |
+| elements              | `STRING`    | Elements surrounding an [autocaptured](/manual/events#autocapture-event-tracking) event |
+| set                   | `STRING`    | A JSON object with any person properties sent with the `$set` field                     |
+| set_once              | `STRING`    | A JSON object with any person properties sent with the `$set_once` field                |
+| distinct_id           | `STRING`    | The `distinct_id` of the user who sent the event                                        |
+| team_id               | `STRING`    | The `team_id` for the event                                                             |
+| ip                    | `STRING`    | The IP address that was sent with the event                                             |
+| site_url              | `STRING`    | This is always set as an empty string for backwards compatibility                       |
+| timestamp             | `TIMESTAMP` | The timestamp when the event was ingested into PostHog                                  |
+| bq_ingested_timestamp | `TIMESTAMP` | The timestamp when the event was sent to BigQuery                                       |
+
 ### Configuration
 
 <AppParameters />
+
+## Troubleshooting
+
+### What should I do if events aren't showing up?
+
+The best way to debug events not showing up is by viewing the logs, which can be accessed by clicking the 'Logs' icon just to the left of the blue settings button.
+This will bring up a new panel with a list of all the most recent logs from our app.
+Take a look back through the log and see if there are any `ERROR` messages that can help provide more information on why the export is failing.
+
+> **Tip:** You can filter down and only view `ERROR` or `WARN` messages using the toggles at the top of the panel next to 'Show logs of type'
 
 ### Why am I seeing duplicate PostHog events in BigQuery?
 
 There's a very rare case when duplicate events appear in BigQuery. This happens due to network errors, where the export seems to have failed, yet it actually reaches BigQuery.
 
-While this shouldn't happen, if you find duplicate events in BigQuery, follow these [Google Cloud docs](https://cloud.google.com/bigquery/streaming-data-into-bigquery#manually_removing_duplicates) to manually remove the them.
+While this shouldn't happen, if you find duplicate events in BigQuery, follow these [Google Cloud docs](https://cloud.google.com/bigquery/streaming-data-into-bigquery#manually_removing_duplicates) to manually remove them.
 
-### Is the source code for this app available?
+Here is an example query based on the [Google Cloud docs](https://cloud.google.com/bigquery/streaming-data-into-bigquery#manually_removing_duplicates) that would remove duplicates:
 
-PostHog is open-source and so are all apps on the platform. The [source code for the BigQuery Export app](https://github.com/PostHog/bigquery-plugin) is available on GitHub.
+```sql
+WITH
+-- first add a row number, one for each uuid
+raw_data AS
+(
+       SELECT *,
+              Row_number() OVER (partition BY uuid) AS row_number
+       FROM   `<project_id>.<dataset>.<TABLE>`
+       WHERE  date(timestamp) = '<YYYY-MM-DD>' ),
+-- now just filter for one row per uuid
+raw_data_deduplicated AS
+(
+       SELECT *
+       EXCEPT (row_number)
+       FROM   raw_data
+       WHERE  row_number = 1 )
+SELECT *
+FROM   raw_data_deduplicated ;
+```
+
+## Further information
 
 ### Who created this app?
 

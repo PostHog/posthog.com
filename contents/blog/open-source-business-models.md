@@ -71,7 +71,3 @@ There are many ways to monetize open-source software, and the approach you choos
 Loved this? Let us know on [Twitter](https://twitter.com/PostHog) or [LinkedIn](https://linkedin.com/company/posthog), and subscribe to our [newsletter](/newsletter) for more posts on startups, growth, and analytics.
 
 _Enjoyed this? Subscribe to our [newsletter](https://posthog.com/newsletter) to hear more from us twice a month!_
-
-<NewsletterForm
-compact
-/>

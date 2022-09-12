@@ -45,14 +45,12 @@ MDX file - no import needed.
 
 However, if I want to include something from a module, I can also do so. Here's how one would insert a Transition component from Headless UI:
 
-```js
-
+```mdx
 import { Transition } from '@headlessui/react'
 
 ## Some Markdown
 
 <Transition>{/* ... */}</Transition>
-
 ```
 
 > Currently, almost every component on the site is available automatically. This will eventually change because it causes some performance issues. For now, if you need a reference for which components you should be using in your MDX, check out the [Storybook page](/handbook/engineering/storybook).

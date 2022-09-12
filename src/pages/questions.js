@@ -1,7 +1,7 @@
 import { DocSearchModal } from '@docsearch/react'
 import { Blockquote } from 'components/BlockQuote'
 import Breadcrumbs from 'components/Breadcrumbs'
-import { CodeBlock } from 'components/CodeBlock'
+import { MdxCodeBlock } from 'components/CodeBlock'
 import { Days } from 'components/CommunityQuestions/Question'
 import { Check } from 'components/Icons/Icons'
 import { InlineCode } from 'components/InlineCode'
@@ -140,7 +140,7 @@ const Question = ({ question }) => {
     const components = {
         inlineCode: InlineCode,
         blockquote: Blockquote,
-        pre: CodeBlock,
+        pre: MdxCodeBlock,
         img: ZoomImage,
     }
     return (

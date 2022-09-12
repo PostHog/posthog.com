@@ -94,7 +94,4 @@ And because we’d be remiss if we didn’t plug our own product, you can track 
 
 _Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
 
-<NewsletterForm
-compact
-/>
 

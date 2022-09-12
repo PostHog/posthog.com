@@ -25,7 +25,7 @@ gem "posthog-ruby"
 
 In your app, set your API key **before** making any calls. If setting a custom `host`, make sure to include the protocol (e.g. `https://`).
 
-```c
+```ruby
 posthog = PostHog::Client.new({
   api_key: "<ph_project_api_key>",
   host: "<ph_instance_address>", # You can remove this line if you're using https://app.posthog.com
@@ -59,7 +59,7 @@ Optionally you can submit:
 
 For example:
 
-```c
+```ruby
 posthog.capture({
     distinct_id: 'distinct id',
     event: 'movie played',
@@ -78,7 +78,7 @@ To set properties on your users via an event, you can leverage the event propert
 
 **Example**
 
-```c
+```ruby
 posthog.capture({
     distinct_id: 'distinct id',
     event: 'movie played',
@@ -96,7 +96,7 @@ When capturing an event, you can pass a property called `$set` as an event prope
 
 **Example**
 
-```c
+```ruby
 posthog.capture({
     distinct_id: 'distinct id',
     event: 'movie played',
@@ -124,7 +124,7 @@ An `identify` call requires:
 
 For example:
 
-```c
+```ruby
 posthog.identify({
   distinct_id: "user:123",
   properties: {
@@ -153,7 +153,7 @@ An `alias` call requires:
 
 For example:
 
-```c
+```ruby
 posthog.alias({
   distinct_id: "user:123",
   alias: "user:12345",
@@ -164,7 +164,7 @@ posthog.alias({
 
 If you're aiming for a full back-end implementation of PostHog, you can send pageviews from your backend
 
-```c
+```ruby
 posthog.capture({
     distinct_id: 'distinct id',
     event: '$pageview',
@@ -186,7 +186,7 @@ When using them with one of libraries, you should check if a feature flag is ena
 > **Note:** Whenever we face an error computing the flag, the library returns `Nil`, instead of `true` or `false`.
 
 
-```c
+```ruby
 posthog.is_feature_enabled('beta-feature', 'distinct id')
 # returns True or False or Nil
 ```
@@ -195,7 +195,7 @@ posthog.is_feature_enabled('beta-feature', 'distinct id')
 
 Here's how you might send different users a different version of your homepage, for example:
 
-```c
+```ruby
 def homepage(request):
     template = "new.html" if posthog.is_feature_enabled('new_ui', 'distinct id') else "old.html"
     return render_template(template, request=request)
@@ -210,7 +210,7 @@ If you're using multivariate feature flags, you can also get not just whether th
 > **Note:** Whenever we face an error computing the flag, the library returns `Nil`, instead of `true` or `false` or a string variant value.
 
 
-```c
+```ruby
 posthog.get_feature_flag('beta-feature', 'distinct id')
 # returns string or True or False or Nil
 ```
@@ -222,7 +222,7 @@ Sometimes, you might want to evaluate feature flags using properties that haven'
 For example, if the `beta-feature` depends on the `is_authorized` property, and you know the value of the property, you can tell PostHog to use this property, like so:
 
 
-```c
+```ruby
 posthog.get_feature_flag('beta-feature', 'distinct id', person_properties: {'is_authorized': True})
 ```
 
@@ -231,7 +231,7 @@ You can pass symbols or strings, the library treats them the same.
 The same holds for [groups](/manual/group-analytics). If you have a group name `organisation`, you can add properties like so:
 
 
-```c
+```ruby
 posthog.get_feature_flag('beta-feature', 'distinct id', groups: {'organisation': 'google'}, group_properties: {'organisation': {'is_authorized': True})
 # returns string or Nil
 ```
@@ -240,9 +240,9 @@ posthog.get_feature_flag('beta-feature', 'distinct id', groups: {'organisation':
 
 You can also get all known flag values as well. This is useful when you want to seed a frontend client with initial known flags. Like all methods above, this also takes optional person and group properties, if known.
 
-```python
+```ruby
 posthog.get_all_flags('distinct id', groups: {}, person_properties: {'is_authorized': True}, group_properties: {})
-# returns dict of flag key and value pairs.
+# returns hash of flag key and value pairs.
 ```
 
 #### Local Evaluation
@@ -258,12 +258,18 @@ All feature flag evaluation requires an API request to your PostHog servers to g
 
 Then, the flag can be evaluated locally. The method signature looks exactly like above
 
-```c
+```ruby
 posthog.get_feature_flag('beta-feature', 'distinct id', person_properties: {'is_authorized': True})
 # returns string or Nil
 ```
 
 > **Note:** New feature flag definitions are polled every 30 seconds by default, which means there will be up to a 30 second delay between you changing the flag definition, and it reflecting on your servers. You can change this default on the client by setting `feature_flags_polling_interval = <value in seconds>`.
+
+This works for `getAllFlags` as well. It evaluates all flags locally if possible. If even one flag isn't locally evaluable, it falls back to decide.
+```c
+posthog.get_all_flags('distinct id', groups: {}, person_properties: {'is_authorized': True}, group_properties: {})
+# returns hash of flag key and value pairs.
+```
 
 **Restricting evaluation to local only**
 
@@ -274,7 +280,7 @@ Sometimes, performance might matter to you so much that you never want an HTTP r
 
 When initializing PostHog, you can configure the interval at which feature flags are polled (fetched from the server). However, if you need to force a reload, you can use `reloadFeatureFlags`:
 
-```js
+```ruby
 posthog.reload_feature_flags()
 
 // Do something with feature flags here
@@ -288,7 +294,7 @@ PostHog 1.31.0 introduced support for [group analytics](/docs/user-guides/group-
 
 -   Capture an event and associate it with a group
 
-```c
+```ruby
 posthog.capture({
     distinct_id: 'distinct id',
     event: 'movie played',
@@ -304,7 +310,7 @@ posthog.capture({
 
 -   Update properties on a group
 
-```c
+```ruby
 posthog.group_identify(
   {
     group_type: "organization",

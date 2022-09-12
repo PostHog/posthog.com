@@ -703,11 +703,6 @@
     from = "/docs/self-host/deploy/proxy"
     to = "/docs/cloud/proxy"
 
-# Added: 2021-08-05
-[[redirects]]
-    from = "/docs/data-model"
-    to = "/docs/data-model"
-
 # Added: 2021-08-12
 [[redirects]]
     from = "/handbook/people/hiring-process/hiring-process"
@@ -2214,7 +2209,6 @@
     from = "/docs/data-model"
     to = "/docs/how-posthog-works/data-model"
 
-
 # Added: 2022-08-25
 [[redirects]]
     from = "/docs/self-host/architecture"
@@ -2229,3 +2223,18 @@
 [[redirects]]
     from = "/docs/architecture/ingestion-pipeline"
     to = "/docs/how-posthog-works/ingestion-pipeline"
+
+# Added: 2022-09-01
+[[redirects]]
+    from = "/blog/the-posthog-array-1-39-1"
+    to = "/blog/the-posthog-array-1-39-0"
+    
+# Added: 2022-09-02    
+[[redirects]]
+    from = "/product/experimentation"
+    to = "/product/experimentation-suite"
+
+    # Added: 2022-09-12
+[[redirects]]
+    from = "/handbook/people/team-structure/app-east/objectives"
+    to = "/handbook/people/team-structure/app-east"
