@@ -39,7 +39,7 @@ Alternatively, you can install the connector via [the GitHub repo](https://gith
 
 ### Using the PostHog data extractor in Patterns
 
-The Posthog data extractor is an API integration configured in Patterns. You will need a [PostHog Personal API key](https://posthog.com/docs/api), and to have configured the Import PostHog Events component in Patterns. 
+The PostHog data extractor is an API integration configured in Patterns. You will need a [PostHog Personal API key](https://posthog.com/docs/api), and to have configured the Import PostHog Events component in Patterns. 
 
 ![Patterns activity schema](../images/docs/apps/patterns/activity-schema.png)
 
