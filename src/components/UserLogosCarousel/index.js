@@ -29,7 +29,7 @@ const companies = [
     },
     {
         logo: ycLogo,
-        name: 'YCombinator',
+        name: 'Y Combinator',
     },
     {
         logo: staplesLogo,
