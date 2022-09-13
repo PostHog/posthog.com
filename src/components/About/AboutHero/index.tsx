@@ -1,5 +1,10 @@
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
+import Lottie from 'react-lottie'
+import AboutHog1 from '../../../lotties/about-hog-1.json'
+import AboutHog2 from '../../../lotties/about-hog-2.json'
+import AboutHog3 from '../../../lotties/about-hog-3.json'
+import AboutHog4 from '../../../lotties/about-hog-4.json'
 
 export const AboutHero = () => {
     return (
@@ -17,37 +22,45 @@ export const AboutHero = () => {
                 </h3>
             </header>
             <div className="flex flex-col md:flex-row justify-center items-center max-w-screen-xl mx-auto gap-4 md:gap-16 px-4 md:px-8 pb-12">
-                <div className="flex justify-between items-center gap-12">
-                    <StaticImage
-                        src="./images/about-hog-1.png"
-                        width={227}
-                        height={243}
-                        alt="Hog looking at a computer"
-                        objectFit="contain"
-                    />
-                    <StaticImage
-                        src="./images/about-hog-2.png"
-                        width={175}
-                        height={253}
-                        alt="Hog behind a computer but with a plant"
-                        objectFit="contain"
-                    />
+                <div className="flex justify-between items-center">
+                    <div className="">
+                        <Lottie
+                            options={{
+                                loop: true,
+                                autoplay: true,
+                                animationData: AboutHog1,
+                            }}
+                        />
+                    </div>
+                    <div className="">
+                        <Lottie
+                            options={{
+                                loop: true,
+                                autoplay: true,
+                                animationData: AboutHog2,
+                            }}
+                        />
+                    </div>
                 </div>
-                <div className="flex justify-between items-center gap-12">
-                    <StaticImage
-                        src="./images/about-hog-3.png"
-                        width={216}
-                        height={230}
-                        alt="Hog who thinks he's using a touchscreen"
-                        objectFit="contain"
-                    />
-                    <StaticImage
-                        src="./images/about-hog-4.png"
-                        width={242}
-                        height={261}
-                        alt="Hog drinking coffee and contemplating life"
-                        objectFit="contain"
-                    />
+                <div className="flex justify-between items-center">
+                    <div className="">
+                        <Lottie
+                            options={{
+                                loop: true,
+                                autoplay: true,
+                                animationData: AboutHog3,
+                            }}
+                        />
+                    </div>
+                    <div className="">
+                        <Lottie
+                            options={{
+                                loop: true,
+                                autoplay: true,
+                                animationData: AboutHog4,
+                            }}
+                        />
+                    </div>
                 </div>
             </div>
         </>

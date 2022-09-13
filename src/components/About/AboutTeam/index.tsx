@@ -25,7 +25,7 @@ export const AboutTeam = () => {
                 We're a team of <span className="text-blue">30</span> from all over the world.
             </h3>
             <h4 className="font-semibold opacity-70 text-center">
-                Many of us move around a lot. Here’s where we’re currently shipping code.
+                Many of us move around a lot. Here's where we're currently shipping code.
             </h4>
 
             <div className="text-center">
@@ -35,7 +35,7 @@ export const AboutTeam = () => {
             </div>
 
             <div className="relative scale-[150%] pt-20 pb-16 lg:py-0 lg:scale-100">
-                <Avatar />
+                <Avatar size="sm" />
                 <Dot classes="top-[27%] left-[44%]" />
                 <Map className="w-[795px] h-[485px]" />
             </div>
