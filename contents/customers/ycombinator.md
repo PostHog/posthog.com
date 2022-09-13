@@ -41,7 +41,6 @@ Because Y Combinator has deployed PostHog across multiple products, Cat’s team
 
 “PostHog has been really great for tracking feature adoption and running experiments,” said Cat. “We’ve even used it to improve our matching algorithm by experimenting with how often we should show a random profile or remove stale profiles. We've experimented with the pace of that and it's had a significant impact."
 
-**“FOLLOW UP COMMENT HERE ON THE IMPACT IT HAD.”**
 
 Unsurprisingly for a startup accelerator, Y Combinator moves quickly and runs many similar experiments to shape the future of the products. Recent examples include testing a co-founder trial project intended to encourage collaboration (“A lot of people asked for it, but PostHog showed us nobody actually used it”) and an experiment to remove users who had been inactive for three weeks (“That was hugely successful and led to many more matches”).
 
