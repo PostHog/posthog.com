@@ -292,7 +292,3 @@ A tip of the hat goes to the team at GitHub who worked on their new Open Graph i
 We really hope you enjoy seeing our Open Graph previews across the internet as much as we enjoyed making them!
 
 _Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
-
-<NewsletterForm
-compact
-/>

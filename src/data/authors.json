@@ -263,5 +263,13 @@
         "image": "../../static/images/authors/grace.jpg",
         "link_type": "LinkedIn",
         "link_url": "https://www.linkedin.com/in/withgracetoo/"
+    },
+    {
+        "handle": "patterns",
+        "name": "Chris Stanley",
+        "role": "Contributor",
+        "image": "../../static/images/authors/contributor-posthog.png",
+        "link_type": "LinkedIn",
+        "link_url": "https://www.linkedin.com/in/chris-stanley-29b20519/"
     }
 ]

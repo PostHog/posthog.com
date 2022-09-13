@@ -25,6 +25,3 @@ We recently got the chance to meet the Avo team in Iceland at our last PostHog o
 
 _Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
 
-<NewsletterForm
-compact
-/>

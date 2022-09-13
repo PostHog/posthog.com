@@ -31,7 +31,6 @@ export default function HTML(props: HTMLProps): JSX.Element {
                     href="//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQItalicVF.woff2"
                     crossOrigin="anonymous"
                 />
-                <script src="https://www.workable.com/assets/embed.js" type="text/javascript" async></script>
 
                 {props.headComponents}
             </head>

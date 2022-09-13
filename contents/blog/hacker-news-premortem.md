@@ -145,5 +145,3 @@ It's an [in-joke](https://news.ycombinator.com/item?id=8863).
 [Example](https://news.ycombinator.com/item?id=28090851)
 
 _Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
-
-<NewsletterForm compact />
