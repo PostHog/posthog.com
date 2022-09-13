@@ -20,9 +20,9 @@ You won’t see any UI changes — persons will still have their own Persons & G
 
 - **Faster filtering of events with person or group properties**. Similarly, filtering events by person or group properties is much faster when a join is no longer necessary. Anywhere where you’re working with persons or groups, and events, PostHog will be faster. 
 
-- **Anonymous and identified users will no longer be merged**. Previously, when a user was identified through an event, such as logging in to a service, we would end up with separate records for unidentified and identified behavior. We would then [merge these into a single person](/docs/how-posthog-works/ingestion-pipeline#merging-two-persons). This could sometimes create conflicts and [other performance issues](/docs/how-posthog-works/ingestion-pipeline#consequences-of-merging). Avoiding this merge means some users may be double-counted, but is much more performant and mostly [mitigated by the event buffer](/docs/how-posthog-works/ingestion-pipeline/#1-event-buffer).
+- **Users will no longer be merged in some situations**. Previously, when an anonymous user was identified through an event, such as logging in to a service, and then becomes anonymous _again_ we would end up with separate records for unidentified and identified behavior. We would then [merge these into a single person](/docs/how-posthog-works/ingestion-pipeline#merging-two-persons), which could create conflicts and [performance issues](/docs/how-posthog-works/ingestion-pipeline#consequences-of-merging). Our new approach avoids this merge and is much more performant. We mitigate the risk of double-counting such users with [the event buffer](/docs/how-posthog-works/ingestion-pipeline/#1-event-buffer)
 
-- **You can create insights based on person properties at the time of an event.** This wasn’t previously possible and was often requested. Now, with this change, it's possible!
+- **You can create insights based on person properties at the time of an event.** This wasn’t previously feasible and was often requested. Now, with this change, it's possible!
 
 - **Self-hosting users will see a storage increase**. This is due to extra information being stored in your self-hosted ClickHouse. We expect users to see their storage requirement increase by approximately XX. 
 
