@@ -68,7 +68,10 @@ export const AboutTeam = () => {
                         color="#FBBC05"
                         className="left-[-24rem] bottom-[-2rem]"
                     />
-                    <Dot classes="top-[27%] left-[44%]" />
+                    <Dot classes="top-[-7.25rem] left-[-16rem]" />
+                    <Dot classes="top-[-6.85rem] left-[-15.5rem]" />
+                    <Dot classes="top-[-6rem] left-[-16rem]" />
+                    <Dot classes="top-[-4.9rem] left-[-12.3rem]" />
                 </div>
             </div>
         </section>
