@@ -40,7 +40,6 @@ import { DemoScheduler } from './components/DemoScheduler'
 import { DeployOption } from './components/DeployOption'
 import { DocsPageSurvey } from './components/DocsPageSurvey'
 import { FeatureAvailability } from './components/FeatureAvailability'
-import { FeatureTable } from './components/FeatureTable'
 import { FeaturesSelfHost } from './components/FeaturesSelfHost'
 import { FloatedImage } from './components/FloatedImage'
 import { Footer } from './components/Footer'
@@ -160,7 +159,6 @@ export const shortcodes = {
     DeployOption,
     DocsPageSurvey,
     FeatureAvailability,
-    FeatureTable,
     FeaturesSelfHost,
     FloatedImage,
     Footer,
