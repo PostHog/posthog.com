@@ -10,7 +10,7 @@ This version upgrades the bundled `grafana/loki` Helm chart from `2.10.2` to `3.
 is based on the old `grafana/loki-simple-scalable` and as such the configuration options are not compatible.
 As part of this upgrade you'll need to:
 
-1. ensure that your values for `loki:` are compatible with the new chart, see their [README](https://github.com/grafana/loki/tree/main/production/helm/loki) for details. Note that we supply default values that will result in the old "single binary" deployment being deployed, mimicking the old functionality.
+1. ensure that your values for `loki:` are compatible with the new chart, see the upstream [README](https://github.com/grafana/loki/tree/main/production/helm/loki) for details. Note that we supply default values that will result in the old "single binary" deployment being deployed, mimicking the old functionality.
 2. delete the old Loki statefulset, as is documented [here](https://github.com/grafana/loki/tree/main/production/helm/loki#upgrading-from-grafanaloki).
 
 ### 26.0.0
