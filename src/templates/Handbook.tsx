@@ -6,7 +6,7 @@ import { Heading } from 'components/Heading'
 import { InlineCode } from 'components/InlineCode'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
-import PostLayout, { Contributors, SidebarSection } from 'components/PostLayout'
+import PostLayout, { Contributors, ShareLinks, SidebarSection } from 'components/PostLayout'
 import { SEO } from 'components/seo'
 import Team from 'components/Team'
 import TestimonialsTable from 'components/TestimonialsTable'
@@ -28,7 +28,7 @@ import CheckIcon from '../images/check.svg'
 import XIcon from '../images/x.svg'
 import WarningIcon from '../images/warning.svg'
 
-export const HandbookSidebar = ({ contributors, availability, related }) => {
+export const HandbookSidebar = ({ contributors, title, location, availability, related }) => {
     const renderAvailabilityIcon = (availability: 'full' | 'partial' | 'none') => {
         switch (availability) {
             case 'full':
@@ -71,6 +71,10 @@ export const HandbookSidebar = ({ contributors, availability, related }) => {
                     </div>
                 </SidebarSection>
             )}
+
+            <SidebarSection title="Share">
+                <ShareLinks title={title} href={location.href} />
+            </SidebarSection>
 
             {related && (
                 <SidebarSection title="Related articles">
@@ -238,7 +242,13 @@ export default function Handbook({
                     }
                     menu={menu}
                     sidebar={
-                        <HandbookSidebar contributors={contributors} availability={availability} related={related} />
+                        <HandbookSidebar
+                            contributors={contributors}
+                            availability={availability}
+                            related={related}
+                            location={location}
+                            title={title}
+                        />
                     }
                     tableOfContents={[...tableOfContents, { depth: 0, value: 'Questions?', url: 'squeak-questions' }]}
                     contentWidth="100%"
