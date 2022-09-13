@@ -1,6 +1,6 @@
 ---
 date: 2022-09-10
-title: Five essential apps for PostHog
+title: "Getting started: Five essential apps for PostHog"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -15,7 +15,7 @@ PostHog apps are a powerful, but ill-defined part of the platform. They’re pow
 
 Want to import or export data into or out of PostHog? [There are apps for that](/apps). 
 Want to enhance data by adding or removing info? [There are apps for that too](/apps).  
-Want to insert the word `hedgehog` into your personIDs randomly? There…well, there isn’t an app for that yet. [But you could build one](/docs/apps/build)!
+Want to insert the word `hedgehog` into your personIDs randomly? There …well, there isn’t an app for that yet. [But you could build one](/docs/apps/build)!
 
 Not sure where to get started with apps? One easy tip is to look for connectors which enable you to sync PostHog with other tools in your stack — but otherwise here are some essential apps we recommend new PostHog users consider. 
 
