@@ -18,10 +18,13 @@ const ButtonLink = ({
     }
 
     return (
-      <span active={section == currentSection} onClick={clickHandler} className="block text-almost-black leading-tight font-medium hover:text-red dark:text-white dark:hover:text-red cursor-pointer hover:opacity-100 opacity-60 text-[14px] py-1 block relative active:top-[0.5px] active:scale-[.99]">
-        {children}
-      </span>
-        
+        <span
+            active={section == currentSection}
+            onClick={clickHandler}
+            className="block text-almost-black leading-tight font-medium hover:text-red dark:text-white dark:hover:text-red cursor-pointer hover:opacity-100 opacity-60 text-[14px] py-1 block relative active:top-[0.5px] active:scale-[.99]"
+        >
+            {children}
+        </span>
     )
 }
 
@@ -80,11 +83,11 @@ export const AnchorScrollNavbarTop = ({ className = '' }: AnchorScrollNavbarTopP
             if (offset < sections.introduction - scrollThreshold) {
                 setCurrentSection('introduction')
             } else if (offset < sections.transparency - scrollThreshold) {
-              setCurrentSection('transparency')
+                setCurrentSection('transparency')
             } else if (offset < sections.whoWeHire - scrollThreshold) {
-              setCurrentSection('who-we-hire')
+                setCurrentSection('who-we-hire')
             } else if (offset < sections.interviewProcess - scrollThreshold) {
-              setCurrentSection('interview-process')
+                setCurrentSection('interview-process')
             } else if (offset < sections.benefits - scrollThreshold) {
                 setCurrentSection('benefits')
             } else if (offset < sections.workingAtPosthog - scrollThreshold) {
@@ -104,13 +107,11 @@ export const AnchorScrollNavbarTop = ({ className = '' }: AnchorScrollNavbarTopP
     }, [])
 
     const navbarLinks = inPageLinks.map(({ label, section }) => (
-
-      <li className="relative leading-none m-0">
+        <li className="relative leading-none m-0">
             <ButtonLink section={section} currentSection={currentSection} key={section}>
-              {label}
-          </ButtonLink>
-      </li>
-        
+                {label}
+            </ButtonLink>
+        </li>
     ))
 
     const selectOptions = inPageLinks.map(({ label, section }) => (
@@ -131,7 +132,6 @@ export const AnchorScrollNavbarTop = ({ className = '' }: AnchorScrollNavbarTopP
                 >
                     {selectOptions}
                 </select>
-
             </div>
         </>
     )
