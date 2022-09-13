@@ -29,7 +29,7 @@ export function FeatureAvailability({ availability }: FeatureAvailabilityProps):
                 Where is this feature available?
             </h6>
 
-            <div className="grid grid-cols-3 gap-x-4">
+            <div className="grid grid-flow-col-dense grid-rows-3 grid-cols-2 sm:grid-flow-row-dense sm:grid-cols-3 sm:grid-rows-2 gap-x-4">
                 <div>
                     <h5 className="flex items-center space-x-1 text-base !mt-0 mb-2">
                         <span>Free / Open-source</span>
