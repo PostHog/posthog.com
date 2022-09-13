@@ -14,6 +14,14 @@ module.exports = exports.createSchemaCustomization = async ({ actions, schema })
       contributors: [Contributors]
       appConfig: [AppConfig]
     }
+    type AshbyJobPostingTableOfContents {
+      value: String,
+      url: String,
+      depth: Int,
+    }
+    type AshbyJobPostingFields {
+      tableOfContents: [AshbyJobPostingTableOfContents]
+    }
     type AppConfig {
       key: String
       name: String
@@ -66,35 +74,6 @@ module.exports = exports.createSchemaCustomization = async ({ actions, schema })
       name: String
       url: String
     }
-    type Jobs implements Node {
-      id: String
-      title: String
-      full_title: String
-      shortcode: String
-      application_url: String
-      state: String
-      department: String
-      department_hierarchy: [WorkableDepartmentHierarchy]
-      url: String
-      application_url: String
-      shortlink: String
-      location: WorkableLocation
-      created_at: String
-    }
-    type WorkableDepartmentHierarchy {
-      id: Int
-      name: String
-    }
-    type WorkableLocation {
-      location_str: String
-      country: String
-      country_code: String
-      region: String
-      region_code: String
-      city: String
-      zip_code: Int
-      telecommuting: Boolean
-    }
     type Plugin implements Node {
       name: String,
       url: String,
@@ -143,6 +122,57 @@ module.exports = exports.createSchemaCustomization = async ({ actions, schema })
       logo: File,
       slug: String,
       imageLink: String,
+    }
+    type AshbyJobTableOfContents {
+      value: String,
+      url: String,
+      depth: Int
+    }
+    type AshbyJobPostingFields {
+      title: String,
+      slug: String,
+      tableOfContents: [AshbyJobTableOfContents],
+      html: String,
+      title: String,
+      slug: String
+    }
+    type AshbyJobPostingFormDefFieldsSectionsFieldsField {
+      type: String,
+        title: String,
+        isNullable: Boolean,
+        path: String
+    }
+    type AshbyJobPostingFormDefFieldsSectionsFields {
+      field: AshbyJobPostingFormDefFieldsSectionsFieldsField
+    }
+    type AshbyJobPostingFormDefFieldsSections {
+      fields: [AshbyJobPostingFormDefFieldsSectionsFields]
+        
+    }
+    type AshbyJobPostingFormDef {
+      sections: [AshbyJobPostingFormDefFieldsSections]
+    }
+    type AshbyJobPostingInfo {
+      descriptionHtml: String,
+      applicationFormDefinition: AshbyJobPostingFormDef
+    }
+    type AshbyJobPosting implements Node {
+      fields: AshbyJobPostingFields
+      externalLink: String,
+      departmentName: String,
+      isListed: Boolean,
+      publishedDate: Date,
+      title: String,
+      locationName: String,
+      info: AshbyJobPostingInfo,
+      parent: AshbyJob,
+    }
+    type AshbyJobCustomFields {
+      value: String,
+      title: String,
+    }
+    type AshbyJob implements Node {
+      customFields: [AshbyJobCustomFields],
     }
   `)
     createTypes([

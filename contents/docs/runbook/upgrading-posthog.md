@@ -17,5 +17,5 @@ Find the relevant upgrade instructions in the corresponding deployment info page
 - [Azure](/docs/self-host/deploy/azure#upgrading-the-chart)
 - [DigitalOcean](/docs/self-host/deploy/digital-ocean#upgrading-the-chart)
 - [Google Cloud Platform](/docs/self-host/deploy/gcp#upgrading-the-chart)
-- [Hobby](/docs/self-host/deploy/gcp#upgrading)
+- [Hobby](/docs/self-host/deploy/hobby#upgrading)
 - [Other platforms](/docs/self-host/deploy/other#upgrading-the-chart)

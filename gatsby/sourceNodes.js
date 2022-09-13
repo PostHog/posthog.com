@@ -46,25 +46,6 @@ module.exports = exports.sourceNodes = async ({ actions, createContentDigest, cr
         })
     }
 
-    if (process.env.WORKABLE_API_KEY) {
-        const { jobs } = await fetch('https://posthog.workable.com/spi/v3/jobs?state=published', {
-            headers: { Authorization: `Bearer ${process.env.WORKABLE_API_KEY}` },
-        }).then((res) => res.json())
-
-        uniqBy(jobs, (job) => job.title).forEach((job) => {
-            const node = {
-                parent: null,
-                children: [],
-                internal: {
-                    type: `Jobs`,
-                    contentDigest: createContentDigest(job),
-                },
-                ...job,
-            }
-            createNode(node)
-        })
-    }
-
     const integrations = await fetch(
         'https://raw.githubusercontent.com/PostHog/integrations-repository/main/integrations.json'
     ).then((res) => res.json())

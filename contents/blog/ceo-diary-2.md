@@ -63,6 +63,3 @@ This happens when you focus on building a successful company, not on bargaining 
 
 _Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
 
-<NewsletterForm
-compact
-/>

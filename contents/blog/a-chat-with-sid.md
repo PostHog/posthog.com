@@ -94,6 +94,4 @@ We shouldn't follow blindly how GitLab worked, but getting a good sense of what 
 
 _Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
 
-<NewsletterForm
-compact
-/>
+
