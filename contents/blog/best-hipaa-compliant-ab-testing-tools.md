@@ -138,4 +138,3 @@ Why? It's logical, really. Research shows that, when required to change password
 
 **Multivariate testing** is similar to A/B testing, but it tests more page elements together to understand how they interact with each other. One would, for example, use a multivariate test to compare all the possible combinations of three different page headlines and three different CTAs (call to actions) to see which performs best. The basic process is similar to an A/B test, but instead of comparing whole page designs, your're comparing specific elements to each other.
 
- <NewsletterForm compact />

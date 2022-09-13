@@ -26,7 +26,3 @@ The highly organized father of three works out of his color-coordinated shed in 
 You can find Phil online on [GitHub](https://github.com/leggetter), [Twitter](https://twitter.com/leggetter) and [LinkedIn](https://www.linkedin.com/in/leggetter/), and his [website](https://leggetter.co.uk).
 
 _Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
-
-<NewsletterForm
-compact
-/>

@@ -28,8 +28,16 @@ const ButtonLink = ({
 
 const inPageLinks = [
     {
+        label: 'Introduction',
+        section: 'introduction',
+    },
+    {
         label: 'Transparency',
         section: 'transparency',
+    },
+    {
+        label: 'Who we hire',
+        section: 'who-we-hire',
     },
     {
         label: 'Interview process',
@@ -38,6 +46,10 @@ const inPageLinks = [
     {
         label: 'Benefits',
         section: 'benefits',
+    },
+    {
+        label: 'Working here',
+        section: 'working-at-posthog',
     },
     {
         label: 'Open roles',

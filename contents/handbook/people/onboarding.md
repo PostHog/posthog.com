@@ -192,7 +192,7 @@ We use a number of different tools to organise our work and communicate at PostH
 - Calendly - external meeting scheduling (e.g. demos, sales)
 - Gusto - US payroll and benefits management
 - Deel - international payroll and contracts management
-- Workable - recruitment tool
+- Ashby - recruitment tool
 
 ## Signatories
 

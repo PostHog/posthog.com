@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-As a YCombinator company ourselves, we want to support other YC companies that wish to use PostHog. As such, our onboarding process for YC companies is different and more extensive than our general process.
+As a Y Combinator company ourselves, we want to support other YC companies that wish to use PostHog. As such, our onboarding process for YC companies is different and more extensive than our general process.
 
 ## The YC deal
 
