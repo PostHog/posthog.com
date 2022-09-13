@@ -37,7 +37,7 @@ In addition to capturing more data, PostHog also provided a wider array of tools
 
 ### How Y Combinator runs experiments to build better products
 
-The level of control PostHog offers extends beyond just instrumentation, however. Cat’s team is also able to use the entire suite of insight tools to choose the appropriate key metric for each product. For Y Combinator Startup School, for example, the team uses [trends insights](/manual/trends) to monitor weekly users and engagement — while [funnels](/manual/funnels) are more useful for Co-Founder Matching because the product involves many discrete steps. 
+Because Y Combinator has deployed PostHog across multiple products, Cat’s team uses the entire suite of insight tools to monitor the appropriate key metric for each product. For Y Combinator Startup School, for example, the team uses [trends insights](/manual/trends) to monitor weekly users and engagement — while [funnels](/manual/funnels) are more useful for Co-Founder Matching because the product involves many discrete steps. Insights are collected into shared dashboards for ease, along with additional dashboards to report on running experiments. 
 
 “PostHog has been really great for tracking feature adoption and running experiments,” said Cat. “We’ve even used it to improve our matching algorithm by experimenting with how often we should show a random profile or remove stale profiles. We've experimented with the pace of that and it's had a significant impact."
 
