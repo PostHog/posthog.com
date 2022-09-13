@@ -24,14 +24,14 @@ const renderAvailabilityIcon = (isAvailable: boolean) => {
 
 export function FeatureAvailability({ availability }: FeatureAvailabilityProps): JSX.Element {
     return (
-        <div className="border-t border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark py-3 space-y-1 mt-2 mb-5 ">
+        <div className="border-t border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark py-2 space-y-1 mt-2 mb-5 ">
             <h6 className="text-primary/50 dark:text-primary-dark/50 !my-0 font-semibold text-base">
                 Where is this feature available?
             </h6>
 
-            <div className="grid grid-flow-col-dense grid-rows-3 grid-cols-2 sm:grid-flow-row-dense sm:grid-cols-3 sm:grid-rows-2 gap-x-4">
+            <div className="grid grid-flow-col-dense grid-rows-3 grid-cols-2 sm:grid-flow-row-dense sm:grid-cols-3 sm:grid-rows-2 gap-x-4 items-center">
                 <div>
-                    <h5 className="flex items-center space-x-1 text-base !mt-0 mb-2">
+                    <h5 className="flex items-center space-x-1 text-base !my-0">
                         <span>Free / Open-source</span>
                         <Link
                             to="/pricing?realm=self-hosted"
@@ -42,7 +42,7 @@ export function FeatureAvailability({ availability }: FeatureAvailabilityProps):
                     </h5>
                 </div>
                 <div className="">
-                    <h5 className="flex items-center space-x-1 text-base !mt-0 mb-2">
+                    <h5 className="flex items-center space-x-1 text-base !my-0">
                         <span>Self-serve</span>
                         <Link
                             to="/pricing?realm=cloud"
@@ -54,7 +54,7 @@ export function FeatureAvailability({ availability }: FeatureAvailabilityProps):
                 </div>
 
                 <div className="">
-                    <h5 className="flex items-center space-x-1 text-base !mt-0 mb-2">
+                    <h5 className="flex items-center space-x-1 text-base !my-0">
                         <span>Enterprise</span>
                         <Link
                             to="/pricing?realm=cloud"
