@@ -1,6 +1,7 @@
 import { CallToAction } from 'components/CallToAction'
 import Logo from 'components/Logo'
 import React from 'react'
+import { DemoLink } from 'components/DemoLink'
 
 export default function CTA({ className = '' }) {
     return (
@@ -30,13 +31,23 @@ export default function CTA({ className = '' }) {
                 </span>
             </div>
 
-            <div className="space-y-4 md:space-y-0 md:space-x-4">
+            <div className="space-y-4 md:space-y-0 md:space-x-4 flex items-center">
                 <CallToAction type="primary" className="!w-full md:!w-auto" to="https://app.posthog.com/signup">
                     Try PostHog Cloud - free
                 </CallToAction>
-                <CallToAction type="secondary" width="56" className="!w-full md:!w-auto" to="/book-a-demo">
-                    Book a demo
+                <CallToAction
+                    type="secondary"
+                    width="56"
+                    className="!w-full md:!w-auto"
+                    to="https://demo.posthog.com"
+                    externalNoIcon
+                >
+                    Try the demo
                 </CallToAction>
+                <div className="inline-flex items-center space-x-2">
+                    or
+                    <DemoLink dark />
+                </div>
             </div>
         </div>
     )
