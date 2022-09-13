@@ -40,7 +40,7 @@ export default function AshbyOpenRoles() {
                                     return (
                                         <li className="border-b border-dashed border-gray-accent-light" key={title}>
                                             <Link
-                                                className="px-4 py-3 text-lg text-primary hover:text-primary font-bold flex justify-between"
+                                                className="px-4 py-3 text-[17px] text-primary hover:text-primary font-bold flex justify-between"
                                                 to={slug}
                                             >
                                                 <span>{title}</span>
