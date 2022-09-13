@@ -47,7 +47,6 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 
 #### [App East](app-east)
 - [Marius Andra](/handbook/company/team#marius-andra-software-engineer) (Team lead, Full Stack Engineer)
-- [Ben White](/handbook/company/team#ben-white-full-stack-engineer) (Full Stack Engineer)
 - [Emanuele Capparelli](/handbook/company/team#ben-white-full-stack-engineer) (Growth Engineer)
 - [Michael Matloka](/handbook/company/team#michael-matloka-software-engineer) (Full Stack Engineer)
 - [Paul D'Ambra](/handbook/company/team#paul-dambra-software-engineer) (Full Stack Engineer)
@@ -57,9 +56,12 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Eric Duong](/handbook/company/team#eric-duong-software-engineer) (Team lead, Full Stack Engineer)
 - [Neil Kakkar](/handbook/company/team#neil-kakkar-software-engineer) (Full Stack Engineer)
 - [Li Yi Yu](/handbook/company/team#li-yi-yu-full-stack-engineer) (Full Stack Engineer)
-- [Rick Marron](/handbook/company/team#rick-marron-full-stack-engineer) (Full Stack Engineer)
-- [Alex Kim](/handbook/company/team#alex-kim-full-stack-engineer) (Full Stack Engineer)
 - _[Chris Clark](/handbook/company/team#chris-clark) (Product Designer)_ - _Works across App West and App East_
+
+#### [Session Recordings](session-recordings)
+- [Ben White](/handbook/company/team#ben-white-full-stack-engineer) (Full Stack Engineer)
+- [Alex Kim](/handbook/company/team#alex-kim-full-stack-engineer) (Full Stack Engineer)
+- [Rick Marron](/handbook/company/team#rick-marron-full-stack-engineer) (Full Stack Engineer)
 
 #### [Platform](platform)
 - [James Greenhill](/handbook/company/team#james-greenhill-software-engineer) (Team lead, Data/Infra Engineer)
