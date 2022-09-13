@@ -52,17 +52,16 @@ export default function Hero() {
                     </h2>
 
                     <div className="flex flex-col md:flex-row justify-center items-center gap-2">
-                        <CallToAction type="primary" className="!w-full md:!w-40 shadow-xl" to="/signup">
+                        <CallToAction type="primary" className="!w-full md:!w-44 shadow-xl" to="/signup">
                             Get started
                         </CallToAction>
                         <CallToAction
                             type="secondary"
-                            className="!w-full md:!w-40 shadow-xl"
+                            className="!w-full md:!w-44 shadow-xl"
                             to="https://demo.posthog.com"
-                            target="_blank"
-                            rel="noopener"
+                            externalNoIcon
                         >
-                            Try a demo
+                            Try the demo
                         </CallToAction>
                     </div>
 
@@ -88,7 +87,7 @@ export default function Hero() {
                                 />
                             </svg>
 
-                            <span>Schedule a demo</span>
+                            <span>Schedule a call</span>
                         </Link>
                     </div>
                 </div>
