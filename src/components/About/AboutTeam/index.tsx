@@ -34,19 +34,42 @@ export const AboutTeam = () => {
                 </CallToAction>
             </div>
 
-            <div className="relative pt-20 pb-16 lg:py-0 lg:scale-100">
-                <Avatar size="lg" handle="li-yi-yu" color="#9DE1D9" className="left-0 top-0" />
-                <Avatar size="md" handle="neil-kakkar" color="#B3E19D" className="left-[30%] top-8" />
-                <Avatar size="sm" handle="yakko-majuri" color="#A2B0D4" className="right-16 top-12" />
-                <Avatar size="md" handle="eric-duong" color="#FDEDC9" className="right-0 top-24" />
-                <Avatar size="md" handle="marius-andra" color="#DCB1E3" className="right-0 bottom-24" />
-                <Avatar size="xl" handle="lottie-coxon" color="#E19D9D" className="right-24 bottom-0" />
-                <Avatar size="sm" handle="coua-phang" color="#E6A9E8" className="left-24 bottom-8" />
-                <Avatar size="xl" handle="guido-iaquinti" color="#9DA4E1" className="left-12 bottom-12" />
-                <Avatar size="md" handle="cameron-deleone" color="#FBBC05" className="left-4 top-36" />
-
-                <Dot classes="top-[27%] left-[44%]" />
-                <Map className="w-[795px] h-[485px]" />
+            <div className="relative text-center pt-16 pb-24 ml-12">
+                <StaticImage
+                    src="./Map/images/map-with-pins.png"
+                    width={795}
+                    height={485}
+                    placeholder="blurred"
+                    alt="Map of the PostHoggers"
+                />
+                {/* <Map className="w-[795px] h-[485px] scale-75" /> */}
+                <div className="absolute inset-1/2 border">
+                    <Avatar size="xl" handle="li-yi-yu" color="#9DE1D9" className="left-[-26rem] top-[-18rem]" />
+                    <Avatar size="md" handle="neil-kakkar" color="#B3E19D" className="left-[-8rem] top-[-16rem]" />
+                    <Avatar size="lg" handle="yakko-majuri" color="#A2B0D4" className="right-[-10rem] top-[-18rem]" />
+                    <Avatar size="md" handle="eric-duong" color="#FDEDC9" className="right-[-20rem] top-[-12rem]" />
+                    <Avatar size="lg" handle="marius-andra" color="#DCB1E3" className="right-[-22rem] top-[-2rem]" />
+                    <Avatar
+                        size="xl"
+                        handle="lottie-coxon"
+                        color="#E19D9D"
+                        className="right-[-11rem] bottom-[-12rem]"
+                    />
+                    <Avatar size="md" handle="coua-phang" color="#E6A9E8" className="left-[-6rem] bottom-[-10rem]" />
+                    <Avatar
+                        size="xl"
+                        handle="guido-iaquinti"
+                        color="#9DA4E1"
+                        className="left-[-20rem] bottom-[-12rem]"
+                    />
+                    <Avatar
+                        size="md"
+                        handle="cameron-deleone"
+                        color="#FBBC05"
+                        className="left-[-24rem] bottom-[-2rem]"
+                    />
+                    <Dot classes="top-[27%] left-[44%]" />
+                </div>
             </div>
         </section>
     )
