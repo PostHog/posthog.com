@@ -56,7 +56,7 @@ export const HandbookSidebar = ({ contributors, availability, related }) => {
             )}
 
             {availability && (
-                <SidebarSection title="Feature availability" className="space-y-2">
+                <SidebarSection title="Feature availability" className="space-y-1.5">
                     <div className="flex items-center justify-between font-bold">
                         <span>Free / Open-source</span>
                         {renderAvailabilityIcon(availability.free)}
