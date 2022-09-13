@@ -6,6 +6,16 @@ availability:
     free: partial
     selfServe: full
     enterprise: full
+
+    features:
+        tagging:
+            free: false
+            selfServe: true
+            enterprise: true
+        descriptions:
+            free: false
+            selfServe: true
+            enterprise: true
 ---
 
 [//]: # 'On restricted plans, users cannot create definitions and view any 30d metrics for events and event properties.'
@@ -80,6 +90,12 @@ From here you may hover over event and event property names to edit definitions.
 You may also explore all properties nested under each event to quickly understand how your data is structured.
 
 ![PostHog - data management expand](../images/features/data-management/data-management-event-expand.png)
+
+#### Adding tags and descriptions to events
+
+<FeatureAvailability availability={_frontmatter.availability.features.tagging} />
+
+Tags and descriptions can additionally be added to events after they are created. This makes using them in insights much easier, especially as the number of distict event types grows.
 
 ## Data Management best practices
 

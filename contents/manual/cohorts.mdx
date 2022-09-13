@@ -6,6 +6,20 @@ availability:
     free: partial
     selfServe: full
     enterprise: full
+
+    features:
+        sequenceOfEvents:
+            free: false
+            selfServe: true
+            enterprise: true
+        cohortMembership:
+            free: false
+            selfServe: true
+            enterprise: true
+        lifecycle:
+            free: false
+            selfServe: true
+            enterprise: true
 ---
 
 Cohorts are PostHog's way of letting you easily create a list of users who have something in common.
@@ -71,6 +85,14 @@ Or, you might select a user property to filter on, and then update that property
 ![Three key cohort settings](../images/features/cohorts/cohort-options.png)
 
 **'Add matching criteria'** adds another group of filters that a user must match to be a part of the cohort, as an `OR` operation. This means that if a user matches _any_ of the groups you add, they will be added to the cohort.
+
+##### Match users based on their lifcycle
+
+<FeatureAvailability availability={_frontmatter.availability.features.lifecycle} />
+
+Cohorts can also be created based on certain 'Lifecycle' criteria. With these, users can be grouped based on their long term behavior, such as whether they frequently performed an event, or have recently stopped performing an event.
+
+![Matching based on lifecycle properties](../images/features/cohorts/lifecycle.png)
 
 ## Adjusting time frames
 

@@ -9,6 +9,12 @@ availability:
     free: partial
     selfServe: full
     enterprise: full
+
+    features:
+        correlation:
+            free: false
+            selfServe: true
+            enterprise: true
 ---
 
 ## Why do funnels matter?
@@ -228,6 +234,14 @@ The most common configurations you might consider tweaking are:
     -   **Sequential:** When measuring people who've gone through the steps in your funnel in the order set, and they have triggered several other events in between. For example, when measuring an advert's effect on conversion, whether someone has seen the ad before or after coming to your product would likely result in a different conversion rate. The first occurrences of events specified in steps are taken into account (within the conversion window).
     -   **Strict Order:** When you only want to measure people who've gone through the steps in your funnel in order and not triggered any other events in between. For example, if you want to exclude users who have searched for another product after initially finding a product in a checkout funnel)
     -   **Any Order:** When measuring people who've gone through all of the steps in a funnel, but they could have completed them in any order. For example, when there are many paths to the final stage of the funnel, such as subscribing to a podcast where people may subscribe immediately, listen to an episode first, follow the author first, etc.
+
+## Correlation analysis
+
+<FeatureAvailability availability={_frontmatter.availability.features.correlation} />
+
+[Correlation Analysis](/manual/correlation) automatically highlights significant factors that affect the conversion rate of users within the funnel.
+
+Correlation analysis works well when you don't already have a hypothesis for what is affecting conversion through a funnel. This report will automatically highlighting significant events or properties that either negatively or positively impact conversion rate.
 
 ### Further reading
 

@@ -11,11 +11,17 @@ availability:
     free: partial
     selfServe: full
     enterprise: full
+
+    features:
+        multivariate:
+            free: false
+            selfServe: true
+            enterprise: true
 ---
 
 Feature Flags allow you to safely deploy and roll back new features. This means you can ship the code for new features and then roll them out to your users in a managed way. If something has goes wrong, you can then roll back without having to re-deploy your application. Feature Flags can also help you control access to certain parts of your product, such as only showing paid features to users with an active subscription.
 
-> Looking to _test_ changes to your product? Check out our [Experimentation](/docs/user-guides/experimentation) feature. 
+> Looking to _test_ changes to your product? Check out our [Experimentation](/docs/user-guides/experimentation) feature.
 
 ## Learning resources
 
@@ -133,6 +139,8 @@ However, for flags using a rollout percentage mechanism (either by itself or in 
 As a result, bear in mind that changing those values will result in flags being toggled on and off for certain users in a non-predictable way.
 
 ## Multivariate feature flags (beta)
+
+<FeatureAvailability availability={_frontmatter.availability.features.multivariate} />
 
 > Multivariate feature flags are only available when using PostHog >= 1.28 (if self-hosting) and [posthog-js](https://github.com/PostHog/posthog-js) >= 1.13.
 

@@ -6,9 +6,19 @@ related:
     - ../tutorials/how-to-embed-shared-dashboard.mdx
     - ../tutorials/taxonomy-acquisition.md
 availability:
-    free: full
-    selfServe: full
+    free: partial
+    selfServe: partial
     enterprise: full
+
+    features:
+        tagging:
+            free: false
+            selfServe: true
+            enterprise: true
+        advancedSharing:
+            free: false
+            selfServe: false
+            enterprise: true
 
 ---
 
@@ -41,12 +51,24 @@ Click '...' to bring up additional options:
 -   'Go full screen' is great for presenting your dashboard
 -   You can also pin, duplicate or delete your dashboard
 
+#### Tagging a dashboard
+
+<FeatureAvailability availability={_frontmatter.availability.features.tagging} />
+
+On paid plans, tags can be added to dashboards to help better organize them. These tags can be added or removed by any member within a project.
+
 ## Send or share a Dashboard
 
 Click 'Share' in the top right corner. You can:
 
 -   Determine who within your project can access the dashboard
 -   Create a link to share your dashboard publicly or embed your dashboard on a website
+
+#### Advanced sharing
+
+<FeatureAvailability availability={_frontmatter.availability.features.advancedSharing} />
+
+On enterprise plans, you can further configure sharing to only give access to certain members within a project. Dashboards can be shared either by members with administrator priviledges, or by the dashboard creator.
 
 ### Further reading
 

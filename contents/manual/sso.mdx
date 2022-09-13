@@ -6,6 +6,21 @@ availability:
     free: partial
     selfServe: partial
     enterprise: full
+
+    features:
+        jitUserProvisioning: true
+        ssoEnforcement:
+            free: false
+            selfServe: false
+            enterprise: true
+        github: true
+        gitlab: true
+        google: true
+        saml:
+            free: false
+            selfServe: false
+            enterprise: true
+
 ---
 
 If you want to make it really easy for your users to log in, or have some compliance requirements around user access/provisioning, you can add one-click login with single sign-on (SSO). We also allow just-in-time provisioning of users, which means that your team members can create their account self-serve (see below), and enforcing log in through an SSO provider to fit all your compliance / IT needs.
@@ -33,7 +48,9 @@ Adding a TXT record depends on your DNS provider (e.g. Cloudflare, Google Domain
 
 ### Just-in-time user provisioning
 
-<FeatureAvailability allPlans />
+<FeatureAvailability availability={_frontmatter.availability.features.jitUserProvisioning} />
+
+<h1>{_frontmatter.title}</h1>
 
 When enabled, just-in-time user provisioning creates a new account whenever a first-time user logs in using any available SSO provider and an email address that matches your verified domain. For self-hosted, this is any provider you configured; for Cloud this is GitHub, GitLab, Google, and SAML if you configured it.
 
@@ -41,7 +58,7 @@ To enable just-in-time user provisioning, navigate to 'Authentication domains' i
 
 ### SSO enforcement
 
-<FeatureAvailability availablePlans={['enterpriseCloud', 'enterprise']} />
+<FeatureAvailability availability={_frontmatter.availability.features.ssoEnforcement} />
 
 You may want to force users log in and/or sign up to your organization using a specific SSO provider. When this is enabled, users will not be able to log in using a password, nor request password resets, and will only be able to use the provider you specified. This will apply for administrators and organization owners too. Please be sure your SSO configuration works correctly before enabling this.
 
@@ -64,7 +81,7 @@ Looking for a provider that's not here? [Reach out to us](https://posthog.com/su
 
 ### GitHub
 
-<FeatureAvailability allPlans />
+<FeatureAvailability availability={_frontmatter.availability.features.github} />
 
 1. Go to <a href='https://github.com/settings/applications/new' target='_blank'>Register a new OAuth application</a>
 
@@ -85,7 +102,7 @@ Looking for a provider that's not here? [Reach out to us](https://posthog.com/su
 
 ### GitLab
 
-<FeatureAvailability allPlans />
+<FeatureAvailability availability={_frontmatter.availability.features.gitlab} />
 
 1. Go to `Settings -> Applications` in your GitLab instance (<a href='https://gitlab.com/profile/applications' target='_blank'>click here for GitLab.com</a>)
 
@@ -100,7 +117,7 @@ Looking for a provider that's not here? [Reach out to us](https://posthog.com/su
 
 ### Google
 
-<FeatureAvailability availablePlans={['free', 'standard', 'enterpriseCloud', 'startup', 'scale', 'enterprise']} />
+<FeatureAvailability availability={_frontmatter.availability.features.google} />
 
 To set up Google SSO please follow these instructions:
 
@@ -116,7 +133,7 @@ To set up Google SSO please follow these instructions:
 
 ## SAML
 
-<FeatureAvailability availablePlans={['enterpriseCloud', 'enterprise']} />
+<FeatureAvailability availability={_frontmatter.availability.features.saml} />
 
 SAML (Security Assertion Markup Language) enables users to have a single set of credentials to access multiple systems. It also has the benefits of centralizing user management to aid maintenance. If your company has an Identity Provider (IdP) that uses SAML, you can integrate it with PostHog (Service Provider, SP) so your users can authenticate through your SAML portal instead of having an additional password for PostHog.
 

@@ -7,6 +7,20 @@ availability:
     free: partial
     selfServe: full
     enterprise: full
+
+    features:
+        cohorts:
+            free: false
+            selfServe: true
+            enterprise: true
+        wildcardGroups:
+            free: false
+            selfServe: true
+            enterprise: true
+        advancedOptions:
+            free: false
+            selfServe: true
+            enterprise: true
 ---
 
 ## Overview
@@ -93,6 +107,8 @@ This will give us the exact conversion rate of this step, as well as the average
 
 ### Viewing recordings and creating cohorts from a step
 
+<FeatureAvailability availability={_frontmatter.availability.features.cohorts} />
+
 One of the most powerful features of the Paths insight is the ability to see all the users who passed through a specific step.
 To do this, we simply click on the blue number next to the name of step which shows how many users arrived at this point, which will bring up a list of all of these users.
 
@@ -145,6 +161,8 @@ Filters can also be combined in order to define more complex groups, creating st
 
 ### Wildcard groups
 
+<FeatureAvailability availability={_frontmatter.availability.features.wildcardGroups} />
+
 Wildcard groups are an advanced feature that allows you to group multiple events together into a single step based on certain patterns.
 Wildcard groups work by using the `*` character to match against an event. All events that contain a certain pattern will be grouped together, and you'll see their name in the paths displayed as the pattern you set.
 
@@ -179,6 +197,8 @@ Exclusions allow you to remove events entirely from being displayed in a path, a
 ![excluding two events](../images/docs/user-guides/paths/exclusions.png)
 
 ### Advanced options
+
+<FeatureAvailability availability={_frontmatter.availability.features.advancedOptions} />
 
 Paths provide a number of more advanced configuration options for customizing the behavior of the insight.
 
