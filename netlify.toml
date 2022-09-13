@@ -905,11 +905,6 @@
 
 # Manually Added: 2021-11-04
 [[redirects]]
-    from = "/about"
-    to = "/handbook/company/story"
-
-# Manually Added: 2021-11-04
-[[redirects]]
     from = "/team"
     to = "/handbook/company/team"
 
