@@ -51,10 +51,3 @@ We're young, aren't struggling for finance and we've the team needed to deepen o
 ## Tap into talent
 
 Engineers are becoming increasingly mission-driven creators who want to understand what the user struggles with and how to alleviate those struggles. During our hiring process, many engineers reveal that they’re leaving their current companies because there’s simply no room to create stuff - either because they’re not given the autonomy to do so or because the product(s) they work on lack sufficient usage to track trends and test new features. Good engineers are scarce, and if you’re lucky enough to snag a few bright stars, give them the keys to the kingdom and watch what they build with it. You’ll be pleasantly surprised.
-
-_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
-
-<NewsletterForm
-compact
-/>
-

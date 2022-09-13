@@ -18,7 +18,7 @@ There are plenty of product analytics tools out there, but all the alternatives 
 
 ## Feb 2020: Launch
 
-We got into YCombinator's W20 batch, and just a couple of weeks after starting realized that we needed to build PostHog.
+We got into Y Combinator's W20 batch, and just a couple of weeks after starting realized that we needed to build PostHog.
 
 We launched on [Hacker News](https://news.ycombinator.com/item?id=22376732) with our MVP, just 4 weeks after we started writing code.
 
@@ -28,7 +28,7 @@ Since then, we've realized that the same reasons that PostHog was appealing to u
 
 ## Apr 2020: $3M Seed round
 
-After we finished YCombinator, [we raised a $3.025M seed round](../../blog/raising-3m-for-os). This was from YCombinator's Continuity Fund, 1984 Ventures. You can learn more about how we raised the money.
+After we finished Y Combinator, [we raised a $3.025M seed round](../../blog/raising-3m-for-os). This was from Y Combinator's Continuity Fund, 1984 Ventures. You can learn more about how we raised the money.
 
 As we started raising, we started hiring. We brought on board [Marius, Eric and James G](../../handbook/company/team).
 
