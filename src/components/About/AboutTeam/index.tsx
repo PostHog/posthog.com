@@ -36,7 +36,7 @@ export const AboutTeam = () => {
 
             <div className="relative text-center pt-16 pb-24 ml-12">
                 <StaticImage
-                    src="./Map/images/map-with-pins.png"
+                    src="./Map/images/map.png"
                     width={795}
                     height={485}
                     placeholder="blurred"
@@ -72,6 +72,22 @@ export const AboutTeam = () => {
                     <Dot classes="top-[-6.85rem] left-[-15.5rem]" />
                     <Dot classes="top-[-6rem] left-[-16rem]" />
                     <Dot classes="top-[-4.9rem] left-[-12.3rem]" />
+                    <Dot classes="top-[-7.5rem] left-[-10.5rem]" />
+                    <Dot classes="top-[-7.75rem] left-[-10rem]" />
+                    <Dot classes="top-[-8rem] left-[-9.8rem]" />
+                    <Dot classes="top-[-8.5rem] left-[-8.75rem]" />
+                    <Dot classes="top-[-9.8rem] left-[-4.5rem]" />
+                    <Dot classes="top-[-9.1rem] left-[-3.8rem]" />
+                    <Dot classes="top-[-9.4rem] left-[-3.5rem]" />
+                    <Dot classes="top-[-9.2rem] left-[-3.3rem]" />
+                    <Dot classes="top-[-9rem] left-[-3rem]" />
+                    <Dot classes="top-[-8.75rem] left-[-2.8rem]" />
+                    <Dot classes="top-[-8rem] left-[-2.5rem]" />
+                    <Dot classes="top-[-7.75rem] left-[-2rem]" />
+                    <Dot classes="top-[-7.25rem] left-[-1.6rem]" />
+                    <Dot classes="top-[-8rem] left-[-1.25rem]" />
+                    <Dot classes="top-[-8.75rem] left-[-.25rem]" />
+                    <Dot classes="top-[-.9rem] left-[-.1rem]" />
                 </div>
             </div>
         </section>
