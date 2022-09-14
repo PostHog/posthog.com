@@ -1,8 +1,10 @@
 import React from 'react'
 import { CallToAction } from 'components/CallToAction'
 import Link from 'components/Link'
+import { graphql, useStaticQuery } from 'gatsby'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 
-const BlogCallout = () => {
+const BlogCallout = ({ post }) => {
     return (
         <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 64">
             <g clipPath="url(#a)">
@@ -25,6 +27,8 @@ const BlogCallout = () => {
 }
 
 export const AboutBlog = () => {
+    const data = useStaticQuery(query)
+    const latestBlogPost = data.allMdx.nodes[0]
     return (
         <section
             id="blog"
@@ -43,18 +47,43 @@ export const AboutBlog = () => {
                 </CallToAction>
             </div>
             <div className="col-span-2 relative">
-                <Link to="/blog/post">
-                    <figure className="mb-2">
-                        <div className="aspect-video border border-solid border-gray-aceent-dark flex items-center justify-center">
-                            image here
-                        </div>
-                    </figure>
-                    <h4 className="text-white text-center lg:text-left">Latest blog post title name</h4>
+                <Link to={latestBlogPost.fields.slug}>
+                    <GatsbyImage image={getImage(latestBlogPost.frontmatter.featuredImage)} />
+                    <h4 className="text-white text-center lg:text-left mt-2">{latestBlogPost.frontmatter.title}</h4>
                 </Link>
                 <div className="w-[170px] h-[64px] absolute bottom-[-20px] left-[-190px] hidden lg:block">
-                    <BlogCallout />
+                    <BlogCallout post={latestBlogPost} />
                 </div>
             </div>
         </section>
     )
 }
+
+const query = graphql`
+    {
+        allMdx(
+            filter: {
+                fields: { slug: { regex: "/^/blog/" } }
+                frontmatter: { date: { ne: null } }
+                isFuture: { ne: true }
+            }
+            limit: 1
+            sort: { fields: frontmatter___date, order: DESC }
+        ) {
+            nodes {
+                fields {
+                    slug
+                }
+                frontmatter {
+                    date
+                    featuredImage {
+                        childImageSharp {
+                            gatsbyImageData
+                        }
+                    }
+                    title
+                }
+            }
+        }
+    }
+`
