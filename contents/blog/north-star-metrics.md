@@ -1,5 +1,5 @@
 ---
-date: 2021-11-12
+date: 2022-14-09
 title: Finding your North Star metric and why it matters
 rootPage: /blog
 sidebar: Blog
@@ -8,7 +8,7 @@ hideAnchor: true
 author: ["andy-vandervell"]
 featuredImage: ../images/blog/give-back-friday.png
 featuredImageType: full
-categories: ["Guides", "Product analytics", "PostHog Academy"]
+categories: ["Guides", "Product analytics"]
 ---
 
 Successful products need actionable metrics and for many businesses this starts with identifying what many refer to as a 'North Star' metric.
@@ -23,14 +23,14 @@ This article explores the different types of North Star metrics using examples f
 - [How to track your North Star metric](#how-to-track-your-north-star-metric)
 - [Further reading](#further-reading)
 
-> This article is part of our [PostHog Academy series](/blog/categories/posthog-academy) where we explain the fundamentals of product analytics.
+> **Changelog**
+> - Nov 12, 2021: Original article publish date
+> - Set 14, 2022: Added how to subcribe to insights and dashboards
 
 ## What is a North Star metric?
 In its simplest form, a North Star is a metric which provides a singular focus for a company or product's growth and success. Every department should understand it and how they influence it – either directly or indirectly. It's something you should monitor regularly - perhaps by [adding it to a PostHog dashboard](https://posthog.com/docs/user-guides/dashboards), for example. 
 
 North Star metrics can and should change over time. What makes sense for an early-stage start-up won't be the same for an established business, so it's a metric that should be interrogated frequently to ensure it's still the right one for you.
-
-> This article is part of our [PostHog Academy series](/blog/categories/posthog-academy) where we explain the fundamentals of product analytics.
 
 ### Examples of good North Star metrics
 
@@ -77,7 +77,7 @@ Examples of engagement metrics include active users (daily, weekly or monthly) o
 If you're selling something like a physical product or service, growth efficiency is a possible North Star for you. This could be defined as the margin on your product or, particularly for any subscription-based service, the cost of acquiring new customers. Think **Manscaped**, **Dollar Shave Club** or even **Apple** – upgrading the RAM on a MacBook is expensive for a reason.
 
 ### Customer growth
-Are you trying to convert free users into paid users? If so, customer growth might be a good place to focus. The perfect example here is everyone's favourite/most-hated daily distraction: **Slack**. Just remember to avoid vanity metrics like registered users. Monitor paid users or teams instead, as these are revenue generating and speak to the quality of experience and not just your ability to acquire email addresses.
+Are you trying to convert free users into paid users? If so, customer growth might be a good place to focus. The perfect example here is everyone's favorite/most-hated daily distraction: **Slack**. Just remember to avoid vanity metrics like registered users. Monitor paid users or teams instead, as these are revenue generating and speak to the quality of experience and not just your ability to acquire email addresses.
 
 ### User experience
 User experience metrics are numerous and will differ depending on the business or product, but they will typically directly or indirectly reference retention. If people enjoy using a product, they're more likely to continue to use it and recommend it to a friend. It's a good choice for early-stage startups or businesses which rely on word-of-mouth growth.
@@ -106,21 +106,11 @@ For us, retaining users is the first step on the path to profitability and a met
 
 ## How to track your North Star metric
 
-Product analytics platforms are the ideal way to track your North Star metric, as they enable you to pull a variety of data into a single platform and correlate it to other activities. 
+Needless to say, a product analytics platform like PostHog is essential for tracking any North Star metric. Tools like Google Analytics simply don't offer the [depth of insight needed](https://posthog.com/customers/mention-me), which also rules out popular privacy-first alternatives like Plausible, Fathom, and Umami.
 
-Naturally, we think PostHog is the best product analytics platform available because it enables you to deploy analytics onto your own infrastructure. That means you don't need to rely on third parties which may be blocked by ad blockers or privacy features, nor do you need to send any data to a third-party platform. This approach increases the accuracy of your data, minimizes the risk of security breaches and gives you greater control. 
+**If you're already using PostHog**, we recommend creating a dashboard featuring your chosen North Star metric (plus other [key product metrics](/blog/b2b-saas-product-metrics)) and adding it to your PostHog project homepage. This ensures you and your team can keep an eye on progress each time your login. Better still, you can have regular updates on any insight or dashboard delivered to a Slack group on any schedule you choose – subscriptions are accessible via the '...' menu. Read our [product manual](/using-posthog) for guidance on the different types of insights you can create.
 
-Of course, there are plenty of other product analytics tools - including [open-source analytics platforms](https://posthog.com/blog/best-open-source-analytics-tools), as well as closed-source alternatives such as Mixpanel, Amplitude and Pendo. 
-
-> New to product analytics? Check out our [introduction to product analytics](https://posthog.com/blog/what-is-product-analytics), or [request a demo with one of our engineers](https://posthog.com/book-a-demo) to get started with PostHog. 
-
-### Why you shouldn't use Google Analytics to track your North Star metric
-
-Google Analytics is good for a lot of things, especially if you want to track basic web metrics such as pageviews or  bounce rate. However, as a _web_ analytics platform it is limited to tracking only specific metrics for websites. It can't track other types of events, nor does it offer the same breadth of analysis tools that a product analytics platform like PostHog does. 
-
-You couldn't, for example, use Google Analytics to track a North Star metric such as Discoveries. Nor could you self-host it on your own infrastructure. 
-
-Ultimately, PostHog is a better fit for tracking both high-level and detailed product metrics, while Product and Engineering teams routinely find that [Google Analytics doesn't offer the depth of insight they need](https://posthog.com/customers/mention-me).
+**If you're not a PostHog user**, we recommend silently contemplating the consequences of this grievous error, and then reading our [product detail pages](/product) or trying our [live demo environment](https://demo.posthog.com/). If you have questions, [book a demo](/book-a-demo) with our customer success team.
 
 ## Further reading
 
@@ -129,7 +119,5 @@ Ultimately, PostHog is a better fit for tracking both high-level and detailed pr
 - [Introduction to SaaS product metrics](/blog/b2b-saas-product-metrics): A guide to common B2B product metrics and how to measure them
 
 - [How to measure product engagement](/blog/how-to-measure-product-engagement): How to define engagement for your platform, and how to use analytics tools to measure and build on the results
-
-> PostHog is an open source analytics tool which enables data and engineering teams to build better products faster and without writing SQL.
 
 <ArrayCTA />
