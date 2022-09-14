@@ -18,9 +18,11 @@ export const AboutStory = () => {
                         weeks later, we'd gone past 1,500 stars on GitHub.
                     </p>
 
-                    <CallToAction to="/handbook/company/story">Continue reading</CallToAction>
+                    <CallToAction to="/handbook/company/story" className="w-full mdlg:w-auto">
+                        Continue reading
+                    </CallToAction>
                 </div>
-                <div className="border-t border-dashed border-gray-accent-light inline-flex gap-8 items-center pt-3 pb-5 mt-6 md:mr-24">
+                <div className="border-t border-dashed border-gray-accent-light inline-flex sm:flex-col mdlg:flex-row  gap-8 sm:gap-2 mdlg:gap-8 items-center sm:items-start mdlg:items-center pt-3 pb-5 mt-6 sm:mr-12 mdlg:mr-24">
                     <p className="pb-0 mb-0 text-sm opacity-75">Want to be our next star?</p>
                     <span className="h-[28px] w-[125px]">
                         <GitHubButton
@@ -50,24 +52,28 @@ export const AboutStory = () => {
                     />
                     <div className="bg-gradient-to-b from-transparent to-tan absolute w-full h-[60%] md:h-full md:top-4em lg:top-[initial] lg:h-[60%] bottom-0" />
                 </div>
-                <StaticImage
-                    src="./images/james.png"
-                    width={385.5}
-                    height={366}
-                    alt="James Hawkins, CEO, Co-founder"
-                    placeholder="none"
-                    objectFit="contain"
-                    className="absolute -bottom-8 lg:-bottom-16 left-4 md:-left-8 lg:-left-16 w-[55vw] md:w-[300px] lg:w-auto"
-                />
-                <StaticImage
-                    src="./images/tim.png"
-                    width={366}
-                    height={320}
-                    alt="Tim Glaser, CTO, Co-founder"
-                    placeholder="none"
-                    objectFit="contain"
-                    className="absolute bottom-0 lg:-bottom-2 right-4 md:right-4 lg:right-8 w-[50vw] md:w-[300px] lg:w-auto"
-                />
+                <div className="absolute -bottom-8 lg:-bottom-16 left-4 md:-left-8 lg:-left-16">
+                    <StaticImage
+                        src="./images/james.png"
+                        width={385.5}
+                        height={366}
+                        alt="James Hawkins, CEO, Co-founder"
+                        placeholder="none"
+                        objectFit="contain"
+                        className="w-[55vw] md:w-[300px] lg:w-auto"
+                    />
+                </div>
+                <div className="absolute bottom-0 lg:-bottom-2 right-4 md:right-4 lg:right-8">
+                    <StaticImage
+                        src="./images/tim.png"
+                        width={366}
+                        height={320}
+                        alt="Tim Glaser, CTO, Co-founder"
+                        placeholder="none"
+                        objectFit="contain"
+                        className="w-[50vw] md:w-[300px] lg:w-auto"
+                    />
+                </div>
             </aside>
         </section>
     )

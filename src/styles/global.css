@@ -532,6 +532,14 @@ ul {
     display: block;
     margin-left: auto;
     margin-right: auto;
+
+    > div:first-child {
+        @apply pl-4;
+    }
+
+    > div:last-child {
+        @apply pr-4;
+    }
 }
 .slick-track:before,
 .slick-track:after {
