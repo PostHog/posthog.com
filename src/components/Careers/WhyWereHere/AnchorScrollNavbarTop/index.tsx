@@ -19,7 +19,6 @@ const ButtonLink = ({
 
     return (
         <span
-            active={section == currentSection}
             onClick={clickHandler}
             className="block text-almost-black leading-tight font-medium hover:text-red dark:text-white dark:hover:text-red cursor-pointer hover:opacity-100 opacity-60 text-[14px] py-1 relative active:top-[0.5px] active:scale-[.99]"
         >
@@ -107,7 +106,7 @@ export const AnchorScrollNavbarTop = ({ className = '' }: AnchorScrollNavbarTopP
     }, [])
 
     const navbarLinks = inPageLinks.map(({ label, section }) => (
-        <li className="relative leading-none m-0">
+        <li key={label} className="relative leading-none m-0">
             <ButtonLink section={section} currentSection={currentSection} key={section}>
                 {label}
             </ButtonLink>
