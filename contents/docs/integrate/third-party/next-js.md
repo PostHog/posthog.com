@@ -39,7 +39,10 @@ After that, we want to initialize the PostHog instance in `pages/_app.js`
 ```tsx
 import { usePostHog } from 'next-use-posthog'
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }) {  
+  // NOTE: If set as an environment variable be sure to prefix with `NEXT_PUBLIC_`
+  // For more info see https://nextjs.org/docs/basic-features/environment-variables#exposing-environment-variables-to-the-browser
+  
   usePostHog('YOUR_API_KEY', { api_host: 'https://app.posthog.com' })
 
   return <Component {...pageProps} />
