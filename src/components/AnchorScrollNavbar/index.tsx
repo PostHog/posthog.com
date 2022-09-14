@@ -39,7 +39,9 @@ export default function AnchorScrollNavbar({ menu, autoScroll = true, className 
                                     offset={-57}
                                     to={url}
                                     hashSpy
-                                    className={`mr-1 cursor-pointer flex items-center space-x-2 text-[14px] font-semibold px-3 py-2 rounded-md hover:bg-gray-accent-light text-black hover:text-black opacity-60 ${
+                                    className={`mr-1 cursor-pointer flex items-center space-x-2 text-[14px] font-semibold px-3 py-2 rounded-md hover:bg-gray-accent-light text-black transition-all hover:text-black opacity-60 hover:opacity-75 relative
+                                    active:top-[0.5px]
+                                    active:scale-[.98] ${
                                         activeSliderIndex === index ? 'bg-gray-accent-light opacity-100 font-bold' : ''
                                     }`}
                                     spy

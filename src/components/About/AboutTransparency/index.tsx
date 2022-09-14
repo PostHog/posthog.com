@@ -50,8 +50,8 @@ const Star = () => {
 
 export const AboutTransparency = () => {
     return (
-        <section id="transparency" className="bg-black pt-12 lg:pt-16 relative px-4 lg:px-8 mb-12">
-            <div className="flex flex-col-reverse lg:flex-row items-end gap-8 max-w-5xl mx-auto text-white">
+        <section id="transparency" className="bg-black pt-12 mdlg:pt-16 relative px-4 mdlg:px-8 mb-12">
+            <div className="flex flex-col-reverse mdlg:flex-row mdlg:items-end gap-8 max-w-5xl mx-auto text-white">
                 <aside className="basis-[60%] flex flex-col relative h-full">
                     <div className="border-2 border-white/50 border-solid px-8 py-6 max-w-sm">
                         <div className="flex items-center justify-between border-b border-dashed border-gray-accent-light pb-3 mb-3">
@@ -72,13 +72,14 @@ export const AboutTransparency = () => {
                         src="./images/xray.png"
                         width={651}
                         height={289}
+                        objectFit="contain"
                         alt="A hedgehog getting an x-ray as an analogy of how transparent we try to be"
-                        className="-mx-4 lg:-mx-0 -mt-6 lg:-mt-10"
+                        className="-mx-4 mdlg:-mx-0 -mt-6 md:-mt-16 mdlg:mt-8 lg:-mt-10"
                     />
                 </aside>
-                <div className="flex-1 pb-16">
+                <div className="flex-1 mdlg:pb-16">
                     <h3 className="text-4xl mb-2">Why we're different</h3>
-                    <h4 className="font-semibold opacity-70">
+                    <h4 className="font-semibold opacity-70 leading-tight">
                         Being open source, we operate in public as much as we can.
                     </h4>
                     <p className="opacity-70">Here are some popular pages from our company handbook:</p>
