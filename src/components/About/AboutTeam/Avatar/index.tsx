@@ -21,10 +21,10 @@ export const circle = (size = 'lg', className = '') => cntl`
     ${className}
 `
 
-export const Avatar = ({ size = 'lg', className = '', image, country, name }) => {
+export const Avatar = ({ size = 'lg', className = '', image, country, name, color }) => {
     return (
         <div className={`absolute ${className}`}>
-            <div className={`${circle(size)}`}>
+            <div style={{ backgroundColor: color ?? 'white' }} className={`${circle(size)}`}>
                 <GatsbyImage
                     alt={name}
                     image={getImage(image)}

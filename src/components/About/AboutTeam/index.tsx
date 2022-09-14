@@ -20,15 +20,16 @@ const Dot = ({ classes }: DotProps) => {
 }
 
 const avatarStyles = [
+    { color: '#DCB1E3', className: 'right-[-22rem] top-[-2rem]', size: 'lg' },
+
+    { color: '#FDEDC9', className: 'right-[-20rem] top-[-12rem]', size: 'md' },
+    { color: '#E19D9D', className: 'right-[-11rem] bottom-[-12rem]', size: 'xl' },
+    { color: '#A2B0D4', className: 'right-[-10rem] top-[-18rem]', size: 'lg' },
     { color: '#9DE1D9', className: 'left-[-26rem] top-[-18rem]', size: 'xl' },
     { color: '#B3E19D', className: 'left-[-8rem] top-[-16rem]', size: 'md' },
-    { color: '#A2B0D4', className: 'right-[-10rem] top-[-18rem]', size: 'lg' },
-    { color: '#FDEDC9', className: 'right-[-20rem] top-[-12rem]', size: 'md' },
-    { color: '#DCB1E3', className: 'right-[-22rem] top-[-2rem]', size: 'lg' },
-    { color: '#E19D9D', className: 'right-[-11rem] bottom-[-12rem]', size: 'xl' },
-    { color: '#E6A9E8', className: 'left-[-6rem] bottom-[-10rem]', size: 'md' },
     { color: '#9DA4E1', className: 'left-[-20rem] bottom-[-12rem]', size: 'xl' },
     { color: '#FBBC05', className: 'left-[-24rem] bottom-[-2rem]', size: 'md' },
+    { color: '#E6A9E8', className: 'left-[-6rem] bottom-[-10rem]', size: 'md' },
 ]
 
 export const AboutTeam = () => {
@@ -95,6 +96,7 @@ const query = graphql`
                     }
                 }
             }
+            sort: { fields: frontmatter___startDate }
         ) {
             nodes {
                 frontmatter {
