@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['joe-martin']
 date: 2022-09-16
-featuredImage: ../images/tutorials/banners/create-events-the-easy-way.png
+featuredImage: ../images/tutorials/banners/create-new-events-the-easy-way.png
 topics: ["events", "toolbar"]
 ---
 
@@ -71,13 +71,13 @@ Sometimes, you may want to create complex events with multiple elements. PostHog
 
 To select additional elements, select `_Add Another Element +_’ from the bottom of the modal. 
 
-![create actions the easy way with posthog](contents/images/tutorials/custom-events-the-easy-way/multi-element-event-posthog.png)
+![create actions the easy way with posthog](../images/tutorials/custom-events-the-easy-way/multi-element-event-posthog.png)
 
 Next, select ‘_Select Element_’ and click the additional element you want to include in your event — you can then customize the action just like you could with the previous element. 
 
 ### Further reading
 Congratulations, you just made a new calculated event using the PostHog toolbar. You can use this event in insights such as funnels, trends or paths — or you can check these tutorials for further inspiration. 
 
-[How to correlate errors with product performance using Sentry](https://posthog.com/tutorials/sentry-plugin-tutorial)
-[How to build, analyze and optimize conversion funnels in PostHog](/tutorials/funnels)
-[How and why to build an AARRR pirate funnel in PostHog](https://posthog.com/blog/aarrr-pirate-funnel)
+- [How to correlate errors with product performance using Sentry](https://posthog.com/tutorials/sentry-plugin-tutorial)
+- [How to build, analyze and optimize conversion funnels in PostHog](/tutorials/funnels)
+- [How and why to build an AARRR pirate funnel in PostHog](https://posthog.com/blog/aarrr-pirate-funnel)
