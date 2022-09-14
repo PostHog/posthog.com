@@ -10,19 +10,22 @@ hideAnchor: true
 - **James Hawkins, CEO & Co-founder**
   - **Tim Glaser, CTO & Co-founder**
     - **Marius Andra, Full Stack Engineer**
-      - Ben White, Full Stack Engineer
       - Emanuele Capparelli, Growth Engineer
       - Michael Matloka, Full Stack Engineer
       - Paul D'Ambra, Full Stack Engineer
+    - **Ben White, Full Stack Engineer**
+      - Alex Kim, Full Stack Engineer
     - **James Greenhill, Data/Infra engineer**
       - Guido Iaquinti, Site Reliability Engineer
       - Tiina Turban, Full Stack Engineer
       - Yakko Majuri, Full Stack Engineer
+      - Ellie Huxtable, Full Stack Engineer
     - **Eric Duong, Full Stack Engineer**
-      - Alex Kim, Full Stack Engineer
       - Li Yi Yu, Full Stack Engineer
       - Neil Kakkar, Full Stack Engineer
       - Rick Marron, Full Stack Engineer
+    - **Luke Harries, Head of Product**
+      - Annika Schmid, Product Manager
     - Karl-Aksel Puulmann, Full Stack Engineer
     - Harry Waye, Full Stack Engineer
   - **Charles Cook, VP of Operations & Marketing**
