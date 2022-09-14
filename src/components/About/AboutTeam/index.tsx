@@ -1,8 +1,8 @@
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 import { CallToAction } from 'components/CallToAction'
-import { Map } from './Map'
 import { Avatar } from './Avatar'
+import { graphql, useStaticQuery } from 'gatsby'
 
 interface DotProps {
     classes: string
@@ -17,8 +17,21 @@ const Dot = ({ classes }: DotProps) => {
         </div>
     )
 }
+const avatarStyles = [
+    { color: '#9DE1D9', className: 'left-[-26rem] top-[-18rem]', size: 'xl' },
+    { color: '#B3E19D', className: 'left-[-8rem] top-[-16rem]', size: 'md' },
+    { color: '#A2B0D4', className: 'right-[-10rem] top-[-18rem]', size: 'lg' },
+    { color: '#FDEDC9', className: 'right-[-20rem] top-[-12rem]', size: 'md' },
+    { color: '#DCB1E3', className: 'right-[-22rem] top-[-2rem]', size: 'lg' },
+    { color: '#E19D9D', className: 'right-[-11rem] bottom-[-12rem]', size: 'xl' },
+    { color: '#E6A9E8', className: 'left-[-6rem] bottom-[-10rem]', size: 'md' },
+    { color: '#9DA4E1', className: 'left-[-20rem] bottom-[-12rem]', size: 'xl' },
+    { color: '#FBBC05', className: 'left-[-24rem] bottom-[-2rem]', size: 'md' },
+]
 
 export const AboutTeam = () => {
+    const { teamMembers } = useStaticQuery(query)
+
     return (
         <section id="team" className="py-12 px-4">
             <h3 className="text-5xl mb-4 lg:mb-1 text-center">
@@ -42,32 +55,21 @@ export const AboutTeam = () => {
                     placeholder="blurred"
                     alt="Map of the PostHoggers"
                 />
-                {/* <Map className="w-[795px] h-[485px] scale-75" /> */}
                 <div className="absolute inset-1/2 border">
-                    <Avatar size="xl" handle="li-yi-yu" color="#9DE1D9" className="left-[-26rem] top-[-18rem]" />
-                    <Avatar size="md" handle="neil-kakkar" color="#B3E19D" className="left-[-8rem] top-[-16rem]" />
-                    <Avatar size="lg" handle="yakko-majuri" color="#A2B0D4" className="right-[-10rem] top-[-18rem]" />
-                    <Avatar size="md" handle="eric-duong" color="#FDEDC9" className="right-[-20rem] top-[-12rem]" />
-                    <Avatar size="lg" handle="marius-andra" color="#DCB1E3" className="right-[-22rem] top-[-2rem]" />
-                    <Avatar
-                        size="xl"
-                        handle="lottie-coxon"
-                        color="#E19D9D"
-                        className="right-[-11rem] bottom-[-12rem]"
-                    />
-                    <Avatar size="md" handle="coua-phang" color="#E6A9E8" className="left-[-6rem] bottom-[-10rem]" />
-                    <Avatar
-                        size="xl"
-                        handle="guido-iaquinti"
-                        color="#9DA4E1"
-                        className="left-[-20rem] bottom-[-12rem]"
-                    />
-                    <Avatar
-                        size="md"
-                        handle="cameron-deleone"
-                        color="#FBBC05"
-                        className="left-[-24rem] bottom-[-2rem]"
-                    />
+                    {teamMembers.nodes.map(({ frontmatter: { name, country, headshot } }, index) => {
+                        const styles = avatarStyles[index]
+                        return (
+                            <Avatar
+                                key={name}
+                                size={styles.size}
+                                className={styles.className}
+                                color={styles.color}
+                                image={headshot}
+                                name={name}
+                                country={country}
+                            />
+                        )
+                    })}
                     <Dot classes="top-[-7.25rem] left-[-16rem]" />
                     <Dot classes="top-[-6.85rem] left-[-15.5rem]" />
                     <Dot classes="top-[-6rem] left-[-16rem]" />
@@ -93,3 +95,40 @@ export const AboutTeam = () => {
         </section>
     )
 }
+
+const query = graphql`
+    {
+        teamMembers: allMdx(
+            filter: {
+                fields: { slug: { regex: "/^/team/" } }
+                frontmatter: {
+                    name: {
+                        in: [
+                            "Li Yi Yu"
+                            "Neil Kakkar"
+                            "Yakko Majuri"
+                            "Eric Duong"
+                            "Marius Andra"
+                            "Lottie Coxon"
+                            "Coua Phang"
+                            "Guido Iaquinti"
+                            "Cameron DeLeone"
+                        ]
+                    }
+                }
+            }
+        ) {
+            nodes {
+                frontmatter {
+                    country
+                    name
+                    headshot {
+                        childImageSharp {
+                            gatsbyImageData(placeholder: NONE)
+                        }
+                    }
+                }
+            }
+        }
+    }
+`
