@@ -113,8 +113,8 @@ export const Benefits = () => {
                     <Structure.SectionHeader
                         title="Benefits"
                         titleTag="h2"
-                        leadText="We’re always looking to expand our benefits to offer meaningful value to our team who make all of this possible."
-                        leadTextClassName="opacity-80 mb-8"
+                        leadText="We're always looking to expand our benefits to offer meaningful value to our team who make all of this possible."
+                        leadTextClassName="mb-8"
                     />
                 </div>
 
