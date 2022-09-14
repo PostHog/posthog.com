@@ -25,7 +25,7 @@ This article explores the different types of North Star metrics using examples f
 
 > **Changelog**
 > - Nov 12, 2021: Original article publish date
-> - Set 14, 2022: Added how to subcribe to insights and dashboards
+> - Set 14, 2022: Added how to subscribe to insights and dashboards
 
 ## What is a North Star metric?
 In its simplest form, a North Star is a metric which provides a singular focus for a company or product's growth and success. Every department should understand it and how they influence it – either directly or indirectly. It's something you should monitor regularly - perhaps by [adding it to a PostHog dashboard](https://posthog.com/docs/user-guides/dashboards), for example. 
