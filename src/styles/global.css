@@ -1106,3 +1106,8 @@ iframe[src*='youtube-nocookie.com'] {
         width: 0.55em;
     }
 }
+
+.about-nav .slick-track,
+.careers-nav .slick-track {
+    @apply md:!flex md:!justify-center md:!w-auto md:!transform-none;
+}

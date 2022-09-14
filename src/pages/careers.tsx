@@ -13,6 +13,7 @@ import { WhyWereHere } from '../components/Careers/WhyWereHere'
 import { WorkingAtPostHog } from '../components/Careers/WorkingAtPostHog'
 import { SEO } from '../components/seo'
 import { TeamQuote } from '../components/TeamQuote'
+import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 
 const menu = [
     {
@@ -50,6 +51,7 @@ const IndexPage = () => {
     const latestJob = data?.allAshbyJobPosting?.nodes && data.allAshbyJobPosting.nodes[0]
     const latestJobCreatedAt = latestJob && new Date(latestJob['publishedDate'])
 
+    const breakpoints = useBreakpoint()
     return (
         <Layout>
             <SEO
@@ -62,8 +64,8 @@ const IndexPage = () => {
             <CareersHero />
             <div className="careers-anchor-navbar">
                 <WhyWereHere />
-                <div className="bg-tan sticky top-0 py-2 z-10">
-                    <AnchorScrollNavbar centerMode menu={menu} />
+                <div className="bg-tan sticky top-0 py-2 z-10 careers-nav">
+                    <AnchorScrollNavbar autoScroll={breakpoints.md} menu={menu} />
                 </div>
                 <Transparency />
                 <TeamQuote

@@ -29,7 +29,7 @@ const menu = [
 export const AboutAnchorScrollNavbar = () => {
     const breakpoints = useBreakpoint()
     return (
-        <div className="bg-tan py-2 sticky top-0 z-10 mb-6">
+        <div className="bg-tan py-2 sticky top-0 z-10 mb-6 about-nav">
             <AnchorScrollNavbar
                 autoScroll={breakpoints.md}
                 className="max-w-screen-xl mx-auto lg:px-8 px-4"
