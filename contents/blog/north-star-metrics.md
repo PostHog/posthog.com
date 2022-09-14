@@ -83,7 +83,7 @@ Are you trying to convert free users into paid users? If so, customer growth mig
 User experience metrics are numerous and will differ depending on the business or product, but they will typically directly or indirectly reference retention. If people enjoy using a product, they're more likely to continue to use it and recommend it to a friend. It's a good choice for early-stage startups or businesses which rely on word-of-mouth growth.
 
 ## PostHog's North Star Metric
-As an open-source product analytics company, our ultimate mission is to "increase the number of successful products in the world". 
+As an open-source analytics company, our ultimate mission is to "increase the number of successful products in the world". 
 
 For us that means giving engineers the means to easily capture meaningful data about how people use their product, then use that data to improve it. Engineers can install PostHog and within a few hours, analyze qualitative and quantitative data captured from their product.
 
@@ -102,7 +102,7 @@ PostHog is product-led, so the most important thing for us is knowing that engin
 
 When we conducted user cohort tests to decide on our North Star Metric, we found Discoveries retained 2.3x more users than the alternative metric.
 
-For us, retaining users is the first step on the path to profitability and a metric that many different teams (e.g. engineering, developer relations and content) can support.
+We feel retaining users is the first step on the path to profitability and a metric that many different teams (e.g. engineering, developer relations and content) can support. Retention also supports our focus on word of mouth growth as happy users are more likely to recommend PostHog.
 
 ## How to track your North Star metric
 
