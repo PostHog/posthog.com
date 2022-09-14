@@ -49,7 +49,7 @@ export const AboutTeam = () => {
 
             <div className="relative text-center pt-16 pb-24 ml-12">
                 <StaticImage
-                    src="./Map/images/map.png"
+                    src="./images/map.png"
                     width={795}
                     height={485}
                     placeholder="blurred"

@@ -2,7 +2,7 @@ import Layout from 'components/Layout'
 import { graphql, useStaticQuery } from 'gatsby'
 import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
-import { AnchorScrollNavbar } from '../components/AnchorScrollNavbar'
+import AnchorScrollNavbar from '../components/AnchorScrollNavbar'
 import { Benefits } from '../components/Careers/Benefits'
 import { CareersHero } from '../components/Careers/CareersHero'
 import { InterviewProcess } from '../components/Careers/InterviewProcess'
@@ -13,6 +13,37 @@ import { WhyWereHere } from '../components/Careers/WhyWereHere'
 import { WorkingAtPostHog } from '../components/Careers/WorkingAtPostHog'
 import { SEO } from '../components/seo'
 import { TeamQuote } from '../components/TeamQuote'
+
+const menu = [
+    {
+        name: 'Introduction',
+        url: 'introduction',
+    },
+    {
+        name: 'Transparency',
+        url: 'transparency',
+    },
+    {
+        name: 'Who we hire',
+        url: 'who-we-hire',
+    },
+    {
+        name: 'Interview process',
+        url: 'interview-process',
+    },
+    {
+        name: 'Benefits',
+        url: 'benefits',
+    },
+    {
+        name: 'Working here',
+        url: 'working-at-posthog',
+    },
+    {
+        name: 'Open roles',
+        url: 'open-roles',
+    },
+]
 
 const IndexPage = () => {
     const data = useStaticQuery(query)
@@ -31,7 +62,9 @@ const IndexPage = () => {
             <CareersHero />
             <div className="careers-anchor-navbar">
                 <WhyWereHere />
-                <AnchorScrollNavbar />
+                <div className="bg-tan sticky top-0 py-2 z-10">
+                    <AnchorScrollNavbar centerMode menu={menu} />
+                </div>
                 <Transparency />
                 <TeamQuote
                     backgroundColor="bg-primary"
