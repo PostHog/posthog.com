@@ -3,6 +3,7 @@ import Layout from '../components/Layout'
 import { StaticImage } from 'gatsby-plugin-image'
 import { NewsletterForm } from 'components/NewsletterForm'
 import { Check2 } from 'components/Icons/Icons'
+import { SEO } from 'components/seo'
 
 const Benefit = ({ text }) => {
     return (
@@ -16,6 +17,7 @@ const Benefit = ({ text }) => {
 export const NewsletterPage = () => {
     return (
         <Layout>
+            <SEO title="PostHog Newsletter" image="/images/open-graph-newsletter.png" />
             <div className="md:grid md:grid-cols-5 md:gap-12 px-4 lg:px-12 max-w-6xl mx-auto md:pt-8">
                 <div className="col-span-2 text-right">
                     <StaticImage src="../images/newsletter-signup.png" objectFit="contain" className="w-full h-full" />
