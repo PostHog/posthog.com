@@ -50,24 +50,28 @@ export const AboutStory = () => {
                     />
                     <div className="bg-gradient-to-b from-transparent to-tan absolute w-full h-[60%] md:h-full md:top-4em lg:top-[initial] lg:h-[60%] bottom-0" />
                 </div>
-                <StaticImage
-                    src="./images/james.png"
-                    width={385.5}
-                    height={366}
-                    alt="James Hawkins, CEO, Co-founder"
-                    placeholder="none"
-                    objectFit="contain"
-                    className="absolute -bottom-8 lg:-bottom-16 left-4 md:-left-8 lg:-left-16 w-[55vw] md:w-[300px] lg:w-auto"
-                />
-                <StaticImage
-                    src="./images/tim.png"
-                    width={366}
-                    height={320}
-                    alt="Tim Glaser, CTO, Co-founder"
-                    placeholder="none"
-                    objectFit="contain"
-                    className="absolute bottom-0 lg:-bottom-2 right-4 md:right-4 lg:right-8 w-[50vw] md:w-[300px] lg:w-auto"
-                />
+                <div className="absolute -bottom-8 lg:-bottom-16 left-4 md:-left-8 lg:-left-16">
+                    <StaticImage
+                        src="./images/james.png"
+                        width={385.5}
+                        height={366}
+                        alt="James Hawkins, CEO, Co-founder"
+                        placeholder="none"
+                        objectFit="contain"
+                        className="w-[55vw] md:w-[300px] lg:w-auto"
+                    />
+                </div>
+                <div className="absolute bottom-0 lg:-bottom-2 right-4 md:right-4 lg:right-8">
+                    <StaticImage
+                        src="./images/tim.png"
+                        width={366}
+                        height={320}
+                        alt="Tim Glaser, CTO, Co-founder"
+                        placeholder="none"
+                        objectFit="contain"
+                        className="w-[50vw] md:w-[300px] lg:w-auto"
+                    />
+                </div>
             </aside>
         </section>
     )
