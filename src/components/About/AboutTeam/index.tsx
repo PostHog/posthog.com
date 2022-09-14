@@ -3,6 +3,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 import { CallToAction } from 'components/CallToAction'
 import { Avatar } from './Avatar'
 import { graphql, useStaticQuery } from 'gatsby'
+import Map from './Map'
 
 interface DotProps {
     classes: string
@@ -17,6 +18,7 @@ const Dot = ({ classes }: DotProps) => {
         </div>
     )
 }
+
 const avatarStyles = [
     { color: '#9DE1D9', className: 'left-[-26rem] top-[-18rem]', size: 'xl' },
     { color: '#B3E19D', className: 'left-[-8rem] top-[-16rem]', size: 'md' },
@@ -47,15 +49,8 @@ export const AboutTeam = () => {
                 </CallToAction>
             </div>
 
-            <div className="relative text-center pt-16 pb-24 ml-12">
-                <StaticImage
-                    src="./images/map.png"
-                    width={795}
-                    height={485}
-                    placeholder="blurred"
-                    alt="Map of the PostHoggers"
-                />
-                <div className="absolute inset-1/2 border">
+            <div className="relative text-center pt-16 pb-24">
+                <div className="absolute inset-1/2 md:scale-100 sm:scale-[.6] scale-[.4]">
                     {teamMembers.nodes.map(({ frontmatter: { name, country, headshot } }, index) => {
                         const styles = avatarStyles[index]
                         return (
@@ -70,26 +65,9 @@ export const AboutTeam = () => {
                             />
                         )
                     })}
-                    <Dot classes="top-[-7.25rem] left-[-16rem]" />
-                    <Dot classes="top-[-6.85rem] left-[-15.5rem]" />
-                    <Dot classes="top-[-6rem] left-[-16rem]" />
-                    <Dot classes="top-[-4.9rem] left-[-12.3rem]" />
-                    <Dot classes="top-[-7.5rem] left-[-10.5rem]" />
-                    <Dot classes="top-[-7.75rem] left-[-10rem]" />
-                    <Dot classes="top-[-8rem] left-[-9.8rem]" />
-                    <Dot classes="top-[-8.5rem] left-[-8.75rem]" />
-                    <Dot classes="top-[-9.8rem] left-[-4.5rem]" />
-                    <Dot classes="top-[-9.1rem] left-[-3.8rem]" />
-                    <Dot classes="top-[-9.4rem] left-[-3.5rem]" />
-                    <Dot classes="top-[-9.2rem] left-[-3.3rem]" />
-                    <Dot classes="top-[-9rem] left-[-3rem]" />
-                    <Dot classes="top-[-8.75rem] left-[-2.8rem]" />
-                    <Dot classes="top-[-8rem] left-[-2.5rem]" />
-                    <Dot classes="top-[-7.75rem] left-[-2rem]" />
-                    <Dot classes="top-[-7.25rem] left-[-1.6rem]" />
-                    <Dot classes="top-[-8rem] left-[-1.25rem]" />
-                    <Dot classes="top-[-8.75rem] left-[-.25rem]" />
-                    <Dot classes="top-[-.9rem] left-[-.1rem]" />
+                </div>
+                <div className="md:max-w-[700px] sm:max-w-[400px] max-w-[300px] w-full mx-auto">
+                    <Map />
                 </div>
             </div>
         </section>

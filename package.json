@@ -126,6 +126,7 @@
         "react-responsive": "^8.2.0",
         "react-scroll": "^1.8.3",
         "react-scrollspy": "^3.4.3",
+        "react-simple-maps": "^3.0.0",
         "react-slick": "^0.28.1",
         "redoc": "^2.0.0-rc.62",
         "redux": "^4.0.5",
