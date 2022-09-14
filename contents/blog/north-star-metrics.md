@@ -1,5 +1,5 @@
 ---
-date: 2022-14-09
+date: 2022-09-14
 title: Finding your North Star metric and why it matters
 rootPage: /blog
 sidebar: Blog
