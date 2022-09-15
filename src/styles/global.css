@@ -23,6 +23,7 @@
 *,
 a {
     @apply box-border;
+    font-variant-ligatures: none;
 }
 
 main a,
@@ -531,6 +532,14 @@ ul {
     display: block;
     margin-left: auto;
     margin-right: auto;
+
+    > div:first-child {
+        @apply pl-4;
+    }
+
+    > div:last-child {
+        @apply pr-4;
+    }
 }
 .slick-track:before,
 .slick-track:after {
@@ -1104,4 +1113,9 @@ iframe[src*='youtube-nocookie.com'] {
         vertical-align: top;
         width: 0.55em;
     }
+}
+
+.about-nav .slick-track,
+.careers-nav .slick-track {
+    @apply md:!flex md:!justify-center md:!w-auto md:!transform-none;
 }

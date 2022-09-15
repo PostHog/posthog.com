@@ -72,7 +72,7 @@ This is an unknown unknown; the only way to figure it out is to get started maki
 
 We've been blessed with mainly organic growth to date. The advantage is that this product-led channel is very leveraged - we can double down on our product and we will grow faster (more word-of-mouth growth, and better retention). However, we can't create wild product improvements overnight (mostly) - we need to push on more channels than this to accelerate.
 
-As we created our reference customers, we've realized what the most successful users of PostHog [have in common](/handbook/strategy/strategy).
+As we created our reference customers, we've realized what the most successful users of PostHog [have in common](/handbook/strategy/overview).
 
 First, we need to create a scorecard. Long term revenue is the _output_ but we want to look upstream for a metric that is more controllable, with a faster feedback loop.
 

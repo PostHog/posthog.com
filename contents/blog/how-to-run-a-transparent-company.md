@@ -89,7 +89,7 @@ Another really simple thing to share, with really high impact.
 * OKRs, including _why_ they were picked
 * Board meeting slides
 * Board meeting notes (since the meeting's primary purpose is to cover strategic topics, so the outcome matters too)
-* [Long-term vision](../handbook/strategy/strategy#tldr)
+* [Long-term vision](../handbook/strategy/overview#tldr)
 
 ## How we are open around people topics
 
