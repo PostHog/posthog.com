@@ -20,15 +20,15 @@ const Dot = ({ classes }: DotProps) => {
 }
 
 const avatarStyles = [
+    { color: '#DCB1E3', className: 'right-[-30.5rem] top-[-2.5rem]', size: 'lg' },
+    { color: '#FDEDC9', className: 'right-[-26rem] top-[-12rem]', size: 'md' },
+    { color: '#E19D9D', className: 'right-[-14.5rem] bottom-[-16rem]', size: 'xl' },
+    { color: '#A2B0D4', className: 'right-[-14rem] top-[-22.5rem]', size: 'lg' },
     { color: '#9DE1D9', className: 'left-[-30.5rem] top-[-18.5rem]', size: 'xl' },
     { color: '#B3E19D', className: 'left-[-10rem] top-[-19rem]', size: 'md' },
-    { color: '#A2B0D4', className: 'right-[-14rem] top-[-22.5rem]', size: 'lg' },
-    { color: '#FDEDC9', className: 'right-[-26rem] top-[-12rem]', size: 'md' },
-    { color: '#DCB1E3', className: 'right-[-30.5rem] top-[-2.5rem]', size: 'lg' },
-    { color: '#E19D9D', className: 'right-[-14.5rem] bottom-[-16rem]', size: 'xl' },
-    { color: '#E6A9E8', className: 'left-[-6rem] bottom-[-12rem]', size: 'md' },
     { color: '#9DA4E1', className: 'left-[-23rem] bottom-[-14rem]', size: 'xl' },
     { color: '#FBBC05', className: 'left-[-25rem] bottom-[-1.5rem]', size: 'md' },
+    { color: '#E6A9E8', className: 'left-[-6rem] bottom-[-12rem]', size: 'md' },
 ]
 
 export const AboutTeam = () => {
