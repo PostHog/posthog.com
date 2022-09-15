@@ -48,32 +48,40 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 
 Engineering is spread out into three small teams. Team Platform is a scope-specific team which focuses on deployments and ingestion (see [Team Platform](platform) for more details). App teams East and West work on the PostHog product in general and they're split based on timezones for optimal collaboration. We mostly hire full-stack engineers and each team has expertise across the stack of the entire product. To learn what each team is working on you can take a look at [feature ownership](/handbook/engineering/feature-ownership).
 
-#### [App East](app-east)
+#### [Product Analytics](app-east)
 - [Marius Andra](/handbook/company/team#marius-andra-software-engineer) (Team lead, Full Stack Engineer)
-- [Emanuele Capparelli](/handbook/company/team#ben-white-full-stack-engineer) (Growth Engineer)
 - [Michael Matloka](/handbook/company/team#michael-matloka-software-engineer) (Full Stack Engineer)
 - [Paul D'Ambra](/handbook/company/team#paul-dambra-software-engineer) (Full Stack Engineer)
 - _[Lottie Coxon](/handbook/company/team#lottie-coxon) (Graphic Designer) - pairs with Chris Clark_
-
-#### [App West](app-west)
-- [Eric Duong](/handbook/company/team#eric-duong-software-engineer) (Team lead, Full Stack Engineer)
-- [Neil Kakkar](/handbook/company/team#neil-kakkar-software-engineer) (Full Stack Engineer)
-- [Li Yi Yu](/handbook/company/team#li-yi-yu-full-stack-engineer) (Full Stack Engineer)
-- _[Chris Clark](/handbook/company/team#chris-clark) (Product Designer)_ - _Works across App West and App East_
+- _Hiring for a [full stack engineer](careers/full-stack-engineer)_
+- _Hiring for a [full stack engineer](careers/full-stack-engineer)_
 
 #### [Session Recordings](session-recordings)
 - [Ben White](/handbook/company/team#ben-white-full-stack-engineer) (Full Stack Engineer)
 - [Alex Kim](/handbook/company/team#alex-kim-full-stack-engineer) (Full Stack Engineer)
-- [Rick Marron](/handbook/company/team#rick-marron-full-stack-engineer) (Full Stack Engineer)
+- [Emanuele Capparelli](/handbook/company/team#ben-white-full-stack-engineer) (Growth Engineer)
+- _Hiring for a [full stack engineer](careers/full-stack-engineer)_
+
+#### [App West - Feature flags / experiments / cohorts / SQL](app-west)
+- [Eric Duong](/handbook/company/team#eric-duong-software-engineer) (Team lead, Full Stack Engineer)
+- [Li Yi Yu](/handbook/company/team#li-yi-yu-full-stack-engineer) (Full Stack Engineer)
+- [Neil Kakkar](/handbook/company/team#neil-kakkar-software-engineer) (Full Stack Engineer)
+- _[Chris Clark](/handbook/company/team#chris-clark) (Product Designer)_ - _Works across App West and Product Analytics_
+- _Hiring for a [full stack engineer](careers/full-stack-engineer)_
 
 #### [Platform](platform)
 - [James Greenhill](/handbook/company/team#james-greenhill-software-engineer) (Team lead, Data/Infra Engineer)
-- [Karl-Aksel Puulmann](/handbook/company/team#karlaksel-puulmann-software-engineer) (Full Stack Engineer)
-- [Tiina Turban](/handbook/company/team#tiina-turban-software-engineer) (Full Stack Engineer)
-- [Yakko Majuri](/handbook/company/team#yakko-majuri-software-engineer) (Full Stack Engineer)
-- [Marcus Hyett](/handbook/company/team#marcus-hyett) (Product Manager)
+- Ellie Huxtable
 - [Guido Iaquinti](/handbook/company/team#guido-iaquinti-software-engineer) (Site Reliability Engineer)
+- _Hiring for an [Site Reliability Engineer](site-reliability-engineer-kubernetes)_
+
+#### [Pipeline](pipeline)
+- [Yakko Majuri](/handbook/company/team#yakko-majuri-software-engineer) (Full Stack Engineer)
+- [Karl-Aksel Puulmann](/handbook/company/team#karlaksel-puulmann-software-engineer) (Full Stack Engineer)
 - [Harry Waye](/handbook/company/team#harry-waye-software-engineer) (Full Stack Engineer)
+- [Tiina Turban](/handbook/company/team#tiina-turban-software-engineer) (Full Stack Engineer)
+- _Incoming Senior Data Engineer_
+- _Hiring for a [full stack engineer](careers/full-stack-engineer)_
 
 ### [Marketing](marketing)
 - [Charles Cook](/handbook/company/team#charles-cook-business-operations) (Team lead, VP Ops & Marketing)
