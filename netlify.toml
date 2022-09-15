@@ -2239,3 +2239,9 @@
 [[redirects]]
     from = "/product/experimentation"
     to = "/product/experimentation-suite"
+
+
+# Added: 2022-09-15
+[[redirects]]
+    from = "/handbook/strategy/overview"
+    to = "/handbook/strategy/strategy"
