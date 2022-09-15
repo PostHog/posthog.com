@@ -2203,6 +2203,7 @@
 [[redirects]]
     from = "/docs/data-model"
     to = "/docs/how-posthog-works/data-model"
+    force = true
 
 # Added: 2022-08-25
 [[redirects]]
