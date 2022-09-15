@@ -143,6 +143,8 @@ module.exports = exports.createSchemaCustomization = async ({ actions, schema })
         path: String
     }
     type AshbyJobPostingFormDefFieldsSectionsFields {
+      descriptionPlain: String,
+      isRequired: Boolean,
       field: AshbyJobPostingFormDefFieldsSectionsFieldsField
     }
     type AshbyJobPostingFormDefFieldsSections {

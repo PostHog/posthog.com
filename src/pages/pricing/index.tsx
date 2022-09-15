@@ -9,6 +9,7 @@ import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 const PricingNew = () => {
     const { posthog } = useValues(posthogAnalyticsLogic)
     const [loading, setLoading] = useState(true)
+
     const [featureFlagEnabled, setFeatureFlagEnabled] = useState(false)
 
     useEffect(() => {
