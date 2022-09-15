@@ -84,11 +84,13 @@ Tracking the actual users can really help understand the kinds of user profiles 
 
 Some users are happy to be tracked personally in return for a great project, but we think in most cases that this is unacceptably invasive by default, and it's important to ask permission up front. Let alone, GDPR, CCPA and those other privacy based laws that are appearing.
 
+<GDPRForm />
+
 ## It's not just the data, it's how the tracking works too
 
 An easy step is not to use third party software to do this.
 
-Subtle advert: we built PostHog for this reason. It means you can grab everything you need to do event-based analytics, designed to track a product's use, on your own infrastructure. You can choose to send or not send personal data to your instance too. Given you've full access to the code and database, you can also plugin things like Metabase or your data lake if you need them :) There are some less product focused, more website-based analytics libraries that are also pretty cool - Matomo or Plausible are definitely worth a look depending on your use case.
+Subtle advert: we built PostHog for this reason. It means you can grab everything you need to do event-based analytics, designed to track a product's use, on your own infrastructure. You can choose to send or not send personal data to your instance too. Given you've full access to the code and database, you can also plug in things like Metabase or your data lake if you need them :) There are some less product focused, more website-based analytics libraries that are also pretty cool - Matomo or Plausible are definitely worth a look depending on your use case.
 
 There are many third party SAAS tools (Amplitude/Mixpanel/Heap) that can provide tracking, but a project would have to send user data to them to use them, we think hence why they're rarely (ever?) seen in the open source world.
 

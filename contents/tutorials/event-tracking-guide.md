@@ -181,3 +181,5 @@ To make the most out of PostHog, you should:
   - Custom events let you track exactly what you care about in your product
   - They can be captured from any of our 10+ integrations
   - You can use them in PostHog just like autocaptured events
+
+<NewsletterTutorial compact/>

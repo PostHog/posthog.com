@@ -33,9 +33,9 @@ const PipelineGraphic = () => {
                 <div className="w-[1px] lg:w-1/2 h-full lg:h-[1px] border-l-2 lg:border-t-2 self-start border-gray-accent-light border-dashed" />
             </div>
             <div className="flex justify-center items-center lg:flex-col relative lg:col-span-3">
-                <div className="absolute left-0 lg:left-1/2 lg:transform lg:-translate-x-1/2 w-full -top-8 z-10">
+                <div className="absolute left-0 lg:left-1/2 lg:-translate-x-1/2 w-full -top-8 z-10">
                     <Icon name="logo-bullet" className="w-16 h-16 mx-auto" />
-                    <h5 className="text-base font-bold hidden bg-tan border border-gray border-opacity-50 px-4 py-2 lg:inline-flex rounded-full border-solid leading-none">
+                    <h5 className="text-lg font-bold hidden bg-tan border border-gray/50 px-4 py-2 lg:inline-flex rounded-full border-solid leading-none">
                         Self-serve product analytics for 90% of your product questions
                     </h5>
                 </div>
@@ -55,16 +55,13 @@ export default function Pipelines() {
         <section className={section('text-center')}>
             <h2 className={heading()}>Event pipelines</h2>
             <h3 className={heading('sm')}>
-                Reliably ingest data at any scale to build a holistic view of your customers.
+                Reliably ingest data at any scale to build a holistic view of your customers
             </h3>
-            <CallToAction to="/integrations" type="outline" className="mt-8">
-                Explore integrations
-            </CallToAction>
             <div className="lg:block flex">
                 <div className="grid lg:grid-cols-3 mt-8 lg:mt-16 mb-8 gap-8 lg:gap-0 w-full sm:w-3/4 lg:w-auto">
                     <div>
                         <h4 className="text-2xl m-0 text-blue">Push from a data warehouse</h4>
-                        <p className="text-base font-semibold">from BigQuery, Snowflake, S3 or Redshift</p>
+                        <p className="text-lg font-semibold">from BigQuery, Snowflake, S3 or Redshift</p>
                         <div className="flex space-x-2 justify-center items-center flex-wrap max-w-xs mx-auto">
                             <Chip icon="snowflake" title="Snowflake" />
                             <Chip icon="bigquery" title="BigQuery" />
@@ -74,7 +71,7 @@ export default function Pipelines() {
                     </div>
                     <div>
                         <h4 className="text-2xl m-0 text-red">In-product usage</h4>
-                        <p className="text-base font-semibold">
+                        <p className="text-lg font-semibold">
                             Libraries for JavaScript, server-side and mobile SDKs, built and maintained by PostHog
                         </p>
                         <div className="flex space-x-2 justify-center items-center flex-wrap">
@@ -88,10 +85,10 @@ export default function Pipelines() {
                     </div>
                     <div>
                         <h4 className="text-2xl m-0 text-yellow">Integrate your ecosystem</h4>
-                        <p className="text-base font-semibold">
+                        <p className="text-lg font-semibold">
                             PostHog{' '}
-                            <Link to="/integrations" className="text-primary" style={{ textDecoration: 'underline' }}>
-                                plugins
+                            <Link to="/apps" className="text-primary" style={{ textDecoration: 'underline' }}>
+                                apps
                             </Link>{' '}
                             pipe data between your stack
                         </p>
@@ -109,7 +106,7 @@ export default function Pipelines() {
                             </h4>
                         </Link>
 
-                        <p className="text-base font-semibold">
+                        <p className="text-lg font-semibold">
                             An actionable data schema sets you up for further analysis
                         </p>
                         <div className="flex space-x-2 justify-center items-center flex-wrap max-w-xs mx-auto">

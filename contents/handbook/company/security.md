@@ -36,7 +36,7 @@ Our policies are stored on Drata, so this section of the Handbook just serves to
 - [Encryption Policy](https://drive.google.com/file/d/1mX9s8gRRpOs7UpdZ48KGyCErL8a3DfZD/view?usp=sharing)
 - [Incident Response Plan](https://drive.google.com/file/d/1Dnj_gELBJTMlqTagGs3Mv8JWMbaLXM54/view?usp=sharing)
 - [Information Security Policy](https://drive.google.com/file/d/1Z2S-yl0jBPLVdl_0Qwc5kyIF3Dj3ypTp/view?usp=sharing)
-- [Password Policy](https://drive.google.com/file/d/1Z2S-yl0jBPLVdl_0Qwc5kyIF3Dj3ypTp/view?usp=sharing)
+- [Password Policy](https://drive.google.com/file/d/1FlOKt_yHGSH8vKMsm4z04M58RiyrWo4M/view?usp=sharing?usp=sharing)
 - [Physical Security Policy](https://drive.google.com/file/d/17JkSfMC7ILuAm3YjZRCTB7i8eWLtkuN3/view?usp=sharing)
 - [Responsible Disclosure Policy](https://drive.google.com/file/d/1ag8F2OA3FYUwRRAGbzMrDw1XV1QoqhNg/view?usp=sharing)
 - [Risk Assessment Policy](https://drive.google.com/file/d/1mnqKDqZTjOI4EJhpbpbjcVmLzCMhZDki/view?usp=sharing)
@@ -64,15 +64,15 @@ We have reviewed our architecture, data flows and agreements to ensure that our 
 
 PostHog does not require personally identifiable information or personal data to perform product analytics, and we provide extensive controls for customers wishing to minimize personal data collection from their end users. We provide separate guidance for our customers on how to use PostHog in a GDPR-compliant way in our [Docs](/docs/integrate/gdpr). 
 
-Additional measures:
+Technical and Organizational Measures ('TOMs')
 
-- We enter into Data Process Agreements (DPAs) with PostHog Cloud customers when requested - [our standard agreement is here](https://docs.google.com/document/d/1xfpP1SCFoI1qSKM6rEt9VqRLRUEXiKj9_0Tvv2mP928/edit?usp=sharing). We maintain a register of all DPAs we have entered into. 
+- We maintain an extensive security policies to ensure we are managing data responsibly - [see above](/handbook/company/security#policies).  
+- We enter into Data Processing Agreements ('DPAs') with PostHog Cloud customers when requested - [our standard agreement is here](https://docs.google.com/document/d/1xfpP1SCFoI1qSKM6rEt9VqRLRUEXiKj9_0Tvv2mP928/edit?usp=sharing). We maintain a register of all DPAs we have entered into. 
 - If data transfer is required from the United Kingdom, EU or EEA to our US-West based AWS environment, we rely on [EU Standard Contractual Clauses](https://docs.google.com/document/d/1reTUk6VTsTLo1ErNYn-Tdmj_ETo8QYNH6tNCaebDwpE/edit?usp=sharing) (SCCs). 
 - We are registered with the Information Commissioner's Office in the United Kingdom as Hiberly Ltd., which is the legal name for our UK entity. 
-- A list of sub-Processors is maintained as part of our [Privacy Policy](https://posthog.com/privacy) - we keep this to a strict minimum.
-- We maintain an extensive security policies to ensure we are managing data responsibly (see above).  
+- A list of sub-Processors is maintained as part of our [DPA](https://docs.google.com/document/d/1xfpP1SCFoI1qSKM6rEt9VqRLRUEXiKj9_0Tvv2mP928/edit?usp=sharing) - we keep this to a strict minimum.
 
-Charles is our assigned Data Protection Officer and is responsible for overseeing compliance. 
+Charles is our assigned Data Protection Officer and is responsible for overseeing compliance. Customers can email privacy@posthog.com for any questions relating to GDPR or privacy more generally. 
 
 ### Self-hosted access for diagnostic purposes
 

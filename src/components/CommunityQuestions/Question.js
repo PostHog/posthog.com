@@ -1,6 +1,6 @@
 import { MDXProvider } from '@mdx-js/react'
 import { Blockquote } from 'components/BlockQuote'
-import { CodeBlock } from 'components/CodeBlock'
+import { MdxCodeBlock } from 'components/CodeBlock'
 import { InlineCode } from 'components/InlineCode'
 import Link from 'components/Link'
 import { ZoomImage } from 'components/ZoomImage'
@@ -24,7 +24,7 @@ export const Reply = ({ avatar, name, childMdx, teamMember, ts, parentId, id, cl
     const components = {
         inlineCode: InlineCode,
         blockquote: Blockquote,
-        pre: CodeBlock,
+        pre: MdxCodeBlock,
         img: ZoomImage,
     }
     return (

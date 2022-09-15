@@ -28,7 +28,7 @@ This version includes a subsequent patch release (1.28.1) launched on **Septembe
 
 ## PostHog 1.28.0 release notes
 
-> If you're self-hosting and want to upgrade for a better experience and new features, remember to [update your PostHog instance](/docs/self-host/configure/upgrading-posthog).
+> If you're self-hosting and want to upgrade for a better experience and new features, remember to [update your PostHog instance](/docs/runbook/upgrading-posthog).
 
 **Release highlights:**
 
@@ -58,14 +58,14 @@ In our [last release](https://posthog.com/blog/the-posthog-array-1-27-0) we ship
 <img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_28_0-advanced-funnels.png" alt="" />
 
 ### Other improvements & fixes
-- Significant improvements to plugins development experience
+- Significant improvements to apps development experience
 - Improved session recording list, particularly when there's multiple recordings for a session
 - Fixed broken links when sharing dashboards publicly
 - Multiple fixes on tooltips
 - Fixed bugs around cohort calculation
 - Fixed issues around loading and refreshing dashboards
 - Multiple UI improvements following our new website brand launch
-- Improvements to plugins UI
+- Improvements to apps UI
 - Preference to disable automatic emails when a new member joins
 - Fixes to pie chart that caused some numbers to display confusingly
 - 300+ other improvements/fixes

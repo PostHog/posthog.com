@@ -49,12 +49,12 @@ export const InterviewProcess = () => {
     }
     return (
         <div className="pt-24 mb-16 text-center" id="interview-process">
-            <Structure.Section width="3xl">
+            <Structure.Section width="5xl">
                 <Structure.SectionHeader
-                    title="Interview process"
+                    title="Get paid to try working here"
                     titleTag="h2"
-                    leadText="You can expect a fast, yet thorough process. While it differs by role, we usually follow a structure of the following stages:"
-                    leadTextClassName="opacity-80"
+                    leadText="We do 2-3 short interviews, then pay you to do some real life, or close to real life, work:"
+                    leadTextClassName=""
                 />
             </Structure.Section>
             <SliderNav
@@ -86,7 +86,7 @@ export const InterviewProcess = () => {
                     image={technical}
                     title="3. Technical interview"
                     subtitle="45 minutes, varies by role"
-                    description="You'll meet the hiring team who will evaluate skills needed to be successful in your role."
+                    description="You'll meet the hiring team who will evaluate skills needed to be successful in your role. No live coding."
                 />
                 <SliderItem
                     image={superday}

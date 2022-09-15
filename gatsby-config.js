@@ -15,7 +15,14 @@ module.exports = {
         twitterUsername: '@PostHog',
         siteUrl: 'https://posthog.com', // required by gatsby-plugin-sitemap
     },
+    trailingSlash: 'never',
     plugins: [
+        {
+            resolve: `gatsby-source-ashby`,
+            options: {
+                apiKey: process.env.ASHBY_API_KEY,
+            },
+        },
         {
             resolve: `gatsby-source-squeak`,
             options: {
@@ -44,6 +51,7 @@ module.exports = {
             },
         },
         'gatsby-plugin-react-helmet',
+        `gatsby-plugin-netlify`,
         `gatsby-plugin-sass`,
         `gatsby-plugin-typescript`,
         `gatsby-plugin-smoothscroll`,
@@ -129,7 +137,12 @@ module.exports = {
                 path: `${__dirname}/static/images/authors`,
             },
         },
-        `gatsby-transformer-gitinfo`,
+        {
+            resolve: `gatsby-plugin-git-info`,
+            options: {
+                match: '{src,contents}/**/*.{mdx,md}',
+            },
+        },
         `gatsby-plugin-image`,
         'gatsby-transformer-sharp',
         'gatsby-plugin-sharp',
@@ -139,8 +152,8 @@ module.exports = {
                 name: 'gatsby-starter-markdown',
                 short_name: 'starter',
                 start_url: '/',
-                background_color: '#663399',
-                theme_color: '#663399',
+                background_color: '#f96132',
+                theme_color: '#f96132',
                 display: 'minimal-ui',
                 icon: 'src/images/posthog-icon-white.svg', // This path is relative to the root of the site.
             },
@@ -226,11 +239,10 @@ module.exports = {
                 ],
             },
         },
-        `gatsby-plugin-remove-trailing-slashes`,
         {
             resolve: `gatsby-plugin-posthog`,
             options: {
-                // Specify the API key for your Posthog Project (required)
+                // Specify the API key for your PostHog project (required)
                 apiKey: process.env.GATSBY_POSTHOG_API_KEY,
                 // Specify the API host (http://app.posthog.com/ unless in development)
                 apiHost: process.env.GATSBY_POSTHOG_API_HOST,
@@ -248,9 +260,7 @@ module.exports = {
         {
             resolve: `gatsby-plugin-sitemap`,
             options: {
-                // Exclude specific pages or groups of pages using glob parameters
-                // See: https://github.com/isaacs/minimatch
-                exclude: [],
+                excludes: [],
                 createLinkInHead: true,
                 query: `
                 {
@@ -259,7 +269,6 @@ module.exports = {
                         siteUrl
                     }
                   }
-
                   allSitePage {
                     nodes {
                       path
@@ -269,38 +278,13 @@ module.exports = {
                 resolveSiteUrl: ({ site }) => {
                     return site.siteMetadata.siteUrl
                 },
-                serialize: async ({ site, allSitePage }) => {
-                    const allQueriedPages = allSitePage.nodes.map((node) => {
-                        let changefreq = 'monthly'
-                        let priority = 0.7
-                        const path = node.path
-                        if (path === '/') {
-                            priority = 1.0
-                            changefreq = 'monthly'
-                        } else if (path.includes('blog')) {
-                            if (path === '/blog') {
-                                changefreq = 'weekly'
-                            } else {
-                                changefreq = 'yearly'
-                            }
-                        } else if (path.includes('product')) {
-                            priority = 0.8
-                        } else if (path.includes('docs')) {
-                            priority = 0.9
-                        } else if (path.includes('handbook')) {
-                            priority = 0.6
-                        } else if (path.includes('pricing')) {
-                            priority = 0.8
-                        } else if (path.includes('plugins')) {
-                            changefreq = 'daily'
-                        }
-
+                resolvePages: async ({ allSitePage: { nodes: allPages }, site }) => {
+                    const transformedPages = allPages.map(({ path }) => {
                         return {
-                            url: `${site.siteMetadata.siteUrl}${path}`,
-                            changefreq: changefreq,
-                            priority: priority,
+                            path: `${site.siteMetadata.siteUrl}${path}`,
                         }
                     })
+
                     let plugins = []
                     try {
                         const pluginsResponse = await fetch(
@@ -312,12 +296,42 @@ module.exports = {
                     }
 
                     plugins = plugins.map((plugin) => ({
-                        url: `${site.siteMetadata.siteUrl}/plugins/` + plugin.name.toLowerCase().replace(/ /g, '-'),
-                        changefreq: 'daily',
-                        priority: 0.8,
+                        path: `${site.siteMetadata.siteUrl}/plugins/` + plugin.name.toLowerCase().replace(/ /g, '-'),
                     }))
 
-                    return [...allQueriedPages, ...plugins]
+                    return [...transformedPages, ...plugins]
+                },
+                serialize: async ({ path }) => {
+                    let changefreq = 'monthly'
+                    let priority = 0.7
+
+                    if (path === '/') {
+                        priority = 1.0
+                        changefreq = 'monthly'
+                    } else if (path.includes('blog')) {
+                        if (path === '/blog') {
+                            changefreq = 'weekly'
+                        } else {
+                            changefreq = 'yearly'
+                        }
+                    } else if (path.includes('product')) {
+                        priority = 0.8
+                    } else if (path.includes('docs')) {
+                        priority = 0.9
+                    } else if (path.includes('handbook')) {
+                        priority = 0.6
+                    } else if (path.includes('pricing')) {
+                        priority = 0.8
+                    } else if (path.includes('plugins')) {
+                        priority = 0.8
+                        changefreq = 'daily'
+                    }
+
+                    return {
+                        url: path,
+                        changefreq: changefreq,
+                        priority: priority,
+                    }
                 },
             },
         },

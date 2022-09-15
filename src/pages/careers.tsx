@@ -1,4 +1,3 @@
-import { GetStartedModal } from 'components/GetStartedModal'
 import Layout from 'components/Layout'
 import { graphql, useStaticQuery } from 'gatsby'
 import { StaticImage } from 'gatsby-plugin-image'
@@ -17,15 +16,15 @@ import { TeamQuote } from '../components/TeamQuote'
 
 const IndexPage = () => {
     const data = useStaticQuery(query)
-    const latestJob = data?.allJobs?.nodes && data.allJobs.nodes[0]
-    const latestJobCreatedAt = latestJob && new Date(latestJob['created_at'])
+    const latestJob = data?.allAshbyJobPosting?.nodes && data.allAshbyJobPosting.nodes[0]
+    const latestJobCreatedAt = latestJob && new Date(latestJob['publishedDate'])
 
     return (
         <Layout>
             <SEO
                 title="Careers - PostHog"
                 description="We're working to increase the number of successful products in the world.
-                We could use your help."
+                Adventurers needed."
                 image={`/og-images/careers.jpeg${latestJobCreatedAt ? `?${latestJobCreatedAt.getTime()}` : ''}`}
             />
 
@@ -89,7 +88,7 @@ const IndexPage = () => {
                 <TeamQuote
                     backgroundColor=""
                     textColor="text-primary"
-                    fontSize="text-2xl"
+                    fontSize="text-3xl"
                     width="max-w-4xl"
                     value={
                         <>
@@ -114,8 +113,8 @@ const IndexPage = () => {
                 />
                 <WorkingAtPostHog />
                 <TeamQuote
-                    backgroundColor=""
-                    textColor="text-primary"
+                    backgroundColor="bg-black"
+                    textColor="text-white"
                     fontSize="text-4xl"
                     width="max-w-4xl"
                     value={
@@ -140,16 +139,15 @@ const IndexPage = () => {
                 />
                 <OpenRoles />
             </div>
-            <GetStartedModal />
         </Layout>
     )
 }
 
 const query = graphql`
     query CareersQuery {
-        allJobs(sort: { fields: created_at, order: DESC }) {
+        allAshbyJobPosting(sort: { fields: publishedDate, order: DESC }) {
             nodes {
-                created_at
+                publishedDate
                 title
             }
         }

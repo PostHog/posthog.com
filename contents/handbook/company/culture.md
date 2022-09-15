@@ -54,7 +54,7 @@ Everyone should help everyone else raise their game. Fatigue sets in when you co
 
 We are direct about the quality of work. That doesn't always mean work needs to be completely polished, as it depends on the speed and impact of a task. Being great at [giving and receiving feedback](/handbook/people/feedback) is a key part of of our culture. 
 
-## Bias for action
+## Bias for impact
 
 If given a choice, go live. If you can't go live, reduce the task size so you can.
 

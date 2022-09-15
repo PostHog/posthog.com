@@ -31,7 +31,7 @@ Oh, and I'm also part of the select group of software developers who have won a 
 * Async migrations (our long-running data migrations system)
 * Data integrity
 * Data exports and imports 
-* Plugin server
+* Plugin server / App server
 
 ### Secondary
 
@@ -63,7 +63,7 @@ Oh, and I'm also part of the select group of software developers who have won a 
 * I can help you debug data issues
 * I can help you write migrations (particularly async migrations!)
 * I can help you write a plugin
-* I can help build tooling to enable you to write a plugin
+* I can help build tooling to enable you to write a plugin or app
 * I can help you learn how to use PostHog effectively
 
 ## How you can help me

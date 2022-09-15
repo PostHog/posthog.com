@@ -1,0 +1,8 @@
+{
+    "name": "gatsby-plugin-git-info",
+    "version": "0.1.0",
+    "dependencies": {
+        "glob": "^8.0.3",
+        "simple-git": "^3.10.0"
+    }
+}

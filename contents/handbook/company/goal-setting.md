@@ -6,31 +6,41 @@ showTitle: true
 
 ## How it works
 
-Every [small team](../people/team-structure/why-small-teams) has:
-
-- As few Objectives as possible - ideally 1
-- Motivation - explains why the objective is set
-- Key Results that show if we're en route to achieving an Objective
+1. Grace runs this process every three months.
+2. A couple of weeks before the end of the period, there is a meeting with all execs to come up with the objectives for each small team.
+3. They will then propose draft key results for every [small team](../people/team-structure/why-small-teams) by creating PRs against the small team pages, and there will be 1/1s with every small team leader to discuss context and to make edits as needed.
+4. Each small team can change or propose alternate key results.
+5. After the end of the period, each team should run a retrospective on their goals, and this should be shared with the rest of the company
 
 ## Why we do this
 
 - Sense of winning / losing - this bonds teams, increases urgency and creates satisfaction when we achieve things
 - Clarifies our direction
 
-## When we do this
-
-- We _do not_ do this for every team at the same time - if it takes a forced process to keep these up-to-date, and so people look at them, then the objectives aren't meaningful
-- It's up to the small team leaders to set a cadence for their own objectives and key results. Changes need to be communicated to James (who makes sure they stack up with each other properly)
-- Objectives should have a deadline
-
 ## Good goal setting
 
+Use this template:
+
+```md
+## March/June/September/December 202x goals
+
+1. PostHog in the EU
+Motivation: Unblock 1,000s of customers [link to data] who need to keep data in the EU but are not capable of self hosting.
+Key results
+  - 100 customers using EU cloud
+  - 99% uptime
+  - Time spent maintaining < 1 hour/week
+  - Uses the same helm chart as US cloud
+```  
+
+- As few Objectives as possible - ideally 1
+- Motivation - explains why the objective is set
+- Key Results that show if we're en route to achieving an Objective
 - Objectives are simple
 - Objectives are ambitious - they move the needle for PostHog
 - Hitting an Objective is more important than hitting any Key Results
 - Key Results show we're on track to hitting the Objectives - it should be simple to know if we hit them
 - Key Results are leading indicators and can be achieved quickly
-- Objectives and Key Results should be timebound
 
 Bear the following in mind:
 
@@ -40,12 +50,6 @@ Bear the following in mind:
 - Don't have a lot of Key Results if you can't capture everything in one - just pick the most important one or two
 - Don't set arbitrary Key Results that a team cannot achieve
 - Don't set a Key Result that is mainly noise or a vanity metric
-
-## How to set goals
-
-- James H is accountable for this happening
-- Objectives are proposed by James H, supported by the Exec Team, and agreed by Small Teams
-- Key Results are set by each Small Team lead
 
 ## Goal adoption
 

@@ -6,7 +6,7 @@ import Section from './Section'
 
 export default function Heatmaps() {
     return (
-        <Section id="heatmaps">
+        <Section id="heatmaps" style={{ marginBottom: '3rem' }}>
             <div className="md:w-2/5">
                 <h3>Heatmaps</h3>
                 <p>
@@ -16,10 +16,10 @@ export default function Heatmaps() {
                 <CallToAction
                     type="outline"
                     size="md"
-                    className="text-red hover:text-red dark:text-red dark:hover:text-red font-bold text-base"
+                    className="text-red hover:text-red dark:text-red dark:hover:text-red font-bold text-lg"
                     to="/product/heatmaps"
                 >
-                    Learn more about heatmaps
+                    Learn more about Heatmaps
                 </CallToAction>
             </div>
             <div className="md:w-3/5 flex justify-center">

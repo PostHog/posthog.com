@@ -35,6 +35,8 @@ Most popular session recording tools, such as  Hotjar, FullStory and LogRocket, 
 2. You don't control your user data
 3. GDPR and HIPAA compliance is a headache (or not possible)
 
+<GDPRForm />
+
 Self-hosting your session recording eliminates these drawbacks and allows you to keep control of your data, while open source tools give you the freedom to study, modify, and run the tools at no extra cost.
 
 If that sounds good to you, coming up are the best open source (or self-hosted) session recording tools right now.
@@ -48,7 +50,7 @@ PostHog is an all-in-one, [open-source product analytics](/blog/best-open-source
 
 ### Who is PostHog for?
 
-We think PostHog is the best tool for product-minded developers, data engineers and product teams. The fully comprehensive suite of analytics tools make it an ideal choice for any company that wants to gain wide-ranging insights into their usage and engagement metrics, while keeping all of their data in one manageable platform.
+We think PostHog is the best tool for product-minded developers, data engineers and product teams. The fully comprehensive suite of analytics tools make it an ideal choice for any company that wants to gain wide-ranging insights into their usage and engagement metrics, while keeping all of their data in one manageable platform. 
 
 Are we biased here? Yes. Are we wrong? We'll let you be the judge. As we're open source, you can [self-host PostHog for free](/pricing) to find out for yourself.
 
@@ -74,6 +76,11 @@ PostHog (self-hosted and cloud) is free up to 1 million captured events each mon
 Yes! PostHog’s open source plans are available under an MIT license. Find out more about [PostHog’s self-hosting plans](/pricing).
 
 <ArrayCTA />
+
+**Further reading:**
+- [The best free and open source A/B testing tools](/blog/best-open-source-ab-testing-tools)
+- [The best GDPR-compliant analytics tools](/blog/best-gdpr-compliant-analytics-tools)
+- [The best HIPAA-compliant analytics tools](/blog/best-hipaa-compliant-analytics-tools)
 
 ## 2. [OpenReplay](https://openreplay.com/)
 ![OpenReplay - open source session replay](../images/blog/open-source-hotjar-alternatives/img2_OpenReplay.png)
@@ -180,7 +187,7 @@ Matomo is an open web analytics platform. Touted as an alternative to Google Ana
 
 ### Who is Matomo for?
 
-Matomo is built with marketing and content teams in mind, offering insights into website content engagement for optimization of user journeys.
+Matomo is mainly built with marketing and content teams in mind, offering insights into website content engagement for optimization of user journeys. Features like session recording are part of a wider set of tools that are useful for product teams as well, but they aren't included in Matomo's open source release. To learn more, read our [PostHog vs Matomo comparison](/blog/posthog-vs-matomo).
 
 ### Strengths
 

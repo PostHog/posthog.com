@@ -2,12 +2,13 @@
 title: Environment variables
 sidebar: Docs
 showTitle: true
+hideAnchor: true
 ---
 
 
 As of [PostHog 1.33.0](/blog/the-posthog-array-1-33-0) some settings can now be managed directly in the app, without having to connect to your cluster and/or redeploy. If you are on version 1.33.0 or newer, please review [Instance settings](/docs/self-host/configure/instance-settings) first.
 
-For settings that can be managed with Instance Settings, you can either set the values via environment variables or through the Instance Settings page in your instance. However, it is strongly **recommended to use Instance settings.** Environment variables are only loaded when there are no values in Instance settings, which means that environment variables could reflect outdated values. 
+For settings that can be managed with Instance Settings, you can either set the values via environment variables or through the Instance Settings page in your instance. However, it is strongly **recommended to use Instance settings.** Environment variables are only loaded when there are no values in Instance settings, which means that environment variables could reflect outdated values.
 
 For other settings, there are various environment variables you can set to configure your instance. Below is a comprehensive list of all of them. However, for general use, you most likely do not have to worry about the vast majority of these.
 
@@ -17,7 +18,7 @@ Some variables here are default Django variables. This [Django Docs page](https:
 
 
 | Variable                   | Description                           | Default Value          |
-| :------------------------: | :------------------------------------ | :-------------------: |
+| :------------------------ | :------------------------------------ | :------------------- |
 | `SECRET_KEY`               | **❗️ Always required.** [Used by Django for cryptography](https://docs.djangoproject.com/en/2.2/ref/settings/#secret-key). Helps secure cookies, sessions, hashes, etc. Custom value required in production. | `<randomly generated secret key>`
 | `SITE_URL` - should be an absolute URL and include the protocol (e.g. `https://posthog.your-domain.com`)            | **❗️ Always required.** Principal/canonical URL of your PostHog instance. Needed for emails, webhooks and SSO to work properly. We currently do not support subpaths in this URL. | `http://localhost:8000`
 | `SECURE_COOKIES`           | Determines if Django should use [secure cookies](https://docs.djangoproject.com/en/2.2/ref/settings/#session-cookie-secure). Insecure cookies do not work without HTTPS.       | `False` if PostHog is running in DEBUG or TEST mode, else `True`
@@ -27,6 +28,7 @@ Some variables here are default Django variables. This [Django Docs page](https:
 | `TRUSTED_PROXIES`          | Specifies the IPs of proxies that can be trusted.                                                 | `None`
 | `TRUST_ALL_PROXIES`        | Determines if all proxies can be trusted.                                                         | `False`
 | `ALLOWED_HOSTS`            | A list of strings representing the host/domain names that Django can serve. [More info](https://docs.djangoproject.com/en/3.1/ref/settings/#allowed-hosts).  | `*` (all)
+| `SKIP_SERVICE_VERSION_REQUIREMENTS`| Set this to True if you want to disable checking for dependent service version requirements.       | `False`
 | `ACTION_EVENT_MAPPING_INTERVAL_SECONDS`| Specify how often (in seconds) PostHog should run a job to match events to actions.       | `300`
 | `ASYNC_EVENT_ACTION_MAPPING`| If set to `False`, actions will be matched to events as they come. Otherwise, the matching will happen in batches through a periodic Celery task. Should only be toggled on by high load instances.         | `False`
 | `CAPTURE_INTERNAL_METRICS` | Send some internal instrumentation to your own posthog instance, exposed via `/instance/status` page. For EE only. | `False`
@@ -36,8 +38,8 @@ Some variables here are default Django variables. This [Django Docs page](https:
 | `CLICKHOUSE_DISABLE_EXTERNAL_SCHEMAS` | If set, disables using ProtoBuf schemas for kafka communication. Needs to be set when using an external ClickHouse service provider during initial deploy. | `False`
 | `DISABLE_PAID_FEATURE_SHOWCASING`| Whether any showcasing of a paid feature should be disabled. Useful if running a free open source version of PostHog and are not interested in premium functionality. | `False`
 | `DISABLE_SECURE_SSL_REDIRECT` | Disables automatic redirect from port 80 (HTTP) to port 443 (HTTPS).                           | `False`
-| `GITHUB_TOKEN`| GitHub personal access token, used to prevent rate limiting when using plugins and to allow installation of plugins from private repos                      | `None`
-| `GITLAB_TOKEN`| GitLab personal access token, used to prevent rate limiting when using plugins and to allow installation of plugins from private repos                      | `None`
+| `GITHUB_TOKEN`| GitHub personal access token, used to prevent rate limiting when using apps and to allow installation of apps from private repos                      | `None`
+| `GITLAB_TOKEN`| GitLab personal access token, used to prevent rate limiting when using apps and to allow installation of apps from private repos                      | `None`
 | `JS_URL`                   | URL used by Webpack for loading external resources like images and files.                         | `http://localhost:8234` if PostHog is running in DEBUG mode, must be specified otherwise.
 | `KAFKA_URL` | Address used by the application to contact kafka | `kafka://kafka`
 | `KAFKA_URL_FOR_CLICKHOUSE` | Address used by ClickHouse to read from kafka. Falls back to `KAFKA_URL` | `None`
@@ -47,7 +49,7 @@ Some variables here are default Django variables. This [Django Docs page](https:
 | `MATERIALIZE_COLUMNS_MINIMUM_QUERY_TIME` | Diagnostic for what columns to materialize | `3000`
 | `MATERIALIZE_COLUMNS_SCHEDULE_CRON` | How frequently to run clickhouse column materialization. | `0 5 * * SAT`
 | `MULTI_ORG_ENABLED` | Allows creating multiple organizations in your instance (multi-tenancy). **Requires a premium license.** | `False`
-| `NPM_TOKEN`| [Access token for npm](https://docs.npmjs.com/about-access-tokens), used to allow installation of plugins released as a private npm package                                 | `None`
+| `NPM_TOKEN`| [Access token for npm](https://docs.npmjs.com/about-access-tokens), used to allow installation of apps released as a private npm package                                 | `None`
 | `OPT_OUT_CAPTURING`        | Disable sending product usage data to PostHog. | `False`
 | `POSTHOG_DB_NAME`| Database name. | Must be specified when `DATABASE_URL` is not set.
 | `POSTHOG_DB_PASSWORD`| Database password. | `""` if PostHog is running in DEBUG or TEST mode. Must be specified when `DATABASE_URL` is not set.
@@ -69,6 +71,7 @@ Some variables here are default Django variables. This [Django Docs page](https:
 | `STATSD_HOST`              | Host of a running StatsD daemon (e.g. 127.0.0.1)                                                  | `None`
 | `STATSD_PORT`              | Port for the running StatsD daemon                                                                | `8125`
 | `STATSD_PREFIX`            | Prefix to be prepended to all stats used by StatsD. Useful for distinguishing environments using the same server. | _Empty_
+| `CLEAR_CLICKHOUSE_REMOVED_DATA_SCHEDULE_CRON` | When data is (asynchronously) deleted from the events table | `0 5 * * SAT`
 
 
 ## Instance settings
@@ -76,7 +79,7 @@ Some variables here are default Django variables. This [Django Docs page](https:
 The following settings should mainly be managed with [Instance settings](/docs/self-host/configure/instance-settings). However, if you can still set them via environment variables if you prefer. Please be mindful that if these settings are overridden in the settings page, the overridden values will prevail.
 
 | Variable                   | Description                           | Default Value          | Managed with Instance Settings |
-| :------------------------: | :------------------------------------ | :-------------------: |  :-------------------: |
+| :------------------------ | :------------------------------------ | :------------------- |  :------------------- |
 | `EMAIL_DEFAULT_FROM` | Please see [configuring email] for details.| Please see [configuring email] for details.  | ✅ Yes
 | `EMAIL_ENABLED` | Please see [configuring email] for details.| Please see [configuring email] for details. | ✅ Yes
 | `EMAIL_HOST_PASSWORD` | Please see [configuring email] for details.               | Please see [configuring email] for details. | ✅ Yes
@@ -85,5 +88,9 @@ The following settings should mainly be managed with [Instance settings](/docs/s
 | `EMAIL_PORT` | Please see [configuring email] for details.                                | Please see [configuring email] for details. | ✅ Yes
 | `EMAIL_USE_TLS` | Please see [configuring email] for details.         | Please see [configuring email] for details. | ✅ Yes
 | `EMAIL_USE_TLS` | Please see [configuring email] for details.       | Please see [configuring email] for details. | ✅ Yes
+| `SLACK_APP_CLIENT_ID` | Please see [configuring slack] for details.       | Please see [configuring slack] for details. | ✅ Yes
+| `SLACK_APP_CLIENT_SECRET` | Please see [configuring slack] for details.       | Please see [configuring slack] for details. | ✅ Yes
+| `SLACK_APP_SIGNING_SECRET` | Please see [configuring slack] for details.       | Please see [configuring slack] for details. | ✅ Yes
 
 [configuring email]: /docs/self-host/configure/email#general-configuration
+[configuring slack]: /docs/self-host/configure/slack

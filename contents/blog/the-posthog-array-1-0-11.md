@@ -10,7 +10,7 @@ featuredImage: ../images/blog/array/default.png
 featuredImageType: standard
 ---
 
-Like what you see and self-hosting? [Update](/docs/self-host/configure/upgrading-posthog) your instance.
+Like what you see and self-hosting? [Update](/docs/runbook/upgrading-posthog) your instance.
 
 First our updates and new features.
 

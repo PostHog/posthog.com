@@ -1,6 +1,9 @@
 import React from 'react'
-import './FeatureAvailability.scss'
-import { CheckCircleFilled, CloseCircleFilled, InfoCircleOutlined, MinusCircleFilled } from '@ant-design/icons'
+import InfoIcon from '../InfoIcon/Index'
+import CheckIcon from '../../images/check.svg'
+import MinusIcon from '../../images/x.svg'
+import WarningIcon from '../../images/warning.svg'
+import Link from '../Link'
 
 type AvailablePlans = 'free' | 'standard' | 'enterpriseCloud' | 'startup' | 'openSource' | 'scale' | 'enterprise'
 
@@ -21,7 +24,7 @@ const PLANS: Record<'cloud' | 'selfHosted', PlanInterface[]> = {
         },
         {
             key: 'standard',
-            name: 'Standard',
+            name: 'Self-Serve',
         },
         {
             key: 'enterpriseCloud',
@@ -35,7 +38,7 @@ const PLANS: Record<'cloud' | 'selfHosted', PlanInterface[]> = {
         },
         {
             key: 'scale',
-            name: 'Scale',
+            name: 'Self-Serve',
         },
         {
             key: 'enterprise',
@@ -64,10 +67,30 @@ function Plan({
     restricted?: boolean
 }): JSX.Element {
     return (
-        <li className={restricted ? 'restricted' : available ? '' : 'unavailable'}>
-            {restricted ? <MinusCircleFilled /> : available ? <CheckCircleFilled /> : <CloseCircleFilled />}
+        <li
+            className={
+                restricted
+                    ? 'restricted flex items-center !text-sm space-y-2'
+                    : available
+                    ? 'flex items-center !text-sm space-y-2'
+                    : 'unavailable flex items-center !text-sm space-y-2'
+            }
+        >
+            {restricted ? (
+                <>
+                    <img src={WarningIcon} alt="Restriction apply" className="h-4 w-4 mr-2" aria-hidden="true" />
+                </>
+            ) : available ? (
+                <>
+                    <img src={CheckIcon} alt="Available" className="h-4 w-4 mr-2" aria-hidden="true" />
+                </>
+            ) : (
+                <>
+                    <img src={MinusIcon} alt="Not available" className="h-4 w-4 mr-2" aria-hidden="true" />
+                </>
+            )}
             {name}
-            {restricted && '*'}
+            {restricted}
         </li>
     )
 }
@@ -78,18 +101,22 @@ export function FeatureAvailability({
     restrictedPlans,
 }: FeatureAvailabilityProps): JSX.Element {
     return (
-        <div className="feature-availability">
-            <h4>Where is this feature available?</h4>
-
-            <div className="feature-availability-inner">
+        <div className="border-t border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark pt-4 pb-1 space-y-2 -mt-2 mb-5">
+            <h6 className="text-primary/50 dark:text-primary-dark/50 !mt-0 mb-2 pb-1 font-semibold text-base">
+                Where is this feature available?
+            </h6>
+            <div className="grid grid-cols-3 gap-4">
                 <div>
-                    <h5>
-                        Self-hosted plans
-                        <a href="/pricing?realm=self-hosted">
-                            <InfoCircleOutlined />
-                        </a>
+                    <h5 className="flex items-center space-x-1 text-base !mt-0 mb-2">
+                        <span>Self-hosted plans</span>
+                        <Link
+                            href="/pricing?realm=self-hosted"
+                            className="!pb-0 group hover:!bg-none active:!bg-none focus:!bg-none"
+                        >
+                            <InfoIcon className="w-4 h-4 opacity-75 group-hover:opacity-100 relative transform transition-all group-hover:scale-[1.2] active:top-[1px] active:scale-[1.1]" />
+                        </Link>
                     </h5>
-                    <ul>
+                    <ul className="p-0 mb-0">
                         {PLANS.selfHosted.map((plan) => (
                             <Plan
                                 key={plan.key}
@@ -100,14 +127,17 @@ export function FeatureAvailability({
                         ))}
                     </ul>
                 </div>
-                <div>
-                    <h5>
-                        Cloud plans
-                        <a href="/pricing?realm=cloud">
-                            <InfoCircleOutlined />
-                        </a>
+                <div className="col-span-2">
+                    <h5 className="flex items-center space-x-1 text-base !mt-0 mb-2">
+                        <span>Cloud plans</span>
+                        <Link
+                            href="/pricing?realm=cloud"
+                            className="!pb-0 group hover:!bg-none active:!bg-none focus:!bg-none"
+                        >
+                            <InfoIcon className="w-4 h-4 opacity-75 group-hover:opacity-100 relative transform transition-all group-hover:scale-[1.2] active:top-[1px] active:scale-[1.1]" />
+                        </Link>
                     </h5>
-                    <ul>
+                    <ul className="pl-0 mb-0 grid sm:grid-cols-2">
                         {PLANS.cloud.map((plan) => (
                             <Plan
                                 key={plan.key}

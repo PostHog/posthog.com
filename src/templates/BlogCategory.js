@@ -2,8 +2,10 @@ import Blog from 'components/Blog'
 
 export default Blog
 
+import { graphql } from 'gatsby'
+
 export const pageQuery = graphql`
-    query($category: String) {
+    query ($category: String) {
         allMdx(
             sort: { order: DESC, fields: [frontmatter___date] }
             filter: { isFuture: { eq: false }, frontmatter: { categories: { in: [$category] } } }

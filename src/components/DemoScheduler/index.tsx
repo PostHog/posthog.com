@@ -6,8 +6,10 @@ import { CalendlyEventListener, EventScheduledEvent, InlineWidget } from 'react-
 
 export const DemoScheduler = ({
     iframeSrc = 'https://calendly.com/d/ckz-37j-jz9/posthog-scale-customer-success-demo',
+    type = 'scale',
 }: {
     iframeSrc?: string
+    type?: string
 }): JSX.Element => {
     const { posthog } = useValues(posthogAnalyticsLogic)
     const calendlyEventScheduled = (e: EventScheduledEvent) => {
@@ -15,6 +17,7 @@ export const DemoScheduler = ({
         posthog?.capture(event, {
             calendly_event_uri: payload?.event.uri,
             calendly_invitee_uri: payload?.invitee.uri,
+            demo_type: type,
         })
     }
 

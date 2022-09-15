@@ -16,7 +16,7 @@ So, what have we been doing with the money?
 
 Since last time - AWS marketplace deployment, docusaurus integration, much better testing, a shiny new user sessions view, and see a ton of bug fixes and improvements to our testing. This Array is almost emoji-worthy. Almost.
 
-If you're self hosting and desire these features - [update your PostHog](/docs/self-host/configure/upgrading-posthog).
+If you're self hosting and desire these features - [update your PostHog](/docs/runbook/upgrading-posthog).
 
 ## Release notes
 
@@ -48,7 +48,7 @@ What's new? We:
 
 ### [Docusaurus integration](/docs/integrate/third-party/docusaurus)
 
-If you're using Docusaurus for your own docs, there's now a [PostHog Docusaurus plugin](/docs/integrate/third-party/docusaurus) for that!
+If you're using Docusaurus for your own docs, there's now a [PostHog Docusaurus integration](/docs/integrate/third-party/docusaurus) for that!
 
 ### [AWS marketplace - 1-click install](https://aws.amazon.com/marketplace/pp/B089QN5DZM)
 

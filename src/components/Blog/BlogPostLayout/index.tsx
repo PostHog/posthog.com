@@ -2,7 +2,6 @@ import Breadcrumbs from 'components/Breadcrumbs'
 import React from 'react'
 import { AuthorsData } from 'types'
 import { BlogFooter } from '../../BlogFooter'
-import { GetStartedModal } from '../../GetStartedModal'
 import { PosthogAnnouncement } from '../../PosthogAnnouncement/PosthogAnnouncement'
 import { Structure } from '../../Structure'
 import { BlogIntro } from '../BlogIntro'
@@ -68,7 +67,6 @@ export function BlogPostLayout({
                 <Structure.Section>{children}</Structure.Section>
             </div>
             <PosthogAnnouncement />
-            <GetStartedModal />
             <BlogFooter blogArticleSlug={blogArticleSlug} />
         </div>
     )

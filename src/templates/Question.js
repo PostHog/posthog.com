@@ -11,7 +11,7 @@ import { ZoomImage } from 'components/ZoomImage'
 import { graphql } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
-import { CodeBlock } from '../components/CodeBlock'
+import { MdxCodeBlock } from '../components/CodeBlock'
 
 const QuestionSidebar = ({ question, location, title, pageViews, categories, slugs }) => {
     const days = Number(question.ts)
@@ -54,7 +54,7 @@ export default function Question({
     const components = {
         inlineCode: InlineCode,
         blockquote: Blockquote,
-        pre: CodeBlock,
+        pre: MdxCodeBlock,
         img: ZoomImage,
     }
     return (
@@ -68,7 +68,7 @@ export default function Question({
                 darkModeToggle
                 className="px-4 mt-4 sticky top-[-2px] z-10 bg-tan dark:bg-primary"
             />
-            <PostLayout article={false} sidebar={<QuestionSidebar slugs={slug} question={question} />}>
+            <PostLayout title={id} article={false} sidebar={<QuestionSidebar slugs={slug} question={question} />}>
                 <div className="bg-white dark:bg-gray-accent-dark p-5 rounded-md shadow-lg article-content questions-content">
                     <MDXProvider components={components}>
                         <MDXRenderer>{question.childMdx.body}</MDXRenderer>

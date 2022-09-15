@@ -1,0 +1,86 @@
+---
+title: Migrate to PostHog from Amplitude
+sidebar: Docs
+showTitle: true
+---
+
+If you're running close to Amplitude's 10 million free events limit, migrating to PostHog could be a good idea, especially since the PostHog event schema is quite similar to Amplitude's.
+
+## Steps
+
+1. Export your data from Amplitude using the [Amplitude Export API](https://developers.amplitude.com/docs/export-api)
+2. [Import data into PostHog](/docs/integrate/ingest-historic-data#importing-events) using any of PostHog's SDKs or capture API.
+
+## Translating the data schema
+
+Roughly, for every Amplitude event, you'll need to:
+
+- **Capture the event**: this involves calling the [Capture](/docs/api/post-only-endpoints#capture) events with the event name, timestamp, event properties, and user properties
+- **Alias the user**: if this is a logged-in user, you'll want to [Alias the device ID to the user](/docs/api/post-only-endpoints#alias)
+
+### Capture the event
+
+For reference, as of writing, Amplitude's event structure is (according to their [Export API documentation](https://developers.amplitude.com/docs/export-api):
+
+```
+{
+  "event_time": UTC ISO-8601 formatted timestamp,
+  "event_name": string,
+  "device_id": string,
+  "user_id": string | null,
+  "event_properties": dict,
+  "group_properties": dict,
+  "user_properties": dict,
+  
+  // A bunch of other fields that include things like
+  // device_carrier, city, etc.
+  ...other_fields
+}
+```
+
+When capturing the event, roughly, the schema you'll want to use is:
+
+```js
+const distinctId = user_id || device_id;
+const eventMessage = {
+  properties: {
+    ...event_properties,
+    ...other_fields,
+    $set: { ...user_properties, ...group_properties },
+    $geoip_disable: true,
+  },
+  event: event_name,
+  distinctId: distinctId,
+  timestamp: event_time,
+};
+```
+
+In short:
+
+- We want to track the event with the same:
+  - Event name
+  - Timestamp
+- For the distinct ID, we either want to use the User ID if present, or the Device ID (a UUID string) if not
+- We want to track both User and Group properties as [User Properties](/docs/integrate/user-properties) using `properties: {$set}`
+- We want to track Event properties using `properties`
+
+### Aliasing device IDs to user IDs
+
+In addition to tracking the events themselves, we want to tie users' events both before and after login. For Amplitude, events before and after login look a bit like this:
+
+| Event | User ID | Device ID |
+|-------|---------|-----------|
+| Application installed | null | 551dc114-7604-430c-a42f-cf81a3059d2b |
+| Login | 123 | 551dc114-7604-430c-a42f-cf81a3059d2b |
+| Purchase | 123 | 551dc114-7604-430c-a42f-cf81a3059d2b |
+
+We'd ideally like to be able to attribute "Application installed" to the user with ID 123, so we need to also call alias with:
+
+```js
+const aliasMessage = {
+  distinctId: user_id, // 123
+  aliasId: device_id, // 551dc114-7604-430c-a42f-cf81a3059d2b
+};
+```
+
+Since you only need to do this once per event, ideally you'd store somewhere (e.g., in a SQL table outside of PostHog) a record of which aliases you'd already sent to PostHog, so that you don't end up sending the same Alias events twice.

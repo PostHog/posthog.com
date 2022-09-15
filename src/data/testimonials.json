@@ -7,7 +7,7 @@
     {
         "featuresUsed": ["data integrity"],
         "author": { "name": "Jonathan Hyde", "role": "Former Head of Product", "company": { "name": "Legl" } },
-        "quote": "Posthog is the first analytics platform where I can be 100% confident in the data. I've finally got the data insight platform I've always wanted as a Product person."
+        "quote": "PostHog is the first analytics platform where I can be 100% confident in the data. I've finally got the data insight platform I've always wanted as a Product person."
     },
     {
         "featuresUsed": ["self-host"],
@@ -183,7 +183,7 @@
     {
         "featuresUsed": ["support"],
         "author": { "name": "Martin McKeaveney", "role": "Co-founder", "company": { "name": "Budibase" } },
-        "quote": "Posthog is awesome - we use it heavily and it is by far the best open source analytics platform, with a great team and support behind it."
+        "quote": "PostHog is awesome - we use it heavily and it is by far the best open source analytics platform, with a great team and support behind it."
     },
     {
         "featuresUsed": ["competitor", "cost"],
@@ -213,7 +213,7 @@
     {
         "featuresUsed": ["competitor", "events", "self-host"],
         "author": { "name": "Filip Stanev", "role": "Co-founder", "company": { "name": "Saga.so" } },
-        "quote": "At Saga, we tried pretty much every product analytics product out there. In the end, we decided to self-host Posthog because of the privacy benefits and the better tracking capability compared to the alternatives. Posthog tracks more events, while other products get blocked and show unreliable results."
+        "quote": "At Saga, we tried pretty much every product analytics product out there. In the end, we decided to self-host PostHog because of the privacy benefits and the better tracking capability compared to the alternatives. PostHog tracks more events, while other products get blocked and show unreliable results."
     },
     {
         "featuresUsed": ["feature flags", "session recording", "autocapture", "competitor"],
@@ -263,12 +263,12 @@
     {
         "featuresUsed": ["competitors", "data pipeline", "ingestion"],
         "author": { "name": "Nick Booth", "role": "CTO", "company": { "name": "Feedr.co" } },
-        "quote": "Self-hosting Snowplow was too complex and Snowflake was expensive to host in the cloud. Posthog looked a lot simpler to self-host and PostHog Cloud wasn’t as costly either."
+        "quote": "Self-hosting Snowplow was too complex and Snowflake was expensive to host in the cloud. PostHog looked a lot simpler to self-host and PostHog Cloud wasn’t as costly either."
     },
     {
         "featuresUsed": ["competitors", "data pipeline", "ingestion"],
         "author": { "name": "Nick Booth", "role": "CTO", "company": { "name": "Feedr.co" } },
-        "quote": "Posthog actually did what we needed it to and could push data out into Redshift via S3 or Airbyte."
+        "quote": "PostHog actually did what we needed it to and could push data out into Redshift via S3 or Airbyte."
     },
     {
         "featuresUsed": ["customer support"],

@@ -30,11 +30,10 @@ export default function SelfHost({ location }) {
                 <DeploymentOptions className="max-w-xl w-full mx-auto border border-dashed border-gray-accent-light rounded-md" />
             </section>
             <section>
-                <Title
-                    title="Questions?"
-                    subtitle="Schedule a time to learn if PostHog is right for you."
-                    className="text-center"
-                />
+                <div className="text-center">
+                    <h2>Need more info?</h2>
+                    <p>Schedule a time to learn if PostHog is right for you.</p>
+                </div>
                 <Contact />
             </section>
         </Layout>

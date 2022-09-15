@@ -11,7 +11,6 @@ If you're running PostHog behind a proxy, there are a few more things you need t
 If PostHog is running behind a proxy, you need to do the following:
 - Set the `IS_BEHIND_PROXY` environment variable to `True`. This will make sure the client's IP address is properly calculated, and SSL is properly handled (e.g. for OAuth requests).
 - Set your [trusted proxies](#trusted-proxies) configuration.
-- If deploying with Docker, use the `docker-compose-config.py` script to expose the appropriate port in `docker-compose.yml`. By default port 80 is exposed, causing a port conflict between the PostHog Docker container and the proxy.
 - Depending on your setup, you might also need to set the `ALLOWED_HOSTS` [environment variable](/docs/self-host/configure/environment-variables). If you don't allow all hosts (i.e. you are whitelisting specific hosts), you will need to set the address(es) of your proxy here.
 
 <div class='note-block'><b>Note:</b> It is suggested to set up the proxy separately from PostHog's Docker Compose definition.</div>
@@ -62,7 +61,7 @@ You need to make sure your proxy server is sending `X-Forwarded-For` headers. Fo
 
 ## Apache2 config
 
-You need the `proxy` `proxy_http` and `proxy_html` modules enabled. 
+You need the `proxy` `proxy_http` and `proxy_html` modules enabled.
 To do this, run `sudo a2enmod proxy proxy_http proxy_html`.
 
 Make sure SSL is enabled, and include the `X-Forwarded-Proto` header so that PostHog knows it.
@@ -74,4 +73,3 @@ Make sure SSL is enabled, and include the `X-Forwarded-Proto` header so that Pos
     # SSL & other config here
 </VirtualHost>
 ```
-

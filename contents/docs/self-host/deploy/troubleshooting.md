@@ -4,17 +4,20 @@ sidebar: Docs
 showTitle: true
 ---
 
-If you are looking for routine procedures and operations to manage PostHog installations like begin, stop, supervise, and debug a PostHog infrastructure, please take a look at the [runbook](../runbook) section.
+If you are looking for routine procedures and operations to manage PostHog installations like begin, stop, supervise, and debug a PostHog infrastructure, please take a look at the [runbook](../../runbook) section.
 
 ## Troubleshooting
 
-### helm failed for not enough resources
+### Helm failed for not enough resources
 
 While running `helm upgrade --install` you might run into an error like `timed out waiting for the condition`
 
 One of the potential causes is that Kubernetes doesn't have enough resources to schedule all the services PostHog needs to run. To know if resources are a problem we can check pod status and errors while the `helm` command is still running:
+
 1. check the output for `kubectl get pods -n posthog` and if you see any pending pods for a long time then that could be the problem
+
 2. check if the pending pod has scheduling errors using `kubectl describe pod <podname> -n posthog`. For example, at the end of the events section we could see that we didn't have enough memory to schedule the pod.
+
 ```
 Events:
   Type     Reason             Age                  From                Message
@@ -28,9 +31,11 @@ Events:
 ### Connection is not secure
 
 First, check that DNS is set up properly:
+
 ```shell
 nslookup <your-hostname> 1.1.1.1
 ```
+
 Note that when using a browser there are various layers of caching and other logic that could make the resolution work (temporarily) even if its not correctly set up.
 
 ### Kafka crash looping (disk full)
@@ -42,29 +47,43 @@ Error while writing to checkpoint file /bitnami/kafka/data/...
 java.io.IOException: No space left on device
 ```
 
-This tells us that the data disk is full. To resize the disk, please follow the [runbook](../runbook/kafka/resize-disk).
+This tells us that the data disk is full. To resize the disk, please follow the [runbook](../../runbook/services/kafka/resize-disk).
 
 #### Why did we run into this problem and how to avoid it in the future?
 
 There isn't a way for us to say "if there's less than X% of disk space left, then nuke the oldest data". Instead we have two conditions that restrict, when stuff can be deleted:
-- size (`logRetentionBytes: _22_000_000_000`) for the minimum size of data on disk before allowed deletion.
-- time (`logRetentionHours: 24`) for the minimum age before allowed deletion.
+
+-   size (`logRetentionBytes: _22_000_000_000`) for the minimum size of data on disk before allowed deletion.
+-   time (`logRetentionHours: 24`) for the minimum age before allowed deletion.
 
 We need to configure these well, but monitoring disk util can help catch this problem before we end up in a crash loop.
 
 See more in these stack overflow questions ([1](https://stackoverflow.com/questions/52970153/kafka-how-to-avoid-running-out-of-disk-storage), [2](https://stackoverflow.com/questions/53039752/kafka-how-to-calculate-the-value-of-log-retention-byte), [3](https://stackoverflow.com/questions/51823569/kafka-retention-policies)).
 
+### Upgrade failed due to cert-manager conflicts
+
+If a deploy fails with the following error:
+
+```
+Error: UPGRADE FAILED: rendered manifests contain a resource that already exists. Unable to continue with update: CustomResourceDefinition "certificaterequests.cert-manager.io" in namespace "" exists and cannot be imported into the current release: invalid ownership metadata; label validation error: missing key "app.kubernetes.io/managed-by": must be set to "Helm"; annotation validation error: missing key "meta.helm.sh/release-name": must be set to "posthog"; annotation validation error: missing key "meta.helm.sh/release-namespace": must be set to "posthog"
+```
+
+The issue might be with cert-manager custom resource definitions already existing and being unupgradable.
+
+Try running helm upgrade without `--atomic` to fix this issue.
+
 ## FAQ
 
 ### How can I increase storage size?
 
-To increase the storage size of the ClickHouse, Kafka or PostgreSQL service, take a look at our [runbook](../runbook) section.
+To increase the storage size of the ClickHouse, Kafka or PostgreSQL service, take a look at our [runbook](../../runbook) section.
 
 ### Are the errors I'm seeing important?
 
 Here are some examples of log spam that currently exists in our app and is safe to ignore:
 
 The following messages in the ClickHouse pod happen when ClickHouse reshuffles how it consumes from the topics. So, anytime ClickHouse or Kafka restarts we'll get a bit of noise and the following log entries are safe to ignore:
+
 ```
 <Error> TCPHandler: Code: 60, e.displayText() = DB::Exception: Table posthog.sharded_events doesn't exist.
 ...
@@ -72,6 +91,7 @@ The following messages in the ClickHouse pod happen when ClickHouse reshuffles h
 ```
 
 The following error is produced by some low-priority celery tasks and we haven't seen any actual impact so can safely be ignored. It shows up in Sentry as well.
+
 ```
 TooManyConnections: too many connections
   File "posthog/celery.py",
@@ -88,7 +108,7 @@ TooManyConnections: too many connections
     kubectl get pods -n posthog
     ```
 
-    This command will list all running pods. If you want plugin server logs, for example, look for a pod that has a name starting with `posthog-plugins`. This will be something like `posthog-plugins-54f324b649-66afm`
+    This command will list all running pods. If you want app/plugin server logs, for example, look for a pod that has a name starting with `posthog-plugins`. This will be something like `posthog-plugins-54f324b649-66afm`
 
 2. Get the logs for that pod using the name from the previous step:
 
@@ -165,13 +185,13 @@ User.objects.count()
     -- sh -c 'echo user:$CLICKHOUSE_USER password:$CLICKHOUSE_PASSWORD'
     ```
 
-3. Connect to the `chi-posthog-posthog-0-0-0` pod:
+2. Connect to the `chi-posthog-posthog-0-0-0` pod:
 
     ```shell
     kubectl exec -n posthog -it chi-posthog-posthog-0-0-0  -- /bin/bash
     ```
 
-2. Connect to ClickHouse using `clickhouse-client`:
+3. Connect to ClickHouse using `clickhouse-client`:
 
     > **Note:** You're connecting to your production database, proceed with caution!
 
@@ -181,7 +201,7 @@ User.objects.count()
 
 ### How do I restart all pods for a service?
 
-> **Important:** Not all services can be safely restarted this way. It is safe to do this for the plugin server. If you have any doubts, ask someone from the PostHog team.
+> **Important:** Not all services can be safely restarted this way. It is safe to do this for the app/plugin server. If you have any doubts, ask someone from the PostHog team.
 
 1. Terminate all running pods for the service:
 
@@ -189,7 +209,6 @@ User.objects.count()
     # substitute posthog-plugins for the desired service
     kubectl scale deployment posthog-plugins --replicas=0 -n posthog
     ```
-
 
 2. Start new pods for the service:
 

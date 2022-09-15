@@ -42,10 +42,10 @@ PostHog is the only analytics platform which enables users to self-host on their
 
 ## 3. Integrate with data warehouses
 
-PostHog's plugin system works seamlessly with tools such as data warehouses, both for importing and exporting data. This means even non-technical users can analyse data from across their infrastructure with ease and develop a conclusive understanding of user behaviour.  
+PostHog's app system works seamlessly with tools such as data warehouses, both for importing and exporting data. This means even non-technical users can analyse data from across their infrastructure with ease and develop a conclusive understanding of user behaviour.  
 
 - **Proposition:** Connect your analytics platform to the rest of your stack, including your data warehouse. 
 - **Challenge:** You're unable to fully leverage the potential of your data warehouse, or to run analytics on more than one data source at a time.
 - **Experience:** You never see the big picture, just fragments of user behaviour. Your data team becomes a bottleneck for others. 
-- **Solution:** PostHog's open-source plugin framework can push and pull data to any tool, including data warehouses. 
+- **Solution:** PostHog's open-source app framework can push and pull data to any tool, including data warehouses. 
 - **Result:** Better leverage your data team and get insights from across your entire data infrastructure.

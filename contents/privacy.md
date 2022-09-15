@@ -83,6 +83,7 @@ PostHog only shares your personal information with those of its employees, contr
 - HubSpot - CRM database
 - Clearbit - marketing data engine
 - Orbit - community engagement platform
+- Zendesk - customer support tool
 
 Our service providers and partners are required by contract to safeguard any personal information they receive from us and are prohibited from using the personal information for any purpose other than to perform the services as instructed by PostHog. 
 
@@ -118,13 +119,11 @@ Certain pages on the Website may set other third party cookies. For example, we 
 
 ### Tracking technologies
 
-We may use third party tracking services, but we don’t use these services to track you individually or collect your personally identifiable-information. We may use these services to collect information about how the Website performs and how users navigate through and use the Website so we can monitor and improve our content and Website performance.
-
-Third party tracking services gather certain simple, non-personally identifying information over time, such as your IP address, browser type, internet service provider, referring and exit pages, timestamp, and similar data about your use of the Website. We do not link this information to any of your personal information such as your user name.
+We do not use third party tracking services to collect information about you.
 
 ### Do Not Track
 
-"Do Not Track" is a privacy preference you can set in your browser if you do not want online services to collect and share certain kinds of information about your online activity from third party tracking services. PostHog does not track your online browsing activity on other online services over time and we do not permit third-party services to track your activity on our site beyond our basic tracking, which you may opt out of. Because we do not share this kind of data with third party services or permit this kind of third party data collection for any of our users, and we do not track our users on third-party websites ourselves, we do not need to respond differently to an individual browser's Do Not Track setting.
+"Do Not Track" is a privacy preference you can set in your browser if you do not want online services to collect and share certain kinds of information about your online activity from third party tracking services. PostHog does not track your online browsing activity on other online services over time and we do not permit third-party services to track your activity on our site. Because we do not share this kind of data with third party services or permit this kind of third party data collection for any of our users, and we do not track our users on third-party websites ourselves, we do not need to respond differently to an individual browser's Do Not Track setting.
 
 ## Global privacy practices and your rights
 
@@ -248,4 +247,4 @@ Although most changes are likely to be minor, PostHog may change its privacy pol
 
 We may also provide notification to users who have provided us email addresses of material changes to this Privacy Policy through our Website. PostHog encourages visitors to frequently check this page for any minor changes to its Privacy Policy. Your continued use of this site after any change in this Privacy Policy will constitute your acceptance of such change.
 
-_Jan 2022_
+_Jun 2022_

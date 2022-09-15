@@ -56,7 +56,9 @@ The process is pretty straightforward and self-serve, but here are a few things 
 - Some countries limit how long you can employ someone in this way (e.g. Germany). After that, you may need to set up a legal entity anyway.
 - You'll need to pay a deposit up front of the first month's salary.
 
-Again, Deel will handle all things payroll. 
+Again, Deel will handle all things payroll.
+
+> PostHog is a comprehensive open-source analytics platform that helps you understand what you're users are really doing. You can self-host it on your own infrastructure, or use our full-managed Cloud service. [Learn more about using PostHog](/product).   
 
 ## 2. Managing your money
 
@@ -89,10 +91,6 @@ Put it in [Brex](https://www.brex.com) (US only). Brex also makes it incredibly 
 In Europe, [Revolut](https://www.revolut.com/) is about the only digital bank that gets anywhere near Brex features-wise, although I find its platform a lot buggier.
 
 > **Time suck alert:** I know what you're thinking – surely there's somewhere I can put my money to get some interest? The reality is that shopping around furiously to find some paltry 0.75% interest rate is highly unlikely to make any difference to your burn rate, and you're better off (unless you have $20m+) prioritizing having your cash easily accessible vs. trying to optimize for returns. I am not a financial advisor though – you should talk to one if you decide this is important.
-
-<NewsletterForm
-compact
-/>
 
 ## 3. Keeping yourself organized
 

@@ -82,17 +82,17 @@
     {
         "date": "2021-01-01",
         "type": "feature",
-        "description": "Plugins launched"
+        "description": "Apps launched"
     },
     {
         "date": "2021-01-01",
         "type": "feature",
-        "description": "Hubspot plugin"
+        "description": "Hubspot Connector"
     },
     {
         "date": "2021-02-01",
         "type": "milestone",
-        "description": "Redesigned app"
+        "description": "Redesigned product"
     },
     {
         "date": "2021-03-01",
@@ -102,7 +102,7 @@
     {
         "date": "2021-04-01",
         "type": "feature",
-        "description": "S3, Snowflake plugins"
+        "description": "S3, Snowflake apps"
     },
     {
         "date": "2021-05-01",
@@ -127,7 +127,7 @@
     {
         "date": "2021-07-30",
         "type": "feature",
-        "description": "Salesforce plugin"
+        "description": "Salesforce Connector"
     },
     {
         "date": "2021-08-01",
@@ -185,67 +185,47 @@
         "description": "Offsite: Iceland"
     },
     {
-        "date": "2022-06-01",
+        "date": "2022-04-01",
         "type": "feature",
-        "description": "Console log tracking in recordings",
-        "future": true
+        "description": "Console log tracking in recordings"
+    },
+    {
+        "date": "2022-05-01",
+        "type": "feature",
+        "description": "Insight experience overhaul"
+    },
+    {
+        "date": "2022-05-01",
+        "type": "feature",
+        "description": "New onboarding experience"
     },
     {
         "date": "2022-06-01",
         "type": "feature",
-        "description": "Insight experience overhaul",
-        "future": true
+        "description": "Rapid ingestion pipeline"
     },
     {
         "date": "2022-06-01",
         "type": "feature",
-        "description": "Export and share visualizations as image file",
-        "future": true
+        "description": "Demo environment"
     },
     {
-        "date": "2022-06-01",
+        "date": "2022-07-01",
         "type": "feature",
-        "description": "Subscribe to dashboards and insights",
-        "future": true
+        "description": "Export and share visualizations as image file"
     },
     {
-        "date": "2022-06-01",
+        "date": "2022-07-01",
         "type": "feature",
-        "description": "Awesome demo environment",
-        "future": true
+        "description": "Subscribe to dashboards and insights"
     },
     {
-        "date": "2022-06-01",
+        "date": "2022-07-01",
         "type": "feature",
-        "description": "New onboarding experience",
-        "future": true
+        "description": "Session analysis across insights"
     },
     {
-        "date": "2022-09-01",
-        "type": "feature",
-        "description": "Unified querying across events, persons, sessions, groups",
-        "future": true
-    },
-    {
-        "date": "2022-09-01",
-        "type": "feature",
-        "description": "Automated insight recommendations",
-        "future": true
-    },
-    {
-        "date": "2022-09-01",
-        "type": "feature",
-        "description": "Session analysis 2.0",
-        "future": true
-    },
-    {
-        "date": "2022-09-01",
-        "type": "feature",
-        "description": "Insight delta",
-        "future": true
-    },
-    {
-        "date": "2022-09-01",
+        "date": "2022-07-01",
         "type": "feature",
         "description": "In-app setup guided tour",
         "future": true
@@ -253,25 +233,43 @@
     {
         "date": "2022-09-01",
         "type": "feature",
-        "description": "Lightning fast querying at Billion event and person scale",
+        "description": "PostHog Cloud EU",
         "future": true
     },
     {
         "date": "2022-09-01",
         "type": "feature",
-        "description": "Enhanced plugin development experience",
+        "description": "Session Recordings DevTools",
         "future": true
     },
     {
         "date": "2022-09-01",
         "type": "feature",
-        "description": "Multiple cloud environments",
+        "description": "Turbo feature flags",
         "future": true
     },
     {
         "date": "2022-09-01",
         "type": "feature",
-        "description": "Rapid ingestion pipeline",
+        "description": "Extended insight visualizations",
+        "future": true
+    },
+    {
+        "date": "2022-11-01",
+        "type": "feature",
+        "description": "Unified querying across events, persons, sessions, groups",
+        "future": true
+    },
+    {
+        "date": "2022-11-01",
+        "type": "feature",
+        "description": "Automated insight recommendations",
+        "future": true
+    },
+    {
+        "date": "2022-11-01",
+        "type": "feature",
+        "description": "Lightning fast querying at billion-event and person scale",
         "future": true
     }
 ]

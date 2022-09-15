@@ -31,7 +31,7 @@ We won’t be requiring masks or vaccination history to attend a HostHog, but if
 
 ## Is there a dress code or code of conduct?
 
-There’s no dress code, but we will expect everyone to adhere to [our standard code of conduct](​​/docs/contribute/code-of-conduct). Please help us create a safe, inclusive environment for everyone! 
+There’s no dress code, but we will expect everyone to adhere to [our standard code of conduct](​/docs/contribute/code-of-conduct). Please help us create a safe, inclusive environment for everyone! 
 
 ## I don’t live in London. Where will the next HostHog be?
 

@@ -10,6 +10,7 @@ import CTA from './CTA'
 import Customers from './Customers'
 import Features from './Features'
 import Hero from './Hero'
+import Apps from './Apps'
 import Pipelines from './Pipelines'
 import Timeline from './Timeline'
 import Quote from './Quote'
@@ -23,28 +24,22 @@ const Home = () => {
             <StarUsBanner />
             <Layout>
                 <SEO
-                    title="PostHog - The self-hosted product analytics platform"
-                    description="PostHog is the all-in-one, open-source analytics platform for building better products. Try it for free."
+                    title="PostHog - The open source Product OS"
+                    description="PostHog is the all-in-one platform for building better products - with product analytics, feature flags, session recordings, a/b testing, heatmaps, and more."
                     image="/images/home.png"
                 />
                 <Hero />
                 <Customers />
                 <BeforeAndAfter />
-                <Features
-                    title={
-                        <>
-                            Everything product-led teams need <span className="text-yellow">in one place</span>
-                        </>
-                    }
-                />
+                <Apps />
                 <Pipelines />
                 <Timeline />
                 <Quote />
                 <Community />
                 <Tutorials
                     title="Tutorials"
-                    subtitle="See PostHog in action."
-                    cta={{ url: '/docs/tutorials', title: 'Explore all tutorials' }}
+                    subtitle="See PostHog in action"
+                    cta={{ url: '/tutorials', title: 'Explore all tutorials' }}
                 />
                 <CTA />
             </Layout>

@@ -13,7 +13,7 @@ categories: ["Product updates", "Launch week", "Guides"]
 
 We just launched our Experimentation suite, and there's a ton we learned about running successful experiments.
 
-It was a no brainer product decision: Since you're already analysing your data in PostHog, and you're already using [Feature Flags](/product/feature-flags) to roll out new features, why not have the capability to test how well these features are doing?
+It was a no brainer product decision: Since you're already analysing your data in PostHog, and you're already using [Feature Flags](/product/feature-flags) to roll out new features, why not have the capability to test how well these features are doing? Plus, what is the world without a [great open-source A/B testing tool](/blog/best-open-source-ab-testing-tools)?
 
 Experiments allow you to choose a target metric, choose specific people to run this experiment on, and set how long the experiment runs for.
 

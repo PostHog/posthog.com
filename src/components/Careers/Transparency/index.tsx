@@ -26,8 +26,8 @@ const TransparencyMattersItem = ({ title, description, className = '' }: Transpa
     return (
         <div className={classList}>
             <div className="text-left">
-                <h5 className="mb-0">{title}</h5>
-                <p className="text-base">{description}</p>
+                <h5 className="mb-2">{title}</h5>
+                <p className="">{description}</p>
             </div>
         </div>
     )
@@ -66,7 +66,7 @@ export const Transparency = () => {
             <div className="w-full my-16 text-left grid sm:grid-cols-2 border-gray-accent-light border-dashed border-l-0 border-r-0 border-t border-b">
                 <div className="border-gray-accent-light border-dashed border-b-0 border-t-0 sm:border-t-0 sm:border-l px-4 py-8 md:py-12 border-r-0">
                     <TransparencyFeature title="Compensation" image={compensationImg} className="max-w-md mx-auto">
-                        <p className="mb-0 text-base text-black font-lightish">
+                        <p className="mb-0 text-lg text-black font-lightish">
                             We pay generously and built a{' '}
                             <a href="/handbook/people/compensation">compensation calculator</a> to keep salary
                             discussions simple and fair. You’ll know your approximate starting salary before you even
@@ -77,7 +77,7 @@ export const Transparency = () => {
 
                 <div className="border-gray-accent-light border-dashed border-b-0 border-t sm:border-t-0 border-l px-4 py-8 md:py-12 border-r">
                     <TransparencyFeature title="Board meetings" image={boardMeetingsImg} className="max-w-md mx-auto">
-                        <p className="mb-0 text-base text-black font-lightish">
+                        <p className="mb-0 text-lg text-black font-lightish">
                             We share slides from each board meeting internally. When everyone knows the direction we're
                             headed and the obstacles we face, they can decide where their time is best spent.
                         </p>
@@ -90,16 +90,17 @@ export const Transparency = () => {
                         image={financesImg}
                         className="max-w-md mx-auto"
                     >
-                        <p className="mb-0 text-base text-black font-lightish">
-                            We keep our team informed about fundraising and share a monthly report covering revenue,
-                            runway, and more. It's nice when you can see your hard work paying off (literally).
+                        <p className="mb-0 text-lg text-black font-lightish">
+                            We keep our team informed about fundraising during the process and share a monthly report
+                            covering revenue, runway, and more. It's nice when you can see your hard work paying off
+                            (literally).
                         </p>
                     </TransparencyFeature>
                 </div>
 
                 <div className="border-gray-accent-light border-dashed border-b-0 border-t border-l px-4 py-8 md:py-12 border-r">
                     <TransparencyFeature title="Constructive feedback" image={feedbackImg} className="max-w-md mx-auto">
-                        <p className="mb-0 text-base text-black font-lightish">
+                        <p className="mb-0 text-lg text-black font-lightish">
                             Transparency is a two-way street. We encourage individual feedback and run regular
                             360-degree group sessions with the whole company, so everyone can improve.
                         </p>
@@ -107,22 +108,34 @@ export const Transparency = () => {
                 </div>
             </div>
 
-            <div className="pb-16 px-4 md:px-0">
-                <h3 className="mb-8">Why transparency matters</h3>
+            <div id="who-we-hire">
+                <Structure.Section width="5xl">
+                    <Structure.SectionHeader
+                        title="Go big"
+                        titleTag="h2"
+                        leadText="Our mission is to increase the number of successful products in the world."
+                        leadTextClassName=""
+                    />
+                </Structure.Section>
+                <div className="pb-16 px-4 md:px-0">
+                    <p className="text-base font-semibold max-w-2xl mx-auto mb-12">In 2026 we aim to go public with $100M revenue. To achieve this, PostHog will need to be the standard devtool for building better products.</p>
 
-                <div className="grid sm:grid-cols-3 sm:gap-8 lg:gap-24 max-w-6xl mx-auto px-4">
-                    <TransparencyMattersItem
-                        title="Trust"
-                        description="A fully remote environment only works when we all trust each other."
-                    />
-                    <TransparencyMattersItem
-                        title="Inclusivity"
-                        description="Sharing information means all of us can have a voice in PostHog's future."
-                    />
-                    <TransparencyMattersItem
-                        title="Growth"
-                        description="We enable everyone to make informed decisions about what they spend time on."
-                    />
+                    <h3 className="mb-4">We look for people who are:</h3>
+
+                    <div className="grid sm:grid-cols-3 sm:gap-8 lg:gap-24 max-w-6xl mx-auto px-4">
+                        <TransparencyMattersItem
+                            title="Different"
+                            description="We look for adventurers. We're here to take a small company to IPO, and beyond. We will only get there if we think differently to everyone else. We're not a fit if you want a predictable career. "
+                        />
+                        <TransparencyMattersItem
+                            title="Individual contributors"
+                            description="We think it's more important to hire exceptional people, then give them autonomy and plenty of context. We're not a fit if management responsibility is what motivates you."
+                        />
+                        <TransparencyMattersItem
+                            title="Scrappy"
+                            description="Fast, low ego people thrive here. We're informal, we use clear language and get a broad variety of work done fast. We're not a fit if you want process."
+                        />
+                    </div>
                 </div>
             </div>
         </div>

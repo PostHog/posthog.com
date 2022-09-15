@@ -102,7 +102,7 @@ export const ProductAnchorNavbar = () => {
 
             <div className="w-11/12 sticky top-2 mx-auto block max-w-3xl lg:hidden z-30 mb-12" style={positionStyles}>
                 <select
-                    className="appearance-none text-white block p-3 w-full rounded border border-white border-half border-opacity-10 bg-primary font-bold"
+                    className="appearance-none text-white block p-3 w-full rounded border border-white/10 border-half bg-primary font-bold"
                     value={currentSection}
                     onChange={(e) => scrollWithOffset(`#${e.target.value}`, -90)}
                 >

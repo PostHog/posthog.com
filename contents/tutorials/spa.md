@@ -26,7 +26,7 @@ This tutorial is aimed at SPAs, which are websites that only load one time, with
 
 To follow this tutorial along, you need to:
 
-1. Have [deployed PostHog](/docs/deployment).
+1. Have [deployed PostHog](/docs/deployment) or [signed up for PostHog cloud](https://app.posthog.com/signup).
 1. Be using our [JavaScript Library](/docs/integrate/client/js) to track your SPA
 
 ### Tracking navigation changes in SPAs
@@ -279,3 +279,5 @@ Essentially, the key steps to keep in mind for tracking navigation in SPAs are:
 1. Set your own properties and/or override `$current_url` to track pages as you like
 
 Following these steps, you can track navigation on your app just like any other website, ensuring you capture exactly how users are using your product. 
+
+<NewsletterTutorial compact/>

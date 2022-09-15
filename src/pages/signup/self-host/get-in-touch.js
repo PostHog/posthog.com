@@ -26,7 +26,7 @@ export default function SelfHost() {
         >
             <SEO title="Get in touch - PostHog" />
             <section className="px-4">
-                <Intro title="Get in touch">
+                <Intro>
                     <Contact />
                 </Intro>
             </section>

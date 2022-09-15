@@ -6,10 +6,11 @@ featuredImage: ../images/tutorials/banners/notion-tutorial-banner.png
 featuredTutorial: false
 date: 2022-05-04
 author: ['joe-martin']
-topics: ['zapier', 'plugins']
+topics: ['apps', 'zapier']
 ---
 - *Level:* Easy 🦔
 - *Estimated reading time:* 5 minutes ☕️
+
 As large organizations get started with PostHog, the number of custom actions you’re tracking can start to grow very quickly. This can become an organizational challenge for teams where multiple people are creating actions, often with different naming conventions. 
 
 PostHog’s Data Management suite exists to help deal with this challenge, providing a way to clarify action ownership, reduce noise and help teams collaborate. However, you may want to maintain a list of tracked actions outside of the Data Management suite for users who do not have access to PostHog.
@@ -54,3 +55,5 @@ The Zapier editor will guide you through the process of creating the workflow, i
 If the action is specific to a page or on-page selector, this information is also included. 
 
 As an output, we want the workflow to populate the information to a Notion page — so we’ll use Notion’s ‘Write to database’ output. With these options created you can tailor how the information contained in the event is written to your Notion database. Instituting best practices, such as requiring action creators to include descriptions for their actions, will enable you to track all tracked actions within a simple Notion table. 
+
+<NewsletterTutorial compact/>

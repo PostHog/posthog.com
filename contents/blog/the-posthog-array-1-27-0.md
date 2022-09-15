@@ -32,7 +32,7 @@ As a small thank you for your time, we're giving away some awesome [PostHog merc
 
 ## PostHog 1.27.0 Release Notes
 
-> If you're self-hosting and want to upgrade for a better experience and new features, remember to [update your PostHog instance](/docs/self-host/configure/upgrading-posthog).
+> If you're self-hosting and want to upgrade for a better experience and new features, remember to [update your PostHog instance](/docs/runbook/upgrading-posthog).
 
 **In this release:**
 
@@ -87,7 +87,7 @@ ClickHouse is deployed a bit differently than our [traditional deployment option
 
 - Domain whitelist to allow self-serve signup with social providers (#5111).
 - Better errors & empty states when generating insights.
-- Plugins UI revamp (#5137, #4871).
+- Apps UI revamp (#5137, #4871).
 - You can now pass a Personal API key to API requests to work with different projects (#5044).
 - Your instance can now be multi-org (premium feature) by setting `MULTI_ORG_ENABLED` environment variable (#5108).
 - Performance improvements around insight requests and caching to optimize resource usage.
