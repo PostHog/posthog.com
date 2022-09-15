@@ -20,23 +20,22 @@ const Dot = ({ classes }: DotProps) => {
 }
 
 const avatarStyles = [
-    { color: '#DCB1E3', className: 'right-[-22rem] top-[-2rem]', size: 'lg' },
-
-    { color: '#FDEDC9', className: 'right-[-20rem] top-[-12rem]', size: 'md' },
-    { color: '#E19D9D', className: 'right-[-11rem] bottom-[-12rem]', size: 'xl' },
-    { color: '#A2B0D4', className: 'right-[-10rem] top-[-18rem]', size: 'lg' },
-    { color: '#9DE1D9', className: 'left-[-26rem] top-[-18rem]', size: 'xl' },
-    { color: '#B3E19D', className: 'left-[-8rem] top-[-16rem]', size: 'md' },
-    { color: '#9DA4E1', className: 'left-[-20rem] bottom-[-12rem]', size: 'xl' },
-    { color: '#FBBC05', className: 'left-[-24rem] bottom-[-2rem]', size: 'md' },
-    { color: '#E6A9E8', className: 'left-[-6rem] bottom-[-10rem]', size: 'md' },
+    { color: '#9DE1D9', className: 'left-[-30.5rem] top-[-18.5rem]', size: 'xl' },
+    { color: '#B3E19D', className: 'left-[-10rem] top-[-19rem]', size: 'md' },
+    { color: '#A2B0D4', className: 'right-[-14rem] top-[-22.5rem]', size: 'lg' },
+    { color: '#FDEDC9', className: 'right-[-26rem] top-[-12rem]', size: 'md' },
+    { color: '#DCB1E3', className: 'right-[-30.5rem] top-[-2.5rem]', size: 'lg' },
+    { color: '#E19D9D', className: 'right-[-14.5rem] bottom-[-16rem]', size: 'xl' },
+    { color: '#E6A9E8', className: 'left-[-6rem] bottom-[-12rem]', size: 'md' },
+    { color: '#9DA4E1', className: 'left-[-23rem] bottom-[-14rem]', size: 'xl' },
+    { color: '#FBBC05', className: 'left-[-25rem] bottom-[-1.5rem]', size: 'md' },
 ]
 
 export const AboutTeam = () => {
     const { teamMembers } = useStaticQuery(query)
 
     return (
-        <section id="team" className="py-12 px-4">
+        <section id="team" className="pt-16 pb-12 px-4">
             <h3 className="text-5xl mb-4 lg:mb-1 text-center">
                 We're a team of <span className="text-blue">30</span> from all over the world.
             </h3>
@@ -44,14 +43,14 @@ export const AboutTeam = () => {
                 Many of us move around a lot. Here's where we're currently shipping code.
             </h4>
 
-            <div className="text-center">
+            <div className="text-center mb-4">
                 <CallToAction to="/handbook/company/team" type="secondary">
                     Meet the team
                 </CallToAction>
             </div>
 
-            <div className="relative text-center pt-16 pb-24">
-                <div className="absolute inset-1/2 md:scale-100 sm:scale-[.6] scale-[.4]">
+            <div className="relative text-center py-14 md:py-28">
+                <div className="absolute inset-1/2 scale-[.4] sm:scale-[.6] md:scale-100">
                     {teamMembers.nodes.map(({ frontmatter: { name, country, headshot } }, index) => {
                         const styles = avatarStyles[index]
                         return (

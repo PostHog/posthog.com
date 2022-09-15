@@ -4,10 +4,10 @@ import countryCodeEmoji from 'country-code-emoji'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 
 const sizes = {
-    sm: 'border-1 w-12 h-12',
-    md: 'border-2 w-16 h-16',
-    lg: 'border-2 w-24 h-24',
-    xl: 'border-3 w-32 h-32',
+    sm: 'border-1 w-16 h-16',
+    md: 'border-2 w-20 h-20',
+    lg: 'border-2 w-32 h-32',
+    xl: 'border-3 w-40 h-40',
 }
 
 export const circle = (size = 'lg', className = '') => cntl`
