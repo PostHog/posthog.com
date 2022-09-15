@@ -2276,3 +2276,9 @@
 [[redirects]]
     from = "/handbook/people/team-structure/infrastructure"
     to = "/handbook/people/team-structure/platform"
+
+
+# Added: 2022-09-15
+[[redirects]]
+    from = "/handbook/people/team-structure/infrastructure/mission"
+    to = "/handbook/people/team-structure/platform/mission"
