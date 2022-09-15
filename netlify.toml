@@ -2271,3 +2271,8 @@
 [[redirects]]
     from = "/handbook/people/team-structure/app-east/objectives"
     to = "/handbook/people/team-structure/product-analytics/objectives"
+
+# Added: 2022-09-15
+[[redirects]]
+    from = "/handbook/people/team-structure/infrastructure"
+    to = "/handbook/people/team-structure/platform"
