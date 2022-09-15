@@ -1358,10 +1358,6 @@
                             "name": "BitBucket Release Tracker"
                         },
                         {
-                            "url": "/docs/apps/braze",
-                            "name": "Braze Import"
-                        },
-                        {
                             "url": "/docs/apps/replicator",
                             "name": "Event Replicator"
                         },
@@ -1716,10 +1712,6 @@
         {
             "name": "BitBucket Release Tracker",
             "url": "/apps/bitbucket-release-tracker"
-        },
-        {
-            "name": "Braze Importer",
-            "url": "/apps/braze"
         },
         {
             "name": "Currency Normalizer",
