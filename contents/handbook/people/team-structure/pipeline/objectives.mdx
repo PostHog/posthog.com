@@ -1,0 +1,69 @@
+- Objective: Develop Posthog CDP into a solution capable of replacing other CDPs for data-warehousing categories. Increase % of customers using “data out” apps from X to Y
+    - Key result:
+        - Make the most important data in and out apps work reliably
+            - (Potentially) Consolidate into 1 repo
+            - Opinionated way of writing tests (maybe end-to-end), structuring the apps
+            - Separate out filters
+        - Team to fill in
+    - Ideas
+        - CDP style UI
+            - Why? To make the CDP product feel like a standalone product similar to other CDP solutions
+        - Live view of data or event testing
+    - Why?
+        - By removing the need for other CDPs, Posthog can save the customers money and potentially create a new revenue line. 
+        - Historically we’ve fixed things iteratively. We want to consider this as a product.
+- Objective: Improve the performance of these areas
+    - Key results:
+        - Re-write how we do historical exports
+            - Able to cope with lots of volume
+            - Resource limiting the apps
+            - Why?
+                - We promised it to our largest customer
+        - (Proposed lower priority) Performance - improve ingestion performance
+            - Why?
+            - High volume customers e.g. a very large open source devtool customer couldn’t use our ingestion pipeline and so had to insert directly into clickhouse
+
+
+## Old roadmap
+
+### 3-year
+
+#### Scaffolding to support core PostHog features
+
+- Events are ingested and visible in app within 5 seconds p99
+
+#### Ingestion robustness
+
+- Ingest events out of order
+- No events left behind (99.99%)
+- All events are correct (99.99%)
+- The pipeline scales perfectly linearly and intercept is low (smallest instance runs on $5 node)
+
+#### Extensibility
+
+- Integrated delightful plugin developer experience (inside PostHog)
+    - CI/CD
+    - Testing
+    - Synthetic data testing
+- Majority of users are using PostHog for their ETL / reverse-ETL workloads 
+
+### 6 months
+
+#### Scaffolding to support core PostHog features
+
+- Scalable to 1Bn Persons 🎉
+- Events are ingested and visible in app within 30 seconds p99
+
+#### Ingestion robustness
+
+- Ingestion monitoring and management
+    - Runbooks, dashboards, and alerts in Grafana on cloud and on self hosted
+
+
+#### Extensibility
+
+- Easy to build a well tested plugin (DevEx)
+    - Documentation
+    - GitHub Template
+        - Unit tests
+        - Style
