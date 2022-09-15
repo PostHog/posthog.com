@@ -1,11 +1,42 @@
-* **Proposed Objective**:
-    * PostHog Cloud in the US remains reliable and launch EU Cloud
-* **Proposed Key Results**:
-    * Multiple organizations using EU hosted PostHog Cloud without regressions in either EU or US cloud
-    * Reliable monitoring and alerting on all key services
-    * Upgrade to Kubernetes 1.25 to unblock key customers
-    * Meet SOC 2 compliance requirements for all cloud infrastructure
-* **Rationale**:
-    * To nail self-serve we need to make it as easy as possible for customers to sign up and get started
-    * For businesses in the EU today, the main barrier is needing to self host to keep data in the EU, this limits trust in our brand and the potential adoption we can drive
-    * Shipping a secure cloud in the EU will also encourage many businesses to get started with PostHog Cloud, even if they ultimately intend to self-host
+- Objective: High uptime and increase the resilience/redundancy
+    - Key results:
+        - Team to fill in
+    - Why?
+        - A lack of reliability will cause churn.
+- Objective: Meet the compliance needs of 5 companies that we cannot meet today
+    - Key result: EU Cloud is successfully managed
+    - Key result: SOC2 completed and security audit
+    - Why?
+        - Not having these is blocking customers, who we can often uniquely satisfy.
+    - (Potentially) Objective: Enable customers to install a production grade self hosted version of Posthog in under 10 minutes (requires the scale plan)
+    - Key result: 
+        - To be filled in by the team
+    - Ideas:
+        - Speak to mid-market and enterprise to understand whether this would help improve their deployment
+        - Implementation ideas
+            - E.g. User creates an IAM, gives the details to Posthog which then spins up the code
+            - User runs terraform directly in their own cloud 
+        - Potentially change this as the default setup method for self-hosted and discontinue hobby and the helm chart version
+        - Need to confirm that this deployment method would work with enterprises: Airbus, ING
+        - Deprecate the hobby deployment
+    - Why?
+        - Simpler install and consistent install across users will result in less support needed. By setting up all the self-hosted clients on the scale plan will drive more revenue.
+
+## Old roadmap
+
+#### 3-year
+
+- All infrastructure is managed as code
+- Cloud is global
+- Best in class security and privacy compliance
+- Scale beyond 1 Trillion events / month
+- Support Non-Cube Deploys 🤖
+
+#### 6 month
+
+- No Heroku
+- ClickHouse Upgraded
+- Good logging and monitoring
+- 5 Billion / month events
+- SOC 2 Ready
+- All infra is managed as code on prod / staging + EU Ready 🎈
