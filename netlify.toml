@@ -1756,10 +1756,10 @@
     from = "/apps/zendesk-connector/docs"
     to = "/docs/apps/zendesk-connector"
 
-# Added: 2022-07-18
+# Added: 2022-07-18 # Updated: 2022-09-15
 [[redirects]]
     from = "/handbook/engineering/app-east"
-    to = "/handbook/people/team-structure/app-east"
+    to = "/handbook/people/team-structure/product-analytics"
 
 # Added: 2022-07-18
 [[redirects]]
@@ -2235,7 +2235,12 @@
     from = "/product/experimentation"
     to = "/product/experimentation-suite"
 
-# Added: 2022-09-11
+# Added: 2022-09-11 # Updated: 2022-09-15
 [[redirects]]
     from = "/handbook/people/team-structure/app-east/objectives"
-    to = "/handbook/people/team-structure/app-east"
+    to = "/handbook/people/team-structure/product-analytics"
+
+# Added: 2022-09-15
+[[redirects]]
+    from = "/handbook/engineering/app-east"
+    to = "/handbook/people/team-structure/product-analytics"

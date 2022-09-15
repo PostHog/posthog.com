@@ -48,7 +48,7 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 
 Engineering is spread out into three small teams. Team Platform is a scope-specific team which focuses on deployments and ingestion (see [Team Platform](platform) for more details). App teams East and West work on the PostHog product in general and they're split based on timezones for optimal collaboration. We mostly hire full-stack engineers and each team has expertise across the stack of the entire product. To learn what each team is working on you can take a look at [feature ownership](/handbook/engineering/feature-ownership).
 
-#### [Product Analytics](app-east)
+#### [Product Analytics](product-analytics)
 - [Marius Andra](/handbook/company/team#marius-andra-software-engineer) (Team lead, Full Stack Engineer)
 - [Michael Matloka](/handbook/company/team#michael-matloka-software-engineer) (Full Stack Engineer)
 - [Paul D'Ambra](/handbook/company/team#paul-dambra-software-engineer) (Full Stack Engineer)
