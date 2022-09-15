@@ -35,7 +35,7 @@ Access your old PostHog instance and run the following command:
 
 ```shell
 # tip: use the flag -U to specify a username if necessary
-pg_dump -d posthog -f tmp/export.sql --no-owner --data-only \
+pg_dump -d posthog -f tmp/export.sql --no-owner --data-only --disable-triggers \
 -t posthog_action \
 -t posthog_actionstep \
 -t posthog_annotation \
