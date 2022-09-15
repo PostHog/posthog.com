@@ -54,9 +54,11 @@ export const AboutStory = () => {
                 </div>
                 <div className="absolute -bottom-8 lg:-bottom-16 left-4 md:-left-8 lg:-left-16">
                     <StaticImage
+                        breakpoints={[750, 1080, 1366, 1920]}
                         src="./images/james.png"
                         width={385.5}
                         height={366}
+                        quality={100}
                         alt="James Hawkins, CEO, Co-founder"
                         placeholder="none"
                         objectFit="contain"
@@ -65,9 +67,11 @@ export const AboutStory = () => {
                 </div>
                 <div className="absolute bottom-0 lg:-bottom-2 right-4 md:right-4 lg:right-8">
                     <StaticImage
+                        breakpoints={[750, 1080, 1366, 1920]}
                         src="./images/tim.png"
                         width={366}
                         height={320}
+                        quality={100}
                         alt="Tim Glaser, CTO, Co-founder"
                         placeholder="none"
                         objectFit="contain"
