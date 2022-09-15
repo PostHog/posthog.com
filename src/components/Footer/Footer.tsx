@@ -217,7 +217,7 @@ export function Footer(): JSX.Element {
                                 <h5 className={linksHeadingSm}>About</h5>
                                 <ul className="list-none p-0 m-0 space-y-1">
                                     <FooterMenuItem title="About us" url="/about" />
-                                    <FooterMenuItem title="Our story" url="/handbook/company/story" />
+                                    <FooterMenuItem title="Our story" url="/about" />
                                     <FooterMenuItem title="Team" url="/handbook/company/team" />
                                     <FooterMenuItem title="Handbook" url="/handbook" />
                                     <FooterMenuItem title="Investors" url="/handbook/strategy/investors" />
