@@ -122,6 +122,10 @@
                             "url": "/handbook/people/team-structure/product-analytics"
                         },
                         {
+                            "name": "Team Session Recording",
+                            "url": "/handbook/people/team-structure/session-recording"
+                        },
+                        {
                             "name": "Team App West",
                             "url": "/handbook/people/team-structure/app-west"
                         },
@@ -130,8 +134,8 @@
                             "url": "/handbook/people/team-structure/platform"
                         },
                         {
-                            "name": "Team Ingestion",
-                            "url": "/handbook/people/team-structure/ingestion"
+                            "name": "Team Pipeline",
+                            "url": "/handbook/people/team-structure/pipeline"
                         },
                         {
                             "name": "Team Infrastructure",

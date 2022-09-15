@@ -57,7 +57,7 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - _Hiring for a [full stack engineer](careers/full-stack-engineer)_
 
 #### [Session Recordings](session-recordings)
-- [Ben White](/handbook/company/team#ben-white-full-stack-engineer) (Full Stack Engineer)
+- [Ben White](/handbook/company/team#ben-white-full-stack-engineer) (Team lead, Full Stack Engineer)
 - [Alex Kim](/handbook/company/team#alex-kim-full-stack-engineer) (Full Stack Engineer)
 - [Emanuele Capparelli](/handbook/company/team#ben-white-full-stack-engineer) (Growth Engineer)
 - _Hiring for a [full stack engineer](careers/full-stack-engineer)_
