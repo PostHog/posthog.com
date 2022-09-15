@@ -55,12 +55,14 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - _[Lottie Coxon](/handbook/company/team#lottie-coxon) (Graphic Designer) - pairs with Chris Clark_
 - _Hiring for a [full stack engineer](careers/full-stack-engineer)_
 - _Hiring for a [full stack engineer](careers/full-stack-engineer)_
+- Product: Supported by Annika Schmid
 
 #### [Session Recordings](session-recordings)
 - [Ben White](/handbook/company/team#ben-white-full-stack-engineer) (Team lead, Full Stack Engineer)
 - [Alex Kim](/handbook/company/team#alex-kim-full-stack-engineer) (Full Stack Engineer)
 - [Emanuele Capparelli](/handbook/company/team#ben-white-full-stack-engineer) (Growth Engineer)
 - _Hiring for a [full stack engineer](careers/full-stack-engineer)_
+- Product: Supported by Annika Schmid
 
 #### [App West - Feature flags / experiments / cohorts / SQL](app-west)
 - [Eric Duong](/handbook/company/team#eric-duong-software-engineer) (Team lead, Full Stack Engineer)
@@ -68,12 +70,14 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Neil Kakkar](/handbook/company/team#neil-kakkar-software-engineer) (Full Stack Engineer)
 - _[Chris Clark](/handbook/company/team#chris-clark) (Product Designer)_ - _Works across App West and Product Analytics_
 - _Hiring for a [full stack engineer](careers/full-stack-engineer)_
+- Product: Supported by Annika Schmid
 
 #### [Platform](platform)
 - [James Greenhill](/handbook/company/team#james-greenhill-software-engineer) (Team lead, Data/Infra Engineer)
 - Ellie Huxtable
 - [Guido Iaquinti](/handbook/company/team#guido-iaquinti-software-engineer) (Site Reliability Engineer)
 - _Hiring for an [Site Reliability Engineer](site-reliability-engineer-kubernetes)_
+- Product: Supported by Luke Harries
 
 #### [Pipeline](pipeline)
 - [Yakko Majuri](/handbook/company/team#yakko-majuri-software-engineer) (Full Stack Engineer)
@@ -82,6 +86,7 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Tiina Turban](/handbook/company/team#tiina-turban-software-engineer) (Full Stack Engineer)
 - _Incoming Senior Data Engineer_
 - _Hiring for a [full stack engineer](careers/full-stack-engineer)_
+- Product: Supported by Luke Harries
 
 ### [Marketing](marketing)
 - [Charles Cook](/handbook/company/team#charles-cook-business-operations) (Team lead, VP Ops & Marketing)
