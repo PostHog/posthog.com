@@ -20,7 +20,7 @@ export default function Modal({ open, setOpen, children }) {
                 onClose={() => setOpen(false)}
                 className="fixed z-[99999] inset-0 overflow-y-auto box-border"
             >
-                <Dialog.Overlay className="fixed inset-0 bg-tan/90" />
+                <Dialog.Overlay className="fixed inset-0 bg-tan/90 dark:bg-primary/90" />
                 {children}
             </Dialog>
         </Transition>

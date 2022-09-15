@@ -9,8 +9,6 @@ import Confetti from 'react-confetti'
 import GitHubButton from 'react-github-btn'
 import { NewsletterForm } from 'components/NewsletterForm'
 import NotProductIcons from 'components/NotProductIcons'
-import { createPortal } from 'react-dom'
-
 const allowedFileTypes = ['application/pdf']
 
 interface IResumeComponentProps {
@@ -190,7 +188,10 @@ export default function Apply({ id, info }) {
                     <Confetti recycle={false} numberOfPieces={1000} />
                 </div>
                 <div onClick={() => setModalOpen(false)} className="flex flex-start justify-center absolute w-full p-4">
-                    <div className="max-w-xl bg-white rounded-md relative" onClick={(e) => e.stopPropagation()}>
+                    <div
+                        className="max-w-xl bg-white dark:bg-black rounded-md relative"
+                        onClick={(e) => e.stopPropagation()}
+                    >
                         <button
                             onClick={() => setModalOpen(false)}
                             className="absolute right-4 top-4 bg-tan rounded-full w-8 h-8 text-black flex items-center justify-center group active:scale-[.90] focus:ring-0"
@@ -240,7 +241,7 @@ export default function Apply({ id, info }) {
                             <p className="m-0 mb-3 text-sm">
                                 This code is our token of appreciation for taking the time to apply.
                             </p>
-                            <div className="rounded-md bg-tan border border-dashed border-gray-accent-light py-2 px-3 flex justify-between items-center mb-4 md:max-w-[210px] w-full">
+                            <div className="rounded-md bg-tan dark:bg-primary border border-dashed border-gray-accent-light py-2 px-3 flex justify-between items-center mb-4 md:max-w-[210px] w-full">
                                 <p className="font-semibold font-code m-0">{code}</p>
                                 <button
                                     disabled={copied}

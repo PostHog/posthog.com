@@ -149,7 +149,9 @@ module.exports = {
                     'sans-serif',
                 ],
             },
-            fontSize: {},
+            fontSize: {
+                '6xl': '3.5rem',
+            },
             colors: {
                 primary: '#151515',
                 'primary-dark': '#EEEFE9',

@@ -13,16 +13,16 @@ export const SectionHeader = ({
     titleTag,
     title,
     leadText = '',
-    titleClassName = '',
+    titleClassName = 'text-5xl mb-2',
     leadTextClassName = '',
 }: SectionHeaderProps) => {
     const Header = titleTag as keyof JSX.IntrinsicElements
-    const leadTextClassList = mergeClassList('mt-1 text-center max-w-2xl mx-auto', leadTextClassName)
+    const leadTextClassList = mergeClassList('opacity-60 max-w-2xl mx-auto', leadTextClassName)
 
     return (
         <>
             <Header className={titleClassName}>{title}</Header>
-            {leadText ? <h5 className={leadTextClassList}>{leadText}</h5> : null}
+            {leadText ? <h4 className={leadTextClassList}>{leadText}</h4> : null}
         </>
     )
 }

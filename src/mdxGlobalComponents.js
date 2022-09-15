@@ -1,5 +1,12 @@
 // AUTO GENERATED FILE 
 
+import { AboutAnchorScrollNavbar } from './components/About/AboutAnchorScrollNavbar'
+import { AboutBlog } from './components/About/AboutBlog'
+import { AboutHero } from './components/About/AboutHero'
+import { AboutInvestors } from './components/About/AboutInvestors'
+import { AboutStory } from './components/About/AboutStory'
+import { AboutTeam } from './components/About/AboutTeam'
+import { AboutTransparency } from './components/About/AboutTransparency'
 import { Accordion } from './components/Accordion'
 import { AnchorScrollNavbar } from './components/AnchorScrollNavbar'
 import { AnimateIntoView } from './components/AnimateIntoView'
@@ -119,6 +126,13 @@ import { VisitLibrary } from './components/VisitLibrary'
 import { ZoomImage } from './components/ZoomImage'
 
 export const shortcodes = {
+	AboutAnchorScrollNavbar,
+	AboutBlog,
+	AboutHero,
+	AboutInvestors,
+	AboutStory,
+	AboutTeam,
+	AboutTransparency,
 	Accordion,
 	AnchorScrollNavbar,
 	AnimateIntoView,
