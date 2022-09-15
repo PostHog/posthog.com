@@ -2254,3 +2254,20 @@
 [[redirects]]
     from = "/handbook/people/team-structure/ingestion"
     to = "/handbook/people/team-structure/pipeline"
+
+# Added: 2022-09-15
+[[redirects]]
+    from = "/handbook/people/team-structure/app-east"
+    to = "/handbook/people/team-structure/product-analytics"
+
+
+# Added: 2022-09-15
+[[redirects]]
+    from = "/handbook/people/team-structure/app-east/mission"
+    to = "/handbook/people/team-structure/product-analytics/mission"
+
+
+# Added: 2022-09-15
+[[redirects]]
+    from = "/handbook/people/team-structure/app-east/objectives"
+    to = "/handbook/people/team-structure/product-analytics/objectives"
