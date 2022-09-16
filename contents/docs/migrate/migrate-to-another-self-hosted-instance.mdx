@@ -58,7 +58,8 @@ pg_dump -d posthog -f tmp/export.sql --no-owner --data-only --disable-triggers \
 -t posthog_user_groups \
 -t posthog_user_user_permissions
 ```
-> **Note:** You may see a warning regarding circular dependencies between tables. This is not a problem as we are using the `--disable-triggers` flag.
+
+> **Note:** You may see a warning regarding circular dependencies between tables, which shouldn't be an issue as we are using `--disable-triggers`. If you do run into issues when restoring, try doing a full dump instead of `--data-only`.
 
 If you do not access your Postgres database via a port-forwarding mechanism to your local machine, you will then need to copy the file from the server to your local system (or the remote server from where you access your new instance). You can do this with `scp`:
 
