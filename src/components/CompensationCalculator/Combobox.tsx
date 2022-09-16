@@ -45,6 +45,7 @@ export const Combobox = (props: ComboboxProps) => {
                         className="flex items-center relative w-full focus:outline-none shadow-sm mt-1.5"
                     >
                         <HeadlessCombobox.Input
+                            autoComplete="off"
                             onBlur={() => setFocused(false)}
                             onFocus={(event: React.FocusEvent<HTMLInputElement>) => {
                                 event.target.value = ''
