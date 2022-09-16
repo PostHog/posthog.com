@@ -1,10 +1,10 @@
 import { ContributorImage, SidebarSection } from 'components/PostLayout'
 import React from 'react'
-import { countryCodeEmoji } from 'country-code-emoji'
 import Tooltip from 'components/Tooltip'
 import { kebabCase } from 'lib/utils'
 import Link from 'components/Link'
 import NotProductIcons from 'components/NotProductIcons'
+import ReactCountryFlag from 'react-country-flag'
 
 import { ThumbDown, ThumbUp } from 'components/Icons/Icons'
 
@@ -68,7 +68,9 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
                                         title={
                                             <div className="flex space-x-1 items-center">
                                                 <span className="text-xs">{name}</span>
-                                                <span>{countryCodeEmoji(country)}</span>
+                                                <span className="w-[14px] flex">
+                                                    <ReactCountryFlag width={14} svg countryCode={country} />
+                                                </span>
                                             </div>
                                         }
                                     >
@@ -104,7 +106,7 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
                         name={teamLead?.frontmatter?.name}
                     />
                     <p className="author text-base font-semibold m-0 text-[15px]">{teamLead?.frontmatter?.name}</p>
-                    <span className="text-lg">{countryCodeEmoji(teamLead?.frontmatter?.country)}</span>
+                    <ReactCountryFlag svg countryCode={teamLead?.frontmatter?.country} />
                 </Link>
             </SidebarSection>
 
