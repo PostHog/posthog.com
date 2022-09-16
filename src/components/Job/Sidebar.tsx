@@ -25,6 +25,16 @@ interface ISidebarProps {
     teamSlug: string
 }
 
+const pineappleText = (percentage: number) => {
+    if (percentage === 50) return 'This team is evenly split on whether pineapple belongs on pizza'
+    if (percentage < 50) return 'Shockingly, team prefers their pizza without pineapple'
+    return (
+        <>
+            <strong>{percentage}%</strong> of this team prefer pineapple on pizza
+        </>
+    )
+}
+
 export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebarProps) {
     const teamLength = team?.length
     if (!team || !teamLength || !teamLead) return null
@@ -122,9 +132,7 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
                         <ThumbDown className="w-8 h-8 fill-green" />
                     )}
                 </div>
-                <p className="text-sm -mt-1 opacity-70 leading-tight mb-3">
-                    <strong>{pineapplePercentage}%</strong> of this team prefer pineapple on pizza
-                </p>
+                <p className="text-sm -mt-1 opacity-70 leading-tight mb-3">{pineappleText(pineapplePercentage)}</p>
                 <div className="h-2 w-full bg-white dark:bg-gray-accent-dark rounded-md relative overflow-hidden">
                     <div
                         style={{ width: `${pineapplePercentage}%` }}
