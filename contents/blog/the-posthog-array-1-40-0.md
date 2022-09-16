@@ -35,7 +35,7 @@ Some copy goes here.
 Some copy goes here. 
 
 ### Other improvements & fixes
-Version 1.39 also adds hundreds of other improvements and fixes, including...
+Version 1.40 also adds hundreds of other improvements and fixes, including...
 
 - **Improvement:** Minor feature one
 - **Improvement:** Minor feature two
