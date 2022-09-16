@@ -131,20 +131,28 @@ const Form = ({ setSubmitted, info, id }) => {
                 <span className="font-bold">Bolded fields</span> are required
             </p>
             <form onSubmit={handleSubmit}>
-                <div className="grid grid-cols-1 gap-y-3 ">
+                <div className="grid grid-cols-2 gap-3">
                     {info?.applicationFormDefinition?.sections?.map(({ fields }) => {
                         return fields.map(({ field, isRequired, descriptionPlain }) => {
                             const required = isRequired
+                            const type = field?.type?.toLowerCase()
                             return (
-                                <div key={field?.path}>
+                                <div
+                                    className={
+                                        type === 'string' || type === 'email'
+                                            ? 'sm:col-span-1 col-span-2'
+                                            : 'col-span-2'
+                                    }
+                                    key={field?.path}
+                                >
                                     <label
                                         className={`opacity-70 mb-1 inline-block ${required ? 'font-bold' : ''}`}
                                         htmlFor={field?.title}
                                     >
                                         {field?.title}
                                     </label>
-                                    {components[field?.type?.toLowerCase()] &&
-                                        components[field?.type?.toLowerCase()]({
+                                    {components[type] &&
+                                        components[type]({
                                             title: field?.title,
                                             required,
                                             path: field?.path,

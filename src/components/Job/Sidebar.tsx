@@ -27,7 +27,7 @@ interface ISidebarProps {
 
 const pineappleText = (percentage: number) => {
     if (percentage === 50) return 'This team is evenly split on whether pineapple belongs on pizza'
-    if (percentage < 50) return 'Shockingly, team prefers their pizza without pineapple'
+    if (percentage < 50) return 'Shockingly, this team prefers their pizza without pineapple'
     return (
         <>
             <strong>{percentage}%</strong> of this team prefer pineapple on pizza
