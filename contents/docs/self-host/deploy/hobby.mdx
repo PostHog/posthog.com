@@ -10,19 +10,17 @@ import Disclaimer from './snippets/disclaimer'
 
 We provide a PostHog "hobby deployment" option for those that want to try out self-hosted PostHog without having to spend a lot on infrastructure costs.
 
-This type of deployment is aimed at users who want to test out the platform or do some minimal tracking (e.g. for a personal blog, or to test PostHog as simply as possible with low volumes).
-
 It should **not** be used as a production instance for tracking a product with any reasonable amount of scale.
 
-## Pre-requisites
+## Requirements
 
--   You have deployed a Linux Ubuntu Virtual Machine.
-    -   A $10/month (2GB RAM) droplet on DigitalOcean can handle approximately 100k events spread over a month
-    -   We recommend a $20/ month (4GB RAM) if you expect any surges in event volumes
-    -   Over 100K we'd recommend our Scale deployment methods
+- You have deployed a Linux Ubuntu Virtual Machine.
+    - An instance with 2GB of RAM can handle approximately 100k events spread over a month
+    - We highly recommend an instance with at least 4GB of RAM to handle any surges in event volume
+    - For volumes over 100K a month we'd recommend deploying using [Kubernetes](/docs/self-host/deploy/other)
+- [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/) are installed
 
-You can click on the badge below to get US$100 in credit over 60 days
-(i.e. run PostHog for free for ~2 months).
+Not sure where to host? You can click on the badge below to get US$100 in credit for DigitalOcean (i.e. run PostHog for free for ~2 months).
 
 <center>
     <a
@@ -37,19 +35,128 @@ You can click on the badge below to get US$100 in credit over 60 days
     </a>
 </center>
 
-## Quick install on an Ubuntu VM
+## Setting up `docker-compose.yml`
 
-For a quick install that uses Docker, run the following command:
+To get started, we'll run the `deploy-hobby` script from the PostHog repo, which will download and set up our `docker-compose.yml`.
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/posthog/posthog/HEAD/bin/deploy-hobby)"
 ```
 
+## Setting up SSL _(optional)_
+
+Next, we'll set up SSL for our deployment through LetsEncrypt. This step is optional, but we'd _highly_ recommend it if you're deploying PostHog in production.
+
+Before proceeding, make sure you have configured your DNS settings to point your domain to your new instance.
+It may take a couple mintues before these changes propagate, so make sure to double check the status before moving forward.
+
+>**Tip:** Avoid using the word 'posthog' in your domain to prevent requests being blocked by ad blockers.
+
+Once your DNS record is set up, we'll need to make a few small changes to our config.
+
+In the `docker-compose.yml` file, change the value of `SITE_URL` from `http://localhost` to `https://<your-domain>`.
+
+```yaml file=docker-compose.yml
+services:
+    ...
+    web:
+        ...
+        environment: &env
+            DEPLOYMENT: hobby
+            # replace with your domain
+            SITE_URL: https://<your-domain>
+            DISABLE_SECURE_SSL_REDIRECT: 'true'
+
+```
+
+Next, we'll add the domain to the Caddyfile.
+
+```yaml file=Caddyfile
+# replace with your domain
+<your-domain> {
+  reverse_proxy http://web:8000
+}
+```
+
+>**Note:** Make sure not to prepend `https://` before your domain in this file.
+
+We're now all set! Once we spin up the stack, we'll get an automatic SSL certificate through LetsEncrypt.
+
+### Customizing your deployment (optional)
+
+By default, the `docker-compose.yml` file comes with a series of default config values that should work for most deployments.
+If you need to customize anything, you can take a look at the [full list of environment variables here](/docs/self-host/configure/environment-variables).
+
+Additionally, if you would like to run a different version of PostHog, you can change the tag for the web, worker, and plugins services.
+Check out [here](https://hub.docker.com/r/posthog/posthog) for a list of all available tags.
+
+## Run the PostHog stack
+
+Now, all that's left to do is to spin up all our services!
+
+```bash
+docker-compose up -d
+```
+
+We can use `docker ps` to check that all of our services are running.
+
+```bash
+$ docker ps
+
+CONTAINER ID   IMAGE                               COMMAND     CREATED    STATUS    PORTS   NAMES
+21a2f62d6e50   posthog/posthog:release-1.39.1      ...         1m ago     Up 1m     ...     ...
+77face12d3e2   posthog/posthog:release-1.39.1      ...         1m ago     Up 1m     ...     ...
+3b4bc7394049   posthog/posthog:release-1.39.1      ...         1m ago     Up 1m     ...     ...
+03f393c7aa84   caddy                               ...         1m ago     Up 1m     ...     ...
+f1060c3d8d73   clickhouse/clickhouse-server:22.3   ...         1m ago     Up 1m     ...     ...
+7d2353a6bddf   bitnami/kafka:2.8.1-debian-10-r99   ...         1m ago     Up 1m     ...     ...
+72051397040e   zookeeper:3.7.0                     ...         1m ago     Up 1m     ...     ...
+ff42ccf14481   redis:6.2.7-alpine                  ...         1m ago     Up 1m     ...     ...
+402a0eef69ae   postgres:12-alpine                  ...         1m ago     Up 1m     ...     ...
+da0d115dd02e   minio/minio                         ...         1m ago     Up 1m     ...     ...
+```
+
+At this point, it will still take a couple of minutes for all the migrations to settle and for Caddy to set up our CA certificate.
+To check the progress of these migrations, we can take a look at the logs for the web container.
+
+```bash
+docker logs posthog_web_1
+```
+
+> **Note:** Make sure to replace `posthog_web_1` with the name of your web container when running `docker ps`.
+
+Once everything has settled, you should see the following message in the logs.
+
+```bash
+$ docker logs posthog_web_1
+
+ _____          _   _    _
+|  __ \        | | | |  | |
+| |__) |__  ___| |_| |__| | ___   __ _
+|  ___/ _ \/ __| __|  __  |/ _ \ / _` |
+| |  | (_) \__ \ |_| |  | | (_) | (_| |
+|_|   \___/|___/\__|_|  |_|\___/ \__, |
+                                  __/ |
+                                 |___/
+
+
+Server running on http://0.0.0.0:8000
+Questions? Please shoot us an email at hey@posthog.com
+```
+
+You can now open the IP address of your instance or the domain you configured earlier in your browser, and you should see the PostHog web interface!
+
+> Running into issues with deployment? Ask a [question here](/questions) or check out our [Slack](/slack) to get help.
+
 ## Upgrading
+
+To upgrade, you can run the `upgrade-hobby` script from the PostHog repo.
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/posthog/posthog/HEAD/bin/upgrade-hobby)"
 ```
+
+>**Warning:** Before upgrading, make sure you have created back-ups of all your data!
 
 ## Migrating
 
