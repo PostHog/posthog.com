@@ -2288,3 +2288,9 @@
 [[redirects]]
     from = "/handbook/people/team-structure/infrastructure/objectives"
     to = "/handbook/people/team-structure/platform/objectives"
+
+
+# Added: 2022-09-16
+[[redirects]]
+    from = "/handbook/strategy/overview"
+    to = "/handbook/strategy/strategy"
