@@ -56,12 +56,7 @@ export function Footer(): JSX.Element {
                     <li className="w-full sm:w-auto flex justify-center mb-2 lg:mb-0">
                         <Logo noText />
                     </li>
-                    <FooterMenuItem
-                        marginBottom="0"
-                        className="md:text-lg"
-                        title="About"
-                        url="/handbook/company/story"
-                    />
+                    <FooterMenuItem marginBottom="0" className="md:text-lg" title="About" url="/about" />
                     <FooterMenuItem marginBottom="0" className="md:text-lg" title="Blog" url="/blog" />
                     <FooterMenuItem marginBottom="0" className="md:text-lg" title="Newsletter" url="/newsletter" />
                     <FooterMenuItem marginBottom="0" className="md:text-lg" title="Careers" url="/careers" />
