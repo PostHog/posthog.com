@@ -19,6 +19,7 @@ export interface Props {
     event?: string
     href?: string
     glossary?: TooltipContentProps[]
+    preview?: TooltipContentProps
 }
 
 export default function Link({
@@ -45,9 +46,11 @@ export default function Link({
     }
     const url = to || href
     const internal = !disablePrefetch && url && /^\/(?!\/)/.test(url)
-    const preview = glossary?.find((glossaryItem) => {
-        return glossaryItem?.slug === url?.replace(/https:\/\/posthog.com|#.*/gi, '')
-    })
+    const preview =
+        other.preview ||
+        glossary?.find((glossaryItem) => {
+            return glossaryItem?.slug === url?.replace(/https:\/\/posthog.com|#.*/gi, '')
+        })
     return onClick && !url ? (
         <button onClick={handleClick} className={className}>
             {children}

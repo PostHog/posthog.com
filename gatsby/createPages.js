@@ -246,8 +246,6 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
                 node?.rawBody &&
                 markdownLinkExtractor(node?.rawBody)?.map((url) => url.replace(/https:\/\/posthog.com|#.*/gi, ''))
             const slug = node.fields?.slug || node.url
-            if (slug === '/docs/self-host/deploy/hosting-costs')
-                console.log('HEY DUDE!', markdownLinkExtractor(node?.rawBody), links)
             let next = null
             let previous = null
             let breadcrumb = null

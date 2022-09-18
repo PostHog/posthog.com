@@ -34,7 +34,7 @@ export const TooltipContent = ({ slug, description, title, video }: TooltipConte
         title &&
         slug &&
         description && (
-            <div className={'w-[350px] p-4'}>
+            <div className={'w-[320px] p-4'}>
                 {video && (
                     <div className="grid grid-cols-2 mb-4 pb-4 relative">
                         <button onClick={() => setView('article')} className="font-semibold">
