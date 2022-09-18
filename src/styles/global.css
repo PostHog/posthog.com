@@ -945,8 +945,11 @@ body.dark {
 }
 
 .home-slider-buttons {
-    .slick-track > div {
-        @apply border-r border-dashed border-gray-accent-light;
+    .slick-track {
+        @apply flex;
+        & > div {
+            @apply border-r border-dashed border-gray-accent-light h-[inherit];
+        }
     }
 }
 
