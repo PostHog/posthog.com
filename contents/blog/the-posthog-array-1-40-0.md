@@ -10,7 +10,7 @@ featuredImage: ../images/blog/posthog-array-blog.png
 featuredImageType: full
 ---
 
-Want to know more about what we're up to? [Subscribe to HogMail, our newsletter](/newsletter), which we send out every two weeks!
+Want to know more about what we're up to? [Subscribe to HogMail, our newsletter](/newsletter), which we send every two weeks!
 
 > Running a self-hosted instance? Check out our [guide to upgrading PostHog](/docs/runbook/upgrading-posthog).
 
@@ -39,7 +39,8 @@ Version 1.40 also adds hundreds of other improvements and fixes, including...
 
 - **Improvement:** Minor feature one
 - **Improvement:** Minor feature two
-- **Fix**: Bug fix.
+- **Fix**: Bug fix one.
+- **Fix**: Bug fix two.
 
 View the commit log in GitHub for a full history of changes: [`release-1.39.0...release-1.40.0`](https://github.com/PostHog/posthog/compare/release-1.39.0...release-1.40.0).
 
