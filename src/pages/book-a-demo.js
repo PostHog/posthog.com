@@ -11,7 +11,7 @@ import React, { useEffect, useState } from 'react'
 const Editions = ({ setDemoType }) => {
     return (
         <>
-            <Intro title="Select edition" />
+            <Intro title="Book a PostHog demo" />
             <div className="max-w-[600px] mx-auto grid md:grid-cols-2 grid-cols-1 gap-x-6">
                 <div className="pb-6 md:pt-0 pt-6 justify-self-end w-full">
                     <div className="flex flex-col space-y-4">
@@ -112,7 +112,7 @@ export default function SelfHost({ location }) {
     }, [demoType])
     return (
         <Layout crumbs={[...crumbs]}>
-            <SEO title="Select edition - PostHog" />
+            <SEO title="Book a PostHog demo" />
             <section className="px-4">
                 {demoType ? <Book demoType={demoType} /> : <Editions setDemoType={setDemoType} />}
             </section>
