@@ -26,7 +26,7 @@ You won’t see any UI changes — persons will still have their own Persons & G
 
 - **Self-hosting users will see a storage increase**. This is due to extra information being stored in your self-hosted ClickHouse. We expect users to see their storage requirement increase by approximately XX. 
 
-Self-hosting users also need to manually upgrade deployment to take advantage of this change, while the change will be automatically targeted for users on PostHog Cloud. If you’re self-hosting PostHog, you need to run [async migration](/docs/runbook/async-migrations) number 0006. Afterwards, change your `PERSON_ON_EVENTS_ENABLED` [instance setting](/docs/self-host/configure/instance-settings) to `true`. You'll need to be [a Staff user](/docs/self-host/configure/instance-settings#staff-users) to make changes.
+Self-hosting users will need to [update to the latest version of PostHog](/docs/runbook/upgrading-posthog), while the change will be automatically targeted for users on PostHog Cloud. 
 
 While improving performance has been a major motivation for this change, this is also a crucial step in ensuring PostHog can continue to scale effectively. 
 
