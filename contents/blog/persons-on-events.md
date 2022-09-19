@@ -12,7 +12,7 @@ featuredImageType: full
 
 In [our last product update](/blog/the-posthog-array-1-39-0) we announced a beta for a substantial change to the way we handle persons and events on PostHog. Today, after gathering your feedback and seeing the improvements to query performance, we’re rolling this change out to all PostHog users. 
 
-This change essentially combines [persons](/manual/persons) and [events](/manual/events) into a single ClickHouse table, moving person IDs and properties _onto_ events. This change also applies to groups, adding group properties and aggregation to the same table. 
+This change essentially combines [persons](/manual/persons) and [events](/manual/events) into a single ClickHouse table, adding person IDs and properties _onto_ events. This change also applies to groups, adding group properties and aggregation to the same table. 
 
 You won’t see any UI changes — persons will still have their own Persons & Groups section on the sidebar, for example — and there’ll be no loss of functionality, but here are some changes you may see:
 
