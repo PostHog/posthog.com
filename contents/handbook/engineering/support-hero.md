@@ -66,6 +66,7 @@ When you initially respond to an issue in Zendesk add a "tag" with the following
 * Docs confusion _either missing or confusing_.
 * App Performance
 * Ingestion _(either problems and not working or performance)_.
+* Insights
 * Data integrity
 * Deployments/Setup
 * Deployments/Upgrading
