@@ -193,13 +193,13 @@ export function Footer(): JSX.Element {
                                 </ul>
                             </div>
                             <div>
-                                <h5 className={linksHeadingSm}>User guides</h5>
+                                <h5 className={linksHeadingSm}>Product manual</h5>
                                 <ul className="list-none p-0 m-0 space-y-1">
-                                    <FooterMenuItem title="Cohorts" url="/docs/user-guides/cohorts" />
-                                    <FooterMenuItem title="Funnels" url="/docs/user-guides/funnels" />
-                                    <FooterMenuItem title="Sessions" url="/docs/user-guides/sessions" />
-                                    <FooterMenuItem title="Data" url="/docs/user-guides/actions" />
-                                    <FooterMenuItem title="Events" url="/docs/user-guides/events" />
+                                    <FooterMenuItem title="Cohorts" url="/manual/cohorts" />
+                                    <FooterMenuItem title="Funnels" url="/manual/funnels" />
+                                    <FooterMenuItem title="Sessions" url="/manual/sessions" />
+                                    <FooterMenuItem title="Data" url="/manual/actions" />
+                                    <FooterMenuItem title="Events" url="/manual/events" />
                                 </ul>
                             </div>
                         </div>
