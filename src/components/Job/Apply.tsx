@@ -308,7 +308,7 @@ export default function Apply({ id, info }) {
                         <div className="mx-6 md:mx-12 py-6 border-t border-dashed border-gray-accent-light">
                             <h4 className="mb-0">Be our next star?</h4>
                             <aside className="float-right h-[28px] w-[125px] ml-8">
-                                <GitHubButton />
+                                <GitHubButton href="https://github.com/PostHog/posthog" />
                             </aside>
                             <p className="text-sm mb-0">
                                 We'd love if you starred our repo on GitHub (if you haven't already)!
