@@ -7,6 +7,8 @@ topics:
     - auto-cohort
 ---
 
+> **Warning:** We're currently in the process of deprecating this app and a future version of PostHog it will be removed. We recommend that you move to using [group analytics](/manual/group-analytics) as soon as possible.
+
 ### What does the Automatic Cohort Creator app do?
 
 The Automatic Cohort Creator app enables you to specify a list of user properties which will be used to automatically assign new users to a cohort.
