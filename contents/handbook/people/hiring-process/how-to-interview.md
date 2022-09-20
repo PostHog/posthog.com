@@ -1,11 +1,13 @@
 ---
-title: How to Interview
+title: Interview technique - deep tips
 sidebar: Handbook
 showTitle: true
 hideAnchor: true
 ---
 
 Reminder: hiring the right team is the most leveraged activity we can do. Whatever you do, focus on getting the strongest signal from a candidate in an interview. Do _not_ focus on scalability / efficiency.
+
+There are some obvious things that I won't spend time on, the
 
 ## Ask about themes, not questions
 
