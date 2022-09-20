@@ -6,10 +6,10 @@ related:
 
 <FeatureAvailability availablePlans={['standard', 'enterpriseCloud', 'startup', 'scale', 'enterprise']} />
 
-Groups are an especially powerful feature within PostHog that allows you to aggregate events by entities other than a user.
-In an abstract sense, groups allow entities such as companies or projects to 'send' events in the same way that users can.
+Groups are a feature within PostHog that allows you to aggregate events by an entity other than a user.
+In a sense, groups allow entities such as companies or projects to 'send' events in the same way that users can.
 
-Groups can be configured to represent almost anything, including organizations, companies, devices, posts, files, and much more.
+Groups can be used to represent almost anything, including organizations, companies, devices, posts, projects, and much more.
 
 Here are some of the questions that group analytics can help answer:
 - Number of companies who signed up in the last month
@@ -22,10 +22,10 @@ Groups can be used directly in a number of other parts of the PostHog suite, inc
 
 ## Understanding group analytics
 
-Before we start learning how to use groups, it's best to get some intuition behind exactly how the behave within PostHog.
+Before we start learning how to use groups, it's best to get some intuition on how they behave within PostHog.
 
-At a high-level, a group is simply a way to take a specific set of events, and 'group' them together under a specified 'type' of entity.
-This 'entity' can be anything you like (organizations, companies, posts, files, etc.) and depends entirely on your application.
+At a high-level, a group is simply a way to take a set of events, and 'group' them together under a specific 'type' of entity.
+This 'entity' can be anything you like (organizations, companies, posts, projects, etc.) and depends entirely on your application.
 
 One very common use case is to create groups that contain events that are sent as part of a larger group of users.
 This could be things such as making groups for each company that uses your app, to creating a separate group for each community within your app.
@@ -35,24 +35,24 @@ This could be things such as making groups for each company that uses your app, 
 ### Groups vs group types
 
 When considering group analytics, it is also important to make the distinction between 'Groups' and 'Group types'.
-At a high level, a group type is the name for the kind of object you would like to aggregate based on (`company`, `project`, `post`), whereas a group is a particular member of that type.
+A 'group type' is the name for given to the kind of object you are aggregating on (`company`, `project`, `post`), whereas a group is a particular member of that type.
 
 > **Tip:** If you're familiar with object-oriented thinking, you can think of each 'group type' as a class, with each 'group' being a unique instance of that class.
 
-A simple example of a group type might be a `company`, whereas each group would be specific companies such as `PostHog`, `Google`, `IBM`, etc.
-There's a hard limit of 5 group types you can create, although within each group type you can have unlimited groups.
+A simple example of a group type might be a `company`, in which case each group would be a specific company such as `PostHog`, `Google`, `IBM`, etc.
+There's a hard limit of 5 group types within PostHog, although within each group type you can have unlimited groups.
 
-Another important concept to remember here is that a single event belongs to only a single group per group type.
-For example, let's say you have a `project shared` event.
+Another important concept to remember here is that a single event belongs to _only_ a single group per group type.
+For example, let's say you have a `project shared` event for when a user shares a project.
 This event could be associated with both a `company` _and_ a `project`, but it can't be associated with _two separate_ companies or _two separate_ projects.
 
 ### Groups vs cohorts
 
 While groups and cohorts may seem almost identical at first, it's important to understand the differences between them.
-When comparing groups and cohorts, it's important to remember that groups **aggregate based on events, not users**.
+When comparing, it's important to remember that groups **aggregate based on events, not users**.
 While it is possible to view persons that are related to a group, they aren't directly 'members' in the same way as cohorts.
 
-Cohorts represent a single list of users, whereas groups represent many separate lists of events all under a specific group type.
+Cohorts represent a singular list of users, whereas groups represent many separate lists of events all under a specific group type.
 
 Following the company example again, you can have a cohort of users which belong to a certain company (e.g. Company A).
 However, this only represents a single company, and you would need to keep creating new cohorts as users from other organizations signed up, which is not practical.
