@@ -6,24 +6,20 @@ related:
 
 <FeatureAvailability availablePlans={['standard', 'enterpriseCloud', 'startup', 'scale', 'enterprise']} />
 
-Groups are a feature within PostHog which enable you to aggregate events by an entity other than a user - such as a company, or project. 
-
-In a sense, groups allow entities such as companies or projects to 'send' events in the same way that users can.
-
-Groups can be used to represent almost anything, including organizations, companies, devices, posts, projects, and much more.
+Groups are a feature which enable you to aggregate events by any entity other than an individual user - such as a company, device, or project. Essentially, groups enable these entities to send events in the same way as a user. 
 
 Here are some of the questions that group analytics can help answer:
-- Number of companies who signed up in the last month
-- Which posts have had the most activity
-- Number of projects created in the past month
-- Compare the conversion rate between small and large companies
-- Which communities are growing the fastest
+- How many companies signed up in the last month?
+- Which posts have had the most activity?
+- How many projects were created in the past month?
+- How does the conversion rate differ between small and large companies?
+- Which communities are growing the fastest?
 
-Groups can be used directly in a number of other parts of the PostHog suite, including [insights](/manual/insights), [feature flags](/manual/feature-flags), and [experiments](/manual/experiments).
+Groups can be used in other parts of the PostHog suite, including [insights](/manual/insights), [feature flags](/manual/feature-flags), and [experiments](/manual/experiments).
 
 ## Understanding group analytics
 
-Before we start learning how to use groups, it's best to get some intuition on how they behave within PostHog.
+Before we learn how to use groups, it's best to get some information about how they behave within PostHog.
 
 At a high-level, a group is simply a way to take a set of events, and 'group' them together under a specific 'type' of entity.
 This 'entity' can be anything you like (organizations, companies, posts, projects, etc.) and depends entirely on your application.
@@ -123,6 +119,7 @@ We now have one group with id `5` that has the type `company`, and the `some eve
 ### Setting and updating group properties
 
 Every group can have properties associated with it.
+
 Continuing with the previous example of using `company` as our group type, we might want to add `company_name`, `date_joined`, and `user_count` as additional fields.
 
 > **Note:** You must include at least one group property for a group to be visible in the "Persons & Groups" tab
