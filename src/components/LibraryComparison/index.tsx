@@ -108,7 +108,7 @@ export const LibraryComparison = () => {
 
             <h2>Server libraries</h2>
 
-            <div className="mb-4">
+            <div className="overflow-x-scroll mb-4">
                 <table>
                     <thead>
                         <tr>
