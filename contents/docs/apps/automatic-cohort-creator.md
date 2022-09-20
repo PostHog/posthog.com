@@ -7,7 +7,7 @@ topics:
     - auto-cohort
 ---
 
-> **Warning:** We're currently in the process of deprecating this app and a future version of PostHog it will be removed. We recommend that you move to using [group analytics](/manual/group-analytics) as soon as possible.
+> **Warning:** We are currently in the process of deprecating this app in favor of [group analytics](/manual/group-analytics), and do not recommend installing it at this time.
 
 ### What does the Automatic Cohort Creator app do?
 
