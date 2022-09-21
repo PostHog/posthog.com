@@ -21,3 +21,5 @@ Compare the numbers of the **Helm chart version** (in the format `posthog-{major
   <CommandHelmUpgradeSnippet />
 
 Check the Helm [documentation](https://helm.sh/docs/helm/helm_upgrade/) for more info about the `helm upgrade` command.
+
+> Note: Make sure you are not in a folder that contains another folder with the name `posthog`. The upgrade command may fail after unintentionally reading through it.
