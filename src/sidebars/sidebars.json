@@ -997,6 +997,10 @@
                     "url": "/docs/apps/build/types"
                 },
                 {
+                    "name": "Using the PostHog API",
+                    "url": "/docs/apps/build/api"
+                },
+                {
                     "name": "Developer reference",
                     "url": "/docs/apps/build/reference"
                 }

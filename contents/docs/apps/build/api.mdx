@@ -1,0 +1,82 @@
+---
+title: Using the PostHog API
+---
+
+All apps have access to a global helper object `posthog`, which provides easy access to the PostHog API.
+
+## `posthog`
+
+The global `posthog` object contains the following interfaces:
+- [`capture`](#capture) - Send addional events from within an app
+- [`api`](#api) - Access the PostHog API from within an app
+
+### `capture`
+
+> **Warning:** Be very careful when calling `posthog.capture` from `processEvent` or `onEvent`! The event captured will also be run through all the installed apps and could potentially lead to an infinite loop of event generation.
+
+```js
+capture(event: string, properties?: Record<string, any>) => void
+```
+
+Calling `posthog.capture` allows you to capture a new event under the same project the app is running in.
+
+It takes 2 arguments, the first one being an event name (required), and the second one being an object with properties to set on the event (optional).
+
+Apps can pass `distinct_id` on the event properties to specify what user the event should be attributed to. If `distinct_id` is not specified, the event will be a attributed to a generic "App Server" person.
+
+Apps can optionally pass a `timestamp`, which need to be in isoformat. If not set, the timestamp will default to current time.
+
+Example:
+```js
+posthog.capture('Stripe Customer Subscribed', {
+  distinct_id: 'a user id',
+  timestamp: new Date(subscription.created*1000).toISOString()
+})
+```
+
+
+### `api`
+
+> **Warning:** Be very careful when using `posthog.api.post` to send events to a PostHog instance from `processEvent` or `onEvent`! The event captured will also be run through all the installed apps and could potentially lead to an infinite loop of event generation.
+
+`posthog.api` gives you access to the following 4 methods:
+
+```js
+get(path: string, options?: ApiMethodOptions): Promise<Response>
+post(path: string, options?: ApiMethodOptions): Promise<Response>
+put(path: string, options?: ApiMethodOptions): Promise<Response>
+delete(path: string, options?: ApiMethodOptions): Promise<Response>
+```
+
+These correspond to HTTP requests and make interacting with the PostHog API an easier process. By default, a personal API key will be provisioned for you and requests will automatically specify this key, as well as set the project the app is installed in as the project to use the API with.
+
+You can override these defaults to interact with another PostHog project or instance. The options available are:
+
+
+```js
+interface ApiMethodOptions {
+    // any data to send with the request, GET and DELETE will set these as URL params
+    data: Record<string, any> 
+
+    // posthog host, defaults to https://app.posthog.com
+    host: string 
+
+    // specifies the project to interact with
+    projectApiKey: string 
+
+    // authenticates the user
+    personalApiKey: string 
+}
+```
+
+**Example usage**
+
+```js
+await posthog.api.get(
+  '/api/event', 
+  { 
+    data: { param: 'some param' }, 
+    host: 'https://posthog.mydomain.com' 
+  }
+)
+```
