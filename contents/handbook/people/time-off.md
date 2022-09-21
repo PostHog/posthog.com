@@ -21,11 +21,15 @@ You do not need to "clear" time off with your manager.
 
 We care about your results, not how long you work. Whilst no approval is needed, it shouldn't be completely at the expense of business getting done. For example, having the entire engineering team off means we can't be responsive to community issues. Please coordinate with your team.
 
-When you pick a date(s) to have off, please enter it into [CharlieHR](https://posthog.charliehr.com/) and it will be automatically approved and added to the team time off calendar. Remember to set an out of office message on your email.
+When you pick a date(s) to have off, please do three things:
+
+- Enter it into [CharlieHR](https://posthog.charliehr.com/) and it will be automatically approved and added to the team time off calendar.
+- Block out your own personal GCal to show that you are out. This is because Charlie _only_ populates the separate team time off calendar - it doesn't automatically block out your calendar for you as well. If you don't do this, automated meetings such as interviews or demos might still get booked into your cal.  
+- Set an out of office message on your email (and have it point to someone else on the team, or hey@). 
 
 The same rules as above apply regardless of the vacation length.
 
-You can add the team time off calendar to Google Calendar by following [these instructions](https://intercom.help/charliehr/en/articles/839648-importing-your-time-off-calendar-to-google-calendar) on CharlieHR as well. CharlieHR only refreshes the calendar twice a day, so any changes you make won't be reflected immediately.
+You can add the team time off calendar to your Google Calendar by following [these instructions](https://intercom.help/charliehr/en/articles/839648-importing-your-time-off-calendar-to-google-calendar) on CharlieHR as well. CharlieHR only refreshes the calendar twice a day, so any changes you make won't be reflected immediately.
 
 ## Flexible working
 
