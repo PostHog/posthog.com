@@ -68,37 +68,35 @@ Release is happening next Monday. Which means
 
     1. Open terminal and run the command you copied. This command will set the correct kubectl context for the playground environment. As a sanity check, run `kubectl config current-context` and make sure that the current context name has `playground` in it somewhere.
     1. _Optional:_ Open another terminal window and run `k9s`. Use the arrow keys to scroll down to the PostHog clusters and keep an eye on this for the duration of the upgrade. [`k9s`](https://k9scli.io/) is a terminal GUI that makes it easier to manage and observe your deployed Kubernetes applications.
+    1. Checkout the `vpc` repo](https://github.com/PostHog/vpc).  [`playground.yaml` file in the `vpc` repo](https://github.com/PostHog/vpc/blob/main/client_values/posthog/playground.yaml) and update the `image: -> tag:` value (`release-[version]-unstable`) with the new version. Commit the change as soon as `release-[version]-unstable` shows up [in Docker Hub](https://hub.docker.com/r/posthog/posthog/tags?page=1&name=release).
+        > ⚠️ Note that you might need to follow major upgrade notes as mentioned in the [upgrade guide](https://posthog.com/docs/self-host/deploy/digital-ocean#upgrading-the-chart), the same way our users would be required to. If so, make any additional changes to the `values.yaml` file as needed.
+    1. Copy the URL of the new `playground.yaml` file. You can get that by navigating to the file [here](https://github.com/PostHog/vpc/blob/main/client_values/posthog/playground.yaml), clicking Raw in the GitHub UI, and copying the URL of that page.
+
+      ![PostHog - GitHub Raw](../../images/05/release_playground_raw_github.png)
+
+      ![PostHog - GitHub Raw File](../../images/05/release_playground_raw_file.png)
       
-    1. Make sure you're on the latest chart version:
+    1. In a separate terminal window, follow the upgrade instructions [here](https://posthog.com/docs/self-host/deploy/digital-ocean#upgrading-the-chart). Replace `values.yaml` in the last upgrade command with the URL you copied in the previous step. Example:
 
       ```shell
-      helm repo update
-      ```
-    1. Verify if the operation is going to be a major version upgrade and follow the [upgrade notes](/docs/runbook/upgrade-notes) if it is:
-
-      ```shell
-      helm list -n posthog
-      helm search repo posthog
-      ```
+      helm upgrade -f 'https://raw.githubusercontent.com/PostHog/vpc/main/client_values/posthog/playground.yaml?token=ABC' --timeout 30m --namespace posthog posthog posthog/posthog --atomic --wait --wait-for-jobs --debug
+      ```  
      
     1. Get the latest values and store them in a `playground.yaml` file:
-
 
       ```shell
       # use tail to remove the first line "USER SUPPLIED VALUES:"
       helm get values posthog -n posthog | tail -n +2 > playground.yaml
       ```
-      
-    1. In the same directory as your `playground.yaml` file, run:
-
-      ```shell
-      helm upgrade -f playground.yaml --timeout 30m --namespace posthog posthog posthog/posthog --atomic --wait --wait-for-jobs --debug
-      ```
-
+    1. Update the `playground.yaml` for `image: -> tag:` value to `release-[version]-unstable` with the new version.
+    1. Follow the upgrade instructions [here](https://posthog.com/docs/self-host/deploy/digital-ocean#upgrading-the-chart). Replace `values.yaml` in the last upgrade command with `playground.yaml`.
+      > ⚠️ Note that you might need to follow major upgrade notes as mentioned in the [upgrade guide](https://posthog.com/docs/self-host/deploy/digital-ocean#upgrading-the-chart), the same way our users would be required to. If so, make any additional changes to the `playground.yaml` file as needed.
     1. Optional: Keep an eye on the progress of the upgrade in `k9s`
     1. If the `helm upgrade` command fails or if in the end the output for `kubectl get pods -n posthog` doesn't show everything as running, then ask `team-platform` for guidance.
+      > ⚠️ Make sure you're not in a working directory containing `posthog` folder, this could lead to the upgrade command looking for the chart locally rather than using the helm repo installed and seeing an error like `Chart.yaml not found`.
     1. Optional: Verify playground is running the latest image by running `kubectl get pod --namespace posthog`. In the output of that command, you should see a row like `posthog-web-6447ff5fdf-gs664`. Copy this row (the numbers after `posthog-web-` will be different), and then run `kubectl  describe pod --namespace posthog posthog-web-6447ff5fdf-gs664`. If you scroll up in that output, you should see a line like `Image: posthog/posthog@sha256:daf43a4a4cd06658e41273bb8fe4a74f17b295d67c6f1e16c17243b5d09af7ee`. This is the sha of the image that is running. You can compare this to the sha in Docker Hub to verify that the image is the latest.
     1. Go to the [playground](https://playground.posthog.net/) and test that everything is working as expected. Check that the version running is the same as the one we're releasing.
+    1. Commit the changes to the [`playground.yaml` file in the `vpc` repo](https://github.com/PostHog/vpc/blob/main/client_values/posthog/playground.yaml) - have someone from Platform team review.
 1. [ ] Time for the "Break the release" session! It's imperative that the session uses the published `release-[version]-unstable` image from Docker Hub to avoid any potential bugs creeping up in the final build stage. You're responsible for running the session, prepare the [release checklist doc](https://docs.google.com/document/d/1tyTChgLM8ZKCIyP05yDeyzS7y-s2ii5lm5WltREO3so) by adding the template at the top. Note that you're also responsible for making sure everything is tested and for cherry picking the fixes and prs tagged with `release-<version>` into the release branch.
 1. [ ] Figure out what's updated in this release with the command below or by asking the Product or Engineering Team. The command will output the entire commit list to `changelog.txt`, sorted by PR [type and scope](https://www.conventionalcommits.org/en/). You can use this list to obtain external contributions to highlight in the Array. In addition, you can look for the `highlight` tag in [PRs](https://github.com/PostHog/posthog/pulls?q=is%3Apr+label%3A%22highlight+%3Astar%3A%22+) but be mindful it's not used very consistently.
   ```bash
