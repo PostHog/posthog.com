@@ -18,29 +18,47 @@ Want to know more about what we're up to? [Subscribe to HogMail, our newsletter]
 
 **Release highlights:**
 
-- [Highlight One](#highlight-one)
-- [Highlight Two](#highlight-two)
-- [Highlight Three](#highlight-three)
+- [New: Lemonized Calendar and Date components](#new-lemonized-calendar-and-date-components
+- [New: Annotations Revamp](#new-annotations-revamp)
+- [New: Personal Modal Revamp](#new-person-modal-revamp)
+- [New: Recordings domain settings](#new-recordings-domain-settings)
+- [Improved: Historical Imports](#improved-historical-imports)
+- [Improved: Retention insight update](#improved-retention-insight-update)
 
-### Highlight One
+- New: Lemon Calendar! (#11519)
+- New: Recordings domain settings (#11751)
+- Improved: Annotations overhaul (#11560, #11482)
+- Improved: New Person Modal (#11662)
+- Improved: Historical Imports (#11517)
+- Improved: Update Retention View (#11643)
+
+### New: Lemonized calendar and date components
+
+We released some long overdue changes to our date components. Following on the heels of our refreshing UI update, we've added new calendar and
+date handling components. This is part of our ongoing effort in updating all of the UI with components that provide a unified experience. 
+
+### New: Annotations revamp
 
 Some copy goes here. 
 
-### Highlight Two
+### New: Person modal revamp
 
 Some copy goes here. 
 
-### Highlight Three
+### New: Recordings domain settings
 
-Some copy goes here. 
+### Improved: Historical imports
+
+### Improved: Retention insight update
 
 ### Other improvements & fixes
 Version 1.40 also adds hundreds of other improvements and fixes, including...
 
-- **Improvement:** Minor feature one
-- **Improvement:** Minor feature two
-- **Fix**: Bug fix one.
-- **Fix**: Bug fix two.
+- **Improvement:** Filter defaults can now be set to apply on all new insights! (#11589)
+- **Improvement:** Event volume and query counts are now emphasized in data management (#11806)
+- **Improvement:** Profile pictures now will show more information on hover! (#11849)
+- **Fix**: Fixed an issue where group properties weren't showing up on search previously (#11813)
+- **Fix**: Fixed an issue that was causing property statistics to be calculated infrequently (#11815)
 
 View the commit log in GitHub for a full history of changes: [`release-1.39.0...release-1.40.0`](https://github.com/PostHog/posthog/compare/release-1.39.0...release-1.40.0).
 
