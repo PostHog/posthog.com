@@ -1,5 +1,5 @@
 ---
-title: Interview technique - deep tips
+title: Interview technique - principles to follow
 sidebar: Handbook
 showTitle: true
 hideAnchor: true
@@ -7,7 +7,7 @@ hideAnchor: true
 
 Reminder: hiring the right team is the most leveraged activity we can do. Whatever you do, focus on getting the strongest signal from a candidate in an interview. Do _not_ focus on scalability / efficiency.
 
-There are some obvious things that I won't spend time on, the
+This is a set of principles that apply to any situation when you're interviewing, rather than a how-to guide.
 
 ## Ask about themes, not questions
 
