@@ -67,21 +67,7 @@ Release is happening next Monday. Which means
       ![PostHog - Copy Script Kubernetes](../../images/05/digital_ocean_release_02.png)
 
     1. Open terminal and run the command you copied. This command will set the correct kubectl context for the playground environment. As a sanity check, run `kubectl config current-context` and make sure that the current context name has `playground` in it somewhere.
-    1. _Optional:_ Open another terminal window and run `k9s`. Use the arrow keys to scroll down to the PostHog clusters and keep an eye on this for the duration of the upgrade. [`k9s`](https://k9scli.io/) is a terminal GUI that makes it easier to manage and observe your deployed Kubernetes applications.
-    1. Checkout the `vpc` repo](https://github.com/PostHog/vpc).  [`playground.yaml` file in the `vpc` repo](https://github.com/PostHog/vpc/blob/main/client_values/posthog/playground.yaml) and update the `image: -> tag:` value (`release-[version]-unstable`) with the new version. Commit the change as soon as `release-[version]-unstable` shows up [in Docker Hub](https://hub.docker.com/r/posthog/posthog/tags?page=1&name=release).
-        > ⚠️ Note that you might need to follow major upgrade notes as mentioned in the [upgrade guide](https://posthog.com/docs/self-host/deploy/digital-ocean#upgrading-the-chart), the same way our users would be required to. If so, make any additional changes to the `values.yaml` file as needed.
-    1. Copy the URL of the new `playground.yaml` file. You can get that by navigating to the file [here](https://github.com/PostHog/vpc/blob/main/client_values/posthog/playground.yaml), clicking Raw in the GitHub UI, and copying the URL of that page.
-
-      ![PostHog - GitHub Raw](../../images/05/release_playground_raw_github.png)
-
-      ![PostHog - GitHub Raw File](../../images/05/release_playground_raw_file.png)
-      
-    1. In a separate terminal window, follow the upgrade instructions [here](https://posthog.com/docs/self-host/deploy/digital-ocean#upgrading-the-chart). Replace `values.yaml` in the last upgrade command with the URL you copied in the previous step. Example:
-
-      ```shell
-      helm upgrade -f 'https://raw.githubusercontent.com/PostHog/vpc/main/client_values/posthog/playground.yaml?token=ABC' --timeout 30m --namespace posthog posthog posthog/posthog --atomic --wait --wait-for-jobs --debug
-      ```  
-     
+    1. _Optional:_ Open another terminal window and run `k9s`. Use the arrow keys to scroll down to the PostHog clusters and keep an eye on this for the duration of the upgrade. [`k9s`](https://k9scli.io/) is a terminal GUI that makes it easier to manage and observe your deployed Kubernetes applications.  
     1. Get the latest values and store them in a `playground.yaml` file:
 
       ```shell
