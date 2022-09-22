@@ -30,7 +30,7 @@ The reverse is true for more experienced candidates - who will want to understan
 
 At the start of the interview, "name it". Say to the candidate something like "hey, I need to go deep on how you work to do the best assessment of a good fit here, is it ok if I focus this interview primarily on that for the first 20 minutes? Then I'll leave 10 minutes at the end for questions. If we overrun, I can book more time with you." Other times, you'll need to explain the opportunity more - for example, if the candidate came through cold outreach. Have a clear idea before you start, and explain it to the candidate up front.
 
-## Work as a team
+## Work as a team
 
 Focus your questions on the areas you're stronger at. If you're great at scrappiness, you're probably best suited to spotting it in others.
 
