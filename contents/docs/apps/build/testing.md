@@ -36,7 +36,7 @@ More detail on other helper functions and how to use them can be found in our [h
 
 These helper functions can be added to your test script using the following line:
 
-```js 
+```js
 const { createEvent, createIdentify} = require("@posthog/plugin-scaffold/test/utils");
 ```
 
@@ -46,6 +46,8 @@ For testing cron activities (e.g. run every minute), we recommend testing the fu
 
 If you have configured your package.json file as above you should be able to run
 
-`npm run test` 
+```bash
+npm run test
+```
 
 And your tests will execute.
