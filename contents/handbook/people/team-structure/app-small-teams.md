@@ -30,7 +30,7 @@ The app small team is responsible for everything related to that area of the pro
 
 ## What is the role of the team lead?
 
-The team lead should led the team to make sure the above happens. They should get the team fully involved rather that doing everything themselves.
+The team lead is overall responsible for ensuring the above happens. They should focus on enabling the team to solve these tasks together rather than trying to do it all themself.
 
 ## What do the product managers do?
 
