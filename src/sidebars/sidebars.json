@@ -805,12 +805,16 @@
                     "url": "/docs/integrate/proxy"
                 },
                 {
-                    "name": "Libraries",
+                    "name": "Library comparison",
                     "url": "/docs/integrate/libraries"
                 },
                 {
                     "name": "Badge",
                     "url": "/docs/integrate/badge"
+                },
+                {
+                    "name": "Browser Extensions",
+                    "url": "/docs/integrate/browser-extension"
                 },
                 {
                     "name": "Client libraries",
@@ -839,10 +843,6 @@
                         {
                             "name": "React Native",
                             "url": "/docs/integrate/client/react-native"
-                        },
-                        {
-                            "name": "Browser Extensions",
-                            "url": "/docs/integrate/client/browser-extension"
                         }
                     ]
                 },
