@@ -52,7 +52,7 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Marius Andra](/handbook/company/team#marius-andra-software-engineer) (Team lead, Full Stack Engineer)
 - [Michael Matloka](/handbook/company/team#michael-matloka-software-engineer) (Full Stack Engineer)
 - [Paul D'Ambra](/handbook/company/team#paul-dambra-software-engineer) (Full Stack Engineer)
-- _[Lottie Coxon](/handbook/company/team#lottie-coxon) (Graphic Designer) - pairs with Chris Clark_
+- _[Lottie Coxon](/handbook/company/team#lottie-coxon) (Graphic Designer)
 - _Hiring for a [full stack engineer](careers/full-stack-engineer)_
 - _Hiring for a [full stack engineer](careers/full-stack-engineer)_
 - Product: Supported by Annika Schmid
@@ -70,7 +70,7 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Neil Kakkar](/handbook/company/team#neil-kakkar-software-engineer) (Full Stack Engineer)
 - _[Chris Clark](/handbook/company/team#chris-clark) (Product Designer)_ - _Works across App West and Product Analytics_
 - _Hiring for a [full stack engineer](careers/full-stack-engineer)_
-- Product: Supported by Annika Schmid
+- Product: Supported by Luke Harries
 
 #### [Platform](platform)
 - [James Greenhill](/handbook/company/team#james-greenhill-software-engineer) (Team lead, Data/Infra Engineer)
