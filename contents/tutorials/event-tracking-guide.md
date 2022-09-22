@@ -95,7 +95,7 @@ There are multiple places where more details can be added to events to make sure
 
 To best capture data about users, you must understand who those users are. Autocaptured events identify users for you, while custom events require manually setting that user identification. Examples of identifiers for users include session IDs and emails. For example, getting identifying a user by email using Javascript is as simple as calling `posthog.identify()` with a unique identifier.
 
-```jsx
+```js
 function loginRequest(user) {
   return authUser(user)
 	.then(authorizedUser => {
