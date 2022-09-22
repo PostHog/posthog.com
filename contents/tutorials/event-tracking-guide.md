@@ -87,8 +87,10 @@ Adding more of these capture calls in the right places in your codebase creates 
 
 With some custom events being sent, it is time to refine those events to capture the data you want. Getting this right requires multiple steps.
 
-1. It starts with the goals of the product which inform what data is needed about users and their behavior. 
+1. It starts with the goals of the product, which inform what data is needed about users and their behavior.
+ 
 2. Next is ensuring data is accessible in the right places in your codebase. This might require writing helper functions for access or formatting the data correctly.
+
 3. Finally, ensuring all the data is captured and added to PostHog for use in your analysis, visualization, and optimization. This is where we’ll focus for the rest of this tutorial.
 
 There are multiple places where more details can be added to events to make sure you are tracking the right data. Here are some key ones.
