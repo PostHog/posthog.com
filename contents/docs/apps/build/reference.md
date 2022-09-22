@@ -1,7 +1,5 @@
 ---
 title: Apps developer reference
-sidebar: Docs
-showTitle: true
 ---
 
 > **Note:** It's worth reading the [Building apps overview](..) for a quick introduction to how to build your own app.
