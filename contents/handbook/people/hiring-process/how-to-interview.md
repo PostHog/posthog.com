@@ -11,7 +11,7 @@ This is a set of principles that apply to any situation when you're interviewing
 
 ## Ask about themes, not questions
 
-Many well-intentioned interviewers will create a list of questions in advance. Alas, this makes the interview feel like an interrogation _and_ often leads to a wide range of shallow answers. Yep, you ticked a box, but probably made a bad hiring choice.
+Many well-intentioned interviewers will create a list of questions in advance. This makes the interview feel like an interrogation _and_ often leads to a wide range of shallow answers, so doesn't help anyone.
 
 You're trying to understand how a human being operates, so go deep. It'll be more interesting for both of you, and will give a stronger signal. Have a few themes in advance you'll want to ask about. For a cultural interview, it might be something like:
 
