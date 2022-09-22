@@ -32,7 +32,7 @@ await jobs.retryRequest(request).runNow()
 await jobs.retryRequest(request).runAt(new Date())
 ```
 
-Having gotten a job function via its key from the `jobs` object calling the function with the desired payload will return another object with 3 functions that can be used to schedule your job. They are:
+Having gotten a job function via its key from the `jobs` object, calling the function with the desired payload will return another object with 3 functions that can be used to schedule your job. They are:
 
 - `runNow`: Runs the job now, but does so asynchronously
 - `runAt`: Takes a JavaScript `Date` object that specifies when the job should run
