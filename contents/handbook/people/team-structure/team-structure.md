@@ -36,7 +36,6 @@ hideAnchor: true
   - **Cory Watilo, Lead Designer**
     - Lottie Coxon, Graphic Designer
     - Eli Kinsey, Front End Engineer
-    - Chris Clark, Product Designer
   - **Simon Fisher, Customer Success Lead**
     - Cameron DeLeone, Customer Success Manager
 
@@ -67,8 +66,7 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 #### [App West - Feature flags / experiments / cohorts / SQL](app-west)
 - [Eric Duong](/handbook/company/team#eric-duong-software-engineer) (Team lead, Full Stack Engineer)
 - [Li Yi Yu](/handbook/company/team#li-yi-yu-full-stack-engineer) (Full Stack Engineer)
-- [Neil Kakkar](/handbook/company/team#neil-kakkar-software-engineer) (Full Stack Engineer)
-- _[Chris Clark](/handbook/company/team#chris-clark) (Product Designer)_ - _Works across App West and Product Analytics_
+- [Neil Kakkar](/handbook/company/team#neil-kakkar-software-engineer) (Full Stack Engineer)Analytics_
 - _Hiring for a [full stack engineer](careers/full-stack-engineer)_
 - Product: Supported by Luke Harries
 
