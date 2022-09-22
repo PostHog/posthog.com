@@ -20,9 +20,9 @@ capture(event: string, properties?: Record<string, any>) => void
 
 It takes 2 arguments, the first one being an event name (required), and the second one being an object with properties to set on the event (optional).
 
-Apps can pass `distinct_id` on the event properties to specify what user the event should be attributed to. If `distinct_id` is not specified, the event will be a attributed to a generic "App Server" person.
+Apps can pass `distinct_id` on the event properties to specify what user the event should be attributed to. If `distinct_id` is not specified, the event will be attributed to a generic "App Server" person.
 
-Apps can optionally pass a `timestamp`, which need to be in isoformat. If not set, the timestamp will default to current time.
+Apps can optionally pass a `timestamp`, which needs to be in ISO 8601 format. If not set, the timestamp will default to current time.
 
 ##### Example usage
 
@@ -37,7 +37,7 @@ posthog.capture('Stripe Customer Subscribed', {
 
 The `posthog.api` object contains a number of methods that make interacting with the PostHog API much easier.
 
-`posthog.api` gives you access to the following 4 methods, which each corresponding to the 4 HTTP methods used to access the API.
+`posthog.api` gives you access to the following 4 methods, which each correspond to the 4 HTTP methods used to access the API.
 
 ```ts
 get(path: string, options?: ApiMethodOptions): Promise<Response>
@@ -46,7 +46,7 @@ put(path: string, options?: ApiMethodOptions): Promise<Response>
 delete(path: string, options?: ApiMethodOptions): Promise<Response>
 ```
 
-By default, all these methods will create a temporary access token which the app can use to access the API without needed to be configured by the user.
+By default, all these methods will create a temporary access token that the app uses to access the API.
 
 > **Warning:** Be very careful when using `posthog.api.post` to send events from `processEvent` or `onEvent`! The event captured will also be run through all the installed apps and could potentially lead to an infinite loop of event generation.
 
