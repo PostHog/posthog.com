@@ -2245,7 +2245,7 @@
 [[redirects]]
     from = "/handbook/strategy/overview"
     to = "/handbook/strategy/strategy"
-
+    
 # Added: 2022-09-20
 [[redirects]]
     from = "/docs/integrate/client/browser-extension"
