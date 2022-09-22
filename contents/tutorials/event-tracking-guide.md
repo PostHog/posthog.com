@@ -22,7 +22,9 @@ Autocapture makes it easy to start getting data such as page views, clicks, and 
 To set up autocapture:
 
 1. Go to “Project settings”
+
 2. Under “Website event autocapture,” copy the code block snippet containing the script tags and Javascript function.
+
 3. Paste the block into your site’s HTML in the `<head>` tags (ideally at the end). This should be an HTML page that acts as a base or template page (with other scripts your page loads) to ensure all possible events are captured.
 
 This allows autocapture to capture events like clicks, change of inputs, or submission of **`a`**, **`button`**, **`form`**, **`input`**, **`select`**, **`textarea`**, and **`label`** tags. Once set up, those events flow automatically into PostHog for you to see and analyze. For a detailed guide on how to install the snippet, read our **[installation guide](https://posthog.com/docs/integrate/client/snippet-installation)**.
