@@ -5,7 +5,7 @@ showTitle: true
 author: ['ian-vanagas', 'yakko-majuri']
 date: 2022-09-21
 featuredImage: ../images/tutorials/banners/actions.png
-topics: ['configuration']
+topics: ['actions']
 ---
 
 - **Level:** Medium 🦔🦔
