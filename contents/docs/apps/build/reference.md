@@ -34,7 +34,7 @@ A `plugin.json` file is structured as follows:
       "name": "<param2_name>",
       "type": "<param2_type>",
       "default": "<param2_default_value>",
-      "required": false,
+      "required": false
     }
   ]
 }
