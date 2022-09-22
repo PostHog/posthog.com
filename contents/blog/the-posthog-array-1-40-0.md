@@ -22,14 +22,12 @@ Want to know more about what we're up to? [Subscribe to HogMail, our newsletter]
 - [New: Annotations Revamp](#new-annotations-revamp)
 - [New: Personal Modal Revamp](#new-person-modal-revamp)
 - [New: Recordings domain settings](#new-recordings-domain-settings)
-- [Improved: Historical Imports](#improved-historical-imports)
 - [Improved: Retention insight update](#improved-retention-insight-update)
 
 - New: Lemon Calendar! (#11519)
 - New: Recordings domain settings (#11751)
 - Improved: Annotations overhaul (#11560, #11482)
 - Improved: New Person Modal (#11662)
-- Improved: Historical Imports (#11517)
 - Improved: Update Retention View (#11643)
 
 ### New: Lemonized calendar and date components
@@ -39,17 +37,19 @@ date handling components. This is part of our ongoing effort in updating all of 
 
 ### New: Annotations revamp
 
-Some copy goes here. 
+Have you had trouble with annotations recently? We've overhauled annotations with a new look and new interface. This change resolves several layout and interaction issues that had previously been happening on annotations. We've also touched up the annotations page to highlight important information!
 
 ### New: Person modal revamp
 
-Some copy goes here. 
+Clicking on datapoints is one of our favorite ways to analyze the users behind the numbers. The new person modal now looks and feels like the rest of the app. We've made it easier for you to search and perform actions on those lists of users.
 
 ### New: Recordings domain settings
 
-### Improved: Historical imports
+Struggling with keeping toolbar and recordings settings separate? Us too.. The settings for managing valid domains for recordings and toolbar are now split so that they can be adjusted independently!
 
 ### Improved: Retention insight update
+
+Another update to our UI! Nothing functionally changed here but once again we cleaned up the UI on the retention insight to keep up with all the styling updates we've had across the board. 
 
 ### Other improvements & fixes
 Version 1.40 also adds hundreds of other improvements and fixes, including...
