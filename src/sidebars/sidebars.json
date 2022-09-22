@@ -993,16 +993,24 @@
                     "url": "/docs/apps/enabling"
                 },
                 {
-                    "name": "TypeScript types",
-                    "url": "/docs/apps/build/types"
+                    "name": "Developer reference",
+                    "url": "/docs/apps/build/reference"
                 },
                 {
                     "name": "Using the PostHog API",
                     "url": "/docs/apps/build/api"
                 },
                 {
-                    "name": "Developer reference",
-                    "url": "/docs/apps/build/reference"
+                    "name": "Jobs",
+                    "url": "/docs/apps/build/jobs"
+                },
+                {
+                    "name": "Testing",
+                    "url": "/docs/apps/build/testing"
+                },
+                {
+                    "name": "TypeScript types",
+                    "url": "/docs/apps/build/types"
                 }
             ]
         },
