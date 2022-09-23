@@ -114,7 +114,38 @@ Identifying users helps understand who those users are and what they are doing. 
 
 Once a user has been identified and a basic event has been set up (with a name), properties can also be set for that event. Properties create more details about the event, such as the ID, category of the data, and other important data that differs between events. These properties can then be used to filter and analyze event tracking data.
 
-As shown above in Python and below in Go, properties are sent along with the distinct id and event. They can include as much data as you like. Common [data formats](https://posthog.com/manual/events#event-filtering) such as booleans, dates, numerics, and more can be handled and utilized within PostHog to filter or adjust data when analyzing.
+As shown above in Python and below in a variety of other languages, properties are sent along with the distinct id and event. They can include as much data as you like. Common [data formats](https://posthog.com/manual/events#event-filtering) such as booleans, dates, numerics, and more can be handled and utilized within PostHog to filter or adjust data when analyzing.
+
+<MultiLanguage>
+
+```js
+posthog.capture(
+  '[event-name]', 
+  { property1: 'value', property2: 'another value' }
+);
+```
+
+```php
+PostHog::capture(array(
+  'distinctId' => 'user:123',
+  'event' => 'movie played',
+  'properties' => array(
+    'movieId' => '123',
+    'category' => 'romcom'
+  )
+));
+```
+
+```ruby
+posthog.capture({
+  distinct_id: 'distinct id',
+  event: 'movie played',
+  properties: {
+    movie_id: '123',
+    category: 'romcom'
+  }
+})
+```
 
 ```go
 client.Enqueue(posthog.Capture{
@@ -127,17 +158,75 @@ client.Enqueue(posthog.Capture{
 })
 ```
 
+</MultiLanguage>
+
 Properties can also be set for individual users using the `set` and `set_once` methods. This allows data to be connected to the user rather than the function or method where the event was called. It also allows permanent user data to be stored across events, and not have to be recreated in each event capture call. Once a user property is `set_once` it can’t be changed by calling `set_once` again. For example:
+
+<MultiLanguage>
 
 ```js
 posthog.capture(
-    'Set some user properties', 
-    { 
-        $set: { location: 'London'  },
-        $set_once: { referred_by: 'some ID' },
-    }
+  'Set some user properties', 
+  { 
+    $set: { location: 'London'  },
+    $set_once: { referred_by: 'some ID' },
+  }
 )
 ```
+
+```python
+posthog.capture(
+  'distinct id',
+  event='movie played',
+  properties={ 
+    '$set': { 'location' : 'London' },
+    '$set_once': { 'referred_by': 'some ID' }
+  }
+)
+```
+
+```php
+PostHog::capture(array(
+  'distinctId' => 'user:123',
+  'event' => 'movie played',
+  'properties' => array(
+    '$set' => array(
+      'location' => 'London'
+    ),
+    '$set_once' => array(
+      'referred_by' => 'some ID'
+    )
+  )
+));
+```
+
+```ruby
+posthog.capture({
+  distinct_id: 'distinct id',
+  event: 'movie played',
+  properties: {
+    $set: { location: 'London' },
+    $set_once: { referred_by: 'some ID' }
+  }
+})
+```
+
+```go
+client.Enqueue(posthog.Capture{
+  DistinctId: "test-user",
+  Event:      "test-snippet",
+  Properties: map[string]interface{}{
+        "$set": map[string]interface{}{
+            "location": "London",
+        },
+        "$set_once": map[string]interface{}{
+            "referred_by": "some ID",
+        },
+    }
+})
+```
+
+</MultiLanguage>
 
 You can find more about [user properties here](https://posthog.com/docs/integrate/user-properties).
 
