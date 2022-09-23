@@ -15,12 +15,15 @@ availability:
             enterprise: true
         github: true
         gitlab: true
-        google: true
+        google:
+            openSource: false
+            free: true
+            selfServe: true
+            enterprise: true
         saml:
             free: false
             selfServe: false
             enterprise: true
-
 ---
 
 If you want to make it really easy for your users to log in, or have some compliance requirements around user access/provisioning, you can add one-click login with single sign-on (SSO). We also allow just-in-time provisioning of users, which means that your team members can create their account self-serve (see below), and enforcing log in through an SSO provider to fit all your compliance / IT needs.
@@ -49,8 +52,6 @@ Adding a TXT record depends on your DNS provider (e.g. Cloudflare, Google Domain
 ### Just-in-time user provisioning
 
 <FeatureAvailability availability={_frontmatter.availability.features.jitUserProvisioning} />
-
-<h1>{_frontmatter.title}</h1>
 
 When enabled, just-in-time user provisioning creates a new account whenever a first-time user logs in using any available SSO provider and an email address that matches your verified domain. For self-hosted, this is any provider you configured; for Cloud this is GitHub, GitLab, Google, and SAML if you configured it.
 
