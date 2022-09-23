@@ -59,7 +59,7 @@ With our engineering-led culture, the engineers on the small team are normally t
 
 We have a small number of product managers who support the product small teams in achieving their goals. This includes helping with prioritization, creating/updating dashboards, competitors analysis, speaking to customers etc. However, having product managers doesn't mean that the engineers can abdicate these responsibilities. The engineers should be the experts of the product they are building and their customers.
 
-Additionally, the product managers should pay particular attention to cross-team alignment and achieving the overall business goals.
+Additionally, the product managers should pay particular attention to cross-team alignment.
 
  
 ## Small Teams list
