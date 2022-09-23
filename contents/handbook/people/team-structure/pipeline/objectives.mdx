@@ -1,28 +1,23 @@
-- Objective: Develop Posthog CDP into a solution capable of replacing other CDPs for data-warehousing categories. Increase % of customers using “data out” apps from X to Y
+- Objective: Events are ingested and processed reliably, accurately, and quickly on all deployments
     - Key result:
-        - Make the most important data in and out apps work reliably
-            - (Potentially) Consolidate into 1 repo
-            - Opinionated way of writing tests (maybe end-to-end), structuring the apps
-            - Separate out filters
-        - Team to fill in
-    - Ideas
-        - CDP style UI
-            - Why? To make the CDP product feel like a standalone product similar to other CDP solutions
-        - Live view of data or event testing
+        - End-to-end P95 time to ingest events is under 1m30s for "normal events" and 2m30s for "buffer events" (note: includes 60s error bars)
+        - We ingest 99.999% of valid events
+            - Limit dead letter queue usage
+        - Ingestion on self-hosted deployments is horizontally scalable
+    - Why?
+        - For customers to trust our product they need to be confident in our ability to handle their volumes reliably 
+
+- Objective: MVP for PostHog CDP (5 happy customers)
+    - Key results:
+        - Nail data exports
+            - Guaranteed job execution (99.999% of jobs processed)
+            - (Automated) testing framework for apps
+        - CDP UX
+            - Pipeline metrics
+            - Destination apps event filtering
+            - (Stretch) CDP-like UI
     - Why?
         - By removing the need for other CDPs, Posthog can save the customers money and potentially create a new revenue line. 
-        - Historically we’ve fixed things iteratively. We want to consider this as a product.
-- Objective: Improve the performance of these areas
-    - Key results:
-        - Re-write how we do historical exports
-            - Able to cope with lots of volume
-            - Resource limiting the apps
-            - Why?
-                - We promised it to our largest customer
-        - (Proposed lower priority) Performance - improve ingestion performance
-            - Why?
-            - High volume customers e.g. a very large open source devtool customer couldn’t use our ingestion pipeline and so had to insert directly into clickhouse
-
 
 ## Old roadmap
 
