@@ -15,7 +15,7 @@ Input from the execs:
 
 
 
-## Proposed Objective 1: Nail Data Exploration
+## Proposed Objective: Nail Data Exploration
 
 NB! This objective still needs analysis and clarification
 
@@ -49,8 +49,8 @@ Meta reason:
 - If we're not careful, we'll end up with inoperable products. 
 - This builds the first shared bridge between all of them.
 
-### How?
-- Universal Search: https://github.com/PostHog/posthog/issues/7963
+### Potential ideas for how?
+- Universal Search: https://github.com/PostHog/posthog/issues/7963 (Note: this doesn't mean natural language text search)
 - An "explore" interface/table, which supports input from various swappable data sources, with a unified set of filters applied to data.
 - Support for custom columns and [formulas](https://github.com/PostHog/posthog/issues/11913) on those tables.
 - Ability to save as a cohorts, save as an action, or export as a CSV when the data permits.
@@ -63,30 +63,3 @@ Meta reason:
 - If we add a bit of text parsing as a follow-up project, this would lead the way to an interface like this:
 
 ![image](https://user-images.githubusercontent.com/53387/191732592-569aa93e-7757-4f09-a109-3f7eb5eff2b7.png)
-
-## Proposed Objective 2: Nail Web Analytics
-- Why? A lot of our customers are only using us to track their product, and not their marketing website.
-  Our hypothesis is that marketing websites have 10-100x more events than applications.
-
-- Analysis:
-  - We are not seen as a web analytics company, and have previously worked to avoid that title.
-  - There is a large overlap between web and product analytics. Our infrastructure can handle both usecases.
-  - Google is sunsetting the traditional "google analytics" web analytics product ("universal analytics"), and moving
-    everyone to GA4. A lot of people are not happy with this, and are jumping ship. We could capture a lot of new users.
-  - If we build an analytics product that serves the needs of web marketers and integrates with the rest of our stack,
-    we're well suited for a lot of new growth.
-
-- Steps:
-  - Figure out why are 80% of our B2B customers not using us for their marketing website?
-    Is it missing features? Cost? Perception? Something else?
-  - What are the needs of typical marketing websites and marketers? A guess: better ad and source tracking.
-    Which of these are reasonable to build on our platform?
-  - Do we want to move into this segment, or should we avoid it? Is it a distraction from our mission of helping people
-    build better products? Might this result in a lot of low volume low quality free users?
-  - Actually implement what comes out of this analysis
-
-This objective includes a lot of product work to figure out what needs to be done. Thus it's the second objective
-of the quarter. The idea is to give product and design enough time to get ahead of the engineers, who will start with
-objective 1.
-
-
