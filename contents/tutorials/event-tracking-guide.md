@@ -147,19 +147,52 @@ PostHog provides the ability to aggregate events by groups. Groups allow you to 
 
 For example, if you had multiple deployments for different companies in your app, you could group events by each company. Another example is instead of calling capture after using identify or with the distinct user id, you can call a group or add the group data to the capture call.
 
+<MultiLanguage>
+
 ```js
 // All subsequent events will be associated with company `id:5`
 posthog.group('company', 'id:5');
+posthog.capture('some event')
+```
 
-posthog.capture('some event');
+```python
+posthog.capture('[distinct id]', 'some event', groups={'company': 'id:5'})
+```
 
-// Alternative
+```go
+client.Enqueue(posthog.Capture{
+    DistinctId: "[distinct id]",
+    Event:      "some event",
+    Groups: posthog.NewGroups().
+        Set("company", "id:5").
+})
+```
+
+```node
 posthog.capture({
     event: "some event",
     distinctId: '[distinct id]',
     groups: { company: 'id:5' }
-});
+})
 ```
+
+```php
+PostHog::capture(array(
+    'distinctId' => '[distinct id]',
+    'event' => 'some event',
+    '$groups' => array("company" => "id:5")
+));
+```
+
+```segment
+analytics.track('[event name]', {
+    "$groups": {
+        "company": "id:5"
+    }
+})
+```
+
+</MultiLanguage>
 
 This allows these groups to be used for analyzing, filtering, and visualizing events in PostHog. An example of a metric that benefits from group event tracking is the unique number of organizations signed up (rather than individuals). For more details about group analytics, you can check out [our product manual](https://posthog.com/manual/group-analytics). 
 
