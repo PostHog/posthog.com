@@ -18,85 +18,69 @@ It should **not** be used as a production instance for tracking a product with a
     - An instance with 2GB of RAM can handle approximately 100k events spread over a month
     - We highly recommend an instance with at least 4GB of RAM to handle any surges in event volume
     - For volumes over 100K a month we'd recommend deploying using [Kubernetes](/docs/self-host/deploy/other)
-- [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/) are installed
+- You have set up an `A` record to connect a custom domain to your instance.
+    - PostHog will automatically create an SSL certificate for your domain using LetsEncrypt
 
-Not sure where to host? You can click on the badge below to get US$100 in credit for DigitalOcean (i.e. run PostHog for free for ~2 months).
+<blockquote>
+    <div class="flex items-center space-x-4">
+        <div>
+            <b>Not sure where to host?</b>
+            <p>You can click on the badge to get US$100 in credit for DigitalOcean (i.e. run PostHog for free for ~2 months).</p>
+        </div>
+        <div class="w-64">
+            <a
+                href="https://www.digitalocean.com/?refcode=6a26a2c395b0&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge"
+                title="DigitalOcean Referral"
+            >
+                <img
+                    noZoom
+                    alt="DigitalOcean Referral Badge"
+                    src="https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%201.svg"
+                />
+            </a>
+        </div>
+    </div>
+</blockquote>
 
-<center>
-    <a
-        href="https://www.digitalocean.com/?refcode=6a26a2c395b0&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge"
-        title="DigitalOcean Referral"
-    >
-        <img
-            noZoom
-            alt="DigitalOcean Referral Badge"
-            src="https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%201.svg"
-        />
-    </a>
-</center>
+## Setting up the stack
 
-## Setting up `docker-compose.yml`
-
-To get started, we'll run the `deploy-hobby` script from the PostHog repo, which will download and set up our `docker-compose.yml`.
+To get started, all we need to do is run the following command, which will spin up a fresh PostHog deployment for us automatically!
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/posthog/posthog/HEAD/bin/deploy-hobby)"
 ```
 
-## Setting up SSL _(optional)_
+You'll now be asked to provide both the release tag you would like to use, as well as the domain you have connected to your instance.
+An automatic SSL certificate will be setup through LetsEncrypt.
 
-Next, we'll set up SSL for our deployment through LetsEncrypt. This step is optional, but we'd _highly_ recommend it if you're deploying PostHog in production.
-
-Before proceeding, make sure you have configured your DNS settings to point your domain to your new instance.
-It may take a couple mintues before these changes propagate, so make sure to double check the status before moving forward.
-
->**Tip:** Avoid using the word 'posthog' in your domain to prevent requests being blocked by ad blockers.
-
-Once your DNS record is set up, we'll need to make a few small changes to our config.
-
-In the `docker-compose.yml` file, change the value of `SITE_URL` from `http://localhost` to `https://<your-domain>`.
-
-```yaml file=docker-compose.yml
-services:
-    ...
-    web:
-        ...
-        environment: &env
-            DEPLOYMENT: hobby
-            # replace with your domain
-            SITE_URL: https://<your-domain>
-            DISABLE_SECURE_SSL_REDIRECT: 'true'
+Once everything has been setup, you should see the following message.
 
 ```
+We will need to wait ~5-10 minutes for things to settle down, migrations to finish, and TLS certs to be issued
 
-Next, we'll add the domain to the Caddyfile.
-
-```yaml file=Caddyfile
-# replace with your domain
-<your-domain> {
-  reverse_proxy http://web:8000
-}
+⏳ Waiting for PostHog web to boot (this will take a few minutes)
 ```
 
->**Note:** Make sure not to prepend `https://` before your domain in this file.
+PostHog will wait here on a couple of tasks that need to complete on the first start-up, which should only take a couple minutes.
 
-We're now all set! Once we spin up the stack, we'll get an automatic SSL certificate through LetsEncrypt.
+Once this is complete, you should be able to see your PostHog dashboard on the domain you provided!
+
+> If you notice this step taking longer than 10 minutes, it's best to cancel it with `Ctrl+C` and take a look at the [troubleshooting](#troubleshooting) section.
 
 ### Customizing your deployment (optional)
 
-By default, the `docker-compose.yml` file comes with a series of default config values that should work for most deployments.
-If you need to customize anything, you can take a look at the [full list of environment variables here](/docs/self-host/configure/environment-variables).
+By default, the `docker-compose.yml` file that gets run comes with a series of default config values that should work for most deployments.
+If you need to customize anything, you can take a look at the [full list of environment variables](/docs/self-host/configure/environment-variables).
+After making any changes, simply restart the stack with `docker-compose`.
 
 Additionally, if you would like to run a different version of PostHog, you can change the tag for the web, worker, and plugins services.
 Check out [here](https://hub.docker.com/r/posthog/posthog) for a list of all available tags.
 
-## Run the PostHog stack
+## Troubleshooting
 
-Now, all that's left to do is to spin up all our services!
+If you have already run the one-step deployment command above and something went wrong, this section covers a number of steps you can take to debug issues.
 
-```bash
-docker-compose up -d
-```
+### Checking that all containers are running
 
 We can use `docker ps` to check that all of our services are running.
 
@@ -107,7 +91,7 @@ CONTAINER ID   IMAGE                               COMMAND     CREATED    STATUS
 21a2f62d6e50   posthog/posthog:release-1.39.1      ...         1m ago     Up 1m     ...     ...
 77face12d3e2   posthog/posthog:release-1.39.1      ...         1m ago     Up 1m     ...     ...
 3b4bc7394049   posthog/posthog:release-1.39.1      ...         1m ago     Up 1m     ...     ...
-03f393c7aa84   caddy                               ...         1m ago     Up 1m     ...     ...
+03f393c7aa84   caddy:2.6.1                         ...         1m ago     Up 1m     ...     ...
 f1060c3d8d73   clickhouse/clickhouse-server:22.3   ...         1m ago     Up 1m     ...     ...
 7d2353a6bddf   bitnami/kafka:2.8.1-debian-10-r99   ...         1m ago     Up 1m     ...     ...
 72051397040e   zookeeper:3.7.0                     ...         1m ago     Up 1m     ...     ...
@@ -116,35 +100,17 @@ ff42ccf14481   redis:6.2.7-alpine                  ...         1m ago     Up 1m 
 da0d115dd02e   minio/minio                         ...         1m ago     Up 1m     ...     ...
 ```
 
-At this point, it will still take a couple of minutes for all the migrations to settle and for Caddy to set up our CA certificate.
-To check the progress of these migrations, we can take a look at the logs for the web container.
+You should see all the same containers as above. If any containers aren't showing up or show that they've restarted recently, it's worth checking their logs to see what the issue is.
+
+### Checking the logs of each container
+
+We can use the following command to check the logs for each of our containers.
 
 ```bash
-docker logs posthog_web_1
+docker logs <container_name>
 ```
 
-> **Note:** Make sure to replace `posthog_web_1` with the name of your web container when running `docker ps`.
-
-Once everything has settled, you should see the following message in the logs.
-
-```bash
-$ docker logs posthog_web_1
-
- _____          _   _    _
-|  __ \        | | | |  | |
-| |__) |__  ___| |_| |__| | ___   __ _
-|  ___/ _ \/ __| __|  __  |/ _ \ / _` |
-| |  | (_) \__ \ |_| |  | | (_) | (_| |
-|_|   \___/|___/\__|_|  |_|\___/ \__, |
-                                  __/ |
-                                 |___/
-
-
-Server running on http://0.0.0.0:8000
-Questions? Please shoot us an email at hey@posthog.com
-```
-
-You can now open the IP address of your instance or the domain you configured earlier in your browser, and you should see the PostHog web interface!
+The best place to start looking is in the `web` container, which runs all the database migrations and will produce an error if any have failed.
 
 > Running into issues with deployment? Ask a [question here](/questions) or check out our [Slack](/slack) to get help.
 
