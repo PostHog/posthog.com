@@ -19,7 +19,7 @@ We have therefore introduced Small Teams. These are designed to each operate lik
 
 * The overall goal is for a Small Team is to own an area of the product/company and be as close to its own startup as possible, with only a handful of centralized processes
 * A Small Team should never be more than six people
-* A Small Team has an Team Lead responsible for its performance - whoever is most appropriate depending on what the team is working on. This does _not_ mean the most senior person on the team.
+* A Small Team has a Team Lead responsible for its performance - whoever is most appropriate depending on what the team is working on. This does _not_ mean the most senior person on the team.
 * A Small Team must have (1) a customer (internal or external), (2) a mission and (3) metrics
 * There may be certain functions where at our current stage we don't need a Small Team yet.
 * Each Small Team runs its own retrospective + sprint every week. This must be done transparently.
@@ -55,7 +55,7 @@ The team lead is overall responsible for ensuring the above happens. They should
 
 ## How do engineers and product managers work together?
 
-With our engineering-led culture, the engineers on the small team are normally the team leads responsible for the product.
+With our engineering-led culture, the engineers on the small team are normally the team leads overall responsible for their area product.
 
 We have a small number of product managers who support the product small teams in achieving their goals. This includes helping with prioritization, creating/updating dashboards, competitors analysis, speaking to customers etc. However, having product managers doesn't mean that the engineers can abdicate these responsibilities. The engineers should be the experts of the product they are building and their customers.
 
