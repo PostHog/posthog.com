@@ -1,6 +1,6 @@
 ---
-date: 2022-08-29
-title: 'Array 1.40.0: What's new in PostHog?'
+date: 2022-09-26
+title: 'Array 1.40.0: Whats new in PostHog?'
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -18,28 +18,28 @@ Want to know more about what we're up to? [Subscribe to HogMail, our newsletter]
 
 **Release highlights:**
 
-- [New: Lemonized Calendar and Date components](#new-lemonized-calendar-and-date-components
+- [New: Lemonized Calendar and Date components](#new-lemonized-calendar-and-date-components)
 - [New: Annotations Revamp](#new-annotations-revamp)
 - [New: Personal Modal Revamp](#new-person-modal-revamp)
 - [New: Recordings domain settings](#new-recordings-domain-settings)
 - [Improved: Retention insight update](#improved-retention-insight-update)
 
-- New: Lemon Calendar! (#11519)
-- New: Recordings domain settings (#11751)
-- Improved: Annotations overhaul (#11560, #11482)
-- Improved: New Person Modal (#11662)
-- Improved: Update Retention View (#11643)
-
 ### New: Lemonized calendar and date components
+
+![lemon calendar](../images/blog/array/1-40-0-lemon-calendar.png)
 
 We released some long overdue changes to our date components. Following on the heels of our refreshing UI update, we've added new calendar and
 date handling components. This is part of our ongoing effort in updating all of the UI with components that provide a unified experience. 
 
 ### New: Annotations revamp
 
+![annotation](../images/blog/array/1-40-0-annotation-modal.png)
+
 Have you had trouble with annotations recently? We've overhauled annotations with a new look and new interface. This change resolves several layout and interaction issues that had previously been happening on annotations. We've also touched up the annotations page to highlight important information!
 
 ### New: Person modal revamp
+
+![person modal](../images/blog/array/1-40-0-person-modal.png)
 
 Clicking on datapoints is one of our favorite ways to analyze the users behind the numbers. The new person modal now looks and feels like the rest of the app. We've made it easier for you to search and perform actions on those lists of users.
 
@@ -49,14 +49,16 @@ Struggling with keeping toolbar and recordings settings separate? Us too.. The s
 
 ### Improved: Retention insight update
 
+![retention insight](../images/blog/array/1-40-0-retention.png)
+
 Another update to our UI! Nothing functionally changed here but once again we cleaned up the UI on the retention insight to keep up with all the styling updates we've had across the board. 
 
 ### Other improvements & fixes
 Version 1.40 also adds hundreds of other improvements and fixes, including...
 
-- **Improvement:** Filter defaults can now be set to apply on all new insights! (#11589)
+- **Improvement:** Filter defaults can now be set to apply on all new insights (#11589)
 - **Improvement:** Event volume and query counts are now emphasized in data management (#11806)
-- **Improvement:** Profile pictures now will show more information on hover! (#11849)
+- **Improvement:** Profile pictures now will show more information on hover (#11849)
 - **Fix**: Fixed an issue where group properties weren't showing up on search previously (#11813)
 - **Fix**: Fixed an issue that was causing property statistics to be calculated infrequently (#11815)
 
