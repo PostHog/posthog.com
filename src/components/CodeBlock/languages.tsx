@@ -83,6 +83,10 @@ const languageMap: LanguageMap = {
         language: 'elixir',
         label: 'Elixir',
     },
+    segment: {
+        language: 'javascript',
+        label: 'Segment',
+    },
     shell: {
         language: 'shell',
         label: (

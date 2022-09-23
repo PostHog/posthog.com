@@ -228,6 +228,10 @@
                             "url": "/handbook/people/hiring-process"
                         },
                         {
+                            "name": "How to interview",
+                            "url": "/handbook/people/hiring-process/how-to-interview"
+                        },
+                        {
                             "name": "Engineering hiring",
                             "url": "/handbook/people/hiring-process/engineering-hiring"
                         },
@@ -801,12 +805,16 @@
                     "url": "/docs/integrate/proxy"
                 },
                 {
-                    "name": "Libraries",
+                    "name": "Library comparison",
                     "url": "/docs/integrate/libraries"
                 },
                 {
                     "name": "Badge",
                     "url": "/docs/integrate/badge"
+                },
+                {
+                    "name": "Browser Extensions",
+                    "url": "/docs/integrate/browser-extension"
                 },
                 {
                     "name": "Client libraries",
@@ -835,10 +843,6 @@
                         {
                             "name": "React Native",
                             "url": "/docs/integrate/client/react-native"
-                        },
-                        {
-                            "name": "Browser Extensions",
-                            "url": "/docs/integrate/client/browser-extension"
                         }
                     ]
                 },
@@ -993,12 +997,24 @@
                     "url": "/docs/apps/enabling"
                 },
                 {
-                    "name": "TypeScript types",
-                    "url": "/docs/apps/build/types"
-                },
-                {
                     "name": "Developer reference",
                     "url": "/docs/apps/build/reference"
+                },
+                {
+                    "name": "Using the PostHog API",
+                    "url": "/docs/apps/build/api"
+                },
+                {
+                    "name": "Jobs",
+                    "url": "/docs/apps/build/jobs"
+                },
+                {
+                    "name": "Testing",
+                    "url": "/docs/apps/build/testing"
+                },
+                {
+                    "name": "TypeScript types",
+                    "url": "/docs/apps/build/types"
                 }
             ]
         },
