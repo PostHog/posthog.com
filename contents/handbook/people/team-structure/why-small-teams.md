@@ -17,7 +17,7 @@ We have therefore introduced Small Teams. These are designed to each operate lik
 
 ## How it works at a high level
 
-* The overall goal is for a Small Team is to own an area of the company and be as close to its own startup as possible, with only a handful of centralized processes
+* The overall goal is for a Small Team is to own an area of the product/company and be as close to its own startup as possible, with only a handful of centralized processes
 * A Small Team should never be more than six people
 * A Small Team has an Team Lead responsible for its performance - whoever is most appropriate depending on what the team is working on. This does _not_ mean the most senior person on the team.
 * A Small Team must have (1) a customer (internal or external), (2) a mission and (3) metrics
