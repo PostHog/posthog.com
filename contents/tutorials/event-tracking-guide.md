@@ -3,7 +3,7 @@ title: Complete guide to event tracking
 sidebar: Docs
 showTitle: true
 author: ['ian-vanagas', 'yakko-majuri']
-date: 2022-09-21
+date: 2022-09-23
 featuredImage: ../images/tutorials/banners/actions.png
 topics: ['actions']
 ---
@@ -41,7 +41,7 @@ Second, autocapture is a general solution that provides value to many users. To 
 
 ## Setting up custom events
 
-To expand on autocapture, you can create and add custom events to your app. Custom events allow you to capture details from anywhere in the codebase whether it is a button press on the frontend or a class method call on the backend. This ensures correct and comprehensive data capture.
+To expand on autocapture, you can create and add custom events to your product. Custom events allow you to capture details from anywhere in the codebase whether it is a button press on the frontend or a class method call on the backend. This ensures correct and comprehensive data capture.
 
 To set up custom events, first, you need to install the library for the language or framework you are using. We have built libraries for a range of languages and frameworks including Javascript, Python, iOS, Android, and more. You can find our [full list of libraries here](https://posthog.com/docs/integrate#libraries).
 
@@ -233,7 +233,7 @@ You can find more about [user properties here](https://posthog.com/docs/integrat
 
 PostHog provides the ability to aggregate events by groups. Groups allow you to track and manage events, not at an individual user level, but at a “company,” “organization,” “project” or another broader entity level. 
 
-For example, if you had multiple deployments for different companies in your app, you could group events by each company. Another example is instead of calling capture after using identify or with the distinct user id, you can call a group or add the group data to the capture call.
+For example, if you had multiple deployments for different companies in your product, you could group events by each company. Another example is instead of calling capture after using identify or with the distinct user id, you can call a group or add the group data to the capture call.
 
 <MultiLanguage>
 
