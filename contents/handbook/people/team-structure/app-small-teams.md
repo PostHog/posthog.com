@@ -15,7 +15,7 @@ The product small team is responsible for everything related to that area of the
 2. Quality
 3. Revenue
 
-## What actions should the product small teams be doing for their area?
+## What actions should the product small teams likely be doing for their area?
 
 - Each quarter:
   1. Create good quarterly OKRs
@@ -27,6 +27,7 @@ The product small team is responsible for everything related to that area of the
   4. Triage and fix related bugs
   5. Assist the support hero in answering related questions
   6. Collaborate with marketing
+  7. Become power users of their app area and use PostHog in their product development process
 
 ## What is the role of the team lead?
 
@@ -34,8 +35,8 @@ The team lead is overall responsible for ensuring the above happens. They should
 
 ## What do the product managers do?
 
-With our engineering-led culture, the engineers on the product small team are responsible for the product. 
+With our engineering-led culture, the engineers on the product small team are responsible for the product.
 
-We have a small number of product managers who support the product small teams in achieving their goals. This includes a wide range of activities such as helping with prioritization, setting up dashboards, competitors analysis, speaking to customers etc.
+We have a small number of product managers who support the product small teams in achieving their goals. This includes helping with prioritization, creating/updating dashboards, competitors analysis, speaking to customers etc. However, having product managers doesn't mean that the engineers can abdicate these responsibilities. The engineers should be the experts of the product they are building and their customers.
 
-However, having product managers doesn't mean that the engineers can outsourcing speaking to customers or diving into metrics. The engineers should be the experts of the product they are building and their customers.
+Additionally, the product managers should pay particular attention to cross-team alignment and achieving the overall business goals.
