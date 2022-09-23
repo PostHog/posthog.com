@@ -50,10 +50,9 @@ To get started, all we need to do is run the following command, which will spin 
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/posthog/posthog/HEAD/bin/deploy-hobby)"
 ```
 
-You'll now be asked to provide both the release tag you would like to use, as well as the domain you have connected to your instance.
-An automatic SSL certificate will be setup through LetsEncrypt.
+You'll now be asked to provide the release tag you would like to use, as well as the domain you have connected to your instance.
 
-Once everything has been setup, you should see the following message.
+Once everything has been setup, you should see the following message:
 
 ```
 We will need to wait ~5-10 minutes for things to settle down, migrations to finish, and TLS certs to be issued
@@ -61,7 +60,7 @@ We will need to wait ~5-10 minutes for things to settle down, migrations to fini
 ⏳ Waiting for PostHog web to boot (this will take a few minutes)
 ```
 
-PostHog will wait here on a couple of tasks that need to complete on the first start-up, which should only take a couple minutes.
+PostHog will wait here on a couple of tasks that need to be completed, which should only take a couple minutes.
 
 Once this is complete, you should be able to see your PostHog dashboard on the domain you provided!
 
