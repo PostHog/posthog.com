@@ -26,7 +26,8 @@ Product reason:
 - We have a pretty good interface for data *visualization* (trends, funnels, retention, etc), but not so much for data 
   *exploration* (events, persons). Users have been asking for more.
 - The biggest pain comes from not being able to move between different types of related data. Imagine [this scenario](https://github.com/PostHog/posthog/issues/7963#issuecomment-1010235411) (© @rcmarron)
-> 1) "I wonder which organizations have used feature Y"
+> 0) Found an anomaly about feature usage in trends
+> 1) "I wonder which paying organizations have used feature Y"
 > 2) Search for that event/action and change the tab to organizations
 > 3) "Interesting CompanyXYZ is using it, I wonder who"
 > 4) Flip to persons + add an organization filter for CompanyXYZ
