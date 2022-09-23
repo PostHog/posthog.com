@@ -10,6 +10,7 @@ import './src/styles/global.css'
 import HandbookLayout from './src/templates/Handbook'
 import Product from './src/templates/Product'
 import SqueakTopic from './src/templates/SqueakTopic'
+import Job from './src/templates/Job'
 
 initKea(false)
 
@@ -34,6 +35,8 @@ export const wrapPageElement = ({ element, props }) => {
         <Product {...props} />
     ) : /^questions\//.test(slug) ? (
         <SqueakTopic {...props} />
+    ) : /^careers\//.test(slug) ? (
+        <Job {...props} />
     ) : (
         element
     )

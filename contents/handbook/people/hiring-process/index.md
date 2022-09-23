@@ -16,11 +16,10 @@ Our goal is to build a [diverse](https://posthog.com/handbook/company/diversity)
 
 | **Position title**        | **Location we're happy to hire in** | **Small Team**        | **Manager** | **Interview Process**                                                                                                                          | **SuperDay Task**              |
 |---------------------------|----------------------------------------|-----------------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|
-| Senior Product Manager    | GMT -8:00 to +2:00                   | App West/East   | Tim G.      | 1) Culture Screen - Coua<br/> 2) Technical Screen - Marcus & Tim <br/> 3) SuperDay Assessment - Tim, Marcus, James H., Chris, & an Engineer      | [Senior Product Manager Task](https://github.com/PostHog/company-internal/blob/master/superdays/product-manager.md) |
-| Senior Data Engineer      | GMT -5:00 to +2:00                   | Ingestion       | James G.    | 1) Culture Screen - Coua<br/> 2) Technical Screen - James G. & Tim<br/> 3) SuperDay Assessment - James G., Tiina, James H. & Yakko                 | [Ingestion Task](https://github.com/PostHog/superday-ingestion) (download ZIP and send)  |
-| Site Reliability Engineer | GMT -8:00 to +2:00                   | Platform        | James G.    | 1) Culture Screen - Coua<br/> 2) Technical Screen - James G.<br/> 3) SuperDay Assessment - James G., Guido, Tiina, James H., & Karl    | [SRE Task](https://github.com/PostHog/sre-superday) (download ZIP and send) |
-| Full Stack Engineer       | GMT -8:00 to +2:00                   | App West/East   | Marius/Eric | 1) Culture Screen - Coua<br/> 2) Technical Screen - Marius/Eric & Tim<br/> 3) SuperDay Assessment - Marius/Eric, Tim, James H., Li, Neil, & Karl | Live Task (link not available) |
-| Technical Content Marketer       | GMT -8:00 to +2:00                   | Marketing   | Charles | 1) Culture Screen - Charles<br/> 2) Technical Screen - James H & Andy<br/> 3) SuperWeek Assessment - Charles, Andy, Tim, James H., Joe | [Technical Content Marketer Task](https://docs.google.com/document/d/1jR7lcNrF_-x-Pczaa5deGnIlkyHuXe2fARwBryie8sU/edit?usp=sharing) |
+| Senior Data Engineer      | GMT -5:00 to +2:00                   | Ingestion       | James G.    | 1) Culture Screen - Coua<br/> 2) Technical Screen - James G.<br/> 3) Engineering Culture Screen - Tim<br/> 3) SuperDay Assessment - James G., Tiina, James H. & Yakko                 | [Ingestion Task](https://github.com/PostHog/superday-ingestion) (download ZIP and send)  |
+| Site Reliability Engineer | GMT -8:00 to +2:00                   | Platform        | James G.    | 1) Culture Screen - Coua<br/> 2) Technical Screen - James G.<br/> 3) Engineering Culture Screen - Tim<br/> 4) SuperDay Assessment - James G., Guido, Tiina, James H., & Karl    | [SRE Task](https://github.com/PostHog/sre-superday) (download ZIP and send) |
+| Full Stack Engineer       | GMT -8:00 to +2:00                   | App West/East   | Marius/Eric | 1) Culture Screen - Coua<br/> 2) Technical Screen - Marius/Eric<br/> 3) Engineering Culture Screen - Tim<br/> 4) SuperDay Assessment - Marius/Eric, Tim, James H., Li, Neil, & Karl | Live Task (link not available) |
+| Product Designer       | GMT -5:00 to +2:00                   | Design   | Cory | 1) Culture Screen - Coua<br/> 2) Technical Screen - James H.<br/> 3) Product Design Team Screen - Cory<br/> 4) SuperDay Assessment - Cory, Chris, Lottie, Eli, James H., & Tim | Live Task (link not available) |
 
 Tasks are only available internally - please do not share these publicly. 
 
@@ -53,9 +52,9 @@ If you are a hiring manager for a role, you will usually:
 
 #### How to write a great job description
 
-The People & Ops team will then write up the full job description in Workable. 
+The People & Ops team will then write up the full job description in Ashby. 
 
-As we keep iterating on our specs, the best approach is to copy our most recently advertised role over in Workable. We find the following approaches work well:
+As we keep iterating on our specs, the best approach is to copy our most recently advertised role over in Ashby. We find the following approaches work well:
 - Being extremely clear and precise about what this person will actually be working on (including linking to example PRs/Issues of similar work in GitHub where possible)
 - Sharing why this role specifically is exciting, and the impact they will get to have
 - Linking to as much useful contextual information as possible, including the small team they will be working on
@@ -63,15 +62,16 @@ As we keep iterating on our specs, the best approach is to copy our most recentl
 - Run the text through a [gender decoder tool](https://gender-decoder.katmatfield.com/) to check for unconscious bias
 - Don't use specific years of experience as a qualifier
 
-Once the hiring manager has signed off on the spec, we will publish it on Workable. 
+Once the hiring manager has signed off on the spec, we will publish it on Ashby. 
 
-In order to get coverage in multiple timezones, we usually clone a job post across London, New York and San Francisco locations, but then push all applicants into a single pipeline after the first interview. Unfortunately Workable doesn't have a good way to manage truly remote global roles. 
 
 #### Job boards
 
-Workable will automatically add the role on our [careers page](https://posthog.com/careers). It will also 'helpfully' publish it on a bunch of other free but irrelevant job boards - you should manually remove all of those except for Workable and LinkedIn. [AngelList](https://angel.co/company/posthoghq/jobs) will also automatically pull all our new roles through. 
+Ashby will automatically add the role on our [careers page](https://posthog.com/careers). It will also 'helpfully' publish it on a bunch of other free but irrelevant job boards - you should manually remove all of those except for Ashby and LinkedIn. [AngelList](https://angel.co/company/posthoghq/jobs) will need to be posted manually. 
 
-We also add all roles to YC's [Work at a Startup](https://www.workatastartup.com/jobs). For certain roles, we also publish on other job boards:
+As a Y Combinator company, we can post [jobs ads on the HackerNews front page](https://news.ycombinator.com/jobguide.html) for free at [https://news.ycombinator.com/submitjob](https://news.ycombinator.com/submitjob). This requires a founder's HackerNews account to do so. 
+
+Ashby also had a partnership with YC's job board so all roles to YC's [Work at a Startup](https://www.workatastartup.com/jobs) will push out automatically. For certain roles, we also publish on other job boards:
 
 **Design**
 
@@ -107,12 +107,12 @@ Unfortunately people who actively work on recruitment in the People & Ops team a
 **What's the process?**
 
 *   If there is an ongoing conversation, please cc careers@ into the email thread with the referred candidate and we will take it over from there.
-*   Otherwise, please upload the profile to the [Workable referral page](https://referrals.workable.com/posthog/jobs/). 
+*   Otherwise, please upload the profile to the [Ashby referral page](https://app.ashbyhq.com/referrals). 
 *   If they have applied themselves already, let careers@ know within 48 hours of them applying.
 
 **Social referral** 
 
-The [Workable referral page](https://referrals.workable.com/posthog/jobs/) makes it super easy to share open positions with your network. If you use the link created via Workable, it will automatically track the applications as a social referral. 
+The [Getting started for interviewers page](https://www.notion.so/Getting-Started-for-Interviewers-4b6bd7cc94834e1ebe8d63345030696f) makes it super easy to share referrals and track their applications as a social referral throughout the interview process. 
 
 If you have other referrals in your network (e.g. 2nd degree connections), who have either applied or might be relevant for us to reach  out to, this also counts as a social referral. 
 
@@ -134,17 +134,17 @@ As a thank you, we will give you $50 credit for our [merch shop](https://merch.p
 
 ## Managing candidates
 
-All of our candidates are managed in [Workable](https://posthog.workable.com/backend) - please ask Coua or Charles for an invite to view candidates, leave feedback, and schedule meetings. 
+All of our candidates are managed in [Ashby](https://www.ashbyhq.com/) - please ask Coua or Charles for an invite to view candidates, leave feedback, and schedule meetings. 
 
-We record all candidate-related comms on Workable so we can ensure we provide all candidates with the best experience we possibly can - even if they are unsuccessful, they should come away feeling like they had a great interaction with PostHog.
+We record all candidate-related comms in Ashby so we can ensure we provide all candidates with the best experience we possibly can - even if they are unsuccessful, they should come away feeling like they had a great interaction with PostHog.
 
-Workable is a pretty intuitive platform to use, but here are a few helpful tips to get you going
+Ashby is a pretty intuitive platform to use, but here are a few helpful tips to get you going
 
-*   [A guide to getting started with the basics](https://help.workable.com/hc/en-us/articles/360038712074-Hiring-Manager-Getting-Started-) - this is pretty much everything you need if you are mainly using Workable to leave feedback on candidates you've met, but are otherwise not involved in the recruitment process.
-*   Link your Gmail account in Settings if you are in direct contact with candidates - this means any emails you send directly from your inbox will automatically be captured on their Workable record for everyone on the hiring team to see.
-*   When emailing candidates from within Workable, you can select a Template from the drop down bar (and customize it if you want). If you find yourself writing the same email, it is worth saving as a template.
+*   [A guide to getting started with the basics](https://www.notion.so/Getting-Started-for-Interviewers-4b6bd7cc94834e1ebe8d63345030696f) - this is pretty much everything you need to navigate through Ashby to provide feeedback and review candidates.
+*   Link your Gmail account in Settings if you are in direct contact with candidates - this means any emails you send directly from your inbox will automatically be captured on their Ashby record for everyone on the hiring team to see.
+*   When emailing candidates from within Ashby, you can select a Template from the drop down bar (and customize it if you want). If you find yourself writing the same email, it is worth saving as a template.
 
-If you receive an application via email or some other non-Workable channel like Slack, pass it on to careers@posthog.com. 
+If you receive an application via email or some other non-Ashby channel like Slack, pass it on to careers@posthog.com. 
 
 ## Sourcing
 
@@ -156,18 +156,18 @@ For most roles, we don’t just rely on incoming applications. Direct outreach i
 
 Good places to look for people include:
 
-*   Workable - [People search](https://help.workable.com/hc/en-us/articles/115012750768-What-is-People-Search-)
+*   Ashby - People search and tags
 *   LinkedIn - [Boolean searches](https://www.talentlyft.com/en/blog/article/306/boolean-search-a-simple-guide-for-recruiters) are your friend!
 *   Twitter
 *   GitHub
-*   StackOverflow
+*   YCombinator
 *   AngelList
 
 Sourcing isn't just something the People & Ops team do! If you want to get involved, get a LinkedIn Recruiter Lite license (~$80/month) and then send them an invitation to connect with a message. You'll find this is a better approach than using InMail. 
 
-### Booking interviews through Workable
+### Booking interviews through Ashby
 
-**Schedule interviews through Workable itself.** Do not use Google Calendar, otherwise the event won't be populated with useful candidate info and we won't have a record of the meeting anywhere. 
+**Schedule interviews through Ashby itself.** Do not use Google Calendar, otherwise the event won't be populated with useful candidate info and we won't have a record of the meeting anywhere. 
 
 When we book a meeting, we have the option of selecting a Google Meet or Zoom call.  Zoom should be the default, unless we are scheduling a meeting where the organizer is not attending themselves, in which case use Google Meet (as Zoom will requires the host to attend).
 
@@ -177,7 +177,7 @@ When we book a meeting, we have the option of selecting a Google Meet or Zoom ca
 
 ### Application
 
-The People & Ops team reviews applications and resumes/portfolios carefully and leaves their feedback as a comment on the candidate's record in Workable if relevant.
+The People & Ops team reviews applications and resumes/portfolios carefully and leaves their feedback as a comment on the candidate's record in Ashby if relevant.
 
 If a candidate hasn't customized the application or resume to the role, it is a flag they aren't that excited about working at PostHog. Cover letters are definitely _not_ mandatory, but at an interview stage, it's important to note how passionate they seem about the company. Did they try out the software already? Did they read the handbook? Are they in our community Slack?
 
@@ -185,7 +185,7 @@ Candidates who are unsuccessful at this stage will receive an automated rejectio
 
 ### First interview - culture interview with People & Ops 
 
-We start with an interview which is designed to get the overall picture on what a candidate is looking for, and to explain who we are. A template scorecard has been created for this stage in Workable.
+We start with an interview which is designed to get the overall picture on what a candidate is looking for, and to explain who we are. A template scorecard has been created for this stage in Ashby.
 
 This is to allow both PostHog and the candidate to assess whether the candidate is a great cultural addition to the team (not culture fit), and to dig into any areas of potential misalignment based on the application. We are looking for proactivity, directness, good communication, an awareness of the impact of the candidate's work, and evidence of iteration / a growth mindset. 
 
@@ -224,9 +224,9 @@ Overall, the candidate should aim to spend at least 80% of their time and energy
 
 In advance of the SuperDay, we will need to do some additional prep to ensure that the candidate has a great experience:
 
-*   Send them an email in the first instance to schedule the SuperDay - we aim to  do this as soon as possible, as candidates often will need to book a day off work. Use the Workable email template for this. If the task involves them doing 'real' work for PostHog, we should ask them to check that their current employment contract permits this - we try to create fake tasks for this reason.
-*   (One day before the SuperDay) Send the candidate a follow up email with details of the task, and ask them for their day rate and bank details. There is a template for this email in Workable, depending on the role - this will probably need customising.
-*   (One day before the SuperDay) Create a private channel in Slack for the candidate and all relevant people - this will be where they can chat to us over the course of the day if they have any questions etc. Invite the candidate as a single channel guest. We might need to add the candidate to one of our systems depending on the role, e.g. Workable for a recruiter SuperDay, but on the whole this should be minimized.
+*   Send them an email in the first instance to schedule the SuperDay - we aim to  do this as soon as possible, as candidates often will need to book a day off work. Use the Ashby email template for this. If the task involves them doing 'real' work for PostHog, we should ask them to check that their current employment contract permits this - we try to create fake tasks for this reason.
+*   (One day before the SuperDay) Send the candidate a follow up email with details of the task, and ask them for their day rate and bank details. There is a template for this email in Ashby, depending on the role - this will probably need customising.
+*   (One day before the SuperDay) Create a private channel in Slack for the candidate and all relevant people - this will be where they can chat to us over the course of the day if they have any questions etc. Invite the candidate as a single channel guest. We might need to add the candidate to one of our systems depending on the role, e.g. Ashby for a recruiter SuperDay, but on the whole this should be minimized.
 *   (One day before the SuperDay) Invite the candidate to a kickoff meeting with the hiring manager at the start of the day. On days where we have a company-wide meeting scheduled, invite them along. On days without standup, schedule an informal session with some team members to give them a chance to learn more about our culture. We may also want to have a proper wrap up with them at the end of their day.
 *   (On the SuperDay) Send the candidate the task - aim to send this before the kick-off session.
 *   (On the SuperDay) Give the candidate a warm welcome! Make it clear that the team is here to answer any questions, and they should feel free to reach out any time! Otherwise don't feel like we need to check in with them - let them get on with the task and trust that they will message us.
@@ -236,7 +236,7 @@ In advance of the SuperDay, we will need to do some additional prep to ensure th
 
 > We aim to make a decision within 48 hours of SuperDay - being decisive is important at this stage, as great candidates will probably be fielding multiple job offers. 
 
-After a SuperDay, everyone involved in the day leaves their feedback on Workable. If there are wildly different opinions, you should open an issue in `company-internal` to discuss.
+After a SuperDay, everyone involved in the day leaves their feedback on Ashby. If there are wildly different opinions, you should open an issue in `company-internal` to discuss.
 
 If a decision is made to hire, the People & Ops team will also open an issue in `company-internal` to give the team context about who the person is and why they were hired. It is helpful to include:
 

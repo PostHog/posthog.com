@@ -64,10 +64,6 @@ If your focus segment has a large number of small clients, you’ll want survey 
 
 - **Retention:** Are your customers continuing to use your product month over month? Retaining over 60% of users of a free version of your product is generally a strong indicator of value generation.
 
- <NewsletterForm
-compact
-/>
-
 ## Pitfalls to avoid
 The following pitfalls can lull you into thinking you have product market fit when you don’t:
 

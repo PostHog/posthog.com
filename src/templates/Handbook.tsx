@@ -282,6 +282,9 @@ export const query = graphql`
                 contributors {
                     url
                     username
+                    teamData {
+                        name
+                    }
                     avatar {
                         childImageSharp {
                             gatsbyImageData(width: 38, height: 38)

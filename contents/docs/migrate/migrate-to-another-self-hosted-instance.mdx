@@ -15,7 +15,7 @@ import ExportingEventsSnippet from './snippets/exporting-events'
 ## Requirements
 
 -   You should have a **clean** [ClickHouse-backed PostHog instance up and running](/docs/self-host). Your new PostHog instance should have **no ingested events**. We recommend using a fresh and unused installation.
--   Your old and new instances should both be running a minimum version of `1.30.0`
+-   Your old and new instances should both be running the **exact** same version of PostHog (minimum `1.30.0`).
 
 > **Having difficulties upgrading your Postgres-backed instance due to long-running migrations?** Check out [this guide](/docs/self-host/postgres-upgrade-migrations).
 
@@ -35,7 +35,7 @@ Access your old PostHog instance and run the following command:
 
 ```shell
 # tip: use the flag -U to specify a username if necessary
-pg_dump -d posthog -f tmp/export.sql --no-owner --data-only \
+pg_dump -d posthog -f tmp/export.sql --no-owner --data-only --disable-triggers \
 -t posthog_action \
 -t posthog_actionstep \
 -t posthog_annotation \
@@ -58,10 +58,11 @@ pg_dump -d posthog -f tmp/export.sql --no-owner --data-only \
 -t posthog_user_groups \
 -t posthog_user_user_permissions
 ```
-
-> **Note:** If your old PostHog instance is hosted on Heroku, you should follow [this guide](https://devcenter.heroku.com/articles/heroku-postgres-import-export) to export **all of your data**, load into a separate database (we recommend a local Postgres instance), and then run the command above.
+> **Note:** You may see a warning regarding circular dependencies between tables, which shouldn't be an issue as we are using `--disable-triggers`. If you do run into issues when restoring, try doing a full dump instead of `--data-only`.
 
 If you do not access your Postgres database via a port-forwarding mechanism to your local machine, you will then need to copy the file from the server to your local system (or the remote server from where you access your new instance). You can do this with `scp`:
+
+> **Note:** If your old PostHog instance is hosted on Heroku, you should follow [this guide](https://devcenter.heroku.com/articles/heroku-postgres-import-export) to export **all of your data**, load into a separate database (we recommend a local Postgres instance), and then run the command above.
 
 ```shell
 scp <your_username>@<database_hostname>:/tmp/export.sql .

@@ -10,30 +10,34 @@ hideAnchor: true
 - **James Hawkins, CEO & Co-founder**
   - **Tim Glaser, CTO & Co-founder**
     - **Marius Andra, Full Stack Engineer**
-      - Ben White, Full Stack Engineer
       - Emanuele Capparelli, Growth Engineer
       - Michael Matloka, Full Stack Engineer
       - Paul D'Ambra, Full Stack Engineer
+    - **Ben White, Full Stack Engineer**
+      - Alex Kim, Full Stack Engineer
     - **James Greenhill, Data/Infra engineer**
       - Guido Iaquinti, Site Reliability Engineer
       - Tiina Turban, Full Stack Engineer
       - Yakko Majuri, Full Stack Engineer
+      - Ellie Huxtable, Full Stack Engineer
     - **Eric Duong, Full Stack Engineer**
-      - Alex Kim, Full Stack Engineer
       - Li Yi Yu, Full Stack Engineer
       - Neil Kakkar, Full Stack Engineer
       - Rick Marron, Full Stack Engineer
+    - **Luke Harries, Head of Product**
+      - Annika Schmid, Product Manager
+      - Joe Martin, Product Marketer
     - Karl-Aksel Puulmann, Full Stack Engineer
     - Harry Waye, Full Stack Engineer
   - **Charles Cook, VP of Operations & Marketing**
     - Andy Vandervell, Content Marketer
     - Grace McKenzie, Operations Manager
     - Coua Phang, Tech Talent Partner
-    - Joe Martin, Product Marketer
+    - Ian Vanagas, Technical Content Marketer
   - **Cory Watilo, Lead Designer**
     - Lottie Coxon, Graphic Designer
     - Eli Kinsey, Front End Engineer
-    - Chris Clark, Product Designer
+    - Paul Hultgren, Developer Advocate
   - **Simon Fisher, Customer Success Lead**
     - Cameron DeLeone, Customer Success Manager
 
@@ -47,7 +51,6 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 
 #### [App East](app-east)
 - [Marius Andra](/handbook/company/team#marius-andra-software-engineer) (Team lead, Full Stack Engineer)
-- [Ben White](/handbook/company/team#ben-white-full-stack-engineer) (Full Stack Engineer)
 - [Emanuele Capparelli](/handbook/company/team#ben-white-full-stack-engineer) (Growth Engineer)
 - [Michael Matloka](/handbook/company/team#michael-matloka-software-engineer) (Full Stack Engineer)
 - [Paul D'Ambra](/handbook/company/team#paul-dambra-software-engineer) (Full Stack Engineer)
@@ -57,9 +60,11 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Eric Duong](/handbook/company/team#eric-duong-software-engineer) (Team lead, Full Stack Engineer)
 - [Neil Kakkar](/handbook/company/team#neil-kakkar-software-engineer) (Full Stack Engineer)
 - [Li Yi Yu](/handbook/company/team#li-yi-yu-full-stack-engineer) (Full Stack Engineer)
-- [Rick Marron](/handbook/company/team#rick-marron-full-stack-engineer) (Full Stack Engineer)
+
+#### [Session Recordings](session-recordings)
+- [Ben White](/handbook/company/team#ben-white-full-stack-engineer) (Full Stack Engineer)
 - [Alex Kim](/handbook/company/team#alex-kim-full-stack-engineer) (Full Stack Engineer)
-- _[Chris Clark](/handbook/company/team#chris-clark) (Product Designer)_ - _Works across App West and App East_
+- [Rick Marron](/handbook/company/team#rick-marron-full-stack-engineer) (Full Stack Engineer)
 
 #### [Platform](platform)
 - [James Greenhill](/handbook/company/team#james-greenhill-software-engineer) (Team lead, Data/Infra Engineer)
@@ -74,6 +79,7 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Charles Cook](/handbook/company/team#charles-cook-business-operations) (Team lead, VP Ops & Marketing)
 - [Joe Martin](/handbook/company/team#joe-martin-product-marketer) (Product Marketer)
 - [Andy Vandervell, Content Marketer](/handbook/company/team#andy-vandervell-content-marketer) (Content Marketer)
+- Ian Vanagas, Technical Content Marketer
 
 ### [Website and Docs](website-docs)
 - [Cory Watilo](/handbook/company/team#cory-watilo-lead-designer) (Lead Designer)

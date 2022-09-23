@@ -45,7 +45,7 @@
             "children": [
                 {
                     "name": "Strategy overview",
-                    "url": "/handbook/strategy/strategy"
+                    "url": "/handbook/strategy/overview"
                 },
                 {
                     "name": "Business model",
@@ -158,7 +158,7 @@
             ]
         },
         {
-            "name": "People & ops",
+            "name": "People & Ops",
             "url": "",
             "children": [
                 {
@@ -188,6 +188,10 @@
                 {
                     "name": "Training",
                     "url": "/handbook/people/training"
+                },
+                {
+                    "name": "Side gigs",
+                    "url": "/handbook/people/side-gigs"
                 },
                 {
                     "name": "Feedback",
@@ -222,6 +226,10 @@
                         {
                             "name": "Overview",
                             "url": "/handbook/people/hiring-process"
+                        },
+                        {
+                            "name": "How to interview",
+                            "url": "/handbook/people/hiring-process/how-to-interview"
                         },
                         {
                             "name": "Engineering hiring",
@@ -368,6 +376,10 @@
                         {
                             "name": "MDX setup",
                             "url": "/handbook/engineering/posthog-com/mdx-setup"
+                        },
+                        {
+                            "name": "Markdown",
+                            "url": "/handbook/engineering/posthog-com/markdown"
                         }
                     ]
                 },
@@ -793,12 +805,16 @@
                     "url": "/docs/integrate/proxy"
                 },
                 {
-                    "name": "Libraries",
+                    "name": "Library comparison",
                     "url": "/docs/integrate/libraries"
                 },
                 {
                     "name": "Badge",
                     "url": "/docs/integrate/badge"
+                },
+                {
+                    "name": "Browser Extensions",
+                    "url": "/docs/integrate/browser-extension"
                 },
                 {
                     "name": "Client libraries",
@@ -827,10 +843,6 @@
                         {
                             "name": "React Native",
                             "url": "/docs/integrate/client/react-native"
-                        },
-                        {
-                            "name": "Browser Extensions",
-                            "url": "/docs/integrate/client/browser-extension"
                         }
                     ]
                 },
@@ -839,32 +851,36 @@
                     "url": "",
                     "children": [
                         {
-                            "name": "Elixir",
-                            "url": "/docs/integrate/server/elixir"
+                            "name": "Node.js",
+                            "url": "/docs/integrate/server/node"
                         },
                         {
                             "name": "Go",
                             "url": "/docs/integrate/server/go"
                         },
                         {
-                            "name": "Java",
-                            "url": "/docs/integrate/server/java"
+                            "name": "Python",
+                            "url": "/docs/integrate/server/python"
                         },
                         {
-                            "name": "Node.js",
-                            "url": "/docs/integrate/server/node"
+                            "name": "Rust",
+                            "url": "/docs/integrate/server/rust"
+                        },
+                        {
+                            "name": "Java",
+                            "url": "/docs/integrate/server/java"
                         },
                         {
                             "name": "PHP",
                             "url": "/docs/integrate/server/php"
                         },
                         {
-                            "name": "Python",
-                            "url": "/docs/integrate/server/python"
-                        },
-                        {
                             "name": "Ruby",
                             "url": "/docs/integrate/server/ruby"
+                        },
+                        {
+                            "name": "Elixir",
+                            "url": "/docs/integrate/server/elixir"
                         }
                     ]
                 },
@@ -981,12 +997,24 @@
                     "url": "/docs/apps/enabling"
                 },
                 {
-                    "name": "TypeScript types",
-                    "url": "/docs/apps/build/types"
-                },
-                {
                     "name": "Developer reference",
                     "url": "/docs/apps/build/reference"
+                },
+                {
+                    "name": "Using the PostHog API",
+                    "url": "/docs/apps/build/api"
+                },
+                {
+                    "name": "Jobs",
+                    "url": "/docs/apps/build/jobs"
+                },
+                {
+                    "name": "Testing",
+                    "url": "/docs/apps/build/testing"
+                },
+                {
+                    "name": "TypeScript types",
+                    "url": "/docs/apps/build/types"
                 }
             ]
         },
@@ -1346,10 +1374,6 @@
                             "name": "BitBucket Release Tracker"
                         },
                         {
-                            "url": "/docs/apps/braze",
-                            "name": "Braze Import"
-                        },
-                        {
                             "url": "/docs/apps/replicator",
                             "name": "Event Replicator"
                         },
@@ -1704,10 +1728,6 @@
         {
             "name": "BitBucket Release Tracker",
             "url": "/apps/bitbucket-release-tracker"
-        },
-        {
-            "name": "Braze Importer",
-            "url": "/apps/braze"
         },
         {
             "name": "Currency Normalizer",

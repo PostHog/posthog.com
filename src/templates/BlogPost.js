@@ -122,6 +122,7 @@ export default function BlogPost({ data, pageContext, location }) {
                 filePath={filePath}
                 tableOfContents={tableOfContents}
                 breadcrumb={[{ name: 'Blog', url: '/blog' }, ...categories]}
+                hideSurvey
                 sidebar={
                     <BlogPostSidebar
                         categories={categories}
