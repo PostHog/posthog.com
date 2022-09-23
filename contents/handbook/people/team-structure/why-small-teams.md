@@ -15,17 +15,52 @@ As we are getting bigger, we anticipate that it will get harder for people to se
 
 We have therefore introduced Small Teams. These are designed to each operate like a startup. 
 
-## How it works
+## How it works at a high level
 
-* The overall goal is for a Small Team to be as close to its own startup as possible, with only a handful of centralized processes
+* The overall goal is for a Small Team is to own an area of the company and be as close to its own startup as possible, with only a handful of centralized processes
 * A Small Team should never be more than six people
-* A Small Team has an Accountable Person responsible for its performance - whoever is most appropriate depending on what the team is working on. This does _not_ mean the most senior person on the team.
+* A Small Team has an Team Lead responsible for its performance - whoever is most appropriate depending on what the team is working on. This does _not_ mean the most senior person on the team.
 * A Small Team must have (1) a customer (internal or external), (2) a mission and (3) metrics
 * There may be certain functions where at our current stage we don't need a Small Team yet.
 * Each Small Team runs its own retrospective + sprint every week. This must be done transparently.
 * A Small Team has the final call in which of its features get into production, with no need for external QA/control - within our existing release schedule.
 * A Small Team will, at some stage, be able to create its own pricing (too complex in immediate future to do this, however)
 * A Small Team is responsible for talking to users, documenting what they build., and ensuring their features are highlighted in releases
+
+## What does owning an area of the product mean?
+
+The product small team is responsible for everything related to their area, particularly:
+
+1. Usage
+2. Quality
+3. Revenue
+
+## What actions should the small teams be doing for their area?
+
+- Each quarter:
+  1. Create good quarterly OKRs
+  2. Create an ambitious vision for their area
+- During the quarter:
+  1. Maintain a prioritized roadmap to help them achieve their objectives
+  2. Speak to customers
+  3. Monitor relevant metrics including those covering Usage, Quality and Revenue
+  4. Triage and fix related bugs
+  5. Assist the support hero in answering related questions
+  6. Collaborate with other Small Teams such as marketing
+  7. Become power users of their area of Posthog and use PostHog in their processes
+
+## What is the role of the Team Lead?
+
+The team lead is overall responsible for ensuring the above happens. They should focus on enabling the team to solve these tasks together rather than trying to do it all themself.
+
+## How do engineers and product managers work together?
+
+With our engineering-led culture, the engineers on the small team are normally the team leads responsible for the product.
+
+We have a small number of product managers who support the product small teams in achieving their goals. This includes helping with prioritization, creating/updating dashboards, competitors analysis, speaking to customers etc. However, having product managers doesn't mean that the engineers can abdicate these responsibilities. The engineers should be the experts of the product they are building and their customers.
+
+Additionally, the product managers should pay particular attention to cross-team alignment and achieving the overall business goals.
+
  
 ## Small Teams list
 
