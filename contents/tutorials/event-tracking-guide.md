@@ -70,7 +70,6 @@ Third, once the library is installed and configured, events can be captured by c
 
 ```python
 def movie_played(movie):
-	movie.view_count += 1
 	posthog.capture(
 		'distinct id', 
 		'movie played', 
