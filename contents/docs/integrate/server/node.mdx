@@ -1,5 +1,5 @@
 ---
-title: Node.js library
+title: Node.js
 sidebarTitle: Node.js
 sidebar: Docs
 showTitle: true
@@ -12,6 +12,8 @@ features:
     featureFlags: true
     groupAnalytics: true
 ---
+
+import CohortExpansionSnippet from './snippets/cohort-expansion'
 
 If you're working with Node.js, the official `posthog-node` library is the simple way to integrate your software with PostHog. This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance. And in addition to event capture, [feature flags](https://posthog.com/docs/user-guides/feature-flags) are supported as well.
 
@@ -91,8 +93,6 @@ To set properties on your users via an event, you can leverage the event propert
 
 ##### $set
 
-**Example**
-
 ```node
 client.capture({
     distinctId: 'distinct id',
@@ -103,13 +103,9 @@ client.capture({
 })
 ```
 
-**Usage**
-
 When capturing an event, you can pass a property called `$set` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
 
 ##### $set_once
-
-**Example**
 
 ```node
 client.capture({
@@ -120,8 +116,6 @@ client.capture({
     },
 })
 ```
-
-**Usage**
 
 `$set_once` works just like `$set`, except that it will **only set the property if the user doesn't already have that property set**.
 
@@ -291,6 +285,7 @@ await client.getAllFlags('distinct id', {groups: {}, personProperties: {'is_auth
 
 Sometimes, performance might matter to you so much that you never want an HTTP request roundtrip delay when computing flags. In this case, you can set the `only_evaluate_locally` parameter to true, which tries to compute flags only with the properties it has. If it fails to compute a flag, it returns `None`, instead of going to PostHog's servers to get the value.
 
+<CohortExpansionSnippet />
 
 #### Reloading feature flags
 

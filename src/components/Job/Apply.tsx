@@ -9,8 +9,6 @@ import Confetti from 'react-confetti'
 import GitHubButton from 'react-github-btn'
 import { NewsletterForm } from 'components/NewsletterForm'
 import NotProductIcons from 'components/NotProductIcons'
-import { createPortal } from 'react-dom'
-
 const allowedFileTypes = ['application/pdf']
 
 interface IResumeComponentProps {
@@ -133,20 +131,28 @@ const Form = ({ setSubmitted, info, id }) => {
                 <span className="font-bold">Bolded fields</span> are required
             </p>
             <form onSubmit={handleSubmit}>
-                <div className="grid grid-cols-1 gap-y-3 ">
+                <div className="grid grid-cols-2 gap-3">
                     {info?.applicationFormDefinition?.sections?.map(({ fields }) => {
                         return fields.map(({ field, isRequired, descriptionPlain }) => {
                             const required = isRequired
+                            const type = field?.type?.toLowerCase()
                             return (
-                                <div key={field?.path}>
+                                <div
+                                    className={
+                                        type === 'string' || type === 'email'
+                                            ? 'sm:col-span-1 col-span-2'
+                                            : 'col-span-2'
+                                    }
+                                    key={field?.path}
+                                >
                                     <label
                                         className={`opacity-70 mb-1 inline-block ${required ? 'font-bold' : ''}`}
                                         htmlFor={field?.title}
                                     >
                                         {field?.title}
                                     </label>
-                                    {components[field?.type?.toLowerCase()] &&
-                                        components[field?.type?.toLowerCase()]({
+                                    {components[type] &&
+                                        components[type]({
                                             title: field?.title,
                                             required,
                                             path: field?.path,
@@ -190,7 +196,10 @@ export default function Apply({ id, info }) {
                     <Confetti recycle={false} numberOfPieces={1000} />
                 </div>
                 <div onClick={() => setModalOpen(false)} className="flex flex-start justify-center absolute w-full p-4">
-                    <div className="max-w-xl bg-white rounded-md relative" onClick={(e) => e.stopPropagation()}>
+                    <div
+                        className="max-w-xl bg-white dark:bg-black rounded-md relative"
+                        onClick={(e) => e.stopPropagation()}
+                    >
                         <button
                             onClick={() => setModalOpen(false)}
                             className="absolute right-4 top-4 bg-tan rounded-full w-8 h-8 text-black flex items-center justify-center group active:scale-[.90] focus:ring-0"
@@ -240,7 +249,7 @@ export default function Apply({ id, info }) {
                             <p className="m-0 mb-3 text-sm">
                                 This code is our token of appreciation for taking the time to apply.
                             </p>
-                            <div className="rounded-md bg-tan border border-dashed border-gray-accent-light py-2 px-3 flex justify-between items-center mb-4 md:max-w-[210px] w-full">
+                            <div className="rounded-md bg-tan dark:bg-primary border border-dashed border-gray-accent-light py-2 px-3 flex justify-between items-center mb-4 md:max-w-[210px] w-full">
                                 <p className="font-semibold font-code m-0">{code}</p>
                                 <button
                                     disabled={copied}
@@ -299,7 +308,7 @@ export default function Apply({ id, info }) {
                         <div className="mx-6 md:mx-12 py-6 border-t border-dashed border-gray-accent-light">
                             <h4 className="mb-0">Be our next star?</h4>
                             <aside className="float-right h-[28px] w-[125px] ml-8">
-                                <GitHubButton />
+                                <GitHubButton href="https://github.com/PostHog/posthog" />
                             </aside>
                             <p className="text-sm mb-0">
                                 We'd love if you starred our repo on GitHub (if you haven't already)!

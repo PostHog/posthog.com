@@ -9,10 +9,11 @@ require('prismjs/components/prism-java')
 require('prismjs/components/prism-swift')
 require('prismjs/components/prism-dart')
 require('prismjs/components/prism-elixir')
+require('prismjs/components/prism-rust')
 
 type LanguageMap = {
     [key: string]: {
-        language: Language | 'html' | 'xml' | 'shell' | 'php' | 'ruby' | 'swift' | 'dart' | 'elixir' | 'java'
+        language: Language | 'html' | 'xml' | 'shell' | 'php' | 'ruby' | 'swift' | 'dart' | 'elixir' | 'java' | 'rust'
         label: React.ReactNode
     }
 }
@@ -82,6 +83,10 @@ const languageMap: LanguageMap = {
         language: 'elixir',
         label: 'Elixir',
     },
+    segment: {
+        language: 'javascript',
+        label: 'Segment',
+    },
     shell: {
         language: 'shell',
         label: (
@@ -143,6 +148,10 @@ const languageMap: LanguageMap = {
     yaml: {
         language: 'yaml',
         label: 'YAML',
+    },
+    rust: {
+        language: 'rust',
+        label: 'Rust',
     },
     python: {
         language: 'python',

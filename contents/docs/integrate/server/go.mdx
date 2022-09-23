@@ -1,5 +1,5 @@
 ---
-title: Go library
+title: Go
 sidebarTitle: Go
 sidebar: Docs
 showTitle: true
@@ -12,6 +12,8 @@ features:
     featureFlags: true
     groupAnalytics: true
 ---
+
+import CohortExpansionSnippet from './snippets/cohort-expansion'
 
 This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance.
 
@@ -296,6 +298,7 @@ featureVariants, _ := client.GetAllFlags(FeatureFlagPayloadNoKey{
 
 Sometimes, performance might matter to you so much that you never want an HTTP request roundtrip delay when computing flags. In this case, you can set the OnlyEvaluateLocally parameter to true, which tries to compute flags only with the properties it has. If it fails to compute a flag, it returns None, instead of going to PostHog's servers to get the value.
 
+<CohortExpansionSnippet />
 
 #### Reloading feature flags
 

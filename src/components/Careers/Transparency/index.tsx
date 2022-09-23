@@ -52,7 +52,7 @@ const TransparencyFeature = ({ image, title, children, className = '' }: Transpa
 
 export const Transparency = () => {
     return (
-        <div className="careers-transparency pt-12 md:pt-24 text-center" id="transparency">
+        <div className="careers-transparency pt-12 text-center" id="transparency">
             <Structure.Section width="4xl">
                 <Structure.SectionHeader
                     title="The most transparent company, ever"

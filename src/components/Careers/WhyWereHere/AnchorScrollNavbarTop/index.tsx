@@ -107,8 +107,8 @@ export const AnchorScrollNavbarTop = ({ className = '' }: AnchorScrollNavbarTopP
     }, [])
 
     const navbarLinks = inPageLinks.map(({ label, section }) => (
-        <li key={section} className="relative leading-none m-0">
-            <ButtonLink section={section} currentSection={currentSection}>
+        <li key={label} className="relative leading-none m-0">
+            <ButtonLink section={section} currentSection={currentSection} key={section}>
                 {label}
             </ButtonLink>
         </li>

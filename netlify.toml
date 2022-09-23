@@ -871,7 +871,7 @@
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/handbook/engineering/feature-parity"
-    to = "/handbook/strategy/strategy"
+    to = "/handbook/strategy/overview"
 
 # Manually Added: 2021-11-04
 [[redirects]]
@@ -897,11 +897,6 @@
 [[redirects]]
     from = "/docs/plugins/maxmind"
     to = "/apps"
-
-# Manually Added: 2021-11-04
-[[redirects]]
-    from = "/about"
-    to = "/handbook/company/story"
 
 # Manually Added: 2021-11-04
 [[redirects]]
@@ -2208,6 +2203,7 @@
 [[redirects]]
     from = "/docs/data-model"
     to = "/docs/how-posthog-works/data-model"
+    force = true
 
 # Added: 2022-08-25
 [[redirects]]
@@ -2236,5 +2232,21 @@
 
 # Added: 2022-09-11
 [[redirects]]
+    from = "/handbook/strategy/strategy"
+    to = "/handbook/strategy/overview"
+
+# Added: 2022-09-12
+[[redirects]]
     from = "/handbook/people/team-structure/app-east/objectives"
     to = "/handbook/people/team-structure/app-east"
+
+
+# Added: 2022-09-16
+[[redirects]]
+    from = "/handbook/strategy/overview"
+    to = "/handbook/strategy/strategy"
+    
+# Added: 2022-09-20
+[[redirects]]
+    from = "/docs/integrate/client/browser-extension"
+    to = "/docs/integrate/browser-extension"

@@ -26,7 +26,7 @@ We found two main session analytics use cases:
 
 We realized we don't currently support the first use case fully. The only session-based analysis you can do is session duration distribution and even then it has the fundamental problem of how sessions are computed. Not all products define sessions the same way, and further, we had edge cases such as server-side events being sent asynchronously for a user.
 
-For the second case, sessions is not the best way to solve the problem. Further, all the work we are doing around Paths and Quantitative Analysis (see [Diagnosing Causes](/handbook/strategy/strategy#milestone-2-early-august-onwards)) will actually solve for this use case and provide significantly more value. In particular, you'll get the same useful qualitative information, but the quantitative overlay will greatly reduce bias (and effort).
+For the second case, sessions is not the best way to solve the problem. Further, all the work we are doing around Paths and Quantitative Analysis (see [Diagnosing Causes](/handbook/strategy/overview#milestone-2-early-august-onwards)) will actually solve for this use case and provide significantly more value. In particular, you'll get the same useful qualitative information, but the quantitative overlay will greatly reduce bias (and effort).
 
 ### What's new?
 

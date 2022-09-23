@@ -66,6 +66,7 @@ When you initially respond to an issue in Zendesk add a "tag" with the following
 * Docs confusion _either missing or confusing_.
 * App Performance
 * Ingestion _(either problems and not working or performance)_.
+* Insights
 * Data integrity
 * Deployments/Setup
 * Deployments/Upgrading
@@ -143,7 +144,7 @@ There are a few different ways that support tickets can be created in Zendesk:
 
 _User Slack_
 
-Support requests posted in #community-support are monitored by the [Support Hero](/handbook/engineering/support-hero), who then creates tickets in Zendesk by reacting to the message with the :ticket: trigger emoji. Once created, the Support Hero will triage the request in either Zendesk or directly in Slack via Help, and assign it a priority and assignee.
+Support requests posted in #community-support are monitored by the [Support Hero](/handbook/engineering/support-hero), who then creates tickets in Zendesk using the Zendesk app. Once created, the Support Hero will triage the request in either Zendesk or directly in Slack via Help, and assign it a priority and assignee.
 
 _Dedicated Support Channels_
 
