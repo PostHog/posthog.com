@@ -1,6 +1,6 @@
 ---
 date: 2022-09-26
-title: 'Array 1.40.0: Whats new in PostHog?'
+title: "Array 1.40.0: Whats new in PostHog?"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -18,49 +18,50 @@ Want to know more about what we're up to? [Subscribe to HogMail, our newsletter]
 
 **Release highlights:**
 
-- [New: Lemonized Calendar and Date components](#new-lemonized-calendar-and-date-components)
-- [New: Annotations Revamp](#new-annotations-revamp)
-- [New: Personal Modal Revamp](#new-person-modal-revamp)
-- [New: Recordings domain settings](#new-recordings-domain-settings)
-- [Improved: Retention insight update](#improved-retention-insight-update)
+- New: [Lemonized Calendar and Date components](#new-lemonized-calendar-and-date-components)
+- New: [Annotations Revamp](#new-annotations-revamp)
+- New: [Personal Modal Revamp](#new-person-modal-revamp)
+- New: [Recordings domain settings](#new-recordings-domain-settings)
+- Improved: [Retention insight update](#improved-retention-insight-update)
 
 ### New: Lemonized calendar and date components
 
 ![lemon calendar](../images/blog/array/1-40-0-lemon-calendar.png)
 
-We released some long overdue changes to our date components. Following on the heels of our refreshing UI update, we've added new calendar and
+We released some long overdue changes to our date components. Following our refreshed UI update, we've added new calendar and
 date handling components. This is part of our ongoing effort in updating all of the UI with components that provide a unified experience. 
 
 ### New: Annotations revamp
 
 ![annotation](../images/blog/array/1-40-0-annotation-modal.png)
 
-Have you had trouble with annotations recently? We've overhauled annotations with a new look and new interface. This change resolves several layout and interaction issues that had previously been happening on annotations. We've also touched up the annotations page to highlight important information!
+We've overhauled annotations with a new look and new interface. This change resolves several layout and interaction issues that had previously been happening on annotations. We've also touched up the annotations page to highlight important information.
 
 ### New: Person modal revamp
 
 ![person modal](../images/blog/array/1-40-0-person-modal.png)
 
-Clicking on datapoints is one of our favorite ways to analyze the users behind the numbers. The new person modal now looks and feels like the rest of the app. We've made it easier for you to search and perform actions on those lists of users.
+Clicking on datapoints is one of our favorite ways to analyze the users behind the numbers. The new person modal now looks and feels like the rest of the app. We've made it easier for you to search and perform actions on those lists of users, too.
 
 ### New: Recordings domain settings
 
-Struggling with keeping toolbar and recordings settings separate? Us too.. The settings for managing valid domains for recordings and toolbar are now split so that they can be adjusted independently!
+Struggling with keeping toolbar and recordings settings separate? Us too... The settings for managing valid domains for recordings and toolbar are now split so that they can be adjusted independently.
 
 ### Improved: Retention insight update
 
 ![retention insight](../images/blog/array/1-40-0-retention.png)
 
-Another update to our UI! Nothing functionally changed here but once again we cleaned up the UI on the retention insight to keep up with all the styling updates we've had across the board. 
+Another update to our UI! Nothing functionally changed here, but once again we cleaned up the UI on the retention insight to keep up with all the styling updates we've had across the board. 
 
 ### Other improvements & fixes
+
 Version 1.40 also adds hundreds of other improvements and fixes, including...
 
-- **Improvement:** Filter defaults can now be set to apply on all new insights (#11589)
-- **Improvement:** Event volume and query counts are now emphasized in data management (#11806)
-- **Improvement:** Profile pictures now will show more information on hover (#11849)
-- **Fix**: Fixed an issue where group properties weren't showing up on search previously (#11813)
-- **Fix**: Fixed an issue that was causing property statistics to be calculated infrequently (#11815)
+- **Improvement:** Filter defaults can now be set to apply on all new insights ([#11589](https://github.com/PostHog/posthog/pull/11589))
+- **Improvement:** Event volume and query counts are now emphasized in data management ([#11806](https://github.com/PostHog/posthog/pull/11806))
+- **Improvement:** Profile pictures now will show more information on hover ([#11849](https://github.com/PostHog/posthog/pull/11849))
+- **Fix**: Fixed an issue where group properties weren't showing up on search previously ([#11813](https://github.com/PostHog/posthog/pull/11813))
+- **Fix**: Fixed an issue that was causing property statistics to be calculated infrequently ([#11815](https://github.com/PostHog/posthog/pull/11815))
 
 View the commit log in GitHub for a full history of changes: [`release-1.39.0...release-1.40.0`](https://github.com/PostHog/posthog/compare/release-1.39.0...release-1.40.0).
 
@@ -86,8 +87,6 @@ Want to join us in helping make more products successful? We're currently hiring
 - [Full Stack Engineer](https://posthog.com/careers/full-stack-engineer)
 
 Curious about what it's like to work at PostHog? Check out our [careers page](https://posthog.com/careers) for more info about our all-remote team and transparent culture. Don’t see a specific role listed? That doesn't mean we won't have a spot for you. [Send us a speculative application!](mailto:careers@posthog.com)
-
-<hr />
 
 _Follow us on [Twitter](https://twitter.com/PostHog) or [LinkedIn](https://linkedin.com/company/posthog) for more PostHog goodness!_
 
