@@ -116,7 +116,7 @@ In addition to the highlights listed above, we also merged a bunch of PRs to imp
 
 ## PostHog News
 
-Welcome [Chris Clark](https://posthog.com/handbook/company/team#chris-clark-product-designer)! Chris joined our Core Experience Team to help us level up our product experience! You can already see a ton of his work in our new funnels feature. Chris is pro-pinneaple on pizza (🍍 on 🍕) "but generally accepting of all pizza views and requirements". 
+Welcome Chris Clark! Chris joined our Core Experience Team to help us level up our product experience! You can already see a ton of his work in our new funnels feature. Chris is pro-pinneaple on pizza (🍍 on 🍕) "but generally accepting of all pizza views and requirements". 
 
 > I once impulse-purchased a baby goose.
 
