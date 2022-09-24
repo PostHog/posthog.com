@@ -1,3 +1,4 @@
+import { Placement } from '@popperjs/core'
 import React, { useState } from 'react'
 import { usePopper } from 'react-popper'
 
@@ -6,15 +7,18 @@ export default function Tooltip({
     title,
     offset,
     className = '',
+    placement = 'bottom',
 }: {
     children: JSX.Element
     title: string
     offset?: [number, number]
     className?: string
+    placement?: Placement
 }) {
     const [referenceElement, setReferenceElement] = useState(null)
     const [popperElement, setPopperElement] = useState(null)
     const { styles, attributes } = usePopper(referenceElement, popperElement, {
+        placement,
         modifiers: [
             {
                 name: 'offset',

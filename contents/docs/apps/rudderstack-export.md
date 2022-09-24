@@ -29,6 +29,10 @@ Once you've added PostHog as a source, make a note of the `write-key` field and 
 2. Search for 'Rudderstack' and select the app, press Install.
 3. Follow the on-screen steps to configure the app, entering your `write-key` and server URL information.
 
+### Configuration
+
+<AppParameters />
+
 ### Is the source code for this app available?
 
 PostHog is open-source and so are all apps on the platform. The [source code for the RudderStack Export app](https://github.com/rudderlabs/rudderstack-posthog-plugin) is available on GitHub.

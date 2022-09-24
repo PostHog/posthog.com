@@ -26,7 +26,6 @@
   to = "/careers"
   status = 200
 
-
 [[redirects]]
     from = "/docs/integrations/android-integration"
     to = "/docs/libraries/android"
@@ -704,11 +703,6 @@
     from = "/docs/self-host/deploy/proxy"
     to = "/docs/cloud/proxy"
 
-# Added: 2021-08-05
-[[redirects]]
-    from = "/docs/data-model"
-    to = "/docs/data-model"
-
 # Added: 2021-08-12
 [[redirects]]
     from = "/handbook/people/hiring-process/hiring-process"
@@ -877,7 +871,7 @@
 # Manually Added: 2021-11-04
 [[redirects]]
     from = "/handbook/engineering/feature-parity"
-    to = "/handbook/strategy/strategy"
+    to = "/handbook/strategy/overview"
 
 # Manually Added: 2021-11-04
 [[redirects]]
@@ -903,11 +897,6 @@
 [[redirects]]
     from = "/docs/plugins/maxmind"
     to = "/apps"
-
-# Manually Added: 2021-11-04
-[[redirects]]
-    from = "/about"
-    to = "/handbook/company/story"
 
 # Manually Added: 2021-11-04
 [[redirects]]
@@ -1020,41 +1009,6 @@
 [[redirects]]
     from = "/product-features/plugins"
     to = "/apps"
-    status = 301
-
-[[redirects]]
-    from = "/product/funnels"
-    to = "/apps/funnels"
-    status = 301
-
-[[redirects]]
-    from = "/product/trends"
-    to = "/apps/trends"
-    status = 301
-
-[[redirects]]
-    from = "/product/session-recording"
-    to = "/apps/session-recording"
-    status = 301
-
-[[redirects]]
-    from = "/product/feature-flags"
-    to = "/apps/feature-flags"
-    status = 301
-
-[[redirects]]
-    from = "/product/heatmaps"
-    to = "/apps/heatmaps"
-    status = 301
-
-[[redirects]]
-    from = "/product/experimentation-suite"
-    to = "/apps/experimentation-suite"
-    status = 301
-
-[[redirects]]
-    from = "/product/collaboration"
-    to = "/apps/collaboration"
     status = 301
 
 [[redirects]]
@@ -1193,7 +1147,7 @@
     to = "/tutorials/how-to-segment-users"
 
 [build]
-    command = "GATSBY_DEPLOY_PRIME_URL=$DEPLOY_PRIME_URL gatsby build"
+    command = "GATSBY_DEPLOY_PRIME_URL=$DEPLOY_PRIME_URL GATSBY_CONTEXT=$CONTEXT gatsby build"
 
 # Added: 2022-02-04
 [[redirects]]
@@ -2244,3 +2198,54 @@
 [[redirects]]
     from = "/docs/user-guides/subscriptions"
     to = "/manual/notifications-and-alerts"
+
+# Added: 2022-08-24
+[[redirects]]
+    from = "/docs/data-model"
+    to = "/docs/how-posthog-works/data-model"
+    force = true
+
+# Added: 2022-08-25
+[[redirects]]
+    from = "/docs/self-host/architecture"
+    to = "/docs/how-posthog-works"
+
+# Added: 2022-08-29
+[[redirects]]
+    from = "/handbook/engineering/databases"
+    to = "/docs/how-posthog-works/ingestion-pipeline"
+
+# Added: 2022-08-29
+[[redirects]]
+    from = "/docs/architecture/ingestion-pipeline"
+    to = "/docs/how-posthog-works/ingestion-pipeline"
+
+# Added: 2022-09-01
+[[redirects]]
+    from = "/blog/the-posthog-array-1-39-1"
+    to = "/blog/the-posthog-array-1-39-0"
+    
+# Added: 2022-09-02    
+[[redirects]]
+    from = "/product/experimentation"
+    to = "/product/experimentation-suite"
+
+# Added: 2022-09-11
+[[redirects]]
+    from = "/handbook/strategy/strategy"
+    to = "/handbook/strategy/overview"
+
+# Added: 2022-09-12
+[[redirects]]
+    from = "/handbook/people/team-structure/app-east/objectives"
+    to = "/handbook/people/team-structure/app-east"
+
+# Added: 2022-09-23
+[[redirects]]
+    from = "/docs/integrate/browser-extension"
+    to = "/docs/integrate/client/browser-extension"
+
+# Added: 2022-09-16
+[[redirects]]
+    from = "/handbook/strategy/overview"
+    to = "/handbook/strategy/strategy"

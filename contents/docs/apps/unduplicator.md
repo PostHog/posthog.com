@@ -36,6 +36,10 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 4. Select the Unduplicator app, press 'Install'.
 5. Once the app is installed, press the blue button to configure the app and select which of the de-duplication methods you want to use (described above).
 
+### Configuration
+
+<AppParameters />
+
 ### Is the source code for this app available?
 
 PostHog is open source and so are all apps on the platform. The [source code for the Unduplicator app](https://github.com/paolodamico/posthog-app-unduplicates) is available on GitHub.

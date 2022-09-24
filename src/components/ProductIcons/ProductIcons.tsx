@@ -2,31 +2,31 @@ import React from 'react'
 
 export const ProductIcons = {
     abTesting: (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
+        <svg width="100%" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
             <path d="M12 22h-1.25V2H12v20Zm-8.75-2.5v-15c0-.345.28-.625.625-.625h6.875c.345 0 .625.28.625.625v15c0 .345-.28.625-.625.625H3.875a.625.625 0 0 1-.625-.625Zm2.5-13.125a.625.625 0 1 0-1.25 0 .625.625 0 0 0 1.25 0Zm0 1.875a.625.625 0 1 0-1.25 0 .625.625 0 0 0 1.25 0Zm-1.25 10h5.625V17H4.5v1.25Zm0-2.5h5.625V14.5H4.5v1.25Zm0-2.5h5.625V12H4.5v1.25Z" />
             <path opacity=".6" d="M14.5 5.125v5h5v-5h-5Zm6.25-1.25v7.5h-7.5v-7.5h7.5Z" />
             <path opacity=".7" d="M13.25 12.625h7.5v7.5h-7.5v-7.5Z" />
         </svg>
     ),
     actions: (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
+        <svg width="100%" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
             <path d="m13.659 3-1.332 7.6h5.427l-6.849 10.306 1.577-7.649H7" />
         </svg>
     ),
     analytics: (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
+        <svg width="100%" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
             <path opacity=".5" d="M7.706 19.647a2.353 2.353 0 1 1-4.706 0v-5.882a2.353 2.353 0 1 1 4.706 0v5.882Z" />
             <path d="M14.766 19.647a2.353 2.353 0 1 1-4.706 0V4.353a2.353 2.353 0 1 1 4.706 0v15.294Z" />
             <path opacity=".75" d="M21.824 19.647a2.353 2.353 0 1 1-4.706 0v-9.412a2.353 2.353 0 1 1 4.706 0v9.412Z" />
         </svg>
     ),
     annotations: (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
+        <svg width="100%" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
             <path d="M20 12a.889.889 0 0 1-.889.889h-4.966l3.514 3.508a.895.895 0 0 1-1.262 1.262l-3.508-3.514v4.966a.889.889 0 1 1-1.778 0v-4.966L7.603 17.66a.895.895 0 0 1-1.262-1.262l3.514-3.508H4.889a.889.889 0 1 1 0-1.778h4.966L6.34 7.603a.895.895 0 0 1 1.262-1.262l3.508 3.514V4.889a.889.889 0 1 1 1.778 0v4.966l3.508-3.514a.895.895 0 0 1 1.262 1.262l-3.514 3.508h4.966c.491 0 .889.398.889.889Z" />
         </svg>
     ),
     api: (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
+        <svg width="100%" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
             <path
                 opacity=".7"
                 d="M19.576 4H4.423A2.415 2.415 0 0 0 2 6.423v10.924a2.415 2.415 0 0 0 2.423 2.423h15.154A2.415 2.415 0 0 0 22 17.347V6.424A2.43 2.43 0 0 0 19.575 4Zm1.542 13.348c0 .859-.683 1.542-1.542 1.542H4.423a1.533 1.533 0 0 1-1.542-1.542V8.274H21.12v9.074Zm0-9.955H2.881v-.97c0-.858.683-1.54 1.542-1.54h15.154c.859 0 1.542.682 1.542 1.54v.97Z"
@@ -38,7 +38,7 @@ export const ProductIcons = {
         </svg>
     ),
     appLibrary: (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
+        <svg width="100%" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
             <path
                 opacity=".8"
                 d="M4.914 2h3.171C9.695 2 11 3.61 11 4.914v3.172a2.914 2.914 0 0 1-2.914 2.913H4.914C3.304 11 2 9.39 2 8.086V4.914A2.914 2.914 0 0 1 4.914 2Z"
@@ -55,7 +55,7 @@ export const ProductIcons = {
         </svg>
     ),
     cloud: (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
+        <svg width="100%" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
             <path
                 fillRule="evenodd"
                 clipRule="evenodd"
@@ -64,7 +64,7 @@ export const ProductIcons = {
         </svg>
     ),
     cohorts: (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
+        <svg width="100%" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
             <path d="M21 11.914A8.912 8.912 0 0 0 12.086 3v8.914H21Z" />
             <path
                 opacity=".5"
@@ -73,7 +73,7 @@ export const ProductIcons = {
         </svg>
     ),
     correlationAnalysis: (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
+        <svg width="100%" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
             <path
                 fillRule="evenodd"
                 clipRule="evenodd"
@@ -92,7 +92,7 @@ export const ProductIcons = {
         </svg>
     ),
     dashboards: (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
+        <svg width="100%" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
             <path
                 opacity=".5"
                 d="M14.668 7.36c-.884-.23-1.767-.36-2.684-.36C6.484 7 2 11.485 2 16.984c0 .294.262.556.556.556a.573.573 0 0 0 .556-.556c0-4.91 3.994-8.904 8.904-8.904.819 0 1.604.098 2.39.327.295.098.59-.098.688-.393.065-.261-.131-.59-.426-.654Z"
@@ -111,7 +111,7 @@ export const ProductIcons = {
         </svg>
     ),
     dataManagement: (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
+        <svg width="100%" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
             <path
                 fillRule="evenodd"
                 clipRule="evenodd"
@@ -124,7 +124,7 @@ export const ProductIcons = {
         </svg>
     ),
     dataWarehouse: (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
+        <svg width="100%" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
             <path
                 fillRule="evenodd"
                 clipRule="evenodd"
@@ -139,7 +139,7 @@ export const ProductIcons = {
         </svg>
     ),
     eventAutocapture: (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
+        <svg width="100%" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
             <path
                 fillRule="evenodd"
                 clipRule="evenodd"
@@ -154,7 +154,7 @@ export const ProductIcons = {
         </svg>
     ),
     eventPipelines: (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
+        <svg width="100%" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
             <path
                 opacity=".85"
                 d="M22.429 15.997a.227.227 0 0 0 .016-.031l.023-.042c.006-.014.009-.028.013-.042.003-.013.008-.024.01-.037a.43.43 0 0 0 0-.166c-.002-.012-.007-.024-.01-.037-.004-.014-.007-.029-.013-.042a.289.289 0 0 0-.023-.041l-.016-.032a.442.442 0 0 0-.053-.066l-1.117-1.117a.425.425 0 1 0-.602.602l.39.39h-2.69l-5.746-4.256V8.713h5.637c.587 0 1.064-.477 1.064-1.064V3.564c0-.587-.477-1.064-1.064-1.064H6.123c-.587 0-1.064.477-1.064 1.064v4.084c0 .587.477 1.064 1.064 1.064h5.636l.001 2.368-5.746 4.256H4.043a.425.425 0 0 0-.426.425v4.9l-.39-.39a.425.425 0 1 0-.602.602l1.117 1.116a.424.424 0 0 0 .601 0l1.117-1.116a.425.425 0 1 0-.601-.602l-.39.39v-4.474h1.546l5.917 4.384a.426.426 0 0 0 .507 0l5.918-4.384h2.69l-.39.39a.425.425 0 1 0 .601.602l1.117-1.117a.397.397 0 0 0 .053-.065ZM5.91 7.65V3.564c0-.116.097-.213.213-.213h12.125c.116 0 .213.097.213.213v4.084a.215.215 0 0 1-.213.213H6.123a.215.215 0 0 1-.213-.212Zm6.276 12.05L6.87 15.761l5.316-3.938 5.316 3.938-5.316 3.938Z"
@@ -163,7 +163,7 @@ export const ProductIcons = {
         </svg>
     ),
     events: (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
+        <svg width="100%" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
             <path
                 opacity=".7"
                 d="M12 6.2c-5.294 0-9 5.824-9 5.824s2.7 5.823 9 5.823c6.353 0 9-5.823 9-5.823S17.347 6.2 12 6.2Zm0 9.529a3.682 3.682 0 0 1-3.705-3.705A3.682 3.682 0 0 1 12 8.318a3.682 3.682 0 0 1 3.705 3.706A3.682 3.682 0 0 1 12 15.729Z"
@@ -172,12 +172,12 @@ export const ProductIcons = {
         </svg>
     ),
     experiments: (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
+        <svg width="100%" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
             <path d="M13.934 10.505v-6.16c.583-.049 1.043-.534 1.043-1.205 0-.63-.509-1.14-1.14-1.14h-3.676c-.623 0-1.132.51-1.132 1.222 0 .589.46 1.075 1.043 1.124v6.16a5.411 5.411 0 0 0-3.502 5.07C6.57 18.567 9.012 21 12.003 21a5.43 5.43 0 0 0 4.47-8.505 5.406 5.406 0 0 0-2.539-1.99ZM9.835 3.14c0-.179.146-.333.323-.333h3.679c.186 0 .331.154.331.414a.326.326 0 0 1-.331.323h-3.679c-.177 0-.323-.146-.323-.404Zm.76 8.037a.408.408 0 0 0 .283-.388V4.352h2.247v6.437c0 .177.113.331.275.388a4.585 4.585 0 0 1 2.903 2.748 7.683 7.683 0 0 0-.76-.032c-1.705 0-2.57.412-3.403.808-.793.38-1.536.745-3.064.745a6.495 6.495 0 0 1-1.665-.194 4.575 4.575 0 0 1 3.184-4.075Z" />
         </svg>
     ),
     featureFlags: (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
+        <svg width="100%" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
             <path d="M6.48 11h11.04c2.2 0 3.979-1.8 3.979-3.98 0-2.2-1.8-3.98-3.98-3.98H6.48c-2.2 0-3.979 1.8-3.979 3.98C2.5 9.2 4.3 11 6.48 11Zm11.04-6.22a2.25 2.25 0 0 1 2.24 2.24c0 1.22-1.02 2.24-2.24 2.24a2.25 2.25 0 0 1-2.24-2.24c0-1.22 1-2.24 2.24-2.24Z" />
             <path
                 opacity=".5"
@@ -186,14 +186,14 @@ export const ProductIcons = {
         </svg>
     ),
     funnels: (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
+        <svg width="100%" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
             <path d="M2.635 19.368a2.182 2.182 0 1 0 4.365 0V5.182a2.182 2.182 0 1 0-4.365 0v14.186Z" />
             <path opacity=".75" d="M9.82 19.368a2.182 2.182 0 1 0 4.364 0v-8.73a2.182 2.182 0 1 0-4.364 0v8.73Z" />
             <path opacity=".5" d="M16.635 19.368a2.182 2.182 0 1 0 4.365 0v-5.456a2.182 2.182 0 1 0-4.365 0v5.456Z" />
         </svg>
     ),
     groupAnalytics: (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
+        <svg width="100%" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
             <path
                 opacity=".5"
                 d="M4.662 13.963c.054 0 .106.006.157.01v-3.96c-.052.005-.103.011-.157.011-.051 0-.102-.005-.153-.01v3.957c.05-.004.102-.008.153-.008ZM12.155 8.429V5.632c-.051.004-.103.008-.155.008-.053 0-.105-.004-.156-.008v2.797c.052-.003.103-.008.156-.008.052 0 .103.005.155.008Z"
@@ -228,7 +228,7 @@ export const ProductIcons = {
         </svg>
     ),
     heatmaps: (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
+        <svg width="100%" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
             <path opacity=".7" d="M17.055 12.72a2.965 2.965 0 1 0 0-5.93 2.965 2.965 0 0 0 0 5.93Z" />
             <path d="M10.782 18.88a3.992 3.992 0 1 0 0-7.984 3.992 3.992 0 0 0 0 7.983Z" />
             <path opacity=".5" d="M5.992 11.58a2.167 2.167 0 1 0 0-4.334 2.167 2.167 0 0 0 0 4.334Z" />
@@ -238,7 +238,7 @@ export const ProductIcons = {
         </svg>
     ),
     lifecycle: (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
+        <svg width="100%" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
             <path d="M3 4a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v7H3V4Z" />
             <path d="M3 11h5v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-9Z" fillOpacity=".5" />
             <path d="M9.502 7a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v4h-5V7Z" />
@@ -250,7 +250,7 @@ export const ProductIcons = {
         </svg>
     ),
     notifications: (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
+        <svg width="100%" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
             <path
                 opacity=".5"
                 d="M18.897 10.92v7.67a.694.694 0 0 1-.692.692H5.744a.694.694 0 0 1-.693-.692V7.513c0-.381.311-.692.693-.692h7.67a4.876 4.876 0 0 1-.055-.693c0-.235.022-.466.055-.692h-7.67a2.08 2.08 0 0 0-2.077 2.077V18.59a2.08 2.08 0 0 0 2.077 2.077h12.461a2.08 2.08 0 0 0 2.077-2.077v-8.088c-.43.205-.895.347-1.385.417Z"
@@ -259,7 +259,7 @@ export const ProductIcons = {
         </svg>
     ),
     openSource: (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
+        <svg width="100%" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
             <path d="M12 10.576a1.424 1.424 0 0 0-.294 2.818v7.599c.098.004.196.008.295.008.099 0 .197-.004.294-.007v-7.6a1.425 1.425 0 0 0-.294-2.818Z" />
             <path
                 opacity=".7"
@@ -268,7 +268,7 @@ export const ProductIcons = {
         </svg>
     ),
     pathAnalysis: (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
+        <svg width="100%" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
             <path d="M17.899 11.632h-1.563a2.456 2.456 0 0 1-1.687-.665l-2.597-2.435-1.897-1.778a3.614 3.614 0 0 0-2.481-.981H6.11c.053.19.08.387.078.584.001.199-.025.397-.078.587h1.563c.624 0 1.226.238 1.68.666l2.697 2.529 1.797 1.684c.673.631 1.56.982 2.482.982h1.563a2.134 2.134 0 0 1-.07-.588c0-.197.026-.394.076-.585Z" />
             <path
                 opacity=".5"
@@ -287,7 +287,7 @@ export const ProductIcons = {
         </svg>
     ),
     persons: (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
+        <svg width="100%" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
             <path
                 opacity=".7"
                 d="M12.062 13.365s1.24-.02 1.164-3.3c-.078-3.28 1.432-3.818 1.995-4.03 1.642-.617 2.464.373 2.464.373 1.9-.176 2.42 1.901 2.2 4.263-.22 2.364 1.056 2.733 1.056 2.733-.891.911-2.772.854-2.772.854v.84c0 .163.083.316.22.405l.057.035c.66.345 2.015.704 2.042.718.444.12.874.282 1.287.485.493.231.827.704.88 1.245v1.93h-6.15v-2.041a2.444 2.444 0 0 0-.88-1.897c-.27-.22-.542-.44-.813-.633a.487.487 0 0 0 .062-.247v-.82c-2.168.017-2.812-.913-2.812-.913Z"
@@ -296,7 +296,7 @@ export const ProductIcons = {
         </svg>
     ),
     posthogMonochrome: (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
+        <svg width="100%" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
             <path
                 d="M6.105 12a.788.788 0 0 1-1.412-.7v-.001a.788.788 0 0 1 1.412.7ZM6.105 16.432a.788.788 0 1 1-1.412-.7.788.788 0 1 1 1.412.7Z"
                 fillOpacity=".25"
@@ -317,7 +317,7 @@ export const ProductIcons = {
         </svg>
     ),
     projects: (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
+        <svg width="100%" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
             <path
                 opacity=".8"
                 d="M3 11.532v5.858c0 1.094.881 1.976 1.976 1.976h14.048A1.972 1.972 0 0 0 21 17.39v-5.858c-2.102 1.047-4.783 1.723-7.745 1.873-.171.529-.67.912-1.255.912a1.313 1.313 0 0 1-1.248-.912c-2.965-.15-5.649-.826-7.752-1.873Z"
@@ -327,7 +327,7 @@ export const ProductIcons = {
         </svg>
     ),
     retention: (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
+        <svg width="100%" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
             <path
                 opacity=".5"
                 fillRule="evenodd"
@@ -342,7 +342,7 @@ export const ProductIcons = {
         </svg>
     ),
     selfHosting: (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
+        <svg width="100%" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
             <path
                 fillRule="evenodd"
                 clipRule="evenodd"
@@ -351,7 +351,7 @@ export const ProductIcons = {
         </svg>
     ),
     sessionRecording: (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
+        <svg width="100%" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
             <path
                 opacity=".5"
                 d="M2 8.843V2.456C2 2.204 2.204 2 2.456 2h6.387a.456.456 0 0 1 0 .912H2.912v5.93A.456.456 0 0 1 2 8.843ZM21.617 2h-6.388a.456.456 0 0 0 0 .912h5.931v5.93a.456.456 0 0 0 .912 0V2.456A.456.456 0 0 0 21.618 2Zm0 12.774a.456.456 0 0 0-.456.456v5.93h-5.932a.456.456 0 0 0 0 .913h6.388a.456.456 0 0 0 .456-.456v-6.388a.456.456 0 0 0-.456-.455ZM8.843 21.16H2.912V15.23a.456.456 0 0 0-.912 0v6.387c0 .251.204.456.456.456h6.387a.456.456 0 0 0 0-.912Z"
@@ -360,7 +360,7 @@ export const ProductIcons = {
         </svg>
     ),
     sessions: (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
+        <svg width="100%" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
             <path
                 opacity=".6"
                 d="M11.557 2.557a9.002 9.002 0 0 0-9 9 9.002 9.002 0 0 0 9 9 9.002 9.002 0 0 0 9-9 9.002 9.002 0 0 0-9-9Zm0 16.364a7.362 7.362 0 0 1-7.364-7.364 7.362 7.362 0 0 1 7.364-7.364 7.361 7.361 0 0 1 7.364 7.364 7.362 7.362 0 0 1-7.364 7.364Z"
@@ -369,18 +369,18 @@ export const ProductIcons = {
         </svg>
     ),
     settings: (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
+        <svg width="100%" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
             <path d="M20.07 10h-1.685a.628.628 0 0 1-.598-.4.62.62 0 0 1 .14-.705l1.192-1.191a.925.925 0 0 0 0-1.307l-1.52-1.52a.948.948 0 0 0-1.31 0L15.097 6.07h.001a.646.646 0 0 1-1.1-.457V3.93a.93.93 0 0 0-.927-.93h-2.15a.928.928 0 0 0-.93.928v1.684a.645.645 0 0 1-1.1.457L7.7 4.878a.948.948 0 0 0-1.31 0l-1.52 1.52a.925.925 0 0 0 0 1.306l1.19 1.194A.647.647 0 0 1 5.603 10H3.93a.927.927 0 0 0-.929.92v2.16a.926.926 0 0 0 .93.928h1.682a.627.627 0 0 1 .597.402c.1.239.041.516-.149.692L4.87 16.295a.926.926 0 0 0 0 1.307l1.519 1.52v-.001a.946.946 0 0 0 1.31 0l1.192-1.192a.645.645 0 0 1 1.1.458v1.683a.931.931 0 0 0 .93.93h2.16a.929.929 0 0 0 .93-.928v-1.685a.63.63 0 0 1 .397-.598.62.62 0 0 1 .704.14l1.192 1.193-.001-.001a.946.946 0 0 0 1.31 0l1.52-1.52v.001a.926.926 0 0 0 0-1.307l-1.192-1.192A.647.647 0 0 1 18.397 14h1.684a.929.929 0 0 0 .92-.92v-2.16a.932.932 0 0 0-.932-.92ZM12 14.34a2.341 2.341 0 1 1 0-4.682 2.341 2.341 0 0 1 0 4.682Z" />
         </svg>
     ),
     sql: (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
+        <svg width="100%" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
             <path d="M16.64 5.28a.293.293 0 0 0-.171 0h-.258c-1.598 0-3.06.55-4.211 1.478A6.675 6.675 0 0 0 7.789 5.28C4.076 5.262 1.05 8.287 1.05 12c0 3.713 3.025 6.738 6.738 6.738 1.598 0 3.06-.55 4.211-1.479a6.675 6.675 0 0 0 4.211 1.479c3.713 0 6.738-3.025 6.738-6.738 0-3.575-2.802-6.497-6.308-6.72ZM7.79 17.878A5.887 5.887 0 0 1 1.91 12a5.876 5.876 0 0 1 5.878-5.878c1.34 0 2.578.447 3.558 1.203A6.72 6.72 0 0 0 9.457 12a6.75 6.75 0 0 0 1.89 4.675 5.805 5.805 0 0 1-3.558 1.203Zm4.726-2.372a5.615 5.615 0 0 1-.516.602 5.807 5.807 0 0 1-1.564-2.974c.052-.017.086-.051.137-.085a.415.415 0 0 0 0-.602l-.068-.069a.356.356 0 0 0-.172-.103V12c0-.619.103-1.22.275-1.787a.443.443 0 0 0 .12.378l.069.068c.086.086.189.12.31.12.12 0 .223-.034.309-.12a.415.415 0 0 0 0-.601l-.07-.069a.415.415 0 0 0-.6 0c-.035.034-.07.069-.087.12a5.91 5.91 0 0 1 1.118-1.942.421.421 0 0 0 .275.103.345.345 0 0 0 .223-.068l.206.257a.447.447 0 0 0 .069.499l.12.12c.086.086.19.12.293.12A5.89 5.89 0 0 1 13.667 12c0 .31-.017.601-.069.894-.12.12-.137.292-.086.447a5.555 5.555 0 0 1-.67 1.65.36.36 0 0 0-.223.12.42.42 0 0 0-.103.395Zm9.23-3.987.068.069c.069.068.172.12.275.12v.31c0 .618-.103 1.22-.275 1.787a.443.443 0 0 0-.12-.378l-.069-.07a.415.415 0 0 0-.602 0c-.154.173-.171.448 0 .603l.07.068c.085.086.188.12.309.12.12 0 .223-.034.309-.12.034-.034.069-.069.086-.12a5.913 5.913 0 0 1-1.117 1.942c-.172-.137-.43-.137-.585.017a.426.426 0 0 0-.017.585 5.909 5.909 0 0 1-1.942 1.117.524.524 0 0 0 .12-.086.415.415 0 0 0 0-.602l-.086-.068a.415.415 0 0 0-.601 0c-.155.171-.172.446 0 .601l.069.069c.085.086.189.12.309.12h.069a5.634 5.634 0 0 1-1.788.275h-.206c-.155-.137-.361-.154-.516-.034-.137-.017-.275-.035-.395-.069a.307.307 0 0 0 .12-.086.415.415 0 0 0 0-.601l-.137-.12a.415.415 0 0 0-.602 0c-.155.171-.172.446 0 .6l.069.07a5.67 5.67 0 0 1-1.925-.98c.24-.258.464-.533.67-.808.017-.017.035-.017.035-.034a.409.409 0 0 0 .103-.19 6.906 6.906 0 0 0 .876-2.027s.018 0 .018-.018a.425.425 0 0 0 .085-.48 6.05 6.05 0 0 0 .104-1.135c0-.396-.035-.79-.104-1.17l.138.138c.086.086.189.12.31.12a.441.441 0 0 0 .309-.12.415.415 0 0 0 0-.601l-.12-.12a.415.415 0 0 0-.602 0 .404.404 0 0 0-.103.154 11.289 11.289 0 0 0-.104-.378.448.448 0 0 0 0-.601l-.12-.12a.41.41 0 0 0-.189-.104 7.268 7.268 0 0 0-1.272-1.856 5.994 5.994 0 0 1 1.668-.894.52.52 0 0 0-.12.086.415.415 0 0 0 0 .602l.068.068c.086.086.189.12.31.12.12 0 .223-.034.309-.12a.415.415 0 0 0 0-.601l-.07-.069a.443.443 0 0 0-.377-.12 5.635 5.635 0 0 1 1.787-.275h.172a.458.458 0 0 0 .206.051c.052 0 .12-.017.172-.034l.413.051a.415.415 0 0 0-.069.653l.12.12c.086.087.19.121.31.121s.223-.034.309-.12a.415.415 0 0 0 0-.602l-.086-.017a5.89 5.89 0 0 1 4.177 4.452.41.41 0 0 0-.224.12.436.436 0 0 0 0 .619Z" />
             <path d="m17.981 13.169-.12-.12a.415.415 0 0 0-.602 0 .415.415 0 0 0 0 .6l.12.121c.087.086.19.12.31.12a.441.441 0 0 0 .31-.12c.154-.172.154-.447-.018-.601ZM19.734 14.922a.415.415 0 0 0-.601 0c-.155.172-.172.447 0 .601l.12.12c.086.087.19.121.31.121s.223-.034.309-.12a.415.415 0 0 0 0-.602l-.138-.12ZM18.91 14.097l-.121-.12a.415.415 0 0 0-.602 0c-.154.171-.171.446 0 .601l.12.12c.087.086.19.12.31.12s.223-.034.31-.12c.154-.154.154-.43-.018-.601ZM15.489 11.897c.086.086.19.12.31.12a.44.44 0 0 0 .309-.12.415.415 0 0 0 0-.602l-.12-.12a.415.415 0 0 0-.602 0 .415.415 0 0 0 0 .601l.103.12ZM16.916 12.103a.415.415 0 0 0-.602 0c-.155.172-.172.447 0 .602l.12.12c.086.086.19.12.31.12s.223-.034.31-.12a.415.415 0 0 0 0-.601l-.138-.12ZM12.756 12.619c.086.086.19.12.31.12s.223-.034.31-.12a.415.415 0 0 0 0-.602l-.121-.12a.415.415 0 0 0-.602 0c-.155.172-.172.447 0 .601l.103.12ZM16.194 14.853a.415.415 0 0 0-.602 0c-.155.172-.172.447 0 .602l.12.12c.086.086.19.12.31.12s.223-.034.31-.12a.415.415 0 0 0 0-.601l-.138-.12ZM15.214 13.856a.415.415 0 0 0-.602 0c-.154.172-.171.447 0 .602l.12.12c.087.086.19.12.31.12s.223-.034.31-.12a.415.415 0 0 0 0-.601l-.138-.12ZM17.174 15.833a.415.415 0 0 0-.602 0c-.155.172-.172.447 0 .601l.12.12c.086.087.19.121.31.121s.223-.034.309-.12a.415.415 0 0 0 0-.602l-.137-.12ZM11.777 11.639c.085.086.189.12.309.12a.441.441 0 0 0 .31-.12.415.415 0 0 0 0-.602l-.121-.12a.415.415 0 0 0-.602 0 .415.415 0 0 0 0 .602l.104.12ZM19.666 11.381a.415.415 0 0 0-.602 0 .415.415 0 0 0 0 .602l.12.12c.086.086.19.12.31.12a.441.441 0 0 0 .31-.12.415.415 0 0 0 0-.601l-.138-.12ZM15.85 8.167a.415.415 0 0 0 0-.601l-.12-.12a.415.415 0 0 0-.602 0c-.155.171-.172.446 0 .6l.12.121c.086.086.19.12.31.12s.206-.034.292-.12ZM16.228 9.147c.086.086.19.12.31.12s.223-.034.309-.12a.415.415 0 0 0 0-.602l-.12-.12a.415.415 0 0 0-.602 0c-.155.172-.172.447 0 .602l.103.12ZM20.645 12.361a.415.415 0 0 0-.601 0c-.155.172-.172.447 0 .602l.12.12c.086.086.19.12.31.12s.223-.034.309-.12a.415.415 0 0 0 0-.602l-.138-.12ZM18.669 10.402a.415.415 0 0 0-.602 0c-.155.171-.172.446 0 .601l.12.12c.086.086.19.12.31.12s.223-.034.31-.12a.415.415 0 0 0 0-.601l-.138-.12ZM17.208 10.144c.086.086.189.12.31.12a.441.441 0 0 0 .309-.12.415.415 0 0 0 0-.602l-.12-.12a.415.415 0 0 0-.602 0 .415.415 0 0 0 0 .601l.103.12ZM12.31 14.183a.415.415 0 0 0-.602 0 .415.415 0 0 0 0 .601l.12.12c.086.087.19.121.31.121a.44.44 0 0 0 .309-.12.415.415 0 0 0 0-.602l-.138-.12ZM14.166 16.039a.415.415 0 0 0-.602 0c-.155.172-.172.447 0 .602l.12.12c.086.086.19.12.31.12s.223-.034.31-.12a.415.415 0 0 0 0-.602l-.138-.12ZM11.502 13.358l-.12-.12a.415.415 0 0 0-.602 0 .415.415 0 0 0 0 .601l.12.12c.086.086.189.12.31.12a.441.441 0 0 0 .309-.12c.137-.154.137-.43-.018-.601ZM18.153 7.91c.086.085.19.12.31.12s.223-.035.309-.12a.415.415 0 0 0 0-.602l-.12-.12a.415.415 0 0 0-.602 0c-.155.171-.172.446 0 .601l.103.12ZM21.419 9.972a.415.415 0 0 0-.602 0c-.155.172-.172.447 0 .601l.12.12c.086.087.19.121.31.121s.223-.034.31-.12a.415.415 0 0 0 0-.602l-.138-.12ZM19.889 9.645l.12.12c.086.087.19.121.31.121s.223-.034.309-.12a.415.415 0 0 0 0-.602l-.12-.12a.415.415 0 0 0-.602 0c-.155.172-.189.447-.017.601ZM18.961 8.717l.12.12c.086.086.19.12.31.12a.441.441 0 0 0 .31-.12.415.415 0 0 0 0-.601l-.121-.12a.415.415 0 0 0-.602 0c-.189.171-.189.446-.017.601Z" />
         </svg>
     ),
     sso: (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
+        <svg width="100%" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
             <path
                 fillRule="evenodd"
                 clipRule="evenodd"
@@ -389,7 +389,7 @@ export const ProductIcons = {
         </svg>
     ),
     stickiness: (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
+        <svg width="100%" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
             <path
                 opacity=".5"
                 d="M2.723 12.754h.249a9.136 9.136 0 0 0 6.2 7.827.235.235 0 0 0 .244-.384l-.193-.203a1.178 1.178 0 0 1-.003-1.61l.885-.935v.001a.236.236 0 0 0-.085-.38 5.517 5.517 0 0 1-3.433-4.316h.315a.704.704 0 0 0 .484-1.214l-2.09-1.976a.698.698 0 0 0-.966 0L2.238 11.54a.703.703 0 0 0 .485 1.214Z"
@@ -406,7 +406,7 @@ export const ProductIcons = {
         </svg>
     ),
     teamCollaboration: (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
+        <svg width="100%" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
             <path d="m11.354 11.956 5.92 5.921a8.345 8.345 0 0 1-5.92 2.454c-1.55 0-3.014-.43-4.263-1.162-1.25.947-2.606 1.098-3.53.969-.324-.043-.388-.474-.087-.604.84-.408 1.378-1.248 1.701-1.915A8.33 8.33 0 0 1 3 11.978a8.37 8.37 0 0 1 8.375-8.375v8.353h-.021Z" />
             <path
                 opacity=".7"
@@ -415,7 +415,7 @@ export const ProductIcons = {
         </svg>
     ),
     toolbar: (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
+        <svg width="100%" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
             <path
                 opacity=".7"
                 d="M19.576 4H4.423A2.415 2.415 0 0 0 2 6.423v10.924a2.415 2.415 0 0 0 2.423 2.423h15.154A2.415 2.415 0 0 0 22 17.347V6.424A2.43 2.43 0 0 0 19.575 4Zm1.542 13.348c0 .859-.683 1.542-1.542 1.542H4.423a1.533 1.533 0 0 1-1.542-1.542V8.274H21.12v9.074Zm0-9.955H2.881v-.97c0-.858.683-1.54 1.542-1.54h15.154c.859 0 1.542.682 1.542 1.54v.97Z"
@@ -427,7 +427,7 @@ export const ProductIcons = {
         </svg>
     ),
     trends: (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
+        <svg width="100%" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
             <path
                 fillRule="evenodd"
                 clipRule="evenodd"
@@ -436,7 +436,7 @@ export const ProductIcons = {
         </svg>
     ),
     topFeatures: (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
+        <svg width="100%" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
             <path
                 fillRule="evenodd"
                 clipRule="evenodd"
@@ -457,13 +457,13 @@ export const ProductIcons = {
         </svg>
     ),
     userPermissions: (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
+        <svg width="100%" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
             <path opacity=".6" d="M14.3 5.7c0-.8-.64-1.44-1.44-1.44h-1.72c-.8 0-1.44.64-1.44 1.44v.84h4.6V5.7Z" />
             <path d="M19.56 7.52H4.44c-1.06 0-1.94.88-1.94 1.94v8.32c0 1.06.88 1.94 1.94 1.94h15.12c1.06 0 1.94-.88 1.94-1.94V9.46c0-1.08-.88-1.94-1.94-1.94ZM8 10.06a1.72 1.72 0 0 1 0 3.44c-.96 0-1.72-.76-1.72-1.72 0-.94.76-1.72 1.72-1.72ZM5.32 16.4c0-1.18.44-2.22 1.12-2.86.421.36.96.6 1.56.6.6 0 1.14-.22 1.561-.6.68.64 1.12 1.68 1.12 2.86-.02 1.04-5.36 1.04-5.36 0Zm13.02.64H13.1c-.26 0-.48-.22-.48-.48s.22-.48.48-.48h5.24c.26 0 .48.22.48.48s-.2.48-.48.48Zm0-2.94H13.1c-.26 0-.48-.22-.48-.48s.22-.48.48-.48h5.24c.26 0 .48.221.48.48 0 .26-.2.48-.48.48Zm0-2.92H13.1c-.26 0-.48-.22-.48-.48s.22-.48.48-.48h5.24c.26 0 .48.22.48.48s-.2.48-.48.48Z" />
         </svg>
     ),
     utm: (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
+        <svg width="100%" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
             <path
                 fillRule="evenodd"
                 clipRule="evenodd"
@@ -473,7 +473,7 @@ export const ProductIcons = {
     ),
 
     webPerformance: (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
+        <svg width="100%" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="fill-current">
             <path d="M5.962 9.858v7.503c0 1.381 1.152 2.494 2.602 2.494h6.85c1.281 0 2.33-.87 2.557-2.024 0-.004 0-.007.002-.01a2.507 2.507 0 0 0 .044-.46v-.746a.229.229 0 0 1-.016-.086V12.11v.001c0-.03.005-.058.016-.086V9.858H5.962ZM18.466 11v.885h2.064a.222.222 0 0 1 .224.224v4.419c0 .059-.023.116-.065.158a.225.225 0 0 1-.159.066h-2.064v.608c0 .094-.005.186-.015.277h1.747c.732 0 1.316-.588 1.316-1.329v-3.98c0-.74-.584-1.329-1.316-1.329h-1.732Zm-1.481 3.201a.22.22 0 0 1 .162.065.228.228 0 0 1 .066.162v.773a.225.225 0 1 1-.45 0v-.773a.224.224 0 0 1 .222-.227Zm0 1.548v-.001c.06-.001.118.023.162.066a.228.228 0 0 1 .066.16v.775c0 .341-.072.667-.202.962-.13.296-.318.561-.55.784a2.567 2.567 0 0 1-.812.524 2.647 2.647 0 0 1-.993.192.226.226 0 0 1-.23-.224.225.225 0 0 1 .23-.224c.295 0 .573-.057.826-.159.253-.102.48-.25.67-.432.19-.183.342-.4.448-.64.105-.24.164-.504.164-.782v-.775a.224.224 0 0 1 .22-.226ZM2 20.328c.055.061.117.124.223.193.255.166.644.329 1.11.466.933.272 2.176.444 3.351.444h10.72c1.265 0 2.48-.172 3.36-.443.441-.135.797-.297 1.027-.461.099-.07.159-.135.209-.197l-20-.002Zm5.288 1.553a.825.825 0 0 0-.8.621h11.004a.827.827 0 0 0-.8-.621H7.287Z" />
             <path
                 opacity=".5"

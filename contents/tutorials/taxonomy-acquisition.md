@@ -107,3 +107,6 @@ You may be signing up users outside of your funnel. Typical examples of when thi
 
 * Your own team creates these manually. This happens with many companies who don't have a self serve signup process.
 * For B2B, the second, third, fourth, etc. users added into an existing team may come through the rest of their team using your platform already. We'll write future tutorials about how to track referrals like this.
+
+<NewsletterTutorial compact/>
+

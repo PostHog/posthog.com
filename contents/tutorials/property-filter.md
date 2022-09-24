@@ -48,3 +48,6 @@ Below is the full configuration Witty Works uses to filter out unwanted data bef
 
 ```$geoip_city_name,$geoip_longitude,$geoip_latitude,$ip,$geoip_postal_code,$current_url,$performance_raw,$referrer,$initial_referrer,$pathname```
 
+<NewsletterTutorial compact/>
+
+

@@ -247,3 +247,6 @@ Finally, two important metrics you should have a grasp of are retention and conv
 
 - [Measuring retention and tracking churn](/docs/tutorials/retention)
 - [Analyzing your conversion with Funnels](/docs/tutorials/funnels)
+
+<NewsletterTutorial compact/>
+

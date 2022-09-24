@@ -17,20 +17,8 @@ import React, { useEffect, useState } from 'react'
 import { animateScroll as scroll } from 'react-scroll'
 import { shortcodes } from '../../mdxGlobalComponents'
 import slugify from 'slugify'
-import { CodeBlock } from 'components/CodeBlock'
+import { MdxCodeBlock } from 'components/CodeBlock'
 import MobileSidebar from 'components/Docs/MobileSidebar'
-
-const Iframe = (props) => {
-    if (props.src && props.src.indexOf('youtube.com') !== -1) {
-        return (
-            <div style={{ position: 'relative', height: 0, paddingBottom: '56.25%' }}>
-                <iframe {...props} className="absolute top-0 left-0 w-full h-full" />
-            </div>
-        )
-    } else {
-        return <iframe {...props} />
-    }
-}
 
 const ViewButton = ({ title, view, setView }) => {
     return (
@@ -89,10 +77,10 @@ export default function Tutorial({ data, pageContext: { pageViews, tableOfConten
     const { body, excerpt, fields } = pageData
     const { title, featuredImage, description, contributors, categories, featuredVideo } = pageData?.frontmatter
     const components = {
-        iframe: Iframe,
         inlineCode: InlineCode,
         blockquote: Blockquote,
-        pre: CodeBlock,
+        pre: MdxCodeBlock,
+        MultiLanguage: MdxCodeBlock,
         img: ZoomImage,
         h1: (props) => Heading({ as: 'h1', ...props }),
         h2: (props) => Heading({ as: 'h2', ...props }),
@@ -158,7 +146,7 @@ export default function Tutorial({ data, pageContext: { pageViews, tableOfConten
                         </MDXProvider>
                     </div>
                 ) : (
-                    <Iframe src={featuredVideo} />
+                    <iframe src={featuredVideo} />
                 )}
             </PostLayout>
         </Layout>

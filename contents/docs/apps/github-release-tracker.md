@@ -26,6 +26,10 @@ If you want to track releases from a private GitHub repo, you'll also need acces
 3. Search for 'GitHub Release Tracker'
 4. Select the app, press 'Install' and follow the on-screen instructions
 
+### Configuration
+
+<AppParameters />
+
 ### Is the source code for this app available?
 
 PostHog is open-source and so are all apps on the platform. The [source code for the GitHub Release Tracker](https://github.com/PostHog/github-release-tracking-plugin) is available on GitHub.

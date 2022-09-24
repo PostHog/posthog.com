@@ -20,6 +20,7 @@ export interface IMenu {
     className?: string
     handleLinkClick?: () => void
     topLevel?: boolean
+    menuType?: 'scroll' | 'standard'
 }
 
 export interface ICrumb {
@@ -64,5 +65,9 @@ export interface IProps {
     breadcrumb?: ICrumb[]
     hideSidebar?: boolean
     nextPost?: INextPost
-    survey?: boolean
+    hideSurvey?: boolean
+    hideSearch?: boolean
+    contentContainerClassName?: string
+    menuType?: 'scroll' | 'standard'
+    menuWidth?: number
 }

@@ -27,6 +27,10 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 Yes. Paid-for versions of PostHog are priced per event and the Downsampling app enables you to reduce the number of events which your instance ingests, thereby giving you greater control over billing.
 
+### Configuration
+
+<AppParameters />
+
 ### Is the source code for this app available?
 
 PostHog is open-source and so are all apps on the platform. The [source code for the Downsampler app](https://github.com/PostHog/downsampling-plugin) is available on GitHub.

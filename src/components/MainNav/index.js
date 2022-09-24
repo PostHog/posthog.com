@@ -34,10 +34,7 @@ export default function MainNav() {
     const menuLength = menu.length
     const halfMenu = Math.floor(menuLength / 2) + 1
     return (
-        <div
-            ref={setReferenceElement}
-            className="flex justify-between items-center max-w-screen-3xl mx-auto lg:relative"
-        >
+        <div className="flex justify-between items-center max-w-screen-3xl mx-auto lg:relative">
             <Link
                 className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark block lg:hidden"
                 to="/"
@@ -51,7 +48,10 @@ export default function MainNav() {
                     initial="hidden"
                     animate="shown"
                 >
-                    <div className="z-50 flex justify-between lg:items-center items-start flex-col lg:flex-row bg-white dark:bg-gray-accent-dark lg:bg-transparent lg:dark:bg-transparent font-nav lg:py-0 py-5 text-white lg:dark:text-white lg:text-almost-black max-w-screen-3xl mx-auto lg:-mx-3">
+                    <div
+                        ref={setReferenceElement}
+                        className="z-50 flex justify-between lg:items-center items-start flex-col lg:flex-row bg-white dark:bg-gray-accent-dark lg:bg-transparent lg:dark:bg-transparent font-nav lg:py-0 py-5 text-white lg:dark:text-white lg:text-almost-black max-w-screen-3xl mx-auto lg:-mx-3"
+                    >
                         <ul className="flex-1 flex flex-col lg:flex-row list-none m-0 p-0 w-full space-x-[1px] lg:w-auto">
                             {menu.slice(0, halfMenu).map((menuItem, index) => {
                                 return <MenuItem referenceElement={referenceElement} key={index} menuItem={menuItem} />

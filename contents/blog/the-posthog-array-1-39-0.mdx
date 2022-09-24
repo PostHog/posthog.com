@@ -1,0 +1,149 @@
+---
+date: 2022-08-29
+title: 'Array 1.39.0: Betas, persons, events and libraries'
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+categories: ['Release notes', 'Product updates']
+featuredImage: ../images/blog/posthog-array-blog.png
+featuredImageType: full
+excerpt: PostHog 1.39.0 introduces a new beta for you to try, a new display chart and big improvements to our client libraries.
+---
+
+Want to know more about what we're up to? [Subscribe to HogMail, our newsletter](/newsletter), which we send out every two weeks!
+
+> Running a self-hosted instance? Check out our [guide to upgrading PostHog](/docs/runbook/upgrading-posthog).
+
+## PostHog 1.39.0 release notes
+
+**Release highlights:**
+
+- [Beta: Improving query performance by combining persons and events](#Beta-improving-query-performance-by-combining-persons-and-events)
+- [New: Added features for client and server-side libraries](#new-added-features-for-client-and-server-side-libraries)
+- [New: Expo-compatible React Native library](#new-expo-compatible-react-native-library)
+- [New: Format your insights to show durations](#new-format-your-insights-to-show-durations)
+- [New: Big, bold number chart type](#new-big-bold-number-chart-type)
+- [New: Choose attribution touchpoint when breaking down funnels](#new-choose-attribution-touchpoint-when-breaking-down-funnels)
+- [Improved: Turbo properties](#improved-turbo-properties)
+- [Improved: History log now shows changes to insights](#improved-history-log-now-shows-changes-to-insights)
+- [Apps: Census integration](#apps-census-integration)
+
+### Beta: Improving query performance by combining persons and events
+
+We're getting ready to make a substantial change to the way [persons](/manual/persons) and [events](/manual/events) work by essentially combining them and adding person ids and properties _onto_ events. 1.39.0 gives you the chance to try the feature ahead of the full release. Here's how:
+
+- **PostHog Cloud:** No action is needed, as we're rolling this test out steadily behind a feature flag. If you're eager to be included from the start, let us know in [Slack](/slack) to see about joining our beta group.
+-  **Self-hosted users:** First, you need to [run async migration number 0006](/docs/runbook/async-migrations). Afterwards, change your `PERSON_ON_EVENTS_ENABLED` [instance setting](/docs/self-host/configure/instance-settings) to `true`. As with other instance settings, you'll need to be [a Staff user](/docs/self-host/configure/instance-settings#staff-users) to make changes.
+
+Why are we doing this? Firstly, it makes queries significantly faster because we no longer have to join tables to get a result; we can just look up everything in the events table instead. One query in our internal tests showed a 400x increase in speed...but this beta will help us understand the improvement in real-world conditions. 
+
+Secondly, feedback showed that users weren't able to create queries based on person properties at the time of an event. By putting person properties on events, this becomes the new default, while still enabling you to to filter insights based on the latest properties using cohorts. 
+
+There'll be some slight changes to how filtering by unique users or person properties work as a result of this change. For more information on this and to find out how we've implemented the change behind the scenes, check out our [overview of the ingestion pipeline](/docs/architecture/ingestion-pipeline).
+
+## New: Added features for client and server-side libraries
+
+While we continue to recommend using Javascript if possible, we've made significant updates to our other client libraries so that Android, iOS, Flutter and React Native now all support feature flags. 
+
+We've also updated our server-side libraries with local feature flag evaluation. This is huge because you can now use feature flags in your backend without worrying about latency. Evaluating locally reduces the computation time from an average of 400ms to 10ms!
+
+Check [our library docs](/docs/integrate/libraries) to find out more about what each library supports and how to deploy.
+
+> Want to upgrade your libraries? The minimum version requirement is [PostHog 1.38.0](/blog/the-posthog-array-1-38-0)
+
+### New: Expo-compatible React Native library
+
+We've rewritten the React Native library completely, in Typescript. That brings it up to a 2.0 which has no external iOS or Android library dependencies and is fully [expo-compatible](https://expo.dev/). The upgraded library now support PostHog [autocapture](/docs/integrate/client/react-native), as well as the [feature flags](/manual/feature-flags) and [group analytics](/manual/group-analytics) upgrades mentioned above.
+
+> Want to upgrade your library? The minimum version requirement is [PostHog 1.38.0](/blog/the-posthog-array-1-38-0). Check the [React Native library docs](/docs/integrate/client/react-native) for more info.
+
+### New: Format your insights to show durations
+
+![formatting an insight as a duration](../images/blog/array-1.39.0/duration-formatting.gif)
+
+Do your event properties contain milliseconds or seconds? Then you can now make things easier by changing your Y-axis unit to show durations instead of the default `none`. It's a small addition, but one which makes insights much easier to read and share with others.
+
+### New: Big, bold number chart type
+
+![the big bold number insight formatted as a duration](../images/blog/array-1.39.0/big-number.png)
+
+This new, much requested and _very_ exciting big bold number insight type does exactly what it says: simplifies a query result down to a single number. And it works great with durations too!
+
+### New: Choose attribution touchpoint when breaking down funnels
+
+![the attribution touchpoint selection menu](../images/blog/array-1.39.0/attribution-touchpoint.png)
+
+When adding breakdown by property to a funnel you can now choose where the property can appear in the funnel of events. Before this the property had to appear on the first event. [Learn more in our docs](https://posthog.com/manual/funnels#choosing-breakdown-property-behaviour).
+
+## Improved: New person deletion flow
+
+![delete karl oh no](../images/blog/array-1.39.0/person-deletion.png)
+
+Deleting persons from PostHog just got a lot easier, thanks to a new person deletion flow which also enables you to delete event data at the same time.
+
+This is especially handy for those times when you need to delete an individual for GDPR reasons - though, if you need to, you can choose to keep the events and just delete the person.
+
+### Improved: Turbo properties
+
+Frustrated that it was taking a few seconds to load properties? You weren't the only one. 
+
+Thankfully, version 1.39.0 addresses this by adding a limit so that PostHog doesn't always search through hundreds of thousands of properties for each query. The result? [Properties now load much faster](https://github.com/PostHog/posthog/pull/11037). On PostHog Cloud we saw a 75% reduction in API call time. 
+
+### Improved: History log now shows changes to insights
+
+![a view of the insights activity tab](../images/blog/array-1.39.0/insights-activity.png)
+
+We've had feedback from several users that they enjoy tracking changes to their feature flags in the history logs. So, we added the same functionality to insights too! Now you can snoop on who has been changing your insights and giving them funny names. 
+
+### Apps: Census integration
+
+Census, a reverse ETL platform which syncs your data warehouse with your operational tools, has created a new PostHog integration. Now you can easily sync events data such as sales or marketing activity into PostHog. Check [the Census docs](https://docs.getcensus.com/destinations/posthog) to find out more!
+
+Interested in building your own app? [Here's how to get started](/docs/apps)!
+
+### Other improvements & fixes
+Version 1.39 also adds hundreds of other improvements and fixes, including...
+
+- **Improvement:** We've added [a new SQL commenter dependency](https://google.github.io/sqlcommenter/python/django/#0) which automatically comments all SQL queries generated by PostHog with tags. [Again](https://github.com/PostHog/posthog/pull/10433#issuecomment-1164125629).
+- **Improvement**: Async migrations that aren't available yet will show up in a separate tab and migrations in Starting state can now be stopped in the UI. This solves [a few problems](https://github.com/PostHog/posthog/pull/10912).
+-   **Improvement**: We've removed some axe violations on Home, to improve accessibility. And added accessibility testing to our workflow. Bonus: Check the PR for [a _fantastic_ Dad joke](https://github.com/PostHog/posthog/pull/11211#discussion_r941651022). 
+-   **Improvement**: For users self-hosting PostHog, you can now set-up [monitoring and logging through Grafana](/docs/self-host/configure/monitoring-with-grafana) out of the box, which makes it much easier to monitor and troubleshoot your deployment.
+-   **Improvement**: [We've separated the list of feature flags on an event from its event properties in the taxonomic filter](https://github.com/PostHog/posthog/pull/10668). This makes it (approximately) 1,000,000% easier to find things when there are lots of feature flags.
+- **Improvement**: We've introduced [the snappy compression codec](https://google.github.io/snappy/) for compressing in-flight messages, which reduces some kafka topic sizes by up to 4x. No more 'message too large' errors!
+-   **Fix**: In a few unexpected cases we used to return a successful response to some invalid API requests to the capture endpoint. [Now we correctly return a `400 BAD REQUEST`](https://github.com/PostHog/posthog/pull/10999) which will help people with useful feedback during development
+
+View the commit log in GitHub for a full history of changes: [`release-1.38.0...release-1.39.0`](https://github.com/PostHog/posthog/compare/release-1.38.0...release-1.39.0).
+
+## Give us your feedback
+We’re always working on improving PostHog and would love to talk to you! Please [schedule a 30 minute call](https://calendly.com/posthog-feedback) with one of our Product, Engineering, or Marketing team members to help us understand how to improve. As a thank you for your time, we'll be giving away awesome [PostHog merch](https://merch.posthog.com)!
+
+## Contributions from the community
+We always welcome contributions from our community and this time we want to thank the following people...
+
+- [@MrKevinOConnel](https://github.com/MrKevinOConnell) for several PRs, including [a new Support Hero bot](https://github.com/MrKevinOConnell/SupportHeroJr).
+- [@petedemin](https://github.com/peterdemin) for some copy fixes.
+- [@Nishant-Sagar](https://github.com/Nishant-Sagar) for improving the docs for Linux users.
+- [@recklessop](https://github.com/recklessop) for fixing some broken URLs on [our GA site](https://isgoogleanalyticsillegal.com/).
+- [@MarkBennett](https://github.com/MarkBennett) for fixing his URL normalizer app.
+- [@danielthedifficult](https://github.com/danielthedifficult) for fixing some issues with our open source version. 
+- [@nemobsis](https://github.com/nemobis) for adding to our GA site.
+
+Do you want to get involved in making PostHog better? Check out our [contributing resources](/docs/contribute) to get started, or head to [our Slack group](/slack). We also have a [list of Good First Issues](https://github.com/PostHog/posthog/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) for ideas on where you can contribute!
+
+## Open roles at PostHog
+Want to join us in helping make more products successful? We're currently hiring for remote candidates in any of the following roles:
+
+- [Head of Product](https://apply.workable.com/posthog/j/7910AE1F46/)
+- [Senior Data Engineer](https://apply.workable.com/posthog/j/F01772B948/)
+- [Senior Backend Engineer](https://apply.workable.com/posthog/j/A9CF0800AA/)
+- [Site Reliability Engineer - Kubernetes](https://apply.workable.com/posthog/j/071DD5C05A/)
+- [Full Stack Engineer - App](https://apply.workable.com/posthog/j/2682B00B76/)
+
+Curious about what it's like to work at PostHog? Check out our [careers page](https://posthog.com/careers) for more info about our all-remote team and transparent culture. Don’t see a specific role listed? That doesn't mean we won't have a spot for you. [Send us a speculative application!](mailto:careers@posthog.com)
+
+<hr />
+
+_Follow us on [Twitter](https://twitter.com/PostHog) or [LinkedIn](https://linkedin.com/company/posthog) for more PostHog goodness!_
+
+<ArrayCTA />

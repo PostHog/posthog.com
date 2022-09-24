@@ -165,3 +165,4 @@ Scroll down a bit and you will find the `HTML selector matches` section. Here yo
 
 It's worth noting that using `Match groups` it is possible to use CSS selectors alongside other filters, like `Text equals` and `Link target equals`. Moreover, you can even define several `Match groups` for a one action.
 
+<NewsletterTutorial compact/>

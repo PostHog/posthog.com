@@ -39,6 +39,10 @@ Additionally, you will need to create a Shopify Access Token, which the Shopify 
 
 To create a Shopify Access Token, create an app on the admin page of your Shopify Account and generate `Admin API access token` in the API Credentials tab or your newly created Shopify app.
 
+### Configuration
+
+<AppParameters />
+
 ### Is the source code for this app available?
 
 PostHog is open-source and so are all apps on the platform. The [source code for the Shopify Connector app](https://github.com/posthog/posthog-shopify-sync-plugin) is available on GitHub.

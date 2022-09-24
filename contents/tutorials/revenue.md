@@ -220,3 +220,6 @@ Tracking revenue is just the start.
 
 - [How to safely roll out new features](/docs/tutorials/feature-flags)
 - [Analyzing your conversion with Funnels](/docs/tutorials/funnels)
+
+<NewsletterTutorial compact/>
+

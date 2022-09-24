@@ -254,3 +254,5 @@ We learned that:
 - We can use formulas to determine averages for more complex metrics that cannot use the native mathematical operations
 
 But, most importantly, we learned that while PostHog is built with certain frameworks in mind (such as the person-event model), given the flexiblity of our API and metric-building capabilities, you are likely to find a way to track your product exactly how you want to.
+
+<NewsletterTutorial compact/>

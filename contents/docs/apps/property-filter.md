@@ -34,6 +34,10 @@ Note: If you are filtering `$ip`, `event.ip` will also be set to null.
 
 No. The Property Filter app will only work on events ingested _after_ it was enabled.
 
+### Configuration
+
+<AppParameters />
+
 ### Is the source code for this app available?
 
 PostHog is open-source and so are all apps on the platform. The [source code for the Property Filter app](https://github.com/witty-works/posthog-property-filter-plugin) is available on GitHub.

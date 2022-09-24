@@ -23,6 +23,10 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 2. Search for 'Currency Normalization' and select the app, press Install.
 3. Update the required settings (get the API key [here](https://openexchangerates.org/)) and enable the plugin.
 
+### Configuration
+
+<AppParameters />
+
 ### Is the source code for this app available?
 
 PostHog is open-source and so are all apps on the platform. The [source code for the Currency Normalizer](https://github.com/PostHog/currency-normalization-plugin) is available on GitHub.
