@@ -54,7 +54,6 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Emanuele Capparelli](/handbook/company/team#ben-white-full-stack-engineer) (Growth Engineer)
 - [Michael Matloka](/handbook/company/team#michael-matloka-software-engineer) (Full Stack Engineer)
 - [Paul D'Ambra](/handbook/company/team#paul-dambra-software-engineer) (Full Stack Engineer)
-- _[Lottie Coxon](/handbook/company/team#lottie-coxon) (Graphic Designer) - pairs with Chris Clark_
 
 #### [App West](app-west)
 - [Eric Duong](/handbook/company/team#eric-duong-software-engineer) (Team lead, Full Stack Engineer)

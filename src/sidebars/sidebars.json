@@ -440,8 +440,16 @@
             "url": "",
             "children": [
                 {
-                    "name": "Overview",
-                    "url": "/handbook/design/about-design"
+                    "name": "Our philosophy",
+                    "url": "/handbook/design/philosophy"
+                },
+                {
+                    "name": "Product design process",
+                    "url": "/handbook/design/process"
+                },
+                {
+                    "name": "Designing posthog.com",
+                    "url": "/handbook/design/designing-posthog-website"
                 }
             ]
         },
