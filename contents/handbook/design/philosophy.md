@@ -16,7 +16,7 @@ Does that mean we're going to change how everything works? Not necessarily. It j
 
 ## Our philosophy started with our website
 
-Our first design hire was our graphic designer, Lottie. This was the result of a fundamental belief by our founders that having a bold, yet relatable brand would be a differentiator.
+Our first design hire was our graphic designer, Lottie. It's not every day you see a graphic designer in the first 5 hires! This was the result of a belief by our founders that having a bold, yet relatable brand would be a differentiator.
 
 After a year of constant iteration on our website and docs over 2021-2022, we landed in a place where our website is now a reference for many other startups who are looking to do something innovative with their websites.
 
