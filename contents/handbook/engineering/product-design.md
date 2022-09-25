@@ -20,7 +20,7 @@ If we're attempting to reach parity on a product or feature with other competito
 
 ### MVP
 
-If you're shipping an entirely new feature (i.e. SQL for PostHog), then you should figure out if anyone cares, which usually means creating an MVP and releasing it behind a feature flag to some friendly users. (Pro tip: make friends by being [support hero](/handbook/engineering/support-hero).)
+If you're shipping an entirely new feature (i.e. SQL for PostHog), then you should figure out if any users even care (!), which usually means creating an MVP and releasing it behind a feature flag to some friendly users. (Pro tip: make friends by being [support hero](/handbook/engineering/support-hero).)
 
 During both of the above approaches, designers are happy to provide light recommendations that will improve the user experience without becoming a blocker to shipping.
 
