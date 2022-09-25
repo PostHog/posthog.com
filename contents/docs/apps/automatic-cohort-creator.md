@@ -7,6 +7,8 @@ topics:
     - auto-cohort
 ---
 
+> **Warning:** We are currently in the process of deprecating this app in favor of [group analytics](/manual/group-analytics), and do not recommend installing it at this time.
+
 ### What does the Automatic Cohort Creator app do?
 
 The Automatic Cohort Creator app enables you to specify a list of user properties which will be used to automatically assign new users to a cohort.

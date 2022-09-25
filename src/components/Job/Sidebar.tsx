@@ -1,10 +1,10 @@
 import { ContributorImage, SidebarSection } from 'components/PostLayout'
 import React from 'react'
-import { countryCodeEmoji } from 'country-code-emoji'
 import Tooltip from 'components/Tooltip'
 import { kebabCase } from 'lib/utils'
 import Link from 'components/Link'
 import NotProductIcons from 'components/NotProductIcons'
+import ReactCountryFlag from 'react-country-flag'
 
 import { ThumbDown, ThumbUp } from 'components/Icons/Icons'
 
@@ -23,6 +23,16 @@ interface ISidebarProps {
     teamLead?: ITeam
     teamName?: string
     teamSlug: string
+}
+
+const pineappleText = (percentage: number) => {
+    if (percentage === 50) return 'This team is evenly split on whether pineapple belongs on pizza'
+    if (percentage < 50) return 'Shockingly, this team prefers their pizza without pineapple'
+    return (
+        <>
+            <strong>{percentage}%</strong> of this team prefer pineapple on pizza
+        </>
+    )
 }
 
 export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebarProps) {
@@ -68,7 +78,9 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
                                         title={
                                             <div className="flex space-x-1 items-center">
                                                 <span className="text-xs">{name}</span>
-                                                <span>{countryCodeEmoji(country)}</span>
+                                                <span className="w-[14px] flex">
+                                                    <ReactCountryFlag width={14} svg countryCode={country} />
+                                                </span>
                                             </div>
                                         }
                                     >
@@ -104,7 +116,7 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
                         name={teamLead?.frontmatter?.name}
                     />
                     <p className="author text-base font-semibold m-0 text-[15px]">{teamLead?.frontmatter?.name}</p>
-                    <span className="text-lg">{countryCodeEmoji(teamLead?.frontmatter?.country)}</span>
+                    <ReactCountryFlag svg countryCode={teamLead?.frontmatter?.country} />
                 </Link>
             </SidebarSection>
 
@@ -120,9 +132,7 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
                         <ThumbDown className="w-8 h-8 fill-green" />
                     )}
                 </div>
-                <p className="text-sm -mt-1 opacity-70 leading-tight mb-3">
-                    <strong>{pineapplePercentage}%</strong> of this team prefer pineapple on pizza
-                </p>
+                <p className="text-sm -mt-1 opacity-70 leading-tight mb-3">{pineappleText(pineapplePercentage)}</p>
                 <div className="h-2 w-full bg-white dark:bg-gray-accent-dark rounded-md relative overflow-hidden">
                     <div
                         style={{ width: `${pineapplePercentage}%` }}

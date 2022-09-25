@@ -97,8 +97,8 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                                 <span className="text-red">increase the number of successful products</span> in the
                                 world.
                             </h3>
-                            <CallToAction to="/handbook/company/story" className="mt-3 !px-12">
-                                Read our story
+                            <CallToAction to="/about" className="mt-3 !px-12">
+                                Learn about us
                             </CallToAction>
                         </div>
                         <div className="border-t border-gray-accent-light border-dashed">

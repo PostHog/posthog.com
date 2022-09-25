@@ -80,6 +80,7 @@ export default function Tutorial({ data, pageContext: { pageViews, tableOfConten
         inlineCode: InlineCode,
         blockquote: Blockquote,
         pre: MdxCodeBlock,
+        MultiLanguage: MdxCodeBlock,
         img: ZoomImage,
         h1: (props) => Heading({ as: 'h1', ...props }),
         h2: (props) => Heading({ as: 'h2', ...props }),
