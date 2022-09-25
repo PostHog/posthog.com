@@ -228,6 +228,10 @@
                             "url": "/handbook/people/hiring-process"
                         },
                         {
+                            "name": "How to interview",
+                            "url": "/handbook/people/hiring-process/how-to-interview"
+                        },
+                        {
                             "name": "Engineering hiring",
                             "url": "/handbook/people/hiring-process/engineering-hiring"
                         },
@@ -302,6 +306,10 @@
                         {
                             "name": "Feature ownership",
                             "url": "/handbook/engineering/feature-ownership"
+                        },
+                        {
+                            "name": "Working with product design",
+                            "url": "/handbook/engineering/product-design"
                         },
                         {
                             "name": "Releasing a new version",
@@ -432,8 +440,16 @@
             "url": "",
             "children": [
                 {
-                    "name": "Overview",
-                    "url": "/handbook/design/about-design"
+                    "name": "Our philosophy",
+                    "url": "/handbook/design/philosophy"
+                },
+                {
+                    "name": "Product design process",
+                    "url": "/handbook/design/process"
+                },
+                {
+                    "name": "Designing posthog.com",
+                    "url": "/handbook/design/designing-posthog-website"
                 }
             ]
         },
@@ -993,12 +1009,24 @@
                     "url": "/docs/apps/enabling"
                 },
                 {
-                    "name": "TypeScript types",
-                    "url": "/docs/apps/build/types"
-                },
-                {
                     "name": "Developer reference",
                     "url": "/docs/apps/build/reference"
+                },
+                {
+                    "name": "Using the PostHog API",
+                    "url": "/docs/apps/build/api"
+                },
+                {
+                    "name": "Jobs",
+                    "url": "/docs/apps/build/jobs"
+                },
+                {
+                    "name": "Testing",
+                    "url": "/docs/apps/build/testing"
+                },
+                {
+                    "name": "TypeScript types",
+                    "url": "/docs/apps/build/types"
                 }
             ]
         },

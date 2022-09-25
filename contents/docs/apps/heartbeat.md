@@ -34,7 +34,7 @@ PostHog is open-source and so are all apps on the platform. The [source code for
 
 ### Who created this app?
 
-We'd like to thank PostHog team member [Marcus Hyett](https://github.com/marcushyett-ph) for creating the Heartbeat app. Thanks, Marcus!
+We'd like to thank [Marcus Hyett](https://github.com/marcushyett-ph) for creating the Heartbeat app. Thanks, Marcus!
 
 ### Who maintains this app?
 

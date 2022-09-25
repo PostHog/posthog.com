@@ -93,11 +93,17 @@ Once this command has finished executing, run the following:
 yarn start
 ```
 
-The runs the local clone of the website, which you can use to preview changes you make before pushing them live. It takes a bit of time for some file processing and compilation to take place, but once it's completed you can access the locally running version of posthog.com via by visiting `http://localhost:8000` in your web browser.
+The runs the local clone of the website, which you can use to preview changes you make before pushing them live. It takes a bit of time for some file processing and compilation to take place, but once it's completed you can access the locally running version of posthog.com via by visiting `http://localhost:8001` in your web browser.
 
-Any time you want to preview changes you are making to the local version of the website, all you have to do is run the `yarn start` again, wait for the command to finish running and then open `http://localhost:8000` in your web browser.
+Any time you want to preview changes you are making to the local version of the website, all you have to do is run the `yarn start` again, wait for the command to finish running and then open `http://localhost:8001` in your web browser.
 
-> If you have something else running on port `8000` you'll be asked if you are okay in running on port `8001`, in which case the website will be accessible on `http://localhost:8001`.
+### Environment variables
+
+Our website uses various APIs to pull in data from sites like GitHub (for contributors) and Ashby (our applicant tracking system). Without setting these environment variables, you may see various errors when building the site. Most of these errors are dismissible, and you can continue to edit the website.
+
+If you're a core team member working on a portion of the site where having this data is useful, you can access some of the main environment variables [here](https://github.com/PostHog/company-internal/blob/master/website-api-keys.md).
+
+Note: If you have a Gatsby account (you'd know if you do), rather than running the site with `yarn start`, you should instead use `gatsby start` which will automatically load in all environment variables directly from Gatsby. (You'll need to set up the Gatsby CLI and authenticate first.)
 
 ### Finding the content to edit
 
