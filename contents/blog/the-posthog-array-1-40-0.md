@@ -18,9 +18,9 @@ Want to know more about what we're up to? [Subscribe to HogMail, our newsletter]
 
 **Release highlights:**
 
-- New: [Lemonized Calendar and Date components](#new-lemonized-calendar-and-date-components)
-- New: [Annotations Revamp](#new-annotations-revamp)
-- New: [Personal Modal Revamp](#new-person-modal-revamp)
+- New: [Lemonized calendar and date components](#new-lemonized-calendar-and-date-components)
+- New: [Annotations revamp](#new-annotations-revamp)
+- New: [Personal modal revamp](#new-person-modal-revamp)
 - New: [Recordings domain settings](#new-recordings-domain-settings)
 - Improved: [Retention insight update](#improved-retention-insight-update)
 
@@ -28,24 +28,23 @@ Want to know more about what we're up to? [Subscribe to HogMail, our newsletter]
 
 ![lemon calendar](../images/blog/array/1-40-0-lemon-calendar.png)
 
-We released some long overdue changes to our date components. Following our refreshed UI update, we've added new calendar and
-date handling components. This is part of our ongoing effort in updating all of the UI with components that provide a unified experience. 
+We released some long overdue changes to our UI, including new calendar and date components. This is part of our ongoing effort to update all UI with components that provide an improved and more unified experience. 
 
-### New: Annotations revamp
+### New: Overhauled annotations
 
 ![annotation](../images/blog/array/1-40-0-annotation-modal.png)
 
-We've overhauled annotations with a new look and new interface. This change resolves several layout and interaction issues that had previously been happening on annotations. We've also touched up the annotations page to highlight important information.
+We've overhauled [annotations](/manual/annotations) with a new look and interface. This change resolves several layout and interaction issues that had previously been impacting annotations. We've also touched up the annotations page to highlight important information better!
 
-### New: Person modal revamp
+### New: Revamped persons modals
 
 ![person modal](../images/blog/array/1-40-0-person-modal.png)
 
-Clicking on datapoints is one of our favorite ways to analyze the users behind the numbers. The new person modal now looks and feels like the rest of the app. We've made it easier for you to search and perform actions on those lists of users, too.
+Clicking datapoints in an insight is one of our favorite ways to analyze the users behind the numbers. The new person modal now looks and feels like the rest of the app. We've made it easier for you to search and perform actions on those lists of users, too.
 
 ### New: Recordings domain settings
 
-Struggling with keeping toolbar and recordings settings separate? Us too... The settings for managing valid domains for recordings and toolbar are now split so that they can be adjusted independently.
+Struggling with keeping toolbar and recordings settings separate? Us too... That's why the settings for managing valid domains for recordings and toolbar are now split, so that they can be adjusted independently!
 
 ### Improved: Retention insight update
 
