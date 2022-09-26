@@ -86,6 +86,24 @@ curl \
 https://app.posthog.com/api/person/
 ```
 
+## Rate limits
+
+On PostHog cloud, the API has the following rate limits:
+* 4800 requests/hour
+* 480 requests/minute
+
+For endpoints that read from the ClickHouse database, the rate limits are a bit tighter:
+* 1200 requests/hour
+* 240 requests/minute
+
+These ClickHouse endpoints include: `/persons/...`, `/events/...`, `/insights/...`, and `/session_recordings/...`
+
+When the rate limits have been hit, you'll receive a `429` response. We may need to adjust these limits in the future, so if you're building on top of PostHog, it's best to make sure you handle the `429` response.
+
+These rate limits are designed to allow access to the API while still protecting the service. If they don't work for you, please reach out, we'd love to learn why.
+
+> **Note:** These rate limits do not apply to any endpoints used to ingest events, identify persons, or evaluate feature flags: `/decide`, `/e`, `/engage`, `/track`, `/capture`, `/batch`, and `/s`.
+
 ## Tips
 
 - The [`/users/@me/` endpoint](/docs/api/user) gives you useful information about the current user.
