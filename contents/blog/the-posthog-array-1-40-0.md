@@ -1,6 +1,6 @@
 ---
 date: 2022-09-26
-title: "Array 1.40.0: Whats new in PostHog?"
+title: "Array 1.40.0: Interface improvements and more!"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -28,7 +28,7 @@ Want to know more about what we're up to? [Subscribe to HogMail, our newsletter]
 
 ![lemon calendar](../images/blog/array/1-40-0-lemon-calendar.png)
 
-We released some long overdue changes to our UI, including new calendar and date components. This is part of our ongoing effort to update all UI with components that provide an improved and more unified experience. 
+The 1.40.0 update is all about visual polish, and we're starting with new calendar and date components. These are some of the most used modals in PostHog, so we've given careful attention to providing an improved and more unified experience.
 
 ### New: Overhauled annotations
 
@@ -50,7 +50,7 @@ Struggling with keeping toolbar and recordings settings separate? Us too... That
 
 ![retention insight](../images/blog/array/1-40-0-retention.png)
 
-Another update to our UI! Nothing functionally changed here, but once again we cleaned up the UI on the retention insight to keep up with all the styling updates we've had across the board. 
+Once again, we've cleaned up the UI on the retention insight to keep up with all the styling updates we've had across the board. The end result is more consistent with the rest of our product, with lots of little touches which add visual flair and create an improved experience.
 
 ### Other improvements & fixes
 
