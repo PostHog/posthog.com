@@ -14,7 +14,7 @@ Events are the bedrock of PostHog and can basically be summed up as ‘anything 
 
 When it comes to capturing events, autocapture is a great place to start. However, sooner or later, every team will want to capture events specific to their product and needs. Internally at PostHog, for example, we track _hundreds_ of such events, ranging from specific button presses to instance updates.
 
-There are two main ways to create new events, including creating them from any of [our libraries](/docs/integrate/libraries) or using [the data management suite](/manual/data-management) in your PostHog instance. However, the easiest way for many people is to use [the toolbar](/manual/toolbar). 
+There are two main ways to create new events, including creating them from any of [our libraries](/docs/integrate/libraries) or using [the data management suite](/manual/data-management) in your PostHog instance. However, the easiest way for many people is to use [the toolbar](/manual/toolbar). Using the toolbar enables you to create new [_actions_](/manual/actions), which consist of one or more events labelled in a specific way for use in PostHog. 
 
 ### Prerequisites
 To follow this tutorial you’ll need…
@@ -50,9 +50,7 @@ When the toolbar is launched, you’ll see a floating PostHog logo in your brows
 
 ![Using the toolbar overlay](../images/tutorials/toolbar/inspect-toolbar.png)
 
-> Calculated events were previously known as Actions. Whenever you see actions, think: calculated events. 
-
-Click ‘_Actions_’ to start creating a new calculated event. This will create a blue overlay that highlights selectable elements. You can select any of these elements to summon a modal which gives you more information about the element. In this modal, click ‘_+ Create a new action_’ to continue.
+Click ‘_Actions_’ to start creating a new action. This will create a blue overlay that highlights selectable elements. You can select any of these elements to summon a modal which gives you more information about the element. In this modal, click ‘_+ Create a new action_’ to continue.
 
 ![create actions the easy way with posthog](../images/tutorials/toolbar/toolbar-create-action.png)
 
