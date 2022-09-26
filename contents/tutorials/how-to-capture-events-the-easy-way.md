@@ -3,12 +3,12 @@ title: How to create new events the easy way
 sidebar: Docs
 showTitle: true
 author: ['joe-martin']
-date: 2022-09-16
+date: 2022-09-26
 featuredImage: ../images/tutorials/banners/create-new-events-the-easy-way.png
 topics: ["events", "toolbar"]
 ---
 
-_Estimated reading time: 6 minutes_ ☕☕
+**Estimated reading time:** 6 minutes ☕☕
 
 Events are the bedrock of PostHog and can basically be summed up as ‘anything your users do’. If a user clicks a registration button, that’s an event. If a user loads a webpage, that’s an event. If a user subscribes to a newsletter, that’s an event. And PostHog can capture them all.
 
@@ -24,7 +24,7 @@ To follow this tutorial you’ll need…
 
 Note that the toolbar is currently only available using [the JavaScript library](/docs/integrate/client/js). 
 
-### Getting started
+## The PostHog Toolbar
 The PostHog toolbar is an overlay across your product and website, which you can summon to create new calculated events, visualize a heatmap, and more.
 
 To get started, visit the page of your website or product which features the element you want to track. If the toolbar is available already you’ll see a floating PostHog logo and can skip the next step, but if not then you’ll need to launch it. 
@@ -42,7 +42,7 @@ Below the slider, you’ll see a list of all the URLs where you have authorized 
 
 If the URL you want isn’t listed, select ‘_+ Add authorized URL_’ and enter the URL. Next, select ‘_Launch_’. 
 
-### Using the toolbar to create new events
+## Using the toolbar to create new events
 
 ![Using the toolbar](../images/tutorials/custom-events-the-easy-way/create-events-easy-way-posthog.png)
 
@@ -56,15 +56,18 @@ Click ‘_Actions_’ to start creating a new action. This will create a blue ov
 
 Most information in the next modal will be auto-populated with relevant information — that’s why we call this the easy way! However, it’s important to give your new event a descriptive name. Enter this in the ‘_What did your user do?_’ field. A good example of an event name would be '_Clicked Get Started on homepage_' or '_New user signed up_'. 
 
-#### Customizing your new event
+### Customizing your new event
 The remaining fields in the modal enable you to specifically customize how PostHog interprets the new event. Most of this will be automatically populated, but you can override them if they are incorrect. 
 
-- *Link target* describes what the target of any linked elements are. 
-- *Text* describes any text appearing within this element. 
-- *Selector* describes the path to this element, enabling you select alternative elements based on their `id` or `data-attr` if preferable. 
-- *Page URL* can be used to specify an exact pattern for pages where this event should be recorded, which is useful if the same element is used in various positions across a page.
+- **Link target** describes what the target of any linked elements are.
+ 
+- **Text** describes any text appearing within this element. 
 
-#### Adding additional elements
+- **Selector** describes the path to this element, enabling you select alternative elements based on their `id` or `data-attr` if preferable.
+ 
+- **Page URL** can be used to specify an exact pattern for pages where this event should be recorded, which is useful if the same element is used in various positions across a page.
+
+### Adding additional elements
 Sometimes, you may want to create complex events with multiple elements. PostHog is currently only capable of doing this using an `OR` operator — meaning that the event will be triggered if the first _or_ the second element are selected. 
 
 To select additional elements, select `_Add Another Element +_’ from the bottom of the modal. 

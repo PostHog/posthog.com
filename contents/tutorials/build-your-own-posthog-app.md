@@ -3,12 +3,12 @@ title: How to build your own app in PostHog
 sidebar: Docs
 showTitle: true
 author: ['joe-martin']
-date: 2020-11-02
+date: 2022-09-26
 featuredImage: ../images/tutorials/banners/how-to-build-app.png
 topics: ["apps"]
 ---
 
-_Estimated reading time: 10 minutes_ ☕☕☕
+**Estimated reading time:** 10 minutes ☕☕☕
 
 Apps are an incredibly powerful part of the PostHog platform, capable of doing almost anything. Apps can alter events as they are ingested, sync data with other platforms, perform scheduled chores and a lot more besides. Almost anything you may want to do with PostHog, you can do with an app.
 
@@ -16,12 +16,12 @@ Right now, PostHog has a library of more than 50 apps available to all users. Th
 
 Even better, if there isn’t an app available that does what you need then you can build your own! There are several ways to create an app, including [creating a dedicated GitHub repo](/docs/apps/build/tutorial#using-a-github-repository) — but in this tutorial we’ll explore how you can create your own app without ever leaving the PostHog platform. 
 
-To follow along with this tutorial, you’ll need…
+To follow along with this tutorial, you’ll need...
 
-A PostHog instance
-Some knowledge of Javascript or Typescript
+- A PostHog instance
+- Some knowledge of Javascript or Typescript
 
-### Introducing PostHog’s app source editor
+## Introducing PostHog’s app source editor
 ![Launching the source editor](../images/tutorials/source-editor/app-editor-name-it.png)
 
 PostHog’s source editor is a built-in tool for writing your own apps directly into PostHog. Apps which you create using the source editor are not publicly available — they exist only for your instance and cannot be seen by other organizations. You can submit your apps for others to use (and we strongly encourage it!), but more on that later. 
@@ -32,14 +32,14 @@ To access the source editor, log in to your PostHog instance and select ‘_Brow
 
 Once you’ve named the app, it will be created in your available apps and automatically enabled — don’t worry, it can’t do anything yet. You can change that by selecting ‘_Edit source_’. 
 
-### Using the app source editor
+## Using the app source editor
 ![Using the source editor](../images/tutorials/source-editor/test-app-code-view.png)
 
 By default, new apps contain example code to help you get started. You can overwrite this with your own code, but before you do here’s a quick introduction to [how apps work](/docs/apps/).
 
 There are two files which make up any app in PostHog — `plugin.json` and `index.ts`. 
 
-#### Setting your app configuration
+### Setting your app configuration
 
 ```
 {
@@ -90,7 +90,7 @@ Here’s a quick introduction to the available fields in `plugin.json`:
 
 > Want further detail on how to setup `plugin.json`? Check [the Apps developer reference docs](/docs/apps/build/reference).
 
-#### Creating your app
+### Creating your app
 
 Beyond the configuration, all the hard work your app will do is controlled by the second file — `index.ts`. This file also handles any special functions, which are detailed in [the developer reference documentation](/docs/apps/build/reference).
 
@@ -114,7 +114,7 @@ async function processEvent(event, { config, cache }) {
 ```
 In this example, the `processEvent` function receives the event before it is ingested by PostHog, adds some properties and then proceeds with standard ingestion. 
 
-### Testing your app
+## Testing your app
 
 Testing your new app on your PostHog instance is as simple as hitting ‘_Save_’, ensuring your app is enabled, then checking for the desired result. 
 
@@ -128,7 +128,7 @@ If you aren’t seeing the expected result it may be because you need to edit th
 
 App chains can be used for specific purposes, such as [filtering unwanted information from an event before it is stored](/tutorials/property-filter), and by default any new apps created with the source editor are added to the _end_ of a chain. If you need to reorder your app chain to get the desired result then simply select ‘_Edit order_’ from the ‘_Installed_’ apps tab and drag enabled apps into the order you need and hit ‘_Save_’.
 
-### Submitting new apps to PostHog
+## Submitting new apps to PostHog
 
 While it’s totally optional, we greatly appreciate everyone who contributes to PostHog by submitting their apps for inclusion in our public app library so that other users can benefit from them. 
 

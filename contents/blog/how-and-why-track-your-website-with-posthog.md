@@ -1,11 +1,11 @@
 ---
-date: 2022-09-10
+date: 2022-09-26
 title: 'How (and why) to track your website with PostHog'
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ['Guides']
+categories: ["Guides", "Using PostHog"]
 author: ["joe-martin"]
 featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
@@ -13,7 +13,7 @@ featuredImageType: full
 
 PostHog may have been built for product analytics, but that doesn’t mean you can only deploy it on your core product — you can also use it to gather analytics from your marketing website too. Internally at PostHog this is exactly what we do, tracking analytics from both the product and this very website within a single project. 
 
-Using PostHog to gather analytics in this way isn’t just an excuse for us to ‘dogfood’ our own product. It’s also a best practice that we strongly recommend to other organizations for several reasons…
+Using PostHog to gather analytics in this way isn’t just an excuse for us to ‘dogfood’ our own product. It’s also a best practice that we strongly recommend to other organizations for several reasons...
 
 > Already want to track your marketing website with PostHog? Find out [how to install our JavaScript snippet](/docs/integrate/client/js) in just a few minutes!
 
@@ -40,7 +40,7 @@ Reducing your stack can have a few overlooked benefits, including greater data c
 
 Even if data consistency isn’t a concern, there are still plenty of reasons to consider moving away from Google Analytics. Recent GDPR rulings within the EU have bought [the legality of Google Analytics](https://isgoogleanalyticsillegal.com/) into question, for example, and prompted many organizations to look for a self-hosted alternative. 
 
-Worried about GDPR but don’t want to self-host? We’ll be launching an EU-hosted version of PostHog Cloud soon, so be sure to join the waitlist!
+Worried about GDPR but don’t want to self-host? We’ll be launching an EU-hosted version of PostHog Cloud soon, so be sure to [join the waitlist](/signup/eu-cloud)!
 
 <GDPRForm />
 
@@ -54,7 +54,7 @@ Session recording in particular is useful on a marketing website, as it lets you
 
 Apps too are an important part of the PostHog-for-websites toolkit, enabling you to shape, filter and enhance user data as it is ingested before exporting to other platforms. Marketing teams in particular can benefit from the ability to sync PostHog with other tools in their marketing stack!
 
-### How to track website traffic with PostHog
+## How to track website traffic with PostHog
 
 If you’re on board and want to move ahead with tracking your marketing site with PostHog, it couldn’t be easier. All you need to do is copy the snippet below (which is also available in the ‘_Project settings_’ of your PostHog instance) into your website’s HTML. Ideally, put it just above the `</head>` tag to get the best results. 
 

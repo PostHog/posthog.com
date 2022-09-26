@@ -1,5 +1,5 @@
 ---
-date: 2022-09-10
+date: 2022-09-26
 title: "Getting started: Your five essential PostHog apps"
 rootPage: /blog
 sidebar: Blog
@@ -8,14 +8,14 @@ hideAnchor: true
 author: ["joe-martin"]
 featuredImage: ../images/blog/posthog-array-blog.png
 featuredImageType: full
-categories: ["Guides"]
+categories: ["Guides". "Using PostHog"]
 ---
 
-PostHog apps are a powerful, but ill-defined part of the platform. They’re powerful because they can do almost anything — and they’re ill-defined because they do almost anything.
+PostHog apps are a powerful, but hard to explain part of the platform. They’re powerful because they can do almost anything — and they’re hard to explain because they do almost anything.
 
 Want to import or export data into or out of PostHog? [There are apps for that](/apps). 
 Want to enhance data by adding or removing info? [There are apps for that too](/apps).  
-Want to insert the word `hedgehog` into your personIDs randomly? There …well, there isn’t an app for that yet. [But you could build one](/docs/apps/build)!
+Want to insert the word `hedgehog` into your personIDs randomly? There... well, there isn’t an app for that yet. [But you could build one](/docs/apps/build)!
 
 Not sure where to get started with apps? One easy tip is to look for connectors which enable you to sync PostHog with other tools in your stack — but otherwise here are some essential apps we recommend new PostHog users consider.
 
@@ -50,7 +50,7 @@ Zapier enables you to easily and codelessly connect PostHog to over 4,000 other 
 
 OK, so this app isn’t truly essential for all teams — but if you’re fussy about trailing slashes (or if other tools in your stack are case sensitive), the URL normalizer is a lifesaver. It enables you to customize how URLs are formatted, converting them all to lower case and stripping all trailing slashes by default. 
 
-Another reason to love the URL normalizer is that it wasn’t built by the PostHog team, but by a member of the community who was inspired by our open-source approach. Big thanks to Mark Bennet for his hard work on this!
+Another reason to love the URL normalizer is that it wasn’t built by the PostHog team, but by a member of the community who was inspired by our open source approach. Big thanks to Mark Bennet for his hard work on this!
 
 > 💡**PostHog Tip:** Interested in seeing how this app was made? Check [the source code](https://github.com/PostHog/posthog-url-normalizer-plugin) to get ideas about building your own apps!
 

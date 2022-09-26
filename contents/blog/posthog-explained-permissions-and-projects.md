@@ -1,5 +1,5 @@
 ---
-date: 2022-09-10
+date: 2022-09-26
 title: "PostHog explained: Permissions and projects"
 rootPage: /blog
 sidebar: Blog
@@ -8,7 +8,7 @@ hideAnchor: true
 author: ["joe-martin"]
 featuredImage: ../images/blog/posthog-blog-image.png
 featuredImageType: full
-categories: ["Guides"]
+categories: ["Guides", "Using PostHog"]
 ---
 
 So, you’ve installed your snippet and started tracking data in PostHog. What’s next? 
@@ -17,29 +17,29 @@ Before forging ahead into the heady world of [insights](/manual/funnels), [sessi
 
 [Inviting teammates to join you](/manual/organizations-and-projects#adding-new-members) is easy, but because the data you’re dealing with may be sensitive it’s worth taking a second to learn about organizations, projects and user permissions first…
 
-### Organizations
+## Organizations
 Starting at the top, organizations are the highest level of abstraction within PostHog — most commonly consisting of an entire company. Everyone who uses PostHog is part of an organization, even if the organization only has one person in it. 
 
 Apart from the FOSS version, all versions of PostHog enable you to belong to and create multiple organizations. To collaborate with someone on PostHog, it’s best to invite them to join your organization. If you’ve joined multiple organizations, you can switch between them using the user setting menu accessed by clicking your profile picture in the top right corner of your PostHog instance.
 
-#### How to invite a colleague to your organization in PostHog
+### How to invite a colleague to your organization in PostHog
 ![how to invite someone to posthog](../images/blog/activation-checklist-images/posthog-invite.png)
 
 Everyone in an organization has the ability to add new members to that organization by sending them an invitation. To send an invitation to a colleague, simply log into your PostHog instance, select your user settings by clicking your profile picture in the top right and select ‘_+ Invite members_’. We’ll send them an email automatically.
 
 > If you haven’t configured email on your PostHog instance, you’ll need to share invite links yourself.
 
-### Projects
+## Projects
 A step down from organizations, projects are where the real magic happens and is best defined as where PostHog groups data and queries. Any information in a project is limited to that project and can’t be accessed in another project. 
 
 Projects are also nested within organizations and, while there are several [ways to organize projects](/manual/organizations-and-projects#ways-of-organizing-projects), the most common approach is to have one project per unlinked project within an organization. One exception to this however would be if you only have one product and one marketing website — in which case [we recommend compiling both into a single project](/blog/how-and-why-track-your-website-with-posthog).
 
-#### How to create private projects
+### How to create private projects
 Normally, when a user joins an organization they get access to all projects within it. But what if you want to keep some things a secret? That’s when private projects are useful. 
 
 Users with Administrator or Owner permissions can make any existing project private via the the _’Access Control_’ section of ‘_Project Settings_’. 
 
-### User permissions
+## User permissions
 In PostHog, because of the sensitive data available, not all user permissions are created equally — and when you add a new user it’s important to consider how much power you want them to have. Every user is either a _Member_, _Administrator_, or _Owner_. 
 
 Each organization can only have one owner, and new users are added as members by default.
@@ -56,7 +56,7 @@ Each organization can only have one owner, and new users are added as members by
 | Transferring ownership                                                                | ❌                  | ❌            | ✅    |
 | Organization deletion                                                                 | ❌                  | ❌            | ✅    |
 
-#### How to alter permissions and remove users in PostHog
+### How to alter permissions and remove users in PostHog
 
 ![how to remove users posthog](../images/blog/activation-checklist-images/how-to-remove-users.png)
 

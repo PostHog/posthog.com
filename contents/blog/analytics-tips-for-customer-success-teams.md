@@ -8,7 +8,7 @@ hideAnchor: true
 author: ["joe-martin"]
 featuredImage: ../images/blog/posthog-blog-image.png
 featuredImageType: full
-categories: ["Guides"]
+categories: ["Guides", "Using PostHog"]
 ---
 
 While PostHog is obviously useful for product managers, engineers and analysts, there’s a lot it can do for other teams too — including customer success. Internally, for example, our CS team uses PostHog to track a variety of relevant metrics and to preemptively identify organizations that would benefit from their support.

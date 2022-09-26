@@ -1,6 +1,6 @@
 ---
-date: 2022-09-10
-title: Five events all teams should track with PostHog
+date: 2022-09-26
+title: 5 events all teams should track with PostHog
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -8,14 +8,14 @@ hideAnchor: true
 author: ["joe-martin"]
 featuredImage: ../images/blog/posthog-blog-image.png
 featuredImageType: full
-categories: ["Guides"]
+categories: ["Guides", "Using PostHog"]
 ---
 
-If you haven’t used product analytics before, it can be tricky to know which events you should start tracking first. That’s why we recommend using PostHog’s autocapture and why we give everyone their first million events for free, every month - so you can track many of the events you need out of the box and without worrying about cost. 
+It can be tricky to know which events you should start tracking first if you haven’t used product analytics before. That’s why we recommend using PostHog’s autocapture. It's also why we give everyone their first million events for free, every month – so you can track many of the events you need out of the box and without worrying about cost. 
 
-But what if you don’t want to use [autocapture](/docs/integrate/client/js#autocapture)? Or if you’re struggling to separate the signal from the noise when it comes to which events to focus on? 
+But what if you don’t want to use [autocapture](/docs/integrate/client/js#autocapture), or you’re struggling to separate the signal from the noise when it comes to which events to focus on? 
 
-This guide outlines five of the most essential events we recommend tracking with PostHog. You may need to adjust them slightly so they map to your product — a free product won’t need to track purchases, for example — but these events should be common to most organizations. 
+This guide outlines five of the most essential events we recommend tracking with PostHog. You may need to adjust them slightly so they map to your product – a free product won’t need to track purchases, for example – but these events should be common to most organizations. 
 
 > Not sure how to start tracking a new event? Find out in our [complete guide to event tracking](/tutorials/event-tracking-guide). Or skip right to our guide on [how to create new events the easy way!](/tutorials/how-to-capture-events-the-easy-way)
 
