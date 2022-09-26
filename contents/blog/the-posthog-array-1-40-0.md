@@ -24,7 +24,7 @@ Want to know more about what we're up to? [Subscribe to HogMail, our newsletter]
 - New: [Recordings domain settings](#new-recordings-domain-settings)
 - Improved: [Retention insight update](#improved-retention-insight-update)
 
-### New: Lemonized calendar and date components
+### New: Redesigned calendar and date components
 
 ![lemon calendar](../images/blog/array/1-40-0-lemon-calendar.png)
 
