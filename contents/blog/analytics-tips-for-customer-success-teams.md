@@ -1,6 +1,6 @@
 ---
 date: 2022-09-10
-title: Five essential tips for Customer Success teams on PostHog
+title: 5 essential tips for Customer Success teams on PostHog
 rootPage: /blog
 sidebar: Blog
 showTitle: true
