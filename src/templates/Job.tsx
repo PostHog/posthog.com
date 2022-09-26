@@ -61,6 +61,8 @@ export default function Job({
     pageContext: { teamName, gitHubIssues },
 }) {
     const timezone = parent?.customFields?.find(({ title }) => title === 'Timezone(s)')?.value
+    const salaryRole = parent?.customFields?.find(({ title }) => title === 'Salary')?.value || title
+
     const menu = [
         {
             name: 'Work at PostHog',
@@ -92,7 +94,7 @@ export default function Job({
                 <PostLayout
                     tableOfContents={[
                         ...tableOfContents,
-                        { ...(sfBenchmark[title] ? { value: 'Salary', url: 'salary', depth: 0 } : {}) },
+                        { ...(sfBenchmark[salaryRole] ? { value: 'Salary', url: 'salary', depth: 0 } : {}) },
                         { value: 'Benefits', url: 'benefits', depth: 0 },
                         {
                             ...(gitHubIssues.length > 0
@@ -136,7 +138,7 @@ export default function Job({
                                         __html: html,
                                     }}
                                 />
-                                {sfBenchmark[title] && (
+                                {sfBenchmark[salaryRole] && (
                                     <Accordion title="Salary" id="salary">
                                         <p>
                                             We have a set system for compensation as part of being transparent. Salary
@@ -156,7 +158,7 @@ export default function Job({
                                                 }}
                                                 hideFormula
                                                 hideRole
-                                                initialJob={title}
+                                                initialJob={salaryRole}
                                             />
                                         </div>
                                     </Accordion>

@@ -131,20 +131,28 @@ const Form = ({ setSubmitted, info, id }) => {
                 <span className="font-bold">Bolded fields</span> are required
             </p>
             <form onSubmit={handleSubmit}>
-                <div className="grid grid-cols-1 gap-y-3 ">
+                <div className="grid grid-cols-2 gap-3">
                     {info?.applicationFormDefinition?.sections?.map(({ fields }) => {
                         return fields.map(({ field, isRequired, descriptionPlain }) => {
                             const required = isRequired
+                            const type = field?.type?.toLowerCase()
                             return (
-                                <div key={field?.path}>
+                                <div
+                                    className={
+                                        type === 'string' || type === 'email'
+                                            ? 'sm:col-span-1 col-span-2'
+                                            : 'col-span-2'
+                                    }
+                                    key={field?.path}
+                                >
                                     <label
                                         className={`opacity-70 mb-1 inline-block ${required ? 'font-bold' : ''}`}
                                         htmlFor={field?.title}
                                     >
                                         {field?.title}
                                     </label>
-                                    {components[field?.type?.toLowerCase()] &&
-                                        components[field?.type?.toLowerCase()]({
+                                    {components[type] &&
+                                        components[type]({
                                             title: field?.title,
                                             required,
                                             path: field?.path,
@@ -300,7 +308,7 @@ export default function Apply({ id, info }) {
                         <div className="mx-6 md:mx-12 py-6 border-t border-dashed border-gray-accent-light">
                             <h4 className="mb-0">Be our next star?</h4>
                             <aside className="float-right h-[28px] w-[125px] ml-8">
-                                <GitHubButton />
+                                <GitHubButton href="https://github.com/PostHog/posthog" />
                             </aside>
                             <p className="text-sm mb-0">
                                 We'd love if you starred our repo on GitHub (if you haven't already)!

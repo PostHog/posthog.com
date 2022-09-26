@@ -1,7 +1,5 @@
 ---
 title: Apps developer reference
-sidebar: Docs
-showTitle: true
 ---
 
 > **Note:** It's worth reading the [Building apps overview](..) for a quick introduction to how to build your own app.
@@ -34,7 +32,7 @@ A `plugin.json` file is structured as follows:
       "name": "<param2_name>",
       "type": "<param2_type>",
       "default": "<param2_default_value>",
-      "required": false,
+      "required": false
     }
   ]
 }
@@ -200,7 +198,7 @@ export function setupPlugin({ attachments, global }: Meta) {
 
 ### `jobs`
 
-The `jobs` object gives you access to the jobs you specified in your app. See [Jobs](#jobs-1) for more information.
+The `jobs` object gives you access to the jobs you specified in your app. See [Jobs](/docs/apps/build/jobs) for more information.
 
 ### `geoip`
 
@@ -400,6 +398,12 @@ async function exportEvents(events, meta) {
 
 In the background, `exportEvents` sets up asynchronous processing of batches and ensures the events in the batch have already been processed by all enabled apps. `exportEvents` can be retried up to 3 times (first retry after 6 s, then 12 s after that, 24 s) by throwing [`RetryError`](#maximizing-reliability-with-retryerror). Attempting to retry more than 3 times is ignored.
 
+## Using the PostHog API
+
+All apps have access to the PostHog API which can be used to read and create almost anything within PostHog, as well as send additional events.
+
+For more information on using the API, take a look at [this guide](/docs/apps/build/api).
+
 ## Available packages and imports
 
 Apps have access to some special objects in the global scope, as well as a variety of libraries for importing. Scheduling functions (`setInterval`, `setTimeout` and `setImmediate`) are not available. Use jobs instead.
@@ -415,90 +419,6 @@ Apps have access to some special objects in the global scope, as well as a varie
 </blockquote>
 
 Equivalent to [node-fetch](https://www.npmjs.com/package/node-fetch).
-
-#### `posthog`
-
-The global `posthog` object gives you access to the following:
-
-##### `capture`
-
-<blockquote class="warning-note">
-
-⚠️ Be very careful when calling `posthog.capture` from `processEvent` or `onEvent`! The event captured will also be run through all the installed apps and could potentially lead to an infinite loop of event generation.
-
-</blockquote>
-
-Calling `posthog.capture` allows you to capture a new event under the same project the app is running in.
-
-It takes 2 arguments, the first one being an event name (required), and the second one being an object with properties to set on the event (optional).
-
-Apps can pass `distinct_id` on the event properties to specify what user the event should be attributed to. If `distinct_id` is not specified, the event will be a attributed to a generic "App Server" person.
-
-Apps can optionally pass a `timestamp`, which need to be in isoformat. If not set, the timestamp will default to current time.
-
-Example:
-```js
-posthog.capture('Stripe Customer Subscribed', {
-  distinct_id: 'a user id',
-  timestamp: new Date(subscription.created*1000).toISOString()
-})
-```
-
-
-Method signature:
-
-```js
-capture(event: string, properties?: Record<string, any>) => void
-```
-
-
-##### `api`
-
-<blockquote class="warning-note">
-
-⚠️ Be very careful when using `posthog.api.post` to send events to a PostHog instance from `processEvent` or `onEvent`! The event captured will also be run through all the installed apps and could potentially lead to an infinite loop of event generation.
-
-</blockquote>
-
-`posthog.api` gives you access to the following 4 methods:
-
-- `get(path: string, options?: ApiMethodOptions): Promise<Response>`
-- `post(path: string, options?: ApiMethodOptions): Promise<Response>`
-- `put(path: string, options?: ApiMethodOptions): Promise<Response>`
-- `delete(path: string, options?: ApiMethodOptions): Promise<Response>`
-
-These correspond to HTTP requests and make interacting with the PostHog API an easier process. By default, a personal API key will be provisioned for you and requests will automatically specify this key, as well as set the project the app is installed in as the project to use the API with.
-
-You can override these defaults to interact with another PostHog project or instance. The options available are:
-
-
-```js
-interface ApiMethodOptions {
-    // any data to send with the request, GET and DELETE will set these as URL params
-    data: Record<string, any> 
-
-    // posthog host, defaults to https://app.posthog.com
-    host: string 
-
-    // specifies the project to interact with
-    projectApiKey: string 
-
-    // authenticates the user
-    personalApiKey: string 
-}
-```
-
-**Example usage**
-
-```js
-await posthog.api.get(
-  '/api/event', 
-  { 
-    data: { param: 'some param' }, 
-    host: 'https://posthog.mydomain.com' 
-  }
-)
-```
 
 ### Available imports
 
@@ -529,127 +449,20 @@ import { BigQuery, Table, TableField, TableMetadata } from '@google-cloud/bigque
 
 You can also use `require` for imports.
 
-## Logs
-
-Apps can make use of the `console` for logging and debugging. `console.log`, `console.warn`, `console.error`, `console.debug`, `console.info` are all supported.
-
-These logs can be seen on the 'Logs' page of each app, which can be accessed on the 'Apps' page of the PostHog UI.
-
 ## Jobs
 
-> **Minimum PostHog version:** 1.25.0
+Apps can schedule tasks in PostHog that run asynchronously on a given schedule. These can be used to import or export data, as well as creating other resources in PostHog such as annotations and cohorts.
 
-Jobs are a way for app developers to schedule and run tasks asynchronously using a powerful scheduling API.
-
-Jobs make possible use cases such as retrying failed requests, a key component of apps that export data out of PostHog.
-
-### Specifying jobs
-
-To specify jobs, you should export a `jobs` object mapping string keys (job names) to functions (jobs), like so:
-
-```js
-export const jobs = {
-    retryRequest: (request, meta) => {
-        fetch(request.url, request.options)
-    }
-}
-```
-
-Job functions can optionally take a payload as their first argument, which can be of any type. They can also access the `meta` object, which is appended as an argument to all app functions, meaning that it will be the second argument in the presence of a payload, and the first (and only) argument in the absence of one.
-
-### Triggering a job
-
-Jobs are accessed as `jobs` via the `meta` object. Triggering a job works as follows:
-
-```js
-await jobs.retryRequest(request).runIn(30, 'seconds')
-await jobs.retryRequest(request).runNow()
-await jobs.retryRequest(request).runAt(new Date())
-```
-
-Having gotten a job function via its key from the `jobs` object calling the function with the desired payload will return another object with 3 functions that can be used to schedule your job. They are:
-
-- `runNow`: Runs the job now, but does so asynchronously
-- `runAt`: Takes a JavaScript `Date` object that specifies when the job should run
-- `runIn`: Takes a duration as a `number` and a unit as a `string` specifying in how many units of time to run this job (e.g. 1 hour)
-
-> Accepted values for the unit argument of `runIn` are: 'milliseconds', 'seconds', 'minutes', 'hours', 'days', 'weeks', 'months', 'quarters', and 'years'. The function will accept these in both singular (e.g. 'second') or plural (e.g. 'seconds') form.
-
-All jobs return a promise that does not resolve to any value. 
-
-### Full example
-
-```js
-export const jobs = {
-    continueSearchingForTheTeapot: async (request, meta) => {
-        await lookForTheTeapot(request)
-    }
-}
-
-async function lookForTheTeapot (request) {
-    const res = await fetch(request.url)
-    if (res.status !== 418) {
-        await jobs.continueSearchingForTheTeapot(request).runIn(30, 'seconds')
-        return
-    }
-    console.log('found the teapot!')
-}
-
-export async function processEvent (event, { jobs }) {
-
-    const request = { url: 'https://www.google.com/teapot' }
-    await lookForTheTeapot(request)
-    
-    return event
-}
-```
+For more information on jobs, check out [this guide](/docs/apps/build/jobs).
 
 ## Testing
 
 In order to ensure apps are stable and work as expected for all their users, we highly recommend writing tests for every app you build.
 
-### Adding testing capabilities to your app
-You will need to add jest and our app testing scaffold to your project in your `package.json` file:
-```json
-"jest": {
-    "testEnvironment": "node"
-},
-"scripts": {
-    "test": "jest ."
-},
-"devDependencies": {
-    "@posthog/plugin-scaffold": "0.10.0",
-    "jest": "^27.0.4"
-}
-```
+For more information on how to setup testing, take a look at [this guide](/docs/app/build/testing).
 
-Create your test files e.g. `index.test.js` or `index.test.ts` for testing your `index.js` or `index.ts` file
+## Logs
 
-### Writing tests
+Apps can make use of the `console` for logging and debugging. `console.log`, `console.warn`, `console.error`, `console.debug`, `console.info` are all supported.
 
-Write tests in jest, you can learn more about the syntax and best practices in the [jest documentation](https://jestjs.io/docs/getting-started). We recommend writing tests to cover the primary functions of your app (e.g. does it create events in the expected format) and also for edge cases (e.g. does it crash if no data is sent).
-
-### Using the app scaffold
-
-Since most PostHog apps are likely to rely on PostHog specific features like "processEvent" we have a number of helper functions to mock these.
-
-* **CreateEvent** - This will mock an event being created in PostHog e.g. ```createEvent({ event: "booking completed", properties: { amount: "20", currency: "USD" } })```
-* **CreateIdentify** - This will mock an identify event e.g. ```createIdentify()```
-
-More detail on other helper functions and how to use them can be found in our [hello world example](https://github.com/PostHog/posthog-hello-world-plugin/blob/main/index.test.js) and in the [utils library](https://github.com/PostHog/plugin-scaffold/blob/main/test/utils.js)
-
-These helper functions can be added to your test script using the following line:
-
-```js 
-const { createEvent, createIdentify} = require("@posthog/plugin-scaffold/test/utils");
-```
-
-For testing cron activities (e.g. run every minute), we recommend testing the functions that are called from this cron in your test - rather than trying to mock the cron event.
-
-### Running tests
-
-If you have configured your package.json file as above you should be able to run
-
-`npm run test` 
-
-And your tests will execute.
+These logs can be seen on the 'Logs' page of each app, which can be accessed on the 'Apps' page of the PostHog UI.

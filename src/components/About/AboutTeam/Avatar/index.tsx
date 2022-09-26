@@ -1,7 +1,7 @@
 import React from 'react'
 import cntl from 'cntl'
-import countryCodeEmoji from 'country-code-emoji'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import ReactCountryFlag from 'react-country-flag'
 
 const sizes = {
     sm: 'border-1 w-16 h-16',
@@ -32,7 +32,7 @@ export const Avatar = ({ size = 'lg', className = '', image, country, name, colo
                     imgClassName="w-full h-full border border-solid border-white box-border rounded-full"
                 />
                 <div className="absolute -right-2 -bottom-1 bg-white w-8 h-8 rounded-full border-2 text-lg border-gray-accent-light border-solid flex items-center justify-center">
-                    {countryCodeEmoji(country)}
+                    <ReactCountryFlag svg countryCode={country} />
                 </div>
             </div>
         </div>

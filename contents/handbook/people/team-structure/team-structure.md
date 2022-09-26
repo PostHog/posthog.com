@@ -26,17 +26,18 @@ hideAnchor: true
       - Rick Marron, Full Stack Engineer
     - **Luke Harries, Head of Product**
       - Annika Schmid, Product Manager
+      - Joe Martin, Product Marketer
     - Karl-Aksel Puulmann, Full Stack Engineer
     - Harry Waye, Full Stack Engineer
   - **Charles Cook, VP of Operations & Marketing**
     - Andy Vandervell, Content Marketer
     - Grace McKenzie, Operations Manager
     - Coua Phang, Tech Talent Partner
-    - Joe Martin, Product Marketer
+    - Ian Vanagas, Technical Content Marketer
   - **Cory Watilo, Lead Designer**
     - Lottie Coxon, Graphic Designer
     - Eli Kinsey, Front End Engineer
-    - Chris Clark, Product Designer
+    - Paul Hultgren, Developer Advocate
   - **Simon Fisher, Customer Success Lead**
     - Cameron DeLeone, Customer Success Manager
 
@@ -53,13 +54,11 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Emanuele Capparelli](/handbook/company/team#ben-white-full-stack-engineer) (Growth Engineer)
 - [Michael Matloka](/handbook/company/team#michael-matloka-software-engineer) (Full Stack Engineer)
 - [Paul D'Ambra](/handbook/company/team#paul-dambra-software-engineer) (Full Stack Engineer)
-- _[Lottie Coxon](/handbook/company/team#lottie-coxon) (Graphic Designer) - pairs with Chris Clark_
 
 #### [App West](app-west)
 - [Eric Duong](/handbook/company/team#eric-duong-software-engineer) (Team lead, Full Stack Engineer)
 - [Neil Kakkar](/handbook/company/team#neil-kakkar-software-engineer) (Full Stack Engineer)
 - [Li Yi Yu](/handbook/company/team#li-yi-yu-full-stack-engineer) (Full Stack Engineer)
-- _[Chris Clark](/handbook/company/team#chris-clark) (Product Designer)_ - _Works across App West and App East_
 
 #### [Session Recordings](session-recordings)
 - [Ben White](/handbook/company/team#ben-white-full-stack-engineer) (Full Stack Engineer)
@@ -71,7 +70,6 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Karl-Aksel Puulmann](/handbook/company/team#karlaksel-puulmann-software-engineer) (Full Stack Engineer)
 - [Tiina Turban](/handbook/company/team#tiina-turban-software-engineer) (Full Stack Engineer)
 - [Yakko Majuri](/handbook/company/team#yakko-majuri-software-engineer) (Full Stack Engineer)
-- [Marcus Hyett](/handbook/company/team#marcus-hyett) (Product Manager)
 - [Guido Iaquinti](/handbook/company/team#guido-iaquinti-software-engineer) (Site Reliability Engineer)
 - [Harry Waye](/handbook/company/team#harry-waye-software-engineer) (Full Stack Engineer)
 
@@ -79,6 +77,7 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Charles Cook](/handbook/company/team#charles-cook-business-operations) (Team lead, VP Ops & Marketing)
 - [Joe Martin](/handbook/company/team#joe-martin-product-marketer) (Product Marketer)
 - [Andy Vandervell, Content Marketer](/handbook/company/team#andy-vandervell-content-marketer) (Content Marketer)
+- Ian Vanagas, Technical Content Marketer
 
 ### [Website and Docs](website-docs)
 - [Cory Watilo](/handbook/company/team#cory-watilo-lead-designer) (Lead Designer)

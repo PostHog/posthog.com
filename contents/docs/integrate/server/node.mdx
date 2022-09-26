@@ -1,5 +1,5 @@
 ---
-title: Node.js library
+title: Node.js
 sidebarTitle: Node.js
 sidebar: Docs
 showTitle: true
@@ -93,8 +93,6 @@ To set properties on your users via an event, you can leverage the event propert
 
 ##### $set
 
-**Example**
-
 ```node
 client.capture({
     distinctId: 'distinct id',
@@ -105,13 +103,9 @@ client.capture({
 })
 ```
 
-**Usage**
-
 When capturing an event, you can pass a property called `$set` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
 
 ##### $set_once
-
-**Example**
 
 ```node
 client.capture({
@@ -122,8 +116,6 @@ client.capture({
     },
 })
 ```
-
-**Usage**
 
 `$set_once` works just like `$set`, except that it will **only set the property if the user doesn't already have that property set**.
 

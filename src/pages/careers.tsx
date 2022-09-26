@@ -154,21 +154,20 @@ const IndexPage = () => {
                     width="max-w-4xl"
                     value={
                         <>
-                            I'm not sure I've ever been more productive at work.{' '}
-                            <span className="text-red">
-                                I look forward to meeting-free Tuesdays and Thursdays almost as much as weekends.
-                            </span>
+                            {' '}
+                            <span className="text-red">Things are transparent and people welcome my feedback.</span> I
+                            love this because I can make a difference not just for my team, but the entire company.
                         </>
                     }
-                    author="Chris Clark"
-                    role="Product Designer"
+                    author="Neil Kakkar"
+                    role="Software Engineer"
                     img={
                         <StaticImage
                             width={100}
                             height={100}
                             imgClassName="rounded-full bg-yellow"
-                            alt={`Chris Clark - Product Designer`}
-                            src="../components/TeamQuote/images/chris.png"
+                            alt={`Neil Kakkar - Software Engineer`}
+                            src="../components/TeamQuote/images/neil.png"
                         />
                     }
                 />
