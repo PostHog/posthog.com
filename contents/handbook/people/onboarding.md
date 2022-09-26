@@ -8,6 +8,8 @@ Welcome to PostHog!
 
 Giving a new joiner a great onboarding experience is super important to us. We want new joiners to feel they’ve made the right decision to join us, and that they are excited and committed to what we’re doing as a company. 
 
+> Want to introduce a new joiner to the people team for onboarding, but don't know who on the team does what? Just introduce them to people@posthog.com and a member of the team will jump in and take it from there!
+
 Our [team](https://posthog.com/handbook/company/team) is spread across the world, and so are our new joiners. In order to ensure the best possible onboarding experience, we aim for the new joiner to meet up with someone from their team in their first week. Depending on the new joiner's location, they might fly out to one of our team members, or the other way around. So the onboarding experience will look a little bit different, depending on where the new joiner is based and which team they will be joining. 
 
 Below we are lining out some general steps for each new joiner's onboarding process. The People team will copy the relevant sections of the checklist into an onboarding issue on the [internal, non-public Ops & People board](https://github.com/orgs/PostHog/projects/2) in GitHub, and tag all relevant people. 
