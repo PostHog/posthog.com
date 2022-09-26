@@ -57,7 +57,7 @@ Another update to our UI! Nothing functionally changed here, but once again we c
 
 Version 1.40 also adds hundreds of other improvements and fixes, including...
 
-- **Improvement:** Filter defaults can now be set to apply on all new insights ([#11589](https://github.com/PostHog/posthog/pull/11589))
+- **Improvement:** Filters for test and internal users can now be set to apply on all new insights ([#11589](https://github.com/PostHog/posthog/pull/11589))
 - **Improvement:** Event volume and query counts are now emphasized in data management ([#11806](https://github.com/PostHog/posthog/pull/11806))
 - **Improvement:** Profile pictures now will show more information on hover ([#11849](https://github.com/PostHog/posthog/pull/11849))
 - **Fix**: Fixed an issue where group properties weren't showing up on search previously ([#11813](https://github.com/PostHog/posthog/pull/11813))
