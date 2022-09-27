@@ -50,7 +50,7 @@ Once done, you’ll have a graph of session duration for the signup and pricing 
 
 ### Time on pages
 
-If you want to know exactly what pages people are spending the most time in, you can *breakdown by* `Current URL` . Reseting the filters and switching the chart type to `Value` gives you a visual that looks like this:
+If you want to know exactly what pages people are spending the most time in, you can *breakdown by* `Current URL` . Resetting the filters and switching the chart type to `Value` gives you a visual that looks like this:
 
 ![Current URL values](../images/tutorials/session-metrics/current-url-values.png)
 
