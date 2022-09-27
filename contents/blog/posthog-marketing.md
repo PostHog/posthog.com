@@ -45,9 +45,9 @@ This dashboard is setup in a grid with two insights per KPI – that's key perfo
 
 We look at the last 90 days by default, but you can change the date range of the whole dashboard whenever you like. We add annotations to denote important events – e.g. changes to landing page designs, or a blog article going viral.
 
-<div align="center">
+<p class="text-center">
 <img src="../images/blog/posthog-marketing/annotation.png" alt="annotation">
-</div>
+</p>
 
 ![annotation](../images/blog/posthog-marketing/annotation.png)
 
