@@ -93,7 +93,7 @@ We also track `sessions per user` and `pages per session` here using trends insi
 
 Formulas are a great way to track all sorts of metrics, including conversion rates.
 
-> 💡 **PostHog Tip:** You can resize and re-arrange your dashboard by clicking on the '...' menu and clicking on 'Edit layout' – you can also use the shortcut (E). We tend to use grids of smaller of insights, mainly because Charles (VP of Ops & Marketing) likes it when they fit easilly onto a laptop screen! Speaking of which, tap 'F' to go fullscreen. You can also export any dashboard as a PNG via the '...' menu.
+> 💡 **PostHog Tip:** You can resize and re-arrange your dashboard by clicking on the '...' menu and clicking on 'Edit layout' – you can also use the shortcut (E). We tend to use grids of smaller of insights, mainly because Charles (VP of Ops & Marketing) likes it when they fit easily onto a laptop screen! Speaking of which, tap 'F' to go fullscreen. You can also export any dashboard as a PNG via the '...' menu.
 
 ### SEO performance tracking
 
