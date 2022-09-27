@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Inside PostHog"]
+categories: ["Inside PostHog", "Guides", "Using PostHog"]
 author: ["andy-vandervell"]
 featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
@@ -208,11 +208,9 @@ In summary, there are a few important reasons why we use PostHog instead of trad
 
 2. **We're interested in outcomes, not activity:** A lot of traditional web metrics aren't useful. We want to know "how does x impact y", not just "how many people did x or y". Funnel insights are huge part of this, and the ability to go from viewing a funnel to watching session recordings of real users is just as powerful for us as it is for our product teams.
 
-3. **It eliminates guesswork:** Intuition and speculation have their place, but there's nothing more satisfying than knowing exactly why something is happening **and** having the tools to rectify the problem. Traditional analytics tools pose more questions than they answer, which is incredibly frustrating.
+3. **It eliminates guesswork:** Intuition and speculation have their place, but there's nothing more satisfying than knowing exactly why something is happening **and** having the tools to rectify the problem.
 
-We hope this look at how we use PostHog will inspire you (and your marketing teams) to experiment with what's possible in PostHog. Just like our product, our approach to marketing is always evolving, so we'll be back to update you on that in future. 
-
-In the meantime, here's some suggested further reading:
+We hope this look at how we use PostHog will inspire you (and your marketing teams) to experiment with what's possible in PostHog. If you found this useful, here's some suggested further reading:
 
 - [PostHog product manual](/using-posthog): Need to learn how to build an insight, a cohort, or how different insights work? This is the place to start.
 
