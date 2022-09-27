@@ -41,11 +41,11 @@ This is our top-level dashboard. It tracks our most important metrics, like 'new
 
 This dashboard has a row of two insights for each top-level metric. One is the total number with 'compare to previous period' enabled; the second is the same metric as a weekly trend. This gives us an at-a-glance view of the top-level number, and context on how it's trending.
 
-[Number + Weekly Trend SCREENSHOT]
+![marketing-dashboard](../images/blog/posthog-marketing/marketing-dashboard.png)
 
 We look at the last 90 days by default, but you can change the date range of the whole dashboard whenever you like. We add annotations to denote important events – e.g. changes to landing page designs, or a blog article going viral.
 
-[Annotation screenshot] 
+![annotation](../images/blog/posthog-marketing/annotation.png)
 
 (Seriously, people, **use annotations!** It's way easier than trying to remember the date you redesigned your pricing page six months ago.)
 
@@ -53,7 +53,7 @@ We look at the last 90 days by default, but you can change the date range of the
 
 We like to iterate our website quickly, which often means pushing new designs live without testing. As a fallback, we track various  "circuit breaker" metrics on our marketing dashboard, such as the conversion rate on key landing pages.
 
-[pricing conversion screenshot]
+![pricing trend](../images/blog/posthog-marketing/pricing-trend.png)
 
 In July, for example, we iterated several different versions of a new pricing page. As you can see (above), our first iteration was a pretty dramatic failure. Users visiting the pricing page and "showing intent" (we'll get into what this means later) declined from ~25% down to ~10%.
 
@@ -73,15 +73,15 @@ One level below we have our main website dashboard. This is less focused on conv
 
 This is all pretty straightforward stuff, but it's still very useful to us as a marketing team. Recently, for example, we identified a specific tutorial that was getting loads of SEO traffic but was in serious need of updating.
 
-[SCREENSHOT HERE]
+![website dashboard](../images/blog/posthog-marketing/website-dashboard.png)
 
 Again, we use a lot of `# Number` views here combined with weekly breakdowns to add further context. The top two rows of the dashboard (pictured above) combine both to provide a quick overview view of website traffic.
 
-[Breakdown screenshot]
+![section breakdown](../images/blog/posthog-marketing/section-breakdown.png)
 
 Drilling further down, we breakdown the unique sessions by website section (above). Given we're a developer tool first, our Docs pages are generally the most popular. You can do this by creating a trends insight with multiple graph series where `Current URL` contains your desired URL path.
 
-[sessions per users]
+![pages per session](../images/blog/posthog-marketing/pages-per-session.png)
 
 We also track `sessions per user` and `pages per session` here using trends insights. We're not looking to optimize these metrics, but they can be useful for comparative purposes.
 
@@ -93,13 +93,13 @@ SEO is an important channel for us – it's a signal of word of mouth growth and
 
 As the below graphic from Google Trends shows, we've seen a consistent increase in brand searches in 2022.
 
-[Google trends screenshot]
+![brand trend](../images/blog/posthog-marketing/brand-trend.png)
 
 (For those interested, the trend line is generated using the Glimpse SEO Chrome extension. I highlight recommend it!)
 
 We use insights to help isolate the impact of our SEO content efforts from this organic word of mouth growth. For example, the insight below shows the weekly cumulative growth of all our SEO content since the beginning of the year.
 
-[screenshot here]
+![seo article trend](../images/blog/posthog-marketing/seo-article-trend.png)
  
 You can get this view by selecting the 'Time' option in the 'Chart type' dropdown.
 
@@ -138,17 +138,17 @@ Why do we use this and not just signed up users? There are a few good reasons:
 
 The 'Showed Intent' action allows us to create funnel insights like the one below. It shows the percentage of all blog readers who 'Showed Intent'.
 
-[Insight screenshot]
+![blog funnel](../images/blog/posthog-marketing/blog-funnel.png)
 
 But... hold-up-a-minute, 3.5% seems like a very low number doesn't it? Fret not, this is why we also have a second insight on our dashboard showing the historical trend, see below.
 
-[trend insight]
+![historical trend](../images/blog/posthog-marketing/historical-trend.png)
 
 That massive dip? It's when '[The really important job interview questions engineers should ask (but don't)](/blog/what-to-ask-in-interviews)' went massively viral, generating upwards of 100k users to the blog. Few of those 100k users came to consider PostHog as a product (which is fine), but it's a good reminder of why you should always check these things.
 
 Beyond this top-level metric, the Content Marketing Effectiveness dashboard (yes, it is a long-winded name!) allows us to compare the influence of different articles and content formats. Let's look at some examples.
 
-[screenshot]
+![session funnel](../images/blog/posthog-marketing/os-session-recording.png)
 
 Above is a funnel analysis for one of our most successful blog posts, a guide to open source session recording tools? It converts to intent at nearly 23%, which is awesome.
 
@@ -172,7 +172,6 @@ Progress on our organic SEO target (5,000 weekly users) has been steady rather t
 
 We achieved 14 of the 20 G2 profile reviews we aimed for in Q3 with an average score of 4.4. Not bad.
 
-
 ## What's next?
 
 We're currently reviewing our objectives for Q4, but we're also looking to make improvements to what and how we track our marketing efforts.
@@ -188,8 +187,6 @@ We're also considering several other supporting signals, such as new users who i
 ### Improving how we track attribution
 
 Until recently, we weren't focused on attribution outside of UTM parameters on our paid marketing activities. Marketing attribution is notoriously hard, so we felt our time and energy was better spent elsewhere. That said, it's becoming more important as we scale.
-
-[screenshot] 
 
 We recently started collecting more information from users at signup – we've added an optional text field where people can tell us where they heard about us. We collect this data in PostHog and manually export it for collation and analysis. It's not the most automated process ever, but it's a start and something we'll evolve over time. 
 
