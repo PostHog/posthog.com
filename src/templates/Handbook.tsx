@@ -263,7 +263,7 @@ export default function Handbook({
 }
 
 export const query = graphql`
-    query HandbookQuery($id: String!, $nextURL: String!, $mission: String!, $objectives: String!) {
+    query HandbookQuery($id: String!, $nextURL: String!, $mission: String, $objectives: String) {
         nextPost: mdx(fields: { slug: { eq: $nextURL } }) {
             excerpt(pruneLength: 500)
             frontmatter {
