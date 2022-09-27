@@ -30,7 +30,7 @@ If you're improving an _existing_ feature that is popular, you are probably crea
 
 However you're building, please _communicate_ to product design what your expectations are!
 
-## [T-shirt sizing](https://asana.com/resources/t-shirt-sizing#what-is-t-shirt-sizing)
+## Task size estimation
 
 The more complex a feature is to implement, the more likely it is that involving product design will make you faster.
 
