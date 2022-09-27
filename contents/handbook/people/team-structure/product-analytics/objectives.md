@@ -1,23 +1,8 @@
-Input from the execs:
+## Nail Data Exploration
 
-> - Objective: Get 80% of active b2b customers to add their marketing website
->   - Why? Increase # events coming in, which increases revenue. Our hypothesis is that marketing websites have 10-100x more events than applications.
-> - Objective: Implement most frequently requested features with 3+ happy companies for the feature launch
->   - Key results:
->     - Implement the following:
->       - Multiple breakdowns
->       - Cohort style queries (did x event x times), but within a query itself
->       - Composite events: ‘Any event’, ‘New user’ (users first event), ‘top events’
->       - User composition (ie pie chart where you can select properties)/
->       - Superscale querying - Get 98% of each company’s insights P99 below an acceptable time (to be worked out by the team)
-> - Why?
->   - Quality/parity with other product analytics tools. Delighting customers especially power users, will lead to word of mouth growth.
-
-
-
-## Proposed Objective: Nail Data Exploration
-
-NB! This objective still needs analysis and clarification
+1. Build v0.1 of the data exploration system
+2. Run a design sprint with Cory
+3. Ship v2
 
 ### Why?
 
@@ -60,6 +45,10 @@ Meta reason:
 - Replace all other data tables in the app (events list, persons list, etc) with this interface.
 - Interconnect all the ideas here: https://github.com/PostHog/posthog/issues/3765
 - Add this power to the toolbar. E.g. add an action, see user recordings and explore further.
-- If we add a bit of text parsing as a follow-up project, this would lead the way to an interface like this:
 
-![image](https://user-images.githubusercontent.com/53387/191732592-569aa93e-7757-4f09-a109-3f7eb5eff2b7.png)
+## Support querying at a scale of billion scale events
+
+1. Phantom is happy with query performance
+2. Instrument and significantly improve query performance for this scale of events
+
+_Note: We might need additional support from Karl for this_
