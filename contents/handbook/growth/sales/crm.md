@@ -81,10 +81,10 @@ You can also just manually add a user to HubSpot under 'Contacts'. When creating
 ## How we calculate Ideal Customer Profile (ICP)
 
 ICP scoring helps us to focus our efforts on those customers who are likely to help us hit our growth targets quickly.
-We use [Clearbit](https://clearbit.com/) to enhance our contact information as they are created and then compute a score out of 25 in HubSpot based on the following parameters:
+We use [Clearbit](https://clearbit.com/) to enhance our contact information as it is created and then compute a score out of 25 in HubSpot based on the following parameters:
 
 - *Industry* - customers in certain industries have stricter privacy requirements which mean a privacy-focused solution like PostHog is ideal for them.  We give the highest score (5 points) to the following industries:
-  - Financial Services
+  - Financial services
   - Health Care
   - Biotechnology
   - Health Care Services
