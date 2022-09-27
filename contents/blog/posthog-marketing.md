@@ -15,7 +15,7 @@ We learned an interesting fact recently: only 20% of our users track their marke
 
 But here's another fact: all the things that make PostHog great for understanding your product also apply to your marketing website. To demonstrate, we're sharing how we use PostHog for marketing.
 
-> Andy Vandervell is Content Marketing Lead at PostHog. He edits and writes the blog and runs our newsletter, HogMail. Prior to PostHog, Andy was a journalist and strategist for the likes of WIRED and Time Inc. UK. He's all about them words and those SEO keywords, basically.
+> Andy Vandervell is Content Marketing Lead at PostHog. He edits and writes the blog and runs our newsletter, HogMail. Prior to PostHog, Andy was a journalist and editorial strategist at WIRED, Time Inc. UK and others. He's all about them words and those SEO keywords, basically.
  
 ## The goals of our marketing team
 
