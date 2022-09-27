@@ -46,7 +46,7 @@ Meta reason:
 - Interconnect all the ideas here: https://github.com/PostHog/posthog/issues/3765
 - Add this power to the toolbar. E.g. add an action, see user recordings and explore further.
 
-## Support querying at a scale of billion scale events
+## Support performant querying of every insight type at a scale of billions scale events
 
 1. Phantom is happy with query performance
 2. Instrument and significantly improve query performance for this scale of events
