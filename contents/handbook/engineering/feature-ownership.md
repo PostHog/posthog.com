@@ -18,28 +18,30 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 
 | Feature |  Owner  |  Label  |
 |---|---|---|
+| Apps | [Team Pipeline][Team Pipeline] | <span class="lemon-tag gh-tag">feature/pipelines</span> |
 | Actions | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/actions</span> |
-| Actors Modal | [@EDsCODE][@EDsCODE]  | <span class="lemon-tag gh-tag">feature/actors-modal</span>  |
+| Actors Modal | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/actors-modal</span>  |
 | Annotations | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/annotations</span> |
-| API Structure | [@Twixes][@Twixes]  | <span class="lemon-tag gh-tag">feature/api-structure</span>  |
 | Application Performance Monitoring (APM) | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/apm</span>  |
-| Async migrations | [Ingestion (Team Platform)](/handbook/people/team-structure/platform)  | <span class="lemon-tag gh-tag">feature/async-migrations</span> |
+| Async migrations | [Team Pipeline][Team Pipeline]  | <span class="lemon-tag gh-tag">feature/async-migrations</span> |
 | Billing | [@timgl][@timgl]  |  <span class="lemon-tag gh-tag">feature/billing</span> |
-| Cohorts | [@EDsCODE][@EDsCODE]  |  <span class="lemon-tag gh-tag">feature/cohorts</span>  |
-| Correlation Analysis | [@neilkakkar][@neilkakkar]  |  <span class="lemon-tag gh-tag">feature/correlation-analysis</span> |
+| Client libraries | Security + core updates owned by [Team Pipeline][Team Pipeline]. Features owned by the relevant small team  | <span class="lemon-tag gh-tag">feature/pipeline</span> |
+| Cohorts | [Team FECS][Team FECS]  |  <span class="lemon-tag gh-tag">feature/cohorts</span>  |
+| Correlation Analysis | [Team FECS][Team FECS]  |  <span class="lemon-tag gh-tag">feature/correlation-analysis</span> |
 | Dashboards | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/dashboards</span> |
-| Data Management | [@alexkim205][@alexkim205]  | <span class="lemon-tag gh-tag">feature/data-management</span>  |
+| Data Management | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/data-management</span>  |
 | Events | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/events</span>  |
-| Experimentation | [@neilkakkar][@neilkakkar] |  <span class="lemon-tag gh-tag">feature/experimentation</span> |
-| Feature Flags | [@neilkakkar][@neilkakkar]  |  <span class="lemon-tag gh-tag">feature/feature-flags</span> |
+| Experimentation | [Team FECS][Team FECS] |  <span class="lemon-tag gh-tag">feature/experimentation</span> |
+| Feature Flags | [Team FECS][Team FECS]  |  <span class="lemon-tag gh-tag">feature/feature-flags</span> |
 | Funnels | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/funnels</span>  |
-| Group Analytics | [@macobo][@macobo]  |  <span class="lemon-tag gh-tag">feature/group-analytics</span> |
-| Onboarding | [@kappa90][@kappa90]  | <span class="lemon-tag gh-tag">feature/onboarding</span>  |
+| Group Analytics | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/group-analytics</span> |
+| Ingestion | [Team Pipeline][Team Pipeline]  | <span class="lemon-tag gh-tag">feature/pipeline</span> |
 | Lifecycle | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/lifecycle</span>  |
+| Onboarding | [@kappa90][@kappa90]  | <span class="lemon-tag gh-tag">feature/onboarding</span>  |
 | Paths | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/paths</span> |
 | Permissions | [@Twixes][@Twixes]  | <span class="lemon-tag gh-tag">feature/permissions</span>  |
 | Persons | [@alexkim205][@alexkim205]  | <span class="lemon-tag gh-tag">feature/persons</span>  |
-| Project Home Page | [@rcmarron][@rcmarron]  | <span class="lemon-tag gh-tag">feature/home</span> |
+| Project Home Page | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/home</span> |
 | Property Filters | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/filters</span>  |
 | Recordings | [Team Session Recording][Team Session Recording]  |  <span class="lemon-tag gh-tag">feature/recordings</span> |
 | Retention | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/retention</span> |
@@ -75,3 +77,6 @@ Some of the features we are building may exist in other products already. It is 
 [@kappa90]: https://github.com/kappa90
 [Team Product Analytics]: /handbook/people/team-structure/product-analytics
 [Team Session Recording]: /handbook/people/team-structure/session-recording
+[Team Pipeline]: /handbook/people/team-structure/pipeline
+[Team Platform]: /handbook/people/team-structure/platform
+[Team FECS]: /handbook/people/team-structure/app-west
