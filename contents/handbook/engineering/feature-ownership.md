@@ -42,11 +42,13 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Paths | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/paths</span> |
 | Permissions | [@Twixes][@Twixes]  | <span class="lemon-tag gh-tag">feature/permissions</span>  |
 | Persons | [@alexkim205][@alexkim205]  | <span class="lemon-tag gh-tag">feature/persons</span>  |
+| Platform (US + EU) | [Team Platform][Team Platform] | <span class="lemon-tag gh-tag">feature/platform</span>  |
 | Project Home Page | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/home</span> |
 | Property Filters | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/filters</span>  |
 | Recordings | [Team Session Recording][Team Session Recording]  |  <span class="lemon-tag gh-tag">feature/recordings</span> |
 | Retention | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/retention</span> |
 | Saved Insights | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/saved-insights</span> |
+| Self-hosting | [Team Platform][Team Platform]  |  <span class="lemon-tag gh-tag">feature/self-hosting</span> |
 | Session Analytics | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/sessions</span> |
 | Settings (personal & project) | [@liyiy][@liyiy]  |  <span class="lemon-tag gh-tag">feature/settings</span> |
 | SSO | [@mariusandra][@mariusandra]  | <span class="lemon-tag gh-tag">feature/sso</span>  |
