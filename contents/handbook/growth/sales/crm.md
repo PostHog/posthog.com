@@ -81,7 +81,7 @@ You can also just manually add a user to HubSpot under 'Contacts'. When creating
 ## How we calculate Ideal Customer Profile (ICP)
 
 ICP scoring helps us to focus our efforts on those customers who are likely to help us hit our growth targets quickly.
-We use [Clearbit](https://clearbit.com/) to enhance our contact information as it is created and then compute a score out of 25 in HubSpot based on the following parameters:
+We use [Clearbit](https://clearbit.com/) to enhance our contact information as it is created and then compute a score out of 25 in [HubSpot](https://app.hubspot.com/property-settings/6958578/properties?action=edit&property=hubspotscore&search=hubspot&type=0-1) based on the following parameters:
 
 - *Industry* - customers in certain industries have stricter privacy requirements which mean a privacy-focused solution like PostHog is ideal for them.  We give the highest score (5 points) to the following industries:
   - Financial services
@@ -101,28 +101,28 @@ We use [Clearbit](https://clearbit.com/) to enhance our contact information as i
 - *B2B/B2C* - our event-based pricing works best for business-to-business companies where the value per event is higher.
 - *Country* - from experience we know that certain countries have a lower inclination to pay for software so we downweight those.
 
-| Metric         | Value                                                                                                            | Score |
-|----------------|------------------------------------------------------------------------------------------------------------------|-------|
-| Industry       | Finance, Financial services, Health & wellness, Health care, Health care services, Biotechnology, Legal Services | 5     |
-|                | Internet, Internet software & services, Consulting, Research & consulting services, Computer networking          | 4     |
-|                | other (known)                                                                                                    | 2     |
-| Employee Count | 0-10                                                                                                             | 1     |
-|                | 11-20                                                                                                            | 2     |
-|                | 21-50                                                                                                            | 3     |
-|                | 51-100                                                                                                           | 4     |
-|                | 101-1000                                                                                                         | 5     |
-|                | 1000+                                                                                                            | 3     |
-| Ability to pay | Revenue >= $10m or Raised > $20m                                                                                 | 5     |
-|                | Revenue $1m-$10m or Raised > $10m                                                                                | 4     |
-| Role           | engineering                                                                                                      | 5     |
-|                | leadership                                                                                                       | 4     |
-|                | product                                                                                                          | 3     |
-|                | other (known)                                                                                                    | 1     |
-| Customer type  | B2B                                                                                                              | 5     |
-|                | B2C                                                                                                              | 2     |
-| Country        | Not in target country list                                                                                       | -7    |
+| Metric         | Value                                                                                                                                                                                                 | Score |
+|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------|
+| Industry       | Finance, Financial services, Health & wellness, Health care, Health care services, Biotechnology, Legal Services                                                                                      | 5     |
+|                | Internet, Internet software & services, Consulting, Research & consulting services, Computer networking                                                                                               | 4     |
+|                | other (known)                                                                                                                                                                                         | 2     |
+| Employee Count | 0-10                                                                                                                                                                                                  | 1     |
+|                | 11-20                                                                                                                                                                                                 | 2     |
+|                | 21-50                                                                                                                                                                                                 | 3     |
+|                | 51-100                                                                                                                                                                                                | 4     |
+|                | 101-1000                                                                                                                                                                                              | 5     |
+|                | 1000+                                                                                                                                                                                                 | 3     |
+| Ability to pay | Revenue >= $10m or Raised > $20m                                                                                                                                                                      | 5     |
+|                | Revenue $1m-$10m or Raised > $10m                                                                                                                                                                     | 4     |
+| Role           | engineering                                                                                                                                                                                           | 5     |
+|                | leadership                                                                                                                                                                                            | 4     |
+|                | product                                                                                                                                                                                               | 3     |
+|                | other (known)                                                                                                                                                                                         | 1     |
+| Customer type  | B2B                                                                                                                                                                                                   | 5     |
+|                | B2C                                                                                                                                                                                                   | 2     |
+| Country        | Not in Austria, Belgium, Brazil, Canada, Denmark, Finland, France, Germany, Iceland, Ireland, Italy, Japan, Netherlands, Norway, Portugal, Spain, Sweden, Switzerland, United Kingdom, United States  | -7    |
 
-We also sync the HubSpot score back into PostHog as the `hubspot_score` person property using the [HubSpot App](https://posthog.com/apps/hubspot-connector).
+We also sync the HubSpot score back into PostHog as the `hubspot_score` person property using the [HubSpot App](https://posthog.com/apps/hubspot-connector).  Our current dividing line between High and Low ICP score is **12.5**.
 
 ## Deals
 
