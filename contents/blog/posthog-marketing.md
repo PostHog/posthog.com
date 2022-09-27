@@ -15,9 +15,9 @@ We learned an interesting fact recently: only 20% of our users track their marke
 
 This is our fault. We market PostHog to engineers, so it's not a surprise few use it for marketing as well.
 
-But here's another fact: all the things that make PostHog great for understanding your product also apply to your website. To show you how, we're sharing how our marketing uses PostHog. We hope you find it useful.
+But here's another fact: all the things that make PostHog great for understanding your product also apply to your website. To demonstrate, we're sharing how we use PostHog for marketing.
 
-> Andy Vandervell is Content Marketing Lead at PostHog. Yadda Yadda
+> Andy Vandervell is Content Marketing Lead at PostHog. He edits and writes the blog and runs our newsletter, HogMail. Prior to PostHog, Andy was a journalist and audience guy for the likes of WIRED and Time Inc. UK. He's all about them words and those SEO keywords, too.  
 
 ## The goals of our marketing team
 
@@ -29,17 +29,17 @@ To start, let's talk about our goals as a marketing team. In Q3 2022, these were
 
 - Acquire 20 new reviews on our G2 profile
 
-But these are top-level goals. We use PostHog to track them, but they're the output of dozens of others track. To do so, we built dashboards... lots of dashboards. 
+Of course, these are just top-level goals. We use PostHog to track them, but they're the output of dozens of others. To do so, we built dashboards... lots of dashboards. 
 
 In fact, 'how we use PostHog for marketing' is really a story about all the dashboards we use. Let's start at the top.
 
 ## The Marketing Dashboard 
 
-This is our top-level dashboard. It tracks our most important metrics, like 'new org signups', as well as other top-level ones (e.g. validated credit cards). It also features a handful of "circuit breaker" metrics.
+This is our top-level dashboard. It tracks our most important metrics, like 'new org signups', as well as other important top-level ones, such as 'validated credit cards'. It also features a handful of "circuit breaker" metrics.
 
 ### Core KPIs
 
-This dashboard has a row of two insights for each top-level metric. One is the total number with 'compare to previous period' enabled; the second is the same metric as a weekly trend. This gives us an at-a-glance view of the top-level number, and context on how it's trending.
+This dashboard is setup in a grid with two insights per KPI – that's key performance indicator if don't speak "marketing". One is the total number with 'compare to previous period' enabled; the second is the same metric as a weekly trend. This gives us an at-a-glance view of the top-level number, and context around peaks and troughs.
 
 ![marketing-dashboard](../images/blog/posthog-marketing/marketing-dashboard.png)
 
@@ -51,15 +51,17 @@ We look at the last 90 days by default, but you can change the date range of the
 
 ### Circuit breakers
 
-We like to iterate our website quickly, which often means pushing new designs live without testing. As a fallback, we track various  "circuit breaker" metrics on our marketing dashboard, such as the conversion rate on key landing pages.
+We like to iterate our website quickly, which often means pushing new designs live without testing. As a fallback, we track various "circuit breaker" metrics on our marketing dashboard, such as the conversion rate on key landing pages.
+
+In July, for example, we discovered a tracking bug between 'posthog.com' and 'app.posthog.com' which caused an obvious drop in conversions. Then, in August, we introduced a new pricing page experience. 
 
 ![pricing trend](../images/blog/posthog-marketing/pricing-trend.png)
 
-In July, for example, we iterated several different versions of a new pricing page. As you can see (above), our first iteration was a pretty dramatic failure. Users visiting the pricing page and "showing intent" (we'll get into what this means later) declined from ~25% down to ~10%.
+As you can see (above), our first iteration was a pretty dramatic failure. Users visiting the pricing page and "showing intent" (we'll get into what this means later) declined from ~25% down to ~10%.
 
 This lead our Website & Docs team to iterate several new versions, which they then tested using feature flags and experiments. Conversions have since returned to normal and we've simplified our pricing as a result.
 
-> 💡 **Try using filters on dashboards:** You can apply global filters to any dashboard based on event properties, person properties, feature flags, and cohorts. This is a great way to drill down into specific audiences (e.g. users by country, city, continent).
+> 💡 **PostHog Tip:** Try using filters on dashboards! You can apply global filters to any dashboard based on event properties, person properties, feature flags, and cohorts. This is a great way to drill down into specific audiences (e.g. users by country, city, continent).
 
 ## Website Dashboard
 
@@ -75,7 +77,7 @@ This is all pretty straightforward stuff, but it's still very useful to us as a 
 
 ![website dashboard](../images/blog/posthog-marketing/website-dashboard.png)
 
-Again, we use a lot of `# Number` views here combined with weekly breakdowns to add further context. The top two rows of the dashboard (pictured above) combine both to provide a quick overview view of website traffic.
+Again, we use a lot of `# Number` views here combined with weekly breakdowns to add further context. The top two rows of the dashboard (pictured above) combine both to provide a quick overview of website traffic.
 
 ![section breakdown](../images/blog/posthog-marketing/section-breakdown.png)
 
@@ -83,29 +85,37 @@ Drilling further down, we breakdown the unique sessions by website section (abov
 
 ![pages per session](../images/blog/posthog-marketing/pages-per-session.png)
 
-We also track `sessions per user` and `pages per session` here using trends insights. We're not looking to optimize these metrics, but they can be useful for comparative purposes.
+We also track `sessions per user` and `pages per session` here using trends insights. We're not looking to optimize these metrics, but they can be useful for comparative purposes. Here's how to track these metrics in PostHog:
 
-> 💡 **Tracking sessions/pages per user:** In PostHog, create a trends insight with two graph series – e.g. series 'A' as unique users and series 'B' as unique sessions. Next, input your desired formula into the 'Formula' box under 'Filters. In this case, `B/A` would give you 'sessions per user'. You can also use this to calculate conversion rates, among other things.
+1. Create a trends insight with two graph series – e.g. series 'A' as unique users and series 'B' as unique sessions. 
+
+2. Use 'Formula' box under 'Filters' to calculate your desired metric. In this case, `B/A` would give you 'sessions per user'. 
+
+Formulas are a great way to track all sorts of metrics, including conversion rates.
+
+> 💡 **PostHog Tip:** You can resize and re-arrange your dashboard by clicking on the '...' menu and clicking on 'Edit layout' – you can also use the shortcut (E). We tend to use grids of smaller of insights, mainly because Charles (VP of Ops & Marketing) likes it when they fit easilly onto a laptop screen! Speaking of which, tap 'F' to go fullscreen. You can also export any dashboard as a PNG via the '...' menu.
 
 ### SEO performance tracking
 
 SEO is an important channel for us – it's a signal of word of mouth growth and high intent traffic to SEO content.
 
-As the below graphic from Google Trends shows, we've seen a consistent increase in brand searches in 2022.
+As the below graphic from Google Trends shows, we've seen a consistent increase in brand searches (i.e. people searching for 'posthog') in 2022.
 
 ![brand trend](../images/blog/posthog-marketing/brand-trend.png)
 
-(For those interested, the trend line is generated using the Glimpse SEO Chrome extension. I highlight recommend it!)
+(For those interested, the trend line is generated using the [Glimpse Chrome extension](https://chrome.google.com/webstore/detail/google-trends-supercharge/ocmojhiloccgbpjnkeiooioedaklapap). I highlight recommend it!)
 
 We use insights to help isolate the impact of our SEO content efforts from this organic word of mouth growth. For example, the insight below shows the weekly cumulative growth of all our SEO content since the beginning of the year.
 
 ![seo article trend](../images/blog/posthog-marketing/seo-article-trend.png)
  
-You can get this view by selecting the 'Time' option in the 'Chart type' dropdown.
+You can get this view by selecting the 'Time' option in the 'Chart type' dropdown. This, combined with multiple graph series, will stack the results so you can view the cumulative trend. The 'Value' chart type does the opposite.
 
-This insight also helps identify when traffic to our SEO content is dropping off.  This is normally a prompt to investigate further in SEMRush, where we track Google rankings for a few hundred different keywords. That said, a degree of fluctuation is normal, so it's best not to overreact to a couple of down weeks. 
+This insight also helps identify when traffic to our SEO content is dropping off. This is normally a prompt to investigate further in SEMRush, where we track Google rankings for a few hundred different keywords. That said, a degree of fluctuation is normal, so it's best not to overreact to a couple of down weeks, or over-celebrate a really good one.
 
-> 🚨 **Measure outcomes, not activity:** Newsflash, bounce rate is not a useful metric! Neither, to a lesser extent, are popular web metrics like time on page or session duration. Unless you're a social network or publisher, what does the time someone spends on your website actually tell you? Nothing, so we don't measure it. Instead, we measure outcomes... which is what our next dashboard is all about.
+### Things we don't measure.
+
+As much as possible, we like to measure outcomes, not activity. That's why we don't track bounce rate, for example – it's not auseful metric! Neither, to a lesser extent, are popular web metrics like 'time on page' or 'session duration'. Unless you're a social network or publisher, what does the time someone spends on your website actually tell you? Nothing, so we don't measure it. Instead, we measure outcomes, which is what our next dashboard is all about.
 
 ## Content Marketing Effectiveness
 
@@ -119,10 +129,10 @@ In a nutshell, 'Showed Intent' applies to any user who triggers an event we know
 
 - Visiting the [PostHog Cloud signup page](https://app.posthog.com/signup)
 - Visiting the [self-host license page](https://license.posthog.com/)
-- Booking a demo
-- Visiting the [self-host section](https://posthog.com/docs/self-host) of our docs.
+- Visiting the [self-host section](https://posthog.com/docs/self-host) of our docs
+- Booking a demo.
 
-We track these by using an 'action' – a way of combining similar events into single event you can use in insights. You can create actions using the PostHog Toolbar or via the Data Management tab in PostHog – it's dead easy.
+We track these by using an 'action' – a way of combining similar events into single event you can use in insights. You can create actions [using the PostHog Toolbar](/tutorials/toolbar) or via the Data Management tab in PostHog – it's dead easy.
 
 Why do we use this and not just signed up users? There are a few good reasons:
 
@@ -150,17 +160,15 @@ Beyond this top-level metric, the Content Marketing Effectiveness dashboard (yes
 
 ![session funnel](../images/blog/posthog-marketing/os-session-recording.png)
 
-Above is a funnel analysis for one of our most successful blog posts, a guide to open source session recording tools? It converts to intent at nearly 23%, which is awesome.
+Above is a funnel analysis for one of our most successful blog posts, a guide to [open-source session recording tools](/blog/best-open-source-session-replay-tools). It converts to intent at nearly 23%, which is awesome.
 
-At other end of the spectrum, we have our guide to GDPR-compliant analytics tools. It only converts 6.3% of the time – perhaps the launch of [PostHog Cloud EU](/signup/eu-cloud) will increase that figure? 🤔
+At other end of the spectrum, we have our guide to [GDPR-compliant analytics tools](/blog/best-gdpr-compliant-analytics-tools). It only converts 6.3% of the time – perhaps the launch of [PostHog Cloud EU](/signup/eu-cloud) will increase that figure? 🤔
 
-Comparison articles, such as [PostHog vs Amplitude](/blog/posthog-vs-amplitude) convert very well – in the region of 25%. This makes sense given people coming into these articles are already in a consideration phase, but the confirmation is useful.
+Comparison articles, such as [PostHog vs Amplitude](/blog/posthog-vs-amplitude) convert very well – in the region of 25%. This makes sense given people coming into these articles are already in a consideration phase, but the confirmation is useful, and we can use these insights to compare similar articles as well.
 
 Overall, these are the kinds of insights that help us inform our content and SEO priorities, which is hugely important given we're a small team. We have a nearly identical dashboard for tracking the impact of [customer stories](/customers), too.
 
-## Paid Ads & Attribution
-
-COPY COPY COPY
+> 💡 **PostHog Tip:** Try experimenting with funnels insights. In addition to the default conversion steps graph, funnels can also be viewed as an historical trend graph and by 'time to convert'.
 
 ## How did we do in Q3?
 
@@ -168,7 +176,7 @@ So that's how we use PostHog in our marketing team, but how did we do in Q3?
 
 Overall, pretty well. Most pleasingly, we smashed our target 420 weekly new org. signups – we consistently hit over 450 per week in August and had our first 500+ week in September.
 
-Progress on our organic SEO target (5,000 weekly users) has been steady rather than spectacular. We were at ~4,000 per week in July and we're currently hovering around the 4,700 mark – we had one 5,000 user week in August.
+Progress on our organic SEO target (5,000 weekly users) has been steady rather than spectacular. We were at ~4,000 per week in July and have been hovering around the 4,700 mark until recently, where we hit 5,200 in a week. Time will tell if this trend will hold.
 
 We achieved 14 of the 20 G2 profile reviews we aimed for in Q3 with an average score of 4.4. Not bad.
 
@@ -188,13 +196,13 @@ We're also considering several other supporting signals, such as new users who i
 
 Until recently, we weren't focused on attribution outside of UTM parameters on our paid marketing activities. Marketing attribution is notoriously hard, so we felt our time and energy was better spent elsewhere. That said, it's becoming more important as we scale.
 
-We recently started collecting more information from users at signup – we've added an optional text field where people can tell us where they heard about us. We collect this data in PostHog and manually export it for collation and analysis. It's not the most automated process ever, but it's a start and something we'll evolve over time. 
+We recently started collecting more information from users at signup – we've added an optional text field where people can tell us where they heard about us. We collect this data in PostHog, and manually export it for collation and analysis. It's not the most automated process ever, but it's a start and something we'll evolve over time. 
 
 ## Further reading
 
 We hope this look at how we use PostHog will inspire you (and your marketing teams) to experiment with what's possible in PostHog. Just like our product, our approach to marketing is always evolving, so we'll be back to update you on that in future. 
 
-In meantime, here's some suggested further reading:
+In the meantime, here's some suggested further reading:
 
 - [PostHog product manual](/using-posthog): Need to learn how to build an insight, how different insights work, or how to build a cohort? This is the place to start.
 
