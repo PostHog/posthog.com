@@ -1,26 +1,14 @@
 - Objective: High uptime and increase the resilience/redundancy
     - Key results:
-        - Team to fill in
+      - Migrate postgres out of heroku
+      - Regular synthetic load testing on production
     - Why?
         - A lack of reliability will cause churn.
 - Objective: Meet the compliance needs of 5 companies that we cannot meet today
     - Key result: EU Cloud is successfully managed
-    - Key result: SOC2 completed and security audit
+    - Key result: Progress made on SOC2
     - Why?
         - Not having these is blocking customers, who we can often uniquely satisfy.
-    - (Potentially) Objective: Enable customers to install a production grade self hosted version of Posthog in under 10 minutes (requires the scale plan)
-    - Key result: 
-        - To be filled in by the team
-    - Ideas:
-        - Speak to mid-market and enterprise to understand whether this would help improve their deployment
-        - Implementation ideas
-            - E.g. User creates an IAM, gives the details to Posthog which then spins up the code
-            - User runs terraform directly in their own cloud 
-        - Potentially change this as the default setup method for self-hosted and discontinue hobby and the helm chart version
-        - Need to confirm that this deployment method would work with enterprises: Airbus, ING
-        - Deprecate the hobby deployment
-    - Why?
-        - Simpler install and consistent install across users will result in less support needed. By setting up all the self-hosted clients on the scale plan will drive more revenue.
 
 ## Old roadmap
 
