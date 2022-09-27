@@ -206,7 +206,7 @@ In summary, there are a few important reasons why we use PostHog instead of trad
 
 1. **It does (almost) everything already:** Outside of a few edge cases, PostHog already does 95% of what we need. If (and when) we need more, we'll make the case for building that functionality, rather than resorting to some other tool.
 
-2. **We're interested in outcomes, not activity:** A lot of traditional web metrics aren't useful. We want to know "how does x impact y", not just "how many people did x or y". Funnel insights are huge part of this, and the ability to go from viewing a funnel to watching session recordings of real users is just as powerful for us as it is for our product teams.
+2. **We're interested in outcomes, not activity:** We want to know "how does x impact y" and why, not just "how many people did x or y". This is where traditional marketing tools fall short. No marketing platform lets you go from viewing a funnel to watching session recordings of real users on your website.
 
 3. **It eliminates guesswork:** Intuition and speculation have their place, but there's nothing more satisfying than knowing exactly why something is happening **and** having the tools to rectify the problem.
 
