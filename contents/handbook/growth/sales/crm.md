@@ -81,20 +81,20 @@ You can also just manually add a user to HubSpot under 'Contacts'. When creating
 ## How we calculate Ideal Customer Profile (ICP)
 
 ICP scoring helps us to focus our efforts on those customers who are likely to help us hit our growth targets quickly.
-We use [Clearbit](https://clearbit.com/) to enhance our contact information as they are created and then compute a score out of 25 in [HubSpot](https://app.hubspot.com/property-settings/6958578/properties?action=edit&property=hubspotscore&search=score&type=0-1) based on the following parameters:
+We use [Clearbit](https://clearbit.com/) to enhance our contact information as it is created and then compute a score out of 25 in HubSpot based on the following parameters:
 
 - *Industry* - customers in certain industries have stricter privacy requirements which mean a privacy-focused solution like PostHog is ideal for them.  We give the highest score (5 points) to the following industries:
-  - Financial Services
-  - Health Care
+  - Financial services
+  - Health care
   - Biotechnology
-  - Health Care Services
-  - Legal Services
-  - Health & Wellness
+  - Health care services
+  - Legal services
+  - Health & wellness
   
   Whilst we score them slightly lower (4 points), we also focus on customers from:
-  - Internet Software & Services
+  - Internet software & services
   - Consulting
-  - Computer Networking
+  - Computer networking
 - *Employee count* - we use this as a strong indicator for product market fit.  Smaller companies are less likely to have achieved this so our highest score here goes to companies in the 100-1000 employee range.  We score companies over 1000 employees slightly lower as they will generally be slower to deal with.
 - *Ability to pay* - indicates whether a company is likely to pay for a product like PostHog to solve their problems.  This is computed from a combination of company revenue and/or the amount of money they have raised.  If their revenue is over $10m, or they have raised over $20m they get the highest score (5 points). If revenue is under $1-10m or they've raised over $10m they'll get 4 points.
 - *Role* - from experience we sell best to people in an engineering role (5 points) and score those the highest.  We also do well with leadership (4 points) and product (3 points) folks, so they have a favourable score.  If we know the role but it falls outside of those categories then it's 1 point.
@@ -103,8 +103,8 @@ We use [Clearbit](https://clearbit.com/) to enhance our contact information as t
 
 | Metric         | Value                                                                                                            | Score |
 |----------------|------------------------------------------------------------------------------------------------------------------|-------|
-| Industry       | Finance, Financial Services, Health & Wellness, Health Care, Health Care Services, Biotechnology, Legal Services | 5     |
-|                | Internet, Internet Software & Services, Consulting, Research & Consulting Services, Computer Networking          | 4     |
+| Industry       | Finance, Financial services, Health & wellness, Health care, Health care services, Biotechnology, Legal Services | 5     |
+|                | Internet, Internet software & services, Consulting, Research & consulting services, Computer networking          | 4     |
 |                | other (known)                                                                                                    | 2     |
 | Employee Count | 0-10                                                                                                             | 1     |
 |                | 11-20                                                                                                            | 2     |
