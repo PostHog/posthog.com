@@ -10,7 +10,7 @@ You should start by identifying the stage and goals of your project.
 
 ## v0.1 or v2?
 
-As the feature owner, you should make a choice if you're building a very basic first iteration of something, or if you're improving the experience.
+As the project owner, you should make a choice if you're building a very basic first iteration of something, or if you're improving the experience.
 
 There are two paths for creating the first version of a product: v0.1 or MVP (even earlier).
 
