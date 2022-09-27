@@ -1,5 +1,5 @@
 ---
-title: Calculating average session duration, time on site and other session-based metrics
+title: Calculating average session duration, time on site, and other session-based metrics
 sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
