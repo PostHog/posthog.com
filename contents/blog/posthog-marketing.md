@@ -11,9 +11,9 @@ featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
 ---
 
-We learned an interesting fact recently: only 20% of our users track their marketing website **and** their product using PostHog. This is our fault. We market PostHog to engineers, so it's not a surprise few use it for marketing as well.
+We learned an interesting fact recently: only 20% of our users track their marketing website **and** their product using PostHog. This is our fault. We market to engineers at PostHog, so it's not a surprise we're less used for marketing.
 
-But here's another fact: all the things that make PostHog great for understanding your product also apply to your website. To demonstrate, we're sharing how we use PostHog for marketing.
+But here's another fact: all the things that make PostHog great for understanding your product also apply to your marketing website. To demonstrate, we're sharing how we use PostHog for marketing.
 
 > Andy Vandervell is Content Marketing Lead at PostHog. He edits and writes the blog and runs our newsletter, HogMail. Prior to PostHog, Andy was a journalist and strategist for the likes of WIRED and Time Inc. UK. He's all about them words and those SEO keywords, basically.
  
@@ -33,11 +33,11 @@ In fact, 'how we use PostHog for marketing' is really a story about all the dash
 
 ## Marketing dashboard 
 
-This is our top-level dashboard. It tracks our most important metrics, like 'new org signups', as well as other important top-level ones, such as 'validated credit cards'. It also features a handful of "circuit breaker" metrics.
+Our top-level dashboard tracks our most important metrics, like 'new org signups', as well as other important top-level ones, such as 'validated credit cards'. It also features a handful of circuit breaker metrics.
 
 ### Core KPIs
 
-This dashboard is setup in a grid with two insights per KPI – that's key performance indicator if don't speak "marketing". One is the total number with 'compare to previous period' enabled; the second is the same metric as a weekly trend. This gives us an at-a-glance view of the top-level number, and context around peaks and troughs.
+This dashboard is setup in a grid with two insights per KPI – that's key performance indicator if you don't speak "marketing". One is the total number with 'compare to previous period' enabled; the second is the same metric as a weekly trend. This gives us an at-a-glance view of the top-level number, and context around peaks and troughs.
 
 ![marketing-dashboard](../images/blog/posthog-marketing/marketing-dashboard.png)
 
@@ -45,7 +45,7 @@ We look at the last 90 days by default, but you can change the date range of the
 
 ![annotation](../images/blog/posthog-marketing/annotation.png)
 
-(Seriously, people, **use annotations!** It's way easier than trying to remember the date you redesigned your pricing page six months ago.)
+(Seriously, people, **use [annotations!](https://posthog.com/manual/annotations)** It's way easier than trying to remember the date you redesigned your pricing page six months ago.)
 
 ### Circuit breakers
 
@@ -63,7 +63,7 @@ This lead our Website & Docs team to iterate several new versions, which they th
 
 ## Website dashboard
 
-One level below we have our main website dashboard. This is less focused on conversion metrics and more on general traffic trends across posthog.com. Here, we're looking at typical analytics things like:
+One level below we have our main website dashboard. This is less focused on conversion metrics and more on general traffic trends across posthog.com. Here, we're looking at things like:
 
 - Total website users
 - Organic SEO users
@@ -71,7 +71,7 @@ One level below we have our main website dashboard. This is less focused on conv
 - The most read pages in each website section
 - A map view showing website users by country
 
-This is all pretty straightforward stuff, but it's still very useful to us as a marketing team. Recently, for example, we identified a specific tutorial that was getting loads of SEO traffic but was in serious need of updating.
+This is all straightforward stuff, but it's still useful to us as a marketing team. Recently, for example, we identified a tutorial that was getting loads of SEO traffic but was in serious need of updating.
 
 ![website dashboard](../images/blog/posthog-marketing/website-dashboard.png)
 
@@ -91,7 +91,7 @@ We also track `sessions per user` and `pages per session` here using trends insi
 
 Formulas are a great way to track all sorts of metrics, including conversion rates.
 
-> 💡 **PostHog Tip:** You can resize and re-arrange your dashboard by clicking on the '...' menu and clicking on 'Edit layout' – you can also use the shortcut (E). We tend to use grids of smaller of insights, mainly because Charles (VP of Ops & Marketing) likes it when they fit easily onto a laptop screen! Speaking of which, tap 'F' to go fullscreen. You can also export any dashboard as a PNG via the '...' menu.
+> 💡 **PostHog Tip:** You can resize and re-arrange your dashboard by clicking on the '...' menu and clicking on 'Edit layout' – you can also use the shortcut (E). We tend to use grids of smaller of insights, mainly because Charles (VP of Ops & Marketing) likes it when they fit easily onto a laptop screen!
 
 ### SEO performance tracking
 
@@ -117,7 +117,7 @@ As much as possible, we like to measure outcomes, not activity. That's why we do
 
 ## Content marketing effectiveness
 
-This dashboard dives deeper into the impact of specific pages. It's built around a metric we call 'Showed Intent', though you could rename this 'Engaged Users' or any other euphemism you prefer. 
+This dashboard dives deeper into the impact of specific pages. It's built around a metric we call 'Showed Intent', though you could rename this 'Engaged Users' or something you prefer. 
 
 Let's dig into it a little more.
 
@@ -194,7 +194,7 @@ We're also considering several other supporting signals, such as new users who i
 
 Until recently, we weren't focused on attribution outside of UTM parameters on our paid marketing activities. Marketing attribution is notoriously hard, so we felt our time and energy was better spent elsewhere. That said, it's becoming more important as we scale.
 
-We recently started collecting more information from users at signup – we've added an optional text field where people can tell us where they heard about us. We collect this data in PostHog, and manually export it for collation and analysis. It's not the most automated process ever, but it's a start and something we'll evolve over time. 
+We recently started collecting more information from users at signup – we've added an optional text field where people can tell us where they heard about us. We collect this data in PostHog, and manually export it for analysis. It's not the most automated process ever, but it's a start and something we'll evolve over time. 
 
 ### Marketing experiments
 
