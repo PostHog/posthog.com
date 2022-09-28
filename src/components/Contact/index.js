@@ -55,9 +55,6 @@ export default function Contact(props) {
                                         selfhost:
                                             'https://calendly.com/d/ckz-37j-jz9/posthog-scale-customer-success-demo',
                                         cloud: 'https://calendly.com/d/ckz-37j-jz9/posthog-scale-customer-success-demo',
-                                        scale: 'https://calendly.com/d/ckz-37j-jz9/posthog-scale-customer-success-demo',
-                                        group: 'https://calendly.com/cameron-posthog/posthog-demo',
-                                        enterprise: 'https://calendly.com/simon-posthog/enterprise-demo',
                                         qa: 'https://calendly.com/cameron-posthog/15-minute-posthog-q-a',
                                     }[demoType]
                                 }
