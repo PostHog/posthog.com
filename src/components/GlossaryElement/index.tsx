@@ -15,6 +15,7 @@ export interface TooltipContentProps {
 export interface MdxNode {
     frontmatter: {
         title: string
+        featuredVideo: string
     }
     fields: {
         slug: string
@@ -26,6 +27,7 @@ export const formatNode = (node: MdxNode) => ({
     title: node?.frontmatter?.title,
     slug: node?.fields?.slug,
     description: node?.excerpt,
+    video: node?.frontmatter?.featuredVideo,
 })
 
 export const TooltipContent = ({ slug, description, title, video }: TooltipContentProps) => {
