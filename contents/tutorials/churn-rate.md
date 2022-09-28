@@ -31,7 +31,7 @@ To calculate product usage churn, we must have a group of users, events from usa
 
 > If we had 100 users who used triggered events for a feature at the beginning of the period, and 80 who were continuing to trigger events it at the end, we’d have a churn rate of 20% because (100 - 80) / 100 * 100 = 20%
 
-Better yet, we can visualize and refine this calculation. PostHog has tools, like retention and lifecycle charts, that help you understand and see churn rate and its changes over time.
+Better yet, we can visualize and refine this calculation. PostHog has tools, like retention and lifecycle charts, that help you understand churn rate and see its changes over time.
 
 ## Visualizing churn rate
 
