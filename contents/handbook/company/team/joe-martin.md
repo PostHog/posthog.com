@@ -17,27 +17,29 @@ I live just outside of London. I'm passionate about punk music, videogame preser
 - I can help you with a broad range of marketing tasks, including sales enablement. 
 - I can help you understand our customers, our competitors or the press. 
 - I can help with literally anything involving writing, editing or proof-reading.
-- I enjoy helping others. You can ask me anything. There are no stupid questions.  
+- I enjoy helping others. You can ask me anything. There are no stupid questions.
+- I help engineering with marketing stuff. Need content for a new feature? I'm your man.   
 
 ### How to work with me
-- I can be over-communicative and need to be challenged on this. Tell me if you want the short version.
-- I have a very hands-on attitude and will never say 'That's not my job'. 
+- I can be over-communicative and need to be challenged on this. Want the short version? Ask.
+- I have a very hands-on attitude and will never say 'That's not my job'.
 - I may parrot ('_It sounds like..._') to ensure I understand. If I'm wrong, tell me. 
-- I'm truly uncomfortable with being in the limelight. I prefer private thank yous.
+- I'm really uncomfortable with being in the limelight. I prefer private thank yous.
 - I value compassion and inclusivity above everything else. I try to put people first. 
 - Ad-hoc meetings are fine, but weekends are sacred. I generally work 9-6 GMT.
 
 ## Areas of focus - Q4 2022
 
-Last quarter I focused on spending more time collaborating with the growth and product teams to directly contirbute to product improvements (such as tutorials and activation flows), growing external communities and partnerships, and becoming more autonomous/skilled technically. I
+Last quarter I focused on collaborating with the growth and product teams to directly contirbute to product improvements (such as tutorials and activation flows), growing external communities and partnerships, and becoming more autonomous/skilled technically so that I could contribute directly to the product. These were all successful. 
 
-This quarter I'm focusing on
+This quarter I'm focusing on...
 
-- [ ] **Onboarding:** Previously I've provided content and research to inform v1 of our onboarding flows. This quarter, I'm going to take greater ownership of onboarding by delivering improvements to our email onboarding, as well as continuing to work with Growth on improving in-product activation. 
-- [ ] **Announcements:** We have some specific things we want to announce, such as EU Cloud. We also have regular announcements, such as Array. In addition to taking ownership of the former, I'll also find ways to directly improve product announcements. A static page for Array? In-app announcements for new features? Better emails? Whatever is needed. 
-- [ ] **Word of mouth growth:** We're starting to get a more detailed view of where our WOM growth comes from. I'll spend time scaling this growth with the marketing team. This could involve a referral program, influencers or levelling up and/our case studies. 
-- [ ] **Product design:** This is a personal goal. I'm switching from just-in-case to just-in-time technical learning and focusing on improving my knowledge of product design. The goal is to become more effective when providing feedback and when planning in-product proposals. Good thing [we have a generous book budget](/handbook/people/training#books). 
+- [ ] **Onboarding:** Previously I've provided content and research to inform v1 of our onboarding flows. This quarter, I'm going to take greater ownership of onboarding by delivering improvements to our emails, as well as continuing to work with Growth on improving in-product activation. 
+- [ ] **Announcements:** We have some specific things we want to announce, such as EU Cloud. We also have regular announcements, such as Array. In addition to taking ownership of the former, I'll also find ways to directly improve the latter. A static page for Array? In-app announcements for new features? Better emails? Whatever is needed. 
+- [ ] **Word of mouth growth:** We're starting to get a more detailed view of where our WOM growth comes from. I'll spend time scaling this growth with the marketing team. This could involve a referral program, influencers or levelling up and/our case studies. Maybe all of the above.
+- [ ] **Product design:** This is a personal goal. I'm switching from just-in-case to just-in-time technical learning and focusing on improving my knowledge of product design instead. The goal is to become more effective when providing feedback and when planning in-product proposals. Good thing [we have a generous book budget](/handbook/people/training#books). 
 
+This list is not exhaustive and is meant to guide the sort of work I do at a high level. If something more important comes up where I'll have more impact? Pivotting is fine. 
 
 ## Feedback
 In our last [360 feedback session](/handbook/people/feedback#full-team-feedback-sessions-1), I received feedback on the following points. 
