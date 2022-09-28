@@ -61,7 +61,7 @@ Coua will create the contract needed, depending on who is joining. Only James an
 *   [ ] Check to see if a laptop is available at the hacker house (ship if outside of the UK or Europe), or have team member purchase laptop as per the [spending money](https://posthog.com/handbook/people/spending-money) guidelines
 *   [ ] Team member to purchase any other necessary equipment as per the [spending money](https://posthog.com/handbook/people/spending-money) guidelines
 *   [ ] Add calendar events for probation and 6-monthly performance reviews
-*   [ ] Give them $100 credit to spend on [PostHog merch store](https://merch.posthog.com/)
+*   [ ] Send them a [welcome merch bundle](https://app.printfection.com/account/campaign/manage.php?storeid=304945) on Printfection - 1 x rucksack, 3 x vertical stickers, 1 x origami, 1 x mug. If shipping to Europe, do not select the cheapest delivery option (so that we pay tax and customs.)
 *   [ ] Share the [Important Company Details](https://docs.google.com/spreadsheets/d/1k4o4VN5VSsgFZpVYrN28Ib0z_pCJFTJyQdfkZEHhOV0/edit?usp=sharing) sheet with them
 *   [ ] Add team member to the PostHog app
 *   [ ] Send them an invite to [Drata](https://app.drata.com/) to do security onboarding and their background check
