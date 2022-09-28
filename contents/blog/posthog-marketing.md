@@ -200,7 +200,7 @@ We recently started collecting more information from users at signup – we've a
 
 Thus far, we've focused on content and developing marketing channels that work. Eventually, we'll need to spend more time on website optimization and experimentation. We're not there yet, and we're wary of over optimization, but we have all the tools we need when we need them. 
 
-## Final thoughts (aka why we use PostHog in the marketing team)
+## Final thoughts
 
 In summary, there are a few important reasons why we use PostHog instead of traditional marketing tools:
 
