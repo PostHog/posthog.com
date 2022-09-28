@@ -7,7 +7,7 @@ showTitle: true
 hideAnchor: true
 categories: ["Inside PostHog", "Guides", "Using PostHog"]
 author: ["andy-vandervell"]
-featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImage: ../images/blog/posthog-marketing/marketing-hog.jpg
 featuredImageType: full
 ---
 
