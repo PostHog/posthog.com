@@ -39,7 +39,7 @@ This quarter I'm focusing on...
 - [ ] **Word of mouth growth:** We're starting to get a more detailed view of where our WOM growth comes from. I'll spend time scaling this growth with the marketing team. This could involve a referral program, influencers or levelling up and/our case studies. Maybe all of the above.
 - [ ] **Product design:** This is a personal goal. I'm switching from just-in-case to just-in-time technical learning and focusing on improving my knowledge of product design instead. The goal is to become more effective when providing feedback and when planning in-product proposals. Good thing [we have a generous book budget](/handbook/people/training#books). 
 
-This list is not exhaustive and is meant to guide the sort of work I do at a high level. If something more important comes up where I'll have more impact? Pivotting is fine. 
+This list is not exhaustive and is meant to guide the sort of work I do at a high level. If something more important comes up where I'll have more impact? Pivoting is fine. 
 
 ## Feedback
 In our last [360 feedback session](/handbook/people/feedback#full-team-feedback-sessions-1), I received feedback on the following points. 
