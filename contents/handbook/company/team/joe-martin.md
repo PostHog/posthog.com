@@ -27,16 +27,17 @@ I live just outside of London. I'm passionate about punk music, videogame preser
 - I value compassion and inclusivity above everything else. I try to put people first. 
 - Ad-hoc meetings are fine, but weekends are sacred. I generally work 9-6 GMT.
 
-## Areas of focus - Q2 2022
+## Areas of focus - Q4 2022
 
-In Q1 I focused on our internal community, content and partnerships, among other things. Among the milestones I set were organizing our first meet-up, securing an enterprise-scale case study, launching the Apps platform and leading partnerships with other orgs. These were all successful.
+Last quarter I focused on spending more time collaborating with the growth and product teams to directly contirbute to product improvements (such as tutorials and activation flows), growing external communities and partnerships, and becoming more autonomous/skilled technically. I
 
-In Q2, I'm focusing on the following areas:
+This quarter I'm focusing on
 
-- [ ] **Growth & Product:** Spend more time working with the Growth, Design and Engineering teams to have a direct impact on the product. Join Engineering sprints to find opportunities to collaborate. 
-- [ ] **Technical skills:** Continue to [improve technical skills and become more capable of shipping changes](https://posthog.com/blog/a-non-coders-thoughts-on-everybody-codes-culture-part-two) autonomously. Make changes directly to the product.  
-- [ ] **Scaling impact:** Find opportunities that, like Apps and onboarding, are especially impactful for users. Deprioritize sunk cost projects, such as Marketplace. Default to high-level content feedback over line-edits.
-- [ ] **Community activation:** Focus on opportunities to grow word of mouth by activating PostHog's community outside of Slack and GitHub. Example: G2 reviews, referral programmes, partnerships.  
+- [ ] **Onboarding:** Previously I've provided content and research to inform v1 of our onboarding flows. This quarter, I'm going to take greater ownership of onboarding by delivering improvements to our email onboarding, as well as continuing to work with Growth on improving in-product activation. 
+- [ ] **Announcements:** We have some specific things we want to announce, such as EU Cloud. We also have regular announcements, such as Array. In addition to taking ownership of the former, I'll also find ways to directly improve product announcements. A static page for Array? In-app announcements for new features? Better emails? Whatever is needed. 
+- [ ] **Word of mouth growth:** We're starting to get a more detailed view of where our WOM growth comes from. I'll spend time scaling this growth with the marketing team. This could involve a referral program, influencers or levelling up and/our case studies. 
+- [ ] **Product design:** This is a personal goal. I'm switching from just-in-case to just-in-time technical learning and focusing on improving my knowledge of product design. The goal is to become more effective when providing feedback and when planning in-product proposals. Good thing [we have a generous book budget](/handbook/people/training#books). 
+
 
 ## Feedback
 In our last [360 feedback session](/handbook/people/feedback#full-team-feedback-sessions-1), I received feedback on the following points. 
