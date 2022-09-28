@@ -26,7 +26,7 @@ export default function Contact(props) {
         if (tab === 'contact' || tab === 'demo') {
             setActiveTab(tab)
         }
-        if (demo && (demo === 'group' || demo === 'scale' || demo === 'enterprise' || demo === 'qa')) {
+        if (demo && (demo === 'cloud' || demo === 'selfhost' || demo === 'qa')) {
             setDemoType(demo)
         }
     }, [location])
@@ -52,6 +52,9 @@ export default function Contact(props) {
                                 type={demoType}
                                 iframeSrc={
                                     {
+                                        selfhost:
+                                            'https://calendly.com/d/ckz-37j-jz9/posthog-scale-customer-success-demo',
+                                        cloud: 'https://calendly.com/d/ckz-37j-jz9/posthog-scale-customer-success-demo',
                                         scale: 'https://calendly.com/d/ckz-37j-jz9/posthog-scale-customer-success-demo',
                                         group: 'https://calendly.com/cameron-posthog/posthog-demo',
                                         enterprise: 'https://calendly.com/simon-posthog/enterprise-demo',

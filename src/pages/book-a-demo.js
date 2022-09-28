@@ -21,10 +21,11 @@ const Editions = ({ setDemoType }) => {
                         width="full"
                         className="mt-4 box-border"
                         type="secondary"
-                        onClick={() => setDemoType('group')}
-                        event={{ name: 'book a demo: clicked group demo' }}
+                        onClick={() => open('https://www.loom.com/share/a75bad1edd1f4a97b90dc8d50e69e98d')}
+                        event={{ name: 'book a demo: clicked recorded demo' }}
                     >
-                        Join a group demo
+                        Watch a recorded demo
+                        <img src="https://cdn.loom.com/sessions/thumbnails/a75bad1edd1f4a97b90dc8d50e69e98d-1663256285164-with-play.gif" />
                     </CallToAction>
                 </div>
                 <div className="md:order-none order-first md:pl-6 pb-6 md:border-l md:border-b-0 border-b border-gray-accent-light border-dashed">
@@ -35,8 +36,8 @@ const Editions = ({ setDemoType }) => {
                                 width="full"
                                 className="box-border"
                                 type="primary"
-                                onClick={() => setDemoType('scale')}
-                                event={{ name: 'book a demo: clicked scale demo' }}
+                                onClick={() => setDemoType('cloud')}
+                                event={{ name: 'book a demo: clicked cloud demo' }}
                             >
                                 Book a personalized demo
                             </CallToAction>
@@ -47,8 +48,8 @@ const Editions = ({ setDemoType }) => {
                                 width="full"
                                 className="box-border"
                                 type="primary"
-                                onClick={() => setDemoType('enterprise')}
-                                event={{ name: 'book a demo: clicked enterprise demo' }}
+                                onClick={() => setDemoType('selfhost')}
+                                event={{ name: 'book a demo: clicked selfhost demo' }}
                             >
                                 Book a personalized demo
                             </CallToAction>
