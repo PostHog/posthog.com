@@ -28,7 +28,7 @@ We find it's important to bring a mixture of technical people, and those with wi
 
 ### During the meeting
 * When the meeting starts, allocate 10 minutes for people to read through everything and to add any additional hypotheses.
-* When the meeting has started, watch some session recordings of users going through key flows of the product. This may generate some further hypotheses. For example, users converting to paying customers, users activating, users inviting their colleagues.
+* After reading, watch session recordings of users going through key flows of the product. Allocate 20 minutes for this. This may generate some further hypotheses. For example, users converting to paying customers, users activating, users inviting their colleagues.
 * During the meeting, you should work through each hypothesis to determine if it is correct and decide how to respond. Answer each hypothesis using available data and write up any actions, such as experiments you want to run, with clearly allocated owners. 
 
 ### After the meeting
