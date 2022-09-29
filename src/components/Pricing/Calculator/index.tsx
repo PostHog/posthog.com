@@ -253,11 +253,12 @@ export default function Calculator({
                 )}
 
                 <p className="text-sm pt-2 mt-2 mb-4 pb-0 m-0 text-black/50 border-t border-dashed border-gray-accent-light">
-                    B2C company with millions of users?
+                    B2C company with {'>'}10 million events/month?
                     <br />
-                    <Link to="/signup/b2c" className="font-bold">
-                        Apply for a volume pricing plan
-                    </Link>
+                    <p className="font-bold">
+                        Contact us after you've made an account and have ingested your first event to receive up to a
+                        30% discount.
+                    </p>
                 </p>
 
                 <div className="pt-4 border-t border-gray-accent-light border-dashed">
