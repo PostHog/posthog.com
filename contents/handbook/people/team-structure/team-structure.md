@@ -93,6 +93,13 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Simon Fisher](/handbook/company/team#simon-fisher-customer-success) (Team lead, Customer Success)
 - [Cameron DeLeone](/handbook/company/team#cameron-deleone-customer-success) (Customer Success Manager)
 
+### [Exec](exec)
+- James Hawkins (Team lead, CEO)
+- Tim Glaser (CTO)
+- Luke Harries (Head of Product)
+- Charles Cook (VP Ops & Marketing)
+- Kendal Hall (Executive Assistant)
+
 ## Organization changes
 
 We’re still an early stage company, and so is our product. We strongly value moving and shipping fast (see [core values](/handbook/company/values)) and we constantly iterate not only our product but our organization too. As this happens, it may be quite possible that organizational changes occur. This mostly happens on the [small teams](/handbook/people/team-structure/why-small-teams) plane. To make the changes smoother for everyone, here’s the checklist we use:

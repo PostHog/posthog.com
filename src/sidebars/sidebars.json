@@ -152,6 +152,10 @@
                         {
                             "name": "Team Customer Success",
                             "url": "/handbook/people/team-structure/customer-success"
+                        },
+                        {
+                            "name": "Team Exec",
+                            "url": "/handbook/people/team-structure/exec"
                         }
                     ]
                 }
