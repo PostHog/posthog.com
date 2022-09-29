@@ -48,7 +48,7 @@ The dormant users are the ones who churned. Comparing them with the ones who did
 
 ![Lifecycle chart](../images/tutorials/churn-rate/lifecycle-chart.png)
 
-Once set up, we can click on the dormant part of the chart to get a list of dormant (churned) users. We can see user properties and, more importantly, session recordings for these users. This helps us lower churn in the next section.
+Once set up, we can click on the dormant part of the chart to get a list of dormant (churned) users. We can see their properties, save them as a cohort (which will be useful later) and, most importantly, watch their session recordings. This helps us gain insights to lower churn in the next section.
 
 You can learn more about lifecycle charts in our [product manual](/manual/lifecycle). 
 
@@ -64,9 +64,11 @@ Once we find a session recording from a churned user, we can watch their actions
 
 ### Cohorts
 
-On top of making improvements to problem areas, we can monitor users at high risk to churn. To do this, we can set up a cohort.
+On top of making improvements to problem areas, we can monitor users at high risk to churn. To do this, we can set up a cohort in one of two ways.
 
-To set up a cohort, go to the cohort page and create filters that match the high churn risk users. In our example, the filters are not completing a key event (uploading a file) in the last 30 days and stopping downloading files in the last 15 days (but having done so before).
+The first is creating the cohort from the list of users in our chart. As mentioned earlier, clicking on the dormant part of the chart gives us a list of users who churned during this period. Clicking "Save as cohort" in the bottom right corner will turn them into a cohort we can do more analysis on.
+
+The second way to create a cohort is by going to the cohort page and filtering to match the high churn risk users. In our example, the filters are not completing a key event (uploading a file) in the last 30 days and stopping downloading files in the last 15 days (but having done so before).
 
 ![Churn risk cohort](../images/tutorials/churn-rate/churn-risk-cohort.png)
 
