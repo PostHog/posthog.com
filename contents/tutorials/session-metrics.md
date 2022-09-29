@@ -11,7 +11,7 @@ topics: ['trends']
 - **Level:** Easy 🦔
 - **Estimated reading time:** 5 minutes ☕️
 
-Understanding how users spend their time in your product is a key part of understanding their behavior. Where users spend their time informs where your product development focus should be. Common metrics that reflect how users spend their time in your product include time on site, time on page, average session duration, and pages per session. 
+Analyzing where users spend their time in your product is vital for understanding which features they value most. There are numerous ways to do this, but one of the most common is to track metrics like time on site, time on page, average session duration, and pages per session. 
 
 These metrics can be calculated and visualized in PostHog by making use of sessions and their durations. We define a session as a set of events grouped to try to capture a single "use" of your product. Each session includes a duration between the first and last event, which we’ll heavily rely on. For more basic information about session data, see our [product manual](https://posthog.com/manual/sessions). 
 
@@ -82,6 +82,6 @@ Again, you can filter these series to better identify the types of users you wan
 
 These metrics should give you a better understanding of how users are spending their time in your product and site. Time on site, time in sections, average session time, and pages per session all provide insight into the experience of your product or the quality of your content. Making improvements to product or content quality helps improves these metrics.
 
-To dive deeper into these insights, you can use [session recordings](https://posthog.com/product/session-recording) to watch exactly how users are interacting with your product or the toolbar to use [heatmaps](https://posthog.com/product/heatmaps) to understand popular areas on popular pages.
+To dive deeper into these insights, you can use [session recordings](https://posthog.com/product/session-recording) to watch exactly how users are interacting with your product or the toolbar to use [heatmaps](https://posthog.com/product/heatmaps) to understand popular areas on pages.
 
 <NewsletterTutorial compact/>
