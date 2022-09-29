@@ -24,7 +24,7 @@ To follow this tutorial along, you need to have:
 1. **[Deployed PostHog](https://posthog.com/docs/deployment)**.
 2. Installed **[posthog-js](https://posthog.com/docs/integrate/client/js)** or added the **[PostHog snippet](https://posthog.com/docs/integrate/client/js)** to your site.
 
-### Time on site
+## Time on site
 
 To start calculating time-based insights you first must go to insights and create a new insight. Once in, choose pageview as your event, and aggregate the sum of session duration.
 
@@ -36,7 +36,7 @@ Once you modify the graph to your liking, by choosing a date range and setting t
 
 This might be useful for getting a rough idea of the usage of our whole product over time but becomes more useful as you break it down. You can do this by filtering the data. For example, you can filter for sessions by section of your product or site such as pricing or signup.
 
-### Time in sections
+## Time in sections
 
 To visualize time in sections, add a filter where the `Current URL` contains the section URL you want. In this case, it will be pricing and signup. Once one is set up, use the copy button and then change the `Current URL` value. This makes it quick to add multiple sections to the graph.
 
@@ -48,7 +48,7 @@ Once done, you’ll have a graph of session duration for the signup and pricing 
 
 ![Pricing vs signup session durations](../images/tutorials/session-metrics/pricing-vs-signup.png)
 
-### Time on pages
+## Time on pages
 
 If you want to know exactly what pages people are spending the most time in, you can *breakdown by* `Current URL` . Resetting the filters and switching the chart type to `Value` gives you a visual that looks like this:
 
@@ -56,7 +56,7 @@ If you want to know exactly what pages people are spending the most time in, you
 
 These insights and visualization might help you reprioritize pages and sections people are spending more time on. Depending on the context, high time on a page could mean the page is important, confusing, or not optimized. [Session recordings](https://posthog.com/product/session-recording) can help you find out if you don’t know.
 
-### Average session duration and pages per session
+## Average session duration
 
 Now that you visualized time on site, time in sections, and time on page, we can visualize some session-based metrics based on averages. Averages provide better insight into how individual users spend their time compared to the sum of time spent metrics calculated and visualized in the last section.
 
@@ -68,7 +68,7 @@ In many ways, average session duration is more useful than the sum or total time
 
 Once you calculate average session duration, you can filter the series to get information based on source or referring domain, device type, active feature flags, cohorts, and more. All of these filters help you get closer to the actual user behavior you are trying to understand.
 
-### Pages per session
+## Pages per session
 
 Another useful average to visualize is the average number of pages per session. To do this set up two graph series, one for total pageview count and a second for pageview unique sessions. You can then use the `A/B` formula to calculate the number of pages per session. 
 
