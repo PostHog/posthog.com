@@ -5,13 +5,13 @@ showTitle: true
 author: ['ian-vanagas']
 date: 2022-09-28
 featuredImage: ../images/tutorials/banners/actions.png
-topics: ['trends']
+topics: ['trends', 'retention', 'lifecycle']
 ---
 
 - **Level:** Easy 🦔
 - **Estimated reading time:** 6 minutes ☕️
 
-The word churn once reminded people of fresh butter, now it brings thoughts of lost users and revenue to product and marketing teams.
+The word churn once reminded people of fresh butter, now it brings thoughts of lost users and revenue.
 
 The churn rate is the percentage of users who stop an action during a certain period. It is used to understand the negative changes in usage, revenue, or other growth metrics. Understanding churn rate is key to figuring out problem areas in your product. 
 
@@ -23,23 +23,23 @@ To follow this tutorial along, you need to have:
 
 1. **[Deployed PostHog](https://posthog.com/docs/deployment)**.
 
-## Calculating churn rate
+## Step 1: Calculating churn rate
 
-To calculate churn rate, first, you must define what ended or stopped. For subscription-based businesses, this could be monthly recurring revenue attributable to a subscriber. For a customer success or sales team, it could be organizations usage. For a product team, it might be product usage events by a user. For this tutorial, this product usage is what we’ll focus on.
+To calculate churn rate, first, you must define what ended or stopped. For subscription-based businesses, this could be monthly recurring revenue attributable to a subscriber. For a customer success or sales team, it could be organization usage. For a product team, it might be product usage events by a user. We'll focus on product usage for this tutorial.
 
-To calculate product usage churn, we must have a group of users, events from usage they are triggering, and a time period. We can look back (however long your time period is) to check the total number of users triggering events and compare it to the number triggering events now. Our churn rate is the number of users who stopped divided by the total number of users at the beginning of the period.
+To calculate product usage churn, we need a group of users, events from usage they are triggering, and a time period. We can look back (however long your time period is) to check the total number of users triggering events and compare it to the number triggering events now. Our churn rate is the number of users who stopped divided by the total number of users at the beginning of the period.
 
 > If we had 100 users who used triggered events for a feature at the beginning of the period, and 80 who were continuing to trigger events it at the end, we’d have a churn rate of 20% because (100 - 80) / 100 * 100 = 20%
 
 Better yet, we can visualize and refine this calculation. PostHog has tools, like retention and lifecycle charts, that help you understand churn rate and see its changes over time.
 
-## Visualizing churn rate
+## Step 2: Visualizing churn rate
 
 To start visualizing churn rate, you can set up a retention funnel for users completing an action or event, then see how many continue their usage. The action or event you choose could be something like an autocapture of a pageview, an event capture you’ve written into your code or a combination of events (an action) that define feature usage. For us, we’ll set up a retention chart for unique users who completed the event `downloaded_file` over the last 8 weeks. 
 
 ![Retention chart](../images/tutorials/churn-rate/retention-chart.png)
 
-We can calculate our weekly churn and total churn by comparing our initial cohort size with the percentage of users remaining. For example, if we care about weekly churn, we can compare Week 0 and Week 1. If we care about churn across the entire period, we can compare Week 0 and Week 8. To learn more about retention charts, check out our [product manual](https://posthog.com/manual/retention).
+We can calculate our weekly churn and total churn by comparing our initial cohort size with the percentage of users remaining. For example, if we care about weekly churn, we can compare Week 0 and Week 1. If we care about churn across the entire period, we can compare Week 0 and Week 8. To learn more about retention charts, check out our [product manual](/manual/retention).
 
 ### Lifecycle charts
 
@@ -56,9 +56,9 @@ The dormant users are the ones who churned. Comparing them with the ones who did
 
 Once set up, we can click on the dormant part of the chart to get a list of dormant (churned) users. We can see user properties and, more importantly, session recordings for these users. This helps us lower churn in the next section.
 
-You can learn more about lifecycle charts in our [product manual](https://posthog.com/manual/lifecycle). 
+You can learn more about lifecycle charts in our [product manual](/manual/lifecycle). 
 
-## Lowering churn
+## Step 3: Lowering churn
 
 Now that we calculated and visualized the churn rate in our product, we can figure out ways to lower it. Being an all-in-one product OS, PostHog has tools to help you with this, and they connect to your data and the work you’ve already done.
 
@@ -66,7 +66,7 @@ Now that we calculated and visualized the churn rate in our product, we can figu
 
 First on this list is session recordings. From any of the visualizations, we can get a list of users who churned at specific times. Clicking on the charts we created earlier in this tutorial gives us a list of users. We can check this list for recordings of recent sessions of churned users.
 
-Once we find a session recording from a churned user, we can watch their actions leading up to them churning. We might discover, for example, that the pricing page confuses users or that they can’t set up a key feature. We can use this information to improve these problem areas (check out [experiments](https://posthog.com/manual/experimentation)).
+Once we find a session recording from a churned user, we can watch their actions leading up to them churning. We might discover, for example, that the pricing page confuses users or that they can’t set up a key feature. We can use this information to improve these problem areas (check out [experiments](/manual/experimentation)).
 
 ### Cohorts
 
@@ -80,8 +80,16 @@ Once saved, this provides us with a dynamic list of “high churn risk” users 
 
 ### Actions
 
-One way we can use a cohort is by combining it with an event to create an action. For example, we can set up an action to trigger when a user in our high churn risk cohort visits a help page. Using [webhooks](https://posthog.com/docs/integrate/webhooks/message-formatting), we can bring these actions into [Slack](https://posthog.com/docs/integrate/webhooks/slack) or wherever our sales or customer success team spends their time to have them reach out to users when the risk action is triggered.
+One way we can use a cohort is by combining it with an event to create an action. For example, we can set up an action to trigger when a user in our high churn risk cohort visits a help page. Using [webhooks](/docs/integrate/webhooks/message-formatting), we can bring these actions into [Slack](/docs/integrate/webhooks/slack) or wherever our sales or customer success team spends their time to have them reach out to users when the risk action is triggered.
 
 ![Churn risk action](../images/tutorials/churn-rate/churn-risk-action.png)
 
 Now we’ve targeted churn on multiple fronts, both by understanding what users are doing before they churn with session recordings and by monitoring users with cohorts and actions. We’ve begun to set up the tools for lowering churn. With continued improvement and experimentation, you’ll hopefully see improvements in your churn rate and the visualizations you’ve set up.
+
+## Further reading
+
+- [How to build, analyze and optimize conversion funnels in PostHog](/tutorials/funnels)
+- [The most useful B2B SaaS product metrics](/blog/b2b-saas-product-metrics)
+- [Finding your North Star metric and why it matters](/blog/north-star-metrics)
+
+<NewsletterTutorial compact/>
