@@ -13,7 +13,7 @@ They have led to some significant increases in monthly revenue growth.
 ## What it is
 
 ### Before the meeting
-* Before the meeting, everyone creates a list of hypotheses. These can be problems or opportunities. They should all be growth engineering related, and they should be focussed on improving our long term monthly growth rate.
+* Before the meeting, everyone creates a list of hypotheses. These can be problems or opportunities. They should all be growth engineering related, and they should be focused on improving our long term monthly growth rate.
 * Examples:
     * "More expensive new pricing has hurt signups"
     * "We're not solving bugs quickly and this is hurting word of mouth growth"
@@ -26,7 +26,7 @@ They have led to some significant increases in monthly revenue growth.
 * Then work through each hypotheses. Answer each hypothesis by looking at the data and write up any actions (for example, experiments we want to run).
 
 ### After the meeting
-* 2 weeks afer the meeting, we run a growth sprint planning session to retrospect on what got done and to confirm what we're doing next
+* 2 weeks after the meeting, we run a growth sprint planning session to retrospect on what got done and to confirm what we're doing next
 * 4 weeks later, we re-run the entire meeting. You may end up carrying some hypotheses from session to session (ie if they're blocked or lower priority).
 
 ## Attendees
