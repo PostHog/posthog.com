@@ -17,12 +17,6 @@ The churn rate is the percentage of users who stop an action during a certain pe
 
 In this tutorial, we’ll calculate and visualize the churn rate then use PostHog’s features of session recordings, cohorts, and actions to lower it.
 
-### Prerequisites
-
-To follow this tutorial along, you need to have:
-
-1. **[Deployed PostHog](https://posthog.com/docs/deployment)**.
-
 ## Step 1: Calculating churn rate
 
 To calculate churn rate, first, you must define what ended or stopped. For subscription-based businesses, this could be monthly recurring revenue attributable to a subscriber. For a customer success or sales team, it could be organization usage. For a product team, it might be product usage events by a user. We'll focus on product usage for this tutorial.
