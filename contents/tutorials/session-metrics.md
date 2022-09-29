@@ -17,7 +17,7 @@ These metrics can be calculated and visualized in PostHog by making use of sessi
 
 In this tutorial, we will use sessions to calculate and visualize a variety of session and time-based metrics like time on site and average session duration.
 
-### Prerequisites
+## Prerequisites
 
 To follow this tutorial along, you need to have:
 
