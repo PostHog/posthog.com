@@ -15,7 +15,10 @@ const Editions = ({ setDemoType }) => {
             <div className="max-w-[600px] mx-auto grid md:grid-cols-2 grid-cols-1 gap-x-6">
                 <div className="pb-6 md:pt-0 pt-6 justify-self-end w-full">
                     <div className="flex flex-col space-y-4">
-                        <Title title="Open Source" subtitle="Free, limited to one project" />
+                        <Title
+                            title="Open Source (free)"
+                            subtitle="No event limit. Self-hosted product that includes basic analytics."
+                        />
                     </div>
                     <CallToAction
                         width="full"
@@ -31,25 +34,16 @@ const Editions = ({ setDemoType }) => {
                 <div className="md:order-none order-first md:pl-6 pb-6 md:border-l md:border-b-0 border-b border-gray-accent-light border-dashed">
                     <div className="flex flex-col md:space-y-10 space-y-6">
                         <div className="space-y-4 w-full">
-                            <Title title="PostHog Cloud" subtitle="For large userbases or event volumes" />
+                            <Title
+                                title="Full feature set (paid)"
+                                subtitle="First million events per month free. Cloud (Saas) or self-hosted. All of PostHog's advanced analytics tools."
+                            />
                             <CallToAction
                                 width="full"
                                 className="box-border"
                                 type="primary"
-                                onClick={() => setDemoType('cloud')}
-                                event={{ name: 'book a demo: clicked cloud demo' }}
-                            >
-                                Book a personalized demo
-                            </CallToAction>
-                        </div>
-                        <div className="space-y-4 w-full">
-                            <Title title="Self-Hosted" subtitle="A focus on compliance and security" />
-                            <CallToAction
-                                width="full"
-                                className="box-border"
-                                type="primary"
-                                onClick={() => setDemoType('selfhost')}
-                                event={{ name: 'book a demo: clicked selfhost demo' }}
+                                onClick={() => setDemoType('paid')}
+                                event={{ name: 'book a demo: clicked paid demo' }}
                             >
                                 Book a personalized demo
                             </CallToAction>
