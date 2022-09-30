@@ -533,12 +533,13 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
     })
 
     result.data.squeakTopics.nodes.forEach((node) => {
-        const { id, slug, label } = node
+        const { slug, label, topicId } = node
+
         createPage({
             path: `questions/${slug}`,
             component: SqueakTopic,
             context: {
-                id,
+                id: topicId,
                 topics: result.data.squeakTopics.nodes,
                 label,
                 menu,
