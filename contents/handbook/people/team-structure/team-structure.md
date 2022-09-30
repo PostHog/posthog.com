@@ -51,10 +51,10 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Marius Andra](/handbook/company/team#marius-andra-software-engineer) (Team lead, Full Stack Engineer)
 - [Michael Matloka](/handbook/company/team#michael-matloka-software-engineer) (Full Stack Engineer)
 - [Paul D'Ambra](/handbook/company/team#paul-dambra-software-engineer) (Full Stack Engineer)
-- _[Lottie Coxon](/handbook/company/team#lottie-coxon) (Graphic Designer)
 - _Hiring for a [full stack engineer](careers/full-stack-engineer)_
 - _Hiring for a [full stack engineer](careers/full-stack-engineer)_
 - Product: Supported by Annika Schmid
+- Product design: Supported by Cory Watilo
 
 #### [Session Recordings](session-recordings)
 - [Ben White](/handbook/company/team#ben-white-full-stack-engineer) (Team lead, Full Stack Engineer)
@@ -62,6 +62,7 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Emanuele Capparelli](/handbook/company/team#ben-white-full-stack-engineer) (Growth Engineer)
 - _Hiring for a [full stack engineer](careers/full-stack-engineer)_
 - Product: Supported by Annika Schmid
+- Product design: Supported by Cory Watilo
 
 #### [App West - Feature flags / experiments / cohorts / SQL](app-west)
 - [Eric Duong](/handbook/company/team#eric-duong-software-engineer) (Team lead, Full Stack Engineer)
@@ -69,6 +70,7 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Neil Kakkar](/handbook/company/team#neil-kakkar-software-engineer) (Full Stack Engineer)Analytics_
 - _Hiring for a [full stack engineer](careers/full-stack-engineer)_
 - Product: Supported by Luke Harries
+- Product design: Supported by Cory Watilo
 
 #### [Platform](platform)
 - [James Greenhill](/handbook/company/team#james-greenhill-software-engineer) (Team lead, Data/Infra Engineer)
@@ -85,6 +87,7 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - _Incoming Senior Data Engineer_
 - _Hiring for a [full stack engineer](careers/full-stack-engineer)_
 - Product: Supported by Luke Harries
+- Product design: Supported by Cory Watilo
 
 ### [Marketing](marketing)
 - [Charles Cook](/handbook/company/team#charles-cook-business-operations) (Team lead, VP Ops & Marketing)
