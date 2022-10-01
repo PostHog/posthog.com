@@ -43,7 +43,7 @@ Some guidelines:
 
 Ideas for the agenda:
 - Planning session. What does the team want to achieve in the next month/quarter/year?
-- Look at the [team page](https://posthog.com/handbook/people/team-structure/team-structure#small-teams) - what needs to be updated?
+- Look at the [team page](https://posthog.com/handbook/small-teams/team-structure#small-teams) - what needs to be updated?
 - [360 degree feedback session](/handbook/people/feedback#ground-rules) - these are more effective at small team offsites
 
 The budget for these trips is up to $1,500 per person in total. We ask team members to use their best judgement for these and try to be thrifty where possible - these should be enjoyable, but not feel like a holiday. 
