@@ -43,7 +43,7 @@ hideAnchor: true
 
 ## Small teams
 
-We've organised the team into small teams that are multi-disciplinary. [You can read about why we've done it this way](/handbook/people/team-structure/why-small-teams).
+We've organised the team into small teams that are multi-disciplinary. [You can read about why we've done it this way](/handbook/company/small-teams).
 
 ### Engineering
 
@@ -102,7 +102,7 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 
 ## Organization changes
 
-We’re still an early stage company, and so is our product. We strongly value moving and shipping fast (see [core values](/handbook/company/values)) and we constantly iterate not only our product but our organization too. As this happens, it may be quite possible that organizational changes occur. This mostly happens on the [small teams](/handbook/people/team-structure/why-small-teams) plane. To make the changes smoother for everyone, here’s the checklist we use:
+We’re still an early stage company, and so is our product. We strongly value moving and shipping fast (see [core values](/handbook/company/values)) and we constantly iterate not only our product but our organization too. As this happens, it may be quite possible that organizational changes occur. This mostly happens on the [small teams](/handbook/company/small-teams) plane. To make the changes smoother for everyone, here’s the checklist we use:
 
 - [ ] Discuss with relevant team leads (and/or managers if applicable).
 - [ ] Discuss with relevant team member(s).

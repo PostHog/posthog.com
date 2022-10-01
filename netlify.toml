@@ -2265,3 +2265,62 @@
     from = "/handbook/company/working-with-product-design"
     to = "/handbook/engineering/product-design"
 
+
+# Added: 2022-10-01
+[[redirects]]
+    from = "/handbook/people/team-structure"
+    to = "/handbook/small-teams"
+
+
+# Added: 2022-10-01
+[[redirects]]
+    from = "/handbook/people/team-structure/why-small-teams"
+    to = "/handbook/company/small-teams"
+
+[[redirects]]
+    from = "/handbook/people/team-structure/app-east"
+    to = "/handbook/small-teams/app-east"
+
+[[redirects]]
+    from = "/handbook/people/team-structure/app-west"
+    to = "/handbook/small-teams/app-west"
+
+[[redirects]]
+    from = "/handbook/people/team-structure/customer-success"
+    to = "/handbook/small-teams/customer-success"
+
+[[redirects]]
+    from = "/handbook/people/team-structure/exec"
+    to = "/handbook/small-teams/exec"
+
+[[redirects]]
+    from = "/handbook/people/team-structure/growth"
+    to = "/handbook/small-teams/growth"
+
+[[redirects]]
+    from = "/handbook/people/team-structure/infrastructure"
+    to = "/handbook/small-teams/infrastructure"
+
+[[redirects]]
+    from = "/handbook/people/team-structure/ingestion"
+    to = "/handbook/small-teams/ingestion"
+
+[[redirects]]
+    from = "/handbook/people/team-structure/marketing"
+    to = "/handbook/small-teams/marketing"
+
+[[redirects]]
+    from = "/handbook/people/team-structure/people"
+    to = "/handbook/small-teams/people"
+
+[[redirects]]
+    from = "/handbook/people/team-structure/platform"
+    to = "/handbook/small-teams/platform"
+
+[[redirects]]
+    from = "/handbook/people/team-structure/session-recording"
+    to = "/handbook/small-teams/session-recording"
+
+[[redirects]]
+    from = "/handbook/people/team-structure/website-docs"
+    to = "/handbook/small-teams/website-docs"

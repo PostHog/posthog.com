@@ -1,5 +1,5 @@
 ---
-title: Why small teams
+title: Small teams
 sidebar: Handbook
 showTitle: true
 hideAnchor: false
@@ -49,7 +49,7 @@ During the quarter:
   6. Collaborate with other Small Teams such as marketing
   7. Become power users of their area of Posthog and use PostHog in their processes
 
-## What is the role of the Team Lead?
+## What is the role of the team lead?
 
 The team lead is overall responsible for ensuring the above happens. They should focus on enabling the team to solve these tasks together rather than trying to do it all themself.
 

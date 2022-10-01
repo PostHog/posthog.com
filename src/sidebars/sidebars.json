@@ -78,6 +78,10 @@
                     "url": "/handbook/company/values"
                 },
                 {
+                    "name": "Small teams",
+                    "url": "/handbook/company/small-teams"
+                },
+                {
                     "name": "Goal setting",
                     "url": "/handbook/company/goal-setting"
                 },
@@ -116,10 +120,6 @@
                     "url": "/handbook/small-teams/team-structure"
                 },
                 {
-                    "name": "Why small teams?",
-                    "url": "/handbook/small-teams/why-small-teams"
-                },
-                {
                     "name": "App East team",
                     "url": "/handbook/small-teams/app-east"
                 },
@@ -128,36 +128,36 @@
                     "url": "/handbook/small-teams/app-west"
                 },
                 {
-                    "name": "Platform team",
-                    "url": "/handbook/small-teams/platform"
+                    "name": "Customer Success team",
+                    "url": "/handbook/small-teams/customer-success"
                 },
                 {
-                    "name": "Ingestion team",
-                    "url": "/handbook/small-teams/ingestion"
+                    "name": "Exec team",
+                    "url": "/handbook/small-teams/exec"
                 },
                 {
                     "name": "Infrastructure team",
                     "url": "/handbook/small-teams/infrastructure"
                 },
                 {
-                    "name": "Marketing team",
-                    "url": "/handbook/small-teams/marketing"
+                    "name": "Ingestion team",
+                    "url": "/handbook/small-teams/ingestion"
                 },
                 {
-                    "name": "Website and Docs team",
-                    "url": "/handbook/small-teams/website-docs"
+                    "name": "Marketing team",
+                    "url": "/handbook/small-teams/marketing"
                 },
                 {
                     "name": "People and Ops team",
                     "url": "/handbook/small-teams/people"
                 },
                 {
-                    "name": "Customer Success team",
-                    "url": "/handbook/small-teams/customer-success"
+                    "name": "Platform team",
+                    "url": "/handbook/small-teams/platform"
                 },
                 {
-                    "name": "Team Exec team",
-                    "url": "/handbook/small-teams/exec"
+                    "name": "Website and Docs team",
+                    "url": "/handbook/small-teams/website-docs"
                 }
             ]
         },
