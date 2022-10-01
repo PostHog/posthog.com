@@ -671,16 +671,18 @@ export default function PostLayout({
                                             </SidebarAction>
                                         </>
                                     )}
-                                    <SidebarAction
-                                        className="!ml-auto"
-                                        title="Toggle content width"
-                                        onClick={handleFullWidthContentChange}
-                                    >
-                                        <ExpandDocument expanded={fullWidthContent} />
-                                    </SidebarAction>
-                                    <SidebarAction className="ml-2" width="auto" title="Toggle dark mode">
-                                        <DarkModeToggle />
-                                    </SidebarAction>
+                                    <div className="ml-auto flex">
+                                        <SidebarAction
+                                            className="hidden xl:block"
+                                            title="Toggle content width"
+                                            onClick={handleFullWidthContentChange}
+                                        >
+                                            <ExpandDocument expanded={fullWidthContent} />
+                                        </SidebarAction>
+                                        <SidebarAction className="ml-2" width="auto" title="Toggle dark mode">
+                                            <DarkModeToggle />
+                                        </SidebarAction>
+                                    </div>
                                 </ul>
                             </div>
                         </div>
