@@ -67,7 +67,7 @@ h6 {
 }
 
 h1 {
-    @apply text-5xl font-bold leading-normal;
+    @apply text-5xl font-bold !leading-none;
     letter-spacing: -0.03em;
 }
 
