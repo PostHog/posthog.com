@@ -8,6 +8,7 @@ import CallToAction from '../CallToAction'
 import { Wrapper } from '../Wrapper'
 import { graphql, useStaticQuery } from 'gatsby'
 import slugify from 'slugify'
+import { GitHub, LinkedIn, YouTube, Slack, Twitter } from 'components/Icons/Icons'
 
 interface ColMenuItems {
     title: string

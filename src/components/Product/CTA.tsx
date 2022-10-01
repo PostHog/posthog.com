@@ -4,7 +4,7 @@ import React from 'react'
 
 export default function CTA({ className = '' }) {
     return (
-        <div className={`bg-black px-8 md:px-16 py-12 -mb-8 text-white ${className}`}>
+        <div className={`bg-black px-8 md:px-16 pt-12 pb-16 -mb-8 text-white ${className}`}>
             <h4 className="text-4xl leading-tight mb-8 md:mb-4">
                 Where else can you get <span className="inline-block text-yellow">self-hostable</span>{' '}
                 <span className="inline-block text-red">product analytics,</span>{' '}

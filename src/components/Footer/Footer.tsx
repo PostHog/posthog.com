@@ -3,6 +3,220 @@ import Accordion from 'components/Accordion'
 import Link from 'components/Link'
 import Logo from 'components/Logo'
 import React from 'react'
+import { IProps, LinkListItem } from './LinkList'
+import ProductIcons from 'components/ProductIcons'
+import { GitHub, LinkedIn, YouTube, SlackMonochrome, Twitter } from 'components/Icons/Icons'
+
+const linklist: IProps[] = [
+    {
+        title: 'Product',
+        url: '/product',
+        items: [
+            {
+                title: 'Overview',
+                url: '/product',
+            },
+            {
+                title: 'Product analytics',
+                url: '/product#top-features',
+            },
+            {
+                title: 'Session recording',
+                url: '/product/session-recording',
+            },
+            {
+                title: 'A/B testing',
+                url: '/product/experimentation-suite',
+            },
+            {
+                title: 'Feature flags',
+                url: '/product/feature-flags',
+            },
+            {
+                title: 'Apps',
+                url: '/apps',
+            },
+        ],
+    },
+    {
+        title: 'Docs',
+        url: '/docs',
+        items: [
+            {
+                title: 'Quickstart guide',
+                url: '/docs/getting-started/cloud',
+            },
+            {
+                title: 'Self-hosting',
+                url: '/docs/self-host',
+            },
+            {
+                title: 'Installing PostHog',
+                url: '/docs/integrate',
+            },
+            {
+                title: 'Building an app',
+                url: '/docs/apps/build',
+            },
+            {
+                title: 'API',
+                url: '/docs/api',
+            },
+            {
+                title: 'Webhooks',
+                url: '/docs/integrate/webhooks/message-formatting',
+            },
+            {
+                title: 'How PostHog works',
+                url: '/docs/how-posthog-works',
+            },
+            {
+                title: 'Data privacy',
+                url: '/docs/privacy',
+            },
+        ],
+    },
+    {
+        title: 'Using PostHog',
+        url: '/using-posthog',
+        items: [
+            {
+                title: 'Product manual',
+                url: '/using-posthog/',
+            },
+            {
+                title: 'Apps manuals',
+                url: '/docs/apps',
+            },
+            {
+                title: 'Tutorials',
+                url: '/tutorials',
+            },
+        ],
+    },
+    {
+        title: 'Community',
+        url: '/questions',
+        items: [
+            {
+                title: 'Questions?',
+                url: '/questions',
+            },
+            {
+                title: 'Contributors',
+                url: '/contributors',
+            },
+            {
+                title: 'Partners',
+                url: '/partners',
+            },
+            {
+                title: 'Newsletter',
+                url: '/newsletter',
+            },
+            {
+                title: 'Customer stories',
+                url: '/customers',
+            },
+            {
+                title: 'Merch',
+                url: 'https://merch.posthog.com',
+            },
+            {
+                title: 'PostHog FM',
+                url: 'https://merch.posthog.com/collections/all',
+            },
+            {
+                title: 'PostHog on GitHub',
+                url: 'https://github.com/PostHog/posthog',
+            },
+        ],
+    },
+    {
+        title: 'Handbook',
+        url: '/handbook',
+        items: [
+            {
+                title: 'Getting started',
+                url: '/handbook/getting-started/start-here',
+            },
+            {
+                title: 'Company',
+                url: '/handbook/company/story',
+            },
+            {
+                title: 'Strategy',
+                url: '/handbook/strategy/overview',
+            },
+            {
+                title: 'How we work',
+                url: '/handbook/company/culture',
+            },
+            {
+                title: 'People & Ops',
+                url: '/handbook/people/compensation',
+            },
+            {
+                title: 'Engineering',
+                url: '/handbook/engineering/developing-locally',
+            },
+            {
+                title: 'Product',
+                url: '/handbook/product/product-team',
+            },
+            {
+                title: 'Design',
+                url: '/handbook/design/philosophy',
+            },
+            {
+                title: 'Marketing',
+                url: '/handbook/growth/marketing',
+            },
+            {
+                title: 'Customer success',
+                url: '/handbook/growth/strategy',
+            },
+        ],
+    },
+    {
+        title: 'Company',
+        url: '/about',
+        items: [
+            {
+                title: 'About',
+                url: '/about',
+            },
+            {
+                title: 'Team',
+                url: '/handbook/company/team',
+            },
+            {
+                title: 'Investors',
+                url: '/handbook/strategy/investors',
+            },
+            {
+                title: 'Press',
+                url: '/media',
+            },
+            {
+                title: 'Blog',
+                url: '/blog',
+            },
+            {
+                title: 'FAQ',
+                url: '/faq',
+            },
+            {
+                title: 'Support',
+                url: '/questions',
+            },
+            {
+                title: 'Careers',
+                url: '/careers',
+            },
+        ],
+    },
+]
 
 const linksHeadingSm = cntl`
     text-base
@@ -49,202 +263,89 @@ const FooterMenuItem = ({ title, url, className = '', marginBottom = '1' }) => {
 }
 
 export function Footer(): JSX.Element {
+    const social: Social[] = [
+        {
+            Icon: <SlackMonochrome className="w-8 h-8 box-border fill-current" />,
+            url: '/slack',
+        },
+        {
+            Icon: <Twitter className="w-8 h-8 box-border fill-current" />,
+            url: 'https://twitter.com/posthog',
+        },
+        {
+            Icon: (
+                <span className="fill-current">
+                    <LinkedIn className="w-8 h-8 box-border" />
+                </span>
+            ),
+            url: 'https://www.linkedin.com/company/posthog',
+        },
+        {
+            Icon: (
+                <span className="fill-current">
+                    <YouTube className="w-8 h-8 box-border" />
+                </span>
+            ),
+            url: 'https://www.youtube.com/channel/UCn4mJ4kK5KVSvozJre645LA',
+        },
+        {
+            Icon: (
+                <span className="fill-current">
+                    <GitHub className="w-8 h-8 box-border" />
+                </span>
+            ),
+            url: 'https://github.com/PostHog',
+        },
+    ]
+
     return (
-        <footer className="mt-20 leading">
-            <div className="py-5 border border-dashed border-gray-accent-light dark:border-gray-accent-dark border-l-0 border-r-0 w-full">
-                <ul className="list-none p-0 m-0 flex justify-between sm:space-x-12 items-center flex-wrap max-w-6xl mx-auto px-4">
-                    <li className="w-full sm:w-auto flex justify-center mb-2 lg:mb-0">
-                        <Logo noText />
-                    </li>
-                    <FooterMenuItem marginBottom="0" className="md:text-lg" title="About" url="/about" />
-                    <FooterMenuItem marginBottom="0" className="md:text-lg" title="Blog" url="/blog" />
-                    <FooterMenuItem marginBottom="0" className="md:text-lg" title="Newsletter" url="/newsletter" />
-                    <FooterMenuItem marginBottom="0" className="md:text-lg" title="Careers" url="/careers" />
-                    <FooterMenuItem
-                        marginBottom="0"
-                        className="lg:!ml-auto md:text-lg"
-                        title="Support"
-                        url="/questions"
-                    />
-                    <FooterMenuItem
-                        marginBottom="0"
-                        className="md:text-lg"
-                        title="Contact sales"
-                        url="/signup/self-host/get-in-touch#contact"
-                    />
+        <footer className="mt-20 border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark">
+            <div className="relative">
+                <div className="relative">
+                    <Link
+                        to="/"
+                        className="-top-6 left-[calc(50%-40px)] w-20 h-12 inline-flex justify-center items-center absolute z-10 rounded !bg-tan hover:!bg-gray-accent-light/90 px-4 active:!bg-gray-accent-light/100 dark:!hover:gray-accent-dark border border-dashed border-gray-accent-light dark:border-gray-accent-dark hover:scale-[1.02] active:top-[1px] active:scale-[.99] transition-all"
+                    >
+                        <span className="inline-block">{ProductIcons.posthogMonochrome}</span>
+                    </Link>
+                </div>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-3 border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:border-r-0 last:border-r-0 lg:grid-cols-6 w-11/12 max-w-7xl mx-auto">
+                {linklist.map((item) => (
+                    <>
+                        <LinkListItem {...item} />
+                    </>
+                ))}
+            </div>
+
+            <div className="flex lg:border-t border-gray-accent-light dark:border-gray-accent-dark border-dashed justify-center">
+                <ul className="list-none px-0 py-2 flex space-x-4">
+                    {social.map(({ Icon, url }: Social) => {
+                        return (
+                            <li key={url}>
+                                <Link
+                                    to={url}
+                                    className="rounded p-2 inline-flex hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark opacity-70 hover:opacity-90 relative hover:scale-[1.01] active:top-[1px] active:scale-[.99] transition-all"
+                                >
+                                    {Icon}
+                                </Link>
+                            </li>
+                        )
+                    })}
                 </ul>
             </div>
-            <div className="grid grid-cols-1 lg:grid-cols-3 max-w-6xl mx-auto my-9 lg:my-0 px-4">
-                <div className="col-span-2 border-b-1 lg:border-r-1 border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:pr-10 py-4 lg:py-7">
-                    <Accordion title={'Product OS suite'} titleClasses={linksHeadingLg}>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
-                            <div>
-                                <h4 className={linksHeadingMd}>
-                                    <Link
-                                        to="/product"
-                                        className="font-bold dark:text-primary-dark text-primary dark:hover:text-primary-dark hover:text-primary"
-                                    >
-                                        Product overview
-                                    </Link>
-                                </h4>
-                                <h5 className={linksHeadingSm}>Analytics</h5>
-                                <ul className="list-none p-0 m-0 space-y-1">
-                                    <FooterMenuItem title="Funnels" url="/product/funnels" />
-                                    <FooterMenuItem title="Trends" url="/product/trends" />
-                                    <FooterMenuItem title="Paths" url="/product/user-paths" />
-                                </ul>
-                            </div>
-                            <div>
-                                <h4 className={linksHeadingMd}>
-                                    <Link
-                                        to="/pricing"
-                                        className="font-bold dark:text-primary-dark text-primary dark:hover:text-primary-dark hover:text-primary"
-                                    >
-                                        Pricing
-                                    </Link>
-                                </h4>
-                                <h5 className={linksHeadingSm}>Features</h5>
-                                <ul className="list-none p-0 m-0 space-y-1">
-                                    <FooterMenuItem title="Session recording" url="/product/session-recording" />
-                                    <FooterMenuItem title="Feature flags" url="/product/feature-flags" />
-                                    <FooterMenuItem title="Experimentation" url="/product/experimentation-suite" />
-                                    <FooterMenuItem title="Heatmaps" url="/product/heatmaps" />
-                                </ul>
-                            </div>
-                            <div>
-                                <h4 className={linksHeadingMd}>
-                                    <Link
-                                        to="/customers"
-                                        className="font-bold dark:text-primary-dark text-primary dark:hover:text-primary-dark hover:text-primary"
-                                    >
-                                        Customers
-                                    </Link>
-                                </h4>
-                                <h5 className={linksHeadingSm}>Platform</h5>
-                                <ul className="list-none p-0 m-0 space-y-1">
-                                    <FooterMenuItem title="Correlation analysis" url="/product/correlation-analysis" />
-                                    <FooterMenuItem title="Collaboration" url="/product/collaboration" />
-                                    <FooterMenuItem title="Apps" url="/apps" />
-                                </ul>
-                            </div>
-                        </div>
-                    </Accordion>
-                </div>
-                <div className="col-span-1 border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:px-10 py-4 lg:pb-7 lg:py-7">
-                    <Accordion title="Community" titleClasses={linksHeadingLg}>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <h5 className={linksHeadingSm}>Discussion</h5>
-                                <ul className="list-none p-0 m-0 space-y-1">
-                                    <FooterMenuItem title="Questions?" url="/questions" />
-                                    <FooterMenuItem title="Slack" url="/slack" />
-                                    <FooterMenuItem
-                                        title="Issues"
-                                        url="https://github.com/PostHog/posthog.com/issues"
-                                    />
-                                    <FooterMenuItem
-                                        title="Contact sales"
-                                        url="/signup/self-host/get-in-touch#contact"
-                                    />
-                                </ul>
-                            </div>
-                            <div>
-                                <h5 className={linksHeadingSm}>Get involved</h5>
-                                <ul className="list-none p-0 m-0 space-y-1">
-                                    <FooterMenuItem title="Roadmap" url="/handbook/strategy/roadmap" />
-                                    <FooterMenuItem title="Contributors" url="/contributors" />
-                                    <FooterMenuItem title="Merch" url="https://merch.posthog.com/collections/all" />
-                                    <FooterMenuItem
-                                        title="PostHog FM"
-                                        url="https://open.spotify.com/playlist/7A2H2J3WhpJmMEwAhKahWH?si=47418915a8d0447b"
-                                    />
-                                    <FooterMenuItem title="Marketplace" url="/marketplace" />
-                                </ul>
-                            </div>
-                        </div>
-                    </Accordion>
-                </div>
-                <div className="col-span-2 lg:border-r-1 border-b-1 lg:border-b-0 border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:pr-10 py-4 lg:py-7">
-                    <Accordion title="Docs" titleClasses={linksHeadingLg}>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div>
-                                <h5 className={linksHeadingSm}>Getting started</h5>
-                                <ul className="list-none p-0 m-0 space-y-1">
-                                    <FooterMenuItem title="PostHog Cloud" url="https://app.posthog.com/signup" />
-                                    <FooterMenuItem title="Self-hosted" url="/docs/self-host" />
-                                    <FooterMenuItem title="Compare options" url="/pricing" />
-                                    <FooterMenuItem title="Tutorials" url="/tutorials" />
-                                    <FooterMenuItem
-                                        title="PostHog on GitHub"
-                                        url="https://github.com/posthog/posthog"
-                                    />
-                                </ul>
-                            </div>
-                            <div>
-                                <h5 className={linksHeadingSm}>Install & integrate</h5>
-                                <ul className="list-none p-0 m-0 space-y-1">
-                                    <FooterMenuItem
-                                        title="Installation"
-                                        url="/docs/integrate/client/snippet-installation"
-                                    />
-                                    <FooterMenuItem title="Docs" url="/docs" />
-                                    <FooterMenuItem title="API" url="/docs/api" />
-                                    <FooterMenuItem title="Apps" url="/docs/apps" />
-                                </ul>
-                            </div>
-                            <div>
-                                <h5 className={linksHeadingSm}>Product manual</h5>
-                                <ul className="list-none p-0 m-0 space-y-1">
-                                    <FooterMenuItem title="Cohorts" url="/manual/cohorts" />
-                                    <FooterMenuItem title="Funnels" url="/manual/funnels" />
-                                    <FooterMenuItem title="Sessions" url="/manual/sessions" />
-                                    <FooterMenuItem title="Data" url="/manual/actions" />
-                                    <FooterMenuItem title="Events" url="/manual/events" />
-                                </ul>
-                            </div>
-                        </div>
-                    </Accordion>
-                </div>
-                <div className="col-span-1 lg:px-10 py-4 lg:py-7">
-                    <Accordion title="Company" titleClasses={linksHeadingLg}>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <h5 className={linksHeadingSm}>About</h5>
-                                <ul className="list-none p-0 m-0 space-y-1">
-                                    <FooterMenuItem title="About us" url="/about" />
-                                    <FooterMenuItem title="Our story" url="/handbook/company/story" />
-                                    <FooterMenuItem title="Team" url="/handbook/company/team" />
-                                    <FooterMenuItem title="Handbook" url="/handbook" />
-                                    <FooterMenuItem title="Investors" url="/handbook/strategy/investors" />
-                                    <FooterMenuItem title="Careers" url="/careers" />
-                                </ul>
-                            </div>
-                            <div>
-                                <h5 className={linksHeadingSm}>Resources</h5>
-                                <ul className="list-none p-0 m-0 space-y-1">
-                                    <FooterMenuItem title="FAQ" url="/faq" />
-                                    <FooterMenuItem title="Ask a question" url="/questions" />
-                                    <FooterMenuItem title="Blog" url="/blog" />
-                                    <FooterMenuItem title="Press" url="/media" />
-                                    <FooterMenuItem title="Merch" url="https://merch.posthog.com/collections/all" />
-                                    <FooterMenuItem
-                                        title="YouTube"
-                                        url="https://www.youtube.com/channel/UCn4mJ4kK5KVSvozJre645LA"
-                                    />
-                                </ul>
-                            </div>
-                        </div>
-                    </Accordion>
-                </div>
-            </div>
+
             <div className="py-5 border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark border-l-0 border-r-0">
-                <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center text-lg px-5">
-                    <small className="font-bold dark:text-gray">&copy; {new Date().getFullYear()} PostHog, Inc.</small>
+                <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center text-lg px-5">
+                    <small className="font-semibold dark:text-gray">
+                        &copy; {new Date().getFullYear()} PostHog, Inc.
+                    </small>
                     <ul className="m-0 p-0 list-none sm:ml-auto flex sm:space-x-8 space-x-4 mt-2 sm:mt-0">
                         <li>
                             <Link
                                 to="/docs/contribute/code-of-conduct"
-                                className="font-bold text-sm text-almost-black hover:text-almost-black dark:text-gray dark dark:hover:text-gray"
+                                className="font-bold text-sm text-almost-black/70 hover:text-almost-black/90 dark:text-gray dark dark:hover:text-gray"
                             >
                                 Code of conduct
                             </Link>
@@ -252,15 +353,15 @@ export function Footer(): JSX.Element {
                         <li>
                             <Link
                                 to="/privacy"
-                                className="font-bold text-sm text-almost-black hover:text-almost-black dark:text-gray dark dark:hover:text-gray"
+                                className="font-bold text-sm text-almost-black/70 hover:text-almost-black/90 dark:text-gray dark dark:hover:text-gray"
                             >
-                                Privacy
+                                Privacy policy
                             </Link>
                         </li>
                         <li>
                             <Link
                                 to="/terms"
-                                className="font-bold text-sm text-almost-black hover:text-almost-black dark:text-gray dark dark:hover:text-gray"
+                                className="font-bold text-sm text-almost-black/70 hover:text-almost-black/90 dark:text-gray dark dark:hover:text-gray"
                             >
                                 Terms
                             </Link>
