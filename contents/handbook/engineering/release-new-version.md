@@ -90,7 +90,7 @@ Release is happening next Monday. Which means
   git log --pretty=format:"%s %ae" origin/release-[old-version]..head | sort -t ':' -k 1,1 -s > changelog.txt
   ```
 1. [ ] Write up the [PostHog Array blog post](/handbook/growth/marketing/blog#posthog-array). Please tag Joe Martin for review, as this helps Marketing coordinate other announcements. Do not release the post until the day of release.
-1. [ ] Share the PostHog Array blog post with all partners listed in the [PostHog Marketplace](/marketplace) via the dedicated Slack channels. Don't have access to them all? Please ask Joe Martin to do this instead. 
+1. [ ] Share the PostHog Array blog post with all partners listed in the [PostHog partner directory](/partners) via the dedicated Slack channels. Don't have access to them all? Please ask Joe Martin to do this instead. 
 
 ### Launch (day of the release)
 1. [ ] Tag the version in GitHub. This will also build and push the `release-[version]`, `latest-release` (for both PostHog base & FOSS) Docker images to Docker Hub. **Please do this once the release branch is finalized, some users may see the image on Docker Hub and update immediately.**

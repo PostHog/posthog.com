@@ -4,9 +4,9 @@ showTitle: true
 hideLastUpdated: true
 ---
 
-**[← Back to Marketplace](/marketplace)**
+**[← Back to Partners](/partners)**
 
-<img src="/images/marketplace/restack.png" alt="Restack logo" width="100" style={{borderRadius: '100px', float: 'right', margin: '0 0 1rem 1rem'}} />
+<img src="/images/partners/restack.png" alt="Restack logo" width="100" style={{borderRadius: '100px', float: 'right', margin: '0 0 1rem 1rem'}} />
 
 [Restack](https://www.restack.io) enables you to run PostHog on your own Kubernetes Cluster on AWS.
 At Restack, we believe in open-source but also know the pain of hosting and maintaining them on your own servers. 

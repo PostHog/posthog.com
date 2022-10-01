@@ -2265,3 +2265,7 @@
     from = "/handbook/company/working-with-product-design"
     to = "/handbook/engineering/product-design"
 
+[[redirects]]
+    from = "/marketplace"
+    to = "/partners"
+    status = 302

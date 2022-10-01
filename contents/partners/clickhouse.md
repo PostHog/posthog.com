@@ -4,9 +4,9 @@ showTitle: true
 hideLastUpdated: true
 ---
 
-**[← Back to Marketplace](/marketplace)**
+**[← Back to Partners](/partners)**
 
-<img src="/images/marketplace/clickhouse.svg" alt="Clickhouse Logo" width="100" style={{float: 'right', margin: '0 0 1rem 1rem'}} />
+<img src="/images/partners/clickhouse.svg" alt="Clickhouse Logo" width="100" style={{float: 'right', margin: '0 0 1rem 1rem'}} />
 
 ClickHouse is an open-source column-oriented database management system. (Note: PostHog runs on ClickHouse!)
 
