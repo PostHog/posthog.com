@@ -108,7 +108,7 @@
             ]
         },
         {
-            "name": "Small Teams",
+            "name": "Small teams",
             "url": "",
             "children": [
                 {
@@ -120,43 +120,43 @@
                     "url": "/handbook/small-teams/why-small-teams"
                 },
                 {
-                    "name": "Team App East",
+                    "name": "App East team",
                     "url": "/handbook/small-teams/app-east"
                 },
                 {
-                    "name": "Team App West",
+                    "name": "App West team",
                     "url": "/handbook/small-teams/app-west"
                 },
                 {
-                    "name": "Team Platform",
+                    "name": "Platform team",
                     "url": "/handbook/small-teams/platform"
                 },
                 {
-                    "name": "Team Ingestion",
+                    "name": "Ingestion team",
                     "url": "/handbook/small-teams/ingestion"
                 },
                 {
-                    "name": "Team Infrastructure",
+                    "name": "Infrastructure team",
                     "url": "/handbook/small-teams/infrastructure"
                 },
                 {
-                    "name": "Team Marketing",
+                    "name": "Marketing team",
                     "url": "/handbook/small-teams/marketing"
                 },
                 {
-                    "name": "Team Website and Docs",
+                    "name": "Website and Docs team",
                     "url": "/handbook/small-teams/website-docs"
                 },
                 {
-                    "name": "Team People and Ops",
+                    "name": "People and Ops team",
                     "url": "/handbook/small-teams/people"
                 },
                 {
-                    "name": "Team Customer Success",
+                    "name": "Customer Success team",
                     "url": "/handbook/small-teams/customer-success"
                 },
                 {
-                    "name": "Team Exec",
+                    "name": "Team Exec team",
                     "url": "/handbook/small-teams/exec"
                 }
             ]
