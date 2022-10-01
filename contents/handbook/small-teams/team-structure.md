@@ -2,7 +2,7 @@
 title: Team structure
 sidebar: Handbook
 showTitle: true
-hideAnchor: true
+hideAnchor: false
 ---
 
 ## Reporting structure
