@@ -311,7 +311,7 @@ export function Footer(): JSX.Element {
                 </div>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:border-r-0 last:border-r-0 lg:grid-cols-6 w-11/12 max-w-7xl mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-3 border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:border-r-0 last:border-r-0 lg:grid-cols-6 w-full max-w-screen-2xl mx-auto">
                 {linklist.map((item) => (
                     <>
                         <LinkListItem {...item} />
