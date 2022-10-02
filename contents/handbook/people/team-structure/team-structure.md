@@ -53,10 +53,10 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Marius Andra](/handbook/company/team#marius-andra-software-engineer) (Team lead, Full Stack Engineer)
 - [Michael Matloka](/handbook/company/team#michael-matloka-software-engineer) (Full Stack Engineer)
 - [Paul D'Ambra](/handbook/company/team#paul-dambra-software-engineer) (Full Stack Engineer)
-- _Hiring for a [full stack engineer](careers/full-stack-engineer)_
-- _Hiring for a [full stack engineer](careers/full-stack-engineer)_
 - Product: Supported by Annika Schmid
 - Product design: Supported by Cory Watilo
+- _Hiring for a [full stack engineer](careers/full-stack-engineer)_
+- _Hiring for a [full stack engineer](careers/full-stack-engineer)_
 
 #### [Experimentation](experimentation)
 - [Eric Duong](/handbook/company/team#eric-duong-software-engineer) (Team lead, Full Stack Engineer)
