@@ -732,10 +732,10 @@
     from = "/handbook/people/team-structure/growth-engineering"
     to = "/handbook/people/team-structure/growth"
 
-# Added: 2021-08-19
+# Added: 2021-08-19 # Modified: 2022-10-02
 [[redirects]]
-    from = "/handbook/people/team-structure/infrastructure"
-    to = "/handbook/people/team-structure/platform"
+    from = "/handbook/people/team-structure/platform"
+    to = "/handbook/people/team-structure/infrastructure"
 
 # Added: 2021-09-09
 [[redirects]]
@@ -1763,7 +1763,11 @@
 
 [[redirects]]
     from = "/handbook/engineering/app-west"
-    to = "/handbook/people/team-structure/app-west"
+    to = "/handbook/people/team-structure/experimentation"
+
+[[redirects]]
+    from = "/handbook/people/team-structure/app-west"
+    to = "/handbook/people/team-structure/experimentation"
 
 [[redirects]]
     from = "/docs/self-host/configure/async-migrations"
@@ -2272,22 +2276,22 @@
     from = "/handbook/people/team-structure/app-east/objectives"
     to = "/handbook/people/team-structure/product-analytics/objectives"
 
-# Added: 2022-09-15
+# Added: 2022-09-15 # Modified: 2022-10-02
 [[redirects]]
-    from = "/handbook/people/team-structure/infrastructure"
-    to = "/handbook/people/team-structure/platform"
-
-
-# Added: 2022-09-15
-[[redirects]]
-    from = "/handbook/people/team-structure/infrastructure/mission"
-    to = "/handbook/people/team-structure/platform/mission"
+    from = "/handbook/people/team-structure/platform"
+    to = "/handbook/people/team-structure/infrastructure"
 
 
 # Added: 2022-09-15
 [[redirects]]
-    from = "/handbook/people/team-structure/infrastructure/objectives"
-    to = "/handbook/people/team-structure/platform/objectives"
+    from = "/handbook/people/team-structure/platform/mission"
+    to = "/handbook/people/team-structure/infrastructure/mission"
+
+
+# Added: 2022-09-15
+[[redirects]]
+    from = "/handbook/people/team-structure/platform/objectives"
+    to = "/handbook/people/team-structure/infrastructure/objectives"
 
 
 # Added: 2022-09-16

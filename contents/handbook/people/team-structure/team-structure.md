@@ -62,6 +62,9 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Eric Duong](/handbook/company/team#eric-duong-software-engineer) (Team lead, Full Stack Engineer)
 - [Neil Kakkar](/handbook/company/team#neil-kakkar-software-engineer) (Full Stack Engineer)
 - [Li Yi Yu](/handbook/company/team#li-yi-yu-full-stack-engineer) (Full Stack Engineer)
+- _Hiring for a [full stack engineer](careers/full-stack-engineer)_
+- Product: Supported by Luke Harries
+- Product design: Supported by Cory Watilo
 
 #### [Session Recordings](session-recordings)
 - [Ben White](/handbook/company/team#ben-white-full-stack-engineer) (Team lead, Full Stack Engineer)
@@ -69,14 +72,6 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Emanuele Capparelli](/handbook/company/team#ben-white-full-stack-engineer) (Growth Engineer)
 - _Hiring for a [full stack engineer](careers/full-stack-engineer)_
 - Product: Supported by Annika Schmid
-- Product design: Supported by Cory Watilo
-
-#### [App West - Feature flags / experiments / cohorts / SQL](app-west)
-- [Eric Duong](/handbook/company/team#eric-duong-software-engineer) (Team lead, Full Stack Engineer)
-- [Li Yi Yu](/handbook/company/team#li-yi-yu-full-stack-engineer) (Full Stack Engineer)
-- [Neil Kakkar](/handbook/company/team#neil-kakkar-software-engineer) (Full Stack Engineer)Analytics_
-- _Hiring for a [full stack engineer](careers/full-stack-engineer)_
-- Product: Supported by Luke Harries
 - Product design: Supported by Cory Watilo
 
 #### [Platform](platform)
