@@ -58,7 +58,7 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - Product: Supported by Annika Schmid
 - Product design: Supported by Cory Watilo
 
-#### [App Experimentation](app-experimentation)
+#### [Experimentation](experimentation)
 - [Eric Duong](/handbook/company/team#eric-duong-software-engineer) (Team lead, Full Stack Engineer)
 - [Neil Kakkar](/handbook/company/team#neil-kakkar-software-engineer) (Full Stack Engineer)
 - [Li Yi Yu](/handbook/company/team#li-yi-yu-full-stack-engineer) (Full Stack Engineer)
@@ -74,7 +74,7 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - Product: Supported by Annika Schmid
 - Product design: Supported by Cory Watilo
 
-#### [Platform](platform)
+#### [Infrastructure](infrastructure)
 - [James Greenhill](/handbook/company/team#james-greenhill-software-engineer) (Team lead, Data/Infra Engineer)
 - Ellie Huxtable
 - [Guido Iaquinti](/handbook/company/team#guido-iaquinti-software-engineer) (Site Reliability Engineer)
