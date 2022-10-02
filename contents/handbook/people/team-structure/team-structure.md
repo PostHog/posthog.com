@@ -26,16 +26,18 @@ hideAnchor: true
       - Rick Marron, Full Stack Engineer
     - **Luke Harries, Head of Product**
       - Annika Schmid, Product Manager
+      - Joe Martin, Product Marketer
     - Karl-Aksel Puulmann, Full Stack Engineer
     - Harry Waye, Full Stack Engineer
   - **Charles Cook, VP of Operations & Marketing**
     - Andy Vandervell, Content Marketer
     - Grace McKenzie, Operations Manager
     - Coua Phang, Tech Talent Partner
-    - Joe Martin, Product Marketer
+    - Ian Vanagas, Technical Content Marketer
   - **Cory Watilo, Lead Designer**
     - Lottie Coxon, Graphic Designer
     - Eli Kinsey, Front End Engineer
+    - Paul Hultgren, Developer Advocate
   - **Simon Fisher, Customer Success Lead**
     - Cameron DeLeone, Customer Success Manager
 
@@ -55,6 +57,11 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - _Hiring for a [full stack engineer](careers/full-stack-engineer)_
 - Product: Supported by Annika Schmid
 - Product design: Supported by Cory Watilo
+
+#### [App Experimentation](app-experimentation)
+- [Eric Duong](/handbook/company/team#eric-duong-software-engineer) (Team lead, Full Stack Engineer)
+- [Neil Kakkar](/handbook/company/team#neil-kakkar-software-engineer) (Full Stack Engineer)
+- [Li Yi Yu](/handbook/company/team#li-yi-yu-full-stack-engineer) (Full Stack Engineer)
 
 #### [Session Recordings](session-recordings)
 - [Ben White](/handbook/company/team#ben-white-full-stack-engineer) (Team lead, Full Stack Engineer)
@@ -93,6 +100,7 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Charles Cook](/handbook/company/team#charles-cook-business-operations) (Team lead, VP Ops & Marketing)
 - [Joe Martin](/handbook/company/team#joe-martin-product-marketer) (Product Marketer)
 - [Andy Vandervell, Content Marketer](/handbook/company/team#andy-vandervell-content-marketer) (Content Marketer)
+- Ian Vanagas, Technical Content Marketer
 
 ### [Website and Docs](website-docs)
 - [Cory Watilo](/handbook/company/team#cory-watilo-lead-designer) (Lead Designer)
@@ -107,6 +115,13 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 ### [Customer Success](customer-success)
 - [Simon Fisher](/handbook/company/team#simon-fisher-customer-success) (Team lead, Customer Success)
 - [Cameron DeLeone](/handbook/company/team#cameron-deleone-customer-success) (Customer Success Manager)
+
+### [Exec](exec)
+- James Hawkins (Team lead, CEO)
+- Tim Glaser (CTO)
+- Luke Harries (Head of Product)
+- Charles Cook (VP Ops & Marketing)
+- Kendal Hall (Executive Assistant)
 
 ## Organization changes
 

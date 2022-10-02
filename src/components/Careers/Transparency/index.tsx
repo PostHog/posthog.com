@@ -52,7 +52,7 @@ const TransparencyFeature = ({ image, title, children, className = '' }: Transpa
 
 export const Transparency = () => {
     return (
-        <div className="careers-transparency pt-12 md:pt-24 text-center" id="transparency">
+        <div className="careers-transparency pt-12 text-center" id="transparency">
             <Structure.Section width="4xl">
                 <Structure.SectionHeader
                     title="The most transparent company, ever"
@@ -118,7 +118,10 @@ export const Transparency = () => {
                     />
                 </Structure.Section>
                 <div className="pb-16 px-4 md:px-0">
-                    <p className="text-base font-semibold max-w-2xl mx-auto mb-12">In 2026 we aim to go public with $100M revenue. To achieve this, PostHog will need to be the standard devtool for building better products.</p>
+                    <p className="text-base font-semibold max-w-2xl mx-auto mb-12">
+                        In 2026 we aim to go public with $100M revenue. To achieve this, PostHog will need to be the
+                        standard devtool for building better products.
+                    </p>
 
                     <h3 className="mb-4">We look for people who are:</h3>
 

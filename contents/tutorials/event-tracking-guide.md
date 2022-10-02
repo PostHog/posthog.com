@@ -2,184 +2,302 @@
 title: Complete guide to event tracking 
 sidebar: Docs
 showTitle: true
-author: ['yakko-majuri']
-date: 2021-08-02
+author: ['ian-vanagas', 'yakko-majuri']
+date: 2022-09-23
 featuredImage: ../images/tutorials/banners/actions.png
-topics: ['configuration']
+topics: ['actions']
 ---
 
-_Estimated reading time: 7 minutes_ ☕☕
+- **Level:** Medium 🦔🦔
+- **Estimated reading time:** 12 minutes ☕️☕️
 
-One of the features we're very proud of at PostHog is event autocapture.
+Event tracking is the first step in making a product better (after building the product). Event tracking gathers the data you need to understand the usage of your product, do analysis, and make improvement decisions. Ideally, every time a user takes action, an event can be captured that helps deepen your understanding of the usage of your product.
 
-Autocapture is great because it ensures you don't miss out on any data that could potentially be relevant to your product. If you restructure your frontend, for example, autocapture will continue to collect relevant events without you needing to update your codebase each time. 
+At PostHog, we offer two ways to track events: autocapture and custom events. This tutorial addresses both step-by-step, walking through setting up autocapture, then diving deeper into custom events, and finally refining those custom events to capture the right data you need.
 
-However, for more advanced product analytics, autocapture is not enough. 
+## Setting up autocapture
 
-First, event autocapture can be a bit overwhelming. On high volume instances, where events come in by the thousands every minute, the events table provided by PostHog can contain so much information that it can be difficult to determine exactly what you care about. 
+Autocapture makes it easy to start getting data such as page views, clicks, and submissions from your site through a Javascript snippet. It doesn’t require setting up individual events and automatically captures data from new or changed components. This is useful, for example, if you restructure your frontend, autocapture continues to collect relevant events without you needing to update your codebase.
 
-Second, autocapture is a general solution that provides value for most users, but, to get the most out of PostHog, you should be using custom events. Custom events let you track _exactly_ the things that you care about, ranging from a user hovering over a certain part of your app, to a specific function being called on your backend.
+To set up autocapture:
 
-This tutorial will address these two points, walking you through how to create actions and send relevant custom events step-by-step, so you can make the most out of PostHog.
+1. Go to “Project settings”
 
-### Prerequisites
+2. Under “Website event autocapture,” copy the code block snippet containing the script tags and Javascript function.
 
-To follow this tutorial along, you need to:
+3. Paste the block into your site’s HTML in the `<head>` tags (ideally at the end). This should be an HTML page that acts as a base or template page (with other scripts your page loads) to ensure all possible events are captured.
 
-1. Have [deployed PostHog](/docs/deployment).
+This allows autocapture to capture events like clicks, change of inputs, or submission of **`a`**, **`button`**, **`form`**, **`input`**, **`select`**, **`textarea`**, and **`label`** tags. Once set up, those events flow automatically into PostHog for you to see and analyze. For a detailed guide on how to install the snippet, read our **[installation guide](https://posthog.com/docs/integrate/client/snippet-installation)**.
 
-### Sorting through your events with Actions
+Autocapture can also be set up by installing the **[posthog-js](https://github.com/PostHog/posthog-js)** library, details of which can be [found here](https://posthog.com/docs/integrate/client/js), but we’ll also explain it when we cover setting up custom events below.
 
-With the goal of making it easier to sort through your events, PostHog introduced the concept of [actions](/docs/user-guides/actions), which are a way to tag and combine events you care about. They are an important part of other features in PostHog, such as Cohorts. <!-- Link to Cohorts Tutorial Here -->
+## Autocapture’s limitations
 
-The relationship between events and actions can be both one-to-one or many-to-one. What this means is that you can create an action from one event only, such as a "Pageview" action for a `$pageview` event, as well as an action targeting multiple events, like a "Sign Up" action targeting the events `clicked button with text "Sign Up"` and `clicked button with text "Sign Up Now"`.
+Although we are proud of our autocapture feature, we know it isn’t enough for more advanced product analytics. This is for two reasons.
 
-Not only that, you can also create actions based on the URL where an event happened. This could lead to actions such as "Clicked Sign Up on About Page".
+First, event autocapture can be overwhelming. In high-volume instances, where events come in at a high rate, the live events table can contain so much information it can be difficult to determine exactly what you care about. Remember that every click, change of input, or submission is tracked here. Without proper filters, actions, and insights set up, this data can be overwhelming.
 
-There are two main reasons for creating actions:
+Second, autocapture is a general solution that provides value to many users. To get the most out of PostHog, you should be using custom events. Custom events let you track *exactly* the behavior you care about, ranging from a user hovering an input, to a function call in your backend.
 
-#### 1. Tagging events that you especially care about**
+## Setting up custom events
 
-Filter out the noise from all your events to make it easier for you to execute your analytics processes.
+To expand on autocapture, you can create and add custom events to your product. Custom events allow you to capture details from anywhere in the codebase whether it is a button press on the frontend or a class method call on the backend. This ensures correct and comprehensive data capture.
 
-#### 2. Combining multiple events into one action**
+To set up custom events, first, you need to install the library for the language or framework you are using. We have built libraries for a range of languages and frameworks including Javascript, Python, iOS, Android, and more. You can find our [full list of libraries here](https://posthog.com/docs/integrate#libraries).
 
-Let's say you have multiple sign up buttons spread across your website. For some types of analysis it could be useful to know which specific button was clicked, however, it might also be the case that you just care that the user signed up, irrespective of what they clicked to do so.
+For example, with Python (and Python frameworks like Django or Flask), setting up custom events starts with installing the PostHog package with pip (or your package manager of choice). 
 
-Actions fit this use-case perfectly, since events are combined using `OR` operations. That means that if an action is composed of multiple events, it will be registered if _any of the events composing it_ are triggered. 
-
-In other words, using the example from above, if you have an action called "Sign Up" that targets the clicks on all your sign up buttons, if your user clicks any of the buttons, the action will be registered.
-
-> **Note:** Actions also work retroactively, meaning that they also tag events that happened in the past, not only events that happened after the action was created.
-
-### Creating Actions
-
-There are many ways to create actions in PostHog. These are:
-
-**1. Through our toolbar (recommended for actions based on frontend elements)**
-
-To learn how to create actions using our toolbar, you can visit our [dedicated tutorial](/docs/tutorials/toolbar/#creating-actions).
-
-**2. From the events table**
-
-To create actions from the events table, just click on the plus sign on the left of any event to reveal a button allowing you to create an action from that specific event. You will also be able to customize the action further in the following steps (such as add another event). 
-
-![Action from event image](../images/tutorials/actions/action-from-event.png)
-<small class='centered'>_Creating actions from the events table_</small>
-
-
-**3. From the 'Actions' page**
-
-Lastly, you can of course create actions from the 'Actions' page under 'Events':
-
-![Actions page image](../images/features/actions/actions-page.png)
-
-#### Action options
-
-Visit our [dedicated actions page](/docs/user-guides/actions/) for a comprehensive explanation of all the options available when creating an action.
-
-### Using custom events to track advanced behaviors 
-
-Now that we've learned how to sort through events, let's go through how to create events that PostHog doesn't automatically capture for you.
-
-Custom events can be created from any of our [libraries](/docs/integrate/overview), as well as our [API](/docs/api/overview). They can be triggered from both the backend and the frontend. We recommend looking through our libraries and only using our API if there isn't a suitable library for you, since using our libraries ensure you are always up-to-date.
-
-#### Using JavaScript event listeners to track user focus and exceptions
-
-Frontend JS is heavily event-based by nature, a paradigm that pairs up well with PostHog events.
-
-For example, to trigger an event when an element is hovered, you can do:
-
-```js
-// Vanilla JS
-
-const paymentButtonEl = document.getElementById('payment-btn')
-
-paymentButtonEl.addEventListener('mouseover', () => {
-    posthog.capture('payment button hovered')
-})
-
+```bash
+pip install posthog
 ```
 
-Another useful custom event might be tracking exceptions, like so:
-
-```js
-// Vanilla JS
-
-window.onerror = (errorMsg, url, lineNumber) => {
-    // Pass exception details as event properties
-    posthog.capture('frontend exception', {"message": errorMsg, "url": url, "lineNumber": lineNumber})
-    return false;
-}
-```
-
-These exceptions can then be correlated with [feature flags](/docs/user-guides/feature-flags) and app usage, to determine if a new feature increased the incidence of exceptions, or if a certain exception harms conversion in a funnel, for example. 
-
-Essentially, it's entirely up to you what events you capture and what properties you pass to them. You can also add more complex logic to determine when to trigger an event, as well as what properties to pass to it.
-
-#### Using backend libraries to track function calls and HTTP status codes
-
-Custom events are not limited to your frontend, however! You can also send events from your backend, which is very useful for going deeper into how your app is being used. 
-
-You can track what functions are being called, for example:
+Second, in whatever library you’ve chosen, you’ll need to configure PostHog. This includes adding your project’s API key and setting the PostHog host.
 
 ```python
-# Python
+import posthog
 
-def my_func():
-    do_stuff() # Your own logic
-    timestamp = get_timestamp() # Logic for getting current timestamp
+# Substitutes posthog.api_key which still exists but has been deprecated
+posthog.project_api_key = '<ph_project_api_key>'
 
-    posthog.capture(
-        'user_distinct_id', 
-        event='my_func_called', 
-        properties={'foo': 'bar'},
-        timestamp=timestamp
-    )
+# Only necessary if you want to use feature flags
+posthog.personal_api_key = '<ph_personal_api_key>'
 
-    return True
+# You can remove this line if you're using app.posthog.com
+posthog.host = '<ph_instance_address>'
 ```
 
-Another useful event could potentially be tracking endpoints that returned a status code not in the 200s. Here's an example for tracking 404s:
+Third, once the library is installed and configured, events can be captured by calling library methods with user details, event types, and properties. Each of our libraries contains the relevant structure for connecting the arguments to these categories. For example, in Python a capture method call might look like this:
 
-```go
-// Go + Martini Web Framework
+```python
+def movie_played(movie):
+	posthog.capture(
+		'distinct id', 
+		'movie played', 
+		{
+			'movie_id': movie.id,
+			'category': movie.category
+		}
+	)
+```
 
-// Triggered when route is not found
-m.NotFound(func(req *http.Request) string) {
-    // Send event to PostHog 
-    client.Enqueue(posthog.Capture{
-      DistinctId: "user_distinct_id",
-      Event:      "404_error",
-      Properties: posthog.NewProperties().Set("route", req.RequestURI)
-    })
-    
-    return "404: Page Not Found"
+Adding more of these capture calls in the right places in your codebase creates a flow of event tracking data into PostHog. For more information on setting this up, read the **[live data ingestion guide](https://posthog.com/docs/integrate/ingest-live-data).**
+
+## Getting custom events right
+
+With some custom events being sent, it is time to refine those events to capture the data you want. Getting this right requires multiple steps.
+
+1. It starts with the goals of the product, which inform what data is needed about users and their behavior.
+ 
+2. Next is ensuring data is accessible in the right places in your codebase. This might require writing helper functions for access or formatting the data correctly.
+
+3. Finally, ensuring all the data is captured and added to PostHog for use in your analysis, visualization, and optimization. This is where we’ll focus for the rest of this tutorial.
+
+There are multiple places where more details can be added to events to make sure you are tracking the right data. Here are some key ones.
+
+### Identifying users
+
+To best capture data about users, you must understand who those users are. Autocaptured events identify users for you, while custom events require manually setting that user identification. Examples of identifiers for users include session IDs and emails. For example, getting identifying a user by email using Javascript is as simple as calling `posthog.identify()` with a unique identifier.
+
+```js
+function loginRequest(user) {
+  return authUser(user)
+	.then(authorizedUser => {
+		posthog.identify(user.email)
+	})
 }
 ```
 
-> **Note:** Unlike exception tracking platforms such as [Sentry](https://sentry.io/) (which we use), tracking exceptions with PostHog is beneficial to correlate error metrics with your product's UX and usage rather than for debugging purposes.
+Identifying users helps understand who those users are and what they are doing. Once identified, PostHog connects events related to formerly anonymous IDs with the unique set IDs. You can find more information on [identifying users here](https://posthog.com/docs/integrate/identifying-users). 
 
-Once again, you can track anything that you like, and you can do so with any of our 10+ [integrations](/docs/integrate/overview), as well as our [API](/docs/api).
+### Properties
 
-#### Using custom events in PostHog
+Once a user has been identified and a basic event has been set up (with a name), properties can also be set for that event. Properties create more details about the event, such as the ID, category of the data, and other important data that differs between events. These properties can then be used to filter and analyze event tracking data.
 
-Custom events in PostHog are treated just like any other event. 
+As shown above in Python and below in a variety of other languages, properties are sent along with the distinct id and event. They can include as much data as you like. Common [data formats](https://posthog.com/manual/events#event-filtering) such as booleans, dates, numerics, and more can be handled and utilized within PostHog to filter or adjust data when analyzing.
 
-You will be able to see them in the events table as well as select them for your analysis in 'Insights'.
+<MultiLanguage>
 
-No extra setup is required, just start sending events and watch them flow in!
+```js
+posthog.capture(
+  '[event-name]', 
+  { property1: 'value', property2: 'another value' }
+);
+```
 
-## **Recap**
+```php
+PostHog::capture(array(
+  'distinctId' => 'user:123',
+  'event' => 'movie played',
+  'properties' => array(
+    'movieId' => '123',
+    'category' => 'romcom'
+  )
+));
+```
 
-To make the most out of PostHog, you should:
+```ruby
+posthog.capture({
+  distinct_id: 'distinct id',
+  event: 'movie played',
+  properties: {
+    movie_id: '123',
+    category: 'romcom'
+  }
+})
+```
 
-- Create actions from your events
-  - Actions work retroactively and can tag one or more events
-  - You can easily create actions with our toolbar
-- Send custom events
-  - Custom events let you track exactly what you care about in your product
-  - They can be captured from any of our 10+ integrations
-  - You can use them in PostHog just like autocaptured events
+```go
+client.Enqueue(posthog.Capture{
+  DistinctId: "test-user",
+  Event:      "test-snippet",
+  Properties: posthog.NewProperties().
+    Set("plan", "Enterprise").
+    Set("friends", 42),
+    Set("proUser", true),
+})
+```
+
+</MultiLanguage>
+
+Properties can also be set for individual users using the `set` and `set_once` methods. This allows data to be connected to the user rather than the function or method where the event was called. It also allows permanent user data to be stored across events, and not have to be recreated in each event capture call. Once a user property is `set_once` it can’t be changed by calling `set_once` again. For example:
+
+<MultiLanguage>
+
+```js
+posthog.capture(
+  'Set some user properties', 
+  { 
+    $set: { location: 'London'  },
+    $set_once: { referred_by: 'some ID' },
+  }
+)
+```
+
+```python
+posthog.capture(
+  'distinct id',
+  event='movie played',
+  properties={ 
+    '$set': { 'location' : 'London' },
+    '$set_once': { 'referred_by': 'some ID' }
+  }
+)
+```
+
+```php
+PostHog::capture(array(
+  'distinctId' => 'user:123',
+  'event' => 'movie played',
+  'properties' => array(
+    '$set' => array(
+      'location' => 'London'
+    ),
+    '$set_once' => array(
+      'referred_by' => 'some ID'
+    )
+  )
+));
+```
+
+```ruby
+posthog.capture({
+  distinct_id: 'distinct id',
+  event: 'movie played',
+  properties: {
+    $set: { location: 'London' },
+    $set_once: { referred_by: 'some ID' }
+  }
+})
+```
+
+```go
+client.Enqueue(posthog.Capture{
+  DistinctId: "test-user",
+  Event:      "test-snippet",
+  Properties: map[string]interface{}{
+        "$set": map[string]interface{}{
+            "location": "London",
+        },
+        "$set_once": map[string]interface{}{
+            "referred_by": "some ID",
+        },
+    }
+})
+```
+
+</MultiLanguage>
+
+You can find more about [user properties here](https://posthog.com/docs/integrate/user-properties).
+
+### Group event tracking
+
+PostHog provides the ability to aggregate events by groups. Groups allow you to track and manage events, not at an individual user level, but at a “company,” “organization,” “project” or another broader entity level. 
+
+For example, if you had multiple deployments for different companies in your product, you could group events by each company. Another example is instead of calling capture after using identify or with the distinct user id, you can call a group or add the group data to the capture call.
+
+<MultiLanguage>
+
+```js
+// All subsequent events will be associated with company `id:5`
+posthog.group('company', 'id:5');
+posthog.capture('some event')
+```
+
+```python
+posthog.capture('[distinct id]', 'some event', groups={'company': 'id:5'})
+```
+
+```go
+client.Enqueue(posthog.Capture{
+    DistinctId: "[distinct id]",
+    Event:      "some event",
+    Groups: posthog.NewGroups().
+        Set("company", "id:5").
+})
+```
+
+```node
+posthog.capture({
+    event: "some event",
+    distinctId: '[distinct id]',
+    groups: { company: 'id:5' }
+})
+```
+
+```php
+PostHog::capture(array(
+    'distinctId' => '[distinct id]',
+    'event' => 'some event',
+    '$groups' => array("company" => "id:5")
+));
+```
+
+```segment
+analytics.track('[event name]', {
+    "$groups": {
+        "company": "id:5"
+    }
+})
+```
+
+</MultiLanguage>
+
+This allows these groups to be used for analyzing, filtering, and visualizing events in PostHog. An example of a metric that benefits from group event tracking is the unique number of organizations signed up (rather than individuals). For more details about group analytics, you can check out [our product manual](https://posthog.com/manual/group-analytics). 
+
+## Combining events into actions
+
+Often a single event does not make up an entire behavior that you want to track. For example, a signup can include not only pressing the signup button, but entering the correct information, and making it past the basic information input stage. To truly track all the events and behaviors, events can be combined into actions. 
+
+Actions can be created by using the PostHog [toolbar to tag relevant elements](https://posthog.com/tutorials/toolbar#how-to-create-and-action) or from an event or pageview within the actions tab under Data Management. Autocapture events, custom events, and page views can then be combined to better track behavior you want to track and care about. You can find more about [actions here](https://posthog.com/manual/actions). 
+
+> **Note:** Actions also work retroactively, meaning they also tag events that happened in the past, not only events that happened after the action was created.
+
+## What’s next?
+
+Now that you set up autocapture, high-quality custom events, and actions, what’s next? If your product is being used (we hope it is), you’ll be getting a flow of data into your PostHog instance. You can continue to expand the capturing and formatting of that data or you can begin to analyze it.
+
+If you are looking for more options to where to send your events from that aren’t covered by our client- and server-side libraries (or autocapture), you can check out our [API](https://posthog.com/docs/api).
+
+If you are looking to get started with analysis of all the event tracking data you now have, you can look into creating a new [trend](https://posthog.com/manual/trends), [funnel](https://posthog.com/manual/funnels), or [dashboard](https://posthog.com/manual/dashboards).
 
 <NewsletterTutorial compact/>

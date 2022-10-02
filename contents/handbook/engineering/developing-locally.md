@@ -133,7 +133,7 @@ Finally, install Postgres locally. Even planning to run Postgres inside Docker, 
 brew install postgresql
 ```
 
-- On Linux
+- On Linux (Debian-based)
 
 ```bash
 sudo apt install postgresql postgresql-contrib
@@ -141,7 +141,7 @@ sudo apt install postgresql postgresql-contrib
 
 This installs both the Postgres server and its tools. DO NOT start the server after running this.
 
-On Linux you often have separate packages: `postgres` for the tools, `postgres-server` for the server, and `libpostgres-dev` for the `psycopg2` dependencies. Consult your distro's list for an up-to-date list of pacakages.
+On Linux you often have separate packages: `postgres` for the tools, `postgres-server` for the server, and `libpostgres-dev` for the `psycopg2` dependencies. Consult your distro's list for an up-to-date list of packages.
 
 ### 2. Prepare the frontend
 
@@ -174,12 +174,12 @@ Assuming Node.js is installed, run `yarn --cwd plugin-server` to install all req
     ```bash
     brew install libxml2 libxmlsec1 pkg-config
     ```
-    - On Linux
+    - On Linux (Debian-based)
     ```bash
-    sudo apt-get install libxml2 libxmlsec1-dev pkg-config
+    sudo apt install libxml2 libxmlsec1-dev pkg-config
     ```
 
-1. Install Python 3.8. You can do so with Homebrew: `brew install python@3.8`. Make sure when outside of `venv` to always use `python3` instead of `python`, as the latter may point to Python 2.x on some systems.
+1. Install Python 3.8. On macOS, you can do so with Homebrew: `brew install python@3.8`. Make sure when outside of `venv` to always use `python3` instead of `python`, as the latter may point to Python 2.x on some systems.
 
     **Friendly tip:** Need to manage multiple versions of Python on a single machine? Try [pyenv](https://github.com/pyenv/pyenv).
 
@@ -208,15 +208,16 @@ Assuming Node.js is installed, run `yarn --cwd plugin-server` to install all req
 1. Install requirements with pip
 
     If your workstation is ARM-based (e.g. Apple Silicon), the first time your run `pip install` you must pass it custom OpenSSL headers:
+
     - On macOS
     ```bash
     brew install openssl brotli
     CFLAGS="-I /opt/homebrew/opt/openssl/include $(python3.8-config --includes)" LDFLAGS="-L /opt/homebrew/opt/openssl/lib" GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1 GRPC_PYTHON_BUILD_SYSTEM_ZLIB=1 pip install -r requirements.txt
     ```
 
-    - On Linux
+    - On Linux (Debian-based)
     ```bash
-    sudo apt-get install brotli libpq-dev -y
+    sudo apt install brotli libpq-dev -y
     GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1 GRPC_PYTHON_BUILD_SYSTEM_ZLIB=1 pip install -r requirements.txt
     ```
 

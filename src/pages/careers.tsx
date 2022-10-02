@@ -2,7 +2,7 @@ import Layout from 'components/Layout'
 import { graphql, useStaticQuery } from 'gatsby'
 import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
-import { AnchorScrollNavbar } from '../components/AnchorScrollNavbar'
+import AnchorScrollNavbar from '../components/AnchorScrollNavbar'
 import { Benefits } from '../components/Careers/Benefits'
 import { CareersHero } from '../components/Careers/CareersHero'
 import { InterviewProcess } from '../components/Careers/InterviewProcess'
@@ -13,12 +13,45 @@ import { WhyWereHere } from '../components/Careers/WhyWereHere'
 import { WorkingAtPostHog } from '../components/Careers/WorkingAtPostHog'
 import { SEO } from '../components/seo'
 import { TeamQuote } from '../components/TeamQuote'
+import { useBreakpoint } from 'gatsby-plugin-breakpoints'
+
+const menu = [
+    {
+        name: 'Introduction',
+        url: 'introduction',
+    },
+    {
+        name: 'Transparency',
+        url: 'transparency',
+    },
+    {
+        name: 'Who we hire',
+        url: 'who-we-hire',
+    },
+    {
+        name: 'Interview process',
+        url: 'interview-process',
+    },
+    {
+        name: 'Benefits',
+        url: 'benefits',
+    },
+    {
+        name: 'Working here',
+        url: 'working-at-posthog',
+    },
+    {
+        name: 'Open roles',
+        url: 'open-roles',
+    },
+]
 
 const IndexPage = () => {
     const data = useStaticQuery(query)
     const latestJob = data?.allAshbyJobPosting?.nodes && data.allAshbyJobPosting.nodes[0]
     const latestJobCreatedAt = latestJob && new Date(latestJob['publishedDate'])
 
+    const breakpoints = useBreakpoint()
     return (
         <Layout>
             <SEO
@@ -31,7 +64,9 @@ const IndexPage = () => {
             <CareersHero />
             <div className="careers-anchor-navbar">
                 <WhyWereHere />
-                <AnchorScrollNavbar />
+                <div className="bg-tan sticky top-0 py-2 z-10 careers-nav">
+                    <AnchorScrollNavbar autoScroll={breakpoints.md} menu={menu} />
+                </div>
                 <Transparency />
                 <TeamQuote
                     backgroundColor="bg-primary"
@@ -119,21 +154,20 @@ const IndexPage = () => {
                     width="max-w-4xl"
                     value={
                         <>
-                            I'm not sure I've ever been more productive at work.{' '}
-                            <span className="text-red">
-                                I look forward to meeting-free Tuesdays and Thursdays almost as much as weekends.
-                            </span>
+                            {' '}
+                            <span className="text-red">Things are transparent and people welcome my feedback.</span> I
+                            love this because I can make a difference not just for my team, but the entire company.
                         </>
                     }
-                    author="Chris Clark"
-                    role="Product Designer"
+                    author="Neil Kakkar"
+                    role="Software Engineer"
                     img={
                         <StaticImage
                             width={100}
                             height={100}
                             imgClassName="rounded-full bg-yellow"
-                            alt={`Chris Clark - Product Designer`}
-                            src="../components/TeamQuote/images/chris.png"
+                            alt={`Neil Kakkar - Software Engineer`}
+                            src="../components/TeamQuote/images/neil.png"
                         />
                     }
                 />

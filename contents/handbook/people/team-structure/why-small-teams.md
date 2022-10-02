@@ -17,16 +17,54 @@ We have therefore introduced Small Teams. These are designed to each operate lik
 
 ## How it works
 
-* The overall goal is for a Small Team to be as close to its own startup as possible, with only a handful of centralized processes
-* A Small Team should never be more than six people
-* A Small Team has an Accountable Person responsible for its performance - whoever is most appropriate depending on what the team is working on. This does _not_ mean the most senior person on the team.
-* A Small Team must have (1) a customer (internal or external), (2) a mission and (3) metrics
+* The overall goal is for a Small Team is to own an area of the product/company and be as close to its own startup as possible, with only a handful of centralized processes
+* A Small Team should _strictly_ be between 2-6 people
+* A Small Team has a Team Lead responsible for its performance - whoever is most appropriate depending on what the team is working on. This does _not_ mean the most experienced person on the team.
+* A Small Team must have a customer (internal or external)
 * There may be certain functions where at our current stage we don't need a Small Team yet.
 * Each Small Team runs its own retrospective + sprint every week. This must be done transparently.
 * A Small Team has the final call in which of its features get into production, with no need for external QA/control - within our existing release schedule.
 * A Small Team will, at some stage, be able to create its own pricing (too complex in immediate future to do this, however)
-* A Small Team is responsible for talking to users, documenting what they build., and ensuring their features are highlighted in releases
+* A Small Team is responsible for talking to users, documenting what they build, and ensuring their features are highlighted in releases
+
+## What does owning an area of the product mean?
+
+The product small team is responsible for everything related to their area, particularly:
+
+1. Usage
+2. Quality
+3. Revenue
+
+## What actions should the small teams be doing for their area?
+
+Each quarter:
+  1. Create good quarterly OKRs
+
+During the quarter:
+  1. Maintain a prioritized roadmap to help them achieve their objectives
+  2. Speak to customers
+  3. Monitor relevant metrics including those covering Usage, Quality and Revenue
+  4. Triage and fix related bugs
+  5. Assist the support hero in answering related questions
+  6. Collaborate with other Small Teams such as marketing
+  7. Become power users of their area of Posthog and use PostHog in their processes
+
+## What is the role of the Team Lead?
+
+The team lead is overall responsible for ensuring the above happens. They should focus on enabling the team to solve these tasks together rather than trying to do it all themself.
+
+## How do small teams and product managers work together?
+
+With our engineering-led culture, the engineers on the small team are normally the team leads overall responsible for their area product.
+
+We have a small number of product managers who support the product small teams in achieving their goals. This includes helping with prioritization, creating/updating dashboards, competitors analysis, speaking to customers etc. However, having product managers doesn't mean that the engineers can abdicate these responsibilities. The engineers should be the experts of the product they are building and their customers.
+
+Additionally, the product managers should pay particular attention to cross-team alignment.
  
+## How do small teams and designers work together?
+
+Similar to product, designers support small teams. [Read our guide](../../engineering/product-design) for engineers on how to work with design.
+
 ## Small Teams list
 
 See [team structure](team-structure).
@@ -35,7 +73,7 @@ See [team structure](team-structure).
 
 ### Who do Small Teams report to? How does this work with management?
 
-The Accountable Person has the final say in a given Small Team's decision making - they decide what to build / work on.
+The Team Lead has the final say in a given Small Team's decision making - they decide what to build / work on.
 
 Each person's line manager is their role's functional leader (if possible). For example, engineers, no matter which Small Team they're in, will report to an engineer. It's important to note that [management at PostHog](/handbook/company/management) is very minimalistic - it's critical that managers don't set tasks for those in Small Teams.
 
@@ -74,7 +112,9 @@ It is at the discretion of the _manager_ of that person if they can move.
 
 ### Aren't most our Small Teams way too small?
 
-In certain cases, but not everywhere. This will clarify where people will work. In fact, it'll make sure we keep the scrappy fun side of working here as we get bigger. A team doesn't _have_ to be six people.
+In general, no - it's surprisingly great how much just 2-6 people can get done.
+
+If more mature product areas cannot cope with the workload, small teams will clarify where we need to hire too. In fact, it'll make sure we keep the scrappy fun side of working here as we get bigger. A team doesn't _have_ to be six people.
 
 ### How does hiring in the Small Team work?
 
@@ -90,11 +130,11 @@ Spend money when it makes sense to do so. See our general policy on spending mon
 
 ### How do you keep the product together as a company?
 
-Tim is ultimately responsible for us having (i) no gaps in product (ii) eliminating duplicate work (iii) making sure all Small Teams are working on something rational. This is how we manage the product.
+Luke is ultimately responsible for us having (i) no gaps in product (ii) eliminating duplicate work (iii) making sure all Small Teams are working on something rational. This is how we manage the product.
 
 ### How do you stop duplicate work?
 
-Tim has the ultimate responsibility to make sure we don't build the same thing in two different teams, or that we don't accidentally compete with each other internally.
+Luke has the ultimate responsibility to make sure we don't build the same thing in two different teams, or that we don't accidentally compete with each other internally.
 
 By keeping communication asynchronous and transparent, this is made much easier to do than is typical at other organizations.
 

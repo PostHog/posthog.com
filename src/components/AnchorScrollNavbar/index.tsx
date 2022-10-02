@@ -1,136 +1,70 @@
-import React, { useState, useEffect } from 'react'
-import scrollTo from 'gatsby-plugin-smoothscroll'
-import { mergeClassList } from '../../lib/utils'
-import downIcon from '../../images/icons/down-caret.svg'
-import Chip from 'components/Chip'
+import React, { useRef, useState } from 'react'
+import Slider from 'react-slick'
+import { Link } from 'react-scroll'
 
-const ButtonLink = ({
-    section,
-    currentSection,
-    children,
-}: {
-    section: string
-    currentSection: string
-    children: React.ReactNode
-}) => {
-    const sectionSelector = `#${section}`
-    const clickHandler = (e: { preventDefault: () => void }) => {
-        e.preventDefault()
-        scrollTo(sectionSelector)
-    }
-
-    return (
-        <Chip active={section == currentSection} onClick={clickHandler}>
-            {children}
-        </Chip>
-    )
+const sliderSettings = {
+    dots: false,
+    infinite: false,
+    arrows: false,
+    speed: 500,
+    slidesToScroll: 1,
+    autoplay: false,
+    variableWidth: true,
 }
 
-const inPageLinks = [
-    {
-        label: 'Introduction',
-        section: 'introduction',
-    },
-    {
-        label: 'Transparency',
-        section: 'transparency',
-    },
-    {
-        label: 'Who we hire',
-        section: 'who-we-hire',
-    },
-    {
-        label: 'Interview process',
-        section: 'interview-process',
-    },
-    {
-        label: 'Benefits',
-        section: 'benefits',
-    },
-    {
-        label: 'Working here',
-        section: 'working-at-posthog',
-    },
-    {
-        label: 'Open roles',
-        section: 'open-roles',
-    },
-]
-
-interface AnchorScrollNavbarProps {
+interface IProps {
+    menu: {
+        name: string
+        url: string
+        icon?: React.ReactNode
+    }[]
     className?: string
+    autoScroll?: boolean
+    centerMode?: boolean
 }
 
-export const AnchorScrollNavbar = ({ className = '' }: AnchorScrollNavbarProps) => {
-    const baseClasses = 'space-x-2 w-full mx-auto justify-center p-3 sticky top-2 z-30 hidden md:inline-flex'
-    const classList = mergeClassList(baseClasses, className)
-
-    const [currentSection, setCurrentSection] = useState('why-were-here')
-
-    useEffect(() => {
-        const scrollThreshold = 100
-
-        const scrollHandler = () => {
-            const sections = {
-                transparency: document.getElementById('transparency')!.offsetTop,
-                interviewProcess: document.getElementById('interview-process')!.offsetTop,
-                benefits: document.getElementById('benefits')!.offsetTop,
-                workingAtPosthog: document.getElementById('working-at-posthog')!.offsetTop,
-                openRoles: document.getElementById('open-roles')!.offsetTop,
-            }
-            const offset = window.scrollY
-
-            if (offset < sections.transparency - scrollThreshold) {
-                setCurrentSection('why-were-here')
-            } else if (offset < sections.interviewProcess - scrollThreshold) {
-                setCurrentSection('transparency')
-            } else if (offset < sections.benefits - scrollThreshold) {
-                setCurrentSection('interview-process')
-            } else if (offset < sections.workingAtPosthog - scrollThreshold) {
-                setCurrentSection('benefits')
-            } else if (offset < sections.openRoles - scrollThreshold) {
-                setCurrentSection('working-at-posthog')
-            } else {
-                setCurrentSection('open-roles')
-            }
-        }
-
-        document.addEventListener('scroll', scrollHandler)
-        window.addEventListener('resize', scrollHandler)
-
-        return () => {
-            document.removeEventListener('scroll', scrollHandler)
-            window.removeEventListener('resize', scrollHandler)
-        }
-    }, [])
-
-    const navbarLinks = inPageLinks.map(({ label, section }) => (
-        <ButtonLink section={section} currentSection={currentSection} key={section}>
-            {label}
-        </ButtonLink>
-    ))
-
-    const selectOptions = inPageLinks.map(({ label, section }) => (
-        <option value={section} key={section}>
-            {label}
-        </option>
-    ))
-
+export default function AnchorScrollNavbar({ menu, autoScroll = true, className = '', centerMode = false }: IProps) {
+    const sliderRef = useRef()
+    const [activeSliderIndex, setActiveSliderIndex] = useState(0)
     return (
-        <>
-            <div className={classList}>{navbarLinks}</div>
-
-            <div className="w-11/12 sticky top-3 z-10 mx-auto block max-w-3xl md:hidden border border-1 border-tan/25 rounded">
-                <select
-                    className="appearance-none text-white bg-primary block p-3 w-full rounded font-bold"
-                    value={currentSection}
-                    onChange={(e) => scrollTo(`#${e.target.value}`)}
-                >
-                    {selectOptions}
-                </select>
-
-                <img src={downIcon} alt="expand menu" className="absolute top-2 right-2 mt-1" />
+        <div className={className}>
+            <div>
+                <Slider centerMode={centerMode} ref={sliderRef} {...sliderSettings}>
+                    {menu.map(({ name, icon, url }, index) => {
+                        return (
+                            <div key={name}>
+                                <Link
+                                    smooth
+                                    duration={300}
+                                    offset={-57}
+                                    to={url}
+                                    hashSpy
+                                    className={`mr-1 cursor-pointer flex items-center space-x-2 text-[14px] font-semibold px-3 py-2 rounded-md hover:bg-gray-accent-light text-black transition-all hover:text-black opacity-60 hover:opacity-75 relative
+                                    active:top-[0.5px]
+                                    active:scale-[.98] ${
+                                        activeSliderIndex === index ? 'bg-gray-accent-light opacity-100 font-bold' : ''
+                                    }`}
+                                    spy
+                                    onClick={() => {
+                                        if (autoScroll) {
+                                            sliderRef?.current?.slickGoTo(index)
+                                        }
+                                    }}
+                                    onSetActive={() => {
+                                        setActiveSliderIndex(index)
+                                        if (autoScroll) {
+                                            sliderRef?.current?.slickGoTo(index)
+                                        }
+                                    }}
+                                >
+                                    {icon && <span className="w-[25px]">{icon}</span>}
+                                    <span>{name}</span>
+                                </Link>
+                            </div>
+                        )
+                    })}
+                </Slider>
             </div>
-        </>
+        </div>
     )
 }

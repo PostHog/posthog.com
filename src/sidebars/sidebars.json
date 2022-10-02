@@ -45,7 +45,7 @@
             "children": [
                 {
                     "name": "Strategy overview",
-                    "url": "/handbook/strategy/strategy"
+                    "url": "/handbook/strategy/overview"
                 },
                 {
                     "name": "Business model",
@@ -156,6 +156,10 @@
                         {
                             "name": "Team Customer Success",
                             "url": "/handbook/people/team-structure/customer-success"
+                        },
+                        {
+                            "name": "Team Exec",
+                            "url": "/handbook/people/team-structure/exec"
                         }
                     ]
                 }
@@ -232,6 +236,10 @@
                             "url": "/handbook/people/hiring-process"
                         },
                         {
+                            "name": "How to interview",
+                            "url": "/handbook/people/hiring-process/how-to-interview"
+                        },
+                        {
                             "name": "Engineering hiring",
                             "url": "/handbook/people/hiring-process/engineering-hiring"
                         },
@@ -306,6 +314,10 @@
                         {
                             "name": "Feature ownership",
                             "url": "/handbook/engineering/feature-ownership"
+                        },
+                        {
+                            "name": "Working with product design",
+                            "url": "/handbook/engineering/product-design"
                         },
                         {
                             "name": "Releasing a new version",
@@ -436,8 +448,16 @@
             "url": "",
             "children": [
                 {
-                    "name": "Overview",
-                    "url": "/handbook/design/about-design"
+                    "name": "Our philosophy",
+                    "url": "/handbook/design/philosophy"
+                },
+                {
+                    "name": "Product design process",
+                    "url": "/handbook/design/process"
+                },
+                {
+                    "name": "Designing posthog.com",
+                    "url": "/handbook/design/designing-posthog-website"
                 }
             ]
         },
@@ -805,12 +825,16 @@
                     "url": "/docs/integrate/proxy"
                 },
                 {
-                    "name": "Libraries",
+                    "name": "Library comparison",
                     "url": "/docs/integrate/libraries"
                 },
                 {
                     "name": "Badge",
                     "url": "/docs/integrate/badge"
+                },
+                {
+                    "name": "Browser Extensions",
+                    "url": "/docs/integrate/browser-extension"
                 },
                 {
                     "name": "Client libraries",
@@ -839,10 +863,6 @@
                         {
                             "name": "React Native",
                             "url": "/docs/integrate/client/react-native"
-                        },
-                        {
-                            "name": "Browser Extensions",
-                            "url": "/docs/integrate/client/browser-extension"
                         }
                     ]
                 },
@@ -851,32 +871,36 @@
                     "url": "",
                     "children": [
                         {
-                            "name": "Elixir",
-                            "url": "/docs/integrate/server/elixir"
+                            "name": "Node.js",
+                            "url": "/docs/integrate/server/node"
                         },
                         {
                             "name": "Go",
                             "url": "/docs/integrate/server/go"
                         },
                         {
-                            "name": "Java",
-                            "url": "/docs/integrate/server/java"
+                            "name": "Python",
+                            "url": "/docs/integrate/server/python"
                         },
                         {
-                            "name": "Node.js",
-                            "url": "/docs/integrate/server/node"
+                            "name": "Rust",
+                            "url": "/docs/integrate/server/rust"
+                        },
+                        {
+                            "name": "Java",
+                            "url": "/docs/integrate/server/java"
                         },
                         {
                             "name": "PHP",
                             "url": "/docs/integrate/server/php"
                         },
                         {
-                            "name": "Python",
-                            "url": "/docs/integrate/server/python"
-                        },
-                        {
                             "name": "Ruby",
                             "url": "/docs/integrate/server/ruby"
+                        },
+                        {
+                            "name": "Elixir",
+                            "url": "/docs/integrate/server/elixir"
                         }
                     ]
                 },
@@ -993,12 +1017,24 @@
                     "url": "/docs/apps/enabling"
                 },
                 {
-                    "name": "TypeScript types",
-                    "url": "/docs/apps/build/types"
-                },
-                {
                     "name": "Developer reference",
                     "url": "/docs/apps/build/reference"
+                },
+                {
+                    "name": "Using the PostHog API",
+                    "url": "/docs/apps/build/api"
+                },
+                {
+                    "name": "Jobs",
+                    "url": "/docs/apps/build/jobs"
+                },
+                {
+                    "name": "Testing",
+                    "url": "/docs/apps/build/testing"
+                },
+                {
+                    "name": "TypeScript types",
+                    "url": "/docs/apps/build/types"
                 }
             ]
         },

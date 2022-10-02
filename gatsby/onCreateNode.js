@@ -30,7 +30,7 @@ module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, 
                 headers: {
                     Authorization: `token ${process.env.GITHUB_API_KEY}`,
                 },
-            })
+            }).catch((err) => console.log(err))
 
             if (res.status !== 200) {
                 console.error(`Got status code ${res.status}`)
