@@ -22,10 +22,19 @@ PostHog 1.29.0 includes a fully revamped Paths experience which enables you to b
 
 **Release highlights:**
 
-- [Explore and deep dive with Paths](#explore-and-deep-dive-with-paths)
-- [Multivariate support in feature flags](#multivariate-support-in-feature-flags)
-- [Private projects](#private-projects)
-- [Trailing DAU/WAU/MAU graphs](#trailing-dauwaumau-graphs)
+- [PostHog 1.29.0 release notes](#posthog-1290-release-notes)
+  - [Explore and deep dive with Paths](#explore-and-deep-dive-with-paths)
+  - [Multivariate support in feature flags](#multivariate-support-in-feature-flags)
+  - [Private projects](#private-projects)
+  - [Trailing DAU/WAU/MAU graphs](#trailing-dauwaumau-graphs)
+  - [Other improvements & fixes](#other-improvements--fixes)
+  - [Deprecation notice](#deprecation-notice)
+  - [Help us improve PostHog](#help-us-improve-posthog)
+- [PostHog News](#posthog-news)
+- [Community](#community)
+  - [Community MVP 🏆](#community-mvp-)
+  - [Community shoutouts](#community-shoutouts)
+- [Open roles](#open-roles)
 
 ### Explore and deep dive with Paths
 
@@ -108,7 +117,7 @@ As a small thank you for your time, we're giving away awesome [PostHog merch](ht
 
 ## PostHog News
 
-Welcome Harry Waye! Harry is joining us as a Full Stack Engineer on the [Platform Team](/handbook/people/team-structure/platform).
+Welcome Harry Waye! Harry is joining us as a Full Stack Engineer on the [Platform Team](/handbook/people/team-structure/infrastructure).
 
 ## Community
 ### Community MVP 🏆

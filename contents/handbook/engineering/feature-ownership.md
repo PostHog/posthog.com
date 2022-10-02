@@ -27,13 +27,13 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Async migrations | [Team Pipeline][Team Pipeline]  | <span class="lemon-tag gh-tag">feature/async-migrations</span> |
 | Billing | [@timgl][@timgl]  |  <span class="lemon-tag gh-tag">feature/billing</span> |
 | Client libraries | Security + core updates owned by [Team Pipeline][Team Pipeline]. Features owned by the relevant small team  | <span class="lemon-tag gh-tag">feature/pipeline</span> |
-| Cohorts | [Team FECS][Team FECS]  |  <span class="lemon-tag gh-tag">feature/cohorts</span>  |
-| Correlation Analysis | [Team FECS][Team FECS]  |  <span class="lemon-tag gh-tag">feature/correlation-analysis</span> |
+| Cohorts | [Team Experimentation][Team Experimentation]  |  <span class="lemon-tag gh-tag">feature/cohorts</span>  |
+| Correlation Analysis | [Team Experimentation][Team Experimentation]  |  <span class="lemon-tag gh-tag">feature/correlation-analysis</span> |
 | Dashboards | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/dashboards</span> |
 | Data Management | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/data-management</span>  |
 | Events | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/events</span>  |
-| Experimentation | [Team FECS][Team FECS] |  <span class="lemon-tag gh-tag">feature/experimentation</span> |
-| Feature Flags | [Team FECS][Team FECS]  |  <span class="lemon-tag gh-tag">feature/feature-flags</span> |
+| Experimentation | [Team Experimentation][Team Experimentation] |  <span class="lemon-tag gh-tag">feature/experimentation</span> |
+| Feature Flags | [Team Experimentation][Team Experimentation]  |  <span class="lemon-tag gh-tag">feature/feature-flags</span> |
 | Funnels | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/funnels</span>  |
 | Group Analytics | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/group-analytics</span> |
 | Ingestion | [Team Pipeline][Team Pipeline]  | <span class="lemon-tag gh-tag">feature/pipeline</span> |
@@ -82,4 +82,4 @@ Some of the features we are building may exist in other products already. It is 
 [Team Session Recording]: /handbook/people/team-structure/session-recording
 [Team Pipeline]: /handbook/people/team-structure/pipeline
 [Team Platform]: /handbook/people/team-structure/platform
-[Team FECS]: /handbook/people/team-structure/app-west
+[Team Experimentation]: /handbook/people/team-structure/experimentation
