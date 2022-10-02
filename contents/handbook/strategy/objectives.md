@@ -4,8 +4,9 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Read [our quarterly company objectives](https://docs.google.com/spreadsheets/d/1j7ECjhYLmMITLbL1XPLHv_McIEJb9uYgONO9rxQD1l8/edit#gid=0).
+Our Q4 2022 company wide objective:
+> Average 11% Month Over Month revenue growth through Q4 2022.
 
-We discuss these in every all hands meeting - team leads explain progress against each key result.
+For the OKRs of each team please see the team pages e.g. [Team Experimentation](/handbook/people/team-structure/experimentation).
 
-These are decided through a regular [goal setting exercise](/handbook/company/goal-setting).
+We discuss the OKRs in every all hands meeting - the team leads explain progress against each key result.
