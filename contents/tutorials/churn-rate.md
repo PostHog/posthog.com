@@ -19,7 +19,7 @@ In this tutorial, we’ll calculate and visualize the churn rate then use PostHo
 
 ## Step 1: Calculating churn rate
 
-To calculate churn rate, first, you must define what ended or stopped. For subscription-based businesses, this could be monthly recurring revenue attributable to a subscriber. For a customer success or sales team, it could be organization usage. For a product team, it might be product usage events by a user. We'll focus on product usage for this tutorial.
+To calculate churn rate, first, you must define what ended or stopped. For subscription-based businesses, this could be monthly recurring revenue attributable to a subscriber. For a customer success or sales team, it could be organization usage. For a product team, it might be product usage events by a user. We will focus on product usage for this tutorial.
 
 To calculate product usage churn, we need a group of users, events from usage they are triggering, and a time period. We can look back (however long your time period is) to check the total number of users triggering events and compare it to the number triggering events now. Our churn rate is the number of users who stopped divided by the total number of users at the beginning of the period.
 
