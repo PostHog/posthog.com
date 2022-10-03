@@ -23,6 +23,8 @@ We've been much more focussed on staying lean as we grow for the last year, desp
 
 My motivation has gone _up_ as we've been more lean. I'm getting more and more proud of what we're working on. Being lean forces us to prioritize. We no longer half ass lots of things, we nail a smaller number of them.
 
+Prioritization doesn't just mean picking the right task to work on, it also means picking the right people to work with. We're getting stronger over time rather than lowering our bar on hiring.
+
 ## But I really want to beat other companies
 
 When I used to race bikes, I did a lot of time trialling. Someone sets off every minute to race around the course as fast as possible.
