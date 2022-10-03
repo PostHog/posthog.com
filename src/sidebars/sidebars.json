@@ -118,20 +118,20 @@
                             "url": "/handbook/people/team-structure/why-small-teams"
                         },
                         {
-                            "name": "Team App East",
-                            "url": "/handbook/people/team-structure/app-east"
+                            "name": "Team Product Analytics",
+                            "url": "/handbook/people/team-structure/product-analytics"
                         },
                         {
-                            "name": "Team App West",
-                            "url": "/handbook/people/team-structure/app-west"
+                            "name": "Team Session Recording",
+                            "url": "/handbook/people/team-structure/session-recording"
                         },
                         {
-                            "name": "Team Platform",
-                            "url": "/handbook/people/team-structure/platform"
+                            "name": "Team Experimentation",
+                            "url": "/handbook/people/team-structure/experimentation"
                         },
                         {
-                            "name": "Team Ingestion",
-                            "url": "/handbook/people/team-structure/ingestion"
+                            "name": "Team Pipeline",
+                            "url": "/handbook/people/team-structure/pipeline"
                         },
                         {
                             "name": "Team Infrastructure",
@@ -152,6 +152,10 @@
                         {
                             "name": "Team Customer Success",
                             "url": "/handbook/people/team-structure/customer-success"
+                        },
+                        {
+                            "name": "Team Exec",
+                            "url": "/handbook/people/team-structure/exec"
                         }
                     ]
                 }
@@ -228,6 +232,10 @@
                             "url": "/handbook/people/hiring-process"
                         },
                         {
+                            "name": "How to interview",
+                            "url": "/handbook/people/hiring-process/how-to-interview"
+                        },
+                        {
                             "name": "Engineering hiring",
                             "url": "/handbook/people/hiring-process/engineering-hiring"
                         },
@@ -302,6 +310,10 @@
                         {
                             "name": "Feature ownership",
                             "url": "/handbook/engineering/feature-ownership"
+                        },
+                        {
+                            "name": "Working with product design",
+                            "url": "/handbook/engineering/product-design"
                         },
                         {
                             "name": "Releasing a new version",
@@ -432,8 +444,16 @@
             "url": "",
             "children": [
                 {
-                    "name": "Overview",
-                    "url": "/handbook/design/about-design"
+                    "name": "Our philosophy",
+                    "url": "/handbook/design/philosophy"
+                },
+                {
+                    "name": "Product design process",
+                    "url": "/handbook/design/process"
+                },
+                {
+                    "name": "Designing posthog.com",
+                    "url": "/handbook/design/designing-posthog-website"
                 }
             ]
         },

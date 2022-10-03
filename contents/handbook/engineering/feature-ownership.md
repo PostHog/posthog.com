@@ -18,38 +18,43 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 
 | Feature |  Owner  |  Label  |
 |---|---|---|
-| Actions | [@pauldambra][@pauldambra]  | <span class="lemon-tag gh-tag">feature/actions</span> |
-| Actors Modal | [@EDsCODE][@EDsCODE]  | <span class="lemon-tag gh-tag">feature/actors-modal</span>  |
-| Annotations | [@pauldambra][@pauldambra]  | <span class="lemon-tag gh-tag">feature/annotations</span> |
-| API Structure | [@Twixes][@Twixes]  | <span class="lemon-tag gh-tag">feature/api-structure</span>  |
-| Application Performance Monitoring (APM) | [@pauldambra][@pauldambra]  | <span class="lemon-tag gh-tag">feature/apm</span>  |
-| Async migrations | [Ingestion (Team Platform)](/handbook/people/team-structure/platform)  | <span class="lemon-tag gh-tag">feature/async-migrations</span> |
+| Apps | [Team Pipeline][Team Pipeline] | <span class="lemon-tag gh-tag">feature/pipelines</span> |
+| Actions | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/actions</span> |
+| Actors Modal | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/actors-modal</span>  |
+| Annotations | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/annotations</span> |
+| API Structure | Security + core updates owned by [Team Pipeline][Team Pipeline]. Features owned by the relevant small team | <span class="lemon-tag gh-tag">feature/api-structure</span> |
+| Application Performance Monitoring (APM) | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/apm</span>  |
+| Async migrations | [Team Pipeline][Team Pipeline]  | <span class="lemon-tag gh-tag">feature/async-migrations</span> |
 | Billing | [@timgl][@timgl]  |  <span class="lemon-tag gh-tag">feature/billing</span> |
-| Cohorts | [@EDsCODE][@EDsCODE]  |  <span class="lemon-tag gh-tag">feature/cohorts</span>  |
-| Correlation Analysis | [@neilkakkar][@neilkakkar]  |  <span class="lemon-tag gh-tag">feature/correlation-analysis</span> |
-| Dashboards | [@Twixes][@Twixes]  |  <span class="lemon-tag gh-tag">feature/dashboards</span> |
-| Data Management | [@alexkim205][@alexkim205]  | <span class="lemon-tag gh-tag">feature/data-management</span>  |
-| Events | [@alexkim205][@alexkim205]  |  <span class="lemon-tag gh-tag">feature/events</span>  |
-| Experimentation | [@neilkakkar][@neilkakkar] |  <span class="lemon-tag gh-tag">feature/experimentation</span> |
-| Feature Flags | [@neilkakkar][@neilkakkar]  |  <span class="lemon-tag gh-tag">feature/feature-flags</span> |
-| Funnels | [@neilkakkar][@neilkakkar]  |  <span class="lemon-tag gh-tag">feature/funnels</span>  |
-| Group Analytics | [@macobo][@macobo]  |  <span class="lemon-tag gh-tag">feature/group-analytics</span> |
+| Client libraries | Security + core updates owned by [Team Pipeline][Team Pipeline]. Features owned by the relevant small team  | <span class="lemon-tag gh-tag">feature/pipeline</span> |
+| Cohorts | [Team Experimentation][Team Experimentation]  |  <span class="lemon-tag gh-tag">feature/cohorts</span>  |
+| Correlation Analysis | [Team Experimentation][Team Experimentation]  |  <span class="lemon-tag gh-tag">feature/correlation-analysis</span> |
+| Dashboards | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/dashboards</span> |
+| Data Management | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/data-management</span>  |
+| Events | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/events</span>  |
+| Experimentation | [Team Experimentation][Team Experimentation] |  <span class="lemon-tag gh-tag">feature/experimentation</span> |
+| Feature Flags | [Team Experimentation][Team Experimentation]  |  <span class="lemon-tag gh-tag">feature/feature-flags</span> |
+| Funnels | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/funnels</span>  |
+| Group Analytics | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/group-analytics</span> |
+| Ingestion | [Team Pipeline][Team Pipeline]  | <span class="lemon-tag gh-tag">feature/pipeline</span> |
+| Lifecycle | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/lifecycle</span>  |
 | Onboarding | [@kappa90][@kappa90]  | <span class="lemon-tag gh-tag">feature/onboarding</span>  |
-| Lifecycle | [@EDsCODE][@EDsCODE]  | <span class="lemon-tag gh-tag">feature/lifecycle</span>  |
-| Paths | [@neilkakkar][@neilkakkar]  |  <span class="lemon-tag gh-tag">feature/paths</span> |
+| Paths | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/paths</span> |
 | Permissions | [@Twixes][@Twixes]  | <span class="lemon-tag gh-tag">feature/permissions</span>  |
 | Persons | [@alexkim205][@alexkim205]  | <span class="lemon-tag gh-tag">feature/persons</span>  |
-| Project Home Page | [@rcmarron][@rcmarron]  | <span class="lemon-tag gh-tag">feature/home</span> |
-| Property Filters | [@mariusandra][@mariusandra]  | <span class="lemon-tag gh-tag">feature/filters</span>  |
-| Recordings | [@rcmarron][@rcmarron]  |  <span class="lemon-tag gh-tag">feature/recordings</span> |
-| Retention | [@EDsCODE][@EDsCODE]  |  <span class="lemon-tag gh-tag">feature/retention</span> |
-| Saved Insights | [@Twixes][@Twixes]  |  <span class="lemon-tag gh-tag">feature/saved-insights</span> |
-| Session Analytics | [@rcmarron][@rcmarron]  |  <span class="lemon-tag gh-tag">feature/sessions</span> |
+| Platform (US + EU) | [Team Infrastructure][Team Infrastructure] | <span class="lemon-tag gh-tag">feature/platform</span>  |
+| Project Home Page | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/home</span> |
+| Property Filters | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/filters</span>  |
+| Recordings | [Team Session Recording][Team Session Recording]  |  <span class="lemon-tag gh-tag">feature/recordings</span> |
+| Retention | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/retention</span> |
+| Saved Insights | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/saved-insights</span> |
+| Self-hosting | [Team Infrastructure][Team Infrastructure]  |  <span class="lemon-tag gh-tag">feature/self-hosting</span> |
+| Session Analytics | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/sessions</span> |
 | Settings (personal & project) | [@liyiy][@liyiy]  |  <span class="lemon-tag gh-tag">feature/settings</span> |
 | SSO | [@mariusandra][@mariusandra]  | <span class="lemon-tag gh-tag">feature/sso</span>  |
-| Stickiness | [@EDsCODE][@EDsCODE]  | <span class="lemon-tag gh-tag">feature/stickiness</span>  |
-| Toolbar | [@pauldambra][@pauldambra]  | <span class="lemon-tag gh-tag">feature/toolbar</span>  |
-| Trends | [@EDsCODE][@EDsCODE]  | <span class="lemon-tag gh-tag">feature/trends</span>  |
+| Stickiness | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/stickiness</span>  |
+| Toolbar | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/toolbar</span>  |
+| Trends | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/trends</span>  |
 
 
 ## Why did we establish feature owners?
@@ -73,3 +78,8 @@ Some of the features we are building may exist in other products already. It is 
 [@yakkomajuri]: https://github.com/yakkomajuri
 [@timgl]: https://github.com/timgl
 [@kappa90]: https://github.com/kappa90
+[Team Product Analytics]: /handbook/people/team-structure/product-analytics
+[Team Session Recording]: /handbook/people/team-structure/session-recording
+[Team Pipeline]: /handbook/people/team-structure/pipeline
+[Team Platform]: /handbook/people/team-structure/platform
+[Team Experimentation]: /handbook/people/team-structure/experimentation

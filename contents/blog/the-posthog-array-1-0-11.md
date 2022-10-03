@@ -97,7 +97,7 @@ For a full breakdown of the changes and updates, please see our [changelog](http
 
 ### [Filtering by date and events in funnels](https://github.com/PostHog/posthog/issues/444)
 
-This was one of 4 issues raised by [jeremynevans](https://github.com/jeremynevans) at Savvy – it was raised in the [PostHog slack channel](https://join.slack.com/t/posthogusers/shared_invite/enQtOTY0MzU5NjAwMDY3LTc2MWQ0OTZlNjhkODk3ZDI3NDVjMDE1YjgxY2I4ZjI4MzJhZmVmNjJkN2NmMGJmMzc2N2U3Yjc3ZjI5NGFlZDQ) and resulted in an excellent conversation with Tim resulting in more feature requests which is amazing.
+This was one of 4 issues raised by [jeremynevans](https://github.com/jeremynevans) at Savvy – it was raised in the [PostHog slack channel](https://join.slack.com/t/posthogusers/shared_invite/zt-1ghutt7jr-jRj0_iYDRS7R~uKeZLIbdQ) and resulted in an excellent conversation with Tim resulting in more feature requests which is amazing.
 
 He is also using PostHog for analytics on [Crowd Cure](https://crowd-cure.com/) to help build the largest clinical trial dataset to yet to help with the Coronavirus crisis – check it out on [Producthunt](https://www.producthunt.com/posts/crowdcure-covid-19).
 
