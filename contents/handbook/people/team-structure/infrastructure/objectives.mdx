@@ -1,11 +1,30 @@
-* **Proposed Objective**:
-    * PostHog Cloud in the US remains reliable and launch EU Cloud
-* **Proposed Key Results**:
-    * Multiple organizations using EU hosted PostHog Cloud without regressions in either EU or US cloud
-    * Reliable monitoring and alerting on all key services
-    * Upgrade to Kubernetes 1.25 to unblock key customers
-    * Meet SOC 2 compliance requirements for all cloud infrastructure
-* **Rationale**:
-    * To nail self-serve we need to make it as easy as possible for customers to sign up and get started
-    * For businesses in the EU today, the main barrier is needing to self host to keep data in the EU, this limits trust in our brand and the potential adoption we can drive
-    * Shipping a secure cloud in the EU will also encourage many businesses to get started with PostHog Cloud, even if they ultimately intend to self-host
+- Objective: High uptime and increase the resilience/redundancy
+    - Key results:
+      - Migrate postgres out of heroku
+      - Regular synthetic load testing on production
+    - Why?
+        - A lack of reliability will cause churn.
+- Objective: Meet the compliance needs of 5 companies that we cannot meet today
+    - Key result: EU Cloud is successfully managed
+    - Key result: Progress made on SOC2
+    - Why?
+        - Not having these is blocking customers, who we can often uniquely satisfy.
+
+## Roadmap
+
+#### 3-year
+
+- All infrastructure is managed as code
+- Cloud is global
+- Best in class security and privacy compliance
+- Scale beyond 1 Trillion events / month
+- Support non-k8s Deploys 🤖
+- Painless developer/contributor experience
+
+#### 6 month
+
+- No Heroku
+- 5 Billion / month events
+- SOC 2 Ready
+- All infra is managed as code on prod / staging + EU Ready 🎈
+- Rock solid, reliable infrastructure with regular production load testing to inform scaling plans

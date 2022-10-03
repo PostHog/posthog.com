@@ -35,7 +35,7 @@ const TopicSidebar = () => {
     )
 }
 
-export default function SqueakTopics({ pageContext: { label, menu } }: IProps) {
+export default function SqueakTopics({ pageContext: { id, label, menu } }: IProps) {
     return (
         <>
             <SEO title={`${label} - PostHog`} />
@@ -53,7 +53,7 @@ export default function SqueakTopics({ pageContext: { label, menu } }: IProps) {
                             slug={null}
                             apiHost={'https://squeak.cloud'}
                             organizationId="a898bcf2-c5b9-4039-82a0-a00220a8c626"
-                            topic={label}
+                            topic={id}
                         />
                     </section>
                 </PostLayout>
