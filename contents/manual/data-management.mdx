@@ -79,6 +79,27 @@ You may also explore all properties nested under each event to quickly understan
 
 ![PostHog - data management expand](../images/features/data-management/data-management-event-expand.png)
 
+## Ingestion warnings
+
+Sometimes we run into problems during ingestion from suboptimal usage of PostHog, for example to maintain data integrity we don't merge with generic IDs like `null`.
+If this happens we'll do our best to still ingest the event and we'll additionally log an ingestion warning. These warnings can be seen in the Data Management section.
+The rest of this page contains more details on the specific warnings.
+
+### Refused to merge with an illegal distinct id
+
+See [identifying users - considerations](/docs/integrate/identifying-users#considerations) for background.
+
+### Refused to merge an already identified user
+
+See [identifying users - considerations](/docs/integrate/identifying-users#considerations) for background.
+
+### Refused to process event with invalid uuid
+
+The events with invalid uuids are dropped.
+There are very few cases where it would be good to provide an event uuid.
+Furthermore there are some gotchas to be aware of, for example deduping based on event uuid is not guaranteed due to how merges work in ClickHouse.
+
+
 ## Data Management best practices
 
 **1. The more definitions you add, the easier it will be for your teammates to understand what each event and property represents**
@@ -94,6 +115,7 @@ Verified events are prioritized in filters and other selection components to sig
 We highly recommend using tags to organize events coming in from different parts of your product. At PostHog for example, we use tags called `session-recordings`, `funnels`, and `feature-flags` to keep track of insights and dashboards related to those features.
 
 Tags can also be useful for organizing PostHog for internal use. We create tags for each of our internal [small teams](/handbook/people/team-structure/team-structure/why-small-teams) to signal which dashboards are interesting to our respective teams.
+
 
 ### Further reading
 

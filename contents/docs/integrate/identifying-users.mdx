@@ -59,7 +59,7 @@ PostHog also has a few built-in protections stopping the most common threats to 
 If we encounter an `$identify` or `$create_alias` event with one of the above problems, the following will happen:
 
 - We process the event normally (it will be ingested and show up in the UI)
-- We refuse to merge users and an ingestion warning will be logged (see [ingestion warnings](/integrate/ingestion-warnings) for more details).
+- We refuse to merge users and an ingestion warning will be logged (see [ingestion warnings](/manual/data-management#ingestion-warnings) for more details).
 - The event will be only be tied to user behind the first passed `distinct_id`
 
 ## Filtering internal users
