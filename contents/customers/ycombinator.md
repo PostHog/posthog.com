@@ -37,7 +37,9 @@ Since getting started with PostHog, Y Combinator has gone beyond analytics and b
 
 For Startup School, for example, the team uses [trends insights](/manual/trends) to monitor weekly users and share results in [dashboards](/manual/dashboards) — while [experiments](/manual/experimentation) have led to several significant improvements for Co-founder Matching. 
 
-“PostHog's experimentation suite is really great,'” said Cat. “We recently used it to improve our matching algorithm by running an experiment which hides profiles that have been stale for 3, 6, 9 or 12 weeks. We found that users in the 6-week group sent 40% more messages than the control group and were more successful with the platform overall - a huge improvement for us!”
+“PostHog's experimentation suite is really great,'” said Cat. “We recently used it to improve our matching algorithm by running an experiment which hides profiles that have been stale for 3, 6, 9 or 12 weeks. We found that users in the 6-week group sent 40% more messages than the control group - a huge improvement for us!”
+
+“And, perhaps more importantly, this experiment group had 35% more of their requests accepted - which translates to having 35% more matches than the control group.”
 
 Experiments and session recordings have also helped Y Combinator avoid pitfalls borne from misleading feedback.
 
