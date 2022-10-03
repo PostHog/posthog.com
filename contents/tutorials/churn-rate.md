@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-09-28
-featuredImage: ../images/tutorials/banners/actions.png
+featuredImage: ../images/tutorials/banners/churn-rate.png
 topics: ['trends', 'retention', 'lifecycle']
 ---
 
