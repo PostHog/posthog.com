@@ -2313,22 +2313,3 @@
 [[redirects]]
     from = "/handbook/company/working-with-product-design"
     to = "/handbook/engineering/product-design"
-
-
-
-# Added: 2022-10-02
-[[redirects]]
-    from = "/handbook/people/team-structure/app-east/mission"
-    to = "/handbook/people/team-structure/experimentation/mission"
-
-
-# Added: 2022-10-02
-[[redirects]]
-    from = "/handbook/people/team-structure/app-west/objectives"
-    to = "/handbook/people/team-structure/experimentation/objectives"
-
-
-# Added: 2022-10-02
-[[redirects]]
-    from = "/handbook/people/team-structure/app-west/mission"
-    to = "/handbook/people/team-structure/product-analytics/mission"
