@@ -1,5 +1,5 @@
 ---
-title: How Y Combinator is building the next generation of startups, with help from PostHog
+title: How Y Combinator uses PostHog experiments to boost engagement by 40%
 customer: Y Combinator
 logo: ../images/customers/ycombinator/yc_logo_b.png
 featuredImage: ../images/customers/ycombinator/featured.svg
@@ -11,36 +11,36 @@ users:
     - Engineering
     - Product
 toolsUsed:
-    - Cohorts
+    - Experiments
     - Autocapture
     - PostHog Cloud
     - Insights
 ---
 
-Y Combinator is the world’s top startup accelerator, helping to fund, train and guide the next generation of innovative businesses. Since 2005, thousands of successful companies have emerged from Y Combinator, including Dropbox, Airbnb, PagerDuty, Reddit, Amplitude... and PostHog. 
+Y Combinator is the world’s top startup accelerator, helping to fund, train and nurture the next generation of innovative businesses. Since 2005, thousands of successful companies have emerged from Y Combinator, including Dropbox, Airbnb, PagerDuty, Reddit, Amplitude... and PostHog. 
 
-"Many people find Y Combinator to be the the most productive period of their lives, which is definitely what we found”, said PostHog CEO James Hawkins in [a blogpost he wrote about his Y Combinator experience](/blog/moving-to-sf). Now, PostHog is used by Y Combinator to improve many of the products we benefitted from! 
+"Many people, including us, find Y Combinator to be the the most productive period of their lives,” said PostHog CEO James Hawkins in [a blogpost he wrote about his Y Combinator experience](/blog/moving-to-sf). Now, PostHog is used by Y Combinator to improve many of the products and processes PostHog benefitted from! 
 
-“We use PostHog for our [Startup Schoo](https://www.startupschool.org/)l, for our public [YC Startup Library](https://www.ycombinator.com/library), and for a product called [Co-Founder Matching](https://www.ycombinator.com/cofounder-matching),” said Cat Li, Product and Engineering Lead for Y Combinator Startup School. “PostHog is especially useful for Co-Founder Matching, which is almost like a dating app for co-founders.”
+“We use PostHog for [Startup School](https://www.startupschool.org/), our public [YC Startup Library](https://www.ycombinator.com/library), and for [Co-Founder Matching](https://www.ycombinator.com/cofounder-matching),” said Cat Li, Product and Engineering Lead for Y Combinator Startup School. “PostHog is especially useful for Co-Founder Matching, which is essentially a dating app for co-founders.”
 
 ### How Y Combinator gathers 30% more data with PostHog than Google Analytics
+Y Combinator empowers each team to choose its own processes, tools and OKRs. Some teams use tools like Segment or Amplitude — but for the flagship Startup School project, Cat's team decided PostHog was the best tool for the job. 
 
-PostHog isn’t the only tool in Y Combinator’s stack, of course. Teams across the organization can each have their own processes, tools and OKRs to guide their progress. Some teams at Y Combinator use Segment or Amplitude — but for the flagship Startup School project, PostHog was a clear choice. 
+“Startup School is hugely popular, so we thought a lot about what tools to use,” said Cat. “Many platforms we looked at, including Google Analytics, dropped 30% of user data due to adblockers, or third-party cookies. PostHog became the obvious choice because it didn't have those issues.”
 
-“We were very thoughtful about what we wanted to use with Startup School and Co-founder Matching,” said Cat. “We chose PostHog so we wouldn’t lose a bunch of the traffic and data. We found that with Google Analytics and other platforms we would lose up to 30% of our data due to adblockers and users who would not allow third-party tracking. Our users are very tech-savvy... very likely to block third-party cookies.”
+PostHog also offered the benefit of autocapture, which enabled the team to get started quickly without wasting weeks defining tracking plans. 
 
-“Because Startup School is very wide reaching, it really matters to us that we have an accurate understanding of what's happening. That meant PostHog was the obvious choice.”
+“Tools we looked at either weren't robust enough, or required a huge amount of work to instrument,” said Cat. “But with PostHog, we could autocapture most events using [the JS snippet](/docs/integrate/client/snippet-installation) and still [configure custom events](tutorials/event-tracking-guide) when we needed to. It was the perfect balance.”
 
-In addition to capturing more data, PostHog also provided a wider array of tools than other platforms, with multiple insight types, correlation analysis, and session recordings enabling Y Combinator to explore data from multiple approaches. 
+### How Y Combinator boosted Co-founder Matching engagement by 40% 
+Since getting started with PostHog, Y Combinator has gone beyond analytics and begin using other PostHog features, such as [experiments](/product/experimentation) and [session recordings](/product/session-recording), to explore data from multiple angles at once.
 
-“Other tools, like Google Analytics, just weren’t robust enough,” said Cat. “As an engineer, I didn’t feel they offered enough detail or control. One thing we really liked about PostHog was that we had control over everything. We could autocapture a lot of events just by using the snippet, but we could also configure custom events too which was great.”
+For Startup School, for example, the team uses [trends insights](/manual/trends) to monitor weekly users and share results in [dashboards](/manual/dashboards) — while [experiments](/manual/experimentation) have led to several significant improvements for Co-founder Matching. 
 
-### How Y Combinator runs experiments to build better products
+“PostHog's experimentation suite is really great,'” said Cat. “We recently used it to improve our matching algorithm by running an experiment which hides profiles that have been stale for 3, 6, 9 or 12 weeks. We found that users in the 6-week group sent 40% more messages than the control group and were more successful with the platform overall - a huge improvement for us!”
 
-Because Y Combinator has deployed PostHog across multiple products, Cat’s team uses the entire suite of insight tools to monitor the appropriate key metric for each product. For Y Combinator Startup School, for example, the team uses [trends insights](/manual/trends) to monitor weekly users and engagement — while [funnels](/manual/funnels) are more useful for Co-Founder Matching because the product involves many discrete steps. Insights are collected into shared dashboards for ease, along with additional dashboards to report on running experiments. 
+Experiments and session recordings have also helped Y Combinator avoid pitfalls borne from misleading feedback.
 
-“PostHog has been really great for tracking feature adoption and running experiments,” said Cat. “We’ve even used it to improve our matching algorithm by experimenting with how often we should show a random profile or remove stale profiles. We've experimented with the pace of that and it's had a significant impact."
+"A lot of people asked us to build a feature that let co-founders collaborate on a trial project," said Cat. "But, when we ran that experiment and looked at the results, we found nobody actually used it at all. Thanks to that, we were able to redirect our efforts and avoid wasting resources.”
 
-Unsurprisingly for a startup accelerator, Y Combinator moves quickly and runs many similar experiments to shape the future of the products. Recent examples include testing a co-founder trial project intended to encourage collaboration (“A lot of people asked for it, but PostHog showed us nobody actually used it”) and an experiment to remove users who had been inactive for three weeks (“That was hugely successful and led to many more matches”).
-
-“We run these sort of experiments a lot, even on our landing pages,” said Cat. “Building things is never just a one-and-done for us. There’s always iteration and theories to test — and PostHog is central to how we do that.”
+“It's just like founders in our Startup School learn," explained Cat. "Building things is never just one-and-done - you always need to be testing new theories and finding ways to improve. PostHog is central to how we do that at Y Combinator.”
