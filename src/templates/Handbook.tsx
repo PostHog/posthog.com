@@ -25,6 +25,12 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import CommunityQuestions from 'components/CommunityQuestions'
 import Markdown from 'markdown-to-jsx'
 
+const MDX = ({ body }) => (
+    <MDXProvider components={{}}>
+        <MDXRenderer>{body}</MDXRenderer>
+    </MDXProvider>
+)
+
 export const HandbookSidebar = ({ contributors, title, location, related }) => {
     return (
         <>
@@ -133,7 +139,7 @@ export const AppParametersFactory: (params: AppParametersProps) => React.FC = ({
 }
 
 export default function Handbook({
-    data: { post, nextPost },
+    data: { post, nextPost, mission, objectives },
     pageContext: { menu, breadcrumb = [], breadcrumbBase, tableOfContents },
     location,
 }) {
@@ -172,6 +178,8 @@ export default function Handbook({
         a: A,
         TestimonialsTable,
         AppParameters: AppParametersFactory({ config: appConfig }),
+        Mission: (_props) => (mission?.body ? MDX({ body: mission.body }) : null),
+        Objectives: (_props) => (objectives?.body ? MDX({ body: objectives.body }) : null),
         ...shortcodes,
     }
 
@@ -255,7 +263,7 @@ export default function Handbook({
 }
 
 export const query = graphql`
-    query HandbookQuery($id: String!, $nextURL: String!) {
+    query HandbookQuery($id: String!, $nextURL: String!, $mission: String, $objectives: String) {
         nextPost: mdx(fields: { slug: { eq: $nextURL } }) {
             excerpt(pruneLength: 500)
             frontmatter {
@@ -264,6 +272,12 @@ export const query = graphql`
             fields {
                 slug
             }
+        }
+        mission: mdx(fields: { slug: { eq: $mission } }) {
+            body
+        }
+        objectives: mdx(fields: { slug: { eq: $objectives } }) {
+            body
         }
         post: mdx(id: { eq: $id }) {
             id
