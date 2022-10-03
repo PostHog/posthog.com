@@ -1,0 +1,24 @@
+---
+title: Ingestion warnings
+sidebarTitle: Ingestion warnings
+sidebar: Docs
+showTitle: true
+---
+
+Sometimes we run into problems during ingestion from suboptimal usage of PostHog, for example to to maintain data integrity we don't merge with generic IDs like `null`.
+If this happens we'll do our best to still ingest the event and we'll additionally log an ingestion warning. These warnings can be seen in the Data Management section.
+The rest of this page contains more details on the specific warnings.
+
+## Refused to merge with an illegal distinct id
+
+See [identifying users - considerations](/docs/integrate/identifying-users#considerations) for background.
+
+## Refused to merge an already identified user
+
+See [identifying users - considerations](/docs/integrate/identifying-users#considerations) for background.
+
+## Refused to process event with invalud uuid
+
+Event uuids must match the format XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX (where each X is a hexadecimal character).
+
+Normally we shouldn't be passing event uuids from clients. An example valid usecase for passing event uuids is exporting historical events and making sure we don't end up with duplicate events. If you're running into this error, then your import script is using an invalid format for the event uuid and that should be updated.

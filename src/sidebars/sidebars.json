@@ -817,6 +817,10 @@
                     "url": "/docs/integrate/user-properties"
                 },
                 {
+                    "name": "Ingestion warnings",
+                    "url": "/docs/integrate/ingestion-warnings"
+                },
+                {
                     "name": "Deploying a reverse proxy",
                     "url": "/docs/integrate/proxy"
                 },
