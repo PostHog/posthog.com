@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-09-26
-featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImage: ../images/tutorials/banners/session-metrics.png
 topics: ['trends']
 ---
 
