@@ -13,7 +13,7 @@ topics: ['trends']
 
 Analyzing where users spend their time in your product is vital for understanding which features they value most. There are numerous ways to do this, but one of the most common is to track metrics like time on site, time on page, average session duration, and pages per session. 
 
-These metrics can be calculated and visualized in PostHog by making use of sessions and their durations. We define a session as a set of events grouped to try to capture a single "use" of your product. Each session includes a duration between the first and last event, which we’ll heavily rely on. For more basic information about session data, see our [product manual](https://posthog.com/manual/sessions). 
+These metrics can be calculated and visualized in PostHog by making use of sessions and their durations. We define a session as a set of events grouped to try to capture a single "use" of your product. Each session includes a duration between the first and last event, which we will rely on heavily. For more basic information about session data, see our [product manual](https://posthog.com/manual/sessions). 
 
 In this tutorial, we will use sessions to calculate and visualize a variety of session and time-based metrics like time on site and average session duration.
 
