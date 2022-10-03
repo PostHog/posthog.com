@@ -2330,9 +2330,8 @@
 
 # Added: 2022-10-02
 [[redirects]]
-    from = "/handbook/people/team-structure/app-west/mission"
-    to = "/handbook/people/team-structure/product-analytics/mission"
-
+    from = "/docs/integrate/client/browser-extension"
+    to = "/docs/integrate/browser-extension"
 
 # Added: 2022-10-03
 [[redirects]]
@@ -2356,3 +2355,9 @@
 [[redirects]]
     from = "/handbook/people/team-structure/pipeline"
     to = "/handbook/people/team-structure/ingestion"
+
+
+# Added: 2022-10-03
+[[redirects]]
+    from = "/handbook/people/team-structure/app-west/mission"
+    to = "/handbook/people/team-structure/product-analytics/mission"
