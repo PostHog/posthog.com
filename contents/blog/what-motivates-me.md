@@ -19,7 +19,7 @@ I've worked at a bunch of startups before. They all had _many_ flaws. Neither Ti
 
 ## Was it just being a rocket ship?
 
-We've been much more focussed on staying lean as we grow for the last year, despite all of our fastest growth coming in this time, including revenue.
+We've been much more focused on staying lean as we grow for the last year, despite all of our fastest growth coming in this time, including revenue.
 
 My motivation has gone _up_ as we've been more lean. I'm getting more and more proud of what we're working on. Being lean forces us to prioritize. We no longer half ass lots of things, we nail a smaller number of them.
 
