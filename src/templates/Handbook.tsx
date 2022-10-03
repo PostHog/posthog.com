@@ -220,7 +220,7 @@ export default function Handbook({
                                     {thumbnail && <GatsbyImage image={getImage(thumbnail)} />}
                                     <h1 className="dark:text-white text-3xl sm:text-5xl m-0">{title}</h1>
                                 </div>
-                                <div className="flex items-center space-x-2 mb-2">
+                                <div className="flex items-center space-x-2">
                                     {github && (
                                         <Link to={github}>
                                             <GitHub className="w-8 h-8 text-black/80 hover:text-black/60 dark:text-white/80 hover:dark:text-white/60 transition-colors" />
