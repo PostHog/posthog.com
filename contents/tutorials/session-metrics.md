@@ -13,7 +13,7 @@ topics: ['trends']
 
 Analyzing where users spend their time in your product is vital for understanding which features they value most. There are numerous ways to do this, but one of the most common is to track metrics like time on site, time on page, average session duration, and pages per session. 
 
-These metrics can be calculated and visualized in PostHog by making use of sessions and their durations. We define a session as a set of events grouped to try to capture a single "use" of your product. Each session includes a duration between the first and last event, which we will rely on heavily. For more basic information about session data, see our [product manual](https://posthog.com/manual/sessions). 
+These metrics can be calculated and visualized in PostHog by making use of sessions and their durations. We define a session as a set of events grouped to try to capture a single "use" of your product. Each session includes a duration between the first and last event, which we will rely on heavily. For more basic information about session data, see our [product manual](/manual/sessions). 
 
 In this tutorial, we will use sessions to calculate and visualize a variety of session and time-based metrics like time on site and average session duration.
 
@@ -21,8 +21,8 @@ In this tutorial, we will use sessions to calculate and visualize a variety of s
 
 To follow this tutorial along, you need to have:
 
-1. **[Deployed PostHog](https://posthog.com/docs/deployment)**.
-2. Installed **[posthog-js](https://posthog.com/docs/integrate/client/js)** or added the **[PostHog snippet](https://posthog.com/docs/integrate/client/js)** to your site.
+1. **[Deployed PostHog](/docs/deployment)**.
+2. Installed **[posthog-js](/docs/integrate/client/js)** or added the **[PostHog snippet](/docs/integrate/client/js)** to your site.
 
 ## Time on site
 
@@ -54,7 +54,7 @@ If you want to know exactly what pages people are spending the most time in, you
 
 ![Current URL values](../images/tutorials/session-metrics/current-url-values.png)
 
-These insights and visualization might help you reprioritize pages and sections people are spending more time on. Depending on the context, high time on a page could mean the page is important, confusing, or not optimized. [Session recordings](https://posthog.com/product/session-recording) can help you find out if you don’t know.
+These insights and visualization might help you reprioritize pages and sections people are spending more time on. Depending on the context, high time on a page could mean the page is important, confusing, or not optimized. [Session recordings](/product/session-recording) can help you find out if you don’t know.
 
 ## Average session duration
 
@@ -76,12 +76,12 @@ Another useful average to visualize is the average number of pages per session. 
 
 ![Pages per session](../images/tutorials/session-metrics/pages-per-session.png)
 
-Again, you can filter these series to better identify the types of users you want, or to provide details on sections and funnels on our site. Clicking on the charts will provide a list of the users included in that data. If there is a [session recording](https://posthog.com/manual/recordings) available for that user session, there will be a link for you to go directly watch it.
+Again, you can filter these series to better identify the types of users you want, or to provide details on sections and funnels on our site. Clicking on the charts will provide a list of the users included in that data. If there is a [session recording](/manual/recordings) available for that user session, there will be a link for you to go directly watch it.
 
 ### Understanding how users spend their time
 
 These metrics should give you a better understanding of how users are spending their time in your product and site. Time on site, time in sections, average session time, and pages per session all provide insight into the experience of your product or the quality of your content. Making improvements to product or content quality helps improves these metrics.
 
-To dive deeper into these insights, you can use [session recordings](https://posthog.com/product/session-recording) to watch exactly how users are interacting with your product or the toolbar to use [heatmaps](https://posthog.com/product/heatmaps) to understand popular areas on pages.
+To dive deeper into these insights, you can use [session recordings](/product/session-recording) to watch exactly how users are interacting with your product or the toolbar to use [heatmaps](/product/heatmaps) to understand popular areas on pages.
 
 <NewsletterTutorial compact/>
