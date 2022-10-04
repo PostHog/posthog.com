@@ -57,6 +57,10 @@ To help manage users' expectations, you might find it useful to share a message 
 3. Respond to and debug issues for _Community_ users (all other free Open Source or free Cloud users)
 4. Fix issues, create PRs
 
+### Triaging issues to the relevant small team
+
+As the support hero you should triage any bugs/feature requests that you don't deal with to the relevant small team. They are ultimately responsible for handling bugs and feature requests for their area of the product.
+
 ## Categorizing requests
 
 It's really valuable for us to understand what types of requests we've had so we can prioritize our investments in certain areas and work out if we're making things better for our users (e.g. we use this as a measure of how easy it is to deploy PostHog).

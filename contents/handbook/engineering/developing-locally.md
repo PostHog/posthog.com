@@ -127,17 +127,14 @@ Saved preprocessed configuration to '/var/lib/clickhouse/preprocessed_configs/us
 
 Finally, install Postgres locally. Even planning to run Postgres inside Docker, we need a local copy of Postgres (version 11+) for its CLI tools and development libraries/headers. These are required by `pip` to install `psycopg2`.
 
-- On macOS
-
-```bash
-brew install postgresql
-```
-
-- On Linux (Debian-based)
-
-```bash
-sudo apt install postgresql postgresql-contrib
-```
+- On macOS:
+    ```bash
+    brew install postgresql
+    ```
+- On Debian-based Linux:
+    ```bash
+    sudo apt install -y postgresql postgresql-contrib libpq-dev
+    ```
 
 This installs both the Postgres server and its tools. DO NOT start the server after running this.
 
@@ -162,22 +159,33 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
 
 > The first time you run typegen, it may get stuck in a loop. If so, cancel the process (`Ctrl+C`), discard all changes in the working directory (`git reset --hard`), and run `yarn typegen:write` again. You may need to discard all changes once more when the second round of type generation completes.
 
-### 3. Prepare app/plugin server
+### 3. Prepare plugin server
 
-Assuming Node.js is installed, run `yarn --cwd plugin-server` to install all required packages. We'll run this service in a later step.
+Assuming Node.js is installed, run `yarn --cwd plugin-server` to install all required packages. You'll also need to install the `brotli` compression library:
+
+- On macOS:
+    ```bash
+    brew install brotli
+    ```
+- On Debian-based Linux:
+    ```bash
+    sudo apt install -y brotli
+    ```
+
+We'll run the plugin server in a later step.
 
 ### 4. Prepare the Django server
 
 1. Install a few dependencies for SAML to work. If you're on macOS, run the command below, otherwise check the official [xmlsec repo](https://github.com/mehcode/python-xmlsec) for more details.
 
-    - On macOS
-    ```bash
-    brew install libxml2 libxmlsec1 pkg-config
-    ```
-    - On Linux (Debian-based)
-    ```bash
-    sudo apt install libxml2 libxmlsec1-dev pkg-config
-    ```
+    - On macOS:
+        ```bash
+        brew install libxml2 libxmlsec1 pkg-config
+        ```
+    - On Debian-based Linux:
+        ```bash
+        sudo apt install -y libxml2 libxmlsec1-dev pkg-config
+        ```
 
 1. Install Python 3.8. On macOS, you can do so with Homebrew: `brew install python@3.8`. Make sure when outside of `venv` to always use `python3` instead of `python`, as the latter may point to Python 2.x on some systems.
 
@@ -207,18 +215,11 @@ Assuming Node.js is installed, run `yarn --cwd plugin-server` to install all req
 
 1. Install requirements with pip
 
-    If your workstation is ARM-based (e.g. Apple Silicon), the first time your run `pip install` you must pass it custom OpenSSL headers:
+    If your workstation is an Apple Silicon Mac, the first time your run `pip install` you must set custom OpenSSL headers:
 
-    - On macOS
     ```bash
-    brew install openssl brotli
+    brew install openssl
     CFLAGS="-I /opt/homebrew/opt/openssl/include $(python3.8-config --includes)" LDFLAGS="-L /opt/homebrew/opt/openssl/lib" GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1 GRPC_PYTHON_BUILD_SYSTEM_ZLIB=1 pip install -r requirements.txt
-    ```
-
-    - On Linux (Debian-based)
-    ```bash
-    sudo apt install brotli libpq-dev -y
-    GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1 GRPC_PYTHON_BUILD_SYSTEM_ZLIB=1 pip install -r requirements.txt
     ```
 
     These will be used when installing `grpcio` and `psycopg2`. After doing this once, and assuming nothing changed with these two packages, next time simply run:
