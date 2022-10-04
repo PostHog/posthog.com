@@ -1,5 +1,5 @@
 ---
-title: How Y Combinator uses PostHog experiments to boost engagement by 40%
+title: How Y Combinator used PostHog experiments to boost engagement by 40%
 customer: Y Combinator
 logo: ../images/customers/ycombinator/yc_logo_b.png
 featuredImage: ../images/customers/ycombinator/featured.svg
