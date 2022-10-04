@@ -12,7 +12,7 @@ Each release there will be a different release owner in charge, to be updated un
 
 If we've shipped features that we want to feature in the release notes, we use the label `highlight` on our pull request. If after the code freeze we have important bugfixes that we want to get into the release, we add the label `release-[version]`. This makes it easier for the release owner to figure out changes for the release blog post and to cherry-pick commits between the Code Freeze and the Release.
 
-> When we say release, technically we mean releasing to self-hosted users as we continously deploy to our cloud environments. However, releases are still an important moment within PostHog as we publicly announce all new features.
+> When we say release, technically we mean releasing to self-hosted users as we continuously deploy to our cloud environments. However, releases are still an important moment within PostHog as we publicly announce all new features.
 
 ## Version numbers
 
