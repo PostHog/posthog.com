@@ -20,10 +20,15 @@ We now add more companies each week than _any_ closed source SaaS rival, and we'
 ## General principles
 
 * For any company, nothing matters more than product market fit. If we get that right, it’ll be much easier for customer success, marketing or sales teams to succeed. As a result, we're 100% inbound. We invest in product, not cold-calling people that don't want to buy from us.
+
 * We are a _late mover_. All the products we build into the platform have product-market fit. This makes it faster to ship.
+
 * A wide strategy is winner takes all. The wider we get, the faster we grow, so the wider we can get. We are here to be ambitious.
+
 * Our company is engineering-led - a wide strategy demands it. We have small teams that operate like their own startups for this reason. We optimize for autonomy (thus, speed), not control.
+
 * Talent compounds. We hire a smaller number of stronger people that flourish with autonomy. See the point above.
+
 * We are open source - we work in the open to build trust and community. We haven't built our defining feature yet - the whole company is a continuous work in progress on the internet that anyone can take part in. This keeps us close to users and builds a unique brand.
 
 ## Mission
