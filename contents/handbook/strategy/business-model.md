@@ -28,7 +28,10 @@ When PostHog makes a new feature, we ask ourselves two questions:
 1. Is this feature for Creation, Collaboration or Compliance?
 1. Would this feature help more users find and use PostHog?
 
-If the likely use case is use by an individual contributor, the feature will be open source. Otherwise, it will be source available. The exception to this is if the feature will significantly help the community to increase. For example, initially we planned "multiple users" as a feature for the source-available version. However, we decided that having multiple users would help the community to grow, which benefits everyone disproportionately.
+### Creation, Collaboration or Compliance**
+- Creation: if the feature improves our existing open source products and is focused on helping individual contributors then it will be open source. If it's a major new feature or product line it should default to being a paid feature.
+- Collaboration: if the feature helps teams to collaborate on Posthog it should be a paid feature. The exception to this is if the feature will significantly help the community to increase. For example, initially we planned "multiple users" as a feature for the source-available version. However, we decided that having multiple users would help the community to grow, which benefits everyone disproportionately.
+- Compliance: if the feature is disproportionately used by enterprises for compliance it should be an enterprise feature.
 
 ## How does open source benefit from our paid offerings?
 
