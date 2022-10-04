@@ -308,6 +308,10 @@
                             "url": "/handbook/engineering/feature-ownership"
                         },
                         {
+                            "name": "Working with product design",
+                            "url": "/handbook/engineering/product-design"
+                        },
+                        {
                             "name": "Releasing a new version",
                             "url": "/handbook/engineering/release-new-version"
                         },
@@ -436,8 +440,16 @@
             "url": "",
             "children": [
                 {
-                    "name": "Overview",
-                    "url": "/handbook/design/about-design"
+                    "name": "Our philosophy",
+                    "url": "/handbook/design/philosophy"
+                },
+                {
+                    "name": "Product design process",
+                    "url": "/handbook/design/process"
+                },
+                {
+                    "name": "Designing posthog.com",
+                    "url": "/handbook/design/designing-posthog-website"
                 }
             ]
         },

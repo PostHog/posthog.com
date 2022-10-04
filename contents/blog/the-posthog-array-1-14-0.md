@@ -71,7 +71,7 @@ Prior to this version, we denoted the importance of this in our Docs, but did no
 
 Many of our deployments generate and set this key by default, so that you will not need to worry about it. This is the case with our [Heroku One-Click deployment](/docs/self-host/deploy/heroku), for example. However, other methods may not automatically do this (we're working on it!). As such, if you run into any issues when updating PostHog, make sure you have a unique `SECRET_KEY` set. 
 
-You can find more information about this on our ['Securing PostHog' page](/docs/self-host/configure/securing-posthog#secret-key) and should always feel welcome to ask any questions on our [community Slack group](https://join.slack.com/t/posthogusers/shared_invite/enQtOTY0MzU5NjAwMDY3LTc2MWQ0OTZlNjhkODk3ZDI3NDVjMDE1YjgxY2I4ZjI4MzJhZmVmNjJkN2NmMGJmMzc2N2U3Yjc3ZjI5NGFlZDQ).
+You can find more information about this on our ['Securing PostHog' page](/docs/self-host/configure/securing-posthog#secret-key) and should always feel welcome to ask any questions on our [community Slack group](https://join.slack.com/t/posthogusers/shared_invite/zt-1ghutt7jr-jRj0_iYDRS7R~uKeZLIbdQ).
 
 
 ## Bug Fixes and Performance Improvements
