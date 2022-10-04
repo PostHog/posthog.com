@@ -4,11 +4,13 @@ sidebar: Handbook
 showTitle: true
 ---
 
-PostHog is a for profit company that balances the need to improve the open source code of PostHog with the need to add source-available features in order to generate income. We have an open core business model.
+PostHog is a for profit company that balances the need to improve the open source code of PostHog with the need to add paid features, or PostHog Cloud, in order to generate income.
+
+We have an open core _and_ cloud business model.
 
 ## Why do we work on the open source product?
 
-When we work on the open source product, it increases the community size, which means we end up with more features, and thus a better product. This means we get yet more community growth and it also helps with revenue growth since the source-available product will also improve.
+When we work on the open source product, it increases the community size, which means we end up with more features, and thus a better product. This means we get yet more community growth and it also helps with revenue growth since the paid products will also improve.
 
 ## Promises
 
@@ -21,14 +23,15 @@ When we work on the open source product, it increases the community size, which 
 
 ## What features are paid only?
 
-If the wider community contributes a new feature that isn't already a source-available feature, we aim to nearly always include it into the open source codebase.
-
-When PostHog makes a new feature, we ask ourselves two questions:
+When PostHog (or a contributor - feel free to message us in advance) makes a new feature, we ask ourselves two questions:
 
 1. Is this feature for Creation, Collaboration or Compliance?
 1. Would this feature help more users find and use PostHog?
 
 ### Creation, Collaboration or Compliance**
+
+> By default, we launch new things as paid. Then we quickly figure out if we can open source them. We consider it an irreversible decision to "un-open source" something, hence this way of releasing. We aim to promptly convert new features to open source if they are suitable.
+
 - Creation: if the feature improves our existing open source products and is focused on helping individual contributors then it will be open source. If it's a major new feature or product line it should default to being a paid feature.
 - Collaboration: if the feature helps teams to collaborate on Posthog it should be a paid feature. The exception to this is if the feature will significantly help the community to increase. For example, initially we planned "multiple users" as a feature for the source-available version. However, we decided that having multiple users would help the community to grow, which benefits everyone disproportionately.
 - Compliance: if the feature is disproportionately used by enterprises for compliance it should be an enterprise feature.

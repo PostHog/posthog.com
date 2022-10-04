@@ -11,7 +11,7 @@ Our mission is to increase the number of successful products in the world.
 
 We started by building an open-source product operating system with many of the things you'd need to build a better product - product analytics, session recording, feature flags, experimentation, and a customer data platform to import/export and transform data. Within a year, we had thousands of customers using us and we started generating revenue.
 
-We focused on our paid product in the Summer, 2021. We quickly hit a milestone for the first 5 reference customers. In 2022, we have figured out how to accelerate our top of funnel growth, and we realized we should focus on nailing Self Serve MidMarket ($20-70K ARR deals), whilst deepening the core product.
+We focused on our paid product in the Summer, 2021. We quickly hit a milestone for the first 5 reference customers. In 2022, we have figured out how to accelerate our top of funnel growth, and we realized we should focus on nailing Self Serve Mid-market ($20-70K ARR deals), whilst deepening the core product.
 
 Today, we're optimizing conversion to paid revenue, and carefully expanding the platform again, into adjacent use cases that will meet the needs for our _existing_ user profiles.
 
@@ -65,7 +65,7 @@ While there is value in the items on the right, we value the items on the left m
 
 **MidMarket vs. Enterprise**
 
-* _MidMarket_: focus on acquiring more high quality MidMarket customers (who may start using for free) over big ticket contracts, so we can get better feedback and learn faster.
+* _Mid-market_: focus on acquiring more high quality Mid-market customers (who may start using for free) over big ticket contracts, so we can get better feedback and learn faster.
 
 **Integrations vs one-stop-shop**
 
