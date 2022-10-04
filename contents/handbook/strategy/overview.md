@@ -43,7 +43,7 @@ In 2026 we will _go public with $100M ARR._ To achieve this, PostHog will need t
 
 **How do we get there?**
 
-* Build for developers```
+* Build for developers
 * Make every developer want to tell others about us
 * Our biggest users self-serve to paying customers 
 * Go broad and develop all the tools our customers need to build better products
