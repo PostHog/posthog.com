@@ -151,9 +151,15 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
 
 > The first time you run typegen, it may get stuck in a loop. If so, cancel the process (`Ctrl+C`), discard all changes in the working directory (`git reset --hard`), and run `yarn typegen:write` again. You may need to discard all changes once more when the second round of type generation completes.
 
-### 3. Prepare app/plugin server
+### 3. Prepare plugin server
 
-Assuming Node.js is installed, run `yarn --cwd plugin-server` to install all required packages. We'll run this service in a later step.
+Assuming Node.js is installed, run `yarn --cwd plugin-server` to install all required packages. You'll also need to install the `brotli` compression library:
+
+```bash
+brew install brotli
+```
+    
+We'll run the plugin server in a later step.
 
 ### 4. Prepare the Django server
 
@@ -199,12 +205,6 @@ Assuming Node.js is installed, run `yarn --cwd plugin-server` to install all req
     ```
 
     If on an x86 platform, simply run the latter version.
-
-    You'll also need to install the `brotli` compression tool:
-
-    ```bash
-    brew install brotli
-    ```
 
 1. Install dev requirements
 
