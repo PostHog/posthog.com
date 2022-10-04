@@ -270,7 +270,7 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
         return Promise.reject(result.errors)
     }
 
-    function createPosts(data, menu, template, breadcrumbBase) {
+    function createPosts(data, menu, template, breadcrumbBase, context) {
         const menuFlattened = flattenMenu(result.data.sidebars.childSidebarsJson[menu])
         data.forEach((node) => {
             const slug = node.fields?.slug || node.url
@@ -302,6 +302,7 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
                     breadcrumbBase: breadcrumbBase || menuFlattened[0],
                     tableOfContents,
                     slug,
+                    ...(context ? context(node) : {}),
                 },
             })
         })
@@ -338,7 +339,18 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
         })
     })
 
-    createPosts(result.data.handbook.nodes, 'handbook', HandbookTemplate, { name: 'Handbook', url: '/handbook' })
+    const createTeamContext = (node) => ({
+        mission: `${node.fields?.slug || node.url}/mission`,
+        objectives: `${node.fields?.slug || node.url}/objectives`,
+    })
+
+    createPosts(
+        result.data.handbook.nodes,
+        'handbook',
+        HandbookTemplate,
+        { name: 'Handbook', url: '/handbook' },
+        createTeamContext
+    )
     createPosts(result.data.docs.nodes, 'docs', HandbookTemplate, { name: 'Docs', url: '/docs' })
     createPosts(result.data.apidocs.nodes, 'docs', ApiEndpoint, { name: 'Docs', url: '/docs' })
     createPosts(result.data.manual.nodes, 'docs', HandbookTemplate, { name: 'Using PostHog', url: '/using-posthog' })
@@ -521,12 +533,13 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
     })
 
     result.data.squeakTopics.nodes.forEach((node) => {
-        const { id, slug, label } = node
+        const { slug, label, topicId } = node
+
         createPage({
             path: `questions/${slug}`,
             component: SqueakTopic,
             context: {
-                id,
+                id: topicId,
                 topics: result.data.squeakTopics.nodes,
                 label,
                 menu,
