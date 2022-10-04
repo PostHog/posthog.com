@@ -47,7 +47,7 @@ PostHog also offered the benefit of autocapture, which enabled the team to get s
 ### How Y Combinator boosted Co-founder Matching engagement by 40% 
 Since starting with PostHog, Y Combinator has gone beyond analytics and begun using more PostHog features, such as [experiments](/product/experimentation) and [session recordings](/product/session-recording), to explore data from multiple angles at once.
 
-For Startup School, for example, the team uses [trends insights](/manual/trends) to monitor weekly users and share results in [dashboards](/manual/dashboards) — while [experiments](/manual/experimentation) have led to several significant improvements for Co-founder Matching. 
+For Startup School, for example, the team uses [trends insights](/manual/trends) to monitor weekly users and share results in [dashboards](/manual/dashboards). For Co-Founder Matching, Y Combinator uses PostHog's [experimentation suite](/manual/experimentation) to try new ideas, some of which have led to significant improvements.  
 
 “PostHog's experimentation suite is really great,” said Cat. “We recently used it to improve our matching algorithm by running an experiment which hides profiles that have been stale for 3, 6, 9 or 12 weeks. We found that users in the 6-week group sent 40% more messages than the control group - a huge improvement for us!”
 
