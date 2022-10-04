@@ -57,8 +57,6 @@ To help manage users' expectations, you might find it useful to share a message 
 3. Respond to and debug issues for _Community_ users (all other free Open Source or free Cloud users)
 4. Fix issues, create PRs
 
-For any bugs/feature requests that you don't deal with you should triage them to the relevant small team. That small team is ultimately responsible for handling bugs and feature requests for their area of the product.
-
 ### Triaging issues to the relevant small team
 
 As the support hero you should triage any bugs/feature requests that you don't deal with to the relevant small team. They are ultimately responsible for handling bugs and feature requests for their area of the product.
