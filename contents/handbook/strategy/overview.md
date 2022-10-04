@@ -73,7 +73,7 @@ While there is value in the items on the right, we value the items on the left m
 
 **Self-hosted vs. Cloud**
 
-* _Cloud_: if customers can use cloud, encourage them to use cloud. Maintain a self-hosted version and migration path but don't push it (we are the most flexible solution - this enables growth. People trying it out, or wanting to move to it long term). We offer a generous free cloud tier so we can become ubiquitous without the cost/hassle of self hosting.
+* _Cloud_: If customers can use cloud, encourage them to use cloud. Maintain a self-hosted version and migration path, but don't push it. We are the most flexible solution, which enables growth. We offer a generous free cloud tier so we can become ubiquitous without the cost/hassle of self-hosting.
 
 **Reject the [“modern data stack”](https://www.analytics8.com/blog/what-is-the-modern-data-stack-and-why-should-you-be-excited-about-it/) vs. adapt to it**
 
