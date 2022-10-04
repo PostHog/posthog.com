@@ -33,7 +33,7 @@ PostHog also offered the benefit of autocapture, which enabled the team to get s
 “Tools we looked at either weren't robust enough, or required a huge amount of work to instrument,” said Cat. “But with PostHog, we could autocapture most events using [the JS snippet](/docs/integrate/client/snippet-installation) and still [configure custom events](/tutorials/event-tracking-guide) when we needed to. It was the perfect balance.”
 
 ### How Y Combinator boosted Co-founder Matching engagement by 40% 
-Since getting started with PostHog, Y Combinator has gone beyond analytics and begin using other PostHog features, such as [experiments](/product/experimentation) and [session recordings](/product/session-recording), to explore data from multiple angles at once.
+Since starting with PostHog, Y Combinator has gone beyond analytics and begun using more PostHog features, such as [experiments](/product/experimentation) and [session recordings](/product/session-recording), to explore data from multiple angles at once.
 
 For Startup School, for example, the team uses [trends insights](/manual/trends) to monitor weekly users and share results in [dashboards](/manual/dashboards) — while [experiments](/manual/experimentation) have led to several significant improvements for Co-founder Matching. 
 
