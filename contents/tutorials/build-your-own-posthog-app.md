@@ -3,7 +3,7 @@ title: How to build your own app in PostHog
 sidebar: Docs
 showTitle: true
 author: ['joe-martin']
-date: 2022-09-26
+date: 2022-10-04
 featuredImage: ../images/tutorials/banners/how-to-build-app.png
 topics: ["apps"]
 ---

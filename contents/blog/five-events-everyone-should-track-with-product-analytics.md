@@ -1,5 +1,5 @@
 ---
-date: 2022-09-26
+date: 2022-10-04
 title: 5 events all teams should track with PostHog
 rootPage: /blog
 sidebar: Blog

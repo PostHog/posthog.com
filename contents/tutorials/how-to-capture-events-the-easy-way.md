@@ -3,7 +3,7 @@ title: How to create new events the easy way
 sidebar: Docs
 showTitle: true
 author: ['joe-martin']
-date: 2022-09-26
+date: 2022-10-04
 featuredImage: ../images/tutorials/banners/create-new-events-the-easy-way.png
 topics: ["events", "toolbar"]
 ---

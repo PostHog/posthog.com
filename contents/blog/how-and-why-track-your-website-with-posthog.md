@@ -1,5 +1,5 @@
 ---
-date: 2022-09-26
+date: 2022-10-04
 title: 'How (and why) to track your website with PostHog'
 rootPage: /blog
 sidebar: Blog
@@ -36,7 +36,7 @@ Ultimately, PostHog can do almost everything that Google Analytics can do and mo
 
 ### 2. Simplify your stack (and get rid of Google Analytics)
 
-Reducing your stack can have a few overlooked benefits, including greater data consistency. No two analytics tools are the same and each can be impacted by adblockers differently — so if you’re using Google Analytics on your website and PostHog on your product then it can be tough to get comparable results. This is especially true if you’re self-hosting PostHog, as this enables you to use first-party cookies and [gather up to 50% more data than other analytics tools](/customers/saga).
+Reducing your stack can have a few overlooked benefits, including greater data consistency. No two analytics tools are the same and each can be impacted by adblockers differently – so if you’re using Google Analytics on your website and PostHog on your product then it can be tough to get comparable results. This is especially true if you’re self-hosting PostHog – which users such as Saga do in order to [gather up to 50% more data than other analytics tools](/customers/saga).
 
 Even if data consistency isn’t a concern, there are still plenty of reasons to consider moving away from Google Analytics. Recent GDPR rulings within the EU have bought [the legality of Google Analytics](https://isgoogleanalyticsillegal.com/) into question, for example, and prompted many organizations to look for a self-hosted alternative. 
 

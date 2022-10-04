@@ -1,5 +1,5 @@
 ---
-date: 2022-09-26
+date: 2022-10-04
 title: 5 essential tips for Customer Success teams on PostHog
 rootPage: /blog
 sidebar: Blog
