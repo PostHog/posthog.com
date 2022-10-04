@@ -7,7 +7,7 @@ showTitle: true
 hideAnchor: true
 categories: ["Guides", "Using PostHog"]
 author: ["joe-martin"]
-featuredImage: ../images/blog/organge-blog-image.jpg
+featuredImage: ../images/blog/orange-blog-image.jpg
 featuredImageType: full
 ---
 
