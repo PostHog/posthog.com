@@ -4,9 +4,9 @@ sidebar: Handbook
 showTitle: true
 ---
 
-PostHog is a for profit company that balances the need to improve the open source code of PostHog with the need to add source-available features in order to generate income. We will build an open core business model.
+PostHog is a for profit company that balances the need to improve the open source code of PostHog with the need to add source-available features in order to generate income. We have an open core business model.
 
-## Why would you work on the open source product?
+## Why do we work on the open source product?
 
 When we work on the open source product, it increases the community size, which means we end up with more features, and thus a better product. This means we get yet more community growth and it also helps with revenue growth since the source-available product will also improve.
 
