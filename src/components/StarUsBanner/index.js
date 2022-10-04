@@ -43,7 +43,7 @@ export default function StarUsBanner() {
                                 <>
                                     <span className="h-[28px] w-[410px]">
                                         <Link to="/pricing" className="text-white hover:text-white">
-                                            PostHog’s EU Cloud has arrived. Find out more! 🎉
+                                            🚀 PostHog’s EU Cloud has arrived. Find out more!
                                         </Link>
                                     </span>
                                 </>
