@@ -6,20 +6,14 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: ["joe-martin"]
-featuredImage: ../images/blog/posthog-blog-image.png
+featuredImage: ../images/blog/posthog-marketing/marketing-hog.jpg
 featuredImageType: full
 categories: ["Guides", "Using PostHog"]
 ---
 
 One of the great things about PostHog is that it democratizes your product strategy by making analytics accessible to more than just analysts. There’s no need for old-fashioned SQL queries or complex business intelligence tools — marketing teams are empowered to get all the information they need by themselves. 
 
-Internally, [our marketing team](/handbook/people/team-structure/marketing) uses PostHog for [all their reporting](/blog/posthog-marketing), as well as for running ad-hoc analysis and testing new ideas. Here are some of the tips and tricks we recommend based on their experience…
-
-> 1. [Set up an AARRR pirate funnel](#1-set-up-an-aarrr-pirate-funnel)
-2. [Track campaigns with trend insights](#2-track-campaigns-with-trend-insights)
-3. [Watch how users sign-up with session recordings](#3-watch-how-users-sign-up-with-session-recordings)
-4. [Understand how users explore your site with paths](#4-understand-how-users-explore-your-site-with-paths)
-5. [Use dashboards subscriptions to keep up to date](#5-use-dashboards-subscriptions-to-keep-up-to-date)
+Internally, [our marketing team](/handbook/people/team-structure/marketing) uses PostHog for [all their reporting](/blog/posthog-marketing), as well as for running ad-hoc analysis and testing new ideas. Here are some of the tips and tricks we recommend based on their experience...
 
 ## 1. Set up an AARRR pirate funnel
 ![AARRR pirate metrics](../images/blog/using-posthog/aarrr.png)

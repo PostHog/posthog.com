@@ -6,7 +6,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: ["joe-martin"]
-featuredImage: ../images/blog/posthog-blog-image.png
+featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
 categories: ["Guides", "Using PostHog"]
 ---
