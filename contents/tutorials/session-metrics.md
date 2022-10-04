@@ -21,7 +21,7 @@ In this tutorial, we will use sessions to calculate and visualize a variety of s
 
 To follow this tutorial along, you need to have:
 
-1. **[Deployed PostHog](/docs/deployment)**.
+1. **[Deployed PostHog](/docs/getting-started/cloud)**.
 2. Installed **[posthog-js](/docs/integrate/client/js)** or added the **[PostHog snippet](/docs/integrate/client/js)** to your site.
 
 ## Time on site
