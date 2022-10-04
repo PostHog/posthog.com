@@ -1,6 +1,5 @@
 ---
 title: Redshift Import
-layout: app
 github: https://github.com/PostHog/posthog-redshift-import-plugin
 installUrl: https://app.posthog.com/project/apps?name=Redshift+Import
 thumbnail: ../../apps/thumbnails/redshift.svg
@@ -16,7 +15,7 @@ The Redshift Import app for PostHog enables you, predictably, to import data fro
 
 Using the Redshift Import app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)!
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
 You'll also need access to a Redshift table to import from.
 
@@ -124,6 +123,10 @@ A transformation entry looks like this:
 ```
 
 Your GitHub username is important so that we only allow changes to transformations by the authors themselves.
+
+### Configuration
+
+<AppParameters />
 
 ### Is the source code for this app available?
 

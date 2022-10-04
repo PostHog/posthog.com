@@ -19,4 +19,4 @@ Host PostHog on your own infrastructure, but leave the ClickHouse database manag
 
 ## Get in touch
 
-[Email to get access to the beta](marketplace+clickhouse@posthog.com)
+[Email to get access to the beta](mailto:marketplace+clickhouse@posthog.com)

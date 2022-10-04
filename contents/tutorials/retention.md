@@ -160,3 +160,6 @@ As mentioned in the introductory section of this tutorial, different businesses 
 - Your business should set appropriate retention metrics that are specific to your product
 - PostHog allows you to view retention on any event or action
 - Filtering retention by event properties or cohorts is a great way to improve product/market fit
+
+<NewsletterTutorial compact/>
+

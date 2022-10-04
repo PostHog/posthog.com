@@ -87,6 +87,11 @@ Below is a rough timeline for planning your next offsite, as well as links to te
   - To simplify this process, we give all team members access to a company card, and we ask people to book their own flights
   - We strongly recommend this approach as centralizing flight booking can be a huge headache for offsite lead, and this allows team members to accurately enter their personal information including airline frequent flier and trusted traveller numbers
   - Encourage folks to buy flights early and with the option to refund if they are unable to attend to save on costs
+  - In the event that a new team member will be attending an offsite, but has not started yet, please contact the Ops team to help coordinate. In these cases, the process is:
+    1. Preemptively create the new team member a Google account
+    2. Issue them a Brex card to their work email with a sufficiently high temporary balance to cover travel costs
+    3. Add them as a guest to any planning Slack channels and/or share any necessary itinerary information such as arrival dates/times and airports
+    4. Have the new team member book travel as usual
 - [ ] Draft rough schedule
   - Building the schedule as a [separate Google Calendar](https://support.google.com/calendar/answer/37095?hl=en) that can eventually be [shared with the team](https://support.google.com/calendar/answer/37082?hl=en) will allow you to flexibly move sessions around as you finalize the itinerary
 - [ ] Send [info gathering form](https://docs.google.com/forms/d/1QWhbQbHxoq--XWhMfTXeccTaq1ru0v_VPhuwOA3xS48/edit?usp=sharing)

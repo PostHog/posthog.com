@@ -1,6 +1,5 @@
 ---
 title: Snowflake Export
-layout: app
 github: https://github.com/PostHog/snowflake-export-plugin
 installUrl: https://app.posthog.com/project/apps?name=Snowflake
 thumbnail: ../../apps/thumbnails/snowflake.svg
@@ -27,7 +26,7 @@ Once the app has been configured, you can enable it by flipping the toggle and i
 #### PostHog Self-hosted
 
 > The Snowflake Export app requires a PostHog instance running [version 1.24.0](https://posthog.com/blog/the-posthog-array-1-24-0) or later.
-> Not running 1.24.0? Find out [how to update](https://posthog.com/docs/self-host/configure/upgrading-posthog)!
+> Not running 1.24.0? Find out [how to update](/docs/runbook/upgrading-posthog)!
 
 1. Log in to your PostHog instance
 2. Click 'Apps' on the left-hand navigation

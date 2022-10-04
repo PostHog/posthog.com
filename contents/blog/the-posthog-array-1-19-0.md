@@ -16,7 +16,7 @@ Once again, we were heavily driven by feedback, having done a bunch of calls wit
 
 ## Release Notes
 
-> If you're self-hosting and want to upgrade for a better experience with nicer features, remember to [update your PostHog instance](/docs/self-host/configure/upgrading-posthog).
+> If you're self-hosting and want to upgrade for a better experience with nicer features, remember to [update your PostHog instance](/docs/runbook/upgrading-posthog).
 
 ### [Scheduled Apps and Editor](https://github.com/PostHog/posthog/pull/2743)
 

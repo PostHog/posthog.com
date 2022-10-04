@@ -89,10 +89,6 @@ What constitutes a good ratio depends on the sector, but a [2017 report by Mixpa
 
 **Is it useful?** Yes, but you need to be careful as a large increase in monthly users can skew your ratio. It's best used by late-stage companies with predictable monthly growth, which is probably why it's popular at Facebook.
 
- <NewsletterForm
-compact
-/>
-
 ### Feature usage
 
 **What is it?** The specifics will vary depending on the product, but this is all about tracking what people are doing. 
@@ -189,6 +185,3 @@ And if you're in need a product analytics platform to track them, learn [how we 
 
 - [Finding your north star metric](/blog/north-star-metrics): All Saas products can benefit from a north star metric and this guide will help you find one
 
- <NewsletterForm
-compact
-/>

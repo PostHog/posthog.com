@@ -66,7 +66,7 @@ At the end of this step, you must ensure that every event in the experiment, no 
 
 ### Persisting flag across authentication steps (optional)
 
-If you're dealing with an experiment where you want to [persist behaviour across authentication steps](docs/user-guides/feature-flags#persisting-flag-across-authentication-steps), there's two more things to note:
+If you're dealing with an experiment where you want to [persist behaviour across authentication steps](/docs/user-guides/feature-flags#persisting-flag-across-authentication-steps), there's two more things to note:
 
 1. Check the relevant box in the UI to persist behaviour across authentication steps.
 2. Whenever you send an `$identify` call that identifies a previously anonymous user with a new ID, send both IDs in the `/decide` call like so:
@@ -99,3 +99,5 @@ And that's all! You should be good to run any experiment you want with these cha
 
 - [How to safely roll out new features using feature flags](/tutorials/feature-flags)
 - [Our guide to great open-source feature flags tools](/blog/best-open-source-feature-flag-tools)
+
+<NewsletterTutorial compact/>

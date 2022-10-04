@@ -1,6 +1,5 @@
 ---
 title: RudderStack Export
-layout: app
 github: https://github.com/rudderlabs/rudderstack-posthog-plugin
 installUrl: https://app.posthog.com/project/apps?name=RudderStack
 thumbnail: ../../apps/thumbnails/rudderstack-export.png
@@ -16,7 +15,7 @@ The Rudderstack Export app enables you to send events from PostHog, to RudderSta
 
 The Rudderstack Export app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)!
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
 You'll also need access to the Rudderstack instance you want to export to.
 
@@ -29,6 +28,10 @@ Once you've added PostHog as a source, make a note of the `write-key` field and 
 1. Visit the 'Apps' page in your instance of PostHog.
 2. Search for 'Rudderstack' and select the app, press Install.
 3. Follow the on-screen steps to configure the app, entering your `write-key` and server URL information.
+
+### Configuration
+
+<AppParameters />
 
 ### Is the source code for this app available?
 

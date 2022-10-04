@@ -1,6 +1,5 @@
 ---
 title: Email Scoring
-layout: app
 github: https://github.com/PostHog/mailboxlayer-plugin
 installUrl: https://app.posthog.com/project/apps?name=Posthog+Ingestion+Alert+Plugin
 thumbnail: ../../apps/thumbnails/email-scoring.png
@@ -16,7 +15,7 @@ The Email Scoring app adds email scores to Persons in PostHog, giving you more c
 
 The Email Scoring app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)!
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
 You'll also need Mailboxlayer access and an API key.
 
@@ -28,6 +27,10 @@ You'll also need Mailboxlayer access and an API key.
 4. Click '+ Install new app' and use this URL to install: `https://github.com/PostHog/mailboxlayer-plugin`
 5. Add the API key to the config.
 6. Enable the app and watch the email scores come in!
+
+### Configuration
+
+<AppParameters />
 
 ### Is the source code for this app available?
 

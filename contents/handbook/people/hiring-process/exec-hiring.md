@@ -46,7 +46,7 @@ In order to ensure speed, we aim to finish the process within 5 working days (as
 *   Technical deep-dive
 *   Scenario-based questions
 
-**Day 3: Meet rest of the Exec team - Marcus and Charles -** _30-45 minutes_
+**Day 3: Meet rest of the Exec team - Charles -** _30-45 minutes_
 
 *   Strategy and long term outlook
 *   Culture fit

@@ -13,14 +13,14 @@ interface ColMenuItems {
 export default function Docs({ referenceElement }: { referenceElement: HTMLDivElement }) {
     const leftColMenuItems: ColMenuItems[] = [
         {
-            title: 'Overview',
-            description: 'Getting started',
-            url: '/docs',
+            title: 'Quickstart guide',
+            description: 'with PostHog Cloud',
+            url: '/docs/getting-started/cloud',
         },
         {
-            title: 'Deploy PostHog',
-            description: 'Cloud or self-host',
-            url: '/docs/deploy',
+            title: 'Self-hosting PostHog',
+            description: 'Deploy PostHog on your own infrastructure',
+            url: '/docs/self-host',
         },
         {
             title: 'Integrate PostHog',

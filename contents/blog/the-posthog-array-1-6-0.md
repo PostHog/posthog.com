@@ -12,7 +12,7 @@ featuredImageType: standard
 
 One of the most fun weeks we've had so far with our UX - resizable and touch-enabled dashboards with a new display mode, Microsoft Teams support, and paths for events. Plus, a ton of performance improvements.
 
-Want to try this out and self hosting? [Update your PostHog](/docs/self-host/configure/upgrading-posthog).
+Want to try this out and self hosting? [Update your PostHog](/docs/runbook/upgrading-posthog).
 
 ## Release notes
 

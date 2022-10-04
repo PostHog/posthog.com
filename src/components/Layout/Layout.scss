@@ -197,15 +197,6 @@ textarea {
     font: inherit;
 }
 
-* {
-    box-sizing: inherit;
-}
-*:before {
-    box-sizing: inherit;
-}
-*:after {
-    box-sizing: inherit;
-}
 body {
     font-family: 'MatterVF', '-apple-system', 'BlinkMacSystemFont', 'avenir next', 'avenir', 'segoe ui',
         'helvetica neue', 'helvetica', 'Ubuntu', 'roboto', 'noto', 'arial', 'sans-serif' !important;
@@ -472,24 +463,6 @@ abbr[title] {
     border-bottom: 1px dotted hsla(0, 0%, 0%, 0.5);
     cursor: help;
     text-decoration: none;
-}
-thead {
-    text-align: left;
-}
-td,
-th {
-    text-align: left;
-    border-bottom: 1px solid hsla(0, 0%, 0%, 0.12);
-    padding-top: 0.5rem;
-    padding-bottom: calc(0.5rem - 1px);
-}
-th:first-child,
-td:first-child {
-    padding-left: 0;
-}
-th:last-child,
-td:last-child {
-    padding-right: 0;
 }
 
 /* CUSTOM */

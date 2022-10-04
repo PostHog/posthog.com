@@ -1,6 +1,5 @@
 ---
 title: Taxonomy Standardizer
-layout: app
 installUrl: https://app.posthog.com/project/apps?name=Taxonomy+Plugin
 github: https://github.com/PostHog/taxonomy-plugin
 thumbnail: ../../apps/thumbnails/taxonomy-standardizer.png
@@ -26,13 +25,17 @@ This app can convert from any of these taxonomies, to any other.
 
 The Taxonomy Standardizer requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)!
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
 ### How do I install the Taxonomy Standardizer app?
 
 1. Visit the 'Apps' page in your instance of PostHog.
 2. Search for 'Taxonomy Standardizer' and select the app, press Install.
 3. Follow the on-screen steps to configure the app.
+
+### Configuration
+
+<AppParameters />
 
 ### Is the source code for this app available?
 

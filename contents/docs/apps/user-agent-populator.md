@@ -1,6 +1,5 @@
 ---
 title: User Agent Populator
-layout: app
 github: https://github.com/weyert/useragentplugin
 installUrl: https://app.posthog.com/project/apps?name=User%20Agent%20Populator
 thumbnail: ../../apps/thumbnails/user-agent-enhancer.png
@@ -33,7 +32,7 @@ Once the app has been configured, you can enable it by flipping the toggle and i
 #### PostHog Self-hosted
 
 > The User Agent Populator requires a PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
-> Not running 1.30.0? Find out [how to update](https://posthog.com/docs/self-host/configure/upgrading-posthog)!
+> Not running 1.30.0? Find out [how to update](https://posthog.com/docs/runbook/upgrading-posthog)!
 
 1. Visit the 'Apps' page in your instance of PostHog.
 2. Search for 'User Agent Populator'.
@@ -46,9 +45,7 @@ Once the app has been configured and enabled, it will begin to transform all new
 
 Before an app can be enabled in PostHog, it has to be configured.
 
-| Option | Description |
-| --- | --- |
-| <span class="whitespace-nowrap mr-4">`Can override existing`<br />`browser related properties?`</span> <br /><br />**Type:** Boolean<br />**Default:** false | Should the app override the `$browser`, `$browser_version`, etc. properties based on the `$useragent` property, even if they have already been set.
+<AppParameters />
 
 ### Using the User Agent Populator
 

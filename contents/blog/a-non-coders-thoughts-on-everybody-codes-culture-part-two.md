@@ -19,7 +19,7 @@ Not anymore. PostHog is still unlikely to consider me a good candidate for [an e
 In my previous post I wrote about the three principles that set me up for success, but now it’s time to reflect on what’s helped me succeed since. 
 
 ### Having unrealistic goals
-In my last post [I said it was important to set realistic limits](blog/a-non-coders-thoughts-on-everybody-codes-culture) and that’s true, at the start.
+In my last post [I said it was important to set realistic limits](/blog/a-non-coders-thoughts-on-everybody-codes-culture) and that’s true, at the start.
 
 However, it’s also been important to follow less grounded ideas. One example is the ShuffleHog — an idea I had for a hackathon project which is essentially a shuffle button to help you discover new insights. I thought ShuffleHog was a fun idea, but nobody else latched on to it.
 
@@ -48,7 +48,3 @@ The experience I’ve had with GitHub, for example, ended up being the catalyst 
 These may be small projects, but they’re a million miles away from where I was before PostHog — and I’m excited to see how much farther working with code will push me to go!
 
 _Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
-
-<NewsletterForm
-compact
-/>

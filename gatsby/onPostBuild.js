@@ -6,6 +6,7 @@ const docsHandbookTemplate = require('../src/templates/OG/docs-handbook.js')
 const customerTemplate = require('../src/templates/OG/customer.js')
 const careersTemplate = require('../src/templates/OG/careers.js')
 const tutorialTemplate = require('../src/templates/OG/tutorial.js')
+const jobTemplate = require('../src/templates/OG/job.js')
 const { flattenMenu } = require('./utils')
 const fetch = require('node-fetch')
 
@@ -38,6 +39,12 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
                 nodes {
                     fields {
                         slug
+                        contributors {
+                            username
+                            avatar {
+                                absolutePath
+                            }
+                        }
                     }
                     frontmatter {
                         title
@@ -51,12 +58,6 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
                     }
                     timeToRead
                     excerpt(pruneLength: 500)
-                    contributors {
-                        username
-                        avatar {
-                            absolutePath
-                        }
-                    }
                 }
             }
             tutorials: allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }) {
@@ -127,9 +128,21 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
                     }
                 }
             }
-            careers: allJobs {
+            careers: allAshbyJobPosting {
                 nodes {
                     title
+                    fields {
+                        slug
+                    }
+                    parent {
+                        ... on AshbyJob {
+                            id
+                            customFields {
+                                title
+                                value
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -219,8 +232,8 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
         const { title } = post.frontmatter
         const { timeToRead, excerpt, fields, parent } = post
         const lastUpdated = parent && parent.fields && parent.fields.lastUpdated
-        if (!title || !timeToRead || !excerpt || !lastUpdated || !post.contributors) continue
-        const contributors = post.contributors.map((contributor) => {
+        if (!title || !timeToRead || !excerpt || !lastUpdated || !fields?.contributors) continue
+        const contributors = fields?.contributors.map((contributor) => {
             const { avatar, username } = contributor
             return {
                 username,
@@ -273,6 +286,19 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
         html: careersTemplate({ jobs: (data.careers && data.careers.nodes) || [], font }),
         slug: 'careers',
     })
+
+    for (const job of data.careers.nodes) {
+        const {
+            title,
+            parent,
+            fields: { slug },
+        } = job
+        const timezone = parent?.customFields?.find(({ title }) => title === 'Timezone(s)')?.value
+        await createOG({
+            html: jobTemplate({ role: title, font, timezone }),
+            slug,
+        })
+    }
 
     // Tutorials OG
     for (const post of data.tutorials.nodes) {

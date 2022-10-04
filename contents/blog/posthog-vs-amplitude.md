@@ -39,9 +39,7 @@ Our MIT License isn’t just for show. You can access [our source code](https://
 
 ## Feature comparison
 
-This table compares the Amplitude Analytics 'Growth' plan to PostHog Cloud, our fully-managed SaaS offering, and [PostHog Scale](/pricing) – the paid tier of our self-hosted platform. 
-
-We also offer [PostHog Enterprise](/enterprise), which includes everything from Scale but adds enhanced training and support, SLA with downtime developer pairing, SSO, SAML, instance monitoring, and more.  
+This table compares the Amplitude Analytics 'Growth' plan to PostHog Cloud, our fully-managed SaaS offering, and [PostHog Self-Hosted](/pricing). Single sign-on and multitenancy are available as bolt-ons to all plans. 
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -392,14 +390,14 @@ PostHog Open Source is free for life, but is limited to one project. It includes
 
 We ship weirdly fast. Here's a quick snapshot of what we're working on right now:
 
-- Console log tracking in recordings
-- Insight experience overhaul
-- Export and share visualizations as image file
+- In-app setup guided tour
+- PostHog Cloud EU
+- Session Recordings DevTools
+- Turbo feature flags
+- Unified querying across events, persons, sessions, groups
 - Automated insight recommendations
-- Session analysis 2.0
 - Lightning fast querying at billion event and person scale
-- Enhanced plugin development experience
-- Rapid ingestion pipeline
+- Extended insight visualizations
 
 You can also take a look at [recent issues](https://github.com/PostHog/posthog/issues) and [pull requests](https://github.com/PostHog/posthog/pulls) on the [PostHog repo](https://github.com/PostHog/posthog) to see what we're working on.
 

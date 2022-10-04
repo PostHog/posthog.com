@@ -42,6 +42,3 @@ Ultimately, while I was initially nervous about the ‘everyone codes’ culture
 
 _Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
 
-<NewsletterForm
-compact
-/>

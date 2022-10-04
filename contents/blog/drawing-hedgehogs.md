@@ -92,6 +92,3 @@ You need to test different versions to find what works - but even after finding 
 
 _Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
 
-<NewsletterForm
-compact
-/>

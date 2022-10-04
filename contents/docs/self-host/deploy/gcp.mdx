@@ -13,6 +13,7 @@ import UpgradingSnippet from './snippets/upgrading'
 import UninstallingSnippet from './snippets/uninstalling'
 import SetupDNS from './snippets/setup-dns'
 import Disclaimer from './snippets/disclaimer'
+import NextSteps from "./snippets/next-steps"
 
 <Disclaimer />
 
@@ -22,19 +23,19 @@ First, we need to set up a Kubernetes cluster (see the official GCP [documentati
 
 > Note: in order to reduce the overhead of managing stateful services like PostgreSQL, Kafka, Redis and ClickHouse by yourself, we suggest you to run them _outside_ Kubernetes and offload their provisioning, building and maintenance operations:
 >
-> * for PostgreSQL, take a look at [Google Cloud SQL for PostgreSQL](https://cloud.google.com/sql/docs/postgres)
-> * for Apache Kafka, take a look at [Confluent Cloud](https://www.confluent.io/confluent-cloud/)
-> * for Redis, take a look at [Google Cloud Memorystore](https://cloud.google.com/memorystore) and [Redis Enterprise Cloud](https://redis.com/redis-enterprise-cloud/overview/)
-> * for ClickHouse, take a look at [Altinity Cloud](https://altinity.com/cloud-database/)
->
+> -   for PostgreSQL, take a look at [Google Cloud SQL for PostgreSQL](https://cloud.google.com/sql/docs/postgres)
+> -   for Apache Kafka, take a look at [Confluent Cloud](https://www.confluent.io/confluent-cloud/)
+> -   for Redis, take a look at [Google Cloud Memorystore](https://cloud.google.com/memorystore) and [Redis Enterprise Cloud](https://redis.com/redis-enterprise-cloud/overview/)
+> -   for ClickHouse, take a look at [Altinity Cloud](https://altinity.com/cloud-database/)
 
 ## Chart configuration
 
 Here's the minimal required `values.yaml` that we'll be using later. You can find an overview of the parameters that can be configured during installation under [configuration](/docs/self-host/deploy/configuration).
+
 ```yaml
-cloud: "gcp"
+cloud: 'gcp'
 ingress:
-  hostname: <your-hostname>
+    hostname: <your-hostname>
 ```
 
 ## Installing the chart
@@ -45,13 +46,13 @@ ingress:
 
 **Important** - This must be a `Global` IP address. GKE will not be able to find a `Region` IP address and assign it to the ingress controller's LB.
 
-### In GCP web console 
+### In GCP web console
 
 1. Open the Google Cloud Console
 1. Go to VPC Networks > [External IP addresses](https://console.cloud.google.com/networking/addresses/list)
 1. Add a new **global** static IP with the name `posthog`
 
-### From gcloud CLI 
+### From gcloud CLI
 
 1. `gcloud compute addresses create posthog --global`
 
@@ -59,7 +60,12 @@ ingress:
 
 <SetupDNS />
 
+## Next steps
+
+<NextSteps />
+
 ## Troubleshooting
+
 ### I cannot connect to my PostHog instance after creation
 
 If DNS has been updated properly, check whether the SSL certificate was created successfully.
@@ -134,7 +140,9 @@ spec:
 ```
 
 ### Provide the claim to the helm chart
+
 Add the following to your `values.yaml` & run `helm install` or `upgrade`:
+
 ```
 clickhouse:
   # -- Optional: Used to manually specify a persistent volume claim. When specified the cloud specific storage class will not be provisioned
