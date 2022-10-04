@@ -23,6 +23,16 @@ Y Combinator is the world’s top startup accelerator, helping to fund, train an
 
 “We use PostHog for [Startup School](https://www.startupschool.org/), our public [YC Startup Library](https://www.ycombinator.com/library), and for [Co-Founder Matching](https://www.ycombinator.com/cofounder-matching),” said Cat Li, Product and Engineering Lead for Y Combinator Startup School. “PostHog is especially useful for Co-Founder Matching, which is essentially a dating app for co-founders.”
 
+<BorderWrapper>
+    <Quote
+        imageSource="/images/customers/cat.jpeg"
+        size="md"
+        name="Cat Li"
+        title="Product & Engineering Lead, Y Combinator"
+        quote={`“One thing I love about PostHog is that we have a shared Slack channel, for support and feedback. We can chat directly to the engineers building PostHog and they're always really responsive.”`}
+    />
+</BorderWrapper>
+
 ### How Y Combinator gathers 30% more data with PostHog than Google Analytics
 Y Combinator empowers each team to choose its own processes, tools, and OKRs. Some teams use tools like Segment or Amplitude — but for the flagship Startup School project, Cat's team decided PostHog was the best tool for the job. 
 
@@ -31,6 +41,8 @@ Y Combinator empowers each team to choose its own processes, tools, and OKRs. So
 PostHog also offered the benefit of autocapture, which enabled the team to get started quickly without wasting weeks defining tracking plans. 
 
 “Tools we looked at either weren't robust enough, or required a huge amount of work to instrument,” said Cat. “But with PostHog, we could autocapture most events using [the JS snippet](/docs/integrate/client/snippet-installation) and still [configure custom events](/tutorials/event-tracking-guide) when we needed to. It was the perfect balance.”
+
+![Y Combinator analytics screenshot](../images/customers/ycombinator/ycombinator-analytics.png)
 
 ### How Y Combinator boosted Co-founder Matching engagement by 40% 
 Since starting with PostHog, Y Combinator has gone beyond analytics and begun using more PostHog features, such as [experiments](/product/experimentation) and [session recordings](/product/session-recording), to explore data from multiple angles at once.
@@ -45,4 +57,4 @@ Experiments and session recordings have also helped Y Combinator avoid pitfalls 
 
 "A lot of people asked us to build a feature that let co-founders collaborate on a trial project," said Cat. "But, when we ran that experiment and looked at the results, we found nobody actually used it at all. Thanks to that, we were able to redirect our efforts and avoid wasting resources.”
 
-“It's just like founders in our Startup School learn," explained Cat. "Building things is never just one-and-done - you always need to be testing new theories and finding ways to improve. PostHog is central to how we do that at Y Combinator.”
+“It's just like founders in our Startup School learn," explained Cat. "Building things is never just one-and-done - you always need to be testing new theories and finding ways to improve. PostHog is central to how we do that at Y Combinator, helping us try new ideas and make our products better.”
