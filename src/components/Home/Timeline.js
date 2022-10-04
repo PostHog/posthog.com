@@ -1,3 +1,4 @@
+import Link from 'components/Link'
 import { graphql, useStaticQuery } from 'gatsby'
 import { StaticImage } from 'gatsby-plugin-image'
 import groupBy from 'lodash.groupby'
@@ -65,7 +66,7 @@ const Open = () => {
     )
 }
 
-const Card = ({ title, githubPages, complete }) => {
+const Card = ({ title, githubPages, complete, html_url }) => {
     const completedIssues = githubPages.filter((page) => page.closed_at)
     const percentageComplete = Math.round((completedIssues.length / githubPages.length) * 100)
 
@@ -111,9 +112,16 @@ const Card = ({ title, githubPages, complete }) => {
                 <ul className="list-none m-0 p-0 md:grid grid-rows-3 grid-cols-2 grid-flow-col gap-y-2 gap-x-4">
                     {githubPages.map((page) => {
                         return (
-                            <li key={page.title} className="text-[14px] flex items-center font-semibold space-x-1">
-                                <span>{page.closed_at ? <Closed /> : <Open />}</span>
-                                <span className="whitespace-nowrap text-ellipsis overflow-hidden">{page.title}</span>
+                            <li key={page.title}>
+                                <Link
+                                    to={page.html_url}
+                                    className="text-[14px] flex items-center font-semibold space-x-1 text-black"
+                                >
+                                    <span>{page.closed_at ? <Closed /> : <Open />}</span>
+                                    <span className="whitespace-nowrap text-ellipsis overflow-hidden">
+                                        {page.title}
+                                    </span>
+                                </Link>
                             </li>
                         )
                     })}
@@ -132,6 +140,7 @@ export default function Timeline() {
                 githubPages {
                     title
                     closed_at
+                    html_url
                 }
             }
         }
