@@ -81,5 +81,5 @@ Some of the features we are building may exist in other products already. It is 
 [Team Product Analytics]: /handbook/people/team-structure/product-analytics
 [Team Session Recording]: /handbook/people/team-structure/session-recording
 [Team Pipeline]: /handbook/people/team-structure/pipeline
-[Team Platform]: /handbook/people/team-structure/platform
+[Team Infrastructure]: /handbook/people/team-structure/infrastructure
 [Team Experimentation]: /handbook/people/team-structure/experimentation
