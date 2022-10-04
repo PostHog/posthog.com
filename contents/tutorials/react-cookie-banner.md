@@ -20,7 +20,7 @@ PostHog provides a simple way to implement tracking and cookies opt out (or in).
 
 To complete this tutorial, you’ll need to  a [PostHog instance](/docs/getting-started/cloud) as well as [Node installed](https://nodejs.org/en/download/) (to install, manage, and run React).
 
-## Setting up React
+## Step 1: Setting up React
 
 We are going to use the popular JavaScript framework [React](https://reactjs.org/) for this tutorial, but this works for other [JavaScript](/docs/integrate/client/js) frameworks as well. To get started with our React project, head into command line, create a folder for our project, then install and create the app (we are naming ours `client`).
 
@@ -36,7 +36,7 @@ Running these commands gives us a working React app.
 
 ![React app](../images/tutorials/react-cookie-banner/react-app.png)
 
-## Setting up PostHog
+## Step 2: Setting up PostHog
 
 Next, we want to set up PostHog to track activity on our site. To do this, first, we’ll install the `posthog-js` package.
 
@@ -74,7 +74,7 @@ When we head back to our local site, right-click, choose inspect, go to the Appl
 
 ![App cookie](../images/tutorials/react-cookie-banner/app-cookie.png)
 
-## Building the banner component
+## Step 3: Building the banner component
 
 Now that we have our site and PostHog library set up, it is time to create the banner. To start, we can create a `CookieBanner.js` file in our `src` folder (where the rest of our React code is).
 
@@ -145,7 +145,7 @@ When we head back to the local site, we’ll see our cookie banner at the bottom
 
 > 💯: For bonus points, you can click each of the buttons and go view the associated events in your PostHog instance.
 
-## Adding the opt out (or in) logic
+## Step 4: Adding the opt out (or in) logic
 
 Next, we’ll add the logic for accepting or declining the tracking cookies. We’ll head back to our `CookieBanner.js` component, import the PostHog library, and add click handlers for the buttons.
 
@@ -188,7 +188,7 @@ Now, when we head back to our site, we can click accept or decline. By inspectin
 
 ![App local storage](../images/tutorials/react-cookie-banner/app-local.png)
 
-## Making the banner conditional
+## Step 5: Making the banner conditional
 
 We don’t want to show users our beautiful cookie banner all the time. We can hide it once users make a decision and not load the banner when they come back to our site.  
 
@@ -276,7 +276,7 @@ function CookieBanner() {
 export default CookieBanner;
 ```
 
-## Testing it all out
+## Step 6: Testing it all out
 
 To make sure everything works, try the following steps:
 
