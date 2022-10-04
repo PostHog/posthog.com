@@ -15,7 +15,7 @@ The word churn once reminded people of fresh butter, now it brings thoughts of l
 
 The churn rate is the percentage of users who stop an action during a certain period. It is used to understand the negative changes in usage, revenue, or other growth metrics. Understanding churn rate is key to figuring out problem areas in your product. 
 
-In this tutorial, we’ll calculate and visualize the churn rate then use PostHog’s features of session recordings, cohorts, and actions to lower it.
+In this tutorial, we will calculate and visualize the churn rate then use PostHog’s features of session recordings, cohorts, and actions to lower it.
 
 ## Step 1: Calculating churn rate
 
