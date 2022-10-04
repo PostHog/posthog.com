@@ -114,7 +114,7 @@ It is at the discretion of the _manager_ of that person if they can move.
 
 In general, no - it's surprisingly great how much just 2-6 people can get done.
 
-If more mature product areas cannot cope with the workload, smallt eams will clarify where we need to hire too. In fact, it'll make sure we keep the scrappy fun side of working here as we get bigger. A team doesn't _have_ to be six people.
+If more mature product areas cannot cope with the workload, small teams will clarify where we need to hire too. In fact, it'll make sure we keep the scrappy fun side of working here as we get bigger. A team doesn't _have_ to be six people.
 
 ### How does hiring in the Small Team work?
 
