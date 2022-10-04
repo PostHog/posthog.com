@@ -13,7 +13,7 @@ categories: ["Guides", "Using PostHog"]
 
 One of the great things about PostHog is that it democratizes your product strategy by making analytics accessible to more than just analysts. There’s no need for old-fashioned SQL queries or complex business intelligence tools — marketing teams are empowered to get all the information they need by themselves. 
 
-Internally, [our marketing team](/handbook/people/team-structure/marketing) uses PostHog for all their reporting, as well as for running ad-hoc analysis and testing new ideas. Here are some of the tips and tricks we recommend based on their experience…
+Internally, [our marketing team](/handbook/people/team-structure/marketing) uses PostHog for [all their reporting](/blog/posthog-marketing), as well as for running ad-hoc analysis and testing new ideas. Here are some of the tips and tricks we recommend based on their experience…
 
 > 1. [Set up an AARRR pirate funnel](#1-set-up-an-aarrr-pirate-funnel)
 2. [Track campaigns with trend insights](#2-track-campaigns-with-trend-insights)
