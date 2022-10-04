@@ -41,17 +41,10 @@ export default function StarUsBanner() {
                                 </Link>
                             ) : (
                                 <>
-                                    <span>Star us on GitHub</span>
-                                    <span className="h-[28px] w-[125px]">
-                                        <GitHubButton
-                                            className="text-red hover:text-red"
-                                            href="https://github.com/posthog/posthog"
-                                            data-size="large"
-                                            data-show-count="true"
-                                            aria-label="Star posthog/posthog on GitHub"
-                                        >
-                                            Star
-                                        </GitHubButton>
+                                    <span className="h-[28px] w-[410px]">
+                                        <Link to="/pricing" className="text-white hover:text-white">
+                                            PostHog’s EU Cloud has arrived. Find out more! 🎉
+                                        </Link>
                                     </span>
                                 </>
                             )}
