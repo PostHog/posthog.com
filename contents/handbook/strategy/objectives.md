@@ -35,7 +35,7 @@ We discuss the OKRs in every all hands meeting - the team leads explain progress
 
 ## How you can help
 
-* Give direct feedback if _anyone_ is doing something that clearly doesn't help with goals.
+* Give direct feedback to a team member if there is working happening that doesn't help with goals. (Unless it's small and obviously valuable in some other way)
 * If your goals feel detached from what is important _say something proactively_.
 
 ## Further reading: musings about metrics
