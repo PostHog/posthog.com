@@ -7,15 +7,24 @@ showTitle: true
 ## TL;DR
 Our mission is to increase the number of successful products in the world.
 
-We started by building an open-source product analytics platform with all the basic things you'd need to understand user behavior - funnels, trends, session recording, feature flags, and many more features. Within a year, we had thousands of customers using us and we started generating revenue.
-
-We focused on our paid product earlier in 2021. We quickly hit a milestone for the first 5 reference customers and we've kept selling since. The next step on our journey is to figure out how to accelerate our top of funnel growth, while achieving larger order values from our Enterprise product.
-
 ## Context
 
-We’ve grown a lot - tens of thousands of sign ups - but it’s clear that the many of our users use us *despite* a bad experience, with complex deployment and maintenance a particular issue. This is a great problem to have, as it means we’re solving a hair-on-fire problem - product analytics that you can self-host.
+We started by building an open-source product operating system with many of the things you'd need to build a better product - product analytics, session recording, feature flags, experimentation, and a customer data platform to import/export and transform data. Within a year, we had thousands of customers using us and we started generating revenue.
 
-For any company, nothing matters more than product market fit. If we get that right, it’ll be much easier for customer success, marketing or sales teams to succeed.
+We focused on our paid product in the Summer, 2021. We quickly hit a milestone for the first 5 reference customers. In 2022, we have figured out how to accelerate our top of funnel growth, and we realized we should focus on nailing Self Serve MidMarket ($20-70K ARR deals), whilst deepening the core product.
+
+Today, we're optimizing conversion to paid revenue, and carefully expanding the platform again, into adjacent use cases that will meet the needs for our _existing_ user profiles.
+
+We now add more companies each week than _any_ closed source SaaS rival, and we're the open source standard for all our applications.
+
+## General principles
+
+* For any company, nothing matters more than product market fit. If we get that right, it’ll be much easier for customer success, marketing or sales teams to succeed. As a result, we're 100% inbound. We invest in product, not cold-calling people that don't want to buy from us.
+* We are a _late mover_. All the products we build into the platform have product-market fit. This makes it faster to ship.
+* A wide strategy is winner takes all. The wider we get, the faster we grow, so the wider we can get. We are here to be ambitious.
+* Our company is engineering-led - a wide strategy demands it. We have small teams that operate like their own startups for this reason. We optimize for autonomy (thus, speed), not control.
+* Talent compounds. We hire a smaller number of stronger people that flourish with autonomy. See the point above.
+* We are open source - we work in the open to build trust and community. We haven't built our defining feature yet - the whole company is a continuous work in progress on the internet that anyone can take part in. This keeps us close to users and builds a unique brand.
 
 ## Mission
 
@@ -29,7 +38,7 @@ In 2026 we will _go public with $100M ARR._ To achieve this, PostHog will need t
 
 **How do we get there?**
 
-* Build for developers that need to control their data
+* Build for technical teams
 * Make every developer want to tell others about us
 * Our biggest users self-serve to paying customers 
 * Go broad and develop all the tools our customers need to build better products
@@ -39,16 +48,7 @@ In 2026 we will _go public with $100M ARR._ To achieve this, PostHog will need t
 
 **The mechanics of success**
 
-Revenue is critical for us to go public _but we won't set short-term revenue targets_ as revenue is an output metric to several other inputs. Instead, we think it is more appropriate to focus on [metrics within our control that contribute more to our revenue in the long-term.](https://app.posthog.com/dashboard/20464)
-
-* **[Quality signups](https://app.posthog.com/insights/ujGv0WqI?events=%5B%5D&actions=%5B%7B%22id%22%3A%2212308%22%2C%22math%22%3A%22dau%22%2C%22name%22%3A%22High%20quality%20sign%20ups%22%2C%22type%22%3A%22actions%22%2C%22order%22%3A0%7D%5D&display=ActionsLineGraph&insight=TRENDS&interval=week&date_from=-90d&new_entity=%5B%5D&properties=%5B%7B%22key%22%3A%22is_organization_first_user%22%2C%22type%22%3A%22event%22%2C%22value%22%3A%5B%22true%22%5D%2C%22operator%22%3A%22exact%22%7D%2C%7B%22key%22%3A%22hubspot_score%22%2C%22type%22%3A%22person%22%2C%22value%22%3A%2270%22%2C%22operator%22%3A%22gt%22%7D%5D&breakdown_type&filter_test_accounts=true#fromDashboard=20464):** Volume of quality organizations signing up 
-* **[Conversion to paid](https://app.posthog.com/insights/M5KDFdvX?events=%5B%5D&actions=%5B%7B%22id%22%3A%2212308%22%2C%22name%22%3A%22High%20quality%20sign%20ups%22%2C%22type%22%3A%22actions%22%2C%22order%22%3A0%2C%22properties%22%3A%5B%7B%22key%22%3A%22is_organization_first_user%22%2C%22type%22%3A%22event%22%2C%22value%22%3A%5B%22true%22%5D%2C%22operator%22%3A%22exact%22%7D%2C%7B%22key%22%3A%22realm%22%2C%22type%22%3A%22event%22%2C%22value%22%3A%5B%22cloud%22%5D%2C%22operator%22%3A%22exact%22%7D%5D%7D%2C%7B%22id%22%3A%2212299%22%2C%22name%22%3A%22User%20paid%20on%20cloud%20or%20self%20hosted%22%2C%22type%22%3A%22actions%22%2C%22order%22%3A1%7D%5D&display=FunnelViz&insight=FUNNELS&interval=week&date_from=-30d&exclusions=%5B%5D&properties=%5B%5D&funnel_to_step=1&funnel_viz_type=trends&funnel_from_step=0&filter_test_accounts=true&funnel_window_interval=12&funnel_window_interval_unit=month#fromDashboard=20464):** Rate at which quality sign-ups become paid customers
-* **Ease of deployment (TBD):** Effort required to deploy and maintain a PostHog instance at scale
-    * Contributing Metrics: Customer sentiment (TBD), time spent on maintenance (TBD) and [scale of instances](https://app.posthog.com/insights/x8T5a1J4?insight=TRENDS&interval=day&actions=%5B%5D&events=%5B%7B%22id%22%3A%22instance%20status%20report%22%2C%22name%22%3A%22instance%20status%20report%22%2C%22type%22%3A%22events%22%2C%22order%22%3A0%2C%22properties%22%3A%5B%7B%22key%22%3A%22events_count_total%22%2C%22value%22%3A%22100000000%22%2C%22operator%22%3A%22gt%22%2C%22type%22%3A%22group%22%2C%22group_type_index%22%3A1%7D%5D%2C%22math%22%3A%22unique_group%22%2C%22math_group_type_index%22%3A1%7D%5D&properties=%5B%5D&filter_test_accounts=false&new_entity=%5B%5D&display=ActionsBarValue&date_from=-90d)
-* **[Discoveries](/handbook/product/metrics#what-is-a-discovery):** Can be tracked in [this dashboard](https://app.posthog.com/dashboard/14719). The volume of meaningful insights discovered using PostHog.
-    * Contributing Metrics: [Insight viewed](https://app.posthog.com/insights/rK1gVlAi/edit?insight=TRENDS&display=ActionsLineGraph&actions=%5B%5D&events=%5B%7B%22id%22%3A%22insight%20viewed%22%2C%22name%22%3A%22insight%20viewed%22%2C%22type%22%3A%22events%22%2C%22order%22%3A0%7D%5D&properties=%5B%5D&filter_test_accounts=false&new_entity=%5B%5D&interval=week&date_from=-90d), insights shared (TBD), [products used across users](https://app.posthog.com/insights/7lCZsIPO?events=%5B%7B%22id%22%3A%22insight%20loaded%22%2C%22math%22%3A%22unique_group%22%2C%22name%22%3A%22insight%20loaded%22%2C%22type%22%3A%22events%22%2C%22order%22%3A0%2C%22math_group_type_index%22%3A0%7D%5D&actions=%5B%7B%22id%22%3A%224959%22%2C%22name%22%3A%22KFA%20-%20Feature%20flags%22%2C%22type%22%3A%22actions%22%2C%22order%22%3A1%7D%2C%7B%22id%22%3A%223091%22%2C%22name%22%3A%22KFA%20-%20Session%20recordings%22%2C%22type%22%3A%22actions%22%2C%22order%22%3A2%7D%2C%7B%22id%22%3A%226868%22%2C%22name%22%3A%22Tried%20Plugins%22%2C%22type%22%3A%22actions%22%2C%22order%22%3A3%7D%5D&display=FunnelViz&insight=FUNNELS&interval=day&date_from=-90d&exclusions=%5B%5D&properties=%5B%5D&funnel_to_step=3&funnel_viz_type=steps&funnel_from_step=0&funnel_order_type=unordered&filter_test_accounts=true&funnel_window_interval=12&funnel_window_interval_unit=month#fromDashboard=20464), [avg active users per organization](https://app.posthog.com/insights/09GUvJKq/edit?insight=TRENDS&display=ActionsLineGraph&actions=%5B%7B%22id%22%3A%225043%22%2C%22type%22%3A%22actions%22%2C%22order%22%3A1%2C%22name%22%3A%22App%20Pageview%20-%20Logged%20in%22%2C%22math%22%3A%22dau%22%7D%5D&events=%5B%7B%22id%22%3A%22%24pageview%22%2C%22name%22%3A%22%24pageview%22%2C%22type%22%3A%22events%22%2C%22order%22%3A0%2C%22math%22%3A%22unique_group%22%2C%22math_group_type_index%22%3A0%7D%5D&properties=%5B%5D&filter_test_accounts=false&new_entity=%5B%5D&formula=B%2FA&interval=week&date_from=-90d), [rate from insight viewed to analyzed](https://app.posthog.com/insights/2PnHWW87?insight=TRENDS&display=ActionsLineGraph&actions=%5B%5D&events=%5B%7B%22id%22%3A%22insight%20viewed%22%2C%22name%22%3A%22insight%20viewed%22%2C%22type%22%3A%22events%22%2C%22order%22%3A0%7D%2C%7B%22id%22%3A%22insight%20analyzed%22%2C%22type%22%3A%22events%22%2C%22order%22%3A1%2C%22name%22%3A%22insight%20analyzed%22%7D%5D&properties=%5B%5D&filter_test_accounts=false&new_entity=%5B%5D&formula=B%2FA&interval=week&date_from=-90d)
-
-We discuss how we track against our high-level metrics once a week during PostHog news. 
+We set [quarterly OKRs](objectives) to keep us on track.
 
 ### How should we prioritize between competing directions?
 
@@ -58,38 +58,32 @@ While there is value in the items on the right, we value the items on the left m
 
 * _Breadth_: build basic versions of every feature needed rather than a small set of sophisticated ones, so our customers can consolidate.
 
-**High quality users vs. high paying businesses**
+**MidMarket vs. Enterprise**
 
-* _High quality users_: focus on acquiring more high quality users over big ticket contracts, so we can get better feedback and learn faster.
+* _MidMarket_: focus on acquiring more high quality MidMarket customers (who may start using for free) over big ticket contracts, so we can get better feedback and learn faster.
 
-**App-based platform vs one-stop-shop**
+**Integrations vs one-stop-shop**
 
-* _Apps-based platform_: integrate with the best services and data sources to solve customer problems faster
+* _One-stop-shop_: build all the things directly into PostHog if possible. This means customers don't have to buy another product or integrate with anything else. We are wide enough now to pull this off.
 
 **Self-hosted vs. Cloud**
 
-* _Self-hosted_: focus on customers who need to self-host, as there is a huge untapped market and we’re uniquely placed to win.
+* _Cloud_: if customers can use cloud, encourage them to use cloud. Maintain a self-hosted version and migration path but don't push it (we are the most flexible solution - this enables growth. People trying it out, or wanting to move to it long term). We offer a generous free cloud tier so we can become ubiquitous without the cost/hassle of self hosting.
 
-* Why maintain Cloud if the focus is on Self-Hosted?
-1. **Top of Funnel:** Cloud acts as a top-of-funnel for people to quickly try out PostHog before committing resources to self-hosting
-2. **Iterate Fast:** Cloud enables us to quickly release, test and iterate on new features with our customers without waiting for longer self-hosting release cycles
-3. **Benchmark for scale:** If we can support a very large instance of PostHog then we can be confident that our customers can support an instance of similar size
-4. **Tactical: Escape valve for users that made the wrong choice** Some teams think self hosting is what they want, but realize that they'd rather migrate to cloud once they're already in production and like the product, but want zero maintenance.
 **Reject the [“modern data stack”](https://www.analytics8.com/blog/what-is-the-modern-data-stack-and-why-should-you-be-excited-about-it/) vs. adapt to it**
 
-* _Reject_: We enable our customers to ingest, store and analyze data on their infrastructure, we don't believe sending sensitive data to multiple cloud providers the right approach
+* _Reject_: We enable our customers to ingest, store and analyze data on their infrastructure, we don't believe tons of integrations, dealing with multiple vendors and sending sensitive data to multiple cloud providers the right approach
 
 ## Direction for 2022
 
  * 2 word summary: **Nail self-serve**
     * **Customers**
-        * **Focus on large-mid-market.** E.g. Large initial contracts ($20k-$70k/year) and smaller deals in organizations that will eventually become  large
+        * **Focus on large-mid-market.** E.g. Large initial contracts ($20k-$70k/year) and smaller deals in organizations that will eventually become large
         * **Non Goal:** Start doing outbound sales
     * **Product**
         * **Goals:**
             * **Quality:** Our core features (insights, recordings, feature-flags / experimentation) work like a Swiss watch
             * **Self Service Subscription:** Customers of every size sign-up, start using and subscribe to PostHog without asking us for help
-            * **Deployments:** PostHog is the easiest self-hosted product to deploy and scale in the world
         * **Non Goals:**
             * Build lots of new low quality / partial features
             * Build everything a single enterprise customer wants just to close a deal
@@ -99,7 +93,7 @@ While there is value in the items on the right, we value the items on the left m
 Our ideal customer is a large-mid-market (~$20k-70k) who meets as many of these these criteria as possible:
 
 * _Needs_
-  * Need to control their user data
+  * Cares about user data
   * Need to excel at product led growth
 * _Haves_
   * Have budget and savvy engineers are the decision makers
