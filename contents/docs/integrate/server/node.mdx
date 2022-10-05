@@ -73,6 +73,8 @@ A `capture` call requires:
 Optionally you can submit:
 
 -   `properties`, which is an object with any information you'd like to add
+-   `sendFeatureFlags`, a boolean that determines whether to send current known feature flags with this event. This is useful when running experiments which depends on this event. However, this makes things slow. [Read this tutorial for manually computing this information and speeding things up](/tutorials/experiments#step-2-sending-the-right-events)
+
 
 For example:
 
