@@ -39,7 +39,7 @@ The feedback app is injected into your site through PostHog. It can be modified 
 
 You can find the first PR for the feedback app [here](https://github.com/PostHog/feedback-app/pull/1).
 
-## FaceHog notifications
+## FaceHog (HogBook? Hoggr?) notifications
 
 A problem some PostHog users face is others changing their carefully crafted insights and feature flags. They can mess these up or completely ruin them, and the original creator wouldn’t have any idea. Worse still, users could delete them without notice.
 
