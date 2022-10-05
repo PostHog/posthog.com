@@ -1,5 +1,5 @@
 ---
-date: 2022-10-03
+date: 2022-10-05
 title: What motivates me
 rootPage: /blog
 sidebar: Blog
@@ -11,39 +11,73 @@ featuredImage: ../images/blog/ceo-diary.png
 featuredImageType: full
 ---
 
-We got pretty far (16k customers, did YC, seed, series A and B raised, $MM revenue) before I really figured out what motivates me.
+PostHog got pretty far (17k customers across all our products, went through YCombinator, seed, series A and B raised, $MM revenue) before I really figured out what motivates me.
 
-## Building the _exact_ place I'd want to work
+## Before we started - building the _exact_ place I'd want to work
 
-I've worked at a bunch of startups before. They all had _many_ flaws. Neither Tim nor I can imagine working anywhere else, ever.
+I've worked at a bunch of startups before. They all had _many_ flaws.
 
-## Was it just being a rocket ship?
+It is a _lot_ of fun getting things right. These sorts of things specifically stand out:
 
-We've been much more focused on staying lean as we grow for the last year, despite all of our fastest growth coming in this time, including revenue.
+* Writing stuff down in a [handbook](../handbook) rather than handling everything 1:1 in meetings. So much win.
+* [Sharing everything](how-to-run-a-transparent-company) internally and most of it externally too. And seeing how this helps people work autonomously.
+* Working on something for end users.
+* Having a board that is focussed on the long run.
+* [Hiring people that we are _excited_ to work with](../handbook/company/values). No matter how well you manage stuff, 90% of problems can be avoided by getting the right people in the first place.
+* Paying everyone according to [a system](../handbook/people/compensation) versus random bargaining. This cuts down churn and politics.
+* Dealing with customers totally transparently. For example, when we launched, none of our competitors had pricing on their pricing page. It's a lot of fun having a community weigh in on what we build.
 
-My motivation has gone _up_ as we've been more lean. I'm getting more and more proud of what we're working on. Being lean forces us to prioritize. We no longer half ass lots of things, we nail a smaller number of them.
+Neither [Tim](../handbook/company/team/tim-glaser) (my cofounder) nor I can imagine working anywhere else.
 
-Prioritization doesn't just mean picking the right task to work on, it also means picking the right people to work with. We're getting stronger over time rather than lowering our bar on hiring.
+## When we launched - being grateful that anyone cares
 
-## But I really want to beat other companies
+In the early days, we [pivoted many times](story-about-pivots). Mostly without any funding. I spent most of my day trying to get anyone to talk to us about our bad ideas, and building new websites for the latest pivot. Tim built entire products every few weeks like it was nothing. Our savings were dwindling.
 
-When I used to race bikes, I did a lot of time trialling. Someone sets off every minute to race around the course as fast as possible.
+The feeling when it started working was magical.
 
-The moment you see another rider ahead of you, you magically roar past them - every time.
+Overnight (after [this](https://news.ycombinator.com/item?id=22376732)), we were flooded with people to talk to. Companies were getting real value out of the product. Since we grew a lot, we more or less went from no code existing, through Seed / Series A and B within 12 months (it was announced a little later).
 
-In the long run, there are some huge companies I want to beat.
+## Now - taking pride in building a business that does stuff properly
 
-## This feels like a long list
+So, we had a lot of hype. But we hadn't focussed on revenue yet.
 
-But everything on it is under the same umbrella.
+Last summer, we got a lot of requests for a paid product (extra features or people wanting us to host it for them). At the same time, lots of investors were interested _and_ my [daughter was very ill](ceo-diary-3). Since I had to look after her, we felt we had to choose _either_ revenue _or_ fundraising.
 
-Those huge companies:
+We picked revenue.
+
+By the summer of this year, it meant the business was real. We got to default alive, with conservative assumptions. Revenue was growing very quickly. Our goal is $100M ARR by 2026 and we're on track. We got different and helpful product feedback, which we acted on. Our open source and free user growth sped up too as an indirect result.
+
+We've been much more mindful of spend for the last year, despite all of our fastest growth coming in this time, including revenue. We're getting leaner and fitter over time.
+
+Something else changed too. For me, I felt a new wave of confidence - because I know that PostHog is now in _our_ control, versus that of a VC.
+
+It is incredibly satisfying to have reached this point. I'm getting more and more proud of what we're working on. Being lean has forced us to prioritize.
+
+We haven't just prioritized what to build, but - more importantly - the people we hired. The bar has gone up. It's very hard to get hired here.
+
+## And, also, I really want to beat other companies
+
+When I was (a lot) younger, all I cared about was cycling. I did a lot of time trialling. Someone sets off every minute to race around the course as fast as possible.
+
+The moment you see another rider ahead of you, it suddenly gets easy and you magically roar past them - every time.
+
+Since we started, there have always been companies I've wanted to beat. So much. Both those one step and many years ahead of us. I've been thinking about why.
+
+## It's all the same thing
+
+I've realized that everything is under the same umbrella.
+
+The people I want to beat represent the opposite of what we want to do. They:
 
 * are closed source
+* aren't transparent with customers
+* have incredibly large teams that don't ship much stuff
 * are sales led
 * provide products that aren't extensible
 * have terrible documentation
 * are messy internally
 * have a bland corporate vibe
 
-I want to show to the world that you can beat the biggest companies, specifically _by_ doing everything the right way. We've built a real brand by getting the above right so far. It has often meant short term pain for long term gain. And we're going to keep it that way.
+I want to show to the world that you can beat the biggest companies, specifically _by_ doing right by our users and our team.
+
+Doing a good job by _not_ doing the list above has led to a strong brand and has made us realize we should keep being ourselves. It has often meant short term pain for long term gain. And we're going to keep it that way.
