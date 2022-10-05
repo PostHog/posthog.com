@@ -6,13 +6,15 @@ showTitle: true
 
 We release a new version every four weeks on Wednesday. This lines up with our sprints, which are two weeks. Code freeze happens the Friday before, and "break the release" happens on Monday.
 
+> Because there are thirteen weeks in a quarter, there is always one extra out-of-sprint week at the end of each quarter. We dedicate that last week to cleanup tasks along with OKR reflection and planning.
+
 This consistency is important, as it means our community and our customers can look forward to new features at a predictable pace. There will always be more work that we want to do and if we get in a habit of pushing deadlines out, we'll push them further and further.
 
 Each release there is a different release owner in charge, according to [this calendar](https://calendar.google.com/calendar/embed?src=c_n8hc1iedb0k8gqhuiv83jolm50%40group.calendar.google.com).
 
 If we've shipped features that we want to feature in the release notes, we use the label `highlight` on our pull request. If after the code freeze we have important bugfixes that we want to get into the release, we add the label `release-[version]`. This makes it easier for the release owner to figure out changes for the release blog post and to cherry-pick commits between the Code Freeze and the Release.
 
-> When we say release, technically we mean releasing to self-hosted users as we deploy PostHog Cloud continuously. However, releases are still an important moment within PostHog as we publicly announce all new features.
+> When we say "release", technically we mean releasing to self-hosted users as we deploy PostHog Cloud continuously. However, releases are still an important moment within PostHog as we publicly announce all new features.
 
 ## Version numbers
 
