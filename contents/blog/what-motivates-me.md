@@ -22,7 +22,7 @@ It is a _lot_ of fun getting things right. These sorts of things specifically st
 * Writing stuff down in a [handbook](../handbook) rather than handling everything 1:1 in meetings. So much win.
 * [Sharing everything](how-to-run-a-transparent-company) internally and most of it externally too. And seeing how this helps people work autonomously.
 * Working on something for end users.
-* Having a board that is focussed on the long run.
+* Having a board that is focused on the long run.
 * [Hiring people that we are _excited_ to work with](../handbook/company/values). No matter how well you manage stuff, 90% of problems can be avoided by getting the right people in the first place.
 * Paying everyone according to [a system](../handbook/people/compensation) versus random bargaining. This cuts down churn and politics.
 * Dealing with customers totally transparently. For example, when we launched, none of our competitors had pricing on their pricing page. It's a lot of fun having a community weigh in on what we build.
@@ -39,7 +39,7 @@ Overnight (after [this](https://news.ycombinator.com/item?id=22376732)), we were
 
 ## Now - taking pride in building a business that does stuff properly
 
-So, we had a lot of hype. But we hadn't focussed on revenue yet.
+So, we had a lot of hype. But we hadn't focused on revenue yet.
 
 Last summer, we got a lot of requests for a paid product (extra features or people wanting us to host it for them). At the same time, lots of investors were interested _and_ my [daughter was very ill](ceo-diary-3). Since I had to look after her, we felt we had to choose _either_ revenue _or_ fundraising.
 
