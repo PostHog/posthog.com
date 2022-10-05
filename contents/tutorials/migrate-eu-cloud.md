@@ -44,3 +44,7 @@ Once the Migrator 3000 is finished, you’ll have your data and events in your n
 4. If necessary for compliance, delete data from your US Cloud or self-hosted PostHog instance.
 
 Once all these are completed, you’ll be fully migrated to EU Cloud.
+
+## Further reading
+
+For more information about migration, check out our [docs](https://posthog.com/docs/migrate/migrate-between-cloud-and-self-hosted).
