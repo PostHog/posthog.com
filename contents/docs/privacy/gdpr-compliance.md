@@ -9,7 +9,7 @@ The [General Data Protection Regulation (GDPR)](https://gdpr.eu/) is a privacy a
 
 We recommend that you read the full text of the GDPR and seek independent legal advice regarding your obligations. The consequences of violating GDPR are severe.
 
-<GDPRForm />
+If you require robust GDPR compliance, we recommend using [PostHog Cloud EU](/signup/eu-cloud) – a managed version of PostHog that's hosted on servers based in Frankfurt.
 
 ## What data is protected under GDPR?
 
@@ -80,9 +80,11 @@ If you are self-hosting PostHog then you are both the Data Processor and the Dat
 
 ### Step 1: Choose a hosting provider
 
-We recommend hosting PostHog on your own infrastructure, or a private cloud such as AWS, Google Cloud Platform or Microsoft Azure. 
+We recommend using PostHog Cloud EU for GDPR compliance, though you can use PostHog Cloud (US) if you follow additional steps to protect user data. If self-hosting, the steps will depend on where you're hosting your data. 
 
 ### Step 2: Deploy PostHog
+
+If using PostHog Cloud EU, simply follow the steps in the onboarding process to start sending events. Read our [integration documentation](/docs/integrate) for more information on sending events to PostHog. 
 
 Deploying PostHog onto your own infrastructure is straightforward and we provide support to help with any issues you encounter. You can follow our [standard deployment guides](https://posthog.com/docs/self-host) to get started, or [arrange a demo](https://posthog.com/book-a-demo) to see it in action first.
 
@@ -112,6 +114,8 @@ If a user **opts out** then you must stop data capturing and processing. Here ar
 - Do not load the posthog-js SDK. If you do this you should ensure your application logic always performs conditional checks for the availability of the PostHog SDK. This may not be possible in modern JavaScript applications.
 
 - Do not initialize the posthog-js SDK via the call to `init`. If you do this you should ensure your application logic always performs conditional checks regarding the initialization state of the PostHog SDK.
+
+> **Cookieless Tracking:** It is possible to use PostHog without tracking cookies. In this mode, PostHog doesn't create permanent user profiles. Read [How to use PostHog without cookie banners](/tutorials/cookieless-tracking)
 
 ### Step 5: Enable the Property Filter app (optional)
 
