@@ -38,7 +38,7 @@ After clicking save, the Migrator 3000 app will start running. You can view its 
 
 Once the Migrator 3000 is finished, you’ll have your data and events in your new EU Cloud instance. To complete your migration, follow the steps below. 
 
-1. Ensure the events you want are there. Check that EU Cloud stats match with your self-hosting or US Cloud instance.
+1. Ensure the events you want are there. Check that EU Cloud data (events, persons, and other data drived from events) matches your self-hosting or US Cloud instance.
 2. Switch your project key and host to your EU Cloud information. The migrator app will continue to run, and bring events over with a delay, but changing your project key and host is better and faster.
 3. Recreate your insights, dashboards, and feature flags in EU Cloud. These won’t be migrated over from your US Cloud or self-hosted instance.
 4. If necessary for compliance, delete data from your US Cloud or self-hosted PostHog instance.
