@@ -12,7 +12,7 @@ For many companies, teams, and products, keeping customer data within the EU is 
 
 Why this matters is that the EU has stricter data privacy laws than other areas. In the EU, there are often stricter requirements for what companies can and can’t do with customer data. For example, there is less regulation in the US on data privacy. To understand how this applies to your company and data, you should check with a legal professional.
 
-For this tutorial, we will go over how to move data you currently have in either US Cloud or self-hosting to EU Cloud.
+For this tutorial, we will go over how to move data you currently have in either US Cloud or self-hosting to EU Cloud. This process might take a while.
 
 ## Signing up for EU Cloud
 
@@ -34,7 +34,7 @@ In the configuration menu, enter the project key and host (`eu.posthog.com`) fro
 
 ![Migrator 3000 config](../images/tutorials/migrate-eu-cloud/migrator-config.png)
 
-After clicking save, the Migrator 3000 app will start running. You can view its progress in Logs (three points icon).
+After clicking save, the Migrator 3000 app will start running. You can view its progress in Logs (three points icon). This will take a while, so be prepared to wait.
 
 ## Finished complete migration
 
