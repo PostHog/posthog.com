@@ -1,6 +1,6 @@
 ---
 date: 2022-10-06
-title: "All the cool things we built at our Rome hackathon"
+title: "Coming soon to PostHog... all the cool things we built at our Rome hackathon"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -8,10 +8,12 @@ hideAnchor: true
 author: ["ian-vanagas"]
 featuredImage: ../images/blog/planning-a-company-offsite/planning-offsite.jpeg
 featuredImageType: full
-categories: ["Inside PostHog", "Engineering", "Product updates"]
+categories: ["Inside PostHog", "Startups"]
 ---
 
-As an all-remote team, we know how important getting together in person is (we’ve [written about this before](/blog/asynchronous-remote-companies)). Our [product analytics team](/handbook/people/team-structure/product-analytics) (plus Luke, Annika, Cory, and Lottie) recently got back from an offsite in Rome. The team ate a lot of pizza and gelato, refocused and aligned current work, ran 360 feedback sessions, and more (see our engineer Paul's [summary thread here](https://twitter.com/pauldambra/status/1576257069766037506)). On top of all of this, they had a hackathon and built a bunch of new things.
+As an all-remote team, we know how important getting together in person is (we’ve [written about this before](/blog/asynchronous-remote-companies)). Our [product analytics team](/handbook/people/team-structure/product-analytics) (plus Luke, Annika, Cory, and Lottie) recently got back from an offsite in Rome – see also [how we plan a killer offsite in 8 weeks](/blog/planning-a-company-offsite). 
+
+The team ate a lot of pizza and gelato, refocused and aligned current work, ran 360 feedback sessions, and more (see our engineer Paul's [summary thread here](https://twitter.com/pauldambra/status/1576257069766037506)). On top of all of this, they had a hackathon and built a bunch of new things.
 
 ![Team Rome](../images/blog/rome-hackathon/team-rome.jpeg)
 
@@ -77,4 +79,4 @@ Many of the projects related to this objective (on top of being fun and sparking
 
 We like to be transparent with what we build. The details are found in the linked PRs as well as more expansively on the teams page in [our handbook](/handbook/people/team-structure/team-structure). We do this because we value feedback a lot. For example, users have been asking for better data exploration tools, which helped it become a priority. 
 
-If you have more feedback about your use cases or what we're planning to build, let us know on [our community Slack](/slack) or [raise an issue](https://github.com/PostHog/posthog/issues) on our repo 
+If you have more feedback about your use cases or what we're planning to build, let us know on [our community Slack](/slack) or [raise an issue](https://github.com/PostHog/posthog/issues) on our repo. 
