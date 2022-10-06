@@ -6,9 +6,9 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: ["ian-vanagas"]
-featuredImage: ../images/blog/product-people.png
+featuredImage: ../images/blog/planning-a-company-offsite/planning-offsite.jpeg
 featuredImageType: full
-categories: ["Inside PostHog"]
+categories: ["Inside PostHog", "Engineering", "Product updates"]
 ---
 
 As an all-remote team, we know how important getting together in person is (we’ve [written about this before](/blog/asynchronous-remote-companies)). Our [product analytics team](/handbook/people/team-structure/product-analytics) (plus Luke, Annika, Cory, and Lottie) recently got back from an offsite in Rome. On top of eating a lot of pizza and gelato, refocusing and aligning work, and 360 feedback sessions, they had a hackathon and built a bunch of new things. 
@@ -25,13 +25,13 @@ Have you ever wanted to add floating pineapples to every page on your site? Mari
 
 ![Pineapple mode](../images/blog/rome-hackathon/pineapple-mode.gif)
 
-To do so, PostHog app developers add a `web.ts` file with the code they wanted to inject through PostHog into their app. This enables app developers to add features like notification banners and custom forms (or pineapples). 
+To do so, PostHog app developers add a `web.ts` file with the code they want to inject through PostHog into their app. This enables them to add features like notification banners and custom forms (or pineapples). 
 
 Read more details in the [PR here](https://github.com/PostHog/posthog/pull/12003).
 
 ## Feedback app
 
-As a more serious example of what the frontend injected apps look like Marius and Luke built a feedback app.
+As a more serious example of what the frontend injected apps look like, Marius and Luke built a feedback app.
 
 The feedback app is injected into your site through PostHog. It can be modified quickly by changing the `web.ts` file, without having to ship changes to your site. On your site, it takes input from users and delivers responses to their own tab in PostHog.
 
