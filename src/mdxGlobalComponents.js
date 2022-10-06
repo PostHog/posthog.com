@@ -46,6 +46,7 @@ import { DarkModeToggle } from './components/DarkModeToggle'
 import { DemoScheduler } from './components/DemoScheduler'
 import { DeployOption } from './components/DeployOption'
 import { DocsPageSurvey } from './components/DocsPageSurvey'
+import { EU } from './components/EU'
 import { FeatureAvailability } from './components/FeatureAvailability'
 import { FeaturesSelfHost } from './components/FeaturesSelfHost'
 import { FloatedImage } from './components/FloatedImage'
@@ -173,6 +174,7 @@ export const shortcodes = {
     DemoScheduler,
     DeployOption,
     DocsPageSurvey,
+    EU,
     FeatureAvailability,
     FeaturesSelfHost,
     FloatedImage,
