@@ -4,19 +4,21 @@ sidebar: Handbook
 showTitle: true
 ---
 
-We release a new version on the last Monday of every month.
+We release a new version every four weeks on Wednesday. This lines up with our sprints, which are two weeks. Code freeze happens the Friday before, and "break the release" happens on Monday.
+
+> Because there are thirteen weeks in a quarter, there is always one extra out-of-sprint week at the end of each quarter. We dedicate that last week to cleanup tasks along with OKR reflection and planning.
 
 This consistency is important, as it means our community and our customers can look forward to new features at a predictable pace. There will always be more work that we want to do and if we get in a habit of pushing deadlines out, we'll push them further and further.
 
-Sprints do not line up with releases, so a release might fall in the middle of the sprint, for which we need to plan accordingly. If a feature won't be ready by the release date then cut down the scope, remove it, or release it behind a feature flag.
-
-Code freezes and break the release happen on the Wednesday before that. Each month there will be a different release owner in charge of the release, to be updated under this [calendar](https://calendar.google.com/calendar/embed?src=c_n8hc1iedb0k8gqhuiv83jolm50%40group.calendar.google.com&ctz=America%2FNew_York).
+Each release there is a different release owner in charge, according to [this calendar](https://calendar.google.com/calendar/embed?src=c_n8hc1iedb0k8gqhuiv83jolm50%40group.calendar.google.com).
 
 If we've shipped features that we want to feature in the release notes, we use the label `highlight` on our pull request. If after the code freeze we have important bugfixes that we want to get into the release, we add the label `release-[version]`. This makes it easier for the release owner to figure out changes for the release blog post and to cherry-pick commits between the Code Freeze and the Release.
 
+> When we say "release", technically we mean releasing to self-hosted users as we deploy PostHog Cloud continuously. However, releases are still an important moment within PostHog as we publicly announce all new features.
+
 ## Version numbers
 
-Every month we bump the `minor` in `major.minor.patch`. At the moment, we're at version 1 for major. This will only change once we have released sufficient functionality under stage 2 of [our Roadmap](/handbook/strategy/roadmap/).
+Every release we bump the `minor` in `major.minor.patch`. At the moment, we're at version 1 for major. This will only change once we have released sufficient functionality under stage 2 of [our Roadmap](/handbook/strategy/roadmap/).
 
 Hopefully we will not have to do many patch versions, but if between versions we discover a breaking bug, we will.
 
@@ -24,7 +26,7 @@ Hopefully we will not have to do many patch versions, but if between versions we
 
 > 💡 For the context of this guide `[version]` is interpreted as the version of the release (e.g. `1.29.0`).
 
-Three business days before the release (Wednesday before the release), we institute a code freeze. Feel free to make an announcement on Slack before we cut the branch, so people can have a heads-up. Then, we branch `master` into `release-[version]` and deploy that to our playground environment, [playground.posthog.com](https://playground.posthog.net/). We then host an hour-long "Break the release" session where everyone lends a hand in testing for any bugs. It's a recurring meeting, so you don't need to set it up.
+On the Friday before the release, we institute a code freeze. Feel free to make an announcement on Slack before we cut the branch, so people have a heads-up. Then, we branch `master` into `release-[version]` and deploy that to our playground environment, [playground.posthog.com](https://playground.posthog.net/). We then host an hour-long "Break the release" session where everyone lends a hand in testing for any bugs. It's a recurring meeting, so you don't need to set it up.
 
 Only bugfixes and finishing touches are allowed to be merged into this branch between the code freeze and the release going out. This gives us about three days to test the release.
 
@@ -36,7 +38,7 @@ The release manager is ultimately responsible for the timeline of the release. T
 
 1. [ ] Post in #dev about the upcoming release (replace `<version>` and `<array draft pr>` from Joe)
 ```
-Release is happening next Monday. Which means 
+Release is happening next Wednesday. Which means 
 1. There will be code freeze today (fixes that need to be cherry picked later should be tagged with `release-<version>`)
 2. Please join the Break the Release meeting to help out testing on the Playground.
 3. Shipped something awesome this month, please add a blurb or comment to <array draft pr> ([highlighted PRs](https://github.com/PostHog/posthog/pulls?q=is%3Apr+label%3A%22highlight+%3Astar%3A%22+)) :pray:
