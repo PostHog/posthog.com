@@ -16,7 +16,7 @@ There are two ways to connect PostHog and Patterns, so that you can calculate me
 
 ### Using the Patterns Connector app
 
-The [Patterns Connector app](/apps/patterns-connector) is available from the PostHog app marketplace and requires PostHog 1.30.0 or above, or PostHog Cloud. You'll also need a Patterns account. 
+The [Patterns Connector app](/apps/patterns-connector) is available from the PostHog app library and requires PostHog 1.30.0 or above, or PostHog Cloud. You'll also need a Patterns account. 
 
 The Patterns Connector app streams event data from PostHog into Patterns in real-time. This makes it especially useful for building real-time notifications, syncing data with external systems to send emails, or enriching event data and sending it to your CRM.
 
@@ -31,7 +31,7 @@ To install and setup the Patterns Connector, follow the steps below...
 7. Select the app, press 'Install', then select the blue gear icon to begin configuration
 8. Paste the URL in "Patterns Webhook URL" during app configuration.
 
-Alternatively, you can install the connector via [the GitHub repo](https://github.com/PostHog/posthog-patterns-app). 
+Alternatively, you can install the connector via [the GitHub repo](https://github.com/PostHog/posthog-patterns-app). 
 
 ![PostHog and Patterns](../images/docs/apps/patterns/lead-scoring.png)
 
@@ -51,7 +51,7 @@ To export PostHog data to Patterns using the data extractor, follow the steps be
 2. Create a new app. Configure your data warehouse, or your Patterns Managed Postgres database will be used by default. 
 3. Find the Import PostHog Events component in the Patterns marketplace and add it to your app
 4. Configure by adding:
-    1. `api_key`: Follow this [page](https://posthog.com/docs/api#how-to-obtain-a-personal-api-key) to get your key/token.
+    1. `api_key`: Follow this [page](https://posthog.com/docs/api#how-to-obtain-a-personal-api-key) to get your key/token.
     2. `project_id`: ID of the project to fetch data from. To find it, from your PostHog dashboard > Project Settings on the sidebar, under Project Variables.
     3. `base_url`: (optional) Specify the URL of your PostHog instance, required only if using a self-hosted instance. This importer points to PostHog Cloud by default.
     4. `start_at`: (optional) Specify this parameter to limit events after this datetime, in UTC. Sample format: "2022-08-05T12:00:00". If not specified, all events are fetched.

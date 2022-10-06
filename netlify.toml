@@ -2314,6 +2314,44 @@
     from = "/handbook/company/working-with-product-design"
     to = "/handbook/engineering/product-design"
 
+[[redirects]]
+    from = "/marketplace"
+    to = "/partners"
+
+
+# Added: 2022-10-01
+[[redirects]]
+    from = "/marketplace/altinity"
+    to = "/partners/altinity"
+
+
+# Added: 2022-10-01
+[[redirects]]
+    from = "/marketplace/clickhouse"
+    to = "/partners/clickhouse"
+
+# Added: 2022-10-01
+[[redirects]]
+    from = "/marketplace/guidelines"
+    to = "/partners/guidelines"
+
+
+# Added: 2022-10-01
+[[redirects]]
+    from = "/marketplace/listing-template"
+    to = "/partners/listing-template"
+
+
+# Added: 2022-10-01
+[[redirects]]
+    from = "/marketplace/opsverse"
+    to = "/partners/opsverse"
+
+
+# Added: 2022-10-01
+[[redirects]]
+    from = "/marketplace/restack"
+    to = "/partners/restack"
 
 
 # Added: 2022-10-02

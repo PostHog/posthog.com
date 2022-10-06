@@ -4,9 +4,9 @@ showTitle: true
 hideLastUpdated: true
 ---
 
-**[← Back to Marketplace](/marketplace)**
+**[← Back to Partners](/partners)**
 
-<img src="/images/marketplace/alinity.png" alt="Altinity Logo" width="100" style={{float: 'right', margin: '0 0 1rem 1rem'}} />
+<img src="/images/partners/alinity.png" alt="Altinity Logo" width="100" style={{float: 'right', margin: '0 0 1rem 1rem'}} />
 
 [Altinity](https://altinity.com) helps enterprises deliver real-time analytics based on ClickHouse anywhere and for any business purpose. Altinity covers everything needed from project inception to production operation.
 
