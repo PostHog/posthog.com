@@ -71,7 +71,7 @@ Some day the hedgehog might help you identify popular areas and potential areas 
 
 ## Takeaways
 
-One outcome of the offsite was a new focus on [nailing data exploration](handbook/people/team-structure/product-analytics#objective-1-nail-data-exploration). The team felt they had good data visualization tools, but not enough for data exploration. For example, it is difficult to move quickly between different types of data (events, persons, groups), often requiring recreating the same filters for multiple queries.
+One outcome of the offsite was a new focus on [nailing data exploration](/handbook/people/team-structure/product-analytics#objective-1-nail-data-exploration). The team felt they had good data visualization tools, but not enough for data exploration. For example, it is difficult to move quickly between different types of data (events, persons, groups), often requiring recreating the same filters for multiple queries.
 
 Many of the projects related to this objective (on top of being fun and sparking joy).
 
