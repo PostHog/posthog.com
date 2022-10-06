@@ -19,14 +19,6 @@ This is _highly_ speculative from 10 years onwards - we only really think about 
 
 <img width="1148" alt="Screenshot 2021-12-03 at 11 12 29" src="https://user-images.githubusercontent.com/70321811/144593249-523bda63-b4be-4741-89f7-aa85b71a1b6e.png" />
 
-## What, How, Why
-
-What PostHog does, how we do it, and why we do it are all important questions. However, we usually think a lot about the _what_ and _how_, but less about the _why_. Getting specific on the _why_ gives us an anchor that doesn't change much over time, even if we try different strategies and pivot. 
-
-Ideally you can read the whole section as a single sentence - we do X, by doing Y, because of Z. Disclaimer - this was one aspect of the sprint that we didn't feel we'd happily resolved. 
-
-<img width="1215" alt="Screenshot 2021-12-03 at 11 16 27" src="https://user-images.githubusercontent.com/70321811/144593785-8d8f03f3-3107-4f57-9818-04bc229d038a.png" />
-
 ## Top 3 values
 
 We have already spent a lot of time creating and refining our [values](/handbook/company/values). The objective here was to select the top 3 most important, and then the top 1. To borrow from [Jake Knapp](https://library.gv.com/the-three-hour-brand-sprint-3ccabf4b768a): "knowing your most important value makes decisions easier, clarifies your message, and sets you apart from the competition."
