@@ -1,6 +1,6 @@
 ---
 date: 2022-10-06
-title: "Coming soon to PostHog... all the cool things we built at our Rome hackathon"
+title: "All the cool things we built at our Rome hackathon"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
