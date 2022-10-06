@@ -1,23 +1,23 @@
 ---
-date: 2022-10-05
-title: "All the cool things we built at our Rome hackathon"
+date: 2022-10-06
+title: "Coming soon to PostHog... all the cool things we built at our Rome hackathon"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: ["ian-vanagas"]
-featuredImage: ../images/blog/product-people.png
+featuredImage: ../images/blog/planning-a-company-offsite/planning-offsite.jpeg
 featuredImageType: full
-categories: ["Inside PostHog"]
+categories: ["Inside PostHog", "Startups"]
 ---
 
-As an all-remote team, we know how important getting together in person is (we’ve [written about this before](/blog/asynchronous-remote-companies)). Our [product analytics team](/handbook/people/team-structure/product-analytics) (plus Luke, Annika, Cory, and Lottie) recently got back from an offsite in Rome. On top of eating a lot of pizza and gelato, refocusing and aligning work, and 360 feedback sessions, they had a hackathon and built a bunch of new things. 
+As an all-remote team, we know how important getting together in person is (we’ve [written about this before](/blog/asynchronous-remote-companies)). Our [product analytics team](/handbook/people/team-structure/product-analytics) (plus Luke, Annika, Cory, and Lottie) recently got back from an offsite in Rome – see also [how we plan a killer offsite in 8 weeks](/blog/planning-a-company-offsite). 
 
-We are showcasing them here. Some are sneak previews, others are works-in-progress, and they’ll likely change. We wanted to give you an idea of what our team actually does at an offsite hackathon.
+The team ate a lot of pizza and gelato, refocused and aligned current work, ran 360 feedback sessions, and more (see our engineer Paul's [summary thread here](https://twitter.com/pauldambra/status/1576257069766037506)). On top of all of this, they had a hackathon and built a bunch of new things.
 
-One outcome of the offsite was a new focus on [nailing data exploration](handbook/people/team-structure/product-analytics#objective-1-nail-data-exploration). Many of the projects built related to this objective (on top of being fun and sparking joy). 
+![Team Rome](../images/blog/rome-hackathon/team-rome.jpeg)
 
-Here’s what the team built at their Rome hackathon.
+We are showcasing them here. Some are sneak previews, others are works-in-progress, and they’ll likely change. We wanted to give you an idea of what our team actually does at an offsite hackathon, so here's what they built.
 
 ## Frontend injected apps
 
@@ -25,13 +25,13 @@ Have you ever wanted to add floating pineapples to every page on your site? Mari
 
 ![Pineapple mode](../images/blog/rome-hackathon/pineapple-mode.gif)
 
-To do so, PostHog app developers add a `web.ts` file with the code they wanted to inject through PostHog into their app. This enables app developers to add features like notification banners and custom forms (or pineapples). 
+To do so, PostHog app developers add a `web.ts` file with the code they want to inject through PostHog into their app. This enables them to add features like notification banners and custom forms (or pineapples). 
 
 Read more details in the [PR here](https://github.com/PostHog/posthog/pull/12003).
 
 ## Feedback app
 
-As a more serious example of what the frontend injected apps look like Marius and Luke built a feedback app.
+As a more serious example of what the frontend injected apps look like, Marius and Luke built a feedback app.
 
 The feedback app is injected into your site through PostHog. It can be modified quickly by changing the `web.ts` file, without having to ship changes to your site. On your site, it takes input from users and delivers responses to their own tab in PostHog.
 
@@ -69,8 +69,14 @@ To increase the amount of fun in PostHog, Ben and Lottie worked on Hedgehog mode
 
 Some day the hedgehog might help you identify popular areas and potential areas for creating actions, but for now they are just hanging out. See the [PR here](https://github.com/PostHog/posthog/pull/12059). 
 
-## Join us
+## Takeaways
 
-We like to be transparent with what we build. The details on what we are building are found in the PRs linked as well as more expansively on each of the team pages in [our handbook](/handbook/people/team-structure/team-structure). We do this because we value feedback a lot, and would like to hear your thoughts.
+One outcome of the offsite was a new focus on [nailing data exploration](handbook/people/team-structure/product-analytics#objective-1-nail-data-exploration). The team felt they had good data visualization tools, but not enough for data exploration. For example, it is difficult to move quickly between different types of data (events, persons, groups), often requiring recreating the same filters for multiple queries.
 
-If you want to provide more than just feedback and building projects like these in team hackathons interests you, we’re hiring full stack engineers. Check out all the details on our [career page](/careers/full-stack-engineer).
+Many of the projects related to this objective (on top of being fun and sparking joy).
+
+![Rome offsite team](../images/blog/rome-hackathon/rome-hackathon.jpeg)
+
+We like to be transparent with what we build. The details are found in the linked PRs as well as more expansively on the teams page in [our handbook](/handbook/people/team-structure/team-structure). We do this because we value feedback a lot. For example, users have been asking for better data exploration tools, which helped it become a priority. 
+
+If you have more feedback about your use cases or what we're planning to build, let us know on [our community Slack](/slack) or [raise an issue](https://github.com/PostHog/posthog/issues) on our repo. 
