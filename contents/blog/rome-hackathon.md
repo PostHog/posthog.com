@@ -43,7 +43,7 @@ You can find the first PR for the feedback app [here](https://github.com/PostHog
 
 A problem some PostHog users face is others changing their carefully crafted insights and feature flags. They can mess these up or completely ruin them, and the original creator wouldn’t have any idea. Worse still, users could delete them without notice.
 
-To limit this happening, Paul worked on “FaceHog,” a notification log of changes to insights, dashboards, feature flags, and experiments you have created.
+To limit this happening, Paul worked on “FaceHog”, a notification log of changes to insights, dashboards, feature flags, and experiments you have created.
 
 ![Facehog](../images/blog/rome-hackathon/facehog.gif)
 
