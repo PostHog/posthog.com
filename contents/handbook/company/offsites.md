@@ -48,6 +48,8 @@ Ideas for the agenda:
 
 The budget for these trips is up to $1,500 per person in total. We ask team members to use their best judgement for these and try to be thrifty where possible - these should be enjoyable, but not feel like a holiday. 
 
+The budget for the offsite replaces that month's [meeting each other budget](/handbook/people/spending-money#meeting-each-other). The accommodation for the offsite should have space to work. If this isn't possible (or to give space for smaller meetings during off-sites) your [workspace budget](/handbook/people/spending-money#work-space) can be used.
+
 You should assign someone on the small team to be responsible for planning the offsite (doesn't have to be the lead), and they will be supported by the Ops & People team to ensure a successful experience. 
 
 ## Hedge House

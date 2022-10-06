@@ -1,4 +1,4 @@
-module.exports = customer = ({ logo, featuredImage, title, logoType, font }) => `
+module.exports = customer = ({ logo, featuredImage, featuredImageType, title, logoType, font }) => `
 <html>
   <head>
     <meta charset="utf-8" />
@@ -145,7 +145,7 @@ module.exports = customer = ({ logo, featuredImage, title, logoType, font }) => 
             bottom: 0;
             width: 100%;
           "
-          src="data:image/jpeg;charset=utf-8;base64,${featuredImage}"
+          src="data:image/${featuredImageType};charset=utf-8;base64,${featuredImage}"
         />
       </div>
     </section>
