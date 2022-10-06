@@ -89,7 +89,7 @@ In the `CookieBanner.js` file, we’ll create a basic React component function w
 // CookieBanner.js
 
 function CookieBanner() {
-	return (
+  return (
     <div>
       <p>
         We use tracking cookies to understand how you use the product 
@@ -164,7 +164,7 @@ function CookieBanner() {
     posthog.opt_out_capturing(); // new
   };
 
-	return (
+  return (
     <div>
       <p>
         We use tracking cookies to understand how you use the product 
@@ -252,7 +252,7 @@ function CookieBanner() {
     setShowBanner(false); // new
   };
 
-	return (
+  return (
     <div>
       {showBanner && ( // new
         <div>
