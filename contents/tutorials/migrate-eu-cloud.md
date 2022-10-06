@@ -24,11 +24,11 @@ To start with EU Cloud, you can go to the [cloud signup page](https://app.postho
 
 ## Using Migrator 3000
 
-Once you’ve created your EU Cloud account, you can immediately start migrating data there. To do this, in your original PostHog instance (either Cloud or self-hosted), go to Apps and search for the [Migrator 3000 app](https://posthog.com/docs/apps/migrator-3000). This app moves data from one PostHog instance to another. Once you've found and added it, click the blue “Configure” button to start.
+Once you’ve created your EU Cloud account, you can immediately start migrating data there. To do this, in your original PostHog instance (either Cloud or self-hosted), go to Apps and search for the [Migrator 3000 app](/docs/apps/migrator-3000). This app moves data from one PostHog instance to another. Once you've found and added it, click the blue “Configure” button to start.
 
 ![Migrator 3000 app](../images/tutorials/migrate-eu-cloud/migrator-app.png)
 
-In the configuration menu, enter the project key and host (`https://eu.posthog.com`) from your EU Cloud instance settings. If you don’t want to import all the events, you can also set a date limit.
+In the configuration menu, enter the project key and host (`eu.posthog.com`) from your EU Cloud instance settings. If you don’t want to import all the events, you can also set a date limit.
 
 ![Migrator 3000 config](../images/tutorials/migrate-eu-cloud/migrator-config.png)
 
@@ -47,4 +47,4 @@ Once all these are completed, you’ll be fully migrated to EU Cloud.
 
 ## Further reading
 
-For more information about migration, check out our [docs](https://posthog.com/docs/migrate/migrate-between-cloud-and-self-hosted).
+For more information about migration, check out our [docs](/docs/migrate/migrate-between-cloud-and-self-hosted).
