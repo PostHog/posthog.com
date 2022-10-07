@@ -320,6 +320,7 @@ posthog.init('<ph_project_api_key>', {
 ```
 
 
+> **Note:** Passing in a distinctID to bootstrap replaces any existing IDs, which means you may fail to connect any old anonymous user events with the logged in person, if your logic calls identify in the frontend immediately on login. In this case, you can omit passing in the distinctID.
 
 ### Group analytics
 
