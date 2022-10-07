@@ -461,6 +461,7 @@ export default function PostLayout({
     hideSearch,
     contentContainerClassName,
     menuType = 'standard',
+    searchFilter,
 }: IProps) {
     const { hash, pathname } = useLocation()
     const breakpoints = useBreakpoint()
@@ -523,7 +524,7 @@ export default function PostLayout({
                             <MobileMenu style={{ transform: `rotate(${mobileMenuOpen ? '180deg' : '0deg'})` }} />
                         </button>
                     )}
-                    <SearchBar />
+                    <SearchBar base={searchFilter} />
                 </div>
             )}
             {menu && (
