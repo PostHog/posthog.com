@@ -1193,6 +1193,10 @@
                 {
                     "name": "Data deletion",
                     "url": "/docs/privacy/data-deletion"
+                },
+                {
+                    "name": "Telemetry",
+                    "url": "/docs/privacy/telemetry"
                 }
             ]
         },
