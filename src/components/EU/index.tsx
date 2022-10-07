@@ -1,5 +1,5 @@
 import AnimateIntoView from 'components/AnimateIntoView'
-import { CallToAction } from 'components/CallToAction'
+import { CallToAction, TrackedCTA } from 'components/CallToAction'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
 import { SEO } from 'components/seo'
@@ -28,9 +28,13 @@ export default function EU() {
                         Our new hosting option in Frankfurt means you no longer have to self-host to keep customer data
                         in the EU.
                     </p>
-                    <CallToAction className="mt-5" to="https://eu.posthog.com/signup">
+                    <TrackedCTA
+                        event={{ name: `clicked Get started`, type: 'EU cloud' }}
+                        className="mt-5"
+                        to="https://eu.posthog.com/signup"
+                    >
                         Get started
-                    </CallToAction>
+                    </TrackedCTA>
                     <p className="text-sm font-semibold mt-7 mb-0">
                         <span className="opacity-60">Current customer?</span>{' '}
                         <Link to="/tutorials/migrate-eu-cloud">Learn about migrating</Link>
@@ -94,9 +98,13 @@ export default function EU() {
                         <p className="text-lg m-0 opacity-50 font-semibold mt-2">
                             It’s the same great PostHog Cloud, just without the need to send any data across the pond.
                         </p>
-                        <CallToAction className="mt-5" to="https://eu.posthog.com/signup">
+                        <TrackedCTA
+                            event={{ name: `clicked Get started`, type: 'EU cloud' }}
+                            className="mt-5"
+                            to="https://eu.posthog.com/signup"
+                        >
                             Get started
-                        </CallToAction>
+                        </TrackedCTA>
                         <p className="text-base md:text-sm font-semibold mt-7 mb-0">
                             <span className="opacity-60">Current customer?</span>{' '}
                             <Link to="/tutorials/migrate-eu-cloud">Learn about migrating</Link>
