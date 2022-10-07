@@ -1,6 +1,6 @@
 ---
 date: 2022-10-07
-title: What motivates me
+title: What motivates me as CEO
 rootPage: /blog
 sidebar: Blog
 showTitle: true
