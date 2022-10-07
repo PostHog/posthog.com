@@ -55,7 +55,7 @@ We’ll add our new experiment feature flags to our codebase on a page with the 
 
 It’s best practice to ensure we fall back on the standard component. It is also used for the control (if you want to set that up). We want to only make changes if the feature flags are active and working.
 
-Here’s what the standard component looks like before implementing feature flags:
+Here’s what a standard React component looks like before implementing feature flags:
 
 ```js
 // Upload.js
@@ -192,3 +192,5 @@ Once results start to show up in PostHog, we can say we’ve successfully set up
 If you’re looking to learn more about feature flags, check out our [product manual](/manual/experimentation) to learn all about their features.
 
 You can also learn about how to run Experiments without feature flags in [this tutorial](/tutorials/experiments).
+
+<NewsletterTutorial compact/>
