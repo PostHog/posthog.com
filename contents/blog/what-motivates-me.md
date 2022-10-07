@@ -15,7 +15,7 @@ PostHog got pretty far (17k customers across all our products, went through Y Co
 
 ## Before we started – building the _exact_ place I'd want to work
 
-I've worked at a bunch of startups before. They all had _many_ flaws.
+I've worked at a bunch of startups before. I learned and did some cool things at each, but they all had _many_ flaws - usually through a lack of organization design.
 
 It is _a lot_ of fun getting things right, and this motivated me early in the company. These specifically stand out:
 
@@ -23,7 +23,7 @@ It is _a lot_ of fun getting things right, and this motivated me early in the co
 
 * [Sharing everything](how-to-run-a-transparent-company) internally and most of it externally too. And seeing how this helps people work autonomously.
 
-* Working on something for end users.
+* Working on something for end users. I wanted to make something that people buy rather than something that we sell.
 
 * Having a board that is focused on the long run.
 
@@ -57,7 +57,7 @@ We've been much more mindful of spend for the last year, despite all of our fast
 
 Something else changed too. For me, I felt a new wave of confidence – because I know that PostHog is now in _our_ control, versus that of a VC.
 
-It is incredibly satisfying to have reached this point. I'm getting more and more proud of what we're working on. Being lean has forced us to prioritize.
+It is incredibly motivating to reach this point. I'm getting more and more proud of what we're working on. Being lean has forced us to prioritize.
 
 We haven't just prioritized what to build, but – more importantly – the people we hired. The bar has gone up. It's very hard to get hired here.
 
