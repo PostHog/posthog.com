@@ -1,4 +1,4 @@
-# The Benefits of Exercis(ing your Options)
+# A complete and simple guide to options at PostHog
 
 Suppose you’ve ever worked for a start-up, or read news about a Unicorn tech company turning people into multi-millionaires overnight. In that case, chances are you have heard of the concept of equity.
 
