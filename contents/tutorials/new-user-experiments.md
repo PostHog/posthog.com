@@ -13,7 +13,7 @@ topics: ['experiments', 'feature flags']
 
 Optimizing the initial experience of new users is critical for turning them into existing users. Products have a limited amount of time and attention from new users before they leave and churn. 
 
-One way PostHog helps create better new user experiences is through experiments. Experiments help teams test changes and their effect on key metrics to create better products. 
+One way PostHog helps create better new user experiences is through Experiments. Experiments help teams test changes and their effect on key metrics to create better products. 
 
 Experiments start with a proposed change and hypothesized impact. They then guide you through setting up the user groups and feature flags for testing. Finally, they provide analysis of results. 
 
@@ -23,7 +23,7 @@ We’ll use all this to help us create a better new user experience.
 
 For our experiment, we want to see if a change to our onboarding process gets more new users to complete the first key event in our product, uploading a file. In our example, we have design and copy changes we’d to try to encourage new users to upload a file.
 
-We’ve already set up PostHog ([on a paid plan](/pricing), to get access to experiments), and have custom events set up for both `signed_up` and `uploaded_file`. Both have a significant amount of events coming in. 
+We’ve already set up PostHog ([on a paid plan](/pricing), to get access to Experiments), and have custom events set up for both `signed_up` and `uploaded_file`. Both have a significant amount of events coming in. 
 
 We’ll also need a `joined_at` user property. Autocapture does not capture this detail so we’ll need to set it up somewhere in our code. We can use `$set_once` in the event capture for `signed_up` to make this happen (find more details on setting [user properties here](/docs/integrate/client/js#set_once))
 
@@ -185,10 +185,10 @@ Once we’ve made these changes, the next steps are to:
 
 For the length of your experiment, PostHog automatically analyzes the usage of our feature flags and events. At the end of the experiment, we’ll *hopefully* get insights that our changes improved our key metric (the `signed_up` to `uploaded_file` funnel) with new users. With positive results, we can roll out the feature to everyone.
 
-Once results start to show up in PostHog, we can say we’ve successfully set up and implemented experiments on new users.
+Once results start to show up in PostHog, we can say we’ve successfully set up and implemented Experiments on new users.
 
 ## Further reading
 
 If you’re looking to learn more about feature flags, check out our [product manual](/manual/experimentation) to learn all about their features.
 
-You can also learn about how to run experiments without feature flags in [this tutorial](/tutorials/experiments).
+You can also learn about how to run Experiments without feature flags in [this tutorial](/tutorials/experiments).
