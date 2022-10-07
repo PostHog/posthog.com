@@ -2441,3 +2441,20 @@
 [[redirects]]
     from = "/partners/restack"
     to = "/marketplace/restack"
+
+
+# Added: 2022-10-07
+[[redirects]]
+    from = "/docs/feature-flag-use-cases"
+    to = "/manual/feature-flags"
+
+
+# Added: 2022-10-07
+[[redirects]]
+    from = "/docs/posthog-direction"
+    to = "/about"
+
+# Added: 2022-10-07
+[[redirects]]
+    from = "/docs/product-direction"
+    to = "/docs/privacy/telemetry"
