@@ -22,6 +22,7 @@ import { GitHub } from 'components/Icons/Icons'
 import { getCookie } from 'lib/utils'
 import { CallToAction } from 'components/CallToAction'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import Tooltip from 'components/Tooltip'
 import CommunityQuestions from 'components/CommunityQuestions'
 import Markdown from 'markdown-to-jsx'
 import CheckIcon from '../images/check.svg'
@@ -32,33 +33,21 @@ const renderAvailabilityIcon = (availability: 'full' | 'partial' | 'none') => {
     switch (availability) {
         case 'full':
             return (
-                <img
-                    src={CheckIcon}
-                    alt="Available"
-                    className="h-4 w-4"
-                    aria-hidden="true"
-                    title="This plan has full access to this feature"
-                />
+                <Tooltip title="This plan has full access to this feature">
+                    <img src={CheckIcon} alt="Available" className="h-4 w-4" aria-hidden="true" />
+                </Tooltip>
             )
         case 'partial':
             return (
-                <img
-                    src={WarningIcon}
-                    alt="Partially available"
-                    className="h-4 w-4"
-                    aria-hidden="true"
-                    title="Not all features are available on this plan"
-                />
+                <Tooltip title="Some parts of this feature are not available on this plan">
+                    <img src={WarningIcon} alt="Partially available" className="h-4 w-4" aria-hidden="true" />
+                </Tooltip>
             )
         case 'none':
             return (
-                <img
-                    src={XIcon}
-                    alt="Not available"
-                    className="h-4 w-4"
-                    aria-hidden="true"
-                    title="This feature is not available on this plan"
-                />
+                <Tooltip title="This feature is not available on this plan">
+                    <img src={XIcon} alt="Not available" className="h-4 w-4" aria-hidden="true" />
+                </Tooltip>
             )
     }
 }
