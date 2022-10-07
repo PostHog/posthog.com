@@ -105,7 +105,7 @@ This is, again, a crude comparison. It ignores caches on both ends, and more int
  
 Robert Hodges, CEO of Altinity, [once compared](URL NEEDED) ClickHouse to a drag-racer — it might not have doors, but it is incredibly, incredibly fast when used correctly. 
 
-These optimizations are made possible by ClickHouse’s insert-and-optimize-later philosophy. ClickHouse is constantly merging data in the background to collapse serieses of data into single values to expedite future queries. 
+These optimizations are made possible by ClickHouse’s insert-and-optimize-later philosophy. ClickHouse is constantly merging data in the background to collapse series of data into single values to expedite future queries. 
 
 Because ClickHouse doesn’t expect mutation requests, it can depend on merges because the individual data won’t be changed; by extension, aggregate values won’t need to be recalculated. 
 
