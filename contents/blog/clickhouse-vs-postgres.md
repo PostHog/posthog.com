@@ -123,7 +123,7 @@ ClickHouse, meanwhile, is all about silently optimizing data and optimizing data
 
 An optimized ClickHouse instance can function so fast that a bulk of a query’s wait-time from a frontend perspective is a function of network speed, not data retrieval. 
 
-## ClickHouse's not so secret weapon... Materialized Views
+### ClickHouse's not so secret weapon... Materialized Views
  
 Materialized Views compose arguably the biggest area where ClickHouse differentiates from Postgres. 
 
