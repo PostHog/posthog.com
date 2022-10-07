@@ -140,7 +140,7 @@ export const AppParametersFactory: (params: AppParametersProps) => React.FC = ({
 
 export default function Handbook({
     data: { post, nextPost, mission, objectives },
-    pageContext: { menu, breadcrumb = [], breadcrumbBase, tableOfContents },
+    pageContext: { menu, breadcrumb = [], breadcrumbBase, tableOfContents, searchFilter },
     location,
 }) {
     const { hash } = useLocation()
@@ -199,6 +199,7 @@ export default function Handbook({
             />
             <Layout>
                 <PostLayout
+                    searchFilter={searchFilter}
                     title={title}
                     filePath={filePath}
                     questions={
