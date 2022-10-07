@@ -300,6 +300,9 @@ const posthog = new PostHog('<ph_project_api_key>', {
 ```
 
 
+> **Note:** Passing in a distinctID to bootstrap replaces any existing IDs, which means you may fail to connect any old anonymous user events with the logged in person, if your logic calls identify in the frontend immediately on login. In this case, you can omit passing in the distinctID.
+
+
 ### Group analytics
 
 PostHog 1.31.0 introduced support for [group analytics](/docs/user-guides/group-analytics), which allows you to associate users and events with larger groups (teams, organizations, etc.).

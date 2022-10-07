@@ -19,7 +19,7 @@ These include:
 - If you have concerns about user privacy or regulation such as [GDPR](/docs/integrate/gdpr) or [HIPPA](/docs/privacy/hipaa-compliance).
 - If you have your own system for identifying users across multiple sessions, or if you don’t need to track user identities at all.
 
-If you’re interested in trying cookie-less tracking, then this tutorial will explain how to do this by configuring posthog-js to use pgae memory instead.
+If you’re interested in trying cookie-less tracking, then this tutorial will explain how to do this by configuring posthog-js to use page memory instead.
 
 <GDPRForm />
 
@@ -71,6 +71,10 @@ posthog.init('<ph_project_api_key>', {
 ## Step 3: Remove your cookies acceptance banner
 
 Now that your PostHog deployment isn’t using cookies you can, optionally and if you’re not using cookies for any other services, completely remove your GDPR-required cookies acceptance banner. Good for you — they only annoy most users anyway. 
+
+## Further reading
+
+- [Building a tracking cookies opt out banner in React](/tutorials/react-cookie-banner)
 
 <NewsletterTutorial compact/>
 

@@ -28,18 +28,24 @@ import CheckIcon from '../images/check.svg'
 import XIcon from '../images/x.svg'
 import WarningIcon from '../images/warning.svg'
 
-export const HandbookSidebar = ({ contributors, title, location, availability, related }) => {
-    const renderAvailabilityIcon = (availability: 'full' | 'partial' | 'none') => {
-        switch (availability) {
-            case 'full':
-                return <img src={CheckIcon} alt="Available" className="h-4 w-4" aria-hidden="true" />
-            case 'partial':
-                return <img src={WarningIcon} alt="Partially available" className="h-4 w-4" aria-hidden="true" />
-            case 'none':
-                return <img src={XIcon} alt="Not available" className="h-4 w-4" aria-hidden="true" />
-        }
+const renderAvailabilityIcon = (availability: 'full' | 'partial' | 'none') => {
+    switch (availability) {
+        case 'full':
+            return <img src={CheckIcon} alt="Available" className="h-4 w-4" aria-hidden="true" />
+        case 'partial':
+            return <img src={WarningIcon} alt="Partially available" className="h-4 w-4" aria-hidden="true" />
+        case 'none':
+            return <img src={XIcon} alt="Not available" className="h-4 w-4" aria-hidden="true" />
     }
+}
 
+const MDX = ({ body }) => (
+    <MDXProvider components={{}}>
+        <MDXRenderer>{body}</MDXRenderer>
+    </MDXProvider>
+)
+
+export const HandbookSidebar = ({ contributors, title, location, availability, related }) => {
     return (
         <>
             {contributors && (
@@ -165,7 +171,7 @@ export const AppParametersFactory: (params: AppParametersProps) => React.FC = ({
 }
 
 export default function Handbook({
-    data: { post, nextPost },
+    data: { post, nextPost, mission, objectives },
     pageContext: { menu, breadcrumb = [], breadcrumbBase, tableOfContents },
     location,
 }) {
@@ -214,6 +220,8 @@ export default function Handbook({
         a: A,
         TestimonialsTable,
         AppParameters: AppParametersFactory({ config: appConfig }),
+        Mission: (_props) => (mission?.body ? MDX({ body: mission.body }) : null),
+        Objectives: (_props) => (objectives?.body ? MDX({ body: objectives.body }) : null),
         ...shortcodes,
     }
 
@@ -263,7 +271,7 @@ export default function Handbook({
                                     {thumbnail && <GatsbyImage image={getImage(thumbnail)} />}
                                     <h1 className="dark:text-white text-3xl sm:text-5xl m-0">{title}</h1>
                                 </div>
-                                <div className="flex items-center space-x-2 mb-2">
+                                <div className="flex items-center space-x-2">
                                     {github && (
                                         <Link to={github}>
                                             <GitHub className="w-8 h-8 text-black/80 hover:text-black/60 dark:text-white/80 hover:dark:text-white/60 transition-colors" />
@@ -298,7 +306,7 @@ export default function Handbook({
 }
 
 export const query = graphql`
-    query HandbookQuery($id: String!, $nextURL: String!) {
+    query HandbookQuery($id: String!, $nextURL: String!, $mission: String, $objectives: String) {
         nextPost: mdx(fields: { slug: { eq: $nextURL } }) {
             excerpt(pruneLength: 500)
             frontmatter {
@@ -307,6 +315,12 @@ export const query = graphql`
             fields {
                 slug
             }
+        }
+        mission: mdx(fields: { slug: { eq: $mission } }) {
+            body
+        }
+        objectives: mdx(fields: { slug: { eq: $objectives } }) {
+            body
         }
         post: mdx(id: { eq: $id }) {
             id

@@ -244,7 +244,7 @@ const Control = (): JSX.Element => {
                         <ul className="list-none p-0 m-0 grid gap-y-2">
                             <Benefit>Full feature set of PostHog Cloud but on your infrastructure</Benefit>
                             <Benefit>Full access to your production instance</Benefit>
-                            <Benefit>Paid deployment support available in the PostHog Marketplace</Benefit>
+                            <Benefit>Paid deployment support available in the PostHog partner directory</Benefit>
                         </ul>
                     </div>
 
