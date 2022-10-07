@@ -1,5 +1,5 @@
 ---
-date: 2022-10-05
+date: 2022-10-07
 title: What motivates me
 rootPage: /blog
 sidebar: Blog
@@ -7,7 +7,7 @@ showTitle: true
 hideAnchor: true
 categories: ["CEO diaries", "Inside PostHog"]
 author: ["james-hawkins"]
-featuredImage: ../images/blog/ceo-diary.png
+featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 ---
 
@@ -63,7 +63,7 @@ We haven't just prioritized what to build, but – more importantly – the peop
 
 ## And, also, I really want to beat other companies
 
-When I was (a lot) younger, all I cared about was cycling. I did a lot of time trialling. Someone sets off every minute to race around the course as fast as possible.
+When I was (a lot) younger, all I cared about was cycling. I did a lot of time trialling, where someone sets off every minute to race around the course as fast as possible.
 
 The moment you see another rider ahead of you, it suddenly gets easy and you magically roar past them - every time.
 
