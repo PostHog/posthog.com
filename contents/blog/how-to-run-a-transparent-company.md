@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["CEO diaries", "Inside PostHog"]
+categories: ["CEO diaries", "Inside PostHog", "Startups"]
 author: ["james-hawkins"]
 featuredImage: ../images/blog/transparency.jpeg
 featuredImageType: full
