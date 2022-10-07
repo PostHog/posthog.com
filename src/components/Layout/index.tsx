@@ -9,7 +9,7 @@ import './DarkMode.scss'
 import { PosthogAnnouncement } from '../PosthogAnnouncement/PosthogAnnouncement'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 
-const Layout = ({ children }: { children: React.ReactNode }): JSX.Element => {
+const Layout = ({ children, className = '' }: { children: React.ReactNode; className?: string }): JSX.Element => {
     const { posthog } = useValues(posthogAnalyticsLogic)
 
     useEffect(() => {
@@ -19,12 +19,12 @@ const Layout = ({ children }: { children: React.ReactNode }): JSX.Element => {
     }, [])
 
     return (
-        <>
+        <div className={className}>
             <Header />
             <main>{children}</main>
             <Footer />
             <PosthogAnnouncement />
-        </>
+        </div>
     )
 }
 
