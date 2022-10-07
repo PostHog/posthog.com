@@ -13,23 +13,29 @@ featuredImageType: full
 
 PostHog got pretty far (17k customers across all our products, went through Y Combinator, seed, series A and B raised, $MM revenue) before I really figured out what motivates me.
 
-## Before we started - building the _exact_ place I'd want to work
+## Before we started – building the _exact_ place I'd want to work
 
 I've worked at a bunch of startups before. They all had _many_ flaws.
 
 It is _a lot_ of fun getting things right, and this motivated me early in the company. These specifically stand out:
 
 * Writing stuff down in a [handbook](../handbook) rather than handling everything 1:1 in meetings. So much win.
+
 * [Sharing everything](how-to-run-a-transparent-company) internally and most of it externally too. And seeing how this helps people work autonomously.
+
 * Working on something for end users.
+
 * Having a board that is focused on the long run.
+
 * [Hiring people that we are _excited_ to work with](../handbook/company/values). No matter how well you manage stuff, 90% of problems can be avoided by getting the right people in the first place.
+
 * Paying everyone according to [a system](../handbook/people/compensation) versus random bargaining. This cuts down churn and politics.
+
 * Dealing with customers totally transparently. For example, when we launched, none of our competitors had pricing on their pricing page. It's a lot of fun having a community weigh in on what we build.
 
 Neither [Tim](../handbook/company/team/tim-glaser) (my cofounder) nor I can imagine working anywhere else.
 
-## When we launched - being grateful that anyone cares
+## When we launched – being grateful that anyone cares
 
 In the early days, we [pivoted many times](story-about-pivots), mostly without any funding. I spent most of my day trying to get anyone to talk to us about our bad ideas, and building new websites for the latest pivot. Tim built entire products every few weeks like it was nothing. All while our savings were dwindling.
 
@@ -37,7 +43,7 @@ The feeling when it started working was magical.
 
 Overnight (after [this](https://news.ycombinator.com/item?id=22376732)), we were flooded with people to talk to. Companies were getting real value out of the product. Since we grew a lot, we more or less went from no code existing, through Seed / Series A and B within 12 months (it was announced a little later).
 
-## Now - taking pride in building a business that does stuff properly
+## Now – taking pride in building a business that does stuff properly
 
 So, we had a lot of hype. But we hadn't focused on revenue yet.
 
@@ -49,11 +55,11 @@ By the summer of 2022, it meant the business was real. We got to default alive, 
 
 We've been much more mindful of spend for the last year, despite all of our fastest growth coming in this time, including revenue. We're getting leaner and fitter over time.
 
-Something else changed too. For me, I felt a new wave of confidence - because I know that PostHog is now in _our_ control, versus that of a VC.
+Something else changed too. For me, I felt a new wave of confidence – because I know that PostHog is now in _our_ control, versus that of a VC.
 
 It is incredibly satisfying to have reached this point. I'm getting more and more proud of what we're working on. Being lean has forced us to prioritize.
 
-We haven't just prioritized what to build, but - more importantly - the people we hired. The bar has gone up. It's very hard to get hired here.
+We haven't just prioritized what to build, but – more importantly – the people we hired. The bar has gone up. It's very hard to get hired here.
 
 ## And, also, I really want to beat other companies
 
@@ -63,7 +69,7 @@ The moment you see another rider ahead of you, it suddenly gets easy and you mag
 
 Since we started, there have always been companies I've wanted to beat. So much. Both those one step and many years ahead of us. I've been thinking about why.
 
-## It's all the same thing
+## It's all the same thing
 
 I've realized that everything is under the same umbrella.
 
