@@ -17,7 +17,7 @@ So why even compare them? Because most companies that invest in an OLAP (online 
 
 In 2020, PostHog used Postgres to store client data. In the beginning, it worked. But usage grew very, very fast. Eventually, that all-purpose Postgres database was tasked to store millions of rows of data. At the rate data was being ingested, PostHog was on a collision course towards a major crash. 
 
-At first, the team tried a ton of hack-y and wacky solutions in attempts to get Postgres to work. Turns out, that wasn’t very sustainable (who would’ve thought!). Then, PostHog migrated client data to ClickHouse. Boom! 
+At first, the team tried a ton of hack-y and wacky solutions in attempts to get Postgres to work. Turns out, that wasn’t very sustainable (who would’ve thought!). Then, PostHog [migrated client data to ClickHouse](/blog/how-we-turned-clickhouse-into-our-eventmansion). Boom! 
 
 This is what that felt like...
 
