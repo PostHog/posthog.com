@@ -42,9 +42,12 @@ Some guidelines:
 - These offsites don't happen very often and involve a lot of travel, so make sure you make the most out of it by having an agenda and an idea of what you want to achieve _before_ the start of the trip. 
 
 Ideas for the agenda:
+- A spoken README session early in the week to share "Who am I/How I work best"
 - Planning session. What does the team want to achieve in the next month/quarter/year?
 - Look at the [team page](https://posthog.com/handbook/people/team-structure/team-structure#small-teams) - what needs to be updated?
 - [360 degree feedback session](/handbook/people/feedback#ground-rules) - these are more effective at small team offsites
+    - This can work better over a shared cooked meal or takeaway in the accommodation rather than a noisy restaurant. Particularly for people who might be anxious about the format or the feedback.
+- Hackathon - try to leave 2 days for this
 
 The budget for these trips is up to $1,500 per person in total. We ask team members to use their best judgement for these and try to be thrifty where possible - these should be enjoyable, but not feel like a holiday. 
 
