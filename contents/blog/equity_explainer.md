@@ -2,9 +2,9 @@
 
 Suppose you’ve ever worked for a start-up, or read news about a Unicorn tech company turning people into multi-millionaires overnight. In that case, chances are you have heard of the concept of equity.
 
-Equity is the amount of ownership of a corporation held by a person or entity. This ownership is usually described as either a percentage of the total equity of the business or at later stages, a finite number of shares. The vast majority of tech start-ups offer equity as part of a total compensation package, normally in the form of share “options”, and the upside potential of these options is meant to compensate for the more grueling (and in my opinion, rewarding) work of growing a start-up company from founding to IPO (more on that later).
+Equity is the amount of ownership of a corporation held by a person or entity. This ownership is usually described as either a percentage of the total equity of the business or at later stages, a finite number of shares. The majority of tech start-ups offer equity as part of their total compensation, normally in the form of share “options”. The upside potential of these options is meant to compensate for the more gruelling (and in my opinion, rewarding) work of growing a start-up company from founding to IPO (more on that later).
 
-As ubiquitous as equity is in the start-up world, it is probably the most widely misunderstood element of joining a technology company. With this post, I hope to shine a light on some of the most confusing aspects of start-up equity, and highlight how PostHog breaks from the norm to offer options in a much more employee-friendly way.
+Despite its popularity, equity is very rarely understood by employees! With this post, I hope to shine a light on some of the most confusing aspects of start-up equity, and highlight how PostHog breaks from the norm to offer options in a much more employee-friendly way.
 
 When a start-up company is incorporated, the founders decide on how to divide ownership of the company between them by quite literally choosing a random number of shares to create out of thin air and distribute to each other in some proportion. In the common two-founder model, most start-ups distribute the shares as a 50/50 split between them, accounting for 100% ownership of the business. The shares are "purchased" for a nominal cost like a ten-thousandth of a cent because the value of a newly minted start-up company is effectively nothing.
 
@@ -28,13 +28,13 @@ Making matters more complicated, the majority of standard terms in stock option 
 
 |                           | **PostHog**                 | **The Other Guys**           |
 |---------------------------|-----------------------------|------------------------------|
-| **Vesting Start:**        | On your first day           | After a "probationary period |
+| **Vesting Start:**        | On your first day           | After a "probationary period" |
 | **Exercise Window:**      | 10 _years_ after departure  | 90 _days_ after departure    |
 | **Merger or Acquisition** | Double-Trigger acceleration | No acceleration              |
 
 ### Vesting Start:
 
-At PostHog, we recognize that you start contributing to the growth of our company on day 1 (and even before that, on your SuperDay), so we feel that you should start earning your options on that day as well (because our lawyers won’t let us give you options until you’re actually hired). Many other start-up companies make you wait until after a probationary period, often 3-months, before your options start to vest.
+At PostHog, we recognize that you start contributing to the company on day 1, so we feel that you should start earning your options on that day as well. Many others make you wait until after a probationary period, often 3-months, before your options start to vest.
 
 ### Exercise Window:
 
@@ -42,9 +42,9 @@ Regardless of whether you resign, or are let go for performance reasons, you wil
 
 In the unlikely event that you are let go “with cause” (AKA gross misconduct like embezzlement or discrimination), you will forfeit your options, which we feel is only fair.
 
-### Merger or Acquisition:
+### What if the company gets sold?
 
 In the event that PostHog is sold to another company before we reach an IPO, we have preferable terms that ensure team members who contributed to growing the company to that point are rewarded for their efforts. If the company is acquired (first trigger) AND you are terminated as part of that acquisition (second trigger), all of your options vest immediately and your 10-year window to exercise them begins. This can offer some protection and certainty to employees who exercise their options following this trigger, as shares in the company during acquisition are much more tangible than options to buy shares, and are often converted into shares of the acquiring company or bought back by the acquirer for cash.
 
-As a fully open-source company, we try to be as transparent as possible about compensation including equity, because we firmly believe that everyone who contributes to our success should reap the benefits. For more information about how PostHog thinks about equity, check out our compensation page and equity FAQ in our handbook.
+As an open-source company, we are transparent about compensation including equity, because we believe that everyone who contributes to our success should reap the benefits. For more information about how PostHog thinks about equity, check out our compensation page and equity FAQ in our handbook.
 
