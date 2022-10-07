@@ -13,7 +13,7 @@ categories: ["Engineering", "Guides"]
 
 Honestly, it is a bit ridiculous to compare Postgres and ClickHouse. The two database solutions are as similar as grapes and grapefruit. ClickHouse was created for a specific purpose; Postgres was designed to be flexible and all-purpose. 
 
-So why even compare them? Because most companies that invest in an OLAP (online analytical processing) database originally used an OLTP (online transaction processing) stack like mySQL or Postgres. PostHog’s database journey was no different. 
+So why even compare them? Because most companies that invest in an OLAP (online analytical processing) database like ClickHouse originally used an OLTP (online transaction processing) stack like mySQL or Postgres. PostHog’s database journey was no different. 
 
 In 2020, PostHog used Postgres to store client data. In the beginning, it worked. But usage grew very, very fast. Eventually, that all-purpose Postgres database was tasked to store millions of rows of data. At the rate data was being ingested, PostHog was on a collision course towards a major crash. 
 
