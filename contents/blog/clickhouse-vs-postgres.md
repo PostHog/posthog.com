@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["mat-pregasen"]
+author: ["mathew-pregasen"]
 featuredImage: ../images/blog/posthog-company-culture-blog.png
 featuredImageType: full
 categories: ["Engineering", "Guides"]
