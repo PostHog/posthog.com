@@ -31,11 +31,35 @@ import WarningIcon from '../images/warning.svg'
 const renderAvailabilityIcon = (availability: 'full' | 'partial' | 'none') => {
     switch (availability) {
         case 'full':
-            return <img src={CheckIcon} alt="Available" className="h-4 w-4" aria-hidden="true" />
+            return (
+                <img
+                    src={CheckIcon}
+                    alt="Available"
+                    className="h-4 w-4"
+                    aria-hidden="true"
+                    title="This plan has full access to this feature"
+                />
+            )
         case 'partial':
-            return <img src={WarningIcon} alt="Partially available" className="h-4 w-4" aria-hidden="true" />
+            return (
+                <img
+                    src={WarningIcon}
+                    alt="Partially available"
+                    className="h-4 w-4"
+                    aria-hidden="true"
+                    title="Not all features are available on this plan"
+                />
+            )
         case 'none':
-            return <img src={XIcon} alt="Not available" className="h-4 w-4" aria-hidden="true" />
+            return (
+                <img
+                    src={XIcon}
+                    alt="Not available"
+                    className="h-4 w-4"
+                    aria-hidden="true"
+                    title="This feature is not available on this plan"
+                />
+            )
     }
 }
 
