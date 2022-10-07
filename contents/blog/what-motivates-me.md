@@ -11,13 +11,13 @@ featuredImage: ../images/blog/ceo-diary.png
 featuredImageType: full
 ---
 
-PostHog got pretty far (17k customers across all our products, went through YCombinator, seed, series A and B raised, $MM revenue) before I really figured out what motivates me.
+PostHog got pretty far (17k customers across all our products, went through Y Combinator, seed, series A and B raised, $MM revenue) before I really figured out what motivates me.
 
 ## Before we started - building the _exact_ place I'd want to work
 
 I've worked at a bunch of startups before. They all had _many_ flaws.
 
-It is a _lot_ of fun getting things right. These sorts of things specifically stand out:
+It is _a lot_ of fun getting things right, and this motivated me early in the company. These specifically stand out:
 
 * Writing stuff down in a [handbook](../handbook) rather than handling everything 1:1 in meetings. So much win.
 * [Sharing everything](how-to-run-a-transparent-company) internally and most of it externally too. And seeing how this helps people work autonomously.
@@ -31,7 +31,7 @@ Neither [Tim](../handbook/company/team/tim-glaser) (my cofounder) nor I can imag
 
 ## When we launched - being grateful that anyone cares
 
-In the early days, we [pivoted many times](story-about-pivots). Mostly without any funding. I spent most of my day trying to get anyone to talk to us about our bad ideas, and building new websites for the latest pivot. Tim built entire products every few weeks like it was nothing. Our savings were dwindling.
+In the early days, we [pivoted many times](story-about-pivots), mostly without any funding. I spent most of my day trying to get anyone to talk to us about our bad ideas, and building new websites for the latest pivot. Tim built entire products every few weeks like it was nothing. All while our savings were dwindling.
 
 The feeling when it started working was magical.
 
@@ -45,7 +45,7 @@ Last summer, we got a lot of requests for a paid product (extra features or peop
 
 We picked revenue.
 
-By the summer of this year, it meant the business was real. We got to default alive, with conservative assumptions. Revenue was growing very quickly. Our goal is $100M ARR by 2026 and we're on track. We got different and helpful product feedback, which we acted on. Our open source and free user growth sped up too as an indirect result.
+By the summer of 2022, it meant the business was real. We got to default alive, with conservative assumptions. Revenue was growing very quickly. Our goal is $100M ARR by 2026 and we're on track. We got different and helpful product feedback, which we acted on. Our open source and free user growth sped up too as an indirect result.
 
 We've been much more mindful of spend for the last year, despite all of our fastest growth coming in this time, including revenue. We're getting leaner and fitter over time.
 
