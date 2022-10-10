@@ -61,7 +61,7 @@ As we keep iterating on our specs, the best approach is to copy our most recentl
 - Run the text through a [gender decoder tool](https://gender-decoder.katmatfield.com/) to check for unconscious bias
 - Don't use specific years of experience as a qualifier
 
-Once the hiring manager has signed off on the spec, we will publish it on Ashby. 
+Once the hiring manager has signed off on the spec, we will publish it on Ashby - [instructions on how to do this are here](/engineering/posthog-com/jobs). 
 
 
 #### Job boards
