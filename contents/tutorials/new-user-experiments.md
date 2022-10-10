@@ -1,5 +1,5 @@
 ---
-title: Running Experiments on new users 
+title: Running experiments on new users 
 sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
