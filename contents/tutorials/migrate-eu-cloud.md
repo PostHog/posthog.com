@@ -8,7 +8,7 @@ featuredImage: ../images/tutorials/banners/migrate-eu-cloud.png
 topics: ['configuration']
 ---
 
-> **Warning:** Migrating event data to PostHog's EU Cloud is a time consuming process, likely to take several days or weeks. We strongly recommend users with a large amount of event data begin by setting up and connecting a new EU cloud instance and migrating data later, if needed. There is currently **no way** to migrate the following data (although it is accessible via the PostHog API):
+> **Warning:** Migrating event data to PostHog's EU Cloud is a time-consuming process, likely to take several days or weeks. We strongly recommend users with a large amount of event data begin by setting up and connecting a new EU cloud instance and migrating data later, if needed. There is currently **no way** to migrate the following data (although it is accessible via the PostHog API):
 - PostHog user accounts
 - actions, cohorts
 - insights, dashboards
@@ -26,7 +26,7 @@ For this tutorial, we will go over how to move data you currently have in either
 
 The first step in migrating to EU Cloud is having an EU Cloud PostHog instance. Even if you have an existing PostHog Cloud instance, you need to create a new one. It is not possible (right now) to change your account between US Cloud (all cloud instances before this launch) or self-hosting and EU Cloud. Instead, you must create a new account and then migrate data to the new account.
 
-> **Note:** You'll need to manually recreate your insights, dashboards, feature flags, and other non-event data in EU Cloud. These won’t be migrated over from your US Cloud or self-hosted instance. Only events, persons, and other data derived from events is migrated through this process.
+> **Note:** You'll need to manually recreate your insights, dashboards, feature flags, and other non-event data in EU Cloud. These won’t be migrated over from your US Cloud or self-hosted instance. Only events, persons, and other data derived from events are migrated through this process.
 
 To start with EU Cloud, you can go to the [cloud signup page](https://app.posthog.com/signup), enter your details, and be sure to select European Union as your data region.
 
