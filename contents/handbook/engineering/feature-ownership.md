@@ -83,3 +83,4 @@ Some of the features we are building may exist in other products already. It is 
 [Team Pipeline]: /handbook/people/team-structure/pipeline
 [Team Infrastructure]: /handbook/people/team-structure/infrastructure
 [Team Experimentation]: /handbook/people/team-structure/experimentation
+[Team Infrastructure]: /handbook/people/team-structure/infrastructure
