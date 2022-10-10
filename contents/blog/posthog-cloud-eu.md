@@ -23,11 +23,11 @@ Thanks to our new hosting option, customers in the EU, and any business that nee
 
 ### Where are PostHog Cloud EU's servers based?
 
-PostHog Cloud EU is hosted on AWS servers based in Frankfurt, Germany.
+PostHog Cloud EU is hosted in the AWS `eu-central-1` region based in Frankfurt, Germany.
 
 ### What data is transferred from the EU to the US?
 
-None. PostHog Cloud EU is an entirely independent instance of PostHog. All event data, user data, and the product itself, is hosted on our EU-based servers.
+None. PostHog Cloud EU is an entirely independent instance of PostHog. All event data, user data, and the product itself, is hosted on our EU-based infrastructure.
 
 ### How do I use PostHog Cloud EU in compliance with GDPR?
 
