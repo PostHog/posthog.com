@@ -1,5 +1,5 @@
 ---
-date: 2022-10-04
+date: 2022-10-10
 title: "Getting started: Your 5 essential PostHog apps"
 rootPage: /blog
 sidebar: Blog

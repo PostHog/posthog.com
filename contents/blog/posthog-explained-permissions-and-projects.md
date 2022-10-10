@@ -1,5 +1,5 @@
 ---
-date: 2022-10-04
+date: 2022-10-10
 title: "PostHog explained: Permissions and projects"
 rootPage: /blog
 sidebar: Blog
