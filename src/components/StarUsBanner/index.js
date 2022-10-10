@@ -41,9 +41,9 @@ export default function StarUsBanner() {
                                 </Link>
                             ) : (
                                 <>
-                                    <span className="h-[28px] w-[325px]">
-                                        <Link to="/signup/eu-cloud" className="text-white hover:text-white">
-                                            🇪🇺 EU Cloud is coming. Join the waitlist!
+                                    <span className="h-[28px] w-[410px]">
+                                        <Link to="/eu" className="text-white hover:text-white">
+                                            🚀 PostHog's EU Cloud has arrived! Learn more.
                                         </Link>
                                     </span>
                                 </>
