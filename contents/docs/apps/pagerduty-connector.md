@@ -20,7 +20,7 @@ Example use cases:
 
 The PagerDuty Connector app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.26.0](https://posthog.com/blog/the-posthog-array-1-26-0) or later.
 
-Not running 1.26.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)!
+Not running 1.26.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
 You'll also need access to a PagerDuty account.
 
@@ -41,6 +41,10 @@ This app requires PostHog 1.26.0 or above, or PostHog Cloud.
 -   Copy the URL.
 -   Choose threshold and operator (less than or equal, greater than or equal).
 -   Enter PagerDuty service integration key (for Events API v2).
+
+### Configuration
+
+<AppParameters />
 
 ### Are there any limitations?
 

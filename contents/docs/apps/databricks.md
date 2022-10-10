@@ -15,7 +15,7 @@ The Databricks Export app for PostHog will push data from PostHog to Databricks,
 
 Using this app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)!
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
 ### How do I install the Databricks Export app for PostHog?
 
@@ -23,7 +23,7 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 2. Search for 'Databricks' and select the app, press Install.
 3. Follow the steps below to configure the app.
 
-### How do I configure the Databricks Export app for PostHog?
+### Configuration
 
 You will need the following, in order to full configure this app:
 
@@ -32,6 +32,8 @@ You will need the following, in order to full configure this app:
 -   Your cluster ID, found in [the system documentation](https://docs.databricks.com/workspace/workspace-details.html)
 
 You will also need to give a temporary filename path for saving raw data, and a database name for where you want to store the data. Enter events in comma ( , ) separated way in order to ignore the data.
+
+<AppParameters />
 
 ### What are the limitations for this app?
 

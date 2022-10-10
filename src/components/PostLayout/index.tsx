@@ -16,7 +16,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { animateScroll as scroll } from 'react-scroll'
+import { animateScroll as scroll, Link as ScrollLink } from 'react-scroll'
 import Scrollspy from 'react-scrollspy'
 import InternalSidebarLink from 'components/Docs/InternalSidebarLink'
 import SearchBar from 'components/Docs/SearchBar'
@@ -25,21 +25,9 @@ import { push as PushMenu } from 'react-burger-menu'
 import Tooltip from 'components/Tooltip'
 import { CallToAction } from 'components/CallToAction'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
-import { replacePath } from '../../../gatsby/utils'
+import { flattenMenu, replacePath } from '../../../gatsby/utils'
 import { IContributor, ICrumb, IMenu, INextPost, IProps, ISidebarAction, ITopic } from './types'
 import { Popover } from 'components/Popover'
-
-const Iframe = (props: any) => {
-    if (props.src && props.src.indexOf('youtube.com') !== -1) {
-        return (
-            <div style={{ position: 'relative', height: 0, paddingBottom: '56.25%' }}>
-                <iframe {...props} className="absolute top-0 left-0 w-full h-full" />
-            </div>
-        )
-    } else {
-        return <iframe {...props} />
-    }
-}
 
 const ShareLink = ({ children, url }: { children: React.ReactNode; url: string }) => {
     const width = 626
@@ -73,7 +61,7 @@ export const SidebarSection = ({
     className?: string
 }) => {
     return (
-        <div className={`py-4 px-5 lg:px-8 ${className}`}>
+        <div className={`py-4 px-6 ${className}`}>
             {title && <h3 className="text-black dark:text-white font-semibold opacity-25 m-0 mb-2 text-sm">{title}</h3>}
             {children}
         </div>
@@ -124,26 +112,32 @@ export const ShareLinks = ({ title, href }: { title: string; href: string }) => 
     )
 }
 
-export const Contributor = ({ image, name }: IContributor) => {
+export const ContributorImage = ({ image, name, className = '', imgClassName = '' }) => {
     const gatsbyImage = image && getImage(image)
     return (
+        <div className={`w-[38px] h-[38px] relative rounded-full overflow-hidden ${className}`}>
+            {gatsbyImage ? (
+                <GatsbyImage imgClassName={`rounded-full ${imgClassName}`} image={gatsbyImage} alt={name} />
+            ) : (
+                <svg width="38" height="38" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M20.0782 41.0392H5.42978C4.03134 41.0392 3.1173 40.1642 3.09386 38.7736C3.07823 37.7814 3.07042 36.797 3.10948 35.8048C3.15636 34.6329 3.72668 33.7345 4.74228 33.1798C8.0782 31.3595 11.4299 29.5783 14.7659 27.7658C15.0081 27.633 15.1565 27.758 15.3362 27.8517C18.1878 29.3439 21.0942 29.4689 24.0626 28.2267C24.1485 28.1955 24.2423 28.1721 24.3126 28.1096C24.9298 27.5861 25.4845 27.7971 26.1251 28.1486C29.1173 29.7971 32.1331 31.4143 35.1487 33.0238C36.4534 33.7191 37.094 34.766 37.0706 36.2426C37.0549 37.0785 37.0706 37.9067 37.0706 38.7426C37.0628 40.1254 36.1409 41.0395 34.7659 41.0395H20.0783L20.0782 41.0392Z"
+                        fill="#BFBFBC"
+                    />
+                    <path
+                        d="M19.8359 27.0625C17.0859 26.9687 14.8047 25.6094 13.1251 23.1953C10.3751 19.2344 10.7032 13.6093 13.8516 10.0001C17.2735 6.08599 22.9452 6.10943 26.336 10.0469C29.9376 14.2345 29.711 20.8437 25.8126 24.6405C24.2188 26.1952 22.3126 27.0312 19.8362 27.0624L19.8359 27.0625Z"
+                        fill="#BFBFBC"
+                    />
+                </svg>
+            )}
+        </div>
+    )
+}
+
+export const Contributor = ({ image, name }: IContributor) => {
+    return (
         <>
-            <div className="w-[38px] h-[38px] relative rounded-full overflow-hidden">
-                {gatsbyImage ? (
-                    <GatsbyImage image={gatsbyImage} alt={name} />
-                ) : (
-                    <svg width="38" height="38" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M20.0782 41.0392H5.42978C4.03134 41.0392 3.1173 40.1642 3.09386 38.7736C3.07823 37.7814 3.07042 36.797 3.10948 35.8048C3.15636 34.6329 3.72668 33.7345 4.74228 33.1798C8.0782 31.3595 11.4299 29.5783 14.7659 27.7658C15.0081 27.633 15.1565 27.758 15.3362 27.8517C18.1878 29.3439 21.0942 29.4689 24.0626 28.2267C24.1485 28.1955 24.2423 28.1721 24.3126 28.1096C24.9298 27.5861 25.4845 27.7971 26.1251 28.1486C29.1173 29.7971 32.1331 31.4143 35.1487 33.0238C36.4534 33.7191 37.094 34.766 37.0706 36.2426C37.0549 37.0785 37.0706 37.9067 37.0706 38.7426C37.0628 40.1254 36.1409 41.0395 34.7659 41.0395H20.0783L20.0782 41.0392Z"
-                            fill="#BFBFBC"
-                        />
-                        <path
-                            d="M19.8359 27.0625C17.0859 26.9687 14.8047 25.6094 13.1251 23.1953C10.3751 19.2344 10.7032 13.6093 13.8516 10.0001C17.2735 6.08599 22.9452 6.10943 26.336 10.0469C29.9376 14.2345 29.711 20.8437 25.8126 24.6405C24.2188 26.1952 22.3126 27.0312 19.8362 27.0624L19.8359 27.0625Z"
-                            fill="#BFBFBC"
-                        />
-                    </svg>
-                )}
-            </div>
+            <ContributorImage image={image} name={name} />
             <span className="author text-[14px] font-semibold">{name}</span>
         </>
     )
@@ -207,16 +201,26 @@ const Chevron = ({ open, className = '' }: { open: boolean; className: string })
     )
 }
 
-const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }: IMenu) => {
+const Menu = ({
+    name,
+    url,
+    children,
+    className = '',
+    handleLinkClick,
+    topLevel,
+    menuType = 'standard',
+    icon,
+}: IMenu) => {
     const location = useLocation()
     const pathname = replacePath(location?.pathname)
     const [isActive, setIsActive] = useState(false)
     const [open, setOpen] = useState<boolean | undefined>(false)
-    const buttonClasses = `mb-[1px] text-left flex justify-between items-center relative text-primary hover:text-primary dark:text-white dark:hover:text-white pl-3 pr-2 py-1 inline-block w-full rounded-sm text-[15px] relative active:top-[0.5px] active:scale-[.99] ${
+    const buttonClasses = `mb-[1px] text-left flex justify-between items-center relative text-primary hover:text-primary dark:text-white dark:hover:text-white pl-3 pr-2 py-1.5 inline-block w-full rounded-sm text-[15px] leading-tight relative active:top-[0.5px] active:scale-[.99] cursor-pointer ${
         children || topLevel
             ? 'hover:bg-gray-accent-light active:bg-[#DBDCD6] dark:hover:bg-gray-accent-dark transition min-h-[36px]'
             : ''
     } ${children && open ? 'bg-gray-accent-light dark:bg-gray-accent-dark font-bold' : ''}`
+
     useEffect(() => {
         const isOpen = (children?: IMenu[]): boolean | undefined => {
             return (
@@ -245,12 +249,20 @@ const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }
     }
 
     const isWithChild = children && children.length > 0
-
+    const MenuLink = { standard: Link, scroll: ScrollLink }[menuType]
+    const menuLinkProps = {
+        standard: {},
+        scroll: { offset: -50, smooth: true, duration: 300, hashSpy: true, spy: true },
+    }[menuType]
     return (
-        <ul className={`list-none m-0 p-0 text-lg font-semibold overflow-hidden ml-4 ${className}`}>
+        <ul className={`list-none m-0 p-0 text-lg font-semibold overflow-hidden mb-[1px] ml-4 ${className}`}>
             <li>
-                {name && url ? (
-                    <Link
+                {(url === undefined || url === null) && name ? (
+                    <p className="text-black dark:text-white font-semibold opacity-25 m-0 mt-3 mb-1 ml-3 text-[15px]">
+                        {name}
+                    </p>
+                ) : name && url ? (
+                    <MenuLink
                         onClick={() => {
                             handleLinkClick && handleLinkClick()
                             if (isWithChild) {
@@ -261,21 +273,29 @@ const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }
                             !topLevel ? 'opacity-50' : ''
                         } hover:opacity-100 transition-opacity ${isActive || isWithChild ? 'opacity-100' : ''}`}
                         to={url}
+                        {...menuLinkProps}
                     >
                         <AnimatePresence>
                             {isActive && (
                                 <motion.span
                                     variants={variants}
-                                    className="absolute w-[4px] bg-red rounded-[2px] h-[65%] left-0"
+                                    className="absolute w-[4px] bg-red rounded-[2px] top-[2px] h-[calc(100%_-_4px)] left-0"
                                     initial="hidden"
                                     animate="visible"
                                     exit="hidden"
                                 />
                             )}
                         </AnimatePresence>
-                        <span>{name}</span>
+                        {icon ? (
+                            <span className="cursor-pointer flex items-center space-x-2 text-[17px] font-semibold text-black hover:text-black">
+                                <span className="w-[25px]">{icon}</span>
+                                <span>{name}</span>
+                            </span>
+                        ) : (
+                            <span>{name}</span>
+                        )}
                         {isWithChild && <Chevron open={open ?? false} />}
-                    </Link>
+                    </MenuLink>
                 ) : (
                     <button className={`${buttonClasses} !p-0`} onClick={() => setOpen(!open)}>
                         {isWithChild ? (
@@ -305,16 +325,38 @@ const Menu = ({ name, url, children, className = '', handleLinkClick, topLevel }
     )
 }
 
-const TableOfContents = ({ menu, handleLinkClick }: { menu: IMenu[]; handleLinkClick?: () => void }) => {
+export const TableOfContents = ({
+    menu,
+    handleLinkClick,
+    menuType = 'standard',
+}: {
+    menu: IMenu[]
+    handleLinkClick?: () => void
+    title?: string | boolean
+    menuType?: 'scroll' | 'standard'
+}) => {
+    const Wrapper = {
+        standard: React.Fragment,
+        scroll: Scrollspy,
+    }[menuType]
+
+    const wrapperProps = {
+        standard: {},
+        scroll: {
+            componentTag: 'div',
+            offset: -50,
+            items: flattenMenu(menu)?.map((navItem) => navItem.url),
+            currentClassName: 'bg-gray-accent-light',
+        },
+    }[menuType]
+
     return (
-        <>
-            <p className="text-black dark:text-white font-semibold opacity-25 m-0 mb-2 ml-3 text-[15px]">
-                Table of contents
-            </p>
-            <nav>
+        <nav>
+            <Wrapper {...wrapperProps}>
                 {menu.map((menuItem) => {
                     return (
                         <Menu
+                            menuType={menuType}
                             topLevel
                             handleLinkClick={handleLinkClick}
                             className="ml-0"
@@ -323,14 +365,14 @@ const TableOfContents = ({ menu, handleLinkClick }: { menu: IMenu[]; handleLinkC
                         />
                     )
                 })}
-            </nav>
-        </>
+            </Wrapper>
+        </nav>
     )
 }
 
 const Breadcrumb = ({ crumbs }: { crumbs: ICrumb[] }) => {
     return (
-        <ul className="list-none flex m-0 p-0 mb-2 whitespace-nowrap overflow-auto">
+        <ul className="list-none flex mt-8 lg:mt-0 p-0 mb-2 whitespace-nowrap overflow-auto">
             {crumbs.map(({ name, url }, index) => {
                 const active = index === crumbs.length - 1
                 return (
@@ -377,9 +419,9 @@ const SidebarAction = ({ children, title, width, className = '', href, onClick }
 
 const NextPost = ({ contentContainerClasses = '', excerpt, frontmatter, fields }: INextPost) => {
     return (
-        <div className="py-6 border-t border-gray-accent-light dark:border-gray-accent-dark border-dashed mt-5">
+        <div className="py-8 border-t border-gray-accent-light dark:border-gray-accent-dark border-dashed">
             <div className={contentContainerClasses}>
-                <p className="text-lg text-black/40 dark:text-white/40 m-0 font-bold pt-6">Next article</p>
+                <p className="text-lg text-black/40 dark:text-white/40 m-0 font-bold">Next article</p>
                 <h3 className="text-xl font-bold m-0 my-1">{frontmatter?.title}</h3>
                 <p className="relative max-h-24 overflow-hidden">
                     {excerpt}
@@ -393,7 +435,7 @@ const NextPost = ({ contentContainerClasses = '', excerpt, frontmatter, fields }
 
 const Survey = ({ contentContainerClasses = '' }) => {
     return (
-        <div className="pt-8 pb-6 border-t border-gray-accent-light dark:border-gray-accent-dark border-dashed mt-5">
+        <div className="py-8 border-t border-gray-accent-light dark:border-gray-accent-dark border-dashed">
             <div className={contentContainerClasses}>
                 <DocsPageSurvey />
             </div>
@@ -406,6 +448,7 @@ export default function PostLayout({
     children,
     sidebar,
     contentWidth = 650,
+    menuWidth = 265,
     questions,
     menu,
     article = true,
@@ -414,6 +457,11 @@ export default function PostLayout({
     breadcrumb,
     hideSidebar,
     nextPost,
+    hideSurvey,
+    hideSearch,
+    contentContainerClassName,
+    menuType = 'standard',
+    searchFilter,
 }: IProps) {
     const { hash, pathname } = useLocation()
     const breakpoints = useBreakpoint()
@@ -429,7 +477,7 @@ export default function PostLayout({
     }
 
     useEffect(() => {
-        if (hash) {
+        if (hash && !hideSearch) {
             scroll.scrollMore(-50)
         }
     }, [])
@@ -461,20 +509,24 @@ export default function PostLayout({
     }, [sidebar, hideSidebar])
 
     const toc = tableOfContents?.filter((item) => item.depth > -1 && item.depth < 2)
-    const contentContainerClasses = `px-5 lg:px-12 w-full transition-all ${
-        hideSidebar ? 'lg:max-w-5xl' : !fullWidthContent ? 'lg:max-w-[746px]' : 'lg:max-w-full'
-    } ${menu ? 'mx-auto' : 'lg:ml-auto'}`
+    const contentContainerClasses =
+        contentContainerClassName ||
+        `px-5 lg:px-12 w-full transition-all ${
+            hideSidebar ? 'lg:max-w-5xl' : !fullWidthContent ? 'lg:max-w-3xl' : 'lg:max-w-full'
+        } ${menu ? 'mx-auto' : 'lg:ml-auto'}`
 
     return (
         <div id="menu-wrapper">
-            <div className="py-2 px-4 border-y border-dashed border-gray-accent-light dark:border-gray-accent-dark flex justify-between sticky top-[-2px] bg-tan dark:bg-primary z-10">
-                {menu && (
-                    <button onClick={handleMobileMenuClick} className="py-2 px-3 block lg:hidden">
-                        <MobileMenu style={{ transform: `rotate(${mobileMenuOpen ? '180deg' : '0deg'})` }} />
-                    </button>
-                )}
-                <SearchBar />
-            </div>
+            {!hideSearch && (
+                <div className="py-2 px-4 border-y border-dashed border-gray-accent-light dark:border-gray-accent-dark flex justify-between sticky top-[-2px] bg-tan dark:bg-primary z-30">
+                    {menu && (
+                        <button onClick={handleMobileMenuClick} className="py-2 px-3 block lg:hidden">
+                            <MobileMenu style={{ transform: `rotate(${mobileMenuOpen ? '180deg' : '0deg'})` }} />
+                        </button>
+                    )}
+                    <SearchBar base={searchFilter} />
+                </div>
+            )}
             {menu && (
                 <PushMenu
                     width="calc(100vw - 80px)"
@@ -495,46 +547,50 @@ export default function PostLayout({
                     isOpen={mobileMenuOpen}
                 >
                     <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark pt-6 px-6">
-                        <TableOfContents handleLinkClick={() => setMobileMenuOpen(false)} menu={menu} />
+                        <TableOfContents
+                            menuType={menuType}
+                            handleLinkClick={() => setMobileMenuOpen(false)}
+                            menu={menu}
+                        />
                     </div>
                 </PushMenu>
             )}
             <div
                 style={{
                     gridAutoColumns: menu
-                        ? `265px 1fr 1fr 265px`
+                        ? `${menuWidth}px 1fr 1fr 265px`
                         : `1fr minmax(auto, ${contentWidth}px) minmax(max-content, 1fr)`,
                 }}
                 className="w-full relative lg:grid lg:grid-flow-col items-start -mb-20"
             >
                 {menu && (
-                    <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:block hidden">
-                        <aside className="lg:sticky top-10 flex-shrink-0 w-full lg:max-w-[265px] justify-self-end px-2 lg:box-border my-10 lg:my-0 lg:pt-10 pb-4 mr-auto overflow-y-auto lg:h-[calc(100vh-40px)]">
-                            <TableOfContents menu={menu} />
+                    <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:block hidden relative z-20">
+                        <aside className="lg:sticky bg-tan dark:bg-primary top-10 flex-shrink-0 w-full justify-self-end px-4 lg:box-border my-10 lg:my-0 lg:py-4 mr-auto overflow-y-auto lg:h-[calc(100vh-40px)]">
+                            <TableOfContents menuType={menuType} menu={menu} />
                         </aside>
                     </div>
                 )}
                 <article
                     key={`${title}-article`}
                     id="content-menu-wrapper"
-                    className="col-span-2 lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-10 lg:mt-0 lg:pt-12 lg:pb-8 ml-auto w-full h-full box-border"
+                    className="col-span-2 lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:pt-12 lg:pb-8 ml-auto w-full h-full box-border"
                 >
                     <div className={contentContainerClasses}>
                         {breadcrumb && <Breadcrumb crumbs={breadcrumb} />}
-                        <div className="article-content">{children}</div>
-                        {questions && questions}
+                        <div>{children}</div>
+                        {questions}
                     </div>
-                    <Survey contentContainerClasses={contentContainerClasses} />
+                    {!hideSurvey && <Survey contentContainerClasses={contentContainerClasses} />}
                     {nextPost && <NextPost {...nextPost} contentContainerClasses={contentContainerClasses} />}
                 </article>
                 {!hideSidebar && sidebar && (
                     <aside
                         key={`${title}-sidebar`}
-                        className="flex-shrink-0 w-full justify-self-end my-10 lg:my-0 mr-auto h-full lg:px-0 px-5 box-border"
+                        className="flex-shrink-0 w-full justify-self-end my-10 lg:my-0 mr-auto h-full lg:px-0 px-4 box-border"
                     >
                         <div className="h-full flex flex-col divide-y divide-gray-accent-light dark:divide-gray-accent-dark divide-dashed">
                             <div className="relative h-full">
-                                <div ref={topSidebarSection} className="pt-6 top-10 sticky">
+                                <div ref={topSidebarSection} className="pt-4 top-10 sticky">
                                     {sidebar}
                                 </div>
                             </div>
@@ -543,9 +599,11 @@ export default function PostLayout({
                                 {view === 'Article' && toc?.length > 1 && !showTocButton && (
                                     <div
                                         style={{ visibility: showTocButton === null ? 'hidden' : 'visible' }}
-                                        className="px-5 lg:px-8 lg:pb-4 lg:block hidden"
+                                        className="px-4 lg:px-8 lg:pb-4 lg:block hidden"
                                     >
-                                        <h4 className="text-black dark:text-white font-semibold opacity-25 m-0 mb-1 text-sm">Jump to:</h4>
+                                        <h4 className="text-black dark:text-white font-semibold opacity-25 m-0 mb-1 text-sm">
+                                            Jump to:
+                                        </h4>
                                         <Scrollspy
                                             offset={-50}
                                             className="list-none m-0 p-0 flex flex-col"

@@ -12,6 +12,8 @@ If you submit a Pull Request to a repository under the `PostHog` organization, a
 
 We usually give out $100 for a product or app-related PR, and $25 for something on posthog.com (but we have gone over and above this for particularly large community PRs before!)
 
+If, after a few days of having had your PR merged, you still didn't get a merch code, you can email us at _[hey@posthog.com](mailto:hey@posthog.com)_ and we'll sort it out! Someone on the PostHog team will send you a code [manually](/handbook/company/merch-store#individuals). 
+
 ## Apps
 
 If you build a app for PostHog that is accepted into our [official repository](https://github.com/PostHog/plugin-repository), we will list you as a contributor in the categories `code` and `plugin` or `app`, as well as send you some merch. 

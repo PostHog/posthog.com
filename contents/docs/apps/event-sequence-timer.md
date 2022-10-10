@@ -15,7 +15,7 @@ This app measures the time it takes for a user to perform one event (`EventB`), 
 
 The Event Sequence Timer requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)!
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
 ### How do I install the Event Sequence Timer app?
 
@@ -42,6 +42,10 @@ If you select No, the stored timestamp will only be set once and never updated. 
 The Event Sequence Timer app measures time between two events (`EventA` and `EventB`) in milliseconds.
 
 When a sequence is completed, the Event Sequence Timer adds a new property called `time_since_eventA` to `EventB`. You can then use this property in analysis with other PostHog apps.
+
+### Configuration
+
+<AppParameters />
 
 ### Is the source code for this app available?
 

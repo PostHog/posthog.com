@@ -1,7 +1,7 @@
 import { DocSearchModal } from '@docsearch/react'
 import { Blockquote } from 'components/BlockQuote'
 import Breadcrumbs from 'components/Breadcrumbs'
-import { CodeBlock } from 'components/CodeBlock'
+import { MdxCodeBlock } from 'components/CodeBlock'
 import { Days } from 'components/CommunityQuestions/Question'
 import { Check } from 'components/Icons/Icons'
 import { InlineCode } from 'components/InlineCode'
@@ -12,6 +12,7 @@ import Icon from 'components/SupportImages/Icon'
 import { ZoomImage } from 'components/ZoomImage'
 import { motion } from 'framer-motion'
 import { GatsbyImage, getImage, StaticImage } from 'gatsby-plugin-image'
+import { createHubSpotContact } from 'lib/utils'
 import React, { useState } from 'react'
 import Scroll from 'react-scroll'
 import { Form, Squeak } from 'squeak-react'
@@ -139,7 +140,7 @@ const Question = ({ question }) => {
     const components = {
         inlineCode: InlineCode,
         blockquote: Blockquote,
-        pre: CodeBlock,
+        pre: MdxCodeBlock,
         img: ZoomImage,
     }
     return (
@@ -234,7 +235,7 @@ export default function FAQ() {
                             <TopLink
                                 title="Partners"
                                 description="Hosting & support"
-                                link="/marketplace"
+                                link="/partners"
                                 icon="partners"
                             />
                             <TopLink title="FAQ" description=" " link="/faq" icon="faq2" />
@@ -292,13 +293,12 @@ export default function FAQ() {
                     <h3>Recent questions</h3>
                     <Element name="squeak-top" />
                     <Squeak
+                        onSignUp={(user) => createHubSpotContact(user)}
                         onSubmit={(_values, formType) =>
                             formType === 'question' && scroller.scrollTo('squeak-top', { smooth: true })
                         }
                         slug={null}
                         apiHost="https://squeak.cloud"
-                        apiKey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB4aXBrcXV2d3FhYXVudXpqb2dlIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NDk3MjE3ODUsImV4cCI6MTk2NTI5Nzc4NX0.SxdOpxHjVwap7sDUptK2TFJl7WK3v3HLuKbzb0JKeKg"
-                        url="https://pxipkquvwqaaunuzjoge.supabase.co"
                         organizationId="a898bcf2-c5b9-4039-82a0-a00220a8c626"
                     />
                     <Element name="squeak-bottom" />

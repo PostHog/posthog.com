@@ -1,5 +1,5 @@
 ---
-title: Python Library
+title: Python
 sidebarTitle: Python
 sidebar: Docs
 showTitle: true
@@ -12,6 +12,7 @@ features:
     featureFlags: true
     groupAnalytics: true
 ---
+import CohortExpansionSnippet from './snippets/cohort-expansion'
 
 This is an optional library you can install if you're working with Python. It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server side application that needs performance.
 
@@ -73,7 +74,7 @@ Optionally you can submit:
 -   `properties`, which is a dictionary with any information you'd like to add
 -   `timestamp`, a datetime object for when the event happened. If this isn't submitted, it'll be set to the current time
 -   `uuid`, a unique `uuid` for the event, leave blank to autogenerate
--   `send_feature_flags`, a boolean that determines whether to send current known feature flags with this event. This is useful when running experiments which depends on this event.
+-   `send_feature_flags`, a boolean that determines whether to send current known feature flags with this event. This is useful when running experiments which depends on this event. However, this makes things slow. [Read this tutorial for manually computing this information and speeding things up](/tutorials/experiments#step-2-sending-the-right-events)
 
 For example:
 
@@ -175,9 +176,12 @@ When using them with one of libraries, you should check if a feature flag is ena
 
 **How to check if a flag is enabled**
 
+> **Note:** Whenever we face an error computing the flag, the library returns `None`, instead of `true`, `false`, or a string variant value.
+
+
 ```python
 posthog.feature_enabled('beta-feature', 'distinct id')
-# returns True or False
+# returns True or False or None
 ```
 
 **Example use case**
@@ -196,10 +200,12 @@ def homepage(request):
 
 If you're using multivariate feature flags, you can also get not just whether the flag is enabled, but what value its enabled to.
 
+> **Note:** Whenever we face an error computing the flag, the library returns `None`, instead of `true`, `false`, or a string variant value.
+
 
 ```python
 posthog.get_feature_flag('beta-feature', 'distinct id')
-# returns string or None
+# returns string or True or False or None
 ```
 
 **Overriding server properties**
@@ -218,7 +224,7 @@ The same holds for groups. If you have a group name `organisation`, you can add 
 
 
 ```python
-posthog.get_feature_flag('beta-feature', 'distinct id', groups={'organisation': 'google', group_properties={'organisation': {'is_authorized': True})
+posthog.get_feature_flag('beta-feature', 'distinct id', groups={'organisation': 'google'}, group_properties={'organisation': {'is_authorized': True})
 # returns string or None
 ```
 
@@ -250,6 +256,19 @@ posthog.get_feature_flag('beta-feature', 'distinct id', person_properties={'is_a
 ```
 
 > **Note:** New feature flag definitions are polled every 30 seconds by default, which means there will be up to a 30 second delay between you changing the flag definition, and it reflecting on your servers. You can change this default on the client by setting `posthog.poll_interval = <value in seconds>`.
+
+This works for `get_all_flags` as well. It evaluates all flags locally if possible. If even one flag isn't locally evaluable, it falls back to decide.
+
+```python
+posthog.get_all_flags('distinct id', groups={}, person_properties={'is_authorized': True}, group_properties={})
+# returns dict of flag key and value pairs.
+```
+
+**Restricting evaluation to local only**
+
+Sometimes, performance might matter to you so much that you never want an HTTP request roundtrip delay when computing flags. In this case, you can set the `only_evaluate_locally` parameter to true, which tries to compute flags only with the properties it has. If it fails to compute a flag, it returns `None`, instead of going to PostHog's servers to get the value.
+
+<CohortExpansionSnippet />
 
 ### Group analytics
 

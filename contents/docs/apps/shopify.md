@@ -23,7 +23,7 @@ If there is an error while fetching orders, the next run of `runEveryMinute()` w
 
 Using this app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)!
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
 ### How do I install this app for PostHog?
 
@@ -38,6 +38,10 @@ To configure the Shopify Connector you will need to set the store name from your
 Additionally, you will need to create a Shopify Access Token, which the Shopify Connector app will call to fetch orders into PostHog.
 
 To create a Shopify Access Token, create an app on the admin page of your Shopify Account and generate `Admin API access token` in the API Credentials tab or your newly created Shopify app.
+
+### Configuration
+
+<AppParameters />
 
 ### Is the source code for this app available?
 

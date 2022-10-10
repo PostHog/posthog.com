@@ -12,7 +12,7 @@ export const WorkingAtPostHog = () => {
                 <div className="flex-0 text-center mb-12 md:mb-0 md:text-left md:max-w-xs md:mr-4">
                     <h3 className="text-4xl">
                         Find out what it's like working at PostHog according to{' '}
-                        <span className="text-orange">our team!</span>
+                        <span className="text-red">our team!</span>
                     </h3>
                 </div>
                 <div className="flex-1">

@@ -57,7 +57,7 @@ As such, you can now filter your purchase events based on product**size**number 
 
 The Property Flattener requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)!
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
 ### How do I install the Property Flattener?
 
@@ -74,6 +74,10 @@ The default separator for nested properties is two subsequent underscores (\_\_)
 -   `/`
 
 When picking your separator, make sure it will not clash with your property naming patterns! There be dragons.
+
+### Configuration
+
+<AppParameters />
 
 ### Is the source code for this app available?
 

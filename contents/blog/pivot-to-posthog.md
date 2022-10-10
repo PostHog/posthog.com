@@ -75,7 +75,4 @@ We were off to the races!
 
 _Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
 
-<NewsletterForm
-compact
-/>
 

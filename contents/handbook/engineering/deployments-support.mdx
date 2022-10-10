@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-If you're the week's support hero or you are providing support for a customer and they have questions about their self-hosted deployment, follow this guide to provide initial support before looping in someone from the Platform team.
+If you're the week's support hero or you are providing support for a customer and they have questions about their self-hosted deployment, follow this guide to provide initial support before looping in someone from the Infrastructure team.
 
 ## Gather basic information
 
@@ -50,7 +50,7 @@ Here's a sample message that should help gather the relevant information up-fron
 
 2. When they send you the output from the command in step 1, if any of the pods has a status other than `Running`, ask them for the output of `kubectl logs pod-name -n posthog`
 
-3. The output from the previous step **may or may not** be familiar to you. Sometimes the logs will be something you've seen before. If that's the case, try to reproduce the issue locally and come up with a fix. If things are cryptic to you, loop in someone from the Platform team.
+3. The output from the previous step **may or may not** be familiar to you. Sometimes the logs will be something you've seen before. If that's the case, try to reproduce the issue locally and come up with a fix. If things are cryptic to you, loop in someone from the Infrastructure team.
 
 4. If a pod is listed as `Failed`, suggest that they try an upgrade with `helm upgrade -f values.yaml -n posthog`
 
@@ -102,7 +102,7 @@ Check out our [Troubleshooting page](/docs/self-host/deploy/troubleshooting) for
 
 ## All is lost
 
-The idea of this doc is to cover some basic support that you can provide in order to either help the customer solve their issue or gather basic info before someone from the Platform team to show up.
+The idea of this doc is to cover some basic support that you can provide in order to either help the customer solve their issue or gather basic info before someone from the Infrastructure team to show up.
 
 However, never hesitate to call us! We're more than happy to help.
 

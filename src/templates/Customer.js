@@ -72,20 +72,22 @@ export default function Customer({ data }) {
                 </div>
                 <div className="max-w-screen-lg lg:max-w-screen-lg 2xl:max-w-screen-xl mx-auto px-4 flex flex-col md:flex-row items-start mt-16 md:mt-20">
                     <aside className="md:mr-9 mb-9 md:mb-0 md:sticky top-20 md:pr-9 md:border-r border-dashed border-gray-accent-light w-full md:w-auto">
-                        {logo && <img className="w-full max-w-[150px]" src={logo.publicURL} />}
+                        {logo && <img className="w-full max-w-[200px]" src={logo.publicURL} />}
                         <ul className="list-none flex-col flex space-y-8 p-0 mt-10 min-w-[250px]">
                             <Tags title="Industry" tags={industries} />
                             <Tags title="Users" tags={users} />
                             <Tags title="Tools used" tags={toolsUsed} />
                         </ul>
                     </aside>
-                    <section className="article-content customer-content">
-                        <h1 className="text-3xl">{title}</h1>
-                        <MDXProvider components={components}>
-                            <MDXRenderer>{body}</MDXRenderer>
-                        </MDXProvider>
+                    <div>
+                        <section className="article-content customer-content">
+                            <h1 className="text-5xl leading-none">{title}</h1>
+                            <MDXProvider components={components}>
+                                <MDXRenderer>{body}</MDXRenderer>
+                            </MDXProvider>
+                        </section>
                         <FooterCTA />
-                    </section>
+                    </div>
                 </div>
             </Layout>
         </>

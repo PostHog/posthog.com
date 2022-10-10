@@ -501,20 +501,21 @@ export const SelfHosting = () => {
 
                     <CTA url="/docs/self-host" title="Learn more" />
                 </Content>
-                <div className="mt-auto w-full">
-                    <div className="w-full">
+                <div className="flex items-end mt-auto w-full">
+                    <div className="hidden md:block mb-3">
+                        <hr className="w-[20px] h-[3px] rounded-full" />
+                        <div className="text-primary/80 inline-block leading-tight text-[12px]">
+                            Deploy with <Link to="/docs/self-host/deploy/aws">AWS</Link>,{' '}
+                            <Link to="/docs/self-host/deploy/gcp">Google Cloud</Link>,{' '}
+                            <Link to="/docs/self-host/deploy/digital-ocean">DigitalOcean</Link>, and more.
+                        </div>
+                    </div>
+                    <div className="md:relative w-3/4">
                         <motion.div
                             transition={{ delay: 0.5 }}
                             initial={{ translateY: '100%' }}
                             animate={{ translateY: 0 }}
-                        >
-                            <StaticImage
-                                placeholder="none"
-                                quality={100}
-                                className="w-full max-w-[350px]"
-                                src="./images/self-hosting-hog.png"
-                            />
-                        </motion.div>
+                        ></motion.div>
                     </div>
                 </div>
             </ContentContainer>

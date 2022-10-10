@@ -21,7 +21,7 @@ Here, we’re sharing our guide to the best free and [open-source tools](/blog/b
 
 PostHog is an [all-in-one product analytics suite](/product) that integrates all of the essential features you need to understand your users. It collects and visualizes data on how people are using your products, provides insights into trends and retention, and helps to remove bottlenecks and reduce churn.
 
-Our A/B testing features, which we call our Experimentation suite, are complemented by other tools like [Feature Flags](/product/feature-flags), [Session Recording](/prodcut/session-recording), [Heatmaps](/product/heatmaps), [User Paths](/product/user-paths) and more, making it one of the most comprehensive analytics platforms around – open source, or otherwise.
+Our A/B testing features, which we call our Experimentation suite, are complemented by other tools like [Feature Flags](/product/feature-flags), [Session Recording](/product/session-recording), [Heatmaps](/product/heatmaps), [User Paths](/product/user-paths) and more, making it one of the most comprehensive analytics platforms around – open source, or otherwise.
 
 [PostHog’s Experimentation suite](https://posthog.com/docs/user-guides/experimentation) allows you to flexibly test your hypotheses with up to three test variants. A control group is also assigned and PostHog will automatically estimate the number of users exposed, and we use Bayesian analysis to calculate the results and ensure they're significant.
 

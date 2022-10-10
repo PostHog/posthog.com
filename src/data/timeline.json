@@ -225,24 +225,6 @@
         "description": "Session analysis across insights"
     },
     {
-        "date": "2022-07-01",
-        "type": "feature",
-        "description": "In-app setup guided tour",
-        "future": true
-    },
-    {
-        "date": "2022-09-01",
-        "type": "feature",
-        "description": "PostHog Cloud EU",
-        "future": true
-    },
-    {
-        "date": "2022-09-01",
-        "type": "feature",
-        "description": "Session Recordings DevTools",
-        "future": true
-    },
-    {
         "date": "2022-09-01",
         "type": "feature",
         "description": "Turbo feature flags",
@@ -251,19 +233,19 @@
     {
         "date": "2022-09-01",
         "type": "feature",
-        "description": "Extenended insight visualizations",
+        "description": "Extended insight visualizations",
         "future": true
     },
     {
         "date": "2022-11-01",
         "type": "feature",
-        "description": "Unified querying across events, persons, sessions, groups",
+        "description": "SQL insights",
         "future": true
     },
     {
         "date": "2022-11-01",
         "type": "feature",
-        "description": "Automated insight recommendations",
+        "description": "Enhanced Customer Data Platform",
         "future": true
     },
     {

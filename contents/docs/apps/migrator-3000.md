@@ -19,7 +19,7 @@ No, this app will only migrate events and objects derived from events, such as p
 
 The Migrator 3000 app requires \*two\*\* PostHog Cloud, or a self-hosted PostHog instances running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)!
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
 ### How do I install the Migrator 3000 app for PostHog Cloud?
 
@@ -43,6 +43,10 @@ To configure the app, follow the configuration steps once the app is enabled and
 -   **Date to start exporting from** - How much historic data do you want to export? Use the format YYYY-MM-DD.
 
 -   **PostHog version** - Self-hosted users can find their PostHog version from /instance/status
+
+### Configuration
+
+<AppParameters />
 
 ### Were there 2999 earlier versions of this app?
 

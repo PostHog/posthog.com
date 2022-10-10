@@ -15,7 +15,7 @@ The Sendgrid Connector sends event and emails data from PostHog into Sendgrid wh
 
 The Sendgrid Connector requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)!
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
 You'll also need Sendgrid access, obviously.
 
@@ -25,6 +25,10 @@ You'll also need Sendgrid access, obviously.
 2. Search for 'Sendgrid' and select the app, press Install.
 3. Add your Sendgrid API key at the configuration step.
 4. Enable the app and watch your contacts list get populated in Sendgrid!
+
+### Configuration
+
+<AppParameters />
 
 ### Is the source code for this app available?
 

@@ -1,151 +1,97 @@
 import React from 'react'
 import InfoIcon from '../InfoIcon/Index'
 import CheckIcon from '../../images/check.svg'
-import MinusIcon from '../../images/x.svg'
-import WarningIcon from '../../images/warning.svg'
-import Link from '../Link'
+import XIcon from '../../images/x.svg'
+import Tooltip from 'components/Tooltip'
 
-type AvailablePlans = 'free' | 'standard' | 'enterpriseCloud' | 'startup' | 'openSource' | 'scale' | 'enterprise'
-
-interface PlanInterface {
-    key: AvailablePlans
-    name: string
+type FeatureAvailabilityProps = {
+    availability:
+        | {
+              openSource?: boolean
+              free: boolean
+              selfServe: boolean
+              enterprise: boolean
+          }
+        | boolean
 }
 
-const PLANS: Record<'cloud' | 'selfHosted', PlanInterface[]> = {
-    cloud: [
-        {
-            key: 'free',
-            name: 'Free',
-        },
-        {
-            key: 'startup',
-            name: 'Startup',
-        },
-        {
-            key: 'standard',
-            name: 'Self-Serve',
-        },
-        {
-            key: 'enterpriseCloud',
-            name: 'Enterprise',
-        },
-    ],
-    selfHosted: [
-        {
-            key: 'openSource',
-            name: 'Open-source',
-        },
-        {
-            key: 'scale',
-            name: 'Self-Serve',
-        },
-        {
-            key: 'enterprise',
-            name: 'Enterprise',
-        },
-    ],
-}
-
-interface FeatureAvailabilityProps {
-    allPlans?: boolean
-    availablePlans?: AvailablePlans[]
-    /* Restricted plan means there are some limitations to the specific functionality available for that feature.
-        Example: Paths is available for everyone, but advanced display features or end point selection is not available on free tiers.
-        TODO: Support clarifying restricions.
-    */
-    restrictedPlans?: AvailablePlans[]
-}
-
-function Plan({
-    available,
-    name,
-    restricted,
-}: {
-    available?: boolean
-    name: string
-    restricted?: boolean
-}): JSX.Element {
-    return (
-        <li
-            className={
-                restricted
-                    ? 'restricted flex items-center !text-sm space-y-2'
-                    : available
-                    ? 'flex items-center !text-sm space-y-2'
-                    : 'unavailable flex items-center !text-sm space-y-2'
-            }
-        >
-            {restricted ? (
-                <>
-                    <img src={WarningIcon} alt="Restriction apply" className="h-4 w-4 mr-2" aria-hidden="true" />
-                </>
-            ) : available ? (
-                <>
-                    <img src={CheckIcon} alt="Available" className="h-4 w-4 mr-2" aria-hidden="true" />
-                </>
-            ) : (
-                <>
-                    <img src={MinusIcon} alt="Not available" className="h-4 w-4 mr-2" aria-hidden="true" />
-                </>
-            )}
-            {name}
-            {restricted}
-        </li>
+const renderAvailabilityIcon = (isAvailable: boolean) => {
+    return isAvailable ? (
+        <img src={CheckIcon} alt="Available" className="h-4 w-4 mr-2" aria-hidden="true" />
+    ) : (
+        <img src={XIcon} alt="Not available" className="h-4 w-4 mr-2" aria-hidden="true" />
     )
 }
 
-export function FeatureAvailability({
-    allPlans,
-    availablePlans,
-    restrictedPlans,
-}: FeatureAvailabilityProps): JSX.Element {
+export function FeatureAvailability({ availability }: FeatureAvailabilityProps): JSX.Element {
+    const diffOpenSource = typeof availability !== 'boolean' && 'openSource' in availability
+
     return (
-        <div className="border-t border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark pt-4 pb-1 space-y-2 -mt-2 mb-5">
-            <h6 className="text-primary/50 dark:text-primary-dark/50 !mt-0 mb-2 pb-1 font-semibold text-base">Where is this feature available?</h6>
-            <div className="grid grid-cols-3 gap-4">
+        <div className="border-t border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark py-2 space-y-2 mt-2 mb-5 ">
+            <h6 className="text-primary/50 dark:text-primary-dark/50 !my-0 font-semibold text-base">
+                Where is this feature available?
+            </h6>
+
+            <div
+                className={`grid grid-flow-col-dense ${
+                    diffOpenSource
+                        ? 'grid-rows-4 grid-cols-2 sm:grid-cols-4 sm:grid-rows-2'
+                        : 'grid-rows-3 grid-cols-2 sm:grid-cols-3 sm:grid-rows-2'
+                } sm:grid-flow-row-dense gap-x-4 items-center`}
+            >
+                {diffOpenSource ? (
+                    <div>
+                        <h5 className="flex items-center space-x-1.5 text-base !my-0">
+                            <span>Open-source</span>
+                            <Tooltip title="Free and Open-source">
+                                <span>
+                                    <InfoIcon className="w-4 h-4" />
+                                </span>
+                            </Tooltip>
+                        </h5>
+                    </div>
+                ) : null}
+
                 <div>
-                    <h5 className="flex items-center space-x-1 text-base !mt-0 mb-2">
-                        <span>Self-hosted plans</span>
-                        <Link
-                            href="/pricing?realm=self-hosted"
-                            className="!pb-0 group hover:!bg-none active:!bg-none focus:!bg-none"
-                        >
-                            <InfoIcon className="w-4 h-4 opacity-75 group-hover:opacity-100 relative transform transition-all group-hover:scale-[1.2] active:top-[1px] active:scale-[1.1]" />
-                        </Link>
+                    <h5 className="flex items-center space-x-1.5 text-base !my-0">
+                        {diffOpenSource ? <span>Free</span> : <span>Free / Open-source</span>}
+                        <Tooltip title="PostHog Cloud (no credit card added) or FOSS">
+                            <span>
+                                <InfoIcon className="w-4 h-4" />
+                            </span>
+                        </Tooltip>
                     </h5>
-                    <ul className="p-0 mb-0">
-                        {PLANS.selfHosted.map((plan) => (
-                            <Plan
-                                key={plan.key}
-                                available={allPlans || availablePlans?.includes(plan.key)}
-                                name={plan.name}
-                                restricted={restrictedPlans?.includes(plan.key)}
-                            />
-                        ))}
-                    </ul>
                 </div>
-                <div className="col-span-2">
-                    <h5 className="flex items-center space-x-1 text-base !mt-0 mb-2">
-                        <span>Cloud plans</span>
-                        <Link
-                            href="/pricing?realm=cloud"
-                            className="!pb-0 group hover:!bg-none active:!bg-none focus:!bg-none"
-                        >
-                            <InfoIcon className="w-4 h-4 opacity-75 group-hover:opacity-100 relative transform transition-all group-hover:scale-[1.2] active:top-[1px] active:scale-[1.1]" />
-                        </Link>
+
+                <div>
+                    <h5 className="flex items-center space-x-1.5 text-base !my-0">
+                        <span>Self-serve</span>
+                        <Tooltip title="PostHog Cloud or Self-hosted (with credit card entered)">
+                            <span>
+                                <InfoIcon className="w-4 h-4" />
+                            </span>
+                        </Tooltip>
                     </h5>
-                    <ul className="pl-0 mb-0 grid sm:grid-cols-2">
-                        {PLANS.cloud.map((plan) => (
-                            <Plan
-                                key={plan.key}
-                                available={allPlans || availablePlans?.includes(plan.key)}
-                                name={plan.name}
-                                restricted={restrictedPlans?.includes(plan.key)}
-                            />
-                        ))}
-                    </ul>
                 </div>
+
+                <div>
+                    <h5 className="flex items-center space-x-1.5 text-base !my-0">
+                        <span>Enterprise</span>
+                        <Tooltip title="PostHog Cloud or Self-hosted (with enterprise license)">
+                            <span>
+                                <InfoIcon className="w-4 h-4" />
+                            </span>
+                        </Tooltip>
+                    </h5>
+                </div>
+
+                {diffOpenSource ? renderAvailabilityIcon(availability.openSource || false) : null}
+
+                {renderAvailabilityIcon(typeof availability === 'boolean' ? availability : availability.free)}
+
+                {renderAvailabilityIcon(typeof availability === 'boolean' ? availability : availability.selfServe)}
+
+                {renderAvailabilityIcon(typeof availability === 'boolean' ? availability : availability.enterprise)}
             </div>
         </div>
     )

@@ -1,0 +1,84 @@
+---
+title: Jobs
+---
+
+## Creating a new job
+
+- Log in to [Ashby](https://www.ashbyhq.com/)
+- Hover `Jobs`
+- Click `Admin`
+- Click `Create Job`
+- Fill in the required fields
+- Click `Create Draft`
+
+You will now be on the settings page for the newly created job.
+
+### Custom fields
+We use custom fields to connect various data to each job posting. Below is the description and purpose of each.
+
+#### Team
+Team is the only required custom field. The value selected determines pineapple preference, objectives, mission, team lead, and which team members appear in the sidebar.
+
+#### Timezone(s)
+Determines the preferred timezone for the position. If a value exists, it appears under the title.
+
+#### Repo
+Determines which repo to pull GitHub issues from if using the Issues custom field.
+
+#### Issues
+A comma-separated list of GitHub issue numbers relevant to the position. Queried at build-time and shown in the automatically created `Typical tasks` section.
+
+#### Salary
+Determines which role to use in the salary calculator. If no value is present, the job title is used. The calculator is not rendered if there is no matching role in the compensation calculator.
+
+## Creating a new job posting
+
+Pages are only created for *listed* job postings. While viewing a job in Ashby:
+- Click `Job Postings` in the sidebar
+- Click `New Draft`
+
+From here, you can create a job description and add automations.
+
+### Job descriptions
+Each job posting can have a different description. When creating a new description, separate sections by H2 if you would like them to be collapsible. When the site is built, sections that start with an H2 are transformed into collapsible elements and added to the table of contents. 
+
+Below is a list of the automatically created sections and how they work.
+
+#### Salary
+This section appears if the job title or Salary custom field matches a job in the [SF benchmark file](https://github.com/PostHog/posthog.com/blob/master/src/components/CompensationCalculator/compensation_data/sf_benchmark.ts).
+
+#### Benefits
+This section appears on all job postings. The data in this section can be updated [here](https://github.com/PostHog/posthog.com/blob/master/src/components/Careers/Benefits/index.tsx).
+
+#### Typical tasks
+This section appears if any GitHub issues are added to the Issues custom field in Ashby. The custom field accepts a comma-separated list of GitHub issue numbers.
+
+#### Objectives
+This section appears if the team has a `mission.mdx` file in their team folder. [Example](https://github.com/PostHog/posthog.com/blob/master/contents/handbook/people/team-structure/app-east/mission.mdx) 
+
+#### Interview process
+This section appears on all job postings. The data in this section can be updated [here](https://github.com/PostHog/posthog.com/blob/master/src/components/Job/InterviewProcess.tsx). To add a custom interview process for a specific job, add a new key to the `roleInterviewProcess` variable and assign an array of [IInterviewProcess](https://github.com/PostHog/posthog.com/blob/1fb3d8351f8fcf6e18cd28e4ba22ff3d84fbb8fc/src/components/Job/InterviewProcess.tsx#L3) objects.
+
+Example:
+
+```JavaScript
+const roleInterviewProcess: Record<string, IInterviewProcess[]> = {
+    'Site Reliability Engineer - Kubernetes': [
+        defaultInterviewProcess[0],
+        defaultInterviewProcess[1],
+        {
+            title: 'Technical interview',
+            description: `You'll meet with an Engineer who will evaluate skills needed to be successful in your role.`,
+            badge: '1 hour',
+        },
+        defaultInterviewProcess[3],
+        defaultInterviewProcess[4],
+    ],
+}
+```
+
+#### Apply
+This section appears on all job postings. The input fields here directly reflect the Application Form assigned to the job. The Application Form can be found on the job's settings page.
+
+## Getting the job to appear on the site
+If the job posting is published, the job will appear automatically the next time the site is rebuilt.

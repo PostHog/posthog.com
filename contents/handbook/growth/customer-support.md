@@ -8,7 +8,7 @@ showTitle: true
 
 You can build a good company by focusing on getting lots of customers. To build a great company, you must delight your existing customers. This means that the journey doesn't simply end once we sign up a user - even more important is to ensure that PostHog is consistently delivering value for them.
 
-## How we ensure amazing custoemr support at PostHog
+## How we ensure amazing customer support at PostHog
 
 ### It's easy for customers to reach us
 

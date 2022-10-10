@@ -36,19 +36,19 @@ Personal API keys allow full access to your account, just like e-mail address an
 There are three options:
 
 1. Use the `Authorization` header and `Bearer` authentication, like so:
-    ```JavaScript
+    ```js
     const headers = {
         Authorization: `Bearer ${POSTHOG_PERSONAL_API_KEY}`
     }
     ```
 2. Put the key in request body, like so:
-    ```JavaScript
+    ```js
     const body = {
         personal_api_key: POSTHOG_PERSONAL_API_KEY
     }
     ```
 3. Put the key in query string, like so:
-    ```JavaScript
+    ```js
     const url = `https://posthog.example.com/api/event/?personal_api_key=${POSTHOG_PERSONAL_API_KEY}`
     ```
 
@@ -116,7 +116,7 @@ Note: We don't automatically add new API endpoints to the sidebar, so you'll nee
 
 You can add a `help_text="Field that does x"` attribute to any Model or Serializer field to help users understand what a specific field is used for:
 
-```py
+```python
 class Insight(models.Model):
     last_refresh: models.DateTimeField = models.DateTimeField(blank=True, null=True, help_text="When the cache for the result of this insight was last refreshed.")
 
@@ -129,7 +129,7 @@ class InsightSerializer(TaggedItemSerializerMixin, InsightBasicSerializer):
 
 To add a description to the top of a page, add a comment to the **viewset** class:
 
-```py
+```python
 class InsightViewSet(TaggedItemViewSetMixin, StructuredViewSetMixin, viewsets.ModelViewSet):
     """
     Stores saved insights along with their entire configuration options. Saved insights can be stored as standalone
@@ -139,7 +139,7 @@ class InsightViewSet(TaggedItemViewSetMixin, StructuredViewSetMixin, viewsets.Mo
 
 You can do the same thing for specific endpoints.
 
-```py
+```python
 @action(methods=["GET", "POST"], detail=False)
 def trend(self, request: request.Request, *args: Any, **kwargs: Any) -> Response:
     """
@@ -157,7 +157,7 @@ The serializer for insight [lives here](https://github.com/PostHog/posthog/blob/
 
 If you have an `@action` endpoint or a custom endpoint (that doesn't use DRF) you can still document by providing a serializer for the request and response.
 
-```py
+```python
 from drf_spectacular.utils import OpenApiResponse
 from posthog.api.documentation import extend_schema
 @extend_schema(

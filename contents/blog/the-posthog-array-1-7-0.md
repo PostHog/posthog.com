@@ -12,7 +12,7 @@ featuredImageType: standard
 
 This week's update brings a React Native integration, time comparisons, easy access to user data from graphs, better user friendliness, and much stronger frontend testing.
 
-Self hosting and want to upgrade? [Update your PostHog](/docs/self-host/configure/upgrading-posthog).
+Self hosting and want to upgrade? [Update your PostHog](/docs/runbook/upgrading-posthog).
 
 ## Release notes
 
@@ -102,7 +102,7 @@ We also have a few backlog bugs to tackle - we will work through these.
 
 ## PostHog news
 
-We've had a big influx of YCombinator S20 companies deploying the platform. It has been fun to meet everyone at the start of their journey - especially since new projects should have product analytics installed!
+We've had a big influx of Y Combinator S20 companies deploying the platform. It has been fun to meet everyone at the start of their journey - especially since new projects should have product analytics installed!
 
 As a new idea, we've been running 15 min onboarding sessions with each company, which has highlighted many more features we wish to improve… [Paul G was right](https://twitter.com/paulg/status/898476047263518720?lang=en), we'll be doing lots more of this.
 

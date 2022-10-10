@@ -1,5 +1,5 @@
 ---
-title: React Native library
+title: React Native
 sidebarTitle: React Native
 sidebar: Docs
 showTitle: true
@@ -37,8 +37,6 @@ Autocapture tracks these events:
 * **Application Opened** - once when the App is opened from a closed state
 * **Application Became Active** - when the App comes to the foreground (e.g. from the app switcher)
 * **Application Backgrounded** - when the App is sent to the background by the user
-* **Keyboard Shown** - when the keyboard appears for user input
-* **Keyboard Hidden** - when the keyboard is dismissed from user input
 * **$screen** - when the user navigates (if using @react-navigation/native)
 * **$autocapture** - touch events when the user interacts with the screen
 
@@ -78,6 +76,8 @@ You can tweak how autocapture works by passing custom options.
 ```jsx
 <PostHogProvider apiKey="<ph_project_api_key>" autocapture={{
     captureTouches: true, // If you don't want to capture touch events set this to false
+    captureLifecycleEvents: true, // If you don't want to capture the Lifecycle Events (e.g. Application Opened) set this to false
+    captureScreens: true, // If you don't want to capture screen events set this to false
     ignoreLabels: [], // Any labels here will be ignored from the stack in touch events
     customLabelProp: "ph-label",
     noCaptureProp: "ph-no-capture",
@@ -243,10 +243,8 @@ Alternatively you can call load the feature flags directly:
 ```js
 // Defaults to undefined if not loaded yet or if there was a problem loading
 posthog.getFeatureFlag("my-flag")
-// Provide an optional default if the flags are not loaded
-posthog.getFeatureFlag("my-flag", false) 
 // Multi variant feature flags are returned as a string
-posthog.getFeatureFlag("my-multivariant-flag", "control") 
+posthog.getFeatureFlag("my-multivariant-flag") 
 
 ```
 
@@ -255,6 +253,54 @@ PostHog will load feature flags when instantiated and will refresh whenever othe
 posthog.reloadFeatureFlagsAsync()
   .then(refreshedFlags => console.log(refreshedFlags))
 ```
+
+
+
+#### Bootstrapping Flags
+
+There is a delay between loading the library and feature flags becoming available to use. For some cases, like redirecting users to a different page based on a feature flag, this is extremely detrimental, as the flags load after the redirect logic occurs, thus never working.
+
+In cases like these, where you want flags to be immediately available on page load, you can use the bootstrap library option.
+
+This allows you to pass in a distinctID and feature flags during library initialisation, like so:
+
+
+```js
+const posthog = new PostHog('<ph_project_api_key>', {
+    host: 'https://app.posthog.com',
+    bootstrap: {
+        distinctID: 'your-anonymous-id',
+        featureFlags: {
+            'flag-1': true,
+            'variant-flag': 'control',
+            'other-flag': false
+        }
+    }
+})
+```
+
+To compute these flag values, use the corresponding `getAllFlags` method in your server-side library. Note that bootstrapping flags requires server-side initialisation.
+
+If the ID you're passing in is an identified ID (that is, an ID with which you've called `posthog.identify()` elsewhere), you can also pass in the `isIdentifiedID` bootstrap option, which ensures that this ID is treated as an identified ID in the library. This is helpful as it warns you when you try to do something wrong with this ID, like calling `identify` again.
+
+
+```js
+const posthog = new PostHog('<ph_project_api_key>', {
+    host: 'https://app.posthog.com',
+    bootstrap: {
+        distinctID: 'your-identified-id',
+        isIdentifiedID: true,
+        featureFlags: {
+            'flag-1': true,
+            'variant-flag': 'control',
+            'other-flag': false
+        }
+    }
+})
+```
+
+
+> **Note:** Passing in a distinctID to bootstrap replaces any existing IDs, which means you may fail to connect any old anonymous user events with the logged in person, if your logic calls identify in the frontend immediately on login. In this case, you can omit passing in the distinctID.
 
 
 ### Group analytics

@@ -29,13 +29,13 @@ export default function UsingPosthog({ referenceElement }: { referenceElement: H
     const resources: ColMenuItems[] = [
         {
             title: 'Customer stories',
-            description: 'See how PostHog is moving the needle up and to the right',
+            description: 'See how PostHog is supporting industry leaders',
             url: '/customers',
         },
         {
-            title: 'Marketplace',
+            title: 'Partner directory',
             description: 'Companies and products who can help with PostHog',
-            url: '/marketplace',
+            url: '/partners',
         },
         {
             title: 'Apps',
@@ -62,23 +62,28 @@ export default function UsingPosthog({ referenceElement }: { referenceElement: H
     const userGuides: ColMenuItems[] = [
         {
             title: 'Product analytics',
-            description: 'Trends, cohorts, sessions, paths',
-            url: '/docs/user-guides#analysis-features',
+            description: 'Insights, funnels, graphs & trends, path analysis + 5 more',
+            url: '/using-posthog#product-analytics',
         },
         {
-            title: 'Visualizations',
-            description: 'Actions, dashboards, person history',
-            url: '/docs/user-guides#visualization-features',
+            title: 'Visualize',
+            description: 'Session recording, Heatmaps',
+            url: '/using-posthog#visualize',
         },
         {
-            title: 'Optimization',
-            description: 'Feature flags, A/B testing, conversions',
-            url: '/docs/user-guides#optimization-features',
+            title: 'Optimize',
+            description: 'Feature flags, experimentation & A/B testing + 1 more',
+            url: '/using-posthog#optimize',
         },
         {
-            title: 'Tracking',
-            description: 'Autocapture, realtime events',
-            url: '/docs/user-guides#tracking-features',
+            title: 'Data',
+            description: 'Actions, cohorts, data management, sessions + 4 more',
+            url: '/using-posthog#data',
+        },
+        {
+            title: 'Project settings',
+            description: 'Team collaboration, organization and projects, toolbar + 3 more',
+            url: '/using-posthog#project-settings',
         },
     ]
 
@@ -89,7 +94,7 @@ export default function UsingPosthog({ referenceElement }: { referenceElement: H
                     <div className="md:border-r border-gray-accent-light border-dashed md:w-[500px]">
                         <div className="md:p-6 md:mb-0 mb-4">
                             <div className="flex items-center w-full justify-between opacity-70">
-                                <h3 className="text-[18px] font-bold m-0 text-black pl-2">User guides</h3>
+                                <h3 className="text-[18px] font-bold m-0 text-black pl-2">Product manual</h3>
                                 <SearchBar
                                     label={false}
                                     className="flex-grow-0 !p-0 w-auto dark:text-white"
@@ -118,8 +123,8 @@ export default function UsingPosthog({ referenceElement }: { referenceElement: H
                                     )
                                 })}
                             </ol>
-                            <CallToAction className="inline-block mt-4 !w-full" to="/docs/user-guides">
-                                Visit user guides
+                            <CallToAction className="inline-block mt-4 !w-full" to="/using-posthog">
+                                Visit product manual
                             </CallToAction>
                         </div>
                         <div className="py-7 md:px-6 border-t md:border-b-0 border-b md:mb-0 mb-4 border-gray-accent-light border-dashed">

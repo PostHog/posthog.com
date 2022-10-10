@@ -15,7 +15,7 @@ The Customer.io Connector sends event data from PostHog into Customer.io. User e
 
 The Customer.io Connector requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)!
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
 You'll also need access to the relevant Customer.io account.
 
@@ -25,6 +25,31 @@ You'll also need access to the relevant Customer.io account.
 2. Search for 'Customer.io' and select the app, press Install.
 3. Add your Customer.io site ID and token at the configuration step.
 4. Enable the app and watch your 'People' list get populated in Customer.io!
+
+### Configuration
+
+<AppParameters />
+
+### How do I match persons in PostHog with customers in Customer.io?
+
+We assume that you use the same ID to identify users in Customer.io as you use as distinct_id or in `posthog.identify()`.
+
+### How do I set properties on a Customer.io customer via PostHog?
+
+PostHog will send any property inside the `$set: {}` property to customer.io. In the example below, `email` and `userProperty` will be set on the customer
+
+```js
+posthog.capture(
+  'some event',
+  {
+    event_propery: 'this will not get sent',
+    $set: {
+      email: 'test@example.com',
+      userProperty: 'value'
+    }
+  }
+)
+```
 
 ### Is the source code for this app available?
 

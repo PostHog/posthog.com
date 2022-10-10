@@ -23,13 +23,13 @@ posthog.identify(
 );
 ```
 
-The example above, using the Posthog JS SDK, appends extra properties to the identify event. These extra properties are also sent to Engage.
+The example above, using the PostHog JS SDK, appends extra properties to the identify event. These extra properties are also sent to Engage.
 
 ### What are the requirements for this app?
 
 The Engage Connector requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)!
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
 You'll also need access to a Engage account, obviously.
 
@@ -45,6 +45,10 @@ Once you have made a note of your keys, log in to your PostHog instance and foll
 4. Enter the API information as requested, select save.
 
 Now, as soon as the app is enabled, PostHog will start sending your events to Engage in real-time.
+
+### Configuration
+
+<AppParameters />
 
 ### Is the source code for this app available?
 

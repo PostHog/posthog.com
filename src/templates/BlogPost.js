@@ -9,16 +9,18 @@ import { H1, H2, H3, H4, H5, H6 } from 'components/MdxAnchorHeaders'
 import PostLayout, { Contributors, ShareLinks, SidebarSection, Text, Topics } from 'components/PostLayout'
 import { SEO } from 'components/seo'
 import { ZoomImage } from 'components/ZoomImage'
+import { graphql } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
-import { CodeBlock } from '../components/CodeBlock'
+import { MdxCodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
+import { NewsletterForm } from 'components/NewsletterForm'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
 const Title = ({ children, className = '' }) => {
-    return <h1 className={`lg:px-[50px] text-2xl lg:text-4xl mt-3 mb-0 lg:mb-5 lg:mt-0 ${className}`}>{children}</h1>
+    return <h1 className={`text-3xl md:text-4xl lg:text-4xl mt-3 mb-0 lg:mb-5 lg:mt-0 ${className}`}>{children}</h1>
 }
 
 const Intro = ({ featuredImage, title, featuredImageType, contributors }) => {
@@ -27,7 +29,7 @@ const Intro = ({ featuredImage, title, featuredImageType, contributors }) => {
             {featuredImage && (
                 <div className="relative">
                     <GatsbyImage
-                        className={`rounded-lg z-0 relative ${
+                        className={`rounded-md z-0 relative ${
                             featuredImageType === 'full'
                                 ? 'before:h-1/2 before:left-0 before:right-0 before:bottom-0 before:z-[1] before:absolute before:bg-gradient-to-t before:from-black/75'
                                 : ''
@@ -35,7 +37,7 @@ const Intro = ({ featuredImage, title, featuredImageType, contributors }) => {
                         image={getImage(featuredImage)}
                     />
                     {featuredImageType === 'full' && (
-                        <Title className="lg:absolute bottom-0 lg:text-white text-primary">{title}</Title>
+                        <Title className="lg:absolute bottom-0 lg:text-white text-primary lg:px-8">{title}</Title>
                     )}
                 </div>
             )}
@@ -43,7 +45,7 @@ const Intro = ({ featuredImage, title, featuredImageType, contributors }) => {
             {contributors && (
                 <Contributors
                     contributors={contributors}
-                    className="flex lg:hidden flex-row space-y-0 space-x-4 my-3 lg:px-[50px]"
+                    className="flex lg:hidden flex-row space-y-0 space-x-4 my-3"
                 />
             )}
         </div>
@@ -71,6 +73,11 @@ const BlogPostSidebar = ({ contributors, date, filePath, title, categories, loca
                     <Calendar className="h-[20px] w-[20px]" /> <time>{date}</time>
                 </Text>
             </SidebarSection>
+            <SidebarSection>
+                <div className="bg-gray-accent-light dark:bg-gray-accent-dark rounded">
+                    <NewsletterForm sidebar />
+                </div>
+            </SidebarSection>
         </>
     )
 }
@@ -88,7 +95,7 @@ export default function BlogPost({ data, pageContext, location }) {
         h4: H4,
         h5: H5,
         h6: H6,
-        pre: CodeBlock,
+        pre: MdxCodeBlock,
         inlineCode: InlineCode,
         blockquote: Blockquote,
         img: ZoomImage,
@@ -115,6 +122,7 @@ export default function BlogPost({ data, pageContext, location }) {
                 filePath={filePath}
                 tableOfContents={tableOfContents}
                 breadcrumb={[{ name: 'Blog', url: '/blog' }, ...categories]}
+                hideSurvey
                 sidebar={
                     <BlogPostSidebar
                         categories={categories}
@@ -132,7 +140,7 @@ export default function BlogPost({ data, pageContext, location }) {
                     featuredImageType={featuredImageType}
                     contributors={contributors}
                 />
-                <div className="lg:px-[50px]">
+                <div className="article-content">
                     <MDXProvider components={components}>
                         <MDXRenderer>{body}</MDXRenderer>
                     </MDXProvider>
