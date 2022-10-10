@@ -8,6 +8,7 @@ featuredImage: ../images/tutorials/banners/migrate-eu-cloud.png
 topics: ['configuration']
 ---
 
+> **Warning:** Migrating event data to PostHog's EU Cloud is a time consuming process, likely to take several days or weeks, and there is currently no way to migrate insights or dashboards. We strongly recommend that users with a large amount of event data begin by creating a new EU cloud instance and migrate data at a later point, if strictly needed. 
 For many companies, teams, and products, keeping customer data within the EU is critical for compliance with regulations such as GDPR. To help them with this, we’ve created an EU Cloud hosting option. It includes all the features of PostHog, with data being hosted in the EU (specifically Germany).
 
 Why this matters is that the EU has stricter data privacy laws than other areas. In the EU, there are often stricter requirements for what companies can and can’t do with customer data. For example, there is less regulation in the US on data privacy. To understand how this applies to your company and data, you should check with a legal professional.
