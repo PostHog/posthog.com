@@ -1,3 +1,4 @@
+---
 date: 2022-10-10
 title: Introducing PostHog Cloud EU
 rootPage: /blog
