@@ -52,7 +52,7 @@ Issues around data portability are particularly crucial for healthcare companies
 
 Cloud-based and self-hosted analytics do the same thing, so surely they collect the same data? Wrong.
 
-Knowledge sharing tool [Saga](/customers/saga) ran a side-by-side comparison between Mixpanel and a self-hosted instance of PostHog and found a huge difference in the number of events that were tracked.
+Knowledge-sharing tool Saga ran a side-by-side comparison between Mixpanel and a self-hosted instance of PostHog and found a huge difference in the number of tracked events.
 
 "For one event we defined, Mixpanel reported 6,343 occurrences last month," explains Filip Stanev, co-founder of Saga. "PostHog reported what we know to be the true figure, 8,169 — almost 30% more than Mixpanel.”
 
