@@ -2454,6 +2454,7 @@
     from = "/docs/posthog-direction"
     to = "/about"
 
+
 # Added: 2022-10-07
 [[redirects]]
     from = "/docs/product-direction"
