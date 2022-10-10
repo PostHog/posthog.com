@@ -3,7 +3,7 @@ title: How to calculate and lower churn rate with PostHog
 sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
-date: 2022-09-28
+date: 2022-10-10
 featuredImage: ../images/tutorials/banners/churn-rate.png
 topics: ['trends', 'retention', 'lifecycle']
 ---
