@@ -15,12 +15,6 @@ While PostHog is obviously useful for product managers, engineers and analysts, 
 
 You can find out more about [how our customer success team works](/handbook/people/team-structure/customer-success) in the PostHog docs, but in the meantime here are five tips to help _your_ CS team get started with PostHog…
 
-> 1. [Use funnels to find out where customers get stuck](#1-Use-funnels-to-find-out-where-customers-get-stuck)
-2. [Use trends to find out which features are popular](#2-Use-trends-to-find-out-which-features-are-popular)
-3. [Use lifecycle charts to find users about to churn](#3-Use-lifecycle-charts-to-find-users-about-to-churn)
-4. [Install apps to integrate PostHog with your stack](#4-Install-apps-to-integrate-PostHog-with-your-stack)
-5. [Build and share a customer success dashboard](#5-Build-and-share-a-customer-success-dashboard)
-
 ## 1. Use funnels to find out where customers get stuck
 ![Top to bottom funnels in PostHog](../images/blog/activation-checklist-images/top-down-funnel.png)
 
