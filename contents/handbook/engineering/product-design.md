@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-It is up to you when to involve our product designers in your work. Because we hire generalists, there is no expectation that every project should start by running through design _first_. 
+We believe that everyone is a designer. Because we hire generalists, there is no expectation that every project should start by running through design _first_. It is up to you when to involve our product designers in your work.
 
 You should start by identifying the stage and goals of your project.
 
@@ -30,7 +30,7 @@ If you're improving an _existing_ feature that is popular, you are probably crea
 
 However you're building, please _communicate_ to product design what your expectations are!
 
-## [T-shirt sizing](https://asana.com/resources/t-shirt-sizing#what-is-t-shirt-sizing)
+## Feature Complexity
 
 The more complex a feature is to implement, the more likely it is that involving product design will make you faster.
 

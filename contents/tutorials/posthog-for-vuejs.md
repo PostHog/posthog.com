@@ -47,7 +47,7 @@ touch posthog.js
 
 In `posthog.js`, I will import PostHog from the previously installed package `posthog-js`. 
 
-```jsx
+```js
 //./plugins/posthog.js
 import posthog from "posthog-js";
 ```
@@ -58,7 +58,7 @@ Next, I will create a plugin and assign PostHog to Vue’s global properties. Th
 
 **Vue 3.x:** 
 
-```jsx
+```js
 //./plugins/posthog.js
 import posthog from "posthog-js";
 
@@ -76,7 +76,7 @@ export default {
 
 **Vue 2.x:** 
 
-```jsx
+```js
 //./plugins/posthog.js
 import posthog from "posthog-js";
 
@@ -100,7 +100,7 @@ Here, I will add the following lines of code:
 
 **Vue 3.x:** 
 
-```jsx
+```js
 //index.js
 
 import posthogPlugin from "./plugins/posthog"; //import the plugin. 
@@ -111,7 +111,7 @@ app.use(posthogPlugin); //install the plugin
 
 **Vue 2.x:** 
 
-```jsx
+```js
 //main.js
 import posthogPlugin from "./plugins/posthog"; // import the plugin
 
@@ -120,7 +120,7 @@ Vue.use(posthogPlugin); // install the plugin, before new Vue()
 
 **That’s it!** Now I can use PostHog throughout my Vue app using `this.$posthog`. Note, the `$` prefix is necessary — if you’re actually on the fence over which method to use, choose this technique as PostHog is worth some serious 💵. 😉. 
 
-```jsx
+```js
 //component.vue
 
 <script>
@@ -153,7 +153,7 @@ With Vue 3.x, developers can use `provide()` and `inject()` to pipe global value
 
 Prior to mounting my app, I will (i) import PostHog, (ii) initialize it, and (iii) provide it to my app. This **must** be done *before* I mount my app — if I provide PostHog *after* mounting it, PostHog will not be predictably available. 
 
-```jsx
+```js
 //app.js
 
 import posthog from "posthog-js";
@@ -169,7 +169,7 @@ app.provide("posthog", posthog);
 
 I can inject PostHog and use it via `this.posthog`. No `$` prefix. Arguably, this is the preferable method if you’re humble like J Cole. 
 
-```jsx
+```js
 //component.vue
 
 export default {
@@ -195,14 +195,14 @@ While Vue 3.x dramatically clamped down on global variables, in Vue 2.x, you can
 
 Anywhere, declare: 
 
-```jsx
+```js
 import posthog from "posthog-js";
 Object.defineProperty(Vue.prototype, '$posthog', { value: posthog });
 ```
 
 Then, access PostHog. I can do this by calling `this.$posthog`. 
 
-```jsx
+```js
 //component.vue
 
 export default {
@@ -218,7 +218,7 @@ While PostHog will automatically capture paths, I can optionally bind it to Vue�
 
 **Vue 3.x:** 
 
-```jsx
+```js
 //router.js #might be in your app.js
 
 router.afterEach((to) => {
@@ -232,7 +232,7 @@ router.afterEach((to) => {
 
 **Vue 2.x:** 
 
-```jsx
+```js
 export default new Router({
 	/*
 	 *
@@ -252,7 +252,7 @@ export default new Router({
 
 Here’s a simple example of me using PostHog to capture a barebones login button. 
 
-```jsx
+```js
 //component.vue
 
 <script>
