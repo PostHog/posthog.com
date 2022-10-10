@@ -47,7 +47,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }, plu
         }
     }
     const questions = await getQuestions()
-    questions.forEach(({ question: { slug, id }, replies }) => {
+    questions.forEach(({ question: { slug, id, replies } }) => {
         const question = {
             slug,
             replies,
@@ -69,6 +69,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }, plu
     const topics = await fetch(`https://squeak.cloud/api/topics?organizationId=${organizationId}`).then((res) =>
         res.json()
     )
+
     topics.forEach((topic) => {
         const { label, id } = topic
         const node = {
@@ -91,7 +92,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }, plu
     )
 
     topicGroups.forEach((topicGroup) => {
-        const { label, id, Topic } = topicGroup
+        const { label, id, topic } = topicGroup
 
         const node = {
             id: createNodeId(`squeak-topic-group-${label}`),
@@ -103,7 +104,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }, plu
             },
             label: label,
             topicId: id,
-            topics: Topic,
+            topics: topic,
             slug: slugify(label, { lower: true }),
         }
         createNode(node)

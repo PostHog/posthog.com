@@ -8,6 +8,8 @@ Welcome to PostHog!
 
 Giving a new joiner a great onboarding experience is super important to us. We want new joiners to feel they’ve made the right decision to join us, and that they are excited and committed to what we’re doing as a company. 
 
+> Want to introduce a new joiner to the people team for onboarding, but don't know who on the team does what? Just introduce them to people@posthog.com and a member of the team will jump in and take it from there!
+
 Our [team](https://posthog.com/handbook/company/team) is spread across the world, and so are our new joiners. In order to ensure the best possible onboarding experience, we aim for the new joiner to meet up with someone from their team in their first week. Depending on the new joiner's location, they might fly out to one of our team members, or the other way around. So the onboarding experience will look a little bit different, depending on where the new joiner is based and which team they will be joining. 
 
 Below we are lining out some general steps for each new joiner's onboarding process. The People team will copy the relevant sections of the checklist into an onboarding issue on the [internal, non-public Ops & People board](https://github.com/orgs/PostHog/projects/2) in GitHub, and tag all relevant people. 
@@ -59,7 +61,7 @@ Coua will create the contract needed, depending on who is joining. Only James an
 *   [ ] Check to see if a laptop is available at the hacker house (ship if outside of the UK or Europe), or have team member purchase laptop as per the [spending money](https://posthog.com/handbook/people/spending-money) guidelines
 *   [ ] Team member to purchase any other necessary equipment as per the [spending money](https://posthog.com/handbook/people/spending-money) guidelines
 *   [ ] Add calendar events for probation and 6-monthly performance reviews
-*   [ ] Give them $100 credit to spend on [PostHog merch store](https://merch.posthog.com/)
+*   [ ] Send them a [welcome merch bundle](https://app.printfection.com/account/campaign/manage.php?storeid=304945) on Printfection - 1 x rucksack, 3 x vertical stickers, 1 x origami, 1 x mug. If shipping to Europe, do not select the cheapest delivery option (so that we pay tax and customs.)
 *   [ ] Share the [Important Company Details](https://docs.google.com/spreadsheets/d/1k4o4VN5VSsgFZpVYrN28Ib0z_pCJFTJyQdfkZEHhOV0/edit?usp=sharing) sheet with them
 *   [ ] Add team member to the PostHog app
 *   [ ] Send them an invite to [Drata](https://app.drata.com/) to do security onboarding and their background check
@@ -114,6 +116,15 @@ Every new joiner at PostHog has an onboarding buddy. If possible, a new joiner w
  > If any travel is needed for the in-person onboarding, please check our [Spending Money page](/handbook/people/spending-money) and book your travel accordingly. _You don't need to let us team know, just use your Brex/Revolut card._
 - Please make sure you spend at least 3 days together, working through the [first week onboarding list](/handbook/people/onboarding#during-their-first-week) and spending time working on any role-specific tasks that are outlined in the new joiner's personal onboarding issue. 
 - You will remain the new joiner's main point of contact for the first few weeks, so please continue to check in with them at least once a week for the first month or so. 
+
+## In-person Onboarding 
+
+Occasionally, a new joiner will meet with members of their team in-person to go through the onboarding process. Upon acceptance of an offer, your Team Lead will notify the People & Operations team who will help you coordinate travel if necessary.
+
+In these cases, the process is:
+  - Preemptively create the new team member a Google account
+  - Issue them a Brex card to their work email with a sufficiently high temporary balance to cover travel costs
+  - Have the new team member book travel as usual
 
 ### Additional access
 

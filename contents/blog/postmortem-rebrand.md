@@ -56,7 +56,7 @@ In reality, this is the best decision a startup like ours could have made.
 
 If you look at any successful later-stage startup (especially in B2B SaaS), their website and docs become a pillar in their overall image. Take [Stripe and their docs](https://stripe.com/docs) as an example. The product works great, but what makes it special is the experience a visitor has with the _brand_.
 
-Settling into the role of guiding the roadmap for our website and docs has opened up a whole new world to me. Our incredible [Product Designer](https://posthog.com/handbook/company/team#chris-clark-product-designer) has alleviated the need for me to be involved in the day-to-day of product design, which has freed me up to focus on the bigger picture - and how people interact with our brand.
+Settling into the role of guiding the roadmap for our website and docs has opened up a whole new world to me. Our product design team has alleviated the need for me to be involved in the day-to-day of product design, which has freed me up to focus on the bigger picture - and how people interact with our brand.
 
 ## Leading up to the rebrand
 There were several factors that led to our rebrand. Our [Graphic Designer, Lottie](https://posthog.com/handbook/company/team#lottie-coxon-graphic-designer), was really honing in on a consistent style for blog artwork as we began focusing on having [unique blog art for every post](https://posthog.com/blog). She was tired of designing for the space theme, the 8-bit style felt a little dated, and she was absolutely killing it with [hedgehog-themed art](https://posthog.com/media).
