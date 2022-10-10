@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Product updates”]
+categories: ["Product updates"]
 author: ["andy-vandervell"]
 featuredImage: ../images/blog/posthog-eu-blog.png
 featuredImageType: full
