@@ -46,27 +46,27 @@ To work on it locally, first you need to clone it to your disk:
 
     You can also clone the repository with [GitHub Desktop](https://desktop.github.com/) installed, from the [posthog.com repository page](https://github.com/PostHog/posthog.com), click the **Code** button and select **Open with GitHub Desktop** from the dropdown that appears.
 
-    ![Open in GitHub Desktop](../../images/docs/contribute/open-in-github-desktop.png)
+    ![Open in GitHub Desktop](../../../images/docs/contribute/open-in-github-desktop.png)
 
     You will then be prompted by the browser to confirm if you want to open the GitHub Desktop application. Select the affirmative action that has text such as **Open GitHub Desktop**.
 
     Once GitHub Desktop has opened you will be prompted to confirm the repository that is being cloned and the location on disk where you wish the code to be stored.
 
-    ![GitHub Desktop clone to dialog](../../images/docs/contribute/github-desktop-clone-repo.png)
+    ![GitHub Desktop clone to dialog](../../../images/docs/contribute/github-desktop-clone-repo.png)
 
     Click **Clone** to clone the posthog.com repostory to your local disk.
 
-    ![GitHub Desktop cloning to disk](../../images/docs/contribute/github-desktop-cloning-to-disk.png)
+    ![GitHub Desktop cloning to disk](../../../images/docs/contribute/github-desktop-cloning-to-disk.png)
 
     Once the clone has completed the GitHub Desktop interface will change to the following:
 
-    ![GitHub Desktop cloned successfully](../../images/docs/contribute/github-desktop-cloned.png)
+    ![GitHub Desktop cloned successfully](../../../images/docs/contribute/github-desktop-cloned.png)
 
     To view the code for the website click **Open in Visual Studio Code**. Dialogs may appear around permissions and trust as you open Visual Studio Code.
 
     Once you have Visual Studio Code open, select the **Terminal** menu option. Within the dropdown select **New Terminal**. This will open a new terminal window within Visual Studio Code:
 
-    ![Visual Studio Code terminal](../../images/docs/contribute/visual-studio-code-terminal.png)
+    ![Visual Studio Code terminal](../../../images/docs/contribute/visual-studio-code-terminal.png)
 
     Don't worry! We only need to run a few commands in the command line.
 
@@ -93,11 +93,17 @@ Once this command has finished executing, run the following:
 yarn start
 ```
 
-The runs the local clone of the website, which you can use to preview changes you make before pushing them live. It takes a bit of time for some file processing and compilation to take place, but once it's completed you can access the locally running version of posthog.com via by visiting `http://localhost:8000` in your web browser.
+The runs the local clone of the website, which you can use to preview changes you make before pushing them live. It takes a bit of time for some file processing and compilation to take place, but once it's completed you can access the locally running version of posthog.com via by visiting `http://localhost:8001` in your web browser.
 
-Any time you want to preview changes you are making to the local version of the website, all you have to do is run the `yarn start` again, wait for the command to finish running and then open `http://localhost:8000` in your web browser.
+Any time you want to preview changes you are making to the local version of the website, all you have to do is run the `yarn start` again, wait for the command to finish running and then open `http://localhost:8001` in your web browser.
 
-> If you have something else running on port `8000` you'll be asked if you are okay in running on port `8001`, in which case the website will be accessible on `http://localhost:8001`.
+### Environment variables
+
+Our website uses various APIs to pull in data from sites like GitHub (for contributors) and Ashby (our applicant tracking system). Without setting these environment variables, you may see various errors when building the site. Most of these errors are dismissible, and you can continue to edit the website.
+
+If you're a core team member working on a portion of the site where having this data is useful, you can access some of the main environment variables [here](https://github.com/PostHog/company-internal/blob/master/website-api-keys.md).
+
+Note: If you have a Gatsby account (you'd know if you do), rather than running the site with `yarn start`, you should instead use `gatsby start` which will automatically load in all environment variables directly from Gatsby. (You'll need to set up the Gatsby CLI and authenticate first.)
 
 ### Finding the content to edit
 
@@ -133,11 +139,11 @@ When editing locally, changes should be made on a new Git branch. Branches shoul
 
     You can also create a new branch in GitHub Desktop by selecting the dropdown next to the **Current Branch** name and clicking **New Branch**.
 
-    ![GitHub Desktop - new branch dropdown](../../images/docs/contribute/github-desktop-new-branch-dropdown.png)
+    ![GitHub Desktop - new branch dropdown](../../../images/docs/contribute/github-desktop-new-branch-dropdown.png)
 
     Then, in the dialog that follows, entering the new branch name.
 
-    ![GitHub Desktop - new branch dialog](../../images/docs/contribute/visual-studio-code-new-branch-dialog.png)
+    ![GitHub Desktop - new branch dialog](../../../images/docs/contribute/visual-studio-code-new-branch-dialog.png)
 
     Once you have a new branch, you can make changes.
 
@@ -342,7 +348,7 @@ In this case, `Twin Peaks` is the alt-text applied to the image.
 Note that it may be necessary to change the folder depending on your file structure. For example, if you needed to go up two directories, this *could* be:
 
 ```markdown
-![Twin Peaks](../../images/02/IMG_4294-scaled.jpg)
+![Twin Peaks](../../../images/02/IMG_4294-scaled.jpg)
 ```
 
 Notice the extra ```../```.
@@ -412,11 +418,11 @@ It's best to create commits that are focused on one specific area. For example, 
 
     Files that have been changed can be viewed within GitHub Desktop along with a diff of the specific change.
 
-    ![Viewing changes in GitHub Desktop](../../images/docs/contribute/viewing-changes-in-github-desktop.png)
+    ![Viewing changes in GitHub Desktop](../../../images/docs/contribute/viewing-changes-in-github-desktop.png)
 
     Select the files that you want to be part of the commit by ensuring the checkbox to the left of the file is checked within GitHub Desktop. Then, write a short descriptive commit message and click the **Commit to...** button.
 
-    ![Making a commit in GitHub Desktop](../../images/docs/contribute/commit-in-github-desktop.gif)
+    ![Making a commit in GitHub Desktop](../../../images/docs/contribute/commit-in-github-desktop.gif)
 
 ## Push changes to GitHub
 
@@ -453,7 +459,7 @@ In order to request that the changes you have made are merged into the main webs
 
     Once you have committed the changes you want to push to GitHub, click the **Push origin** button.
 
-    ![Push to origin from GitHub Desktop](../../images/docs/contribute/push-to-origin-github-desktop.gif)
+    ![Push to origin from GitHub Desktop](../../../images/docs/contribute/push-to-origin-github-desktop.gif)
 
 ## Create a pull request
 
@@ -478,13 +484,13 @@ Create a pull request to request that your changes be merged into the main branc
 
     With the branch published, click the **Create pull request** button.
 
-    ![pull request from GitHub Desktop](../../images/docs/contribute/github-desktop-pull-request.png)
+    ![pull request from GitHub Desktop](../../../images/docs/contribute/github-desktop-pull-request.png)
 
     This will open up a page on github.com in your default web browser.
 
 If you are pushing to an existing branch, navigate to the [posthog.com repo](https://github.com/posthog/posthog.com) and switch to the new branch using the dropdown:
 
-![GitHub branch switcher](../../images/docs/contribute/github-branch-switcher.png)
+![GitHub branch switcher](../../../images/docs/contribute/github-branch-switcher.png)
 
 Then, open the **Contribute** dropdown and click the **Open pull request** button.
 
@@ -496,7 +502,7 @@ If you know who you would like to review the pull request, select them in the **
 
 After a series of checks are run (to ensure nothing in your pull request breaks the website), Netlify will generate a preview link available on the `netlify/posthog/deploy-preview` line. This includes all of your changes so you can preview before your pull request is merged.
 
-![Preview branch](../../images/docs/contribute/preview-branch.png)
+![Preview branch](../../../images/docs/contribute/preview-branch.png)
 
 > **Note:** Checks are run automatically for PostHog org members and previous contributors. First time contributors will require authorization for checks to be run by a PostHog org member.
 

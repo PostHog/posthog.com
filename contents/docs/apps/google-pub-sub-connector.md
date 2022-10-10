@@ -1,6 +1,5 @@
 ---
 title: GCP Pub/Sub Connector
-layout: app
 github: https://github.com/vendasta/pubsub-plugin
 installUrl: https://app.posthog.com/project/apps?name=Pub%2FSub%20Export
 thumbnail: ../../apps/thumbnails/pub-sub-export.png
@@ -16,7 +15,7 @@ This app sends events from PostHog to a [Google Cloud Pub/Sub](https://cloud.goo
 
 The Pub/Sub Connector requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)!
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
 You'll also need a Google Cloud Pub/Sub account to connect to.
 
@@ -32,17 +31,21 @@ You'll also need a Google Cloud Pub/Sub account to connect to.
 
 You'll need this file to configure the Pub/Sub app for PostHog. You can find out where to find it in [Google's Pub/Sub client libraries documentation](https://cloud.google.com/pubsub/docs/reference/libraries).
 
+### Configuration
+
+<AppParameters />
+
 ### Is the source code for this app available?
 
-PostHog is open-source and so are all apps on the platform. The [source code for the Google Cloud Pub/Sub Connector](https://github.com/vendasta/pubsub-plugin) is available on GitHub.
+PostHog is open-source and so are all apps on the platform. The [source code for the Google Cloud Pub/Sub Connector](https://github.com/PostHog/pubsub-plugin) is available on GitHub.
 
 ### Who created this app?
 
-We'd like to thank PostHog community member [Jesse Redl](https://github.com/vendasta/pubsub-plugin/commits?author=jredl-va) from [Vendasta](https://posthog.com/customers/vendasta) for creating the Pub/Sub Connector. Thanks, Jesse!
+We'd like to thank PostHog community member Jesse Redl from [Vendasta](https://posthog.com/customers/vendasta) for creating the Pub/Sub Connector. Thanks, Jesse!
 
 ### Who maintains this app?
 
-This app is maintained by the community. If you have issues with the app not functioning as intended, please [raise a bug report on the repo](https://github.com/vendasta/pubsub-plugin) to let us know!
+This app is maintained by the community. If you have issues with the app not functioning as intended, please [raise a bug report on the repo](https://github.com/PostHog/pubsub-plugin) to let us know!
 
 ### What if I have feedback on this app?
 

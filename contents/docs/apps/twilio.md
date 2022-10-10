@@ -1,6 +1,5 @@
 ---
 title: Twilio Connector
-layout: app
 github: https://github.com/PostHog/posthog-twilio-plugin
 installUrl: https://app.posthog.com/project/apps?name=posthog-twilio-plugin
 thumbnail: ../../apps/thumbnails/twilio.png
@@ -18,7 +17,7 @@ You can set a timeout period of between 1 second and 31536000 seconds (1 calenda
 
 This app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)!
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
 ### How do I install this app for PostHog?
 
@@ -31,6 +30,10 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 To configure this app, you will need your Account SID and Auth Token from Twilio. You can find these in Twilio in your account menu under `Account > Keys & Credentials > API Keys and tokens > Live credentials`.
 
 Additionally, you will need to know your Twilio Phone Number. Follow [Twilio's documentation for buying or finding your Twilio phone numbers](https://www.twilio.com/docs/usage/tutorials/how-to-use-your-free-trial-account#get-your-first-twilio-phone-number).
+
+### Configuration
+
+<AppParameters />
 
 ### Is the source code for this app available?
 

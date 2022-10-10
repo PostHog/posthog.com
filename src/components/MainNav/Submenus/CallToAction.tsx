@@ -11,12 +11,7 @@ export default function CallToAction({
     className: string
 }) {
     return (
-        <CTA
-            to={to}
-            type="outline"
-            size="sm"
-            className={`!bg-transparent hover:border-orange dark:hover:border-orange dark:hover:border-opacity-100 hover:border-opacity-100 !transition-all ${className}`}
-        >
+        <CTA to={to} type="outline" size="sm" className={` !transition-all ${className}`}>
             {children}
         </CTA>
     )

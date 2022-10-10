@@ -28,7 +28,7 @@ const crumbText = (classes = '') => cntl`
     py-2
     px-3
     block
-    text-xs
+    text-sm
     ${classes}
 `
 

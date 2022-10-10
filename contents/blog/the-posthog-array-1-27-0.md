@@ -32,7 +32,7 @@ As a small thank you for your time, we're giving away some awesome [PostHog merc
 
 ## PostHog 1.27.0 Release Notes
 
-> If you're self-hosting and want to upgrade for a better experience and new features, remember to [update your PostHog instance](/docs/self-host/configure/upgrading-posthog).
+> If you're self-hosting and want to upgrade for a better experience and new features, remember to [update your PostHog instance](/docs/runbook/upgrading-posthog).
 
 **In this release:**
 
@@ -116,7 +116,7 @@ In addition to the highlights listed above, we also merged a bunch of PRs to imp
 
 ## PostHog News
 
-Welcome [Chris Clark](https://posthog.com/handbook/company/team#chris-clark-product-designer)! Chris joined our Core Experience Team to help us level up our product experience! You can already see a ton of his work in our new funnels feature. Chris is pro-pinneaple on pizza (🍍 on 🍕) "but generally accepting of all pizza views and requirements". 
+Welcome Chris Clark! Chris joined our Core Experience Team to help us level up our product experience! You can already see a ton of his work in our new funnels feature. Chris is pro-pinneaple on pizza (🍍 on 🍕) "but generally accepting of all pizza views and requirements". 
 
 > I once impulse-purchased a baby goose.
 

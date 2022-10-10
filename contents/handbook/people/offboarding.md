@@ -109,6 +109,8 @@ In the case of voluntary offboarding, you will be offered the chance to send a g
 <input type="checkbox"/> Remove team member from AWS <br />
 <input type="checkbox"/> Remove team member from Workable <br />
 <input type="checkbox"/> Remove team member from Orbit (access &amp; team member state) <br />
+<input type="checkbox"/> Remove team member from Pitch (access &amp; team member state) <br />
+<input type="checkbox"/> Remove team member from Balsamiq (access &amp; team member state) <br />
 <input type="checkbox"/> Remove team member from license.posthog.com <br />
 <input type="checkbox"/> Remove team member from Cloudflare (Only Tim can do this) <br />
 <input type="checkbox"/> Remove team member from the [Team page](/handbook/company/team) <br />

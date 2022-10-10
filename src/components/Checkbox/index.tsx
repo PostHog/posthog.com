@@ -14,7 +14,7 @@ export default function Checkbox({
     checked: boolean
 }): JSX.Element {
     return (
-        <div {...other} className={`relative flex items-center space-x-2 text-base font-semibold ${className}`}>
+        <div {...other} className={`relative flex items-center space-x-2 text-lg font-semibold ${className}`}>
             <span>
                 <input
                     checked={checked}

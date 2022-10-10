@@ -32,20 +32,20 @@ const exampleCode = `SELECT entrance_period_start,
 export default function BeforeAndAfter() {
     return (
         <section className="px-4">
-            <div className={section('bg-primary rounded-lg p-4 pb-0 md:pt-16 lg:pb-0 lg:p-12 lg:pt-32')}>
+            <div className={section('bg-primary rounded-lg p-4 pb-0 md:pt-16 lg:pb-0 lg:p-12 lg:pt-28')}>
                 <div className="flex items-center flex-col md:flex-row space-x-4">
-                    <div className="relative">
+                    <div className="relative md:mt-12">
                         <AnimateIntoView className="absolute left-20">
                             <img src={factoBlurb} />
                         </AnimateIntoView>
                         <StaticImage className="max-w-[200px] md:max-w-[300px]" src="../../images/facto-home.png" />
                     </div>
                     <div>
-                        <h2 className="text-white m-0 text-2xl sm:text-4xl md:text-5xl leading-none xl:text-6xl">
+                        <h2 className="text-white m-0 text-2xl sm:text-4xl md:text-5xl leading-none lg:text-7xl">
                             <span className="text-red">Quit writing SQL</span>
                             <br /> to answer product questions
                         </h2>
-                        <h3 className="m-0 mt-2 md:mt-4 text-base sm:text-lg md:text-xl xl:text-2xl text-gray">
+                        <h3 className="m-0 mt-2 md:mt-4 text-lg sm:text-lg md:text-xl xl:text-2xl text-gray">
                             PostHog can answer 90% of them, out of the box.
                         </h3>
                     </div>
@@ -67,17 +67,17 @@ export default function BeforeAndAfter() {
                     }
                     itemOne={
                         <div className="bg-primary">
-                            <h4 className="text-white text-xs sm:text-base md:text-xl m-0 text-center w-1/2 h-[67px] flex items-center md:items-start justify-center">
+                            <h4 className="text-white text-sm sm:text-lg md:text-xl m-0 text-center w-1/2 h-[67px] flex items-center md:items-start justify-center">
                                 Before PostHog
                             </h4>
-                            <div className={`w-full text-xs md:text-base ${gradientWrapper}`}>
+                            <div className={`w-full text-sm md:text-lg ${gradientWrapper}`}>
                                 <CodeBlock code={exampleCode} language="sql" />
                             </div>
                         </div>
                     }
                     itemTwo={
                         <div className="bg-primary">
-                            <h4 className="text-white flex space-x-1 sm:space-x-4 justify-center text-xs sm:text-base md:text-xl my-0 w-1/2 ml-auto bg-primary h-[67px] items-center md:items-start">
+                            <h4 className="text-white flex space-x-1 sm:space-x-4 justify-center text-sm sm:text-lg md:text-xl my-0 w-1/2 ml-auto bg-primary h-[67px] items-center md:items-start">
                                 <span>With</span>{' '}
                                 <Logo className="max-w-[25px] sm:max-w-[40px] md:w-auto" color="white" noText />{' '}
                                 <span>PostHog</span>

@@ -5,7 +5,7 @@ import Logo from 'components/Logo'
 import React from 'react'
 
 const linksHeadingSm = cntl`
-    text-sm
+    text-base
     text-gray
     dark:text-gray
     mb-1
@@ -13,7 +13,7 @@ const linksHeadingSm = cntl`
     pb-[0.2rem]
 `
 const linksHeadingMd = cntl`
-    text-base
+    text-lg
     mb-5
     leading-tight
 `
@@ -32,7 +32,7 @@ const link = (marginBottom = '1') => cntl`
     hover:text-primary
     dark:text-primary-dark
     dark:hover:text-white
-    text-sm
+    text-base
     font-bold
     mb-${marginBottom}
     inline-block
@@ -50,38 +50,33 @@ const FooterMenuItem = ({ title, url, className = '', marginBottom = '1' }) => {
 
 export function Footer(): JSX.Element {
     return (
-        <footer className="max-w-screen-2xl mx-auto mt-20 pb-9 px-4 leading">
-            <div className="py-2 border border-dashed border-gray-accent-light dark:border-gray-accent-dark border-l-0 border-r-0 max-w-6xl mx-auto">
-                <ul className="list-none p-0 m-0 flex justify-between sm:space-x-12 items-center flex-wrap">
+        <footer className="mt-20 leading">
+            <div className="py-5 border border-dashed border-gray-accent-light dark:border-gray-accent-dark border-l-0 border-r-0 w-full">
+                <ul className="list-none p-0 m-0 flex justify-between sm:space-x-12 items-center flex-wrap max-w-6xl mx-auto px-4">
                     <li className="w-full sm:w-auto flex justify-center mb-2 lg:mb-0">
                         <Logo noText />
                     </li>
+                    <FooterMenuItem marginBottom="0" className="md:text-lg" title="About" url="/about" />
+                    <FooterMenuItem marginBottom="0" className="md:text-lg" title="Blog" url="/blog" />
+                    <FooterMenuItem marginBottom="0" className="md:text-lg" title="Newsletter" url="/newsletter" />
+                    <FooterMenuItem marginBottom="0" className="md:text-lg" title="Careers" url="/careers" />
                     <FooterMenuItem
                         marginBottom="0"
-                        className="md:text-base"
-                        title="About"
-                        url="/handbook/company/story"
-                    />
-                    <FooterMenuItem marginBottom="0" className="md:text-base" title="Blog" url="/blog" />
-                    <FooterMenuItem marginBottom="0" className="md:text-base" title="Newsletter" url="/newsletter" />
-                    <FooterMenuItem marginBottom="0" className="md:text-base" title="Careers" url="/careers" />
-                    <FooterMenuItem
-                        marginBottom="0"
-                        className="lg:!ml-auto md:text-base"
+                        className="lg:!ml-auto md:text-lg"
                         title="Support"
                         url="/questions"
                     />
                     <FooterMenuItem
                         marginBottom="0"
-                        className="md:text-base"
+                        className="md:text-lg"
                         title="Contact sales"
                         url="/signup/self-host/get-in-touch#contact"
                     />
                 </ul>
             </div>
-            <div className="grid grid-cols-1 lg:grid-cols-3 max-w-6xl mx-auto my-9 lg:my-0">
+            <div className="grid grid-cols-1 lg:grid-cols-3 max-w-6xl mx-auto my-9 lg:my-0 px-4">
                 <div className="col-span-2 border-b-1 lg:border-r-1 border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:pr-10 py-4 lg:py-7">
-                    <Accordion title={'Product analytics suite'} titleClasses={linksHeadingLg}>
+                    <Accordion title={'Product OS suite'} titleClasses={linksHeadingLg}>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
                             <div>
                                 <h4 className={linksHeadingMd}>
@@ -93,7 +88,7 @@ export function Footer(): JSX.Element {
                                     </Link>
                                 </h4>
                                 <h5 className={linksHeadingSm}>Analytics</h5>
-                                <ul className="list-none p-0 m-0">
+                                <ul className="list-none p-0 m-0 space-y-1">
                                     <FooterMenuItem title="Funnels" url="/product/funnels" />
                                     <FooterMenuItem title="Trends" url="/product/trends" />
                                     <FooterMenuItem title="Paths" url="/product/user-paths" />
@@ -109,7 +104,7 @@ export function Footer(): JSX.Element {
                                     </Link>
                                 </h4>
                                 <h5 className={linksHeadingSm}>Features</h5>
-                                <ul className="list-none p-0 m-0">
+                                <ul className="list-none p-0 m-0 space-y-1">
                                     <FooterMenuItem title="Session recording" url="/product/session-recording" />
                                     <FooterMenuItem title="Feature flags" url="/product/feature-flags" />
                                     <FooterMenuItem title="Experimentation" url="/product/experimentation-suite" />
@@ -126,7 +121,7 @@ export function Footer(): JSX.Element {
                                     </Link>
                                 </h4>
                                 <h5 className={linksHeadingSm}>Platform</h5>
-                                <ul className="list-none p-0 m-0">
+                                <ul className="list-none p-0 m-0 space-y-1">
                                     <FooterMenuItem title="Correlation analysis" url="/product/correlation-analysis" />
                                     <FooterMenuItem title="Collaboration" url="/product/collaboration" />
                                     <FooterMenuItem title="Apps" url="/apps" />
@@ -140,7 +135,7 @@ export function Footer(): JSX.Element {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <h5 className={linksHeadingSm}>Discussion</h5>
-                                <ul className="list-none p-0 m-0">
+                                <ul className="list-none p-0 m-0 space-y-1">
                                     <FooterMenuItem title="Questions?" url="/questions" />
                                     <FooterMenuItem title="Slack" url="/slack" />
                                     <FooterMenuItem
@@ -155,7 +150,7 @@ export function Footer(): JSX.Element {
                             </div>
                             <div>
                                 <h5 className={linksHeadingSm}>Get involved</h5>
-                                <ul className="list-none p-0 m-0">
+                                <ul className="list-none p-0 m-0 space-y-1">
                                     <FooterMenuItem title="Roadmap" url="/handbook/strategy/roadmap" />
                                     <FooterMenuItem title="Contributors" url="/contributors" />
                                     <FooterMenuItem title="Merch" url="https://merch.posthog.com/collections/all" />
@@ -163,7 +158,7 @@ export function Footer(): JSX.Element {
                                         title="PostHog FM"
                                         url="https://open.spotify.com/playlist/7A2H2J3WhpJmMEwAhKahWH?si=47418915a8d0447b"
                                     />
-                                    <FooterMenuItem title="Marketplace" url="/marketplace" />
+                                    <FooterMenuItem title="Partner directory" url="/partners" />
                                 </ul>
                             </div>
                         </div>
@@ -174,7 +169,7 @@ export function Footer(): JSX.Element {
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div>
                                 <h5 className={linksHeadingSm}>Getting started</h5>
-                                <ul className="list-none p-0 m-0">
+                                <ul className="list-none p-0 m-0 space-y-1">
                                     <FooterMenuItem title="PostHog Cloud" url="https://app.posthog.com/signup" />
                                     <FooterMenuItem title="Self-hosted" url="/docs/self-host" />
                                     <FooterMenuItem title="Compare options" url="/pricing" />
@@ -187,7 +182,7 @@ export function Footer(): JSX.Element {
                             </div>
                             <div>
                                 <h5 className={linksHeadingSm}>Install & integrate</h5>
-                                <ul className="list-none p-0 m-0">
+                                <ul className="list-none p-0 m-0 space-y-1">
                                     <FooterMenuItem
                                         title="Installation"
                                         url="/docs/integrate/client/snippet-installation"
@@ -198,13 +193,13 @@ export function Footer(): JSX.Element {
                                 </ul>
                             </div>
                             <div>
-                                <h5 className={linksHeadingSm}>User guides</h5>
-                                <ul className="list-none p-0 m-0">
-                                    <FooterMenuItem title="Cohorts" url="/docs/user-guides/cohorts" />
-                                    <FooterMenuItem title="Funnels" url="/docs/user-guides/funnels" />
-                                    <FooterMenuItem title="Sessions" url="/docs/user-guides/sessions" />
-                                    <FooterMenuItem title="Data" url="/docs/user-guides/actions" />
-                                    <FooterMenuItem title="Events" url="/docs/user-guides/events" />
+                                <h5 className={linksHeadingSm}>Product manual</h5>
+                                <ul className="list-none p-0 m-0 space-y-1">
+                                    <FooterMenuItem title="Cohorts" url="/manual/cohorts" />
+                                    <FooterMenuItem title="Funnels" url="/manual/funnels" />
+                                    <FooterMenuItem title="Sessions" url="/manual/sessions" />
+                                    <FooterMenuItem title="Data" url="/manual/actions" />
+                                    <FooterMenuItem title="Events" url="/manual/events" />
                                 </ul>
                             </div>
                         </div>
@@ -215,7 +210,8 @@ export function Footer(): JSX.Element {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <h5 className={linksHeadingSm}>About</h5>
-                                <ul className="list-none p-0 m-0">
+                                <ul className="list-none p-0 m-0 space-y-1">
+                                    <FooterMenuItem title="About us" url="/about" />
                                     <FooterMenuItem title="Our story" url="/handbook/company/story" />
                                     <FooterMenuItem title="Team" url="/handbook/company/team" />
                                     <FooterMenuItem title="Handbook" url="/handbook" />
@@ -225,7 +221,7 @@ export function Footer(): JSX.Element {
                             </div>
                             <div>
                                 <h5 className={linksHeadingSm}>Resources</h5>
-                                <ul className="list-none p-0 m-0">
+                                <ul className="list-none p-0 m-0 space-y-1">
                                     <FooterMenuItem title="FAQ" url="/faq" />
                                     <FooterMenuItem title="Ask a question" url="/questions" />
                                     <FooterMenuItem title="Blog" url="/blog" />
@@ -241,34 +237,36 @@ export function Footer(): JSX.Element {
                     </Accordion>
                 </div>
             </div>
-            <div className="flex py-5 border border-dashed border-gray-accent-light dark:border-gray-accent-dark border-l-0 border-r-0 items-center text-base max-w-6xl mx-auto">
-                <small className="font-bold dark:text-gray">&copy; {new Date().getFullYear()} PostHog, Inc.</small>
-                <ul className="m-0 p-0 list-none ml-auto flex sm:space-x-8 space-x-4">
-                    <li>
-                        <Link
-                            to="/docs/contribute/code-of-conduct"
-                            className="font-bold text-sm text-almost-black hover:text-almost-black dark:text-gray dark dark:hover:text-gray"
-                        >
-                            Code of conduct
-                        </Link>
-                    </li>
-                    <li>
-                        <Link
-                            to="/privacy"
-                            className="font-bold text-sm text-almost-black hover:text-almost-black dark:text-gray dark dark:hover:text-gray"
-                        >
-                            Privacy
-                        </Link>
-                    </li>
-                    <li>
-                        <Link
-                            to="/terms"
-                            className="font-bold text-sm text-almost-black hover:text-almost-black dark:text-gray dark dark:hover:text-gray"
-                        >
-                            Terms
-                        </Link>
-                    </li>
-                </ul>
+            <div className="py-5 border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark border-l-0 border-r-0">
+                <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center text-lg px-5">
+                    <small className="font-bold dark:text-gray">&copy; {new Date().getFullYear()} PostHog, Inc.</small>
+                    <ul className="m-0 p-0 list-none sm:ml-auto flex sm:space-x-8 space-x-4 mt-2 sm:mt-0">
+                        <li>
+                            <Link
+                                to="/docs/contribute/code-of-conduct"
+                                className="font-bold text-sm text-almost-black hover:text-almost-black dark:text-gray dark dark:hover:text-gray"
+                            >
+                                Code of conduct
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                to="/privacy"
+                                className="font-bold text-sm text-almost-black hover:text-almost-black dark:text-gray dark dark:hover:text-gray"
+                            >
+                                Privacy
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                to="/terms"
+                                className="font-bold text-sm text-almost-black hover:text-almost-black dark:text-gray dark dark:hover:text-gray"
+                            >
+                                Terms
+                            </Link>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </footer>
     )

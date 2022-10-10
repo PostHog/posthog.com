@@ -93,7 +93,7 @@ export default function SelfHost({ setOpen, open }: { setOpen: (open: boolean) =
                             >
                                 <Check className="w-[20px] flex-shrink-0" />
                                 <div>
-                                    <h4 className="text-base m-0">{feature.title}</h4>
+                                    <h4 className="text-lg m-0">{feature.title}</h4>
                                     <p className="text-[15px] font-semibold m-0 leading-snug text-black/50">
                                         {feature.description}
                                     </p>

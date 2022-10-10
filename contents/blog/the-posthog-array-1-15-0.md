@@ -236,7 +236,7 @@ In addition to the main features mentioned above, we also merged over 100 PRs im
 
 Our team has been actively engaged in discussions about company strategy, culture, and values over the past few weeks. 
 
-And, since we value transparency, most of that is openly available for anyone to read, such as our [public strategy](https://posthog.com/handbook/strategy/strategy).
+And, since we value transparency, most of that is openly available for anyone to read, such as our [public strategy](https://posthog.com/handbook/strategy/overview).
 
 ## PostHog News
 

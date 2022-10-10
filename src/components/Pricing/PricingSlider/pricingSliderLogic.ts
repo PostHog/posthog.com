@@ -1,45 +1,12 @@
 import { kea } from 'kea'
-import { CLOUD_ENTERPRISE_MINIMUM_PRICING, ENTERPRISE_MINIMUM_PRICING } from '../constants'
-import { inverseCurve, sliderCurve } from './LogSlider'
+import { CLOUD_ENTERPRISE_MINIMUM_PRICING, ENTERPRISE_MINIMUM_PRICING, pricing } from '../constants'
+import { inverseCurve, prettyInt, sliderCurve } from './LogSlider'
 
 const calculatePrice = (eventNumber: number, pricingOption: PricingOptionType) => {
     let finalCost = 0
     let alreadyCountedEvents = 0
 
-    const thresholdPrices =
-        pricingOption === 'self-hosted'
-            ? [
-                  [1_000_000, 0],
-                  [2_000_000, 0.00045],
-                  [10_000_000, 0.000225],
-                  [100_000_000, 0.000075],
-                  [1_000_000_000, 0.000025],
-                  [Number.MAX_SAFE_INTEGER, 0.000025],
-              ]
-            : pricingOption === 'self-hosted-enterprise'
-            ? [
-                  [10_000_000, 0.00045],
-                  [100_000_000, 0.00009],
-                  [1_000_000_000, 0.000018],
-                  [Number.MAX_SAFE_INTEGER, 0.0000036],
-              ]
-            : pricingOption === 'cloud'
-            ? [
-                  [1_000_000, 0],
-                  [2_000_000, 0.00045],
-                  [10_000_000, 0.000225],
-                  [100_000_000, 0.000075],
-                  [1_000_000_000, 0.000025],
-                  [Number.MAX_SAFE_INTEGER, 0.000025],
-              ]
-            : pricingOption === 'cloud-enterprise'
-            ? [
-                  [10_000_000, 0.00045],
-                  [100_000_000, 0.00009],
-                  [1_000_000_000, 0.000018],
-                  [Number.MAX_SAFE_INTEGER, 0.0000036],
-              ]
-            : [[]]
+    const thresholdPrices = pricing[pricingOption] || [[]]
 
     for (const [threshold, unitPricing] of thresholdPrices) {
         finalCost =
@@ -48,10 +15,8 @@ const calculatePrice = (eventNumber: number, pricingOption: PricingOptionType) =
         alreadyCountedEvents = threshold
     }
 
-    if (pricingOption === 'self-hosted-enterprise') {
-        finalCost = finalCost > ENTERPRISE_MINIMUM_PRICING ? finalCost : ENTERPRISE_MINIMUM_PRICING
-    } else if (pricingOption === 'cloud-enterprise') {
-        finalCost = finalCost > CLOUD_ENTERPRISE_MINIMUM_PRICING ? finalCost : CLOUD_ENTERPRISE_MINIMUM_PRICING
+    if (pricingOption === 'cloud-enterprise' || pricingOption === 'self-hosted-enterprise') {
+        finalCost += 450
     }
 
     return Math.round(finalCost)
@@ -75,7 +40,7 @@ export const pricingSliderLogic = kea({
             },
         ],
         sliderValue: [
-            1,
+            null,
             {
                 setSliderValue: (_: null, { value }: { value: number }) => value,
                 setInputValue: (_: null, { value }: { value: number }) => inverseCurve(value * 1000000),
@@ -112,6 +77,18 @@ export const pricingSliderLogic = kea({
             (s) => [s.eventNumber],
             (eventNumber: number) => {
                 return calculatePrice(eventNumber, 'self-hosted')
+            },
+        ],
+        cloudEnterpriseCost: [
+            (s) => [s.eventNumber],
+            (eventNumber: number) => {
+                return calculatePrice(eventNumber, 'cloud-enterprise')
+            },
+        ],
+        selfHostedEnterpriseCost: [
+            (s) => [s.eventNumber],
+            (eventNumber: number) => {
+                return calculatePrice(eventNumber, 'self-hosted-enterprise')
             },
         ],
         finalMonthlyCost: [

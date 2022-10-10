@@ -46,8 +46,8 @@ You need to define these events within your product, and push them to PostHog. F
   - _Deep dive: Acquisition dashboard:_ [Users - traffic](#users--traffic)
     - _Deep dive: traffic dashboard:_ [Users - traffic - by utm_source](#users--traffic--by-utmsource)
     - _Deep dive: traffic dashboard:_ [Users - traffic - by utm_medium](#users--traffic--by-utmmedium)
-    - _Deep dive: traffic dashboard:_ [Users - traffic - by utm_campaign]((#users--traffic--by-utmcampaign))
-    - _Deep dive: traffic dashboard:_ [Users - traffic - by utm_content]((#users--traffic--by-utmcontent))
+    - _Deep dive: traffic dashboard:_ [Users - traffic - by utm_campaign](#users--traffic--by-utmcampaign)
+    - _Deep dive: traffic dashboard:_ [Users - traffic - by utm_content](#users--traffic--by-utmcontent)
     - _Deep dive: traffic dashboard:_ [Users - traffic - by utm_term](#users--traffic--by-utmterm)
     - _Deep dive: traffic dashboard:_ [Users - traffic - by initial referring domain](#users--traffic--by-initial-referring-domain)
   - _Deep dive: acqusition dashboard:_ [Users - sign ups - conversion rate](#users--sign-ups--conversion-rate)
@@ -107,3 +107,6 @@ You may be signing up users outside of your funnel. Typical examples of when thi
 
 * Your own team creates these manually. This happens with many companies who don't have a self serve signup process.
 * For B2B, the second, third, fourth, etc. users added into an existing team may come through the rest of their team using your platform already. We'll write future tutorials about how to track referrals like this.
+
+<NewsletterTutorial compact/>
+

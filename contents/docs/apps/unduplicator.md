@@ -1,6 +1,5 @@
 ---
 title: Unduplicator
-layout: app
 github: https://github.com/paolodamico/posthog-app-unduplicates
 installUrl: https://app.posthog.com/project/apps?name=Unduplicates
 thumbnail: ../../apps/thumbnails/unduplicator.png
@@ -27,7 +26,7 @@ The app has two modes that define what's considered a duplicate event. Either mo
 
 The Unduplicator requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)!
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
 ### How do I install the Unduplicator app for PostHog?
 
@@ -36,6 +35,10 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 3. Search for 'Unduplicates'
 4. Select the Unduplicator app, press 'Install'.
 5. Once the app is installed, press the blue button to configure the app and select which of the de-duplication methods you want to use (described above).
+
+### Configuration
+
+<AppParameters />
 
 ### Is the source code for this app available?
 

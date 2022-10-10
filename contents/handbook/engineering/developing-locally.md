@@ -90,6 +90,11 @@ docker compose -f docker-compose.dev.yml up
 
 > **Friendly tip 3:** You _might_ need `sudo` – see [Docker docs on managing Docker as a non-root user](https://docs.docker.com/engine/install/linux-postinstall).
 
+>**Friendly tip 4:** If you see `Error: (HTTP code 500) server error - Ports are not available: exposing port TCP 0.0.0.0:5432 -> 0.0.0.0:0: listen tcp 0.0.0.0:5432: bind: address already in use`,  - refer to this [stackoverflow answer](https://stackoverflow.com/questions/38249434/docker-postgres-failed-to-bind-tcp-0-0-0-05432-address-already-in-use). In most cases, you can solve this by stopping the `postgresql` service.
+```bash
+sudo service postgresql stop
+```
+
 Second, verify via `docker ps` and `docker logs` (or via the Docker Desktop dashboard) that all these services are up and running. They should display something like this in their logs:
 
 ```shell
@@ -120,17 +125,20 @@ Saved preprocessed configuration to '/var/lib/clickhouse/preprocessed_configs/us
 
 > **Friendly tip:** Kafka is currently the only x86 container used, and might segfault randomly when running on ARM. Restart it when that happens.
 
-Finally, install Postgres locally. Even planning to run Postgres inside Docker, we need a local copy of Postgres (version 11+) for its CLI tools and development libraries/headers. These are required by `pip` to install `psycopg2`.
+Finally, install Postgres locally. Even if you are planning to run Postgres inside Docker, we need a local copy of Postgres (version 11+) for its CLI tools and development libraries/headers. These are required by `pip` to install `psycopg2`.
 
-On macOS you can just run:
-
-```bash
-brew install postgresql
-```
+- On macOS:
+    ```bash
+    brew install postgresql
+    ```
+- On Debian-based Linux:
+    ```bash
+    sudo apt install -y postgresql postgresql-contrib libpq-dev
+    ```
 
 This installs both the Postgres server and its tools. DO NOT start the server after running this.
 
-On Linux you often have separate packages: `postgres` for the tools, `postgres-server` for the server, and `libpostgres-dev` for the `psycopg2` dependencies. Consult your distro's list for an up-to-date list of pacakages.
+On Linux you often have separate packages: `postgres` for the tools, `postgres-server` for the server, and `libpostgres-dev` for the `psycopg2` dependencies. Consult your distro's list for an up-to-date list of packages.
 
 ### 2. Prepare the frontend
 
@@ -151,19 +159,35 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
 
 > The first time you run typegen, it may get stuck in a loop. If so, cancel the process (`Ctrl+C`), discard all changes in the working directory (`git reset --hard`), and run `yarn typegen:write` again. You may need to discard all changes once more when the second round of type generation completes.
 
-### 3. Prepare app/plugin server
+### 3. Prepare plugin server
 
-Assuming Node.js is installed, run `yarn --cwd plugin-server` to install all required packages. We'll run this service in a later step.
+Assuming Node.js is installed, run `yarn --cwd plugin-server` to install all required packages. You'll also need to install the `brotli` compression library:
+
+- On macOS:
+    ```bash
+    brew install brotli
+    ```
+- On Debian-based Linux:
+    ```bash
+    sudo apt install -y brotli
+    ```
+
+We'll run the plugin server in a later step.
 
 ### 4. Prepare the Django server
 
 1. Install a few dependencies for SAML to work. If you're on macOS, run the command below, otherwise check the official [xmlsec repo](https://github.com/mehcode/python-xmlsec) for more details.
 
-    ```bash
-    brew install libxml2 libxmlsec1 pkg-config
-    ```
+    - On macOS:
+        ```bash
+        brew install libxml2 libxmlsec1 pkg-config
+        ```
+    - On Debian-based Linux:
+        ```bash
+        sudo apt install -y libxml2 libxmlsec1-dev pkg-config
+        ```
 
-1. Install Python 3.8. You can do so with Homebrew: `brew install python@3.8`. Make sure when outside of `venv` to always use `python3` instead of `python`, as the latter may point to Python 2.x on some systems.
+1. Install Python 3.8. On macOS, you can do so with Homebrew: `brew install python@3.8`. Make sure when outside of `venv` to always use `python3` instead of `python`, as the latter may point to Python 2.x on some systems.
 
     **Friendly tip:** Need to manage multiple versions of Python on a single machine? Try [pyenv](https://github.com/pyenv/pyenv).
 
@@ -183,13 +207,19 @@ Assuming Node.js is installed, run `yarn --cwd plugin-server` to install all req
     source env/bin/activate.fish
     ```
 
-1. Install requirements with pip
-
-    If your workstation is ARM-based (e.g. Apple Silicon), the first time your run `pip install` you must pass it custom OpenSSL headers:
+1. Upgrade pip to the latest version:
 
     ```bash
-    brew install openssl brotli
-    CFLAGS="-I /opt/homebrew/opt/openssl/include" LDFLAGS="-L /opt/homebrew/opt/openssl/lib" GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1 GRPC_PYTHON_BUILD_SYSTEM_ZLIB=1 pip install -r requirements.txt
+    pip install -U pip
+    ```
+
+1. Install requirements with pip
+
+    If your workstation is an Apple Silicon Mac, the first time your run `pip install` you must set custom OpenSSL headers:
+
+    ```bash
+    brew install openssl
+    CFLAGS="-I /opt/homebrew/opt/openssl/include $(python3.8-config --includes)" LDFLAGS="-L /opt/homebrew/opt/openssl/lib" GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1 GRPC_PYTHON_BUILD_SYSTEM_ZLIB=1 pip install -r requirements.txt
     ```
 
     These will be used when installing `grpcio` and `psycopg2`. After doing this once, and assuming nothing changed with these two packages, next time simply run:
@@ -220,7 +250,7 @@ DEBUG=1 ./bin/migrate
 
 ### 6. Start PostHog
 
-Now start all of PostHog (backend, worker, app server, and frontend – simultaneously) with:
+Now start all of PostHog (backend, worker, plugin server, and frontend – simultaneously) with:
 
 ```bash
 ./bin/start
@@ -230,11 +260,13 @@ Open [http://localhost:8000](http://localhost:8000) to see the app.
 
 > **Note:** The first time you run this command you might get an error that says "layout.html is not defined". Make sure you wait until the frontend is finished compiling and try again.
 
-To see some data on the frontend, you should go to the `http://localhost:8000/demo` and play around with it. This will give you a Hogflix test project containing some data data in the app.
+To get some practical test data into your brand-new instance of PostHog, run `DEBUG=1 ./manage.py generate_demo_data`. For a list of useful arguments of the command, run `DEBUG=1 ./manage.py generate_demo_data --help`.
 
 ### 7. Develop
 
-This is it! You can now change PostHog in any way you want. To commit changes, create a new branch based on `master` for your intended change, and develop away. Just make sure not use to use `release-*` patterns in your branches unless putting out a new version of PostHog, as such branches have special handling related to releases.
+This is it! You can now change PostHog in any way you want. See [Project Structure](/handbook/engineering/project-structure) for an intro to the repository's contents.
+
+To commit changes, create a new branch based on `master` for your intended change, and develop away. Just make sure not use to use `release-*` patterns in your branches unless putting out a new version of PostHog, as such branches have special handling related to releases.
 
 ## Testing
 
@@ -281,7 +313,7 @@ This command automatically turns any feature flag ending in `_EXPERIMENT` as a m
 
 ## Extra: Debugging the backend in PyCharm
 
-With [PyCharm's](/handbook/engineering/beginners-guide/developer-workflow#alternative-pycharm) built in support for Django, it's fairly easy to setup debugging in the backend. This is especially useful when you want to trace and debug a network request made from the client all the way back to the server. You can set breakpoints and step through code to see exactly what the backend is doing with your request.
+With PyCharm's built in support for Django, it's fairly easy to setup debugging in the backend. This is especially useful when you want to trace and debug a network request made from the client all the way back to the server. You can set breakpoints and step through code to see exactly what the backend is doing with your request.
 
 1. Setup Django configuration as per JetBrain's [docs](https://blog.jetbrains.com/pycharm/2017/08/develop-django-under-the-debugger/).
 2. Click Edit Configuration to edit the Django Server configuration you just created.

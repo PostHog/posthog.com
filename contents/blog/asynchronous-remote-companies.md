@@ -11,7 +11,7 @@ featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 ---
 
-Even when Tim (my cofounder) and I were doing a [YCombinator](https://ycombinator.com) (YC) batch in 2020, we realized we got more work done when we worked asynchronously. 
+Even when Tim (my cofounder) and I were doing a [Y Combinator](https://ycombinator.com) (YC) batch in 2020, we realized we got more work done when we worked asynchronously. 
 
 Yes, even when there were just two of us, working in the same room as each other.
 
@@ -50,5 +50,3 @@ Don't get me wrong – working asynchronously has huge upside. This time often g
 But, knowing each other more deeply helps create a true team – where people can more deeply trust and empathize with each other.
 
 So, if you're building a remote company, don't wait too long to initiate those links. It could be the difference between success and failure.
-
- <NewsletterForm compact />

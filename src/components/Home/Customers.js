@@ -34,8 +34,8 @@ const Customer = ({ image, width, height, className = '' }) => {
 export default function Customers() {
     return (
         <section className="mb-16 -mt-[1px]">
-            <div className="bg-almost-black py-8 md:py-12 2xl:py-16 px-4 relative z-20">
-                <h2 className="m-0 text-center text-4xl lg:text-5xl 2xl:text-5xl text-white max-w-screen-2xl mx-auto">
+            <div className="bg-almost-black py-8 md:py-12 xl:py-16 px-4 relative z-20">
+                <h2 className="m-0 text-center text-4xl lg:text-5xl 2xl:text-6xl text-white max-w-screen-2xl mx-auto">
                     These industry leaders <span className="text-yellow">run their data stack</span> on
                     <Logomark className="inline-flex ml-4 -mt-2 h-8 lg:h-10 xl:h-12 2xl:h-14 fill-current" />
                 </h2>

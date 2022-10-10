@@ -34,7 +34,7 @@ export default function SelfHost() {
                 </div>
                 <div className="max-w-screen-lg mx-auto flex md:flex-row flex-col items-center">
                     <Plan title="Open source" subtitle="with community support">
-                        <p className="text-black/70 my-2 text-base">
+                        <p className="text-black/70 my-2 text-lg">
                             Our original open source product is available on GitHub and offers product analytics,
                             feature flags, and session recordings.
                         </p>

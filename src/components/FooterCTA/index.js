@@ -8,16 +8,16 @@ export default function FooterCTA() {
     return (
         <div className="flex flex-col lg:flex-row justify-between py-12 px-6 sm:px-12 bg-primary dark:bg-gray-accent-dark items-center dark rounded-[10px] mt-12">
             <div>
-                <h2 className="text-white">Try it free.</h2>
+                <h2 className="text-white text-5xl">Try it free.</h2>
                 <p className="text-white w-">
-                    Install on your own server or Cloud hosting account, or just try PostHog Cloud and start tracking
-                    data in under 5 minutes.
+                    Try PostHog Cloud in under 5 minutes, or choose to self-host on your own infrastructure or private
+                    cloud.
                 </p>
                 <div className="flex flex-col sm:flex-row sm:space-x-2 space-y-2 sm:space-y-0">
-                    <CallToAction to="/signup" className="!bg-red !border-red !text-white w-full sm:w-44">
-                        Get started
+                    <CallToAction to="/signup" className="w-full sm:w-48">
+                        Get started - free
                     </CallToAction>
-                    <CallToAction to="/book-a-demo" type="outline" className="w-full sm:w-44 !bg-transparent">
+                    <CallToAction to="/book-a-demo" type="secondary" className="w-full sm:w-48 ">
                         Schedule a demo
                     </CallToAction>
                 </div>

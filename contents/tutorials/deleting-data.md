@@ -78,3 +78,4 @@ if __name__ == "__main__":
     logging.info("Cleanup finished, total duration: %s", datetime.now() - start_time)
 ```
 
+<NewsletterTutorial compact/>

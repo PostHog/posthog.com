@@ -11,7 +11,7 @@ import { graphql } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
-import { CodeBlock } from '../components/CodeBlock'
+import { MdxCodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
@@ -144,7 +144,7 @@ export default function HostHog({ data }) {
         )
     }
     const components = {
-        pre: CodeBlock,
+        pre: MdxCodeBlock,
         Hero,
         Section,
         FeatureSnapshot,
@@ -174,7 +174,7 @@ export default function HostHog({ data }) {
                 </article>
                 <div className="border-t border-gray-accent-light border-dashed pt-10">
                     <h3 className="m-0">Can’t make it to {city}?</h3>
-                    <p className="mt-1 mb-16 sm:mb-8 text-base">
+                    <p className="mt-1 mb-16 sm:mb-8 text-lg">
                         Our mailing list subscribers are the first to find out when we're planning a HostHog event
                         closer to you.
                     </p>

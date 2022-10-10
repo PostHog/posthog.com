@@ -59,8 +59,8 @@ export default function Blog() {
                                 className="rounded-sm pointer-events-none"
                             />
                         )}
-                        <h4 className="text-base font-bold m-0 text-black/70 mt-2 leading-tight">{title}</h4>
-                        <p className="text-xs m-0 mt-1 text-black/50 dark:text-white/50">{date}</p>
+                        <h4 className="text-lg font-bold m-0 text-black/70 mt-2 leading-tight">{title}</h4>
+                        <p className="text-sm m-0 mt-1 text-black/50 dark:text-white/50">{date}</p>
                     </Link>
                     <h4 className="text-[15px] font-semibold opacity-40 mt-4 mb-1">Categories</h4>
                     <ul className="list-none m-0 p-0">
@@ -73,7 +73,7 @@ export default function Blog() {
                                         to={url}
                                         className="py-2.5 block border-b border-gray-accent-light border-dashed group group-last:border-b-0"
                                     >
-                                        <h3 className="text-base m-0 opacity-70 group-hover:text-red group-hover:opacity-100 transition-all">
+                                        <h3 className="text-sm m-0 opacity-70 group-hover:text-red group-hover:opacity-100 transition-all">
                                             {fieldValue}
                                         </h3>
                                     </Link>

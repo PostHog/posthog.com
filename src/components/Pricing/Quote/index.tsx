@@ -56,11 +56,11 @@ const base = {
     `,
     name: cntl`
         not-italic
-        text-base
+        text-lg
     `,
     title: cntl`
         not-italic
-        text-base
+        text-lg
         opacity-50
     `,
     footer: cntl`

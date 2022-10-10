@@ -1,12 +1,13 @@
 ---
 title: Automatic Cohort Creator
-layout: app
 github: https://github.com/PostHog/posthog-automatic-cohorts-plugin
 installUrl: https://app.posthog.com/project/apps?name=Automatic%20Cohort%20Creator
 thumbnail: ../../apps/thumbnails/automatic-cohort-creator.png
 topics:
     - auto-cohort
 ---
+
+> **Warning:** We are currently in the process of deprecating this app in favor of [group analytics](/manual/group-analytics), and do not recommend installing it at this time.
 
 ### What does the Automatic Cohort Creator app do?
 
@@ -16,13 +17,17 @@ The Automatic Cohort Creator app enables you to specify a list of user propertie
 
 The Automatic Cohort Creator app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)!
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
 ### How do I install the Automatic Cohort Creator app?
 
 1. Visit the 'Apps' page in your instance of PostHog.
 2. Search for 'Automatic Cohort Creator' and select the app, press Install.
 3. Follow the on-screen steps to configure the app.ß
+
+### Configuration
+
+<AppParameters />
 
 ### Is the source code for this app available?
 

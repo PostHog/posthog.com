@@ -20,10 +20,10 @@ export default function Apps() {
     return (
         <section className={section('mt-4 md:mt-8')}>
             <h2 className={heading('lg')}>
-                Do more with your data with the <br className="hidden lg:block" />
-                <span className="text-blue">PostHog App Store</span>
+                The PostHog app library helps you <br className="hidden lg:block" />
+                <span className="text-blue">do more with your data</span>
             </h2>
-            <p className="my-6 mx-auto text-center text-base md:text-lg font-semibold mt-2 lg:mt-4 text-primary max-w-2xl opacity-75">
+            <p className="my-6 mx-auto text-center text-lg md:text-lg font-semibold mt-2 lg:mt-4 text-primary max-w-2xl opacity-75">
                 Or <a href="/docs/apps">build your own app</a>
             </p>
             <div className="mt-8 md:mt-12">
@@ -31,7 +31,7 @@ export default function Apps() {
 
                 <footer className="text-center">
                     <CallToAction to="/apps" type="outline" className="mt-8">
-                        Browse 50-ish apps
+                        Browse 50ish apps
                     </CallToAction>
                 </footer>
             </div>

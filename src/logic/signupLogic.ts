@@ -2,6 +2,8 @@ import { kea } from 'kea'
 import { isValidEmailAddress } from 'lib/utils'
 import { posthogAnalyticsLogic } from './posthogAnalyticsLogic'
 
+import type { signupLogicType } from './signupLogicType'
+
 export enum Realm {
     hosted = 'hosted',
     cloud = 'cloud',
@@ -64,7 +66,7 @@ async function updateContact(email: string, properties: Record<string, string>) 
     ).json() as Promise<HubSpotContactResponse>
 }
 
-export const signupLogic = kea({
+export const signupLogic = kea<signupLogicType>({
     path: typeof window === undefined ? undefined : () => ['signup'],
     actions: {
         setEmail: (email: string) => ({ email }),

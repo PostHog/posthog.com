@@ -1,23 +1,17 @@
 import { Link } from 'react-scroll'
 import Scrollspy from 'react-scrollspy'
 import '@fontsource/source-code-pro'
-import CodeBlock from 'components/Home/CodeBlock'
+import { CodeBlock, SingleCodeBlock } from 'components/CodeBlock'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import 'core-js/features/array/at'
 import { graphql } from 'gatsby'
 import { getCookie, setCookie } from 'lib/utils'
 import * as OpenAPISampler from 'openapi-sampler'
-import Highlight, { defaultProps } from 'prism-react-renderer'
 import React, { useEffect, useRef, useState } from 'react'
-import { push as Menu } from 'react-burger-menu'
 import ReactMarkdown from 'react-markdown'
-import '../styles/api-docs.scss'
-import { Listbox } from '@headlessui/react'
-import { SelectorIcon } from '@heroicons/react/outline'
-import MainSidebar from 'components/Docs/MainSidebar'
-import Navigation from 'components/Docs/Navigation'
-import SectionLinks from 'components/SectionLinks'
+import PostLayout from 'components/PostLayout'
+import CommunityQuestions from 'components/CommunityQuestions'
 
 const mapVerbsColor = {
     get: 'blue',
@@ -30,6 +24,7 @@ const mapVerbsColor = {
 function Endpoints({ paths }) {
     const urlItems = []
     Object.entries(paths).map(([path, value]) => Object.keys(value).map((verb) => urlItems.push(pathID(verb, path))))
+
     return (
         <div>
             <h3>Endpoints</h3>
@@ -177,14 +172,14 @@ function Params({ params, objects, object, depth = 0 }) {
                             </div>
                             <div className="">
                                 <div>
-                                    <span className="type bg-gray-accent-light dark:bg-gray-accent-dark inline-block px-[4px] py-[2px] text-xs rounded-sm">
+                                    <span className="type bg-gray-accent-light dark:bg-gray-accent-dark inline-block px-[4px] py-[2px] text-sm rounded-sm">
                                         {param.schema.type}
                                     </span>
                                 </div>
                                 {param.schema.default && (
                                     <>
                                         <div>
-                                            <span className="text-xs">
+                                            <span className="text-sm">
                                                 Default: <code>{param.schema.default}</code>
                                             </span>
                                         </div>
@@ -192,7 +187,7 @@ function Params({ params, objects, object, depth = 0 }) {
                                 )}
                                 {param.schema.enum && (
                                     <>
-                                        <div className="text-xs">
+                                        <div className="text-sm">
                                             One of:{' '}
                                             {param.schema.enum
                                                 .filter((item) => item && item !== '')
@@ -204,7 +199,7 @@ function Params({ params, objects, object, depth = 0 }) {
                                         </div>
                                     </>
                                 )}
-                                <div className="text-xs">
+                                <div className="text-sm">
                                     <ReactMarkdown>{param.schema.description}</ReactMarkdown>
                                 </div>
                             </div>
@@ -240,16 +235,16 @@ function Parameters({ item, objects }) {
     return (
         <>
             {pathParams?.length > 0 && (
-                <>
+                <div>
                     <h4>Path Parameters</h4>
                     <Params params={pathParams} objects={objects} />
-                </>
+                </div>
             )}
             {queryParams?.length > 0 && (
-                <>
+                <div>
                     <h4>Query Parameters</h4>
                     <Params params={queryParams} objects={objects} />
-                </>
+                </div>
             )}
         </>
     )
@@ -263,9 +258,8 @@ function RequestBody({ item, objects }) {
     const object = objects.schemas[objectKey]
 
     return (
-        <>
+        <div>
             <h4>Request Parameters</h4>
-            <br />
             <Params
                 params={Object.entries(object.properties)
                     .map(([name, schema]) => {
@@ -277,7 +271,7 @@ function RequestBody({ item, objects }) {
                     .filter((item) => !item.schema.readOnly)}
                 objects={objects}
             />
-        </>
+        </div>
     )
 }
 
@@ -293,7 +287,7 @@ function ResponseBody({ item, objects }) {
         <>
             <h4>Response</h4>
             <div className="response-wrapper">
-                <button className="mt-2 text-sm" onClick={() => setShowResponse(!showResponse)}>
+                <button className="mt-2 text-sm text-red font-semibold" onClick={() => setShowResponse(!showResponse)}>
                     {showResponse ? 'Hide' : 'Show'} response
                 </button>
                 <br />
@@ -338,57 +332,27 @@ function RequestExample({ item, objects, exampleLanguage, setExampleLanguage }) 
             ]
         })
     }
-    const path = item.pathName.replaceAll('{', ':').replaceAll('}', '')
 
-    return (
-        <>
-            <div className="code-example flex items-center justify-between my-1.5">
-                <div className="text-gray">
-                    <code className={`text-${mapVerbsColor[item.httpVerb]}`}>{item.httpVerb.toUpperCase()} </code>
-                    <code>{path}</code>
-                </div>
+    const path: string = item.pathName.replaceAll('{', ':').replaceAll('}', '')
 
-                <Listbox as="div" className="relative" value={exampleLanguage} onChange={setExampleLanguage}>
-                    <Listbox.Button className="bg-white pl-2 pr-10 py-1 rounded-sm text-xs flex items-center ">
-                        <span className="text-gray-accent-dark font-normal">{exampleLanguage}</span>
-                        <SelectorIcon className="w-3 h-3 text-gray absolute right-1.5" />
-                    </Listbox.Button>
-                    <Listbox.Options
-                        as="ul"
-                        className="absolute right-0 top-full mt-1 bg-white list-none px-0 py-1 rounded-sm shadow focus:outline-none z-50"
-                    >
-                        {['curl', 'python'].map((option) => (
-                            <Listbox.Option
-                                key={option}
-                                value={option}
-                                className={({ active, selected }) =>
-                                    `${selected ? 'font-semibold' : ''} ${
-                                        active ? 'bg-orange text-white' : 'text-gray-accent-dark'
-                                    } w-full pl-3 pr-6 cursor-pointer`
-                                }
-                            >
-                                <span className="text-xs">{option}</span>
-                            </Listbox.Option>
-                        ))}
-                    </Listbox.Options>
-                </Listbox>
-            </div>
-
-            {exampleLanguage === 'curl' && (
-                <CodeBlock
-                    code={`export POSTHOG_PERSONAL_API_KEY=[your personal api key]
+    const languages = [
+        {
+            label: 'cURL',
+            language: 'bash',
+            code: `
+            export POSTHOG_PERSONAL_API_KEY=[your personal api key]
 curl ${item.httpVerb === 'delete' ? ' -X DELETE ' : item.httpVerb == 'patch' ? '-X PATCH ' : ''}${
-                        item.httpVerb === 'post' ? "\n    -H 'Content-Type: application/json'" : ''
-                    }\\
+                item.httpVerb === 'post' ? "\n    -H 'Content-Type: application/json'" : ''
+            }\\
     -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \\
-    https://app.posthog.com${path}${params.map((item) => `\\\n\t-d ${item[0]}=${JSON.stringify(item[1])}`)}`}
-                    language="bash"
-                    hideNumbers={true}
-                />
-            )}
-            {exampleLanguage === 'python' && (
-                <CodeBlock
-                    code={`api_key = "[your personal api key]"
+    https://app.posthog.com${path}${params.map((item) => `\\\n\t-d ${item[0]}=${JSON.stringify(item[1])}`)}
+            `,
+        },
+        {
+            label: 'Python',
+            language: 'python',
+            code: `
+api_key = "[your personal api key]"
 project_id = "[your project id]"
 response = requests.${item.httpVerb}(
     "https://app.posthog.com${path}".format(
@@ -401,12 +365,41 @@ response = requests.${item.httpVerb}(
                   .replace('\n}', '\n\t}')}`
             : ''
     }
-)${item.httpVerb !== 'delete' ? '.json()' : ''}`}
-                    language="bash"
-                    hideNumbers={true}
-                />
-            )}
-        </>
+)${item.httpVerb !== 'delete' ? '.json()' : ''}
+            `,
+        },
+    ]
+
+    const currentLanguage = languages.find((l) => l.language === exampleLanguage) || languages[0]
+
+    return (
+        <CodeBlock
+            selector="dropdown"
+            currentLanguage={currentLanguage}
+            onChange={({ language }) => setExampleLanguage(language)}
+            label={
+                <div className="code-example flex text-xs space-x-1.5 my-1">
+                    <code className={`shrink-0 text-${mapVerbsColor[item.httpVerb]}`}>
+                        {item.httpVerb.toUpperCase()}{' '}
+                    </code>
+                    <code className="min-w-0 break-words">
+                        {path.split('/').map((token) => {
+                            if (token === '') {
+                                return <wbr />
+                            } else {
+                                return (
+                                    <>
+                                        <wbr />/{token}
+                                    </>
+                                )
+                            }
+                        })}
+                    </code>
+                </div>
+            }
+        >
+            {languages}
+        </CodeBlock>
     )
 }
 
@@ -414,28 +407,21 @@ function ResponseExample({ objects, objectKey }) {
     if (!objectKey) {
         return 'No response'
     }
+
+    const response = JSON.stringify(
+        OpenAPISampler.sample(objects.schemas[objectKey], {}, { components: objects }),
+        null,
+        2
+    )
+
     return (
-        <Highlight
-            {...defaultProps}
-            code={JSON.stringify(
-                OpenAPISampler.sample(objects.schemas[objectKey], {}, { components: objects }),
-                null,
-                2
-            )}
-            language="json"
+        <SingleCodeBlock
+            showCopy={false}
+            label={<span className="text-xs font-semibold">RESPONSE</span>}
+            language="javascript"
         >
-            {({ className, tokens, getLineProps, getTokenProps }) => (
-                <pre className={className} style={{ background: '#24292E', margin: 0 }}>
-                    {tokens.map((line, i) => (
-                        <div {...getLineProps({ line, key: i })} key={i}>
-                            {line.map((token, key) => (
-                                <span {...getTokenProps({ token, key })} key={key} />
-                            ))}
-                        </div>
-                    ))}
-                </pre>
-            )}
-        </Highlight>
+            {response}
+        </SingleCodeBlock>
     )
 }
 
@@ -467,11 +453,7 @@ const pathDescription = (item) => {
     }
 }
 
-const SectionLinksTop = ({ previous, next }) => {
-    return <SectionLinks className="mt-9" previous={previous} next={next} />
-}
-
-export default function ApiEndpoint({ data, pageContext: { slug, menu, previous, next, breadcrumb, breadcrumbBase } }) {
+export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, breadcrumbBase, tableOfContents } }) {
     const {
         components: { components },
     } = data
@@ -486,22 +468,12 @@ export default function ApiEndpoint({ data, pageContext: { slug, menu, previous,
         paths[item.path][item.httpVerb] = item.operationSpec
     })
     const objects = JSON.parse(components)
-    const mainEl = useRef()
 
-    const [menuOpen, setMenuOpen] = useState(false)
     const [exampleLanguage, setExampleLanguageState] = useState()
+
     const setExampleLanguage = (language) => {
         setCookie('api_docs_example_language', language)
         setExampleLanguageState(language)
-    }
-
-    const handleMobileMenuClick = () => {
-        setMenuOpen(!menuOpen)
-    }
-    const styles = {
-        bmOverlay: {
-            background: 'transparent',
-        },
     }
 
     useEffect(() => {
@@ -511,125 +483,87 @@ export default function ApiEndpoint({ data, pageContext: { slug, menu, previous,
     }, [])
 
     return (
-        <>
+        <Layout>
             <SEO title={`${name} API Reference - PostHog`} />
-            <Layout>
-                <div className="handbook-container px-4">
-                    <div id="handbook-menu-wrapper">
-                        <Menu
-                            width="calc(100vw - 80px)"
-                            onClose={() => setMenuOpen(false)}
-                            customBurgerIcon={false}
-                            customCrossIcon={false}
-                            styles={styles}
-                            pageWrapId="handbook-content-menu-wrapper"
-                            outerContainerId="handbook-menu-wrapper"
-                            overlayClassName="backdrop-blur"
-                            isOpen={menuOpen}
-                        >
-                            <MainSidebar height={'auto'} menu={menu} slug={slug} className="p-5 pb-32 md:hidden" />
-                        </Menu>
-                        <Navigation
-                            title={name}
-                            filePath={null}
-                            breadcrumb={breadcrumb}
-                            breadcrumbBase={breadcrumbBase}
-                            menuOpen={menuOpen}
-                            handleMobileMenuClick={handleMobileMenuClick}
-                        />
-                    </div>
-                    <section id="handbook-content-menu-wrapper">
-                        <SectionLinksTop next={next} previous={previous} />
-                        <div className="flex items-start mt-8 md:space-x-16">
-                            <MainSidebar
-                                height={'auto'}
-                                sticky
-                                top={90}
-                                mainEl={mainEl}
-                                menu={menu}
-                                slug={slug}
-                                className="hidden md:block w-full transition-opacity md:opacity-60 hover:opacity-100 mb-14 flex-1"
-                            />
-                            <article
-                                className="article-content api-content-container api-documentation flex-grow"
-                                ref={mainEl}
+            <PostLayout
+                title={name}
+                questions={<CommunityQuestions />}
+                menu={menu}
+                tableOfContents={tableOfContents}
+                contentWidth="100%"
+                breadcrumb={[breadcrumbBase, ...(breadcrumb || [])]}
+            >
+                <h2 className="!mt-0">{name}</h2>
+                <blockquote className="p-6 rounded bg-gray-accent-light dark:bg-gray-accent-dark">
+                    <p>
+                        For instructions on how to authenticate to use this endpoint, see{' '}
+                        <a className="text-red hover:text-red font-semibold" href="/docs/api/overview">
+                            API overview
+                        </a>
+                        .
+                    </p>
+                </blockquote>
+                <ReactMarkdown>{items[0].operationSpec?.description}</ReactMarkdown>
+
+                <Endpoints paths={paths} />
+
+                {items.map((item) => {
+                    item = item.operationSpec
+
+                    return (
+                        <div className="mt-8" key={item.operationId}>
+                            <div
+                                className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start"
+                                id={pathID(item.httpVerb, item.pathName)}
                             >
-                                <h2 className="!mt-0">{name}</h2>
-                                <blockquote className="p-6 rounded bg-gray-accent-light dark:bg-gray-accent-dark">
-                                    <p>
-                                        For instructions on how to authenticate to use this endpoint, see{' '}
-                                        <a className="text-red hover:text-red font-semibold" href="/docs/api/overview">
-                                            API overview
-                                        </a>
-                                        .
-                                    </p>
-                                </blockquote>
-                                <ReactMarkdown>{items[0].operationSpec?.description}</ReactMarkdown>
+                                <div className="space-y-6">
+                                    <h2>{generateName(item)}</h2>
+                                    <ReactMarkdown>
+                                        {!item.description || item.description === items[0].operationSpec?.description
+                                            ? pathDescription(item)
+                                            : item.description}
+                                    </ReactMarkdown>
+                                    <Parameters item={item} objects={objects} />
 
-                                <Endpoints paths={paths} />
+                                    <RequestBody item={item} objects={objects} />
 
-                                {items.map((item) => {
-                                    item = item.operationSpec
+                                    <ResponseBody item={item} objects={objects} />
+                                </div>
+                                <div className="lg:sticky top-0">
+                                    <h4>Request</h4>
+                                    <RequestExample
+                                        item={item}
+                                        objects={objects}
+                                        exampleLanguage={exampleLanguage}
+                                        setExampleLanguage={setExampleLanguage}
+                                    />
 
-                                    return (
-                                        <div className="mt-8" key={item.operationId}>
-                                            <div
-                                                className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start"
-                                                id={pathID(item.httpVerb, item.pathName)}
-                                            >
-                                                <div>
-                                                    <h2>{generateName(item)}</h2>
-                                                    <ReactMarkdown>
-                                                        {!item.description ||
-                                                        item.description === items[0].operationSpec?.description
-                                                            ? pathDescription(item)
-                                                            : item.description}
-                                                    </ReactMarkdown>
-                                                    <Parameters item={item} objects={objects} />
-
-                                                    <RequestBody item={item} objects={objects} />
-
-                                                    <ResponseBody item={item} objects={objects} />
-                                                </div>
-                                                <div className="lg:sticky top-0">
-                                                    <h4>Request</h4>
-                                                    <RequestExample
-                                                        item={item}
-                                                        objects={objects}
-                                                        exampleLanguage={exampleLanguage}
-                                                        setExampleLanguage={setExampleLanguage}
-                                                    />
-
-                                                    <h4>Response</h4>
-                                                    <ResponseExample
-                                                        item={item}
-                                                        objects={objects}
-                                                        objectKey={
-                                                            item.responses[Object.keys(item.responses)[0]]?.content?.[
-                                                                'application/json'
-                                                            ]?.schema['$ref']
-                                                                ?.split('/')
-                                                                .at(-1) ||
-                                                            item.responses[Object.keys(item.responses)[0]]?.content?.[
-                                                                'application/json'
-                                                            ]?.schema['items']['$ref']
-                                                                ?.split('/')
-                                                                .at(-1)
-                                                        }
-                                                        exampleLanguage={exampleLanguage}
-                                                        setExampleLanguage={setExampleLanguage}
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    )
-                                })}
-                            </article>
+                                    <h4>Response</h4>
+                                    <ResponseExample
+                                        item={item}
+                                        objects={objects}
+                                        objectKey={
+                                            item.responses[Object.keys(item.responses)[0]]?.content?.[
+                                                'application/json'
+                                            ]?.schema['$ref']
+                                                ?.split('/')
+                                                .at(-1) ||
+                                            item.responses[Object.keys(item.responses)[0]]?.content?.[
+                                                'application/json'
+                                            ]?.schema['items']['$ref']
+                                                ?.split('/')
+                                                .at(-1)
+                                        }
+                                        exampleLanguage={exampleLanguage}
+                                        setExampleLanguage={setExampleLanguage}
+                                    />
+                                </div>
+                            </div>
                         </div>
-                    </section>
-                </div>
-            </Layout>
-        </>
+                    )
+                })}
+            </PostLayout>
+        </Layout>
     )
 }
 

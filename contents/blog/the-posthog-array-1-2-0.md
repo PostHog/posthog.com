@@ -12,7 +12,7 @@ featuredImageType: standard
 
 Big new integration - PostHog now has a library for iOS!
 
-Like what you see and self-hosting? [Update](/docs/self-host/configure/upgrading-posthog) your instance.
+Like what you see and self-hosting? [Update](/docs/runbook/upgrading-posthog) your instance.
 
 ## Release notes
 

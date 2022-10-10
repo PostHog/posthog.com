@@ -51,7 +51,7 @@ export const SelfHosted = ({ hideActions, hideBadge, hideCalculator, className =
                 </ul>
                 <TrackedCTA
                     href="https://license.posthog.com/"
-                    className="mt-7 mb-3 mt-auto shadow-xl"
+                    className="mt-7 mb-3 mx-auto"
                     event={{ name: `clicked Choose Self-Serve`, type: 'self-hosted' }}
                 >
                     Choose Self-Serve
@@ -98,7 +98,7 @@ export const Enterprise = ({ setOpen, hideActions, hideBadge, hideCalculator, cl
                 </ul>
                 <TrackedCTA
                     href="https://license.posthog.com/?price_id=price_1L1AeWEuIatRXSdzj0Y5ioOU"
-                    className="mt-7 mb-3 mt-auto shadow-xl"
+                    className="mt-7 mb-3 mx-auto"
                     event={{ name: `clicked Choose Enterprise`, type: 'self-hosted-enterprise' }}
                 >
                     Choose Enterprise

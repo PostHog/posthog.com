@@ -1,17 +1,12 @@
 import { MDXProvider } from '@mdx-js/react'
 import { GithubIcon } from 'components/GithubIcon'
-import { countryCodeEmoji } from 'country-code-emoji'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
+import { kebabCase } from 'lib/utils'
 import React from 'react'
+import ReactCountryFlag from 'react-country-flag'
 import { shortcodes } from '../../mdxGlobalComponents'
-
-const kebabCase = (string) =>
-    string
-        .replace(/([a-z])([A-Z])/g, '$1-$2')
-        .replace(/[\s_]+/g, '-')
-        .toLowerCase()
 
 export default function Team() {
     const {
@@ -51,7 +46,7 @@ export default function Team() {
                                     title={title}
                                 />
                                 <span className="absolute mt-8 top-2 right-2 text-4xl sm:text-4xl">
-                                    {country === 'world' ? '🌎' : countryCodeEmoji(country)}
+                                    {country === 'world' ? '🌎' : <ReactCountryFlag svg countryCode={country} />}
                                 </span>
                             </div>
                         </div>
