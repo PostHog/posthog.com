@@ -18,15 +18,6 @@ Using PostHog to gather analytics in this way isn’t just an excuse for us to �
 > Already want to track your marketing website with PostHog? Find out [how to install our JavaScript snippet](/docs/integrate/client/js) in just a few minutes!
 
 ### 1. Get better data
-<BorderWrapper>
-    <Quote
-        imageSource="/images/customers/filip.png"
-        size="md"
-        name="Filip Stanev"
-        title="Co-founder, Saga"
-        quote={`“PostHog tracks more events than Mixpanel. For one event we defined, Mixpanel reported 6,343 occurrences last month. PostHog reported what we know to be the true figure, 8,169 — almost 30% more than Mixpanel.”`}
-    />
-</BorderWrapper>
 
 Web analytics tools, such as Google Analytics, are all well and good — but if your tracking stops as soon as a user logs in to your platform then can you really track their entire user journey? 
 
