@@ -9,7 +9,7 @@ The [General Data Protection Regulation (GDPR)](https://gdpr.eu/) is a privacy a
 
 We recommend that you read the full text of the GDPR and seek independent legal advice regarding your obligations. The consequences of violating GDPR are severe.
 
-If you require robust GDPR compliance, we recommend using [PostHog Cloud EU](/signup/eu-cloud) – a managed version of PostHog that's hosted on servers based in Frankfurt.
+If you require robust GDPR compliance, we recommend using [PostHog Cloud EU](/eu) – a managed version of PostHog that's hosted on servers based in Frankfurt.
 
 ## What data is protected under GDPR?
 
