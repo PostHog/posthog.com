@@ -94,7 +94,7 @@ export default function SelfHost() {
                                     <h2 className="text-xl md:text-2xl opacity-70 font-semibold mb-4">
                                         Same product suite. New hosting option.
                                     </h2>
-                                    <p className="font-semibold opacity-70">Estimated arrival: Winter 2022</p>
+                                    <p className="font-semibold opacity-70">Estimated arrival: Imminent</p>
 
                                     <h3 className="leading-tight">Get notified when PostHog Cloud EU is ready</h3>
                                     <HubspotForm portalId="6958578" formId="c2c88e03-449d-464f-b98e-5b84d9f504ab" />
