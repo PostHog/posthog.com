@@ -11,7 +11,13 @@ featuredImage: ../images/blog/posthog-eu-blog.png
 featuredImageType: full
 --
 
-Today, we’re delighted to announce the [launch of PostHog Cloud EU](/eu) – a fully-managed version of PostHog where all data is hosted exclusively in the EU.
+It's no secret that some popular analytics tools, such as Google Analytics, have fallen foul of GDPR regulations in the EU. That's one reason why we've enabled users to self-host PostHog, or to anonymize user data in a way which complies with GDPR. 
+
+Today, we're making a third option available: hosting PostHog Cloud in Europe so that user data never has to leave the EU. Now, any business which needs to comply with GDPR regulations can get up and running in a few minutes, and without the ongoing upkeep required for a self-hosted deployment. 
+
+Oh, and PostHog Cloud EU also happens to be faster for users located in Europe, which is nice. 
+
+PostHog Cloud EU offers everything you'd expect of PostHog - analytics, session recording, experiments and more. The only difference is that you can now choose to host in a different region, at no extra cost. 
 
 Until now, running PostHog with GDPR compliance meant self-hosting on your own infrastructure, or comprehensively anonymizing data if using PostHog Cloud.
 
