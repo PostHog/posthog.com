@@ -70,6 +70,7 @@ In the future, we will split the session into groups in order to manage time bet
 - You are expected to give feedback to everyone, even if you don’t work together directly. It may be very short feedback, which is ok! 
 - That being said, avoid piling on and repeating feedback others have given unless you have a different perspective or can add more context. It is ok to say "+1 to what X said about Y" and move on. Do not spend 2min repeating the same point that has already been made by someone else. 
 - Everyone is responsible for noting down and actioning their own feedback (i.e. the People team won't do this for you). 
+- At the end go back around the group and give everyone the opportunity for a moment to reflect on the session.
 
 ### How is this different from individual performance review?
 

@@ -135,3 +135,5 @@ You can remove a user from a PostHog instance via the PostHog user interface. To
 ### Further reading
 
 - [A simple guide to personal data and PII](/blog/what-is-personal-data-pii)
+- [Building a tracking cookies opt out banner in React](/tutorials/react-cookie-banner)
+- [How to use PostHog without cookie banners](/tutorials/cookieless-tracking)

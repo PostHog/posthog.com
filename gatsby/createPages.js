@@ -302,6 +302,7 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
                     breadcrumbBase: breadcrumbBase || menuFlattened[0],
                     tableOfContents,
                     slug,
+                    searchFilter: menu,
                     ...(context ? context(node) : {}),
                 },
             })
