@@ -6,10 +6,6 @@ PostHog tracks some usage of its own products. You can opt out of any telemetry 
 
 ## Self-hosting (Open source / Self-serve / Enterprise)
 
-This is designed for individual or smaller teams of developers to use for non-commercial or smaller commercial projects.
-
-The repo can be found at the PostHog GitHub.
-
 We ask users if they wish to opt in to:
 
 -   Our Slack channel where we have a community
@@ -24,6 +20,14 @@ We provide opt-out tracking on some basic high-level information on the product:
 -   Company name if provided
 -   The host
 
-### PostHog Cloud
+## PostHog Cloud
 
-We track product usage with our own product – the same you will be using – by default. However, you can choose to opt-out of tracking we can opt you out – if you are an existing or prospective customer, talk to us about it.
+We track product usage with our own product – the same you will be using – by default.
+This includes information on how our users utilize our product, which helps us ship and improve features.
+
+## Anonymizing or opting-out of tracking
+
+If you wish to anonymize your data, you can do so any time by visiting your personal settings, and choosing to 'Anonymize Data Collection'.
+We will continue to track events about your usage, but we will no longer associate them with your account's email.
+
+If instead you would like to opt-out of all tracking - whether you're an existing or prospective customer - please email us at hey@posthog.com.
