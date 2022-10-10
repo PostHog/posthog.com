@@ -21,7 +21,7 @@ We’ll use all this to help us create a better new user experience.
 
 ## Our experiment and what we need
 
-For our experiment, we want to see if a change to our onboarding process gets more new users to complete the first key event in our product, uploading a file. In our example, we have design and copy changes we’d to try to encourage new users to upload a file.
+In our example project, we have a Dropbox-like product that allows users to upload and download files. For our experiment, we want to see if a change to our onboarding process gets more new users to complete the first key event in our product, uploading a file. We have design and copy changes we’d to try to encourage new users to upload a file.
 
 We’ve already set up PostHog ([on a paid plan](/pricing), to get access to experiments), and have custom events set up for both `signed_up` and `uploaded_file`. Both have a significant amount of events coming in. 
 
