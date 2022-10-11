@@ -1,5 +1,5 @@
 ---
-title: Objectives and Key Results
+title: Objectives and key results
 sidebar: Handbook
 showTitle: true
 ---
