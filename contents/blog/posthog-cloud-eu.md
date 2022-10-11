@@ -35,11 +35,15 @@ None. PostHog Cloud EU is an entirely independent instance of PostHog. All event
 
 Just deploying PostHog Cloud EU isn't enough – you still need to [acquire consent](/tutorials/react-cookie-banner) from your users and comply with all other provisions of the GDPR, such as the right to be forgotten. Please see our [GDPR guidance](/docs/privacy/gdpr-compliance) for more information.
 
+### What does PostHog Cloud EU cost?
+
+For now, we're charging [the same as "regular" PostHog Cloud](../pricing). The first 1 million events/month are free, then we charge monthly per event after that. [Get started here](https://eu.posthog.com/signup).
+
 ### I'm an existing PostHog customer, can I migrate to PostHog Cloud EU?
 
 It is possible to migrate event data from another PostHog instance to EU Cloud, but it is a time-consuming process likely to take several days or weeks. There is currently no way to migrate other information, including insights, dashboards, user accounts, feature flags or API keys. 
 
-We strongly recommend that users with large volumes of data begin by setting up and connect a new EU cloud instance and only attempt to migrate data later, if needed, by following [this migration tutorial](/tutorials/eu-cloud). 
+We strongly recommend that users with large volumes of data begin by setting up and connect a new EU cloud instance and only attempt to migrate data later, if needed, by following [this migration tutorial](/tutorials/migrate-eu-cloud). 
 
 ## GDPR compliance checklist
 
