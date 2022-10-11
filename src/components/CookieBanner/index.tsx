@@ -15,7 +15,8 @@ export default function CookieBanner() {
     useEffect(() => {
         setShowBanner(
             typeof posthog?.has_opted_in_capturing !== 'undefined' &&
-                (!posthog?.has_opted_in_capturing() || !posthog?.has_opted_out_capturing())
+                !posthog?.has_opted_in_capturing() &&
+                !posthog?.has_opted_out_capturing()
         )
     }, [])
 
