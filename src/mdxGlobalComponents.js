@@ -41,11 +41,13 @@ import { Container } from './components/Container'
 import { ContributorCard } from './components/ContributorCard'
 import { ContributorSearch } from './components/ContributorSearch'
 import { ContributorsChart } from './components/ContributorsChart'
+import { CookieBanner } from './components/CookieBanner'
 import { Customers } from './components/Customers'
 import { DarkModeToggle } from './components/DarkModeToggle'
 import { DemoScheduler } from './components/DemoScheduler'
 import { DeployOption } from './components/DeployOption'
 import { DocsPageSurvey } from './components/DocsPageSurvey'
+import { EU } from './components/EU'
 import { FeatureAvailability } from './components/FeatureAvailability'
 import { FeaturesSelfHost } from './components/FeaturesSelfHost'
 import { FloatedImage } from './components/FloatedImage'
@@ -168,11 +170,13 @@ export const shortcodes = {
     ContributorCard,
     ContributorSearch,
     ContributorsChart,
+    CookieBanner,
     Customers,
     DarkModeToggle,
     DemoScheduler,
     DeployOption,
     DocsPageSurvey,
+    EU,
     FeatureAvailability,
     FeaturesSelfHost,
     FloatedImage,
