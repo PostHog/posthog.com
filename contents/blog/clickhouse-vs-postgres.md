@@ -31,7 +31,7 @@ If you’ve ever taken a databases 101 course, you’ve likely heard lectures on
 
 The majority of popular solutions — MySQL, Postgres, SQLite — are all row-based. In each of these, data / objects are stored as rows, like a phone book. 
 
-In contrast, ClickHouse is a *columnar* database. Built by a single C++ binary, ClickHouse tables in memory are inverted — data is ingested as a column, meaning you’ve a *very large* number of columns and a much smaller set of rows.
+In contrast, ClickHouse is a *columnar* database. ClickHouse tables in memory are inverted — data is ingested as a column, meaning you’ve a large number of columns and a sizable set of rows.
 
 Here's what that looks like...
 
