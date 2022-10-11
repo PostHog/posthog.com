@@ -43,6 +43,7 @@ import { ContributorsChart } from './components/ContributorsChart'
 import { CookieBanner } from './components/CookieBanner'
 import { Customers } from './components/Customers'
 import { DarkModeToggle } from './components/DarkModeToggle'
+import { DemoLink } from './components/DemoLink'
 import { DemoScheduler } from './components/DemoScheduler'
 import { DeployOption } from './components/DeployOption'
 import { DocsPageSurvey } from './components/DocsPageSurvey'
@@ -171,6 +172,7 @@ export const shortcodes = {
     CookieBanner,
     Customers,
     DarkModeToggle,
+    DemoLink,
     DemoScheduler,
     DeployOption,
     DocsPageSurvey,
