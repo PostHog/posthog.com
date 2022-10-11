@@ -8,6 +8,9 @@ import './SkeletonLoading.css'
 import './DarkMode.scss'
 import { PosthogAnnouncement } from '../PosthogAnnouncement/PosthogAnnouncement'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
+import { StaticImage } from 'gatsby-plugin-image'
+import { CallToAction } from 'components/CallToAction'
+import CookieBanner from 'components/CookieBanner'
 
 const Layout = ({ children, className = '' }: { children: React.ReactNode; className?: string }): JSX.Element => {
     const { posthog } = useValues(posthogAnalyticsLogic)
@@ -24,6 +27,7 @@ const Layout = ({ children, className = '' }: { children: React.ReactNode; class
             <main>{children}</main>
             <Footer />
             <PosthogAnnouncement />
+            <CookieBanner />
         </div>
     )
 }

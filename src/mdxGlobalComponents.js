@@ -41,6 +41,7 @@ import { Container } from './components/Container'
 import { ContributorCard } from './components/ContributorCard'
 import { ContributorSearch } from './components/ContributorSearch'
 import { ContributorsChart } from './components/ContributorsChart'
+import { CookieBanner } from './components/CookieBanner'
 import { Customers } from './components/Customers'
 import { DarkModeToggle } from './components/DarkModeToggle'
 import { DemoScheduler } from './components/DemoScheduler'
@@ -169,6 +170,7 @@ export const shortcodes = {
     ContributorCard,
     ContributorSearch,
     ContributorsChart,
+    CookieBanner,
     Customers,
     DarkModeToggle,
     DemoScheduler,
