@@ -20,10 +20,10 @@ export default function CookieBanner() {
 
     return showBanner ? (
         <div className="fixed z-50 -left-8 -bottom-10">
-            <div className="bg-primary rounded-sm max-w-[200px] text-white/80 translate-x-1/2">
+            <div className="bg-primary rounded-sm max-w-[202px] text-white/80 translate-x-1/2">
                 <p className="text-[14px] m-0 p-3">
-                    We use tracking cookies to understand how you use the product and help us improve it. Please accept
-                    cookies to help us improve.
+                    PostHog doesn’t use third party cookies - only a single in-house cookie. No data is transmitted to a
+                    third party.
                 </p>
                 <div className="grid grid-cols-2 border-t border-white/40 border-dashed divide-x-1 divide-white/40 divide-dashed">
                     <button onClick={() => handleClick(true)} className="font-semibold text-red py-2 text-[14px]">
