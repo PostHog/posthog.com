@@ -37,7 +37,7 @@ Here's what that looks like...
 
 ![clickhouse vs postgres rows and columns](../images/blog/clickhouse-vs-postgres/rows-vs-columns.png)  
 
-This difference – to be clear – details how the data is *stored*; to the user, no mental-inversion is needed. You’re still dealing with tables with entries. You will continue to utilize SQL to interface with ClickHouse. The big difference is that those queries will perform very differently from analog queries to Postgres or any other row-based relational database. 
+The difference – to be clear – is how the data is *stored*; to the user, no mental-inversion is needed. You still deal with tables with entries. You continue to utilize SQL to interface with ClickHouse. The big difference is that those queries perform differently from the analog queries in Postgres or other row-based relational database. 
 
 ![clickhouse vs postgres rows and columns](../images/blog/clickhouse-vs-postgres/rows-vs-columns-user.png) 
 
