@@ -21,7 +21,7 @@ export default function CookieBanner() {
     }, [])
 
     return showBanner ? (
-        <div className="fixed z-50 left-0 bottom-[50px] sm:bottom-0">
+        <div className="fixed z-50 left-0 bottom-0">
             <div className="bg-primary rounded-sm max-w-[202px] text-white/80 translate-x-[150px]">
                 <p className="text-[14px] m-0 p-3">
                     PostHog doesn’t use third party cookies - only a single in-house cookie. No data is transmitted to a
