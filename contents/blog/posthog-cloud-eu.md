@@ -37,7 +37,7 @@ Just deploying PostHog Cloud EU isn't enough – you still need to [acquire cons
 
 ### What does PostHog Cloud EU cost?
 
-For now, we're charging [the same as "regular" PostHog Cloud](../pricing). The first 1 million events/month are free, then we charge monthly per event after that. [Get started here](https://eu.posthog.com/signup) (_not_ from our pricing page - it hasn't made it there yet!)
+For now, we're charging [the same as "regular" PostHog Cloud](../pricing). The first 1 million events/month are free, then we charge monthly per event after that. [Get started here](https://eu.posthog.com/signup).
 
 ### I'm an existing PostHog customer, can I migrate to PostHog Cloud EU?
 
