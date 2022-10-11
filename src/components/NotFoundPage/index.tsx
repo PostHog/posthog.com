@@ -5,7 +5,6 @@ import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 import { BasicHedgehogImage } from '../BasicHedgehogImage'
 import { CallToAction } from '../CallToAction'
 import Layout from '../Layout'
-import './NotFoundPage.scss'
 import Lottie from 'react-lottie'
 import pizzaFight from '../../lotties/pizza-fight.json'
 
