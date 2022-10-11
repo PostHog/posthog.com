@@ -13,11 +13,11 @@ categories: ["Engineering", "Guides"]
 
 Honestly, it is a bit ridiculous to compare Postgres and ClickHouse. The two database solutions are as similar as grapes and grapefruit. ClickHouse was created for a specific purpose; Postgres was designed to be flexible and all-purpose. 
 
-So why even compare them? Because most companies that invest in an OLAP (online analytical processing) database like ClickHouse originally used an OLTP (online transaction processing) stack like mySQL or Postgres. PostHog’s database journey was no different. 
+So why even compare them? Because most companies that invest in an online analytical processing (OLAP) database like ClickHouse originally used an online transaction processing (OLTP) stack like MySQL or Postgres. PostHog’s database journey was no different. 
 
-In 2020, PostHog used Postgres to store client data. In the beginning, it worked. But usage grew very, very fast. Eventually, that all-purpose Postgres database was tasked to store millions of rows of data. At the rate data was being ingested, PostHog was on a collision course towards a major crash. 
+In 2020, PostHog used Postgres to store client data. In the beginning, it worked. But usage grew very, very fast. Eventually, that all-purpose Postgres database was tasked to store millions of rows of data. It was obvious Postgres couldn't handle the scale necessary for an analytics platform like PostHog.
 
-At first, the team tried a ton of hack-y and wacky solutions in attempts to get Postgres to work. Turns out, that wasn’t very sustainable (who would’ve thought!). Then, PostHog [migrated client data to ClickHouse](/blog/how-we-turned-clickhouse-into-our-eventmansion). Boom! 
+At first, the team tried a ton of hack-y and wacky solutions in attempts to get Postgres to work. Turns out, that wasn’t sustainable (who would’ve thought!). Eventually, PostHog [migrated client data to ClickHouse](/blog/how-we-turned-clickhouse-into-our-eventmansion). Boom! 
 
 This is what that felt like...
 
@@ -29,7 +29,7 @@ Suddenly, all those data problems were solved, Thanos-snapped from existence. He
 
 If you’ve ever taken a databases 101 course, you’ve likely heard lectures on row-based relational databases. Good chance, the professor referred to them as simply *relational databases* or even *normal databases*. 
 
-The majority of popular solutions — mySQL, Postgres, SQLite — are all row-based. In each of these, data / objects are stored as rows, like a Yellowpages book. 
+The majority of popular solutions — MySQL, Postgres, SQLite — are all row-based. In each of these, data / objects are stored as rows, like a phone book. 
 
 In contrast, ClickHouse is a *columnar* database. Built by a single C++ binary, ClickHouse tables in memory are inverted — data is ingested as a column, meaning you’ve a *very large* number of columns and a much smaller set of rows.
 
@@ -43,13 +43,13 @@ This difference – to be clear – details how the data is *stored*; to the use
 
 ClickHouse was designed for products that require fetched aggregate data — stuff like analytics, financial real-time products, ad-bidding technology, content delivery networks, or log management. Basically, it’s for data that doesn’t need to be *changed*; ClickHouse is downright terrible at mutations.
 
-It’s important to realize that ClickHouse is rarely used alone. Because ClickHouse is bad at update-heavy data, it’s not a great database to run the day-to-day usage of an app. If ClickHouse powered Tinder, the only match users would make would be with a loading modal. Anyone who uses ClickHouse is also using Postgres or mySQL for the non-specialized bits of their product.
+It’s important to realize that ClickHouse is rarely used alone. Because ClickHouse is bad at update-heavy data, it’s not a great database to run the day-to-day usage of an app. If ClickHouse powered Tinder, the only match users would have is the loading modal. Anyone who uses ClickHouse is also using Postgres or another rows-based relational database for the non-specialized bits of their product.
 
 One previously-used [analogy](https://www.youtube.com/watch?v=aRT8E0nD_LE) to compare OLTP databases (Postgres) with OLAP databases (ClickHouse) is Teachers vs Principals. A teacher (akin to Postgres) would be able to efficiently answer the question “How is Johnny, the 4th grader, doing in Math?”. A principal (akin to OLAP) wouldn’t know who Johnny is, but would be able to quickly provide the student body’s national exam pass rate.  
 
-### Clearing some instant confusion
+### Clearing some ClickHouse confusion
 
-ClickHouse’s documentation could be a tad confusing to readers unfamiliar with OLAP databases. This is because ClickHouse makes usage recommendations in context of the reader’s expected goals. 
+ClickHouse’s documentation is a tad confusing to readers unfamiliar with OLAP databases. This is because ClickHouse makes usage recommendations based on the reader’s expected goals. 
 
 Let’s take a look at ClickHouse’s self-stated key properties: 
 
@@ -57,7 +57,7 @@ Let’s take a look at ClickHouse’s self-stated key properties:
 
 ClickHouse states that a vast majority of requests should be for read access, but this is a bit misleading — it’s more that read-heavy requests should greatly outnumber update/mutation requests, not inserts. 
 
-ClickHouse later states that inserts should happen in batches. This is not because ClickHouse is bad at write-access; rather, batched inserts take advantage of ClickHouse’s core tenet of “insert fast, optimize later” philosophy. Non-batched requests are inherently slower than batched counterparts, and relatively the same when the database doesn’t support transactions. 
+ClickHouse states that inserts should happen in batches. This is not because ClickHouse is bad at write-access; rather, batched inserts take advantage of ClickHouse’s core tenet of “insert fast, optimize later” philosophy. Non-batched requests are inherently slower than batched counterparts, and relatively the same when the database doesn’t support transactions. 
 
 ## Comparing ClickHouse and Postgres
 
@@ -71,7 +71,7 @@ Conversely, you will also see:
 
 It’s like comparing a MacBook (Postgres) with a music synthesizer (ClickHouse) — you can make decent music on your Macbook, but you explicitly can’t run Microsoft Excel on a synthesizer. 
 
-Likewise, it should be no surprise that most of this article will focus on the former scenario (hacking Postgres to operate like ClickHouse). The converse is simply ridiculous. 
+Likewise, it should be no surprise that most of this section will focus on the former scenario (hacking Postgres to operate like ClickHouse). The converse is simply ridiculous. 
 
 ### Simple Cases
  
@@ -103,7 +103,7 @@ This is, again, a crude comparison. It ignores caches on both ends, and more int
 
 4. No transaction-locking overhead.
  
-Robert Hodges, CEO of Altinity, [once compared](URL NEEDED) ClickHouse to a drag-racer — it might not have doors, but it is incredibly, incredibly fast when used correctly. 
+Robert Hodges, CEO of Altinity, [once compared](https://www.youtube.com/watch?v=fGG9dApIhDU) ClickHouse to a drag-racer — it might not have doors, but it is incredibly, incredibly fast when used correctly. 
 
 These optimizations are made possible by ClickHouse’s insert-and-optimize-later philosophy. ClickHouse is constantly merging data in the background to collapse series of data into single values to expedite future queries. 
 
@@ -157,7 +157,7 @@ In a nutshell, Postgres can be bandaged up to achieve some efficiency that Click
 
 ### Specialized engines vs one-size-fits-all
  
-Technically, database engines are nothing new. mySQL has plenty of engines, although it is typically used with just InnoDB. Postgres technically only operates using a single engine, though the Postgres team is building a new engine called [zheap](https://www.percona.com/live/19/sessions/zheap-the-next-generation-storage-engine-for-postgres), specifically designed to optimize the `UPDATE` function. 
+Technically, database engines are nothing new. MySQL has plenty of engines, although it is typically used with just InnoDB. Postgres technically only operates using a single engine, though the Postgres team is building a new engine called [zheap](https://www.percona.com/live/19/sessions/zheap-the-next-generation-storage-engine-for-postgres), specifically designed to optimize the `UPDATE` function. 
 
 The difference between Postgres and ClickHouse engines are similar to the broader comparisons of the databases — Postgres champions a one-size-fits-all approach, while ClickHouse expects users to harness specialized engines when carrying out certain data fetches. 
 
@@ -167,9 +167,9 @@ ClickHouse also has specialized engines — `MaterializedView`, `Merge`, `Dictio
 
 #### What is Vectorized Query Execution? 
 
-Vectorized Execution, originally championed by the MonetDB team, batches data to achieve bulk processing — a technique previously discussed throughout this article. While there are some third party [Postgres extensions](https://github.com/citusdata/postgres_vectorization_test) to achieve Vectorized Query Execution, ClickHouse is built around it, processing data on every CPU while better utilizing the CPU cache and SIMD CPU instructions.
+Vectorized Execution, originally championed by the [MonetDB](https://www.monetdb.org/) team, batches data to achieve bulk processing. While there are some third party [Postgres extensions](https://github.com/citusdata/postgres_vectorization_test) to achieve Vectorized Query Execution, ClickHouse is built around it, processing data on every CPU while better utilizing the CPU cache and SIMD CPU instructions.
 
-### Sharding
+### Postgres and its sharding problem
 
 One of the biggest constraints of Postgres for the longest time was sharding. Even now, Postgres’s most-used sharding solution — declarative table partitioning — isn’t exactly a sharding solution as the splitting operates at a table-by-table level. 
 
