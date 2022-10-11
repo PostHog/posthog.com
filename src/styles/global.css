@@ -67,7 +67,7 @@ h6 {
 }
 
 h1 {
-    @apply text-5xl font-bold leading-normal;
+    @apply text-5xl font-bold !leading-none;
     letter-spacing: -0.03em;
 }
 
@@ -240,8 +240,7 @@ h4 {
 }
 
 /* animated underlined links */
-.article-content a:not(.cta),
-footer a:not(.cta) {
+.article-content a:not(.cta) {
     background: linear-gradient(to right, rgba(191, 191, 188, 0), rgba(191, 191, 188, 0)),
         linear-gradient(to right, rgba(191, 191, 188, 1), rgba(191, 191, 188, 1));
     background-size: 100% 0.1em, 0 0.1em;
