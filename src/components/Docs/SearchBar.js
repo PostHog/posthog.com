@@ -47,18 +47,18 @@ export default function SearchBar({ base, label = true, className = '' }) {
 
     return (
         <div
-            className={`flex space-x-3 w-full text-[14px] px-3 items-center flex-grow relative ${
+            className={`flex space-x-3 w-full text-[14px] px-2 items-center flex-grow relative ${
                 !label ? 'docsearch-no-label' : ''
             } ${className}`}
         >
             <DocSearch
                 translations={{
                     button: {
-                        buttonText: label ? `Search ${breakpoints.xs ? '' : base} ` : '',
+                        buttonText: label ? `Search ${breakpoints.xs ? '' : base || 'almost anything'}` : '',
                         buttonAriaLabel: 'Search',
                     },
                 }}
-                searchParameters={{ facetFilters: [`tags:${base}`] }}
+                searchParameters={base && { facetFilters: [`tags:${base}`] }}
                 appId="B763I3AO0D"
                 indexName="posthog"
                 apiKey="f1386529b9fafc5c3467e0380f19de4b"

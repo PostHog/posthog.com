@@ -38,7 +38,7 @@ export const SelfHosted = ({ hideActions, hideBadge, hideCalculator, className =
                     <h5 className="text-[15px] opacity-50 m-0 font-medium"> Starts at</h5>
                     <p className="m-0">
                         <span>
-                            <strong>$0.0003</strong>
+                            <strong>$0.00045</strong>
                             <span className="text-[13px] opacity-50">/event</span>
                         </span>
                     </p>
@@ -51,7 +51,7 @@ export const SelfHosted = ({ hideActions, hideBadge, hideCalculator, className =
                 </ul>
                 <TrackedCTA
                     href="https://license.posthog.com/"
-                    className="mt-7 mb-3 mt-auto shadow-xl"
+                    className="mt-7 mb-3 mx-auto"
                     event={{ name: `clicked Choose Self-Serve`, type: 'self-hosted' }}
                 >
                     Choose Self-Serve
@@ -88,7 +88,7 @@ export const Enterprise = ({ setOpen, hideActions, hideBadge, hideCalculator, cl
                         First 1 million events included every month
                     </p>
                 </div>
-                <p className="text-[13px] text-black/50">Self-Serve benefits plus...</p>
+                <p className="text-[13px] text-black/50 mb-2">Self-Serve benefits plus...</p>
                 <ul className="list-none p-0 m-0 grid gap-y-3 mb-6">
                     <Feature>SQL access</Feature>
                     <Feature>Team training</Feature>
@@ -98,7 +98,7 @@ export const Enterprise = ({ setOpen, hideActions, hideBadge, hideCalculator, cl
                 </ul>
                 <TrackedCTA
                     href="https://license.posthog.com/?price_id=price_1L1AeWEuIatRXSdzj0Y5ioOU"
-                    className="mt-7 mb-3 mt-auto shadow-xl"
+                    className="mt-7 mb-3 mx-auto"
                     event={{ name: `clicked Choose Enterprise`, type: 'self-hosted-enterprise' }}
                 >
                     Choose Enterprise

@@ -26,12 +26,6 @@ export default function SelfHost() {
             <SEO title="Self-host - PostHog" />
             <section>
                 <Intro title="How do you want to run PostHog?" />
-                <p className="text-center -mt-16 mb-12">
-                    Not sure which edition is right for you?{' '}
-                    <Link to="/pricing" className="font-semibold">
-                        Build your perfect plan.
-                    </Link>
-                </p>
                 <div className="border-t border-b border-dashed border-gray-accent-light">
                     <div className="grid md:grid-cols-2 max-w-screen-lg mx-auto md:divide-x-1 divide-y-1 md:divide-y-0 divide-dashed divide-gray-accent-light">
                         <SelfHosted />
@@ -40,7 +34,7 @@ export default function SelfHost() {
                 </div>
                 <div className="max-w-screen-lg mx-auto flex md:flex-row flex-col items-center">
                     <Plan title="Open source" subtitle="with community support">
-                        <p className="text-black/70 my-2 text-base">
+                        <p className="text-black/70 my-2 text-lg">
                             Our original open source product is available on GitHub and offers product analytics,
                             feature flags, and session recordings.
                         </p>

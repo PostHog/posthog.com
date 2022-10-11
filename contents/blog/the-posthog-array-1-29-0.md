@@ -18,7 +18,7 @@ PostHog 1.29.0 includes a fully revamped Paths experience which enables you to b
 
 ## PostHog 1.29.0 release notes
 
-> For a better experience and new features, remember to [update your PostHog instance](/docs/self-host/configure/upgrading-posthog).
+> For a better experience and new features, remember to [update your PostHog instance](/docs/runbook/upgrading-posthog).
 
 **Release highlights:**
 
@@ -108,7 +108,7 @@ As a small thank you for your time, we're giving away awesome [PostHog merch](ht
 
 ## PostHog News
 
-Welcome Harry Waye! Harry is joining us as a Full Stack Engineer on the [Core Analytics Team](/handbook/people/team-structure/core-analytics).
+Welcome Harry Waye! Harry is joining us as a Full Stack Engineer on the [Platform Team](/handbook/people/team-structure/platform).
 
 ## Community
 ### Community MVP 🏆

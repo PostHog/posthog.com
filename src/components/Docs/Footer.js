@@ -24,7 +24,7 @@ export default function Footer({ contributors, filePath, title }) {
                             // If no contributors are found, this section shows nothing.
                             contributors && (
                                 <div className="my-10">
-                                    <h3 className="text-base text-white">Contributors</h3>
+                                    <h3 className="text-lg text-white">Contributors</h3>
                                     <Contributors
                                         className="list-none m-0 p-0 flex space-x-2 mt-2 flex-wrap"
                                         contributors={contributors}
@@ -37,7 +37,7 @@ export default function Footer({ contributors, filePath, title }) {
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <h3 className="text-base text-white">Docs</h3>
+                            <h3 className="text-lg text-white">Docs</h3>
                             <ul className="m-0 p-0 list-none flex flex-col space-y-2">
                                 <li>
                                     <a
@@ -60,7 +60,7 @@ export default function Footer({ contributors, filePath, title }) {
                             </ul>
                         </div>
                         <div>
-                            <h3 className="text-base text-white">Community & support</h3>
+                            <h3 className="text-lg text-white">Community & support</h3>
                             <ul className="m-0 p-0 list-none">
                                 <li>
                                     Join our{' '}

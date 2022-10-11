@@ -26,7 +26,7 @@ const CopyAnchor = ({ id = '', hovered }: { id: string; hovered: boolean }) => {
                         animate={{ translateY: '-120%', opacity: 1 }}
                         exit={{ opacity: 0 }}
                     >
-                        <span className="text-xs">Copied!</span>
+                        <span className="text-sm">Copied!</span>
                     </motion.div>
                 )}
             </AnimatePresence>

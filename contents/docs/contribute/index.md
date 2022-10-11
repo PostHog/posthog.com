@@ -5,9 +5,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-We love contributions to PostHog, big or small.
-
-Here's what you need to know about contributing to our product:
+We love contributions to PostHog, big or small. Here's what you need to know about contributing to our product:
 
 ## Being a part of the community
 

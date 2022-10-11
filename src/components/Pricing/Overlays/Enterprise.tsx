@@ -1,44 +1,18 @@
 import { Check } from 'components/Icons/Icons'
 import Modal from 'components/Modal'
 import React from 'react'
+import { Link as ScrollLink } from 'react-scroll'
 
 const sections = [
     {
-        title: 'Security',
-        description:
-            'Configure PostHog to meet your security and data policies with granular controls over authentication and user data',
-        features: ['Project permissions', 'SSO, SAML'],
-    },
-    {
-        title: 'Compliance',
-        description:
-            'PostHog encrypts data and can be hosted on-premise, eliminating the extra steps involved in bringing on a new third party sub-processor. User data controls make it easy to comply with GDPR rules.',
-        features: ['GDPR', 'HIPAA', 'SOC II'],
-    },
-    {
-        title: 'Data management',
-        description: `We’ll help you configure your data and backups to control cost, while making sure you retain the data you need.`,
-        features: ['Configurable backups', 'Custom data retention', 'SOC II'],
+        title: 'Security & data management',
+        description: `Access control and compliance`,
+        features: ['SSO SAML', 'Advanced permissioning', 'Private projects', 'SOC 2 compliance (coming soon)'],
     },
     {
         title: 'Success',
         description: `With direct support from PostHog engineers, our success team will make sure your team accomplishes your objectives - not just when you start using PostHog, but on an ongoing basis.`,
-        features: [
-            'Dedicated Slack channel',
-            'Assisted dashboard configuration',
-            'Team training',
-            'Monitoring setup support',
-        ],
-    },
-    {
-        title: 'Support',
-        description: `Proactive assistance from PostHog engineers makes sure your PostHog instance is reliable, secure, and up to date.`,
-        features: [
-            'Instance monitoring',
-            'Infrastructure management pairing',
-            'Assisted upgrades',
-            'SLA w/ downtime developer pairing',
-        ],
+        features: ['Dedicated Slack channel', 'Assisted dashboard configuration', 'Team training'],
     },
 ]
 
@@ -107,9 +81,9 @@ export default function Enterprise({ setOpen, open }: { setOpen: (open: boolean)
                         </svg>
                     </button>
                 </div>
-                <h3 className="text-[18px] !text-bold/50 m-0 mt-2">
-                    Extra security, compliance, and data management tools. Plus proactive support for your PostHog
-                    instance, and for your teams using PostHog.
+                <h3 className="text-lg !text-semibold/50 m-0 mt-2">
+                    Extra security, compliance, and data management tools. Plus priority support for your teams using
+                    PostHog.
                 </h3>
                 <ul className="list-none m-0 p-0 mt-6">
                     {sections.map((section) => {
@@ -118,11 +92,11 @@ export default function Enterprise({ setOpen, open }: { setOpen: (open: boolean)
                                 key={section.title}
                                 className="border-t first:border-t-0 border-dashed border-gray-accent mt-4 pt-2 first:mt-0"
                             >
-                                <h4 className="text-lg m-0 mt-4">{section.title}</h4>
+                                <h4 className="text-xl m-0 mt-4">{section.title}</h4>
                                 <p className="text-[15px] font-medium m-0 leading-snug text-black/50">
                                     {section.description}
                                 </p>
-                                <ul className="list-none p-0 my-2 space-y-1">
+                                <ul className="list-none p-0 my-4 space-y-1">
                                     {section.features.map((feature) => {
                                         return (
                                             <li
@@ -139,6 +113,16 @@ export default function Enterprise({ setOpen, open }: { setOpen: (open: boolean)
                         )
                     })}
                 </ul>
+                <p className="m-0 mt-2 font-semibold">
+                    <ScrollLink
+                        onClick={() => setOpen(false)}
+                        smooth
+                        to="pricing-breakdown"
+                        className="cursor-pointer text-red"
+                    >
+                        See pricing breakdown and volume discounts
+                    </ScrollLink>
+                </p>
             </div>
         </Modal>
     )

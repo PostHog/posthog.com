@@ -11,17 +11,20 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
     const CustomerTemplate = path.resolve(`src/templates/Customer.js`)
     const PluginTemplate = path.resolve(`src/templates/Plugin.js`)
     const AppTemplate = path.resolve(`src/templates/App.js`)
-    const TutorialTemplate = path.resolve(`src/templates/Tutorial.js`)
     const ProductTemplate = path.resolve(`src/templates/Product.js`)
-    const ApiEndpoint = path.resolve(`src/templates/ApiEndpoint.js`)
-    const TutorialsCategoryTemplate = path.resolve(`src/templates/TutorialsCategory.js`)
-    const TutorialsAuthorTemplate = path.resolve(`src/templates/TutorialsAuthor.js`)
     const HostHogTemplate = path.resolve(`src/templates/HostHog.js`)
     const Question = path.resolve(`src/templates/Question.js`)
+    const SqueakTopic = path.resolve(`src/templates/SqueakTopic.tsx`)
+    const Job = path.resolve(`src/templates/Job.tsx`)
 
+    // Tutorials
+    const TutorialTemplate = path.resolve(`src/templates/tutorials/Tutorial.tsx`)
+    const TutorialsCategoryTemplate = path.resolve(`src/templates/tutorials/TutorialsCategory.tsx`)
+    const TutorialsAuthorTemplate = path.resolve(`src/templates/tutorials/TutorialsAuthor.tsx`)
+
+    // Docs
+    const ApiEndpoint = path.resolve(`src/templates/ApiEndpoint.tsx`)
     const HandbookTemplate = path.resolve(`src/templates/Handbook.tsx`)
-    const LibraryTemplate = path.resolve(`src/templates/docs/Library.tsx`)
-    const AppDocsTemplate = path.resolve(`src/templates/docs/App.tsx`)
 
     const result = await graphql(`
         {
@@ -65,8 +68,17 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
                         depth
                         value
                     }
-                    frontmatter {
-                        layout
+                    fields {
+                        slug
+                    }
+                }
+            }
+            manual: allMdx(filter: { fields: { slug: { regex: "/^/manual/" } }, frontmatter: { title: { ne: "" } } }) {
+                nodes {
+                    id
+                    headings {
+                        depth
+                        value
                     }
                     fields {
                         slug
@@ -124,6 +136,10 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
             blogPosts: allMdx(filter: { isFuture: { eq: false }, fields: { slug: { regex: "/^/blog/" } } }) {
                 nodes {
                     id
+                    headings {
+                        depth
+                        value
+                    }
                     fields {
                         slug
                     }
@@ -214,11 +230,83 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
                     id
                 }
             }
+            squeakTopics: allSqueakTopic {
+                nodes {
+                    label
+                    topicId
+                    slug
+                }
+            }
+            squeakTopicGroups: allSqueakTopicGroup {
+                nodes {
+                    label
+                    topics {
+                        id
+                        label
+                    }
+                }
+            }
+            jobs: allAshbyJobPosting {
+                nodes {
+                    id
+                    title
+                    fields {
+                        slug
+                    }
+                    parent {
+                        ... on AshbyJob {
+                            customFields {
+                                value
+                                title
+                            }
+                        }
+                    }
+                }
+            }
         }
     `)
 
     if (result.errors) {
         return Promise.reject(result.errors)
+    }
+
+    function createPosts(data, menu, template, breadcrumbBase, context) {
+        const menuFlattened = flattenMenu(result.data.sidebars.childSidebarsJson[menu])
+        data.forEach((node) => {
+            const slug = node.fields?.slug || node.url
+            let next = null
+            let previous = null
+            let breadcrumb = null
+            let nextURL = ''
+            const tableOfContents = node.headings && formatToc(node.headings)
+            menuFlattened.some((item, index) => {
+                if (item.url === slug) {
+                    next = menuFlattened[index + 1]
+                    nextURL = next && next.url ? next.url : ''
+                    previous = menuFlattened[index - 1]
+                    breadcrumb = [...item.breadcrumb]
+                    return true
+                }
+            })
+
+            createPage({
+                path: replacePath(slug),
+                component: template,
+                context: {
+                    id: node.id,
+                    nextURL,
+                    next,
+                    previous,
+                    menu: result.data.sidebars.childSidebarsJson[menu],
+                    breadcrumb,
+                    breadcrumbBase: breadcrumbBase || menuFlattened[0],
+                    tableOfContents,
+                    slug,
+                    searchFilter: menu,
+                    ...(context ? context(node) : {}),
+                },
+            })
+        })
     }
 
     function formatToc(headings) {
@@ -232,10 +320,6 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
         })
     }
 
-    const handbookMenu = result.data.sidebars.childSidebarsJson.handbook
-    const handbookMenuFlattened = flattenMenu(handbookMenu)
-    const docsMenu = result.data.sidebars.childSidebarsJson.docs
-    const docsMenuFlattened = flattenMenu(docsMenu)
     const categories = {}
     result.data.categories.group.forEach(({ category }) => {
         const slug = slugify(category, { lower: true })
@@ -256,100 +340,21 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
         })
     })
 
-    result.data.handbook.nodes.forEach((node) => {
-        const { slug } = node.fields
-        let next = null
-        let previous = null
-        let breadcrumb = null
-        const tableOfContents = formatToc(node.headings)
-        handbookMenuFlattened.some((item, index) => {
-            if (item.url === slug) {
-                next = handbookMenuFlattened[index + 1]
-                previous = handbookMenuFlattened[index - 1]
-                breadcrumb = item.breadcrumb
-                return true
-            }
-        })
-
-        createPage({
-            path: replacePath(node.fields.slug),
-            component: HandbookTemplate,
-            context: {
-                id: node.id,
-                next,
-                previous,
-                menu: handbookMenu,
-                breadcrumb,
-                breadcrumbBase: { name: 'Handbook', url: '/handbook' },
-                tableOfContents: [...tableOfContents, { depth: 0, url: 'squeak-questions', value: 'Questions?' }],
-                slug,
-            },
-        })
+    const createTeamContext = (node) => ({
+        mission: `${node.fields?.slug || node.url}/mission`,
+        objectives: `${node.fields?.slug || node.url}/objectives`,
     })
 
-    result.data.docs.nodes.forEach((node) => {
-        const { slug } = node.fields
-        const { layout = 'handbook' } = node.frontmatter
-        let next = null
-        let previous = null
-        let breadcrumb = null
-        const tableOfContents = formatToc(node.headings)
-        docsMenuFlattened.some((item, index) => {
-            if (item.url === slug) {
-                next = docsMenuFlattened[index + 1]
-                previous = docsMenuFlattened[index - 1]
-                breadcrumb = item.breadcrumb
-                return true
-            }
-        })
-
-        createPage({
-            path: replacePath(node.fields.slug),
-            component: layout === 'library' ? LibraryTemplate : layout === 'app' ? AppDocsTemplate : HandbookTemplate,
-            context: {
-                id: node.id,
-                next,
-                previous,
-                menu: docsMenu,
-                breadcrumb,
-                breadcrumbBase: { name: 'Docs', url: '/docs' },
-                tableOfContents: [...tableOfContents, { depth: 0, url: 'squeak-questions', value: 'Questions?' }],
-                slug,
-            },
-        })
-    })
-
-    result.data.apidocs.nodes.forEach((node) => {
-        const slug = replacePath(node.url)
-        let next = null
-        let previous = null
-        let breadcrumb = null
-        docsMenuFlattened.some((item, index) => {
-            if (item.url === slug) {
-                next = docsMenuFlattened[index + 1]
-                previous = docsMenuFlattened[index - 1]
-                breadcrumb = item.breadcrumb
-                return true
-            }
-        })
-
-        createPage({
-            path: slug,
-            component: ApiEndpoint,
-            context: {
-                id: node.id,
-                slug,
-                menu: docsMenu,
-                next,
-                previous,
-                // menu: docsMenu,
-                breadcrumb,
-                breadcrumbBase: { name: 'Docs', url: '/docs' },
-                // tableOfContents,
-                // slug,
-            },
-        })
-    })
+    createPosts(
+        result.data.handbook.nodes,
+        'handbook',
+        HandbookTemplate,
+        { name: 'Handbook', url: '/handbook' },
+        createTeamContext
+    )
+    createPosts(result.data.docs.nodes, 'docs', HandbookTemplate, { name: 'Docs', url: '/docs' })
+    createPosts(result.data.apidocs.nodes, 'docs', ApiEndpoint, { name: 'Docs', url: '/docs' })
+    createPosts(result.data.manual.nodes, 'docs', HandbookTemplate, { name: 'Using PostHog', url: '/using-posthog' })
 
     const tutorialsPageViewExport = await fetch(
         'https://app.posthog.com/shared/4lYoM6fa3Sa8KgmljIIHbVG042Bd7Q.json'
@@ -365,12 +370,14 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
                 return true
             }
         })
+
         createPage({
             path: replacePath(node.fields.slug),
             component: TutorialTemplate,
             context: {
                 id: node.id,
                 tableOfContents,
+                menu: result.data.sidebars.childSidebarsJson.docs,
                 pageViews,
                 slug,
             },
@@ -402,12 +409,14 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
     result.data.blogPosts.nodes.forEach((node) => {
         const { slug } = node.fields
         const postCategories = node.frontmatter.categories || []
+        const tableOfContents = node.headings && formatToc(node.headings)
         createPage({
             path: replacePath(slug),
             component: BlogPostTemplate,
             context: {
                 id: node.id,
-                categories: postCategories.map((category) => ({ title: category, url: categories[category].url })),
+                tableOfContents,
+                categories: postCategories.map((category) => ({ name: category, url: categories[category].url })),
                 slug,
             },
         })
@@ -437,6 +446,7 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
             },
         })
     })
+
     result.data.apps.nodes.forEach((node) => {
         const { slug } = node.fields
         const { documentation } = node.frontmatter
@@ -509,14 +519,74 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
             })
         }
     })
-    result.data.questions.nodes.forEach((node) => {
-        const { id } = node
+
+    const menu = []
+    result.data.squeakTopicGroups.nodes.forEach(({ label, topics }) => {
+        menu.push({ name: label })
+        topics.forEach(({ label }) => {
+            menu.push({
+                name: label,
+                url: `/questions/${slugify(label, {
+                    lower: true,
+                })}`,
+            })
+        })
+    })
+
+    result.data.squeakTopics.nodes.forEach((node) => {
+        const { slug, label, topicId } = node
+
         createPage({
-            path: `questions/${id}`,
-            component: Question,
+            path: `questions/${slug}`,
+            component: SqueakTopic,
             context: {
-                id,
+                id: topicId,
+                topics: result.data.squeakTopics.nodes,
+                label,
+                menu,
             },
         })
     })
+
+    if (process.env.ASHBY_API_KEY && process.env.GITHUB_API_KEY) {
+        for (node of result.data.jobs.nodes) {
+            const { id, parent } = node
+            const slug = node.fields.slug
+            const team = parent?.customFields?.find(({ title, value }) => title === 'Team')?.value
+            const issues = parent?.customFields?.find(({ title, value }) => title === 'Issues')?.value?.split(',')
+            const repo = parent?.customFields?.find(({ title, value }) => title === 'Repo')?.value
+            let gitHubIssues = []
+            if (issues) {
+                for (const issue of issues) {
+                    const { html_url, number, title, labels } = await fetch(
+                        `https://api.github.com/repos/${repo}/issues/${issue.trim()}`,
+                        {
+                            headers: {
+                                Authorization: `token ${process.env.GITHUB_API_KEY}`,
+                            },
+                        }
+                    ).then((res) => res.json())
+                    gitHubIssues.push({
+                        url: html_url,
+                        number,
+                        title,
+                        labels,
+                    })
+                }
+            }
+            createPage({
+                path: slug,
+                component: Job,
+                context: {
+                    id,
+                    slug,
+                    teamName: team,
+                    teamNameInfo: `Team ${team}`,
+                    objectives: `/handbook/people/team-structure/${slugify(team, { lower: true })}/objectives`,
+                    mission: `/handbook/people/team-structure/${slugify(team, { lower: true })}/mission`,
+                    gitHubIssues,
+                },
+            })
+        }
+    }
 }

@@ -48,10 +48,10 @@ const Handbook = ({ menu }: { menu: HandbookNav[] }) => {
                         return (
                             <li key={title}>
                                 <Link
-                                    className="rounded px-2 py-2.5 hover:bg-tan/50 flex items-center space-x-2 relative active:top-[1px] active:scale-[.99]"
+                                    className="rounded px-2 py-2.5 h-full hover:bg-tan/50 flex items-center space-x-2 relative active:top-[1px] active:scale-[.99]"
                                     to={url}
                                 >
-                                    <span className="text-[14px] text-black/30 text-center leading-none font-semibold dark:text-white w-4">
+                                    <span className="text-[14px] text-black/30 text-center leading-none font-semibold dark:text-white w-4 flex items-center">
                                         {index + 1}.
                                     </span>
                                     <h3 className="text-base m-0 opacity-70 leading-none">{title}</h3>
@@ -92,13 +92,13 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                     <div className="md:border-r border-gray-accent-light border-dashed flex-grow">
                         <div className="md:px-6 pt-0 md:pt-6 pb-6 text-center mx-auto">
                             <h2 className="text-[15px] font-semibold text-black/40 m-0">About PostHog</h2>
-                            <h3 className="text-xl xl:text-2xl font-bold mt-3 mb-0 !leading-tight">
+                            <h3 className="text-2xl xl:text-3xl font-bold mt-3 mb-0 !leading-tight">
                                 Our mission is to{' '}
                                 <span className="text-red">increase the number of successful products</span> in the
                                 world.
                             </h3>
-                            <CallToAction to="/handbook/company/story" className="mt-3 !px-12">
-                                Read our story
+                            <CallToAction to="/about" className="mt-3 !px-12">
+                                Learn about us
                             </CallToAction>
                         </div>
                         <div className="border-t border-gray-accent-light border-dashed">
@@ -112,8 +112,11 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                                 </Block>
                                 <Block title="Careers" cta={{ url: '/careers', label: 'Explore careers' }}>
                                     <p className="m-0 text-[14px] dark:text-white">
-                                        We're currently hiring for <strong>{jobs.totalCount} roles</strong>. We're
-                                        unlike any company you've ever worked for.
+                                        We're currently hiring for{' '}
+                                        <strong>
+                                            {jobs.totalCount} role{jobs.totalCount > 1 && 's'}
+                                        </strong>
+                                        . We're unlike any company you've ever worked for.
                                     </p>
                                 </Block>
                             </div>
@@ -135,7 +138,7 @@ const query = graphql`
                 fieldValue
             }
         }
-        jobs: allJobs {
+        jobs: allAshbyJobPosting(filter: { isListed: { eq: true } }) {
             totalCount
         }
         sidebars: file(absolutePath: { regex: "//sidebars/sidebars.json$/" }) {

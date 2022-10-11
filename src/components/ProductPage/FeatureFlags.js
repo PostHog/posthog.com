@@ -16,7 +16,7 @@ export default function FeatureFlags() {
                 <CallToAction
                     type="outline"
                     size="md"
-                    className="text-red hover:text-red dark:text-red dark:hover:text-red font-bold text-base"
+                    className="text-red hover:text-red dark:text-red dark:hover:text-red font-bold text-lg"
                     to="/product/feature-flags"
                 >
                     Learn more about Feature Flags

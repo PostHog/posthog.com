@@ -150,10 +150,7 @@ module.exports = {
                 ],
             },
             fontSize: {
-                '2xs': '0.65rem',
-                base: '16px',
-                'base-larger': '.933rem',
-                'text-sm': '.8rem',
+                '6xl': '3.5rem',
             },
             colors: {
                 primary: '#151515',

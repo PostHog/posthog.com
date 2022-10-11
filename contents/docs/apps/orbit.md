@@ -1,6 +1,5 @@
 ---
 title: Orbit Connector
-layout: app
 github: https://github.com/PostHog/posthog-orbit-love-plugin
 installUrl: https://app.posthog.com/project/apps?name=Orbit+Love+Report+Sync
 thumbnail: ../../apps/thumbnails/orbit-stats-sync.png
@@ -16,7 +15,7 @@ The Orbit app for PostHog pulls data from the Orbit.love workspace API into Post
 
 The Orbit Connector requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)!
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
 You'll also need an Orbit workspace you can connect to.
 
@@ -31,6 +30,10 @@ You'll also need an Orbit workspace you can connect to.
 Workspace stats are sent into your PostHog instance as an `orbit love report` event, which you can filter and explore using PostHog. Supported report types include: overview, members, and activities.
 
 Refer to [Orbit's API documentation](https://docs.orbit.love/reference/about-the-orbit-api) for a full list of properties available in each report.
+
+### Configuration
+
+<AppParameters />
 
 ### Is the source code for this app available?
 

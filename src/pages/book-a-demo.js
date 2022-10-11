@@ -11,64 +11,60 @@ import React, { useEffect, useState } from 'react'
 const Editions = ({ setDemoType }) => {
     return (
         <>
-            <Intro title="Select edition" />
-            <div className="flex justify-center flex-col md:flex-row divide-y-1 md:divide-y-0 md:divide-x-1 divide-dashed divide-gray-accent-light">
-                <div className="md:pr-12 pb-12 md:pb-0">
-                    <h2 className="text-[15px] font-semibold mb-4 text-gray">Self-serve plans</h2>
+            <Intro title="Book a PostHog demo" />
+            <div className="max-w-[600px] mx-auto grid md:grid-cols-2 grid-cols-1 gap-x-6">
+                <div className="pb-6 md:pt-0 pt-6 justify-self-end w-full">
                     <div className="flex flex-col space-y-4">
-                        <Title title="PostHog Cloud" subtitle="Turnkey solution, pay per event" badge="Self-Serve" />
                         <Title
-                            title="Self-Hosted"
-                            subtitle="Full access to your instance, pay per event"
-                            badge="Self-Serve"
+                            title="Open Source (free)"
+                            subtitle="No event limit. Self-hosted product that includes basic analytics."
                         />
-                        <Title title="Open Source" subtitle="Free, limited to one project" badge="Self hosted" />
                     </div>
                     <CallToAction
                         width="full"
-                        className="mt-7 shadow-lg"
+                        className="mt-4 box-border"
                         type="secondary"
-                        onClick={() => setDemoType('group')}
-                        event={{ name: 'book a demo: clicked group demo' }}
+                        onClick={() => open('https://www.loom.com/share/a75bad1edd1f4a97b90dc8d50e69e98d')}
+                        event={{ name: 'book a demo: clicked recorded demo' }}
                     >
-                        Join a group demo
+                        Watch a recorded demo
+                        <img src="https://cdn.loom.com/sessions/thumbnails/a75bad1edd1f4a97b90dc8d50e69e98d-1663256285164-with-play.gif" />
                     </CallToAction>
                 </div>
-                <div className="md:pl-12 pt-12 md:pt-0">
-                    <h2 className="text-[15px] font-semibold mb-4 text-gray">Enterprise plans</h2>
-                    <div className="flex flex-col space-y-10">
-                        <div className="space-y-4 max-w-[280px]">
+                <div className="md:order-none order-first md:pl-6 pb-6 md:border-l md:border-b-0 border-b border-gray-accent-light border-dashed">
+                    <div className="flex flex-col md:space-y-10 space-y-6">
+                        <div className="space-y-4 w-full">
                             <Title
-                                title="PostHog Cloud"
-                                subtitle="For large userbases or event volumes, starts at $300/mo"
-                                badge="Enterprise"
+                                title="Full feature set (paid)"
+                                subtitle="First million events per month free. Cloud (Saas) or self-hosted. All of PostHog's advanced analytics tools."
                             />
                             <CallToAction
                                 width="full"
-                                className="mt-7 shadow-xl"
+                                className="box-border"
                                 type="primary"
-                                onClick={() => setDemoType('scale')}
-                                event={{ name: 'book a demo: clicked scale demo' }}
+                                onClick={() => setDemoType('paid')}
+                                event={{ name: 'book a demo: clicked paid demo' }}
                             >
                                 Book a personalized demo
                             </CallToAction>
                         </div>
-                        <div className="space-y-4 max-w-[280px]">
-                            <Title
-                                title="Self-Hosted"
-                                subtitle="A focus on compliance and security, starts at $450/mo"
-                                badge="Enterprise"
-                            />
-                            <CallToAction
-                                width="full"
-                                className="mt-7 shadow-xl"
-                                type="primary"
-                                onClick={() => setDemoType('enterprise')}
-                                event={{ name: 'book a demo: clicked enterprise demo' }}
-                            >
-                                Book a personalized demo
-                            </CallToAction>
-                        </div>
+                    </div>
+                </div>
+                <div className="md:col-span-2 pt-6 border-t border-dashed border-gray-accent-light text-center">
+                    <h3 className="m-0">Not sure if PostHog is right for you?</h3>
+                    <p className="m-0 mt-1 text-black/50 font-medium text-sm">
+                        Book a quick Q&A with someone from the PostHog team!
+                    </p>
+                    <div className="md:max-w-[280px] w-full mx-auto">
+                        <CallToAction
+                            width="full"
+                            className="mt-4 box-border"
+                            type="secondary"
+                            onClick={() => setDemoType('qa')}
+                            event={{ name: 'book a demo: clicked qa' }}
+                        >
+                            Meet PostHog
+                        </CallToAction>
                     </div>
                 </div>
             </div>
@@ -86,14 +82,14 @@ const Book = ({ demoType }) => {
     )
 }
 
-export default function SelfHost() {
+export default function SelfHost({ location }) {
     const initialCrumbs = [
         {
             title: 'Select edition',
         },
     ]
     const { posthog } = useValues(posthogAnalyticsLogic)
-    const [demoType, setDemoType] = useState(null)
+    const [demoType, setDemoType] = useState(location.state?.demoType)
     const [crumbs, setCrumbs] = useState(initialCrumbs)
 
     useEffect(() => {
@@ -111,7 +107,7 @@ export default function SelfHost() {
     }, [demoType])
     return (
         <Layout crumbs={[...crumbs]}>
-            <SEO title="Select edition - PostHog" />
+            <SEO title="Book a demo – PostHog" />
             <section className="px-4">
                 {demoType ? <Book demoType={demoType} /> : <Editions setDemoType={setDemoType} />}
             </section>

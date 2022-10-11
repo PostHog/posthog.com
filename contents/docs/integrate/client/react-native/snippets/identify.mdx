@@ -10,9 +10,7 @@ An identify call requires:
 * `userProperties` with a dictionary with key: value pairs
 
 ```javascript
-import PostHog from 'posthog-react-native'
-
-PostHog.identify('distinctID', {
+posthog.identify('distinctID', {
     email: 'user@posthog.com',
     name: 'My Name'
 })

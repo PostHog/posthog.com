@@ -1,6 +1,5 @@
 ---
 title: Google Cloud Export
-layout: app
 github: https://github.com/PostHog/posthog-gcs-plugin
 installUrl: https://app.posthog.com/project/apps?name=GCS+Export
 thumbnail: ../../apps/thumbnails/gcs-export.png
@@ -16,7 +15,7 @@ The Google Cloud Storage Export app enables you to send events from PostHog to a
 
 The Google Cloud Storage Export app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)!
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
 You'll also need access to the Google Cloud Storage bucket you want to export to.
 
@@ -29,6 +28,10 @@ Before installing the Google Cloud Storage Export app, you will need your Google
 3. Upload your Google Cloud key .json file.
 4. Enter your Project ID.
 5. Enter your bucket name.
+
+### Configuration
+
+<AppParameters />
 
 ### Is the source code for this app available?
 

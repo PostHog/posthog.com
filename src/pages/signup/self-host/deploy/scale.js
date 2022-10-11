@@ -10,7 +10,7 @@ import React from 'react'
 
 const ListNumber = ({ children }) => {
     return (
-        <span className="flex-shrink-0 font-bold w-7 h-7 md:h-9 md:w-9 bg-gray-accent-light rounded-full flex items-center justify-center text-base md:text-lg">
+        <span className="flex-shrink-0 font-bold w-7 h-7 md:h-9 md:w-9 bg-gray-accent-light rounded-full flex items-center justify-center text-lg md:text-lg">
             {children}
         </span>
     )

@@ -2,6 +2,8 @@ import Blog from '../components/Blog'
 
 export default Blog
 
+import { graphql } from 'gatsby'
+
 export const pageQuery = graphql`
     query {
         allMdx(

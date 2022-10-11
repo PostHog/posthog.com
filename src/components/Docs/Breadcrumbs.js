@@ -4,7 +4,7 @@ import { Link } from 'gatsby'
 const Crumb = ({ crumb: { name, url } }) => {
     const classes = 'mr-1 md:mr-2'
     return (
-        <li className="flex items-center text-xs md:text-base">
+        <li className="flex items-center text-sm md:text-lg">
             {url ? (
                 <Link
                     className={`${classes} dark:text-[#765494] text-gray-accent-dark hover:text-almost-black `}

@@ -1,7 +1,7 @@
 import { DocSearchModal } from '@docsearch/react'
 import { Blockquote } from 'components/BlockQuote'
 import Breadcrumbs from 'components/Breadcrumbs'
-import { CodeBlock } from 'components/CodeBlock'
+import { MdxCodeBlock } from 'components/CodeBlock'
 import { Days } from 'components/CommunityQuestions/Question'
 import { Check } from 'components/Icons/Icons'
 import { InlineCode } from 'components/InlineCode'
@@ -12,6 +12,7 @@ import Icon from 'components/SupportImages/Icon'
 import { ZoomImage } from 'components/ZoomImage'
 import { motion } from 'framer-motion'
 import { GatsbyImage, getImage, StaticImage } from 'gatsby-plugin-image'
+import { createHubSpotContact } from 'lib/utils'
 import React, { useState } from 'react'
 import Scroll from 'react-scroll'
 import { Form, Squeak } from 'squeak-react'
@@ -23,11 +24,13 @@ const TopLink = ({ title, description, link, icon }) => {
         <li className="w-full">
             <a
                 href={link}
-                className="flex flex-col items-center text-center text-black hover:text-black opacity-80 hover:opacity-100 hover:bg-gray-accent/25 dark:hover:bg-gray-accent/10 px-4 py-5 h-full"
+                className="flex flex-col items-center text-center text-black hover:text-black opacity-80 hover:opacity-100 hover:bg-gray-accent/25 dark:hover:bg-gray-accent/10 px-4 py-5 h-full space-y-1"
             >
                 <Icon className="w-6 h-6 mb-2 text-gray" name={icon} />
-                <h3 className="font-bold text-base mb-1">{title}</h3>
-                <p className="text-xs text-gray dark:text-white dark:text-opacity-75 mb-0">{description}</p>
+                <h3 className="font-bold text-base mb-0 leading-none">{title}</h3>
+                <p className="text-sm font-semibold text-gray dark:text-white dark:text-opacity-75 mb-0">
+                    {description}
+                </p>
             </a>
         </li>
     )
@@ -38,10 +41,10 @@ const Guide = ({ title, link, icon }) => {
         <li className="border-b border-dashed border-gray first:border-l">
             <Link
                 to={link}
-                className="flex justify-start items-center w-full h-full text-black hover:text-black hover:bg-gray-accent/20 dark:hover:bg-gray-accent/10 opacity-80 hover:opacity-100 p-4 space-x-2"
+                className="flex justify-start items-center w-full h-full text-black hover:text-black hover:bg-gray-accent/20 dark:hover:bg-gray-accent/10 opacity-80 hover:opacity-100 p-4 space-x-3"
             >
-                <Icon className="w-4 h-4 text-gray" name={icon} />
-                <h3 className="font-bold text-sm mb-0">{title}</h3>
+                <Icon className="w-6 h-6 text-gray" name={icon} />
+                <h3 className="font-bold text-base mb-0">{title}</h3>
             </Link>
         </li>
     )
@@ -97,10 +100,10 @@ const Search = () => {
                     name="faq-search"
                     placeholder="Search anything product, installation, or company-related..."
                     autoFocus={true}
-                    className="pl-10 py-3 text-base bg-white dark:bg-gray-accent-dark rounded-full w-full ring-red shadow-lg shadow-[0_100px_80px_0_rgba(0,0,0,0.07),0px_14.5036px_24.1177px_rgba(0,0,0,0.0395839),0_6.68266px_10.0172px_rgba(0,0,0,0.0291065),0_4.88627px_3.62304px_rgba(0,0,0,0.0214061)]"
+                    className="pl-10 py-3 text-base bg-white dark:bg-gray-accent-dark rounded-full w-full ring-red shadow-lg"
                 />
 
-                <button className="hidden px-6 py-3 bg-red text-base shadow-md rounded-sm text-white font-bold">
+                <button className="hidden px-6 py-3 bg-red text-lg shadow-md rounded-sm text-white font-bold">
                     Search
                 </button>
             </form>
@@ -137,7 +140,7 @@ const Question = ({ question }) => {
     const components = {
         inlineCode: InlineCode,
         blockquote: Blockquote,
-        pre: CodeBlock,
+        pre: MdxCodeBlock,
         img: ZoomImage,
     }
     return (
@@ -232,7 +235,7 @@ export default function FAQ() {
                             <TopLink
                                 title="Partners"
                                 description="Hosting & support"
-                                link="/marketplace"
+                                link="/partners"
                                 icon="partners"
                             />
                             <TopLink title="FAQ" description=" " link="/faq" icon="faq2" />
@@ -280,7 +283,7 @@ export default function FAQ() {
                     </ol>
                     <a
                         href="/docs/user-guides"
-                        className="border border-t-0 border-dashed border-gray p-3 text-base font-semibold flex justify-center hover:bg-gray-accent/20 dark:hover:bg-gray-accent-dark"
+                        className="border border-t-0 border-dashed border-gray p-3 text-lg font-semibold flex justify-center hover:bg-gray-accent/20 dark:hover:bg-gray-accent-dark"
                     >
                         View all (23)
                     </a>
@@ -290,13 +293,12 @@ export default function FAQ() {
                     <h3>Recent questions</h3>
                     <Element name="squeak-top" />
                     <Squeak
+                        onSignUp={(user) => createHubSpotContact(user)}
                         onSubmit={(_values, formType) =>
                             formType === 'question' && scroller.scrollTo('squeak-top', { smooth: true })
                         }
                         slug={null}
                         apiHost="https://squeak.cloud"
-                        apiKey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB4aXBrcXV2d3FhYXVudXpqb2dlIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NDk3MjE3ODUsImV4cCI6MTk2NTI5Nzc4NX0.SxdOpxHjVwap7sDUptK2TFJl7WK3v3HLuKbzb0JKeKg"
-                        url="https://pxipkquvwqaaunuzjoge.supabase.co"
                         organizationId="a898bcf2-c5b9-4039-82a0-a00220a8c626"
                     />
                     <Element name="squeak-bottom" />

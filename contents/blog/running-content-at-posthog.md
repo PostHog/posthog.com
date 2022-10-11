@@ -72,9 +72,6 @@ Content and analytics go hand in hand. There are several ways/metrics to track t
 
 _Enjoyed this? Subscribe to our [newsletter](https://posthog.com/newsletter) to hear more from us twice a month!_
 
-<NewsletterForm
-compact
-/>
 
 
 

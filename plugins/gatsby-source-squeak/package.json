@@ -14,6 +14,6 @@
     "author": "Eli Kinsey <eli@ekinsey.dev>",
     "license": "0BSD",
     "dependencies": {
-        "gatsby-source-filesystem": "^4.10.1"
+        "gatsby-source-filesystem": "^4.20.0"
     }
 }
