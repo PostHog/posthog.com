@@ -106,7 +106,7 @@ export default function EU() {
                             Get started
                         </TrackedCTA>
                         <p className="text-base md:text-sm font-semibold mt-7 mb-0">
-                            <span className="opacity-60">Current customer?</span>{' '}
+                            <span className="opacity-60">Current customer?</span> <br className="sm:hidden" />
                             <Link to="/tutorials/migrate-eu-cloud">Learn about migrating</Link>
                         </p>
                     </div>
