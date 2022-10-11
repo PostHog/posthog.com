@@ -343,7 +343,6 @@ export function Footer(): JSX.Element {
                     })}
                 </ul>
             </div>
-
             <div className="py-5 border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark border-l-0 border-r-0">
                 <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center text-lg px-5">
                     <small className="font-semibold dark:text-gray">

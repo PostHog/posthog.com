@@ -253,11 +253,7 @@ export default function Calculator({
                 )}
 
                 <p className="text-sm pt-2 mt-2 mb-4 pb-0 m-0 text-black/50 border-t border-dashed border-gray-accent-light">
-                    B2C company with millions of users?
-                    <br />
-                    <Link to="/signup/b2c" className="font-bold">
-                        Apply for a volume pricing plan
-                    </Link>
+                    B2C company with millions of users? Sign up and get in touch to learn about B2C pricing.
                 </p>
 
                 <div className="pt-4 border-t border-gray-accent-light border-dashed">

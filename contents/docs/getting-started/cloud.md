@@ -44,8 +44,9 @@ We'd recommend you don't skip this step unless you've already set-up another Pos
 
 Now that you have your PostHog Cloud account all set up, here are a bunch of cool things you can go and try out next:
 
-- [Product manuals](/docs/user-guides) - Information on using specific features within PostHog.
+- [Product manual](/using-posthog) - Information on using specific features within PostHog.
 - [Tutorials](/tutorials) - In-depth guides on popular use cases and integrations.
+- [Set up a proxy](/docs/integrate/proxy) - Capture more events by using your own domain - even on Cloud!
 - [Toolbar](/docs/user-guides/toolbar) - View heatmaps and customize your integration from your website.
 - [Apps](/docs/apps) - PostHog provides over 50+ apps to connect with your favorite services.
 - [API](/docs/api) - Get programmatic access to your data and insights.

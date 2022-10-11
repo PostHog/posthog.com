@@ -20,9 +20,9 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
 
     const resources: ColMenuItems[] = [
         {
-            title: 'Marketplace',
+            title: 'Partner directory',
             description: 'Companies and products who can help with PostHog',
-            url: '/marketplace',
+            url: '/partners',
         },
         {
             title: 'Contributors',

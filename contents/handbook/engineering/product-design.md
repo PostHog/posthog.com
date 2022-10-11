@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-It is up to you when to involve our product designers in your work. Because we hire generalists, there is no expectation that every project should start by running through design _first_. 
+We believe that everyone is a designer. Because we hire generalists, there is no expectation that every project should start by running through design _first_. It is up to you when to involve our product designers in your work.
 
 You should start by identifying the stage and goals of your project.
 

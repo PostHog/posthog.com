@@ -732,10 +732,10 @@
     from = "/handbook/people/team-structure/growth-engineering"
     to = "/handbook/people/team-structure/growth"
 
-# Added: 2021-08-19
+# Added: 2021-08-19 # Modified: 2022-10-02
 [[redirects]]
-    from = "/handbook/people/team-structure/infrastructure"
-    to = "/handbook/people/team-structure/platform"
+    from = "/handbook/people/team-structure/platform"
+    to = "/handbook/people/team-structure/infrastructure"
 
 # Added: 2021-09-09
 [[redirects]]
@@ -1751,10 +1751,10 @@
     from = "/apps/zendesk-connector/docs"
     to = "/docs/apps/zendesk-connector"
 
-# Added: 2022-07-18
+# Added: 2022-07-18 # Updated: 2022-09-15
 [[redirects]]
     from = "/handbook/engineering/app-east"
-    to = "/handbook/people/team-structure/app-east"
+    to = "/handbook/people/team-structure/product-analytics"
 
 # Added: 2022-07-18
 [[redirects]]
@@ -1763,7 +1763,11 @@
 
 [[redirects]]
     from = "/handbook/engineering/app-west"
-    to = "/handbook/people/team-structure/app-west"
+    to = "/handbook/people/team-structure/experimentation"
+
+[[redirects]]
+    from = "/handbook/people/team-structure/app-west"
+    to = "/handbook/people/team-structure/experimentation"
 
 [[redirects]]
     from = "/docs/self-host/configure/async-migrations"
@@ -2230,7 +2234,7 @@
     from = "/product/experimentation"
     to = "/product/experimentation-suite"
 
-# Added: 2022-09-11
+# Added: 2022-09-11 # Updated: 2022-09-15
 [[redirects]]
     from = "/handbook/strategy/strategy"
     to = "/handbook/strategy/overview"
@@ -2238,12 +2242,57 @@
 # Added: 2022-09-12
 [[redirects]]
     from = "/handbook/people/team-structure/app-east/objectives"
-    to = "/handbook/people/team-structure/app-east"
+    to = "/handbook/people/team-structure/product-analytics"
 
-# Added: 2022-09-23
+# Added: 2022-09-15
 [[redirects]]
-    from = "/docs/integrate/browser-extension"
-    to = "/docs/integrate/client/browser-extension"
+    from = "/handbook/engineering/app-east"
+    to = "/handbook/people/team-structure/product-analytics"
+
+# Added: 2022-09-15
+[[redirects]]
+    from = "/handbook/people/team-structure/team-east"
+    to = "/handbook/people/team-structure/product-analytics"
+
+# Added: 2022-09-15
+[[redirects]]
+    from = "/handbook/people/team-structure/ingestion"
+    to = "/handbook/people/team-structure/pipeline"
+
+# Added: 2022-09-15
+[[redirects]]
+    from = "/handbook/people/team-structure/app-east"
+    to = "/handbook/people/team-structure/product-analytics"
+
+
+# Added: 2022-09-15
+[[redirects]]
+    from = "/handbook/people/team-structure/app-east/mission"
+    to = "/handbook/people/team-structure/product-analytics/mission"
+
+
+# Added: 2022-09-15
+[[redirects]]
+    from = "/handbook/people/team-structure/app-east/objectives"
+    to = "/handbook/people/team-structure/product-analytics/objectives"
+
+# Added: 2022-09-15 # Modified: 2022-10-02
+[[redirects]]
+    from = "/handbook/people/team-structure/platform"
+    to = "/handbook/people/team-structure/infrastructure"
+
+
+# Added: 2022-09-15
+[[redirects]]
+    from = "/handbook/people/team-structure/platform/mission"
+    to = "/handbook/people/team-structure/infrastructure/mission"
+
+
+# Added: 2022-09-15
+[[redirects]]
+    from = "/handbook/people/team-structure/platform/objectives"
+    to = "/handbook/people/team-structure/infrastructure/objectives"
+
 
 # Added: 2022-09-16
 [[redirects]]
@@ -2265,3 +2314,83 @@
     from = "/handbook/company/working-with-product-design"
     to = "/handbook/engineering/product-design"
 
+[[redirects]]
+    from = "/marketplace"
+    to = "/partners"
+
+
+# Added: 2022-10-01
+[[redirects]]
+    from = "/marketplace/altinity"
+    to = "/partners/altinity"
+
+
+# Added: 2022-10-01
+[[redirects]]
+    from = "/marketplace/clickhouse"
+    to = "/partners/clickhouse"
+
+# Added: 2022-10-01
+[[redirects]]
+    from = "/marketplace/guidelines"
+    to = "/partners/guidelines"
+
+
+# Added: 2022-10-01
+[[redirects]]
+    from = "/marketplace/listing-template"
+    to = "/partners/listing-template"
+
+
+# Added: 2022-10-01
+[[redirects]]
+    from = "/marketplace/opsverse"
+    to = "/partners/opsverse"
+
+
+# Added: 2022-10-01
+[[redirects]]
+    from = "/marketplace/restack"
+    to = "/partners/restack"
+
+
+# Added: 2022-10-02
+[[redirects]]
+    from = "/handbook/people/team-structure/app-east/mission"
+    to = "/handbook/people/team-structure/experimentation/mission"
+
+
+# Added: 2022-10-02
+[[redirects]]
+    from = "/handbook/people/team-structure/app-west/objectives"
+    to = "/handbook/people/team-structure/experimentation/objectives"
+
+# Added: 2022-10-02
+[[redirects]]
+    from = "/docs/integrate/client/browser-extension"
+    to = "/docs/integrate/browser-extension"
+
+# Added: 2022-10-03
+[[redirects]]
+    from = "/handbook/people/team-structure/product-analytics"
+    to = "/handbook/people/team-structure/app-east"
+
+# Added: 2022-10-03
+[[redirects]]
+    from = "/handbook/people/team-structure/experimentation/mission"
+    to = "/handbook/people/team-structure/app-east/mission"
+
+# Added: 2022-10-03
+[[redirects]]
+    from = "/handbook/people/team-structure/product-analytics/mission"
+    to = "/handbook/people/team-structure/app-west/mission"
+
+# Added: 2022-10-03
+[[redirects]]
+    from = "/handbook/people/team-structure/pipeline"
+    to = "/handbook/people/team-structure/ingestion"
+
+# Added: 2022-10-03
+[[redirects]]
+    from = "/handbook/people/team-structure/app-west/mission"
+    to = "/handbook/people/team-structure/product-analytics/mission"

@@ -47,7 +47,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }, plu
         }
     }
     const questions = await getQuestions()
-    questions.forEach(({ question: { slug, id }, replies }) => {
+    questions.forEach(({ question: { slug, id, replies } }) => {
         const question = {
             slug,
             replies,
