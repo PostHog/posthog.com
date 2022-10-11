@@ -57,10 +57,6 @@ To help manage users' expectations, you might find it useful to share a message 
 3. Respond to and debug issues for _Community_ users (all other free Open Source or free Cloud users)
 4. Fix issues, create PRs
 
-### Triaging issues to the relevant small team
-
-As the support hero you should triage any bugs/feature requests that you don't deal with to the relevant small team. They are ultimately responsible for handling bugs and feature requests for their area of the product.
-
 ## Categorizing requests
 
 It's really valuable for us to understand what types of requests we've had so we can prioritize our investments in certain areas and work out if we're making things better for our users (e.g. we use this as a measure of how easy it is to deploy PostHog).
@@ -83,6 +79,21 @@ When you initially respond to an issue in Zendesk add a "tag" with the following
 If something falls into two categories, but predominantly one, just tag the one you think is most relevant. If the ticket covers multiple topics, tag with all the relevant tags.
 
 If a ticket doesn't fit a category correctly, we might need to update our tags -- open a PR to edit this page.
+
+Additionally, add a group tag to the relevant team that the feature category falls under:
+* Infrastructure
+* Pipeline
+* Product Analytics
+* Experiments
+* Recordings
+
+This tag will send a notification to the team specific support channel in slack. 
+
+### Triaging issues to the relevant small team
+
+As the support hero you should triage any bugs/feature requests that you don't deal with to the relevant small team. Tag the relevant secondary support hero in the team specific support channel to handoff the request. They are ultimately responsible for handling bugs and feature requests for their area of the product. 
+
+You should still be the first line of support in issues that come in meaning you should try to gather as much information and debug as far as possible before moving the ticket towards the small team. If the ticket does get escalated to the small team, the secondary on-call hero will be responsible for the ticket from that point on. 
 
 ### Escalating issues
 
@@ -206,3 +217,7 @@ Every team has a Secondary on-call rotation. Unlike support hero, you are still 
 - [Secondary - Platform Infrastructure](https://posthog.pagerduty.com/schedules#P78OOWZ)
 
 PagerDuty doesn't let us have a rotation that automatically selects the person that is support hero to also be the secondary on-call for their team. This means we'll occasionally need to manually shuffle the schedule around.
+
+### Team specific support channels
+
+Each team has its own support channel that will receive tickets based on the group that's assigned to the ticket in zendesk. This support channel serves as a central point for all incoming questions and requests per team responsibilitiy. Please use it to have visibility on the important problems that might be surfacing regarding your team's features. The support hero remain the main point of contact for these issues until it's escalated to the secondary support hero. 
