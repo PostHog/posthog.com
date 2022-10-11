@@ -77,7 +77,7 @@ const apps = [
 
 const otherLinks = [
     {
-        name: 'Integrate',
+        name: 'Integrate PostHog',
         links: [
             { name: 'Live events', to: '/docs/integrate/ingest-live-data' },
             { name: 'Historical events', to: '/docs/integrate/ingest-historic-data' },
@@ -87,7 +87,7 @@ const otherLinks = [
         ],
     },
     {
-        name: 'Manual',
+        name: 'Product manual',
         links: [
             { name: 'Trends', to: '/manual/trends' },
             { name: 'Funnels', to: '/manual/funnels' },
@@ -111,8 +111,9 @@ const otherLinks = [
     {
         name: 'Apps',
         links: [
-            { name: 'All apps', to: '/docs/apps' },
-            { name: 'Building apps', to: '/docs/apps/build' },
+            { name: 'Explore app library', to: '/apps' },
+            { name: 'Use cases', to: '/docs/apps' },
+            { name: 'Building an app', to: '/docs/apps/build' },
             { name: 'Developer reference', to: '/docs/apps/build/reference' },
         ],
     },
@@ -122,11 +123,11 @@ const otherLinks = [
             { name: 'REST API', to: '/docs/api' },
             { name: 'Developing locally', to: '/handbook/engineering/developing-locally' },
             { name: 'Contributing', to: '/docs/contribute' },
-            { name: 'PostHog internals', to: '/docs/how-posthog-works' },
+            { name: 'How PostHog works', to: '/docs/how-posthog-works' },
         ],
     },
     {
-        name: 'Privacy & Compliance',
+        name: 'Privacy & compliance',
         links: [
             { name: 'GDPR', to: '/docs/privacy/gdpr-compliance' },
             { name: 'HIPAA', to: '/docs/privacy/hipaa-compliance' },
@@ -271,7 +272,6 @@ export const DocsIndex: React.FC = () => {
                     <section className="space-y-8">
                         <div className="text-center">
                             <h2 className="font-bold mb-1">Important links</h2>
-                            <p className="text-gray font-medium">More information on every part of PostHog</p>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-l border-dashed border-gray-accent-light dark:border-gray-accent-dark">
