@@ -9,7 +9,7 @@ export const GDPRForm = () => (
         </p>
         <div className="flex flex-col md:flex-row justify-center items-center gap-2 xl:gap-4">
             <CallToAction width="106" to="/signup">
-                Try PostHog Cloud EU – free
+                Try PostHog Cloud EU for free
             </CallToAction>
         </div>
         <br />
