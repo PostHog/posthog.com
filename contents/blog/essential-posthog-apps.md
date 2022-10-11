@@ -1,6 +1,6 @@
 ---
 date: 2022-10-10
-title: "Getting started: Your 5 essential PostHog apps"
+title: "5 essential PostHog apps for new users"
 rootPage: /blog
 sidebar: Blog
 showTitle: true

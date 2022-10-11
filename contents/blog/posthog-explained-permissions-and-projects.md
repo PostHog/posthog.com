@@ -1,6 +1,6 @@
 ---
 date: 2022-10-10
-title: "PostHog explained: Permissions and projects"
+title: "Permissions and projects in PostHog, explained"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
