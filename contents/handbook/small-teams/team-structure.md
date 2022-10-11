@@ -66,7 +66,7 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - Product: Supported by Luke Harries
 - Product design: Supported by Cory Watilo
 
-#### [Session Recordings](session-recordings)
+#### [Session Recording](session-recording)
 - [Ben White](/handbook/company/team#ben-white-full-stack-engineer) (Team lead, Full Stack Engineer)
 - [Alex Kim](/handbook/company/team#alex-kim-full-stack-engineer) (Full Stack Engineer)
 - [Emanuele Capparelli](/handbook/company/team#ben-white-full-stack-engineer) (Growth Engineer)
@@ -111,7 +111,7 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Simon Fisher](/handbook/company/team#simon-fisher-customer-success) (Team lead, Customer Success)
 - [Cameron DeLeone](/handbook/company/team#cameron-deleone-customer-success) (Customer Success Manager)
 
-### [Exec](exec)
+### [Exec Team](exec)
 - James Hawkins (Team lead, CEO)
 - Tim Glaser (CTO)
 - Luke Harries (Head of Product)

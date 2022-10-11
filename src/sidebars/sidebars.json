@@ -120,43 +120,43 @@
                     "url": "/handbook/small-teams/team-structure"
                 },
                 {
-                    "name": "App East team",
-                    "url": "/handbook/small-teams/app-east"
-                },
-                {
-                    "name": "App West team",
-                    "url": "/handbook/small-teams/app-west"
-                },
-                {
-                    "name": "Customer Success team",
+                    "name": "Customer Success",
                     "url": "/handbook/small-teams/customer-success"
                 },
                 {
-                    "name": "Exec team",
+                    "name": "Exec Team",
                     "url": "/handbook/small-teams/exec"
                 },
                 {
-                    "name": "Infrastructure team",
+                    "name": "Experimentation",
+                    "url": "/handbook/small-teams/experimentation"
+                },
+                {
+                    "name": "Infrastructure",
                     "url": "/handbook/small-teams/infrastructure"
                 },
                 {
-                    "name": "Ingestion team",
-                    "url": "/handbook/small-teams/ingestion"
-                },
-                {
-                    "name": "Marketing team",
+                    "name": "Marketing",
                     "url": "/handbook/small-teams/marketing"
                 },
                 {
-                    "name": "People and Ops team",
+                    "name": "People & Ops",
                     "url": "/handbook/small-teams/people"
                 },
                 {
-                    "name": "Platform team",
-                    "url": "/handbook/small-teams/platform"
+                    "name": "Pipeline",
+                    "url": "/handbook/small-teams/pipeline"
                 },
                 {
-                    "name": "Website and Docs team",
+                    "name": "Product Analytics",
+                    "url": "/handbook/small-teams/product-analytics"
+                },
+                {
+                    "name": "Session Recording",
+                    "url": "/handbook/small-teams/session-recording"
+                },
+                {
+                    "name": "Website & Docs",
                     "url": "/handbook/small-teams/website-docs"
                 }
             ]
