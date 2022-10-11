@@ -6,14 +6,14 @@ import { Heading } from 'components/Heading'
 import { InlineCode } from 'components/InlineCode'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
-import PostLayout, { Contributors, ShareLinks, SidebarSection, TableOfContents } from 'components/PostLayout'
+import PostLayout, { Contributors, ShareLinks, SidebarSection } from 'components/PostLayout'
 import { SEO } from 'components/seo'
 import Team from 'components/Team'
 import TestimonialsTable from 'components/TestimonialsTable'
 import { ZoomImage } from 'components/ZoomImage'
 import { graphql } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { animateScroll as scroll } from 'react-scroll'
 import { shortcodes } from '../mdxGlobalComponents'
 import MobileSidebar from 'components/Docs/MobileSidebar'
@@ -22,8 +22,35 @@ import { GitHub } from 'components/Icons/Icons'
 import { getCookie } from 'lib/utils'
 import { CallToAction } from 'components/CallToAction'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import Tooltip from 'components/Tooltip'
 import CommunityQuestions from 'components/CommunityQuestions'
 import Markdown from 'markdown-to-jsx'
+import CheckIcon from '../images/check.svg'
+import XIcon from '../images/x.svg'
+import WarningIcon from '../images/warning.svg'
+
+const renderAvailabilityIcon = (availability: 'full' | 'partial' | 'none') => {
+    switch (availability) {
+        case 'full':
+            return (
+                <Tooltip title="This plan has full access to this feature">
+                    <img src={CheckIcon} alt="Available" className="h-4 w-4" aria-hidden="true" />
+                </Tooltip>
+            )
+        case 'partial':
+            return (
+                <Tooltip title="Some parts of this feature are not available on this plan">
+                    <img src={WarningIcon} alt="Partially available" className="h-4 w-4" aria-hidden="true" />
+                </Tooltip>
+            )
+        case 'none':
+            return (
+                <Tooltip title="This feature is not available on this plan">
+                    <img src={XIcon} alt="Not available" className="h-4 w-4" aria-hidden="true" />
+                </Tooltip>
+            )
+    }
+}
 
 const MDX = ({ body }) => (
     <MDXProvider components={{}}>
@@ -31,7 +58,7 @@ const MDX = ({ body }) => (
     </MDXProvider>
 )
 
-export const HandbookSidebar = ({ contributors, title, location, related }) => {
+export const HandbookSidebar = ({ contributors, title, location, availability, related }) => {
     return (
         <>
             {contributors && (
@@ -46,6 +73,24 @@ export const HandbookSidebar = ({ contributors, title, location, related }) => {
                     />
                 </SidebarSection>
             )}
+
+            {availability && (
+                <SidebarSection title="Feature availability" className="space-y-1.5">
+                    <div className="flex items-center justify-between font-bold">
+                        <span>Free / Open-source</span>
+                        {renderAvailabilityIcon(availability.free)}
+                    </div>
+                    <div className="flex items-center justify-between font-bold">
+                        <span>Self-serve</span>
+                        {renderAvailabilityIcon(availability.selfServe)}
+                    </div>
+                    <div className="flex items-center justify-between font-bold">
+                        <span>Enterprise</span>
+                        {renderAvailabilityIcon(availability.enterprise)}
+                    </div>
+                </SidebarSection>
+            )}
+
             <SidebarSection title="Share">
                 <ShareLinks title={title} href={location.href} />
             </SidebarSection>
@@ -140,7 +185,7 @@ export const AppParametersFactory: (params: AppParametersProps) => React.FC = ({
 
 export default function Handbook({
     data: { post, nextPost, mission, objectives },
-    pageContext: { menu, breadcrumb = [], breadcrumbBase, tableOfContents },
+    pageContext: { menu, breadcrumb = [], breadcrumbBase, tableOfContents, searchFilter },
     location,
 }) {
     const { hash } = useLocation()
@@ -149,8 +194,18 @@ export default function Handbook({
         frontmatter,
         fields: { slug, contributors, appConfig },
     } = post
-    const { title, hideAnchor, description, hideLastUpdated, features, github, installUrl, thumbnail, related } =
-        frontmatter
+    const {
+        title,
+        hideAnchor,
+        description,
+        hideLastUpdated,
+        features,
+        github,
+        availability,
+        installUrl,
+        thumbnail,
+        related,
+    } = frontmatter
     const { parent, excerpt } = post
     const lastUpdated = parent?.fields?.gitLogLatestDate
     const showToc = !hideAnchor && tableOfContents?.length > 0
@@ -199,6 +254,7 @@ export default function Handbook({
             />
             <Layout>
                 <PostLayout
+                    searchFilter={searchFilter}
                     title={title}
                     filePath={filePath}
                     questions={
@@ -210,9 +266,10 @@ export default function Handbook({
                     sidebar={
                         <HandbookSidebar
                             contributors={contributors}
-                            title={title}
-                            location={location}
+                            availability={availability}
                             related={related}
+                            location={location}
+                            title={title}
                         />
                     }
                     tableOfContents={[...tableOfContents, { depth: 0, value: 'Questions?', url: 'squeak-questions' }]}
@@ -228,7 +285,7 @@ export default function Handbook({
                                     {thumbnail && <GatsbyImage image={getImage(thumbnail)} />}
                                     <h1 className="dark:text-white text-3xl sm:text-5xl m-0">{title}</h1>
                                 </div>
-                                <div className="flex items-center space-x-2 mb-2">
+                                <div className="flex items-center space-x-2">
                                     {github && (
                                         <Link to={github}>
                                             <GitHub className="w-8 h-8 text-black/80 hover:text-black/60 dark:text-white/80 hover:dark:text-white/60 transition-colors" />
@@ -243,7 +300,7 @@ export default function Handbook({
                             </div>
 
                             {!hideLastUpdated && (
-                                <p className="mt-1 mb-0 !opacity-30 text-black dark:text-white font-semibold">
+                                <p className="mt-0 mb-4 md:mt-1 md:mb-0 !opacity-30 text-black dark:text-white font-semibold">
                                     Last updated: <time>{lastUpdated}</time>
                                 </p>
                             )}
@@ -319,6 +376,11 @@ export const query = graphql`
                     sessionRecording
                     featureFlags
                     groupAnalytics
+                }
+                availability {
+                    free
+                    selfServe
+                    enterprise
                 }
                 thumbnail {
                     childImageSharp {

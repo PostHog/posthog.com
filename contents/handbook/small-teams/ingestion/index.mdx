@@ -1,16 +1,20 @@
 ---
+<<<<<<<< HEAD:contents/handbook/small-teams/ingestion/index.mdx
 title: Ingestion team
+========
+title: Team Pipeline
+>>>>>>>> master:contents/handbook/people/team-structure/pipeline/index.mdx
 sidebar: Handbook
 showTitle: true
 hideAnchor: false
 ---
 
-Team ingestion is part of the [Platform team](/handbook/people/team-structure/platform) at PostHog.
-
 ## People
 
-- Tiina Turban (Full Stack Engineer)
-- Yakko Majuri (Full Stack Engineer)
+- [Yakko Majuri](/handbook/company/team#yakko-majuri-software-engineer) (Full Stack Engineer)
+- [Karl-Aksel Puulmann](/handbook/company/team#karlaksel-puulmann-software-engineer) (Full Stack Engineer)
+- [Harry Waye](/handbook/company/team#harry-waye-software-engineer) (Full Stack Engineer)
+- [Tiina Turban](/handbook/company/team#tiina-turban-software-engineer) (Full Stack Engineer)
 
 ## Mission statement
 
@@ -52,51 +56,6 @@ It is our responsibility to ensure that the extensibility of the pipeline does n
 
 - Build new features to support plugin developers in building more powerful tools
 - Ensure a delightful experience for plugin developers
-
-## Roadmap
-
-### 3-year
-
-#### Scaffolding to support core PostHog features
-
-- Events are ingested and visible in app within 5 seconds p99
-
-#### Ingestion robustness
-
-- Ingest events out of order
-- No events left behind (99.99%)
-- All events are correct (99.99%)
-- The pipeline scales perfectly linearly and intercept is low (smallest instance runs on $5 node)
-
-#### Extensibility
-
-- Integrated delightful plugin developer experience (inside PostHog)
-    - CI/CD
-    - Testing
-    - Synthetic data testing
-- Majority of users are using PostHog for their ETL / reverse-ETL workloads 
-
-### 6 months
-
-#### Scaffolding to support core PostHog features
-
-- Scalable to 1Bn Persons 🎉
-- Events are ingested and visible in app within 30 seconds p99
-
-#### Ingestion robustness
-
-- Ingestion monitoring and management
-    - Runbooks, dashboards, and alerts in Grafana on cloud and on self hosted
-
-
-#### Extensibility
-
-- Easy to build a well tested plugin (DevEx)
-    - Documentation
-    - GitHub Template
-        - Unit tests
-        - Style
-
 
 ## How do we work?
 

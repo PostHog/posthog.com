@@ -388,6 +388,10 @@
                         {
                             "name": "Markdown",
                             "url": "/handbook/engineering/posthog-com/markdown"
+                        },
+                        {
+                            "name": "Jobs",
+                            "url": "/handbook/engineering/posthog-com/jobs"
                         }
                     ]
                 },

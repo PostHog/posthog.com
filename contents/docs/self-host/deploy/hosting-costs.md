@@ -45,7 +45,7 @@ A few examples should help to illustrate why:
 - External (managed) services will cost significantly more than using self-hosted services, etc.
 - Running an installation at 90% CPU or on slow disks will result in very slow UI and response times, but it will cost way less than a fast installation with responsive UI. (You can set up [monitoring](https://github.com/PostHog/charts-clickhouse/blob/554ecd8ccb63098d77002051ecd6912de9f554d2/charts/posthog/Chart.yaml#L56-L60) in your PostHog install to monitor this)
 
-Given the nearly limitless possible infrastructure configurations, it's impossible to provide a single estimate based on event volume alone, however if you hop into our [community Slack](/slack), an engineer from our platform team can help chat through this quickly.
+Given the nearly limitless possible infrastructure configurations, it's impossible to provide a single estimate based on event volume alone, however if you hop into our [community Slack](/slack), an engineer from our infrastructure team can help chat through this quickly.
 
 We recommend taking your planned configuration and plugging it into the pricing calculator for your hosting provider:
 

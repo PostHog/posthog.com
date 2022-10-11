@@ -5,7 +5,6 @@ import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 import { BasicHedgehogImage } from '../BasicHedgehogImage'
 import { CallToAction } from '../CallToAction'
 import Layout from '../Layout'
-import './NotFoundPage.scss'
 import Lottie from 'react-lottie'
 import pizzaFight from '../../lotties/pizza-fight.json'
 
@@ -57,7 +56,7 @@ export default function NotFoundPage(): JSX.Element {
                         )}
                     </div>
                 </div>
-                <div className="-mt-20 sm:-mt-32 max-w-2xl w-full mx-auto relative">
+                <div className="-mt-20 sm:-mt-32 max-w-2xl w-full mx-auto relative h-[378px]">
                     <span className="w-full h-[2px] bg-black absolute left-0 bottom-[20%] rounded-md" />
                     <Lottie
                         options={{

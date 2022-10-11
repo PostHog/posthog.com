@@ -235,7 +235,7 @@ export default function FAQ() {
                             <TopLink
                                 title="Partners"
                                 description="Hosting & support"
-                                link="/marketplace"
+                                link="/partners"
                                 icon="partners"
                             />
                             <TopLink title="FAQ" description=" " link="/faq" icon="faq2" />
