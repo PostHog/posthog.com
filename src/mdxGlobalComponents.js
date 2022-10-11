@@ -36,16 +36,18 @@ import { CodeBlock } from './components/CodeBlock'
 import { CommunityQuestions } from './components/CommunityQuestions'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { Contact } from './components/Contact'
-import { ContactForm } from './components/ContactForm'
 import { Container } from './components/Container'
 import { ContributorCard } from './components/ContributorCard'
 import { ContributorSearch } from './components/ContributorSearch'
 import { ContributorsChart } from './components/ContributorsChart'
+import { CookieBanner } from './components/CookieBanner'
 import { Customers } from './components/Customers'
 import { DarkModeToggle } from './components/DarkModeToggle'
+import { DemoLink } from './components/DemoLink'
 import { DemoScheduler } from './components/DemoScheduler'
 import { DeployOption } from './components/DeployOption'
 import { DocsPageSurvey } from './components/DocsPageSurvey'
+import { EU } from './components/EU'
 import { FeatureAvailability } from './components/FeatureAvailability'
 import { FeaturesSelfHost } from './components/FeaturesSelfHost'
 import { FloatedImage } from './components/FloatedImage'
@@ -163,16 +165,18 @@ export const shortcodes = {
     CommunityQuestions,
     CompensationCalculator,
     Contact,
-    ContactForm,
     Container,
     ContributorCard,
     ContributorSearch,
     ContributorsChart,
+    CookieBanner,
     Customers,
     DarkModeToggle,
+    DemoLink,
     DemoScheduler,
     DeployOption,
     DocsPageSurvey,
+    EU,
     FeatureAvailability,
     FeaturesSelfHost,
     FloatedImage,

@@ -225,6 +225,11 @@
         "description": "Session analysis across insights"
     },
     {
+        "date": "2022-10-01",
+        "type": "feature",
+        "description": "EU hosting for PostHog Cloud"
+    },
+    {
         "date": "2022-09-01",
         "type": "feature",
         "description": "Turbo feature flags",

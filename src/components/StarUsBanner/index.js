@@ -34,17 +34,24 @@ export default function StarUsBanner() {
                     className="fixed bottom-0 sm:bottom-[23px] z-[9998] w-full flex justify-center items-center"
                 >
                     <div className="flex space-x-4 bg-red py-[12px] px-[25px] text-white sm:rounded-full w-full sm:items-center sm:w-auto">
-                        <p className="mx-auto sm:m-0 sm:pr-3 text-lg font-semibold flex items-center space-x-4">
+                        <p className="mx-auto m-0 sm:pr-3 text-[15px] font-semibold flex items-center space-x-4">
                             {posthog && posthog.isFeatureEnabled && posthog.isFeatureEnabled('london-banner') ? (
                                 <Link to="/hosthog/london" className="text-white hover:text-white">
                                     Come say &#128075; at our London meet-up!
                                 </Link>
                             ) : (
                                 <>
-                                    <span className="h-[28px] w-[325px]">
-                                        <Link to="/signup/eu-cloud" className="text-white hover:text-white">
-                                            🇪🇺 EU Cloud is coming. Join the waitlist!
-                                        </Link>
+                                    <span>Star us on GitHub</span>
+                                    <span className="h-[28px] w-[125px]">
+                                        <GitHubButton
+                                            className="text-red hover:text-red"
+                                            href="https://github.com/posthog/posthog"
+                                            data-size="large"
+                                            data-show-count="true"
+                                            aria-label="Star posthog/posthog on GitHub"
+                                        >
+                                            Star
+                                        </GitHubButton>
                                     </span>
                                 </>
                             )}

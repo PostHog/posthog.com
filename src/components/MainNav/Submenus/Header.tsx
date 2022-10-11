@@ -31,7 +31,7 @@ export default function Header({ title }: Props) {
         },
         {
             Icon: (
-                <span className="text-white dark:text-gray-accent-dark">
+                <span className="text-[#ED1D24]">
                     <YouTube className="w-[24px]" />
                 </span>
             ),
