@@ -1125,3 +1125,7 @@ iframe[src*='youtube-nocookie.com'] {
 .careers-nav .slick-track {
     @apply md:!flex md:!justify-center md:!w-auto md:!transform-none;
 }
+
+.eu-cloud header {
+    @apply bg-[#DFDFCD];
+}
