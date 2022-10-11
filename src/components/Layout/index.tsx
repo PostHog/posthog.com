@@ -8,9 +8,8 @@ import './SkeletonLoading.css'
 import './DarkMode.scss'
 import { PosthogAnnouncement } from '../PosthogAnnouncement/PosthogAnnouncement'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
-import { StaticImage } from 'gatsby-plugin-image'
-import { CallToAction } from 'components/CallToAction'
 import CookieBanner from 'components/CookieBanner'
+import Link from 'components/Link'
 
 const Layout = ({ children, className = '' }: { children: React.ReactNode; className?: string }): JSX.Element => {
     const { posthog } = useValues(posthogAnalyticsLogic)
@@ -23,6 +22,14 @@ const Layout = ({ children, className = '' }: { children: React.ReactNode; class
 
     return (
         <div className={className}>
+            <div>
+                <p className="text-center py-4 bg-gray-accent-light flex justify-center space-x-1 font-semibold m-0">
+                    <span>🚀 PostHog's EU Cloud has arrived!</span>
+                    <Link to="/eu" className="text-red">
+                        Learn more.
+                    </Link>
+                </p>
+            </div>
             <Header />
             <main>{children}</main>
             <Footer />

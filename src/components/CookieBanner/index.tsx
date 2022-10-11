@@ -13,14 +13,15 @@ export default function CookieBanner() {
     }
 
     useEffect(() => {
-        if (typeof posthog?.has_opted_in_capturing !== 'undefined') {
-            setShowBanner(!posthog?.has_opted_in_capturing() || !posthog?.has_opted_out_capturing())
-        }
+        setShowBanner(
+            typeof posthog?.has_opted_in_capturing !== 'undefined' &&
+                (!posthog?.has_opted_in_capturing() || !posthog?.has_opted_out_capturing())
+        )
     }, [])
 
     return showBanner ? (
-        <div className="fixed z-50 -left-8 -bottom-10">
-            <div className="bg-primary rounded-sm max-w-[202px] text-white/80 translate-x-1/2">
+        <div className="fixed z-50 left-0 bottom-[50px] sm:bottom-0">
+            <div className="bg-primary rounded-sm max-w-[202px] text-white/80 translate-x-[150px]">
                 <p className="text-[14px] m-0 p-3">
                     PostHog doesn’t use third party cookies - only a single in-house cookie. No data is transmitted to a
                     third party.
@@ -34,7 +35,7 @@ export default function CookieBanner() {
                     </button>
                 </div>
             </div>
-            <StaticImage alt="Sport hog" width={180} src="../Pricing/images/sport-hog.png" />
+            <StaticImage alt="Sport hog" width={250} src="../EU/images/ursula.png" />
         </div>
     ) : null
 }
