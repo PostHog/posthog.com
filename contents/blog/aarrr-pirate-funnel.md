@@ -182,7 +182,7 @@ Even products that rely on viral growth (e.g. social media apps) need some confi
 
 AARRR is sometimes considered a "marketing framework". This is nonsense. It spans disciplines, which is why it's a useful framework for product-led growth. And if you want to influence them all, people and teams need to own them.
 
-At PostHog, we're [organized into small teams](/handbook/people/team-structure/why-small-teams).
+At PostHog, we're [organized into small teams](/handbook/company/small-teams).
 
 Here's how our earlier table might look if we assigned different PostHog teams to it:
 
