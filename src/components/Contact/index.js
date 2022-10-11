@@ -1,11 +1,11 @@
 import { useLocation } from '@reach/router'
 import Chip from 'components/Chip'
-import { ContactForm } from 'components/ContactForm'
 import { DemoScheduler } from 'components/DemoScheduler'
 import { useValues } from 'kea'
 import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
 import queryString from 'query-string'
 import React, { useEffect, useState } from 'react'
+import HubspotForm from 'react-hubspot-form'
 
 export default function Contact(props) {
     const { posthog } = useValues(posthogAnalyticsLogic)
@@ -46,7 +46,15 @@ export default function Contact(props) {
             <div className="mt-8">
                 {
                     {
-                        contact: <ContactForm />,
+                        contact: (
+                            <div className="max-w-xl mx-auto mt-12">
+                                <HubspotForm
+                                    portalId="6958578"
+                                    formId="21de475a-af2c-47c2-ae02-414aefdfdeb4"
+                                    onSubmit={() => setSubmitted(true)}
+                                />
+                            </div>
+                        ),
                         demo: (
                             <DemoScheduler
                                 type={demoType}
