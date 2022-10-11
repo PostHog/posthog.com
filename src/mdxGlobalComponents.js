@@ -36,7 +36,6 @@ import { CodeBlock } from './components/CodeBlock'
 import { CommunityQuestions } from './components/CommunityQuestions'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { Contact } from './components/Contact'
-import { ContactForm } from './components/ContactForm'
 import { Container } from './components/Container'
 import { ContributorCard } from './components/ContributorCard'
 import { ContributorSearch } from './components/ContributorSearch'
@@ -165,7 +164,6 @@ export const shortcodes = {
     CommunityQuestions,
     CompensationCalculator,
     Contact,
-    ContactForm,
     Container,
     ContributorCard,
     ContributorSearch,
