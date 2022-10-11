@@ -41,7 +41,9 @@ Just deploying PostHog Cloud EU isn't enough – you still need to [acquire cons
 
 ### I'm an existing PostHog customer, can I migrate to PostHog Cloud EU?
 
-Yes. Please read our guide to [migrating to PostHog Cloud EU](/tutorials/migrate-eu-cloud). Please note: at this time, only event and person data can be migrated. Insights, dashboards, and feature flags are not migratable.
+It is possible to migrate event data from another PostHog instance to EU Cloud, but it is a time-consuming process likely to take several days or weeks. There is currently no way to migrate other information, including insights, dashboards, user accounts, feature flags or API keys. 
+
+We strongly recommend that users with large volumes of data begin by setting up and connect a new EU cloud instance and only attempt to migrate data later, if needed, by following [this migration tutorial](/tutorials/eu-cloud). 
 
 ## GDPR compliance checklist
 
