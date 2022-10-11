@@ -174,7 +174,7 @@ For marketing, partnership proposals or anything like that, please post in Slack
 
 ### Squeak!
 
-Squeak! is a community curation toolkit created by the [Website & Docs team](/handbook/people/team-structure/website-docs). The ultimate goal of Squeak! is to support our customers and make our community self-sustaining.
+Squeak! is a community curation toolkit created by the [Website & Docs team](/handbook/small-teams/website-docs). The ultimate goal of Squeak! is to support our customers and make our community self-sustaining.
 
 #### Q&A.js by Squeak!
 
