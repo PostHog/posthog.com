@@ -17,6 +17,10 @@ const linklist: IProps[] = [
                 url: '/product',
             },
             {
+                title: 'Pricing',
+                url: '/pricing',
+            },
+            {
                 title: 'Product analytics',
                 url: '/product#top-features',
             },
@@ -35,6 +39,14 @@ const linklist: IProps[] = [
             {
                 title: 'Apps',
                 url: '/apps',
+            },
+            {
+                title: 'Customer stories',
+                url: '/customers',
+            },
+            {
+                title: 'PostHog vs...',
+                url: '/blog/categories/comparisons',
             },
         ],
     },
@@ -115,16 +127,12 @@ const linklist: IProps[] = [
                 url: '/newsletter',
             },
             {
-                title: 'Customer stories',
-                url: '/customers',
-            },
-            {
                 title: 'Merch',
-                url: 'https://merch.posthog.com',
+                url: 'https://merch.posthog.com/collections/all',
             },
             {
                 title: 'PostHog FM',
-                url: 'https://merch.posthog.com/collections/all',
+                url: 'https://open.spotify.com/playlist/7A2H2J3WhpJmMEwAhKahWH?si=47418915a8d0447b',
             },
             {
                 title: 'PostHog on GitHub',
