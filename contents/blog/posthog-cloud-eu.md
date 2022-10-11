@@ -19,10 +19,6 @@ Oh, and PostHog Cloud EU also happens to be faster for users located in Europe, 
 
 PostHog Cloud EU offers everything you'd expect of PostHog - analytics, session recording, experiments and more. The only difference is that you can now choose to host in a different region, at no extra cost. 
 
-Until now, running PostHog with GDPR compliance meant self-hosting on your own infrastructure, or comprehensively anonymizing data if using PostHog Cloud.
-
-Thanks to our new hosting option, customers in the EU, and any business that needs to keep user data within the EU, can get up and running on PostHog Cloud EU in just a few minutes.
-
 <GDPRForm />
 
 ## FAQ
