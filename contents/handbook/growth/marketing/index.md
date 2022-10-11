@@ -132,7 +132,7 @@ While we don't actively do PR, we occasionally put out press releases ourselves 
 
 ### Marketing quarterly goals
 
-The latest goals for marketing can be found on the [Marketing Small Team page](https://posthog.com/handbook/people/team-structure/marketing#q3-2022-goals). 
+The latest goals for marketing can be found on the [Marketing Small Team page](https://posthog.com/handbook/small-teams/marketing#q3-2022-goals). 
 
 ### 2022 marketing calendar
 
@@ -150,7 +150,7 @@ We closely follow other companies which are active in the product analytics spac
 
 ## Who we are
 
-The Marketing Small Team page is maintained [here](/handbook/people/team-structure/marketing). By 2026, we still want to be a very small but highly effective and responsive team (15-20 people), rather than a very large marketing team with all the traditional functions and hierarchy. In addition to people who share PostHog's culture, we also value:
+The Marketing Small Team page is maintained [here](/handbook/small-teams/marketing). By 2026, we still want to be a very small but highly effective and responsive team (15-20 people), rather than a very large marketing team with all the traditional functions and hierarchy. In addition to people who share PostHog's culture, we also value:
 
 - Strong opinions 
 - People who like to choose their own objectives 

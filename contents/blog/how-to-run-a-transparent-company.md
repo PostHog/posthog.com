@@ -73,7 +73,7 @@ This should be copy pasta from your board slides. We share the monthly reports o
 
 ## How we build product openly
 
-We're [split into small teams](/handbook/people/team-structure/why-small-teams). Each small team runs their own sprints. They share:
+We're [split into small teams](/handbook/company/small-teams). Each small team runs their own sprints. They share:
 
 * How last sprint went
 * What the plan is for the next sprint
