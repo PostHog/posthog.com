@@ -52,6 +52,8 @@ To help manage users' expectations, you might find it useful to share a message 
 
 ### Prioritizing requests
 
+(To figure out how much a customer is paying, go to [revenue.posthog.net](https://revenue.posthog.net) (internal), click on the most recent month and command + F for the company name)
+
 1. Respond to and debug issues for _Priority_ customers (customers on Scale and Enterprise, either current or in our sales process, plus any high-paying Cloud customers)
 2. Respond to and debug issues for _Subscriber_ customers (paying subscribers on Cloud, usually paying $1-500/month)
 3. Respond to and debug issues for _Community_ users (all other free Open Source or free Cloud users)
