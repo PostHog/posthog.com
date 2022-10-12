@@ -67,7 +67,7 @@ export default function DeployOption({ url, icon, title, disablePrefetch, badge 
                 posthog?.capture('deploy option clicked', { deploy_option: title })
             }}
         >
-            {Icon && <Icon />}
+            {Icon && <Icon className="w-6 h-6" />}
             <span>{title}</span>
             {badge && <span className={`lemon-tag ${badgeClass}`}>{badge}</span>}
         </Link>

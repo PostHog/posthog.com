@@ -74,7 +74,7 @@ const BlogPostSidebar = ({ contributors, date, filePath, title, categories, loca
                 </Text>
             </SidebarSection>
             <SidebarSection>
-                <div className="bg-gray-accent-light dark:bg-gray-accent-dark rounded">
+                <div className="bg-gray-accent-light dark:bg-gray-accent-dark rounded max-w-xs">
                     <NewsletterForm sidebar />
                 </div>
             </SidebarSection>

@@ -9,7 +9,7 @@ Each feature at PostHog has an Engineering owner. This owner is responsible for 
 When a bug or feature request comes in, we tag it with the relevant label (see labels below). The owner is responsible for then prioritizing any bug/request that comes in for each feature. This does not mean working on every bug/request, an owner can make the deliberate decision that working on something is not the best thing to work on, but every request should be looked at.
 
 
-> 💡 The Team Platform works a bit differently. Each subteam owns certain parts of PostHog. Among other things, this helps reduce any lead time when critical fixes are needed. Please review the [Team Platform](/handbook/people/team-structure/platform) page for further details.
+> 💡 The Team Platform works a bit differently. Each subteam owns certain parts of PostHog. Among other things, this helps reduce any lead time when critical fixes are needed. Please review the [Team Platform](/handbook/small-teams/platform) page for further details.
 
 
 ## Feature list
@@ -78,8 +78,9 @@ Some of the features we are building may exist in other products already. It is 
 [@yakkomajuri]: https://github.com/yakkomajuri
 [@timgl]: https://github.com/timgl
 [@kappa90]: https://github.com/kappa90
-[Team Product Analytics]: /handbook/people/team-structure/product-analytics
-[Team Session Recording]: /handbook/people/team-structure/session-recording
-[Team Pipeline]: /handbook/people/team-structure/pipeline
-[Team Infrastructure]: /handbook/people/team-structure/infrastructure
-[Team Experimentation]: /handbook/people/team-structure/experimentation
+[Team Product Analytics]: /handbook/small-teams/product-analytics
+[Team Session Recording]: /handbook/small-teams/session-recording
+[Team Pipeline]: /handbook/small-teams/pipeline
+[Team Infrastructure]: /handbook/small-teams/infrastructure
+[Team Experimentation]: /handbook/small-teams/experimentation
+[Team Infrastructure]: /handbook/small-teams/infrastructure

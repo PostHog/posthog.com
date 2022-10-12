@@ -60,7 +60,7 @@ To support this work, we also introduced the new [Data Management](/blog/data-ma
 
 ## What's next?
 
-We're continuing to actively work on improving collaboration throughout the product and we have some specific plans in our short term [roadmap](/handbook/people/team-structure/team-app#roadmap). 
+We're continuing to actively work on improving collaboration throughout the product and we have some specific plans in our short term roadmap. 
 
 However, we're a fast moving company and we continuously reprioritize based on feedback, market needs, etc., so the way we tackle this problem may change.
 

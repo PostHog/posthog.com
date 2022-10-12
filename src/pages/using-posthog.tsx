@@ -105,7 +105,7 @@ const categories: {
             },
             {
                 name: 'Heatmaps',
-                url: '/manual/heatmaps',
+                url: '/manual/toolbar',
                 category: 'heatmaps',
                 description: 'Find the most popular areas within your app',
                 icon: ProductIcons.heatmaps,
