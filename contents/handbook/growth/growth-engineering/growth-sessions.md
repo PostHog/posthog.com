@@ -24,7 +24,7 @@ We find it's important to bring a mixture of technical people, and those with wi
 * Examples:
     * "New, more expensive pricing has hurt signups"
     * "We're not solving bugs quickly and this is hurting word of mouth growth"
-    * "We are losing b2c customers to open source"
+    * "We are losing B2C customers to open source"
     * "We should charge for products separately so we can upsell on features rather than volume. This would let us charge sooner than our current 1m events/month limit, and would let us keep prices low for people that don't use the full breadth of the platform"
 
 ### During the meeting
