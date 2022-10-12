@@ -60,6 +60,7 @@ export default function Job({
     },
     pageContext: { teamName, gitHubIssues },
 }) {
+    console.log(team)
     const timezone = parent?.customFields?.find(({ title }) => title === 'Timezone(s)')?.value
     const salaryRole = parent?.customFields?.find(({ title }) => title === 'Salary')?.value || title
 
