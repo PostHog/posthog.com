@@ -16,14 +16,15 @@ hideAnchor: false
     - **Ben White, Full Stack Engineer**
       - Alex Kim, Full Stack Engineer
     - **James Greenhill, Data/Infra engineer**
-      - Guido Iaquinti, Site Reliability Engineer
       - Tiina Turban, Full Stack Engineer
       - Yakko Majuri, Full Stack Engineer
-      - Ellie Huxtable, Full Stack Engineer
+      - Zack Elan, Software Engineer
+    - **Ellie Huxtable, Full Stack Engineer**
+      - Guido Iaquinti, Site Reliability Engineer
+      - Daniel Jaramillo, Site Reliability Engineer
     - **Eric Duong, Full Stack Engineer**
       - Li Yi Yu, Full Stack Engineer
       - Neil Kakkar, Full Stack Engineer
-      - Rick Marron, Full Stack Engineer
     - **Luke Harries, Head of Product**
       - Annika Schmid, Product Manager
       - Joe Martin, Product Marketer
@@ -75,17 +76,19 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - Product design: Supported by Cory Watilo
 
 #### [Infrastructure](infrastructure)
-- [James Greenhill](/handbook/company/team#james-greenhill-software-engineer) (Team lead, Data/Infra Engineer)
-- Ellie Huxtable
+- [Ellie Huxtable]() (Site Reliability Engineer)
 - [Guido Iaquinti](/handbook/company/team#guido-iaquinti-software-engineer) (Site Reliability Engineer)
+- [Daniel Jaramillo]() (Site Reliability Engineer)
 - _Hiring for an [Site Reliability Engineer](site-reliability-engineer-kubernetes)_
 - Product: Supported by Luke Harries
 
 #### [Pipeline](pipeline)
 - [Yakko Majuri](/handbook/company/team#yakko-majuri-software-engineer) (Full Stack Engineer)
+- [James Greenhill](/handbook/company/team#james-greenhill-software-engineer) (Data/Infra Engineer)
 - [Karl-Aksel Puulmann](/handbook/company/team#karlaksel-puulmann-software-engineer) (Full Stack Engineer)
 - [Harry Waye](/handbook/company/team#harry-waye-software-engineer) (Full Stack Engineer)
 - [Tiina Turban](/handbook/company/team#tiina-turban-software-engineer) (Full Stack Engineer)
+- [Zack Elan]() (Software Engineer)
 - _Incoming Senior Data Engineer_
 - _Hiring for a [full stack engineer](careers/full-stack-engineer)_
 - Product: Supported by Luke Harries

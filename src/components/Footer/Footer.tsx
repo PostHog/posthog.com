@@ -161,6 +161,10 @@ const linklist: IProps[] = [
                 url: '/handbook/company/culture',
             },
             {
+                title: 'Small teams',
+                url: '/handbook/small-teams/team-structure',
+            },
+            {
                 title: 'People & Ops',
                 url: '/handbook/people/compensation',
             },

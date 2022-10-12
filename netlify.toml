@@ -2299,6 +2299,11 @@
     from = "/handbook/strategy/overview"
     to = "/handbook/strategy/strategy"
 
+# Added: 2022-09-20
+[[redirects]]
+    from = "/docs/integrate/client/browser-extension"
+    to = "/docs/integrate/browser-extension"
+
 # Added: 2022-09-24
 [[redirects]]
     from = "/handbook/company/website-design-process"
