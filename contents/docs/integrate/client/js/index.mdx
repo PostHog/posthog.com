@@ -112,7 +112,8 @@ If you use multiple distinct IDs for the same user (e.g. a logical ID and a UUID
 posthog.alias('[new ID]', '[original ID]')
 ```
 
-The original ID will be kept as the default, but any events sent to either will be received under the same person.
+Any events sent to either will be received under the same person.
+Note that the `'[original ID]'` cannot be previously identified nor associated with multiple distinct ids.
 
 ### Reset after logout
 

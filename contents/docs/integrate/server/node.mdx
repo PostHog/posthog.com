@@ -159,7 +159,7 @@ If you're using PostHog in the front-end and back-end, doing the `identify` call
 
 An `alias` call requires:
 
--   `distinctId` – the current distinct ID of the user
+-   `distinctId` – the current unique id (logged in user id)
 -   `alias` – the _other_ distinct ID of the user, which will be aliased to the current one
 
 For example:
@@ -167,7 +167,7 @@ For example:
 ```node
 client.alias({
     distinctId: 'user:123',
-    alias: 'user:12345',
+    alias: 'session:12345',
 })
 ```
 
