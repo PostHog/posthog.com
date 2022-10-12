@@ -35,7 +35,7 @@ const Block = ({
 const Handbook = ({ menu }: { menu: HandbookNav[] }) => {
     return (
         <div className="md:py-7 py-6 border-t md:border-b-0 border-b md:mb-0 mb-4 border-gray-accent-light border-dashed">
-            <div className="max-w-2xl mx-auto xl:max-w-auto md:px-6">
+            <div className="max-w-3xl mx-auto xl:max-w-auto md:px-6">
                 <div className="flex items-center w-full justify-between opacity-70">
                     <h3 className="text-[18px] font-bold m-0 text-black ">Handbook</h3>
                     <SearchBar label={false} className="flex-grow-0 !p-0 w-auto dark:text-white" base={'handbook'} />
@@ -97,8 +97,8 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                                 <span className="text-red">increase the number of successful products</span> in the
                                 world.
                             </h3>
-                            <CallToAction to="/handbook/company/story" className="mt-3 !px-12">
-                                Read our story
+                            <CallToAction to="/about" className="mt-3 !px-12">
+                                Learn about us
                             </CallToAction>
                         </div>
                         <div className="border-t border-gray-accent-light border-dashed">
@@ -112,8 +112,11 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                                 </Block>
                                 <Block title="Careers" cta={{ url: '/careers', label: 'Explore careers' }}>
                                     <p className="m-0 text-[14px] dark:text-white">
-                                        We're currently hiring for <strong>{jobs.totalCount} roles</strong>. We're
-                                        unlike any company you've ever worked for.
+                                        We're currently hiring for{' '}
+                                        <strong>
+                                            {jobs.totalCount} role{jobs.totalCount > 1 && 's'}
+                                        </strong>
+                                        . We're unlike any company you've ever worked for.
                                     </p>
                                 </Block>
                             </div>
@@ -135,7 +138,7 @@ const query = graphql`
                 fieldValue
             }
         }
-        jobs: allJobs {
+        jobs: allAshbyJobPosting(filter: { isListed: { eq: true } }) {
             totalCount
         }
         sidebars: file(absolutePath: { regex: "//sidebars/sidebars.json$/" }) {

@@ -39,7 +39,4 @@ If so, check out our [new Docs page about integrating PostHog with Segment](/doc
 
 _Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
 
-<NewsletterForm
-compact
-/>
 

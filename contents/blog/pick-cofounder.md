@@ -45,7 +45,7 @@ And, crucially, you need to like working with each other.
 
 ## Isn't two devs better?
 
-If you're comfortable talking with strangers that often do not want to talk to you, then two developers is probably the best possible setup. One of the things that was noticeable during [PostHog's time at YCombinator](moving-to-sf) was how outgoing many of the technical founders were.
+If you're comfortable talking with strangers that often do not want to talk to you, then two developers is probably the best possible setup. One of the things that was noticeable during [PostHog's time at Y Combinator](moving-to-sf) was how outgoing many of the technical founders were.
 
 It has been _very_ important that James can do the basics of development. Optimally, both would be kick-ass developers, but that has been less important than selling and communication skills with external parties - users, customers, employees, and investors.
 
@@ -66,9 +66,3 @@ There are a few things PostHog did to guard against this:
 Having a co-founder is great - but it's far better to have no co-founder than to have the wrong one. Getting this right is perhaps the most crucial decision you'll take on your road to startup success.
 
 Loved this? Let us know on [Twitter](https://twitter.com/PostHog) or [LinkedIn](https://linkedin.com/company/posthog), or subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics.
-
-_Enjoyed this? Subscribe to our [newsletter](https://posthog.com/newsletter) to hear more from us twice a month!_
-
-<NewsletterForm
-compact
-/>

@@ -1,5 +1,12 @@
 // AUTO GENERATED FILE 
 
+import { AboutAnchorScrollNavbar } from './components/About/AboutAnchorScrollNavbar'
+import { AboutBlog } from './components/About/AboutBlog'
+import { AboutHero } from './components/About/AboutHero'
+import { AboutInvestors } from './components/About/AboutInvestors'
+import { AboutStory } from './components/About/AboutStory'
+import { AboutTeam } from './components/About/AboutTeam'
+import { AboutTransparency } from './components/About/AboutTransparency'
 import { Accordion } from './components/Accordion'
 import { AnchorScrollNavbar } from './components/AnchorScrollNavbar'
 import { AnimateIntoView } from './components/AnimateIntoView'
@@ -7,6 +14,7 @@ import { AnimatedBurger } from './components/AnimatedBurger'
 import { Apps } from './components/Apps'
 import { AppsList } from './components/AppsList'
 import { ArrayCTA } from './components/ArrayCTA'
+import { AshbyOpenRoles } from './components/AshbyOpenRoles'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BlockQuote } from './components/BlockQuote'
 import { Blog } from './components/Blog'
@@ -28,16 +36,18 @@ import { CodeBlock } from './components/CodeBlock'
 import { CommunityQuestions } from './components/CommunityQuestions'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { Contact } from './components/Contact'
-import { ContactForm } from './components/ContactForm'
 import { Container } from './components/Container'
 import { ContributorCard } from './components/ContributorCard'
 import { ContributorSearch } from './components/ContributorSearch'
 import { ContributorsChart } from './components/ContributorsChart'
+import { CookieBanner } from './components/CookieBanner'
 import { Customers } from './components/Customers'
 import { DarkModeToggle } from './components/DarkModeToggle'
+import { DemoLink } from './components/DemoLink'
 import { DemoScheduler } from './components/DemoScheduler'
 import { DeployOption } from './components/DeployOption'
 import { DocsPageSurvey } from './components/DocsPageSurvey'
+import { EU } from './components/EU'
 import { FeatureAvailability } from './components/FeatureAvailability'
 import { FeaturesSelfHost } from './components/FeaturesSelfHost'
 import { FloatedImage } from './components/FloatedImage'
@@ -54,6 +64,7 @@ import { ImageBlock } from './components/ImageBlock'
 import { IngestionAppsList } from './components/IngestionAppsList'
 import { InlineCode } from './components/InlineCode'
 import { LandingPageCallToAction } from './components/LandingPage/LandingPageCallToAction'
+import { LibraryComparison } from './components/LibraryComparison'
 import { LibraryFeatures } from './components/LibraryFeatures'
 import { Link } from './components/Link'
 import { Logo } from './components/Logo'
@@ -64,6 +75,7 @@ import { NewsletterForm } from './components/NewsletterForm'
 import { NewsletterTutorial } from './components/NewsletterTutorial'
 import { NextSteps } from './components/NextSteps'
 import { NotFoundPage } from './components/NotFoundPage'
+import { NotProductIcons } from './components/NotProductIcons'
 import { OverflowXSection } from './components/OverflowXSection'
 import { Popover } from './components/Popover'
 import { PostCard } from './components/PostCard'
@@ -114,11 +126,16 @@ import { TotalTeam } from './components/TotalTeam'
 import { Tutorials } from './components/Tutorials'
 import { TutorialsSlider } from './components/TutorialsSlider'
 import { VisitLibrary } from './components/VisitLibrary'
-import { WorkableOpenRoles } from './components/WorkableOpenRoles'
-import { WorkableSnippet } from './components/WorkableSnippet'
 import { ZoomImage } from './components/ZoomImage'
 
 export const shortcodes = {
+	AboutAnchorScrollNavbar,
+	AboutBlog,
+	AboutHero,
+	AboutInvestors,
+	AboutStory,
+	AboutTeam,
+	AboutTransparency,
 	Accordion,
 	AnchorScrollNavbar,
 	AnimateIntoView,
@@ -126,6 +143,7 @@ export const shortcodes = {
 	Apps,
 	AppsList,
 	ArrayCTA,
+	AshbyOpenRoles,
 	BasicHedgehogImage,
 	BlockQuote,
 	Blog,
@@ -147,16 +165,18 @@ export const shortcodes = {
 	CommunityQuestions,
 	CompensationCalculator,
 	Contact,
-	ContactForm,
 	Container,
 	ContributorCard,
 	ContributorSearch,
 	ContributorsChart,
+	CookieBanner,
 	Customers,
 	DarkModeToggle,
+	DemoLink,
 	DemoScheduler,
 	DeployOption,
 	DocsPageSurvey,
+	EU,
 	FeatureAvailability,
 	FeaturesSelfHost,
 	FloatedImage,
@@ -173,6 +193,7 @@ export const shortcodes = {
 	IngestionAppsList,
 	InlineCode,
 	LandingPageCallToAction,
+	LibraryComparison,
 	LibraryFeatures,
 	Link,
 	Logo,
@@ -183,6 +204,7 @@ export const shortcodes = {
 	NewsletterTutorial,
 	NextSteps,
 	NotFoundPage,
+	NotProductIcons,
 	OverflowXSection,
 	Popover,
 	PostCard,
@@ -233,7 +255,5 @@ export const shortcodes = {
 	Tutorials,
 	TutorialsSlider,
 	VisitLibrary,
-	WorkableOpenRoles,
-	WorkableSnippet,
 	ZoomImage
 }

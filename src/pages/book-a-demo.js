@@ -7,48 +7,44 @@ import Layout from 'components/SignUp/Layout'
 import { useValues } from 'kea'
 import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
 import React, { useEffect, useState } from 'react'
+import { StaticImage } from 'gatsby-plugin-image'
 
 const Editions = ({ setDemoType }) => {
     return (
         <>
-            <Intro title="Select edition" />
+            <Intro title="Book a PostHog demo" />
             <div className="max-w-[600px] mx-auto grid md:grid-cols-2 grid-cols-1 gap-x-6">
                 <div className="pb-6 md:pt-0 pt-6 justify-self-end w-full">
                     <div className="flex flex-col space-y-4">
-                        <Title title="Open Source" subtitle="Free, limited to one project" />
+                        <Title
+                            title="Open Source (free)"
+                            subtitle="No event limit. Self-hosted product that includes basic analytics."
+                        />
                     </div>
                     <CallToAction
                         width="full"
-                        className="mt-4 box-border"
+                        className="mt-4 pt-6 box-border"
                         type="secondary"
-                        onClick={() => setDemoType('group')}
-                        event={{ name: 'book a demo: clicked group demo' }}
+                        onClick={() => open('https://www.loom.com/share/a75bad1edd1f4a97b90dc8d50e69e98d')}
+                        event={{ name: 'book a demo: clicked recorded demo' }}
                     >
-                        Join a group demo
+                        <StaticImage src="../images/loom-screenshot.gif" alt="Loom demo" />
+                        <div className="pt-1">Watch a recorded demo</div>
                     </CallToAction>
                 </div>
                 <div className="md:order-none order-first md:pl-6 pb-6 md:border-l md:border-b-0 border-b border-gray-accent-light border-dashed">
                     <div className="flex flex-col md:space-y-10 space-y-6">
                         <div className="space-y-4 w-full">
-                            <Title title="PostHog Cloud" subtitle="For large userbases or event volumes" />
+                            <Title
+                                title="Full feature set (paid)"
+                                subtitle="First million events per month free. Cloud (Saas) or self-hosted. All of PostHog's advanced analytics tools."
+                            />
                             <CallToAction
                                 width="full"
                                 className="box-border"
                                 type="primary"
-                                onClick={() => setDemoType('scale')}
-                                event={{ name: 'book a demo: clicked scale demo' }}
-                            >
-                                Book a personalized demo
-                            </CallToAction>
-                        </div>
-                        <div className="space-y-4 w-full">
-                            <Title title="Self-Hosted" subtitle="A focus on compliance and security" />
-                            <CallToAction
-                                width="full"
-                                className="box-border"
-                                type="primary"
-                                onClick={() => setDemoType('enterprise')}
-                                event={{ name: 'book a demo: clicked enterprise demo' }}
+                                onClick={() => setDemoType('paid')}
+                                event={{ name: 'book a demo: clicked paid demo' }}
                             >
                                 Book a personalized demo
                             </CallToAction>
@@ -112,7 +108,7 @@ export default function SelfHost({ location }) {
     }, [demoType])
     return (
         <Layout crumbs={[...crumbs]}>
-            <SEO title="Select edition - PostHog" />
+            <SEO title="Book a demo – PostHog" />
             <section className="px-4">
                 {demoType ? <Book demoType={demoType} /> : <Editions setDemoType={setDemoType} />}
             </section>

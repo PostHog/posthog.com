@@ -15,7 +15,6 @@ Designers are spread between Small Teams. Like sovereign states have ambassadors
 |--------------|------------------|-----------------|
 | [Lottie Coxon](/handbook/company/team#lottie-coxon-graphic-designer) | Graphic Designer | Marketing, Growth  |
 | [Cory Watilo](/handbook/company/team/#cory-watilo-lead-designer) (Team lead)  | Design Lead      | Growth  |
-| [Chris Clark](/handbook/company/team#chris-clark-product-designer)  | Product Designer | Core Experience, Core Analytics |
 
 Design at PostHog:
 

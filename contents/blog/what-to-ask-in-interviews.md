@@ -77,8 +77,6 @@ Avoid:
 
 * Companies that are fundraising as they'll otherwise run out of money, but haven't closed the round
 
-<NewsletterForm compact />
-
 ## What's the culture like?
 
 - "What are the company values, and why? Can you give me some specific ways you've followed them?"
@@ -122,7 +120,3 @@ This will reveal perhaps what the hardest challenge will be, and where you could
 ## Be reasonable, but buyer beware
 
 Startups do not have everything figured out. The challenge is figuring out if they can get from where they are today to where they need to be to succeed – just don't shy away from asking to see if they're headed in the right direction.
-
-<NewsletterForm
-compact
-/>

@@ -15,6 +15,7 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
     const HostHogTemplate = path.resolve(`src/templates/HostHog.js`)
     const Question = path.resolve(`src/templates/Question.js`)
     const SqueakTopic = path.resolve(`src/templates/SqueakTopic.tsx`)
+    const Job = path.resolve(`src/templates/Job.tsx`)
 
     // Tutorials
     const TutorialTemplate = path.resolve(`src/templates/tutorials/Tutorial.tsx`)
@@ -245,6 +246,23 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
                     }
                 }
             }
+            jobs: allAshbyJobPosting {
+                nodes {
+                    id
+                    title
+                    fields {
+                        slug
+                    }
+                    parent {
+                        ... on AshbyJob {
+                            customFields {
+                                value
+                                title
+                            }
+                        }
+                    }
+                }
+            }
         }
     `)
 
@@ -252,7 +270,7 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
         return Promise.reject(result.errors)
     }
 
-    function createPosts(data, menu, template, breadcrumbBase) {
+    function createPosts(data, menu, template, breadcrumbBase, context) {
         const menuFlattened = flattenMenu(result.data.sidebars.childSidebarsJson[menu])
         data.forEach((node) => {
             const slug = node.fields?.slug || node.url
@@ -284,6 +302,8 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
                     breadcrumbBase: breadcrumbBase || menuFlattened[0],
                     tableOfContents,
                     slug,
+                    searchFilter: menu,
+                    ...(context ? context(node) : {}),
                 },
             })
         })
@@ -320,7 +340,18 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
         })
     })
 
-    createPosts(result.data.handbook.nodes, 'handbook', HandbookTemplate, { name: 'Handbook', url: '/handbook' })
+    const createTeamContext = (node) => ({
+        mission: `${node.fields?.slug || node.url}/mission`,
+        objectives: `${node.fields?.slug || node.url}/objectives`,
+    })
+
+    createPosts(
+        result.data.handbook.nodes,
+        'handbook',
+        HandbookTemplate,
+        { name: 'Handbook', url: '/handbook' },
+        createTeamContext
+    )
     createPosts(result.data.docs.nodes, 'docs', HandbookTemplate, { name: 'Docs', url: '/docs' })
     createPosts(result.data.apidocs.nodes, 'docs', ApiEndpoint, { name: 'Docs', url: '/docs' })
     createPosts(result.data.manual.nodes, 'docs', HandbookTemplate, { name: 'Using PostHog', url: '/using-posthog' })
@@ -415,6 +446,7 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
             },
         })
     })
+
     result.data.apps.nodes.forEach((node) => {
         const { slug } = node.fields
         const { documentation } = node.frontmatter
@@ -502,16 +534,59 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
     })
 
     result.data.squeakTopics.nodes.forEach((node) => {
-        const { id, slug, label } = node
+        const { slug, label, topicId } = node
+
         createPage({
             path: `questions/${slug}`,
             component: SqueakTopic,
             context: {
-                id,
+                id: topicId,
                 topics: result.data.squeakTopics.nodes,
                 label,
                 menu,
             },
         })
     })
+
+    if (process.env.ASHBY_API_KEY && process.env.GITHUB_API_KEY) {
+        for (node of result.data.jobs.nodes) {
+            const { id, parent } = node
+            const slug = node.fields.slug
+            const team = parent?.customFields?.find(({ title, value }) => title === 'Team')?.value
+            const issues = parent?.customFields?.find(({ title, value }) => title === 'Issues')?.value?.split(',')
+            const repo = parent?.customFields?.find(({ title, value }) => title === 'Repo')?.value
+            let gitHubIssues = []
+            if (issues) {
+                for (const issue of issues) {
+                    const { html_url, number, title, labels } = await fetch(
+                        `https://api.github.com/repos/${repo}/issues/${issue.trim()}`,
+                        {
+                            headers: {
+                                Authorization: `token ${process.env.GITHUB_API_KEY}`,
+                            },
+                        }
+                    ).then((res) => res.json())
+                    gitHubIssues.push({
+                        url: html_url,
+                        number,
+                        title,
+                        labels,
+                    })
+                }
+            }
+            createPage({
+                path: slug,
+                component: Job,
+                context: {
+                    id,
+                    slug,
+                    teamName: team,
+                    teamNameInfo: `${team} Team`,
+                    objectives: `/handbook/small-teams/${slugify(team, { lower: true })}/objectives`,
+                    mission: `/handbook/small-teams/${slugify(team, { lower: true })}/mission`,
+                    gitHubIssues,
+                },
+            })
+        }
+    }
 }

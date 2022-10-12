@@ -80,3 +80,29 @@ export function isValidEmailAddress(email: string): boolean {
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     return re.test(String(email).toLowerCase())
 }
+
+export interface HubSpotUser {
+    firstName: string
+    lastName: string
+    email: string
+}
+
+export const createHubSpotContact = ({ firstName, lastName, email }: HubSpotUser) => {
+    return fetch('/.netlify/functions/hubspot', {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+            firstName,
+            lastName,
+            email,
+        }),
+    })
+}
+
+export const kebabCase = (string) =>
+    string
+        .replace(/([a-z])([A-Z])/g, '$1-$2')
+        .replace(/[\s_]+/g, '-')
+        .toLowerCase()

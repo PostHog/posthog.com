@@ -5,11 +5,13 @@ import { mergeClassList } from '../../lib/utils'
 export const NewsletterForm = ({
     sidebar = false,
     compact = false,
+    subcompact = false,
     bgColor = '#08042f',
     className = '',
 }: {
     sidebar?: boolean
     compact?: boolean
+    subcompact?: boolean
     bgColor?: string
     className?: string
 }): JSX.Element => {
@@ -77,9 +79,9 @@ export const NewsletterForm = ({
         </div>
     ) : compact ? (
         <div className="w-full mx-auto my-12 text-center">
-            <div className="flex w-full h-full p-1 border-t border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark">
+            <div className="flex justify-center w-full h-full p-1 border-t border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark">
                 <div className={classList}>
-                    <div className="flex flex-col md:flex-row space-x-4 items-center">
+                    <div className="flex flex-col md:flex-row md:space-x-4 items-center">
                         <figure className="shrink-0 grow-0 basis-12 m-0 text-black dark:text-white">
                             <svg
                                 className="block h-12 mb-0 fill-current"
@@ -95,7 +97,7 @@ export const NewsletterForm = ({
                             </svg>
                         </figure>
 
-                        <span className="flex flex-col space-x-2 md:flex-row flex-grow font-bold md:justify-start md:text-left">
+                        <span className="flex flex-col md:space-x-2 md:flex-row flex-grow font-bold md:justify-start md:text-left">
                             <span className="text-lg">The best of PostHog.</span>{' '}
                             <span className="text-sm md:text-lg">Delivered twice a month.</span>
                         </span>
@@ -138,6 +140,38 @@ export const NewsletterForm = ({
                     </div>
                 </div>
             </div>
+        </div>
+    ) : subcompact ? (
+        <div className={classList}>
+            <form
+                action="https://posthog.us19.list-manage.com/subscribe/post?u=292207b434c26e77b45153b96&id=97194afa0a"
+                method="post"
+                id="mc-embedded-subscribe-form"
+                name="mc-embedded-subscribe-form"
+                className="validate w-full flex flex-col md:flex-row items-center mb-0 space-y-2 md:space-y-0 md:space-x-2"
+                target="_blank"
+                noValidate
+            >
+                <input
+                    type="email"
+                    name="EMAIL"
+                    className="block w-full px-4 py-2 flex-1 bg-tan dark:bg-gray-accent-dark rounded-md border-0 text-base font-semibold md:text-left outline-none text-center max-w-sm"
+                    id="mce-EMAIL"
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="email@address.com"
+                    value={email}
+                    required
+                />
+                {/* real people should not fill this in and expect good things - do not remove this or risk form bot signups*/}
+                <div style={{ position: 'absolute', left: '-5000px' }} aria-hidden="true">
+                    <input type="text" name="b_292207b434c26e77b45153b96_97194afa0a" tabIndex={-1} defaultValue />
+                </div>
+                <input
+                    type="submit"
+                    className="bg-red dark:bg-white text-white dark:text-black shrink-0 grow-0 basis-auto font-bold lg:mt-0 border-none cursor-pointer px-5 py-3 md:py-2 w-full rounded-sm md:w-auto"
+                    value="Sign me up!"
+                />
+            </form>
         </div>
     ) : (
         <div className="w-11/12 max-w-4xl mx-auto mb-48">

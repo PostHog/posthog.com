@@ -29,12 +29,12 @@ You can view the Support Hero rotation [in PagerDuty here](https://posthog.pager
 
 ### Channels
 
-There are a couple of channels that customer requests come in so make sure you keep an eye on all of them, but the **most support tickets will come into [Zendesk](#Zendesk)**:
+There are a couple of channels that customer requests come in so make sure you keep an eye on all of them, but **most support tickets will come into [Zendesk](#Zendesk)**. Beyond Zendesk, you should keep an eye on:
 
-- [PostHog Users's Slack](https://posthog.com/slack), specifically [#_customer_support](https://posthogusers.slack.com/archives/G01JXEDAL22), where all messages will come in from the other channels (also on [Zendesk](#zendesk)).
-- [#squeak-ping](https://posthog.slack.com/archives/C03B04XGLAZ) which alerts you to questions asked directly on posthog.com (via [Squeak!](https://squeak.posthog.com)'s [Q&A.js](https://squeak.posthog.com/toolkit/qna.js)). [Learn how to use Squeak!](#how-to-use-squeak)
-- GitHub issues, with [the main repo](https://github.com/posthog/posthog/issues) being the most important one.
-- Sentry issues, either [directly](https://sentry.io/organizations/posthog/issues/?project=1899813) or in #sentry in our main Slack.
+- [PostHog Users's Slack](https://posthog.com/slack), specifically `#community-support`. Users who post in `#general` or elsewhere should be instructed to post in `#community-support`
+- Sentry issues, either [directly](https://sentry.io/organizations/posthog/issues/?project=1899813) or in `#sentry` in our main Slack.
+
+Zendesk will also get populated with new issues from people outside the PostHog organization on the `posthog` and `posthog.com` repos, as well as with Squeak questions. These tickets will come with links to the issue or Squeak so you can answer them in the appropriate platform, rather than on Zendesk itself. 
 
 ### Communication
 
@@ -52,10 +52,16 @@ To help manage users' expectations, you might find it useful to share a message 
 
 ### Prioritizing requests
 
+(To figure out how much a customer is paying, go to [revenue.posthog.net](https://revenue.posthog.net) (internal), click on the most recent month and command + F for the company name)
+
 1. Respond to and debug issues for _Priority_ customers (customers on Scale and Enterprise, either current or in our sales process, plus any high-paying Cloud customers)
 2. Respond to and debug issues for _Subscriber_ customers (paying subscribers on Cloud, usually paying $1-500/month)
 3. Respond to and debug issues for _Community_ users (all other free Open Source or free Cloud users)
 4. Fix issues, create PRs
+
+### Triaging issues to the relevant small team
+
+As the support hero you should triage any bugs/feature requests that you don't deal with to the relevant small team. They are ultimately responsible for handling bugs and feature requests for their area of the product.
 
 ## Categorizing requests
 
@@ -66,6 +72,7 @@ When you initially respond to an issue in Zendesk add a "tag" with the following
 * Docs confusion _either missing or confusing_.
 * App Performance
 * Ingestion _(either problems and not working or performance)_.
+* Insights
 * Data integrity
 * Deployments/Setup
 * Deployments/Upgrading
@@ -143,7 +150,7 @@ There are a few different ways that support tickets can be created in Zendesk:
 
 _User Slack_
 
-Support requests posted in #community-support are monitored by the [Support Hero](/handbook/engineering/support-hero), who then creates tickets in Zendesk by reacting to the message with the :ticket: trigger emoji. Once created, the Support Hero will triage the request in either Zendesk or directly in Slack via Help, and assign it a priority and assignee.
+Support requests posted in #community-support are monitored by the [Support Hero](/handbook/engineering/support-hero), who then creates tickets in Zendesk using the Zendesk app. Once created, the Support Hero will triage the request in either Zendesk or directly in Slack via Help, and assign it a priority and assignee.
 
 _Dedicated Support Channels_
 
@@ -169,7 +176,7 @@ For marketing, partnership proposals or anything like that, please post in Slack
 
 ### Squeak!
 
-Squeak! is a community curation toolkit created by the [Website & Docs team](/handbook/people/team-structure/website-docs). The ultimate goal of Squeak! is to support our customers and make our community self-sustaining.
+Squeak! is a community curation toolkit created by the [Website & Docs team](/handbook/small-teams/website-docs). The ultimate goal of Squeak! is to support our customers and make our community self-sustaining.
 
 #### Q&A.js by Squeak!
 

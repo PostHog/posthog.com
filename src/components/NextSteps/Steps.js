@@ -187,7 +187,7 @@ export const LearnMore = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link event="next steps - Learn more about PostHog: Read our story" to="/handbook/company/story">
+                    <Link event="next steps - Learn more about PostHog: Read our story" to="/about">
                         Read our story
                     </Link>
                 </li>

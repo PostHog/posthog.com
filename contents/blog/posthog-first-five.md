@@ -8,7 +8,7 @@ hideAnchor: true
 author: ["andy-vandervell"]
 featuredImage: ../images/blog/posthog-first-five/first-five.jpg
 featuredImageType: full
-categories: ["Inside PostHog"]
+categories: ["Inside PostHog", "Startups"]
 ---
 
 Our CEO and co-founder, James Hawkins, [recently joined Y Combinator](https://www.youtube.com/watch?v=gF1NGUsjxLU) to talk about the first five hires PostHog ever made, how we made them, and why. This is the story behind each hire, and the lessons we learned along the way.
@@ -118,5 +118,3 @@ While it's tempting to search for "that hire" who will magically transform your 
 Successful companies are built on collective strength, which is why talent compounds is one of our [core values](/handbook/company/values).
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/gF1NGUsjxLU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-<NewsletterForm compact />

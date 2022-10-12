@@ -1,11 +1,11 @@
 import { useLocation } from '@reach/router'
 import Chip from 'components/Chip'
-import { ContactForm } from 'components/ContactForm'
 import { DemoScheduler } from 'components/DemoScheduler'
 import { useValues } from 'kea'
 import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
 import queryString from 'query-string'
 import React, { useEffect, useState } from 'react'
+import HubspotForm from 'react-hubspot-form'
 
 export default function Contact(props) {
     const { posthog } = useValues(posthogAnalyticsLogic)
@@ -26,7 +26,7 @@ export default function Contact(props) {
         if (tab === 'contact' || tab === 'demo') {
             setActiveTab(tab)
         }
-        if (demo && (demo === 'group' || demo === 'scale' || demo === 'enterprise' || demo === 'qa')) {
+        if (demo && (demo === 'paid' || demo === 'qa')) {
             setDemoType(demo)
         }
     }, [location])
@@ -46,15 +46,21 @@ export default function Contact(props) {
             <div className="mt-8">
                 {
                     {
-                        contact: <ContactForm />,
+                        contact: (
+                            <div className="max-w-xl mx-auto mt-12">
+                                <HubspotForm
+                                    portalId="6958578"
+                                    formId="21de475a-af2c-47c2-ae02-414aefdfdeb4"
+                                    onSubmit={() => setSubmitted(true)}
+                                />
+                            </div>
+                        ),
                         demo: (
                             <DemoScheduler
                                 type={demoType}
                                 iframeSrc={
                                     {
-                                        scale: 'https://calendly.com/d/ckz-37j-jz9/posthog-scale-customer-success-demo',
-                                        group: 'https://calendly.com/cameron-posthog/posthog-demo',
-                                        enterprise: 'https://calendly.com/simon-posthog/enterprise-demo',
+                                        paid: 'https://calendly.com/d/ckz-37j-jz9/posthog-scale-customer-success-demo',
                                         qa: 'https://calendly.com/cameron-posthog/15-minute-posthog-q-a',
                                     }[demoType]
                                 }

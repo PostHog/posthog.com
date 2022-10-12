@@ -8,7 +8,7 @@ hideAnchor: true
 featuredImage: ../images/blog/planning-a-company-offsite/planning-offsite.jpeg
 featuredImageType: full
 author: ["grace-mckenzie"]
-categories: ["Inside PostHog", "Guides"]
+categories: ["Inside PostHog", "Guides", "Startups"]
 ---
 
 As a company born at the beginning of the pandemic, PostHog has been fully-remote from its inception. Our team is 30+ people distributed across 10 countries; we have no central office, but [we still value getting together](/blog/asynchronous-remote-companies) in person. 
@@ -49,8 +49,6 @@ Choosing where to host your offsite is one of the most subjective planning decis
 
 - **Affordability:** An ideal offsite location depends on the stage of the company – a realistic budget for a five-person company won’t be the same as one for 100. Work out how much you can spend per person on travel and accommodation for your chosen location as soon as possible. And don’t go to Switzerland – it will bankrupt you.
 
-<NewsletterForm compact />
-
 ## Planning your schedule
 
 <div style="width:100%;height:0;padding-bottom:194%;position:relative;"><iframe src="https://giphy.com/embed/elDpvxPF5FfcBbwOvR" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div>
@@ -85,5 +83,3 @@ As a reference, we budget $1,500 per person for a small team offsite and $3,000 
 ## Final thoughts
 
 Offsite planning can often be some of the hardest, yet most rewarding work you can do in a startup. I hope the information above helps you along the way, but be sure to check out [our open-source guide](handbook/company/offsites#how-to-plan-an-offsite-in-8-weeks---a-checklist) for planning offsites. It includes our comprehensive checklist and some public templates you can use to make the process as efficient as possible.
-
-<NewsletterForm compact />

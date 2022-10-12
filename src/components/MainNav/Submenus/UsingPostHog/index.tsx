@@ -33,9 +33,9 @@ export default function UsingPosthog({ referenceElement }: { referenceElement: H
             url: '/customers',
         },
         {
-            title: 'Marketplace',
+            title: 'Partner directory',
             description: 'Companies and products who can help with PostHog',
-            url: '/marketplace',
+            url: '/partners',
         },
         {
             title: 'Apps',
@@ -94,7 +94,7 @@ export default function UsingPosthog({ referenceElement }: { referenceElement: H
                     <div className="md:border-r border-gray-accent-light border-dashed md:w-[500px]">
                         <div className="md:p-6 md:mb-0 mb-4">
                             <div className="flex items-center w-full justify-between opacity-70">
-                                <h3 className="text-[18px] font-bold m-0 text-black pl-2">User guides</h3>
+                                <h3 className="text-[18px] font-bold m-0 text-black pl-2">Product manual</h3>
                                 <SearchBar
                                     label={false}
                                     className="flex-grow-0 !p-0 w-auto dark:text-white"
@@ -124,7 +124,7 @@ export default function UsingPosthog({ referenceElement }: { referenceElement: H
                                 })}
                             </ol>
                             <CallToAction className="inline-block mt-4 !w-full" to="/using-posthog">
-                                Visit user guides
+                                Visit product manual
                             </CallToAction>
                         </div>
                         <div className="py-7 md:px-6 border-t md:border-b-0 border-b md:mb-0 mb-4 border-gray-accent-light border-dashed">

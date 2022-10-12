@@ -122,7 +122,7 @@ export const SingleCodeBlock = ({ label, language, children, ...props }: SingleC
 
 export const CodeBlock = ({
     label,
-    selector = 'dropdown',
+    selector = 'tabs',
     showLabel = true,
     showCopy = true,
     showLineNumbers = false,
@@ -317,7 +317,7 @@ export const CodeBlock = ({
                                                         {children === "'<ph_project_api_key>'" && projectToken
                                                             ? `'${projectToken}'`
                                                             : children === "'<ph_instance_address>'" && projectToken
-                                                            ? 'https://app.posthog.com'
+                                                            ? `'https://app.posthog.com'`
                                                             : children}
                                                     </span>
                                                 )

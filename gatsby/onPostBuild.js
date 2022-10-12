@@ -6,6 +6,7 @@ const docsHandbookTemplate = require('../src/templates/OG/docs-handbook.js')
 const customerTemplate = require('../src/templates/OG/customer.js')
 const careersTemplate = require('../src/templates/OG/careers.js')
 const tutorialTemplate = require('../src/templates/OG/tutorial.js')
+const jobTemplate = require('../src/templates/OG/job.js')
 const { flattenMenu } = require('./utils')
 const fetch = require('node-fetch')
 
@@ -127,9 +128,21 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
                     }
                 }
             }
-            careers: allJobs {
+            careers: allAshbyJobPosting {
                 nodes {
                     title
+                    fields {
+                        slug
+                    }
+                    parent {
+                        ... on AshbyJob {
+                            id
+                            customFields {
+                                title
+                                value
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -256,6 +269,7 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
     for (const post of data.customers.nodes) {
         const { frontmatter } = post
         const logoType = frontmatter.logo.absolutePath.includes('.svg') ? 'svg+xml' : 'image/jpeg'
+        const featuredImageType = frontmatter.featuredImage.absolutePath.includes('.svg') ? 'svg+xml' : 'image/jpeg'
         const featuredImage = fs.readFileSync(frontmatter.featuredImage.absolutePath, {
             encoding: 'base64',
         })
@@ -263,7 +277,14 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
             encoding: 'base64',
         })
         await createOG({
-            html: customerTemplate({ title: frontmatter.title, featuredImage, logo, logoType, font }),
+            html: customerTemplate({
+                title: frontmatter.title,
+                featuredImage,
+                featuredImageType,
+                logo,
+                logoType,
+                font,
+            }),
             slug: post.fields.slug,
         })
     }
@@ -273,6 +294,19 @@ module.exports = exports.onPostBuild = async ({ graphql }) => {
         html: careersTemplate({ jobs: (data.careers && data.careers.nodes) || [], font }),
         slug: 'careers',
     })
+
+    for (const job of data.careers.nodes) {
+        const {
+            title,
+            parent,
+            fields: { slug },
+        } = job
+        const timezone = parent?.customFields?.find(({ title }) => title === 'Timezone(s)')?.value
+        await createOG({
+            html: jobTemplate({ role: title, font, timezone }),
+            slug,
+        })
+    }
 
     // Tutorials OG
     for (const post of data.tutorials.nodes) {
