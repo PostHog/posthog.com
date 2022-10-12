@@ -85,7 +85,7 @@ const categories: {
             },
             {
                 name: 'Retention',
-                url: '/manual/retenion',
+                url: '/manual/retention',
                 category: 'retention',
                 description: 'Track how many of your users return',
                 icon: ProductIcons.retention,
