@@ -228,7 +228,7 @@ const categories: {
             },
             {
                 name: 'Settings',
-                url: '/manual/settings',
+                url: '/manual/application-settings',
                 category: 'settings',
                 description: 'Organization controls, billing, and project configuration',
                 icon: ProductIcons.settings,
