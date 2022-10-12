@@ -85,6 +85,7 @@ Now we’ve targeted churn on multiple fronts, both by understanding what users 
 ## Further reading
 
 - [How to build, analyze and optimize conversion funnels in PostHog](/tutorials/funnels)
+- [Measuring and visualizing growth loops](/tutorials/growth-loops)
 - [The most useful B2B SaaS product metrics](/blog/b2b-saas-product-metrics)
 - [Finding your North Star metric and why it matters](/blog/north-star-metrics)
 
