@@ -5,7 +5,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-In addition to events having properties, users can also have properties. There are two different methods that can be used: `set`, `set_once` and `$unset`. Depending on the integration library the actual function calls look a bit different, but internally they all work the same way. Note that all methods can be used in properties with normal event capture, e.g. using our [js library](/docs/integrate/client/js):
+In addition to events having properties, users can also have properties. There are three different methods that can be used: `set`, `set_once` and `$unset`. Depending on the integration library the actual function calls look a bit different, but internally they all work the same way. Note that all methods can be used in properties with normal event capture, e.g. using our [js library](/docs/integrate/client/js):
 ```js
 posthog.capture(
     'Set some user properties', 
