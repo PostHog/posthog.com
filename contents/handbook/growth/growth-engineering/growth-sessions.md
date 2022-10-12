@@ -20,6 +20,7 @@ We find it's important to bring a mixture of technical people, and those with wi
 
 ### Before the meeting
 * Before the meeting, everyone creates a list of hypotheses. These can be problems which limit growth, or opportunities to accelerate. They should all be related to growth engineering (e.g. not simple bug fixes), and they should be focused on improving our long term monthly growth rate.
+
 * Examples:
     * "New, more expensive pricing has hurt signups"
     * "We're not solving bugs quickly and this is hurting word of mouth growth"
@@ -28,11 +29,14 @@ We find it's important to bring a mixture of technical people, and those with wi
 
 ### During the meeting
 * When the meeting starts, allocate 10 minutes for people to read through everything and to add any additional hypotheses.
+
 * After reading, watch session recordings of users going through key flows of the product. Allocate 20 minutes for this. This may generate some further hypotheses. For example, users converting to paying customers, users activating, users inviting their colleagues.
+
 * During the meeting, you should work through each hypothesis to determine if it is correct and decide how to respond. Answer each hypothesis using available data and write up any actions, such as experiments you want to run, with clearly allocated owners. 
 
 ### After the meeting
 * Two weeks after the meeting, run a growth sprint planning session to reflect on what got done and to confirm what comes next.
+
 * Four weeks later, re-run the entire meeting. You may end up carrying some hypotheses from session to session if they're blocked or lower priority.
 
 ## Growth session template
