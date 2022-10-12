@@ -548,6 +548,16 @@
                     ]
                 }
             ]
+        },
+        {
+            "name": "Growth engineering",
+            "url": "",
+            "children": [
+                {
+                    "name": "Growth reviews",
+                    "url": "/handbook/growth/growth-engineering/growth-sessions"
+                }
+            ]
         }
     ],
     "docs": [
