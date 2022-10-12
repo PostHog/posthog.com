@@ -33,9 +33,9 @@ export default function UsingPosthog({ referenceElement }: { referenceElement: H
             url: '/customers',
         },
         {
-            title: 'Marketplace',
+            title: 'Partner directory',
             description: 'Companies and products who can help with PostHog',
-            url: '/marketplace',
+            url: '/partners',
         },
         {
             title: 'Apps',
