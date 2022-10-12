@@ -39,7 +39,6 @@ Examples:
 * During the meeting, you should work through each hypothesis to determine if it is correct and decide how to respond. Answer each hypothesis using available data and write up any actions, such as experiments you want to run, with clearly allocated owners. 
 
 ### After the meeting
-* Two weeks after the meeting, run a growth sprint planning session to reflect on what got done and to confirm what comes next.
 
 * Four weeks later, re-run the entire meeting. You may end up carrying some hypotheses from session to session if they're blocked or lower priority.
 
