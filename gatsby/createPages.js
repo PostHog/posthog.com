@@ -581,7 +581,7 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
                     id,
                     slug,
                     teamName: team,
-                    teamNameInfo: `Team ${team}`,
+                    teamNameInfo: `${team} Team`,
                     objectives: `/handbook/small-teams/${slugify(team, { lower: true })}/objectives`,
                     mission: `/handbook/small-teams/${slugify(team, { lower: true })}/mission`,
                     gitHubIssues,

@@ -430,10 +430,6 @@
                     "url": "/handbook/product/user-feedback"
                 },
                 {
-                    "name": "Scale features prioritization",
-                    "url": "/handbook/product/scale-features-prioritization"
-                },
-                {
                     "name": "Paid features",
                     "url": "/handbook/product/paid-features"
                 },
@@ -1176,7 +1172,7 @@
             "children": [
                 {
                     "name": "Overview",
-                    "url": "/docs/privacy/"
+                    "url": "/docs/privacy"
                 },
                 {
                     "name": "GDPR guidance",

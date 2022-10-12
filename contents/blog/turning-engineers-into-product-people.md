@@ -40,7 +40,7 @@ Beyond iteration speed, risk-taking, and problem-solving, we’re also looking f
 
 <iframe src="https://giphy.com/embed/3o7btZ1Gm7ZL25pLMs" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 
-As of writing, we’ve got 12 engineers and are looking to double that number within a year. Expanding your engineering team introduces all sorts of interesting challenges, from the kind of work each person does to how we distribute ownership of output. We’ve introduced [Small Teams](https://posthog.com/handbook/people/team-structure/why-small-teams) at PostHog over the past few months and have enjoyed immense success with it. More work gets done faster and more problems are spotted early and fixed. Every Small Team has its own leader, and top management provides support and direction.
+As of writing, we’ve got 12 engineers and are looking to double that number within a year. Expanding your engineering team introduces all sorts of interesting challenges, from the kind of work each person does to how we distribute ownership of output. We’ve introduced [Small Teams](https://posthog.com/handbook/company/small-teams) at PostHog over the past few months and have enjoyed immense success with it. More work gets done faster and more problems are spotted early and fixed. Every Small Team has its own leader, and top management provides support and direction.
 
 ## Do you need a VP of Product?
 
