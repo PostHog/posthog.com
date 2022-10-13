@@ -48,9 +48,9 @@ We've organised the team into small teams that are multi-disciplinary. [You can 
 
 ### Engineering
 
-Engineering is spread out into three small teams. Team Platform is a scope-specific team which focuses on deployments and ingestion (see [Team Platform](platform) for more details). App teams East and West work on the PostHog product in general and they're split based on timezones for optimal collaboration. We mostly hire full-stack engineers and each team has expertise across the stack of the entire product. To learn what each team is working on you can take a look at [feature ownership](/handbook/engineering/feature-ownership).
+Engineering is spread out into three small teams. Team Platform is a scope-specific team which focuses on deployments and ingestion (see [Team Platform](/handbook/small-teams/infrastructure) for more details). App teams East and West work on the PostHog product in general and they're split based on timezones for optimal collaboration. We mostly hire full-stack engineers and each team has expertise across the stack of the entire product. To learn what each team is working on you can take a look at [feature ownership](/handbook/engineering/feature-ownership).
 
-#### [Product Analytics](product-analytics)
+#### [Product Analytics](/handbook/small-teams/product-analytics)
 - [Marius Andra](/handbook/company/team#marius-andra-software-engineer) (Team lead, Full Stack Engineer)
 - [Michael Matloka](/handbook/company/team#michael-matloka-software-engineer) (Full Stack Engineer)
 - [Paul D'Ambra](/handbook/company/team#paul-dambra-software-engineer) (Full Stack Engineer)
@@ -59,7 +59,7 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - _Hiring for a [full stack engineer](careers/full-stack-engineer)_
 - _Hiring for a [full stack engineer](careers/full-stack-engineer)_
 
-#### [Experimentation](experimentation)
+#### [Experimentation](/handbook/small-teams/experimentation)
 - [Eric Duong](/handbook/company/team#eric-duong-software-engineer) (Team lead, Full Stack Engineer)
 - [Neil Kakkar](/handbook/company/team#neil-kakkar-software-engineer) (Full Stack Engineer)
 - [Li Yi Yu](/handbook/company/team#li-yi-yu-full-stack-engineer) (Full Stack Engineer)
@@ -67,7 +67,7 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - Product: Supported by Luke Harries
 - Product design: Supported by Cory Watilo
 
-#### [Session Recording](session-recording)
+#### [Session Recording](/handbook/small-teams/session-recording)
 - [Ben White](/handbook/company/team#ben-white-full-stack-engineer) (Team lead, Full Stack Engineer)
 - [Alex Kim](/handbook/company/team#alex-kim-full-stack-engineer) (Full Stack Engineer)
 - [Emanuele Capparelli](/handbook/company/team#ben-white-full-stack-engineer) (Growth Engineer)
@@ -75,14 +75,14 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - Product: Supported by Annika Schmid
 - Product design: Supported by Cory Watilo
 
-#### [Infrastructure](infrastructure)
+#### [Infrastructure](/handbook/small-teams/infrastructure)
 - [Ellie Huxtable]() (Site Reliability Engineer)
 - [Guido Iaquinti](/handbook/company/team#guido-iaquinti-software-engineer) (Site Reliability Engineer)
 - [Daniel Jaramillo]() (Site Reliability Engineer)
 - _Hiring for an [Site Reliability Engineer](site-reliability-engineer-kubernetes)_
 - Product: Supported by Luke Harries
 
-#### [Pipeline](pipeline)
+#### [Pipeline](/handbook/small-teams/pipeline)
 - [Yakko Majuri](/handbook/company/team#yakko-majuri-software-engineer) (Full Stack Engineer)
 - [James Greenhill](/handbook/company/team#james-greenhill-software-engineer) (Data/Infra Engineer)
 - [Karl-Aksel Puulmann](/handbook/company/team#karlaksel-puulmann-software-engineer) (Full Stack Engineer)
@@ -94,27 +94,27 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - Product: Supported by Luke Harries
 - Product design: Supported by Cory Watilo
 
-### [Marketing](marketing)
+### [Marketing](/handbook/small-teams/marketing)
 - [Charles Cook](/handbook/company/team#charles-cook-business-operations) (Team lead, VP Ops & Marketing)
 - [Joe Martin](/handbook/company/team#joe-martin-product-marketer) (Product Marketer)
 - [Andy Vandervell, Content Marketer](/handbook/company/team#andy-vandervell-content-marketer) (Content Marketer)
 - Ian Vanagas, Technical Content Marketer
 
-### [Website and Docs](website-docs)
+### [Website and Docs](/handbook/small-teams/website-docs)
 - [Cory Watilo](/handbook/company/team#cory-watilo-lead-designer) (Lead Designer)
 - [Eli Kinsey](/handbook/company/team#eli-kinsey-frontend-engineer) (Frontend Engineer)
 - [Lottie Coxon](/handbook/company/team#lottie-coxon-graphic-designer) (Graphic Designer)
 
-### [People & Operations](people)
+### [People & Operations](/handbook/small-teams/people)
 - [Charles Cook](/handbook/company/team#charles-cook-business-operations) (Team lead, VP Ops & Marketing)
 - [Grace McKenzie](/handbook/company/team#grace-mckenzie-operations-manager) (Operations Manager)
 - Coua Phang (Tech Talent Partner)
 
-### [Customer Success](customer-success)
+### [Customer Success](/handbook/small-teams/customer-success)
 - [Simon Fisher](/handbook/company/team#simon-fisher-customer-success) (Team lead, Customer Success)
 - [Cameron DeLeone](/handbook/company/team#cameron-deleone-customer-success) (Customer Success Manager)
 
-### [Exec Team](exec)
+### [Exec Team](/handbook/small-teams/exec)
 - James Hawkins (Team lead, CEO)
 - Tim Glaser (CTO)
 - Luke Harries (Head of Product)
