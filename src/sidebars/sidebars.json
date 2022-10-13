@@ -1001,6 +1001,10 @@
                     "url": "/docs/migrate/migrate-from-amplitude"
                 },
                 {
+                    "name": "To PostHog Cloud EU",
+                    "url": "/tutorials/migrate-eu-cloud"
+                },
+                {
                     "name": "Between Cloud and self-hosted",
                     "url": "/docs/migrate/migrate-between-cloud-and-self-hosted"
                 }
