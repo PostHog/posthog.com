@@ -63,7 +63,7 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Eric Duong](/handbook/company/team#eric-duong-software-engineer) (Team lead, Full Stack Engineer)
 - [Neil Kakkar](/handbook/company/team#neil-kakkar-software-engineer) (Full Stack Engineer)
 - [Li Yi Yu](/handbook/company/team#li-yi-yu-full-stack-engineer) (Full Stack Engineer)
-- _Hiring for a [full stack engineer](careers/full-stack-engineer)_
+- _Hiring for a [full stack engineer](/careers/full-stack-engineer)_
 - Product: Supported by Luke Harries
 - Product design: Supported by Cory Watilo
 
@@ -71,7 +71,7 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Ben White](/handbook/company/team#ben-white-full-stack-engineer) (Team lead, Full Stack Engineer)
 - [Alex Kim](/handbook/company/team#alex-kim-full-stack-engineer) (Full Stack Engineer)
 - [Emanuele Capparelli](/handbook/company/team#ben-white-full-stack-engineer) (Growth Engineer)
-- _Hiring for a [full stack engineer](careers/full-stack-engineer)_
+- _Hiring for a [full stack engineer](/careers/full-stack-engineer)_
 - Product: Supported by Annika Schmid
 - Product design: Supported by Cory Watilo
 
@@ -90,7 +90,7 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Tiina Turban](/handbook/company/team#tiina-turban-software-engineer) (Full Stack Engineer)
 - [Zack Elan]() (Software Engineer)
 - _Incoming Senior Data Engineer_
-- _Hiring for a [full stack engineer](careers/full-stack-engineer)_
+- _Hiring for a [full stack engineer](/careers/full-stack-engineer)_
 - Product: Supported by Luke Harries
 - Product design: Supported by Cory Watilo
 
