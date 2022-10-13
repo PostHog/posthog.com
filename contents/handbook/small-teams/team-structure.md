@@ -56,8 +56,8 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Paul D'Ambra](/handbook/company/team#paul-dambra-software-engineer) (Full Stack Engineer)
 - Product: Supported by Annika Schmid
 - Product design: Supported by Cory Watilo
-- _Hiring for a [full stack engineer](careers/full-stack-engineer)_
-- _Hiring for a [full stack engineer](careers/full-stack-engineer)_
+- _Hiring for a [full stack engineer](/careers/full-stack-engineer)_
+- _Hiring for a [full stack engineer](/careers/full-stack-engineer)_
 
 #### [Experimentation](/handbook/small-teams/experimentation)
 - [Eric Duong](/handbook/company/team#eric-duong-software-engineer) (Team lead, Full Stack Engineer)
@@ -79,7 +79,7 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Ellie Huxtable]() (Site Reliability Engineer)
 - [Guido Iaquinti](/handbook/company/team#guido-iaquinti-software-engineer) (Site Reliability Engineer)
 - [Daniel Jaramillo]() (Site Reliability Engineer)
-- _Hiring for an [Site Reliability Engineer](site-reliability-engineer-kubernetes)_
+- _Hiring for an [Site Reliability Engineer](/careers/site-reliability-engineer-kubernetes)_
 - Product: Supported by Luke Harries
 
 #### [Pipeline](/handbook/small-teams/pipeline)

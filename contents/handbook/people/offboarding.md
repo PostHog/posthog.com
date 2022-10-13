@@ -22,7 +22,7 @@ In this case, we are letting the team member go.
 
 This is generally for performance reasons or because the company's needs have changed and the role can no longer be justified. If the decision is down to performance issues, we will have already communicated feedback to the individual and given them time to take the feedback on board. However, performance issues sadly can't always be resolved, which means we might ultimately need to end someone's employment. 
 
-We will usually ask you to stop working immediately. If you have been with us for at least 3 months, you will be paid 4 months of salary as [severance](/people/compensation#severance). Otherwise, you will be paid 1 month of salary as severance. 
+We will usually ask you to stop working immediately. If you have been with us for at least 3 months, you will be paid 4 months of salary as [severance](/handbook/people/compensation#severance). Otherwise, you will be paid 1 month of salary as severance. 
 
 ## Communicating departures
 
