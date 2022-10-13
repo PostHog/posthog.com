@@ -85,7 +85,7 @@ const categories: {
             },
             {
                 name: 'Retention',
-                url: '/manual/retenion',
+                url: '/manual/retention',
                 category: 'retention',
                 description: 'Track how many of your users return',
                 icon: ProductIcons.retention,
@@ -228,7 +228,7 @@ const categories: {
             },
             {
                 name: 'Settings',
-                url: '/manual/settings',
+                url: '/manual/application-settings',
                 category: 'settings',
                 description: 'Organization controls, billing, and project configuration',
                 icon: ProductIcons.settings,

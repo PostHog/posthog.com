@@ -480,7 +480,7 @@ Create your test files e.g. `index.test.js` or `index.test.ts` for testing your 
 
 Write tests in jest, you can learn more about the syntax and best practices in the [jest documentation](https://jestjs.io/docs/getting-started). We recommend writing tests to cover the primary functions of your app (e.g. does it create events in the expected format) and also for edge cases (e.g. does it crash if no data is sent).
 
-For more information on how to setup testing, take a look at [this guide](/docs/app/build/testing).
+For more information on how to setup testing, take a look at [this guide](/docs/apps/build/testing).
 
 ## Logs
 

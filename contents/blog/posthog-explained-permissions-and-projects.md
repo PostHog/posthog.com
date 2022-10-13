@@ -32,7 +32,7 @@ Everyone in an organization has the ability to add new members to that organizat
 ## Projects
 A step down from organizations, projects are where the real magic happens and is best defined as where PostHog groups data and queries. Any information in a project is limited to that project and can’t be accessed in another project. 
 
-Projects are also nested within organizations and, while there are several [ways to organize projects](/manual/organizations-and-projects#ways-of-organizing-projects), the most common approach is to have one project per unlinked project within an organization. One exception to this however would be if you only have one product and one marketing website — in which case [we recommend compiling both into a single project](/blog/how-and-why-track-your-website-with-posthog).
+Projects are also nested within organizations and, while there are several [ways to organize projects](/manual/organizations-and-projects#ways-of-organizing-projects), the most common approach is to have one project per unlinked project within an organization. One exception to this however would be if you only have one product and one marketing website — in which case [we recommend compiling both into a single project](/blog/track-your-website-with-posthog).
 
 ### How to create private projects
 Normally, when a user joins an organization they get access to all projects within it. But what if you want to keep some things a secret? That’s when private projects are useful. 

@@ -161,7 +161,7 @@ This scenario typically isn't ideal, as merging two users will only affect event
 As a result, we will be left with two separate `person_id`'s in the events table that should be associated with the same user, but instead will be treated as entirely unique users.
 The only way to fully 'merge' these two people would be to go back and rewrite the `person_id` field on past events, which is not practical or performant.
 
-For more information on how these merges can affect the results of your queries, take a look at this page on how [querying data](/data/how-posthog-works/queries) works.
+For more information on how these merges can affect the results of your queries, take a look at this page on how [querying data](/docs/how-posthog-works/queries) works.
 
 Avoiding this scenario is the primary goal of the event buffer: by [buffering certain events](#1-event-buffer), we can avoid creating a duplicate Person when other events arrive in suboptimal order from the user's initial sign-up flow.
 
