@@ -13,25 +13,36 @@ Confused about the difference between an event and an action? Not sure what the 
 ## A
 
 #### Action
+Actions in PostHog are a way to organize [events](manual/glossary/#event) into a different format. In their simplest form actions consist of one or more events which have been given a new name - usually a descriptive title, such as 'Viewed Glossary Page`. [Find out more about actions in PostHog](/manual/actions). 
 
 #### Active user
 Active users are the people who currently use your product. A user who becomes inactive may have [churned](/manual/glossary#churn).
 
 ### Annotation
+Annotations are short text notes you can apply to your data to help you understand context at a later point, or to signal important context to others. A common use for annotations it to add them shared charts and mark important events, such as feature releases or new marketing activiity. [Find out more about annotations in PostHog](/manual/annotations). 
 
 #### App 
+Apps are additional features or functionality which are built on top of PostHog. They are commonly used to integrate PostHog with other platforms, to modify events or to enhance PostHog's functionality. Apps may be built by the PostHog team, or by the community. You can [browse the app library](/apps) to see what's available, or [find out more in the docs](/docs/apps). 
+
+#### App chain
+In PostHog, the output of one app will impact the actions of the next app to create a chain. This makes it crucial to understand the order in which apps run. [Find out more about app chains in the docs](/docs/apps/build). 
 
 #### ARR
+Annual recurring revenue - basically how much revenue you have each year. 
 
 #### A/B test
+A/B tests are when you test two versions of an idea by serving each version to portion of your userbase, so you can monitor which perfoms best. If you're using more than two versions, it's a [multivariate test](/manual/glossary#experiments). PostHog can do both, via [Experiments](/manual/experimentation). 
 
 ## B 
 
 #### B2B
+Business to business. It's when you make money by selling things or services to other businesses, rather than to individual users. Tools such as [Group Analytics](/manual/group-analytics) are especially important for B2B users in PostHog.
 
 #### B2C
+Business to customer. It's when you make money by selling things or services to individual customers, rather than to other businesses. Tools such as [experiments](/manual/experimentation) are especially important for B2C users in PostHog.
 
 #### BAA
+Business Associate Agreement, or also known as a Business Associate Contract. It's a legal document signed by contractors who may have to handle [personal health information](/manual/glossary#PHI) in order to agree to and satisfy the requirements of [HIPAA](/manual/glossary#HIPAA). [Find out more about PostHog and HIPAA](/docs/privacy/hipaa-compliance). 
 
 ## C
 
@@ -39,8 +50,10 @@ Active users are the people who currently use your product. A user who becomes i
 When a user stops using your product and is no longer considered to be an [active user](/manual/glossary#active-user). The speed at which users churn is known as your _churn rate_ and, if it is greater than the rate at which you acquire new customers then your product is in decline. 
 
 #### ClickHouse
+ClickHouse is an [open source](/manual/glossary#open-source), column orientated system for managing databases. [We like it a lot and use it to power PostHog](/docs/how-posthog-works/clickhouse). 
 
 #### Cohort
+Cohorts are groups of users in PostHog, created using the Cohorts tool. Cohorts can be created from either a static list, or a dynamic list which continues to update. Cohorts and [groups](/manual/glossary#groups) are similar, but [not the same](/manual/group-analytics#groups-vs-cohorts).
 
 #### Conversion
 
@@ -157,6 +170,8 @@ When a user stops using your product and is no longer considered to be an [activ
 #### Path
 
 #### Persons
+
+#### PHI 
 
 #### Pivot
 
