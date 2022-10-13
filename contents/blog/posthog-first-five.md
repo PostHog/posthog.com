@@ -8,7 +8,7 @@ hideAnchor: true
 author: ["andy-vandervell"]
 featuredImage: ../images/blog/posthog-first-five/first-five.jpg
 featuredImageType: full
-categories: ["Inside PostHog"]
+categories: ["Inside PostHog", "Startups"]
 ---
 
 Our CEO and co-founder, James Hawkins, [recently joined Y Combinator](https://www.youtube.com/watch?v=gF1NGUsjxLU) to talk about the first five hires PostHog ever made, how we made them, and why. This is the story behind each hire, and the lessons we learned along the way.

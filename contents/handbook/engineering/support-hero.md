@@ -52,10 +52,16 @@ To help manage users' expectations, you might find it useful to share a message 
 
 ### Prioritizing requests
 
+(To figure out how much a customer is paying, go to [revenue.posthog.net](https://revenue.posthog.net) (internal), click on the most recent month and command + F for the company name)
+
 1. Respond to and debug issues for _Priority_ customers (customers on Scale and Enterprise, either current or in our sales process, plus any high-paying Cloud customers)
 2. Respond to and debug issues for _Subscriber_ customers (paying subscribers on Cloud, usually paying $1-500/month)
 3. Respond to and debug issues for _Community_ users (all other free Open Source or free Cloud users)
 4. Fix issues, create PRs
+
+### Triaging issues to the relevant small team
+
+As the support hero you should triage any bugs/feature requests that you don't deal with to the relevant small team. They are ultimately responsible for handling bugs and feature requests for their area of the product.
 
 ## Categorizing requests
 
@@ -170,7 +176,7 @@ For marketing, partnership proposals or anything like that, please post in Slack
 
 ### Squeak!
 
-Squeak! is a community curation toolkit created by the [Website & Docs team](/handbook/people/team-structure/website-docs). The ultimate goal of Squeak! is to support our customers and make our community self-sustaining.
+Squeak! is a community curation toolkit created by the [Website & Docs team](/handbook/small-teams/website-docs). The ultimate goal of Squeak! is to support our customers and make our community self-sustaining.
 
 #### Q&A.js by Squeak!
 

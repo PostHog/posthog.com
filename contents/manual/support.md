@@ -87,7 +87,7 @@ PostHog provides a free basic level of support to everyone via the community, wi
 </table>
 </div>
 
-By default, the Scale plan does not include items marked with a '+'. However, we work with several partners that can offer a 'fully supported' experience for Scale customers - visit our [partner directory](/marketplace) to learn more. 
+By default, the Scale plan does not include items marked with a '+'. However, we work with several partners that can offer a 'fully supported' experience for Scale customers - visit our [partner directory](/partners) to learn more. 
 
 ## Community Support
 

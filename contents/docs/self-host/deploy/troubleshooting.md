@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-If you are looking for routine procedures and operations to manage PostHog installations like begin, stop, supervise, and debug a PostHog infrastructure, please take a look at the [runbook](../../runbook) section.
+If you are looking for routine procedures and operations to manage PostHog installations like begin, stop, supervise, and debug a PostHog infrastructure, please take a look at the [runbook](/docs/runbook) section.
 
 ## Troubleshooting
 
@@ -47,7 +47,7 @@ Error while writing to checkpoint file /bitnami/kafka/data/...
 java.io.IOException: No space left on device
 ```
 
-This tells us that the data disk is full. To resize the disk, please follow the [runbook](../../runbook/services/kafka/resize-disk).
+This tells us that the data disk is full. To resize the disk, please follow the [runbook](/docs/runbook/services/kafka/resize-disk).
 
 #### Why did we run into this problem and how to avoid it in the future?
 
@@ -76,7 +76,7 @@ Try running helm upgrade without `--atomic` to fix this issue.
 
 ### How can I increase storage size?
 
-To increase the storage size of the ClickHouse, Kafka or PostgreSQL service, take a look at our [runbook](../../runbook) section.
+To increase the storage size of the ClickHouse, Kafka or PostgreSQL service, take a look at our [runbook](/docs/runbook) section.
 
 ### Are the errors I'm seeing important?
 

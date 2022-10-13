@@ -37,7 +37,7 @@ const FeaturedCustomer = ({ customer }) => {
             </div>
             <div className="px-8 pb-9 relative z-20">
                 <img src={logo?.publicURL} />
-                <h2 className="text-2xl my-7">{title}</h2>
+                <h2 className="text-3xl my-7">{title}</h2>
                 <span to={slug} className="text-red hover:text-red font-bold flex space-x-1 items-center text-[17px]">
                     <span>Read case study</span>
                     <RightArrow className="w-5 h-5 bounce" />

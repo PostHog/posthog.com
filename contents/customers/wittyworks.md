@@ -31,11 +31,11 @@ Once Witty Works’ Engineering team had deployed PostHog internally, other team
     />
 </BorderWrapper>
 
-“We connected all of my usual tools, such as [HubSpot](/integrations/hubspot), using PostHog’s apps,” said Head of Marketing Alexander Groschup. “That enabled me to start putting information into [dashboards](/docs/user-guides/dashboards) and to really get started. Once I could see the dashboards, I started to understand how valuable PostHog would be.”
+“We connected all of my usual tools, such as [HubSpot](/apps/hubspot-connector), using PostHog’s apps,” said Head of Marketing Alexander Groschup. “That enabled me to start putting information into [dashboards](/docs/user-guides/dashboards) and to really get started. Once I could see the dashboards, I started to understand how valuable PostHog would be.”
 
 While ready-made integrations were available for many tools, such as Sentry and HubSpot, Witty Works’ team had far bigger plans they wanted to achieve with the app system. 
 
-“User privacy is one of our key features and we’re very careful about the data we collect,” explained Lukas Smith. “PostHog has a [GeoIP Enricher](/integrations/geoip), but we didn’t want to log IP addresses for every user. We only wanted to know the country they were from. So, [we built an app of our own](/docs/apps/build) to achieve that.”
+“User privacy is one of our key features and we’re very careful about the data we collect,” explained Lukas Smith. “PostHog has a [GeoIP Enricher](/apps/geoip-enrichment), but we didn’t want to log IP addresses for every user. We only wanted to know the country they were from. So, [we built an app of our own](/docs/apps/build) to achieve that.”
 
 <BorderWrapper>
     <Quote

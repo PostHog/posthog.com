@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Inside PostHog"]
+categories: ["Inside PostHog", "Startups"]
 author: ["charles-cook"]
 featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full

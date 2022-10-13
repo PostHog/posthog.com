@@ -70,7 +70,7 @@ We thought about it, and realized this was something we needed to act on. We put
 
 The best part? We've not had to sacrifice engineering autonomy.
 
-Both Marcus and Paolo can write code, and they both ship from time to time. This creates a more collaborative environment with engineering (and it helps them understand our end users better). Our structure also promotes this - we rely on [small teams](../handbook/people/team-structure/why-small-teams), with individuals setting their own priorities each week or two, to give real ownership of what people choose to build. Product gives very valuable context and high level guidance so engineers can make better decisions in this situations.
+Both Marcus and Paolo can write code, and they both ship from time to time. This creates a more collaborative environment with engineering (and it helps them understand our end users better). Our structure also promotes this - we rely on [small teams](../handbook/company/small-teams), with individuals setting their own priorities each week or two, to give real ownership of what people choose to build. Product gives very valuable context and high level guidance so engineers can make better decisions in this situations.
 
 ## How to build a design team
 
