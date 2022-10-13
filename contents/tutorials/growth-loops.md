@@ -28,7 +28,7 @@ Here's an example of a viral growth loop for a multiplayer product:
 
 1. A user signs up for your product.
 2. They recruit their co-workers to become users.
-3. They also recommend the product to a friend at another company who signs up.
+3. They also recommend the product to a friend at another company, who then signs up.
 
 To track this, we’ll need a `signed_up` event (that includes a user’s company as a property), an `activated` event, and an `invited_team_member` event.
 
