@@ -38,7 +38,7 @@ So, your customers have signed up. What do they do next? Answering this question
 
 Tracking feature usage enables you to see what is catching a customers’ attention and how users find value in your platform. Armed with this information you can decide where to focus your engineering efforts, what to prioritize on your roadmap and how to give users a better experience. 
 
-> 💡 **PostHog Tip:** Want to explore which features in a B2B product are driving user retention? Use a [retention insight](/manual/retenion) to visualize which features get return users.
+> 💡 **PostHog Tip:** Want to explore which features in a B2B product are driving user retention? Use a [retention insight](/manual/retention) to visualize which features get return users.
 
 ## 4. Payments 
 If your payment events are separate from your sign-up flow, you’ll need a separate event to track purchases. This can give you a clear view of revenue trends and is vital if you offer a free product tier, so you don’t get misled by surging sign-ups which don’t bring actual revenue.

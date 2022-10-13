@@ -38,4 +38,4 @@ Alternatively, you can load the PostHog JS snippet via Rudderstack itself, by en
 
 ## Sending events
 
-To learn how to send events to PostHog with RudderStack, you should check out the [official RudderStack Docs for this integration](https://docs.rudderstack.com/destinations/posthog). 
+To learn how to send events to PostHog with RudderStack, you should check out the [official RudderStack Docs for this integration](https://www.rudderstack.com/docs/destinations/streaming-destinations/posthog/). 
