@@ -110,9 +110,9 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }, plu
         createNode(node)
     })
 
-    const roadmap = await fetch(
-        `http://localhost:3000/api/roadmap?organizationId=${'04db81b2-831b-4488-b31e-423b0e7ff6ad'}`
-    ).then((res) => res.json())
+    const roadmap = await fetch(`https://squeak.cloud/api/roadmap?organizationId=${organizationId}`).then((res) =>
+        res.json()
+    )
 
     for (const roadmapItem of roadmap) {
         const { title, github_urls } = roadmapItem
