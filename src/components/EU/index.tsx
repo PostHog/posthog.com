@@ -22,7 +22,7 @@ export default function EU() {
                     </h1>
                     <h2 className="text-3xl sm:text-5xl m-0 leading-[1.1]">
                         Same PostHog. <br />
-                        <span className="text-red">Now GDPR-compliant.</span>
+                        <span className="text-red">Now GDPR-ready.</span>
                     </h2>
                     <p className="text-base sm:text-lg m-0 opacity-50 font-semibold mt-2">
                         Our new hosting option in Frankfurt means you no longer have to self-host to keep customer data
