@@ -134,7 +134,7 @@ h4 {
     }
 
     code {
-        @apply font-medium text-sm rounded-[2px] inline-block p-[2px] bg-gray-accent-light dark:bg-gray-accent-dark;
+        @apply font-medium text-sm;
     }
 
     blockquote {
