@@ -16,14 +16,17 @@ Actions in PostHog are a way to organize [events](manual/glossary#event) into a 
 #### Active user
 Active users are the people who currently use your product. A user who becomes inactive may have [churned](/manual/glossary#churn).
 
+#### Alias
+A related user account. In PostHog, aliases can be used to connect two user accounts (and their data). For example, combining the data of an anonymous user with their signed up account. See more in [identifying users](/docs/integrate/identifying-users).
+
 #### Annotation
 Annotations are short text notes you can apply to your data to help you understand context at a later point, or to signal important context to others. A common use for annotations it to add them shared charts and mark important events, such as feature releases or new marketing activiity. [Find out more about annotations in PostHog](/manual/annotations). 
 
 #### App 
-Apps are additional features or functionality which are built on top of PostHog. They are commonly used to integrate PostHog with other platforms, to modify events or to enhance PostHog's functionality. Apps may be built by the PostHog team, or by the community. You can [browse the app library](/apps) to see what's available, or [find out more in the docs](/docs/apps). 
+Apps are additional features or functionality built on top of PostHog. They are commonly used to integrate PostHog with other platforms, modify events or enhance PostHog's functionality. Apps may be built by the PostHog team, or by the community. You can [browse the app library](/apps) to see what's available, or [find out more in the docs](/docs/apps). 
 
 #### App chain
-In PostHog, the output of one app will impact the actions of the next app to create a chain. This makes it crucial to understand the order in which apps run. [Find out more about app chains in the docs](/docs/apps/build). 
+In PostHog, the output of one app can impact the actions of the next app to create a chain. This makes it crucial to understand the order in which apps run. [Find out more about app chains in the docs](/docs/apps/build). 
 
 #### ARR
 Annual recurring revenue - basically how much revenue you expect to make each year.
@@ -44,23 +47,35 @@ Business Associate Agreement, or also known as a Business Associate Contract. It
 
 ## C
 
+#### CAC
+Cost of acquisition. The amount spent on marketing, promotion, or advertising to acquire a customer. You can calculate CAC using the formula `Amount of money spent on customer acquisition / number of customers acquired`.
+
+#### Chart
+A graph or visual representation of data such as trend, bar, pie. In PostHog, charts often appear in [insights](/manual/glossary#insight).  
+
 #### Churn
 When a user stops using your product and is no longer considered to be an [active user](/manual/glossary#active-user). The speed at which users churn is known as your _churn rate_ and, if it is greater than the rate at which you acquire new customers then your product is in decline. 
 
 #### ClickHouse
-ClickHouse is an [open source](/manual/glossary#open-source), column orientated system for managing databases. [We like it a lot and use it to power PostHog](/docs/how-posthog-works/clickhouse). 
+ClickHouse is an [open source](/manual/glossary#open-source), column-oriented database. [We like it a lot and use it to power PostHog](/docs/how-posthog-works/clickhouse). 
+
+#### Cloud
+Computing infrastructure, power, services, or storage hosted for on-demand usage with less required user setup and maintenance. You can choose to host your instance of PostHog in the cloud by choosing PostHog Cloud, instead of [self-hosting](/manual/glossary#self-host). 
 
 #### Cohort
-Cohorts are groups of users in PostHog, created using the Cohorts tool. Cohorts can be created from either a static list, or a dynamic list which continues to update. Cohorts and [groups](/manual/glossary#groups) are similar, but [not the same](/manual/group-analytics#groups-vs-cohorts).
+Cohorts are groups of users in PostHog, created using the Cohorts tool. Cohorts can be created as either a static list, or a dynamic list which continues to update. Cohorts and [groups](/manual/glossary#groups) are similar, but [not the same](/manual/group-analytics#groups-vs-cohorts).
 
 #### Conversion
 Conversion is when a user of your product changes into a new, usually more desirable, state. For example, converting from a lead into an [active user](/manual/glossary#active-user). You can use tools such as [funnels](manual/funnels) to track users who convert between states. 
 
+#### Compliance
+The act of complying with laws or regulations such as [HIPAA](/manual/glossary#HIPAA) or [GDPR](](/manual/glossary#GDPR). [Find out more about how to use PostHog in compliance with common regulations](/docs/privacy).
+
 #### CPA 
-Cost per Acquisition. Essentially, how must it costs you to acquire users through an advertising campaign using the formula `Cost of the campaign / number of successful conversions`. 
+Cost per Acquisition. How much it costs you to acquire users through an advertising campaign using the formula `Cost of the campaign / number of successful conversions`. 
 
 #### CTA 
-Call to Action. It's basically a message intended to elicit an action in your users, like this one: [Star PostHog on GitHub!](https://github.com/PostHog/posthog)
+Call to Action. A message intended to elicit an action in your users, like this one: [Star PostHog on GitHub!](https://github.com/PostHog/posthog)
 
 #### CTR 
 Click-through Rate, or what proportion of users which saw a CTA actually clicked it. CTR is usually a good measure of [engagement](/manual/glossary#engagement).
@@ -68,7 +83,7 @@ Click-through Rate, or what proportion of users which saw a CTA actually clicked
 ## D 
 
 #### Dashboard
-Dashboards in PostHog enable you to save many useful pieces of information, such as [insights](/manual/glossary#insights), into one place. This makes it easier to collaborate, as you can share dashboards with others in many different ways. [Find out more about Dashboards in the docs](/manual/dashboards).  
+Dashboards in PostHog enable you to save multiple useful pieces of information, such as [insights](/manual/glossary#insights), into one place. This makes it easier to collaborate, as you can share dashboards with others in many different ways. [Find out more about Dashboards in the docs](/manual/dashboards).  
 
 #### Data lake
 A data lake is a system for storing raw data. The data stored in a data lake is usually for an ambiguous or unknown purpose, but the style of storage means all data is easily accessible to seasoned professionals and can be quickly updated.  
@@ -98,6 +113,9 @@ Feature flags are used to divide users into two groups - those for whom the flag
 #### First-party cookies
 Every time you visit a website or view content from a website, you are served a `cookie` - a data packet which contains information on your visit. First-party cookies are those which are served by the website operator and are typically used to store only user preferences. Users who self-host PostHog are able to collect additional information through their first-party cookie because PostHog is also deployed onto their servers. See also: [third-party cookies](/manual/glossary#third-party-cookies)
 
+#### Formula
+An equation or calculation that modifies data from one or more series. 
+
 #### FOSS
 Free Open Source Software. FOSS products are exactly as they are described: free, and open source. [PostHog has a FOSS version too!](https://github.com/PostHog/posthog-foss)
 
@@ -121,6 +139,9 @@ Go-to Market. In short, it's the plan you have for how you will bring a new prod
 Health Insurance Portability and Accountability Act. It's a piece of legislation in the US which covers, among other things, how [personal health information](/manual/glossary#PHI) must be handled. [Find out more about how to use PostHog in a which complies with HIPAA regulations](/docs/privacy/hipaa-compliance). 
 
 ## I 
+
+#### Identify
+The process of collecting, connecting, and combining data to a user. Also the process of de-anonymizing a user with [properties](/manual/glossary#property).
 
 #### Ingestion
 The process of getting the [events](/manual/glossary#events) users trigger into PostHog, regardless of whether the data is [current](/docs/integrate/ingest-live-data) or [historic](/docs/integrate/ingest-historic-data).
@@ -152,7 +173,7 @@ Lifetime Value. The total amount of revenue you get from the average user before
 Monthly [Active Users](/manual/glossary#active-users). Essentially, how many users you have using your product each month. 
 
 #### MOM
-Month-on-month. Normally this is used to track your performance from one month to the next, e.g. "We grew revenue 10% month-on-month". 
+Month-on-month or month-over-month. Normally this is used to track your performance from one month to the next, e.g. "We grew revenue 10% month-on-month". 
 
 #### MQL
 Marketing Qualified Lead. A person who has indicated interest in a product based on activities taken by the marketing department, such as adverts or downloading marketing content. See also: [PQL](/manual/glossary#pql)
@@ -196,6 +217,9 @@ In PostHog, persons are used to aggregate the behaviour of an individual user, w
 #### PII
 Personal Identifying Information. Under some regulations, such as [HIPAA](/manual/glossary#HIPAA), any information which can be used to identify a user - such as their birthday, ethnicity, or address - must be processed in accordance with law.
 
+#### Pipeline
+A managed stream of data connecting data creation, modification, storage, and access.
+
 #### PHI
 Personal Health Information. Regulations such as [HIPAA](/manual/glossary#hipaa) require that any information about an individual's health must be processed and store in accordance with law. 
 
@@ -215,6 +239,9 @@ An event when someone makes a change to a piece of software. The best thing that
 
 ## R 
 
+#### Release Conditions
+The users a [feature flag](/manual/glossary#feature-flag) is active for. For example, the internal team, or 50% of all users.
+
 #### Retention 
 In PostHog, a retention insight is used to visualize how many users return to your product after first visiting it on a particular day. [Find out more about measuring retention on PostHog](/manual/retention).
 
@@ -232,8 +259,14 @@ Security Assertion Markup Language is a system which enables users to login to m
 #### Segment
 Segmentation is a way of dividing users into groups based on either demographic, geographic, behavioral or technographic properties. [Find out how to segment users with PostHog](/tutorials/how-to-segment-users). 
 
+#### Self-host
+The ability to host and manage software yourself (on your own servers). PostHog provides the ability to [self-host](/docs/self-host).
+
 #### Session 
 A period of time when users are [engaged](/manual/glossary#engagement) and interacting with your product. PostHog enables you to [capture sessions directly, as recordings](/manual/recordings).
+
+#### SQL
+Structured Query Language (pronounced "sequel"). A programming language for designing, building, and querying relational database management systems.
 
 #### SSO 
 Single Sign-on is a system which enables users to login to a system (such as PostHog) using their access to another system (such as Google Workspace) as their credentials. [Find out more about SAML on PostHog](/manual/SSO).
@@ -246,6 +279,8 @@ In PostHog, a stickiness insight enables you to see how many times users perform
 #### Third-party cookies
 Every time you visit a website or view content from a website, you are served a `cookie` - a data packet which contains information on your visit. Third-party cookies are those which are _not_ served by the website operator and are instead served by third-parties, typically advertising companies. Users who self-host PostHog are able to collect additional information through [first-party cookies](/manual/glossary#first-party-cookies) because PostHog is also deployed onto their servers.
 
+#### Toolbar
+In PostHog, the toolbar is a widget in your browser that contains easy access to useful actions or information. PostHog's toolbar lets you easily inspect elements, view page [heatmaps]((/manual/glossary#heatmap), create [actions](/manual/glossary#actions), and toggle [feature flags](/manual/glossary#feature-flag). [Find out more about using the toolbar](/manual/toolbar).
 ## U
 
 #### UGC
@@ -255,7 +290,11 @@ User Generated Content refers to any content which users create within, or using
 Urchin Tracking Module. Essentially, a UTM are modifiers appended to an existing URL in order to aid attribution in marketing campaigns. [Find out more about tracking UTMs in PostHog](/tutorials/taxonomy-acquisition). 
 
 ## V
+#### Variants
+Different versions of an experiment. In PostHog, variants are linked to [feature flags](/manual/glossary#feature-flag), which activate them.
 
+#### VM
+Virtual machine. An emulated and often isolated computing process. We use VMs to run [apps](/manual/glossary#app).
 ## W 
 
 ## X 
