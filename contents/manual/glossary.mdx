@@ -54,7 +54,7 @@ Business Associate Agreement, or also known as a Business Associate Contract. It
 Cost of acquisition. The amount spent on marketing, promotion, or advertising to acquire a customer. You can calculate CAC using the formula `Amount of money spent on customer acquisition / number of customers acquired`.
 
 #### Chart
-A graph or visual representation of data such as trend, bar, pie. In PostHog, charts often appear in [insights](/manual/glossary#insight).  
+A graph or visual representation of data such as trend, bar, pie. In PostHog, charts often appear in [insights](/manual/glossary#insight).  [Trend](/manual/glossary#trend) insights can have multiple [chart types](/manual/trends#chart-types). 
 
 #### Churn
 When a user stops using your product and is no longer considered to be an [active user](/manual/glossary#active-user). The speed at which users churn is known as your _churn rate_ and, if it is greater than the rate at which you acquire new customers then your product is in decline. 
@@ -75,7 +75,7 @@ Conversion is when a user of your product changes into a new, usually more desir
 The act of complying with laws or regulations such as [HIPAA](/manual/glossary#HIPAA) or [GDPR](](/manual/glossary#GDPR). [Find out more about how to use PostHog in compliance with common regulations](/docs/privacy).
 
 #### CPA 
-Cost per Acquisition. How much it costs you to acquire users through an advertising campaign using the formula `Cost of the campaign / number of successful conversions`. 
+Cost per Acquisition. How much it costs you to acquire users through an advertising campaign using the formula `Cost of the campaign / number of successful conversions`. \
 
 #### CTA 
 Call to Action. A message intended to elicit an action in your users, like this one: [Star PostHog on GitHub!](https://github.com/PostHog/posthog)
@@ -137,6 +137,9 @@ Groups in PostHog enable you to aggregate events by anything other than an indiv
 Go-to Market. In short, it's the plan you have for how you will bring a new product or feature to market, often building in intelligence on your users gained from product analytics. 
 
 ## H
+
+#### Heatmap <img src={InternalTerm} alt="Internal Term" style={{ width: 25 }} />
+Heatmaps enable you to visualize user activity as an overlay on top of the page, with warmer colours used to represent where the most activity takes place. In PostHog, heatmaps are used to track where users click. Find out more about PostHog heatmaps](/manual/toolbar), which are enabled via the [toolbar](/manual/glossary#toolbar). 
 
 #### HIPAA
 Health Insurance Portability and Accountability Act. It's a piece of legislation in the US which covers, among other things, how [personal health information](/manual/glossary#PHI) must be handled. [Find out more about how to use PostHog in a which complies with HIPAA regulations](/docs/privacy/hipaa-compliance). 
@@ -235,6 +238,9 @@ A rapid change in company direction. [One of our favourite hobbies](/blog/story-
 #### PQL
 Product Qualified Lead. A PQL is a user who has expressed interest in your product based on actions which can be attributed to the product, such as completing a free trial or having experienced the direct value of the product.
 
+#### Product analytics 
+Analytics services which focus on tracking identified _and_ anonymous users and how they interact with your product. Product analytics services, such as PostHog, typically involve more detailed analysis tools than [web analytics](/manual/glossary#web-analytics) tools as a result of being able to focus on idenfitied users. 
+
 #### Property
 In PostHog, [events](/manual/glossary#events) and [persons](/manual/glossary#persons) contain additional information, called Properties. A property can be any information stored on the object, such as which device they are using or their geographic location. [Find out more about using properties in PostHog](/docs/how-posthog-works/queries). 
 
@@ -242,6 +248,9 @@ In PostHog, [events](/manual/glossary#events) and [persons](/manual/glossary#per
 An event when someone makes a change to a piece of software. The best thing that anyone on PostHog's team can ever be doing.  
 
 ## Q 
+
+#### Query
+The process of asking a question using your data. Whenever you create an [insight](/manual/glossary#insight) you're running a query against your data. Find out more about [how querying works in PostHog](/docs/how-posthog-works/queries). 
 
 ## R 
 
@@ -290,6 +299,10 @@ Every time you visit a website or view content from a website, you are served a 
 
 #### Toolbar <img src={InternalTerm} alt="Internal Term" style={{ width: 25 }} />
 In PostHog, the toolbar is a widget in your browser that contains easy access to useful actions or information. PostHog's toolbar lets you easily inspect elements, view page [heatmaps]((/manual/glossary#heatmap), create [actions](/manual/glossary#actions), and toggle [feature flags](/manual/glossary#feature-flag). [Find out more about using the toolbar](/manual/toolbar).
+
+#### Trend <img src={InternalTerm} alt="Internal Term" style={{ width: 25 }} />
+In PostHog, a trend [insight](/manual/glossary#insight) is the default insight type and enables you to plot data from PostHog onto a [chart](/manual/glossary#chart). There are many different [chart types](/manual/trends#chart-types) and options which can be used when creating trend insights, including [formula](/manual/glossary#formula). Find out more about trend insights in PostHog. 
+
 ## U
 
 #### UGC
@@ -306,6 +319,9 @@ Different versions of an experiment. In PostHog, variants are linked to [feature
 Virtual machine. An emulated and often isolated computing process. We use VMs to run [apps](/manual/glossary#app).
 
 ## W 
+
+#### Web analytics 
+Analytics services which focus on tracking anonymous users and how they interact with your content. Web analytics services, such as [Google Analytics](http://isgoogleanalyticsillegal.com), typically involve less detailed analysis tools than [product analytics](/manual/glossary#product-analytics) tools and cannot track user identities. 
 
 ## X 
 
