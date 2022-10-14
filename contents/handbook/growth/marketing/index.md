@@ -12,31 +12,29 @@ PostHog's [vision](https://posthog.com/handbook/strategy/overview#long-term-visi
 
 ### Things we want to be brilliant at
 
-#### Behaviours
-
-- **Acting as a service to the engineering team:** We actively engage with engineering teams, find out what they’re working on and partner with them to amplify what they are doing. Engineers don’t like talking to marketing people in most companies. We want our engineers to want to talk to marketing because we provide them with such a great service.
+- **Acting as a service to the engineering team:** We actively engage with engineering teams, find out what they’re working on and partner with them to amplify what they are doing.
  
-- **Word of mouth mindset:** By IPO, we want to have built a hugely successful company driven primarily by word of mouth, rather than technical paid ads, or brand/PR.
+- **Word of mouth mindset:** By IPO, we want to have built a hugely successful company driven primarily by word of mouth, rather than paid ads or PR.
 
 - **Speed:** We want to be highly reactive, low process, and reliant on other teams as little as possible to ship things. We want to get stuff wrong quickly, then iterate. 
 
-#### Tactics
-
 - **Content for our ideal customer:** We deliver genuinely useful insights about things those customers care about (can be purely product-related, but also general advice). We're pitching our content at ‘self-servers’. Ahrefs and HubSpot are examples of companies who do this brilliantly for their audience.
  
-- **Highly visible at industry events:** We want to be known for giving good talks at events, because this enhances word of mouth and is a natural extension of being good at creating good content.
- 
-- **Being really cool and interesting people in online communities:** We could do a lot more of this in relevant communities in Slack/Discord/StackOverflow etc, and it's more engaging than one-way social media. We also increase awareness in relevant communities by sponsoring them. Overall we want to be a net contributor to those communities.
+### Things we want to be good at
 
-### Things we want to be good at (and could outsource or delegate)
-
-- **Paid ads:** An agency should keep handling this for us, but we shouldn’t get better at it internally. This includes out of home, should we ever decide to do this.
+- **Paid ads:** An agency should keep handling this for us, but we shouldn’t get better at it internally. This includes out of home, should we ever decide to do this. We see paid ads as a hygiene factor. 
  
-- **Incentivised campaigns** - e.g. GitHub star campaign. It's not clear how these can be repeatable sources of successful word of mouth growth for us, but they will occasional be useful.
-  
+- **Incentivised campaigns** - e.g. GitHub stars campaign. It's not clear how these can be repeatable sources of successful word of mouth growth for us, but they will occasional be useful.
+
+### Things we might want to be good at but are still testing
+
 -  **Developer influencers (maybe):** A small but growing trend in the industry, we could be one of the first to capitalize on this, especially as they are relevant to word of mouth.
 
-- **Social media:** This is different from 'being cool and interesting people in online communities'. We don't get high quality traction on places like LinkedIn/Twitter, and we're not spending any time at all on Facebook/Instagram/TikTok, but it's worth maintaining a baseline presence for credibility.
+- **Social media:** This is different from 'being cool and interesting people in online communities'. We don't get high quality traction (yet) on places like LinkedIn/Twitter, and we're not spending any time at all on Facebook/Instagram/TikTok. We are currently trying out Twitter. 
+
+- **Highly visible at industry events:** We could become known for giving good talks at events, because this enhances word of mouth and is a natural extension of being good at creating good content.
+ 
+- **Being really cool and interesting people in online communities:** We could do a lot more of this in relevant communities in Slack/Discord/StackOverflow etc, and it's more engaging than one-way social media. We also increase awareness in relevant communities by sponsoring them. Overall we want to be a net contributor to those communities.
 
 ### Things we don't want to spend time on
 
