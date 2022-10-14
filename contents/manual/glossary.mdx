@@ -4,13 +4,13 @@ sidebar: Docs
 showTitle: true
 ---
 
-PostHog is an incredibly broad platform, with many distinct features and tools. As a result, it's hugely powerful -- but can be overwhelming if you're new to product analytics. 
+import InternalTerm from '../images/logos/gloss_hog.png'
 
-Confused about the difference between an event and an action? Not sure what the difference is between a funnel and a path? You've come to the right place.
+PostHog is an incredibly broad platform, with many distinct features and tools. As a result, it's hugely powerful -- but can be overwhelming if you're new to product analytics. So, we've created a glossary to explain many of the most common terms and acronyms. If a term is specific to PostHog then it's marked with a <img src={InternalTerm} alt="Internal Term" style={{ width: 25 }} /> to help reduce confusion. 
 
 ## A
 
-#### Action
+#### Action <img src={InternalTerm} alt="Internal Term" style={{ width: 25 }} />
 Actions in PostHog are a way to organize [events](manual/glossary#event) into a different format. In their simplest form actions consist of one or more events which have been given a new name - usually a descriptive title, such as 'Viewed Glossary Page`. [Find out more about actions in PostHog](/manual/actions). 
 
 #### Active user
@@ -33,6 +33,7 @@ Annual recurring revenue - basically how much revenue you expect to make each ye
 
 #### Autocapture
 The ability to capture user behavior (events, pageviews) automatically, without having to implement dedicated instrumentation. PostHog enables you to autocapture data by using out [JavaScript library or snippet](/docs/integrate/client/js#autocapture).
+
 #### A/B test
 A/B tests are when you test two versions of an idea by serving each version to portion of your userbase, so you can monitor which performs best. If you're using more than two versions, it's a [multivariate test](/manual/glossary#multivariate-test). PostHog can do both, via [Experiments](/manual/experimentation). 
 
