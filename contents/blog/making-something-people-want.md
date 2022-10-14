@@ -32,7 +32,7 @@ Since then, we got a lot of feedback to build the products next door to ours. Th
 
 ## Do it for real
 
-Even before launching, we focussed on this loop:
+Even before launching, we focused on this loop:
 
 * Give excited user access to new feature
 * User users it and gives feedback
