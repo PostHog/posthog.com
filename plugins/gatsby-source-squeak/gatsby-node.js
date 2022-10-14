@@ -147,7 +147,6 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }, plu
                         .catch((err) => console.log(err))
                 })
             )
-            console.log(node.githubPages)
         }
         createNode(node)
     }

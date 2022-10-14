@@ -16,7 +16,7 @@ import React from 'react'
 // - For multiple events in a month, leave off the month after the first result (so it doesn't look like multiple months) - until someone build this correctly =]
 //
 
-const Closed = () => {
+export const Closed = () => {
     return (
         <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clipPath="url(#clip0_6103_20817)">
@@ -40,7 +40,7 @@ const Closed = () => {
     )
 }
 
-const Open = () => {
+export const Open = () => {
     return (
         <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clipPath="url(#clip0_6103_31895)">
@@ -134,12 +134,11 @@ const Card = ({ title, githubPages, complete, html_url }) => {
 export default function Timeline() {
     const { sessionRecording } = useStaticQuery(graphql`
         query {
-            sessionRecording: squeakRoadmap(title: { eq: "Session Recording 3.0" }) {
+            sessionRecording: squeakRoadmap(title: { eq: "Feature flags platform: iOS" }) {
                 title
                 complete
                 githubPages {
                     title
-                    closed_at
                     html_url
                 }
             }
