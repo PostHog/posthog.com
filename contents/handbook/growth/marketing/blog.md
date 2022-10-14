@@ -4,11 +4,11 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Content is a key pillar of our marketing strategy. As our products are quite technical in nature, we believe that frequent and regular content output helps improve acquisition and ongoing product engagement. The [blog](/blog) is where we publish interesting product content, share feature updates, and tell PostHog stories.
+Content is the main pillar of our marketing strategy. As our target users are engineers, we believe that frequent and regular content output helps us to drive word of mouth, leading to signups. The [blog](/blog) is where we publish interesting product content, share feature updates, and tell PostHog stories.
 
 ## Content & SEO strategy
 
-Content SEO is a long-term strategy. We are focused on generating a sustained output of high quality content that is genuinely valuable to users.
+Content & SEO is a long-term strategy. We are focused on generating a sustained output of high quality content that is genuinely valuable to users. Rather than scale up content output for the sake of it, our strategy is to go _deeper_ and creating better content as we grow, not simply pushing out more articles for its own sake. For this reason, we never set ourselves specific content output targets. 
 
 We use [SEMRush](https://www.semrush.com/) to track and optimize our ranking for the keywords that we think are target customers are using to search for solutions like PostHog online. If you need access, please ask Andy. 
 
@@ -18,25 +18,24 @@ The top keywords are then used as the basis of our content strategy. Broadly spe
   
 - 20% brand building and community engagement, written by anyone on the team. These can be about anything, and their purpose is to drive one-off spikes in awareness through virality on sites like Hacker News and Reddit.
 
-Andy is currently the main person responsible for our content output.
+Andy and Ian are currently the main people responsible for our regular content output. James H and Joe are also frequent contributors. 
 
 You can view planned content on the [Marketing project board](https://github.com/orgs/PostHog/projects/8?card_filter_query=label%3Acontent) using the "content" label filter.
 
 All planned content will have an issue created for it. We also maintain a long list of possible content ideas [in this GitHub issue](https://github.com/PostHog/posthog.com/issues/3607).
 
-Join our [#ideas-for-blog-post team Slack channel](https://posthog.slack.com/archives/C015CRUQR7Y), raise an issue, or comment on the [ideas long list issue](https://github.com/PostHog/posthog.com/issues/3607) to suggest a content idea. Community members can suggest them to Andy Vandervell directly or via [the User slack channel](/slack)!
+Join our [#content-ideas Slack channel](https://posthog.slack.com/archives/C015CRUQR7Y), raise an issue, or comment on the [ideas long list issue](https://github.com/PostHog/posthog.com/issues/3607) to suggest a content idea. Community members can suggest them to Andy directly or via [the User slack channel](/slack)!
 
 ## Content categories
 
 As we have a few different places where content lives on our site, follow these guidelines to figure out where your content fits best. Sometimes you will find that the content you've created fits better in Docs rather than on the Blog. 
 
-- **Blog post** = Virtually all SEO-specific content (e.g. 7 best open source analytics solutions); brand building content (e.g. CEO diaries, news).
+1. [Blog post](/blog) = Virtually all SEO-specific content (e.g. 7 best open source analytics solutions); brand building content (e.g. CEO diaries, news).
+2. [Docs - Tutorial](/tutorials) = Anything that basically explains 'how to do X'. This includes content created for SEO purposes that explains how do something in PostHog (e.g. how to build an AARRR funnel).
+3. [Docs - Manual](/using-posthog) = Reference guides to PostHog features (e.g. Actions, Funnels).
+4. [Docs - Everything else](/docs) = Everything else product-specific that isn't covered above (e.g. deployment documentation). 
 
-- **Docs - Tutorial** = Anything that explains 'how to do X' _that is specific to PostHog_. This includes content created for SEO purposes that explains how do something in PostHog (e.g. how to build an AARRR funnel).
-
-- **Docs - Manual** = Reference guides to PostHog features (e.g. Actions, Funnels).
- 
-- **Docs - Everything else** = Everything else product-specific that isn't covered above (e.g. deployment documentation). 
+The Marketing team is responsible for 1. and 2. generally, while 3. and 4. sit with the Website & Docs team. 
 
 ## Production workflow
 
@@ -124,4 +123,4 @@ categories: ["Product analytics", "Guides"]
 
 The [blog post GitHub issue template](https://github.com/PostHog/posthog.com/blob/master/.github/ISSUE_TEMPLATE/blog-post-idea-template.md) outlines how the content should be amplified and distributed. This can and should be edited for each post using the team's experience and ideas to identify what's best on a post-by-post basis.
 
-This section excludes [Paid Ads](/handbook/growth/marketing/paid), which are covered elsewhere in the Handbook.
+This section excludes [Paid Ads](/handbook/growth/marketing/paid), which are covered elsewhere.
