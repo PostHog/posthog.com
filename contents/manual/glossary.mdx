@@ -16,16 +16,16 @@ Actions in PostHog are a way to organize [events](manual/glossary#event) into a 
 #### Active user
 Active users are the people who currently use your product. A user who becomes inactive may have [churned](/manual/glossary#churn).
 
-#### Alias
+#### Alias <img src={InternalTerm} alt="Internal Term" style={{ width: 25 }} />
 A related user account. In PostHog, aliases can be used to connect two user accounts (and their data). For example, combining the data of an anonymous user with their signed up account. See more in [identifying users](/docs/integrate/identifying-users).
 
-#### Annotation
+#### Annotation <img src={InternalTerm} alt="Internal Term" style={{ width: 25 }} />
 Annotations are short text notes you can apply to your data to help you understand context at a later point, or to signal important context to others. A common use for annotations it to add them shared charts and mark important events, such as feature releases or new marketing activiity. [Find out more about annotations in PostHog](/manual/annotations). 
 
-#### App 
+#### App <img src={InternalTerm} alt="Internal Term" style={{ width: 25 }} />
 Apps are additional features or functionality built on top of PostHog. They are commonly used to integrate PostHog with other platforms, modify events or enhance PostHog's functionality. Apps may be built by the PostHog team, or by the community. You can [browse the app library](/apps) to see what's available, or [find out more in the docs](/docs/apps). 
 
-#### App chain
+#### App chain <img src={InternalTerm} alt="Internal Term" style={{ width: 25 }} />
 In PostHog, the output of one app can impact the actions of the next app to create a chain. This makes it crucial to understand the order in which apps run. [Find out more about app chains in the docs](/docs/apps/build). 
 
 #### ARR
@@ -105,7 +105,7 @@ In PostHog's [lifecycle insight](/manual/lifecycle) a dormant user is one who di
 #### Engagement
 In product and marketing terms, engagement is how involved or active someone is with your product. A regular user would be said to have _high_ engagement, or to be highly engaged. 
 
-#### Event
+#### Event <img src={InternalTerm} alt="Internal Term" style={{ width: 25 }} />
 Events are the core building block of PostHog. Any activity a user does, such as clicking a button or viewing a page, is an event. Events are [ingested](/manual/glossary#ingestion) into PostHog, and sometimes organized as [actions](/manual/glossary#actions).
 
 ## F 
@@ -116,7 +116,7 @@ Feature flags are used to divide users into two groups - those for whom the flag
 #### First-party cookies
 Every time you visit a website or view content from a website, you are served a `cookie` - a data packet which contains information on your visit. First-party cookies are those which are served by the website operator and are typically used to store only user preferences. Users who self-host PostHog are able to collect additional information through their first-party cookie because PostHog is also deployed onto their servers. See also: [third-party cookies](/manual/glossary#third-party-cookies)
 
-#### Formula
+#### Formula <img src={InternalTerm} alt="Internal Term" style={{ width: 25 }} />
 An equation or calculation that modifies data from one or more series. 
 
 #### FOSS
@@ -130,7 +130,7 @@ A funnel is a concept used to track users through a series of actions, such as f
 #### GDPR 
 General Data Protection Regulation. GDPR is a regulation within the EU which governs how data must be processed, protected and kept private - notably by keeping it on servers within EU jurisdiction. [Find out more about complying with GDPR while using PostHog](/docs/privacy/gdpr-compliance). 
 
-#### Groups
+#### Groups 
 Groups in PostHog enable you to aggregate events by anything other than an individual user, such as a company, team, device, project or pricing tier. [Groups are different to cohorts](/manual/group-analytics#groups-vs-cohorts) and can be used for [group analytics](/manual/group-analytics).
 
 #### GTM
@@ -149,7 +149,7 @@ The process of collecting, connecting, and combining data to a user. Also the pr
 #### Ingestion
 The process of getting the [events](/manual/glossary#events) users trigger into PostHog, regardless of whether the data is [current](/docs/integrate/ingest-live-data) or [historic](/docs/integrate/ingest-historic-data).
 
-#### Insights
+#### Insights <img src={InternalTerm} alt="Internal Term" style={{ width: 25 }} />
 Insights are a core feature of PostHog which enable you to query analytics and derive visualized results. [Funnels](/manual/funnels), [trends](/manual/trends), [path analysis](/manual/paths) and more are all examples of PostHog insights. 
 
 #### Internal users
@@ -195,7 +195,7 @@ Minimum Viable Product. In other words, the simplest (and usually cheapest and f
 
 ## N 
 
-#### New user
+#### New user <img src={InternalTerm} alt="Internal Term" style={{ width: 25 }} />
 In PostHog's [lifecycle insight](/manual/lifecycle) a New User is someone who was first identified within the specified period, and who did the investigated event in that same period.
 
 #### North star
@@ -214,10 +214,10 @@ A model of distribution which involves giving others the ability to inspect, mod
 
 ## P
 
-#### Path
+#### Path <img src={InternalTerm} alt="Internal Term" style={{ width: 25 }} />
 In PostHog, a path is a visualization of a users' activity achieved using the [path analysis insight](/manual/paths). Paths enable you to see, for example, all the pages which users who visited a particular page viewed afterwards. 
 
-#### Persons
+#### Persons <img src={InternalTerm} alt="Internal Term" style={{ width: 25 }} />
 In PostHog, persons are used to aggregate the behaviour of an individual user, whether or not that user has been identified. [Find out more about Persons on PostHog](/manual/persons). 
 
 #### PII
@@ -248,13 +248,13 @@ An event when someone makes a change to a piece of software. The best thing that
 #### Release Conditions
 The users a [feature flag](/manual/glossary#feature-flag) is active for. For example, the internal team, or 50% of all users.
 
-#### Retention 
+#### Retention <img src={InternalTerm} alt="Internal Term" style={{ width: 25 }} />
 In PostHog, a retention insight is used to visualize how many users return to your product after first visiting it on a particular day. [Find out more about measuring retention on PostHog](/manual/retention).
 
-#### Returning user
+#### Returning user <img src={InternalTerm} alt="Internal Term" style={{ width: 25 }} />
 In PostHog's [lifecycle insight](/manual/lifecycle) a returning user is one who did the specified action within the current period _and_ within the previous period.
 
-#### Resurrecting user
+#### Resurrecting user <img src={InternalTerm} alt="Internal Term" style={{ width: 25 }} />
 In PostHog's [lifecycle insight](/manual/lifecycle) a returning user is one who did the specified action within the current period _but not_ within the previous period.
 
 ## S 
@@ -280,7 +280,7 @@ Structured Query Language (pronounced "sequel"). A programming language for desi
 #### SSO 
 Single Sign-on is a system which enables users to login to a system (such as PostHog) using their access to another system (such as Google Workspace) as their credentials. [Find out more about SAML on PostHog](/manual/SSO).
 
-#### Stickiness 
+#### Stickiness <img src={InternalTerm} alt="Internal Term" style={{ width: 25 }} />
 In PostHog, a stickiness insight enables you to see how many times users perform an action within a set period of time. [Find out more about measuring stickiness with PostHog](/manual/stickiness). 
 
 ## T
@@ -288,7 +288,7 @@ In PostHog, a stickiness insight enables you to see how many times users perform
 #### Third-party cookies
 Every time you visit a website or view content from a website, you are served a `cookie` - a data packet which contains information on your visit. Third-party cookies are those which are _not_ served by the website operator and are instead served by third-parties, typically advertising companies. Users who self-host PostHog are able to collect additional information through [first-party cookies](/manual/glossary#first-party-cookies) because PostHog is also deployed onto their servers.
 
-#### Toolbar
+#### Toolbar <img src={InternalTerm} alt="Internal Term" style={{ width: 25 }} />
 In PostHog, the toolbar is a widget in your browser that contains easy access to useful actions or information. PostHog's toolbar lets you easily inspect elements, view page [heatmaps]((/manual/glossary#heatmap), create [actions](/manual/glossary#actions), and toggle [feature flags](/manual/glossary#feature-flag). [Find out more about using the toolbar](/manual/toolbar).
 ## U
 
@@ -304,6 +304,7 @@ Different versions of an experiment. In PostHog, variants are linked to [feature
 
 #### VM
 Virtual machine. An emulated and often isolated computing process. We use VMs to run [apps](/manual/glossary#app).
+
 ## W 
 
 ## X 
