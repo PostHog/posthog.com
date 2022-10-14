@@ -135,7 +135,6 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }, plu
                     const org = split[3]
                     const repo = split[4]
                     const ghURL = `https://api.github.com/repos/${org}/${repo}/issues/${number}`
-                    console.log(ghURL)
                     return fetch(ghURL, {
                         headers: {
                             Authorization: `token ${process.env.GITHUB_API_KEY}`,

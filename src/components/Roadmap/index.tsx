@@ -1,106 +1,40 @@
 import Layout from 'components/Layout'
 import { graphql, useStaticQuery } from 'gatsby'
-import React, { useState } from 'react'
+import React from 'react'
 import groupBy from 'lodash.groupby'
 import Link from 'components/Link'
-import { GitHub } from 'components/Icons/Icons'
-import { Closed, Open } from 'components/Home/Timeline'
 import { SEO } from 'components/seo'
 import PostLayout from 'components/PostLayout'
+import { UnderConsideration } from './UnderConsideration'
+import { InProgress } from './InProgress'
 
-const InProgress = (props) => {
-    const [more, setMore] = useState(false)
-    const { title, githubPages, description } = props
-    const completedIssues = githubPages && githubPages?.filter((page) => page.closed_at)
-    const percentageComplete = githubPages && Math.round((completedIssues.length / githubPages?.length) * 100)
-    return (
-        <li>
-            <h4 className="text-lg flex space-x-1 items-center m-0">{title}</h4>
-            <p className="m-0 text-[15px] text-black/80 inline">
-                {more ? description : description.substring(0, 130) + (description?.length > 130 ? '...' : '')}
-            </p>
-            {!more && (description || githubPages?.length > 0) && (
-                <button onClick={() => setMore(true)} className="font-semibold text-red inline ml-1">
-                    more
-                </button>
-            )}
-            {githubPages && (
-                <div className="mt-4">
-                    <div className="h-2 flex-grow bg-gray-accent-light rounded-md relative overflow-hidden">
-                        <div
-                            style={{ width: `${percentageComplete}%` }}
-                            className={`bg-[#3FB950] absolute inset-0 h-full`}
-                        />
-                    </div>
-                </div>
-            )}
-            {githubPages && more && (
-                <ul className="list-none m-0 p-0 grid gap-y-2 mt-4">
-                    {githubPages.map((page) => {
-                        return (
-                            <li key={page.title}>
-                                <Link
-                                    to={page.html_url}
-                                    className="text-[14px] flex items-center font-semibold space-x-1 text-black"
-                                >
-                                    <span>{page.closed_at ? <Closed /> : <Open />}</span>
-                                    <span>{page.title}</span>
-                                </Link>
-                            </li>
-                        )
-                    })}
-                </ul>
-            )}
-        </li>
-    )
+interface IGitHubPage {
+    title: string
+    html_url: string
+    number: string
+    closed_at: string
+    reactions: {
+        hooray: number
+        heart: number
+        eyes: number
+    }
 }
 
-const UnderConsideration = (props) => {
-    const { title, html_url, number, reactions } = props.githubPages[0]
-    return (
-        <li>
-            <Link to={html_url} className="text-lg text-red flex space-x-1 items-center">
-                <span>{title}</span>
-                <span className="text-sm text-black opacity-50">#{number}</span>
-            </Link>
-            <ul className="list-none m-0 p-0 flex items-center space-x-2 text-sm font-semibold mt-2 mb-2">
-                <li className="flex space-x-1 items-center">
-                    {reactions.heart > 0 && (
-                        <>
-                            <span>❤️</span>
-                            <span className="text-black/60">{reactions.heart}</span>
-                        </>
-                    )}
-                </li>
-                <li className="flex space-x-1 items-center">
-                    {reactions.eyes > 0 && (
-                        <>
-                            <span>👀</span>
-                            <span className="text-black/60">{reactions.eyes}</span>
-                        </>
-                    )}
-                </li>
-                <li className="flex space-x-1 items-center">
-                    {reactions.hooray > 0 && (
-                        <>
-                            <span>🎉</span>
-                            <span className="text-black/60">{reactions.hooray}</span>
-                        </>
-                    )}
-                </li>
-            </ul>
-            <Link
-                to={html_url}
-                className="text-[15px] inline-flex items-center space-x-2 py-2 px-4 rounded-sm bg-gray-accent-light text-black hover:text-black font-bold"
-            >
-                <GitHub className="w-[24px]" />
-                <span>Vote on GitHub</span>
-            </Link>
-        </li>
-    )
+interface ITeam {
+    name: string
 }
 
-const Complete = (props) => {
+export interface IRoadmap {
+    complete: boolean
+    date_completed: string
+    title: string
+    description: string
+    team: ITeam
+    githubPages: IGitHubPage[]
+    projected_completion_date: string
+}
+
+const Complete = (props: { title: string; githubPages: IGitHubPage[] }) => {
     const { title, githubPages } = props
     return (
         <li className="text-base font-semibold">
@@ -109,7 +43,15 @@ const Complete = (props) => {
     )
 }
 
-const Section = ({ title, description, children }) => {
+const Section = ({
+    title,
+    description,
+    children,
+}: {
+    title: string | React.ReactNode
+    description: string | React.ReactNode
+    children: React.ReactNode
+}) => {
     return (
         <div className="lg:px-9 lg:py-6 first:pl-0 last:pr-0">
             <h3 className="text-xl m-0">{title}</h3>
@@ -119,7 +61,7 @@ const Section = ({ title, description, children }) => {
     )
 }
 
-const Card = ({ team, children }) => {
+const Card = ({ team, children }: { team: string; children: React.ReactNode }) => {
     return (
         <li className="bg-white m-0 p-4 rounded-md border-gray-accent-light border-dashed border">
             {team !== 'undefined' && <p className="text-sm opacity-50 m-0 mb-2">{team}</p>}
@@ -128,7 +70,7 @@ const Card = ({ team, children }) => {
     )
 }
 
-const CardContainer = ({ children }) => {
+const CardContainer = ({ children }: { children: React.ReactNode }) => {
     return <ul className="list-none m-0 p-0 grid gap-y-4">{children}</ul>
 }
 
@@ -136,17 +78,18 @@ export default function Roadmap() {
     const {
         allSqueakRoadmap: { nodes },
     } = useStaticQuery(query)
+
     const underConsideration = groupBy(
-        nodes.filter((node) => !node.date_completed && !node.projected_completion_date && node.githubPages),
-        ({ team }) => team?.name
+        nodes.filter((node: IRoadmap) => !node.date_completed && !node.projected_completion_date && node.githubPages),
+        ({ team }: { team: ITeam }) => team?.name
     )
     const inProgress = groupBy(
-        nodes.filter((node) => !node.date_completed && node.projected_completion_date),
-        ({ team }) => team?.name
+        nodes.filter((node: IRoadmap) => !node.date_completed && node.projected_completion_date),
+        ({ team }: { team: ITeam }) => team?.name
     )
     const complete = groupBy(
-        nodes.filter((node) => node.date_completed),
-        ({ team }) => team?.name
+        nodes.filter((node: IRoadmap) => node.date_completed),
+        ({ team }: { team: ITeam }) => team?.name
     )
     return (
         <Layout>
@@ -174,10 +117,10 @@ export default function Roadmap() {
                             <CardContainer>
                                 {Object.keys(underConsideration).map((key) => {
                                     return (
-                                        <Card team={key}>
+                                        <Card key={key} team={key}>
                                             <CardContainer>
-                                                {underConsideration[key]?.map((node) => {
-                                                    return <UnderConsideration {...node} />
+                                                {underConsideration[key]?.map((node: IRoadmap) => {
+                                                    return <UnderConsideration key={node.title} {...node} />
                                                 })}
                                             </CardContainer>
                                         </Card>
@@ -197,10 +140,10 @@ export default function Roadmap() {
                             <CardContainer>
                                 {Object.keys(inProgress).map((key) => {
                                     return (
-                                        <Card team={key}>
+                                        <Card key={key} team={key}>
                                             <CardContainer>
-                                                {inProgress[key]?.map((node) => {
-                                                    return <InProgress {...node} />
+                                                {inProgress[key]?.map((node: IRoadmap) => {
+                                                    return <InProgress key={node.title} {...node} />
                                                 })}
                                             </CardContainer>
                                         </Card>
@@ -212,10 +155,10 @@ export default function Roadmap() {
                             <CardContainer>
                                 {Object.keys(complete).map((key) => {
                                     return (
-                                        <Card team={key}>
+                                        <Card key={key} team={key}>
                                             <CardContainer>
-                                                {complete[key]?.map((node) => {
-                                                    return <Complete {...node} />
+                                                {complete[key]?.map((node: IRoadmap) => {
+                                                    return <Complete key={node.title} {...node} />
                                                 })}
                                             </CardContainer>
                                         </Card>
@@ -247,13 +190,8 @@ const query = graphql`
                     number
                     closed_at
                     reactions {
-                        url
-                        total_count
-                        laugh
                         hooray
-                        confused
                         heart
-                        rocket
                         eyes
                     }
                 }
