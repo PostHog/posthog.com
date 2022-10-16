@@ -146,7 +146,7 @@ Because this is a single page app, navigation does not trigger new `pageview` ev
 
 Although autocapture does a lot we’ll have to write more code to capture pageviews in our single page app. We’ll go over a few ways of triggering the pageview events: the router, page render, and on visibility change. 
 
-### Method 1: Router
+### Method 1: router
 
 The first method is using the router. The router allows us to add functions that run every time the page changes. With `react-router-dom`, we can use `useLocation` for this. We’ll add a location variable we get from the router, and run a `useEffect` to trigger a pageview every time it changes.
 
@@ -196,7 +196,7 @@ Now when we move between pages, we’ll trigger pageviews on each.
 > **Note:** other frameworks or languages have ways to “listen” for the changes in the router that we use to trigger a pageview event. For example, in Vue, you can set up a `watcher` and in Svelte, you can use the `navigating` store.
 > 
 
-### Method 2: Page Render
+### Method 2: page render
 
 A more manual way to trigger pageview events is by setting them up to trigger every time a page is rendered. You may want to do this if you have a smaller number of pages and only want some of them to trigger pageview events. 
 
@@ -222,7 +222,7 @@ export function Benefits() {
 
 Once this is done on each of the pages you want to trigger events, rendering that page will create a `pageview` event.
 
-### Method 3: Visibility
+### Method 3: visibility
 
 Many single page apps navigate through scrolling. As users scroll through the app new content, sections, and components are shown to them. This isn’t automatically captured with PostHog, but we can set up a way to capture it. We’ll do this by checking if the component is visible and triggering a pageview event if so.
 
