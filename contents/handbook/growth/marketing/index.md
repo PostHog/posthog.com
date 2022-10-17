@@ -24,7 +24,7 @@ PostHog's [vision](https://posthog.com/handbook/strategy/overview#long-term-visi
 
 - **Paid ads:** An agency should keep handling this for us, but we shouldn’t get better at it internally. This includes out of home, should we ever decide to do this. We see paid ads as a hygiene factor. 
  
-- **Incentivised campaigns** - e.g. GitHub stars campaign. It's not clear how these can be repeatable sources of successful word of mouth growth for us, but they will occasional be useful.
+- **Incentivised campaigns** - e.g. GitHub stars campaign. It's not clear how these can be repeatable sources of successful word of mouth growth for us, but they will occasionally be useful.
 
 ### Things we might want to be good at but are still testing
 
