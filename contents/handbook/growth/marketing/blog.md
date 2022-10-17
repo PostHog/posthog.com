@@ -24,7 +24,7 @@ You can view planned content on the [Marketing project board](https://github.com
 
 All planned content will have an issue created for it. We also maintain a long list of possible content ideas [in this GitHub issue](https://github.com/PostHog/posthog.com/issues/3607).
 
-Join our [#content-ideas Slack channel](https://posthog.slack.com/archives/C015CRUQR7Y), raise an issue, or comment on the [ideas long list issue](https://github.com/PostHog/posthog.com/issues/3607) to suggest a content idea. Community members can suggest them to Andy directly or via [the User slack channel](/slack)!
+Join our [#content-ideas Slack channel](https://posthog.slack.com/archives/C015CRUQR7Y), raise an [issue](https://github.com/PostHog/posthog.com/issues/new/choose), or comment on the [ideas long list issue](https://github.com/PostHog/posthog.com/issues/3607) to suggest a content idea. Community members can suggest them to Andy directly or via [the User slack channel](/slack)!
 
 ## Content categories
 
