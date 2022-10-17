@@ -120,7 +120,7 @@ We're currently experimenting with a view different approaches:
 
 - **Developer influencers:** Sponsoring YouTube creators who create quality content for developers, either through a regular shoutout or a more in-depth piece of content creation that is about PostHog. 
 
-- **Commercial sponsorship:** Sponsoring newsletters, podcasts, and events that are likely to reach our target audience. We try to keep a relatively narrow focus here. Newsletters have worked best for us so var. 
+- **Commercial sponsorship:** Sponsoring newsletters, podcasts, and events that are likely to reach our target audience. We try to keep a relatively narrow focus here. Newsletters have worked best for us so far.
  
 - **Open source sponsorship:** Sponsoring open source projects and developers that have helped us build PostHog. Sometimes we do cross-promotion with them, but it's not necessary – this is more about giving back to the community.
 
