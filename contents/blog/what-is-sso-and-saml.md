@@ -17,7 +17,7 @@ Existing at an intersection of convenience and security, single sign-on (SSO) au
 ## What is SSO?
 SSO stands for Single Sign-On. It enables users to login to services without entering a service-specific password — instead, access is validated by their access to a secondary system or domain. Ever logged into a website using your Google or Facebook account? _That’s_ SSO. 
 
-Administrators and IT teams often encourage SSO for security purposes, as it ensures only authorized users can access an account. We use it at PostHog for this reason and offer support for SSO via authorized email domains and certain third-party providers — namely Google, GitLab, and GitHub.
+Administrators and IT teams often encourage SSO for security purposes, as it ensures only authorized users can access an account. A simple username and password often isn't secure enough. We use SSO at PostHog for this reason and offer support for it via authorized email domains and certain third-party providers — namely Google, GitLab, and GitHub.
 
 PostHog also offers [just-in-time provisioning](/manual/sso#just-in-time-user-provisioning), which automatically creates a new account whenever new users access PostHog — provided that they have a valid email address and SSO provider, of course.
 
