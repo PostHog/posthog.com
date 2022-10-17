@@ -46,7 +46,7 @@ const Handbook = ({ menu }: { menu: HandbookNav[] }) => {
                 <ol className="list-none m-0 p-0 md:grid grid-rows-6 grid-cols-2 grid-flow-col mt-5">
                     {menu.map(({ title, url }: HandbookNav, index) => {
                         return (
-                            <li key={title}>
+                            <li key={title} className="first:hidden">
                                 <Link
                                     className="rounded px-2 py-2.5 h-full hover:bg-tan/50 flex items-center space-x-2 relative active:top-[1px] active:scale-[.99]"
                                     to={url}
