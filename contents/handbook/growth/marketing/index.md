@@ -80,7 +80,7 @@ Tackling a) is the responsibility of everyone at PostHog. The marketing team's s
 - Sharing our messages in the right places, where relevant users can see them
 - Spending enough time and/or money in those places so that our messages get through
 
-### No sneaky stuff
+### No sneaky shit
 
 Our [target users](/handbook/growth/marketing/customer-personas) are technical and acutely aware of the tedious clickbaity marketing tactics that software companies use to try and entice them. Stop. It's patronizing to them and the marketing people creating the content. 
  
