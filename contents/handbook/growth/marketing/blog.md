@@ -8,7 +8,7 @@ Content is the main pillar of our marketing strategy. As our target users are en
 
 ## Content & SEO strategy
 
-Content & SEO is a long-term strategy. We are focused on generating a sustained output of high quality content that is genuinely valuable to users. Rather than scale up content output for the sake of it, our strategy is to go _deeper_ and creating better content as we grow, not simply pushing out more articles for its own sake. For this reason, we never set ourselves specific content output targets. 
+Content & SEO is a long-term strategy. We are focused on generating a sustained output of high quality content that is genuinely valuable to users. Rather than scale up content output for the sake of it, our strategy is to go _deeper_ and create better content as we grow, not simply push out more articles for its own sake. For this reason, we never set ourselves specific content output targets. 
 
 We use [SEMRush](https://www.semrush.com/) to track and optimize our ranking for the keywords that we think are target customers are using to search for solutions like PostHog online. If you need access, please ask Andy. 
 
