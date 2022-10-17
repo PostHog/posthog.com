@@ -1,5 +1,5 @@
 ---
-date: 2022-10-12
+date: 2022-10-17
 title: "HogMail #14"
 rootPage: /blog
 sidebar: Blog
