@@ -1682,6 +1682,10 @@
         {
             "name": "Support",
             "url": "/manual/support"
+        },
+        {
+            "name": "Glossary",
+            "url": "/manual/glossary"
         }
     ],
     "product": [
