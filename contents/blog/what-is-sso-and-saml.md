@@ -10,7 +10,7 @@ featuredImage: ../images/blog/posthog-blog-image.jpg
 featuredImageType: full
 ---
 
-Existing at an intersection of convenience and security, SSO authentication is uniquely liked by both IT teams _and_ everyday users — which is why we strongly recommend setting it up on new PostHob instances. In this article we’ll explain what SSO (and SAML) is, and why you should use it.
+Existing at an intersection of convenience and security, single sign-on (SSO) authentication is used and appreciated by both IT teams _and_ everyday users — which is why we strongly recommend setting it up on new PostHog instances. In this article we’ll explain what SSO (and SAML) is, and why you should use it.
 
 > **Ready to get started?** Check [PostHog’s authentication docs](/manual/sso) for instructions on setting up SSO and SAML. 
 
