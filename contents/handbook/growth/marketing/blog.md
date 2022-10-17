@@ -12,11 +12,13 @@ Content & SEO is a long-term strategy. We are focused on generating a sustained 
 
 We use [SEMRush](https://www.semrush.com/) to track and optimize our ranking for the keywords that we think are target customers are using to search for solutions like PostHog online. If you need access, please ask Andy. 
 
-The top keywords are then used as the basis of our content strategy. Broadly speaking, we aim for:
+The top keywords are then used as the basis of our content strategy. We bucket our content into three buckets:
 
-- 80% SEO-optimized content, written by the Marketing team. The purpose of these is to improve our topical authority and visibility in areas relevant to our target audience, and generate organic inbound demand and word of mouth awareness.
-  
-- 20% brand building and community engagement, written by anyone on the team. These can be about anything, and their purpose is to drive one-off spikes in awareness through virality on sites like Hacker News and Reddit.
+- **SEO-optimized content**, written by the Marketing team. The purpose of these is to improve our topical authority and visibility in areas relevant to our target audience, and generate organic inbound demand and word of mouth awareness.
+
+- **Tutorials**, written mostly by the Marketing team. The purpose of these is to encourage new signups (because we show potential users how to solve their problems using PostHog), as well as helping existing customers. Some tutorials are also SEO-optimized, especially when they cover general product analytics topics (e.g. 'how to calculate and reduce churn.')
+
+- **Brand building and community engagement**, written by anyone on the team, with the Marketing team acting as editors. These can be about anything, and their purpose is to drive one-off spikes in awareness through virality on sites like Hacker News and Reddit.
 
 Andy and Ian are currently the main people responsible for our regular content output. James H and Joe are also frequent contributors. 
 
