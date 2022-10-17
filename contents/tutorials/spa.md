@@ -5,7 +5,7 @@ showTitle: true
 author: ['ian-vanagas', 'yakko-majuri']
 date: 2022-10-17
 featuredImage: ../images/tutorials/banners/spa.png
-topics: ['configuration']
+topics: ['configuration', 'events']
 ---
 
 _Estimated reading time: 12 minutes_ ☕☕
