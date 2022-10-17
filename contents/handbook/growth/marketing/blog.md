@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Content is the main pillar of our marketing strategy. As our target users are engineers, we believe that frequent and regular content output helps us to drive word of mouth, leading to signups. The [blog](/blog) is where we publish interesting product content, share feature updates, and tell PostHog stories.
+Content is the main pillar of our marketing strategy. As our products are quite technical in nature, we believe that frequent and regular content output helps improve acquisition and ongoing product engagement. The [blog](/blog) is where we publish interesting product content, share feature updates, and tell PostHog stories.
 
 ## Content & SEO strategy
 
