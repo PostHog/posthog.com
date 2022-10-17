@@ -9,7 +9,7 @@ Each feature at PostHog has an Engineering owner. This owner is responsible for 
 When a bug or feature request comes in, we tag it with the relevant label (see labels below). The owner is responsible for then prioritizing any bug/request that comes in for each feature. This does not mean working on every bug/request, an owner can make the deliberate decision that working on something is not the best thing to work on, but every request should be looked at.
 
 
-> 💡 The Team Platform works a bit differently. Each subteam owns certain parts of PostHog. Among other things, this helps reduce any lead time when critical fixes are needed. Please review the [Team Platform](/handbook/small-teams/platform) page for further details.
+> 💡 The Team Platform works a bit differently. Each subteam owns certain parts of PostHog. Among other things, this helps reduce any lead time when critical fixes are needed. Please review the [Team Platform](/handbook/small-teams/infrastructure) page for further details.
 
 
 ## Feature list

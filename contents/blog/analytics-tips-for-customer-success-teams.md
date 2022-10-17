@@ -22,7 +22,7 @@ Using a combination of [autocapture](/manual/events#autocapture-event-tracking) 
 
 At PostHog, for example, new users have to go through several common steps to be successful — they must create an account, login, ingest events and then make a discovery through an insight. Using funnels, we’re able to identify which stage users get stuck on and then monitor how successful we are in our attempts to fix the problem.
 
-> 💡**PostHog Tip:** Want to delve deeper into the root causes behind a drop off? Use [breakdowns](/funnels#identify-possible-causes-of-failure-and-success) to explore what groups of users have in common. 
+> 💡**PostHog Tip:** Want to delve deeper into the root causes behind a drop off? Use [breakdowns](/manual/funnels#identify-possible-causes-of-failure-and-success) to explore what groups of users have in common. 
 
 ## 2. Use trends to find out which features are popular
 ![graph of an insight broken down by a property](../images/blog/activation-checklist-images/posthog-trend-insight.png)

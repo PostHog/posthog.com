@@ -63,11 +63,11 @@ Additionally, the product managers should pay particular attention to cross-team
  
 ## How do small teams and designers work together?
 
-Similar to product, designers support small teams. [Read our guide](../../engineering/product-design) for engineers on how to work with design.
+Similar to product, designers support small teams. [Read our guide](/handbook/engineering/product-design) for engineers on how to work with design.
 
 ## Small Teams list
 
-See [team structure](team-structure).
+See [team structure](/handbook/small-teams/team-structure).
 
 ## FAQ
 

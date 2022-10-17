@@ -124,7 +124,7 @@
                     "url": "/handbook/small-teams/customer-success"
                 },
                 {
-                    "name": "Exec Team",
+                    "name": "Exec",
                     "url": "/handbook/small-teams/exec"
                 },
                 {
@@ -1001,6 +1001,10 @@
                     "url": "/docs/migrate/migrate-from-amplitude"
                 },
                 {
+                    "name": "To PostHog Cloud EU",
+                    "url": "/tutorials/migrate-eu-cloud"
+                },
+                {
                     "name": "Between Cloud and self-hosted",
                     "url": "/docs/migrate/migrate-between-cloud-and-self-hosted"
                 }
@@ -1678,6 +1682,10 @@
         {
             "name": "Support",
             "url": "/manual/support"
+        },
+        {
+            "name": "Glossary",
+            "url": "/manual/glossary"
         }
     ],
     "product": [

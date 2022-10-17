@@ -282,7 +282,7 @@ export default function FAQ() {
                         />
                     </ol>
                     <a
-                        href="/docs/user-guides"
+                        href="/using-posthog"
                         className="border border-t-0 border-dashed border-gray p-3 text-lg font-semibold flex justify-center hover:bg-gray-accent/20 dark:hover:bg-gray-accent-dark"
                     >
                         View all (23)
