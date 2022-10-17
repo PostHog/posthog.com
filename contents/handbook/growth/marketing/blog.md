@@ -35,7 +35,7 @@ As we have a few different places where content lives on our site, follow these 
 3. [Docs - Manual](/using-posthog) = Reference guides to PostHog features (e.g. Actions, Funnels).
 4. [Docs - Everything else](/docs) = Everything else product-specific that isn't covered above (e.g. deployment documentation). 
 
-The Marketing team is responsible for 1. and 2. generally, while 3. and 4. sit with the Website & Docs team. 
+The Marketing team is responsible for 1. and 2. generally, while 3. and 4. usually sit with the Website & Docs team. We do encourage teams to step on toes, however.
 
 ## Production workflow
 
