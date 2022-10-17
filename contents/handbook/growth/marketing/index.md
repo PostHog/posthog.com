@@ -48,7 +48,7 @@ These are our main values:
 
 - Be opinionated
 - Pull, don’t push
-- No sneaky stuff
+- No sneaky shit
 
 ### Be opinionated
 
