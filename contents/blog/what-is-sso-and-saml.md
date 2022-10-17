@@ -22,7 +22,7 @@ Administrators and IT teams often encourage SSO for security purposes, as it ens
 PostHog also offers [just-in-time provisioning](/manual/sso#just-in-time-user-provisioning), which automatically creates a new account whenever new users access PostHog — provided that they have a valid email address and SSO provider, of course.
 
 ## What is SAML?
-SAML, on the other hand, stands for Security Assertion Markup Language. It’s one of the underlying technologies which makes SSO possible and enables team members to use a single set of login credentials across multiple systems. In PostHog, you can use multi-tenant SAML to support many authentication servers at once, and integrate Identity Providers, such as OneLogin or Okta. 
+SAML, on the other hand, stands for Security Assertion Markup Language. It’s one of the underlying technologies which makes SSO possible and enables team members to use a single set of login credentials across multiple systems. In PostHog, you can use multi-tenant SAML to support many authentication servers at once and integrate Identity Providers, such as OneLogin or Okta. 
 
 > Some SSO and SAML features are intended for use in large organizations and are only available on Enterprise or paid PostHog plans. For a comprehensive explanation of which features are available on each plan, refer to the [authentication docs](/manual/sso).
 
