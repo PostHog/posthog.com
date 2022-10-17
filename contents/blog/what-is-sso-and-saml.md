@@ -19,7 +19,7 @@ SSO stands for Single Sign-On. It enables users to login to services without ent
 
 Administrators and IT teams often encourage SSO for security purposes, as it ensures only authorized users can access an account. We use it at PostHog for this reason and offer support for SSO via authorized email domains and certain third-party providers — namely Google, GitLab, and GitHub.
 
-PostHog also offers [just-in-time provisioning](/manual/sso#just-in-time-user-provisioning), which automatically creates a new account whenever new users access PostHog — provided that they have an acceptable email address and SSO provider, of course.
+PostHog also offers [just-in-time provisioning](/manual/sso#just-in-time-user-provisioning), which automatically creates a new account whenever new users access PostHog — provided that they have a valid email address and SSO provider, of course.
 
 ## What is SAML?
 SAML, on the other hand, stands for Security Assertion Markup Language. It’s one of the underlying technologies which makes SSO possible and enables team members to use a single set of login credentials across multiple systems. In PostHog, you can use multi-tenant SAML to support many authentication servers at once, and integrate Identity Providers, such as OneLogin or Okta. 
