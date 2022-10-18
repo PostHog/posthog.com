@@ -4972,6 +4972,18 @@
   dependencies:
     "@types/node" "*"
 
+"@types/lodash.groupby@^4.6.7":
+  version "4.6.7"
+  resolved "https://registry.yarnpkg.com/@types/lodash.groupby/-/lodash.groupby-4.6.7.tgz#35fdb9647f100450d1004f65f74cbd964cdb567a"
+  integrity sha512-dFUR1pqdMgjIBbgPJ/8axJX6M1C7zsL+HF4qdYMQeJ7XOp0Qbf37I3zh9gpXr/ks6tgEYPDRqyZRAnFYvewYHQ==
+  dependencies:
+    "@types/lodash" "*"
+
+"@types/lodash@*":
+  version "4.14.186"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.186.tgz#862e5514dd7bd66ada6c70ee5fce844b06c8ee97"
+  integrity sha512-eHcVlLXP0c2FlMPm56ITode2AgLMSa6aJ05JTTbYbI+7EMkCEE5qk2E41d5g2lCVTqRe0GnnRFurmlCsDODrPw==
+
 "@types/lodash@^4.14.167", "@types/lodash@^4.14.92":
   version "4.14.185"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.185.tgz#c9843f5a40703a8f5edfd53358a58ae729816908"
@@ -23808,10 +23820,10 @@ sprintf-js@~1.0.2:
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
   integrity sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==
 
-squeak-react@^3.0.5:
-  version "3.0.7"
-  resolved "https://registry.yarnpkg.com/squeak-react/-/squeak-react-3.0.7.tgz#2e68206fc0c2587684771d739482cfad2c87db92"
-  integrity sha512-nMmjaAdPrRyKZnNC/0MsDWSYExwdJincODn9bxGog/Z3O6izrtNFOO/Dnl9BWsugNggvIlbFCuYbf5IXGfbyIQ==
+squeak-react@^3.0.8:
+  version "3.0.8"
+  resolved "https://registry.yarnpkg.com/squeak-react/-/squeak-react-3.0.8.tgz#a92e2b76ec9bfc45e00a5d1271f06eac7c410cdd"
+  integrity sha512-+uwyXMi1DCipJTbGg8ECNERELxx89apkapq9Y3om9xE1xZO+Y7NufcdtR9yki1DObw+u8pxtGLr/RToI84N5qg==
   dependencies:
     formik "^2.2.9"
     gravatar "^1.8.2"

@@ -2108,3 +2108,7 @@
 [[redirects]]
     from = "/handbook/people/team-structure/team-structure"
     to = "/handbook/small-teams/team-structure"
+
+[[redirects]]
+    from = "/eu-cloud"
+    to = "/eu"
