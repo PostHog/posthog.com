@@ -13,60 +13,92 @@ featuredImageType: full
 
 It's one thing to build _something_, it's another to build something that _people want_.
 
-Every principle here, that applied at 2 people and 0 users, is still relevant today at ~35 and ~50K developers in the community. In fact, you have to push harder to make this happen when you get bigger. 
+Every principle here, that applied at 0 users, is still relevant today at ~50K developers in the community. In fact, you have to push harder to make this happen when you get bigger. 
 
 ## We started with a problem we'd had
 
 We pivoted, [a lot](pivot-to-posthog). We repeatedly set out to solve problems we'd had in our previous careers.
 
-Every time we pivoted, we wanted to set up product analytics for the new piece of software we ended up working on.
+Every idea failed. However, a pattern emerged:
 
-These were our frustrations:
+Every time we pivoted, we had to set up product analytics again.
+
+Every time we set up product analytics again, we got frustrated. Here's the list:
 
 * We couldn't get to the underlying data, to debug
 * Opaque pricing
 * Sending our data to a 3rd party (privacy, and adblockers causing us to lose 50% of our data)
 * We didn't want to have to set up the telemetry manually. We wanted to auto capture front end events.
 
-So we solved the above with our initial launch on HN.
+So we solved the above with our [initial launch on Hacker News (HN)](https://news.ycombinator.com/item?id=22376732).
 
-Since then, we got a lot of feedback to build the products next door to ours. The ones that have done best are the ones we've used ourselves, a lot.
+## Ideas that sound bad, might be genius
+
+We got a lot of feedback to build the products next door to ours.
+
+I thought [this fateful request](https://github.com/PostHog/posthog/issues/149) was a bad idea, and I pushed users too quickly to something else I had in mind.
+
+Then [Karl](/handbook/company/team/karl-aksel-puulmann) appeared.
+
+Karl is, amongst other things, one of our engineers. What users were asking for made sense to him. So, during a hackathon, he shipped this (huge) feature in a week or two.
+
+It was instantly popular.
+
+It taught us that consolidating multiple tools into the platform made us much more valuable to users. It taught us that we could pull that off. Those things meant that we could compete in cloud and wouldn't be reliant on self hosting for the whole business.
+
+Code won.
 
 ## Throw away bad ideas
 
-If an idea isn't working, it may be easire to (i) congraluate yourself for trying and (ii) delete the code and start again. A solution looking for a problem isn't a fun place to be. 
+The most perfect pre-product-market-fit startup, is a machine that repeatedly (i) learns (ii) ships (iii) goes back to step (i).
+
+If you ship something, and learn that it's not popular (which will happen _most_ of the time), then you have a decision - do I _iterate_ this thing, or do I _start over_?
+
+Startup lore is that most people will bias heavily towards iteration when they should just start over. Dalton, one our partners at YC, [has a great talk on this topic](https://www.ycombinator.com/library/6p-all-about-pivoting). It's understandable - you don't want to lose face by changing ideas.
+
+Having an ego is expensive. For us, it was better value to throw the majority of our ideas away.
+
+## Who does what
+
+This must be simple for the greatest speed.
+
+I found users, built the website and docs, and the odd wireframe.
+
+Tim (my cofounder and our CTO) dealt with existing users by shipping stuff.
 
 ## Ship for real life people
 
 As soon as we had decided to build PostHog, our next phase was to see if anyone would use it.
 
-Before launching on HackerNews, we focused on this loop:
+Before launching on HN, we focused on this loop:
 
 1. Find someone who is interested in what we working on
 
-This was the only time we had to do outreach at PostHog.
+This was the only time we had to do outreach at PostHog. Once we had product market fit, this need disappeared.
 
 I knew we were targeting developers, so with that in mind "I need a developer to implement and hopefully give feedback on this". We had no focus on money yet.
 
 I went through (i) friends and family that sprung to mind (ii) literally my phonebook (iii) 1st connections on LinkedIn (iv) every developer I'd ever worked with via LinkedIn (v) every developer who'd worked at every place I'd ever worked.
 
-I decided Whatsapp / SMS > Email > LinkedIn, depending on if I had each person's contact details. With ideas that didn't work out, it was harder work to get people to try it!
+I decided WhatsApp / SMS > Email > LinkedIn, depending on if I had each person's contact details. With ideas that didn't work out, it was harder work to get people to try it!
 
-All messages were totally cutomized to the person. Nothing automated.
+All messages were totally cutomized to the person. Nothing automated. I was very clear I was just hoping that we could get them as an early, free user - because we were preparing the product before a big launch.
 
 Within a couple of days I had a few teams who were up for trying it.
 
-We spent a further $2K on ads on Twitter to see if we could get a little self serve usage up and running - our main focus here was to (i) check nothing was broken, in case it went viral when we launched and (ii) get the repo to 100 stars. I'd stress we had a hard 4 week deadline we'd set ourselves, so we were spending money to avoid spending more time to let the above happen naturally.
+We spent a further $2K on ads on Twitter to see if we could get a little self serve usage up and running - our main focus here was to (i) check nothing was broken, in case it went viral when we launched and (ii) get the repo to 100 stars. I'd stress we had a hard 4 week deadline we'd set ourselves, so we were spending money to avoid spending more time to let the above happen naturally. This step wasn't necessary, so please don't copy if you've no capital.
 
 2. Give user access to new feature
 
-Our only focus early on, was to make sure the product did the bare minimum. The first ever team could (i) login and (ii) see a list of events streaming from their website. The reason they were willing to implement something with so little value, at that point (!), was that they believed in the vision!
+Our only focus early on, was to make sure the product did the bare minimum. The first ever team could (i) login (well, after we fixed the login screen - that was the first bug) and (ii) see a list of events streaming from their website.
+
+The reason they were willing to let us implement something with so little value, at that point (!), was that they were friends with us and perhaps believed in the vision!
 
 3. User uses it and gives feedback
 
 We set up a [community Slack](../slack) group.
 
-With each customer that would join, we'd create a private channel.
+With each customer that would join, we'd create a private channel. In the early days when we were a team of two, this is where users went from my responsibility, to Tim's.
 
 This made us feel very close with users.
 
@@ -82,20 +114,36 @@ This _still_ applies. See our [community roadmap idea](https://github.com/PostHo
 
 ## How to engage with users
 
-Once we launched, we made it _very_ easy to get in contact.
-
-Slack has been the most important channel because:
+Once we launched, we made it _very_ easy to give us feedback. Slack turned out to be the best channel because:
 
 * many users had it open all day at work - we saw 20x the response rate of email
-* people are trained to use it informally - people don't spend a lot of time to polish their communication on it, which means peope are more likely to post something
+* there's a low bar to posting because people use it informally - people don't spend a lot of time to polish their communication on it. We wanted more communication, rather than less, especially in the early days
 
 There are some issues with using Slack like this:
 
-* It isn't ticketed (without looking for 3rd party apps)
+* It isn't ticketed (without looking for 3rd party apps) - this can be painful now we've several thousand people in there
 * Once you have lots of people in your group, you lose messages if you don't pay for their premium features (which are way too expensive for most free communities to use)
 
 (Later on, we built [Squeak!](https://github.com/posthog/squeak) to solve some of these)
 
-## Focus on specific types of user
+## Enter the Ideal Customer Profile (ICP) - focus on specific types of user
 
-18 months after the launch of the open source project, we were getting a  lot ofp aid demand for (i) premium features 
+We spent the first 18 months focussed on the open source project. We made a mistake though - we didn't get specific about who we were building for. We'd have said "developers are all the same, aren't they?"
+
+Bluntly, defining an ICP felt bureaucratic and like something a Fortune 500 would do. I put it in my mental bucket of things I don't care about, alongside words such as "synergy", "resources" and "alignment".
+
+Alas, I was wrong. I think we could have saved about 30% of our time if we'd done this sooner.
+
+This is something I'd do from day 1 if I were starting over.
+
+Something we only cracked once we focussed on our paid product was the importance of defining an Ideal Customer Profile. It's _still_ a work in progress.
+
+Broadly, create a very, *very* specific list of characteristics and behaviors of the users you are building for. Look at [PostHog's current ICP](/handbook/strategy/overview#target-customers-for-2022) if you want an example.
+
+## Listen to users
+
+You may feel cleverer than users - you built the thing, right?
+
+Wrong! You need them, not the other way around. 
+
+Check your ego and listen to users, stay fast and you'll learn the most by doing. That's how you build something people want.
