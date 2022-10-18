@@ -5,9 +5,12 @@ showTitle: true
 related:
     - ../tutorials/funnels.md
     - ../tutorials/nextjs-supabase-signup-funnel.mdx
----
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
 
-<FeatureAvailability allPlans />
+---
 
 Session Recording allows you to record users navigating through your website and play back the individual sessions to watch how real users use your product.
 
@@ -34,43 +37,6 @@ If your application displays sensitive user information outside of input fields,
 
 To do so, you should add the CSS class name `ph-no-capture` to elements which should not be recorded. This will lead to the element being replaced with a block of the same size when you play back the recordings. Make sure everyone who watches recordings in your team is aware of this, so that they don't think your product is broken when something doesn't show up!
 
-## Recordings data retention
-
-Depending on how your app or website is built, recordings can take a lot of disk space. To manage this, we have the following retention policy options in place.
-
-### PostHog Cloud & Clickhouse Self-hosted
-
-By default, recordings are automatically deleted after 3 weeks. Old recordings are deleted with Clickhouse's <a target="_blank" href="https://clickhouse.com/docs/en/sql-reference/statements/alter/ttl/">Table TTL</a>. If you're self-hosting, you can set your own retention policy by updating the `RECORDINGS_TTL_WEEKS` configuration on your instance settings page.
-
-Please note, if your Clickhouse storage is nearing capacity, you'll want to temporarily increase your volume size before running the command above (even if you're decreasing the value). Otherwise, the command can hang.
-
-### Legacy Postgres Self-hosted
-
-Recordings are kept indefinitely by default. You can can set recordings to delete after a configurable number of days in the [project settings page](/docs/user-guides/application-settings#project-settings).
-
-### Preserving recordings
-
-We're working towards a solution for archiving and preserving recordings data for future reference. You can follow up on this [GitHub issue](https://github.com/PostHog/posthog/issues/2142).
-
-In order to simplify the archival process, since [posthog-js 1.24.0](https://github.com/PostHog/posthog-js/pull/405), recording length is capped at 24 hours. 
-
-### Further controls
-
-If you want more granular controls, you can choose to enable session recording using [feature flags](feature-flags). This enables you to control session recordings based on users with certain previous events/actions or properties (or just to capture a percentage of all sessions).
-
-To do this set `disable_session_recording` in our [JavaScript library config](/docs/integrate/client/js/#config) to `true`.
-
-Then conditionally call the method `posthog.startSessionRecording` to enable it using the feature flag.
-
-For example:
-
-```javascript
-    window.posthog.onFeatureFlags((function() {
-        if (window.posthog.isFeatureEnabled("your-feature-flag")) {
-            window.posthog.startSessionRecording()
-        }
-    })
-```
 
 
 ## Recording configurations
@@ -96,6 +62,69 @@ posthog.init('<ph_project_api_key>', {
 })
 ```
 
+### Console logs recording (beta)
+
+PostHog can also capture console logs from your application. This is useful for debugging, providing extra context on what is happening in your users browser environment. As console logs can contain sensitive information we do not capture these logs automatically. You can enable this feature globally from your PostHog [project settings page](https://app.posthog.com/project/settings) or client-side by setting `enable_recording_console_log` in our [JavaScript library config](/docs/integrate/client/js/#config) to `true`.
+
+Console logs will be recorded if _either_ the project setting **or** the client-side config is set to `true`. If recordings overall are disabled then console logs will also not be recorded.
+
+```javascript
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_instance_address>',
+    // REMINDER: This is only needed if you aren't using the project settings config
+    enable_recording_console_log: true 
+    // ... other options
+})
+
+```
+
+### Further controls
+
+If you want more granular controls, you can choose to enable session recording using [feature flags](feature-flags). This enables you to control session recordings based on users with certain previous events/actions or properties (or just to capture a percentage of all sessions).
+
+To do this set `disable_session_recording` in our [JavaScript library config](/docs/integrate/client/js/#config) to `true`.
+
+Then conditionally call the method `posthog.startSessionRecording` to enable it using the feature flag.
+
+For example:
+
+```javascript
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_instance_address>',
+    disable_session_recording: true
+    // ... other options
+})
+window.posthog.onFeatureFlags((function() {
+    if (window.posthog.isFeatureEnabled("your-feature-flag")) {
+        window.posthog.startSessionRecording()
+    }
+})
+```
+
+
+
+
+## Recordings data retention
+
+Depending on how your app or website is built, recordings can take a lot of disk space. To manage this, we have the following retention policy options in place.
+
+### PostHog Cloud & Clickhouse Self-hosted
+
+By default, recordings are automatically deleted after 3 weeks. Old recordings are deleted with Clickhouse's <a target="_blank" href="https://clickhouse.com/docs/en/sql-reference/statements/alter/ttl/">Table TTL</a>. If you're self-hosting, you can set your own retention policy by updating the `RECORDINGS_TTL_WEEKS` configuration on your instance settings page.
+
+Please note, if your Clickhouse storage is nearing capacity, you'll want to temporarily increase your volume size before running the command above (even if you're decreasing the value). Otherwise, the command can hang.
+
+### Legacy Postgres Self-hosted
+
+Recordings are kept indefinitely by default. You can can set recordings to delete after a configurable number of days in the [project settings page](/docs/user-guides/application-settings#project-settings).
+
+### Preserving recordings
+
+We're working towards a solution for archiving and preserving recordings data for future reference. You can follow up on this [GitHub issue](https://github.com/PostHog/posthog/issues/2142).
+
+In order to simplify the archival process, since [posthog-js 1.24.0](https://github.com/PostHog/posthog-js/pull/405), recording length is capped at 24 hours. 
+
+
 
 ## Troubleshooting
 
@@ -120,6 +149,7 @@ If you had previously disabled session recordings, you may have set the `disable
 To re-enable session recordings you want to either remove the `disable_session_recording` option or set it to `false`.
 
 You can read more about [posthog-js configurations here](/docs/integrate/client/js#config).
+
 
 #### Content security policy
 

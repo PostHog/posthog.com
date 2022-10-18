@@ -4,9 +4,10 @@ import { createPortal } from 'react-dom'
 
 type SearchBoxProps = {
     placeholder?: string
+    filter?: string
 }
 
-export const SearchBox: React.FC<SearchBoxProps> = ({ placeholder }) => {
+export const SearchBox: React.FC<SearchBoxProps> = ({ placeholder, filter }) => {
     const [query, setQuery] = React.useState<string>('')
     const [searchOpen, setSearchOpen] = React.useState<boolean>(false)
 
@@ -29,6 +30,7 @@ export const SearchBox: React.FC<SearchBoxProps> = ({ placeholder }) => {
                         apiKey="f1386529b9fafc5c3467e0380f19de4b"
                         initialQuery={query}
                         onClose={() => setSearchOpen(false)}
+                        searchParameters={filter && { facetFilters: [`tags:${filter}`] }}
                     />,
                     document.body
                 )}

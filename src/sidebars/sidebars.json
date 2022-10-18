@@ -78,6 +78,10 @@
                     "url": "/handbook/company/values"
                 },
                 {
+                    "name": "Small teams",
+                    "url": "/handbook/company/small-teams"
+                },
+                {
                     "name": "Goal setting",
                     "url": "/handbook/company/goal-setting"
                 },
@@ -104,60 +108,56 @@
                 {
                     "name": "Brand assets",
                     "url": "/handbook/company/brand-assets"
-                },
+                }
+            ]
+        },
+        {
+            "name": "Small teams",
+            "url": "",
+            "children": [
                 {
                     "name": "Team structure",
-                    "url": "",
-                    "children": [
-                        {
-                            "name": "Team structure",
-                            "url": "/handbook/people/team-structure/team-structure"
-                        },
-                        {
-                            "name": "Why Small Teams",
-                            "url": "/handbook/people/team-structure/why-small-teams"
-                        },
-                        {
-                            "name": "Team App East",
-                            "url": "/handbook/people/team-structure/app-east"
-                        },
-                        {
-                            "name": "Team App West",
-                            "url": "/handbook/people/team-structure/app-west"
-                        },
-                        {
-                            "name": "Team Platform",
-                            "url": "/handbook/people/team-structure/platform"
-                        },
-                        {
-                            "name": "Team Ingestion",
-                            "url": "/handbook/people/team-structure/ingestion"
-                        },
-                        {
-                            "name": "Team Infrastructure",
-                            "url": "/handbook/people/team-structure/infrastructure"
-                        },
-                        {
-                            "name": "Team Marketing",
-                            "url": "/handbook/people/team-structure/marketing"
-                        },
-                        {
-                            "name": "Team Website and Docs",
-                            "url": "/handbook/people/team-structure/website-docs"
-                        },
-                        {
-                            "name": "Team People and Ops",
-                            "url": "/handbook/people/team-structure/people"
-                        },
-                        {
-                            "name": "Team Customer Success",
-                            "url": "/handbook/people/team-structure/customer-success"
-                        },
-                        {
-                            "name": "Team Exec",
-                            "url": "/handbook/people/team-structure/exec"
-                        }
-                    ]
+                    "url": "/handbook/small-teams/team-structure"
+                },
+                {
+                    "name": "Customer Success",
+                    "url": "/handbook/small-teams/customer-success"
+                },
+                {
+                    "name": "Exec",
+                    "url": "/handbook/small-teams/exec"
+                },
+                {
+                    "name": "Experimentation",
+                    "url": "/handbook/small-teams/experimentation"
+                },
+                {
+                    "name": "Infrastructure",
+                    "url": "/handbook/small-teams/infrastructure"
+                },
+                {
+                    "name": "Marketing",
+                    "url": "/handbook/small-teams/marketing"
+                },
+                {
+                    "name": "People & Ops",
+                    "url": "/handbook/small-teams/people"
+                },
+                {
+                    "name": "Pipeline",
+                    "url": "/handbook/small-teams/pipeline"
+                },
+                {
+                    "name": "Product Analytics",
+                    "url": "/handbook/small-teams/product-analytics"
+                },
+                {
+                    "name": "Session Recording",
+                    "url": "/handbook/small-teams/session-recording"
+                },
+                {
+                    "name": "Website & Docs",
+                    "url": "/handbook/small-teams/website-docs"
                 }
             ]
         },
@@ -388,6 +388,10 @@
                         {
                             "name": "Markdown",
                             "url": "/handbook/engineering/posthog-com/markdown"
+                        },
+                        {
+                            "name": "Jobs",
+                            "url": "/handbook/engineering/posthog-com/jobs"
                         }
                     ]
                 },
@@ -424,10 +428,6 @@
                 {
                     "name": "User feedback",
                     "url": "/handbook/product/user-feedback"
-                },
-                {
-                    "name": "Scale features prioritization",
-                    "url": "/handbook/product/scale-features-prioritization"
                 },
                 {
                     "name": "Paid features",
@@ -546,6 +546,16 @@
                             "url": "/handbook/growth/sales/who-we-do-business-with"
                         }
                     ]
+                }
+            ]
+        },
+        {
+            "name": "Growth engineering",
+            "url": "",
+            "children": [
+                {
+                    "name": "Growth reviews",
+                    "url": "/handbook/growth/growth-engineering/growth-sessions"
                 }
             ]
         }
@@ -991,6 +1001,10 @@
                     "url": "/docs/migrate/migrate-from-amplitude"
                 },
                 {
+                    "name": "To PostHog Cloud EU",
+                    "url": "/tutorials/migrate-eu-cloud"
+                },
+                {
                     "name": "Between Cloud and self-hosted",
                     "url": "/docs/migrate/migrate-between-cloud-and-self-hosted"
                 }
@@ -1172,7 +1186,7 @@
             "children": [
                 {
                     "name": "Overview",
-                    "url": "/docs/privacy/"
+                    "url": "/docs/privacy"
                 },
                 {
                     "name": "GDPR guidance",
@@ -1668,6 +1682,10 @@
         {
             "name": "Support",
             "url": "/manual/support"
+        },
+        {
+            "name": "Glossary",
+            "url": "/manual/glossary"
         }
     ],
     "product": [

@@ -112,7 +112,8 @@ If you use multiple distinct IDs for the same user (e.g. a logical ID and a UUID
 posthog.alias('[new ID]', '[original ID]')
 ```
 
-The original ID will be kept as the default, but any events sent to either will be received under the same person.
+Any events sent to either will be received under the same person.
+Note that the `'[original ID]'` cannot be previously identified nor associated with multiple distinct ids.
 
 ### Reset after logout
 
@@ -320,6 +321,7 @@ posthog.init('<ph_project_api_key>', {
 ```
 
 
+> **Note:** Passing in a distinctID to bootstrap replaces any existing IDs, which means you may fail to connect any old anonymous user events with the logged in person, if your logic calls identify in the frontend immediately on login. In this case, you can omit passing in the distinctID.
 
 ### Group analytics
 
@@ -415,6 +417,7 @@ Some of the most relevant options are:
 | `cross_subdomain_cookie`<br/><br/>**Type:** Boolean<br/>**Default:** `true`                                                                                                                     | Determines if cookie should be set on the top level domain (example.com). If PostHog-js is loaded on a subdomain (test.example.com), _and_ `cross_subdomain_cookie` is set to false, it'll set the cookie on the subdomain only (test.example.com).                                                           |
 | `disable_persistence`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                                 | Disable persisting user data across pages. This will disable cookies, session storage and local storage.                       |
 | `disable_session_recording`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                           | Determines if users should be opted out of session recording.                                                                  |
+| `enable_recording_console_log`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                        | Determines if console logs should be recorded as part of the session recording. [More information][/manual/recordings#console-logs-recording-beta].                                               |
 | `loaded`<br/><br/>**Type:** Function<br/>**Default:** `function () {}`                                                                                                                    | A function to be called once the PostHog scripts have loaded successfully.                                                     |
 | `opt_out_capturing_by_default`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                        | Determines if users should be opted out of PostHog tracking by default, requiring additional logic to opt them into capturing. |
 | `persistence`<br/><br/>**Type:** `localStorage` or `cookie` or `memory` or `localStorage+cookie`<br/>**Default:** `cookie`                                                                | Determines how PostHog stores information about the user. See [persistence](#persistence) for details.                         |

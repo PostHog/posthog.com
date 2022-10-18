@@ -70,7 +70,7 @@ Management tasks do come first, as giving context to your team tends to have a m
 There are teams at PostHog that need to work across functions, so we have an anti-silo approach when it comes to the tasks that people work on.
 
 That means:
-* Task setting happens transparently in [Small Teams](structure). Anyone can read notes from or show up to any of the sprint planning meetings.
+* Task setting happens transparently in [Small Teams](/handbook/company/small-teams). Anyone can read notes from or show up to any of the sprint planning meetings.
 * Anyone can give feedback to anyone else on their priorities, and it's our expectation they do so.
 * Every [Small Team](structure) has complete control over what they ship.
 

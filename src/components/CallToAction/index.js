@@ -90,6 +90,7 @@ export const CallToAction = ({
     children,
     className,
     external,
+    externalNoIcon,
     state = {},
     event,
 }) => {
@@ -98,6 +99,7 @@ export const CallToAction = ({
         <Link
             state={state}
             external={external}
+            externalNoIcon={externalNoIcon}
             className={button(type, width, className, size)}
             onClick={onClick}
             to={url}

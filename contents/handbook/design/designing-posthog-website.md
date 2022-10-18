@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-The [Website & Docs Team](/handbook/people/team-structure/website-docs) is responsible for everything you see on posthog.com.
+The [Website & Docs Team](/handbook/small-teams/website-docs) is responsible for everything you see on posthog.com.
 
 ## People
 

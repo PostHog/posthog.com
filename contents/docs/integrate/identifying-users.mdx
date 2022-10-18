@@ -7,7 +7,7 @@ showTitle: true
 
 PostHog allows you to identify your users with an ID of your choice so you can track users across platforms, connect events from before and after users log in, and leverage your preferred type of ID for filtering through your users. 
 
-Identifying users is usually done via our libraries, by calling the `identify` method. This method will associate an **anonymous ID** with a distinct ID of your choice. In client libraries, the anonymous ID is stored locally and inferred for you, but in server-side libraries you need to tell PostHog what that anonymous ID is too.
+Identifying users is usually done via our libraries, by calling the `identify` or `alias` method. This method will associate an **anonymous ID** with a distinct ID of your choice. In client libraries, the anonymous ID is stored locally and inferred for you, but in server-side libraries you need to tell PostHog what that anonymous ID is too.
 
 For example, if you identify an user in your website as follows:
 
@@ -29,7 +29,7 @@ An important mistake to avoid is using non-unique distinct IDs to identify users
 - Your logic for generating IDs does not generate sufficiently strong IDs and you can end up with a clash where 2 users have the same ID
 - There's a bug, typo, or mistake in your code leading to most or all users being identified with generic IDs like `null`, `true`, or `distinctId`
 
-Both of the above scenarios are highly problematic, as they will cause distinct users to be merged together in PostHog.
+All of the above scenarios are highly problematic, as they will cause distinct users to be merged together in PostHog.
 
 While implementing analytics with PostHog, make sure you avoid above pitfalls to maintain data integrity.
 
@@ -54,13 +54,28 @@ PostHog also has a few built-in protections stopping the most common threats to 
   - `null`
   - `0`
 - We do not allow identifying users with empty space strings of any length (`' '`, `'       '`, etc.)
+- We do not allow merging from an already identified user (`distinct_id` user can be previously identified, but `anon_distinct_id` and `alias` user cannot).
 
-If we encounter an `$identify` event with one of these disallowed IDs, the following will happen:
+If we encounter an `$identify` or `$create_alias` event with one of the above problems, the following will happen:
 
 - We process the event normally (it will be ingested and show up in the UI)
-- We refuse to merge users if both IDs exist
-- The user with the disallowed ID will have an $identify event
+- We refuse to merge users and an ingestion warning will be logged (see [ingestion warnings](/manual/data-management#ingestion-warnings) for more details).
+- The event will be only be tied to user behind the first passed `distinct_id`
 
 ## Filtering internal users
 
 If you want to avoid tracking users within your organization, [you can do this](/tutorials/filter-internal-users) within your project's settings.
+
+## Signup flow with frontend and backend
+
+To use PostHog effectively we want all of the events tied to the same user to be tied to the same `person_id` (see [concequences of merging users](/docs/how-posthog-works/ingestion-pipeline#consequences-of-merging)). There's a few things to keep in mind when using a sign-up flow that involves both the frontend and backend: 
+1. We have an event buffer to delay creating persons from backend events (see [all about the event buffer](/docs/how-posthog-works/ingestion-pipeline#all-about-the-event-buffer)) that will help.
+2. The event buffer has a limited time window, so the (identify or alias) event that merges the frontend and backend user should come in within that window (60s)
+3. We don't buffer `$identify` events, so from the backend take care to not send those for setting properties before the users are merged. For setting user properties you can use any custom event, e.g. 
+```python
+posthog.capture(
+  'distinct id',
+  event='movie played',
+  properties={ '$set': { 'userProperty': 'value' } }
+)
+```

@@ -14,7 +14,7 @@ export const OpenRoles = () => {
                         <p>
                             <strong>Don’t see a specific role listed?</strong> That doesn't mean we won't have a spot
                             for you.{' '}
-                            <a href="mailto:careers@posthog.com?subject=Speculative application!&body=Hi PostHog! Here's a link to my personal website, LinkedIn, CV, or equivalent.">
+                            <a href="/careers/speculative-application">
                                 Send us a speculative application!
                             </a>
                             <a href=""></a>

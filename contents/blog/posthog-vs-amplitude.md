@@ -26,7 +26,7 @@ But we think PostHog is a more powerful tool for building better products. Not o
 
 ## How is PostHog different from Amplitude?
 
-Let's start with the core differences. Over 9,000 companies already use PostHog, and [many have switched from Amplitude](/customers/saga). Here are a few reasons why.
+Let's start with the core differences. Over 9,000 companies already use PostHog, and many have switched from Amplitude. Here are a few reasons why.
 
 ### 1. You control your data
 You can self-host PostHog and keep total control of your data. That means no third-party cookies, no data sharing, and straightforward [GDPR](/docs/privacy/gdpr-compliance) and [HIPAA compliance](/docs/privacy/hipaa-compliance). We also offer PostHog Cloud for those who prefer a fully-managed SaaS experience, while partners like [Altinity](/marketplace/altinity) can manage a self-hosted instance on your behalf.

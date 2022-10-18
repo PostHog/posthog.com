@@ -12,6 +12,7 @@ interface Props {
     onClick?: (e: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => void
     disablePrefetch?: boolean
     external?: boolean
+    externalNoIcon?: boolean
     iconClasses?: string
     state?: any
     event?: string
@@ -25,6 +26,7 @@ export default function Link({
     onClick,
     disablePrefetch,
     external,
+    externalNoIcon,
     iconClasses = '',
     state = {},
     event = '',
@@ -51,12 +53,12 @@ export default function Link({
         </GatsbyLink>
     ) : (
         <a
-            target={external ? '_blank' : ''}
+            target={external || externalNoIcon ? '_blank' : ''}
             rel="noopener noreferrer"
             onClick={handleClick}
             {...other}
             href={url}
-            className={className}
+            className={`${className} group`}
         >
             {external ? (
                 <span className="inline-flex justify-center items-center space-x-1">

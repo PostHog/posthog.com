@@ -302,6 +302,7 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
                     breadcrumbBase: breadcrumbBase || menuFlattened[0],
                     tableOfContents,
                     slug,
+                    searchFilter: menu,
                     ...(context ? context(node) : {}),
                 },
             })
@@ -533,12 +534,13 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
     })
 
     result.data.squeakTopics.nodes.forEach((node) => {
-        const { id, slug, label } = node
+        const { slug, label, topicId } = node
+
         createPage({
             path: `questions/${slug}`,
             component: SqueakTopic,
             context: {
-                id,
+                id: topicId,
                 topics: result.data.squeakTopics.nodes,
                 label,
                 menu,
@@ -579,9 +581,9 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
                     id,
                     slug,
                     teamName: team,
-                    teamNameInfo: `Team ${team}`,
-                    objectives: `/handbook/people/team-structure/${slugify(team, { lower: true })}/objectives`,
-                    mission: `/handbook/people/team-structure/${slugify(team, { lower: true })}/mission`,
+                    teamNameInfo: `${team} Team`,
+                    objectives: `/handbook/small-teams/${slugify(team, { lower: true })}/objectives`,
+                    mission: `/handbook/small-teams/${slugify(team, { lower: true })}/mission`,
                     gitHubIssues,
                 },
             })
