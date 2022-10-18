@@ -1,9 +1,10 @@
-import { ClosedIssue, OpenIssue } from 'components/Icons/Icons'
+import { Check, ClosedIssue, OpenIssue, Plus } from 'components/Icons/Icons'
 import Link from 'components/Link'
 import React, { useState } from 'react'
 import { IRoadmap } from '.'
 import { Login, useUser } from 'squeak-react'
 import addToMailchimp from 'gatsby-plugin-mailchimp'
+import Spinner from 'components/Spinner'
 
 export function InProgress(props: IRoadmap) {
     const { user } = useUser()
@@ -71,7 +72,16 @@ export function InProgress(props: IRoadmap) {
                         onClick={() => subscribe(user?.email)}
                         className="text-[15px] inline-flex items-center space-x-2 py-2 px-4 rounded-sm bg-gray-accent-light text-black hover:text-black font-bold active:top-[0.5px] active:scale-[.98]"
                     >
-                        {subscribed ? 'Subscribed!' : 'Get early access'}
+                        <span className="w-[24px] h-[24px] flex items-center justify-center bg-blue/10 text-blue rounded-full">
+                            {loading ? (
+                                <Spinner className="w-[14px] h-[14px] !text-blue" />
+                            ) : subscribed ? (
+                                <Check className="w-[14px] h-[14px]" />
+                            ) : (
+                                <Plus className="w-[14px] h-[14px]" />
+                            )}
+                        </span>
+                        <span>{subscribed ? 'Subscribed!' : 'Get early access'}</span>
                     </button>
                 )}
             </div>
