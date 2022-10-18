@@ -120,17 +120,19 @@ export default function Roadmap() {
                                     description="The top features we might build next. Your feedback is requested."
                                 >
                                     <CardContainer>
-                                        {Object.keys(underConsideration).map((key) => {
-                                            return (
-                                                <Card key={key} team={key}>
-                                                    <CardContainer>
-                                                        {underConsideration[key]?.map((node: IRoadmap) => {
-                                                            return <UnderConsideration key={node.title} {...node} />
-                                                        })}
-                                                    </CardContainer>
-                                                </Card>
-                                            )
-                                        })}
+                                        {Object.keys(underConsideration)
+                                            .sort()
+                                            .map((key) => {
+                                                return (
+                                                    <Card key={key} team={key}>
+                                                        <CardContainer>
+                                                            {underConsideration[key]?.map((node: IRoadmap) => {
+                                                                return <UnderConsideration key={node.title} {...node} />
+                                                            })}
+                                                        </CardContainer>
+                                                    </Card>
+                                                )
+                                            })}
                                     </CardContainer>
                                 </Section>
                                 <Section
@@ -143,17 +145,19 @@ export default function Roadmap() {
                                     }
                                 >
                                     <CardContainer>
-                                        {Object.keys(inProgress).map((key) => {
-                                            return (
-                                                <Card key={key} team={key}>
-                                                    <CardContainer>
-                                                        {inProgress[key]?.map((node: IRoadmap) => {
-                                                            return <InProgress key={node.title} {...node} />
-                                                        })}
-                                                    </CardContainer>
-                                                </Card>
-                                            )
-                                        })}
+                                        {Object.keys(inProgress)
+                                            .sort()
+                                            .map((key) => {
+                                                return (
+                                                    <Card key={key} team={key}>
+                                                        <CardContainer>
+                                                            {inProgress[key]?.map((node: IRoadmap) => {
+                                                                return <InProgress key={node.title} {...node} />
+                                                            })}
+                                                        </CardContainer>
+                                                    </Card>
+                                                )
+                                            })}
                                     </CardContainer>
                                 </Section>
                                 <Section
@@ -161,17 +165,19 @@ export default function Roadmap() {
                                     description="Here’s what was included in our last array."
                                 >
                                     <CardContainer>
-                                        {Object.keys(complete).map((key) => {
-                                            return (
-                                                <Card key={key} team={key}>
-                                                    <CardContainer>
-                                                        {complete[key]?.map((node: IRoadmap) => {
-                                                            return <Complete key={node.title} {...node} />
-                                                        })}
-                                                    </CardContainer>
-                                                </Card>
-                                            )
-                                        })}
+                                        {Object.keys(complete)
+                                            .sort()
+                                            .map((key) => {
+                                                return (
+                                                    <Card key={key} team={key}>
+                                                        <CardContainer>
+                                                            {complete[key]?.map((node: IRoadmap) => {
+                                                                return <Complete key={node.title} {...node} />
+                                                            })}
+                                                        </CardContainer>
+                                                    </Card>
+                                                )
+                                            })}
                                     </CardContainer>
                                 </Section>
                             </div>
