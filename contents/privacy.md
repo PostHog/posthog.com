@@ -1,5 +1,5 @@
 ---
-title: Privacy Policy
+title: Privacy policy
 sidebar: Docs
 showTitle: true
 ---
