@@ -66,7 +66,7 @@ Other sticking points included getting AWS SES (Simple Email Service) approval, 
 
 ## Getting signups
 
-The driving force behind EU Cloud is customer demand. Before starting work, we already had companies interested. As it progressed, those companies made firmer commitments, mainly, being a part of the beta. In our [customer success](/handbook/small-teams/customer-success) team’s conversations, they continued to generate demand for an EU Cloud.
+The driving force behind EU Cloud is customer demand. Before starting work, we already had companies interested. As it progressed, those companies made firmer commitments, mainly, being a part of the beta. In our [Customer Success](/handbook/small-teams/customer-success) team’s conversations, they continued to generate demand for an EU Cloud.
 
 This led to us creating a waitlist which users could sign up to via a custom landing page. Whenever we mentioned an EU Cloud option or GDPR requirements, we pointed users to this landing page.
 
