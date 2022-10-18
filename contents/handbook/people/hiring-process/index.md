@@ -16,8 +16,6 @@ Our goal is to build a [diverse](/handbook/company/diversity), world-class team 
 
 | **Position title**        | **Location we're happy to hire in** | **Small Team**        | **Manager** | **Interview Process**                                                                                                                          | **SuperDay Task**              |
 |---------------------------|----------------------------------------|-----------------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|
-| Senior Data Engineer      | GMT -5:00 to +2:00                   | Ingestion       | James G.    | 1) Culture Screen - Coua<br/> 2) Technical Screen - Yakko<br/> 3) Engineering Culture Screen - Tim<br/> 3) SuperDay Assessment - James G., Tiina, James H. & Yakko                 | [Ingestion Task](https://github.com/PostHog/superday-ingestion) (download ZIP and send)  |
-| Site Reliability Engineer | GMT -8:00 to +2:00                   | Platform        | James G.    | 1) Culture Screen - Coua<br/> 2) Technical Screen - James G.<br/> 3) Engineering Culture Screen - Tim<br/> 4) SuperDay Assessment - James G., Guido, Tiina, James H., & Karl    | [SRE Task](https://github.com/PostHog/sre-superday) (download ZIP and send) |
 | Full Stack Engineer       | GMT -8:00 to +2:00                   | App West/East   | Marius/Eric | 1) Culture Screen - Coua<br/> 2) Technical Screen - Marius/Eric<br/> 3) Engineering Culture Screen - Tim<br/> 4) SuperDay Assessment - Marius/Eric, Tim, James H., Li, Neil, & Karl | Live Task (link not available) |
 
 Tasks are only available internally - please do not share these publicly. 
