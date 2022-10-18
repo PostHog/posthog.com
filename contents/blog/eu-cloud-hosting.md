@@ -50,7 +50,7 @@ As work was starting, Guido from our team said:
 
 > "Spinning up PostHog Cloud EU feels (at least to me) a bit like playing with Lego. It’s incredibly satisfying to see the effort we put in over the last months designing and building those pieces is finally paying off."
 
-One of the first steps was making sure to first split the production integration and deployment pipeline from US Cloud. Next was setting up and configuring the key infrastructure for PostHog such as ClickHouse, Kafka (with AWS MSK), Redis, ZooKeeper, Kubernetes (AWS EKS), and more. See our docs on [how PostHog works](/docs/how-posthog-works) for more details.
+One of the first steps was splitting the production integration and deployment pipeline from US Cloud. Next was setting up and configuring the key infrastructure for PostHog such as ClickHouse, Kafka (with AWS MSK), Redis, ZooKeeper, Kubernetes (AWS EKS), and more. See our docs on [how PostHog works](/docs/how-posthog-works) for more details.
 
 They made some slight changes, moving the database from Heroku to AWS RDS (Relational Database). This is better future-proofing, as Heroku has scaling limits and is difficult to migrate from. Other changes led to upgrades, like more shards in our ClickHouse cluster, allowing for easier scaling in the future.
 
