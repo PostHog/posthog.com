@@ -128,7 +128,7 @@ There are some issues with using Slack like this:
 
 ## Enter the Ideal Customer Profile (ICP) - focus on specific types of user
 
-We spent the first 18 months focussed on the open source project. We made a mistake though - we didn't get specific about who we were building for. We'd have said "developers are all the same, aren't they?"
+We spent the first 18 months focused on the open source project. We made a mistake though - we didn't get specific about who we were building for. We'd have said "developers are all the same, aren't they?"
 
 Bluntly, defining an ICP felt bureaucratic and like something a Fortune 500 would do. I put it in my mental bucket of things I don't care about, alongside words such as "synergy", "resources" and "alignment".
 
@@ -136,7 +136,7 @@ Alas, I was wrong. I think we could have saved about 30% of our time if we'd don
 
 This is something I'd do from day 1 if I were starting over.
 
-Something we only cracked once we focussed on our paid product was the importance of defining an Ideal Customer Profile. It's _still_ a work in progress.
+Something we only cracked once we focused on our paid product was the importance of defining an Ideal Customer Profile. It's _still_ a work in progress.
 
 Broadly, create a very, *very* specific list of characteristics and behaviors of the users you are building for. Look at [PostHog's current ICP](/handbook/strategy/overview#target-customers-for-2022) if you want an example.
 
