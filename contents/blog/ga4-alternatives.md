@@ -56,7 +56,7 @@ The following GA4 alternatives all solve one or more the above issues. Some prov
 - **GDPR compliance:** <span className="text-green text-lg">✔</span> (via self-hosting or EU Cloud)
 - **GA data import:** <span className="text-red text-lg">✖</span>
 
-PostHog is an all-in-one suite of product and data tools that includes product analytics, session recording and A/B testing – pretty much everything you need to track user behavior in an app or website, basically. Like GA4, PostHog is an event-based platform – it's priced on per event used, though it offers a generous 1 million events for free each month.
+PostHog is an [all-in-one suite](/product) of product and data tools that includes product analytics, session recording and A/B testing – pretty much everything you need to track user behavior in an app or website, basically. Like GA4, PostHog is an event-based platform – it's priced on per event used, though it offers a generous 1 million events for free each month.
 
 As an open source product, you can see exactly what the team is working on via the [PostHog repo on GitHub](https://github.com/PostHog/posthog). This open source approach also affords a wide degree of flexibility. PostHog can be [self-hosted on your infrastructure](/docs/self-host), which is ideal for keeping control of data and compliance with privacy regulations. PostHog Cloud is available for those who want a managed SaaS experience, and there's an [EU hosting option](/eu) if you need to keep data in the EU for GDPR compliance. 
 
@@ -222,18 +222,18 @@ It also shares some of the weaknesses of Google Analytics. While Matomo has adde
 
 Matomo has feature parity with GA4 and even goes further thanks to its A/B testing and session recording features. Universal Analytics users will feel right at home using Matomo, too, making it a great choice for content and marketing teams.
 
-### TelemetryDECK
+### TelemetryDeck
 
 - **Best for:** Mobile apps
 - **Tracking method:** Event-based
 - **GDPR compliance:** <span className="text-green text-lg">✔</span>
 - **GA data import:** <span className="text-red text-lg">✖</span>
 
-While it can be used on websites, TelemetryDECK is primarily a privacy-minded analytics tool for mobile apps. As such, it uses an event-based tracking model – TelemetryDECK calls them signals. It has first-party SDKs for Swift (iOS, macOS etc. apps), Kotlin (Android and Java apps), and Javascript (node and web apps).
+While it can be used on websites, [TelemetryDeck](https://telemetrydeck.com/) is primarily a privacy-minded analytics tool for mobile apps. As such, it uses an event-based tracking model – TelemetryDeck calls them signals. It has first-party SDKs for Swift (iOS, macOS etc. apps), Kotlin (Android and Java apps), and Javascript (node and web apps).
 
-TelemetryDECK makes it easy for app developers to track things like active users, OS version, app version, and basic user metadata like user location. It also supports basic retention and conversion funnel insights. TelemetryDECK only collects basic user metadata, so you don't need tracking consent banners.
+TelemetryDeck makes it easy for app developers to track things like active users, OS version, app version, and basic user metadata like user location. It also supports basic retention and conversion funnel insights. TelemetryDeck only collects basic user metadata, so you don't need tracking consent banners.
 
-#### TelemetryDECK vs Google Analytics 4
+#### TelemetryDeck vs Google Analytics 4
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -241,7 +241,7 @@ TelemetryDECK makes it easy for app developers to track things like active users
     	<tr>
         	<td className="w-3/12"></td>
         	<td className="w-3/12 text-center"><strong>Google Analytics 4</strong></td>
-        	<td className="w-3/12 text-center"><strong>TelemetryDECK </strong></td>
+        	<td className="w-3/12 text-center"><strong>TelemetryDeck </strong></td>
     	</tr>
 	</thead>
 	<tbody>
@@ -315,7 +315,7 @@ TelemetryDECK is a good option for those who want basic app analytics, but it fa
 - **GDPR compliance:** <span className="text-green text-lg">✔</span>
 - **GA data import:** <span className="text-green text-lg">✔</span>
 
-Plausible is a leader in the trend of lightweight, privacy-orientated analytics tools. It's easy to use and doesn't collect any personally identifiable information. This makes it ideal for complying with GDPR, but this comes at the cost of functionality. 
+[Plausible](https://plausible.io/) is a leader in the trend of lightweight, privacy-orientated analytics tools. It's easy to use and doesn't collect any personally identifiable information. This makes it ideal for complying with GDPR, but this comes at the cost of functionality. 
 
 Plausible, and others like it, are only able to track very basic website metrics like pageviews, session duration, and referrer information. This makes it useless for apps, and significantly less powerful than Google Analytics and other alternatives in this list.
 
@@ -401,7 +401,7 @@ While it lacks many of the advanced features of GA4, Plausible is a good option 
 - **GDPR compliance:** <span className="text-green text-lg">✔</span>
 - **GA data import:** <span className="text-red text-lg">✖</span>
 
-Piwik PRO is a commercial spinoff of Matomo – Matomo used be called Piwik. As such, there are some similarities between the two, such as session-based tracking and superficial UX similarities.
+[Piwik PRO](https://piwik.pro/) is a commercial spinoff of Matomo – Matomo used be called Piwik. As such, there are some similarities between the two, such as session-based tracking and superficial UX similarities.
 
 Piwik PRO's main differentiators are enterprise level support and the integration of a customer data platform (CDP). Like Matomo, it also puts an emphasis on privacy compliance by integrating a consent manager.
 
@@ -487,7 +487,7 @@ Unsurprisingly, Piwik PRO's roots in Matomo make it a popular choice for users w
 - **GDPR compliance:** <span className="text-green text-lg">✔</span>
 - **GA data import:** <span className="text-red text-lg">✖</span>
 
-Fathom is another leading privacy-focused analytics tool that's similar in scope to Plausible. It's ideal for small and medium-size marketing websites, but it lacks the deeper features typical Google Analytics users will demand. It doesn't currently support GA data import, though it is in development. 
+[Fathom](https://usefathom.com/) is another leading privacy-focused analytics tool that's similar in scope to Plausible. It's ideal for small and medium-size marketing websites, but it lacks the deeper features typical Google Analytics users will demand. It doesn't currently support GA data import, though it is in development. 
 
 #### Fathom vs Google Analytics 4
 
