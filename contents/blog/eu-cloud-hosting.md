@@ -70,7 +70,7 @@ The driving force behind EU Cloud is customer demand. Before starting work, we a
 
 This led to us creating a waitlist which users could sign up to via a custom landing page. Whenever we mentioned an EU Cloud option or GDPR requirements, we pointed users to this landing page.
 
-One important area of conversation was the scale of events EU Cloud could handle. The Customer Success and Infrastructure teams were in close communication to make sure the right expectations were set. Some PostHog users were expected to send a large number of events immediately after launch. Ensuring the infrastructure could handle it was critical. 
+One important area of conversation was the scale of events EU Cloud could handle. The Customer Success and Infrastructure teams were in close communication to make sure the right expectations were set. Would EU Cloud be able to handle 500M+ events per month right away? They expected some PostHog users to send a large number of events immediately after launch. Ensuring the infrastructure could handle it was critical, and the team was confident it could. 
 
 ## Final tests
 
