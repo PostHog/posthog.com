@@ -42,7 +42,7 @@ In the configuration menu, enter the host (`eu.posthog.com`) and project key fro
 
 ![Replicator config](../images/tutorials/migrate-eu-cloud/replicator-config.png)
 
-After clicking save and activating it (toggle on left side), the Replicator will start to run. Any events added to your old instance will be replicated in your EU Cloud instance. It can take a little while(15-20 minutes) for the first events to show up.
+After clicking save and activating it (toggle on the left side), the Replicator will start to run. Any events added to your old instance will be replicated in your EU Cloud instance. It can take a little while(15-20 minutes) for the first events to show up.
 
 ## Finished complete migration
 
