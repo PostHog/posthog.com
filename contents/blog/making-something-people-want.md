@@ -40,7 +40,7 @@ If an idea isn't working, it may be easire to (i) congraluate yourself for tryin
 
 As soon as we had decided to build PostHog, our next phase was to see if anyone would use it.
 
-Before launching on HackerNews, we focussed on this loop:
+Before launching on HackerNews, we focused on this loop:
 
 1. Find someone who is interested in what we working on
 
