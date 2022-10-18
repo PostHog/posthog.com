@@ -7,6 +7,7 @@ import { SEO } from 'components/seo'
 import PostLayout from 'components/PostLayout'
 import { UnderConsideration } from './UnderConsideration'
 import { InProgress } from './InProgress'
+import { OrgProvider, UserProvider } from 'squeak-react'
 
 interface IGitHubPage {
     title: string
@@ -94,81 +95,90 @@ export default function Roadmap() {
     return (
         <Layout>
             <SEO title="PostHog Roadmap" />
-            <div className="border-t border-dashed border-gray-accent-light">
-                <PostLayout
-                    contentWidth={'100%'}
-                    article={false}
-                    title={'Roadmap'}
-                    hideSearch
-                    hideSurvey
-                    menu={[
-                        { name: 'Questions', url: '/questions' },
-                        { name: 'Roadmap', url: '/roadmap' },
-                        { name: 'Contributors', url: '/contributors' },
-                        { name: 'Core team', url: '/handbook/company/team' },
-                    ]}
-                >
-                    <h1 className="font-bold text-5xl mb-8 lg:mt-0">Roadmap</h1>
-                    <div className="grid grid-cols-1 lg:grid-cols-3 lg:divide-x lg:gap-y-0 gap-y-6 divide-gray-accent-light divide-dashed lg:-mb-8 lg:border-t border-gray-accent-light border-dashed">
-                        <Section
-                            title="Under consideration"
-                            description="The top features we might build next. Your feedback is requested."
+            <OrgProvider
+                value={{ organizationId: 'a898bcf2-c5b9-4039-82a0-a00220a8c626', apiHost: 'https://squeak.cloud' }}
+            >
+                <UserProvider>
+                    <div className="border-t border-dashed border-gray-accent-light">
+                        <PostLayout
+                            contentWidth={'100%'}
+                            article={false}
+                            title={'Roadmap'}
+                            hideSearch
+                            hideSurvey
+                            menu={[
+                                { name: 'Questions', url: '/questions' },
+                                { name: 'Roadmap', url: '/roadmap' },
+                                { name: 'Contributors', url: '/contributors' },
+                                { name: 'Core team', url: '/handbook/company/team' },
+                            ]}
                         >
-                            <CardContainer>
-                                {Object.keys(underConsideration).map((key) => {
-                                    return (
-                                        <Card key={key} team={key}>
-                                            <CardContainer>
-                                                {underConsideration[key]?.map((node: IRoadmap) => {
-                                                    return <UnderConsideration key={node.title} {...node} />
-                                                })}
-                                            </CardContainer>
-                                        </Card>
-                                    )
-                                })}
-                            </CardContainer>
-                        </Section>
-                        <Section
-                            title="In progress"
-                            description={
-                                <>
-                                    Here’s what we’re building <strong>right now</strong>. (We choose milestones using
-                                    community feedback.)
-                                </>
-                            }
-                        >
-                            <CardContainer>
-                                {Object.keys(inProgress).map((key) => {
-                                    return (
-                                        <Card key={key} team={key}>
-                                            <CardContainer>
-                                                {inProgress[key]?.map((node: IRoadmap) => {
-                                                    return <InProgress key={node.title} {...node} />
-                                                })}
-                                            </CardContainer>
-                                        </Card>
-                                    )
-                                })}
-                            </CardContainer>
-                        </Section>
-                        <Section title="Recently shipped" description="Here’s what was included in our last array.">
-                            <CardContainer>
-                                {Object.keys(complete).map((key) => {
-                                    return (
-                                        <Card key={key} team={key}>
-                                            <CardContainer>
-                                                {complete[key]?.map((node: IRoadmap) => {
-                                                    return <Complete key={node.title} {...node} />
-                                                })}
-                                            </CardContainer>
-                                        </Card>
-                                    )
-                                })}
-                            </CardContainer>
-                        </Section>
+                            <h1 className="font-bold text-5xl mb-8 lg:mt-0">Roadmap</h1>
+                            <div className="grid grid-cols-1 lg:grid-cols-3 lg:divide-x lg:gap-y-0 gap-y-6 divide-gray-accent-light divide-dashed lg:-mb-8 lg:border-t border-gray-accent-light border-dashed">
+                                <Section
+                                    title="Under consideration"
+                                    description="The top features we might build next. Your feedback is requested."
+                                >
+                                    <CardContainer>
+                                        {Object.keys(underConsideration).map((key) => {
+                                            return (
+                                                <Card key={key} team={key}>
+                                                    <CardContainer>
+                                                        {underConsideration[key]?.map((node: IRoadmap) => {
+                                                            return <UnderConsideration key={node.title} {...node} />
+                                                        })}
+                                                    </CardContainer>
+                                                </Card>
+                                            )
+                                        })}
+                                    </CardContainer>
+                                </Section>
+                                <Section
+                                    title="In progress"
+                                    description={
+                                        <>
+                                            Here’s what we’re building <strong>right now</strong>. (We choose milestones
+                                            using community feedback.)
+                                        </>
+                                    }
+                                >
+                                    <CardContainer>
+                                        {Object.keys(inProgress).map((key) => {
+                                            return (
+                                                <Card key={key} team={key}>
+                                                    <CardContainer>
+                                                        {inProgress[key]?.map((node: IRoadmap) => {
+                                                            return <InProgress key={node.title} {...node} />
+                                                        })}
+                                                    </CardContainer>
+                                                </Card>
+                                            )
+                                        })}
+                                    </CardContainer>
+                                </Section>
+                                <Section
+                                    title="Recently shipped"
+                                    description="Here’s what was included in our last array."
+                                >
+                                    <CardContainer>
+                                        {Object.keys(complete).map((key) => {
+                                            return (
+                                                <Card key={key} team={key}>
+                                                    <CardContainer>
+                                                        {complete[key]?.map((node: IRoadmap) => {
+                                                            return <Complete key={node.title} {...node} />
+                                                        })}
+                                                    </CardContainer>
+                                                </Card>
+                                            )
+                                        })}
+                                    </CardContainer>
+                                </Section>
+                            </div>
+                        </PostLayout>
                     </div>
-                </PostLayout>
-            </div>
+                </UserProvider>
+            </OrgProvider>
         </Layout>
     )
 }

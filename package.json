@@ -96,6 +96,7 @@
         "lodash.uniqby": "^4.7.0",
         "mailgun.js": "^4.1.4",
         "markdown-to-jsx": "^7.1.7",
+        "md5": "^2.3.0",
         "mermaid": "^9.1.5",
         "mobx": "^6.3.13",
         "netlify-cli": "^11.7.1",
