@@ -98,15 +98,15 @@ The reason they were willing to let us implement something with so little value,
 
 We set up a [community Slack](../slack) group.
 
-With each customer that would join, we'd create a private channel. In the early days when we were a team of two, this is where users went from my responsibility, to Tim's.
+When new customers joined, we'd create a private channel. In the early days when we were a team of two, this is where users went from my responsibility, to Tim's.
 
 This made us feel very close with users.
 
 We realized we had to _act_ on feedback/bugs and feature requests. We knew that if we acted on them, we'd get more, which means we'd make more progress. If we didn't do this, then users would stop giving us feedback and we'd die!
 
-4. Repeat
+### 4. Repeat
 
-For every new feature, we aimed to get a few early adopter users on it, and through the above loop. Every time we did so, this led to bug reports, UX improvements or something totally different. A bit like QA-ing a pull request.
+For every new feature, we aimed to get a few early adopter users on it, and through the above loop. Every time we did, this led to bug reports, UX improvements, or something unexpected. A bit like QA-ing a pull request.
 
 It is _much _ better to ship like this, rather than shipping in isolation. With this approach, what you build will be much more likely to work, and you'll gain a far deeper understanding of your customers too.
 
@@ -128,13 +128,13 @@ There are some issues with using Slack like this:
 
 ## Enter the Ideal Customer Profile (ICP) - focus on specific types of user
 
-We spent the first 18 months focused on the open source project. We made a mistake though - we didn't get specific about who we were building for. We'd have said "developers are all the same, aren't they?"
+We spent the first 18 months focused on the open source project. We made a mistake though - we didn't get specific about who we were building for. We'd have said "developers are all the same, aren't they?" We were blind to our need of a Ideal Customer Profile (ICP).
 
 Bluntly, defining an ICP felt bureaucratic and like something a Fortune 500 would do. I put it in my mental bucket of things I don't care about, alongside words such as "synergy", "resources" and "alignment".
 
 Alas, I was wrong. I think we could have saved about 30% of our time if we'd done this sooner.
 
-This is something I'd do from day 1 if I were starting over.
+Defining an ICP is something I'd do from day 1 if I were starting over.
 
 Something we only cracked once we focused on our paid product was the importance of defining an Ideal Customer Profile. It's _still_ a work in progress.
 
