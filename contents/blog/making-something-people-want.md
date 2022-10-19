@@ -94,7 +94,7 @@ Early on, our only focus was to make sure the product did the bare minimum. The 
 
 The reason they were willing to let us implement something with so little value, at that point (!), was that they were friends with us and perhaps believed in the vision.
 
-3. User uses it and gives feedback
+### 3. User uses it and gives feedback
 
 We set up a [community Slack](../slack) group.
 
