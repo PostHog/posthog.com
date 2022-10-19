@@ -88,7 +88,7 @@ Within a couple of days I had a few teams who were up for trying it.
 
 We spent a further $2K on ads on Twitter to see if we could get a little self serve usage up and running - our main focus here was to (i) check nothing was broken, in case it went viral when we launched and (ii) get the repo to 100 stars. I'd stress we had a hard 4 week deadline we'd set ourselves, so we were spending money to avoid spending more time to let the above happen naturally. This step wasn't necessary, so please don't copy if you've no capital.
 
-2. Give user access to new feature
+### 2. Give user access to new feature
 
 Our only focus early on, was to make sure the product did the bare minimum. The first ever team could (i) login (well, after we fixed the login screen - that was the first bug) and (ii) see a list of events streaming from their website.
 
