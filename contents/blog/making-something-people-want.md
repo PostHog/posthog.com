@@ -62,7 +62,7 @@ Having an ego is expensive. For us, it was better value to throw the majority of
 
 This must be simple for the greatest speed.
 
-I found users, built the website and docs, and the odd wireframe.
+I found users, built the website and docs, and the occasional wireframe.
 
 Tim (my cofounder and our CTO) dealt with existing users by shipping stuff.
 
