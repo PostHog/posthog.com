@@ -155,7 +155,7 @@
     {
         "featuresUsed": ["open-source, ui"],
         "author": { "name": "Chris S", "role": "Founder", "company": { "name": "Unknown" } },
-        "quote": "Posthog has a unique place in the market with an open developer product. Easy implementation. Great feature set. App UI is super intuitive for technical and non-technical users."
+        "quote": "PostHog has a unique place in the market with an open developer product. Easy implementation. Great feature set. App UI is super intuitive for technical and non-technical users."
     },
     {
         "featuresUsed": ["insights, dashboards"],
