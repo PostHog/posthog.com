@@ -1,6 +1,6 @@
 ---
-date: 2022-10-10
-title: The best open source software for engineers
+date: 2022-10-19
+title: Modern Data Stack 101: The open source alternatives
 rootPage: /blog
 sidebar: Blog
 showTitle: true
