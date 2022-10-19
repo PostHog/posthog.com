@@ -81,7 +81,13 @@ export default function Roadmap() {
     } = useStaticQuery(query)
 
     const underConsideration = groupBy(
-        nodes.filter((node: IRoadmap) => !node.date_completed && !node.projected_completion_date && node.githubPages),
+        nodes.filter(
+            (node: IRoadmap) =>
+                !node.date_completed &&
+                !node.projected_completion_date &&
+                node.githubPages &&
+                node.githubPages.length > 0
+        ),
         ({ team }: { team: ITeam }) => team?.name
     )
     const inProgress = groupBy(
