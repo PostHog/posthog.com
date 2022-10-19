@@ -25,7 +25,7 @@ Every time we pivoted, we had to set up product analytics again.
 
 Every time we set up product analytics again, we got frustrated by the following:
 
-* We couldn't get to the underlying data, to debug
+* No access to underlying data (to debug)
 * Opaque pricing
 * Sending our data to a 3rd party (privacy, and adblockers causing us to lose 50% of our data)
 * We didn't want to have to set up the telemetry manually. We wanted to auto capture front end events.
