@@ -227,6 +227,8 @@ Matomo has feature parity with GA4 and even goes further thanks to its A/B testi
 
 ### TelemetryDeck
 
+![telemetrydeck](../images/blog/ga4-alternatives/telemetrydeck.png)
+
 - **Best for:** Mobile apps
 - **Tracking method:** Event-based
 - **GDPR compliance:** <span className="text-green text-lg">✔</span>
@@ -400,6 +402,8 @@ Plausible, and others like it, are only able to track very basic website metrics
 While it lacks many of the advanced features of GA4, Plausible is a good option for content and marketing teams who just want easy to use, basic analytics functionality.
 
 ### Piwik PRO
+
+![piwik pro](../images/blog/ga4-alternatives/piwik-pro.png)
 
 - **Best for:** Content, marketing and e-commerce websites
 - **Tracking method:** Session-based
