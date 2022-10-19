@@ -82,7 +82,7 @@ I went through (i) friends and family that sprung to mind (ii) my literal phoneb
 
 I decided WhatsApp / SMS > Email > LinkedIn, depending on if I had each person's contact details. With ideas that didn't work out, it was harder work to get people to try it!
 
-All messages were totally cutomized to the person. Nothing automated. I was very clear I was just hoping that we could get them as an early, free user - because we were preparing the product before a big launch.
+All messages were totally customized to the person. Nothing automated. I was clear I was just hoping that we could get them as an early, free user - because we were preparing the product for a big launch.
 
 Within a couple of days I had a few teams who were up for trying it.
 
