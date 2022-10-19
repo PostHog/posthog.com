@@ -90,7 +90,7 @@ We spent a further $2K on ads on Twitter to see if we could get a little self se
 
 ### 2. Give user access to new feature
 
-Our only focus early on, was to make sure the product did the bare minimum. The first ever team could (i) login (well, after we fixed the login screen - that was the first bug) and (ii) see a list of events streaming from their website.
+Early on, our only focus was to make sure the product did the bare minimum. The first ever team could (i) login (well, after we fixed the login screen – that was the first bug) and (ii) see a list of events streaming from their website.
 
 The reason they were willing to let us implement something with so little value, at that point (!), was that they were friends with us and perhaps believed in the vision!
 
