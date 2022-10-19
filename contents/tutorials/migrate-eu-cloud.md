@@ -20,7 +20,7 @@ For many companies, teams, and products, keeping customer data within the EU is 
 
 Why this matters is that the EU has stricter data privacy laws than other areas. In the EU, there are often stricter requirements for what companies can and can’t do with customer data. For example, there is less regulation in the US on data privacy. To understand how this applies to your company and data, you should check with a legal professional.
 
-For this tutorial, we will go over how to migrate from US Cloud or self-hosting to EU Cloud.
+For this tutorial, we will go over how to migrate from US Cloud or self-hosting to EU Cloud. This process might take a while.
 
 ## Signing up for EU Cloud
 
@@ -43,6 +43,8 @@ In the configuration menu, enter the host (`eu.posthog.com`) and project key fro
 ![Replicator config](../images/tutorials/migrate-eu-cloud/replicator-config.png)
 
 After clicking save and activating it (toggle on the left side), the Replicator will start to run. Any events added to your old instance will be replicated in your EU Cloud instance. It can take a little while (15-20 minutes) for the first events to show up.
+
+Once the Replicator is activated, go back to the configuration menu and click the gear next "Export historical events" under "Jobs." On the calendar, select a start and end date, then click "Run job now." This will begin the process of historical events being import (and might take a while).
 
 ## Finished complete migration
 
