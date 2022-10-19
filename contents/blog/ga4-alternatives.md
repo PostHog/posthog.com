@@ -51,6 +51,8 @@ The following GA4 alternatives all solve one or more the above issues. Some prov
 
 ### PostHog
 
+![PostHog - best gdpr compliant analytics tools](../images/blog/gdpr-compliant-analytics/posthog-gdpr-compliant.png)
+
 - **Best for:** Mobile and desktop apps
 - **Tracking method:** Event-based
 - **GDPR compliance:** <span className="text-green text-lg">✔</span> (via self-hosting or EU Cloud)
@@ -135,8 +137,9 @@ As an open source product, you can see exactly what the team is working on via t
 
 [PostHog](https://posthog.com/) is an all-in-one platform for tracking user behavior in apps and websites. While it's a [powerful tool for marketing)(/blog/posthog-marketing) in the right hands, it's best deployed by product and engineering teams seeking deep insights into how users use their product.
 
-
 ### Matomo
+
+![Matomo - open source analytics tools](../images/blog/open-source-analytics-tools/matomo-screenshot.png)
 
 - **Best for:** Content, marketing and e-commerce websites
 - **Tracking method:** Session-based
@@ -310,6 +313,8 @@ TelemetryDECK is a good option for those who want basic app analytics, but it fa
 
 ### Plausible
 
+![Plausible Analytics - open source analytics tools](../images/blog/open-source-analytics-tools/plausible-screenshot.png)
+
 - **Best for:** Content and marketing websites
 - **Tracking method:** Session-based
 - **GDPR compliance:** <span className="text-green text-lg">✔</span>
@@ -481,6 +486,8 @@ Piwik PRO's main differentiators are enterprise level support and the integratio
 Unsurprisingly, Piwik PRO's roots in Matomo make it a popular choice for users who are familiar with Universal Analytics. It's less feature-rich than Matomo in some respects, but may be a better choice for larger organisations who require more support and scale.
 
 ### Fathom
+
+![Fathom - GDPR compliant analytics](../images/blog/gdpr-compliant-analytics/fathom.png)
 
 - **Best for:** Content and marketing websites
 - **Tracking method:** Session-based
