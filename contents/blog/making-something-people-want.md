@@ -44,7 +44,7 @@ Karl is, amongst other things, one of our engineers. What users were asking for 
 
 It was instantly popular.
 
-It taught us that consolidating multiple tools into the platform made us much more valuable to users. It taught us that we could pull that off. Those things meant that we could compete in cloud and wouldn't be reliant on self hosting for the whole business.
+It taught us that consolidating multiple tools into the platform made us much more valuable to users. It taught us that we could pull that off. We could now compete in cloud and wouldn't be reliant on self hosting for the whole business.
 
 Code won.
 
