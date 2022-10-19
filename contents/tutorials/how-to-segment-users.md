@@ -57,7 +57,7 @@ What if we want to see if there are countries around the world where users look 
 
 ### Step 1: Enable the GeoIP Enricher
 
-If you haven’t done so already, click 'Apps' and enable [the GeoIP Enricher app](/plugins/geoip) within your PostHog instance. This will automatically enrich events and persons with geographic data.
+If you haven’t done so already, click 'Apps' and enable [the GeoIP Enricher app](/apps/geoip-enrichment) within your PostHog instance. This will automatically enrich events and persons with geographic data.
 
 ![segmentation](../images/tutorials/segmentation/segment-posthog-3.png)
 

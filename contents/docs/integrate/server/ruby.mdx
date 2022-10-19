@@ -152,15 +152,15 @@ If you're using PostHog in the front-end and back-end, doing the `identify` call
 
 An `alias` call requires:
 
--   `previous distinct id`: the unique ID of the user from beforehand
--   `distinct id`: the current unique id
+-   `distinct_id` – the current unique id (logged in user id)
+-   `alias` – the _other_ distinct ID of the user, which will be aliased to the current one
 
 For example:
 
 ```ruby
 posthog.alias({
   distinct_id: "user:123",
-  alias: "user:12345",
+  alias: "session:12345",
 })
 ```
 

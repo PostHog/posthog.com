@@ -53,7 +53,7 @@ In 2026 we will _go public with $100M ARR._ To achieve this, PostHog will need t
 
 **The mechanics of success**
 
-We set [quarterly OKRs](objectives) to keep us on track.
+We set [quarterly OKRs](/handbook/strategy/objectives) to keep us on track.
 
 ### How should we prioritize between competing directions?
 

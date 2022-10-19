@@ -1,8 +1,10 @@
 import React from 'react'
 import { CallToAction } from '../CallToAction'
+import { Link } from 'gatsby'
 import { heading, section } from './classes'
 import Icon from './Icon'
 import Slider from './Slider'
+import { DemoLink } from 'components/DemoLink'
 
 export const FeatureStrip = ({ className = '' }) => {
     return (
@@ -51,12 +53,21 @@ export default function Hero() {
                     </h2>
 
                     <div className="flex flex-col md:flex-row justify-center items-center gap-2">
-                        <CallToAction type="primary" className="!w-full md:!w-40 shadow-xl" to="/signup">
+                        <CallToAction type="primary" className="!w-full md:!w-44 shadow-xl" to="/signup">
                             Get started
                         </CallToAction>
-                        <CallToAction type="secondary" className="!w-full md:!w-40 shadow-xl" to="/book-a-demo">
-                            Book a demo
+                        <CallToAction
+                            type="secondary"
+                            className="!w-full md:!w-44 shadow-xl"
+                            to="https://demo.posthog.com"
+                            externalNoIcon
+                        >
+                            Try the demo
                         </CallToAction>
+                    </div>
+
+                    <div className="mt-4 flex justify-center">
+                        <DemoLink />
                     </div>
                 </div>
                 <Slider />
