@@ -13,7 +13,7 @@ featuredImageType: full
 
 It's one thing to build _something_, it's another to build something that _people want_.
 
-Every principle here, that applied at 0 users, is still relevant today at ~50K developers in the community. In fact, you have to push harder to make this happen when you get bigger. 
+This principle, and the ones that follow in this post, applied at 0 users and are still relevant today at ~50K developers in our community. In fact, we have had to push harder to make them happen as we have gotten bigger. 
 
 ## We started with a problem we'd had
 
