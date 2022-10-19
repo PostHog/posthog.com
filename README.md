@@ -55,6 +55,10 @@ docker run -it --rm \
 1. `export POSTHOG_APP_API_KEY=key`
 1. `yarn start`
 
+## Want job listings or contributors to load?
+
+[See (private) instructions](https://github.com/PostHog/company-internal/blob/master/website-api-keys.md) for this.
+
 ## Questions?
 
 ### [Join our Slack community.](https://join.slack.com/t/posthogusers/shared_invite/zt-1ghutt7jr-jRj0_iYDRS7R~uKeZLIbdQ)
