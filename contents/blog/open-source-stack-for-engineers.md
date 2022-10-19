@@ -5,10 +5,10 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImage: ../images/blog/posthog-company-culture-blog.png
 featuredImageType: full
 author: ["joe-martin"]
-categories: ["Open Source", "Guides"]
+categories: ["Open source", "Guides"]
 ---
 
 At PostHog, we believe an open source approach doesn’t just lead to greater growth; it also leads to better products. That’s what inspired us to make our platform open source, to adopt [a transparent company culture](/careers), and also why we try to use open source software wherever we can in our stack. 
