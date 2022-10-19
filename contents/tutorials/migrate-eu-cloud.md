@@ -32,7 +32,7 @@ To start with EU Cloud, you can go to the [cloud signup page](https://app.postho
 
 ![EU Cloud signup](../images/tutorials/migrate-eu-cloud/signup.png)
 
-## Using the Replicator
+## Using the Replicator Plugin
 
 Once you’ve created your EU Cloud account, you can immediately start migrating data there. To do this, in your original PostHog instance (either Cloud or self-hosted), go to Apps and search for the [Replicator app](/apps/replicator). Install it and then configure it to point to your EU Cloud instance.
 
@@ -42,7 +42,7 @@ In the configuration menu, enter the host (`eu.posthog.com`) and project key fro
 
 ![Replicator config](../images/tutorials/migrate-eu-cloud/replicator-config.png)
 
-After clicking save and activating it (toggle on the left side), the Replicator will start to run. Any events added to your old instance will be replicated in your EU Cloud instance. It can take a little while(15-20 minutes) for the first events to show up.
+After clicking save and activating it (toggle on the left side), the Replicator will start to run. Any events added to your old instance will be replicated in your EU Cloud instance. It can take a little while (15-20 minutes) for the first events to show up.
 
 ## Finished complete migration
 
