@@ -7,7 +7,7 @@ showTitle: true
 hideAnchor: true
 categories: ["CEO diaries", "Inside PostHog"]
 author: ["james-hawkins"]
-featuredImage: ../images/blog/ceo-diary.png
+featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 ---
 
