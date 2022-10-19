@@ -86,7 +86,7 @@ All messages were totally customized to the person. Nothing automated. I was cle
 
 Within a couple of days I had a few teams who were up for trying it.
 
-We spent a further $2K on ads on Twitter to see if we could get a little self serve usage up and running - our main focus here was to (i) check nothing was broken, in case it went viral when we launched and (ii) get the repo to 100 stars. I'd stress we had a hard 4 week deadline we'd set ourselves, so we were spending money to avoid spending more time to let the above happen naturally. This step wasn't necessary, so please don't copy if you've no capital.
+We spent a further $2K on ads on Twitter to see if we could get a little self serve usage up and running - our main focus here was to (i) check nothing was broken, in case it went viral when we launched and (ii) get the repo to 100 stars. I'd stress we had a hard 4 week deadline we'd set ourselves, so we were spending money to avoid spending more time to let the above happen naturally. This step wasn't necessary, so please don't copy it if you have no capital.
 
 ### 2. Give user access to new feature
 
