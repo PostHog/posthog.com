@@ -78,7 +78,7 @@ This was the only time we had to do outreach at PostHog. Once we had product mar
 
 I knew we were targeting developers, so with that in mind "I need a developer to implement and hopefully give feedback on this". We had no focus on money yet.
 
-I went through (i) friends and family that sprung to mind (ii) literally my phonebook (iii) 1st connections on LinkedIn (iv) every developer I'd ever worked with via LinkedIn (v) every developer who'd worked at every place I'd ever worked.
+I went through (i) friends and family that sprung to mind (ii) my literal phonebook (iii) 1st connections on LinkedIn (iv) every developer I'd ever worked with via LinkedIn (v) every developer who'd worked at every place I'd ever worked.
 
 I decided WhatsApp / SMS > Email > LinkedIn, depending on if I had each person's contact details. With ideas that didn't work out, it was harder work to get people to try it!
 
