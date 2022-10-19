@@ -28,7 +28,7 @@ Every time we set up product analytics again, we got frustrated by the following
 * No access to underlying data (to debug)
 * Opaque pricing
 * Sending our data to a 3rd party (privacy, and adblockers causing us to lose 50% of our data)
-* We didn't want to have to set up the telemetry manually. We wanted to auto capture front end events.
+* Setting up the telemetry manually, which we didn't want to do. We wanted to auto capture front end events.
 
 So we solved the above with our [initial launch on Hacker News (HN)](https://news.ycombinator.com/item?id=22376732).
 
