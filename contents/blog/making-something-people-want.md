@@ -23,7 +23,7 @@ Every idea failed. However, a pattern emerged:
 
 Every time we pivoted, we had to set up product analytics again.
 
-Every time we set up product analytics again, we got frustrated. Here's the list:
+Every time we set up product analytics again, we got frustrated by the following:
 
 * We couldn't get to the underlying data, to debug
 * Opaque pricing
