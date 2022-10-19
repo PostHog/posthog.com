@@ -1,5 +1,5 @@
 ---
-date: 2022-10-18
+date: 2022-10-19
 title: "How to choose and measure growth loops"
 rootPage: /blog
 sidebar: Blog
@@ -17,9 +17,13 @@ Growth loops are an alternative way to thinking than [funnels](/blog/aarrr-pirat
 
 ## Why you should care about growth loops
 
-Growth loops are important because they compound. Ideally, the growth in your key metrics exponentially increases, while the average effort or investment decreases. For many companies, this key metric is users or revenue which helps create a successful company.
+Growth loops are important because they compound. Ideally, the growth in your key metrics exponentially increases, while the average effort or investment decreases. For many companies, this key metric is users or revenue which helps create a successful company. 
+
+Nearly every successful company utilizes growth loops in some way, consciously or not. For example, the newsletter platform Substack allows writers to easily share and monetize their work. As writers share their work (for their own benefit), it gets the attention of other writers, who see the benefit of the platform, join, and continue the loop.
 
 Growth loops can be a useful way of aligning multiple areas. For a growth loop to work, customer-facing teams must align with engineering and product teams. Each team benefits from the work the others are doing. 
+
+In our Substack example, the marketing and business development teams have to attract large writers (who often required upfront payments). The product and engineering teams then have to deliver a great writing and subscription experience. Without both, the growth loop doesn't work. When the company is aligned, however, it can cause exponential growth through compounding benefits. For Substack, that means bigger writers, better experiences, more readers, and ultimately, more revenue.
 
 ## Types of growth loops
 
@@ -68,7 +72,13 @@ After reading these, you likely have some idea of what growth loop is right for 
 
 Understanding your ideal user will help you decide where to put your effort for your growth loop. If your ideal user won’t pay for your product, it isn’t a good idea to use sales as your growth loop. You can create a growth loop that better aligns with what they want. Growth loops are about creating win-wins.
 
-A user needs a win-win to repeatedly take an action that fuels a product’s growth loop. They need an incentive. Smart companies build this incentive into the core of their product. For example, you gain followers by posting on social media, but that also keeps users engaged and attracts new users.
+For example, say you are LinkedIn. Your ideal user is a newly graduated business professional. They have less income, so they are less likely to pay for a subscription. Sales and performance marketing are less likely to work. 
+
+What you can do is create a connection between their network and content creation. They value their network a lot, and creating content is free. When a user creates and shares content, their network pays attention. With this attention, the user can engage with their network, and LinkedIn can sell ads. When other users see someone benefiting from this, they share content, and this cycle repeats. This is a content growth loop.
+
+A user needs a win-win to repeatedly take an action that fuels a product’s growth loop. They won't take an action they don't think they'll benefit from. They need an incentive, whether it is status, attention, or money. Smart companies build this incentive into the core of their product.
+
+For example, HubSpot builds a large number of free tools small-medium businesses benefit from, like "Website Grader" or "Email Signature Generator" as well as the free tier of their product. These freebies get a lot of attention which drives signups, some of which turn into customers. The growth in customers allows them to improve their overall product (including their free tools) and create a B2B viral growth loop. 
 
 The benefits your product and growth loop can provide are limitless. Finding new ways to provide this value is a great way.
 
@@ -80,13 +90,15 @@ Here are some examples of how you can measure each of the growth loops.
 
 ### Virality
 
-To measure virality, we want to know what drives users to share our product and the referral source of sign ups. To do this, we’ll want to measure our traffic and shareability. We want events for the loop of signing up, getting started, referring others, and repeating. More occurrences of each and better connections between them are good signs for our viral growth loop.
+To measure virality, we want to know what drives users to share our product and the referral source of signups. To do this, we’ll want to measure our traffic and shareability. We want events for the loop of signing up, getting started, referring others, and repeating. More occurrences of each and better connections between them are good signs for our viral growth loop.
 
 ### Performance marketing
 
 Performance marketing is about measuring marketing is leading to signups and revenue. We can do this by understanding customer cost of acquisition (CAC) and lifetime value (LTV). The margin between what it takes to acquire a user (CAC) and how much value we receive from them (LTV) drives the performance marketing growth loop (and the rest of the company).
 
 To get data about CAC and LTV, we’ll have to understand the sources of our traffic, conversion, and finally retention. This combined with our marketing spend and revenue enables us to calculate CAC and LTV (and grow our business and product).
+
+> **Calculating CAC and LTV**: CAC is sales and marketing spend divided by acquired customers. For example, $100 spent on Facebook ads led to 10 new customers, which would mean their CAC is $10. LTV is customer value times customer lifetime. For example, the average customer has a $20 per month subscription and stays subscribed for 5 months. The average customer LTV would be $100.
 
 ### Content
 
