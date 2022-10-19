@@ -128,23 +128,25 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }, plu
         }
         if (github_urls.length > 0) {
             node.githubPages = await Promise.all(
-                github_urls.map((url) => {
-                    const split = url.split('/')
-                    const type = split[5]
-                    const number = split[6]
-                    const org = split[3]
-                    const repo = split[4]
-                    const ghURL = `https://api.github.com/repos/${org}/${repo}/issues/${number}`
-                    return fetch(ghURL, {
-                        headers: {
-                            Authorization: `token ${process.env.GITHUB_API_KEY}`,
-                        },
-                    })
-                        .then((res) => {
-                            return res.json()
+                github_urls
+                    .filter((url) => url.includes('github.com'))
+                    .map((url) => {
+                        const split = url.split('/')
+                        const type = split[5]
+                        const number = split[6]
+                        const org = split[3]
+                        const repo = split[4]
+                        const ghURL = `https://api.github.com/repos/${org}/${repo}/issues/${number}`
+                        return fetch(ghURL, {
+                            headers: {
+                                Authorization: `token ${process.env.GITHUB_API_KEY}`,
+                            },
                         })
-                        .catch((err) => console.log(err))
-                })
+                            .then((res) => {
+                                return res.json()
+                            })
+                            .catch((err) => console.log(err))
+                    })
             )
         }
         createNode(node)
