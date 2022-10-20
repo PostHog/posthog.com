@@ -1,5 +1,5 @@
 ---
-date: 2022-10-18
+date: 2022-10-19
 title: "The best GA4 alternatives for apps and websites"
 rootPage: /blog
 sidebar: Blog
@@ -19,8 +19,8 @@ To further complicate matters, Google Analytics is [under fire from European reg
 
 In this guide we'll cover:
 
-- How GA4 and Universal Analytics differ
-- Why existing users are looking to switch
+- The differences between UA and GA4
+- Why existing users want to switch
 - The best GA4 alternatives for different use cases
 
 ## GA4 vs Universal Analytics... what's the difference?
