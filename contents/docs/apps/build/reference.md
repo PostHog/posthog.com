@@ -459,7 +459,28 @@ For more information on jobs, check out [this guide](/docs/apps/build/jobs).
 
 In order to ensure apps are stable and work as expected for all their users, we highly recommend writing tests for every app you build.
 
-For more information on how to setup testing, take a look at [this guide](/docs/app/build/testing).
+### Adding testing capabilities to your app
+You will need to add jest and our app testing scaffold to your project in your `package.json` file:
+```json
+"jest": {
+    "testEnvironment": "node"
+},
+"scripts": {
+    "test": "jest ."
+},
+"devDependencies": {
+    "@posthog/plugin-scaffold": "*",
+    "jest": "^27.0.4"
+}
+```
+
+Create your test files e.g. `index.test.js` or `index.test.ts` for testing your `index.js` or `index.ts` file
+
+### Writing tests
+
+Write tests in jest, you can learn more about the syntax and best practices in the [jest documentation](https://jestjs.io/docs/getting-started). We recommend writing tests to cover the primary functions of your app (e.g. does it create events in the expected format) and also for edge cases (e.g. does it crash if no data is sent).
+
+For more information on how to setup testing, take a look at [this guide](/docs/apps/build/testing).
 
 ## Logs
 

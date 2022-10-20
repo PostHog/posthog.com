@@ -46,7 +46,8 @@ Don’t log sensitive information. Make sure you never log:
 
 ### Testing
 * All new packages and most new significant functionality should come with unit tests
-* significant features should come with integration and/or end-to-end tests
+* Significant features should come with integration and/or end-to-end tests
+* Analytics-related queries should be covered by snapshot tests for ease of reviewing
 
 #### Unit tests
 A good unit test should:

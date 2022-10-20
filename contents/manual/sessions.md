@@ -2,6 +2,10 @@
 title: Sessions
 sidebar: Docs
 showTitle: true
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
 ---
 
 Session analysis helps you to understand product usage by uncovering the amount of time users spend on your product and how often they return.

@@ -14,7 +14,7 @@ export default function Subscribed() {
             <h6 className="mt-2 mb-3">
                 Be sure to check us out on <a href="https://github.com/PostHog/posthog">Github.com</a>
             </h6>
-            <p className="m-0 flex justify-center items-center text-white font-semibold h-[28px] w-[125px]">
+            <p className="m-0 flex justify-center items-center text-white font-semibold h-[28px] w-[105px]">
                 <GitHubButton
                     className="text-white hover:text-white"
                     href="https://github.com/posthog/posthog"
