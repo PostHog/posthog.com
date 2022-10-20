@@ -1,5 +1,5 @@
 ---
-title: Getting payment and revenue data from Stripe
+title: How to get Stripe payment and revenue data
 sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
@@ -31,7 +31,7 @@ In the Stripe Plugin configuration screen, paste the key into the “Your Stripe
 
 Once done, click Save and enable the app (click the toggle). Once you see “No results” or “Trying to save `number` new invoices…” in logs you’re ready to go.
 
-## Testing
+## Testing transactions
 
 If you have regular transactions, you can test to ensure the flow works with those. If you don’t, you can use data from test transactions. Just make sure your restricted key is for the right mode (test vs live).
 
