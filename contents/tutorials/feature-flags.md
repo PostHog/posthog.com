@@ -201,5 +201,6 @@ You don't need feature flags _per se_ to implement kill switches, but having the
 
 - [The best free and open-source feature toggle platforms](/blog/best-open-source-feature-flag-tools)
 - [How to run Experiments without feature flags](/tutorials/experiments)
+- [How to run Experiments on new users](/tutorials/new-user-experiments)
 
 <NewsletterTutorial compact/>
