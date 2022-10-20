@@ -15,7 +15,7 @@ Features tell, benefits sell. Well, they used to.
 
 Marketing lore tells you that you must focus on the _why_, not the what. "No one buys a CRM, they buy a way to increase their revenue" - that sort of thing.
 
-I'm sure this worked great when it was invented. But now, it feels tired and out-of-touch to end users. I think developers are especially sensitive to vague language when evaluating products.
+I'm sure this worked great when it was invented. But now, it feels tired and out-of-touch. Developers seem especially sensitive to vague language when evaluating products.
 
 It makes me feel like I'm being sold to, by someone who doesn't know what they're talking about.
 
