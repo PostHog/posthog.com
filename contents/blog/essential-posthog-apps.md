@@ -61,4 +61,4 @@ Exporting information from PostHog into your data warehouse (or data lake) is a 
 
 The BigQuery Export sends batches of events from PostHog every 30 seconds, automatically retrying any failed exports to ensure that your data warehouse is as up-to-date as possible.
 
-> 💡**PostHog Tip:** Don’t store data on BigQuery? We also have export apps for platforms such as [Amazon S3](/apps/s3-export), [Databricks](/apps/databricks), [Google Cloud Storage](/apps/google-cloud-export), [Redshift](/apps/redshift-export), [Snowflake](​​/apps/snowflake-export) and more!
+> 💡**PostHog Tip:** Don’t store data on BigQuery? We also have export apps for platforms such as [Amazon S3](/apps/s3-export), [Databricks](/apps/databricks), [Google Cloud Storage](/apps/google-cloud-export), [Redshift](/apps/redshift-export), [Snowflake](/apps/snowflake-export) and more!

@@ -27,7 +27,7 @@ Ultimately, PostHog can do almost everything that Google Analytics can do and mo
 
 ### 2. Simplify your stack (and get rid of Google Analytics)
 
-Reducing your stack can have a few overlooked benefits, including greater data consistency. No two analytics tools are the same and each can be impacted by adblockers differently – so if you’re using Google Analytics on your website and PostHog on your product then it can be tough to get comparable results. This is especially true if you’re self-hosting PostHog – which users such as Saga do in order to [gather up to 50% more data than other analytics tools](/customers/saga).
+Reducing your stack can have a few overlooked benefits, including greater data consistency. No two analytics tools are the same and each can be impacted by adblockers differently – so if you’re using Google Analytics on your website and PostHog on your product then it can be tough to get comparable results.
 
 Even if data consistency isn’t a concern, there are still plenty of reasons to consider moving away from Google Analytics. Recent GDPR rulings within the EU have bought [the legality of Google Analytics](https://isgoogleanalyticsillegal.com/) into question, for example, and prompted many organizations to look for a self-hosted alternative. 
 
@@ -39,7 +39,7 @@ Worried about GDPR but don’t want to self-host? We’ll be launching an EU-hos
 
 ![session recording on posthog](../images/blog/activation-checklist-images/session-recording-posthog.png)
 
-We’ve built PostHog to be an all-in-one product analytics platform that, unlike tools such as Amplitude or Mixpanel, doesn’t force you to use other tools to plug feature gaps. Using PostHog across your marketing site therefore enables you to benefit from these tools, including [session recording](/manual/recordings), [heatmaps](manual/toolbar) and [apps](/apps).
+We’ve built PostHog to be an all-in-one product analytics platform that, unlike tools such as Amplitude or Mixpanel, doesn’t force you to use other tools to plug feature gaps. Using PostHog across your marketing site therefore enables you to benefit from these tools, including [session recording](/manual/recordings), [heatmaps](/manual/toolbar) and [apps](/apps).
 
 Session recording in particular is useful on a marketing website, as it lets you filter by events to find actual recordings of users who complete certain actions. Want to literally watch how a successful lead differs from an unsuccessful one, or how users navigate your documentation? Now you can. 
 
