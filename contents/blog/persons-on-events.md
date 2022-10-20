@@ -26,10 +26,10 @@ You won’t see any UI changes — persons will still have their own Persons & G
 
 - **Self-hosting users will see a storage increase**. This is due to extra information being stored in your self-hosted ClickHouse. We expect users to see their storage requirement increase by approximately XX. 
 
-Self-hosting users will need to [update to the latest version of PostHog](/docs/runbook/upgrading-posthog), while the change will be automatically targeted for users on PostHog Cloud. 
+Self-hosting users will need to [update to the latest version of PostHog](/docs/runbook/upgrading-posthog), while the change will be automatically rolled out for users on PostHog Cloud. 
 
 While improving performance has been a major motivation for this change, this is also a crucial step in ensuring PostHog can continue to scale effectively. 
 
-Since launching in 2020, PostHog has been adopted by over 15,000 companies and has tracked over 50 billion events. In order to ensure that current and future users have the best possible experience, we need our systems to work as efficiently as possible. Moving persons on to events is a key to this, along with supporting work such as [using materialized columns in ClickHouse](/blog/clickhouse-materialized-columns) to speed up queries even further.
+Since launching in 2020, PostHog has been adopted by over 15,000 companies and has tracked over 50 billion events. In order to ensure that current and future users have the best possible experience, we need our systems to work as efficiently as possible. Moving persons on to events is an important part of this, along with supporting work such as [using materialized columns in ClickHouse](/blog/clickhouse-materialized-columns) to speed up queries even further.
 
 This said, even though the change is now being fully deployed, we’re still eager to hear [your feedback](https://www.g2.com/g2gives/girls-who-code-pillar-2022/and/posthog) and understand how we can keep making PostHog better. If you’d like more information about any of the changes above then we’re happy to [answer your questions](/questions).
