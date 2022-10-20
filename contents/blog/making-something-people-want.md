@@ -120,11 +120,13 @@ This _still_ applies. See our [community roadmap idea](https://github.com/PostHo
 Once we launched, we made it _very_ easy to give us feedback. Slack turned out to be the best channel because:
 
 * many users had it open all day at work - we saw 20x the response rate of email
+
 * there's a low bar to posting because people use it informally - people don't spend a lot of time to polish their communication on it. We wanted more communication, rather than less, especially in the early days
 
 There are some issues with using Slack like this:
 
 * It isn't ticketed (without looking for 3rd party apps) - this can be painful now we've several thousand people in there
+
 * Once you have lots of people in your group, you lose messages if you don't pay for their premium features (which are way too expensive for most free communities to use)
 
 (Later on, we built [Squeak!](https://github.com/posthog/squeak) to solve some of these)
