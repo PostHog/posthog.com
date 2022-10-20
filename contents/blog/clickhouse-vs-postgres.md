@@ -6,7 +6,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: ["mathew-pregasen"]
-featuredImage: ../images/blog/posthog-company-culture-blog.png
+featuredImage: ../images/blog/posthog-release-notes-blog.png
 featuredImageType: full
 categories: ["Engineering", "Guides"]
 ---
