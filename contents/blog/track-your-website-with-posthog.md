@@ -31,7 +31,7 @@ Reducing your stack can have a few overlooked benefits, including greater data c
 
 Even if data consistency isn’t a concern, there are still plenty of reasons to consider moving away from Google Analytics. Recent GDPR rulings within the EU have bought [the legality of Google Analytics](https://isgoogleanalyticsillegal.com/) into question, for example, and prompted many organizations to look for a self-hosted alternative. 
 
-Worried about GDPR but don’t want to self-host? We’ll be launching an EU-hosted version of PostHog Cloud soon, so be sure to [join the waitlist](/signup/eu-cloud)!
+Worried about GDPR but don’t want to self-host? We recently, we offer [PostHog Cloud EU](https://posthog.com/eu) where all your data (and the product itself) is hosted in the EU, making it the [perfect alternative to GA4](/blog/ga4-alternatives).  
 
 <GDPRForm />
 
