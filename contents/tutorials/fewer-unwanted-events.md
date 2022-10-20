@@ -1,0 +1,97 @@
+---
+title: How to capture fewer unwanted events
+sidebar: Docs
+showTitle: true
+author: ['ian-vanagas']
+date: 2022-10-20
+featuredImage: ../images/tutorials/banners/fewer-unwanted-events.png
+topics: ['configuration', 'apps']
+---
+
+**Estimated reading time:** 5 minutes ☕
+
+For some users, cost is a big concern. Too many events can cause unexpected costs when first trying a product analytics platform like PostHog. We want to make sure we are providing value to you as a customer, and if that means capturing fewer events, we’ll do it.
+
+For others, PostHog can overwhelm them with events. We try our best to not have this happen with filtering tools for [insights](/manual/insights), [internal users](/tutorials/filter-internal-users), and [privacy](/tutorials/property-filter). We recommend having as much data as possible, because you never know what you need, but if you are feeling overwhelmed, there are solutions.
+
+PostHog provides options to capture fewer events and limiting the number of unwanted ones. This can help lower costs and stress for new or overwhelmed users.
+
+## Configuring autocapture
+
+Autocapture enables you to get started capturing events on your site quickly, but this can lead to large numbers of events. 
+
+To counteract this, autocapture is configurable. For example, you can use the frontend JavaScript library without enabling autocapture. Just set `autocapture` to `false` when initializing the library (this still captures `pageview` and `pageleave`).
+
+```js
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_instance_address>',
+    autocapture: false,
+    // ... more options
+})
+```
+
+You can also disable `pageview` and `pageleave` with the `capture_pageview` option and session recordings with `disable_session_recording`. You can find all the configuration options for our [JavaScript library here](/docs/integrate/client/js#config).
+
+Disabling these options still allows you to use other PostHog features like `posthog.capture()` calls or feature flags. If limiting unwanted events is what is important for you, using disabling autocapture and using capture calls gives you more control over the events you are capturing. 
+
+## Using feature flags
+
+If you’re worried that a specific area of your product generating too many events, you can put those events behind feature flags. You can use feature flags instead of changing code to remove events or turn off autocapture. Here are two ways to do so.
+
+First, you can turn off autocapture with a feature flag when the PostHog library loads. Toggling off this feature flag can lower event flow within PostHog without changing the code.
+
+```js
+posthog.init(
+	'<ph_project_api_key>', 
+  { 
+    api_host: '<ph_instance_address>',
+    loaded: function (posthog) {
+      if (posthog.isFeatureEnabled('disable-autocapture')) {
+        posthog.config.autocapture = false;
+      }
+    }
+  }
+)
+```
+
+You can also put events in key areas behind feature flags and turn them off if you reach your limit.
+
+```js
+if (!posthog.isFeatureEnabled('disable-event-capture')) {
+	  posthog.capture('event');
+}
+```
+
+Feature flags work well as “kill switches” in situations where you want fewer events. You can collect events from a specific area and then turn the event capture off when you’ve got the data and insights you’re looking for.
+
+## Drop events based on property app
+
+PostHog has apps that enable you to modify the events flowing into your instance. We can use them to capture fewer events. 
+
+The first app is the “[Drop events based on property](https://github.com/PostHog/drop-events-on-property-plugin)” app. You can use it to drop events that match a specified property. This is useful for [privacy-focused](/tutorials/property-filter) teams or teams who want to capture fewer events. 
+
+To set up this app, search for “Drop Events Based On Property” in Apps, click the blue gear, add the key and value (optional) of the event you want to drop, click save, and activate the toggle. As an example, if I want to drop events related to a specific page, I can set the property key to `$pathname` and the property value to `/about`
+
+![Drop events based on property app](../images/tutorials/fewer-unwanted-events/drop-events.png)
+
+Doing this drops any events where the property `$pathname` is `/about`. This is useful if certain pages on your site create a lot of events, but aren’t useful to you. Other uses include dropping events from a specific OS, browser, device type, location, user (distinct ID), and more.
+
+## Downsampling app
+
+The second app you can use to capture fewer events is the [Downsampler](/docs/apps/downsampling) app. It reduces the number of events your instance will ingest by a percentage. 
+
+To configure it, search for the “Downsampling Plugin” in Apps, click the blue gear, pick a percentage of events you want to keep, and click the toggle to activate.
+
+![Downsampler app](../images/tutorials/fewer-unwanted-events/downsampler.png)
+
+The problem with downsampling (compared to the other methods covered) is that you have less control over event ingestion. The app drops a random selection of events and you must guess what percentage you need. A percentage of a large number can still be a large number, which might not solve your problem. On the other hand, you could also be downsampling when you don’t need to. Downsampling is an option, but we'd recommend trying the other first.
+
+## Further reading
+
+Hopefully, these options helped you get your event data ingestion and costs in control. From that, you can increase the amount you are capturing again. Here are some recommendations to help you out:
+
+- Not getting enough events? Check out our [event tracking guide](/tutorials/event-tracking-guide).
+- Trouble with pageview captures on your single page app? Check out our [tutorial on how to set it up](/tutorials/spa).
+- Want to avoid using cookies in your tracking? Follow our [cookieless tracking tutorial](/tutorials/cookieless-tracking).
+
+<NewsletterTutorial compact/>
