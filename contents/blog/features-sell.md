@@ -1,6 +1,6 @@
 ---
 date: 2022-10-20
-title: "Is this the death of benefits selling?"
+title: "Please don't sell me on your \"why\""
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -13,7 +13,7 @@ featuredImageType: full
 
 Features tell, benefits sell. Well, they used to.
 
-Marketing lore tells you that you must focus on the _why_, not the what. "No one buys a CRM, they buy a way to increase their revenue" - the sort of thing you hear at a TED Talk.
+Marketing lore tells you that you must focus on the _why_, not the what. "No one buys a CRM, they buy a way to increase their revenue". I disagree.
 
 I'm sure this worked great when it was invented. But now, it feels tired and out-of-touch. Developers seem especially sensitive to vague language when evaluating products.
 
