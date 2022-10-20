@@ -29,7 +29,7 @@ In simple terms, the core difference comes from how UA and GA4 track activity:
 
 **Universal Analytics** is a session-based analytics platform. It's designed for a time when desktop websites were the norm, and people didn't think much about what cookies were. It's good at tracking things like the number of sessions on a website, how many pageviews they generated, and where they came from.
 
-**Google Analytics 4** uses an event-based tracking system. It's  designed for tracking what people actually do, such as when they click a button, complete an action, or when when they fail to do so. It can still track things like pageviews and website referrers, but its event-based model is more flexible and powerful.
+**Google Analytics 4** uses an event-based tracking system. It's  designed for tracking what people actually do, such as when they click a button, complete an action, or when they fail to do so. It can still track things like pageviews and website referrers, but its event-based model is more flexible and powerful.
 
 ### So, why do people hate GA4?
 
@@ -37,17 +37,17 @@ If event-based tracking is so great, why do people hate GA4 so much?
 
 People tend to fall into one or more of the following camps:
 
-- **Users who miss pre-defined reports:** Google's changes go beyond the tracking model. It's also eliminated many of the pre-defined reports users relied on to do their jobs. Stuff is just harder to find in GA4, unnecessarily so. Some speculate popular reports will make a return one day, but there's no guarantee they will.
+1. **Users who miss pre-defined reports:** GA4 lacks many of the pre-defined reports users relied on to do their jobs. Stuff is just harder to find in GA4, unnecessarily so. Some speculate popular reports will make a return one day, but there's no guarantee they will.
 
-- **Users who lack data science support:** Universal Analytics is popular among small business users and marketing teams, but GA4 caters to large corporate users and app developers. GA4's greater emphasis on exporting data to Data Studio or BigQuery for analysis is hard for users who lack data science and analytics support.
+2. **Users who lack data science support:** Universal Analytics is popular among small business users and marketing teams, but GA4 caters to large corporate users and app developers. GA4's greater emphasis on exporting data to Data Studio or BigQuery for analysis is hard for users who lack data science and analytics support.
 
-- **App developers who need more features:**  While GA4 courts app developers, it still falls short of the [numerous alternatives](/blog/categories/comparisons) that lured customers away from Universal Analytics in the first place. To many, GA4 is too little, too late.
+3. **App developers who need more features:**  While GA4 courts app developers, it still falls short of the [numerous alternatives](/blog/categories/comparisons) that lured customers away from Universal Analytics in the first place. To many, GA4 is too little, too late.
 
-- **Users concerned about privacy compliance:** The collapse of the [EU-US privacy shield](/blog/gdpr-google-analytics-privacy-shield) makes using Google Analytics in Europe problematic. GA4 attempts to improve privacy, but not enough according to many data protection agencies. GA4 is also incompatible with the US health legislation, so can't be used in healthcare settings.
+4. **Users concerned about privacy compliance:** The collapse of the [EU-US privacy shield](/blog/gdpr-google-analytics-privacy-shield) makes using Google Analytics in Europe problematic. GA4 attempts to improve privacy, but not enough according to many data protection agencies. GA4 is also incompatible with US health legislation, so can't be used in healthcare settings.
 
 ## Alternatives to GA4
 
-The following GA4 alternatives all solve one or more the above issues. Some provide a similar experience to UA, while others focus on unimpeachable privacy, or greater insights. In each case, we've highlighted the strengths of each tool and the ideal use cases.  
+The following GA4 alternatives all solve one or more of these issues. Some provide a similar experience to UA, while others focus on unimpeachable privacy, or greater insights. In each case, we've highlighted the strengths of each tool and the ideal use cases.  
 
 ### PostHog
 
@@ -58,7 +58,7 @@ The following GA4 alternatives all solve one or more the above issues. Some prov
 - **GDPR compliance:** <span className="text-green text-lg">✔</span> (via self-hosting or EU Cloud)
 - **GA data import:** <span className="text-red text-lg">✖</span>
 
-PostHog is an [all-in-one suite](/product) of product and data tools that includes product analytics, session recording and A/B testing – pretty much everything you need to track user behavior in an app or website, basically. Like GA4, PostHog is an event-based platform – it's priced on per event used, though it offers a generous 1 million events for free each month.
+PostHog is an [all-in-one suite](/product) of product and data tools that includes product analytics, session recording and A/B testing – pretty much everything you need to track user behavior in an app or website, basically. Like GA4, PostHog is an event-based platform. It's priced on per event used, though it offers a generous [1 million events for free](/pricing) each month, so most smaller users can use it for free.
 
 As an open source product, you can see exactly what the team is working on via the [PostHog repo on GitHub](https://github.com/PostHog/posthog). This open source approach also affords a wide degree of flexibility. PostHog can be [self-hosted on your infrastructure](/docs/self-host), which is ideal for keeping control of data and compliance with privacy regulations. PostHog Cloud is available for those who want a managed SaaS experience, and there's an [EU hosting option](/eu) if you need to keep data in the EU for GDPR compliance. 
 
@@ -135,7 +135,7 @@ As an open source product, you can see exactly what the team is working on via t
 
 #### Verdict
 
-[PostHog](https://posthog.com/) is an all-in-one platform for tracking user behavior in apps and websites. While it's a [powerful tool for marketing)(/blog/posthog-marketing) in the right hands, it's best deployed by product and engineering teams seeking deep insights into how users use their product.
+[PostHog](https://posthog.com/) is an all-in-one platform for tracking user behavior in apps and websites. While it's a [powerful tool for marketing](/blog/posthog-marketing) in the right hands, it's best deployed by product and engineering teams seeking deep insights into how users use their product. Integrated session recording, A/B testing and feature flag products mean it can also replace several other products in a company's tech stack.
 
 ### Matomo
 
@@ -324,7 +324,7 @@ TelemetryDECK is a good option for those who want basic app analytics, but it fa
 
 [Plausible](https://plausible.io/) is a leader in the trend of lightweight, privacy-orientated analytics tools. It's easy to use and doesn't collect any personally identifiable information. This makes it ideal for complying with GDPR, but this comes at the cost of functionality. 
 
-Plausible, and others like it, are only able to track very basic website metrics like pageviews, session duration, and referrer information. This makes it useless for apps, and significantly less powerful than Google Analytics and other alternatives in this list.
+Plausible, and others like it, can only track very basic website metrics like pageviews, session duration, and referrer information. This makes it useless for apps, and significantly less powerful than Google Analytics and other alternatives in this list.
 
 #### Plausible vs Google Analytics 4
 
@@ -399,7 +399,7 @@ Plausible, and others like it, are only able to track very basic website metrics
 
 #### Verdict
 
-While it lacks many of the advanced features of GA4, Plausible is a good option for content and marketing teams who just want easy to use, basic analytics functionality.
+While it lacks many of the advanced features of GA4, Plausible is a good option for content and marketing teams who just want easy to use, basic website analytics.
 
 ### Piwik PRO
 
