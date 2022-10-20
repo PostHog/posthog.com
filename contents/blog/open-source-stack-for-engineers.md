@@ -1,5 +1,5 @@
 ---
-date: 2022-10-19
+date: 2022-10-20
 title: Modern Data Stack 101: The open source alternatives
 rootPage: /blog
 sidebar: Blog
