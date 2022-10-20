@@ -24,9 +24,9 @@ To counteract this, autocapture is configurable. For example, you can use the fr
 
 ```js
 posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_instance_address>',
-    autocapture: false,
-    // ... more options
+  api_host: '<ph_instance_address>',
+  autocapture: false,
+  // ... more options
 })
 ```
 
@@ -42,7 +42,7 @@ First, you can turn off autocapture with a feature flag when the PostHog library
 
 ```js
 posthog.init(
-	'<ph_project_api_key>', 
+  '<ph_project_api_key>',
   { 
     api_host: '<ph_instance_address>',
     loaded: function (posthog) {
@@ -58,7 +58,7 @@ You can also put events in key areas behind feature flags and turn them off if y
 
 ```js
 if (!posthog.isFeatureEnabled('disable-event-capture')) {
-	  posthog.capture('event');
+	posthog.capture('event');
 }
 ```
 
