@@ -85,7 +85,7 @@ I went through (i) friends and family that sprung to mind (ii) my literal phoneb
 
 I decided WhatsApp / SMS > Email > LinkedIn, depending on if I had each person's contact details. With ideas that didn't work out, it was harder work to get people to try it!
 
-All messages were totally customized to the person. Nothing automated. I was clear I was just hoping that we could get them as an early, free user - because we were preparing the product for a big launch.
+All messages were totally customized to the person. Nothing automated. I was clear I was just hoping that we could get them as an early, free user – because we were preparing the product for a big launch.
 
 Within a couple of days I had a few teams who were up for trying it.
 
@@ -121,7 +121,7 @@ Once we launched, we made it _very_ easy to give us feedback. Slack turned out t
 
 * many users had it open all day at work - we saw 20x the response rate of email
 
-* there's a low bar to posting because people use it informally - people don't spend a lot of time to polish their communication on it. We wanted more communication, rather than less, especially in the early days
+* there's a low bar to posting because people use it informally – people don't spend a lot of time to polish their communication on it. We wanted more communication, rather than less, especially in the early days
 
 There are some issues with using Slack like this:
 
@@ -131,7 +131,7 @@ There are some issues with using Slack like this:
 
 (Later on, we built [Squeak!](https://github.com/posthog/squeak) to solve some of these)
 
-## Enter the Ideal Customer Profile (ICP) - focus on specific types of user
+## Enter the Ideal Customer Profile (ICP) – focus on specific types of user
 
 We spent the first 18 months focused on the open source project. We made a mistake though – we didn't get specific about who we were building for. We'd have said "developers are all the same, aren't they?" We were blind to our need of a Ideal Customer Profile (ICP).
 
