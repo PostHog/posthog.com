@@ -508,7 +508,7 @@ Unsurprisingly, Piwik PRO's roots in Matomo make it a popular choice for users w
     	<tr>
         	<td className="w-3/12"></td>
         	<td className="w-3/12 text-center"><strong>Google Analytics 4</strong></td>
-        	<td className="w-3/12 text-center"><strong>Plausible</strong></td>
+        	<td className="w-3/12 text-center"><strong>Fathom</strong></td>
     	</tr>
 	</thead>
 	<tbody>
