@@ -13,10 +13,7 @@ export const OpenRoles = () => {
                         <p>We take exceptional people when they come along - and we really mean that!</p>
                         <p>
                             <strong>Don’t see a specific role listed?</strong> That doesn't mean we won't have a spot
-                            for you.{' '}
-                            <a href="/careers/speculative-application">
-                                Send us a speculative application!
-                            </a>
+                            for you. <a href="/careers/speculative-application">Send us a speculative application!</a>
                             <a href=""></a>
                         </p>
                         <p className="mt-2">
