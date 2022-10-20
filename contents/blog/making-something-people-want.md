@@ -1,11 +1,11 @@
 ---
-date: 2022-10-18
+date: 2022-10-20
 title: How we made something people want
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["CEO diaries", "Inside PostHog"]
+categories: ["CEO diaries", "Inside PostHog", "Startups"]
 author: ["james-hawkins"]
 featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
@@ -26,8 +26,11 @@ Every time we pivoted, we had to set up product analytics again.
 Every time we set up product analytics again, we got frustrated by the following:
 
 * No access to underlying data (to debug)
+
 * Opaque pricing
+
 * Sending our data to a 3rd party (privacy, and adblockers causing us to lose 50% of our data)
+
 * Setting up the telemetry manually, which we didn't want to do. We wanted to auto capture front end events.
 
 So we solved the above with our [initial launch on Hacker News (HN)](https://news.ycombinator.com/item?id=22376732).
@@ -52,9 +55,9 @@ Code won.
 
 The most perfect pre-product-market-fit startup, is a machine that repeatedly (i) learns (ii) ships (iii) goes back to step (i).
 
-If you ship something, and learn that it's not popular (which will happen _most_ of the time), then you have a decision - do I _iterate_ this thing, or do I _start over_?
+If you ship something, and learn that it's not popular (which will happen _most_ of the time), then you have a decision – do I _iterate_ this thing, or do I _start over_?
 
-Startup lore is that most people will bias heavily towards iteration when they should just start over. Dalton, one our partners at YC, [has a great talk on this topic](https://www.ycombinator.com/library/6p-all-about-pivoting). It's understandable - you don't want to lose face by changing ideas.
+Startup lore is that most people will bias heavily towards iteration when they should just start over. Dalton, one our partners at YC, [has a great talk on this topic](https://www.ycombinator.com/library/6p-all-about-pivoting). It's understandable – you don't want to lose face by changing ideas.
 
 Having an ego is expensive. For us, it was better value to throw the majority of our ideas away.
 
@@ -82,11 +85,11 @@ I went through (i) friends and family that sprung to mind (ii) my literal phoneb
 
 I decided WhatsApp / SMS > Email > LinkedIn, depending on if I had each person's contact details. With ideas that didn't work out, it was harder work to get people to try it!
 
-All messages were totally customized to the person. Nothing automated. I was clear I was just hoping that we could get them as an early, free user - because we were preparing the product for a big launch.
+All messages were totally customized to the person. Nothing automated. I was clear I was just hoping that we could get them as an early, free user – because we were preparing the product for a big launch.
 
 Within a couple of days I had a few teams who were up for trying it.
 
-We spent a further $2K on ads on Twitter to see if we could get a little self serve usage up and running - our main focus here was to (i) check nothing was broken, in case it went viral when we launched and (ii) get the repo to 100 stars. I'd stress we had a hard 4 week deadline we'd set ourselves, so we were spending money to avoid spending more time to let the above happen naturally. This step wasn't necessary, so please don't copy it if you have no capital.
+We spent a further $2K on ads on Twitter to see if we could get a little self serve usage up and running – our main focus here was to (i) check nothing was broken, in case it went viral when we launched and (ii) get the repo to 100 stars. I'd stress we had a hard 4 week deadline we'd set ourselves, so we were spending money to avoid spending more time to let the above happen naturally. This step wasn't necessary, so please don't copy it if you have no capital.
 
 ### 2. Give user access to new feature
 
@@ -110,25 +113,27 @@ For every new feature, we aimed to get a few early adopter users on it, and thro
 
 It is _much _ better to ship like this, rather than shipping in isolation. With this approach, what you build will be much more likely to work, and you'll gain a far deeper understanding of your customers too.
 
-This _still_ applies. See our [community roadmap idea](https://github.com/PostHog/posthog.com/issues/4453) - we're looking to go further with this.
+This _still_ applies. See our [community roadmap idea](https://github.com/PostHog/posthog.com/issues/4453) – we're looking to go further with this.
 
 ## How to engage with users
 
 Once we launched, we made it _very_ easy to give us feedback. Slack turned out to be the best channel because:
 
 * many users had it open all day at work - we saw 20x the response rate of email
-* there's a low bar to posting because people use it informally - people don't spend a lot of time to polish their communication on it. We wanted more communication, rather than less, especially in the early days
+
+* there's a low bar to posting because people use it informally – people don't spend a lot of time to polish their communication on it. We wanted more communication, rather than less, especially in the early days
 
 There are some issues with using Slack like this:
 
 * It isn't ticketed (without looking for 3rd party apps) - this can be painful now we've several thousand people in there
+
 * Once you have lots of people in your group, you lose messages if you don't pay for their premium features (which are way too expensive for most free communities to use)
 
 (Later on, we built [Squeak!](https://github.com/posthog/squeak) to solve some of these)
 
-## Enter the Ideal Customer Profile (ICP) - focus on specific types of user
+## Enter the Ideal Customer Profile (ICP) – focus on specific types of user
 
-We spent the first 18 months focused on the open source project. We made a mistake though - we didn't get specific about who we were building for. We'd have said "developers are all the same, aren't they?" We were blind to our need of a Ideal Customer Profile (ICP).
+We spent the first 18 months focused on the open source project. We made a mistake though – we didn't get specific about who we were building for. We'd have said "developers are all the same, aren't they?" We were blind to our need of a Ideal Customer Profile (ICP).
 
 Bluntly, defining an ICP felt bureaucratic and like something a Fortune 500 would do. I put it in my mental bucket of things I don't care about, alongside words such as "synergy", "resources" and "alignment".
 
@@ -142,7 +147,7 @@ Broadly, create a very, *very* specific list of characteristics and behaviors of
 
 ## Listen to users
 
-You may feel cleverer than users - you built the thing, right?
+You may feel cleverer than users – you built the thing, right?
 
 Wrong! You need them, not the other way around. 
 
