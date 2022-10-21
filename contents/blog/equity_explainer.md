@@ -11,8 +11,6 @@ featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 ---
 
-# A complete and simple guide to options at PostHog
-
 Suppose you’ve ever worked for a start-up, or read news about a Unicorn tech company turning people into multi-millionaires overnight. In that case, chances are you have heard of the concept of equity.
 
 Equity is the amount of ownership of a corporation held by a person or entity. This ownership is usually described as either a percentage of the total equity of the business or at later stages, a finite number of shares. The majority of tech start-ups offer equity as part of their total compensation, normally in the form of share “options”. The upside potential of these options is meant to compensate for the more gruelling (and in my opinion, rewarding) work of growing a start-up company from founding to IPO (more on that later).
