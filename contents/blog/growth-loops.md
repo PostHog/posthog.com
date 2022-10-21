@@ -81,13 +81,13 @@ Understanding your ideal user will help you decide where to put your effort for 
 
 For example, say you are LinkedIn. Your ideal user is a newly graduated business professional. They have less income, so they are less likely to pay for a subscription. Sales and performance marketing are less likely to work. 
 
-What you can do is create a connection between their network and content creation. They value their network a lot, and creating content is free. When a user creates and shares content, their network pays attention. With this attention, the user can engage with their network, and LinkedIn can sell ads. When other users see someone benefiting from this, they share content, and this cycle repeats. This is a content growth loop.
+What you can do is create a connection between their network and content creation. They value their network a lot, and creating content is free. When a user creates and shares content, their network pays attention. With this attention, the user engages with their network, and LinkedIn sells ads. When other users see the benefits of this, they share content, and this cycle repeats. This is a content growth loop.
 
 A user needs a win-win to repeatedly take an action that fuels a product’s growth loop. They won't take an action they don't think they'll benefit from. They need an incentive, whether it is status, attention, or money. Smart companies build this incentive into the core of their product.
 
 For example, HubSpot builds a large number of free tools small-medium businesses benefit from, like "Website Grader" or "Email Signature Generator" as well as the free tier of their product. These freebies get a lot of attention which drives signups, some of which turn into customers. The growth in customers allows them to improve their overall product (including their free tools) and create a B2B viral growth loop. 
 
-The benefits your product and growth loop can provide are limitless. Finding new ways to provide this value is a great way.
+There are many creative ways to provide users incentives to be a part of your growth loop. Optimizing existing win-wins with users, as well as finding new ones, fuels the growth loops that help products succeed.
 
 ## Measuring your growth loop
 
