@@ -434,7 +434,7 @@ Piwik PRO's main differentiators are enterprise level support and the integratio
 		<tr>
         	<td>Funnels</td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-gren text-lg">✔</span></td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
     	<tr>
         	<td>User Paths</td>
