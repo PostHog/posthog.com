@@ -1,3 +1,9 @@
+---
+title: Andy Vandervell's README
+sidebar: Handbook
+showTitle: true
+---
+
 ## Areas of responsibility
 
 - Writing, editing, and commissioning marketing content
