@@ -24,14 +24,14 @@ export const BlogCategories: CategoryInterface[] = [
         link: '/blog/categories/product-updates',
     },
     {
-        title: 'Engineering',
-        slug: 'engineering',
-        link: '/blog/categories/engineering',
+        title: 'Guides',
+        slug: 'guides',
+        link: '/blog/categories/guides',
     },
     {
-        title: 'Product analytics',
-        slug: 'product-analytics',
-        link: '/blog/categories/product-analytics',
+        title: 'Startups',
+        slug: 'startups',
+        link: '/blog/categories/startups',
     },
     {
         title: 'Open source',
