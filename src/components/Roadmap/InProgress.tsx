@@ -12,7 +12,7 @@ export function InProgress(props: IRoadmap) {
     const [showAuth, setShowAuth] = useState(false)
     const [subscribed, setSubscribed] = useState(false)
     const [loading, setLoading] = useState(false)
-    const { title, githubPages, description } = props
+    const { title, githubPages, description, beta_available } = props
     const completedIssues = githubPages && githubPages?.filter((page) => page.closed_at)
     const percentageComplete = githubPages && Math.round((completedIssues.length / githubPages?.length) * 100)
 
@@ -44,7 +44,7 @@ export function InProgress(props: IRoadmap) {
             <p className="m-0 text-[15px] text-black/80 inline">
                 {more ? description : description.substring(0, 130) + (description?.length > 130 ? '...' : '')}
             </p>
-            {!more && (description || githubPages?.length > 0) && (
+            {!more && (description?.length > 130 || githubPages?.length > 0) && (
                 <button onClick={() => setMore(true)} className="font-semibold text-red inline ml-1">
                     more
                 </button>
@@ -81,7 +81,9 @@ export function InProgress(props: IRoadmap) {
                                 <Plus className="w-[14px] h-[14px]" />
                             )}
                         </span>
-                        <span>{subscribed ? 'Subscribed!' : 'Get early access'}</span>
+                        <span>
+                            {subscribed ? 'Subscribed!' : beta_available ? 'Get early access' : 'Subscribe for updates'}
+                        </span>
                     </button>
                 )}
             </div>

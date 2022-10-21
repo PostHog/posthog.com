@@ -1,3 +1,4 @@
+import { CallToAction } from 'components/CallToAction'
 import { graphql, useStaticQuery } from 'gatsby'
 import groupBy from 'lodash.groupby'
 import React from 'react'
@@ -140,6 +141,11 @@ export default function Timeline() {
                         </div>
                     )
                 })}
+            </div>
+            <div className="text-center mt-8 md:mt-12">
+                <CallToAction type="outline" to="/roadmap">
+                    Explore our roadmap
+                </CallToAction>
             </div>
         </section>
     )
