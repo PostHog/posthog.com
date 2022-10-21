@@ -35,7 +35,7 @@ const Block = ({
 const Handbook = ({ menu }: { menu: HandbookNav[] }) => {
     return (
         <div className="md:py-7 py-6 border-t md:border-b-0 border-b md:mb-0 mb-4 border-gray-accent-light border-dashed">
-            <div className="max-w-2xl mx-auto xl:max-w-auto md:px-6">
+            <div className="max-w-3xl mx-auto xl:max-w-auto md:px-6">
                 <div className="flex items-center w-full justify-between opacity-70">
                     <h3 className="text-[18px] font-bold m-0 text-black ">Handbook</h3>
                     <SearchBar label={false} className="flex-grow-0 !p-0 w-auto dark:text-white" base={'handbook'} />
@@ -46,7 +46,7 @@ const Handbook = ({ menu }: { menu: HandbookNav[] }) => {
                 <ol className="list-none m-0 p-0 md:grid grid-rows-6 grid-cols-2 grid-flow-col mt-5">
                     {menu.map(({ title, url }: HandbookNav, index) => {
                         return (
-                            <li key={title}>
+                            <li key={title} className="first:hidden">
                                 <Link
                                     className="rounded px-2 py-2.5 h-full hover:bg-tan/50 flex items-center space-x-2 relative active:top-[1px] active:scale-[.99]"
                                     to={url}

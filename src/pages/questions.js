@@ -122,8 +122,6 @@ const Search = () => {
                         <Form
                             onSubmit={handleSqueakSubmit}
                             apiHost="https://squeak.cloud"
-                            apiKey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB4aXBrcXV2d3FhYXVudXpqb2dlIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NDk3MjE3ODUsImV4cCI6MTk2NTI5Nzc4NX0.SxdOpxHjVwap7sDUptK2TFJl7WK3v3HLuKbzb0JKeKg"
-                            url="https://pxipkquvwqaaunuzjoge.supabase.co"
                             organizationId="a898bcf2-c5b9-4039-82a0-a00220a8c626"
                         />
                     )}
@@ -235,7 +233,7 @@ export default function FAQ() {
                             <TopLink
                                 title="Partners"
                                 description="Hosting & support"
-                                link="/marketplace"
+                                link="/partners"
                                 icon="partners"
                             />
                             <TopLink title="FAQ" description=" " link="/faq" icon="faq2" />
@@ -282,7 +280,7 @@ export default function FAQ() {
                         />
                     </ol>
                     <a
-                        href="/docs/user-guides"
+                        href="/using-posthog"
                         className="border border-t-0 border-dashed border-gray p-3 text-lg font-semibold flex justify-center hover:bg-gray-accent/20 dark:hover:bg-gray-accent-dark"
                     >
                         View all (23)
@@ -297,6 +295,7 @@ export default function FAQ() {
                         onSubmit={(_values, formType) =>
                             formType === 'question' && scroller.scrollTo('squeak-top', { smooth: true })
                         }
+                        limit={20}
                         slug={null}
                         apiHost="https://squeak.cloud"
                         organizationId="a898bcf2-c5b9-4039-82a0-a00220a8c626"

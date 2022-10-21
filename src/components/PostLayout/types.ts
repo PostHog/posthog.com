@@ -70,4 +70,5 @@ export interface IProps {
     contentContainerClassName?: string
     menuType?: 'scroll' | 'standard'
     menuWidth?: number
+    searchFilter?: string
 }
