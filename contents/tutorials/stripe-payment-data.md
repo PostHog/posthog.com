@@ -1,9 +1,9 @@
 ---
-title: How to get Stripe payment and revenue data
+title: How to get Stripe payment and revenue data into PostHog
 sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
-date: 2022-10-19
+date: 2022-10-21
 featuredImage: ../images/tutorials/banners/stripe-payment-data.png
 topics: ['trends', 'apps']
 ---
@@ -25,11 +25,11 @@ Configure it by clicking the blue gear, but first, we’ll need a Stripe restric
 
 To create a restricted key, you’ll need to go into the [API keys section](https://dashboard.stripe.com/apikeys) of your Stripe developer dashboard. In “[Create restricted API key](https://dashboard.stripe.com/apikeys/create),” give it a name (like “PostHog app”) and add **read** access permissions for Customers, Products, Invoices, Subscriptions, and Usage Records. Once selected, scroll to the bottom and click “Create key.” Back on your dashboard, copy the key, and head to PostHog.
 
-In the Stripe Plugin configuration screen, paste the key into the “Your Stripe API key” field. Optionally, you can set the group type to whatever you currently use, organization is a good default if you don’t have one. Set the group type index to match the group type you choose. This is found in the API at `/api/groups_types/` or if `organization` is your first group, the group type will be `0`. Finally, choose if you want to send events even if a user isn’t found in PostHog. For maximum payment data, select `Yes`.
+In the Stripe Plugin configuration screen, paste the key into the “Your Stripe API key” field. Optionally, you can set the group type to whatever you currently use – organization is a good default if you don’t have one. Set the group type index to match the group type you choose. This is found in the API at `/api/groups_types/` or if `organization` is your first group, the group type will be `0`. Finally, choose if you want to send events even if a user isn’t found in PostHog. For maximum payment data, select `Yes`.
 
 ![Stripe app config](../images/tutorials/stripe-payment-data/stripe-config.png)
 
-Once done, click Save and enable the app (click the toggle). Once you see “No results” or “Trying to save `number` new invoices…” in logs you’re ready to go.
+Once done, click Save and enable the app (click the toggle). Once you see “No results” or “Trying to save `number` new invoices...” in logs you’re ready to go.
 
 ## Testing transactions
 
