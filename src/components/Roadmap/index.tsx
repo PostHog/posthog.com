@@ -115,6 +115,7 @@ export default function Roadmap() {
                             menu={[
                                 { name: 'Questions', url: '/questions' },
                                 { name: 'Roadmap', url: '/roadmap' },
+                                { name: 'Changelog', url: '/roadmap/changelog' },
                                 { name: 'Contributors', url: '/contributors' },
                                 { name: 'Core team', url: '/handbook/company/team' },
                             ]}
