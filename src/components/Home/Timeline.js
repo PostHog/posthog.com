@@ -2,44 +2,48 @@ import { graphql, useStaticQuery } from 'gatsby'
 import groupBy from 'lodash.groupby'
 import React from 'react'
 
-// Until this gets refactored...
-//
-// Month: Only set for first result that month (so we don't repeat )
-// Types: feature   | something new in the product
-//        news      | company announcements
-//        milestone | github star count, fundraising round, hosted event, etc
-// Name: Short description
-//
-// - Leave (at least) one entry for each month
-// - For multiple events in a month, leave off the month after the first result (so it doesn't look like multiple months) - until someone build this correctly =]
-//
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+const categories = {
+    'Major new feature': 'feature',
+    'Company news': 'news',
+    'Something cool happened': 'milestone',
+}
 
 export default function Timeline() {
     const {
-        allTimelineJson: { nodes },
+        allSqueakRoadmap: { nodes },
     } = useStaticQuery(graphql`
         query {
-            allTimelineJson {
+            allSqueakRoadmap(filter: { milestone: { eq: true } }, sort: { fields: date_completed }) {
                 nodes {
-                    date: date
-                    year: date(formatString: "YYYY")
-                    month: date(formatString: "MMM")
-                    quarter: date(formatString: "Q")
-                    future
-                    description
-                    type
+                    date_completed(formatString: "YYYY-MM-DD")
+                    title
+                    projected_completion_date(formatString: "YYYY-MM-DD")
+                    category
                 }
             }
         }
     `)
 
     const pastEvents = groupBy(
-        nodes.filter((node) => !node.future),
-        ({ year }) => year
+        nodes.filter((node) => {
+            const date = node.date_completed || node.projected_completion_date
+            return date && new Date(date) < new Date()
+        }),
+        (node) => {
+            const date = new Date(node.date_completed || node.projected_completion_date)
+            return date.getUTCFullYear()
+        }
     )
     const futureEvents = groupBy(
-        nodes.filter((node) => node.future),
-        ({ year }) => year
+        nodes.filter((node) => {
+            const date = node.date_completed || node.projected_completion_date
+            return date && new Date(date) > new Date()
+        }),
+        (node) => {
+            const date = new Date(node.date_completed || node.projected_completion_date)
+            return date.getUTCFullYear()
+        }
     )
 
     return (
@@ -68,8 +72,14 @@ export default function Timeline() {
 
             <div className="max-w-screen-2xl mx-auto mdlg:grid grid-cols-3 gap-8 space-2 lg:space-4">
                 {Object.keys(pastEvents).map((year) => {
-                    const pastMonths = groupBy(pastEvents[year], (event) => event.month)
-                    const futureQuarters = groupBy(futureEvents[year], (event) => event.quarter)
+                    const pastMonths = groupBy(pastEvents[year], (node) => {
+                        const date = new Date(node.date_completed || node.projected_completion_date)
+                        return months[date.getUTCMonth()]
+                    })
+                    const futureQuarters = groupBy(futureEvents[year], (node) => {
+                        const date = node.date_completed || node.projected_completion_date
+                        return Math.floor(new Date(date).getUTCMonth() / 3 + 1)
+                    })
                     return (
                         <div key={year} className="w-full max-w-md mx-auto lg:max-w-auto mb-4 lg:mb-0">
                             <h4 className="text-lg font-bold text-center">{year}</h4>
@@ -85,14 +95,14 @@ export default function Timeline() {
                                                     {month}
                                                 </p>
                                                 <ul className="list-none m-0 p-0">
-                                                    {pastMonths[month].map(({ description, type }) => {
+                                                    {pastMonths[month].map(({ title, category }) => {
                                                         return (
                                                             <li
-                                                                key={description}
+                                                                key={title}
                                                                 className="flex-auto relative text-[14px] text-left pl-4 content-none before:inline-block before:absolute before:w-[10px] before:h-[10px] before:left-0 before:top-[5px] before:rounded-full before:mr-2 mt-1 first:mt-0"
-                                                                data-type={type}
+                                                                data-type={categories[category]}
                                                             >
-                                                                {description}
+                                                                {title}
                                                             </li>
                                                         )
                                                     })}
@@ -110,14 +120,14 @@ export default function Timeline() {
                                                     Q{quarter}
                                                 </p>
                                                 <ul className="list-none m-0 p-0">
-                                                    {futureQuarters[quarter].map(({ description, type }) => {
+                                                    {futureQuarters[quarter].map(({ title, category }) => {
                                                         return (
                                                             <li
-                                                                key={description}
+                                                                key={title}
                                                                 className="flex-auto relative text-[14px] text-left pl-4 text-gray content-none before:inline-block before:absolute before:w-[10px] before:h-[10px] before:left-0 before:top-[5px] before:rounded-full before:mr-2 mt-1 first:mt-0"
-                                                                data-type={type}
+                                                                data-type={categories[category]}
                                                             >
-                                                                {description}
+                                                                {title}
                                                             </li>
                                                         )
                                                     })}

@@ -35,13 +35,10 @@ export interface IRoadmap {
     projected_completion_date: string
 }
 
-const Complete = (props: { title: string; githubPages: IGitHubPage[] }) => {
-    const { title, githubPages } = props
-    return (
-        <li className="text-base font-semibold">
-            {githubPages?.length > 0 ? <Link to={githubPages[0]?.html_url}>{title}</Link> : title}
-        </li>
-    )
+const Complete = (props: { title: string; githubPages: IGitHubPage[]; otherLinks: string[] }) => {
+    const { title, githubPages, otherLinks } = props
+    const url = (githubPages?.length > 0 && githubPages[0]?.html_url) || (otherLinks?.length > 0 && otherLinks[0])
+    return <li className="text-base font-semibold">{url ? <Link to={url}>{title}</Link> : title}</li>
 }
 
 const Section = ({
@@ -206,6 +203,7 @@ const query = graphql`
                 team {
                     name
                 }
+                otherLinks
                 githubPages {
                     title
                     html_url

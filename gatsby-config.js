@@ -119,13 +119,6 @@ module.exports = {
         {
             resolve: `gatsby-source-filesystem`,
             options: {
-                name: `timeline`,
-                path: `${__dirname}/src/data/timeline.json`,
-            },
-        },
-        {
-            resolve: `gatsby-source-filesystem`,
-            options: {
                 name: `testimonials`,
                 path: `${__dirname}/src/data/testimonials.json`,
             },
