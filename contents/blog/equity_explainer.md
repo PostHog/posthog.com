@@ -37,7 +37,7 @@ It's an option to purchase a share of the company at a given price – the “st
 
 The most common vesting schedule for tech companies these days is the 4-year/1-year cliff, which means that a quarter of your options vest after your 1-year work anniversary, and 1/36th of your remaining options vest each month for the following three years. As a company, we feel that this structure strikes a fair balance between incentivizing team members to stay and contribute to the growth of the company, while not locking them into “golden handcuffs” where they are required to put in 4 years of work to reap any of the benefits of being a part of a start-up.
 
-### How exactly do share options turn you into a millionaire? 
+### How do share options turn you into a millionaire? 
 
 When you are granted your options on the first day of employment, the price you will pay to exercise them will stay static at whatever the Fair Market Value (FMV) per share is on your first day, irrespective of what the value is when you sell your purchased shares. 
 
