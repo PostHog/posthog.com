@@ -432,6 +432,7 @@ Equivalent to [node-fetch](https://www.npmjs.com/package/node-fetch).
 | `snowflake-sdk`    | [`npm` package `snowflake-sdk`](https://www.npmjs.com/package/snowflake-sdk) |
 | `aws-sdk`    | [`npm` package `aws-sdk`](https://www.npmjs.com/package/aws-sdk) |
 | `@google-cloud/bigquery`    | [`npm` package `@google-cloud/bigquery`](https://www.npmjs.com/package/@google-cloud/bigquery) |
+| `@google-cloud/storage`    | [`npm` package `@google-cloud/storage`](https://www.npmjs.com/package/@google-cloud/storage) |
 | `node-fetch`    | [`npm` package `node-fetch`](https://www.npmjs.com/package/node-fetch) |
 | `@posthog/plugin-scaffold`    | Types for PostHog plugins. [`npm` package `@posthog/plugin-scaffold`](https://www.npmjs.com/package/@posthog/plugin-scaffold) |
 | `@posthog/plugin-contrib`    | Helpers for plugin devs maintained by PostHog. [`npm` package `@posthog/plugin-contrib`](https://www.npmjs.com/package/@posthog/plugin-contrib) |
