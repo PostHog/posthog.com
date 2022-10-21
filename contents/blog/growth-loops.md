@@ -13,9 +13,16 @@ categories: ["Product analytics", "Guides"]
 
 A growth loop is a series of actions that amplify each other to fuel perpetual growth. New inputs repeatedly power the series to exponentially grow the whole. Companies use growth loops to align their product and distribution to have the greatest impact.
 
-Growth loops are an alternative way to thinking than [funnels](/blog/aarrr-pirate-funnel). While funnels focus on a series of steps from Acquisition to Referral, growth loops focus on a smaller number of steps done repeatedly.
+Growth loops are an alternative growth framework to funnels like [AARRR pirate metrics](/blog/aarrr-pirate-funnel). While funnels focus on a series of steps from Acquisition to Referral, growth loops focus on a smaller number of steps done repeatedly.
 
-## Why you should care about growth loops
+In this guide, we'll cover:
+
+- Why growth loops are so powerful
+- The different types of growth loops
+- How to choose your own growth loop
+- How to measure your growth loop
+
+## Why should you care about growth loops?
 
 Growth loops are important because they compound. Ideally, the growth in your key metrics exponentially increases, while the average effort or investment decreases. For many companies, this key metric is users or revenue which helps create a successful company. 
 
@@ -44,7 +51,7 @@ The performance marketing growth loop is using advertising or marketing to acqui
 
 For example, with Google Ad Words, companies pay per click on specific keywords related to potential customers’ searches. They pay for clicks (performance). With the correct math figured out (cost of acquisition), this can lead to a growth loop of increasing ad spend and revenue growth.
 
-Products that benefit from performance marketing are generally high margins (more money for ads) with low organic demand. For example, direct-to-consumer goods (e.g. Casper, Warby Parker, Dollar Shave Club) and SaaS software targeting small-medium businesses (e.g. Shopify, Hubspot, Slack).
+Products that use performance marketing growth loops generally have high margins (more money for ads), but low organic demand. Good examples include direct-to-consumer goods (e.g. Casper, Warby Parker, Dollar Shave Club) and SaaS software targeting small-medium businesses (e.g. Shopify, Hubspot, Slack).
 
 ### Content
 
@@ -59,7 +66,7 @@ Two types of products benefit from this:
 
 Sales is the growth loop of acquiring users through sales. Customers grow (both revenue and usage), which allows the company to hire more salespeople as well as improve the product’s value proposition.
 
-Products relying on sales are generally large contracts that need high levels of support, engagement, and customization. Offers are often tailored to the specific customer and require a large amount of time and effort. 
+Products relying on sales generally pitch for large contracts that need high levels of support, engagement, and customization. Offers are often tailored to the specific customer and require a large amount of time and effort. 
 
 For example, sales is a growth loop for enterprise SaaS companies (e.g. Salesforce, SAP, Microsoft) and big consultancies (e.g. McKinsey, Deloitte)
 
