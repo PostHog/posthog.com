@@ -29,7 +29,7 @@ There are numerous ways to achieve GDPR compliance, which you can broadly catego
 - **Better:** Data is stored in EU cloud servers
 - **Best:** You self-host and control all data / no personal data is collected
 
-All the tools in this list offer one or more of these methods. We've also chosen a broad range of tools that includes in-depth product analytics platforms, lightweight "privacy first" platforms and open source Google Analytics alternatives.
+All the tools in this list offer one or more of these methods. We've also chosen a broad range of tools that includes in-depth product analytics platforms, lightweight "privacy first" platforms and open source [Google Analytics alternatives](/blog/ga4-alternatives).
 
 ### 1. PostHog
 
