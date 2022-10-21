@@ -2092,3 +2092,7 @@
 [[redirects]]
     from = "/eu-cloud"
     to = "/eu"
+
+[[redirects]]
+    from = "/handbook/strategy/roadmap"
+    to = "/roadmap"
