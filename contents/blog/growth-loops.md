@@ -38,7 +38,7 @@ There are multiple types of growth loops. Each involves specific actions and is 
 
 ### Virality
 
-Virality is the growth loop of spreading rapidly through word of mouth. Users gain value from other users being a part of the product or by sharing the product. Products succeed when they gain large amounts of attention.
+Virality is all about growth through word of mouth. Users gain value from other users being a part of the product or by sharing the product. Products succeed when they gain large amounts of attention.
 
 This is generally good for two types of products:
 
