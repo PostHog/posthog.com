@@ -44,13 +44,17 @@ The events from Stripe will include details like the customer’s email (as a di
 Now that we have some payment data, we can start to develop some insights and trends from it. Some ideas:
 
 - Total count of `Stripe Customer Subscribed`, `Stripe Invoice Paid`
+
 - Sum of `stripe_amount_paid` for `Stripe Invoice Paid` (weekly, monthly)
+
 - Funnel of `pageview` or `signup` to `Stripe Invoice Paid`
     - Use `utm_source` to judge sources on conversion; for example, if Google Ads vs Facebook Ads
     - Key feature events to `Stripe Invoice Paid`
+
 - Retention of users (or organizations) who paid Stripe Invoice and continued to…
     - use the product or key features
     - pay another Stripe invoice next month (revenue retention)
+
 - Create a cohort of churned users
     - Match persons who completed `Stripe Invoice Paid` in the last 60 days and did not complete `Stripe Invoice Paid` in the last 30 days
 
