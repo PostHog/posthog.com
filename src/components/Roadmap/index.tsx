@@ -26,6 +26,7 @@ interface ITeam {
 }
 
 export interface IRoadmap {
+    beta_available: boolean
     complete: boolean
     date_completed: string
     title: string
@@ -149,7 +150,13 @@ export default function Roadmap() {
                                 >
                                     <CardContainer>
                                         {Object.keys(inProgress)
-                                            .sort()
+                                            .sort((a, b) =>
+                                                inProgress[a].some((goal) => goal.beta_available)
+                                                    ? -1
+                                                    : inProgress[b].some((goal) => goal.beta_available)
+                                                    ? 1
+                                                    : 0
+                                            )
                                             .map((key) => {
                                                 return (
                                                     <Card key={key} team={key}>
@@ -196,6 +203,7 @@ const query = graphql`
     {
         allSqueakRoadmap {
             nodes {
+                beta_available
                 complete
                 date_completed
                 title
