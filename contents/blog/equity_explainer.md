@@ -57,11 +57,11 @@ Making matters more complicated, the majority of standard terms in stock option 
 
 ### Vesting Start
 
-At PostHog, we recognize that you start contributing to the company on day 1, so we feel that you should start earning your options on that day as well. Many others make you wait until after a probationary period, often 3-months, before your options start to vest.
+At PostHog, we recognize that you start contributing to the company on day one, so we feel that you should start earning your options on that day as well. Many others make you wait until after a probationary period, often three month, before your options start to vest.
 
 ### Exercise Window
 
-Regardless of whether you resign, or are let go for performance reasons, you will have 10 years from the day you were hired to exercise your options. In most companies, you have only 3 months to exercise your options before you lose them entirely, which can make tax optimization and planning a stressful and difficult process.
+Regardless of whether you resign, or are let go for performance reasons, you will have 10 years from the day you were hired to exercise your options. In most companies, you have only three months to exercise your options before you lose them entirely, which can make tax optimization and planning a stressful and difficult process.
 
 In the unlikely event that you are let go “with cause” (i.e. for gross misconduct, like embezzlement or discrimination), you will forfeit your options, which we feel is only fair.
 
