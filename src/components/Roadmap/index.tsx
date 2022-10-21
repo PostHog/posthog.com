@@ -93,7 +93,15 @@ export default function Roadmap() {
         ({ team }: { team: ITeam }) => team?.name
     )
     const complete = groupBy(
-        nodes.filter((node: IRoadmap) => node.date_completed),
+        nodes.filter((node: IRoadmap) => {
+            const goalDate = node.date_completed && new Date(node.date_completed)
+            const currentDate = new Date()
+            const currentQuarter = Math.floor(currentDate.getMonth() / 3 + 1)
+            const goalQuarter = goalDate && Math.floor(goalDate.getMonth() / 3 + 1)
+            return (
+                goalDate && goalDate.getUTCFullYear() === currentDate.getUTCFullYear() && goalQuarter === currentQuarter
+            )
+        }),
         ({ team }: { team: ITeam }) => team?.name
     )
     return (
