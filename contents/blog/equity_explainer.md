@@ -17,7 +17,7 @@ Equity is the amount of ownership of a corporation held by a person or entity. T
 
 But, despite its popularity, equity is very rarely understood by employees! With this post, I hope to shine a light on some of the most confusing aspects of start-up equity, and highlight how PostHog breaks from the norm to offer options in a much more employee-friendly way.
 
-## Startup shares and the options pool
+## How share options work
 
 When a start-up company is incorporated, the founders decide on how to divide ownership of the company between them by quite literally choosing a random number of shares to create out of thin air and distribute to each other in some proportion. 
 
