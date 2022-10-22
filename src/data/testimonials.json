@@ -178,7 +178,7 @@
     {
         "featuresUsed": ["toolbar", "data warehouse"],
         "author": { "name": "Nick Booth", "role": "CTO", "company": { "name": "Feedr" } },
-        "quote": "We have been using PostHog for a number of months now and found it very easy to implement. Its toolbar feature means in some cases we can get metrics on specific areas with out needing to instrument our code. We use Redshift for our Datawarehouse and the posted posthog instance supports pushing the data into this so we have all of our product analytics in one place. All in all a spectacular product."
+        "quote": "We have been using PostHog for a number of months now and found it very easy to implement. Its toolbar feature means in some cases we can get metrics on specific areas without needing to instrument our code. We use Redshift for our Datawarehouse and the posted posthog instance supports pushing the data into this so we have all of our product analytics in one place. All in all a spectacular product."
     },
     {
         "featuresUsed": ["support"],

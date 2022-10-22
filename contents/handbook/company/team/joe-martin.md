@@ -30,7 +30,7 @@ I live just outside of London. I'm passionate about punk music, videogame preser
 
 ## Areas of focus - Q4 2022
 
-Last quarter I focused on collaborating with the growth and product teams to directly contirbute to product improvements (such as tutorials and activation flows), growing external communities and partnerships, and becoming more autonomous/skilled technically so that I could contribute directly to the product. These were all successful. 
+Last quarter I focused on collaborating with the growth and product teams to directly contribute to product improvements (such as tutorials and activation flows), growing external communities and partnerships, and becoming more autonomous/skilled technically so that I could contribute directly to the product. These were all successful. 
 
 This quarter I'm focusing on...
 

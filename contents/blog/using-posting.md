@@ -217,7 +217,7 @@ This can be useful for sharing your most valuable metrics with colleagues who do
 
 We created the [GeoIP Enricher](/apps/geoip-enrichment) app to enhance events and persons with IP location data, allowing you to run queries on a range of geographic data, including city name, country, continent and time zone data. 
 
-But what if you want geographic data, but don't don't to collect more personally identifiable IP data? 
+But what if you want geographic data, but don't want to collect more personally identifiable IP data? 
 
 Enter the [Property Filter](/apps/property-filter) app, which was built by PostHog users Witty Works so they [could collect country data in a privacy-friendly way](/tutorials/property-filter).
 
