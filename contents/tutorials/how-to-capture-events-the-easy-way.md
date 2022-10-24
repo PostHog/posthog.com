@@ -46,7 +46,7 @@ If the URL you want isn’t listed, select ‘_+ Add authorized URL_’ and ente
 
 ![Using the toolbar](../images/tutorials/custom-events-the-easy-way/create-events-easy-way-posthog.png)
 
-When the toolbar is launched, you’ll see a floating PostHog logo in your browser. You can drag this around to unobscure elements of the site if needed, and when you click it, it will reveal a pop-out menu, as you can see above.
+When the toolbar is launched, you’ll see a floating PostHog logo in your browser. You can drag the logo to reveal obscured elements of the page as needed, and on click it will reveal a pop-out menu, as pictured above.
 
 ![Using the toolbar overlay](../images/tutorials/toolbar/inspect-toolbar.png)
 
