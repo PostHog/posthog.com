@@ -30,6 +30,8 @@ Users on the All Signed-up Users list are also tagged as either `clouduser` or `
 
 Array is our product announcement email, for telling users about major releases and important updates. We send this after every major update - usually once a month - as part of [the new release process](/handbook/engineering/release-new-version).
 
+> Once an array is released, it is important to also update all items on [the public roadmap](/roadmap). Marketing is responsible for this, at this time.
+
 ### Updating the Mailchimp audience
 
 We manually sync our email lists before sending each Array email, to ensure as many users as possible are aware of important updates. If users choose to unsubscribe from the list, they will not be re-added. 

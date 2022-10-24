@@ -111,3 +111,4 @@ Release is happening next Wednesday. Which means
 1. [ ] Go to the [EWXT9O7BVDC2O](https://us-east-1.console.aws.amazon.com/cloudfront/v3/home?region=us-east-2#/distributions/EWXT9O7BVDC2O) CloudFront distribution to the "Invalidations" tab and add a new one with `/*` value. This will refresh the CloudFront cache so that users can see the new version. You can check this by visiting https://update.posthog.com/
 1. [ ] Send a message on the PostHog Users Slack (community) in [#announcements](https://posthogusers.slack.com/archives/CT7HXDEG3) to let everyone know the release has shipped.
 1. [ ] Send the newsletter with the PostHog Array. The Marketing Team will arrange this, provided Joe Martin has been tagged for review in the PostHog Array blog post. 
+1. [ ] Update all items on [the public roadmap](/roadmap), via Squeak. The Marketing Team will arrange this, provided Joe Martin has been tagged for review in the PostHog Array blog post. 
