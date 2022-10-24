@@ -1,5 +1,5 @@
 ---
-date: 2022-10-20
+date: 2022-10-24
 title: "Databases 101: ClickHouse and PostgreSQL"
 rootPage: /blog
 sidebar: Blog
