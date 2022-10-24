@@ -1,8 +1,18 @@
 [
     {
-        "featuresUsed": ["privacy", "compliance"],
-        "author": { "name": "Ben White", "role": "Head of Engineering", "company": { "name": "Temedica" } },
-        "quote": "PostHog is what I always wanted a Product Analytics SaaS to be. Private cloud option so GDPR becomes way more manageable, features built based on direct community feedback, focus on simplicity and usefulness over vanity features...Great job people!"
+        "featuresUsed": ["experimentation"],
+        "author": { "name": "Cat Li", "role": "Product & Engineering Lead", "company": { "name": "Y Combinator" } },
+        "quote": "PostHog's experimentation suite is really great!"
+    },
+    {
+        "featuresUsed": ["support"],
+        "author": { "name": "Cat Li", "role": "Product & Engineering Lead", "company": { "name": "Y Combinator" } },
+        "quote": "One thing I love about PostHog is that we have a shared Slack channel, for support and feedback. We can chat directly to the engineers building PostHog and they're always really responsive."
+    },
+    {
+        "featuresUsed": ["data integrity"],
+        "author": { "name": "Cat Li", "role": "Product & Engineering Lead", "company": { "name": "Y Combinator" } },
+        "quote": "Many platforms we looked at, including Google Analytics, dropped 30% of user data due to adblockers, or third-party cookies. PostHog became the obvious choice because it didn't have those issues."
     },
     {
         "featuresUsed": ["data integrity"],
@@ -21,17 +31,17 @@
     },
     {
         "featuresUsed": ["competition", "pricing"],
-        "author": { "name": "Joe Saunderson", "role": "Software Engineer", "company": { "name": "MentionMe" } },
+        "author": { "name": "Joe Saunderson", "role": "Technical Lead", "company": { "name": "MentionMe" } },
         "quote": "We looked at Amplitude, Mixpanel and Pendo and not only were they far too expensive but it was also very unclear how they worked in terms of data privacy."
     },
     {
         "featuresUsed": ["open source", "self-host"],
-        "author": { "name": "Lleo Harress", "role": "Software Engineer", "company": { "name": "MentionMe" } },
+        "author": { "name": "Lleo Harress", "role": "Technical Lead", "company": { "name": "MentionMe" } },
         "quote": "The fact that PostHog is open source was really helpful. The cloud formation templates made deployment easy and we were up and running within a day, but because it’s open source we can also open the codebase and figure things out if needed. We’ve iterated and built out an entire stack for ourselves since launching PostHog."
     },
     {
         "featuresUsed": ["self-host", "privacy"],
-        "author": { "name": "Joe Saunderson", "role": "Software Engineer", "company": { "name": "MentionMe" } },
+        "author": { "name": "Joe Saunderson", "role": "Technical Lead", "company": { "name": "MentionMe" } },
         "quote": "We self-hosted PostHog because we needed to keep everything on our infrastructure. Our clients’ privacy is very important to us and we have obligations to store their data safely."
     },
     {
@@ -46,7 +56,7 @@
     },
     {
         "featuresUsed": ["feature flags", "experimentation"],
-        "author": { "name": "Joe Saunderson", "role": "Software Engineer", "company": { "name": "MentionMe" } },
+        "author": { "name": "Joe Saunderson", "role": "Technical Lead", "company": { "name": "MentionMe" } },
         "quote": "We use feature flags to issue changes to 50% of users and then compare the effect. Experiment, find results, decide where to focus and then iterate."
     },
     {
@@ -143,6 +153,21 @@
         "quote": "PostHog helps us understand how our users are benefiting from our platform. Their intuitive dashboard builder for breaking down the incoming event data has made it easier for us to better service our customers and understand what features to build next. I've tried a handful of product analytics tools, and PostHog has become the obvious choice"
     },
     {
+        "featuresUsed": ["open-source, ui"],
+        "author": { "name": "Chris S", "role": "Founder", "company": { "name": "Unknown" } },
+        "quote": "PostHog has a unique place in the market with an open developer product. Easy implementation. Great feature set. App UI is super intuitive for technical and non-technical users."
+    },
+    {
+        "featuresUsed": ["insights, dashboards"],
+        "author": { "name": "Henrik H", "role": "Head of Product Experience", "company": { "name": "Unknown" } },
+        "quote": "Super easy to setup custom dashboards and build insights based what you are currently monitoring in your web application."
+    },
+    {
+        "featuresUsed": ["session-recording"],
+        "author": { "name": "Raghavender Rao J.", "role": "Co-founder & CEO", "company": { "name": "Unknown" } },
+        "quote": "We love the new screen recordings feature and how it auto-captures events without us setting up the telemetry - no code changes are needed. All in all a spectacular product."
+    },
+    {
         "featuresUsed": ["self-host"],
         "author": { "name": "Tiffany Wong", "role": "Co-founder", "company": { "name": "Pry" } },
         "quote": "You can choose to host PostHog either in the cloud, or on your own infrastructure. If your product is often tracking sensitive data then it’s best to host it yourself so you can have full control over everything."
@@ -211,34 +236,9 @@
         "quote": "We can actually access ALL the collected data. No garbage predefined reports, no ridiculous sampling, it's all there."
     },
     {
-        "featuresUsed": ["competitor", "events", "self-host"],
-        "author": { "name": "Filip Stanev", "role": "Co-founder", "company": { "name": "Saga.so" } },
-        "quote": "At Saga, we tried pretty much every product analytics product out there. In the end, we decided to self-host PostHog because of the privacy benefits and the better tracking capability compared to the alternatives. PostHog tracks more events, while other products get blocked and show unreliable results."
-    },
-    {
         "featuresUsed": ["feature flags", "session recording", "autocapture", "competitor"],
         "author": { "name": "Evan Sosenko", "role": "CTO", "company": { "name": "PureSkill.gg" } },
         "quote": "The autocapture and session recording is ridiculously powerful out of the box. Adding custom events and user properties will take you to the next level. The feature flags let us dark-launch without yet-another-service to integrate. You can even use it as a support tool since you can replay user sessions. There might be other services that do those things on their own, but having it all in one place is a huge win and time save."
-    },
-    {
-        "featuresUsed": ["privacy", "performance", "competitor"],
-        "author": { "name": "Filip Stanev", "role": "Co-founder", "company": { "name": "Saga" } },
-        "quote": "LogRocket was one of the first tools we tried, but it felt very privacy invasive. We didn’t feel comfortable with how much they were tracking. We tried Amplitude, but it was just far too slow. Even creating dashboards felt laggy."
-    },
-    {
-        "featuresUsed": ["privacy", "performance", "competitor"],
-        "author": { "name": "Filip Stanev", "role": "Co-founder", "company": { "name": "Saga" } },
-        "quote": "We tried Amplitude and LogRocket first. Very early on we discovered that we were losing information due to ad blockers and privacy features. We also didn’t think it was a great idea to share information with these platforms."
-    },
-    {
-        "featuresUsed": ["data integrity", "performance", "competitor"],
-        "author": { "name": "Filip Stanev", "role": "Co-founder", "company": { "name": "Saga" } },
-        "quote": "We installed Mixpanel and PostHog at the same time. We saw between 40-50% more events in PostHog, just because we were self-hosting. PostHog also tracks around 20-30% more users than Mixpanel does. For example, for one particular event we defined, Mixpanel reported 6,343 occurrences last month. PostHog reported what we know to be the true figure, which is 8,169 — almost 30% more than Mixpanel."
-    },
-    {
-        "featuresUsed": ["data integrity", "performance", "competitor"],
-        "author": { "name": "Filip Stanev", "role": "Co-founder", "company": { "name": "Saga" } },
-        "quote": "The ability to track events across sessions is a big thing for us, because otherwise we’d need to use another completely different tool for that. It’s the same with feature flags, which are integrated very tightly into our product. It really makes PostHog stand out as more than just another analytics platform."
     },
     {
         "featuresUsed": ["users", "dashboards"],
