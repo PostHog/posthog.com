@@ -127,7 +127,7 @@ Using the cache step we can cache the results of pulling python dependencies or 
     python -m pip install psycopg2-binary --no-cache-dir --compile
 ```
 
-Note that there is no if block to determine whether to use the cache or not when we `pip install` the dependencies. This is because pip is smart enough to use the rehydrated cache if it sees it, if it doesn't see it will just go out to the internet to grab what it needs.
+Note that there is no if block to determine whether to use the cache when we `pip install` the dependencies. This is because `pip` is smart enough to use the rehydrated cache if it exists. In cases where it doesn't exist, `pip` will fetch dependencies from the public internet.
 
 Yarn is a bit more involved only because we grab the location of the cache directory first and use that output as an input to the caching step
 
