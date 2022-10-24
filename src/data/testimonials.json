@@ -2,7 +2,7 @@
     {
         "featuresUsed": ["experimentation"],
         "author": { "name": "Cat Li", "role": "Product & Engineering Lead", "company": { "name": "Y Combinator" } },
-        "quote": "PostHog's experimentation suite is really great."
+        "quote": "PostHog's experimentation suite is really great!"
     },
     {
         "featuresUsed": ["support"],
