@@ -59,7 +59,7 @@ Finally, we advise caution when installing, building and enabling [apps](/docs/a
 
 ## Does PostHog offer a BAA for PostHog Cloud?
 
-We believe the most effective solution to HIPAA-compliant product analytics is to control the data yourself. That's why we recommend using the self-hosted versions of PostHog. As such, we do not usually offer a [Business Associate Agreement (BAA)](https://www.hhs.gov/hipaa/for-professionals/covered-entities/sample-business-associate-agreement-provisions/index.html) for PostHog Cloud except for certain contracts - contact sales@posthog.com if this is critical for you. 
+We believe the most effective solution to HIPAA-compliant product analytics is to control the data yourself. That's why we recommend using the self-hosted versions of PostHog. As such, we do not usually offer a [Business Associate Agreement (BAA)](https://www.hhs.gov/hipaa/for-professionals/covered-entities/sample-business-associate-agreement-provisions/index.html) for PostHog Cloud except for certain contracts – contact sales@posthog.com if this is critical for you. 
 
 ### Further reading
 
