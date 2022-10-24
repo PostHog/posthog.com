@@ -82,3 +82,27 @@ hideAnchor: false
 
 ## Feature ownership
 You can find out more about the features we own [here](/handbook/engineering/feature-ownership)
+
+## Long term vision
+
+Imagine Alice is a product manager, and Bob is an engineer, both of whom love using PostHog. They're building a new feature together, but they're unsure of the impact, so Alice & Bob decide to gate the feature via a feature flag.
+
+Bob runs the PostHog CLI, which automatically converts his branch to a feature flagged version. Alice then sets up auto-rollback on this feature flag using the PostHog UI: If their conversion metric falls more than 20%, the feature must be automatically rolled back.
+
+Bob feels this isn't enough, and also adds a condition for Sentry errors increasing by 30%. This should result in an automatic rollback as well.
+
+Once the feature is rolled out, thankfully, nothing goes wrong, but what's disappointing is that the feature doesn't seem to have moved any of the core company metrics. This doesn't fit into either of Bob's or Alice's model, so they want to dig deeper why this was the case.
+
+Before they even start, PostHog automatically does some impact analysis on their core metrics, and generates some insights into what properties are highly correlated with conversion & which aren't.
+
+As it turns out, people in USA and India love their new feature, having a 40% increase in conversion, but other countries, specially the UK, seem to dislike it, so much so that it negatively affects conversion. In the end, these forces balance out, leading to similar total conversion rates.
+
+They suspect it might have something to do with their positioning in other countries, so they run a marketing experiment using PostHog, where PostHog automatically generates recommended copy text to try out. It generates 5 variants, and they test these in all countries.
+
+As it turns out, copy wasn't the issue, and there's no significant change here. They watch a few recordings from the experiment to confirm there's nothing off here.
+
+Since it's not a positioning issue, Alice & Bob decide that it makes sense to introduce some personalisation, and let people opt-in to the new feature, and have it on by default for USA and India. They can customise this right from the feature flag, and set this up such that any users who opt-in on their UI automatically get the flag.
+
+PostHog keeps analysing metrics for this flag over time, and notifies Alice and Bob when their customers behaviour change. For example, if the conversion for users in UK has taken a turn for the better, or if enterprise customers have taken a turn for the worse.
+
+Our long term vision is to make all of this possible.
