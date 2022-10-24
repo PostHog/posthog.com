@@ -56,17 +56,6 @@ export default function Hero() {
                         <CallToAction type="primary" className="!w-full md:!w-44 shadow-xl" to="/signup">
                             Get started
                         </CallToAction>
-                        <CallToAction
-                            type="secondary"
-                            className="!w-full md:!w-44 shadow-xl"
-                            to="https://demo.posthog.com"
-                            externalNoIcon
-                        >
-                            Try the demo
-                        </CallToAction>
-                    </div>
-
-                    <div className="mt-4 flex justify-center">
                         <DemoLink />
                     </div>
                 </div>

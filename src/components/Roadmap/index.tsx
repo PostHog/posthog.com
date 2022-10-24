@@ -18,6 +18,7 @@ interface IGitHubPage {
         hooray: number
         heart: number
         eyes: number
+        _1: number
     }
 }
 
@@ -26,6 +27,7 @@ interface ITeam {
 }
 
 export interface IRoadmap {
+    beta_available: boolean
     complete: boolean
     date_completed: string
     title: string
@@ -35,13 +37,10 @@ export interface IRoadmap {
     projected_completion_date: string
 }
 
-const Complete = (props: { title: string; githubPages: IGitHubPage[] }) => {
-    const { title, githubPages } = props
-    return (
-        <li className="text-base font-semibold">
-            {githubPages?.length > 0 ? <Link to={githubPages[0]?.html_url}>{title}</Link> : title}
-        </li>
-    )
+const Complete = (props: { title: string; githubPages: IGitHubPage[]; otherLinks: string[] }) => {
+    const { title, githubPages, otherLinks } = props
+    const url = (githubPages?.length > 0 && githubPages[0]?.html_url) || (otherLinks?.length > 0 && otherLinks[0])
+    return <li className="text-base font-semibold">{url ? <Link to={url}>{title}</Link> : title}</li>
 }
 
 const Section = ({
@@ -54,7 +53,7 @@ const Section = ({
     children: React.ReactNode
 }) => {
     return (
-        <div className="lg:px-9 lg:py-6 first:pl-0 last:pr-0">
+        <div className="lg:px-9 lg:pt-6 pb-12 first:pl-0 last:pr-0">
             <h3 className="text-xl m-0">{title}</h3>
             <p className="text-[15px] m-0 text-black/60 mb-4">{description}</p>
             {children}
@@ -95,7 +94,15 @@ export default function Roadmap() {
         ({ team }: { team: ITeam }) => team?.name
     )
     const complete = groupBy(
-        nodes.filter((node: IRoadmap) => node.date_completed),
+        nodes.filter((node: IRoadmap) => {
+            const goalDate = node.date_completed && new Date(node.date_completed)
+            const currentDate = new Date()
+            const currentQuarter = Math.floor(currentDate.getMonth() / 3 + 1)
+            const goalQuarter = goalDate && Math.floor(goalDate.getMonth() / 3 + 1)
+            return (
+                goalDate && goalDate.getUTCFullYear() === currentDate.getUTCFullYear() && goalQuarter === currentQuarter
+            )
+        }),
         ({ team }: { team: ITeam }) => team?.name
     )
     return (
@@ -152,7 +159,13 @@ export default function Roadmap() {
                                 >
                                     <CardContainer>
                                         {Object.keys(inProgress)
-                                            .sort()
+                                            .sort((a, b) =>
+                                                inProgress[a].some((goal) => goal.beta_available)
+                                                    ? -1
+                                                    : inProgress[b].some((goal) => goal.beta_available)
+                                                    ? 1
+                                                    : 0
+                                            )
                                             .map((key) => {
                                                 return (
                                                     <Card key={key} team={key}>
@@ -199,6 +212,7 @@ const query = graphql`
     {
         allSqueakRoadmap {
             nodes {
+                beta_available
                 complete
                 date_completed
                 title
@@ -206,6 +220,7 @@ const query = graphql`
                 team {
                     name
                 }
+                otherLinks
                 githubPages {
                     title
                     html_url
@@ -215,6 +230,7 @@ const query = graphql`
                         hooray
                         heart
                         eyes
+                        _1
                     }
                 }
                 projected_completion_date
