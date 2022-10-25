@@ -23,6 +23,7 @@ It can take time to approve options, as it requires a board meeting and company 
 
 We have written out a few of the most commonly asked questions about share options below. Some of these will be useful if this is your first time being granted share options, while others go into more detail. 
 
+
 ### What is a share option?
 
 A share option gives you the option to buy a share of PostHog's stock at a set price agreed today, regardless of what the price is in the future. 
@@ -32,19 +33,32 @@ These can be financially very lucrative, because PostHog will give you the oppor
  
 ### What does it mean to 'exercise' a share option?
  
-This simply means you decide to buy the shares at the price agreed in your option agreement. You should be careful here, as you may have personal tax implications in doing this. For this reason, most people only do this at the time of an exit event, i.e. sale to another company or going public. 
+This simply means you decide to buy the shares at the price agreed in your option agreement. The price you pay is called the 'exercise price' or 'strike price' - both terms are widely used, but they mean the same thing here.  
+
+You should be careful here, as you may have personal tax implications in doing this. For this reason, most people only do this at the time of an exit event, i.e. sale to another company or going public. 
+
 
 ### What are my share options actually worth?
 
 You can use [this handy calculator](https://docs.google.com/spreadsheets/d/1mj-5Uy3IB5I09ml-zFH9VXxssqfGUgif1SURcsTFZRU/edit?usp=sharing) to find out, as well as to model what they might be worth in the future. You'll need to make a copy first, and be signed in with your PostHog email address. 
  
+
 ### What if I leave PostHog before this exit event happens?
  
-Luckily we have set up terms that are industry-leading in their friendliness to team members! If you leave PostHog, you will have until June 2031 to exercise them. This date applies to share options granted in June 2021 - in future, there will probably be different dates for different grants which we will list out here.  
+Happily, we have set up terms that are industry-leading in their friendliness to team members! If you leave PostHog, you will have until June 2031 to exercise them. This date applies to share options granted in June 2021 - in future, there will probably be different dates for different grants which we will list out here.  
 
-The industry standard is to only give you 90 days to exercise after leaving, which we think is bogus. 
+The industry standard is to only give you 90 days to exercise after leaving, which we think is bogus.
 
+
+### Does anything happen after 90 days then?
+
+Yes - we usually grant share options as ISOs, which are tax-advantaged in the US. If you do not exercise these within 90 days of leaving, you still keep the share options, but they legally have to convert into NSOs, which do not have the same tax treatment. 
+
+This means that US taxpayers may choose to exercise their share options within 90 days of leaving, in order to retain the tax benefits, but of course this comes at the cost of exercising the shares. If you are considering doing this, talk to an accountant first to make sure you fully understand the tax implications here!
+
+(If you are not a US taxpayer, the conversion from ISO to NSO doesn't make any practical difference.)
  
+
 ### Does it make any difference how I leave PostHog - what if I am fired or made redundant?
  
 Again, we have taken a very broad and team-friendly approach to what are called 'good leaver' and 'bad leaver' provisions:
@@ -68,12 +82,19 @@ Instead we follow the standard industry vesting schedule over 4 years:
  
 Vesting starts on the day that you started at PostHog, not the date that your share options were granted.
 
- 
+
+### What about if I took a pay rise in share instead of salary?
+
+These have exactly the same terms as our regular share options, except that vesting starts immediately - ie. there is no 1 year cliff. (We think this is fairer!)
+
+
 ### How did you decide the exercise price that I should pay on my share options?
 
-PostHog doesn't decide the price - we get an external company to conduct a valuation and determine the 'fair market value' of the shares. Note that this is different (and lower) than simply the last funding round price, due to the way that it is calculated. 
+PostHog doesn't decide the price - we get an external company to conduct a valuation and determine the 'fair market value' (FMV) of the shares. Note that this is different (and lower) than simply the last funding round price, due to the way that it is calculated. 
+
+We don't have any flexibility here - if we set an exercise price lower than the FMV, this will cause you serious income tax issues!
  
-These valuations are usually only valid for 1 year (US) and 90 days (UK), so we have to redo them periodically. 
+These valuations are usually only valid for 1 year (US) and 120 days (UK), so we have to redo them periodically. 
 
 
 ### Why do we allocate share options in batches?
@@ -90,7 +111,7 @@ Under most countries' tax laws, including the US and UK, this would be considere
 
 ### Can PostHog help me figure out what tax I will have to pay in the future though?
  
-We can point you in the right direction, but we cannot give you personal tax advice - you need to talk to an accountant. 
+We cannot give you personal tax advice - you need to talk to an accountant. We're happy to ask around our network for recommendations.  
  
  
 ### I received share options under the EMI plan as I'm based in the UK - how are these different from our regular share options?
