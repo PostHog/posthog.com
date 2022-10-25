@@ -2096,3 +2096,8 @@
 [[redirects]]
     from = "/handbook/strategy/roadmap"
     to = "/roadmap"
+
+# Added: 2022-10-25
+[[redirects]]
+    from = "/docs/self-host/postgres-vs-clickhouse"
+    to = "/blog/clickhouse-vs-postgres"
