@@ -85,7 +85,9 @@ You can find out more about the features we own [here](/handbook/engineering/fea
 
 ## Long term vision
 
-Imagine Alice is a product manager, and Bob is an engineer, both of whom love using PostHog. They're building a new feature together, but they're unsure of the impact, so Alice & Bob decide to gate the feature via a feature flag.
+Imagine Alice is a product manager, and Bob is an engineer, both of whom love using PostHog. 
+
+During their weekly growth review, Posthog shows them that one of their workflows is performing 50% worse than other SaaS companies with a similar flow. They decide to build a new feature together, but they're unsure of the impact, so Alice & Bob decide to gate the feature via a feature flag.
 
 Bob runs the PostHog CLI, which automatically converts his branch to a feature flagged version. Alice then sets up auto-rollback on this feature flag using the PostHog UI: If their conversion metric falls more than 20%, the feature must be automatically rolled back.
 
