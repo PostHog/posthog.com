@@ -45,7 +45,7 @@ You can use [this handy calculator](https://docs.google.com/spreadsheets/d/1mj-5
 
 ### What if I leave PostHog before this exit event happens?
  
-Happily, we have set up terms that are industry-leading in their friendliness to team members! If you leave PostHog, you will have until June 2031 to exercise them. This date applies to share options granted in June 2021 - in future, there will probably be different dates for different grants which we will list out here.  
+Happily, we have set up terms that are industry-leading in their friendliness to team members! If you leave PostHog, you will have 10 years to exercise them from the date you were granted them. 
 
 The industry standard is to only give you 90 days to exercise after leaving, which we think is bogus.
 
