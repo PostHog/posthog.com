@@ -44,7 +44,7 @@ In the configuration menu (blue gear), enter the host (`eu.posthog.com`) and pro
 
 After clicking save and activating it (toggle on the left side), the Replicator will start to run. Any events added to your old instance will be replicated in your EU Cloud instance. It can take a little while (15-20 minutes) for the first events to show up.
 
-Once the Replicator is activated, go back to the configuration menu and click the gear next to "Export historical events" under "Jobs." On the calendar, select a start and end date, then click "Run job now." This will begin the process of historical events being import (and might take a while).
+Once the Replicator is activated, go back to the configuration menu and click the gear next to "Export historical events" under "Jobs." On the calendar, select a start and end date, then click "Run job now." This will begin the process of historical events being import (and might take a while). You can see the progress by clicking the "App metrics" button (graph) and going to the "Historical exports" tab.
 
 ## Finished complete migration
 
