@@ -89,7 +89,7 @@ Imagine Alice is a product manager, and Bob is an engineer, both of whom love us
 
 Bob runs the PostHog CLI, which automatically converts his branch to a feature flagged version. Alice then sets up auto-rollback on this feature flag using the PostHog UI: If their conversion metric falls more than 20%, the feature must be automatically rolled back.
 
-Bob feels this isn't enough, and also adds a condition for Sentry errors increasing by 30%. This should result in an automatic rollback as well.
+Alice checks the Posthog UI and because it's such an important feature - adds a safety condition for Sentry errors increasing by 30% and a few counter metrics. This should result in an automatic rollback as well. Alice starts the experiment.
 
 Once the feature is rolled out, thankfully, nothing goes wrong, but what's disappointing is that the feature doesn't seem to have moved any of the core company metrics. This doesn't fit into either of Bob's or Alice's model, so they want to dig deeper why this was the case.
 
