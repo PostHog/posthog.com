@@ -69,7 +69,7 @@ The followed types and operators are allowed:
 
 ### Who maintains this app?
 
-This app is maintained by PostHog. If you have issues with the app not functioning as intended, please [raise a bug report](https://github.com/PostHog/posthog/issues/new?assignees=&labels=bug&template=bug_report.md) to let us know!
+This app was created by [@plibither8](https://github.com/plibither8) and is maintained by the community.  If you have issues with the app not functioning as intended, please [raise a bug report](https://github.com/PostHog/posthog/issues/new?assignees=&labels=bug&template=bug_report.md) to let us know!
 
 ### What if I have feedback on this app?
 
