@@ -29,6 +29,8 @@ In this guide we will:
 
 Product metrics capture how people use your product **and** how that impacts your business. 
 
+For example, if the number of new users who go on to successfully use your product (aka new user activation) is declining, you can expect this to lead to a decline in the number of paying users.
+
 Product metrics are essential for understanding the overall health of your product and areas of weakness, but they also help guide your product roadmap.
 
 ## What makes a good B2B product metric?
