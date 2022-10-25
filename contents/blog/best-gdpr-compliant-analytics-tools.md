@@ -203,8 +203,6 @@ Matomo's core open source analytics is free to self-host. More advanced features
 
 ### 6. TelemetryDeck
 
-![telemetrydeck](../images/blog/ga4-alternatives/telemetrydeck.png)
-
 [TelemetryDeck](https://telemetrydeck.com/) is to app analytics what Plausible and Fathom are to website analytics – a lightweight tool that collects minimal personal information. Consequently, TelemetryDeck says developers can use its tool without tracking permission banners.
 
 Unlike Plausible and Fathom, TelemetryDeck is an event-based analytics platform, making it more adept at understanding what users are doing in your app. It includes basic retention, funnel, page flow insights, while tracking useful app metrics such as app version, phone model and OS version, and average usage.
