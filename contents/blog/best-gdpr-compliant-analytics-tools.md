@@ -1,5 +1,5 @@
 ---
-date: 2022-08-12
+date: 2022-10-25
 title: The 6 best GDPR-compliant analytics tools
 rootPage: /blog
 sidebar: Blog
