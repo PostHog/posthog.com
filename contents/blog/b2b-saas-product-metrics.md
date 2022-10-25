@@ -1,5 +1,5 @@
 ---
-date: 2022-06-16
+date: 2022-10-25
 title: The most useful B2B SaaS product metrics
 rootPage: /blog
 sidebar: Blog
@@ -15,7 +15,7 @@ So, you're building a B2B SaaS product.
 
 Everyone knows you've got to measure stuff to succeed. This is not news. 
 
-What, why, and how? These are the questions that matter.
+What, why, and how? These are the questions that matter and the answers lie in the product metrics you track.
 
 In this guide we will:
 
@@ -23,11 +23,13 @@ In this guide we will:
 2. Explain the [common metrics used by B2B SaaS companies](#common-b2b-saas-product-metrics)
 3. [Recommend metrics](#recommended-b2b-product-metrics) for most B2B SaaS products
 
-Please note: this guide is about _product_ metrics, rather than revenue or wider business metrics. Naturally, they're important too. Most product analytics tools, such as Mixpanel and [Amplitude](/blog/posthog-vs-amplitude), allow you to track the metrics in this guide.
+> **Note:** This guide is about _product_ metrics, not revenue or wider business metrics like customer lifetime value (CLV) or average revenue per user (ARPU). Naturally, they're important too, but this guide is all about the metrics of most interest to product teams.
 
-If you don't already have product analytics, or are thinking of switching, consider PostHog. We're an open-source analytics platform that combines the best of Mixpanel + Hotjar + Optimizely + LaunchDarkly into one tool you can host yourself.
+## What are product metrics?
 
-Read our [product page](/product) and [documentation](/docs) if you're interested.
+Product metrics capture how people use your product **and** how that impacts your business. 
+
+Product metrics are essential for understanding the overall health of your product and areas of weakness, but they also help guide your product roadmap.
 
 ## What makes a good B2B product metric?
 
@@ -45,7 +47,7 @@ Here's what those mean in a little more detail:
 
 It's not realistic to achieve all four in every metric you use, but three out of four is a good benchmark.
 
-## Common B2B SaaS product metrics
+## Common product metrics
 
 Coming up are some of the most common metrics for SaaS products. We explain what they are, how to measure them, and how useful they really are.
 
