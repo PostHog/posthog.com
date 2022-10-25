@@ -7,7 +7,7 @@ showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/b2b-product-metrics/b2b-product-metrics.jpeg
 featuredImageType: full
-categories: ["Guides", "PostHog Academy", "Product analytics"]
+categories: ["Guides"]
 author: ["andy-vandervell"]
 ---
 
@@ -28,8 +28,6 @@ Please note: this guide is about _product_ metrics, rather than revenue or wider
 If you don't already have product analytics, or are thinking of switching, consider PostHog. We're an open-source analytics platform that combines the best of Mixpanel + Hotjar + Optimizely + LaunchDarkly into one tool you can host yourself.
 
 Read our [product page](/product) and [documentation](/docs) if you're interested.
-
-> This article is part of our [PostHog Academy series](/blog/categories/posthog-academy) where we explain the fundamentals of product analytics.
 
 ## What makes a good B2B product metric?
 
