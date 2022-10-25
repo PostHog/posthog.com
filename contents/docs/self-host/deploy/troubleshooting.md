@@ -56,7 +56,7 @@ There isn't a way for us to say "if there's less than X% of disk space left, the
 -   size (`logRetentionBytes: _22_000_000_000`) for the minimum size of data on disk before allowed deletion.
 -   time (`logRetentionHours: 24`) for the minimum age before allowed deletion.
 
-We need to configure these well, but monitoring disk util can help catch this problem before we end up in a crash loop.
+We need to configure these well, but a disk monitoring utility can help catch this problem before we end up in a crash loop.
 
 See more in these stack overflow questions ([1](https://stackoverflow.com/questions/52970153/kafka-how-to-avoid-running-out-of-disk-storage), [2](https://stackoverflow.com/questions/53039752/kafka-how-to-calculate-the-value-of-log-retention-byte), [3](https://stackoverflow.com/questions/51823569/kafka-retention-policies)).
 

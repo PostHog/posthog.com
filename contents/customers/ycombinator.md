@@ -19,7 +19,7 @@ toolsUsed:
 
 Y Combinator is the world’s top startup accelerator, helping to fund, train and nurture the next generation of innovative businesses. Since 2005, thousands of successful companies have emerged from Y Combinator, including Dropbox, Airbnb, PagerDuty, Reddit, Amplitude... and PostHog. 
 
-"Many people, including us, find Y Combinator to be the the most productive period of their lives,” said PostHog CEO James Hawkins in [a blogpost he wrote about his Y Combinator experience](/blog/moving-to-sf). Now, PostHog is used by Y Combinator to improve many of the products and processes PostHog benefitted from! 
+"Many people, including us, find Y Combinator to be the most productive period of their lives,” said PostHog CEO James Hawkins in [a blogpost he wrote about his Y Combinator experience](/blog/moving-to-sf). Now, PostHog is used by Y Combinator to improve many of the products and processes PostHog benefitted from! 
 
 “We use PostHog for [Startup School](https://www.startupschool.org/), our public [YC Startup Library](https://www.ycombinator.com/library), and for [Co-Founder Matching](https://www.ycombinator.com/cofounder-matching),” said Cat Li, Product and Engineering Lead for Y Combinator Startup School. “PostHog is especially useful for Co-Founder Matching, which is essentially a dating app for co-founders.”
 

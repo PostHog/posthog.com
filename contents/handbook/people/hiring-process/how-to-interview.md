@@ -22,7 +22,7 @@ You're trying to understand how a human being operates, so go deep. It'll be mor
 
 ## Ask permission to get what you need
 
-Candidates' expecations of interviews vary wildly.
+Candidates' expectations of interviews vary wildly.
 
 Less experienced candidates, or those in less competitive markets, often expect an intense questioning.
 

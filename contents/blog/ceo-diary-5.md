@@ -64,7 +64,7 @@ At our first offsite in 2020, we ran a [full team feedback session](../handbook/
 
 Tim and I were both given the feedback that we've seen product done badly in our previous careers, and as a result, we aren't building this discipline at all into the company. We were just a bunch of engineers building what we felt users wanted - which was probably the right choice in the first few months, but not the path to building a world-class experience.
 
-Compellingly, Paolo - then, one of our engineers - had proactively acted like a product manager. He gathered deep feedback from dozens of users, which he summarised at the start of the offsite to everyone. It was incredibly useful (and influenced us going broard with our product, giving us a much better strategy).
+Compellingly, Paolo - then, one of our engineers - had proactively acted like a product manager. He gathered deep feedback from dozens of users, which he summarised at the start of the offsite to everyone. It was incredibly useful (and influenced us going broad with our product, giving us a much better strategy).
 
 We thought about it, and realized this was something we needed to act on. We put Paolo into a full time product role, and we hired Marcus into a VP Product role in 2021. The focus they gave us was a key part of getting to five reference customers - this became really obvious last year.
 
