@@ -95,7 +95,7 @@ Bob builds the feature and runs the PostHog CLI, automatically converting his fe
 
 Alice checks the Posthog UI and because it's such an important feature - adds a safety condition for Sentry errors increasing by 30% and a few counter metrics. This should result in an automatic rollback as well. Alice starts the experiment.
 
-Once the feature is rolled out, thankfully, nothing goes wrong, but what's disappointing is that the feature doesn't seem to have moved any of the core company metrics. This doesn't fit into either of Bob's or Alice's model, so they want to dig deeper why this was the case.
+Thankfully, nothing goes wrong when the feature is rolled out. The team is disappointed that the feature doesn't seem to move any of the core company metrics, however. This doesn't fit into either of Bob's or Alice's model, so they dig deeper why this was the case.
 
 Before they even start, PostHog automatically does some impact analysis on their core metrics, and generates some insights into what properties are highly correlated with conversion & which aren't.
 
