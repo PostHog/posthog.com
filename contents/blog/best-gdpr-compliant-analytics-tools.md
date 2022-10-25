@@ -211,13 +211,13 @@ Unlike Plausible and Fathom, TelemetryDeck is an event-based analytics platform,
 
 #### Who is TelemetryDeck for? 
 
-TelemetryDeck is good for individual app developers who want a simple, effective solution for app analytics. It's is most comparable to Countly, though it doesn't collect as much information on users, or offer as many features. There are first-party SDKs for Swift, Kotlin (for Android and Java), and Javascript (for Node and websites). There's also a community SDK for the Unity game engine.
+TelemetryDeck is good for individual app developers who want a simple, effective solution for app analytics. It's most comparable to Countly, though it doesn't collect as much information on users, or offer as many features. There are first-party SDKs for Swift, Kotlin (for Android and Java), and Javascript (for Node and websites). There's also a community SDK for the Unity game engine.
 
 #### Features & benefits
 
 - App analytics for Android and iPhone apps
 - Doesn't track any personally identifiable information
-- Tracks app version and phones OS version
+- Tracks app version and phone OS version
 - Basic retention, funnel, and user path visualizations
 
 #### TelemetryDeck and GDPR compliance
