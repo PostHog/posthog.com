@@ -24,7 +24,7 @@ You won’t see any UI changes — persons will still have their own Persons & G
 
 - **You can create insights based on person properties at the time of an event.** This wasn’t previously feasible and was often requested. Now, with this change, it's possible!
 
-- **Self-hosting users will see a storage increase**. This is due to extra information being stored in your self-hosted ClickHouse. We expect users to see their storage requirement increase by approximately XX. 
+- **Self-hosting users will see a storage increase**. This is due to extra information being stored in your self-hosted ClickHouse. It's difficult to give an estimate on this as the impact will vary a lot depending on configuration and usage per organization. 
 
 Self-hosting users will need to [update to the latest version of PostHog](/docs/runbook/upgrading-posthog), while the change will be automatically rolled out for users on PostHog Cloud. 
 
