@@ -1,12 +1,12 @@
 ---
-date: 2022-10-24
-title: "Databases 101: ClickHouse and PostgreSQL"
+date: 2022-10-26
+title: "In-depth: ClickHouse vs PostgreSQL"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: ["mathew-pregasen"]
-featuredImage: ../images/blog/posthog-release-notes-blog.png
+featuredImage: ../images/blog/clickhouse-vs-postgres/postgres-vs-clickhouse.png
 featuredImageType: full
 categories: ["Engineering", "Guides"]
 ---
