@@ -41,7 +41,7 @@ Key results
 - Hitting an Objective is more important than hitting any Key Results
 - Key Results show we're on track to hitting the Objectives - it should be simple to know if we hit them
 - Key Results are leading indicators and can be achieved quickly
-- Key Results should be specific and measureable whenever possible
+- Key Results should be specific and measurable whenever possible
 
 Bear the following in mind:
 

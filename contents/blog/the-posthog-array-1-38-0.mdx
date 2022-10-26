@@ -37,7 +37,7 @@ Want to know more about what we're up to? [Subscribe to HogMail, our newsletter]
 We've added multiple ways to get insights and dashboards out of PostHog and into your other daily tools, such as Slack. You can now:
 
 - Export dashboards or insights as an image, to share anywhere you need
-- Setup email subcriptions to have updates sent to you and your team regularly
+- Setup email subscriptions to have updates sent to you and your team regularly
 - Setup Slack subscriptions to get scheduled updates into any channel you choose
 
 We've already found subscriptions to be incredibly useful for our team, so go ahead and [get started](/docs/user-guides/subscriptions)!
@@ -59,7 +59,7 @@ To learn more about session analysis, check out the [sessions documentation](/do
 **Note:** Sessions are currently only supported in `posthog-js`. 
 
 ### New: Async migration 0005
-There is a new async migration available which changes the persons table in ClickHouse to use `version` instead of `_timestamp` for collapsing entires. This helps avoid various data integrity issues due to race conditions and batching of Kafka messages within the plugin-server. 
+There is a new async migration available which changes the persons table in ClickHouse to use `version` instead of `_timestamp` for collapsing entries. This helps avoid various data integrity issues due to race conditions and batching of Kafka messages within the plugin-server. 
 
 Curious about async migrations? Find out more in [the self-host docs](https://posthog.com/docs/self-host/configure/async-migrations/overview), or examine this [new migration specficially on GitHub](https://github.com/PostHog/posthog/blob/master/posthog/async_migrations/migrations/0005_person_replacing_by_version.py).
 

@@ -138,7 +138,7 @@ Going beyond this, Netdata also offers more advanced anomaly detection issues fo
 - Single-line auto-deployment
 - Anomaly detection powered by machine learning
 
-## 7. ClickHouse
+## ClickHouse
 
 ![ClickHouse - open source database for engineers](../images/blog/open-source-engineers/clickhouse-open-source.png)
 

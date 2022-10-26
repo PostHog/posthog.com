@@ -37,7 +37,7 @@ Projects are also nested within organizations and, while there are several [ways
 ### How to create private projects
 Normally, when a user joins an organization they get access to all projects within it. But what if you want to keep some things a secret? That’s when private projects are useful. 
 
-Users with Administrator or Owner permissions can make any existing project private via the the _’Access Control_’ section of ‘_Project Settings_’. 
+Users with Administrator or Owner permissions can make any existing project private via the _’Access Control_’ section of ‘_Project Settings_’. 
 
 ## User permissions
 In PostHog, because of the sensitive data available, not all user permissions are created equally — and when you add a new user it’s important to consider how much power you want them to have. Every user is either a _Member_, _Administrator_, or _Owner_. 

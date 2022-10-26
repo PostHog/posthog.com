@@ -16,14 +16,14 @@ Our goal is to build a [diverse](/handbook/company/diversity), world-class team 
 
 | **Position title**        | **Location we're happy to hire in** | **Small Team**        | **Manager** | **Interview Process**                                                                                                                          | **SuperDay Task**              |
 |---------------------------|----------------------------------------|-----------------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|
-| Full Stack Engineer     | GMT -5:00 to +2:00                   | Product Analytics       | Marius    | 1) Culture Screen - Coua<br/> 2) Technical Screen - Marius<br/> 3) Engineering Culture Screen - Tim<br/> 3) SuperDay Assessment - Marius, Emanuele, Michael, Paul, Tim & James H.              | Live Task (link not available) |
+| Full Stack Engineer     | GMT -5:00 to +2:00                   | Product Analytics       | Marius    | 1) Culture Screen - Coua<br/> 2) Technical Screen - Marius<br/> 3) Engineering Culture Screen - Tim<br/> 3) SuperDay Assessment - Marius, Michael, Paul, Tim & James H.              | Live Task (link not available) |
 | Full Stack Engineer       | GMT -5:00 to +2:00                   | Experimentation  | Eric | 1) Culture Screen - Coua<br/> 2) Technical Screen - Eric<br/> 3) Engineering Culture Screen - Tim<br/> 4) SuperDay Assessment - Eric, Li, Neil, Tim & James H. | Live Task (link not available) |
 
 Tasks are only available internally - please do not share these publicly. 
 
 ### External recruiters
 
-All of our recruiting is done in-house, and we do not work with external agencies for any of our roles. We frequently receive unsolicited messages from agencies - sometimes 20 in a week - who want to work with us, and the best response is to simply ignore the message. If they attach any candidate profiles or resumés to their email, please _do not_ open the attachment. If you are ever unsure what to do, feel free to forward any unsolicited messages to careers@posthog.com. 
+All of our recruiting is done in-house, and we do not work with external agencies for any of our roles. We frequently receive unsolicited messages from agencies - sometimes 20 in a week - who want to work with us, and the best response is to simply ignore the message. If they attach any candidate profiles or résumés to their email, please _do not_ open the attachment. If you are ever unsure what to do, feel free to forward any unsolicited messages to careers@posthog.com. 
 
 ### Deciding to hire
 
@@ -225,7 +225,7 @@ In advance of the SuperDay, we will need to do some additional prep to ensure th
 *   Send them an email in the first instance to schedule the SuperDay - we aim to  do this as soon as possible, as candidates often will need to book a day off work. Use the Ashby email template for this. If the task involves them doing 'real' work for PostHog, we should ask them to check that their current employment contract permits this - we try to create fake tasks for this reason.
 *   (One day before the SuperDay) Send the candidate a follow up email with details of the task, and ask them for their day rate and bank details. There is a template for this email in Ashby, depending on the role - this will probably need customising.
 *   (One day before the SuperDay) Create a private channel in Slack for the candidate and all relevant people - this will be where they can chat to us over the course of the day if they have any questions etc. Invite the candidate as a single channel guest. We might need to add the candidate to one of our systems depending on the role, e.g. Ashby for a recruiter SuperDay, but on the whole this should be minimized.
-*   (One day before the SuperDay) Invite the candidate to a kickoff meeting with the hiring manager at the start of the day. On days where we have a company-wide meeting scheduled, invite them along. On days without standup, schedule an informal session with some team members to give them a chance to learn more about our culture. We may also want to have a proper wrap up with them at the end of their day.
+*   (One day before the SuperDay) Invite the candidate to a kickoff meeting with the hiring manager at the start of the day. On days when we have a company-wide meeting scheduled, invite them along. On days without standup, schedule an informal session with some team members to give them a chance to learn more about our culture. We may also want to have a proper wrap up with them at the end of their day.
 *   (On the SuperDay) Send the candidate the task - aim to send this before the kick-off session.
 *   (On the SuperDay) Give the candidate a warm welcome! Make it clear that the team is here to answer any questions, and they should feel free to reach out any time! Otherwise don't feel like we need to check in with them - let them get on with the task and trust that they will message us.
 *   (One day after the SuperDay) Pay the candidate using the bank details they provided.
