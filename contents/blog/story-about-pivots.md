@@ -226,7 +226,7 @@ You learn more by doing than getting advice, but sprinkling an intensive period 
 
 We continuously built products and recruited users onto something real. What people did and what we thought they'd do often diverged. [Jason Fried](https://twitter.com/jasonfried) goes so far as to say [you can't validate something that doesn't exist](https://twitter.com/jasonfried/status/1337095209620946944). The key is to not get scared about just building the thing you're talking about - Tim often only spent a week building things out, and during this time I was busy booking lots of meetings and finding potential users.
 
-You _must_ be quick to do this. Others we heard of during the batch intended on spending months building their new idea out. That idea is a lot more frightening than starting with some throwaway code. Getting some production use, even if [embarassingly early](/blog/we-ship-whenever#why), is important to know if your _concept_ is a compelling enough one that early users are willing to put up with some pain to try to solve the problem you're tackling.
+You _must_ be quick to do this. Others we heard of during the batch intended on spending months building their new idea out. That idea is a lot more frightening than starting with some throwaway code. Getting some production use, even if [embarrassingly early](/blog/we-ship-whenever#why), is important to know if your _concept_ is a compelling enough one that early users are willing to put up with some pain to try to solve the problem you're tackling.
 
 ## Have a user in mind
 

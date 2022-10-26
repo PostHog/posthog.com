@@ -110,7 +110,7 @@ To thank you for your time, we're giving away some awesome [PostHog merch](https
 
 ## PostHog News
 
-We onboarded so many people this cycle that we decided to to make a table for it!
+We onboarded so many people this cycle that we decided to make a table for it!
 
 ### New joiners
 

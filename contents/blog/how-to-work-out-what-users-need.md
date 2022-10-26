@@ -27,7 +27,7 @@ Speaking 1:1 with customers is a great way to immerse yourself in their experien
 Have an approximate structure for the interview, and vary the questions to get a range of insights that will help you understand their needs. But don’t be too rigid - if the conversation goes off on a relevant tangent, follow it. It might lead to some subconsciously valuable insights.
 
 ### How does PostHog do this?
-Gathering user feedback is something we invest in as an on-going activity, regularly reaching out to members of the community and speaking with them directly. Often we record and share these calls internally. 
+Gathering user feedback is something we invest in as an ongoing activity, regularly reaching out to members of the community and speaking with them directly. Often we record and share these calls internally. 
 
 We also run separate usability tests with handpicked users when releasing new features. You can find out more about [how we gather user feedback in the PostHog handbook](/handbook/product/user-feedback).
 
@@ -77,7 +77,7 @@ Leveraging first principles is a great way to understand needs without being bia
 Look at your competitor’s products and ask yourself, “Why do they have this feature?”. This will help you identify the problems they were solving for and build a better solution.
 
 ### How does PostHog do this?
-Competitor research is an on-going process at PostHog, which involves both actively looking into our competitor's products and communitities to identify opportunities, as well as the market at large. 
+Competitor research is an ongoing process at PostHog, which involves both actively looking into our competitor's products and communitities to identify opportunities, as well as the market at large. 
 
 There's no shortcut here; research takes time to do and has to be done thoroughly. However, it's also something that is supported by other types of research - many times in user feedback calls we hear from customers who have used competitors in the past, such as Saga, who have run Mixpanel and PostHog side-by-side to compare performance.
 

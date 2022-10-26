@@ -19,7 +19,7 @@ And, while there is **no universal legal definition** of what constitutes "GDPR-
 
 2. **Data must be handled securely:** GDPR punishes breaches of privacy and security severely. Data must be held securely and staff trained in how to handle data. You must also delete any personal data you hold if a user requests it.
 
-3. **Don't transfer EU personal data to the US:** Non-anonymized identifiable information on EU citizens can't be transferred to the US. This is a hot button issue due to [recent rulings against websites](https://isgoogleanalyticsillegal.com/) that transeferred the personal data of EU citizens (e.g. IP addresses) to Google's US-based servers.
+3. **Don't transfer EU personal data to the US:** Non-anonymized identifiable information on EU citizens can't be transferred to the US. This is a hot button issue due to [recent rulings against websites](https://isgoogleanalyticsillegal.com/) that transferred the personal data of EU citizens (e.g. IP addresses) to Google's US-based servers.
 
 ## The best GDPR-compliant analytics tools
 
@@ -164,7 +164,7 @@ Like PostHog, Countly can be deployed onto your own infrastructure, or in cloud 
 
 #### How much does Countly cost?
 
-Countly doesn't publish pricing on its website. You have to contact sales. Its open source Community Edition is free to self-host, but it exlcudes most of its user behavior features. 
+Countly doesn't publish pricing on its website. You have to contact sales. Its open source Community Edition is free to self-host, but it excludes most of its user behavior features. 
 
 ### 5. Matomo
 
@@ -197,7 +197,7 @@ Matomo offers first-party cookies by default and robust tools to ensure personal
 
 #### How much does Matomo cost?
 
-Matomo's core open source analytics is free to self-host. More advanced features, such as A/B testing and Custom resports, are add-ons charged for annually at varying rates. Its managed cloud service charges by hits (any pageview, event, download etc.) with 1 million hits costing £139 (approx. $170) per month.
+Matomo's core open source analytics is free to self-host. More advanced features, such as A/B testing and Custom reports, are add-ons charged for annually at varying rates. Its managed cloud service charges by hits (any pageview, event, download etc.) with 1 million hits costing £139 (approx. $170) per month.
 
 **Related:** [PostHog and Matomo compared](/blog/posthog-vs-matomo)
 

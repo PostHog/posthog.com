@@ -348,7 +348,7 @@ posthog.screen('Dashboard', {
 
 V1 of this library utilised the underlying `posthog-ios` and `posthog-android` SDKs to do most of the work. Since the new version is written entirely in JS, using only Expo supported libraries, there are some changes to the way PostHog is configured as well as actually calling PostHog.
 
-For iOS, the new React Native SDK will attempt to migrate the previously peristed data which should result in no unexpected changes to tracked data.
+For iOS, the new React Native SDK will attempt to migrate the previously persisted data which should result in no unexpected changes to tracked data.
 
 For Android, it is unfortunately not possible for persisted Android data to be loaded which means stored information such as the randomly generated `anonymousId` or the `distinctId` set by `posthog.identify` will not be present. For identified users, the simple workaround is to ensure that `identify` is called at least once when the app loads. For anonymous users there is unfortunately no straightforward workaround they will show up as new anonymous users in PostHog.
 
