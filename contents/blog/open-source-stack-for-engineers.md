@@ -1,6 +1,6 @@
 ---
 date: 2022-10-19
-title: "Modern Data Stack 101: The open source alternatives"
+title: "Building an open source data stack"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
