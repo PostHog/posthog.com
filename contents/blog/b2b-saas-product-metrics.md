@@ -17,11 +17,11 @@ Everyone knows you've got to measure stuff to succeed. This is not news.
 
 What, why, and how? These are the questions that matter and the answers lie in the product metrics you track.
 
-In this guide we will:
+In this guide, we'll cover:
 
-1. Reveal [what makes a good metric](#what-makes-a-good-b2b-product-metric) for a B2B product
-2. Explain the [common metrics used by B2B SaaS companies](#common-b2b-saas-product-metrics)
-3. [Recommend metrics](#recommended-b2b-product-metrics) for most B2B SaaS products
+1. [What makes a good metric](#what-makes-a-good-b2b-product-metric) for a B2B product
+2. [The common metrics used by B2B SaaS companies](#common-b2b-saas-product-metrics)
+3. [How to choose your product metrics](#how-to-choose-your-product-metrics) 
 
 > **Note:** This guide is about _product_ metrics, not revenue or wider business metrics like customer lifetime value (CLV) or average revenue per user (ARPU). Naturally, they're important too, but this guide is all about the metrics of most interest to product teams.
 
