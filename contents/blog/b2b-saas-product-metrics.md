@@ -23,15 +23,15 @@ In this guide, we'll cover:
 2. [The common metrics used by B2B SaaS companies](#common-b2b-saas-product-metrics)
 3. [How to choose your product metrics](#how-to-choose-your-product-metrics) 
 
-> **Note:** This guide is about _product_ metrics, not revenue or wider business metrics like customer lifetime value (CLV) or average revenue per user (ARPU). Naturally, they're important too, but this guide is all about the metrics of most interest to product teams.
+> **Note:** This guide is about _product_ metrics, not revenue or wider business metrics like customer lifetime value (LTV) or average revenue per user (ARPU). Naturally, they're important too, but this guide is all about the metrics of most interest to product teams.
 
 ## What are product metrics?
 
 Product metrics capture how people use your product **and** how that impacts your business. 
 
-For example, if the number of new users who go on to successfully use your product (aka new user activation) is declining, you can expect this to lead to a decline in the number of paying users.
+For example, if the number of new users who successfully use your product (aka new user activation) declines, you can expect this to lead to a decline in the number of paying users.
 
-Product metrics are essential for understanding the overall health of your product and areas of weakness, but they also help guide your product roadmap.
+Product metrics are essential for understanding the overall health of your product and areas of weakness, and they also help guide your product decisions.
 
 ## What makes a good B2B product metric?
 
@@ -51,7 +51,7 @@ It's not realistic to achieve all four in every metric you use, but three out of
 
 ## Common product metrics
 
-Coming up are some of the most common metrics for SaaS products. We explain what they are, how to measure them, and how useful they really are.
+Coming up are some of the most common metrics for products. We explain what they are, how to measure them, and how useful they really are.
 
 Think we missed one? Make a suggestion via [our website repo](https://github.com/PostHog/posthog.com).
 
@@ -165,19 +165,19 @@ Monitoring support requests is best monitored after an update, or the introducti
 
 When choosing your product metrics, first remember the four qualities of good metrics we mentioned earlier: understandable, comparative, specific and actionable.
 
-They're all important in isolation, but hugely powerful in combination. Here's an example of how this works in practice.
+They're all important in isolation, but more powerful when combined. Here's an example of how this works.
 
 Our product, [PostHog](https://posthog.com/), is all about helping engineers and product teams discover insights about product usage. 
 
 In PostHog, users can:
 
-- Create and analyze insights that track trends over time, how well users convert, what paths they take, and how well they retain.
+- Create and analyze insights that track trends over time such as how well users convert, what paths they take, and how well they retain.
 
-- Use dashboards to collate insights into cohesive reports on any element of the product experience.
+- Use dashboards to combine insights into cohesive reports on any element of the product experience.
 
-- View session recordings of real customers using their product to understand where they get stuck, or how they use the product.
+- View session recordings of real customers to understand where they get stuck or how they use the product.
 
-- Use feature flags to run product experiments on new features and user experiences before rolling them out.
+- Use feature flags to test and run experiments before rolling features out.
 
 To capture all this activity, we created a composite metric we call [Discoveries](/handbook/product/metrics). We define Discoveries as any time a PostHog user analyzes an insight, dashboard, recording, or correlation analysis report for 10 second or more.
 
