@@ -1,5 +1,5 @@
 ---
-date: 2022-10-25
+date: 2022-10-26
 title: The most useful B2B SaaS product metrics
 rootPage: /blog
 sidebar: Blog
