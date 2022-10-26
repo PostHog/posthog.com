@@ -11,40 +11,42 @@ export function UnderConsideration(props: IRoadmap) {
                 <span>{title}</span>
                 <span className="text-sm text-black opacity-50">#{number}</span>
             </Link>
-            <ul className="list-none m-0 p-0 flex items-center space-x-2 text-sm font-semibold mt-2 mb-2">
-                {reactions.heart > 0 && (
-                    <li className="flex space-x-1 items-center">
-                        <>
-                            <span>❤️</span>
-                            <span className="text-black/60">{reactions.heart}</span>
-                        </>
-                    </li>
-                )}
-                {reactions.eyes > 0 && (
-                    <li className="flex space-x-1 items-center">
-                        <>
-                            <span>👀</span>
-                            <span className="text-black/60">{reactions.eyes}</span>
-                        </>
-                    </li>
-                )}
-                {reactions.hooray > 0 && (
-                    <li className="flex space-x-1 items-center">
-                        <>
-                            <span>🎉</span>
-                            <span className="text-black/60">{reactions.hooray}</span>
-                        </>
-                    </li>
-                )}
-                {reactions._1 > 0 && (
-                    <li className="flex space-x-1 items-center">
-                        <>
-                            <span>👍</span>
-                            <span className="text-black/60">{reactions._1}</span>
-                        </>
-                    </li>
-                )}
-            </ul>
+            {reactions ? (
+                <ul className="list-none m-0 p-0 flex items-center space-x-2 text-sm font-semibold mt-2 mb-2">
+                    {reactions.heart > 0 && (
+                        <li className="flex space-x-1 items-center">
+                            <>
+                                <span>❤️</span>
+                                <span className="text-black/60">{reactions.heart}</span>
+                            </>
+                        </li>
+                    )}
+                    {reactions.eyes > 0 && (
+                        <li className="flex space-x-1 items-center">
+                            <>
+                                <span>👀</span>
+                                <span className="text-black/60">{reactions.eyes}</span>
+                            </>
+                        </li>
+                    )}
+                    {reactions.hooray > 0 && (
+                        <li className="flex space-x-1 items-center">
+                            <>
+                                <span>🎉</span>
+                                <span className="text-black/60">{reactions.hooray}</span>
+                            </>
+                        </li>
+                    )}
+                    {reactions._1 > 0 && (
+                        <li className="flex space-x-1 items-center">
+                            <>
+                                <span>👍</span>
+                                <span className="text-black/60">{reactions._1}</span>
+                            </>
+                        </li>
+                    )}
+                </ul>
+            ) : null}
             <Link
                 to={html_url}
                 className="text-[15px] active:top-[0.5px] active:scale-[.98] inline-flex items-center space-x-2 py-2 px-4 rounded-sm bg-gray-accent-light text-black hover:text-black font-bold"
