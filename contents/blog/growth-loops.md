@@ -32,7 +32,7 @@ Nearly every successful company utilizes growth loops in some way, consciously o
 
 Growth loops can be a useful way of aligning multiple areas. For a growth loop to work, customer-facing teams must align with engineering and product teams. Each team benefits from the work the others are doing. 
 
-In our Substack example, the marketing and business development teams have to attract large writers (who often required upfront payments). The product and engineering teams then have to deliver a great writing and subscription experience. Without both, the growth loop doesn't work. When the company is aligned, however, it can cause exponential growth through compounding benefits. For Substack, that means bigger writers, better experiences, more readers, and ultimately, more revenue.
+In our Substack example, the marketing and business development teams have to attract popular writers (who often require upfront payments). The product and engineering teams then have to deliver a great writing and subscription experience. Without both, the growth loop doesn't work. When the company is aligned, however, it can cause exponential growth through compounding benefits. For Substack, that means bigger writers, better experiences, more readers, and ultimately, more revenue.
 
 ## Types of growth loops
 
