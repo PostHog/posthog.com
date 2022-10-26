@@ -53,7 +53,7 @@ Some variables here are default Django variables. This [Django Docs page](https:
 | `OPT_OUT_CAPTURING`        | Disable sending product usage data to PostHog. | `False`
 | `POSTHOG_DB_NAME`| Database name. | Must be specified when `DATABASE_URL` is not set.
 | `POSTHOG_DB_PASSWORD`| Database password. | `""` if PostHog is running in DEBUG or TEST mode. Must be specified when `DATABASE_URL` is not set.
-| `POSTHOG_DB_USER`| Database user name. | `postgres` if PostHog is running in DEBUG or TEST mode. Must be specified when `DATABASE_URL` is not set.
+| `POSTHOG_DB_USER`| Database username. | `postgres` if PostHog is running in DEBUG or TEST mode. Must be specified when `DATABASE_URL` is not set.
 | `POSTHOG_POSTGRES_CLI_SSL_CA`| Location of the SSL root certificate file for PostgreSQL. [More info.](https://www.postgresql.org/docs/current/ssl-tcp.html) | `None`
 | `POSTHOG_POSTGRES_CLI_SSL_CRT`| Location of the SSL certificate file for PostgreSQL. [More info.](https://www.postgresql.org/docs/current/ssl-tcp.html) | `None`
 | `POSTHOG_POSTGRES_CLI_SSL_KEY`| Location of the SSL key file for PostgreSQL. [More info.](https://www.postgresql.org/docs/current/ssl-tcp.html) | `None`

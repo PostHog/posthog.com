@@ -35,17 +35,8 @@ export default function CTA({ className = '' }) {
                 <CallToAction type="primary" className="!w-full md:!w-auto" to="https://app.posthog.com/signup">
                     Try PostHog Cloud - free
                 </CallToAction>
-                <CallToAction
-                    type="secondary"
-                    width="56"
-                    className="!w-full md:!w-auto"
-                    to="https://demo.posthog.com"
-                    externalNoIcon
-                >
-                    Try the demo
-                </CallToAction>
-                <div className="inline-flex items-center space-x-2">
-                    or
+                <div className="inline-flex items-center space-x-4">
+                    <span>or</span>
                     <DemoLink dark />
                 </div>
             </div>

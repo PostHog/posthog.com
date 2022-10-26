@@ -160,7 +160,7 @@ Beyond this top-level metric, the Content Marketing Effectiveness dashboard (yes
 
 Above is a funnel analysis for one of our most successful blog posts, a guide to [open-source session recording tools](/blog/best-open-source-session-replay-tools). It converts to intent at nearly 23%, which is awesome.
 
-At other end of the spectrum, we have our guide to [GDPR-compliant analytics tools](/blog/best-gdpr-compliant-analytics-tools). It only converts 6.3% of the time – perhaps the launch of [PostHog Cloud EU](/signup/eu-cloud) will increase that figure? 🤔
+At other end of the spectrum, we have our guide to [GDPR-compliant analytics tools](/blog/best-gdpr-compliant-analytics-tools). It only converts 6.3% of the time – perhaps the launch of [PostHog Cloud EU](https://eu.posthog.com/signup) will increase that figure? 🤔
 
 Comparison articles, such as [PostHog vs Amplitude](/blog/posthog-vs-amplitude) convert very well – in the region of 25%. This makes sense given people coming into these articles are already in a consideration phase, but the confirmation is useful. We also use these insights to compare similar articles.
 

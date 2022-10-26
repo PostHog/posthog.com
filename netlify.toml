@@ -1930,48 +1930,35 @@
 
 # Added: 2022-08-29
 [[redirects]]
-    from = "/handbook/engineering/databases"
-    to = "/docs/how-posthog-works/ingestion-pipeline"
+    from = "/manual/actions"
+    to = "/docs/user-guides/actions"
 
-# Added: 2022-08-29
-[[redirects]]
-    from = "/docs/architecture/ingestion-pipeline"
-    to = "/docs/how-posthog-works/ingestion-pipeline"
 
-# Added: 2022-09-01
+# Added: 2022-08-16
 [[redirects]]
-    from = "/blog/the-posthog-array-1-39-1"
-    to = "/blog/the-posthog-array-1-39-0"
-    
-# Added: 2022-09-02    
-[[redirects]]
-    from = "/product/experimentation"
-    to = "/product/experimentation-suite"
+    from = "/manual/annotations"
+    to = "/docs/user-guides/annotations"
 
-# Added: 2022-09-11 # Updated: 2022-09-15
-[[redirects]]
-    from = "/handbook/strategy/strategy"
-    to = "/handbook/strategy/overview"
 
 # Added: 2022-09-15
 [[redirects]]
     from = "/handbook/engineering/app-east"
     to = "/handbook/people/team-structure/product-analytics"
 
-# Added: 2022-09-15
+# Added: 2022-08-16
 [[redirects]]
-    from = "/handbook/people/team-structure/team-east"
-    to = "/handbook/people/team-structure/product-analytics"
+    from = "/manual/cohorts"
+    to = "/docs/user-guides/cohorts"
 
 [[redirects]]
     from = "/handbook/people/team-structure/app-east"
     to = "/handbook/small-teams/app-east"
 
 
-# Added: 2022-09-16
+# Added: 2022-08-16
 [[redirects]]
-    from = "/handbook/strategy/overview"
-    to = "/handbook/strategy/strategy"
+    from = "/manual/feature-flags"
+    to = "/docs/user-guides/feature-flags"
 
 # Added: 2022-09-20
 [[redirects]]
@@ -1983,21 +1970,14 @@
     from = "/handbook/company/website-design-process"
     to = "/handbook/designing-posthog-website"
 
-
-# Added: 2022-09-24
-[[redirects]]
-    from = "/handbook/company/working-with-product-design"
-    to = "/handbook/engineering/product-design"
-
-
 # Added: 2022-10-01
 [[redirects]]
     from = "/handbook/people/team-structure"
     to = "/handbook/small-teams"
     
 [[redirects]]
-    from = "/marketplace"
-    to = "/partners"
+    from = "/manual/group-analytics"
+    to = "/docs/user-guides/group-analytics"
 
 # Added: 2022-10-01
 [[redirects]]
@@ -2061,14 +2041,14 @@
 
 # Added: 2022-10-01
 [[redirects]]
-    from = "/marketplace/guidelines"
-    to = "/partners/guidelines"
+    from = "/manual/insights"
+    to = "/docs/user-guides/insights"
 
 
-# Added: 2022-10-01
+# Added: 2022-08-16
 [[redirects]]
-    from = "/marketplace/listing-template"
-    to = "/partners/listing-template"
+    from = "/manual/lifecycle"
+    to = "/docs/user-guides/lifecycle"
 
 # Added: 2022-10-01
 [[redirects]]
@@ -2103,6 +2083,10 @@
     from = "/handbook/people/team-structure/product-analytics"
     to = "/handbook/small-teams/product-analytics"
 
+# Added: 2022-10-07
+[[redirects]]
+    from = "/docs/self-host/postgres-vs-clickhouse"
+    to = "/blog/clickhouse-vs-postgres"
 
 # Added: 2022-10-11
 [[redirects]]
@@ -2112,3 +2096,7 @@
 [[redirects]]
     from = "/eu-cloud"
     to = "/eu"
+
+[[redirects]]
+    from = "/handbook/strategy/roadmap"
+    to = "/roadmap"

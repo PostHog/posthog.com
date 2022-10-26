@@ -12,30 +12,38 @@ export function UnderConsideration(props: IRoadmap) {
                 <span className="text-sm text-black opacity-50">#{number}</span>
             </Link>
             <ul className="list-none m-0 p-0 flex items-center space-x-2 text-sm font-semibold mt-2 mb-2">
-                <li className="flex space-x-1 items-center">
-                    {reactions.heart > 0 && (
+                {reactions.heart > 0 && (
+                    <li className="flex space-x-1 items-center">
                         <>
                             <span>❤️</span>
                             <span className="text-black/60">{reactions.heart}</span>
                         </>
-                    )}
-                </li>
-                <li className="flex space-x-1 items-center">
-                    {reactions.eyes > 0 && (
+                    </li>
+                )}
+                {reactions.eyes > 0 && (
+                    <li className="flex space-x-1 items-center">
                         <>
                             <span>👀</span>
                             <span className="text-black/60">{reactions.eyes}</span>
                         </>
-                    )}
-                </li>
-                <li className="flex space-x-1 items-center">
-                    {reactions.hooray > 0 && (
+                    </li>
+                )}
+                {reactions.hooray > 0 && (
+                    <li className="flex space-x-1 items-center">
                         <>
                             <span>🎉</span>
                             <span className="text-black/60">{reactions.hooray}</span>
                         </>
-                    )}
-                </li>
+                    </li>
+                )}
+                {reactions._1 > 0 && (
+                    <li className="flex space-x-1 items-center">
+                        <>
+                            <span>👍</span>
+                            <span className="text-black/60">{reactions._1}</span>
+                        </>
+                    </li>
+                )}
             </ul>
             <Link
                 to={html_url}

@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 featuredTutorial: false
 author: ['neil-kakkar']
-topics: ['feature flags']
+topics: ['experiments', 'feature flags']
 featuredImage: ../images/tutorials/banners/experiments.png
 date: 2022-05-26
 ---
@@ -101,5 +101,6 @@ And that's all! You should be good to run any experiment you want with these cha
 
 - [How to safely roll out new features using feature flags](/tutorials/feature-flags)
 - [Our guide to great open-source feature flags tools](/blog/best-open-source-feature-flag-tools)
+- [How to run Experiments on new users](/tutorials/new-user-experiments)
 
 <NewsletterTutorial compact/>
