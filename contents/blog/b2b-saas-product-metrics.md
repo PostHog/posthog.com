@@ -161,9 +161,41 @@ Monitoring support requests is best monitored after an update, or the introducti
 
 **Is it useful?** Inviting colleagues to create an account is a sure sign users are getting value from your product, and will reduce churn among your customers. What's not to like about that?
 
-## Recommended B2B product metrics
+## How to choose your product metrics
 
-Every product requires a different metrics, but these are the metrics we'd recommend for most B2B products:
+When choosing your product metrics, first remember the four qualities of good metrics we mentioned earlier: understandable, comparative, specific and actionable.
+
+They're all important in isolation, but hugely powerful in combination. Here's an example of how this works in practice.
+
+Our product, [PostHog](https://posthog.com/), is all about helping engineers and product teams discover insights about product usage. 
+
+In PostHog, users can:
+
+- Create and analyze insights that track trends over time, how well users convert, what paths they take, and how well they retain.
+
+- Use dashboards to collate insights into cohesive reports on any element of the product experience.
+
+- View session recordings of real customers using their product to understand where they get stuck, or how they use the product.
+
+- Use feature flags to run product experiments on new features and user experiences before rolling them out.
+
+To capture all this activity, we created a composite metric we call [Discoveries](/handbook/product/metrics). We define Discoveries as any time a PostHog user analyzes an insight, dashboard, recording, or correlation analysis report for 10 second or more.
+
+What makes this a good product metric for us? Let's break it down:
+
+- **Is easy to understand?** Yes. While it combines several different events into one action, they're all easy for anyone who knows the product to understand.
+
+- **Is it comparable?** Absolutely. We can use this metric to compare power users to average users and compare different cohorts based on multiple criteria (e.g. paying vs non-paying customers, job title etc.). It's also sensitive to changes in the product, so we can see whether our users make more or fewer discoveries when we make a change.
+
+- **Is it specific?** Yes. Again, while it's a composite metric, each individual event captures users getting value from our product.
+
+- **Is it actionable?** Yes. If this metric drops, it immediately gives us several avenues of investigation to understand the cause.
+
+Not all useful product metrics follow this trend – active users is a notable exception – but it's a good acid test to apply to any metric you're considering.
+
+### Recommended B2B product metrics
+
+To help get you started, we've chosen five metrics that are useful for any B2B product. You will want to augment and adapt these for your specific needs, but 
 
 - **Active users (DAU / WAU / MAU)** because it's a fundamental metric that underpins others, and allows you to measure user growth over time.
 
@@ -181,10 +213,12 @@ And if you're in need a product analytics platform to track them, learn [how we 
 
 ## Further reading
 
+For more inspiration around measuring product success, we recommend reading our [guide to AARRR pirate metrics](/blog/aarrr-pirate-funnel) – a popular framework for understanding user behavior and discovering opportunities.
+
+You may also find the following guides useful:
+
 - [How to achieve B2B product market fit](/blog/how-to-product-market-fit): There's no universal standard for achieving market fit, but this guide introduces heuristics to help you find it
 
-- [How to measure product engagement](/blog/how-to-product-market-fit): Guide to defining engagement for your platform, and how to use analytics tools to measure and build on the results
-
-- [Finding your north star metric](/blog/north-star-metrics): All Saas products can benefit from a north star metric and this guide will help you find one
+- [Finding your north star metric](/blog/north-star-metrics): All SaaS products can benefit from a north star metric and this guide will help you find one
 
 - [How to get Stripe payment and revenue data](/tutorial/stripe-payment-data): This tutorial helps you get the data about your customers (and revenue) from Stripe you need to calculate some of these metrics
