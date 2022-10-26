@@ -75,7 +75,7 @@ As soon as we had decided to build PostHog, our next phase was to see if anyone 
 
 Before launching on HN, we focused on this loop:
 
-### 1. Find someone who is interested in what we working on
+### 1. Find someone who is interested in what we are working on
 
 This was the only time we had to do outreach at PostHog. Once we had product market fit, this need disappeared.
 
