@@ -24,8 +24,8 @@ const Layout = ({ children, className = '' }: { children: React.ReactNode; class
         <div className={className}>
             <div>
                 <p className="text-center py-4 bg-gray-accent-light dark:bg-gray-accent-dark flex sm:flex-row flex-col justify-center sm:space-x-1 font-semibold m-0">
-                    <span>🚀 PostHog's EU Cloud has arrived!</span>
-                    <Link to="/eu" className="text-red">
+                    <span>Update 1.41 now available!</span>
+                    <Link to="/blog/the-posthog-array-1-41-0" className="text-red">
                         Learn more
                     </Link>
                 </p>
