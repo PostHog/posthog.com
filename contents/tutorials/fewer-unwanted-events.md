@@ -12,13 +12,13 @@ topics: ['configuration', 'apps']
 
 For some users, cost is a big concern. Too many events can cause unexpected costs when first trying a product analytics platform like PostHog. We want to make sure we are providing value to you as a customer, and if that means capturing fewer events, we’ll do it.
 
-For others, PostHog can overwhelm them with events. We try our best to not have this happen with filtering tools for [insights](/manual/insights), [internal users](/tutorials/filter-internal-users), and [privacy](/tutorials/property-filter). We recommend having as much data as possible, because you never know what you need, but if you are feeling overwhelmed, there are solutions.
+For others, PostHog can overwhelm them with events. We try our best to help you avoid this by providing filtering tools for [insights](/manual/insights), [internal users](/tutorials/filter-internal-users), and [privacy](/tutorials/property-filter). We recommend having as much data as possible, because you never know what you need, but if you are feeling overwhelmed, there are solutions.
 
-PostHog provides options to capture fewer events and limiting the number of unwanted ones. This can help lower costs and stress for new or overwhelmed users.
+PostHog provides options to capture fewer events and limit the number of unwanted ones. This can help lower costs and stress for new or overwhelmed users. In this tutorial, we'll explore how to limit the number of unwanted events you capture in PostHog. 
 
 ## Configuring autocapture
 
-Autocapture enables you to get started capturing events on your site quickly, but this can lead to large numbers of events. 
+Autocapture enables you to start capturing events on your site quickly, but this can lead to large numbers of events. 
 
 To counteract this, autocapture is configurable. For example, you can use the frontend JavaScript library without enabling autocapture. Just set `autocapture` to `false` when initializing the library (this still captures `pageview` and `pageleave`).
 
@@ -30,13 +30,13 @@ posthog.init('<ph_project_api_key>', {
 })
 ```
 
-You can also disable `pageview` and `pageleave` with the `capture_pageview` option and session recordings with `disable_session_recording`. You can find all the configuration options for our [JavaScript library here](/docs/integrate/client/js#config).
+You can also disable `pageview` and `pageleave` with the `capture_pageview` option and session recordings with `disable_session_recording`. You can find all the [configuration options for our JavaScript library](/docs/integrate/client/js#config) in our docs.
 
-Disabling these options still allows you to use other PostHog features like `posthog.capture()` calls or feature flags. If limiting unwanted events is what is important for you, using disabling autocapture and using capture calls gives you more control over the events you are capturing. 
+Disabling these options still allows you to use other PostHog features such as `posthog.capture()` calls or feature flags. If limiting unwanted events is what is important for you, using disabling autocapture and using capture calls gives you more control over the events you are capturing. 
 
 ## Using feature flags
 
-If you’re worried that a specific area of your product generating too many events, you can put those events behind feature flags. You can use feature flags instead of changing code to remove events or turn off autocapture. Here are two ways to do so.
+If you’re worried that a specific area of your product may be generating too many events, you can put those events behind feature flags. You can use feature flags instead of changing code to remove events or turn off autocapture. Here are two ways to do so.
 
 First, you can turn off autocapture with a feature flag when the PostHog library loads. Toggling off this feature flag can lower event flow within PostHog without changing the code.
 
