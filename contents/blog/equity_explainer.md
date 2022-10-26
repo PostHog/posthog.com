@@ -1,6 +1,6 @@
 ---
 date: 2022-10-20
-title: "A complete and simple guide to options at PostHog"
+title: "Rising tides: our employee-friendly share options scheme"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -15,7 +15,11 @@ Suppose you’ve ever worked for a start-up, or read news about a Unicorn tech c
 
 Equity is the amount of ownership of a corporation held by a person or entity. This ownership is usually described as either a percentage of the total equity of the business or at later stages, a finite number of shares. The majority of tech start-ups offer equity as part of their total compensation, normally in the form of share “options”. The upside potential of these options is meant to compensate for the more gruelling (and in my opinion, rewarding) work of growing a start-up company from founding to IPO (more on that later).
 
-But, despite its popularity, equity is very rarely understood by employees! With this post, I hope to shine a light on some of the most confusing aspects of start-up equity, and highlight how PostHog breaks from the norm to offer options in a much more employee-friendly way.
+When we set out to design a share options scheme, we decided to prioritize employee-friendliness for a number of reasons:
+  - Many of us had personally been burned by unfriendly share option schemes when working at previous companies
+  - It helps us to attract talent by making our share options massively more valuable in practical terms, not just the pure $ amount (which in many ways may be the least important thing).
+  - It's part of our culture to expect high performance but reward people well and ensure they are genuinely able to share in PostHog's growth. Having a good share options scheme helps people feel more bought in.
+  - We also feel that it's just the right thing to do!
 
 ## How share options work
 
@@ -51,9 +55,10 @@ Making matters more complicated, the majority of standard terms in stock option 
 
 |                           | **PostHog**                 | **Most startups**           |
 |---------------------------|-----------------------------|------------------------------|
-| **Vesting Start:**        | On your first day           | After a "probationary period" |
+| **Vesting Start:**        | On your first day           | After a "probationary period"|
 | **Exercise Window:**      | 10 _years_ after departure  | 90 _days_ after departure    |
 | **Merger or Acquisition** | Double-Trigger acceleration | No acceleration              |
+| **Good Leavers**.         | Includes performance lay-off| Doesn't include performance  |
 
 ### Vesting Start
 
@@ -70,5 +75,11 @@ In the unlikely event that you are let go “with cause” (i.e. for gross misco
 In the event that PostHog is sold to another company before we reach an IPO, we have preferable terms that ensure team members who contributed to growing the company to that point are rewarded for their efforts. 
 
 If the company is acquired (first trigger) **and** you are terminated as part of that acquisition (second trigger), all of your options vest immediately and your 10-year window to exercise them begins. This can offer some protection and certainty to employees who exercise their options following this trigger, as shares in the company during acquisition are much more tangible than options to buy shares, and are often converted into shares of the acquiring company or bought back by the acquirer for cash.
+
+### What if I am let go from PostHog?
+
+A "good leaver" in share options scheme is someone who departs a company but retains their vested options and can exercise them according to the company's specified schedule. At PostHog, we believe that a "good leaver" is anyone who voluntarily resigns or is let go for performance reasons. Usually performance-related issues stem from a mismatch between a teammate and the culture of the company, and we feel it is always best for both the company and the individual to allow people to find the best fit for them (which is why we offer [very generous severance](https://posthog.com/handbook/people/compensation#severance). Only in the event of serious transgressions, such as harrassment or embezzlement, do we deem someone a "bad leaver" who forefits all of their vested options. 
+
+In many other companies, only people who voluntarily resign are considered "good leavers" (and in some extreme cases, the concept of a "good leaver" does not exist and you forfeit your options regardless of how you leave the company).
 
 As an open-source company, we are transparent about compensation including equity, because we believe that everyone who contributes to our success should reap the benefits. For more information about how PostHog thinks about equity, check out our [compensation page](/handbook/people/compensation) and [equity FAQ](/people/share-options) in our handbook.
