@@ -64,11 +64,43 @@ if (!posthog.isFeatureEnabled('disable-event-capture')) {
 
 Feature flags work well as “kill switches” in situations where you want fewer events. You can collect events from a specific area and then turn the event capture off when you’ve got the data and insights you’re looking for.
 
+## Filter out app
+
+PostHog has apps that enable you to modify the events flowing into your instance. We can use them to capture fewer events.
+
+The first app is the "Filter Out" app. It is used to filter out (or in) events matching certain conditions. This includes filters like number comparison, string regex, and boolean checks.
+
+To set it up, go to Browse Apps, search for "Filter Out Plugin," and upload JSON matching the schema detailed in the [README](https://github.com/plibither8/posthog-filter-out-plugin). This will look something like:
+
+```js
+[
+  {
+    "property": "email",
+    "type": "string",
+    "operator": "not_contains",
+    "value": "yourcompany.com"
+  },
+  {
+    "property": "$host",
+    "type": "string",
+    "operator": "is_not",
+    "value": "localhost:8000"
+  },
+  {
+    "property": "$browser_version",
+    "type": "number",
+    "operator": "gt",
+    "value": 100
+  }
+]
+```
+Finally, click save and toggle the app to activate it. You'll be able to track how it is working by clicking on the "App metrics" button (graph).
+
+> Be sure to test your filters drop the events you expect, because miswritten schema can filter large amounts of events. For example, our sample `email` filter filters all events without an email key and autocaptured properties must start with `$`.
+
 ## Drop events based on property app
 
-PostHog has apps that enable you to modify the events flowing into your instance. We can use them to capture fewer events. 
-
-The first app is the “[Drop events based on property](https://github.com/PostHog/drop-events-on-property-plugin)” app. You can use it to drop events that match a specified property. This is useful for [privacy-focused](/tutorials/property-filter) teams or teams who want to capture fewer events. 
+The second app is the “[Drop events based on property](https://github.com/PostHog/drop-events-on-property-plugin)” app. It is similar to the Filter Out app. You can use it to drop events that match a specified property. This is useful for [privacy-focused](/tutorials/property-filter) teams or teams who want to capture fewer events. 
 
 To set up this app, search for “Drop Events Based On Property” in Apps, click the blue gear, add the key and value (optional) of the event you want to drop, click save, and activate the toggle. As an example, if I want to drop events related to a specific page, I can set the property key to `$pathname` and the property value to `/about`
 
@@ -78,7 +110,7 @@ Doing this drops any events where the property `$pathname` is `/about`. This is 
 
 ## Downsampling app
 
-The second app you can use to capture fewer events is the [Downsampler](/docs/apps/downsampling) app. It reduces the number of events your instance will ingest by a percentage. 
+The third app you can use to capture fewer events is the [Downsampler](/docs/apps/downsampling) app. It reduces the number of events your instance will ingest by a percentage. 
 
 To configure it, search for the “Downsampling Plugin” in Apps, click the blue gear, pick a percentage of events you want to keep, and click the toggle to activate.
 
