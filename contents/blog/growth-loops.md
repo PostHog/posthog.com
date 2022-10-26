@@ -28,6 +28,8 @@ Growth loops are important because they compound. Ideally, the growth in your ke
 
 Nearly every successful company utilizes growth loops in some way, consciously or not. For example, the newsletter platform Substack allows writers to easily share and monetize their work. As writers share their work (for their own benefit), it gets the attention of other writers, who see the benefit of the platform, join, and continue the loop.
 
+![Substack growth loop](../images/blog/growth-loops/substack.png)
+
 Growth loops can be a useful way of aligning multiple areas. For a growth loop to work, customer-facing teams must align with engineering and product teams. Each team benefits from the work the others are doing. 
 
 In our Substack example, the marketing and business development teams have to attract large writers (who often required upfront payments). The product and engineering teams then have to deliver a great writing and subscription experience. Without both, the growth loop doesn't work. When the company is aligned, however, it can cause exponential growth through compounding benefits. For Substack, that means bigger writers, better experiences, more readers, and ultimately, more revenue.
@@ -50,6 +52,8 @@ This is generally good for two types of products:
 The performance marketing growth loop is using advertising or marketing to acquire users, then using the new revenue to fund more marketing. It is reliant on connecting marketing to acquire users (performance) with value (revenue) captured. If you see a social media or search ad for a product, that is a product relying on performance marketing.
 
 For example, with Google Ad Words, companies pay per click on specific keywords related to potential customers’ searches. They pay for clicks (performance). With the correct math figured out (cost of acquisition), this can lead to a growth loop of increasing ad spend and revenue growth.
+
+![Performance marketing with Google growth loop](../images/blog/growth-loops/google.png)
 
 Products that use performance marketing growth loops generally have high margins (more money for ads), but low organic demand. Good examples include direct-to-consumer goods (e.g. Casper, Warby Parker, Dollar Shave Club) and SaaS software targeting small-medium businesses (e.g. Shopify, Hubspot, Slack).
 
@@ -79,13 +83,17 @@ After reading these, you likely have some idea of what growth loop is right for 
 
 Understanding your ideal user will help you decide where to put your effort for your growth loop. If your ideal user won’t pay for your product, it isn’t a good idea to use sales as your growth loop. You can create a growth loop that better aligns with what they want. Growth loops are about creating win-wins.
 
-For example, say you are LinkedIn. Your ideal user is a newly graduated business professional. They have less income, so they are less likely to pay for a subscription. Sales and performance marketing are less likely to work. 
+For example, say you are LinkedIn. Your ideal user is a newly graduated business professional. They have less income, so they are less likely to pay for a subscription. Sales and performance marketing are less likely to work.
 
 What you can do is create a connection between their network and content creation. They value their network a lot, and creating content is free. When a user creates and shares content, their network pays attention. With this attention, the user engages with their network, and LinkedIn sells ads. When other users see the benefits of this, they share content, and this cycle repeats. This is a content growth loop.
 
+![LinkedIn growth loop](../images/blog/growth-loops/linkedin.png)
+
 A user needs a win-win to repeatedly take an action that fuels a product’s growth loop. They won't take an action they don't think they'll benefit from. They need an incentive, whether it is status, attention, or money. Smart companies build this incentive into the core of their product.
 
-For example, HubSpot builds a large number of free tools small-medium businesses benefit from, like "Website Grader" or "Email Signature Generator" as well as the free tier of their product. These freebies get a lot of attention which drives signups, some of which turn into customers. The growth in customers allows them to improve their overall product (including their free tools) and create a B2B viral growth loop. 
+For example, HubSpot builds a large number of free tools small-medium businesses benefit from, like "Website Grader" or "Email Signature Generator" as well as the free tier of their product. These freebies get a lot of attention which drives signups, some of which turn into customers. The growth in customers allows them to improve their overall product (including their free tools) and create a B2B viral growth loop.
+
+![Hubspot growth loop](../images/blog/growth-loops/hubspot.png)
 
 There are many creative ways to provide users incentives to be a part of your growth loop. Optimizing existing win-wins with users, as well as finding new ones, fuels the growth loops that help products succeed.
 
