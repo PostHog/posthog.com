@@ -49,7 +49,9 @@ The FMV is decided through an external, very complicated process known as a 409A
 
 The reality of this is much more complicated, as there can be a number of [tax implications](https://secfi.com/learn/exercise-stock-options-tax-implications) depending on the type of option you were granted, when you decide to exercise them relative to when you sell them, and your overall income; but you really should talk to an accountant before making any serious decisions so you don’t end up with an unexpectedly massive tax bill.
 
-Making matters more complicated, the majority of standard terms in stock option plans limit your freedom in when and how you can exercise your options. 
+Making matters more complicated, the majority of standard terms in stock option plans limit your freedom in when and how you can exercise your options.
+
+In the UK, stock options are offered under the tax-advantged [EMI scheme](https://theaccountancycloud.com/blogs/a-simple-guide-to-enterprise-management-incentive-emi#:~:text=The%20Enterprise%20Management%20Incentive%20(EMI,equity%20participation%20in%20the%20business.), which has a different (and usually much lower) strike price than the FMV.
 
 ## How PostHog does things differently
 
@@ -66,7 +68,7 @@ At PostHog, we recognize that you start contributing to the company on day one, 
 
 ### Exercise Window
 
-Regardless of whether you resign, or are let go for performance reasons, you will have 10 years from the day you were hired to exercise your options. In most companies, you have only three months to exercise your options before you lose them entirely, which can make tax optimization and planning a stressful and difficult process.
+Regardless of whether you resign, or are let go for performance reasons, you will have 10 years from the day you were hired to exercise your options. In most companies, you have only three months to exercise your options before you lose them entirely, which can make tax optimization and planning a stressful and difficult process. We also believe that this window allows you the opportunity to watch the company's growth before deciding to exercise your options. One thing to note is that based on IRS law, tax advantaged ISOs convert into NSOs after 3 months, so there may still be an incentive to exercise sooner.
 
 In the unlikely event that you are let go “with cause” (i.e. for gross misconduct, like embezzlement or discrimination), you will forfeit your options, which we feel is only fair.
 
@@ -78,7 +80,7 @@ If the company is acquired (first trigger) **and** you are terminated as part of
 
 ### What if I am let go from PostHog?
 
-A "good leaver" in share options scheme is someone who departs a company but retains their vested options and can exercise them according to the company's specified schedule. At PostHog, we believe that a "good leaver" is anyone who voluntarily resigns or is let go for performance reasons. Usually performance-related issues stem from a mismatch between a teammate and the culture of the company, and we feel it is always best for both the company and the individual to allow people to find the best fit for them (which is why we offer [very generous severance](https://posthog.com/handbook/people/compensation#severance). Only in the event of serious transgressions, such as harassment or embezzlement, do we deem someone a "bad leaver" who forefits all of their vested options. 
+A "good leaver" in share options scheme is someone who departs a company but retains their vested options and can exercise them according to the company's specified schedule. At PostHog, we believe that a "good leaver" is anyone who voluntarily resigns or is let go for performance reasons. Usually performance-related issues stem from a mismatch between a teammate and the culture of the company, and we feel it is always best for both the company and the individual to allow people to find the best fit for them (which is why we offer [very generous severance](https://posthog.com/handbook/people/compensation#severance).
 
 In many other companies, only people who voluntarily resign are considered "good leavers" (and in some extreme cases, the concept of a "good leaver" does not exist and you forfeit your options regardless of how you leave the company).
 
