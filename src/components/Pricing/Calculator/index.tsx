@@ -252,8 +252,8 @@ export default function Calculator({
                     </>
                 )}
 
-                <p className="text-sm pt-2 mt-2 mb-4 pb-0 m-0 text-black/50 border-t border-dashed border-gray-accent-light">                  
-                        * We offer B2C companies up to 30% off. Get in touch after you've started sending data to PostHog.
+                <p className="text-sm pt-2 mt-2 mb-4 pb-0 m-0 text-black/50 border-t border-dashed border-gray-accent-light">
+                    * We offer B2C companies up to 30% off. Get in touch after you've started sending data to PostHog.
                 </p>
 
                 <div className="pt-4 border-t border-gray-accent-light border-dashed">

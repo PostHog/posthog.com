@@ -2083,6 +2083,10 @@
     from = "/handbook/people/team-structure/product-analytics"
     to = "/handbook/small-teams/product-analytics"
 
+# Added: 2022-10-07
+[[redirects]]
+    from = "/docs/self-host/postgres-vs-clickhouse"
+    to = "/blog/clickhouse-vs-postgres"
 
 # Added: 2022-10-11
 [[redirects]]
