@@ -108,15 +108,17 @@ To set up this app, search for “Drop Events Based On Property” in Apps, clic
 
 Doing this drops any events where the property `$pathname` is `/about`. This is useful if certain pages on your site create a lot of events, but aren’t useful to you. Other uses include dropping events from a specific OS, browser, device type, location, user (distinct ID), and more.
 
-## Downsampling app
+## Downsampling app (not recommended)
 
-The third app you can use to capture fewer events is the [Downsampler](/docs/apps/downsampling) app. It reduces the number of events your instance will ingest by a percentage. 
+The third app you can use to capture fewer events is the [Downsampler](/docs/apps/downsampling) app. It reduces the number of events your instance will ingest by a percentage.
 
 To configure it, search for the “Downsampling Plugin” in Apps, click the blue gear, pick a percentage of events you want to keep, and click the toggle to activate.
 
 ![Downsampler app](../images/tutorials/fewer-unwanted-events/downsampler.png)
 
-The problem with downsampling (compared to the other methods covered) is that you have less control over event ingestion. The app drops a random selection of events and you must guess what percentage you need. A percentage of a large number can still be a large number, which might not solve your problem. On the other hand, you could also be downsampling when you don’t need to. Downsampling is an option, but we'd recommend trying the other first.
+The problem with downsampling (compared to the other methods covered) is that you have less control over event ingestion. The app drops a random selection of all events. For example, if you have a funnel that goes from pageview to signup to paid. The downsampler could drop the signup event breaking a funnel, or worse, it could drop a paid subscription making your customer data inaccurate.
+
+On top of this, you must guess what percentage you need. A percentage of a large number can still be a large number, which might not solve your problem. On the other hand, you could also be downsampling when you don’t need to. Downsampling is an option, but we'd recommend trying the others first.
 
 ## Further reading
 
