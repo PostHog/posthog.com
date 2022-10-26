@@ -1,5 +1,5 @@
 ---
-date: 2022-08-12
+date: 2022-10-25
 title: The 6 best GDPR-compliant analytics tools
 rootPage: /blog
 sidebar: Blog
@@ -201,7 +201,39 @@ Matomo's core open source analytics is free to self-host. More advanced features
 
 **Related:** [PostHog and Matomo compared](/blog/posthog-vs-matomo)
 
-### 6. GoAccess
+### 6. TelemetryDeck
+
+![telemetrydeck](../images/blog/ga4-alternatives/telemetrydeck.png)
+
+[TelemetryDeck](https://telemetrydeck.com/) is to app analytics what Plausible and Fathom are to website analytics – a lightweight tool that collects minimal personal information. Consequently, TelemetryDeck says developers can use it without tracking permission banners.
+
+Unlike Plausible and Fathom, TelemetryDeck is an event-based analytics platform, making it more adept at understanding what users are doing in your app. It includes basic retention, funnel, page flow insights, and tracks useful app data such as app version, phone model and OS version, and average usage time.
+
+#### Who is TelemetryDeck for? 
+
+TelemetryDeck is good for individual app developers who want a simple, effective solution for app analytics. It's most comparable to Countly, though it doesn't collect as much information on users, or offer as many features. There are first-party SDKs for Swift, Kotlin (for Android and Java), and Javascript (for Node and websites). There's also a community SDK for the Unity game engine.
+
+#### Features & benefits
+
+- App analytics for Android and iPhone apps
+- Doesn't track any personally identifiable information
+- Tracks app version and phone OS version
+- Basic retention, funnel, and user path visualizations
+
+#### TelemetryDeck and GDPR compliance
+
+- **Open source:** <span className="text-red text-lg">✖</span>
+- **Self-hosting:** <span className="text-red text-lg">✖</span>
+- **EU Cloud Hosting:** <span className="text-green text-lg">✔</span>
+- **Cookieless Tracking:** <span className="text-green text-lg">✔</span>
+
+TelemetryDeck makes GDPR compliance very easy. It doesn't collect enough personal information to require opt-out banners, and it's hosted in the EU.
+
+#### How much does TelemetryDeck cost?
+
+TelemetryDeck's free plan gives you up to 100,000 signals per month – signals are TelemetryDeck's name for events. It has three other plans (Indie, Business and Enterprise) which unlock more signals, support, and user accounts.
+
+### 7. GoAccess
 
 ![GoAccess - open source analytics tools](../images/blog/gdpr-compliant-analytics/goaccess-gdpr-compliant.png)
 
