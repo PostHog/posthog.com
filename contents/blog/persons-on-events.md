@@ -30,6 +30,6 @@ Self-hosting users will need to [update to the latest version of PostHog](/docs/
 
 While improving performance has been a major motivation for this change, this is also a crucial step in ensuring PostHog can continue to scale effectively. 
 
-Since launching in 2020, PostHog has been adopted by over 15,000 companies and has tracked over 50 billion events. In order to ensure that current and future users have the best possible experience, we need our systems to work as efficiently as possible. Moving persons on to events is an important part of this, along with supporting work such as [using materialized columns in ClickHouse](/blog/clickhouse-materialized-columns) to speed up queries even further.
+Since launching in 2020, PostHog has been adopted by over 15,000 companies and has tracked over 50 billion events. In order to ensure that current and future users have the best possible experience, we need our systems to work as efficiently as possible. Adding persons on to events is an important part of this, along with supporting work such as [using materialized columns in ClickHouse](/blog/clickhouse-materialized-columns) to speed up queries even further.
 
 This said, even though the change is now being fully deployed, we’re still eager to hear [your feedback](/slack) and understand how we can keep making PostHog better. If you’d like more information about any of the changes above then we’re happy to [answer your questions](/questions).
