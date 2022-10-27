@@ -4,7 +4,11 @@ import satori from 'satori'
 import { Resvg, initWasm } from '@resvg/resvg-wasm'
 
 const handler: Handler = async (event, context) => {
-    await initWasm(fs.readFileSync('./functions/og/index_bg.wasm'))
+    try {
+        await initWasm(fs.readFileSync('./functions/og/index_bg.wasm'))
+    } catch {
+        /* noop */
+    }
 
     const font = fs.readFileSync('./functions/og/MatterSQVF.otf')
 
