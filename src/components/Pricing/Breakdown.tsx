@@ -13,10 +13,10 @@ export default function Breakdown({ pricingOption, description }) {
                     return (
                         <li
                             key={index}
-                            className="flex items-center space-x-2 justify-between opacity-50 border-b border-dashed border-gray-accent-light pb-2 last:pb-0 last:border-b-0"
+                            className="flex items-center space-x-2 justify-between text-black/50 border-b border-dashed border-gray-accent-light pb-2 last:pb-0 last:border-b-0"
                         >
-                            <p className="text-[14px] font-medium m-0">{label || '100 million - 1 billion'}</p>
-                            <p className="text-[14px] font-medium m-0">{price[1] === 0 ? 'Free' : `$${price[1]}`}</p>
+                            <p className="text-sm font-medium m-0">{label || '100 million - 1 billion'}</p>
+                            <p className="font-bold m-0 text-black/100">{price[1] === 0 ? 'Free' : `$${price[1]}`}</p>
                         </li>
                     )
                 })}

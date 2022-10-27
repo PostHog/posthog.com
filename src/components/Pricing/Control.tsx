@@ -226,7 +226,7 @@ const Control = (): JSX.Element => {
                     </div>
 
                     <div className="lg:order-7 mb-12 lg:mb-0 bg-white px-4 pb-4 shadow-xl rounded-b-md">
-                        <Breakdown description="No credit card required for up to 10,000/mo" pricingOption="cloud" />
+                        <Breakdown description="No credit card required for up to 10,000 events/mo" pricingOption="cloud" />
                     </div>
 
                     <header className="flex flex-col lg:order-2 bg-white/40 px-4 pt-4 shadow-xl rounded-t-md">
@@ -251,7 +251,7 @@ const Control = (): JSX.Element => {
 
                     <div className="lg:order-8 mb-12 lg:mb-0 bg-white px-4 pb-4 shadow-xl rounded-b-md">
                         <Breakdown
-                            description="No credit card required for up to 500/mo"
+                            description="No credit card required for up to 500 sessions/mo"
                             pricingOption="session-recording"
                         />
                     </div>
