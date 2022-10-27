@@ -24,7 +24,6 @@ import Enterprise from 'components/Pricing/Modals/Enterprise'
 import { pricingSliderLogic } from 'components/Pricing/PricingSlider/pricingSliderLogic'
 import { prettyInt, sliderCurve } from 'components/Pricing/PricingSlider/LogSlider'
 import { pricing, pricingLabels } from 'components/Pricing/constants'
-import { ProductIcons } from '../ProductIcons/ProductIcons'
 
 const Benefit = ({ children }) => {
     return (
@@ -176,88 +175,18 @@ const Control = (): JSX.Element => {
                             placeholder="none"
                         />
                     </div>
-                    <div className="lg:order-1 mb-12">
-                        <p className="font-semibold opacity-60 mb-4">Self-hosted or PostHog Cloud (US or EU)</p>
+                    <div className="lg:order-1">
                         <h1 className="text-3xl sm:text-4xl md:text-5xl mt-0 mb-2">
-                            Get the whole hog. <br />
-                            <span className="text-red">Only pay for what you use.</span>
+                            Pay per tracked event.
+                            <br />
+                            Get the whole hog.
                         </h1>
-                        <p className="text-lg font-semibold opacity-60">After a generous monthly free tier, pricing scales with usage.</p>
-
-                        <TrackedCTA
-                                event={{
-                                    name: `clicked Get started - free`,
-                                    type: enterpriseMode ? 'cloud-enterprise' : 'cloud',
-                                }}
-                                type="primary"
-                                width="auto"
-                                className="shadow-md"
-                                to={
-                                    enterpriseMode
-                                        ? 'https://posthog.com/signup/cloud/enterprise'
-                                        : 'https://app.posthog.com/signup'
-                                }
-                            >
-                                {enterpriseMode ? 'Get in touch' : 'Get started - free'}
-                            </TrackedCTA>
+                        <h3 className="text-xl text-black/50 font-bold">
+                            Your first 1 million events are free. <span className="text-blue">Every month.</span>
+                        </h3>
                     </div>
                 </div>
             </section>
-
-            <section className="max-w-6xl mx-auto px-4">
-                <h4 className="mb-0">Products</h4>
-                <p className="text-[15px] opacity-60 pb-2 mb-8 border-b border-dashed border-gray-accent-light">The Product OS suite ships with all products. You can disable billing for products you don't need.</p>
-
-                <div className="grid grid-cols-3 gap-12">
-                    <div>
-                        <header className="flex flex-col">
-                            <span className="w-6 h-6 flex mb-1">{ProductIcons.analytics}</span>
-                            <h3 className="text-lg mb-0 pb-0">Product analytics + data stack</h3>
-                            <p className="text-[15px] opacity-75 mb-0 font-semibold">Trends, funnels, path analysis + more</p>
-                            <p className="text-sm opacity-60 leading-tight">with event autocapture, pipelines, data warehouse, APIs</p>
-                        </header>
-
-                        <div className="pb-8">
-                            <p className="opacity-60 mb-0">Pricing</p>
-                            <p className="mb-0">
-                                <span className="font-bold text-lg">$0.00045</span>
-                                <span className="text-sm opacity-60">/event</span>
-                            </p>
-                            <p className="text-sm opacity-70 mb-0 font-semibold">First 1 million events/mo free</p>
-                        </div>
-                        
-                        <Calculator
-                            enterpriseMode={enterpriseMode}
-                            handleEnterpriseModeChange={handleEnterpriseModeChange}
-                            enterprise={enterprise}
-                            selfHost={selfHost}
-                            setCurrentModal={setCurrentModal}
-                        />
-                    </div>
-                    <div>
-                        <header className="flex flex-col">
-                            <span className="w-6 h-6 flex mb-1">{ProductIcons.sessionRecording}</span>
-                            <h3 className="text-lg mb-0 pb-0">Session recording</h3>
-                            <p className="text-[15px] opacity-75 mb-0 font-semibold">Watch people using your product and website</p>
-                            <p className="text-sm opacity-60 leading-tight">with console logs and behaviorial bucketing</p>
-                        </header>
-
-                        <div className="pb-8">
-                            <p className="opacity-60 mb-0">Pricing</p>
-                            <p className="mb-0">
-                                <span className="font-bold text-lg">$0.0050</span>
-                                <span className="text-sm opacity-60">/recording</span>
-                            </p>
-                            <p className="text-sm opacity-70 mb-0 font-semibold">First 15,000 recordings/mo free</p>
-                        </div>
-
-                    </div>
-                    <div>
-
-                    </div>
-                </div>
-            </section>
-
 
             <section className="border-dashed border-gray-accent-light border-t border-b mb-8 hidden md:block">
                 <div className="max-w-6xl mx-auto flex items-center md:px-4">
@@ -456,6 +385,17 @@ const Control = (): JSX.Element => {
                                 project and no user permissions
                             </p>
                         </div>
+                    </div>
+                </div>
+                <div className="flex-shrink md:basis-96 box-border flex">
+                    <div className="md:max-w-[290px] mx-auto">
+                        <Calculator
+                            enterpriseMode={enterpriseMode}
+                            handleEnterpriseModeChange={handleEnterpriseModeChange}
+                            enterprise={enterprise}
+                            selfHost={selfHost}
+                            setCurrentModal={setCurrentModal}
+                        />
                     </div>
                 </div>
             </section>
