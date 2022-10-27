@@ -38,7 +38,7 @@ In the example config below, the app will only keep events where all of the foll
 ```
 [
   {
-    "key": "email",
+    "property": "email",
     "type": "string",
     "operator": "not_contains",
     "value": "yourcompany.com"
