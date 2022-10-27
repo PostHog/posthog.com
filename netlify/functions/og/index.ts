@@ -1,9 +1,11 @@
 import fs from 'fs'
 import { Handler } from '@netlify/functions'
 import satori from 'satori'
+import { Resvg, initWasm } from '@resvg/resvg-wasm'
 
 const handler: Handler = async (event, context) => {
-    // console.log(fs.readdirSync('./netlify/functions/og/'))
+    await initWasm(fs.readFileSync('./netlify/functions/og/index_bg.wasm'))
+
     const font = fs.readFileSync('./netlify/functions/og/MatterSQVF.otf')
 
     const svg = await satori(
@@ -28,12 +30,17 @@ const handler: Handler = async (event, context) => {
         }
     )
 
+    const resvg = new Resvg(svg)
+    const pngData = resvg.render()
+    const pngBuffer = pngData.asPng()
+
     return {
         statusCode: 200,
         headers: {
-            'Content-Type': 'image/svg+xml',
+            'Content-Type': 'image/png',
         },
-        body: svg,
+        isBase64Encoded: true,
+        body: Buffer.from(pngBuffer).toString('base64'),
     }
 }
 

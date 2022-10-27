@@ -4,7 +4,7 @@
   AWS_LAMBDA_JS_RUNTIME = "nodejs16.x"
 
 [functions]
-  included_files = ["**/*.woff", "**/*.otf"]
+  included_files = ["**/*.woff", "**/*.otf", "**/*.wasm"]
 
 [dev]
   command = "yarn start"
