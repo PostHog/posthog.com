@@ -1,6 +1,6 @@
 ---
 title: Filter Out
-github: hhttps://github.com/PostHog/posthog-filter-out-plugin
+github: https://github.com/PostHog/posthog-filter-out-plugin
 installUrl: https://app.posthog.com/project/apps?name=Filter%Out%20Plugin
 thumbnail: ../../apps/thumbnails/filter-out.png
 topics:
