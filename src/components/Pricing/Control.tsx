@@ -212,7 +212,7 @@ const Control = (): JSX.Element => {
                         <header className="flex flex-col bg-white/40 px-4 pt-4 shadow-xl rounded-t-md">
                             <span className="w-9 h-9 flex mb-1">{ProductIcons.analytics}</span>
                             <h3 className="text-lg mb-0 pb-0">Product analytics + data stack</h3>
-                            <p className="text-[15px] opacity-75 mb-0 font-semibold">Trends, funnels, path analysis + more</p>
+                            <p className="text-[15px] opacity-75 leading-tight mb-0 font-semibold">Trends, funnels, path analysis + more</p>
                             <p className="text-sm opacity-60 leading-tight pb-0">with event autocapture, pipelines, data warehouse, APIs</p>
                         </header>
 
@@ -238,7 +238,7 @@ const Control = (): JSX.Element => {
                         <header className="flex flex-col lg:order-2 bg-white/40 px-4 pt-4 shadow-xl rounded-t-md">
                             <span className="w-9 h-9 flex mb-1">{ProductIcons.sessionRecording}</span>
                             <h3 className="text-lg mb-0 pb-0">Session recording</h3>
-                            <p className="text-[15px] opacity-75 mb-0 font-semibold">Watch people using your product and website</p>
+                            <p className="text-[15px] opacity-75 leading-tight mb-0 font-semibold">Watch people using your product and website</p>
                             <p className="text-sm opacity-60 leading-tight pb-0">with console logs and behaviorial bucketing</p>
                         </header>
 
@@ -255,10 +255,10 @@ const Control = (): JSX.Element => {
                             SR pricing breakdown
                         </div>
 
-                        <header className="flex flex-col lg:order-3 bg-white/40 px-4 pt-4 shadow-xl rounded-t-md">
+                        <header className="flex flex-col lg:order-3 bg-white/40 p-4 shadow-xl rounded-t-md">
                             <span className="w-9 h-9 flex mb-1">{ProductIcons.experiments}</span>
                             <h3 className="text-lg mb-0 pb-0">Feature flags + experiments</h3>
-                            <p className="text-[15px] opacity-75 font-semibold mb-0">Multivariate flags, user targeting/exclusions, secondary goals</p>
+                            <p className="text-[15px] opacity-75 leading-tight font-semibold mb-0">Multivariate flags, user targeting/exclusions, secondary goals</p>
                         </header>
 
                         <div className="pb-8 lg:order-6 bg-white px-4 pt-4 shadow-xl">
@@ -277,7 +277,7 @@ const Control = (): JSX.Element => {
             </section>
 
             <section className="max-w-6xl mx-auto px-4">
-                <div className="grid grid-cols-3 gap-8">
+                <div className="grid lg:grid-cols-3 gap-8">
                     <div className="col-span-2">
                         <h4 className="mb-3">Pricing calculator</h4>
 
@@ -291,7 +291,7 @@ const Control = (): JSX.Element => {
 
                             <div className="border-b border-dashed  border-gray-accent-light col-span-3 p-2 pl-10 relative">
                                 <span className="w-5 h-5 flex absolute top-3 left-3">{ProductIcons.analytics}</span>
-                                <div className="flex justify-between items-center">
+                                <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center">
                                     <strong>Product analytics + data stack</strong>
                                     <span>
                                         <span className="text-lg font-bold">1,000,000</span> <span className="opacity-60 text-sm">events</span>
@@ -307,7 +307,7 @@ const Control = (): JSX.Element => {
 
                             <div className="border-b border-dashed border-gray-accent-light col-span-3 p-2 pl-10 relative">
                                 <span className="w-5 h-5 flex absolute top-3 left-3">{ProductIcons.sessionRecording}</span>
-                                <div className="flex justify-between items-center">
+                                <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center">
                                     <strong>Session recording</strong>
                                     <span>
                                         <span className="text-lg font-bold">15,000</span> <span className="opacity-60 text-sm">recordings</span>
