@@ -190,7 +190,7 @@ const Control = (): JSX.Element => {
                                     type: enterpriseMode ? 'cloud-enterprise' : 'cloud',
                                 }}
                                 type="primary"
-                                width="full lg:auto"
+                                width="full lg:w-auto"
                                 className="shadow-md"
                                 to={
                                     enterpriseMode
@@ -288,7 +288,7 @@ const Control = (): JSX.Element => {
                                 type: enterpriseMode ? 'cloud-enterprise' : 'cloud',
                             }}
                             type="primary"
-                            width="full lg:auto"
+                            width="full lg:w-auto"
                             className="shadow-md"
                             to={
                                 enterpriseMode
@@ -374,7 +374,7 @@ const Control = (): JSX.Element => {
                             <span className="w-6 h-6 absolute top-0 left-1">{ProductIcons.experiments}</span>
                             
                             <h5 className="text-base mb-0">B2C with millions of users?</h5>
-                            <p className="text-[15px] mb-1">Get in touch for volume discounts after signing up</p>
+                            <p className="text-[15px] mb-1">Get in touch for volume discounts after signing up.</p>
                         </div>
 
                         <div className="pl-10 relative mb-4">
