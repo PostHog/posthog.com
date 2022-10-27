@@ -37,9 +37,9 @@ They lead with what it is.
 
 ## So, which is better?
 
-Marketing lore [tells you](https://blog.hubspot.com/sales/how-to-sell-benefits-not-features#:~:text=Features%20tell%2C%20benefits%20sell.,their%20life%20in%20some%20way.) that you must focus on the _why_, not the what. "No one buys a CRM, they buy a way to increase their revenue". I disagree strongly for a developer focused product, and I suspect other products may follow.
+Marketing lore [tells you](https://blog.hubspot.com/sales/how-to-sell-benefits-not-features#:~:text=Features%20tell%2C%20benefits%20sell.,their%20life%20in%20some%20way.) that you must focus on the _why_, not the what. "No one buys a CRM, they buy a way to increase their revenue". I disagree strongly if you are working on a developer focused product, and perhaps anything.
 
-I'm sure this worked great when it was invented. But now, it feels tired and out-of-touch. Developers seem especially sensitive to vague language when evaluating products. I think it's because developers have to figure out how it all works, to plug it all in, in many cases, so details matter.
+This approach has become so popular that it feels tired and out-of-touch. Developers are especially sensitive to vague language when evaluating products. [Hacker News](https://news.ycombinator.com) provides a clear example of this - many new startups launch there, and a common criticism is "I have read the homepage and don't know what it does". I think it's because developers have to figure out how it all works, to plug it all in, in many cases, so details matter.
 
 It makes me feel like I'm being sold to, by someone who doesn't know what they're talking about.
 
