@@ -10,7 +10,7 @@ Incidents are going to happen.
 
 **When in doubt, raise an incident.** We'd much rather have declared an incident which turned out not to be an incident. Many incidents take too long to get called, or are missed completely because someone didn't ring the alarm when they had a suspicion something was wrong.
 
-To declare an incident, type `/incident` in the #incidents channel. This will create a new channel and send updates.
+To declare an incident, type `/incident` anywhere in Slack. This will create a new channel and send updates.
 
 Anyone can declare an incident, including non-engineers. If in doubt, check with your nearest engineer.
 
@@ -24,6 +24,37 @@ Things that _shouldn’t_ be an incident
 - Insights returning incorrect data
 - Events being < 5 minutes behind
 - Unable to save insights, create feature flags
+
+### Incident severity
+Please refer to the following guidance when choosing the severity for your incident. If you are unsure, it's usually better to over-estimate than under-estimate! 
+
+#### Minor
+A minor-severity incident does not usually require paging people, and can be addressed within normal working hours. It is higher priority than any bugs however, and should come before sprint work.
+
+Examples
+- Broken non-critical functionality, with no workaround. Not on the critical path for customers
+- Performance degradation. Not an outage, but our app is not performing as it should. For instance, growing (but not yet critical) ingestion lag.
+- A memory leak in a database or feature. With time, this could cause a major/critical incident, but does not usually require _immediate_ attention
+
+If not dealt with, minor incidents can often become major incidents. Minor incidents are usually OK to have open for a few days, whereas anything more severe we would be trying to resolve asap
+
+#### Major
+A major incident usually requires paging people, and should be dealt with _immediately_. They are usually opened when key or critical functionality is not working as expected.
+
+Major incidents often become critical incidents if not resolved in a timely manner
+
+Examples
+- Customer signup is broken
+- Significantly elevated error rate
+
+#### Critical
+An incident with very high impact on customers, and with the potential to existentially effect the company or reduce revenue
+
+Examples
+- Posthog Cloud is completely down
+- A data breach, or loss of data
+- Event ingestion totally failing - we are losing events
+
 
 ## What happens during an incident
 
