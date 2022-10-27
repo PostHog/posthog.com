@@ -38,7 +38,7 @@ For people in the US, we offer the option to opt in to a [Flexible Savings Accou
 
 There is also the option to choose a lower tier, high deductible health plan (HDHP), which will qualify you for a [Health Savings Account (HSA)](https://www.healthcare.gov/glossary/health-savings-account-hsa/) that has further tax benefits beyond what the FSA provides. We will also contribute $50 per month to this account if you opt in. At the end of the year, any unused money rolls over and the contribution limit resets.
 
-For people in the UK, [Bupa](https://www.bupa.co.uk/health-information/mental-health/talking-therapies-for-mental-health) offers coverage for therapists that are inaccesible through the NHS alone.
+For people in the UK, [Bupa](https://www.bupa.co.uk/health-information/mental-health/talking-therapies-for-mental-health) offers coverage for therapists that are inaccessible through the NHS alone.
 
 ### Unlimited time off
 
