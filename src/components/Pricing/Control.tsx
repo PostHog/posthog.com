@@ -25,6 +25,7 @@ import { pricingSliderLogic } from 'components/Pricing/PricingSlider/pricingSlid
 import { LogSlider, prettyInt, sliderCurve } from 'components/Pricing/PricingSlider/LogSlider'
 import { pricing, pricingLabels } from 'components/Pricing/constants'
 import { ProductIcons } from '../ProductIcons/ProductIcons'
+import Breakdown from './Breakdown'
 
 const Benefit = ({ children }) => {
     return (
@@ -56,29 +57,6 @@ export const section = cntl`
     px-4
     md:px-0
 `
-
-const Breakdown = ({ planName }) => {
-    const breakdown = pricing[planName]
-    return breakdown.map((price, index) => {
-        const label = pricingLabels[price[0]]
-        const included = price[1] === 0
-        return (
-            <>
-                <div className="col-span-2">{label || '100 million - 1 billion'}</div>
-                <strong className="text-right">
-                    {included ? (
-                        'Included'
-                    ) : (
-                        <>
-                            {price[1]}
-                            <span className="font-normal text-black/50">/event</span>
-                        </>
-                    )}
-                </strong>
-            </>
-        )
-    })
-}
 
 const Button = ({
     onClick,
@@ -242,13 +220,7 @@ const Control = (): JSX.Element => {
                     </div>
 
                     <div className="lg:order-7 mb-12 lg:mb-0 bg-white px-4 pb-4 shadow-xl rounded-b-md">
-                        <Calculator
-                            enterpriseMode={enterpriseMode}
-                            handleEnterpriseModeChange={handleEnterpriseModeChange}
-                            enterprise={enterprise}
-                            selfHost={selfHost}
-                            setCurrentModal={setCurrentModal}
-                        />
+                        <Breakdown description="No credit card required for up to 10,000/mo" pricingOption="cloud" />
                     </div>
 
                     <header className="flex flex-col lg:order-2 bg-white/40 px-4 pt-4 shadow-xl rounded-t-md">
@@ -272,8 +244,10 @@ const Control = (): JSX.Element => {
                     </div>
 
                     <div className="lg:order-8 mb-12 lg:mb-0 bg-white px-4 pb-4 shadow-xl rounded-b-md">
-                        <h4 className="text-base font-bold m-0 ">Volume discounts</h4>
-                        @todo: SR pricing breakdown
+                        <Breakdown
+                            description="No credit card required for up to 500/mo"
+                            pricingOption="session-recording"
+                        />
                     </div>
 
                     <header className="flex flex-col lg:order-3 bg-white/40 p-4 shadow-xl rounded-t-md">

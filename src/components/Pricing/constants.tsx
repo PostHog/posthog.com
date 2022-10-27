@@ -7,6 +7,10 @@ export const CLOUD_MINIMUM_PRICING = 0
 export const CLOUD_ENTERPRISE_MINIMUM_PRICING = 450
 
 export const pricingLabels = {
+    15_000: 'First 15k recordings/mo',
+    50_000: '15-50k',
+    150_000: '50-150k',
+    500_000: '150-500k',
     1_000_000: 'First 1 million events/mo',
     2_000_000: '1-2 million',
     10_000_000: '2-10 million',
