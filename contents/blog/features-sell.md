@@ -1,5 +1,5 @@
 ---
-date: 2022-10-20
+date: 2022-10-27
 title: "Please don't sell me on your \"why\""
 rootPage: /blog
 sidebar: Blog
