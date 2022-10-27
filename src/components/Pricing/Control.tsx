@@ -208,16 +208,16 @@ const Control = (): JSX.Element => {
                 <h4 className="mb-0">Products</h4>
                 <p className="text-[15px] opacity-60 pb-2 mb-8 border-b border-dashed border-gray-accent-light">The Product OS suite ships with all products. You can disable billing for products you don't need.</p>
 
-                <div className="grid lg:grid-cols-3 grid-rows-[max-content_max-content_1fr] lg:gap-y-4 lg:gap-x-12">
-                        <header className="flex flex-col">
-                            <span className="w-6 h-6 flex mb-1">{ProductIcons.analytics}</span>
+                <div className="grid lg:grid-cols-3 grid-rows-[max-content_max-content_1fr] lg:gap-x-6 mb-12">
+                        <header className="flex flex-col bg-white/40 px-4 pt-4 shadow-xl rounded-t-md">
+                            <span className="w-9 h-9 flex mb-1">{ProductIcons.analytics}</span>
                             <h3 className="text-lg mb-0 pb-0">Product analytics + data stack</h3>
                             <p className="text-[15px] opacity-75 mb-0 font-semibold">Trends, funnels, path analysis + more</p>
-                            <p className="text-sm opacity-60 leading-tight">with event autocapture, pipelines, data warehouse, APIs</p>
+                            <p className="text-sm opacity-60 leading-tight pb-0">with event autocapture, pipelines, data warehouse, APIs</p>
                         </header>
 
-                        <div className="pb-8 lg:order-4">
-                            <p className="opacity-60 mb-0">Pricing</p>
+                        <div className="pb-8 lg:order-4 bg-white px-4 pt-4 shadow-xl">
+                            <p className="opacity-60 mb-0 text-sm">Pricing</p>
                             <p className="mb-0">
                                 <span className="font-bold text-lg">$0.00045</span>
                                 <span className="text-sm opacity-60">/event</span>
@@ -225,7 +225,7 @@ const Control = (): JSX.Element => {
                             <p className="text-sm opacity-70 mb-0 font-semibold">First 1 million events/mo free</p>
                         </div>
                         
-                        <div className="lg:order-7 mb-12 lg:mb-0">
+                        <div className="lg:order-7 mb-12 lg:mb-0 bg-white px-4 pb-4 shadow-xl rounded-b-md">
                             <Calculator
                                 enterpriseMode={enterpriseMode}
                                 handleEnterpriseModeChange={handleEnterpriseModeChange}
@@ -235,15 +235,15 @@ const Control = (): JSX.Element => {
                             />
                         </div>
 
-                        <header className="flex flex-col lg:order-2">
-                            <span className="w-6 h-6 flex mb-1">{ProductIcons.sessionRecording}</span>
+                        <header className="flex flex-col lg:order-2 bg-white/40 px-4 pt-4 shadow-xl rounded-t-md">
+                            <span className="w-9 h-9 flex mb-1">{ProductIcons.sessionRecording}</span>
                             <h3 className="text-lg mb-0 pb-0">Session recording</h3>
                             <p className="text-[15px] opacity-75 mb-0 font-semibold">Watch people using your product and website</p>
-                            <p className="text-sm opacity-60 leading-tight">with console logs and behaviorial bucketing</p>
+                            <p className="text-sm opacity-60 leading-tight pb-0">with console logs and behaviorial bucketing</p>
                         </header>
 
-                        <div className="pb-8 lg:order-5">
-                            <p className="opacity-60 mb-0">Pricing</p>
+                        <div className="pb-8 lg:order-5 bg-white px-4 pt-4 shadow-xl">
+                            <p className="opacity-60 mb-0 text-sm">Pricing</p>
                             <p className="mb-0">
                                 <span className="font-bold text-lg">$0.0050</span>
                                 <span className="text-sm opacity-60">/recording</span>
@@ -251,25 +251,25 @@ const Control = (): JSX.Element => {
                             <p className="text-sm opacity-70 mb-0 font-semibold">First 15,000 recordings/mo free</p>
                         </div>
 
-                        <div className="lg:order-8 mb-12 lg:mb-0">
+                        <div className="lg:order-8 mb-12 lg:mb-0 bg-white px-4 pb-4 shadow-xl rounded-b-md">
                             SR pricing breakdown
                         </div>
 
-                        <header className="flex flex-col lg:order-3">
-                            <span className="w-6 h-6 flex mb-1">{ProductIcons.experiments}</span>
+                        <header className="flex flex-col lg:order-3 bg-white/40 px-4 pt-4 shadow-xl rounded-t-md">
+                            <span className="w-9 h-9 flex mb-1">{ProductIcons.experiments}</span>
                             <h3 className="text-lg mb-0 pb-0">Feature flags + experiments</h3>
-                            <p className="text-[15px] opacity-75 mb-0 font-semibold">Multivariate flags, user targeting/exclusions, secondary goals</p>
+                            <p className="text-[15px] opacity-75 font-semibold mb-0">Multivariate flags, user targeting/exclusions, secondary goals</p>
                         </header>
 
-                        <div className="pb-8 lg:order-6">
-                            <p className="opacity-60 mb-0">Pricing</p>
+                        <div className="pb-8 lg:order-6 bg-white px-4 pt-4 shadow-xl">
+                            <p className="opacity-60 mb-0 text-sm">Pricing</p>
                             <p className="mb-0">
                                 <span className="font-bold text-lg">Free</span>
                             </p>
                             <p className="text-xs opacity-70 mb-0 font-semibold">We may charge for additional features in the future</p>
                         </div>
 
-                        <div className="lg:order-9">
+                        <div className="lg:order-9 bg-white px-4 pb-4 shadow-xl rounded-b-md">
                             feature flags pricing breakdown (empty for now)
                         </div>
 
@@ -281,7 +281,7 @@ const Control = (): JSX.Element => {
                     <div className="col-span-2">
                         <h4 className="mb-3">Pricing calculator</h4>
 
-                        <div className="rounded-lg bg-gray-accent-light grid grid-cols-4">
+                        <div className="rounded-md bg-gray-accent-light grid grid-cols-4">
                             <div className="font-semibold opacity-70 text-sm border-b border-dashed border-gray-accent-light col-span-3 px-4 py-2">
                                 Product
                             </div>
@@ -289,7 +289,7 @@ const Control = (): JSX.Element => {
                                 Subtotal
                             </div>
 
-                            <div className="border-b border-dashed border-gray-accent-light col-span-3 p-2 pl-10 relative">
+                            <div className="border-b border-dashed  border-gray-accent-light col-span-3 p-2 pl-10 relative">
                                 <span className="w-5 h-5 flex absolute top-3 left-3">{ProductIcons.analytics}</span>
                                 <div className="flex justify-between items-center">
                                     <strong>Product analytics + data stack</strong>
