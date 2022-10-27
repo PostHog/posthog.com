@@ -25,7 +25,9 @@ One common aspect between definitions of power users is high usage, whether that
 To help define exactly what a power user looks like, you can use PostHog. To do so, identify the key features for power users and analyze the events and actions related to those features. Some ideas:
 
 - Compare the retention percentage or returning amounts. Power users have higher retention.
+
 - Compare the stickiness (what events are causing users to come back repeatedly). Power users use features repeatedly.
+
 - Create trends for average user usage vs 90th, 95th, and 99th percentile usage. Power users use features significantly more than average. The larger the gap, the better.
 
 If a feature shows higher retention, repeated use, and a large difference in usage to the average, it is likely valuable to a power user. You can use data related to this feature along with qualitative analysis to solidify the definition of your power user.
