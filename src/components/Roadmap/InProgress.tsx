@@ -39,15 +39,15 @@ export function InProgress(props: IRoadmap) {
     }
 
     return (
-        <li className="sm:flex xl:flex-col space-y-2 sm:space-y-0 border-t border-dashed border-gray-accent-light first:border-t-0 px-4 py-4 sm:py-2 xl:pb-4">
+        <li className="sm:flex xl:flex-col space-y-2 sm:space-y-0 border-t border-dashed border-gray-accent-light first:border-t-0 px-4 py-4 sm:py-2 xl:pb-4 bg-white rounded-sm shadow-xl">
             <div className="flex-1 sm:mt-2">
 
                 <h4 className="text-lg flex space-x-1 items-center m-0">{title}</h4>
                 <p className="m-0 text-[15px] text-black/80 inline">
-                    {more ? description : description.substring(0, 160) + (description?.length > 160 ? '...' : '')}
+                    {more ? description : description.substring(0, 125) + (description?.length > 125 ? '...' : '')}
                 </p>
-                {!more && (description?.length > 160 || githubPages?.length > 0) && (
-                    <button onClick={() => setMore(true)} className="font-semibold text-red inline ml-1">
+                {!more && (description?.length > 125 || githubPages?.length > 0) && (
+                    <button onClick={() => setMore(true)} className="font-semibold text-red inline text-sm ml-1">
                         more
                     </button>
                 )}

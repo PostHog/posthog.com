@@ -40,7 +40,7 @@ export interface IRoadmap {
 const Complete = (props: { title: string; githubPages: IGitHubPage[]; otherLinks: string[] }) => {
     const { title, githubPages, otherLinks } = props
     const url = (githubPages?.length > 0 && githubPages[0]?.html_url) || (otherLinks?.length > 0 && otherLinks[0])
-    return <li className="text-base font-semibold">{url ? <Link to={url}>{title}</Link> : title}</li>
+    return <li className="text-base font-semibold">{url ? <Link to={url} className="flex px-4 py-2 bg-white rounded-sm relative active:top-[0.5px] active:scale-[.99] shadow-xl">{title}</Link> : <span className="flex bg-white px-4 py-2 rounded-sm shadow-xl relative">{title}</span>}</li>
 }
 
 const Section = ({
@@ -53,7 +53,7 @@ const Section = ({
     children: React.ReactNode
 }) => {
     return (
-        <div className="xl:px-7 2xl:px-8 xl:pt-6 first:pl-0 last:pr-0">
+        <div className="xl:px-7 2xl:px-8 xl:pt-6 first:pl-0 last:pr-0 pb-6 xl:pb-12">
             <h3 className="text-xl m-0">{title}</h3>
             <p className="text-[15px] m-0 text-black/60 mb-4">{description}</p>
             {children}
@@ -64,8 +64,8 @@ const Section = ({
 const Card = ({ team, children }: { team: string; children: React.ReactNode }) => {
     return (
         <>
-            {team !== 'undefined' && <h4 className="oh5acity-50 text-base font-bold mt-0 pt-0 mb-2 pt-4">{team}</h4>}
-            <li className="bg-white m-0 rounded-md mb-4">
+            {team !== 'undefined' && <h4 className="oh5acity-50 text-base font-bold mt-0 mb-2 pt-4">{team}</h4>}
+            <li className="m-0 mb-3">
                 {children}
             </li>
         </>
