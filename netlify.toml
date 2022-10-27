@@ -2208,3 +2208,110 @@
 [[redirects]]
     from = "/docs/user-guides/subscriptions"
     to = "/manual/notifications-and-alerts"
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/docs/integrate/browser-extension"
+    to = "/docs/integrate/client/browser-extension"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/docs/how-posthog-works"
+    to = "/docs/self-host/architecture"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/handbook/small-teams/_team_template"
+    to = "/handbook/people/team-structure/_team_template"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/handbook/small-teams/customer-success"
+    to = "/handbook/people/team-structure/customer-success"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/handbook/small-teams/pipeline"
+    to = "/handbook/people/team-structure/ingestion"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/handbook/small-teams/marketing"
+    to = "/handbook/people/team-structure/marketing"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/handbook/small-teams/people"
+    to = "/handbook/people/team-structure/people"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/handbook/small-teams/infrastructure"
+    to = "/handbook/people/team-structure/platform"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/handbook/small-teams/team-structure"
+    to = "/handbook/people/team-structure/team-structure"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/handbook/small-teams/website-docs"
+    to = "/handbook/people/team-structure/website-docs"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/handbook/company/small-teams"
+    to = "/handbook/people/team-structure/why-small-teams"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/partners/altinity"
+    to = "/marketplace/altinity"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/partners/clickhouse"
+    to = "/marketplace/clickhouse"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/partners/guidelines"
+    to = "/marketplace/guidelines"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/partners"
+    to = "/marketplace"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/partners/listing-template"
+    to = "/marketplace/listing-template"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/partners/opsverse"
+    to = "/marketplace/opsverse"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/partners/restack"
+    to = "/marketplace/restack"
