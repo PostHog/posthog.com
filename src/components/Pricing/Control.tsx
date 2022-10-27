@@ -121,6 +121,7 @@ const Control = (): JSX.Element => {
         selfHostedCost,
         cloudEnterpriseCost,
         selfHostedEnterpriseCost,
+        sessionRecordingCost,
         sliderValue,
         sessionRecordingSliderValue,
         monthlyTotal,
@@ -142,6 +143,11 @@ const Control = (): JSX.Element => {
     useEffect(() => {
         if (showPlanBuilder) builderRef.current?.scrollIntoView({ behavior: 'smooth' })
     }, [showPlanBuilder])
+
+    useEffect(() => {
+        setSliderValue(13.815510557964274)
+    }, [])
+
     return (
         <Layout>
             <SelfHostOverlay open={currentModal === 'self host'} setOpen={setCurrentModal} />
@@ -334,7 +340,7 @@ const Control = (): JSX.Element => {
                                 </div>
                             </div>
                             <div className="border-b border-dashed border-gray-accent-light p-2 text-center">
-                                <span className="text-lg font-bold">$0</span>
+                                <span className="text-lg font-bold">${cloudCost.toLocaleString()}</span>
                             </div>
 
                             <div className="border-b border-dashed border-gray-accent-light col-span-3 p-2 pl-10 relative">
@@ -362,7 +368,7 @@ const Control = (): JSX.Element => {
                                 </div>
                             </div>
                             <div className="border-b border-dashed border-gray-accent-light p-2 text-center">
-                                <span className="text-lg font-bold">$0</span>
+                                <span className="text-lg font-bold">${sessionRecordingCost.toLocaleString()}</span>
                             </div>
 
                             <div className="col-span-3 p-4">
@@ -373,7 +379,7 @@ const Control = (): JSX.Element => {
                                 </p>
                             </div>
                             <div className="p-4 text-center">
-                                <span className="text-lg font-bold">${monthlyTotal}</span>
+                                <span className="text-lg font-bold">${monthlyTotal.toLocaleString()}</span>
                                 <span className="opacity-60">/mo</span>
                             </div>
                         </div>

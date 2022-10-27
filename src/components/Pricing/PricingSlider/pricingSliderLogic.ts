@@ -97,6 +97,12 @@ export const pricingSliderLogic = kea({
                 return calculatePrice(eventNumber, pricingOption)
             },
         ],
+        sessionRecordingCost: [
+            (s) => [s.sessionRecordingEventNumber],
+            (sessionRecordingEventNumber: number) => {
+                return calculatePrice(sessionRecordingEventNumber, 'session-recording')
+            },
+        ],
         cloudCost: [
             (s) => [s.eventNumber],
             (eventNumber: number) => {
