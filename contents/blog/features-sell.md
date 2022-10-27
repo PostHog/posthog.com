@@ -59,7 +59,7 @@ We went for "Open Source Product OS. A suite of product and data tools. Built on
 
 This created [a large debate](https://github.com/PostHog/posthog.com/issues/3620) internally. 
 
-We ran an a/b test, using your favourite open source product OS, and happily saw it had no impact on conversion rate.
+We ran an a/b test, using your favorite open source product OS, and happily saw it had no impact on conversion rate.
 
 ## Users are as clever as you
 
