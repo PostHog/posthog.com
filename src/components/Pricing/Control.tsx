@@ -208,8 +208,7 @@ const Control = (): JSX.Element => {
                 <h4 className="mb-0">Products</h4>
                 <p className="text-[15px] opacity-60 pb-2 mb-8 border-b border-dashed border-gray-accent-light">The Product OS suite ships with all products. You can disable billing for products you don't need.</p>
 
-                <div className="grid grid-cols-3 gap-12">
-                    <div>
+                <div className="grid lg:grid-cols-3 grid-rows-[max-content_max-content_1fr] lg:gap-y-4 lg:gap-x-12">
                         <header className="flex flex-col">
                             <span className="w-6 h-6 flex mb-1">{ProductIcons.analytics}</span>
                             <h3 className="text-lg mb-0 pb-0">Product analytics + data stack</h3>
@@ -217,7 +216,7 @@ const Control = (): JSX.Element => {
                             <p className="text-sm opacity-60 leading-tight">with event autocapture, pipelines, data warehouse, APIs</p>
                         </header>
 
-                        <div className="pb-8">
+                        <div className="pb-8 lg:order-4">
                             <p className="opacity-60 mb-0">Pricing</p>
                             <p className="mb-0">
                                 <span className="font-bold text-lg">$0.00045</span>
@@ -226,23 +225,24 @@ const Control = (): JSX.Element => {
                             <p className="text-sm opacity-70 mb-0 font-semibold">First 1 million events/mo free</p>
                         </div>
                         
-                        <Calculator
-                            enterpriseMode={enterpriseMode}
-                            handleEnterpriseModeChange={handleEnterpriseModeChange}
-                            enterprise={enterprise}
-                            selfHost={selfHost}
-                            setCurrentModal={setCurrentModal}
-                        />
-                    </div>
-                    <div>
-                        <header className="flex flex-col">
+                        <div className="lg:order-7 mb-12 lg:mb-0">
+                            <Calculator
+                                enterpriseMode={enterpriseMode}
+                                handleEnterpriseModeChange={handleEnterpriseModeChange}
+                                enterprise={enterprise}
+                                selfHost={selfHost}
+                                setCurrentModal={setCurrentModal}
+                            />
+                        </div>
+
+                        <header className="flex flex-col lg:order-2">
                             <span className="w-6 h-6 flex mb-1">{ProductIcons.sessionRecording}</span>
                             <h3 className="text-lg mb-0 pb-0">Session recording</h3>
                             <p className="text-[15px] opacity-75 mb-0 font-semibold">Watch people using your product and website</p>
                             <p className="text-sm opacity-60 leading-tight">with console logs and behaviorial bucketing</p>
                         </header>
 
-                        <div className="pb-8">
+                        <div className="pb-8 lg:order-5">
                             <p className="opacity-60 mb-0">Pricing</p>
                             <p className="mb-0">
                                 <span className="font-bold text-lg">$0.0050</span>
@@ -251,10 +251,28 @@ const Control = (): JSX.Element => {
                             <p className="text-sm opacity-70 mb-0 font-semibold">First 15,000 recordings/mo free</p>
                         </div>
 
-                    </div>
-                    <div>
+                        <div className="lg:order-8 mb-12 lg:mb-0">
+                            SR pricing breakdown
+                        </div>
 
-                    </div>
+                        <header className="flex flex-col lg:order-3">
+                            <span className="w-6 h-6 flex mb-1">{ProductIcons.experiments}</span>
+                            <h3 className="text-lg mb-0 pb-0">Feature flags + experiments</h3>
+                            <p className="text-[15px] opacity-75 mb-0 font-semibold">Multivariate flags, user targeting/exclusions, secondary goals</p>
+                        </header>
+
+                        <div className="pb-8 lg:order-6">
+                            <p className="opacity-60 mb-0">Pricing</p>
+                            <p className="mb-0">
+                                <span className="font-bold text-lg">Free</span>
+                            </p>
+                            <p className="text-xs opacity-70 mb-0 font-semibold">We may charge for additional features in the future</p>
+                        </div>
+
+                        <div className="lg:order-9">
+                            feature flags pricing breakdown (empty for now)
+                        </div>
+
                 </div>
             </section>
 
