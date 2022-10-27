@@ -21,15 +21,17 @@ Features are _what_ your product does.
 
 An example of selling by benefit is Salesforce:
 
-Homepage title tag (for me, at least): Salesforce UK: We Bring Companies and Customers Together
-Hero image: "Drive growth with magical Customer 360 experiences. See how Salesforce can help you unite data to make every customer moment more cost-efficient."
+_Homepage title tag:_ Salesforce UK: We Bring Companies and Customers Together
+
+_Hero image:_ "Drive growth with magical Customer 360 experiences. See how Salesforce can help you unite data to make every customer moment more cost-efficient."
 
 "Drive growth" is a benefit. This headline touches on what the software does "Customer 360 experiences... unite data", but that is still a little vague, and then concludes with "more cost-efficient". It's a benefit sandwich with a light feature filling.
 
 An example of selling by feature is Datadog:
 
-Homepage title tag: Cloud Monitoring as a Service | Datadog
-Hero image: "Modern monitoring & security. See inside any stack, any app, at any scale, anywhere."
+_Homepage title tag:_ Cloud Monitoring as a Service | Datadog
+
+_Hero image:_ "Modern monitoring & security. See inside any stack, any app, at any scale, anywhere."
 
 They lead with what it is.
 
