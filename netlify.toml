@@ -5,6 +5,7 @@
 
 [functions]
   included_files = ["**/*.woff", "**/*.otf", "**/*.wasm"]
+  directory = "functions/"
 
 [dev]
   command = "yarn start"

@@ -4,9 +4,9 @@ import satori from 'satori'
 import { Resvg, initWasm } from '@resvg/resvg-wasm'
 
 const handler: Handler = async (event, context) => {
-    await initWasm(fs.readFileSync('./netlify/functions/og/index_bg.wasm'))
+    await initWasm(fs.readFileSync('./functions/og/index_bg.wasm'))
 
-    const font = fs.readFileSync('./netlify/functions/og/MatterSQVF.otf')
+    const font = fs.readFileSync('./functions/og/MatterSQVF.otf')
 
     const svg = await satori(
         {
