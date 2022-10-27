@@ -50,7 +50,7 @@ In the example config below, the app will only keep events where all of the foll
     "value": "localhost:8000"
   },
   {
-    "key": "browser_version",
+    "property": "browser_version",
     "type": "number",
     "operator": "gt",
     "value": 100
