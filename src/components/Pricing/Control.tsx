@@ -276,6 +276,92 @@ const Control = (): JSX.Element => {
                 </div>
             </section>
 
+            <section className="max-w-6xl mx-auto px-4">
+                <div className="grid grid-cols-3 gap-8">
+                    <div className="col-span-2">
+                        <h4 className="mb-3">Pricing calculator</h4>
+
+                        <div className="rounded-lg bg-gray-accent-light grid grid-cols-4">
+                            <div className="font-semibold opacity-70 text-sm border-b border-dashed border-gray-accent-light col-span-3 px-4 py-2">
+                                Product
+                            </div>
+                            <div className="font-semibold opacity-70 text-sm border-b border-dashed border-gray-accent-light px-4 py-2 text-center">
+                                Subtotal
+                            </div>
+
+                            <div className="border-b border-dashed border-gray-accent-light col-span-3 p-2 pl-10 relative">
+                                <span className="w-5 h-5 flex absolute top-3 left-3">{ProductIcons.analytics}</span>
+                                <div className="flex justify-between items-center">
+                                    <strong>Product analytics + data stack</strong>
+                                    <span>
+                                        <span className="text-lg font-bold">1,000,000</span> <span className="opacity-60 text-sm">events</span>
+                                    </span>
+                                </div>
+
+                                @todo: slider goes here
+
+                            </div>
+                            <div className="border-b border-dashed border-gray-accent-light p-2 text-center">
+                                <span className="text-lg font-bold">$0</span>
+                            </div>
+
+                            <div className="border-b border-dashed border-gray-accent-light col-span-3 p-2 pl-10 relative">
+                                <span className="w-5 h-5 flex absolute top-3 left-3">{ProductIcons.sessionRecording}</span>
+                                <div className="flex justify-between items-center">
+                                    <strong>Session recording</strong>
+                                    <span>
+                                        <span className="text-lg font-bold">15,000</span> <span className="opacity-60 text-sm">recordings</span>
+                                    </span>
+                                </div>
+
+                                @todo: slider goes here
+                            </div>
+                            <div className="border-b border-dashed border-gray-accent-light p-2 text-center">
+                                <span className="text-lg font-bold">$0</span>
+                            </div>
+
+                            <div className="col-span-3 p-4">
+                                <strong>Monthly estimate</strong><br />
+                                <p className="opacity-60 text-sm mb-0">Cost with billing limits set at your selections</p>
+                            </div>
+                            <div className="p-4 text-center">
+                                <span className="text-lg font-bold">$0</span><span className="opacity-60">/mo</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div>
+                        <h4 className="border-b border-dashed border-gray-accent-light pb-2 mb-3">Addons</h4>
+
+                        <div className="pl-10 relative mb-4">
+                            <span className="w-6 h-6 absolute top-0 left-1">{ProductIcons.experiments}</span>
+                            
+                            <h5 className="text-base mb-0">Enterprise package</h5>
+                            <p className="text-[15px] mb-1">SAML SSO, advanced permissions, dedicated Slack support channel</p>
+                            <p className="text-sm text-black/70">Add <strong className="text-black/100">25%</strong> to total bill ($450/mo min)</p>
+                        </div>
+
+
+                        <h4 className="border-b border-dashed border-gray-accent-light pb-2 mb-3">Discounts</h4>
+
+                        <div className="pl-10 relative mb-4">
+                            <span className="w-6 h-6 absolute top-0 left-1">{ProductIcons.experiments}</span>
+                            
+                            <h5 className="text-base mb-0">B2C with millions of users?</h5>
+                            <p className="text-[15px] mb-1">Get in touch for volume discounts after signing up</p>
+                        </div>
+
+                        <div className="pl-10 relative mb-4">
+                            <span className="w-6 h-6 absolute top-0 left-1">{ProductIcons.experiments}</span>
+                            
+                            <h5 className="text-base mb-0">Non-profits</h5>
+                            <p className="text-[15px] mb-1">50% off in most cases. Get in touch after signing up.</p>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
 
             <section className="border-dashed border-gray-accent-light border-t border-b mb-8 hidden md:block">
                 <div className="max-w-6xl mx-auto flex items-center md:px-4">
