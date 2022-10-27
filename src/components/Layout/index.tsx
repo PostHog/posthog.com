@@ -22,7 +22,6 @@ const Layout = ({ children, className = '' }: { children: React.ReactNode; class
 
     return (
         <div className={className}>
-            <Banner />
             <Header />
             <main>{children}</main>
             <Footer />
