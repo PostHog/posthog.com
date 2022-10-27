@@ -190,7 +190,7 @@ const Control = (): JSX.Element => {
                                     type: enterpriseMode ? 'cloud-enterprise' : 'cloud',
                                 }}
                                 type="primary"
-                                width="auto"
+                                width="full lg:auto"
                                 className="shadow-md"
                                 to={
                                     enterpriseMode
@@ -252,7 +252,9 @@ const Control = (): JSX.Element => {
                         </div>
 
                         <div className="lg:order-8 mb-12 lg:mb-0 bg-white px-4 pb-4 shadow-xl rounded-b-md">
-                            SR pricing breakdown
+                            <h4 className="text-base font-bold m-0 ">Volume discounts</h4>
+
+                            @todo: SR pricing breakdown
                         </div>
 
                         <header className="flex flex-col lg:order-3 bg-white/40 p-4 shadow-xl rounded-t-md">
@@ -266,13 +268,37 @@ const Control = (): JSX.Element => {
                             <p className="mb-0">
                                 <span className="font-bold text-lg">Free</span>
                             </p>
-                            <p className="text-xs opacity-70 mb-0 font-semibold">We may charge for additional features in the future</p>
+                            <p className="text-xs opacity-60 mb-0 font-semibold">We may charge for additional features in the future</p>
                         </div>
 
                         <div className="lg:order-9 bg-white px-4 pb-4 shadow-xl rounded-b-md">
-                            feature flags pricing breakdown (empty for now)
+                            {/* feature flags pricing breakdown (empty for now) */}
                         </div>
 
+                </div>
+            </section>
+
+            <section className="max-w-6xl mx-auto px-4 mb-12">
+                <div className="bg-black rounded-md flex flex-col lg:items-center lg:flex-row justify-between p-8">
+                    <h3 className="text-white mb-4 lg:mb-0 pb-0 leading-none">Try PostHog free. Cloud or self-hosted.</h3>
+                    <aside>
+                        <TrackedCTA
+                            event={{
+                                name: `clicked Get started - free`,
+                                type: enterpriseMode ? 'cloud-enterprise' : 'cloud',
+                            }}
+                            type="primary"
+                            width="full lg:auto"
+                            className="shadow-md"
+                            to={
+                                enterpriseMode
+                                    ? 'https://posthog.com/signup/cloud/enterprise'
+                                    : 'https://app.posthog.com/signup'
+                            }
+                        >
+                            {enterpriseMode ? 'Get in touch' : 'Get started - free'}
+                        </TrackedCTA>
+                    </aside>
                 </div>
             </section>
 
@@ -362,207 +388,6 @@ const Control = (): JSX.Element => {
                 </div>
             </section>
 
-
-            <section className="border-dashed border-gray-accent-light border-t border-b mb-8 hidden md:block">
-                <div className="max-w-6xl mx-auto flex items-center md:px-4">
-                    <p className="font-semibold text-sm text-black/50 text-right m-0">
-                        One price, <br />
-                        full product suite:
-                    </p>
-                    <ProductPillars />
-                </div>
-            </section>
-
-            <section className="flex flex-col md:flex-row gap-12 px-4 max-w-6xl mx-auto items-start">
-                <div className="grow grid md:grid-cols-2 md:grid-rows-[1fr_max-content] gap-x-8 col-span-2">
-                    <div className="order-1 bg-white px-8 pt-8 border-l-3 border-t-3 border-r-3 border-red border-solid rounded-tl rounded-tr shadow-xl relative pb-2 ">
-                        <div className="mb-4">
-                            <CloudIcon className="opacity-30 mb-3" />
-                            <h2 className="text-xl mb-1 flex items-center">
-                                {enterpriseMode ? (
-                                    ' PostHog Enterprise Cloud'
-                                ) : (
-                                    <>
-                                        PostHog Cloud{' '}
-                                        <span className="absolute -top-[3px] right-3 bg-red inline-flex text-sm px-3 py-2 rounded-[3px] font-semibold ml-2 space-x-1">
-                                            <span className="text-white font-bold">Recommended</span>
-                                            <button onClick={() => setWhyCloudOpen(true)} className="text-white">
-                                                <Info />
-                                            </button>
-                                        </span>
-                                    </>
-                                )}
-                            </h2>
-                            <p className="mb-2 text-sm text-black/50 leading-tight">
-                                SaaS solution managed by the PostHog core team
-                            </p>
-                        </div>
-
-                        <ul className="list-none p-0 m-0 grid gap-y-2">
-                            <Benefit>Full product suite</Benefit>
-                            <Benefit>Hosted & managed by PostHog</Benefit>
-                            <Benefit>Always get the latest features</Benefit>
-                        </ul>
-                    </div>
-
-                    <div className="order-3 md:order-2 bg-white px-8 pt-8 pb-2 rounded-md shadow-xl">
-                        <div className="mb-4">
-                            <SelfHostIcon className="opacity-30 mb-3" />
-                            <h2 className="text-xl mb-1 flex items-center">
-                                {enterpriseMode ? 'Self-hosted Enterprise' : 'Self-hosted'}
-                            </h2>
-                            <p className="mb-2 text-sm text-black/50 leading-tight">
-                                Customer data never leaves your infrastructure
-                            </p>
-                        </div>
-
-                        <ul className="list-none p-0 m-0 grid gap-y-2">
-                            <Benefit>Full feature set of PostHog Cloud but on your infrastructure</Benefit>
-                            <Benefit>Full access to your production instance</Benefit>
-                            <Benefit>Paid deployment support available in the PostHog partner directory</Benefit>
-                        </ul>
-                    </div>
-
-                    <div className="order-2 relative mb-8 md:mb-0 md:order-3 bg-white px-8 pb-8 border-l-3 border-b-3 border-r-3 border-red border-solid rounded-bl rounded-br shadow-xl">
-                        <div className="border-t border-dashed border-gray-accent flex justify-between pt-2 mt-4">
-                            <div className="flex flex-col">
-                                <strong className="text-[16px]">Monthly estimate</strong>
-                                <span className="text-sm text-black/60">
-                                    for {sliderValue ? prettyInt(sliderCurve(sliderValue)) : '1,000,000'} events/mo
-                                </span>
-                            </div>
-                            <div>
-                                <strong className="text-[18px] text-black">
-                                    ${prettyInt(enterpriseMode ? cloudEnterpriseCost : cloudCost)}
-                                </strong>
-                                <span className="text-sm text-black/60">/mo</span>
-                            </div>
-                        </div>
-
-                        <div className="mt-4">
-                            <TrackedCTA
-                                event={{
-                                    name: `clicked Get started - free`,
-                                    type: enterpriseMode ? 'cloud-enterprise' : 'cloud',
-                                }}
-                                type="primary"
-                                width="full"
-                                className="shadow-md"
-                                to={
-                                    enterpriseMode
-                                        ? 'https://posthog.com/signup/cloud/enterprise'
-                                        : 'https://app.posthog.com/signup'
-                                }
-                            >
-                                {enterpriseMode ? 'Get in touch' : 'Get started - free'}
-                            </TrackedCTA>
-                        </div>
-                    </div>
-
-                    <div className="order-4 bg-white px-8 pb-8 rounded-bl rounded-br shadow-xl">
-                        <div className="border-t border-dashed border-gray-accent flex justify-between pt-2 mt-4">
-                            <div className="flex flex-col">
-                                <strong className="text-[16px]">Monthly estimate</strong>
-                                <span className="text-sm text-black/60">
-                                    for {sliderValue ? prettyInt(sliderCurve(sliderValue)) : '1,000,000'} events/mo
-                                </span>
-                            </div>
-                            <div>
-                                <strong className="text-[18px] text-black">
-                                    ${prettyInt(enterpriseMode ? selfHostedEnterpriseCost : selfHostedCost)}
-                                </strong>
-                                <span className="text-sm text-black/60">/mo</span>
-                            </div>
-                        </div>
-
-                        <div className="mt-4">
-                            <TrackedCTA
-                                event={{
-                                    name: `clicked Get started - free`,
-                                    type: enterpriseMode ? 'self-hosted-enterprise' : 'self-hosted',
-                                }}
-                                type="primary"
-                                width="full"
-                                className="shadow-md"
-                                to={
-                                    enterpriseMode
-                                        ? 'https://license.posthog.com/?price_id=price_1L1AeWEuIatRXSdzj0Y5ioOU'
-                                        : 'https://license.posthog.com/'
-                                }
-                            >
-                                Get started - free
-                            </TrackedCTA>
-                        </div>
-                    </div>
-                    <div className="md:col-span-2 mt-8 order-5">
-                        <div className="mx-auto flex justify-center space-x-8 pb-4 mb-6 border-b border-dashed border-gray-accent-light">
-                            <Link
-                                to="/book-a-demo"
-                                className="text-[15px] group font-semibold text-blue py-2 px-3 rounded-sm hover:text-blue hover:bg-blue/10 flex space-x-2 items-center"
-                            >
-                                <svg
-                                    width="24"
-                                    height="17"
-                                    viewBox="0 0 24 17"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="text-black/30 group-hover:text-blue"
-                                >
-                                    <path
-                                        d="M3.105 0.499996C2.21906 0.499996 1.5 1.22 1.5 2.105V13.9999H0V15.4558C0 16.308 0.691872 16.9999 1.54406 16.9999H22.3182C23.2473 16.9999 24.0001 16.2471 24.0001 15.318V13.9999H22.5001V2.05244C22.5001 1.19744 21.8026 0.499924 20.9476 0.499924L3.105 0.499996ZM3.105 2L20.9999 2.0525V13.9999H13.4737C13.4662 14.8249 12.7912 15.4999 11.9653 15.4999C11.1375 15.4999 10.4625 14.8268 10.4568 13.9999H3.00002V2.10506C3.00002 2.04693 3.0469 2.00006 3.10502 2.00006L3.105 2ZM12.0347 3.5C10.3744 3.5 9.0234 4.86406 9.0234 6.54416C9.0234 7.94854 9.97214 9.1232 11.25 9.47384C9.14246 9.68384 7.22155 10.7816 5.95867 12.4916H10.0161C10.2833 12.4869 10.557 12.486 10.8364 12.4916H13.3209C13.5037 12.4888 13.6847 12.4897 13.8628 12.4916H18.0169C16.7691 10.7994 14.8811 9.70544 12.7989 9.47672C14.0861 9.13172 15.0432 7.9542 15.0432 6.54416C15.0442 4.86416 13.6961 3.5 12.0358 3.5H12.0347Z"
-                                        fill="currentColor"
-                                    />
-                                </svg>
-
-                                <span>Schedule a demo</span>
-                            </Link>
-                            <Link
-                                to="/get-in-touch#contact"
-                                className="text-[15px] group font-semibold text-blue py-2 px-3 rounded-sm hover:text-blue hover:bg-blue/10 flex space-x-2 items-center"
-                            >
-                                <svg
-                                    width="20"
-                                    height="20"
-                                    viewBox="0 0 20 20"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="text-black/30 group-hover:text-blue"
-                                >
-                                    <path
-                                        d="M18.7569 1.24141C18.4467 0.932806 17.9842 0.826566 17.5717 0.975786L1.6631 6.65779C1.23498 6.81013 0.938096 7.20389 0.910756 7.65779C0.883412 8.11247 1.12952 8.53825 1.53732 8.74295L6.74832 11.3475L13.4085 6.59055L8.65072 13.2523L11.2553 18.4633C11.4491 18.8493 11.8436 19.0907 12.2725 19.0907C12.2959 19.0907 12.3186 19.0899 12.3412 19.0883C12.7959 19.0618 13.1905 18.7657 13.3436 18.3368L19.0256 2.42658C19.1717 2.01408 19.0678 1.55158 18.7568 1.24142L18.7569 1.24141Z"
-                                        fill="currentColor"
-                                    />
-                                </svg>
-
-                                <span>Get in touch</span>
-                            </Link>
-                        </div>
-                        <div>
-                            <h4 className="text-[15px] mb-0 font-normal opacity-75">
-                                <span className="font-bold">
-                                    Looking for{' '}
-                                    <Link
-                                        className="border-b border-dashed border-gray-accent-light text-black"
-                                        onClick={() =>
-                                            posthog &&
-                                            posthog.capture('clicked Browse on GitHub', { type: 'open-source' })
-                                        }
-                                        to="https://github.com/PostHog/posthog"
-                                    >
-                                        PostHog Open Source
-                                    </Link>
-                                    ?
-                                </span>{' '}
-                                (No credit card required)
-                            </h4>
-                            <p className="text-sm opacity-60">
-                                Available with product analytics, feature flags, and session recordings – limited to 1
-                                project and no user permissions
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
             <section className={`${section} mt-12 md:px-4`}>
                 <h2 className="text-2xl m-0 flex items-center">What comes in PostHog?</h2>
                 <p className="m-0 text-black/50 font-medium mb-7">Get access to all features and no plan limits.</p>
