@@ -39,13 +39,13 @@ They lead with what it is.
 
 Marketing lore [tells you](https://blog.hubspot.com/sales/how-to-sell-benefits-not-features#:~:text=Features%20tell%2C%20benefits%20sell.,their%20life%20in%20some%20way.) that you must focus on the _why_, not the what. "No one buys a CRM, they buy a way to increase their revenue". I disagree strongly if you are working on a developer focused product, and perhaps anything.
 
-This approach has become so popular that it feels tired and out-of-touch. Developers are especially sensitive to vague language when evaluating products. [Hacker News](https://news.ycombinator.com) provides a clear example of this - many new startups launch there, and a common criticism is "I have read the homepage and don't know what it does". I think it's because developers have to figure out how it all works, to plug it all in, in many cases, so details matter.
+This approach has become so popular that it feels tired and out-of-touch. Developers are especially sensitive to vague language when evaluating products. [Hacker News](https://news.ycombinator.com) provides a clear example of this – many new startups launch there, and a common criticism is "I have read the homepage and don't know what it does". I think it's because developers have to figure out how it all works, to plug it all in, in many cases, so details matter.
 
 It makes me feel like I'm being sold to, by someone who doesn't know what they're talking about.
 
 Worse, benefits-heavy and feature-light language makes it hard to know what you're actually buying. I can evaluate for myself what benefits something brings, I want to see what it does, and how it compares to other products.
 
-Highlighting benefits makes sense, as a backup in case I don't get it. For executives who don't use the software, and certainly don't implement it - go nuts. For everyone else, benefits-oriented language is a poor user experience - it gets in the way of explaining the product.
+Highlighting benefits makes sense, as a backup in case I don't get it. For executives who don't use the software, and certainly don't implement it – go nuts. For everyone else, benefits-oriented language is a poor user experience – it gets in the way of explaining the product.
 
 ## What we've tried at PostHog
 
@@ -63,4 +63,4 @@ We ran an a/b test, using your favorite open source product OS, and happily saw 
 
 ## Users are as clever as you
 
-Often, users _do_ know the product category they're interested in. I know, for example, the approximate benefits a CRM brings, and I want to choose one that suits my team particularly well. Otherwise I wouldn't have been looking for one in the first place. Show me how your features stack up. Please don't tell me you'll "drive growth with magical customer 360 experiences" (Salesforce's homepage today) - this doesn't help me compare your product to your competitors, and it makes me feel like you're manipulating me instead of helping me decide if you are actually useful.
+Often, users _do_ know the product category they're interested in. I know, for example, the approximate benefits a CRM brings, and I want to choose one that suits my team particularly well. Otherwise I wouldn't have been looking for one in the first place. Show me how your features stack up. Please don't tell me you'll "drive growth with magical customer 360 experiences" (Salesforce's homepage today) – this doesn't help me compare your product to your competitors, and it makes me feel like you're manipulating me instead of helping me decide if you are actually useful.
