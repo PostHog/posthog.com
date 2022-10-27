@@ -45,6 +45,7 @@ Virality is all about growth through word of mouth. Users gain value from other 
 This is generally good for two types of products:
 
 - Multiplayer or networked products that improve (or only work) when multiple friends or colleagues also use it (e.g. Snapchat, Figma, Zoom). Users want friends or colleagues to use the product.
+
 - Products that are fun to share with others (e.g. TikTok, Instagram, Airbnb listings). Users share the app or content from the app on social media and other communications platforms.
 
 ### Performance marketing (paid ads)
@@ -132,5 +133,3 @@ If the sale involves implementation or customization, usage metrics are useful f
 No matter what growth loop you choose, and however you choose to measure it, PostHog can help. PostHog provides the tools like [event tracking](/tutorials/event-tracking-guide), trends, funnels, and experiments that help companies create better growth loops and more successful products.
 
 If you are looking for more information on measuring viral or content growth loops, check out our blog post on [how we use PostHog for marketing](/blog/posthog-marketing).
-
-If you are targeting businesses with your performance marketing or sales growth loop, see our tutorial on [B2B product metrics](/tutorials/metrics-tutorial).
