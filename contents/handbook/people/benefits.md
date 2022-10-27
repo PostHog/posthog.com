@@ -24,9 +24,7 @@ In the UK, we use [Royal London](https://www.royallondon.com/) as our pension pr
 
 It's important to us that everyone is as happy and healthy as they can be. To ensure this, we offer private health insurance in countries where the health system struggles with long wait times for appointments or high out-of-pocket costs. Currently, we provide private health insurance in the US and UK.
 
-In the US, our medical insurance is provided via UnitedHealthcare and managed via our payroll provider [Gusto](https://app.gusto.com/). We also offer dental and vision insurance via Guardian.
-
-PostHog pays 100% of the premium of the Platinum plan for team members, and 75% for dependents, in order to level the playing field with folks who live in countries that offer public healthcare.
+In the US, our medical insurance is provided via UnitedHealthcare and managed via our payroll provider [Gusto](https://app.gusto.com/). We also offer dental and vision insurance via Guardian. PostHog pays 100% of the premium of the Platinum plan for team members, and 75% for dependents.
 
 In the UK, we use [Bupa](https://www.bupa.co.uk/) for private healthcare (£100 excess per policy year) and [Medicash](https://www.medicash.org/) as our cash plan for dental and vision. Children are included for free. Both of these are taxable benefits which will affect your Personal Allowance each tax year, and you can opt out at any time with 1 month notice. 
 
