@@ -53,7 +53,7 @@ const Section = ({
     children: React.ReactNode
 }) => {
     return (
-        <div className="lg:px-9 lg:pt-6 pb-12 first:pl-0 last:pr-0">
+        <div className="xl:px-7 2xl:px-8 xl:pt-6 first:pl-0 last:pr-0">
             <h3 className="text-xl m-0">{title}</h3>
             <p className="text-[15px] m-0 text-black/60 mb-4">{description}</p>
             {children}
