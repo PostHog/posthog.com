@@ -22,7 +22,7 @@ import { useActions, useValues } from 'kea'
 import { TrackedCTA } from 'components/CallToAction'
 import Enterprise from 'components/Pricing/Modals/Enterprise'
 import { pricingSliderLogic } from 'components/Pricing/PricingSlider/pricingSliderLogic'
-import { prettyInt, sliderCurve } from 'components/Pricing/PricingSlider/LogSlider'
+import { LogSlider, prettyInt, sliderCurve } from 'components/Pricing/PricingSlider/LogSlider'
 import { pricing, pricingLabels } from 'components/Pricing/constants'
 import { ProductIcons } from '../ProductIcons/ProductIcons'
 
@@ -138,10 +138,19 @@ const Control = (): JSX.Element => {
     const [enterpriseModalOpen, setEnterpriseModalOpen] = useState(false)
     const [whyCloudOpen, setWhyCloudOpen] = useState(false)
     const builderRef = useRef<HTMLDivElement>()
-    const { cloudCost, selfHostedCost, cloudEnterpriseCost, selfHostedEnterpriseCost, sliderValue } =
-        useValues(pricingSliderLogic)
+    const {
+        cloudCost,
+        selfHostedCost,
+        cloudEnterpriseCost,
+        selfHostedEnterpriseCost,
+        sliderValue,
+        sessionRecordingSliderValue,
+        monthlyTotal,
+        sessionRecordingEventNumber,
+        eventNumber,
+    } = useValues(pricingSliderLogic)
     const [enterpriseMode, setEnterpriseMode] = useState(false)
-    const { setPricingOption } = useActions(pricingSliderLogic)
+    const { setPricingOption, setSessionRecordingSliderValue, setSliderValue } = useActions(pricingSliderLogic)
 
     const handleEnterpriseModeChange = (checked: boolean) => {
         setPricingOption(checked ? 'cloud-enterprise' : 'cloud')
@@ -155,7 +164,6 @@ const Control = (): JSX.Element => {
     useEffect(() => {
         if (showPlanBuilder) builderRef.current?.scrollIntoView({ behavior: 'smooth' })
     }, [showPlanBuilder])
-
     return (
         <Layout>
             <SelfHostOverlay open={currentModal === 'self host'} setOpen={setCurrentModal} />
@@ -182,105 +190,121 @@ const Control = (): JSX.Element => {
                             Get the whole hog. <br />
                             <span className="text-red">Only pay for what you use.</span>
                         </h1>
-                        <p className="text-lg font-semibold opacity-60">After a generous monthly free tier, pricing scales with usage.</p>
+                        <p className="text-lg font-semibold opacity-60">
+                            After a generous monthly free tier, pricing scales with usage.
+                        </p>
 
                         <TrackedCTA
-                                event={{
-                                    name: `clicked Get started - free`,
-                                    type: enterpriseMode ? 'cloud-enterprise' : 'cloud',
-                                }}
-                                type="primary"
-                                width="full lg:w-auto"
-                                className="shadow-md"
-                                to={
-                                    enterpriseMode
-                                        ? 'https://posthog.com/signup/cloud/enterprise'
-                                        : 'https://app.posthog.com/signup'
-                                }
-                            >
-                                {enterpriseMode ? 'Get in touch' : 'Get started - free'}
-                            </TrackedCTA>
+                            event={{
+                                name: `clicked Get started - free`,
+                                type: enterpriseMode ? 'cloud-enterprise' : 'cloud',
+                            }}
+                            type="primary"
+                            width="full lg:w-auto"
+                            className="shadow-md"
+                            to={
+                                enterpriseMode
+                                    ? 'https://posthog.com/signup/cloud/enterprise'
+                                    : 'https://app.posthog.com/signup'
+                            }
+                        >
+                            {enterpriseMode ? 'Get in touch' : 'Get started - free'}
+                        </TrackedCTA>
                     </div>
                 </div>
             </section>
 
             <section className="max-w-6xl mx-auto px-4">
                 <h4 className="mb-0">Products</h4>
-                <p className="text-[15px] opacity-60 pb-2 mb-8 border-b border-dashed border-gray-accent-light">The Product OS suite ships with all products. You can disable billing for products you don't need.</p>
+                <p className="text-[15px] opacity-60 pb-2 mb-8 border-b border-dashed border-gray-accent-light">
+                    The Product OS suite ships with all products. You can disable billing for products you don't need.
+                </p>
 
                 <div className="grid lg:grid-cols-3 grid-rows-[max-content_max-content_1fr] lg:gap-x-6 mb-12">
-                        <header className="flex flex-col bg-white/40 px-4 pt-4 shadow-xl rounded-t-md">
-                            <span className="w-9 h-9 flex mb-1">{ProductIcons.analytics}</span>
-                            <h3 className="text-lg mb-0 pb-0">Product analytics + data stack</h3>
-                            <p className="text-[15px] opacity-75 leading-tight mb-0 font-semibold">Trends, funnels, path analysis + more</p>
-                            <p className="text-sm opacity-60 leading-tight pb-0">with event autocapture, pipelines, data warehouse, APIs</p>
-                        </header>
+                    <header className="flex flex-col bg-white/40 px-4 pt-4 shadow-xl rounded-t-md">
+                        <span className="w-9 h-9 flex mb-1">{ProductIcons.analytics}</span>
+                        <h3 className="text-lg mb-0 pb-0">Product analytics + data stack</h3>
+                        <p className="text-[15px] opacity-75 leading-tight mb-0 font-semibold">
+                            Trends, funnels, path analysis + more
+                        </p>
+                        <p className="text-sm opacity-60 leading-tight pb-0">
+                            with event autocapture, pipelines, data warehouse, APIs
+                        </p>
+                    </header>
 
-                        <div className="pb-8 lg:order-4 bg-white px-4 pt-4 shadow-xl">
-                            <p className="opacity-60 mb-0 text-sm">Pricing</p>
-                            <p className="mb-0">
-                                <span className="font-bold text-lg">$0.00045</span>
-                                <span className="text-sm opacity-60">/event</span>
-                            </p>
-                            <p className="text-sm opacity-70 mb-0 font-semibold">First 1 million events/mo free</p>
-                        </div>
-                        
-                        <div className="lg:order-7 mb-12 lg:mb-0 bg-white px-4 pb-4 shadow-xl rounded-b-md">
-                            <Calculator
-                                enterpriseMode={enterpriseMode}
-                                handleEnterpriseModeChange={handleEnterpriseModeChange}
-                                enterprise={enterprise}
-                                selfHost={selfHost}
-                                setCurrentModal={setCurrentModal}
-                            />
-                        </div>
+                    <div className="pb-8 lg:order-4 bg-white px-4 pt-4 shadow-xl">
+                        <p className="opacity-60 mb-0 text-sm">Pricing</p>
+                        <p className="mb-0">
+                            <span className="font-bold text-lg">$0.00045</span>
+                            <span className="text-sm opacity-60">/event</span>
+                        </p>
+                        <p className="text-sm opacity-70 mb-0 font-semibold">First 1 million events/mo free</p>
+                    </div>
 
-                        <header className="flex flex-col lg:order-2 bg-white/40 px-4 pt-4 shadow-xl rounded-t-md">
-                            <span className="w-9 h-9 flex mb-1">{ProductIcons.sessionRecording}</span>
-                            <h3 className="text-lg mb-0 pb-0">Session recording</h3>
-                            <p className="text-[15px] opacity-75 leading-tight mb-0 font-semibold">Watch people using your product and website</p>
-                            <p className="text-sm opacity-60 leading-tight pb-0">with console logs and behaviorial bucketing</p>
-                        </header>
+                    <div className="lg:order-7 mb-12 lg:mb-0 bg-white px-4 pb-4 shadow-xl rounded-b-md">
+                        <Calculator
+                            enterpriseMode={enterpriseMode}
+                            handleEnterpriseModeChange={handleEnterpriseModeChange}
+                            enterprise={enterprise}
+                            selfHost={selfHost}
+                            setCurrentModal={setCurrentModal}
+                        />
+                    </div>
 
-                        <div className="pb-8 lg:order-5 bg-white px-4 pt-4 shadow-xl">
-                            <p className="opacity-60 mb-0 text-sm">Pricing</p>
-                            <p className="mb-0">
-                                <span className="font-bold text-lg">$0.0050</span>
-                                <span className="text-sm opacity-60">/recording</span>
-                            </p>
-                            <p className="text-sm opacity-70 mb-0 font-semibold">First 15,000 recordings/mo free</p>
-                        </div>
+                    <header className="flex flex-col lg:order-2 bg-white/40 px-4 pt-4 shadow-xl rounded-t-md">
+                        <span className="w-9 h-9 flex mb-1">{ProductIcons.sessionRecording}</span>
+                        <h3 className="text-lg mb-0 pb-0">Session recording</h3>
+                        <p className="text-[15px] opacity-75 leading-tight mb-0 font-semibold">
+                            Watch people using your product and website
+                        </p>
+                        <p className="text-sm opacity-60 leading-tight pb-0">
+                            with console logs and behaviorial bucketing
+                        </p>
+                    </header>
 
-                        <div className="lg:order-8 mb-12 lg:mb-0 bg-white px-4 pb-4 shadow-xl rounded-b-md">
-                            <h4 className="text-base font-bold m-0 ">Volume discounts</h4>
+                    <div className="pb-8 lg:order-5 bg-white px-4 pt-4 shadow-xl">
+                        <p className="opacity-60 mb-0 text-sm">Pricing</p>
+                        <p className="mb-0">
+                            <span className="font-bold text-lg">$0.0050</span>
+                            <span className="text-sm opacity-60">/recording</span>
+                        </p>
+                        <p className="text-sm opacity-70 mb-0 font-semibold">First 15,000 recordings/mo free</p>
+                    </div>
 
-                            @todo: SR pricing breakdown
-                        </div>
+                    <div className="lg:order-8 mb-12 lg:mb-0 bg-white px-4 pb-4 shadow-xl rounded-b-md">
+                        <h4 className="text-base font-bold m-0 ">Volume discounts</h4>
+                        @todo: SR pricing breakdown
+                    </div>
 
-                        <header className="flex flex-col lg:order-3 bg-white/40 p-4 shadow-xl rounded-t-md">
-                            <span className="w-9 h-9 flex mb-1">{ProductIcons.experiments}</span>
-                            <h3 className="text-lg mb-0 pb-0">Feature flags + experiments</h3>
-                            <p className="text-[15px] opacity-75 leading-tight font-semibold mb-0">Multivariate flags, user targeting/exclusions, secondary goals</p>
-                        </header>
+                    <header className="flex flex-col lg:order-3 bg-white/40 p-4 shadow-xl rounded-t-md">
+                        <span className="w-9 h-9 flex mb-1">{ProductIcons.experiments}</span>
+                        <h3 className="text-lg mb-0 pb-0">Feature flags + experiments</h3>
+                        <p className="text-[15px] opacity-75 leading-tight font-semibold mb-0">
+                            Multivariate flags, user targeting/exclusions, secondary goals
+                        </p>
+                    </header>
 
-                        <div className="pb-8 lg:order-6 bg-white px-4 pt-4 shadow-xl">
-                            <p className="opacity-60 mb-0 text-sm">Pricing</p>
-                            <p className="mb-0">
-                                <span className="font-bold text-lg">Free</span>
-                            </p>
-                            <p className="text-xs opacity-60 mb-0 font-semibold">We may charge for additional features in the future</p>
-                        </div>
+                    <div className="pb-8 lg:order-6 bg-white px-4 pt-4 shadow-xl">
+                        <p className="opacity-60 mb-0 text-sm">Pricing</p>
+                        <p className="mb-0">
+                            <span className="font-bold text-lg">Free</span>
+                        </p>
+                        <p className="text-xs opacity-60 mb-0 font-semibold">
+                            We may charge for additional features in the future
+                        </p>
+                    </div>
 
-                        <div className="lg:order-9 bg-white px-4 pb-4 shadow-xl rounded-b-md">
-                            {/* feature flags pricing breakdown (empty for now) */}
-                        </div>
-
+                    <div className="lg:order-9 bg-white px-4 pb-4 shadow-xl rounded-b-md">
+                        {/* feature flags pricing breakdown (empty for now) */}
+                    </div>
                 </div>
             </section>
 
             <section className="max-w-6xl mx-auto px-4 mb-12">
                 <div className="bg-black rounded-md flex flex-col lg:items-center lg:flex-row justify-between p-8">
-                    <h3 className="text-white mb-4 lg:mb-0 pb-0 leading-none">Try PostHog free. Cloud or self-hosted.</h3>
+                    <h3 className="text-white mb-4 lg:mb-0 pb-0 leading-none">
+                        Try PostHog free. Cloud or self-hosted.
+                    </h3>
                     <aside>
                         <TrackedCTA
                             event={{
@@ -320,70 +344,96 @@ const Control = (): JSX.Element => {
                                 <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center">
                                     <strong>Product analytics + data stack</strong>
                                     <span>
-                                        <span className="text-lg font-bold">1,000,000</span> <span className="opacity-60 text-sm">events</span>
+                                        <span className="text-lg font-bold">{eventNumber.toLocaleString()}</span>{' '}
+                                        <span className="opacity-60 text-sm">events</span>
                                     </span>
                                 </div>
-
-                                @todo: slider goes here
-
+                                <div className="pt-4 pb-6">
+                                    <LogSlider
+                                        stepsInRange={100}
+                                        marks={[10000, 1000000, 10000000, 100000000, 1000000000]}
+                                        min={10000}
+                                        max={1000000000}
+                                        onChange={(value) => setSliderValue(value)}
+                                        value={sliderValue}
+                                    />
+                                </div>
                             </div>
                             <div className="border-b border-dashed border-gray-accent-light p-2 text-center">
                                 <span className="text-lg font-bold">$0</span>
                             </div>
 
                             <div className="border-b border-dashed border-gray-accent-light col-span-3 p-2 pl-10 relative">
-                                <span className="w-5 h-5 flex absolute top-3 left-3">{ProductIcons.sessionRecording}</span>
+                                <span className="w-5 h-5 flex absolute top-3 left-3">
+                                    {ProductIcons.sessionRecording}
+                                </span>
                                 <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center">
                                     <strong>Session recording</strong>
                                     <span>
-                                        <span className="text-lg font-bold">15,000</span> <span className="opacity-60 text-sm">recordings</span>
+                                        <span className="text-lg font-bold">
+                                            {sessionRecordingEventNumber.toLocaleString()}
+                                        </span>{' '}
+                                        <span className="opacity-60 text-sm">recordings</span>
                                     </span>
                                 </div>
-
-                                @todo: slider goes here
+                                <div className="pt-4 pb-6">
+                                    <LogSlider
+                                        stepsInRange={100}
+                                        marks={[15000, 50000, 150000, 500000, 1000000]}
+                                        min={15000}
+                                        max={1000000}
+                                        onChange={(value) => setSessionRecordingSliderValue(value)}
+                                        value={sessionRecordingSliderValue}
+                                    />
+                                </div>
                             </div>
                             <div className="border-b border-dashed border-gray-accent-light p-2 text-center">
                                 <span className="text-lg font-bold">$0</span>
                             </div>
 
                             <div className="col-span-3 p-4">
-                                <strong>Monthly estimate</strong><br />
-                                <p className="opacity-60 text-sm mb-0">Cost with billing limits set at your selections</p>
+                                <strong>Monthly estimate</strong>
+                                <br />
+                                <p className="opacity-60 text-sm mb-0">
+                                    Cost with billing limits set at your selections
+                                </p>
                             </div>
                             <div className="p-4 text-center">
-                                <span className="text-lg font-bold">$0</span><span className="opacity-60">/mo</span>
+                                <span className="text-lg font-bold">${monthlyTotal}</span>
+                                <span className="opacity-60">/mo</span>
                             </div>
                         </div>
-
                     </div>
                     <div>
                         <h4 className="border-b border-dashed border-gray-accent-light pb-2 mb-3">Addons</h4>
 
                         <div className="pl-10 relative mb-4">
                             <span className="w-6 h-6 absolute top-0 left-1">{ProductIcons.experiments}</span>
-                            
-                            <h5 className="text-base mb-0">Enterprise package</h5>
-                            <p className="text-[15px] mb-1">SAML SSO, advanced permissions, dedicated Slack support channel</p>
-                            <p className="text-sm text-black/70">Add <strong className="text-black/100">25%</strong> to total bill ($450/mo min)</p>
-                        </div>
 
+                            <h5 className="text-base mb-0">Enterprise package</h5>
+                            <p className="text-[15px] mb-1">
+                                SAML SSO, advanced permissions, dedicated Slack support channel
+                            </p>
+                            <p className="text-sm text-black/70">
+                                Add <strong className="text-black/100">25%</strong> to total bill ($450/mo min)
+                            </p>
+                        </div>
 
                         <h4 className="border-b border-dashed border-gray-accent-light pb-2 mb-3">Discounts</h4>
 
                         <div className="pl-10 relative mb-4">
                             <span className="w-6 h-6 absolute top-0 left-1">{ProductIcons.experiments}</span>
-                            
+
                             <h5 className="text-base mb-0">B2C with millions of users?</h5>
                             <p className="text-[15px] mb-1">Get in touch for volume discounts after signing up.</p>
                         </div>
 
                         <div className="pl-10 relative mb-4">
                             <span className="w-6 h-6 absolute top-0 left-1">{ProductIcons.experiments}</span>
-                            
+
                             <h5 className="text-base mb-0">Non-profits</h5>
                             <p className="text-[15px] mb-1">50% off in most cases. Get in touch after signing up.</p>
                         </div>
-
                     </div>
                 </div>
             </section>

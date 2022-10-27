@@ -36,6 +36,13 @@ export const pricing = {
         [100_000_000, 0.000075],
         [Number.MAX_SAFE_INTEGER, 0.000025],
     ],
+    'session-recording': [
+        [15_000, 0],
+        [50_000, 0.005],
+        [150_000, 0.0045],
+        [500_000, 0.004],
+        [Number.MAX_SAFE_INTEGER, 0.0035],
+    ],
     'cloud-enterprise': [
         [1_000_000, 0],
         [2_000_000, 0.00045],

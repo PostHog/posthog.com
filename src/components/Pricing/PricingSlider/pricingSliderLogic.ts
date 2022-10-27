@@ -22,7 +22,12 @@ const calculatePrice = (eventNumber: number, pricingOption: PricingOptionType) =
     return Math.round(finalCost)
 }
 
-export type PricingOptionType = 'self-hosted' | 'self-hosted-enterprise' | 'cloud' | 'cloud-enterprise'
+export type PricingOptionType =
+    | 'self-hosted'
+    | 'self-hosted-enterprise'
+    | 'cloud'
+    | 'cloud-enterprise'
+    | 'session-recording'
 
 export const pricingSliderLogic = kea({
     actions: {
@@ -30,8 +35,18 @@ export const pricingSliderLogic = kea({
         setInputValue: (value: number) => ({ value }),
         setSliderValue: (value: number) => ({ value }),
         setPricingOption: (option: PricingOptionType) => ({ option }),
+        setSessionRecordingSliderValue: (value: number) => ({ value }),
+        setSessionRecordingInputValue: (value: number) => ({ value }),
     },
     reducers: {
+        sessionRecordingEventNumber: [
+            15000,
+            {
+                setSessionRecordingSliderValue: (_: null, { value }: { value: number }) =>
+                    Math.round(sliderCurve(value)),
+                setSessionRecordingInputValue: (_: null, { value }: { value: number }) => value * 1000000,
+            },
+        ],
         eventNumber: [
             1000000,
             {
@@ -51,6 +66,21 @@ export const pricingSliderLogic = kea({
             {
                 setSliderValue: (_: null, { value }: { value: number }) => Math.round(sliderCurve(value) / 1000000),
                 setInputValue: (_: null, { value }: { value: number }) => value,
+            },
+        ],
+        sessionRecordingSliderValue: [
+            null,
+            {
+                setSessionRecordingSliderValue: (_: null, { value }: { value: number }) => value,
+                setSessionRecordingInputValue: (_: null, { value }: { value: number }) => inverseCurve(value * 1000000),
+            },
+        ],
+        sessionRecordingInputValue: [
+            1,
+            {
+                setSessionRecordingSliderValue: (_: null, { value }: { value: number }) =>
+                    Math.round(sliderCurve(value) / 1000000),
+                setSessionRecordingInputValue: (_: null, { value }: { value: number }) => value,
             },
         ],
         pricingOption: [
@@ -89,6 +119,15 @@ export const pricingSliderLogic = kea({
             (s) => [s.eventNumber],
             (eventNumber: number) => {
                 return calculatePrice(eventNumber, 'self-hosted-enterprise')
+            },
+        ],
+        monthlyTotal: [
+            (s) => [s.sessionRecordingEventNumber, s.eventNumber],
+            (sessionRecordingEventNumber: number, eventNumber: number) => {
+                return (
+                    calculatePrice(eventNumber, 'cloud') +
+                    calculatePrice(sessionRecordingEventNumber, 'session-recording')
+                )
             },
         ],
         finalMonthlyCost: [
