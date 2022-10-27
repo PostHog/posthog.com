@@ -15,7 +15,7 @@ If you’ve ever worked for a startup, or read about a Unicorn tech company turn
 
 Equity is the amount of ownership of a corporation held by a person or entity. This ownership is usually described as either a percentage of the total equity of the business or, at later stages, a finite number of shares. 
 
-The majority of tech start-ups offer equity as part of their total compensation, normally in the form of share “options”. The upside potential of these options is meant to compensate for the more gruelling (and in my opinion, rewarding) work of growing a start-up company from founding to IPO (more on that later).
+The majority of tech startups offer equity as part of their total compensation, normally in the form of share “options”. The upside potential of these options is meant to compensate for the more gruelling (and in my opinion, rewarding) work of growing a startup company from founding to IPO (more on that later).
 
 When we set out to design a share options scheme for PostHog, we decided to prioritize employee-friendliness for a number of reasons:
 
@@ -31,7 +31,7 @@ When we set out to design a share options scheme for PostHog, we decided to prio
 
 When a startup company is incorporated, the founders decide on how to divide ownership between them by (quite literally) choosing a random number of shares to create out of thin air and distributing them to each other in some proportion. 
 
-In the common two-founder model, most start-ups distribute the shares as a 50/50 split between them, accounting for 100% ownership of the business. The shares are "purchased" for a nominal cost like a ten-thousandth of a cent because the value of a newly minted start-up company is effectively nothing.
+In the common two-founder model, most startups distribute the shares as a 50/50 split between them, accounting for 100% ownership of the business. The shares are "purchased" for a nominal cost like a ten-thousandth of a cent because the value of a newly minted startup company is effectively nothing.
 
 As our hypothetical founders pull Red-Bull-fueled all-nighters building their MVP and applying to accelerator programs, the valuation of their company slowly increases until the point where they seek outside investors to inject capital into the business to expedite growth. 
 
@@ -43,7 +43,9 @@ Usually, the first fundraising round (the ‘seed’ round) will involve carving
 
 ### What exactly is an option? 
 
-It's an option to purchase a share of the company at a given price – the “strike price” – which is known as “exercising” the option, thus becoming a percent owner of the company. These options are almost always granted by way of what is known as a vesting schedule, where options become available for exercise progressively over the course of employment with the company. This is to prevent a new hire from joining a company, exercising all of their options immediately, quitting, and watching their shares in the company grow in value without contributing any work towards building the company. 
+It's an option to purchase a share of the company at a given price – the “strike price” – which is known as “exercising” the option, thus becoming a percent owner of the company. 
+
+Options are almost always granted by way of what is known as a vesting schedule, where options become available for exercise progressively over the course of employment with the company. This is to prevent a new hire from joining a company, exercising all of their options immediately, quitting, and watching their shares in the company grow in value without contributing any work towards building the company. 
 
 The most common vesting schedule for tech companies these days is the 4-year/1-year cliff, which means that a quarter of your options vest after your 1-year work anniversary, and 1/36th of your remaining options vest each month for the following three years. 
 
