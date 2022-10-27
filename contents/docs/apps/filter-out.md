@@ -44,7 +44,7 @@ In the example config below, the app will only keep events where all of the foll
     "value": "yourcompany.com"
   },
   {
-    "key": "host",
+    "property": "host",
     "type": "string",
     "operator": "is_not",
     "value": "localhost:8000"
