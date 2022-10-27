@@ -16,13 +16,13 @@ Building a better product for power users keeps them happy and helps prevent the
 
 To create a great product for power users, you must know who they are and how they are using your product. In this tutorial, we’ll cover how to identify and analyze power users. All you need to start is a PostHog instance (and some users).
 
-## Defining a power user
+## Defining your power users
 
-The first step to identifying and analyzing a power user is defining them. There is no one-size-fits-all, every company and product has its own definition. Defining what they do is key to identifying and analyzing them. Ideally, your power users should align with your ideal customer profile and your key product metrics.
+The first step to identifying and analyzing a power user is defining them. There is no one-size-fits-all, every company and product has its own definition. Defining what they do is key to identifying and analyzing them. Ideally, your power users should align with your ideal customer profile and your [key product metrics](/blog/b2b-saas-product-metrics.
 
 One common aspect between definitions of power users is high usage, whether that is visiting every day, using feature lots, or long session times. A power user relies on the product, it is core to their workflow. They also use advanced features more than average.
 
-To help define exactly what a power user looks like, you can use PostHog. To do so, identify the key features for power users and analyze the events and actions related to those features. Some ideas:
+You can use PostHog to define exactly what a power user looks like. To do so, identify the key features for power users and analyze the events and actions related to those features. Some ideas:
 
 - Compare the retention percentage or returning amounts. Power users have higher retention.
 
@@ -41,7 +41,7 @@ Once you’ve decided your definition is a good one, you can use it to create a 
 
 Both represent power user behavior. When combined with the key events or actions identified earlier, we can create a cohort that matches our definition of a power user.
 
-As an example, we’ll use `uploaded_file`  as the power user event we care about. We can then either select “completed an event multiple times” or “completed an event regularly.” Because we care about the high volume of usage, and `uploaded_file` isn’t an advanced feature, we’ll choose “completed an event multiple times.” We’ll then set our usage amounts and regularity (which we can tweak later). Once done, it should look something like this:
+As an example, we’ll use `uploaded_file` as the power user event we care about. We can then either select “completed an event multiple times” or “completed an event regularly.” Because we care about the high volume of usage, and `uploaded_file` isn’t an advanced feature, we’ll choose “completed an event multiple times.” We’ll then set our usage amounts and regularity (which we can tweak later). Once done, it should look something like this:
 
 ![Power user cohort](../images/tutorials/power-users/cohort.png)
 
