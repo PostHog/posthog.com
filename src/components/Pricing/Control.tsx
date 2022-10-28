@@ -332,8 +332,8 @@ const Control = (): JSX.Element => {
                                 <div className="pt-4 pb-6">
                                     <LogSlider
                                         stepsInRange={100}
-                                        marks={[10000, 1000000, 10000000, 100000000, 1000000000]}
-                                        min={10000}
+                                        marks={[1000000, 10000000, 100000000, 1000000000]}
+                                        min={1000000}
                                         max={1000000000}
                                         onChange={(value) => setSliderValue(value)}
                                         value={sliderValue}
@@ -360,9 +360,9 @@ const Control = (): JSX.Element => {
                                 <div className="pt-4 pb-6">
                                     <LogSlider
                                         stepsInRange={100}
-                                        marks={[15000, 50000, 150000, 500000, 1000000]}
+                                        marks={[15000, 50000, 150000, 500000]}
                                         min={15000}
-                                        max={1000000}
+                                        max={500000}
                                         onChange={(value) => setSessionRecordingSliderValue(value)}
                                         value={sessionRecordingSliderValue}
                                     />
