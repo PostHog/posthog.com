@@ -44,6 +44,6 @@ A Design SuperDay usually looks like this (_there is a degree of flexibility due
 *   Kick-off session with [Cory](/handbook/people/team#cory-watilo-lead-designer)(Lead Designer)
 *   Meet the founders - Tim and James
 *   Time to focus on the task - we can provide support via your personal Slack channel
-*   On days where we have company wide meetings, we will invite you along to that and give you a chance to introduce yourself. On days without company-wide meetings, we will arrange for you to meet a few members of our team for a casual lunch/coffee break
+*   On days when we have company wide meetings, we will invite you along to that and give you a chance to introduce yourself. On days without company-wide meetings, we will arrange for you to meet a few members of our team for a casual lunch/coffee break
 
 > In line with our [values](/handbook/company/values) and [culture](/handbook/company/culture), you might get short replies like "step on toes" or "bias for action". 

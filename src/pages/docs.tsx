@@ -26,7 +26,7 @@ const quickLinks = [
         icon: 'apps',
         name: 'Apps',
         to: '/docs/apps',
-        description: 'Extend PostHog by adding your own funcionality.',
+        description: 'Extend PostHog by adding your own functionality.',
     },
     {
         icon: 'partners',

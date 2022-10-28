@@ -66,7 +66,7 @@ There are a few places on posthog.com where we ask users to complete a form to g
 
 - [B2C](/signup/b2c) - linked from the pricing page, capturing B2C customers looking for a volume discount
 - [Enterprise](/signup/cloud/enterprise) - linked from the signup page, capturing customers wanting Enterprise features on Cloud
-- [EU Cloud](/signup/eu-cloud) - linked from GDPR blog posts, capturing customers looking to use our upcoming EU Cloud
+- [EU Cloud](https://eu.posthog.com/signup) - linked from GDPR blog posts, capturing customers looking to use our upcoming EU Cloud
 
 The sales@ alias gets an email notification when one of these forms is submitted - respond to them in the same way as the email section above.
 

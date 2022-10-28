@@ -47,7 +47,7 @@ There is no limit on the number of events you can send in a batch, but the entir
 > **Note:** Timestamp is optional. If not set, it'll automatically be set to the current time.
 
 ```bash
-POST https://[your-instance].com/capture/
+POST https://[your-instance].com/batch/
 Content-Type: application/json
 Body:
 {
@@ -86,7 +86,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
     "context": "{}",
     "type": "alias",
     "event": "$create_alias"
-}' https://app.posthog.com/batch/
+}' https://app.posthog.com/capture/
 ```
 
 ### Capture
@@ -101,7 +101,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
     "type": "capture",
     "event": "$event",
     "messageId": "1234"
-}' https://app.posthog.com/batch/
+}' https://app.posthog.com/capture/
 ```
 
 ### Identify
@@ -116,7 +116,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
     "$set": {},
     "event": "$identify",
     "messageId": "123"
-}' https://app.posthog.com/batch/
+}' https://app.posthog.com/capture/
 ```
 
 ### Page
@@ -133,7 +133,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
     "event": "$page",
     "name": "a page",
     "messageId": "123"
-}' https://app.posthog.com/batch/
+}' https://app.posthog.com/capture/
 ```
 
 ### Screen
@@ -150,7 +150,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
     "event": "$screen",
     "name": "a page",
     "messageId": "123"
-}' https://app.posthog.com/batch/
+}' https://app.posthog.com/capture/
 ```
 
 ### Responses

@@ -19,7 +19,7 @@ import ResizeDiskRequirementsSnippet from '../../snippets/resize-disk-requiremen
     /dev/disk/by-id/scsi-0DO_Volume_pvc-966716a8-cac6-407a-afb4-8cab52b0ad9b  9.8G  145M  9.2G   2% /bitnami/postgresql
     ```
 
-1. Resize the underlying PVC (in this example we are resizing it to to 20G)
+1. Resize the underlying PVC (in this example we are resizing it to 20G)
 
     ```shell
     kubectl -n posthog patch pvc data-posthog-posthog-postgresql-0 -p '{ "spec": { "resources": { "requests": { "storage": "20Gi" }}}}'
