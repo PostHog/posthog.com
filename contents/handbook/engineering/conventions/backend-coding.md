@@ -6,7 +6,7 @@ sidebar: Handbook
 #### Logging
 As a general rule, we should have logs for every expected and unexpected actions of the application, using the appropriate _log level_.
 
-We should also be logging these exceptions to [Sentry](https://sentry.io/organizations/posthog2/issues/) with the [Sentry Python SDK](https://docs.sentry.io/platforms/python/). Python exceptions should almost always be captured automatically without extra instrumention, but custom ones (such as failed requests to external services, query errors, or Celery task failures) can be tracked using `capture_exception()`.
+We should also be logging these exceptions to [Sentry](https://sentry.io/organizations/posthog2/issues/) with the [Sentry Python SDK](https://docs.sentry.io/platforms/python/). Python exceptions should almost always be captured automatically without extra instrumentation, but custom ones (such as failed requests to external services, query errors, or Celery task failures) can be tracked using `capture_exception()`.
 
 ##### Levels
 A _log level_ or _log severity_ is a piece of information telling how important a given log message is:
@@ -46,7 +46,8 @@ Don’t log sensitive information. Make sure you never log:
 
 ### Testing
 * All new packages and most new significant functionality should come with unit tests
-* significant features should come with integration and/or end-to-end tests
+* Significant features should come with integration and/or end-to-end tests
+* Analytics-related queries should be covered by snapshot tests for ease of reviewing
 
 #### Unit tests
 A good unit test should:

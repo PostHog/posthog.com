@@ -5,7 +5,7 @@ showTitle: true
 ---
 
 
-[`0002_fill_distinct_id2`](https://github.com/PostHog/posthog/blob/master/posthog/async_migrations/migrations/0003_fill_person_distinct_id2.py) is an async migration added to to migrate the data from the old `person_distinct_id` table to the new `person_distinct_id2` table.
+[`0002_fill_distinct_id2`](https://github.com/PostHog/posthog/blob/master/posthog/async_migrations/migrations/0003_fill_person_distinct_id2.py) is an async migration added to migrate the data from the old `person_distinct_id` table to the new `person_distinct_id2` table.
 
 This is needed for faster `person_distinct_id` queries as the old schema worked off of (`distinct_id`, `person_id`) pairs, making it expensive for our analytics queries, which need to map from `distinct_id` to the latest `person_id`. 
 

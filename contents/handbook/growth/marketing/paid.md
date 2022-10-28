@@ -11,10 +11,10 @@ We work with an agency, [Hey Digital](https://www.heydigital.co/) to manage paid
 - Creating paid ad assets for each channel
 - Manage paid channels on our behalf 
 
-We communicate with them via a shared internal Slack channel, and have 2 checkin calls with them each month. We have a very light approvals process for creative:
+We communicate with them via a shared internal Slack channel, and have 2 check-in calls with them each month. We have a very light approvals process for creative:
 
 - Hey Digital team share asset(s) for feedback in Slack
-- PostHog team approve - Charles/Joe/Andy for copy, Cory/Lottie for visuals
+- PostHog team approve - usually Charles or Andy, but anyone can jump in and give feedback
 - If approval is not given within 48 hours, Hey Digital will process regardless
 
 Specific details of our media plan are shared internally only, as they contain commercially sensitive information that could be beneficial to our competitors. 
@@ -33,14 +33,11 @@ We currently run ads on:
 - Twitter - _awareness_
 - LinkedIn - _awareness_
 - Reddit - _awareness_
-
-We are testing ads on:
 - Quora - _awareness_
-- Product Hunt - _awareness, conversion_
 
-We may consider other paid platforms such as Facebook and Stack Overflow in the future as we learn more, though they are not currently a priority. We have previous tried and no longer use Bing, Carbon Ads, and Google Display, as they did not drive high quality user signups. 
+We may consider other paid platforms such as Facebook and Stack Overflow in the future as we learn more, though they are not currently a priority. We have previous tried and no longer use Bing, Product Hunt, Carbon Ads, and Google Display, as they did not drive high quality user signups. 
 
-We generally target users in the US, Canada, UK, Germany and France, as these tend to lead to the most high quality signups.
+We usually focus campaigns on users in the US, Canada, UK, Germany and France, as these tend to lead to the most high quality signups. For our GDPR-specific campaigns, we target all EU countries. 
 
 ## Tracking conversion
 

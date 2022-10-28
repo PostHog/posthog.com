@@ -27,6 +27,6 @@ With that Slack is configured for your project! You can now [create a Subscripti
 
 ### Troubleshooting
 
-#### I can't select my Slack channel or I am not recieiving Subscriptions
+#### I can't select my Slack channel or I am not receiving Subscriptions
 
 In order for the PostHog Slack App to send messages to a channel it needs to be first added to it. To do this you can type `/invite` in the relevant channel and then select `Add Apps to this channel` which will then allow you to search for the PostHog app and add it.

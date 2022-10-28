@@ -65,3 +65,17 @@ If we encounter an `$identify` or `$create_alias` event with one of the above pr
 ## Filtering internal users
 
 If you want to avoid tracking users within your organization, [you can do this](/tutorials/filter-internal-users) within your project's settings.
+
+## Signup flow with frontend and backend
+
+To use PostHog effectively we want all of the events tied to the same user to be tied to the same `person_id` (see [consequences of merging users](/docs/how-posthog-works/ingestion-pipeline#consequences-of-merging)). There's a few things to keep in mind when using a sign-up flow that involves both the frontend and backend: 
+1. We have an event buffer to delay creating persons from backend events (see [all about the event buffer](/docs/how-posthog-works/ingestion-pipeline#all-about-the-event-buffer)) that will help.
+2. The event buffer has a limited time window, so the (identify or alias) event that merges the frontend and backend user should come in within that window (60s)
+3. We don't buffer `$identify` events, so from the backend take care to not send those for setting properties before the users are merged. For setting user properties you can use any custom event, e.g. 
+```python
+posthog.capture(
+  'distinct id',
+  event='movie played',
+  properties={ '$set': { 'userProperty': 'value' } }
+)
+```

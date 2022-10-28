@@ -4,13 +4,21 @@ sidebar: Docs
 showTitle: true
 ---
 
+### 28.0.0
+
+This version changes the supported Kubernetes version to >=1.23 <= 1.25. Kubernetes 1.22 support has been dropped as it has reached end of life on 2022-10-28.
+
 ### 27.0.0
 
-This version upgrades the bundled `grafana/loki` Helm chart from `2.10.2` to `3.0.6`. The new 3.x Helm Chart 
+This version upgrades the bundled `grafana/loki` Helm chart from `2.10.2` to `3.0.6`. The new 3.x Helm Chart
 is based on the old `grafana/loki-simple-scalable` and as such the configuration options are not compatible.
 If you have `loki.enabled=false` (the default) then you do not need to do anything special with this upgrade.
-Otherwise, before performing the upgrade please ensure that you have read the [upgrade documentation](https://github.com/grafana/loki/tree/main/production/helm/loki#upgrading-from-v2x) 
+Otherwise, before performing the upgrade please ensure that you have read the [upgrade documentation](https://github.com/grafana/loki/tree/main/production/helm/loki#upgrading-from-v2x)
 on the Loki Chart repo.
+
+#### 27.1.0
+
+This version upgrades PostHog version to 1.40, which requires async migration 0006 to be completed (if you're on version <1.38 then upgrade to 1.39.1 and run 0005 and 0006 async migrations before upgrading to 1.40).
 
 ### 26.0.0
 

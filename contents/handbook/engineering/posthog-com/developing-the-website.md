@@ -54,7 +54,7 @@ To work on it locally, first you need to clone it to your disk:
 
     ![GitHub Desktop clone to dialog](../../../images/docs/contribute/github-desktop-clone-repo.png)
 
-    Click **Clone** to clone the posthog.com repostory to your local disk.
+    Click **Clone** to clone the posthog.com repository to your local disk.
 
     ![GitHub Desktop cloning to disk](../../../images/docs/contribute/github-desktop-cloning-to-disk.png)
 
@@ -85,7 +85,7 @@ Type the following into the command line and press return:
 yarn
 ```
 
-This runs the Yarn tool. Run standlone like this, it installs the dependency packages used by posthog.com. This may take a few minutes.
+This runs the Yarn tool. When run standalone like this, it installs the dependency packages used by posthog.com. This may take a few minutes.
 
 Once this command has finished executing, run the following:
 

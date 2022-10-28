@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-We have a [merch store](https://merch.posthog.com/) where our community can purchase high quality PostHog-branded merch.
+We have a [merch store](https://merch.posthog.com/) where our community can purchase high quality PostHog-branded merch. As we have a limited number of Shopify admins on our current plan, message Grace or Charles in the #team-people-and-ops channel if you need any help sending out merch or gift cards, as you probably won't be able to do it yourself. 
 
 ## How do we think about merch?
 

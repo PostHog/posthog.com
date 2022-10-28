@@ -27,7 +27,7 @@ import ResizeDiskRequirementsSnippet from '../../snippets/resize-disk-requiremen
     /dev/disk/by-id/scsi-0DO_Volume_pvc-97776a5e-9cdc-4fac-8dad-199f1728b857   15G   40M   14G   1% /bitnami/kafka
     ```
 
-1. Resize the underlying PVC (in this example we are resizing it to to 20G)
+1. Resize the underlying PVC (in this example we are resizing it to 20G)
 
     ```shell
     kubectl -n posthog patch pvc data-posthog-posthog-kafka-0 -p '{ "spec": { "resources": { "requests": { "storage": "20Gi" }}}}'
