@@ -30,7 +30,7 @@ You can use PostHog to define exactly what a power user looks like. To do so, id
 
 - Create trends for average user usage vs 90th, 95th, and 99th percentile usage. Power users use features significantly more than average. The larger the gap, the better.
 
-If a feature shows higher retention, repeated use, and a large difference in usage to the average, it is likely valuable to a power user. You can use data related to this feature along with qualitative analysis to solidify the definition of your power user.
+If a feature shows higher retention, repeated use, and a large difference in usage to the average, it is likely valuable to a power user. You can use data related to this feature along with qualitative analysis, such as insights from user interviews and session recordings, to solidify the definition of your power user.
 
 For example, at PostHog, we define power users as users with a high number of [discoveries](/handbook/product/metrics). It is a metric users do repeatedly every week, distinguishes engaged users, and creates higher retention. We've done tests to confirm it's importance, checking it against other potential definitions, for example:
 
