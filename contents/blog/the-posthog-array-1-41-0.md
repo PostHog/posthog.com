@@ -31,6 +31,7 @@ After updating to 1.41.0, check [ingestion warnings](#new-ingestion-warnings) an
 - New: Count of events per user
 - New: Text cards on dashboards
 - New: App metrics
+- New: View recordings from anywhere
 - New: Ingestion warnings
 - New: Change your email yourself
 - New: Hedgehog mode
@@ -69,6 +70,16 @@ Curious how well your apps are doing? Previously, you may have had to pour over 
 
 Want to take a look? Head to the apps page in your instance and click the chart symbol for any installed app.  
 
+### New: View recordings from anywhere
+
+![view recordings from anywhere1](../images/blog/array/1-41-0-view-recordings-anywhere1.png)
+
+![view recordings from anywhere2](../images/blog/array/1-41-0-view-recordings-anywhere2.png)
+
+You can now "View recordings" from different levels of your data. 
+
+Curious about how a specific person is interacting with your app? Navigate to a person detail page and check out their recordings. Want to see recordings for a specific event or action you've created? Check out the new view recordings button you can find in the event's detail page or from the events table.
+
 ### New: Ingestion warnings
 
 ![ingestion warnings](../images/blog/array/1-41-0-ingestion.png)
@@ -93,7 +104,7 @@ For a while now, we've been having a hard time explaining to our families what w
 
 We've heard feedback recently that session recording was incredibly useful, but didn't spark much joy for those who used it. So, we've overhauled the entire interface for session recordings to make it easier to use and to help you find relevant recordings faster. 
 
-We think session recording feels like an entirely new experience now, so check it out. Now's the perfect time to explore [the console log beta too](/manual/recordings#console-logs-recording-beta)!
+We think session recording feels like an entirely new experience now, so check it out. Now's the perfect time to explore [the console log too](/manual/recordings#console-logs-recording-beta)!
 
 ### One more thing: Site apps 
 
