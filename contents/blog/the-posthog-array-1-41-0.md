@@ -1,6 +1,6 @@
 ---
 date: 2022-10-31
-title: "Array 1.41.0: SUBHEADLINE GOES HERE"
+title: "Array 1.41.0: Enable hedgehog mode"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -98,13 +98,13 @@ This can be useful for a number of potential tasks, such as displaying feedback 
 
 You think that's it? Not by a long shot! Version 1.41 also adds hundreds of other improvements and fixes, including...
 
-- **Improvement:**  https://github.com/PostHog/posthog-github-action
+- **Improvement:**  
 - **Improvement:** 
 - **Improvement:**
 - **Fix**: 
 - **Fix**: 
 
-View the commit log in GitHub for a full history of changes: [`release-1.40.0...release-1.41.0`](https://github.com/PostHog/posthog/compare/release-1.39.0...release-1.40.0).
+View the commit log in GitHub for a full history of changes: [`release-1.40.0...release-1.41.0`](https://github.com/PostHog/posthog/compare/release-1.40.0...release-1.41.0).
 
 ## Give us your feedback
 We’re always working on improving PostHog and would love to talk to you! Please [schedule a 30 minute call](https://calendly.com/posthog-feedback) with one of our Product, Engineering, or Marketing team members to help us understand how to improve. As a thank you for your time, we'll be giving away awesome [PostHog merch](https://merch.posthog.com)!
