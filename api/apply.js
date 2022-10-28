@@ -2,12 +2,12 @@
 const Busboy = require('busboy')
 const request = require('request')
 
-function multipartToAshby(event) {
+function multipartToAshby(req) {
     return new Promise((resolve) => {
         const applicationForm = { fieldSubmissions: [] }
         const formData = {}
         const busboy = Busboy({
-            headers: event.headers,
+            headers: req.headers,
         })
 
         busboy.on('file', (name, filestream, file) => {
@@ -38,12 +38,12 @@ function multipartToAshby(event) {
             resolve(formData)
         })
 
-        busboy.end(Buffer.from(event.body, 'base64'))
+        req.pipe(busboy)
     })
 }
 
 const handler = async (req, res) => {
-    const formData = await multipartToAshby(req)
+    const formData = await multipartToAshby(req, res)
     const options = {
         method: 'POST',
         url: 'https://api.ashbyhq.com/applicationForm.submit',
@@ -61,4 +61,12 @@ const handler = async (req, res) => {
     })
 
     res.status(200).json({ submission })
+}
+
+export default handler
+
+export const config = {
+    api: {
+        bodyParser: false,
+    },
 }
