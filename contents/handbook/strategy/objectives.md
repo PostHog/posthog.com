@@ -4,6 +4,14 @@ sidebar: Handbook
 showTitle: true
 ---
 
+Our mission is to
+
+> "Increase the number of successful products in the world."
+
+Our vision for 2023 is:
+
+> “Everyone building a product has a clear path to making it successful without losing control of their data.”
+
 Our Q4 2022 company wide objective:
 > Average 11% Month Over Month revenue growth through Q4 2022.
 

@@ -10,7 +10,7 @@ In this page you can find a collection of guidelines, style suggestions, and tip
 
 Our frontend webapp is written with [Kea](https://keajs.org/) and [React](https://reactjs.org/) as two separate layers. Kea is used to organise the app's data for rendering (we call this the *data* or *state* layer), and React is used to render the computed state (this is the *view* or *template* layer).
 
-We try to be very explicit about this separation, and avoid local React state wherever possible, with exceptions for the `lib/` folder. Having all our data in one layer makes for code that's easier to [test](https://kea.js.org/docs/intro/testing), and observe. Basically, getting your [data layer](https://kea.js.org/blog/data-first-frontend-revolution) right is hard enough. We aim to not make it harder by constraining your data to a DOM-style hierarchy.
+We try to be very explicit about this separation, and avoid local React state wherever possible, with exceptions for the `lib/` folder. Having all our data in one layer makes for code that's easier to [test](https://keajs.org/docs/intro/testing), and observe. Basically, getting your [data layer](https://keajs.org/blog/data-first-frontend-revolution) right is hard enough. We aim to not make it harder by constraining your data to a DOM-style hierarchy.
 
 Hence the explicitly in keeping the layers separate.
 
@@ -41,6 +41,6 @@ Hence the explicitly in keeping the layers separate.
   - Namespace all your CSS rules under globally unique classes that match the component's name and case, for example `.DashboardMenu { put everything here }`
   - We loosely follow BEM conventions. If an element can't be namespaced inside a container class (e.g. modals that break out of the containing DOM element), use BEM style names like `.DashboardMenu__modal` to keep things namespaced.
 - Testing
-  - Write [logic tests](https://kea.js.org/docs/intro/testing) for all logic files. 
+  - Write [logic tests](https://keajs.org/docs/intro/testing) for all logic files. 
   - If your component is in the `lib/` folder, and has some interactivity, write a [react testing library](https://testing-library.com/docs/react-testing-library/intro/) test for it.
   - Add all new presentational elements and scenes to [our storybook](https://storybook.posthog.net/). Run `yarn storybook` locally.
