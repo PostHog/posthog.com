@@ -8,9 +8,9 @@ featuredImage: ../images/tutorials/banners/build-site-app.png
 topics: ["apps"]
 ---
 
-Site apps make it quick and easy to add features such as forms and banners to your site through our JavaScript library. This enables you to do things like capture feedback, add notifications, provide support, and more. These apps can then capture data for analysis in PostHog.
+Site apps make it quick and easy to add features such as forms and banners to your site through our JavaScript library. This enables you to do things like capture feedback, add notifications, provide support, and more. These apps can then capture data for analysis in PostHog. You can learn 
 
-In this tutorial, we’ll teach you how to build a site app. To complete this tutorial, you only need [Node installed](https://nodejs.org/en/download/) to build and run the app.
+In this tutorial, we’ll teach you how to build a site app. If you're looking for a broader overview of apps, you can find it [in our docs](/docs/apps). Our app will show up on our product site as button users can click to send us a customizable message captured as a PostHog event. To complete this tutorial, you only need [Node installed](https://nodejs.org/en/download/) to build and run the app.
 
 ## Basic setup
 
