@@ -82,7 +82,7 @@ user.
 
 ![ingestion warnings](../images/blog/array/1-41-0-ingestion.png)
 
-In case you still try to alias identified events, there's a new Ingestion Warnings page to remind you that it's a bad idea. 
+We've added a new page to the Data Management section which lists warnings related to data ingestion from the past 30 days. If you still try to alias identified events, the Ingestion Warning page is where we'll remind you that it's a bad idea. 
 
 ### New: Groups caching changes
 
