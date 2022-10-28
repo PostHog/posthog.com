@@ -30,7 +30,11 @@ After configuring PostHog within Laudspeaker, you can install the Laudspeaker Co
 3. Search for 'Laudspeaker'
 4. Select the app, press 'Install'
 
-Finally, to configure the app, you must provide the app with your API for `write-key`. This can be found in the 'Settings' section of Laudspeaker and should be copied into the Laudspeaker Connector configuration in PostHog. 
+To configure the app, you must provide the app with your API for `write-key`. This can be found in the 'Settings' section of Laudspeaker and should be copied into the Laudspeaker Connector configuration in PostHog. 
+
+Finally, you must provide (in PostHog) `[your_server's_url]/events/posthog` for `Lauspeaker URL` (or, if using a Laudspeaker hosted plan, `app.laudspeaker.com/events/posthog`). When this is entered, enable the app in PostHog. 
+
+Other fields (email, phone number, custom) are optional and can be specified if you want to be able to message people from PostHog through those channels with Laudspeaker
 
 ### Is the source code for this app available?
 

@@ -12,14 +12,6 @@ export default function SelfHost() {
         <Layout
             crumbs={[
                 {
-                    title: 'Get started',
-                    url: '/signup',
-                },
-                {
-                    title: 'Self-host',
-                    url: '/signup/self-host',
-                },
-                {
                     title: 'Get in touch',
                 },
             ]}
@@ -27,7 +19,7 @@ export default function SelfHost() {
             <SEO title="Get in touch - PostHog" />
             <section className="px-4">
                 <Intro>
-                    <Contact />
+                    <Contact activeTab="contact" />
                 </Intro>
             </section>
         </Layout>
