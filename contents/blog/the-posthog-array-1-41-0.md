@@ -73,7 +73,7 @@ Want to take a look? Head to the apps page in your instance and click the chart 
 
 ![ingestion warnings](../images/blog/array/1-41-0-ingestion.png)
 
-We've added a new page to the Data Management section which lists warnings related to data ingestion from the past 30 days. If you still try to alias identified events, the Ingestion Warning page is where we'll remind you that it's a bad idea. 
+We've added a new page to the Data Management section which lists warnings related to data ingestion from the past 30 days. If you still try to merge identified users into others, the Ingestion Warning page is where we'll remind you that the merge got blocked.
 
 ### New: Change your email yourself
 
@@ -108,10 +108,10 @@ Site apps can be useful for a number of potential tasks, such as displaying feed
 You think that's it? Not by a long shot! Version 1.41 also adds hundreds of other improvements and fixes, including...
 
 - **Improvement:**  You can now [send analytics events from GitHub actions, to PostHog](https://github.com/PostHog/posthog-github-action)
+- **Improvement:**  We have revamped our timezone system! We've squashed various bugs and improved the interval grouping to be more in line with expectations when filtering on dates.
 - **Improvement:** 
-- **Improvement:**
-- **Fix**: 
-- **Fix**: 
+- **Fix**: Experiment results will appear immediately after the first exposure to a user
+- **Fix**: The experiments table is now sortable
 
 View the commit log in GitHub for a full history of changes: [`release-1.40.0...release-1.41.0`](https://github.com/PostHog/posthog/compare/release-1.40.0...release-1.41.0).
 
