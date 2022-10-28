@@ -39,7 +39,7 @@ After updating to 1.41.0, check [ingestion warnings](#new-ingestion-warnings) an
 
 ### New: Persons on events on by default
 
-We used to store events in one table and persons in another table. That meant that, once you reached billion event scale, any query which touched person properties would time out. But, no longer! After running [an extensive beta since update 1.39.0](/blog/the-posthog-array-1-39-0#beta-improving-query-performance-by-combining-persons-and-events), we've now moved person data onto the events themselves. This change also applies to groups, adding group properties and aggregation to the same table. 
+We used to store events in one table and persons in another table. That meant that, once you reached billion event scale, any query which touched person properties would time out. But, no longer! After running [an extensive beta since update 1.39.0](/blog/the-posthog-array-1-39-0#beta-improving-query-performance-by-combining-persons-and-events), we've now added person data onto the events themselves. This change also applies to groups, adding group properties and aggregation to the same table. 
 
 You won’t see any UI changes as a result of this change — persons will still have their own Persons & Groups section on the sidebar, for example — but you will notice results are a lot (up to 400%!) faster for any queries involving persons, groups or events. This is a massive change, so be sure to [read the full announcement for more info](/blog/persons-on-events).
 
