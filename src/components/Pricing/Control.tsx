@@ -25,6 +25,7 @@ import { pricingSliderLogic } from 'components/Pricing/PricingSlider/pricingSlid
 import { LogSlider, prettyInt, sliderCurve } from 'components/Pricing/PricingSlider/LogSlider'
 import { pricing, pricingLabels } from 'components/Pricing/constants'
 import { ProductIcons } from '../ProductIcons/ProductIcons'
+import { NotProductIcons } from '../NotProductIcons/NotProductIcons'
 import Breakdown from './Breakdown'
 
 const Benefit = ({ children }) => {
@@ -388,7 +389,7 @@ const Control = (): JSX.Element => {
                         <h4 className="border-b border-dashed border-gray-accent-light pb-2 mb-3">Addons</h4>
 
                         <div className="pl-10 relative mb-4">
-                            <span className="w-6 h-6 absolute top-0 left-1">{ProductIcons.experiments}</span>
+                            <span className="w-6 h-6 absolute top-0 left-1">{NotProductIcons.enterprise}</span>
 
                             <h5 className="text-base mb-0">Enterprise package</h5>
                             <p className="text-[15px] mb-1">
@@ -402,14 +403,14 @@ const Control = (): JSX.Element => {
                         <h4 className="border-b border-dashed border-gray-accent-light pb-2 mb-3">Discounts</h4>
 
                         <div className="pl-10 relative mb-4">
-                            <span className="w-6 h-6 absolute top-0 left-1">{ProductIcons.experiments}</span>
+                            <span className="w-6 h-6 absolute top-0 left-1">{NotProductIcons.discount}</span>
 
                             <h5 className="text-base mb-0">B2C with millions of users?</h5>
                             <p className="text-[15px] mb-1">Get in touch for volume discounts after signing up.</p>
                         </div>
 
                         <div className="pl-10 relative mb-4">
-                            <span className="w-6 h-6 absolute top-0 left-1">{ProductIcons.experiments}</span>
+                            <span className="w-6 h-6 absolute top-0 left-1">{NotProductIcons.discount}</span>
 
                             <h5 className="text-base mb-0">Non-profits</h5>
                             <p className="text-[15px] mb-1">50% off in most cases. Get in touch after signing up.</p>
