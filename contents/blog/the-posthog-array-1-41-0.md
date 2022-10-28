@@ -16,47 +16,98 @@ Want to know more about what we're up to? [Subscribe to HogMail, our newsletter]
 
 ## PostHog 1.41.0 release notes
 
+
+
 **Release highlights:**
 
-- New: 
-- New:
-- New: 
-- New:
-- Improved: 
+- New: Count of events per user
+- Improved: Math selector
+- New: Text cards on dashboards
+- Improved: Recordings interface
+- New: Plugin metrics
+- New: Persons on events on by default
+- New: Alias changes
+- New: Ingestion warnings
+- New: Groups caching chagnes
+- Finally: Change your email yourself
+- New: Hedgehog mode
+- One more thing: Site apps 
 
-### New: 
-
-PICTURE GOES HERE
-
-1-sentence description goes here. 
-
-### New:
-
-PICTURE GOES HERE
-
-1-sentence description goes here. 
-
-### New: 
+### New: Count of events per user
 
 PICTURE GOES HERE
 
-1-sentence description goes here. 
+*Average number of purchases per user? Maximum number of forms submitted per user?* 
+Questions like these used to be hard to answer, but no more! Introducing "count of events per user".
 
-### New:
-
-PICTURE GOES HERE
-
-1-sentence description goes here. 
-
-### Improved: Retention insight update
+### Improved: Math selector
 
 PICTURE GOES HERE
 
-1-sentence description goes here. 
+Work on the previous task had us redo the math selector.
+
+### New: Text cards on dashboards
+
+PICTURE GOES HERE
+
+Would you like to add some metadata or clarifications on your dashboards? Now you can! Hint: gifs are metadata too! 
+
+### Improved: Recordings interface
+
+PICTURE GOES HERE
+
+We've been listening and implementing the most requested features, with a special focus on sparking joy. 
+It's like a completely new app now, so check it out! 
+
+### New: Plugin metrics
+
+PICTURE GOES HERE
+
+Curious how well your plugins are doing? You no longer have to read smoke signals in AWS logs - just use the new Plugin Metrics page. 
+
+### New: Persons on events on by default
+
+PICTURE GOES HERE
+
+We used to store events in one table and persons in another. Any query that touched person properties would require 
+database level JOINs and time out, once you reached the billion event scale. No longer! By moving person data
+onto the events themselves, we eliminated a whole class of performance issues 🚀.
+
+### New: Alias changes
+
+PICTURE GOES HERE
+
+The above change required us to be strict about who's a identified user and who's not. Because of that, you might
+benefit from double checking your `identify` and `alias` calls. The new rule is this: only anonymous users can be
+aliased into other users. Once you call `identify` on a user, you can no longer alias this user into another identified
+user. 
+
+### New: Ingestion warnings
+
+PICTURE GOES HERE
+
+In case you still try to, there's a new Ingestion Warnings page to 
+
+### New: Groups caching chagnes
+
+PICTURE GOES HERE
+
+### Finally: Change your email yourself
+
+PICTURE GOES HERE
+
+### New: Hedgehog mode
+
+PICTURE GOES HERE
+
+### One more thing: Site apps 
+
+PICTURE GOES HERE
+
 
 ### Other improvements & fixes
 
-Version 1.41 also adds hundreds of other improvements and fixes, including...
+You think that's it? Not by a long shot! Version 1.41 also adds hundreds of other improvements and fixes, including...
 
 - **Improvement:** 
 - **Improvement:** 
