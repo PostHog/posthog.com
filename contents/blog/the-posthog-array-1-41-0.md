@@ -12,16 +12,17 @@ featuredImageType: full
 
 Want to know more about what we're up to? [Subscribe to HogMail, our newsletter](/newsletter), which we send every two weeks!
 
-> Running a self-hosted instance? Check out our [guide to upgrading PostHog](/docs/runbook/upgrading-posthog).
-
-> **IMPORTANT NOTE FOR SELF-HOSTED USERS:** Self-hosted users should check `alias` usage before [upgrading PostHog](/docs/runbook/upgrading-posthog) due to changes involving persons on events. For example, assuming `email` is used as the identified user id, then: 
+## Important update notes for self-hosted users
+Due to changes in this update, it is important check `alias` usage before [upgrading PostHog](/docs/runbook/upgrading-posthog) to 1.41.0 on a self-hosted instance. For example, assuming `email` is used as the identified user id, then: 
 
 ```
 identify(email)                                   # in the frontend
 alias(backend_unique_id, email)      # in the backend - THIS WILL NOT WORK
 alias(email, backend_unique_id2)    # in the backend - the right order
 ```
-After updating to 1.41.0, check [ingestion warnings](#new-ingestion-warnings) and run async migrations 0005, 0006 and 0007.
+> **If you haven't run async migrations 0005, 0006 and/or 0007 before:** Before updating to 1.41.0, check [ingestion warnings](#new-ingestion-warnings) and solve any outstanding issues. Run async migrations 0005, 0006 and/or 0007 at `<your-posthog-site>/instance/async_migrations`. 
+
+> **If you have completed async migration 0007 before:** If you have changed anything regarding `alias` or based on ingestion warnings, you must re-run async migration 0007 by [connecting to Postgres](/docs/self-host/deploy/troubleshooting#how-do-i-connect-to-postgres), running `UPDATE posthog_asyncmigration SET status = 0 WHERE name = '0007_persons_and_groups_on_events_backfill' AND status = 2;` and re-running 0007 at `<your-posthog-site>/instance/async_migrations`.
 
 ## PostHog 1.41.0 release notes
 
@@ -76,7 +77,7 @@ Want to take a look? Head to the apps page in your instance and click the chart 
 
 ![view recordings from anywhere2](../images/blog/array/1-41-0-view-recordings-anywhere2.png)
 
-You can now "View recordings" from different levels of your data. 
+You can now view session recordings from different levels of your data. 
 
 Curious about how a specific person is interacting with your app? Navigate to a person detail page and check out their recordings. Want to see recordings for a specific event or action you've created? Check out the new view recordings button you can find in the event's detail page or from the events table.
 
