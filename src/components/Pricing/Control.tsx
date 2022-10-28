@@ -322,7 +322,7 @@ const Control = (): JSX.Element => {
                     <div className="md:col-span-2 mt-8 order-5">
                         <div className="mx-auto flex justify-center space-x-8 pb-4 mb-6 border-b border-dashed border-gray-accent-light">
                             <Link
-                                to="/signup/self-host/get-in-touch#demo"
+                                to="/book-a-demo"
                                 className="text-[15px] group font-semibold text-blue py-2 px-3 rounded-sm hover:text-blue hover:bg-blue/10 flex space-x-2 items-center"
                             >
                                 <svg
@@ -342,7 +342,7 @@ const Control = (): JSX.Element => {
                                 <span>Schedule a demo</span>
                             </Link>
                             <Link
-                                to="/signup/cloud/enterprise"
+                                to="/get-in-touch#contact"
                                 className="text-[15px] group font-semibold text-blue py-2 px-3 rounded-sm hover:text-blue hover:bg-blue/10 flex space-x-2 items-center"
                             >
                                 <svg
