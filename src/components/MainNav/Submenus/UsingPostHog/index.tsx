@@ -15,7 +15,9 @@ interface ColMenuItems {
 
 interface Tutorial {
     title: string
-    slug: string
+    fields: {
+        slug: string
+    }
     frontmatter: {
         featuredImage: any
     }
@@ -50,7 +52,7 @@ export default function UsingPosthog({ referenceElement }: { referenceElement: H
         {
             title: 'Contact sales',
             description: 'Licensing, upgrade, or demo inquiries',
-            url: '/signup/self-host/get-in-touch#contact',
+            url: '/get-in-touch#contact',
         },
         {
             title: 'PostHog on GitHub',
@@ -132,7 +134,7 @@ export default function UsingPosthog({ referenceElement }: { referenceElement: H
                                 <h3 className="text-[18px] font-bold m-0 text-black ">Latest tutorials</h3>
                             </div>
                             <ul className="m-0 list-none p-0 mt-2 grid grid-cols-2 gap-4">
-                                {nodes.map(({ slug, title, frontmatter: { featuredImage } }: Tutorial) => {
+                                {nodes.map(({ fields: { slug }, title, frontmatter: { featuredImage } }: Tutorial) => {
                                     const image = featuredImage && getImage(featuredImage)
                                     return (
                                         <li key={slug}>
@@ -188,7 +190,9 @@ const query = graphql`
             sort: { fields: frontmatter___date, order: DESC }
         ) {
             nodes {
-                slug
+                fields {
+                    slug
+                }
                 frontmatter {
                     featuredImage {
                         childImageSharp {

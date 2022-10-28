@@ -12,6 +12,10 @@
   to = "/apps/:splat"
 
 [[redirects]]
+  from = "/docs/user-guides/*"
+  to = "/manual/:splat"
+
+[[redirects]]
   from = "/next-steps/*"
   to = "/next-steps"
   status = 200
@@ -143,16 +147,6 @@
 [[redirects]]
     from = "/handbook/growth/customer-success"
     to = "/handbook/growth/customer-support"
-
-
-[[redirects]]
-    from = "/handbook/growth/customer-success"
-    to = "/handbook/growth/customer-support"
-
-
-[[redirects]]
-    from = "/handbook/getting-started"
-    to = "/handbook/getting-started/start-here"
 
 
 [[redirects]]
@@ -657,12 +651,6 @@
     from = "/docs/user-guides/overview"
     to = "/docs/user-guides"
 
-# Added: 2021-07-17
-# Not due to a rename, but to improve the website's navigation experience
-[[redirects]]
-    from = "/signup"
-    to = "/pricing"
-
 # Added: 2021-08-02
 [[redirects]]
     from = "/docs/user-guides/log-in-with-sso"
@@ -732,11 +720,6 @@
     from = "/handbook/people/team-structure/growth-engineering"
     to = "/handbook/people/team-structure/growth"
 
-# Added: 2021-08-19 # Modified: 2022-10-02
-[[redirects]]
-    from = "/handbook/people/team-structure/platform"
-    to = "/handbook/people/team-structure/infrastructure"
-
 # Added: 2021-09-09
 [[redirects]]
     from = "/docs/user-guides/projects"
@@ -767,11 +750,6 @@
     from = "/handbook/engineering/product-team"
     to = "/handbook/product/product-team"
 
-# Added: 2021-09-20; Updated: 2021-09-27
-[[redirects]]
-    from = "/handbook/engineering/scale-features-prioritization"
-    to = "/handbook/product/enterprise-features-prioritization"
-
 # Added: 2021-09-21
 [[redirects]]
     from = "/blog/Building-the-future-of-game-analytics-pureskill"
@@ -791,16 +769,6 @@
 [[redirects]]
     from = "/docs/user-guides/session-recording"
     to = "/docs/user-guides/recordings"
-
-# Added: 2021-10-6
-[[redirects]]
-    from = "/docs/user-guides/session-recording"
-    to = "/docs/user-guides/recordings"
-
-# Added: 2021-10-6
-[[redirects]]
-    from = "/handbook/product/scale-features-prioritization"
-    to = "/handbook/engineering/scale-features-prioritization"
 
 # Added: 2021-10-11
 [[redirects]]
@@ -971,12 +939,12 @@
 # Added: 2021-11-10
 [[redirects]]
     from = "/handbook/people/team-structure/design"
-    to = "/handbook/design/about-design"
+    to = "/handbook/design/philosophy"
 
 # Added: 2021-11-11
 [[redirects]]
     from = "/handbook/design/about-design"
-    to = "/handbook/people/team-structure/design"
+    to = "/handbook/design/philosophy"
 
 [[redirects]]
     from = "/product-features/self-hosted"
@@ -1136,11 +1104,6 @@
     from = "/handbook/engineering/ee-setup"
     to = "/docs/contribute/developing-locally"
 
-# Added: 2021-12-14
-[[redirects]]
-    from = "/docs/user-guides/sessions"
-    to = "/blog/sessions-removal"
-
 # Added: 2022-01-10
 [[redirects]]
     from = "/docs/tutorials/how-to-segment-users"
@@ -1150,11 +1113,6 @@
     command = "GATSBY_DEPLOY_PRIME_URL=$DEPLOY_PRIME_URL GATSBY_CONTEXT=$CONTEXT gatsby build"
 
 # Added: 2022-02-04
-[[redirects]]
-    from = "/docs/self-host/runbook/clickhouse/vertical_scaling"
-    to = "/docs/self-host/runbook/clickhouse/vertical-scaling"
-
-# Added: 2022-02-14
 [[redirects]]
     from = "/docs/self-host/runbook/clickhouse/vertical_scaling"
     to = "/docs/self-host/runbook/clickhouse/vertical-scaling"
@@ -1261,11 +1219,6 @@
 
 # Added: 2022-04-01
 [[redirects]]
-    from = "/product/quantitative-analysis"
-    to = "/apps/quantitative-analysis"
-
-# Added: 2022-04-01
-[[redirects]]
     from = "/product/user-paths"
     to = "/apps/user-paths"
 
@@ -1365,21 +1318,6 @@
 [[redirects]]
     from = "/product-features"
     to = "/blog/posthog-vs-amplitude"
-
-# Added: 2022-05-13
-[[redirects]]
-    from = "/docs/plugins/build/reference"
-    to = "/docs/apps/build/reference"
-
-# Added: 2022-05-13
-[[redirects]]
-    from = "/docs/plugins/build/types"
-    to = "/docs/apps/build/types"
-
-# Added: 2022-05-13
-[[redirects]]
-    from = "/docs/plugins/enabling"
-    to = "/docs/apps/enabling"
 
 # Added: 2022-05-26
 [[redirects]]
@@ -1751,11 +1689,6 @@
     from = "/apps/zendesk-connector/docs"
     to = "/docs/apps/zendesk-connector"
 
-# Added: 2022-07-18 # Updated: 2022-09-15
-[[redirects]]
-    from = "/handbook/engineering/app-east"
-    to = "/handbook/people/team-structure/product-analytics"
-
 # Added: 2022-07-18
 [[redirects]]
     from = "/blog/the-posthog-array-1-37-1"
@@ -1763,11 +1696,7 @@
 
 [[redirects]]
     from = "/handbook/engineering/app-west"
-    to = "/handbook/people/team-structure/experimentation"
-
-[[redirects]]
-    from = "/handbook/people/team-structure/app-west"
-    to = "/handbook/people/team-structure/experimentation"
+    to = "/handbook/small-teams/experimentation"
 
 [[redirects]]
     from = "/docs/self-host/configure/async-migrations"
@@ -1801,24 +1730,6 @@
 [[redirects]]
     from = "/docs/self-host/disaster-recovery"
     to = "/docs/runbook/disaster-recovery"
-
-
-# Added: 2022-08-02
-[[redirects]]
-    from = "/docs/self-host/migrate/migrate-between-cloud-and-self-hosted"
-    to = "/docs/runbook/migrate/migrate-between-cloud-and-self-hosted"
-
-
-# Added: 2022-08-02
-[[redirects]]
-    from = "/docs/self-host/migrate/migrate-from-amplitude"
-    to = "/docs/runbook/migrate/migrate-from-amplitude"
-
-
-# Added: 2022-08-02
-[[redirects]]
-    from = "/docs/self-host/migrate/migrate-to-another-self-hosted-instance"
-    to = "/docs/migrate/migrate-to-another-self-hosted-instance"
 
 
 # Added: 2022-08-02
@@ -1966,7 +1877,7 @@
 
 [[redirects]]
     from = "/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog"
-    to = "/blog/aarrr-pirate-funnel"    
+    to = "/blog/aarrr-pirate-funnel"
 
 # Added: 2022-08-08
 [[redirects]]
@@ -1986,7 +1897,7 @@
 # Added: 2022-02-03
 [[redirects]]
     from = "/docs/self-host/migrate-from-postgres-to-clickhouse"
-    to = "/docs/self-host/migrate/migrate-to-another-self-hosted-instance"
+    to = "/docs/migrate/migrate-to-another-self-hosted-instance"
 
 # Added: 2022-08-08
 [[redirects]]
@@ -1995,213 +1906,16 @@
 
 # Added: 2022-08-10
 [[redirects]]
-    from = "/plugins/customer.io"
-    to = "/apps/customer-io"
-
-[[redirects]]
-    from = "/plugins/hubspot"
-    to = "/apps/hubspot-connector"
-
-[[redirects]]
-    from = "/plugins/pub/sub-export"
-    to = "/apps/google-pub-sub-connector"
-
-[[redirects]]
-    from = "/plugins/sendgrid"
-    to = "/apps/sendgrid-connector"
-
-[[redirects]]
-    from = "/plugins/geoip"
-    to = "/apps/apps/geoip-enrichment"
-
-[[redirects]]
-    from = "/plugins/event-sequence-timer-plugin"
-    to = "/apps/event-sequence-timer"
-
-# Added: 2022-08-10
-[[redirects]]
     from = "/handbook/product/pm-rampup"
     to = "/handbook/people/ramp-up/product-manager"
 
 [[redirects]]
-    from = "/handbook/people/team-structure/team-structure/why-small-teams"
+    from = "/handbook/small-teams/team-structure/why-small-teams"
     to = "/handbook/people/team-structure/why-small-teams"
 
 [[redirects]]
     from = "/docs/plugins/build"
     to = "/docs/apps/build"
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/actions"
-    to = "/manual/actions"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/annotations"
-    to = "/manual/annotations"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/application-settings"
-    to = "/manual/application-settings"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/cohorts"
-    to = "/manual/cohorts"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/correlation"
-    to = "/manual/correlation"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/dashboards"
-    to = "/manual/dashboards"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/data-management"
-    to = "/manual/data-management"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/events"
-    to = "/manual/events"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/experimentation"
-    to = "/manual/experimentation"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/feature-flags"
-    to = "/manual/feature-flags"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/funnels"
-    to = "/manual/funnels"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/group-analytics"
-    to = "/manual/group-analytics"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides"
-    to = "/using-posthog"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/insights"
-    to = "/manual/insights"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/lifecycle"
-    to = "/manual/lifecycle"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/organizations-and-projects"
-    to = "/manual/organizations-and-projects"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/paths"
-    to = "/manual/paths"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/persons"
-    to = "/manual/persons"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/recordings"
-    to = "/manual/recordings"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/retention"
-    to = "/manual/retention"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/sessions"
-    to = "/manual/sessions"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/sso"
-    to = "/manual/sso"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/stickiness"
-    to = "/manual/stickiness"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/subscriptions"
-    to = "/manual/subscriptions"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/support"
-    to = "/manual/support"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/toolbar"
-    to = "/manual/toolbar"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/trends"
-    to = "/manual/trends"
-
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/utm-segmentation"
-    to = "/manual/utm-segmentation"
-
-# Added: 2022-08-11
-[[redirects]]
-    from = "/docs/user-guides/subscriptions"
-    to = "/manual/notifications-and-alerts"
 
 # Added: 2022-08-24
 [[redirects]]
@@ -2216,114 +1930,109 @@
 
 # Added: 2022-08-29
 [[redirects]]
-    from = "/handbook/engineering/databases"
-    to = "/docs/how-posthog-works/ingestion-pipeline"
+    from = "/manual/actions"
+    to = "/docs/user-guides/actions"
 
-# Added: 2022-08-29
-[[redirects]]
-    from = "/docs/architecture/ingestion-pipeline"
-    to = "/docs/how-posthog-works/ingestion-pipeline"
 
-# Added: 2022-09-01
+# Added: 2022-08-16
 [[redirects]]
-    from = "/blog/the-posthog-array-1-39-1"
-    to = "/blog/the-posthog-array-1-39-0"
-    
-# Added: 2022-09-02    
-[[redirects]]
-    from = "/product/experimentation"
-    to = "/product/experimentation-suite"
+    from = "/manual/annotations"
+    to = "/docs/user-guides/annotations"
 
-# Added: 2022-09-11 # Updated: 2022-09-15
-[[redirects]]
-    from = "/handbook/strategy/strategy"
-    to = "/handbook/strategy/overview"
-
-# Added: 2022-09-12
-[[redirects]]
-    from = "/handbook/people/team-structure/app-east/objectives"
-    to = "/handbook/people/team-structure/product-analytics"
 
 # Added: 2022-09-15
 [[redirects]]
     from = "/handbook/engineering/app-east"
     to = "/handbook/people/team-structure/product-analytics"
 
-# Added: 2022-09-15
+# Added: 2022-08-16
 [[redirects]]
-    from = "/handbook/people/team-structure/team-east"
-    to = "/handbook/people/team-structure/product-analytics"
+    from = "/manual/cohorts"
+    to = "/docs/user-guides/cohorts"
 
-# Added: 2022-09-15
-[[redirects]]
-    from = "/handbook/people/team-structure/ingestion"
-    to = "/handbook/people/team-structure/pipeline"
-
-# Added: 2022-09-15
 [[redirects]]
     from = "/handbook/people/team-structure/app-east"
-    to = "/handbook/people/team-structure/product-analytics"
+    to = "/handbook/small-teams/app-east"
 
 
-# Added: 2022-09-15
+# Added: 2022-08-16
 [[redirects]]
-    from = "/handbook/people/team-structure/app-east/mission"
-    to = "/handbook/people/team-structure/product-analytics/mission"
+    from = "/manual/feature-flags"
+    to = "/docs/user-guides/feature-flags"
 
-
-# Added: 2022-09-15
+# Added: 2022-09-20
 [[redirects]]
-    from = "/handbook/people/team-structure/app-east/objectives"
-    to = "/handbook/people/team-structure/product-analytics/objectives"
-
-# Added: 2022-09-15 # Modified: 2022-10-02
-[[redirects]]
-    from = "/handbook/people/team-structure/platform"
-    to = "/handbook/people/team-structure/infrastructure"
-
-
-# Added: 2022-09-15
-[[redirects]]
-    from = "/handbook/people/team-structure/platform/mission"
-    to = "/handbook/people/team-structure/infrastructure/mission"
-
-
-# Added: 2022-09-15
-[[redirects]]
-    from = "/handbook/people/team-structure/platform/objectives"
-    to = "/handbook/people/team-structure/infrastructure/objectives"
-
-
-# Added: 2022-09-16
-[[redirects]]
-    from = "/handbook/strategy/overview"
-    to = "/handbook/strategy/strategy"
+    from = "/docs/integrate/client/browser-extension"
+    to = "/docs/integrate/browser-extension"
 
 # Added: 2022-09-24
 [[redirects]]
     from = "/handbook/company/website-design-process"
     to = "/handbook/designing-posthog-website"
 
-# Added: 2022-09-24
+# Added: 2022-10-01
 [[redirects]]
-    from = "/handbook/design/about-design"
-    to = "/handbook/design/philosophy"
+    from = "/handbook/people/team-structure"
+    to = "/handbook/small-teams"
+    
+[[redirects]]
+    from = "/manual/group-analytics"
+    to = "/docs/user-guides/group-analytics"
 
-# Added: 2022-09-24
+# Added: 2022-10-01
 [[redirects]]
-    from = "/handbook/company/working-with-product-design"
-    to = "/handbook/engineering/product-design"
+    from = "/handbook/people/team-structure/why-small-teams"
+    to = "/handbook/company/small-teams"
 
 [[redirects]]
-    from = "/marketplace"
-    to = "/partners"
+    from = "/handbook/people/team-structure/app-west"
+    to = "/handbook/small-teams/experimentation"
+
+[[redirects]]
+    from = "/handbook/people/team-structure/customer-success"
+    to = "/handbook/small-teams/customer-success"
+
+[[redirects]]
+    from = "/handbook/people/team-structure/exec"
+    to = "/handbook/small-teams/exec"
+
+[[redirects]]
+    from = "/handbook/people/team-structure/growth"
+    to = "/handbook/small-teams/growth"
+
+[[redirects]]
+    from = "/handbook/people/team-structure/infrastructure"
+    to = "/handbook/small-teams/infrastructure"
+
+[[redirects]]
+    from = "/handbook/people/team-structure/ingestion"
+    to = "/handbook/small-teams/ingestion"
+
+[[redirects]]
+    from = "/handbook/people/team-structure/marketing"
+    to = "/handbook/small-teams/marketing"
+
+[[redirects]]
+    from = "/handbook/people/team-structure/people"
+    to = "/handbook/small-teams/people"
+
+[[redirects]]
+    from = "/handbook/people/team-structure/platform"
+    to = "/handbook/small-teams/platform"
+
+[[redirects]]
+    from = "/handbook/people/team-structure/session-recording"
+    to = "/handbook/small-teams/session-recording"
+
+[[redirects]]
+    from = "/handbook/people/team-structure/website-docs"
+    to = "/handbook/small-teams/website-docs"
 
 
 # Added: 2022-10-01
 [[redirects]]
-    from = "/marketplace/altinity"
-    to = "/partners/altinity"
-
+    from = "/handbook/people/team-structure/_team_template"
+    to = "/handbook/small-teams/_team_template"
 
 # Added: 2022-10-01
 [[redirects]]
@@ -2332,15 +2041,14 @@
 
 # Added: 2022-10-01
 [[redirects]]
-    from = "/marketplace/guidelines"
-    to = "/partners/guidelines"
+    from = "/manual/insights"
+    to = "/docs/user-guides/insights"
 
 
-# Added: 2022-10-01
+# Added: 2022-08-16
 [[redirects]]
-    from = "/marketplace/listing-template"
-    to = "/partners/listing-template"
-
+    from = "/manual/lifecycle"
+    to = "/docs/user-guides/lifecycle"
 
 # Added: 2022-10-01
 [[redirects]]
@@ -2353,91 +2061,42 @@
     from = "/marketplace/restack"
     to = "/partners/restack"
 
-
-# Added: 2022-10-02
+# Added: 2022-10-01
 [[redirects]]
-    from = "/handbook/people/team-structure/app-east/mission"
-    to = "/handbook/people/team-structure/experimentation/mission"
+    from = "/marketplace/altinity"
+    to = "/partners/altinity"
 
 
-# Added: 2022-10-02
+# Added: 2022-10-11
 [[redirects]]
-    from = "/handbook/people/team-structure/app-west/objectives"
-    to = "/handbook/people/team-structure/experimentation/objectives"
+    from = "/handbook/people/team-structure/experimentation"
+    to = "/handbook/small-teams/experimentation"
 
 
-# Added: 2022-10-02
-[[redirects]]
-    from = "/docs/integrate/client/browser-extension"
-    to = "/docs/integrate/browser-extension"
-
-# Added: 2022-10-03
-[[redirects]]
-    from = "/handbook/people/team-structure/product-analytics"
-    to = "/handbook/people/team-structure/app-east"
-
-
-# Added: 2022-10-03
-[[redirects]]
-    from = "/handbook/people/team-structure/experimentation/mission"
-    to = "/handbook/people/team-structure/app-east/mission"
-
-
-# Added: 2022-10-03
-[[redirects]]
-    from = "/handbook/people/team-structure/product-analytics/mission"
-    to = "/handbook/people/team-structure/app-west/mission"
-
-
-# Added: 2022-10-03
+# Added: 2022-10-11
 [[redirects]]
     from = "/handbook/people/team-structure/pipeline"
-    to = "/handbook/people/team-structure/ingestion"
+    to = "/handbook/small-teams/pipeline"
 
-
-# Added: 2022-10-03
+# Added: 2022-10-11
 [[redirects]]
-    from = "/handbook/people/team-structure/app-west/mission"
-    to = "/handbook/people/team-structure/product-analytics/mission"
-
+    from = "/handbook/people/team-structure/product-analytics"
+    to = "/handbook/small-teams/product-analytics"
 
 # Added: 2022-10-07
 [[redirects]]
-    from = "/partners/altinity"
-    to = "/marketplace/altinity"
+    from = "/docs/self-host/postgres-vs-clickhouse"
+    to = "/blog/clickhouse-vs-postgres"
 
-
-# Added: 2022-10-07
+# Added: 2022-10-11
 [[redirects]]
-    from = "/partners/clickhouse"
-    to = "/marketplace/clickhouse"
+    from = "/handbook/people/team-structure/team-structure"
+    to = "/handbook/small-teams/team-structure"
 
-
-# Added: 2022-10-07
 [[redirects]]
-    from = "/partners/guidelines"
-    to = "/marketplace/guidelines"
+    from = "/eu-cloud"
+    to = "/eu"
 
-
-# Added: 2022-10-07
-[[redirects]]
-    from = "/partners"
-    to = "/marketplace"
-
-
-# Added: 2022-10-07
-[[redirects]]
-    from = "/partners/listing-template"
-    to = "/marketplace/listing-template"
-
-
-# Added: 2022-10-07
-[[redirects]]
-    from = "/partners/opsverse"
-    to = "/marketplace/opsverse"
-
-
-# Added: 2022-10-07
 [[redirects]]
     from = "/partners/restack"
     to = "/marketplace/restack"
@@ -2615,3 +2274,9 @@
 [[redirects]]
     from = "/handbook/company/small-teams"
     to = "/handbook/people/team-structure/why-small-teams"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/handbook/strategy/roadmap"
+    to = "/roadmap"

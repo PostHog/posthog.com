@@ -300,7 +300,7 @@ export default function Handbook({
                             </div>
 
                             {!hideLastUpdated && (
-                                <p className="mt-1 mb-0 !opacity-30 text-black dark:text-white font-semibold">
+                                <p className="mt-0 mb-4 md:mt-1 md:mb-0 !opacity-30 text-black dark:text-white font-semibold">
                                     Last updated: <time>{lastUpdated}</time>
                                 </p>
                             )}

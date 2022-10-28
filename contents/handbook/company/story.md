@@ -44,7 +44,7 @@ This was a major update - PostHog started providing [ClickHouse support](../../b
 
 We realized that our users, whether they're startups, scale ups or enterprises, have simple needs across a broad range of use cases in understanding user behavior.
 
-PostHog now supports [product analytics](../../product-features/trends), [feature flags](../../product-features/feature-flags), [session recording](../../product-features/session-recording) and [apps](../../product-features/plugins).
+PostHog now supports [product analytics](/product/trends), [feature flags](/product/feature-flags), [session recording](/product/session-recording) and [apps](/apps).
 
 ## Dec 2020: $9M Series A
 

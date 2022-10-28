@@ -93,11 +93,11 @@ I personally love this syntax. It feels super readable to me and reminds me a bi
 
 ### GitHub Actions
 
-So that's all well and cool, but what about making sure that in a fit of intense focus and momentum we don't inadvertently push a breaking change to master? We need someone or something to act as a gatekeeper to keep us from from shooting ourselves in the foot. We need CI.
+So that's all well and cool, but what about making sure that in a fit of intense focus and momentum we don't inadvertently push a breaking change to master? We need someone or something to act as a gatekeeper to keep us from shooting ourselves in the foot. We need CI.
 
 We could use Travis, or Jekins, or CircleCI… but as you may have noticed we keep almost everything about PostHog in GitHub, from our product roadmap, issues, this blog, everything is in GitHub. So it made sense to us to keep our CI in GitHub if we could. We decided to give GitHub Actions a test. So far, we have loved it.
 
-[GitHub actions](https://github.com/features/actions) are basically a workflow you can trigger from events that occure on your GitHub repo. We trigger ours on the creation of a pull request. We also require that our actions all return 👍&nbsp;&nbsp;before you can merge your PR into master. Thus, we keep master clean.
+[GitHub actions](https://github.com/features/actions) are basically a workflow you can trigger from events that occur on your GitHub repo. We trigger ours on the creation of a pull request. We also require that our actions all return 👍&nbsp;&nbsp;before you can merge your PR into master. Thus, we keep master clean.
 
 To make sure that things are only improving with our modifications, we first re-run our Django unit and integration tests just to make sure that in our customers final environment things are still going to behave as expected. We need to be sure that there was nothing unique about your dev environment that could have fooled the tests into a false sense of awesome. You can check out how we set this up here [Django github actions](https://github.com/PostHog/posthog/blob/master/.github/workflows/pythonapp.yml)
 
@@ -127,7 +127,7 @@ Using the cache step we can cache the results of pulling python dependencies or 
     python -m pip install psycopg2-binary --no-cache-dir --compile
 ```
 
-Note that there is no if block to determine whether to use the cache or not when we `pip install` the dependencies. This is because pip is smart enough to use the rehydrated cache if it sees it, if it doesnt see it it will just go out to the internet to grab what it needs.
+Note that there is no if block to determine whether to use the cache when we `pip install` the dependencies. This is because `pip` is smart enough to use the rehydrated cache if it exists. In cases where it doesn't exist, `pip` will fetch dependencies from the public internet.
 
 Yarn is a bit more involved only because we grab the location of the cache directory first and use that output as an input to the caching step
 
@@ -153,7 +153,7 @@ Yarn is a bit more involved only because we grab the location of the cache direc
 
 That last line with the `if` block tells GitHub to not run `yarn install` if the cache exists. This saves us a ton of time if nothing has changed
 
-On top of that, let's say you are making changes to only the API. There's no reason why you should be rebuiling the frontend each time the tests are run. So we go ahead and cache that between runs as well.
+On top of that, let's say you are making changes to only the API. There's no reason why you should be rebuilding the frontend each time the tests are run. So we go ahead and cache that between runs as well.
 
 #### Frontend app build cache
 

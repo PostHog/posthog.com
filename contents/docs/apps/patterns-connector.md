@@ -45,7 +45,7 @@ Once you’ve installed the app and configured the webhook, data will begin stre
 
 ### Are there other ways to connect PostHog and Patterns?
 
-Yes. You can also use the PostHog data extractor within Patterns to extract a full historical and incremental load of events. Check [this tutorial about connecting PostHog and Patterns](/tutorials/how-to-connect-patterns-and-posthog.md) for more information.
+Yes. You can also use the PostHog data extractor within Patterns to extract a full historical and incremental load of events. Check [this tutorial about connecting PostHog and Patterns](/tutorials/how-to-connect-patterns-and-posthog) for more information.
 
 ### Is the source code for this app available?
 

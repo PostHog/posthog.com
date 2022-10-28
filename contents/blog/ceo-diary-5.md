@@ -64,13 +64,13 @@ At our first offsite in 2020, we ran a [full team feedback session](../handbook/
 
 Tim and I were both given the feedback that we've seen product done badly in our previous careers, and as a result, we aren't building this discipline at all into the company. We were just a bunch of engineers building what we felt users wanted - which was probably the right choice in the first few months, but not the path to building a world-class experience.
 
-Compellingly, Paolo - then, one of our engineers - had proactively acted like a product manager. He gathered deep feedback from dozens of users, which he summarised at the start of the offsite to everyone. It was incredibly useful (and influenced us going broard with our product, giving us a much better strategy).
+Compellingly, Paolo - then, one of our engineers - had proactively acted like a product manager. He gathered deep feedback from dozens of users, which he summarised at the start of the offsite to everyone. It was incredibly useful (and influenced us going broad with our product, giving us a much better strategy).
 
 We thought about it, and realized this was something we needed to act on. We put Paolo into a full time product role, and we hired Marcus into a VP Product role in 2021. The focus they gave us was a key part of getting to five reference customers - this became really obvious last year.
 
 The best part? We've not had to sacrifice engineering autonomy.
 
-Both Marcus and Paolo can write code, and they both ship from time to time. This creates a more collaborative environment with engineering (and it helps them understand our end users better). Our structure also promotes this - we rely on [small teams](../handbook/people/team-structure/why-small-teams), with individuals setting their own priorities each week or two, to give real ownership of what people choose to build. Product gives very valuable context and high level guidance so engineers can make better decisions in this situations.
+Both Marcus and Paolo can write code, and they both ship from time to time. This creates a more collaborative environment with engineering (and it helps them understand our end users better). Our structure also promotes this - we rely on [small teams](../handbook/company/small-teams), with individuals setting their own priorities each week or two, to give real ownership of what people choose to build. Product gives very valuable context and high level guidance so engineers can make better decisions in this situations.
 
 ## How to build a design team
 

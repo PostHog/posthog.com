@@ -73,6 +73,10 @@ export default function Job({
         },
         {
             name: 'About us',
+            url: '/about',
+        },
+        {
+            name: 'Our story',
             url: '/handbook/company/story',
         },
         {

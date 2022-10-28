@@ -132,7 +132,7 @@ Go to your PostHog instance and select `Toolbar` in the bottom of the sidebar.
 
 ![Toolbar Location](..images/tutorials/../../../images/tutorials/css-selectors-for-actions/toolbar_location.png)
 
-Then, press the `Open with Toolbar` button, which will take you to your website. You can read more about working with the toolbar [here](docs/tutorials/../../toolbar.md).
+Then, press the `Open with Toolbar` button, which will take you to your website. You can read more about working with the toolbar [here](/manual/toolbar).
 
 After your website is open, you should see a PostHog logo 🦔 floating around. Press it. You will see a toolbar like the picture below.
 

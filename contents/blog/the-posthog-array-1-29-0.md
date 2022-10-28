@@ -108,7 +108,7 @@ As a small thank you for your time, we're giving away awesome [PostHog merch](ht
 
 ## PostHog News
 
-Welcome Harry Waye! Harry is joining us as a Full Stack Engineer on the [Platform Team](/handbook/people/team-structure/platform).
+Welcome Harry Waye! Harry is joining us as a Full Stack Engineer on the [Platform Team](/handbook/small-teams/infrastructure).
 
 ## Community
 ### Community MVP 🏆

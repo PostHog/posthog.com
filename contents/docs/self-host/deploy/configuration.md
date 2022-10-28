@@ -201,7 +201,7 @@ email:
 
 </details>
 
-### [ClickHouse](../../runbook/services/clickhouse)
+### [ClickHouse](/docs/runbook/services/clickhouse)
 
 ClickHouse is the datastore system that does the bulk of heavy lifting with regards to storing and analyzing the analytics data.
 
@@ -260,7 +260,7 @@ Read more about ClickHouse settings [here](https://clickhouse.com/docs/en/operat
 
 _See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) for full configuration options._
 
-### [MinIO](../../runbook/services/minio/)
+### [MinIO](/docs/runbook/services/minio)
 
 By default, `MinIO` is not installed as part of the chart. If you want to enable it, please set `minio.enabled` to `true`.
 
@@ -274,7 +274,7 @@ To use an external S3 like/compatible object storage, please set `minio.enabled`
 
 _See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and the [MinIO chart](https://github.com/bitnami/charts/tree/master/bitnami/minio) for full configuration options._
 
-### [PostgreSQL](../../runbook/services/postgresql)
+### [PostgreSQL](/docs/runbook/services/postgresql)
 
 > While ClickHouse powers the bulk of the analytics if you deploy PostHog using this chart, Postgres is still needed as a data store for PostHog to work.
 
@@ -303,7 +303,7 @@ pgbouncer:
 
 _See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) for full configuration options._
 
-### [Redis](../../runbook/services/redis)
+### [Redis](/docs/runbook/services/redis)
 
 Redis is installed by default as part of the chart. You can customize all its settings by overriding `values.yaml` variables in the `redis` namespace.
 
@@ -387,7 +387,7 @@ By default, Redis doesn't use any password for authentication. If you want to co
 
 _See [ALL_VALUES.md](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) and the [Redis chart](https://github.com/bitnami/charts/tree/master/bitnami/redis) for full configuration options._
 
-### [Kafka](../../runbook/services/kafka/)
+### [Kafka](/docs/runbook/services/kafka)
 
 Kakfa is installed by default as part of the chart. You can customize all its settings by overriding `values.yaml` variables in the `kafka` namespace.
 

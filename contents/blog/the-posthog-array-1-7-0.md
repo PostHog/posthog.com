@@ -89,7 +89,7 @@ You [used to](https://github.com/PostHog/posthog/issues/764) have to enter your 
 
 ## Favorite issue
 
-### [Deployment master plan](hhttps://github.com/PostHog/posthog/issues/799)
+### [Deployment master plan](https://github.com/PostHog/posthog/issues/799)
 
 We also have a few backlog bugs to tackle - we will work through these.
 

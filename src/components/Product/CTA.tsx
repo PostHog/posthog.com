@@ -1,10 +1,11 @@
 import { CallToAction } from 'components/CallToAction'
 import Logo from 'components/Logo'
 import React from 'react'
+import { DemoLink } from 'components/DemoLink'
 
 export default function CTA({ className = '' }) {
     return (
-        <div className={`bg-black px-8 md:px-16 py-12 -mb-8 text-white ${className}`}>
+        <div className={`bg-black px-8 md:px-16 pt-12 pb-16 -mb-8 text-white ${className}`}>
             <h4 className="text-4xl leading-tight mb-8 md:mb-4">
                 Where else can you get <span className="inline-block text-yellow">self-hostable</span>{' '}
                 <span className="inline-block text-red">product analytics,</span>{' '}
@@ -30,13 +31,14 @@ export default function CTA({ className = '' }) {
                 </span>
             </div>
 
-            <div className="space-y-4 md:space-y-0 md:space-x-4">
+            <div className="space-y-4 md:space-y-0 md:space-x-4 flex items-center">
                 <CallToAction type="primary" className="!w-full md:!w-auto" to="https://app.posthog.com/signup">
                     Try PostHog Cloud - free
                 </CallToAction>
-                <CallToAction type="secondary" width="56" className="!w-full md:!w-auto" to="/book-a-demo">
-                    Book a demo
-                </CallToAction>
+                <div className="inline-flex items-center space-x-4">
+                    <span>or</span>
+                    <DemoLink dark />
+                </div>
             </div>
         </div>
     )

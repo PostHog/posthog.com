@@ -18,7 +18,8 @@ Almost all PRs made to PostHog repositories will need a review from another engi
   - Is the solution secure?
     - Is there no leakage of data between projects/organizations?
   - Is the code properly instrumented for product analytics?
-  - Is there logging for changes changes potentially affecting infrastructure?
+  - Is there logging for changes potentially affecting infrastructure?
+  - Are analytics query changes covered by snapshot tests? Does the SQL generated make sense?
 
 #### What _not_ to look for:
   - Syntax formatting. If we're arguing about syntax, that means we should be using a formatter or linter rule.
