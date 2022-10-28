@@ -10,7 +10,7 @@ This guide should help you understand my brain and how it works.
 
 I am (painfully) English, to the point where I would love to have some culture and traditions other than crumpets, tea and my deep love of Marmite. I was born in London and grew up in Surrey (AKA the South East of the UK). At the end of 2020 I moved to Africa to live with my boyfriend George. We lived in Dakar, Senegal for a bit and now we are based in Kinshasa, the capital of the Democratic Republic of Congo - and who knows where we will end up next.
 
-I am apart of the Design team, specialising in visual flare, AKA branding and hedgehogs. Basically, I take all the character of our company and the team and push it into the visuals. PostHog is my first official 'job' job, but during my time at university I created my own bespoke t-shirt painting business and worked as a brand designer for three Oxford Balls. 
+I am a part of the Design team, specialising in visual flare, AKA branding and hedgehogs. Basically, I take all the character of our company and the team and push it into the visuals. PostHog is my first official 'job' job, but during my time at university I created my own bespoke t-shirt painting business and worked as a brand designer for three Oxford Balls. 
 
 I love good conversation, anything honey roasted and bright blue skies. My guilty pleasure is fashion but obviously I veto any fast fashion vendors - sustainable all the way, people! Oh, and I love to create things, and usually always have a small side project running at all times, such as making my own jewellery, painting flower pots or hand making thank you cards. I'm convinced I have no left brain, just one massive right one.  
 
@@ -43,7 +43,7 @@ I love good conversation, anything honey roasted and bright blue skies. My guilt
 
 - I have a tendency to be a bit of a pushover and a people pleaser - I am working on it, but please be considerate when asking me to do something for you as I will try to bend over backwards to help someone in need. But if it is a real design emergency know that I will always be there to help.
 
-- I am not a perfectionist, but if something doesnt feel right I won't drop it until I am happy with the outcome. Sometimes this is jarring for some as I won't stop stirring the pot, but I trust my gut instinct, and my gut has a good track record. 
+- I am not a perfectionist, but if something doesn't feel right I won't drop it until I am happy with the outcome. Sometimes this is jarring for some as I won't stop stirring the pot, but I trust my gut instinct, and my gut has a good track record. 
 
 - I love a good goofy joke so please indulge me with your good humour and charm - it really brightens my day. 
 

@@ -48,7 +48,7 @@ As well as your day job with specific teams, its important we have PMs having co
 ### Customer Research
 * You're always talking with our customers, and you intimately know how their frictions with our products
 * You're giving customer insights to every team (in and outside of product) to help them prioritize better
-* You're the first to hear about new opportunites and problems that our customers need solved and you capture this information
+* You're the first to hear about new opportunities and problems that our customers need solved and you capture this information
 
 ### Growth
 * You work closely with growth engineering and leadership to understand how we can accelerate activation and revenue growth

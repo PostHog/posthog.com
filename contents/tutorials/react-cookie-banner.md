@@ -295,4 +295,4 @@ If you’re interested in going further into tracking, data management, and cook
 
 1. A tutorial on [setting up cookieless tracking](/tutorials/cookieless-tracking).
 2. A guide to [setting up a reverse proxy](/docs/integrate/proxy) to help your data stay first-party.
-3. Sign up for our [EU Cloud waitlist](/signup/eu-cloud).
+3. Sign up for our [EU Cloud](https://eu.posthog.com/signup).
