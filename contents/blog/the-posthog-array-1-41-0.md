@@ -28,7 +28,7 @@ Want to know more about what we're up to? [Subscribe to HogMail, our newsletter]
 - New: Persons on events on by default
 - New: Alias changes
 - New: Ingestion warnings
-- New: Groups caching chagnes
+- New: Groups caching changes
 - Finally: Change your email yourself
 - New: Hedgehog mode
 - One more thing: Site apps 
@@ -88,7 +88,7 @@ PICTURE GOES HERE
 
 In case you still try to, there's a new Ingestion Warnings page to 
 
-### New: Groups caching chagnes
+### New: Groups caching changes
 
 PICTURE GOES HERE
 
