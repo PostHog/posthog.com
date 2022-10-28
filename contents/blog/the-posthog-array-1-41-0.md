@@ -18,16 +18,13 @@ Want to know more about what we're up to? [Subscribe to HogMail, our newsletter]
 
 **Release highlights:**
 
+- New: Persons on events on by default
 - New: Count of events per user
 - New: Text cards on dashboards
 - New: App metrics
-- New: Persons on events on by default
-- New: Alias changes
 - New: Ingestion warnings
-- New: Groups caching changes
 - New: Change your email yourself
 - New: Hedgehog mode
-- New: GitHub subdirectories in apps
 - Improved: Recordings interface
 - One more thing: Site apps 
 
@@ -55,14 +52,6 @@ Questions like these used to be hard to answer with PostHog, but no more! We've 
 
 Previously there was no easy way to add context or links to a dashboard, meaning you may have to send long explanations when sharing a dashboard with teammates. That's why we've added the option for users on paid plans to add text cards where they can add any information they want, including metadata, images or gifs!
 
-### Improved: Recordings interface
-
-![recordings interface](../images/blog/array/1-41-0-recordings-interface.png)
-
-We've heard feedback recently that session recording was incredibly useful, but didn't spark much joy for those who used it. So, we've overhauled the entire interface for session recordings to make it easier to use and to help you find relevant recordings faster. 
-
-We think session recording feels like an entirely new experience now, so check it out. Now's the perfect time to explore [the console log beta too](/manual/recordings#console-logs-recording-beta)!
-
 ### New: App metrics
 
 ![app metrics](../images/blog/array/1-41-0-app-metrics-insight.png)
@@ -77,10 +66,6 @@ Want to take a look? Head to the apps page in your instance and click the chart 
 
 We've added a new page to the Data Management section which lists warnings related to data ingestion from the past 30 days. If you still try to alias identified events, the Ingestion Warning page is where we'll remind you that it's a bad idea. 
 
-### New: Groups caching changes
-
-PICTURE GOES HERE
-
 ### New: Change your email yourself
 
 ![change your password](../images/blog/array/1-41-0-password.png)
@@ -92,6 +77,14 @@ Finally, we can release one of our most requested features: the ability to chang
 ![hedgehog mode](../images/blog/array/1-41-0-hedgehog-mode.png)
 
 For a while now, we've been having a hard time explaining to our families what we do for a living. This makes it even harder.
+
+### Improved: Recordings interface
+
+![recordings interface](../images/blog/array/1-41-0-recordings-interface.png)
+
+We've heard feedback recently that session recording was incredibly useful, but didn't spark much joy for those who used it. So, we've overhauled the entire interface for session recordings to make it easier to use and to help you find relevant recordings faster. 
+
+We think session recording feels like an entirely new experience now, so check it out. Now's the perfect time to explore [the console log beta too](/manual/recordings#console-logs-recording-beta)!
 
 ### One more thing: Site apps 
 
