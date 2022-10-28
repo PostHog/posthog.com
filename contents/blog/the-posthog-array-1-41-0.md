@@ -60,7 +60,7 @@ PICTURE GOES HERE
 We've been listening and implementing the most requested features, with a special focus on sparking joy. 
 It's like a completely new app now, so check it out! 
 
-### New: Plugin metrics
+### New: App metrics
 
 PICTURE GOES HERE
 
