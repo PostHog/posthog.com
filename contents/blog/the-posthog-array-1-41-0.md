@@ -16,30 +16,29 @@ Want to know more about what we're up to? [Subscribe to HogMail, our newsletter]
 
 ## PostHog 1.41.0 release notes
 
-
-
 **Release highlights:**
 
 - New: Count of events per user
-- Improved: Math selector
 - New: Text cards on dashboards
-- Improved: Recordings interface
 - New: App metrics
 - New: Persons on events on by default
 - New: Alias changes
 - New: Ingestion warnings
 - New: Groups caching changes
-- Finally: Change your email yourself
+- New: Change your email yourself
 - New: Hedgehog mode
-- New: github subdirectories in apps
+- New: GitHub subdirectories in apps
+- Improved: Math selector
+- Improved: Recordings interface
 - One more thing: Site apps 
 
 ### New: Count of events per user
 
-PICTURE GOES HERE
+![count events per user](../images/blog/array/1-41-0-count-events-per-user.png)
 
-*Average number of purchases per user? Maximum number of forms submitted per user?* 
-Questions like these used to be hard to answer, but no more! Introducing "count of events per user".
+Have you ever asked yourself '*What's the average average number of purchases per user?*' or '*What's the maximum number of forms submitted per user?'* 
+
+Questions like these used to be hard to answer with PostHog, but no more! We've added a new series option for insights, enabling you to see the count of events per user - including sub-options for seeing the averages, minimum and maximum count of events per user. We think this is going to be especially useful for teams working on transactional products. 
 
 ### Improved: Math selector
 
@@ -49,9 +48,9 @@ Work on the previous task had us redo the math selector.
 
 ### New: Text cards on dashboards
 
-PICTURE GOES HERE
+![text cards on dashboards](../images/blog/array/1-41-0-text-card-on-dashboard.png)
 
-Would you like to add some metadata or clarifications on your dashboards? Now you can! Hint: gifs are metadata too! 
+Previously there was no easy way to add context or links to a dashboard, meaning you may have to send long explanations when sharing a dashboard with teammates. That's why we've added the option for users on paid plans to add text cards where they can add any information they want, including metadata, images or gifs!
 
 ### Improved: Recordings interface
 
