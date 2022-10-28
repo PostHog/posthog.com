@@ -50,7 +50,7 @@ In `plugin.json`, add details about the app and that message variable.
 }
 ```
 
-Once done that, in the same folder, run this command to start the app locally:
+Once you've done that, in the same folder, run this command to start the app locally:
 
 ```bash
 npx @posthog/app-dev-server
@@ -155,7 +155,7 @@ export function inject({ config, posthog }) {
 }
 ```
 
-Once added, we can test if it working by clicking the button on our `localhost` page. We’ll see the event show up under “Captured Events” on.
+Once added, we can test if it's working by clicking the button on our `localhost` page. We’ll see the event show up under “Captured Events” on.
 
 ![Captured event](../images/tutorials/build-site-app/captured-event.png)
 
@@ -185,6 +185,7 @@ If you have a cloud instance, you can search for available apps in “Browse App
 ## Further reading
 
 - [All the cool things we built at our Rome hackathon](/blog/rome-hackathon): Site apps, pineapple mode, and the feedback app were only some of the cool things we built at our Rome Hackathon. Discover this rest.
+
 - [How to build your own app in PostHog](/tutorials/build-your-own-posthog-app): More interested in modifying, exporting, or adding events on the backend. This tutorial teaches you how to build a backend app that does just that.
 
 <NewsletterTutorial compact/>
