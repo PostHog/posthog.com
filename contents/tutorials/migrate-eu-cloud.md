@@ -20,7 +20,7 @@ For many companies, teams, and products, keeping customer data within the EU is 
 
 Why this matters is that the EU has stricter data privacy laws than other areas. In the EU, there are often stricter requirements for what companies can and can’t do with customer data. For example, there is less regulation in the US on data privacy. To understand how this applies to your company and data, you should check with a legal professional.
 
-For this tutorial, we will go over how to move data you currently have in either US Cloud or self-hosting to EU Cloud. This process might take a while.
+For this tutorial, we will go over how to migrate from US Cloud or self-hosting to EU Cloud. This process might take a while.
 
 ## Signing up for EU Cloud
 
@@ -32,24 +32,26 @@ To start with EU Cloud, you can go to the [cloud signup page](https://app.postho
 
 ![EU Cloud signup](../images/tutorials/migrate-eu-cloud/signup.png)
 
-## Using Migrator 3000
+## Using the Replicator Plugin
 
-Once you’ve created your EU Cloud account, you can immediately start migrating data there. To do this, in your original PostHog instance (either Cloud or self-hosted), go to Apps and search for the [Migrator 3000 app](/docs/apps/migrator-3000). This app moves data from one PostHog instance to another. Once you've found and added it, click the blue “Configure” button to start.
+Once you’ve created your EU Cloud account, you can immediately start migrating data there. To do this, in your original PostHog instance (either Cloud or self-hosted), go to Apps and search for the [Replicator app](/apps/replicator). Install it and then configure it to point to your EU Cloud instance.
 
-![Migrator 3000 app](../images/tutorials/migrate-eu-cloud/migrator-app.png)
+![Replicator app](../images/tutorials/migrate-eu-cloud/replicator.png)
 
-In the configuration menu, enter the project key and host (`eu.posthog.com`) from your EU Cloud instance settings. If you don’t want to import all the events, you can also set a date limit.
+In the configuration menu (blue gear), enter the host (`eu.posthog.com`) and project key from your EU Cloud instance settings.
 
-![Migrator 3000 config](../images/tutorials/migrate-eu-cloud/migrator-config.png)
+![Replicator config](../images/tutorials/migrate-eu-cloud/replicator-config.png)
 
-After clicking save, the Migrator 3000 app will start running. You can view its progress in Logs (three points icon). This will take a while, so be prepared to wait.
+After clicking save and activating it (toggle on the left side), the Replicator will start to run. Any events added to your old instance will be replicated in your EU Cloud instance. It can take a little while (15-20 minutes) for the first events to show up.
+
+Once the Replicator is activated, go back to the configuration menu and click the gear next to "Export historical events" under "Jobs." On the calendar, select a start and end date, then click "Run job now." This will begin the process of historical events being import (and might take a while). You can see the progress in logs or by clicking the "App metrics" button (graph) and going to the "Historical exports" tab.
 
 ## Finished complete migration
 
-Once the Migrator 3000 is finished, you’ll have your data and events in your new EU Cloud instance. To complete your migration, follow the steps below. 
+Once the Replicator is set up, you’ll have your data and events in your new EU Cloud instance. To complete your migration, follow the steps below. 
 
 1. Ensure the events you want are there. Check that EU Cloud data (events, persons, and other data derived from events) matches your self-hosting or US Cloud instance.
-2. Switch your project key and host to your EU Cloud information. The migrator app will continue to run, and bring events over with a delay, but changing your project key and host is better and faster.
+2. Switch your project key and host to your EU Cloud information. The Replicator app will continue to run, and replicating events over with a delay, but changing your project key and host is better and faster.
 3. Recreate your insights, dashboards, feature flags, and other non-events data in EU Cloud. These won’t be migrated over from your US Cloud or self-hosted instance.
 4. If necessary for compliance, delete data from your US Cloud or self-hosted PostHog instance.
 

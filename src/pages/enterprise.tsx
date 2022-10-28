@@ -70,7 +70,7 @@ const EnterpriseLandingPage = (): JSX.Element => {
                         <CallToAction type="primary" width="56" to="/book-a-demo">
                             Schedule a demo
                         </CallToAction>
-                        <CallToAction type="outline" width="56" to="/signup/self-host/get-in-touch#contact">
+                        <CallToAction type="outline" width="56" to="/get-in-touch#contact">
                             Contact sales
                         </CallToAction>
                     </div>
@@ -204,7 +204,7 @@ const EnterpriseLandingPage = (): JSX.Element => {
                     <CallToAction type="primary" width="56" to="/book-a-demo">
                         Schedule a demo
                     </CallToAction>
-                    <CallToAction type="outline" width="56" to="/signup/self-host/get-in-touch#contact">
+                    <CallToAction type="outline" width="56" to="/get-in-touch#contact">
                         Contact sales
                     </CallToAction>
                 </div>

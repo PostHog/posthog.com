@@ -89,7 +89,7 @@ Here are is an example [dashboard](/docs/user-guides/dashboards) combining chart
 
 ### Total revenue in the last month
 
-If you want to see agreggate values for periods, you can change the time frame on line charts, or you can also display data as a table or pie chart, which combines the aggregate values of the periods and displays it as one value. 
+If you want to see aggregate values for periods, you can change the time frame on line charts, or you can also display data as a table or pie chart, which combines the aggregate values of the periods and displays it as one value. 
 
 To see the total revenue of the previous month, for instance, you can set your time frame to 'Previous Month' and your chart type to 'Pie'. You can pair this with a view of this month's total month-to-date revenue, as well as compare performance on a week-by-week basis. 
 

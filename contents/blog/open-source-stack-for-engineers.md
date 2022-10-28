@@ -1,6 +1,6 @@
 ---
 date: 2022-10-19
-title: "Modern Data Stack 101: The open source alternatives"
+title: "Building an open source data stack"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -138,7 +138,7 @@ Going beyond this, Netdata also offers more advanced anomaly detection issues fo
 - Single-line auto-deployment
 - Anomaly detection powered by machine learning
 
-## 7. ClickHouse
+## ClickHouse
 
 ![ClickHouse - open source database for engineers](../images/blog/open-source-engineers/clickhouse-open-source.png)
 

@@ -8,7 +8,7 @@ Welcome to the PostHog Handbook! If you are a new starter, this page will help y
 
 ## Big picture
 
-We encourage everyone to start at the beginning first before diving in. We have a strong bias for action, but it is still worth taking a step back and looking at the 'why' first. This helps ensure sure you have the right context and are working on the right things. 
+We encourage everyone to start at the beginning first before diving in. We have a strong bias for action, but it is still worth taking a step back and looking at the 'why' first. This helps ensure you have the right context and are working on the right things. 
 
 You should start with the '[Company](/handbook/company/story)' section and work your way through everything there. It is not a lot to read. In particular, the sections on our [Strategy](/handbook/strategy/overview) and [Roadmap](/handbook/strategy/roadmap) are a must-read for everyone. 
 

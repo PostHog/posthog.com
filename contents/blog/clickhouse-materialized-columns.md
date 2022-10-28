@@ -105,7 +105,7 @@ WHERE event = '$pageview'
 Looking at `system.query_log`, the new query:
 
 - Took 980ms (**71%/3.4x improvement**)
-- Read 14.36 GiB from disk (**81%/5x improvement improvement**)
+- Read 14.36 GiB from disk (**81%/5x improvement**)
 
 The wins are even more magnified if more than one property filter is used at a time.
 
