@@ -8,13 +8,13 @@ featuredImage: ../images/tutorials/banners/build-site-app.png
 topics: ["apps"]
 ---
 
-Site apps make it quick and easy to add features like forms and banners to your site through our JavaScript library. This enables you to do things like capture feedback, add notifications, provide support, and more. These apps can then capture data for analysis in PostHog.
+Site apps make it quick and easy to add features such as forms and banners to your site through our JavaScript library. This enables you to do things like capture feedback, add notifications, provide support, and more. These apps can then capture data for analysis in PostHog.
 
 In this tutorial, we’ll teach you how to build a site app. To complete this tutorial, you only need [Node installed](https://nodejs.org/en/download/) to build and run the app.
 
 ## Basic setup
 
-First, create a folder and add two files that make up our app `site.ts` and `plugin.json`.
+First, create a folder and add two files that make up our app: `site.ts` and `plugin.json`.
 
 ```bash
 mkdir cool_app
@@ -163,7 +163,7 @@ You now have a basic app to get feedback from users. From here, you can take the
 
 - [Feedback app](https://github.com/PostHog/feedback-app), a form for gathering feedback from your users
 - [Notification bar](https://github.com/PostHog/notification-bar-app), a customizable notification bar for your site
-- [Pineapple mode](https://github.com/PostHog/pineapple-mode-app), a button that makes your page fill with pineapples when clicked
+- [Pineapple mode](https://github.com/PostHog/pineapple-mode-app), a button that fills your page with pineapples when clicked
 
 ## Adding site apps to your site
 
