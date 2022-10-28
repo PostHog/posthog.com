@@ -142,7 +142,7 @@ Another thing we fixed in `posthog-js` this week! It was actually fixed a fortni
 
 ## Weekly round up
 
-* [Traffic simular](https://github.com/dabreegster/abstreet)
+* [Traffic simulator](https://github.com/dabreegster/abstreet)
 * [Cyclops lamb born](https://www.mirror.co.uk/news/weird-news/farmer-baffled-after-sheep-gave-22251344)
 
 ## PostHog news

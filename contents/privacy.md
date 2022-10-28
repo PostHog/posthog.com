@@ -151,7 +151,7 @@ Additional rights that may apply to you in certain instances:
 
 These rights may be limited, for example if fulfilling your request would reveal personal information about another person, or if you ask us to delete information which we are required by law or have compelling legitimate interests to keep.
 
-Where we collect personal information to administer your accounts or your contract with us or to comply with our legal obligations, this is mandatory and we will not be able to manage our relationship with you without this. In all other cases, the provision of requested personal information is optional, but this may affect your ability to participate in certain certain Website-related activities or being able to access and use certain features and services, where the information is needed for those purposes.
+Where we collect personal information to administer your accounts or your contract with us or to comply with our legal obligations, this is mandatory and we will not be able to manage our relationship with you without this. In all other cases, the provision of requested personal information is optional, but this may affect your ability to participate in certain Website-related activities or being able to access and use certain features and services, where the information is needed for those purposes.
 
 To exercise your privacy rights, you can email us at the address given below in the ‘Contacting PostHog About Your Privacy’ section of this Privacy Policy.
 
@@ -186,7 +186,7 @@ We collect and process some or all of the following types of information from yo
 #### Information we collect from other sources
 
 * Ashby provides PostHog with the ability to link the data you provide to us, with other publicly available information about you that you have published online, such as on LinkedIn, GitHub or other public social media profiles.
-* Ashby allows PostHog to search various databases which may include your personal data (include your CV or Resumé), to find possible candidates to fill our job openings. Where we find you in this way, we will obtain your personal data from these sources.
+* Ashby allows PostHog to search various databases which may include your personal data (including your CV or Résumé), to find possible candidates to fill our job openings. Where we find you in this way, we will obtain your personal data from these sources.
 * We may receive your personal data from a third party who recommends you as a candidate for a specific job opening or for our business more generally.
 
 ### How we use applicant information
