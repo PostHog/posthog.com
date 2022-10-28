@@ -24,7 +24,7 @@ Want to know more about what we're up to? [Subscribe to HogMail, our newsletter]
 - Improved: Math selector
 - New: Text cards on dashboards
 - Improved: Recordings interface
-- New: Plugin metrics
+- New: App metrics
 - New: Persons on events on by default
 - New: Alias changes
 - New: Ingestion warnings
