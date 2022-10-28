@@ -93,7 +93,7 @@ exports.onCreateNode = async function ({ node, actions, getNode, store, cache, c
                         store,
                     }))
                 return {
-                    avatar___NODE: fileNode && fileNode.id,
+                    ...(fileNode ? { avatar___NODE: fileNode.id } : {}),
                     url: null,
                     username: authorName,
                 }
