@@ -43,7 +43,7 @@ We used to store events in one table and persons in another table. That meant th
 
 You won’t see any UI changes as a result of this change — persons will still have their own Persons & Groups section on the sidebar, for example — but you will notice results are a lot (up to 400%!) faster for any queries involving persons, groups or events. This is a massive change, so be sure to [read the full announcement for more info](/blog/persons-on-events).
 
-> **Note:** As a result of putting persons on events we now have to be strict about identified and unidentified users. Now, only anonymous users can be aliased into other users - meaning that once you call `identify` on a user, you can no longer alias the user into another identified user. Because of that, we recommend double checking your `identify` and `alias` calls and following advice above [how to upgrade a self-hosted instance to 1.41.0](/blog/the-posthog-array-1-41-0). 
+> **Note:** As a result of putting persons on events we now have to be strict about identified and unidentified users. Now, only anonymous users can be aliased into other users - meaning that once you call `identify` on a user, you can no longer alias the user into another identified user. Because of that, we recommend double checking your `identify` and `alias` calls, and following advice above [how to upgrade a self-hosted instance to 1.41.0](/blog/the-posthog-array-1-41-0). 
 
 ### New: Count of events per user
 
