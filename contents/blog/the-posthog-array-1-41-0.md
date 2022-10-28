@@ -31,6 +31,7 @@ Want to know more about what we're up to? [Subscribe to HogMail, our newsletter]
 - New: Groups caching chagnes
 - Finally: Change your email yourself
 - New: Hedgehog mode
+- New: github subdirectories in apps
 - One more thing: Site apps 
 
 ### New: Count of events per user
@@ -86,7 +87,7 @@ user.
 
 PICTURE GOES HERE
 
-In case you still try to, there's a new Ingestion Warnings page to 
+In case you still try to alias identified events, there's a new Ingestion Warnings page to remind you that it's a bad idea. 
 
 ### New: Groups caching chagnes
 
@@ -96,13 +97,22 @@ PICTURE GOES HERE
 
 PICTURE GOES HERE
 
+One of our most requested features: you can now change your own email address without contacting support 🤩🤩🤩
+
 ### New: Hedgehog mode
 
 PICTURE GOES HERE
 
+For a while now, we've been having a hard trouble explaining to our spouses what we do for work. This makes it even harder.
+
 ### One more thing: Site apps 
 
 PICTURE GOES HERE
+
+We're testing a new big (beta) thing: site apps. You need to **manually opt in** to enable this feature. Once you do, 
+PostHog apps will be able to inject code onto your website through posthog-js. For example to display a feedback form,
+add a quick "THE APP IS DOWN, NO NEED TO PANIC" banner, or even make it rain pineapples. Again, we're having a really
+hard time explaining to people this is what we do for work! 😍
 
 
 ### Other improvements & fixes
