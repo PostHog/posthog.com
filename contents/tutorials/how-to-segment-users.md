@@ -57,7 +57,7 @@ What if we want to see if there are countries around the world where users look 
 
 ### Step 1: Enable the GeoIP Enricher
 
-If you haven’t done so already, click 'Apps' and enable [the GeoIP Enricher app](/plugins/geoip) within your PostHog instance. This will automatically enrich events and persons with geographic data.
+If you haven’t done so already, click 'Apps' and enable [the GeoIP Enricher app](/apps/geoip-enrichment) within your PostHog instance. This will automatically enrich events and persons with geographic data.
 
 ![segmentation](../images/tutorials/segmentation/segment-posthog-3.png)
 
@@ -67,11 +67,11 @@ Click 'New Insight' and select 'Trends'. We want to know the conversion rate bet
 
 ![segmentation](../images/tutorials/segmentation/segment-posthog-4.png)
 
-Next, we calculate the conversion rate. We can use the 'Formula' tool to do this by simplying dividing purchases (B) by views (A). 
+Next, we calculate the conversion rate. We can use the 'Formula' tool to do this by simply dividing purchases (B) by views (A). 
 
 ### Step 3: Breakdown by user countries
 
-Using 'Breakdown by', select 'Country Name' from the user propertie list. Now we can see the average conversion rate per country.
+Using 'Breakdown by', select 'Country Name' from the user property list. Now we can see the average conversion rate per country.
 
 ![segmentation](../images/tutorials/segmentation/segment-posthog-5.png)
 

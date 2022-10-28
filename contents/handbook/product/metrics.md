@@ -6,7 +6,7 @@ showTitle: true
 
 # Discoveries
 
-As we improve our Product, it's key to have a guiding metric that we can all at Product & Engineering rally behind and measure our progress against. For the Product, this metric is **Discoveries**. The metric can be tracked in the [product dasboard][dashboard] and is reported weekly at PostHog News.
+As we improve our Product, it's key to have a guiding metric that we can all at Product & Engineering rally behind and measure our progress against. For the Product, this metric is **Discoveries**. The metric can be tracked in the [product dashboard][dashboard] and is reported weekly at PostHog News.
 
 > 💡 Discoveries is different from Discovered Learnings. Discovered Learnings is used as a metric for activation and growth.
 

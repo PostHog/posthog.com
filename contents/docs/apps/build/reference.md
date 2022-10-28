@@ -432,6 +432,8 @@ Equivalent to [node-fetch](https://www.npmjs.com/package/node-fetch).
 | `snowflake-sdk`    | [`npm` package `snowflake-sdk`](https://www.npmjs.com/package/snowflake-sdk) |
 | `aws-sdk`    | [`npm` package `aws-sdk`](https://www.npmjs.com/package/aws-sdk) |
 | `@google-cloud/bigquery`    | [`npm` package `@google-cloud/bigquery`](https://www.npmjs.com/package/@google-cloud/bigquery) |
+| `@google-cloud/storage`    | [`npm` package `@google-cloud/storage`](https://www.npmjs.com/package/@google-cloud/storage) |
+| `@google-cloud/pubsub`    | [`npm` package `@google-cloud/pubsub`](https://www.npmjs.com/package/@google-cloud/pubsub) |
 | `node-fetch`    | [`npm` package `node-fetch`](https://www.npmjs.com/package/node-fetch) |
 | `@posthog/plugin-scaffold`    | Types for PostHog plugins. [`npm` package `@posthog/plugin-scaffold`](https://www.npmjs.com/package/@posthog/plugin-scaffold) |
 | `@posthog/plugin-contrib`    | Helpers for plugin devs maintained by PostHog. [`npm` package `@posthog/plugin-contrib`](https://www.npmjs.com/package/@posthog/plugin-contrib) |
@@ -480,7 +482,7 @@ Create your test files e.g. `index.test.js` or `index.test.ts` for testing your 
 
 Write tests in jest, you can learn more about the syntax and best practices in the [jest documentation](https://jestjs.io/docs/getting-started). We recommend writing tests to cover the primary functions of your app (e.g. does it create events in the expected format) and also for edge cases (e.g. does it crash if no data is sent).
 
-For more information on how to setup testing, take a look at [this guide](/docs/app/build/testing).
+For more information on how to setup testing, take a look at [this guide](/docs/apps/build/testing).
 
 ## Logs
 

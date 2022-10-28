@@ -159,15 +159,15 @@ If you're using PostHog in the front-end and back-end, doing the identify call i
 
 An alias call requires
 
--   `distinct id` the current unique id
--   `alias` the unique ID of the user before
+-   `DistinctId` – the current unique id (logged in user id)
+-   `Alias` – the _other_ distinct ID of the user, which will be aliased to the current one
 
 For example:
 
 ```go
 client.Enqueue(posthog.Alias{
   DistinctId: "user:123",
-  Alias: "user:12345",
+  Alias: "session:12345",
 })
 ```
 

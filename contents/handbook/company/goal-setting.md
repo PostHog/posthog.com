@@ -8,7 +8,7 @@ showTitle: true
 
 1. Grace runs this process every three months.
 2. A couple of weeks before the end of the period, there is a meeting with all execs to come up with the objectives for each small team.
-3. They will then propose draft key results for every [small team](../people/team-structure/why-small-teams) by creating PRs against the small team pages, and there will be 1/1s with every small team leader to discuss context and to make edits as needed.
+3. They will then propose draft key results for every [small team](../company/small-teams) by creating PRs against the small team pages, and there will be 1/1s with every small team leader to discuss context and to make edits as needed.
 4. Each small team can change or propose alternate key results.
 5. After the end of the period, each team should run a retrospective on their goals that includes a numerical score for each Key Result and a short reflection on both the Key Results and the overall Objective. This should be made public and shared with the whole company by creating PRs against the small team pages.
 
@@ -41,7 +41,7 @@ Key results
 - Hitting an Objective is more important than hitting any Key Results
 - Key Results show we're on track to hitting the Objectives - it should be simple to know if we hit them
 - Key Results are leading indicators and can be achieved quickly
-- Key Results should be specific and measureable whenever possible
+- Key Results should be specific and measurable whenever possible
 
 Bear the following in mind:
 

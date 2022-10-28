@@ -43,6 +43,7 @@ import { ContributorsChart } from './components/ContributorsChart'
 import { CookieBanner } from './components/CookieBanner'
 import { Customers } from './components/Customers'
 import { DarkModeToggle } from './components/DarkModeToggle'
+import { DemoLink } from './components/DemoLink'
 import { DemoScheduler } from './components/DemoScheduler'
 import { DeployOption } from './components/DeployOption'
 import { DocsPageSurvey } from './components/DocsPageSurvey'
@@ -102,6 +103,7 @@ import { ProductPage } from './components/ProductPage'
 import { ProductSectionHeader } from './components/ProductSectionHeader'
 import { Question } from './components/Question'
 import { Quote2 } from './components/Quote2'
+import { Roadmap } from './components/Roadmap'
 import { RocketHorizontalRule } from './components/RocketHorizontalRule'
 import { SearchBox } from './components/SearchBox'
 import { SectionLinks } from './components/SectionLinks'
@@ -171,6 +173,7 @@ export const shortcodes = {
     CookieBanner,
     Customers,
     DarkModeToggle,
+    DemoLink,
     DemoScheduler,
     DeployOption,
     DocsPageSurvey,
@@ -230,6 +233,7 @@ export const shortcodes = {
     ProductSectionHeader,
     Question,
     Quote2,
+    Roadmap,
     RocketHorizontalRule,
     SearchBox,
     SectionLinks,

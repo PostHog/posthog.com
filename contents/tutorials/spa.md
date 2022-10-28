@@ -1,283 +1,305 @@
 ---
-title: Tracking single page apps
+title: Tracking pageviews in single page apps (SPA)
 sidebar: Docs
 showTitle: true
-author: ['yakko-majuri']
-date: 2020-11-03
+author: ['ian-vanagas', 'yakko-majuri']
+date: 2022-10-17
 featuredImage: ../images/tutorials/banners/spa.png
-topics: ['configuration']
+topics: ['configuration', 'events']
 ---
 
-_Estimated reading time: 8 minutes_ ☕☕
+_Estimated reading time: 12 minutes_ ☕☕
 
-If you have a Single Page Application (SPA), and have been thinking about how to track it using PostHog - look no further. 
+A single page application (or SPA) is an app that lives on a single page. Users can navigate around the app and change the content without having to load new pages. Single page apps rely heavily on caching and components like loading screens compared to other types of apps like progressive web apps.
 
-This tutorial will guide you through multiple methods you can use to ensure you capture navigation in your SPA website. 
+Single page apps come with some unique challenges. A big one is that since pages don’t need to be reloaded to change, pageviews are often not captured properly. Developers of single page apps need to set up custom events to trigger pageviews at the right time.
 
-### Is this tutorial for me?
+In this tutorial, we’ll be creating a single page app, setting up PostHog, then providing multiple ways to capture pageviews. This includes triggering events on page renders, using the router, and watching for component visibility on scroll.
 
-This tutorial is aimed at SPAs, which are websites that only load one time, with all content either being loaded at once or dynamically as the user browses (without a page refresh). However, it may also provide relevant insights for:
+> **Note:** although we’ll be using React for this tutorial, it is relevant to other web SPA frameworks (like Vue, Svelte, or Meteor), mobile apps (Android, iOS), and apps with non-standard navigation. You can find our full list of [client libraries here](/docs/integrate#client-libraries).
+> 
 
-- Tracking mobile apps
-- Tracking apps/Websites with non-standard navigation
-- Those looking to capture additional `$pageview` events
+## Setting up a single page app in React
 
-### Prerequisites
+We’ll start by setting up a basic React app with a router and a couple of pages. To start, go to the command line (or terminal), create a folder for our project, then create the react app (named `spa_client`), and start the app. 
 
-To follow this tutorial along, you need to:
-
-1. Have [deployed PostHog](/docs/deployment) or [signed up for PostHog cloud](https://app.posthog.com/signup).
-1. Be using our [JavaScript Library](/docs/integrate/client/js) to track your SPA
-
-### Tracking navigation changes in SPAs
-
-If you use PostHog to track a traditional website, our [autocapture](/docs/integrate/client/js#autocapture) feature is great at providing insight into how users navigate your page, since `$pageview` events are captured automatically on page loads. However, if you have an SPA, PostHog will only capture a `$pageview` once, since the page only loads one time. 
-
-As such, in order to accurately capture navigation in SPAs, we need to manually send events, since autocapture is not enough. 
-
-This tutorial will now take you through various methods that use events to track navigation, which can be used by themselves or in combination with the others.
-
-### Navigation via clicks
-
-The most straightforward way to track navigation in SPAs is to set triggers for clicks that coordinate the navigation and use them to determine what "page" the user is now on.
-
-Consider a webpage where clicking on the navigation takes the user to another location on the same page, for example. This can easily be done by adding element IDs as values for the `href` property on links, like so:
-
-```html
-<a id='nav-about-us' href='#about-us'>About Us</a>
+```bash
+mkdir spa_pageview_app
+cd spa_pageview_app
+npx create-react-app spa_client
+cd spa_client
+npm start
 ```
 
-Clicking the link above will take the user to the element with ID `about-us`, working as navigation. 
+If successful, going to `localhost:3000` should show you the React logo.
 
-Thus, we can track that by listening for the click event on that element, and subsequently capturing a PostHog `$pageview` when the event is triggered. In Vanilla JS, this would look something like this:
+Next, we’ll install the packages we need for the router and PostHog. Back in your terminal install `posthog-js` and `react-router-dom`
 
-```js
-document.getElementById('nav-about-us').addEventListener('click', () => {
-    posthog.capture('$pageview')
-})
+```bash
+npm install --save posthog-js
+npm install --save react-router-dom
 ```
 
-Since PostHog captures the 'Current URL' property from `window.location.href` and `a` tags pointing to the same page update that value, the event `$pageview` will be automatically populated with the correct URL, such as `mywebsite.com/#about-us`.
+Once we’ve done this, we can start to work on the content of the application, and routing between each of the pages.
 
-As such, to track navigation via clicks, one simply needs to set event listeners for the all the relevant clicks and capture a `$pageview` on those events. Provided that the clicks change the URL (`window.location.href`), this method will work with no additional tweaks needed. However, we will still go through how you can update the URL yourself.
+### Setting up the router and pages
 
-### Tracking visible elements on the page
-
-While tracking pageviews from clicks is a good first step, the approach is not ideal for a lot of SPAs. 
-
-Tracking navigation via clicks only works perfectly if the _only way_ users can navigate through your application is via clicking. However, for many SPAs, scrolling is another way to navigate via sections, so that the user can either click on the navbar items or scroll through the page in order to access other sections.
-
-In this case, clicks are not enough: we need to track what elements are visible on the page every time the viewport changes, and capture page views when new sections become visible (i.e. were navigated to). 
-
-To do so, we need a few things.
-
-#### Checking if an element is visible to the user
-
-To check if an element is visible to the user, we can use the following helper function:
+First, in `src/index.js` we’ll import `BrowerRouter` and then wrap our app in it. The `BrowserRouter` will turn our component into a single page app so we can add multiple pages. Your `index.js` file should look like this (we’ve removed some unnecessary code like `css` and `webVitals` for now):
 
 ```js
-const isElementInViewport = (el) => {
-    const rect = el.getBoundingClientRect()
-    
-    return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        (   
-            window.innerHeight || 
-            document.documentElement.clientHeight
-        ) >= rect.bottom &&
-        (
-            window.innerWidth || 
-            document.documentElement.clientWidth
-        ) >= rect.right
-    )
+// src/index.js
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import { BrowserRouter } from 'react-router-dom'; // new
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <BrowserRouter> {/* new */}
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>
+);
+```
+
+Next, we’ll create a couple of basic pages as functions. Create `Home.js`, `About.js`, and `Benefits.js` all with a basic format like this (replace Home with the other names):
+
+```js
+// src/Home.js
+export function Home() {
+  return (
+    <>
+      <h1>Home</h1>
+      <p>Welcome to the Home page</p>
+    </>
+  );
 }
 ```
 
-The function above takes a reference to a DOM element as a parameter and returns `true` if the element is visible (and `false` otherwise). It does so by checking the coordinates of the rectangle that bounds the element against the user viewport to determine if the element is visible in the user's screen ([more info](https://stackoverflow.com/questions/123999/how-can-i-tell-if-a-dom-element-is-visible-in-the-current-viewport)).
-
-We will be using this function to periodically check if certain elements are visible as the user goes through the page.
-
-#### Determining elements that represent new sections
-
-The next step is to decide what elements in our SPA constitute a new section/screen. We will use these to trigger pageviews when they are visible for the user.
-
-For example, these could be section heders, as well as wrapping `div` tags. This will vary from website to website, and you need to decide for yourself when _exactly_ the page view should be triggered. For example, do you want to trigger a `$pageview` when the section is partly visible or entirely covering the screen? 
-
-Once you have determined the elements to use, you can specify them in a structure like this:
+Once you’ve done this, go to `App.js` and get rid of the boilerplate. We are going to add our routes and navigation to each of the routes here. You’ll need to import each of the pages we’ve created as well as `Routes`, `Route`, and `Link` from `react-router-dom`. We’ll add each of the pages as a route and a link in our nav. Once you’ve done all of this, your `App.js` file should look like this:
 
 ```js
-let elementsToTrack = [
-    {
-        name: "section1",
-        ref: document.getElementById('section1'),
-        visible: true
-    },
-    {
-        name: "section2",
-        ref: document.getElementById('section2'),
-        visible: false
-    },
-]
+// src/App.js
+import { Route, Routes, Link } from 'react-router-dom';
+import { Home } from './Home';
+import { About } from './About';
+import { Benefits } from './Benefits'
+
+function App() {
+  return (
+    <>
+      <nav>
+        <ul>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/about">About</Link></li>
+          <li><Link to="/benefits">Benefits</Link></li>
+        </ul>
+      </nav>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/benefits" element={<Benefits />} />
+      </Routes>
+    </>
+  );
+}
+
+export default App;
 ```
 
-This structure will be useful for the next step, but you can of course customize this entire solution as you wish.
+Once done, checking our local site again should give us a single page app with a few pages. Although basic, it’ll help us illustrate what you need to do to set up tracking and pageview events correctly.
 
-#### Listening for changes to the window to trigger page views
+### Setting up PostHog
 
-With the structure in place, let's now actually listen for changes and capture events.
-
-First, let's write up a handler that checks if our elements are visible and captures a pageview if they are:
+Our last step before setting up correct pageview tracking in this SPA is setting up PostHog. To do this, go back to `index.js`, import PostHog (we installed it earlier), and initialize it using your project key and host.
 
 ```js
-const visibilityChangeHandler = () => {
-    
-    // Loop through the relevant elements
-    for (let el of elementsToTrack) {
+// index.js
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import { BrowserRouter } from 'react-router-dom';
+import posthog from 'posthog-js'; // new
 
-        // Check if the element is visible
-        let visible = isElementInViewport(el.ref)
-
-        // Check diff to prevent useless triggers
-        if (visible !== el.visible) {
-
-            // Update the element visibility state
-            el.visible = visible
-
-            // Capture a pageview with PostHog
-            if (visible) {
-                posthog.capture(
-                    '$pageview', 
-                    { section: el.name, $current_url: el.name }
-                )
-            }
-        }
-    }
-}
-```
-
-The comments in the code provide context as to what each line is doing, but, essentially, when the handler is triggered, we check the elements we care about for _changes_ in visibility, update the state, and capture a `$pageview` if the change was from `false -> true` only. 
-
-You could also add some more complex logic here, such as capturing a pageview when one element stops being visible and another one becomes visible. 
-
-Additionally, you also have choices when calling `posthog.capture`. You can either set your custom property to track the current screen (`section` in the example), or override PostHog's default `$current_url` prop (or both). 
-
-If you override the default property, your events table will look like this:
-
-![SPA Events Table](../images/tutorials/spa/events-table.png)
-
-Instead of a the automatically captured URL, your events table will show your custom value under 'URL / Screen'.
-
-Additionally, you will also be able to use our [paths](/docs/user-guides/paths) feature with your custom URLs.
-
-> **Note:** If your page does not refresh but the URL changes with navigation, PostHog's default 'Current URL' may still be useful. Otherwise, if your URL _never_ changes, you should definitely override the prop with your own values - just make sure to follow a good naming system!
-
-#### Setting the relevant listeners
-
-Finally, we need to listen for the relevant changes to window that might lead to a new page view:
-
-```js
-if (window.addEventListener) {
-    addEventListener('scroll', visibilityChangeHandler, false)
-    addEventListener('resize', visibilityChangeHandler, false)
-
-    // Uncomment next lines to capture pageviews on page load
-    // addEventListener('DOMContentLoaded', handler, false);
-    // addEventListener('load', visibilityChangeHandler, false);
-}
-```
-
-Here, we are listening for window events that may cause a new section to come into view, which are scrolling and resizing. Since PostHog autocapture already captures a `$pageview` when the page loads, you don't need to capture another one immeediately. 
-
-However, if you have reason to do so, you can listen for window `load` events and/or `DOMContentLoaded` events. The latter triggers when the DOM structure is ready (i.e. HTML and CSS loaded), whereas the former triggers when images and frames finish loading.
-
-#### Full snippet
-
-Putting everything together, here's what the final snippet looks like (without comments):
-
-```js
-let elementsToTrack = [
-    {
-        name: "section1",
-        ref: document.getElementById('section1'),
-        visible: true
-    },
-    {
-        name: "section2",
-        ref: document.getElementById('section2'),
-        visible: false
-    },
-]
-
-const isElementInViewport = (el) => {
-    const rect = el.getBoundingClientRect()
-    
-    return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        (   
-            window.innerHeight || 
-            document.documentElement.clientHeight
-        ) >= rect.bottom &&
-        (
-            window.innerWidth || 
-            document.documentElement.clientWidth
-        ) >= rect.right
-    )
-}
-
-const visibilityChangeHandler = () => {
-    for (let el of elementsToTrack) {
-        let visible = isElementInViewport(el.ref)
-        if (visible !== el.visible) {
-            el.visible = visible
-            if (visible) {
-                posthog.capture(
-                    '$pageview', 
-                    { section: el.name, $current_url: el.name }
-                )
-            }
-        }
-    }
-}
-
-if (window.addEventListener) {
-    addEventListener('scroll', visibilityChangeHandler, false)
-    addEventListener('resize', visibilityChangeHandler, false)
-}
-```
-
-This snippet is written in Vanilla JS and can be included at the bottom of your page's `body` to track navigation.
-
-Additionally, if you are using a web framework like React, you can either set this logic on a `useEffect` hook or `componentDidMount` call on a wrapper/layout component, as well as you can also track navigation based on when certain components render. 
-
-
-#### Additional methods
-
-The methods presented here are examples of options to track SPAs with PostHog. However, with an understanding of how to go about setting up tracking, you can also explore other methods.
-
-Given the wide variety of available JavaScript events, you can also set up your navigation tracking in other ways, such as through `mouseover` events, for example. 
-
-In addition, you can also send your own [custom events](/docs/integrate/client/js/#capture) to track navigation if you prefer to keep PostHog's default `$pageview` untouched. You could, for example, create a `screenview` event, passing any other properties you wish to include with it, like so:
-
-```js
-posthog.capture(
-    'screenview', 
-    { 
-        screenName: 'About Us', 
-        route: '#about-us', 
-        navigationMethod: 'scroll' 
-    }
+posthog.init( // new
+	'<ph_project_api_key>', { api_host: '<ph_instance_address>' }
 )
 
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>
+);
 ```
 
-Essentially, the key steps to keep in mind for tracking navigation in SPAs are:
+Once we’ve initialized PostHog, autocaptured events should start flowing into our instance. We’ll also see that we have some `pageview` events, but clicking our nav links doesn’t trigger `pageview` events.
 
-1. Identify what counts as a new screen and how to account for it (e.g. relevant elements and triggers)
-1. Capture a pageview or custom event to track navigation
-1. Set your own properties and/or override `$current_url` to track pages as you like
+![Missing pageviews](../images/tutorials/spa/no-tracking.png)
 
-Following these steps, you can track navigation on your app just like any other website, ensuring you capture exactly how users are using your product. 
+Because this is a single page app, navigation does not trigger new `pageview` events. You see we clicked the button to go to the Benefits and About pages, but didn’t get `pageview` events for either of them. We will have to set up custom events to trigger them. In the next step, we’ll go over some ways to do this. 
+
+## Capturing pageviews
+
+Although autocapture does a lot we’ll have to write more code to capture pageviews in our single page app. We’ll go over a few ways of triggering the pageview events: the router, page render, and on visibility change. 
+
+### Method 1: router
+
+The first method is using the router. The router allows us to add functions that run every time the page changes. With `react-router-dom`, we can use `useLocation` for this. We’ll add a location variable we get from the router, and run a `useEffect` to trigger a pageview every time it changes.
+
+This is what it looks like in `App.js`
+
+```js
+// src/App.js
+import { Route, Routes, Link, useLocation } from 'react-router-dom'; // new
+import { Home } from './Home';
+import { About } from './About';
+import { Benefits } from './Benefits'
+import * as React from 'react'; // new
+import posthog from 'posthog-js'; // new
+
+function App() {
+  let location = useLocation(); // new
+
+  React.useEffect(() => { // new
+    posthog.capture('$pageview')
+  }, [location]);
+
+  return (
+    <>
+      <nav>
+        <ul>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/about">About</Link></li>
+          <li><Link to="/benefits">Benefits</Link></li>
+        </ul>
+      </nav>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/benefits" element={<Benefits />} />
+      </Routes>
+    </>
+  );
+}
+
+export default App;
+```
+
+Now when we move between pages, we’ll trigger pageviews on each.
+
+![Triggering pageviews](../images/tutorials/spa/tracking.png)
+
+> **Note:** other frameworks or languages have ways to “listen” for the changes in the router that we use to trigger a pageview event. For example, in Vue, you can set up a `watcher` and in Svelte, you can use the `navigating` store.
+> 
+
+### Method 2: page render
+
+A more manual way to trigger pageview events is by setting them up to trigger every time a page is rendered. You may want to do this if you have a smaller number of pages and only want some of them to trigger pageview events. 
+
+To set this up, add a `useEffect` hook to the page we want to capture. It should look like this:
+
+```js
+// src/Benefits.js
+import posthog from 'posthog-js'; // new
+import React from "react"; // new
+
+export function Benefits() {
+  React.useEffect(() => { 
+    posthog.capture('$pageview') // new
+  }, [])
+  return (
+    <>
+      <h1>Benefits</h1>
+      <p>Welcome to the Benefits page</p>
+    </>
+  );
+}
+```
+
+Once this is done on each of the pages you want to trigger events, rendering that page will create a `pageview` event.
+
+### Method 3: visibility
+
+Many single page apps navigate through scrolling. As users scroll through the app new content, sections, and components are shown to them. This isn’t automatically captured with PostHog, but we can set up a way to capture it. We’ll do this by checking if the component is visible and triggering a pageview event if so.
+
+There are a few ways to trigger pageview events based on visibility, but we are just going to pick a simple one for this tutorial. We could use  [IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) or set up [JQuery](https://stackoverflow.com/questions/123999/how-can-i-tell-if-a-dom-element-is-visible-in-the-current-viewport) to track when elements are in the viewport, but we will just install a [react-visibility-sensor](https://github.com/joshwnj/react-visibility-sensor) component. To start, we’ll install the module.
+
+```bash
+npm install react-visibility-sensor
+```
+
+Next, we’ll modify our `App.js` page a bit, so it is one long, scrollable page. We’ll add some tall `divs` to split up the page.
+
+```js
+// src/App.js
+import { Home } from './Home';
+import { About } from './About';
+import { Benefits } from './Benefits'
+
+function App() {
+  return (
+    <>
+      <Home />
+      <div style={{height: '50rem'}} />
+      <About />
+      <div style={{height: '50rem'}} />
+      <Benefits />
+    </>
+  );
+}
+
+export default App;
+```
+
+Finally, we’ll wrap each of the components in a `VisibilitySensor` and have the change trigger a pageview event.
+
+> **Note:** you can trigger whatever event you want, such as `screenview`, if you didn’t want to combine it with the autocaptured pageview events.
+> 
+
+```js
+// src/App.js
+import { Home } from './Home';
+import { About } from './About';
+import { Benefits } from './Benefits'
+import VisibilitySensor from 'react-visibility-sensor'; // new
+import posthog from 'posthog-js';
+
+function App() {
+	function onChange (isVisible) { // new
+    if (isVisible) posthog.capture('$pageview');
+  }
+  return (
+    <>
+      <VisibilitySensor onChange={onChange}>
+        <Home />
+      </VisibilitySensor>
+      <div style={{height: '50rem'}} />
+      <VisibilitySensor onChange={onChange}>
+        <About />
+      </VisibilitySensor>
+      <div style={{height: '50rem'}} />
+      <VisibilitySensor onChange={onChange}>
+        <Benefits />
+      </VisibilitySensor>
+    </>
+  );
+}
+
+export default App;
+```
+
+Scrolling the app will now trigger a pageview every time one of the components is visible. 
+
+## Next steps
+
+Now that we are capturing pageviews, we can figure out how users move around our app. For example, we could analyze and optimize our conversion funnel. [See a tutorial on how here](https://posthog.com/tutorials/funnels).
+
+We can also track more events than just pageviews. The [event tracking guide](https://posthog.com/tutorials/event-tracking-guide) will provide you with all the details on how.
+
+For more advanced PostHog users, you can use all of your new pageview data to help you build [an AARRR dashboard](https://posthog.com/blog/aarrr-pirate-funnel).
 
 <NewsletterTutorial compact/>

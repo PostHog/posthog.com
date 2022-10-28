@@ -15,7 +15,7 @@ If you are looking for guidance on how to manage customers in HubSpot specifical
 
 1. Customer will either:
    1. Book a demo directly on our calendar via our [pricing](/pricing) page
-   1. Fill in the contact form on the [signup](/signup/self-host/get-in-touch) page, which captures which plan they are interested in as well as metrics such as MAUs, event count etc.
+   1. Fill in the contact form on the [signup](/get-in-touch#contact) page, which captures which plan they are interested in as well as metrics such as MAUs, event count etc.
    1. Email us directly at hey@ or sales@
 1. (If it's a direct demo booking, skip to 3)  We'll email them introducing ourselves and answering any questions they've shared as well as offering up a call/demo to discuss their needs further.
 1. On the initial call we'll spend some time understanding what they want and then optionally give a [demo](/handbook/growth/sales/demos) if that's what they are there for.

@@ -22,7 +22,7 @@ You'll notice PostHog feels much nicer to use and that's largely in part to all 
 
 ![Sentry Screenshot](../images/blog/array/sentry.png)
 
-An important part of devolping a great user experience is identifying, tracking, and fixing bugs. 
+An important part of developing a great user experience is identifying, tracking, and fixing bugs. 
 
 With our new [Sentry](https://sentry.io/) integration, you can leverage PostHog data to help your debugging, and Sentry exception data to track relevant UX metrics. As a two-way integration, it:
 - Adds a direct link in Sentry to the profile of the person affected in PostHog
