@@ -12,7 +12,7 @@ featuredImageType: full
 
 Want to know more about what we're up to? [Subscribe to HogMail, our newsletter](/newsletter), which we send every two weeks!
 
-## Update guide for self-hosted users
+## 1.41.0 update guide for self-hosted users
 Due to changes in this update, it is important check `alias` usage before [upgrading PostHog](/docs/runbook/upgrading-posthog) to 1.41.0 on a self-hosted instance. For example, assuming `email` is used as the identified user id, then: 
 
 ```
