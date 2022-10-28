@@ -39,71 +39,77 @@ export function InProgress(props: IRoadmap) {
     }
 
     return (
-        <li>
-            <h4 className="text-lg flex space-x-1 items-center m-0">{title}</h4>
-            <p className="m-0 text-[15px] text-black/80 inline">
-                {more ? description : description.substring(0, 130) + (description?.length > 130 ? '...' : '')}
-            </p>
-            {!more && (description?.length > 130 || githubPages?.length > 0) && (
-                <button onClick={() => setMore(true)} className="font-semibold text-red inline ml-1">
-                    more
-                </button>
-            )}
-            {githubPages && (
-                <div className="mt-4 mb-4">
-                    <div className="h-2 flex-grow bg-gray-accent-light rounded-md relative overflow-hidden">
-                        <div
-                            style={{ width: `${percentageComplete}%` }}
-                            className={`bg-[#3FB950] absolute inset-0 h-full`}
-                        />
-                    </div>
-                </div>
-            )}
-            <div className="mt-2">
-                {showAuth ? (
-                    <Login
-                        onSubmit={(data: { email: string }) => subscribe(data?.email)}
-                        apiHost="https://squeak.cloud"
-                        organizationId="a898bcf2-c5b9-4039-82a0-a00220a8c626"
-                    />
-                ) : (
-                    <button
-                        disabled={subscribed || loading}
-                        onClick={() => subscribe(user?.email)}
-                        className="text-[15px] inline-flex items-center space-x-2 py-2 px-4 rounded-sm bg-gray-accent-light text-black hover:text-black font-bold active:top-[0.5px] active:scale-[.98]"
-                    >
-                        <span className="w-[24px] h-[24px] flex items-center justify-center bg-blue/10 text-blue rounded-full">
-                            {loading ? (
-                                <Spinner className="w-[14px] h-[14px] !text-blue" />
-                            ) : subscribed ? (
-                                <Check className="w-[14px] h-[14px]" />
-                            ) : (
-                                <Plus className="w-[14px] h-[14px]" />
-                            )}
-                        </span>
-                        <span>
-                            {subscribed ? 'Subscribed!' : beta_available ? 'Get early access' : 'Subscribe for updates'}
-                        </span>
+        <li className="sm:flex xl:flex-col space-y-2 sm:space-y-0 border-t border-dashed border-gray-accent-light first:border-t-0 px-4 py-4 sm:py-2 xl:pb-4 bg-white rounded-sm shadow-xl">
+            <div className="flex-1 sm:mt-2">
+
+                <h4 className="text-lg flex space-x-1 items-center m-0">{title}</h4>
+                <p className="m-0 text-[15px] text-black/80 inline">
+                    {more ? description : description.substring(0, 125) + (description?.length > 125 ? '...' : '')}
+                </p>
+                {!more && (description?.length > 125 || githubPages?.length > 0) && (
+                    <button onClick={() => setMore(true)} className="font-semibold text-red inline text-sm ml-1">
+                        more
                     </button>
                 )}
+                {githubPages && (
+                    <div className="mt-4 mb-4">
+                        <h5 className="text-sm mb-2 font-semibold opacity-60">Progress</h5>
+                        <div className="h-2 flex-grow bg-gray-accent-light rounded-md relative overflow-hidden">
+                            <div
+                                style={{ width: `${percentageComplete}%` }}
+                                className={`bg-[#3FB950] absolute inset-0 h-full`}
+                            />
+                        </div>
+                    </div>
+                )}
+                {githubPages && more && (
+                    <ul className="list-none m-0 p-0 pb-4 grid gap-y-2 mt-4">
+                        {githubPages.map((page) => {
+                            return (
+                                <li key={page.title}>
+                                    <Link
+                                        to={page.html_url}
+                                        className="text-[14px] flex items-start font-semibold space-x-1 text-black leading-tight"
+                                    >
+                                        <span className="inline-block mt-.5">{page.closed_at ? <ClosedIssue /> : <OpenIssue />}</span>
+                                        <span>{page.title}</span>
+                                    </Link>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                )}
             </div>
-            {githubPages && more && (
-                <ul className="list-none m-0 p-0 grid gap-y-2 mt-4">
-                    {githubPages.map((page) => {
-                        return (
-                            <li key={page.title}>
-                                <Link
-                                    to={page.html_url}
-                                    className="text-[14px] flex items-center font-semibold space-x-1 text-black"
-                                >
-                                    <span>{page.closed_at ? <ClosedIssue /> : <OpenIssue />}</span>
-                                    <span>{page.title}</span>
-                                </Link>
-                            </li>
-                        )
-                    })}
-                </ul>
-            )}
+            <div className="sm:flex-[0_0_250px] xl:flex-1 flex sm:justify-end xl:justify-start">
+                <div className="mt-2">
+                    {showAuth ? (
+                        <Login
+                            onSubmit={(data: { email: string }) => subscribe(data?.email)}
+                            apiHost="https://squeak.cloud"
+                            organizationId="a898bcf2-c5b9-4039-82a0-a00220a8c626"
+                        />
+                    ) : (
+                        <button
+                            disabled={subscribed || loading}
+                            onClick={() => subscribe(user?.email)}
+                            className="text-[15px] flex items-center space-x-2 py-2 px-4 rounded-sm bg-gray-accent-light text-black hover:text-black font-bold active:top-[0.5px] active:scale-[.98] w-full"
+                        >
+                            <span className="w-[24px] h-[24px] flex items-center justify-center bg-blue/10 text-blue rounded-full">
+                                {loading ? (
+                                    <Spinner className="w-[14px] h-[14px] !text-blue" />
+                                ) : subscribed ? (
+                                    <Check className="w-[14px] h-[14px]" />
+                                ) : (
+                                    <Plus className="w-[14px] h-[14px]" />
+                                )}
+                            </span>
+                            <span>
+                                {subscribed ? 'Subscribed!' : beta_available ? 'Get early access' : 'Subscribe for updates'}
+                            </span>
+                        </button>
+                    )}
+                </div>
+            </div>
         </li>
     )
 }
