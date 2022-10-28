@@ -23,6 +23,10 @@ availability:
             free: false
             selfServe: true
             enterprise: true
+        text_and_media_cards:
+            free: false
+            selfServe: true
+            enterprise: true
         advancedSharing:
             free: false
             selfServe: false
@@ -62,6 +66,12 @@ Click '...' to bring up additional options:
 -   Select 'Edit layout' to drag and resize panels and click 'Done editing' when finished
 -   'Go full screen' is great for presenting your dashboard
 -   You can also pin, duplicate or delete your dashboard
+
+## Adding text and media to dashboards
+
+<FeatureAvailability availability={_frontmatter.availability.features.text_and_media_cards} />
+
+On paid plans, text cards can be added to dashboards alongside insights. These allow you to add text and external images to add context to your dashboards. With [object storage](/docs/runbook/services/minio) enabled you can drag and drop images onto the cards to upload images and gifs to your text cards.
 
 ## Tagging a dashboard
 
