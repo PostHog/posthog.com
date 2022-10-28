@@ -76,8 +76,8 @@ const Editions = ({ setDemoType }) => {
 const Book = ({ demoType }) => {
     return (
         <>
-            <Intro title="Book a demo">
-                <Contact hideTabs demoType={demoType} />
+            <Intro>
+                <Contact activeTab="demo" demoType={demoType} />
             </Intro>
         </>
     )
