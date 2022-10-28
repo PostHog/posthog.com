@@ -28,7 +28,6 @@ Want to know more about what we're up to? [Subscribe to HogMail, our newsletter]
 - New: Change your email yourself
 - New: Hedgehog mode
 - New: GitHub subdirectories in apps
-- Improved: Math selector
 - Improved: Recordings interface
 - One more thing: Site apps 
 
@@ -38,13 +37,9 @@ Want to know more about what we're up to? [Subscribe to HogMail, our newsletter]
 
 Have you ever asked yourself '*What's the average average number of purchases per user?*' or '*What's the maximum number of forms submitted per user?'* 
 
-Questions like these used to be hard to answer with PostHog, but no more! We've added a new series option for insights, enabling you to see the count of events per user - including sub-options for seeing the averages, minimum and maximum count of events per user. We think this is going to be especially useful for teams working on transactional products. 
+Questions like these used to be hard to answer with PostHog, but no more! We've added a new series option for insights, enabling you to see the count of events per user - including sub-options for seeing the averages, minimum and maximum count of events per user. 
 
-### Improved: Math selector
-
-PICTURE GOES HERE
-
-Work on the previous task had us redo the math selector.
+**Bonus update:** While working on this feature, we also took the opportunity to improve our math selector UI.
 
 ### New: Text cards on dashboards
 
@@ -54,10 +49,11 @@ Previously there was no easy way to add context or links to a dashboard, meaning
 
 ### Improved: Recordings interface
 
-PICTURE GOES HERE
+![recordings interface](../images/blog/array/1-41-0-recordings-interface.png)
 
-We've been listening and implementing the most requested features, with a special focus on sparking joy. 
-It's like a completely new app now, so check it out! 
+We've heard feedback recently that session recording was incredibly useful, but didn't spark much joy for those who used it. So, we've overhauled the entire interface for session recordings to make it easier to use and to help you find relevant recordings faster. 
+
+We think session recording feels like an entirely new experience now, so check it out. Now's the perfect time to explore [the console log beta too](/manual/recordings#console-logs-recording-beta)!
 
 ### New: App metrics
 
@@ -84,7 +80,7 @@ user.
 
 ### New: Ingestion warnings
 
-PICTURE GOES HERE
+![ingestion warnings](../images/blog/array/1-41-0-ingestion.png)
 
 In case you still try to alias identified events, there's a new Ingestion Warnings page to remind you that it's a bad idea. 
 
@@ -94,25 +90,23 @@ PICTURE GOES HERE
 
 ### Finally: Change your email yourself
 
-PICTURE GOES HERE
+![change your password](../images/blog/array/1-41-0-password.png)
 
-One of our most requested features: you can now change your own email address without contacting support 🤩🤩🤩
+Finally, we can release one of our most requested features: the ability to change the email address attached to your account, without contacting support. All you have to do is select your profile picture in the top right and access your account settings. 
 
 ### New: Hedgehog mode
 
-PICTURE GOES HERE
+![hedgehog mode](../images/blog/array/1-41-0-hedgehog-mode.png)
 
-For a while now, we've been having a hard trouble explaining to our spouses what we do for work. This makes it even harder.
+For a while now, we've been having a hard time explaining to our families what we do for a living. This makes it even harder.
 
 ### One more thing: Site apps 
 
-PICTURE GOES HERE
+![site-apps](../images/blog/array/1-41-0-site-apps.gif)
 
-We're testing a new big (beta) thing: site apps. You need to **manually opt in** to enable this feature. Once you do, 
-PostHog apps will be able to inject code onto your website through posthog-js. For example to display a feedback form,
-add a quick "THE APP IS DOWN, NO NEED TO PANIC" banner, or even make it rain pineapples. Again, we're having a really
-hard time explaining to people this is what we do for work! 😍
+We're testing a new big (beta) thing: site apps. You need to **manually opt in** to enable this feature and, once you do, PostHog will be able to inject code onto your website through `posthog-js`. We've put together [a tutorial that explains how to make a site app](/tutorials/build-site-app). 
 
+This can be useful for a number of potential tasks, such as displaying feedback forms, posting service update banners, or making it rain pineapples. No, we're not really sure why we made the last one.
 
 ### Other improvements & fixes
 
