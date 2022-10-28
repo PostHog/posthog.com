@@ -8,17 +8,17 @@ featuredImage: ../images/tutorials/banners/power-users.png
 topics: ['trends', 'cohorts']
 ---
 
-Power users are users who use your product the most, significantly more than the average user. They have different needs and usage patterns than average users. Often, they are a company’s best and most important customers.
+Power users are your best and most important customers. They're knowledgable, willing to learn, and more likely to give feedback than average users. They're also more demanding.
 
-Power users are knowledgeable, willing to learn, and likely to give feedback about your product. They care more about new features and upgrades than the average user does. Changes can impact a power user while not impacting an average user. That is why it is important to analyze power users and build for them as a group separately.
+They care more about new features and upgrades. They have different needs and usage patterns than average users. They notice changes (positive or negative) average users won't. 
 
-Building a better product for power users keeps them happy and helps prevent them from churning. It helps you build a competitive advantage by growing lock-in with these users. It also  encourages average users to increase their usage and become power users.
+Locking them in will give you a competitive advantage, but they're also more likely to churn if you don't identify them and build to their needs.
 
-To create a great product for power users, you must know who they are and how they are using your product. In this tutorial, we’ll cover how to identify and analyze power users. All you need to start is a PostHog instance (and some users).
+In this tutorial, we’ll cover how to **identify** and **analyze power users** so you can keep them happy and convert your average users into power users. All you need to start is a PostHog instance (and some users).
 
 ## Defining your power users
 
-The first step to identifying and analyzing a power user is defining them. There is no one-size-fits-all, every company and product has its own definition. Defining what they do is key to identifying and analyzing them. Ideally, your power users should align with your ideal customer profile and your [key product metrics](/blog/b2b-saas-product-metrics.
+There is no one-size-fits-all for a power users – every company and product has its own. Defining what they do is key to identifying and analyzing them. Ideally, your power users should align with your ideal customer profile and your [key product metrics](/blog/b2b-saas-product-metrics.
 
 One common aspect between definitions of power users is high usage, whether that is visiting every day, using feature lots, or long session times. A power user relies on the product, it is core to their workflow. They also use advanced features more than average.
 
