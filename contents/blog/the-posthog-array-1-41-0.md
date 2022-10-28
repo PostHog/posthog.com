@@ -90,9 +90,9 @@ We think session recording feels like an entirely new experience now, so check i
 
 ![site-apps](../images/blog/array/1-41-0-site-apps.gif)
 
-We're testing a new big (beta) thing: site apps. You need to **manually opt in** to enable this feature and, once you do, PostHog will be able to inject code onto your website through `posthog-js`. We've put together [a tutorial that explains how to make a site app](/tutorials/build-site-app). 
+We're testing a new big (beta) thing: site apps. You need to **manually opt in** to enable this feature by configuring your `posthog-js` initialization to include `opt_in_site_apps: true`. Once you do, PostHog will be able to inject code onto your website through `posthog-js`. We've put together [a tutorial that explains how to make a site app](/tutorials/build-site-app) if you're interested. 
 
-This can be useful for a number of potential tasks, such as displaying feedback forms, posting service update banners, or making it rain pineapples. No, we're not really sure why we made the last one.
+Site apps can be useful for a number of potential tasks, such as displaying feedback forms, posting service update banners, or making it rain pineapples. No, we're not really sure why we made the last one either. 
 
 ### Other improvements & fixes
 
