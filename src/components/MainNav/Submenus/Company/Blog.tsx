@@ -38,7 +38,7 @@ export default function Blog() {
         {
             title: 'Contact sales',
             description: 'Demo, license questions, dad jokes',
-            url: '/signup/self-host/get-in-touch#contact',
+            url: '/get-in-touch#contact',
         },
         { title: 'Media', description: 'Company bio, logos, hedgehogs', url: '/media' },
     ]

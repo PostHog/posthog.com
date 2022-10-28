@@ -52,7 +52,7 @@ export default function UsingPosthog({ referenceElement }: { referenceElement: H
         {
             title: 'Contact sales',
             description: 'Licensing, upgrade, or demo inquiries',
-            url: '/signup/self-host/get-in-touch#contact',
+            url: '/get-in-touch#contact',
         },
         {
             title: 'PostHog on GitHub',

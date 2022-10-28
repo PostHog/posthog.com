@@ -39,7 +39,7 @@ We have [small teams](/handbook/small-teams/team-structure) - we can move people
 
 **Lightweight management**
 
-You have [someone to talk to](https://posthog.com/handbook/company/management), but without being micromanaged. Their priority is to support you, and we give them resources to make them a better manager. 
+You have [someone to talk to](/handbook/company/management), but without being micromanaged. Their priority is to support you, and we give them resources to make them a better manager. They will also do a [regular career check-in](/handbook/company/management#1-1s-and-team-member-growth) with you as part of your 1-1s to ensure you're on the right track. 
 
 **Build a huge open source portfolio**
 
