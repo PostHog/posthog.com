@@ -238,7 +238,7 @@ With the graph above, we're using PostHog's built-in mathematical operations to 
 
 In this case, we are doing the same as above, but with an extra step. We first calculate the sum of purchases, and then divide it by the total number of purchases. 
 
-While in this case we get the same results (except for the final data point simply because of when the screenshots were taken), it is useful to be aware of this method as it gives you more flexiblity for your averages. 
+While in this case we get the same results (except for the final data point simply because of when the screenshots were taken), it is useful to be aware of this method as it gives you more flexibility for your averages. 
 
 For example, if organizations in your platform can do a purchase more than once per month, you can set the second event to be filtered by `Active Users`, giving you the average revenue per organization that month, rather than the average revenue per purchase event during the month.
 
@@ -253,6 +253,6 @@ We learned that:
 - We can use event properties to do native numerical operations, and user properties to group users into relevant cohorts (such as based on the number of projects or their pricing tier)
 - We can use formulas to determine averages for more complex metrics that cannot use the native mathematical operations
 
-But, most importantly, we learned that while PostHog is built with certain frameworks in mind (such as the person-event model), given the flexiblity of our API and metric-building capabilities, you are likely to find a way to track your product exactly how you want to.
+But, most importantly, we learned that while PostHog is built with certain frameworks in mind (such as the person-event model), given the flexibility of our API and metric-building capabilities, you are likely to find a way to track your product exactly how you want to.
 
 <NewsletterTutorial compact/>

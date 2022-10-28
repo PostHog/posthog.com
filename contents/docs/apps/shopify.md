@@ -17,7 +17,7 @@ This app will:
 -   Create a PostHog user from a Shopify customer if it doesn't exist
 -   Create events for every new order
 
-If there is an error while fetching orders, the next run of `runEveryMinute()` will try to re-read information from where it was previously interupted.
+If there is an error while fetching orders, the next run of `runEveryMinute()` will try to re-read information from where it was previously interrupted.
 
 ### What are the requirements for this app?
 

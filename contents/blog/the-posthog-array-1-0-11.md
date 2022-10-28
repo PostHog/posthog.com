@@ -51,7 +51,7 @@ Coupled with the above you can now authenticate your login through GitHub or Git
 
 Aaron was so used to typing /logout he did not realize how frustrating not having a logout button can be.
 
-It had been pointed out several times that having a user name in the top right corner of PostHog made it seem like it was a logout button, it wasn’t but now is. 
+It had been pointed out several times that having a username in the top right corner of PostHog made it seem like it was a logout button, it wasn’t but now is. 
 
 ### [Explaining Stickiness](https://github.com/PostHog/posthog/pull/438)
 

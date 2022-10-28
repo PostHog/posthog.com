@@ -52,7 +52,7 @@ Putting things in writing helps us clarify our own ideas, as well as allow other
 
 Everyone should help everyone else raise their game. Fatigue sets in when you complete a task, so it's easier for outsiders to help those creating the work to raise their game.
 
-We are direct about the quality of work. That doesn't always mean work needs to be completely polished, as it depends on the speed and impact of a task. Being great at [giving and receiving feedback](/handbook/people/feedback) is a key part of of our culture. 
+We are direct about the quality of work. That doesn't always mean work needs to be completely polished, as it depends on the speed and impact of a task. Being great at [giving and receiving feedback](/handbook/people/feedback) is a key part of our culture. 
 
 ## Bias for impact
 

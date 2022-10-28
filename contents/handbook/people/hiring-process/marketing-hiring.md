@@ -44,7 +44,7 @@ A Marketing SuperDay usually looks like this (_there is a degree of flexibility 
 *   Meet the founders - Tim and James
 *   Time to focus on the task, we can provide support via your personal Slack channel
 *   Informal session with a few team members
-*   On days where we have company wide meetings, we will invite you along to that and give you a chance to introduce yourself. On days without company-wide meetings, we will arrange for you to meet a few members of our team for a casual lunch/coffee break
+*   On days when we have company wide meetings, we will invite you along to that and give you a chance to introduce yourself. On days without company-wide meetings, we will arrange for you to meet a few members of our team for a casual lunch/coffee break
 
 Overall, you should spend at least 80% of your time and energy on the task and less than 20% on meeting people, as we will base our decision on your output of the day. However, we encourage everyone to use the Slack channel as much as needed for any questions or problems. 
 
