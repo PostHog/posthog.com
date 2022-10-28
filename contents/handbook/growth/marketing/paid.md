@@ -11,7 +11,7 @@ We work with an agency, [Hey Digital](https://www.heydigital.co/) to manage paid
 - Creating paid ad assets for each channel
 - Manage paid channels on our behalf 
 
-We communicate with them via a shared internal Slack channel, and have 2 checkin calls with them each month. We have a very light approvals process for creative:
+We communicate with them via a shared internal Slack channel, and have 2 check-in calls with them each month. We have a very light approvals process for creative:
 
 - Hey Digital team share asset(s) for feedback in Slack
 - PostHog team approve - usually Charles or Andy, but anyone can jump in and give feedback

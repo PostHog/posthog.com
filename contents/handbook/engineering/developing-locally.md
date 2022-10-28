@@ -170,7 +170,7 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
 
 4. Install Node packages by running `yarn`.
 
-5. Run `yarn typegen:write` to generate types for [Kea](https://kea.js.org/) state management logics used all over the frontend.
+5. Run `yarn typegen:write` to generate types for [Kea](https://keajs.org/) state management logics used all over the frontend.
 
 > The first time you run typegen, it may get stuck in a loop. If so, cancel the process (`Ctrl+C`), discard all changes in the working directory (`git reset --hard`), and run `yarn typegen:write` again. You may need to discard all changes once more when the second round of type generation completes.
 
