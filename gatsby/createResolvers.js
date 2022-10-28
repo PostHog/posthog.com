@@ -7,7 +7,7 @@ module.exports = exports.createResolvers = ({ createResolvers }) => {
                         query: {
                             filter: {
                                 frontmatter: {
-                                    github: { eq: source.username },
+                                    name: { eq: source.username },
                                 },
                             },
                         },
