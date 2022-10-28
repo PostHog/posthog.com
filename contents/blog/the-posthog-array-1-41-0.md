@@ -31,6 +31,14 @@ Want to know more about what we're up to? [Subscribe to HogMail, our newsletter]
 - Improved: Recordings interface
 - One more thing: Site apps 
 
+### New: Persons on events on by default
+
+We used to store events in one table and persons in another table. That meant that, once you reached billion event scale, any query which touched person properties would time out. But, no longer! After running [an extensive beta since update 1.39.0](/blog/the-posthog-array-1-39-0#beta-improving-query-performance-by-combining-persons-and-events), we've now moved person data onto the events themselves. This change also applies to groups, adding group properties and aggregation to the same table. 
+
+You won’t see any UI changes as a result of this change — persons will still have their own Persons & Groups section on the sidebar, for example — but you will notice results are a lot (up to 400%!) faster for any queries involving persons, groups or events. This is a massive change, so be sure to [read the full announcement for more info](/blog/persons-on-events).
+
+> **Note:** As a result of putting persons on events we now have to be strict about identified and unidentified users. Now, only anonymous users can be aliased into other users - meaning that once you call `identify` on a user, you can no longer alias the user into another identified user. Because of that, we recommend double checking your `identify` and `alias` calls. 
+
 ### New: Count of events per user
 
 ![count events per user](../images/blog/array/1-41-0-count-events-per-user.png)
@@ -57,26 +65,11 @@ We think session recording feels like an entirely new experience now, so check i
 
 ### New: App metrics
 
-PICTURE GOES HERE
+![app metrics](../images/blog/array/1-41-0-app-metrics-insight.png)
 
-Curious how well your plugins are doing? You no longer have to read smoke signals in AWS logs - just use the new Plugin Metrics page. 
+Curious how well your apps are doing? Previously, you may have had to pour over the AWS logs, but now you can head to the new app metrics page to find out how many events an app has processed, how many retries were attempted and what errors may have occured. Very handy. 
 
-### New: Persons on events on by default
-
-PICTURE GOES HERE
-
-We used to store events in one table and persons in another. Any query that touched person properties would require 
-database level JOINs and time out, once you reached the billion event scale. No longer! By moving person data
-onto the events themselves, we eliminated a whole class of performance issues 🚀.
-
-### New: Alias changes
-
-PICTURE GOES HERE
-
-The above change required us to be strict about who's a identified user and who's not. Because of that, you might
-benefit from double checking your `identify` and `alias` calls. The new rule is this: only anonymous users can be
-aliased into other users. Once you call `identify` on a user, you can no longer alias this user into another identified
-user. 
+Want to take a look? Head to the apps page in your instance and click the chart symbol for any installed app.  
 
 ### New: Ingestion warnings
 
@@ -88,7 +81,7 @@ We've added a new page to the Data Management section which lists warnings relat
 
 PICTURE GOES HERE
 
-### Finally: Change your email yourself
+### New: Change your email yourself
 
 ![change your password](../images/blog/array/1-41-0-password.png)
 
