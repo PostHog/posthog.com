@@ -40,7 +40,7 @@ export default function NextSteps({ location }) {
         async function getCustomer() {
             const name = location.pathname.split('/')[2]
             if (name) {
-                const customer = await fetch(`/.netlify/functions/customer?name=${name}`).then((res) => res.json())
+                const customer = await fetch(`/api/customer?name=${name}`).then((res) => res.json())
                 setCustomer(customer)
             }
             setLoading(false)

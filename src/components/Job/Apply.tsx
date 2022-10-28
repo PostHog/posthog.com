@@ -113,8 +113,7 @@ const Form = ({ setSubmitted, info, id }) => {
         }
         setError(error)
         form.append('jobPostingId', id)
-
-        fetch('/.netlify/functions/apply', {
+        fetch('/api/apply', {
             method: 'POST',
             body: form,
         })

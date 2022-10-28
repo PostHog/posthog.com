@@ -24,7 +24,7 @@ export function InProgress(props: IRoadmap) {
                 undefined,
                 'https://posthog.us19.list-manage.com/subscribe/post?u=292207b434c26e77b45153b96&amp;id=ef3044881e&amp;f_id=00178ae4f0'
             )
-            const res = await fetch('/.netlify/functions/mailchimp', {
+            const res = await fetch('/api/mailchimp', {
                 method: 'POST',
                 body: JSON.stringify({ email: email, tag: title }),
             })
