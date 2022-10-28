@@ -77,7 +77,7 @@ Want to take a look? Head to the apps page in your instance and click the chart 
 
 ![view recordings from anywhere2](../images/blog/array/1-41-0-view-recordings-anywhere2.png)
 
-You can now view session recordings from different levels of your data. 
+You can now view session recordings from different places within PostHog.
 
 Curious about how a specific person is interacting with your app? Navigate to a person detail page and check out their recordings. Want to see recordings for a specific event or action you've created? Check out the new view recordings button you can find in the event's detail page or from the events table.
 
