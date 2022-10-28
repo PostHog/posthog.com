@@ -112,7 +112,7 @@ This can be useful for a number of potential tasks, such as displaying feedback 
 
 You think that's it? Not by a long shot! Version 1.41 also adds hundreds of other improvements and fixes, including...
 
-- **Improvement:** 
+- **Improvement:**  https://github.com/PostHog/posthog-github-action
 - **Improvement:** 
 - **Improvement:**
 - **Fix**: 
