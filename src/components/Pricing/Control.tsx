@@ -194,7 +194,7 @@ const Control = (): JSX.Element => {
                         <StaticImage
                             alt="The cutest hedgehog you've ever seen driving a red tractor"
                             src="./images/tractor-hog.png"
-                            className="lg:-mt-4 xl:-mt-12 max-w-screen-sm"
+                            className="max-w-screen-sm"
                             loading="eager"
                             placeholder="none"
                         />
@@ -287,7 +287,7 @@ const Control = (): JSX.Element => {
                         />
                     </div>
 
-                    <header className={`${gridCell} ${gridCellTop} lg:order-3`}>
+                    <header className={`${gridCell} ${gridCellTop} pb-4 lg:pb-0 lg:order-3`}>
                         <span className="w-9 h-9 flex mb-1">{ProductIcons.experiments}</span>
                         <h3 className="text-lg mb-0 pb-0">Feature flags + experiments</h3>
                         <p className="text-[15px] opacity-75 leading-tight font-semibold mb-0">
