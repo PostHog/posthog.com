@@ -14,6 +14,15 @@ Want to know more about what we're up to? [Subscribe to HogMail, our newsletter]
 
 > Running a self-hosted instance? Check out our [guide to upgrading PostHog](/docs/runbook/upgrading-posthog).
 
+> **IMPORTANT NOTE FOR SELF-HOSTED USERS:** Self-hosted users should check `alias` usage before [upgrading PostHog](/docs/runbook/upgrading-posthog) due to changes involving persons on events. For example, assuming `email` is used as the identified user id, then: 
+
+```
+identify(email)                                   # in the frontend
+alias(backend_unique_id, email)      # in the backend - THIS WILL NOT WORK
+alias(email, backend_unique_id2)    # in the backend - the right order
+```
+After updating to 1.41.0, check [ingestion warnings](#new-ingestion-warnings) and run async migrations 0005, 0006 and 0007.
+
 ## PostHog 1.41.0 release notes
 
 **Release highlights:**
@@ -34,7 +43,7 @@ We used to store events in one table and persons in another table. That meant th
 
 You won’t see any UI changes as a result of this change — persons will still have their own Persons & Groups section on the sidebar, for example — but you will notice results are a lot (up to 400%!) faster for any queries involving persons, groups or events. This is a massive change, so be sure to [read the full announcement for more info](/blog/persons-on-events).
 
-> **Note:** As a result of putting persons on events we now have to be strict about identified and unidentified users. Now, only anonymous users can be aliased into other users - meaning that once you call `identify` on a user, you can no longer alias the user into another identified user. Because of that, we recommend double checking your `identify` and `alias` calls. 
+> **Note:** As a result of putting persons on events we now have to be strict about identified and unidentified users. Now, only anonymous users can be aliased into other users - meaning that once you call `identify` on a user, you can no longer alias the user into another identified user. Because of that, we recommend double checking your `identify` and `alias` calls and following advice above [how to upgrade a self-hosted instance to 1.41.0](/blog/the-posthog-array-1-41-0). 
 
 ### New: Count of events per user
 
