@@ -3,7 +3,7 @@ title: How to build a site app
 sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
-date: 2022-10-27
+date: 2022-10-28
 featuredImage: ../images/tutorials/banners/build-site-app.png
 topics: ["apps"]
 ---
@@ -70,7 +70,11 @@ This is the basics of what we need to set up and we can start adding more functi
 
 Right now, our app doesn’t do much. We want it to be useful and help us get feedback from our users. To do this, we’ll add a button users click to tell us we are doing a good job. We’ll also set up PostHog to capture an event when they do this. To start making this a reality, we’ll need to create the component with HTML, CSS, and TypeScript.
 
-In the `site.ts` file, add a `style` constant that stores the CSS styling for our button. Next, write a function `createShadow` to inject a Shadow DOM we have full control over in the page (and doesn’t mess with the current page). Finally, write the logic for our `inject` function to create the button, add it to the Shadow DOM, and have a trigger our `console.log` message set in the config. Putting these three together gives us something like this:
+In the `site.ts` file, add a `style` constant that stores the CSS styling for our app such as classes, position, alignment, and color.
+
+Next, write a function `createShadow` to inject a shadow DOM (document object model). Using the shadow DOM enables the app to add new content, style, and functionality to the page without affecting the existing code. It does this by creating a separate, hidden DOM tree and attaching it to the existing DOM. Check out the docs on [using a shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM) for more information.
+
+Finally, write the logic for our `inject` function to create the button, add it to the shadow DOM, and have it trigger our `console.log` message set in the config. Putting these three together gives us something like this:
 
 ```js
 // site.ts
@@ -155,7 +159,7 @@ export function inject({ config, posthog }) {
 }
 ```
 
-Once added, we can test if it's working by clicking the button on our `localhost` page. We’ll see the event show up under “Captured Events” on.
+Once added, we can test if it's working by clicking the button on our `localhost` page. We’ll see the event show up under “Captured Events.”
 
 ![Captured event](../images/tutorials/build-site-app/captured-event.png)
 
@@ -167,7 +171,19 @@ You now have a basic app to get feedback from users. From here, you can take the
 
 ## Adding site apps to your site
 
-Once you’ve created an app, the final step is deploying it to your site. The first step to deploying a site app is configuring your `posthog-js` initialization to include `opt_in_site_apps: true` . It should look like this:
+Once you’ve created an app, the final step is deploying it to your site. The first step is adding the site app to your PostHog instance. You'll do this from the "Browse Apps" section of PostHog.
+
+If you have a self-hosted instance, you can add your app by pasting its GitHub, GitLab, or npm URL in the advanced tab in “Browse Apps.” If it is private, make sure to include `?private_token=TOKEN` at the end of the URL. 
+
+> **Note:** Adding custom or third-party apps isn’t available for Cloud instances.
+
+If you have a cloud instance, you can search for available apps in “Browse Apps” (feedback, notification bar, and pineapple mode are all available). You can also submit your app by [emailing your GitHub URL to hey@posthog.com](mailto:hey@posthog.com?subject=Submit%20Plugin%20to%20Repository&body=Plugin%20GitHub%20link%3A). Once you’ve done that, we’ll review and potentially add your site app to the app store for everyone to use.
+
+Once added, you can configure your app by searching for it and then clicking on the "Configure" button (blue gear). The configuration menu has all the details from the `plugin.json` file such as instructions or customization. Once configured, click "Save" and enable the app (by clicking the toggle). Our example site app has a simple configuration, but this is customizable and can provide many options.
+
+![Configuring app](../images/tutorials/build-site-app/config.png)
+
+Once you've done that, the final step is getting the app set up on your site. Go to where you initialize `posthog-js` in your code, and add `opt_in_site_apps: true`. This enable your site apps to inject into your site through the `posthog-js` library. It should look like this:
 
 ```js
 posthog.init("<ph_project_api_key>", { 
@@ -175,12 +191,11 @@ posthog.init("<ph_project_api_key>", {
     "opt_in_site_apps": true 
 })
 ```
+Now that opt-in is added and the app activated, the thumbs-up button should appear on your site. This is what it looks like on a very basic site:
 
-Next, if you have a self-hosted instance, you can add your app by pasting its GitHub, GitLab, or npm URL in the advanced tab in “Browse Apps.” If it is private, make sure to include `?private_token=TOKEN` at the end of the URL. 
+![App on site](../images/tutorials/build-site-app/app-on-site.png)
 
-> **Note:** Adding custom or third-party apps isn’t available for Cloud instances.
-
-If you have a cloud instance, you can search for available apps in “Browse Apps” (feedback, notification bar, and pineapple mode are all available). You can also submit your app by [emailing your GitHub URL to hey@posthog.com](mailto:hey@posthog.com?subject=Submit%20Plugin%20to%20Repository&body=Plugin%20GitHub%20link%3A). Once you’ve done that, we’ll review and potentially add your site app to the app store for everyone to use.
+You now have a basic site app added to your site you can continue to customize and improve for your needs.
 
 ## Further reading
 
