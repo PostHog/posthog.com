@@ -7,22 +7,25 @@ hideAnchor: true
 
 Reminder: hiring the right team is the most leveraged activity we can do. Whatever you do, focus on getting the strongest signal from a candidate in an interview. Do _not_ focus on scalability / efficiency.
 
-This is a set of principles that apply to any situation when you're interviewing, rather than a how-to guide.
+## Focus on themes
 
-## Ask about themes, not questions
+Many well-intentioned interviewers will create a long list of questions that they'll follow rigorously. This is likely to lead to shallow answers.
 
-Many well-intentioned interviewers will create a list of questions in advance. This makes the interview feel like an interrogation _and_ often leads to a wide range of shallow answers, so doesn't help anyone.
+You're trying to understand how a human being operates, so go deep. It'll be more interesting for both of you, and will give a stronger signal.
 
-You're trying to understand how a human being operates, so go deep. It'll be more interesting for both of you, and will give a stronger signal. Have a few themes in advance you'll want to ask about. For a cultural interview, it might be something like:
+Prepare the themes in advance you'll want to ask about. For a cultural interview, it might be something like:
 
 * scrappiness
 * low ego
 * ambition
 * able to write code
+* optimist
+
+For each of the above themes, consider some good questions in advance. Use these as starting off points.
 
 ## Ask permission to get what you need
 
-Candidates' expecations of interviews vary wildly.
+Candidates' expectations of interviews vary wildly.
 
 Less experienced candidates, or those in less competitive markets, often expect an intense questioning.
 

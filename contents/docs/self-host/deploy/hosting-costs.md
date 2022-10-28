@@ -8,7 +8,7 @@ Charges on various platforms can be confusing to understand as loadbalancers (wh
 
 ## Hobby ($10/mo)
 
-See [Hobby Deployment](hobby) for details on volumes.
+See [Hobby Deployment](/docs/self-host/deploy/hobby) for details on volumes.
 
 ## DigitalOcean
 

@@ -94,7 +94,7 @@ By comparing the values of these metrics against each other you can begin to get
 ## What tools are good for tracking product engagement?
 Naturally, we think PostHog is the best tool for tracking product engagement. 
 
-This is because, in addition to tracking the metrics above, PostHog enables you to to understand their context through tools such as  [Session Recording](https://posthog.com/docs/user-guides/sessions), [Heatmaps](https://posthog.com/docs/user-guides/toolbar#inspecting-elements), [Cohorts](https://posthog.com/docs/user-guides/cohorts) and [Correlation analysis](https://posthog.com/docs/user-guides/correlation). You can also create dashboards to monitor engagement continuously.
+This is because, in addition to tracking the metrics above, PostHog enables you to understand their context through tools such as  [Session Recording](https://posthog.com/docs/user-guides/sessions), [Heatmaps](https://posthog.com/docs/user-guides/toolbar#inspecting-elements), [Cohorts](https://posthog.com/docs/user-guides/cohorts) and [Correlation analysis](https://posthog.com/docs/user-guides/correlation). You can also create dashboards to monitor engagement continuously.
 
 Paying attention to engagement and building more of what your customers love is a sure way to turn them from regular users into fans and advocates. Stay on top of your user engagement, listen and respond, and you’ll turn casual customers into product champions.
 

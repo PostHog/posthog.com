@@ -12,6 +12,10 @@ If you have `loki.enabled=false` (the default) then you do not need to do anythi
 Otherwise, before performing the upgrade please ensure that you have read the [upgrade documentation](https://github.com/grafana/loki/tree/main/production/helm/loki#upgrading-from-v2x) 
 on the Loki Chart repo.
 
+#### 27.1.0
+
+This version upgrades PostHog version to 1.40, which requires async migration 0006 to be completed (if you're on version <1.38 then upgrade to 1.39.1 and run 0005 and 0006 async migrations before upgrading to 1.40).
+
 ### 26.0.0
 
 This version upgrades the Prometheus service from version `2.31.1` to `2.36.2`. As part of this upgrade, we've also changed some default values in the `prometheus` stanza:
