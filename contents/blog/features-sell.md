@@ -1,6 +1,6 @@
 ---
 date: 2022-10-27
-title: "Please don't sell me on your \"why\""
+title: "Tell me about features, not benefits"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -59,7 +59,7 @@ We went for "Open Source Product OS. A suite of product and data tools. Built on
 
 This created [a large debate](https://github.com/PostHog/posthog.com/issues/3620) internally. 
 
-We ran an a/b test, using your favorite open source product OS, and happily saw it had no impact on conversion rate.
+We ran an a/b test, using your favorite open source product OS, and happily saw it had no impact on conversion rate. I see that as a win because it means we're not confusing users, and it means we are seen as wider than "just" product analytics, which will let us get wider usage from teams across lots of our products.
 
 ## Users are as clever as you
 
