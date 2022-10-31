@@ -566,19 +566,14 @@
         { "source": "/docs/plugins/build", "destination": "/docs/apps/build" },
         { "source": "/docs/data-model", "destination": "/docs/how-posthog-works/data-model" },
         { "source": "/docs/self-host/architecture", "destination": "/docs/how-posthog-works" },
-        { "source": "/manual/actions", "destination": "/docs/user-guides/actions" },
-        { "source": "/manual/annotations", "destination": "/docs/user-guides/annotations" },
         {
             "source": "/handbook/engineering/app-east",
             "destination": "/handbook/people/team-structure/product-analytics"
         },
-        { "source": "/manual/cohorts", "destination": "/docs/user-guides/cohorts" },
         { "source": "/handbook/people/team-structure/app-east", "destination": "/handbook/small-teams/app-east" },
-        { "source": "/manual/feature-flags", "destination": "/docs/user-guides/feature-flags" },
         { "source": "/docs/integrate/client/browser-extension", "destination": "/docs/integrate/browser-extension" },
         { "source": "/handbook/company/website-design-process", "destination": "/handbook/designing-posthog-website" },
         { "source": "/handbook/people/team-structure", "destination": "/handbook/small-teams" },
-        { "source": "/manual/group-analytics", "destination": "/docs/user-guides/group-analytics" },
         { "source": "/handbook/people/team-structure/why-small-teams", "destination": "/handbook/company/small-teams" },
         {
             "source": "/handbook/people/team-structure/app-west",
@@ -611,8 +606,6 @@
             "destination": "/handbook/small-teams/_team_template"
         },
         { "source": "/marketplace/clickhouse", "destination": "/partners/clickhouse" },
-        { "source": "/manual/insights", "destination": "/docs/user-guides/insights" },
-        { "source": "/manual/lifecycle", "destination": "/docs/user-guides/lifecycle" },
         { "source": "/marketplace/opsverse", "destination": "/partners/opsverse" },
         { "source": "/marketplace/restack", "destination": "/partners/restack" },
         { "source": "/marketplace/altinity", "destination": "/partners/altinity" },
