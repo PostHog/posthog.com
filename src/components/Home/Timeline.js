@@ -50,7 +50,7 @@ export default function Timeline() {
     )
 
     return (
-        <section className="px-4">
+        <section className="px-4 mb-12 md:mb-20">
             <h2 className={heading()}>We ship <br className="sm:hidden" /><span className="text-orange">weirdly fast</span></h2>
             <h3 className={heading('sm')}>
                 (How else could we have done all this?)
@@ -84,7 +84,7 @@ export default function Timeline() {
                         return Math.floor(new Date(date).getUTCMonth() / 3 + 1)
                     })
                     return (
-                        <div key={year} className="bg-white rounded  w-full mb-4 lg:mb-0 border-gray-accent-light border-dashed border-r last:border-r-0">
+                        <div key={year} className="bg-white rounded w-full mb-4 lg:mb-0 border-gray-accent-light border-dashed border-r last:border-r-0">
                             <h4 className="text-base py-1 font-bold text-center bg-gray-accent-light ">{year}</h4>
                             <div className="px-8">
                                 <ul role="list" className="py-1 px-0">
