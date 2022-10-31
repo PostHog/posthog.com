@@ -22,7 +22,7 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
         {
             title: 'Product roadmap',
             description: 'See what we\'re building, and help us decide what to build next.',
-            url: '/partners',
+            url: '/roadmap',
         },
         {
             title: 'Partner directory',
