@@ -71,7 +71,6 @@ We've added a new page to the Data Management section which lists warnings relat
 
 > **Note:** Self-hosted users managing kafka separately should create a new topic `clickhouse_ingestion_warnings` manually.
 
-
 ### New: App metrics
 
 ![app metrics](../images/blog/array/1-41-0-app-metrics-insight.png)
