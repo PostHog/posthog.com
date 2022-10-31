@@ -47,13 +47,15 @@ const Section = ({
     title,
     description,
     children,
+    className,
 }: {
     title: string | React.ReactNode
     description: string | React.ReactNode
     children: React.ReactNode
+    className?: string
 }) => {
     return (
-        <div className="xl:px-7 2xl:px-8 xl:pt-6 first:pl-0 last:pr-0 pb-6 xl:pb-12">
+        <div className={`xl:px-7 2xl:px-8 xl:pt-6 first:pl-0 last:pr-0 pb-6 xl:pb-12 ${className}`}>
             <h3 className="text-xl m-0">{title}</h3>
             <p className="text-[15px] m-0 text-black/60 mb-4">{description}</p>
             {children}
@@ -154,7 +156,7 @@ export default function Roadmap() {
                                     title="In progress"
                                     description={
                                         <>
-                                            Here’s what we’re building <strong>right now</strong>. (We choose milestones
+                                            Here’s what we're building <strong>right now</strong>. (We choose milestones
                                             using community feedback.)
                                         </>
                                     }
@@ -183,9 +185,13 @@ export default function Roadmap() {
                                 </Section>
                                 <Section
                                     title="Recently shipped"
-                                    description="Here’s what was included in our last array."
+                                    // description="Here's what was included in our last array."
+                                    className=""
                                 >
-                                    <CardContainer>
+                                    <p className="p-4 border border-dashed border-gray-accent-light rounded-sm text-[15px]">Check out <Link to="/blog/categories/product-updates">product updates</Link> on our blog to see what we've shipped recently.</p>
+                                    {/*
+                                        hidden until we have more historical content loaded
+                                        <CardContainer>
                                         {Object.keys(complete)
                                             .sort()
                                             .map((key) => {
@@ -199,7 +205,8 @@ export default function Roadmap() {
                                                     </Card>
                                                 )
                                             })}
-                                    </CardContainer>
+                                        </CardContainer>
+                                    */}
                                 </Section>
                             </div>
                         </PostLayout>
