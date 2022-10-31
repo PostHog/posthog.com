@@ -105,6 +105,12 @@ Finally, we can release one of our most requested features: the ability to chang
 
 For a while now, we've been having a hard time explaining to our families what we do for a living. This makes it even harder.
 
+### Improved: Formula mode in Trends
+
+We've seen that the relationship between Trends series and the formula was a bit unintuitive at times. To alleviate this, we've reworked the experience of our formula feature. Instead of an "Add formula" button, click "Enable formula mode" – "Series" become then "Variables", and the formula itself is presented right below them. Go right back at any time using "Disable formula mode".
+
+<img width="1176" alt="Trends query editor with the formula mode tooltip" src="https://user-images.githubusercontent.com/4550621/194917357-81f0f06d-2994-420b-b566-ef67d1e7d010.png">
+
 ### Improved: Recordings interface
 
 ![recordings interface](../images/blog/array/1-41-0-recordings-interface.png)
