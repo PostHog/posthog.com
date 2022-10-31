@@ -1,5 +1,5 @@
 ---
-title: Adding product data in the new tab page with Momentum Dash
+title: Adding product data in new tab with Momentum Dash
 sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
