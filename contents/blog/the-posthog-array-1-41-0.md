@@ -75,11 +75,9 @@ We've added a new page to the Data Management section which lists warnings relat
 
 ![app metrics](../images/blog/array/1-41-0-app-metrics-insight.png)
 
-Curious how well your apps are doing? Previously, you may have had to pour over the AWS logs, but now you can head to the new app metrics page to find out how many events an app has processed, how many retries were attempted and what errors may have occured. Very handy. 
+Curious how well your apps are doing? Previously, you may have had to pour over the AWS logs, but now you can head to the new app metrics page to find out how many events an app has processed, how many retries were attempted and what errors may have occured. Very handy. Want to take a look? Head to the apps page in your instance and click the chart symbol for any installed app.  
 
 App metrics are only available for users on Scale or Enterprise plans. 
-
-Want to take a look? Head to the apps page in your instance and click the chart symbol for any installed app.  
 
 > **Note:** Self-hosted users managing kafka separately should create a new topic `clickhouse_app_metrics` manually.
 
