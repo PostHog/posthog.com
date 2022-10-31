@@ -10,9 +10,9 @@ featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
 ---
 
-In [a previous product update](/blog/the-posthog-array-1-39-0) we announced a beta for a substantial change to the way we handle persons and events on PostHog. Today, after gathering your feedback and seeing the improvements to query performance, we’re rolling this change out to all PostHog Cloud users. 
+In [a previous product update](/blog/the-posthog-array-1-39-0) we announced a beta for a substantial change to the way we handle persons and events on PostHog. Today, after gathering your feedback and seeing the improvements to query performance, we’re rolling this change out to all PostHog Cloud users. We've also made this change available for Self-Hosted users, as part of the 1.41.0 update. 
 
-We've also made this change available for Self-Hosted users, as part of the 1.41.0 update. We've explained how to upgrade to 1.41.0 and run the necessary async migrations in [our 1.41.0 release highlights](/blog/the-posthog-array-1-41-0). 
+> **Need to upgrade a self-hosted instance?** We've explained how to upgrade to 1.41.0 and run the necessary async migrations in [our 1.41.0 release highlights](/blog/the-posthog-array-1-41-0). 
 
 This change combines [persons](/manual/persons) and [events](/manual/events) into a single ClickHouse table, adding person IDs and properties _onto_ events. This change also applies to groups, adding group properties and aggregation to the same table. 
 
