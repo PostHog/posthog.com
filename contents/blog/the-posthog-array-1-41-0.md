@@ -129,7 +129,7 @@ You think that's it? Not by a long shot! Version 1.41 also adds hundreds of othe
 - **Improvement:**  We have revamped our timezone system! We've squashed various bugs and improved the interval grouping to be more in line with expectations when filtering on dates.
 - **Fix:** WAU/MAU aggregation in Trends was quietly always grouped by day, even if a different interval (hour/week/month) was selected. Additionally, those modes showed zero users for periods with no relevant events, even if the real count should have been non-zero due to WAU/MAU being a trailing count. Both issues are now fixed, and we've expanded our test coverage of those aggregation modes to ensure their results are accurate going forward.
 - **Fix**: Experiment results will appear immediately after the first exposure to a user
-- **Fix**: The experiments table is now sortable
+- **Improvement**: The experiments table is now sortable
 
 View the commit log in GitHub for a full history of changes: [`release-1.40.0...release-1.41.0`](https://github.com/PostHog/posthog/compare/release-1.40.0...release-1.41.0).
 
