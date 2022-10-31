@@ -63,6 +63,15 @@ Questions like these used to be hard to answer with PostHog, but no more! We've 
 
 Previously there was no easy way to add context or links to a dashboard, meaning you may have to send long explanations when sharing a dashboard with teammates. That's why we've added the option for users on paid plans to add text cards where they can add any information they want, including metadata, images or gifs!
 
+### New: Ingestion warnings
+
+![ingestion warnings](../images/blog/array/1-41-0-ingestion.png)
+
+We've added a new page to the Data Management section which lists warnings related to data ingestion from the past 30 days. If you still try to merge identified users into others, the Ingestion Warning page is where we'll remind you that the merge got blocked.
+
+> **Note:** Self-hosted users managing kafka separately should create a new topic `clickhouse_ingestion_warnings` manually.
+
+
 ### New: App metrics
 
 ![app metrics](../images/blog/array/1-41-0-app-metrics-insight.png)
@@ -70,6 +79,8 @@ Previously there was no easy way to add context or links to a dashboard, meaning
 Curious how well your apps are doing? Previously, you may have had to pour over the AWS logs, but now you can head to the new app metrics page to find out how many events an app has processed, how many retries were attempted and what errors may have occured. Very handy. 
 
 Want to take a look? Head to the apps page in your instance and click the chart symbol for any installed app.  
+
+> **Note:** Self-hosted users managing kafka separately should create a new topic `clickhouse_app_metrics` manually.
 
 ### New: View recordings from anywhere
 
@@ -80,12 +91,6 @@ Want to take a look? Head to the apps page in your instance and click the chart 
 You can now view session recordings from different places within PostHog.
 
 Curious about how a specific person is interacting with your app? Navigate to a person detail page and check out their recordings. Want to see recordings for a specific event or action you've created? Check out the new view recordings button you can find in the event's detail page or from the events table.
-
-### New: Ingestion warnings
-
-![ingestion warnings](../images/blog/array/1-41-0-ingestion.png)
-
-We've added a new page to the Data Management section which lists warnings related to data ingestion from the past 30 days. If you still try to merge identified users into others, the Ingestion Warning page is where we'll remind you that the merge got blocked.
 
 ### New: Change your email yourself
 
