@@ -31,9 +31,9 @@ alias(email, backend_unique_id2)    # in the backend - the right order
 - New: Persons on events on by default
 - New: Count of events per user
 - New: Text cards on dashboards
+- New: Ingestion warnings
 - New: App metrics
 - New: View recordings from anywhere
-- New: Ingestion warnings
 - New: Change your email yourself
 - New: Hedgehog mode
 - Improved: Recordings interface
