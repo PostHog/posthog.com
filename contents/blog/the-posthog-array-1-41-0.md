@@ -87,7 +87,7 @@ App metrics are only available for users on Scale or Enterprise plans.
 
 ![view recordings from anywhere2](../images/blog/array/1-41-0-view-recordings-anywhere2.png)
 
-You can now view session recordings from different places within PostHog.
+You can now view session recordings from lots of different places within PostHog, making it easier to find relevant recordings.
 
 Curious about how a specific person is interacting with your app? Navigate to a person detail page and check out their recordings. Want to see recordings for a specific event or action you've created? Check out the new view recordings button you can find in the event's detail page or from the events table.
 
@@ -105,9 +105,9 @@ For a while now, we've been having a hard time explaining to our families what w
 
 ### Improved: Formula mode in Trends
 
-We've seen that the relationship between Trends series and the formula was a bit unintuitive at times. To alleviate this, we've reworked the experience of our formula feature. Instead of an "Add formula" button, click "Enable formula mode" – "Series" become then "Variables", and the formula itself is presented right below them. Go right back at any time using "Disable formula mode".
-
 <img width="1176" alt="Trends query editor with the formula mode tooltip" src="https://user-images.githubusercontent.com/4550621/194917357-81f0f06d-2994-420b-b566-ef67d1e7d010.png">
+
+We've seen that the relationship between Trends series and formula was a bit unintuitive at times. To alleviate this, we've reworked the experience of our formula feature. Instead of an "Add formula" button, click "Enable formula mode" – "Series" then become "Variables", and the formula itself is presented right below them.
 
 ### Improved: Recordings interface
 
