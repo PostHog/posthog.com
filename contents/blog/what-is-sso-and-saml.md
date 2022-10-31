@@ -1,5 +1,5 @@
 ---
-date: 2022-10-22
+date: 2022-10-31
 title: "What is SSO and why you should enable it for PostHog"
 rootPage: /blog
 sidebar: Blog
