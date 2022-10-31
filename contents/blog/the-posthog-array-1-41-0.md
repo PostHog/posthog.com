@@ -28,16 +28,16 @@ alias(email, backend_unique_id2)    # in the backend - the right order
 
 **Release highlights:**
 
-- New: Persons on events on by default
-- New: Count of events per user
-- New: Text cards on dashboards
-- New: Ingestion warnings
-- New: App metrics
-- New: View recordings from anywhere
-- New: Change your email yourself
-- New: Hedgehog mode
-- Improved: Recordings interface
-- One more thing: Site apps 
+- [New: Persons on events on by default](#new-persons-on-events-on-by-default)
+- [New: Count of events per user](#new-counts-of-events-per-user)
+- [New: Text cards on dashboards](#new-text-cards-on-dashboards)
+- [New: Ingestion warnings](#new-ingestion-warnings)
+- [New: App metrics](#new-app-metrics)
+- [New: View recordings from anywhere](#new-view-recordings-from-anywhere)
+- [New: Change your own email](#new-change-your-own-email)
+- [New: Hedgehog mode](#new-hedgehog-mode)
+- [Improved: Recordings interface](#improved-recordings-interface)
+- [One more thing: Site apps](#one-more-thing-site-apps)
 
 ### New: Persons on events on by default
 
@@ -94,7 +94,7 @@ You can now view session recordings from different places within PostHog.
 
 Curious about how a specific person is interacting with your app? Navigate to a person detail page and check out their recordings. Want to see recordings for a specific event or action you've created? Check out the new view recordings button you can find in the event's detail page or from the events table.
 
-### New: Change your email yourself
+### New: Change your own email
 
 ![change your password](../images/blog/array/1-41-0-password.png)
 
