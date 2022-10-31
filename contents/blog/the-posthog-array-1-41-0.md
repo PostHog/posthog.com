@@ -53,7 +53,7 @@ You won’t see any UI changes as a result of this change — persons will still
 
 Have you ever asked yourself '*What's the average average number of purchases per user?*' or '*What's the maximum number of forms submitted per user?'* 
 
-Questions like these used to be hard to answer with PostHog, but no more! We've added a new series option for insights, enabling you to see the count of events per user - including sub-options for seeing the averages, minimum and maximum count of events per user. 
+Questions like these used to be hard to answer with PostHog, but no more! Use the new "Count per user" aggregation mode available in Trends to analyze _how intensely_ your users use the product and its features. "Count per user" supports common statistical functions for crunching the per-user numbers: average, median, minimum, maximum, 90th/95th/99th percentile.
 
 **Bonus:** While working on this feature, we also took the opportunity to improve our aggregation selector UI: aggregation by property value is now presented with more clarity.
 
