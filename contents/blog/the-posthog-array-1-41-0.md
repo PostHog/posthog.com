@@ -1,6 +1,6 @@
 ---
-date: 2022-10-31
-title: "Array 1.41.0: Enable hedgehog mode"
+date: 2022-11-02
+title: "Array 1.41.0: Improving performance by up to 400%"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
