@@ -9,7 +9,7 @@ topics:
 
 ### What does the Filter Out app do?
 
-The Filter Out app enables you to create filters which prevent PostHog from ingesting data from your product unless it passes those filters. Any events which do not match the filter requirements are skipped over and are not ingested. 
+This app enables you to create filters which prevent PostHog from ingesting data from your product unless it passes those filters. Any events which do not match the filter requirements are skipped over and are not ingested. 
 
 ###### What are the requirements for this app?
 
