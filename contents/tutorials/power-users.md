@@ -3,7 +3,7 @@ title: How to identify and analyze power users
 sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
-date: 2022-10-26
+date: 2022-10-31
 featuredImage: ../images/tutorials/banners/power-users.png
 topics: ['trends', 'cohorts']
 ---
@@ -18,7 +18,7 @@ In this tutorial, we’ll cover how to **identify** and **analyze power users** 
 
 ## Defining your power users
 
-There is no one-size-fits-all for a power users – every company and product has its own. Defining what they do is key to identifying and analyzing them. Ideally, your power users should align with your ideal customer profile and your [key product metrics](/blog/b2b-saas-product-metrics.
+There is no one-size-fits-all definition for power users – every company and product has its own. Defining what they do is key to identifying and analyzing them. Ideally, your power users should align with your ideal customer profile and your [key product metrics](/blog/b2b-saas-product-metrics).
 
 One common aspect between definitions of power users is high usage, whether that is visiting every day, using feature lots, or long session times. A power user relies on the product, it is core to their workflow. They also use advanced features more than average.
 
@@ -32,7 +32,7 @@ You can use PostHog to define exactly what a power user looks like. To do so, id
 
 If a feature shows higher retention, repeated use, and a large difference in usage to the average, it is likely valuable to a power user. You can use data related to this feature along with qualitative analysis, such as insights from user interviews and session recordings, to solidify the definition of your power user.
 
-For example, at PostHog, we define power users as users with a high number of [discoveries](/handbook/product/metrics). It is a metric users do repeatedly every week, distinguishes engaged users, and creates higher retention. We've done tests to confirm it's importance, checking it against other potential definitions, for example:
+For example, at PostHog, we define power users as users with a high number of [discoveries](/handbook/product/metrics). It is a metric users do repeatedly every week, distinguishes engaged users, and creates higher retention. We've done tests to confirm its importance, checking it against other potential definitions, for example:
 
 > A test carried out on Oct 6 with cohorts from Aug 8 to Aug 29, 2021 revealed that Discoveries show 2.3x more retained users (in absolute numbers) and had an F1-score 33% higher than for Discovered Learnings.
 
@@ -70,7 +70,9 @@ With all that, you’ve set up a power user cohort and begun to do analysis. Fro
 ## Further reading
 
 - [Calculating average session duration, time on site, and other session-based metrics](/tutorials/session-metrics): use your newly created power user cohort to calculate session-based metrics like time on site and pages per session with help from this tutorial.
+
 - [How to run Experiments without feature flags](/tutorials/experiments): Learn how to improve your power user experience by running experiments without feature flags.
+
 - [How we made something people want](/blog/making-something-people-want): Learn how we make something people want (and create power users by doing it) in this blog post by our CEO James.
 
 <NewsletterTutorial compact/>
