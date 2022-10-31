@@ -21,6 +21,7 @@ const Roadmap = () => {
                   width={367}
                   height={348}
                   imgClassName=""
+                  placeholder="blurred"
                   alt={`Here's what's cookin', good lookin'`}
                   src="./images/experiment-hog.png"
               />
@@ -28,7 +29,7 @@ const Roadmap = () => {
           <div className="col-span-2">
             <h2 className="m-0 text-5xl md:text-7xl text-primary text-center md:text-left">The future of PostHog <span className="text-red">depends on you</span></h2>
             <h3 className="m-0 text-lg md:text-[20px] leading-tight md:text-xl text-center md:text-left font-semibold mt-2 md:mt-3 opacity-75 text-primary">
-            We publish our roadmap. Tell us what we should build next – and get early access.
+            We publish our product roadmap. Tell us what we should build next – and get early access.
             </h3>
 
             <div className="mt-4 mb-12 text-center md:text-left">
