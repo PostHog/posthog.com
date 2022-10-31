@@ -1,5 +1,5 @@
 ---
-date: 2022-10-19
+date: 2022-10-31
 title: "How to choose and measure growth loops"
 rootPage: /blog
 sidebar: Blog
