@@ -55,7 +55,7 @@ Have you ever asked yourself '*What's the average average number of purchases pe
 
 Questions like these used to be hard to answer with PostHog, but no more! We've added a new series option for insights, enabling you to see the count of events per user - including sub-options for seeing the averages, minimum and maximum count of events per user. 
 
-**Bonus update:** While working on this feature, we also took the opportunity to improve our math selector UI.
+**Bonus:** While working on this feature, we also took the opportunity to improve our aggregation selector UI: aggregation by property value is now presented with more clarity.
 
 ### New: Text cards on dashboards
 
