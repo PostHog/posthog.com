@@ -23,7 +23,7 @@ This depends entirely on who joins your board, and how you've pitched to them.
 
 Our experience has been an intense focus on finding the Ideal Customer Profile, and trying to focus as much as possible on the right users. Yes, we track revenue, signups and so on, but our board sees those as the output of building a great product for a specific set of end users. 
 
-We have to prepare for the board meetings - now that we've got the process down, these usually take a few hours to do. We keep the majority of the meeting focussed on one or two discussion topics rather than presenting an update. The guidance our board have given us has outweighed the cost of setting up and running these sessions every 3 months. And, frankly, if I know someone is marking my homework, it encourages me to do a better job. Sidenote: is this the real reason we're open source?!
+We have to prepare for the board meetings - now that we've got the process down, these usually take a few hours to do. We keep the majority of the meeting focused on one or two discussion topics rather than presenting an update. The guidance our board have given us has outweighed the cost of setting up and running these sessions every 3 months. And, frankly, if I know someone is marking my homework, it encourages me to do a better job. Sidenote: is this the real reason we're open source?!
 
 ## Control
 
@@ -78,7 +78,7 @@ Neither of these sounds like a relaxing exercise!
 
 We started by bootstrapping. The reality at PostHog is that Tim and I committed 12 months of personal runway to getting off the ground. We simply paid ourselves nothing for the first 6 months. That created stress - we had to save up ahead of time, then had to spend as little as possible in our personal lives.
 
-Then we got into [YCombinator](https://ycombinator.com). The personal stress evaporated and we focussed 100% on the business.
+Then we got into [YCombinator](https://ycombinator.com). The personal stress evaporated and we focused 100% on the business.
 
 What I didn't realize at the time is many teams will raise a pre-seed round, ahead of real traction or having a team - this reduces the barrier of needing a bunch of savings.
 
