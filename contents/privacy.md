@@ -99,7 +99,7 @@ PostHog at its sole discretion may make use of company logos where those compani
 
 ### International transfer of personal information
 
-The Websites are hosted in the United States and the personal information we collect will be stored and processed on our servers in the United States. Our employees, contractors and affiliated organizations that process information for us as described above may be located in the United States or in other countries outside of your home country which may have different data protection standards to those which apply in your home country.
+The Websites are hosted in the United States, or in Germany if you are a PostHog Cloud customer who has selected EU hosting, and the personal information we collect will be stored and processed on our servers in either the United States or Germany. Our employees, contractors and affiliated organizations that process information for us as described above may be located in the United States or in other countries outside of your home country which may have different data protection standards to those which apply in your home country.
 
 Where your personal information is transferred outside of the EEA, Switzerland and UK and where this is to a country which is not subject to an adequacy decision by the EU Commission or considered adequate as determined by applicable data protection laws, we will take steps to ensure your personal information is adequately protected by safeguards such as Standard Contractual Clauses (“SCCs”) approved by the EU Commission or by the UK Government. A copy of the relevant mechanism can be obtained for your review on request by using the contact details in the ‘Contacting PostHog About Your Privacy’ section of this Privacy Policy.
 
@@ -127,7 +127,7 @@ We do not use third party tracking services to collect information about you.
 
 ## Global privacy practices and your rights
 
-Information we collect will be stored and processed in the United States in accordance with this Privacy Policy but we understand that users from other countries may have different expectations and rights with regard to their privacy. For all Website visitors and users, no matter their country of location, we will:
+Information we collect may be stored and processed in the United States in accordance with this Privacy Policy but we understand that users from other countries may have different expectations and rights with regard to their privacy. For all Website visitors and users, no matter their country of location, we will:
 
 * provide clear methods of unambiguous, informed consent when we do collect your personal information and where required by applicable law;
 * only collect the minimum amount of personal information necessary for the purpose it is collected for, unless you choose to provide us more;
@@ -212,7 +212,7 @@ If you are a national of countries in the European Economic Area (EEA), United K
 
 Your personal information may be processed in the United States, the country where you have applied for a job, or any other country where PostHog has team members or operations.
 
-PostHog may transfer, store, or process your personal information in a country outside your jurisdiction, including countries outside the European Economic Area (“EEA”), Switzerland, and the United Kingdom. If we transfer personal information from the EEA, Switzerland, or United Kingdom to a country outside it, such as the United States, we will enter into EU standard contractual clauses with the data importer, or take other measures to provide an adequate level of data protection.
+PostHog may transfer, store, or process your personal information in a country outside your jurisdiction, including countries outside the European Economic Area (“EEA”), Switzerland, and the United Kingdom. If we transfer personal information from the EEA, Switzerland, or United Kingdom to a country outside it, such as the United States, we will enter into Standard Contractual Clauses (“SCCs”) approved by the EU Commission or by the UK Government,  with the data importer, or take other measures to provide an adequate level of data protection.
 
 ### How long we keep applicant personal data
 
@@ -245,4 +245,4 @@ Although most changes are likely to be minor, PostHog may change its privacy pol
 
 We may also provide notification to users who have provided us email addresses of material changes to this Privacy Policy through our Website. PostHog encourages visitors to frequently check this page for any minor changes to its Privacy Policy. Your continued use of this site after any change in this Privacy Policy will constitute your acceptance of such change.
 
-_Jun 2022_
+_October 2022_
