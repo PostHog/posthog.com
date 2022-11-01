@@ -228,7 +228,7 @@ const Control = (): JSX.Element => {
                     </div>
                 </div>
             </section>
-            
+
             <section className={`${section}`}>
                 <h4 className="mb-0">Products</h4>
                 <p className="text-[15px] opacity-60 pb-2 mb-8 border-b border-dashed border-gray-accent-light">
@@ -257,7 +257,11 @@ const Control = (): JSX.Element => {
                     </div>
 
                     <div className={`${gridCell} ${gridCellBottom} lg:order-7`}>
-                        <Breakdown description="No credit card required for up to 10,000 events/mo" pricingOption="cloud" />
+                        <Breakdown
+                            priceLength={8}
+                            description="No credit card required for up to 10,000 events/mo"
+                            pricingOption="cloud"
+                        />
                     </div>
 
                     <header className={`${gridCell} ${gridCellTop} lg:order-2`}>
@@ -282,6 +286,7 @@ const Control = (): JSX.Element => {
 
                     <div className={`${gridCell} ${gridCellBottom} lg:order-8`}>
                         <Breakdown
+                            priceLength={6}
                             description="No credit card required for up to 500 sessions/mo"
                             pricingOption="session-recording"
                         />
