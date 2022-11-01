@@ -625,6 +625,7 @@
             "destination": "/handbook/small-teams/team-structure"
         },
         { "source": "/eu-cloud", "destination": "/eu" },
-        { "source": "/handbook/strategy/roadmap", "destination": "/roadmap" }
+        { "source": "/handbook/strategy/roadmap", "destination": "/roadmap" },
+        { "source": "/docs/architecture/ingestion-pipeline", "destination": "/docs/how-posthog-works/ingestion-pipeline" }
     ]
 }
