@@ -105,7 +105,7 @@ For a while now, we've been having a hard time explaining to our families what w
 
 ### Improved: Formula mode in Trends
 
-<img width="1176" alt="Trends query editor with the formula mode tooltip" src="https://user-images.githubusercontent.com/4550621/194917357-81f0f06d-2994-420b-b566-ef67d1e7d010.png">
+![Trends query editor with the formula mode tooltip](https://user-images.githubusercontent.com/4550621/194917357-81f0f06d-2994-420b-b566-ef67d1e7d010.png)
 
 We've seen that the relationship between Trends series and formula was a bit unintuitive at times. To alleviate this, we've reworked the experience of our formula feature. Instead of an "Add formula" button, click "Enable formula mode" – "Series" then become "Variables", and the formula itself is presented right below them.
 
