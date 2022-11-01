@@ -6,7 +6,7 @@ showTitle: true
 
 Incidents are going to happen.
 
-## When to raise an incident
+## When to raise an incident
 
 **When in doubt, raise an incident.** We'd much rather have declared an incident which turned out not to be an incident. Many incidents take too long to get called, or are missed completely because someone didn't ring the alarm when they had a suspicion something was wrong.
 
@@ -15,7 +15,7 @@ To declare an incident, type `/incident` anywhere in Slack. This will create a n
 Anyone can declare an incident, including non-engineers. If in doubt, check with your nearest engineer.
 
 Some things that should definitely be an incident
-- `app.posthog.com` being completely unavailable (not just for you)
+- `app.posthog.com` (PostHog Cloud US) or `eu.posthog.com` (PostHog Cloud EU) being completely unavailable (not just for you)
 - No insights can be created
 - Feature flags are not being returned at all, or `/decide` is down
 - Various alerts defined as critical, such as disk space full, OOM or >5 minute ingestion lag
@@ -26,7 +26,7 @@ Things that _shouldn’t_ be an incident
 - Unable to save insights, create feature flags
 
 ### Incident severity
-Please refer to the following guidance when choosing the severity for your incident. If you are unsure, it's usually better to over-estimate than under-estimate! 
+Please refer to the following guidance when choosing the severity for your incident. If you are unsure, it's usually better to over-estimate than under-estimate!
 
 #### Minor
 A minor-severity incident does not usually require paging people, and can be addressed within normal working hours. It is higher priority than any bugs however, and should come before sprint work.
@@ -90,4 +90,4 @@ During a process like this, trying to come up with action items means losing foc
 If an incident was pretty uneventful we can skip this step.
 
 
-_Thanks to (this article)[Incident Review and Postmortem Best Practices] from Pragmatic Engineer_
+_Thanks to [Incident Review and Postmortem Best Practices](https://blog.pragmaticengineer.com/postmortem-best-practices/) from Pragmatic Engineer_
