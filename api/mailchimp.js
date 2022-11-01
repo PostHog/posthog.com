@@ -5,7 +5,7 @@ const md5 = require('md5')
 const handler = async (req, res) => {
     let { body } = req
     if (!body) return res.status(500).json({ error: 'Missing body' })
-    const { email, tag } = body
+    const { email, tag } = JSON.parse(body)
     if (!email || !tag) return { statusCode: 500, body: 'Missing required fields' }
     const data = await fetch(`https://us19.api.mailchimp.com/3.0/lists/ef3044881e/members/${md5(email)}/tags`, {
         headers: {

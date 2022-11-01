@@ -4,7 +4,7 @@ const hubspot = require('@hubspot/api-client')
 const handler = async (req, res) => {
     let { body } = req
     if (!body) return res.status(500).json({ error: 'Missing body' })
-    const { email, firstName, lastName } = body
+    const { email, firstName, lastName } = JSON.parse(body)
 
     if (!email || !firstName || !lastName) {
         return res.status(500).json({ error: 'Missing required fields' })
