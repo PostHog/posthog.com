@@ -4,6 +4,10 @@ sidebar: Docs
 showTitle: true
 ---
 
+### 29.0.0
+
+This version upgrades PostHog version to 1.41.0 which comes with some breaking changes upgrade guide is <here>.
+
 ### 28.0.0
 
 This version changes the supported Kubernetes version to >=1.23 <= 1.25. Kubernetes 1.22 support has been dropped as it has reached end of life on 2022-10-28.
@@ -18,6 +22,7 @@ on the Loki Chart repo.
 
 #### 27.1.0
 
+If you're upgrading the chart directly to 29.0.0 (recommended) ignore this (and run the 0005 migration on top of 1.41.0 if not ran already).
 This version upgrades PostHog version to 1.40, which requires async migration 0006 to be completed (if you're on version <1.38 then upgrade to 1.39.1 and run 0005 and 0006 async migrations before upgrading to 1.40).
 
 ### 26.0.0
