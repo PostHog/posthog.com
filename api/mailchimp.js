@@ -2,7 +2,7 @@
 const fetch = require('node-fetch')
 const md5 = require('md5')
 
-exports.handler = async (req, res) => {
+const handler = async (req, res) => {
     let { body } = req
     if (!body) return res.status(500).json({ error: 'Missing body' })
     const { email, tag } = body
@@ -16,3 +16,5 @@ exports.handler = async (req, res) => {
     })
     return res.status(200).json(data)
 }
+
+export default handler
