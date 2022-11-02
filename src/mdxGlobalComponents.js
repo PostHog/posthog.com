@@ -15,6 +15,7 @@ import { Apps } from './components/Apps'
 import { AppsList } from './components/AppsList'
 import { ArrayCTA } from './components/ArrayCTA'
 import { AshbyOpenRoles } from './components/AshbyOpenRoles'
+import { Banner } from './components/Banner'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BlockQuote } from './components/BlockQuote'
 import { Blog } from './components/Blog'
@@ -145,6 +146,7 @@ export const shortcodes = {
     AppsList,
     ArrayCTA,
     AshbyOpenRoles,
+    Banner,
     BasicHedgehogImage,
     BlockQuote,
     Blog,
