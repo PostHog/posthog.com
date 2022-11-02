@@ -28,7 +28,6 @@ You won’t see any UI changes — persons will still have their own Persons & G
 
 - **Self-hosting users will see a storage increase**. This is due to extra information being stored in your self-hosted ClickHouse. It's difficult to give an estimate on this as the impact will vary a lot depending on configuration and usage per organization. 
 
-Self-hosting users will need to [update to the latest version of PostHog](/docs/runbook/upgrading-posthog), while the change will be automatically rolled out for users on PostHog Cloud. 
 
 While improving performance has been a major motivation for this change, this is also a crucial step in ensuring PostHog can continue to scale effectively. 
 
