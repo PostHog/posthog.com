@@ -130,10 +130,15 @@ Site apps can be useful for a number of potential tasks, such as displaying feed
 You think that's it? Not by a long shot! Version 1.41 also adds hundreds of other improvements and fixes, including...
 
 - **Improvement:**  You can now [send analytics events from GitHub actions, to PostHog](https://github.com/PostHog/posthog-github-action)
+
 - **Improvement:**  We have revamped our timezone system! We've squashed various bugs and improved the interval grouping to be more in line with expectations when filtering on dates.
+
 - **Fix:** WAU/MAU aggregation in Trends was quietly always grouped by day, even if a different interval (hour/week/month) was selected. Additionally, those modes showed zero users for periods with no relevant events, even if the real count should have been non-zero due to WAU/MAU being a trailing count. Both issues are now fixed, and we've expanded our test coverage of those aggregation modes to ensure their results are accurate going forward.
+
 - **Fix**: Experiment results will appear immediately after the first exposure to a user
+
 - **Improvement**: The experiments table is now sortable
+
 - **Improvement**: Hold down "shift" when using the toolbar to click on elements below the heatmap.
 
 View the commit log in GitHub for a full history of changes: [`release-1.40.0...release-1.41.0`](https://github.com/PostHog/posthog/compare/release-1.40.0...release-1.41.0).
@@ -145,13 +150,21 @@ We’re always working on improving PostHog and would love to talk to you! Pleas
 We always welcome contributions from our community and this time we want to thank the following people...
 
 - [@ShaneMaglangit](https://github.com/ShaneMaglangit) for fixing [a bug when buttons could be disabled on some insights](https://github.com/PostHog/posthog/pull/12332).
+
 - [@RCMarron](https://github.com/rcmarron), a former team member who still helped [meter some rate limits](https://github.com/PostHog/posthog/pull/12006). We miss you, Rick!
+
 - [@Codepitbull](https://github.com/codepitbull) who helped us with [shading transitive dependencies](https://github.com/PostHog/posthog-java/pull/23).
+
 - [@GMA](https://github.com/gma) for clarifying that [`brotli` is required on all architectures](https://github.com/PostHog/posthog.com/pull/3925).
+
 - [@ByteMerger](https://github.com/bytemerger) for [updating an app logo](https://github.com/PostHog/posthog-engage-so-plugin/pull/3) for [our Engage connector](/apps/engage-connector).
+
 - [@Balajivenkatesh](https://github.com/balajivenkatesh) for [improving the way we send data to a webhook](https://github.com/PostHog/posthog-patterns-app/pull/1) in [our Patterns connector](/apps/patterns-connector).
-- [@msmans](https://github.com/msmans) for [adding ClickHouse pod distribution](https://github.com/PostHog/charts-clickhouse/pull/582). 
+
+- [@msmans](https://github.com/msmans) for [adding ClickHouse pod distribution](https://github.com/PostHog/charts-clickhouse/pull/582).
+ 
 - [@krzd](https://github.com/krzd) for [updating some Debian-specific documentation](https://github.com/PostHog/posthog.com/pull/4307).
+
 - [@jacobwgillespie], co-founder of [Depot](https://depot.dev/), for [moving us from Yarn 1 to Yarn 3](https://github.com/PostHog/posthog/pull/12520). A great PR!
 
 Do you want to get involved in making PostHog better? Check out our [contributing resources](/docs/contribute) to get started, or head to [our Slack group](/slack). We also have a [list of Good First Issues](https://github.com/PostHog/posthog/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) for ideas on where you can contribute!
