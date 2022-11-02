@@ -7,14 +7,7 @@ export interface IToast {
     createdAt?: number
 }
 
-export const useToast = (): {
-    toasts: IToast[]
-    addToast: (toast: IToast) => void
-    removeToast: (createdAt: number) => void
-} => {
+export const useToast = () => {
     const toast = useContext(Context)
-    if (toast === undefined) {
-        throw Error('No org has been specified using Provider')
-    }
     return toast
 }
