@@ -3,7 +3,7 @@ title: How to build a site app
 sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
-date: 2022-10-28
+date: 2022-11-02
 featuredImage: ../images/tutorials/banners/build-site-app.png
 topics: ["apps"]
 ---
