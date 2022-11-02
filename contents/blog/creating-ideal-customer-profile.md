@@ -1,6 +1,6 @@
 ---
 date: 2022-11-01
-title: "How we found our Ideal Customer Profilen"
+title: "How we found our Ideal Customer Profile"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
