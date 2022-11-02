@@ -341,7 +341,6 @@
             "source": "/docs/contribute/coding-conventions",
             "destination": "/handbook/engineering/conventions/frontend-coding"
         },
-        { "source": "/docs/contribute/developing-locally", "destination": "/handbook/engineering/developing-locally" },
         { "source": "/handbook/engineering/mdx", "destination": "/handbook/engineering/posthog-com/mdx-setup" },
         { "source": "/docs/contribute/project-structure", "destination": "/handbook/engineering/project-structure" },
         { "source": "/docs/contribute/stack", "destination": "/handbook/engineering/stack" },
@@ -370,7 +369,6 @@
             "source": "/handbook/engineering/posthog-com/developing-the-website",
             "destination": "/docs/contribute/contribute-to-website"
         },
-        { "source": "/handbook/engineering/developing-locally", "destination": "/docs/contribute/developing-locally" },
         { "source": "/handbook/engineering/project-structure", "destination": "/docs/contribute/project-structure" },
         { "source": "/handbook/engineering/stack", "destination": "/docs/contribute/stack" },
         { "source": "/handbook/engineering/cloud-providers", "destination": "/handbook/engineering/aws" },
