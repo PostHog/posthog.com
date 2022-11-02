@@ -404,6 +404,16 @@
                     ]
                 },
                 {
+                    "name": "ClickHouse manual",
+                    "url": "",
+                    "children": [
+                        {
+                            "name": "Data storage or what is a MergeTree",
+                            "url": "/handbook/engineering/clickhouse/data-storage"
+                        }
+                    ]
+                },
+                {
                     "name": "Shipping things, step by step",
                     "url": "/handbook/engineering/development-process"
                 },
