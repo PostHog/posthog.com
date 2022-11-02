@@ -81,6 +81,14 @@ App metrics are only available for users on Scale or Enterprise plans.
 
 > **Note:** Self-hosted users managing kafka separately should create a new topic `clickhouse_app_metrics` manually.
 
+### Improved: Recordings interface
+
+![recordings interface](../images/blog/array/1-41-0-recordings-interface.png)
+
+We've heard feedback recently that session recording was incredibly useful, but didn't spark much joy for those who used it. So, we've overhauled the entire interface for session recordings to make it easier to use and to help you find relevant recordings faster. 
+
+We think session recording feels like an entirely new experience now, so check it out. Now's the perfect time to explore [the console log too](/manual/recordings#console-logs-recording-beta)!
+
 ### New: View recordings from anywhere
 
 ![view recordings from anywhere1](../images/blog/array/1-41-0-view-recordings-anywhere1.png)
@@ -109,14 +117,6 @@ For a while now, we've been having a hard time explaining to our families what w
 
 We've seen that the relationship between Trends series and formula was a bit unintuitive at times. To alleviate this, we've reworked the experience of our formula feature. Instead of an "Add formula" button, click "Enable formula mode" – "Series" then become "Variables", and the formula itself is presented right below them.
 
-### Improved: Recordings interface
-
-![recordings interface](../images/blog/array/1-41-0-recordings-interface.png)
-
-We've heard feedback recently that session recording was incredibly useful, but didn't spark much joy for those who used it. So, we've overhauled the entire interface for session recordings to make it easier to use and to help you find relevant recordings faster. 
-
-We think session recording feels like an entirely new experience now, so check it out. Now's the perfect time to explore [the console log too](/manual/recordings#console-logs-recording-beta)!
-
 ### One more thing: Site apps 
 
 ![site-apps](../images/blog/array/1-41-0-site-apps.gif)
@@ -134,6 +134,7 @@ You think that's it? Not by a long shot! Version 1.41 also adds hundreds of othe
 - **Fix:** WAU/MAU aggregation in Trends was quietly always grouped by day, even if a different interval (hour/week/month) was selected. Additionally, those modes showed zero users for periods with no relevant events, even if the real count should have been non-zero due to WAU/MAU being a trailing count. Both issues are now fixed, and we've expanded our test coverage of those aggregation modes to ensure their results are accurate going forward.
 - **Fix**: Experiment results will appear immediately after the first exposure to a user
 - **Improvement**: The experiments table is now sortable
+- **Improvement**: Hold down "shift" when using the toolbar to click on elements below the heatmap.
 
 View the commit log in GitHub for a full history of changes: [`release-1.40.0...release-1.41.0`](https://github.com/PostHog/posthog/compare/release-1.40.0...release-1.41.0).
 
