@@ -18,7 +18,7 @@ Even better, if there isn’t an app available that does what you need then you 
 
 To follow along with this tutorial, you’ll need...
 
-- A PostHog instance
+- A PostHog instance (self-hosted if you want to upload and test on your own instance)
 - Some knowledge of Javascript or Typescript
 
 ## Introducing PostHog’s app source editor
@@ -26,9 +26,11 @@ To follow along with this tutorial, you’ll need...
 
 PostHog’s source editor is a built-in tool for writing your own apps directly into PostHog. Apps which you create using the source editor are not publicly available — they exist only for your instance and cannot be seen by other organizations. You can submit your apps for others to use (and we strongly encourage it!), but more on that later. 
 
-To access the source editor, log in to your PostHog instance and select ‘_Browse apps_’ from the main menu on the left hand side. From there, select the ‘_Advanced_’ tab, name your app in the ‘_App editor_’ field and hit ‘_Start coding_’. 
+To access the source editor, log in to your self-hosted PostHog instance and select ‘_Browse apps_’ from the main menu on the left hand side. If you're self-hosted, select the ‘_Advanced_’ tab, name your app in the ‘_App editor_’ field and hit ‘_Start coding_’.
 
-![Launching the source editor(../images/tutorials/source-editor/app-editor-source-launch.png)
+> **Note:** You'll only be able to upload and test your own apps on a self-hosted PostHog instance. If you want to build an app and have a PostHog Cloud instance, click '[_Build your own_](/docs/apps/build)' in the description on the Apps page. You can still publish and use apps with a cloud instance, but apps need to be reviewed by us first before publishing. Read more about the [review process here](/docs/apps/build/tutorial#submitting-your-app).
+
+![Launching the source editor](../images/tutorials/source-editor/app-editor-source-launch.png)
 
 Once you’ve named the app, it will be created in your available apps and automatically enabled — don’t worry, it can’t do anything yet. You can change that by selecting ‘_Edit source_’. 
 
@@ -116,7 +118,7 @@ In this example, the `processEvent` function receives the event before it is ing
 
 ## Testing your app
 
-Testing your new app on your PostHog instance is as simple as hitting ‘_Save_’, ensuring your app is enabled, then checking for the desired result. 
+Testing your new app on your self-hosted PostHog instance is as simple as hitting ‘_Save_’, ensuring your app is enabled, then checking for the desired result.
 
 To get detailed information on how your app is working, it’s useful to look at the logs in the Javascript console — you can access this for each app individually by pressing the logs button in the app UI. You can see it highlighted in the image below. 
 
