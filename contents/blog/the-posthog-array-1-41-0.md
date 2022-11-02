@@ -16,9 +16,9 @@ Want to know more about what we're up to? [Subscribe to HogMail, our newsletter]
 Due to changes in this update, it is important check `alias` usage before [upgrading PostHog](/docs/runbook/upgrading-posthog) to 1.41.0 on a self-hosted instance. Further [information is available in the docs](/docs/integrate/identifying-users#considerations), but for example, assuming `email` is used as the identified user id, then: 
 
 ```
-identify(email)                                   # in the frontend
-alias(backend_unique_id, email)      # in the backend - THIS WILL NOT WORK
-alias(email, backend_unique_id2)    # in the backend - the right order
+identify(email)                     # in the frontend
+alias(email, backend_unique_id)     # in the backend - this works
+alias(backend_unique_id, email)     # in the backend - THIS WILL NOT WORK
 ```
 > **If you haven't run async migration 0007 before:** Before updating to 1.41.0, check [ingestion warnings](#new-ingestion-warnings) and solve any outstanding issues. Then upgrade to 1.41.0 and then run async migration 0007 at `<your-posthog-site>/instance/async_migrations` (if you haven't ran 0005 yet start with that, then 0006 and finally 0007). 
 
