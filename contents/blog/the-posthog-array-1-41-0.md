@@ -22,7 +22,7 @@ alias(email, backend_unique_id2)    # in the backend - the right order
 ```
 > **If you haven't run async migration 0007 before:** Before updating to 1.41.0, check [ingestion warnings](#new-ingestion-warnings) and solve any outstanding issues. Then upgrade to 1.41.0 and then run async migration 0007 at `<your-posthog-site>/instance/async_migrations` (if you haven't ran 0005 yet start with that, then 0006 and finally 0007). 
 
-> **If you have completed async migration 0007 before:** If you have changed anything regarding `alias` or based on ingestion warnings, you must re-run async migration 0007 by [connecting to Postgres](/docs/self-host/deploy/troubleshooting#how-do-i-connect-to-postgres), running `UPDATE posthog_asyncmigration SET status = 0 WHERE name = '0007_persons_and_groups_on_events_backfill' AND status = 2;` and re-running 0007 at `<your-posthog-site>/instance/async_migrations`.
+> **If you have completed async migration 0007 before:** If you have changed anything regarding `alias` or based on ingestion warnings or if you use groups, you must re-run async migration 0007 on top of 1.41.0 by [connecting to Postgres](/docs/self-host/deploy/troubleshooting#how-do-i-connect-to-postgres), running `UPDATE posthog_asyncmigration SET status = 0 WHERE name = '0007_persons_and_groups_on_events_backfill' AND status = 2;` and re-running 0007 at `<your-posthog-site>/instance/async_migrations`.
 
 ## PostHog 1.41.0 release notes
 
