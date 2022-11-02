@@ -22,7 +22,7 @@ You won’t see any UI changes — persons will still have their own Persons & G
 
 - **Faster filtering of events with person or group properties**. Similarly, filtering events by person or group properties is much faster when a join is no longer necessary. Anywhere where you’re working with persons or groups, and events, PostHog will be faster. 
 
-- **Users will no longer be merged retroactively in some situations**. When an identified user logs in from a different browser (thus becoming anonymous) we end up with separate records for their unidentified and identified behavior, which are then merged into a single person. We used to do this using database joins at query time, so that all events were tied to the same person. Now, we simply look at the events when queries are created - meaning that anonymous events are shown as separate, unique persons in insights.
+- **Users will no longer be merged retroactively in some situations**. When an identified user logs in from a different browser (thus becoming anonymous) we end up with separate records for their unidentified and identified behavior, which are then merged into a single person. We used to do database joins at query time, so that all events were tied to the same person. Now, we simply look at the events which have the data from the event processing time - meaning that anonymous events are shown as separate, unique persons in insights.
 
 - **You can create insights based on person properties at the time of an event.** This wasn’t previously feasible and was often requested. Now, with this change, it's possible!
 
