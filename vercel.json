@@ -36,7 +36,11 @@
         },
         { "source": "/docs/plugins/build/overview", "destination": "/docs/apps/build" },
         { "source": "/docs/plugins/types", "destination": "/docs/apps/build/types" },
-        { "source": "/docs/developing-locally", "destination": "/docs/contributing/developing-locally" },
+        { "source": "/docs/developing-locally", "destination": "/handbook/engineering/developing-locally" },
+        {
+            "source": "/docs/contributing/developing-locally",
+            "destination": "/handbook/engineering/developing-locally"
+        },
         { "source": "/docs/project-structure", "destination": "/docs/contributing/project-structure" },
         { "source": "/docs/recognizing-contributions", "destination": "/docs/contributing/recognizing-contributions" },
         { "source": "/docs/stack", "destination": "/docs/contributing/stack" },
@@ -47,7 +51,6 @@
         { "source": "/docs/self-host/configure", "destination": "/docs/self-host#configure" },
         { "source": "/docs/configuring-posthog", "destination": "/docs/self-host/configure" },
         { "source": "/docs/features/log-in-with-github-gitlab", "destination": "/docs/user-guides/sso" },
-        { "source": "/docs/contributing/developing-locally", "destination": "/docs/contribute/developing-locally" },
         { "source": "/docs/contributing", "destination": "/docs/contribute" },
         { "source": "/docs/contributing/project-structure", "destination": "/docs/contribute/project-structure" },
         {
@@ -626,6 +629,9 @@
         },
         { "source": "/eu-cloud", "destination": "/eu" },
         { "source": "/handbook/strategy/roadmap", "destination": "/roadmap" },
-        { "source": "/docs/architecture/ingestion-pipeline", "destination": "/docs/how-posthog-works/ingestion-pipeline" }
+        {
+            "source": "/docs/architecture/ingestion-pipeline",
+            "destination": "/docs/how-posthog-works/ingestion-pipeline"
+        }
     ]
 }
