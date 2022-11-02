@@ -26,7 +26,7 @@ If the revenue chart isn't compelling enough, knowing very specifically the user
 These are all example decisions we've taken because of having a clear ICP:
 
 * How you describe what your company does
-  * We're very feature-focussed versus benefit focussed in our language since our users self serve and we don't go heavy on enterprise sales
+  * We're very feature-focused versus benefit focused in our language since our users self serve and we don't go heavy on enterprise sales
 * What your website should look and feel like
   * We are happy including code snippets
 * Your pricing model
@@ -90,4 +90,4 @@ As we sold some deals, and failed to sell others, we started [modifying pricing]
 
 ## How we're evolving this
 
-So far, we've identified ICPs at a _company_ level. As we're geting more sophisticated, we're doing it at an _individual_ level. We want to have a set list of stakeholders we aim to delight, so we are clearer on those _within_ our ICP we're shipping for.
+So far, we've identified ICPs at a _company_ level. As we're getting more sophisticated, we're doing it at an _individual_ level. We want to have a set list of stakeholders we aim to delight, so we are clearer on those _within_ our ICP we're shipping for.
