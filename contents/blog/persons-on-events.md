@@ -10,7 +10,7 @@ featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
 ---
 
-In [a previous product update](/blog/the-posthog-array-1-39-0) we announced a beta for a substantial change to the way we handle persons and events on PostHog. Today, after gathering your feedback and seeing the improvements to query performance, we’re rolling this change out to all PostHog Cloud users. We've also made this change available for Self-Hosted users, as part of the 1.41.0 update. 
+In [a previous product update](/blog/the-posthog-array-1-39-0) we announced a beta for a substantial change to the way we handle persons and events on PostHog. Today, after gathering your feedback and seeing the improvements to query performance, we’re rolling this change out as part of the 1.41.0 update. It is available now for self-hosted users and PostHog Cloud users can expect to see the benefits soon as we roll it out across EU and US Clouds.
 
 > **Need to upgrade a self-hosted instance?** We've explained how to upgrade to 1.41.0 and run the necessary async migrations in [our 1.41.0 release highlights](/blog/the-posthog-array-1-41-0). 
 
