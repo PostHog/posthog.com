@@ -31,7 +31,7 @@ This is our usual first round interview with a member of the People & Ops team.
 
 #### Technical Interview 
 
-The [technical interview](https://posthog.com/handbook/people/hiring-process#interview-2) usually lasts between 45-60 minutes and you will probably meet a member of our [People and Culture team](https://posthog.com/handbook/people/team-structure/people) as well as [Charles](https://posthog.com/handbook/people/team#charles-cook-business-operations). For this round, you can expect questions about your background, together with scenario-based questions. 
+The [technical interview](https://posthog.com/handbook/people/hiring-process#interview-2) usually lasts between 45-60 minutes and you will probably meet a member of our [People and Culture team](https://posthog.com/handbook/small-teams/people) as well as [Charles](https://posthog.com/handbook/people/team#charles-cook-business-operations). For this round, you can expect questions about your background, together with scenario-based questions. 
 
 #### Operations SuperDay
 
@@ -45,7 +45,7 @@ An Operations SuperDay usually looks like this  (_there is a degree of flexibili
 *   Meet the founders
 *   Time to focus on the task, we can provide support via your personal Slack channel 
 *   Informal session with a team member 
-*   On days where we have company wide meetings, we will invite you along to that and give you a chance to introduce yourself. On days without company wide meetings, we will arrange for you to meet a few members of our team for a casual lunch/coffee break
+*   On days when we have company wide meetings, we will invite you along to that and give you a chance to introduce yourself. On days without company wide meetings, we will arrange for you to meet a few members of our team for a casual lunch/coffee break
 
 Overall, you should spend at least 80% of your time and energy on the task and less than 20% on meeting people, as we will base our decision on your output of the day. However, we encourage everyone to use the Slack channel as much as needed for any questions or problems. 
 

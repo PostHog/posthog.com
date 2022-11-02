@@ -23,8 +23,9 @@ I tend to work 9am to 5pm with an hour for lunch, then I have a gap to have dinn
 - I speak really fast and hop around a lot. I've tried to fix this before but it led to me focussing more on polish than the topic at hand - a tradeoff that I felt wasn't worth it. If you leave a conversation without clarity with me, get me in written form instead.
 - Sometimes I bottleneck stuff because I'm too keen to try to pick up tasks. Call me out on this.
 - I'm a little disorganized. I compensate for this by making sure the teams I work on have this skill. Often I think this actually helps me prioritize the things that really matter.
-- If I haven't responded to something that you've sent me, that's probably because I've read it and don't feel particularly strongly - so just make a call on what to do if you don't hear back in a reasonable time frame.
+- If I haven't responded to something that you've sent me, that's probably because I've read it and don't feel particularly strongly - so just make a call on what to do if you don't hear back in a reasonable time frame. I try not to do this intentionally.
 - I'm an optimist and I'm level headed. If you've got bad news, I am never going to get mad.
+- I'm not great at delivering direct feedback 1:1, so I'm working on actively addressing this. I'm using the [OFNR framework](https://danieltenner.com/2015/05/05/nonviolent-communication/) to do this.
 
 ## What I value
 
@@ -60,19 +61,19 @@ I need to make sure we maintain a high month over month revenue growth rate whil
 
 ### Personal strategy
 
-- Make sure we've the right team to accelerate community growth
-- Assist with the above (building the team / supporting the work)
+- Make sure every team reaches an ["Innovating" state](https://danlebrero.com/2022/07/06/an-elegant-puzzle-systems-of-engineer-management-book-summary/)
+- Support the marketing team with my individual work 
 
 ### Execution todo
 
-- Figure out how to accelerate [high quality adoption](https://app.posthog.com/insights/ujGv0WqI?insight=TRENDS&events=%5B%5D&actions=%5B%7B%22id%22%3A%2212308%22%2C%22math%22%3A%22dau%22%2C%22name%22%3A%22High%20quality%20sign%20ups%22%2C%22type%22%3A%22actions%22%2C%22order%22%3A0%7D%5D&display=ActionsLineGraph&interval=week&date_from=-90d&new_entity=%5B%5D&properties=%5B%7B%22key%22%3A%22is_organization_first_user%22%2C%22type%22%3A%22event%22%2C%22value%22%3A%5B%22true%22%5D%2C%22operator%22%3A%22exact%22%7D%2C%7B%22key%22%3A%22hubspot_score%22%2C%22type%22%3A%22person%22%2C%22value%22%3A%2270%22%2C%22operator%22%3A%22gt%22%7D%5D&filter_test_accounts=true) from customers that fit our [customer DNA profile](https://docs.google.com/spreadsheets/d/13nP76FIoc-4FcG7_A7-b0aTrgftgDERTGy5F45FKHUE/edit#gid=0)
+- Validate a new marketing channel
 - Personal
-  - 1 bike ride a week
+  - 2 strength sessions a week
   
 ### Archived todo
 
 It makes me feel better crossing stuff out, rather than deleting it, thus:
-
+- ~~1 bike ride a week. Note: solved this by commuting to pick up my daughter from nursery every week. Double win!~~
 - ~~Experiment with larger order values as opportunities arise. Note: hired someone to do this.~~
 - ~~Set clear input-focussed goals for teams, that will optimize for [_long term_ revenue](/blog/ceo-diary-1)~~
 - ~~Hire and onboard someone else able to run all $0 to $50K ish sales~~

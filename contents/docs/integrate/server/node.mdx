@@ -159,7 +159,7 @@ If you're using PostHog in the front-end and back-end, doing the `identify` call
 
 An `alias` call requires:
 
--   `distinctId` – the current distinct ID of the user
+-   `distinctId` – the current unique id (logged in user id)
 -   `alias` – the _other_ distinct ID of the user, which will be aliased to the current one
 
 For example:
@@ -167,7 +167,7 @@ For example:
 ```node
 client.alias({
     distinctId: 'user:123',
-    alias: 'user:12345',
+    alias: 'session:12345',
 })
 ```
 
@@ -240,7 +240,7 @@ For example, if the `beta-feature` depends on the `is_authorized` property, and 
 const flagValue = await client.getFeatureFlag('flag-key', 'user distinct id', {personProperties: {is_authorized: true}})
 ```
 
-The same holds for [groups](manual/group-analytics). If you have a group named `organisation`, you can add properties like so:
+The same holds for [groups](/manual/group-analytics). If you have a group named `organisation`, you can add properties like so:
 
 
 ```node

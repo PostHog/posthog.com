@@ -53,7 +53,7 @@ In 2026 we will _go public with $100M ARR._ To achieve this, PostHog will need t
 
 **The mechanics of success**
 
-We set [quarterly OKRs](objectives) to keep us on track.
+We set [quarterly OKRs](/handbook/strategy/objectives) to keep us on track.
 
 ### How should we prioritize between competing directions?
 
@@ -95,7 +95,7 @@ While there is value in the items on the right, we value the items on the left m
 
 ## Target customers for 2022
 
-Our ideal customer is a large-mid-market (~$20k-70k) who meets as many of these these criteria as possible:
+Our ideal customer is a large-mid-market (~$20k-70k) who meets as many of these criteria as possible:
 
 * _Needs_
   * Cares about user data

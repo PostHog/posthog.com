@@ -17,7 +17,7 @@ Out of five posts that I hoped would get there, four did. Look mom, lots of traf
 
 ![Blog traffic for PostHog](../images/blog/writing-for-developers/posthog-blog-traffic.jpg)
 
-I don't claim to be a well-established writer. Amongst other things, I'm inconsistent with publishing and being British means I wrestle with US English. On the flipside, I've spent an embarassingly large amount of time reading content that engineers find engaging.
+I don't claim to be a well-established writer. Amongst other things, I'm inconsistent with publishing and being British means I wrestle with US English. On the flipside, I've spent an embarrassingly large amount of time reading content that engineers find engaging.
 
 This is what I have learned thus far. I've created a framework for those also working at developer-focused companies, writing for the same audience as me.
 

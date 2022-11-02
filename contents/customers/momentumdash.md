@@ -13,11 +13,11 @@ toolsUsed:
     - Apps
 ---
 
-Enjoyed by over 2 million users, [Momentum Dash](https://momentumdash.com/) turns your browsers ‘New Tab’ page into a center for focus so that you become more productive, inspired and purposeful. The team is driven by a desire to build a product that people truly love — and product analytics has provided a strategic advantage in the pursuit of this goal.  
+Enjoyed by over 2 million users, [Momentum Dash](https://momentumdash.com/) turns your browser's ‘New Tab’ page into a center for focus so that you become more productive, inspired, and purposeful. The team is driven by a desire to build a product that people truly love — and product analytics has given them a strategic advantage in the pursuit of this goal.  
 
 However, when analytics play such an essential role in the business it’s crucial that you’re able to trust the results — and for Momentum Dash that hasn’t always been the case. 
 
-“We used to use [Mixpanel](/blog/why-i-ditched-google-analytics-for-posthog), but it was so extremely expensive that we had to downsample very aggressively,” said Engineering Manager & Tech Lead Joe Trollo. “In turn, the downsampling created artifacts in our reports and we spent a lot of time confirming whether or not they were real”
+“We used to use [Mixpanel](/blog/why-i-ditched-google-analytics-for-posthog), but it was so extremely expensive that we had to downsample very aggressively,” said Engineering Manager & Tech Lead Joe Trollo. “In turn, the downsampling created artifacts in our reports and we spent a lot of time confirming whether or not they were real.”
 
 “Eventually, we were too skeptical of the reports for them to be effective. We were frustrated by the lost time and lack of insights, and started to look for another solution — which thankfully led us to PostHog.”
 
@@ -26,11 +26,11 @@ However, when analytics play such an essential role in the business it’s cruci
 ## A managed ClickHouse service with Altinity
 PostHog seemed like the perfect solution for Momentum Dash as the team could self-host in order to keep costs down and retain ownership — and trust — of data. The Engineering team was also familiar with most of the components required to maintain a self-hosted instance, such as Postgres, Redis and Kafka. 
 
-ClickHouse, however, was a complete unknown. In order to make sure everything was deployed correctly, Momentum Dash reached out to ClickHouse experts [Altinity](https://altinity.com/) via the [PostHog partner directory](https://posthog.com/partner directory) and signed up for [Alinity.Cloud](https://altinity.com/cloud-database/), which provides a fully managed ClickHouse service to backend PostHog. 
+ClickHouse, however, was a complete unknown. In order to make sure everything was deployed correctly, Momentum Dash reached out to ClickHouse experts [Altinity](https://altinity.com/) via the [PostHog partner directory](https://posthog.com/partners) and signed up for [Alinity.Cloud](https://altinity.com/cloud-database/), which provides a fully managed ClickHouse service to backend PostHog. 
 
-“Altinity was extremely helpful and the team was very proactive,” says Joe. “They helped provision a test cluster, diagnose and solve issues and even helped us [materialize some columns](https://posthog.com/blog/clickhouse-materialized-columns) to improve performance.”
+“Altinity was extremely helpful and the team was very proactive,” says Joe. “They helped provision a test cluster, diagnose and solve issues, and even helped us [materialize some columns](https://posthog.com/blog/clickhouse-materialized-columns) to improve performance.”
 
-“Even now, Atlinity is monitoring our ClickHouse instance for any slow queries and working with PostHog to optimize them.”
+“Even now, Altinity is monitoring our ClickHouse instance for any slow queries and working with PostHog to optimize them.”
 
 <BorderWrapper>
     <Quote

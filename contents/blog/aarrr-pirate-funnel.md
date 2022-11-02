@@ -112,7 +112,7 @@ It may also be prudent to add a quality metric here, too. Tracking signups based
 - New users who engage with your core feature
 - New users who complete the onboarding process
 - New users who enable a third-party integration
-- New users who who spend x minutes using the product/website
+- New users who spend x minutes using the product/website
 
 Some users create accounts but never use your product. Tracking activation helps you isolate onboarding issues from long term retention issues.
 
@@ -182,7 +182,7 @@ Even products that rely on viral growth (e.g. social media apps) need some confi
 
 AARRR is sometimes considered a "marketing framework". This is nonsense. It spans disciplines, which is why it's a useful framework for product-led growth. And if you want to influence them all, people and teams need to own them.
 
-At PostHog, we're [organized into small teams](/handbook/people/team-structure/why-small-teams).
+At PostHog, we're [organized into small teams](/handbook/company/small-teams).
 
 Here's how our earlier table might look if we assigned different PostHog teams to it:
 
@@ -228,7 +228,7 @@ Dave McClure's original framework suggests you spend 80% of your effort on refin
 
 Here's some recommended further reading around product growth and user engagement:
 
-- **[How to achieve B2B product market fit](/blog/how-to-product-market-fit)**: There's no universal standard for achieving market fit, but this guide introduces problem-solving techinques to help you find it for a B2B product.
+- **[How to achieve B2B product market fit](/blog/how-to-product-market-fit)**: There's no universal standard for achieving market fit, but this guide introduces problem-solving techniques to help you find it for a B2B product.
 
 - **[Dave McClure's original Startup Metrics for Pirates deck](https://www.slideshare.net/dmc500hats/startup-metrics-for-pirates-nov-2010):** McClure refined his original deck from its inception in 2007. This version is from 2010. 
 

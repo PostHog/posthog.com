@@ -1,5 +1,5 @@
 ---
-title: Privacy
+title: Privacy policy
 sidebar: Docs
 showTitle: true
 ---
@@ -99,7 +99,7 @@ PostHog at its sole discretion may make use of company logos where those compani
 
 ### International transfer of personal information
 
-The Websites are hosted in the United States and the personal information we collect will be stored and processed on our servers in the United States. Our employees, contractors and affiliated organizations that process information for us as described above may be located in the United States or in other countries outside of your home country which may have different data protection standards to those which apply in your home country.
+The Websites are hosted in the United States, or in Germany if you are a PostHog Cloud customer who has selected EU hosting, and the personal information we collect will be stored and processed on our servers in either the United States or Germany. Our employees, contractors and affiliated organizations that process information for us as described above may be located in the United States or in other countries outside of your home country which may have different data protection standards to those which apply in your home country.
 
 Where your personal information is transferred outside of the EEA, Switzerland and UK and where this is to a country which is not subject to an adequacy decision by the EU Commission or considered adequate as determined by applicable data protection laws, we will take steps to ensure your personal information is adequately protected by safeguards such as Standard Contractual Clauses (“SCCs”) approved by the EU Commission or by the UK Government. A copy of the relevant mechanism can be obtained for your review on request by using the contact details in the ‘Contacting PostHog About Your Privacy’ section of this Privacy Policy.
 
@@ -127,7 +127,7 @@ We do not use third party tracking services to collect information about you.
 
 ## Global privacy practices and your rights
 
-Information we collect will be stored and processed in the United States in accordance with this Privacy Policy but we understand that users from other countries may have different expectations and rights with regard to their privacy. For all Website visitors and users, no matter their country of location, we will:
+Information we collect may be stored and processed in the United States in accordance with this Privacy Policy but we understand that users from other countries may have different expectations and rights with regard to their privacy. For all Website visitors and users, no matter their country of location, we will:
 
 * provide clear methods of unambiguous, informed consent when we do collect your personal information and where required by applicable law;
 * only collect the minimum amount of personal information necessary for the purpose it is collected for, unless you choose to provide us more;
@@ -151,7 +151,7 @@ Additional rights that may apply to you in certain instances:
 
 These rights may be limited, for example if fulfilling your request would reveal personal information about another person, or if you ask us to delete information which we are required by law or have compelling legitimate interests to keep.
 
-Where we collect personal information to administer your accounts or your contract with us or to comply with our legal obligations, this is mandatory and we will not be able to manage our relationship with you without this. In all other cases, the provision of requested personal information is optional, but this may affect your ability to participate in certain certain Website-related activities or being able to access and use certain features and services, where the information is needed for those purposes.
+Where we collect personal information to administer your accounts or your contract with us or to comply with our legal obligations, this is mandatory and we will not be able to manage our relationship with you without this. In all other cases, the provision of requested personal information is optional, but this may affect your ability to participate in certain Website-related activities or being able to access and use certain features and services, where the information is needed for those purposes.
 
 To exercise your privacy rights, you can email us at the address given below in the ‘Contacting PostHog About Your Privacy’ section of this Privacy Policy.
 
@@ -167,7 +167,7 @@ Please note that due to the open source nature of our products, services, and co
 
 This section sets out how we collect, store, and process personal information as part of our recruitment process. It only applies to users of our website who submit an application for one of our open roles and is supplemental to the above Privacy Policy.
 
-We use [Workable](https://workable.com/), an online application provided by Workable Software Limited, to assist with our recruitment process. We use Workable to process personal information as a data processor on our behalf. Workable is only entitled to process your personal data in accordance with our instructions.
+We use [Ashby](https://www.ashbyhq.com/), an online application provided by Ashby Inc., to assist with our recruitment process. We use Ashby to process personal information as a data processor on our behalf. Ashby is only entitled to process your personal data in accordance with our instructions.
 
 Where you apply for a job opening posted by us, these provisions will apply to our processing of your personal information. When you apply for a job opening via the application function on a job site like LinkedIn or similar online service provider (referred to below as a “Partner”), you should note that the relevant Partner may retain your personal data and may also collect data from us in respect of the progress of your application. Any use by the Partner of your data will be in accordance with the Partner’s privacy policy.
 
@@ -181,12 +181,12 @@ We collect and process some or all of the following types of information from yo
 * Information relating to your employment history such as resumé/CV, employment history, qualifications and skills
 * If you contact us, we may keep a record of that correspondence
 * A record of your progress through any hiring process that we may conduct
-* Details of your visits to Workable’s Website including, but not limited to, traffic data, location data, weblogs and other communication data, the site that referred you to Workable’s Website and the resources that you access.
+* Details of your visits to Ashby’s Website including, but not limited to, traffic data, location data, weblogs and other communication data, the site that referred you to Ashby’s Website and the resources that you access.
 
 #### Information we collect from other sources
 
-* Workable provides PostHog with the ability to link the data you provide to us, with other publicly available information about you that you have published online, such as on LinkedIn, GitHub or other public social media profiles.
-* Workable allows PostHog to search various databases which may include your personal data (include your CV or Resumé), to find possible candidates to fill our job openings. Where we find you in this way, we will obtain your personal data from these sources.
+* Ashby provides PostHog with the ability to link the data you provide to us, with other publicly available information about you that you have published online, such as on LinkedIn, GitHub or other public social media profiles.
+* Ashby allows PostHog to search various databases which may include your personal data (including your CV or Résumé), to find possible candidates to fill our job openings. Where we find you in this way, we will obtain your personal data from these sources.
 * We may receive your personal data from a third party who recommends you as a candidate for a specific job opening or for our business more generally.
 
 ### How we use applicant information
@@ -212,9 +212,7 @@ If you are a national of countries in the European Economic Area (EEA), United K
 
 Your personal information may be processed in the United States, the country where you have applied for a job, or any other country where PostHog has team members or operations.
 
-PostHog may transfer, store, or process your personal information in a country outside your jurisdiction, including countries outside the European Economic Area (“EEA”), Switzerland, and the United Kingdom. If we transfer personal information from the EEA, Switzerland, or United Kingdom to a country outside it, such as the United States, we will enter into EU standard contractual clauses with the data importer, or take other measures to provide an adequate level of data protection.
-
-In particular, your data may be accessible to i) Workable’s staff in the USA or ii) may be stored by Workable’s hosting service provider on servers in the USA as well as in the EU. The USA does not have the same data protection laws as the United Kingdom and EEA. A Data Processor Agreement has been signed between Workable Software Limited and its overseas group companies, and between Workable Software Limited and each of its data processors. These data processor agreements are designed to help safeguard your privacy rights and give you remedies in the unlikely event of a misuse of your personal data.
+PostHog may transfer, store, or process your personal information in a country outside your jurisdiction, including countries outside the European Economic Area (“EEA”), Switzerland, and the United Kingdom. If we transfer personal information from the EEA, Switzerland, or United Kingdom to a country outside it, such as the United States, we will enter into Standard Contractual Clauses (“SCCs”) approved by the EU Commission or by the UK Government,  with the data importer, or take other measures to provide an adequate level of data protection.
 
 ### How long we keep applicant personal data
 
@@ -247,4 +245,4 @@ Although most changes are likely to be minor, PostHog may change its privacy pol
 
 We may also provide notification to users who have provided us email addresses of material changes to this Privacy Policy through our Website. PostHog encourages visitors to frequently check this page for any minor changes to its Privacy Policy. Your continued use of this site after any change in this Privacy Policy will constitute your acceptance of such change.
 
-_Jun 2022_
+_October 2022_

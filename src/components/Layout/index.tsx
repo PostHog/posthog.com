@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { Header } from '../Header/Header'
+import Banner from '../Banner/index'
 import { Footer } from '../Footer/Footer'
 import { useValues } from 'kea'
 import './Fonts.scss'
@@ -8,8 +9,9 @@ import './SkeletonLoading.css'
 import './DarkMode.scss'
 import { PosthogAnnouncement } from '../PosthogAnnouncement/PosthogAnnouncement'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
+import CookieBanner from 'components/CookieBanner'
 
-const Layout = ({ children }: { children: React.ReactNode }): JSX.Element => {
+const Layout = ({ children, className = '' }: { children: React.ReactNode; className?: string }): JSX.Element => {
     const { posthog } = useValues(posthogAnalyticsLogic)
 
     useEffect(() => {
@@ -19,12 +21,13 @@ const Layout = ({ children }: { children: React.ReactNode }): JSX.Element => {
     }, [])
 
     return (
-        <>
+        <div className={className}>
             <Header />
             <main>{children}</main>
             <Footer />
             <PosthogAnnouncement />
-        </>
+            <CookieBanner />
+        </div>
     )
 }
 

@@ -86,4 +86,4 @@ The questions are based on the ones used by [Culture Amp](https://www.cultureamp
 
 The questions follow a simple linear scale ranging from 1 (strongly disagree) to 5 (strongly agree). We also added an optional comment field, in case there you have more detailed feedback. In line with our values, we have decided to _not_ make this anonymous.
 
-We run the survey at the end of each quarter and share the results with the team afterwards. We also share some high level results on the [people page.](https://posthog.com/handbook/people/team-structure/people)
+We run the survey at the end of each quarter and share the results with the team afterwards. We also share some high level results on the [people page.](https://posthog.com/handbook/small-teams/people)
