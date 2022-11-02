@@ -28,7 +28,6 @@ You won’t see any UI changes — persons will still have their own Persons & G
 
 - **Self-hosting users will see a storage increase**. This is due to extra information being stored in your self-hosted ClickHouse. It's difficult to give an estimate on this as the impact will vary a lot depending on configuration and usage per organization. 
 
-
 While improving performance has been a major motivation for this change, this is also a crucial step in ensuring PostHog can continue to scale effectively. 
 
 Since launching in 2020, PostHog has been adopted by over 15,000 companies and has tracked over 50 billion events. In order to ensure that current and future users have the best possible experience, we need our systems to work as efficiently as possible. Adding persons on to events is an important part of this, along with supporting work such as [using materialized columns in ClickHouse](/blog/clickhouse-materialized-columns) to speed up queries even further.
