@@ -40,20 +40,7 @@ export interface IRoadmap {
 const Complete = (props: { title: string; githubPages: IGitHubPage[]; otherLinks: string[] }) => {
     const { title, githubPages, otherLinks } = props
     const url = (githubPages?.length > 0 && githubPages[0]?.html_url) || (otherLinks?.length > 0 && otherLinks[0])
-    return (
-        <li className="text-base font-semibold">
-            {url ? (
-                <Link
-                    to={url}
-                    className="flex px-4 py-2 bg-white rounded-sm relative active:top-[0.5px] active:scale-[.99] shadow-xl"
-                >
-                    {title}
-                </Link>
-            ) : (
-                <span className="flex bg-white px-4 py-2 rounded-sm shadow-xl relative">{title}</span>
-            )}
-        </li>
-    )
+    return <li className="text-base font-semibold">{url ? <Link to={url}>{title}</Link> : title}</li>
 }
 
 const Section = ({
@@ -66,7 +53,7 @@ const Section = ({
     children: React.ReactNode
 }) => {
     return (
-        <div className="xl:px-7 2xl:px-8 xl:pt-6 first:pl-0 last:pr-0 pb-6 xl:pb-12">
+        <div className="lg:px-9 lg:pt-6 pb-12 first:pl-0 last:pr-0">
             <h3 className="text-xl m-0">{title}</h3>
             <p className="text-[15px] m-0 text-black/60 mb-4">{description}</p>
             {children}
@@ -76,15 +63,15 @@ const Section = ({
 
 const Card = ({ team, children }: { team: string; children: React.ReactNode }) => {
     return (
-        <>
-            {team !== 'undefined' && <h4 className="oh5acity-50 text-base font-bold mt-0 mb-2 pt-4">{team}</h4>}
-            <li className="m-0 mb-3">{children}</li>
-        </>
+        <li className="bg-white m-0 p-4 rounded-md border-gray-accent-light border-dashed border">
+            {team !== 'undefined' && <p className="text-sm opacity-50 m-0 mb-2">{team}</p>}
+            {children}
+        </li>
     )
 }
 
 const CardContainer = ({ children }: { children: React.ReactNode }) => {
-    return <ul className="list-none m-0 p-0 grid">{children}</ul>
+    return <ul className="list-none m-0 p-0 grid gap-y-4">{children}</ul>
 }
 
 export default function Roadmap() {
@@ -139,8 +126,8 @@ export default function Roadmap() {
                                 { name: 'Core team', url: '/handbook/company/team' },
                             ]}
                         >
-                            <h1 className="font-bold text-5xl mb-8 xl:mt-0">Roadmap</h1>
-                            <div className="grid grid-cols-1 xl:grid-cols-3 xl:divide-x xl:gap-y-0 gap-y-6 divide-gray-accent-light divide-dashed xl:-mb-8 xl:border-t border-gray-accent-light border-dashed">
+                            <h1 className="font-bold text-5xl mb-8 lg:mt-0">Roadmap</h1>
+                            <div className="grid grid-cols-1 lg:grid-cols-3 lg:divide-x lg:gap-y-0 gap-y-6 divide-gray-accent-light divide-dashed lg:-mb-8 lg:border-t border-gray-accent-light border-dashed">
                                 <Section
                                     title="Under consideration"
                                     description="The top features we might build next. Your feedback is requested."

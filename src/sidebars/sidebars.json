@@ -132,10 +132,6 @@
                     "url": "/handbook/small-teams/experimentation"
                 },
                 {
-                    "name": "Growth",
-                    "url": "/handbook/small-teams/growth"
-                },
-                {
                     "name": "Infrastructure",
                     "url": "/handbook/small-teams/infrastructure"
                 },
@@ -324,10 +320,6 @@
                             "url": "/handbook/engineering/release-new-version"
                         },
                         {
-                            "name": "Handling incidents",
-                            "url": "/handbook/engineering/incidents"
-                        },
-                        {
                             "name": "Bug prioritization",
                             "url": "/handbook/engineering/bug-prioritization"
                         }
@@ -400,16 +392,6 @@
                         {
                             "name": "Jobs",
                             "url": "/handbook/engineering/posthog-com/jobs"
-                        }
-                    ]
-                },
-                {
-                    "name": "ClickHouse manual",
-                    "url": "",
-                    "children": [
-                        {
-                            "name": "Data storage or what is a MergeTree",
-                            "url": "/handbook/engineering/clickhouse/data-storage"
                         }
                     ]
                 },

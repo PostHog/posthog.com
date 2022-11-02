@@ -117,7 +117,7 @@ module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, 
         }
     }
 
-    if (node.internal.type === 'Plugin' && node.url.includes('github.com') && process.env.GITHUB_API_KEY) {
+    if (node.internal.type === 'Plugin' && node.url.includes('github.com')) {
         const { name, owner } = GitUrlParse(node.url)
         const { download_url } = await fetch(`https://api.github.com/repos/${owner}/${name}/readme`, {
             headers: {

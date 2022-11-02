@@ -176,33 +176,6 @@ module.exports = exports.createSchemaCustomization = async ({ actions, schema })
     type AshbyJob implements Node {
       customFields: [AshbyJobCustomFields],
     }
-    type SqueakTeam {
-      name: String,
-    }
-    type SqueakGitHubReactions {
-      hooray: Int,
-          heart: Int,
-          eyes: Int,
-          _1: Int,
-    }
-    type SqueakGitHubPage {
-      title: String,
-      html_url: String,
-      number: Int,
-      closed_at: Date,
-      reactions: SqueakGitHubReactions,
-    }
-    type SqueakRoadmap implements Node {
-      title: String,
-      category: String
-      beta_available: Boolean,
-      complete: Boolean,
-      description: String,
-      team: SqueakTeam,
-      otherLinks: [String],
-      githubPages: [SqueakGitHubPage],
-      milestone: Boolean,
-    }
   `)
     createTypes([
         schema.buildObjectType({

@@ -88,7 +88,7 @@ export interface HubSpotUser {
 }
 
 export const createHubSpotContact = ({ firstName, lastName, email }: HubSpotUser) => {
-    return fetch('/api/hubspot', {
+    return fetch('/.netlify/functions/hubspot', {
         method: 'POST',
         headers: {
             'content-type': 'application/json',

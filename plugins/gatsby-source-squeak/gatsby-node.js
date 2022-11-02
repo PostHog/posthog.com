@@ -128,7 +128,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }, plu
         }
         const otherLinks = github_urls.filter((url) => !url.includes('github.com'))
         node.otherLinks = otherLinks
-        if (github_urls.length > 0 && process.env.GITHUB_API_KEY) {
+        if (github_urls.length > 0) {
             node.githubPages = await Promise.all(
                 github_urls
                     .filter((url) => url.includes('github.com'))

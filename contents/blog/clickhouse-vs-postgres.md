@@ -1,5 +1,5 @@
 ---
-date: 2022-10-28
+date: 2022-10-26
 title: "In-depth: ClickHouse vs PostgreSQL"
 rootPage: /blog
 sidebar: Blog

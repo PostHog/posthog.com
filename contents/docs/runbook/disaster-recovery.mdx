@@ -14,11 +14,6 @@ Data is stored in PostgreSQL, ClickHouse and Kafka. At a minimum you should have
 backups of PostgreSQL and ClickHouse, these are crucial to PostHog. Kafka stores
 the incoming analytics events which are then persisted into ClickHouse.
 
-Note: in order to work, ClickHouse and Kafka use Zookeeper as distributed key value
-store and locking service. While Zookeeper doesn't host any data related to PostHog
-it's a core dependency of the overall stack.
-
-
 ## PostgreSQL
 
 PostgreSQL stores your PostHog instance configuration and authentication/authorization.
@@ -46,7 +41,3 @@ or [AWS Kinesis Firehose](https://aws.amazon.com/blogs/architecture/amazon-msk-b
 
 If PostHog is consuming events to ClickHouse in good time, you should not lose much
 in case of a Kafka failure, so it may be a risk that you want to accept.
-
-## Zookeeper
-ZooKeeper is a centralized service providing distributed synchronization. It is a core
-dependency of both ClickHouse and Zookeeper.

@@ -22,9 +22,11 @@ In the UK, we use [Royal London](https://www.royallondon.com/) as our pension pr
 
 ### Private health insurance
 
-It's important to us that everyone is as happy and healthy as they can be. To ensure this, we offer private health insurance in countries where the health system struggles with long wait times for appointments or high out-of-pocket costs. Currently, we provide private health insurance in the US and UK.
+It's important to us that everyone is as happy and healthy as they can be. To ensure this, we offer private health insurance in countries where the health system struggles with long wait times for appointment. Currently, we  provide private health insurance in the US and UK. 
 
-In the US, our medical insurance is provided via UnitedHealthcare and managed via our payroll provider [Gusto](https://app.gusto.com/). We also offer dental and vision insurance via Guardian. PostHog pays 100% of the premium of the Platinum plan for team members, and 75% for dependents.
+In the US, our medical insurance is provided via UnitedHealthcare and managed via our payroll provider [Gusto](https://app.gusto.com/). The plan includes medical, dental and vision insurance. 
+
+PostHog pays 75% of the premium of the platinum plan, and you pay the other 25%. The same conditions apply to added dependents. UnitedHealthcare also offers cheaper Gold and Silver plans at lower cost, which you can choose if you'd like to contribute less. The exact costs depend on factors like age - the People team can create a quote in Gusto. 
 
 In the UK, we use [Bupa](https://www.bupa.co.uk/) for private healthcare (£100 excess per policy year) and [Medicash](https://www.medicash.org/) as our cash plan for dental and vision. Children are included for free. Both of these are taxable benefits which will affect your Personal Allowance each tax year, and you can opt out at any time with 1 month notice. 
 
@@ -32,11 +34,9 @@ In the UK, we use [Bupa](https://www.bupa.co.uk/) for private healthcare (£100 
 
 We know that the world can feel a bit heavy from time to time and we want to make sure everyone gets support, if they need it. 
 
-For people in the US, we offer the option to opt in to a [Flexible Savings Account (FSA)](https://www.healthcare.gov/have-job-based-coverage/flexible-spending-accounts/), which is a tax-advantaged account that allows you to contribute pre-tax dollars up to $3,050 per year to be used on out-of-pocket medical expenses. If you choose to contribute, PostHog will match up to $50 per month to help cover mental health care costs. The FSA is a "use it or lose it" benefit, so any dollars that are not spent by the end of the year return to the company.  
+We launched [Spill](https://www.spill.chat/) in March 2021 to give everyone in the team access to comprehensive mental health support. Spill offers access to video therapy sessions with qualified therapists (one-off or a course), together with exercises and helpful reading materials, all integrated into Slack. They also offer a one-off ask-a-therapist feature if you don't want to commit to an entire session.
 
-There is also the option to choose a lower tier, high deductible health plan (HDHP), which will qualify you for a [Health Savings Account (HSA)](https://www.healthcare.gov/glossary/health-savings-account-hsa/) that has further tax benefits beyond what the FSA provides. We will also contribute $50 per month to this account if you opt in. At the end of the year, any unused money rolls over and the contribution limit resets.
-
-For people in the UK, [Bupa](https://www.bupa.co.uk/health-information/mental-health/talking-therapies-for-mental-health) offers coverage for therapists that are inaccessible through the NHS alone.
+Spill is 100% free and confidential - they do not share any personal information with PostHog about who is using the service etc. The _only_ exception is if they believe that there is a threat to a person's safety or the safety of others. 
 
 ### Unlimited time off
 

@@ -50,10 +50,8 @@ export default function Footer({ contributors, filePath, title }) {
                                 </li>
                                 <li>
                                     <a
-                                        className="flex items-center space-x-1 text-white hover:text-white"
-                                        href={`https://github.com/PostHog/posthog.com/issues/new?title=${encodeURIComponent(
-                                            `Docs feedback on: ${title}`
-                                        )}&body=${encodeURIComponent(`**Issue with: ${filePath}**\n\n`)}`}
+                                        className="text-white hover:text-white flex items-center space-x-1"
+                                        href={`https://github.com/PostHog/posthog.com/issues/new?title=Docs feedback on: ${title}&body=**Issue with: ${filePath}**\n\n`}
                                     >
                                         <Issue />
                                         <span>Raise an issue</span>

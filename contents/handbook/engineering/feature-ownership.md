@@ -25,7 +25,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | API Structure | Security + core updates owned by [Team Pipeline][Team Pipeline]. Features owned by the relevant small team | <span class="lemon-tag gh-tag">feature/api-structure</span> |
 | Application Performance Monitoring (APM) | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/apm</span>  |
 | Async migrations | [Team Pipeline][Team Pipeline]  | <span class="lemon-tag gh-tag">feature/async-migrations</span> |
-| Billing | [Team Growth][Team Growth]  |  <span class="lemon-tag gh-tag">feature/billing</span> |
+| Billing | [@timgl][@timgl]  |  <span class="lemon-tag gh-tag">feature/billing</span> |
 | Client libraries | Security + core updates owned by [Team Pipeline][Team Pipeline]. Features owned by the relevant small team  | <span class="lemon-tag gh-tag">feature/pipeline</span> |
 | Cohorts | [Team Experimentation][Team Experimentation]  |  <span class="lemon-tag gh-tag">feature/cohorts</span>  |
 | Correlation Analysis | [Team Experimentation][Team Experimentation]  |  <span class="lemon-tag gh-tag">feature/correlation-analysis</span> |
@@ -38,8 +38,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Group Analytics | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/group-analytics</span> |
 | Ingestion | [Team Pipeline][Team Pipeline]  | <span class="lemon-tag gh-tag">feature/pipeline</span> |
 | Lifecycle | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/lifecycle</span>  |
-| Messaging (Email, Notifications) | [Team Growth][Team Growth]  | <span class="lemon-tag gh-tag">feature/messaging</span>  |
-| Onboarding | [Team Growth][Team Growth]  | <span class="lemon-tag gh-tag">feature/onboarding</span>  |
+| Onboarding | [@kappa90][@kappa90]  | <span class="lemon-tag gh-tag">feature/onboarding</span>  |
 | Paths | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/paths</span> |
 | Permissions | [@Twixes][@Twixes]  | <span class="lemon-tag gh-tag">feature/permissions</span>  |
 | Persons | [@alexkim205][@alexkim205]  | <span class="lemon-tag gh-tag">feature/persons</span>  |
@@ -78,10 +77,10 @@ Some of the features we are building may exist in other products already. It is 
 [@Twixes]: https://github.com/Twixes
 [@yakkomajuri]: https://github.com/yakkomajuri
 [@timgl]: https://github.com/timgl
+[@kappa90]: https://github.com/kappa90
 [Team Product Analytics]: /handbook/small-teams/product-analytics
 [Team Session Recording]: /handbook/small-teams/session-recording
 [Team Pipeline]: /handbook/small-teams/pipeline
 [Team Infrastructure]: /handbook/small-teams/infrastructure
 [Team Experimentation]: /handbook/small-teams/experimentation
 [Team Infrastructure]: /handbook/small-teams/infrastructure
-[Team Growth]: /handbook/small-teams/growth
