@@ -57,6 +57,14 @@ Questions like these used to be hard to answer with PostHog, but no more! Use th
 
 **Bonus:** While working on this feature, we also took the opportunity to improve our aggregation selector UI: aggregation by property value is now presented with more clarity.
 
+### Improved: Recordings interface
+
+![recordings interface](../images/blog/array/1-41-0-recordings-interface.png)
+
+We've heard feedback recently that session recording was incredibly useful, but didn't spark much joy for those who used it. So, we've overhauled the entire interface for session recordings to make it easier to use and to help you find relevant recordings faster. 
+
+We think session recording feels like an entirely new experience now, so check it out. Now's the perfect time to explore [the console log too](/manual/recordings#console-logs-recording-beta)!
+
 ### New: Text cards on dashboards
 
 ![text cards on dashboards](../images/blog/array/1-41-0-text-card-on-dashboard.png)
@@ -80,14 +88,6 @@ Curious how well your apps are doing? Previously, you may have had to pour over 
 App metrics are only available for users on Scale or Enterprise plans. 
 
 > **Note:** Self-hosted users managing kafka separately should create a new topic `clickhouse_app_metrics` manually.
-
-### Improved: Recordings interface
-
-![recordings interface](../images/blog/array/1-41-0-recordings-interface.png)
-
-We've heard feedback recently that session recording was incredibly useful, but didn't spark much joy for those who used it. So, we've overhauled the entire interface for session recordings to make it easier to use and to help you find relevant recordings faster. 
-
-We think session recording feels like an entirely new experience now, so check it out. Now's the perfect time to explore [the console log too](/manual/recordings#console-logs-recording-beta)!
 
 ### New: View recordings from anywhere
 
