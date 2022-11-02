@@ -1,5 +1,5 @@
 ---
-date: 2022-10-27
+date: 2022-11-02
 title: "Tell me about features, not benefits"
 rootPage: /blog
 sidebar: Blog
