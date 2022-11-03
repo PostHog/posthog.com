@@ -37,6 +37,8 @@ If your application displays sensitive user information outside of input fields,
 
 To do so, you should add the CSS class name `ph-no-capture` to elements which should not be recorded. This will lead to the element being replaced with a block of the same size when you play back the recordings. Make sure everyone who watches recordings in your team is aware of this, so that they don't think your product is broken when something doesn't show up!
 
+NB: `ph-no-capture` also controls whether autocapture runs against the element in question. You can [configure a different class](https://github.com/PostHog/posthog-js/blob/96fa9339b9c553a1c69ec5db9d282f31a65a1c25/src/posthog-core.js#L1035) for disabling recordings of elements separately to autocapture.
+
 
 
 ## Recording configurations
