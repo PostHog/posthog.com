@@ -161,11 +161,12 @@ Consider this query:
 
 ```sql
 SELECT
-    toYear(timestamp),
-    uniq(site_id)
+    toStartOfDay(timestamp),
+    avg(metric_value)
 FROM distributed_sensor_values
+WHERE timestamp > '2010-01-01' and timestamp < '2023-01-01'
 GROUP BY toYear(timestamp)
-ORDER BY uniq(site_id) DESC
+ORDER BY avg(metric_value) DESC
 LIMIT 20
 ```
 
