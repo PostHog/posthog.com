@@ -103,7 +103,6 @@ import { ProductFooter } from './components/ProductFooter'
 import { ProductIcons } from './components/ProductIcons'
 import { ProductPage } from './components/ProductPage'
 import { ProductSectionHeader } from './components/ProductSectionHeader'
-import { Profile } from './components/Profile'
 import { Question } from './components/Question'
 import { Quote2 } from './components/Quote2'
 import { Roadmap } from './components/Roadmap'
@@ -236,7 +235,6 @@ export const shortcodes = {
 	ProductIcons,
 	ProductPage,
 	ProductSectionHeader,
-	Profile,
 	Question,
 	Quote2,
 	Roadmap,
