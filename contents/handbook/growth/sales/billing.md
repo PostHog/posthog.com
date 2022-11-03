@@ -51,7 +51,7 @@ As far as possible these existing prices should be used in combination with `Cou
 1. Go to the appropriate product in question (**do not create your own Product**)
 1. Click "Add another price"
 1. **Important**: For metered products (e.g. Events, Recordings) select `Graduated Pricing`, `Usage is metered` and `Maximum usage during period`. This is crucial as the Billing Service will always send the maximum number of events for the billable period, respecting any billing limits set at the time.
-1. Expand the `additional options` and add a straightfoward Price Description like `Custom - fixed pricing
+1. Expand the `additional options` and add a straightforward Price Description like `Custom - fixed pricing
 1. Add the tiers as you see fit
 
 
