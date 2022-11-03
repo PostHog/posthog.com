@@ -489,7 +489,7 @@ Compression ratios have direct impact on query performance: IO is often the bott
 can be read faster from disk at the cost of more CPU work for decompression.
 
 By default columns are compressed by the `LZ4` algorithm. We've found good success using `ZSTD(3)` for storing JSON columns though - see
-[this issue](https://github.com/PostHog/posthog/issues/10616) for benchmarks.
+[benchmarks](https://github.com/PostHog/posthog/issues/10616) for more information.
 
 ### Weak JOIN support
 
