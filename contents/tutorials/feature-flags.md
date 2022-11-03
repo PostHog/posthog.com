@@ -4,9 +4,8 @@ sidebar: Docs
 showTitle: true
 featuredImage: ../images/tutorials/banners/feature-flags.png
 featuredTutorial: false
-author: ['yakko-majuri']
+author: ['yakko-majuri', 'joe-martin']
 topics: ['feature flags']
-featuredVideo: https://youtube.com/embed/aUILrrrlu50?start=950
 date: 2020-09-24
 ---
 
@@ -41,17 +40,11 @@ It can also be useful to create your Feature Flags before working on the functio
 
 ### Step 1: Navigate to 'Feature Flags'
 
-Click on 'Feature Flags' on the left sidebar in PostHog.
-
-![Feature Flags Page](../images/tutorials/feature-flags/feature-flags-page.png)
-
-### Step 2: Creating a new flag
-
-While on the 'Feature Flags' page, click on the blue '+ New Feature Flag' button. This will open up a menu on the right side of the page, like so:
+Click on 'Feature Flags' on the left sidebar in PostHog and click on the blue '+ New Feature Flag' button. This will open up a menu on the right side of the page, like so:
 
 ![Create Feature Flag](../images/tutorials/feature-flags/create-flag.png)
 
-### Step 3: Configuring your flag
+### Step 2: Configuring your flag
 
 With the menu open, you will see there are a few options you can configure for your flag. Here's the purpose of each one:
 
@@ -100,7 +93,7 @@ When used in conjunction with property filters, PostHog will first check if the 
 <div class='note-block'><b>Technical Note:</b> Our rollout percentage mechanism works by hashing the distinct ID of a user with the flag key, casting it to an integer, and dividing it by 100. That gives us a number between 0 and 1 which we compare to the rollout percentage value (also between 0 and 1) to determine if a user should have the flag on or off. This ensures an acceptable degree of randomness and accuracy while allowing flags to persist.</div>
 
 
-### Step 4: Saving your flag
+### Step 3: Saving your flag
 
 Just click 'Save feature flag' and that's it! Your flag will now be active. Clicking on it will also allow you to edit it as you wish.
 
