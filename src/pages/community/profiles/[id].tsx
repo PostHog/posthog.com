@@ -78,7 +78,7 @@ export default function ProfilePage({ params }: PageProps) {
 
     React.useEffect(() => {
         if (id) {
-            fetch(`http://localhost:3000/api/profiles/${id}`)
+            fetch(`https://squeak.cloud/api/profiles/${id}`)
                 .then((res) => {
                     if (res.status === 404) {
                         throw new Error('not found')
@@ -104,7 +104,7 @@ export default function ProfilePage({ params }: PageProps) {
         <>
             <SEO title={`Community Profile - PostHog`} />
             <OrgProvider
-                value={{ organizationId: '75421a23-0387-4418-8a6e-deddff8aefe8', apiHost: 'http://localhost:3000' }}
+                value={{ organizationId: 'a898bcf2-c5b9-4039-82a0-a00220a8c626', apiHost: 'https://squeak.cloud' }}
             >
                 <Layout>
                     <UserProvider>
