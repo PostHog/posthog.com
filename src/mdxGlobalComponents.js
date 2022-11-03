@@ -64,6 +64,7 @@ import { HostingOption } from './components/HostingOption'
 import { ImageBlock } from './components/ImageBlock'
 import { IngestionAppsList } from './components/IngestionAppsList'
 import { InlineCode } from './components/InlineCode'
+import { LPCTA } from './components/LPCTA'
 import { LandingPageCallToAction } from './components/LandingPage/LandingPageCallToAction'
 import { LibraryComparison } from './components/LibraryComparison'
 import { LibraryFeatures } from './components/LibraryFeatures'
@@ -195,6 +196,7 @@ export const shortcodes = {
     ImageBlock,
     IngestionAppsList,
     InlineCode,
+    LPCTA,
     LandingPageCallToAction,
     LibraryComparison,
     LibraryFeatures,
