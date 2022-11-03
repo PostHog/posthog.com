@@ -8,7 +8,7 @@ showTitle: true
 
 ### How do I get access?
 
-Ask in the `#team-platform` Slack channel for someone to add you. Anyone who has edit access can do so.
+Ask in the `#team-infrastructure` Slack channel for someone to add you.
 
 To give someone access (important to follow these steps!):
 1. navigate to [IAM](https://console.aws.amazon.com/iamv2/home#/users)
@@ -22,14 +22,14 @@ To give someone access (important to follow these steps!):
 
 This is because of MFA. Just adding MFA isn't quite enough for AWS console so if you are seeing a bunch of really weird permissions errors. Log out, then log back in using your MFA token. This should resolve everything!
 
-### Permissions errors using aws cli
+### Permissions errors using AWS CLI
 
 If you see something like:
 ```
 <my-user> is not authorized to perform: <action> on resource: <resource> with an explicit deny
 ```
 
-Note the "with an explicit deny" in the end which likely is due to the fact that we force Multi-Factor Authentication (MFA). Follow [this guide](https://aws.amazon.com/premiumsupport/knowledge-center/authenticate-mfa-cli/) to use a session token. 
+Note the "with an explicit deny" in the end which likely is due to the fact that we force Multi-Factor Authentication (MFA). Follow [this guide](https://aws.amazon.com/premiumsupport/knowledge-center/authenticate-mfa-cli/) to use a session token.
 
 TLDR:
 
@@ -55,7 +55,7 @@ See docs [here](https://posthog.com/docs/self-host/deploy/aws).
 
 ### How do I get access?
 
-Ask someone in the `#team-platform` Slack channel to add you. Anyone who has edit access can do so.
+Ask in the `#team-infrastructure` Slack channel for someone to add you.
 
 To give someone access: Navigate to [PostHog project IAM](https://console.cloud.google.com/iam-admin/iam?project=posthog-301601&supportedpurview=project) and use the `+Add` button at the top to add their PostHog email address and toggle `Basic` -> `Editor` role.
 
@@ -68,9 +68,9 @@ See docs [here](https://posthog.com/docs/self-host/deploy/gcp).
 
 ### How do I get access?
 
-Ask in the `#team-platform` Slack channel for someone to add you. Anyone who is an owner can do so.
+Ask in the `#team-infrastructure` Slack channel for someone to add you.
 
-To give someone access: Navigate to [PostHog team settings page](https://cloud.digitalocean.com/account/team?i=7cfa7c) and use the `Invite Members` button to add their PostHog email address.
+To give someone access: navigate to [PostHog team settings page](https://cloud.digitalocean.com/account/team?i=7cfa7c) and use the `Invite Members` button to add their PostHog email address.
 
 ### Edit 1-Click app info
 
