@@ -17,7 +17,7 @@ We have a few different routes for users to contact us. As an open source compan
 These are the ways in which customers can currently reach us:
 
 - **Questions** - this offers users the best possible experience, as they can search [previously answered questions](/questions) that have been asked anywhere on posthog.com in our Docs!
-- **Slack** - our active [PostHog Users Slack](https://posthog.com/slack) community frequently post questions, and for [Scale](/pricing#scale) and [Enterprise](/pricing#enterprise) customers, through a dedicated channel on our main company Slack
+- **Slack** - our active [PostHog Users Slack](https://posthog.com/slack) community frequently post questions, and for [Self-hosted](/pricing) and [Enterprise](/pricing#enterprise) customers, through a dedicated channel on our main company Slack
 - **Email** - a user may email hey@posthog.com with a specific support query
 - **GitHub** - sometimes users ask about the progress of [certain issues](https://github.com/PostHog/posthog) that are important to them
 
@@ -35,7 +35,7 @@ We want to help teams of all sizes learn how to ask the right product analytics 
 
 We've also created a [Product Metrics Worksheet](https://docs.google.com/document/d/1mXKS08ngcJlbJdaYihikHO7RDY8dbxyChmsUneOwrfw/edit?usp=sharing) that systematically lays out how to define, implement, and track core product and business metrics (Acquisition, Activation, Retention, Referral, Revenue) all within PostHog. Anyone can copy this - even if they're not using PostHog (yet)!
 
-For [Scale](/pricing#scale) customers, we include a complimentary workshop where we work with all the stakeholders to go through this worksheet, define these metrics, and create dashboards in PostHog. [Enterprise](/pricing#enterprise) customers have customized onboarding depending on the nature of the agreement. 
+For [Self-hosted](/pricing) customers, we include a complimentary workshop where we work with all the stakeholders to go through this worksheet, define these metrics, and create dashboards in PostHog. [Enterprise](/pricing#enterprise) customers have customized onboarding depending on the nature of the agreement. 
 
 ## Customer support runbook
 
