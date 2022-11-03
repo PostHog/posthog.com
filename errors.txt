@@ -363,16 +363,16 @@ Warning    [url-whitespace] Leading or trailing whitespace in URL
            '.
 Result     Valid: filtered
 
-URL        `/handbook/engineering/developing-locally'
-Name       `Engineering'
-Parent URL https://posthog.com, line 73, col 72614
-Real URL   https://posthog.com/handbook/engineering/developing-locally
-Check time 5.174 seconds
-Info       Redirected to
-           `https://posthog.com/docs/contribute/developing-locally'.
-           Redirected to
-           `https://posthog.com/handbook/engineering/developing-locally'.
-Result     Error: TooManyRedirects: Exceeded 10 redirects.
+              URL        `/handbook/engineering/developing-locally'
+              Name       `Engineering'
+              Parent URL https://posthog.com, line 73, col 72614
+              Real URL   https://posthog.com/handbook/engineering/developing-locally
+              Check time 5.174 seconds
+              Info       Redirected to
+                         `https://posthog.com/docs/contribute/developing-locally'.
+                         Redirected to
+                         `https://posthog.com/handbook/engineering/developing-locally'.
+              Result     Error: TooManyRedirects: Exceeded 10 redirects.
 
 URL        `https://github.com/PostHog/posthog.com/issues/new?title=Feedback on: Overview&body=**Issue with: /handbook/growth/marketing/index.md**'
 Parent URL https://posthog.com/handbook/growth/marketing, line 74, col 43192
@@ -3111,27 +3111,27 @@ Warning    [url-whitespace] Leading or trailing whitespace in URL
            '.
 Result     Valid: filtered
 
-URL        `/handbook/engineering/stack'
-Name       `Tech stack'
-Parent URL https://posthog.com/handbook, line 72, col 64769
-Real URL   https://posthog.com/handbook/engineering/stack
-Check time 4.068 seconds
-Info       Redirected to
-           `https://posthog.com/docs/contribute/stack'.
-           Redirected to
-           `https://posthog.com/handbook/engineering/stack'.
-Result     Error: TooManyRedirects: Exceeded 10 redirects.
+              URL        `/handbook/engineering/stack'
+              Name       `Tech stack'
+              Parent URL https://posthog.com/handbook, line 72, col 64769
+              Real URL   https://posthog.com/handbook/engineering/stack
+              Check time 4.068 seconds
+              Info       Redirected to
+                         `https://posthog.com/docs/contribute/stack'.
+                         Redirected to
+                         `https://posthog.com/handbook/engineering/stack'.
+              Result     Error: TooManyRedirects: Exceeded 10 redirects.
 
-URL        `/handbook/engineering/project-structure'
-Name       `Project structure'
-Parent URL https://posthog.com/handbook, line 72, col 65258
-Real URL   https://posthog.com/handbook/engineering/project-structure
-Check time 3.859 seconds
-Info       Redirected to
-           `https://posthog.com/docs/contribute/project-structure'.
-           Redirected to
-           `https://posthog.com/handbook/engineering/project-structure'.
-Result     Error: TooManyRedirects: Exceeded 10 redirects.
+              URL        `/handbook/engineering/project-structure'
+              Name       `Project structure'
+              Parent URL https://posthog.com/handbook, line 72, col 65258
+              Real URL   https://posthog.com/handbook/engineering/project-structure
+              Check time 3.859 seconds
+              Info       Redirected to
+                         `https://posthog.com/docs/contribute/project-structure'.
+                         Redirected to
+                         `https://posthog.com/handbook/engineering/project-structure'.
+              Result     Error: TooManyRedirects: Exceeded 10 redirects.
 
 URL        `https://github.com/PostHog/posthog.com/issues/new?title=Feedback on: How we review PRs&body=**Issue with: /handbook/engineering/how-we-review.md**'
 Parent URL https://posthog.com/handbook/engineering/how-we-review, line 72, col 225034
@@ -3157,16 +3157,16 @@ Warning    [url-whitespace] Leading or trailing whitespace in URL
            '.
 Result     Valid: filtered
 
-URL        `/handbook/engineering/conventions/frontend-coding'
-Name       `Coding conventions'
-Parent URL https://posthog.com/handbook, line 72, col 66678
-Real URL   https://posthog.com/handbook/engineering/conventions/frontend-coding
-Check time 3.914 seconds
-Info       Redirected to
-           `https://posthog.com/docs/contribute/coding-conventions'.
-           Redirected to
-           `https://posthog.com/handbook/engineering/conventions/frontend-coding'.
-Result     Error: TooManyRedirects: Exceeded 10 redirects.
+              URL        `/handbook/engineering/conventions/frontend-coding'
+              Name       `Coding conventions'
+              Parent URL https://posthog.com/handbook, line 72, col 66678
+              Real URL   https://posthog.com/handbook/engineering/conventions/frontend-coding
+              Check time 3.914 seconds
+              Info       Redirected to
+                         `https://posthog.com/docs/contribute/coding-conventions'.
+                         Redirected to
+                         `https://posthog.com/handbook/engineering/conventions/frontend-coding'.
+              Result     Error: TooManyRedirects: Exceeded 10 redirects.
 
 URL        `https://github.com/PostHog/posthog.com/issues/new?title=Feedback on: Feature ownership&body=**Issue with: /handbook/engineering/feature-ownership.md**'
 Parent URL https://posthog.com/handbook/engineering/feature-ownership, line 72, col 231935
@@ -3326,38 +3326,38 @@ Warning    [url-whitespace] Leading or trailing whitespace in URL
            '.
 Result     Valid: filtered
 
-URL        `/handbook/engineering/cloud-providers'
-Name       `Working with cloud providers'
-Parent URL https://posthog.com/handbook, line 72, col 79524
-Real URL   https://posthog.com/handbook/engineering/cloud-providers
-Check time 3.508 seconds
-Info       Redirected to
-           `https://posthog.com/handbook/engineering/aws'.
-           Redirected to
-           `https://posthog.com/handbook/engineering/cloud-providers'.
-Result     Error: TooManyRedirects: Exceeded 10 redirects.
+              URL        `/handbook/engineering/cloud-providers'
+              Name       `Working with cloud providers'
+              Parent URL https://posthog.com/handbook, line 72, col 79524
+              Real URL   https://posthog.com/handbook/engineering/cloud-providers
+              Check time 3.508 seconds
+              Info       Redirected to
+                         `https://posthog.com/handbook/engineering/aws'.
+                         Redirected to
+                         `https://posthog.com/handbook/engineering/cloud-providers'.
+              Result     Error: TooManyRedirects: Exceeded 10 redirects.
 
-URL        `/handbook/engineering/posthog-com/developing-the-website'
-Name       `PostHog.com'
-Parent URL https://posthog.com/handbook, line 72, col 80977
-Real URL   https://posthog.com/handbook/engineering/posthog-com/developing-the-website
-Check time 3.665 seconds
-Info       Redirected to
-           `https://posthog.com/docs/contribute/contribute-to-website'.
-           Redirected to
-           `https://posthog.com/handbook/engineering/posthog-com/developing-the-website'.
-Result     Error: TooManyRedirects: Exceeded 10 redirects.
+              URL        `/handbook/engineering/posthog-com/developing-the-website'
+              Name       `PostHog.com'
+              Parent URL https://posthog.com/handbook, line 72, col 80977
+              Real URL   https://posthog.com/handbook/engineering/posthog-com/developing-the-website
+              Check time 3.665 seconds
+              Info       Redirected to
+                         `https://posthog.com/docs/contribute/contribute-to-website'.
+                         Redirected to
+                         `https://posthog.com/handbook/engineering/posthog-com/developing-the-website'.
+              Result     Error: TooManyRedirects: Exceeded 10 redirects.
 
-URL        `/handbook/engineering/posthog-com/mdx-setup'
-Name       `MDX setup'
-Parent URL https://posthog.com/handbook, line 72, col 82468
-Real URL   https://posthog.com/handbook/engineering/posthog-com/mdx-setup
-Check time 3.833 seconds
-Info       Redirected to
-           `https://posthog.com/handbook/engineering/mdx'.
-           Redirected to
-           `https://posthog.com/handbook/engineering/posthog-com/mdx-setup'.
-Result     Error: TooManyRedirects: Exceeded 10 redirects.
+              URL        `/handbook/engineering/posthog-com/mdx-setup'
+              Name       `MDX setup'
+              Parent URL https://posthog.com/handbook, line 72, col 82468
+              Real URL   https://posthog.com/handbook/engineering/posthog-com/mdx-setup
+              Check time 3.833 seconds
+              Info       Redirected to
+                         `https://posthog.com/handbook/engineering/mdx'.
+                         Redirected to
+                         `https://posthog.com/handbook/engineering/posthog-com/mdx-setup'.
+              Result     Error: TooManyRedirects: Exceeded 10 redirects.
 
 URL        `https://github.com/PostHog/posthog.com/issues/new?title=Feedback on: Markdown&body=**Issue with: /handbook/engineering/posthog-com/markdown.mdx**'
 Parent URL https://posthog.com/handbook/engineering/posthog-com/markdown, line 75, col 32009

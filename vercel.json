@@ -346,18 +346,6 @@
             "destination": "/blog/best-open-source-session-replay-tools"
         },
         { "source": "/docs/privacy/hipaa-compliance", "destination": "/blog/hipaa-compliant-analytics" },
-        {
-            "source": "/handbook/engineering/conventions/frontend-coding",
-            "destination": "/docs/contribute/coding-conventions"
-        },
-        {
-            "source": "/handbook/engineering/posthog-com/developing-the-website",
-            "destination": "/docs/contribute/contribute-to-website"
-        },
-        { "source": "/handbook/engineering/project-structure", "destination": "/docs/contribute/project-structure" },
-        { "source": "/handbook/engineering/stack", "destination": "/docs/contribute/stack" },
-        { "source": "/handbook/engineering/cloud-providers", "destination": "/handbook/engineering/aws" },
-        { "source": "/handbook/engineering/posthog-com/mdx-setup", "destination": "/handbook/engineering/mdx" },
         { "source": "/product/quantitative-analysis", "destination": "/product/correlation-analysis" },
         { "source": "/docs/plugins/build/reference", "destination": "/docs/apps/build/reference" },
         { "source": "/docs/plugins/build/types", "destination": "/docs/apps/build/types" },
