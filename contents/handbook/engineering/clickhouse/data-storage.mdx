@@ -312,9 +312,12 @@ ORDER BY (site_id, toStartOfDay(timestamp), event, uuid)
 SETTINGS index_granularity = 8192
 ```
 
-Now, ClickHouse would generate one **partition** per 10 years of data, allowing to skip reading even the primary index
+Now, ClickHouse would generate one **partition** per 10 years of data, allowing to skip reading even the primary index in some cases.
 
 In the underlying data, each **part** would belong to a single **partition** and only parts within a partition would get merged.
+
+One additional benefit of partitioning by a derivate of timestamp is that if most queries touch recent data,
+can also set up rules to automatically move older parts and partitions to cheaper storage or drop them entirely.
 
 ### Query analysis
 
