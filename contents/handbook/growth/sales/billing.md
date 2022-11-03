@@ -19,7 +19,7 @@ With the addition of our "V2" Billing architecture, billing for **self-hosted** 
 
 > ⚠️ Modifying products and prices should be done carefully. If you aren't sure at any point contact the #growth team to check what you are doing
 
-Each of our billable Products has an entry in Stripe with each Product having multiple Prices. We use metadata on these prices to allow the Biling Service to appropriately load and offer products to the instances:
+Each of our billable Products has an entry in Stripe with each Product having multiple Prices. We use metadata on these prices to allow the Billing Service to appropriately load and offer products to the instances:
 
 
 ![Stripe products](../../../images/handbook/growth/sales/stripe-products.png)
@@ -31,8 +31,27 @@ Each of our billable Products has an entry in Stripe with each Product having mu
 * `posthog_type`: `events | recordings | enterprise` -> This allows PostHog to find and map the relevant products. **Important:** There should never be more than 1 Stripe product with the same `posthog_type`
 
 **On Stripe Product Prices**
-* `plan`: `standard | enterprise | startup | free` -> Identifies the plan that this price belongs to. If not set, the `default` price is used.
+* `plan`: `standard | enterprise | startup | free` -> Identifies the plan that this price belongs to. If `standard` is not set anywhere, the `default` price is used.
+* `free_allocation` -> The free usage an organization is entitled to before inserting their billing details
+* `description` -> Adds an (i) info label to the frontend showing a custom description for the price, can be written using HTML markup
+* `valid_days` -> The number of days a price is valid for, before automatically switching to another plan (the `default` plan unless `move_to_price_id` is set). Useful to create pricing that is only valid for a specific period, e.g. for the startup plans. Note: if more than one price with `valid_days` is added to a subscription, the validity period will be the *shortest* of the two, before resetting all plans to the default ones 
+* `move_to_price_id` -> Can be used together with `valid_days` to specify if the customer needs to be moved to a specific pricing, rather than the default one, at the end of the validity period.
 
+
+### Custom pricing 
+
+Each Product (Events, Recordings, Enterprise) has multiple prices that can be used in a subscription. The `default` price is the one that will be applied by the standard subscribe flows but there are also prices for the metered products (Events, Recordings) such as `startup` or `enterprise` which can be applied. For very special cases, each product also has a `free` price that charges nothing whilst enabling the features.
+
+As far as possible these existing prices should be used in combination with `Coupons` to offer custom deals to customers. In more complex cases however it may be useful to create a custom pricing configuration for a product(s). To do this:
+
+1. Go to the appropriate product in question (**do not create your own Product**)
+1. Click "Add another price"
+1. **Important**: For metered products (e.g. Events, Recordings) select `Graduated Pricing`, `Usage is metered` and `Maximum usage during period`. This is crucial as the Billing Service will always send the maximum number of events for the billable period, respecting any billing limits set at the time.
+1. Expand the `additional options` and add a straightforward Price Description like `Custom - fixed pricing`
+1. Add the tiers as you see fit
+1. Add custom metadata if needed
+
+![Stripe price example](../../../images/handbook/growth/sales/stripe-custom-price.png)
 
 
 ### Upgrading a customer to Enterprise
@@ -46,19 +65,11 @@ Using the **Updating Subscriptions** flow below:
 1. Add the `Enterprise Product` as well as the other products (Events, Recordings) labelled with `Enterprise`
 
 
-### Custom pricing 
-
-Each Product (Events, Recordings, Enterprise) has multiple prices that can be used in a subscription. The `default` price is the one that will be applied by the standard subscribe flows but there are also prices for the metered products (Events, Recordings) such as `startup` or `enterprise` which can be applied. For very special cases, each product also has a `free` price that charges nothing whilst enabling the features.
-
-As far as possible these existing prices should be used in combination with `Coupons` to offer custom deals to customers. In more complex cases however it may be useful to create a custom pricing configuration for a product(s). To do this:
-
-1. Go to the appropriate product in question (**do not create your own Product**)
-1. Click "Add another price"
-1. **Important**: For metered products (e.g. Events, Recordings) select `Graduated Pricing`, `Usage is metered` and `Maximum usage during period`. This is crucial as the Billing Service will always send the maximum number of events for the billable period, respecting any billing limits set at the time.
-1. Expand the `additional options` and add a straightforward Price Description like `Custom - fixed pricing
-1. Add the tiers as you see fit
-
-![Stripe price example](../../../images/handbook/growth/sales/stripe-custom-price.png)
+### Moving a customer to a Startup plan
+Using the **Updating Subscriptions** flow below:
+1. Remove all standard prices in the subscription
+1. Search for `startup` 
+1. Add all products (Events, Recordings) labelled with `Startup`, the user will be subscribed to the Startup plan for 1 year.
 
 
 ### Updating subscriptions
