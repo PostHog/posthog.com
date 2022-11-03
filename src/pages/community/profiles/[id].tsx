@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { PageProps } from 'gatsby'
 
 import { handbook } from '../../../sidebars/sidebars.json'
@@ -15,6 +15,9 @@ import Link from 'components/Link'
 import { Heading } from 'components/Heading'
 import Markdown from 'markdown-to-jsx'
 import { classNames } from 'lib/utils'
+import { OrgProvider, UserProvider, useUser } from 'squeak-react'
+import Modal from 'components/Modal'
+import EditProfile from 'components/Profiles/EditProfile'
 
 type SqueakProfile = {
     id: string
@@ -50,7 +53,7 @@ const Avatar = (props: { className?: string; src?: string }) => {
             {props.src ? (
                 <img className="w-full h-full" alt="" src={props.src} />
             ) : (
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M20.0782 41.0392H5.42978C4.03134 41.0392 3.1173 40.1642 3.09386 38.7736C3.07823 37.7814 3.07042 36.797 3.10948 35.8048C3.15636 34.6329 3.72668 33.7345 4.74228 33.1798C8.0782 31.3595 11.4299 29.5783 14.7659 27.7658C15.0081 27.633 15.1565 27.758 15.3362 27.8517C18.1878 29.3439 21.0942 29.4689 24.0626 28.2267C24.1485 28.1955 24.2423 28.1721 24.3126 28.1096C24.9298 27.5861 25.4845 27.7971 26.1251 28.1486C29.1173 29.7971 32.1331 31.4143 35.1487 33.0238C36.4534 33.7191 37.094 34.766 37.0706 36.2426C37.0549 37.0785 37.0706 37.9067 37.0706 38.7426C37.0628 40.1254 36.1409 41.0395 34.7659 41.0395H20.0783L20.0782 41.0392Z"
                         fill="#BFBFBC"
@@ -69,6 +72,7 @@ export default function ProfilePage({ params }: PageProps) {
     const id = params.id
 
     const [profile, setProfile] = React.useState<SqueakProfile | undefined>(undefined)
+    const [editModalOpen, setEditModalOpen] = React.useState(false)
 
     const name = [profile?.first_name, profile?.last_name].filter(Boolean).join(' ')
 
@@ -91,64 +95,81 @@ export default function ProfilePage({ params }: PageProps) {
         }
     }, [id])
 
-    const components = {
-        inlineCode: InlineCode,
-        blockquote: Blockquote,
-        pre: MdxCodeBlock,
-        h1: (props) => Heading({ as: 'h1', ...props }),
-        h2: (props) => Heading({ as: 'h2', ...props }),
-        h3: (props) => Heading({ as: 'h3', ...props }),
-        h4: (props) => Heading({ as: 'h4', ...props }),
-        h5: (props) => Heading({ as: 'h5', ...props }),
-        h6: (props) => Heading({ as: 'h6', ...props }),
-        img: ZoomImage,
-        a: (props: any) => <Link {...props} className="text-red hover:text-red font-semibold" />,
+    const handleEditProfile = (profile) => {
+        setProfile(profile)
+        setEditModalOpen(false)
     }
-
-    console.log(profile?.biography)
 
     return (
         <>
-            <SEO title={`Community Profile - PostHog`} image={`/og-images/.jpeg`} />
-            <Layout>
-                <PostLayout
-                    title="Profile"
-                    breadcrumb={[
-                        { name: 'Community', url: '/questions' },
-                        { name: 'Profile', url: `/community/profiles/${id}` },
-                    ]}
-                    menu={handbook}
-                    sidebar={<ProfileSidebar profile={profile} />}
-                    hideSurvey
-                >
-                    {profile ? (
-                        <div className="space-y-8 my-8">
-                            <section className="flex justify-between">
-                                <div className="space-y-3">
-                                    <h1 className="m-0">{name || 'Anonymous'}</h1>
-                                    {profile.company_role && <p className="text-gray">{profile?.company_role}</p>}
+            <SEO title={`Community Profile - PostHog`} />
+            <OrgProvider
+                value={{ organizationId: '75421a23-0387-4418-8a6e-deddff8aefe8', apiHost: 'http://localhost:3000' }}
+            >
+                <Layout>
+                    <UserProvider>
+                        <Modal setOpen={setEditModalOpen} open={editModalOpen}>
+                            <div
+                                onClick={() => setEditModalOpen(false)}
+                                className="flex flex-start justify-center absolute w-full p-4"
+                            >
+                                <div
+                                    className="max-w-xl bg-white dark:bg-black rounded-md relative w-full p-5"
+                                    onClick={(e) => e.stopPropagation()}
+                                >
+                                    <EditProfile onSubmit={handleEditProfile} profile={profile} />
                                 </div>
+                            </div>
+                        </Modal>
+                        <PostLayout
+                            title="Profile"
+                            breadcrumb={[
+                                { name: 'Community', url: '/questions' },
+                                { name: 'Profile', url: `/community/profiles/${id}` },
+                            ]}
+                            menu={handbook}
+                            sidebar={<ProfileSidebar setEditModalOpen={setEditModalOpen} profile={profile} />}
+                            hideSurvey
+                        >
+                            {profile ? (
+                                <div className="space-y-8 my-8">
+                                    <section className="flex justify-between">
+                                        <div className="space-y-3">
+                                            <h1 className="m-0">{name || 'Anonymous'}</h1>
+                                            {profile.company_role && (
+                                                <p className="text-gray">{profile?.company_role}</p>
+                                            )}
+                                        </div>
 
-                                <Avatar className="w-24 h-24" src={profile.avatar} />
-                            </section>
+                                        <Avatar className="w-24 h-24" src={profile.avatar} />
+                                    </section>
 
-                            {profile?.biography && (
-                                <section>
-                                    <h3>Biography</h3>
+                                    {profile?.biography && (
+                                        <section>
+                                            <h3>Biography</h3>
 
-                                    <Markdown>{profile.biography}</Markdown>
-                                </section>
-                            )}
-                        </div>
-                    ) : null}
-                </PostLayout>
-            </Layout>
+                                            <Markdown>{profile.biography}</Markdown>
+                                        </section>
+                                    )}
+                                </div>
+                            ) : null}
+                        </PostLayout>
+                    </UserProvider>
+                </Layout>
+            </OrgProvider>
         </>
     )
 }
 
-const ProfileSidebar = ({ profile }: { profile?: SqueakProfile }) => {
+const ProfileSidebar = ({
+    profile,
+    setEditModalOpen,
+}: {
+    profile?: SqueakProfile
+    setEditModalOpen: () => boolean
+}) => {
     const name = [profile?.first_name, profile?.last_name].filter(Boolean).join(' ')
+    const { user } = useUser()
 
     return profile ? (
         <div>
@@ -208,6 +229,14 @@ const ProfileSidebar = ({ profile }: { profile?: SqueakProfile }) => {
                     ) : null}
                 </>
             ) : null}
+
+            {user?.profile?.id === profile.id && (
+                <SidebarSection>
+                    <button onClick={() => setEditModalOpen(true)} className="text-base text-red font-semibold">
+                        Edit profile
+                    </button>
+                </SidebarSection>
+            )}
         </div>
     ) : (
         <></>

@@ -40,7 +40,20 @@ export interface IRoadmap {
 const Complete = (props: { title: string; githubPages: IGitHubPage[]; otherLinks: string[] }) => {
     const { title, githubPages, otherLinks } = props
     const url = (githubPages?.length > 0 && githubPages[0]?.html_url) || (otherLinks?.length > 0 && otherLinks[0])
-    return <li className="text-base font-semibold">{url ? <Link to={url} className="flex px-4 py-2 bg-white rounded-sm relative active:top-[0.5px] active:scale-[.99] shadow-xl">{title}</Link> : <span className="flex bg-white px-4 py-2 rounded-sm shadow-xl relative">{title}</span>}</li>
+    return (
+        <li className="text-base font-semibold">
+            {url ? (
+                <Link
+                    to={url}
+                    className="flex px-4 py-2 bg-white rounded-sm relative active:top-[0.5px] active:scale-[.99] shadow-xl"
+                >
+                    {title}
+                </Link>
+            ) : (
+                <span className="flex bg-white px-4 py-2 rounded-sm shadow-xl relative">{title}</span>
+            )}
+        </li>
+    )
 }
 
 const Section = ({
@@ -65,9 +78,7 @@ const Card = ({ team, children }: { team: string; children: React.ReactNode }) =
     return (
         <>
             {team !== 'undefined' && <h4 className="oh5acity-50 text-base font-bold mt-0 mb-2 pt-4">{team}</h4>}
-            <li className="m-0 mb-3">
-                {children}
-            </li>
+            <li className="m-0 mb-3">{children}</li>
         </>
     )
 }

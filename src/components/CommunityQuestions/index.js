@@ -10,8 +10,8 @@ export default function CommunityQuestions() {
             </h3>
             <Squeak
                 onSignUp={(user) => createHubSpotContact(user)}
-                apiHost="https://squeak.cloud"
-                organizationId="a898bcf2-c5b9-4039-82a0-a00220a8c626"
+                apiHost="http://localhost:3000"
+                organizationId="75421a23-0387-4418-8a6e-deddff8aefe8"
             />
         </div>
     )
