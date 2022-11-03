@@ -29,10 +29,10 @@ Each of our billable Products has an entry in Stripe with each Product having mu
 #### Custom metadata
 **On Stripe Products**
 * `posthog_type`: `events | recordings | enterprise` -> This allows PostHog to find and map the relevant products. **Important:** There should never be more than 1 Stripe product with the same `posthog_type`
+* `free_allocation` -> The free usage an organization is entitled to before inserting their billing details, for a specific product
 
 **On Stripe Product Prices**
 * `plan`: `standard | enterprise | startup | free` -> Identifies the plan that this price belongs to. If `standard` is not set anywhere, the `default` price is used.
-* `free_allocation` -> The free usage an organization is entitled to before inserting their billing details
 * `description` -> Adds an (i) info label to the frontend showing a custom description for the price, can be written using HTML markup
 * `valid_days` -> The number of days a price is valid for, before automatically switching to another plan (the `default` plan unless `move_to_price_id` is set). Useful to create pricing that is only valid for a specific period, e.g. for the startup plans. Note: if more than one price with `valid_days` is added to a subscription, the validity period will be the *shortest* of the two, before resetting all plans to the default ones 
 * `move_to_price_id` -> Can be used together with `valid_days` to specify if the customer needs to be moved to a specific pricing, rather than the default one, at the end of the validity period.
