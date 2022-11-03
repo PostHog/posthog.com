@@ -35,7 +35,7 @@ We want to help teams of all sizes learn how to ask the right product analytics 
 
 We've also created a [Product Metrics Worksheet](https://docs.google.com/document/d/1mXKS08ngcJlbJdaYihikHO7RDY8dbxyChmsUneOwrfw/edit?usp=sharing) that systematically lays out how to define, implement, and track core product and business metrics (Acquisition, Activation, Retention, Referral, Revenue) all within PostHog. Anyone can copy this - even if they're not using PostHog (yet)!
 
-For [Scale](/pricing#scale) customers, we include a complimentary workshop where we work with all the stakeholders to go through this worksheet, define these metrics, and create dashboards in PostHog. [Enteprise](/pricing#enterprise) customers have customized onboarding depending on the nature of the agreement. 
+For [Scale](/pricing#scale) customers, we include a complimentary workshop where we work with all the stakeholders to go through this worksheet, define these metrics, and create dashboards in PostHog. [Enterprise](/pricing#enterprise) customers have customized onboarding depending on the nature of the agreement. 
 
 ## Customer support runbook
 
