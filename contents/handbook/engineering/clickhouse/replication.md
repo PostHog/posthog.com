@@ -4,9 +4,11 @@ title: Data replication and distributed queries
 
 This document provides information on:
 - How data replication and Distributed table engine works in ClickHouse
+- Sharding MergeTree tables
 - How to monitor replication
-- Distributed query execution
-- Important gotchas
+- How to reason about distributed query execution
+- Important settings for distributed query execution
+- Doing ad-hoc distributed queries
 
 ## Setting up replicated tables
 
@@ -26,7 +28,7 @@ if the previous table has been dropped.
 
 ### Sharding replicated tables
 
-Sharding helps scale out a database fleet by having each machine only s
+Sharding helps scale out a dataset by having each node only store part of the data.
 
 To decide whether to shard a table, consider how it's queried and what data it stores:
 - Shard: tables that could become too large for a single server (e.g. events, logs, raw analytics data)
@@ -39,13 +41,27 @@ When creating a replicated table, configuring whether a table is sharded or not 
 - Example sharded engine: `ReplicatedMergeTree('/zk/some/path/{shard}/tablename', '{replica}')`
 - Example not sharded table engine: `ReplicatedMergeTree('/zk/some/path/tablename', '{replica}-{shard}')`
 
+Note that resharding large tables is currently relatively painful and bespoke operation - be careful choosing a good sharding key.
+
+### Monitoring replication
+
+When doing larger cluster operations, it's often important to keep an eye on replication. The [`system.replication_queue`](https://clickhouse.com/docs/en/operations/system-tables/replication_queue) and [`system.replicated_fetches`](https://clickhouse.com/docs/en/operations/system-tables/replicated_fetches) tables can provide at-a-glance overview of what the system is doing.
+
 ## `Distributed` table engine
 
 [`Distributed` table engine](https://clickhouse.com/docs/en/engines/table-engines/special/distributed/) tables
 are used to query and write to sharded tables. Note that Distributed engine tables do not store any data on its own
 but rather always fan out to `ReplicatedMergeTree` tables on the cluster.
 
-TODO: Limitations of distributed tables. No aliases, materialized columns, etc.
+## How writes against `Distributed` tables work
+
+When INSERTing data against Distributed tables, ClickHouse decides which shard each row belongs to and forwards data to relevant shard(s)
+based on the sharding_key.
+
+Note that if your underlying table has columns that ClickHouse populates (e.g. ALIAS, MATERIALIZED), it's often necessary to set up
+two Distributed tables:
+- One for writes containing a minimum set of columns
+- One for reads which contain all columns
 
 ## How queries against `Distributed` tables work
 
@@ -161,12 +177,12 @@ Consider this query:
 
 ```sql
 SELECT
-    toStartOfDay(timestamp),
-    avg(metric_value)
+    site_id,
+    uniq(event)
 FROM distributed_sensor_values
 WHERE timestamp > '2010-01-01' and timestamp < '2023-01-01'
-GROUP BY toYear(timestamp)
-ORDER BY avg(metric_value) DESC
+GROUP BY site_id
+ORDER BY uniq(event) DESC
 LIMIT 20
 ```
 
@@ -175,64 +191,65 @@ would look something like the following:
 
 ```sql
 SELECT
-    toStartOfDay(timestamp),
-    avgState(metric_value)
+    site_id,
+    uniqState(event)
 FROM sharded_sensor_values
 WHERE timestamp > '2010-01-01' and timestamp < '2023-01-01'
-GROUP BY toStartOfDay(timestamp)
+GROUP BY site_id
 ```
 
 In `EXPLAIN` output this would be expressed as:
 
 ```
 ReadFromRemote (Read from remote replica)
-Header: toStartOfDay(timestamp) DateTime
-        avg(metric_value) AggregateFunction(avg, Int32)
+Header: site_id UInt32
+        uniq(event) AggregateFunction(uniq, String)
 ```
 
-This is a lot of data that needs to be streamed over the network and
+In this case coordinator needs to receive a lot of data from the other shards to calculate the correct results:
+1. It loads data for every site_id on the other shards
+2. It cannot just load the unique event count from the other shards, but rather needs to know what events were seen or not
 
-`avgState` is a [aggregate function combinator](https://clickhouse.com/docs/en/sql-reference/aggregate-functions/combinators/#-state). It's useful since than needing to send over all the unique metric_values, the coordinator can send back values that the coordinator can combine
-with its own results.
+This query is expensive in terms of the amount of data that needs to be transferred over the network.
 
-One important aggregate function combinator is `uniqState` which calculate number of unique instances of
+One thing that makes this query more efficient is `uniqState`, which is a [aggregate function combinator](https://clickhouse.com/docs/en/sql-reference/aggregate-functions/combinators/#-state). It's useful since than needing to send over all the events, the coordinator can send back an optimized bitmap-like structure that the coordinator can combine with its own results.
 
 <details><summary>Click to see full `EXPLAIN` plan</summary>
 
 ```
 Expression (Projection)
-Header: toStartOfDay(timestamp) DateTime
-        metric_value Float64
+Header: site_id UInt32
+        uniq(event) UInt64
   Limit (preliminary LIMIT (without OFFSET))
-  Header: toStartOfDay(timestamp) DateTime
-          avg(metric_value) Float64
+  Header: site_id UInt32
+          uniq(event) UInt64
     Sorting (Sorting for ORDER BY)
-    Header: toStartOfDay(timestamp) DateTime
-            avg(metric_value) Float64
+    Header: site_id UInt32
+            uniq(event) UInt64
       Expression (Before ORDER BY)
-      Header: toStartOfDay(timestamp) DateTime
-              avg(metric_value) Float64
+      Header: site_id UInt32
+              uniq(event) UInt64
         MergingAggregated
-        Header: toStartOfDay(timestamp) DateTime
-                avg(metric_value) Float64
+        Header: site_id UInt32
+                uniq(event) UInt64
           SettingQuotaAndLimits (Set limits and quota after reading from storage)
-          Header: toStartOfDay(timestamp) DateTime
-                  avg(metric_value) AggregateFunction(avg, Int32)
+          Header: site_id UInt32
+                  uniq(event) AggregateFunction(uniq, String)
             Union
-            Header: toStartOfDay(timestamp) DateTime
-                    avg(metric_value) AggregateFunction(avg, Int32)
+            Header: site_id UInt32
+                    uniq(event) AggregateFunction(uniq, String)
               Aggregating
-              Header: toStartOfDay(timestamp) DateTime
-                      avg(metric_value) AggregateFunction(avg, Int32)
+              Header: site_id UInt32
+                      uniq(event) AggregateFunction(uniq, String)
                 Expression (Before GROUP BY)
-                Header: metric_value Int32
-                        toStartOfDay(timestamp) DateTime
+                Header: site_id UInt32
+                        event String
                   SettingQuotaAndLimits (Set limits and quota after reading from storage)
-                  Header: timestamp DateTime
-                          metric_value Int32
+                  Header: site_id UInt32
+                          event String
                     ReadFromMergeTree
-                    Header: timestamp DateTime
-                            metric_value Int32
+                    Header: site_id UInt32
+                            event String
                     Indexes:
                       PrimaryKey
                         Keys:
@@ -241,69 +258,119 @@ Header: toStartOfDay(timestamp) DateTime
                         Parts: 6/6
                         Granules: 1628/5723
               ReadFromRemote (Read from remote replica)
-              Header: toStartOfDay(timestamp) DateTime
-                      avg(metric_value) AggregateFunction(avg, Int32)
+              Header: site_id UInt32
+                      uniq(event) AggregateFunction(uniq, String)
+
 ```
 
 </details>
 
+#### Improving this query
 
+This query can be made faster by setting the
+[`distributed_group_by_no_merge`](https://clickhouse.com/docs/en/operations/settings/settings/#distributed-group-by-no-merge)
+setting, like so:
+
+```sql
+SELECT
+    site_id,
+    uniq(event)
+FROM distributed_sensor_values
+WHERE timestamp > '2010-01-01' and timestamp < '2023-01-01'
+GROUP BY site_id
+ORDER BY uniq(event) DESC
+SETTINGS distributed_group_by_no_merge=1
+LIMIT 20
+```
+
+After this, the coordinator knows to trust that the data is sharded according to `site_id` and it can send the same query down to other shards.
+
+In `EXPLAIN`, this is represented by the `ReadFromRemote` being done later in the cycle and now reading `UInt64` instead of `AggregateFunction(uniq, String)`:
+
+```
+ReadFromRemote (Read from remote replica)
+Header: site_id UInt32
+        uniq(event) UInt64
+```
+
+Takeaway: Proper data layout and usage of query settings can improve queries significantly by doing less work over the network.
+
+
+<details><summary>Click to see full `EXPLAIN` plan</summary>
+
+```
+Header: site_id UInt32
+        uniq(event) UInt64
+  Union
+  Header: site_id UInt32
+          uniq(event) UInt64
+    Expression (Projection)
+    Header: site_id UInt32
+            uniq(event) UInt64
+      Limit (preliminary LIMIT (without OFFSET))
+      Header: site_id UInt32
+              uniq(event) UInt64
+        Sorting (Sorting for ORDER BY)
+        Header: site_id UInt32
+                uniq(event) UInt64
+          Expression (Before ORDER BY)
+          Header: site_id UInt32
+                  uniq(event) UInt64
+            Aggregating
+            Header: site_id UInt32
+                    uniq(event) UInt64
+              Expression (Before GROUP BY)
+              Header: site_id UInt32
+                      event String
+                SettingQuotaAndLimits (Set limits and quota after reading from storage)
+                Header: site_id UInt32
+                        event String
+                  ReadFromMergeTree
+                  Header: site_id UInt32
+                          event String
+                  Indexes:
+                    PrimaryKey
+                      Keys:
+                        toStartOfDay(timestamp)
+                      Condition: and((toStartOfDay(timestamp) in (-Inf, 1672531200]), (toStartOfDay(timestamp) in [1262304000, +Inf)))
+                      Parts: 6/6
+                      Granules: 1628/5723
+    ReadFromRemote (Read from remote replica)
+    Header: site_id UInt32
+            uniq(event) UInt64
+```
+
+</details>
 
 ### Query settings
 
 Some noteworthy [query settings](https://clickhouse.com/docs/en/operations/settings/settings/) which affect the behavior of distributed queries are:
 
-- https://clickhouse.com/docs/en/operations/settings/settings/#distributed-group-by-no-merge
-- https://clickhouse.com/docs/en/operations/settings/settings/#distributed-push-down-limit
-- https://clickhouse.com/docs/en/operations/settings/settings/#optimize-distributed-group-by-sharding-key
-- https://clickhouse.com/docs/en/operations/settings/settings/#settings-prefer-localhost-replica
+- [distributed_group_by_no_merge](https://clickhouse.com/docs/en/operations/settings/settings/#distributed-group-by-no-merge)
+- [distributed_push_down_limit](https://clickhouse.com/docs/en/operations/settings/settings/#distributed-push-down-limit)
+- [optimize_distributed_group_by_sharding_key](https://clickhouse.com/docs/en/operations/settings/settings/#optimize-distributed-group-by-sharding-key)
+- [prefer_localhost_replica](https://clickhouse.com/docs/en/operations/settings/settings/#settings-prefer-localhost-replica)
 
 Many of these unlock potential optimizations by streaming less data over the network, but require data to be sharded correctly to work.
 
-## Choosing sharding_key
+## Ad-hoc distributed queries
 
+It's sometimes useful to query data from across the cluster without setting up Distributed tables, for example to query system tables on all nodes or shards.
 
-### Further reading
+This can be done as such:
+
+```sql
+SELECT hostName(), shardNum(), *
+FROM clusterAllReplicas('my_cluster', 'system', 'metrics')
+```
+
+More documentation on this can be found at:
+- https://clickhouse.com/docs/en/sql-reference/table-functions/cluster/
+- https://clickhouse.com/docs/en/sql-reference/functions/other-functions/
+
+## Further reading
 
 - https://clickhouse.com/docs/en/engines/table-engines/mergetree-family/replication/
 - https://altinity.com/presentations/strength-in-numbers-introduction-to-clickhouse-cluster-performance
-
-TODO: cluster and clusterAllReplicas functions
-TODO: https://clickhouse.com/docs/en/operations/settings/settings/#distributed-group-by-no-merge and sharding_key and optimize_distributed_group_by_sharding_key
-
-
-```
-EXPLAIN indexes=1, header=1 SELECT
-    toStartOfDay(timestamp),
-    event,
-    sum(metric_value) as total_metric_value
-FROM distributed_sensor_values
-WHERE site_id = 233 AND timestamp > '2010-01-01' and timestamp < '2023-01-01'
-GROUP BY toStartOfDay(timestamp), event
-ORDER BY total_metric_value DESC
-LIMIT 20
-FORMAT LineAsString
-```
-
-
-```
-EXPLAIN indexes=1, header=1 SELECT
-    toYear(timestamp),
-    uniq(site_id)
-FROM distributed_sensor_values
-GROUP BY toYear(timestamp)
-ORDER BY uniq(site_id) DESC
-LIMIT 20
-FORMAT LineAsString
-```
-
-
-EXPLAIN indexes=1, header=1 SELECT
-    toStartOfDay(timestamp),
-    avg(metric_value) as metric_value
-FROM distributed_sensor_values
-WHERE timestamp > '2010-01-01' and timestamp < '2023-01-01'
-GROUP BY toStartOfDay(timestamp)
-ORDER BY metric_value DESC
-LIMIT 20
-FORMAT LineAsString
+- https://kb.altinity.com/engines/
+- https://kb.altinity.com/altinity-kb-setup-and-maintenance/altinity-kb-zookeeper/zookeeper-schema/

@@ -410,6 +410,10 @@
                         {
                             "name": "Data storage or what is a MergeTree",
                             "url": "/handbook/engineering/clickhouse/data-storage"
+                        },
+                        {
+                            "name": "Data replication",
+                            "url": "/handbook/engineering/clickhouse/replication"
                         }
                     ]
                 },
