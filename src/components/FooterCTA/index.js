@@ -14,7 +14,7 @@ export default function FooterCTA() {
                     cloud.
                 </p>
                 <div className="flex flex-col sm:flex-row sm:space-x-2 space-y-2 sm:space-y-0">
-                    <CallToAction to="/signup" className="w-full sm:w-48">
+                    <CallToAction to="https://app.posthog.com/signup" className="w-full sm:w-48">
                         Get started - free
                     </CallToAction>
                     <CallToAction to="/book-a-demo" type="secondary" className="w-full sm:w-48 ">

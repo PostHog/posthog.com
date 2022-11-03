@@ -72,11 +72,10 @@ With a long term vision, clear focused audience, and a ton of context about our 
 
 ### Feedback & iteration
 
-To get buy-in, it was crucial for me to share the draft with the entire company and get as much feedback as possible. The feedback was comprehensive and enabled me to quickly iterate on the first version. To make the strategy easy to remember and execute, we came up with a memorable two-word version of our top priority: “nail funnels” (thanks to [Tim](https://posthog.com/handbook/company/team/marcus-hyett)). 
+To get buy-in, it was crucial for me to share the draft with the entire company and get as much feedback as possible. The feedback was comprehensive and enabled me to quickly iterate on the first version. To make the strategy easy to remember and execute, we came up with a memorable two-word version of our top priority: “nail funnels”.
 
 But you can't just assume everyone will buy into the strategy because you posted it somewhere and they gave it a thumbs up. You have to talk people through it 1:1 and communicate the message via different channels. We discussed the new strategy in all our small team standups, company all-hands, and uploaded it to our website.
 
 Read more about our strategy [here](https://posthog.com/handbook/company/team/marcus-hyett).
 
 _Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
-

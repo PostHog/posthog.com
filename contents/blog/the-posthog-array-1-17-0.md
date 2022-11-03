@@ -10,7 +10,7 @@ featuredImage: ../images/blog/array/default.png
 featuredImageType: standard
 ---
 
-Having launched **major** features in our [previous release](/blog/the-posthog-array-1-16-0) such as [Session Recording](/docs/user-guides/session-recording) and [apps](/apps), over the past two weeks we worked extremely hard to improve PostHog's UX, enhance the new Beta features, and fix a bunch of bugs.  
+Having launched **major** features in our [previous release](/blog/the-posthog-array-1-16-0) such as [Session Recording](/docs/user-guides/recordings) and [apps](/apps), over the past two weeks we worked extremely hard to improve PostHog's UX, enhance the new Beta features, and fix a bunch of bugs.  
 
 You'll notice PostHog feels much nicer to use and that's largely in part to all the feedback we've received from our users, so thank you and keep the suggestions coming!
 

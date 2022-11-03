@@ -13,6 +13,7 @@ interface LogSliderProps {
     marks: number[]
     stepsInRange: number
     onChange: (value: number) => void
+    value: number
 }
 
 const MySlider = Slider.createSliderWithTooltip(Slider)
@@ -45,8 +46,7 @@ const makeMarks = (marks: number[]): Record<number, string> => {
     }, {} as Record<number, string>)
 }
 
-export const LogSlider = ({ min, max, marks, stepsInRange, onChange }: LogSliderProps): JSX.Element => {
-    const { sliderValue } = useValues(pricingSliderLogic)
+export const LogSlider = ({ min, max, marks, stepsInRange, onChange, value }: LogSliderProps): JSX.Element => {
     return (
         <MySlider
             min={inverseCurve(min)}
@@ -56,7 +56,7 @@ export const LogSlider = ({ min, max, marks, stepsInRange, onChange }: LogSlider
             tipFormatter={(value) => prettyInt(sliderCurve(value))}
             onChange={onChange}
             className="log-slider center"
-            value={sliderValue}
+            value={value}
         />
     )
 }
