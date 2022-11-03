@@ -1,6 +1,7 @@
 {
     "redirects": [
         { "source": "/plugins/:path*", "destination": "/apps/:path*" },
+        { "source": "/integrations/:path*", "destination": "/apps/:path*" },
         { "source": "/docs/user-guides/:path*", "destination": "/manual/:path*" },
         { "source": "/next-steps/:path*", "destination": "/next-steps", "statusCode": 200 },
         { "source": "/question/:path*", "destination": "/question", "statusCode": 200 },
@@ -320,22 +321,6 @@
         { "source": "/docs/privacy/overview", "destination": "/docs/privacy" },
         { "source": "/docs/integrate/gdpr", "destination": "/docs/privacy/gdpr-compliance" },
         { "source": "/blog/hipaa-compliant-analytics", "destination": "/blog/best-hipaa-compliant-analytics-tools" },
-        {
-            "source": "/handbook/engineering/databases/async-migrations",
-            "destination": "/handbook/engineering/async-migrations"
-        },
-        {
-            "source": "/handbook/engineering/databases/event-ingestion",
-            "destination": "/handbook/engineering/event-ingestion"
-        },
-        {
-            "source": "/handbook/engineering/databases/query-performance-optimization",
-            "destination": "/handbook/engineering/query-performance-optimization"
-        },
-        {
-            "source": "/handbook/engineering/databases/schema-changes",
-            "destination": "/handbook/engineering/schema-changes"
-        },
         { "source": "/handbook/engineering/aws", "destination": "/handbook/engineering/cloud-providers" },
         {
             "source": "/docs/contribute/coding-conventions",
@@ -355,7 +340,7 @@
         { "source": "/sso", "destination": "/docs/user-guides/sso" },
         { "source": "/docs/api/people", "destination": "/docs/api/persons" },
         { "source": "/handbook/engineering/k8s-overview", "destination": "/docs/self-host/architecture" },
-        { "source": "/product/user-paths", "destination": "/apps/user-paths" },
+        { "source": "/product/user-paths", "destination": "/manual/paths" },
         {
             "source": "/tutorials/free-hotjar-alternative",
             "destination": "/blog/best-open-source-session-replay-tools"
@@ -607,6 +592,7 @@
             "source": "/handbook/people/team-structure/_team_template",
             "destination": "/handbook/small-teams/_team_template"
         },
+        { "source": "/marketplace", "destination": "/partners" },
         { "source": "/marketplace/clickhouse", "destination": "/partners/clickhouse" },
         { "source": "/marketplace/opsverse", "destination": "/partners/opsverse" },
         { "source": "/marketplace/restack", "destination": "/partners/restack" },
