@@ -69,9 +69,10 @@ When querying Distributed table, you can send the query to any node in the Click
 1. Figures out what queries individual shards need to execute and queues these queries
 2. Once results are in, aggregates the results together and returns an answer
 
-Given local execution is faster than reading data over the network, ClickHouse will usually perform the nodes shards query locally instead of sending it to another replica in the shard. This behavior is controlled by [`prefer-localhost-replica` setting](https://clickhouse.com/docs/en/operations/settings/settings/#settings-prefer-localhost-replica)
+Given local execution is faster than reading data over the network, ClickHouse will usually perform one of the queries locally instead of sending it to another replica of its shard.
 
-Note that the sub-queries executed on other shards might return already aggregated data or it might stream entire datasets across the network depending on the query.
+Depending on the query, sub-queries executed on other shards might either return already aggregated data or stream or stream entire
+datasets across the network. Being aware of which is done is crucial for performance.
 
 ### Example query - distributed sums
 
