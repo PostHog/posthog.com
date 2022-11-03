@@ -22,6 +22,10 @@ With the addition of our "V2" Billing architecture, billing for **self-hosted** 
 Each of our billable Products has an entry in Stripe with each Product having multiple Prices. We use metadata on these prices to allow the Biling Service to appropriately load and offer products to the instances:
 
 
+![Stripe products](../../../images/handbook/growth/sales/stripe-products.png)
+
+
+
 #### Custom metadata
 **On Stripe Products**
 * `posthog_type`: `events | recordings | enterprise` -> This allows PostHog to find and map the relevant products. **Important:** There should never be more than 1 Stripe product with the same `posthog_type`
@@ -31,7 +35,7 @@ Each of our billable Products has an entry in Stripe with each Product having mu
 
 
 
-## Upgrading a customer to Enterprise
+### Upgrading a customer to Enterprise
 Enterprise plans consist of two things:
 1. A unique Enterprise product charging the fixed price per month
 1. Different Prices for each of the metered products (Events, Recordings)
@@ -54,11 +58,14 @@ As far as possible these existing prices should be used in combination with `Cou
 1. Expand the `additional options` and add a straightfoward Price Description like `Custom - fixed pricing
 1. Add the tiers as you see fit
 
+![Stripe price example](../../../images/handbook/growth/sales/stripe-custom-price.png)
 
 
 ### Updating subscriptions
 
 Stripe subscriptions can be modified relatively freely for example if adding the Enterprise plan or moving to a custom pricing plan. 
+
+![Stripe subscription update](../../../images/handbook/growth/sales/stripe-update-subscription.png)
 
 1. Look up the customer on [Stripe dashboard][stripe_dashboard] using their email address or Stripe ID (this can be found in the Billing Service admin under `Customers`).
 1. Click on the customer's current subscription.
@@ -70,7 +77,6 @@ Stripe subscriptions can be modified relatively freely for example if adding the
 > **NOTE:** Removing a metered product price (events, recordings) and adding a new price will likely reset the usage. This is fine as the Billing Service will update it during the next sync.
 
 
-
 ### Self-hosted differences
 
 Self-hosted customers as of 1.42.0 can signup for premium services within the product just as a Cloud customer would. The only additional step that occurs in the background is that a `License` is generated and automatically saved in their PostHog database and the license key emailed to them. This `License` does not actually enable any functionality but acts as a sort of API Key to talk to the Billing Service so that they can setup payment just as the Cloud instances do. Unlike the Cloud edition, only one Billing Customer can be created per self-hosted License.
@@ -79,6 +85,8 @@ Self-hosted customers as of 1.42.0 can signup for premium services within the pr
 
 1. Something goes wrong during the activation flow
   * The customer should have a license key sent to their email which they can enter manually on the Organization Billing page
+  ![Self hosted license key activation](../../../images/handbook/growth/sales/self-hosted-license-key.png)
+  ![Self hosted license key activation input](../../../images/handbook/growth/sales/self-hosted-license-key-input.png)
 2. The instance is air-gapped (blocked from calling external services)
   * If the customer can allow traffic to `billing.posthog.com` at least during the activation flow then they can do this and signup as normal.
   * If not, they will need some direct support to enter the license directly. Please reach out to #growth team who can advise here.
