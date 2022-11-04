@@ -7,7 +7,11 @@ export interface IToast {
     createdAt?: number
 }
 
-export const useToast = () => {
+export const useToast = (): {
+    toasts: IToast[]
+    addToast: (toast: IToast) => void
+    removeToast: (createdAt: number) => void
+} => {
     const toast = useContext(Context)
-    return toast
+    return toast || {}
 }
