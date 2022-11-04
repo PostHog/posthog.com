@@ -633,7 +633,7 @@
     ],
     "rewrites": [
         {
-            "source": "/community/profiles/:id*",
+            "source": "/community/profiles/(.*)",
             "destination": "/community/profiles"
         }
     ]
