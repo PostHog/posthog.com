@@ -95,8 +95,8 @@ export default function ProfilePage({ params }: PageProps) {
         }
     }, [id])
 
-    const handleEditProfile = (profile) => {
-        setProfile(profile)
+    const handleEditProfile = (updatedProfile) => {
+        setProfile({ ...profile, ...updatedProfile })
         setEditModalOpen(false)
     }
 
@@ -232,17 +232,17 @@ const ProfileSidebar = ({
 
                     {profile.team.profiles.length > 0 ? (
                         <SidebarSection title="Co-workers">
-                            <ul className="p-0">
+                            <ul className="p-0 grid gap-y-2">
                                 {profile.team.profiles
                                     .filter(({ id }) => id !== profile.id)
                                     .map((profile) => {
                                         return (
-                                            <div key={profile.id} className="flex items-center space-x-2">
+                                            <li key={profile.id} className="flex items-center space-x-2">
                                                 <Avatar className="w-8 h-8" src={profile.avatar} />
                                                 <a href={`/community/profiles/${profile.id}`}>
                                                     {profile.first_name} {profile.last_name}
                                                 </a>
-                                            </div>
+                                            </li>
                                         )
                                     })}
                             </ul>
