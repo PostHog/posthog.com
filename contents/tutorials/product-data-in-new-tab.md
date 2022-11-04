@@ -10,13 +10,13 @@ topics: ['apps']
 
 Keeping product analytics top of mind keeps you focused on what matters to your product and customers. It reminds you about the state of the product, and what you need to do to improve it.
 
-When you spend lots of time on the computer, one of the areas you see the most is the new tab page in your browser. There are many extensions for changing and customizing the new tab page, but one of the most popular (and one of our favorites) is [Momentum Dash](https://momentumdash.com/). It transforms the new tab into “a focused, productive, and inspiring dashboard.” 
+When you spend lots of time on a computer, one of the areas you see the most is the new tab page in your browser. There are many extensions for changing and customizing the new tab page, but one of the most popular (and one of our favorites) is [Momentum Dash](https://momentumdash.com/). It transforms the new tab into a focused, productive, and inspiring dashboard. 
 
 In this tutorial, we’re going add key product data from PostHog into Momentum Dash’s new tab dashboard. We’ll show you how to format the API request that Momentum Dash uses to get the information from PostHog. To do this, you need a PostHog instance and a [Momentum Dash Plus](https://momentumdash.com/plus) account.
 
 ## Getting the information for the API request in PostHog
 
-To get our PostHog data into Momentum Dash, we need to format an API request that “gets” that metric. Momentum Dash makes this API request every time you open a new tab to fill in the key metric information. We are going to need 3 pieces of information from PostHog to create an API request.
+To get our PostHog data into Momentum Dash, we need to format an API request that “gets” that metric. Momentum Dash makes this API request every time you open a new tab to fill in the key metric information. We are going to need three pieces of information from PostHog to create an API request.
 
 ### 1. A personal (or project) key
 
@@ -32,7 +32,7 @@ You find your project key by clicking “Project settings” in the sidebar, the
 
 ### 3. An insight short ID
 
-Next, you need the data you want to show in the new tab. To do so browse your insights or dashboards for a metric you want to display. When you find it, click on the insight details (the link from insights or “view” from a dashboard.” Once on that screen, copy the unique value in the URL after `<ph_instance_address>/insights/`.
+Next, you need the data you want to show in the new tab. Browse to your insights or dashboards for a metric you want to display. When you find it, click on the insight details (the link from insights or “view” from a dashboard). Once on that screen, copy the unique value in the URL after `<ph_instance_address>/insights/`.
 
 ![Insight short ID](../images/tutorials/product-data-in-new-tab/short-id.png)
 
@@ -44,7 +44,7 @@ Once you have all three pieces of information, we are going to use them to forma
 https://<ph_instance_address>/api/projects/<project_id>/insights/?personal_api_key=<personal_key>&short_id=<insight_short_id>
 ```
 
-So if our instance address was `app.posthog.com`, project ID was `12345`, our personal API key was `phx_abcde`, and our insight short ID was `aAbBcC`, our API request would look like:
+So, if our instance address was `app.posthog.com`, project ID was `12345`, our personal API key was `phx_abcde`, and our insight short ID was `aAbBcC`, our API request would look like:
 
 ```bash
 https://app.posthog.com/api/projects/12345/insights/?personal_api_key=phx_abcde&short_id=aAbBcC
@@ -52,7 +52,7 @@ https://app.posthog.com/api/projects/12345/insights/?personal_api_key=phx_abcde&
 
 Copy your formatted code and open up a new tab (assuming you have Momentum Dash set up) to move on to the next step.
 
-## Adding our metric in Momentum Dash
+## Adding your metric to Momentum Dash
 
 Once you’ve signed up for Momentum Dash Plus and added the extension, your new tab page should look like this:
 
@@ -62,7 +62,7 @@ Hover your mouse in the top right corner, and an “add” button appears. Click
 
 ![Momentum API request](../images/tutorials/product-data-in-new-tab/momentum-api.png)
 
-When you click the drop-down, you get lots of options, you have to find the one that matches your metric (number) in PostHog. For my number chart, it was `result[0].result[0].aggregated_value` but it might also be `result[0].result[0].count` or another value. 
+When you click the drop-down, you get lots of options, you have to find the one that matches your metric (number) in PostHog. For my number chart, it was `result[0].result[0].aggregated_value` but it might also be `result[0].result[0].count`, or another value. 
 
 > **Note:** It is likely easier to modify the insight in PostHog to provide a single value through a number chart than to reformat your API request to get that value.
 
@@ -77,3 +77,4 @@ Now, every time you open a new tab, you see product data showing you how you are
 - Deciding what metric to add to your new tab page? Churn rate is a popular one. Here’s [a tutorial on how you calculate (and lower) churn rate with PostHog](/tutorials/churn-rate).
 - Care more about time on site or average session duration? [This tutorial helps you calculate session-based metrics](/tutorials/session-metrics).
 - Would rather have product metrics in Slack? See how you can set up [Slack and PostHog in our docs](/docs/integrate/webhooks/slack).
+- Curious about how Momentum Dash handles analytics? Check out [how Momentum Dash uses PostHog](/customers/momentumdash).
