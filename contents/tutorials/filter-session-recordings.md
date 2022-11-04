@@ -21,7 +21,7 @@ In this tutorial we’ll explain how to use PostHog’s various filters and feat
 
 ### How to filter recordings by actions or events
 
-The most typical use case for session recordings is to filter based on an event or action, so you can see how users interact with certain features or areas of your product. To do this, you need to have an appropriate event or action set up. 
+A typical use case for session recordings is to filter based on an event or action, so you can see how users interact with certain features or areas of your product. To do this, you need to have an appropriate event or action set up. 
 
 > Want to know more about creating actions and tracking events? Check [our complete guide to event tracking](/tutorials/event-tracking-guide). 
 
@@ -29,12 +29,12 @@ To start filtering, simply select ‘Filter recordings’ at the top of the page
 
 ![search for recording events](../images/tutorials/session-recordings/filter-events-session-recording.png)
 
-Searching for actions or events in PostHog is similar to building a query in PostHog insights — all you have to do is use the filter builder on the left of the screen to define what sort of actions or events you’re looking for. 
+Searching for actions or events in PostHog is similar to building a query in insights — use the filter builder on the left of the screen to define what sort of actions or events you’re looking for. 
 Once you have filtered the recordings to a smaller, more relevant list then you can search within individual recordings to find the specific moment when an event occurs. In fact, there are a few ways to find the specific event you’re looking for!
 
 ![global filter off](../images/tutorials/session-recordings/recording-filter-off.png)
 
-The easiest way to focus in on a particular action that you’ve created a filter for is to use the toggle labeled ‘Only show matching events’. This will remove all events which don’t match your global filter from both the timeline and the event list, changing the view from the above, to the below. 
+The easiest way to focus on a particular action that you filtered for is to use the toggle labeled ‘Only show matching events’. This removes all events which don’t match your global filter from both the timeline and the event list, changing the view from the above, to the below. 
 
 ![global filter on](../images/tutorials/session-recordings/recording-filter-on.png)
 
@@ -42,7 +42,7 @@ Alternatively, you may prefer to search for an event which _doesn’t_ match a g
 
 ### How to filter based by feature flags
 
-If you use feature flags in PostHog then you can also filter recordings by the flag variant shown to a user. This can be helpful if, for example, you want to compare user behavior between flag variants. 
+If you use feature flags in PostHog, you can also filter recordings by the flag variant shown to a user. This can be helpful if, for example, you want to compare user behavior between flag variants. 
 
 To filter recordings based on an event which happens within a recording where a user has viewed a particular flag. To do this, you must first create a filter based on the event you’re looking for and _then_ create a secondary filter that specifies the flag. 
 
@@ -71,7 +71,7 @@ In such instances you may want to build filters based on device, OS, location or
 
 The final way to filter recordings is chronologically, based on the time or date that an recording was captured. This can be especially powerful for products where users behavior is influenced by the time of year, such as a B2C marketplace that runs seasonal sales.
 
-PostHog also enables you to filter recordings based on the overall duration of an engagement. This is useful if you need to find recordings based where users are highly engaged and interact with your app for extended periods — or where engagements are brief, perhaps due to UX issues. 
+PostHog also enables you to filter recordings based on the overall duration of a session. This is useful if you need to find recordings based where users are highly engaged and interact with your app for extended periods — or where engagements are brief, perhaps due to UX issues. 
 
 ![filter recording by time](../images/tutorials/session-recordings/filter-recordings-time.png)
 
@@ -79,4 +79,4 @@ In either case, you can filter recordings using the date and time controls at th
 
 ## Further reading
 
-Session recordings in PostHog are an especially powerful tool for users such as support engineers, product designers and product managers who need context on the details of user behavior. To find out more about session recordings, including how to [prevent PostHog from capturing sensitive user information](/manual/recordings#ignoring-sensitive-elements), check [the session recording docs](/manual/recordings). 
+Session recordings in PostHog are powerful tool for users such as support engineers, product designers and product managers who need context on the details of user behavior. To find out more about session recordings, including how to [prevent PostHog from capturing sensitive user information](/manual/recordings#ignoring-sensitive-elements), check [the session recording docs](/manual/recordings). 
