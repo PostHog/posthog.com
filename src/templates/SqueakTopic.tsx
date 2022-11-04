@@ -3,6 +3,7 @@ import { Slack } from 'components/Icons/Icons'
 import Layout from 'components/Layout'
 import PostLayout, { SidebarSection } from 'components/PostLayout'
 import { SEO } from 'components/seo'
+import { squeakProfileLink } from 'lib/utils'
 import React from 'react'
 import { Squeak } from 'squeak-react'
 
@@ -48,6 +49,7 @@ export default function SqueakTopics({ pageContext: { id, label, menu } }: IProp
                 >
                     <section className="my-8 lg:my-0">
                         <Squeak
+                            profileLink={squeakProfileLink}
                             limit={5}
                             topics={false}
                             slug={null}
