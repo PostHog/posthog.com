@@ -69,8 +69,7 @@ const Avatar = (props: { className?: string; src?: string }) => {
 }
 
 export default function ProfilePage({ params }: PageProps) {
-    console.log(params)
-    const id = params.id
+    const id = params.id || params['*']
 
     const [profile, setProfile] = React.useState<SqueakProfile | undefined>(undefined)
     const [editModalOpen, setEditModalOpen] = React.useState(false)
