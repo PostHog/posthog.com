@@ -42,15 +42,18 @@ export default function EditProfile({ profile, onSubmit }) {
 
     const handleSubmit = async (values, { setSubmitting, resetForm }) => {
         setSubmitting(true)
-        const profile = await fetch(`https://squeak.cloud/api/profiles/${id}`, {
-            method: 'PATCH',
-            body: JSON.stringify(values),
-            credentials: 'include',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-        }).then((res) => res.json())
+        const profile = await fetch(
+            `https://squeak.cloud/api/profiles/${id}?organizationId=a898bcf2-c5b9-4039-82a0-a00220a8c626`,
+            {
+                method: 'PATCH',
+                body: JSON.stringify(values),
+                credentials: 'include',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+            }
+        ).then((res) => res.json())
         setSubmitting(false)
         onSubmit && onSubmit(profile)
     }

@@ -78,7 +78,7 @@ export default function ProfilePage({ params }: PageProps) {
 
     React.useEffect(() => {
         if (id) {
-            fetch(`https://squeak.cloud/api/profiles/${id}`)
+            fetch(`https://squeak.cloud/api/profiles/${id}?organizationId=a898bcf2-c5b9-4039-82a0-a00220a8c626`)
                 .then((res) => {
                     if (res.status === 404) {
                         throw new Error('not found')
