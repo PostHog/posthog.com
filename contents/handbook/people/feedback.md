@@ -17,11 +17,11 @@ This includes giving feedback [to each other](/handbook/company/values#step-on-t
 We run full team 360-degree feedback session as part of every offsite. The session gives everyone the opportunity to give and receive feedback to everyone else.
 
 ### Ground rules
-- Everybody participates! You should have a think and prepare in advance - don't try and wing it on the day.
+- Everybody participates! You should have a think and prepare in advance – don't try and wing it on the day.
 
 - Preparation includes reading our handbook about how to be a good feedback [giver](/handbook/people/feedback#how-to-give-good-feedback) and [receiver](/handbook/people/feedback#how-to-receive-feedback-well).
 
-- Feedback to be 70% constructive - this is an opportunity to help each other to grow. 
+- Feedback to be 70% constructive – this is an opportunity to help each other to grow. 
 
 - Everyone is  expected to give feedback to everyone, even if they don’t work together directly. It may be very short feedback, which is ok! 
 
