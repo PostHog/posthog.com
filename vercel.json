@@ -2,6 +2,7 @@
     "redirects": [
         { "source": "/plugins/:path*", "destination": "/apps/:path*" },
         { "source": "/docs/user-guides/:path*", "destination": "/manual/:path*" },
+        { "source": "/community/profiles/:path*", "destination": "/community/profiles", "statusCode": 200 },
         { "source": "/next-steps/:path*", "destination": "/next-steps", "statusCode": 200 },
         { "source": "/question/:path*", "destination": "/question", "statusCode": 200 },
         { "source": "/careers/:path*", "destination": "/careers", "statusCode": 200 },
@@ -626,6 +627,9 @@
         },
         { "source": "/eu-cloud", "destination": "/eu" },
         { "source": "/handbook/strategy/roadmap", "destination": "/roadmap" },
-        { "source": "/docs/architecture/ingestion-pipeline", "destination": "/docs/how-posthog-works/ingestion-pipeline" }
+        {
+            "source": "/docs/architecture/ingestion-pipeline",
+            "destination": "/docs/how-posthog-works/ingestion-pipeline"
+        }
     ]
 }
