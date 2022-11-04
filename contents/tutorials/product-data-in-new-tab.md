@@ -28,7 +28,7 @@ You can also use the project key (not recommended). You find it in “Project se
 
 ### 2. A project ID
 
-You find your project key by clicking “Project settings” in the sidebar, then scrolling down to the “Project Variables” and copying the value for “Project ID.” It should be a series of digits. 
+You find your project ID by clicking “Project settings” in the sidebar, then scrolling down to the “Project Variables” and copying the value for “Project ID.” It should be a series of digits like `12345`. 
 
 ### 3. An insight short ID
 
