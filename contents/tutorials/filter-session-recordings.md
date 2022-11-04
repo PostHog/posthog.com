@@ -13,7 +13,7 @@ _Estimated reading time: 10 minutes_ ☕☕
 
 Session recordings are a powerful feature, helping you to find hidden user behavior patterns or friction points you can’t isolate with [other insight types](/manual/insights). Funnels may tell you _where_ users are experiencing friction within your product, but only session recordings can show you _why_. 
 
-The challenge, however, can be finding relevant recordings and focusing on the right actions quickly. If you can’t do this, you can face the unenviable task for watching hundreds of recordings in their entirety. 
+The challenge, however, can be finding relevant recordings with the right behavior quickly. If you can’t do this, you can face the unenviable task of searching many recordings to find what you are looking for. 
 
 In this tutorial we’ll explain how to use PostHog’s various filters and features to find relevant session recordings quickly, and painlessly. 
 
