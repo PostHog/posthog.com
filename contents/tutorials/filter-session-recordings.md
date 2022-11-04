@@ -1,5 +1,5 @@
 ---
-title: How to find relevant recordings quickly
+title: How to find relevant session recordings quickly
 sidebar: Docs
 showTitle: true
 featuredImage: ../images/tutorials/banners/filter-sessions.png
