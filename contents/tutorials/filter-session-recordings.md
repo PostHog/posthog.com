@@ -11,7 +11,7 @@ date: 2022-11-03
 
 _Estimated reading time: 10 minutes_ ☕☕
 
-Session recordings can be a powerful feature, helping you to find hidden patterns in user behavior or friction points that you can’t isolate with [other insight types](/manual/insights). Funnels may tell you _where_ users are experiencing friction within your product, but only session recordings can show you _why_. 
+Session recordings are a powerful feature, helping you to find hidden user behavior patterns or friction points you can’t isolate with [other insight types](/manual/insights). Funnels may tell you _where_ users are experiencing friction within your product, but only session recordings can show you _why_. 
 
 The challenge, however, can be finding relevant recordings and focusing on the right actions quickly. If you can’t do this, you can face the unenviable task for watching hundreds of recordings in their entirety. 
 
