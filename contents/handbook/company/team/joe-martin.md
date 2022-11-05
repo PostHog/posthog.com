@@ -42,7 +42,7 @@ This quarter I'm focusing on...
 This list is not exhaustive and is meant to guide the sort of work I do at a high level. If something more important comes up where I'll have more impact? Pivoting is fine. 
 
 ## Feedback
-In past feedback sessions I've been told that I'm an effective communicator and executor, that others recognise how I default to transparency and that I show bravery in how vulernable and direct I am with feedback. I've had especially positive feedback recently about work I do with external parties and customers, and my ability to take ownership of large projects. 
+In past feedback sessions I've been told that I'm an effective communicator and executor, that others recognise how I default to transparency and that I show bravery in how vulnerable and direct I am with feedback. I've had especially positive feedback recently about work I do with external parties and customers, and my ability to take ownership of large projects. 
 
 I've previously used forms to gather feedback from engineering teams, outside of 360 sessions. These teams have given me positive feedback on my ability to prioritize and to give thoughtful, detailed feedback on the product. Constructively I was asked to get more involved in engineering projects at a conceptual stage, when I can be most impactful. PostHog team members can [read notes about this from my previous career chat](https://docs.google.com/document/d/1eCx1FLsc8gbH4x9oML8RcoNlA-KLYS3WBcCh9eP2f88/edit?usp=sharing) for more info. 
 
