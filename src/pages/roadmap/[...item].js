@@ -79,6 +79,32 @@ export default function RoadmapPage({ params }) {
                                 </li>
                             </ol>
 
+                            <h2 className="font-bold text-5xl mb-8 xl:mt-0">How to use</h2>
+                            <ol>
+                                <li>
+                                    Once Sidecar is installed, go to your CRM / customer support tool or anywhere you
+                                    might find a customers's name.
+                                </li>
+                                <li>
+                                    The Sidecar slide out will appear. Select where your PostHog instance exists (if you
+                                    use cloud, you're probably on 'PostHog US')
+                                </li>
+                                <li>
+                                    Insert a personal API key by going to https://app.posthog.com/me/settings (or
+                                    https://example.com/me/settings if you self host)
+                                </li>
+                                <li>
+                                    Now you can select which fields you display on the page. These can be either person
+                                    or group properties.
+                                </li>
+                                <li>
+                                    If you now search, Sidecar will search your PostHog data by email or by distinct ID.
+                                    It will default search the string that is selected before you right click, but you
+                                    can edit the search manually afterwards.
+                                </li>
+                                <li>Happy dealing with customers, with much more context.</li>
+                            </ol>
+
                             <h2 className="font-bold text-5xl mb-8 xl:mt-0">
                                 I found a bug, have feedback or want to contribute
                             </h2>
