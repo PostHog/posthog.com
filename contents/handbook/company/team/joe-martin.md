@@ -47,3 +47,6 @@ In past feedback sessions I've been told that I'm an effective communicator and 
 I've previously used forms to gather feedback from engineering teams. These teams have given me positive feedback on my ability to prioritize and to give thoughtful, detailed feedback on the product. PostHog team members can [read notes about this from my previous career chat](https://docs.google.com/document/d/1eCx1FLsc8gbH4x9oML8RcoNlA-KLYS3WBcCh9eP2f88/edit?usp=sharing) for more info. 
 
 Constructively I've had feedback that, because I generate a lot of ideas, the 'wilder' ideas can often overshadow the more thoughtful and impactful concepts. I've also had consistent feedback that I can be overcommunicative and that, when giving feedback, I default to detailed line edits rather than big picture ideas. As a result I'm currently trying to communicate more conscisely, especially when I'm between major projects and hunting for areas of focus. 
+
+I'm always open to more feedback, from anyone. Got some? [Send it to me](https://forms.gle/UcA5FdAjZJSXiqYG6)!
+
