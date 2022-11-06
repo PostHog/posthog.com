@@ -12,9 +12,7 @@ import { FeatureSnapshot } from 'components/FeatureSnapshot'
 
 import banner from '../../images/sidecar.png'
 
-export default function RoadmapPage({ params }) {
-    const itemName = params[`item`]
-
+export default function RoadmapPage() {
     const HomePage = ({ data }) => {
         return <div>{data.site.siteMetadata.description}</div>
     }
@@ -40,7 +38,7 @@ export default function RoadmapPage({ params }) {
                                 { name: 'Core team', url: '/handbook/company/team' },
                             ]}
                         >
-                            <h1 className="font-bold text-5xl mb-8 xl:mt-0">{itemName}</h1>
+                            <h1 className="font-bold text-5xl mb-8 xl:mt-0">Sidecar</h1>
                             <p className="font-bold text-1xl mb-8 xl:mt-0">
                                 A chrome extension that shows your users' data in any other SaaS tool.
                             </p>
