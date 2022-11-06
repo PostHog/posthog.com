@@ -10,6 +10,8 @@ import { OrgProvider, UserProvider } from 'squeak-react'
 import Section from 'components/ProductPage/Section'
 import { FeatureSnapshot } from 'components/FeatureSnapshot'
 
+import banner from '../../images/sidecar.png'
+
 export default function RoadmapPage({ params }) {
     const itemName = params[`item`]
 
@@ -45,7 +47,7 @@ export default function RoadmapPage({ params }) {
 
                             <Section title="Test updates safely with feature flags" titleSize="md">
                                 <FeatureSnapshot
-                                    image="/images/sidecar.png"
+                                    image={banner}
                                     features={[
                                         <>
                                             <strong>More context for debugging</strong> get to session recordings,
