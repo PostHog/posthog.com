@@ -52,8 +52,12 @@ However, with some businesses, like e-commerce, it's very common to browse thing
 
 ![Persist feature flags](../images/features/feature-flags/feature-flag-persist.png)
 
-Note that this slows down the feature flag response slightly. Also note that this functionality is currently available for `posthog-js` only.
-If you're using another client library, you can [follow this guide to get the same feature](/tutorials/experiments)
+Note that there are some performance trade-offs here. Specifically,
+
+1. Enabling this slows down the feature flag response.
+2. It disables local evaluation of the feature flag.
+3. It disables bootstrapping this feature flag.
+
 
 ## Implementing the feature flag
 
