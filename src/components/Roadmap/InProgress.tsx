@@ -5,8 +5,10 @@ import { IRoadmap } from '.'
 import { Login, useUser } from 'squeak-react'
 import addToMailchimp from 'gatsby-plugin-mailchimp'
 import Spinner from 'components/Spinner'
+import { useToast } from '../../hooks/toast'
 
 export function InProgress(props: IRoadmap) {
+    const { addToast } = useToast()
     const { user } = useUser()
     const [more, setMore] = useState(false)
     const [showAuth, setShowAuth] = useState(false)
@@ -31,6 +33,9 @@ export function InProgress(props: IRoadmap) {
             if (res.ok) {
                 setSubscribed(true)
                 setShowAuth(false)
+                addToast({ message: `Subscribed to ${title}. We’ll email you with updates!` })
+            } else {
+                addToast({ error: true, message: 'Whoops! Something went wrong.' })
             }
         } else {
             setShowAuth(true)
@@ -41,7 +46,6 @@ export function InProgress(props: IRoadmap) {
     return (
         <li className="sm:flex xl:flex-col space-y-2 sm:space-y-0 border-t border-dashed border-gray-accent-light first:border-t-0 px-4 py-4 sm:py-2 xl:pb-4 bg-white rounded-sm shadow-xl">
             <div className="flex-1 sm:mt-2">
-
                 <h4 className="text-lg flex space-x-1 items-center m-0">{title}</h4>
                 <p className="m-0 text-[15px] text-black/80 inline">
                     {more ? description : description.substring(0, 125) + (description?.length > 125 ? '...' : '')}
@@ -71,7 +75,9 @@ export function InProgress(props: IRoadmap) {
                                         to={page.html_url}
                                         className="text-[14px] flex items-start font-semibold space-x-1 text-black leading-tight"
                                     >
-                                        <span className="inline-block mt-.5">{page.closed_at ? <ClosedIssue /> : <OpenIssue />}</span>
+                                        <span className="inline-block mt-.5">
+                                            {page.closed_at ? <ClosedIssue /> : <OpenIssue />}
+                                        </span>
                                         <span>{page.title}</span>
                                     </Link>
                                 </li>
@@ -104,7 +110,11 @@ export function InProgress(props: IRoadmap) {
                                 )}
                             </span>
                             <span>
-                                {subscribed ? 'Subscribed!' : beta_available ? 'Get early access' : 'Subscribe for updates'}
+                                {subscribed
+                                    ? 'Subscribed!'
+                                    : beta_available
+                                    ? 'Get early access'
+                                    : 'Subscribe for updates'}
                             </span>
                         </button>
                     )}

@@ -11,10 +11,11 @@ import HandbookLayout from './src/templates/Handbook'
 import Product from './src/templates/Product'
 import SqueakTopic from './src/templates/SqueakTopic'
 import Job from './src/templates/Job'
+import { Provider as ToastProvider } from './src/context/toast'
 
 initKea(false)
 
-export const wrapRootElement = wrapElement
+export const wrapRootElement = ({ element }) => <ToastProvider>{wrapElement({ element })}</ToastProvider>
 export const onRouteUpdate = ({ location, prevLocation }) => {
     // This is checked and set on initial load in the body script set in gatsby-ssr.js
     // Checking for prevLocation prevents this from happening twice
