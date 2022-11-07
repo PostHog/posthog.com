@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-We release a new version every four weeks on Wednesday. This lines up with our sprints, which are two weeks. Code freeze happens the Friday before, and "break the release" happens on Monday.
+We release a new version every four weeks on Monday. This lines up with our sprints, which are two weeks. Code freeze and "break the release" happens on Wednesday before.
 
 > Because there are thirteen weeks in a quarter, there is always one extra out-of-sprint week at the end of each quarter. We dedicate that last week to cleanup tasks along with OKR reflection and planning.
 
