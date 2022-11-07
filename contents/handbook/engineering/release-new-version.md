@@ -26,7 +26,7 @@ Hopefully we will not have to do many patch versions, but if between versions we
 
 > 💡 For the context of this guide `[version]` is interpreted as the version of the release (e.g. `1.29.0`).
 
-On the Friday before the release, we institute a code freeze. Feel free to make an announcement on Slack before we cut the branch, so people have a heads-up. Then, we branch `master` into `release-[version]` and deploy that to our playground environment, [playground.posthog.com](https://playground.posthog.net/). We then host an hour-long "Break the release" session where everyone lends a hand in testing for any bugs. It's a recurring meeting, so you don't need to set it up.
+On the Wednesday before the release, we institute a code freeze. Feel free to make an announcement on Slack before we cut the branch, so people have a heads-up. Then, we branch `master` into `release-[version]` and deploy that to our playground environment, [playground.posthog.com](https://playground.posthog.net/). We then host an hour-long "Break the release" session where everyone lends a hand in testing for any bugs. It's a recurring meeting, so you don't need to set it up.
 
 Only bugfixes and finishing touches are allowed to be merged into this branch between the code freeze and the release going out. This gives us about three days to test the release.
 
@@ -38,7 +38,7 @@ The release manager is ultimately responsible for the timeline of the release. T
 
 1. [ ] Post in #dev about the upcoming release (replace `<version>` and `<array draft pr>` from Joe)
 ```
-Release is happening next Wednesday. Which means 
+Release is happening next Monday. Which means 
 1. There will be code freeze today (fixes that need to be cherry picked later should be tagged with `release-<version>`)
 2. Please join the Break the Release meeting to help out testing on the Playground.
 3. Shipped something awesome this month, please add a blurb or comment to <array draft pr> ([highlighted PRs](https://github.com/PostHog/posthog/pulls?q=is%3Apr+label%3A%22highlight+%3Astar%3A%22+)) :pray:
