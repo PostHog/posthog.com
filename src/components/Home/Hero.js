@@ -60,7 +60,7 @@ export default function Hero() {
                             to="https://app.posthog.com/signup"
                         >
                             Get started - free
-
+                            
                         </CallToAction>
                         <DemoLink />
                     </div>
