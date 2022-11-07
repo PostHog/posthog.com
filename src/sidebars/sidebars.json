@@ -633,6 +633,10 @@
                             "url": "/docs/self-host/deploy/hobby"
                         },
                         {
+                            "name": "EU Hosting Companies",
+                            "url": "/docs/self-host/deploy/hosting-in-eu"
+                        },
+                        {
                             "name": "Other platforms",
                             "url": "/docs/self-host/deploy/other"
                         }
@@ -821,10 +825,6 @@
                 {
                     "name": "Managing hosting costs",
                     "url": "/docs/self-host/deploy/hosting-costs"
-                },
-                {
-                    "name": "EU-only hosting",
-                    "url": "/docs/self-host/deploy/hosting-in-eu"
                 }
             ]
         },
