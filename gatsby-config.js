@@ -131,12 +131,6 @@ module.exports = {
             },
         },
         {
-            resolve: `gatsby-plugin-git-info`,
-            options: {
-                match: '{src,contents}/**/*.{mdx,md}',
-            },
-        },
-        {
             resolve: `gatsby-source-strapi-pages`,
             options: {
                 strapiURL: process.env.STRAPI_URL,
