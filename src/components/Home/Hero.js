@@ -56,7 +56,7 @@ export default function Hero() {
 
                         <CallToAction 
                             type="primary" 
-                            className="!w-full md:!w-44 shadow-xl" 
+                            className="!w-full md:!w-48 shadow-xl" 
                             to="https://app.posthog.com/signup"
                         >
                             Get started - free
