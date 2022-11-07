@@ -26,7 +26,7 @@ I live just outside of London. I'm passionate about punk music, videogame preser
 - I have a very hands-on attitude and will never say 'That's not my job'.
 - I'm really uncomfortable with being in the limelight. I prefer private thank yous.
 - I value compassion and inclusivity above everything else. I try to put people first. 
-- I struggle with anxiety and constantly feel like I am failing. Direct feedback helps me a _lot_. 
+- I struggle with anxiety and always feel like I'm failing. Direct feedback helps me _lots_. 
 
 ## Areas of focus - Q4 2022
 
