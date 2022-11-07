@@ -18,15 +18,15 @@ I live just outside of London. I'm passionate about punk music, videogame preser
 - I can help you understand our customers, our competitors or the press. 
 - I can help with literally anything involving writing, editing or proof-reading.
 - I enjoy helping others. You can ask me anything. There are no stupid questions.
-- I help engineering with marketing stuff. Need content for a new feature? I'm your man.   
+- I help engineering with marketing stuff. Need content for a new feature? I'm your man.
+- I can help you work with many of our customers, partners or other external parties.    
 
 ### How to work with me
-- I can be over-communicative and need to be challenged on this. Want the short version? Ask.
+- I can be over-communicative and need to be challenged on this.
 - I have a very hands-on attitude and will never say 'That's not my job'.
-- I may parrot ('_It sounds like..._') to ensure I understand. If I'm wrong, tell me. 
 - I'm really uncomfortable with being in the limelight. I prefer private thank yous.
 - I value compassion and inclusivity above everything else. I try to put people first. 
-- Ad-hoc meetings are fine, but weekends are sacred. I generally work 9-6 GMT.
+- I struggle with anxiety and constantly feel like I am failing. Direct feedback helps me a _lot_. 
 
 ## Areas of focus - Q4 2022
 
@@ -42,17 +42,11 @@ This quarter I'm focusing on...
 This list is not exhaustive and is meant to guide the sort of work I do at a high level. If something more important comes up where I'll have more impact? Pivoting is fine. 
 
 ## Feedback
-In our last [360 feedback session](/handbook/people/feedback#full-team-feedback-sessions-1), I received feedback on the following points. 
+In past feedback sessions I've been told that I'm an effective communicator and executor, that others recognise how I default to transparency and that I show bravery in how vulnerable and direct I am with feedback. I've had especially positive feedback recently about work I do with external parties and customers, and my ability to take ownership of large projects. 
 
-- I am seen as an effective and flexible executor, planner, writer and storyteller.
-- I am seen as empathetic and extremely supportive of others, especially new colleagues or those with less experience than me. 
-- I am seen as brave when giving feedback and stepping on toes. Others recognize that I default to transparency.
-- Work I do, such as [case studies](/customers), is seen as valuable and showing a lot of insight.
-- I am seen as over-cautious and too detail-orientated when planning new work. 
-- I am seen as over-communicative in social discussions. I talk a lot about diversity, but fail on follow-through.
-- I am seen as biased to my past experiences. This limits my potential impact.
+I've previously used forms to gather feedback from engineering teams, outside of 360 sessions. These teams have given me positive feedback on my ability to prioritize and to give thoughtful, detailed feedback on the product. Constructively I was asked to get more involved in engineering projects at a conceptual stage, when I can be most impactful. PostHog team members can [read notes about this from my previous career chat](https://docs.google.com/document/d/1eCx1FLsc8gbH4x9oML8RcoNlA-KLYS3WBcCh9eP2f88/edit?usp=sharing) for more info. 
 
-A few months later, I had my [career chat](/handbook/people/career-progression) with Marcus and gathered additional feedback. PostHog team members can [read notes from this conversation and summary of the feedback](https://docs.google.com/document/d/1eCx1FLsc8gbH4x9oML8RcoNlA-KLYS3WBcCh9eP2f88/edit?usp=sharing) for more info. 
+Constructively I've had feedback from the team I work with that, because I generate a lot of ideas, the 'wilder' ideas can often overshadow the more thoughtful and impactful concepts. I've also had consistent feedback that I can be overcommunicative and that, when giving feedback, I default to detailed line edits rather than big picture suggestions. As a result I'm currently trying to communicate more conscisely, especially when I'm between major projects and hunting for areas of focus.
 
-I'm always open to more feedback, from anyone. Got some? [Send it to me!](https://forms.gle/UcA5FdAjZJSXiqYG6)
+I'm always open to more feedback, from anyone. Got some? [Send it to me](https://forms.gle/UcA5FdAjZJSXiqYG6)!
 
