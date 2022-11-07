@@ -8,7 +8,7 @@ featuredImage: ../images/tutorials/banners/migrate-eu-cloud.png
 topics: ['configuration']
 ---
 
-> **Warning:** Migrating event data to PostHog's EU Cloud is a time-consuming process, likely to take several days or weeks. We strongly recommend users with a large amount of event data begin by setting up and connecting a new EU cloud instance and migrating data later, if needed. There is currently **no way** to migrate the following data (although it is accessible via the PostHog API):
+> **Warning:** Migrating event data to PostHog's EU Cloud is a time-consuming process, likely to take several days or weeks. We strongly recommend users with a large amount of event data begin by setting up and connecting a new EU cloud instance and migrating data later, if needed. There is currently **no way** for Cloud instances to migrate the following data (although it is accessible via the PostHog API and self-hosted instances can use the [migrate metadata script](https://github.com/PostHog/posthog-migrate-meta)):
 - PostHog user accounts
 - actions, cohorts
 - insights, dashboards
@@ -26,7 +26,7 @@ For this tutorial, we will go over how to migrate from US Cloud or self-hosting 
 
 The first step in migrating to EU Cloud is having an EU Cloud PostHog instance. Even if you have an existing PostHog Cloud instance, you need to create a new one. It is not possible (right now) to change your account between US Cloud (all cloud instances before this launch) or self-hosting and EU Cloud. Instead, you must create a new account and then migrate data to the new account.
 
-> **Note:** You'll need to manually recreate your insights, dashboards, feature flags, and other non-event data in EU Cloud. These won’t be migrated over from your US Cloud or self-hosted instance. Only events, persons, and other data derived from events are migrated through this process.
+> **Note:** If you are migrating from a Cloud instance, you'll need to manually recreate your insights, dashboards, feature flags, and other non-event data in EU Cloud. These won’t be migrated over from your US Cloud instance. Only events, persons, and other data derived from events are migrated through this process. Self-hosted instance users can use the [migrate metadata script](https://github.com/PostHog/posthog-migrate-meta) to migrate this data into EU Cloud.
 
 To start with EU Cloud, you can go to the [cloud signup page](https://app.posthog.com/signup), enter your details, and be sure to select European Union as your data region.
 
@@ -52,7 +52,7 @@ Once the Replicator is set up, you’ll have your data and events in your new EU
 
 1. Ensure the events you want are there. Check that EU Cloud data (events, persons, and other data derived from events) matches your self-hosting or US Cloud instance.
 2. Switch your project key and host to your EU Cloud information. The Replicator app will continue to run, and replicating events over with a delay, but changing your project key and host is better and faster.
-3. Recreate your insights, dashboards, feature flags, and other non-events data in EU Cloud. These won’t be migrated over from your US Cloud or self-hosted instance.
+3. Recreate your insights, dashboards, feature flags, and other non-events data in EU Cloud (or, if self-hosted, run the [metadata migrator](https://github.com/PostHog/posthog-migrate-meta)). These won’t be migrated over from your old instance.
 4. If necessary for compliance, delete data from your US Cloud or self-hosted PostHog instance.
 
 Once all these are completed, you’ll be fully migrated to EU Cloud.

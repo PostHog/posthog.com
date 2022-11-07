@@ -57,6 +57,16 @@ Release is happening next Wednesday. Which means
   Note that this will result in a Docker image tagged `release-[version]-unstable` being built. It might take a while, but it should show up [in Docker Hub](https://hub.docker.com/r/posthog/posthog/tags?page=1&name=release) within half an hour. You can check the build's status on the [GitHub Actions page of the main repo](https://github.com/PostHog/posthog/actions/workflows/docker-unstable-image.yml).
   
   > 💡 Make sure you have `doctl`, `helm`, and `k9s` installed before going through the next steps. You can install all of these with `brew install doctl helm k9s`.
+1. [ ] Create a new [`charts-clickhouse`](https://github.com/PostHog/charts-clickhouse) branch named `bump-[version]` to update the Helm chart:
+    1. In [`Chart.yaml`](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/Chart.yaml) update `appVersion` to the new version.
+    1. In [`Chart.yaml`](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/Chart.yaml) update `version`. 
+      - If you're releasing a patch version of the app, increase the `patch` version by 1. 
+      - If you're releasing a minor version of the app with no breaking changes, increase the `minor` version by 1.
+      - If you're releasing a minor version of the app with breaking changes for deployment (e.g. you must run async migrations manually), increase the `major` version by 1 and publish [upgrade notes](https://github.com/PostHog/posthog.com/blob/master/contents/docs/runbook/upgrade-notes.md) for the chart.
+    1. In [values.yaml](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/values.yaml) update `image.default` to point to the new **unstable** tag (i.e. `:release-[version]-unstable`).
+    1. In [`ALL_VALUES.md`](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) update the default value of `image.default` to what you set in the previous step. Also, update the `AppVersion` [shields.io](https://shields.io/) badge at the top.
+    1. Push the relevant changes and create a PR. **Do not merge this PR.** (You can see that [in Docker Hub](https://hub.docker.com/r/posthog/posthog/tags?page=1&name=release-))
+    1. Make sure all tests pass in this PR. If a test fails, to get the errors, check the "namespace report", which is run right after the failed test.
 
 1. [ ] Upgrade PostHog playground
     1. The PostHog Playground uses a helm chart deployment on DigitalOcean. Find the playground cluster in our [DigitalOcean Kubernetes clusters list](https://cloud.digitalocean.com/kubernetes/clusters?i=7cfa7c).
@@ -100,12 +110,7 @@ Release is happening next Wednesday. Which means
   git tag -a [version] -m "Version [version]"
   git push --follow-tags
   ```
-1. [ ] Create a new [`charts-clickhouse`](https://github.com/PostHog/charts-clickhouse) branch named `bump-[version]` to update the Helm chart:
-    1. In [`Chart.yaml`](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/Chart.yaml) update `appVersion` to the new version.
-    1. In [`Chart.yaml`](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/Chart.yaml) update `version` by increasing the `minor` version by 1.
-    1. In [values.yaml](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/values.yaml) update `image.default` to point to the new tag (i.e. `:release-[version]`).
-    1. In [`ALL_VALUES.md`](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) update the default value of `image.default` to what you set in the previous step. Also, update the `AppVersion` [shields.io](https://shields.io/) badge at the top.
-    1. Push the relevant changes and create a PR. **Do not merge until the `release-[version]` branch is built.** (You can see that [in Docker Hub](https://hub.docker.com/r/posthog/posthog/tags?page=1&name=release-))
+1. [ ] Update the PR in [charts-clickhouse](https://github.com/PostHog/charts-clickhouse/pulls) and change the image from `release-1.x.y-unstable` to `release-1.x.y`.
 1. [ ] Publish the [PostHog Array blog post](/handbook/growth/marketing/blog#posthog-array).
 1. [ ] Create a new main repo (`posthog`) branch named `sync-[version]`. Cherry-pick the `release-[version]` commits updating `version.py` and `versions.json` into `sync-[version]` and create a PR to get them into `master`. **Merging this to master will notify users that an update is available.** The Array post should be out at this point so that the "Release notes" link isn't a 404.
 1. [ ] Go to the [EWXT9O7BVDC2O](https://us-east-1.console.aws.amazon.com/cloudfront/v3/home?region=us-east-2#/distributions/EWXT9O7BVDC2O) CloudFront distribution to the "Invalidations" tab and add a new one with `/*` value. This will refresh the CloudFront cache so that users can see the new version. You can check this by visiting https://update.posthog.com/
