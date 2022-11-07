@@ -42,7 +42,7 @@ PostHog will send any property inside the `$set: {}` property to customer.io. In
 posthog.capture(
   'some event',
   {
-    event_propery: 'this will not get sent',
+    event_property: 'this will not get sent',
     $set: {
       email: 'test@example.com',
       userProperty: 'value'
