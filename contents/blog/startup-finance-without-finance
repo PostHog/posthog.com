@@ -1,0 +1,60 @@
+---
+date: 2022-11-08
+title: "How to run finance at your startup without hiring a finance person"
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+categories: ["Inside PostHog"]
+author: ["charles-cook"]
+featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImageType: full
+---
+
+This is a comprehensive, step-by-step guide to how we run finance at PostHog without a dedicated finance person. You should be able to pretty much copy and paste this - if you implement everything below, it should take 1 person under a week. The aim to to get your financial ops running on autopilot as much as possible, through a combination of useful tools and a sensible, repeatable process. 
+
+## Who is this for?
+
+Startups who are early stage or have reached product-market fit. If you are smaller than 10 people, I'd just do the accounting and call it a day. If you are 10-50 people, this guide is for you! (Well, your ops person/people.) If you are more than 50 people, consider hiring a dedicated finance person. 
+
+## What you'll need
+
+- List to be added (software, access to stuff etc.)
+
+> Who to bank with is not covered in this guide, but if you pick Brex or Mercury in the US or Revolut in the UK, you can't go too far wrong. 
+
+## Contents
+
+- To be added (titles will be made more interesting)
+
+## Accounting
+
+- Getting an accountant (aka Fondo)
+- What is QuickBooks/Xero? (and why you don't need to actually use it yourself)
+- Monthly management reports - how to read them
+- Payroll
+
+> Filing taxes and paying the relevant fees isn't covered in this guide - but you should get your accountant to do this, not learn it yourself. 
+
+## Financial planning 
+
+- Software that makes this easy, aka Pry
+- How we have set up Pry - tips and tricks to make this smooth
+- Monthly budget vs. actuals review - how to do a good, simple process here
+- Board reporting
+
+> A note on consolidated accounts. Only relevant for folks who have a US top co and foreign parent, which is a large % at YC these days - this is weirdly complicated to figure out but easy to once its done. Using JustConsolidate + Pry. 
+
+## How to upskill yourself 
+
+- [Do this course](https://www.coursera.org/specializations/finance-accounting?)
+- Share your monthly accounts internally so people can ask questions
+- Ask your accountants questions about literally every single thing you don't understand
+- Prioritize clarity and runway management over 'best practice'
+- Your investors can help here, especially when it comes to assumptions for your model
+
+## When to hire a finance person
+
+- Write something here. 
+
+<NewsletterForm compact />
