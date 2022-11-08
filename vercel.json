@@ -364,7 +364,7 @@
         { "source": "/lenny", "destination": "/?utm_campaign=lenny" },
         { "source": "/zizyo", "destination": "/?utm_campaign=zizyo" },
         { "source": "/devopsjourney", "destination": "/?utm_campaign=devopsjourney" },
-        { "source": "/devopsfordevelopers", "destination": "/?utm_campaign=devopsfordevelopers" },
+        { "source": "/ebenezer", "destination": "/?utm_campaign=ebenezer" },
         { "source": "/blog/the-posthog-array-1-36-1", "destination": "/blog/the-posthog-array-1-36-0" },
         { "source": "/tutorials/b2b", "destination": "/blog/b2b-saas-product-metrics" },
         {
