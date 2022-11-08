@@ -414,6 +414,10 @@
                         {
                             "name": "Data replication",
                             "url": "/handbook/engineering/clickhouse/replication"
+                        },
+                        {
+                            "name": "Data ingestion",
+                            "url": "/handbook/engineering/clickhouse/data-ingestion"
                         }
                     ]
                 },
