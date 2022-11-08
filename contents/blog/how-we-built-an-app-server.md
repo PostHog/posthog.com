@@ -208,7 +208,7 @@ Although using VMs solved many of our potential security, infrastructure, and us
 
 First, there are limitless libraries for JavaScript, but we only [allow a small portion of them](/docs/apps/build/reference#available-imports). You can’t install and use whatever npm package you like. We include basic packages such as Node’s standard `crypto`, `url`, `node-fetch`, and `zlib` libraries. We also include libraries like `snowflake-sdk`, `@google-cloud/bigquery`, and `pg` to connect external services. This ensures that the code run by our users and servers uses libraries we trust.
 
-Second, it is possible for users to write a loop that loops forever and causes resource exhaustion. To prevent this, we set up a babel plugin that injects code into `for`, `while`, and `do while` loops (as described in [this article](https://medium.com/@bvjebin/js-infinite-loops-killing-em-e1c2f5f2db7f)). Basically, whenever there is a loop, we set up a timer before we start it. If the loop runs for more than 30 seconds, the program errors.
+Second, users can write a loop that loops forever and causes resource exhaustion. To prevent this, we set up a babel plugin that injects code into `for`, `while`, and `do while` loops (as described in [this article](https://medium.com/@bvjebin/js-infinite-loops-killing-em-e1c2f5f2db7f)). Whenever there is a loop, we set up a timer before we start it. If the loop runs for more than 30 seconds, the program errors.
 
 Third, to prevent data loss, we added the ability to retry logic to our `processEvent` function. Kafka handles retries for us by batching events and adding failed ones into the dead letter queue. We added the ability to run functions on `RetryError`  to improve consistency. App developers can also run fetches with retry. Here’s an example of what it looks like:
 
@@ -240,7 +240,7 @@ Worker threads receive tasks from the main thread and execute them. Some of the 
 
 ![Worker thread](../images/blog/how-we-built-an-app-server/worker-thread.png)
 
-When the worker thread finishes its task, it returns back to the main thread for further processing. This could include more modification through apps, PostHog person processing, or writing to ClickHouse. A final `onEvent` task runs once all the processing completes, which is useful for functions like exporting or alerting.
+When the worker thread finishes its task, it returns to the main thread for further processing. This could include more modification through apps, PostHog person processing, or writing to ClickHouse. A final `onEvent` task runs once all the processing completes, which is useful for functions like exporting or alerting.
 
 This structure enables modularity, and many different types of tasks, including app-related ones, can run together. Work improving the code for the plugin server improves all of the processes. This also lowers the maintenance needed for having multiple systems.
 
@@ -272,7 +272,7 @@ graph TD
 
 Kafka manages our data flows. It helps us batch, split, and manage parallel work for our apps. For example, Kafka helps us batch and retry events when apps call `processEvent`. We use a Kafka topic (which holds messages and events in a logical order) to continue the flow of data.
 
-Another service we use is Redis to cache data and back the queue for apps. There are many parts of the app that are reusable and don’t need to be rebuilt each time we run the app. There is data we only need to keep around temporarily. Using Redis to cache data like this dramatically improved app performance and lowered the number of app servers we needed to run.
+Another service we use is Redis to cache data and back the queue for apps. Many parts of the app are reusable and don’t need to be rebuilt each time we run the app. There is data we only need to keep around temporarily. Using Redis to cache data like this dramatically improved app performance and lowered the number of app servers we needed to run.
 
 We also use a couple of Redis patterns. First, we use [Redlock](https://redis.io/docs/manual/patterns/distributed-locks/) for the scheduler and job queue consumer. Redlock ensures these processes are only run on one machine because we only want them to run once. If they ran more than once, we’d have duplication and issues. For example, we only need one scheduler to do the basic work of saying what to do at what time. Second, we use [Pub/Sub](https://redis.io/docs/manual/pubsub/) to check for updates to the apps.
 
