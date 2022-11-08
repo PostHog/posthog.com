@@ -11,11 +11,9 @@ featuredImageType: full
 categories: ["Inside PostHog"]
 ---
 
-There are infinite ways to build a product, and because of that, there are infinite ways to use our product platform at PostHog. Each team and product has specific needs we handle by providing tools like data insights, session recordings, and feature flags. 
+We ingest and process billions of events to help companies build better products. We have many tools to help them do this such as customizable event capture, client and server libraries, data insights, and more. We are always trying to better fulfill the needs of our users, but we sometimes we can't build the customized solution they need. 
 
-Key to all this is event data, which we capture in many ways and is customizable. We ingest and process billions of events for companies to help them use that data to build better products.
-
-At one point in our journey, we realized the ability to customize the processing of data was missing. For example, many users wanted to add geographic data to events, get events from CRMs, export data to BigQuery, and more. Use cases were endless, so we needed to give them the ability to do this themselves.
+At one point in our journey, we realized the ability to customize the processing of data was missing. Many users wanted to add geographic data to events, get events from CRMs, export data to BigQuery, and more. Use cases were endless, so we needed to give them the ability to do this themselves.
 
 To do this, we built the ability to build and use apps integrated into our ingestion pipeline that run tasks, process and modify events, and connect to external services. Anyone can write and use apps to change their data flows, creating endless customization for their needs.
 
