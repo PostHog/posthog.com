@@ -27,7 +27,7 @@ If you aren't able to fix the problem yourself here are some other options:
 
 ## Enterprise Self-hosted Support
 
-PostHog Enterprise Self-Hosted Support is delivered over a shared slack channel or email.
+PostHog Enterprise Self-Hosted Support is delivered over a shared Slack channel or email.
 
 Enterprise Self-hosted Support is provided to self-hosted customers with a minimum contract of $5k/month.
 
