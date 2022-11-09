@@ -1,13 +1,13 @@
 ---
-date: 2022-10-20
-title: "Rising tides: our employee-friendly share options scheme"
+date: 2022-11-09
+title: "Creating an employee-friendly startup share-option scheme"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Inside PostHog", "Startups", "Guides"]
+categories: ["Inside PostHog", "Startups"]
 author: ["grace-mckenzie"]
-featuredImage: ../images/blog/posthog-ceo-diary-blog.png
+featuredImage: ../images/blog/equity.jpg
 featuredImageType: full
 ---
 
@@ -26,6 +26,8 @@ When we set out to design a share options scheme for PostHog, we decided to prio
 3. It's part of our culture to expect high performance but reward people well and ensure they are genuinely able to share in PostHog's growth. Having a good share options scheme helps people feel more bought in.
 
 4. We also feel that it's just the right thing to do!
+
+> Grace McKenzie is the Operations Manager at PostHog. She tackles any and all back office projects that help build the scaffolding we need as our company scales. In her spare time, you can find her on the rugby pitch playing flanker or at her local billiards hall practicing her 8-ball breaks.
 
 ## How share options work
 
