@@ -2301,3 +2301,9 @@
 [[redirects]]
     from = "/handbook/strategy/roadmap"
     to = "/roadmap"
+
+
+# Added: 2022-11-09
+[[redirects]]
+    from = "/handbook/engineering/production-access"
+    to = "/handbook/engineering/how-to-access-posthog-cloud-infra"
