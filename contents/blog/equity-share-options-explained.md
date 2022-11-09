@@ -63,7 +63,7 @@ The reality of this is much more complicated, as there can be a number of [tax i
 
 Making matters more complicated, the majority of standard terms in stock option plans limit your freedom in when and how you can exercise your options.
 
-In the UK, stock options are offered under the tax-advantged [EMI scheme](https://theaccountancycloud.com/blogs/a-simple-guide-to-enterprise-management-incentive-emi#:~:text=The%20Enterprise%20Management%20Incentive%20(EMI,equity%20participation%20in%20the%20business.), which has a different (and usually much lower) strike price than the FMV.
+In the UK, stock options are offered under the tax-advantged [EMI scheme](https://theaccountancycloud.com/blogs/everything-you-need-to-know-about-the-emi-scheme), which has a different (and usually much lower) strike price than the FMV.
 
 ## How PostHog does things differently
 
@@ -80,7 +80,7 @@ At PostHog, we recognize that you start contributing to the company on day one, 
 
 ### Exercise Window
 
-Regardless of whether you resign, or are let go for performance reasons, you will have 10 years from the day you were hired to exercise your options. In most companies, you have only three months to exercise your options before you lose them entirely, which can make tax optimization and planning a stressful and difficult process. We also believe that this window allows you the opportunity to watch the company's growth before deciding to exercise your options. One thing to note is that based on IRS law, tax advantaged [Incentive Stock Options (ISOs)](https://www.investopedia.com/terms/i/iso.asp#:~:text=An%20incentive%20stock%20option%20(ISO,higher%20rate%20for%20ordinary%20income.) convert into less favourable [Non-Qualified Stock Options (NSOs)](https://www.investopedia.com/terms/n/nso.asp) after 3 months, so there may still be an incentive to exercise sooner.
+Regardless of whether you resign, or are let go for performance reasons, you will have 10 years from the day you were hired to exercise your options. In most companies, you have only three months to exercise your options before you lose them entirely, which can make tax optimization and planning a stressful and difficult process. We also believe that this window allows you the opportunity to watch the company's growth before deciding to exercise your options. One thing to note is that based on IRS law, tax advantaged [Incentive Stock Options (ISOs)](https://www.investopedia.com/terms/i/iso.asp) convert into less favourable [Non-Qualified Stock Options (NSOs)](https://www.investopedia.com/terms/n/nso.asp) after 3 months, so there may still be an incentive to exercise sooner.
 
 In the unlikely event that you are let go “with cause” (i.e. for gross misconduct, like embezzlement or discrimination), you will forfeit your options, which we feel is only fair.
 
