@@ -420,6 +420,10 @@
                             "url": "/handbook/engineering/clickhouse/data-ingestion"
                         },
                         {
+                            "name": "Working with JSON",
+                            "url": "/handbook/engineering/clickhouse/working-with-json"
+                        },
+                        {
                             "name": "Query performance",
                             "url": "/handbook/engineering/clickhouse/performance"
                         },
