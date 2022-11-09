@@ -7,7 +7,7 @@ showTitle: true
 hideAnchor: true
 categories: ["Inside PostHog", "Startups"]
 author: ["grace-mckenzie"]
-featuredImage: ../images/blog/equity.jpg
+featuredImage: ../images/blog/equity.png
 featuredImageType: full
 ---
 
