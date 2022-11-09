@@ -420,6 +420,10 @@
                             "url": "/handbook/engineering/clickhouse/data-ingestion"
                         },
                         {
+                            "name": "Query performance",
+                            "url": "/handbook/engineering/clickhouse/performance"
+                        },
+                        {
                             "name": "Schema case studies",
                             "url": "",
                             "children": [
