@@ -6,7 +6,7 @@ showTitle: true
 
 ## Support for open-source deployments of PostHog
 
-PostHog at production scale is a data-intensive application with a complex system architecture using advanced technologies.
+PostHog at production scale is a data-intensive application with a complex system architecture.
 
 Frequently, errors with self-hosted PostHog are due to incorrect configurations or management.
 
