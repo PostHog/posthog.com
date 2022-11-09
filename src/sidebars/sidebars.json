@@ -845,6 +845,10 @@
                     "url": "/docs/self-host/deploy/troubleshooting"
                 },
                 {
+                    "name": "Support for self-hosting (open-source and enterprise)",
+                    "url": "/docs/self-host/deploy/support"
+                },
+                {
                     "name": "Managing hosting costs",
                     "url": "/docs/self-host/deploy/hosting-costs"
                 }
