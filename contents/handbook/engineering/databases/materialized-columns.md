@@ -12,9 +12,7 @@ We currently store JSON data in string columns in clickhouse, reading and parsin
 
 Materialized columns allow us to "store" specific properties stored in JSON as separate columns that are there on disk, making reading these columns up to 25x faster than normal properties.
 
-Also check out our [blog post](/blog/clickhouse-materialized-columns) on materialized columns.
-
-Note that ClickHouse 22.3 added experimental support for Object data type which will eventually replace how we store JSON data and remove the need for materialized columns
+Also check out our [ClickHouse manual](/handbook/engineering/clickhouse/working-with-json) and [blog post](/blog/clickhouse-materialized-columns) for more information.
 
 ## Materialized columns in practice
 
