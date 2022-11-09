@@ -115,6 +115,10 @@ const linklist: IProps[] = [
                 url: '/questions',
             },
             {
+                title: 'Product roadmap',
+                url: '/roadmap',
+            },
+            {
                 title: 'Contributors',
                 url: '/contributors',
             },

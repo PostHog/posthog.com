@@ -1,6 +1,7 @@
 {
     "redirects": [
         { "source": "/plugins/:path*", "destination": "/apps/:path*" },
+        { "source": "/integrations/:path*", "destination": "/apps/:path*" },
         { "source": "/docs/user-guides/:path*", "destination": "/manual/:path*" },
         { "source": "/next-steps/:path*", "destination": "/next-steps", "statusCode": 200 },
         { "source": "/question/:path*", "destination": "/question", "statusCode": 200 },
@@ -36,7 +37,11 @@
         },
         { "source": "/docs/plugins/build/overview", "destination": "/docs/apps/build" },
         { "source": "/docs/plugins/types", "destination": "/docs/apps/build/types" },
-        { "source": "/docs/developing-locally", "destination": "/docs/contributing/developing-locally" },
+        { "source": "/docs/developing-locally", "destination": "/handbook/engineering/developing-locally" },
+        {
+            "source": "/docs/contributing/developing-locally",
+            "destination": "/handbook/engineering/developing-locally"
+        },
         { "source": "/docs/project-structure", "destination": "/docs/contributing/project-structure" },
         { "source": "/docs/recognizing-contributions", "destination": "/docs/contributing/recognizing-contributions" },
         { "source": "/docs/stack", "destination": "/docs/contributing/stack" },
@@ -47,7 +52,6 @@
         { "source": "/docs/self-host/configure", "destination": "/docs/self-host#configure" },
         { "source": "/docs/configuring-posthog", "destination": "/docs/self-host/configure" },
         { "source": "/docs/features/log-in-with-github-gitlab", "destination": "/docs/user-guides/sso" },
-        { "source": "/docs/contributing/developing-locally", "destination": "/docs/contribute/developing-locally" },
         { "source": "/docs/contributing", "destination": "/docs/contribute" },
         { "source": "/docs/contributing/project-structure", "destination": "/docs/contribute/project-structure" },
         {
@@ -317,28 +321,11 @@
         { "source": "/docs/privacy/overview", "destination": "/docs/privacy" },
         { "source": "/docs/integrate/gdpr", "destination": "/docs/privacy/gdpr-compliance" },
         { "source": "/blog/hipaa-compliant-analytics", "destination": "/blog/best-hipaa-compliant-analytics-tools" },
-        {
-            "source": "/handbook/engineering/databases/async-migrations",
-            "destination": "/handbook/engineering/async-migrations"
-        },
-        {
-            "source": "/handbook/engineering/databases/event-ingestion",
-            "destination": "/handbook/engineering/event-ingestion"
-        },
-        {
-            "source": "/handbook/engineering/databases/query-performance-optimization",
-            "destination": "/handbook/engineering/query-performance-optimization"
-        },
-        {
-            "source": "/handbook/engineering/databases/schema-changes",
-            "destination": "/handbook/engineering/schema-changes"
-        },
         { "source": "/handbook/engineering/aws", "destination": "/handbook/engineering/cloud-providers" },
         {
             "source": "/docs/contribute/coding-conventions",
             "destination": "/handbook/engineering/conventions/frontend-coding"
         },
-        { "source": "/docs/contribute/developing-locally", "destination": "/handbook/engineering/developing-locally" },
         { "source": "/handbook/engineering/mdx", "destination": "/handbook/engineering/posthog-com/mdx-setup" },
         { "source": "/docs/contribute/project-structure", "destination": "/handbook/engineering/project-structure" },
         { "source": "/docs/contribute/stack", "destination": "/handbook/engineering/stack" },
@@ -353,25 +340,12 @@
         { "source": "/sso", "destination": "/docs/user-guides/sso" },
         { "source": "/docs/api/people", "destination": "/docs/api/persons" },
         { "source": "/handbook/engineering/k8s-overview", "destination": "/docs/self-host/architecture" },
-        { "source": "/product/user-paths", "destination": "/apps/user-paths" },
+        { "source": "/product/user-paths", "destination": "/manual/paths" },
         {
             "source": "/tutorials/free-hotjar-alternative",
             "destination": "/blog/best-open-source-session-replay-tools"
         },
         { "source": "/docs/privacy/hipaa-compliance", "destination": "/blog/hipaa-compliant-analytics" },
-        {
-            "source": "/handbook/engineering/conventions/frontend-coding",
-            "destination": "/docs/contribute/coding-conventions"
-        },
-        {
-            "source": "/handbook/engineering/posthog-com/developing-the-website",
-            "destination": "/docs/contribute/contribute-to-website"
-        },
-        { "source": "/handbook/engineering/developing-locally", "destination": "/docs/contribute/developing-locally" },
-        { "source": "/handbook/engineering/project-structure", "destination": "/docs/contribute/project-structure" },
-        { "source": "/handbook/engineering/stack", "destination": "/docs/contribute/stack" },
-        { "source": "/handbook/engineering/cloud-providers", "destination": "/handbook/engineering/aws" },
-        { "source": "/handbook/engineering/posthog-com/mdx-setup", "destination": "/handbook/engineering/mdx" },
         { "source": "/product/quantitative-analysis", "destination": "/product/correlation-analysis" },
         { "source": "/docs/plugins/build/reference", "destination": "/docs/apps/build/reference" },
         { "source": "/docs/plugins/build/types", "destination": "/docs/apps/build/types" },
@@ -389,6 +363,8 @@
         { "source": "/handbook/company/1-1s", "destination": "/handbook/company/management" },
         { "source": "/lenny", "destination": "/?utm_campaign=lenny" },
         { "source": "/zizyo", "destination": "/?utm_campaign=zizyo" },
+        { "source": "/devopsjourney", "destination": "/?utm_campaign=devopsjourney" },
+        { "source": "/ebenezer", "destination": "/?utm_campaign=ebenezer" },
         { "source": "/blog/the-posthog-array-1-36-1", "destination": "/blog/the-posthog-array-1-36-0" },
         { "source": "/tutorials/b2b", "destination": "/blog/b2b-saas-product-metrics" },
         {
@@ -606,6 +582,7 @@
             "source": "/handbook/people/team-structure/_team_template",
             "destination": "/handbook/small-teams/_team_template"
         },
+        { "source": "/marketplace", "destination": "/partners" },
         { "source": "/marketplace/clickhouse", "destination": "/partners/clickhouse" },
         { "source": "/marketplace/opsverse", "destination": "/partners/opsverse" },
         { "source": "/marketplace/restack", "destination": "/partners/restack" },
@@ -626,6 +603,9 @@
         },
         { "source": "/eu-cloud", "destination": "/eu" },
         { "source": "/handbook/strategy/roadmap", "destination": "/roadmap" },
-        { "source": "/docs/architecture/ingestion-pipeline", "destination": "/docs/how-posthog-works/ingestion-pipeline" }
+        {
+            "source": "/docs/architecture/ingestion-pipeline",
+            "destination": "/docs/how-posthog-works/ingestion-pipeline"
+        }
     ]
 }

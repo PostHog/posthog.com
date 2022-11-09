@@ -1,49 +1,39 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const Busboy = require('busboy')
 const request = require('request')
-
-function multipartToAshby(req) {
-    return new Promise((resolve) => {
-        const applicationForm = { fieldSubmissions: [] }
-        const formData = {}
-        const busboy = Busboy({
-            headers: req.headers,
-        })
-
-        busboy.on('file', (name, filestream, file) => {
-            filestream.on('data', (data) => {
-                formData[name] = {
-                    value: data,
-                    options: {
-                        filename: file.filename,
-                        contentType: null,
-                    },
-                }
-            })
-        })
-
-        busboy.on('field', (name, value) => {
-            if (name === 'jobPostingId') {
-                formData[name] = value
-            } else {
-                applicationForm.fieldSubmissions.push({
-                    path: name,
-                    value,
-                })
-            }
-        })
-
-        busboy.on('finish', () => {
-            formData.applicationForm = JSON.stringify(applicationForm)
-            resolve(formData)
-        })
-
-        req.pipe(busboy)
-    })
-}
+const multiparty = require('multiparty')
+const fs = require('fs')
 
 const handler = async (req, res) => {
-    const formData = await multipartToAshby(req, res)
+    const form = new multiparty.Form()
+    const formData = await new Promise((resolve, reject) => {
+        form.parse(req, function (err, fields, files) {
+            if (err) reject({ err })
+            const fieldSubmissions = []
+            Object.keys(fields).forEach((key) => {
+                if (key !== 'jobPostingId') {
+                    fieldSubmissions.push({
+                        path: key,
+                        value: fields[key][0],
+                    })
+                }
+            })
+            const resumeKey = Object.keys(files)[0]
+            const file = files[resumeKey][0]
+            const data = {
+                applicationForm: JSON.stringify({ fieldSubmissions }),
+                jobPostingId: fields['jobPostingId'][0],
+                [resumeKey]: {
+                    value: fs.createReadStream(file.path),
+                    options: {
+                        filename: file.originalFilename,
+                        contentType: null,
+                    },
+                },
+            }
+
+            resolve(data)
+        })
+    })
     const options = {
         method: 'POST',
         url: 'https://api.ashbyhq.com/applicationForm.submit',

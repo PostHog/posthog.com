@@ -414,6 +414,28 @@
                         {
                             "name": "Data replication",
                             "url": "/handbook/engineering/clickhouse/replication"
+                        },
+                        {
+                            "name": "Data ingestion",
+                            "url": "/handbook/engineering/clickhouse/data-ingestion"
+                        },
+                        {
+                            "name": "Schema case studies",
+                            "url": "",
+                            "children": [
+                                {
+                                    "name": "Overview",
+                                    "url": "/handbook/engineering/clickhouse/schema/overview"
+                                },
+                                {
+                                    "name": "app_metrics",
+                                    "url": "/handbook/engineering/clickhouse/schema/app-metrics"
+                                },
+                                {
+                                    "name": "person_distinct_id",
+                                    "url": "/handbook/engineering/clickhouse/schema/person-distinct-id"
+                                }
+                            ]
                         }
                     ]
                 },
@@ -633,6 +655,10 @@
                             "url": "/docs/self-host/deploy/hobby"
                         },
                         {
+                            "name": "EU Hosting Companies",
+                            "url": "/docs/self-host/deploy/hosting-in-eu"
+                        },
+                        {
                             "name": "Other platforms",
                             "url": "/docs/self-host/deploy/other"
                         }
@@ -821,10 +847,6 @@
                 {
                     "name": "Managing hosting costs",
                     "url": "/docs/self-host/deploy/hosting-costs"
-                },
-                {
-                    "name": "EU-only hosting",
-                    "url": "/docs/self-host/deploy/hosting-in-eu"
                 }
             ]
         },
@@ -1701,7 +1723,7 @@
                 },
                 {
                     "name": "Trends",
-                    "url": "/tutorials/categories/session-recording"
+                    "url": "/tutorials/categories/trends"
                 }
             ]
         },
