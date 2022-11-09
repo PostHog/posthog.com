@@ -346,7 +346,10 @@ export default function Questions() {
                                                             <p className="max-w-xl break-words whitespace-normal line-clamp-2 text-sm opacity-90">
                                                                 {question.replies[0].body}
                                                             </p>
-                                                            <div className="flex items-center space-x-1.5">
+                                                            <a
+                                                                href={`/community/profiles/${profile.id}`}
+                                                                className="flex items-center space-x-1.5"
+                                                            >
                                                                 <div className={`w-5 h-5 overflow-hidden rounded-full`}>
                                                                     {profile.avatar ? (
                                                                         <img
@@ -374,7 +377,7 @@ export default function Questions() {
                                                                 <span className="text-gray font-semibold">
                                                                     {profile.first_name} {profile.last_name}
                                                                 </span>
-                                                            </div>
+                                                            </a>
                                                         </td>
                                                         <td className="whitespace-nowrap p-4 text-sm text-gray-500 text-gray font-semibold">
                                                             {dayFormat(dateToDays(question.created_at))}
