@@ -4,6 +4,7 @@ const files = {}
 
 exports.onPreInit = async function (_, options) {
     const { strapiURL, strapiKey } = options
+    if (!strapiURL || !strapiKey) return
     const createStrapiPageNodes = async (limit = 100, page = 1) => {
         const strapiPages = await fetch(
             `${strapiURL}/api/pages?pagination[pageSize]=${limit}&pagination[page]=${page}`,
@@ -33,6 +34,13 @@ exports.onCreateNode = async function ({ node, getNode, actions, store, cache, c
     if (node.internal.type === `MarkdownRemark` || node.internal.type === 'Mdx') {
         const parent = getNode(node.parent)
         if (parent.internal.type === 'File') {
+            if (Object.keys(files).length <= 0) {
+                return createNodeField({
+                    node: parent,
+                    name: 'gitLogLatestDate',
+                    value: new Date(),
+                })
+            }
             const file = files[`contents/${parent.relativePath}`]
             if (file) {
                 const { contributors, lastUpdated } = file
