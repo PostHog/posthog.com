@@ -38,7 +38,7 @@ export const BlogCategories: CategoryInterface[] = [
         slug: 'open-source',
         link: '/blog/categories/open-source',
     },
-        {
+    {
         title: 'CEO diaries',
         slug: 'ceo-diaries',
         link: '/blog/categories/ceo-diaries',
