@@ -93,7 +93,7 @@ when run again.
 This behavior is due to [page cache](https://www.thomas-krenn.com/en/wiki/Linux_Page_Cache_Basics) in linux. In broad terms, the operating
 system caches recently read files into memory, speeding up subsequent reads of the same data.
 
-As most queries in ClickHouse are dependant on fast IO to execute fast, this can have a significant effect on query performance and a reason
+As most queries in ClickHouse are dependent on fast IO to execute fast, this can have a significant effect on query performance and a reason
 why at PostHog our ClickHouse nodes have a lot of memory available.
 
 ### Effect on benchmarking
