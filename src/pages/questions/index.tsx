@@ -343,7 +343,7 @@ export default function Questions() {
                                                                     )
                                                                 })}
                                                             </div>
-                                                            <p className="max-w-xl break-words whitespace-normal line-clamp-2 text-sm">
+                                                            <p className="max-w-xl break-words whitespace-normal line-clamp-2 text-sm opacity-90">
                                                                 {question.replies[0].body}
                                                             </p>
                                                             <div className="flex items-center space-x-1.5">
