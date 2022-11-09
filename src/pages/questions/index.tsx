@@ -13,10 +13,8 @@ import { ZoomImage } from 'components/ZoomImage'
 import { motion } from 'framer-motion'
 import { GatsbyImage, getImage, StaticImage } from 'gatsby-plugin-image'
 import React, { useEffect, useState } from 'react'
-import Scroll from 'react-scroll'
+import { dayFormat, dateToDays } from '../../utils'
 import { Form } from 'squeak-react'
-const Element = Scroll.Element
-const scroller = Scroll.scroller
 
 const TopLink = ({ title, description, link, icon }) => {
     return (
@@ -183,19 +181,13 @@ const Header = () => {
                     <h5 className="text-center">Search answers across posthog.com</h5>
                     <Search />
                     <p className="mt-3 text-sm text-gray text-center font-semibold">
-                        Can't find your answer?{' '}
-                        <button
-                            className="text-red"
-                            onClick={() => scroller.scrollTo('squeak-bottom', { offset: -100, smooth: true })}
-                        >
-                            Ask a question
-                        </button>
+                        Can't find your answer? <button className="text-red">Ask a question</button>
                     </p>
                 </div>
 
                 <span className="absolute bottom-[calc(-170px-3rem)] hidden mdlg:block md:-left-24 lg:-left-20 z-[-10] transition-all">
                     <StaticImage
-                        src="../../contents/images/search-hog-1.png"
+                        src="../../../contents/images/search-hog-1.png"
                         alt="This hog has an answer"
                         height={512}
                         width={440}
@@ -206,7 +198,7 @@ const Header = () => {
 
                 <span className="absolute bottom-[calc(-101px-3rem)] hidden mdlg:block md:-right-40 lg:-right-36 xl:-right-24 2xl:-right-14 z-[-20] transition-all">
                     <StaticImage
-                        src="../../contents/images/search-hog-2.png"
+                        src="../../../contents/images/search-hog-2.png"
                         alt="This hog has an answer"
                         height={407}
                         width={449}
@@ -314,26 +306,26 @@ export default function Questions() {
                                                         scope="col"
                                                         className="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                                                     >
-                                                        Name
+                                                        Question
                                                     </th>
                                                     <th
                                                         scope="col"
                                                         className="px-4 py-3.5 text-left text-sm font-semibold text-gray-900"
                                                     >
-                                                        Email
+                                                        Posted at
                                                     </th>
                                                     <th
                                                         scope="col"
                                                         className="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 sm:pr-6"
                                                     >
-                                                        Role
+                                                        Replies
                                                     </th>
                                                 </tr>
                                             </thead>
                                             <tbody className="divide-y divide-gray-accent-light divide-dashed">
                                                 {questions.map(({ question, profile, numReplies }) => (
                                                     <tr key={question.id} className="">
-                                                        <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 sm:pl-6 space-y-3">
+                                                        <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 sm:pl-6 space-y-2">
                                                             <div className="flex items-center space-x-2">
                                                                 <Link to={`/questions/${question.id}`}>
                                                                     <span className="text-[16px]">
@@ -351,9 +343,9 @@ export default function Questions() {
                                                                     )
                                                                 })}
                                                             </div>
-                                                            <div className="max-w-md whitespace-normal break-normal">
-                                                                {question.replies[0].body.substring(0, 120)}
-                                                            </div>
+                                                            <p className="max-w-xl break-words whitespace-normal line-clamp-2 text-sm">
+                                                                {question.replies[0].body}
+                                                            </p>
                                                             <div className="flex items-center space-x-1.5">
                                                                 <div className={`w-5 h-5 overflow-hidden rounded-full`}>
                                                                     {profile.avatar ? (
@@ -384,10 +376,10 @@ export default function Questions() {
                                                                 </span>
                                                             </div>
                                                         </td>
-                                                        <td className="whitespace-nowrap p-4 text-sm text-gray-500">
-                                                            {question.created_at}
+                                                        <td className="whitespace-nowrap p-4 text-sm text-gray-500 text-gray font-semibold">
+                                                            {dayFormat(dateToDays(question.created_at))}
                                                         </td>
-                                                        <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-6">
+                                                        <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-6 text-gray font-semibold">
                                                             {numReplies}
                                                         </td>
                                                     </tr>
