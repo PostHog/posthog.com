@@ -1,6 +1,6 @@
 ---
 date: 2022-11-09
-title: "Creating an employee-friendly startup share-option scheme"
+title: "Creating an employee-friendly startup share option scheme"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
