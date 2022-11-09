@@ -132,6 +132,10 @@
                     "url": "/handbook/small-teams/experimentation"
                 },
                 {
+                    "name": "Growth",
+                    "url": "/handbook/small-teams/growth"
+                },
+                {
                     "name": "Infrastructure",
                     "url": "/handbook/small-teams/infrastructure"
                 },
@@ -320,6 +324,10 @@
                             "url": "/handbook/engineering/release-new-version"
                         },
                         {
+                            "name": "Handling incidents",
+                            "url": "/handbook/engineering/incidents"
+                        },
+                        {
                             "name": "Bug prioritization",
                             "url": "/handbook/engineering/bug-prioritization"
                         }
@@ -392,6 +400,42 @@
                         {
                             "name": "Jobs",
                             "url": "/handbook/engineering/posthog-com/jobs"
+                        }
+                    ]
+                },
+                {
+                    "name": "ClickHouse manual",
+                    "url": "",
+                    "children": [
+                        {
+                            "name": "Data storage or what is a MergeTree",
+                            "url": "/handbook/engineering/clickhouse/data-storage"
+                        },
+                        {
+                            "name": "Data replication",
+                            "url": "/handbook/engineering/clickhouse/replication"
+                        },
+                        {
+                            "name": "Data ingestion",
+                            "url": "/handbook/engineering/clickhouse/data-ingestion"
+                        },
+                        {
+                            "name": "Schema case studies",
+                            "url": "",
+                            "children": [
+                                {
+                                    "name": "Overview",
+                                    "url": "/handbook/engineering/clickhouse/schema/overview"
+                                },
+                                {
+                                    "name": "app_metrics",
+                                    "url": "/handbook/engineering/clickhouse/schema/app-metrics"
+                                },
+                                {
+                                    "name": "person_distinct_id",
+                                    "url": "/handbook/engineering/clickhouse/schema/person-distinct-id"
+                                }
+                            ]
                         }
                     ]
                 },
@@ -611,6 +655,10 @@
                             "url": "/docs/self-host/deploy/hobby"
                         },
                         {
+                            "name": "EU Hosting Companies",
+                            "url": "/docs/self-host/deploy/hosting-in-eu"
+                        },
+                        {
                             "name": "Other platforms",
                             "url": "/docs/self-host/deploy/other"
                         }
@@ -799,10 +847,6 @@
                 {
                     "name": "Managing hosting costs",
                     "url": "/docs/self-host/deploy/hosting-costs"
-                },
-                {
-                    "name": "EU-only hosting",
-                    "url": "/docs/self-host/deploy/hosting-in-eu"
                 }
             ]
         },
@@ -1679,7 +1723,7 @@
                 },
                 {
                     "name": "Trends",
-                    "url": "/tutorials/categories/session-recording"
+                    "url": "/tutorials/categories/trends"
                 }
             ]
         },

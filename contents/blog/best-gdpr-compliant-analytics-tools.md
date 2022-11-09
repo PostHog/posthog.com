@@ -1,6 +1,6 @@
 ---
 date: 2022-10-25
-title: The 6 best GDPR-compliant analytics tools
+title: The 7 best GDPR-compliant analytics tools
 rootPage: /blog
 sidebar: Blog
 showTitle: true

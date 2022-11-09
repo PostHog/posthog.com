@@ -99,6 +99,7 @@
         "md5": "^2.3.0",
         "mermaid": "^9.1.5",
         "mobx": "^6.3.13",
+        "multiparty": "^4.2.3",
         "netlify-cli": "^11.7.1",
         "node-fetch": "^2.6.1",
         "posthog-node": "^2.0.2",

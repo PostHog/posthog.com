@@ -1928,37 +1928,72 @@
     from = "/docs/self-host/architecture"
     to = "/docs/how-posthog-works"
 
+# Added: 2022-08-25
+[[redirects]]
+    from = "/handbook/engineering/databases"
+    to = "/docs/how-posthog-works/ingestion-pipeline"
+
+# Added: 2022-09-15
+[[redirects]]
+    from = "/handbook/people/team-structure/team-east"
+    to = "/handbook/people/team-structure/product-analytics"
+
+
+[[redirects]]
+    from = "/marketplace"
+    to = "/partners"
+
+
+# Added: 2022-10-01
+[[redirects]]
+    from = "/marketplace/guidelines"
+    to = "/partners/guidelines"
+
+
+# Added: 2022-10-01
+[[redirects]]
+    from = "/marketplace/listing-template"
+    to = "/partners/listing-template"
+
+
+# Added: 2022-09-24
+[[redirects]]
+    from = "/handbook/company/working-with-product-design"
+    to = "/handbook/engineering/product-design"
+
+# Added: 2022-09-16
+[[redirects]]
+    from = "/handbook/strategy/overview"
+    to = "/handbook/strategy/strategy"
+
 # Added: 2022-08-29
 [[redirects]]
-    from = "/manual/actions"
-    to = "/docs/user-guides/actions"
+    from = "/docs/architecture/ingestion-pipeline"
+    to = "/docs/how-posthog-works/ingestion-pipeline"
 
-
-# Added: 2022-08-16
+# Added: 2022-09-01
 [[redirects]]
-    from = "/manual/annotations"
-    to = "/docs/user-guides/annotations"
+    from = "/blog/the-posthog-array-1-39-1"
+    to = "/blog/the-posthog-array-1-39-0"
 
+# Added: 2022-09-02    
+[[redirects]]
+    from = "/product/experimentation"
+    to = "/product/experimentation-suite"
+
+# Added: 2022-09-11 # Updated: 2022-09-15
+[[redirects]]
+    from = "/handbook/strategy/strategy"
+    to = "/handbook/strategy/overview"
 
 # Added: 2022-09-15
 [[redirects]]
     from = "/handbook/engineering/app-east"
     to = "/handbook/people/team-structure/product-analytics"
 
-# Added: 2022-08-16
-[[redirects]]
-    from = "/manual/cohorts"
-    to = "/docs/user-guides/cohorts"
-
 [[redirects]]
     from = "/handbook/people/team-structure/app-east"
     to = "/handbook/small-teams/app-east"
-
-
-# Added: 2022-08-16
-[[redirects]]
-    from = "/manual/feature-flags"
-    to = "/docs/user-guides/feature-flags"
 
 # Added: 2022-09-20
 [[redirects]]
@@ -1974,10 +2009,6 @@
 [[redirects]]
     from = "/handbook/people/team-structure"
     to = "/handbook/small-teams"
-    
-[[redirects]]
-    from = "/manual/group-analytics"
-    to = "/docs/user-guides/group-analytics"
 
 # Added: 2022-10-01
 [[redirects]]
@@ -2039,16 +2070,6 @@
     from = "/marketplace/clickhouse"
     to = "/partners/clickhouse"
 
-# Added: 2022-10-01
-[[redirects]]
-    from = "/manual/insights"
-    to = "/docs/user-guides/insights"
-
-
-# Added: 2022-08-16
-[[redirects]]
-    from = "/manual/lifecycle"
-    to = "/docs/user-guides/lifecycle"
 
 # Added: 2022-10-01
 [[redirects]]
@@ -2097,6 +2118,186 @@
     from = "/eu-cloud"
     to = "/eu"
 
+[[redirects]]
+    from = "/partners/restack"
+    to = "/marketplace/restack"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/handbook/small-teams/_team_template"
+    to = "/handbook/people/team-structure/_team_template"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/handbook/small-teams/customer-success"
+    to = "/handbook/people/team-structure/customer-success"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/handbook/small-teams/customer-success/mission"
+    to = "/handbook/people/team-structure/customer-success/mission"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/handbook/small-teams/customer-success/objectives"
+    to = "/handbook/people/team-structure/customer-success/objectives"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/handbook/small-teams/exec"
+    to = "/handbook/people/team-structure/exec"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/handbook/small-teams/exec/mission"
+    to = "/handbook/people/team-structure/exec/mission"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/handbook/small-teams/exec/objectives"
+    to = "/handbook/people/team-structure/exec/objectives"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/handbook/small-teams/product-analytics/mission"
+    to = "/handbook/people/team-structure/experimentation/mission"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/handbook/small-teams/infrastructure"
+    to = "/handbook/people/team-structure/infrastructure"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/handbook/small-teams/infrastructure/mission"
+    to = "/handbook/people/team-structure/infrastructure/mission"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/handbook/small-teams/infrastructure/objectives"
+    to = "/handbook/people/team-structure/infrastructure/objectives"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/handbook/small-teams/marketing"
+    to = "/handbook/people/team-structure/marketing"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/handbook/small-teams/marketing/mission"
+    to = "/handbook/people/team-structure/marketing/mission"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/handbook/small-teams/marketing/objectives"
+    to = "/handbook/people/team-structure/marketing/objectives"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/handbook/small-teams/people"
+    to = "/handbook/people/team-structure/people"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/handbook/small-teams/people/mission"
+    to = "/handbook/people/team-structure/people/mission"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/handbook/small-teams/people/objectives"
+    to = "/handbook/people/team-structure/people/objectives"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/handbook/small-teams/pipeline"
+    to = "/handbook/people/team-structure/pipeline"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/handbook/small-teams/pipeline/objectives"
+    to = "/handbook/people/team-structure/pipeline/objectives"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/handbook/small-teams/product-analytics"
+    to = "/handbook/people/team-structure/product-analytics"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/handbook/small-teams/experimentation/mission"
+    to = "/handbook/people/team-structure/product-analytics/mission"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/handbook/small-teams/product-analytics/objectives"
+    to = "/handbook/people/team-structure/product-analytics/objectives"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/handbook/small-teams/session-recording"
+    to = "/handbook/people/team-structure/session-recording"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/handbook/small-teams/session-recording/objectives"
+    to = "/handbook/people/team-structure/session-recording/objectives"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/handbook/small-teams/team-structure"
+    to = "/handbook/people/team-structure/team-structure"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/handbook/small-teams/website-docs"
+    to = "/handbook/people/team-structure/website-docs"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/handbook/small-teams/website-docs/mission"
+    to = "/handbook/people/team-structure/website-docs/mission"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/handbook/small-teams/website-docs/objectives"
+    to = "/handbook/people/team-structure/website-docs/objectives"
+
+
+# Added: 2022-10-27
+[[redirects]]
+    from = "/handbook/company/small-teams"
+    to = "/handbook/people/team-structure/why-small-teams"
+
+
+# Added: 2022-10-27
 [[redirects]]
     from = "/handbook/strategy/roadmap"
     to = "/roadmap"

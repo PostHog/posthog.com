@@ -53,7 +53,11 @@ export default function Hero() {
                     </h2>
 
                     <div className="flex flex-col md:flex-row justify-center items-center gap-2">
-                        <CallToAction type="primary" className="!w-full md:!w-44 shadow-xl" to="/signup">
+                        <CallToAction
+                            type="primary"
+                            className="!w-full md:!w-44 shadow-xl"
+                            to="https://app.posthog.com/signup"
+                        >
                             Get started
                         </CallToAction>
                         <DemoLink />
