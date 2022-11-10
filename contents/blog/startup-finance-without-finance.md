@@ -87,7 +87,7 @@ Your report (sometimes referred to as 'management accounts') will comprise three
 
 I lied when I said accounting was the good stuff - _this_ is the good stuff. Let's get our Wall Street on. 
 
-For this section, I'm going to assume you have your accounts set up in QuickBooks. Next, go to your account in Pry - the first thing you'll be prompted to do is connect Pry to your QuickBooks account, which should be straightforward. You can also connect your bank accounts directly if you want to - I like this because it means that Pry always has the latest bank account balances in one place, which is easier than logging into each one and adding up the total. 
+Go to your account in [Pry](https://pry.co/) - the first thing you'll be prompted to do is connect Pry to your QuickBooks account, which should be straightforward. You can also connect your bank accounts directly if you want to - I like this because it means that Pry always has the latest bank account balances in one place, which is easier than logging into each one and adding up the total. 
 
 Once you've got your historical accounts showing in Pry (aka 'actuals'), it's time to build our financial plan! We're going to do three things:
 
