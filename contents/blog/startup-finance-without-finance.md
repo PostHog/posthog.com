@@ -76,7 +76,7 @@ Your report (sometimes referred to as 'management accounts') will comprise three
 
 ### General tips
 
-- Your accountants are not mind readers - they do not have any context about the things your business is doing, so if there is an unusual transaction they haven't seen before, you'll need to explain to them what it's for. 
+- Your accountants are not mind readers - if there is an unusual transaction they haven't seen before, you'll need to explain to them what it's for. 
 - Be super clear with reporting timeline expectations from your accountant and agree these up front. Similarly, when they need stuff from you, ask them for a deadline - some of these are actually real, legal deadlines!
 - Ask for quarterly and annual reports to be generated, not just monthly. You'll need these for random things like investor data requests throughout the year. 
 - If you are a B2B SaaS company, ask your accountant to put your hosting costs in COGS ('cost of goods sold') not IT expenses. Otherwise it'll look like you have a ridiculous 99% profit margin or something. 
