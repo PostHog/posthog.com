@@ -87,18 +87,31 @@ export function InProgress(props: IRoadmap) {
                 )}
             </div>
             <div className="sm:flex-[0_0_250px] xl:flex-1 flex sm:justify-end xl:justify-start">
-                <div className="mt-2">
+                <div className="mt-2 w-full">
                     {showAuth ? (
-                        <Login
-                            onSubmit={(data: { email: string }) => subscribe(data?.email)}
-                            apiHost="https://squeak.cloud"
-                            organizationId="a898bcf2-c5b9-4039-82a0-a00220a8c626"
-                        />
+                        <>
+                            <h4 className="mb-1 text-red">Sign into PostHog.com</h4>
+                            <div className="bg-tan p-4 mb-2">
+                                <p className="text-sm mb-2">
+                                    <strong>Note: PostHog.com authentication is separate from your PostHog app.</strong>
+                                </p>
+                                
+                                <p className="text-sm mb-0">
+                                    We suggest signing up with your personal email. Soon you'll be able to link your PostHog app account.
+                                </p>
+                            </div>
+                            
+                            <Login
+                                onSubmit={(data: { email: string }) => subscribe(data?.email)}
+                                apiHost="https://squeak.cloud"
+                                organizationId="a898bcf2-c5b9-4039-82a0-a00220a8c626"
+                            />
+                        </>
                     ) : (
                         <button
                             disabled={subscribed || loading}
                             onClick={() => subscribe(user?.email)}
-                            className="text-[15px] flex items-center space-x-2 py-2 px-4 rounded-sm bg-gray-accent-light text-black hover:text-black font-bold active:top-[0.5px] active:scale-[.98] w-full"
+                            className="text-[15px] inline-flex items-center space-x-2 py-2 px-4 rounded-sm bg-gray-accent-light text-black hover:text-black font-bold active:top-[0.5px] active:scale-[.98] w-auto"
                         >
                             <span className="w-[24px] h-[24px] flex items-center justify-center bg-blue/10 text-blue rounded-full">
                                 {loading ? (

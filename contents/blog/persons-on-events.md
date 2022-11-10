@@ -14,13 +14,13 @@ In [a previous product update](/blog/the-posthog-array-1-39-0) we announced a be
 
 > **Need to upgrade a self-hosted instance?** We've explained how to upgrade to 1.41.0 and run the necessary async migrations in [our 1.41.0 release highlights](/blog/the-posthog-array-1-41-0). 
 
-This change combines [persons](/manual/persons) and [events](/manual/events) into a single [ClickHouse table](/blog/clickhouse-vs-postgres#olap-vs-oltp-aka-columns-vs-rows), adding person IDs and properties _onto_ events. This change also applies to groups, adding group properties and aggregation to the same table. 
+This change combines [persons](/manual/persons) and [events](/manual/events) into a single [ClickHouse table](/blog/clickhouse-vs-postgres#olap-vs-oltp-aka-columns-vs-rows), adding person IDs and properties _onto_ events.
 
 You won’t see any UI changes — persons will still have their own Persons & Groups section on the sidebar, for example — and there’ll be no loss of functionality, but here are some changes you may see:
 
-- **Faster results for queries involving person or group properties and events**. Putting persons, groups and events into a single ClickHouse table means we no longer have to join tables to get results on queries involving these data. As a result, query performance will improve by up to 400%.
+- **Faster results for queries involving person properties and events**. Putting persons and events into a single ClickHouse table means we no longer have to join tables to get results on queries involving these data. As a result, query performance will improve by up to 400%.
 
-- **Faster filtering of events with person or group properties**. Similarly, filtering events by person or group properties is much faster when joining the tables is no longer necessary. Anywhere where you’re working with persons or groups, and events, PostHog will be faster. 
+- **Faster filtering of events with person properties**. Similarly, filtering events by person properties is much faster when joining the tables is no longer necessary. Anywhere where you’re working with persons and events, PostHog will be faster. 
 
 - **Users will no longer be merged retroactively in some situations**. When an identified user logs in from a different browser (thus becoming anonymous) we end up with separate records for their unidentified and identified behavior. We used to do database joins at query time, so that all events were tied to the same person. Now, we simply look at the events which have the data from the event processing time - meaning that in some situations anonymous events are shown as separate, unique persons in insights. Further [information is available in the docs](https://posthog.com/docs/how-posthog-works/ingestion-pipeline#merging-two-persons) 
 
