@@ -198,7 +198,7 @@ Here are a few tips I've found helpful for upskilling yourself or your team's fi
 - Share your monthly accounts internally so people can ask questions. 
 - Ask your accountants questions about literally every single thing you don't understand. The more you understand, the easier you're making their lives as well. 
 - Prioritize clarity and runway management over 'best practice'. Knowing exactly what is driving your cash burn, and how you can influence it, is way more valuable than learning a bunch of financial jargon and beautifully formatted reports. 
-- Lean on your investors for help, _especially_ when it comes to assumptions for your financial model. They have seen dozens of companies like yours, so will be able to tell you if your growth plans are unrealistic, or if a particular metric is looking unusually off. Don't be afraid to ask for help - it shows you're taking this stuff seriously!
+- Lean on your investors for help, _especially_ when it comes to assumptions for your financial model. They have seen dozens of companies like yours, so will be able to tell you if your growth plans are unrealistic, or if a particular metric is looking unusually off. Don't be afraid to ask for help - it shows you're taking this stuff seriously.
 
 So when do you hire this finance person? Broadly speaking, there will be one of two triggers:
 
