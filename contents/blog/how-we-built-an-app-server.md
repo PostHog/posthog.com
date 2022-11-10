@@ -119,7 +119,7 @@ After creating a basic MVP, and seeing the benefits of its usage, work continued
 
 ### Structuring apps
 
-Each app contains two key files:
+The basic structure of an app has stayed the same since the JavaScript rebuild. Each app contains two key files:
 
 - `index.js` (or `index.ts`) which contains key application logic, modifies events, connects with external services, and interacts with PostHog. It has an allowlist of libraries to use for utilities or interacting with other services. It also has access (through the VM) to meta information, storage, and logging.
 - `plugin.json` contains configuration data for the app, what shows up in PostHog, and variables for end users to modify. The file contains the name, description, and other details that show up on the front end.
@@ -177,74 +177,26 @@ And here’s a basic `plugin.json` that goes along with it:
 
 ### App functions and processes
 
-Within each index file, there are multiple functions and standard objects passed to those functions. These include `setupPlugin`, `processEvent`, `onEvent`, and scheduled functions. The event processing functions take an event, a config (meta) object (which contains configuration details), and VM-related extensions like storage, caching, and logging. Functions end return updated events, capture new events in PostHog, or send data to external services.
-
-Specifically, our server exports predefined functions that run on conditions like:
+As you can see by reading the above examples, the index file exports functions that take objects PostHog provides (like configuration or event data). Specifically, our PostHog exports predefined functions that run on conditions like:
 
 - event ingestion (`processEvent`)
     - useful for modifying incoming data, such as adding geographic data properties or dropping events matching a property filter.
 - every minute, hour, day (`runEveryMinute`, `runEveryHour`, `runEveryDay`)
-    - useful for triggering events based on updates to external services such as Stripe, HubSpot, or GitHub
+    - useful for triggering events based on updates to external services such as Stripe, HubSpot, or GitHub.
 - once processing is complete (`exportEvents`, `onEvent`)
-    - useful for exporting data to external services such as BigQuery, Snowflake, or Databricks
+    - useful for exporting data to external services such as BigQuery, Snowflake, or Databricks.
 
-We built each of these to fulfill use cases that help users keep control and get the most out of their data.
-
-### Transforming code into callable functions
-
-We export, transform, and connect these functions to extensions like storage, logging, and caching. This, ultimately, turns them into callable functions. Here’s a diagram of what a callable function VM looks like:
+These functions are exported when apps are uploaded to PostHog. From there they run as callable functions on VMs as part of our ingestion pipeline and also have access to extensions like storage, caching, and logging. Overall, it looks like this:
 
 ![VM](../images/blog/how-we-built-an-app-server/vm.png)
 
-Once completed and uploaded, these apps are connected to PostHog through our app library or services like npm and GitHub. Once the app code is exported and transformed, it runs on the VMs (above) as part of our ingestion pipeline.
+Structuring apps this way provides flexibility to users while maintaining scalability and security. Added features like scheduling and exporting added new functionality users wanted. Caching and improving the config object (enabling statelessness) helped apps scale effectively. Running apps in VMs helped ensure they were secure and isolated. The next step was to put these apps into production.
 
-This structure and functionality make it simple to build an app while maintaining enough customizability for many use cases. We have continued to build functionality, like scheduling and services, into apps over time that help them better fulfill use cases for users.
+## Serving apps and managing data at scale
 
-## Making sure arbitrary code doesn’t break everything
+An app is no good if it doesn't integrate into PostHog. Apps needed to integrate with our ingestion pipeline. They needed to handle an inflow of data, scale, manage tasks, and update themselves. There are many parts needed to make this happen.
 
-Although using VMs solved many of our potential security, infrastructure, and usability issues, it didn’t solve all of them. Apps contain arbitrary code, and arbitrary code is dangerous. We’ve taken multiple steps to limit this.
-
-First, there are limitless libraries for JavaScript, but we only [allow a small portion of them](/docs/apps/build/reference#available-imports). You can’t install and use whatever npm package you like. We include basic packages such as Node’s standard `crypto`, `url`, `node-fetch`, and `zlib` libraries. We also include libraries like `snowflake-sdk`, `@google-cloud/bigquery`, and `pg` to connect external services. This ensures that the code run by our users and servers uses libraries we trust.
-
-Second, users can write a loop that loops forever and causes resource exhaustion. To prevent this, we set up a babel plugin that injects code into `for`, `while`, and `do while` loops (as described in [this article](https://medium.com/@bvjebin/js-infinite-loops-killing-em-e1c2f5f2db7f)). Whenever there is a loop, we set up a timer before we start it. If the loop runs for more than 30 seconds, the program errors.
-
-Third, to prevent data loss, we added the ability to retry logic to our `processEvent` function. Kafka handles retries for us by batching events and adding failed ones into the dead letter queue. We added the ability to run functions on `RetryError`  to improve consistency. App developers can also run fetches with retry. Here’s an example of what it looks like:
-
-```js
-import { RetryError } from '@posthog/plugin-scaffold'
-
-export function setupPlugin() {
-    try {
-        // Some network connection
-    } catch {
-        throw new RetryError('Service is unavailable, but it might be back up in a moment')
-    }
-}
-```
-
-Fourth, we made it easier to write high-quality apps. The biggest things we did here were creating an app [template](https://github.com/PostHog/posthog-plugin-starter-kit) and [scaffold](https://github.com/PostHog/plugin-scaffold) for users, including [Jest](https://jestjs.io/) to test the app, and the ability to write the app in TypeScript. Many more minor improvements added up to higher-quality apps getting written.
-
-Finally, as mentioned before, although our self-hosted instances can run whatever arbitrary code they want, we still review apps before adding them for everyone to use on Cloud. This ensures a final quality and security standard for users.
-
-## Serving and managing apps at scale
-
-The next step after creating an app (and making sure it doesn’t break things) is putting it into use. The plugin server serves and manages apps along with other processes in the ingestion pipeline. We needed to make sure apps integrate into the ingestion process, and not just bolt on. To show you how we did that, here’s a complete overview of what the plugin server looks like (our app server only utilizes some parts):
-
-![Plugin server](../images/blog/how-we-built-an-app-server/plugin-server.png)
-
-The main thread routes incoming tasks to the right location. It receives data and starts threads to complete them. We use [Piscina](https://github.com/piscinajs/piscina) (a node.js worker pool) to create and manage the threads. Piscina abstracts away a lot of the management of threads we would need to do to scale. The main thread also handles the functionality of scheduling and job queuing. The result is created tasks being sent to worker threads to complete.
-
-Worker threads receive tasks from the main thread and execute them. Some of the tasks, like `processEvent` or `runEveryMinute` use the app code we detailed above. Worker threads contain the VMs, as well as the ingestion logic and connections to extensions and libraries. Each worker thread can run up to 10 tasks at the same time.
-
-![Worker thread](../images/blog/how-we-built-an-app-server/worker-thread.png)
-
-When the worker thread finishes its task, it returns to the main thread for further processing. This could include more modification through apps, PostHog person processing, or writing to ClickHouse. A final `onEvent` task runs once all the processing completes, which is useful for functions like exporting or alerting.
-
-This structure enables modularity, and many different types of tasks, including app-related ones, can run together. Work improving the code for the plugin server improves all of the processes. This also lowers the maintenance needed for having multiple systems.
-
-## The infrastructure needed to scale to billions of events
-
-The final step is to make app functions and servers scale to the billions of events we process. Apps needed to integrate with our ingestion pipeline. Below is a basic diagram of our ingestion pipeline. Most of what we care about is the plugin server and the Kafka data flow leading into it.
+Below is a basic diagram of our ingestion pipeline. Most of what we care about is the plugin server and the Kafka data flow leading into it.
 
 ```mermaid
 graph TD
@@ -268,15 +220,63 @@ graph TD
     Kafka2 <-..- ClickHouse
 ```
 
+### Using Kafka and Redis
+
 Kafka manages our data flows. It helps us batch, split, and manage parallel work for our apps. For example, Kafka helps us batch and retry events when apps call `processEvent`. We use a Kafka topic (which holds messages and events in a logical order) to continue the flow of data.
 
 Another service we use is Redis to cache data and back the queue for apps. Many parts of the app are reusable and don’t need to be rebuilt each time we run the app. There is data we only need to keep around temporarily. Using Redis to cache data like this dramatically improved app performance and lowered the number of app servers we needed to run.
 
 We also use a couple of Redis patterns. First, we use [Redlock](https://redis.io/docs/manual/patterns/distributed-locks/) for the scheduler and job queue consumer. Redlock ensures these processes are only run on one machine because we only want them to run once. If they ran more than once, we’d have duplication and issues. For example, we only need one scheduler to do the basic work of saying what to do at what time. Second, we use [Pub/Sub](https://redis.io/docs/manual/pubsub/) to check for updates to the apps.
 
-The app (plugin) server itself runs in Node. It runs all the processes detailed in the plugin server section above. Finally, events write to ClickHouse. We’ve detailed in the past [why ClickHouse is uniquely suited for handling the billions of events we store there](/blog/how-we-turned-clickhouse-into-our-eventmansion).
+We chose these because we used them elsewhere and they have a proven track record of working well at scale. They help the app server integrate with our existing infrastructure.
 
-Because apps integrate into our ingestion pipeline, they benefit from all the work that goes into keeping the pipeline running smoothly and efficiently. Instead of thinking about apps as a bolt-on, they are a key part of the process.
+### Integrating into the plugin server
+
+To ensure apps were connected into the rest of the ingestion pipeline, we decided to integrate apps into our plugin server. The plugin server runs processes for ingesting, formating, and writing data from users to storage. It runs on Node (because of the decision we made in the hackathon about speed and VMs).
+
+To show you how we did that, here’s a complete overview of what the plugin server looks like (our app server only utilizes some parts):
+
+![Plugin server](../images/blog/how-we-built-an-app-server/plugin-server.png)
+
+The main thread routes incoming tasks to the right location. It receives data and starts threads to complete them. We decided to use [Piscina](https://github.com/piscinajs/piscina) (a node.js worker pool) to create and manage the threads. We choose Piscina because it abstracts away a lot of the management of threads we would need to do to scale. The main thread also handles the functionality of scheduling and job queuing. The result is created tasks being sent to worker threads to complete.
+
+### Actually doing the work (in worker threads)
+
+Worker threads receive tasks from the main thread and execute them. Some of the tasks, like `processEvent` or `runEveryMinute` use the callable functions (app code) we detailed above. Worker threads contain the VMs, as well as the ingestion logic and connections to extensions and libraries. Each worker thread can run up to 10 tasks at the same time.
+
+![Worker thread](../images/blog/how-we-built-an-app-server/worker-thread.png)
+
+When the worker thread finishes its task, it returns to the main thread for further processing. This could include more modification through apps, PostHog person processing, or writing to ClickHouse. A final `onEvent` task runs once all the processing completes, which is useful for functions like exporting or alerting.
+
+This structure enables modularity. Many different types of tasks, including app-related ones, can run together. Work improving the code for the plugin server improves all of the processes. This also lowers the maintenance needed for having multiple systems.
+
+## Making sure arbitrary code doesn’t break everything
+
+The final piece to worry about is that apps are arbitrary code. When left unchecked, they can run whatever code they want, including code that tries to exploit or crash our servers. Allowing users to run arbitrary code can cause many security, infrastrcuture, and usability issues. We use VMs because they provide some solutions, but they don't offer total protection. We've done a bunch more work to prevent potential issues and make sure apps are secure and reliable.
+
+First, there are limitless libraries for JavaScript, but we only [allow a small portion of them](/docs/apps/build/reference#available-imports). You can’t install and use whatever npm package you like. We include basic packages such as Node’s standard `crypto`, `url`, `node-fetch`, and `zlib` libraries. We also include libraries like `snowflake-sdk`, `@google-cloud/bigquery`, and `pg` to connect external services. This ensures that the code run by our users and servers uses libraries we trust.
+
+Second, users can write a loop that loops forever and causes resource exhaustion. To prevent this, we set up a babel plugin that injects code into `for`, `while`, and `do while` loops (as described in [this article](https://medium.com/@bvjebin/js-infinite-loops-killing-em-e1c2f5f2db7f)). Whenever there is a loop, we set up a timer before we start it. If the loop runs for more than 30 seconds, the program errors.
+
+Third, to prevent data loss, we added the ability to retry logic to our `processEvent` function. Kafka handles retries for us by batching events and adding failed ones into the dead letter queue. We added the ability to run functions on `RetryError`  to improve consistency. App developers can also run fetches with retry. Here’s an example of what it looks like:
+
+```js
+import { RetryError } from '@posthog/plugin-scaffold'
+
+export function setupPlugin() {
+    try {
+        // Some network connection
+    } catch {
+        throw new RetryError('Service is unavailable, but it might be back up in a moment')
+    }
+}
+```
+
+Fourth, we made it easier to write high-quality apps. The biggest things we did here were creating an app [template](https://github.com/PostHog/posthog-plugin-starter-kit) and [scaffold](https://github.com/PostHog/plugin-scaffold) for users, including [Jest](https://jestjs.io/) to test the app, and the ability to write the app in TypeScript. Many more minor improvements added up to higher-quality apps getting written.
+
+Finally, as mentioned before, although our self-hosted instances can run whatever arbitrary code they want, we still review apps before adding them for everyone to use on Cloud. This ensures a final quality and security standard for users.
+
+All this work helped us create a secure and reliable app server. This allowed us to be more confident allowing users to build apps and users to be more confident using them.
 
 ## Unlocking customization and innovation through apps
 
