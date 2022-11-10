@@ -501,7 +501,7 @@ jobs:
 
 ### Syncing repositories
 
-One last case we'll discuss is syncing one repository's contents from another. In our case, we have a main product repo: https://github.com/PostHog/posthog. However, parts of it – enteprise features code – are non-FOSS, which means their code is not under a free license. We are happy to offer a purely FOSS version of PostHog with https://github.com/PostHog/posthog-foss, which is just like the main repo but with non-free portions removed.
+One last case we'll discuss is syncing one repository's contents from another. In our case, we have a main product repo: https://github.com/PostHog/posthog. However, parts of it – enterprise features code – are non-FOSS, which means their code is not under a free license. We are happy to offer a purely FOSS version of PostHog with https://github.com/PostHog/posthog-foss, which is just like the main repo but with non-free portions removed.
 
 Keeping `posthog-foss` in sync with `posthog` manually would be awful work though. So we've automated it:
 
