@@ -92,14 +92,58 @@ Your report will comprise three parts - rather than listing out what every line 
 
 ## Predicting the future - aka Financial Planning
 
+I lied when I said accounting was the good stuff - _this_ is the good stuff. Let's get our Wall Street on. 
+
+For this section, I'm going to assume you have your accounts set up in QuickBooks. Next, go to your account in Pry - the first thing you'll be prompted to do in onboarding is connect it to your QuickBooks account, which should be straightforward. You can also connect your bank accounts directly if you want to - I like this because it means that Pry always has the latest bank account balances in one place, which is easier than logging into each one and adding up the total. 
+
+Once you've got your historical accounts showing in Pry (aka 'actuals'), it's time to build our financial plan! We're going to do three things:
+
+We're going to do 3 things:
+
+- A simple _revenue forecast_ - we'll use Google Sheets then connect this to Pry
+- A simple _expense forecast_ - we'll use Google Sheets then connect this to Pry
+- A _hiring plan_ - in Pry itself
+
+Before you start, [make a copy of this handy template](https://docs.google.com/spreadsheets/d/1ft0rTdvGHvSD4EOOl-bhNiQLtFdWdyLwrEnvLFq5Wxc/edit?usp=sharing) - this is an adapted version of the actual sheet we use at PostHog. 
+
+**Revenue forecast**
+
+Under the 'Revenue' tab, you'll see this is filled with dummy data. Feel free to adapt this as you need for your business - you might just need one line at this stage!
+
+(I prefer to model this stuff in Sheets first, as Pry's 'Models' functionality is much slower and less intuitive.)
+
+Feel free to extend the model as far out as you like - at PostHog, we don't go further than 3 years out, and really it's only the next 12-24 months we really care about trying to get right.
+
+[INSERT INSTRUCTIONS ON NAMED RANGES]
+
+Once you're done, this is how to get it into Pry: 
+
+- Go to Models -> Revenue
+- Next to 'Inputs', hit '+' and select the 'Import' option
+- The first time you do this, you'll need to click 'Connect New Account' to give Pry access to your Google account
+- Then select the relevant spreadsheet you want to import
+- You'll want to import each 'Range' you previously created - just pull in the 'Total MRR' line
+- This should now show up in your model Input on the left hand side
+- Create a new formula, call it something like 'MRR' and set it to just be equal to the Total MRR input
+- In the right hand pane, create a new Output, select your new formula from the drop down menu and map it to 'Income'
+
+Phew! If you make changes to your Google Sheet in the future, remember to come back to this Model page and click the refresh button in the top left to make sure Pry is pulling your very latest data. 
+
+If this has worked, you should see all the revenue being projected forward in your main Financials tab in Pry. 
+
+**Expenses forecast**
+
+Shockingly, you'll find this under the Expenses tab. Again, feel free to overwrite the dummy data with stuff that's relevant to your business. Generally the most important stuff here are COGS, aka hosting costs. Generally, other expenses outside of employees aren't going to change your runway very much. 
+
+It is _not_ worth getting super detailed mapping out every single expense on this tab. 
 
 
 
+> A note on scenarios - these are a really important part of our financial planning process, and are easy to build in Pry. In particular, we regularly check our 'default alive' scenario to ensure we're on track. I'll cover this topic in a future post. 
 
-- Software that makes this easy, aka Pry
-- How we have set up Pry - tips and tricks to make this smooth
-- Monthly budget vs. actuals review - how to do a good, simple process here
-- Board reporting
+### Budget vs. actuals
+
+- Write out our process
 
 > Do you have a US parent company and a foreign subsidiary? We do! This complicates things quite a bit as you need _two_ companies set up in QuickBooks, but you can only hook up one company to Pry to compare budget vs. actuals. The solution is to set up an account with [JustConsolidate](https://www.justconsolidate.com/), which will combine your accounts into one _new_ company in QuickBooks. Then you can hook up that company to Pry. Not a perfect solution, as you'll only be able to see balances in Pry, but I'd strongly recommend doing this instead of just hooking up your US company to Pry. Get your accountant to set up JustConsolidate for you, as they'll get it right (for a one-off fee).
 
