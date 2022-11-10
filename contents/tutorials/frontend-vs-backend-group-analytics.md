@@ -145,7 +145,7 @@ analytics.track('$groupidentify', {
 
 PostHog currently stores groups separately from events, but soon, we will merge them. This means calling `group_identify` will not update the group details for past events (like it does now). To handle this, we recommend calling `group_identify` whenever group properties change. This ensures events always have the most updated group properties.
 
-The benefit of the backend is that you don’t have to call `reset()` when you’re done because you have no session to reset. If you’ve set up your capture calls properly, they should be sending data from the active user or group (which will be none).
+The benefit of the backend is that you don’t have to call `reset()` when you’re done because you have no session to reset. There are no sessions because the backend usually deals with multiple requests from different people one after another. It is awkward to enforce a session that lasts only one request, and this also reduces flexibility for implementers. Instead, you can add group analytics where and when you need it on the backend.
 
 ## Next steps in group analytics
 
