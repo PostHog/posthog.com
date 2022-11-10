@@ -50,7 +50,7 @@ Ok, let's start with the good stuff. You need to hire an accountant. Specificall
 
 (At this point, you'll probably want to step out of this guide, contact Fondo, and then come back. I'll wait.)
 
-The next step here is to set your accountant up with the necessary access to your QuickBooks account and probably your bank account(s) and things like Stripe. They will tell you what they need. 
+The next step here is to set your accountant up with the necessary access to your QuickBooks account, probably your bank account(s), and things like Stripe. They will tell you what they need. 
 
 **Monthly accounting process**
 
