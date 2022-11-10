@@ -149,6 +149,8 @@ The benefit of the backend is that you donâ€™t have to call `reset()` when youâ€
 
 ## Next steps in group analytics
 
-This should give you a better understanding of how you need to implement frontend vs backend group analytics From here, you can utilize your group analytics to [view groups and their properties](/manual/group-analytics#viewing-groups-and-their-properties), [analyze group insights](/manual/group-analytics#analyzing-group-insights), and [setup group feature flags](/manual/group-analytics#integrating-groups-with-feature-flags). Check out [tracking how teams use your product](/tutorials/tracking-teams) for more ideas.
+This should give you a better understanding of how you need to implement frontend vs backend group analytics. From here, you can utilize your group analytics to [view groups and their properties](/manual/group-analytics#viewing-groups-and-their-properties), [analyze group insights](/manual/group-analytics#analyzing-group-insights), and [setup group feature flags](/manual/group-analytics#integrating-groups-with-feature-flags). 
+
+Check out [tracking how teams use your product](/tutorials/tracking-teams) for more ideas.
 
 <NewsletterTutorial compact/>
