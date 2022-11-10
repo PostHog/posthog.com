@@ -332,7 +332,7 @@ export default function Questions() {
                                                                         {question.subject}
                                                                     </span>
                                                                 </Link>
-                                                                {question.topics.map(({ topic }) => {
+                                                                {/*question.topics.map(({ topic }) => {
                                                                     return (
                                                                         <div
                                                                             key={topic.id}
@@ -341,7 +341,7 @@ export default function Questions() {
                                                                             {topic.label}
                                                                         </div>
                                                                     )
-                                                                })}
+                                                                })*/}
                                                             </div>
                                                             <p className="max-w-xl break-words whitespace-normal line-clamp-2 text-sm opacity-90">
                                                                 {question.replies[0].body}
