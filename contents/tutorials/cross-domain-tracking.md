@@ -8,7 +8,7 @@ featuredImage: ../images/tutorials/banners/cross-domain-tracking.png
 topics: ['configuration']
 ---
 
-Many companies use multiple domains for different parts of their products. A common structure is having one domain for the marketing website and another (subdomain) for the app. Other companies might have multiple connected domains. This is great for having different content and ensuring no conflicts but causes issues when it comes to tracking.
+Many companies use multiple domains for different parts of their products. A common structures include one domain for the marketing website and another (subdomain) for the app, multiple connected domains, and separate domains for documentation and community sections. This is great for having different content and ensuring no conflicts but causes issues when it comes to tracking.
 
 The jump from one domain to another causes problems with the tracking. The first site identifies a user and tracks them, but the second site doesn’t always have access to that user and the related tracking information. To help solve this problem, there are some ways to set up cross domain tracking.
 
