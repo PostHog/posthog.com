@@ -157,7 +157,7 @@ If this has worked, you should see all the expenses being projected forward in y
 
 Finally, head over to Pry's 'Hiring Plan' tab. This section is pretty straightforward - fill in your current team, plus projected future hires. In theory you could do this in Sheets as well and import again, but I like the fine-grained control in Pry. Plus under the Settings cog, you can do things like add a % for additional tax etc. so you get the fully loaded team member cost, and or model future pay rises in. 
 
-You should now have a nice financial plan set up in Pry! I'm not going to cover everything that Pry does in this guide here, so I'd recommend you check out [their docs](https://pry.co/docs/introduction) instead. 
+You should now have a nice financial plan set up in Pry. I'm not going to cover everything that Pry does in this guide, so I'd recommend you check out [their docs](https://pry.co/docs/introduction) instead. 
 
 ### Budget vs. actuals
 
