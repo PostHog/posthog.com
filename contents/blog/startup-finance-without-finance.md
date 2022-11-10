@@ -31,12 +31,6 @@ If you are 5-99 people, this guide is for you!
 - A [Pry](https://pry.co/) account for financial planning
 - Google Sheets
 
-## Contents
-
-- Keeping score 
-- Predicting the future
-- Delaying the inevitable
-
 > Who to bank with is not covered in this guide, but please pick something startup-appropriate like Brex or Mercury in the US, or Revolut in Europe.
 
 ## Keeping score - aka Accounting
@@ -103,6 +97,8 @@ Once you've got your historical accounts showing in Pry (aka 'actuals'), it's ti
 - A _hiring plan_ - in Pry itself
 
 Before you start, [make a copy of this handy template](https://docs.google.com/spreadsheets/d/1ft0rTdvGHvSD4EOOl-bhNiQLtFdWdyLwrEnvLFq5Wxc/edit?usp=sharing) - this is an adapted version of the actual sheet we use at PostHog. 
+
+> Do you have a US parent company and a foreign subsidiary? We do! This complicates things quite a bit as you need _two_ companies set up in QuickBooks, but you can only hook up one company to Pry to compare budget vs. actuals. The solution is to set up an account with [JustConsolidate](https://www.justconsolidate.com/), which will combine your accounts into one _new_ company in QuickBooks. Then you can hook up that company to Pry. Not a perfect solution, as you'll only be able to see balances in Pry, but I'd strongly recommend doing this instead of just hooking up your US company to Pry. Get your accountant to set up JustConsolidate for you, as they'll get it right (for a one-off fee).
 
 **Revenue forecast**
 
@@ -180,8 +176,6 @@ If we find anything particularly unusual, we'll follow up with the relevant team
 - Hiring - either unexpected or more expensive than originally forecast
 - Marketing spend 
 
-> Do you have a US parent company and a foreign subsidiary? We do! This complicates things quite a bit as you need _two_ companies set up in QuickBooks, but you can only hook up one company to Pry to compare budget vs. actuals. The solution is to set up an account with [JustConsolidate](https://www.justconsolidate.com/), which will combine your accounts into one _new_ company in QuickBooks. Then you can hook up that company to Pry. Not a perfect solution, as you'll only be able to see balances in Pry, but I'd strongly recommend doing this instead of just hooking up your US company to Pry. Get your accountant to set up JustConsolidate for you, as they'll get it right (for a one-off fee).
-
 ### General tips
 
 - Be really careful with the slider in your main Financials view in Pry - make sure you're looking at the right actuals before you suddenly panic and think you're running out of money in 2 months!
@@ -190,7 +184,7 @@ If we find anything particularly unusual, we'll follow up with the relevant team
 - Pry's ability to create branches for scenarios and then merge them back into master Git-style is super slick - we use it all the time. 
 - Your investors will want to see an ARR overview and P&L summary output in a different output to the one Pry does. I'll cover how we do this in a separate article. 
 
-## Delaying the inevitable
+## Delaying the inevitable - aka Upskilling > Hiring
 
 Here are a few tips I've found helpful for upskilling yourself or your team's finance chops - I firmly believe it's really worth understanding these things properly yourself, rather than outsourcing it to a new person - it's a lot to put in the hands of someone you don't know!
 
