@@ -57,7 +57,7 @@ The next step here is to set your accountant up with the necessary access to you
 Once you're all set up, this is how we run our accounting process each month:
 
 1. Around the 20th of the month, we receive a monthly financial report from Fondo with a bit of explanatory blurb. Typically this will include a few questions about where to categorize certain transactions - answer these asap. 
-2. We read the report really carefully. Is there anything that doesn't make sense? You should be able to explain every big change you see from the previous month. If you can't, log into QuickBooks and look at your [Sales](https://app.qbo.intuit.com/app/sales) or [Expenses](https://app.qbo.intuit.com/app/expenses) tab. 
+2. We read the report carefully. Is there anything that doesn't make sense? You should be able to explain every big change you see from the previous month. If you can't, log into QuickBooks and look at your [Sales](https://app.qbo.intuit.com/app/sales) or [Expenses](https://app.qbo.intuit.com/app/expenses) tabs. 
 3. If there are any changes needed, ask Fondo to make them - we usually have at least a couple each month. 
 4. Compare how you did against your budget - we'll get to this later. 
 5. Share the report with your _entire_ team, and include a bit of commentary. This is a great habit to get into, as it gives transparency and encourages people to ask questions, which keep you honest!
