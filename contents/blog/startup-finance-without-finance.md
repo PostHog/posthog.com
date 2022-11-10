@@ -64,7 +64,7 @@ Your report (sometimes referred to as 'management accounts') will comprise three
 - **Profit and loss** - also called 'income statement'
   - Revenue looks obvious, but make sure you only talk about 'real' revenue from sales, and not things like bank account interest or merch. 
   - Cost of Goods Sold is also called COGS - as mentioned before, this is where your hosting costs should go if you are a SaaS business. 
-  - When people say 'startups aren't profitable' they are talking about 'Net profit' (sometimes called 'Net income'), not 'Gross profit'. If you see a positive 'Gross profit' number, that is normal - do not get excited!
+  - When people say 'startups aren't profitable', they are talking about 'Net profit' (sometimes called 'Net income'), not 'Gross profit'. If you see a positive 'Gross profit' number, that is normal - do not get excited!
   - You should spend 80% of your effort here making sure you understand your Expenses
   - Startups and VCs are obsessed with talking about 'EBITDA' and 'your path to EBITDA-positive'. 'Net operating income' or 'Operating income' is a good enouch proxy for this. Don't worry about calculating it. 
 - **Balance sheet**
