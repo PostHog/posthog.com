@@ -66,7 +66,7 @@ Your report (sometimes referred to as 'management accounts') will comprise three
   - Cost of Goods Sold is also called COGS - as mentioned before, this is where your hosting costs should go if you are a SaaS business. 
   - When people say 'startups aren't profitable', they are talking about 'Net profit' (sometimes called 'Net income'), not 'Gross profit'. If you see a positive 'Gross profit' number, that is normal - do not get excited!
   - You should spend 80% of your effort here making sure you understand your Expenses
-  - Startups and VCs are obsessed with talking about 'EBITDA' and 'your path to EBITDA-positive'. 'Net operating income' or 'Operating income' is a good enouch proxy for this. Don't worry about calculating it. 
+  - Startups and VCs are obsessed with talking about 'EBITDA' and 'your path to EBITDA-positive'. 'Net operating income' or 'Operating income' is a good enough proxy for this. Don't worry about calculating it. 
 - **Balance sheet**
   - For an early stage startup, this report basically only tells you how much money you have in the bank. You should not be waiting once a month for your accountant to tell you this!
   - If you have a foreign subsidiary, you might see an 'intercompany transfer' in there - that is money you've sent from your parent to subsidiary company to cover things like payroll. When it comes to tracking performance vs. your budget, this can be messy (see below!).
