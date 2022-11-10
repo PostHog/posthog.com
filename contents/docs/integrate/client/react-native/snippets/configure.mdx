@@ -61,7 +61,7 @@ export function MyApp1() {
         posthogPromise.then(ph => ph.capture('MyApp1 loaded')
     }, [])
 
-    return <View>{...}</View>
+    return <View>Your app code</View>
 }
 
 
@@ -76,7 +76,7 @@ export function MyApp2() {
 For most people, the default configuration options will work great but if you need to you can further customise how PostHog will work.
 
 ```ts
-export const posthog = new PostHog("<ph_project_api_key>", {
+export const posthog = await PostHog.initAsync("<ph_project_api_key>", {
     // PostHog API host
     host?: string = "https://app.posthog.com",
     // The number of events to queue before sending to PostHog (flushing)
