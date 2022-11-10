@@ -27,8 +27,8 @@ If you are 5-99 people, this guide is for you!
 
 - A person who is responsible for owning this area of your business - probably the ops person or a financially-inclined co-founder
 - A bank account
-- A (QuickBooks)[https://quickbooks.intuit.com/] account for accounting
-- A (Pry)[https://pry.co/] account for financial planning
+- A [QuickBooks](https://quickbooks.intuit.com/) account for accounting
+- A [Pry](https://pry.co/) account for financial planning
 - Google Sheets
 
 ## Contents
@@ -44,7 +44,7 @@ If you are 5-99 people, this guide is for you!
 
 Ok, let's start with the good stuff. You need to hire an accountant. Specifically, you need [Fondo](https://www.tryfondo.com/). They will handle:
 
-- _Bookkeeping_ - this means they record all money that goes in and out of your company in QuickBooks and assign it to the right place (e.g. marketing, hosting etc.)
+- _Bookkeeping_ - this means they record all money that goes in and out of your company in QuickBooks and assign it to the right place, such as marketing, hosting etc.
 - _Financial reports_ - monthly, quarterly, and annual financial reports. More on these in a minute. 
 - _Tax filings_ - there are a myriad of state and federal taxes to pay. You _will_ forget the deadlines. Don't do this yourself - the fines are brutal if you are late. 
 - _Tax credits_ - exciting bonus money the government gives back to you if you fill out enough forms. Pay Fondo a commission and they will do it for you - it's basically free money. 
@@ -58,13 +58,28 @@ The next step here is to set your accountant up with the necessary access to you
 Once you're all set up, this is how we run our accounting process each month:
 
 1. Around the 20th of the month, we receive a monthly financial report from Fondo with a bit of explanatory blurb. Typically this will include a few questions about where to categorize certain transactions - answer these asap. 
-2. _Read the report really carefully._ Is there anything that doesn't make sense? You should be able to explain every big change you see from the previous month. If you can't, log into QuickBooks and look at your (Sales)[https://app.qbo.intuit.com/app/sales] or (Expenses)[https://app.qbo.intuit.com/app/expenses] tab. 
-3. Compare how you did against your budget - we'll get to this later. 
-4. Share the report with your _entire_ team, and include a bit of commentary. This is a great habit to get into, as it gives transparency and encourages people to ask questions, which keep you honest!
+2. _Read the report really carefully._ Is there anything that doesn't make sense? You should be able to explain every big change you see from the previous month. If you can't, log into QuickBooks and look at your [Sales](https://app.qbo.intuit.com/app/sales) or [Expenses](https://app.qbo.intuit.com/app/expenses) tab. 
+3. If there are any changes needed, ask Fondo to make them - we usually have at least a couple each month. 
+4. Compare how you did against your budget - we'll get to this later. 
+5. Share the report with your _entire_ team, and include a bit of commentary. This is a great habit to get into, as it gives transparency and encourages people to ask questions, which keep you honest!
 
 **How to read your financial report**
 
-TBD
+You'll sometimes hear these referred to as 'management accounts' by the way - for our purposes here, you can treat them as the same thing. When you get bigger and fancier, you can produce glossy, proper management accounts that include other nice graphs and metrics, but you don't need those yet. 
+
+Your report will comprise three parts - rather than listing out what every line item means, I'm just going to include particularly important or non-obvious things you should look out for:
+
+- **Profit and loss** - also called 'income statement'
+  - Revenue looks obvious, but make sure you only talk about 'real' revenue from sales, and not things like bank account interest or merch. 
+  - Cost of Goods sold is also called COGS - as mentioned before, this is where your hosting costs should go if you are a SaaS business. 
+  - When people say 'startups aren't profitable' they are talking about 'Net profit' (sometimes called 'Net income'), not 'Gross profit'. If you see a positive 'Gross profit' number, that is normal - do not get excited!
+  - You should spend 80% of your effort here making sure you understand your Expenses
+  - Startups and VCs are obsessed with talking about 'EBITDA' and 'your path to EBITDA-positive'. 'Net operating income' or 'Operating income' is a good enouch proxy for this. Don't worry about calculating it. 
+- **Balance sheet**
+  - For an early stage startup, this report basically only tells you how much money you have in the bank. You should not be waiting once a month for your accountant to tell you this!
+- **Cash flow statement**
+  - This again is not very interesting for an early stage startup (unless you are in fintech/hardware)
+  - The main number that you're interested in here is 'Net cash increase for period' (or similar title) as this is what is also often referred to as 'burn'.
 
 **General tips**
 
