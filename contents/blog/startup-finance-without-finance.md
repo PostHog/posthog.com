@@ -194,7 +194,7 @@ If we find anything particularly unusual, we'll follow up with the relevant team
 
 Here are a few tips I've found helpful for upskilling yourself or your team's finance chops - I firmly believe it's really worth understanding these things properly yourself, rather than outsourcing it to a new person - it's a lot to put in the hands of someone you don't know!
 
-- [Do this free course](https://www.coursera.org/specializations/finance-accounting?) - it'll teach you more than you usefully need to know at this stage, but you'll feel more confident you know what you're talking about. And it's cheaper than an MBA!
+- [Do this free course](https://www.coursera.org/specializations/finance-accounting?) - it'll teach you more than you need to know at this stage, but you'll feel more confident you know what you're talking about. And it's cheaper than an MBA!
 - Share your monthly accounts internally so people can ask questions. 
 - Ask your accountants questions about literally every single thing you don't understand. The more you understand, the easier you're making their lives as well. 
 - Prioritize clarity and runway management over 'best practice'. Knowing exactly what is driving your cash burn, and how you can influence it, is way more valuable than learning a bunch of financial jargon and beautifully formatted reports. 
