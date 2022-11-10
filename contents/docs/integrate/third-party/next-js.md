@@ -43,7 +43,7 @@ function MyApp({ Component, pageProps }) {
   // NOTE: If set as an environment variable be sure to prefix with `NEXT_PUBLIC_`
   // For more info see https://nextjs.org/docs/basic-features/environment-variables#exposing-environment-variables-to-the-browser
   
-  usePostHog('YOUR_API_KEY', { api_host: 'https://app.posthog.com' })
+  usePostHog('<ph_project_api_key>', { api_host: '<ph_instance_address>' })
 
   return <Component {...pageProps} />
 }
@@ -57,8 +57,8 @@ export default MyApp
 import { usePostHog } from 'next-use-posthog'
 
 function MyApp({ Component, pageProps }) {
-  usePostHog('YOUR_API_KEY', {
-    api_host: 'https://app.posthog.com',
+  usePostHog('<ph_project_api_key>', {
+    api_host: '<ph_instance_address>',
     loaded: (posthog) => {
       if (process.env.NODE_ENV === 'development') posthog.opt_out_capturing()
     },
@@ -96,7 +96,7 @@ function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
     // Init PostHog
-    posthog.init('YOUR_API_KEY', { api_host: 'https://app.posthog.com' });
+    posthog.init('<ph_project_api_key>', { api_host: '<ph_instance_address>' });
 
     // Track page views
     const handleRouteChange = () => posthog.capture('$pageview');
