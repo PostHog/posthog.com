@@ -58,7 +58,6 @@ Once you're all set up, this is how we run our accounting process each month:
 
 ### How to read your financial report
 
-You'll sometimes hear these referred to as 'management accounts' by the way - for our purposes here, you can treat them as the same thing. When you get bigger and fancier, you can produce glossy, proper management accounts that include other nice graphs and metrics, but you don't need those yet. 
 
 Your report (sometimes referred to as 'management accounts') will comprise three parts - rather than listing out what every line item means, I'm just going to include particularly important or non-obvious things you should look out for:
 
