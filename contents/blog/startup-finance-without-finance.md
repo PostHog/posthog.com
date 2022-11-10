@@ -15,13 +15,13 @@ This is a comprehensive, step-by-step guide to exactly how to run finance like w
 
 The aim to to get your financial ops running on autopilot as much as possible, through a combination of useful tools and a sensible, repeatable process. Who knows, maybe you'll actually _look forward_ to digging into your finances on a regular basis, rather than breaking out in a cold sweat every time your investors ask you for an update...
 
-## Who is this for?
+## Who is this for?
 
 Startups who are early stage or have reached product-market fit. If you are smaller than 5 people, I'd just do the accounting bit (so you don't go to prison) and stop there so you can focus on building your product. 
 
 If you are 5-99 people, this guide is for you!
 
-> Looking for a more generalist ops guide instead for things like hiring, payroll, and expense management? Check out our (startup ops toolkit)[https://posthog.com/blog/startup-ops-toolkit] instead. 
+> Looking for a more generalist ops guide instead for things like hiring, payroll, and expense management? Check out our [startup ops toolkit](https://posthog.com/blog/startup-ops-toolkit) instead. 
 
 ## What you'll need
 
@@ -33,10 +33,9 @@ If you are 5-99 people, this guide is for you!
 
 ## Contents
 
-- Keeping score
+- Keeping score 
 - Predicting the future
 - Delaying the inevitable
-- Hiring the vampire
 
 > Who to bank with is not covered in this guide, but please pick something startup-appropriate like Brex or Mercury in the US, or Revolut in the UK, and you won't go too far wrong. 
 
@@ -58,12 +57,12 @@ The next step here is to set your accountant up with the necessary access to you
 Once you're all set up, this is how we run our accounting process each month:
 
 1. Around the 20th of the month, we receive a monthly financial report from Fondo with a bit of explanatory blurb. Typically this will include a few questions about where to categorize certain transactions - answer these asap. 
-2. _Read the report really carefully._ Is there anything that doesn't make sense? You should be able to explain every big change you see from the previous month. If you can't, log into QuickBooks and look at your [Sales](https://app.qbo.intuit.com/app/sales) or [Expenses](https://app.qbo.intuit.com/app/expenses) tab. 
+2. We read the report really carefully. Is there anything that doesn't make sense? You should be able to explain every big change you see from the previous month. If you can't, log into QuickBooks and look at your [Sales](https://app.qbo.intuit.com/app/sales) or [Expenses](https://app.qbo.intuit.com/app/expenses) tab. 
 3. If there are any changes needed, ask Fondo to make them - we usually have at least a couple each month. 
 4. Compare how you did against your budget - we'll get to this later. 
 5. Share the report with your _entire_ team, and include a bit of commentary. This is a great habit to get into, as it gives transparency and encourages people to ask questions, which keep you honest!
 
-**How to read your financial report**
+### How to read your financial report
 
 You'll sometimes hear these referred to as 'management accounts' by the way - for our purposes here, you can treat them as the same thing. When you get bigger and fancier, you can produce glossy, proper management accounts that include other nice graphs and metrics, but you don't need those yet. 
 
@@ -81,7 +80,7 @@ Your report will comprise three parts - rather than listing out what every line 
   - This again is not very interesting for an early stage startup (unless you are in fintech/hardware)
   - The main number that you're interested in here is 'Net cash increase for period' (or similar title) as this is what is also often referred to as 'burn'.
 
-**General tips**
+### General tips
 
 - Your accountants are not mind readers - they do not have any context about the things your business is doing, so if there is an unusual transaction they haven't seen before, you'll need to explain to them what it's for. 
 - Be super clear with reporting timeline expectations from your accountant and agree these up front. Similarly, when they need stuff from you, ask them for a deadline - some of these are actually real, legal deadlines!
@@ -99,16 +98,21 @@ Your report will comprise three parts - rather than listing out what every line 
 
 > A note on consolidated accounts. Only relevant for folks who have a US top co and foreign parent, which is a large % at YC these days - this is weirdly complicated to figure out but easy to once its done. Using JustConsolidate + Pry. 
 
-## How to upskill yourself 
+## Delaying the inevitable
 
-- [Do this course](https://www.coursera.org/specializations/finance-accounting?)
-- Share your monthly accounts internally so people can ask questions
-- Ask your accountants questions about literally every single thing you don't understand
-- Prioritize clarity and runway management over 'best practice'
-- Your investors can help here, especially when it comes to assumptions for your model
+Here are a few tips I've found helpful for upskilling yourself or your team's finance chops - I firmly believe it's really worth understanding these things properly yourself, rather than outsourcing it to a new person - it's a lot to put in the hands of someone you don't know!
 
-## When to hire a finance person
+- [Do this free course](https://www.coursera.org/specializations/finance-accounting?) - it'll teach you more than you usefully need to know at this stage, but you'll feel more confident you know what you're talking about. And it's cheaper than an MBA!
+- Share your monthly accounts internally so people can ask questions. 
+- Ask your accountants questions about literally every single thing you don't understand. The more you understand, the easier you're making their lives as well. 
+- Prioritize clarity and runway management over 'best practice'. Knowing exactly what is driving your cash burn, and how you can influence it, is way more valuable than learning a bunch of financial jargon and beautifully formatted reports. 
+- Lean on your investors for help, _especially_ when it comes to assumptions for your financial model. They have seen dozens of companies like yours, so will be able to tell you if your growth plans are unrealistic, or if a particular metric is looking unusually off. Don't be afraid to ask for help - it shows you're taking this stuff seriously!
 
-- Write something here. 
+So when do you hire this finance person? Broadly speaking, there will be one of two triggers:
+
+- You get to a point where the sheer volume of financial work is enough for your ops person to spend 100% of their time on. This is usually driven by things like international expansion (reporting & tax complexity) or product expansion (different pricing models are hard to forecast). 
+- You want to go out and fundraise but, no matter how hard you try, you can't put together a coherent financial story about your business.
+
+In either case, I'd recommend you get someone in who has 1-2 years' experience building financial models 24/7 at a top-tier investment bank, but has suddently seen the light and wants out. Save the CFO hire for pre-IPO, ok?
 
 <NewsletterForm compact />
