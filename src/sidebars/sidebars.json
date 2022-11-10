@@ -376,8 +376,8 @@
                             "url": "/handbook/engineering/cloud-providers"
                         },
                         {
-                            "name": "Breaking glass to debug PostHog Cloud",
-                            "url": "/handbook/engineering/production-access"
+                            "name": "How-to access PostHog Cloud infra",
+                            "url": "/handbook/engineering/how-to-access-posthog-cloud-infra"
                         }
                     ]
                 },
@@ -418,6 +418,10 @@
                         {
                             "name": "Data ingestion",
                             "url": "/handbook/engineering/clickhouse/data-ingestion"
+                        },
+                        {
+                            "name": "Working with JSON",
+                            "url": "/handbook/engineering/clickhouse/working-with-json"
                         },
                         {
                             "name": "Query performance",

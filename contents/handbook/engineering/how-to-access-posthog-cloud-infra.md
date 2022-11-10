@@ -1,5 +1,5 @@
 ---
-title: Breaking glass to debug PostHog Cloud
+title: How-to access PostHog Cloud infra
 sidebar: Handbook
 showTitle: true
 ---
