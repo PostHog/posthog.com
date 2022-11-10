@@ -11,7 +11,7 @@ featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
 ---
 
-This is a comprehensive, step-by-step guide to exactly how to run finance like we do at PostHog - without a dedicated finance person. You should be able to pretty much copy and paste this. If you implement _everything_ below, it should take 1 person a week. 
+This is a comprehensive, step-by-step guide to run finance exactly like we do at PostHog - without a dedicated finance person. You should be able to pretty much copy and paste this. If you implement _everything_ below, it should take 1 person a week. 
 
 The aim to to get your financial ops running on autopilot as much as possible, through a combination of useful tools and a sensible, repeatable process. Who knows, maybe you'll actually _look forward_ to digging into your finances on a regular basis, rather than breaking out in a cold sweat every time your investors ask you for an update...
 
@@ -37,7 +37,7 @@ If you are 5-99 people, this guide is for you!
 - Predicting the future
 - Delaying the inevitable
 
-> Who to bank with is not covered in this guide, but please pick something startup-appropriate like Brex or Mercury in the US, or Revolut in the UK, and you won't go too far wrong. 
+> Who to bank with is not covered in this guide, but please pick something startup-appropriate like Brex or Mercury in the US, or Revolut in Europe.
 
 ## Keeping score - aka Accounting
 
@@ -94,11 +94,9 @@ Your report will comprise three parts - rather than listing out what every line 
 
 I lied when I said accounting was the good stuff - _this_ is the good stuff. Let's get our Wall Street on. 
 
-For this section, I'm going to assume you have your accounts set up in QuickBooks. Next, go to your account in Pry - the first thing you'll be prompted to do in onboarding is connect it to your QuickBooks account, which should be straightforward. You can also connect your bank accounts directly if you want to - I like this because it means that Pry always has the latest bank account balances in one place, which is easier than logging into each one and adding up the total. 
+For this section, I'm going to assume you have your accounts set up in QuickBooks. Next, go to your account in Pry - the first thing you'll be prompted to do is connect Pry to your QuickBooks account, which should be straightforward. You can also connect your bank accounts directly if you want to - I like this because it means that Pry always has the latest bank account balances in one place, which is easier than logging into each one and adding up the total. 
 
 Once you've got your historical accounts showing in Pry (aka 'actuals'), it's time to build our financial plan! We're going to do three things:
-
-We're going to do 3 things:
 
 - A simple _revenue forecast_ - we'll use Google Sheets then connect this to Pry
 - A simple _expense forecast_ - we'll use Google Sheets then connect this to Pry
@@ -110,11 +108,11 @@ Before you start, [make a copy of this handy template](https://docs.google.com/s
 
 Under the 'Revenue' tab, you'll see this is filled with dummy data. Feel free to adapt this as you need for your business - you might just need one line at this stage!
 
-(I prefer to model this stuff in Sheets first, as Pry's 'Models' functionality is much slower and less intuitive.)
+(I prefer to model this stuff in Sheets, as Pry's 'Models' functionality is much slower and less intuitive.)
 
 Feel free to extend the model as far out as you like - at PostHog, we don't go further than 3 years out, and really it's only the next 12-24 months we really care about trying to get right.
 
-[INSERT INSTRUCTIONS ON NAMED RANGES]
+Finally, click Data -> Named Ranges and then select the cells where your total MRR is displayed (in the template, that's cells B19 to AE19). Call it something sensible like 'Total MRR'.  
 
 Once you're done, this is how to get it into Pry: 
 
@@ -122,10 +120,10 @@ Once you're done, this is how to get it into Pry:
 - Next to 'Inputs', hit '+' and select the 'Import' option
 - The first time you do this, you'll need to click 'Connect New Account' to give Pry access to your Google account
 - Then select the relevant spreadsheet you want to import
-- You'll want to import each 'Range' you previously created - just pull in the 'Total MRR' line
+- You'll want to import the MRR 'Range' you previously created - just pull in the 'Total MRR' line
 - This should now show up in your model Input on the left hand side
 - Create a new formula, call it something like 'MRR' and set it to just be equal to the Total MRR input
-- In the right hand pane, create a new Output, select your new formula from the drop down menu and map it to 'Income'
+- In the right hand pane, create a new Output, select your new formula from the drop down menu and map it to 'Income' or 'Revenue'
 
 Phew! If you make changes to your Google Sheet in the future, remember to come back to this Model page and click the refresh button in the top left to make sure Pry is pulling your very latest data. 
 
@@ -137,13 +135,50 @@ Shockingly, you'll find this under the Expenses tab. Again, feel free to overwri
 
 It is _not_ worth getting super detailed mapping out every single expense on this tab. 
 
+Finally, click Data -> Named Ranges and then create a named range for _each_ of your expense line items. Again, call them something sensible so you can find them in Pry easily. 
 
+Once you're done, this is how to get it into Pry: 
+
+- Go to Models -> Expense
+- Next to 'Inputs', hit '+' and select the 'Import' option
+- You should now just be able to select the same Google Sheet again
+- You'll want to import each 'Range' you created in your Google Sheet
+- These should now show up in your model Input on the left hand side
+- Create a new formula for each range, and set each value to just be equal to the input you've imported (ie. create a formula called 'IT Expense' = 'IT Expense import')
+- In the right hand pane, create a new Output for each line item - map each formula output to the relevant item in your budget
+
+Pheww! Again, make sure you refresh the inputs on this Model page if you make changes to your Google Sheet in the future.
+
+If this has worked, you should see all the expenses being projected forward in your main Financials tab in Pry as well.
 
 > A note on scenarios - these are a really important part of our financial planning process, and are easy to build in Pry. In particular, we regularly check our 'default alive' scenario to ensure we're on track. I'll cover this topic in a future post. 
 
+**Hiring plan**
+
+Finally, head over to Pry's 'Hiring Plan' tab. This section is pretty straightforward - fill in your current team, plus projected future hires. In theory you could do this in Sheets as well and import again, but I like the fine-grained control in Pry. Plus under the Settings cog, you can do things like add a % for additional tax etc. so you get the fully loaded team member cost, and or model future pay rises in. 
+
+You should now have a nice financial plan set up in Pry! I'm not going to cover everything that Pry does in this guide here, so I'd recommend you check out [their docs](https://pry.co/docs/introduction) instead. 
+
 ### Budget vs. actuals
 
-- Write out our process
+Once a month, after we have received our monthly financial report from Fondo (remember that?), we review how we performed against our budget in Pry. You can also reallocate revenue and expenses to different categories in Pry by simply dragging and dropping, but be aware that this doesn't change anything in QuickBooks. 
+
+Our process is pleasingly simple:
+
+1. Open up your main Financials view in Pry
+2. On the left, select the Planned vs. Actuals tab
+3. Next to the name of the month you want to look at, hover over and a little arrow will appear saying 'Set Budget Start Date' - click on it
+4. This will then bring up a two column view of the month you are looking at
+5. We look at how we performed against our cashflow forecast (seriously, it's basically the only thing we care about)
+6. We then scroll through our plan and pay particular attention to anything that looks like it's gone unusually over or under budget - if anything is in the wrong category, you can just drag and drop it into the correct one
+
+We schedule this budget review meeting in for the last week of the month, ie. after we've received the final financial report from Fondo. This ensures that the latest actuals data is reflected in Pry. 
+
+If we find anything particularly unusual, we'll follow up with the relevant team lead to see what's happened here. Often though you're really going to be looking at one of:
+
+- Hosting costs spiking
+- Hiring - either unexpected or more expensive than originally forecast
+- Marketing spend 
 
 > Do you have a US parent company and a foreign subsidiary? We do! This complicates things quite a bit as you need _two_ companies set up in QuickBooks, but you can only hook up one company to Pry to compare budget vs. actuals. The solution is to set up an account with [JustConsolidate](https://www.justconsolidate.com/), which will combine your accounts into one _new_ company in QuickBooks. Then you can hook up that company to Pry. Not a perfect solution, as you'll only be able to see balances in Pry, but I'd strongly recommend doing this instead of just hooking up your US company to Pry. Get your accountant to set up JustConsolidate for you, as they'll get it right (for a one-off fee).
 
