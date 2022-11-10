@@ -127,5 +127,6 @@ This section highlights some general rules of thumb that can help speed up queri
 - [Looking up single rows is frequently slow](/handbook/engineering/clickhouse/data-storage#point-queries-not-supported-by-order-by)
 - [ORDER BY and LIMIT/OFFSET can be slow in sharded settings](/handbook/engineering/clickhouse/replication#example-query-limit-filter-and-aggregate)
 - Cheat: [preaggregate data](/handbook/engineering/clickhouse/schema/app-metrics) or leverage materialized columns to pull out data from large columns.
+- Leverage [query settings in special cases](https://clickhouse.com/docs/en/operations/settings/settings/).
 
 Also always do your benchmarking in a realistic setting: on large datasets on powerful machines.
