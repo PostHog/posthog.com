@@ -1,6 +1,6 @@
 ### With the PosthogProvider
 
-The recommended flow for setting up PostHog React Native is to use the `PostHogProvider` which utilises the Context API to pass posthog around as well as enabling autocapture and ensuring that the queue is flushed at the right time:
+The recommended flow for setting up PostHog React Native is to use the `PostHogProvider` which utilises the Context API to pass the PostHog Client around as well as enabling autocapture and ensuring that the queue is flushed at the right time:
 
 ```jsx
 // App.(js|ts)
@@ -42,10 +42,10 @@ export let posthog: PostHog | undefined = undefined
 
 export const posthogPromise: Promise<PostHog> = PostHog.initAsync('<ph_project_api_key>', {
   // PostHog API host (https://app.posthog.com by default)
-  host: '<ph_instance_address>',
+  host: '<ph_instance_address>'
 })
 
-posthogPromise.then((client) => {
+posthogPromise.then(client => {
   posthog = client
 })
 
