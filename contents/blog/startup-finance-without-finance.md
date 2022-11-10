@@ -159,7 +159,7 @@ Finally, head over to Pry's 'Hiring Plan' tab. This section is pretty straightfo
 
 You should now have a nice financial plan set up in Pry! I'm not going to cover everything that Pry does in this guide here, so I'd recommend you check out [their docs](https://pry.co/docs/introduction) instead. 
 
-### Budget vs. actuals
+### Budget vs. actuals
 
 Once a month, after we have received our monthly financial report from Fondo (remember that?), we review how we performed against our budget in Pry. You can also reallocate revenue and expenses to different categories in Pry by simply dragging and dropping, but be aware that this doesn't change anything in QuickBooks. 
 
@@ -181,6 +181,14 @@ If we find anything particularly unusual, we'll follow up with the relevant team
 - Marketing spend 
 
 > Do you have a US parent company and a foreign subsidiary? We do! This complicates things quite a bit as you need _two_ companies set up in QuickBooks, but you can only hook up one company to Pry to compare budget vs. actuals. The solution is to set up an account with [JustConsolidate](https://www.justconsolidate.com/), which will combine your accounts into one _new_ company in QuickBooks. Then you can hook up that company to Pry. Not a perfect solution, as you'll only be able to see balances in Pry, but I'd strongly recommend doing this instead of just hooking up your US company to Pry. Get your accountant to set up JustConsolidate for you, as they'll get it right (for a one-off fee).
+
+### General tips
+
+- Be really careful with the slider in your main Financials view in Pry - make sure you're looking at the right actuals before you suddenly panic and think you're running out of money in 2 months!
+- Do not have Pry open in two tabs at the same time and make edits in both - it will break. 
+- Do not give edit access to your Revenue and Expenses Google Sheet, ever. 
+- Pry's ability to create branches for scenarios and then merge them back into master Git-style is super slick - we use it all the time. 
+- Your investors will want to see an ARR overview and P&L summary output in a different output to the one Pry does. I'll cover how we do this in a separate article. 
 
 ## Delaying the inevitable
 
