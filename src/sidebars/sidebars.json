@@ -408,6 +408,10 @@
                     "url": "",
                     "children": [
                         {
+                            "name": "Overview",
+                            "url": "/handbook/engineering/clickhouse/overview"
+                        },
+                        {
                             "name": "Data storage or what is a MergeTree",
                             "url": "/handbook/engineering/clickhouse/data-storage"
                         },
