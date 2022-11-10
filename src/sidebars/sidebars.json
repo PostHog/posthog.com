@@ -428,6 +428,10 @@
                             "url": "/handbook/engineering/clickhouse/performance"
                         },
                         {
+                            "name": "Operations",
+                            "url": "/handbook/engineering/clickhouse/operations"
+                        },
+                        {
                             "name": "Schema case studies",
                             "url": "",
                             "children": [
