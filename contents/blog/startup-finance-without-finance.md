@@ -76,6 +76,7 @@ Your report will comprise three parts - rather than listing out what every line 
   - Startups and VCs are obsessed with talking about 'EBITDA' and 'your path to EBITDA-positive'. 'Net operating income' or 'Operating income' is a good enouch proxy for this. Don't worry about calculating it. 
 - **Balance sheet**
   - For an early stage startup, this report basically only tells you how much money you have in the bank. You should not be waiting once a month for your accountant to tell you this!
+  - If you have a foreign subsidiary, you might see an 'intercompany transfer' in there - that is money you've sent from your parent to subsidiary company to cover things like payroll. When it comes to tracking performance vs. your budget, this can be messy (see below!).
 - **Cash flow statement**
   - This again is not very interesting for an early stage startup (unless you are in fintech/hardware)
   - The main number that you're interested in here is 'Net cash increase for period' (or similar title) as this is what is also often referred to as 'burn'.
@@ -91,12 +92,16 @@ Your report will comprise three parts - rather than listing out what every line 
 
 ## Predicting the future - aka Financial Planning
 
+
+
+
+
 - Software that makes this easy, aka Pry
 - How we have set up Pry - tips and tricks to make this smooth
 - Monthly budget vs. actuals review - how to do a good, simple process here
 - Board reporting
 
-> A note on consolidated accounts. Only relevant for folks who have a US top co and foreign parent, which is a large % at YC these days - this is weirdly complicated to figure out but easy to once its done. Using JustConsolidate + Pry. 
+> Do you have a US parent company and a foreign subsidiary? We do! This complicates things quite a bit as you need _two_ companies set up in QuickBooks, but you can only hook up one company to Pry to compare budget vs. actuals. The solution is to set up an account with [JustConsolidate](https://www.justconsolidate.com/), which will combine your accounts into one _new_ company in QuickBooks. Then you can hook up that company to Pry. Not a perfect solution, as you'll only be able to see balances in Pry, but I'd strongly recommend doing this instead of just hooking up your US company to Pry. Get your accountant to set up JustConsolidate for you, as they'll get it right (for a one-off fee).
 
 ## Delaying the inevitable
 
