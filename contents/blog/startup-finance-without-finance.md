@@ -11,7 +11,7 @@ featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
 ---
 
-This is a comprehensive, step-by-step guide to run finance exactly like we do at PostHog - without a dedicated finance person. You should be able to pretty much copy and paste this. If you implement _everything_ below, it should take 1 person a week. 
+We run finance at PostHog without a dedicated finance person. This is a comprehensive, step-by-step guide to do just that. If you implement _everything_ below, it should take 1 person a week. 
 
 The aim to to get your financial ops running on autopilot as much as possible, through a combination of useful tools and a sensible, repeatable process. Who knows, maybe you'll actually _look forward_ to digging into your finances on a regular basis, rather than breaking out in a cold sweat every time your investors ask you for an update...
 
