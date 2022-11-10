@@ -1,11 +1,11 @@
 ---
-title: The guide to frontend vs backend group analytics implementations
+title: Understanding group analytics: frontend vs backend implementations
 sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-11-09
 featuredImage: ../images/tutorials/banners/frontend-vs-backend-group-analytics.png
-topics: ["configuration"]
+topics: ["configuration","group-analytics"]
 ---
 
 Group analytics is a powerful feature for understanding how groups such as organizations, customers, and companies use your product as a unit. It provides a new level of analysis between individual users and all your users.
@@ -143,7 +143,7 @@ analytics.track('$groupidentify', {
 
 </MultiLanguage>
 
-PostHog currently stores groups separately from events, but soon, we will merge them. This means calling `group_identify` will not update the group details for past events (like it does now). To handle this, we recommend calling `group_identify` whenever group properties change. This makes sure events always have the most updated group properties.
+PostHog currently stores groups separately from events, but soon, we will merge them. This means calling `group_identify` will not update the group details for past events (like it does now). To handle this, we recommend calling `group_identify` whenever group properties change. This ensures events always have the most updated group properties.
 
 The benefit of the backend is that you don’t have to call `reset()` when you’re done because you have no session to reset. If you’ve set up your capture calls properly, they should be sending data from the active user or group (which will be none).
 
