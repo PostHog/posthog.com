@@ -11,13 +11,13 @@ featuredImageType: full
 categories: ["Inside PostHog"]
 ---
 
-We ingest and process billions of events to help companies build better products. We have many tools to help them do this such as customizable event capture, client and server libraries, data insights, and more. We are always trying to better fulfill the needs of our users, but we sometimes we can't build the customized solution they need. 
+As a product analytics and data tool company, we ingest and process billions of events to help companies understand their products and build better ones. PostHog has many tools to help them do this such as customizable event capture, client and server libraries, data insights, and more.
 
-At one point in our journey, we realized the ability to customize the processing of data was missing. Many users wanted to add geographic data to events, get events from CRMs, export data to BigQuery, and more. Use cases were endless, so we needed to give them the ability to do this themselves.
+We are constantly trying to help users do more with their data, but sometimes we can't build the customize solution they need. In this case, we aim to give users the tools to build it themselves. At one point, this thinking led us to realize users needed the ability to customize data processing. Many users wanted to add geographic data to events, get events from CRMs, export data to BigQuery, and more. Use cases were endless, so we needed to give them the ability to do this themselves.
 
-To do this, we built the ability to build and use apps integrated into our ingestion pipeline that run tasks, process and modify events, and connect to external services. Anyone can write and use apps to change their data flows, creating endless customization for their needs.
+To do this, we needed to add the ability to byukd and use apps integrated into our data pipeline where users send their events. The apps had to run tasks, process and modify events, and connect to external services. Users needed to be able to customize their data flows, creating solutions to their endless use cases.
 
-Like many features, it started as a hackathon MVP and developed into a service that now handles billions of events. Here are how we built it and the lessons we learned along the way.
+Like many features, building this started as a hackathon MVP and developed into a service that now handles billions of events. Here are how we built it and the lessons we learned along the way.
 
 ## The three-day app MVP
 
