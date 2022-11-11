@@ -11,7 +11,7 @@ featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 ---
 
-One of the most important things we've ever done at PostHog, is to create an Ideal Customer Profile.
+Creating an Ideal Customer Profile is one of the most important things we've ever done at PostHog.
 
 You can see it in our revenue growth:
 
@@ -19,7 +19,7 @@ You can see it in our revenue growth:
 
 I _wish_ we had run this exercise sooner.
 
-## Why should I care
+## Why should you care?
 
 If the revenue chart isn't compelling enough, knowing very specifically the users you are building for, makes everything better.
 
@@ -48,21 +48,20 @@ These are all example decisions we've taken because of having a clear ICP:
 
 !> I'm going to assume you're building a SaaS product for paying users. You can apply this principles to other stuff as you see fit.
 
-We had quite a bit of demand for a paid product last summer. We already had a large open source community, and we listed a paid product on our website - every week we were getting quite a few people asking about it. Whilst you may not have such an advantage, the same thing applies if you're having lots of outbound sales conversations and struggling to close deals consistently.
+We had quite a bit of demand for a paid product last summer. We already had a large open source community, and we listed a paid product on our website – every week we were getting quite a few people asking about it. Whilst you may not have such an advantage, the same thing applies if you're having lots of outbound sales conversations and struggling to close deals consistently.
 
 Whilst we had a rough idea of the features, we weren't 100% sure which customers to focus on or how to price it. 
-
 
 We created a list of very specific things that we felt _could_ be part of our ICP.
 
 These were _needs_ and _haves_ that our customers had in common. Things like:
 
-* have they used one of our free products successfully?
-* have they got customer
-* do they have a centralized data team?
-* is engineering making the purchasing decision?
-* do they have a data warehouse?
-* do they need to control their data?
+* Have they used one of our free products successfully?
+* Have they got customers?
+* Do they have a centralized data team?
+* Is engineering making the purchasing decision?
+* Do they have a data warehouse?
+* Do they need to control their data?
 
 Note, we didn't include things like industry, or revenue. We felt these are proxies and somewhat vague. For example, healthcare companies usually need to control their data, but it's the need to control data that is important.
 
@@ -78,7 +77,9 @@ You should focus _completely_ on your ICP. That's the point. Everything else com
 
 Hence, defining it was the only thing that mattered to us at the time.
 
-We set a goal for the entire company of getting 5 reference customers. In the weekly all hands, we'd run through who was trying to buy from us, and what they needed, until we had 5 customers paying list price, delighted with us and using the product intensively. We'd rapidly change priorities and ship based on our aggregate view of everyone trying to buy things from us. This is exactly where having too many people at a startup, ahead of product market fit, causes you to struggle - it's harder to adapt like this.
+We set a goal for the entire company of getting 5 reference customers. In the weekly all hands, we'd run through who was trying to buy from us, and what they needed, until we had 5 customers paying list price, delighted with us and using the product intensively. 
+
+We'd rapidly change priorities and ship based on our aggregate view of everyone trying to buy things from us. This is exactly where having too many people at a startup, ahead of product market fit, causes you to struggle – it's harder to adapt like this.
 
 Once that was done, we quickly had hundreds more.
 
