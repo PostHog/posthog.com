@@ -122,7 +122,6 @@ import { Structure } from './components/Structure'
 import { Subscribe } from './components/Subscribe'
 import { Tab } from './components/Tab'
 import { TeamQuote } from './components/TeamQuote'
-import { TeamRoadmap } from './components/TeamRoadmap'
 import { Toast } from './components/Toast'
 import { Toggle } from './components/Toggle'
 import { Tooltip } from './components/Tooltip'
@@ -256,7 +255,6 @@ export const shortcodes = {
     Subscribe,
     Tab,
     TeamQuote,
-    TeamRoadmap,
     Toast,
     Toggle,
     Tooltip,

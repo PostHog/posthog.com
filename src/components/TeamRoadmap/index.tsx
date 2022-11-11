@@ -3,6 +3,7 @@ import { graphql, useStaticQuery } from 'gatsby'
 import { CardContainer, IRoadmap } from 'components/Roadmap'
 import { InProgress } from 'components/Roadmap/InProgress'
 import { OrgProvider, UserProvider } from 'squeak-react'
+import Link from 'components/Link'
 
 export default function TeamRoadmap({ team }: { team?: string }) {
     const {
@@ -10,24 +11,29 @@ export default function TeamRoadmap({ team }: { team?: string }) {
     } = useStaticQuery(query)
 
     const roadmap = team ? nodes.filter((node: IRoadmap) => node?.team?.name === team) : nodes
-    if (!roadmap || roadmap.length <= 0) return null
     return (
         <OrgProvider
             value={{ organizationId: 'a898bcf2-c5b9-4039-82a0-a00220a8c626', apiHost: 'https://squeak.cloud' }}
         >
             <UserProvider>
-                <CardContainer>
-                    {roadmap?.map((node: IRoadmap) => {
-                        return (
-                            <InProgress
-                                more
-                                className="bg-opacity-0 shadow-none border border-dashed border-gray-accent-light rounded-md !border-t !mb-4"
-                                key={node.title}
-                                {...node}
-                            />
-                        )
-                    })}
-                </CardContainer>
+                {roadmap?.length <= 0 ? (
+                    <p className="!m-0 py-4 px-6 border border-dashed border-gray-accent-light dark:border-gray-accent-dark rounded-md">
+                        Check out the <Link to="/roadmap">company roadmap</Link> to see what we're working on next!
+                    </p>
+                ) : (
+                    <CardContainer>
+                        {roadmap?.map((node: IRoadmap) => {
+                            return (
+                                <InProgress
+                                    more
+                                    className="bg-opacity-0 shadow-none border border-dashed border-gray-accent-light dark:border-gray-accent-dark rounded-md !border-t !mb-4"
+                                    key={node.title}
+                                    {...node}
+                                />
+                            )
+                        })}
+                    </CardContainer>
+                )}
             </UserProvider>
         </OrgProvider>
     )
