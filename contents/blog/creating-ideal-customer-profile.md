@@ -1,11 +1,11 @@
 ---
-date: 2022-11-01
+date: 2022-11-11
 title: "How we found our Ideal Customer Profile"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["CEO diaries", "Inside PostHog"]
+categories: ["CEO diaries", "Inside PostHog", "Startups"]
 author: ["james-hawkins"]
 featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
