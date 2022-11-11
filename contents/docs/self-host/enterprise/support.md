@@ -4,10 +4,6 @@ sidebar: Docs
 showTitle: true
 ---
 
-For self-hosted enterprise support go to [enterprise support](/docs/self-host/open-source/support.md)
-
-## Enterprise Self-hosted Support
-
 PostHog Enterprise Self-Hosted Support is delivered over a shared Slack channel or email.
 
 Enterprise Self-hosted Support is provided to self-hosted customers with a minimum contract of $5k/month.

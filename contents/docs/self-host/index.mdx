@@ -5,15 +5,17 @@ sidebar: Docs
 showTitle: true
 ---
 
-The fastest and most reliable way to get started with PostHog is to use [PostHog Cloud](/pricing).
+import Disclaimer from './deploy/snippets/disclaimer'
+
+The fastest and most reliable way to get started with PostHog is to use [PostHog Cloud](/docs/getting-started/cloud).
 
 However, if you're a large company with the need to self-host or an engineer looking to use the open-source version in funky non-production way then you're in the right place!
 
 ## PostHog Open-Source
 
-The core of PostHog is open-source and always will be. You can self-host PostHog the open-source version in weird and wonderful ways such as running it in your basement to [monitor a home IoT system](https://gist.github.com/mariusandra/d8add5fc7f32bedeae45d9ce8eb75b35).
+<Disclaimer />
 
-Self-hosted open-source deployment is **not** recommended in production and is unlikely to handle >100k events/month. There's significant complexity around deployment and maintenance with a high risk of data loss. As a small team we can only provide limited [support](/docs/self-host/open-source/support).
+The core of PostHog is open-source and always will be. You can self-host PostHog the open-source version in weird and wonderful ways such as running it in your basement to [monitor a home IoT system](https://gist.github.com/mariusandra/d8add5fc7f32bedeae45d9ce8eb75b35).
 
 It is not possible to upgrade from PostHog open-source to PostHog Scale (the feature complete version of PostHog).
 
