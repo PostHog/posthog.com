@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-YouTube could be a massive channel for organic traffic. Our small amount of [Youtube content (especially tutorials)](https://www.youtube.com/channel/UCoP6ql8QkyOoVpBU4P8LM6w) has a decent amount (x000s) of views. Many potential and current users in our [ICP](/handbook/growth/marketing/customer-personas) rely on YouTube for informative content. Users [have asked for it](https://posthog.slack.com/archives/C02KGGDCA6Q/p1667921203713659).
+YouTube could be a massive channel for organic traffic. Our small amount of [YouTube content (especially tutorials)](https://www.youtube.com/channel/UCoP6ql8QkyOoVpBU4P8LM6w) has a decent amount (x000s) of views. Many potential and current users in our [ICP](/handbook/growth/marketing/customer-personas) rely on YouTube for informative content. Users [have asked for it](https://posthog.slack.com/archives/C02KGGDCA6Q/p1667921203713659).
 
 We have lots of content (blog, tutorial) that can relatively easily turn into video content. As a start, we should turn tutorial and SEO blog content into video content and post it on YouTube. 
 
