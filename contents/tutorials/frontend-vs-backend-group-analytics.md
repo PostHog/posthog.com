@@ -16,7 +16,7 @@ When implementing group analytics, there are some differences to look out for be
 
 Before we go into the implementation, it is useful to understand **why** there are differences between the frontend and backend. 
 
-At PostHog, we think about (and store) everything as **events**. This means a group for us is a set of events related to a group identity (and properties). People (in PostHog) are the same, a set of events related to a person identity (and properties). 
+At PostHog, we think about (and store) everything as **events**. This means a group for us is a set of events related to a group identity. People (in PostHog) are the same, a set of events related to a person identity. 
 
 When you shift your thinking from a group as a set of people to a group as a set of events (with people identities), the differences between the frontend and backend implementation makes more sense.
 
