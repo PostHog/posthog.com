@@ -10,44 +10,55 @@ However, not all announcements require the same level of marketing support. We t
 
 The steps outlined below are a general checklist and the Marketing team will cater the level of support on a case-by-case basis.
 
-### Tier 3: Service features
-Service features are those which introduce changes which we do not expect to have a noticeable impact for a majority of users.
+> **Have something you want to announce?** The first step is to drop a message in the #team-marketing Slack channel so that marketing can assist and prevent overlapping comms. 
 
-An example of a service feature would include bug fixes or minor performance improvements. 
+### Minor announcements
+Minor announcements involve changes which have no noticeable impact on the experience of most users. They can involve small visual changes, such as UI tweaks, but are more often small bug fixes or back-end changes. They do not require action from users and pose no known risk. 
 
-Marketing support for a service feature would typically include: 
+We may support minor announcements by…
 
-- Including the news in the PostHog newsletter.
+- Including them as ‘Other improvements and fixes’ in PostHog Array.
+- Writing a short Twitter and/or LinkedIn post.
+- Posting in the user Slack group.
 
-### Tier 2: Core features
-Core features are those which introduce changes which we expect to have a noticeable impact for a larger subset of users, but not a majority. 
+An example of a minor announcement is the [bug fixes to timezone management](/blog/the-posthog-array-1-41-0#other-improvements--fixes).
 
-An example of a core feature would include a new plugin which integrates PostHog with a third-party platform, or a cosmetic refresh of an existing feature. 
+### Medium announcements
+Medium announcements involve changes which have a noticeable impact on the experience of some users, but not the majority. They are likely to involve visual or functional changes, such as adding a chart type, but do not introduce wholly new features. They do not require action from users and pose no known risk.
 
-Marketing support for a core feature would typically include:
+We may support medium announcements by…
 
-- Creating a blog announcement about the feature within one week of launch.
-- Sharing the blog announcement with the Slack community via the #editorial channel.
-- Sharing the blog announcement on PostHog's social media channels.
+- Including them in Array release highlights.
+- Writing a Twitter and LinkedIn post.
+- Sending targeted emails to affected users. 
+- Posting in the user Slack group with a @here tag.
+- Writing a tutorial created for week of release.
+- Creating an in-app banner for existing users.
 - Sharing links to the social media announcement internally via Slack, so colleagues can amplify them.
-- If relevant, sharing the blog announcement with other external parties, such as integration partners or PPC agencies.
-- Updating any required assets on PostHog.com. 
-- Including the news in the PostHog newsletter.
+- Sharing the announcement with other external parties, such as integration partners or PPC agencies.
 
-### Tier 1: Major features
-Major features are those which introduce changes which we expect to have noticeable impact for a majority of users or which would represent reasons why prospective users would choose PostHog.
+Examples of medium announcements include the [new recordings interface](/blog/the-posthog-array-1-41-0#improved-recordings-interface) and [the async migration for version 1.34.0](https://mailchi.mp/4d48b3d89202/upgrade-your-posthog-deployment-to-clickhouse-14203188).
 
-An example of a major feature would include the creation of a new tool, such as session recordings, or a fundamental overhaul of an existing feature. 
+### Major announcements
+Major announcements involve changes which have a noticeable impact on the experience of most users, or require specific action from affected users. They may introduce new features, require product downtime, or include opt-in betas for upcoming work. 
 
-Marketing support for a major feature would typically include:
+We may support major announcements by…
 
-- Creating a blog announcement about the feature within 24 hours of launch.
-- Sharing the blog announcement with the Slack community via the #general channel.
-- Sharing the blog announcement on PostHog's social media channels and scheduling further posts in the first week.
-- Sharing links to the social media announcement internally via Slack, so colleagues can amplify them.
-- If relevant, sharing the blog announcement with other external parties, such as an integration partner or PPC agencies.
-- Creating a follow-on blog article about the feature within three weeks of launch.
+- Including them as the primary headline items in Array.
+- Writing a Twitter thread and LinkedIn post.
+- Writing a Twitter thread posted by @james406.
+- Writing a dedicated blog post.
+- Sending targeted emails to all or affected users.
+- Posting in the PostHog user Slack group with a @here tag.
+- Writing a tutorial for day of release.
+- Creating a dedicated landing page.
+- Creating an in-app banner for existing users.
+- Creating on-site banner for all visitors.
 - Updating any third-party sites or listings, such as G2.com or StackShare.
-- Coordinating PR and external communications if required.
-- Updating any required assets on PostHog.com.
-- Including the news in the PostHog newsletter.
+- Sharing links to the social media announcement internally via Slack, so colleagues can amplify them.
+- Sharing the announcement with other external parties, such as integration partners or PPC agencies.
+
+We do not typically do PR for anything other than company-level news. We have separate [processes and guides for managing press announcements](/handbook/growth/marketing/press). 
+
+Examples of major announcements include [persons on events](/blog/persons-on-events) and the [launch of EU Cloud](/eu).
+
