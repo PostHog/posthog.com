@@ -26,7 +26,7 @@ If the revenue chart isn't compelling enough, knowing very specifically the user
 These are all example decisions we've taken because of having a clear ICP:
 
 * How you describe what your company does
-  * We're very feature-focused versus benefit focused in our language since our users self serve and we don't go heavy on enterprise sales
+  * We're [feature-focused versus benefit focused](/blog/features-sell) in our language because our users self serve and we don't go heavy on enterprise sales
 
 * What your website should look and feel like
   * We are happy including code snippets
