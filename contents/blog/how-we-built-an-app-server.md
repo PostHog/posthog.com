@@ -280,9 +280,17 @@ All this work helped us create a secure and reliable app server. This allowed us
 
 ## Unlocking customization and innovation through apps
 
-We’ve seen users large and small write apps for all sorts of use cases. There are large companies writing apps to enhance events with critical data. There are also solo devs writing apps to scratch their own itch and end up used by thousands in our community. Apps unlocked more control over data flows as well as more innovation on the PostHog platform.
+We’ve seen users large and small write apps for all sorts of use cases. There are large companies writing apps to enhance events with critical data. There are also solo devs writing apps to scratch their own itch and end up used by thousands in our community. Users write often write apps to connect or export to key services in their stack. Some examples of apps include:
 
-Building and scaling the app server fundamentally changed the way we think about our product and infrastructure. Work on apps helped our ingestion pipeline become more integrated and modular. Apps also made our product more customizable and open to permissionless innovation. As an example of this, see the release of [site apps](/tutorials/build-site-app), which were inspired by apps and provide similar customizable functionality in the front end. 
+- "Data-in" apps like the [Hubspot](/apps/hubspot-connector), [Salesforce](/apps/salesforce-connector) (community built), [Stripe](https://github.com/PostHog/stripe-plugin), and [Shopify](/apps/shopify) connectors.
+- "Data-out" apps like the [BigQuery](/apps/bigquery-export), [S3](/apps/s3-export), and [Rudderstack](/apps/snowflake-export) (community built) exports.
+- Ingestion-filtering apps like [Property Filter](/apps/property-filter) (community built), [Property Flattener](/apps/property-flattener), and [First Time Event Tracker](/apps/first-time-event-tracker).
+
+Apps unlocked more control over data flows as well as more innovation on the PostHog platform. Thousands of apps are enabled each month, which process billions of events in our pipeline.
+
+Building and scaling the app server fundamentally changed the way we think about our product and infrastructure. Work on apps helped our ingestion pipeline become more integrated and modular. Apps also made our product more customizable and open to permissionless innovation. 
+
+Our vision for apps is to continue to enable more customizability of data flows and the overall PostHog experience. As an example of this, see the release of [site apps](/tutorials/build-site-app), which were inspired by apps and provide similar customizable functionality in the frontend. 
 
 The ability to leverage PostHog to customize, control, and fully utilize your data will continue to improve. Apps, and many other features of PostHog, help with this. In the end, PostHog aims to help you understand your product and gives you the tools to build a better one.
 
