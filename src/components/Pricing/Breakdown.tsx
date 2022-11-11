@@ -3,14 +3,14 @@ import { pricing, pricingLabels } from './constants'
 
 const formatNumber = (num: number, length: number) => String(num).padEnd(length, '0')
 
-export default function Breakdown({ pricingOption, description, priceLength }) {
+export default function Breakdown({ pricingOption, description = null, priceLength }) {
     const breakdown = pricing[pricingOption]
 
     return (
         <div>
             <h4 className="text-base font-bold m-0 ">Volume discounts</h4>
-            <p className="text-sm text-black/60">{description}</p>
-            <ul className="grid gap-y-1 m-0 p-0">
+            {description ? <p className="text-sm text-black/60">{description}</p> : null}
+            <ul className="grid gap-y-1 mt-2 p-0">
                 {breakdown.map((price, index) => {
                     const label = pricingLabels[price[0]]
                     return (
