@@ -444,6 +444,10 @@
                                     "url": "/handbook/engineering/clickhouse/schema"
                                 },
                                 {
+                                    "name": "sharded_events",
+                                    "url": "/handbook/engineering/clickhouse/schema/sharded-events"
+                                },
+                                {
                                     "name": "app_metrics",
                                     "url": "/handbook/engineering/clickhouse/schema/app-metrics"
                                 },
