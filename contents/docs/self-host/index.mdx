@@ -5,28 +5,32 @@ sidebar: Docs
 showTitle: true
 ---
 
-import Disclaimer from './deploy/snippets/disclaimer'
+The fastest and most reliable way to get started with PostHog is to use [PostHog Cloud](/pricing).
 
-Getting a production environment of PostHog up and running is probably one of the first things you want to do! This section goes through the different options available depending on where you'll be hosting PostHog, and includes guides on several of the most popular services.
+However, if you're a large company with the need to self-host or an engineer looking to use the open-source version in funky non-production way then you're in the right place!
 
-<Disclaimer />
+## PostHog Open-Source
 
-## Deployment options
+The core of PostHog is open-source and always will be. You can self-host PostHog the open-source version in weird and wonderful ways such as running it in your basement to [monitor a home IoT system](https://gist.github.com/mariusandra/d8add5fc7f32bedeae45d9ce8eb75b35).
 
--   [DigitalOcean](/docs/self-host/deploy/digital-ocean) - _recommended for production use cases if you don't have a preference_
--   [AWS](/docs/self-host/deploy/aws)
--   [Google Cloud Platform](/docs/self-host/deploy/gcp)
--   [Azure](/docs/self-host/deploy/azure) - _in beta_
--   [Other platforms](/docs/self-host/deploy/other)
--   [Hobby](/docs/self-host/deploy/hobby) - _recommended for testing out PostHog_
+Self-hosted open-source deployment is **not** recommended in production and is unlikely to handle >100k events/month. There's significant complexity around deployment and maintenance with a high risk of data loss. As a small team we can only provide limited [support](/docs/self-host/open-source/support).
 
-## Configure
+It is not possible to upgrade from PostHog open-source to PostHog Scale (the feature complete version of PostHog).
 
-There are various ways to configure and personalize your PostHog instance to better suit your needs. In this section you will find all the information you need about settings and options you can configure to get what you need out of PostHog.
+For more information on deployment go to [open-source deployment](/docs/self-host/open-source/deployment).
 
--   [Monitoring with Grafana](/docs/self-host/configure/monitoring-with-grafana)
--   [Environment variables](/docs/self-host/configure/environment-variables)
--   [Upgrading PostHog](/docs/runbook/upgrading-posthog)
--   [Securing PostHog](/docs/self-host/configure/securing-posthog)
--   [Running behind proxy](/docs/self-host/configure/running-behind-proxy)
--   [Email configuration](/docs/self-host/configure/email)
+## PostHog Enterprise
+
+Built for large companies with significant data isolation requirements. Requires a minimum contract of $5,000/month.
+
+Deployment options:
+- Deploy PostHog using Kubernetes on your own cloud
+    - This requires knowledge of Kubernetes and your engineering team's time for deployment and ongoing maintenance. We are happy to provide reasonable [support](/docs/self-host/enterprise/support).
+    - [Enterprise deployment](/docs/self-host/enterprise/overview) contains the information you need to get set up - we recommend you get a license key first.
+    - To get the license key [book a call](/book-a-demo) with our customer success team.
+- Work with a PostHog partner
+    - Several of our [partners](/partners) might be an option for more involved support. We can direct you on the call to who is best suited.
+- PostHog Cloud Enterprise
+    - For most customers, the Enterprise version of [PostHog Cloud](/pricing) will satisfy their compliance and privacy needs.
+
+[Book a call](/book-a-demo) with our customer success team to get started with PostHog Enterprise.
