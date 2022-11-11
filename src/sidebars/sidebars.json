@@ -408,6 +408,10 @@
                     "url": "",
                     "children": [
                         {
+                            "name": "Overview",
+                            "url": "/handbook/engineering/clickhouse"
+                        },
+                        {
                             "name": "Data storage or what is a MergeTree",
                             "url": "/handbook/engineering/clickhouse/data-storage"
                         },
@@ -437,7 +441,7 @@
                             "children": [
                                 {
                                     "name": "Overview",
-                                    "url": "/handbook/engineering/clickhouse/schema/overview"
+                                    "url": "/handbook/engineering/clickhouse/schema"
                                 },
                                 {
                                     "name": "app_metrics",
