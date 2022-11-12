@@ -39,15 +39,31 @@ We now add more companies each week than _any_ closed source SaaS rival, and we'
 
 **Where do we want to get to?**
 
-In 2026 we will _go public with $100M ARR._ To achieve this, PostHog will need to be _the standard devtool for building better products._
+In 2026 we will _go public with $100M ARR._ To achieve this, we will need:
 
-**How do we get there?**
+* 1,000 companies building successful products with us, paying $25K each
+* 500 companies building successful products with us, paying $50K each
+* 50 companies building successful products with us, paying $1M each
 
-* Build for developers
-* Make every developer want to tell others about us
-* Our biggest users self-serve to paying customers 
-* Go broad and develop all the tools our customers need to build better products
-* Empower developers to build on top of PostHog
+**How do we help others build successful products?**
+
+* Software teams can measure performance, diagnose it, and act upon it, all in PostHog. 
+* All the data from all their tools is in PostHog, so there are no blind spots
+* PostHog's quality is self fulfilling. PostHog's product, website and docs are so good that we grow through word of mouth growth, so we can invest everything into improving these resources.
+* Software teams at startups don't need any tool other than PostHog for the first 5 years of their life, so they don't have issues with data integration or complexity. Going broad means more use cases, value and growth. This lets us reinvest into more tools, driving more growth etc, so we reach more teams.
+
+**From where we are today, what do we need to build to get there?**
+
+* PostHog becomes a data platform, with a wider range of data ingestion. We make warehouses redundant.
+  * Today, teams often export everything to a warehouse and query it there. Then they end up with a data engineering mess trying to set up other tools with their warehouse and / or a data platform.
+* We need to provide a more flexible UX, including SQL, so users can measure and diagnose product performance better through direct data access.
+  * To remove the need for a warehouse, we must give direct access to data.
+* Before other tools are built into PostHog, we make it easy to get more value out of them, with PostHog's data. Over time, we will build these all into the platform.
+  * We can enrich other products through our browser extension and export apps. Over time, we will remove the need for these 3rd party products.
+* We need to make sure our existing products in the platform have any major gaps in functionality closed, and that they integrate well with the rest of the product.
+  * This allows us to move people from 3rd party products, for a simpler stack and faster growth and reinvestment.
+* We need to make users _love_ the platform rather than _like_ it, through a user experience that makes developers feel at home.
+  * This will increase word of mouth growth. We shouldn't just build an open source alternative of competitors' products, which are more focussed on less technical people.
 
 ### What should we be working on today?
 
@@ -58,10 +74,6 @@ We set [quarterly OKRs](/handbook/strategy/objectives) to keep us on track.
 ### How should we prioritize between competing directions?
 
 While there is value in the items on the right, we value the items on the left more.
-
-**Breadth vs. depth of capabilities**
-
-* _Breadth_: build basic versions of every feature needed rather than a small set of sophisticated ones, so our customers can consolidate.
 
 **MidMarket vs. Enterprise**
 
@@ -77,7 +89,7 @@ While there is value in the items on the right, we value the items on the left m
 
 **Reject the [“modern data stack”](https://www.analytics8.com/blog/what-is-the-modern-data-stack-and-why-should-you-be-excited-about-it/) vs. adapt to it**
 
-* _Reject_: We enable our customers to ingest, store and analyze data on their infrastructure, we don't believe tons of integrations, dealing with multiple vendors and sending sensitive data to multiple cloud providers is the right approach.
+* _Reject_: We enable our customers to ingest, store and analyze data on their infrastructure, we don't believe tons of integrations, dealing with multiple vendors and sending sensitive data to multiple cloud providers is the right approach. Providing all the apps and a customer data platform in one place, removes the need to setup a warehouse in the first place.
 
 ## Direction for 2022
 
