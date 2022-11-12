@@ -63,7 +63,7 @@ In 2026 we will _go public with $100M ARR._ To achieve this, we will need:
 * We need to make sure our existing products in the platform have any major gaps in functionality closed, and that they integrate well with the rest of the product.
   * This allows us to move people from 3rd party products, for a simpler stack and faster growth and reinvestment.
 * We need to make users _love_ the platform rather than _like_ it, through a user experience that makes developers feel at home.
-  * This will increase word of mouth growth. We shouldn't just build an open source alternative of competitors' products, which are more focussed on less technical people.
+  * This will increase word of mouth growth. We shouldn't just build an open source alternative of competitors' products, which are more focused on less technical people.
 
 ### What should we be working on today?
 
