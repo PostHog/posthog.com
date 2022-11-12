@@ -41,30 +41,37 @@ We now add more companies each week than _any_ closed source SaaS rival, and we'
 
 In 2026 we will _go public with $100M ARR._ To achieve this, we will need:
 
-* 1,000 companies building successful products with us, paying $25K each
-* 500 companies building successful products with us, paying $50K each
-* 50 companies building successful products with us, paying $1M each
+1) 1,000 companies building successful products with us, paying $25K each
+2) 500 companies building successful products with us, paying $50K each
+3) 50 companies building successful products with us, paying $1M each
+
+Working on the midmarket first, (1) and (2), is the easiest way to achieve (3) later, from a stronger brand, product and financial position.
 
 **How do we help others build successful products?**
 
 * Software teams can measure performance, diagnose it, and act upon it, all in PostHog. 
-* All the data from all their tools is in PostHog, so there are no blind spots
+* All the data from all their tools is in PostHog, so there are no blind spots.
 * PostHog's quality is self fulfilling. PostHog's product, website and docs are so good that we grow through word of mouth growth, so we can invest everything into improving these resources.
 * Software teams at startups don't need any tool other than PostHog for the first 5 years of their life, so they don't have issues with data integration or complexity. Going broad means more use cases, value and growth. This lets us reinvest into more tools, driving more growth etc, so we reach more teams.
 
 **From where we are today, what do we need to build to get there?**
 
-* PostHog becomes a data platform, with a wider range of data ingestion. We make warehouses redundant.
-  * Today, teams often export everything to a warehouse and query it there. Then they end up with a data engineering mess trying to set up other tools with their warehouse and / or a data platform.
+* PostHog becomes a data platform, with a wider range of data ingestion (both real time streaming, and in bulk so migration is possible). We make warehouses redundant as a result.
+  * Today, teams often export everything to a warehouse and query it or send it to other products from there. Then they end up with a data engineering mess trying to set up other tools with their warehouse and / or a data platform. We already have lots of exports, but lack imports. This would help data engineers service the rest of their organization better.
 * We need to provide a more flexible UX, including SQL, so users can measure and diagnose product performance better through direct data access.
   * To remove the need for a warehouse, we must give direct access to data.
 * Before other tools are built into PostHog, we make it easy to get more value out of them, with PostHog's data. Over time, we will build these all into the platform.
-  * We can enrich other products through our browser extension and export apps. Over time, we will remove the need for these 3rd party products.
+  * We can enrich other products through our browser extension and export apps. Over time, we will remove the need for these 3rd party products. In the short run, these two methods will enable data engineers to help other teams start using PostHog data (marketing/customer success/sales), before we have built front end apps for in the immediate future.
 * We need to make sure our existing products in the platform have any major gaps in functionality closed, and that they integrate well with the rest of the product.
   * This allows us to move people from 3rd party products, for a simpler stack and faster growth and reinvestment.
-* We need to make users _love_ the platform rather than _like_ it, through a user experience that makes developers feel at home.
-  * This will increase word of mouth growth. We shouldn't just build an open source alternative of competitors' products, which are more focused on less technical people.
-
+* We need users to _love_ the platform rather than _like_ it, through a user experience that makes developers feel at home.
+  * This will increase word of mouth growth. We shouldn't just build an open source alternative of competitors' products, which have a UX and UI focused on less technical people.
+* We need a 2 way community. This will accelerate brand/word of mouth. Today, we are quite 1-way (we provide lots of support), with a few users starting to really help with feedback.
+  * The steps are (i) become excellent at involving community in what we're building (ii) enable the community to build on top of us via API, at first for hobbyist/internal projects, (iii) then as startups on our API (who may be building on top of other data warehouses at the same time), with us helping them find users and then (iv) eventually (but likely post $100M ARR), enable startups to build products that we entirely host for them.
+* We need an ultra streamlined and product-led sales motion
+  * Today, we are excellent in demos, and we have figured out the basics of customer success and sales.
+  * However, our data and processes could be considerably more automated.
+  
 ### What should we be working on today?
 
 **The mechanics of success**
@@ -79,13 +86,17 @@ While there is value in the items on the right, we value the items on the left m
 
 * _Mid-market_: focus on acquiring more high quality Mid-market customers (who may start using for free) over big ticket contracts, so we can get better feedback and learn faster.
 
+**Product, Website and Docs vs. GTM spending**
+
+* _Product, Website and Docs_: focus on investing as much as we can into the experience we offer people who hear about us. This drives word of mouth growth, which is compounding, scales forever and gets us into a monopoly position - since it saves energy and money that we can reinvest into the product, website and docs.
+
 **Integrations vs one-stop-shop**
 
-* _One-stop-shop_: build all the things directly into PostHog if possible. This means customers don't have to buy another product or integrate with anything else. We are wide enough now to pull this off.
+* _One-stop-shop_: build all the things directly into PostHog if reasonable. This means customers don't have to buy another product or integrate with anything else, so we acquire all of their SaaS spending and can scale the product faster.
 
 **Self-hosted vs. Cloud**
 
-* _Cloud_: If customers can use cloud, encourage them to use cloud. Maintain a self-hosted version and migration path, but don't push it. We are the most flexible solution, which enables growth. We offer a generous free cloud tier so we can become ubiquitous without the cost/hassle of self-hosting.
+* _Cloud_: If customers can use cloud, encourage them heavily to use cloud because it's then a better user experience (easier and cheaper). Maintain a self-hosted version and migration path, but don't push it. We are the most flexible solution, which enables growth. We offer a generous free cloud tier so we can become ubiquitous without the cost/hassle of self-hosting.
 
 **Reject the [“modern data stack”](https://www.analytics8.com/blog/what-is-the-modern-data-stack-and-why-should-you-be-excited-about-it/) vs. adapt to it**
 
