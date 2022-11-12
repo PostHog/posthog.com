@@ -408,6 +408,10 @@
                     "url": "",
                     "children": [
                         {
+                            "name": "Overview",
+                            "url": "/handbook/engineering/clickhouse"
+                        },
+                        {
                             "name": "Data storage or what is a MergeTree",
                             "url": "/handbook/engineering/clickhouse/data-storage"
                         },
@@ -428,12 +432,20 @@
                             "url": "/handbook/engineering/clickhouse/performance"
                         },
                         {
+                            "name": "Operations",
+                            "url": "/handbook/engineering/clickhouse/operations"
+                        },
+                        {
                             "name": "Schema case studies",
                             "url": "",
                             "children": [
                                 {
                                     "name": "Overview",
-                                    "url": "/handbook/engineering/clickhouse/schema/overview"
+                                    "url": "/handbook/engineering/clickhouse/schema"
+                                },
+                                {
+                                    "name": "sharded_events",
+                                    "url": "/handbook/engineering/clickhouse/schema/sharded-events"
                                 },
                                 {
                                     "name": "app_metrics",

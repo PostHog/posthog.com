@@ -57,7 +57,7 @@ If there are elements you don't want to be captured, you can add the `ph-no-capt
 Basic usage:
 ```jsx
 // App.(js|ts)
-import PostHog from 'posthog-react-native'
+import {PostHogProvider} from 'posthog-react-native'
 import {NavigationContainer} from '@react-navigation/native';
 
 export function App() {
@@ -73,7 +73,7 @@ export function App() {
 
 You can tweak how autocapture works by passing custom options.
 
-```jsx
+```tsx
 <PostHogProvider apiKey="<ph_project_api_key>" autocapture={{
     captureTouches: true, // If you don't want to capture touch events set this to false
     captureLifecycleEvents: true, // If you don't want to capture the Lifecycle Events (e.g. Application Opened) set this to false
@@ -266,7 +266,7 @@ This allows you to pass in a distinctID and feature flags during library initial
 
 
 ```js
-const posthog = new PostHog('<ph_project_api_key>', {
+const posthog = await Posthog.initAsync('<ph_project_api_key>', {
     host: 'https://app.posthog.com',
     bootstrap: {
         distinctID: 'your-anonymous-id',
@@ -285,7 +285,7 @@ If the ID you're passing in is an identified ID (that is, an ID with which you'v
 
 
 ```js
-const posthog = new PostHog('<ph_project_api_key>', {
+const posthog = await Posthog.initAsync('<ph_project_api_key>', {
     host: 'https://app.posthog.com',
     bootstrap: {
         distinctID: 'your-identified-id',
@@ -374,7 +374,7 @@ PostHog.capture("foo")
 // V2 Setup difference
 import PostHog from 'posthog-react-native'
 
-const posthog = new PostHog('phc_ChmcdLbC770zgl23gp3Lax6SERzC2szOUxtp0Uy4nTf', {
+const posthog = await Posthog.initAsync('phc_ChmcdLbC770zgl23gp3Lax6SERzC2szOUxtp0Uy4nTf', {
     host: 'https://app.posthog.com',
     // Add any other options here.
 })
