@@ -37,11 +37,11 @@ export function UnderConsideration(props: IRoadmap) {
                             </>
                         </li>
                     )}
-                    {reactions._1 > 0 && (
+                    {reactions.plus1 > 0 && (
                         <li className="flex space-x-1 items-center">
                             <>
                                 <span>👍</span>
-                                <span className="text-black/60">{reactions._1}</span>
+                                <span className="text-black/60">{reactions.plus1}</span>
                             </>
                         </li>
                     )}

@@ -19,7 +19,7 @@ interface IGitHubPage {
         hooray: number
         heart: number
         eyes: number
-        _1: number
+        plus1: number
     }
 }
 
@@ -269,7 +269,7 @@ const query = graphql`
                         hooray
                         heart
                         eyes
-                        _1
+                        plus1
                     }
                 }
                 projected_completion_date
