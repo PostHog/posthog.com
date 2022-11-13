@@ -15,7 +15,7 @@ import Link from 'components/Link'
 import { Heading } from 'components/Heading'
 import Markdown from 'markdown-to-jsx'
 import { classNames } from 'lib/utils'
-import { OrgProvider, UserProvider, useUser } from 'squeak-react'
+import { OrgProvider, UserProvider, useUser, Question } from 'squeak-react'
 import Modal from 'components/Modal'
 import EditProfile from 'components/Profiles/EditProfile'
 
@@ -73,6 +73,7 @@ export default function ProfilePage({ params }: PageProps) {
 
     const [profile, setProfile] = React.useState<SqueakProfile | undefined>(undefined)
     const [editModalOpen, setEditModalOpen] = React.useState(false)
+    const [questions, setQuestions] = React.useState([])
 
     const name = [profile?.first_name, profile?.last_name].filter(Boolean).join(' ')
 
@@ -88,6 +89,29 @@ export default function ProfilePage({ params }: PageProps) {
                 })
                 .then((profile) => {
                     setProfile(profile)
+                })
+                .catch((err) => {
+                    console.error(err)
+                })
+            fetch(`https://squeak.cloud/api/questions`, {
+                method: 'POST',
+                body: JSON.stringify({
+                    organizationId: 'a898bcf2-c5b9-4039-82a0-a00220a8c626',
+                    profileId: id,
+                }),
+                headers: {
+                    'content-type': 'application/json',
+                },
+            })
+                .then((res) => {
+                    if (res.status === 404) {
+                        throw new Error('not found')
+                    }
+
+                    return res.json()
+                })
+                .then((questions) => {
+                    setQuestions(questions?.questions)
                 })
                 .catch((err) => {
                     console.error(err)
@@ -153,6 +177,21 @@ export default function ProfilePage({ params }: PageProps) {
                                     )}
                                 </div>
                             ) : null}
+                            {questions && questions.length >= 1 && (
+                                <div className="mt-12">
+                                    <h3>Discussions</h3>
+                                    {questions.map((question) => {
+                                        return (
+                                            <Question
+                                                key={question.id}
+                                                question={question}
+                                                apiHost="https://squeak.cloud"
+                                                organizationId="a898bcf2-c5b9-4039-82a0-a00220a8c626"
+                                            />
+                                        )
+                                    })}
+                                </div>
+                            )}
                         </PostLayout>
                     </UserProvider>
                 </Layout>
