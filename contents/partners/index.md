@@ -57,6 +57,8 @@ Get a fully managed PostHog instance in the cloud region of your choice, or with
 
 **Services:** PostHog as a managed service / Data locality
 
+<hr />
+
 <img src="/images/partners/talenodigital.png" alt="taleno.digital" width="100" style={{float: 'right', marginTop: '1rem', marginLeft: '1rem'}} />
 
 #### [**taleno.digital**](../partners/taleno-digital)
