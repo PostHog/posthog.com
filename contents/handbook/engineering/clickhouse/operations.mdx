@@ -74,7 +74,7 @@ Note that this may not stop any currently running merges. To do so, check out [s
 
 When necessary to delete user data due to GDPR or otherwise, it's wise to do so in batches and asynchronously.
 
-At PostHog, when deleting user data, we schedule for all deletions to occur at once per week to minimize the cost
+At PostHog, when deleting user data, we schedule for all deletions to occur once per week to minimize the cost
 of rewriting data.
 
 In the future, [lightweight deletes](https://clickhouse.com/docs/en/sql-reference/statements/delete/) might simplify this process.
@@ -84,7 +84,7 @@ In the future, [lightweight deletes](https://clickhouse.com/docs/en/sql-referenc
 [As explained previously](/handbook/engineering/clickhouse/data-storage#what-does-the-merge-stand-for), merges are the lifeblood
 of ClickHouse, responsible for optimizing how data is laid out on disk as well as for deduplicating data.
 
-Merges an be monitored via the following tables:
+Merges can be monitored via the following tables:
 - [`system.merges`](https://clickhouse.com/docs/en/operations/system-tables/merges)
 - [`system.replication_queue`](https://clickhouse.com/docs/en/operations/system-tables/replication_queue)
 

@@ -131,7 +131,7 @@ SELECT hostName(), sum(metric_value) FROM distributed_sensor_values GROUP BY hos
 returns the hostname query is executed on.
 
 In this case `clickhouse01` was the coordinator node. It:
-- sent out a query to `clickhouse03` on other shard to execute. The query was ```SELECT hostname(), sum(`metric_value`) FROM `default`.`sharded_sensor_values` GROUP BY hostname()```
+- sent out a subset of the query to `clickhouse03` on other shard to execute. The query was ```SELECT hostname(), sum(`metric_value`) FROM `default`.`sharded_sensor_values` GROUP BY hostname()```
 - ran the query locally, getting aggregated results
 - combined both the local and remote results
 
@@ -213,7 +213,7 @@ In this case coordinator needs to receive a lot of data from the other shards to
 
 This query is expensive in terms of the amount of data that needs to be transferred over the network.
 
-One thing that makes this query more efficient is `uniqState`, which is a [aggregate function combinator](https://clickhouse.com/docs/en/sql-reference/aggregate-functions/combinators/#-state). It's useful since needing to send over all the events, the coordinator can send back an optimized bitmap-like structure that the coordinator can combine with its own results.
+One thing that makes this query more efficient is `uniqState`, which is a [aggregate function combinator](https://clickhouse.com/docs/en/sql-reference/aggregate-functions/combinators/#-state). It's useful since rather needing to send over all the events, the coordinator can send back an optimized bitmap-like structure that the coordinator can combine with its own results.
 
 <details><summary>Click to see full `EXPLAIN` plan</summary>
 
