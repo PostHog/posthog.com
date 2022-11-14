@@ -186,7 +186,7 @@ As you can see by reading the above examples, the index file exports functions t
 - once processing is complete (`exportEvents`, `onEvent`)
     - useful for exporting data to external services such as BigQuery, Snowflake, or Databricks.
 
-When users upload apps to PostHog, we import these functions from the files, and run them through [custom babel transforms](https://github.com/PostHog/posthog/tree/master/plugin-server/src/worker/vm/transforms) for extra security. From there they run as callable functions on VMs as part of our ingestion pipeline and also have access to extensions like storage, caching, and logging. Overall, it looks like this:
+When users upload apps to PostHog, we import these functions from the files and run them through [custom babel transforms](https://github.com/PostHog/posthog/tree/master/plugin-server/src/worker/vm/transforms) for extra security. From there they run as callable functions on VMs as part of our ingestion pipeline and also have access to extensions like storage, caching, and logging. Overall, it looks like this:
 
 ![VM](../images/blog/how-we-built-an-app-server/vm.png)
 
@@ -196,7 +196,9 @@ Structuring apps this way provides flexibility to users while maintaining scalab
 
 An app is no good if it doesn't integrate into PostHog. Apps needed to integrate with our ingestion pipeline. They needed to handle an inflow of data, scale, manage tasks, and update themselves. There are many parts needed to make this happen.
 
-Below is a basic diagram of our ingestion pipeline. Most of what we care about is the plugin server and the Kafka data flow leading into it.
+The initial ingestion pipeline used Python, Celery to manage the job queue, and a Node "plugin server" that ran the functions from the apps on incoming events.
+
+It has evolved significantly. A high-level version now looks like this:
 
 ```mermaid
 graph TD
@@ -220,25 +222,27 @@ graph TD
     Kafka2 <-..- ClickHouse
 ```
 
+The plugin server is now a core service that processes all events, updates related, models, and runs all plugins (including apps). Apps are just a portion of what the app server does. 
+
+The entire pipeline is now written in TypeScript and runs on Node. This saves sending processed data back to Python for writing to databases. We can just write it directly to ClickHouse or Postgres. We also now use Kafka to manage data flows and Redis for caching.
+
 ### Using Kafka and Redis
 
 Kafka manages our data flows. It helps us batch, split, and manage parallel work for our apps. For example, Kafka helps us batch and retry events when apps call `processEvent`. We use a Kafka topic (fancy name for "queue") to continue the flow of data.
 
-Another service we use is Redis to cache data and back the queue for apps. Many parts of the app are reusable and don’t need to be rebuilt each time we run the app. There is data we only need to keep around temporarily. Using Redis to cache data like this dramatically improved app performance and lowered the number of app servers we needed to run.
+Another service we use is Redis to cache data for apps. Parts of the app are reusable and don’t need to be recomputed each time we run the app. For example, apps can cache details about the organization events belong to, instead of looking for those details each time an event is processed. Over billions of events, this is a lot of compute we save.
 
 We use a couple of Redis patterns. First, we use [Redlock](https://redis.io/docs/manual/patterns/distributed-locks/) for the scheduler and job queue consumer. Redlock ensures these processes are only run on one machine because we only want them to run once. If they ran more than once, we’d have duplication and issues. For example, we only need one scheduler to do the basic work of saying what to do at what time. Second, we use [Pub/Sub](https://redis.io/docs/manual/pubsub/) to check for updates to the apps.
 
-We chose these because we used them elsewhere and they have a proven track record of working well at scale. They help the app server integrate with our existing infrastructure.
+We chose these because we used them elsewhere and they have a proven track record of working well at scale. They help apps integrate with our existing infrastructure.
 
-### Integrating into the plugin server
+### How the plugin server works (apps and beyond)
 
-To ensure apps connected to the rest of the ingestion pipeline, we decided to integrate apps into our plugin server. The plugin server runs processes for ingesting, formatting, and writing data from users to storage. It runs on Node (because of the decision we made in the hackathon about speed and VMs).
-
-To show you how we did that, here’s a complete overview of what the plugin server looks like (our app server only utilizes some parts):
+As mentioned earlier, our plugin server expanded to encompass much more than apps. It now handles all plugins, including apps which validate, process, format, and write event data to databases. The plugin server looks like this: 
 
 ![Plugin server](../images/blog/how-we-built-an-app-server/plugin-server.png)
 
-The main thread routes incoming tasks to the right location. It receives data and starts threads to complete them. We decided to use [Piscina](https://github.com/piscinajs/piscina) (a node.js worker pool) to create and manage the threads. We choose Piscina because it abstracts away a lot of the management of threads we would need to do to scale. The main thread also handles the functionality of scheduling and job queuing. The result creates tasks and sends them to worker threads to complete.
+The main thread routes incoming tasks to the right location. It receives data and starts threads to complete them. We use [Piscina](https://github.com/piscinajs/piscina) (a node.js worker pool) to create and manage the threads. Piscina abstracts away a lot of the management of threads we would need to do to scale. The main thread also handles the functionality of scheduling and job queuing. The result creates tasks and sends them to worker threads to complete.
 
 ### Doing the work (in worker threads)
 
@@ -246,9 +250,9 @@ Worker threads receive tasks from the main thread and execute them. Some of the 
 
 ![Worker thread](../images/blog/how-we-built-an-app-server/worker-thread.png)
 
-When the worker thread finishes its task, it returns to the main thread for further processing. This could include more modification through apps, PostHog person processing, or writing to ClickHouse. A final `onEvent` task runs once all the processing completes, which is useful for functions like exporting or alerting.
+When the worker thread finishes its task, it gets another new event, process, or other scheduled task from the main thread. The main thread is responsible for getting and rerouting events for further processing. A final `onEvent` task runs once all the processing completes, which is useful for functions like exporting or alerting.
 
-This structure enables modularity. Many different types of tasks, including app-related ones, can run together. Work improving the code for the plugin server improves all of the processes. This also lowers the maintenance needed for having multiple systems.
+This structure enables modularity, allowing us to run different types of workers and apps. On the small scale, they can run individual app tasks can together. On a larger scale, we are working on decoupling types of tasks to enable them separately and more efficiently.
 
 ## Making sure arbitrary code doesn’t break everything
 
@@ -272,11 +276,11 @@ export function setupPlugin() {
 }
 ```
 
-Fourth, we made it easier to write high-quality apps. The biggest things we did here were creating an app [template](https://github.com/PostHog/posthog-plugin-starter-kit) and [scaffold](https://github.com/PostHog/plugin-scaffold) for users, including [Jest](https://jestjs.io/) to test the app, and the ability to write the app in TypeScript. Many more minor improvements added up to higher-quality apps getting written.
+Fourth, we made it easier to write high-quality apps. We improved the [docs](/docs/apps/build), and added [tutorials](/docs/apps/build/tutorial). Apps are written in Typescript (we provide [types](/docs/apps/build/types)) and tested in [Jest](/docs/apps/build/testing). Many more minor improvements added up to higher-quality apps getting written.
 
 Finally, as mentioned before, although our self-hosted instances can run whatever arbitrary code they want, we still review apps before adding them for everyone to use on Cloud. This ensures a final quality and security standard for users.
 
-All this work helped us create a secure and reliable app server. This allowed us to be more confident in allowing users to build apps and users to be more confident using them.
+All this work helped us create more secure and reliable apps. This allowed us to be more confident in allowing users to build apps and users to be more confident using them.
 
 ## Unlocking customization and innovation through apps
 
@@ -288,7 +292,7 @@ We’ve seen users large and small write apps for all sorts of use cases. There 
 
 Apps unlocked more control over data flows as well as more innovation on the PostHog platform. Users install and enable thousands of apps each month, which process billions of events in our pipeline.
 
-Building and scaling the app server fundamentally changed the way we think about our product and infrastructure. Work on apps helped our ingestion pipeline become more integrated and modular. Apps also made our product more customizable and open to permissionless innovation. 
+Building and scaling the apps fundamentally changed the way we think about our product and infrastructure. Work on apps helped our ingestion pipeline become more integrated and modular. Apps also made our product more customizable and open to permissionless innovation. 
 
 Our vision for apps is to continue to enable more customizability of data flows and the overall PostHog experience. As an example of this, see the release of [site apps](/tutorials/build-site-app), which provides similar customizable functionality in the frontend. 
 
