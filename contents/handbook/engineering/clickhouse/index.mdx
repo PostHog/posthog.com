@@ -1,5 +1,5 @@
 ---
-title: ClickHouse manual
+title: ClickHouse
 ---
 
 Welcome to PostHog's ClickHouse manual.
@@ -37,7 +37,7 @@ ClickHouse repeatedly performed an order of magnitude better than other tools we
 
 -   _Compression:_ ClickHouse has _excellent_ compression and the size-on-disk was incredible. ClickHouse even beat out serialization formats such as ORC and Parquet.
 -   _Process from disk:_ Some OLAP solutions, like Presto, require data to live in memory. That’s fast, but you need to have a _lot_ of memory for big datasets. ClickHouse processes from disk, which is better for smaller instances too.
--   _Real-time data updates:_ ClickHouse basically processes data as it arrives, so there’s no need to pre-aggregate data. It’s faster for us, and our users.
+-   _Real-time data updates:_ ClickHouse processes data as it arrives, so there’s no need to pre-aggregate data. It’s faster for us, and our users.
 
 Eventually, we decided we knew enough to proceed and so we spun our test cluster out into an actual production cluster. It’s just part of how [we like to bias for speed](/careers).
 

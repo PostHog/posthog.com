@@ -129,7 +129,7 @@ At the time of writing (November 2022), sampling is not yet supported by the Pos
 
 ## `ReplacingMergeTree` with `uuid` as sort key
 
-`ReplacingMergeTree` in allows "replacing" old data with new given identical `ORDER BY` values. In our case, since
+`ReplacingMergeTree` allows "replacing" old data with new given identical `ORDER BY` values. In our case, since
 we have a `uuid` column in `ORDER BY`, in theory users should be able to "fix" past data by re-emitting events
 with same event, date, and uuid but improved data.
 

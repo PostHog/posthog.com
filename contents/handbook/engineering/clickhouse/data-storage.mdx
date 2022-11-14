@@ -140,16 +140,15 @@ As having a lot of small files would be disadvantageous for many reasons from qu
 regularly **merges** small parts together until they
 [reach a maximum size](https://clickhouse.com/docs/en/operations/settings/merge-tree-settings/#max-bytes-to-merge-at-max-space-in-pool).
 
-The merge combines the two parts into a new one. This is similar to how merge sort works and atomically replaces the two source parts.
+The merge combines the two parts into a new one. This is similar to how [merge sort](https://en.wikipedia.org/wiki/Merge_sort) works and atomically replaces the two source parts.
 
 Merges can be monitored using the [`system.merges` table](https://clickhouse.com/docs/en/operations/system-tables/merges/).
-
 
 ## Query execution
 
 ### Aggregation supported by `ORDER BY`
 
-Our `sensor_values` table above is set up in a way that queries similar to the following are really fast to execute.
+Our `sensor_values` table is set up in a way that queries similar to the following are really fast to execute.
 
 ```sql
 SELECT
@@ -169,7 +168,7 @@ Executing this reports:
 ```
 
 Why can it be fast? Because ClickHouse:
-1. can leverage table `ORDER BY (site_id, toStartOfDay(timestamp), event, uuid)` clause to skip reading a lot of data
+1. leverages table `ORDER BY (site_id, toStartOfDay(timestamp), event, uuid)` clause to skip reading a lot of data
 2. is fast and efficient about I/O and aggregation
 
 Let's dig into how the primary index for this query is used by using [`EXPLAIN`](https://clickhouse.com/docs/en/sql-reference/statements/explain/).
@@ -261,7 +260,7 @@ Indexes:
     Granules: 11/24415
 ```
 
-At the start of the query, clickhouse loaded the primary index of each part into memory. From this output, we know that the query first used the primary key to filter based on `site_id` and `timestamp` values stored in the index.
+At the start of the query, ClickHouse loaded the primary index of each part into memory. From this output, we know that the query first used the primary key to filter based on `site_id` and `timestamp` values stored in the index.
 This allowed it to know that only 11 out of 24415 granules (0.05%) contained any relevant data.
 
 From there it read those 11 granules (11 * 8192 rows) worth of data from `timestamp`, `side_id`, `event` and `metric_value` columns and did the
@@ -277,7 +276,7 @@ Consider this query:
 SELECT * FROM sensor_values WHERE uuid = '69028f26-768f-afef-1816-521b22d281ca'
 ```
 
-Executing this reports:
+Executing this query reports:
 ```
 1 row in set. Elapsed: 0.703 sec. Processed 200.00 million rows, 3.20 GB (304.43 million rows/s., 4.87 GB/s.)
 ```
@@ -291,7 +290,7 @@ table to find a single record _and_ read all columns.
 ClickHouse provides some ways to make this faster (e.g. [Projections](https://clickhouse.com/docs/en/engines/table-engines/mergetree-family/mergetree#projections))
 but in general these require extra disk space or have other trade-offs.
 
-ClickHouse schema must be aligned with queries that are being executed. 
+ClickHouse schema must be aligned with queries that are being executed.
 
 ## `PARTITION BY`
 
@@ -456,20 +455,21 @@ See the following Altinity documentation for more guidance:
 
 Updating data in ClickHouse is expensive and analogous to a schema migration.
 
-Fo example, to update an events properties, ClickHouse frequently needs to:
+For example, to update an events properties, ClickHouse frequently needs to:
 - Scan all the data to find what parts contain the relevant data. This isn't often covered by `ORDER BY` and thus quite expensive.
 - Rewrite the _whole_ part (including any columns) - this could be potentially up to 150GB of data rewritten for a single update.
 
 This makes things operationally hard. We mitigate this by:
 - Writing duplicated rows for new data, using other table engines (e.g. ReplacingMergeTree) and accounting for this duplication in our queries.
-- Batching up GDPR- or other data deletions up and doing them on a schedule rather than immediately.
+- Batching up GDPR- or other data deletions and doing them on a schedule rather than immediately.
 
 ### No query planner
 
 ClickHouse doesn't have a query planner in the sense PostgreSQL or other databases do.
 
-On the one hand, you often end up fighting the query planner in other databases. If we know how ClickHouse performs internally and how to translate queries into intuition
-on how they're executed, we're well-equipped to deal with issues as they arise.
+On the one hand, you often end up fighting the query planner in other databases.
+If we know how ClickHouse works internally and can develop that into intuition for how SQL is executed, we're well-equipped to deal with
+performance issues as they arise.
 
 On the other, this means that we'll need to be careful writing SQL as small changes can have huge performance implications.
 
@@ -477,7 +477,7 @@ Examples:
 - For best performance, ClickHouse requires you "push" predicates in WHERE clauses into sub-queries rather than filtering at the outermost query.
 - In the `sensor_values` queries above, the execution plan would have been _slightly_ more optimal if the filter condition on `toYear(timestamp)` rather than `timestamp`.
 
-One notable exception to "no query planner" is that clickhouse often pushes predicates from `WHERE` into `PREWHERE`. Filters in `PREWHERE` are executed first and ClickHouse
+One notable exception to "no query planner" is that ClickHouse often pushes predicates from `WHERE` into `PREWHERE`. Filters in `PREWHERE` are executed first and ClickHouse
 moves columns it thinks are "cheaper" or "more selective" into it. However putting the wrong column (e.g. a fat column containing JSON) in `PREWHERE` can cause performance to tank.
 
 Read more on `PREWHERE` in the [ClickHouse docs](https://clickhouse.com/docs/en/sql-reference/statements/select/prewhere/).
@@ -498,7 +498,7 @@ By default columns are compressed by the `LZ4` algorithm. We've found good succe
 ClickHouse excels at aggregating data from a single table at a time. If you however have a query with JOINs or subqueries, the right-hand-side of the
 JOIN would be loaded into memory first.
 
-This means that at scale JOINs can kill performance. Read more on effect of removing JOINs from our events database here:
+This means that at scale JOINs can kill performance. Read more on the effect of removing JOINs from our events database here:
 - https://github.com/PostHog/posthog/issues/7962
 - https://github.com/PostHog/product-internal/pull/240
 
