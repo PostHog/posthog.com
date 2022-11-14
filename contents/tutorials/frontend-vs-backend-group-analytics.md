@@ -1,11 +1,11 @@
 ---
-title: Understanding group analytics: frontend vs backend implementations
+title: "Understanding group analytics: frontend vs backend implementations"
 sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-11-09
 featuredImage: ../images/tutorials/banners/frontend-vs-backend-group-analytics.png
-topics: ["configuration","group-analytics"]
+topics: ["configuration","group analytics"]
 ---
 
 Group analytics is a powerful feature for understanding how groups such as organizations, customers, and companies use your product as a unit. It provides a new level of analysis between individual users and all your users.
