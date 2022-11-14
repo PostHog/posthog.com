@@ -18,7 +18,7 @@ Before we go into the implementation, it is useful to understand **why** there a
 
 At PostHog, we think about (and store) everything as **events**. This means a group for us is a set of events related to a group identity. People (in PostHog) are the same, a set of events related to a person identity. 
 
-When you shift your thinking from a group as a set of people to a group as a set of events (with people identities), the differences between the frontend and backend implementation makes more sense.
+When you shift your thinking from a group as a set of people to a group as a set of events (with people identities), the differences between the frontend and backend implementation make more sense.
 
 To further help this make sense, let’s look at both frontend and backend implementation
 
@@ -34,7 +34,7 @@ posthog.group('company', 'posthog');
 posthog.capture('login');
 ```
 
-On the frontend, you also use the `group` call to update the properties of your group. The below example both connects to the group and updates the group’s properties.
+On the frontend, you also use the `group` call to update the properties of your group. The below example does both. It connects the user to the group and updates the group’s properties.
 
 ```js
 posthog.group('company', 'posthog', {
