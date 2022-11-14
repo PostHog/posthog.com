@@ -1,4 +1,14 @@
 import { useLocation } from '@reach/router'
+import { motion, AnimatePresence } from 'framer-motion'
+import { useBreakpoint } from 'gatsby-plugin-breakpoints'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { animateScroll as scroll, Link as ScrollLink } from 'react-scroll'
+import Scrollspy from 'react-scrollspy'
+import { push as PushMenu } from 'react-burger-menu'
+import { flattenMenu, replacePath } from '../../../gatsby/utils'
+import { IContributor, ICrumb, IMenu, INextPost, IProps, ISidebarAction, ITopic } from './types'
+
 import Chip from 'components/Chip'
 import {
     Edit,
@@ -12,22 +22,13 @@ import {
     Twitter,
 } from 'components/Icons/Icons'
 import Link from 'components/Link'
-import { motion, AnimatePresence } from 'framer-motion'
-import { useBreakpoint } from 'gatsby-plugin-breakpoints'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { animateScroll as scroll, Link as ScrollLink } from 'react-scroll'
-import Scrollspy from 'react-scrollspy'
 import InternalSidebarLink from 'components/Docs/InternalSidebarLink'
-import SearchBar from 'components/Docs/SearchBar'
 import { DarkModeToggle } from 'components/DarkModeToggle'
-import { push as PushMenu } from 'react-burger-menu'
+import { Popover } from 'components/Popover'
 import Tooltip from 'components/Tooltip'
 import { CallToAction } from 'components/CallToAction'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
-import { flattenMenu, replacePath } from '../../../gatsby/utils'
-import { IContributor, ICrumb, IMenu, INextPost, IProps, ISidebarAction, ITopic } from './types'
-import { Popover } from 'components/Popover'
+import SearchBar from 'components/Search/SearchBar'
 
 const ShareLink = ({ children, url }: { children: React.ReactNode; url: string }) => {
     const width = 626
@@ -517,14 +518,11 @@ export default function PostLayout({
 
     return (
         <div id="menu-wrapper">
-            {!hideSearch && (
-                <div className="py-2 px-4 border-y border-dashed border-gray-accent-light dark:border-gray-accent-dark flex justify-between sticky top-[-2px] bg-tan dark:bg-primary z-30">
-                    {menu && (
-                        <button onClick={handleMobileMenuClick} className="py-2 px-3 block lg:hidden">
-                            <MobileMenu style={{ transform: `rotate(${mobileMenuOpen ? '180deg' : '0deg'})` }} />
-                        </button>
-                    )}
-                    <SearchBar base={searchFilter} />
+            {menu && (
+                <div className="block lg:hidden py-2 px-4 border-y border-dashed border-gray-accent-light dark:border-gray-accent-dark flex justify-between sticky top-[-2px] bg-tan dark:bg-primary z-30">
+                    <button onClick={handleMobileMenuClick} className="py-2 px-3">
+                        <MobileMenu style={{ transform: `rotate(${mobileMenuOpen ? '180deg' : '0deg'})` }} />
+                    </button>
                 </div>
             )}
             {menu && (
@@ -565,6 +563,7 @@ export default function PostLayout({
             >
                 {menu && (
                     <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:block hidden relative z-20">
+                        {!hideSearch && <SearchBar base={searchFilter} />}
                         <aside className="lg:sticky bg-tan dark:bg-primary top-10 flex-shrink-0 w-full justify-self-end px-4 lg:box-border my-10 lg:my-0 lg:py-4 mr-auto overflow-y-auto lg:h-[calc(100vh-40px)]">
                             <TableOfContents menuType={menuType} menu={menu} />
                         </aside>

@@ -7,7 +7,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 import Link from 'components/Link'
 import PostLayout from 'components/PostLayout'
 import { docs } from '../sidebars/sidebars.json'
-import SearchBox from 'components/SearchBox'
+import SearchBox from 'components/Search/SearchBox'
 
 const quickLinks = [
     {

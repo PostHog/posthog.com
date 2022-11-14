@@ -3,7 +3,7 @@ import React from 'react'
 import RightCol from '../RightCol'
 import CallToAction from '../CallToAction'
 import { Wrapper } from '../Wrapper'
-import SearchBar from 'components/Docs/SearchBar'
+import SearchBar from 'components/Search/SearchBar'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 

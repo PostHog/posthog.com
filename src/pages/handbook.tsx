@@ -5,7 +5,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 import Link from 'components/Link'
 import PostLayout from 'components/PostLayout'
 import { handbook } from '../sidebars/sidebars.json'
-import SearchBox from 'components/SearchBox'
+import SearchBox from 'components/Search/SearchBox'
 
 const otherLinks = [
     {
