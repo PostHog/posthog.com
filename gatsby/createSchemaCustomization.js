@@ -184,6 +184,8 @@ module.exports = exports.createSchemaCustomization = async ({ actions, schema })
           heart: Int,
           eyes: Int,
           _1: Int,
+          plus1: Int,
+          minus1: Int
     }
     type SqueakGitHubPage {
       title: String,
