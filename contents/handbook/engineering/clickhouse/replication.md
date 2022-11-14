@@ -28,7 +28,7 @@ if the previous table has been dropped.
 
 ### Sharding replicated tables
 
-Sharding helps scale out a dataset by having each node only store part of the data.
+Sharding helps scale a dataset by having each node only store part of the data.
 
 To decide whether to shard a table, consider how it's queried and what data it stores:
 - Shard: tables that could become too large for a single server (e.g. events, logs, raw analytics data)
@@ -61,17 +61,17 @@ based on the sharding_key.
 Note that if your underlying table has columns that ClickHouse populates (e.g. ALIAS, MATERIALIZED), it's often necessary to set up
 two Distributed tables:
 - One for writes containing a minimum set of columns
-- One for reads which contain all columns
+- Another for reads which contain all columns
 
 ## How queries against `Distributed` tables work
 
-When querying Distributed table, you can send the query to any node in the ClickHouse cluster. That node becomes the `coordinator`, which
+When querying Distributed table, you can send the query to any node in the ClickHouse cluster. That node becomes the `coordinator`, which:
 1. Figures out what queries individual shards need to execute and queues these queries
 2. Once results are in, aggregates the results together and returns an answer
 
 Given local execution is faster than reading data over the network, ClickHouse will usually perform one of the queries locally instead of sending it to another replica of its shard.
 
-Depending on the query, sub-queries executed on other shards might either return already aggregated data or stream or stream entire
+Depending on the query, sub-queries executed on other shards might either return already aggregated data or stream entire
 datasets across the network. Being aware of which is done is crucial for performance.
 
 ### Example query - distributed sums
@@ -132,10 +132,10 @@ returns the hostname query is executed on.
 
 In this case `clickhouse01` was the coordinator node. It:
 - sent out a query to `clickhouse03` on other shard to execute. The query was ```SELECT hostname(), sum(`metric_value`) FROM `default`.`sharded_sensor_values` GROUP BY hostname()```
-- Ran the query locally, getting getting aggregated results.
-- Combined both the local and remote results
+- ran the query locally, getting aggregated results
+- combined both the local and remote results
 
-In this case minimal network traffic happened since the results of a query could be combined independently.
+In this case, minimal network traffic happened since the results of a query could be combined independently.
 
 <details><summary>Click to see full `EXPLAIN` plan</summary>
 ```
@@ -187,7 +187,7 @@ ORDER BY uniq(event) DESC
 LIMIT 20
 ```
 
-In this case the query sent to other shards cannot do all the work on its own. Instead, the query being sent to the other shard
+In this case, the query sent to other shards cannot do all the work on its own. Instead, the query being sent to the other shard
 would look something like the following:
 
 ```sql
@@ -199,7 +199,7 @@ WHERE timestamp > '2010-01-01' and timestamp < '2023-01-01'
 GROUP BY site_id
 ```
 
-In `EXPLAIN` output this would be expressed as:
+In `EXPLAIN` output, this would be expressed as:
 
 ```
 ReadFromRemote (Read from remote replica)
@@ -213,7 +213,7 @@ In this case coordinator needs to receive a lot of data from the other shards to
 
 This query is expensive in terms of the amount of data that needs to be transferred over the network.
 
-One thing that makes this query more efficient is `uniqState`, which is a [aggregate function combinator](https://clickhouse.com/docs/en/sql-reference/aggregate-functions/combinators/#-state). It's useful since than needing to send over all the events, the coordinator can send back an optimized bitmap-like structure that the coordinator can combine with its own results.
+One thing that makes this query more efficient is `uniqState`, which is a [aggregate function combinator](https://clickhouse.com/docs/en/sql-reference/aggregate-functions/combinators/#-state). It's useful since needing to send over all the events, the coordinator can send back an optimized bitmap-like structure that the coordinator can combine with its own results.
 
 <details><summary>Click to see full `EXPLAIN` plan</summary>
 
@@ -366,12 +366,14 @@ FROM clusterAllReplicas('my_cluster', 'system', 'metrics')
 ```
 
 More documentation on this can be found at:
-- https://clickhouse.com/docs/en/sql-reference/table-functions/cluster/
-- https://clickhouse.com/docs/en/sql-reference/functions/other-functions/
+- [cluster, clusterAllReplicas ClickHouse docs](https://clickhouse.com/docs/en/sql-reference/table-functions/cluster/)
+- [Other Functions ClickHouse docs](https://clickhouse.com/docs/en/sql-reference/functions/other-functions/)
 
 ## Further reading
 
-- https://clickhouse.com/docs/en/engines/table-engines/mergetree-family/replication/
-- https://altinity.com/presentations/strength-in-numbers-introduction-to-clickhouse-cluster-performance
-- https://kb.altinity.com/engines/
-- https://kb.altinity.com/altinity-kb-setup-and-maintenance/altinity-kb-zookeeper/zookeeper-schema/
+- [Data Replication ClickHouse docs](https://clickhouse.com/docs/en/engines/table-engines/mergetree-family/replication/)
+- [Strength in Numbers: Introduction to ClickHouse Cluster Performance](https://altinity.com/presentations/strength-in-numbers-introduction-to-clickhouse-cluster-performance)
+- [Engines](https://kb.altinity.com/engines/)
+- [ZooKeeper schema](https://kb.altinity.com/altinity-kb-setup-and-maintenance/altinity-kb-zookeeper/zookeeper-schema/)
+
+Next in the ClickHouse manual: [Data ingestion](handbook/engineering/clickhouse/data-ingestion)

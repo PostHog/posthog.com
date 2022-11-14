@@ -4,7 +4,7 @@ title: sharded_events
 
 `sharded_events` table powers our analytics and is the biggest table we have by orders of magnitude.
 
-In this document we'll be dissecting the state of the table at the time of writing, some potential problems and improvements to it.
+In this document, we'll be dissecting the state of the table at the time of writing, some potential problems and improvements to it.
 
 ## Schema
 
@@ -68,7 +68,7 @@ WHERE team_id = 2
 
 Which is well-served by the first 3 parts of this `ORDER BY`.
 
-However note that:
+Note that:
 - This ORDER BY doesn't speed up filtering by common JSON properties, as every matching event needs to be read from disk
 - By having `toDate(timestamp)` before `event`, we might be losing out on some compression benefits (due to same events probably having similar properties)
 
@@ -81,7 +81,7 @@ Evaluation: 🤷 It's reasonably good, but there are some potential improvements
 Sharding by distinct_id means that many queries such as unique person counts or funnels
 [cannot be evaluated on individual replicas and a data must be sent to coordinator node](/handbook/engineering/clickhouse/replication#example-query-limit-filter-and-aggregate).
 
-Luckily this isn't the worst bottleneck in our production environments due to fast networking.
+Luckily, this isn't the worst bottleneck in our production environments due to fast networking.
 
 Evaluation: 👎 this needs fixing, however [resharding data is hard](/handbook/engineering/clickhouse/operations#resharding).
 
@@ -123,21 +123,21 @@ Evaluation: 🤷 A lot better than could be, but also a lot of unrealized potent
 Allowing data to be sampled helps speed up queries at the expense of having less accurate results. This can be helpful
 for allowing a fast data exploration experience.
 
-However we should now be sampling by `person_id` column as analytics-by-person is _likely_ the most important thing.
+We should now be sampling by `person_id` column as analytics-by-person is _likely_ the most important thing.
 
-Note that at the time of writing, sampling is not yet supported by the PostHog app.
+At the time of writing (November 2022), sampling is not yet supported by the PostHog app.
 
 ## `ReplacingMergeTree` with `uuid` as sort key
 
 `ReplacingMergeTree` in allows "replacing" old data with new given identical `ORDER BY` values. In our case, since
 we have a `uuid` column in `ORDER BY`, in theory users should be able to "fix" past data by re-emitting events
-with same event, date and uuid but improved data.
+with same event, date, and uuid but improved data.
 
 However this does not work as `ReplacingMergeTree` only does work at merge-time and:
 1. merges are not guaranteed to occur
 2. we're not accounting for duplicate-uuid data in queries and it would be prohibitively expensive to do so
 
-Only way to make use of this is to regularly use `OPTIMIZE TABLE sharded_events FINAL`, but that could
+The only way to use this is to regularly use `OPTIMIZE TABLE sharded_events FINAL`, but that could
 make operations harder and require a lot of I/O due to needing to rewrite data.
 
 Sending data with custom `uuid`s is also undocumented and prone to bugs on our end.
@@ -146,7 +146,7 @@ Evaluation: 🚫 This design decision is a mistake.
 
 ## `elements_chain` column
 
-PostHog javascript library has an autocapture feature, where we store actions users do on pages and DOM elements
+PostHog's JavaScript library has an autocapture feature, where we store actions users do on pages and DOM elements
 these actions are done against.
 
 `elements_chain` column contains the DOM hierarchy autocaptured events were done against. In queries we match
@@ -164,7 +164,7 @@ or with common queries this is needlessly inefficient.
 
 There are several unproven ideas on how to could optimize this:
 
-### Combine with previous results
+### 1. Combine with previous results
 
 Due to `person` columns now being stored on `sharded_events` table, historical data in the table can be considered immutable.
 
@@ -173,9 +173,11 @@ and combine results with the previous query results.
 
 In theory this works well with line graphs but harder to do with e.g. funnels and requires extensive in-app logic to build out.
 
-### Projections
+### 2. Projections
 
 Similarly, due to immutable data PostHog could calculate some frequent insights ahead of time.
 
 The [projections](https://clickhouse.com/docs/en/sql-reference/statements/alter/projection/) feature could feasibly help
 do this at a per-part level for consistency without special application logic.
+
+Next schema in the ClickHouse manual: [app_metrics](/handbook/engineering/clickhouse/schema/app-metrics)
