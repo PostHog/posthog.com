@@ -1,5 +1,5 @@
 ---
-date: 2022-11-11
+date: 2022-11-14
 title: "How we found our Ideal Customer Profile"
 rootPage: /blog
 sidebar: Blog
