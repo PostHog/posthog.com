@@ -2308,8 +2308,7 @@
     from = "/handbook/engineering/production-access"
     to = "/handbook/engineering/how-to-access-posthog-cloud-infra"
 
-
-# Added: 2022-11-12
+# Added: 2022-11-10
 [[redirects]]
-    from = "/handbook/engineering/clickhouse/schema"
-    to = "/handbook/engineering/clickhouse/schema/overview"
+    from = "/handbook/engineering/clickhouse/schema/overview"
+    to = "/handbook/engineering/clickhouse/schema"

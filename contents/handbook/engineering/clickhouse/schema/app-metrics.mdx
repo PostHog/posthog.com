@@ -8,7 +8,7 @@ PostHog provides Apps for data imports, exports and transformation purposes.
 
 App metrics helps users of apps want to know whether the apps are reliable and have tooling to debug errors.
 
-When designing the schema, we needed ingestion of these stats should be as 'cheap' as possible. On the flip side
+When designing the schema, we needed ingestion of these stats should be as 'cheap' as possible. On the flip side,
 queries against the data did not need to support much beyond time-range filtering.
 
 ## Schema
@@ -109,18 +109,18 @@ For this reason `error_details` column uses ZSTD(3) codec.
 
 Sorting sort by error_type also has a significance: `error_details` of a given error type should be similar and compress well.
 
-In the future we also might introduce `TTL`s for the error columns if storage becomes a problem or periodically
+In the future, we might introduce `TTL`s for the error columns if storage becomes a problem or periodically
 wipe error data in other ways.
 
 ### Decision: pre-aggregate metrics in app in memory
 
 Apps act on events as they're processed and users might have dozens of apps installed at the same time.
 
-For this reason emitting a kafka message per app per event ingested ends up being too expensive. We
+For this reason, emitting a Kafka message per app per event ingested ends up being too expensive. We
 instead aggregate metrics (and errors) in memory and only periodically flush data to Kafka.
 
-Note that this runs the trade-off of counts being subtly off after deploys or restarts. If this becomes
-a significant user concern, we may reduce the precision of the numbers shown in the UI in the future.
+This runs the trade-off of counts being subtly off after deploys or restarts. If this becomes
+a significant user concern, we may reduce the precision of the numbers shown in the UI.
 
 ### Decision: using `AggregatingMergeTree`
 
@@ -129,11 +129,11 @@ To make ingesting and storing this data cheaper, `AggregatingMergeTree` is used.
 Each time two parts are merged, rows with identical `ORDER BY` values are collapsed into a single row in the new part.
 
 In this setup, this means that:
-- We aggregate data up to an hours granularity (since `toStartOfHour(timestamp)` is in the `ORDER BY`)
+- we aggregate data up to an hours granularity (since `toStartOfHour(timestamp)` is in the `ORDER BY`)
 - successes, successes_on_retry and failures columns get summed up for each unique value of `ORDER BY`
-- Errors are not aggregated at all (since `error_uuid` is in the `ORDER BY`)
+- errors are not aggregated at all (since `error_uuid` is in the `ORDER BY`)
 
-Note that even with all of this we still need to sum values in queries as merges may never occur.
+Even with all of this we still need to sum values in queries as merges may never occur.
 
 
 ### Decision: sharding
@@ -147,10 +147,12 @@ storage similar number of events can require hundreds of gigabytes.
 
 Queries against this schema are also usually measured in milliseconds.
 
-The reason we were able to do leverage pre-aggregation to this extent was since we needed to answer only a few different questions:
-- What is the number of successes and failures in a given time range per day or hour, diced by plugin, method and job
-- How many errors of each type did we see in that time range
-- What are some examples of specific errors we saw
+The reason we were able to leverage pre-aggregation to this extent was since we only needed to answer a few questions:
+- What is the number of successes and failures in a given time range per day or hour, diced by plugin, method and job?
+- How many errors of each type did we see in that time range?
+- What are some examples of specific errors we saw?
 
 These queries all lend itself well to pre-aggregation, meaning an expert schema could store this data very cheaply at the cost
 of some flexibility.
+
+Next schema in the ClickHouse manual: [app_metrics](/handbook/engineering/clickhouse/schema/person-distinct-id)
