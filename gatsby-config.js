@@ -51,7 +51,6 @@ module.exports = {
             },
         },
         'gatsby-plugin-react-helmet',
-        `gatsby-plugin-netlify`,
         `gatsby-plugin-sass`,
         `gatsby-plugin-typescript`,
         `gatsby-plugin-smoothscroll`,
