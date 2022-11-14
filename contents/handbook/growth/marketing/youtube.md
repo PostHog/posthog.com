@@ -32,4 +32,11 @@ v3:
 - Use Loom or other software, same equipment, record blog posts and [YouTube-specific content](https://github.com/PostHog/posthog.com/issues/4586), better scripts,  freelance editor, custom thumbnails (from Lottie or freelancer).
 - Goal: publish 3 high-quality videos per week (at least 1 featuring non-tutorial content), consistently reaching x000s, some videos reaching x0000. >10 signups attributable per week.
 
+## Distribution
+Distributing these videos will consist of:
+- Relying on YouTube's algorithm
+- Adding a link to the video in the related tutorial
+- Sending to general channel in user Slack
+- If SEO or non-tutorial videos, posting on social
+
 There is a lot to learn here, but YouTube could become a massive, differentiated channel for us.
