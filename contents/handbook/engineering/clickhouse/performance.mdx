@@ -2,10 +2,10 @@
 title: Query performance
 ---
 
-This document:
-- details what tools are available to understand and measure query performance
+This document goes over:
+- what tools are available to understand and measure query performance
 - importance of page cache
-- provides some general tips and tricks
+- general tips and tricks for performant queries
 
 ## Tooling
 
@@ -13,7 +13,7 @@ This document:
 
 `clickhouse-client` is a command-line application for running queries against ClickHouse.
 
-When executing queries it details progress, execution time, how many rows and gigabytes of data were processed and how much
+When executing queries, it details progress, execution time, how many rows and gigabytes of data were processed, and how much
 CPU was used.
 
 ![clickhouse-client progress reporting](../../../images/handbook/clickhouse-client-progress.gif)
@@ -29,9 +29,9 @@ It includes information on:
 - In case of errors, exception information
 - For distributed queries, `is_initial_query` to disambiguate distributed queries
 
-At PostHog we also often add metadata about the query to the query as a comment to make it easier to analyze after the fact.
+At PostHog, we also often add metadata to the query as a comment to make it easier to analyze later.
 
-Example query to get recent slow queries:
+An example query to get recent slow queries:
 
 ```sql
 SELECT
@@ -60,15 +60,15 @@ do [ad-hoc distributed queries](/handbook/engineering/clickhouse/replication#ad-
 
 ### `EXPLAIN`
 
-Previous pages in this manual have [showed various examples](/handbook/engineering/clickhouse/data-storage#aggregation-supported-by-order-by)
-of using ClickHouse `EXPLAIN` statement to your advantage.
+Previous pages in this manual [showed various examples](/handbook/engineering/clickhouse/data-storage#aggregation-supported-by-order-by)
+of using the ClickHouse `EXPLAIN` statement to your advantage.
 
 Various forms of explain can detail:
 - If and how much data ClickHouse was able to avoid processing thanks to schema setup
 - If and how ClickHouse "optimizes" the query by moving columns to `PREWHERE`
 - Detailing how the query is planned to be executed
 
-Read more on `EXPLAIN` here: https://clickhouse.com/docs/en/sql-reference/statements/explain/
+Read more about `EXPLAIN` in [ClickHouse's EXPLAIN Statement docs](https://clickhouse.com/docs/en/sql-reference/statements/explain/).
 
 ### Flame graphs
 
@@ -83,25 +83,25 @@ For CPU-bound calculations, [flamegraphs](https://github.com/Slach/clickhouse-fl
   />
 </div>
 
-We've built flamegraph support into PostHog - you can find tools to generate flamegraphs for queries under PostHog instance settings.
+We've built flamegraph support into PostHog. You can find tools to generate flamegraphs for queries under PostHog instance settings.
 
 ## Importance of the page cache
 
-When running queries you might encounter an odd artifact: The first time you run a query, it's really slow but it speeds up significantly
+When running queries, you might encounter an odd artifact: the first time you run a query, it's really slow but it speeds up significantly
 when run again.
 
 This behavior is due to [page cache](https://www.thomas-krenn.com/en/wiki/Linux_Page_Cache_Basics) in linux. In broad terms, the operating
 system caches recently read files into memory, speeding up subsequent reads of the same data.
 
-As most queries in ClickHouse are dependent on fast IO to execute fast, this can have a significant effect on query performance and a reason
+As most queries in ClickHouse are dependent on fast I/O to execute fast, this can have a significant effect on query performance. It is a reason
 why at PostHog our ClickHouse nodes have a lot of memory available.
 
 ### Effect on benchmarking
 
-This behavior can however be a problem for profiling: Users constructing new queries might not hit the page cache and receive a worse
+This behavior can be a problem for profiling: users constructing new queries might not hit the page cache and receive a worse
 experience than benchmarking may show.
 
-This means it's often important to wipe page cache on clickhouse when doing queries. This can be achieved with the following command on a ClickHouse node:
+This means it's often important to wipe page cache on ClickHouse when doing queries. This can be achieved with the following command on a ClickHouse node:
 
 ```bash
 sudo sh -c "/usr/bin/echo 3 > /proc/sys/vm/drop_caches"
@@ -121,12 +121,14 @@ This section highlights some general rules of thumb that can help speed up queri
 - Push down any and all WHERE conditions to in queries as deep as possible, as ClickHouse [won't do it for you](/handbook/engineering/clickhouse/data-storage#no-query-planner).
 - Avoid reading columns that are not needed for the query.
 - Test if [moving small column filters to `PREWHERE`](/handbook/engineering/clickhouse/data-storage#no-query-planner) helps performance.
-- [Avoid reading large columns in `PREWHERE`](/handbook/engineering/clickhouse/data-storage#no-query-planner)
-- [Compress columns with appropriate codecs](/handbook/engineering/clickhouse/data-storage#data-compression)
-- Make use of the [extensive catalogue aggregation functions available in ClickHouse](https://clickhouse.com/docs/en/sql-reference/aggregate-functions/)
-- [Looking up single rows is frequently slow](/handbook/engineering/clickhouse/data-storage#point-queries-not-supported-by-order-by)
-- [ORDER BY and LIMIT/OFFSET can be slow in sharded settings](/handbook/engineering/clickhouse/replication#example-query-limit-filter-and-aggregate)
+- [Avoid reading large columns in `PREWHERE`](/handbook/engineering/clickhouse/data-storage#no-query-planner).
+- [Compress columns with appropriate codecs](/handbook/engineering/clickhouse/data-storage#data-compression).
+- Make use of the [extensive catalogue aggregation functions available in ClickHouse](https://clickhouse.com/docs/en/sql-reference/aggregate-functions/).
+- [Looking up single rows is frequently slow](/handbook/engineering/clickhouse/data-storage#point-queries-not-supported-by-order-by).
+- [ORDER BY and LIMIT/OFFSET can be slow in sharded settings](/handbook/engineering/clickhouse/replication#example-query-limit-filter-and-aggregate).
 - Cheat: [preaggregate data](/handbook/engineering/clickhouse/schema/app-metrics) or leverage materialized columns to pull out data from large columns.
 - Leverage [query settings in special cases](https://clickhouse.com/docs/en/operations/settings/settings/).
 
 Also always do your benchmarking in a realistic setting: on large datasets on powerful machines.
+
+Next in the ClickHouse manual: [Operations](/handbook/engineering/clickhouse/operations)

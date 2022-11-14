@@ -14,7 +14,7 @@ In frontend libraries like posthog-js, when persons land on a site they're initi
 As persons log in or sign up, `posthog.identify` should be called to signal that the anonymous person is actually some
 logged in person and their prior events should be grouped together.
 
-Note that the semantics of this have changed significantly with person-on-events project.
+The semantics of this have changed significantly with [person-on-events](/blog/persons-on-events) project.
 
 ## Schema
 
@@ -32,7 +32,7 @@ CREATE TABLE person_distinct_id
 ORDER BY (team_id, distinct_id, person_id)
 ```
 
-Note that `is_deleted` column is not actually being written to - it is dynamically calculated based on the `_sign` column.
+The `is_deleted` column is not actually being written to, it is dynamically calculated based on the `_sign` column.
 
 This table was queried often joined with `events` table along the following lines:
 
@@ -54,7 +54,7 @@ WHERE team_id = 2
 GROUP BY pdi.person_id
 ```
 
-### Design decision: No sharding
+### Design decision: no sharding
 
 Since this table was almost always joined against the events table, this table was not sharded.
 
@@ -63,15 +63,15 @@ which would be expensive and slow.
 
 ### Design decision: CollapsingMergeTree
 
-What person a given distinct_id belongs to can change over time as `posthog.identify` or `posthog.alias` are called.
+The given distinct_id belonging to a person can change over time as `posthog.identify` or `posthog.alias` are called.
 
 For this reason the data needs to be constantly updated, yet updating data in ClickHouse requires rewriting large
 chunks of data.
 
-Rather than rewriting data, [`CollapsingMergeTree`](https://clickhouse.com/docs/en/engines/table-engines/mergetree-family/collapsingmergetree/) was opted to be used.
-CollapsingMergeTree adds special behavior to ClickHouse merge operation: If on a merge rows with identical `ORDER BY` values are seen, they are collapsed according to
+Rather than rewriting data, we opted to use [`CollapsingMergeTree`](https://clickhouse.com/docs/en/engines/table-engines/mergetree-family/collapsingmergetree/).
+CollapsingMergeTree adds special behavior to ClickHouse merge operation: if on a merge rows with identical `ORDER BY` values are seen, they are collapsed according to
 `_sign` column:
-- If sum of signs `_sign` was positive, new row has `_sign` of 1
+- If sum of signs `_sign` was positive, new row has `_sign` of 1.
 - Otherwise, the row was removed.
 
 This was used to update-via-insert:
@@ -79,7 +79,7 @@ This was used to update-via-insert:
 - On a change, the new person_id row was emitted with `_sign` of 1
 - At query-time, the resulting rows were aggregated together to find the current state of the world
 
-Due to this logic both person_id and distinct_id needed to be in the `ORDER BY` key.
+Due to this logic, both person_id and distinct_id needed to be in the `ORDER BY` key.
 
 ### Problem: CollapsingMergeTree for updates
 
@@ -87,11 +87,11 @@ CollapsingMergeTree is not ideal for frequently updating a single row as merges 
 subsequent rows signifying deletes get discarded before being merged with an "insert" row.
 
 When updating columns [`ReplacingMergeTree`](https://clickhouse.com/docs/en/engines/table-engines/mergetree-family/replacingmergetree/) engine tables with an
-explicit `version` column has proven to be reliable overall.
+explicit `version` column has proven to be reliable.
 
 ### Problem: Expensive queries
 
-In [December 2021 PostHog started seeing significant performance problems and out-of-memory errors](https://github.com/PostHog/posthog/issues/7548) due to this schema for largest users.
+In [December 2021, PostHog started seeing significant performance problems and out-of-memory errors](https://github.com/PostHog/posthog/issues/7548) due to this schema for largest users.
 
 The problem was two-fold:
 - JOINs are inherently expensive in ClickHouse as the right-hand-side of the join (person_distinct_id subquery) would be loaded into memory
@@ -139,7 +139,7 @@ GROUP BY pdi.person_id
 This schema:
 - Was over 2x faster to query for large teams while requiring less memory
 - Had explicit versioning logic built in
-- Required less kafka messages and traffic
+- Required fewer Kafka messages and traffic
 - Lowered `index_granularity` for faster point queries
 - Leveraged `ReplacingMergeTree` to ensure data consistency
 

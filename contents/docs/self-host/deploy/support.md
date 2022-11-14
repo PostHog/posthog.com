@@ -1,10 +1,10 @@
 ---
-title: Support for self-hosting (open-source and enterprise)
+title: Support for self-hosting
 sidebar: Docs
 showTitle: true
 ---
 
-## Support for open-source deployments of PostHog
+## Open-source self-hosted support
 
 PostHog at production scale is a data-intensive application with a complex system architecture.
 
@@ -25,7 +25,7 @@ If you aren't able to fix the problem yourself here are some other options:
 - Upgrade to PostHog Enterprise
   - [Book a call](https://posthog.com/book-a-demo) or send us an email at [hey@posthog.com](mailto:hey@posthog.com)
 
-## Enterprise Self-hosted Support
+## Enterprise Self-Hosted Support
 
 PostHog Enterprise Self-Hosted Support is delivered over a shared Slack channel or email.
 
