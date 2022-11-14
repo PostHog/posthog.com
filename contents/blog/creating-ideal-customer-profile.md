@@ -25,30 +25,30 @@ If the revenue chart isn't compelling enough, knowing very specifically the user
 
 These are all example decisions we've taken because of having a clear ICP:
 
-* How you describe what your company does
-  * We're [feature-focused versus benefit focused](/blog/features-sell) in our language because our users self serve and we don't go heavy on enterprise sales
+**How do we describe what our company does?**
+- We're [feature-focused versus benefit focused](/blog/features-sell) in our language because our users self serve and we don't go heavy on enterprise sales
 
-* What your website should look and feel like
-  * We are happy including code snippets
+**What should our website should look and feel like?**
+- We are happy including code snippets
 
-* Your pricing model
-  * Transparent, self serve
+**What's our pricing model?**
+- Transparent, self serve
 
-* How you generate demand, which marketing channels you prioritize, and how you use them
-  * We have no outbound sales
-  * Word of mouth growth by not spending too much outside of the product
-  * Useful, detailed content works well
+How do we generate demand, which marketing channels should we prioritize, and how do we use them?**
+- We have no outbound sales
+- Word of mouth growth by not spending too much outside of the product
+- Useful, detailed content works well
 
-* How you postioning against competition
-  * We add features developers will want that our competitors won't
-  * We can build a brand around being for developers
+**How do we postion against competitors?**
+- We add features developers will want that our competitors won't
+- We can build a brand around being for developers
 
-* When to prioritize new features versus bugs
-  * We've found technical users have a higher bug tolerance _if_ we are very fast and communicative when a user finds one
+**How do we prioritize new features versus bugs?**
+- We've found technical users have a higher bug tolerance _if_ we are very fast and communicative when a user finds one
 
-* Which new features to prioritize
-  * We're shipping thing stechnical people want, like SQL access rather than tools for marketing reporting
-  * We focus on companies that have product market fit, which means scalability and data accuracy matter
+**Which new features do we prioritize?
+- We're shipping features stechnical people want, like SQL access rather than tools for marketing reporting
+- We focus on companies that have product market fit, which means scalability and data accuracy matter
 
 ## How we did it
 
