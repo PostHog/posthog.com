@@ -6,28 +6,25 @@ hideLastUpdated: true
 
 **[← Back to partners](/partners)**
 
-[taleno.digital](https://taleno.digital) is a Data Consultancy service that offers cost effective yet high quality Modern Data Stack solutions for Data Warehousing and Product Analytics.
-
-Helping you get up to speed in setting up using PostHog Cloud only and getting insights so you can focus on data-driven product iteration.
+[taleno.digital](https://taleno.digital) is a data consultancy service that offers cost effective, high quality solutions for data warehousing and product analytics built on the modern data stack.
 
 ## Services offered
 
 ### App
 
-taleno.digital is your analytics engineer-as-a-service so you don't need to hire an FTE. 
+taleno.digital is your analytics engineer-as-a-service, so you don't need to hire an FTE. 
 
 ### Support
 
 - Setup PostHog Cloud & Deployment
 - Handle issues / inconsistencies encountered with PostHog Cloud
-- Creation of well thought Actions, Insights & Dashboards
+- Creation of actions, insights & dashboards
 
 ### Pricing
 
-- The client should cover the monthly subscription of their PostHog Cloud on top of 1M FREE events per Month.
-- Get 30% discount if your product is B2C.
-- You only need to pay for the initial setup cost of $100 and $100 per succeeding request.
+- The client should cover the cost of their PostHog Cloud subscription on top of 1M free events per month
+- Get a 30% discount if your product is B2C
+- You only need to pay for the initial setup cost of $100, and $100 per subsequent request
 
 ## Contact
-
-posthog@taleno.digital
+Get in touch by emailing [posthog@taleno.digital](mailto:posthog@taleno.digital)
