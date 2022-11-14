@@ -63,7 +63,7 @@ Marius also tried to develop and subsequently scratched a [gRPC](https://grpc.io
 
 ### Using Celery
 
-In our main PostHog app, we use [Celery](https://docs.celeryproject.org/) to process events. When an event hits `/capture`, our API parses the request and queues the event into a job queue. Marius realized he could build a new server with the [Node port of Celery](https://celery-node.js.org/) and plug that in as another step in the existing pipeline.
+In our main PostHog app, we used [Celery](https://docs.celeryproject.org/) to process events asynchronously. When an event hits `/capture`, our API parses the request and queues the event into a job queue. Marius realized he could build a new server with the [Node port of Celery](https://celery-node.js.org/) and plug that in as another step in the existing pipeline.
 
 This would solve all pending issues: we wouldn't have to worry about Python dependencies, we could potentially run untrusted code in a fast sandbox, there would be no process management for a gRPC link, and we could eventually rewrite the entire ingestion pipeline in Node to get a speed boost over Python.
 
@@ -79,9 +79,9 @@ The first and last steps were easy enough with our app structure and Celery, but
 
 The solution to the second step was to use VMs (Virtual Machines). Turns out Node. v14 has a [built-in VM module](https://nodejs.org/docs/latest-v17.x/api/vm.html) that enables running custom JavaScript in a separate context.
 
-Using the VM module enabled Javascript code to be “compiled and run immediately or compiled, saved, and run later.” The downside was that “the VM module is not a security mechanism. Do not use it to run untrusted code.” This wasn’t unexpected. [Privilege escalation](https://en.wikipedia.org/wiki/Privilege_escalation) and [resource exhaustion](https://en.wikipedia.org/wiki/Resource_exhaustion_attack) attacks are real. We couldn’t avoid them, but we could build strategies to mitigate them.
+Using the VM module enabled us to run custom JavaScript code during event ingestion. The downside was that “the VM module is not a security mechanism. Do not use it to run untrusted code.” This wasn’t unexpected. [Privilege escalation](https://en.wikipedia.org/wiki/Privilege_escalation) and [resource exhaustion](https://en.wikipedia.org/wiki/Resource_exhaustion_attack) attacks are real. We couldn’t avoid them, but we could build strategies to mitigate them.
 
-Node's VM module also puts your code in an isolated context, has ~~limited~~ no support for secure communications with the host, and has holes like this:
+Node's VM module puts your code in an isolated context, has ~~limited~~ no support for secure communications with the host, and has holes like this:
 
 ```js
 const vm = require('vm');
@@ -177,7 +177,7 @@ And here’s a basic `plugin.json` that goes along with it:
 
 ### App functions and processes
 
-As you can see by reading the above examples, the index file exports functions that take objects PostHog provides (like configuration or event data). Specifically, our PostHog exports predefined functions that run on conditions like:
+As you can see by reading the above examples, the index file exports functions that take objects PostHog provides (like configuration or event data). Specifically, PostHog apps export predefined functions that run on conditions like:
 
 - event ingestion (`processEvent`)
     - useful for modifying incoming data, such as adding geographic data properties or dropping events matching a property filter.
@@ -186,7 +186,7 @@ As you can see by reading the above examples, the index file exports functions t
 - once processing is complete (`exportEvents`, `onEvent`)
     - useful for exporting data to external services such as BigQuery, Snowflake, or Databricks.
 
-When users upload apps to PostHog, these we export these functions from the files. From there they run as callable functions on VMs as part of our ingestion pipeline and also have access to extensions like storage, caching, and logging. Overall, it looks like this:
+When users upload apps to PostHog, we import these functions from the files, and run them through [custom babel transforms](https://github.com/PostHog/posthog/tree/master/plugin-server/src/worker/vm/transforms) for extra security. From there they run as callable functions on VMs as part of our ingestion pipeline and also have access to extensions like storage, caching, and logging. Overall, it looks like this:
 
 ![VM](../images/blog/how-we-built-an-app-server/vm.png)
 
@@ -222,11 +222,11 @@ graph TD
 
 ### Using Kafka and Redis
 
-Kafka manages our data flows. It helps us batch, split, and manage parallel work for our apps. For example, Kafka helps us batch and retry events when apps call `processEvent`. We use a Kafka topic (which holds messages and events in a logical order) to continue the flow of data.
+Kafka manages our data flows. It helps us batch, split, and manage parallel work for our apps. For example, Kafka helps us batch and retry events when apps call `processEvent`. We use a Kafka topic (fancy name for "queue") to continue the flow of data.
 
 Another service we use is Redis to cache data and back the queue for apps. Many parts of the app are reusable and don’t need to be rebuilt each time we run the app. There is data we only need to keep around temporarily. Using Redis to cache data like this dramatically improved app performance and lowered the number of app servers we needed to run.
 
-We also use a couple of Redis patterns. First, we use [Redlock](https://redis.io/docs/manual/patterns/distributed-locks/) for the scheduler and job queue consumer. Redlock ensures these processes are only run on one machine because we only want them to run once. If they ran more than once, we’d have duplication and issues. For example, we only need one scheduler to do the basic work of saying what to do at what time. Second, we use [Pub/Sub](https://redis.io/docs/manual/pubsub/) to check for updates to the apps.
+We use a couple of Redis patterns. First, we use [Redlock](https://redis.io/docs/manual/patterns/distributed-locks/) for the scheduler and job queue consumer. Redlock ensures these processes are only run on one machine because we only want them to run once. If they ran more than once, we’d have duplication and issues. For example, we only need one scheduler to do the basic work of saying what to do at what time. Second, we use [Pub/Sub](https://redis.io/docs/manual/pubsub/) to check for updates to the apps.
 
 We chose these because we used them elsewhere and they have a proven track record of working well at scale. They help the app server integrate with our existing infrastructure.
 
