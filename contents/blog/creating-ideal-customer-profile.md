@@ -39,7 +39,7 @@ How do we generate demand, which marketing channels should we prioritize, and ho
 - Word of mouth growth by not spending too much outside of the product
 - Useful, detailed content works well
 
-**How do we postion against competitors?**
+**How do we position against competitors?**
 - We add features developers will want that our competitors won't
 - We can build a brand around being for developers
 
