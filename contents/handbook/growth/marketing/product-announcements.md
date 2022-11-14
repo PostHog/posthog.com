@@ -8,7 +8,7 @@ Marketing takes responsibility for coordinating and publicizing news about PostH
 
 However, not all announcements require the same level of marketing support. We therefore group them into tiers which help us decide what level of investment is required from the Marketing team. Which tier applies is agreed upon by the Marketing and Product teams and agreement should be sought as early as possible if Marketing support is expected.
 
-The steps outlined below are a general checklist and the Marketing team will cater the level of support on a case-by-case basis.
+The steps outlined below are a general checklist and the Marketing team will cater the level of support on a case-by-case basis, assigning an owner to each item for a specific announcement. 
 
 > **Have something you want to announce?** The first step is to drop a message in the #team-marketing Slack channel so that marketing can assist and prevent overlapping comms. 
 
