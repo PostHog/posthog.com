@@ -71,6 +71,13 @@ Using the **Updating Subscriptions** flow below:
 1. Search for `startup` 
 1. Add all products (Events, Recordings) labelled with `Startup`, the user will be subscribed to the Startup plan for 1 year.
 
+### Giving customers a free trial
+
+1. Find the Organization in the Billing Service Admin portal
+2. Find the `Free Trial Until` field and update that to the appropriate date
+3. The next time that Customer visits PostHog, their `AvailableFeatures` will be updated to reflect the standard premium features
+4. Once this date passes their `AvailableFeatures` will be reset to the free plan unless they have subscribed within this time.
+
 
 ### Updating subscriptions
 
