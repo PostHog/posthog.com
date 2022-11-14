@@ -259,7 +259,6 @@ const Control = (): JSX.Element => {
                     <div className={`${gridCell} ${gridCellBottom} lg:order-7`}>
                         <Breakdown
                             priceLength={8}
-                            description="No credit card required for up to 10,000 events/mo"
                             pricingOption="cloud"
                         />
                     </div>
@@ -287,7 +286,6 @@ const Control = (): JSX.Element => {
                     <div className={`${gridCell} ${gridCellBottom} lg:order-8`}>
                         <Breakdown
                             priceLength={6}
-                            description="No credit card required for up to 500 sessions/mo"
                             pricingOption="session-recording"
                         />
                     </div>

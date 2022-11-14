@@ -376,8 +376,8 @@
                             "url": "/handbook/engineering/cloud-providers"
                         },
                         {
-                            "name": "Breaking glass to debug PostHog Cloud",
-                            "url": "/handbook/engineering/production-access"
+                            "name": "How-to access PostHog Cloud infra",
+                            "url": "/handbook/engineering/how-to-access-posthog-cloud-infra"
                         }
                     ]
                 },
@@ -408,12 +408,54 @@
                     "url": "",
                     "children": [
                         {
+                            "name": "Overview",
+                            "url": "/handbook/engineering/clickhouse"
+                        },
+                        {
                             "name": "Data storage or what is a MergeTree",
                             "url": "/handbook/engineering/clickhouse/data-storage"
                         },
                         {
                             "name": "Data replication",
                             "url": "/handbook/engineering/clickhouse/replication"
+                        },
+                        {
+                            "name": "Data ingestion",
+                            "url": "/handbook/engineering/clickhouse/data-ingestion"
+                        },
+                        {
+                            "name": "Working with JSON",
+                            "url": "/handbook/engineering/clickhouse/working-with-json"
+                        },
+                        {
+                            "name": "Query performance",
+                            "url": "/handbook/engineering/clickhouse/performance"
+                        },
+                        {
+                            "name": "Operations",
+                            "url": "/handbook/engineering/clickhouse/operations"
+                        },
+                        {
+                            "name": "Schema case studies",
+                            "url": "",
+                            "children": [
+                                {
+                                    "name": "Overview",
+                                    "url": "/handbook/engineering/clickhouse/schema"
+                                },
+                                {
+                                    "name": "sharded_events",
+                                    "url": "/handbook/engineering/clickhouse/schema/sharded-events"
+                                },
+                                {
+                                    "name": "app_metrics",
+                                    "url": "/handbook/engineering/clickhouse/schema/app-metrics"
+                                },
+                                {
+                                    "name": "person_distinct_id",
+                                    "url": "/handbook/engineering/clickhouse/schema/person-distinct-id"
+                                }
+                            ]
                         }
                     ]
                 },
@@ -633,6 +675,10 @@
                             "url": "/docs/self-host/deploy/hobby"
                         },
                         {
+                            "name": "EU Hosting Companies",
+                            "url": "/docs/self-host/deploy/hosting-in-eu"
+                        },
+                        {
                             "name": "Other platforms",
                             "url": "/docs/self-host/deploy/other"
                         }
@@ -819,12 +865,12 @@
                     "url": "/docs/self-host/deploy/troubleshooting"
                 },
                 {
-                    "name": "Managing hosting costs",
-                    "url": "/docs/self-host/deploy/hosting-costs"
+                    "name": "Support for self-hosting (open-source and enterprise)",
+                    "url": "/docs/self-host/deploy/support"
                 },
                 {
-                    "name": "EU-only hosting",
-                    "url": "/docs/self-host/deploy/hosting-in-eu"
+                    "name": "Managing hosting costs",
+                    "url": "/docs/self-host/deploy/hosting-costs"
                 }
             ]
         },
@@ -1701,7 +1747,7 @@
                 },
                 {
                     "name": "Trends",
-                    "url": "/tutorials/categories/session-recording"
+                    "url": "/tutorials/categories/trends"
                 }
             ]
         },

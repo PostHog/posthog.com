@@ -27,7 +27,7 @@ export default function WhatsNext() {
 
                     <p>We'd love to get your feedback!</p>
                     
-                    <CallToAction type="secondary" size="sm" to="/docs/api" className="mb-6 md:mb-12">
+                    <CallToAction type="secondary" size="sm" to="/roadmap" className="mb-6 md:mb-12">
                         Visit our product roadmap
                     </CallToAction>
                 </>

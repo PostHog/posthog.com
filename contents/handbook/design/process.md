@@ -35,11 +35,9 @@ Design at PostHog:
 
 ## Blog artwork and marketing assets
 
-Because of the volume of content we publish, blog artwork has its own dedicated [Artwork](https://github.com/orgs/PostHog/projects/14) project board managed by Lottie.
+Because of the volume of content we publish, all requested artwork has its own dedicated [Artwork](https://github.com/orgs/PostHog/projects/65/views/2?layout=board) project board managed by Lottie. Please add a small description/brief, level of importance and a hard deadline: this will allow Lottie to priortise which projects get done first around her own sprint tasks. 
 
 When [authoring a blog post](/handbook/growth/marketing/blog), add the `Artwork` project board so we can create visuals and make sure the post is listed on our [content calendar](https://docs.google.com/spreadsheets/d/1-6QYxi46d5y88BQ8vdGWmgrFZBbCMs1CAIc5JGLuf4Y/edit) with a publish date. [Learn more about our process.](/handbook/growth/marketing/exporting-blog-post-image)
-
-It's also worth trying out [CustomHog](https://www.figma.com/file/HwUmk7WqccLkGgNNGAs4zN/Art-board?node-id=4168%3A24524) to create your own hedgehog content. (This function is still in early stages so if help is needed just reach out to Lottie on Slack).
 
 **Important:** We prioritize feedback based on alignment with business goals. _Everyone has feedback about design._ (If feedback is more of a personal opinion than a business-related perspective, we’ll note it, but don't be offended if your feedback isn't specifically addressed!)
 

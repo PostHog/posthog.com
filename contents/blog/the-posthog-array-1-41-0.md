@@ -20,9 +20,10 @@ identify(email)                     # in the frontend
 alias(email, backend_unique_id)     # in the backend - this works
 alias(backend_unique_id, email)     # in the backend - THIS WILL NOT WORK
 ```
-> **If you haven't run async migration 0007 before:** Before updating to 1.41.0, check [ingestion warnings](#new-ingestion-warnings) and solve any outstanding issues. Then upgrade to 1.41.0 and then run async migration 0007 at `<your-posthog-site>/instance/async_migrations` (if you haven't ran 0005 yet start with that, then 0006 and finally 0007). 
 
-> **If you have completed async migration 0007 before:** If you have changed anything regarding `alias` or based on ingestion warnings or if you use groups, you must re-run async migration 0007 on top of 1.41.0 by [connecting to Postgres](/docs/self-host/deploy/troubleshooting#how-do-i-connect-to-postgres), running `UPDATE posthog_asyncmigration SET status = 0 WHERE name = '0007_persons_and_groups_on_events_backfill' AND status = 2;` and re-running 0007 at `<your-posthog-site>/instance/async_migrations`.
+> **If you haven't run async migration 0007 before:** Upgrade to 1.41 and then check [ingestion warnings](#new-ingestion-warnings) and solve any outstanding issues. After that run async migration 0007 at `<your-posthog-site>/instance/async_migrations` (if you haven't ran 0005 yet start with that, then 0006 and finally 0007).
+
+> **If you have completed async migration 0007 before:** If you have changed anything regarding `alias` or based on ingestion warnings, you must re-run async migration 0007 on top of 1.41 by [connecting to Postgres](/docs/self-host/deploy/troubleshooting#how-do-i-connect-to-postgres), running `UPDATE posthog_asyncmigration SET status = 0 WHERE name = '0007_persons_and_groups_on_events_backfill' AND status = 2;` and re-running 0007 at `<your-posthog-site>/instance/async_migrations`.
 
 ## PostHog 1.41.0 release notes
 
@@ -41,9 +42,9 @@ alias(backend_unique_id, email)     # in the backend - THIS WILL NOT WORK
 
 ### New: Persons on events on by default
 
-We used to store events in one table and persons in another table. That meant that, once you reached billion event scale, any query which touched person properties would time out. But, no longer! After running [an extensive beta since update 1.39.0](/blog/the-posthog-array-1-39-0#beta-improving-query-performance-by-combining-persons-and-events), we've now added person data onto the events themselves. This change also applies to groups, adding group properties and aggregation to the same table. 
+We used to store events in one table and persons in another table. That meant that, once you reached billion event scale, any query which touched person properties would time out. But, no longer! After running [an extensive beta since update 1.39.0](/blog/the-posthog-array-1-39-0#beta-improving-query-performance-by-combining-persons-and-events), we've now added person data onto the events themselves.
 
-You won’t see any UI changes as a result of this change — persons will still have their own Persons & Groups section on the sidebar, for example — but you will notice results are a lot (up to 400%!) faster for any queries involving persons, groups or events. This is a massive change, so be sure to [read the full announcement for more info](/blog/persons-on-events).
+You won’t see any UI changes as a result of this change — persons will still have their own Persons & Groups section on the sidebar, for example — but you will notice results are a lot (up to 400%!) faster for any queries involving persons and events. This is a massive change, so be sure to [read the full announcement for more info](/blog/persons-on-events).
 
 > **Note:** As a result of adding persons on events and changing how queries work we now have to be more strict about merging users. Because of that, we recommend double checking your `alias` calls, and following advice above [how to upgrade a self-hosted instance to 1.41.0](/blog/the-posthog-array-1-41-0). 
 

@@ -1,6 +1,6 @@
 ---
 date: 2022-10-31
-title: "How to choose and measure growth loops"
+title: "How to harness the awesome power of growth loops"
 rootPage: /blog
 sidebar: Blog
 showTitle: true

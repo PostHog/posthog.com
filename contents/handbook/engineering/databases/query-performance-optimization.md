@@ -91,7 +91,7 @@ Fixing a slow query is usually a 3 steps process:
 ```
 SELECT total_time, blk_write_time, calls, query
 FROM pg_stat_statements
-ORDER BY (blk_write_time) DESC 
+ORDER BY (blk_write_time) DESC
 LIMIT 10;
 ```
 
@@ -105,7 +105,7 @@ are Django foreign keys, it’s going to have created indices on `team_id` and
 `person_id`. We can still use the composite index for both `team_id` and
 `person_id` lookups, as mentioned on
 https://www.postgresql.org/docs/11/indexes-multicolumn.html , thus we can avoid
-having to write the other two indices by adding `db_index=False` 
+having to write the other two indices by adding `db_index=False`
 
 #### Removing foreign key fields
 
@@ -121,7 +121,7 @@ Remove field completely in next release, add note that users should update throu
 
 #### Finding and removing unused indices
 
-How do you know if they are unused? Do something like 
+How do you know if they are unused? Do something like
 
 ```
 SELECT s.schemaname,
@@ -185,13 +185,4 @@ Need more granular access to queries than these dashboards provide? Take a look 
 
 ### How-to fix slow queries
 
-TODO
-
-If you have a fix, you need to make sure it works and doesn't regress.
-Under the main repo, you can find a query performance benchmark suite at `ee/benchmarks`. These are run nightly on master. You can refresh this manually by running the [Benchmark workflow](https://github.com/PostHog/posthog/actions/workflows/benchmark.yml), which might be handy for chained PRs.
-
-After fixing an issue:
-1. Make sure there's an appropriate benchmark for the fix
-2. Add `performance` label to your PR to get information about the performance changes
-
-Only changes > 20% are reported. ClickHouse queries are run on a private ClickHouse installation with pre-populated data.
+See [ClickHouse manual](/handbook/engineering/clickhouse/) for tips and tricks.
