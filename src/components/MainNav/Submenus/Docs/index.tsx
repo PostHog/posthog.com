@@ -1,7 +1,7 @@
 import CallToAction from '../CallToAction'
 import Link from 'components/Link'
 import React from 'react'
-import SearchBar from 'components/Search/SearchBar'
+import SearchBox from 'components/Search/SearchBox'
 import { Wrapper } from '../Wrapper'
 
 interface ColMenuItems {
@@ -63,7 +63,7 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                 <section className="p-6 border-r border-gray-accent-light border-dashed">
                     <div className="flex items-center w-full justify-between opacity-70">
                         <h3 className="text-[18px] font-bold m-0 text-black pl-2">Table of contents</h3>
-                        <SearchBar label={false} className="flex-grow-0 !p-0 w-auto dark:text-white" base={'docs'} />
+                        <SearchBox label={false} className="flex-grow-0 !p-0 w-auto dark:text-white" base={'docs'} />
                     </div>
                     <ol className="m-0 list-none p-0 mt-2">
                         {leftColMenuItems.map(({ title, description, url }: ColMenuItems, index) => {

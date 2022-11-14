@@ -28,7 +28,7 @@ import { Popover } from 'components/Popover'
 import Tooltip from 'components/Tooltip'
 import { CallToAction } from 'components/CallToAction'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
-import SearchBar from 'components/Search/SearchBar'
+import SearchBox from 'components/Search/SearchBox'
 
 const ShareLink = ({ children, url }: { children: React.ReactNode; url: string }) => {
     const width = 626
@@ -563,7 +563,7 @@ export default function PostLayout({
             >
                 {menu && (
                     <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:block hidden relative z-20">
-                        {!hideSearch && <SearchBar base={searchFilter} />}
+                        {!hideSearch && <SearchBox filter={searchFilter} />}
                         <aside className="lg:sticky bg-tan dark:bg-primary top-10 flex-shrink-0 w-full justify-self-end px-4 lg:box-border my-10 lg:my-0 lg:py-4 mr-auto overflow-y-auto lg:h-[calc(100vh-40px)]">
                             <TableOfContents menuType={menuType} menu={menu} />
                         </aside>

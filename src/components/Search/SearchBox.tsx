@@ -1,22 +1,28 @@
+import '@docsearch/css/dist/modal.css'
+import '@docsearch/css/dist/_variables.css'
+
 import React from 'react'
 import { DocSearchModal } from '@docsearch/react'
+import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
+import { useValues } from 'kea'
 import { createPortal } from 'react-dom'
 
 type SearchBoxProps = {
+    size: 'small' | 'large'
     placeholder?: string
     filter?: string
+    label?: boolean
+    className?: string
 }
 
-export const SearchBox: React.FC<SearchBoxProps> = ({ placeholder, filter }) => {
-    const [query, setQuery] = React.useState<string>('')
+export const SearchBox: React.FC<SearchBoxProps> = ({ size, placeholder, filter, label = true, className }) => {
     const [searchOpen, setSearchOpen] = React.useState<boolean>(false)
+    const { posthog } = useValues(posthogAnalyticsLogic)
 
-    const handleSubmit = (event: React.FormEvent) => {
+    const handleSearchBoxClick = (event: React.MouseEvent) => {
         event.preventDefault()
-
-        if (query.trim()) {
-            setSearchOpen(true)
-        }
+        setSearchOpen(true)
+        posthog?.capture('docs_search_used')
     }
 
     return (
@@ -28,14 +34,13 @@ export const SearchBox: React.FC<SearchBoxProps> = ({ placeholder, filter }) => 
                         appId="B763I3AO0D"
                         indexName="posthog"
                         apiKey="f1386529b9fafc5c3467e0380f19de4b"
-                        initialQuery={query}
                         onClose={() => setSearchOpen(false)}
                         searchParameters={filter && { facetFilters: [`tags:${filter}`] }}
                     />,
                     document.body
                 )}
 
-            <form onSubmit={handleSubmit} className="flex items-center relative m-0 w-full max-w-lg">
+            <button onClick={handleSearchBoxClick} className="flex items-center relative m-0 w-full max-w-lg">
                 <div className="absolute left-4 w-4 h-4">
                     <svg className="opacity-50" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
                         <g opacity="1" clipPath="url(#a)">
@@ -51,19 +56,10 @@ export const SearchBox: React.FC<SearchBoxProps> = ({ placeholder, filter }) => 
                         </defs>
                     </svg>
                 </div>
-                <input
-                    onChange={(e) => setQuery(e.target.value)}
-                    value={query}
-                    name="docs-search"
-                    placeholder={placeholder || 'Search...'}
-                    autoFocus={true}
-                    className="pl-10 py-3 text-base text-left text-gray bg-white dark:bg-gray-accent-dark dark:text-white rounded-full w-full md:w-[300px] mdlg:w-[400px] lg:w-[375px] xl:w-[500px] ring-red shadow-lg"
-                />
-
-                <button className="hidden px-6 py-2.5 bg-red text-lg shadow-md rounded-sm text-white font-bold">
-                    Search
-                </button>
-            </form>
+                <div className="pl-10 py-3 text-base text-left text-gray bg-white dark:bg-gray-accent-dark dark:text-white rounded-full w-full md:w-[300px] mdlg:w-[400px] lg:w-[375px] xl:w-[500px] ring-red shadow-lg">
+                    {placeholder || 'Search...'}
+                </div>
+            </button>
         </>
     )
 }

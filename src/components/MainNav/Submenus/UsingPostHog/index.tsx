@@ -3,7 +3,7 @@ import React from 'react'
 import RightCol from '../RightCol'
 import CallToAction from '../CallToAction'
 import { Wrapper } from '../Wrapper'
-import SearchBar from 'components/Search/SearchBar'
+import SearchBox from 'components/Search/SearchBox'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 
@@ -97,10 +97,10 @@ export default function UsingPosthog({ referenceElement }: { referenceElement: H
                         <div className="md:p-6 md:mb-0 mb-4">
                             <div className="flex items-center w-full justify-between opacity-70">
                                 <h3 className="text-[18px] font-bold m-0 text-black pl-2">Product manual</h3>
-                                <SearchBar
+                                <SearchBox
                                     label={false}
                                     className="flex-grow-0 !p-0 w-auto dark:text-white"
-                                    base={'docs'}
+                                    filter={'docs'}
                                 />
                             </div>
                             <ol className="m-0 list-none p-0 mt-2">
