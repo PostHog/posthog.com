@@ -46,7 +46,7 @@ How do we generate demand, which marketing channels should we prioritize, and ho
 **How do we prioritize new features versus bugs?**
 - We've found technical users have a higher bug tolerance _if_ we are very fast and communicative when a user finds one
 
-**Which new features do we prioritize?
+**Which new features do we prioritize?**
 - We're shipping features stechnical people want, like SQL access rather than tools for marketing reporting
 - We focus on companies that have product market fit, which means scalability and data accuracy matter
 
