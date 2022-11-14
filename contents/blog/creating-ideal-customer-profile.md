@@ -52,13 +52,13 @@ These are all example decisions we've taken because of having a clear ICP:
 
 ## How we did it
 
-!> I'm going to assume you're building a SaaS product for paying users. You can apply this principles to other stuff as you see fit.
+> I'm going to assume you're building a SaaS product for paying users. You can apply these principles to other stuff as you see fit.
 
-We had quite a bit of demand for a paid product last summer. We already had a large open source community, and we listed a paid product on our website – every week we were getting quite a few people asking about it. Whilst you may not have such an advantage, the same thing applies if you're having lots of outbound sales conversations and struggling to close deals consistently.
+We had quite a bit of demand for a paid product last summer. We already had a large open source community, and we listed a paid product on our website – every week we were getting quite a few people asking about it. 
 
-Whilst we had a rough idea of the features, we weren't 100% sure which customers to focus on or how to price it. 
+Whilst you may not have such an advantage, the same thing applies if you're having lots of outbound sales conversations and struggling to close deals consistently.
 
-We created a list of very specific things that we felt _could_ be part of our ICP.
+We had a rough idea of the features, we weren't 100% sure which customers to focus on or how to price it. To help, we created a list of very specific things that we felt _could_ be part of our ICP.
 
 These were _needs_ and _haves_ that our customers had in common. Things like:
 
