@@ -24,7 +24,7 @@ v1:
 
 v2:
 
-- Use Loom, slightly upgrade equipment, more advanced (longer) tutorials, more work on script, a freelance editor, and custom thumbnails (from Lottie).
+- Use Loom, slightly upgrade equipment, more advanced (longer) tutorials, more work on the script, a freelance editor, and custom thumbnails (from Lottie).
 - Goal: consistently publish 2 higher quality videos per week, some reaching x000s  of views, >5 signups attributable per week.
 
 v3:
