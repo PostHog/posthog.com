@@ -25,7 +25,7 @@ As Segment does not load any of our custom Javascript, it has limitations and by
 
 If you would like these additional features, as well as any other functions of our [JS library](/docs/integrate/client/js), you can follow the instructions below to continue using Segment `analytics` but with additional PostHog functionality.
 
-1. In additon to Segment, install your [PostHog JS snippet](/docs/integrate/client/js#installation)
+1. In addition to Segment, install your [PostHog JS snippet](/docs/integrate/client/js#installation)
 2. Modify the initialisation as documented below to pass the segment `analytics` through for PostHog JS to sync with
 
 ```js
