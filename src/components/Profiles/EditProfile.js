@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Form, Field, Formik } from 'formik'
 import Button from 'components/CommunityQuestions/Button'
+import Icons, { Markdown } from 'components/Icons'
 
 const fields = {
     first_name: {
@@ -23,7 +24,7 @@ const fields = {
                 as="textarea"
                 type="text"
                 name="biography"
-                placeholder="Biography"
+                placeholder="280 characters or less..."
                 className="py-2 px-4 text-lg rounded-md w-full dark:text-primary border-gray-accent-light border mb-2"
             />
         ),
@@ -76,6 +77,11 @@ export default function EditProfile({ profile, onSubmit }) {
             {({ isSubmitting, isValid, values, setFieldValue, submitForm }) => {
                 return (
                     <Form className="m-0">
+                        <h2>Update profile</h2>
+                        <p>
+                            Tip: Be sure to use full URLs when adding links to your website, GitHub, LinkedIn and
+                            Twitter (start with https)
+                        </p>
                         <div className="grid grid-cols-2 gap-x-4 gap-y-4 m-0">
                             {Object.keys(values).map((key) => {
                                 const field = fields[key]
@@ -95,6 +101,11 @@ export default function EditProfile({ profile, onSubmit }) {
                                 )
                             })}
                         </div>
+
+                        <p className="-mt-2 text-sm flex items-center space-x-2">
+                            <Markdown />
+                            <span>Markdown is allowed - even encouraged!</span>
+                        </p>
 
                         <Button loading={isSubmitting} disabled={isSubmitting || !isValid} type="submit">
                             Update
