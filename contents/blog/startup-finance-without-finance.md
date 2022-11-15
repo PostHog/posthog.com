@@ -120,7 +120,7 @@ Once you're done, this is how to get it into Pry:
 - Create a new formula, call it something like 'MRR' and set it to just be equal to the Total MRR input
 - In the right hand pane, create a new Output, select your new formula from the drop down menu and map it to 'Income' or 'Revenue'
 
-Phew! If you make changes to your Google Sheet in the future, remember to come back to this Model page and click the refresh button in the top left to make sure Pry is pulling your very latest data. 
+Phew! If you make changes to your Google Sheet in the future, remember to come back to this Model page and click the refresh button in the top left to make sure Pry is pulling your very latest data. Don't worry - Google Sheets will automatically update your Named Ranges as well if you add any new rows, so it won't break your Pry model. 
 
 If this has worked, you should see all the revenue being projected forward in your main Financials tab in Pry. 
 
