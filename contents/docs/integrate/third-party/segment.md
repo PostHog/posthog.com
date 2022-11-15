@@ -21,12 +21,12 @@ Make sure you have a [Segment account](https://segment.com/docs/#getting-started
 
 ### Full Segment setup (all features supported)
 
-As Segment does not load any of our custom Javascript, it has limitations and by default cannot support other features of PostHog such as **autocapture**, **Session Recording**, **Feature Flags**, **heatmaps** or the **toolbar**. Segment is also more easily blocked by ad-blockers.
+As Segment does not load any of our custom Javascript, it has limitations and by default cannot support other features of PostHog such as **autocapture**, **session recording**, **feature flags**, **heatmaps** or the **toolbar**. Segment is also more easily blocked by ad-blockers.
 
 If you would like these additional features, as well as any other functions of our [JS library](/docs/integrate/client/js), you can follow the instructions below to continue using Segment `analytics` but with additional PostHog functionality.
 
 1. In addition to Segment, install your [PostHog JS snippet](/docs/integrate/client/js#installation)
-2. Modify the initialisation as documented below to pass the segment `analytics` through for PostHog JS to sync with
+2. Modify the initialization as documented below to pass the segment `analytics` through for PostHog JS to sync with:
 
 ```js
 
