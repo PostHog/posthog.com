@@ -98,11 +98,9 @@ Thus we needed an abstraction. The two most popular are `isolated-vm` and `vm2` 
 
 - [`vm2`](https://github.com/patriksimek/vm2) has a different isolation model. Each "VM" runs in an isolated NodeVM context, in the same thread as the rest of the app. There are no memory or CPU limits we can enforce. You run the code locally, but don’t share any variables with the host app.
 
-While `isolated-vm` felt like a great fit because of its emphasis on security, its implementation [wasn't a success](https://github.com/PostHog/posthog/issues/6855#issuecomment-853879421).
+While `isolated-vm` felt like a great fit because of its emphasis on security, its implementation [wasn't a success](https://github.com/PostHog/posthog/issues/6855#issuecomment-853879421). Narius would have had to implement proxying similar to `vm2` just to get fetch working, and that wasn't worth the effort.
 
-> At the end of the day, I (Marius) would have had to implement some proxying code similar to vm2, just to get fetch working, and decided it's not worth the effort, considering the time budget and the extremely likely case that I'll leave in some security holes.
-
-`vm2` didn't have this problem, as it had its own system of proxies that make sharing code between the host and the VM seamless.
+`vm2` had its own system of proxies that make sharing code between the host and the VM seamless.
 
 Because of this, we decided to change our security model. On PostHog Cloud, we would vet the apps ourselves, before allowing everyone to use them. Self-hosted users were free to write and use as many [arbitrary apps](https://github.com/PostHog/posthog/issues/6855) as they please.
 
@@ -125,7 +123,7 @@ After creating a basic MVP, and seeing the benefits of its usage, work continued
 
 Before we get any deeper, it's worth recapping apps structure and features as they are now. 
 
-### Structuring apps
+### App structure
 
 The basic structure of an app has stayed the same since the JavaScript rebuild. Each app contains two key files:
 
