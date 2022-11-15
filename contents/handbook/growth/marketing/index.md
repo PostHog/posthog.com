@@ -16,7 +16,7 @@ PostHog's [vision](https://posthog.com/handbook/strategy/overview#long-term-visi
 
 ### Things we want to be brilliant at
 
-- **Acting as the newsroom of PostHog:** We actively engage with engineering teams (like a journalist would), find out what they’re working on and partner with them to amplify what they are doing.
+- **Acting as the newsroom of PostHog:** We actively engage with engineering teams (like a journalist would engage with subjects), find out what they’re working on and partner with them to amplify what they are doing.
  
 - **Word of mouth mindset:** By IPO, we want to have built a hugely successful company driven primarily by word of mouth, rather than paid ads or PR.
 
