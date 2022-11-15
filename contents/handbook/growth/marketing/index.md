@@ -34,7 +34,7 @@ PostHog's [vision](https://posthog.com/handbook/strategy/overview#long-term-visi
 
 -  **Developer influencers:** A small but growing trend in the industry, we could be one of the first to capitalize on this, especially as they are relevant to word of mouth.
 
-- **Social media:** This is different from 'being cool and interesting people in online communities'. We don't get high quality traction (yet) on places like LinkedIn/Twitter, and we're not spending any time at all on Facebook/Instagram/TikTok. We are currently trying out James H's personal Twitter and LinkedIn accounts, as well as YouTube and TikTok. 
+- **Social media:** This is different from 'being cool and interesting people in online communities'. We don't get high quality traction (yet) on places like LinkedIn/Twitter, and we're not spending any time at all on Facebook/Instagram. We are currently trying out James H's personal Twitter and LinkedIn accounts, as well as YouTube and TikTok. 
 
 - **Highly visible at industry events:** We could become known for giving good talks at events, because this enhances word of mouth and is a natural extension of being good at creating good content.
  
