@@ -46,13 +46,15 @@ In 2026: _The leading product teams use PostHog to build the best products._
 
 We are the first product tool that technical founders integrate into their product. We scale with them from their first user; to their first dollar; to 1000 person engineering orgs; IPO; and beyond. The best product people don't want to join a company that's not using PostHog.
 
+We become the customer's data platform for customer and product data. We enable other users throughout the org to use customer and product data initially by building tools for the data engineers. Overall, we replace the data warehouse and CDP.
+
 We go public with $100M ARR from the following:
 
 1) 1,000 companies building successful products with us, paying $25K each
 2) 500 companies building successful products with us, paying $50K each
 3) 50 companies building successful products with us, paying $1M each
 
-We did this by first focusing on fast-growing self-serve startups to nail (1) and (2). This gave us the strong brand, product, and financial position to win (3).
+We did this by first focusing on high-growth self-serve startups to nail (1) and (2). This gave us the strong brand, product, and financial position to win (3).
 
 **How do we help others build successful products?**
 
@@ -70,10 +72,8 @@ We did this by first focusing on fast-growing self-serve startups to nail (1) an
      * Currently, **individual contributors** in the product team like us. Particularly the engineers.
      * We want all the individual contributors to **love** PostHog and help them succeed in building better products.
      * We then move to features that help them succeed as a team meaning tools for managers and enabling collaboration.
-     * Progressively, we move up the org until we are the indispensable product tool from individual members of the product team up to the CPO/CTO/CEO.
    * **Company size**:
      * Currently, solo founders and small teams like PostHog.
-     * We want to become a tool that the product team **loves**. 
      * We should clearly be known as the first tool that any CTO or product team installs for a new product. This is particularly true for startups backed by the leading VCs/accelerators.
      * We truly scale with the company up to 10,000 person orgs.
      * Our immediate focus is to make sure PostHog is loved by the leading growth-stage companies with 20-500 employees.
@@ -82,8 +82,7 @@ We did this by first focusing on fast-growing self-serve startups to nail (1) an
      * We want to make a product that the power-users that can code truly love.
      * We start with providing maximum flexibility for the power-users. This means a more flexible UX including SQL, so users can measure and diagnose product performance better through direct data access.
      * We then build opinionated workflows to guide users through the best practices.
-     * But PostHog should still be intuitive for those who don't code. They feel they gain new powers/skills by using PostHog.
-     * We also want PostHog to still be a good experience for those that aren't familiar with the technical details of the product.
+     * But PostHog should still be intuitive for those who don't code.
    * **Functionality and community**
      * We need to make sure our existing products in the platform have any major gaps in functionality closed, and that they integrate well with the rest of the product.
        * This allows us to move people from 3rd party products, for a simpler stack and faster growth and reinvestment.
@@ -96,12 +95,12 @@ We did this by first focusing on fast-growing self-serve startups to nail (1) an
    * Users can use our core applications to make data-driven decisions quickly and deeply. They should have full direct access as needed so they don't need another data warehouse.
    * We should build the all key imports and exports that are needed. Customers should be able to contribute any remaining connectors which we maintain to a high standard.
    * Long-term PostHog should interoperate with many different database backends meaning we can ride the wave of technological progress rather than being disrupted by it.
-   * PostHog's export should put us in the critical path of the data being used to power the product.
+   * PostHog's data should be used to power the product — in the critical path to production.
 3. Ultra-streamlined and product-led sales motion
     * Currently, we are excellent in demos, and we have figured out the basics of customer success and sales.
     * Our data and processes should be considerably more automated to enable high-quality interactions at scale.
 4. Apps
-   * PostHog should be high-extensible
+   * PostHog should be highly-extensible
      * API: We should expose the same public API as we use internally. It should be well-documented and the docs should be world-class.
      * Apps can be broadly classified into: (1) internal apps (you build it, you use it) - mainly for internal tools. (2) community shared apps (someone else builds, you use it). (3) indie tools (someone else builds it, you pay them some money to use it. (4) VC companies (it's someone else's proper company built on Posthog, you pay them significant amounts of money to use it)
      * We should focus on internal and community apps. When we have a sufficient number of active companies (likely post $100M ARR) we might want to pursue indie tools and even VC-backed companies.
@@ -117,9 +116,9 @@ We set [quarterly OKRs](/handbook/strategy/objectives) to keep us on track.
 
 While there is value in the items on the right, we value the items on the left more.
 
-**Self-serve vs. Enterprise**
+**High-growth startups vs. Enterprise**
 
-* _Self-serve_: focus on acquiring more high quality self-serve customers (who may start using for free) over big ticket contracts, so we can get better feedback and learn faster.
+* _High-growth startups_: focus on acquiring more high-growth customers (who may start using for free) over big-ticket contracts from slower-moving organizations that require long procurement processes. So we can continue to win through our product-led growth motion, get better feedback and learn faster.
 
 **Opinionated vs. Flexible**
 
@@ -145,7 +144,7 @@ While there is value in the items on the right, we value the items on the left m
 
  * 2 word summary: **Nail self-serve**
     * **Customers**
-        * **Focus on large self-serve.** E.g. Large initial contracts ($20k-$70k/year) and smaller deals in organizations that will eventually become large
+        * **Focus on high-growth startups.** E.g. Large initial contracts ($20k-$70k/year) and smaller deals in organizations that will eventually become large
         * **Non Goal:** Start doing outbound sales
     * **Product**
         * **Goals:**
@@ -157,7 +156,7 @@ While there is value in the items on the right, we value the items on the left m
 
 ## Target customers for 2022
 
-Our ideal customer is a large-mid-market (~$20k-70k) who meets as many of these criteria as possible:
+Our ideal customers are high-growth startups (~$20k-70k) who meets as many of these criteria as possible:
 
 * _Needs_
   * Cares about user data
