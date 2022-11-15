@@ -287,7 +287,9 @@ All this work helped us create more secure and reliable apps. This allowed us to
 We’ve seen users large and small write apps for all sorts of use cases. There are large companies writing apps to enhance events with critical data. There are also solo devs writing apps to scratch their own itch and end up used by thousands in our community. Users write often write apps to connect or export to key services in their stack. Some examples of apps include:
 
 - "Data-in" apps like the [Hubspot](/apps/hubspot-connector), [Salesforce](/apps/salesforce-connector) (community built), [Stripe](https://github.com/PostHog/stripe-plugin), and [Shopify](/apps/shopify) connectors.
+
 - "Data-out" apps like the [BigQuery](/apps/bigquery-export), [S3](/apps/s3-export), and [Rudderstack](/apps/snowflake-export) (community built) exports.
+
 - Ingestion-filtering apps like [Property Filter](/apps/property-filter) (community built), [Property Flattener](/apps/property-flattener), and [First Time Event Tracker](/apps/first-time-event-tracker).
 
 Apps unlocked more control over data flows as well as more innovation on the PostHog platform. Users install and enable thousands of apps each month, which process billions of events in our pipeline.
