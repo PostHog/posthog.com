@@ -2312,3 +2312,21 @@
 [[redirects]]
     from = "/handbook/engineering/clickhouse/schema/overview"
     to = "/handbook/engineering/clickhouse/schema"
+
+
+# Added: 2022-11-11
+[[redirects]]
+    from = "/docs/self-host/deploy/hosting-costs"
+    to = "/docs/self-host/enterprise/hosting-costs"
+
+
+# Added: 2022-11-11
+[[redirects]]
+    from = "/docs/self-host/deploy/hobby"
+    to = "/docs/self-host/open-source/deployment"
+
+
+# Added: 2022-11-11
+[[redirects]]
+    from = "/docs/self-host/deploy/support"
+    to = "/docs/self-host/open-source/support"
