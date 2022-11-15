@@ -4,7 +4,11 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Our approach is to provide internal Marketing-as-a-Service, aka MaaS. We are an engineering-led company, and believe in product-led, word of mouth growth. The best way marketing can contribute to PostHog's success is to act as a service to our product teams and amplify the work they are doing.
+We treat Marketing as the [newsroom](https://en.wikipedia.org/wiki/Newsroom) of PostHog. What this means in practice:
+- A small, talented team of in-house content creators with strong editorial capability - our default is to keep writing in-house, not farm it out to a network of freelancers. 
+- Building a reputation for high quality, trustworthy content that is a go-to resource for our users and wider reading audience. 
+- Extreme responsiveness to opportunities, both internal and external (e.g. cool Hackathon projects, GDPR rulings). 
+- Reporting and amplifying company and product news, rather than [artificially creating news](https://en.wikipedia.org/wiki/Tomorrow_Never_Dies) or buzz by telling people what to build. 
 
 ## Marketing vision 
 
@@ -12,7 +16,7 @@ PostHog's [vision](https://posthog.com/handbook/strategy/overview#long-term-visi
 
 ### Things we want to be brilliant at
 
-- **Acting as a service to the engineering team:** We actively engage with engineering teams, find out what they’re working on and partner with them to amplify what they are doing.
+- **Acting as the newsroom of PostHog:** We actively engage with engineering teams (like a journalist would), find out what they’re working on and partner with them to amplify what they are doing.
  
 - **Word of mouth mindset:** By IPO, we want to have built a hugely successful company driven primarily by word of mouth, rather than paid ads or PR.
 
@@ -28,9 +32,9 @@ PostHog's [vision](https://posthog.com/handbook/strategy/overview#long-term-visi
 
 ### Things we might want to be good at but are still testing
 
--  **Developer influencers (maybe):** A small but growing trend in the industry, we could be one of the first to capitalize on this, especially as they are relevant to word of mouth.
+-  **Developer influencers:** A small but growing trend in the industry, we could be one of the first to capitalize on this, especially as they are relevant to word of mouth.
 
-- **Social media:** This is different from 'being cool and interesting people in online communities'. We don't get high quality traction (yet) on places like LinkedIn/Twitter, and we're not spending any time at all on Facebook/Instagram/TikTok. We are currently trying out Twitter. 
+- **Social media:** This is different from 'being cool and interesting people in online communities'. We don't get high quality traction (yet) on places like LinkedIn/Twitter, and we're not spending any time at all on Facebook/Instagram/TikTok. We are currently trying out James H's personal Twitter and LinkedIn accounts, as well as YouTube and TikTok. 
 
 - **Highly visible at industry events:** We could become known for giving good talks at events, because this enhances word of mouth and is a natural extension of being good at creating good content.
  
