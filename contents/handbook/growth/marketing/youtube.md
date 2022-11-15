@@ -35,7 +35,7 @@ v3:
 ## Distribution
 Distributing these videos will consist of:
 - Relying on YouTube's algorithm
-- Adding a link to the video in the related tutorial
+- Embed the video in the related tutorial
 - Sending to general channel in user Slack
 - If SEO or non-tutorial videos, posting on social
 
