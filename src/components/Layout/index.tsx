@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Header } from '../Header/Header'
 import { Footer } from '../Footer/Footer'
 import CookieBanner from 'components/CookieBanner'
