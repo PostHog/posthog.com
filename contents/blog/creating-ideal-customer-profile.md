@@ -77,7 +77,7 @@ We then looked at _every_ customer and how they got on. Tracking customers that 
 
 We scored each customer on our big list of needs and haves. When we looked at the differences between those that bought and were successful versus those that dragged along or maybe bought and had less success, our ideal customer profile became very obvious.
 
-## 5 reference customers
+## 5 reference customers
 
 You should focus _completely_ on your ICP. That's the point. Everything else comes from it.
 
