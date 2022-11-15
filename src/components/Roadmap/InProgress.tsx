@@ -6,15 +6,16 @@ import { Login, useUser } from 'squeak-react'
 import addToMailchimp from 'gatsby-plugin-mailchimp'
 import Spinner from 'components/Spinner'
 import { useToast } from '../../hooks/toast'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 
-export function InProgress(props: IRoadmap) {
+export function InProgress(props: IRoadmap & { className?: string; more?: boolean; stacked?: boolean }) {
     const { addToast } = useToast()
     const { user } = useUser()
-    const [more, setMore] = useState(false)
+    const [more, setMore] = useState(props.more ?? false)
     const [showAuth, setShowAuth] = useState(false)
     const [subscribed, setSubscribed] = useState(false)
     const [loading, setLoading] = useState(false)
-    const { title, githubPages, description, beta_available } = props
+    const { title, githubPages, description, beta_available, thumbnail } = props
     const completedIssues = githubPages && githubPages?.filter((page) => page.closed_at)
     const percentageComplete = githubPages && Math.round((completedIssues.length / githubPages?.length) * 100)
 
@@ -44,48 +45,59 @@ export function InProgress(props: IRoadmap) {
     }
 
     return (
-        <li className="sm:flex xl:flex-col space-y-2 sm:space-y-0 border-t border-dashed border-gray-accent-light first:border-t-0 px-4 py-4 sm:py-2 xl:pb-4 bg-white rounded-sm shadow-xl">
-            <div className="flex-1 sm:mt-2">
-                <h4 className="text-lg flex space-x-1 items-center m-0">{title}</h4>
-                <p className="m-0 text-[15px] text-black/80 inline">
-                    {more ? description : description.substring(0, 125) + (description?.length > 125 ? '...' : '')}
-                </p>
-                {!more && (description?.length > 125 || githubPages?.length > 0) && (
-                    <button onClick={() => setMore(true)} className="font-semibold text-red inline text-sm ml-1">
-                        more
-                    </button>
-                )}
-                {githubPages && (
-                    <div className="mt-4 mb-4">
-                        <h5 className="text-sm mb-2 font-semibold opacity-60">Progress</h5>
-                        <div className="h-2 flex-grow bg-gray-accent-light rounded-md relative overflow-hidden">
-                            <div
-                                style={{ width: `${percentageComplete}%` }}
-                                className={`bg-[#3FB950] absolute inset-0 h-full`}
-                            />
-                        </div>
+        <li
+            className={`border-t border-dashed border-gray-accent-light first:border-t-0 px-4 py-4 sm:py-2 xl:pb-4 bg-white rounded-sm shadow-xl ${
+                props?.className ?? ''
+            }`}
+        >
+            <div className="sm:mt-2 flex sm:flex-row sm:space-x-4 flex-col-reverse space-y-reverse sm:space-y-0 space-y-4">
+                <div className="sm:flex-grow">
+                    <h4 className="text-lg flex space-x-1 items-center !m-0">{title}</h4>
+                    <p className="m-0 text-[15px] text-black/80 inline">
+                        {more ? description : description.substring(0, 125) + (description?.length > 125 ? '...' : '')}
+                    </p>
+                    {!more && (description?.length > 125 || githubPages?.length > 0) && (
+                        <button onClick={() => setMore(true)} className="font-semibold text-red inline text-sm ml-1">
+                            more
+                        </button>
+                    )}
+                </div>
+                {thumbnail && (
+                    <div className="sm:flex-shrink-0">
+                        <GatsbyImage className="shadow-md" image={getImage(thumbnail)} />
                     </div>
                 )}
-                {githubPages && more && (
-                    <ul className="list-none m-0 p-0 pb-4 grid gap-y-2 mt-4">
-                        {githubPages.map((page) => {
-                            return (
-                                <li key={page.title}>
-                                    <Link
-                                        to={page.html_url}
-                                        className="text-[14px] flex items-start font-semibold space-x-1 text-black leading-tight"
-                                    >
-                                        <span className="inline-block mt-.5">
-                                            {page.closed_at ? <ClosedIssue /> : <OpenIssue />}
-                                        </span>
-                                        <span>{page.title}</span>
-                                    </Link>
-                                </li>
-                            )
-                        })}
-                    </ul>
-                )}
             </div>
+            {githubPages && (
+                <div className="mt-4 mb-4">
+                    <h5 className="text-sm mb-2 font-semibold opacity-60 !mt-0">Progress</h5>
+                    <div className="h-2 flex-grow bg-gray-accent-light rounded-md relative overflow-hidden">
+                        <div
+                            style={{ width: `${percentageComplete}%` }}
+                            className={`bg-[#3FB950] absolute inset-0 h-full`}
+                        />
+                    </div>
+                </div>
+            )}
+            {githubPages && more && (
+                <ul className="list-none m-0 p-0 pb-4 grid gap-y-2 mt-4">
+                    {githubPages.map((page) => {
+                        return (
+                            <li key={page.title}>
+                                <Link
+                                    to={page.html_url}
+                                    className="text-[14px] flex items-start font-semibold space-x-1 text-black leading-tight cta"
+                                >
+                                    <span className="inline-block mt-.5">
+                                        {page.closed_at ? <ClosedIssue /> : <OpenIssue />}
+                                    </span>
+                                    <span>{page.title}</span>
+                                </Link>
+                            </li>
+                        )
+                    })}
+                </ul>
+            )}
             <div className="sm:flex-[0_0_250px] xl:flex-1 flex sm:justify-end xl:justify-start">
                 <div className="mt-2 w-full">
                     {showAuth ? (
@@ -95,12 +107,13 @@ export function InProgress(props: IRoadmap) {
                                 <p className="text-sm mb-2">
                                     <strong>Note: PostHog.com authentication is separate from your PostHog app.</strong>
                                 </p>
-                                
+
                                 <p className="text-sm mb-0">
-                                    We suggest signing up with your personal email. Soon you'll be able to link your PostHog app account.
+                                    We suggest signing up with your personal email. Soon you'll be able to link your
+                                    PostHog app account.
                                 </p>
                             </div>
-                            
+
                             <Login
                                 onSubmit={(data: { email: string }) => subscribe(data?.email)}
                                 apiHost="https://squeak.cloud"
