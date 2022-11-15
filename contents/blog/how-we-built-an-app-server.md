@@ -291,7 +291,7 @@ Finally, as mentioned before, although our self-hosted instances can run whateve
 
 All this work helped us create more secure and reliable apps. This allowed us to be more confident in allowing users to build apps and users to be more confident using them.
 
-## Unlocking customization and innovation through apps
+## Unlocking customization and control through apps
 
 We’ve seen users large and small write apps for all sorts of use cases. There are large companies writing apps to enhance events with critical data. There are also solo devs writing apps to scratch their own itch and end up used by thousands in our community. Users write often write apps to connect or export to key services in their stack. Some examples of apps include:
 
@@ -301,11 +301,11 @@ We’ve seen users large and small write apps for all sorts of use cases. There 
 
 - Ingestion-filtering apps like [Property Filter](/apps/property-filter) (community built), [Property Flattener](/apps/property-flattener), and [First Time Event Tracker](/apps/first-time-event-tracker).
 
-Apps unlocked more control over data flows as well as more innovation on the PostHog platform. Users install and enable thousands of apps each month, which process billions of events in our pipeline.
+Apps unlocked more control over data flows on the PostHog platform. Users install and enable thousands of apps each month, which process billions of events in our pipeline. They use them to connect and shape their data to their needs.
 
-Building and scaling the apps fundamentally changed the way we think about our product and infrastructure. Work on apps helped our ingestion pipeline become more integrated and modular. Apps also made our product more customizable and open to permissionless innovation. 
+Building and scaling the apps fundamentally changed the way we think about our product and infrastructure. Work on apps helped our ingestion pipeline become more integrated and modular. The plugin server, now a core part of our ingestion pipeline, evolved out of the app MVP.
 
-Our vision for apps is to continue to enable more customizability of data flows and the overall PostHog experience. As an example of this, see the release of [site apps](/tutorials/build-site-app), which provides similar customizable functionality in the frontend. 
+Our vision for apps is to continue to enable more customizability of data flows. We want users to have access to the data they need to create better products, and apps are key to doing this. We also want to allow for more customization the overall PostHog experience. As an example of this, see the release of [site apps](/tutorials/build-site-app), which provides similar customizable functionality in the frontend.
 
 The ability to leverage PostHog to customize, control, and fully utilize your data will continue to improve. Apps, and many other features of PostHog, help with this. In the end, PostHog aims to help you understand your product and gives you the tools to build a better one.
 
