@@ -157,24 +157,27 @@ export default function ProfilePage({ params }: PageProps) {
                         >
                             {profile ? (
                                 <div className="space-y-8 my-8">
-                                    <section className="flex justify-between">
+                                    <section className="">
+                                        <Avatar
+                                            className="w-24 h-24 float-right bg-gray-accent dark:gray-accent-dark"
+                                            src={profile.avatar}
+                                        />
+
                                         <div className="space-y-3">
-                                            <h1 className="m-0">{name || 'Anonymous'}</h1>
+                                            <h1 className="m-0 mb-8">{name || 'Anonymous'}</h1>
                                             {profile.company_role && (
                                                 <p className="text-gray">{profile?.company_role}</p>
                                             )}
                                         </div>
 
-                                        <Avatar className="w-24 h-24" src={profile.avatar} />
+                                        {profile?.biography && (
+                                            <section>
+                                                <h3>Biography</h3>
+
+                                                <Markdown>{profile.biography}</Markdown>
+                                            </section>
+                                        )}
                                     </section>
-
-                                    {profile?.biography && (
-                                        <section>
-                                            <h3>Biography</h3>
-
-                                            <Markdown>{profile.biography}</Markdown>
-                                        </section>
-                                    )}
                                 </div>
                             ) : null}
                             {questions && questions.length >= 1 && (
