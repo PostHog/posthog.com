@@ -221,4 +221,4 @@ You may also find the following guides useful:
 
 - [Finding your north star metric](/blog/north-star-metrics): All SaaS products can benefit from a north star metric and this guide will help you find one
 
-- [How to get Stripe payment and revenue data](/tutorial/stripe-payment-data): This tutorial helps you get the data about your customers (and revenue) from Stripe you need to calculate some of these metrics
+- [How to get Stripe payment and revenue data](/tutorials/stripe-payment-data): This tutorial helps you get the data about your customers (and revenue) from Stripe you need to calculate some of these metrics

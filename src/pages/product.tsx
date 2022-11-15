@@ -1,5 +1,6 @@
 import Layout from 'components/Layout'
 import PostLayout, { TableOfContents } from 'components/PostLayout'
+import WhatsNext from 'components/Product/WhatsNext'
 import API from 'components/Product/API'
 import CTA from 'components/Product/CTA'
 import Apps from 'components/Product/Apps'
@@ -92,6 +93,7 @@ const menu = [
     { name: 'Data warehouse', url: 'data-warehouse', icon: ProductIcons.dataWarehouse },
     { name: 'Self-hosting', url: 'self-hosting', icon: ProductIcons.selfHosting },
     { name: 'API', url: 'api', icon: ProductIcons.api },
+    { name: "What's next?", url: 'roadmap', icon: ProductIcons.experiments },
 ]
 
 const Menu = () => {
@@ -199,6 +201,7 @@ export default function Product() {
                 <DataWarehouse />
                 <SelfHosting />
                 <API />
+                <WhatsNext />
                 <CTA className="mt-12 -mx-12 !px-20 !md:px-16 !-mb-12 md:!-mb-20" />
             </PostLayout>
         </Layout>

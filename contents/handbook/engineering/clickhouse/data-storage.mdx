@@ -5,7 +5,7 @@ title: Data storage or what is a MergeTree
 This document covers the answers to the following questions:
 - How data is stored on disk for MergeTree engine family tables
 - What are `parts`, `granules` and `marks`
-- How choosing the correct `ORDER BY` and `PARTITION BY` in table definitions can affect query performance and why
+- How and why choosing the correct `ORDER BY` and `PARTITION BY` in table definitions affects query performance
 - How to use `EXPLAIN` to understand what ClickHouse is doing
 - Difference between `PREWHERE` and `WHERE`
 - Data compression
@@ -64,7 +64,7 @@ LIMIT 200000000
 
 [`system.parts`](https://clickhouse.com/docs/en/operations/system-tables/parts/) table contains a lot of metadata about every part.
 
-To find out what type each part is, its size and where on disk it's located, you can run the following query:
+To find out what type each part is, its size, and where on disk it's located, you can run the following query:
 
 ```sql
 SELECT
@@ -140,16 +140,15 @@ As having a lot of small files would be disadvantageous for many reasons from qu
 regularly **merges** small parts together until they
 [reach a maximum size](https://clickhouse.com/docs/en/operations/settings/merge-tree-settings/#max-bytes-to-merge-at-max-space-in-pool).
 
-The merge combines the two parts into a new one similar to how merge sort works and atomically replaces the two source parts.
+The merge combines the two parts into a new one. This is similar to how [merge sort](https://en.wikipedia.org/wiki/Merge_sort) works and atomically replaces the two source parts.
 
 Merges can be monitored using the [`system.merges` table](https://clickhouse.com/docs/en/operations/system-tables/merges/).
-
 
 ## Query execution
 
 ### Aggregation supported by `ORDER BY`
 
-Our `sensor_values` table above is set up in a way that queries similar to the following are really fast to execute.
+Our `sensor_values` table is set up in a way that queries similar to the following are really fast to execute.
 
 ```sql
 SELECT
@@ -169,8 +168,8 @@ Executing this reports:
 ```
 
 Why can it be fast? Because ClickHouse:
-1. can leverage table `ORDER BY (site_id, toStartOfDay(timestamp), event, uuid)` clause to skip reading a lot of data
-2. is really fast and efficient about I/O and aggregation
+1. leverages table `ORDER BY (site_id, toStartOfDay(timestamp), event, uuid)` clause to skip reading a lot of data
+2. is fast and efficient about I/O and aggregation
 
 Let's dig into how the primary index for this query is used by using [`EXPLAIN`](https://clickhouse.com/docs/en/sql-reference/statements/explain/).
 
@@ -261,13 +260,13 @@ Indexes:
     Granules: 11/24415
 ```
 
-At the start of the query, clickhouse loaded the primary index of each part into memory. From this output, we know that the query first used the primary key to filter based on `site_id` and `timestamp` values stored in the index.
+At the start of the query, ClickHouse loaded the primary index of each part into memory. From this output, we know that the query first used the primary key to filter based on `site_id` and `timestamp` values stored in the index.
 This allowed it to know that only 11 out of 24415 granules (0.05%) contained any relevant data.
 
 From there it read those 11 granules (11 * 8192 rows) worth of data from `timestamp`, `side_id`, `event` and `metric_value` columns and did the
 rest of filtering and aggregation on that data alone.
 
-See [This documentation](https://kb.altinity.com/engines/mergetree-table-engine-family/pick-keys/) for a guide on how to choose `ORDER BY`.
+See [this documentation](https://kb.altinity.com/engines/mergetree-table-engine-family/pick-keys/) for a guide on how to choose `ORDER BY`.
 
 ### "Point queries" not supported by `ORDER BY`
 
@@ -277,13 +276,13 @@ Consider this query:
 SELECT * FROM sensor_values WHERE uuid = '69028f26-768f-afef-1816-521b22d281ca'
 ```
 
-Executing this reports:
+Executing this query reports:
 ```
 1 row in set. Elapsed: 0.703 sec. Processed 200.00 million rows, 3.20 GB (304.43 million rows/s., 4.87 GB/s.)
 ```
 
 While the overall execution time of this query is not bad thanks to fast I/O, it needed to read 2200x the amount of data from disk.
-As the dataset size or column sizes increase, this performance would get pathologically worse.
+As the dataset size or column sizes increase, this performance would get dramatically worse.
 
 Why is this query slower? Because our `ORDER BY` does not support fast filtering by uuid and ClickHouse needs to read the whole
 table to find a single record _and_ read all columns.
@@ -291,12 +290,11 @@ table to find a single record _and_ read all columns.
 ClickHouse provides some ways to make this faster (e.g. [Projections](https://clickhouse.com/docs/en/engines/table-engines/mergetree-family/mergetree#projections))
 but in general these require extra disk space or have other trade-offs.
 
-Always ensure your ClickHouse schema is aligned with queries that are being executed!
+ClickHouse schema must be aligned with queries that are being executed.
 
 ## `PARTITION BY`
 
 Another tool to make queries faster is `PARTITION BY`. Consider the updated table definition:
-
 
 ```sql
 CREATE TABLE sensor_values (
@@ -312,9 +310,12 @@ ORDER BY (site_id, toStartOfDay(timestamp), event, uuid)
 SETTINGS index_granularity = 8192
 ```
 
-Now, ClickHouse would generate one **partition** per 10 years of data, allowing to skip reading even the primary index
+Here, ClickHouse would generate one **partition** per 10 years of data, allowing to skip reading even the primary index in some cases.
 
 In the underlying data, each **part** would belong to a single **partition** and only parts within a partition would get merged.
+
+One additional benefit of partitioning by a derivate of timestamp is that if most queries touch recent data, you
+can also set up rules to automatically move older parts and partitions to cheaper storage or drop them entirely.
 
 ### Query analysis
 
@@ -442,70 +443,73 @@ The benefit here is that it could skip reading the primary key index for most of
 
 Use partitions wisely - each INSERT should ideally only touch 1-2 partitions and too many partitions will cause issues around replication or prove useless for filtering.
 
-Loading the primary index/marks file might also not be the bottleneck you expect so benchmark different schemas against each other.
+Loading the primary index/marks file might not be the bottleneck you expect, so be sure to benchmark different schemas against each other.
 
 See the following Altinity documentation for more guidance:
-- https://kb.altinity.com/engines/mergetree-table-engine-family/pick-keys/
-- https://kb.altinity.com/altinity-kb-schema-design/how-much-is-too-much/
+- [How to pick an ORDER BY / PRIMARY KEY / PARTITION BY for the MergeTree-family table](https://kb.altinity.com/engines/mergetree-table-engine-family/pick-keys/)
+- [How much is too much? ClickHouse limitations](https://kb.altinity.com/altinity-kb-schema-design/how-much-is-too-much/)
 
-## Other notes of MergeTree
+## Other notes on MergeTree
 
 ### Data is expensive to update
 
 Updating data in ClickHouse is expensive and analogous to a schema migration.
 
-To e.g. update an events properties, clickhouse frequently needs to:
+For example, to update an events properties, ClickHouse frequently needs to:
 - Scan all the data to find what parts contain the relevant data. This isn't often covered by `ORDER BY` and thus quite expensive.
-- Rewrite the _whole_ part (including any columns) - this could be potentially up to 150GB of data rewritten for a single update
+- Rewrite the _whole_ part (including any columns) - this could be potentially up to 150GB of data rewritten for a single update.
 
 This makes things operationally hard. We mitigate this by:
 - Writing duplicated rows for new data, using other table engines (e.g. ReplacingMergeTree) and accounting for this duplication in our queries.
-- Batching up GDPR- or other data deletions up and doing them on a schedule rather than immediately.
+- Batching up GDPR- or other data deletions and doing them on a schedule rather than immediately.
 
 ### No query planner
 
 ClickHouse doesn't have a query planner in the sense PostgreSQL or other databases do.
 
-On the one hand you often end up fighting the query planner in other databases. If we know how ClickHouse performs internally and how to translate queries into intuition
-how they're executed, we're well-equipped to deal with issues as they arise.
+On the one hand, you often end up fighting the query planner in other databases.
+If we know how ClickHouse works internally and can develop that into intuition for how SQL is executed, we're well-equipped to deal with
+performance issues as they arise.
 
-On the other this means that we'll need to be careful writing SQL as small changes can have huge performance implications.
+On the other, this means that we'll need to be careful writing SQL as small changes can have huge performance implications.
 
 Examples:
 - For best performance, ClickHouse requires you "push" predicates in WHERE clauses into sub-queries rather than filtering at the outermost query.
 - In the `sensor_values` queries above, the execution plan would have been _slightly_ more optimal if the filter condition on `toYear(timestamp)` rather than `timestamp`.
 
-One notable exception to "No query planner" is that clickhouse often pushes predicates from `WHERE` into `PREWHERE`. Filters in `PREWHERE` are executed first and ClickHouse
+One notable exception to "no query planner" is that ClickHouse often pushes predicates from `WHERE` into `PREWHERE`. Filters in `PREWHERE` are executed first and ClickHouse
 moves columns it thinks are "cheaper" or "more selective" into it. However putting the wrong column (e.g. a fat column containing JSON) in `PREWHERE` can cause performance to tank.
 
-Read more on `PREWHERE` here: https://clickhouse.com/docs/en/sql-reference/statements/select/prewhere/
+Read more on `PREWHERE` in the [ClickHouse docs](https://clickhouse.com/docs/en/sql-reference/statements/select/prewhere/).
 
 ### Data compression
 
 Compression means that if subsequent column values of a given column are often similar or identical, the data compresses really well. At PostHog
 we frequently see uncompressed / compressed ratios of 20x-40x for JSON columns and 300x-2000x for sparse small columns.
 
-Compression ratios have direct impact on query performance: IO is often the bottleneck, meaning that highly compressed data
+Compression ratios have direct impact on query performance: I/O is often the bottleneck, meaning that highly compressed data
 can be read faster from disk at the cost of more CPU work for decompression.
 
-By default columns are compressed by the `LZ4` algorithm. We've found good success using `ZSTD(3)` for storing JSON columns though - see
-[this issue](https://github.com/PostHog/posthog/issues/10616) for benchmarks.
+By default columns are compressed by the `LZ4` algorithm. We've found good success using `ZSTD(3)` for storing JSON columns - see
+[benchmarks](https://github.com/PostHog/posthog/issues/10616) for more information.
 
 ### Weak JOIN support
 
 ClickHouse excels at aggregating data from a single table at a time. If you however have a query with JOINs or subqueries, the right-hand-side of the
 JOIN would be loaded into memory first.
 
-This means that at scale JOINs can kill performance. Read more on effect of removing JOINs from our events database here:
+This means that at scale JOINs can kill performance. Read more on the effect of removing JOINs from our events database here:
 - https://github.com/PostHog/posthog/issues/7962
 - https://github.com/PostHog/product-internal/pull/240
 
 
 ## Suggested reading
 
-- https://clickhouse.com/docs/en/engines/table-engines/mergetree-family/mergetree/
-- https://clickhouse.com/docs/en/faq/general/why-clickhouse-is-so-fast/
-- https://clickhouse.com/docs/en/development/architecture/
-- https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes/sparse-primary-indexes-design/
-- https://kb.altinity.com/altinity-kb-schema-design/how-much-is-too-much/
-- https://kb.altinity.com/engines/mergetree-table-engine-family/pick-keys/
+- [ClickHouse MergeTree docs](https://clickhouse.com/docs/en/engines/table-engines/mergetree-family/mergetree/)
+- [Why is ClickHouse so fast?](https://clickhouse.com/docs/en/faq/general/why-clickhouse-is-so-fast/)
+- [Overview of ClickHouse Architecture](https://clickhouse.com/docs/en/development/architecture/)
+- [ClickHouse Index Design](https://clickhouse.com/docs/en/guides/improving-query-performance/sparse-primary-indexes/sparse-primary-indexes-design/)
+- [How much is too much? ClickHouse limitations](https://kb.altinity.com/altinity-kb-schema-design/how-much-is-too-much/)
+- [How to pick an ORDER BY / PRIMARY KEY / PARTITION BY for the MergeTree-family table](https://kb.altinity.com/engines/mergetree-table-engine-family/pick-keys/)
+
+Next in the ClickHouse manual: [Data replication](/handbook/engineering/clickhouse/replication)

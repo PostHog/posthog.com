@@ -33,7 +33,7 @@ Hero.args = {
     subtitle:
         'PostHog’s self-hosted analytics platform helps teams better understand how their products are being used. Unlike Google Analytics, PostHog is open-source and can be deployed on your existing infrastructure.',
     ctas: [
-        <CallToAction key={0} href="/signup">
+        <CallToAction key={0} href="https://app.posthog.com/signup">
             Get started - free
         </CallToAction>,
         <CallToAction key={1} href="/book-a-demo" type="outline">

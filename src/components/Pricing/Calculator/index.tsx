@@ -223,8 +223,7 @@ export default function Calculator({
             className="bg-transparent w-full"
         >
             <div>
-                <h4 className="text-lg font-bold m-0 ">Pricing breakdown</h4>
-                <p className="text-sm mb-2 text-semibold">Pay per event</p>
+                <h4 className="text-base font-bold m-0 ">Volume discounts</h4>
                 {pricingOption && (
                     <>
                         <ul className="grid gap-y-1 m-0 p-0">
