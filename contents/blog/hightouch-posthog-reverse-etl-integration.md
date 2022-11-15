@@ -47,7 +47,7 @@ You can read more about Hightouch's PostHog integration [in its documentation](h
 
 ## Why is this useful?
 
-Let's say your marketing team uses a CRM. It's syncing customer data into your data warehouse, such as names, email addresses, how they found your product, job title, pricing information and organization data. This is all contextual data you can use in PosHog.
+Let's say your marketing team uses a CRM. It's syncing customer data into your data warehouse, such as names, email addresses, how they found your product, job title, pricing information and organization data. This is all contextual data you can use in PostHog.
 
 Once this data is synced into 'Persons' in PostHog, you can [create Cohorts](/tutorials/cohorts) of users with this additional data. You could, for example, create Cohorts based on:
 
