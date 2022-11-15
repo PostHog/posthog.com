@@ -1,6 +1,6 @@
 ---
 date: 2022-11-07
-title: "How we built an app server (from MVP to billions of events)"
+title: "How PostHog built an app server (from MVP to billions of events)"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -11,21 +11,23 @@ featuredImageType: full
 categories: ["Inside PostHog"]
 ---
 
-As a product analytics and data tool company, we ingest and process billions of events to help companies understand their products and build better ones. PostHog has many tools to help them do this such as customizable event capture, client and server libraries, data insights, and more.
+PostHog's mission is to increase the number of successful products in the world. To achieve it, we're building a comprehensive [suite of analytics and data tools](/product) and we're only getting started – see [our roadmap](/roadmap) for a look at what we're working on now. 
 
-We are constantly trying to help users do more with their data, but sometimes we can't build the customized solution they need. In this case, we aim to give users the tools to build it themselves. At one point, this thinking led us to realize users needed the ability to customize data processing. Many users wanted to add geographic data to events, get events from CRMs, export data to BigQuery, and more. Use cases were endless, so we needed to give them the ability to do this themselves.
+Earlier in our history, users frequently asked us for ways to enrich or do more with their data. They wanted to add geographic data to events, get events from CRMs, export and import data from other sources, and more. 
 
-To do this, we needed to add the ability to build and use apps integrated into our data pipeline where users send their events. The apps had to run tasks, process and modify events, and connect to external services. Users needed to be able to customize their data flows, creating solutions to their endless use cases.
+We couldn't build every solution ourselves, so we needed to enable PostHog users to customize their data flows, and create solutions to their endless use cases. We found the answer at our Tuscany offsite: an app platform that enabled users to build apps integrated into our data pipeline.
 
-Like many features, building this started as a hackathon MVP and developed into a service that now handles billions of events. Here are how we built it and the lessons we learned along the way.
+This is the story of how [PostHog Apps](/apps) went from three-day MVP into a service that handles billions of events – and all the lessons we learned along the way.
 
-## The three-day app MVP
+## Part 1: Building an MVP in three days
 
-Apps started as an MVP that came together in 3 days. Marius created it to scratch his itch for a world map that existed in Google Analytics but didn’t in PostHog. The map required location data from IP addresses. There were many services to do this, but connecting them to event data going was difficult.
+PostHog Apps are the brainchild of our [first ever hire](/blog/posthog-first-five), Marius Andra. 
+
+Marius wanted to build a Google Analytics-style world map view for PostHog during our [insert location] offsite hackathon, but he had a problem. The map required location data from IP addresses but, while there were many services to do this, connecting them to event data was difficult.
 
 ![Map](../images/blog/how-we-built-an-app-server/map.png)
 
-The idea expanded to enable more modification of the events pipeline such as backing up data to S3, syncing GitHub stars, or getting customer feedback.
+His solution was the first ever PostHog app, [GeoIP](/apps/geoip-enrichment), but the project soon expanded to enable more modification of the events pipeline, such as backing up data to S3, syncing GitHub stars, or getting customer feedback.
 
 ### Arbitrary app code in Python
 
@@ -47,27 +49,28 @@ class ExamplePlugin(PluginBaseClass):
         pass
 ```
 
-Other features added included a plugin repository, an interface to configure the apps, and a CLI to preconfigure apps for custom installations. Marius built two sample plugins with it: the currency normalizer (convert event properties to a single currency), and the coveted GeoIP app.
+Other features added included a plugin repository, an interface to configure the apps, and a CLI to preconfigure apps for custom installations. Marius built two sample plugins with it: the [currency normalizer](/apps/currency-normalization) (convert event properties to a single currency), and the coveted GeoIP app.
 
-It didn’t take long for cracks to appear. First, it’s nearly impossible to manage Python dependencies via multiple `requirements.txt` files. There's no way to tell which dependencies your plugin's dependencies will install, without first installing them. There is [nothing like `pip --dry-run`](https://github.com/pypa/pip/issues/53). You need to install the `pip` package and run an `__init__.py` script inside the package to get its dependency tree.
+This was a promising start, but it didn’t take long for cracks to appear. 
 
-What's more, all dependencies get installed together. This makes it just a matter of time before a plugin overrides an app dependency (e.g. `django`), and brings everything crashing down. This wasn’t going to work for us, so we needed to rebuild. 
+First, it’s nearly impossible to manage Python dependencies via multiple `requirements.txt` files. There's no way to tell which dependencies your plugin's dependencies will install, without first installing them. There is [nothing like `pip --dry-run`](https://github.com/pypa/pip/issues/53). You need to install the `pip` package and run an `__init__.py` script inside the package to get its dependency tree.
 
-## Rebuilding in JavaScript
+Second, all dependencies were installed together. This made it just a matter of time before a plugin overrode an app dependency (e.g. `django`), and brought everything crashing down. This wasn’t going to work for us, so we needed to rebuild. 
 
-After deciding to rebuild, the first attempt was using [PyMiniRacer](https://github.com/sqreen/PyMiniRacer) to generate JavaScript. PyMiniRacer is great for simple functions, but lacked support for async/promises and importing modules like `fetch` because it was raw v8, not Node. It also had a limited standard library. All of which led to the decision it also wasn’t going to work. 
+## Part 2: Rebuilding in JavaScript
 
-### Another try in JavaScript with gPRC in Node
+After deciding to rebuild, the first attempt was using [PyMiniRacer](https://github.com/sqreen/PyMiniRacer) to generate JavaScript. PyMiniRacer is great for simple functions, but lacks support for async/promises and importing modules like `fetch` because it was raw v8, not Node. It also had a limited standard library. It wasn’t going to work. 
+Next, Marius tried to develop and subsequently scratched a [gRPC](https://grpc.io/docs/languages/node/basics/) implementation in Node. He could call JS code from Python and get a response, but this approach created too much manual work. It raised questions such as "how many workers should respond to the gRPC calls?" and "how do we make sure we lose no events if the node gRPC server is down?” Apps needed to scale, so this also wasn’t going to work either.
 
-Marius also tried to develop and subsequently scratched a [gRPC](https://grpc.io/docs/languages/node/basics/) implementation in Node. He was able to call JS code from Python and get a response, but this approach left us with a lot of manual work. It raised questions such as "how many workers should respond to the gRPC calls?" and "how do we make sure we lose no events if the node gRPC server is down?” Apps needed to scale, so this also wasn’t going to work.
+### Finding the solution: Celery + virtual machines
 
-### Using Celery
+After these false starts, Marius found a solution in something we already used: Celery.
 
-In our main PostHog app, we used [Celery](https://docs.celeryproject.org/) to process events asynchronously. When an event hits `/capture`, our API parses the request and queues the event into a job queue. Marius realized he could build a new server with the [Node port of Celery](https://celery-node.js.org/) and plug that in as another step in the existing pipeline.
+In our main PostHog app, we used [Celery](https://docs.celeryproject.org/) to process events asynchronously. When an event hit `/capture`, our API parsed the request and queued the event into a job queue. Marius realized he could build a new server with the [Node port of Celery](https://celery-node.js.org/) and plug that in as another step in the existing pipeline.
 
-This would solve all pending issues: we wouldn't have to worry about Python dependencies, we could potentially run untrusted code in a fast sandbox, there would be no process management for a gRPC link, and we could eventually rewrite the entire ingestion pipeline in Node to get a speed boost over Python.
+The combination of Celery and Node solved all pending issues: we wouldn't have to worry about Python dependencies, we could potentially run untrusted code in a fast sandbox, there would be no process management for a gRPC link, and we could eventually rewrite the entire ingestion pipeline in Node to get a speed boost over Python.
 
-Using celery required us to build a Node app that:
+Using Celery required us to build a Node app that:
 
 - Gets a stream of events from Python through a Redis queue (via [celery.node](https://celery-node.js.org/))
 - Runs user-defined JavaScript on that stream of events.
@@ -77,9 +80,9 @@ The first and last steps were easy enough with our app structure and Celery, but
 
 ### VMs to the rescue
 
-The solution to the second step was to use VMs (Virtual Machines). Turns out Node. v14 has a [built-in VM module](https://nodejs.org/docs/latest-v17.x/api/vm.html) that enables running custom JavaScript in a separate context.
+The solution to the second step was to use VMs (Virtual Machines). Turns out Node v14 has a [built-in VM module](https://nodejs.org/docs/latest-v17.x/api/vm.html) that enables running custom JavaScript in a separate context.
 
-Using the VM module enabled us to run custom JavaScript code during event ingestion. The downside was that “the VM module is not a security mechanism. Do not use it to run untrusted code.” This wasn’t unexpected. [Privilege escalation](https://en.wikipedia.org/wiki/Privilege_escalation) and [resource exhaustion](https://en.wikipedia.org/wiki/Resource_exhaustion_attack) attacks are real. We couldn’t avoid them, but we could build strategies to mitigate them.
+Using the VM module let us to run custom JavaScript code during event ingestion. The downside was that “the VM module is not a security mechanism. Do not use it to run untrusted code.” This wasn’t unexpected. [Privilege escalation](https://en.wikipedia.org/wiki/Privilege_escalation) and [resource exhaustion](https://en.wikipedia.org/wiki/Resource_exhaustion_attack) attacks are real. We couldn’t avoid them, but we could build strategies to mitigate them.
 
 Node's VM module puts your code in an isolated context, has ~~limited~~ no support for secure communications with the host, and has holes like this:
 
@@ -92,6 +95,7 @@ console.log('Never gets executed.');
 Thus we needed an abstraction. The two most popular are `isolated-vm` and `vm2` :
 
 - [`isolated-vm`](https://github.com/laverdet/isolated-vm) claims to be secure and various big companies use it. Each "isolate" runs in a new thread, with controllable CPU and memory limits. There are methods to copy data between the main thread and an isolate, and we can share objects and functions between the host and the isolate. It's not a perfect sandbox, but it's as close as we can get.
+
 - [`vm2`](https://github.com/patriksimek/vm2) has a different isolation model. Each "VM" runs in an isolated NodeVM context, in the same thread as the rest of the app. There are no memory or CPU limits we can enforce. You run the code locally, but don’t share any variables with the host app.
 
 While `isolated-vm` felt like a great fit because of its emphasis on security, its implementation [wasn't a success](https://github.com/PostHog/posthog/issues/6855#issuecomment-853879421).
@@ -102,26 +106,31 @@ While `isolated-vm` felt like a great fit because of its emphasis on security, i
 
 Because of this, we decided to change our security model. On PostHog Cloud, we would vet the apps ourselves, before allowing everyone to use them. Self-hosted users were free to write and use as many [arbitrary apps](https://github.com/PostHog/posthog/issues/6855) as they please.
 
-This maintains self-hosted users’ freedom, while still enabling Cloud users to benefit from community apps. Apps are all developed and tested in the open. We just need to do a final manual check before installing them. After launch, we found many of [our most used apps](/blog/the-state-of-plugins) came from our community, proving this decision’s success.
+This maintained self-hosted users’ freedom, while still enabling Cloud users to benefit from community apps. Apps are all developed and tested in the open. We just need to do a final manual check before installing them. After launch, we found many of [our most used apps](/blog/the-state-of-plugins) came from our community, proving this decision’s success.
 
 ### What did we learn from all this?
 
 - Python, which we wrote our ingestion pipeline in, wasn’t going to work. Dependency management was too difficult.
 - Apps needed to scale while having access to some key JavaScript libraries. Using Node and Celery enabled us to integrate into our ingestion pipeline while providing the functionality we needed.
+
 - We needed to make sure the code apps were running was secure and sandboxed. VMs were the answer to this, and Node had support for VMs.
+
 - The default NodeVM wasn’t secure and couldn’t communicate with a host. `isolated-vm` was secure but needed proxying. `vm2` had the ability to proxy code, but was less secure. `vm2` and a review process for Cloud apps was the ultimate decision.
 
 These learnings led to our current app structure.
 
-## Evolving to the current app structure
+## Part 3: Building a mature app platform that scales
 
-After creating a basic MVP, and seeing the benefits of its usage, work continued on apps. They evolved and functionality grew over time. Where did they end up? Apps structure and features follow. 
+After creating a basic MVP, and seeing the benefits of its usage, work continued to add functionality and support greater scale. 
+
+Before we get any deeper, it's worth recapping apps structure and features as they are now. 
 
 ### Structuring apps
 
 The basic structure of an app has stayed the same since the JavaScript rebuild. Each app contains two key files:
 
 - `index.js` (or `index.ts`) which contains key application logic, modifies events, connects with external services, and interacts with PostHog. It has an allowlist of libraries to use for utilities or interacting with other services. It also has access (through the VM) to meta information, storage, and logging.
+
 - `plugin.json` contains configuration data for the app, what shows up in PostHog, and variables for end users to modify. The file contains the name, description, and other details that show up on the front end.
 
 Here’s what a basic `index.js` looks like:
@@ -192,7 +201,7 @@ When users upload apps to PostHog, we import these functions from the files and 
 
 Structuring apps this way provides flexibility to users while maintaining scalability and security. Added features like scheduling and exporting added new functionality users wanted. Caching and improving the config object (enabling statelessness) helped apps scale effectively. Running apps in VMs helped ensure they were secure and isolated. The next step was to put these apps into production.
 
-## Serving apps and managing data at scale
+### Serving apps and managing data at scale
 
 An app is no good if it doesn't integrate into PostHog. Apps needed to integrate with our ingestion pipeline. They needed to handle an inflow of data, scale, manage tasks, and update themselves. There are many parts needed to make this happen.
 
@@ -254,7 +263,7 @@ When the worker thread finishes its task, it gets another new event, process, or
 
 This structure enables modularity, allowing us to run different types of workers and apps. On the small scale, they can run individual app tasks can together. On a larger scale, we are working on decoupling types of tasks to enable them separately and more efficiently.
 
-## Making sure arbitrary code doesn’t break everything
+### Making sure arbitrary code doesn’t break everything
 
 The final piece to worry about is that apps are arbitrary code. When left unchecked, they can run whatever code they want, including code that tries to exploit or crash our servers. Allowing users to run arbitrary code can cause many security, infrastructure, and usability issues. We use VMs because they provide some solutions, but they don't offer total protection. We've done a bunch more work to prevent potential issues and make sure apps are secure and reliable.
 
