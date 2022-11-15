@@ -9,7 +9,7 @@ Segment allows you to easily manage data and integrations with services across y
 
 ## Simple Segment setup (minimal feature support)
 
-The standard Segment analytics supports simple **tracking of pageviews**, **custom events** and **identifying users**.
+The standard Segment analytics supports simple tracking of **pageviews**, **custom events** and **identifying users**.
 
 Make sure you have a [Segment account](https://segment.com/docs/#getting-started) **and** a PostHog account, either [self-hosted](/docs/deployment) or using [PostHog Cloud](https://app.posthog.com/signup).
 
