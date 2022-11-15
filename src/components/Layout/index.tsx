@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Header } from '../Header/Header'
 import { Footer } from '../Footer/Footer'
 import CookieBanner from 'components/CookieBanner'
+import { useValues } from 'kea'
+import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 
 import './Fonts.scss'
 import './Layout.scss'
