@@ -74,6 +74,7 @@ export const ProductAnalytics = () => {
                     animate={{ translateY: 0 }}
                 >
                     <StaticImage
+                        alt=""
                         placeholder="none"
                         quality={100}
                         objectFit="cover"
@@ -126,6 +127,7 @@ export const ProductAnalytics = () => {
                                     quality={100}
                                     className="w-full max-w-[215px] xl:max-w-[360px]"
                                     src="./images/product-analytics-hog.png"
+                                    alt=""
                                 />
                             </motion.div>
                         </div>
@@ -153,6 +155,7 @@ export const SessionRecording = () => {
                         objectFit="contain"
                         className="w-[170%] md:w-full rotate-2 md:max-w-[754.5px] shadow-xl"
                         src="./images/session-recording.png"
+                        alt=""
                     />
                 </motion.div>
             </ImageContainer>
@@ -183,6 +186,7 @@ export const SessionRecording = () => {
                                     quality={100}
                                     className="w-full max-w-[250px] md:max-w-full"
                                     src="./images/session-recording-hog.png"
+                                    alt=""
                                 />
                             </motion.div>
                         </div>
@@ -208,6 +212,7 @@ export const FeatureFlags = () => {
                         quality={100}
                         className="w-[150%] md:w-full rotate-1 shadow-xl"
                         src="./images/feature-flags-2.png"
+                        alt=""
                     />
                 </motion.div>
                 <motion.div
@@ -221,6 +226,7 @@ export const FeatureFlags = () => {
                         quality={100}
                         className="w-[150%] md:w-full -rotate-1 shadow-xl"
                         src="./images/feature-flags-1.png"
+                        alt=""
                     />
                 </motion.div>
             </ImageContainer>
@@ -247,6 +253,7 @@ export const FeatureFlags = () => {
                                 animate={{ translateX: 0 }}
                             >
                                 <StaticImage
+                                    alt=""
                                     placeholder="none"
                                     quality={100}
                                     className="w-full max-w-[250px] xl:max-w-[480px]"
@@ -277,6 +284,7 @@ export const ABTesting = () => {
                     animate={{ translateY: 0 }}
                 >
                     <StaticImage
+                        alt=""
                         placeholder="none"
                         quality={100}
                         objectFit="contain"
@@ -291,6 +299,7 @@ export const ABTesting = () => {
                     animate={{ translateY: 0 }}
                 >
                     <StaticImage
+                        alt=""
                         placeholder="none"
                         quality={100}
                         objectFit="contain"
@@ -337,6 +346,7 @@ export const ABTesting = () => {
                                 animate={{ translateX: 0 }}
                             >
                                 <StaticImage
+                                    alt=""
                                     placeholder="none"
                                     quality={100}
                                     className="w-full max-w-[200px] lg:max-w-[250px] xl:max-w-[480px]"
@@ -371,6 +381,7 @@ export const EventPipelines = () => {
                     animate={{ translateY: 0 }}
                 >
                     <StaticImage
+                        alt=""
                         placeholder="none"
                         quality={100}
                         objectFit="contain"
@@ -412,6 +423,7 @@ export const EventPipelines = () => {
                                 animate={{ translateX: 0 }}
                             >
                                 <StaticImage
+                                    alt=""
                                     placeholder="none"
                                     quality={100}
                                     className="w-full max-w-[250px] xl:max-w-[480px]"
@@ -437,6 +449,7 @@ export const DataWarehouse = () => {
                     animate={{ translateY: 0 }}
                 >
                     <StaticImage
+                        alt=""
                         placeholder="none"
                         quality={100}
                         objectFit="contain"
@@ -461,6 +474,7 @@ export const DataWarehouse = () => {
                             animate={{ translateX: 0 }}
                         >
                             <StaticImage
+                                alt=""
                                 placeholder="none"
                                 quality={100}
                                 className="w-full"
@@ -485,6 +499,7 @@ export const SelfHosting = () => {
                     animate={{ translateY: 0 }}
                 >
                     <StaticImage
+                        alt=""
                         placeholder="none"
                         quality={100}
                         objectFit="contain"

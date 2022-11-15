@@ -38,7 +38,11 @@ export default function BeforeAndAfter() {
                         <AnimateIntoView className="absolute left-20">
                             <img src={factoBlurb} />
                         </AnimateIntoView>
-                        <StaticImage className="max-w-[200px] md:max-w-[300px]" src="../../images/facto-home.png" />
+                        <StaticImage
+                            alt=""
+                            className="max-w-[200px] md:max-w-[300px]"
+                            src="../../images/facto-home.png"
+                        />
                     </div>
                     <div>
                         <h2 className="text-white m-0 text-2xl sm:text-4xl md:text-5xl leading-none lg:text-7xl">
