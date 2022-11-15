@@ -5,6 +5,8 @@ import { heading, section } from './classes'
 import Icon from './Icon'
 import Slider from './Slider'
 import { DemoLink } from 'components/DemoLink'
+import { useValues } from 'kea'
+import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 
 export const FeatureStrip = ({ className = '' }) => {
     return (
@@ -40,6 +42,8 @@ const Feature = ({ title, icon, url }) => {
 }
 
 export default function Hero() {
+    const { posthog } = useValues(posthogAnalyticsLogic)
+
     return (
         <section className="flex flex-col justify-center items-center">
             <div className="relative w-full z-10">
@@ -56,7 +60,11 @@ export default function Hero() {
                         <CallToAction
                             type="primary"
                             className="!w-full md:!w-44 shadow-xl"
-                            to="https://app.posthog.com/signup"
+                            to={`https://${
+                                posthog?.isFeatureEnabled && posthog?.isFeatureEnabled('direct-to-eu-cloud')
+                                    ? 'eu'
+                                    : 'app'
+                            }.posthog.com/signup`}
                         >
                             Get started
                         </CallToAction>
