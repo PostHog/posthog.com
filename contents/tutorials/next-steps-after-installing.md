@@ -8,8 +8,6 @@ featuredImage: ../images/tutorials/banners/next-steps-after-installing.png
 topics: ["configuration", "actions", "trends"]
 ---
 
-
-
 You created a PostHog account and installed it on your site, but what’s next? PostHog has many tools for helping you build better products, but if you don’t know where to start, the options can be overwhelming. This tutorial goes over the ABCs of what to do next after signing up and installing PostHog (we are assuming you’ve done both).
 
 ## All the events captured
@@ -17,7 +15,6 @@ You created a PostHog account and installed it on your site, but what’s next? 
 If you installed PostHog through our [snippet](/docs/integrate#snippet) or [`posthog-js`](/docs/integrate/client/js) library, you’ll be autocapturing events. You product will send pageviews, button clicks, inputs, and more to PostHog. You’ll also have access to session recordings by turning them in “project settings” under "recordings.”
 
 If you are using [another library](/docs/integrate#libraries) or the [API](/docs/api), you’ll need to implement event capture yourself. Luckily, our libraries make this easy, just a single call. Event capture calls look like this:
-
 
 <MultiLanguage>
 
