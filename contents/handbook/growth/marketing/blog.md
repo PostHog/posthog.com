@@ -47,26 +47,13 @@ Our content production workflow is as follows:
 
 * **Create a GitHub issue**: Create [a new blog post issue in the posthog.com repo](https://github.com/PostHog/posthog.com/issues/new?assignees=&labels=Marketing&template=blog-post-idea-template.md&title=Blog+post%3A+%7Btitle%7D). Use the **New blog post idea** issue template. Fill in the required information as well as adding any additional information that you feel is beneficial to someone reviewing the issue. Add this issue to [the Marketing GitHub project](https://github.com/orgs/PostHog/projects/8).
 
-* **Shoot a video (optional):** This could be an interview, talk, panel discussion, or tutorial recording. We’ll eventually edit this down to about half or a third of its size.
-
-  * Content interviews usually take 40-60 minutes, and we generate 20-30 questions for each interviewee. These questions range from their career history to their current role and product, plus a few personal questions to add flavor to the interview. Here’s [an example](https://www.youtube.com/watch?v=gMYWond64lM) of one we did with Eltje.
-
-  * HogTalks are Zoom sessions where we invite an expert to speak on a specific topic. We package these videos for upload to our YouTube channel - no blog post required, just a transcript where appropriate. Here’s [an example](https://www.youtube.com/watch?v=JvjK-YA9Ieo). 
-  * The engineering team sometimes creates tutorials that we use to explain certain PostHog features. These can be turned into blog posts in their own right. Here’s [an example](https://www.youtube.com/watch?v=3_yH24Bh0HE).
- 
-  * **Get the transcript (optional):** We use [Rev.com](https://rev.com) to pull the transcript from the video. Rev also lets you get a quick draft in just a few minutes, though we recommend waiting for the proper version, which can take anywhere from a few hours if ‘rushed’ - which costs extra - to a day or two.
-
 * **Write the blog post:** We write up a concise blog post about the discussion or tutorial (with the help of the transcript, if available). This is where we add more context to the topic and include links to other content for further reading. The length of a blog post can vary wildly. If based on a video a 60-minute interview usually yields a ~1,500-word blog post.
 
 * **Get feedback:** Once written, if the blog post is to be published on the PostHog blog, push it to GitHub and create a Pull Request for feedback. See [Publishing](#publishing) for more information. If the blog post is going to be published on an external site, use Google Docs to get feedback.
 
 * **Artwork:** Things that are more interesting to the eye are more likely to be clicked on. Each blog post or tutorial need an accompanying image. [Learn more in the Publishing section below.](#publishing)
 
-* **Extract the audio from the edited video (optional):** This goes into the podcast.
-
-* **Amplify the content:** After the blog post is complete, we pull snippets from it and schedule them for publishing across social media platforms and encourage the rest of the PostHog team to share within their networks. The blog post GitHub issue provides an "amplification checklist" that should be followed. Note that we generally discourage the use of hashtags on Twitter, especially when used mid-tweet. 
-
-### Publishing
+### Publishing to the blog
 
 Our [Marketing project board](https://github.com/orgs/PostHog/projects/8?card_filter_query=label%3Acontent) is our source of truth for all content. We use the 'content' label for all issues and PRs.
 
@@ -123,8 +110,25 @@ categories: ["Product analytics", "Guides"]
 ---
  ```
 
-### Distribution
+## Distribution
 
-The [blog post GitHub issue template](https://github.com/PostHog/posthog.com/blob/master/.github/ISSUE_TEMPLATE/blog-post-idea-template.md) outlines how the content should be amplified and distributed. This can and should be edited for each post using the team's experience and ideas to identify what's best on a post-by-post basis.
+As of Q4 2022, we are distributing content in a mixture of channels - those we want to be good at, and those we put minimal effort into out of habit and good practice. We use freelancers to outsource manual work such as reformatting existing written content to fit a Twitter thread format (for example). 
 
-This section excludes [Paid Ads](/handbook/growth/marketing/paid), which are covered elsewhere.
+### Let's get (or stay) good at this in Q4
+
+- SEO - _Andy_
+- HogMail - _Andy_
+- PostHog LinkedIn - _Andy_
+- James' personal Twitter - _James H (outsourced)_
+- James' personal LinkedIn - _James H (outsourced)_
+- TikTok - _James H (editing and posting outsourced)_
+- YouTube - _Ian_
+
+### Let's post here out of habit/hygiene factor
+
+- PostHog Twitter - _Andy (just retweeting and link sharing)_
+- User Slack - _whoever wrote the content_
+- Hacker News - _only for Show HN announcements, otherwise default is to not post here and hope others do it outside PostHog_
+- LinkedIn paid ads - _Charles (outsourced)_
+- Twitter paid ads - _Andy (outsourced)_
+- Dev.to - _Charles_
