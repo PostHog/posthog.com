@@ -5,9 +5,12 @@ showTitle: true
 ---
 
 We treat Marketing as the [newsroom](https://en.wikipedia.org/wiki/Newsroom) of PostHog. What this means in practice:
-- A small, talented team of in-house content creators with strong editorial capability - our default is to keep writing in-house, not farm it out to a network of freelancers. 
+- A small, talented team of in-house content creators with strong editorial capability - our default is to keep writing in-house, not farm it out to a network of freelancers.
+ 
 - Building a reputation for high quality, trustworthy content that is a go-to resource for our users and wider reading audience. 
-- Extreme responsiveness to opportunities, both internal and external (e.g. cool Hackathon projects, GDPR rulings). 
+
+- Extreme responsiveness to opportunities, both internal and external (e.g. cool Hackathon projects, GDPR rulings).
+ 
 - Proactively reporting and amplifying company and product news, rather than [artificially creating news](https://en.wikipedia.org/wiki/Tomorrow_Never_Dies) or buzz by telling people what to build. 
 
 ## Marketing vision 
