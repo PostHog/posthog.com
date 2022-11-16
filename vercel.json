@@ -3,8 +3,6 @@
         { "source": "/plugins/:path*", "destination": "/apps/:path*" },
         { "source": "/integrations/:path*", "destination": "/apps/:path*" },
         { "source": "/docs/user-guides/:path*", "destination": "/manual/:path*" },
-        { "source": "/next-steps/:path*", "destination": "/next-steps", "statusCode": 200 },
-        { "source": "/question/:path*", "destination": "/question", "statusCode": 200 },
         { "source": "/careers/:path*", "destination": "/careers", "statusCode": 200 },
         { "source": "/docs/integrations/android-integration", "destination": "/docs/libraries/android" },
         { "source": "/docs/integrations/community", "destination": "/docs/libraries/community" },
@@ -606,6 +604,22 @@
         {
             "source": "/docs/architecture/ingestion-pipeline",
             "destination": "/docs/how-posthog-works/ingestion-pipeline"
+        },
+        {
+            "source": "/docs/self-host/deploy/hobby",
+            "destination": "/docs/self-host/open-source/deployment"
+        },
+        {
+            "source": "/docs/self-host/deploy/support",
+            "destination": "/docs/self-host/open-source/support"
+        },
+        {
+            "source": "/docs/self-host/deploy/hosting-costs",
+            "destination": "/docs/self-host/enterprise/hosting-costs"
         }
+    ],
+    "rewrites": [
+        { "source": "/next-steps/(.*)", "destination": "/next-steps" },
+        { "source": "/question/(.*)", "destination": "/question" }
     ]
 }

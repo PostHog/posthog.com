@@ -19,7 +19,7 @@ interface IGitHubPage {
         hooray: number
         heart: number
         eyes: number
-        _1: number
+        plus1: number
     }
 }
 
@@ -41,10 +41,23 @@ export interface IRoadmap {
 const Complete = (props: { title: string; githubPages: IGitHubPage[]; otherLinks: string[] }) => {
     const { title, githubPages, otherLinks } = props
     const url = (githubPages?.length > 0 && githubPages[0]?.html_url) || (otherLinks?.length > 0 && otherLinks[0])
-    return <li className="text-base font-semibold">{url ? <Link to={url} className="flex px-4 py-2 bg-white rounded-sm relative active:top-[0.5px] active:scale-[.99] shadow-xl">{title}</Link> : <span className="flex bg-white px-4 py-2 rounded-sm shadow-xl relative">{title}</span>}</li>
+    return (
+        <li className="text-base font-semibold">
+            {url ? (
+                <Link
+                    to={url}
+                    className="flex px-4 py-2 bg-white rounded-sm relative active:top-[0.5px] active:scale-[.99] shadow-xl"
+                >
+                    {title}
+                </Link>
+            ) : (
+                <span className="flex bg-white px-4 py-2 rounded-sm shadow-xl relative">{title}</span>
+            )}
+        </li>
+    )
 }
 
-const Section = ({
+export const Section = ({
     title,
     description,
     children,
@@ -64,18 +77,16 @@ const Section = ({
     )
 }
 
-const Card = ({ team, children }: { team: string; children: React.ReactNode }) => {
+export const Card = ({ team, children }: { team: string; children: React.ReactNode }) => {
     return (
         <>
             {team !== 'undefined' && <h4 className="oh5acity-50 text-base font-bold mt-0 mb-2 pt-4">{team}</h4>}
-            <li className="m-0 mb-3">
-                {children}
-            </li>
+            <li className="m-0 mb-3">{children}</li>
         </>
     )
 }
 
-const CardContainer = ({ children }: { children: React.ReactNode }) => {
+export const CardContainer = ({ children }: { children: React.ReactNode }) => {
     return <ul className="list-none m-0 p-0 grid">{children}</ul>
 }
 
@@ -186,7 +197,7 @@ export default function Roadmap() {
                                                     <Card key={key} team={key}>
                                                         <CardContainer>
                                                             {inProgress[key]?.map((node: IRoadmap) => {
-                                                                return <InProgress key={node.title} {...node} />
+                                                                return <InProgress stacked key={node.title} {...node} />
                                                             })}
                                                         </CardContainer>
                                                     </Card>
@@ -199,7 +210,10 @@ export default function Roadmap() {
                                     // description="Here's what was included in our last array."
                                     className=""
                                 >
-                                    <p className="p-4 border border-dashed border-gray-accent-light rounded-sm text-[15px]">Check out <Link to="/blog/categories/product-updates">product updates</Link> on our blog to see what we've shipped recently.</p>
+                                    <p className="p-4 border border-dashed border-gray-accent-light rounded-sm text-[15px]">
+                                        Check out <Link to="/blog/categories/product-updates">product updates</Link> on
+                                        our blog to see what we've shipped recently.
+                                    </p>
                                     {/*
                                         hidden until we have more historical content loaded
                                         <CardContainer>
@@ -240,6 +254,11 @@ const query = graphql`
                 team {
                     name
                 }
+                thumbnail {
+                    childImageSharp {
+                        gatsbyImageData(width: 75, placeholder: NONE, quality: 100)
+                    }
+                }
                 otherLinks
                 githubPages {
                     title
@@ -250,7 +269,7 @@ const query = graphql`
                         hooray
                         heart
                         eyes
-                        _1
+                        plus1
                     }
                 }
                 projected_completion_date
