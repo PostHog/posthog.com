@@ -14,7 +14,9 @@ You created a PostHog account and installed it on your site, but what’s next? 
 
 To get the best possible understanding of your product, you need as much data as possible. Capturing the most possible events helps you do this. PostHog makes it easy.
 
-Autocapture is enabled by default if you've installed either [the PostHog snippet](/docs/integrate#snippet) or [`posthog-js`](/docs/integrate/client/js). That means your product will send pageviews, button clicks, inputs, and more to PostHog automatically. You can also enable session recordings in “Project Settings”, under "Recordings.”
+Autocapture is enabled by default if you've installed either [the PostHog snippet](/docs/integrate#snippet) or [`posthog-js`](/docs/integrate/client/js). That means your product will send pageviews, button clicks, inputs, and more to PostHog automatically. 
+
+> With either of these installed, you can also **enable session recordings** in “Project Settings”, under "Recordings.”
 
 If you are using [a different library](/docs/integrate#libraries) or the [API](/docs/api), you’ll need to implement event capture yourself. Luckily, our libraries make this easy, just a single call. Event capture calls look like this:
 
