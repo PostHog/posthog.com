@@ -1,4 +1,5 @@
 const fetch = require(`node-fetch`)
+const slugify = require('slugify')
 
 require('dotenv').config({
     path: `.env.${process.env.NODE_ENV}`,
@@ -454,7 +455,6 @@ module.exports = {
                                   slug
                                   internal {
                                     contentDigest
-                                    type
                                   }
                                 }
                               }
@@ -465,7 +465,7 @@ module.exports = {
                                 return headings.map((heading) => {
                                     return {
                                         ...page,
-                                        id: id + heading.value,
+                                        id: id + '-' + slugify(heading.value),
                                         title: frontmatter.title,
                                         heading,
                                         type: 'docs',
@@ -490,7 +490,6 @@ module.exports = {
                                   slug
                                   internal {
                                     contentDigest
-                                    type
                                   }
                                 }
                               }
@@ -501,7 +500,7 @@ module.exports = {
                                 return headings.map((heading) => {
                                     return {
                                         ...page,
-                                        id: id + heading.value,
+                                        id: id + '-' + slugify(heading.value),
                                         title: frontmatter.title,
                                         heading,
                                         type: 'manual',
@@ -526,7 +525,6 @@ module.exports = {
                                   slug
                                   internal {
                                     contentDigest
-                                    type
                                   }
                                 }
                               }
@@ -537,7 +535,7 @@ module.exports = {
                                 return headings.map((heading) => {
                                     return {
                                         ...page,
-                                        id: id + heading.value,
+                                        id: id + '-' + slugify(heading.value),
                                         title: frontmatter.title,
                                         heading,
                                         type: 'handbook',
@@ -562,7 +560,6 @@ module.exports = {
                                   }
                                   internal {
                                     contentDigest
-                                    type
                                   }
                                 }
                               }
@@ -573,7 +570,7 @@ module.exports = {
                                 return headings.map((heading) => {
                                     return {
                                         ...page,
-                                        id: id + heading.value,
+                                        id: id + '-' + slugify(heading.value),
                                         title: frontmatter.title,
                                         heading,
                                         type: 'tutorial',
@@ -598,7 +595,6 @@ module.exports = {
                                   }
                                   internal {
                                     contentDigest
-                                    type
                                   }
                                 }
                               }
@@ -609,7 +605,7 @@ module.exports = {
                                 return headings.map((heading) => {
                                     return {
                                         ...page,
-                                        id: id + heading.value,
+                                        id: id + '-' + slugify(heading.value),
                                         title: frontmatter.title,
                                         heading,
                                         type: 'blog',
@@ -650,7 +646,6 @@ module.exports = {
                                   title: subject
                                   internal {
                                     contentDigest
-                                    type
                                   }
                                 }
                               }
