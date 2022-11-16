@@ -63,7 +63,7 @@ export const Vendasta = (props: React.SVGProps<SVGSVGElement>) => {
 export const Ycombinator = (props: React.SVGProps<SVGSVGElement>) => {
     const { websiteTheme } = useValues(layoutLogic)
     return (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 212 44">
+        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 212 44" className="h-8">
             <path
                 fillRule="evenodd"
                 clipRule="evenodd"
