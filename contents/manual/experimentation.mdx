@@ -2,9 +2,11 @@
 title: Experimentation
 sidebar: Docs
 showTitle: true
+availability:
+    free: none
+    selfServe: full
+    enterprise: full
 ---
-
-<FeatureAvailability availablePlans={['standard', 'enterpriseCloud', 'startup', 'scale', 'enterprise']} />
 
 Experimentation helps you test changes to your product. You can test hypotheses about which changes will lead to optimal results. You may have also heard it called A/B testing, or split testing. Examples:
 
@@ -13,8 +15,6 @@ Experimentation helps you test changes to your product. You can test hypotheses 
 -   You want to test if certain deals & promotions do better with users in a specific country.
 -   You want to test if showing your website copy in German does better than English in Austria.
 -   You want to test if certain copy does better within a cohort of new users.
-
-> 🚧 **Experimentation is currently in beta** and support is limited to our [JavaScript](/docs/integrate/client/js#feature-flags) integration. If you have any feedback, please <a href="/questions" target="_blank">reach out</a>.
 
 ## How does it work?
 
@@ -123,7 +123,7 @@ While the experiment is running, you can see results on the page. Sometimes, in 
 
 While peeking at the results in itself is not a problem, making quick decisions based on preliminary results is problematic. For this reason, we display a banner that informs you whether it's safe to end an experiment or not.
 
-Note that this recommendation doesn't cover all edge cases. It is still possible, when new data comes in, that results flip completely. This is true for any experiments and any significance test in existence today. But, the probability of this happening is very low, which is why most people are comfortable taking this risk. For a 0 risk experiment, you'd have to run it for an infinite amount of time: every new person is new data to be accomodated.
+Note that this recommendation doesn't cover all edge cases. It is still possible, when new data comes in, that results flip completely. This is true for any experiments and any significance test in existence today. But, the probability of this happening is very low, which is why most people are comfortable taking this risk. For a 0 risk experiment, you'd have to run it for an infinite amount of time: every new person is new data to be accommodated.
 
 ### Terminating an experiment
 

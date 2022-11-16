@@ -7,13 +7,21 @@ related:
     - ../tutorials/metrics-tutorial.md
     - ../tutorials/cohorts.md
     - ../tutorials/feature-flags.md
----
+availability:
+    free: partial
+    selfServe: full
+    enterprise: full
 
-<FeatureAvailability allPlans restrictedPlans={['free', 'openSource']} />
+    features:
+        multivariate:
+            free: false
+            selfServe: true
+            enterprise: true
+---
 
 Feature Flags allow you to safely deploy and roll back new features. This means you can ship the code for new features and then roll them out to your users in a managed way. If something has goes wrong, you can then roll back without having to re-deploy your application. Feature Flags can also help you control access to certain parts of your product, such as only showing paid features to users with an active subscription.
 
-> Looking to _test_ changes to your product? Check out our [Experimentation](/docs/user-guides/experimentation) feature. 
+> Looking to _test_ changes to your product? Check out our [Experimentation](/docs/user-guides/experimentation) feature.
 
 ## Learning resources
 
@@ -44,8 +52,12 @@ However, with some businesses, like e-commerce, it's very common to browse thing
 
 ![Persist feature flags](../images/features/feature-flags/feature-flag-persist.png)
 
-Note that this slows down the feature flag response slightly. Also note that this functionality is currently available for `posthog-js` only.
-If you're using another client library, you can [follow this guide to get the same feature](/tutorials/experiments)
+Note that there are some performance trade-offs here. Specifically,
+
+1. Enabling this slows down the feature flag response.
+2. It disables local evaluation of the feature flag.
+3. It disables bootstrapping this feature flag.
+
 
 ## Implementing the feature flag
 
@@ -131,6 +143,8 @@ However, for flags using a rollout percentage mechanism (either by itself or in 
 As a result, bear in mind that changing those values will result in flags being toggled on and off for certain users in a non-predictable way.
 
 ## Multivariate feature flags (beta)
+
+<FeatureAvailability availability={_frontmatter.availability.features.multivariate} />
 
 > Multivariate feature flags are only available when using PostHog >= 1.28 (if self-hosting) and [posthog-js](https://github.com/PostHog/posthog-js) >= 1.13.
 

@@ -302,6 +302,7 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
                     breadcrumbBase: breadcrumbBase || menuFlattened[0],
                     tableOfContents,
                     slug,
+                    searchFilter: menu,
                     ...(context ? context(node) : {}),
                 },
             })
@@ -580,9 +581,9 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
                     id,
                     slug,
                     teamName: team,
-                    teamNameInfo: `Team ${team}`,
-                    objectives: `/handbook/people/team-structure/${slugify(team, { lower: true })}/objectives`,
-                    mission: `/handbook/people/team-structure/${slugify(team, { lower: true })}/mission`,
+                    teamNameInfo: `${team} Team`,
+                    objectives: `/handbook/small-teams/${slugify(team, { lower: true })}/objectives`,
+                    mission: `/handbook/small-teams/${slugify(team, { lower: true })}/mission`,
                     gitHubIssues,
                 },
             })

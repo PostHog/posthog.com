@@ -57,7 +57,7 @@ If there are elements you don't want to be captured, you can add the `ph-no-capt
 Basic usage:
 ```jsx
 // App.(js|ts)
-import PostHog from 'posthog-react-native'
+import {PostHogProvider} from 'posthog-react-native'
 import {NavigationContainer} from '@react-navigation/native';
 
 export function App() {
@@ -73,7 +73,7 @@ export function App() {
 
 You can tweak how autocapture works by passing custom options.
 
-```jsx
+```tsx
 <PostHogProvider apiKey="<ph_project_api_key>" autocapture={{
     captureTouches: true, // If you don't want to capture touch events set this to false
     captureLifecycleEvents: true, // If you don't want to capture the Lifecycle Events (e.g. Application Opened) set this to false
@@ -266,7 +266,7 @@ This allows you to pass in a distinctID and feature flags during library initial
 
 
 ```js
-const posthog = new PostHog('<ph_project_api_key>', {
+const posthog = await Posthog.initAsync('<ph_project_api_key>', {
     host: 'https://app.posthog.com',
     bootstrap: {
         distinctID: 'your-anonymous-id',
@@ -285,7 +285,7 @@ If the ID you're passing in is an identified ID (that is, an ID with which you'v
 
 
 ```js
-const posthog = new PostHog('<ph_project_api_key>', {
+const posthog = await Posthog.initAsync('<ph_project_api_key>', {
     host: 'https://app.posthog.com',
     bootstrap: {
         distinctID: 'your-identified-id',
@@ -348,7 +348,7 @@ posthog.screen('Dashboard', {
 
 V1 of this library utilised the underlying `posthog-ios` and `posthog-android` SDKs to do most of the work. Since the new version is written entirely in JS, using only Expo supported libraries, there are some changes to the way PostHog is configured as well as actually calling PostHog.
 
-For iOS, the new React Native SDK will attempt to migrate the previously peristed data which should result in no unexpected changes to tracked data.
+For iOS, the new React Native SDK will attempt to migrate the previously persisted data which should result in no unexpected changes to tracked data.
 
 For Android, it is unfortunately not possible for persisted Android data to be loaded which means stored information such as the randomly generated `anonymousId` or the `distinctId` set by `posthog.identify` will not be present. For identified users, the simple workaround is to ensure that `identify` is called at least once when the app loads. For anonymous users there is unfortunately no straightforward workaround they will show up as new anonymous users in PostHog.
 
@@ -374,7 +374,7 @@ PostHog.capture("foo")
 // V2 Setup difference
 import PostHog from 'posthog-react-native'
 
-const posthog = new PostHog('phc_ChmcdLbC770zgl23gp3Lax6SERzC2szOUxtp0Uy4nTf', {
+const posthog = await Posthog.initAsync('phc_ChmcdLbC770zgl23gp3Lax6SERzC2szOUxtp0Uy4nTf', {
     host: 'https://app.posthog.com',
     // Add any other options here.
 })

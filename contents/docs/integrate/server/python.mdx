@@ -74,7 +74,7 @@ Optionally you can submit:
 -   `properties`, which is a dictionary with any information you'd like to add
 -   `timestamp`, a datetime object for when the event happened. If this isn't submitted, it'll be set to the current time
 -   `uuid`, a unique `uuid` for the event, leave blank to autogenerate
--   `send_feature_flags`, a boolean that determines whether to send current known feature flags with this event. This is useful when running experiments which depends on this event.
+-   `send_feature_flags`, a boolean that determines whether to send current known feature flags with this event. This is useful when running experiments which depends on this event. However, this makes things slow. [Read this tutorial for manually computing this information and speeding things up](/tutorials/experiments#step-2-sending-the-right-events)
 
 For example:
 
@@ -159,13 +159,12 @@ If you're using PostHog in the front-end and back-end, doing the `identify` call
 
 An `alias` call requires:
 
--   `previous distinct id` the unique ID of the user before
--   `distinct id` the current unique id
+-   `distinct id` – the current unique id (logged in user id)
+-   `alias` – the _other_ distinct ID of the user, which will be aliased to the current one
 
 For example:
-
 ```python
-posthog.alias('anonymous session id', 'distinct id')
+posthog.alias('user:123', 'session:12345');
 ```
 
 ### Feature flags

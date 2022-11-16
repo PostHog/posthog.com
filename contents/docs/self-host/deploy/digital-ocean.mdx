@@ -18,10 +18,7 @@ import InstallingSnippet from './snippets/installing'
 import UpgradingSnippet from './snippets/upgrading'
 import UninstallingSnippet from './snippets/uninstalling'
 import InstallClusterIssuer from './snippets/install-cluster-issuer'
-import Disclaimer from './snippets/disclaimer'
 import NextSteps from './snippets/next-steps'
-
-<Disclaimer />
 
 [DigitalOcean](https://digitalocean.com) is one of the most well-established Cloud Providers.
 Compared to AWS, GCP and Azure where the amount of options and configuration can be overwhelming,
@@ -161,7 +158,7 @@ cert-manager:
     enabled: true
 ```
 
-Note: if you are planning to use our [GeoIP integration](https://posthog.com/integrations/geoip), please also add the snippet below
+Note: if you are planning to use our [GeoIP integration](https://posthog.com/apps/geoip-enrichment), please also add the snippet below
 to enable proxy protocol support in the load balancer and in the `nginx` ingress controller:
 
 ```yaml file=values.yaml

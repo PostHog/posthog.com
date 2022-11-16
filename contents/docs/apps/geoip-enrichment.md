@@ -30,7 +30,7 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 3. Search for 'GeoIP'
 4. Select the GeoIP app, press 'Install' and follow the on-screen instructions
 
-### How do I add add properties?
+### How do I add properties?
 
 The following properties can be added to the event if its IP address can be matched to a GeoLite2 City location:
 

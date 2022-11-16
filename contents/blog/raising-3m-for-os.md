@@ -81,7 +81,7 @@ From this point on, we're going to explain how we raised venture capital in this
 
 ## Converting an Open Source project into a business
 
-This is a contraversial topic as it creates all kinds of incentives, but for at least our project, it fundamentally made the entire thing possible in the first place. We just wouldn't have gone ahead if we were working on it at weekends or in our spare time.
+This is a controversial topic as it creates all kinds of incentives, but for at least our project, it fundamentally made the entire thing possible in the first place. We just wouldn't have gone ahead if we were working on it at weekends or in our spare time.
 
 ## Product`<>`Community versus Product`<>`Market fit
 
@@ -306,7 +306,7 @@ Once the company was incorporated (which we had to do to get YC's $150k initial 
 
 We set a cap with investors. We started off with a $12M post money cap, meaning that the first $200K or so that we raised guaranteed those investors that if our eventual priced round went over $12M valuation, they'd get a lower price as a reward for investing early thus getting a higher fraction of the company for the same money. After starting with angel investors on this basis, we decided fundraising was going well so we increased the cap to $15M. We were originally going to increase it to $20M, enabling us to raise more, but we felt given the economic uncertainty as covid hit that we should take the money as fast as possible in case the US went into a recession.
 
-It's important to note that the downside of SAFEs is that if you have a down round at the next phase of fundraising, you'll get very diluted (if if the price is lower than the cap).
+It's important to note that the downside of SAFEs is that if you have a down round at the next phase of fundraising, you'll get very diluted (if the price is lower than the cap).
 
 We've no affiliation other than being friends, but in order to model how much of the company you're selling during this process, we used [Pulley](https://pulley.com). You put in all the SAFEs and you can model out a series A to check how much you've sold. [Sam Altman's advice](https://blog.ycombinator.com/dilution/) is to try to give up no more than 10-15% in a seed round and 15-25% in your A round… although "it's far more important not to run out of money than almost anything else". We used [Clerky](https://www.clerky.com/) to generate the SAFEs and to send them for electronic signature.
 

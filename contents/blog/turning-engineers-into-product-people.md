@@ -14,7 +14,7 @@ categories: ["Startups", "Product analytics"]
 
 Great engineers will either get autonomy at your company, or they'll get it somewhere else. Our engineers are encouraged to think about the _what_ and _why_ of what they're building - not just the _how_.
 
-At PostHog, new people are usually surprised by the lack of [micromanagement](https://posthog.com/handbook/company/management), onerous KPIs, and [death by meetings](https://posthog.com/blog/meetings). Rather, we run two-week sprints where everyone decides what they’re going to work on for the next 14 days following a retrospective at the end of each sprint. New problems are usually discovered and solved during each sprint that weren’t originally planned for, such as two of our main features - [session recording](https://posthog.com/product-features/session-recording) and [feature flags](https://posthog.com/product-features/feature-flags) - which were ideated during one of our hackathons.
+At PostHog, new people are usually surprised by the lack of [micromanagement](https://posthog.com/handbook/company/management), onerous KPIs, and [death by meetings](https://posthog.com/blog/meetings). Rather, we run two-week sprints where everyone decides what they’re going to work on for the next 14 days following a retrospective at the end of each sprint. New problems are usually discovered and solved during each sprint that weren’t originally planned for, such as two of our main features - [session recording](/product/session-recording) and [feature flags](/product/feature-flags) - which were ideated during one of our hackathons.
 
 When you give engineers the freedom to play around with new ideas, magical things happen.
 
@@ -40,7 +40,7 @@ Beyond iteration speed, risk-taking, and problem-solving, we’re also looking f
 
 <iframe src="https://giphy.com/embed/3o7btZ1Gm7ZL25pLMs" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 
-As of writing, we’ve got 12 engineers and are looking to double that number within a year. Expanding your engineering team introduces all sorts of interesting challenges, from the kind of work each person does to how we distribute ownership of output. We’ve introduced [Small Teams](https://posthog.com/handbook/people/team-structure/why-small-teams) at PostHog over the past few months and have enjoyed immense success with it. More work gets done faster and more problems are spotted early and fixed. Every Small Team has its own leader, and top management provides support and direction.
+As of writing, we’ve got 12 engineers and are looking to double that number within a year. Expanding your engineering team introduces all sorts of interesting challenges, from the kind of work each person does to how we distribute ownership of output. We’ve introduced [Small Teams](https://posthog.com/handbook/company/small-teams) at PostHog over the past few months and have enjoyed immense success with it. More work gets done faster and more problems are spotted early and fixed. Every Small Team has its own leader, and top management provides support and direction.
 
 ## Do you need a VP of Product?
 

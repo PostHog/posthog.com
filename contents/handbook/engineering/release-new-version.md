@@ -4,19 +4,21 @@ sidebar: Handbook
 showTitle: true
 ---
 
-We release a new version on the last Monday of every month.
+We release a new version every four weeks on Monday. This lines up with our sprints, which are two weeks. Code freeze and "break the release" happens on Wednesday before.
+
+> Because there are thirteen weeks in a quarter, there is always one extra out-of-sprint week at the end of each quarter. We dedicate that last week to cleanup tasks along with OKR reflection and planning.
 
 This consistency is important, as it means our community and our customers can look forward to new features at a predictable pace. There will always be more work that we want to do and if we get in a habit of pushing deadlines out, we'll push them further and further.
 
-Sprints do not line up with releases, so a release might fall in the middle of the sprint, for which we need to plan accordingly. If a feature won't be ready by the release date then cut down the scope, remove it, or release it behind a feature flag.
-
-Code freezes and break the release happen on the Wednesday before that. Each month there will be a different release owner in charge of the release, to be updated under this [calendar](https://calendar.google.com/calendar/embed?src=c_n8hc1iedb0k8gqhuiv83jolm50%40group.calendar.google.com&ctz=America%2FNew_York).
+Each release there is a different release owner in charge, according to [this calendar](https://calendar.google.com/calendar/embed?src=c_n8hc1iedb0k8gqhuiv83jolm50%40group.calendar.google.com).
 
 If we've shipped features that we want to feature in the release notes, we use the label `highlight` on our pull request. If after the code freeze we have important bugfixes that we want to get into the release, we add the label `release-[version]`. This makes it easier for the release owner to figure out changes for the release blog post and to cherry-pick commits between the Code Freeze and the Release.
 
+> When we say "release", technically we mean releasing to self-hosted users as we deploy PostHog Cloud continuously. However, releases are still an important moment within PostHog as we publicly announce all new features.
+
 ## Version numbers
 
-Every month we bump the `minor` in `major.minor.patch`. At the moment, we're at version 1 for major. This will only change once we have released sufficient functionality under stage 2 of [our Roadmap](/handbook/strategy/roadmap/).
+Every release we bump the `minor` in `major.minor.patch`. At the moment, we're at version 1 for major. This will only change once we have released sufficient functionality under stage 2 of [our Roadmap](/handbook/strategy/roadmap/).
 
 Hopefully we will not have to do many patch versions, but if between versions we discover a breaking bug, we will.
 
@@ -24,7 +26,7 @@ Hopefully we will not have to do many patch versions, but if between versions we
 
 > 💡 For the context of this guide `[version]` is interpreted as the version of the release (e.g. `1.29.0`).
 
-Three business days before the release (Wednesday before the release), we institute a code freeze. Feel free to make an announcement on Slack before we cut the branch, so people can have a heads-up. Then, we branch `master` into `release-[version]` and deploy that to our playground environment, [playground.posthog.com](https://playground.posthog.net/). We then host an hour-long "Break the release" session where everyone lends a hand in testing for any bugs. It's a recurring meeting, so you don't need to set it up.
+On the Wednesday before the release, we institute a code freeze. Feel free to make an announcement on Slack before we cut the branch, so people have a heads-up. Then, we branch `master` into `release-[version]` and deploy that to our playground environment, [playground.posthog.com](https://playground.posthog.net/). We then host an hour-long "Break the release" session where everyone lends a hand in testing for any bugs. It's a recurring meeting, so you don't need to set it up.
 
 Only bugfixes and finishing touches are allowed to be merged into this branch between the code freeze and the release going out. This gives us about three days to test the release.
 
@@ -55,6 +57,16 @@ Release is happening next Monday. Which means
   Note that this will result in a Docker image tagged `release-[version]-unstable` being built. It might take a while, but it should show up [in Docker Hub](https://hub.docker.com/r/posthog/posthog/tags?page=1&name=release) within half an hour. You can check the build's status on the [GitHub Actions page of the main repo](https://github.com/PostHog/posthog/actions/workflows/docker-unstable-image.yml).
   
   > 💡 Make sure you have `doctl`, `helm`, and `k9s` installed before going through the next steps. You can install all of these with `brew install doctl helm k9s`.
+1. [ ] Create a new [`charts-clickhouse`](https://github.com/PostHog/charts-clickhouse) branch named `bump-[version]` to update the Helm chart:
+    1. In [`Chart.yaml`](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/Chart.yaml) update `appVersion` to the new version.
+    1. In [`Chart.yaml`](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/Chart.yaml) update `version`. 
+      - If you're releasing a patch version of the app, increase the `patch` version by 1. 
+      - If you're releasing a minor version of the app with no breaking changes, increase the `minor` version by 1.
+      - If you're releasing a minor version of the app with breaking changes for deployment (e.g. you must run async migrations manually), increase the `major` version by 1 and publish [upgrade notes](https://github.com/PostHog/posthog.com/blob/master/contents/docs/runbook/upgrade-notes.md) for the chart.
+    1. In [values.yaml](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/values.yaml) update `image.default` to point to the new **unstable** tag (i.e. `:release-[version]-unstable`).
+    1. In [`ALL_VALUES.md`](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) update the default value of `image.default` to what you set in the previous step. Also, update the `AppVersion` [shields.io](https://shields.io/) badge at the top.
+    1. Push the relevant changes and create a PR. **Do not merge this PR.** (You can see that [in Docker Hub](https://hub.docker.com/r/posthog/posthog/tags?page=1&name=release-))
+    1. Make sure all tests pass in this PR. If a test fails, to get the errors, check the "namespace report", which is run right after the failed test.
 
 1. [ ] Upgrade PostHog playground
     1. The PostHog Playground uses a helm chart deployment on DigitalOcean. Find the playground cluster in our [DigitalOcean Kubernetes clusters list](https://cloud.digitalocean.com/kubernetes/clusters?i=7cfa7c).
@@ -90,7 +102,7 @@ Release is happening next Monday. Which means
   git log --pretty=format:"%s %ae" origin/release-[old-version]..head | sort -t ':' -k 1,1 -s > changelog.txt
   ```
 1. [ ] Write up the [PostHog Array blog post](/handbook/growth/marketing/blog#posthog-array). Please tag Joe Martin for review, as this helps Marketing coordinate other announcements. Do not release the post until the day of release.
-1. [ ] Share the PostHog Array blog post with all partners listed in the [PostHog Marketplace](/marketplace) via the dedicated Slack channels. Don't have access to them all? Please ask Joe Martin to do this instead. 
+1. [ ] Share the PostHog Array blog post with all partners listed in the [PostHog partner directory](/partners) via the dedicated Slack channels. Don't have access to them all? Please ask Joe Martin to do this instead. 
 
 ### Launch (day of the release)
 1. [ ] Tag the version in GitHub. This will also build and push the `release-[version]`, `latest-release` (for both PostHog base & FOSS) Docker images to Docker Hub. **Please do this once the release branch is finalized, some users may see the image on Docker Hub and update immediately.**
@@ -98,12 +110,7 @@ Release is happening next Monday. Which means
   git tag -a [version] -m "Version [version]"
   git push --follow-tags
   ```
-1. [ ] Create a new [`charts-clickhouse`](https://github.com/PostHog/charts-clickhouse) branch named `bump-[version]` to update the Helm chart:
-    1. In [`Chart.yaml`](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/Chart.yaml) update `appVersion` to the new version.
-    1. In [`Chart.yaml`](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/Chart.yaml) update `version` by increasing the `minor` version by 1.
-    1. In [values.yaml](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/values.yaml) update `image.default` to point to the new tag (i.e. `:release-[version]`).
-    1. In [`ALL_VALUES.md`](https://github.com/PostHog/charts-clickhouse/blob/main/charts/posthog/ALL_VALUES.md) update the default value of `image.default` to what you set in the previous step. Also, update the `AppVersion` [shields.io](https://shields.io/) badge at the top.
-    1. Push the relevant changes and create a PR. **Do not merge until the `release-[version]` branch is built.** (You can see that [in Docker Hub](https://hub.docker.com/r/posthog/posthog/tags?page=1&name=release-))
+1. [ ] Update the PR in [charts-clickhouse](https://github.com/PostHog/charts-clickhouse/pulls) and change the image from `release-1.x.y-unstable` to `release-1.x.y`.
 1. [ ] Publish the [PostHog Array blog post](/handbook/growth/marketing/blog#posthog-array).
 1. [ ] Create a new main repo (`posthog`) branch named `sync-[version]`. Cherry-pick the `release-[version]` commits updating `version.py` and `versions.json` into `sync-[version]` and create a PR to get them into `master`. **Merging this to master will notify users that an update is available.** The Array post should be out at this point so that the "Release notes" link isn't a 404.
 1. [ ] Go to the [EWXT9O7BVDC2O](https://us-east-1.console.aws.amazon.com/cloudfront/v3/home?region=us-east-2#/distributions/EWXT9O7BVDC2O) CloudFront distribution to the "Invalidations" tab and add a new one with `/*` value. This will refresh the CloudFront cache so that users can see the new version. You can check this by visiting https://update.posthog.com/

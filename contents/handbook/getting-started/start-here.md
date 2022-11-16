@@ -8,7 +8,7 @@ Welcome to the PostHog Handbook! If you are a new starter, this page will help y
 
 ## Big picture
 
-We encourage everyone to start at the beginning first before diving in. We have a strong bias for action, but it is still worth taking a step back and looking at the 'why' first. This helps ensure sure you have the right context and are working on the right things. 
+We encourage everyone to start at the beginning first before diving in. We have a strong bias for action, but it is still worth taking a step back and looking at the 'why' first. This helps ensure you have the right context and are working on the right things. 
 
 You should start with the '[Company](/handbook/company/story)' section and work your way through everything there. It is not a lot to read. In particular, the sections on our [Strategy](/handbook/strategy/overview) and [Roadmap](/handbook/strategy/roadmap) are a must-read for everyone. 
 
@@ -19,7 +19,7 @@ Next, familiarise yourself with our approach to [Culture](/handbook/company/cult
 Now it's time to dive into some of the more practical stuff - these are the most important pages:
 
 1. [Communication](/handbook/company/communication) - we have a distinctive style. If PostHog is your first all-remote company, this page is especially helpful.
-2. [Team structure](/handbook/people/team-structure/team-structure) - we are structured in Small Teams. These pages will help you get the lay of the land, and who does what. 
+2. [Team structure](/handbook/small-teams/team-structure) - we are structured in Small Teams. These pages will help you get the lay of the land, and who does what. 
 3. [Management](/handbook/company/management) - we have a relatively unusual approach to management, and it is possible that you will not be familiar with our approach. 
 
 ### Working in GitHub

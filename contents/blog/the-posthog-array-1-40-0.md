@@ -19,7 +19,7 @@ Want to know more about what we're up to? [Subscribe to HogMail, our newsletter]
 **Release highlights:**
 
 - New: [Redesigned calendar and date components](#new-redesigned-calendar-and-date-components)
-- New: [Overhauled annotations](#new--overhauled-annotations)
+- New: [Overhauled annotations](#new-overhauled-annotations)
 - New: [Revamped persons modals](#new-revamped-persons-modal)
 - New: [Recordings domain settings](#new-recordings-domain-settings)
 - Improved: [Retention insight update](#improved-retention-insight-update)

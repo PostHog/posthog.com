@@ -61,7 +61,7 @@ export const SidebarSection = ({
     className?: string
 }) => {
     return (
-        <div className={`py-4 px-5 lg:px-8 ${className}`}>
+        <div className={`py-4 px-6 ${className}`}>
             {title && <h3 className="text-black dark:text-white font-semibold opacity-25 m-0 mb-2 text-sm">{title}</h3>}
             {children}
         </div>
@@ -95,7 +95,7 @@ export const ShareLinks = ({ title, href }: { title: string; href: string }) => 
                 <Facebook />
             </ShareLink>
             <ShareLink
-                url={`https://twitter.com/intent/tweet?url=${href}&text=Check%20out%20this%20article%20from%20%40poshog%0A%0A`}
+                url={`https://twitter.com/intent/tweet?url=${href}&text=Check%20out%20this%20article%20from%20%40posthog%0A%0A`}
             >
                 <Twitter className="w-[32px] h-[32px]" />
             </ShareLink>
@@ -117,7 +117,12 @@ export const ContributorImage = ({ image, name, className = '', imgClassName = '
     return (
         <div className={`w-[38px] h-[38px] relative rounded-full overflow-hidden ${className}`}>
             {gatsbyImage ? (
-                <GatsbyImage imgClassName={`rounded-full ${imgClassName}`} image={gatsbyImage} alt={name} />
+                <GatsbyImage
+                    imgClassName={`rounded-full ${imgClassName}`}
+                    image={gatsbyImage}
+                    alt={name}
+                    className="bg-gray-accent dark:bg-gray-accent-dark"
+                />
             ) : (
                 <svg width="38" height="38" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -461,6 +466,7 @@ export default function PostLayout({
     hideSearch,
     contentContainerClassName,
     menuType = 'standard',
+    searchFilter,
 }: IProps) {
     const { hash, pathname } = useLocation()
     const breakpoints = useBreakpoint()
@@ -523,7 +529,7 @@ export default function PostLayout({
                             <MobileMenu style={{ transform: `rotate(${mobileMenuOpen ? '180deg' : '0deg'})` }} />
                         </button>
                     )}
-                    <SearchBar />
+                    <SearchBar base={searchFilter} />
                 </div>
             )}
             {menu && (
@@ -585,11 +591,11 @@ export default function PostLayout({
                 {!hideSidebar && sidebar && (
                     <aside
                         key={`${title}-sidebar`}
-                        className="flex-shrink-0 w-full justify-self-end my-10 lg:my-0 mr-auto h-full lg:px-0 px-5 box-border"
+                        className="flex-shrink-0 w-full justify-self-end my-10 lg:my-0 mr-auto h-full lg:px-0 px-4 box-border"
                     >
                         <div className="h-full flex flex-col divide-y divide-gray-accent-light dark:divide-gray-accent-dark divide-dashed">
                             <div className="relative h-full">
-                                <div ref={topSidebarSection} className="pt-6 top-10 sticky">
+                                <div ref={topSidebarSection} className="pt-4 top-10 sticky">
                                     {sidebar}
                                 </div>
                             </div>
@@ -598,7 +604,7 @@ export default function PostLayout({
                                 {view === 'Article' && toc?.length > 1 && !showTocButton && (
                                     <div
                                         style={{ visibility: showTocButton === null ? 'hidden' : 'visible' }}
-                                        className="px-5 lg:px-8 lg:pb-4 lg:block hidden"
+                                        className="px-4 lg:px-8 lg:pb-4 lg:block hidden"
                                     >
                                         <h4 className="text-black dark:text-white font-semibold opacity-25 m-0 mb-1 text-sm">
                                             Jump to:
@@ -671,16 +677,18 @@ export default function PostLayout({
                                             </SidebarAction>
                                         </>
                                     )}
-                                    <SidebarAction
-                                        className="!ml-auto"
-                                        title="Toggle content width"
-                                        onClick={handleFullWidthContentChange}
-                                    >
-                                        <ExpandDocument expanded={fullWidthContent} />
-                                    </SidebarAction>
-                                    <SidebarAction className="ml-2" width="auto" title="Toggle dark mode">
-                                        <DarkModeToggle />
-                                    </SidebarAction>
+                                    <div className="ml-auto flex">
+                                        <SidebarAction
+                                            className="hidden xl:block"
+                                            title="Toggle content width"
+                                            onClick={handleFullWidthContentChange}
+                                        >
+                                            <ExpandDocument expanded={fullWidthContent} />
+                                        </SidebarAction>
+                                        <SidebarAction className="ml-2" width="auto" title="Toggle dark mode">
+                                            <DarkModeToggle />
+                                        </SidebarAction>
+                                    </div>
                                 </ul>
                             </div>
                         </div>

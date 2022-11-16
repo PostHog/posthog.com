@@ -91,7 +91,7 @@ const cloudOptions = {
     },
     demoCTA: {
         title: 'Join a group demo',
-        url: '/signup/self-host/get-in-touch?plan=cloud&demo=group#demo',
+        url: '/get-in-touch?plan=cloud&demo=group#demo',
     },
 }
 
@@ -103,11 +103,11 @@ const cloudEnterpriseOptions = {
     icon: <CloudIcon className="opacity-30 w-[36px]" />,
     mainCTA: {
         title: 'Get in touch',
-        url: '/signup/self-host/get-in-touch?plan=enterprise#contact',
+        url: '/get-in-touch?plan=enterprise#contact',
     },
     demoCTA: {
         title: 'Book a demo',
-        url: '/signup/self-host/get-in-touch?plan=enterprise&demo=enterprise#demo',
+        url: '/get-in-touch?plan=enterprise&demo=enterprise#demo',
     },
 }
 
@@ -124,7 +124,7 @@ const cloudEnterpriseOptions2 = {
     },
     demoCTA: {
         title: 'Book a demo',
-        url: '/signup/self-host/get-in-touch?plan=enterprise&demo=enterprise#demo',
+        url: '/get-in-touch?plan=enterprise&demo=enterprise#demo',
     },
 }
 
@@ -140,7 +140,7 @@ const selfHostedOptions = {
     },
     demoCTA: {
         title: 'Join a group demo',
-        url: '/signup/self-host/get-in-touch?plan=self-host&demo=group#demo',
+        url: '/get-in-touch?plan=self-host&demo=group#demo',
     },
 }
 
@@ -156,7 +156,7 @@ const selfHostedEnterpriseOptions = {
     },
     demoCTA: {
         title: 'Book a demo',
-        url: '/signup/self-host/get-in-touch?plan=enterprise&demo=enterprise#demo',
+        url: '/get-in-touch?plan=enterprise&demo=enterprise#demo',
     },
 }
 
@@ -223,8 +223,7 @@ export default function Calculator({
             className="bg-transparent w-full"
         >
             <div>
-                <h4 className="text-lg font-bold m-0 ">Pricing breakdown</h4>
-                <p className="text-sm mb-2 text-semibold">Pay per event</p>
+                <h4 className="text-base font-bold m-0 ">Volume discounts</h4>
                 {pricingOption && (
                     <>
                         <ul className="grid gap-y-1 m-0 p-0">
@@ -253,7 +252,7 @@ export default function Calculator({
                 )}
 
                 <p className="text-sm pt-2 mt-2 mb-4 pb-0 m-0 text-black/50 border-t border-dashed border-gray-accent-light">
-                    B2C company with millions of users? Sign up and get in touch to learn about B2C pricing.
+                    * We offer B2C companies up to 30% off. Get in touch after you've started sending data to PostHog.
                 </p>
 
                 <div className="pt-4 border-t border-gray-accent-light border-dashed">

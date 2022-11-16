@@ -8,7 +8,19 @@ hideAnchor: true
 
 ## Our approach to hiring 
 
-Our goal is to build a [diverse](https://posthog.com/handbook/company/diversity), world-class team that allows us to act and iterate fast, with a high level of [autonomy and innovation](https://posthog.com/handbook/people/team-structure/why-small-teams).
+Our goal is to build a [diverse](/handbook/company/diversity), world-class team that allows us to act and iterate fast, with a high level of [autonomy and innovation](/handbook/company/small-teams).
+
+Our recruitment strategy is to run:
+- **100% inbound by default** - effectively a word of mouth strategy, like our marketing and sales model.
+- Supplement this with **occasional, targeted sourcing** to increase the pool of diverse candidates (if needed).
+
+This has resulted in the highest number of qualified and motivated candidates reaching final stages with us compared to other methods, such as more generic sourcing. As a result, we invest most of our energy in:
+
+- Writing exceptional job descriptions, and re-writing them frequently
+- Ensuring our careers page and application experience are world class
+- Sharing our roles within our networks for exposure in unusual ways (as candidates are likely to be pre-qualified)
+- Giving candidates genuinely useful and direct feedback if they weren't successful with us
+- Running a smooth and incredibly slick recruitment process, from application to offer
 
 ## Hiring Process
 
@@ -16,16 +28,14 @@ Our goal is to build a [diverse](https://posthog.com/handbook/company/diversity)
 
 | **Position title**        | **Location we're happy to hire in** | **Small Team**        | **Manager** | **Interview Process**                                                                                                                          | **SuperDay Task**              |
 |---------------------------|----------------------------------------|-----------------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|
-| Senior Data Engineer      | GMT -5:00 to +2:00                   | Ingestion       | James G.    | 1) Culture Screen - Coua<br/> 2) Technical Screen - James G.<br/> 3) Engineering Culture Screen - Tim<br/> 3) SuperDay Assessment - James G., Tiina, James H. & Yakko                 | [Ingestion Task](https://github.com/PostHog/superday-ingestion) (download ZIP and send)  |
-| Site Reliability Engineer | GMT -8:00 to +2:00                   | Platform        | James G.    | 1) Culture Screen - Coua<br/> 2) Technical Screen - James G.<br/> 3) Engineering Culture Screen - Tim<br/> 4) SuperDay Assessment - James G., Guido, Tiina, James H., & Karl    | [SRE Task](https://github.com/PostHog/sre-superday) (download ZIP and send) |
-| Full Stack Engineer       | GMT -8:00 to +2:00                   | App West/East   | Marius/Eric | 1) Culture Screen - Coua<br/> 2) Technical Screen - Marius/Eric<br/> 3) Engineering Culture Screen - Tim<br/> 4) SuperDay Assessment - Marius/Eric, Tim, James H., Li, Neil, & Karl | Live Task (link not available) |
-| Product Designer       | GMT -5:00 to +2:00                   | Design   | Cory | 1) Culture Screen - Coua<br/> 2) Technical Screen - James H.<br/> 3) Product Design Team Screen - Cory<br/> 4) SuperDay Assessment - Cory, Chris, Lottie, Eli, James H., & Tim | Live Task (link not available) |
+| Full Stack Engineer     | GMT -5:00 to +2:00                   | Product Analytics       | Marius    | 1) Culture Screen - Coua<br/> 2) Technical Screen - Marius<br/> 3) Engineering Culture Screen - Tim<br/> 3) SuperDay Assessment - Marius, Michael, Paul, Tim & James H.              | Live Task (link not available) |
+| Full Stack Engineer       | GMT -5:00 to +2:00                   | Experimentation  | Eric | 1) Culture Screen - Coua<br/> 2) Technical Screen - Eric<br/> 3) Engineering Culture Screen - Tim<br/> 4) SuperDay Assessment - Eric, Li, Neil, Tim & James H. | Live Task (link not available) |
 
 Tasks are only available internally - please do not share these publicly. 
 
 ### External recruiters
 
-All of our recruiting is done in-house, and we do not work with external agencies for any of our roles. We frequently receive unsolicited messages from agencies - sometimes 20 in a week - who want to work with us, and the best response is to simply ignore the message. If they attach any candidate profiles or resumés to their email, please _do not_ open the attachment. If you are ever unsure what to do, feel free to forward any unsolicited messages to careers@posthog.com. 
+All of our recruiting is done in-house, and we do not work with external agencies for any of our roles. We frequently receive unsolicited messages from agencies - sometimes 20 in a week - who want to work with us, and the best response is to simply ignore the message. If they attach any candidate profiles or résumés to their email, please _do not_ open the attachment. If you are ever unsure what to do, feel free to forward any unsolicited messages to careers@posthog.com. 
 
 ### Deciding to hire
 
@@ -62,7 +72,7 @@ As we keep iterating on our specs, the best approach is to copy our most recentl
 - Run the text through a [gender decoder tool](https://gender-decoder.katmatfield.com/) to check for unconscious bias
 - Don't use specific years of experience as a qualifier
 
-Once the hiring manager has signed off on the spec, we will publish it on Ashby. 
+Once the hiring manager has signed off on the spec, we will publish it on Ashby - [instructions on how to do this are here](/handbook/engineering/posthog-com/jobs). 
 
 
 #### Job boards
@@ -227,7 +237,7 @@ In advance of the SuperDay, we will need to do some additional prep to ensure th
 *   Send them an email in the first instance to schedule the SuperDay - we aim to  do this as soon as possible, as candidates often will need to book a day off work. Use the Ashby email template for this. If the task involves them doing 'real' work for PostHog, we should ask them to check that their current employment contract permits this - we try to create fake tasks for this reason.
 *   (One day before the SuperDay) Send the candidate a follow up email with details of the task, and ask them for their day rate and bank details. There is a template for this email in Ashby, depending on the role - this will probably need customising.
 *   (One day before the SuperDay) Create a private channel in Slack for the candidate and all relevant people - this will be where they can chat to us over the course of the day if they have any questions etc. Invite the candidate as a single channel guest. We might need to add the candidate to one of our systems depending on the role, e.g. Ashby for a recruiter SuperDay, but on the whole this should be minimized.
-*   (One day before the SuperDay) Invite the candidate to a kickoff meeting with the hiring manager at the start of the day. On days where we have a company-wide meeting scheduled, invite them along. On days without standup, schedule an informal session with some team members to give them a chance to learn more about our culture. We may also want to have a proper wrap up with them at the end of their day.
+*   (One day before the SuperDay) Invite the candidate to a kickoff meeting with the hiring manager at the start of the day. On days when we have a company-wide meeting scheduled, invite them along. On days without standup, schedule an informal session with some team members to give them a chance to learn more about our culture. We may also want to have a proper wrap up with them at the end of their day.
 *   (On the SuperDay) Send the candidate the task - aim to send this before the kick-off session.
 *   (On the SuperDay) Give the candidate a warm welcome! Make it clear that the team is here to answer any questions, and they should feel free to reach out any time! Otherwise don't feel like we need to check in with them - let them get on with the task and trust that they will message us.
 *   (One day after the SuperDay) Pay the candidate using the bank details they provided.

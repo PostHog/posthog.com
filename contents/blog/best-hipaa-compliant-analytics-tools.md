@@ -66,7 +66,7 @@ Unlike PostHog (above) and Plausible (below), Countly isn’t open source - thou
 ### Features & benefits
 
 - User tracking across desktop, mobile and IOT devices
-- Library of apps to extend functionaility
+- Library of apps to extend functionality
 - Push notifications and crash analytics
 
 ### Is Countly HIPAA compliant?

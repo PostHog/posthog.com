@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["CEO diaries", "Inside PostHog"]
+categories: ["CEO diaries", "Inside PostHog", "Startups"]
 author: ["james-hawkins"]
 featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
@@ -36,7 +36,7 @@ Finally, it helped us get to product market fit sooner. YC founders tend to give
 
 ## Investor reviews
 
-YC has a database that provies anonymized investor reviews written by founders about their experiences during fundraising. The fact this comes from within a trusted network means it'd be hard to replicate something from outside.
+YC has a database that provides anonymized investor reviews written by founders about their experiences during fundraising. The fact this comes from within a trusted network means it'd be hard to replicate something from outside.
 
 It was crucial to us in raising a seed round - we didn't know anyone and used it to build trust and to figure out who had the best reputation.
 

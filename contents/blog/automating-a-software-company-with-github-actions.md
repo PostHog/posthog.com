@@ -417,7 +417,7 @@ Here's what this looks like in GitHub's workflow visualization feature:
 
 But this is just the starting point, because on every commit to `master` we check whether the version has been incremented - and if it has, all the aforementioned release tasks run automatically.
 
-In fact, there are too many steps to show them all in this post – but I encourage you to take a look at real-world YAML that we use in our JS library's repo: [`cd.yaml`](https://github.com/PostHog/posthog-js/blob/master/.github/workflows/cd.yml). In it, we also use our own GitHub Action (free on the Actions Marketplace) which compares package version between the reposistory contents and npm: [PostHog/check-package-version](https://github.com/PostHog/check-package-version).
+In fact, there are too many steps to show them all in this post – but I encourage you to take a look at real-world YAML that we use in our JS library's repo: [`cd.yaml`](https://github.com/PostHog/posthog-js/blob/master/.github/workflows/cd.yml). In it, we also use our own GitHub Action (free on the Actions Marketplace) which compares package version between the repository contents and npm: [PostHog/check-package-version](https://github.com/PostHog/check-package-version).
 
 GitHub can also _visualize_ workflows – extremely boring if there's only one job, but here the graph is quite informative. Do keep in mind that this CD process is really an extension of the previous autobump workflow.
 
@@ -501,7 +501,7 @@ jobs:
 
 ### Syncing repositories
 
-One last case we'll discuss is syncing one repository's contents from another. In our case, we have a main product repo: https://github.com/PostHog/posthog. However, parts of it – enteprise features code – are non-FOSS, which means their code is not under a free license. We are happy to offer a purely FOSS version of PostHog with https://github.com/PostHog/posthog-foss, which is just like the main repo but with non-free portions removed.
+One last case we'll discuss is syncing one repository's contents from another. In our case, we have a main product repo: https://github.com/PostHog/posthog. However, parts of it – enterprise features code – are non-FOSS, which means their code is not under a free license. We are happy to offer a purely FOSS version of PostHog with https://github.com/PostHog/posthog-foss, which is just like the main repo but with non-free portions removed.
 
 Keeping `posthog-foss` in sync with `posthog` manually would be awful work though. So we've automated it:
 

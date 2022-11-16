@@ -7,6 +7,7 @@ import Layout from 'components/SignUp/Layout'
 import { useValues } from 'kea'
 import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
 import React, { useEffect, useState } from 'react'
+import { StaticImage } from 'gatsby-plugin-image'
 
 const Editions = ({ setDemoType }) => {
     return (
@@ -22,13 +23,13 @@ const Editions = ({ setDemoType }) => {
                     </div>
                     <CallToAction
                         width="full"
-                        className="mt-4 box-border"
+                        className="mt-4 pt-6 box-border"
                         type="secondary"
                         onClick={() => open('https://www.loom.com/share/a75bad1edd1f4a97b90dc8d50e69e98d')}
                         event={{ name: 'book a demo: clicked recorded demo' }}
                     >
-                        Watch a recorded demo
-                        <img src="https://cdn.loom.com/sessions/thumbnails/a75bad1edd1f4a97b90dc8d50e69e98d-1663256285164-with-play.gif" />
+                        <StaticImage src="../images/loom-screenshot.gif" alt="Loom demo" />
+                        <div className="pt-1">Watch a recorded demo</div>
                     </CallToAction>
                 </div>
                 <div className="md:order-none order-first md:pl-6 pb-6 md:border-l md:border-b-0 border-b border-gray-accent-light border-dashed">
@@ -75,8 +76,8 @@ const Editions = ({ setDemoType }) => {
 const Book = ({ demoType }) => {
     return (
         <>
-            <Intro title="Book a demo">
-                <Contact hideTabs demoType={demoType} />
+            <Intro>
+                <Contact activeTab="demo" demoType={demoType} />
             </Intro>
         </>
     )

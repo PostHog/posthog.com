@@ -119,13 +119,6 @@ module.exports = {
         {
             resolve: `gatsby-source-filesystem`,
             options: {
-                name: `timeline`,
-                path: `${__dirname}/src/data/timeline.json`,
-            },
-        },
-        {
-            resolve: `gatsby-source-filesystem`,
-            options: {
                 name: `testimonials`,
                 path: `${__dirname}/src/data/testimonials.json`,
             },
@@ -138,9 +131,10 @@ module.exports = {
             },
         },
         {
-            resolve: `gatsby-plugin-git-info`,
+            resolve: `gatsby-source-strapi-pages`,
             options: {
-                match: '{src,contents}/**/*.{mdx,md}',
+                strapiURL: process.env.STRAPI_URL,
+                strapiKey: process.env.STRAPI_API_KEY,
             },
         },
         `gatsby-plugin-image`,
@@ -229,31 +223,11 @@ module.exports = {
                                 host: 'localhost',
                                 global: false,
                             },
-                            // By default the HTML entities <>&'" are escaped.
-                            // Add additional HTML escapes by providing a mapping
-                            // of HTML entities and their escape value IE: { '}': '&#123;' }
                             escapeEntities: {},
                         },
                     },
                     `gatsby-remark-mermaid`,
                 ],
-            },
-        },
-        {
-            resolve: `gatsby-plugin-posthog`,
-            options: {
-                // Specify the API key for your PostHog project (required)
-                apiKey: process.env.GATSBY_POSTHOG_API_KEY,
-                // Specify the API host (http://app.posthog.com/ unless in development)
-                apiHost: process.env.GATSBY_POSTHOG_API_HOST,
-                // Puts tracking script in the head instead of the body (optional, default: true)
-                head: true,
-                // Enable posthog analytics tracking during development (optional, default: false)
-                isEnabledDevMode: true,
-                initOptions: {
-                    _capture_metrics: true,
-                    persistence: 'localStorage+cookie',
-                },
             },
         },
         `gatsby-plugin-postcss`,

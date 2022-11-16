@@ -1,10 +1,14 @@
 ---
 title: Group analytics
+sidebar: Docs
+showTitle: true
+availability:
+    free: none
+    selfServe: full
+    enterprise: full
 related:
     - ../tutorials/tracking-teams.md
 ---
-
-<FeatureAvailability availablePlans={['standard', 'enterpriseCloud', 'startup', 'scale', 'enterprise']} />
 
 Groups are a feature which enable you to aggregate events by any entity other than an individual user - such as a company, device, or project. Essentially, groups enable these entities to send events in the same way as a user. 
 
@@ -15,7 +19,7 @@ Here are some of the questions that group analytics can help answer:
 - How does the conversion rate differ between small and large companies?
 - Which communities are growing the fastest?
 
-Groups can be used in other parts of the PostHog suite, including [insights](/manual/insights), [feature flags](/manual/feature-flags), and [experiments](/manual/experiments).
+Groups can be used in other parts of the PostHog suite, including [insights](/manual/insights), [feature flags](/manual/feature-flags), and [experiments](/manual/experimentation).
 
 ## Understanding group analytics
 
@@ -190,6 +194,8 @@ analytics.track('$groupidentify', {
 Properties on groups behave in the exact same way as properties on persons within insights. They can also be used within exepriments and feature flags to rollout features to specific groups.
 
 > **Note:** The PostHog UI identifies a group using the `name` property. If no `name` property is found, it falls back to the group key.
+
+For more on implementing group analytics, check out our [guide on frontend vs backend group analytics implementations](/tutorials/frontend-vs-backend-group-analytics).
 
 ## Using groups in PostHog
 

@@ -15,6 +15,7 @@ import { Apps } from './components/Apps'
 import { AppsList } from './components/AppsList'
 import { ArrayCTA } from './components/ArrayCTA'
 import { AshbyOpenRoles } from './components/AshbyOpenRoles'
+import { Banner } from './components/Banner'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BlockQuote } from './components/BlockQuote'
 import { Blog } from './components/Blog'
@@ -36,16 +37,18 @@ import { CodeBlock } from './components/CodeBlock'
 import { CommunityQuestions } from './components/CommunityQuestions'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { Contact } from './components/Contact'
-import { ContactForm } from './components/ContactForm'
 import { Container } from './components/Container'
 import { ContributorCard } from './components/ContributorCard'
 import { ContributorSearch } from './components/ContributorSearch'
 import { ContributorsChart } from './components/ContributorsChart'
+import { CookieBanner } from './components/CookieBanner'
 import { Customers } from './components/Customers'
 import { DarkModeToggle } from './components/DarkModeToggle'
+import { DemoLink } from './components/DemoLink'
 import { DemoScheduler } from './components/DemoScheduler'
 import { DeployOption } from './components/DeployOption'
 import { DocsPageSurvey } from './components/DocsPageSurvey'
+import { EU } from './components/EU'
 import { FeatureAvailability } from './components/FeatureAvailability'
 import { FeaturesSelfHost } from './components/FeaturesSelfHost'
 import { FloatedImage } from './components/FloatedImage'
@@ -61,6 +64,7 @@ import { HostingOption } from './components/HostingOption'
 import { ImageBlock } from './components/ImageBlock'
 import { IngestionAppsList } from './components/IngestionAppsList'
 import { InlineCode } from './components/InlineCode'
+import { LPCTA } from './components/LPCTA'
 import { LandingPageCallToAction } from './components/LandingPage/LandingPageCallToAction'
 import { LibraryComparison } from './components/LibraryComparison'
 import { LibraryFeatures } from './components/LibraryFeatures'
@@ -101,6 +105,7 @@ import { ProductPage } from './components/ProductPage'
 import { ProductSectionHeader } from './components/ProductSectionHeader'
 import { Question } from './components/Question'
 import { Quote2 } from './components/Quote2'
+import { Roadmap } from './components/Roadmap'
 import { RocketHorizontalRule } from './components/RocketHorizontalRule'
 import { SearchBox } from './components/SearchBox'
 import { SectionLinks } from './components/SectionLinks'
@@ -117,6 +122,7 @@ import { Structure } from './components/Structure'
 import { Subscribe } from './components/Subscribe'
 import { Tab } from './components/Tab'
 import { TeamQuote } from './components/TeamQuote'
+import { Toast } from './components/Toast'
 import { Toggle } from './components/Toggle'
 import { Tooltip } from './components/Tooltip'
 import { TotalCountries } from './components/TotalCountries'
@@ -142,6 +148,7 @@ export const shortcodes = {
     AppsList,
     ArrayCTA,
     AshbyOpenRoles,
+    Banner,
     BasicHedgehogImage,
     BlockQuote,
     Blog,
@@ -163,16 +170,18 @@ export const shortcodes = {
     CommunityQuestions,
     CompensationCalculator,
     Contact,
-    ContactForm,
     Container,
     ContributorCard,
     ContributorSearch,
     ContributorsChart,
+    CookieBanner,
     Customers,
     DarkModeToggle,
+    DemoLink,
     DemoScheduler,
     DeployOption,
     DocsPageSurvey,
+    EU,
     FeatureAvailability,
     FeaturesSelfHost,
     FloatedImage,
@@ -188,6 +197,7 @@ export const shortcodes = {
     ImageBlock,
     IngestionAppsList,
     InlineCode,
+    LPCTA,
     LandingPageCallToAction,
     LibraryComparison,
     LibraryFeatures,
@@ -228,6 +238,7 @@ export const shortcodes = {
     ProductSectionHeader,
     Question,
     Quote2,
+    Roadmap,
     RocketHorizontalRule,
     SearchBox,
     SectionLinks,
@@ -244,6 +255,7 @@ export const shortcodes = {
     Subscribe,
     Tab,
     TeamQuote,
+    Toast,
     Toggle,
     Tooltip,
     TotalCountries,

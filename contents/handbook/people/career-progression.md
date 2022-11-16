@@ -35,11 +35,11 @@ We don't limit you, and will push for much more than you may think is possible. 
 
 PostHog has a wide variety of challenges - from data, to entire new products and features, to design and UX tradeoffs. On the go-to-market side, we're wildly different - you'll learn about self serve, bottom up adoption, handling a community, and how giving things away for free leads to us making money.
 
-We have [small teams](/handbook/people/team-structure/team-structure) - we can move people around as we grow to provide variety and to let people switch up their focus if things get stale.
+We have [small teams](/handbook/small-teams/team-structure) - we can move people around as we grow to provide variety and to let people switch up their focus if things get stale.
 
 **Lightweight management**
 
-You have [someone to talk to](https://posthog.com/handbook/company/management), but without being micromanaged. Their priority is to support you, and we give them resources to make them a better manager. 
+You have [someone to talk to](/handbook/company/management), but without being micromanaged. Their priority is to support you, and we give them resources to make them a better manager. They will also do a [regular career check-in](/handbook/company/management#1-1s-and-team-member-growth) with you as part of your 1-1s to ensure you're on the right track. 
 
 **Build a huge open source portfolio**
 

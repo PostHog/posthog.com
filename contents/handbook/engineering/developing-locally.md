@@ -37,13 +37,13 @@ This is what we'll be using in the guide below.
 > It is also technically possible to run PostHog in Docker completely, but syncing changes is then much slower, and for development you need PostHog dependencies installed on the host anyway (such as formatting or typechecking tools).
 > The other way around – everything on the host, is not practical due to significant complexities involved in instantiating Kafka or ClickHouse from scratch.
 
-The instructions here assume you're running macOS.
+The instructions here assume you're running macOS or the current Ubuntu Linux LTS (22.04).
 
-For Linux, adjust the steps as needed (e.g. use `apt` or `pacman` in place of `brew`).
+For other Linux distros, adjust the steps as needed (e.g. use `dnf` or `pacman` in place of `apt`).
 
-Windows isn't supported natively. But, Windows users can run a Linux virtual machine. The latest Ubuntu Desktop is recommended. (Ubuntu Server is not recommended as debugging the frontend will require a browser that can access localhost.)
+Windows isn't supported natively. But, Windows users can run a Linux virtual machine. The latest Ubuntu LTS Desktop is recommended. (Ubuntu Server is not recommended as debugging the frontend will require a browser that can access localhost.)
 
-In case some steps here have fallen out of date, please tell us about it – feel free to [submit a patch](https://github.com/PostHog/posthog.com/tree/master/contents/docs/contribute/developing-locally.mdx)!
+In case some steps here have fallen out of date, please tell us about it – feel free to [submit a patch](https://github.com/PostHog/posthog.com/blob/master/contents/handbook/engineering/developing-locally.md)!
 
 ## macOS prerequisites
 
@@ -58,15 +58,27 @@ In case some steps here have fallen out of date, please tell us about it – fee
 
 3. Install [Docker Desktop](https://www.docker.com/products/docker-desktop) and in its settings give Docker **at least 4 GB of RAM** (or 6 GB if you can afford it) and at least 4 CPU cores.
 
-4. Append line `127.0.0.1 kafka clickhouse` to `/etc/hosts`. You can do it in one line with:
+## Ubuntu prerequisites
+
+1. Install Docker following [the official instructions here](https://docs.docker.com/engine/install/ubuntu/).
+
+2. Install the `build-essential` package:
 
     ```bash
-    sudo echo '127.0.0.1 kafka clickhouse' | sudo tee -a /etc/hosts
+    sudo apt install -y build-essential
+    ````
+
+## Common prerequisites for both macOS & Linux
+
+1. Append line `127.0.0.1 kafka clickhouse` to `/etc/hosts`. You can do it in one line with:
+
+    ```bash
+    echo '127.0.0.1 kafka clickhouse' | sudo tee -a /etc/hosts
     ```
 
     ClickHouse and Kafka won't be able to talk to each other without these mapped hosts.
 
-5. Clone the [PostHog repository](https://github.com/posthog/posthog). All future commands assume you're inside the `posthog/` folder.
+2. Clone the [PostHog repository](https://github.com/posthog/posthog). All future commands assume you're inside the `posthog/` folder.
 
     ```bash
     git clone https://github.com/PostHog/posthog && cd posthog/
@@ -125,18 +137,21 @@ Saved preprocessed configuration to '/var/lib/clickhouse/preprocessed_configs/us
 
 > **Friendly tip:** Kafka is currently the only x86 container used, and might segfault randomly when running on ARM. Restart it when that happens.
 
-Finally, install Postgres locally. Even planning to run Postgres inside Docker, we need a local copy of Postgres (version 11+) for its CLI tools and development libraries/headers. These are required by `pip` to install `psycopg2`.
+Finally, install Postgres locally. Even if you are planning to run Postgres inside Docker, we need a local copy of Postgres (version 11+) for its CLI tools and development libraries/headers. These are required by `pip` to install `psycopg2`.
 
 - On macOS:
     ```bash
     brew install postgresql
     ```
-- On Debian-based Linux:
-    ```bash
-    sudo apt install -y postgresql postgresql-contrib libpq-dev
-    ```
 
 This installs both the Postgres server and its tools. DO NOT start the server after running this.
+
+- On Debian-based Linux:
+    ```bash
+    sudo apt install -y postgresql-client postgresql-contrib libpq-dev
+    ```
+
+This intentionally only installs the Postgres client and drivers, and not the server. If you wish to install the server, or have it installed already, you will want to stop it, because the TCP port it uses conflicts with the one used by the Postgres Docker container. On Linux, this can be done with `sudo systemctl disable postgresql.service`.
 
 On Linux you often have separate packages: `postgres` for the tools, `postgres-server` for the server, and `libpostgres-dev` for the `psycopg2` dependencies. Consult your distro's list for an up-to-date list of packages.
 
@@ -155,7 +170,7 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
 
 4. Install Node packages by running `yarn`.
 
-5. Run `yarn typegen:write` to generate types for [Kea](https://kea.js.org/) state management logics used all over the frontend.
+5. Run `yarn typegen:write` to generate types for [Kea](https://keajs.org/) state management logics used all over the frontend.
 
 > The first time you run typegen, it may get stuck in a loop. If so, cancel the process (`Ctrl+C`), discard all changes in the working directory (`git reset --hard`), and run `yarn typegen:write` again. You may need to discard all changes once more when the second round of type generation completes.
 
@@ -187,9 +202,20 @@ We'll run the plugin server in a later step.
         sudo apt install -y libxml2 libxmlsec1-dev pkg-config
         ```
 
-1. Install Python 3.8. On macOS, you can do so with Homebrew: `brew install python@3.8`. Make sure when outside of `venv` to always use `python3` instead of `python`, as the latter may point to Python 2.x on some systems.
+1. Install Python 3.8.
 
-    **Friendly tip:** Need to manage multiple versions of Python on a single machine? Try [pyenv](https://github.com/pyenv/pyenv).
+    - On macOS, you can do so with Homebrew: `brew install python@3.8`.
+
+    - On Debian-based Linux:
+        ```bash
+        sudo add-apt-repository ppa:deadsnakes/ppa -y
+        sudo apt update
+        sudo apt install python3.8 python3.8-venv python3.8-dev -y
+        ```
+
+Make sure when outside of `venv` to always use `python3` instead of `python`, as the latter may point to Python 2.x on some systems. If installing multiple versions of Python 3, such as by using the `deadsnakes` PPA, use `python3.8` instead of `python3`.
+
+You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage multiple versions of Python 3 on the same machine.
 
 1. Create the virtual environment in current directory called 'env':
 

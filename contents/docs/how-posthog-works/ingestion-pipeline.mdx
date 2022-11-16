@@ -161,13 +161,13 @@ This scenario typically isn't ideal, as merging two users will only affect event
 As a result, we will be left with two separate `person_id`'s in the events table that should be associated with the same user, but instead will be treated as entirely unique users.
 The only way to fully 'merge' these two people would be to go back and rewrite the `person_id` field on past events, which is not practical or performant.
 
-For more information on how these merges can affect the results of your queries, take a look at this page on how [querying data](/data/how-posthog-works/queries) works.
+For more information on how these merges can affect the results of your queries, take a look at this page on how [querying data](/docs/how-posthog-works/queries) works.
 
 Avoiding this scenario is the primary goal of the event buffer: by [buffering certain events](#1-event-buffer), we can avoid creating a duplicate Person when other events arrive in suboptimal order from the user's initial sign-up flow.
 
 #### 3.1.2 - `$create_alias` events
 
-The process of handling `$create_alias` events is almost identical to the process for `$identify` events, except that instead of merging `$anon_distinct_id` into `$distinct_id`, we allow you to pass in two arbitrary `$distinct_id`'s you would like to combine and merge the second one into the first one.
+The process of handling `$create_alias` events is almost identical to the process for `$identify` events, except that instead of merging `$anon_distinct_id` into `$distinct_id`, we allow you to pass in two arbitrary `$distinct_id`'s you would like to combine and merge the second one (`alias`) into `distinct_id`.
 
 #### 3.1.3 - All other events
 
