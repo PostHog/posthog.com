@@ -5,8 +5,6 @@ import { heading, section } from './classes'
 import Icon from './Icon'
 import Slider from './Slider'
 import { DemoLink } from 'components/DemoLink'
-import { useValues } from 'kea'
-import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 import { SignupCTA } from 'components/SignupCTA'
 
 export const FeatureStrip = ({ className = '' }) => {
@@ -43,8 +41,6 @@ const Feature = ({ title, icon, url }) => {
 }
 
 export default function Hero() {
-    const { posthog } = useValues(posthogAnalyticsLogic)
-
     return (
         <section className="flex flex-col justify-center items-center">
             <div className="relative w-full z-10">

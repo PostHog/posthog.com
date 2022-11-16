@@ -1,12 +1,8 @@
 import React from 'react'
 import { CallToAction } from 'components/CallToAction'
-import { useValues } from 'kea'
-import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
 import { SignupCTA } from 'components/SignupCTA'
 
 export const LPCTA = () => {
-    const { posthog } = useValues(posthogAnalyticsLogic)
-
     return (
         <>
             <br />
