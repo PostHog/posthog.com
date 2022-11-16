@@ -39,7 +39,7 @@ export default function BeforeAndAfter() {
                             <img src={factoBlurb} />
                         </AnimateIntoView>
                         <StaticImage
-                            alt=""
+                            alt="A cartoon hedgehog laying on their back"
                             className="max-w-[200px] md:max-w-[300px]"
                             src="../../images/facto-home.png"
                         />
