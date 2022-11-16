@@ -74,7 +74,7 @@ export const ProductAnalytics = () => {
                     animate={{ translateY: 0 }}
                 >
                     <StaticImage
-                        alt=""
+                        alt="A funnel insight with 4 steps showing how many users dropped off during a sign-up flow"
                         placeholder="none"
                         quality={100}
                         objectFit="cover"
@@ -155,7 +155,7 @@ export const SessionRecording = () => {
                         objectFit="contain"
                         className="w-[170%] md:w-full rotate-2 md:max-w-[754.5px] shadow-xl"
                         src="./images/session-recording.png"
-                        alt=""
+                        alt="A session recording of a fake application called Hogflix"
                     />
                 </motion.div>
             </ImageContainer>
@@ -212,7 +212,7 @@ export const FeatureFlags = () => {
                         quality={100}
                         className="w-[150%] md:w-full rotate-1 shadow-xl"
                         src="./images/feature-flags-2.png"
-                        alt=""
+                        alt="A filter for rolling out a feature flag to 50% of organizations in a cohort"
                     />
                 </motion.div>
                 <motion.div
@@ -226,7 +226,7 @@ export const FeatureFlags = () => {
                         quality={100}
                         className="w-[150%] md:w-full -rotate-1 shadow-xl"
                         src="./images/feature-flags-1.png"
-                        alt=""
+                        alt="A code snippet to check if the feature flag 'nav' is enabled"
                     />
                 </motion.div>
             </ImageContainer>
@@ -284,7 +284,7 @@ export const ABTesting = () => {
                     animate={{ translateY: 0 }}
                 >
                     <StaticImage
-                        alt=""
+                        alt="A graph depicting an increasing trend line showing improvement in an experiment over time"
                         placeholder="none"
                         quality={100}
                         objectFit="contain"
@@ -299,7 +299,7 @@ export const ABTesting = () => {
                     animate={{ translateY: 0 }}
                 >
                     <StaticImage
-                        alt=""
+                        alt="A slider set at 20% showing how long an experiment will need to be run in order to get the specified improvement"
                         placeholder="none"
                         quality={100}
                         objectFit="contain"
@@ -381,7 +381,7 @@ export const EventPipelines = () => {
                     animate={{ translateY: 0 }}
                 >
                     <StaticImage
-                        alt=""
+                        alt="A grid of several logos for apps that are available in PostHog. Includes services such as Salesforce, Intercom, Rudderstack, Segment, Hubspot, and Slack"
                         placeholder="none"
                         quality={100}
                         objectFit="contain"
@@ -449,7 +449,7 @@ export const DataWarehouse = () => {
                     animate={{ translateY: 0 }}
                 >
                     <StaticImage
-                        alt=""
+                        alt="A network of different logos, showing lines coming from PostHog and going to S3, BigQuery, ClickHouse (PostHog's database), and Redshift."
                         placeholder="none"
                         quality={100}
                         objectFit="contain"
@@ -499,7 +499,7 @@ export const SelfHosting = () => {
                     animate={{ translateY: 0 }}
                 >
                     <StaticImage
-                        alt=""
+                        alt="A hedgehog dressed as a professor pointing at a chalkboard with a complex SQL statement written on it"
                         placeholder="none"
                         quality={100}
                         objectFit="contain"
