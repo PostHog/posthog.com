@@ -93,7 +93,20 @@ export const CallToAction = ({
     externalNoIcon,
     state = {},
     event,
-}) => {
+}: {
+    type?: string
+    width?: string
+    size?: string
+    href?: string
+    to?: string
+    onClick?: () => void
+    children?: JSX.Element | string
+    className?: string
+    external?: boolean
+    externalNoIcon?: boolean
+    state?: any
+    event?: any
+}): JSX.Element => {
     const url = to || href
     return (
         <Link
