@@ -1,10 +1,12 @@
 import AnimateIntoView from 'components/AnimateIntoView'
 import { CallToAction } from 'components/CallToAction'
+import { SignupCTA } from 'components/SignupCTA'
 import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
 import blurb from './images/blurb.svg'
 
 export default function FooterCTA() {
+    const { posthog } = useValues(posthogAnalyticsLogic)
     return (
         <div className="flex flex-col lg:flex-row justify-between py-12 px-6 sm:px-12 bg-primary dark:bg-gray-accent-dark items-center dark rounded-[10px] mt-12">
             <div>
@@ -14,9 +16,7 @@ export default function FooterCTA() {
                     cloud.
                 </p>
                 <div className="flex flex-col sm:flex-row sm:space-x-2 space-y-2 sm:space-y-0">
-                    <CallToAction to="https://app.posthog.com/signup" className="w-full sm:w-48">
-                        Get started - free
-                    </CallToAction>
+                    <SignupCTA className="w-full sm:w-48" />
                     <CallToAction to="/book-a-demo" type="secondary" className="w-full sm:w-48 ">
                         Schedule a demo
                     </CallToAction>

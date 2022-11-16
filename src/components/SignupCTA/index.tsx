@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'gatsby'
 import { CallToAction } from 'components/CallToAction'
 import { useValues } from 'kea'
 import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
@@ -10,18 +9,26 @@ import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
 export const SignupCTA = ({
     className = '',
     text = 'Get started - free',
+    type = 'primary',
+    width,
+    event,
 }: {
     text?: string
     className?: string
+    type?: string
+    width?: string
+    event?: any
 }): JSX.Element => {
     const { posthog } = useValues(posthogAnalyticsLogic)
     return (
         <CallToAction
-            type="primary"
+            type={type}
             className={className}
+            width={width}
             to={`https://${
                 posthog?.isFeatureEnabled && posthog?.isFeatureEnabled('direct-to-eu-cloud') ? 'eu' : 'app'
             }.posthog.com/signup`}
+            event={event}
         >
             {text}
         </CallToAction>
