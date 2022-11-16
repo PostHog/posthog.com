@@ -1,15 +1,14 @@
 import React, { useEffect } from 'react'
 import { Header } from '../Header/Header'
-import Banner from '../Banner/index'
 import { Footer } from '../Footer/Footer'
+import CookieBanner from 'components/CookieBanner'
 import { useValues } from 'kea'
+import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
+
 import './Fonts.scss'
 import './Layout.scss'
 import './SkeletonLoading.css'
 import './DarkMode.scss'
-import { PosthogAnnouncement } from '../PosthogAnnouncement/PosthogAnnouncement'
-import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
-import CookieBanner from 'components/CookieBanner'
 
 const Layout = ({ children, className = '' }: { children: React.ReactNode; className?: string }): JSX.Element => {
     const { posthog } = useValues(posthogAnalyticsLogic)
@@ -25,7 +24,6 @@ const Layout = ({ children, className = '' }: { children: React.ReactNode; class
             <Header />
             <main>{children}</main>
             <Footer />
-            <PosthogAnnouncement />
             <CookieBanner />
         </div>
     )

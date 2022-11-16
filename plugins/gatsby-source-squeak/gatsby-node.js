@@ -130,7 +130,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, cache
 
         if (image) {
             const url = `https://res.cloudinary.com/${image.cloud_name}/v${image.version}/${image.publicId}.${image.format}`
-            console.log(url)
+
             const fileNode = await createRemoteFileNode({
                 url,
                 parentNodeId: node.id,

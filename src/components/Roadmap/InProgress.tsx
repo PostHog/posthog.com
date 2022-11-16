@@ -64,7 +64,7 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
                 </div>
                 {thumbnail && (
                     <div className="sm:flex-shrink-0">
-                        <GatsbyImage className="shadow-md" image={getImage(thumbnail)} />
+                        <GatsbyImage className="shadow-md" image={getImage(thumbnail)} alt="" />
                     </div>
                 )}
             </div>
