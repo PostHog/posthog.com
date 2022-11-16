@@ -84,13 +84,13 @@ client.Enqueue(posthog.Capture{
 
 </MultiLanguage>
 
-To figure out which events you should capture, think about which areas have the biggest impact on your product or [north star metrics](/blog/north-star-metrics). As a minimum, we recommend capturing events such as signups, logins, purchases, and feature usage. 
+To figure out which events you should capture, think about which areas have the biggest impact on your product or [north star metrics](/blog/north-star-metrics). As a minimum, we recommend capturing events such as: 
 
-- Signup
-- Subscription
-- Core features
-- New features
-- Marketing website
+- signups
+- logins
+- purchases and subscriptions
+- feature usage
+- page and component views
 
 Once you've started capturing events, you can create actions (a combination of one or more events) to better represent user behavior. Actions are created in the “Data Management” section of the sidebar or interactively using the toolbar (click “Launch Toolbar” on the sidebar).
 
@@ -125,13 +125,15 @@ Now that you’ve set up PostHog with data and dashboards, your teammates can be
 
 To make sure they don’t mess up all your hard work, you can change their access levels in your organization settings. Setting them to “Member” will prevent them from deleting or changing the settings in your project or instances. You can also set up projects you don’t want others to access as private in the project settings. 
 
-When working with others, you likely will want to [filter them out](/tutorials/filter-internal-users) of the events. To do this, go to ”project settings”, scroll down to “filter out internal and test users”  and add filters such as host does not include local development addresses and email does not include your company’s domain.
+When working with others, you likely will want to [filter out](/tutorials/filter-internal-users) events they trigger when doing analysis. To set this up, go to ”Project Settings”, scroll down to “filter out internal and test users”  and add filters such as host does not include local development addresses and email does not include your company’s domain.
+
+![Filter](../images/tutorials/next-steps-after-installing/filter.png)
 
 ## Create subscriptions to important events, actions, and dashboards
 
 Once everyone’s onboard with PostHog, you'll want to centralize information and keep insights top of mind to help you improve your product. To do this, you can setup webhooks and subscriptions to your data and dashboards. 
 
-If there are key events or actions you want to track, such as a potential customer visiting your pricing page, you can have it trigger a webhook. This requires setting up the webhook in the service of your choice (like [Slack](/docs/integrate/webhooks/slack), [Teams](/docs/integrate/webhooks/microsoft-teams), [Zapier](/tutorials/how-to-connect-posthog-and-notion-with-zapier), or [Discord](/docs/integrate/webhooks/discord)). You can then add the webhook to your PostHog instance in “project settings” under “webhook integration.” Finally, go to data management, create or select an action, then enable “post to webhook when this action is triggered.”
+If there are key events or actions you want to track, such as a potential customer visiting your pricing page, you can have it trigger a webhook. This requires setting up the webhook in the service of your choice (like [Slack](/docs/integrate/webhooks/slack), [Teams](/docs/integrate/webhooks/microsoft-teams), [Zapier](/tutorials/how-to-connect-posthog-and-notion-with-zapier), or [Discord](/docs/integrate/webhooks/discord)). You can then add the webhook to your PostHog instance in “Project Settings” under “webhook integration.” Finally, go to data management, create or select an action, then enable “post to webhook when this action is triggered.”
 
 ![Webhook](../images/tutorials/next-steps-after-installing/hook.png)
 
@@ -143,15 +145,15 @@ Finally, if you want your data backed up or sent to an external service such as 
 
 ## Experiment to improve your product
 
-Once you have some data, and you’ve had a chance to gain some insights from it, it’s time to start using those insights to improve your product. A great way to do this is with experiments.
+Once you have some data, and you’ve had a chance to gain some insights from it, it’s time to start using those insights to improve your product. A great way to do this is with Experiments.
 
-Experiments in PostHog help you test if changes improve your product in the ways you care about.
-
-To create an experiment, go to “experiments,” click “new experiment,” fill in the details, set up the variants you’d like to test, who’d you like to test it on, and the metric you’re trying to improve. When you click save, PostHog will create feature flags for your experiment that you can add to your code. Once you’ve implemented the feature flags, click launch and PostHog will track the experiment’s progress.
+Experiments in PostHog help you test if changes improve your product in the ways you care about. They provide structure for your tests by requiring variants, participants (like [new users](/tutorials/new-user-experiments)), and goals.
 
 ![Experiments](../images/tutorials/next-steps-after-installing/experiment.png)
 
-Throughout the time the experiment runs, PostHog will give you details of the results. We automatically do correlation analysis to tell if the changes are making a difference. Hopefully, by the end of your experiment, your changes are a success. The use of feature flags makes it easy to roll out to everyone. 
+Once created, PostHog creates feature flags for each variant (or you can run [experiments without them](/tutorials/experiments)). Once implemented and launched, PostHog will continuously analyze related event data to tell you if the changes are making a difference. At the end of the test, PostHog helps you decide if the experiment was successful and you can use feature flags to it roll out.
+
+Read more about setting up and using experiments in [our product manual](/manual/experimentation).
 
 ## Further reading
 
