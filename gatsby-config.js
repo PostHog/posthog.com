@@ -427,5 +427,256 @@ module.exports = {
                 ],
             },
         },
+        {
+            // This plugin must be placed last in your list of plugins to ensure that it can query all the GraphQL data
+            resolve: `gatsby-plugin-algolia`,
+            options: {
+                appId: process.env.ALGOLIA_APP_ID,
+                // Use Admin API key without GATSBY_ prefix, so that the key isn't exposed in the application
+                // Tip: use Search API key with GATSBY_ prefix to access the service from within components
+                apiKey: process.env.ALGOLIA_API_KEY,
+                indexName: process.env.ALGOLIA_INDEX_NAME, // for all queries
+                queries: [
+                    {
+                        query: `
+                            {
+                              docs: allMdx(filter: {slug: {regex: "/^docs/"}}) {
+                                nodes {
+                                  id
+                                  headings {
+                                    value
+                                    depth
+                                  }
+                                  excerpt
+                                  frontmatter {
+                                    title
+                                  }
+                                  slug
+                                  internal {
+                                    contentDigest
+                                    type
+                                  }
+                                }
+                              }
+                            }
+                        `,
+                        transformer: ({ data }) =>
+                            data.docs.nodes.flatMap(({ id, headings, frontmatter, ...page }) => {
+                                return headings.map((heading) => {
+                                    return {
+                                        ...page,
+                                        id: id + heading.value,
+                                        title: frontmatter.title,
+                                        heading,
+                                        type: 'docs',
+                                    }
+                                })
+                            }),
+                    },
+                    {
+                        query: `
+                            {
+                              manual: allMdx(filter: {slug: {regex: "/^manual/"}}) {
+                                nodes {
+                                  id
+                                  headings {
+                                    value
+                                    depth
+                                  }
+                                  excerpt
+                                  frontmatter {
+                                    title
+                                  }
+                                  slug
+                                  internal {
+                                    contentDigest
+                                    type
+                                  }
+                                }
+                              }
+                            }
+                        `,
+                        transformer: ({ data }) =>
+                            data.manual.nodes.flatMap(({ id, headings, frontmatter, ...page }) => {
+                                return headings.map((heading) => {
+                                    return {
+                                        ...page,
+                                        id: id + heading.value,
+                                        title: frontmatter.title,
+                                        heading,
+                                        type: 'manual',
+                                    }
+                                })
+                            }),
+                    },
+                    {
+                        query: `
+                            {
+                              handbook: allMdx(filter: {slug: {regex: "/^handbook/"}}) {
+                                nodes {
+                                  id
+                                  headings {
+                                    value
+                                    depth
+                                  }
+                                  excerpt
+                                  frontmatter {
+                                    title
+                                  }
+                                  slug
+                                  internal {
+                                    contentDigest
+                                    type
+                                  }
+                                }
+                              }
+                            }
+                        `,
+                        transformer: ({ data }) =>
+                            data.handbook.nodes.flatMap(({ id, headings, frontmatter, ...page }) => {
+                                return headings.map((heading) => {
+                                    return {
+                                        ...page,
+                                        id: id + heading.value,
+                                        title: frontmatter.title,
+                                        heading,
+                                        type: 'handbook',
+                                    }
+                                })
+                            }),
+                    },
+                    {
+                        query: `
+                            {
+                              tutorials: allMdx(filter: {slug: {regex: "/^tutorials/"}}) {
+                                nodes {
+                                  id
+                                  slug
+                                  headings {
+                                    value
+                                    depth
+                                  }
+                                  excerpt
+                                  frontmatter {
+                                    title
+                                  }
+                                  internal {
+                                    contentDigest
+                                    type
+                                  }
+                                }
+                              }
+                            }
+                        `,
+                        transformer: ({ data }) =>
+                            data.tutorials.nodes.flatMap(({ id, headings, frontmatter, ...page }) => {
+                                return headings.map((heading) => {
+                                    return {
+                                        ...page,
+                                        id: id + heading.value,
+                                        title: frontmatter.title,
+                                        heading,
+                                        type: 'tutorial',
+                                    }
+                                })
+                            }),
+                    },
+                    {
+                        query: `
+                            {
+                              blog: allMdx(filter: {slug: {regex: "/^blog/"}}) {
+                                nodes {
+                                  id
+                                  slug
+                                  headings {
+                                    value
+                                    depth
+                                  }
+                                  excerpt
+                                  frontmatter {
+                                    title
+                                  }
+                                  internal {
+                                    contentDigest
+                                    type
+                                  }
+                                }
+                              }
+                            }
+                        `,
+                        transformer: ({ data }) =>
+                            data.blog.nodes.flatMap(({ id, headings, frontmatter, ...page }) => {
+                                return headings.map((heading) => {
+                                    return {
+                                        ...page,
+                                        id: id + heading.value,
+                                        title: frontmatter.title,
+                                        heading,
+                                        type: 'blog',
+                                    }
+                                })
+                            }),
+                    },
+                    {
+                        query: `
+                            {
+                              endpoints: allApiEndpoint {
+                                nodes {
+                                  id
+                                  url
+                                  title: name
+                                  internal {
+                                    contentDigest
+                                  }
+                                }
+                              }
+                            }
+                        `,
+                        transformer: ({ data }) => {
+                            return data.endpoints.nodes.map((endpoint) => {
+                                return {
+                                    ...endpoint,
+                                    type: 'api',
+                                }
+                            })
+                        },
+                    },
+                    {
+                        query: `
+                            {
+                              questions: allQuestion {
+                                nodes {
+                                  id
+                                  title: subject
+                                  internal {
+                                    contentDigest
+                                    type
+                                  }
+                                }
+                              }
+                            }
+                        `,
+                        transformer: ({ data }) => {
+                            return data.questions.nodes.map((question) => {
+                                return {
+                                    ...question,
+                                    type: 'question',
+                                }
+                            })
+                        },
+                    },
+                ],
+                chunkSize: 10000, // default: 1000
+                /*settings: {
+                    // optional, any index settings
+                    // Note: by supplying settings, you will overwrite all existing settings on the index
+                },*/
+                mergeSettings: false, // optional, defaults to false. See notes on mergeSettings below
+                concurrentQueries: true, // default: true
+                dryRun: false, // default: false, only calculate which objects would be indexed, but do not push to Algolia
+                continueOnFailure: false, // default: false, don't fail the build if Algolia indexing fails
+                algoliasearchOptions: undefined, // default: { timeouts: { connect: 1, read: 30, write: 30 } }, pass any different options to the algoliasearch constructor
+            },
+        },
     ],
 }
