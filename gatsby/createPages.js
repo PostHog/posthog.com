@@ -416,7 +416,7 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
             context: {
                 id: node.id,
                 tableOfContents,
-                categories: postCategories.map((category) => ({ name: category, url: categories[category].url })),
+                categories: postCategories.map((category) => ({ name: category, url: categories[category]?.url })),
                 slug,
             },
         })
