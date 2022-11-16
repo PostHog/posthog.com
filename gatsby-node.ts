@@ -1,15 +1,16 @@
-const path = require('path')
+import path from 'path'
+import { GatsbyNode } from 'gatsby'
 
-exports.createPages = require('./gatsby/createPages')
-exports.onCreateNode = require('./gatsby/onCreateNode')
-exports.createSchemaCustomization = require('./gatsby/createSchemaCustomization')
-exports.sourceNodes = require('./gatsby/sourceNodes')
-exports.onPostBuild = require('./gatsby/onPostBuild.js')
-exports.createResolvers = require('./gatsby/createResolvers.js')
+export { createPages } from './gatsby/createPages'
+export { onCreateNode } from './gatsby/onCreateNode'
+export { createSchemaCustomization } from './gatsby/createSchemaCustomization'
+export { sourceNodes } from './gatsby/sourceNodes'
+export { onPostBuild } from './gatsby/onPostBuild'
+export { createResolvers } from './gatsby/createResolvers'
 
 // Implement the Gatsby API “onCreatePage”. This is
 // called after every page is created.
-exports.onCreatePage = async ({ page, actions }) => {
+export const onCreatePage: GatsbyNode['onCreatePage'] = async ({ page, actions }) => {
     const { createPage } = actions
     if (page.path.match(/^\/next\-steps/)) {
         page.matchPath = '/next-steps/*'
@@ -21,7 +22,7 @@ exports.onCreatePage = async ({ page, actions }) => {
     }
 }
 
-exports.onCreateWebpackConfig = ({ stage, actions }) => {
+export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ stage, actions }) => {
     actions.setWebpackConfig({
         resolve: {
             extensions: ['.js', '.ts', '.tsx'],

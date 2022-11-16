@@ -1,4 +1,6 @@
-module.exports = exports.createSchemaCustomization = async ({ actions, schema }) => {
+import { GatsbyNode } from 'gatsby'
+
+export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] = async ({ actions, schema }) => {
     const { createTypes } = actions
     createTypes(`
     type Mdx implements Node {

@@ -1,9 +1,9 @@
-const fetch = require('node-fetch')
-const uniqBy = require('lodash.uniqby')
-const { MenuBuilder } = require('redoc')
+import fetch from 'node-fetch'
+import { MenuBuilder } from 'redoc'
+import { GatsbyNode } from 'gatsby'
 
-module.exports = exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => {
-    const { createNode, createParentChildLink } = actions
+export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createContentDigest, createNodeId }) => {
+    const { createNode } = actions
 
     if (process.env.POSTHOG_APP_API_KEY) {
         const api_endpoints = await fetch('https://app.posthog.com/api/schema/', {

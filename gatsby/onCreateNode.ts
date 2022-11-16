@@ -1,16 +1,30 @@
-const { replacePath } = require('./utils')
-const { createFilePath, createRemoteFileNode } = require(`gatsby-source-filesystem`)
-const fetch = require('node-fetch')
-const uniqBy = require('lodash.uniqby')
+import { replacePath } from './utils'
+import { createFilePath, createRemoteFileNode } from 'gatsby-source-filesystem'
+import fetch from 'node-fetch'
+import GitUrlParse from 'git-url-parse'
+import slugify from 'slugify'
+import { JSDOM } from 'jsdom'
+import { GatsbyNode } from 'gatsby'
+
 require('dotenv').config({
     path: `.env.${process.env.NODE_ENV}`,
 })
-const GitUrlParse = require('git-url-parse')
-const slugify = require('slugify')
-const { JSDOM } = require('jsdom')
 
-module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, cache, createNodeId }) => {
+// const popularity = {}
+
+// exports.onPreBuild = async () => {}
+
+export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
+    node,
+    getNode,
+    actions,
+    store,
+    cache,
+    createNodeId,
+}) => {
     const { createNodeField, createNode } = actions
+
+    // console.log(cache)
 
     if (node.internal.type === `MarkdownRemark` || node.internal.type === 'Mdx') {
         const parent = getNode(node.parent)
