@@ -6,7 +6,6 @@ import React from 'react'
 import blurb from './images/blurb.svg'
 
 export default function FooterCTA() {
-    const { posthog } = useValues(posthogAnalyticsLogic)
     return (
         <div className="flex flex-col lg:flex-row justify-between py-12 px-6 sm:px-12 bg-primary dark:bg-gray-accent-dark items-center dark rounded-[10px] mt-12">
             <div>
