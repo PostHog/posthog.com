@@ -190,8 +190,10 @@ As you can see by reading the above examples, the index file exports functions t
 
 - event ingestion (`processEvent`)
     - useful for modifying incoming data, such as adding geographic data properties or dropping events matching a property filter.
+
 - every minute, hour, day (`runEveryMinute`, `runEveryHour`, `runEveryDay`)
     - useful for triggering events based on updates to external services such as Stripe, HubSpot, or GitHub.
+
 - once processing is complete (`exportEvents`, `onEvent`)
     - useful for exporting data to external services such as BigQuery, Snowflake, or Databricks.
 
