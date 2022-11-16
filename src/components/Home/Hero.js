@@ -54,7 +54,7 @@ export default function Hero() {
                     </h2>
 
                     <div className="flex flex-col md:flex-row justify-center items-center gap-2">
-                        <SignupCTA className="!w-full md:!w-44 shadow-xl" />
+                        <SignupCTA className="!w-full md:!w-44 shadow-xl !px-4" />
                         <DemoLink />
                     </div>
                 </div>
