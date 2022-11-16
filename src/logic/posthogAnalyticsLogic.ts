@@ -1,4 +1,4 @@
-import { kea, actions, reducers, listeners, events, selectors } from 'kea'
+import { kea, actions, reducers } from 'kea'
 
 export const posthogAnalyticsLogic = kea([
     actions(() => ({
@@ -7,7 +7,7 @@ export const posthogAnalyticsLogic = kea([
 
     reducers(() => ({
         posthog: [
-            window.posthog,
+            typeof window !== 'undefined' ? window.posthog : undefined,
             {
                 posthogFound: (_, { posthog }) => posthog,
             },
