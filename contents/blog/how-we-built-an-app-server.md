@@ -295,19 +295,19 @@ All this work helped us create more secure and reliable apps. This allowed us to
 
 ## Unlocking customization and control through apps
 
-We’ve seen users large and small write apps for all sorts of use cases. There are large companies writing apps to enhance events with critical data. There are also solo devs writing apps to scratch their own itch and end up used by thousands in our community. Users write often write apps to connect or export to key services in their stack. Some examples of apps include:
+Building and scaling PostHog apps fundamentally changed the way we think about our product and infrastructure. We started life as an open source product analytics tool. Now, we're a platform. 
 
-- "Data-in" apps like the [Hubspot](/apps/hubspot-connector), [Salesforce](/apps/salesforce-connector) (community built), [Stripe](https://github.com/PostHog/stripe-plugin), and [Shopify](/apps/shopify) connectors.
+Since launch, we've seen companies and solo devs create numerous useful, clever apps to solve problems or connect new services. There are [over 50 PostHog apps](/apps), including:
 
-- "Data-out" apps like the [BigQuery](/apps/bigquery-export), [S3](/apps/s3-export), and [Rudderstack](/apps/rudderstack-export) (community built) exports.
+- "Data-in" apps connecting PostHog to [Hubspot](/apps/hubspot-connector), [Salesforce](/apps/salesforce-connector) (community built), [Stripe](https://github.com/PostHog/stripe-plugin), and [Shopify](/apps/shopify).
 
-- Ingestion-filtering apps like [Property Filter](/apps/property-filter) (community built), [Property Flattener](/apps/property-flattener), and [First Time Event Tracker](/apps/first-time-event-tracker).
+- "Data-out" apps for exporting PostHog data to [BigQuery](/apps/bigquery-export), [S3](/apps/s3-export), [Rudderstack](/apps/rudderstack-export) (community built), and [Intercom](/apps/intercom).
 
-Apps unlocked more control over data flows on the PostHog platform. Users install and enable thousands of apps each month, which process billions of events in our pipeline. They use them to connect and shape their data to their needs.
+- Ingestion-filtering apps like [Property Filter](/apps/property-filter) (community built), [Property Flattener](/apps/property-flattener), and [First Time Event Tracker](/apps/first-time-event-tracker) that give users even more control over events and properties sent to PostHog.
 
-Building and scaling apps fundamentally changed the way we think about our product and infrastructure. Work on apps helped our ingestion pipeline become more integrated and modular. The plugin server, now a core part of our ingestion pipeline, evolved out of the app MVP.
+Our vision for apps is to continue to enable more customizability for data flows. We want users to have access to the data they need to create better products, and apps are key to doing this. 
 
-Our vision for apps is to continue to enable more customizability for data flows. We want users to have access to the data they need to create better products, and apps are key to doing this. We also want to allow for more customization of the overall PostHog experience. As an example of this, see the release of [site apps](/tutorials/build-site-app), which provides similar customizable functionality in the frontend.
+We also want to allow for more customization of the overall PostHog experience. As an example of this, see the release of [site apps](/tutorials/build-site-app), which provides similar customizable functionality in the frontend. Like how apps allow users to modify their data flows, site apps enable them to modify their product with frontend components. With site apps, users can add surveys, feedback requests, banners, and more frontend changes through PostHog.
 
 The ability to leverage PostHog to customize, control, and fully utilize your data will continue to improve. Apps, and many other features of PostHog, help with this. In the end, PostHog aims to help you understand your product and gives you the tools to build a better one.
 
