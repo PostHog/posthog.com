@@ -19,7 +19,7 @@ We couldn't build every solution ourselves, so we needed to enable PostHog users
 
 This is the story of how [PostHog apps](/apps) went from three-day MVP into a service that handles billions of events – and all the lessons we learned along the way.
 
-## Part 1: Building an MVP in three days
+## ✏️ Part 1: Building an MVP in three days
 
 PostHog apps are the brainchild of our [first ever hire](/blog/posthog-first-five), Marius Andra. 
 
@@ -57,7 +57,7 @@ First, it’s nearly impossible to manage Python dependencies via multiple `requ
 
 Second, all dependencies were installed together. This made it just a matter of time before a plugin overrode an app dependency (e.g. `django`), and brought everything crashing down. This wasn’t going to work for us, so we needed to rebuild. 
 
-## Part 2: Rebuilding in JavaScript
+## 🛠 Part 2: Rebuilding in JavaScript
 
 After deciding to rebuild, the first attempt was using [PyMiniRacer](https://github.com/sqreen/PyMiniRacer) to generate JavaScript. PyMiniRacer is great for simple functions, but lacks support for async/promises and importing modules like `fetch` because it was raw v8, not Node. It also had a limited standard library. It wasn’t going to work. 
 
@@ -119,7 +119,7 @@ This maintained self-hosted users’ freedom, while still enabling Cloud users t
 
 These learnings led to our current app structure.
 
-## Part 3: Building a mature app platform that scales
+## 📈 Part 3: Building a mature app platform that scales
 
 After creating a basic MVP, and seeing the benefits of its usage, work continued to add functionality and support greater scale. 
 
