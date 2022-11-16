@@ -15,22 +15,25 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
     const [showAuth, setShowAuth] = useState(false)
     const [subscribed, setSubscribed] = useState(false)
     const [loading, setLoading] = useState(false)
-    const { title, githubPages, description, beta_available, thumbnail } = props
+    const { title, githubPages, description, beta_available, thumbnail, roadmapId } = props
     const completedIssues = githubPages && githubPages?.filter((page) => page.closed_at)
     const percentageComplete = githubPages && Math.round((completedIssues.length / githubPages?.length) * 100)
 
     async function subscribe(email: string) {
         setLoading(true)
         if (email) {
-            await addToMailchimp(
-                email,
-                undefined,
-                'https://posthog.us19.list-manage.com/subscribe/post?u=292207b434c26e77b45153b96&amp;id=ef3044881e&amp;f_id=00178ae4f0'
-            )
-            const res = await fetch('/api/mailchimp', {
+            const res = await fetch('http://localhost:3000/api/roadmap/subscribe', {
                 method: 'POST',
-                body: JSON.stringify({ email: email, tag: title }),
+                body: JSON.stringify({ id: 1 }),
+                credentials: 'include',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
             })
+
+            console.log(res)
+
             if (res.ok) {
                 setSubscribed(true)
                 setShowAuth(false)

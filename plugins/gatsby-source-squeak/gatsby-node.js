@@ -115,10 +115,11 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, cache
     )
 
     for (const roadmapItem of roadmap) {
-        const { title, github_urls, image } = roadmapItem
+        const { title, github_urls, image, id } = roadmapItem
 
         const node = {
             ...roadmapItem,
+            roadmapId: id,
             id: createNodeId(`squeak-roadmap-${title}`),
             parent: null,
             children: [],
