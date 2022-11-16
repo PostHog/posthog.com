@@ -40,27 +40,6 @@ module.exports = exports.createSchemaCustomization = async ({ actions, schema })
       authorData: [AuthorsJson] @link(by: "handle", from: "author")
       badge: String
     }
-    type Replies {
-      name: String
-      rawBody: String
-      imageURL: String
-      subject: String
-    }
-    type Question implements Node {
-      rawBody: String
-      name: String
-      slug: [String]
-      imageURL: String
-      replies: [Replies]
-      avatar: File @link(from: "avatar___NODE")
-      childrenReply: Mdx
-    }
-    type Reply implements Node {
-      avatar: File @link(from: "avatar___NODE")
-      name: String
-      fullName: String
-      subject: String
-    }
     type TeamData {
       name: String
       jobTitle: String
@@ -149,7 +128,6 @@ module.exports = exports.createSchemaCustomization = async ({ actions, schema })
     }
     type AshbyJobPostingFormDefFieldsSections {
       fields: [AshbyJobPostingFormDefFieldsSectionsFields]
-        
     }
     type AshbyJobPostingFormDef {
       sections: [AshbyJobPostingFormDefFieldsSections]
@@ -175,33 +153,6 @@ module.exports = exports.createSchemaCustomization = async ({ actions, schema })
     }
     type AshbyJob implements Node {
       customFields: [AshbyJobCustomFields],
-    }
-    type SqueakTeam {
-      name: String,
-    }
-    type SqueakGitHubReactions {
-      hooray: Int,
-          heart: Int,
-          eyes: Int,
-          _1: Int,
-    }
-    type SqueakGitHubPage {
-      title: String,
-      html_url: String,
-      number: Int,
-      closed_at: Date,
-      reactions: SqueakGitHubReactions,
-    }
-    type SqueakRoadmap implements Node {
-      title: String,
-      category: String
-      beta_available: Boolean,
-      complete: Boolean,
-      description: String,
-      team: SqueakTeam,
-      otherLinks: [String],
-      githubPages: [SqueakGitHubPage],
-      milestone: Boolean,
     }
   `)
     createTypes([
