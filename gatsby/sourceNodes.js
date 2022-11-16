@@ -1,8 +1,6 @@
 const fetch = require('node-fetch')
 const uniqBy = require('lodash.uniqby')
 const { MenuBuilder } = require('redoc')
-const { createClient } = require('@supabase/supabase-js')
-const xss = require('xss')
 
 module.exports = exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => {
     const { createNode, createParentChildLink } = actions
