@@ -192,10 +192,15 @@ Once a month, after we've received our monthly financial report from Fondo (reme
 Our process is pleasingly simple:
 
 1. Open up your main Financials view in Pry
+
 2. On the left, select the Planned vs. Actuals tab
+
 3. Next to the name of the month you want to look at, hover over and a little arrow will appear saying 'Set Budget Start Date' – click on it
+
 4. This will then bring up a two column view of the month you are looking at
+
 5. We look at how we performed against our cashflow forecast (seriously, it's basically the only thing we care about)
+
 6. We then scroll through our plan and pay particular attention to anything that looks like it's gone unusually over or under budget – if anything is in the wrong category, you can just drag and drop it into the correct one
 
 We schedule this budget review meeting in for the last week of the month, i.e. after we've received the final financial report from Fondo. This ensures that the latest actuals are reflected in Pry. 
