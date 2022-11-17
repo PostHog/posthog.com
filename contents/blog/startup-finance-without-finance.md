@@ -151,7 +151,7 @@ If this has worked, you should see all the revenue being projected forward in yo
 
 #### Expenses forecast
 
-Shockingly, you'll find this under the Expenses tab in the sheet.  Generally the most important stuff here are COGS, aka hosting costs. Generally, other expenses outside of employees aren't going to change your runway very much. 
+Shockingly, you'll find this under the Expenses tab in the sheet. COGS, aka hosting costs if you're SaaS, is the most important thing here. Other expenses outside of employees aren't going to change your runway very much. 
 
 It is _not_ worth getting super detailed mapping out every single expense on this tab. 
 
