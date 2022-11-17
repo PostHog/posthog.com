@@ -54,7 +54,7 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Marius Andra](/handbook/company/team#marius-andra-software-engineer) (Team lead, Full Stack Engineer)
 - [Michael Matloka](/handbook/company/team#michael-matloka-software-engineer) (Full Stack Engineer)
 - [Paul D'Ambra](/handbook/company/team#paul-dambra-software-engineer) (Full Stack Engineer)
-- Product: Supported by Annika Schmid
+- Product: Supported by [Luke Harries](/handbook/company/team#luke-harries-head-of-product)
 - Product design: Supported by Cory Watilo
 - _Hiring for a [full stack engineer](/careers/full-stack-engineer)_
 - _Hiring for a [full stack engineer](/careers/full-stack-engineer)_
@@ -64,7 +64,7 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Neil Kakkar](/handbook/company/team#neil-kakkar-software-engineer) (Full Stack Engineer)
 - [Li Yi Yu](/handbook/company/team#li-yi-yu-full-stack-engineer) (Full Stack Engineer)
 - _Hiring for a [full stack engineer](/careers/full-stack-engineer)_
-- Product: Supported by [Luke Harries](/handbook/company/team#luke-harries-head-of-product)
+- Product: Supported by Annika Schmid
 - Product design: Supported by Cory Watilo
 
 #### [Session Recording](/handbook/small-teams/session-recording)
