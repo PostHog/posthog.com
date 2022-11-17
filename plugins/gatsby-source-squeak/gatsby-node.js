@@ -2,7 +2,7 @@ const { createRemoteFileNode } = require(`gatsby-source-filesystem`)
 const fetch = require('node-fetch')
 const slugify = require('slugify')
 
-exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }, pluginOptions) => {
+exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, cache, store }, pluginOptions) => {
     const { apiHost, organizationId } = pluginOptions
     const { createNode, createParentChildLink } = actions
 
@@ -127,7 +127,8 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }, plu
     )
 
     for (const roadmapItem of roadmap) {
-        const { title, github_urls } = roadmapItem
+        const { title, github_urls, image } = roadmapItem
+
         const node = {
             ...roadmapItem,
             id: createNodeId(`squeak-roadmap-${title}`),
@@ -138,6 +139,21 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }, plu
                 contentDigest: createContentDigest(roadmapItem),
             },
         }
+
+        if (image) {
+            const url = `https://res.cloudinary.com/${image.cloud_name}/v${image.version}/${image.publicId}.${image.format}`
+
+            const fileNode = await createRemoteFileNode({
+                url,
+                parentNodeId: node.id,
+                createNode,
+                createNodeId,
+                cache,
+                store,
+            })
+            node.thumbnail___NODE = fileNode?.id
+        }
+
         const otherLinks = github_urls.filter((url) => !url.includes('github.com'))
         node.otherLinks = otherLinks
         if (github_urls.length > 0 && process.env.GITHUB_API_KEY) {
@@ -156,8 +172,14 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }, plu
                                 Authorization: `token ${process.env.GITHUB_API_KEY}`,
                             },
                         })
-                            .then((res) => {
-                                return res.json()
+                            .then((res) => res.json())
+                            .then((data) => {
+                                if (data.reactions) {
+                                    data.reactions.plus1 = data.reactions['+1']
+                                    data.reactions.minus1 = data.reactions['-1']
+                                }
+
+                                return data
                             })
                             .catch((err) => console.log(err))
                     })
@@ -210,10 +232,12 @@ exports.createSchemaCustomization = async ({ actions }) => {
         }
 
         type SqueakGitHubReactions {
-            hooray: Int,
-            heart: Int,
-            eyes: Int,
-            _1: Int,
+          hooray: Int,
+          heart: Int,
+          eyes: Int,
+          _1: Int,
+          plus1: Int,
+          minus1: Int
         }
 
         type SqueakGitHubPage {
@@ -225,15 +249,16 @@ exports.createSchemaCustomization = async ({ actions }) => {
         }
 
         type SqueakRoadmap implements Node {
-            title: String,
-            category: String
-            beta_available: Boolean,
-            complete: Boolean,
-            description: String,
-            team: SqueakTeam,
-            otherLinks: [String],
-            githubPages: [SqueakGitHubPage],
-            milestone: Boolean,
+          title: String,
+          category: String
+          beta_available: Boolean,
+          complete: Boolean,
+          description: String,
+          team: SqueakTeam,
+          otherLinks: [String],
+          githubPages: [SqueakGitHubPage],
+          milestone: Boolean,
+          thumbnail: File @link(from: "thumbnail___NODE")
         }
     `)
 }
