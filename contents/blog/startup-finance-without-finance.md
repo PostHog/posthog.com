@@ -37,6 +37,8 @@ If you are fewer than five people, I'd suggest just doing the accounting bit (so
 
 ## Keeping score (aka Accounting)
 
+<iframe src="https://giphy.com/embed/26nfp8HGGHLPGY2KQ" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+
 Ok, let's start with the good stuff. You need to hire an accountant. Specifically, you need [Fondo](https://www.tryfondo.com/). They will handle:
 
 - **Bookkeeping:** This means they record all money that goes in and out of your company in QuickBooks and assign it to the right place, such as marketing, hosting etc.
@@ -109,6 +111,8 @@ Your report (sometimes referred to as 'management accounts') will comprise three
 - You may hear 'accruals' vs. 'cash'-based accounting floating around. 'Accruals' means you record the revenue when you issued the invoice; 'cash' means you record it when the money hits your bank account. We use accruals-based accounting, which is usually the sensible choice for B2B SaaS. 
 
 ## Predicting the future (aka Financial Planning)
+
+<iframe src="https://giphy.com/embed/Dps6uX4XPOKeA" width="480" height="366" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 
 I lied when I said accounting was the good stuff: _this_ is the good stuff. Let's get our Wall Street on. 
 
@@ -211,7 +215,7 @@ If we find anything particularly unusual, we'll follow up with the relevant team
 - Hosting costs spiking
 - Hiring, either unexpected or more expensive than originally forecast
 
-### General advice
+### General tips
 
 - Be really careful with the slider in your main Financials view in Pry – make sure you're looking at the right actuals before you suddenly panic and think you're running out of money in 2 months!
 
@@ -224,6 +228,8 @@ If we find anything particularly unusual, we'll follow up with the relevant team
 - Your investors will want to see an ARR overview and P&L summary output in a different output to the one Pry does. I'll cover how we do this in a separate article. 
 
 ## Delaying the inevitable (aka Upskilling > Hiring)
+
+<iframe src="https://giphy.com/embed/3ohzAyD4H1klPRUCwU" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 
 Here are a few tips I've found helpful for upskilling yourself or your team's finance chops – I firmly believe it's really worth understanding these things properly yourself, rather than outsourcing it to a new person. It's a lot to put in the hands of someone you don't know!
 
