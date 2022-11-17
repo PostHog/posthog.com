@@ -7,7 +7,7 @@ showTitle: true
 hideAnchor: true
 categories: ["Inside PostHog","Startups"]
 author: ["charles-cook"]
-featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImage: ../images/blog/equity.png
 featuredImageType: full
 ---
 
