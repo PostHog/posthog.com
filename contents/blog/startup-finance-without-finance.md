@@ -160,11 +160,17 @@ Finally, click Data -> Named Ranges and then create a named range for _each_ of 
 Once you're done, this is how to get it into Pry: 
 
 - Go to Models -> Expense
+
 - Next to 'Inputs', hit '+' and select the 'Import' option
+
 - Select the same Google Sheet again
+
 - Import each 'Range' you created in your Google Sheet
+
 - These should now show up in your model Input on the left hand side
+
 - Create a new formula for each range, and set each value to just be equal to the input you've imported (ie. create a formula called 'IT Expense' = 'IT Expense import')
+
 - In the right hand pane, create a new Output for each line item – map each formula output to the relevant item in your budget
 
 Pheww! Again, make sure you refresh the inputs on this Model page if you make changes to your Google Sheet in the future.
