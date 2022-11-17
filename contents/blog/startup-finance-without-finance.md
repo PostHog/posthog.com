@@ -211,7 +211,7 @@ If we find anything particularly unusual, we'll follow up with the relevant team
 - Hosting costs spiking
 - Hiring, either unexpected or more expensive than originally forecast
 
-### General tips
+### General tips
 
 - Be really careful with the slider in your main Financials view in Pry – make sure you're looking at the right actuals before you suddenly panic and think you're running out of money in 2 months!
 
