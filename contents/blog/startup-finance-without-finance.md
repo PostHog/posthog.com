@@ -194,7 +194,7 @@ Our process is pleasingly simple:
 
 We schedule this budget review meeting in for the last week of the month, i.e. after we've received the final financial report from Fondo. This ensures that the latest actuals are reflected in Pry. 
 
-If we find anything particularly unusual, we'll follow up with the relevant team lead to see what's happened here. Often though you're really going to be looking at one of:
+If we find anything particularly unusual, we'll follow up with the relevant team lead to see what's happened. Often, though, you're really going to be looking at one of:
 
 - Hosting costs spiking
 - Hiring - either unexpected or more expensive than originally forecast
