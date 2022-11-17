@@ -563,8 +563,8 @@ export default function PostLayout({
             >
                 {menu && (
                     <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:block hidden relative z-20">
-                        {!hideSearch && <SearchBox filter={searchFilter} />}
                         <aside className="lg:sticky bg-tan dark:bg-primary top-10 flex-shrink-0 w-full justify-self-end px-4 lg:box-border my-10 lg:my-0 lg:py-4 mr-auto overflow-y-auto lg:h-[calc(100vh-40px)]">
+                            {!hideSearch && <SearchBox filter={searchFilter} />}
                             <TableOfContents menuType={menuType} menu={menu} />
                         </aside>
                     </div>

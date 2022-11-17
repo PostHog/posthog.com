@@ -1,11 +1,8 @@
-import '@docsearch/css/dist/modal.css'
-import '@docsearch/css/dist/_variables.css'
-
-import React from 'react'
-import { DocSearchModal } from '@docsearch/react'
+import React, { Fragment, useState } from 'react'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
 import { useValues } from 'kea'
-import { createPortal } from 'react-dom'
+import SearchResults from './SearchResults'
+import { Dialog, Transition } from '@headlessui/react'
 
 type SearchBoxProps = {
     size: 'small' | 'large'
@@ -16,29 +13,50 @@ type SearchBoxProps = {
 }
 
 export const SearchBox: React.FC<SearchBoxProps> = ({ size, placeholder, filter, label = true, className }) => {
-    const [searchOpen, setSearchOpen] = React.useState<boolean>(false)
+    const [isOpen, setIsOpen] = useState(false)
     const { posthog } = useValues(posthogAnalyticsLogic)
 
     const handleSearchBoxClick = (event: React.MouseEvent) => {
         event.preventDefault()
-        setSearchOpen(true)
+        setIsOpen(true)
         posthog?.capture('docs_search_used')
     }
 
     return (
         <>
-            {searchOpen &&
-                createPortal(
-                    <DocSearchModal
-                        initialScrollY={window.scrollY}
-                        appId="B763I3AO0D"
-                        indexName="posthog"
-                        apiKey="f1386529b9fafc5c3467e0380f19de4b"
-                        onClose={() => setSearchOpen(false)}
-                        searchParameters={filter && { facetFilters: [`tags:${filter}`] }}
-                    />,
-                    document.body
-                )}
+            <Transition.Root show={isOpen} as={Fragment}>
+                <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
+                    <Transition.Child
+                        as={Fragment}
+                        enter="ease-out duration-300"
+                        enterFrom="opacity-0"
+                        enterTo="opacity-100"
+                        leave="ease-in duration-200"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0"
+                    >
+                        <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+                    </Transition.Child>
+
+                    <div className="fixed inset-0 z-10 overflow-y-auto" style={{ zIndex: '999999' }}>
+                        <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                            <Transition.Child
+                                as={Fragment}
+                                enter="ease-out duration-300"
+                                enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                enterTo="opacity-100 translate-y-0 sm:scale-100"
+                                leave="ease-in duration-200"
+                                leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+                                leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                            >
+                                <Dialog.Panel className="w-full max-w-2xl">
+                                    <SearchResults />
+                                </Dialog.Panel>
+                            </Transition.Child>
+                        </div>
+                    </div>
+                </Dialog>
+            </Transition.Root>
 
             <button onClick={handleSearchBoxClick} className="flex items-center relative m-0 w-full max-w-lg">
                 <div className="absolute left-4 w-4 h-4">

@@ -1,4 +1,3 @@
-import { DocSearchModal } from '@docsearch/react'
 import { Blockquote } from 'components/BlockQuote'
 import Breadcrumbs from 'components/Breadcrumbs'
 import { MdxCodeBlock } from 'components/CodeBlock'
@@ -66,7 +65,7 @@ const Search = () => {
     }
     return (
         <>
-            {modal && (
+            {/*modal && (
                 <DocSearchModal
                     onClose={() => setModal(false)}
                     initialQuery={value}
@@ -74,7 +73,7 @@ const Search = () => {
                     indexName="posthog"
                     apiKey="f1386529b9fafc5c3467e0380f19de4b"
                 />
-            )}
+            )*/}
             <form
                 onSubmit={handleSubmit}
                 className="flex flex-col justify-center relative mx-auto mb-0 w-full max-w-lg"
