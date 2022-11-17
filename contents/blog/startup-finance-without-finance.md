@@ -240,7 +240,7 @@ Here are a few tips I've found helpful for upskilling yourself or your team's fi
 So when do you hire this finance person? Broadly speaking, there will be one of two triggers:
 
 - You get to a point where the sheer volume of financial work is enough for your ops person to spend 100% of their time on. This is usually driven by things like international expansion (reporting & tax complexity) or product expansion (different pricing models are hard to forecast).
- 
+
 - You want to go out and fundraise but, no matter how hard you try, you can't put together a coherent financial story about your business.
 
 In either case, I'd recommend you get someone in who has 1-2 years' experience building financial models 24/7 at a top-tier investment bank, but has suddenly seen the light and wants out. Save the CFO hire for pre-IPO, ok?
