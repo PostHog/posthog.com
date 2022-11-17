@@ -1,5 +1,5 @@
 ---
-date: 2022-11-08
+date: 2022-11-18
 title: "How to run finance at your startup without hiring a finance person"
 rootPage: /blog
 sidebar: Blog
@@ -211,7 +211,7 @@ If we find anything particularly unusual, we'll follow up with the relevant team
 - Hosting costs spiking
 - Hiring, either unexpected or more expensive than originally forecast
 
-### General tips
+### General advice
 
 - Be really careful with the slider in your main Financials view in Pry – make sure you're looking at the right actuals before you suddenly panic and think you're running out of money in 2 months!
 
@@ -244,4 +244,3 @@ So when do you hire this finance person? Broadly speaking, there will be one of 
 - You want to go out and fundraise but, no matter how hard you try, you can't put together a coherent financial story about your business.
 
 In either case, I'd recommend you get someone in who has 1-2 years' experience building financial models 24/7 at a top-tier investment bank, but has suddenly seen the light and wants out. Save the CFO hire for pre-IPO, ok?
-
