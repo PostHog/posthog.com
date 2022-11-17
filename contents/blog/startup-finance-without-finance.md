@@ -27,11 +27,11 @@ If you are fewer than five people, I'd suggest just doing the accounting bit (so
 
 ## What you'll need
 
-- A person who is responsible for owning this area of your business - probably the ops person or a financially-inclined co-founder
 - A bank account
-- A [QuickBooks](https://quickbooks.intuit.com/) account for accounting
-- A [Pry](https://pry.co/) account for financial planning
 - Google Sheets
+- A [Pry](https://pry.co/) account for financial planning
+- A [QuickBooks](https://quickbooks.intuit.com/) account for accounting
+- A person who is responsible for owning this area of your business – probably the ops person or a financially-inclined co-founder.
 
 > Who to bank with is not covered in this guide, but please pick something startup-appropriate like Brex or Mercury in the US, or Revolut in Europe.
 
