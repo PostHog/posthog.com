@@ -1,5 +1,5 @@
 ---
-title: The next steps after installing PostHog
+title: What to do after installing PostHog in 5 steps
 sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
