@@ -4,6 +4,8 @@ sidebar: Docs
 showTitle: true
 ---
 
+*Only relevant for [PostHog Enterprise Self-Hosted](/docs/self-host/enterprise/overview) deployed with Kubernetes*
+
 This document outlines how to deploy PostHog using Altinity Cloud ClickHouse clusters.
 
 ## Prerequisites

@@ -52,12 +52,9 @@ To help manage users' expectations, you might find it useful to share a message 
 
 ### Prioritizing requests
 
-(To figure out how much a customer is paying, go to [revenue.posthog.net](https://revenue.posthog.net) (internal), click on the most recent month and command + F for the company name)
-
-1. Respond to and debug issues for _Priority_ customers (customers on Scale and Enterprise, either current or in our sales process, plus any high-paying Cloud customers)
-2. Respond to and debug issues for _Subscriber_ customers (paying subscribers on Cloud, usually paying $1-500/month)
-3. Respond to and debug issues for _Community_ users (all other free Open Source or free Cloud users)
-4. Fix issues, create PRs
+1. Any user requests in a dedicated channel, or if you're tagged by the Customer Success team, as they'll be customers that either pay us or can pay us a decent amount of money
+2. Any issue in Zendesk marked as 'high' priority (as they'll be paying customers)
+3. Any other Zendesk (including squeak and github) or community slack issues.
 
 ### Triaging issues to the relevant small team
 
@@ -182,11 +179,11 @@ Squeak! is a community curation toolkit created by the [Website & Docs team](/ha
 
 At the end of every page in the docs and handbook is a form where visitors can ask questions about the content of that page. (It also appears on the pricing page, and will be used in other places in the future.) This is an embedded JavaScript snippet we call [Q&A.js](https://squeak.posthog.com/toolkit/qna.js), powered by Squeak!
 
-Q&A.js should help reduce the load of the support hero, but you'll need to make sure questions are getting answered accurately – and in a timely manner.
+Squeak questions appear in Zendesk.
 
 #### Answering questions using Squeak!
 
-When a question is posted, a notification is sent to the [#squeak-ping](https://posthog.slack.com/archives/C03B04XGLAZ) channel in Slack. You can answer a question directly on the page where it was asked. When a reply is posted, the person who asked the question will receive an email notification.
+When a question is posted, it'll appear in Zendesk with a link to Squeak. A notification is also sent to the [#squeak-ping](https://posthog.slack.com/archives/C03B04XGLAZ) channel in Slack. You can answer a question directly on the page where it was asked. When a reply is posted, the person who asked the question will receive an email notification.
 
 The first time you answer a question, you'll need to create a Squeak! account. (You'll be prompted to do this after answering a question, as posting/responding requires authentication.)
 
@@ -202,9 +199,10 @@ Every team has a Secondary on-call rotation. Unlike support hero, you are still 
 
 ### Schedules
 
-- [Secondary - App East](https://posthog.pagerduty.com/schedules#PXUZ9XL)
-- [Secondary - App West](https://posthog.pagerduty.com/schedules#P04FUTJ)
-- [Secondary – Platform Ingestion](https://posthog.pagerduty.com/schedules#PM8YSH8)
-- [Secondary - Platform Infrastructure](https://posthog.pagerduty.com/schedules#P78OOWZ)
+- [Secondary - Product Analytics](https://posthog.pagerduty.com/schedules#PXUZ9XL)
+- [Secondary - Experimentation](https://posthog.pagerduty.com/schedules#P04FUTJ)
+- [Secondary - Session recordings](https://posthog.pagerduty.com/schedules#PUPERAV)
+- [Secondary – Pipeline](https://posthog.pagerduty.com/schedules#PM8YSH8)
+- [Secondary - Infrastructure](https://posthog.pagerduty.com/schedules#P78OOWZ)
 
 PagerDuty doesn't let us have a rotation that automatically selects the person that is support hero to also be the secondary on-call for their team. This means we'll occasionally need to manually shuffle the schedule around.

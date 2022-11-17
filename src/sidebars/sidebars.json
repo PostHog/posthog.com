@@ -98,6 +98,10 @@
                     "url": "/handbook/company/management"
                 },
                 {
+                    "name": "Sprints",
+                    "url": "/handbook/company/sprints"
+                },
+                {
                     "name": "Offsites",
                     "url": "/handbook/company/offsites"
                 },
@@ -408,6 +412,10 @@
                     "url": "",
                     "children": [
                         {
+                            "name": "Overview",
+                            "url": "/handbook/engineering/clickhouse"
+                        },
+                        {
                             "name": "Data storage or what is a MergeTree",
                             "url": "/handbook/engineering/clickhouse/data-storage"
                         },
@@ -437,7 +445,11 @@
                             "children": [
                                 {
                                     "name": "Overview",
-                                    "url": "/handbook/engineering/clickhouse/schema/overview"
+                                    "url": "/handbook/engineering/clickhouse/schema"
+                                },
+                                {
+                                    "name": "sharded_events",
+                                    "url": "/handbook/engineering/clickhouse/schema/sharded-events"
                                 },
                                 {
                                     "name": "app_metrics",
@@ -556,6 +568,10 @@
                         {
                             "name": "Press",
                             "url": "/handbook/growth/marketing/press"
+                        },
+                        {
+                            "name": "YouTube",
+                            "url": "/handbook/growth/marketing/youtube"
                         }
                     ]
                 }
@@ -643,36 +659,64 @@
                     "url": "/docs/self-host"
                 },
                 {
-                    "name": "Deployments",
-                    "url": "",
+                    "name": "Open-Source",
+                    "url": "/docs/self-host/open-source/deployment",
                     "children": [
                         {
-                            "name": "AWS",
-                            "url": "/docs/self-host/deploy/aws"
+                            "name": "Deployment",
+                            "url": "/docs/self-host/open-source/deployment"
                         },
                         {
-                            "name": "Azure",
-                            "url": "/docs/self-host/deploy/azure"
+                            "name": "Support",
+                            "url": "/docs/self-host/open-source/support"
+                        }
+                    ]
+                },
+                {
+                    "name": "Enterprise",
+                    "url": "/docs/self-host/enterprise/overview",
+                    "children": [
+                        {
+                            "name": "Overview",
+                            "url": "/docs/self-host/enterprise/overview"
                         },
                         {
-                            "name": "DigitalOcean",
-                            "url": "/docs/self-host/deploy/digital-ocean"
+                            "name": "Support",
+                            "url": "/docs/self-host/enterprise/support"
                         },
                         {
-                            "name": "Google Cloud Platform",
-                            "url": "/docs/self-host/deploy/gcp"
+                            "name": "Hosting Costs",
+                            "url": "/docs/self-host/enterprise/hosting-costs"
                         },
                         {
-                            "name": "Hobby",
-                            "url": "/docs/self-host/deploy/hobby"
-                        },
-                        {
-                            "name": "EU Hosting Companies",
-                            "url": "/docs/self-host/deploy/hosting-in-eu"
-                        },
-                        {
-                            "name": "Other platforms",
-                            "url": "/docs/self-host/deploy/other"
+                            "name": "Deployments",
+                            "url": "",
+                            "children": [
+                                {
+                                    "name": "AWS",
+                                    "url": "/docs/self-host/deploy/aws"
+                                },
+                                {
+                                    "name": "Azure",
+                                    "url": "/docs/self-host/deploy/azure"
+                                },
+                                {
+                                    "name": "DigitalOcean",
+                                    "url": "/docs/self-host/deploy/digital-ocean"
+                                },
+                                {
+                                    "name": "Google Cloud Platform",
+                                    "url": "/docs/self-host/deploy/gcp"
+                                },
+                                {
+                                    "name": "EU Hosting Companies",
+                                    "url": "/docs/self-host/deploy/hosting-in-eu"
+                                },
+                                {
+                                    "name": "Other platforms",
+                                    "url": "/docs/self-host/deploy/other"
+                                }
+                            ]
                         }
                     ]
                 },
@@ -855,14 +899,6 @@
                 {
                     "name": "Troubleshooting and FAQs",
                     "url": "/docs/self-host/deploy/troubleshooting"
-                },
-                {
-                    "name": "Support for self-hosting (open-source and enterprise)",
-                    "url": "/docs/self-host/deploy/support"
-                },
-                {
-                    "name": "Managing hosting costs",
-                    "url": "/docs/self-host/deploy/hosting-costs"
                 }
             ]
         },

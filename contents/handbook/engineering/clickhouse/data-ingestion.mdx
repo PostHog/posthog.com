@@ -12,8 +12,8 @@ This document covers:
 
 As any database system, ClickHouse allows using `INSERT`s to load data.
 
-However each `INSERT` creates a new part in ClickHouse, which
-comes with a lot of overhead and in a busy system will lead to errors due to exceeding
+Each `INSERT` creates a new part in ClickHouse, which
+comes with a lot of overhead and, in a busy system, will lead to errors due to exceeding
 [`parts_to_throw` MergeTree table setting](https://clickhouse.com/docs/en/operations/settings/merge-tree-settings/#parts-to-throw-insert) (default 300).
 
 ClickHouse provides a bunch of options to make `INSERT`s still work. For example:
@@ -21,7 +21,7 @@ ClickHouse provides a bunch of options to make `INSERT`s still work. For example
 - [`async_insert` setting](https://clickhouse.com/docs/en/operations/settings/settings/#async-insert)
 - [Buffer table engine](https://clickhouse.com/docs/en/engines/table-engines/special/buffer/)
 
-However these come with their own trade-offs, consistency problems and requires the ClickHouse cluster to always be accessible.
+These come with their own trade-offs, consistency problems, and require the ClickHouse cluster to always be accessible.
 As such, PostHog instead leverages Kafka engine tables for ingestion.
 
 ## Why we ingest via Kafka tables
@@ -30,17 +30,17 @@ We instead rely on the [Kafka table engine](https://clickhouse.com/docs/en/engin
 into ClickHouse.
 
 The benefits are:
-- Resiliency: It handles sudden spikes in traffic and ClickHouse cluster unavailability gracefully
+- Resiliency: Kafka handles sudden spikes in traffic and ClickHouse cluster unavailability gracefully
 - PostHog already uses Kafka throughout the app, making it a safe technical choice
 
 It also has minimal overhead in terms of memory used and allows us to always temporarily stop ingestion by removing the tables in question.
 
-## How kafka tables work
+## How Kafka tables work
 
 Kafka engine tables act as Kafka consumers in a given [consumer group](https://docs.confluent.io/platform/current/clients/consumer.html#concepts).
 Selecting from that table advances the consumer offsets.
 
-A kafka table on it's own does nothing beyond allowing to select from Kafka - it needs to be paired with other tables for ingestion
+A Kafka table on it's own does nothing beyond allowing to select from Kafka - it needs to be paired with other tables for ingestion
 to work.
 
 Example kafka engine table:
@@ -67,9 +67,7 @@ of `kafka_skip_broken_messages`, breaking ingestion.
 can be thought of as triggers - they react to new blocks being INSERTed into source tables and allow transforming and piping
 that data to other tables.
 
-Note that materialized views come with a lot of gotchas.
-
-A great resource for learning more is [this presentation](https://den-crane.github.io/Everything_you_should_know_about_materialized_views_commented.pdf).
+Materialized views come with a lot of gotchas. A great resource for learning more about them is [this presentation](https://den-crane.github.io/Everything_you_should_know_about_materialized_views_commented.pdf).
 
 ## Example schema - reading and writing ingestion events
 
@@ -122,9 +120,9 @@ In this schema:
 - `sharded_ingestion_warnings` MergeTree is responsible for storing the ingested data
 - `ingestion_warnings` table is responsible for fielding queries and distributing writes to `sharded_ingestion_warnings` tables across shards
 - `ingestion_warnings_mv` regularly polls `kafka_ingestion_warnings` and pushes the data to `ingestion_warnings` distributed table
-    - Note it also forwards `_timestamp`, `_offset` and `_partition` virtual columns containing Kafka message metadata so they can be stored and used during debugging.
+    - **Note**: it also forwards `_timestamp`, `_offset` and `_partition` virtual columns containing Kafka message metadata so they can be stored and used during debugging.
 
-### Visualized
+### Example schema visualized
 
 This is the same schema visualized in a ClickHouse cluster with 2 shards and 1 replica each:
 
@@ -169,10 +167,13 @@ flowchart LR
 
 ## Further reading
 
-- https://clickhouse.com/docs/en/sql-reference/statements/insert-into/#performance-considerations
-- https://clickhouse.com/docs/en/integrations/kafka/kafka-table-engine
-- https://clickhouse.com/docs/en/engines/table-engines/integrations/kafka/
-- https://docs.confluent.io/platform/current/clients/consumer.html#concepts
-- https://altinity.com/blog/clickhouse-materialized-views-illuminated-part-1
-- https://posthog.com/blog/clickhouse-vs-postgres#clickhouses-not-so-secret-weapon-materialized-views
-- https://den-crane.github.io/Everything_you_should_know_about_materialized_views_commented.pdf
+- [Performance Considerations ClickHouse docs](https://clickhouse.com/docs/en/sql-reference/statements/insert-into/#performance-considerations)
+- [Using the Kafka table engine](https://clickhouse.com/docs/en/integrations/kafka/kafka-table-engine)
+- [Kafka ClickHouse docs](https://clickhouse.com/docs/en/engines/table-engines/integrations/kafka/)
+- [Confluent concepts (Zookeeper)](https://docs.confluent.io/platform/current/clients/consumer.html#concepts)
+- [ClickHouse Materialized Views Illuminated, Part 1](https://altinity.com/blog/clickhouse-materialized-views-illuminated-part-1)
+- [ClickHouse's not so secret weapon... Materialized Views](https://posthog.com/blog/clickhouse-vs-postgres#clickhouses-not-so-secret-weapon-materialized-views)
+- [Everything you should know
+about materialized views.](https://den-crane.github.io/Everything_you_should_know_about_materialized_views_commented.pdf)
+
+Next in the ClickHouse manual: [Working with JSON](/handbook/engineering/clickhouse/working-with-json)
