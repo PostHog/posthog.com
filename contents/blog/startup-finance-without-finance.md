@@ -19,7 +19,9 @@ Who knows, maybe you'll actually _look forward_ to digging into your finances on
 
 ## Who is this for?
 
-Startups who are early stage or have reached product-market fit. If you are smaller than 5 people, I'd just do the accounting bit (so you don't go to prison) and stop there so you can focus on building your product. 
+Startups with 5 to 100 who are early stage or have reached product-market fit. 
+
+If you are fewer than five people, I'd suggest just doing the accounting bit (so you don't go to jail) and stop there so you can focus on building your product. 
 
 If you are 5-99 people, this guide is for you!
 
