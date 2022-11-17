@@ -38,7 +38,7 @@ PostHog::capture(array(
   'event' => 'movie played',
   'properties' => array(
     'movieId' => 'Return of the Hedgehogs',
-    'category' => 'romcom'
+    'category' => 'thriller'
   )
 ));
 ```
@@ -100,7 +100,7 @@ Once you've started capturing events, you can create actions (a combination of o
 
 ![Action](../images/tutorials/next-steps-after-installing/action.png)
 
-Be sure to add properties to your events to better capture variables such as the value, type or version. For example, you might want to know which version of the product someone is using or if they are a customer or not. Properties can help you here, and you can set them for users as well. 
+Be sure to add properties to your events to better capture variables such as the value, type, or version. For example, you might want to know which version of the product someone is using or if they are a customer or not. Properties can help you here, and you can set them for users as well. 
 
 Finally, you may also want to connect to external services like [Stripe](/tutorials/stripe-payment-data) or [HubSpot](/apps/hubspot-connector) to get data. You can do that using [apps](/apps). To install an app, search for it in “browse apps,” then configure and activate it.
 
@@ -127,9 +127,9 @@ Creating a dashboard will give you an understanding of the different types of in
 
 ## 3. Invite your team
 
-Now that you’ve set up PostHog with data and dashboards, your teammates can benefit from all your hard work. Inviting your teammates to PostHog allows you to share data, insights. and dashboards. Engineers, product managers, data analysts, markets, and executives can all benefit from this. It also helps in collaboration using our tools to improve your product.
+Now that you’ve set up PostHog with data and dashboards, your teammates can benefit from all your hard work. Inviting your teammates to PostHog allows you to share data, insights, and dashboards. Engineers, product managers, data analysts, markets, and executives can all benefit from this. It also helps in collaboration using our tools to improve your product.
 
-To invite your teammates, go to your instance homepage, clicking the "Invite" button, and adding their email. This will add them to your organization with access to all your projects.
+To invite your teammates, go to your instance homepage, click the "Invite" button, and add their email. This will add them to your organization with access to all your projects.
 
 ![Invite](../images/tutorials/next-steps-after-installing/invite.png)
 
@@ -149,7 +149,7 @@ If there are key events or actions you want to track, such as a potential custom
 
 You can also subscribe to dashboards in Slack or via email. Just go to your dashboard, click the three dots to the left of share, click “subscribe,” and “new subscription.” If you want to send dashboards to Slack, you’ll need to configure our [Slack integration](/docs/integrate/third-party/slack). If you want dashboards by email, just fill in the details like the name, email, and recurrence, then click “create subscription.” 
 
-Finally, if you want your data backed up or sent to an external service such as [BigQuery](/apps/bigquery-export), [S3](/apps/s3-export) or [Snowflake](/apps/snowflake-export), you can use one of our many [“data-out” apps](/apps). Just go to “browse apps,” search for the one you want, configure it, and start sending the data to the other places you want it.
+Finally, if you want your data backed up or sent to an external service such as [BigQuery](/apps/bigquery-export), [S3](/apps/s3-export), or [Snowflake](/apps/snowflake-export), you can use one of our many [“data-out” apps](/apps). Just go to “browse apps,” search for the one you want, configure it, and start sending the data to the other places you want it.
 
 ![Data-out apps](../images/tutorials/next-steps-after-installing/apps.png)
 
