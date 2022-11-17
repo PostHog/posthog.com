@@ -9,22 +9,30 @@ const searchClient = algoliasearch('7VNQB5W0TX', 'e9ff9279dc8771a35a26d586c73c20
 
 type Result = Hit<{
     id: string
-    type: 'blog' | 'docs' | 'api' | 'question' | 'handbook'
+    type: 'blog' | 'docs' | 'api' | 'question' | 'handbook' | 'manual'
     slug: string
     title: string
     excerpt: string
 }>
 
 const SearchBox = () => {
-    const { query, refine, clear, isSearchStalled } = useSearchBox()
+    const { query, refine, isSearchStalled } = useSearchBox()
 
     return (
-        <div className="relative flex items-center border-2 rounded border-gray-accent-light">
-            <input className="w-full py-1 px-2" value={query} onChange={(event) => refine(event.target.value)} />
+        <div className="relative flex items-center rounded">
+            <input
+                className="w-full py-2 px-3 bg-black/5 focus:outline-none rounded"
+                placeholder="Search..."
+                value={query}
+                onChange={(event) => refine(event.target.value)}
+            />
 
-            <button className="absolute right-4" onClick={clear}>
-                ✕
-            </button>
+            <kbd
+                className="absolute right-4 text-xs font-code bg-black/10 rounded px-1 py-0.5 text-black/40"
+                style={{ fontSize: '10px' }}
+            >
+                ESC
+            </kbd>
         </div>
     )
 }
@@ -32,15 +40,27 @@ const SearchBox = () => {
 const RefinementList = () => {
     const { items, refine } = useRefinementList({ attribute: 'type', sortBy: ['name:asc'] })
 
+    const formatLabel = (label: Result['type']): string => {
+        return {
+            blog: 'Blog',
+            docs: 'Docs',
+            handbook: 'Handbook',
+            api: 'API',
+            tutorial: 'Tutorials',
+            manual: 'Manual',
+            question: 'Questions',
+        }[label]
+    }
+
     return (
         <div className="ais-RefinementList">
             <ul className="flex items-center flex-wrap space-x-2 list-none p-0">
                 {items.map((item) => (
                     <li
                         key={item.value}
-                        className={classNames('rounded p-0.5', item.isRefined && 'bg-gray-accent-light')}
+                        className={classNames('rounded px-1 py-0.5', item.isRefined && 'bg-gray-accent-light')}
                     >
-                        <label className="flex items-center space-x-1 text-gray-accent-dark">
+                        <label className="flex items-center text-gray-accent-dark cursor-pointer">
                             <input
                                 className="sr-only"
                                 type="checkbox"
@@ -48,8 +68,9 @@ const RefinementList = () => {
                                 checked={item.isRefined}
                                 onChange={() => refine(item.value)}
                             />
-                            <span className="ais-RefinementList-labelText">{item.label}</span>
-                            <span className="ais-RefinementList-count">{item.count}</span>
+                            <span className="ais-RefinementList-labelText">
+                                {formatLabel(item.label as Result['type'])}
+                            </span>
                         </label>
                     </li>
                 ))}
@@ -89,7 +110,7 @@ const Hits = () => {
 export default function SearchResults() {
     return (
         <div
-            className="z-50 p-8 bg-white rounded-md shadow w-full max-w-2xl flex flex-col space-y-2"
+            className="z-50 p-6 bg-white rounded-md shadow w-full max-w-2xl flex flex-col space-y-2"
             style={{ zIndex: '999999', height: '500px' }}
         >
             <InstantSearch searchClient={searchClient} indexName="dev_posthog_com">
