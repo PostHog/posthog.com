@@ -196,9 +196,9 @@ We schedule this budget review meeting in for the last week of the month, i.e. a
 
 If we find anything particularly unusual, we'll follow up with the relevant team lead to see what's happened. Often, though, you're really going to be looking at one of:
 
-- Hosting costs spiking
-- Hiring - either unexpected or more expensive than originally forecast
 - Marketing spend 
+- Hosting costs spiking
+- Hiring, either unexpected or more expensive than originally forecast
 
 ### General tips
 
