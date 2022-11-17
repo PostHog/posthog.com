@@ -448,6 +448,9 @@ module.exports = {
                                     value
                                     depth
                                   }
+                                  fields {
+                                    pageViews
+                                  }
                                   excerpt
                                   frontmatter {
                                     title
@@ -483,6 +486,9 @@ module.exports = {
                                     value
                                     depth
                                   }
+                                  fields {
+                                    pageViews
+                                  }
                                   excerpt
                                   frontmatter {
                                     title
@@ -517,6 +523,9 @@ module.exports = {
                                   headings {
                                     value
                                     depth
+                                  }
+                                  fields {
+                                    pageViews
                                   }
                                   excerpt
                                   frontmatter {
@@ -554,6 +563,9 @@ module.exports = {
                                     value
                                     depth
                                   }
+                                  fields {
+                                    pageViews
+                                  }
                                   excerpt
                                   frontmatter {
                                     title
@@ -588,6 +600,9 @@ module.exports = {
                                   headings {
                                     value
                                     depth
+                                  }
+                                  fields {
+                                    pageViews
                                   }
                                   excerpt
                                   frontmatter {

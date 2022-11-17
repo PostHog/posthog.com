@@ -5,6 +5,7 @@ import GitUrlParse from 'git-url-parse'
 import slugify from 'slugify'
 import { JSDOM } from 'jsdom'
 import { GatsbyNode } from 'gatsby'
+import { PAGEVIEW_CACHE_KEY } from './onPreBootstrap'
 
 require('dotenv').config({
     path: `.env.${process.env.NODE_ENV}`,
@@ -24,8 +25,6 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
 }) => {
     const { createNodeField, createNode } = actions
 
-    // console.log(cache)
-
     if (node.internal.type === `MarkdownRemark` || node.internal.type === 'Mdx') {
         const parent = getNode(node.parent)
         if (parent.internal.type === 'Reply') return
@@ -36,6 +35,24 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
             name: `slug`,
             value: replacePath(slug),
         })
+
+        if (slug) {
+            const pageViews = await cache.get(PAGEVIEW_CACHE_KEY)
+
+            if (slug.slice(0, -1) in pageViews) {
+                createNodeField({
+                    node,
+                    name: `pageViews`,
+                    value: pageViews[slug.slice(0, -1)],
+                })
+            } else {
+                createNodeField({
+                    node,
+                    name: `pageViews`,
+                    value: 0,
+                })
+            }
+        }
 
         if (/^\/docs\/apps/.test(slug) && node?.frontmatter?.github && process.env.GITHUB_API_KEY) {
             const { name, owner } = GitUrlParse(node.frontmatter.github)

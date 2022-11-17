@@ -7,6 +7,7 @@ export { createSchemaCustomization } from './gatsby/createSchemaCustomization'
 export { sourceNodes } from './gatsby/sourceNodes'
 export { onPostBuild } from './gatsby/onPostBuild'
 export { createResolvers } from './gatsby/createResolvers'
+export { onPreBootstrap } from './gatsby/onPreBootstrap'
 
 // Implement the Gatsby API “onCreatePage”. This is
 // called after every page is created.
