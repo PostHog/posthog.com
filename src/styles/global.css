@@ -103,7 +103,7 @@ h4 {
     h4,
     h5,
     h6 {
-        @apply mt-8;
+        @apply mt-4;
         letter-spacing: -0.015em;
 
         a:not(.cta) {
@@ -156,7 +156,7 @@ h4 {
         & + h2,
         & + h3,
         & + h4 {
-            @apply mt-8;
+            @apply mt-4;
         }
     }
 
