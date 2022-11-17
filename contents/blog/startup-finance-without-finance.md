@@ -23,8 +23,6 @@ Startups with 5 to 100 who are early stage or have reached product-market fit.
 
 If you are fewer than five people, I'd suggest just doing the accounting bit (so you don't go to jail) and stop there so you can focus on building your product. 
 
-If you are 5-99 people, this guide is for you!
-
 > Looking for a more generalist ops guide instead for things like hiring, payroll, and expense management? Check out our [startup ops toolkit](https://posthog.com/blog/startup-ops-toolkit) instead. 
 
 ## What you'll need
