@@ -10,8 +10,12 @@ const searchClient = algoliasearch('7VNQB5W0TX', 'e9ff9279dc8771a35a26d586c73c20
 type Result = Hit<{
     id: string
     type: 'blog' | 'docs' | 'api' | 'question' | 'handbook' | 'manual'
-    slug: string
     title: string
+    slug: string
+    headings: {
+        value: string
+        depth: number
+    }[]
     excerpt: string
 }>
 
@@ -63,6 +67,7 @@ const RefinementList = () => {
                         <label className="flex items-center text-gray-accent-dark cursor-pointer">
                             <input
                                 className="sr-only"
+                                tabIndex={-1}
                                 type="checkbox"
                                 value={item.value}
                                 checked={item.isRefined}
@@ -80,39 +85,67 @@ const RefinementList = () => {
 }
 
 const Hits = () => {
+    const [currentResult, setCurrentResult] = React.useState<Result | null>(null)
     const { hits } = useHits<Result>()
 
     return (
-        <div className="overflow-y-scroll overscroll-none text-left">
-            {hits.length > 0 ? (
-                <ol className="list-none m-0">
-                    {hits.map((hit) => {
-                        return (
-                            <li key={hit.objectID} className="focus-within:bg-gray-accent-light rounded">
-                                <Link
-                                    className="w-full p-2 text-red font-semibold flex flex-col space-y-1"
-                                    to={'/' + hit.slug}
+        <div className="grid grid-cols-2 min-h-0 flex-grow">
+            <section className="overscroll-none text-left" style={{ overflowY: 'scroll' }}>
+                {hits.length > 0 ? (
+                    <ol className="list-none m-0">
+                        {hits.map((hit) => {
+                            return (
+                                <li
+                                    key={hit.objectID}
+                                    className="focus-within:bg-gray-accent-light rounded hover:bg-gray-accent-light"
+                                    onMouseOver={() => setCurrentResult(hit)}
+                                    onFocus={() => setCurrentResult(hit)}
                                 >
-                                    <span>{hit.title}</span>
-                                    <p className="text-sm m-0 text-gray">{hit.excerpt}</p>
-                                </Link>
-                            </li>
-                        )
-                    })}
-                </ol>
-            ) : (
-                <div className="w-full flex items-center justify-center">No results</div>
-            )}
+                                    <Link
+                                        className="w-full px-3 py-2 text-red font-semibold flex flex-col space-y-1 focus:outline-none"
+                                        to={'/' + hit.slug}
+                                    >
+                                        <span className="line-clamp-1">{hit.title}</span>
+                                        <p className="text-sm m-0 text-gray line-clamp-2">{hit.excerpt}</p>
+                                    </Link>
+                                </li>
+                            )
+                        })}
+                    </ol>
+                ) : (
+                    <div className="w-full flex items-center justify-center">No results</div>
+                )}
+            </section>
+            <section className="overflow-y-scroll bg-tan p-6 h-full">
+                {currentResult ? (
+                    <div className="text-left mt-4">
+                        <span className="block text-center text-xs font-semibold text-red uppercase">
+                            {currentResult.type}
+                        </span>
+                        <h4 className="text-center">{currentResult.title}</h4>
+                        <p className="text-black/70">{currentResult.excerpt}</p>
+                        <span className="text-xs text-gray font-semibold mb-3">On this page</span>
+                        <ol className="list-none m-0 text-sm text-gray font-semibold space-y-2">
+                            {currentResult?.headings
+                                ?.filter(({ depth }) => depth <= 2)
+                                .map((heading) => {
+                                    return (
+                                        <li key={heading.value}>
+                                            <span>{heading.value}</span>
+                                        </li>
+                                    )
+                                })}
+                        </ol>
+                    </div>
+                ) : null}
+            </section>
         </div>
     )
 }
 
 export default function SearchResults() {
     return (
-        <div
-            className="z-50 p-6 bg-white rounded-md shadow w-full max-w-2xl flex flex-col space-y-2"
-            style={{ zIndex: '999999', height: '500px' }}
-        >
+        <div className="z-50 p-6 bg-white rounded-md shadow flex flex-col space-y-2 h-full">
             <InstantSearch searchClient={searchClient} indexName="dev_posthog_com">
                 <SearchBox />
                 <RefinementList />
