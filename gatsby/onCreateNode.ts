@@ -39,7 +39,7 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
         if (slug) {
             const pageViews = await cache.get(PAGEVIEW_CACHE_KEY)
 
-            if (slug.slice(0, -1) in pageViews) {
+            if (pageViews && slug.slice(0, -1) in pageViews) {
                 createNodeField({
                     node,
                     name: `pageViews`,
