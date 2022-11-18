@@ -195,13 +195,13 @@ Finally, head over to Pry's 'Hiring Plan' tab. This section is pretty straightfo
 
 You should now have a nice financial plan set up in Pry. I'm not going to cover everything that Pry does in this guide, so I'd recommend you check out [their docs](https://pry.co/docs/introduction) instead. But it should look something like this:
 
-![pry image 1](../images/Pry image 1.jpeg)
+![pry image 1](../images/Pry_image_1.jpeg)
 
 ### Budget vs. actuals
 
 Once a month, after we've received our monthly financial report from Fondo (remember that?), we review how we performed against our budget in Pry. You can also reallocate revenue and expenses to different categories in Pry by simply dragging and dropping, but be aware that this doesn't change anything in QuickBooks. 
 
-![pry image 2](../images/Pry image 2.jpeg)
+![pry image 2](../images/Pry_image_2.jpeg)
 
 Our process is pleasingly simple:
 
