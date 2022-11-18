@@ -23,6 +23,7 @@ import { BlogFooter } from './components/BlogFooter'
 import { BorderWrapper } from './components/BorderWrapper'
 import { Breadcrumbs } from './components/Breadcrumbs'
 import { CallToAction } from './components/CallToAction'
+import { Caption } from './components/Caption'
 import { Card } from './components/Card'
 import { Benefits } from './components/Careers/Benefits'
 import { CareersHero } from './components/Careers/CareersHero'
@@ -156,6 +157,7 @@ export const shortcodes = {
     BorderWrapper,
     Breadcrumbs,
     CallToAction,
+    Caption,
     Card,
     Benefits,
     CareersHero,

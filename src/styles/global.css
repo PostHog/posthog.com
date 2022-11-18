@@ -72,7 +72,7 @@ h1 {
 }
 
 h2 {
-    @apply text-3xl font-bold leading-normal;
+    @apply text-3xl font-bold leading-tight;
     letter-spacing: -0.03em;
 
     code {
@@ -81,7 +81,7 @@ h2 {
 }
 
 h3 {
-    @apply text-2xl leading-normal;
+    @apply text-2xl leading-tight;
 
     code {
         @apply !font-bold !text-2xl;
@@ -103,7 +103,7 @@ h4 {
     h4,
     h5,
     h6 {
-        @apply mt-8;
+        @apply mt-4;
         letter-spacing: -0.015em;
 
         a:not(.cta) {
