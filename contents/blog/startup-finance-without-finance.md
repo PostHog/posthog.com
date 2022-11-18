@@ -259,7 +259,7 @@ In either case, I'd recommend you get someone in who has 1-2 years' experience b
 
 ## Further reading
 
-If you found this useful, we recommend reading our [ops toolkit for early-stage startups](/blog/startup-ops-toolkit) – it'll guide you through setting up simmilar processes for things like hiring, HR, stock options, and more.
+If you found this useful, we recommend reading our [ops toolkit for early-stage startups](/blog/startup-ops-toolkit) – it'll guide you through setting up similar processes for things like hiring, HR, stock options, and more.
 
 Speaking of hiring, [Creating an employee-friendly startup share option scheme](/blog/equity-share-options-explained) will help you create a share option scheme potential hires will love. 
 
