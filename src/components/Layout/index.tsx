@@ -4,6 +4,7 @@ import { Footer } from '../Footer/Footer'
 import CookieBanner from 'components/CookieBanner'
 import { useValues } from 'kea'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
+import { SearchProvider } from 'components/Search/SearchContext'
 
 import './Fonts.scss'
 import './Layout.scss'
@@ -20,12 +21,14 @@ const Layout = ({ children, className = '' }: { children: React.ReactNode; class
     }, [])
 
     return (
-        <div className={className}>
-            <Header />
-            <main>{children}</main>
-            <Footer />
-            <CookieBanner />
-        </div>
+        <SearchProvider>
+            <div className={className}>
+                <Header />
+                <main>{children}</main>
+                <Footer />
+                <CookieBanner />
+            </div>
+        </SearchProvider>
     )
 }
 
