@@ -28,7 +28,7 @@ import { Popover } from 'components/Popover'
 import Tooltip from 'components/Tooltip'
 import { CallToAction } from 'components/CallToAction'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
-import SearchBox from 'components/Search/SearchBox'
+import SidebarSearchBox from 'components/Search/SidebarSearchBox'
 
 const ShareLink = ({ children, url }: { children: React.ReactNode; url: string }) => {
     const width = 626
@@ -49,8 +49,6 @@ const ShareLink = ({ children, url }: { children: React.ReactNode; url: string }
         </button>
     )
 }
-
-const A = (props: any) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
 export const SidebarSection = ({
     title,
@@ -522,14 +520,15 @@ export default function PostLayout({
         } ${menu ? 'mx-auto' : 'lg:ml-auto'}`
 
     return (
-        <div id="menu-wrapper">
+        <div id="menu-wrapper" className="border-t border-dashed border-gray-accent-light">
             {menu && (
-                <div className="block lg:hidden py-2 px-4 border-y border-dashed border-gray-accent-light dark:border-gray-accent-dark flex justify-between sticky top-[-2px] bg-tan dark:bg-primary z-30">
+                <div className="block lg:hidden py-2 px-4 border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark flex justify-between sticky top-[-2px] bg-tan dark:bg-primary z-30">
                     <button onClick={handleMobileMenuClick} className="py-2 px-3">
                         <MobileMenu style={{ transform: `rotate(${mobileMenuOpen ? '180deg' : '0deg'})` }} />
                     </button>
                 </div>
             )}
+
             {menu && (
                 <PushMenu
                     width="calc(100vw - 80px)"
@@ -568,8 +567,12 @@ export default function PostLayout({
             >
                 {menu && (
                     <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:block hidden relative z-20">
-                        <aside className="lg:sticky bg-tan dark:bg-primary top-10 flex-shrink-0 w-full justify-self-end px-4 lg:box-border my-10 lg:my-0 lg:py-4 mr-auto overflow-y-auto lg:h-[calc(100vh-40px)]">
-                            {!hideSearch && <SearchBox filter={searchFilter} />}
+                        <aside className="lg:sticky bg-tan dark:bg-primary top-0 flex-shrink-0 w-full justify-self-end px-4 lg:box-border my-10 lg:my-0 mr-auto overflow-y-auto lg:h-[calc(100vh-40px)] pb-10">
+                            {!hideSearch && (
+                                <div className="lg:sticky top-0 z-20 pt-4 bg-tan">
+                                    <SidebarSearchBox filter={searchFilter} />
+                                </div>
+                            )}
                             <TableOfContents menuType={menuType} menu={menu} />
                         </aside>
                     </div>
