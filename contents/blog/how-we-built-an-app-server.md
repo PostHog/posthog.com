@@ -15,7 +15,7 @@ PostHog's mission is to increase the number of successful products in the world.
 
 Earlier in our history, users frequently asked us for ways to enrich and do more with their data. They wanted to add geographic data to events, get events from CRMs, export and import data from other sources, and more. 
 
-We couldn't build every solution ourselves, so we needed to enable PostHog users to customize their data flows, and create solutions to their endless use cases. We found the answer at our Tuscany offsite: an app platform that enabled users to build apps integrated into our data pipeline.
+We couldn't build every solution ourselves, so we needed to enable users to customize their data flows, and create solutions to their endless use cases. We found the answer at our Tuscany offsite: an app platform that enabled users to build apps integrated into our data pipeline.
 
 This is the story of how [PostHog apps](/apps) went from three-day MVP into a service that handles billions of events – and all the lessons we learned along the way.
 
@@ -23,7 +23,7 @@ This is the story of how [PostHog apps](/apps) went from three-day MVP into a se
 
 PostHog apps are the brainchild of our [first ever hire](/blog/posthog-first-five), Marius Andra. 
 
-Marius wanted a Google Analytics-style world map view for PostHog during our Tuscany offsite hackathon, but he had a problem. The map required location data from IP addresses but, while there were many services to do this, connecting them to event data was difficult.
+Marius wanted a Google Analytics-style world map view for PostHog during our Tuscany offsite hackathon, but he had a problem. The map required location data from IP addresses. While there were many services to do this, connecting them to event data was difficult.
 
 ![Map](../images/blog/how-we-built-an-app-server/map.png)
 
@@ -55,21 +55,21 @@ This was a promising start, but it didn’t take long for cracks to appear.
 
 First, it’s nearly impossible to manage Python dependencies via multiple `requirements.txt` files. There's no way to tell which dependencies your plugin's dependencies will install, without first installing them. There is [nothing like `pip --dry-run`](https://github.com/pypa/pip/issues/53). You need to install the `pip` package and run an `__init__.py` script inside the package to get its dependency tree.
 
-Second, all dependencies were installed together. This made it just a matter of time before a plugin overrode an app dependency (e.g. `django`), and brought everything crashing down. This wasn’t going to work for us, so we needed to rebuild. 
+Second, all the dependencies installed together. This made it just a matter of time before a plugin overrode an app dependency (e.g. `django`), and brought everything crashing down. This wasn’t going to work for us, so we needed to rebuild. 
 
 ## 🛠 Part 2: Rebuilding in JavaScript
 
 After deciding to rebuild, the first attempt was using [PyMiniRacer](https://github.com/sqreen/PyMiniRacer) to generate JavaScript. PyMiniRacer is great for simple functions, but lacks support for async/promises and importing modules like `fetch` because it was raw v8, not Node. It also had a limited standard library. It wasn’t going to work. 
 
-Next, Marius tried to develop and subsequently scratched a [gRPC](https://grpc.io/docs/languages/node/basics/) implementation in Node. He could call JavaScript code from Python (which our pipeline was written in) and get a response, but this approach created too much manual work. It raised questions such as "how many workers should respond to the gRPC calls?" and "how do we make sure we lose no events if the node gRPC server is down?” Apps needed to scale, so this also wasn’t going to work either.
+Next, Marius tried to develop and subsequently scratched a [gRPC](https://grpc.io/docs/languages/node/basics/) implementation in Node. He could call JavaScript code from Python (which we wrote our pipeline in) and get a response, but this approach created too much manual work. It raised questions such as "how many workers should respond to the gRPC calls?" and "how do we make sure we lose no events if the node gRPC server is down?” Apps needed to scale, so this also wasn’t going to work either.
 
 ### Finding the solution with Celery
 
 After these false starts, Marius found a solution in something we already used: Celery.
 
-In our main PostHog app, we used [Celery](https://docs.celeryproject.org/) to process events asynchronously (we don't anymore). When an event hit `/capture`, our API parsed the request and queued the event into a job queue. Marius realized he could build a new server with the [Node port of Celery](https://celery-node.js.org/) and plug that in as another step in the existing pipeline.
+In our main PostHog app, we used [Celery](https://docs.celeryproject.org/) to process events asynchronously (we don't anymore). When an event hits `/capture`, our API parsed the request and queued the event into a job queue. Marius realized he could build a new server with the [Node port of Celery](https://celery-node.js.org/) and plug that in as another step in the existing pipeline.
 
-The combination of Celery and Node solved all pending issues: we wouldn't have to worry about Python dependencies, could potentially run untrusted code in a fast sandbox, there would be no process management for a gRPC link, and could eventually rewrite the entire ingestion pipeline in Node to get a speed boost over Python.
+The combination of Celery and Node solved all pending issues: we wouldn't have to worry about Python dependencies, could potentially run untrusted code in a fast sandbox, there would be no process management for a gRPC link, and could eventually rewrite the entire ingestion pipeline in Node to get a speed boost over Python (which we eventually did).
 
 Using Celery required us to build a Node app that:
 
@@ -186,7 +186,7 @@ And here’s a basic `plugin.json` that goes along with it:
 
 ### App functions and processes
 
-As you can see by reading the above examples, the index file exports functions that take objects PostHog provides (like configuration or event data). Specifically, PostHog apps export predefined functions that run on conditions like:
+As you can see by reading the above examples, the index file exports functions that take objects PostHog provides (like configuration and event data). Specifically, PostHog apps export predefined functions that run on conditions like:
 
 - event ingestion (`processEvent`)
     - useful for modifying incoming data, such as adding geographic data properties or dropping events matching a property filter.
@@ -201,15 +201,21 @@ When users upload apps to PostHog, we import these functions from the files and 
 
 ![VM](../images/blog/how-we-built-an-app-server/vm.png)
 
-Structuring apps this way provides flexibility to users while maintaining scalability and security. Added features like scheduling and exporting added new functionality users wanted. Caching and improving the config object (enabling statelessness) helped apps scale effectively. Running apps in VMs helped ensure they were secure and isolated. The next step was to put these apps into production.
+Structuring apps this way provides flexibility to users while maintaining scalability and security. We continued to improve each of these aspects as apps developed:
+
+- **Flexibility:** features like scheduling and exporting added new functionality that solve more use cases.
+- **Scalability:** caching and improving the config object (enabling statelessness) helped apps scale effectively and use fewer resources.
+- **Security:** running apps in VMs with babel transforms helped ensure they were secure and isolated. 
+
+The next step is putting these apps into production.
 
 ### Serving apps and managing data at scale
 
-An app is no good if it doesn't integrate into PostHog. Apps needed to integrate with our ingestion pipeline. They needed to handle an inflow of data, scale, manage tasks, and update themselves. There are many parts needed to make this happen.
+An app is no good if it doesn't integrate into PostHog. Apps needed to integrate with our event ingestion pipeline. They needed to handle an inflow of data, scale, manage tasks, and update themselves. There are many pieces needed to make this happen.
 
 The initial ingestion pipeline used Python, Celery to manage the job queue, and a Node "plugin server" that ran the functions from the apps on incoming events.
 
-It has evolved significantly. A high-level version now looks like this:
+It has evolved significantly. A high-level version of the ingestion pipeline now looks like this:
 
 ```mermaid
 graph TD
@@ -233,7 +239,7 @@ graph TD
     Kafka2 <-..- ClickHouse
 ```
 
-The plugin server is now a core service that processes all events, updates related, models, and runs all plugins (including apps). Apps are just a portion of what the plugin server does. 
+The plugin server is now a core service that processes all events, updates related, models, and runs all plugins (including apps). Apps are only a small part of what the plugin server does now. 
 
 The entire pipeline is now written in TypeScript and runs on Node. This saves sending processed data back to Python for writing to databases. We can just write it directly to ClickHouse or Postgres. We also now use Kafka to manage data flows and Redis for caching.
 
@@ -241,7 +247,7 @@ The entire pipeline is now written in TypeScript and runs on Node. This saves se
 
 Kafka manages our data flows. It helps us batch, split, and manage parallel work for our apps. For example, Kafka helps us batch and retry events when apps call `processEvent`. We use a Kafka topic (fancy name for "queue") to continue the flow of data.
 
-Another service we use is Redis to cache data for apps. Parts of the app are reusable and don’t need to be recomputed each time we run the app. For example, apps can cache details about the organization events belong to, instead of looking for those details each time an event is processed. Over billions of events, this saves a lot of compute.
+Another service we use is Redis to cache data for apps. Parts of the app are reusable and don’t need to be recomputed each time we run the app. For example, apps can cache details about the organization events belong to, instead of looking for those details for each processed event. Over billions of events, this saves a lot of compute.
 
 We use a couple of Redis patterns. First, we use [Redlock](https://redis.io/docs/manual/patterns/distributed-locks/) for the scheduler and job queue consumer. Redlock ensures these processes are only run on one machine because we only want them to run once. If they ran more than once, we’d have duplication and issues. For example, we only need one scheduler to do the basic work of saying what to do at what time. Second, we use [Pub/Sub](https://redis.io/docs/manual/pubsub/) to check for updates to apps.
 
@@ -249,7 +255,7 @@ We chose these because we used them elsewhere and they have a proven track recor
 
 ### How the plugin server works (apps and beyond)
 
-As mentioned earlier, our plugin server expanded to encompass much more than apps. It now handles all plugins, including apps which validate, process, format, and write event data to databases. The plugin server looks like this: 
+As mentioned earlier, our plugin server expanded to encompass much more than apps. It now handles all plugins, including apps that validate, process, format, and write event data to databases. The plugin server looks like this: 
 
 ![Plugin server](../images/blog/how-we-built-an-app-server/plugin-server.png)
 
@@ -261,19 +267,21 @@ Worker threads receive tasks from the main thread and execute them. Some of the 
 
 ![Worker thread](../images/blog/how-we-built-an-app-server/worker-thread.png)
 
-When the worker thread finishes its task, it gets another new event, process, or other scheduled task from the main thread. The main thread is responsible for getting and rerouting events for further processing. A final `onEvent` task runs once all the processing completes, which is useful for functions like exporting or alerting.
+When the worker thread finishes its task, it gets another new event, process, or other scheduled task from the main thread. The main thread handles getting and rerouting events for further processing. A final `onEvent` task runs once all the processing completes, which is useful for functions like exporting or alerting.
 
 This structure enables modularity, allowing us to run different types of workers and apps. On the small scale, workers can run individual app tasks can together. On a larger scale, we are working on decoupling types of tasks to improve efficiency.
 
 ### Making sure arbitrary code doesn’t break everything
 
-The final piece of the story of apps to worry about is that they are arbitrary code. When left unchecked, they can run whatever code they want, including code that tries to exploit or crash our servers. Allowing users to run arbitrary code can cause many security, infrastructure, and usability issues. We use VMs because they provide some solutions, but they don't offer total protection. We've done a bunch more work to prevent potential issues and make sure apps are secure and reliable.
+The final piece of the story of apps to worry about is that they are arbitrary code. When left unchecked, they can run whatever code they want, including code that tries to exploit or crash our servers. 
 
-First, there are limitless libraries for JavaScript, but we only [allow a small portion of them](/docs/apps/build/reference#available-imports). You can’t install and use whatever npm package you like. We include basic packages such as Node’s standard `crypto`, `url`, `node-fetch`, and `zlib` libraries. We also include libraries like `snowflake-sdk`, `@google-cloud/bigquery`, and `pg` to connect external services. This ensures that the code run by our users and servers uses libraries we trust.
+Allowing users to run arbitrary code can cause many security, infrastructure, and usability issues. We use VMs because they provide some solutions, but they don't offer total protection. We've done a bunch more work to prevent potential issues and make sure apps are secure and reliable.
+
+First, there are endless libraries for JavaScript, but we only [allow a small number of them](/docs/apps/build/reference#available-imports). Users can’t install and use whatever npm package they like. We include basic packages such as Node’s standard `crypto`, `url`, `node-fetch`, and `zlib` libraries. We also include libraries like `snowflake-sdk`, `@google-cloud/bigquery`, and `pg` to connect external services. This ensures that the code run by our users and servers uses libraries we trust.
 
 Second, users can write a loop that loops forever and causes resource exhaustion. To prevent this, we set up a babel plugin that injects code into `for`, `while`, and `do while` loops (as described in [this article](https://medium.com/@bvjebin/js-infinite-loops-killing-em-e1c2f5f2db7f)). Whenever there is a loop, we set up a timer before we start it. If the loop runs for more than 30 seconds, the program errors.
 
-Third, to prevent data loss, we added the ability to retry logic to our `processEvent` function. Kafka handles retries for us by batching events and adding failed ones into the dead letter queue. We added the ability to run functions on `RetryError`  to improve consistency. App developers can also run fetches with retry. Here’s an example of what it looks like:
+Third, to prevent data loss, we added the ability to retry logic to our `processEvent` function. Kafka handles retries for us by batching events and adding failed ones into the dead letter queue. We added the ability to run functions on `RetryError` to improve consistency. App developers can also run fetches with retry. Here’s an example of what it looks like:
 
 ```js
 import { RetryError } from '@posthog/plugin-scaffold'
@@ -297,21 +305,21 @@ All this work helped us create more secure and reliable apps. This allowed us to
 
 Building and scaling PostHog apps fundamentally changed the way we think about our product and infrastructure. We started life as an open source product analytics tool. Now, we're a platform. 
 
-Since launch, we've seen companies and solo devs create numerous useful, clever apps to solve problems or connect new services. There are [over 50 PostHog apps](/apps), including:
+Since launch, we've seen companies and solo devs create many useful, clever apps to solve problems or connect new services. There are [over 50 PostHog apps](/apps), including:
 
 - "Data-in" apps connecting PostHog to [Hubspot](/apps/hubspot-connector), [Salesforce](/apps/salesforce-connector) (community built), [Stripe](https://github.com/PostHog/stripe-plugin), and [Shopify](/apps/shopify).
 
 - "Data-out" apps for exporting PostHog data to [BigQuery](/apps/bigquery-export), [S3](/apps/s3-export), [Rudderstack](/apps/rudderstack-export) (community built), and [Intercom](/apps/intercom).
 
-- Ingestion-filtering apps like [Property Filter](/apps/property-filter) (community built), [Property Flattener](/apps/property-flattener), and [First Time Event Tracker](/apps/first-time-event-tracker) that give users even more control over events and properties sent to PostHog.
+- Ingestion-filtering apps like [Property Filter](/apps/property-filter) (community built), [Property Flattener](/apps/property-flattener), and [First Time Event Tracker](/apps/first-time-event-tracker) that give users, even more, control over events and properties sent to PostHog.
 
 Our vision for apps is to continue to enable more customizability for data flows. We want users to have access to the data they need to create better products, and apps are key to doing this. 
 
-We also want to allow for more customization of the overall PostHog experience. As an example of this, see the release of [site apps](/tutorials/build-site-app), which provides similar customizable functionality in the frontend. Like how apps allow users to modify their data flows, site apps enable them to modify their product with frontend components. With site apps, users can add surveys, feedback requests, banners, and more frontend changes through PostHog.
+We also want to allow for more customization of the PostHog experience. As an example of this, see the release of [site apps](/tutorials/build-site-app), which provides similar customizable functionality in the frontend. Like how apps allow users to customize their data flows, site apps enable them to customize their products with frontend components. Users can add surveys, feedback requests, banners, and more through PostHog site apps.
 
-The ability to leverage PostHog to customize, control, and fully utilize your data will continue to improve. Apps, and many other features of PostHog, help with this. In the end, PostHog aims to help you understand your product and gives you the tools to build a better one.
+The ability to leverage PostHog to customize, control, and fully utilize your data to improve your product will continue to progress. Apps, and many other features of PostHog, help with this. In the end, PostHog aims to help you understand your product and gives you the tools to build a better one.
 
 ## Further reading
 - Feeling inspired? [Learn how to make your own app](/tutorials/build-your-own-posthog-app).
-- More of a front end person? Check out our tutorial on [building site apps](/tutorials/build-site-app).
+- More of a frontend person? Check out our tutorial on [building site apps](/tutorials/build-site-app).
 - Want to dive deeper into apps? [Check out our app docs](/docs/apps)
