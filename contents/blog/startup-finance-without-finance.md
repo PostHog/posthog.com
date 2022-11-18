@@ -69,7 +69,6 @@ Once you're all set up, this is how we run our accounting process each month:
 
 ### How to read your financial report
 
-
 Your report (sometimes referred to as 'management accounts') will comprise three parts. Rather than listing out what every line item means, I'm just going to include particularly important or non-obvious things you should look out for:
 
 #### Profit and loss (aka 'income statement')
@@ -141,12 +140,19 @@ Finally, click Data -> Named Ranges and then select the cells where your total M
 Once you're done, this is how to get it into Pry: 
 
 - Go to Models -> Revenue
+
 - Next to 'Inputs', hit '+' and select the 'Import' option
+
 - The first time you do this, you'll need to click 'Connect New Account' to give Pry access to your Google account
+
 - Then select the relevant spreadsheet you want to import
+
 - You'll want to import the MRR 'Range' you previously created - just pull in the 'Total MRR' line
+
 - This should now show up in your model Input on the left hand side
+
 - Create a new formula, call it something like 'MRR' and set it to just be equal to the Total MRR input
+
 - In the right hand pane, create a new Output, select your new formula from the drop down menu and map it to 'Income' or 'Revenue'
 
 Phew! If you make changes to your Google Sheet in the future, remember to come back to this Model page and click the refresh button in the top left to make sure Pry is pulling your very latest data. Don't worry – Google Sheets will automatically update your Named Ranges as well if you add any new rows, so it won't break your Pry model. 
@@ -250,3 +256,11 @@ So when do you hire this finance person? Broadly speaking, there will be one of 
 - You want to go out and fundraise but, no matter how hard you try, you can't put together a coherent financial story about your business.
 
 In either case, I'd recommend you get someone in who has 1-2 years' experience building financial models 24/7 at a top-tier investment bank, but has suddenly seen the light and wants out. Save the CFO hire for pre-IPO, ok?
+
+## Further reading
+
+If you found this useful, we recommend reading our [ops toolkit for early-stage startups](/blog/startup-ops-toolkit) – it'll guide you through setting up simmilar processes for things like hiring, HR, stock options, and more.
+
+Speaking of hiring, [Creating an employee-friendly startup share option scheme](/blog/equity-share-options-explained) will help you create a share option scheme potential hires will love. 
+
+Once you've hired, read [How to plan a killer company offsite in just 8 weeks](/blog/planning-a-company-offsite) – it's killer.
