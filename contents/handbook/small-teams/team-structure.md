@@ -18,7 +18,6 @@ hideAnchor: false
     - **James Greenhill, Data/Infra engineer**
       - Tiina Turban, Full Stack Engineer
       - Yakko Majuri, Full Stack Engineer
-      - Zack Elan, Software Engineer
     - **Ellie Huxtable, Full Stack Engineer**
       - Guido Iaquinti, Site Reliability Engineer
       - Daniel Jaramillo, Site Reliability Engineer
@@ -88,7 +87,6 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Karl-Aksel Puulmann](/handbook/company/team#karlaksel-puulmann-software-engineer) (Full Stack Engineer)
 - [Harry Waye](/handbook/company/team#harry-waye-software-engineer) (Full Stack Engineer)
 - [Tiina Turban](/handbook/company/team#tiina-turban-software-engineer) (Full Stack Engineer)
-- [Zack Elan]() (Software Engineer)
 - _Incoming Senior Data Engineer_
 - _Hiring for a [full stack engineer](/careers/full-stack-engineer)_
 - Product: Supported by [Luke Harries](/handbook/company/team#luke-harries-head-of-product)
