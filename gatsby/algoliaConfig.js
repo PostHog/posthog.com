@@ -48,7 +48,7 @@ module.exports = {
         queries: [
             retrievePages('docs', '/^docs/'),
             retrievePages('manual', '/^manual/'),
-            retrievePages('manual', '/^handbook/'),
+            retrievePages('handbook', '/^handbook/'),
             retrievePages('tutorial', '/^tutorials/'),
             retrievePages('blog', '/^blog/'),
             {

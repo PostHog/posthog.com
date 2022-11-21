@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import algoliasearch from 'algoliasearch/lite'
 import { InstantSearch, useSearchBox, useRefinementList, useHits } from 'react-instantsearch-hooks-web'
 import { Hit } from 'instantsearch.js'
 import Link from 'components/Link'
 import { classNames } from 'lib/utils'
+import { useSearch } from './SearchContext'
 
 const searchClient = algoliasearch('7VNQB5W0TX', 'e9ff9279dc8771a35a26d586c73c20a8')
 
@@ -18,6 +19,37 @@ type Result = Hit<{
     }[]
     excerpt: string
 }>
+
+const categories = [
+    {
+        type: 'docs',
+        name: 'Docs',
+    },
+    {
+        type: 'manual',
+        name: 'Manual',
+    },
+    {
+        type: 'blog',
+        name: 'Blog',
+    },
+    {
+        type: 'tutorial',
+        name: 'Tutorials',
+    },
+    {
+        type: 'question',
+        name: 'Questions',
+    },
+    {
+        type: 'handbook',
+        name: 'Handbook',
+    },
+    {
+        type: 'api',
+        name: 'API',
+    },
+]
 
 const SearchBox = () => {
     const { query, refine, isSearchStalled } = useSearchBox()
@@ -42,51 +74,70 @@ const SearchBox = () => {
 }
 
 const RefinementList = () => {
+    const [selected, setSelected] = useState<typeof categories[number] | null>(null)
     const { items, refine } = useRefinementList({ attribute: 'type', sortBy: ['name:asc'] })
 
     const formatLabel = (label: Result['type']): string => {
-        return {
-            blog: 'Blog',
-            docs: 'Docs',
-            handbook: 'Handbook',
-            api: 'API',
-            tutorial: 'Tutorials',
-            manual: 'Manual',
-            question: 'Questions',
-        }[label]
+        return {}[label]
+    }
+
+    const updateSelected = (category: typeof categories[number]) => {
+        setSelected((selected) => {
+            refine(category.type)
+
+            if (selected?.type === category.type) {
+                return null
+            } else if (selected?.type) {
+                refine(selected.type)
+            }
+
+            return category
+        })
     }
 
     return (
-        <div className="ais-RefinementList">
+        <fieldset className="border-none py-2">
+            <legend className="sr-only">Filter results by category</legend>
             <ul className="flex items-center flex-wrap space-x-2 list-none p-0">
-                {items.map((item) => (
-                    <li
-                        key={item.value}
-                        className={classNames('rounded px-1 py-0.5', item.isRefined && 'bg-gray-accent-light')}
-                    >
-                        <label className="flex items-center text-gray-accent-dark cursor-pointer">
-                            <input
-                                className="sr-only"
-                                tabIndex={-1}
-                                type="checkbox"
-                                value={item.value}
-                                checked={item.isRefined}
-                                onChange={() => refine(item.value)}
-                            />
-                            <span className="ais-RefinementList-labelText">
-                                {formatLabel(item.label as Result['type'])}
-                            </span>
-                        </label>
-                    </li>
-                ))}
+                {categories.map((item) => {
+                    const result = items.find((res) => res.value === item.type)
+                    const isSelected = selected?.type === item.type
+
+                    return (
+                        <li
+                            key={item.type}
+                            className={classNames(
+                                'rounded px-1.5 py-0.5',
+                                isSelected ? 'bg-red text-white' : 'text-gray-accent-dark bg-gray-accent-light'
+                            )}
+                        >
+                            <label className={classNames('flex items-center', result?.count !== 0 && 'cursor-pointer')}>
+                                <input
+                                    className="sr-only"
+                                    tabIndex={-1}
+                                    type="checkbox"
+                                    disabled={!result?.count}
+                                    value={item.type}
+                                    checked={isSelected}
+                                    onChange={() => updateSelected(item)}
+                                />
+                                <span className="text-sm mr-2">{item.name}</span>
+                                <span className={classNames('text-xs', isSelected ? 'text-white/80' : 'text-black/40')}>
+                                    {result?.count || 0}
+                                </span>
+                            </label>
+                        </li>
+                    )
+                })}
             </ul>
-        </div>
+        </fieldset>
     )
 }
 
 const Hits = () => {
-    const [currentResult, setCurrentResult] = React.useState<Result | null>(null)
     const { hits } = useHits<Result>()
+    const [currentResult, setCurrentResult] = React.useState<Result | null>(hits?.[0])
+    const { close } = useSearch()
 
     return (
         <div className="grid grid-cols-2 min-h-0 flex-grow">
@@ -103,6 +154,7 @@ const Hits = () => {
                                 >
                                     <Link
                                         className="w-full px-3 py-2 text-red font-semibold flex flex-col space-y-1 focus:outline-none"
+                                        onClick={close}
                                         to={'/' + hit.slug}
                                     >
                                         <span className="line-clamp-1">{hit.title}</span>
@@ -116,15 +168,15 @@ const Hits = () => {
                     <div className="w-full flex items-center justify-center">No results</div>
                 )}
             </section>
-            <section className="overflow-y-scroll bg-tan p-6 h-full">
+            <section className="overflow-y-scroll bg-tan p-10 h-full">
                 {currentResult ? (
-                    <div className="text-left mt-4">
+                    <div className="text-left">
                         <span className="block text-center text-xs font-semibold text-red uppercase">
                             {currentResult.type}
                         </span>
                         <h4 className="text-center">{currentResult.title}</h4>
                         <p className="text-black/70">{currentResult.excerpt}</p>
-                        <span className="text-xs text-gray font-semibold mb-3">On this page</span>
+                        <span className="block text-xs text-gray font-semibold mb-3">On this page</span>
                         <ol className="list-none m-0 text-sm text-gray font-semibold space-y-2">
                             {currentResult?.headings
                                 ?.filter(({ depth }) => depth <= 2)
