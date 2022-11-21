@@ -55,7 +55,7 @@ This was a promising start, but it didn’t take long for cracks to appear.
 
 First, it’s nearly impossible to manage Python dependencies via multiple `requirements.txt` files. There's no way to tell which dependencies your plugin's dependencies will install, without first installing them. There is [nothing like `pip --dry-run`](https://github.com/pypa/pip/issues/53). You need to install the `pip` package and run an `__init__.py` script inside the package to get its dependency tree.
 
-Second, all the dependencies installed together. This made it just a matter of time before a plugin overrode an app dependency (e.g. `django`), and brought everything crashing down. This wasn’t going to work for us, so we needed to rebuild. 
+Second, all the dependencies are installed together. This made it just a matter of time before a plugin overrode an app dependency (e.g. `django`), and brought everything crashing down. This wasn’t going to work for us, so we needed to rebuild. 
 
 ## 🛠 Part 2: Rebuilding in JavaScript
 
@@ -142,12 +142,12 @@ async function getRandomNumber() {
 }
 
 // Plugin method that runs on plugin load
-async function setupPlugin({ config }) {
+export async function setupPlugin({ config }) {
     console.log(config.greeting)
 }
 
 // Plugin method that processes event
-async function processEvent(event, { config, cache }) {
+export async function processEvent(event, { config, cache }) {
     const counterValue = (await cache.get('greeting_counter', 0))
     cache.set('greeting_counter', counterValue + 1)
     if (!event.properties) event.properties = {}
@@ -156,13 +156,6 @@ async function processEvent(event, { config, cache }) {
     event.properties['random_number'] = await getRandomNumber()
     return event
 }
-
-// The plugin itself
-module.exports = {
-    setupPlugin,
-    processEvent
-}
-```
 
 And here’s a basic `plugin.json` that goes along with it:
 
@@ -275,7 +268,7 @@ This structure enables modularity, allowing us to run different types of workers
 
 The final piece of the story of apps to worry about is that they are arbitrary code. When left unchecked, they can run whatever code they want, including code that tries to exploit or crash our servers. 
 
-Allowing users to run arbitrary code can cause many security, infrastructure, and usability issues. We use VMs because they provide some solutions, but they don't offer total protection. We've done a bunch more work to prevent potential issues and make sure apps are secure and reliable.
+Allowing users to run arbitrary code can cause many security, infrastructure, and usability issues. We use Node VMs because they provide some solutions, but they don't offer total protection. We've done a bunch more work to prevent potential issues and make sure apps are secure and reliable.
 
 First, there are endless libraries for JavaScript, but we only [allow a small number of them](/docs/apps/build/reference#available-imports). Users can’t install and use whatever npm package they like. We include basic packages such as Node’s standard `crypto`, `url`, `node-fetch`, and `zlib` libraries. We also include libraries like `snowflake-sdk`, `@google-cloud/bigquery`, and `pg` to connect external services. This ensures that the code run by our users and servers uses libraries we trust.
 
