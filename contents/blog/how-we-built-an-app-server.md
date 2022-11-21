@@ -301,7 +301,7 @@ Finally, as mentioned before, although our self-hosted instances can run whateve
 
 All this work helped us create more secure and reliable apps. This allowed us to be more confident in allowing users to build apps and users to be more confident using them.
 
-## Unlocking customization and control through apps
+## 🏆 Conclusion: The present and future of PostHog apps
 
 Building and scaling PostHog apps fundamentally changed the way we think about our product and infrastructure. We started life as an open source product analytics tool. Now, we're a platform. 
 
