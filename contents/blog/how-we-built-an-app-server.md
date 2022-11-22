@@ -21,9 +21,7 @@ This is the story of how [PostHog apps](/apps) went from three-day MVP into a se
 
 ## ✏️ Part 1: Building an MVP in three days
 
-PostHog apps are the brainchild of our [first ever hire](/blog/posthog-first-five), Marius Andra. 
-
-I (Marius) wanted a Google Analytics-style world map view for PostHog during our Tuscany offsite hackathon, but I had a problem. The map required location data from IP addresses. While there were many services to do this, connecting them to event data was difficult.
+PostHog apps were an idea of mine. I wanted a Google Analytics-style world map view and that required location data from IP addresses. While there were many services to do this, connecting them to event data was difficult. I decided to work on solving this during our Tuscany offsite hackathon.
 
 ![Map](../images/blog/how-we-built-an-app-server/map.png)
 
