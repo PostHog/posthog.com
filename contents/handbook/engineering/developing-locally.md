@@ -215,7 +215,11 @@ We'll run the plugin server in a later step.
 
 Make sure when outside of `venv` to always use `python3` instead of `python`, as the latter may point to Python 2.x on some systems. If installing multiple versions of Python 3, such as by using the `deadsnakes` PPA, use `python3.8` instead of `python3`.
 
-You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage multiple versions of Python 3 on the same machine.
+You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage multiple versions of Python 3 on the same machine. 
+
+<blockquote class="warning-note">
+    On a Mac, even if you are using pyenv to manage Python versions the easiest way to make sure subsequent steps succeed is also running `brew install python@3.8`. Otherwise, for example, installing xmlsec might be tricky
+</blockquote>
 
 1. Create the virtual environment in current directory called 'env':
 
