@@ -1,5 +1,5 @@
 ---
-title: The ultimate guide to identifying users in PostHog
+title: An introductory guide to identifying users in PostHog
 sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
