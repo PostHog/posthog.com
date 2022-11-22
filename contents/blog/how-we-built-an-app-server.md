@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["ian-vanagas", "marius-andra"]
+author: ["marius-andra", "ian-vanagas"]
 featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
 categories: ["Inside PostHog", "Engineering"]
@@ -21,7 +21,7 @@ This is the story of how [PostHog apps](/apps) went from three-day MVP into a se
 
 ## ✏️ Part 1: Building an MVP in three days
 
-PostHog apps were an idea of mine. I wanted a Google Analytics-style world map view and that required location data from IP addresses. While there were many services to do this, connecting them to event data was difficult. I decided to work on solving this during our Tuscany offsite hackathon.
+PostHog apps were an idea of mine (Marius). I wanted a Google Analytics-style world map view and that required location data from IP addresses. While there were many services to do this, connecting them to event data was difficult. I decided to work on solving this during our Tuscany offsite hackathon.
 
 ![Map](../images/blog/how-we-built-an-app-server/map.png)
 
