@@ -68,7 +68,7 @@ Comparing the stickiness of your features gives you more insight into which ones
 Once you set up your dashboard with feature trends, retention, and stickiness, you should have an idea of what features drive retention and keep users coming back. You can then use these insights to improve your product. There are two key actions you can take:
 
 1. **Promoting high retention features:** double down on high retention features by promoting them more and putting them front and center. For example, you can adjust your UI to have clearer paths to those features.
-2. I**mproving low retention features:** fix the figures with low retention. Run experiments to improve them and track retention improvement with your dashboard. If that doesn’t work, you can stop working on them, or if you think the impact is extremely negative, you can drop the feature entirely.
+2. **Improving low retention features:** fix the figures with low retention. Run experiments to improve them and track retention improvement with your dashboard. If that doesn’t work, you can stop working on them, or if you think the impact is extremely negative, you can drop the feature entirely.
 
 Now you have a better idea of the features that drive user retention and keep them coming back. You can continue to use the dashboard you created to keep track of this and make changes to your features that help you drive higher retention in your product.
 
