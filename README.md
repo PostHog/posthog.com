@@ -31,14 +31,7 @@ Please feel free to suggest any changes. See our [contributing guide](https://gi
     
     *Note: You'll also see a second link: `http://localhost:8001/___graphql`. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.org/tutorial/part-five/#introducing-graphiql).*
 
-If you are using Apple M1 ([read this for more](https://github.com/lovell/sharp/issues/2460)):
-```bash
-rm -rf ./node_modules
-brew install vips
-yarn install
-```
-
-It is also possible to use docker:
+It is also possible to use Docker:
 
 ```bash
 docker run -it --rm \
