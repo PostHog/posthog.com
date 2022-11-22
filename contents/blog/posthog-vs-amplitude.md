@@ -28,7 +28,7 @@ But we think PostHog is a more powerful tool for building better products. Not o
 
 Let's start with the core differences. Over 10,000 companies already use PostHog, and many have switched from Amplitude. Here are a few reasons why.
 
-### 1. It's an all-one-platform
+### 1. It's an all-in-one platform
 PostHog is more than a product analytics tool, it's an all-in-one platform that replaces multiple tools in your data stack. You could run Amplitude for analytics, LaunchDarkly for feature flagging, Hotjar for session recording, and Optimizely for A/B testing, or you could just use PostHog for everything. One platform, one price: seamless integration.
 
 ### 2. It's built for engineers
