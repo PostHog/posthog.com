@@ -11,7 +11,7 @@ author: ["andy-vandervell", "joe-martin"]
 categories: ["Guides", "Open source", "Comparisons"]
 ---
 
-PostHog and Amplitude are both product analytics tools. That means they tell you where users are coming from and how they interact with your product, so that you can find ways to make it better.
+PostHog and Amplitude are both offer product analytics. That means they tell you where users are coming from and how they interact with your product, so that you can find ways to make it better.
 
 But we think PostHog is a more powerful tool for building better products. Not only does PostHog offer more features and tools for engineers to understand their users, it's an [open-source analytics platform](/blog/best-open-source-analytics-tools) you can self-host and customize to your needs.
 
@@ -26,10 +26,10 @@ But we think PostHog is a more powerful tool for building better products. Not o
 
 ## How is PostHog different from Amplitude?
 
-Let's start with the core differences. Over 9,000 companies already use PostHog, and many have switched from Amplitude. Here are a few reasons why.
+Let's start with the core differences. Over 10,000 companies already use PostHog, and many have switched from Amplitude. Here are a few reasons why.
 
-### 1. You control your data
-You can self-host PostHog and keep total control of your data. That means no third-party cookies, no data sharing, and straightforward [GDPR](/docs/privacy/gdpr-compliance) and [HIPAA compliance](/docs/privacy/hipaa-compliance). We also offer PostHog Cloud for those who prefer a fully-managed SaaS experience, while partners like [Altinity](/marketplace/altinity) can manage a self-hosted instance on your behalf.
+### 1. It's an all-one-platform
+PostHog is more than a product analytics tool, it's an all-in-one platform that replaces multiple tools in your data stack. You could run Amplitude for analytics, LaunchDarkly for feature flagging, Hotjar for session recording, and Optimizely for A/B testing, or you could just use PostHog for everything. One platform, one price: seamless integration.
 
 ### 2. It's built for engineers
 Unlike Amplitude, PostHog is built for software developers. PostHog autocaptures data, so you don't have to spend time instrumenting events every time you update your app or website – we also offer robust tools for capturing custom events and actions when you need to. Our pricing is transparent, and we're entirely self-serve. You can setup PostHog and start paying us without ever speaking to a sales rep, but we have an [awesome customer success team](/get-in-touch#contact) if you have questions.
@@ -109,7 +109,7 @@ This table compares the Amplitude Analytics 'Growth' plan to PostHog Cloud, our 
 		<tr>
         	<td>GDPR compliance</td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
 		<tr>
