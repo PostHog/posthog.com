@@ -63,6 +63,10 @@ module.exports = {
                                   id
                                   url
                                   title: name
+                                  schema {
+                                    httpVerb
+                                    path
+                                  }
                                   internal {
                                     contentDigest
                                   }

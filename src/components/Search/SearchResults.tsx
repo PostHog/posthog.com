@@ -13,6 +13,10 @@ type Result = Hit<{
     type: 'blog' | 'docs' | 'api' | 'question' | 'handbook' | 'manual'
     title: string
     slug: string
+    schema?: {
+        httpVerb: string
+        path: string
+    }[]
     headings: {
         value: string
         depth: number
@@ -76,10 +80,6 @@ const SearchBox = () => {
 const RefinementList = () => {
     const [selected, setSelected] = useState<typeof categories[number] | null>(null)
     const { items, refine } = useRefinementList({ attribute: 'type', sortBy: ['name:asc'] })
-
-    const formatLabel = (label: Result['type']): string => {
-        return {}[label]
-    }
 
     const updateSelected = (category: typeof categories[number]) => {
         setSelected((selected) => {
@@ -177,17 +177,35 @@ const Hits = () => {
                         <h4 className="text-center">{currentResult.title}</h4>
                         <p className="text-black/70">{currentResult.excerpt}</p>
                         <span className="block text-xs text-gray font-semibold mb-3">On this page</span>
-                        <ol className="list-none m-0 text-sm text-gray font-semibold space-y-2">
-                            {currentResult?.headings
-                                ?.filter(({ depth }) => depth <= 2)
-                                .map((heading) => {
+                        {currentResult.type === 'api' ? (
+                            <ol className="list-none m-0 text-sm text-gray font-semibold space-y-2">
+                                {currentResult?.schema?.map((endpoint, index) => {
                                     return (
-                                        <li key={heading.value}>
-                                            <span>{heading.value}</span>
+                                        <li
+                                            key={currentResult.type + endpoint.httpVerb + endpoint.path + index}
+                                            className="font-code text-xs whitespace-nowrap space-x-2 flex items-center"
+                                        >
+                                            <span className="uppercase">{endpoint.httpVerb}</span>
+                                            <div className="text-ellipsis flex-shrink overflow-hidden">
+                                                <span>{endpoint.path}</span>
+                                            </div>
                                         </li>
                                     )
                                 })}
-                        </ol>
+                            </ol>
+                        ) : (
+                            <ol className="list-none m-0 text-sm text-gray font-semibold space-y-2">
+                                {currentResult?.headings
+                                    ?.filter(({ depth }) => depth <= 2)
+                                    .map((heading, index) => {
+                                        return (
+                                            <li key={currentResult.type + heading.value + index}>
+                                                <span>{heading.value}</span>
+                                            </li>
+                                        )
+                                    })}
+                            </ol>
+                        )}
                     </div>
                 ) : null}
             </section>
