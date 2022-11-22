@@ -175,7 +175,7 @@ And later the Kafka table:
 DROP TABLE kafka_events_json -- ON CLUSTER 'posthog'
 ```
 
-And recreate them in reverse order using the schemas you copied earlier. i.e. Kafka table first, then materialized view.
+And recreate them in reverse order using the schemas you copied earlier. i.e. Kafka table first, then materialized view. Make sure to add the `ON CLUSTER` clause if you dropped the tables on the whole cluster.
 
 ### Restarting the ClickHouse server on a node
 
