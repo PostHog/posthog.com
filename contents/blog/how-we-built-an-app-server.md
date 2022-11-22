@@ -21,13 +21,11 @@ This is the story of how [PostHog apps](/apps) went from three-day MVP into a se
 
 ## ✏️ Part 1: Building an MVP in three days
 
-PostHog apps are the brainchild of our [first ever hire](/blog/posthog-first-five), Marius Andra. 
-
-Marius wanted a Google Analytics-style world map view for PostHog during our Tuscany offsite hackathon, but he had a problem. The map required location data from IP addresses. While there were many services to do this, connecting them to event data was difficult.
+PostHog apps were an idea of mine. I wanted a Google Analytics-style world map view and that required location data from IP addresses. While there were many services to do this, connecting them to event data was difficult. I decided to work on solving this during our Tuscany offsite hackathon.
 
 ![Map](../images/blog/how-we-built-an-app-server/map.png)
 
-His solution was to build an app platform and the first ever PostHog app, [GeoIP](/apps/geoip-enrichment), but the project vision immediately expanded to enable more modification of the events pipeline, such as backing up data to S3, syncing GitHub stars, or getting customer feedback.
+My solution was to build an app platform and the first ever PostHog app, [GeoIP](/apps/geoip-enrichment), but the project vision immediately expanded to enable more modification of the events pipeline, such as backing up data to S3, syncing GitHub stars, or getting customer feedback.
 
 ### Arbitrary app code in Python
 
@@ -49,7 +47,7 @@ class ExamplePlugin(PluginBaseClass):
         pass
 ```
 
-Other features added included a plugin repository, an interface to configure the apps, and a CLI to preconfigure apps for custom installations. Marius built two sample apps with it: the [currency normalizer](/apps/currency-normalization) (convert event properties to a single currency), and the coveted GeoIP app.
+Other features added included a plugin repository, an interface to configure the apps, and a CLI to preconfigure apps for custom installations. I built two sample apps with it: the [currency normalizer](/apps/currency-normalization) (convert event properties to a single currency), and the coveted GeoIP app.
 
 This was a promising start, but it didn’t take long for cracks to appear. 
 
@@ -59,15 +57,15 @@ Second, all the dependencies are installed together. This made it just a matter 
 
 ## 🛠 Part 2: Rebuilding in JavaScript
 
-After deciding to rebuild, the first attempt was using [PyMiniRacer](https://github.com/sqreen/PyMiniRacer) to generate JavaScript. PyMiniRacer is great for simple functions, but lacks support for async/promises and importing modules like `fetch` because it was raw v8, not Node. It also had a limited standard library. It wasn’t going to work. 
+After deciding to rebuild, my first attempt was using [PyMiniRacer](https://github.com/sqreen/PyMiniRacer) to generate JavaScript. PyMiniRacer is great for simple functions, but lacks support for async/promises and importing modules like `fetch` because it was raw v8, not Node. It also had a limited standard library. It wasn’t going to work. 
 
-Next, Marius tried to develop and subsequently scratched a [gRPC](https://grpc.io/docs/languages/node/basics/) implementation in Node. He could call JavaScript code from Python (which we wrote our pipeline in) and get a response, but this approach created too much manual work. It raised questions such as "how many workers should respond to the gRPC calls?" and "how do we make sure we lose no events if the node gRPC server is down?” Apps needed to scale, so this also wasn’t going to work either.
+Next, I tried to develop and subsequently scratched a [gRPC](https://grpc.io/docs/languages/node/basics/) implementation in Node. I could call JavaScript code from Python (which we wrote our pipeline in) and get a response, but this approach created too much manual work. It raised questions such as "how many workers should respond to the gRPC calls?" and "how do we make sure we lose no events if the node gRPC server is down?” Apps needed to scale, so this also wasn’t going to work either.
 
 ### Finding the solution with Celery
 
-After these false starts, Marius found a solution in something we already used: Celery.
+After these false starts, I found a solution in something we already used: Celery.
 
-In our main PostHog app, we used [Celery](https://docs.celeryproject.org/) to process events asynchronously (we don't anymore). When an event hits `/capture`, our API parsed the request and queued the event into a job queue. Marius realized he could build a new server with the [Node port of Celery](https://celery-node.js.org/) and plug that in as another step in the existing pipeline.
+In our main PostHog app, we used [Celery](https://docs.celeryproject.org/) to process events asynchronously (we don't anymore). When an event hits `/capture`, our API parsed the request and queued the event into a job queue. I realized I could build a new server with the [Node port of Celery](https://celery-node.js.org/) and plug that in as another step in the existing pipeline.
 
 The combination of Celery and Node solved all pending issues: we wouldn't have to worry about Python dependencies, could potentially run untrusted code in a fast sandbox, there would be no process management for a gRPC link, and could eventually rewrite the entire ingestion pipeline in Node to get a speed boost over Python (which we eventually did).
 
@@ -99,7 +97,7 @@ Thus we needed an abstraction. The two most popular are `isolated-vm` and `vm2` 
 
 - [`vm2`](https://github.com/patriksimek/vm2) has a different isolation model. Each "VM" runs in an isolated NodeVM context, in the same thread as the rest of the app. There are no memory or CPU limits we can enforce. You run the code locally, but don’t share any variables with the host app.
 
-While `isolated-vm` felt like a great fit because of its emphasis on security, its implementation [wasn't a success](https://github.com/PostHog/posthog/issues/6855#issuecomment-853879421). Marius would have had to implement proxying similar to `vm2` just to get fetch working, and that wasn't worth the effort.
+While `isolated-vm` felt like a great fit because of its emphasis on security, its implementation [wasn't a success](https://github.com/PostHog/posthog/issues/6855#issuecomment-853879421). I would have had to implement proxying similar to `vm2` just to get fetch working, and that wasn't worth the effort.
 
 `vm2` had its own system of proxies that make sharing code between the host and the VM seamless.
 
