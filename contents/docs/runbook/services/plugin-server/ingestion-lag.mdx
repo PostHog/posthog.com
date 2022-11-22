@@ -149,7 +149,7 @@ ON p.id = pdi.person_id
 
 If it looks like the properties are all / mostly generic (e.g. initial referrers, OS, properties PostHog sets by default) **or** the hot partition problem is **very serious** (a lot of lag), you can then [copy the approach from this PR](https://github.com/PostHog/posthog-cloud-infra/pull/806) to force the events for the ID to be randomly partitioned.
 
-We check the person properties because if a lot of custom properties are being used, random partitioning may cause properties to get inconsistent values.
+We check the person properties because if a lot of custom properties are being used random partitioning may cause properties to get inconsistent values.
 
 ### Dropping and recreating ClickHouse "ingestion tables"
 
