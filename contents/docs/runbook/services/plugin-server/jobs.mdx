@@ -1,0 +1,47 @@
+---
+title: Jobs not executing
+sidebar: Docs
+showTitle: true
+---
+
+> **Important:** Please ensure you [have access to production](/handbook/engineering/how-to-access-posthog-cloud-infra) so that you are able to handle incidents!
+
+## Background
+
+Jobs are an important functionality of PostHog apps / plugins. Among other things, they power much of our exports functionality.
+
+In order to debug jobs not working properly, it's important to understand the following:
+
+1. Jobs can be **triggered** from plugin servers with **any capability**
+2. Jobs can only be **procesed** from plugin servers with the **jobs capability**
+
+In our Cloud environments, plugin server capabilties can be inferred from deployment names. To debug the jobs processing pipeline, you'll be looking at the `plugins-jobs-xxxxx` pods.
+
+It's also important to know that in our Cloud environments, jobs are **not stored in our main Postgres database**. Rather, we store them in a separate RDS instance that is used only for jobs.
+
+The jobs pipeline works as follows:
+
+1. Enqueue job into `jobs` Kafka topic from any plugin server instance
+2. Plugin server with jobs capability consumes from Kafka and persists the job in the jobs database (via Graphile Worker)
+3. The Graphile Worker in a plugin server instance with the jobs capability pulls the jobs from the jobs databas when it's time, runs them, and deletes them from the database
+
+## Debugging
+
+There are a few potential services that can cause our jobs processing pipeline to have issues:
+
+1. **Kafka:** We may be failing to add jobs to the `jobs` Kafka topic. Potential reasons: Kafka is down, jobs messages have gotten larger than the default Kafka limit of 1mb, we've shipped a bug causing jobs messages to be malformed.
+2. **Jobs database:** The jobs database may be oversaturated or unreacheable. 
+3. **Plugin server:** The plugin server could have stopped enqueueing / processing jobs because it is oversaturated or we've shipped a bug.
+
+## Actions
+
+The most straightforward and safe operation to perform is to trigger a "restart" of the jobs pods. This can be done with a redeploy or using `kubectl` to spin up an entire new set of pods.
+
+Example:
+
+```shell
+kubectl rollout restart deployment/plugins-jobs -n posthog
+```
+
+If this doesn't fix the issue, you should try to establish the health of both Kafka and the jobs database. Provided they look healthy, we've likely shipped a bug and should look at Git history and revert any suspicious changes.
+

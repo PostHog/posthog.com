@@ -874,7 +874,21 @@
                                 },
                                 {
                                     "name": "Plugin server",
-                                    "url": "/docs/runbook/services/plugin-server"
+                                    "url": "/docs/runbook/services/plugin-server",
+                                    "children": [
+                                        {
+                                            "name": "Overview",
+                                            "url": "/docs/runbook/services/plugin-server"
+                                        },
+                                        {
+                                            "name": "Jobs not executing",
+                                            "url": "/docs/runbook/services/plugin-server/jobs"
+                                        },
+                                        {
+                                            "name": "Ingestion lag",
+                                            "url": "/docs/runbook/services/plugin-server/ingestion-lag"
+                                        }
+                                    ]
                                 },
                                 {
                                     "name": "MinIO",
