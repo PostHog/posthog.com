@@ -663,6 +663,10 @@
                     "url": "/docs/self-host/open-source/deployment",
                     "children": [
                         {
+                            "name": "Disclaimer",
+                            "url": "/docs/self-host/open-source/disclaimer"
+                        },
+                        {
                             "name": "Deployment",
                             "url": "/docs/self-host/open-source/deployment"
                         },
