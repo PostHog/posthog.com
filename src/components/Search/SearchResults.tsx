@@ -4,7 +4,7 @@ import { InstantSearch, useSearchBox, useRefinementList, useHits } from 'react-i
 import { Hit } from 'instantsearch.js'
 import Link from 'components/Link'
 import { classNames } from 'lib/utils'
-import { useSearch } from './SearchContext'
+import { useSearch, SearchResultType } from './SearchContext'
 
 const searchClient = algoliasearch('7VNQB5W0TX', 'e9ff9279dc8771a35a26d586c73c20a8')
 
@@ -55,8 +55,24 @@ const categories = [
     },
 ]
 
+type SearchResultsProps = {
+    initialFilter?: SearchResultType
+}
+
+export default function SearchResults(props: SearchResultsProps) {
+    return (
+        <div className="z-50 p-6 bg-white rounded-md shadow flex flex-col space-y-2 h-full">
+            <InstantSearch searchClient={searchClient} indexName="dev_posthog_com">
+                <SearchBox />
+                <RefinementList initialFilter={props.initialFilter} />
+                <Hits />
+            </InstantSearch>
+        </div>
+    )
+}
+
 const SearchBox = () => {
-    const { query, refine, isSearchStalled } = useSearchBox()
+    const { query, refine } = useSearchBox()
 
     return (
         <div className="relative flex items-center rounded">
@@ -77,9 +93,20 @@ const SearchBox = () => {
     )
 }
 
-const RefinementList = () => {
+type RefinementListProps = {
+    initialFilter?: SearchResultType
+}
+
+const RefinementList: React.FC<RefinementListProps> = (props) => {
     const [selected, setSelected] = useState<typeof categories[number] | null>(null)
     const { items, refine } = useRefinementList({ attribute: 'type', sortBy: ['name:asc'] })
+
+    useEffect(() => {
+        if (props.initialFilter) {
+            refine(props.initialFilter)
+            setSelected(categories.find(({ type }) => type === props.initialFilter) || null)
+        }
+    }, [props.initialFilter])
 
     const updateSelected = (category: typeof categories[number]) => {
         setSelected((selected) => {
@@ -209,18 +236,6 @@ const Hits = () => {
                     </div>
                 ) : null}
             </section>
-        </div>
-    )
-}
-
-export default function SearchResults() {
-    return (
-        <div className="z-50 p-6 bg-white rounded-md shadow flex flex-col space-y-2 h-full">
-            <InstantSearch searchClient={searchClient} indexName="dev_posthog_com">
-                <SearchBox />
-                <RefinementList />
-                <Hits />
-            </InstantSearch>
         </div>
     )
 }

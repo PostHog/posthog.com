@@ -6,13 +6,15 @@ import SearchResults from './SearchResults'
 
 type SearchContextValue = {
     isVisible: boolean
-    open: () => void
+    open: (filter?: SearchResultType) => void
     close: () => void
 }
 
+export type SearchResultType = 'blog' | 'docs' | 'api' | 'question' | 'handbook' | 'manual'
+
 const SearchContext = React.createContext<SearchContextValue>({
     isVisible: false,
-    open: () => {
+    open: (_filter?: SearchResultType) => {
         /* noop */
     },
     close: () => {
@@ -23,6 +25,7 @@ const SearchContext = React.createContext<SearchContextValue>({
 export const SearchProvider: React.FC = ({ children }) => {
     const { posthog } = useValues(posthogAnalyticsLogic)
     const [isVisible, setIsVisible] = React.useState<boolean>(false)
+    const [initialFilter, setInitialFilter] = React.useState<SearchResultType | undefined>(undefined)
 
     React.useEffect(() => {
         const handler = (event: KeyboardEvent) => {
@@ -47,13 +50,15 @@ export const SearchProvider: React.FC = ({ children }) => {
         }
     }, [isVisible])
 
-    const open = () => {
+    const open = (filter?: SearchResultType) => {
+        setInitialFilter(filter)
         setIsVisible(true)
         posthog?.capture('web search opened')
     }
 
     const close = () => {
         setIsVisible(false)
+        setInitialFilter(undefined)
         posthog?.capture('web search closed')
     }
 
@@ -87,7 +92,7 @@ export const SearchProvider: React.FC = ({ children }) => {
                                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                             >
                                 <Dialog.Panel className="w-full max-w-4xl h-[600px] z-[999999]">
-                                    <SearchResults />
+                                    <SearchResults initialFilter={initialFilter} />
                                 </Dialog.Panel>
                             </Transition.Child>
                         </div>
