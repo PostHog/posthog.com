@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['yakko-majuri']
 featuredImage: ../images/tutorials/banners/b2b.png
-topics: ['feature flags', 'trends']
+topics: ['feature flags', 'trends', 'insights']
 date: 2020-11-17
 ---
 
