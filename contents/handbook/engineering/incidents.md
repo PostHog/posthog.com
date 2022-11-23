@@ -60,10 +60,10 @@ Examples
 
 The person who raised the incident is the incident lead. It’s their responsibility to:
 - Make sure the right people join the zoom. This includes [the current on call person](https://posthog.pagerduty.com/service-directory/P43Y0E8). Optionally, add people from Infra and [the feature owner](https://posthog.com/handbook/engineering/feature-ownership) if relevant. Also ping Tim and James G so they're aware.
-- take notes in the incident channel. This should include time stamps, and is a brain dump of everything that we know, and everything that we are or have tried. This will give us much more opportunity to learn from the incident afterwards.
+- Take notes in the incident channel. This should include time stamps, and is a brain dump of everything that we know, and everything that we are or have tried. This will give us much more opportunity to learn from the incident afterwards.
 - Update the [status banner on app](https://app.posthog.com/feature_flags/984)
-- Update the [status page](https://uptimerobot.com/statuspage.php)
-- Update users in [#announcements](https://posthogusers.slack.com/archives/CT7HXDEG3)
+- Update the status page by typing [`/inc statuspage`](https://help.incident.io/en/articles/5948011-statuspage) in the incident slack channel. This will prompt you with a wizard asking you for details about the outage that we will communicate with customers.
+- With our statuspage.io integration users in the user's slack will be notified in the `#announcements` channel automatically but look out for any questions that may come up
 
 If the person who raised the incident is the best person to debug the issue, they should hand over the incident lead role to someone else on the call.
 
