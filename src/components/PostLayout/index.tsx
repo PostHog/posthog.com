@@ -570,7 +570,7 @@ export default function PostLayout({
                         <aside className="lg:sticky bg-tan dark:bg-primary top-0 flex-shrink-0 w-full justify-self-end px-4 lg:box-border my-10 lg:my-0 mr-auto overflow-y-auto lg:h-[calc(100vh-40px)] pb-10">
                             {!hideSearch && (
                                 <div className="lg:sticky top-0 z-20 pt-4 bg-tan">
-                                    <SidebarSearchBox filter={searchFilter} />
+                                    <SidebarSearchBox />
                                 </div>
                             )}
                             <TableOfContents menuType={menuType} menu={menu} />

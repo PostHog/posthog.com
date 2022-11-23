@@ -103,10 +103,10 @@ export default function FAQ() {
             />
             <section className="px-4">
                 <div className="relative">
-                    <div className="max-w-4xl mx-auto my-12  flex flex-col justify-center">
+                    <div className="max-w-4xl mx-auto my-12  flex flex-col items-center justify-center">
                         <h1 className="text-center">Questions?</h1>
                         <h5 className="text-center">Search answers across posthog.com</h5>
-                        <SearchBox />
+                        <SearchBox filter="question" />
                         <p className="mt-3 text-sm text-gray text-center font-semibold">
                             Can't find your answer?{' '}
                             <button

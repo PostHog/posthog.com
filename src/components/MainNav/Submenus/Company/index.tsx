@@ -3,7 +3,7 @@ import React from 'react'
 import Header from '../Header'
 import { graphql, useStaticQuery } from 'gatsby'
 import Blog from './Blog'
-import SearchBox from 'components/Search/SearchBox'
+import SearchIconButton from 'components/Search/SearchIconButton'
 import CallToAction from '../CallToAction'
 import { Wrapper } from '../Wrapper'
 
@@ -38,7 +38,7 @@ const Handbook = ({ menu }: { menu: HandbookNav[] }) => {
             <div className="max-w-3xl mx-auto xl:max-w-auto md:px-6">
                 <div className="flex items-center w-full justify-between opacity-70">
                     <h3 className="text-[18px] font-bold m-0 text-black ">Handbook</h3>
-                    <SearchBox label={false} className="flex-grow-0 !p-0 w-auto dark:text-white" base={'handbook'} />
+                    <SearchIconButton initialFilter="handbook" />
                 </div>
                 <p className="text-[14px] m-0 mt-2 dark:text-white">
                     We're open source and operate in public as much as we can.

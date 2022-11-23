@@ -1,21 +1,20 @@
 import React from 'react'
 import { useSearch } from './SearchContext'
 import { Search } from 'components/Icons/Icons'
+import { SearchResultType } from './SearchContext'
 
 type SearchBoxProps = {
     placeholder?: string
-    filter?: string
-    label?: boolean
-    className?: string
+    filter?: SearchResultType
 }
 
-export const SidebarSearchBox: React.FC<SearchBoxProps> = ({ placeholder, filter, label = true, className }) => {
+export const SidebarSearchBox: React.FC<SearchBoxProps> = ({ placeholder, filter }) => {
     const { open } = useSearch()
 
     return (
         <button
             type="button"
-            onClick={open}
+            onClick={() => open(filter)}
             className="flex items-center relative m-0 w-full text-sm text-gray focus:outline-none"
         >
             <div className="absolute left-4 z-20">
