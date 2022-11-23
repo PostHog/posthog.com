@@ -5,6 +5,7 @@ import { Hit } from 'instantsearch.js'
 import Link from 'components/Link'
 import { classNames } from 'lib/utils'
 import { useSearch, SearchResultType } from './SearchContext'
+import { Combobox } from '@headlessui/react'
 
 const searchClient = algoliasearch('7VNQB5W0TX', 'e9ff9279dc8771a35a26d586c73c20a8')
 
@@ -60,14 +61,20 @@ type SearchResultsProps = {
 }
 
 export default function SearchResults(props: SearchResultsProps) {
+    const { close } = useSearch()
+
     return (
-        <div className="z-50 p-6 bg-white rounded-md shadow flex flex-col space-y-2 h-full">
-            <InstantSearch searchClient={searchClient} indexName="dev_posthog_com">
-                <SearchBox />
-                <RefinementList initialFilter={props.initialFilter} />
-                <Hits />
-            </InstantSearch>
-        </div>
+        <Combobox value={{} as Result} onChange={close}>
+            {({ activeOption }) => (
+                <div className="z-50 p-6 bg-white rounded-md shadow flex flex-col space-y-2 h-full">
+                    <InstantSearch searchClient={searchClient} indexName="dev_posthog_com">
+                        <SearchBox />
+                        <RefinementList initialFilter={props.initialFilter} />
+                        <Hits activeOption={activeOption} />
+                    </InstantSearch>
+                </div>
+            )}
+        </Combobox>
     )
 }
 
@@ -76,7 +83,7 @@ const SearchBox = () => {
 
     return (
         <div className="relative flex items-center rounded">
-            <input
+            <Combobox.Input
                 className="w-full py-2 px-3 bg-black/5 focus:outline-none rounded"
                 placeholder="Search..."
                 value={query}
@@ -161,55 +168,55 @@ const RefinementList: React.FC<RefinementListProps> = (props) => {
     )
 }
 
-const Hits = () => {
+type HitsProps = {
+    activeOption: Result | null
+}
+
+const Hits: React.FC<HitsProps> = ({ activeOption }) => {
     const { hits } = useHits<Result>()
-    const [currentResult, setCurrentResult] = React.useState<Result | null>(hits?.[0])
-    const { close } = useSearch()
 
     return (
         <div className="grid grid-cols-2 min-h-0 flex-grow">
-            <section className="overscroll-none text-left" style={{ overflowY: 'scroll' }}>
+            <section className="overscroll-none text-left overflow-y-scroll">
                 {hits.length > 0 ? (
-                    <ol className="list-none m-0">
+                    <Combobox.Options as="ol" className="list-none m-0" static>
                         {hits.map((hit) => {
                             return (
-                                <li
+                                <Combobox.Option
                                     key={hit.objectID}
+                                    value={hit}
                                     className="focus-within:bg-gray-accent-light rounded hover:bg-gray-accent-light"
-                                    onMouseOver={() => setCurrentResult(hit)}
-                                    onFocus={() => setCurrentResult(hit)}
                                 >
                                     <Link
                                         className="w-full px-3 py-2 text-red font-semibold flex flex-col space-y-1 focus:outline-none"
-                                        onClick={close}
                                         to={'/' + hit.slug}
                                     >
                                         <span className="line-clamp-1">{hit.title}</span>
                                         <p className="text-sm m-0 text-gray line-clamp-2">{hit.excerpt}</p>
                                     </Link>
-                                </li>
+                                </Combobox.Option>
                             )
                         })}
-                    </ol>
+                    </Combobox.Options>
                 ) : (
                     <div className="w-full flex items-center justify-center">No results</div>
                 )}
             </section>
             <section className="overflow-y-scroll bg-tan p-10 h-full">
-                {currentResult ? (
+                {activeOption ? (
                     <div className="text-left">
                         <span className="block text-center text-xs font-semibold text-red uppercase">
-                            {currentResult.type}
+                            {activeOption.type}
                         </span>
-                        <h4 className="text-center">{currentResult.title}</h4>
-                        <p className="text-black/70">{currentResult.excerpt}</p>
+                        <h4 className="text-center">{activeOption.title}</h4>
+                        <p className="text-black/70">{activeOption.excerpt}</p>
                         <span className="block text-xs text-gray font-semibold mb-3">On this page</span>
-                        {currentResult.type === 'api' ? (
+                        {activeOption.type === 'api' ? (
                             <ol className="list-none m-0 text-sm text-gray font-semibold space-y-2">
-                                {currentResult?.schema?.map((endpoint, index) => {
+                                {activeOption?.schema?.map((endpoint, index) => {
                                     return (
                                         <li
-                                            key={currentResult.type + endpoint.httpVerb + endpoint.path + index}
+                                            key={activeOption.type + endpoint.httpVerb + endpoint.path + index}
                                             className="font-code text-xs whitespace-nowrap space-x-2 flex items-center"
                                         >
                                             <span className="uppercase">{endpoint.httpVerb}</span>
@@ -222,11 +229,11 @@ const Hits = () => {
                             </ol>
                         ) : (
                             <ol className="list-none m-0 text-sm text-gray font-semibold space-y-2">
-                                {currentResult?.headings
+                                {activeOption?.headings
                                     ?.filter(({ depth }) => depth <= 2)
                                     .map((heading, index) => {
                                         return (
-                                            <li key={currentResult.type + heading.value + index}>
+                                            <li key={activeOption.type + heading.value + index}>
                                                 <span>{heading.value}</span>
                                             </li>
                                         )
