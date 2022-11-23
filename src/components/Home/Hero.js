@@ -48,9 +48,9 @@ export default function Hero() {
                         The <span className="text-red inline-block">open source</span>{' '}
                         <span className="inline-block">Product OS</span>
                     </h1>
-                    <h2 className={heading('subtitle', 'primary', 'my-6 !text-black/50')}>
-                        PostHog integrates analytics, session recording, feature flags, and more - all into one seamless platform.<br>
-                        Save time configuring multiple tools, and more time building better products.   
+                    <h2 className={heading('subtitle', 'primary', 'my-6 !text-black/50 max-w-5xl mx-auto')}>
+                        PostHog integrates analytics, session recording, feature flags, and more - all into one seamless
+                        platform. Save time configuring multiple tools, and more time building better products.
                     </h2>
 
                     <div className="flex flex-col md:flex-row justify-center items-center gap-2">
