@@ -53,7 +53,7 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
             <div className="sm:mt-2 flex sm:flex-row sm:space-x-4 flex-col-reverse space-y-reverse sm:space-y-0 space-y-4">
                 <div className="sm:flex-grow">
                     <h4 className="text-lg flex space-x-1 items-center !m-0">{title}</h4>
-                    <p className="m-0 text-[15px] text-black/80 inline">
+                    <p className="m-0 text-[15px] opacity-80 inline">
                         {more ? description : description.substring(0, 125) + (description?.length > 125 ? '...' : '')}
                     </p>
                     {!more && (description?.length > 125 || githubPages?.length > 0) && (
@@ -86,7 +86,7 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
                             <li key={page.title}>
                                 <Link
                                     to={page.html_url}
-                                    className="text-[14px] flex items-start font-semibold space-x-1 text-black leading-tight cta"
+                                    className="text-[14px] flex items-start font-semibold space-x-1 text-black dark:text-white leading-tight cta"
                                 >
                                     <span className="inline-block mt-.5">
                                         {page.closed_at ? <ClosedIssue /> : <OpenIssue />}
