@@ -4,6 +4,11 @@ sidebar: Docs
 showTitle: true
 ---
 
+
+### 30.0.0
+
+Async migrations 0005-0007 need to be completed before updating to 1.42, if you haven't yet ran them upgrade first to 1.41.4, then run the async migrations, then update to 1.42.
+
 ### 29.0.0
 
 This version upgrades PostHog version to 1.41.1, which comes with some breaking changes. The upgrade guide is [here](https://posthog.com/blog/the-posthog-array-1-41-0#1410-update-guide-for-selfhosted-users).
