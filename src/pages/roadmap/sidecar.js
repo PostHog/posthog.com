@@ -99,6 +99,9 @@ export default function RoadmapPage() {
                                         https://example.com/me/settings if you self host)
                                     </li>
                                     <li>
+                                        If you have an ad-blocker enabled, you may need to disable this before hitting 'Next'. 
+                                    </li>                                                                                  
+                                    <li>
                                         Now you can select which fields you display on the page. These can be either person
                                         or group properties.
                                     </li>
