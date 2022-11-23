@@ -603,6 +603,18 @@
         {
             "source": "/docs/architecture/ingestion-pipeline",
             "destination": "/docs/how-posthog-works/ingestion-pipeline"
+        },
+        {
+            "source": "/docs/self-host/deploy/hobby",
+            "destination": "/docs/self-host/open-source/deployment"
+        },
+        {
+            "source": "/docs/self-host/deploy/support",
+            "destination": "/docs/self-host/open-source/support"
+        },
+        {
+            "source": "/docs/self-host/deploy/hosting-costs",
+            "destination": "/docs/self-host/enterprise/hosting-costs"
         }
     ],
     "rewrites": [

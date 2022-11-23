@@ -19,7 +19,7 @@ interface IGitHubPage {
         hooray: number
         heart: number
         eyes: number
-        _1: number
+        plus1: number
     }
 }
 
@@ -57,7 +57,7 @@ const Complete = (props: { title: string; githubPages: IGitHubPage[]; otherLinks
     )
 }
 
-const Section = ({
+export const Section = ({
     title,
     description,
     children,
@@ -77,7 +77,7 @@ const Section = ({
     )
 }
 
-const Card = ({ team, children }: { team: string; children: React.ReactNode }) => {
+export const Card = ({ team, children }: { team: string; children: React.ReactNode }) => {
     return (
         <>
             {team !== 'undefined' && <h4 className="oh5acity-50 text-base font-bold mt-0 mb-2 pt-4">{team}</h4>}
@@ -86,7 +86,7 @@ const Card = ({ team, children }: { team: string; children: React.ReactNode }) =
     )
 }
 
-const CardContainer = ({ children }: { children: React.ReactNode }) => {
+export const CardContainer = ({ children }: { children: React.ReactNode }) => {
     return <ul className="list-none m-0 p-0 grid">{children}</ul>
 }
 
@@ -197,7 +197,7 @@ export default function Roadmap() {
                                                     <Card key={key} team={key}>
                                                         <CardContainer>
                                                             {inProgress[key]?.map((node: IRoadmap) => {
-                                                                return <InProgress key={node.title} {...node} />
+                                                                return <InProgress stacked key={node.title} {...node} />
                                                             })}
                                                         </CardContainer>
                                                     </Card>
@@ -254,6 +254,11 @@ const query = graphql`
                 team {
                     name
                 }
+                thumbnail {
+                    childImageSharp {
+                        gatsbyImageData(width: 75, placeholder: NONE, quality: 100)
+                    }
+                }
                 otherLinks
                 githubPages {
                     title
@@ -264,7 +269,7 @@ const query = graphql`
                         hooray
                         heart
                         eyes
-                        _1
+                        plus1
                     }
                 }
                 projected_completion_date
