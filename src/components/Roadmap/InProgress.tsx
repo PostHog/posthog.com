@@ -1,9 +1,8 @@
 import { Check, ClosedIssue, OpenIssue, Plus } from 'components/Icons/Icons'
 import Link from 'components/Link'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { IRoadmap } from '.'
 import { Login, useUser } from 'squeak-react'
-import addToMailchimp from 'gatsby-plugin-mailchimp'
 import Spinner from 'components/Spinner'
 import { useToast } from '../../hooks/toast'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
@@ -24,15 +23,13 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
         if (email) {
             const res = await fetch('http://localhost:3000/api/roadmap/subscribe', {
                 method: 'POST',
-                body: JSON.stringify({ id: 1 }),
+                body: JSON.stringify({ id: roadmapId }),
                 credentials: 'include',
                 headers: {
                     Accept: 'application/json',
                     'Content-Type': 'application/json',
                 },
             })
-
-            console.log(res)
 
             if (res.ok) {
                 setSubscribed(true)
@@ -46,6 +43,38 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
         }
         setLoading(false)
     }
+
+    async function unsubscribe(email: string) {
+        setLoading(true)
+        if (email) {
+            const res = await fetch('http://localhost:3000/api/roadmap/unsubscribe', {
+                method: 'POST',
+                body: JSON.stringify({ id: roadmapId }),
+                credentials: 'include',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+            })
+
+            if (res.ok) {
+                setSubscribed(false)
+                setShowAuth(false)
+                addToast({ message: `Unsubscribed from ${title}. You will no longer receive updates.` })
+            } else {
+                addToast({ error: true, message: 'Whoops! Something went wrong.' })
+            }
+        } else {
+            setShowAuth(true)
+        }
+        setLoading(false)
+    }
+
+    useEffect(() => {
+        if (user) {
+            setSubscribed(user?.profile?.subscriptions?.some((sub) => sub?.id === roadmapId))
+        }
+    }, [user])
 
     return (
         <li
@@ -125,8 +154,8 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
                         </>
                     ) : (
                         <button
-                            disabled={subscribed || loading}
-                            onClick={() => subscribe(user?.email)}
+                            disabled={loading}
+                            onClick={() => (subscribed ? unsubscribe(user?.email) : subscribe(user?.email))}
                             className="text-[15px] inline-flex items-center space-x-2 py-2 px-4 rounded-sm bg-gray-accent-light text-black hover:text-black font-bold active:top-[0.5px] active:scale-[.98] w-auto"
                         >
                             <span className="w-[24px] h-[24px] flex items-center justify-center bg-blue/10 text-blue rounded-full">
@@ -140,7 +169,7 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
                             </span>
                             <span>
                                 {subscribed
-                                    ? 'Subscribed!'
+                                    ? 'Unsubscribe'
                                     : beta_available
                                     ? 'Get early access'
                                     : 'Subscribe for updates'}
