@@ -6,7 +6,7 @@ showTitle: true
 
 ## Summary
 
-We should build for the highest-performing **product teams** (engineers, PMs, designers) building the **most loved products** at **high-growth startups**. We should focus specifically on the  **product-engineers** (full-stack engineers skewed towards the frontend) but it should be usable by everyone in the product team.
+We build for the highest-performing **product teams** (engineers, PMs, designers) building the **most loved products** at **high-growth startups**. We focus specifically on the  **product-engineers** (full-stack engineers skewed towards the frontend) but it should be usable by everyone in the product team.
 
 Example: PostHog anytime from their Series B to IPO
 
