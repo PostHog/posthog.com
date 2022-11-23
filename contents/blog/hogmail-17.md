@@ -71,9 +71,13 @@ Charles shares his practical guide to how we run finance without a dedicated fin
 ## #random
 
 - [The Seven Levels of Busy](https://randsinrepose.com/archives/the-seven-levels-of-busy/) (2 min read)
+
 - [Samsung’s Dangerous Dominance of South Korea](https://www.youtube.com/watch?v=oL0umpPPe-8) (21 min watch)
+
 - [A journalist says yes to every PR pitch for a da](https://slate.com/human-interest/2022/11/pr-publicist-emails-journalism-oof.html) (17 min read)
+
 - [Are you ready for workplace brain scanning?](https://spectrum.ieee.org/neurotech-workplace-innereye-emotiv) (12 min read)
+
 - [Marie Kondo your software stack with open source](https://github.com/readme/featured/open-source-minimalism) (17 min read)
 
 > We send HogMail every two weeks. [Signup here](/newsletter) so you don't miss it.
