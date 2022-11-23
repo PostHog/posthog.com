@@ -49,7 +49,7 @@ export default function Hero() {
                         <span className="inline-block">Product OS</span>
                     </h1>
                     <h2 className={heading('subtitle', 'primary', 'my-6 !text-black/50')}>
-                        A suite of product and data tools. Built on the modern data stack.
+                        PostHog integrates analytics, session recording, feature flags, and more - all into one seamless platform. Save time configuring multiple tools, and more time building better products.   
                     </h2>
 
                     <div className="flex flex-col md:flex-row justify-center items-center gap-2">
