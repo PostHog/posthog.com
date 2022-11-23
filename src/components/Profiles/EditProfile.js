@@ -40,11 +40,11 @@ function capitalizeFirstLetter(string) {
 const ValidationSchema = Yup.object().shape({
     first_name: Yup.string().required('Required'),
     last_name: Yup.string().required('Required'),
-    website: Yup.string().url('Invalid URL'),
-    github: Yup.string().url('Invalid URL'),
-    linkedin: Yup.string().url('Invalid URL'),
-    twitter: Yup.string().url('Invalid URL'),
-    biography: Yup.string().max(280, 'Exceeds 280 characters'),
+    website: Yup.string().url('Invalid URL').nullable(),
+    github: Yup.string().url('Invalid URL').nullable(),
+    linkedin: Yup.string().url('Invalid URL').nullable(),
+    twitter: Yup.string().url('Invalid URL').nullable(),
+    biography: Yup.string().max(280, 'Exceeds 280 characters').nullable(),
 })
 
 export default function EditProfile({ profile, onSubmit }) {
