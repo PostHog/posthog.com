@@ -26,11 +26,13 @@ Joe to add a gif here.
 
 Neil and Joe to provide highlight here. 
 
-### New: 
+### New: Area chart visualization
 
-Joe to add a gif here. 
+![area chart visualization in posthog](../images/blog/array/1-42-0-area-chart.png)
 
-Neil and Joe to provide highlight here. Main new feature. 
+New team member Thomas Obermueller has got off to a great start by delivering the much-requested area chart visualization for PostHog insights. Now, if a normal line chart isn't  enough and a regular bar chart won't satisfy then you have an exciting third option.
+
+To [quote Thomas](https://github.com/PostHog/posthog/pull/12869) himself: "_The main use case for this is when you want to see the composition of a metric, while also having the total value as a reference e.g. breakdown of revenue by customer over time._"
 
 ### New: 
 
