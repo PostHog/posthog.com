@@ -69,7 +69,19 @@ We’re always working on improving PostHog and would love to talk to you! Pleas
 ## Contributions from the community
 We always welcome contributions from our community and this time we want to thank the following people...
 
-Joe to add contributors here. 
+- @gpetrioli for [fixing broken handbook links](https://github.com/PostHog/meta/pull/73)
+- @MoSattler for [fixing some FF hook issues](https://github.com/PostHog/posthog-js-lite/pull/36)
+- @GrowthFYI for [fixing some scaling issues](https://github.com/PostHog/feedback-app/pull/9)
+- @BTruer for [correcting some docs issues](https://github.com/PostHog/posthog.com/pull/4698)
+- @Chuloo for [fixing a URL on the roadmap](https://github.com/PostHog/posthog.com/pull/4661)
+- @talenodigital for [becoming a PostHog partner](https://github.com/PostHog/posthog.com/pull/4651)
+- @NitzanBallerine for [fixing some contributor attribution issues](https://github.com/PostHog/posthog/pull/12586)
+- @Pblither8 for [fixing some 'raise issue', um, issues](https://github.com/PostHog/posthog.com/pull/4401)
+- @Mmmoussa for [fixing some storage issues](https://github.com/PostHog/posthog-js-lite/pull/28)
+- @JustinJones for [fixing a LOT of typos](https://github.com/PostHog/posthog.com/pull/4506)
+- @danielthedifficult for [fixing some typos](https://github.com/PostHog/posthog.com/pull/4691)
+- @Demivan for [fixing a broken URL](https://github.com/PostHog/posthog.com/pull/4682)
+- @DavidODonovan for [fixing social sharing](https://github.com/PostHog/posthog.com/issues/4669)
 
 Do you want to get involved in making PostHog better? Check out our [contributing resources](/docs/contribute) to get started, or head to [our Slack group](/slack). We also have a [list of Good First Issues](https://github.com/PostHog/posthog/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) for ideas on where you can contribute!
 
