@@ -1,5 +1,5 @@
 ---
-title: How to discover features that drive user retention
+title: How to discover which features drive retention
 sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
@@ -8,7 +8,7 @@ featuredImage: ../images/tutorials/banners/feature-retention.png
 topics: ["stickiness", "dashboards", "retention"]
 ---
 
-Every company wants to build a product that keeps users coming back. Returning and reoccurring users are often your best ones. They build are your user base,  customers, and advocates. Many teams focus on improving user retention metrics, like weekly active users or customer retention.
+Every company wants to build a product that keeps users coming back. Returning and reoccurring users are often your best ones. Many teams focus on improving user retention metrics, like weekly active users or customer retention.
 
 This tutorial will help you discover the features that drive retention and keep users coming back. Specifically, we’ll build a dashboard to track metrics related to a feature’s retention and compare those metrics across your features.
 
@@ -25,7 +25,7 @@ See the [event tracking guide](/tutorials/event-tracking-guide) for more details
 
 ## Creating a feature retention dashboard
 
-To discover the features that drive retention, we will create insights and add them all to a dashboard. The dashboard gives us an overview of retention stats for features and makes it easy to compare them.
+To discover which features drive retention, we will create insights and add them all to a dashboard. The dashboard gives us an overview of retention stats for features and makes it easy to compare them.
 
 To create a new dashboard, click “Dashboards” in the sidebar, then click the “New dashboard” button, give it a name and description, and finally click “Create and go to dashboard.” 
 
@@ -41,7 +41,7 @@ This insight gives us a basic understanding of the features weekly or monthly ac
 
 ## Adding feature retention charts
 
-The next piece we’ll add is retention charts. Either from your retention dashboards or “Insights” on the sidebar, create a new insight. This time we’ll be using the “Retention” insight. 
+Next, we'll add some retention charts. Either from your dashboard or “Insights” on the sidebar, create a new insight. This time we’ll be using the “Retention” insight. 
 
 Choose one of your feature events for both “performed” and “came back to perform” options. If you have a large number of users, you can use “for the first time.” If you have fewer, use “recurringly.” Choose a relevant time scale, likely weekly rather than daily. Once done, you can click save or add to the dashboard and repeat for the rest of your features.
 
@@ -53,7 +53,7 @@ This enables you to see how features compare for retention, and at what point us
 
 ## Creating a stickiness chart
 
-You can also use feature event data to create a stickiness chart. A stickiness chart enable you to compare the repeated usage of your features.
+You can also use feature event data to create a stickiness chart. A stickiness chart enables you to compare the repeated usage of your features.
 
 To create one, follow a similar process to the recurring feature usage active user chart. Create a new insight, and select the stickiness tab. Add a graph series for each of your features, and you can start to compare them. 
 
@@ -68,7 +68,7 @@ Comparing the stickiness of your features gives you more insight into which ones
 Once you set up your dashboard with feature trends, retention, and stickiness, you should have an idea of what features drive retention and keep users coming back. You can then use these insights to improve your product. There are two key actions you can take:
 
 1. **Promoting high retention features:** double down on high retention features by promoting them more and putting them front and center. For example, you can adjust your UI to have clearer paths to those features.
-2. **Improving low retention features:** fix the figures with low retention. Run experiments to improve them and track retention improvement with your dashboard. If that doesn’t work, you can stop working on them, or if you think the impact is extremely negative, you can drop the feature entirely.
+2. **Improving low retention features:** fix the features with low retention. Run experiments to improve them and track retention improvement with your dashboard. If that doesn’t work, you can stop working on them, or if you think the impact is extremely negative, you can drop the feature entirely.
 
 Now you have a better idea of the features that drive user retention and keep them coming back. You can continue to use the dashboard you created to keep track of this and make changes to your features that help you drive higher retention in your product.
 
