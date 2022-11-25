@@ -9,26 +9,29 @@ hideAnchor: false
 
 - **James Hawkins, CEO & Co-founder**
   - **Tim Glaser, CTO & Co-founder**
-    - **Marius Andra, Full Stack Engineer**
-      - Emanuele Capparelli, Growth Engineer
-      - Michael Matloka, Full Stack Engineer
-      - Paul D'Ambra, Full Stack Engineer
-    - **Ben White, Full Stack Engineer**
-      - Alex Kim, Full Stack Engineer
     - **James Greenhill, Data/Infra engineer**
       - Tiina Turban, Full Stack Engineer
       - Yakko Majuri, Full Stack Engineer
+      - Xavier Velo, Data engineer
     - **Ellie Huxtable, Full Stack Engineer**
       - Guido Iaquinti, Site Reliability Engineer
       - Daniel Jaramillo, Site Reliability Engineer
-    - **Eric Duong, Full Stack Engineer**
-      - Li Yi Yu, Full Stack Engineer
-      - Neil Kakkar, Full Stack Engineer
-    - **Luke Harries, Head of Product**
+    - Emanuele Capparelli, Growth Engineer
+    - Harry Waye, Full Stack Engineer
+    - **Simon Fisher, Customer Success Lead**
+      - Cameron DeLeone, Customer Success Manager
+  - **Luke Harries, Head of Product**
       - Annika Schmid, Product Manager
       - Joe Martin, Product Marketer
+  - **Marius Andra, Full Stack Engineer**
+    - Michael Matloka, Full Stack Engineer
+    - Paul D'Ambra, Full Stack Engineer
     - Karl-Aksel Puulmann, Full Stack Engineer
-    - Harry Waye, Full Stack Engineer
+  - **Eric Duong, Full Stack Engineer**
+    - Li Yi Yu, Full Stack Engineer
+    - Neil Kakkar, Full Stack Engineer
+  - **Ben White, Full Stack Engineer**
+    - Alex Kim, Full Stack Engineer
   - **Charles Cook, VP of Operations & Marketing**
     - Andy Vandervell, Content Marketer
     - Grace McKenzie, Operations Manager
@@ -38,8 +41,7 @@ hideAnchor: false
     - Lottie Coxon, Graphic Designer
     - Eli Kinsey, Front End Engineer
     - Paul Hultgren, Developer Advocate
-  - **Simon Fisher, Customer Success Lead**
-    - Cameron DeLeone, Customer Success Manager
+
 
 ## Small teams
 
