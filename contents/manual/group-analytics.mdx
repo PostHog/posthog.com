@@ -66,19 +66,21 @@ This section will give an overview of setting up your first group within PostHog
 ### Creating groups
 
 Groups and group types are defined directly from our libraries when sending events.
-In the examples below, we use the group type `company`, and set the unique ID for the group to be `abcd`.
+In the examples below, we'll be tracking a company whose ID in the product is `kd4m8z`. That's why we'll be using group type `company` and group key `kd4m8z`.
+
+> We advise against using the _name_ of the company (or any other group) as they key, because that's rarely guaranteed to be unique, and conflicts can affect the quality of analytics data.
 
 <MultiLanguage>
 
 ```js
-// All subsequent events will be associated with company `abcd`
-posthog.group('company', 'abcd');
+// All subsequent events will be associated with company `kd4m8z`
+posthog.group('company', 'kd4m8z');
 
 posthog.capture('some event')
 ```
 
 ```python
-posthog.capture('[distinct id]', 'some event', groups={'company': 'abcd'})
+posthog.capture('[distinct id]', 'some event', groups={'company': 'kd4m8z'})
 ```
 
 ```go
@@ -86,7 +88,7 @@ client.Enqueue(posthog.Capture{
     DistinctId: "[distinct id]",
     Event: "beep",
     Groups: posthog.NewGroups().
-        Set("company", "abcd").
+        Set("company", "kd4m8z").
 })
 ```
 
@@ -94,7 +96,7 @@ client.Enqueue(posthog.Capture{
 posthog.capture({
     event: 'beep',
     distinctId: '[distinct id]',
-    groups: { company: 'abcd' }
+    groups: { company: 'kd4m8z' }
 })
 ```
 
@@ -102,14 +104,14 @@ posthog.capture({
 PostHog::capture(array(
     'distinctId' => '[distinct id]',
     'event' => 'beep',
-    '$groups' => array("company" => "abcd")
+    '$groups' => array("company" => "kd4m8z")
 ));
 ```
 
 ```segment
 analytics.track('beep', {
     "$groups": {
-        "company": "abcd"
+        "company": "kd4m8z"
     }
 })
 ```
@@ -118,7 +120,7 @@ analytics.track('beep', {
 
 > **Tip:** When specifying the group type, use the singular version for clarity (`company` instead of `companies`).
 
-We now have one `company`-type group with ID `abcd`, and the event `beep` that we sent will be attached to this newly created group.
+We now have one `company`-type group with ID `kd4m8z`, and the event `beep` that we sent will be attached to this newly created group.
 
 ### Setting and updating group properties
 
