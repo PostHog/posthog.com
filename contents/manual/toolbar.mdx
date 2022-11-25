@@ -33,7 +33,7 @@ When enabled, the Toolbar appears as an overlay (not visible to your users) and 
 
 When launched, the toolbar injects an API token behind the `#` in the URL when loading your page, like this `http://mysite.com/#toolbarsecretAPItokenhere`. The toolbar won't load if you have a frontend that overrides the injected API token (the information after the #) before the `posthog-js` library (or snippet) loads and has a chance to read the API token. 
 
-To solve this, get the `toolbarsecretAPItokenhere` (API token) from the URL before it is overriden and call:
+To solve this, get the `toolbarsecretAPItokenhere` (API token) from the URL before it is overridden and call:
 ```js
 posthog.loadToolbar({ temporaryToken: 'toolbarsecretAPItokenhere' })
 ```
