@@ -70,7 +70,7 @@ docker run -it --rm \
 
 ### Debugging errors on start
 1. Pull the latest changes from `master`
-2. Run `gatbsy clean && yarn start` or delete `node_modules` and `.cache`
+2. Run `gatsby clean && yarn start` or delete `node_modules` and `.cache`
 3. Check builds are passing in [deployment to Vercel](https://github.com/PostHog/posthog.com/deployments)
 
 ### Working on `/docs/api`?
