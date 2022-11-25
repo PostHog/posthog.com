@@ -1738,10 +1738,6 @@
             "url": "/tutorials",
             "children": [
                 {
-                    "name": "All tutorials",
-                    "url": "/tutorials"
-                },
-                {
                     "name": "Actions",
                     "url": "/tutorials/categories/actions"
                 },
@@ -1754,8 +1750,20 @@
                     "url": "/tutorials/categories/cohorts"
                 },
                 {
+                    "name": "Configuration",
+                    "url": "/tutorials/categories/configuration"
+                },
+                {
+                    "name": "Data management",
+                    "url": "/tutorials/categories/data-management"
+                },
+                {
                     "name": "Dashboards",
                     "url": "/tutorials/categories/dashboards"
+                },
+                {
+                    "name": "Experimentation",
+                    "url": "/tutorials/categories/experimentation"
                 },
                 {
                     "name": "Feature flags",
@@ -1766,8 +1774,16 @@
                     "url": "/tutorials/categories/funnels"
                 },
                 {
+                    "name": "Group analytics",
+                    "url": "/tutorials/categories/group-analytics"
+                },
+                {
                     "name": "Heatmaps",
                     "url": "/tutorials/categories/heatmaps"
+                },
+                {
+                    "name": "Insights",
+                    "url": "/tutorials/categories/insights"
                 },
                 {
                     "name": "Path analysis",
@@ -1780,6 +1796,10 @@
                 {
                     "name": "Session recording",
                     "url": "/tutorials/categories/session-recording"
+                },
+                {
+                    "name": "Toolbar",
+                    "url": "/tutorials/categories/toolbar"
                 },
                 {
                     "name": "Trends",
