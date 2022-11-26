@@ -12,7 +12,7 @@ hideAnchor: false
     - **James Greenhill, Data/Infra engineer**
       - Tiina Turban, Full Stack Engineer
       - Yakko Majuri, Full Stack Engineer
-      - Xavier Velo, Data engineer
+      - Xavier Vello, Data engineer
     - **Ellie Huxtable, Full Stack Engineer**
       - Guido Iaquinti, Site Reliability Engineer
       - Daniel Jaramillo, Site Reliability Engineer
