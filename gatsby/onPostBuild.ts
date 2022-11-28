@@ -12,7 +12,7 @@ import fetch from 'node-fetch'
 import { GatsbyNode } from 'gatsby'
 
 export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
-    /*const { data } = await graphql(`
+    const { data } = await graphql(`
         query {
             blog: allMdx(
                 filter: { fields: { slug: { regex: "/^/blog/" } }, frontmatter: { featuredImageType: { eq: "full" } } }
@@ -321,5 +321,5 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
         })
     }
 
-    await browser.close()*/
+    await browser.close()
 }
