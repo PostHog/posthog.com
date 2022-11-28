@@ -882,7 +882,25 @@
                                 },
                                 {
                                     "name": "Plugin server",
-                                    "url": "/docs/runbook/services/plugin-server"
+                                    "url": "/docs/runbook/services/plugin-server",
+                                    "children": [
+                                        {
+                                            "name": "Overview",
+                                            "url": "/docs/runbook/services/plugin-server"
+                                        },
+                                        {
+                                            "name": "Ingestion lag",
+                                            "url": "/docs/runbook/services/plugin-server/ingestion-lag"
+                                        },
+                                        {
+                                            "name": "Jobs not executing",
+                                            "url": "/docs/runbook/services/plugin-server/jobs"
+                                        },
+                                        {
+                                            "name": "Scheduled tasks not executing",
+                                            "url": "/docs/runbook/services/plugin-server/scheduled-tasks"
+                                        }
+                                    ]
                                 },
                                 {
                                     "name": "MinIO",
@@ -1656,6 +1674,10 @@
                         {
                             "url": "/docs/apps/variance-connector",
                             "name": "Variance Connector"
+                        },
+                        {
+                            "url": "/docs/apps/pace-integration",
+                            "name": "Pace Integration"
                         },
                         {
                             "url": "/docs/apps/zapier-connector",
