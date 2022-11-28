@@ -881,12 +881,16 @@
                                             "url": "/docs/runbook/services/plugin-server"
                                         },
                                         {
+                                            "name": "Ingestion lag",
+                                            "url": "/docs/runbook/services/plugin-server/ingestion-lag"
+                                        },
+                                        {
                                             "name": "Jobs not executing",
                                             "url": "/docs/runbook/services/plugin-server/jobs"
                                         },
                                         {
-                                            "name": "Ingestion lag",
-                                            "url": "/docs/runbook/services/plugin-server/ingestion-lag"
+                                            "name": "Scheduled tasks not executing",
+                                            "url": "/docs/runbook/services/plugin-server/scheduled-tasks"
                                         }
                                     ]
                                 },
