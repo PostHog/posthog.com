@@ -30,7 +30,7 @@ If you haven't run async migrations 0005-0007 yet, or if they aren't available o
 
 ### New: Area chart visualization
 
-![area chart visualization in posthog](../images/blog/array/1-42-0-area-chart.png)
+![area chart visualization in posthog](../images/blog/array/1-42-0-area-charts.gif)
 
 New team member Thomas Obermueller has got off to a great start by delivering the much-requested area chart visualization for PostHog insights. Now, if a normal line chart isn't  enough and a regular bar chart won't satisfy then you have an exciting third option.
 
@@ -38,17 +38,23 @@ To [quote Thomas](https://github.com/PostHog/posthog/pull/12869) himself: "_The 
 
 ### New: Path breakdown normalisations
 
+![path breakdown normalization](../images/blog/array/1-42-0-paths.gif)
+
 Are you frustrated when you breakdown paths by URLs and see four different URLs that look like: `/home/`, `/home`, `/home?`, and `/home/#`? Well, not anymore! Now, whenever we're dealing with path breakdowns, we normalise URLs to count the same, so you'll see there's only one place like `/home`. 
 
 ### New: Share recordings more easily
+
+![share recordings in posthog](../images/blog/array/1-42-0-share-recordings.gif)
 
 When you find an interesting session recording, you probably want to share it with your team. So, we've improved sharing options to make it easier. You can now share specific recordings easily, and even send teammates to an exact time in any recording!
 
 ### New: Vote on our roadmap
 
+![posthog roadmap](../images/blog/array/1-42-0-roadmap.gif)
+
 Even though we're open source, we know it's not always very easy to tell what we're working on or planning for the future - there are just so many repos, issues and PRs!
 
-So, we built a public roadmap of our major projects. You can use it to vote on upcoming projects, subscribe for updates and give feedback on our wildest ideas. Best of all, it's [powered by Squeak!](https://squeak.posthog.com/)
+So, [we built a public roadmap of our major projects](/roadmap). You can use it to vote on upcoming projects, subscribe for updates and give feedback on our wildest ideas. Best of all, it's [powered by Squeak!](https://squeak.posthog.com/)
 
 ### Boring legal bit: Policy updates
 
