@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import algoliasearch from 'algoliasearch/lite'
-import { InstantSearch, useSearchBox, useRefinementList, useHits } from 'react-instantsearch-hooks-web'
+import { useSearchBox, useRefinementList, useHits } from 'react-instantsearch-hooks-web'
 import { Hit } from 'instantsearch.js'
 import Link from 'components/Link'
 import { classNames } from 'lib/utils'
 import { useSearch, SearchResultType } from './SearchContext'
 import { navigate } from 'gatsby'
-import { Combobox } from '@headlessui/react'
-
-const searchClient = algoliasearch('7VNQB5W0TX', 'e9ff9279dc8771a35a26d586c73c20a8')
+import { Combobox, RadioGroup } from '@headlessui/react'
+import { RefinementListItem } from 'instantsearch.js/es/connectors/refinement-list/connectRefinementList'
 
 type Result = Hit<{
     id: string
@@ -26,7 +24,13 @@ type Result = Hit<{
     excerpt: string
 }>
 
+type Category = typeof categories[number]
+
 const categories = [
+    {
+        type: 'all',
+        name: 'All',
+    },
     {
         type: 'docs',
         name: 'Docs',
@@ -57,11 +61,18 @@ const categories = [
     },
 ]
 
+// Mod function that can handle negative numbers
+function mod(n: number, m: number) {
+    return ((n % m) + m) % m
+}
+
 type SearchResultsProps = {
     initialFilter?: SearchResultType
 }
 
 export default function SearchResults(props: SearchResultsProps) {
+    const [category, setCategory] = useState<Category>(categories[0])
+    const { items, refine } = useRefinementList({ attribute: 'type', sortBy: ['name:asc'] })
     const { close } = useSearch()
 
     const onSelect = (result: Result) => {
@@ -69,15 +80,54 @@ export default function SearchResults(props: SearchResultsProps) {
         navigate('/' + result.slug)
     }
 
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+        if (event.key === 'Tab') {
+            event.preventDefault()
+
+            setCategory((category) => {
+                const typeSet = new Set(items.map((item) => item.value))
+
+                const extendedItems = categories.reduce<typeof categories[number][]>((acc, category) => {
+                    if (category.type === 'all' || typeSet.has(category.type)) {
+                        return [...acc, category]
+                    } else {
+                        return acc
+                    }
+                }, [])
+
+                const currentIdx = extendedItems.findIndex((item) => item.name === category.name)
+
+                if (items.length === 0 || items.length === -1) {
+                    return category
+                }
+
+                return !event.shiftKey
+                    ? extendedItems[mod(currentIdx + 1, extendedItems.length)]
+                    : extendedItems[mod(currentIdx - 1, extendedItems.length)]
+            })
+        }
+    }
+
+    const compareResults = (a: Result, b: Result) => {
+        return a.objectID === b.objectID
+    }
+
     return (
-        <Combobox value={{} as Result} onChange={onSelect}>
+        <Combobox value={{} as Result} onChange={onSelect} by={compareResults}>
             {({ activeOption }) => (
-                <div className="z-50 p-6 bg-white rounded-md shadow flex flex-col space-y-2 h-full">
-                    <InstantSearch searchClient={searchClient} indexName="dev_posthog_com">
-                        <SearchBox />
-                        <RefinementList initialFilter={props.initialFilter} />
-                        <Hits activeOption={activeOption} />
-                    </InstantSearch>
+                <div
+                    className="z-50 p-6 bg-white rounded-md shadow flex flex-col space-y-2 h-full"
+                    onKeyDown={handleKeyDown}
+                >
+                    <SearchBox />
+                    <RefinementList
+                        initialFilter={props.initialFilter}
+                        category={category}
+                        setCategory={setCategory}
+                        refine={refine}
+                        items={items}
+                    />
+                    <Hits activeOption={activeOption} />
                 </div>
             )}
         </Combobox>
@@ -92,6 +142,8 @@ const SearchBox = () => {
             <Combobox.Input
                 className="w-full py-2 px-3 bg-black/5 focus:outline-none rounded"
                 placeholder="Search..."
+                autoComplete="off"
+                onKeyDown={(event: React.KeyboardEvent) => (event.key === 'Tab' ? event.preventDefault() : null)}
                 value={query}
                 onChange={(event) => refine(event.target.value)}
             />
@@ -108,69 +160,75 @@ const SearchBox = () => {
 
 type RefinementListProps = {
     initialFilter?: SearchResultType
+    category: Category
+    setCategory: React.Dispatch<React.SetStateAction<Category>>
+    items: RefinementListItem[]
+    refine: (value: string) => void
 }
 
 const RefinementList: React.FC<RefinementListProps> = (props) => {
-    const [selected, setSelected] = useState<typeof categories[number] | null>(null)
-    const { items, refine } = useRefinementList({ attribute: 'type', sortBy: ['name:asc'] })
+    const [selected, setSelected] = React.useState<Category>(props.category)
 
     useEffect(() => {
         if (props.initialFilter) {
-            refine(props.initialFilter)
-            setSelected(categories.find(({ type }) => type === props.initialFilter) || null)
+            props.refine(props.initialFilter)
         }
     }, [props.initialFilter])
 
-    const updateSelected = (category: typeof categories[number]) => {
-        setSelected((selected) => {
-            refine(category.type)
+    useEffect(() => {
+        if (selected.type !== 'all') {
+            props.refine(selected.type)
+        }
 
-            if (selected?.type === category.type) {
-                return null
-            } else if (selected?.type) {
-                refine(selected.type)
-            }
+        if (props.category.type !== 'all') {
+            props.refine(props.category.type)
+        }
 
-            return category
-        })
-    }
+        setSelected(props.category)
+    }, [props.category])
 
     return (
-        <fieldset className="border-none py-2">
-            <legend className="sr-only">Filter results by category</legend>
-            <ul className="flex items-center flex-wrap space-x-2 list-none p-0">
+        <RadioGroup value={props.category} onChange={props.setCategory} className="border-none py-2">
+            <RadioGroup.Label className="sr-only">Filter results by category</RadioGroup.Label>
+            <div className="flex items-center flex-wrap space-x-2 list-none p-0">
                 {categories.map((item) => {
-                    const result = items.find((res) => res.value === item.type)
-                    const isSelected = selected?.type === item.type
+                    const result = props.items.find((res) => res.value === item.type)
 
                     return (
-                        <li
+                        <RadioGroup.Option
                             key={item.type}
+                            value={item}
+                            disabled={!result?.count}
+                            onClick={() => {
+                                if (item.type === props.category.type) {
+                                    props.setCategory(categories[0])
+                                }
+                            }}
                             className={classNames(
-                                'rounded px-1.5 py-0.5',
-                                isSelected ? 'bg-red text-white' : 'text-gray-accent-dark bg-gray-accent-light'
+                                item.type === 'all' ? 'sr-only' : '',
+                                'rounded px-1.5 py-0.5 ui-checked:bg-red ui-checked:text-white ui-not-checked:text-gray-accent-dark ui-not-checked:bg-gray-accent-light'
                             )}
                         >
-                            <label className={classNames('flex items-center', result?.count !== 0 && 'cursor-pointer')}>
-                                <input
-                                    className="sr-only"
-                                    tabIndex={-1}
-                                    type="checkbox"
-                                    disabled={!result?.count}
-                                    value={item.type}
-                                    checked={isSelected}
-                                    onChange={() => updateSelected(item)}
-                                />
-                                <span className="text-sm mr-2">{item.name}</span>
-                                <span className={classNames('text-xs', isSelected ? 'text-white/80' : 'text-black/40')}>
-                                    {result?.count || 0}
-                                </span>
-                            </label>
-                        </li>
+                            {({ checked }) => (
+                                <label
+                                    className={classNames(
+                                        'flex items-center select-none',
+                                        result?.count !== 0 && 'cursor-pointer'
+                                    )}
+                                >
+                                    <span className="text-sm mr-2">{item.name}</span>
+                                    <span
+                                        className={classNames('text-xs', checked ? 'text-white/80' : 'text-black/40')}
+                                    >
+                                        {result?.count || 0}
+                                    </span>
+                                </label>
+                            )}
+                        </RadioGroup.Option>
                     )
                 })}
-            </ul>
-        </fieldset>
+            </div>
+        </RadioGroup>
     )
 }
 
@@ -185,7 +243,7 @@ const Hits: React.FC<HitsProps> = ({ activeOption }) => {
         <div className="grid grid-cols-2 min-h-0 flex-grow">
             <section className="overscroll-none text-left overflow-y-scroll">
                 {hits.length > 0 ? (
-                    <Combobox.Options as="ol" className="list-none m-0" static>
+                    <Combobox.Options as="ol" className="list-none m-0" static hold>
                         {hits.map((hit) => {
                             return (
                                 <Combobox.Option
