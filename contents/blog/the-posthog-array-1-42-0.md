@@ -10,7 +10,7 @@ featuredImage: ../images/blog/posthog-array-blog.png
 featuredImageType: full
 ---
 
-Want to know more about what we're up to? Check out [our roadmap](/roadmap) to see what we're working on and what new beta features are available!
+Want to know more about what we're up to? Check out [our roadmap](/roadmap) to see what we're working on and what new beta features are available! You can also subscribe to [our Hogmail newsletter](/newsletter)!
 
 ## PostHog 1.42.0 release notes
 
@@ -36,25 +36,13 @@ To [quote Thomas](https://github.com/PostHog/posthog/pull/12869) himself: "_The 
 
 ### New: Path breakdown normalisations
 
-Are you frustrated with breaking down by URLs and seeing four different URLs that look like: `/home/`, `/home`, `/home?`, and `/home/#`?
+Are you frustrated when you breakdown paths by URLs and see four different URLs that look like: `/home/`, `/home`, `/home?`, and `/home/#`? Well, not anymore! Now, whenever we're dealing with path breakdowns, we normalise URLs to count the same, so you only see there's only one place like `/home`. 
 
-Well, not anymore! Now, whenever we're dealing with path breakdowns, we normalise all of these URLs to count the same as `/home`.
+### New: Share recordings more easily
 
-Joe to add a gif here. 
+User recordings are a great for finding ways to improve your product, but when you find something interesting what's the first thing you do? Probably share it with your team. 
 
-Neil and Joe to provide highlight here. Substantial new feature. 
-
-
-### New: Share recording links
-
-You can now share specific recording links and also have them start at any point you want.
-
-https://github.com/PostHog/posthog/pull/12725
-
-Joe to add a gif here. 
-
-Neil and Joe to provide highlight here. Substantial new feature. 
-
+So, we've improved the options for sharing specific recordings. You can now share specific recordings easily, and even send teammates to an exact time in any recording!
 
 ### New: 
 
@@ -64,14 +52,9 @@ Neil and Joe to provide highlight here. Substantial new feature.
 
 ### Improved: 
 
-
 Fixed person deletion (removing dangling distinctIDs). Important note (that was true before too): if you want to re-use the distinctID do NOT use delete person and instead use split distinctIDs. Re-using deleted person's distinctID's is not supported and will result in bad data state.
 
-@tiina to clarify: https://github.com/PostHog/posthog/pull/12475
-
-Joe to add a gif here. 
-
-Neil and Joe to provide highlight here. Significant improvement. 
+@tiina to clarify: https://github.com/PostHog/posthog/pull/12475 
 
 ### One more thing: Roadmap
 
@@ -83,7 +66,7 @@ Despite being described by our VP of Marketing and Ops as "_the least interestin
 
 - We've added a CCPA addendum to [our privacy policy](/privacy)
 - We've updated various policies for the release of [PostHog Cloud EU](/eu)
-- We've updated [our SCCs](/handbook/company/security) to the latest version
+- We've updated [our SCCs](/handbook/company/security) to the latest versions
 - We've [changed from Workable to Ashby for applicant data processing](https://www.ashbyhq.com/customers/posthog-customer-story)
 
 ### Other improvements & fixes
