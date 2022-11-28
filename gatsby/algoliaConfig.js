@@ -90,6 +90,9 @@ module.exports = {
                                 nodes {
                                   id
                                   title: subject
+                                  replies {
+                                    body
+                                  }
                                   internal {
                                     contentDigest
                                   }
@@ -98,9 +101,10 @@ module.exports = {
                             }
                         `,
                 transformer: ({ data }) => {
-                    return data.questions.nodes.map((question) => {
+                    return data.questions.nodes.map(({ replies, ...question }) => {
                         return {
                             ...question,
+                            excerpt: replies?.[0]?.body,
                             type: 'question',
                         }
                     })
