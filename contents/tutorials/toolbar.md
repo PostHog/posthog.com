@@ -7,6 +7,7 @@ featuredImage: ../images/tutorials/banners/toolbar.png
 author: ['yakko-majuri', 'andy-vandervell']
 topics:
     - heatmaps
+    - toolbar
 date: 2022-07-15
 ---
 
