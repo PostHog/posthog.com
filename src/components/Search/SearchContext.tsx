@@ -32,7 +32,7 @@ export const SearchProvider: React.FC = ({ children }) => {
             if (event.key === '/' && !isVisible) {
                 event.preventDefault()
                 open()
-            } else if (event.key === 'k' && event.ctrlKey) {
+            } else if (event.key === 'k' && (event.ctrlKey || event.metaKey)) {
                 event.preventDefault()
 
                 if (isVisible) {
