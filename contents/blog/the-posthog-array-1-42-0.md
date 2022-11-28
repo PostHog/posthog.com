@@ -44,9 +44,7 @@ Are you frustrated when you breakdown paths by URLs and see four different URLs 
 
 ### New: Share recordings more easily
 
-User recordings are a great for finding ways to improve your product, but when you find something interesting what's the first thing you do? Probably share it with your team. 
-
-So, we've improved the options for sharing specific recordings. You can now share specific recordings easily, and even send teammates to an exact time in any recording!
+When you find an interesting session recording, you probably want to share it with your team. So, we've improved sharing options to make it easier. You can now share specific recordings easily, and even send teammates to an exact time in any recording!
 
 ### New: 
 
