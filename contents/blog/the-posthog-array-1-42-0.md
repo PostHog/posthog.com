@@ -75,7 +75,16 @@ Neil and Joe to provide highlight here. Significant improvement.
 
 ### One more thing: Roadmap
 
-Joe to add info here about roadmap launch. 
+Joe to add info here about roadmap launch.
+
+### Boring legal bit: Policy updates
+
+Despite being described by our VP of Marketing and Ops as "_the least interesting thing ever_", we nevertheless need to tell you that there have been some changes to our terms and privacy policies:
+
+- We've added a CCPA addendum to [our privacy policy](/privacy)
+- We've updated various policies for the release of [PostHog Cloud EU](/eu)
+- We've updated [our SCCs](/handbook/company/security) to the latest version
+- We've [changed from Workable to Ashby for applicant data processing](https://www.ashbyhq.com/customers/posthog-customer-story)
 
 ### Other improvements & fixes
 
