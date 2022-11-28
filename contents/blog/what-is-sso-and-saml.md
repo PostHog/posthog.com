@@ -1,12 +1,12 @@
 ---
 date: 2022-10-31
-title: "What is SSO and why you should enable it for PostHog"
+title: What is SSO and why you should enable it for PostHog
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ['Guides', ‘Using PostHog’]
-featuredImage: ../images/blog/posthog-blog-image.jpg
+categories: ["Guides", "Using PostHog"]
+featuredImage: ../images/blog/posthog-blog-image.png
 featuredImageType: full
 ---
 
