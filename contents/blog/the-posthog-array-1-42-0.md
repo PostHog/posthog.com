@@ -30,43 +30,67 @@ Neil and Joe to provide highlight here.
 
 ![area chart visualization in posthog](../images/blog/array/1-42-0-area-chart.png)
 
-New team member Thomas has got off to a great start by delivering the much-requested area chart visualization for insights. Now, if a normal line chart isn't enough and a regular bar chart just won't satisfy then you have an exciting and colourful third option.
+New team member Thomas Obermueller has got off to a great start by delivering the much-requested area chart visualization for PostHog insights. Now, if a normal line chart isn't  enough and a regular bar chart won't satisfy then you have an exciting third option.
 
 To [quote Thomas](https://github.com/PostHog/posthog/pull/12869) himself: "_The main use case for this is when you want to see the composition of a metric, while also having the total value as a reference e.g. breakdown of revenue by customer over time._"
 
+### New: Path breakdown normalisations
+
+Are you frustrated with breaking down by URLs and seeing four different URLs that look like: `/home/`, `/home`, `/home?`, and `/home/#`?
+
+Well, not anymore! Now, whenever we're dealing with path breakdowns, we normalise all of these URLs to count the same as `/home`.
+
+Joe to add a gif here. 
+
+Neil and Joe to provide highlight here. Substantial new feature. 
+
+
+### New: Share recording links
+
+You can now share specific recording links and also have them start at any point you want.
+
+https://github.com/PostHog/posthog/pull/12725
+
+Joe to add a gif here. 
+
+Neil and Joe to provide highlight here. Substantial new feature. 
+
+
 ### New: 
 
 Joe to add a gif here. 
 
 Neil and Joe to provide highlight here. Substantial new feature. 
 
-### New: 
+### Improved: 
+
+
+Fixed person deletion (removing dangling distinctIDs). Important note (that was true before too): if you want to re-use the distinctID do NOT use delete person and instead use split distinctIDs. Re-using deleted person's distinctID's is not supported and will result in bad data state.
+
+@tiina to clarify: https://github.com/PostHog/posthog/pull/12475
 
 Joe to add a gif here. 
 
-Neil and Joe to provide highlight here. Substantial new feature. 
+Neil and Joe to provide highlight here. Significant improvement. 
 
 ### One more thing: Roadmap
 
 Joe to add info here about roadmap launch. 
 
-### Boring legal bit: Policy updates
-
-Despite being described by our VP of Marketing and Ops as "_the least interesting thing ever_", we nevertheless need to tell you that there have been some changes to our terms and privacy policies:
-
-- We've added a CCPA addendum to [our privacy policy](/privacy)
-- We've updated various policies for the release of [PostHog Cloud EU](/eu)
-- We've updated [our SCCs](/handbook/company/security) to the latest version
-- We've [changed from Workable to Ashby for applicant data processing](https://www.ashbyhq.com/customers/posthog-customer-story)
-
 ### Other improvements & fixes
 
-You think that's it? Not by a long shot! Version 1.41 also adds hundreds of other improvements and fixes, including...
+You think that's it? Not by a long shot! Version 1.42 also adds hundreds of other improvements and fixes, including...
 
-- **Improvement:** Neil to add notable improvement here. 
-- **Fix:** Neil to add notable fixes here. 
+- **Improvement:** Recordings don't show windows anymore if only 1 window was tracked. 
+- **Improvement:** A next-up button for recordings (think just like Netflix's next episodes) to better signal recordings to autoplay
+- **Improvement:** You now see a free-trial banner if you're on the free trial
+- **Improvement:** You can now choose if deleting a dashboard should also delete insights
+- **Improvement:** We don't skip showing labels for alternate bars when breaking down insights.
+- **Improvement:** We now disable heatmap clicks when holding down shift
+- **Fix:** Secondary metrics in experiments now don't depend on the flag values being present for all steps, just like the primary metric.
+- **Fix:** Group pages were 404ing when they had a dot in the name. They don't anymore.
 
-View the commit log in GitHub for a full history of changes: [`release-1.41.0...release-1.42.0`](https://github.com/PostHog/posthog/compare/release-1.41.0...release-1.42.0).
+View the commit log in GitHub for a full history of changes: [`release-1.41.4...release-1.42.0`](https://github.com/PostHog/posthog/compare/release-1.41.4...release-1.42.0).
 
 ## Give us your feedback
 We’re always working on improving PostHog and would love to talk to you! Please [schedule a 30 minute call](https://calendly.com/posthog-feedback) with one of our Product, Engineering, or Marketing team members to help us understand how to improve. As a thank you for your time, we'll be giving away awesome [PostHog merch](https://merch.posthog.com)!
