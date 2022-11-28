@@ -16,7 +16,7 @@
 This is the repository for the PostHog website. It contains:
 
 - All of our written content and visuals including product features, manuals, docs, blogs, case studies, tutorials, and the handbook
-- Features like questions and answers (using [Squeak](https://github.com/PostHog/squeak)), job listings (using [Ashby](https://www.ashbyhq.com/customers/posthog-customer-story)), pricing calculator, roadmap, API docs, and more
+- Features like questions and answers (using [Squeak!](https://github.com/PostHog/squeak)), job listings (using [Ashby](https://www.ashbyhq.com/customers/posthog-customer-story)), pricing calculator, roadmap, API docs, and more
 - All the components, templates, logic, and styling to make this work, look pretty, and spark joy
 
 ## Table of contents
