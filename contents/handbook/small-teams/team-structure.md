@@ -9,27 +9,29 @@ hideAnchor: false
 
 - **James Hawkins, CEO & Co-founder**
   - **Tim Glaser, CTO & Co-founder**
-    - **Marius Andra, Full Stack Engineer**
-      - Emanuele Capparelli, Growth Engineer
-      - Michael Matloka, Full Stack Engineer
-      - Paul D'Ambra, Full Stack Engineer
-    - **Ben White, Full Stack Engineer**
-      - Alex Kim, Full Stack Engineer
     - **James Greenhill, Data/Infra engineer**
       - Tiina Turban, Full Stack Engineer
       - Yakko Majuri, Full Stack Engineer
-      - Zack Elan, Software Engineer
+      - Xavier Vello, Data engineer
     - **Ellie Huxtable, Full Stack Engineer**
       - Guido Iaquinti, Site Reliability Engineer
       - Daniel Jaramillo, Site Reliability Engineer
-    - **Eric Duong, Full Stack Engineer**
-      - Li Yi Yu, Full Stack Engineer
-      - Neil Kakkar, Full Stack Engineer
-    - **Luke Harries, Head of Product**
+    - Emanuele Capparelli, Growth Engineer
+    - Harry Waye, Full Stack Engineer
+    - **Simon Fisher, Customer Success Lead**
+      - Cameron DeLeone, Customer Success Manager
+  - **Luke Harries, Head of Product**
       - Annika Schmid, Product Manager
       - Joe Martin, Product Marketer
+  - **Marius Andra, Full Stack Engineer**
+    - Michael Matloka, Full Stack Engineer
+    - Paul D'Ambra, Full Stack Engineer
     - Karl-Aksel Puulmann, Full Stack Engineer
-    - Harry Waye, Full Stack Engineer
+  - **Eric Duong, Full Stack Engineer**
+    - Li Yi Yu, Full Stack Engineer
+    - Neil Kakkar, Full Stack Engineer
+  - **Ben White, Full Stack Engineer**
+    - Alex Kim, Full Stack Engineer
   - **Charles Cook, VP of Operations & Marketing**
     - Andy Vandervell, Content Marketer
     - Grace McKenzie, Operations Manager
@@ -39,8 +41,7 @@ hideAnchor: false
     - Lottie Coxon, Graphic Designer
     - Eli Kinsey, Front End Engineer
     - Paul Hultgren, Developer Advocate
-  - **Simon Fisher, Customer Success Lead**
-    - Cameron DeLeone, Customer Success Manager
+
 
 ## Small teams
 
@@ -54,24 +55,21 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Marius Andra](/handbook/company/team#marius-andra-software-engineer) (Team lead, Full Stack Engineer)
 - [Michael Matloka](/handbook/company/team#michael-matloka-software-engineer) (Full Stack Engineer)
 - [Paul D'Ambra](/handbook/company/team#paul-dambra-software-engineer) (Full Stack Engineer)
-- Product: Supported by Annika Schmid
+- Product: Supported by [Luke Harries](/handbook/company/team#luke-harries-head-of-product)
 - Product design: Supported by Cory Watilo
-- _Hiring for a [full stack engineer](/careers/full-stack-engineer)_
-- _Hiring for a [full stack engineer](/careers/full-stack-engineer)_
 
 #### [Experimentation](/handbook/small-teams/experimentation)
 - [Eric Duong](/handbook/company/team#eric-duong-software-engineer) (Team lead, Full Stack Engineer)
 - [Neil Kakkar](/handbook/company/team#neil-kakkar-software-engineer) (Full Stack Engineer)
 - [Li Yi Yu](/handbook/company/team#li-yi-yu-full-stack-engineer) (Full Stack Engineer)
 - _Hiring for a [full stack engineer](/careers/full-stack-engineer)_
-- Product: Supported by Luke Harries
+- Product: Supported by Annika Schmid
 - Product design: Supported by Cory Watilo
 
 #### [Session Recording](/handbook/small-teams/session-recording)
 - [Ben White](/handbook/company/team#ben-white-full-stack-engineer) (Team lead, Full Stack Engineer)
 - [Alex Kim](/handbook/company/team#alex-kim-full-stack-engineer) (Full Stack Engineer)
 - [Emanuele Capparelli](/handbook/company/team#ben-white-full-stack-engineer) (Growth Engineer)
-- _Hiring for a [full stack engineer](/careers/full-stack-engineer)_
 - Product: Supported by Annika Schmid
 - Product design: Supported by Cory Watilo
 
@@ -79,8 +77,7 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Ellie Huxtable]() (Site Reliability Engineer)
 - [Guido Iaquinti](/handbook/company/team#guido-iaquinti-software-engineer) (Site Reliability Engineer)
 - [Daniel Jaramillo]() (Site Reliability Engineer)
-- _Hiring for an [Site Reliability Engineer](/careers/site-reliability-engineer-kubernetes)_
-- Product: Supported by Luke Harries
+- Product: Supported by [Luke Harries](/handbook/company/team#luke-harries-head-of-product)
 
 #### [Pipeline](/handbook/small-teams/pipeline)
 - [Yakko Majuri](/handbook/company/team#yakko-majuri-software-engineer) (Full Stack Engineer)
@@ -88,10 +85,7 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Karl-Aksel Puulmann](/handbook/company/team#karlaksel-puulmann-software-engineer) (Full Stack Engineer)
 - [Harry Waye](/handbook/company/team#harry-waye-software-engineer) (Full Stack Engineer)
 - [Tiina Turban](/handbook/company/team#tiina-turban-software-engineer) (Full Stack Engineer)
-- [Zack Elan]() (Software Engineer)
-- _Incoming Senior Data Engineer_
-- _Hiring for a [full stack engineer](/careers/full-stack-engineer)_
-- Product: Supported by Luke Harries
+- Product: Supported by [Luke Harries](/handbook/company/team#luke-harries-head-of-product)
 - Product design: Supported by Cory Watilo
 
 ### [Marketing](/handbook/small-teams/marketing)
