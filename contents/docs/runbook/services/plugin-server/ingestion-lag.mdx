@@ -40,19 +40,21 @@ You can do this in many ways:
     ORDER BY ts
     ```
 
+    > Please note that `timestamp` reflects the time the event happened, not when the event was ingested. Thus it is possible that this metric is off if users are sending us events in the past or the future. However, it generally is a great representation of things. You can use `_timestamp` to get ingestion time timestamps, but note that it is a column that's not in our sorting key and thus filtering on it leads to expensive (and thus slow) queries.
+
 If we're not processing events, then things are very serious. However, even then there are levels to the issue.
 
 The **worst case scenario** is if events are being dropped by the capture endpoint (`posthog/api/capture.py`). This is because **these events are forever lost**.
 
-It's a smaller but still serious issue if the plugin server is unable to process events or ClickHouse unable to consume them. These events will remain in Kafka until they're correctly processed.
+It's a smaller but still serious issue if the plugin server is unable to process events or ClickHouse unable to consume them. These events will remain in Kafka until the messages older than the specified retention for the topic.
 
 To determine this, there are a few useful resources:
 
 - Graph: Kafka Production Rate ([US Cloud link](https://metrics.posthog.net/d/27BWK5nGk/kafka-msk-overview?orgId=1&viewPanel=22))
 - Graph: Events received per minute ([US Cloud link](https://metrics.posthog.net/d/iffHpmSMz/posthog-cloud?orgId=1&refresh=30s&viewPanel=10))
 - Graph: HTTP Response Codes ([US Cloud link](https://metrics.posthog.net/d/iffHpmSMz/posthog-cloud?orgId=1&refresh=30s&viewPanel=4))
-- Sentry errors for `/e`, `/batch` etc endpoints
-- Plugin server logs
+- Sentry errors for `/e`, `/batch` etc endpoints ([US Cloud link](https://sentry.io/organizations/posthog/issues/?query=is%3Aunresolved+assigned%3A%23pipeline&referrer=issue-list&statsPeriod=14d))
+- Plugin server logs ([US Cloud link](https://grafana.us-east-1.prod.posthog.dev/explore?orgId=1&left=%7B%22datasource%22:%22P8E80F9AEF21F6940%22,%22queries%22:%5B%7B%22refId%22:%22A%22,%22editorMode%22:%22builder%22,%22expr%22:%22%7Bcontainer%3D%5C%22posthog-plugins-ingestion%5C%22%7D%20%7C%3D%20%60%60%22,%22queryType%22:%22range%22%7D%5D,%22range%22:%7B%22from%22:%22now-1h%22,%22to%22:%22now%22%7D%7D))
 
 
 ## Actions
