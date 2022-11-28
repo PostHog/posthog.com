@@ -57,8 +57,6 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Paul D'Ambra](/handbook/company/team#paul-dambra-software-engineer) (Full Stack Engineer)
 - Product: Supported by [Luke Harries](/handbook/company/team#luke-harries-head-of-product)
 - Product design: Supported by Cory Watilo
-- _Hiring for a [full stack engineer](/careers/full-stack-engineer)_
-- _Hiring for a [full stack engineer](/careers/full-stack-engineer)_
 
 #### [Experimentation](/handbook/small-teams/experimentation)
 - [Eric Duong](/handbook/company/team#eric-duong-software-engineer) (Team lead, Full Stack Engineer)
@@ -72,7 +70,6 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Ben White](/handbook/company/team#ben-white-full-stack-engineer) (Team lead, Full Stack Engineer)
 - [Alex Kim](/handbook/company/team#alex-kim-full-stack-engineer) (Full Stack Engineer)
 - [Emanuele Capparelli](/handbook/company/team#ben-white-full-stack-engineer) (Growth Engineer)
-- _Hiring for a [full stack engineer](/careers/full-stack-engineer)_
 - Product: Supported by Annika Schmid
 - Product design: Supported by Cory Watilo
 
@@ -80,7 +77,6 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Ellie Huxtable]() (Site Reliability Engineer)
 - [Guido Iaquinti](/handbook/company/team#guido-iaquinti-software-engineer) (Site Reliability Engineer)
 - [Daniel Jaramillo]() (Site Reliability Engineer)
-- _Hiring for an [Site Reliability Engineer](/careers/site-reliability-engineer-kubernetes)_
 - Product: Supported by [Luke Harries](/handbook/company/team#luke-harries-head-of-product)
 
 #### [Pipeline](/handbook/small-teams/pipeline)
@@ -89,8 +85,6 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Karl-Aksel Puulmann](/handbook/company/team#karlaksel-puulmann-software-engineer) (Full Stack Engineer)
 - [Harry Waye](/handbook/company/team#harry-waye-software-engineer) (Full Stack Engineer)
 - [Tiina Turban](/handbook/company/team#tiina-turban-software-engineer) (Full Stack Engineer)
-- _Incoming Senior Data Engineer_
-- _Hiring for a [full stack engineer](/careers/full-stack-engineer)_
 - Product: Supported by [Luke Harries](/handbook/company/team#luke-harries-head-of-product)
 - Product design: Supported by Cory Watilo
 
