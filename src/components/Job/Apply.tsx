@@ -19,6 +19,22 @@ interface IResumeComponentProps {
 }
 
 const components = {
+    valueselect: ({ title, required, path, options }) => (
+        <select
+            name={title}
+            data-path={path}
+            required={required}
+            className="w-full block !bg-white dark:!bg-white/10 box-border px-3 py-2 rounded-sm focus:shadow-xl border border-black/20 text-[17px] font-medium dark:bg-white box-border/10 dark:text-white"
+        >
+            {options.map(({ label, value }) => {
+                return (
+                    <option key={value} value={value}>
+                        {label}
+                    </option>
+                )
+            })}
+        </select>
+    ),
     string: ({ title, required, path, placeholder }: IResumeComponentProps) => (
         <input
             data-path={path}
@@ -135,10 +151,11 @@ const Form = ({ setSubmitted, info, id }) => {
                         return fields.map(({ field, isRequired, descriptionPlain }) => {
                             const required = isRequired
                             const type = field?.type?.toLowerCase()
+
                             return (
                                 <div
                                     className={
-                                        type === 'string' || type === 'email'
+                                        type === 'string' || type === 'email' || type === 'valueselect'
                                             ? 'sm:col-span-1 col-span-2'
                                             : 'col-span-2'
                                     }
@@ -156,6 +173,7 @@ const Form = ({ setSubmitted, info, id }) => {
                                             required,
                                             path: field?.path,
                                             placeholder: descriptionPlain,
+                                            options: field?.selectableValues,
                                         })}
                                 </div>
                             )
