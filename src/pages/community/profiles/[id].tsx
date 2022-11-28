@@ -1,20 +1,14 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { PageProps } from 'gatsby'
 
-import { handbook } from '../../../sidebars/sidebars.json'
+import { docs } from '../../../sidebars/sidebars.json'
 
 import SEO from 'components/seo'
 import Layout from 'components/Layout'
 import PostLayout, { SidebarSection } from 'components/PostLayout'
 import { GitHub, LinkedIn, Twitter } from 'components/Icons'
-import { Blockquote } from 'components/BlockQuote'
-import { InlineCode } from 'components/InlineCode'
-import { MdxCodeBlock } from 'components/CodeBlock'
-import { ZoomImage } from 'components/ZoomImage'
 import Link from 'components/Link'
-import { Heading } from 'components/Heading'
 import Markdown from 'markdown-to-jsx'
-import { classNames } from 'lib/utils'
 import { OrgProvider, UserProvider, useUser, Question } from 'squeak-react'
 import Modal from 'components/Modal'
 import EditProfile from 'components/Profiles/EditProfile'
@@ -152,7 +146,7 @@ export default function ProfilePage({ params }: PageProps) {
                                 { name: 'Community', url: '/questions' },
                                 { name: 'Profile', url: `/community/profiles/${id}` },
                             ]}
-                            menu={handbook}
+                            menu={docs}
                             sidebar={<ProfileSidebar setEditModalOpen={setEditModalOpen} profile={profile} />}
                             hideSurvey
                         >
