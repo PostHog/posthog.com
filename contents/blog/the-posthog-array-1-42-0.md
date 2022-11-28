@@ -30,7 +30,7 @@ Neil and Joe to provide highlight here.
 
 ![area chart visualization in posthog](../images/blog/array/1-42-0-area-chart.png)
 
-New team member Thomas Obermueller has got off to a great start by delivering the much-requested area chart visualization for PostHog insights. Now, if a normal line chart isn't  enough and a regular bar chart won't satisfy then you have an exciting third option.
+New team member Thomas has got off to a great start by delivering the much-requested area chart visualization for insights. Now, if a normal line chart isn't enough and a regular bar chart just won't satisfy then you have an exciting and colourful third option.
 
 To [quote Thomas](https://github.com/PostHog/posthog/pull/12869) himself: "_The main use case for this is when you want to see the composition of a metric, while also having the total value as a reference e.g. breakdown of revenue by customer over time._"
 
@@ -46,15 +46,18 @@ Joe to add a gif here.
 
 Neil and Joe to provide highlight here. Substantial new feature. 
 
-### Improved: 
-
-Joe to add a gif here. 
-
-Neil and Joe to provide highlight here. Significant improvement. 
-
 ### One more thing: Roadmap
 
 Joe to add info here about roadmap launch. 
+
+### Boring legal bit: Policy updates
+
+Despite being described by our VP of Marketing and Ops as "_the least interesting thing ever_", we nevertheless need to tell you that there have been some changes to our terms and privacy policies:
+
+- We've added a CCPA addendum to [our privacy policy](/privacy)
+- We've updated various policies for the release of [PostHog Cloud EU](/eu)
+- We've updated [our SCCs](/handbook/company/security) to the latest version
+- We've [changed from Workable to Ashby for applicant data processing](https://www.ashbyhq.com/customers/posthog-customer-story)
 
 ### Other improvements & fixes
 
