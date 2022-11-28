@@ -185,7 +185,7 @@ const Hits: React.FC<HitsProps> = ({ activeOption }) => {
                                 <Combobox.Option
                                     key={hit.objectID}
                                     value={hit}
-                                    className="focus-within:bg-gray-accent-light rounded hover:bg-gray-accent-light"
+                                    className="ui-active:bg-gray-accent-light rounded hover:bg-gray-accent-light"
                                 >
                                     <Link
                                         className="w-full px-3 py-2 text-red font-semibold flex flex-col space-y-1 focus:outline-none"
