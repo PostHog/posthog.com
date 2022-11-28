@@ -62,6 +62,7 @@ import { Heading } from './components/Heading'
 import { HiddenSection } from './components/HiddenSection'
 import { Home } from './components/Home'
 import { HostingOption } from './components/HostingOption'
+import { Icons } from './components/Icons'
 import { ImageBlock } from './components/ImageBlock'
 import { IngestionAppsList } from './components/IngestionAppsList'
 import { InlineCode } from './components/InlineCode'
@@ -196,6 +197,7 @@ export const shortcodes = {
     HiddenSection,
     Home,
     HostingOption,
+    Icons,
     ImageBlock,
     IngestionAppsList,
     InlineCode,

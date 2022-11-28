@@ -11,6 +11,10 @@ exports.createResolvers = require('./gatsby/createResolvers.js')
 // called after every page is created.
 exports.onCreatePage = async ({ page, actions }) => {
     const { createPage } = actions
+    if (page.path.match(/^\/community\/profiles/)) {
+        page.matchPath = '/community/profiles/*'
+        createPage(page)
+    }
     if (page.path.match(/^\/next\-steps/)) {
         page.matchPath = '/next-steps/*'
         createPage(page)
