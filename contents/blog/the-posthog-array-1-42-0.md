@@ -1,6 +1,6 @@
 ---
 date: 2022-11-30
-title: "Array 1.42.0: SUBTITLE HERE"
+title: "Array 1.42.0: Making recordings easier to share"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
