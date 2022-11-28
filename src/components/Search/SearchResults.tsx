@@ -5,6 +5,7 @@ import { Hit } from 'instantsearch.js'
 import Link from 'components/Link'
 import { classNames } from 'lib/utils'
 import { useSearch, SearchResultType } from './SearchContext'
+import { navigate } from 'gatsby'
 import { Combobox } from '@headlessui/react'
 
 const searchClient = algoliasearch('7VNQB5W0TX', 'e9ff9279dc8771a35a26d586c73c20a8')
@@ -63,8 +64,13 @@ type SearchResultsProps = {
 export default function SearchResults(props: SearchResultsProps) {
     const { close } = useSearch()
 
+    const onSelect = (result: Result) => {
+        close()
+        navigate('/' + result.slug)
+    }
+
     return (
-        <Combobox value={{} as Result} onChange={close}>
+        <Combobox value={{} as Result} onChange={onSelect}>
             {({ activeOption }) => (
                 <div className="z-50 p-6 bg-white rounded-md shadow flex flex-col space-y-2 h-full">
                     <InstantSearch searchClient={searchClient} indexName="dev_posthog_com">
