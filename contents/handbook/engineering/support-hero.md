@@ -60,6 +60,14 @@ To help manage users' expectations, you might find it useful to share a message 
 
 As the support hero you should triage any bugs/feature requests that you don't deal with to the relevant small team. They are ultimately responsible for handling bugs and feature requests for their area of the product.
 
+### Support for self-hosted users
+
+Supporting self-hosted users can be particularly tricky/time-consuming!
+
+If the messages are from a dedicated slack, a tag from the CS team or 'high' priority zendesk then **do prioritize** them accordingly. You'll likely find [these docs useful](https://posthog.com/docs/self-host/deploy/troubleshooting).
+
+However, if it's in the community slack and you don't have the time to solve it then it's fine to politely point them to the docs for [self-serve open-source support](/docs/self-host/open-source/support#support-for-open-source-deployments-of-posthog) and ask them to file a github issue if they believe something is broken in the docs or deployment setup.
+
 ## Categorizing requests
 
 It's really valuable for us to understand what types of requests we've had so we can prioritize our investments in certain areas and work out if we're making things better for our users (e.g. we use this as a measure of how easy it is to deploy PostHog).

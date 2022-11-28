@@ -156,12 +156,8 @@ While there is value in the items on the right, we value the items on the left m
 
 ## Target customers for 2022
 
-Our ideal customers are high-growth startups (~$20k-70k) who meets as many of these criteria as possible:
+We build for the highest-performing **product teams** (engineers, PMs, designers) building the **most loved products** at **high-growth startups**. We focus specifically on the  **product-engineers** (full-stack engineers skewed towards the frontend) but it should be usable by everyone in the product team.
 
-* _Needs_
-  * Cares about user data
-  * Need to excel at product led growth
-* _Haves_
-  * Have budget and savvy engineers are the decision makers
-  * Have a central analytics or devops function
-  * Have a product aimed at businesses
+Example: PostHog anytime from their Series B to IPO
+
+For more information read about our [ideal customer persona](/handbook/strategy/ideal-customer-persona).
