@@ -27,3 +27,9 @@ Above everything else, if you are going above and beyond for PostHog and you're 
 Just to reassure you, PostHog won't try to claim ownership of any intellectual property (IP) you create in your personal time, e.g. if you are contributing to another open source project as a hobby. However, you need to be _really_ careful that you do not introduce any of PostHog's non-open source IP into any project that you work on - this can cause serious legal headaches. As a rule, anything from PostHog that is explicitly MIT-licensed is fine to use, anything else is not.
 
 If you are ever worried about this, please talk to Charles and he can help you figure out the best solution here. 
+
+## Getting signoff
+
+We ask you to please just check in with the relevant Exec team member for your team (ie. James, Tim, Charles, or Luke) to get their confirmation before going ahead with any side gigs. 
+
+If your side gig existed before you joined PostHog, this will usually be covered as part of the interview process. 
