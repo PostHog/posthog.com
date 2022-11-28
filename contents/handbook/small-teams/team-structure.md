@@ -53,6 +53,7 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Marius Andra](/handbook/company/team#marius-andra-software-engineer) (Team lead, Full Stack Engineer)
 - [Michael Matloka](/handbook/company/team#michael-matloka-software-engineer) (Full Stack Engineer)
 - [Paul D'Ambra](/handbook/company/team#paul-dambra-software-engineer) (Full Stack Engineer)
+- [Karl-Aksel Puulmann](/handbook/company/team#karlaksel-puulmann-software-engineer) (Full Stack Engineer)
 - Product: Supported by [Luke Harries](/handbook/company/team#luke-harries-head-of-product)
 - Product design: Supported by Cory Watilo
 - _Hiring for a [full stack engineer](/careers/full-stack-engineer)_
@@ -84,11 +85,10 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 #### [Pipeline](/handbook/small-teams/pipeline)
 - [Yakko Majuri](/handbook/company/team#yakko-majuri-software-engineer) (Full Stack Engineer)
 - [James Greenhill](/handbook/company/team#james-greenhill-software-engineer) (Data/Infra Engineer)
-- [Karl-Aksel Puulmann](/handbook/company/team#karlaksel-puulmann-software-engineer) (Full Stack Engineer)
 - [Harry Waye](/handbook/company/team#harry-waye-software-engineer) (Full Stack Engineer)
 - [Tiina Turban](/handbook/company/team#tiina-turban-software-engineer) (Full Stack Engineer)
+- [Xavier Vello](/handbook/company/team#xavier-vello-software-engineer) (Data Engineer)
 - _Incoming Senior Data Engineer_
-- _Hiring for a [full stack engineer](/careers/full-stack-engineer)_
 - Product: Supported by [Luke Harries](/handbook/company/team#luke-harries-head-of-product)
 - Product design: Supported by Cory Watilo
 
