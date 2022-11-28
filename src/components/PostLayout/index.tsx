@@ -95,7 +95,7 @@ export const ShareLinks = ({ title, href }: { title: string; href: string }) => 
                 <Facebook />
             </ShareLink>
             <ShareLink
-                url={`https://twitter.com/intent/tweet?url=${href}&text=Check%20out%20this%20article%20from%20%40poshog%0A%0A`}
+                url={`https://twitter.com/intent/tweet?url=${href}&text=Check%20out%20this%20article%20from%20%40posthog%0A%0A`}
             >
                 <Twitter className="w-[32px] h-[32px]" />
             </ShareLink>
@@ -117,7 +117,12 @@ export const ContributorImage = ({ image, name, className = '', imgClassName = '
     return (
         <div className={`w-[38px] h-[38px] relative rounded-full overflow-hidden ${className}`}>
             {gatsbyImage ? (
-                <GatsbyImage imgClassName={`rounded-full ${imgClassName}`} image={gatsbyImage} alt={name} />
+                <GatsbyImage
+                    imgClassName={`rounded-full ${imgClassName}`}
+                    image={gatsbyImage}
+                    alt={name}
+                    className="bg-gray-accent dark:bg-gray-accent-dark"
+                />
             ) : (
                 <svg width="38" height="38" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path

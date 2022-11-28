@@ -58,7 +58,7 @@ export const AboutInvestors = () => {
             <h3 className="text-5xl mb-1 text-center">Investors</h3>
             <h4 className="font-semibold opacity-70 text-center mb-12">
                 Thanks a million! <br className="lg:hidden" />
-                ($26 million, to be exact...)
+                ($27.125 million, to be exact...)
             </h4>
 
             <div className="grid grid-cols-2 lg:grid-cols-4 border-b border-r border-dashed border-gray-accent-light">

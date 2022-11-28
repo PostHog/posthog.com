@@ -406,19 +406,27 @@ Matomo is ideal for anyone who uses popular off-the-shelf content management sys
 
 ## Coming soon to PostHog
 
-We ship new features fast. Here's a quick snapshot of what we're working on right now:
+We ship weirdly fast. Here's a quick snapshot of what we're working on right now:
 
-- In-app setup guided tour
-- PostHog Cloud EU
-- Session Recordings DevTools
-- Turbo feature flags
-- Unified querying across events, persons, sessions, groups
-- Automated insight recommendations
-- Lightning fast querying at billion event and person scale
-- Extended insight visualizations
+- SOC 2 compliance
+- PostHog Customer Data Platform
+- See Users & Recordings linked to feature flags ([GitHub issue](https://github.com/PostHog/posthog/issues/12360))
+- Direct access to data via SQL ([GitHub issue](https://github.com/PostHog/posthog/issues/12352))
+- Universal search for people, recordings, cohorts, events, and groups ([GitHub issue](https://github.com/PostHog/posthog/issues/7963))
 
-Got a question? [Ask them here](/questions).
+And what we're considering working on next:
 
-You can read about how we work in the open in [our company handbook](/handbook/getting-started/start-here).
+- Feature flags platform for Android, iOS and Flutter
+- Mobile session recordings
+- Interlinking recordings and analytics
+- Session recording playlists
+
+You can view and vote on issues on [our public roadmap](/roadmap).
+
+You can also take a look at [recent issues](https://github.com/PostHog/posthog/issues) and [pull requests](https://github.com/PostHog/posthog/pulls) on the [PostHog repo](https://github.com/PostHog/posthog) to see what we're working on.
+
+At PostHog, nearly everything we do is done in the open. You can chat with our engineers directly in the [community Slack](/slack), or ask them questions on [any of our docs pages](/docs). 
+
+You can read all about how we work in our [company handbook](/handbook/getting-started/start-here).
 
 <ArrayCTA />

@@ -17,7 +17,7 @@ Currently, we are hiring for the following Engineering roles:
 
 Beyond the specific skills listed in the job description, we generally look for: 
 
-*   [DevRel at PostHog](https://posthog.com/handbook/growth/developer-relations) is undertaken with an ethos of empathy and collaboration. Any DevRel hire must clearly demonstrate this.
+*   DevRel at PostHog is undertaken with an ethos of empathy and collaboration. Any DevRel hire must clearly demonstrate this.
 *   Has built something from scratch, ideally with minimal outside help
     *   You may have been the founder of a startup, or built an impressive side project. You may have also worked on a project at work where you were the only developer. 
 *   Communication skills

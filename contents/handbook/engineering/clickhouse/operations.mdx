@@ -1,0 +1,226 @@
+---
+title: Operations
+---
+
+This document gives an overview of the kitchen side of ClickHouse: how various operations work,
+what tricky migrations we have experience with as well as various settings and tips.
+
+## Settings
+
+ClickHouse provides daunting amounts of configuration on all levels. This section provides
+information on the different kind of settings and how to configure them.
+
+### Query settings
+
+Query settings allow to manipulate the behavior of queries, for example setting limits on
+query execution time and resource usage or toggling specific behaviors on-and-off.
+
+Documentation:
+- [Settings](https://clickhouse.com/docs/en/operations/settings/settings)
+- [Restrictions on Query Complexity](https://clickhouse.com/docs/en/operations/settings/query-complexity/)
+
+Using query settings is done:
+- at query-time via ClickHouse client library arguments (preferred)
+- at query-time via explicit [`SETTINGS` clause in queries](https://clickhouse.com/docs/en/sql-reference/statements/select/)
+- via `users.xml` file to apply to all queries
+
+### Server settings
+
+Server settings allow tuning things like global thread or pool sizes, networking and other `clickhouse-server`-level configuration.
+
+Documentation:
+- [Server Settings](https://clickhouse.com/docs/en/operations/server-configuration-parameters/settings/)
+
+You can change server settings via `config.xml` file. **Note:** some settings may require a server restart.
+
+### MergeTree table settings
+
+MergeTree settings allow configuring things from primary index granularity to merge behavior to limits of usage of this table.
+
+Documentation:
+- [MergeTree tables settings](https://clickhouse.com/docs/en/operations/settings/merge-tree-settings/)
+- Undocumented settings can be found in [the source code](https://clickhouse.com/codebrowser/ClickHouse/src/Storages/MergeTree/MergeTreeSettings.h.html)
+
+MergeTree table settings are set either:
+- at table creation time
+- or via [`ALTER TABLE ... SETTING`](https://clickhouse.com/docs/en/sql-reference/statements/alter/setting) statement
+
+### Profiles and users
+
+ClickHouse allows creating different profiles and users with their own set of settings. This can
+be useful to grant read-only access to some users or otherwise limit resource use.
+
+Read more in documentation:
+- [Settings Profiles](https://clickhouse.com/docs/en/operations/settings/settings-profiles)
+- [Settings](https://clickhouse.com/docs/en/operations/settings/settings/)
+
+## Mutations
+
+`ALTER TABLE ... UPDATE` and `ALTER TABLE ... DELETE` operations which mutate data require ClickHouse to
+rewrite whole data via special merge operations. These are frequently expensive operations and require monitoring.
+
+You can monitor progress of mutations via the following system tables:
+- [`system.mutations`](https://clickhouse.com/docs/en/operations/system-tables/mutations/)
+- [`system.merges`](https://clickhouse.com/docs/en/operations/system-tables/merges) - see `is_mutation` column
+- [`system.replication_queue`](https://clickhouse.com/docs/en/operations/system-tables/replication_queue)
+
+When creating mutations, it's often wise to alter the value of [`mutations_sync` setting](https://clickhouse.com/docs/en/operations/settings/settings/#mutations_sync).
+
+Running mutations can be stopped by issuing a [`KILL MUTATION WHERE mutation_id = '...'`](https://clickhouse.com/docs/en/sql-reference/statements/kill/) statement.
+
+Note that this may not stop any currently running merges. To do so, check out [section on `SYSTEM STOP MERGES`](/handbook/engineering/clickhouse/operations#system-stop-merges)
+
+### GDPR
+
+When necessary to delete user data due to GDPR or otherwise, it's wise to do so in batches and asynchronously.
+
+At PostHog, when deleting user data, we schedule for all deletions to occur once per week to minimize the cost
+of rewriting data.
+
+In the future, [lightweight deletes](https://clickhouse.com/docs/en/sql-reference/statements/delete/) might simplify this process.
+
+## Merges
+
+[As explained previously](/handbook/engineering/clickhouse/data-storage#what-does-the-merge-stand-for), merges are the lifeblood
+of ClickHouse, responsible for optimizing how data is laid out on disk as well as for deduplicating data.
+
+Merges can be monitored via the following tables:
+- [`system.merges`](https://clickhouse.com/docs/en/operations/system-tables/merges)
+- [`system.replication_queue`](https://clickhouse.com/docs/en/operations/system-tables/replication_queue)
+
+### `OPTIMIZE TABLE`
+
+[`OPTIMIZE TABLE`] statement schedules merges for a table, optimizing the on-disk layout or speeding up queries or
+[forcing some schema changes into effect.](/handbook/engineering/clickhouse/operations#simple-schema-changes)
+
+**Note:** not all parts are guaranteed to be merged if the size of parts exceeds maximum limits or if data is already in a single part.
+In this case adding a `FINAL` modifier forces the merge regardless.
+
+### `SYSTEM STOP MERGES`
+
+[`SYSTEM STOP MERGES`](https://clickhouse.com/docs/en/sql-reference/statements/system/#stop-merges) statement can stop background merges
+from occurring temporarily for a table or the whole database. This can be useful during trickier schema migrations when copying data.
+
+Note unless ingestion is paused during this time, this can easily lead to `too many parts` errors.
+
+Merges can be resumed via [`SYSTEM START MERGES`](https://clickhouse.com/docs/en/sql-reference/statements/system/#start-merges) statement.
+
+### Important settings
+
+Merges have many relevant settings associated to be cognizant about:
+- [`parts_to_throw_insert`](https://clickhouse.com/docs/en/operations/settings/merge-tree-settings/#parts-to-throw-insert) controls when ClickHouse starts
+    when parts count gets high.
+- [max_bytes_to_merge_at_max_space_in_pool](https://clickhouse.com/docs/en/operations/settings/merge-tree-settings/#max-bytes-to-merge-at-max-space-in-pool) controls maximum part size
+- [`background_pool_size`](https://clickhouse.com/docs/en/operations/server-configuration-parameters/settings/#background_pool_size) (and related)
+    server settings control how many merges are executed in parallel
+- Undocumented `max_replicated_mutations_in_queue` and `max_replicated_merges_in_queue` settings control how many merges are processed at once
+
+## Simple schema changes
+
+As in any other database, schema changes are done via [`ALTER TABLE`](https://clickhouse.com/docs/en/sql-reference/statements/alter/) statements.
+
+One area where ClickHouse differs from other databases is that schema changes are generally lazy and apply to only new data or merged parts. This applies to:
+- Adding or removing columns, changing default values
+- Changing compression of columns
+- Updating table settings
+
+You can generally force these changes onto old data by forcing data to be merged via
+ [`OPTIMIZE TABLE FINAL`](https://clickhouse.com/docs/en/sql-reference/statements/optimize/)
+statement, but this can be expensive.
+
+## TTLs
+
+[ClickHouse TTLs](https://clickhouse.com/docs/en/sql-reference/statements/alter/ttl/) allow dropping old rows or columns after expiry.
+
+It's suggested to set up your table to partition by timestamp as well, so old files can be dropped completely instead of needing to be
+rewritten as a result of TTL.
+
+## Tricky schema changes
+
+Some schema changes are deceptively hard and frequently requires rewriting the whole table or re-creating
+the tables.
+
+Make sure to never re-use Zookeeper paths when re-creating replicated table!
+
+The difference often comes down to [how data is stored on disk](/handbook/engineering/clickhouse/data-storage) and its implications.
+
+### Async migrations
+
+At PostHog, we've developed Async Migrations for executing these long-running operations in the background without affecting availability.
+
+You can learn more about Async Migrations in our [blog](/blog/async-migrations), [handbook](/handbook/engineering/databases/async-migrations) and
+[runbook](/docs/runbook/async-migrations).
+
+### Pausing ingestion
+
+This is frequently a prerequisite of any large-scale schema change as new data may get lost when you are copying data from
+one place to another.
+
+If you're using [Kafka engine tables for ingestion](/handbook/engineering/clickhouse/data-ingestion#how-kafka-tables-work), you can pause
+ingestion by dropping materialized view(s) attached to Kafka engine tables.
+
+To restart ingestion, recreate the dropped table(s).
+
+### Changing table engines
+
+When changing table engines, you can leverage [`ALTER PARTITION`](https://clickhouse.com/docs/en/sql-reference/statements/alter/partition/)
+commands to move data between tables.
+
+**Note:** ALTER PARTITION commands only work if the two tables have identical structure: same columns and ORDER BY/PARTITION BY. It works by
+creating hard links between partitions, so the operation does not require any extra disk space until merges happen.
+
+Thus it's important to stop ingesting new data and merges during this operation.
+
+PostHog needed to implement this kind of operation to move to a sharded schema:
+[`0004_replicated_schema.py`](https://github.com/PostHog/posthog/blob/3573aa41941a152e57e0f23fba7a2d1e83a9a9af/posthog/async_migrations/migrations/0004_replicated_schema.py).
+
+### Changing `ORDER BY` or `PARTITION BY`
+
+Changing `ORDER BY` and `PARTITION BY` affects how data is stored on disk and requires rewriting this data.
+
+Suggested procedure if using `ReplacingMergeTree`:
+1. Create a new table with correct `ORDER BY`
+2. Create a new materialized view table, writing new data to new table.
+3. Copy data over from old table via [`INSERT INTO SELECT`](https://clickhouse.com/docs/en/sql-reference/statements/insert-into/#inserting-the-results-of-select)
+4. Deduplicate via `OPTIMIZE TABLE FINAL` if feasible.
+
+Note that INSERT-ing data this way may be slow or time out. Consider:
+- Dropping any materialized columns temporarily
+- Increasing query settings `max_execution_time`, `send_timeout`, `receive_timeout` timeouts to be large enough
+- Finding correct values for query settings `max_block_size`, `max_insert_block_size`, `max_threads`, `max_insert_threads`
+- Setting `optimize_on_insert` setting to `0`
+
+Note that this operation temporarily doubles the amount of disk space you need.
+
+An example (from PostHog) of an async migration: [0005_person_replacing_by_version.py](https://github.com/PostHog/posthog/blob/50deeae355af35b3512097ebdc592c9fadd84bb4/posthog/async_migrations/migrations/0005_person_replacing_by_version.py)
+
+### Resharding
+
+At PostHog, we've haven't had to reshard data (yet), but the process would look similar to changing `ORDER BY` or `PARTITION BY`, requiring either to pause data or deduplicate at the end.
+
+Storing/restoring parts of data from backups might also simplify this process.
+
+### Denormalizing columns via dictionaries
+
+A powerful tool in the arsenal of performance is de-normalization of data.
+
+At PostHog, we eliminated some JOINs for person data by storing information on person identities and properties directly on events.
+
+Backfilling this data was implemented via `ALTER TABLE UPDATE` populating new columns. The column data was pulled in
+[using dictionaries](https://clickhouse.com/docs/en/sql-reference/dictionaries/external-dictionaries/external-dicts/)
+which allowed to query and store data from other tables in memory during the update.
+
+An alternative approach might have been to create a new table and populate it similar to changing `ORDER BY`, but this
+would have required expensive deduplication, a lot of extra space and even more memory usage.
+
+Learn more on this:
+- [0007_persons_and_groups_on_events_backfill.py](https://github.com/PostHog/posthog/blob/7aaa6ef710daadc7e8324ffe62ea1f89ee96d199/posthog/async_migrations/migrations/0007_persons_and_groups_on_events_backfill.py)
+- [Altinity knowledge base: Column backfilling with alter/update using a dictionary](https://kb.altinity.com/altinity-kb-schema-design/backfill_column/)
+
+## Learn more
+
+More information for ClickHouse operations can be found in:
+- [Altinity knowledgebase](https://kb.altinity.com/)
+- [Tinybird knowledgebase](https://www.tinybird.co/clickhouse/knowledge-base/)
+
+Next in the ClickHouse manual: [Schema case studies](/handbook/engineering/clickhouse/schema)

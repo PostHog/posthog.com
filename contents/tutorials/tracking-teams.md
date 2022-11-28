@@ -5,7 +5,7 @@ showTitle: true
 author: ['yakko-majuri']
 date: 2021-04-08
 featuredImage: ../images/tutorials/banners/user-model.png
-topics: ['configuration']
+topics: ['configuration', 'group analytics']
 ---
 
 _Estimated reading time: 12 minutes_ ☕☕☕
@@ -254,5 +254,9 @@ We learned that:
 - We can use formulas to determine averages for more complex metrics that cannot use the native mathematical operations
 
 But, most importantly, we learned that while PostHog is built with certain frameworks in mind (such as the person-event model), given the flexibility of our API and metric-building capabilities, you are likely to find a way to track your product exactly how you want to.
+
+## Further reading
+- [The guide to frontend vs backend group analytics implementations](/tutorials/frontend-vs-backend-group-analytics)
+- [Analyzing user behavior with cohorts](/tutorials/cohorts)
 
 <NewsletterTutorial compact/>

@@ -23,53 +23,6 @@ module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, 
             value: replacePath(slug),
         })
 
-        // Create GitHub contributor nodes for handbook & docs
-        if (/^\/handbook|^\/docs|^\/manual/.test(slug) && process.env.GITHUB_API_KEY) {
-            const url = `https://api.github.com/repos/posthog/posthog.com/commits?path=/contents/${parent.relativePath}`
-            const res = await fetch(url, {
-                headers: {
-                    Authorization: `token ${process.env.GITHUB_API_KEY}`,
-                },
-            }).catch((err) => console.log(err))
-
-            if (res.status !== 200) {
-                console.error(`Got status code ${res.status}`)
-            }
-
-            let contributors = await res.json()
-            contributors = contributors.filter(
-                (contributor) => contributor && contributor.author && contributor.author.login
-            )
-
-            const contributorsNode = await Promise.all(
-                uniqBy(contributors, (contributor) => contributor.author.login).map(async (contributor) => {
-                    const { author } = contributor
-                    const imageUrl = author && author.avatar_url
-                    const fileNode =
-                        imageUrl &&
-                        (await createRemoteFileNode({
-                            url: imageUrl,
-                            parentNodeId: node.id,
-                            createNode,
-                            createNodeId,
-                            cache,
-                            store,
-                        }))
-                    return {
-                        avatar___NODE: fileNode && fileNode.id,
-                        url: author && author.html_url,
-                        username: author && author.login,
-                    }
-                })
-            )
-
-            createNodeField({
-                node,
-                name: `contributors`,
-                value: contributorsNode,
-            })
-        }
-
         if (/^\/docs\/apps/.test(slug) && node?.frontmatter?.github && process.env.GITHUB_API_KEY) {
             const { name, owner } = GitUrlParse(node.frontmatter.github)
 
@@ -117,7 +70,7 @@ module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, 
         }
     }
 
-    if (node.internal.type === 'Plugin' && node.url.includes('github.com')) {
+    if (node.internal.type === 'Plugin' && node.url.includes('github.com') && process.env.GITHUB_API_KEY) {
         const { name, owner } = GitUrlParse(node.url)
         const { download_url } = await fetch(`https://api.github.com/repos/${owner}/${name}/readme`, {
             headers: {

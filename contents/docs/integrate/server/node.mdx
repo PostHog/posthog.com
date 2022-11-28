@@ -55,7 +55,7 @@ You can find your key in the 'Project Settings' page in PostHog.
 |       `personalApiKey`        | An optional [personal API key](/docs/api/overview#personal-api-keys-recommended) for evaluating feature flags locally |           `null`           |
 | `featureFlagsPollingInterval` | Interval in milliseconds specifying how often feature flags should be fetched from the PostHog API       |          `300000`          |
 
-> **Note:** When using PostHog in an AWS Lambda function or a similar serverless function environment, make sure you set `flushAt` and `flushInterval` to `0`.
+> **Note:** When using PostHog in an AWS Lambda function or a similar serverless function environment, make sure you set `flushAt` to `1` and `flushInterval` to `0`.
 
 ## Making calls
 

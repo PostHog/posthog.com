@@ -198,7 +198,7 @@ export default function Hero() {
                     PostHog is the single platform that can replace an entire suite of tools you’re already paying for.
                 </p>
                 <div className="flex space-x-3 items-center justify-center">
-                    <CallToAction to="/signup" type="primary">
+                    <CallToAction to="https://app.posthog.com/signup" type="primary">
                         Get started - free
                     </CallToAction>
                     <CallToAction to="/pricing" type="secondary">

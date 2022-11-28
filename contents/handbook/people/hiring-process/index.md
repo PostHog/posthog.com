@@ -10,13 +10,24 @@ hideAnchor: true
 
 Our goal is to build a [diverse](/handbook/company/diversity), world-class team that allows us to act and iterate fast, with a high level of [autonomy and innovation](/handbook/company/small-teams).
 
+Our recruitment strategy is to run:
+- **100% inbound by default** - effectively a word of mouth strategy, like our marketing and sales model.
+- Supplement this with **occasional, targeted sourcing** to increase the pool of diverse candidates (if needed).
+
+This has resulted in the highest number of qualified and motivated candidates reaching final stages with us compared to other methods, such as more generic sourcing. As a result, we invest most of our energy in:
+
+- Writing exceptional job descriptions, and re-writing them frequently
+- Ensuring our careers page and application experience are world class
+- Sharing our roles within our networks for exposure in unusual ways (as candidates are likely to be pre-qualified)
+- Giving candidates genuinely useful and direct feedback if they weren't successful with us
+- Running a smooth and incredibly slick recruitment process, from application to offer
+
 ## Hiring Process
 
 ### Summary of process for current live roles
 
 | **Position title**        | **Location we're happy to hire in** | **Small Team**        | **Manager** | **Interview Process**                                                                                                                          | **SuperDay Task**              |
 |---------------------------|----------------------------------------|-----------------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|
-| Full Stack Engineer     | GMT -5:00 to +2:00                   | Product Analytics       | Marius    | 1) Culture Screen - Coua<br/> 2) Technical Screen - Marius<br/> 3) Engineering Culture Screen - Tim<br/> 3) SuperDay Assessment - Marius, Michael, Paul, Tim & James H.              | Live Task (link not available) |
 | Full Stack Engineer       | GMT -5:00 to +2:00                   | Experimentation  | Eric | 1) Culture Screen - Coua<br/> 2) Technical Screen - Eric<br/> 3) Engineering Culture Screen - Tim<br/> 4) SuperDay Assessment - Eric, Li, Neil, Tim & James H. | Live Task (link not available) |
 
 Tasks are only available internally - please do not share these publicly. 
@@ -60,7 +71,7 @@ As we keep iterating on our specs, the best approach is to copy our most recentl
 - Run the text through a [gender decoder tool](https://gender-decoder.katmatfield.com/) to check for unconscious bias
 - Don't use specific years of experience as a qualifier
 
-Once the hiring manager has signed off on the spec, we will publish it on Ashby - [instructions on how to do this are here](/engineering/posthog-com/jobs). 
+Once the hiring manager has signed off on the spec, we will publish it on Ashby - [instructions on how to do this are here](/handbook/engineering/posthog-com/jobs). 
 
 
 #### Job boards

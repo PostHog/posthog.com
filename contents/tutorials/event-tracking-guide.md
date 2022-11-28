@@ -5,7 +5,7 @@ showTitle: true
 author: ['ian-vanagas', 'yakko-majuri']
 date: 2022-09-23
 featuredImage: ../images/tutorials/banners/actions.png
-topics: ['actions']
+topics: ['actions', 'events']
 ---
 
 - **Level:** Medium 🦔🦔
@@ -294,7 +294,7 @@ Actions can be created by using the PostHog [toolbar to tag relevant elements](h
 
 ## What’s next?
 
-Now that you set up autocapture, high-quality custom events, and actions, what’s next? If your product is being used (we hope it is), you’ll be getting a flow of data into your PostHog instance. You can continue to expand the capturing and formatting of that data or you can begin to analyze it.
+Now that you have set up autocapture, high-quality custom events, and actions, what’s next? If your product is being used (we hope it is), you’ll be getting a flow of data into your PostHog instance. You can continue to expand the capturing and formatting of that data or you can begin to analyze it. Check out our [recommended next steps after installing PostHog](/tutorials/next-steps-after-installing).
 
 If you are looking for more options to where to send your events from that aren’t covered by our client- and server-side libraries (or autocapture), you can check out our [API](https://posthog.com/docs/api).
 
