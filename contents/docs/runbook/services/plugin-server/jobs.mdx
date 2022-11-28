@@ -13,9 +13,9 @@ Jobs are an important functionality of PostHog apps / plugins. Among other thing
 In order to debug jobs not working properly, it's important to understand the following:
 
 1. Jobs can be **triggered** from plugin servers with **any capability**
-2. Jobs can only be **procesed** from plugin servers with the **jobs capability**
+2. Jobs can only be **processed** from plugin servers with the **jobs capability**
 
-In our Cloud environments, plugin server capabilties can be inferred from deployment names. To debug the jobs processing pipeline, you'll be looking at the `plugins-jobs-xxxxx` pods.
+In our Cloud environments, plugin server capabilities can be inferred from deployment names. To debug the jobs processing pipeline, you'll be looking at the `plugins-jobs-xxxxx` pods.
 
 It's also important to know that in our Cloud environments, jobs are **not stored in our main Postgres database**. Rather, we store them in a separate RDS instance that is used only for jobs.
 
@@ -23,7 +23,7 @@ The jobs pipeline works as follows:
 
 1. Enqueue job into `jobs` Kafka topic from any plugin server instance
 2. Plugin server with jobs capability consumes from Kafka and persists the job in the jobs database (via Graphile Worker)
-3. The Graphile Worker in a plugin server instance with the jobs capability pulls the jobs from the jobs databas when it's time, runs them, and deletes them from the database
+3. The Graphile Worker in a plugin server instance with the jobs capability pulls the jobs from the jobs database when it's time, runs them, and deletes them from the database
 
 ## Debugging
 

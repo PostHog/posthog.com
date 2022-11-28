@@ -10,7 +10,7 @@ showTitle: true
 
 Team Pipeline has committed to processing "standard" events end-to-end within 30 seconds (p95) and "buffered" events within 1m30s (p95). 
 
-It's important for customers that their data is queriable soon after being sent so they can debug their implementation and get the feeling that PostHog is working correctly.
+It's important for customers that their data is queryable soon after being sent so they can debug their implementation and get the feeling that PostHog is working correctly.
 
 To calculate how we're doing with respect to our commitment, we have a Celery task that every 60 seconds calculates lag based on an event that we emit every minute from a plugin. 
 
