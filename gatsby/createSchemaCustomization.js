@@ -138,9 +138,14 @@ module.exports = exports.createSchemaCustomization = async ({ actions, schema })
     }
     type AshbyJobPostingFormDefFieldsSectionsFieldsField {
       type: String,
-        title: String,
-        isNullable: Boolean,
-        path: String
+      title: String,
+      isNullable: Boolean,
+      path: String
+      selectableValues: [AshbyJobPostingSelectableValue!]
+    }
+    type AshbyJobPostingSelectableValue {
+      label: String!
+      value: String!
     }
     type AshbyJobPostingFormDefFieldsSectionsFields {
       descriptionPlain: String,
@@ -149,7 +154,6 @@ module.exports = exports.createSchemaCustomization = async ({ actions, schema })
     }
     type AshbyJobPostingFormDefFieldsSections {
       fields: [AshbyJobPostingFormDefFieldsSectionsFields]
-        
     }
     type AshbyJobPostingFormDef {
       sections: [AshbyJobPostingFormDefFieldsSections]
