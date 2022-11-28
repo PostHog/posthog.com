@@ -1,6 +1,7 @@
 import { MDXProvider } from '@mdx-js/react'
 import { BorderWrapper } from 'components/BorderWrapper'
 import Breadcrumbs from 'components/Breadcrumbs'
+import { Caption } from 'components/Caption'
 import { FloatedImage } from 'components/FloatedImage'
 import { ImageBlock } from 'components/ImageBlock'
 import Layout from 'components/Layout'
@@ -17,6 +18,7 @@ const A = (props) => <Link {...props} className="text-red hover:text-red font-se
 const components = {
     ...shortcodes,
     BorderWrapper,
+    Caption,
     ImageBlock,
     FloatedImage,
     a: A,

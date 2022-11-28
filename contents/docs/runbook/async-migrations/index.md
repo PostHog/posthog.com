@@ -111,7 +111,9 @@ The table below lists out recommended PostHog app and chart versions to use for 
 | 0002            | 1.33.0          | 16.1.0        |        |
 | 0003            | 1.33.0          | 16.1.0        |        |
 | 0004            | 1.36.1          | 26.0.0        | Run the async migration right after upgrading as there could be problems with ingestion otherwise | 
-
+| 0005            | 1.41.4          | 29.0.4        |        |
+| 0006            | 1.41.4          | 29.0.4        |        |
+| 0007            | 1.41.4          | 29.0.4        | Completing this migration enables person on events. Further information: https://posthog.com/blog/persons-on-events |
 
 #### Upgrading hobby deployment to a specific version
 

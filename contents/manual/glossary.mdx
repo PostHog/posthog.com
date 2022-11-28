@@ -11,7 +11,7 @@ PostHog is an incredibly broad platform, with many distinct features and tools. 
 ## A
 
 #### Action 🦔
-Actions in PostHog are a way to organize [events](manual/glossary#event) into a different format. In their simplest form actions consist of one or more events which have been given a new name - usually a descriptive title, such as 'Viewed Glossary Page`. [Find out more about actions in PostHog](/manual/actions). 
+Actions in PostHog are a way to organize [events](/manual/glossary#event) into a different format. In their simplest form actions consist of one or more events which have been given a new name - usually a descriptive title, such as 'Viewed Glossary Page`. [Find out more about actions in PostHog](/manual/actions). 
 
 #### Active user
 Active users are the people who currently use your product. A user who becomes inactive may have [churned](/manual/glossary#churn).
@@ -23,7 +23,7 @@ A related user account. In PostHog, aliases can be used to connect two user acco
 Annotations are short text notes you can apply to your data to help you understand context at a later point, or to signal important context to others. A common use for annotations it to add them shared charts and mark important events, such as feature releases or new marketing activiity. [Find out more about annotations in PostHog](/manual/annotations). 
 
 #### App 🦔
-Apps are additional features or functionality built on top of PostHog. They are commonly used to integrate PostHog with other platforms, modify events or enhance PostHog's functionality. Apps may be built by the PostHog team, or by the community. You can [browse the app library](/apps) to see what's available, or [find out more in the docs](/docs/apps). 
+Apps are additional features or functionality built on top of PostHog. They are commonly used to integrate PostHog with other platforms, modify events or enhance PostHog's functionality. Apps may be built by the PostHog team, or by the community. You can [browse the app library](/apps) to see what's available, or [find out more in the docs](/docs/apps). Formerly known as plugins. 
 
 #### App chain 🦔
 In PostHog, the output of one app can impact the actions of the next app to create a chain. This makes it crucial to understand the order in which apps run. [Find out more about app chains in the docs](/docs/apps/build). 
@@ -72,7 +72,7 @@ Cohorts are groups of users in PostHog, created using the Cohorts tool. Cohorts 
 As an [open source](/manual/glossary#open-source) company, PostHog enables anyone to add to our codebase or to submit ideas, either as [issues](/manual/glossary#issue) or [PRs](/manual/glossary#pull-request). When someone does this, they become a contributor and can earn rewards such as [merch](https://merch.posthog.com/collections/all), invitations and public thank yous. Sometimes, they even [get hired](/careers). We love our contributors - [check them out](/handbook/company/team#contributors)!
 
 #### Conversion
-Conversion is when a user of your product changes into a new, usually more desirable, state. For example, converting from a lead into an [active user](/manual/glossary#active-user). You can use tools such as [funnels](manual/funnels) to track users who convert between states. 
+Conversion is when a user of your product changes into a new, usually more desirable, state. For example, converting from a lead into an [active user](/manual/glossary#active-user). You can use tools such as [funnels](/manual/funnels) to track users who convert between states. 
 
 #### Compliance
 The act of complying with laws or regulations such as [HIPAA](/manual/glossary#HIPAA) or [GDPR](](/manual/glossary#GDPR). [Find out more about how to use PostHog in compliance with common regulations](/docs/privacy).
@@ -199,7 +199,7 @@ Marketing Qualified Lead. A person who has indicated interest in a product based
 Monthly Recurring Revenue - basically how much revenue you expect to make each month. 
 
 #### Multivariate test
-An [A/B test](/manual/glossary#a/b-test) which runs with more than two possible variants. You can run multivariate tests in PostHog using the [experimentation suite](/manual/experiments).
+An [A/B test](/manual/glossary#a/b-test) which runs with more than two possible variants. You can run multivariate tests in PostHog using the [experimentation suite](/manual/experimentation).
 
 #### MVP
 Minimum Viable Product. In other words, the simplest (and usually cheapest and fastest) version of something which you can build to test an idea. We build a _lot_ of MVPs. 
@@ -231,17 +231,20 @@ In PostHog, a path is a visualization of a users' activity achieved using the [p
 #### Persons 🦔
 In PostHog, persons are used to aggregate the behaviour of an individual user, whether or not that user has been identified. [Find out more about Persons on PostHog](/manual/persons). 
 
+#### PHI
+Personal Health Information. Regulations such as [HIPAA](/manual/glossary#hipaa) require that any information about an individual's health must be processed and store in accordance with law. 
+
 #### PII
 Personal Identifying Information. Under some regulations, such as [HIPAA](/manual/glossary#HIPAA), any information which can be used to identify a user - such as their birthday, ethnicity, or address - must be processed in accordance with law.
 
 #### Pipeline
 A managed stream of data connecting data creation, modification, storage, and access.
 
-#### PHI
-Personal Health Information. Regulations such as [HIPAA](/manual/glossary#hipaa) require that any information about an individual's health must be processed and store in accordance with law. 
-
 #### Pivot
 A rapid change in company direction. [One of our favourite hobbies](/blog/story-about-pivots). 
+
+#### Plugin
+A way of adding extra functionality to PostHog, or integrating with other systems. We don't call them plugins anymore, though. We call them apps. 
 
 #### PQL
 Product Qualified Lead. A PQL is a user who has expressed interest in your product based on actions which can be attributed to the product, such as completing a free trial or having experienced the direct value of the product.
@@ -280,7 +283,7 @@ In PostHog's [lifecycle insight](/manual/lifecycle) a returning user is one who 
 ## S 
 
 #### SAML
-Security Assertion Markup Language is a system which enables users to login to multiple systems with one set of credentials. [Find out more about SAML on PostHog](/manual/SSO). 
+Security Assertion Markup Language is a system which enables users to login to multiple systems with one set of credentials. [Find out more about SAML on PostHog](/manual/sso). 
 
 #### SDK
 Software development kit. Tools for building and using a software platform. [PostHog has many SDKs available](/docs/integrate).
@@ -298,7 +301,7 @@ A period of time when users are [engaged](/manual/glossary#engagement) and inter
 Structured Query Language (pronounced "sequel"). A programming language for designing, building, and querying relational database management systems.
 
 #### SSO 
-Single Sign-on is a system which enables users to login to a system (such as PostHog) using their access to another system (such as Google Workspace) as their credentials. [Find out more about SAML on PostHog](/manual/SSO).
+Single Sign-on is a system which enables users to login to a system (such as PostHog) using their access to another system (such as Google Workspace) as their credentials. [Find out more about SAML on PostHog](/manual/sso).
 
 #### Stickiness 🦔
 In PostHog, a stickiness insight enables you to see how many times users perform an action within a set period of time. [Find out more about measuring stickiness with PostHog](/manual/stickiness). 

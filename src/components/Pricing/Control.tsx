@@ -22,8 +22,11 @@ import { useActions, useValues } from 'kea'
 import { TrackedCTA } from 'components/CallToAction'
 import Enterprise from 'components/Pricing/Modals/Enterprise'
 import { pricingSliderLogic } from 'components/Pricing/PricingSlider/pricingSliderLogic'
-import { prettyInt, sliderCurve } from 'components/Pricing/PricingSlider/LogSlider'
+import { LogSlider, prettyInt, sliderCurve } from 'components/Pricing/PricingSlider/LogSlider'
 import { pricing, pricingLabels } from 'components/Pricing/constants'
+import { ProductIcons } from '../ProductIcons/ProductIcons'
+import { NotProductIcons } from '../NotProductIcons/NotProductIcons'
+import Breakdown from './Breakdown'
 
 const Benefit = ({ children }) => {
     return (
@@ -51,33 +54,40 @@ const Check = () => {
 
 export const section = cntl`
     max-w-6xl
+    xl:max-w-7xl
     mx-auto
     px-4
-    md:px-0
 `
 
-const Breakdown = ({ planName }) => {
-    const breakdown = pricing[planName]
-    return breakdown.map((price, index) => {
-        const label = pricingLabels[price[0]]
-        const included = price[1] === 0
-        return (
-            <>
-                <div className="col-span-2">{label || '100 million - 1 billion'}</div>
-                <strong className="text-right">
-                    {included ? (
-                        'Included'
-                    ) : (
-                        <>
-                            {price[1]}
-                            <span className="font-normal text-black/50">/event</span>
-                        </>
-                    )}
-                </strong>
-            </>
-        )
-    })
-}
+export const gridCell = cntl`
+    bg-white
+    flex 
+    flex-col 
+    px-4
+    xl:px-8
+    shadow-xl 
+`
+
+export const gridCellTop = cntl`
+    bg-white/40
+    rounded-t-md
+    pt-4 
+    xl:pt-8 
+`
+
+export const gridCellMid = cntl`
+    pt-4
+    xl:pt-6
+    pb-8 
+`
+
+export const gridCellBottom = cntl`
+    mb-12 
+    lg:mb-0 
+    pb-4
+    xl:pb-8
+    rounded-b-md
+`
 
 const Button = ({
     onClick,
@@ -137,10 +147,20 @@ const Control = (): JSX.Element => {
     const [enterpriseModalOpen, setEnterpriseModalOpen] = useState(false)
     const [whyCloudOpen, setWhyCloudOpen] = useState(false)
     const builderRef = useRef<HTMLDivElement>()
-    const { cloudCost, selfHostedCost, cloudEnterpriseCost, selfHostedEnterpriseCost, sliderValue } =
-        useValues(pricingSliderLogic)
+    const {
+        cloudCost,
+        selfHostedCost,
+        cloudEnterpriseCost,
+        selfHostedEnterpriseCost,
+        sessionRecordingCost,
+        sliderValue,
+        sessionRecordingSliderValue,
+        monthlyTotal,
+        sessionRecordingEventNumber,
+        eventNumber,
+    } = useValues(pricingSliderLogic)
     const [enterpriseMode, setEnterpriseMode] = useState(false)
-    const { setPricingOption } = useActions(pricingSliderLogic)
+    const { setPricingOption, setSessionRecordingSliderValue, setSliderValue } = useActions(pricingSliderLogic)
 
     const handleEnterpriseModeChange = (checked: boolean) => {
         setPricingOption(checked ? 'cloud-enterprise' : 'cloud')
@@ -154,6 +174,10 @@ const Control = (): JSX.Element => {
     useEffect(() => {
         if (showPlanBuilder) builderRef.current?.scrollIntoView({ behavior: 'smooth' })
     }, [showPlanBuilder])
+
+    useEffect(() => {
+        setSliderValue(13.815510557964274)
+    }, [])
 
     return (
         <Layout>
@@ -170,236 +194,259 @@ const Control = (): JSX.Element => {
                         <StaticImage
                             alt="The cutest hedgehog you've ever seen driving a red tractor"
                             src="./images/tractor-hog.png"
-                            className="lg:-mt-4 xl:-mt-12 max-w-screen-sm"
+                            className="max-w-screen-sm"
                             loading="eager"
                             placeholder="none"
                         />
                     </div>
-                    <div className="lg:order-1">
+                    <div className="lg:order-1 mb-12">
+                        <p className="font-semibold opacity-60 mb-4">Self-hosted or PostHog Cloud (US or EU)</p>
                         <h1 className="text-3xl sm:text-4xl md:text-5xl mt-0 mb-2">
-                            Pay per tracked event.
-                            <br />
-                            Get the whole hog.
+                            Get the whole hog. <br />
+                            <span className="text-red">Only pay for what you use.</span>
                         </h1>
-                        <h3 className="text-xl text-black/50 font-bold">
-                            Your first 1 million events are free. <span className="text-blue">Every month.</span>
-                        </h3>
+                        <p className="text-lg font-semibold opacity-60">
+                            After a generous monthly free tier, pricing scales with usage.
+                        </p>
+
+                        <TrackedCTA
+                            event={{
+                                name: `clicked Get started - free`,
+                                type: enterpriseMode ? 'cloud-enterprise' : 'cloud',
+                            }}
+                            type="primary"
+                            width="full lg:w-auto"
+                            className="shadow-md"
+                            to={
+                                enterpriseMode
+                                    ? 'https://posthog.com/signup/cloud/enterprise'
+                                    : 'https://app.posthog.com/signup'
+                            }
+                        >
+                            {enterpriseMode ? 'Get in touch' : 'Get started - free'}
+                        </TrackedCTA>
                     </div>
                 </div>
             </section>
 
-            <section className="border-dashed border-gray-accent-light border-t border-b mb-8 hidden md:block">
-                <div className="max-w-6xl mx-auto flex items-center md:px-4">
-                    <p className="font-semibold text-sm text-black/50 text-right m-0">
-                        One price, <br />
-                        full product suite:
-                    </p>
-                    <ProductPillars />
+            <section className={`${section}`}>
+                <h4 className="mb-0">Products</h4>
+                <p className="text-[15px] opacity-60 pb-2 mb-8 border-b border-dashed border-gray-accent-light">
+                    The Product OS suite ships with all products. You can disable billing for products you don't need.
+                </p>
+
+                <div className="grid lg:grid-cols-3 grid-rows-[max-content_max-content_1fr] lg:gap-x-6 mb-12">
+                    <header className={`${gridCell} ${gridCellTop}`}>
+                        <span className="w-9 h-9 flex mb-1">{ProductIcons.analytics}</span>
+                        <h3 className="text-lg mb-0 pb-0">Product analytics + data stack</h3>
+                        <p className="text-[15px] opacity-75 leading-tight mb-0 font-semibold">
+                            Trends, funnels, path analysis + more
+                        </p>
+                        <p className="text-sm opacity-60 leading-tight pb-0">
+                            with event autocapture, pipelines, data warehouse, APIs
+                        </p>
+                    </header>
+
+                    <div className={`${gridCell} ${gridCellMid} lg:order-4`}>
+                        <p className="opacity-60 mb-0 text-sm">Pricing</p>
+                        <p className="mb-0">
+                            <span className="font-bold text-lg">$0.00045</span>
+                            <span className="text-sm opacity-60">/event</span>
+                        </p>
+                        <p className="text-sm opacity-70 mb-0 font-semibold">First 1 million events/mo free</p>
+                    </div>
+
+                    <div className={`${gridCell} ${gridCellBottom} lg:order-7`}>
+                        <Breakdown priceLength={8} pricingOption="cloud" />
+                    </div>
+
+                    <header className={`${gridCell} ${gridCellTop} lg:order-2`}>
+                        <span className="w-9 h-9 flex mb-1">{ProductIcons.sessionRecording}</span>
+                        <h3 className="text-lg mb-0 pb-0">Session recording</h3>
+                        <p className="text-[15px] opacity-75 leading-tight mb-0 font-semibold">
+                            Watch people using your product and website
+                        </p>
+                        <p className="text-sm opacity-60 leading-tight pb-0">
+                            with console logs and behaviorial bucketing
+                        </p>
+                    </header>
+
+                    <div className={`${gridCell} ${gridCellMid} lg:order-5`}>
+                        <p className="opacity-60 mb-0 text-sm">Pricing</p>
+                        <p className="mb-0">
+                            <span className="font-bold text-lg">$0.0050</span>
+                            <span className="text-sm opacity-60">/recording</span>
+                        </p>
+                        <p className="text-sm opacity-70 mb-0 font-semibold">First 15,000 recordings/mo free</p>
+                    </div>
+
+                    <div className={`${gridCell} ${gridCellBottom} lg:order-8`}>
+                        <Breakdown priceLength={6} pricingOption="session-recording" />
+                    </div>
+
+                    <header className={`${gridCell} ${gridCellTop} pb-4 lg:pb-0 lg:order-3`}>
+                        <span className="w-9 h-9 flex mb-1">{ProductIcons.experiments}</span>
+                        <h3 className="text-lg mb-0 pb-0">Feature flags + experiments</h3>
+                        <p className="text-[15px] opacity-75 leading-tight font-semibold mb-0">
+                            Multivariate flags, user targeting/exclusions, secondary goals
+                        </p>
+                    </header>
+
+                    <div className={`${gridCell} ${gridCellMid} lg:order-6`}>
+                        <p className="opacity-60 mb-0 text-sm">Pricing</p>
+                        <p className="mb-0">
+                            <span className="font-bold text-lg">Free</span>
+                        </p>
+                        <p className="text-xs opacity-50 mb-0 font-semibold">
+                            We may charge for additional features in the future
+                        </p>
+                    </div>
+
+                    <div className={`${gridCell} ${gridCellBottom} lg:order-9`}>
+                        {/* feature flags pricing breakdown (empty for now) */}
+                    </div>
                 </div>
             </section>
 
-            <section className="flex flex-col md:flex-row gap-12 px-4 max-w-6xl mx-auto items-start">
-                <div className="grow grid md:grid-cols-2 md:grid-rows-[1fr_max-content] gap-x-8 col-span-2">
-                    <div className="order-1 bg-white px-8 pt-8 border-l-3 border-t-3 border-r-3 border-red border-solid rounded-tl rounded-tr shadow-xl relative pb-2 ">
-                        <div className="mb-4">
-                            <CloudIcon className="opacity-30 mb-3" />
-                            <h2 className="text-xl mb-1 flex items-center">
-                                {enterpriseMode ? (
-                                    ' PostHog Enterprise Cloud'
-                                ) : (
-                                    <>
-                                        PostHog Cloud{' '}
-                                        <span className="absolute -top-[3px] right-3 bg-red inline-flex text-sm px-3 py-2 rounded-[3px] font-semibold ml-2 space-x-1">
-                                            <span className="text-white font-bold">Recommended</span>
-                                            <button onClick={() => setWhyCloudOpen(true)} className="text-white">
-                                                <Info />
-                                            </button>
-                                        </span>
-                                    </>
-                                )}
-                            </h2>
-                            <p className="mb-2 text-sm text-black/50 leading-tight">
-                                SaaS solution managed by the PostHog core team
-                            </p>
-                        </div>
+            <section className={`${section} mb-12`}>
+                <div className="bg-black rounded-md flex flex-col lg:items-center lg:flex-row justify-between p-8">
+                    <h3 className="text-white mb-4 lg:mb-0 pb-0 leading-none">
+                        Try PostHog free. Cloud or self-hosted.
+                    </h3>
+                    <aside>
+                        <TrackedCTA
+                            event={{
+                                name: `clicked Get started - free`,
+                                type: enterpriseMode ? 'cloud-enterprise' : 'cloud',
+                            }}
+                            type="primary"
+                            width="full lg:w-auto"
+                            className="shadow-md"
+                            to={
+                                enterpriseMode
+                                    ? 'https://posthog.com/signup/cloud/enterprise'
+                                    : 'https://app.posthog.com/signup'
+                            }
+                        >
+                            {enterpriseMode ? 'Get in touch' : 'Get started - free'}
+                        </TrackedCTA>
+                    </aside>
+                </div>
+            </section>
 
-                        <ul className="list-none p-0 m-0 grid gap-y-2">
-                            <Benefit>Full product suite</Benefit>
-                            <Benefit>Hosted & managed by PostHog</Benefit>
-                            <Benefit>Always get the latest features</Benefit>
-                        </ul>
-                    </div>
+            <section className={`${section} mb-12`}>
+                <div className="grid lg:grid-cols-3 gap-8 xl:gap-12">
+                    <div className="col-span-2">
+                        <h4 className="mb-3">Pricing calculator</h4>
 
-                    <div className="order-3 md:order-2 bg-white px-8 pt-8 pb-2 rounded-md shadow-xl">
-                        <div className="mb-4">
-                            <SelfHostIcon className="opacity-30 mb-3" />
-                            <h2 className="text-xl mb-1 flex items-center">
-                                {enterpriseMode ? 'Self-hosted Enterprise' : 'Self-hosted'}
-                            </h2>
-                            <p className="mb-2 text-sm text-black/50 leading-tight">
-                                Customer data never leaves your infrastructure
-                            </p>
-                        </div>
-
-                        <ul className="list-none p-0 m-0 grid gap-y-2">
-                            <Benefit>Full feature set of PostHog Cloud but on your infrastructure</Benefit>
-                            <Benefit>Full access to your production instance</Benefit>
-                            <Benefit>Paid deployment support available in the PostHog partner directory</Benefit>
-                        </ul>
-                    </div>
-
-                    <div className="order-2 relative mb-8 md:mb-0 md:order-3 bg-white px-8 pb-8 border-l-3 border-b-3 border-r-3 border-red border-solid rounded-bl rounded-br shadow-xl">
-                        <div className="border-t border-dashed border-gray-accent flex justify-between pt-2 mt-4">
-                            <div className="flex flex-col">
-                                <strong className="text-[16px]">Monthly estimate</strong>
-                                <span className="text-sm text-black/60">
-                                    for {sliderValue ? prettyInt(sliderCurve(sliderValue)) : '1,000,000'} events/mo
-                                </span>
+                        <div className="rounded-md bg-gray-accent-light grid grid-cols-4">
+                            <div className="font-semibold opacity-70 text-sm border-b border-dashed border-gray-accent-light col-span-3 px-4 py-2">
+                                Product
                             </div>
-                            <div>
-                                <strong className="text-[18px] text-black">
-                                    ${prettyInt(enterpriseMode ? cloudEnterpriseCost : cloudCost)}
-                                </strong>
-                                <span className="text-sm text-black/60">/mo</span>
+                            <div className="font-semibold opacity-70 text-sm border-b border-dashed border-gray-accent-light px-4 py-2 text-center">
+                                Subtotal
                             </div>
-                        </div>
 
-                        <div className="mt-4">
-                            <TrackedCTA
-                                event={{
-                                    name: `clicked Get started - free`,
-                                    type: enterpriseMode ? 'cloud-enterprise' : 'cloud',
-                                }}
-                                type="primary"
-                                width="full"
-                                className="shadow-md"
-                                to={
-                                    enterpriseMode
-                                        ? 'https://posthog.com/signup/cloud/enterprise'
-                                        : 'https://app.posthog.com/signup'
-                                }
-                            >
-                                {enterpriseMode ? 'Get in touch' : 'Get started - free'}
-                            </TrackedCTA>
-                        </div>
-                    </div>
-
-                    <div className="order-4 bg-white px-8 pb-8 rounded-bl rounded-br shadow-xl">
-                        <div className="border-t border-dashed border-gray-accent flex justify-between pt-2 mt-4">
-                            <div className="flex flex-col">
-                                <strong className="text-[16px]">Monthly estimate</strong>
-                                <span className="text-sm text-black/60">
-                                    for {sliderValue ? prettyInt(sliderCurve(sliderValue)) : '1,000,000'} events/mo
-                                </span>
-                            </div>
-                            <div>
-                                <strong className="text-[18px] text-black">
-                                    ${prettyInt(enterpriseMode ? selfHostedEnterpriseCost : selfHostedCost)}
-                                </strong>
-                                <span className="text-sm text-black/60">/mo</span>
-                            </div>
-                        </div>
-
-                        <div className="mt-4">
-                            <TrackedCTA
-                                event={{
-                                    name: `clicked Get started - free`,
-                                    type: enterpriseMode ? 'self-hosted-enterprise' : 'self-hosted',
-                                }}
-                                type="primary"
-                                width="full"
-                                className="shadow-md"
-                                to={
-                                    enterpriseMode
-                                        ? 'https://license.posthog.com/?price_id=price_1L1AeWEuIatRXSdzj0Y5ioOU'
-                                        : 'https://license.posthog.com/'
-                                }
-                            >
-                                Get started - free
-                            </TrackedCTA>
-                        </div>
-                    </div>
-                    <div className="md:col-span-2 mt-8 order-5">
-                        <div className="mx-auto flex justify-center space-x-8 pb-4 mb-6 border-b border-dashed border-gray-accent-light">
-                            <Link
-                                to="/book-a-demo"
-                                className="text-[15px] group font-semibold text-blue py-2 px-3 rounded-sm hover:text-blue hover:bg-blue/10 flex space-x-2 items-center"
-                            >
-                                <svg
-                                    width="24"
-                                    height="17"
-                                    viewBox="0 0 24 17"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="text-black/30 group-hover:text-blue"
-                                >
-                                    <path
-                                        d="M3.105 0.499996C2.21906 0.499996 1.5 1.22 1.5 2.105V13.9999H0V15.4558C0 16.308 0.691872 16.9999 1.54406 16.9999H22.3182C23.2473 16.9999 24.0001 16.2471 24.0001 15.318V13.9999H22.5001V2.05244C22.5001 1.19744 21.8026 0.499924 20.9476 0.499924L3.105 0.499996ZM3.105 2L20.9999 2.0525V13.9999H13.4737C13.4662 14.8249 12.7912 15.4999 11.9653 15.4999C11.1375 15.4999 10.4625 14.8268 10.4568 13.9999H3.00002V2.10506C3.00002 2.04693 3.0469 2.00006 3.10502 2.00006L3.105 2ZM12.0347 3.5C10.3744 3.5 9.0234 4.86406 9.0234 6.54416C9.0234 7.94854 9.97214 9.1232 11.25 9.47384C9.14246 9.68384 7.22155 10.7816 5.95867 12.4916H10.0161C10.2833 12.4869 10.557 12.486 10.8364 12.4916H13.3209C13.5037 12.4888 13.6847 12.4897 13.8628 12.4916H18.0169C16.7691 10.7994 14.8811 9.70544 12.7989 9.47672C14.0861 9.13172 15.0432 7.9542 15.0432 6.54416C15.0442 4.86416 13.6961 3.5 12.0358 3.5H12.0347Z"
-                                        fill="currentColor"
+                            <div className="border-b border-dashed  border-gray-accent-light col-span-3 p-2 pl-10 relative">
+                                <span className="w-5 h-5 flex absolute top-3 left-3">{ProductIcons.analytics}</span>
+                                <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center">
+                                    <strong>Product analytics + data stack</strong>
+                                    <span>
+                                        <span className="text-lg font-bold">{eventNumber.toLocaleString()}</span>{' '}
+                                        <span className="opacity-60 text-sm">events</span>
+                                    </span>
+                                </div>
+                                <div className="pt-4 pb-6">
+                                    <LogSlider
+                                        stepsInRange={100}
+                                        marks={[1000000, 10000000, 100000000, 1000000000]}
+                                        min={1000000}
+                                        max={1000000000}
+                                        onChange={(value) => setSliderValue(value)}
+                                        value={sliderValue}
                                     />
-                                </svg>
+                                </div>
+                            </div>
+                            <div className="border-b border-dashed border-gray-accent-light p-2 text-center">
+                                <span className="text-lg font-bold">${cloudCost.toLocaleString()}</span>
+                            </div>
 
-                                <span>Schedule a demo</span>
-                            </Link>
-                            <Link
-                                to="/get-in-touch#contact"
-                                className="text-[15px] group font-semibold text-blue py-2 px-3 rounded-sm hover:text-blue hover:bg-blue/10 flex space-x-2 items-center"
-                            >
-                                <svg
-                                    width="20"
-                                    height="20"
-                                    viewBox="0 0 20 20"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="text-black/30 group-hover:text-blue"
-                                >
-                                    <path
-                                        d="M18.7569 1.24141C18.4467 0.932806 17.9842 0.826566 17.5717 0.975786L1.6631 6.65779C1.23498 6.81013 0.938096 7.20389 0.910756 7.65779C0.883412 8.11247 1.12952 8.53825 1.53732 8.74295L6.74832 11.3475L13.4085 6.59055L8.65072 13.2523L11.2553 18.4633C11.4491 18.8493 11.8436 19.0907 12.2725 19.0907C12.2959 19.0907 12.3186 19.0899 12.3412 19.0883C12.7959 19.0618 13.1905 18.7657 13.3436 18.3368L19.0256 2.42658C19.1717 2.01408 19.0678 1.55158 18.7568 1.24142L18.7569 1.24141Z"
-                                        fill="currentColor"
+                            <div className="border-b border-dashed border-gray-accent-light col-span-3 p-2 pl-10 relative">
+                                <span className="w-5 h-5 flex absolute top-3 left-3">
+                                    {ProductIcons.sessionRecording}
+                                </span>
+                                <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center">
+                                    <strong>Session recording</strong>
+                                    <span>
+                                        <span className="text-lg font-bold">
+                                            {sessionRecordingEventNumber.toLocaleString()}
+                                        </span>{' '}
+                                        <span className="opacity-60 text-sm">recordings</span>
+                                    </span>
+                                </div>
+                                <div className="pt-4 pb-6">
+                                    <LogSlider
+                                        stepsInRange={100}
+                                        marks={[15000, 50000, 150000, 500000]}
+                                        min={15000}
+                                        max={500000}
+                                        onChange={(value) => setSessionRecordingSliderValue(value)}
+                                        value={sessionRecordingSliderValue}
                                     />
-                                </svg>
+                                </div>
+                            </div>
+                            <div className="border-b border-dashed border-gray-accent-light p-2 text-center">
+                                <span className="text-lg font-bold">${sessionRecordingCost.toLocaleString()}</span>
+                            </div>
 
-                                <span>Get in touch</span>
-                            </Link>
-                        </div>
-                        <div>
-                            <h4 className="text-[15px] mb-0 font-normal opacity-75">
-                                <span className="font-bold">
-                                    Looking for{' '}
-                                    <Link
-                                        className="border-b border-dashed border-gray-accent-light text-black"
-                                        onClick={() =>
-                                            posthog &&
-                                            posthog.capture('clicked Browse on GitHub', { type: 'open-source' })
-                                        }
-                                        to="https://github.com/PostHog/posthog"
-                                    >
-                                        PostHog Open Source
-                                    </Link>
-                                    ?
-                                </span>{' '}
-                                (No credit card required)
-                            </h4>
-                            <p className="text-sm opacity-60">
-                                Available with product analytics, feature flags, and session recordings – limited to 1
-                                project and no user permissions
-                            </p>
+                            <div className="col-span-3 p-4">
+                                <strong>Monthly estimate</strong>
+                                <br />
+                                <p className="opacity-60 text-sm mb-0">
+                                    Cost with billing limits set at your selections
+                                </p>
+                            </div>
+                            <div className="p-4 text-center">
+                                <span className="text-lg font-bold">${monthlyTotal.toLocaleString()}</span>
+                                <span className="opacity-60">/mo</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className="flex-shrink md:basis-96 box-border flex">
-                    <div className="md:max-w-[290px] mx-auto">
-                        <Calculator
-                            enterpriseMode={enterpriseMode}
-                            handleEnterpriseModeChange={handleEnterpriseModeChange}
-                            enterprise={enterprise}
-                            selfHost={selfHost}
-                            setCurrentModal={setCurrentModal}
-                        />
+                    <div>
+                        <h4 className="border-b border-dashed border-gray-accent-light pb-2 mb-3">Addons</h4>
+
+                        <div className="pl-10 relative mb-8">
+                            <span className="w-6 h-6 absolute top-0 left-1">{NotProductIcons.enterprise}</span>
+
+                            <h5 className="text-base mb-0">Enterprise package</h5>
+                            <p className="text-[15px] mb-1">
+                                SAML SSO, advanced permissions, dedicated Slack support channel
+                            </p>
+                            <p className="text-sm text-black/70">
+                                Add <strong className="text-black/100">25%</strong> to total bill ($450/mo min)
+                            </p>
+                        </div>
+
+                        <h4 className="border-b border-dashed border-gray-accent-light pb-2 mb-3">Discounts</h4>
+
+                        <div className="pl-10 relative mb-4">
+                            <span className="w-6 h-6 absolute top-0 left-1">{NotProductIcons.discount}</span>
+
+                            <h5 className="text-base mb-0">B2C with millions of users?</h5>
+                            <p className="text-[15px] mb-1">Get in touch for volume discounts after signing up.</p>
+                        </div>
+
+                        <div className="pl-10 relative mb-4">
+                            <span className="w-6 h-6 absolute top-0 left-1">{NotProductIcons.discount}</span>
+
+                            <h5 className="text-base mb-0">Non-profits</h5>
+                            <p className="text-[15px] mb-1">50% off in most cases. Get in touch after signing up.</p>
+                        </div>
                     </div>
                 </div>
             </section>
-            <section className={`${section} mt-12 md:px-4`}>
+
+            <section className={`${section} mt-12 px-0 md:px-4`}>
                 <h2 className="text-2xl m-0 flex items-center">What comes in PostHog?</h2>
                 <p className="m-0 text-black/50 font-medium mb-7">Get access to all features and no plan limits.</p>
                 <Features />

@@ -48,6 +48,10 @@
                     "url": "/handbook/strategy/overview"
                 },
                 {
+                    "name": "Ideal Customer Persona",
+                    "url": "/handbook/strategy/ideal-customer-persona"
+                },
+                {
                     "name": "Business model",
                     "url": "/handbook/strategy/business-model"
                 },
@@ -98,6 +102,10 @@
                     "url": "/handbook/company/management"
                 },
                 {
+                    "name": "Sprints",
+                    "url": "/handbook/company/sprints"
+                },
+                {
                     "name": "Offsites",
                     "url": "/handbook/company/offsites"
                 },
@@ -130,6 +138,10 @@
                 {
                     "name": "Experimentation",
                     "url": "/handbook/small-teams/experimentation"
+                },
+                {
+                    "name": "Growth",
+                    "url": "/handbook/small-teams/growth"
                 },
                 {
                     "name": "Infrastructure",
@@ -320,6 +332,10 @@
                             "url": "/handbook/engineering/release-new-version"
                         },
                         {
+                            "name": "Handling incidents",
+                            "url": "/handbook/engineering/incidents"
+                        },
+                        {
                             "name": "Bug prioritization",
                             "url": "/handbook/engineering/bug-prioritization"
                         }
@@ -368,8 +384,8 @@
                             "url": "/handbook/engineering/cloud-providers"
                         },
                         {
-                            "name": "Breaking glass to debug PostHog Cloud",
-                            "url": "/handbook/engineering/production-access"
+                            "name": "How-to access PostHog Cloud infra",
+                            "url": "/handbook/engineering/how-to-access-posthog-cloud-infra"
                         }
                     ]
                 },
@@ -392,6 +408,62 @@
                         {
                             "name": "Jobs",
                             "url": "/handbook/engineering/posthog-com/jobs"
+                        }
+                    ]
+                },
+                {
+                    "name": "ClickHouse manual",
+                    "url": "",
+                    "children": [
+                        {
+                            "name": "Overview",
+                            "url": "/handbook/engineering/clickhouse"
+                        },
+                        {
+                            "name": "Data storage or what is a MergeTree",
+                            "url": "/handbook/engineering/clickhouse/data-storage"
+                        },
+                        {
+                            "name": "Data replication",
+                            "url": "/handbook/engineering/clickhouse/replication"
+                        },
+                        {
+                            "name": "Data ingestion",
+                            "url": "/handbook/engineering/clickhouse/data-ingestion"
+                        },
+                        {
+                            "name": "Working with JSON",
+                            "url": "/handbook/engineering/clickhouse/working-with-json"
+                        },
+                        {
+                            "name": "Query performance",
+                            "url": "/handbook/engineering/clickhouse/performance"
+                        },
+                        {
+                            "name": "Operations",
+                            "url": "/handbook/engineering/clickhouse/operations"
+                        },
+                        {
+                            "name": "Schema case studies",
+                            "url": "",
+                            "children": [
+                                {
+                                    "name": "Overview",
+                                    "url": "/handbook/engineering/clickhouse/schema"
+                                },
+                                {
+                                    "name": "sharded_events",
+                                    "url": "/handbook/engineering/clickhouse/schema/sharded-events"
+                                },
+                                {
+                                    "name": "app_metrics",
+                                    "url": "/handbook/engineering/clickhouse/schema/app-metrics"
+                                },
+                                {
+                                    "name": "person_distinct_id",
+                                    "url": "/handbook/engineering/clickhouse/schema/person-distinct-id"
+                                }
+                            ]
                         }
                     ]
                 },
@@ -500,6 +572,10 @@
                         {
                             "name": "Press",
                             "url": "/handbook/growth/marketing/press"
+                        },
+                        {
+                            "name": "YouTube",
+                            "url": "/handbook/growth/marketing/youtube"
                         }
                     ]
                 }
@@ -587,32 +663,68 @@
                     "url": "/docs/self-host"
                 },
                 {
-                    "name": "Deployments",
-                    "url": "",
+                    "name": "Open-Source",
+                    "url": "/docs/self-host/open-source/deployment",
                     "children": [
                         {
-                            "name": "AWS",
-                            "url": "/docs/self-host/deploy/aws"
+                            "name": "Disclaimer",
+                            "url": "/docs/self-host/open-source/disclaimer"
                         },
                         {
-                            "name": "Azure",
-                            "url": "/docs/self-host/deploy/azure"
+                            "name": "Deployment",
+                            "url": "/docs/self-host/open-source/deployment"
                         },
                         {
-                            "name": "DigitalOcean",
-                            "url": "/docs/self-host/deploy/digital-ocean"
+                            "name": "Support",
+                            "url": "/docs/self-host/open-source/support"
+                        }
+                    ]
+                },
+                {
+                    "name": "Enterprise",
+                    "url": "/docs/self-host/enterprise/overview",
+                    "children": [
+                        {
+                            "name": "Overview",
+                            "url": "/docs/self-host/enterprise/overview"
                         },
                         {
-                            "name": "Google Cloud Platform",
-                            "url": "/docs/self-host/deploy/gcp"
+                            "name": "Support",
+                            "url": "/docs/self-host/enterprise/support"
                         },
                         {
-                            "name": "Hobby",
-                            "url": "/docs/self-host/deploy/hobby"
+                            "name": "Hosting Costs",
+                            "url": "/docs/self-host/enterprise/hosting-costs"
                         },
                         {
-                            "name": "Other platforms",
-                            "url": "/docs/self-host/deploy/other"
+                            "name": "Deployments",
+                            "url": "",
+                            "children": [
+                                {
+                                    "name": "AWS",
+                                    "url": "/docs/self-host/deploy/aws"
+                                },
+                                {
+                                    "name": "Azure",
+                                    "url": "/docs/self-host/deploy/azure"
+                                },
+                                {
+                                    "name": "DigitalOcean",
+                                    "url": "/docs/self-host/deploy/digital-ocean"
+                                },
+                                {
+                                    "name": "Google Cloud Platform",
+                                    "url": "/docs/self-host/deploy/gcp"
+                                },
+                                {
+                                    "name": "EU Hosting Companies",
+                                    "url": "/docs/self-host/deploy/hosting-in-eu"
+                                },
+                                {
+                                    "name": "Other platforms",
+                                    "url": "/docs/self-host/deploy/other"
+                                }
+                            ]
                         }
                     ]
                 },
@@ -770,7 +882,25 @@
                                 },
                                 {
                                     "name": "Plugin server",
-                                    "url": "/docs/runbook/services/plugin-server"
+                                    "url": "/docs/runbook/services/plugin-server",
+                                    "children": [
+                                        {
+                                            "name": "Overview",
+                                            "url": "/docs/runbook/services/plugin-server"
+                                        },
+                                        {
+                                            "name": "Ingestion lag",
+                                            "url": "/docs/runbook/services/plugin-server/ingestion-lag"
+                                        },
+                                        {
+                                            "name": "Jobs not executing",
+                                            "url": "/docs/runbook/services/plugin-server/jobs"
+                                        },
+                                        {
+                                            "name": "Scheduled tasks not executing",
+                                            "url": "/docs/runbook/services/plugin-server/scheduled-tasks"
+                                        }
+                                    ]
                                 },
                                 {
                                     "name": "MinIO",
@@ -795,14 +925,6 @@
                 {
                     "name": "Troubleshooting and FAQs",
                     "url": "/docs/self-host/deploy/troubleshooting"
-                },
-                {
-                    "name": "Managing hosting costs",
-                    "url": "/docs/self-host/deploy/hosting-costs"
-                },
-                {
-                    "name": "EU-only hosting",
-                    "url": "/docs/self-host/deploy/hosting-in-eu"
                 }
             ]
         },
@@ -1554,6 +1676,10 @@
                             "name": "Variance Connector"
                         },
                         {
+                            "url": "/docs/apps/pace-integration",
+                            "name": "Pace Integration"
+                        },
+                        {
                             "url": "/docs/apps/zapier-connector",
                             "name": "Zapier Connector"
                         }
@@ -1679,7 +1805,7 @@
                 },
                 {
                     "name": "Trends",
-                    "url": "/tutorials/categories/session-recording"
+                    "url": "/tutorials/categories/trends"
                 }
             ]
         },

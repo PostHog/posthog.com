@@ -56,3 +56,13 @@ With Restack, you can run PostHog on your own Kubernetes Cluster on AWS without 
 Get a fully managed PostHog instance in the cloud region of your choice, or within your own cloud.
 
 **Services:** PostHog as a managed service / Data locality
+
+<hr />
+
+<img src="/images/partners/talenodigital.png" alt="taleno.digital" width="100" style={{float: 'right', marginTop: '1rem', marginLeft: '1rem'}} />
+
+#### [**taleno.digital**](../partners/taleno-digital)
+
+A data consultancy service for data warehousing and product analytics built on the modern data stack.
+
+**Services:** Deployment support / Insight and dashboard creation expertise

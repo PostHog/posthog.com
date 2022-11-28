@@ -21,7 +21,7 @@ Netdata is an open source monitoring and troubleshooting platform used by engine
 
 “I looked at modern, open source solutions. When I found PostHog I loved how easy it was to get going and the developer-centric, event-based approach. And then there’s autocapture — turning that on makes sure you get a lot of the magic, right out of the box.”
 
-### Finding product market fit with analytics and empathy
+## Finding product-market fit with analytics and empathy
 
 [Autocapture](/blog/is-autocapture-still-bad) enabled Netdata to start collecting data immediately, so the team could focus on moving towards product market fit, rather than complex instrumentation. Using autocapture alongside some custom events has enabled the team to identify trends and iterate quickly. 
 
@@ -41,7 +41,7 @@ Netdata knows there’s more to getting product market fit than just the data, h
 
 “I turned on session recording in PostHog,” said Andrew. “It’s so much better than Smartlook, which we used to use, because you can tie it to every individual event and user. If someone in our community has a problem we can get their user ID, look at their events and see how they’re using the product. We don’t have to ask for so much info… it makes a real difference.”
 
-### Forwarding analytics data to BigQuery
+## Forwarding analytics data to BigQuery
 
 Getting value from product data is so important to Netdata that the analysis doesn’t stop in PostHog — instead, Netdata uses [PostHog’s open-source app platform](/docs) to forward all events to a BigQuery instance. This enables the team to run detailed analysis of data from multiple platforms, in addition to the work they do in PostHog. 
 

@@ -119,12 +119,16 @@ We cannot give you personal tax advice - you need to talk to an accountant. We'r
 The EMI plan has various additional tax benefits associated with it that we're able to offer because PostHog Inc. has a UK child company, Hiberly Ltd. Your shares are still held in PostHog Inc. even though you are employed by Hiberly Ltd. 
  
 You can find [a simple guide to EMI here](https://lawble.co.uk/emi-scheme-guide-for-employees/). It is worth noting that you will lose EMI tax benefits if you stop being a UK tax resident. 
- 
- 
+  
+### How do I track my vesting and manage my options?
+
+We use a tool called [LTSE Equity](https://equity.ltse.com/) (previously known as Captable.io) to virtually manage our cap table and stock options. You can sign in to the platform using your PostHog email, and you will be able to see all of the options grants you have received, the start date and how much you have vested thus far, the strike price of your options, and how much it would cost to exercise a certain amount of options.
+
+The Operations team is currently in the process of enabling us to both grant options via the platform, and to allow for online exercise of your options for digitals share certificates to limit the amount of unnecessary paperwork everyone has to deal with.
+
 ### I have a question that is not covered here!
  
-Ask Charles - ideally in a public Slack channel (if appropriate) for better visibility. 
-
+Ask Charles or Grace - ideally in a public Slack channel (if appropriate) for better visibility. 
 
 ### May I suggest a change to our share option plan or my share option document?
  

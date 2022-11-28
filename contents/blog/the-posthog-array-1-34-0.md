@@ -48,7 +48,7 @@ Best of all, if your team uses [Session Recording](/product/session-recording), 
 
 We've also added a new Data Management system! This new tool helps you organize your PostHog data in-house through event definitions, definition tagging and many more features. This is especially useful in large teams, where it can sometimes be difficult to know if your insights are using the right events.
 
-Check out our [blogpost which explains more about Data Management on PostHog](/blog/data-management-feature) or dive straight into the [Data Management docs](https://posthog.com/docs/user-guides/data-management) for more information.
+Check out our [blogpost which explains more about Data Management on PostHog](/blog/data-management-feature) or dive straight into the [Data Management docs](/docs/user-guides/data-management) for more information.
 
 > 🎁 Definition creation, tagging, and volume metrics are premium features which require a PostHog Scale or Enterprise license. [Learn more](/pricing).
 

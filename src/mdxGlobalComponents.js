@@ -15,6 +15,7 @@ import { Apps } from './components/Apps'
 import { AppsList } from './components/AppsList'
 import { ArrayCTA } from './components/ArrayCTA'
 import { AshbyOpenRoles } from './components/AshbyOpenRoles'
+import { Banner } from './components/Banner'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BlockQuote } from './components/BlockQuote'
 import { Blog } from './components/Blog'
@@ -22,6 +23,7 @@ import { BlogFooter } from './components/BlogFooter'
 import { BorderWrapper } from './components/BorderWrapper'
 import { Breadcrumbs } from './components/Breadcrumbs'
 import { CallToAction } from './components/CallToAction'
+import { Caption } from './components/Caption'
 import { Card } from './components/Card'
 import { Benefits } from './components/Careers/Benefits'
 import { CareersHero } from './components/Careers/CareersHero'
@@ -63,6 +65,7 @@ import { HostingOption } from './components/HostingOption'
 import { ImageBlock } from './components/ImageBlock'
 import { IngestionAppsList } from './components/IngestionAppsList'
 import { InlineCode } from './components/InlineCode'
+import { LPCTA } from './components/LPCTA'
 import { LandingPageCallToAction } from './components/LandingPage/LandingPageCallToAction'
 import { LibraryComparison } from './components/LibraryComparison'
 import { LibraryFeatures } from './components/LibraryFeatures'
@@ -120,6 +123,7 @@ import { Structure } from './components/Structure'
 import { Subscribe } from './components/Subscribe'
 import { Tab } from './components/Tab'
 import { TeamQuote } from './components/TeamQuote'
+import { Toast } from './components/Toast'
 import { Toggle } from './components/Toggle'
 import { Tooltip } from './components/Tooltip'
 import { TotalCountries } from './components/TotalCountries'
@@ -145,6 +149,7 @@ export const shortcodes = {
     AppsList,
     ArrayCTA,
     AshbyOpenRoles,
+    Banner,
     BasicHedgehogImage,
     BlockQuote,
     Blog,
@@ -152,6 +157,7 @@ export const shortcodes = {
     BorderWrapper,
     Breadcrumbs,
     CallToAction,
+    Caption,
     Card,
     Benefits,
     CareersHero,
@@ -193,6 +199,7 @@ export const shortcodes = {
     ImageBlock,
     IngestionAppsList,
     InlineCode,
+    LPCTA,
     LandingPageCallToAction,
     LibraryComparison,
     LibraryFeatures,
@@ -250,6 +257,7 @@ export const shortcodes = {
     Subscribe,
     Tab,
     TeamQuote,
+    Toast,
     Toggle,
     Tooltip,
     TotalCountries,

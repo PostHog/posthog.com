@@ -44,6 +44,7 @@ We'd recommend you don't skip this step unless you've already set-up another Pos
 
 Now that you have your PostHog Cloud account all set up, here are a bunch of cool things you can go and try out next:
 
+- [Next steps after installing PostHog](/tutorials/next-steps-after-installing) - Our recommendations for what to do next after you've installed PostHog.
 - [Product manual](/using-posthog) - Information on using specific features within PostHog.
 - [Tutorials](/tutorials) - In-depth guides on popular use cases and integrations.
 - [Set up a proxy](/docs/integrate/proxy) - Capture more events by using your own domain - even on Cloud!
