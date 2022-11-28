@@ -14,21 +14,19 @@ Want to know more about what we're up to? Check out [our roadmap](/roadmap) to s
 
 ## 1.42.0 update guide for self-hosted users
 
-Async migrations 0005-0007 need to be completed before updating to 1.42. If you haven't run them yet, or if they aren't available on your current version, then upgrade to 1.41.4 first, then run the async migrations, then upgrade to 1.42.
+Self-hosted users must run async migrations 0005-0007 before updating to 1.42.0. 
+
+If you haven't run async migrations 0005-0007 yet, or if they aren't available on your current version,  we recommend upgrading to 1.41.4 first, _then_ running the async migrations, then upgrading to 1.42.0.
 
 ## PostHog 1.42.0 release notes
 
 **Release highlights:**
 
-- New: feature
-- Improved: feature
-- One more thing: announcement
-
-### New: 
-
-Joe to add a gif here. 
-
-Neil and Joe to provide highlight here. 
+- [New: Area chart visualization](#new-area-chart-visualization)
+- [New: Path breakdown normalisations](#new-path-breakdown-normalisations)
+- [New: Share recordings more easily](#new-share-recordings-more-easily)
+- [New: Vote on our roadmap](#new-vote-on-our-roadmap)
+- [Boring legal bit: Policy updates](#boring-legal-bit-policy-updates)
 
 ### New: Area chart visualization
 
@@ -40,25 +38,21 @@ To [quote Thomas](https://github.com/PostHog/posthog/pull/12869) himself: "_The 
 
 ### New: Path breakdown normalisations
 
-Are you frustrated when you breakdown paths by URLs and see four different URLs that look like: `/home/`, `/home`, `/home?`, and `/home/#`? Well, not anymore! Now, whenever we're dealing with path breakdowns, we normalise URLs to count the same, so you only see there's only one place like `/home`. 
+Are you frustrated when you breakdown paths by URLs and see four different URLs that look like: `/home/`, `/home`, `/home?`, and `/home/#`? Well, not anymore! Now, whenever we're dealing with path breakdowns, we normalise URLs to count the same, so you'll see there's only one place like `/home`. 
 
 ### New: Share recordings more easily
 
 When you find an interesting session recording, you probably want to share it with your team. So, we've improved sharing options to make it easier. You can now share specific recordings easily, and even send teammates to an exact time in any recording!
 
-### New: 
+### New: Vote on our roadmap
 
-Joe to add a gif here. 
+Even though we're open source, we know it's not always very easy to tell what we're working on or planning for the future - there are just so many repos, issues and PRs!
 
-Neil and Joe to provide highlight here. Substantial new feature. 
-
-### One more thing: Roadmap
-
-Joe to add info here about roadmap launch.
+So, we built a public roadmap of our major projects. You can use it to vote on upcoming projects, subscribe for updates and give feedback on our wildest ideas. Best of all, it's [powered by Squeak!](https://squeak.posthog.com/)
 
 ### Boring legal bit: Policy updates
 
-Despite being described by our VP of Marketing and Ops as "_the least interesting thing ever_", we nevertheless need to tell you that there have been some changes to our terms and privacy policies:
+Despite being described by our VP of Marketing and Ops as "_the least interesting thing ever_", we nevertheless need to tell you that there have been some changes to our terms and privacy policies. Don't worry, it's all good news:
 
 - We've added a CCPA addendum to [our privacy policy](/privacy)
 - We've updated various policies for the release of [PostHog Cloud EU](/eu)
@@ -69,12 +63,12 @@ Despite being described by our VP of Marketing and Ops as "_the least interestin
 
 You think that's it? Not by a long shot! Version 1.42 also adds hundreds of other improvements and fixes, including...
 
-- **Improvement:** Recordings don't show windows anymore if only 1 window was tracked. 
-- **Improvement:** A next-up button for recordings (think just like Netflix's next episodes) to better signal recordings to autoplay
-- **Improvement:** You now see a free-trial banner if you're on the free trial
-- **Improvement:** You can now choose if deleting a dashboard should also delete insights
+- **Improvement:** Recordings no longer show windows anymore if only 1 window was tracked.
+- **Improvement:** We added a next-up button for recordings (just like Netflix's next episodes) to better signal recordings to autoplay.
+- **Improvement:** You now see a free trial banner if you're on the free trial.
+- **Improvement:** You can now choose if deleting a dashboard should also delete insights.
 - **Improvement:** We don't skip showing labels for alternate bars when breaking down insights.
-- **Improvement:** We now disable heatmap clicks when holding down shift
+- **Improvement:** We now disable heatmap clicks when holding down shift.
 - **Fix:** Secondary metrics in experiments now don't depend on the flag values being present for all steps, just like the primary metric.
 - **Fix:** Group pages were 404ing when they had a dot in the name. They don't anymore.
 
