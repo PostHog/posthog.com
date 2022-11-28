@@ -12,6 +12,10 @@ featuredImageType: full
 
 Want to know more about what we're up to? Check out [our roadmap](/roadmap) to see what we're working on and what new beta features are available! You can also subscribe to [our Hogmail newsletter](/newsletter)!
 
+## 1.42.0 update guide for self-hosted users
+
+Async migrations 0005-0007 need to be completed before updating to 1.42. If you haven't run them yet, or if they aren't available on your current version, then upgrade to 1.41.4 first, then run the async migrations, then upgrade to 1.42.
+
 ## PostHog 1.42.0 release notes
 
 **Release highlights:**
@@ -49,12 +53,6 @@ So, we've improved the options for sharing specific recordings. You can now shar
 Joe to add a gif here. 
 
 Neil and Joe to provide highlight here. Substantial new feature. 
-
-### Improved: 
-
-Fixed person deletion (removing dangling distinctIDs). Important note (that was true before too): if you want to re-use the distinctID do NOT use delete person and instead use split distinctIDs. Re-using deleted person's distinctID's is not supported and will result in bad data state.
-
-@tiina to clarify: https://github.com/PostHog/posthog/pull/12475 
 
 ### One more thing: Roadmap
 
