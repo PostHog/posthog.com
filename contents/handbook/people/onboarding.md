@@ -35,7 +35,7 @@ With default styling set, you can now choose the 'Call to action' template.
 
 ![google email layouts](../images/handbook/layout-email.png)
 
-With an email template chosen, you can then enter the copy you want to send. [This doc is a suggested template](https://docs.google.com/document/d/1O3_d4v3xgOr1awKkJb8K3xj8-6VV_fHsPkwtgaEhWKI/edit?usp=sharing) with important actions specified, though we recommend personalizing it to the individual. 
+With an email template chosen, you can then enter the copy you want to send. [This doc is a suggested template](https://docs.google.com/document/d/1O3_d4v3xgOr1awKkJb8K3xj8-6VV_fHsPkwtgaEhWKI/edit?usp=sharing) with important actions specified, though we recommend personalizing it to the individual. [Here is an accompanying image](../images/handbook/handbook-onboarding-email.jpg) to use. We've linked to these as docs and direct images to make the formatting easier for you.  
 
 ## Onboarding buddy
 
