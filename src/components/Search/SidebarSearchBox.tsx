@@ -22,7 +22,7 @@ export const SidebarSearchBox: React.FC<SearchBoxProps> = ({ placeholder, filter
             </div>
 
             <div className="pl-10 py-2 text-left text-gray bg-white dark:bg-gray-accent-dark dark:text-white w-full rounded border border-gray-accent-light hover:border-gray z-10 shadow-sm">
-                <span>{placeholder || 'Quick search...'}</span>
+                <span>{placeholder || 'Search...'}</span>
             </div>
 
             <div className="absolute inset-x-0 top-full h-8 bg-gradient-to-b from-tan"></div>

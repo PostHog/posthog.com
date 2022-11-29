@@ -7,6 +7,8 @@ import { useSearch, SearchResultType } from './SearchContext'
 import { navigate } from 'gatsby'
 import { Combobox, RadioGroup } from '@headlessui/react'
 import { RefinementListItem } from 'instantsearch.js/es/connectors/refinement-list/connectRefinementList'
+import { StaticImage } from 'gatsby-plugin-image'
+import { CallToAction } from 'components/CallToAction'
 
 type Result = Hit<{
     id: string
@@ -116,7 +118,7 @@ export default function SearchResults(props: SearchResultsProps) {
         <Combobox value={{} as Result} onChange={onSelect} by={compareResults}>
             {({ activeOption }) => (
                 <div
-                    className="z-50 p-6 bg-white rounded-md shadow flex flex-col space-y-2 h-full"
+                    className="search-results z-50 bg-white rounded-md shadow-xl flex flex-col space-y-2 h-full"
                     onKeyDown={handleKeyDown}
                 >
                     <SearchBox />
@@ -138,10 +140,10 @@ const SearchBox = () => {
     const { query, refine } = useSearchBox()
 
     return (
-        <div className="relative flex items-center rounded">
+        <div className="relative flex items-center rounded pt-6 px-5">
             <Combobox.Input
                 className="w-full py-2 px-3 bg-black/5 focus:outline-none rounded"
-                placeholder="Search..."
+                placeholder="Search PostHog.com..."
                 autoComplete="off"
                 onKeyDown={(event: React.KeyboardEvent) => (event.key === 'Tab' ? event.preventDefault() : null)}
                 value={query}
@@ -149,7 +151,7 @@ const SearchBox = () => {
             />
 
             <kbd
-                className="absolute right-4 text-xs font-code bg-black/10 rounded px-1 py-0.5 text-black/40"
+                className="hidden md:block absolute right-8 text-xs bg-gray-accent-light rounded px-1 py-0.5 text-black/40 font-sans"
                 style={{ fontSize: '10px' }}
             >
                 ESC
@@ -188,9 +190,9 @@ const RefinementList: React.FC<RefinementListProps> = (props) => {
     }, [props.category])
 
     return (
-        <RadioGroup value={props.category} onChange={props.setCategory} className="border-none py-2">
+        <RadioGroup value={props.category} onChange={props.setCategory} className="border-none py-2 md:px-5">
             <RadioGroup.Label className="sr-only">Filter results by category</RadioGroup.Label>
-            <div className="flex items-center flex-wrap space-x-2 list-none p-0">
+            <div className="flex items-center md:flex-wrap list-none p-0 overflow-auto px-5 md:px-0">
                 {categories.map((item) => {
                     const result = props.items.find((res) => res.value === item.type)
 
@@ -206,17 +208,17 @@ const RefinementList: React.FC<RefinementListProps> = (props) => {
                             }}
                             className={classNames(
                                 item.type === 'all' ? 'sr-only' : '',
-                                'rounded px-1.5 py-0.5 ui-checked:bg-red ui-checked:text-white ui-not-checked:text-gray-accent-dark ui-not-checked:bg-gray-accent-light'
+                                'rounded-full px-2 py-0.5 ui-checked:bg-red ui-checked:text-white ui-not-checked:text-gray-accent-dark ui-not-checked:bg-white border ui-not-checked:border-gray-accent-light ui-checked:border-red first:hidden mr-2'
                             )}
                         >
                             {({ checked }) => (
                                 <label
                                     className={classNames(
-                                        'flex items-center select-none',
+                                        'flex items-baseline select-none space-x-1',
                                         result?.count !== 0 && 'cursor-pointer'
                                     )}
                                 >
-                                    <span className="text-sm mr-2">{item.name}</span>
+                                    <span className="text-sm">{item.name}</span>
                                     <span
                                         className={classNames('text-xs', checked ? 'text-white/80' : 'text-black/40')}
                                     >
@@ -240,8 +242,8 @@ const Hits: React.FC<HitsProps> = ({ activeOption }) => {
     const { hits } = useHits<Result>()
 
     return (
-        <div className="grid grid-cols-2 min-h-0 flex-grow">
-            <section className="overscroll-none text-left overflow-y-scroll">
+        <div className="grid md:grid-cols-2 min-h-0 flex-grow border-t border-gray-accent-light/50">
+            <section className="overscroll-none text-left overflow-y-scroll border-r border-gray-accent-light/50">
                 {hits.length > 0 ? (
                     <Combobox.Options as="ol" className="list-none m-0" static hold>
                         {hits.map((hit) => {
@@ -249,61 +251,110 @@ const Hits: React.FC<HitsProps> = ({ activeOption }) => {
                                 <Combobox.Option
                                     key={hit.objectID}
                                     value={hit}
-                                    className="ui-active:bg-gray-accent-light rounded hover:bg-gray-accent-light"
+                                    className="group ui-active:bg-tan/50 hover:bg-gray-accent-light border-b border-gray-accent-light/50 pl-3 pr-2"
                                 >
                                     <Link
-                                        className="w-full px-3 py-2 text-red font-semibold flex flex-col space-y-1 focus:outline-none"
+                                        className="w-full px-2 py-3 text-black/75 group-hover:text-black/100 font-semibold flex flex-col space-y-0.5 focus:outline-none leading-tight"
                                         to={'/' + hit.slug}
                                     >
-                                        <span className="line-clamp-1">{hit.title}</span>
-                                        <p className="text-sm m-0 text-gray line-clamp-2">{hit.excerpt}</p>
+                                        <span
+                                            className={`text-[13px] font-normal ${
+                                                hit.type === 'api' ? 'uppercase' : 'capitalize'
+                                            } text-gray rounded-full`}
+                                        >
+                                            {hit.type}
+                                        </span>
+
+                                        <span className="line-clamp-1 font-semibold">{hit.title}</span>
+                                        {/* <p className="text-sm font-normal m-0 text-gray line-clamp-2">{hit.excerpt}</p> */}
+                                        <span className="text-[13px] font-normal">
+                                            <span className="text-black opacity-[35%]">posthog.com/</span>
+                                            <span className="text-black/50">{hit.slug}</span>
+                                        </span>
                                     </Link>
                                 </Combobox.Option>
                             )
                         })}
                     </Combobox.Options>
                 ) : (
-                    <div className="w-full flex items-center justify-center">No results</div>
+                    <>
+                        <div className="p-8">
+                            <div className="text-center">
+                                <h3 className="mb-0 text-lg">No results</h3>
+                                <p className="text-[15px] opacity-75 mb-0">
+                                    This doesn't happen often, but we're stumped!
+                                </p>
+                            </div>
+
+                            <div className="text-center mb-4">
+                                <StaticImage
+                                    placeholder="none"
+                                    loading="eager"
+                                    quality={100}
+                                    objectFit="contain"
+                                    alt=""
+                                    src="../../../contents/images/media/social-media-headers/hogs/detective_hog.png"
+                                    className="max-w-[150px]"
+                                />
+                            </div>
+
+                            <div className="border border-gray-accent-light p-4 rounded bg-tan/50">
+                                <h5 className="text-base opacity-75 mb-0">Tip: Ask the community</h5>
+                                <p className="text-sm mb-4">
+                                    Our team monitors the Questions page. Somone's bound to know the answer!
+                                </p>
+
+                                <CallToAction type="primary" size="sm" width="full" className="" href="/questions">
+                                    Ask a question
+                                </CallToAction>
+                            </div>
+                        </div>
+                    </>
                 )}
             </section>
-            <section className="overflow-y-scroll bg-tan p-10 h-full">
+            <section className="hidden md:block overflow-y-scroll bg-tan/50 p-2 h-full">
                 {activeOption ? (
-                    <div className="text-left">
-                        <span className="block text-center text-xs font-semibold text-red uppercase">
-                            {activeOption.type}
-                        </span>
-                        <h4 className="text-center">{activeOption.title}</h4>
-                        <p className="text-black/70">{activeOption.excerpt}</p>
-                        <span className="block text-xs text-gray font-semibold mb-3">On this page</span>
-                        {activeOption.type === 'api' ? (
-                            <ol className="list-none m-0 text-sm text-gray font-semibold space-y-2">
-                                {activeOption?.schema?.map((endpoint, index) => {
-                                    return (
-                                        <li
-                                            key={activeOption.type + endpoint.httpVerb + endpoint.path + index}
-                                            className="font-code text-xs whitespace-nowrap space-x-2 flex items-center"
-                                        >
-                                            <span className="uppercase">{endpoint.httpVerb}</span>
-                                            <div className="text-ellipsis flex-shrink overflow-hidden">
-                                                <span>{endpoint.path}</span>
-                                            </div>
-                                        </li>
-                                    )
-                                })}
-                            </ol>
-                        ) : (
-                            <ol className="list-none m-0 text-sm text-gray font-semibold space-y-2">
-                                {activeOption?.headings
-                                    ?.filter(({ depth }) => depth <= 2)
-                                    .map((heading, index) => {
+                    <div className="p-6 bg-white rounded border border-gray-accent-light/25">
+                        <div className="text-left">
+                            <span className="block text-sm font-semibold text-black/50 uppercase mb-0">
+                                {activeOption.type}
+                            </span>
+                            <h4 className="text-2xl">{activeOption.title}</h4>
+                            <p className="text-black/70 text-[15px]">{activeOption.excerpt}</p>
+                            <span className="block text-xs text-gray font-semibold mb-3">On this page</span>
+                            {activeOption.type === 'api' ? (
+                                <ol className="list-none m-0 text-sm text-gray font-semibold space-y-2">
+                                    {activeOption?.schema?.map((endpoint, index) => {
                                         return (
-                                            <li key={activeOption.type + heading.value + index}>
-                                                <span>{heading.value}</span>
+                                            <li
+                                                key={activeOption.type + endpoint.httpVerb + endpoint.path + index}
+                                                className="font-code text-xs whitespace-nowrap space-x-2 flex items-center"
+                                            >
+                                                <span className="uppercase">{endpoint.httpVerb}</span>
+                                                <div className="text-ellipsis flex-shrink overflow-hidden">
+                                                    <span>{endpoint.path}</span>
+                                                </div>
                                             </li>
                                         )
                                     })}
-                            </ol>
-                        )}
+                                </ol>
+                            ) : (
+                                <ol className="list-none m-0 text-gray font-semibold space-y-2">
+                                    {activeOption?.headings
+                                        ?.filter(({ depth }) => depth <= 2)
+                                        .map((heading, index) => {
+                                            return (
+                                                <li
+                                                    key={activeOption.type + heading.value + index}
+                                                    className="text-sm jumpTo pl-6"
+                                                >
+                                                    <span>{heading.value}</span>
+                                                </li>
+                                            )
+                                        })}
+                                </ol>
+                            )}
+                        </div>
                     </div>
                 ) : null}
             </section>
