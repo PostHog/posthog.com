@@ -9,6 +9,7 @@ import { Combobox, RadioGroup } from '@headlessui/react'
 import { RefinementListItem } from 'instantsearch.js/es/connectors/refinement-list/connectRefinementList'
 import { StaticImage } from 'gatsby-plugin-image'
 import { CallToAction } from 'components/CallToAction'
+import { Search } from 'components/Icons/Icons'
 
 type Result = Hit<{
     id: string
@@ -118,10 +119,11 @@ export default function SearchResults(props: SearchResultsProps) {
         <Combobox value={{} as Result} onChange={onSelect} by={compareResults}>
             {({ activeOption }) => (
                 <div
-                    className="search-results z-50 bg-white rounded-md shadow-xl flex flex-col h-full"
+                    className="search-results z-50 bg-white rounded overflow-hidden shadow-xl flex flex-col h-full"
                     onKeyDown={handleKeyDown}
                 >
                     <SearchBox />
+                    <Hits activeOption={activeOption} />
                     <RefinementList
                         initialFilter={props.initialFilter}
                         category={category}
@@ -129,7 +131,6 @@ export default function SearchResults(props: SearchResultsProps) {
                         refine={refine}
                         items={items}
                     />
-                    <Hits activeOption={activeOption} />
                 </div>
             )}
         </Combobox>
@@ -140,9 +141,12 @@ const SearchBox = () => {
     const { query, refine } = useSearchBox()
 
     return (
-        <div className="relative flex items-center rounded-tl rounded-tr border-b border-gray-accent-light/50">
+        <div className="relative flex items-center border-b border-gray-accent-light/50">
+            <div className="absolute left-4 z-20">
+                <Search className="w-5 h-5 opacity-40" />
+            </div>
             <Combobox.Input
-                className="w-full py-3 px-4 font-medium focus:outline-none border-none"
+                className="w-full py-3 pl-11 pr-4 font-medium focus:outline-none border-none ring-0 focus:ring-0 placeholder:text-black/25"
                 placeholder="Search PostHog.com..."
                 autoComplete="off"
                 onKeyDown={(event: React.KeyboardEvent) => (event.key === 'Tab' ? event.preventDefault() : null)}
@@ -151,7 +155,7 @@ const SearchBox = () => {
             />
 
             <kbd
-                className="hidden md:block absolute right-4 text-xs bg-gray-accent-light rounded px-1 py-0.5 text-black/40 font-sans"
+                className="hidden md:block absolute right-4 text-xs border border-b-2 border-gray-accent-light/50 rounded-sm px-1.5 py-0.5 text-black/40 font-sans"
                 style={{ fontSize: '10px' }}
             >
                 ESC
@@ -190,9 +194,9 @@ const RefinementList: React.FC<RefinementListProps> = (props) => {
     }, [props.category])
 
     return (
-        <RadioGroup value={props.category} onChange={props.setCategory} className="border-none bg-tan/25 py-2 md:px-5">
+        <RadioGroup value={props.category} onChange={props.setCategory} className="bg-tan/25 -mt-[1px]">
             <RadioGroup.Label className="sr-only">Filter results by category</RadioGroup.Label>
-            <div className="flex items-center md:flex-wrap list-none p-0 overflow-auto px-5 md:px-0">
+            <div className="flex items-center md:flex-wrap list-none p-0 overflow-auto">
                 {categories.map((item) => {
                     const result = props.items.find((res) => res.value === item.type)
 
@@ -200,15 +204,15 @@ const RefinementList: React.FC<RefinementListProps> = (props) => {
                         <RadioGroup.Option
                             key={item.type}
                             value={item}
-                            disabled={!result?.count}
+                            // disabled={!result?.count}
                             onClick={() => {
                                 if (item.type === props.category.type) {
                                     props.setCategory(categories[0])
                                 }
                             }}
                             className={classNames(
-                                item.type === 'all' ? 'sr-only' : '',
-                                'rounded-full px-2 py-0.5 ui-checked:bg-red ui-checked:text-white ui-not-checked:text-gray-accent-dark ui-not-checked:bg-gray-accent-light/50 ui-not-checked:hover:bg-gray-accent-light/90 first:hidden mr-2'
+                                item.type === 'not-all' ? 'sr-only' : '',
+                                'relative px-3 first:px-5 py-2 ui-checked:text-red before:absolute before:top-[-1px] before:left-0 before:right-0 before:h-[2px] ui-checked:before:h-[3px] ui-checked:before:bg-red ui-not-checked:before:bg-transparent ui-not-checked:hover:before:bg-black/40 ui-not-checked:text-gray-accent-dark cursor-pointer'
                             )}
                         >
                             {({ checked }) => (
@@ -218,9 +222,9 @@ const RefinementList: React.FC<RefinementListProps> = (props) => {
                                         result?.count !== 0 && 'cursor-pointer'
                                     )}
                                 >
-                                    <span className="text-sm">{item.name}</span>
+                                    <span className="text-sm ui-checked:font-bold">{item.name}</span>
                                     <span
-                                        className={classNames('text-xs', checked ? 'text-white/80' : 'text-black/40')}
+                                        className={classNames('text-xs', checked ? 'text-black/40' : 'text-black/40')}
                                     >
                                         {result?.count || 0}
                                     </span>
@@ -242,7 +246,7 @@ const Hits: React.FC<HitsProps> = ({ activeOption }) => {
     const { hits } = useHits<Result>()
 
     return (
-        <div className="grid md:grid-cols-2 min-h-0 flex-grow border-t border-gray-accent-light/50">
+        <div className="grid md:grid-cols-2 min-h-0 flex-grow border-b border-gray-accent-light">
             <section className="overscroll-none text-left overflow-y-scroll border-r border-gray-accent-light/50">
                 {hits.length > 0 ? (
                     <Combobox.Options as="ol" className="list-none m-0" static hold>
@@ -280,7 +284,7 @@ const Hits: React.FC<HitsProps> = ({ activeOption }) => {
                     <>
                         <div className="p-8">
                             <div className="text-center">
-                                <h3 className="mb-0 text-lg">No results</h3>
+                                <h3 className="mb-0 text-xl">No results</h3>
                                 <p className="text-[15px] opacity-75 mb-0">
                                     This doesn't happen often, but we're stumped!
                                 </p>
@@ -300,8 +304,8 @@ const Hits: React.FC<HitsProps> = ({ activeOption }) => {
 
                             <div className="border border-gray-accent-light p-4 rounded bg-tan/50">
                                 <h5 className="text-base opacity-75 mb-0">Tip: Ask the community</h5>
-                                <p className="text-sm mb-4">
-                                    Our team monitors the Questions page. Somone's bound to know the answer!
+                                <p className="text-sm mb-4 opacity-80">
+                                    Our team monitor the Questions page. Somone's bound to know the answer!
                                 </p>
 
                                 <CallToAction type="primary" size="sm" width="full" className="" href="/questions">
