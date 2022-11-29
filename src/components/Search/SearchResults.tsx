@@ -323,10 +323,10 @@ const Hits: React.FC<HitsProps> = ({ activeOption }) => {
                             >
                                 {activeOption.type}
                             </span>
-                            <h4 className="text-2xl">{activeOption.title}</h4>
+                            <h4 className="text-2xl mb-3">{activeOption.title}</h4>
                             <p className="text-black/70 text-[15px] mb-0">{activeOption.excerpt}</p>
                             {activeOption.type !== 'question' ? (
-                                <span className="block text-xs text-gray font-semibold mb-3">On this page</span>
+                                <span className="block text-xs text-gray font-semibold mt-5 mb-3">On this page</span>
                             ) : (
                                 <></>
                             )}
