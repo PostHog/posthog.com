@@ -247,7 +247,7 @@ const Hits: React.FC<HitsProps> = ({ activeOption }) => {
 
     return (
         <div className="grid md:grid-cols-2 min-h-0 flex-grow border-b border-gray-accent-light">
-            <section className="overscroll-none text-left overflow-y-scroll border-r border-gray-accent-light/50">
+            <section className="overscroll-none text-left overflow-y-auto border-r border-gray-accent-light/50">
                 {hits.length > 0 ? (
                     <Combobox.Options as="ol" className="list-none m-0" static hold>
                         {hits.map((hit) => {
@@ -316,18 +316,18 @@ const Hits: React.FC<HitsProps> = ({ activeOption }) => {
                     </>
                 )}
             </section>
-            <section className="hidden md:block overflow-y-scroll bg-tan/50 p-2 h-full">
+            <section className="hidden md:block overflow-y-auto bg-tan/50 p-2 h-full">
                 {activeOption ? (
-                    <div className="p-6 bg-white rounded border border-gray-accent-light/25">
+                    <div className="p-6 bg-white rounded border border-gray-accent-light/40">
                         <div className="text-left">
                             <span
                                 className={`block text-sm font-semibold text-black/50 ${
                                     activeOption.type === 'api' ? 'uppercase' : 'capitalize'
-                                } mb-0.5`}
+                                } mb-1`}
                             >
                                 {activeOption.type}
                             </span>
-                            <h4 className="text-2xl mb-3">{activeOption.title}</h4>
+                            <h4 className="text-2xl mb-3 leading-[1.125]">{activeOption.title}</h4>
                             <p className="text-black/70 text-[15px] mb-0">{activeOption.excerpt}</p>
                             {activeOption.type !== 'question' ? (
                                 <span className="block text-xs text-gray font-semibold mt-5 mb-3">On this page</span>
