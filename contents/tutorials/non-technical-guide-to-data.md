@@ -18,7 +18,7 @@ In this tutorial, we’ll go through how you can understand your product’s dat
 
 In school, using someone else’s work is cheating, but in real life, it is “collaboration.” Exploring teammates’ work in PostHog is a great way to get started understanding the data there.
 
-The best place to do this is though the dashboards and insights other people in your organization created. To find them, click “Dashboards” on the sidebar. If you’re looking for the most important ones, they might be under “Pinned.”
+The best place to do this is through the dashboards and insights other people in your organization created. To find them, click “Dashboards” on the sidebar. If you’re looking for the most important ones, they might be under “Pinned.”
 
 ![Dashboards](../images/tutorials/non-technical-guide-to-data/dashboards.png)
 
