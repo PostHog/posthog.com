@@ -316,7 +316,11 @@ const Hits: React.FC<HitsProps> = ({ activeOption }) => {
                 {activeOption ? (
                     <div className="p-6 bg-white rounded border border-gray-accent-light/25">
                         <div className="text-left">
-                            <span className="block text-sm font-semibold text-black/50 uppercase mb-0">
+                            <span
+                                className={`block text-sm font-semibold text-black/50 ${
+                                    activeOption.type === 'api' ? 'uppercase' : 'capitalize'
+                                } mb-0`}
+                            >
                                 {activeOption.type}
                             </span>
                             <h4 className="text-2xl">{activeOption.title}</h4>
