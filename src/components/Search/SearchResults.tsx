@@ -118,7 +118,7 @@ export default function SearchResults(props: SearchResultsProps) {
         <Combobox value={{} as Result} onChange={onSelect} by={compareResults}>
             {({ activeOption }) => (
                 <div
-                    className="search-results z-50 bg-white rounded-md shadow-xl flex flex-col space-y-2 h-full"
+                    className="search-results z-50 bg-white rounded-md shadow-xl flex flex-col h-full"
                     onKeyDown={handleKeyDown}
                 >
                     <SearchBox />
@@ -140,9 +140,9 @@ const SearchBox = () => {
     const { query, refine } = useSearchBox()
 
     return (
-        <div className="relative flex items-center rounded pt-6 px-5">
+        <div className="relative flex items-center rounded-tl rounded-tr border-b border-gray-accent-light/50">
             <Combobox.Input
-                className="w-full py-2 px-3 bg-black/5 focus:outline-none rounded"
+                className="w-full py-3 px-4 font-medium focus:outline-none border-none"
                 placeholder="Search PostHog.com..."
                 autoComplete="off"
                 onKeyDown={(event: React.KeyboardEvent) => (event.key === 'Tab' ? event.preventDefault() : null)}
@@ -151,7 +151,7 @@ const SearchBox = () => {
             />
 
             <kbd
-                className="hidden md:block absolute right-8 text-xs bg-gray-accent-light rounded px-1 py-0.5 text-black/40 font-sans"
+                className="hidden md:block absolute right-4 text-xs bg-gray-accent-light rounded px-1 py-0.5 text-black/40 font-sans"
                 style={{ fontSize: '10px' }}
             >
                 ESC
@@ -190,7 +190,7 @@ const RefinementList: React.FC<RefinementListProps> = (props) => {
     }, [props.category])
 
     return (
-        <RadioGroup value={props.category} onChange={props.setCategory} className="border-none py-2 md:px-5">
+        <RadioGroup value={props.category} onChange={props.setCategory} className="border-none bg-tan/25 py-2 md:px-5">
             <RadioGroup.Label className="sr-only">Filter results by category</RadioGroup.Label>
             <div className="flex items-center md:flex-wrap list-none p-0 overflow-auto px-5 md:px-0">
                 {categories.map((item) => {
@@ -208,7 +208,7 @@ const RefinementList: React.FC<RefinementListProps> = (props) => {
                             }}
                             className={classNames(
                                 item.type === 'all' ? 'sr-only' : '',
-                                'rounded-full px-2 py-0.5 ui-checked:bg-red ui-checked:text-white ui-not-checked:text-gray-accent-dark ui-not-checked:bg-white border ui-not-checked:border-gray-accent-light ui-checked:border-red first:hidden mr-2'
+                                'rounded-full px-2 py-0.5 ui-checked:bg-red ui-checked:text-white ui-not-checked:text-gray-accent-dark ui-not-checked:bg-gray-accent-light/50 ui-not-checked:hover:bg-gray-accent-light/90 first:hidden mr-2'
                             )}
                         >
                             {({ checked }) => (
