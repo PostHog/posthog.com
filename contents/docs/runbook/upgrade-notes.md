@@ -7,7 +7,9 @@ showTitle: true
 
 ### 30.0.0
 
-Async migrations 0005-0007 need to be completed before updating to 1.42, if you haven't yet ran them upgrade first to 1.41.4, then run the async migrations, then update to 1.42.
+Self-hosted users must run async migrations 0005-0007 before updating to PostHog version 1.42.0. 
+
+If you haven't run async migrations 0005-0007 yet, or if they aren't available on your current version,  we recommend upgrading to PostHog version 1.41.4 first, _then_ running the async migrations, then upgrading to 1.42.0.
 
 ### 29.0.0
 
