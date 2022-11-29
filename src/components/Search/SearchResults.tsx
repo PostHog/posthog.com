@@ -319,13 +319,17 @@ const Hits: React.FC<HitsProps> = ({ activeOption }) => {
                             <span
                                 className={`block text-sm font-semibold text-black/50 ${
                                     activeOption.type === 'api' ? 'uppercase' : 'capitalize'
-                                } mb-0`}
+                                } mb-0.5`}
                             >
                                 {activeOption.type}
                             </span>
                             <h4 className="text-2xl">{activeOption.title}</h4>
-                            <p className="text-black/70 text-[15px]">{activeOption.excerpt}</p>
-                            <span className="block text-xs text-gray font-semibold mb-3">On this page</span>
+                            <p className="text-black/70 text-[15px] mb-0">{activeOption.excerpt}</p>
+                            {activeOption.type !== 'question' ? (
+                                <span className="block text-xs text-gray font-semibold mb-3">On this page</span>
+                            ) : (
+                                <></>
+                            )}
                             {activeOption.type === 'api' ? (
                                 <ol className="list-none m-0 text-sm text-gray font-semibold space-y-2">
                                     {activeOption?.schema?.map((endpoint, index) => {
