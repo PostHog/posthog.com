@@ -44,7 +44,7 @@ Are you frustrated when you breakdown trends and funnels by URLs and see four di
 
 Now, whenever we're dealing with breakdowns by "Current URL" or "Pathname", we normalise URLs to count the same, so you'll see there's only one place like `/home`. 
 
-### New: Share recordings more easily
+### New: Share recordings easily, and precisely
 
 ![share recordings in posthog](../images/blog/array/1-42-0-share-recordings.gif)
 
