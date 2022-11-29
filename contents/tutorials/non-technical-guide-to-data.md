@@ -14,7 +14,7 @@ In this tutorial, we’ll go through how you can understand your product’s dat
 
 > This tutorial assumes your technical team set up PostHog in your app or site, and you have data to work with. Read our [event tracking guide](/tutorials/event-tracking-guide) for details on setting this up if not.
 
-## 1. Explore what other’s creations
+## 1. Explore other’s creations
 
 In school, using someone else’s work is cheating, but in real life, it is “collaboration.” Exploring teammates’ work in PostHog is a great way to get started understanding the data there.
 
@@ -43,7 +43,7 @@ You can sort all of these types of data to learn how often your team is using it
 
 Understanding the events, actions, and properties in PostHog, and what your team is actually using, should give you some ideas of what data is available, and what is important. This is useful when you go to create insights.
 
-## 3. See the events you’ve done
+## 3. See you captured events
 
 Another way to understand the data in PostHog is to see the captured events from your usage. This helps you connect data in PostHog with product usage in the real world. You’ll be able to relive your usage of the product through the data inside PostHog
 
