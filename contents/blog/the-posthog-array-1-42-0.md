@@ -23,7 +23,7 @@ If you haven't run async migrations 0005-0007 yet, or if they aren't available o
 **Release highlights:**
 
 - [New: Area chart visualization](#new-area-chart-visualization)
-- [New: Path breakdown normalisations](#new-path-breakdown-normalisations)
+- [New: URL breakdown normalisations](#new-url-breakdown-normalisations)
 - [New: Share recordings more easily](#new-share-recordings-more-easily)
 - [New: Vote on our roadmap](#new-vote-on-our-roadmap)
 - [Boring legal bit: Policy updates](#boring-legal-bit-policy-updates)
@@ -36,11 +36,13 @@ New team member Thomas Obermueller has got off to a great start by delivering th
 
 To [quote Thomas](https://github.com/PostHog/posthog/pull/12869) himself: "_The main use case for this is when you want to see the composition of a metric, while also having the total value as a reference e.g. breakdown of revenue by customer over time._"
 
-### New: Path breakdown normalisations
+### New: URL breakdown normalisations
 
-![path breakdown normalization](../images/blog/array/1-42-0-paths.gif)
+![URL breakdown normalization](../images/blog/array/1-42-0-url-breakdown.gif)
 
-Are you frustrated when you breakdown paths by URLs and see four different URLs that look like: `/home/`, `/home`, `/home?`, and `/home/#`? Well, not anymore! Now, whenever we're dealing with path breakdowns, we normalise URLs to count the same, so you'll see there's only one place like `/home`. 
+Are you frustrated when you breakdown trends and funnels by URLs and see four different URLs that look like: `/home/`, `/home`, `/home?`, and `/home/#`? Well, not anymore! 
+
+Now, whenever we're dealing with breakdowns by "Current URL" or "Pathname", we normalise URLs to count the same, so you'll see there's only one place like `/home`. 
 
 ### New: Share recordings more easily
 
