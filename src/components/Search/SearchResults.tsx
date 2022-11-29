@@ -74,7 +74,11 @@ type SearchResultsProps = {
 }
 
 export default function SearchResults(props: SearchResultsProps) {
-    const [category, setCategory] = useState<Category>(categories[0])
+    const [category, setCategory] = useState<Category>(
+        props.initialFilter
+            ? (categories.find((category) => category.type === props.initialFilter) as Category)
+            : categories[0]
+    )
     const { items, refine } = useRefinementList({ attribute: 'type', sortBy: ['name:asc'] })
     const { close } = useSearch()
 
