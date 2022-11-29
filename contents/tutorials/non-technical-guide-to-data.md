@@ -8,7 +8,7 @@ featuredImage: ../images/tutorials/banners/non-technical-guide-to-data.png
 topics: ["data management"]
 ---
 
-Non-technical users have many tools in PostHog for gaining insights from their product data. You don’t need coding knowledge, but you do need some knowledge of your data. Knowing the formatting and structure of your data is key to getting the most out of PostHog as a non-technical user.
+Non-technical users have many tools in PostHog for gaining insights from their product data. You don’t need to be a software engineer, but you do need some knowledge of your data. Knowing the formatting and structure of your data, for example, is key to getting the most out of PostHog as a non-technical user.
 
 In this tutorial, we’ll go through how you can understand your product’s data in PostHog. This allows you to find the data you want, format it in the right way, and generate insights to improve your product. 
 
@@ -16,13 +16,13 @@ In this tutorial, we’ll go through how you can understand your product’s dat
 
 ## 1. Explore other’s creations
 
-In school, using someone else’s work is cheating, but in real life, it is “collaboration.” Exploring teammates’ work in PostHog is a great way to get started understanding the data there.
+In school, using someone else’s work is cheating; in real life, it's “collaboration.” Exploring teammates’ work in PostHog is a great way to get started understanding the data there.
 
 The best place to do this is through the dashboards and insights other people in your organization created. To find them, click “Dashboards” on the sidebar. If you’re looking for the most important ones, they might be under “Pinned.”
 
 ![Dashboards](../images/tutorials/non-technical-guide-to-data/dashboards.png)
 
-When you click into a dashboard, don’t only look at the visualizations, but click “show details” to show the queries and filters behind them. Even better, click on the title of the visualizations, go to the insight detail view, and click Edit (don’t worry, we won’t change anything).
+When you click into a dashboard, don’t only look at the visualizations, but click “show details” to show the queries and filters behind them. Even better, click on the title of the visualizations, go to the insight detail view, and click Edit (don’t worry, we won’t save the changes).
 
 Editing a visualization gives you an idea of what is used for:
 
@@ -43,7 +43,7 @@ You can sort all of these types of data to learn how often your team is using it
 
 Understanding the events, actions, and properties in PostHog, and what your team is actually using, should give you some ideas of what data is available, and what is important. This is useful when you go to create insights.
 
-## 3. See you captured events
+## 3. See your captured events
 
 Another way to understand the data in PostHog is to see the captured events from your usage. This helps you connect data in PostHog with product usage in the real world. You’ll be able to relive your usage of the product through the data inside PostHog
 
