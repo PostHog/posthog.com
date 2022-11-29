@@ -255,7 +255,7 @@ const Hits: React.FC<HitsProps> = ({ activeOption }) => {
                                 <Combobox.Option
                                     key={hit.objectID}
                                     value={hit}
-                                    className="group ui-active:bg-tan/50 hover:bg-gray-accent-light border-b border-gray-accent-light/50 pl-3 pr-2"
+                                    className="group ui-active:bg-tan/50 hover:bg-tan/50 border-b border-t mt-[-1px] border-gray-accent-light/25 hover:border-gray-accent-light/30 ui-active:border-gray-accent-light/30 last:border-b-0 pl-3 pr-2"
                                 >
                                     <Link
                                         className="w-full px-2 py-3 text-black/75 group-hover:text-black/100 font-semibold flex flex-col space-y-0.5 focus:outline-none leading-tight"
