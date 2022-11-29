@@ -1,6 +1,6 @@
 ---
 date: 2022-11-30
-title: "Array 1.42.0: Making recordings easier to share"
+title: "Array 1.42.0: Share your recordings!"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
