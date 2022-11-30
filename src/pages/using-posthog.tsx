@@ -7,7 +7,7 @@ import { docs } from '../sidebars/sidebars.json'
 import { graphql } from 'gatsby'
 import ProductIcons from 'components/ProductIcons'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import SearchBox from 'components/Search/SearchBox'
+import { useSearch } from 'components/Search/SearchContext'
 import { Close } from 'components/Icons/Icons'
 import { CallToAction } from 'components/CallToAction'
 import Modal from 'components/Modal'
@@ -251,7 +251,7 @@ const categories: {
     },
 ]
 
-export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
+export const UsingPostHog: React.FC<{ data: any }> = ({ data, filter }) => {
     const { tutorials, featuredTutorials } = data
 
     const tutorialsByCategory = tutorials.group.reduce((acc, curr) => {
@@ -262,6 +262,13 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
     }, {})
 
     const [currentModal, setCurrentModal] = React.useState<string | undefined>(undefined)
+
+    const { open } = useSearch()
+
+    const handleSearchBoxClick = (event: React.MouseEvent) => {
+        event.preventDefault()
+        open(filter)
+    }
 
     return (
         <Layout>
@@ -277,12 +284,13 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
                             <a href="/docs">visit the docs</a>.
                         </p>
 
-                        <div className="my-4">
-                            <SearchBox placeholder="Search..." />
-                        </div>
-
                         <p className="text-sm text-black/75 dark:text-white">
-                            Don't see the answer you're looking for? <a href="/questions">Ask a question</a>
+                            If you can't find what you're looking for{' '}
+                            <button className="font-semibold text-red" onClick={handleSearchBoxClick}>
+                                try our awesome site search
+                            </button>{' '}
+                            <span className="opacity-60">(powered by Algolia)</span> or{' '}
+                            <a href="/questions">ask a community question</a>.
                         </p>
                     </section>
 
