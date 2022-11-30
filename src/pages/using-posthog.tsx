@@ -11,6 +11,7 @@ import { useSearch } from 'components/Search/SearchContext'
 import { Close } from 'components/Icons/Icons'
 import { CallToAction } from 'components/CallToAction'
 import Modal from 'components/Modal'
+import { SiteSearchCallout } from 'components/SiteSearchCallout'
 
 const categories: {
     name: string
@@ -284,14 +285,7 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data, filter }) => {
                             <a href="/docs">visit the docs</a>.
                         </p>
 
-                        <p className="text-sm text-black/75 dark:text-white">
-                            If you can't find what you're looking for{' '}
-                            <button className="font-semibold text-red" onClick={handleSearchBoxClick}>
-                                try our awesome site search
-                            </button>{' '}
-                            <span className="opacity-60">(powered by Algolia)</span> or{' '}
-                            <a href="/questions">ask a community question</a>.
-                        </p>
+                        <SiteSearchCallout />
                     </section>
 
                     <section>

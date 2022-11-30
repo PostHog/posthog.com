@@ -113,6 +113,7 @@ import { DesignedForYourStackBlock } from './components/Sections/DesignedForYour
 import { FeaturedSectionTextLeft } from './components/Sections/FeaturedSectionTextLeft'
 import { FeaturedSectionTextRight } from './components/Sections/FeaturedSectionTextRight'
 import { FeaturedSectionTripleImage } from './components/Sections/FeaturedSectionTripleImage'
+import { SiteSearchCallout } from './components/SiteSearchCallout'
 import { SliderNav } from './components/SliderNav'
 import { Spacer } from './components/Spacer'
 import { Spinner } from './components/Spinner'
@@ -246,6 +247,7 @@ export const shortcodes = {
     FeaturedSectionTextLeft,
     FeaturedSectionTextRight,
     FeaturedSectionTripleImage,
+    SiteSearchCallout,
     SliderNav,
     Spacer,
     Spinner,
