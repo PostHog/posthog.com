@@ -1,3 +1,5 @@
+const slugify = require('slugify')
+
 const retrievePages = (type, regex) => {
     return {
         query: `
@@ -25,9 +27,13 @@ const retrievePages = (type, regex) => {
             }
         `,
         transformer: ({ data }) =>
-            data.docs.nodes.map(({ id, frontmatter, ...page }) => {
+            data.docs.nodes.map(({ id, frontmatter, headings, ...page }) => {
                 return {
                     ...page,
+                    headings: headings.map((heading) => ({
+                        ...heading,
+                        fragment: slugify(heading.value, { lower: true }),
+                    })),
                     id,
                     title: frontmatter.title,
                     type,

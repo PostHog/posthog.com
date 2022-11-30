@@ -23,6 +23,7 @@ type Result = Hit<{
     headings: {
         value: string
         depth: number
+        fragment: string
     }[]
     excerpt: string
 }>
@@ -369,7 +370,9 @@ const Hits: React.FC<HitsProps> = ({ activeOption }) => {
                                                     key={activeOption.type + heading.value + index}
                                                     className="text-sm jumpTo pl-6"
                                                 >
-                                                    <span>{heading.value}</span>
+                                                    <Link to={`/${activeOption.slug}#${heading.fragment}`}>
+                                                        {heading.value}
+                                                    </Link>
                                                 </li>
                                             )
                                         })}
