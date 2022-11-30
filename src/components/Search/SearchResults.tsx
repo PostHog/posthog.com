@@ -227,11 +227,16 @@ const RefinementList: React.FC<RefinementListProps> = (props) => {
                                     )}
                                 >
                                     <span className="text-sm ui-checked:font-bold">{item.name}</span>
-                                    <span
-                                        className={classNames('text-xs', checked ? 'text-black/40' : 'text-black/40')}
-                                    >
-                                        {result?.count || 0}
-                                    </span>
+                                    {item.type !== 'all' && (
+                                        <span
+                                            className={classNames(
+                                                'text-xs',
+                                                checked ? 'text-black/40' : 'text-black/40'
+                                            )}
+                                        >
+                                            {result?.count || 0}
+                                        </span>
+                                    )}
                                 </label>
                             )}
                         </RadioGroup.Option>
