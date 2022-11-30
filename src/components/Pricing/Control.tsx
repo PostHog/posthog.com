@@ -443,7 +443,6 @@ const Control = (): JSX.Element => {
                     </div>
                 </div>
             </section>
-
             <section className={`${section} mt-12 px-0 md:px-4`}>
                 <h2 className="text-2xl m-0 flex items-center">What comes in PostHog?</h2>
                 <p className="m-0 text-black/50 font-medium mb-7">Get access to all features and no plan limits.</p>
@@ -451,16 +450,16 @@ const Control = (): JSX.Element => {
             </section>
             <section className={`${section} mb-12 mt-12 md:mt-24 md:px-4`}>
                 <h2 className="text-2xl m-0 flex items-center border-b border-dashed border-gray-accent-light pb-4">
-                    Compare all plans
-                </h2>
-                <AllPlans />
-            </section>
-            <section className={`${section} mb-12 mt-12 md:mt-24 md:px-4`}>
-                <h2 className="text-2xl m-0 flex items-center border-b border-dashed border-gray-accent-light pb-4">
                     <SelfHostIcon className="opacity-30 w-[36px] mr-2" />
                     <span>Want to self-host PostHog?</span>
                 </h2>
                 <SelfHost />
+            </section>
+            <section className={`${section} mb-12 mt-12 md:mt-24 md:px-4`}>
+                <h2 className="text-2xl m-0 flex items-center border-b border-dashed border-gray-accent-light pb-4">
+                    Compare all plans
+                </h2>
+                <AllPlans />
             </section>
             <section className={`${section} mb-12 mt-12 md:mt-24 md:px-4`}>
                 <h2 className="text-2xl m-0 mb-6 pb-6 border-b border-gray-accent-light border-dashed">Questions</h2>
