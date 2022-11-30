@@ -29,7 +29,7 @@ Product engineers also have responsibility for the overall product they are work
 - responsible for fixing the parts of their product that break or have bugs
 - more willing to build a product from scratch for users, less loyal to features they’ve added in the past
 
-[Incident.io](http://Incident.io) sums this up as:
+[incident.io](http://incident.io) sums this up as:
 
 > “Care more about outcomes and impact than the exact implementation, or the tools used to solve the problem.”
 
@@ -47,11 +47,11 @@ With a basic idea of what a product engineer is, we can dive deeper into the cha
 
 One characteristic that distinguishes product engineers is their “customer obsession.” They care a lot about the people and organizations using their product and want to build a better solution for them.
 
-Customer obsession manifests in a couple of ways. First is that they talk to users. Talking to users isn’t only a job for product managers and salespeople. Product engineers must do this too. They must understand the real problems users are having and figure out solutions for them. This might entail working with a product manager or designer, but it is the ultimate responsibility of the product engineer to make it happen. [incident.io](http://Incident.io) is looking for this in their job post:
+Customer obsession manifests in a couple of ways. First is that they talk to users. Talking to users isn’t only a job for product managers and salespeople. Product engineers must do this too. They must understand the real problems users are having and figure out solutions for them. This might entail working with a product manager or designer, but it is the ultimate responsibility of the product engineer to make it happen. [incident.io](http://incident.io) is looking for this in their job post:
 
 > "Enjoy speaking directly with customers and understanding their problems”
 
-Second, customer obsession means shipping features users wants and benefit from. Features without a direct connection to users are less important to product engineers. They focus less of their time here. Quickly shipping these features to improve the user’s experience is important for a product engineer. [Fly.io](http://Fly.io) states this by saying:
+Second, customer obsession means shipping features users wants and benefit from. Features without a direct connection to users are less important to product engineers. They focus less of their time here. Quickly shipping these features to improve the user’s experience is important for a product engineer. [Fly.io](http://fly.io) states this by saying:
 
 > “We're ruthless about working on stuff that our users will see and care about. We are not ruthless about shaping and polishing our code into a radiant-cut gem of perfection.”
 
@@ -87,7 +87,7 @@ Shipping fast and talking to customers requires time on top of engineering requi
 
 > “Great developer tooling. Our CI/CD takes ~10m, and we deploy at least 5x a day. Everyone on the team has contributed to developer experience 💪🏾”
 
-A great developer experience enables product engineers to ship fast and focus on the other parts of the work. Having to deal with integration, deployment, and infrastructure prevents them from focusing on shipping features, talking to customers, doing research, and other important tasks. A company like [incident.io](http://Incident.io) invests heavily in developer experience to enable this:
+A great developer experience enables product engineers to ship fast and focus on the other parts of the work. Having to deal with integration, deployment, and infrastructure prevents them from focusing on shipping features, talking to customers, doing research, and other important tasks. A company like [incident.io](http://incident.io) invests heavily in developer experience to enable this:
 
 > “Investing heavily in the developer experience: whether it’s metrics, logging, tracing and error tracking, or development workflow. Build times are blazing fast: our CI to deploy time is ~5m. Everyone uses a M1 Pro Macbook, and you have budget for other equipment should you need it.”
 
