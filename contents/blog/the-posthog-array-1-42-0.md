@@ -1,6 +1,6 @@
 ---
 date: 2022-11-30
-title: "Array 1.42.0: Vote on our roadmap!"
+title: "Array 1.42.0: Get beta features via our roadmap!"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -25,7 +25,7 @@ If you haven't run async migrations 0005-0007 yet, or if they aren't available o
 - [New: Area chart visualization](#new-area-chart-visualization)
 - [New: URL breakdown normalisations](#new-url-breakdown-normalisations)
 - [New: Share recordings more easily](#new-share-recordings-more-easily)
-- [New: Vote on our roadmap](#new-vote-on-our-roadmap)
+- [New: Get beta features via our roadmap](#new-get-beta-features-via-our-roadmap)
 - [Boring legal bit: Policy updates](#boring-legal-bit-policy-updates)
 
 ### New: Area chart visualization
