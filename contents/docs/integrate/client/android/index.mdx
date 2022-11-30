@@ -131,6 +131,46 @@ PostHog.with(this)
                                   .putValue("hero", "superhog"));
 ```
 
+### Feature Flags
+
+PostHog v1.10.0 introduced [Feature Flags](/docs/user-guides/feature-flags), which allow you to safely deploy and roll back new features. This feature requires posthog-android version of `2.0.0` or above.
+
+Here's how you can use them:
+
+-   Check if a feature is enabled:
+
+```java
+PostHog.with(this).isFeatureEnabled("enabled-flag")
+```
+
+-   Trigger a reload of the feature flags:
+
+```java
+PostHog.with(this).reloadFeatureFlags()
+```
+
+**Get a flag value**
+
+If you're using multivariate feature flags, you can also get the value of the flag, as well as whether or not it is enabled.
+
+```java
+PostHog.with(this).getFeatureFlag("enabled-flag")
+```
+
+-   By default, this function will send a `$feature_flag_called` event to your instance every time it's called so you're able to do analytics.
+
+### Groups
+
+PostHog 1.31.0 introduced support for [group analytics](/docs/user-guides/group-analytics), which allows you to associate users and events with larger groups (teams, organizations, etc.). This feature requires posthog-android version of `2.0.0` or above.
+
+> **Note: ** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
+
+-   Capture an event and associate it with a group
+
+```java
+PostHog.with(this).group("group-type", "group-key", new Properties().putValue("name", "some-company-name"));
+```
+
 ## All configuration options
 
 When creating the PostHog client, there are many options you can set:
