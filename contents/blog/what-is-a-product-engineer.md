@@ -6,9 +6,9 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: ["ian-vanagas"]
-featuredImage: ../images/blog/posthog-company-culture-blog.png
+featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
-categories: ["Startups"]
+categories: ["Startups", "Guides"]
 ---
 
 Startups see their path to success as building a product many people want and pay for. Out of this need came the role of product engineer. They are a core part of many teams building the next generation of great products. More startups are hiring product engineers, and more people are building the skills needed to be one.
@@ -95,10 +95,14 @@ A great developer experience enables product engineers to ship fast and focus on
 
 From these characteristics, we can define the skills product engineers have, here’s a list:
 
-- Ship features that users care about, where ever they are on the stack. Ship rapidly and iterate.
+- Ship features that users care about, wherever they are on the stack. Ship rapidly and iterate.
+
 - Develop opinions, be able to communicate them, and turn them into features. Be able to explain why a feature matters to customers as well as its importance in the competitive landscape.
+
 - Create prototypes and test them with users. Run experiments and understand their results. Be able to design for yourself and use design systems.
+
 - Talk with customers, analyze data, and be aware of the competitive landscape to understand what to build.
+
 - Use tools that automate non-product work like infrastructure, integration, deployment, and testing.
 
 ## Why do product engineers matter?
