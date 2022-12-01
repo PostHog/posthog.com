@@ -66,7 +66,6 @@ export default function RoadmapPage() {
                             </Section>
 
                             <div className="article-content px-5 lg:px-12 w-full transition-all lg:max-w-3xl mx-auto pb-6">
-
                                 <h3 className="font-bold text-5xl mb-8 xl:mt-0">How to install</h3>
                                 <ol>
                                     <li>
@@ -79,33 +78,37 @@ export default function RoadmapPage() {
                                         unpacked extension and upload it.
                                     </li>
                                     <li>
-                                        Chrome's extension store can be buggy - just restart after you enable developer mode
-                                        if you have any issues.
+                                        Chrome's extension store can be buggy - just restart after you enable developer
+                                        mode if you have any issues.
                                     </li>
                                 </ol>
 
                                 <h3 className="font-bold text-5xl mb-8 xl:mt-0">How to use</h3>
                                 <ol>
                                     <li>
-                                        Once Sidecar is installed, go to your CRM / customer support tool or anywhere you
-                                        might find a customers's name.
+                                        Once Sidecar is installed, go to your CRM / customer support tool or anywhere
+                                        you might find a customers's name.
                                     </li>
                                     <li>
-                                        The Sidecar slide out will appear. Select where your PostHog instance exists (if you
-                                        use cloud, you're probably on 'PostHog US')
+                                        The Sidecar slide out will appear. Select where your PostHog instance exists (if
+                                        you use cloud, you're probably on 'PostHog US')
                                     </li>
                                     <li>
                                         Insert a personal API key by going to https://app.posthog.com/me/settings (or
                                         https://example.com/me/settings if you self host)
                                     </li>
                                     <li>
-                                        Now you can select which fields you display on the page. These can be either person
-                                        or group properties.
+                                        If you have an ad-blocker enabled, you may need to disable this before hitting
+                                        'Next'.
                                     </li>
                                     <li>
-                                        If you now search, Sidecar will search your PostHog data by email or by distinct ID.
-                                        It will default search the string that is selected before you right click, but you
-                                        can edit the search manually afterwards.
+                                        Now you can select which fields you display on the page. These can be either
+                                        person or group properties.
+                                    </li>
+                                    <li>
+                                        If you now search, Sidecar will search your PostHog data by email or by distinct
+                                        ID. It will default search the string that is selected before you right click,
+                                        but you can edit the search manually afterwards.
                                     </li>
                                     <li>Happy dealing with customers, with much more context.</li>
                                 </ol>
@@ -115,19 +118,21 @@ export default function RoadmapPage() {
                                 </h3>
 
                                 <p>
-                                    For feedback, please join our <Link to="/slack">community chat</Link>, and post it in
-                                    the #team-website-and-docs channel.
+                                    For feedback, please join our <Link to="/slack">community chat</Link>, and post it
+                                    in the #team-website-and-docs channel.
                                 </p>
                                 <p>
                                     For bugs,{' '}
-                                    <Link to="https://github.com/PostHog/sidecar/issues/new">create an issue</Link> in the
-                                    Sidecar repo
+                                    <Link to="https://github.com/PostHog/sidecar/issues/new">create an issue</Link> in
+                                    the Sidecar repo
                                 </p>
                                 <p>
                                     To contribute code, we're grateful for{' '}
-                                    <Link to="https://github.com/PostHog/sidecar">pull requests in the sidecar repo</Link>.
-                                    To make sure we can merge your work, we recommend talking about it with us in the Slack
-                                    channel. We give merch for cool features.
+                                    <Link to="https://github.com/PostHog/sidecar">
+                                        pull requests in the sidecar repo
+                                    </Link>
+                                    . To make sure we can merge your work, we recommend talking about it with us in the
+                                    Slack channel. We give merch for cool features.
                                 </p>
 
                                 <h3 className="font-bold text-5xl mb-8 xl:mt-0">Feature ideas</h3>
@@ -142,7 +147,8 @@ export default function RoadmapPage() {
                                         Ability to update a user's data in the toolbar, and pushing it back into PostHog
                                     </li>
                                     <li>
-                                        Ability to add customer user fields in the toolbar, and pushing it back into PostHog
+                                        Ability to add customer user fields in the toolbar, and pushing it back into
+                                        PostHog
                                     </li>
                                     <li>Ability to scrape a page and automatically update a user's profile</li>
                                 </ul>

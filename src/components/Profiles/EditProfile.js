@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Form, Field, Formik } from 'formik'
 import Button from 'components/CommunityQuestions/Button'
+import Icons, { Markdown } from 'components/Icons'
+import * as Yup from 'yup'
 
 const fields = {
     first_name: {
@@ -23,7 +25,7 @@ const fields = {
                 as="textarea"
                 type="text"
                 name="biography"
-                placeholder="Biography"
+                placeholder="280 characters or less..."
                 className="py-2 px-4 text-lg rounded-md w-full dark:text-primary border-gray-accent-light border mb-2"
             />
         ),
@@ -34,6 +36,16 @@ const fields = {
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1)
 }
+
+const ValidationSchema = Yup.object().shape({
+    first_name: Yup.string().required('Required'),
+    last_name: Yup.string().required('Required'),
+    website: Yup.string().url('Invalid URL').nullable(),
+    github: Yup.string().url('Invalid URL').nullable(),
+    linkedin: Yup.string().url('Invalid URL').nullable(),
+    twitter: Yup.string().url('Invalid URL').nullable(),
+    biography: Yup.string().max(280, 'Exceeds 280 characters').nullable(),
+})
 
 export default function EditProfile({ profile, onSubmit }) {
     if (!profile) return null
@@ -61,23 +73,20 @@ export default function EditProfile({ profile, onSubmit }) {
     return (
         <Formik
             initialValues={{ first_name, last_name, website, github, linkedin, twitter, biography }}
-            validate={(values) => {
-                const errors = {}
-                if (!values.first_name) {
-                    errors.first_name = 'Required'
-                }
-                if (!values.last_name) {
-                    errors.last_name = 'Required'
-                }
-                return errors
-            }}
+            validationSchema={ValidationSchema}
             onSubmit={handleSubmit}
         >
-            {({ isSubmitting, isValid, values, setFieldValue, submitForm }) => {
+            {({ isSubmitting, isValid, values, errors, setFieldValue, submitForm }) => {
                 return (
                     <Form className="m-0">
+                        <h2>Update profile</h2>
+                        <p>
+                            Tip: Be sure to use full URLs when adding links to your website, GitHub, LinkedIn and
+                            Twitter (start with https)
+                        </p>
                         <div className="grid grid-cols-2 gap-x-4 gap-y-4 m-0">
                             {Object.keys(values).map((key) => {
+                                const error = errors[key]
                                 const field = fields[key]
                                 const label = field?.label || capitalizeFirstLetter(key.replaceAll('_', ' '))
                                 return (
@@ -85,16 +94,24 @@ export default function EditProfile({ profile, onSubmit }) {
                                         <label htmlFor={key}>{label}</label>
                                         {field?.component || (
                                             <Field
-                                                className="py-2 px-4 text-lg rounded-md w-full dark:text-primary border-gray-accent-light border"
+                                                className="py-2 px-4 text-lg rounded-md w-full dark:text-primary border-gray-accent-light border m-0"
                                                 type={field?.type || 'text'}
                                                 name={key}
                                                 placeholder={label}
                                             />
                                         )}
+                                        {error && (
+                                            <span className="text-red font-semibold inline-block my-1">{error}</span>
+                                        )}
                                     </div>
                                 )
                             })}
                         </div>
+
+                        <p className=" text-sm flex items-center space-x-2">
+                            <Markdown />
+                            <span>Markdown is allowed - even encouraged!</span>
+                        </p>
 
                         <Button loading={isSubmitting} disabled={isSubmitting || !isValid} type="submit">
                             Update

@@ -1,0 +1,121 @@
+---
+title: Self-hosted open-source PostHog
+sidebarTitle: Deployment
+sidebar: Docs
+showTitle: true
+---
+
+import Disclaimer from '../deploy/snippets/disclaimer'
+
+<Disclaimer />
+
+You can self-host PostHog the open-source version in weird and wonderful ways such as [monitor a home IoT system in your basement](https://gist.github.com/mariusandra/d8add5fc7f32bedeae45d9ce8eb75b35).
+
+## Requirements
+
+- You have deployed a Linux Ubuntu Virtual Machine.
+    - An instance with 2GB of RAM can handle approximately 100k events spread over a month
+    - We highly recommend an instance with at least 4GB of RAM to handle any surges in event volume
+    - For volumes over 100K a month we'd recommend using [Kubernetes](/docs/self-host/deploy/other) which requires [PostHog Enterprise](/docs/self-host/enterprise/overview)
+- You have set up an `A` record to connect a custom domain to your instance.
+    - PostHog will automatically create an SSL certificate for your domain using LetsEncrypt
+
+New deployments of PostHog open-source using Kubernetes are no longer supported.
+
+## Configuration
+
+There are various ways to configure and personalize your PostHog instance to better suit your needs. In this section you will find all the information you need about settings and options you can configure to get what you need out of PostHog.
+
+-   [Environment variables](/docs/self-host/configure/environment-variables)
+-   [Upgrading PostHog](/docs/runbook/upgrading-posthog)
+-   [Securing PostHog](/docs/self-host/configure/securing-posthog)
+-   [Running behind proxy](/docs/self-host/configure/running-behind-proxy)
+-   [Email configuration](/docs/self-host/configure/email)
+
+## Setting up the stack
+
+To get started, all we need to do is run the following command, which will spin up a fresh PostHog deployment for us automatically!
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/posthog/posthog/HEAD/bin/deploy-hobby)"
+```
+
+You'll now be asked to provide the release tag you would like to use, as well as the domain you have connected to your instance.
+
+Once everything has been setup, you should see the following message:
+
+```
+We will need to wait ~5-10 minutes for things to settle down, migrations to finish, and TLS certs to be issued
+
+⏳ Waiting for PostHog web to boot (this will take a few minutes)
+```
+
+PostHog will wait here on a couple of tasks that need to be completed, which should only take a couple minutes.
+
+Once this is complete, you should be able to see your PostHog dashboard on the domain you provided!
+
+> If you notice this step taking longer than 10 minutes, it's best to cancel it with `Ctrl+C` and take a look at the [troubleshooting](#troubleshooting) section.
+
+### Customizing your deployment (optional)
+
+By default, the `docker-compose.yml` file that gets run comes with a series of default config values that should work for most deployments.
+If you need to customize anything, you can take a look at the [full list of environment variables](/docs/self-host/configure/environment-variables).
+After making any changes, simply restart the stack with `docker-compose`.
+
+Additionally, if you would like to run a different version of PostHog, you can change the tag for the web, worker, and plugins services.
+Check out [here](https://hub.docker.com/r/posthog/posthog) for a list of all available tags.
+
+## Troubleshooting
+
+If you have already run the one-step deployment command above and something went wrong, this section covers a number of steps you can take to debug issues.
+
+### Checking that all containers are running
+
+We can use `docker ps` to check that all of our services are running.
+
+```bash
+$ docker ps
+
+CONTAINER ID   IMAGE                               COMMAND     CREATED    STATUS    PORTS   NAMES
+21a2f62d6e50   posthog/posthog:release-1.39.1      ...         1m ago     Up 1m     ...     ...
+77face12d3e2   posthog/posthog:release-1.39.1      ...         1m ago     Up 1m     ...     ...
+3b4bc7394049   posthog/posthog:release-1.39.1      ...         1m ago     Up 1m     ...     ...
+03f393c7aa84   caddy:2.6.1                         ...         1m ago     Up 1m     ...     ...
+f1060c3d8d73   clickhouse/clickhouse-server:22.3   ...         1m ago     Up 1m     ...     ...
+7d2353a6bddf   bitnami/kafka:2.8.1-debian-10-r99   ...         1m ago     Up 1m     ...     ...
+72051397040e   zookeeper:3.7.0                     ...         1m ago     Up 1m     ...     ...
+ff42ccf14481   redis:6.2.7-alpine                  ...         1m ago     Up 1m     ...     ...
+402a0eef69ae   postgres:12-alpine                  ...         1m ago     Up 1m     ...     ...
+da0d115dd02e   minio/minio                         ...         1m ago     Up 1m     ...     ...
+```
+
+You should see all the same containers as above. If any containers aren't showing up or show that they've restarted recently, it's worth checking their logs to see what the issue is.
+
+### Checking the logs of each container
+
+We can use the following command to check the logs for each of our containers.
+
+```bash
+docker logs <container_name>
+```
+
+The best place to start looking is in the `web` container, which runs all the database migrations and will produce an error if any have failed.
+
+> Running into issues with deployment? Ask a [question here](/questions) or check out our [Slack](/slack) to get help.
+
+## Upgrading
+
+To upgrade, you can run the `upgrade-hobby` script from the PostHog repo.
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/posthog/posthog/HEAD/bin/upgrade-hobby)"
+```
+
+>**Warning:** Before upgrading, make sure you have created back-ups of all your data!
+
+## Migrating
+
+If you need to move into production or if your server is struggling, you can migrate to a production instance as follows:
+
+-   to [PostHog Cloud](/docs/migrate/migrate-between-cloud-and-self-hosted) for hands-off experience
+-   to [a bigger self-hosted instance](/docs/migrate/migrate-to-another-self-hosted-instance)

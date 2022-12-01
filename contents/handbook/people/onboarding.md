@@ -14,7 +14,28 @@ Our [team](https://posthog.com/handbook/company/team) is spread across the world
 
 ## Onboarding checklist
 
-This is maintained as an Issue template in GitHub, [which you can view here](https://github.com/PostHog/company-internal/blob/master/.github/ISSUE_TEMPLATE/onboarding.md). The People team will create a new onboarding Issue for each new joiner. 
+This is maintained as an issue template in GitHub, [which you can view here](https://github.com/PostHog/company-internal/blob/master/.github/ISSUE_TEMPLATE/onboarding.md). The People team will create a new onboarding Issue for each new joiner. 
+
+### Onboarding email
+
+We send an introductory email to all new hires to welcome them to the team and ease them in the some of the essential actions we need them to take. This needs communicating openly, as users may not be able to access the `company-internal` repo yet. So, we send them an email. 
+
+The onboarding email is sent by the People team directly. We want to strike a balance between sending attractive, personalized emails and avoiding creating process or using overpowered tools, such as Customer.io or Mailchimp. So, we send email using Gmail Layouts. You can access Gmail Layouts with this button: 
+
+![google email layouts](../images/handbook/layouts-button.png)
+
+If this is the first time you've used Gmail Layouts, select `Default Styling` before choosing a template. Choosing Black `#00000` as your primary colour will create simple black buttons which match the design of other emails. Please also upload a PostHog logo and enter our Twitter and LinkedIn links. You can use the following text in your email footers. 
+
+```
+No hedgehogs were harmed in the making of this email.
+PostHog's mailing address is 2261 Market Street #4008 in the city of San Francisco, CA 94114
+```
+
+With default styling set, you can now choose the 'Call to action' template. 
+
+![google email layouts](../images/handbook/layout-email.png)
+
+With an email template chosen, you can then enter the copy you want to send. [This doc is a suggested template](https://docs.google.com/document/d/1O3_d4v3xgOr1awKkJb8K3xj8-6VV_fHsPkwtgaEhWKI/edit?usp=sharing) with important actions specified, though we recommend personalizing it to the individual. [Here is an accompanying image](../images/handbook/handbook-onboarding-email.jpg) to use. We've linked to these as docs and direct images to make the formatting easier for you.  
 
 ## Onboarding buddy
 

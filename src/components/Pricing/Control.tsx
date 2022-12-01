@@ -257,11 +257,7 @@ const Control = (): JSX.Element => {
                     </div>
 
                     <div className={`${gridCell} ${gridCellBottom} lg:order-7`}>
-                        <Breakdown
-                            priceLength={8}
-                            description="No credit card required for up to 10,000 events/mo"
-                            pricingOption="cloud"
-                        />
+                        <Breakdown priceLength={8} pricingOption="cloud" />
                     </div>
 
                     <header className={`${gridCell} ${gridCellTop} lg:order-2`}>
@@ -285,11 +281,7 @@ const Control = (): JSX.Element => {
                     </div>
 
                     <div className={`${gridCell} ${gridCellBottom} lg:order-8`}>
-                        <Breakdown
-                            priceLength={6}
-                            description="No credit card required for up to 500 sessions/mo"
-                            pricingOption="session-recording"
-                        />
+                        <Breakdown priceLength={6} pricingOption="session-recording" />
                     </div>
 
                     <header className={`${gridCell} ${gridCellTop} pb-4 lg:pb-0 lg:order-3`}>

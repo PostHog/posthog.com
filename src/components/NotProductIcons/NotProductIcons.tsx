@@ -53,10 +53,19 @@ export const NotProductIcons = {
         </svg>
     ),
     discount: (
-        <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"><path fillRule="evenodd" d="M18.709 5.275a.999.999 0 0 1 0 1.414l-12.02 12.02a.999.999 0 1 1-1.414-1.413l12.02-12.02a.999.999 0 0 1 1.414 0Z" clipRule="evenodd"/><path d="M4.75 7.608a2.423 2.423 0 1 0 4.846.001 2.423 2.423 0 0 0-4.846-.001Zm1.5 0a.922.922 0 1 1 1.845 0 .922.922 0 0 1-1.845 0ZM15.059 16.505a2.423 2.423 0 1 0 4.845 0 2.423 2.423 0 0 0-4.845 0Zm1.5 0a.923.923 0 1 1 1.846 0 .923.923 0 0 1-1.846 0Z"/></svg>
+        <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
+            <path
+                fillRule="evenodd"
+                d="M18.709 5.275a.999.999 0 0 1 0 1.414l-12.02 12.02a.999.999 0 1 1-1.414-1.413l12.02-12.02a.999.999 0 0 1 1.414 0Z"
+                clipRule="evenodd"
+            />
+            <path d="M4.75 7.608a2.423 2.423 0 1 0 4.846.001 2.423 2.423 0 0 0-4.846-.001Zm1.5 0a.922.922 0 1 1 1.845 0 .922.922 0 0 1-1.845 0ZM15.059 16.505a2.423 2.423 0 1 0 4.845 0 2.423 2.423 0 0 0-4.845 0Zm1.5 0a.923.923 0 1 1 1.846 0 .923.923 0 0 1-1.846 0Z" />
+        </svg>
     ),
     enterprise: (
-        <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"><path d="M19.667 4C18 4 15 3.6 12 1.2 9.6 3.6 6.4 4 4.534 4 3.6 4 3 3.9 3 3.9v5.155c0 10.8 9 13.745 9 13.745s9-2.945 9-13.745V3.9s-.5.1-1.333.1Zm-8.792 11.6L7.05 11.55l1.125-1.35 2.7 1.913L16.5 7.95l1.012.9-6.637 6.75Z"/></svg>
+        <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
+            <path d="M19.667 4C18 4 15 3.6 12 1.2 9.6 3.6 6.4 4 4.534 4 3.6 4 3 3.9 3 3.9v5.155c0 10.8 9 13.745 9 13.745s9-2.945 9-13.745V3.9s-.5.1-1.333.1Zm-8.792 11.6L7.05 11.55l1.125-1.35 2.7 1.913L16.5 7.95l1.012.9-6.637 6.75Z" />
+        </svg>
     ),
     investors: (
         <svg className="fill-current" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

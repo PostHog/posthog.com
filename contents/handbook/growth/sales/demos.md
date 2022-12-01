@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-> Want to see PostHog in action? [Book a PostHog demo](/book-a-demo) with our customer success team, or try our [live demo environment](https://demo.posthog.com/). 
+> Want to see PostHog in action? [Book a PostHog demo](/book-a-demo) with our customer success team. 
 
 ## Giving great demos
 
@@ -40,22 +40,11 @@ When doing a demo of PostHog, you should prioritize using the following environm
    
     This is the best way to do a demo because you can help the client with their exact needs and you show them how to do what they want with their own data, so they immediately see the value.
 
-2. The [PostHog Demo Environment](https://demo.posthog.com)
-
-    The demo instance was designed to be an environment with a significant amount of "good" demo data that showcases the multiple features of PostHog and allows clients to log in and run the demo themselves (while following your instructions).
-
-    To run a demo on the demo environment, you should:
-
-    1. **Have access:** Ask Yakko or James to give you access if you don't have it.
-    2. **Invite the client to the instance:** Invite them to the instance so that they can have access themselves without you having to share credentials.
-    3. **Guide the client through a demo while they share their screen:** Take them for a spin of the product as you would do if you were the one navigating. But be patient, the client might want to click around and get a feel for PostHog, which is encouraged!
-    4. **Revoke their access at the end of the call:** After the call, revoke the client's access to the instance or ask Yakko to do it if you do not have permission.
-
-3. A local environment
+2. A local environment
 
     This is best if you have a good set of demo data locally. You can use some our management commands for data generation to do this.
 
-4. PostHog Cloud 
+3. PostHog Cloud 
 
     Only demo using PostHog Cloud (on the PostHog team account) if you really have to. Be careful not to expose sensitive data when doing the demo. 
 

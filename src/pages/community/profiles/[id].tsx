@@ -1,21 +1,15 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { PageProps } from 'gatsby'
 
-import { handbook } from '../../../sidebars/sidebars.json'
+import { docs } from '../../../sidebars/sidebars.json'
 
 import SEO from 'components/seo'
 import Layout from 'components/Layout'
 import PostLayout, { SidebarSection } from 'components/PostLayout'
 import { GitHub, LinkedIn, Twitter } from 'components/Icons'
-import { Blockquote } from 'components/BlockQuote'
-import { InlineCode } from 'components/InlineCode'
-import { MdxCodeBlock } from 'components/CodeBlock'
-import { ZoomImage } from 'components/ZoomImage'
 import Link from 'components/Link'
-import { Heading } from 'components/Heading'
 import Markdown from 'markdown-to-jsx'
-import { classNames } from 'lib/utils'
-import { OrgProvider, UserProvider, useUser } from 'squeak-react'
+import { OrgProvider, UserProvider, useUser, Question } from 'squeak-react'
 import Modal from 'components/Modal'
 import EditProfile from 'components/Profiles/EditProfile'
 
@@ -73,6 +67,7 @@ export default function ProfilePage({ params }: PageProps) {
 
     const [profile, setProfile] = React.useState<SqueakProfile | undefined>(undefined)
     const [editModalOpen, setEditModalOpen] = React.useState(false)
+    const [questions, setQuestions] = React.useState([])
 
     const name = [profile?.first_name, profile?.last_name].filter(Boolean).join(' ')
 
@@ -88,6 +83,30 @@ export default function ProfilePage({ params }: PageProps) {
                 })
                 .then((profile) => {
                     setProfile(profile)
+                })
+                .catch((err) => {
+                    console.error(err)
+                })
+            fetch(`https://squeak.cloud/api/questions`, {
+                method: 'POST',
+                body: JSON.stringify({
+                    organizationId: 'a898bcf2-c5b9-4039-82a0-a00220a8c626',
+                    profileId: id,
+                    published: true,
+                }),
+                headers: {
+                    'content-type': 'application/json',
+                },
+            })
+                .then((res) => {
+                    if (res.status === 404) {
+                        throw new Error('not found')
+                    }
+
+                    return res.json()
+                })
+                .then((questions) => {
+                    setQuestions(questions?.questions)
                 })
                 .catch((err) => {
                     console.error(err)
@@ -127,32 +146,50 @@ export default function ProfilePage({ params }: PageProps) {
                                 { name: 'Community', url: '/questions' },
                                 { name: 'Profile', url: `/community/profiles/${id}` },
                             ]}
-                            menu={handbook}
+                            menu={docs}
                             sidebar={<ProfileSidebar setEditModalOpen={setEditModalOpen} profile={profile} />}
                             hideSurvey
                         >
                             {profile ? (
                                 <div className="space-y-8 my-8">
-                                    <section className="flex justify-between">
+                                    <section className="">
+                                        <Avatar
+                                            className="w-24 h-24 float-right bg-gray-accent dark:gray-accent-dark"
+                                            src={profile.avatar}
+                                        />
+
                                         <div className="space-y-3">
-                                            <h1 className="m-0">{name || 'Anonymous'}</h1>
+                                            <h1 className="m-0 mb-8">{name || 'Anonymous'}</h1>
                                             {profile.company_role && (
                                                 <p className="text-gray">{profile?.company_role}</p>
                                             )}
                                         </div>
 
-                                        <Avatar className="w-24 h-24" src={profile.avatar} />
+                                        {profile?.biography && (
+                                            <section>
+                                                <h3>Biography</h3>
+
+                                                <Markdown>{profile.biography}</Markdown>
+                                            </section>
+                                        )}
                                     </section>
-
-                                    {profile?.biography && (
-                                        <section>
-                                            <h3>Biography</h3>
-
-                                            <Markdown>{profile.biography}</Markdown>
-                                        </section>
-                                    )}
                                 </div>
                             ) : null}
+                            {questions && questions.length >= 1 && (
+                                <div className="mt-12">
+                                    <h3>Discussions</h3>
+                                    {questions.map((question) => {
+                                        return (
+                                            <Question
+                                                key={question.id}
+                                                question={question}
+                                                apiHost="https://squeak.cloud"
+                                                organizationId="a898bcf2-c5b9-4039-82a0-a00220a8c626"
+                                            />
+                                        )
+                                    })}
+                                </div>
+                            )}
                         </PostLayout>
                     </UserProvider>
                 </Layout>

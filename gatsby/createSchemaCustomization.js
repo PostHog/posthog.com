@@ -138,9 +138,14 @@ module.exports = exports.createSchemaCustomization = async ({ actions, schema })
     }
     type AshbyJobPostingFormDefFieldsSectionsFieldsField {
       type: String,
-        title: String,
-        isNullable: Boolean,
-        path: String
+      title: String,
+      isNullable: Boolean,
+      path: String
+      selectableValues: [AshbyJobPostingSelectableValue!]
+    }
+    type AshbyJobPostingSelectableValue {
+      label: String!
+      value: String!
     }
     type AshbyJobPostingFormDefFieldsSectionsFields {
       descriptionPlain: String,
@@ -149,7 +154,6 @@ module.exports = exports.createSchemaCustomization = async ({ actions, schema })
     }
     type AshbyJobPostingFormDefFieldsSections {
       fields: [AshbyJobPostingFormDefFieldsSectionsFields]
-        
     }
     type AshbyJobPostingFormDef {
       sections: [AshbyJobPostingFormDefFieldsSections]
@@ -184,6 +188,8 @@ module.exports = exports.createSchemaCustomization = async ({ actions, schema })
           heart: Int,
           eyes: Int,
           _1: Int,
+          plus1: Int,
+          minus1: Int
     }
     type SqueakGitHubPage {
       title: String,
@@ -202,6 +208,7 @@ module.exports = exports.createSchemaCustomization = async ({ actions, schema })
       otherLinks: [String],
       githubPages: [SqueakGitHubPage],
       milestone: Boolean,
+      thumbnail: File @link(from: "thumbnail___NODE")
     }
   `)
     createTypes([

@@ -2,6 +2,8 @@
 title: Monitoring with Prometheus and Grafana
 ---
 
+*Only relevant for [PostHog Enterprise Self-Hosted](/docs/self-host/enterprise/overview) deployed with Kubernetes*
+
 This guide covers how to configure monitoring of your self-hosted deployment through Grafana.
 If you are targeting a production use-case, we _highly_ recommend setting up all of these options.
 
