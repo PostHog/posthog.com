@@ -520,7 +520,7 @@ export default function PostLayout({
         } ${menu ? 'mx-auto' : 'lg:ml-auto'}`
 
     return (
-        <div id="menu-wrapper" className="border-t border-dashed border-gray-accent-light">
+        <div id="menu-wrapper" className="border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark">
             {menu && (
                 <div className="block lg:hidden py-2 px-4 border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark flex justify-between sticky top-[-2px] bg-tan dark:bg-primary z-30">
                     <button onClick={handleMobileMenuClick} className="py-2 px-3">
@@ -567,7 +567,7 @@ export default function PostLayout({
             >
                 {menu && (
                     <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:block hidden relative z-20">
-                        <aside className="lg:sticky bg-tan dark:bg-primary top-0 flex-shrink-0 w-full justify-self-end px-4 lg:box-border my-10 lg:my-0 mr-auto overflow-y-auto lg:h-[calc(100vh-40px)] pb-10">
+                        <aside className="lg:sticky bg-tan dark:bg-primary top-0 flex-shrink-0 w-full justify-self-end px-4 lg:box-border my-10 lg:my-0 mr-auto overflow-y-auto lg:h-screen pb-10">
                             {!hideSearch && (
                                 <div className="lg:sticky top-0 z-20 pt-4 -mx-2 px-1 bg-tan dark:bg-primary relative after:absolute after:top-full after:h-[1px] after:left-0 after:right-0 after:content-[''] after:bg-gradient-to-b after:from-tan after:via-tan after:to-tan/0 dark:after:from-primary dark:via-tan dark:after:to-primary/0">
                                     <SidebarSearchBox />
