@@ -67,7 +67,9 @@ For example, we pay 4 months notice if we let someone go. I doubt we'd have made
 
 There's a myth that you can only exit (sell your shares) from a VC-backed company through an Initial Public Offering (IPO), or through selling the business.
 
-The reality is that you can sell secondaries, but they aren't guaranteed. Most founders we know do this around the series B, or whenever the company is an obvious success. For employees, this normally starts a couple of rounds later. You can't sell anything like 100% of your stake each time - a few percent of what you own is the norm - VCs want you to remove some personal stress so you can focus on the business, but they still want you hungry for more. As the company gets bigger, this can go from removing any personal debt, to a life changing amount _whilst_ still running the company.
+The reality is that you can sell secondaries, but they aren't guaranteed. Most founders we know do this around the series B, or whenever the company is an obvious success. For employees, this normally starts a couple of rounds later. 
+
+You can't sell anything like 100% of your stake each time – a few percent of what you own is the norm – but VCs want you to remove some personal stress while keeping you hungry for more. As the company gets bigger, this can go from removing any personal debt, to a life changing amount _whilst_ still running the company.
 
 Tim and I both think this path will give us the greatest happiness. It means removing financial stress from our lives, whilst being lucky enough to work on our mission of increasing the number of successful products in the world. It's a huge amount of fun for me to try to beat huge competitors by doing things "the right way" for developers.
 
