@@ -28,7 +28,7 @@ Too book a day off:
 - Block out your own personal GCal to show that you are out. This is because PTO by Roots _only_ books in an all day event in your calendar to show that you are out. If you don't do this, automated meetings such as interviews or demos might still get booked into your cal.  
 - Set an out of office message on your email and have it point to someone else on the team, or hey@posthog.com. PTO by Roots will automatically set your Slack status to out of office and will autorespond to Slack messages. 
 
-> For now, please book in public holidays you plan to take off as well. We have team members working in countries all over the world, so it is not practical for us to book these all in on your behalf. Some people also prefer to work on certain days even if they're considered a public holiday in the country they are living in or visiting. 
+> Please manually book in public holidays you plan to take off as well. We have team members working in countries all over the world, so it is not practical for us to book these all in on your behalf. Some people also prefer to work on certain days even if they're considered a public holiday in the country they are living in or visiting. 
 
 The same rules as above apply regardless of the holiday length and type. Sick leave and any any other types of time off should also be booked in the same way. 
 
