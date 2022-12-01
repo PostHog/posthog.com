@@ -42,17 +42,17 @@ const retrievePages = (type, regex) => {
     }
 }
 
-if (!process.env.ALGOLIA_APP_ID || !process.env.ALGOLIA_API_KEY || !process.env.ALGOLIA_INDEX_NAME) {
+if (!process.env.GATSBY_ALGOLIA_APP_ID || !process.env.ALGOLIA_API_KEY || !process.env.GATSBY_ALGOLIA_INDEX_NAME) {
     console.warn('No Algolia keys present in environment, skipping sending information to algolia')
 }
+
+console.log(process.env.GATSBY_ALGOLIA_APP_ID, process.env.ALGOLIA_API_KEY, process.env.GATSBY_ALGOLIA_INDEX_NAME)
 
 module.exports = {
     // This plugin must be placed last in your list of plugins to ensure that it can query all the GraphQL data
     resolve: `gatsby-plugin-algolia`,
     options: {
         appId: process.env.GATSBY_ALGOLIA_APP_ID,
-        // Use Admin API key without GATSBY_ prefix, so that the key isn't exposed in the application
-        // Tip: use Search API key with GATSBY_ prefix to access the service from within components
         apiKey: process.env.ALGOLIA_API_KEY,
         indexName: process.env.GATSBY_ALGOLIA_INDEX_NAME,
         queries: [
@@ -81,9 +81,10 @@ module.exports = {
                             }
                         `,
                 transformer: ({ data }) => {
-                    return data.endpoints.nodes.map((endpoint) => {
+                    return data.endpoints.nodes.map(({ url, ...endpoint }) => {
                         return {
                             ...endpoint,
+                            slug: url.slice(1),
                             type: 'api',
                         }
                     })
@@ -99,6 +100,7 @@ module.exports = {
                                   replies {
                                     body
                                   }
+                                  permalink
                                   internal {
                                     contentDigest
                                   }
@@ -107,10 +109,11 @@ module.exports = {
                             }
                         `,
                 transformer: ({ data }) => {
-                    return data.questions.nodes.map(({ replies, ...question }) => {
+                    return data.questions.nodes.map(({ replies, permalink, ...question }) => {
                         return {
                             ...question,
                             excerpt: replies?.[0]?.body,
+                            slug: `questions/${permalink || ''}`,
                             type: 'question',
                         }
                     })

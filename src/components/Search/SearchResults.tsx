@@ -276,7 +276,7 @@ const Hits: React.FC<HitsProps> = ({ activeOption, close }) => {
                                 >
                                     <Link
                                         className="w-full px-2 py-3 text-black/75 dark:text-white/75 group-hover:text-black/100 dark:group-hover:text-white/100 font-semibold flex flex-col space-y-0.5 focus:outline-none leading-tight"
-                                        to={'/' + (hit.type === 'api' ? slugify(hit.title, { lower: true }) : hit.slug)}
+                                        to={'/' + hit.slug}
                                         onClick={() => close()}
                                     >
                                         <span
