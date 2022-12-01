@@ -102,7 +102,7 @@ First, you need to want to build something very, very big. You will never be abl
 
 Second, the style of product you want to build may _require_ more capital. With hindsight, we've built a really wide platform with lots of products inside it. The innovation is starting on an open source base, and integrating all the tools that customers need to build a more successful product. That's an awful lot of stuff to build. We also believed that our paid self hosted product would be 90%+ of our revenue, so we'd need to build a free and a paid product on top (although that later turned out not to be true...)
 
-## There are terrible reasons for raising money...
+## Truth #2: There are terrible reasons for raising money
 
 Although there may be exceptions, here are some standard ways to fail:
 
