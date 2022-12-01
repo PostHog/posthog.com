@@ -85,10 +85,10 @@ You’ll need to set environment variables for these. [See (private) instruction
 
 ## Contributing
 
-We <3 contributions big and small. The best ways to do this are:
+We <3 contributions big and small. In priority order (although everything is appreciated) with the most helpful first:
 
 - Give us feedback in our [Slack community](https://posthog.com/slack)
-- Vote on features in our [roadmap](https://posthog.com/roadmap)
+- Vote on features or get early access to beta functionality in our [roadmap](https://posthog.com/roadmap)
 - Open a PR
     - Read [our instructions above](#quick-start) on developing PostHog.com locally
     - Read more [detailed instructions in our manual](https://posthog.com/handbook/engineering/posthog-com/developing-the-website)
