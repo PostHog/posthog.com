@@ -36,7 +36,7 @@ The same rules as above apply regardless of the holiday length and type. Sick le
 
 We operate on a trust basis and we don't count hours or days worked. We trust everyone to manage their own time. 
 
-Whether you have an appointment with your doctor, school run with your kids, or you want to finish an hour early to meet friends or family - we don't mind and you don't need to tell us. Please just add it to your calendar and, if you are customer-facing, please make sure you have cover. 
+Whether you have an appointment with your doctor, school run with your kids, or you want to finish an hour early to meet friends or family - we don't mind and you don't need to tell us. Please just add it to your calendar and, if you are doing anything that could require you to be immediately available (ie support hero / or any customer-facing role), please make sure you have cover. 
 
 ### Sabbaticals
 
