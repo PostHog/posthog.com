@@ -214,7 +214,7 @@ const RefinementList: React.FC<RefinementListProps> = (props) => {
                         <RadioGroup.Option
                             key={item.type}
                             value={item}
-                            disabled={!result?.count}
+                            disabled={!result?.count && item.type !== 'all'}
                             onClick={() => {
                                 if (item.type === props.category.type) {
                                     props.setCategory(categories[0])
