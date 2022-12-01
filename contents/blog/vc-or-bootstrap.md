@@ -55,7 +55,11 @@ However, if you're building a bootstrapped company, you _still_ have to report t
 
 One more party has made a positive difference to us, but for others it can be bad – if your board asks for X, and users want Y, then you may have problems. This depends on the kind of people you raise from and your relationship with them.
 
-There is a critical boss that VC removes though - you, to a certain extent. Personal finances can survive much longer when you have VC funding and when you're early stage. This can lead to a lack of discipline, as mentioned before, or it can lead to longer term thinking. It certainly feels less stressful. The fact you still need to be accountable for spending to your investors, we've found, does mean that when we spend a lot, it is intentional and reasoned.
+There is a critical boss that VC removes though – **you**, to a certain extent. Personal finances can survive much longer when you're early-stage but have  VC funding.
+
+This can lead to a lack of discipline, as mentioned before, or it can lead to longer term thinking. But it's quantifiably less stressful. 
+
+The fact you still need to be accountable for spending to your investors, we've found, means larger spending is intentional and reasoned.
 
 For example, we pay 4 months notice if we let someone go. I doubt we'd have made that call if we were bootstrapped. We simply think it's cheaper to spend money here than to have an underperformer stay for longer because we feel bad. 
 
