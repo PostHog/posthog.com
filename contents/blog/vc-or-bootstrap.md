@@ -19,7 +19,7 @@ There are lots of myths around what it's like run a business with VC funding –
 
 This hasn't been our experience.
 
-This depends entirely on who joins your board, and how you've pitched to them.
+The truth? It depends entirely on who joins your board, and how you've pitched to them.
 
 Our experience has been an intense focus on finding the Ideal Customer Profile, and trying to focus as much as possible on the right users. Yes, we track revenue, signups and so on, but our board sees those as the output of building a great product for a specific set of end users. 
 
