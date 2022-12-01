@@ -110,6 +110,6 @@ Although there may be exceptions, here are some standard ways to fail:
 * You want to hire people to do the early sales for you
 * You want to raise money because of your ego
 
-## ... but for me it was less stressful
+## Why VC = less stress (for me)
 
 Running any company is usually a marathon - I believe that looking after yourself let's you in turn look after users better. That often means raising money.
