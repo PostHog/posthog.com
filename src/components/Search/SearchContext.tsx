@@ -14,7 +14,10 @@ type SearchContextValue = {
 
 export type SearchResultType = 'blog' | 'docs' | 'api' | 'question' | 'handbook' | 'manual'
 
-const searchClient = algoliasearch('7VNQB5W0TX', 'e9ff9279dc8771a35a26d586c73c20a8')
+const searchClient = algoliasearch(
+    process.env.GATSBY_ALGOLIA_APP_ID as string,
+    process.env.GATSBY_ALGOLIA_SEARCH_API_KEY as string
+)
 
 const SearchContext = React.createContext<SearchContextValue>({
     isVisible: false,
@@ -96,7 +99,10 @@ export const SearchProvider: React.FC = ({ children }) => {
                                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                             >
                                 <Dialog.Panel className="w-full max-w-4xl md:mx-4 h-[90vh] md:h-[600px] z-[999999]">
-                                    <InstantSearch searchClient={searchClient} indexName="dev_posthog_com">
+                                    <InstantSearch
+                                        searchClient={searchClient}
+                                        indexName={process.env.GATSBY_ALGOLIA_INDEX_NAME}
+                                    >
                                         <SearchResults initialFilter={initialFilter} />
                                     </InstantSearch>
                                 </Dialog.Panel>

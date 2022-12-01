@@ -50,11 +50,11 @@ module.exports = {
     // This plugin must be placed last in your list of plugins to ensure that it can query all the GraphQL data
     resolve: `gatsby-plugin-algolia`,
     options: {
-        appId: process.env.ALGOLIA_APP_ID,
+        appId: process.env.GATSBY_ALGOLIA_APP_ID,
         // Use Admin API key without GATSBY_ prefix, so that the key isn't exposed in the application
         // Tip: use Search API key with GATSBY_ prefix to access the service from within components
         apiKey: process.env.ALGOLIA_API_KEY,
-        indexName: process.env.ALGOLIA_INDEX_NAME,
+        indexName: process.env.GATSBY_ALGOLIA_INDEX_NAME,
         queries: [
             retrievePages('docs', '/^docs/'),
             retrievePages('manual', '/^manual/'),
