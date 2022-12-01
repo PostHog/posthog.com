@@ -10,6 +10,7 @@ import { RefinementListItem } from 'instantsearch.js/es/connectors/refinement-li
 import { StaticImage } from 'gatsby-plugin-image'
 import { CallToAction } from 'components/CallToAction'
 import { Search } from 'components/Icons/Icons'
+import slugify from 'slugify'
 
 type Result = Hit<{
     id: string
@@ -128,7 +129,7 @@ export default function SearchResults(props: SearchResultsProps) {
                     onKeyDown={handleKeyDown}
                 >
                     <SearchBox />
-                    <Hits activeOption={activeOption} />
+                    <Hits activeOption={activeOption} close={close} />
                     <RefinementList
                         initialFilter={props.initialFilter}
                         category={category}
@@ -215,10 +216,9 @@ const RefinementList: React.FC<RefinementListProps> = (props) => {
                                     props.setCategory(categories[0])
                                 }
                             }}
-                            className={classNames(
-                                item.type === 'not-all' ? 'sr-only' : '',
+                            className={
                                 'relative px-3 first:px-5 py-2 ui-checked:text-red before:absolute before:top-[-1px] before:left-0 before:right-0 before:h-[2px] ui-checked:before:h-[3px] ui-checked:before:bg-red ui-not-checked:before:bg-transparent ui-not-checked:hover:before:bg-black/40 ui-not-checked:text-gray-accent-dark cursor-pointer'
-                            )}
+                            }
                         >
                             {({ checked }) => (
                                 <label
@@ -250,9 +250,10 @@ const RefinementList: React.FC<RefinementListProps> = (props) => {
 
 type HitsProps = {
     activeOption: Result | null
+    close: () => void
 }
 
-const Hits: React.FC<HitsProps> = ({ activeOption }) => {
+const Hits: React.FC<HitsProps> = ({ activeOption, close }) => {
     const { hits } = useHits<Result>()
 
     return (
@@ -269,7 +270,8 @@ const Hits: React.FC<HitsProps> = ({ activeOption }) => {
                                 >
                                     <Link
                                         className="w-full px-2 py-3 text-black/75 group-hover:text-black/100 font-semibold flex flex-col space-y-0.5 focus:outline-none leading-tight"
-                                        to={'/' + hit.slug}
+                                        to={'/' + (hit.type === 'api' ? slugify(hit.title, { lower: true }) : hit.slug)}
+                                        onClick={() => close()}
                                     >
                                         <span
                                             className={`text-[13px] font-normal ${
@@ -370,7 +372,10 @@ const Hits: React.FC<HitsProps> = ({ activeOption }) => {
                                                     key={activeOption.type + heading.value + index}
                                                     className="text-sm jumpTo pl-6"
                                                 >
-                                                    <Link to={`/${activeOption.slug}#${heading.fragment}`}>
+                                                    <Link
+                                                        to={`/${activeOption.slug}#${heading.fragment}`}
+                                                        onClick={() => close()}
+                                                    >
                                                         {heading.value}
                                                     </Link>
                                                 </li>
