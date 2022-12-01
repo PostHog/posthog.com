@@ -10,7 +10,7 @@ import { RefinementListItem } from 'instantsearch.js/es/connectors/refinement-li
 import { StaticImage } from 'gatsby-plugin-image'
 import { CallToAction } from 'components/CallToAction'
 import { Search } from 'components/Icons/Icons'
-import slugify from 'slugify'
+import usePostHog from 'lib/usePostHog'
 
 type Result = Hit<{
     id: string
@@ -84,7 +84,19 @@ export default function SearchResults(props: SearchResultsProps) {
     const { items, refine } = useRefinementList({ attribute: 'type', sortBy: ['name:asc'] })
     const { close } = useSearch()
 
+    const { query } = useSearchBox()
+    const posthog = usePostHog()
+
     const onSelect = (result: Result) => {
+        posthog?.capture('web search result clicked', {
+            objectID: result.objectID,
+            title: result.title,
+            slug: result.slug,
+            category: category.type,
+            query,
+            type: result.type,
+        })
+
         close()
         navigate('/' + result.slug)
     }
@@ -180,6 +192,7 @@ type RefinementListProps = {
 
 const RefinementList: React.FC<RefinementListProps> = (props) => {
     const [selected, setSelected] = React.useState<Category>(props.category)
+    const posthog = usePostHog()
 
     useEffect(() => {
         if (props.initialFilter) {
@@ -195,6 +208,11 @@ const RefinementList: React.FC<RefinementListProps> = (props) => {
         if (props.category.type !== 'all') {
             props.refine(props.category.type)
         }
+
+        posthog?.capture('web search category refine', {
+            previous: selected.type,
+            category: props.category.type,
+        })
 
         setSelected(props.category)
     }, [props.category])
@@ -261,6 +279,21 @@ type HitsProps = {
 
 const Hits: React.FC<HitsProps> = ({ activeOption, close }) => {
     const { hits } = useHits<Result>()
+    const posthog = usePostHog()
+    const { query } = useSearchBox()
+
+    const onSelectHeading = (heading: { value: string; depth: number; fragment: string }) => {
+        posthog?.capture('web search result heading clicked', {
+            objectID: activeOption?.objectID,
+            title: activeOption?.title,
+            slug: activeOption?.slug,
+            fragment: heading.fragment,
+            query,
+            heading: heading.value,
+            type: activeOption?.type,
+        })
+        close()
+    }
 
     return (
         <div className="grid md:grid-cols-2 min-h-0 flex-grow border-b border-gray-accent-light dark:border-gray-accent-dark">
@@ -384,7 +417,7 @@ const Hits: React.FC<HitsProps> = ({ activeOption, close }) => {
                                                 >
                                                     <Link
                                                         to={`/${activeOption.slug}#${heading.fragment}`}
-                                                        onClick={() => close()}
+                                                        onClick={() => onSelectHeading(heading)}
                                                         className="text-black/60 dark:text-white/60 group-hover:text-black/90 dark:group-hover:text-white/90"
                                                     >
                                                         {heading.value}

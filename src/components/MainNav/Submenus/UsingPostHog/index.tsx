@@ -97,7 +97,7 @@ export default function UsingPosthog({ referenceElement }: { referenceElement: H
                         <div className="md:p-6 md:mb-0 mb-4">
                             <div className="flex items-center w-full justify-between opacity-70">
                                 <h3 className="text-[18px] font-bold m-0 text-black pl-2">Product manual</h3>
-                                <SearchIconButton initialFilter="manual" />
+                                <SearchIconButton location="using-ph-dropdown" initialFilter="manual" />
                             </div>
                             <ol className="m-0 list-none p-0 mt-2">
                                 {userGuides.map(({ title, description, url }: ColMenuItems, index) => {

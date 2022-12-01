@@ -1,17 +1,23 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { useValues } from 'kea'
-import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
 import React, { Fragment } from 'react'
 import SearchResults from './SearchResults'
 import { InstantSearch } from 'react-instantsearch-hooks-web'
 import algoliasearch from 'algoliasearch/lite'
+import usePostHog from 'lib/usePostHog'
 
 type SearchContextValue = {
     isVisible: boolean
-    open: (filter?: SearchResultType) => void
+    open: (from: SearchLocation, filter?: SearchResultType) => void
     close: () => void
 }
 
+export type SearchLocation =
+    | 'slash'
+    | 'ctrl-k'
+    | 'sidebar'
+    | 'docs-dropdown'
+    | 'using-ph-dropdown'
+    | 'handbook-dropdown'
 export type SearchResultType = 'blog' | 'docs' | 'api' | 'question' | 'handbook' | 'manual'
 
 const searchClient = algoliasearch(
@@ -21,7 +27,7 @@ const searchClient = algoliasearch(
 
 const SearchContext = React.createContext<SearchContextValue>({
     isVisible: false,
-    open: (_filter?: SearchResultType) => {
+    open: (_location, _filter) => {
         /* noop */
     },
     close: () => {
@@ -30,7 +36,7 @@ const SearchContext = React.createContext<SearchContextValue>({
 })
 
 export const SearchProvider: React.FC = ({ children }) => {
-    const { posthog } = useValues(posthogAnalyticsLogic)
+    const posthog = usePostHog()
     const [isVisible, setIsVisible] = React.useState<boolean>(false)
     const [initialFilter, setInitialFilter] = React.useState<SearchResultType | undefined>(undefined)
 
@@ -38,14 +44,14 @@ export const SearchProvider: React.FC = ({ children }) => {
         const handler = (event: KeyboardEvent) => {
             if (event.key === '/' && !isVisible) {
                 event.preventDefault()
-                open()
+                open('slash')
             } else if (event.key === 'k' && (event.ctrlKey || event.metaKey)) {
                 event.preventDefault()
 
                 if (isVisible) {
                     close()
                 } else {
-                    open()
+                    open('ctrl-k')
                 }
             }
         }
@@ -57,16 +63,20 @@ export const SearchProvider: React.FC = ({ children }) => {
         }
     }, [isVisible])
 
-    const open = (filter?: SearchResultType) => {
+    const open = (from: SearchLocation, filter?: SearchResultType) => {
+        posthog?.capture('web search opened', {
+            filter,
+            from,
+        })
+
         setInitialFilter(filter)
         setIsVisible(true)
-        posthog?.capture('web search opened')
     }
 
     const close = () => {
+        posthog?.capture('web search closed')
         setIsVisible(false)
         setInitialFilter(undefined)
-        posthog?.capture('web search closed')
     }
 
     return (
@@ -74,7 +84,7 @@ export const SearchProvider: React.FC = ({ children }) => {
             {children}
 
             <Transition.Root show={isVisible} as={Fragment}>
-                <Dialog open={isVisible} onClose={() => setIsVisible(false)}>
+                <Dialog open={isVisible} onClose={close}>
                     <Transition.Child
                         as={Fragment}
                         enter="ease-out duration-100"
@@ -101,7 +111,7 @@ export const SearchProvider: React.FC = ({ children }) => {
                                 <Dialog.Panel className="w-full max-w-4xl md:mx-4 h-[90vh] md:h-[600px] z-[999999]">
                                     <InstantSearch
                                         searchClient={searchClient}
-                                        indexName={process.env.GATSBY_ALGOLIA_INDEX_NAME}
+                                        indexName={process.env.GATSBY_ALGOLIA_INDEX_NAME as string}
                                     >
                                         <SearchResults initialFilter={initialFilter} />
                                     </InstantSearch>

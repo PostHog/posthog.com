@@ -1,16 +1,17 @@
 import React from 'react'
-import { useSearch, SearchResultType } from './SearchContext'
+import { useSearch, SearchResultType, SearchLocation } from './SearchContext'
 
 type SearchIconButtonProps = {
     initialFilter?: SearchResultType
+    location: SearchLocation
 }
 
-export const SearchIconButton: React.FC<SearchIconButtonProps> = ({ initialFilter }) => {
+export const SearchIconButton: React.FC<SearchIconButtonProps> = ({ location, initialFilter }) => {
     const { open } = useSearch()
 
     const handleSearchBoxClick = (event: React.MouseEvent) => {
         event.preventDefault()
-        open(initialFilter)
+        open(location, initialFilter)
     }
 
     return (

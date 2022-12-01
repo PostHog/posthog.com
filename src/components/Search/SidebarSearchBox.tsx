@@ -19,7 +19,7 @@ export const SidebarSearchBox: React.FC<SearchBoxProps> = ({ placeholder, filter
     return (
         <button
             type="button"
-            onClick={() => open(filter)}
+            onClick={() => open('sidebar', filter)}
             className="flex items-center m-0 mb-2 w-full text-sm text-gray focus:outline-none shadow-xl border border-gray/10 border-b-gray/30 hover:border-gray/20 rounded relative active:top-[0] hover:scale-[1.01] active:scale-[1]"
         >
             <div className="absolute left-4 z-20">
