@@ -25,7 +25,7 @@ Our experience has been an intense focus on finding the Ideal Customer Profile, 
 
 We have to prepare for the board meetings - now that we've got the process down, these usually take a few hours to do. We keep the majority of the meeting focused on one or two discussion topics rather than presenting an update. The guidance our board have given us has outweighed the cost of setting up and running these sessions every 3 months. And, frankly, if I know someone is marking my homework, it encourages me to do a better job. Sidenote: is this the real reason we're open source?!
 
-## Control
+## Myth #2: You lose control of your company
 
 Our board could pressure us to take certain decisions, but Tim (co-founder) and I are ultimately in control – after our series B, we've got control of three out of five seats. Control is something we can negotiate each time we fundraise.
 
