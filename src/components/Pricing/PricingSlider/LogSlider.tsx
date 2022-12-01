@@ -41,7 +41,7 @@ const abbreviateNumber = (number: number): string => {
 
 const makeMarks = (marks: number[]): Record<number, string> => {
     return marks.reduce((acc, cur) => {
-        acc[cur && inverseCurve(cur)] = abbreviateNumber(cur)
+        acc[cur] = abbreviateNumber(cur)
         return acc
     }, {} as Record<number, string>)
 }
@@ -49,11 +49,11 @@ const makeMarks = (marks: number[]): Record<number, string> => {
 export const LogSlider = ({ min, max, marks, stepsInRange, onChange, value }: LogSliderProps): JSX.Element => {
     return (
         <MySlider
-            min={min && inverseCurve(min)}
-            max={inverseCurve(max)}
+            min={min}
+            max={max}
             marks={makeMarks(marks)}
-            step={(inverseCurve(max) - (min && inverseCurve(min))) / stepsInRange}
-            tipFormatter={(value) => prettyInt(sliderCurve(value))}
+            step={(max - min) / stepsInRange}
+            tipFormatter={(value) => value}
             onChange={onChange}
             className="log-slider center"
             value={value}

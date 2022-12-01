@@ -42,15 +42,14 @@ export const pricingSliderLogic = kea({
         sessionRecordingEventNumber: [
             0,
             {
-                setSessionRecordingSliderValue: (_: null, { value }: { value: number }) =>
-                    Math.round(sliderCurve(value)),
+                setSessionRecordingSliderValue: (_: null, { value }: { value: number }) => Math.round(value),
                 setSessionRecordingInputValue: (_: null, { value }: { value: number }) => value * 1000000,
             },
         ],
         eventNumber: [
             0,
             {
-                setSliderValue: (_: null, { value }: { value: number }) => Math.round(sliderCurve(value)),
+                setSliderValue: (_: null, { value }: { value: number }) => Math.round(value),
                 setInputValue: (_: null, { value }: { value: number }) => value * 1000000,
             },
         ],
@@ -58,13 +57,13 @@ export const pricingSliderLogic = kea({
             null,
             {
                 setSliderValue: (_: null, { value }: { value: number }) => value,
-                setInputValue: (_: null, { value }: { value: number }) => inverseCurve(value * 1000000),
+                setInputValue: (_: null, { value }: { value: number }) => value,
             },
         ],
         inputValue: [
             1,
             {
-                setSliderValue: (_: null, { value }: { value: number }) => Math.round(sliderCurve(value) / 1000000),
+                setSliderValue: (_: null, { value }: { value: number }) => Math.round(value),
                 setInputValue: (_: null, { value }: { value: number }) => value,
             },
         ],
@@ -72,14 +71,13 @@ export const pricingSliderLogic = kea({
             null,
             {
                 setSessionRecordingSliderValue: (_: null, { value }: { value: number }) => value,
-                setSessionRecordingInputValue: (_: null, { value }: { value: number }) => inverseCurve(value * 1000000),
+                setSessionRecordingInputValue: (_: null, { value }: { value: number }) => value,
             },
         ],
         sessionRecordingInputValue: [
             1,
             {
-                setSessionRecordingSliderValue: (_: null, { value }: { value: number }) =>
-                    Math.round(sliderCurve(value) / 1000000),
+                setSessionRecordingSliderValue: (_: null, { value }: { value: number }) => Math.round(value),
                 setSessionRecordingInputValue: (_: null, { value }: { value: number }) => value,
             },
         ],
