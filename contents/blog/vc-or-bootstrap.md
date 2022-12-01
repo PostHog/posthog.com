@@ -77,7 +77,7 @@ You can't sell anything like 100% of your stake each time – a few percent of w
 
 Tim and I both think this path will give us the greatest happiness. It means removing financial stress from our lives, whilst being lucky enough to work on our mission of increasing the number of successful products in the world. It's a huge amount of fun for me to try to beat huge competitors by doing things "the right way" for developers.
 
-## Getting started
+## Myth #6: Getting VC backing is stressful
 
 If you want to get started with bootstrapping, you have two choices:
 
