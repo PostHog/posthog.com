@@ -33,7 +33,7 @@ The fact we have plenty of runway, can pay everyone well, and have great people 
 
 Of course, this can easily result in a lack of discipline, but it helped us get an open source project off the ground first, before focussing on revenue last summer.
 
-## Is fundraising a drag?
+## Myth #3: Fundraising is a drag
 
 There is a huge amount of variation. It all comes down to roughly these requirements:
 
