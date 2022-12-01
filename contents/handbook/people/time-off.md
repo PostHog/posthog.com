@@ -6,7 +6,7 @@ showTitle: true
 
 We offer our team unlimited time off, but with an expectation that you take _at least 25 days off a year_, including national holidays. This is to make sure that people can take time off flexibly while not feeling guilty about being on vacation.
 
-The reason for this policy is that it's critical for PostHog that we hire people we can trust to be responsible with their time off - enough that they can recharge, but not so much that it means we don't get any work done. The People & Ops team will look holiday usage occasionally but _only_ to encourage people who haven't taken enough time off to do so. The 25 days is a minimum, not a guide.
+The reason for this policy is that it's critical for PostHog that we hire people we can trust to be responsible with their time off - enough that they can recharge, but not so much that it means we don't get any work done. The People & Ops team will look holiday usage occasionally to encourage people who haven't taken the minimum time off to do so. The 25 days is a minimum, not a guide.
 
 
 ## Permissionless time off
