@@ -79,18 +79,22 @@ Tim and I both think this path will give us the greatest happiness. It means rem
 
 ## Myth #6: Getting VC backing is stressful
 
-If you want to get started with bootstrapping, you have two choices:
+It may not be easy, but getting VC funding is way less stressful than bootstrapping.
 
-* start working on your new business before you quit your job
-* spend your personal capital until you're profitable
+When bootstrapping, you have two choices:
 
-Neither of these sounds like a relaxing exercise!
+* Start working on your new business before you quit your job
+* Spend your personal capital until you're profitable
 
-We started by bootstrapping. The reality at PostHog is that Tim and I committed 12 months of personal runway to getting off the ground. We simply paid ourselves nothing for the first 6 months. That created stress - we had to save up ahead of time, then had to spend as little as possible in our personal lives.
+Neither is relaxing.
 
-Then we got into [YCombinator](https://ycombinator.com). The personal stress evaporated and we focused 100% on the business.
+I know this because we did it. Tim and I committed 12 months of personal runway to getting PostHog off the ground. We simply paid ourselves nothing for the first six months. It was stressful. We had to save up ahead of time, then had to spend as little as possible in our personal lives.
 
-What I didn't realize at the time is many teams will raise a pre-seed round, ahead of real traction or having a team - this reduces the barrier of needing a bunch of savings.
+All that personal stress evaporated once we got into [YCombinator](https://ycombinator.com). We focused 100% on the business and we're happier and more successful as a result.
+
+What I didn't realize at the time is many teams will raise a pre-seed round, ahead of real traction or having a team. This reduces the barrier of needing a bunch of savings, and the stress of living hand to mouth to get something off the ground.
+
+Now you know that, don't make our mistake if you can avoid it!
 
 ## Truth #1: Some companies ARE a terrible fit for VC
 
