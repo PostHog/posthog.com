@@ -27,7 +27,7 @@ So, why does Amplitude think it’s better to give users a more limited product?
 
 Let's tackle these arguments one by one. 
 
-## 1. Autocapture creates information overload
+## Myth #1: Autocapture creates information overload
 
 To quote Tony Stark: “An intelligence agency which fears intelligence is, historically, not awesome.” 
 
@@ -37,7 +37,7 @@ A well-designed product analytics platform that is shaped by user feedback will 
 
 Also, what's the alternative here? Having less data because you can only track the handful of data points you've planned for in advance? That sounds far less appealing.
 
-## 2. Autocapture creates bad data
+## Myth #2: Autocapture creates bad data
 
 Amplitude argues autocapture means you need someone to police and clean the data. This may have been an issue for teams in the past, but with modern tools it’s possible to simply give users the information they need instead. 
 
@@ -45,7 +45,7 @@ At PostHog, we do this through our [Data Management suite](/docs/user-guides/dat
 
 The article also raises the point that someone may make changes to your product which throw off your data without your knowledge. However this isn’t a risk that’s exclusive to autocapture, as it can happen with manual instrumentation as well. Ultimately, no analytics platform can protect your codebase from rogue engineers!
 
-## 3. Autocapture takes the same/more time
+## Myth #3: Autocapture takes the same/more time
 
 Amplitude suggests that autocapture saves time for product managers because they don’t need to plan which events to track in advance, but it creates more work for analysts who need to deal with the extra information. 
 
@@ -55,7 +55,7 @@ Manual instrumentation also takes longer to implement initially and can have an 
 
 In either case, the optimum approach isn't one or the other – it's both. Autocapture to get you started quickly with a minimum overhead, but with manual instrumentation for the nitty gritty where you need to invest more time.
 
-## 4. Autocapture isn’t secure enough
+## Myth #5: Autocapture isn’t secure enough
 
 At last, something we agree on. Sort of. 
 
