@@ -51,7 +51,7 @@ I've intentionally not listed "a good network" as, whilst easier for some than o
 
 None of these are necessary, but the better you do against each of them, the less time you'll have to spend fundraising. Ironically, this means you'll have more time to focus on product, which means - the easier time you'll have fundraising.
 
-## More bosses
+## Myth #4: Your investors are your boss
 
 Although you may retain control, if you fundraise, you've now got investors that you feel you _should_ report to.
 
