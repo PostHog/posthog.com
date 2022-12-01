@@ -92,7 +92,7 @@ Then we got into [YCombinator](https://ycombinator.com). The personal stress eva
 
 What I didn't realize at the time is many teams will raise a pre-seed round, ahead of real traction or having a team - this reduces the barrier of needing a bunch of savings.
 
-## Some companies are a terrible fit for VC
+## Truth #1: Some companies ARE a terrible fit for VC
 
 First, you need to want to build something very, very big. You will never be able to deliberately relax and run things as a lifestyle business once you're at $1M ARR or more, for example. Are you going to want to push further when you've no financial need to do so?
 
