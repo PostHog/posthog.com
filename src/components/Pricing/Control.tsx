@@ -197,10 +197,6 @@ const Control = (): JSX.Element => {
         if (showPlanBuilder) builderRef.current?.scrollIntoView({ behavior: 'smooth' })
     }, [showPlanBuilder])
 
-    useEffect(() => {
-        setSliderValue(13.815510557964274)
-    }, [])
-
     return (
         <Layout>
             <SelfHostOverlay open={currentModal === 'self host'} setOpen={setCurrentModal} />
@@ -419,14 +415,14 @@ const Control = (): JSX.Element => {
                                     <strong>Product analytics + data stack</strong>
                                     <span>
                                         <span className="text-lg font-bold">{eventNumber.toLocaleString()}</span>{' '}
-                                        <span className="opacity-60 text-sm">events</span>
+                                        <span className="opacity-60 text-sm">event{eventNumber === 1 ? '' : 's'}</span>
                                     </span>
                                 </div>
                                 <div className="pt-4 pb-6">
                                     <LogSlider
                                         stepsInRange={100}
-                                        marks={[1000000, 10000000, 100000000, 1000000000]}
-                                        min={1000000}
+                                        marks={[0, 1000000, 10000000, 100000000, 1000000000]}
+                                        min={0}
                                         max={1000000000}
                                         onChange={(value) => setSliderValue(value)}
                                         value={sliderValue}
@@ -447,14 +443,16 @@ const Control = (): JSX.Element => {
                                         <span className="text-lg font-bold">
                                             {sessionRecordingEventNumber.toLocaleString()}
                                         </span>{' '}
-                                        <span className="opacity-60 text-sm">recordings</span>
+                                        <span className="opacity-60 text-sm">
+                                            recording{sessionRecordingEventNumber === 1 ? '' : 's'}
+                                        </span>
                                     </span>
                                 </div>
                                 <div className="pt-4 pb-6">
                                     <LogSlider
                                         stepsInRange={100}
-                                        marks={[15000, 50000, 150000, 500000]}
-                                        min={15000}
+                                        marks={[0, 15000, 50000, 150000, 500000]}
+                                        min={0}
                                         max={500000}
                                         onChange={(value) => setSessionRecordingSliderValue(value)}
                                         value={sessionRecordingSliderValue}

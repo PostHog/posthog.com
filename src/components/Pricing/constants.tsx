@@ -39,7 +39,7 @@ export const pricing = {
         [Number.MAX_SAFE_INTEGER, 0.000025],
     ],
     'session-recording': [
-        [50_000, 0.005],
+        [15_000, 0.005],
         [150_000, 0.0045],
         [500_000, 0.004],
         [500_001, 0.0035],

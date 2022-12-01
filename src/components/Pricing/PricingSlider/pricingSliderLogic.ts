@@ -40,7 +40,7 @@ export const pricingSliderLogic = kea({
     },
     reducers: {
         sessionRecordingEventNumber: [
-            15000,
+            0,
             {
                 setSessionRecordingSliderValue: (_: null, { value }: { value: number }) =>
                     Math.round(sliderCurve(value)),
@@ -48,7 +48,7 @@ export const pricingSliderLogic = kea({
             },
         ],
         eventNumber: [
-            1000000,
+            0,
             {
                 setSliderValue: (_: null, { value }: { value: number }) => Math.round(sliderCurve(value)),
                 setInputValue: (_: null, { value }: { value: number }) => value * 1000000,
