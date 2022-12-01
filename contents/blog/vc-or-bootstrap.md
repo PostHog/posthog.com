@@ -15,7 +15,7 @@ Since PostHog raised Venture Capital (VC), we've had far less stress, and far mo
 
 There are lots of myths around what it's like run a business with VC funding – today, I'm here to dispel them.
 
-## Do board meetings with VC companies involve them pressuring expansion at all costs?
+## Myth #1: VC boards want growth at any cost
 
 Not for us.
 
