@@ -119,9 +119,14 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     }
     type AshbyJobPostingFormDefFieldsSectionsFieldsField {
       type: String,
-        title: String,
-        isNullable: Boolean,
-        path: String
+      title: String,
+      isNullable: Boolean,
+      path: String
+      selectableValues: [AshbyJobPostingSelectableValue!]
+    }
+    type AshbyJobPostingSelectableValue {
+      label: String!
+      value: String!
     }
     type AshbyJobPostingFormDefFieldsSectionsFields {
       descriptionPlain: String,

@@ -19,11 +19,30 @@ interface IResumeComponentProps {
 }
 
 const components = {
+    valueselect: ({ title, required, path, options }) => (
+        <select
+            name={title}
+            data-path={path}
+            required={required}
+            className="flex-grow w-full block !bg-white dark:!bg-white/10 box-border px-3 py-2 rounded-sm focus:shadow-xl border border-black/20 text-[17px] font-medium dark:bg-white box-border/10 dark:text-white"
+        >
+            <option disabled selected value="">
+                Select an option
+            </option>
+            {options.map(({ label, value }) => {
+                return (
+                    <option key={value} value={value}>
+                        {label}
+                    </option>
+                )
+            })}
+        </select>
+    ),
     string: ({ title, required, path, placeholder }: IResumeComponentProps) => (
         <input
             data-path={path}
             required={required}
-            className="w-full block !bg-white dark:!bg-white/10 box-border px-3 py-2 rounded-sm focus:shadow-xl border border-black/20 text-[17px] font-medium dark:bg-white box-border/10 dark:text-white"
+            className="flex-grow w-full block !bg-white dark:!bg-white/10 box-border px-3 py-2 rounded-sm focus:shadow-xl border border-black/20 text-[17px] font-medium dark:bg-white box-border/10 dark:text-white"
             placeholder={placeholder || title}
             name={title}
         />
@@ -32,7 +51,7 @@ const components = {
         <input
             data-path={path}
             required={required}
-            className="w-full block !bg-white dark:!bg-white/10 box-border px-3 py-2 rounded-sm focus:shadow-xl border border-black/20 text-[17px] font-medium dark:bg-white box-border/10 dark:text-white"
+            className="flex-grow w-full block !bg-white dark:!bg-white/10 box-border px-3 py-2 rounded-sm focus:shadow-xl border border-black/20 text-[17px] font-medium dark:bg-white box-border/10 dark:text-white"
             type="email"
             placeholder={placeholder || title}
             name={title}
@@ -135,11 +154,12 @@ const Form = ({ setSubmitted, info, id }) => {
                         return fields.map(({ field, isRequired, descriptionPlain }) => {
                             const required = isRequired
                             const type = field?.type?.toLowerCase()
+
                             return (
                                 <div
                                     className={
-                                        type === 'string' || type === 'email'
-                                            ? 'sm:col-span-1 col-span-2'
+                                        type === 'string' || type === 'email' || type === 'valueselect'
+                                            ? 'sm:col-span-1 col-span-2 flex flex-col'
                                             : 'col-span-2'
                                     }
                                     key={field?.path}
@@ -156,6 +176,7 @@ const Form = ({ setSubmitted, info, id }) => {
                                             required,
                                             path: field?.path,
                                             placeholder: descriptionPlain,
+                                            options: field?.selectableValues,
                                         })}
                                 </div>
                             )

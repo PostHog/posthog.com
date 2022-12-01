@@ -80,7 +80,8 @@ export const AboutTransparency = () => {
                 <div className="flex-1 mdlg:pb-16">
                     <h3 className="text-4xl mb-2">Why we're different</h3>
                     <h4 className="font-semibold text-white/70 leading-tight">
-                        Being open source, we operate in public as much as we can – including our <Link to="/roadmap">product roadmap</Link>.
+                        Being open source, we operate in public as much as we can – including our{' '}
+                        <Link to="/roadmap">product roadmap</Link>.
                     </h4>
                     <p className="opacity-70">Here are some popular pages from our company handbook:</p>
                     <ul className="p-0 m-0 mb-2 gap-x-1 grid grid-cols-3">

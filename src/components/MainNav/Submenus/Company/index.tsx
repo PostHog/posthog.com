@@ -52,7 +52,7 @@ const Handbook = ({ menu }: { menu: HandbookNav[] }) => {
                                     to={url}
                                 >
                                     <span className="text-[14px] text-black/30 text-center leading-none font-semibold dark:text-white w-4 flex items-center">
-                                        {index + 1}.
+                                        {index}.
                                     </span>
                                     <h3 className="text-base m-0 opacity-70 leading-none">{title}</h3>
                                 </Link>
