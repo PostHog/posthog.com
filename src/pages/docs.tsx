@@ -7,8 +7,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 import Link from 'components/Link'
 import PostLayout from 'components/PostLayout'
 import { docs } from '../sidebars/sidebars.json'
-import { useSearch } from 'components/Search/SearchContext'
-import { SiteSearchCallout } from 'components/SiteSearchCallout'
+import SearchBox from 'components/Search/SearchBox'
 
 const quickLinks = [
     {
@@ -154,7 +153,7 @@ export const DocsIndex: React.FC = () => {
                                     examples for everything PostHog
                                 </h5>
 
-                                <SiteSearchCallout />
+                                <SearchBox filter="docs" placeholder="Seach documentation..." />
                             </div>
 
                             <div className="absolute hidden md:block overflow-hidden inset-y-0 right-0 h-full w-full z-10">

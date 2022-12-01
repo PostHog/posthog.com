@@ -7,7 +7,7 @@ import { docs } from '../sidebars/sidebars.json'
 import { graphql } from 'gatsby'
 import ProductIcons from 'components/ProductIcons'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import { useSearch } from 'components/Search/SearchContext'
+import SearchBox from 'components/Search/SearchBox'
 import { Close } from 'components/Icons/Icons'
 import { CallToAction } from 'components/CallToAction'
 import Modal from 'components/Modal'
@@ -252,7 +252,7 @@ const categories: {
     },
 ]
 
-export const UsingPostHog: React.FC<{ data: any }> = ({ data, filter }) => {
+export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
     const { tutorials, featuredTutorials } = data
 
     const tutorialsByCategory = tutorials.group.reduce((acc, curr) => {
@@ -263,13 +263,6 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data, filter }) => {
     }, {})
 
     const [currentModal, setCurrentModal] = React.useState<string | undefined>(undefined)
-
-    const { open } = useSearch()
-
-    const handleSearchBoxClick = (event: React.MouseEvent) => {
-        event.preventDefault()
-        open(filter)
-    }
 
     return (
         <Layout>
@@ -285,7 +278,13 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data, filter }) => {
                             <a href="/docs">visit the docs</a>.
                         </p>
 
-                        <SiteSearchCallout />
+                        <div className="my-4">
+                            <SearchBox placeholder="Search..." />
+                        </div>
+
+                        <p className="text-sm text-black/75 dark:text-white">
+                            Don't see the answer you're looking for? <a href="/questions">Ask a question</a>
+                        </p>
                     </section>
 
                     <section>

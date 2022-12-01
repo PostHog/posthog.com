@@ -29,7 +29,7 @@ export const SidebarSearchBox: React.FC<SearchBoxProps> = ({ placeholder, filter
             <div className="flex items-center justify-between pl-10 pr-2 py-2 text-left text-[15px] font-medium text-black/30 bg-white/50 dark:bg-gray-accent-dark dark:text-white w-full z-10">
                 <span>{placeholder || 'Search...'}</span>
                 <span>
-                    {window.navigator.userAgent.toLowerCase().includes('macintosh') ? (
+                    {typeof window !== 'undefined' && window.navigator.userAgent.toLowerCase().includes('macintosh') ? (
                         <kbd className="">
                             <CmdK className={keyboardShortcut} />
                         </kbd>
