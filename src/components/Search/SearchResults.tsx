@@ -147,12 +147,12 @@ const SearchBox = () => {
     const { query, refine } = useSearchBox()
 
     return (
-        <div className="relative flex items-center border-b border-gray-accent-light/50">
+        <div className="relative flex items-center border-b border-gray-accent-light/50 dark:border-black dark:border-b-2">
             <div className="absolute left-4 z-20">
                 <Search className="w-5 h-5 opacity-40" />
             </div>
             <Combobox.Input
-                className="w-full py-3 pl-11 pr-4 font-medium focus:outline-none border-none ring-0 focus:ring-0 placeholder:text-black/25"
+                className="w-full py-3 pl-11 pr-4 font-medium focus:outline-none bg-white dark:bg-gray-accent-dark border-none ring-0 focus:ring-0 placeholder:text-black/25 dark:placeholder:text-white/25"
                 placeholder="Search PostHog.com..."
                 autoComplete="off"
                 onKeyDown={(event: React.KeyboardEvent) => (event.key === 'Tab' ? event.preventDefault() : null)}
@@ -161,7 +161,7 @@ const SearchBox = () => {
             />
 
             <kbd
-                className="hidden md:block absolute right-4 text-xs border border-b-2 border-gray-accent-light/50 rounded-sm px-1.5 py-0.5 text-black/40 font-sans"
+                className="hidden md:block absolute right-4 text-xs border border-b-2 border-gray-accent-light/50 dark:border-gray-accent-dark/50 rounded-sm px-1.5 py-0.5 text-black/40 dark:text-white/40 font-sans"
                 style={{ fontSize: '10px' }}
             >
                 ESC
@@ -200,9 +200,13 @@ const RefinementList: React.FC<RefinementListProps> = (props) => {
     }, [props.category])
 
     return (
-        <RadioGroup value={props.category} onChange={props.setCategory} className="bg-tan/25 -mt-[1px]">
+        <RadioGroup
+            value={props.category}
+            onChange={props.setCategory}
+            className="bg-tan/25 dark:bg-gray-accent-dark -mt-[1px]"
+        >
             <RadioGroup.Label className="sr-only">Filter results by category</RadioGroup.Label>
-            <div className="flex items-center md:flex-wrap list-none p-0 overflow-auto">
+            <div className="flex items-center md:flex-wrap list-none p-0 overflow-auto dark:border-t dark:border-black">
                 {categories.map((item) => {
                     const result = props.items.find((res) => res.value === item.type)
 
@@ -217,7 +221,7 @@ const RefinementList: React.FC<RefinementListProps> = (props) => {
                                 }
                             }}
                             className={
-                                'relative px-3 first:px-5 py-2 ui-checked:text-red before:absolute before:top-[-1px] before:left-0 before:right-0 before:h-[2px] ui-checked:before:h-[3px] ui-checked:before:bg-red ui-not-checked:before:bg-transparent ui-not-checked:hover:before:bg-black/40 ui-not-checked:text-gray-accent-dark cursor-pointer'
+                                'relative px-3 first:px-5 py-2 before:absolute before:top-[-1px] before:left-0 before:right-0 before:h-[2px] ui-checked:before:h-[3px] ui-checked:before:bg-red ui-not-checked:before:bg-transparent ui-not-checked:hover:before:bg-black/40 ui-not-checked:text-gray-accent-dark dark:ui-not-checked:text-gray-accent-light cursor-pointer'
                             }
                         >
                             {({ checked }) => (
@@ -232,7 +236,9 @@ const RefinementList: React.FC<RefinementListProps> = (props) => {
                                         <span
                                             className={classNames(
                                                 'text-xs',
-                                                checked ? 'text-black/40' : 'text-black/40'
+                                                checked
+                                                    ? 'text-black/40 dark:text-white/40'
+                                                    : 'text-black/40 dark:text-white/40'
                                             )}
                                         >
                                             {result?.count || 0}
@@ -257,26 +263,26 @@ const Hits: React.FC<HitsProps> = ({ activeOption, close }) => {
     const { hits } = useHits<Result>()
 
     return (
-        <div className="grid md:grid-cols-2 min-h-0 flex-grow border-b border-gray-accent-light">
-            <section className="overscroll-none text-left overflow-y-auto border-r border-gray-accent-light/50">
+        <div className="grid md:grid-cols-2 min-h-0 flex-grow border-b border-gray-accent-light dark:border-gray-accent-dark">
+            <section className="overscroll-none bg-white dark:bg-gray-accent-dark text-left overflow-y-auto border-r border-gray-accent-light/50 dark:border-gray-accent-dark/50">
                 {hits.length > 0 ? (
-                    <Combobox.Options as="ol" className="list-none m-0" static hold>
+                    <Combobox.Options as="ol" className="list-none m-0 dark:bg-black" static hold>
                         {hits.map((hit) => {
                             return (
                                 <Combobox.Option
                                     key={hit.objectID}
                                     value={hit}
-                                    className="group ui-active:bg-tan/50 hover:bg-tan/50 border-b border-t mt-[-1px] border-gray-accent-light/25 hover:border-gray-accent-light/30 ui-active:border-gray-accent-light/30 last:border-b-0 pl-3 pr-2"
+                                    className="group ui-active:bg-tan/50 dark:ui-active:bg-gray-accent-dark hover:bg-tan/50 dark:hover:bg-gray-accent-dark/50 border-b border-t mt-[-1px] border-gray-accent-light/25 hover:border-gray-accent-light/30 dark:border-gray-accent-dark/80 dark:hover:border-gray-accent-dark/90 ui-active:border-gray-accent-light/30 dark:ui-active:border-gray-accent-dark/90 last:border-b-0 pl-3 pr-2"
                                 >
                                     <Link
-                                        className="w-full px-2 py-3 text-black/75 group-hover:text-black/100 font-semibold flex flex-col space-y-0.5 focus:outline-none leading-tight"
+                                        className="w-full px-2 py-3 text-black/75 dark:text-white/75 group-hover:text-black/100 dark:group-hover:text-white/100 font-semibold flex flex-col space-y-0.5 focus:outline-none leading-tight"
                                         to={'/' + (hit.type === 'api' ? slugify(hit.title, { lower: true }) : hit.slug)}
                                         onClick={() => close()}
                                     >
                                         <span
                                             className={`text-[13px] font-normal ${
                                                 hit.type === 'api' ? 'uppercase' : 'capitalize'
-                                            } text-gray rounded-full`}
+                                            } text-black/60 dark:text-white/60 rounded-full`}
                                         >
                                             {hit.type}
                                         </span>
@@ -284,8 +290,10 @@ const Hits: React.FC<HitsProps> = ({ activeOption, close }) => {
                                         <span className="line-clamp-1 font-semibold">{hit.title}</span>
                                         {/* <p className="text-sm font-normal m-0 text-gray line-clamp-2">{hit.excerpt}</p> */}
                                         <span className="text-[13px] font-normal">
-                                            <span className="text-black opacity-[35%]">posthog.com/</span>
-                                            <span className="text-black/50">{hit.slug}</span>
+                                            <span className="text-black dark:text-white opacity-[35%]">
+                                                posthog.com/
+                                            </span>
+                                            <span className="text-black/50 dark:text-white/50">{hit.slug}</span>
                                         </span>
                                     </Link>
                                 </Combobox.Option>
@@ -314,7 +322,7 @@ const Hits: React.FC<HitsProps> = ({ activeOption, close }) => {
                                 />
                             </div>
 
-                            <div className="border border-gray-accent-light p-4 rounded bg-tan/50">
+                            <div className="border border-gray-accent-light dark:border-gray-accent-dark p-4 rounded bg-tan/50 dark:bg-almost-black/100">
                                 <h5 className="text-base opacity-75 mb-0">Tip: Ask the community</h5>
                                 <p className="text-sm mb-4 opacity-80">
                                     Our team monitor the Questions page. Somone's bound to know the answer!
@@ -328,26 +336,28 @@ const Hits: React.FC<HitsProps> = ({ activeOption, close }) => {
                     </>
                 )}
             </section>
-            <section className="hidden md:block overflow-y-auto bg-tan/50 p-2 h-full">
+            <section className="hidden md:block overflow-y-auto bg-tan/50 dark:bg-almost-black p-2 h-full">
                 {activeOption ? (
-                    <div className="p-6 bg-white rounded border border-gray-accent-light/40">
+                    <div className="p-6 bg-white dark:bg-gray-accent-dark rounded border border-gray-accent-light/40 dark:border-gray-accent-dark">
                         <div className="text-left">
                             <span
-                                className={`block text-sm font-semibold text-black/50 ${
+                                className={`block text-sm font-semibold text-black/50 dark:text-white/50 ${
                                     activeOption.type === 'api' ? 'uppercase' : 'capitalize'
                                 } mb-1`}
                             >
                                 {activeOption.type}
                             </span>
                             <h4 className="text-2xl mb-3 leading-[1.125]">{activeOption.title}</h4>
-                            <p className="text-black/70 text-[15px] mb-0">{activeOption.excerpt}</p>
+                            <p className="text-black/70 dark:text-white/80 text-[15px] mb-0">{activeOption.excerpt}</p>
                             {activeOption.type !== 'question' ? (
-                                <span className="block text-xs text-gray font-semibold mt-5 mb-3">On this page</span>
+                                <span className="block text-xs text-black/60 dark:text-white/60 font-semibold mt-5 mb-3">
+                                    On this page
+                                </span>
                             ) : (
                                 <></>
                             )}
                             {activeOption.type === 'api' ? (
-                                <ol className="list-none m-0 text-sm text-gray font-semibold space-y-2">
+                                <ol className="list-none m-0 text-sm text-black/60 dark:text-white/60 font-semibold space-y-2">
                                     {activeOption?.schema?.map((endpoint, index) => {
                                         return (
                                             <li
@@ -363,18 +373,19 @@ const Hits: React.FC<HitsProps> = ({ activeOption, close }) => {
                                     })}
                                 </ol>
                             ) : (
-                                <ol className="list-none m-0 text-gray font-semibold space-y-2">
+                                <ol className="list-none m-0 font-semibold space-y-2">
                                     {activeOption?.headings
                                         ?.filter(({ depth }) => depth <= 2)
                                         .map((heading, index) => {
                                             return (
                                                 <li
                                                     key={activeOption.type + heading.value + index}
-                                                    className="text-sm jumpTo pl-6"
+                                                    className="text-sm jumpTo pl-6 group"
                                                 >
                                                     <Link
                                                         to={`/${activeOption.slug}#${heading.fragment}`}
                                                         onClick={() => close()}
+                                                        className="text-black/60 dark:text-white/60 group-hover:text-black/90 dark:group-hover:text-white/90"
                                                     >
                                                         {heading.value}
                                                     </Link>

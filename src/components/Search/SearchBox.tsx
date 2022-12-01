@@ -32,7 +32,7 @@ export const SearchBox: React.FC<SearchBoxProps> = ({ placeholder, filter }) => 
                     </defs>
                 </svg>
             </div>
-            <div className="w-full pl-10 py-3 text-base text-left text-gray bg-white dark:bg-gray-accent-dark dark:text-white rounded-full w-full md:w-[300px] mdlg:w-[400px] lg:w-[375px] xl:w-[500px] ring-red shadow-lg">
+            <div className="pl-10 py-3 text-base text-left text-primary/40 hover:text-primary/60 dark:text-white/30 dark:hover:text-white/40 bg-white dark:bg-gray-accent-dark dark:text-white rounded-full w-full md:w-[300px] mdlg:w-[400px] lg:w-[375px] xl:w-[500px] ring-red shadow-lg">
                 {placeholder || 'Search...'}
             </div>
         </button>
