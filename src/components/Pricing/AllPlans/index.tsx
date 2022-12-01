@@ -37,7 +37,7 @@ const cloudPlans: IPlan[] = [
     },
     {
         title: 'with Enterprise package',
-        description: 'Slack-based priority support, SSO, advanced permissions',
+        description: 'Plus add 25% to total bill. Slack-based priority support, SSO, advanced permissions',
         pricing: {
             event: 0.00045,
             monthly: 450,
@@ -52,11 +52,11 @@ const cloudPlans: IPlan[] = [
 
 const selfHostPlans: IPlan[] = [
     {
-        title: 'Enterprise starting from $5,000/month',
+        title: 'Enterprise Self-Hosted, from...',
         description: 'Slack-based priority support, SSO, advanced permissions',
         pricing: {
-            event: 0.00045,
-            monthly: 450,
+            event: 0.0,
+            monthly: 5000,
         },
         mainCTA: {
             title: 'Get started',

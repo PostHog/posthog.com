@@ -28,15 +28,36 @@ import { ProductIcons } from '../ProductIcons/ProductIcons'
 import { NotProductIcons } from '../NotProductIcons/NotProductIcons'
 import Breakdown from './Breakdown'
 import SelfHost from './SelfHost'
+import Tooltip from 'components/Tooltip'
 
-const Benefit = ({ children }) => {
+const OtherEdition = ({ name, price, children }) => {
     return (
-        <li className="font-medium text-[15px] flex gap-x-1.5 items-start leading-tight">
-            <span className="w-[24px] flex justify-center items-center flex-shrink-0 mt-[2px]">
-                <Check />
+        <div>
+            <h4 className="text-xl mb-0">{name}</h4>
+            <p className="opacity-60 font-medium mb-2">{price}</p>
+            {children}
+        </div>
+    )
+}
+
+const EnterpriseSelfHosted = () => {
+    return (
+        <Tooltip
+            title={
+                <>
+                    <p className="text-sm m-0">The $5,000/month plan includes:</p>
+                    <ul className="mt-1 pt-0">
+                        <li className="text-sm"> 40m events</li>
+                        <li className="text-sm">80k sessions</li>
+                        <li className="text-sm">Self-hosted enterprise support</li>
+                    </ul>
+                </>
+            }
+        >
+            <span>
+                <Info className="w-2 h-2" />
             </span>
-            <span>{children}</span>
-        </li>
+        </Tooltip>
     )
 }
 
@@ -189,9 +210,15 @@ const Control = (): JSX.Element => {
             <SEO title="PostHog Pricing" description="Find out how much it costs to use PostHog" />
             <section>
                 <div
-                    className={`grid lg:grid-cols-2 lg:mt-12 md:mt-18 lg:gap-x-4 gap-y-3 lg:gap-y-0 mb-4 md:px-4 ${section}`}
+                    className={`grid lg:items-center lg:grid-cols-2 md:mt-18 lg:mt-4 lg:gap-x-4 gap-y-3 lg:gap-y-0 mb-4 md:px-4 ${section}`}
                 >
-                    <div className="lg:order-2">
+                    <div className="pt-6 pb-4">
+                        <h1 className="text-4xl md:text-5xl m-0 text-center lg:text-left">
+                            Get the whole hog. <br />
+                            <span className="text-red text-3xl md:text-5xl">Only pay for what you use.</span>
+                        </h1>
+                    </div>
+                    <div>
                         <StaticImage
                             alt="The cutest hedgehog you've ever seen driving a red tractor"
                             src="./images/tractor-hog.png"
@@ -200,42 +227,42 @@ const Control = (): JSX.Element => {
                             placeholder="none"
                         />
                     </div>
-                    <div className="lg:order-1 mb-12">
-                        <h1 className="text-3xl sm:text-4xl md:text-5xl mt-0 mb-2">
-                            Get the whole hog. <br />
-                            <span className="text-red">Only pay for what you use.</span>
-                        </h1>
-                        <p className="text-lg font-semibold opacity-60">
-                            After a generous monthly free tier, pricing scales with usage.
-                        </p>
+                </div>
+            </section>
 
-                        <TrackedCTA
-                            event={{
-                                name: `clicked Get started - free`,
-                                type: enterpriseMode ? 'cloud-enterprise' : 'cloud',
-                            }}
-                            type="primary"
-                            width="full lg:w-auto"
-                            className="shadow-md"
-                            to={
-                                enterpriseMode
-                                    ? 'https://posthog.com/signup/cloud/enterprise'
-                                    : 'https://app.posthog.com/signup'
-                            }
-                        >
-                            {enterpriseMode ? 'Get in touch' : 'Get started - free'}
-                        </TrackedCTA>
-                    </div>
+            <section className={`mb-8 ${section}`}>
+                <h2 className="mb-0 text-2xl">PostHog Cloud</h2>
+
+                <p className="text-lg font-semibold opacity-60 mb-4">The easiest way to get up and running</p>
+
+                <div className="flex flex-col md:flex-row items-center gap-3 md:gap-4">
+                    <TrackedCTA
+                        event={{
+                            name: `clicked Get started - free`,
+                            type: enterpriseMode ? 'cloud-enterprise' : 'cloud',
+                        }}
+                        type="primary"
+                        width="full lg:w-auto"
+                        className="shadow-md"
+                        to={
+                            enterpriseMode
+                                ? 'https://posthog.com/signup/cloud/enterprise'
+                                : 'https://app.posthog.com/signup'
+                        }
+                    >
+                        {enterpriseMode ? 'Get in touch' : 'Get started - free'}
+                    </TrackedCTA>
+
+                    <p className="opacity-60 text-sm mb-0">14-day free trial, then pricing scales with usage</p>
                 </div>
             </section>
 
             <section className={`${section}`}>
-                <h4 className="mb-0">Products</h4>
-                <p className="text-[15px] opacity-60 pb-2 mb-8 border-b border-dashed border-gray-accent-light">
-                    The Product OS suite ships with all products. You can disable billing for products you don't need.
-                </p>
+                <h5 className="text-[15px] font-semibold opacity-60 border-b border-dashed border-gray-accent-light pb-2 mb-6">
+                    The PostHog suite includes:
+                </h5>
 
-                <div className="grid lg:grid-cols-3 grid-rows-[max-content_max-content_1fr] lg:gap-x-6 mb-12">
+                <div className="grid lg:grid-cols-3 grid-rows-[max-content_max-content_1fr] lg:gap-x-6 lg:mb-6">
                     <header className={`${gridCell} ${gridCellTop}`}>
                         <span className="w-9 h-9 flex mb-1">{ProductIcons.analytics}</span>
                         <h3 className="text-lg mb-0 pb-0">Product analytics + data stack</h3>
@@ -250,10 +277,10 @@ const Control = (): JSX.Element => {
                     <div className={`${gridCell} ${gridCellMid} lg:order-4`}>
                         <p className="opacity-60 mb-0 text-sm">Pricing</p>
                         <p className="mb-0">
-                            <span className="font-bold text-lg">$0.00045</span>
+                            <span className="font-bold text-lg">$0.000450</span>
                             <span className="text-sm opacity-60">/event</span>
                         </p>
-                        <p className="text-sm opacity-70 mb-0 font-semibold">First 1 million events/mo free</p>
+                        <p className="text-sm opacity-70 mb-0 font-semibold">First 2 weeks free</p>
                     </div>
 
                     <div className={`${gridCell} ${gridCellBottom} lg:order-7`}>
@@ -277,7 +304,7 @@ const Control = (): JSX.Element => {
                             <span className="font-bold text-lg">$0.0050</span>
                             <span className="text-sm opacity-60">/recording</span>
                         </p>
-                        <p className="text-sm opacity-70 mb-0 font-semibold">First 15,000 recordings/mo free</p>
+                        <p className="text-sm opacity-70 mb-0 font-semibold">First 2 weeks free</p>
                     </div>
 
                     <div className={`${gridCell} ${gridCellBottom} lg:order-8`}>
@@ -306,29 +333,70 @@ const Control = (): JSX.Element => {
                         {/* feature flags pricing breakdown (empty for now) */}
                     </div>
                 </div>
+
+                <p className="lg:text-right text-sm opacity-60 -mt-4 lg:-mt-0 mb-8 pb-4">
+                    <strong>B2C company with millions of users?</strong> Get in touch for volume discounts after signing
+                    up.
+                </p>
             </section>
 
             <section className={`${section} mb-12`}>
-                <div className="bg-black rounded-md flex flex-col lg:items-center lg:flex-row justify-between p-8">
-                    <h3 className="text-white mb-4 lg:mb-0 pb-0 leading-none">Try PostHog Cloud free.</h3>
-                    <aside>
+                <h5 className="text-[15px] font-semibold opacity-60 border-b border-dashed border-gray-accent-light pb-2 mb-6">
+                    Other editions of PostHog:
+                </h5>
+                <div className="grid lg:grid-cols-3 grid-rows-[max-content_max-content_1fr] space-y-8 lg:space-y-0 lg:space-x-6 mb-6 lg:mb-0">
+                    <OtherEdition name="PostHog Cloud Lite" price="Free">
+                        <p className="text-[15px] mb-4">
+                            Generous usage limits for hobbyists and early-stage startups. You get:
+                        </p>
+                        <ul className="text-sm mb-4">
+                            <li className="text-[15px]">10 million events/mo</li>
+                            <li className="text-[15px]">15,000 recordings/mo</li>
+                            <li className="text-[15px]">10 feature flags/mo</li>
+                            <li className="text-[15px]">3 experiments/mo</li>
+                        </ul>
+
+                        <p className="text-sm italic opacity-60 mb-0">
+                            Get PostHog Cloud Lite by signing up for PostHog Cloud (above). Just downgrade before the
+                            14-day trial ends.
+                        </p>
+                    </OtherEdition>
+
+                    <OtherEdition name="Self-host" price="Same pricing as PostHog Cloud">
+                        <p className="text-[15px] mb-4">
+                            Not recommended due to hosting complexities, but available for those who need it
+                        </p>
+
+                        <div>
+                            <TrackedCTA
+                                href="https://license.posthog.com/"
+                                size="md"
+                                type="outline"
+                                className="text-red shadow-none !p-0 bg-transparent border-0"
+                                event={{ name: 'deploy: clicked Get license key' }}
+                            >
+                                Get a license key
+                            </TrackedCTA>
+                        </div>
+                    </OtherEdition>
+
+                    <OtherEdition name="Open Source" price="Free forever">
+                        <p className="text-[15px] mb-2">
+                            Deploy with Docker on your own sever. Requires manual upgrades.
+                        </p>
+                        <p className="text-[13px] mb-4 opacity-60">
+                            <strong>Tip:</strong> PostHog Cloud is faster to set up - <em>and cheaper!</em>
+                        </p>
                         <TrackedCTA
-                            event={{
-                                name: `clicked Get started - free`,
-                                type: enterpriseMode ? 'cloud-enterprise' : 'cloud',
-                            }}
-                            type="primary"
-                            width="full lg:w-auto"
-                            className="shadow-md"
-                            to={
-                                enterpriseMode
-                                    ? 'https://posthog.com/signup/cloud/enterprise'
-                                    : 'https://app.posthog.com/signup'
-                            }
+                            href="/docs/self-host"
+                            size="md"
+                            type="outline"
+                            className="text-red shadow-none !p-0 bg-transparent border-0"
+                            event={{ name: 'next steps - installing posthog: View deployment instructions' }}
                         >
-                            {enterpriseMode ? 'Get in touch' : 'Get started - free'}
+                            View deployment instructions
                         </TrackedCTA>
-                    </aside>
+                    </OtherEdition>
                 </div>
             </section>
 
@@ -420,12 +488,18 @@ const Control = (): JSX.Element => {
                             <p className="text-[15px] mb-1">
                                 SAML SSO, advanced permissions, dedicated Slack support channel
                             </p>
-                            <p className="text-sm text-black/70">
-                                Add <strong className="text-black/100">25%</strong> to total bill ($450/mo min)
+                            <p className="text-sm text-black/70 mb-1">
+                                <strong>PostHog Cloud:</strong> Add <strong className="text-black/100">25%</strong> to
+                                total bill ($450/mo min)
+                            </p>
+                            <p className="text-sm text-black/70 flex items-center space-x-1">
+                                <strong>Self-hosted:</strong>&nbsp;Starts at $5,000/mo <EnterpriseSelfHosted />
                             </p>
                         </div>
 
-                        <h4 className="border-b border-dashed border-gray-accent-light pb-2 mb-3">Discounts</h4>
+                        <h4 className="border-b border-dashed border-gray-accent-light pb-2 mb-3">
+                            Available discounts
+                        </h4>
 
                         <div className="pl-10 relative mb-4">
                             <span className="w-6 h-6 absolute top-0 left-1">{NotProductIcons.discount}</span>
@@ -443,12 +517,12 @@ const Control = (): JSX.Element => {
                     </div>
                 </div>
             </section>
-            <section className={`${section} mt-12 px-0 md:px-4`}>
-                <h2 className="text-2xl m-0 flex items-center">What comes in PostHog?</h2>
+            <section className={`${section} mt-12 px-4`}>
+                <h2 className="text-2xl m-0 flex items-center">What comes in PostHog Cloud?</h2>
                 <p className="m-0 text-black/50 font-medium mb-7">Get access to all features and no plan limits.</p>
                 <Features />
             </section>
-            <section className={`${section} mb-12 mt-12 md:mt-24 md:px-4`}>
+            <section className={`${section} mb-12 mt-12 md:mt-24 md:px-4 hidden`}>
                 <h2 className="text-2xl m-0 flex items-center border-b border-dashed border-gray-accent-light pb-4">
                     <SelfHostIcon className="opacity-30 w-[36px] mr-2" />
                     <span>Want to self-host PostHog?</span>
@@ -457,7 +531,7 @@ const Control = (): JSX.Element => {
             </section>
             <section className={`${section} mb-12 mt-12 md:mt-24 md:px-4`}>
                 <h2 className="text-2xl m-0 flex items-center border-b border-dashed border-gray-accent-light pb-4">
-                    Compare all plans
+                    Compare plans
                 </h2>
                 <AllPlans />
             </section>

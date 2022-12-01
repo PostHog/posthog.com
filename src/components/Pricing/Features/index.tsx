@@ -38,7 +38,6 @@ const dataStack: IFeature[] = [
 ]
 
 const planAllowances: IFeature[] = [
-    { title: '1 million events included every month!' },
     { title: 'Unlimited tracked users' },
     { title: 'Unlimited teammates' },
     { title: 'Unlimited event tracking' },
