@@ -10,7 +10,7 @@ type SearchBoxProps = {
 }
 
 const keyboardShortcut = cntl`
-    box-content p-[5px] border border-b-2 border-gray-accent-light rounded-[3px] inline-flex 
+    box-content p-[5px] border border-b-2 border-gray-accent-light dark:border-gray-accent-light/40 rounded-[3px] inline-flex text-black/35 dark:text-white/40 
 `
 
 export const SidebarSearchBox: React.FC<SearchBoxProps> = ({ placeholder, filter }) => {
@@ -20,13 +20,13 @@ export const SidebarSearchBox: React.FC<SearchBoxProps> = ({ placeholder, filter
         <button
             type="button"
             onClick={() => open(filter)}
-            className="flex items-center relative m-0 mb-2 w-full text-sm text-gray focus:outline-none shadow-xl border border-gray/10 border-b-gray/30 hover:border-gray/20 rounded relative active:top-[0] hover:scale-[1.01] active:scale-[1]"
+            className="flex items-center m-0 mb-2 w-full text-sm text-gray focus:outline-none shadow-xl border border-gray/10 border-b-gray/30 hover:border-gray/20 rounded relative active:top-[0] hover:scale-[1.01] active:scale-[1]"
         >
             <div className="absolute left-4 z-20">
                 <Search className="w-4 h-4" />
             </div>
 
-            <div className="flex items-center justify-between pl-10 pr-2 py-2 text-left text-[15px] font-medium text-black/30 bg-white/50 dark:bg-gray-accent-dark dark:text-white w-full z-10">
+            <div className="flex items-center justify-between pl-10 pr-2 py-2 text-left text-[15px] font-medium text-black/30 dark:text-primary-dark/30 bg-white/50 dark:bg-gray-accent-dark dark:text-white w-full z-10">
                 <span>{placeholder || 'Search...'}</span>
                 <span>
                     {typeof window !== 'undefined' && window.navigator.userAgent.toLowerCase().includes('macintosh') ? (
