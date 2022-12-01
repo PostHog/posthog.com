@@ -112,4 +112,13 @@ Although there may be exceptions, here are some standard ways to fail:
 
 ## Why VC = less stress (for me)
 
-Running any company is usually a marathon - I believe that looking after yourself let's you in turn look after users better. That often means raising money.
+To sum up, VC funding is less stressful for me because:
+
+* I don't have to worry about personal finance
+* I can focus on doing the right long term thing, all the time
+* It hasn't changed control / who my boss is
+* Raising wasn't a huge distraction
+* We don't need an IPO to be successful financially
+* What we enjoy doing and what we're building is well suited to a VC model
+
+Ultimately, running any company is usually a marathon - I believe that looking after yourself let's you in turn look after users better. That often means raising money.
