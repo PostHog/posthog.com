@@ -67,7 +67,7 @@ The fact you still need to be accountable for spending to your investors, we've 
 
 For example, we pay 4 months notice if we let someone go. I doubt we'd have made that call if we were bootstrapped. We simply think it's cheaper to spend money here than to have an underperformer stay for longer because we feel bad. 
 
-## How to make loads of money
+## Myth #5: It's IPO or bust
 
 There's a myth that you can only exit (sell your shares) from a VC-backed company through an Initial Public Offering (IPO), or through selling the business.
 
