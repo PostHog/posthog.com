@@ -17,7 +17,7 @@ There are lots of myths around what it's like run a business with VC funding –
 
 ## Myth #1: VC boards want growth at any cost
 
-Not for us.
+This hasn't been our experience.
 
 This depends entirely on who joins your board, and how you've pitched to them.
 
