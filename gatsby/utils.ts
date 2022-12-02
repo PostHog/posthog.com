@@ -1,7 +1,7 @@
 // Replacing '/' would result in empty string which is invalid
-const replacePath = (path) => (path === `/` ? path : path.replace(/\/$/, ``))
+export const replacePath = (path: string) => (path === `/` ? path : path.replace(/\/$/, ``))
 
-function flattenMenu(items, breadcrumb = []) {
+export function flattenMenu(items, breadcrumb = []) {
     return items.reduce((acc, item) => {
         if (item.url) {
             acc.push({
@@ -20,9 +20,4 @@ function flattenMenu(items, breadcrumb = []) {
         }
         return acc
     }, [])
-}
-
-module.exports = {
-    replacePath,
-    flattenMenu,
 }

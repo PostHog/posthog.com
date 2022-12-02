@@ -1,4 +1,6 @@
-module.exports = exports.createSchemaCustomization = async ({ actions, schema }) => {
+import { GatsbyNode } from 'gatsby'
+
+export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] = async ({ actions, schema }) => {
     const { createTypes } = actions
     createTypes(`
     type Mdx implements Node {
@@ -39,27 +41,6 @@ module.exports = exports.createSchemaCustomization = async ({ actions, schema })
     type Frontmatter {
       authorData: [AuthorsJson] @link(by: "handle", from: "author")
       badge: String
-    }
-    type Replies {
-      name: String
-      rawBody: String
-      imageURL: String
-      subject: String
-    }
-    type Question implements Node {
-      rawBody: String
-      name: String
-      slug: [String]
-      imageURL: String
-      replies: [Replies]
-      avatar: File @link(from: "avatar___NODE")
-      childrenReply: Mdx
-    }
-    type Reply implements Node {
-      avatar: File @link(from: "avatar___NODE")
-      name: String
-      fullName: String
-      subject: String
     }
     type TeamData {
       name: String
@@ -179,36 +160,6 @@ module.exports = exports.createSchemaCustomization = async ({ actions, schema })
     }
     type AshbyJob implements Node {
       customFields: [AshbyJobCustomFields],
-    }
-    type SqueakTeam {
-      name: String,
-    }
-    type SqueakGitHubReactions {
-      hooray: Int,
-          heart: Int,
-          eyes: Int,
-          _1: Int,
-          plus1: Int,
-          minus1: Int
-    }
-    type SqueakGitHubPage {
-      title: String,
-      html_url: String,
-      number: Int,
-      closed_at: Date,
-      reactions: SqueakGitHubReactions,
-    }
-    type SqueakRoadmap implements Node {
-      title: String,
-      category: String
-      beta_available: Boolean,
-      complete: Boolean,
-      description: String,
-      team: SqueakTeam,
-      otherLinks: [String],
-      githubPages: [SqueakGitHubPage],
-      milestone: Boolean,
-      thumbnail: File @link(from: "thumbnail___NODE")
     }
   `)
     createTypes([

@@ -305,12 +305,30 @@ div[class^='feature-'].text-center {
         position: absolute;
         top: 0;
         width: 18px;
-
-        @apply xl:hidden;
     }
 
     &:hover:before {
         opacity: 1;
+    }
+}
+
+/* When used in article on-page nav, only show on mobile viewports... */
+
+#content-menu-wrapper .jumpTo:before {
+    @apply xl:hidden;
+}
+
+/* ... but show on desktop in search results (and rotate) */
+
+.search-results {
+    .jumpTo {
+        &:before {
+            @apply -rotate-90 top-0.5;
+        }
+
+        &:hover:before {
+            @apply opacity-50;
+        }
     }
 }
 

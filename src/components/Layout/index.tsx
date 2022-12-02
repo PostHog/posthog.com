@@ -5,6 +5,7 @@ import CookieBanner from 'components/CookieBanner'
 import Banner from 'components/Banner'
 import { useValues } from 'kea'
 import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
+import { SearchProvider } from 'components/Search/SearchContext'
 
 import './Fonts.scss'
 import './Layout.scss'
@@ -21,13 +22,15 @@ const Layout = ({ children, className = '' }: { children: React.ReactNode; class
     }, [])
 
     return (
-        <div className={className}>
-            <Banner />
-            <Header />
-            <main>{children}</main>
-            <Footer />
-            <CookieBanner />
-        </div>
+        <SearchProvider>
+            <div className={className}>
+                <Banner />
+                <Header />
+                <main>{children}</main>
+                <Footer />
+                <CookieBanner />
+            </div>
+        </SearchProvider>
     )
 }
 

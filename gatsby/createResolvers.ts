@@ -1,4 +1,6 @@
-module.exports = exports.createResolvers = ({ createResolvers }) => {
+import { GatsbyNode } from 'gatsby'
+
+export const createResolvers: GatsbyNode['createResolvers'] = ({ createResolvers }) => {
     const resolvers = {
         Contributors: {
             teamData: {

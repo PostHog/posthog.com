@@ -1,4 +1,5 @@
 import { kea, actions, reducers } from 'kea'
+import type { PostHog } from 'posthog-js'
 
 export const posthogAnalyticsLogic = kea([
     actions(() => ({

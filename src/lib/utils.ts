@@ -15,7 +15,7 @@ export const unsafeHash = (str: string) => {
     return String(a)
 }
 
-export const classNames = (...classes: (string | null | undefined)[]) => {
+export const classNames = (...classes: (string | null | undefined | false)[]) => {
     return classes.filter(Boolean).join(' ')
 }
 
