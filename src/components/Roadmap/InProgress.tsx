@@ -21,7 +21,7 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
     async function subscribe(email: string) {
         setLoading(true)
         if (email) {
-            const res = await fetch('http://localhost:3000/api/roadmap/subscribe', {
+            const res = await fetch('https://squeak.cloud/api/roadmap/subscribe', {
                 method: 'POST',
                 body: JSON.stringify({ id: roadmapId }),
                 credentials: 'include',
@@ -47,7 +47,7 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
     async function unsubscribe(email: string) {
         setLoading(true)
         if (email) {
-            const res = await fetch('http://localhost:3000/api/roadmap/unsubscribe', {
+            const res = await fetch('https://squeak.cloud/api/roadmap/unsubscribe', {
                 method: 'POST',
                 body: JSON.stringify({ id: roadmapId }),
                 credentials: 'include',
