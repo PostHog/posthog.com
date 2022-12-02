@@ -46,8 +46,6 @@ if (!process.env.GATSBY_ALGOLIA_APP_ID || !process.env.ALGOLIA_API_KEY || !proce
     console.warn('No Algolia keys present in environment, skipping sending information to algolia')
 }
 
-console.log(process.env.GATSBY_ALGOLIA_APP_ID, process.env.ALGOLIA_API_KEY, process.env.GATSBY_ALGOLIA_INDEX_NAME)
-
 module.exports = {
     // This plugin must be placed last in your list of plugins to ensure that it can query all the GraphQL data
     resolve: `gatsby-plugin-algolia`,
