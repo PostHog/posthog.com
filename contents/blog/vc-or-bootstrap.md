@@ -1,5 +1,5 @@
 ---
-date: 2022-12-01
+date: 2022-12-02
 title: Raising money is less stressful than bootstrapping
 rootPage: /blog
 sidebar: Blog
@@ -35,7 +35,7 @@ Our board could pressure us to take certain decisions, but Tim (co-founder) and 
 
 The fact we have plenty of runway, can pay everyone well, and have great people that ship stuff, means we have _more_ control than a bootstrapped startup that _must_ generate revenue or go out of business.
 
-Of course, this can easily result in a lack of discipline, but it helped us get an open source project off the ground first, before focussing on revenue last summer.
+Of course, this can easily result in a lack of discipline, but it helped us get an open source project off the ground first, before focusing on revenue last summer.
 
 ## Myth #3: Fundraising is a drag
 
@@ -47,7 +47,7 @@ There is a huge amount of variation. It all comes down to roughly these requirem
 * Proven team
 * Good VC market conditions
 
-I've intentionally not listed "a good network" as, whilst easier for some than others, I believe you can get this done as a byproduct of the above.
+I've intentionally not listed "a good network" as, while easier for some than others, I believe you can get this done as a byproduct of the above.
 
 None of these are necessary, but the better you do against each of them, the less time you'll have to spend fundraising. Ironically, this means you'll have more time to focus on product, which means - the easier time you'll have fundraising.
 
@@ -100,9 +100,13 @@ Now you know that, don't make our mistake if you can avoid it!
 
 Those are some myths dispelled, but this doesn't invalidate bootstrapping and some companies definitely **shouldn't** seek VC funding.
 
-First, you need to want to build something very, very big. It's very hard to relax and run things as a lifestyle business once you're at $1M ARR or more, for example. Are you going to want to push further when you've no financial need to do so?
+First, you need to want to build something very, very big. It's hard to relax and run things as a lifestyle business once you're at $1M ARR or more, for example. Are you going to want to push further when you've no financial need to do so?
 
-Second, the style of product matters. If you don't need much capital, then don't raise it. At PostHog, the opposite was true - we've built a really wide platform with lots of products inside it, which made VC more important to us. The innovation is starting on an open source base, and integrating all the tools that customers need to build a more successful product. That's an awful lot of stuff to build. We also believed that our paid self hosted product would be 90%+ of our revenue, so we'd need to build a free and a paid product on top (although that later turned out not to be true...)
+Second, the style of product matters. If you don't need much capital, then don't raise it. 
+
+At PostHog, the opposite was true – we've built a really wide platform with lots of products inside it, which made VC more important to us. The innovation is starting on an open source base, and integrating all the tools that customers need to build a more successful product. 
+
+That's an awful lot of stuff to build. We also believed that our paid self-hosted product would be 90%+ of our revenue, so we'd need to build a free and a paid product on top (although that later turned out not to be true...).
 
 ## Truth #2: There are terrible reasons for raising money
 
@@ -123,4 +127,4 @@ To sum up, VC funding is less stressful for me because:
 * We don't need an IPO to be successful financially
 * What we enjoy doing and what we're building is well suited to a VC model
 
-Ultimately, running any company is usually a marathon - I believe that looking after yourself let's you in turn look after users better. That often means raising money.
+Ultimately, running any company is usually a marathon – I believe that looking after yourself let's you in turn look after users better. That often means raising money.
