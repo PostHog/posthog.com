@@ -1,6 +1,6 @@
 ---
 date: 2022-12-01
-title: "Product engineer vs software engineer: What's the difference?"
+title: "Product engineer vs software engineer: what's the difference?"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -58,3 +58,9 @@ As a company, having software engineers appeals to companies with a large-scale 
 Startups or companies that want to be agile and move fast, should look for product engineers. Product engineers have a holistic view of the product and the ability to move fast when the need arises.
 
 Picking what is right is up to the company and its culture. If focusing on building great products is a priority, product engineers might be a better choice. If scaling and building expertise throughout the company is a focus, then software engineers are likely better. Companies with both types of roles have succeeded and more will continue to succeed.
+
+## Further reading
+
+- [What is a product engineer (and why they matter)](/blog/what-is-a-product-engineer/)
+- [Startups, stop treating engineers like a different species](/blog/stop-treating-engineers-differently)
+- [22 ways PostHog makes it easier to build great products](/blog/using-posting)
