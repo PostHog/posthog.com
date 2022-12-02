@@ -102,7 +102,7 @@ Those are some myths dispelled, but this doesn't invalidate bootstrapping and so
 
 First, you need to want to build something very, very big. It's very hard to relax and run things as a lifestyle business once you're at $1M ARR or more, for example. Are you going to want to push further when you've no financial need to do so?
 
-Second, the style of product you want to build may _require_ more capital. With hindsight, we've built a really wide platform with lots of products inside it. The innovation is starting on an open source base, and integrating all the tools that customers need to build a more successful product. That's an awful lot of stuff to build. We also believed that our paid self hosted product would be 90%+ of our revenue, so we'd need to build a free and a paid product on top (although that later turned out not to be true...)
+Second, the style of product matters. If you don't need much capital, then don't raise it. At PostHog, the opposite was true - we've built a really wide platform with lots of products inside it, which made VC more important to us. The innovation is starting on an open source base, and integrating all the tools that customers need to build a more successful product. That's an awful lot of stuff to build. We also believed that our paid self hosted product would be 90%+ of our revenue, so we'd need to build a free and a paid product on top (although that later turned out not to be true...)
 
 ## Truth #2: There are terrible reasons for raising money
 
