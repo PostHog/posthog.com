@@ -79,9 +79,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, cache
         replies && createReplies(node, replies)
     })
 
-    const topics = await fetch(`https://squeak.cloud/api/topics?organizationId=${organizationId}`).then((res) =>
-        res.json()
-    )
+    const topics = await fetch(`${apiHost}/api/topics?organizationId=${organizationId}`).then((res) => res.json())
 
     topics.forEach((topic) => {
         const { label, id } = topic
@@ -100,8 +98,8 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, cache
         createNode(node)
     })
 
-    const topicGroups = await fetch(`https://squeak.cloud/api/topic-groups?organizationId=${organizationId}`).then(
-        (res) => res.json()
+    const topicGroups = await fetch(`${apiHost}/api/topic-groups?organizationId=${organizationId}`).then((res) =>
+        res.json()
     )
 
     topicGroups.forEach((topicGroup) => {
@@ -123,15 +121,14 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, cache
         createNode(node)
     })
 
-    const roadmap = await fetch(`https://squeak.cloud/api/roadmap?organizationId=${organizationId}`).then((res) =>
-        res.json()
-    )
+    const roadmap = await fetch(`${apiHost}/api/roadmap?organizationId=${organizationId}`).then((res) => res.json())
 
     for (const roadmapItem of roadmap) {
-        const { title, github_urls, image } = roadmapItem
+        const { title, github_urls, image, id } = roadmapItem
 
         const node = {
             ...roadmapItem,
+            roadmapId: id,
             id: createNodeId(`squeak-roadmap-${title}`),
             parent: null,
             children: [],
