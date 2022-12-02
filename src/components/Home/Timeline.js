@@ -1,5 +1,7 @@
 import { CallToAction } from 'components/CallToAction'
 import { graphql, useStaticQuery } from 'gatsby'
+import Link from 'components/Link'
+import { heading, section } from './classes'
 import groupBy from 'lodash.groupby'
 import React from 'react'
 
@@ -48,13 +50,14 @@ export default function Timeline() {
     )
 
     return (
-        <section className="px-4">
-            <h2 className="text-center">We ship weirdly fast</h2>
-            <p className="my-6 mx-auto text-center text-lg md:text-xl font-semibold mt-2 lg:mt-4 text-primary max-w-2xl opacity-75">
-                How else would we have done all this?
-            </p>
+        <section className="px-4 mb-12 md:mb-20">
+            <h2 className={heading()}>
+                We ship <br className="sm:hidden" />
+                <span className="text-orange">weirdly fast</span>
+            </h2>
+            <h3 className={heading('sm')}>(How else could we have done all this?)</h3>
 
-            <div className="text-center pb-8 md:pb-12">
+            <div className="text-center py-8 md:pb-12">
                 <div className="inline-flex flex-col md:flex-row gap-y-2 md:gap-x-6">
                     <div className="flex items-center text-[15px] text-left gap-2">
                         <span className="block w-[10px] h-[10px] rounded-full bg-[#43AF79]"></span>
@@ -71,7 +74,7 @@ export default function Timeline() {
                 </div>
             </div>
 
-            <div className="max-w-screen-2xl mx-auto mdlg:grid grid-cols-3 gap-8 space-2 lg:space-4">
+            <div className="max-w-screen-2xl mx-auto mdlg:grid grid-cols-3 shadow-xl">
                 {Object.keys(pastEvents).map((year) => {
                     const pastMonths = groupBy(pastEvents[year], (node) => {
                         const date = new Date(node.date_completed || node.projected_completion_date)
@@ -82,15 +85,18 @@ export default function Timeline() {
                         return Math.floor(new Date(date).getUTCMonth() / 3 + 1)
                     })
                     return (
-                        <div key={year} className="w-full max-w-md mx-auto lg:max-w-auto mb-4 lg:mb-0">
-                            <h4 className="text-lg font-bold text-center">{year}</h4>
-                            <div className="bg-gray-accent-light px-4 rounded">
+                        <div
+                            key={year}
+                            className="bg-white rounded w-full mb-4 lg:mb-0 border-gray-accent-light border-dashed border-r last:border-r-0"
+                        >
+                            <h4 className="text-base py-1 font-bold text-center bg-gray-accent-light ">{year}</h4>
+                            <div className="px-8">
                                 <ul role="list" className="py-1 px-0">
                                     {Object.keys(pastMonths).map((month) => {
                                         return (
                                             <li
                                                 key={month}
-                                                className="timeline-entry list-none border-gray-accent-light border-dashed border-b last:border-none flex py-2 gap-3 items-start"
+                                                className="timeline-entry list-none border-gray-accent-light/50 border-solid border-b last:border-none flex py-2 gap-3 items-start"
                                             >
                                                 <p className="text-[14px] text-gray capitalize w-[30px] flex-shrink-0 m-0">
                                                     {month}
@@ -115,7 +121,7 @@ export default function Timeline() {
                                         return (
                                             <li
                                                 key={quarter}
-                                                className="timeline-entry list-none border-gray-accent-light border-dashed border-b last:border-none flex py-2 gap-3 items-start"
+                                                className="timeline-entry list-none  flex py-2 gap-3 items-start"
                                             >
                                                 <p className="text-[14px] text-gray capitalize w-[30px] flex-shrink-0 m-0">
                                                     Q{quarter}
@@ -141,11 +147,6 @@ export default function Timeline() {
                         </div>
                     )
                 })}
-            </div>
-            <div className="text-center mt-8 md:mt-12">
-                <CallToAction type="outline" to="/roadmap">
-                    Explore our roadmap
-                </CallToAction>
             </div>
         </section>
     )

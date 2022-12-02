@@ -1,4 +1,14 @@
 import { useLocation } from '@reach/router'
+import { motion, AnimatePresence } from 'framer-motion'
+import { useBreakpoint } from 'gatsby-plugin-breakpoints'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { animateScroll as scroll, Link as ScrollLink } from 'react-scroll'
+import Scrollspy from 'react-scrollspy'
+import { push as PushMenu } from 'react-burger-menu'
+import { flattenMenu, replacePath } from '../../../gatsby/utils'
+import { IContributor, ICrumb, IMenu, INextPost, IProps, ISidebarAction, ITopic } from './types'
+
 import Chip from 'components/Chip'
 import {
     Edit,
@@ -12,22 +22,13 @@ import {
     Twitter,
 } from 'components/Icons/Icons'
 import Link from 'components/Link'
-import { motion, AnimatePresence } from 'framer-motion'
-import { useBreakpoint } from 'gatsby-plugin-breakpoints'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { animateScroll as scroll, Link as ScrollLink } from 'react-scroll'
-import Scrollspy from 'react-scrollspy'
 import InternalSidebarLink from 'components/Docs/InternalSidebarLink'
-import SearchBar from 'components/Docs/SearchBar'
 import { DarkModeToggle } from 'components/DarkModeToggle'
-import { push as PushMenu } from 'react-burger-menu'
+import { Popover } from 'components/Popover'
 import Tooltip from 'components/Tooltip'
 import { CallToAction } from 'components/CallToAction'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
-import { flattenMenu, replacePath } from '../../../gatsby/utils'
-import { IContributor, ICrumb, IMenu, INextPost, IProps, ISidebarAction, ITopic } from './types'
-import { Popover } from 'components/Popover'
+import SidebarSearchBox from 'components/Search/SidebarSearchBox'
 
 const ShareLink = ({ children, url }: { children: React.ReactNode; url: string }) => {
     const width = 626
@@ -48,8 +49,6 @@ const ShareLink = ({ children, url }: { children: React.ReactNode; url: string }
         </button>
     )
 }
-
-const A = (props: any) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
 export const SidebarSection = ({
     title,
@@ -95,7 +94,7 @@ export const ShareLinks = ({ title, href }: { title: string; href: string }) => 
                 <Facebook />
             </ShareLink>
             <ShareLink
-                url={`https://twitter.com/intent/tweet?url=${href}&text=Check%20out%20this%20article%20from%20%40poshog%0A%0A`}
+                url={`https://twitter.com/intent/tweet?url=${href}&text=Check%20out%20this%20article%20from%20%40posthog%0A%0A`}
             >
                 <Twitter className="w-[32px] h-[32px]" />
             </ShareLink>
@@ -117,7 +116,12 @@ export const ContributorImage = ({ image, name, className = '', imgClassName = '
     return (
         <div className={`w-[38px] h-[38px] relative rounded-full overflow-hidden ${className}`}>
             {gatsbyImage ? (
-                <GatsbyImage imgClassName={`rounded-full ${imgClassName}`} image={gatsbyImage} alt={name} />
+                <GatsbyImage
+                    imgClassName={`rounded-full ${imgClassName}`}
+                    image={gatsbyImage}
+                    alt={name}
+                    className="bg-gray-accent dark:bg-gray-accent-dark"
+                />
             ) : (
                 <svg width="38" height="38" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -279,7 +283,7 @@ const Menu = ({
                             {isActive && (
                                 <motion.span
                                     variants={variants}
-                                    className="absolute w-[4px] bg-red rounded-[2px] top-[2px] h-[calc(100%_-_4px)] left-0"
+                                    className="absolute w-[4px] bg-tan dark:bg-primary rounded-[2px] top-[2px] h-[calc(100%_-_4px)] left-0"
                                     initial="hidden"
                                     animate="visible"
                                     exit="hidden"
@@ -516,17 +520,15 @@ export default function PostLayout({
         } ${menu ? 'mx-auto' : 'lg:ml-auto'}`
 
     return (
-        <div id="menu-wrapper">
-            {!hideSearch && (
-                <div className="py-2 px-4 border-y border-dashed border-gray-accent-light dark:border-gray-accent-dark flex justify-between sticky top-[-2px] bg-tan dark:bg-primary z-30">
-                    {menu && (
-                        <button onClick={handleMobileMenuClick} className="py-2 px-3 block lg:hidden">
-                            <MobileMenu style={{ transform: `rotate(${mobileMenuOpen ? '180deg' : '0deg'})` }} />
-                        </button>
-                    )}
-                    <SearchBar base={searchFilter} />
+        <div id="menu-wrapper" className="border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark">
+            {menu && (
+                <div className="block lg:hidden py-2 px-4 border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark flex justify-between sticky top-[-2px] bg-tan dark:bg-primary z-30">
+                    <button onClick={handleMobileMenuClick} className="py-2 px-3">
+                        <MobileMenu style={{ transform: `rotate(${mobileMenuOpen ? '180deg' : '0deg'})` }} />
+                    </button>
                 </div>
             )}
+
             {menu && (
                 <PushMenu
                     width="calc(100vw - 80px)"
@@ -565,7 +567,12 @@ export default function PostLayout({
             >
                 {menu && (
                     <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:block hidden relative z-20">
-                        <aside className="lg:sticky bg-tan dark:bg-primary top-10 flex-shrink-0 w-full justify-self-end px-4 lg:box-border my-10 lg:my-0 lg:py-4 mr-auto overflow-y-auto lg:h-[calc(100vh-40px)]">
+                        <aside className="lg:sticky bg-tan dark:bg-primary top-0 flex-shrink-0 w-full justify-self-end px-4 lg:box-border my-10 lg:my-0 mr-auto overflow-y-auto lg:h-screen pb-10">
+                            {!hideSearch && (
+                                <div className="lg:sticky top-0 z-20 pt-4 -mx-2 px-1 bg-tan dark:bg-primary relative">
+                                    <SidebarSearchBox />
+                                </div>
+                            )}
                             <TableOfContents menuType={menuType} menu={menu} />
                         </aside>
                     </div>

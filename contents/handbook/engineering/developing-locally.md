@@ -157,7 +157,7 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
 
 ### 2. Prepare the frontend
 
-1. Install nvm: https://github.com/nvm-sh/nvm. If using fish, you may instead prefer https://github.com/jorgebucaran/nvm.fish.
+1. Install nvm, with `brew install nvm` or by following the instructions at https://github.com/nvm-sh/nvm. If using fish, you may instead prefer https://github.com/jorgebucaran/nvm.fish.
 
 <blockquote class="warning-note">
     After installation, make sure to follow the instructions printed in your terminal to add NVM to your{' '}

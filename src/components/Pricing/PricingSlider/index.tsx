@@ -1,5 +1,5 @@
 import React from 'react'
-import { useActions } from 'kea'
+import { useActions, useValues } from 'kea'
 import { pricingSliderLogic } from './pricingSliderLogic'
 import { LogSlider } from './LogSlider'
 
@@ -18,7 +18,7 @@ export const PricingSlider = ({
     stepsInRange = 100,
 }: PricingSliderProps) => {
     const { setSliderValue } = useActions(pricingSliderLogic)
-
+    const { sliderValue } = useValues(pricingSliderLogic)
     return (
         <LogSlider
             min={min}
@@ -26,6 +26,7 @@ export const PricingSlider = ({
             marks={marks}
             stepsInRange={stepsInRange}
             onChange={(value) => setSliderValue(value)}
+            value={sliderValue}
         />
     )
 }

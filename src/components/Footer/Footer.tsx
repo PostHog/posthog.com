@@ -115,6 +115,10 @@ const linklist: IProps[] = [
                 url: '/questions',
             },
             {
+                title: 'Product roadmap',
+                url: '/roadmap',
+            },
+            {
                 title: 'Contributors',
                 url: '/contributors',
             },
@@ -325,9 +329,7 @@ export function Footer(): JSX.Element {
 
             <div className="grid grid-cols-2 md:grid-cols-3 border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:border-r-0 last:border-r-0 lg:grid-cols-6 w-full max-w-screen-2xl mx-auto">
                 {linklist.map((item) => (
-                    <>
-                        <LinkListItem {...item} />
-                    </>
+                    <LinkListItem {...item} key={item.url} />
                 ))}
             </div>
 

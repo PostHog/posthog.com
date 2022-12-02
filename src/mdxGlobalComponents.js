@@ -15,6 +15,7 @@ import { Apps } from './components/Apps'
 import { AppsList } from './components/AppsList'
 import { ArrayCTA } from './components/ArrayCTA'
 import { AshbyOpenRoles } from './components/AshbyOpenRoles'
+import { Banner } from './components/Banner'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BlockQuote } from './components/BlockQuote'
 import { Blog } from './components/Blog'
@@ -22,6 +23,7 @@ import { BlogFooter } from './components/BlogFooter'
 import { BorderWrapper } from './components/BorderWrapper'
 import { Breadcrumbs } from './components/Breadcrumbs'
 import { CallToAction } from './components/CallToAction'
+import { Caption } from './components/Caption'
 import { Card } from './components/Card'
 import { Benefits } from './components/Careers/Benefits'
 import { CareersHero } from './components/Careers/CareersHero'
@@ -60,9 +62,11 @@ import { Heading } from './components/Heading'
 import { HiddenSection } from './components/HiddenSection'
 import { Home } from './components/Home'
 import { HostingOption } from './components/HostingOption'
+import { Icons } from './components/Icons'
 import { ImageBlock } from './components/ImageBlock'
 import { IngestionAppsList } from './components/IngestionAppsList'
 import { InlineCode } from './components/InlineCode'
+import { LPCTA } from './components/LPCTA'
 import { LandingPageCallToAction } from './components/LandingPage/LandingPageCallToAction'
 import { LibraryComparison } from './components/LibraryComparison'
 import { LibraryFeatures } from './components/LibraryFeatures'
@@ -105,12 +109,12 @@ import { Question } from './components/Question'
 import { Quote2 } from './components/Quote2'
 import { Roadmap } from './components/Roadmap'
 import { RocketHorizontalRule } from './components/RocketHorizontalRule'
-import { SearchBox } from './components/SearchBox'
 import { SectionLinks } from './components/SectionLinks'
 import { DesignedForYourStackBlock } from './components/Sections/DesignedForYourStackBlock'
 import { FeaturedSectionTextLeft } from './components/Sections/FeaturedSectionTextLeft'
 import { FeaturedSectionTextRight } from './components/Sections/FeaturedSectionTextRight'
 import { FeaturedSectionTripleImage } from './components/Sections/FeaturedSectionTripleImage'
+import { SiteSearchCallout } from './components/SiteSearchCallout'
 import { SliderNav } from './components/SliderNav'
 import { Spacer } from './components/Spacer'
 import { Spinner } from './components/Spinner'
@@ -120,6 +124,7 @@ import { Structure } from './components/Structure'
 import { Subscribe } from './components/Subscribe'
 import { Tab } from './components/Tab'
 import { TeamQuote } from './components/TeamQuote'
+import { Toast } from './components/Toast'
 import { Toggle } from './components/Toggle'
 import { Tooltip } from './components/Tooltip'
 import { TotalCountries } from './components/TotalCountries'
@@ -145,6 +150,7 @@ export const shortcodes = {
     AppsList,
     ArrayCTA,
     AshbyOpenRoles,
+    Banner,
     BasicHedgehogImage,
     BlockQuote,
     Blog,
@@ -152,6 +158,7 @@ export const shortcodes = {
     BorderWrapper,
     Breadcrumbs,
     CallToAction,
+    Caption,
     Card,
     Benefits,
     CareersHero,
@@ -190,9 +197,11 @@ export const shortcodes = {
     HiddenSection,
     Home,
     HostingOption,
+    Icons,
     ImageBlock,
     IngestionAppsList,
     InlineCode,
+    LPCTA,
     LandingPageCallToAction,
     LibraryComparison,
     LibraryFeatures,
@@ -235,12 +244,12 @@ export const shortcodes = {
     Quote2,
     Roadmap,
     RocketHorizontalRule,
-    SearchBox,
     SectionLinks,
     DesignedForYourStackBlock,
     FeaturedSectionTextLeft,
     FeaturedSectionTextRight,
     FeaturedSectionTripleImage,
+    SiteSearchCallout,
     SliderNav,
     Spacer,
     Spinner,
@@ -250,6 +259,7 @@ export const shortcodes = {
     Subscribe,
     Tab,
     TeamQuote,
+    Toast,
     Toggle,
     Tooltip,
     TotalCountries,

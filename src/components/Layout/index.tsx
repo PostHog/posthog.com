@@ -1,15 +1,16 @@
 import React, { useEffect } from 'react'
 import { Header } from '../Header/Header'
 import { Footer } from '../Footer/Footer'
+import CookieBanner from 'components/CookieBanner'
+import Banner from 'components/Banner'
 import { useValues } from 'kea'
+import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
+import { SearchProvider } from 'components/Search/SearchContext'
+
 import './Fonts.scss'
 import './Layout.scss'
 import './SkeletonLoading.css'
 import './DarkMode.scss'
-import { PosthogAnnouncement } from '../PosthogAnnouncement/PosthogAnnouncement'
-import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
-import CookieBanner from 'components/CookieBanner'
-import Link from 'components/Link'
 
 const Layout = ({ children, className = '' }: { children: React.ReactNode; className?: string }): JSX.Element => {
     const { posthog } = useValues(posthogAnalyticsLogic)
@@ -21,21 +22,15 @@ const Layout = ({ children, className = '' }: { children: React.ReactNode; class
     }, [])
 
     return (
-        <div className={className}>
-            <div>
-                <p className="text-center py-4 bg-gray-accent-light dark:bg-gray-accent-dark flex sm:flex-row flex-col justify-center sm:space-x-1 font-semibold m-0">
-                    <span>🚀 PostHog's EU Cloud has arrived!</span>
-                    <Link to="/eu" className="text-red">
-                        Learn more
-                    </Link>
-                </p>
+        <SearchProvider>
+            <div className={className}>
+                <Banner />
+                <Header />
+                <main>{children}</main>
+                <Footer />
+                <CookieBanner />
             </div>
-            <Header />
-            <main>{children}</main>
-            <Footer />
-            <PosthogAnnouncement />
-            <CookieBanner />
-        </div>
+        </SearchProvider>
     )
 }
 

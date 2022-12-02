@@ -8,6 +8,10 @@ A reverse proxy allows you to send events to PostHog Cloud using your own domain
 This can have a number advantages, most notably being that events sent to your own domain won't be intercepted by tracker blockers.
 By sending events to your own domain, you'll be able to track more users and more events, without having to host PostHog yourself.
 
+> Note: PostHog Cloud EU requires that the proxy sets the `Host` header to `eu.posthog.com` for requests 
+> sent to https://eu.posthog.com. The instructions below do not account for this. PR's with the requested 
+> changes welcome 🙏
+
 ## Deploying a reverse proxy
 
 ### Using Caddy
@@ -41,6 +45,10 @@ import diagram from '../../images/docs/cloud/cloudfront-proxy/cache-policy.png'
 
 5. Choose the appropriate price class for your use
 6. Once the distribution is deployed set its URL as the api host in your JS snippet or SDK config
+
+### Setting up a CloudFront distribution
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/NvdidHJU-Hk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 You can find out about [CloudFront pricing on the AWS website](https://aws.amazon.com/cloudfront/pricing/)
 
