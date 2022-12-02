@@ -23,7 +23,7 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
         if (email) {
             const res = await fetch('https://squeak.cloud/api/roadmap/subscribe', {
                 method: 'POST',
-                body: JSON.stringify({ id: roadmapId }),
+                body: JSON.stringify({ id: roadmapId, organizationId: 'a898bcf2-c5b9-4039-82a0-a00220a8c626' }),
                 credentials: 'include',
                 headers: {
                     Accept: 'application/json',
@@ -49,7 +49,7 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
         if (email) {
             const res = await fetch('https://squeak.cloud/api/roadmap/unsubscribe', {
                 method: 'POST',
-                body: JSON.stringify({ id: roadmapId }),
+                body: JSON.stringify({ id: roadmapId, organizationId: 'a898bcf2-c5b9-4039-82a0-a00220a8c626' }),
                 credentials: 'include',
                 headers: {
                     Accept: 'application/json',
