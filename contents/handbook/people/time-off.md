@@ -15,7 +15,7 @@ We care about your results, not how long you work.
 
 You do not need to get approval for time off from your manager. Instead, we expect everyone to coordinate with their team to make sure that we're still able to move forwards in your absence. For example, having an entire Small Team off at the same time means we can't be responsive to community issues.  
 
-### How to book time off in PTO by Roots
+### How to book time off in PTO by Roots
 
 Before you start, make sure that:
 - You have authorized the PTO by Roots app in Slack to connect to your Google Calendar
