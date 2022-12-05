@@ -13,16 +13,17 @@ categories: ["Guides", "Comparisons"]
 
 Want to know how PostHog and Mixpanel are different? If you remember nothing else, remember these two points:
 
-1. Mixpanel is a product analytics tool. 
+1. Mixpanel is a product analytics tool. dfsededsvedsvds
+
 2. PostHog is an all-in-one platform that _includes_ product analytics **and** a whole bunch more.
 
 In this guide, we'll cover:
 
-- [Mixpanel and PostHog's core features](#core-features)
-- [Privacy and compliance on each platform](#privacy--compliance)
-- [How they track usage and library support](#tracking--sdks)
-- [Compare available integrations in multiple categories](#integrations)
-- [Answer freqeuntly asked questions about PostHog and Mixpanel](#frequently-asked-questions)
+- Mixpanel and PostHog's [core features](#core-features)
+- [Privacy and compliance] on each platform(#privacy--compliance)
+- How they track usage and [library support](#tracking--sdks)
+- [Compare available integrations](#integrations) in multiple categories
+- [Answer frequently asked questions](#frequently-asked-questions) about PostHog and Mixpanel
 
 ## How is PostHog different to Mixpanel?
 
@@ -141,13 +142,13 @@ PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our 
             <td><strong>NPS & surveys</strong></td>
 			  <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-orange text-lg">⚠</span></td>
-            <td>Create and report on user surveys, gather feedback</td>
+            <td>Create, report on surveys, gather feedback</td>
         </tr>
         <tr>
             <td><strong>Open source</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Build your own apps, contribute your own code</td>
+            <td>Build your own apps; contribute code</td>
         </tr>
     </tbody>
 </table>
@@ -155,7 +156,7 @@ PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our 
 
 - **Experiments:** Mixpanel offers an experiments feature in its Enterprise plan, but it's limited to running simple A/B tests. Users on Mixpanel's Growth plan can integrate with third-party testing tools like AB Tasty or Convert and analyze results in Mixpanel. PostHog's experimentation suite supports A/B and multivariate tests using our integrated feature flagging.
 
-- **Feature flagging:** Mixpanel doesn't have any built-in feature flag functionality, but there are official integrations for Flagsmith, GrowthBook, and others.
+- **Feature flagging:** Mixpanel doesn't have any built-in feature flag functionality, but there are official integrations for Flagsmith, GrowthBook, and others. See: [What are the benefits of an all-in-one platform?](anchor-link-here)
 
 - **Correlation analysis:** When viewing a funnel in PostHog, [correlation analysis](/product/correlation-analysis) automatically suggests events and properties that correlate to success or failure – e.g. "people who converted were 10x more likely to versus people who dropped off". We use transparent, testable statistical models – no phony "AI" here. 
 
@@ -208,12 +209,11 @@ PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our 
 </table>
 </div>
 
-- **Self-hosting:** While we recommend most customers use PostHog Cloud, PostHog can be self-hosted on your own infrastructure so you keep control of all your data. This is useful for businesses that handle highly sensitive information, such as defense or health data, but it is more expensive than using PostHog Cloud.
+- **Self-hosting:** While we recommend most customers use PostHog Cloud, PostHog can be self-hosted on your own infrastructure so you keep control of all your data. This is useful for businesses that handle highly sensitive information, such as defense or health data, but it is more expensive than using PostHog Cloud. See: [Who should self-host PostHog?](#who-should-selfhost-posthog)
 
-- **HIPAA compliance:** Both Mixpanel and PostHog will sign a Business Associate Agreement if you require HIPAA compliance, [subject to conditions](anchor-link-here). Self-hosting PostHog is also a popular option for companies handling personal health information. See: [Who should self-host PostHog?](achor-link-here).
+- **HIPAA compliance:** Both Mixpanel and PostHog will sign a Business Associate Agreement if you require HIPAA compliance, [subject to conditions](anchor-link-here). Self-hosting PostHog is also a popular option for companies handling personal health information.
 
-- **Cookie-less tracking:** If you'd rather not serve annoying cookie banners to your users, PostHog can be configured to store data in memory so it doesn't persist beyond a single session. See: [How to use PostHog without cookie banners](/tutorials/cookieless-tracking).
-
+- **Cookie-less tracking:** If you'd rather not serve annoying cookie banners to your users, PostHog can be configured to store data in memory so it doesn't persist beyond a single session. See: [How to use PostHog without cookie banners](/tutorials/cookieless-tracking). Note: some types of user analysis aren't possible with this method.
 
 ## Tracking & SDKs
 
@@ -344,7 +344,6 @@ To quote Tony Stark: “An intelligence agency which fears intelligence is, hist
 - **Mobile app session recordings:** We don't currently support session recording in mobile apps, but it's currently under consideration as a project for our session recording team. See our [public roadmap](/roadmap) for more info.
 
 - **Unity:** We don't have a Unity SDK yet but, just like Unity, we're open-source, so anyone can create one. See our [contribution guidelines](/docs/contribute) for more info.
-
 
 ### Server libraries
 
@@ -797,13 +796,13 @@ Both platforms support a wide-range of of sales and marketing tools to support a
         </tr>
         <tr>
             <td><strong>n8n</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Open source workflow automation</td>
         </tr>
         <tr>
             <td><strong>Twilio</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Automate SMS alerts on events</td>
         </tr>
