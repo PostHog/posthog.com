@@ -7,7 +7,6 @@ import { docs } from '../sidebars/sidebars.json'
 import { graphql } from 'gatsby'
 import ProductIcons from 'components/ProductIcons'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import SearchBox from 'components/SearchBox'
 import { Close } from 'components/Icons/Icons'
 import { CallToAction } from 'components/CallToAction'
 import Modal from 'components/Modal'
@@ -276,10 +275,6 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
                             help tracking events or deploying a self-host version of PostHog,{' '}
                             <a href="/docs">visit the docs</a>.
                         </p>
-
-                        <div className="my-4">
-                            <SearchBox placeholder="Search..." />
-                        </div>
 
                         <p className="text-sm text-black/75 dark:text-white">
                             Don't see the answer you're looking for? <a href="/questions">Ask a question</a>

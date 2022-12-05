@@ -1,5 +1,5 @@
 ---
-date: 2022-11-30
+date: 2022-12-01
 title: "What is a product engineer (and why they matter)"
 rootPage: /blog
 sidebar: Blog

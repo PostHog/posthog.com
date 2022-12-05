@@ -108,12 +108,12 @@ import { ProductSectionHeader } from './components/ProductSectionHeader'
 import { Quote2 } from './components/Quote2'
 import { Roadmap } from './components/Roadmap'
 import { RocketHorizontalRule } from './components/RocketHorizontalRule'
-import { SearchBox } from './components/SearchBox'
 import { SectionLinks } from './components/SectionLinks'
 import { DesignedForYourStackBlock } from './components/Sections/DesignedForYourStackBlock'
 import { FeaturedSectionTextLeft } from './components/Sections/FeaturedSectionTextLeft'
 import { FeaturedSectionTextRight } from './components/Sections/FeaturedSectionTextRight'
 import { FeaturedSectionTripleImage } from './components/Sections/FeaturedSectionTripleImage'
+import { SiteSearchCallout } from './components/SiteSearchCallout'
 import { SliderNav } from './components/SliderNav'
 import { Spacer } from './components/Spacer'
 import { Spinner } from './components/Spinner'
@@ -242,12 +242,12 @@ export const shortcodes = {
     Quote2,
     Roadmap,
     RocketHorizontalRule,
-    SearchBox,
     SectionLinks,
     DesignedForYourStackBlock,
     FeaturedSectionTextLeft,
     FeaturedSectionTextRight,
     FeaturedSectionTripleImage,
+    SiteSearchCallout,
     SliderNav,
     Spacer,
     Spinner,

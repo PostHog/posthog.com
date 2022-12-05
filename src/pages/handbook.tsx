@@ -5,7 +5,6 @@ import { StaticImage } from 'gatsby-plugin-image'
 import Link from 'components/Link'
 import PostLayout from 'components/PostLayout'
 import { handbook } from '../sidebars/sidebars.json'
-import SearchBox from 'components/SearchBox'
 
 const otherLinks = [
     {
@@ -79,7 +78,6 @@ export const Handbook: React.FC = () => {
                                     This explains how we operate as a company.
                                 </h5>
 
-                                <SearchBox filter="handbook" placeholder="Search handbook..." />
                                 <p className="text-gray mt-4">
                                     First time here? Read the{' '}
                                     <Link to="/handbook/getting-started/start-here">getting started</Link> guide.

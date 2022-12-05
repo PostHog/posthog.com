@@ -1,15 +1,28 @@
-const { replacePath } = require('./utils')
-const { createFilePath, createRemoteFileNode } = require(`gatsby-source-filesystem`)
-const fetch = require('node-fetch')
-const uniqBy = require('lodash.uniqby')
+import { replacePath } from './utils'
+import { createFilePath, createRemoteFileNode } from 'gatsby-source-filesystem'
+import fetch from 'node-fetch'
+import GitUrlParse from 'git-url-parse'
+import slugify from 'slugify'
+import { JSDOM } from 'jsdom'
+import { GatsbyNode } from 'gatsby'
+import { PAGEVIEW_CACHE_KEY } from './onPreBootstrap'
+
 require('dotenv').config({
     path: `.env.${process.env.NODE_ENV}`,
 })
-const GitUrlParse = require('git-url-parse')
-const slugify = require('slugify')
-const { JSDOM } = require('jsdom')
 
-module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, cache, createNodeId }) => {
+// const popularity = {}
+
+// exports.onPreBuild = async () => {}
+
+export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
+    node,
+    getNode,
+    actions,
+    store,
+    cache,
+    createNodeId,
+}) => {
     const { createNodeField, createNode } = actions
 
     if (node.internal.type === `MarkdownRemark` || node.internal.type === 'Mdx') {
@@ -22,6 +35,24 @@ module.exports = exports.onCreateNode = async ({ node, getNode, actions, store, 
             name: `slug`,
             value: replacePath(slug),
         })
+
+        if (slug) {
+            const pageViews = await cache.get(PAGEVIEW_CACHE_KEY)
+
+            if (pageViews && slug.slice(0, -1) in pageViews) {
+                createNodeField({
+                    node,
+                    name: `pageViews`,
+                    value: pageViews[slug.slice(0, -1)],
+                })
+            } else {
+                createNodeField({
+                    node,
+                    name: `pageViews`,
+                    value: 0,
+                })
+            }
+        }
 
         if (/^\/docs\/apps/.test(slug) && node?.frontmatter?.github && process.env.GITHUB_API_KEY) {
             const { name, owner } = GitUrlParse(node.frontmatter.github)
