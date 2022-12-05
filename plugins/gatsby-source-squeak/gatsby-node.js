@@ -5,14 +5,17 @@ const slugify = require('slugify')
 exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, cache, store }, pluginOptions) => {
     const { apiHost, organizationId } = pluginOptions
     const { createNode, createParentChildLink } = actions
+
     const getQuestions = async () => {
         const response = await fetch(`${apiHost}/api/questions`, {
             method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
             body: JSON.stringify({
                 organizationId,
-                slug: null,
-                published: true,
                 perPage: 1000,
+                published: true,
             }),
         })
 
@@ -24,9 +27,10 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, cache
 
         return questions
     }
+
     const createReplies = (node, replies) => {
         for (const reply of replies) {
-            const { body, profile: user, id, created_at } = reply
+            const { body, profile: user, id, subject, created_at } = reply
             const replyId = createNodeId(`reply-${id}`)
             const replyNode = {
                 id: replyId,
@@ -40,18 +44,27 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, cache
                 },
                 name: user?.first_name || 'Anonymous',
                 imageURL: user?.avatar,
+                subject,
                 created_at: new Date(created_at),
             }
             createNode(replyNode)
             createParentChildLink({ parent: node, child: replyNode })
         }
     }
+
     const questions = await getQuestions()
-    questions.forEach(({ question: { slug, id, replies } }) => {
+
+    questions.forEach(({ question: { slug, id, subject, replies, published, resolved, profile_id, permalink } }) => {
         const question = {
             slug,
             replies,
+            published,
+            resolved,
+            subject,
+            permalink: permalink,
+            profileId: profile_id,
         }
+
         const node = {
             id: createNodeId(`question-${id}`),
             parent: null,
@@ -66,9 +79,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, cache
         replies && createReplies(node, replies)
     })
 
-    const topics = await fetch(`https://squeak.cloud/api/topics?organizationId=${organizationId}`).then((res) =>
-        res.json()
-    )
+    const topics = await fetch(`${apiHost}/api/topics?organizationId=${organizationId}`).then((res) => res.json())
 
     topics.forEach((topic) => {
         const { label, id } = topic
@@ -87,8 +98,8 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, cache
         createNode(node)
     })
 
-    const topicGroups = await fetch(`https://squeak.cloud/api/topic-groups?organizationId=${organizationId}`).then(
-        (res) => res.json()
+    const topicGroups = await fetch(`${apiHost}/api/topic-groups?organizationId=${organizationId}`).then((res) =>
+        res.json()
     )
 
     topicGroups.forEach((topicGroup) => {
@@ -110,15 +121,14 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, cache
         createNode(node)
     })
 
-    const roadmap = await fetch(`https://squeak.cloud/api/roadmap?organizationId=${organizationId}`).then((res) =>
-        res.json()
-    )
+    const roadmap = await fetch(`${apiHost}/api/roadmap?organizationId=${organizationId}`).then((res) => res.json())
 
     for (const roadmapItem of roadmap) {
-        const { title, github_urls, image } = roadmapItem
+        const { title, github_urls, image, id } = roadmapItem
 
         const node = {
             ...roadmapItem,
+            roadmapId: id,
             id: createNodeId(`squeak-roadmap-${title}`),
             parent: null,
             children: [],
@@ -195,4 +205,58 @@ exports.onCreateNode = async ({ node, actions, store, cache, createNodeId }) => 
             node.avatar___NODE = imageNode && imageNode.id
         }
     }
+}
+
+exports.createSchemaCustomization = async ({ actions }) => {
+    const { createTypes } = actions
+
+    createTypes(`
+        type Question implements Node {
+            subject: String
+            slug: [String]
+            imageURL: String
+            replies: [Reply]
+            avatar: File @link(from: "avatar___NODE")
+        }
+
+        type Reply implements Node {
+            avatar: File @link(from: "avatar___NODE")
+            fullName: String
+            subject: String
+        }
+
+        type SqueakTeam {
+            name: String,
+        }
+
+        type SqueakGitHubReactions {
+          hooray: Int,
+          heart: Int,
+          eyes: Int,
+          _1: Int,
+          plus1: Int,
+          minus1: Int
+        }
+
+        type SqueakGitHubPage {
+            title: String,
+            html_url: String,
+            number: Int,
+            closed_at: Date,
+            reactions: SqueakGitHubReactions,
+        }
+
+        type SqueakRoadmap implements Node {
+          title: String,
+          category: String
+          beta_available: Boolean,
+          complete: Boolean,
+          description: String,
+          team: SqueakTeam,
+          otherLinks: [String],
+          githubPages: [SqueakGitHubPage],
+          milestone: Boolean,
+          thumbnail: File @link(from: "thumbnail___NODE")
+        }
+    `)
 }

@@ -15,7 +15,7 @@ We care about your results, not how long you work.
 
 You do not need to get approval for time off from your manager. Instead, we expect everyone to coordinate with their team to make sure that we're still able to move forwards in your absence. For example, having an entire Small Team off at the same time means we can't be responsive to community issues.  
 
-### How to book time off in PTO by Roots
+### How to book time off in PTO by Roots
 
 Before you start, make sure that:
 - You have authorized the PTO by Roots app in Slack to connect to your Google Calendar
@@ -24,7 +24,7 @@ Before you start, make sure that:
 If you don't do this, your holiday won't show up in the team time off calendar. 
 
 To book a day off:
-- Book it on the PTO by Roots app in Slack. It will be automatically approved and added to the team time off calendar. There are various types of time off you can select. 
+- Book it on the PTO by Roots app in Slack. There are various types of time off you can select. It will be automatically approved and added to the team time off calendar (with the exception of longer term leave.) It will also be added to your manager's personal calendar. 
 - Block out your own personal GCal to show that you are out. This is because PTO by Roots _only_ books in an all day event in your calendar to show that you are out. If you don't do this, automated meetings such as interviews or demos might still get booked into your cal.  
 - Set an out of office message on your email and have it point to someone else on the team, or hey@posthog.com. PTO by Roots will automatically set your Slack status to out of office and will autorespond to Slack messages. 
 

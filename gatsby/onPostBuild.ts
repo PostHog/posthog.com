@@ -1,16 +1,17 @@
-const chromium = require('chrome-aws-lambda')
-const path = require('path')
-const fs = require('fs')
-const blogTemplate = require('../src/templates/OG/blog.js')
-const docsHandbookTemplate = require('../src/templates/OG/docs-handbook.js')
-const customerTemplate = require('../src/templates/OG/customer.js')
-const careersTemplate = require('../src/templates/OG/careers.js')
-const tutorialTemplate = require('../src/templates/OG/tutorial.js')
-const jobTemplate = require('../src/templates/OG/job.js')
-const { flattenMenu } = require('./utils')
-const fetch = require('node-fetch')
+import chromium from 'chrome-aws-lambda'
+import path from 'path'
+import fs from 'fs'
+import blogTemplate from '../src/templates/OG/blog.js'
+import docsHandbookTemplate from '../src/templates/OG/docs-handbook.js'
+import customerTemplate from '../src/templates/OG/customer.js'
+import careersTemplate from '../src/templates/OG/careers.js'
+import tutorialTemplate from '../src/templates/OG/tutorial.js'
+import jobTemplate from '../src/templates/OG/job.js'
+import { flattenMenu } from './utils'
+import fetch from 'node-fetch'
+import { GatsbyNode } from 'gatsby'
 
-module.exports = exports.onPostBuild = async ({ graphql }) => {
+export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
     const { data } = await graphql(`
         query {
             blog: allMdx(

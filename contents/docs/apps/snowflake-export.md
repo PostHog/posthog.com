@@ -112,7 +112,7 @@ Currently, we support both Amazon S3 and Google Cloud Storage for staging files.
 
 1. Create a new GCS bucket.
 2. Follow [this Snowflake guide on GCS](https://docs.snowflake.com/en/user-guide/data-load-gcs-config.html) to create a storage integration and generate a user for Snowflake to use when accessing your bucket. Make sure not to skip over any part of the guide!
-3. Download the service account credentials JSON file, we'll upload this into PostHog during the configuration step.
+3. There should now be a service account created by Snowflake in Google Cloud. Download the JSON file with credentials for that account by referring to [this Google Cloud guide](https://developers.google.com/workspace/guides/create-credentials#create_credentials_for_a_service_account). We'll upload this file into PostHog in the app configuration step.
 
 Make sure the user available to the plugin has permissions on the storage integration you just created. You can do this like so:
 
@@ -175,7 +175,7 @@ The name of the GCS bucket to use for exporting data. This should be without the
 The name of the integration within Snowflake you created in [this step](#connect-google-cloud-storage-to-snowflake)
 
 **`GCS credentials file`**<br />
-A JSON file with your credentials for accessing GCS. Instructions on how to get this file can be found in [this Google Cloud tutorial](https://cloud.google.com/bigquery/docs/reference/libraries#setting_up_authentication)
+A JSON file with your credentials for accessing GCS. Instructions on how to get this file can be found in [this Google Cloud tutorial](https://developers.google.com/workspace/guides/create-credentials#create_credentials_for_a_service_account)
 
 #### Your export is now set up!
 

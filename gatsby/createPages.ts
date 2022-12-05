@@ -1,10 +1,10 @@
-const { replacePath, flattenMenu } = require('./utils')
-const path = require('path')
-const slugify = require('slugify')
-const Slugger = require('github-slugger')
-const { default: fetch } = require('node-fetch')
+import { replacePath, flattenMenu } from './utils'
+import { GatsbyNode } from 'gatsby'
+import path from 'path'
+import slugify from 'slugify'
+import fetch from 'node-fetch'
 
-module.exports = exports.createPages = async ({ actions: { createPage }, graphql }) => {
+export const createPages: GatsbyNode['createPages'] = async ({ actions: { createPage }, graphql }) => {
     const BlogPostTemplate = path.resolve(`src/templates/BlogPost.js`)
     const PlainTemplate = path.resolve(`src/templates/Plain.js`)
     const BlogCategoryTemplate = path.resolve(`src/templates/BlogCategory.js`)
@@ -310,12 +310,11 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
     }
 
     function formatToc(headings) {
-        const slugger = new Slugger()
         return headings.map((heading) => {
             return {
                 ...heading,
                 depth: heading.depth - 2,
-                url: slugger.slug(heading.value),
+                url: slugify(heading.value),
             }
         })
     }
@@ -416,7 +415,7 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
             context: {
                 id: node.id,
                 tableOfContents,
-                categories: postCategories.map((category) => ({ name: category, url: categories[category].url })),
+                categories: postCategories.map((category) => ({ name: category, url: categories[category]?.url })),
                 slug,
             },
         })

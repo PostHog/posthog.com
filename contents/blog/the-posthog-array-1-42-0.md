@@ -44,13 +44,13 @@ Are you frustrated when you breakdown trends and funnels by URLs and see four di
 
 Now, whenever we're dealing with breakdowns by "Current URL" or "Pathname", we normalise URLs to count the same, so you'll see there's only one place like `/home`. 
 
-### New: Share recordings easily, and precisely
+### New: Share recordings easily
 
 ![share recordings in posthog](../images/blog/array/1-42-0-share-recordings.gif)
 
 When you find an interesting session recording, you probably want to share it with your team. So, we've improved sharing options to make it easier. You can now share specific recordings easily, and even send teammates to an exact time in any recording!
 
-### New: Vote on our roadmap
+### New: Get beta features via our roadmap
 
 ![posthog roadmap](../images/blog/array/1-42-0-roadmap.gif)
 
