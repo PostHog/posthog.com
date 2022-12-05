@@ -541,7 +541,7 @@ Mixpanel and PostHog support a wide-range of export destinations.
             <td><strong>RudderStack</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Send event </td>
+            <td>Sync event and person data</td>
         </tr>
         <tr>
             <td><strong>Airbyte</strong></td>
