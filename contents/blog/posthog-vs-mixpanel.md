@@ -13,14 +13,14 @@ categories: ["Guides", "Comparisons"]
 
 Want to know how PostHog and Mixpanel are different? If you remember nothing else, remember these two points:
 
-1. Mixpanel is a product analytics tool. dfsededsvedsvds
+1. Mixpanel is a product analytics tool.
 
 2. PostHog is an all-in-one platform that _includes_ product analytics **and** a whole bunch more.
 
 In this guide, we'll cover:
 
 - Mixpanel and PostHog's [core features](#core-features)
-- [Privacy and compliance] on each platform(#privacy--compliance)
+- [Privacy and compliance](#privacy--compliance) on each platform
 - How they track usage and [library support](#tracking--sdks)
 - [Compare available integrations](#integrations) in multiple categories
 - [Answer frequently asked questions](#frequently-asked-questions) about PostHog and Mixpanel
@@ -412,15 +412,74 @@ Some PostHog features, such as session recording and autocapture, are only avail
 </table>
 </div>
 
+## Admin & Security
+
+<div className="overflow-x-auto -mx-5 px-5">
+<table className="w-full mt-4" style="min-width: 600px;">
+    <thead>
+        <tr>
+			<td className="w-3/12"></td>
+            <td><strong>Mixpanel</strong></td>
+            <td><strong>PostHog</strong></td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>SOC 2 certification</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center">Coming Q4</td>
+            <td>Externally audited security</td>
+        </tr>
+        <tr>
+            <td><strong>SAML/SSO</strong></td>
+            <td className="text-center">Enterprise</td>
+            <td className="text-center">Enterprise</td>
+            <td>Organization single sign-on</td>
+        </tr>
+        <tr>
+            <td><strong>Access levels</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Assign access levels to team members</td>
+        </tr>
+        <tr>
+            <td><strong>Multiple organizations</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Create orgs for all your internal teams</td>
+        </tr>
+        <tr>
+            <td><strong>Multiple projects</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Track multiple products and domains</td>
+        </tr>
+        <tr>
+            <td><strong>Private projects</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center">Enterprise</td>
+            <td>Create hidden projects with user permissions</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+- **PostHog Enterprise:** Our [Enterprise tier](/enterprise) includes single sign-on, private projects, and a dedicated Slack support channel.
+
 ## Integrations
+
+Mixpanel claims over 50 official integrations covering a wide-range of use cases. Given its focus on product analytics alone, many of these integrations connect to third-party tools for A/B testing, feature flag, and marketing.
+
+The [PostHog app store](/apps) has over 50 apps as well, though not all of these are integrations with external tools. PostHog doesn't natively connect with A/B testing or feature flag tools as these features are built into PostHog itself.
 
 **Categories:**
 
-- Data Export 
-- Data Import
-- Dev Tools & Support 
-- Marketing & Sales
-- Alerts & Automation
+- [Data Export](#data-export) 
+- [Data Import](#data-import)
+- [Dev Tools & Support](#dev-tools--support) 
+- [Marketing & Sales](#marketing--sales)
+- [Alerts & Automation](#alerts--automation)
 
 ### Data Export
 
@@ -601,7 +660,7 @@ Please get in touch if you require a specific import source we don't currently s
 
 ### Dev Tools & Support
 
-As an open source platform designed for technical teams, PostHog integrates with numerous developer tools and platforms.
+As an open source platform designed for technical teams, PostHog integrates with numerous developer tools and platforms. This isn't an area of strong support for Mixpanel due to its focus on product managers and marketing teams.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -668,7 +727,11 @@ As an open source platform designed for technical teams, PostHog integrates with
 
 ### Marketing & Sales
 
-Both platforms support a wide-range of of sales and marketing tools to support automation flows and syncing of user data.
+Both platforms support a wide-range of sales and marketing tools to support automation flows and syncing of user data.
+
+Mixpanel has a specific advantage in connecting to Google and Facebook's advertising platforms directly, enabling in-product tracking of campaign ROI. 
+
+It's easy to track marketing conversions in PostHog, but you can't currently connect that directly to campaign spending data.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -765,6 +828,8 @@ Both platforms support a wide-range of of sales and marketing tools to support a
 
 ### Alerts & Automation
 
+Mixpanel and PostHog both support popular messaging apps and automation platforms, though PostHog also support Discord and the open-source Zapier alternative, n8n.
+
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
     <thead>
@@ -815,61 +880,6 @@ Both platforms support a wide-range of of sales and marketing tools to support a
     </tbody>
 </table>
 </div>
-
-## Admin & Security
-
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-			<td className="w-3/12"></td>
-            <td><strong>Mixpanel</strong></td>
-            <td><strong>PostHog</strong></td>
-            <td></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>SOC 2 certification</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center">Coming Q4</td>
-            <td>Externally audited security</td>
-        </tr>
-        <tr>
-            <td><strong>SAML/SSO</strong></td>
-            <td className="text-center">Enterprise</td>
-            <td className="text-center">Enterprise</td>
-            <td>Organization single sign-on</td>
-        </tr>
-        <tr>
-            <td><strong>Access levels</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Assign access levels to team members</td>
-        </tr>
-        <tr>
-            <td><strong>Multiple organizations</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Create orgs for all your internal teams</td>
-        </tr>
-        <tr>
-            <td><strong>Multiple projects</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Track multiple products and domains</td>
-        </tr>
-        <tr>
-            <td><strong>Private projects</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center">Enterprise</td>
-            <td>Create hidden projects with user permissions</td>
-        </tr>
-    </tbody>
-</table>
-</div>
-
-- **PostHog Enterprise:** Our [Enterprise tier](/enterprise) includes single sign-on, private projects, and a dedicated Slack support channel.
 
 ## Frequently asked questions
 
