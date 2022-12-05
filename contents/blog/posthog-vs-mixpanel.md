@@ -115,7 +115,7 @@ PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our 
         </tr>
         <tr>
             <td><strong>Experiments</strong></td>
-            <td className="text-center">Enterprise-only</td>
+            <td className="text-center">Enterprise</td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Test changes in production before rolling them out</td>
         </tr>
@@ -382,13 +382,13 @@ Some PostHog features, such as session recording and autocapture, are only avail
         <tr>
             <td><strong>Rust</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Alpha</td>
+            <td className="text-center">Alpha</td>
             <td>PostHog: Under development, not recommended for production</td>
         </tr>
         <tr>
             <td><strong>Java</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Beta</td>
+            <td className="text-center">Beta</td>
             <td>PostHog: Support events and user ID</td>
         </tr>
         <tr>
@@ -838,8 +838,8 @@ Both platforms support a wide-range of of sales and marketing tools to support a
         </tr>
         <tr>
             <td><strong>SAML/SSO</strong></td>
-            <td className="text-center">Enterprise only</td>
-            <td className="text-center">Enterprise only</td>
+            <td className="text-center">Enterprise</td>
+            <td className="text-center">Enterprise</td>
             <td>Organization single sign-on</td>
         </tr>
         <tr>
@@ -863,7 +863,7 @@ Both platforms support a wide-range of of sales and marketing tools to support a
         <tr>
             <td><strong>Private projects</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Enterprise only</td>
+            <td className="text-center">Enterprise</td>
             <td>Create hidden projects with user permissions</td>
         </tr>
     </tbody>
