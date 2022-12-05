@@ -168,7 +168,7 @@ PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our 
 <table className="w-full mt-4" style="min-width: 600px;">
     <thead>
         <tr>
-			<td className="w-3/12"></td>
+            <td className="w-3/12"></td>
             <td><strong>Mixpanel</strong></td>
             <td><strong>PostHog</strong></td>
             <td></td>
@@ -221,14 +221,14 @@ PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our 
 <table className="w-full mt-4" style="min-width: 600px;">
     <thead>
         <tr>
-			<td className="w-3/12"></td>
+            <td className="w-3/12"></td>
             <td><strong>Mixpanel</strong></td>
             <td><strong>PostHog</strong></td>
             <td></td>
         </tr>
     </thead>
     <tbody>
-        <tr>
+            <tr>
             <td><strong>Event tracking</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
@@ -286,7 +286,7 @@ To quote Tony Stark: “An intelligence agency which fears intelligence is, hist
 <table className="w-full mt-4" style="min-width: 600px;">
     <thead>
         <tr>
-			<td className="w-3/12"></td>
+            <td className="w-3/12"></td>
             <td><strong>Mixpanel</strong></td>
             <td><strong>PostHog</strong></td>
             <td></td>
@@ -353,7 +353,7 @@ Some PostHog features, such as session recording and autocapture, are only avail
 <table className="w-full mt-4" style="min-width: 600px;">
     <thead>
         <tr>
-			<td className="w-3/12"></td>
+            <td className="w-3/12"></td>
             <td><strong>Mixpanel</strong></td>
             <td><strong>PostHog</strong></td>
             <td></td>
@@ -418,7 +418,7 @@ Some PostHog features, such as session recording and autocapture, are only avail
 <table className="w-full mt-4" style="min-width: 600px;">
     <thead>
         <tr>
-			<td className="w-3/12"></td>
+            <td className="w-3/12"></td>
             <td><strong>Mixpanel</strong></td>
             <td><strong>PostHog</strong></td>
             <td></td>
@@ -489,7 +489,7 @@ Mixpanel and PostHog support a wide-range of export destinations.
 <table className="w-full mt-4" style="min-width: 600px;">
     <thead>
         <tr>
-			<td className="w-3/12"></td>
+            <td className="w-3/12"></td>
             <td><strong>Mixpanel</strong></td>
             <td><strong>PostHog</strong></td>
             <td></td>
@@ -572,7 +572,7 @@ Please get in touch if you require a specific import source we don't currently s
 			<td className="w-3/12"></td>
             <td><strong>Mixpanel</strong></td>
             <td><strong>PostHog</strong></td>
-			 <td></td>
+			<td></td>
         </tr>
     </thead>
     <tbody>
@@ -737,7 +737,7 @@ It's easy to track marketing conversions in PostHog, but you can't currently con
 <table className="w-full mt-4" style="min-width: 600px;">
     <thead>
         <tr>
-			<td className="w-3/12"></td>
+            <td className="w-3/12"></td>
             <td><strong>Mixpanel</strong></td>
             <td><strong>PostHog</strong></td>
             <td></td>
@@ -834,7 +834,7 @@ Mixpanel and PostHog both support popular messaging apps and automation platform
 <table className="w-full mt-4" style="min-width: 600px;">
     <thead>
         <tr>
-			<td className="w-3/12"></td>
+            <td className="w-3/12"></td>
             <td><strong>Mixpanel</strong></td>
             <td><strong>PostHog</strong></td>
             <td></td>
