@@ -20,6 +20,7 @@ export const SignupCTA = ({
     event?: any
 }): JSX.Element => {
     const { posthog } = useValues(posthogAnalyticsLogic)
+
     return (
         <CallToAction
             type={type}
