@@ -1,16 +1,12 @@
 ---
-title: How to set up cross domain tracking in PostHog
+title: How to track performance marketing in PostHog
 sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-12-02
 featuredImage: ../images/tutorials/banners/performance-marketing.png
 topics: ['funnels', 'insights']
----
-
-
-
-# How to track performance marketing in PostHog
+--- 
 
 Performance marketing is paying for ads, attention, and clicks to your site where you try to convert them into users and customers. It is paying for users to see your site. Companies use channels like Google, Facebook, other social media, ad networks, and sponsorships to do this. 
 
