@@ -1,5 +1,5 @@
 ---
-date: 2022-12-02
+date: 2022-12-05
 title: Raising money is less stressful than bootstrapping
 rootPage: /blog
 sidebar: Blog
