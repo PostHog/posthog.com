@@ -72,6 +72,18 @@ The issue might be with cert-manager custom resource definitions already existin
 
 Try running helm upgrade without `--atomic` to fix this issue.
 
+### Namespace deletion stuck at `terminating`
+
+While deleting the namespace, if your Helm release uses `clickhouse.enabled: true` you might end up in the operation being indefinitely stuck.
+
+This is a [documented behavior](https://github.com/Altinity/clickhouse-operator/issues/1043) of the `clickhouse-operator` finalizer.
+
+Workaround:
+
+* patch CHI removing the finalizer: `kubectl patch chi posthog -n posthog -p '{"metadata":{"finalizers":null}}' --type=merge`
+
+* delete CHI: `kubectl delete chi posthog -n posthog`
+
 ## FAQ
 
 ### How can I increase storage size?
