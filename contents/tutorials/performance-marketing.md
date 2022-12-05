@@ -18,13 +18,13 @@ Performance marketing campaigns have many different goals such as traffic, lead 
 
 The first step in performance marketing is ensuring proper tracking. To do this, you must add Urchin Tracking Modules (UTM) to your links in each channel. These are pieces of information in your URL with details about where the user came from. They look like `https://posthog.com/tutorials?utm_source=google`.
 
-PostHog automatically captures UTMs our JavaScript library (and snippet). The ones we support are `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`, `gclid`, `fbclid`, and `msclkid`. Pageview events have these added as a property, and users have them added as an initial user property.
+PostHog automatically captures UTMs our JavaScript library (and snippet). The ones we support are `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`, `gclid`, `fbclid`, and `msclkid`. Pageview events have these added as a property, and users have them added as an person property (both most recent and initial).
 
 Any UTM that isn’t one of these is not automatically tracked and you’ll have to capture it yourself. You can do this by checking the URL from the UTM then:
 
 - capturing a specific event for that UTM
 - capturing a pageview with the UTM as a property
-- setting an initial UTM user property (once)
+- setting an initial UTM person property (once)
 
 Many channels for performance marketing allow you to customize your UTMs, and we recommend doing that to get the best data possible.
 
@@ -56,7 +56,9 @@ Every company has a goal for its performance marketing. For some, it is activati
 
 Tracking signups is relatively similar to tracking traffic, we just replace the pageview event with our signup action. 
 
-To filter, you can again use a UTM attribute. You included it as a property in your signup event, you can use the event property as a filter. If not, you can use a UTM value (or initial UTM value) in user properties. This option is used more because PostHog automatically adds this value to users.
+To filter, you can again use a UTM attribute. You included it as a property in your signup event, you can use the event property as a filter. If not, you can use a UTM value (or initial UTM value) in person properties. This option is used more because PostHog automatically adds this value to persons.
+
+> A person has both initial UTM properties and most recent ones. The initial property is the first UTM value set for a person. The most recent property is the last UTM value set for a person. Events only have a single UTM property for the most recent value. 
 
 In this example, we’ve chosen the unique number of users who completed the “user signed up” event, then filtered the group of users for those with the initial UTM source being set. 
 
