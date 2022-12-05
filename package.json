@@ -26,6 +26,7 @@
     },
     "dependencies": {
         "@ant-design/icons": "^4.1.0",
+        "@docsearch/react": "^3.3.0",
         "@fontsource/source-code-pro": "^4.5.4",
         "@headlessui/react": "^1.6.6",
         "@headlessui/tailwindcss": "^0.1.1",
