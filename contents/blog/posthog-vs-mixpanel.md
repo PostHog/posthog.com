@@ -461,7 +461,6 @@ Mixpanel and PostHog support a wide-range of export destinations.
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td>Export data to Microsoft Azure</td>
         </tr>
-        </tr>
         <tr>
             <td><strong>Google Cloud Storage</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
