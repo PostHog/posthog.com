@@ -21,7 +21,7 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
     const resources: ColMenuItems[] = [
         {
             title: 'Product roadmap',
-            description: 'See what we\'re building, and help us decide what to build next.',
+            description: "See what we're building, and help us decide what to build next.",
             url: '/roadmap',
         },
         {

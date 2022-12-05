@@ -3,7 +3,6 @@
         { "source": "/plugins/:path*", "destination": "/apps/:path*" },
         { "source": "/integrations/:path*", "destination": "/apps/:path*" },
         { "source": "/docs/user-guides/:path*", "destination": "/manual/:path*" },
-        { "source": "/careers/:path*", "destination": "/careers", "statusCode": 200 },
         { "source": "/docs/integrations/android-integration", "destination": "/docs/libraries/android" },
         { "source": "/docs/integrations/community", "destination": "/docs/libraries/community" },
         { "source": "/docs/integrations/docusaurus-integration", "destination": "/docs/libraries/docusaurus" },
@@ -619,7 +618,12 @@
         }
     ],
     "rewrites": [
+        {
+            "source": "/community/profiles/(.*)",
+            "destination": "/community/profiles"
+        },
         { "source": "/next-steps/(.*)", "destination": "/next-steps" },
-        { "source": "/question/(.*)", "destination": "/question" }
+        { "source": "/question/(.*)", "destination": "/question" },
+        { "source": "/careers/(.*)", "destination": "/careers" }
     ]
 }

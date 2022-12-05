@@ -111,7 +111,7 @@ export const ProductAnalytics = () => {
                         <hr className="w-[20px] h-[3px] rounded-full" />
                         <div className="text-primary/80 inline-block leading-tight text-[12px]">
                             Compare to <Link to="/blog/posthog-vs-amplitude">Amplitude</Link>,{' '}
-                            <Link to="/blog/why-i-ditched-google-analytics-for-posthog">Mixpanel</Link>,{' '}
+                            <Link to="/blog/why-i-ditched-google-analytics-for-posthog">Google Analytics</Link>,{' '}
                             <Link to="/blog/posthog-vs-matomo">Matomo</Link>
                         </div>
                     </div>

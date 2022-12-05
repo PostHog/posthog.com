@@ -326,6 +326,10 @@ export const query = graphql`
                                 title
                                 isNullable
                                 path
+                                selectableValues {
+                                    label
+                                    value
+                                }
                             }
                         }
                     }

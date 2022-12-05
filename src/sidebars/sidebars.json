@@ -48,6 +48,10 @@
                     "url": "/handbook/strategy/overview"
                 },
                 {
+                    "name": "Ideal Customer Persona",
+                    "url": "/handbook/strategy/ideal-customer-persona"
+                },
+                {
                     "name": "Business model",
                     "url": "/handbook/strategy/business-model"
                 },
@@ -663,6 +667,10 @@
                     "url": "/docs/self-host/open-source/deployment",
                     "children": [
                         {
+                            "name": "Disclaimer",
+                            "url": "/docs/self-host/open-source/disclaimer"
+                        },
+                        {
                             "name": "Deployment",
                             "url": "/docs/self-host/open-source/deployment"
                         },
@@ -874,7 +882,25 @@
                                 },
                                 {
                                     "name": "Plugin server",
-                                    "url": "/docs/runbook/services/plugin-server"
+                                    "url": "/docs/runbook/services/plugin-server",
+                                    "children": [
+                                        {
+                                            "name": "Overview",
+                                            "url": "/docs/runbook/services/plugin-server"
+                                        },
+                                        {
+                                            "name": "Ingestion lag",
+                                            "url": "/docs/runbook/services/plugin-server/ingestion-lag"
+                                        },
+                                        {
+                                            "name": "Jobs not executing",
+                                            "url": "/docs/runbook/services/plugin-server/jobs"
+                                        },
+                                        {
+                                            "name": "Scheduled tasks not executing",
+                                            "url": "/docs/runbook/services/plugin-server/scheduled-tasks"
+                                        }
+                                    ]
                                 },
                                 {
                                     "name": "MinIO",
@@ -1650,6 +1676,10 @@
                             "name": "Variance Connector"
                         },
                         {
+                            "url": "/docs/apps/pace-integration",
+                            "name": "Pace Integration"
+                        },
+                        {
                             "url": "/docs/apps/zapier-connector",
                             "name": "Zapier Connector"
                         }
@@ -1730,10 +1760,6 @@
             "url": "/tutorials",
             "children": [
                 {
-                    "name": "All tutorials",
-                    "url": "/tutorials"
-                },
-                {
                     "name": "Actions",
                     "url": "/tutorials/categories/actions"
                 },
@@ -1746,8 +1772,20 @@
                     "url": "/tutorials/categories/cohorts"
                 },
                 {
+                    "name": "Configuration",
+                    "url": "/tutorials/categories/configuration"
+                },
+                {
+                    "name": "Data management",
+                    "url": "/tutorials/categories/data-management"
+                },
+                {
                     "name": "Dashboards",
                     "url": "/tutorials/categories/dashboards"
+                },
+                {
+                    "name": "Experimentation",
+                    "url": "/tutorials/categories/experimentation"
                 },
                 {
                     "name": "Feature flags",
@@ -1758,8 +1796,16 @@
                     "url": "/tutorials/categories/funnels"
                 },
                 {
+                    "name": "Group analytics",
+                    "url": "/tutorials/categories/group-analytics"
+                },
+                {
                     "name": "Heatmaps",
                     "url": "/tutorials/categories/heatmaps"
+                },
+                {
+                    "name": "Insights",
+                    "url": "/tutorials/categories/insights"
                 },
                 {
                     "name": "Path analysis",
@@ -1772,6 +1818,10 @@
                 {
                     "name": "Session recording",
                     "url": "/tutorials/categories/session-recording"
+                },
+                {
+                    "name": "Toolbar",
+                    "url": "/tutorials/categories/toolbar"
                 },
                 {
                     "name": "Trends",

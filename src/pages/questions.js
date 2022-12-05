@@ -1,4 +1,3 @@
-import { DocSearchModal } from '@docsearch/react'
 import { Blockquote } from 'components/BlockQuote'
 import Breadcrumbs from 'components/Breadcrumbs'
 import { MdxCodeBlock } from 'components/CodeBlock'
@@ -12,10 +11,12 @@ import Icon from 'components/SupportImages/Icon'
 import { ZoomImage } from 'components/ZoomImage'
 import { motion } from 'framer-motion'
 import { GatsbyImage, getImage, StaticImage } from 'gatsby-plugin-image'
-import { createHubSpotContact } from 'lib/utils'
+import { createHubSpotContact, squeakProfileLink } from 'lib/utils'
 import React, { useState } from 'react'
 import Scroll from 'react-scroll'
 import { Form, Squeak } from 'squeak-react'
+import SearchBox from 'components/Search/SearchBox'
+
 const Element = Scroll.Element
 const scroller = Scroll.scroller
 
@@ -47,87 +48,6 @@ const Guide = ({ title, link, icon }) => {
                 <h3 className="font-bold text-base mb-0">{title}</h3>
             </Link>
         </li>
-    )
-}
-
-const Search = () => {
-    const [value, setValue] = useState('')
-    const [modal, setModal] = useState(false)
-    const [showForm, setShowForm] = useState(false)
-    const [formValues, setFormValues] = useState(null)
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        if (value.trim()) {
-            setModal(true)
-        }
-    }
-    const handleSqueakSubmit = (values) => {
-        setFormValues(values)
-    }
-    return (
-        <>
-            {modal && (
-                <DocSearchModal
-                    onClose={() => setModal(false)}
-                    initialQuery={value}
-                    appId="B763I3AO0D"
-                    indexName="posthog"
-                    apiKey="f1386529b9fafc5c3467e0380f19de4b"
-                />
-            )}
-            <form
-                onSubmit={handleSubmit}
-                className="flex flex-col justify-center relative mx-auto mb-0 w-full max-w-lg"
-            >
-                <div className="absolute left-4 w-4 h-4">
-                    <svg className="opacity-50" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
-                        <g opacity="1" clipPath="url(#a)">
-                            <path
-                                d="m18 15.964-4.794-4.793A7.2 7.2 0 1 0 .001 7.2a7.2 7.2 0 0 0 11.17 6.006L15.963 18 18 15.964ZM2.04 7.2A5.16 5.16 0 0 1 7.2 2.043 5.16 5.16 0 1 1 2.04 7.2Z"
-                                fill="#90794B"
-                            />
-                        </g>
-                        <defs>
-                            <clipPath id="a">
-                                <path fill="#fff" d="M0 0h18v18H0z" />
-                            </clipPath>
-                        </defs>
-                    </svg>
-                </div>
-                <input
-                    onChange={(e) => setValue(e.target.value)}
-                    value={value}
-                    name="faq-search"
-                    placeholder="Search anything product, installation, or company-related..."
-                    autoFocus={true}
-                    className="pl-10 py-3 text-base bg-white dark:bg-gray-accent-dark rounded-full w-full ring-red shadow-lg"
-                />
-
-                <button className="hidden px-6 py-3 bg-red text-lg shadow-md rounded-sm text-white font-bold">
-                    Search
-                </button>
-            </form>
-            {showForm && (
-                <motion.div className="mt-4 max-w-[450px]" initial={{ height: 0 }} animate={{ height: 'auto' }}>
-                    {formValues ? (
-                        <div>
-                            <p className="flex items-center space-x-1 font-semibold text-[#43AF79]">
-                                <span className=" w-[24px] h-[24px] bg-[#43AF79] rounded-full flex justify-center items-center">
-                                    <Check className="w-[12px] h-[12px] text-white" />
-                                </span>
-                                <span>Question sent. Thread will be posted here.</span>
-                            </p>
-                        </div>
-                    ) : (
-                        <Form
-                            onSubmit={handleSqueakSubmit}
-                            apiHost="https://squeak.cloud"
-                            organizationId="a898bcf2-c5b9-4039-82a0-a00220a8c626"
-                        />
-                    )}
-                </motion.div>
-            )}
-        </>
     )
 }
 
@@ -183,10 +103,10 @@ export default function FAQ() {
             />
             <section className="px-4">
                 <div className="relative">
-                    <div className="max-w-4xl mx-auto my-12  flex flex-col justify-center">
+                    <div className="max-w-4xl mx-auto my-12  flex flex-col items-center justify-center">
                         <h1 className="text-center">Questions?</h1>
                         <h5 className="text-center">Search answers across posthog.com</h5>
-                        <Search />
+                        <SearchBox filter="question" />
                         <p className="mt-3 text-sm text-gray text-center font-semibold">
                             Can't find your answer?{' '}
                             <button
@@ -291,6 +211,7 @@ export default function FAQ() {
                     <h3>Recent questions</h3>
                     <Element name="squeak-top" />
                     <Squeak
+                        profileLink={squeakProfileLink}
                         onSignUp={(user) => createHubSpotContact(user)}
                         onSubmit={(_values, formType) =>
                             formType === 'question' && scroller.scrollTo('squeak-top', { smooth: true })

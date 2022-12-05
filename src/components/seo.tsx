@@ -13,18 +13,12 @@ interface SEOProps {
     noindex?: boolean
 }
 
-export function SEO({ title, description, image, article, canonicalUrl, noindex }: SEOProps): JSX.Element {
+export const SEO = ({ title, description, image, article, canonicalUrl, noindex }: SEOProps): JSX.Element => {
     const { pathname } = useLocation()
     const { site } = useStaticQuery(query)
 
-    const {
-        defaultTitle,
-        titleTemplate,
-        defaultDescription,
-        siteUrl,
-        defaultImage,
-        twitterUsername,
-    } = site.siteMetadata
+    const { defaultTitle, titleTemplate, defaultDescription, siteUrl, defaultImage, twitterUsername } =
+        site.siteMetadata
 
     const seo = {
         title: title || defaultTitle,
@@ -55,6 +49,8 @@ export function SEO({ title, description, image, article, canonicalUrl, noindex 
         </Helmet>
     )
 }
+
+export default SEO
 
 SEO.propTypes = {
     title: PropTypes.string,

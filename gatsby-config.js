@@ -1,4 +1,6 @@
 const fetch = require(`node-fetch`)
+const slugify = require('slugify')
+const algoliaConfig = require('./gatsby/algoliaConfig')
 
 require('dotenv').config({
     path: `.env.${process.env.NODE_ENV}`,
@@ -51,7 +53,6 @@ module.exports = {
             },
         },
         'gatsby-plugin-react-helmet',
-        `gatsby-plugin-netlify`,
         `gatsby-plugin-sass`,
         `gatsby-plugin-typescript`,
         `gatsby-plugin-smoothscroll`,
@@ -408,5 +409,8 @@ module.exports = {
                 ],
             },
         },
+        ...(!process.env.GATSBY_ALGOLIA_APP_ID || !process.env.ALGOLIA_API_KEY || !process.env.GATSBY_ALGOLIA_INDEX_NAME
+            ? []
+            : [algoliaConfig]),
     ],
 }
