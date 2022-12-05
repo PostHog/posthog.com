@@ -33,20 +33,6 @@ const TopLink = ({ title, description, link, icon }) => {
     )
 }
 
-const Guide = ({ title, link, icon }) => {
-    return (
-        <li className="border-b border-dashed border-gray first:border-l">
-            <Link
-                to={link}
-                className="flex justify-start items-center w-full h-full text-black hover:text-black hover:bg-gray-accent/20 dark:hover:bg-gray-accent/10 opacity-80 hover:opacity-100 p-4 space-x-3"
-            >
-                <Icon className="w-6 h-6 text-gray" name={icon} />
-                <h3 className="font-bold text-base mb-0">{title}</h3>
-            </Link>
-        </li>
-    )
-}
-
 const Search = () => {
     const [value, setValue] = useState('')
     const [modal, setModal] = useState(false)
@@ -300,19 +286,13 @@ export default function Questions() {
                                 <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
                                     <div className="overflow-hidden border border-dashed border-gray-accent-light">
                                         <table className="min-w-full">
-                                            <thead className="bg-gray-50">
-                                                <tr className="sr-only">
+                                            <thead className="bg-gray-50 border-b border-gray-accent-light border-dashed">
+                                                <tr className="">
                                                     <th
                                                         scope="col"
                                                         className="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                                                     >
-                                                        Question
-                                                    </th>
-                                                    <th
-                                                        scope="col"
-                                                        className="px-4 py-3.5 text-left text-sm font-semibold text-gray-900"
-                                                    >
-                                                        Posted at
+                                                        Topic
                                                     </th>
                                                     <th
                                                         scope="col"
@@ -320,19 +300,28 @@ export default function Questions() {
                                                     >
                                                         Replies
                                                     </th>
+                                                    <th
+                                                        scope="col"
+                                                        className="px-4 py-3.5 text-left text-sm font-semibold text-gray-900"
+                                                    >
+                                                        Activity
+                                                    </th>
                                                 </tr>
                                             </thead>
                                             <tbody className="divide-y divide-gray-accent-light divide-dashed">
-                                                {questions.map(({ question, profile, numReplies }) => (
-                                                    <tr key={question.id} className="">
-                                                        <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 sm:pl-6 space-y-2">
-                                                            <div className="flex items-center space-x-2">
-                                                                <Link to={`/questions/${question.id}`}>
-                                                                    <span className="text-[16px]">
-                                                                        {question.subject}
-                                                                    </span>
-                                                                </Link>
-                                                                {/*question.topics.map(({ topic }) => {
+                                                {questions.map(({ question, profile, numReplies }) => {
+                                                    const latestReply = question.replies[question.replies.length - 1]
+
+                                                    return (
+                                                        <tr key={question.id} className="">
+                                                            <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 sm:pl-6 space-y-2">
+                                                                <div className="flex items-center space-x-2">
+                                                                    <Link to={`/questions/${question.permalink}`}>
+                                                                        <span className="text-[16px]">
+                                                                            {question.subject}
+                                                                        </span>
+                                                                    </Link>
+                                                                    {/*question.topics.map(({ topic }) => {
                                                                     return (
                                                                         <div
                                                                             key={topic.id}
@@ -342,51 +331,54 @@ export default function Questions() {
                                                                         </div>
                                                                     )
                                                                 })*/}
-                                                            </div>
-                                                            <p className="max-w-xl break-words whitespace-normal line-clamp-2 text-sm opacity-90">
-                                                                {question.replies[0].body}
-                                                            </p>
-                                                            <a
-                                                                href={`/community/profiles/${profile.id}`}
-                                                                className="flex items-center space-x-1.5"
-                                                            >
-                                                                <div className={`w-5 h-5 overflow-hidden rounded-full`}>
-                                                                    {profile.avatar ? (
-                                                                        <img
-                                                                            className="w-full h-full"
-                                                                            alt=""
-                                                                            src={profile.avatar}
-                                                                        />
-                                                                    ) : (
-                                                                        <svg
-                                                                            viewBox="0 0 40 40"
-                                                                            fill="none"
-                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                        >
-                                                                            <path
-                                                                                d="M20.0782 41.0392H5.42978C4.03134 41.0392 3.1173 40.1642 3.09386 38.7736C3.07823 37.7814 3.07042 36.797 3.10948 35.8048C3.15636 34.6329 3.72668 33.7345 4.74228 33.1798C8.0782 31.3595 11.4299 29.5783 14.7659 27.7658C15.0081 27.633 15.1565 27.758 15.3362 27.8517C18.1878 29.3439 21.0942 29.4689 24.0626 28.2267C24.1485 28.1955 24.2423 28.1721 24.3126 28.1096C24.9298 27.5861 25.4845 27.7971 26.1251 28.1486C29.1173 29.7971 32.1331 31.4143 35.1487 33.0238C36.4534 33.7191 37.094 34.766 37.0706 36.2426C37.0549 37.0785 37.0706 37.9067 37.0706 38.7426C37.0628 40.1254 36.1409 41.0395 34.7659 41.0395H20.0783L20.0782 41.0392Z"
-                                                                                fill="#BFBFBC"
-                                                                            ></path>
-                                                                            <path
-                                                                                d="M19.8359 27.0625C17.0859 26.9687 14.8047 25.6094 13.1251 23.1953C10.3751 19.2344 10.7032 13.6093 13.8516 10.0001C17.2735 6.08599 22.9452 6.10943 26.336 10.0469C29.9376 14.2345 29.711 20.8437 25.8126 24.6405C24.2188 26.1952 22.3126 27.0312 19.8362 27.0624L19.8359 27.0625Z"
-                                                                                fill="#BFBFBC"
-                                                                            ></path>
-                                                                        </svg>
-                                                                    )}
                                                                 </div>
-                                                                <span className="text-gray font-semibold">
-                                                                    {profile.first_name} {profile.last_name}
-                                                                </span>
-                                                            </a>
-                                                        </td>
-                                                        <td className="whitespace-nowrap p-4 text-sm text-gray-500 text-gray font-semibold">
-                                                            {dayFormat(dateToDays(question.created_at))}
-                                                        </td>
-                                                        <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-6 text-gray font-semibold">
-                                                            {numReplies}
-                                                        </td>
-                                                    </tr>
-                                                ))}
+                                                                <p className="max-w-xl break-words whitespace-normal line-clamp-2 text-sm opacity-90">
+                                                                    {question.replies[0].body}
+                                                                </p>
+                                                                <a
+                                                                    href={`/community/profiles/${profile.id}`}
+                                                                    className="flex items-center space-x-1.5"
+                                                                >
+                                                                    <div
+                                                                        className={`w-5 h-5 overflow-hidden rounded-full`}
+                                                                    >
+                                                                        {profile.avatar ? (
+                                                                            <img
+                                                                                className="w-full h-full"
+                                                                                alt=""
+                                                                                src={profile.avatar}
+                                                                            />
+                                                                        ) : (
+                                                                            <svg
+                                                                                viewBox="0 0 40 40"
+                                                                                fill="none"
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                            >
+                                                                                <path
+                                                                                    d="M20.0782 41.0392H5.42978C4.03134 41.0392 3.1173 40.1642 3.09386 38.7736C3.07823 37.7814 3.07042 36.797 3.10948 35.8048C3.15636 34.6329 3.72668 33.7345 4.74228 33.1798C8.0782 31.3595 11.4299 29.5783 14.7659 27.7658C15.0081 27.633 15.1565 27.758 15.3362 27.8517C18.1878 29.3439 21.0942 29.4689 24.0626 28.2267C24.1485 28.1955 24.2423 28.1721 24.3126 28.1096C24.9298 27.5861 25.4845 27.7971 26.1251 28.1486C29.1173 29.7971 32.1331 31.4143 35.1487 33.0238C36.4534 33.7191 37.094 34.766 37.0706 36.2426C37.0549 37.0785 37.0706 37.9067 37.0706 38.7426C37.0628 40.1254 36.1409 41.0395 34.7659 41.0395H20.0783L20.0782 41.0392Z"
+                                                                                    fill="#BFBFBC"
+                                                                                ></path>
+                                                                                <path
+                                                                                    d="M19.8359 27.0625C17.0859 26.9687 14.8047 25.6094 13.1251 23.1953C10.3751 19.2344 10.7032 13.6093 13.8516 10.0001C17.2735 6.08599 22.9452 6.10943 26.336 10.0469C29.9376 14.2345 29.711 20.8437 25.8126 24.6405C24.2188 26.1952 22.3126 27.0312 19.8362 27.0624L19.8359 27.0625Z"
+                                                                                    fill="#BFBFBC"
+                                                                                ></path>
+                                                                            </svg>
+                                                                        )}
+                                                                    </div>
+                                                                    <span className="text-gray font-semibold">
+                                                                        {profile.first_name} {profile.last_name}
+                                                                    </span>
+                                                                </a>
+                                                            </td>
+                                                            <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-6 text-gray font-semibold">
+                                                                {numReplies}
+                                                            </td>
+                                                            <td className="whitespace-nowrap p-4 text-sm text-gray-500 text-gray font-semibold">
+                                                                {dayFormat(dateToDays(latestReply.created_at))}
+                                                            </td>
+                                                        </tr>
+                                                    )
+                                                })}
                                             </tbody>
                                         </table>
                                     </div>
@@ -398,45 +390,6 @@ export default function Questions() {
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div className="max-w-4xl w-full mx-auto">
-                    <h3>Product manuals</h3>
-                </div>
-
-                <div className="max-w-4xl w-full mx-auto">
-                    <ol className="list-none m-0 p-0 grid md:grid-flow-col grid-cols-2 md:grid-cols-4 md:grid-rows-3 divide-x divide-dashed divide-gray justify-center border-t border-r border-dashed border-gray">
-                        <Guide title="Trends" link="/docs/user-guides/trends" icon="trendz" />
-                        <Guide title="Funnels" link="/docs/user-guides/funnels" icon="funnels" />
-                        <Guide title="User paths" link="/docs/user-guides/paths" icon="user-paths" />
-                        <Guide
-                            title="Correlation analysis"
-                            link="/docs/user-guides/correlation"
-                            icon="correlation-analysis"
-                        />
-                        <Guide title="Session recording" link="/docs/user-guides/recordings" icon="session-recording" />
-                        <Guide title="Feature flags" link="/docs/user-guides/feature-flags" icon="feature-flags" />
-                        <Guide
-                            title="Experimentation"
-                            link="/docs/user-guides/experimentation"
-                            icon="experimentation"
-                        />
-                        <Guide title="Heatmaps" link="/docs/user-guides/toolbar#toolbar-features" icon="heatmaps" />
-                        <Guide title="Apps" link="/docs/apps" icon="apps" />
-                        <Guide title="Toolbar" link="/docs/user-guides/toolbar" icon="toolbar" />
-                        <Guide title="Insights" link="/docs/user-guides/insights" icon="insights" />
-                        <Guide
-                            title="Group Analytics"
-                            link="/docs/user-guides/group-analytics"
-                            icon="group-analytics"
-                        />
-                    </ol>
-                    <a
-                        href="/using-posthog"
-                        className="border border-t-0 border-dashed border-gray p-3 text-lg font-semibold flex justify-center hover:bg-gray-accent/20 dark:hover:bg-gray-accent-dark"
-                    >
-                        View all (23)
-                    </a>
                 </div>
             </section>
         </Layout>

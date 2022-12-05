@@ -13,7 +13,6 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
     const AppTemplate = path.resolve(`src/templates/App.js`)
     const ProductTemplate = path.resolve(`src/templates/Product.js`)
     const HostHogTemplate = path.resolve(`src/templates/HostHog.js`)
-    const Question = path.resolve(`src/templates/Question.js`)
     const SqueakTopic = path.resolve(`src/templates/SqueakTopic.tsx`)
     const Job = path.resolve(`src/templates/Job.tsx`)
 
@@ -223,11 +222,6 @@ module.exports = exports.createPages = async ({ actions: { createPage }, graphql
                 nodes {
                     id
                     slug
-                }
-            }
-            questions: allQuestion {
-                nodes {
-                    id
                 }
             }
             squeakTopics: allSqueakTopic {
