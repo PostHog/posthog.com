@@ -23,7 +23,7 @@ Pineapple Mode requires either PostHog Cloud, or a self-hosted PostHog instance 
 
 Not running 1.41.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
-You'll also need to manually opt in to the site apps feature as it's currently in beta.
+You'll also need to manually opt in to the site apps feature, as it's currently in beta.
 
 ### How do I install Pineapple Mode?
 
