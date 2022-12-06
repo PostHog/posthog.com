@@ -1,40 +1,38 @@
 ---
 title: Stripe Connector
 github: https://github.com/posthog/stripe-plugin
-installUrl: https://app.posthog.com/project/apps?name=Gitlab+Release+Tracker
-thumbnail: ../../apps/thumbnails/gitlab.png
+installUrl: https://app.posthog.com/project/apps?name=stripe
+thumbnail: ../../apps/thumbnails/stripe-connector.png
 topics:
-    - gitlab-release-tracker
+    - stripe-connector
 ---
 
-### What does the GitHub Release Tracker app do?
+### What does the Stripe Connector do?
 
-The GitHub Release Tracker adds an [Annotation](/docs/user-guides/annotations) to PostHog whenever a specified repo launches a new GitHub release. This is useful for correlating the impact of new releases on other metrics, such as sign-ups, as well as other performance-related issues.
+Stripe is a payments platform used by millions of companies. The Stripe Connector enables you to get information about revenue and payments from Stripe, into PostHog. 
 
-### How do I install the GitHub Release Tracker for PostHog?
+Once revenue information is in PostHog, you can analyze it just like any other PostHog event using insights and dashboards. 
+
+### How do I install the Stripe Connector?
 
 1. Log in to your PostHog instance
 2. Click 'Apps' on the left-hand tool bar
-3. Search for 'GitLab Release Tracker'
-4. Select the app, press 'Install' and follow the on-screen instructions
+3. Search for 'Stripe'
+4. Select the app, press 'Install' and follow the configuration instructions accessed by pressing the cog button.
 
 ### What are the requirements for this app?
 
-The GitHub Release Tracker requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+The Stripe Connector requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
-### Configuration
-
-<AppParameters />
-
 ### Is the source code for this app available?
 
-PostHog is open-source and so are all apps on the platform. The [source code for the GitLab Release Tracker](https://github.com/PostHog/gitlab-release-tracking-plugin) is available on GitHub.
+PostHog is open-source and so are all apps on the platform. The [source code for the Stripe Connector](https://github.com/posthog/stripe-plugin) is available on GitHub.
 
 ### Who created this app?
 
-We'd like to thank PostHog team members [Yakko Majuri](https://github.com/yakkomajuri), [Tim Glaser](https://github.com/timgl), [Michael Matloka](https://github.com/Twixes) and [Marius Andra](https://github.com/mariusandra) for creating the GitLab Release Tracker.
+We'd like to thank PostHog team members [Yakko Majuri](https://github.com/yakkomajuri), [Tim Glaser](https://github.com/timgl), [Kunal Pathak](https://github.com/kpthatsme) and [Paul Hultgren](https://github.com/pjhul) for creating this app.
 
 ### Who maintains this app?
 
