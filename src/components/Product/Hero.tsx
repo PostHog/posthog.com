@@ -3,6 +3,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 import React, { useState } from 'react'
 import Slider from 'react-slick'
 import { Link } from 'react-scroll'
+import { SignupCTA } from 'components/SignupCTA'
 
 const slides = [
     {
@@ -186,6 +187,7 @@ const Slide = ({ image, label }) => {
 
 export default function Hero() {
     const [activeSlide, setActiveSlide] = useState(0)
+
     return (
         <section id="overview" className="text-center pt-7 sm:pt-14 mb-8">
             <div className="px-5 max-w-screen-2xl mx-auto relative z-10">
@@ -198,9 +200,7 @@ export default function Hero() {
                     PostHog is the single platform that can replace an entire suite of tools you’re already paying for.
                 </p>
                 <div className="flex space-x-3 items-center justify-center">
-                    <CallToAction to="https://app.posthog.com/signup" type="primary">
-                        Get started - free
-                    </CallToAction>
+                    <SignupCTA />
                     <CallToAction to="/pricing" type="secondary">
                         View pricing
                     </CallToAction>

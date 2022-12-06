@@ -220,7 +220,11 @@ const Control = (): JSX.Element => {
                             to={
                                 enterpriseMode
                                     ? 'https://posthog.com/signup/cloud/enterprise'
-                                    : 'https://app.posthog.com/signup'
+                                    : `https://${
+                                          posthog?.isFeatureEnabled && posthog?.isFeatureEnabled('direct-to-eu-cloud')
+                                              ? 'eu'
+                                              : 'app'
+                                      }.posthog.com/signup`
                             }
                         >
                             {enterpriseMode ? 'Get in touch' : 'Get started - free'}
@@ -325,7 +329,11 @@ const Control = (): JSX.Element => {
                             to={
                                 enterpriseMode
                                     ? 'https://posthog.com/signup/cloud/enterprise'
-                                    : 'https://app.posthog.com/signup'
+                                    : `https://${
+                                          posthog?.isFeatureEnabled && posthog?.isFeatureEnabled('direct-to-eu-cloud')
+                                              ? 'eu'
+                                              : 'app'
+                                      }.posthog.com/signup`
                             }
                         >
                             {enterpriseMode ? 'Get in touch' : 'Get started - free'}

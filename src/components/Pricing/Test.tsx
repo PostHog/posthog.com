@@ -260,6 +260,7 @@ const Breakdown = ({ planName, ctas }) => {
 
 const PricingBreakdown = () => {
     const { eventNumber } = useValues(pricingSliderLogic)
+    const { posthog } = useValues(posthogAnalyticsLogic)
     return (
         <section className={`${section} mt-12 md:px-4`}>
             <h2
@@ -289,7 +290,11 @@ const PricingBreakdown = () => {
                             ctas={[
                                 {
                                     children: 'Try PostHog Cloud',
-                                    to: 'https://app.posthog.com/signup',
+                                    to: `https://${
+                                        posthog?.isFeatureEnabled && posthog?.isFeatureEnabled('direct-to-eu-cloud')
+                                            ? 'eu'
+                                            : 'app'
+                                    }.posthog.com/signup`,
                                 },
                                 {
                                     children: 'Try PostHog Self-Hosted',
