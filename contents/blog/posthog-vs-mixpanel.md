@@ -513,6 +513,7 @@ Mixpanel and PostHog support a wide-range of export destinations.
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Export data to S3 bucket</td>
+        </tr>
         <tr>
             <td><strong>Azure Blob Storage</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
