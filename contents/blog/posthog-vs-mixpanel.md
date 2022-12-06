@@ -427,7 +427,7 @@ To quote Tony Stark: “An intelligence agency which fears intelligence is, hist
 
 - **Mobile app session recordings:** We don't currently support session recording in mobile apps, but it's currently under consideration as a project for our session recording team. See our [public roadmap](/roadmap) for more info.
 
-- **Unity:** We don't have a Unity SDK yet but, just like Unity, we're open-source, so anyone can create one. See our [contribution guidelines](/docs/contribute) for more info.
+- **Unity:** We don't have a Unity SDK yet, as we're open-source, anyone can create one. See our [contribution guidelines](/docs/contribute) for more info.
 
 ### Server libraries
 
