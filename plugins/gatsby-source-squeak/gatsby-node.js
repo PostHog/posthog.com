@@ -61,7 +61,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, cache
             published,
             resolved,
             subject,
-            permalink: permalink,
+            permalink,
             profileId: profile_id,
         }
 
@@ -115,7 +115,12 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, cache
             },
             label: label,
             topicId: id,
-            topics: topic,
+            topics: topic.map((topic) => {
+                return {
+                    ...topic,
+                    slug: slugify(topic.label, { lower: true }),
+                }
+            }),
             slug: slugify(label, { lower: true }),
         }
         createNode(node)
