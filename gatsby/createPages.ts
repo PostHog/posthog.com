@@ -5,7 +5,7 @@ import slugify from 'slugify'
 import fetch from 'node-fetch'
 
 export const createPages: GatsbyNode['createPages'] = async ({ actions: { createPage }, graphql }) => {
-    const BlogPostTemplate = path.resolve(`src/templates/BlogPost.js`)
+    /*const BlogPostTemplate = path.resolve(`src/templates/BlogPost.js`)
     const PlainTemplate = path.resolve(`src/templates/Plain.js`)
     const BlogCategoryTemplate = path.resolve(`src/templates/BlogCategory.js`)
     const CustomerTemplate = path.resolve(`src/templates/Customer.js`)
@@ -536,5 +536,5 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 },
             })
         }
-    }
+    }*/
 }
