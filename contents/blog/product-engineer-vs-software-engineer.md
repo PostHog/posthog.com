@@ -17,7 +17,7 @@ A recent addition to the debate is the role of the product engineer. The role of
 
 To help you think through this yourself, we’ll compare the role of product engineer with the role of software engineer.
 
-## What does each role focus on?
+## How are product and software engineers different?
 
 A product engineer focuses on building great products. This means they own the product and are responsible for its successes and failures. Product engineers care about solving users’ problems and must be empathetic towards them for their usage. They build with the user in mind and create what users need for success.
 
@@ -29,7 +29,7 @@ Product engineers are less focused on implementation and focus more on solving t
 
 Software engineers are more idealistic. They look for the best solution to the problem in front of them, focus on best practices, and build off prior work. Security, risk, and scaling weigh heavier in their minds.
 
-## How does each spend their time?
+## How do they spend their time?
 
 Product engineers spend their time in a variety of ways. A majority of their time is still spent coding, but they have responsibilities outside of coding than software engineers.
 
@@ -63,4 +63,4 @@ Picking what is right is up to the company and its culture. If focusing on build
 
 - [What is a product engineer (and why they matter)](/blog/what-is-a-product-engineer/)
 - [Startups, stop treating engineers like a different species](/blog/stop-treating-engineers-differently)
-- [22 ways PostHog makes it easier to build great products](/blog/using-posting)
+- [The really important job interview questions engineers should ask (but don't)](/blog/what-to-ask-in-interviews)
