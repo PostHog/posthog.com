@@ -107,6 +107,7 @@ import { ProductPage } from './components/ProductPage'
 import { ProductSectionHeader } from './components/ProductSectionHeader'
 import { Question } from './components/Question'
 import { Quote2 } from './components/Quote2'
+import { RenderInClient } from './components/RenderInClient'
 import { Roadmap } from './components/Roadmap'
 import { RocketHorizontalRule } from './components/RocketHorizontalRule'
 import { SectionLinks } from './components/SectionLinks'
@@ -243,6 +244,7 @@ export const shortcodes = {
     ProductSectionHeader,
     Question,
     Quote2,
+    RenderInClient,
     Roadmap,
     RocketHorizontalRule,
     SectionLinks,
