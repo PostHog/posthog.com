@@ -1,56 +1,61 @@
-import Breadcrumbs from 'components/Breadcrumbs'
 import Layout from 'components/Layout'
+import PostLayout from 'components/PostLayout'
 import { SEO } from 'components/seo'
 import { graphql } from 'gatsby'
 import { createHubSpotContact } from 'lib/utils'
+import { useTopicMenu } from 'lib/useTopicMenu'
 import React from 'react'
-// import { Question } from 'squeak-react'
+import { FullQuestion } from 'squeak-react'
+
+type Question = {
+    id: string
+    permalink: string
+    published: boolean
+    subject: string
+    replies: {
+        id: string
+        body: string
+        published: boolean
+        profile: {
+            id: string
+            avatar: string
+        }
+        created_at: string
+    }[]
+}
 
 type QuestionPageProps = {
     pageContext: {
         id: string
     }
     data: {
-        question: {
-            id: string
-            permalink: string
-            published: boolean
-            subject: string
-            replies: {
-                id: string
-                body: string
-                profile: {
-                    id: string
-                    avatar: string
-                }
-                created_at: string
-            }[]
-        }
+        question: Question
     }
     params: {
         permalink: string
     }
 }
 
+const QuestionSidebar = () => {
+    return <div></div>
+}
+
 export default function QuestionPage(props: QuestionPageProps) {
-    console.log(props)
+    const menu = useTopicMenu()
+
     return (
         <Layout>
             <SEO title={`${props.data.question.subject} - PostHog`} />
-            <Breadcrumbs
-                crumbs={[{ title: 'Questions', url: '/questions' }]}
-                darkModeToggle
-                className="px-4 mt-4 sticky top-[-2px] z-10 bg-tan dark:bg-primary"
-            />
-            <section className="max-w-3xl mx-auto py-12">
-                {props.data.question.subject}
-                {/*<Question
-                    onSignUp={(user) => createHubSpotContact(user)}
-                    apiHost="https://squeak.cloud"
-                    organizationId="a898bcf2-c5b9-4039-82a0-a00220a8c626"
-                    question={props.data.question}
-                />*/}
-            </section>
+            <PostLayout title={props.data.question.subject} menu={menu} sidebar={<QuestionSidebar />} hideSurvey>
+                <section className="max-w-5xl mx-auto py-12">
+                    <FullQuestion
+                        apiHost="https://squeak.cloud"
+                        organizationId="a898bcf2-c5b9-4039-82a0-a00220a8c626"
+                        onSignUp={(user) => createHubSpotContact(user)}
+                        question={props.data.question}
+                    />
+                </section>
+            </PostLayout>
         </Layout>
     )
 }
@@ -64,9 +69,12 @@ export const query = graphql`
             permalink
             replies {
                 id
+                published
                 profile {
                     id
                     avatar
+                    first_name
+                    last_name
                 }
                 body
                 created_at

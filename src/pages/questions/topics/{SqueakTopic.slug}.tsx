@@ -7,7 +7,7 @@ import { SEO } from 'components/seo'
 import { squeakProfileLink } from 'lib/utils'
 import { Squeak } from 'squeak-react'
 import { graphql } from 'gatsby'
-import { IMenu } from 'components/PostLayout/types'
+import { useTopicMenu } from 'lib/useTopicMenu'
 
 interface ITopic {
     label: string
@@ -20,16 +20,6 @@ interface IProps {
             id: string
             topicId: string
             label: string
-        }
-        squeakTopicGroups: {
-            nodes: {
-                label: string
-                topics: {
-                    id: string
-                    label: string
-                    slug: string
-                }[]
-            }[]
         }
     }
     pageContext: {
@@ -56,17 +46,7 @@ const TopicSidebar = () => {
 }
 
 export default function SqueakTopics({ data }: IProps) {
-    const menu: IMenu[] = []
-
-    data.squeakTopicGroups.nodes.forEach(({ label, topics }) => {
-        menu.push({ name: label })
-        topics.forEach(({ label, slug }) => {
-            menu.push({
-                name: label,
-                url: `/questions/topics/${slug}`,
-            })
-        })
-    })
+    const menu = useTopicMenu()
 
     return (
         <>
@@ -78,7 +58,6 @@ export default function SqueakTopics({ data }: IProps) {
                             profileLink={squeakProfileLink}
                             limit={5}
                             topics={false}
-                            slug={null}
                             apiHost={'https://squeak.cloud'}
                             organizationId="a898bcf2-c5b9-4039-82a0-a00220a8c626"
                             topic={data.squeakTopic.topicId}
@@ -96,16 +75,6 @@ export const query = graphql`
             id
             topicId
             label
-        }
-        squeakTopicGroups: allSqueakTopicGroup {
-            nodes {
-                label
-                topics {
-                    id
-                    label
-                    slug
-                }
-            }
         }
     }
 `
