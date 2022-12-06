@@ -8,7 +8,7 @@ featuredImage: ../images/tutorials/banners/explore-insights-session-recordings.p
 topics: ['insights', 'session recording']
 ---
 
-One of the most powerful features of PostHog is all of your product tools and data in one place. You don’t need to sign up for multiple products, find ways to link them together, have data in different places, and hop between them. In PostHog, going from product data to visualizations to session recordings is literally three clicks.
+One of the most powerful features of PostHog is all of your product tools and data are in one place. You don’t need to sign up for multiple products, find ways to link them together, have data in different places, and hop between them. In PostHog, going from product data to visualizations to session recordings is literally three clicks.
 
 In this tutorial, we will show the many ways to use session recordings to dive deeper into insights and visualizations you created. Using the connections between tools enables further exploration of user behavior and better, more detailed insights.
 
@@ -52,7 +52,7 @@ For example, if you had a signup funnel, you can use a funnel insight to both tr
 
 Correlated events and properties show what correlates to someone completing or dropping off from your funnel. Encouraging or discouraging these events or properties can help improve your funnel. They can also be abstract and disconnected from the real usage of the funnel. Luckily, a list of users and session recordings connect to each of them. 
 
-Once you’ve created a funnel, below the funnel you’ll get a set of correlated events and another for properties. You can click the “Completed” or “Dropped off” number on any of them to view a list of users and the related session recording.
+Once you’ve created a funnel, below the funnel you’ll get a set of correlated events and another for properties. You can click the “Completed” or “Dropped off” numbers on any of them to view a list of users and the related session recording.
 
 > **Tip:** To specifically see success or drop off correlated events or properties, click the selectors in the top right of the component.
 
