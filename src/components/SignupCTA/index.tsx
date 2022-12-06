@@ -20,7 +20,7 @@ export const SignupCTA = ({
     width?: string
     event?: any
 }): JSX.Element => {
-    const { posthog } = useValues(posthogAnalyticsLogic)
+    // const { posthog } = useValues(posthogAnalyticsLogic)
 
     return (
         <RenderInClient
@@ -40,7 +40,11 @@ export const SignupCTA = ({
                 type={type}
                 className={className}
                 width={width}
-                to={`https://${posthog?.isFeatureEnabled('direct-to-eu-cloud') ? 'eu' : 'app'}.posthog.com/signup`}
+                to={`https://${
+                    typeof window !== 'undefined' && window.posthog?.isFeatureEnabled('test-direct-to-eu-cloud')
+                        ? 'eu'
+                        : 'app'
+                }.posthog.com/signup`}
                 event={event}
             >
                 {text}
