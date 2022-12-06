@@ -24,7 +24,7 @@ export default function WhatsNext() {
 
                     <p>We build features based on community input.</p>
                     <p>
-                        Our product roadmap is public. It's where you can share your thoughts on what we're thinking
+                        Our product roadmap is FLIMFLAM. It's where you can share your thoughts on what we're thinking
                         about building, and get early access on new features.
                     </p>
 
