@@ -136,7 +136,7 @@ const Activity = ({ questions, questionsLoading }) => {
                                         {question?.subject}
                                     </Link>
                                 </div>
-                                <p className="m-0 font-semibold opacity-60 flex-shrink-0 w-[200px]">
+                                <p className="m-0 font-semibold opacity-60 flex-shrink-0 xl:w-[200px]">
                                     {numReplies} {numReplies === 1 ? 'reply' : 'replies'}
                                 </p>
                             </ListItem>
@@ -171,7 +171,7 @@ const ActiveIssues = ({ issues }) => {
                     return (
                         <ListItem key={issue?.id}>
                             <Issue {...other} />
-                            <p className="m-0 text-ellipsis overflow-hidden whitespace-nowrap w-[200px] flex-shrink-0 font-semibold opacity-60">
+                            <p className="m-0 text-ellipsis overflow-hidden whitespace-nowrap xl:w-[200px] flex-shrink-0 font-semibold opacity-60">
                                 {comments} comment{comments.length === 1 ? '' : 's'}
                             </p>
                         </ListItem>
@@ -191,9 +191,12 @@ const ActivePulls = ({ pulls }) => {
                     return (
                         <ListItem key={pull?.id}>
                             <Issue {...pull} />
-                            <Link to={pull?.user?.url} className="flex items-center space-x-2 flex-shrink-0 w-[200px]">
+                            <Link
+                                to={pull?.user?.url}
+                                className="flex items-center space-x-2 flex-shrink-0 xl:w-[200px]"
+                            >
                                 <img className="rounded-full w-[30px] h-[30px]" src={pull?.user?.avatar} />
-                                <p className="m-0 text-ellipsis overflow-hidden whitespace-nowrap">
+                                <p className="m-0 text-ellipsis overflow-hidden whitespace-nowrap xl:block hidden">
                                     {pull?.user?.username}
                                 </p>
                             </Link>
@@ -272,6 +275,7 @@ export default function CommunityPage({ params }: PageProps) {
                             </div>
                         </Modal>
                         <PostLayout
+                            menuWidth={320}
                             title="Profile"
                             menu={docs}
                             sidebar={
