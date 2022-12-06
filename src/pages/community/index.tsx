@@ -115,7 +115,7 @@ const ListItem = ({ children }: { children: React.ReactNode }) => {
 const Activity = ({ questions, questionsLoading }) => {
     const { user } = useUser()
     return (
-        <div className="mb-12">
+        <div id="my-activity" className="mb-12">
             <SectionTitle>My activity</SectionTitle>
             {questionsLoading ? (
                 <Spinner />
@@ -163,7 +163,7 @@ const Issue = ({ number, title, url }: { number: number; title: string; url: str
 
 const ActiveIssues = ({ issues }) => {
     return (
-        <div className="mb-12">
+        <div id="active-issues" className="mb-12">
             <SectionTitle>Most active issues</SectionTitle>
             <ul className="m-0 p-0 list-none">
                 {issues.map((issue) => {
@@ -184,7 +184,7 @@ const ActiveIssues = ({ issues }) => {
 
 const ActivePulls = ({ pulls }) => {
     return (
-        <div className="mb-12">
+        <div id="active-pulls" className="mb-12">
             <SectionTitle>Most active PRs</SectionTitle>
             <ul className="m-0 p-0 list-none">
                 {pulls.map((pull) => {
@@ -281,6 +281,11 @@ export default function CommunityPage({ params }: PageProps) {
                                     profile={profile}
                                 />
                             }
+                            tableOfContents={[
+                                ...(profile ? [{ url: 'my-activity', value: 'My activity', depth: 0 }] : []),
+                                { url: 'active-issues', value: 'Most active issues', depth: 0 },
+                                { url: 'active-pulls', value: 'Most active PRs', depth: 0 },
+                            ]}
                             hideSurvey
                         >
                             {profile && <Activity questionsLoading={questionsLoading} questions={questions} />}
@@ -323,7 +328,7 @@ const ProfileSidebar = ({
     return (
         <div>
             <SidebarSection>
-                <div className="mb-2 flex items-center justify-between">
+                <div className="mb-2 flex items-baseline justify-between">
                     <h4 className="m-0">My profile</h4>
                     {profile && (
                         <button onClick={handleSignOut} className="text-red font-semibold text-sm">
