@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { PageProps } from 'gatsby'
-
+import { graphql, PageProps } from 'gatsby'
 import { docs } from '../../sidebars/sidebars.json'
-
 import SEO from 'components/seo'
 import Layout from 'components/Layout'
 import PostLayout, { SidebarSection } from 'components/PostLayout'
@@ -14,6 +12,7 @@ import { SqueakProfile } from './profiles/[id]'
 import { CallToAction } from 'components/CallToAction'
 import { Login as SqueakLogin } from 'squeak-react'
 import Spinner from 'components/Spinner'
+import { useStaticQuery } from 'gatsby'
 
 const Avatar = (props: { className?: string; src?: string }) => {
     return (
@@ -101,12 +100,23 @@ const Profile = ({
     )
 }
 
+const SectionTitle = ({ children }: { children: React.ReactNode }) => {
+    return <h2 className="m-0 mb-6">{children}</h2>
+}
+
+const ListItem = ({ children }: { children: React.ReactNode }) => {
+    return (
+        <li className="flex justify-between space-x-2 items-end text-lg pb-4 mb-4 border-b border-gray-accent-light dark:border-gray-accent-dark border-dashed last:border-b-0 last:pb-0 last:mb-0">
+            {children}
+        </li>
+    )
+}
+
 const Activity = ({ questions, questionsLoading }) => {
     const { user } = useUser()
     return (
-        <div>
-            <h2 className="m-0 mb-6">My activity</h2>
-
+        <div className="mb-12">
+            <SectionTitle>My activity</SectionTitle>
             {questionsLoading ? (
                 <Spinner />
             ) : questions?.length > 0 ? (
@@ -114,26 +124,83 @@ const Activity = ({ questions, questionsLoading }) => {
                     {questions.map((q) => {
                         const { question, numReplies, profile } = q
                         return (
-                            <li
-                                className="flex justify-between space-x-2 items-end text-lg pb-4 mb-4 border-b border-gray-accent-light dark:border-gray-accent-dark border-dashed last:border-b-0 last:pb-0 last:mb-0"
-                                key={question?.id}
-                            >
-                                <div>
+                            <ListItem key={question?.id}>
+                                <div className="flex-grow flex flex-col overflow-hidden">
                                     <p className="m-0 text-sm opacity-60">
                                         {profile?.id === user?.profile?.id ? 'You started a thread' : 'You replied to'}:
                                     </p>
-                                    <Link to={`/question/${question?.permalink}`}>{question?.subject}</Link>
+                                    <Link
+                                        className="font-bold text-ellipsis overflow-hidden whitespace-nowrap"
+                                        to={`/question/${question?.permalink}`}
+                                    >
+                                        {question?.subject}
+                                    </Link>
                                 </div>
-                                <p className="m-0 font-semibold opacity-60 flex-shrink-0">
+                                <p className="m-0 font-semibold opacity-60 flex-shrink-0 w-[200px]">
                                     {numReplies} {numReplies === 1 ? 'reply' : 'replies'}
                                 </p>
-                            </li>
+                            </ListItem>
                         )
                     })}
                 </ul>
             ) : (
-                <p>You don't have any open questions yet!</p>
+                <p>You haven't asked / answered any questions yet!</p>
             )}
+        </div>
+    )
+}
+
+const Issue = ({ number, title, url }: { number: number; title: string; url: string }) => {
+    return (
+        <>
+            <p className="m-0 text-base opacity-60 min-w-[50px] flex-shrink-0">#{number}</p>
+            <Link className="text-base font-bold text-ellipsis overflow-hidden whitespace-nowrap flex-grow" to={url}>
+                {title}
+            </Link>
+        </>
+    )
+}
+
+const ActiveIssues = ({ issues }) => {
+    return (
+        <div className="mb-12">
+            <SectionTitle>Most active issues</SectionTitle>
+            <ul className="m-0 p-0 list-none">
+                {issues.map((issue) => {
+                    const { comments, ...other } = issue
+                    return (
+                        <ListItem key={issue?.id}>
+                            <Issue {...other} />
+                            <p className="m-0 text-ellipsis overflow-hidden whitespace-nowrap w-[200px] flex-shrink-0 font-semibold opacity-60">
+                                {comments} comment{comments.length === 1 ? '' : 's'}
+                            </p>
+                        </ListItem>
+                    )
+                })}
+            </ul>
+        </div>
+    )
+}
+
+const ActivePulls = ({ pulls }) => {
+    return (
+        <div className="mb-12">
+            <SectionTitle>Most active PRs</SectionTitle>
+            <ul className="m-0 p-0 list-none">
+                {pulls.map((pull) => {
+                    return (
+                        <ListItem key={pull?.id}>
+                            <Issue {...pull} />
+                            <Link to={pull?.user?.url} className="flex items-center space-x-2 flex-shrink-0 w-[200px]">
+                                <img className="rounded-full w-[30px] h-[30px]" src={pull?.user?.avatar} />
+                                <p className="m-0 text-ellipsis overflow-hidden whitespace-nowrap">
+                                    {pull?.user?.username}
+                                </p>
+                            </Link>
+                        </ListItem>
+                    )
+                })}
+            </ul>
         </div>
     )
 }
@@ -143,6 +210,7 @@ export default function CommunityPage({ params }: PageProps) {
     const [editModalOpen, setEditModalOpen] = useState(false)
     const [questions, setQuestions] = useState([])
     const [questionsLoading, setQuestionsLoading] = useState(true)
+    const { issues, pulls } = useStaticQuery(query)
 
     useEffect(() => {
         if (profile) {
@@ -151,7 +219,7 @@ export default function CommunityPage({ params }: PageProps) {
                 method: 'POST',
                 body: JSON.stringify({
                     organizationId: 'a898bcf2-c5b9-4039-82a0-a00220a8c626',
-                    profileId: '3d7338c6-a1a2-453e-aac0-ef9581b0b6b2',
+                    profileId: profile?.id,
                     published: true,
                     perPage: 5,
                 }),
@@ -216,6 +284,8 @@ export default function CommunityPage({ params }: PageProps) {
                             hideSurvey
                         >
                             {profile && <Activity questionsLoading={questionsLoading} questions={questions} />}
+                            <ActiveIssues issues={issues.nodes} />
+                            <ActivePulls pulls={pulls.nodes} />
                         </PostLayout>
                     </UserProvider>
                 </Layout>
@@ -256,9 +326,9 @@ const ProfileSidebar = ({
                 <div className="mb-2 flex items-center justify-between">
                     <h4 className="m-0">My profile</h4>
                     {profile && (
-                        <CallToAction onClick={handleSignOut} size="xs" type="secondary">
+                        <button onClick={handleSignOut} className="text-red font-semibold text-sm">
                             Sign out
-                        </CallToAction>
+                        </button>
                     )}
                 </div>
                 {profile ? <Profile setEditModalOpen={setEditModalOpen} profile={profile} /> : <Login />}
@@ -266,3 +336,35 @@ const ProfileSidebar = ({
         </div>
     )
 }
+
+export const query = graphql`
+    {
+        issues: allPostHogIssue {
+            nodes {
+                id
+                number
+                title
+                url
+                comments
+                user {
+                    avatar
+                    url
+                    username
+                }
+            }
+        }
+        pulls: allPostHogPull {
+            nodes {
+                id
+                number
+                title
+                url
+                user {
+                    avatar
+                    url
+                    username
+                }
+            }
+        }
+    }
+`

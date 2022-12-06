@@ -46,6 +46,63 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         })
     }
 
+    const posthogIssues = await fetch(
+        'https://api.github.com/repos/posthog/posthog/issues?sort=comments&per_page=5'
+    ).then((res) => res.json())
+    posthogIssues.forEach((issue) => {
+        const { html_url, title, number, user, comments } = issue
+        const data = {
+            url: html_url,
+            title,
+            number,
+            comments,
+            user: {
+                username: user?.login,
+                avatar: user?.avatar_url,
+                url: user?.html_url,
+            },
+        }
+        const node = {
+            id: createNodeId(`posthog-issue-${title}`),
+            parent: null,
+            children: [],
+            internal: {
+                type: `PostHogIssue`,
+                contentDigest: createContentDigest(data),
+            },
+            ...data,
+        }
+        createNode(node)
+    })
+
+    const posthogPulls = await fetch(
+        'https://api.github.com/repos/posthog/posthog/pulls?sort=popularity&per_page=5'
+    ).then((res) => res.json())
+    posthogPulls.forEach((issue) => {
+        const { html_url, title, number, user } = issue
+        const data = {
+            url: html_url,
+            title,
+            number,
+            user: {
+                username: user?.login,
+                avatar: user?.avatar_url,
+                url: user?.html_url,
+            },
+        }
+        const node = {
+            id: createNodeId(`posthog-pull-${title}`),
+            parent: null,
+            children: [],
+            internal: {
+                type: `PostHogPull`,
+                contentDigest: createContentDigest(data),
+            },
+            ...data,
+        }
+        createNode(node)
+    })
+
     const integrations = await fetch(
         'https://raw.githubusercontent.com/PostHog/integrations-repository/main/integrations.json'
     ).then((res) => res.json())
