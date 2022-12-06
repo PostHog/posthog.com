@@ -35,7 +35,7 @@ const Roadmap = () => {
                     The future of PostHog <span className="text-red">depends on you</span>
                 </h2>
                 <h3 className="m-0 text-lg md:text-[20px] leading-tight md:text-xl text-center md:text-left font-semibold mt-2 md:mt-3 opacity-75 text-primary">
-                    We publish our product roadmap. Tell us what we should build next – and get early access.
+                    Tell us what we should build next – and get early access.
                 </h3>
 
                 <div className="mt-4 mb-12 text-center md:text-left">
