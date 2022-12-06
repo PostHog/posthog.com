@@ -27,6 +27,7 @@ import { pricing, pricingLabels } from 'components/Pricing/constants'
 import { ProductIcons } from '../ProductIcons/ProductIcons'
 import { NotProductIcons } from '../NotProductIcons/NotProductIcons'
 import Breakdown from './Breakdown'
+import { RenderInClient } from 'components/RenderInClient'
 
 const Benefit = ({ children }) => {
     return (
@@ -208,27 +209,29 @@ const Control = (): JSX.Element => {
                         <p className="text-lg font-semibold opacity-60">
                             After a generous monthly free tier, pricing scales with usage.
                         </p>
-
-                        <TrackedCTA
-                            event={{
-                                name: `clicked Get started - free`,
-                                type: enterpriseMode ? 'cloud-enterprise' : 'cloud',
-                            }}
-                            type="primary"
-                            width="full lg:w-auto"
-                            className="shadow-md"
-                            to={
-                                enterpriseMode
-                                    ? 'https://posthog.com/signup/cloud/enterprise'
-                                    : `https://${
-                                          posthog?.isFeatureEnabled && posthog?.isFeatureEnabled('direct-to-eu-cloud')
-                                              ? 'eu'
-                                              : 'app'
-                                      }.posthog.com/signup`
-                            }
-                        >
-                            {enterpriseMode ? 'Get in touch' : 'Get started - free'}
-                        </TrackedCTA>
+                        <RenderInClient>
+                            <TrackedCTA
+                                event={{
+                                    name: `clicked Get started - free`,
+                                    type: enterpriseMode ? 'cloud-enterprise' : 'cloud',
+                                }}
+                                type="primary"
+                                width="full lg:w-auto"
+                                className="shadow-md"
+                                to={
+                                    enterpriseMode
+                                        ? 'https://posthog.com/signup/cloud/enterprise'
+                                        : `https://${
+                                              posthog?.isFeatureEnabled &&
+                                              posthog?.isFeatureEnabled('direct-to-eu-cloud')
+                                                  ? 'eu'
+                                                  : 'app'
+                                          }.posthog.com/signup`
+                                }
+                            >
+                                {enterpriseMode ? 'Get in touch' : 'Get started - free'}
+                            </TrackedCTA>
+                        </RenderInClient>
                     </div>
                 </div>
             </section>
