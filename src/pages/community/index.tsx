@@ -210,7 +210,7 @@ export default function CommunityPage({ params }: PageProps) {
     const [editModalOpen, setEditModalOpen] = useState(false)
     const [questions, setQuestions] = useState([])
     const [questionsLoading, setQuestionsLoading] = useState(true)
-    const { issues, pulls } = useStaticQuery(query)
+    const { issues, pulls, postHogStats, postHogComStats } = useStaticQuery(query)
 
     useEffect(() => {
         if (profile) {
@@ -279,6 +279,8 @@ export default function CommunityPage({ params }: PageProps) {
                                     setProfile={setProfile}
                                     setEditModalOpen={setEditModalOpen}
                                     profile={profile}
+                                    postHogStats={postHogStats}
+                                    postHogComStats={postHogComStats}
                                 />
                             }
                             tableOfContents={[
@@ -299,14 +301,61 @@ export default function CommunityPage({ params }: PageProps) {
     )
 }
 
+interface IGitHubStats {
+    commits: number
+    contributors: number
+    forks: number
+    stars: number
+}
+
+const Stat = ({ label, count }: { label: string; count: number }) => {
+    return (
+        <li className="flex flex-col">
+            <h5 className="m-0 text-sm opacity-60 font-semibold">{label}</h5>
+            <p className="m-0 text-sm font-semibold">{count.toLocaleString()}</p>
+        </li>
+    )
+}
+
+const Stats = ({
+    owner,
+    repo,
+    description,
+    stats,
+}: {
+    owner: string
+    repo: string
+    description: React.ReactNode
+    stats: IGitHubStats
+}) => {
+    return (
+        <div className="mb-6">
+            <Link to={`https://github.com/${owner}/${repo}`} external>
+                {owner}/{repo}
+            </Link>
+            <p className="m-0 text-sm">{description}</p>
+            <ul className="m-0 p-0 list-none flex space-x-2 mt-2">
+                <Stat label="Stars" count={stats?.stars} />
+                <Stat label="Contributors" count={stats?.contributors} />
+                <Stat label="Forks" count={stats?.forks} />
+                <Stat label="Commits" count={stats?.commits} />
+            </ul>
+        </div>
+    )
+}
+
 const ProfileSidebar = ({
     profile,
     setProfile,
     setEditModalOpen,
+    postHogStats,
+    postHogComStats,
 }: {
     profile?: SqueakProfile
     setProfile: (profile: SqueakProfile) => void
     setEditModalOpen: (open: boolean) => void
+    postHogStats: IGitHubStats
+    postHogComStats: IGitHubStats
 }) => {
     const { user, setUser } = useUser()
     useEffect(() => {
@@ -337,6 +386,24 @@ const ProfileSidebar = ({
                     )}
                 </div>
                 {profile ? <Profile setEditModalOpen={setEditModalOpen} profile={profile} /> : <Login />}
+            </SidebarSection>
+            <SidebarSection title="Stats for our popular repos">
+                <Stats
+                    stats={postHogComStats}
+                    owner="posthog"
+                    repo="posthog.com"
+                    description={
+                        <>
+                            The very website you're on <i>right now</i>!
+                        </>
+                    }
+                />
+                <Stats
+                    stats={postHogStats}
+                    owner="posthog"
+                    repo="posthog"
+                    description="The app you're here to learn about"
+                />
             </SidebarSection>
         </div>
     )
@@ -370,6 +437,18 @@ export const query = graphql`
                     username
                 }
             }
+        }
+        postHogComStats: gitHubStats(repo: { eq: "posthog.com" }) {
+            commits
+            contributors
+            forks
+            stars
+        }
+        postHogStats: gitHubStats(repo: { eq: "posthog" }) {
+            commits
+            contributors
+            forks
+            stars
         }
     }
 `

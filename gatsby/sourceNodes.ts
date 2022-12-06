@@ -1,6 +1,7 @@
 import fetch from 'node-fetch'
 import { MenuBuilder } from 'redoc'
 import { GatsbyNode } from 'gatsby'
+import parseLinkHeader from 'parse-link-header'
 
 export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createContentDigest, createNodeId }) => {
     const { createNode } = actions
@@ -46,10 +47,10 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         })
     }
 
-    const posthogIssues = await fetch(
+    const postHogIssues = await fetch(
         'https://api.github.com/repos/posthog/posthog/issues?sort=comments&per_page=5'
     ).then((res) => res.json())
-    posthogIssues.forEach((issue) => {
+    postHogIssues.forEach((issue) => {
         const { html_url, title, number, user, comments } = issue
         const data = {
             url: html_url,
@@ -75,10 +76,10 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         createNode(node)
     })
 
-    const posthogPulls = await fetch(
+    const postHogPulls = await fetch(
         'https://api.github.com/repos/posthog/posthog/pulls?sort=popularity&per_page=5'
     ).then((res) => res.json())
-    posthogPulls.forEach((issue) => {
+    postHogPulls.forEach((issue) => {
         const { html_url, title, number, user } = issue
         const data = {
             url: html_url,
@@ -102,6 +103,47 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         }
         createNode(node)
     })
+
+    const createGitHubStatsNode = async (owner, repo) => {
+        const repoStats = await fetch(`https://api.github.com/repos/${owner}/${repo}`).then((res) => res.json())
+        const contributors = await fetch(`https://api.github.com/repos/${owner}/${repo}/contributors?per_page=1`).then(
+            (res) => {
+                const link = parseLinkHeader(res.headers.get('link'))
+                const number = link?.last?.page
+                return number && Number(number)
+            }
+        )
+        const commits = await fetch(`https://api.github.com/repos/${owner}/${repo}/commits?per_page=1`).then((res) => {
+            const link = parseLinkHeader(res.headers.get('link'))
+            const number = link?.last?.page
+            return number && Number(number)
+        })
+        const { stargazers_count, forks_count } = repoStats
+
+        const data = {
+            owner,
+            repo,
+            stars: stargazers_count,
+            forks: forks_count,
+            commits,
+            contributors,
+        }
+
+        const node = {
+            id: createNodeId(`github-stats-${repo}`),
+            parent: null,
+            children: [],
+            internal: {
+                type: `GitHubStats`,
+                contentDigest: createContentDigest(data),
+            },
+            ...data,
+        }
+        createNode(node)
+    }
+
+    await createGitHubStatsNode('posthog', 'posthog')
+    await createGitHubStatsNode('posthog', 'posthog.com')
 
     const integrations = await fetch(
         'https://raw.githubusercontent.com/PostHog/integrations-repository/main/integrations.json'
