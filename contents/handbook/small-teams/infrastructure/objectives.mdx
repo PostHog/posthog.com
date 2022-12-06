@@ -1,14 +1,31 @@
-- Objective: High uptime and increase the resilience/redundancy
-    - Key results:
-      - Migrate postgres out of heroku
-      - Regular synthetic load testing on production
-    - Why?
-        - A lack of reliability will cause churn.
-- Objective: Meet the compliance needs of 5 companies that we cannot meet today
-    - Key result: EU Cloud is successfully managed
-    - Key result: Progress made on SOC2
-    - Why?
-        - Not having these is blocking customers, who we can often uniquely satisfy.
+## Q4 2022 Goals
+
+- Objective: Migrate PostgreSQL out of Heroku and into the correct AWS account
+  - Why? Reduce cost and reduce risk of us maxing out the instance
+- Objective: Most of the pipeline team has written/contributed to their own alerting system
+  - Once the system is set up well, would be good to get the other teams doing this too
+  - Why? Enable the pipeline team to self-serve their issues
+- Objective: Consolidate infrastructure into the correct AWS accounts (specifically US)
+  - Why? This will reduce the toil and AWS expenses
+- Objective: Keep infra spend flat at $120k/month
+  - Such as [Guido’s list](https://github.com/PostHog/posthog/issues/13153)
+  - *Will likely decrease cost first then increase with usage*
+  - Why? Improving our gross profit margin
+  
+## Q1 2023 Goals
+
+- Objective: Migrate PostgreSQL out of Heroku and into the correct AWS account
+  - Why? Reduce cost and reduce risk of us maxing out the instance
+- Objective: Most of the pipeline team has written/contributed to their own alerting system
+  - Once the system is set up well, would be good to get the other teams doing this too
+  - Why? Enable the pipeline team to self-serve their issues
+- Objective: Consolidate infrastructure into the correct AWS accounts (specifically US)
+  - Why? This will reduce the toil and AWS expenses
+- Objective: Keep infra spend flat at $120k/month
+  - Such as [Guido’s list](https://github.com/PostHog/posthog/issues/13153)
+  - *Will likely decrease cost first then increase with usage*
+  - Why? Improving our gross profit margin
+
 
 ## Roadmap
 
