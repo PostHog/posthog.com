@@ -1,5 +1,5 @@
 import Layout from 'components/Layout'
-import PostLayout from 'components/PostLayout'
+import PostLayout, { SidebarSection } from 'components/PostLayout'
 import { SEO } from 'components/seo'
 import { graphql } from 'gatsby'
 import { createHubSpotContact } from 'lib/utils'
@@ -36,8 +36,12 @@ type QuestionPageProps = {
     }
 }
 
-const QuestionSidebar = () => {
-    return <div></div>
+const QuestionSidebar = ({ question }: { question: Question }) => {
+    return (
+        <div>
+            <SidebarSection title="Topics">topics</SidebarSection>
+        </div>
+    )
 }
 
 export default function QuestionPage(props: QuestionPageProps) {
@@ -46,7 +50,12 @@ export default function QuestionPage(props: QuestionPageProps) {
     return (
         <Layout>
             <SEO title={`${props.data.question.subject} - PostHog`} />
-            <PostLayout title={props.data.question.subject} menu={menu} sidebar={<QuestionSidebar />} hideSurvey>
+            <PostLayout
+                title={props.data.question.subject}
+                menu={menu}
+                sidebar={<QuestionSidebar question={props.data.question} />}
+                hideSurvey
+            >
                 <section className="max-w-5xl mx-auto py-12">
                     <FullQuestion
                         apiHost="https://squeak.cloud"
