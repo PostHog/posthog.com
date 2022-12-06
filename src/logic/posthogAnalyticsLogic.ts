@@ -1,34 +1,17 @@
-import { kea, actions, reducers, listeners, afterMount } from 'kea'
+import { kea, actions, reducers, afterMount } from 'kea'
 
 export const posthogAnalyticsLogic = kea([
     actions(() => ({
         setPosthog: (posthog) => ({ posthog }),
-        setFeatureFlags: (flags) => ({ flags }),
     })),
 
     reducers(() => ({
         posthog: [
             undefined,
             {
-                setPosthog: (_, { posthog }) => (posthog && typeof window !== 'undefined' ? window.posthog : undefined),
+                setPosthog: (_, { posthog }) => posthog,
             },
         ],
-        featureFlags: [
-            undefined,
-            {
-                setFeatureFlags: (_, { flags }) => flags,
-            },
-        ],
-    })),
-
-    listeners(({ actions }) => ({
-        setPosthog: async ({ posthog }, breakpoint) => {
-            await breakpoint(1000)
-            posthog.onFeatureFlags &&
-                posthog?.onFeatureFlags(() => {
-                    actions.setFeatureFlags(window.posthog?.featureFlags?.flagCallReported)
-                })
-        },
     })),
 
     afterMount(({ actions }) => {

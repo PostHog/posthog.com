@@ -19,14 +19,14 @@ export const SignupCTA = ({
     width?: string
     event?: any
 }): JSX.Element => {
-    const { featureFlags } = useValues(posthogAnalyticsLogic)
+    const { posthog } = useValues(posthogAnalyticsLogic)
 
     return (
         <CallToAction
             type={type}
             className={className}
             width={width}
-            to={`https://${featureFlags?.['direct-to-eu-cloud'] ? 'eu' : 'app'}.posthog.com/signup`}
+            to={`https://${posthog?.isFeatureEnabled('direct-to-eu-cloud') ? 'eu' : 'app'}.posthog.com/signup`}
             event={event}
         >
             {text}
