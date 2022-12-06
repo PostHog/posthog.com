@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { CallToAction } from 'components/CallToAction'
+import usePostHog from 'lib/usePostHog'
 
 /**
  * A signup CTA that directs to the correct region (EU or US) based on feature flag.
@@ -17,14 +18,13 @@ export const SignupCTA = ({
     width?: string
     event?: any
 }): JSX.Element => {
+    const posthog = usePostHog()
     const [directToEu, setDirectToEu] = React.useState(false)
 
     useEffect(() => {
-        if (typeof window !== 'undefined') {
-            window.posthog.onFeatureFlags(() => {
-                setDirectToEu(window.posthog.isFeatureEnabled('test-direct-to-eu-cloud'))
-            })
-        }
+        posthog?.onFeatureFlags(() => {
+            setDirectToEu(posthog?.isFeatureEnabled('test-direct-to-eu-cloud'))
+        })
     }, [])
 
     return (
