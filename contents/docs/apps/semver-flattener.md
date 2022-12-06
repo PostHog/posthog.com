@@ -53,7 +53,7 @@ This app requires either PostHog Cloud, or a self-hosted PostHog instance runnin
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
-### How do I install the Downsampler app?
+### How do I install the SemVer Flattener app?
 
 1. Visit the 'Apps' page in your instance of PostHog.
 2. Search for 'SemVer Flattener' and select the app, press Install.
