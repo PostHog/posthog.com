@@ -54,30 +54,33 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, cache
 
     const questions = await getQuestions()
 
-    questions.forEach(({ question: { slug, id, subject, replies, published, resolved, profile_id, permalink } }) => {
-        const question = {
-            slug,
-            replies,
-            published,
-            resolved,
-            subject,
-            permalink,
-            profileId: profile_id,
-        }
+    questions.forEach(
+        ({ profile, question: { slug, id, subject, replies, published, resolved, profile_id, permalink } }) => {
+            const question = {
+                slug,
+                replies,
+                published,
+                resolved,
+                subject,
+                permalink,
+                profile,
+                profileId: profile_id,
+            }
 
-        const node = {
-            id: createNodeId(`question-${id}`),
-            parent: null,
-            children: [],
-            internal: {
-                type: `Question`,
-                contentDigest: createContentDigest(question),
-            },
-            ...question,
+            const node = {
+                id: createNodeId(`question-${id}`),
+                parent: null,
+                children: [],
+                internal: {
+                    type: `Question`,
+                    contentDigest: createContentDigest(question),
+                },
+                ...question,
+            }
+            createNode(node)
+            replies && createReplies(node, replies)
         }
-        createNode(node)
-        replies && createReplies(node, replies)
-    })
+    )
 
     const topics = await fetch(`${apiHost}/api/topics?organizationId=${organizationId}`).then((res) => res.json())
 

@@ -12,6 +12,9 @@ type Question = {
     permalink: string
     published: boolean
     subject: string
+    profile: {
+        id: string
+    }
     replies: {
         id: string
         body: string
@@ -39,7 +42,7 @@ type QuestionPageProps = {
 const QuestionSidebar = ({ question }: { question: Question }) => {
     return (
         <div>
-            <SidebarSection title="Topics">topics</SidebarSection>
+            <SidebarSection title="Posted by">{question.profile.id}</SidebarSection>
         </div>
     )
 }
