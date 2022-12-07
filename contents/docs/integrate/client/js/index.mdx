@@ -38,7 +38,7 @@ import JSCaptureIgnoreElements from './snippets/capture-ignore-elements.mdx'
 
 #### Tuning autocapture
 
-You can configure autocapture using the allowlists.
+You can configure autocapture using allowlists. If an array is passed for an allowlist, autocapture events will only be sent for elements matching at least one of the items in the array.
 
 For example, to only capture clicks on buttons on the docs section of the website that contain the data attribute `ph-autocapture` you can do:
 
@@ -47,7 +47,7 @@ posthog.init('sTMFPsFhdP1Ssg',
     {
         api_host: 'https://app.posthog.com',
         autocapture: {
-                event_allowlist: ['click'], // elements from this array ['click', 'change', 'submit']
+                event_allowlist: ['click'], // DOM events from this list ['click', 'change', 'submit']
                 url_allowlist: ['*/docs/*'], // strings or RegExps
                 element_allowlist: ['button'], // DOM elements from this list ['a', 'button', 'form', 'input', 'select', 'textarea', 'label']
                 css_selector_allowlist: ['[ph-autocapture]'] // List of CSS selectors
