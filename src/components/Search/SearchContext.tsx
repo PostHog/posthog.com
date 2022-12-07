@@ -3,7 +3,7 @@ import React, { Fragment } from 'react'
 import SearchResults from './SearchResults'
 import { InstantSearch } from 'react-instantsearch-hooks-web'
 import algoliasearch from 'algoliasearch/lite'
-import usePostHog from 'lib/usePostHog'
+import usePostHog from '../../hooks/usePostHog'
 
 type SearchContextValue = {
     isVisible: boolean

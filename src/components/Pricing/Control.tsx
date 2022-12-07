@@ -17,7 +17,7 @@ import { animateScroll as scroll } from 'react-scroll'
 import SelfHostOverlay from 'components/Pricing/Overlays/SelfHost'
 import EnterpriseOverlay from 'components/Pricing/Overlays/Enterprise'
 import WhyCloud from 'components/Pricing/Overlays/WhyCloud'
-import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
+import usePostHog from '../../hooks/usePostHog'
 import { useActions, useValues } from 'kea'
 import { TrackedCTA } from 'components/CallToAction'
 import Enterprise from 'components/Pricing/Modals/Enterprise'
@@ -27,6 +27,7 @@ import { pricing, pricingLabels } from 'components/Pricing/constants'
 import { ProductIcons } from '../ProductIcons/ProductIcons'
 import { NotProductIcons } from '../NotProductIcons/NotProductIcons'
 import Breakdown from './Breakdown'
+import { RenderInClient } from 'components/RenderInClient'
 import SelfHost from './SelfHost'
 
 const Benefit = ({ children }) => {
@@ -142,7 +143,7 @@ const Control = (): JSX.Element => {
     const [selfHost, setSelfHost] = useState(false)
     const [enterprise, setEnterprise] = useState(false)
     const [currentModal, setCurrentModal] = useState<string | boolean>(false)
-    const { posthog } = useValues(posthogAnalyticsLogic)
+    const posthog = usePostHog()
     const [showVolumeDiscounts, setShowVolumeDiscounts] = useState(false)
     const [showPlanBuilder, setShowPlanBuilder] = useState(false)
     const [enterpriseModalOpen, setEnterpriseModalOpen] = useState(false)
@@ -208,27 +209,29 @@ const Control = (): JSX.Element => {
                         <p className="text-lg font-semibold opacity-60">
                             After a generous monthly free tier, pricing scales with usage.
                         </p>
-
-                        <TrackedCTA
-                            event={{
-                                name: `clicked Get started - free`,
-                                type: enterpriseMode ? 'cloud-enterprise' : 'cloud',
-                            }}
-                            type="primary"
-                            width="full lg:w-auto"
-                            className="shadow-md"
-                            to={
-                                enterpriseMode
-                                    ? 'https://posthog.com/signup/cloud/enterprise'
-                                    : `https://${
-                                          posthog?.isFeatureEnabled && posthog?.isFeatureEnabled('direct-to-eu-cloud')
-                                              ? 'eu'
-                                              : 'app'
-                                      }.posthog.com/signup`
-                            }
-                        >
-                            {enterpriseMode ? 'Get in touch' : 'Get started - free'}
-                        </TrackedCTA>
+                        <RenderInClient>
+                            <TrackedCTA
+                                event={{
+                                    name: `clicked Get started - free`,
+                                    type: enterpriseMode ? 'cloud-enterprise' : 'cloud',
+                                }}
+                                type="primary"
+                                width="full lg:w-auto"
+                                className="shadow-md"
+                                to={
+                                    enterpriseMode
+                                        ? 'https://posthog.com/signup/cloud/enterprise'
+                                        : `https://${
+                                              posthog?.isFeatureEnabled &&
+                                              posthog?.isFeatureEnabled('direct-to-eu-cloud')
+                                                  ? 'eu'
+                                                  : 'app'
+                                          }.posthog.com/signup`
+                                }
+                            >
+                                {enterpriseMode ? 'Get in touch' : 'Get started - free'}
+                            </TrackedCTA>
+                        </RenderInClient>
                     </div>
                 </div>
             </section>

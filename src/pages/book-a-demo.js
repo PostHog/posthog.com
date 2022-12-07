@@ -5,7 +5,7 @@ import { SEO } from 'components/seo'
 import Intro from 'components/SignUp/Intro'
 import Layout from 'components/SignUp/Layout'
 import { useValues } from 'kea'
-import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
+import usePostHog from '../hooks/usePostHog'
 import React, { useEffect, useState } from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 
@@ -89,7 +89,7 @@ export default function SelfHost({ location }) {
             title: 'Select edition',
         },
     ]
-    const { posthog } = useValues(posthogAnalyticsLogic)
+    const posthog = usePostHog()
     const [demoType, setDemoType] = useState(location.state?.demoType)
     const [crumbs, setCrumbs] = useState(initialCrumbs)
 

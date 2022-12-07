@@ -10,7 +10,7 @@ import { RefinementListItem } from 'instantsearch.js/es/connectors/refinement-li
 import { StaticImage } from 'gatsby-plugin-image'
 import { CallToAction } from 'components/CallToAction'
 import { Search } from 'components/Icons/Icons'
-import usePostHog from 'lib/usePostHog'
+import usePostHog from '../../hooks/usePostHog'
 
 type Result = Hit<{
     id: string
