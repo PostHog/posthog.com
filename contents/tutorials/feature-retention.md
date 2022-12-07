@@ -1,5 +1,5 @@
 ---
-title: How to discover which features drive retention
+title: How to discover features that drive user retention
 sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
@@ -17,9 +17,10 @@ This tutorial will help you discover the features that drive retention and keep 
 The first step in understanding feature retention is knowing what data you have. You need data from your product’s features to know anything about their retention. There are two ways to do this:
 
 1. Add the [snippet](/docs/integrate/client/snippet-installation) or install the [JavaScript library](/docs/integrate/client/js) to enable [autocapture](/docs/integrate/client/js#autocapture). Find autocaptured events related to the feature (views, button presses, inputs). Create an [action](/manual/actions) (a combination of events) using the toolbar or under “Data Management” in the sidebar to represent that feature’s usage.
+
 2. Add event capture calls manually into the code that encompasses the feature usage. Use functions, methods, hooks, or other structures in your code to represent a feature’s usage.
 
-> **Note:** be sure to think about the relative effort it takes to use a feature. For example, a long form submission is more difficult than a video view. Users take an action more often when it is easier. An event that takes more work happens less, and this can correlate to lower retention.
+> **Note:** Be sure to think about the relative effort it takes to use a feature. For example, a long form submission is more difficult than a video view. Users take an action more often when it is easier. An event that takes more work happens less, and this can correlate to lower retention.
 
 See the [event tracking guide](/tutorials/event-tracking-guide) for more details on setting up tracking in PostHog.
 
@@ -67,8 +68,9 @@ Comparing the stickiness of your features gives you more insight into which ones
 
 Once you set up your dashboard with feature trends, retention, and stickiness, you should have an idea of what features drive retention and keep users coming back. You can then use these insights to improve your product. There are two key actions you can take:
 
-1. **Promoting high retention features:** double down on high retention features by promoting them more and putting them front and center. For example, you can adjust your UI to have clearer paths to those features.
-2. **Improving low retention features:** fix the features with low retention. Run experiments to improve them and track retention improvement with your dashboard. If that doesn’t work, you can stop working on them, or if you think the impact is extremely negative, you can drop the feature entirely.
+1. **Promoting high retention features:** Double down on high retention features by promoting them more and putting them front and center. For example, you can adjust your UI to have clearer paths to those features.
+
+2. **Improving low retention features:** Fix the features with low retention. Run experiments to improve them and track retention improvement with your dashboard. If that doesn’t work, you can stop working on them, or if you think the impact is extremely negative, you can drop the feature entirely.
 
 Now you have a better idea of the features that drive user retention and keep them coming back. You can continue to use the dashboard you created to keep track of this and make changes to your features that help you drive higher retention in your product.
 
