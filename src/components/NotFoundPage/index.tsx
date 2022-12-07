@@ -1,7 +1,7 @@
 import Chip from 'components/Chip'
 import { useValues } from 'kea'
 import React, { useEffect, useState } from 'react'
-import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
+import usePostHog from '../../hooks/usePostHog'
 import { BasicHedgehogImage } from '../BasicHedgehogImage'
 import { CallToAction } from '../CallToAction'
 import Layout from '../Layout'
@@ -10,7 +10,7 @@ import pizzaFight from '../../lotties/pizza-fight.json'
 import SearchBox from 'components/Search/SearchBox'
 
 export default function NotFoundPage(): JSX.Element {
-    const { posthog } = useValues(posthogAnalyticsLogic)
+    const posthog = usePostHog()
     const [submittedPreference, setSubmittedPreference] = useState(false)
 
     useEffect(() => {

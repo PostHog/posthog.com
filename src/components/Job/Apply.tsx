@@ -9,8 +9,7 @@ import Confetti from 'react-confetti'
 import GitHubButton from 'react-github-btn'
 import { NewsletterForm } from 'components/NewsletterForm'
 import NotProductIcons from 'components/NotProductIcons'
-import { useValues } from 'kea'
-import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
+import usePostHog from '../../hooks/usePostHog'
 import { RenderInClient } from 'components/RenderInClient'
 const allowedFileTypes = ['application/pdf']
 
@@ -196,7 +195,7 @@ const Form = ({ setSubmitted, info, id }) => {
 const code = 'X7DABDB33723'
 
 export default function Apply({ id, info }) {
-    const { posthog } = useValues(posthogAnalyticsLogic)
+    const posthog = usePostHog()
     const [submitted, setSubmitted] = useState(false)
     const [copyTooltip, setCopyTooltip] = useState(false)
     const [copied, setCopied] = useState(false)

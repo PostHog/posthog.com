@@ -1,8 +1,7 @@
-import { useValues } from 'kea'
-import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
 import React from 'react'
 import { Spacer } from '../Spacer'
 import { CalendlyEventListener, EventScheduledEvent, InlineWidget } from 'react-calendly'
+import usePostHog from '../../hooks/usePostHog'
 
 export const DemoScheduler = ({
     iframeSrc = 'https://calendly.com/d/ckz-37j-jz9/posthog-scale-customer-success-demo',
@@ -11,7 +10,7 @@ export const DemoScheduler = ({
     iframeSrc?: string
     type?: string
 }): JSX.Element => {
-    const { posthog } = useValues(posthogAnalyticsLogic)
+    const posthog = usePostHog()
     const calendlyEventScheduled = (e: EventScheduledEvent) => {
         const { event, payload = null } = e.data
         posthog?.capture(event, {
