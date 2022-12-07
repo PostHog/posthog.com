@@ -1,12 +1,15 @@
 ## Q4 2022 Goals
 
-- Objective: Migrate PostgreSQL out of Heroku and into the correct AWS account
-  - Why? Reduce cost and reduce risk of us maxing out the instance
-- Objective: Most of the pipeline team has written/contributed to their own alerting system
-  - Once the system is set up well, would be good to get the other teams doing this too
-  - Why? Enable the pipeline team to self-serve their issues
-- Objective: Consolidate infrastructure into the correct AWS accounts (specifically US)
-  - Why? This will reduce the toil and AWS expenses
+- Objective: Reduce TOIL
+  - KR: Migrate PostgreSQL out of Heroku and into the correct AWS account
+    - Why? Reduce cost and reduce risk of us maxing out the instance
+  - KR: Consolidate infrastructure into the correct AWS accounts (specifically US)
+    - Why? This will reduce the toil and AWS expenses
+- Objective: Support other teams and enable other teams to self-serve
+  - KR: Most of the pipeline team has written/contributed to their own alerting system
+    - Once the system is set up well, would be good to get the other teams doing this too
+    - Why? Enable the pipeline team to self-serve their issues
+  - Metric to track: % of non-infra hero time supporting other teams  
 - Objective: Keep infra spend flat at $120k/month
   - Such as [Guido’s list](https://github.com/PostHog/posthog/issues/13153)
   - *Will likely decrease cost first then increase with usage*
