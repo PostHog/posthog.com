@@ -9,7 +9,7 @@ topics:
 
 ### What does the Pineapple Mode app do?
 
-Activating Pineapple Mode enables you to make it rain pineapples all over your product or website. Yes, really.
+Activating Pineapple Mode makes it rain pineapples all over your product or website. Yes, really.
 
 ### OK, but why does Pineapple Mode do that?
 
