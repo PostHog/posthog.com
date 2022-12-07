@@ -1,7 +1,7 @@
 ---
 title: Feedback Widget
 github: https://github.com/PostHog/feedback-app
-installUrl: https://app.posthog.com/project/apps?name=Feedback-App
+installUrl: https://app.posthog.com/project/apps?name=Feedback%20Widget
 thumbnail: ../../apps/thumbnails/feedback-widget.png
 topics:
     - feedback-widget
@@ -13,7 +13,7 @@ This app enables you to gather feedback from your users and ingest it as an even
 
 It looks like this...
 
-![site-apps](../images/blog/feedback-widget.gif)
+![Feedback widget](../../images/blog/feedback-widget.gif)
 
 ### What are the requirements for this app?
 
@@ -21,13 +21,13 @@ First, you need to opt in to the site apps beta. You'll need to be on PostHog 1.
 
 You can opt in to the beta by configuring your `posthog-js` initialization to include `opt_in_site_apps: true`. Please be aware you do this at your own risk.
 
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
+Not running 1.41.0? Find out [how to update your self-hosted PostHog deployment](/docs/runbook/upgrading-posthog)!
 
 ### How do I install the Feedback Widget?
 
-1. First, opt into the site apps beta by setting your `posthog-js` initialization to include `opt_in_site_apps: true`.  
+1. Opt into the site apps beta by setting your `posthog-js` initialization to include `opt_in_site_apps: true`.  
 2. Visit the 'Apps' page in your instance of PostHog.
-3. Search for 'Feedback App' and select the app, press Install.
+3. Search for 'Feedback Widget' and select the app, press Install.
 4. Follow the on-screen steps to configure the app.
 
 ## Can I make my own site apps?
