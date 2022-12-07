@@ -1,35 +1,48 @@
-### Objective: Make feature flags incredible to use for customers with 3-15 engineers ([currently we have](https://app.posthog.com/insights/Bmz6U0tS) 10 customers with 3+ engineers who have created a feature flag in the last 30 days)
-
-- **Key Result:** Launch remaining major platforms (with large marketing support to further drive adoption)
-    - iOS
-    - Android
-    - Flutter
-- **Key Result:** 5 happy teams on permission and alerting features
-    - alerting/notification hooks to slack
-    - access control
-    - prevent accidental rollouts - 100% rollout should be loud and clear
-- **Key Result:** 5 happy teams using feature flags based on cohorts
-    - bulk add emails to cohorts
-    - view cohorts by organization
-    - edit static cohorts
-    - cohort creation improvement, flexible user additions
-    - cohorts by groups
-- **Key Result:** Release beta of developer integrated features with 5 users
-    - connect codebase and show feature flag coverage by branch
-    - reorient feature flag page to show flags that are active AND implemented
-    - Opportunity: Allow debugging integrations to be added and do issue tracking related to possible active feature flags
-    - (stretch goal) CI implementation that allows people to check flags in code deployment against what's active + exists
+### Objective: Increase deployability of Feature Flags
 
 * **Rationale:**
-    * We want feature flags to be used across larger engineering teams. Currently we aren't solving their needs fully but we have a clear path to doing so.
-
-### Objective: Launch Direct SQL Querying Beta
-
-* **Key Result:**
-     * Five beta users who retain for three weeks
-* **Key Result:**
-     * Understand the possible product directions to extend direct sql querying
-
-* **Rationale:**
-     * To fully support our technical users, we need to allow them to ask any sort of question about their data that might not be fit for an interface
+     * Feature flags is a high friction feature. Unlike adding a snippet or simple line to track an event, engineers and product owners need to plan for their product to work with the flag on and off. 
+     To fully enable engineers to build with feature flags, we should make it remarkably easy to create flags.
  
+- **Key Result:** Activation rate of users using flags by 20% (Base metric TBD)
+- **Key Result:** TBD
+    
+Possible avenues:
+- Auto detection of feature flags being sent that don't have a corresponding flag in posthog and easy creation (like github asking for branch to PR)
+- API Enablement. Create experiments or feature flags using posthog API.
+- Better hook and time to deployment with feature flag creation when someone lands on the feature flag page
+- Less related but important: JSON flags, feature flag resiliency
+
+### Objective: Understand similarities between users throughout posthog
+
+* **Rationale:**
+     * Help engineers stay focused on building. Give them as close to the answers and insights as possible with ample proof and dropoff points for further exploration.
+ 
+- **Key Result:** Internal discoveries around different segments of users and groups
+- **Key Result:** 
+
+ Possible avenues:
+- Cohort correlation. What are property and behavioral similarities between users in this cohort
+- Experiment correlation. What are property and behavioral similarities between successful and failing variants
+
+
+### Objective: Nail feature analysis
+
+- **Key Result:** Our growth team is able to ship and draw conclusions painlessly on every feature being tested
+- **Key Result:** TBD
+
+* **Rationale:**
+     * We have internal power users on the growth team who actively find value in deploying with experiments. Making the act of quick insights for features seamless sets us up to deliver an opinionated workflow
+
+Possible avenues:
+- Complete visibility into who's seeing a flag enabled feature. See recordings connected with users
+- Clarity around how users are bucketed in experiments. How do release conditions relate to control vs variants and how do variant overrides relate to those?
+- Experiments UX (pushed from last Q)
+
+### Possible Objective: Direct SQL Querying
+
+- **Key Result:** TBD
+- **Key Result:** TBD
+
+* **Rationale:**
+     * To support users who want to ask free formed questions about their event and user data.
