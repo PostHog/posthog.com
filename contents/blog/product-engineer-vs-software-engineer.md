@@ -48,13 +48,15 @@ They spend time communicating with users, their team, and other members of the c
 
 Software engineers focus on writing code, testing it, and maintaining it. They look for ways to optimize code, improve scalability, and solve bugs. They are deeply focused on specific areas of technology, whether that is databases, data pipelines, backend APIs, or client-side app frameworks. This means researching and reading documentation, updates, and code.
 
-## What do their teams and companies look like?
+## Why do companies choose product versus software engineers?
 
-Product engineers are often a part of smaller teams, where they must do more themselves. Startups, and earlier-stage companies that require people to do more, are often looking for product engineers (even if they don’t say it). They need people who can own large decisions and ship quickly. Product engineers fit this need.
+Product engineers are often a part of smaller teams, where they must do more themselves. Startups and earlier-stage companies that require people to do more are often looking for product engineers (even if they don’t say it). They need people who can own large decisions and ship quickly. Product engineers fit this need.
 
 Software engineers are part of larger teams, usually spread out across multiple teams. They have a team to support them, so they can specialize. Their team might include designers, product managers, and marketers. This allows them to think less about if what they are building is right, and more about the implementation.
 
-At the end of the day, it’s up to the company and team to decide what roles they need. There are always debates about what the right structure and right roles are. Product engineers and software engineers both have their place in the tech world. It all comes down to the goals of the team and the needs of the customers.
+Companies choose roles and team structures based on their goals. Small companies (or innovative teams within larger companies) need people who can ideate and execute product ideas. Large and mature companies need people who can specialize in key areas of technology and optimize them.
+
+For example, when Elon Musk bought Twitter, he had the goal of making dramatic changes to the product. He needed product engineers to quickly execute these changes. He wanted proof they could do this, which is why he forced engineers to show him what code they shipped recently. He didn't need software engineers to continue to maintain or optimize the existing codebase. This led to a big shift in team structure, with a large number of software engineers (and other roles) leaving the company.
 
 ## What’s right for you?
 
@@ -66,7 +68,7 @@ As a company, having software engineers appeals to companies with a large-scale 
 
 Startups or companies that want to be agile and move fast, should look for product engineers. Product engineers have a holistic view of the product and the ability to move fast when the need arises.
 
-Picking what is right is up to the company and its culture. If focusing on building great products is a priority, product engineers might be a better choice. If scaling and building expertise throughout the company is a focus, then software engineers are likely better. Companies with both types of roles have succeeded and more will continue to succeed.
+Picking what is right is up to the company and its goals. If you're a small team focusing on building great products, multi-skilled product engineers who can talk to users are a great choice. If your larger product requires specialization to scale and maintain, software engineers are the better choice. Companies with both types of roles have succeeded and more will continue to succeed.
 
 ## Further reading
 
