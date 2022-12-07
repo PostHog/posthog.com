@@ -27,6 +27,7 @@ import { pricing, pricingLabels } from 'components/Pricing/constants'
 import { ProductIcons } from '../ProductIcons/ProductIcons'
 import { NotProductIcons } from '../NotProductIcons/NotProductIcons'
 import Breakdown from './Breakdown'
+import SelfHost from './SelfHost'
 
 const Benefit = ({ children }) => {
     return (
@@ -200,7 +201,6 @@ const Control = (): JSX.Element => {
                         />
                     </div>
                     <div className="lg:order-1 mb-12">
-                        <p className="font-semibold opacity-60 mb-4">Self-hosted or PostHog Cloud (US or EU)</p>
                         <h1 className="text-3xl sm:text-4xl md:text-5xl mt-0 mb-2">
                             Get the whole hog. <br />
                             <span className="text-red">Only pay for what you use.</span>
@@ -314,9 +314,7 @@ const Control = (): JSX.Element => {
 
             <section className={`${section} mb-12`}>
                 <div className="bg-black rounded-md flex flex-col lg:items-center lg:flex-row justify-between p-8">
-                    <h3 className="text-white mb-4 lg:mb-0 pb-0 leading-none">
-                        Try PostHog free. Cloud or self-hosted.
-                    </h3>
+                    <h3 className="text-white mb-4 lg:mb-0 pb-0 leading-none">Try PostHog Cloud free.</h3>
                     <aside>
                         <TrackedCTA
                             event={{
@@ -453,7 +451,6 @@ const Control = (): JSX.Element => {
                     </div>
                 </div>
             </section>
-
             <section className={`${section} mt-12 px-0 md:px-4`}>
                 <h2 className="text-2xl m-0 flex items-center">What comes in PostHog?</h2>
                 <p className="m-0 text-black/50 font-medium mb-7">Get access to all features and no plan limits.</p>
@@ -461,11 +458,18 @@ const Control = (): JSX.Element => {
             </section>
             <section className={`${section} mb-12 mt-12 md:mt-24 md:px-4`}>
                 <h2 className="text-2xl m-0 flex items-center border-b border-dashed border-gray-accent-light pb-4">
+                    <SelfHostIcon className="opacity-30 w-[36px] mr-2" />
+                    <span>Want to self-host PostHog?</span>
+                </h2>
+                <SelfHost />
+            </section>
+            <section className={`${section} mb-12 mt-12 md:mt-24 md:px-4`}>
+                <h2 className="text-2xl m-0 flex items-center border-b border-dashed border-gray-accent-light pb-4">
                     Compare all plans
                 </h2>
                 <AllPlans />
             </section>
-            <section className={`${section} my-12  md:px-4`}>
+            <section className={`${section} mb-12 mt-12 md:mt-24 md:px-4`}>
                 <h2 className="text-2xl m-0 mb-6 pb-6 border-b border-gray-accent-light border-dashed">Questions</h2>
                 <FAQs />
             </section>

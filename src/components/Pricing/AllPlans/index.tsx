@@ -52,19 +52,7 @@ const cloudPlans: IPlan[] = [
 
 const selfHostPlans: IPlan[] = [
     {
-        title: 'Self-serve',
-        description: 'with community support',
-        pricing: {
-            event: 0.00045,
-        },
-        mainCTA: {
-            title: 'Get started',
-            url: 'https://license.posthog.com/',
-        },
-        pricingOption: 'self-hosted',
-    },
-    {
-        title: 'with Enterprise package',
+        title: 'Enterprise starting from $5,000/month',
         description: 'Slack-based priority support, SSO, advanced permissions',
         pricing: {
             event: 0.00045,
@@ -75,18 +63,6 @@ const selfHostPlans: IPlan[] = [
             url: 'https://license.posthog.com/?price_id=price_1L1AeWEuIatRXSdzj0Y5ioOU',
         },
         pricingOption: 'self-hosted-enterprise',
-    },
-    {
-        title: 'Open Source',
-        description: 'Limited, but free forever',
-        pricing: {
-            event: 0,
-        },
-        mainCTA: {
-            title: 'Visit GitHub',
-            url: 'https://github.com/PostHog/posthog',
-        },
-        pricingOption: 'open-source',
     },
 ]
 
@@ -163,7 +139,7 @@ export default function AllPlans() {
     return (
         <>
             <div
-                className={`grid md:grid-cols-5 md:gap-x-6 md:gap-y-0 gap-y-10 my-9 transition-all ${
+                className={`grid md:grid-cols-3 md:gap-x-6 md:gap-y-0 gap-y-10 my-9 transition-all ${
                     showComparison ? 'lg:ml-[180px]' : ''
                 }`}
             >
@@ -175,7 +151,7 @@ export default function AllPlans() {
                     plans={cloudPlans}
                 />
                 <PlanSection
-                    className="md:col-span-3"
+                    className="md:col-span-1"
                     title="Self-hosted"
                     subtitle="Deploy to your private cloud or infrastructure"
                     Icon={SelfHostIcon}
