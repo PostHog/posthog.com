@@ -11,19 +11,28 @@ featuredImageType: full
 categories: ["Startups", "Guides"]
 ---
 
-There are always arguments about what is the best way to run a tech company, how you should structure a company, and what roles you should have. Tech companies are endlessly trying to innovate in company composition to get work done effectively.
+Software companies are changing. Where once product managers and software engineers dominated, now a new role is emerging: the [product engineer](/blog/what-is-a-product-engineer).
 
-A recent addition to the debate is the role of the product engineer. The role of the product engineer changed the way companies think about engineering. Is a greater focus on product necessary to succeed now? Are older structures and engineering roles outdated?
+Want proof? Look at this graph:
 
-To help you think through this yourself, we’ll compare the role of product engineer with the role of software engineer.
+![product-engineer-trends](../images/blog/product-engineer-trend.png)
+
+Online searches for product engineers have grown over 80% in the last year and are 3x greater now than just two years ago.
+
+Product engineers are changing the way companies think about engineering. To help explain why, we’ll compare the role of product engineer with the traditional (and still very necessary) role of full-stack software engineer.
 
 ## How are product and software engineers different?
 
-A product engineer focuses on building great products. This means they own the product and are responsible for its successes and failures. Product engineers care about solving users’ problems and must be empathetic towards them for their usage. They build with the user in mind and create what users need for success.
+Here's the TL;DR: 
+- Product engineers focus on building great products.
+- Software engineers focus on building great software.
+- But they both write and commit code.
 
-Software engineers on the other hand focus on building great software. Their primary purpose is to write clean, efficient, and secure code. They own the code they write. They care more about solving technical problems and optimizing systems.
+Let's break those points down a bit more.
 
-Many software engineers have less say in what they work on. They have flexibility with implementation, but they aren’t making product decisions. Their team helps them with that, meaning they can focus on the technical implementation.
+Product engineers own the product and are responsible for its successes and failures. They're empathetic towards users and care about solving their problems. They build with the user in mind and create what users need for success.
+
+In contrast, software engineers own the code they write. They care more about solving technical problems, optimizing systems, and writing clean, secure code. They have flexibility with implementation, but they aren’t making product decisions.
 
 Product engineers are less focused on implementation and focus more on solving the users’ problems. In this way, they are pragmatic. They are willing to build fast, iterate, or even from scratch if needed.
 
@@ -31,13 +40,13 @@ Software engineers are more idealistic. They look for the best solution to the p
 
 ## How do they spend their time?
 
-Product engineers spend their time in a variety of ways. A majority of their time is still spent coding, but they have responsibilities outside of coding than software engineers.
+Product engineers still spend the majority of their time coding, but they have responsibilities outside of coding that software engineers don't.
 
 Product engineers also spend their time talking to customers, digging into usage data, and researching the competitive landscape. They test other products, build prototypes, and brainstorm experiments to make their product better.
 
 They spend time communicating with users, their team, and other members of the company. They communicate what they learned in research, why their work relates to that research, and how to prioritize what to work on next. They own the product roadmap, and this comes with a responsibility to communicate it.
 
-Software engineers focus on writing code, testing it, and maintaining it. They  look for ways to optimize code, improve scalability, and solve bugs. They are deeply focused on specific areas of technology, whether that is databases, data pipelines, backend APIs, or client-side app frameworks. This means researching and reading documentation, updates, and code.
+Software engineers focus on writing code, testing it, and maintaining it. They look for ways to optimize code, improve scalability, and solve bugs. They are deeply focused on specific areas of technology, whether that is databases, data pipelines, backend APIs, or client-side app frameworks. This means researching and reading documentation, updates, and code.
 
 ## What do their teams and companies look like?
 
