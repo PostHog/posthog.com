@@ -1,4 +1,4 @@
-import { CallToAction } from 'components/CallToAction/index.js'
+import { CallToAction } from 'components/CallToAction/index.tsx'
 import Contact from 'components/Contact'
 import { Title } from 'components/Pricing/PricingTable/Plan'
 import { SEO } from 'components/seo'

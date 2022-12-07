@@ -9,6 +9,8 @@ import Confetti from 'react-confetti'
 import GitHubButton from 'react-github-btn'
 import { NewsletterForm } from 'components/NewsletterForm'
 import NotProductIcons from 'components/NotProductIcons'
+import { useValues } from 'kea'
+import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
 const allowedFileTypes = ['application/pdf']
 
 interface IResumeComponentProps {
@@ -193,6 +195,7 @@ const Form = ({ setSubmitted, info, id }) => {
 const code = 'X7DABDB33723'
 
 export default function Apply({ id, info }) {
+    const { posthog } = useValues(posthogAnalyticsLogic)
     const [submitted, setSubmitted] = useState(false)
     const [copyTooltip, setCopyTooltip] = useState(false)
     const [copied, setCopied] = useState(false)
@@ -353,7 +356,11 @@ export default function Apply({ id, info }) {
 
                                     <TrackedCTA
                                         className="mt-auto"
-                                        href="https://app.posthog.com/signup"
+                                        html={`https://${
+                                            posthog?.isFeatureEnabled && posthog?.isFeatureEnabled('direct-to-eu-cloud')
+                                                ? 'eu'
+                                                : 'app'
+                                        }.posthog.com/signup`}
                                         size="sm"
                                         event={{ name: `clicked Continue`, type: 'cloud' }}
                                     >

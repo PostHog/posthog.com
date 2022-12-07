@@ -1,4 +1,4 @@
-import { TrackedCTA } from 'components/CallToAction/index.js' // TEMP
+import { TrackedCTA } from 'components/CallToAction/index.tsx' // TEMP
 import Contact from 'components/Contact'
 import { Title } from 'components/Pricing/PricingTable/Plan'
 import { SEO } from 'components/seo'

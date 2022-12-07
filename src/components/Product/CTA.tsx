@@ -2,6 +2,7 @@ import { CallToAction } from 'components/CallToAction'
 import Logo from 'components/Logo'
 import React from 'react'
 import { DemoLink } from 'components/DemoLink'
+import { SignupCTA } from 'components/SignupCTA'
 
 export default function CTA({ className = '' }) {
     return (
@@ -32,9 +33,7 @@ export default function CTA({ className = '' }) {
             </div>
 
             <div className="space-y-4 md:space-y-0 md:space-x-4 flex items-center">
-                <CallToAction type="primary" className="!w-full md:!w-auto" to="https://app.posthog.com/signup">
-                    Try PostHog Cloud - free
-                </CallToAction>
+                <SignupCTA className="!w-full md:!w-auto" text="Try PostHog Cloud - free" />
                 <div className="inline-flex items-center space-x-4">
                     <span>or</span>
                     <DemoLink dark />

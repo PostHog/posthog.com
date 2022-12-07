@@ -1,4 +1,4 @@
-import { TrackedCTA } from 'components/CallToAction/index.js'
+import { TrackedCTA } from 'components/CallToAction/index.tsx'
 import { Check2 } from 'components/Icons/Icons'
 import Link from 'components/Link'
 import CallToAction from 'components/MainNav/Submenus/CallToAction'

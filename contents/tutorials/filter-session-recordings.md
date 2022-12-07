@@ -63,7 +63,7 @@ As before, you can then search within a specific recording to find the event you
 ### How to filter recordings based on device, location or OS
 Often, you’ll want to combine several persons filters with events filters so that you can, for example, find users who completed a specific action on Mac OS, or called a particular feature flag within the UK. 
 
-![quick filters](../images/tutorials/session-recordings/quick-filters-recordings.png)
+![quick filters](../images/tutorials/session-recordings/quick-filter-recordings.png)
 
 In such instances you may want to build filters based on device, OS, location or browser with a single click. That’s why we built the quick filter options which you can see on each entry in the recent recordings column — simply click a matching icon to filter for similar recordings. 
 

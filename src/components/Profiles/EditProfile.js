@@ -44,7 +44,7 @@ const ValidationSchema = Yup.object().shape({
     github: Yup.string().url('Invalid URL').nullable(),
     linkedin: Yup.string().url('Invalid URL').nullable(),
     twitter: Yup.string().url('Invalid URL').nullable(),
-    biography: Yup.string().max(280, 'Exceeds 280 characters').nullable(),
+    biography: Yup.string().max(3000, 'Please limit your bio to 3,000 characters, you wordsmith!').nullable(),
 })
 
 export default function EditProfile({ profile, onSubmit }) {
