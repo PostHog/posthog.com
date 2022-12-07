@@ -48,7 +48,7 @@ How you're trying to get feedbac matters.
 
 * We get 20x higher response rates through Slack. We've recently started doing this in our product directly too.
 * Be specific and make it easy for users to respond to you. What type of feedback is most useful?
-* We're experimenting with asking inside hte app.
+* We're experimenting with asking inside the app.
 
 ## My users churn
 
