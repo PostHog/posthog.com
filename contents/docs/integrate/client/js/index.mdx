@@ -36,19 +36,41 @@ import JSCaptureIgnoreElements from './snippets/capture-ignore-elements.mdx'
 
 <JSAutoCapture />
 
+#### Tuning autocapture
+
+You can configure autocapture using the allowlists.
+
+For example, to only capture clicks on buttons on the docs section of the website that contain the data attribute `ph-autocapture` you can do:
+
+```js
+posthog.init('sTMFPsFhdP1Ssg',
+    {
+        api_host: 'https://app.posthog.com',
+        autocapture: {
+                event_allowlist: ['click'], // elements from this array ['click', 'change', 'submit']
+                url_allowlist: ['*/docs/*'], // strings or RegExps
+                element_allowlist: ['button'], // DOM elements from this list ['a', 'button', 'form', 'input', 'select', 'textarea', 'label']
+                css_selector_allowlist: ['[ph-autocapture]'] // List of CSS selectors
+            }
+    }
+)
+```
+
+The allowlists only change autocapture, they won't change the data collected by session recordings.
+
 <JSCaptureIgnoreElements />
 
-#### Important notes on autocapture
+Alternatively you can disable autocapture completely by setting `autocapture: false` in the config.
 
-While autocapture allows you to track the majority of general events on your website right out of the gate, it is important to note that, for security reasons, PostHog is very conservative regarding `input` tags. In order to prevent passwords or other sensitive data from being collected, very little data is collected from inputs with autocapture.
+Disabling autocapture **will not disable session recording**. You can disable session recording using `disable_session_recording` or by turning it off in your project's settings.
+
+#### Autocapture on input elements
+
+For security reasons, PostHog is very conservative regarding `input` tags to prevent passwords or other sensitive data from being collected.
 
 Specifically, PostHog autocapture will grab only the `name`, `id`, and `class` attributes from `input` tags.
 
-As such, you should be aware of this when you start, in order to understand why you may be getting less data than expected.
-
-If you need to collect more data from inputs, you should look into [Custom events and Actions](/docs/user-guides/actions).
-
-Another important thing to note is that disabling autocapture **will not disable session recording**. You can disable session recording too using `disable_session_recording` or by turning it off in your project's settings.
+Sometimes less data might be collected than expected. If you need to collect more data from inputs, you should look into [Custom events and Actions](/docs/user-guides/actions).
 
 ### Website vs app
 
