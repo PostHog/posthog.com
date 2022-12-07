@@ -43,9 +43,9 @@ You can configure autocapture using allowlists. If an array is passed for an all
 For example, to only capture clicks on buttons on the docs section of the website that contain the data attribute `ph-autocapture` you can do:
 
 ```js
-posthog.init('sTMFPsFhdP1Ssg',
+posthog.init('[your api key]',
     {
-        api_host: 'https://app.posthog.com',
+        api_host: 'https://posthog.[your-domain].com',
         autocapture: {
                 event_allowlist: ['click'], // DOM events from this list ['click', 'change', 'submit']
                 url_allowlist: ['*/docs/*'], // strings or RegExps
