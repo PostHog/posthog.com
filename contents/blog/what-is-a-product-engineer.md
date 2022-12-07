@@ -1,6 +1,6 @@
 ---
 date: 2022-12-01
-title: "What is a product engineer (and why they matter)"
+title: "What is a product engineer (and why they're awesome)"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
