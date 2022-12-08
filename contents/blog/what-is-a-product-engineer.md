@@ -83,7 +83,7 @@ Because they build prototypes and are self-reliant, product engineers often have
 
 ### Reliant on automation and CI/CD systems.
 
-Shipping fast and talking to customers requires time on top of engineering requires time. Product engineers get this time by relying on devtools and automation. Ideally, they are spending little of their time on testing, infrastructure, and deployment. Companies might have separate teams for this or rely on the growing number of product enabling product engineers (like some of the ones we’ve quoted here). Developer tooling is a key part of [Ashby’s](https://www.ashbyhq.com/) team:
+Shipping fast and talking to customers requires time on top of engineering. Product engineers get this time by relying on devtools and automation. Ideally, they are spending little of their time on testing, infrastructure, and deployment. Companies might have separate teams for this or rely on the growing number of product enabling product engineers (like some of the ones we’ve quoted here). Developer tooling is a key part of [Ashby’s](https://www.ashbyhq.com/) team:
 
 > “Great developer tooling. Our CI/CD takes ~10m, and we deploy at least 5x a day. Everyone on the team has contributed to developer experience 💪🏾”
 
