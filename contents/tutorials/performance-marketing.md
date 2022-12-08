@@ -3,7 +3,7 @@ title: How to track performance marketing in PostHog
 sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
-date: 2022-12-02
+date: 2022-12-08
 featuredImage: ../images/tutorials/banners/performance-marketing.png
 topics: ['funnels', 'insights']
 --- 
@@ -21,7 +21,7 @@ PostHog automatically captures UTMs via our JavaScript library (and snippet). Th
 - `utm_medium`: traffic medium, like social or paid (ad)
 - `utm_campaign`: related campaign, like `brand_awareness` or `holiday_sale`
 - `utm_content`: content location, like a specific post, button, image
-- `utm_term`: search term, like “analytics” or “product analytics”
+- `utm_term`: search term, like "analytics" or "product analytics"
 - `gclid`: Google click ID for tracking data related to Google Ads
 - `fbclid`: Facebook click ID for tracking data related to Facebook Ads
 - `msclkid`: Microsoft click ID for tracking data related to Microsoft (Bing) Ads
@@ -90,9 +90,11 @@ On top of these, there are lots of settings to tweak your funnel such as “Conv
 
 PostHog's tools for measuring and analyzing performance marketing helps you figure out if it is making a difference in your business, and make changes if not. Here are some recommendations on how you can use them to help make this happen.
 
-- **Compare channels** - Breaking down by channel enables you to compare and find out which ones are working and which aren’t. This helps improve efficiency and informs future marketing strategy choices.
-- **Test new channels** - Without measurement, you won’t know how new channels are doing. This leads to unnecessary waste and inaccurate decisions.
-- **Improve existing channels** - Analyzing trends helps you adjust strategies and content in your channels based on what’s currently working.
+- **Compare channels:**  Breaking down by channel enables you to compare and find out which ones are working and which aren’t. This helps improve efficiency and informs future marketing strategy choices.
+
+- **Test new channels:** Without measurement, you won’t know how new channels are doing. This leads to unnecessary waste and inaccurate decisions.
+
+- **Improve existing channels:** Analyzing trends helps you adjust strategies and content in your channels based on what’s currently working.
 
 The ultimate goal of performance marketing is to help you make more money and grow your business. Measuring and tracking performance helps to ensure you’re on the right path toward achieving that goal.
 
