@@ -31,7 +31,7 @@ For previous batches:
 
 We want to make this feel as personalized as possible - there is an outsized impact in giving YC companies personal attention to ensure they are successful with PostHog. 
 
-- Kendal maintains a sheet with the details for all companies in the current batch
+- Kendal maintains a sheet with the details for all companies in the current batch as they launch (since the list isn't available anywhere)
 - James H messages every single one of them individually so that a) they have his number, and b) to tell them about the YC deal on Bookface
 - YC companies check out the deal and then book in for an onboarding call (see detailed section below)
 - Once companies are set up with us, we ask them to mark themselves as 'using' PostHog in Bookface
