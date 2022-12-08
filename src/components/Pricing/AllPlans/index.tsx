@@ -55,12 +55,12 @@ const selfHostPlans: IPlan[] = [
         title: 'Enterprise starting from $5,000/month',
         description: 'Slack-based priority support, SSO, advanced permissions',
         pricing: {
-            event: 0.00045,
-            monthly: 450,
+            monthly: 5000,
+            event: 0,
         },
         mainCTA: {
             title: 'Get started',
-            url: 'https://license.posthog.com/?price_id=price_1L1AeWEuIatRXSdzj0Y5ioOU',
+            url: 'https://license.posthog.com/?price_id=price_1MBgFyEuIatRXSdzoNukQdbc',
         },
         pricingOption: 'self-hosted-enterprise',
     },
@@ -77,12 +77,12 @@ const Plan = ({ plan }: { plan: IPlan }) => {
                         <span>
                             <strong>${plan.pricing.monthly}</strong>
                             <span className="text-[13px] opacity-50">/mo</span>
-                            <span className="inline-block opacity-50 mx-2">+</span>
+                            <span className="inline-block opacity-50 mx-2">{plan.pricing.event ? '+' : ''}</span>
                         </span>
                     )}
                     <span>
-                        <strong>${plan.pricing.event}</strong>
-                        <span className="text-[13px] opacity-50">/event</span>
+                        <strong>{plan.pricing.event ? `$${plan.pricing.event}}` : ''}</strong>
+                        <span className="text-[13px] opacity-50">{plan.pricing.event ? '/event' : ''}</span>
                     </span>
                 </p>
             </div>
