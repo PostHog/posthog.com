@@ -48,15 +48,13 @@ They spend time communicating with users, their team, and other members of the c
 
 Software engineers focus on writing code, testing it, and maintaining it. They look for ways to optimize code, improve scalability, and solve bugs. They are deeply focused on specific areas of technology, whether that is databases, data pipelines, backend APIs, or client-side app frameworks. This means researching and reading documentation, updates, and code.
 
-## Why do companies choose product versus software engineers?
+## Why is demand for product engineers growing?
 
-Product engineers are often a part of smaller teams, where they must do more themselves. Startups and earlier-stage companies that require people to do more are often looking for product engineers (even if they don’t say it). They need people who can own large decisions and ship quickly. Product engineers fit this need.
+There's no single reason, but typically it's motivated by a desire to ship product improvements faster. Product engineers are popular among startups and early-stage companies for this reason, even if they don’t say it.
 
-Software engineers are part of larger teams, usually spread out across multiple teams. They have a team to support them, so they can specialize. Their team might include designers, product managers, and marketers. This allows them to think less about if what they are building is right, and more about the implementation.
+At larger companies, product engineers are seen as a way to drive innovation, sometimes through the creation of smaller teams that have the freedom to ideate and execute product ideas. Software engineers and multidiscipline teams are still important, but product engineers can inject urgency where it's needed.
 
-Companies choose roles and team structures based on their goals. Small companies (or innovative teams within larger companies) need people who can ideate and execute product ideas. Large and mature companies need people who can specialize in key areas of technology and optimize them.
-
-For example, when Elon Musk bought Twitter, he had the goal of making dramatic changes to the product. He needed product engineers to quickly execute these changes. He wanted proof they could do this, which is why he forced engineers to show him what code they shipped recently. He didn't need software engineers to continue to maintain or optimize the existing codebase. This led to a big shift in team structure, with a large number of software engineers (and other roles) leaving the company.
+Elon Musk's Twitter is a good example of company that might benefit from product engineers, whether he's aware of it or not. Elon wants to make dramatic changes to the product, but in his opinion, the organization he inherited was too large and unwieldy to achieve this. In other words, he doesn't need software engineers to maintain or optimize the existing codebase; he needs product engineers who can identify problems and opportunities, and execute solutions quickly and independently. 
 
 ## What’s right for you?
 
