@@ -16,7 +16,17 @@ In this tutorial, we’ll cover how to track your performance marketing campaign
 
 The first step in performance marketing is ensuring proper tracking. To do this, you must add Urchin Tracking Modules (UTM) to your links in each channel. These are pieces of information in your URL with details about where the user came from. They look like `https://posthog.com/tutorials?utm_source=google`.
 
-PostHog automatically captures UTMs via our JavaScript library (and snippet). The ones we support are `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`, `gclid`, `fbclid`, and `msclkid`. Pageview events have these added as a property, and users have them added as an person property (both most recent and initial). 
+PostHog automatically captures UTMs via our JavaScript library (and snippet). The ones we support are: 
+- `utm_source`: the traffic source, like Google or Facebook
+- `utm_medium`: the traffic medium, like social or paid (ad)
+- `utm_campaign`: the related campaign, like brand awareness or holiday sale
+- `utm_content`: the content location, like a specific post, button, image
+- `utm_term`: the search term, like “analytics” or “product analytics”
+- `gclid`: Google click ID for tracking data related to Google Ads
+- `fbclid`: Facebook click ID for tracking data related to Facebook Ads
+- `msclkid`: Microsoft click ID for tracking data related to Microsoft (Bing) Ads
+
+Pageview events have these added as a property, and users have them added as an person property (both most recent and initial). 
 
 Many channels allow you to customize your UTMs, and we recommend doing that to get the best data possible.
 
