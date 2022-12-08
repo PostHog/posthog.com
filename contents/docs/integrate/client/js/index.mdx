@@ -48,7 +48,7 @@ posthog.init('<ph_project_api_key>',
         api_host: '<ph_instance_address>',
         autocapture: {
                 event_allowlist: ['click'], // DOM events from this list ['click', 'change', 'submit']
-                url_allowlist: ['*/docs/*'], // strings or RegExps
+                url_allowlist: ['posthog.com\.\/docs\/.*'], // strings or RegExps
                 element_allowlist: ['button'], // DOM elements from this list ['a', 'button', 'form', 'input', 'select', 'textarea', 'label']
                 css_selector_allowlist: ['[ph-autocapture]'] // List of CSS selectors
             }
