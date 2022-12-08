@@ -201,5 +201,5 @@ module.exports = {
             },
         },
     },
-    plugins: [],
+    plugins: [require('@tailwindcss/forms'), require('@tailwindcss/line-clamp'), require('@headlessui/tailwindcss')],
 }

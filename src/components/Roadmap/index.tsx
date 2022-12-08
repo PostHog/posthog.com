@@ -8,7 +8,7 @@ import PostLayout from 'components/PostLayout'
 import { UnderConsideration } from './UnderConsideration'
 import { InProgress } from './InProgress'
 import { OrgProvider, UserProvider } from 'squeak-react'
-import { StaticImage } from 'gatsby-plugin-image'
+import { ImageDataLike, StaticImage } from 'gatsby-plugin-image'
 
 interface IGitHubPage {
     title: string
@@ -36,6 +36,8 @@ export interface IRoadmap {
     team: ITeam
     githubPages: IGitHubPage[]
     projected_completion_date: string
+    roadmapId: BigInt
+    thumbnail: ImageDataLike
 }
 
 const Complete = (props: { title: string; githubPages: IGitHubPage[]; otherLinks: string[] }) => {
@@ -138,6 +140,7 @@ export default function Roadmap() {
                             menu={[
                                 { name: 'Questions', url: '/questions' },
                                 { name: 'Roadmap', url: '/roadmap' },
+                                { name: 'Changelog', url: '/roadmap/changelog' },
                                 { name: 'Contributors', url: '/contributors' },
                                 { name: 'Core team', url: '/handbook/company/team' },
                             ]}
@@ -246,6 +249,7 @@ const query = graphql`
     {
         allSqueakRoadmap {
             nodes {
+                roadmapId
                 beta_available
                 complete
                 date_completed

@@ -15,7 +15,7 @@ export const unsafeHash = (str: string) => {
     return String(a)
 }
 
-export const classNames = (...classes: (string | null | undefined)[]) => {
+export const classNames = (...classes: (string | null | undefined | false)[]) => {
     return classes.filter(Boolean).join(' ')
 }
 
@@ -106,3 +106,5 @@ export const kebabCase = (string) =>
         .replace(/([a-z])([A-Z])/g, '$1-$2')
         .replace(/[\s_]+/g, '-')
         .toLowerCase()
+
+export const squeakProfileLink = (profile) => (profile ? `/community/profiles/${profile.id}` : '')

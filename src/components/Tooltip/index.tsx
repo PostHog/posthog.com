@@ -10,7 +10,7 @@ export default function Tooltip({
     placement = 'bottom',
 }: {
     children: JSX.Element
-    title: string
+    title: string | React.ReactNode
     offset?: [number, number]
     className?: string
     placement?: Placement

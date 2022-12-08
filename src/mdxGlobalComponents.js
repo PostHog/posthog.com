@@ -62,6 +62,7 @@ import { Heading } from './components/Heading'
 import { HiddenSection } from './components/HiddenSection'
 import { Home } from './components/Home'
 import { HostingOption } from './components/HostingOption'
+import { Icons } from './components/Icons'
 import { ImageBlock } from './components/ImageBlock'
 import { IngestionAppsList } from './components/IngestionAppsList'
 import { InlineCode } from './components/InlineCode'
@@ -97,6 +98,7 @@ import { PricingTable } from './components/Pricing/PricingTable'
 import { ProductPillars } from './components/Pricing/ProductPillars'
 import { Quote } from './components/Pricing/Quote'
 import { Savings } from './components/Pricing/Savings'
+import { SelfHost } from './components/Pricing/SelfHost'
 import { ProductAnchorNavbar } from './components/ProductAnchorNavbar'
 import { ProductFeature } from './components/ProductFeature'
 import { ProductFeaturePlugin } from './components/ProductFeaturePlugin'
@@ -106,14 +108,16 @@ import { ProductPage } from './components/ProductPage'
 import { ProductSectionHeader } from './components/ProductSectionHeader'
 import { Question } from './components/Question'
 import { Quote2 } from './components/Quote2'
+import { RenderInClient } from './components/RenderInClient'
 import { Roadmap } from './components/Roadmap'
 import { RocketHorizontalRule } from './components/RocketHorizontalRule'
-import { SearchBox } from './components/SearchBox'
 import { SectionLinks } from './components/SectionLinks'
 import { DesignedForYourStackBlock } from './components/Sections/DesignedForYourStackBlock'
 import { FeaturedSectionTextLeft } from './components/Sections/FeaturedSectionTextLeft'
 import { FeaturedSectionTextRight } from './components/Sections/FeaturedSectionTextRight'
 import { FeaturedSectionTripleImage } from './components/Sections/FeaturedSectionTripleImage'
+import { SignupCTA } from './components/SignupCTA'
+import { SiteSearchCallout } from './components/SiteSearchCallout'
 import { SliderNav } from './components/SliderNav'
 import { Spacer } from './components/Spacer'
 import { Spinner } from './components/Spinner'
@@ -196,6 +200,7 @@ export const shortcodes = {
     HiddenSection,
     Home,
     HostingOption,
+    Icons,
     ImageBlock,
     IngestionAppsList,
     InlineCode,
@@ -231,6 +236,7 @@ export const shortcodes = {
     ProductPillars,
     Quote,
     Savings,
+    SelfHost,
     ProductAnchorNavbar,
     ProductFeature,
     ProductFeaturePlugin,
@@ -240,14 +246,16 @@ export const shortcodes = {
     ProductSectionHeader,
     Question,
     Quote2,
+    RenderInClient,
     Roadmap,
     RocketHorizontalRule,
-    SearchBox,
     SectionLinks,
     DesignedForYourStackBlock,
     FeaturedSectionTextLeft,
     FeaturedSectionTextRight,
     FeaturedSectionTripleImage,
+    SignupCTA,
+    SiteSearchCallout,
     SliderNav,
     Spacer,
     Spinner,

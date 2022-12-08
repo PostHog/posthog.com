@@ -93,7 +93,7 @@ const menu = [
     { name: 'Data warehouse', url: 'data-warehouse', icon: ProductIcons.dataWarehouse },
     { name: 'Self-hosting', url: 'self-hosting', icon: ProductIcons.selfHosting },
     { name: 'API', url: 'api', icon: ProductIcons.api },
-    { name: 'What\'s next?', url: 'roadmap', icon: ProductIcons.experiments },
+    { name: "What's next?", url: 'roadmap', icon: ProductIcons.experiments },
 ]
 
 const Menu = () => {
