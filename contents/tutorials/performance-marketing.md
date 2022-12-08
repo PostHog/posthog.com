@@ -18,7 +18,7 @@ Performance marketing campaigns have many different goals such as traffic, lead 
 
 The first step in performance marketing is ensuring proper tracking. To do this, you must add Urchin Tracking Modules (UTM) to your links in each channel. These are pieces of information in your URL with details about where the user came from. They look like `https://posthog.com/tutorials?utm_source=google`.
 
-PostHog automatically captures UTMs our JavaScript library (and snippet). The ones we support are `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`, `gclid`, `fbclid`, and `msclkid`. Pageview events have these added as a property, and users have them added as an person property (both most recent and initial).
+PostHog automatically captures UTMs via our JavaScript library (and snippet). The ones we support are `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`, `gclid`, `fbclid`, and `msclkid`. Pageview events have these added as a property, and users have them added as an person property (both most recent and initial).
 
 Any UTM that isn’t one of these is not automatically tracked and you’ll have to capture it yourself. You can do this by checking the URL from the UTM then:
 
@@ -28,19 +28,19 @@ Any UTM that isn’t one of these is not automatically tracked and you’ll have
 
 Many channels for performance marketing allow you to customize your UTMs, and we recommend doing that to get the best data possible.
 
-> **Tip:** for sponsorships, we often create custom links like `posthog.com/sponsored` which redirect to links with UTMs because they are easier to type and look better while allowing us to be consistent in measuring with UTMs.
+> **💡 PostHog Tip:** For sponsorships, we create custom URLs like `posthog.com/sponsored` which redirect to URLs with UTMs. This gives us an easy to remember vanity URL and consistent UTM tracking without the need to create dedicated landing pages.
 
 ## Tracking traffic from performance marketing
 
 Once you’ve set up UTMs, you can start to use them to track data from different sources of performance marketing. Assuming you have pageview events coming from different sources, you can create a few different insights relevant to performance marketing. 
 
-The first is pageviews broken down by UTM source. To do this, create an insight, filter pageview where UTM Source is set, and breakdown by UTM source. This  gives you a breakdown of traffic from specific sources. 
+To view pageviews broken down by UTM source, create an insight, filter pageview where `UTM Source` is set, and then breakdown by `UTM Source`. This gives you a breakdown of traffic from specific sources. 
 
 ![UTM source set](../images/tutorials/performance-marketing/utm-source-set.png)
 
 The problem with this is that UTM sources might not be ads you are running. Any site or link can set a UTM source, so you might have sources other than ads.
 
-To see specifically, the traffic from channels, add another filter that explicitly calls out the channels you use. For example, if you run ads on Facebook and LinkedIn, you can set UTM source to equal “facebook” and “linkedin.” 
+To fix this, add another filter that explicitly calls out the channels you use. For example, if you run ads on Facebook and LinkedIn, you can set `UTM Source` to equal “facebook” or “linkedin.” 
 
 ![Specific UTMs](../images/tutorials/performance-marketing/utm-source-breakdown.png)
 
@@ -56,9 +56,9 @@ Every company has a goal for its performance marketing. For some, it is activati
 
 Tracking signups is relatively similar to tracking traffic, we just replace the pageview event with our signup action. 
 
-To filter, you can again use a UTM attribute. You included it as a property in your signup event, you can use the event property as a filter. If not, you can use a UTM value (or initial UTM value) in person properties. This option is used more because PostHog automatically adds this value to persons.
+To filter, you can again use a UTM attribute. If you included it as a property in your signup event, you can use the event property as a filter. If not, you can use a UTM value (or initial UTM value) in person properties. This option is used more because PostHog automatically adds this value to persons.
 
-> A person has both initial UTM properties and most recent ones. The initial property is the first UTM value set for a person. The most recent property is the last UTM value set for a person. Events only have a single UTM property for the most recent value. 
+> A person has both initial UTM properties and most recent ones. The initial property is the first UTM value set for a person  – i.e. the first time they ever visited your website. The most recent property is the last UTM value set for a person. Events only have a single UTM property for the most recent value. 
 
 In this example, we’ve chosen the unique number of users who completed the “user signed up” event, then filtered the group of users for those with the initial UTM source being set. 
 
@@ -66,7 +66,7 @@ In this example, we’ve chosen the unique number of users who completed the “
 
 You can use other UTM filters from the prior section to get the signup numbers (or whatever your goal is) from your performance marketing.
 
-> **Tip:** at PostHog, we include a “where did you hear about us” field in our signup flow, which helps a lot as an extra layer to our marketing tracking (including performance marketing).
+> **💡PostHog Tip:** We include a “where did you hear about us” field in our signup flow, which is useful for tracking factors like word of mouth growth. This data is captured for analysis in PostHog. Read [this tutorial about setting up surveys in PostHog](/tutorials/survey) for more information.
 
 ## Tracking performance marketing conversion
 
