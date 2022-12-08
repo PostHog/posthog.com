@@ -59,8 +59,8 @@ const selfHostPlans: IPlan[] = [
             event: 0,
         },
         mainCTA: {
-            title: 'Get started',
-            url: 'https://license.posthog.com/?price_id=price_1MBgFyEuIatRXSdzoNukQdbc',
+            title: 'Book a call',
+            url: '/book-a-demo',
         },
         pricingOption: 'self-hosted-enterprise',
     },
@@ -81,7 +81,7 @@ const Plan = ({ plan }: { plan: IPlan }) => {
                         </span>
                     )}
                     <span>
-                        <strong>{plan.pricing.event ? `$${plan.pricing.event}}` : ''}</strong>
+                        <strong>{plan.pricing.event ? `$${plan.pricing.event}` : ''}</strong>
                         <span className="text-[13px] opacity-50">{plan.pricing.event ? '/event' : ''}</span>
                     </span>
                 </p>
