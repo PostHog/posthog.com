@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { Header } from '../Header/Header'
 import { Footer } from '../Footer/Footer'
 import CookieBanner from 'components/CookieBanner'
+import Banner from 'components/Banner'
 import usePostHog from '../../hooks/usePostHog'
 import { SearchProvider } from 'components/Search/SearchContext'
 
@@ -22,6 +23,7 @@ const Layout = ({ children, className = '' }: { children: React.ReactNode; class
     return (
         <SearchProvider>
             <div className={className}>
+                <Banner />
                 <Header />
                 <main>{children}</main>
                 <Footer />
