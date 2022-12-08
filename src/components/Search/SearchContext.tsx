@@ -112,6 +112,7 @@ export const SearchProvider: React.FC = ({ children }) => {
                                     <InstantSearch
                                         searchClient={searchClient}
                                         indexName={process.env.GATSBY_ALGOLIA_INDEX_NAME as string}
+                                        stalledSearchDelay={750}
                                     >
                                         <SearchResults initialFilter={initialFilter} />
                                     </InstantSearch>
