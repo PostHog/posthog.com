@@ -28,7 +28,7 @@ The most popular articles this year:
 - [How (and why) our marketing team uses PostHog](/blog/posthog-marketing) – 50 clicks
 - [How to run a transparent startup](/blog/how-to-run-a-transparent-company) – 48 clicks
 - [How we made something people want](/blog/making-something-people-want) – 45 clicks
-- [All the cool things we built at our Rome hackathon]/blog/rome-hackathon) – 45 clicks
+- [All the cool things we built at our Rome hackathon](/blog/rome-hackathon) – 45 clicks
 
 Mental note: y'all love articles with 'how' in the title, eh? Thanks for your support.
  
