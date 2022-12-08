@@ -14,21 +14,19 @@ In this tutorial, we’ll cover how to track your performance marketing campaign
 
 ## Tracking performance marketing with UTMs
 
-The first step in performance marketing is ensuring proper tracking. To do this, you must add Urchin Tracking Modules (UTM) to your links in each channel. These are pieces of information in your URL with details about where the user came from. They look like `https://posthog.com/tutorials?utm_source=google`.
+The first step in performance marketing is ensuring proper tracking. To do this, you must add Urchin Tracking Modules (UTM) to your links in each channel. These are pieces of information in your URL with details about where the user came from. They look like `https://posthog.com/tutorials?utm_source=google&utm_medium=social`.
 
 PostHog automatically captures UTMs via our JavaScript library (and snippet). The ones we support are: 
-- `utm_source`: the traffic source, like Google or Facebook
-- `utm_medium`: the traffic medium, like social or paid (ad)
-- `utm_campaign`: the related campaign, like brand awareness or holiday sale
-- `utm_content`: the content location, like a specific post, button, image
-- `utm_term`: the search term, like “analytics” or “product analytics”
+- `utm_source`: traffic source, like Google or Facebook
+- `utm_medium`: traffic medium, like social or paid (ad)
+- `utm_campaign`: related campaign, like `brand_awareness` or `holiday_sale`
+- `utm_content`: content location, like a specific post, button, image
+- `utm_term`: search term, like “analytics” or “product analytics”
 - `gclid`: Google click ID for tracking data related to Google Ads
 - `fbclid`: Facebook click ID for tracking data related to Facebook Ads
 - `msclkid`: Microsoft click ID for tracking data related to Microsoft (Bing) Ads
 
-Pageview events have these added as a property, and users have them added as an person property (both most recent and initial). 
-
-Many channels allow you to customize your UTMs, and we recommend doing that to get the best data possible.
+Pageview events have these added as a property, and users have them added as an person property (both most recent and initial). Many channels allow you to customize your UTMs, and we recommend doing that to get the best data possible.
 
 > **💡 PostHog Tip:** For sponsorships, we create custom URLs like `posthog.com/sponsored` which redirect to URLs with UTMs. This gives us an easy to remember vanity URL and consistent UTM tracking without the need to create dedicated landing pages.
 
