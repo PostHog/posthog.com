@@ -19,7 +19,7 @@ For startups in the W23 batch:
 - Book into a free YC group setup session where we will…
   - Build a dashboard for the batch with your product growth metrics
   - Pair with you to ensure you pass calls correctly
-- Get the CEO’s phone number and message him any time - seriously (well maybe not any time, he does have to sleep you know…)
+- Get the batphone - CEO on whatsapp/text
 
 For previous batches:
 
