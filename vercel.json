@@ -616,6 +616,10 @@
         {
             "source": "/docs/self-host/deploy/hosting-costs",
             "destination": "/docs/self-host/enterprise/hosting-costs"
+        },
+        {
+            "source": "/blog/using-posting",
+            "destination": "/blog/using-posthog"
         }
     ],
     "rewrites": [
