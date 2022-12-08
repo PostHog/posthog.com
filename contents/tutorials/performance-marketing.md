@@ -8,31 +8,23 @@ featuredImage: ../images/tutorials/banners/performance-marketing.png
 topics: ['funnels', 'insights']
 --- 
 
-Performance marketing is paying for ads, attention, and clicks to your site where you try to convert them into users and customers. It is paying for users to see your site. Companies use channels like Google, Facebook, other social media, ad networks, and sponsorships to do this. 
+Performance marketing is paying for ads, attention, and clicks to your site where you try to convert them into users and customers. Companies use channels like Google, Facebook, other social media, ad networks, and sponsorships to do this. 
 
-Performance marketing is different from word-of-mouth or organic marketing where potential users run into you without having to pay for it. It also isn’t brand marketing, which focuses on awareness (which is difficult to measure) to get users. Performance marketing focuses on traffic and conversion (which is easier to measure).
-
-Performance marketing campaigns have many different goals such as traffic, lead generation, and signups. In this tutorial, we’ll cover how to track each of them and your overall performance marketing efforts.
+In this tutorial, we’ll cover how to track your performance marketing campaigns, channels, traffic, and conversion using PostHog's product analytics suite.
 
 ## Tracking performance marketing with UTMs
 
 The first step in performance marketing is ensuring proper tracking. To do this, you must add Urchin Tracking Modules (UTM) to your links in each channel. These are pieces of information in your URL with details about where the user came from. They look like `https://posthog.com/tutorials?utm_source=google`.
 
-PostHog automatically captures UTMs via our JavaScript library (and snippet). The ones we support are `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`, `gclid`, `fbclid`, and `msclkid`. Pageview events have these added as a property, and users have them added as an person property (both most recent and initial).
+PostHog automatically captures UTMs via our JavaScript library (and snippet). The ones we support are `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`, `gclid`, `fbclid`, and `msclkid`. Pageview events have these added as a property, and users have them added as an person property (both most recent and initial). 
 
-Any UTM that isn’t one of these is not automatically tracked and you’ll have to capture it yourself. You can do this by checking the URL from the UTM then:
-
-- capturing a specific event for that UTM
-- capturing a pageview with the UTM as a property
-- setting an initial UTM person property (once)
-
-Many channels for performance marketing allow you to customize your UTMs, and we recommend doing that to get the best data possible.
+Many channels allow you to customize your UTMs, and we recommend doing that to get the best data possible.
 
 > **💡 PostHog Tip:** For sponsorships, we create custom URLs like `posthog.com/sponsored` which redirect to URLs with UTMs. This gives us an easy to remember vanity URL and consistent UTM tracking without the need to create dedicated landing pages.
 
 ## Tracking traffic from performance marketing
 
-Once you’ve set up UTMs, you can start to use them to track data from different sources of performance marketing. Assuming you have pageview events coming from different sources, you can create a few different insights relevant to performance marketing. 
+Once you’ve set up UTMs, you can use them to analyze data based on the different sources and channels.
 
 To view pageviews broken down by UTM source, create an insight, filter pageview where `UTM Source` is set, and then breakdown by `UTM Source`. This gives you a breakdown of traffic from specific sources. 
 
@@ -48,11 +40,11 @@ Even better, use the UTM campaign, content, medium, or check for a specific clic
 
 ![UTM campaign and click ID](../images/tutorials/performance-marketing/utm-campaign.png)
 
-Doing a combination of these to fit the performance marketing you are doing helps you track the total traffic from individual performance marketing campaigns. 
+Doing a combination of these to fit the performance marketing you are doing helps you track the total traffic from individual campaigns. 
 
 ## Tracking signups from performance marketing
 
-Every company has a goal for its performance marketing. For some, it is activation. For others, it is leads. For us at PostHog, it is signups. In this section, feel free to replace the signup event (in our case, action) with the relevant goal (event or action) for your performance marketing. 
+Every company has a goal for its performance marketing. For some, it is activation. For others, it is leads. For us at PostHog, it is signups. In this section, feel free to replace the signup event (in our case, action) with the relevant goal (event or action) for you. 
 
 Tracking signups is relatively similar to tracking traffic, we just replace the pageview event with our signup action. 
 
@@ -68,9 +60,9 @@ You can use other UTM filters from the prior section to get the signup numbers (
 
 > **💡PostHog Tip:** We include a “where did you hear about us” field in our signup flow, which is useful for tracking factors like word of mouth growth. This data is captured for analysis in PostHog. Read [this tutorial about setting up surveys in PostHog](/tutorials/survey) for more information.
 
-## Tracking performance marketing conversion
+## Tracking conversion from traffic to signups
 
-Now that we have information on performance marketing leading to traffic and our key metric (signups), we can also look at the conversion between the two. We want to make sure our performance marketing converts into signups and customers. To do this, we are going to create some funnels.
+Now that we have information on traffic and our key metric (signups), we can also look at the conversion between the two. We want to make sure the traffic we are paying for converts into signups and customers. To do this, we are going to use the funnel insight.
 
 In insights, go to the funnels tab. We’ll want our first step to be a pageview with a filter of an initial UTM value of some sort (like we’ve done before). Our second step is a visit to our signup page. Our third, and final, step is our key metric (signups). Altogether, this will look something like this:
 
@@ -80,31 +72,19 @@ After creating this funnel, we can change this in a bunch of ways. First, we can
 
 ![Breakdown funnel](../images/tutorials/performance-marketing/funnel-breakdown.png)
 
-Second, we can change the graph type to “Historical trends” to give us a better idea of how our performance marketing conversion is doing over time.
+Second, we can change the graph type to “Historical trends” to give us a better idea of how our conversion is doing over time.
 
 ![Historical trends type funnel](../images/tutorials/performance-marketing/funnel-type.png)
 
-On top of these, there are lots of settings to tweak your funnel such as “Conversion rate calculation,” “Conversion window limit,” and “Date range” to match the insights you want to get about your performance marketing. 
+On top of these, there are lots of settings to tweak your funnel such as “Conversion rate calculation,” “Conversion window limit,” and “Date range” to match your desired insights. 
 
 ## What are the benefits of measuring your performance marketing?
 
-As you’ve seen, PostHog has many tools for measuring performance marketing. This helps you figure out if it is making a difference in your business. Here are some recommendations on how you can use performance marketing measurements to make channels to improve your business.
+PostHog's tools for measuring and analyzing performance marketing helps you figure out if it is making a difference in your business, and make changes if not. Here are some recommendations on how you can use them to help make this happen.
 
-### Comparing channels
-
-Each of the ways of measuring performance in this tutorial allows you to breakdown by channel. This enables you to compare channels to find out which ones are working and which aren’t.
-
-You can compare traffic, signups, and conversion with your spend on each channel. Making sure the best channels get the most spend ensures efficiency. You can double down on ones that are working, and lower spend on ones that aren’t. If there are problem areas, you can quickly identify and fix them.
-
-Having a channel comparison also helps make future marketing strategy choices. A good performing channel encourages more investment into organic there or hiring people to help improve it. Knowing where you do best is key to creating a competitive advantage.
-
-### Test new channels, and improve existing ones
-
-Having measurements for performance marketing in place enables you to test new channels and improve existing ones. Without measurement, you won’t know how channels are doing. This leads to unnecessary waste and inaccurate decisions.
-
-Performance marketing trends are always changing. New channels are opening up. New ads are tested. What works now won’t always work. Measuring performance lets you analyze trends and adjust strategies based on what’s currently working.
-
-### Grow your business
+- **Compare channels** - Breaking down by channel enables you to compare and find out which ones are working and which aren’t. This helps improve efficiency and informs future marketing strategy choices.
+- **Test new channels** - Without measurement, you won’t know how new channels are doing. This leads to unnecessary waste and inaccurate decisions.
+- **Improve existing channels** - Analyzing trends helps you adjust strategies and content in your channels based on what’s currently working.
 
 The ultimate goal of performance marketing is to help you make more money and grow your business. Measuring and tracking performance helps to ensure you’re on the right path toward achieving that goal.
 
