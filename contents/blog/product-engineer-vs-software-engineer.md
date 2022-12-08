@@ -1,12 +1,12 @@
 ---
-date: 2022-12-01
+date: 2022-12-08
 title: "Product engineer vs software engineer: what's the difference?"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: ["ian-vanagas"]
-featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImage: ../images/blog/product-engineer.jpg
 featuredImageType: full
 categories: ["Startups", "Guides"]
 ---
