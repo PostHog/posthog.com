@@ -37,7 +37,7 @@ This app is maintained by the PostHog community.
 
 ### What if I have feedback on this app?
 
-We love feature requests and feedback! Please [create an issue](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&template=feature_request.md) to tell us what you think.
+We love feature requests and feedback! Please [create an issue](https://github.com/PostHog/posthog-avo-plugin/new) to tell us what you think.
 
 ### What if my question isn't answered above?
 
