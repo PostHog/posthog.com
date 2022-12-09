@@ -74,7 +74,7 @@
         "gatsby-remark-autolink-headers": "^5.20.0",
         "gatsby-remark-copy-linked-files": "^5.20.0",
         "gatsby-remark-katex": "^6.20.0",
-        "gatsby-remark-prismjs": "^7.2.0",
+        "gatsby-remark-prismjs": "^6.0.0",
         "gatsby-remark-static-images": "^1.2.1",
         "gatsby-source-ashby": "^1.0.3",
         "gatsby-source-filesystem": "^4.20.0",
