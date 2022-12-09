@@ -170,7 +170,10 @@ const SearchBox = () => {
                 autoComplete="off"
                 onKeyDown={(event: React.KeyboardEvent) => (event.key === 'Tab' ? event.preventDefault() : null)}
                 value={query}
-                onChange={(event) => refine(event.target.value)}
+                displayValue={() => query}
+                onChange={(event) => {
+                    refine(event.target.value)
+                }}
             />
 
             <kbd
