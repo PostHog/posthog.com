@@ -79,6 +79,9 @@ export const query = graphql`
             subject
             published
             permalink
+            profile {
+                id
+            }
             replies {
                 id
                 published

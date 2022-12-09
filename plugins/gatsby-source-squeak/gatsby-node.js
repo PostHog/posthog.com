@@ -7,17 +7,15 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, cache
     const { createNode, createParentChildLink } = actions
 
     const getQuestions = async () => {
-        const response = await fetch(`${apiHost}/api/questions`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                organizationId,
-                perPage: 1000,
-                published: true,
-            }),
-        })
+        const response = await fetch(
+            `${apiHost}/api/v1/questions?organizationId=${organizationId}&perPage=1000&published=true`,
+            {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+        )
 
         if (response.status !== 200) {
             return []
@@ -54,33 +52,21 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, cache
 
     const questions = await getQuestions()
 
-    questions.forEach(
-        ({ profile, question: { slug, id, subject, replies, published, resolved, profile_id, permalink } }) => {
-            const question = {
-                slug,
-                replies,
-                published,
-                resolved,
-                subject,
-                permalink,
-                profile,
-                profileId: profile_id,
-            }
-
-            const node = {
-                id: createNodeId(`question-${id}`),
-                parent: null,
-                children: [],
-                internal: {
-                    type: `Question`,
-                    contentDigest: createContentDigest(question),
-                },
-                ...question,
-            }
-            createNode(node)
-            replies && createReplies(node, replies)
+    questions.forEach((question) => {
+        const node = {
+            id: createNodeId(`question-${question.id}`),
+            parent: null,
+            children: [],
+            internal: {
+                type: `Question`,
+                contentDigest: createContentDigest(question),
+            },
+            ...question,
         }
-    )
+
+        createNode(node)
+        createReplies(node, question.replies)
+    })
 
     const topics = await fetch(`${apiHost}/api/topics?organizationId=${organizationId}`).then((res) => res.json())
 
