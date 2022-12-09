@@ -2,8 +2,13 @@
 
 - Objective: Performance
     - Key Results: We have wrapped up the person-on-event project and have deprecated the old non-person-on-events queries
+        - Why? Performance speed up
     - Key Results: We have reduced the cost per event for capture by an order of magnitude
+        - Why? Infra savings and improves performance
 - Objective: Reliability
     - Key Results: We have converted all current US dashboards into IaC dashboards configured in Terraform and made all necessary migrations from StatsD to Prom to support this.
+        - Why? Gets US and EU equivalent in terms of monitoring, alerting, runbooks
     - Key Results: Backfills do not slow us down or take down the system. We have tests for this.
+        - Why? Improves service quality and protects against bad actors
     - Key Results: Erroring apps fail gracefully, do not take down anything else, and we have tests to prove this.
+        - Why? Improves service quality and tackles customer annoyance of apps turning off when there's an error
