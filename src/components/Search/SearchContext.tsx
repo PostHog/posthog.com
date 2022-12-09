@@ -18,6 +18,7 @@ export type SearchLocation =
     | 'docs-dropdown'
     | 'using-ph-dropdown'
     | 'handbook-dropdown'
+    | 'mobile-header'
 export type SearchResultType = 'blog' | 'docs' | 'api' | 'question' | 'handbook' | 'manual'
 
 const searchClient = algoliasearch(
@@ -112,6 +113,7 @@ export const SearchProvider: React.FC = ({ children }) => {
                                     <InstantSearch
                                         searchClient={searchClient}
                                         indexName={process.env.GATSBY_ALGOLIA_INDEX_NAME as string}
+                                        stalledSearchDelay={750}
                                     >
                                         <SearchResults initialFilter={initialFilter} />
                                     </InstantSearch>

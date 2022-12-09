@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useSearchBox, useRefinementList, useHits } from 'react-instantsearch-hooks-web'
+import { useSearchBox, useRefinementList, useHits, useInstantSearch } from 'react-instantsearch-hooks-web'
 import { Hit } from 'instantsearch.js'
 import Link from 'components/Link'
 import { classNames } from 'lib/utils'
@@ -156,6 +156,7 @@ export default function SearchResults(props: SearchResultsProps) {
 }
 
 const SearchBox = () => {
+    const { close } = useSearch()
     const { query, refine } = useSearchBox()
 
     return (
@@ -169,11 +170,16 @@ const SearchBox = () => {
                 autoComplete="off"
                 onKeyDown={(event: React.KeyboardEvent) => (event.key === 'Tab' ? event.preventDefault() : null)}
                 value={query}
-                onChange={(event) => refine(event.target.value)}
+                displayValue={() => query}
+                onChange={(event) => {
+                    refine(event.target.value)
+                }}
             />
 
             <kbd
-                className="hidden md:block absolute right-4 text-xs border border-b-2 border-gray-accent-light/50 dark:border-gray-accent-dark/50 rounded-sm px-1.5 py-0.5 text-black/40 dark:text-white/40 font-sans"
+                role="button"
+                className="hidden md:block absolute right-4 text-xs border border-b-2 border-gray-accent-light/50 dark:border-gray-accent-dark/50 rounded-sm px-1.5 py-0.5 text-black/40 dark:text-white/40 font-sans cursor-pointer"
+                onClick={close}
                 style={{ fontSize: '10px' }}
             >
                 ESC
@@ -278,9 +284,17 @@ type HitsProps = {
 }
 
 const Hits: React.FC<HitsProps> = ({ activeOption, close }) => {
+    const [initialLoad, setInitialLoad] = React.useState(false)
     const { hits } = useHits<Result>()
+    const { status } = useInstantSearch()
     const posthog = usePostHog()
     const { query } = useSearchBox()
+
+    useEffect(() => {
+        if (!initialLoad && hits.length > 0) {
+            setInitialLoad(true)
+        }
+    }, [initialLoad, hits])
 
     const onSelectHeading = (heading: { value: string; depth: number; fragment: string }) => {
         posthog?.capture('web search result heading clicked', {
@@ -298,14 +312,27 @@ const Hits: React.FC<HitsProps> = ({ activeOption, close }) => {
     return (
         <div className="grid md:grid-cols-2 min-h-0 flex-grow border-b border-gray-accent-light dark:border-gray-accent-dark">
             <section className="overscroll-none bg-white dark:bg-gray-accent-dark text-left overflow-y-auto border-r border-gray-accent-light/50 dark:border-gray-accent-dark/50">
-                {hits.length > 0 ? (
+                {!initialLoad || status === 'stalled' ? (
+                    <ol className="list-none m-0 dark:bg-black">
+                        {new Array(5).fill({}).map((_, index) => (
+                            <li
+                                key={index}
+                                className="px-2 py-3 space-y-1 border-y border-gray-accent-light/20 dark:border-gray-accent-dark/80 -mt-px"
+                            >
+                                <div className="w-24 bg-gray-accent-light/60 dark:bg-gray-accent-dark/80 h-3.5 animate-pulse rounded-sm"></div>
+                                <div className="w-64 bg-gray-accent-light/60 dark:bg-gray-accent-dark/80 h-5 animate-pulse rounded-sm"></div>
+                                <div className="w-32 bg-gray-accent-light/60 dark:bg-gray-accent-dark/80 h-3 animate-pulse rounded-sm"></div>
+                            </li>
+                        ))}
+                    </ol>
+                ) : hits.length > 0 ? (
                     <Combobox.Options as="ol" className="list-none m-0 dark:bg-black" static hold>
                         {hits.map((hit) => {
                             return (
                                 <Combobox.Option
                                     key={hit.objectID}
                                     value={hit}
-                                    className="group ui-active:bg-tan/50 dark:ui-active:bg-gray-accent-dark hover:bg-tan/50 dark:hover:bg-gray-accent-dark/50 border-b border-t mt-[-1px] border-gray-accent-light/25 hover:border-gray-accent-light/30 dark:border-gray-accent-dark/80 dark:hover:border-gray-accent-dark/90 ui-active:border-gray-accent-light/30 dark:ui-active:border-gray-accent-dark/90 last:border-b-0 pl-3 pr-2"
+                                    className="group ui-active:bg-tan/50 dark:ui-active:bg-gray-accent-dark hover:bg-tan/50 dark:hover:bg-gray-accent-dark/50 border-b border-t -mt-px border-gray-accent-light/25 hover:border-gray-accent-light/30 dark:border-gray-accent-dark/80 dark:hover:border-gray-accent-dark/90 ui-active:border-gray-accent-light/30 dark:ui-active:border-gray-accent-dark/90 last:border-b-0 pl-3 pr-2"
                                 >
                                     <Link
                                         className="w-full px-2 py-3 text-black/75 dark:text-white/75 group-hover:text-black/100 dark:group-hover:text-white/100 font-semibold flex flex-col space-y-0.5 focus:outline-none leading-tight"
