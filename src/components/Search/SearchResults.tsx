@@ -156,8 +156,13 @@ export default function SearchResults(props: SearchResultsProps) {
 }
 
 const SearchBox = () => {
+    const [query, setQuery] = useState('')
     const { close } = useSearch()
-    const { query, refine } = useSearchBox()
+    const { refine } = useSearchBox()
+
+    useEffect(() => {
+        refine(query)
+    }, [query])
 
     return (
         <div className="relative flex items-center border-b border-gray-accent-light/50 dark:border-black dark:border-b-2">
@@ -172,7 +177,7 @@ const SearchBox = () => {
                 value={query}
                 displayValue={() => query}
                 onChange={(event) => {
-                    refine(event.target.value)
+                    setQuery(event.target.value)
                 }}
             />
 
