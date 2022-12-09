@@ -18,6 +18,7 @@ export type SearchLocation =
     | 'docs-dropdown'
     | 'using-ph-dropdown'
     | 'handbook-dropdown'
+    | 'mobile-header'
 export type SearchResultType = 'blog' | 'docs' | 'api' | 'question' | 'handbook' | 'manual'
 
 const searchClient = algoliasearch(
