@@ -36,7 +36,7 @@ We'd like to thank former PostHog team member [Paolo D'Amico](https://github.com
 
 ### Who maintains this app?
 
-This app is maintained by the community. If you have issues with the app not functioning as intended, please [raise a bug report](https://github.com/PostHog/posthog/issues/new?assignees=&labels=bug&template=bug_report.md) to let us know!
+This app is maintained by the community. If you have issues with the app not functioning as intended, please [raise a bug report](https://github.com/paolodamico/posthog-app-advanced-geoip/issues) to let the maintainer of this app know.
 
 ### What if I have feedback on this app?
 
