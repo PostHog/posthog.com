@@ -36,13 +36,13 @@ Mental note: y'all love articles with 'how' in the title, eh? Thanks for your su
 
 ## #new-from-posthog
 
-💰 [Why raising money is less stressful than bootstrapping](https://posthog.com/blog/vc-or-bootstrap): CEO James explodes 🤯 some preconceptions about raising startup capital. Agree, disagree? Hit him up on Twitter.
+- [Why raising money is less stressful than bootstrapping](https://posthog.com/blog/vc-or-bootstrap): CEO James explodes 🤯 some preconceptions about raising startup capital. Agree, disagree? Hit him up on Twitter.
 
-🦄 [What is a product engineer (and why they're awesome)](https://posthog.com/blog/what-is-a-product-engineer): What happens when a full-stack engineer and a product manager have a baby? They produce the ultimate startup employee.*
+- [What is a product engineer (and why they're awesome)](https://posthog.com/blog/what-is-a-product-engineer): What happens when a full-stack engineer and a product manager have a baby? They produce the ultimate startup employee.*
 
-💰 [How to use filters + session recordings to understand user friction](https://posthog.com/tutorials/filter-session-recordings): Funnels may tell you _where_ users are experiencing friction within your product, but only session recordings can show you _why_.
+- [How to use filters + session recordings to understand user friction](https://posthog.com/tutorials/filter-session-recordings): Funnels may tell you _where_ users are experiencing friction within your product, but only session recordings can show you _why_.
 
-💰 [A non-technical guide to understanding data in PostHog](https://posthog.com/tutorials/non-technical-guide-to-data): You don't need to be a data scientist to understand "the data". Use these hacks to learn. 
+- [A non-technical guide to understanding data in PostHog](https://posthog.com/tutorials/non-technical-guide-to-data): You don't need to be a data scientist to understand "the data". Use these hacks to learn. 
 
 ## #very-good-reads
 
