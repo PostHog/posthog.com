@@ -148,7 +148,7 @@ export default function Product({ referenceElement }: { referenceElement: HTMLDi
                         >
                             <Ycombinator className={iconClasses} />
                             <p className="text-sm opacity-50 m-0 text-black font-medium dark:text-white mt-1 leading-tight">
-                                How Y Combinator used PostHog to boost engagement by 40%
+                                Used PostHog experiments to boost engagement by 40%
                             </p>
                         </Link>
                         <Link
@@ -157,7 +157,7 @@ export default function Product({ referenceElement }: { referenceElement: HTMLDi
                         >
                             <Hasura className={iconClasses} />
                             <p className="text-sm opacity-50 m-0 text-black font-medium dark:text-white mt-1 leading-tight">
-                                How Hasura improved conversion rates by 10-20% with PostHog
+                                Used PostHog insights to increase conversion rates by 20%
                             </p>
                         </Link>
                         <Link
@@ -166,7 +166,7 @@ export default function Product({ referenceElement }: { referenceElement: HTMLDi
                         >
                             <Phantom className={iconClasses} />
                             <p className="text-sm opacity-50 m-0 text-black font-medium dark:text-white mt-1 leading-tight">
-                                How Phantom enhanced its product and cut failure rates by 90%
+                                Used PostHog feature flags to cut failure rates by 90%
                             </p>
                         </Link>
                     </ol>
