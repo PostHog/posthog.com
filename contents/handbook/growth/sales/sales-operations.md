@@ -111,11 +111,11 @@ _How do I find out a customer's usage?_
 
 _Can a customer transfer from self-hosted (e.g. Open Source) to Cloud?_
 
-Yes! See [Migrator 3000](https://posthog.com/docs/apps/migrator-3000)
+Yes! See [the Replicator app](/apps/replicator).
 
 _Can a customer transfer from Cloud to Self-hosted?_
 
-Yes! See [Migrator 3000](https://posthog.com/docs/apps/migrator-3000)
+Yes! See [the Replicator app](/apps/replicator).
 
 They will _lose_ their dashboard and configuration - this will just retain their events, but usually that's the principal concern.
 

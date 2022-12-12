@@ -1632,10 +1632,6 @@
                             "name": "Intercom Connector"
                         },
                         {
-                            "url": "/docs/apps/migrator-3000",
-                            "name": "Migrator 3000"
-                        },
-                        {
                             "url": "/docs/apps/pagerduty-connector",
                             "name": "PagerDuty Connector"
                         },
@@ -2000,10 +1996,6 @@
         {
             "name": "Ingestion Alerts",
             "url": "/apps/ingestion-alert"
-        },
-        {
-            "name": "Migrator 3000",
-            "url": "/apps/migrator-3000"
         },
         {
             "name": "n8n Connector",
