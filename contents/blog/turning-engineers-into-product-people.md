@@ -14,7 +14,9 @@ categories: ["Startups", "Product analytics"]
 
 Great engineers will either get autonomy at your company, or they'll get it somewhere else. Our engineers are encouraged to think about the _what_ and _why_ of what they're building - not just the _how_.
 
-At PostHog, new people are usually surprised by the lack of [micromanagement](https://posthog.com/handbook/company/management), onerous KPIs, and [death by meetings](https://posthog.com/blog/meetings). Rather, we run two-week sprints where everyone decides what they’re going to work on for the next 14 days following a retrospective at the end of each sprint. New problems are usually discovered and solved during each sprint that weren’t originally planned for, such as two of our main features - [session recording](/product/session-recording) and [feature flags](/product/feature-flags) - which were ideated during one of our hackathons.
+At PostHog, new people are usually surprised by the lack of [micromanagement](https://posthog.com/handbook/company/management), onerous KPIs, and [death by meetings](https://posthog.com/blog/meetings). Rather, we run two-week sprints where everyone decides what they’re going to work on for the next 14 days following a retrospective at the end of each sprint. 
+
+New problems are usually discovered and solved during each sprint that weren’t originally planned for, such as two of our main features - [session recording](/product/session-recording) and [feature flags](/product/feature-flags) - which were ideated during one of our hackathons.
 
 When you give engineers the freedom to play around with new ideas, magical things happen.
 
@@ -36,7 +38,7 @@ You can get a sense of project ownership during the hiring phase. At PostHog, we
 
 We also don't care whether they’ve worked at only one company or job-hopped - just that they learned new stuff, grew continuously, and built better products. Likewise, we don’t care whether you dropped out of college or attained a PhD - experience and entrepreneurship are not tied to qualifications. Most people underestimate the four-year head-start one gets by skipping college, especially for a field like computer science where everything you need to know is a Google search away.
 
-Beyond iteration speed, risk-taking, and problem-solving, we’re also looking for _curiosity_ - being willing to ask endless questions about the problem and the solution. For example, is there another way we could structure the dashboard? Do we really need three buttons here or is one enough? Do our users actually care about this feature? These are the types of questions we expect from product-minded engineers.
+Beyond iteration speed, risk-taking, and problem-solving, we’re also looking for _curiosity_ - being willing to ask endless questions about the problem and the solution. For example, is there another way we could structure the dashboard? Do we really need three buttons here or is one enough? Do our users actually care about this feature? These are the types of questions we expect from [product-minded engineers](/blog/what-is-a-product-engineer).
 
 <iframe src="https://giphy.com/embed/3o7btZ1Gm7ZL25pLMs" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 
@@ -51,3 +53,7 @@ We're young, aren't struggling for finance and we've the team needed to deepen o
 ## Tap into talent
 
 Engineers are becoming increasingly mission-driven creators who want to understand what the user struggles with and how to alleviate those struggles. During our hiring process, many engineers reveal that they’re leaving their current companies because there’s simply no room to create stuff - either because they’re not given the autonomy to do so or because the product(s) they work on lack sufficient usage to track trends and test new features. Good engineers are scarce, and if you’re lucky enough to snag a few bright stars, give them the keys to the kingdom and watch what they build with it. You’ll be pleasantly surprised.
+
+### Further reading
+
+- [The difference between product engineers and software engineers](/blog/product-engineer-vs-software-engineer)

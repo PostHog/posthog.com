@@ -1,5 +1,5 @@
 [build.environment]
-  NODE_VERSION = "16"
+  NODE_VERSION = "18"
   GATSBY_CPU_COUNT = "2"
 
 [dev]
@@ -1226,7 +1226,7 @@
 [[redirects]]
     from = "/tutorials/free-hotjar-alternative"
     to = "/blog/best-open-source-session-replay-tools"
-    
+
 # Added: 2022-05-03
 [[redirects]]
     from = "/docs/privacy/hipaa-compliance"
@@ -1277,7 +1277,7 @@
 # Added: 2022-05-03
 [[redirects]]
     from = "/product/quantitative-analysis"
-    to = "/product/correlation-analysis"    
+    to = "/product/correlation-analysis"
 
 # Added: 2022-05-12
 [[redirects]]
@@ -1333,12 +1333,12 @@
 [[redirects]]
     from = "/handbook/company/1-1s"
     to = "/handbook/company/management"
-    
+
 # Added: 2022-06-07
 [[redirects]]
     from = "/lenny"
     to = "/?utm_campaign=lenny"
-    
+
 # Added: 2022-06-09
 [[redirects]]
     from = "/blog/the-posthog-array-1-36-1"
@@ -1353,22 +1353,22 @@
 [[redirects]]
     from = "/docs/self-host/migrate-to-cloud"
     to = "/docs/self-host/migrate/migrate-between-cloud-and-self-hosted"
-    
+
 # Added: 2022-06-30
 [[redirects]]
     from = "/tutorials/categories/plugins"
     to = "/tutorials/categories/apps"
-    
+
 # Added: 2022-07-08
 [[redirects]]
     from = "/startups"
     to = "/pricing"
-    
+
 # Added: 2022-07-11
 [[redirects]]
     from = "/trial"
     to = "/pricing"
-    
+
 # Added: 2022-07-12
 [[redirects]]
     from = "/schedule-demo"
@@ -1976,7 +1976,7 @@
     from = "/blog/the-posthog-array-1-39-1"
     to = "/blog/the-posthog-array-1-39-0"
 
-# Added: 2022-09-02    
+# Added: 2022-09-02
 [[redirects]]
     from = "/product/experimentation"
     to = "/product/experimentation-suite"
@@ -2561,4 +2561,3 @@
 [[redirects]]
     from = "/docs/self-host/open-source/support"
     to = "/docs/self-host/deploy/support"
-
