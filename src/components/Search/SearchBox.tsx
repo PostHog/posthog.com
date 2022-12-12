@@ -1,18 +1,19 @@
 import React from 'react'
 import { useSearch } from './SearchContext'
-import type { SearchResultType } from './SearchContext'
+import type { SearchResultType, SearchLocation } from './SearchContext'
 
 type SearchBoxProps = {
     placeholder?: string
+    location: SearchLocation
     filter?: SearchResultType
 }
 
-export const SearchBox: React.FC<SearchBoxProps> = ({ placeholder, filter }) => {
+export const SearchBox: React.FC<SearchBoxProps> = ({ placeholder, location, filter }) => {
     const { open } = useSearch()
 
     const handleSearchBoxClick = (event: React.MouseEvent) => {
         event.preventDefault()
-        open(filter)
+        open(location, filter)
     }
 
     return (
