@@ -29,7 +29,7 @@ In this guide, we'll cover:
 
 ### 1. PostHog does more than product analytics
 
-Don't mistake us, product analytics is a core part of our platform, but it's just one cog in a suite of vital tools for product and data teams. When you adopt PostHog you also get session recording (with console logs), feature flagging, A/B and multivariate testing, and customizable data pipelines – all seamlessly integrated and with just one bill to pay. Don't want session recording? Just turn it off.
+Don't mistake us, product analytics is a core part of our platform, but it's just one cog in a suite of vital tools for product and data teams. When you adopt PostHog you also get session recording (with console logs), feature flagging, A/B and multivariate testing, and customizable data pipelines – all seamlessly integrated and with just one bill to pay.
 
 ### 2. It's built for engineers
 
@@ -181,119 +181,7 @@ PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our 
 
 - **NPS & surveys:** PostHog doesn't have a built-in survey feature, but it's easy to [create your own surveys and send the results to PostHog for analysis](/tutorials/survey).
 
-## Privacy, Admin & Security
 
-COPY HERE
-COPY HERE
-COPY HERE
-
-### Privacy Compliance
-
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-            <td className="w-3/12"></td>
-            <td><strong>Mixpanel</strong></td>
-            <td><strong>PostHog</strong></td>
-            <td></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>GDPR compliant</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>EU hosting or data residency available</td>
-        </tr>
-        <tr>
-            <td><strong>HIPAA compliant</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Business Associate Agreement available</td>
-        </tr>
-        <tr>
-            <td><strong>Data anonymization</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Remove personally identifiable information for privacy</td>
-        </tr>
-        <tr>
-            <td><strong>Self-hosting option</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Self-host and keep complete control of your data</td>
-        </tr>
-        <tr>
-            <td><strong>Cookie-less tracking option</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Use analytics without cookie consent banners</td>
-        </tr>
-    </tbody>
-</table>
-</div>
-
-- **Self-hosting:** While we recommend most customers use PostHog Cloud, PostHog can be self-hosted on your own infrastructure so you keep control of all your data. This is useful for businesses that handle highly sensitive information, such as defense or health data, but it is more expensive than using PostHog Cloud. See: [Who should self-host PostHog?](#who-should-selfhost-posthog)
-
-- **HIPAA compliance:** Both Mixpanel and PostHog will sign a Business Associate Agreement if you require HIPAA compliance, [subject to conditions](anchor-link-here). Self-hosting PostHog is also a popular option for companies handling personal health information.
-
-- **Cookie-less tracking:** If you'd rather not serve annoying cookie banners to your users, PostHog can be configured to store data in memory so it doesn't persist beyond a single session. See: [How to use PostHog without cookie banners](/tutorials/cookieless-tracking). Note: some types of user analysis aren't possible with this method.
-
-### Admin & Security
-
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-            <td className="w-3/12"></td>
-            <td><strong>Mixpanel</strong></td>
-            <td><strong>PostHog</strong></td>
-            <td></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>SOC 2 certification</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center">Coming Q4</td>
-            <td>Externally audited security</td>
-        </tr>
-        <tr>
-            <td><strong>SAML/SSO</strong></td>
-            <td className="text-center">Enterprise</td>
-            <td className="text-center">Enterprise</td>
-            <td>Organization single sign-on</td>
-        </tr>
-        <tr>
-            <td><strong>Access levels</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Assign access levels to team members</td>
-        </tr>
-        <tr>
-            <td><strong>Multiple organizations</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Create orgs for all your internal teams</td>
-        </tr>
-        <tr>
-            <td><strong>Multiple projects</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Track multiple products and domains</td>
-        </tr>
-        <tr>
-            <td><strong>Private projects</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center">Enterprise</td>
-            <td>Create hidden projects with user permissions</td>
-        </tr>
-    </tbody>
-</table>
-</div>
-
-- **PostHog Enterprise:** Our [Enterprise tier](/enterprise) includes single sign-on, private projects, and a dedicated Slack support channel.
 
 ## Tracking & SDKs
 
@@ -347,6 +235,12 @@ COPY HERE
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Send events from your server</td>
+        </tr>
+        <tr>
+            <td><strong>Capture API</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Send events through an API</td>
         </tr>
     </tbody>
 </table>
@@ -910,6 +804,120 @@ Mixpanel and PostHog both support popular messaging apps and automation platform
     </tbody>
 </table>
 </div>
+
+## Privacy, Admin & Security
+
+COPY HERE
+COPY HERE
+COPY HERE
+
+### Privacy Compliance
+
+<div className="overflow-x-auto -mx-5 px-5">
+<table className="w-full mt-4" style="min-width: 600px;">
+    <thead>
+        <tr>
+            <td className="w-3/12"></td>
+            <td><strong>Mixpanel</strong></td>
+            <td><strong>PostHog</strong></td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>GDPR compliant</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>EU hosting or data residency available</td>
+        </tr>
+        <tr>
+            <td><strong>HIPAA compliant</strong></td>
+            <td className="text-center">Self-host only</td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Business Associate Agreement available</td>
+        </tr>
+        <tr>
+            <td><strong>Data anonymization</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Remove personally identifiable information for privacy</td>
+        </tr>
+        <tr>
+            <td><strong>Self-hosting option</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Self-host and keep complete control of your data</td>
+        </tr>
+        <tr>
+            <td><strong>Cookie-less tracking option</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Use analytics without cookie consent banners</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+- **Self-hosting:** While we recommend most customers use PostHog Cloud, PostHog can be self-hosted on your own infrastructure so you keep control of all your data. This is useful for businesses that handle highly sensitive information, such as defense or health data, but it is more expensive than using PostHog Cloud. See: [Who should self-host PostHog?](#who-should-selfhost-posthog)
+
+- **HIPAA compliance:** Mixpanel will sign a Business Associate Agreement if you require HIPAA compliance. At PostHog, we recommend self-hosting PostHog if you require HIPAA compliance. This ensures all sensitive data never leaves your infrastructure, giving you complete control and simplifying compliance processes.
+
+- **Cookie-less tracking:** If you'd rather not serve annoying cookie banners to your users, PostHog can be configured to store data in memory so it doesn't persist beyond a single session. See: [How to use PostHog without cookie banners](/tutorials/cookieless-tracking). Note: some types of user analysis aren't possible with this method.
+
+### Admin & Security
+
+<div className="overflow-x-auto -mx-5 px-5">
+<table className="w-full mt-4" style="min-width: 600px;">
+    <thead>
+        <tr>
+            <td className="w-3/12"></td>
+            <td><strong>Mixpanel</strong></td>
+            <td><strong>PostHog</strong></td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>SOC 2 certification</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center">Coming Q4</td>
+            <td>Externally audited security</td>
+        </tr>
+        <tr>
+            <td><strong>SAML/SSO</strong></td>
+            <td className="text-center">Enterprise</td>
+            <td className="text-center">Enterprise</td>
+            <td>Organization single sign-on</td>
+        </tr>
+        <tr>
+            <td><strong>Access levels</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Assign access levels to team members</td>
+        </tr>
+        <tr>
+            <td><strong>Multiple organizations</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Create orgs for all your internal teams</td>
+        </tr>
+        <tr>
+            <td><strong>Multiple projects</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Track multiple products and domains</td>
+        </tr>
+        <tr>
+            <td><strong>Private projects</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center">Enterprise</td>
+            <td>Create hidden projects with user permissions</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+- **PostHog Enterprise:** Our [Enterprise tier](/enterprise) includes single sign-on, private projects, and a dedicated Slack support channel.
 
 ## Frequently asked questions
 
