@@ -26,7 +26,7 @@ export default function Questions() {
 
     const { data, size, setSize } = useSWRInfinite<any[]>(
         (offset) =>
-            `http://localhost:3000/api/v1/questions?organizationId=a898bcf2-c5b9-4039-82a0-a00220a8c626&start=${
+            `https://squeak.cloud/api/v1/questions?organizationId=a898bcf2-c5b9-4039-82a0-a00220a8c626&start=${
                 offset * 20
             }&perPage=20&published=true&sortBy=${sortBy}`,
         (url: string) =>
