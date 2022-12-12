@@ -142,7 +142,7 @@
         "sass": "^1.43.2",
         "sharp": "^0.30.7",
         "slugify": "^1.6.0",
-        "squeak-react": "^4.2.0",
+        "squeak-react": "^4.2.1",
         "styled-components": "^5.3.3",
         "svg-sprite": "^1.5.0",
         "swr": "^2.0.0",
