@@ -7,7 +7,7 @@ import fetch from 'node-fetch'
 export const createPages: GatsbyNode['createPages'] = async ({ actions: { createPage }, graphql }) => {
     const BlogPostTemplate = path.resolve(`src/templates/BlogPost.js`)
     const PlainTemplate = path.resolve(`src/templates/Plain.js`)
-    const BlogCategoryTemplate = path.resolve(`src/templates/BlogCategory.js`)
+    const BlogCategoryTemplate = path.resolve(`src/templates/BlogCategory.tsx`)
     const CustomerTemplate = path.resolve(`src/templates/Customer.js`)
     const PluginTemplate = path.resolve(`src/templates/Plugin.js`)
     const AppTemplate = path.resolve(`src/templates/App.js`)
@@ -208,8 +208,11 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     }
                 }
             }
-            categories: allMdx(limit: 1000) {
-                group(field: frontmatter___categories) {
+            categories: allMdx(
+                sort: { order: DESC, fields: [frontmatter___date] }
+                filter: { isFuture: { eq: false }, frontmatter: { rootPage: { eq: "/blog" }, date: { ne: null } } }
+            ) {
+                group(field: frontmatter___categories, limit: 2) {
                     category: fieldValue
                 }
             }
@@ -421,16 +424,17 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     })
 
+    console.log('cats', categories)
+
     Object.keys(categories).forEach((category) => {
         const { url, slug } = categories[category]
+        console.log(category, slug)
         createPage({
             path: url,
             component: BlogCategoryTemplate,
             context: {
-                title: category,
                 category,
                 slug,
-                crumbs: [{ title: 'Blog', url: '/blog' }, { title: category }],
             },
         })
     })
