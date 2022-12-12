@@ -33,17 +33,82 @@ Don't mistake us, product analytics is a core part of our platform, but it's jus
 
 ### 2. It's built for engineers
 
-Anyone can use PostHog – just [ask our marketing team](/blog/posthog-vs-amplitude) – but it's designed for engineers first. We believe engineering-led companies are the future of tech and that future requires tools that let software engineers flex their product muscles. In building a platform [product engineers](/blog/what-is-a-product-engineer) love, we're also building a platform that gives data and marketing teams unrivaled insights.
+Anyone can use PostHog – just [ask our marketing team](/blog/posthog-vs-amplitude) – but it's designed for engineers first. We believe engineering-led companies are the future of tech and that future requires tools that let [product engineers](https://posthog.com/blog/what-is-a-product-engineer) flex their product muscles. 
 
 ### 3. We're an open book
 
-PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our product is open source and released under an MIT License. You can read [our source code](https://github.com/PostHog/posthog), raise your own issues and PRs, and [build apps atop PostHog](/blog/how-we-built-an-app-server) to support custom data flows. Anyone can read our [company handbook](/handbook) and [how we pay people](/handbook/people/compensation).
+PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our product is open source and released under an MIT License. You can read [our source code](https://github.com/PostHog/posthog), raise your own issues and PRs, and [build apps atop PostHog](/blog/how-we-built-an-app-server) to support custom data flows. Anyone can read or comment on our [public roadmap](/roadmap).
 
 > This guide compares Mixpanel's self-serve Growth plan with PostHog Cloud. Features available on other plans are marked as such.
 
 ## Features
 
-### Product Analytics
+### Platform
+
+<div className="overflow-x-auto -mx-5 px-5">
+<table className="w-full mt-4" style="min-width: 600px;">
+    <thead>
+        <tr>
+			<td className="w-3/12"></td>
+            <td><strong>Mixpanel</strong></td>
+            <td><strong>PostHog</strong></td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Product analytics</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Track events and conversion; analyse user behavior</td>
+        </tr>
+        <tr>
+            <td><strong>Session recording</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Watch real users use your product; diagnose bugs</td>
+        </tr>
+        <tr>
+            <td><strong>Feature flags</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Roll out features safely; toggle features for cohorts or individuals</td>
+        </tr>
+        <tr>
+            <td><strong>Experiments</strong></td>
+            <td className="text-center">Enterprise</td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Test changes in production before rolling them out</td>
+        </tr>
+        <tr>
+            <td><strong>Heatmaps</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Track where users click and why</td>
+        </tr>
+        <tr>
+            <td><strong>Event pipelines</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Push and pull data to enrich customer profiles</td>
+        </tr>
+        <tr>
+            <td><strong>Open source</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Build your own apps and contribute code</td>
+        </tr>        
+    </tbody>
+</table>
+</div>
+
+- **Experiments:** Mixpanel offers an experiments feature in its Enterprise plan, but it's limited to running simple A/B tests. PostHog's experimentation suite supports A/B and multivariate tests using our integrated feature flagging. Visit our [experimentation product page](/product/experimentation-suite) for more info.
+
+- **Feature flagging:** Mixpanel doesn't have any built-in feature flag functionality. PostHog supports unlimited flags for free, and targeting by percentage or user properties. Visit [our session recording page](/product/feature-flags) for more information.
+
+- **Session recording:** PostHog offers 15,000 session recordings per month for free. Sensitive data can be obscured from recordings using CSS classes. Visit our [session recording page](/product/session-recording) for more information.
+
+### Product analytics
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -111,77 +176,24 @@ PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our 
             <td>Understand how organizations use your product</td>
         </tr>
         <tr>
-            <td><strong>Open source</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td><strong>Formulas</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Build your own apps; contribute code</td>
-        </tr>        
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Use custom formulas to create unique insights</td>
+        </tr>
+        <tr>
+            <td><strong>SQL query editor</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center">Coming Q1 2023</td>
+            <td>Write your own queries in SQL</td>
+        </tr>          
     </tbody>
 </table>
 </div>
 
 - **Correlation analysis:** When viewing a funnel in PostHog, [correlation analysis](/product/correlation-analysis) automatically suggests events and properties that correlate to success or failure – e.g. "people who converted were 10x more likely to versus people who dropped off". We use transparent, testable statistical models – no phony "AI" here.
 
-### Advanced features
-
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-			<td className="w-3/12"></td>
-            <td><strong>Mixpanel</strong></td>
-            <td><strong>PostHog</strong></td>
-            <td></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>Feature flags</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Roll out features safely; toggle features for cohorts or individuals</td>
-        </tr>
-        <tr>
-            <td><strong>Session recording</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Watch users interact with your product; diagnose bugs</td>
-        </tr>
-        <tr>
-            <td><strong>Experiments</strong></td>
-            <td className="text-center">Enterprise</td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Test changes in production before rolling them out</td>
-        </tr>
-        <tr>
-            <td><strong>Heatmaps</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Track where users click and why</td>
-        </tr>
-        <tr>
-            <td><strong>In-app guides</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Create in-app feature guides</td>
-        </tr>
-        <tr>
-            <td><strong>NPS & surveys</strong></td>
-			  <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-orange text-lg">⚠</span></td>
-            <td>Create, report on surveys, gather feedback</td>
-        </tr>
-    </tbody>
-</table>
-</div>
-
-- **Experiments:** Mixpanel offers an experiments feature in its Enterprise plan, but it's limited to running simple A/B tests. Users on Mixpanel's Growth plan can integrate with third-party testing tools like AB Tasty or Convert and analyze results in Mixpanel. PostHog's experimentation suite supports A/B and multivariate tests using our integrated feature flagging.
-
-- **Feature flagging:** Mixpanel doesn't have any built-in feature flag functionality, but there are official integrations for Flagsmith, GrowthBook, and others. See: [What are the benefits of an all-in-one platform?](anchor-link-here)
-
-- **NPS & surveys:** PostHog doesn't have a built-in survey feature, but it's easy to [create your own surveys and send the results to PostHog for analysis](/tutorials/survey).
-
-
+- **SQL query editor:** Mixpanel doesn't support SQL queries, instead option for a its own query language, JQL (JavaScript Query Language). PostHog's SQL query editor is [currently in development](/PostHog/posthog/issues/12352).
 
 ## Tracking & SDKs
 
@@ -207,7 +219,7 @@ COPY HERE
             <td>Track manually instrumented events</td>
         </tr>
         <tr>
-            <td><strong>Event autocapture</strong></td>
+            <td><strong>Autocapture</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Automatically track events without instrumentation</td>
