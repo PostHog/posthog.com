@@ -1,7 +1,6 @@
 import Layout from 'components/Layout'
 import PostLayout from 'components/PostLayout'
 import { SEO } from 'components/seo'
-import { graphql } from 'gatsby'
 import { createHubSpotContact } from 'lib/utils'
 import { useTopicMenu } from 'lib/useTopicMenu'
 import React from 'react'
@@ -20,11 +19,12 @@ type QuestionPageProps = {
 export default function QuestionPage(props: QuestionPageProps) {
     const menu = useTopicMenu()
     const { data: question } = useSWR<Question>(
-        `${process.env.GATSBY_SQUEAK_API_HOST}/api/question?organizationId=${process.env.GATSBY_SQUEAK_ORG_ID}&permalink=${props.params.permalink}`,
-        (url) => fetch(url).then((res) => res.json())
+        `${process.env.GATSBY_SQUEAK_API_HOST}/api/v1/questions?organizationId=${process.env.GATSBY_SQUEAK_ORG_ID}&permalink=${props.params.permalink}`,
+        (url) =>
+            fetch(url)
+                .then((res) => res.json())
+                .then(({ questions }) => questions[0])
     )
-
-    console.log(question)
 
     return (
         <Layout>

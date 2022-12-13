@@ -137,10 +137,8 @@ export default function ProfilePage({ params }: PageProps) {
                                 onClick={() => setEditModalOpen(false)}
                                 className="flex flex-start justify-center absolute w-full p-4"
                             >
-                                <div
-                                    className="max-w-xl bg-white dark:bg-black rounded-md relative w-full p-5"
-                                    onClick={(e) => e.stopPropagation()}
-                                >
+                                className="max-w-xl bg-white dark:bg-black rounded-md relative w-full p-5"
+                                <div onClick={(e) => e.stopPropagation()}>
                                     <EditProfile onSubmit={handleEditProfile} profile={profile} />
                                 </div>
                             </div>

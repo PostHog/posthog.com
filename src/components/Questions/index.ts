@@ -5,6 +5,7 @@ export type Question = {
     subject: string
     topics: {
         topic: {
+            id: string
             label: string
         }
     }[]

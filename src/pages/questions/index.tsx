@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { useTopicMenu } from 'lib/useTopicMenu'
 import { Listbox } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/outline'
+import useSWRInfinite from 'swr/infinite'
 
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
@@ -14,6 +15,21 @@ import QuestionForm from 'components/Questions/QuestionForm'
 export default function Questions() {
     const menu = useTopicMenu()
     const [sortBy, setSortBy] = useState<'newest' | 'activity' | 'popular'>('newest')
+
+    const { data, size, setSize, isLoading, mutate } = useSWRInfinite<any[]>(
+        (offset) =>
+            `${process.env.GATSBY_SQUEAK_API_HOST}/api/v1/questions?organizationId=${
+                process.env.GATSBY_SQUEAK_ORG_ID
+            }&start=${offset * 20}&perPage=20&published=true&sortBy=${sortBy}`,
+        (url: string) =>
+            fetch(url)
+                .then((r) => r.json())
+                .then((r) => r.questions)
+    )
+
+    const questions = React.useMemo(() => {
+        return data?.flat() || []
+    }, [size, data])
 
     return (
         <Layout>
@@ -62,11 +78,16 @@ export default function Questions() {
                                         </Listbox.Options>
                                     </Listbox>
 
-                                    <QuestionForm />
+                                    <QuestionForm onSubmit={() => mutate()} />
                                 </div>
                             </div>
                             <div className="mt-8 flex flex-col">
-                                <QuestionsTable sortBy={sortBy} />
+                                <QuestionsTable
+                                    questions={questions}
+                                    size={size}
+                                    setSize={setSize}
+                                    isLoading={isLoading}
+                                />
                             </div>
                         </div>
                     </section>

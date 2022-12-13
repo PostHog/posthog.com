@@ -1,29 +1,19 @@
 import React from 'react'
 
 import { dayFormat, dateToDays } from '../../utils'
-import useSWRInfinite from 'swr/infinite'
 import slugify from 'slugify'
 
 import Link from 'components/Link'
+import { Question } from './index'
 
-type QuestionSortBy = 'newest' | 'activity' | 'popular'
+type QuestionsTableProps = {
+    questions: Question[]
+    isLoading: boolean
+    size: number
+    setSize: (size: number | ((_size: number) => number)) => any
+}
 
-export const QuestionsTable = ({ sortBy }: { sortBy: QuestionSortBy }) => {
-    const { data, size, setSize, isLoading } = useSWRInfinite<any[]>(
-        (offset) =>
-            `${process.env.GATSBY_SQUEAK_API_HOST}/api/v1/questions?organizationId=${
-                process.env.GATSBY_SQUEAK_ORG_ID
-            }&start=${offset * 20}&perPage=20&published=true&sortBy=${sortBy}`,
-        (url: string) =>
-            fetch(url)
-                .then((r) => r.json())
-                .then((r) => r.questions)
-    )
-
-    const questions = React.useMemo(() => {
-        return data?.flat() || []
-    }, [size, data])
-
+export const QuestionsTable = ({ questions, isLoading, setSize }: QuestionsTableProps) => {
     return (
         <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">

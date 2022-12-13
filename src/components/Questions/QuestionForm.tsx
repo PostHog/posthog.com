@@ -6,11 +6,18 @@ import { Close } from 'components/Icons/Icons'
 
 import { Authentication, Form } from 'squeak-react'
 
-export default function Questions() {
+type QuestionFormProps = {
+    onSubmit: () => void
+}
+
+export default function Questions(props: QuestionFormProps): JSX.Element {
     const { user, getSession } = useUser()
     const [showModal, setShowModal] = useState(false)
 
-    console.log(user)
+    const handleSubmit = () => {
+        props.onSubmit()
+        setShowModal(false)
+    }
 
     return (
         <>
@@ -31,7 +38,7 @@ export default function Questions() {
                                     apiHost={process.env.GATSBY_SQUEAK_API_HOST as string}
                                     organizationId={process.env.GATSBY_SQUEAK_ORG_ID as string}
                                     initialView="question-form"
-                                    onSubmit={() => setShowModal(false)}
+                                    onSubmit={handleSubmit}
                                 />
                             </>
                         ) : (
