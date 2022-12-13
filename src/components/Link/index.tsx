@@ -51,7 +51,7 @@ export default function Link({
     const preview =
         other.preview ||
         glossary?.find((glossaryItem) => {
-            return glossaryItem?.slug === url?.replace(/https:\/\/posthog.com|#.*/gi, '')
+            return glossaryItem?.slug === url?.replace(/https:\/\/posthog.com/gi, '')
         })
     return onClick && !url ? (
         <button onClick={handleClick} className={className}>
