@@ -1,4 +1,3 @@
-import Breadcrumbs from 'components/Breadcrumbs'
 import Avatar from 'components/CommunityQuestions/Avatar'
 import Link from 'components/Link'
 import PostLayout from 'components/PostLayout'
@@ -30,10 +29,7 @@ export const Posts = ({ posts, title, action }) => {
 
                     return (
                         <li className="relative rounded-md overflow-hidden" key={id}>
-                            <Link
-                                className="text-white dark:text-black hover:text-white dark:hover-text-black"
-                                to={slug}
-                            >
+                            <Link className="text-white hover:text-white" to={slug}>
                                 <GatsbyImage image={getImage(featuredImage)} />
                                 <div className="bg-black/60 absolute inset-0 p-6 flex flex-col h-full w-full">
                                     <p className="m-0 text-sm opacity-80">{categories.join(', ')}</p>
