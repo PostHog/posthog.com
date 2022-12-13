@@ -9,14 +9,17 @@ import Layout from '../Layout'
 import { SEO } from '../seo'
 import slugify from 'slugify'
 import blogMenu from './blogMenu'
+import { NewsletterForm } from 'components/NewsletterForm'
 
 export const Posts = ({ posts, title, action }) => {
     return (
         <section className="mb-12">
-            <div className="pb-2 mb-5 border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark flex justify-between items-center">
-                <h4 className="m-0 text-2xl">{title}</h4>
-                <div>{action}</div>
-            </div>
+            {title && (
+                <div className="pb-2 mb-5 border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark flex justify-between items-center">
+                    <h4 className="m-0 text-2xl">{title}</h4>
+                    <div>{action}</div>
+                </div>
+            )}
             <ul className="list-none m-0 p-0 grid md:grid-cols-2 gap-4">
                 {posts.map((post) => {
                     const {
@@ -90,6 +93,7 @@ const Blog = ({
                     posts={allPostsFilter === 'popular' ? allPostsPopular : allPostsRecent}
                     action={<PostToggle checked={allPostsFilter === 'popular'} onChange={handleToggleChange} />}
                 />
+                <NewsletterForm />
                 {categories.group.map(({ category, edges }) => {
                     const slug = slugify(category, { lower: true })
                     const url = `/blog/categories/${slug}`

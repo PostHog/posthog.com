@@ -6,6 +6,7 @@ import blogMenu from 'components/Blog/blogMenu'
 import Layout from 'components/Layout'
 import { Posts, PostToggle } from 'components/Blog'
 import Pagination from 'components/Pagination'
+import { NewsletterForm } from 'components/NewsletterForm'
 
 const BlogCategory = ({
     data: {
@@ -23,6 +24,8 @@ const BlogCategory = ({
         setAllPostsFilter(postsFilter)
     }
 
+    const posts = allPostsFilter === 'popular' ? allPostsPopular : allPostsRecent
+
     return (
         <Layout>
             <SEO title={`${category} - PostHog`} />
@@ -38,9 +41,11 @@ const BlogCategory = ({
                 <div className="mt-6 mb-12">
                     <Posts
                         title={category}
-                        posts={allPostsFilter === 'popular' ? allPostsPopular : allPostsRecent}
+                        posts={posts.slice(0, 4)}
                         action={<PostToggle checked={allPostsFilter === 'popular'} onChange={handleToggleChange} />}
                     />
+                    <NewsletterForm />
+                    <Posts posts={posts.slice(4)} />
                     <Pagination currentPage={currentPage} numPages={numPages} base={base} />
                 </div>
             </PostLayout>
