@@ -111,7 +111,7 @@ _How do I find out a customer's usage?_
 
 _Can a customer transfer from self-hosted (e.g. Open Source) to Cloud?_
 
-Yes! See [the Replicator app](/apps/replicator).
+Yes! See [the Replicator app](/docs/apps/replicator).
 
 _Can a customer transfer from Cloud to Self-hosted?_
 
