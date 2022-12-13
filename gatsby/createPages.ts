@@ -3,6 +3,7 @@ import { GatsbyNode } from 'gatsby'
 import path from 'path'
 import slugify from 'slugify'
 import fetch from 'node-fetch'
+const Slugger = require('github-slugger')
 
 export const createPages: GatsbyNode['createPages'] = async ({ actions: { createPage }, graphql }) => {
     const BlogPostTemplate = path.resolve(`src/templates/BlogPost.js`)
@@ -314,11 +315,13 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     }
 
     function formatToc(headings) {
+        // need to use slugger for header links to match
+        const slugger = new Slugger()
         return headings.map((heading) => {
             return {
                 ...heading,
                 depth: heading.depth - 2,
-                url: slugify(heading.value),
+                url: slugger.slug(heading.value),
             }
         })
     }
