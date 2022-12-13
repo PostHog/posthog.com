@@ -1,20 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSearch } from './SearchContext'
 import { Search, CmdK, Ctrl, K } from 'components/Icons/Icons'
 import { SearchResultType } from './SearchContext'
-import cntl from 'cntl'
 
 type SearchBoxProps = {
     placeholder?: string
     filter?: SearchResultType
 }
 
-const keyboardShortcut = cntl`
-    box-content p-[5px] border border-b-2 border-gray-accent-light dark:border-gray-accent-light/40 rounded-[3px] inline-flex text-black/35 dark:text-white/40 
-`
+const keyboardShortcut =
+    'box-content p-[5px] border border-b-2 border-gray-accent-light dark:border-gray-accent-light/40 rounded-[3px] inline-flex text-black/35 dark:text-white/40'
 
 export const SidebarSearchBox: React.FC<SearchBoxProps> = ({ placeholder, filter }) => {
+    const [isMac, setIsMac] = React.useState<boolean | undefined>(undefined)
     const { open } = useSearch()
+
+    useEffect(() => {
+        setIsMac(typeof window !== 'undefined' && window.navigator.userAgent.toLowerCase().includes('macintosh'))
+    }, [])
 
     return (
         <button
@@ -28,18 +31,20 @@ export const SidebarSearchBox: React.FC<SearchBoxProps> = ({ placeholder, filter
 
             <div className="flex items-center justify-between pl-10 pr-2 py-2 text-left text-[15px] font-medium text-black/30 dark:text-primary-dark/30 bg-white/50 dark:bg-gray-accent-dark dark:text-white w-full z-10">
                 <span>{placeholder || 'Search...'}</span>
-                <span>
-                    {typeof window !== 'undefined' && window.navigator.userAgent.toLowerCase().includes('macintosh') ? (
-                        <kbd className="">
-                            <CmdK className={keyboardShortcut} />
-                        </kbd>
-                    ) : (
-                        <kbd className="space-x-1">
-                            <Ctrl className={keyboardShortcut} />
-                            <K className={keyboardShortcut} />
-                        </kbd>
-                    )}
-                </span>
+                {isMac !== undefined && (
+                    <span>
+                        {isMac ? (
+                            <kbd className="">
+                                <CmdK className={keyboardShortcut} />
+                            </kbd>
+                        ) : (
+                            <kbd className="space-x-1">
+                                <Ctrl className={keyboardShortcut} />
+                                <K className={keyboardShortcut} />
+                            </kbd>
+                        )}
+                    </span>
+                )}
             </div>
         </button>
     )

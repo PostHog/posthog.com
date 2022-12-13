@@ -18,19 +18,7 @@ const tiers = [
         description: 'Quis suspendisse ut fermentum neque vivamus non tellus.',
     },
     {
-        name: 'Self-Hosted',
-        href: '#',
-        priceMonthly: 59,
-        description: 'Orci volutpat ut sed sed neque, dui eget. Quis tristique non.',
-    },
-    {
         name: '+ Enterprise package',
-        href: '#',
-        priceMonthly: 59,
-        description: 'Orci volutpat ut sed sed neque, dui eget. Quis tristique non.',
-    },
-    {
-        name: 'Open Source',
         href: '#',
         priceMonthly: 59,
         description: 'Orci volutpat ut sed sed neque, dui eget. Quis tristique non.',
@@ -727,7 +715,7 @@ export const PlanComparison = ({ className = '' }) => {
                                 {tiers.map((tier) => (
                                     <th
                                         key={tier.name}
-                                        className="py-2 px-3 text-sm text-left font-bold text-almost-black leading-tight border-white/10 sticky top-0  z-10 bg-opacity-75 bg-tan"
+                                        className="py-2 px-3 text-sm text-left font-bold text-almost-black leading-tight border-white/10 sticky top-0  z-10 bg-opacity-75 bg-tan w-full"
                                         scope="col"
                                     >
                                         {tier.name}

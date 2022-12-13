@@ -363,6 +363,7 @@
         { "source": "/devopsjourney", "destination": "/?utm_campaign=devopsjourney" },
         { "source": "/ebenezer", "destination": "/?utm_campaign=ebenezer" },
         { "source": "/codu", "destination": "/?utm_campaign=codu" },
+        { "source": "/peterelbaum", "destination": "/?utm_campaign=peterelbaum" },
         { "source": "/blog/the-posthog-array-1-36-1", "destination": "/blog/the-posthog-array-1-36-0" },
         { "source": "/tutorials/b2b", "destination": "/blog/b2b-saas-product-metrics" },
         {
@@ -616,6 +617,10 @@
         {
             "source": "/docs/self-host/deploy/hosting-costs",
             "destination": "/docs/self-host/enterprise/hosting-costs"
+        },
+        {
+            "source": "/blog/using-posting",
+            "destination": "/blog/using-posthog"
         }
     ],
     "rewrites": [
