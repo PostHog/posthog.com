@@ -212,8 +212,9 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 sort: { order: DESC, fields: [frontmatter___date] }
                 filter: { isFuture: { eq: false }, frontmatter: { rootPage: { eq: "/blog" }, date: { ne: null } } }
             ) {
-                group(field: frontmatter___categories, limit: 2) {
+                group(field: frontmatter___categories) {
                     category: fieldValue
+                    totalCount
                 }
             }
             plugins: allPlugin(filter: { url: { regex: "/github.com/" } }) {
@@ -323,13 +324,32 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     }
 
     const categories = {}
-    result.data.categories.group.forEach(({ category }) => {
+    result.data.categories.group.forEach(({ category, totalCount }) => {
+        const postsPerPage = 10
+        const numPages = Math.ceil(totalCount / postsPerPage)
         const slug = slugify(category, { lower: true })
         const url = `/blog/categories/${slug}`
         categories[category] = {
             slug,
             url,
         }
+        Array.from({ length: numPages }).forEach((_, i) => {
+            const base = `/blog/categories/${slug}`
+            const context = {
+                category,
+                slug,
+                limit: postsPerPage,
+                skip: i * postsPerPage,
+                numPages,
+                currentPage: i + 1,
+                base,
+            }
+            createPage({
+                path: i === 0 ? base : `${base}/${i + 1}`,
+                component: BlogCategoryTemplate,
+                context,
+            })
+        })
     })
 
     result.data.allMdx.nodes.forEach((node) => {
@@ -419,21 +439,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 id: node.id,
                 tableOfContents,
                 categories: postCategories.map((category) => ({ name: category, url: categories[category]?.url })),
-                slug,
-            },
-        })
-    })
-
-    console.log('cats', categories)
-
-    Object.keys(categories).forEach((category) => {
-        const { url, slug } = categories[category]
-        console.log(category, slug)
-        createPage({
-            path: url,
-            component: BlogCategoryTemplate,
-            context: {
-                category,
                 slug,
             },
         })
