@@ -19,10 +19,10 @@ Want to know how PostHog and Mixpanel are different? If you remember nothing els
 
 In this guide, we'll cover:
 
-- Mixpanel and PostHog's [core features](#core-features)
-- [Privacy and compliance](#privacy--compliance) on each platform
-- How they track usage and [library support](#tracking--sdks)
-- [Compare available integrations](#integrations) in multiple categories
+- Mixpanel and PostHog's [core features](#features)
+- How they [track usage](#tracking--sdks) and [library support](#client-libraries)
+- [Available integrations](#integrations)
+- [Privacy and compliance](#privacy--compliance)
 - [Answer frequently asked questions](#frequently-asked-questions) about PostHog and Mixpanel
 
 ## How is PostHog different to Mixpanel?
@@ -193,13 +193,11 @@ PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our 
 
 - **Correlation analysis:** When viewing a funnel in PostHog, [correlation analysis](/product/correlation-analysis) automatically suggests events and properties that correlate to success or failure – e.g. "people who converted were 10x more likely to versus people who dropped off". We use transparent, testable statistical models – no phony "AI" here.
 
-- **SQL query editor:** Mixpanel doesn't support SQL queries, instead option for a its own query language, JQL (JavaScript Query Language). PostHog's SQL query editor is [currently in development](/PostHog/posthog/issues/12352).
+- **SQL query editor:** Mixpanel doesn't support SQL queries, instead opting for its own query language, JQL (JavaScript Query Language). PostHog's SQL query editor is [currently in development](/PostHog/posthog/issues/12352).
 
 ## Tracking & SDKs
 
-COPY HERE
-COPY HERE
-COPY HERE
+PostHog and Mixpanel both support a broad range of tracking options and libraries. The main difference is PostHog supports event autocapture, so you don't have to manually instrument all your events to track them,
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -268,8 +266,6 @@ Some would have you believe that autocapture generates "too much data" that's ha
 
 To quote Tony Stark: “An intelligence agency which fears intelligence is, historically, not awesome.”
 
-[add diagram here based on Heap one]
-
 ### Client libraries
 
 <div className="overflow-x-auto -mx-5 px-5">
@@ -333,7 +329,7 @@ To quote Tony Stark: “An intelligence agency which fears intelligence is, hist
 
 - **Mobile app session recordings:** We don't currently support session recording in mobile apps, but it's currently under consideration as a project for our session recording team. See our [public roadmap](/roadmap) for more info.
 
-- **Unity:** We don't have a Unity SDK yet, as we're open-source, anyone can create one. See our [contribution guidelines](/docs/contribute) for more info.
+- **Unity:** We don't have a Unity SDK yet but, as we're open-source, anyone can create one. See our [contribution guidelines](/docs/contribute) for more info.
 
 ### Server libraries
 
@@ -404,9 +400,9 @@ Some PostHog features, such as session recording and autocapture, are only avail
 
 ## Integrations
 
-Mixpanel claims over 50 official integrations covering a wide-range of use cases. Given its focus on product analytics alone, many of these integrations connect to third-party tools for A/B testing, feature flag, and marketing.
+Mixpanel claims over 50 official integrations covering a wide-range of use cases. Given its focus on product analytics alone, many of these integrations connect to third-party tools for A/B testing, feature flag, and marketing use cases.
 
-The [PostHog app store](/apps) has over 50 apps as well, though not all of these are integrations with external tools. PostHog doesn't natively connect with A/B testing or feature flag tools as these features are built into PostHog itself.
+The [PostHog App Store](/apps) has over 50 apps as well, though not all of these are integrations with external tools. PostHog doesn't natively connect with A/B testing or feature flag tools as these features are built into PostHog itself.
 
 **Categories:**
 
@@ -487,8 +483,8 @@ Mixpanel and PostHog support a wide-range of export destinations.
         </tr>
         <tr>
             <td><strong>Fivetran</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td>Extract and load data to external platforms</td>
         </tr>
     </tbody>
@@ -497,9 +493,7 @@ Mixpanel and PostHog support a wide-range of export destinations.
 
 ### Data Import
 
-Mixpanel natively supports more data sources. Up to now, our priority has been to make it easy to get data out of PostHog to where you need it to be. 
-
-Please get in touch if you require a specific import source we don't currently support. Because we're open source, it's also possible to [build you own ingestion apps](/docs/apps/build) for edge cases. 
+Both tools can ingest data from a broad range of sources via their import APIs or dedicated integrations.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -533,31 +527,31 @@ Please get in touch if you require a specific import source we don't currently s
         <tr>
             <td><strong>Amazon S3</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Ingest data from S3 bucket for analysis</td>
         </tr>
         <tr>
             <td><strong>Google Cloud Storage</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Ingest data from GCS bucket for analysis</td>
         </tr>
         <tr>
             <td><strong>Google Pub/Sub</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Import events from Pub/Sub topics</td>
         </tr>
         <tr>
             <td><strong>Snowflake</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Import Snowflake data for analysis</td>
         </tr>
         <tr>
             <td><strong>Snowplow</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Ingest events from behavioral data platform</td>
         </tr>
         <tr>
@@ -596,7 +590,7 @@ Please get in touch if you require a specific import source we don't currently s
 
 ### Dev Tools & Support
 
-As an open source platform designed for technical teams, PostHog integrates with numerous developer tools and platforms. This isn't an area of strong support for Mixpanel due to its focus on product managers and marketing teams.
+As an open source platform designed for technical teams, PostHog integrates with numerous developer tools and platforms. This isn't an area of strong support for Mixpanel.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -764,7 +758,7 @@ It's easy to track marketing conversions in PostHog, but you can't currently con
 
 ### Alerts & Automation
 
-Mixpanel and PostHog both support popular messaging apps and automation platforms, though PostHog also support Discord and the open-source Zapier alternative, n8n.
+Mixpanel and PostHog both support popular messaging apps and automation platforms, though PostHog also supports Discord and the open-source Zapier alternative, n8n.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -819,9 +813,7 @@ Mixpanel and PostHog both support popular messaging apps and automation platform
 
 ## Privacy, Admin & Security
 
-COPY HERE
-COPY HERE
-COPY HERE
+
 
 ### Privacy Compliance
 
@@ -844,15 +836,15 @@ COPY HERE
         </tr>
         <tr>
             <td><strong>HIPAA compliant</strong></td>
-            <td className="text-center">Self-host only</td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center">Self-host only</td>
             <td>Business Associate Agreement available</td>
         </tr>
         <tr>
             <td><strong>Data anonymization</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Remove personally identifiable information for privacy</td>
+            <td>Remove personally identifiable information</td>
         </tr>
         <tr>
             <td><strong>Self-hosting option</strong></td>
@@ -872,7 +864,7 @@ COPY HERE
 
 - **Self-hosting:** While we recommend most customers use PostHog Cloud, PostHog can be self-hosted on your own infrastructure so you keep control of all your data. This is useful for businesses that handle highly sensitive information, such as defense or health data, but it is more expensive than using PostHog Cloud. See: [Who should self-host PostHog?](#who-should-selfhost-posthog)
 
-- **HIPAA compliance:** Mixpanel will sign a Business Associate Agreement if you require HIPAA compliance. At PostHog, we recommend self-hosting PostHog if you require HIPAA compliance. This ensures all sensitive data never leaves your infrastructure, giving you complete control and simplifying compliance processes.
+- **HIPAA compliance:** Mixpanel will sign a Business Associate Agreement if you require HIPAA compliance. At PostHog, we recommend self-hosting PostHog if you require [HIPAA compliance](/docs/privacy/hipaa-compliance). This ensures all sensitive data never leaves your infrastructure, giving you complete control and simplifying compliance processes.
 
 - **Cookie-less tracking:** If you'd rather not serve annoying cookie banners to your users, PostHog can be configured to store data in memory so it doesn't persist beyond a single session. See: [How to use PostHog without cookie banners](/tutorials/cookieless-tracking). Note: some types of user analysis aren't possible with this method.
 
@@ -939,7 +931,38 @@ We recommend 95% of companies use [PostHog Cloud](/pricing) – it's fully-manag
 
 Enterprises looking to self-host will require an infrastructure team knowledgeable in Kubernetes and ClickHouse. Our [partner directory](/partners) includes third-party specialists who can support self-hosted deployments. Please [book a call](book-a-demo) to discuss your options and whether self-hosting is right for you.
 
-- Why choose an open source platform?
-- Why should I choose an all-in-one platform?
+### How long does it take to deploy PostHog?
 
-- What are the conditions for signing a BAA with PostHog?
+When using PostHog Cloud, mere minutes. All you need to do is include a tracking snippet in your website and you're good to go. See our guide to [getting started on PostHog Cloud](/docs/getting-started/cloud) for more info.
+
+### Does PostHog use cookies?
+
+Yes, PostHog (like Mixpanel) uses cookies. Cookies are necessary to enable common use cases, such as cross-domain tracking and tracking returning visitors.
+
+It is possible, however, to configure PostHog to track users without requiring [without cookie banners](/tutorials/cookieless-tracking) by storing cookies in `memory` so it doesn't persist beyond an individual session.
+
+Both Mixpanel and PostHog also support anonymizing data, while the PostHog [Property Filter app](/apps/property-filter) allows you to limit the types of information collected to protect user privacy.
+
+### How much does PostHog cost?
+
+We believe in transparent pricing, which is why [our pricing page](/pricing) includes an easy-to-understand pricing calculator.
+
+PostHog Cloud includes a generous 1 million events and 15,000 session recordings per month for **free, every month** with **no feature limitations**.
+
+A typical, medium-size B2B product with 10,000 monthly active users, who generate: 
+
+- 100 events each per month
+- 5 sessions each per month
+
+Would use:
+
+- 1 million events per month
+- 50,000 session recordings
+
+Discounts for annual contracts are available on application.
+
+### How much does Mixpanel cost?
+
+Mixpanel prices based on "Monthly Track Users" (MTUs) and applies a limit of 1,000 events per MTU. A company with 10,000 MTUs would pay $190 per month, or £133 per month if you pay annually.
+
+Mixpanel also offers a free tier with a 100k MTU limit, however it applies numerous feature limits – e.g. you can create but **not save** cohorts.
