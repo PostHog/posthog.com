@@ -59,8 +59,8 @@ export default function SqueakTopics({ data }: IProps) {
                             limit={5}
                             topics={false}
                             slug={null}
-                            apiHost={'https://squeak.cloud'}
-                            organizationId="a898bcf2-c5b9-4039-82a0-a00220a8c626"
+                            apiHost={process.env.GATSBY_SQUEAK_API_HOST as string}
+                            organizationId={process.env.GATSBY_SQUEAK_ORG_ID as string}
                             topic={data.squeakTopic.topicId}
                         />
                     </section>

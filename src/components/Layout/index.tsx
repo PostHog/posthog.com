@@ -23,7 +23,10 @@ const Layout = ({ children, className = '' }: { children: React.ReactNode; class
 
     return (
         <SearchProvider>
-            <UserProvider apiHost="https://squeak.cloud" organizationId="a898bcf2-c5b9-4039-82a0-a00220a8c626">
+            <UserProvider
+                apiHost={process.env.GATSBY_SQUEAK_API_HOST as string}
+                organizationId={process.env.GATSBY_SQUEAK_ORG_ID as string}
+            >
                 <div className={className}>
                     <Header />
                     <main>{children}</main>

@@ -73,7 +73,9 @@ export default function ProfilePage({ params }: PageProps) {
 
     React.useEffect(() => {
         if (id) {
-            fetch(`https://squeak.cloud/api/profiles/${id}?organizationId=a898bcf2-c5b9-4039-82a0-a00220a8c626`)
+            fetch(
+                `${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${id}?organizationId=${process.env.GATSBY_SQUEAK_ORG_ID}`
+            )
                 .then((res) => {
                     if (res.status === 404) {
                         throw new Error('not found')
@@ -87,10 +89,10 @@ export default function ProfilePage({ params }: PageProps) {
                 .catch((err) => {
                     console.error(err)
                 })
-            fetch(`https://squeak.cloud/api/questions`, {
+            fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions`, {
                 method: 'POST',
                 body: JSON.stringify({
-                    organizationId: 'a898bcf2-c5b9-4039-82a0-a00220a8c626',
+                    organizationId: process.env.GATSBY_SQUEAK_ORG_ID,
                     profileId: id,
                     published: true,
                 }),
@@ -123,7 +125,10 @@ export default function ProfilePage({ params }: PageProps) {
         <>
             <SEO title={`Community Profile - PostHog`} />
             <OrgProvider
-                value={{ organizationId: 'a898bcf2-c5b9-4039-82a0-a00220a8c626', apiHost: 'https://squeak.cloud' }}
+                value={{
+                    organizationId: process.env.GATSBY_SQUEAK_ORG_ID as string,
+                    apiHost: process.env.GATSBY_SQUEAK_API_HOST as string,
+                }}
             >
                 <Layout>
                     <UserProvider>
@@ -183,8 +188,8 @@ export default function ProfilePage({ params }: PageProps) {
                                             <Question
                                                 key={question.id}
                                                 question={question}
-                                                apiHost="https://squeak.cloud"
-                                                organizationId="a898bcf2-c5b9-4039-82a0-a00220a8c626"
+                                                apiHost={process.env.GATSBY_SQUEAK_API_HOST as string}
+                                                organizationId={process.env.GATSBY_SQUEAK_ORG_ID as string}
                                             />
                                         )
                                     })}
