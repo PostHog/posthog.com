@@ -588,7 +588,7 @@ Both tools can ingest data from a broad range of sources via their import APIs o
 </table>
 </div>
 
-### Dev Tools & Support
+### Dev tools & support
 
 As an open source platform designed for technical teams, PostHog integrates with numerous developer tools and platforms. This isn't an area of strong support for Mixpanel.
 
@@ -655,7 +655,7 @@ As an open source platform designed for technical teams, PostHog integrates with
 </table>
 </div>
 
-### Marketing & Sales
+### Marketing & sales
 
 Both platforms support a wide-range of sales and marketing tools to support automation flows and syncing of user data.
 
@@ -756,7 +756,7 @@ It's easy to track marketing conversions in PostHog, but you can't currently con
 </table>
 </div>
 
-### Alerts & Automation
+### Alerts & automation
 
 Mixpanel and PostHog both support popular messaging apps and automation platforms, though PostHog also supports Discord and the open-source Zapier alternative, n8n.
 
@@ -811,11 +811,9 @@ Mixpanel and PostHog both support popular messaging apps and automation platform
 </table>
 </div>
 
-## Privacy, Admin & Security
+## Privacy, admin & security
 
-
-
-### Privacy Compliance
+### Privacy compliance
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -868,7 +866,7 @@ Mixpanel and PostHog both support popular messaging apps and automation platform
 
 - **Cookie-less tracking:** If you'd rather not serve annoying cookie banners to your users, PostHog can be configured to store data in memory so it doesn't persist beyond a single session. See: [How to use PostHog without cookie banners](/tutorials/cookieless-tracking). Note: some types of user analysis aren't possible with this method.
 
-### Admin & Security
+### Admin & security
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
