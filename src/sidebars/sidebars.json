@@ -1648,6 +1648,10 @@
                             "name": "PagerDuty Connector"
                         },
                         {
+                            "url": "/docs/apps/laudspeaker-connector",
+                            "name": "Laudspeaker Connector"
+                        },
+                        {
                             "url": "/docs/apps/postgres-export",
                             "name": "PostgreSQL Export"
                         },
@@ -1688,6 +1692,10 @@
                             "name": "Pace Integration"
                         },
                         {
+                            "url": "/docs/apps/patterns-connector",
+                            "name": "Patterns Connector"
+                        },
+                        {
                             "url": "/docs/apps/zapier-connector",
                             "name": "Zapier Connector"
                         }
@@ -1700,6 +1708,10 @@
                         {
                             "url": "/docs/apps/downsampling",
                             "name": "Downsampler"
+                        },
+                        {
+                            "url": "/docs/apps/semver-flattener",
+                            "name": "SemVer Flattener"
                         },
                         {
                             "url": "/docs/apps/event-sequence-timer",
@@ -1724,6 +1736,10 @@
                         {
                             "url": "/docs/apps/taxonomy-standardizer",
                             "name": "Taxonomy Standardizer"
+                        },
+                        {
+                            "url": "/docs/apps/filter-out",
+                            "name": "Filter Out"
                         },
                         {
                             "url": "/docs/apps/unduplicator",
@@ -1772,6 +1788,14 @@
                         {
                             "url": "/docs/apps/pineapple-mode",
                             "name": "Pineapple Mode"
+                        },
+                        {
+                            "url": "/docs/apps/feedback-widget",
+                            "name": "Feedback Widget"
+                        },
+                        {
+                            "url": "/docs/apps/notification-bar",
+                            "name": "Notification Bar"
                         }
                     ]
                 }
