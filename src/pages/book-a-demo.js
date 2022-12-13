@@ -52,7 +52,8 @@ const Editions = ({ setDemoType }) => {
                     </div>
                 </div>
                 <div className="md:col-span-2 pt-6 border-t border-dashed border-gray-accent-light text-center">
-                    <h3 className="m-0">Not sure if PostHog is right for you?</h3>
+                    <h3 className="m-0">Have a few questions?</h3>
+                    <h3 className="m-0"> Want to self-host?</h3>
                     <p className="m-0 mt-1 text-black/50 font-medium text-sm">
                         Book a quick Q&A with someone from the PostHog team!
                     </p>
@@ -64,7 +65,7 @@ const Editions = ({ setDemoType }) => {
                             onClick={() => setDemoType('qa')}
                             event={{ name: 'book a demo: clicked qa' }}
                         >
-                            Meet PostHog
+                            Book 15 minutes
                         </CallToAction>
                     </div>
                 </div>

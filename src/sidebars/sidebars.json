@@ -1578,6 +1578,10 @@
                             "name": "Shopify Connector"
                         },
                         {
+                            "url": "/docs/apps/stripe-connector",
+                            "name": "Stripe Connector"
+                        },
+                        {
                             "url": "/docs/apps/twitter-followers",
                             "name": "Twitter Followers Tracker"
                         },
@@ -1598,6 +1602,10 @@
                         {
                             "url": "/docs/apps/s3-export",
                             "name": "Amazon S3 Export"
+                        },
+                        {
+                            "url": "/docs/apps/s3-export",
+                            "name": "Avo Inspector"
                         },
                         {
                             "url": "/docs/apps/bigquery-export",
@@ -1630,10 +1638,6 @@
                         {
                             "url": "/docs/apps/intercom",
                             "name": "Intercom Connector"
-                        },
-                        {
-                            "url": "/docs/apps/migrator-3000",
-                            "name": "Migrator 3000"
                         },
                         {
                             "url": "/docs/apps/pagerduty-connector",
@@ -1728,6 +1732,10 @@
                     "url": "",
                     "children": [
                         {
+                            "url": "/docs/apps/advanced-geoip",
+                            "name": "Advanced GeoIP Enricher"
+                        },
+                        {
                             "url": "/docs/apps/automatic-cohort-creator",
                             "name": "Automatic Cohort Creator"
                         },
@@ -1750,6 +1758,16 @@
                         {
                             "url": "/docs/apps/user-agent-populator",
                             "name": "User Agent Populator"
+                        }
+                    ]
+                },
+                {
+                    "name": "Site apps",
+                    "url": "",
+                    "children": [
+                        {
+                            "url": "/docs/apps/pineapple-mode",
+                            "name": "Pineapple Mode"
                         }
                     ]
                 }
@@ -2000,10 +2018,6 @@
         {
             "name": "Ingestion Alerts",
             "url": "/apps/ingestion-alert"
-        },
-        {
-            "name": "Migrator 3000",
-            "url": "/apps/migrator-3000"
         },
         {
             "name": "n8n Connector",
