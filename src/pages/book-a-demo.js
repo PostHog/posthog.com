@@ -1,11 +1,11 @@
-import { CallToAction } from 'components/CallToAction/index.js'
+import { CallToAction } from 'components/CallToAction/index.tsx'
 import Contact from 'components/Contact'
 import { Title } from 'components/Pricing/PricingTable/Plan'
 import { SEO } from 'components/seo'
 import Intro from 'components/SignUp/Intro'
 import Layout from 'components/SignUp/Layout'
 import { useValues } from 'kea'
-import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
+import usePostHog from '../hooks/usePostHog'
 import React, { useEffect, useState } from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 
@@ -52,7 +52,8 @@ const Editions = ({ setDemoType }) => {
                     </div>
                 </div>
                 <div className="md:col-span-2 pt-6 border-t border-dashed border-gray-accent-light text-center">
-                    <h3 className="m-0">Not sure if PostHog is right for you?</h3>
+                    <h3 className="m-0">Have a few questions?</h3>
+                    <h3 className="m-0"> Want to self-host?</h3>
                     <p className="m-0 mt-1 text-black/50 font-medium text-sm">
                         Book a quick Q&A with someone from the PostHog team!
                     </p>
@@ -64,7 +65,7 @@ const Editions = ({ setDemoType }) => {
                             onClick={() => setDemoType('qa')}
                             event={{ name: 'book a demo: clicked qa' }}
                         >
-                            Meet PostHog
+                            Book 15 minutes
                         </CallToAction>
                     </div>
                 </div>
@@ -89,7 +90,7 @@ export default function SelfHost({ location }) {
             title: 'Select edition',
         },
     ]
-    const { posthog } = useValues(posthogAnalyticsLogic)
+    const posthog = usePostHog()
     const [demoType, setDemoType] = useState(location.state?.demoType)
     const [crumbs, setCrumbs] = useState(initialCrumbs)
 

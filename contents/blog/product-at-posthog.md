@@ -11,7 +11,7 @@ featuredImageType: full
 categories: ["Inside PostHog", "Product analytics", "Startups"]
 ---
 
-We’ve talked before about [product-minded engineers](https://posthog.com/blog/turning-engineers-into-product-people) at PostHog. We don’t have PMs dictating a roadmap or solutions - it all comes from engineering. A PostHog engineer has complete autonomy to decide the 'what' (prioritization) and the 'how' (solution) of the features we build, so Product & Design play a role that’s a bit different to the typical tech startup. 
+We’ve talked before about [product-minded engineers](/blog/what-is-a-product-engineer) at PostHog. We don’t have PMs dictating a roadmap or solutions - it all comes from engineering. A PostHog engineer has complete autonomy to decide the 'what' (prioritization) and the 'how' (solution) of the features we build, so Product & Design play a role that’s a bit different to the typical tech startup. 
 
 Let's look at how product development workflow at PostHog, the responsibilities of the Product Team, the benefits & results of this approach, the foundations required to build a team like this, and some pitfalls and learnings we’ve acquired along the way.
 

@@ -434,7 +434,7 @@ Indexes:
 What this tells us is that ClickHouse:
 1. First leverages an internal MinMax index on `timestamp` to whittle down the number of parts to 2/14 and granules to 3589/24421
 2. Then it tries to filter via the partition key but this doesn't narrow things down further
-3. Then, it loads and leverages the Primary key as before to narrow data down to 12 parts.
+3. Then, it loads and leverages the Primary key as before to narrow data down to 12 granules.
 4. Lastly reads, filters and aggregates data in those 12 granules
 
 The benefit here is that it could skip reading the primary key index for most of the parts that did not contain relevant data. If and how much this speeds up the query however depends on the size of the dataset.

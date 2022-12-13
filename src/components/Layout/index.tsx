@@ -2,9 +2,7 @@ import React, { useEffect } from 'react'
 import { Header } from '../Header/Header'
 import { Footer } from '../Footer/Footer'
 import CookieBanner from 'components/CookieBanner'
-import Banner from 'components/Banner'
-import { useValues } from 'kea'
-import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
+import usePostHog from '../../hooks/usePostHog'
 import { SearchProvider } from 'components/Search/SearchContext'
 
 import './Fonts.scss'
@@ -13,7 +11,7 @@ import './SkeletonLoading.css'
 import './DarkMode.scss'
 
 const Layout = ({ children, className = '' }: { children: React.ReactNode; className?: string }): JSX.Element => {
-    const { posthog } = useValues(posthogAnalyticsLogic)
+    const posthog = usePostHog()
 
     useEffect(() => {
         if (window && posthog) {
@@ -24,7 +22,6 @@ const Layout = ({ children, className = '' }: { children: React.ReactNode; class
     return (
         <SearchProvider>
             <div className={className}>
-                <Banner />
                 <Header />
                 <main>{children}</main>
                 <Footer />

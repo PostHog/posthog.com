@@ -1,6 +1,7 @@
 import { CallToAction } from 'components/CallToAction'
 import { RightArrow } from 'components/Icons/Icons'
 import Link from 'components/Link'
+import { SignupCTA } from 'components/SignupCTA'
 import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
 import slugify from 'slugify'
@@ -77,13 +78,11 @@ export const InstallingPostHog = () => {
                 <li>
                     <h5>PostHog Cloud</h5>
                     <p>Create an account, install tracking code, and get started in minutes.</p>
-                    <CallToAction
-                        to="https://app.posthog.com/signup"
+                    <SignupCTA
+                        text="Try PostHog Cloud - free"
                         event="next steps - installing posthog: Try PostHog Cloud - free"
                         className="mb-2"
-                    >
-                        Try PostHog Cloud - free
-                    </CallToAction>
+                    />
                     <Divider className="my-4" />
                 </li>
                 <li>

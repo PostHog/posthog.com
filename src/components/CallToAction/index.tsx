@@ -1,7 +1,6 @@
 import cntl from 'cntl'
 import Link from 'components/Link'
-import { useValues } from 'kea'
-import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
+import usePostHog from '../../hooks/usePostHog'
 import React from 'react'
 
 const sizes = {
@@ -67,7 +66,7 @@ export const button = (type = 'primary', width = 'auto', className = '', size = 
 `
 
 export const TrackedCTA = ({ event: { name: eventName, ...event }, ...props }) => {
-    const { posthog } = useValues(posthogAnalyticsLogic)
+    const posthog = usePostHog()
 
     return (
         <CallToAction
@@ -93,7 +92,20 @@ export const CallToAction = ({
     externalNoIcon,
     state = {},
     event,
-}) => {
+}: {
+    type?: string
+    width?: string
+    size?: string
+    href?: string
+    to?: string
+    onClick?: () => void
+    children?: JSX.Element | string
+    className?: string
+    external?: boolean
+    externalNoIcon?: boolean
+    state?: any
+    event?: any
+}): JSX.Element => {
     const url = to || href
     return (
         <Link

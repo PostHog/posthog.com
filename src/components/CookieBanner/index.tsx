@@ -1,14 +1,13 @@
 import { StaticImage } from 'gatsby-plugin-image'
-import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
+import usePostHog from '../../hooks/usePostHog'
 import React, { useEffect, useState } from 'react'
-import { useValues } from 'kea'
 
 export default function CookieBanner() {
-    const { posthog } = useValues(posthogAnalyticsLogic)
+    const posthog = usePostHog()
     const [showBanner, setShowBanner] = useState(false)
 
     const handleClick = (accept: boolean) => {
-        accept ? posthog.opt_in_capturing() : posthog.opt_out_capturing()
+        accept ? posthog?.opt_in_capturing() : posthog?.opt_out_capturing()
         setShowBanner(false)
     }
 

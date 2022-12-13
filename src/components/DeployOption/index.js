@@ -24,8 +24,7 @@ import {
     Zapier,
 } from 'components/Icons/Icons'
 import Link from 'components/Link'
-import { useValues } from 'kea'
-import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
+import usePostHog from '../../hooks/usePostHog'
 import React from 'react'
 
 const icons = {
@@ -55,7 +54,7 @@ const icons = {
 }
 
 export default function DeployOption({ url, icon, title, disablePrefetch, badge }) {
-    const { posthog } = useValues(posthogAnalyticsLogic)
+    const posthog = usePostHog()
     const Icon = icon && icons[icon]
     const badgeClass = badge === 'new' ? 'success' : badge === 'beta' ? 'warning' : null
     return (

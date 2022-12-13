@@ -1,4 +1,4 @@
-import { TrackedCTA } from 'components/CallToAction/index.js' // TEMP
+import { TrackedCTA } from 'components/CallToAction/index.tsx' // TEMP
 import { Browser, Cloud, Lightning, Prohibited, ServerLocked, WebCode } from 'components/Icons/Icons'
 import { Plan } from 'components/Pricing/PricingTable/Plan'
 import { SEO } from 'components/seo'
