@@ -20,7 +20,7 @@ type QuestionPageProps = {
 export default function QuestionPage(props: QuestionPageProps) {
     const menu = useTopicMenu()
     const { data: question } = useSWR<Question>(
-        `https://squeak.cloud/api/question?organizationId=a898bcf2-c5b9-4039-82a0-a00220a8c626&permalink=${props.params.permalink}`,
+        `${process.env.GATSBY_SQUEAK_API_HOST}/api/question?organizationId=${process.env.GATSBY_SQUEAK_ORG_ID}&permalink=${props.params.permalink}`,
         (url) => fetch(url).then((res) => res.json())
     )
 

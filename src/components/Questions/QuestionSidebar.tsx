@@ -2,9 +2,10 @@ import { SidebarSection } from 'components/PostLayout'
 import slugify from 'slugify'
 import React from 'react'
 import Link from 'components/Link'
+import { Question } from './index'
 
-export const QuestionSidebar = ({ question }: { question: Question }) => {
-    return (
+export const QuestionSidebar = ({ question }: { question: Question | undefined }) => {
+    return question ? (
         <div>
             <SidebarSection title="Posted by">
                 <div className="flex items-center space-x-2">
@@ -49,7 +50,7 @@ export const QuestionSidebar = ({ question }: { question: Question }) => {
                 </SidebarSection>
             )}
         </div>
-    )
+    ) : null
 }
 
 export default QuestionSidebar

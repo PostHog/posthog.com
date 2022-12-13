@@ -11,9 +11,9 @@ type QuestionSortBy = 'newest' | 'activity' | 'popular'
 export const QuestionsTable = ({ sortBy }: { sortBy: QuestionSortBy }) => {
     const { data, size, setSize, isLoading } = useSWRInfinite<any[]>(
         (offset) =>
-            `https://squeak.cloud/api/v1/questions?organizationId=a898bcf2-c5b9-4039-82a0-a00220a8c626&start=${
-                offset * 20
-            }&perPage=20&published=true&sortBy=${sortBy}`,
+            `${process.env.GATSBY_SQUEAK_API_HOST}/api/v1/questions?organizationId=${
+                process.env.GATSBY_SQUEAK_ORG_ID
+            }&start=${offset * 20}&perPage=20&published=true&sortBy=${sortBy}`,
         (url: string) =>
             fetch(url)
                 .then((r) => r.json())

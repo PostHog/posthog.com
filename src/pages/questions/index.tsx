@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 
 import { useTopicMenu } from 'lib/useTopicMenu'
-import { useUser } from '../../hooks/useUser'
-import { Dialog, Listbox } from '@headlessui/react'
+import { Listbox } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/outline'
 
 import Layout from 'components/Layout'
@@ -10,16 +9,11 @@ import { SEO } from 'components/seo'
 import PostLayout from 'components/PostLayout'
 import SidebarSearchBox from 'components/Search/SidebarSearchBox'
 import QuestionsTable from 'components/Questions/QuestionsTable'
+import QuestionForm from 'components/Questions/QuestionForm'
 
 export default function Questions() {
-    const { user } = useUser()
     const menu = useTopicMenu()
-    const [showForm, setShowForm] = useState(false)
     const [sortBy, setSortBy] = useState<'newest' | 'activity' | 'popular'>('newest')
-
-    const handleSqueakSubmit = () => {
-        setShowForm(false)
-    }
 
     return (
         <Layout>
@@ -33,17 +27,6 @@ export default function Questions() {
                             <p className="text-gray">We've got answers!</p>
                         </div>
                     </section>
-
-                    <Dialog open={showForm} onClose={(isOpen) => setShowForm(isOpen)}>
-                        <div className="fixed inset-0 bg-black opacity-30 z-40" />
-
-                        <div className="fixed inset-0 flex items-center justify-center z-50">
-                            <Dialog.Panel className="bg-white p-4 rounded-lg shadow w-full max-w-2xl">
-                                <Dialog.Title>Ask a question</Dialog.Title>
-                                <div className="flex items-center justify-center">{JSON.stringify(user)}</div>
-                            </Dialog.Panel>
-                        </div>
-                    </Dialog>
 
                     <section className="pt-4">
                         <div className="max-w-6xl mx-auto">
@@ -78,13 +61,8 @@ export default function Questions() {
                                             ))}
                                         </Listbox.Options>
                                     </Listbox>
-                                    <button
-                                        type="button"
-                                        className="flex-shrink-0 inline-flex items-center justify-center rounded border border-transparent bg-red px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-red focus:ring-offset-2 sm:w-auto shadow-lg"
-                                        onClick={() => setShowForm(true)}
-                                    >
-                                        Ask a question
-                                    </button>
+
+                                    <QuestionForm />
                                 </div>
                             </div>
                             <div className="mt-8 flex flex-col">

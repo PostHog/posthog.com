@@ -1,20 +1,38 @@
 import { useContext } from 'react'
 import React, { createContext, useEffect, useState } from 'react'
 
+type User = {
+    id: string
+    email: string
+    isMember: boolean
+    profile: {
+        avatar: string
+        first_name: string
+        last_name: string
+    }
+}
+
 type UserContextValue = {
     organizationId: string
     apiHost: string
-    user: Record<string, any> | null // TODO: Bring in real user type
-    setUser: React.Dispatch<React.SetStateAction<Record<string, any> | null>>
+    isLoading: boolean
+
+    user: User | null
+    setUser: React.Dispatch<React.SetStateAction<User | null>>
+
+    getSession: () => Promise<User | null>
 }
 
 export const UserContext = createContext<UserContextValue>({
     organizationId: '',
     apiHost: '',
+    isLoading: true,
     user: null,
     setUser: () => {
         // noop
     },
+
+    getSession: async () => null,
 })
 
 type UserProviderProps = {
@@ -24,29 +42,42 @@ type UserProviderProps = {
 }
 
 export const UserProvider: React.FC<UserProviderProps> = ({ apiHost, organizationId, children }) => {
-    const [user, setUser] = useState<Record<string, any> | null>(null)
+    const [isLoading, setIsLoading] = useState(true)
+    const [user, setUser] = useState<User | null>(null)
 
     useEffect(() => {
-        fetch(`${apiHost}/api/user?organizationId=${organizationId}`, {
-            method: 'GET',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-            .then((res) => {
-                console.log(res)
-
-                /*const role = res.data.profile?.role
-            const isModerator = role === 'admin' || role === 'moderator'
-            setUser({ ...res.data, isModerator })*/
-            })
-            .catch(() => {
-                setUser(null)
-            })
+        getSession()
     }, [])
 
-    return <UserContext.Provider value={{ organizationId, apiHost, user, setUser }}>{children}</UserContext.Provider>
+    const getSession = async (): Promise<User | null> => {
+        setIsLoading(true)
+
+        try {
+            const res = await fetch(`${apiHost}/api/user?organizationId=${organizationId}`, {
+                method: 'GET',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+
+            const data = await res.json()
+            setUser(data)
+
+            return data as User
+        } catch (error) {
+            console.error(error)
+            return null
+        } finally {
+            setIsLoading(false)
+        }
+    }
+
+    return (
+        <UserContext.Provider value={{ organizationId, apiHost, user, setUser, isLoading, getSession }}>
+            {children}
+        </UserContext.Provider>
+    )
 }
 
 export const useUser = () => {
