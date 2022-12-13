@@ -9,8 +9,8 @@ import Confetti from 'react-confetti'
 import GitHubButton from 'react-github-btn'
 import { NewsletterForm } from 'components/NewsletterForm'
 import NotProductIcons from 'components/NotProductIcons'
-import { useValues } from 'kea'
-import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
+import usePostHog from '../../hooks/usePostHog'
+import { RenderInClient } from 'components/RenderInClient'
 const allowedFileTypes = ['application/pdf']
 
 interface IResumeComponentProps {
@@ -195,7 +195,7 @@ const Form = ({ setSubmitted, info, id }) => {
 const code = 'X7DABDB33723'
 
 export default function Apply({ id, info }) {
-    const { posthog } = useValues(posthogAnalyticsLogic)
+    const posthog = usePostHog()
     const [submitted, setSubmitted] = useState(false)
     const [copyTooltip, setCopyTooltip] = useState(false)
     const [copied, setCopied] = useState(false)
@@ -353,19 +353,32 @@ export default function Apply({ id, info }) {
                                 <div>
                                     <h5 className="text-base mb-0">Try PostHog Cloud</h5>
                                     <p className="text-sm opacity-60 mb-2">Easiest, fastest, cheapest</p>
-
-                                    <TrackedCTA
-                                        className="mt-auto"
-                                        html={`https://${
-                                            posthog?.isFeatureEnabled && posthog?.isFeatureEnabled('direct-to-eu-cloud')
-                                                ? 'eu'
-                                                : 'app'
-                                        }.posthog.com/signup`}
-                                        size="sm"
-                                        event={{ name: `clicked Continue`, type: 'cloud' }}
+                                    <RenderInClient
+                                        placeholder={
+                                            <TrackedCTA
+                                                className="mt-auto"
+                                                html={`https://app.posthog.com/signup`}
+                                                size="sm"
+                                                event={{ name: `clicked Continue`, type: 'cloud' }}
+                                            >
+                                                Get started - free
+                                            </TrackedCTA>
+                                        }
                                     >
-                                        Get started - free
-                                    </TrackedCTA>
+                                        <TrackedCTA
+                                            className="mt-auto"
+                                            html={`https://${
+                                                posthog?.isFeatureEnabled &&
+                                                posthog?.isFeatureEnabled('direct-to-eu-cloud')
+                                                    ? 'eu'
+                                                    : 'app'
+                                            }.posthog.com/signup`}
+                                            size="sm"
+                                            event={{ name: `clicked Continue`, type: 'cloud' }}
+                                        >
+                                            Get started - free
+                                        </TrackedCTA>
+                                    </RenderInClient>
                                 </div>
                                 <div>
                                     <h5 className="text-base mb-0">Self-hosted</h5>

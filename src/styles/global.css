@@ -843,7 +843,7 @@ ul {
 }
 
 .heart-pulse {
-    animation: pulse 5s linear infinite;
+    animation: heart-pulse 5s linear infinite;
 }
 
 .heart-fade {
@@ -870,7 +870,7 @@ ul {
     }
 }
 
-@keyframes pulse {
+@keyframes heart-pulse {
     0% {
         transform: scale(1);
     }

@@ -2,7 +2,7 @@ import { ExternalLink } from 'components/Icons/Icons'
 import { Link as GatsbyLink } from 'gatsby'
 import { useValues } from 'kea'
 import React from 'react'
-import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
+import usePostHog from '../../hooks/usePostHog'
 import type { GatsbyLinkProps } from 'gatsby'
 
 interface Props {
@@ -33,7 +33,7 @@ export default function Link({
     href,
     ...other
 }: Props) {
-    const { posthog } = useValues(posthogAnalyticsLogic)
+    const posthog = usePostHog()
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => {
         if (event && posthog) {

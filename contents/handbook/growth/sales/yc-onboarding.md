@@ -4,31 +4,45 @@ sidebar: Handbook
 showTitle: true
 ---
 
-As a Y Combinator company ourselves, we want to support other YC companies that wish to use PostHog. As such, our onboarding process for YC companies is different and more extensive than our general process.
+We want to support other YC companies using PostHog because:
+
+- Many of these companies will quickly grow into [our ICP](https://posthog.com/handbook/strategy/ideal-customer-persona) and we have an opportunity to get in early with them. 
+- A lot of our most helpful and direct product feedback has generally come from other YC companies. 
+- It's nice to give back to the YC community. 
 
 ## The YC deal
 
-Our YC deal provides the following:
+For startups in the W23 batch:
 
-- 20 million events/month, free for 6 months (PostHog Cloud or Self Hosted)
-- Companies also get a $50 gift card to spend on our merch and dedicated support (i.e. a private Slack with our core team members).
+- Get PostHog Cloud free for 12 months with up to 20m events and 50,000 session recordings per month
+- Choose between a free pair of Airpods or a Timbuk2 backpack
+- Book into a free YC group setup session where we will…
+  - Build a dashboard for the batch with your product growth metrics
+  - Pair with you to ensure you pass calls correctly
+- Get the batphone - CEO on whatsapp/text
 
-For current batch YC companies, we also offer:
+For previous batches:
 
-- 20 million events/month, free for a year (instead of 6 months)
-- Free group pairing session to help with setup
-- PostHog AirPods, a PostHog Timbuk2 Backpack, a $150 Open Collective gift card, or a $150 PostHog Merch gift card.
-- A referral scheme that lets you double-down on the above deal
+- Get PostHog Cloud free for 6 months with up to 20m events and 50,000 session recordings per month
 
-> **Note:** Batch-specific deals will be updated here as new batches come along.
+> Only James has the ability to update our deal in Bookface, so any changes to the deal text should be made in [this Google Doc](https://docs.google.com/document/d/17MtngAx2DeVo3YyhPwwKRvakI54SJuNmHkPtFns2IVQ/edit) then shared with him. 
+
+## Our process
+
+We want to make this feel as personalized as possible - there is an outsized impact in giving YC companies personal attention to ensure they are successful with PostHog. 
+
+- Kendal maintains a sheet with the details for all companies in the current batch as they launch (since the list isn't available anywhere)
+- James H messages every single one of them individually so that a) they have his number, and b) to tell them about the YC deal on Bookface
+- YC companies check out the deal and then book in for an onboarding call (see detailed section below)
+- Once companies are set up with us, we ask them to mark themselves as 'using' PostHog in Bookface
 
 ## Onboarding call
 
 ### Inbound request sources
 
-YC companies can reach out in different ways. Ideally, we will steer them towards the [dedicated YC Onboarding page](/yc-onboarding), but they may also reach out to us on _[yc@posthog.com](mailto:yc@posthog.com)_.
+YC companies can either book a demo [dedicated YC Onboarding page](/yc-onboarding) or email us directly on _[yc@posthog.com](mailto:yc@posthog.com)_.
 
-Having received a demo request through one of these sources, schedule an appropriate 1-hour slot and ensure at least one person can certainly attend it.
+Having received a demo request through one of these sources, schedule an appropriate 1-hour slot and ensure at least one YC company can definitely attend it. Ideally you want to batch these demos into small groups. 
 
 ### Before the call
 
@@ -36,7 +50,7 @@ Ideally, we want users to have gotten started with PostHog before the demo call.
 
 > Before the call, we recommend you sign up to our Cloud version and try installing our snippet on your website. Doing so would allow us to tailor the onboarding to your needs, leveraging data from your website instead of demo data. However, if you prefer to get a demo first, we'll give you access to a demo playground during our call.
 
-> **Note:** We recommend PostHog Cloud as a way to get started quickly, but it's up to them if they want to set up a self-hosted instance before the call. You should also help with this.
+> We recommend PostHog Cloud as a way to get started quickly, but it's up to them if they want to set up a self-hosted instance before the call. You should also help with this.
 
 If users come to the call with a ready instance, we can focus more on their needs and setting up relevant views than a basic overview of the platform that they could have gotten without us.
 
@@ -63,14 +77,16 @@ Always tailor the demo to the user specifically! Skip things they don't need and
 
 ### After the call
 
-If you have time left in the 1-hour slot, **do this during the call** - ensure the user is fully set up by the time the call is over.
+If you have time left in the 1-hour slot, **do this during the call** - ensure the user is fully set up by the time the call is over. Finally, make sure they are in our [user Slack group](/slack). 
 
-You should:
+Then you should:
 
 
 #### 1. Send a one-time giveaway
 
-Customers have the following giveaway options. Some options have restrictions depending on the shipping address.
+Customers have the following giveaway options. Our default are a choice of AirPods or Timbuk2 rucksack for folks in the US or Canada - if they live outside these countries, you should offer them a choice between $150 merch credit or Open Collective donation. 
+
+Please do _not_ send Airpods or Timbuk2 outside of the US and Canada, no matter how much someone asks - this creates big customs headaches for us and is a bad experience for the user. 
 
 <table>
 <thead>
@@ -175,20 +191,18 @@ To create a giftcard in Open Collective:
 </tbody>
 </table>
 
-Remind the YC contact that they will get another set of merch if they refer another company. All the other company needs to do is [schedule a YC onboarding session](/yc-onboarding) and say that "Company X" referred them. Then, we'll double-merch both of them.
-
 #### 2. Set up billing
 
 If they use PostHog Cloud, [update their plan to the Startup plan](/handbook/growth/sales/billing) using the Django Admin panel. Also, set `should_setup_billing` to `True` - this will prompt them to add card details (but assure them they won't get charged!)
-
-If they will self-host PostHog, set them up with a [one-year EE license](/handbook/growth/sales/billing) (Paolo can help with this).
 
 Ask them to confirm they've tagged themselves as using us, and send a direct link [to the deal](https://bookface.ycombinator.com/deals/687), so this is easy.
 
 #### 3. Set up HubSpot
 
-After they've gotten set up, if they are a promising company, [create a deal on the appropriate Hubspot pipeline](/handbook/growth/sales/sales-operations).
+After they've gotten set up, if appropriate, [create a deal on the appropriate Hubspot pipeline](/handbook/growth/sales/sales-operations).
 
 ## Responsibilities
 
-Cameron handles YC onboarding calls, and Charles manages Printfection, Open Collective, and Shopify.
+- James H and Kendal manage 1-1 comms with YC companies initially
+- Cameron handles YC onboarding calls, billing, and HubSpot
+- Grace manages Printfection, Open Collective, and Shopify
