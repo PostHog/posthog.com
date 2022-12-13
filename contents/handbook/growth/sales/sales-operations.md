@@ -115,7 +115,7 @@ Yes! See [the Replicator app](/docs/apps/replicator).
 
 _Can a customer transfer from Cloud to Self-hosted?_
 
-Yes! See [the Replicator app](/apps/replicator).
+Yes! See [the Replicator app](/docs/apps/replicator).
 
 They will _lose_ their dashboard and configuration - this will just retain their events, but usually that's the principal concern.
 
