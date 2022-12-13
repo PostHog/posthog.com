@@ -65,7 +65,7 @@ const faqs = [
     },
     {
         q: 'Can I switch between PostHog Cloud and Self-hosted plans?',
-        a: 'You can switch from PostHog Cloud to Self-hosted Scale and vice versa - just email our support team (hey@posthog.com). We will manually transfer your data, for free. If you are switching between PostHog Cloud and Self-hosted Open Source then you can transfer events yourself using our Replicator app - https://posthog.com/apps/replicator.',
+        a: 'You can switch from PostHog Cloud to Self-hosted Scale and vice versa - just email our support team (hey@posthog.com). We will manually transfer your data, for free. If you are switching between PostHog Cloud and Self-hosted Open Source then you can transfer events yourself using our Replicator app - https://posthog.com/docs/apps/replicator.',
         author: {
             q: {
                 image: <StaticImage alt="" width={40} src="./images/hog-1.png" />,
