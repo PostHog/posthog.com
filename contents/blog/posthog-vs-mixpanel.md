@@ -414,8 +414,6 @@ The [PostHog App Store](/apps) has over 50 apps as well, though not all of these
 
 ### Data Export
 
-Mixpanel and PostHog support a wide-range of export destinations.
-
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
     <thead>
@@ -492,8 +490,6 @@ Mixpanel and PostHog support a wide-range of export destinations.
 </div>
 
 ### Data Import
-
-Both tools can ingest data from a broad range of sources via their import APIs or dedicated integrations.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
