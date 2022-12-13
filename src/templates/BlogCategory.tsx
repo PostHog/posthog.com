@@ -35,7 +35,7 @@ const BlogCategory = ({
                 hideSidebar
                 hideSurvey
             >
-                <div className="mt-6">
+                <div className="mt-6 mb-12">
                     <Posts
                         title={category}
                         posts={allPostsFilter === 'popular' ? allPostsPopular : allPostsRecent}

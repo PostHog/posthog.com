@@ -73,7 +73,12 @@ export const Topics = ({ topics }: { topics: ITopic[] }) => {
             {topics.map(({ name, url, state }: ITopic) => {
                 return (
                     <li className="m-1" key={name}>
-                        <Chip state={state} className="text-red hover:text-red" href={url} size="xs">
+                        <Chip
+                            state={state}
+                            className="dark:text-white/80 dark:hover:text-white/80 text-black/80 hover:text-black/80 dark:border-gray-accent-dark !bg-[#2D2D2D] !bg-opacity-5 !text-xs"
+                            href={url}
+                            size="xs"
+                        >
                             {name}
                         </Chip>
                     </li>

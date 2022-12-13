@@ -6,7 +6,7 @@ import { InlineCode } from 'components/InlineCode'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
 import { H1, H2, H3, H4, H5, H6 } from 'components/MdxAnchorHeaders'
-import PostLayout, { Contributors, ShareLinks, SidebarSection, Text, Topics } from 'components/PostLayout'
+import PostLayout, { Contributors, PageViews, ShareLinks, SidebarSection, Text, Topics } from 'components/PostLayout'
 import { SEO } from 'components/seo'
 import { ZoomImage } from 'components/ZoomImage'
 import { graphql } from 'gatsby'
@@ -53,7 +53,7 @@ const Intro = ({ featuredImage, title, featuredImageType, contributors }) => {
     )
 }
 
-const BlogPostSidebar = ({ contributors, date, filePath, title, categories, location }) => {
+const BlogPostSidebar = ({ contributors, date, filePath, title, categories, location, pageViews }) => {
     return (
         <>
             {contributors && (
@@ -64,6 +64,11 @@ const BlogPostSidebar = ({ contributors, date, filePath, title, categories, loca
             <SidebarSection title="Share">
                 <ShareLinks title={title} href={location.href} />
             </SidebarSection>
+            {pageViews?.length > 0 && (
+                <SidebarSection>
+                    <PageViews pageViews={pageViews.toLocaleString()} />
+                </SidebarSection>
+            )}
             {categories?.length > 0 && (
                 <SidebarSection title="Topic(s)">
                     <Topics topics={categories} />
@@ -133,6 +138,7 @@ export default function BlogPost({ data, pageContext, location }) {
                         filePath={filePath}
                         title={title}
                         location={location}
+                        pageViews={fields?.pageViews}
                     />
                 }
             >
@@ -160,6 +166,7 @@ export const query = graphql`
             excerpt(pruneLength: 150)
             fields {
                 slug
+                pageViews
             }
             frontmatter {
                 date(formatString: "MMM DD, YYYY")
