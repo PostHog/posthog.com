@@ -72,7 +72,7 @@ Paid versions remove the project limit and add numerous paid-only features, incl
 - **Alternative to:** Google Analytics
 - [Matomo on GitHub](https://github.com/matomo-org/matomo) 
 
-[Matomo](https://matomo.org/) is an open-source platform for website analytics. It's one of the most popular open-source alternatives to Google Analytics for website owners and marketing teams. It even offers a data import tool for Google Analytics so you can bring your data with you. You can run it on-premise or use Matomo's own cloud hosting service.
+[Matomo](https://matomo.org/) is an open-source platform for website analytics. It's one of the most popular open-source [alternatives to Google Analytics for website owners](/blog/ga4-alternatives) and marketing teams. It even offers a data import tool for Google Analytics so you can bring your data with you. You can run it on-premise or use Matomo's own cloud hosting service.
 
 #### Who is Matomo for?
 Matomo is intended for marketing and website teams looking to track content performance and marketing attribution. It's suitable for both SMBs and enterprises – the EU runs a version of Matomo on all its websites.
@@ -311,4 +311,3 @@ Superset is ideal for enterprises with experienced in-house data teams. It can h
 
 Apache Superset is distributed under a Apache-2.0 license. There are no paid features or tiers.
 
-<NewsletterForm compact />

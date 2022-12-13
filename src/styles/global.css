@@ -23,6 +23,7 @@
 *,
 a {
     @apply box-border;
+    font-variant-ligatures: none;
 }
 
 main a,
@@ -66,12 +67,12 @@ h6 {
 }
 
 h1 {
-    @apply text-5xl font-bold leading-normal;
+    @apply text-5xl font-bold !leading-none;
     letter-spacing: -0.03em;
 }
 
 h2 {
-    @apply text-3xl font-bold leading-normal;
+    @apply text-3xl font-bold leading-tight;
     letter-spacing: -0.03em;
 
     code {
@@ -80,7 +81,7 @@ h2 {
 }
 
 h3 {
-    @apply text-2xl leading-normal;
+    @apply text-2xl leading-tight;
 
     code {
         @apply !font-bold !text-2xl;
@@ -102,8 +103,12 @@ h4 {
     h4,
     h5,
     h6 {
-        @apply mt-8;
+        @apply mt-4;
         letter-spacing: -0.015em;
+
+        a:not(.cta) {
+            font-variation-settings: 'wght' 800;
+        }
     }
 
     h2 + h3 {
@@ -235,8 +240,7 @@ h4 {
 }
 
 /* animated underlined links */
-.article-content a:not(.cta),
-footer a:not(.cta) {
+.article-content a:not(.cta) {
     background: linear-gradient(to right, rgba(191, 191, 188, 0), rgba(191, 191, 188, 0)),
         linear-gradient(to right, rgba(191, 191, 188, 1), rgba(191, 191, 188, 1));
     background-size: 100% 0.1em, 0 0.1em;
@@ -301,12 +305,30 @@ div[class^='feature-'].text-center {
         position: absolute;
         top: 0;
         width: 18px;
-
-        @apply xl:hidden;
     }
 
     &:hover:before {
         opacity: 1;
+    }
+}
+
+/* When used in article on-page nav, only show on mobile viewports... */
+
+#content-menu-wrapper .jumpTo:before {
+    @apply xl:hidden;
+}
+
+/* ... but show on desktop in search results (and rotate) */
+
+.search-results {
+    .jumpTo {
+        &:before {
+            @apply -rotate-90 top-0.5;
+        }
+
+        &:hover:before {
+            @apply opacity-50;
+        }
     }
 }
 
@@ -375,7 +397,6 @@ article .article-content {
     }
 }
 
-@import 'workable-overrides.css';
 @import 'backgrounds.css';
 @import 'buttons.scss';
 
@@ -532,6 +553,14 @@ ul {
     display: block;
     margin-left: auto;
     margin-right: auto;
+
+    > div:first-child {
+        @apply pl-4;
+    }
+
+    > div:last-child {
+        @apply pr-4;
+    }
 }
 .slick-track:before,
 .slick-track:after {
@@ -814,7 +843,7 @@ ul {
 }
 
 .heart-pulse {
-    animation: pulse 5s linear infinite;
+    animation: heart-pulse 5s linear infinite;
 }
 
 .heart-fade {
@@ -841,7 +870,7 @@ ul {
     }
 }
 
-@keyframes pulse {
+@keyframes heart-pulse {
     0% {
         transform: scale(1);
     }
@@ -937,8 +966,11 @@ body.dark {
 }
 
 .home-slider-buttons {
-    .slick-track > div {
-        @apply border-r border-dashed border-gray-accent-light;
+    .slick-track {
+        @apply flex;
+        & > div {
+            @apply border-r border-dashed border-gray-accent-light h-[inherit];
+        }
     }
 }
 
@@ -1030,4 +1062,96 @@ body.dark {
 iframe[src*='youtube.com'],
 iframe[src*='youtube-nocookie.com'] {
     @apply aspect-video w-full h-auto;
+}
+
+.job-content {
+    details {
+        @apply mb-4;
+
+        &[open] + details {
+            @apply mt-12;
+        }
+
+        summary {
+            @apply select-none;
+        }
+    }
+    section {
+        @apply mt-8 mb-8;
+
+        details:not([open]):last-child summary {
+            @apply mb-0;
+        }
+    }
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        br {
+            @apply hidden;
+        }
+    }
+    h2 {
+        @apply text-2xl;
+    }
+    h3 {
+        @apply text-xl;
+    }
+    h4,
+    h5 {
+        @apply text-lg;
+    }
+    h1 {
+        @apply text-4xl;
+    }
+    p {
+        @apply !min-h-0 mb-4;
+    }
+    ul {
+        @apply mb-4;
+    }
+    li {
+        p {
+            @apply mb-2;
+        }
+    }
+    summary {
+        @apply relative mb-4 cursor-pointer flex items-center justify-between pb-4 border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark outline-none;
+        h2 {
+            @apply m-0;
+        }
+        &::-webkit-details-marker {
+            @apply hidden;
+        }
+    }
+    details[open] > summary:after {
+        @apply rotate-[-45deg];
+    }
+    summary:after {
+        @apply transition-all inline-block absolute right-0 top-1/2 -translate-y-1/2 opacity-50 rotate-[135deg];
+        border-style: solid;
+        border-width: 0.18em 0.18em 0 0;
+        content: '';
+        height: 0.55em;
+        width: 0.55em;
+    }
+}
+
+.about-nav .slick-track,
+.careers-nav .slick-track {
+    @apply md:!flex md:!justify-center md:!w-auto md:!transform-none;
+}
+
+.eu-cloud header {
+    @apply bg-[#DFDFCD];
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }

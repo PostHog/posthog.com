@@ -1,0 +1,29 @@
+## Q1 2023 Goals
+
+### Objective 1: Ship PostHog 3000 UX. 10 happy ICP beta customers.
+
+- Why? Subjectively, we believe there are many UI/UX improvements to make it a tool that product engineers love.
+
+- Key results:
+  - We have shipped the core elements of PostHog 3000 that we believe are most impactful. This can be tabs, dark mode, a new query editor. TBD
+  - (Likely Q2) Ship notebooks - making it seamless to explore product questions in PostHog. Build with 5 happy beta customers
+    - Why? This should enable faster and more structured data exploration. The data exploration work this quarter unlocks this as a key workflow.
+
+### Objective 2: Make PostHog performance frustration free for our 10 largest customers
+
+- Key results:
+  - For top 10 US&EU clients p95 of dashboard load time <5s 
+  - For top 10 US&EU clients p95 of insight load time <5s
+  - Rough roadmap
+    - Some sample projects: rethinking timeouts, data sampling, re-schemaing. TBD
+    - Create plan for handling 10x larger customer and increasing redundancy from only Karl
+
+### Objective: Systematically prevent regressions across PostHog Part 2
+
+- Why? A number of users (including Simon and Cameron during demos) often experience regressions when using PostHog. This damages the experience and is problematic for the $20k+/year ICPs we are targeting
+- Key results:
+  - There are no demos that are interrupted by bugs
+  - There are no known ways of combining query options in a way that fails (query tests)
+  - Create a dashboard that tracks product quality in an objective way
+  - Other ideas:
+    - Automated rollout (internal, beta, hobbyists, paying then ICP)? Automated testing? Visual regression testing? QA tester? Proper issue tracking and triaging system? Create a system for triaging bugs and solving them?

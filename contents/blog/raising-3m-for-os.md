@@ -13,7 +13,7 @@ categories: ["CEO diaries", "Inside PostHog", "Open Source"]
 
 Open source projects have long battled with how to finance themselves. [PostHog](https://github.com/posthog/posthog) is lucky to have significant funding and wanted to share what we did to help other cool projects take off.
 
-For those who've not met us before, PostHog provide open source product analytics. We went through the YCombinator [W20 batch](https://www.ycombinator.com/companies?batch=w2020), which took place from January to March 2020. We have raised $3.025M in funding really quickly, and wanted to share what we did. We may well not be a typical company, but we would hope this gives some lessons learned regardless.
+For those who've not met us before, PostHog provide open source product analytics. We went through the Y Combinator [W20 batch](https://www.ycombinator.com/companies?batch=w2020), which took place from January to March 2020. We have raised $3.025M in funding really quickly, and wanted to share what we did. We may well not be a typical company, but we would hope this gives some lessons learned regardless.
 
 ## Why raise money at all
 
@@ -81,7 +81,7 @@ From this point on, we're going to explain how we raised venture capital in this
 
 ## Converting an Open Source project into a business
 
-This is a contraversial topic as it creates all kinds of incentives, but for at least our project, it fundamentally made the entire thing possible in the first place. We just wouldn't have gone ahead if we were working on it at weekends or in our spare time.
+This is a controversial topic as it creates all kinds of incentives, but for at least our project, it fundamentally made the entire thing possible in the first place. We just wouldn't have gone ahead if we were working on it at weekends or in our spare time.
 
 ## Product`<>`Community versus Product`<>`Market fit
 
@@ -146,7 +146,7 @@ We had to shift from selling ourselves to investors, to having to let investors 
 
 It may have been luck, but we didn't have a single negative interaction the entire way through this process. People wanted to understand what we're working on, they were encouraging and very helpful - even when they said no in many cases. A lot of the meetings were very intense and direct, but those were the most helpful ones of all. If you can handle QA, you can handle VC!
 
-## The impact of coronavirus
+## The impact of coronavirus
 
 Coronavirus' impact made fundraising harder. We had started raising as the virus was spreading in China, but before it had affected the US significantly.
 
@@ -204,7 +204,7 @@ This was handy to store more context than is possible in as spreadsheet.
 
 The format was a single long document, with more detailed notes that I stored as a private repo. I just had 5-10 bullet points about each person I was meeting and their firm, that I would generate during the [planning process](#plan-the-meeting).
 
-### Captable management
+### Captable management
 
 We used [Pulley](https://pulley.com/) for this. [Captable.io](https://captable.io/) is a well known alternative. 
 
@@ -306,7 +306,7 @@ Once the company was incorporated (which we had to do to get YC's $150k initial 
 
 We set a cap with investors. We started off with a $12M post money cap, meaning that the first $200K or so that we raised guaranteed those investors that if our eventual priced round went over $12M valuation, they'd get a lower price as a reward for investing early thus getting a higher fraction of the company for the same money. After starting with angel investors on this basis, we decided fundraising was going well so we increased the cap to $15M. We were originally going to increase it to $20M, enabling us to raise more, but we felt given the economic uncertainty as covid hit that we should take the money as fast as possible in case the US went into a recession.
 
-It's important to note that the downside of SAFEs is that if you have a down round at the next phase of fundraising, you'll get very diluted (if if the price is lower than the cap).
+It's important to note that the downside of SAFEs is that if you have a down round at the next phase of fundraising, you'll get very diluted (if the price is lower than the cap).
 
 We've no affiliation other than being friends, but in order to model how much of the company you're selling during this process, we used [Pulley](https://pulley.com). You put in all the SAFEs and you can model out a series A to check how much you've sold. [Sam Altman's advice](https://blog.ycombinator.com/dilution/) is to try to give up no more than 10-15% in a seed round and 15-25% in your A round… although "it's far more important not to run out of money than almost anything else". We used [Clerky](https://www.clerky.com/) to generate the SAFEs and to send them for electronic signature.
 
@@ -328,8 +328,5 @@ More hand holding is probably better if you have less experience or you need som
 
 _Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
 
-<NewsletterForm
-compact
-/>
 
 

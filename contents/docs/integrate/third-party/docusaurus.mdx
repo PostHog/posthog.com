@@ -26,14 +26,17 @@ npm install --save posthog-docusaurus
 ```js
 // in docusaurus.config.js
 module.exports = {
-  plugins: ["posthog-docusaurus"],
-  themeConfig: {
-    posthog: {
-      apiKey: "<ph_project_api_key>",
-      appUrl: "<ph_instance_address>",  // optional
-      enableInDevelopment: false  // optional
-    }
-  }
+  plugins: [
+    [
+      "posthog-docusaurus",
+      {
+        apiKey: "<ph_project_api_key>'",
+        appUrl: "<ph_instance_address>", // optional
+        enableInDevelopment: false, // optional
+        // other options are passed to posthog-js init as is
+      },
+    ],
+  ],
 };
 ```
 

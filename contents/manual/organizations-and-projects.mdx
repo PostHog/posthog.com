@@ -2,6 +2,26 @@
 title: Organizations and projects
 sidebar: Docs
 showTitle: true
+availability:
+    free: partial
+    selfServe: partial
+    enterprise: full
+
+    features:
+        multipleOrgs:
+            openSource: false
+            free: true
+            selfServe: true
+            enterprise: true
+        multipleProjects:
+            free: false
+            selfServe: true
+            enterprise: true
+        accessLevels: true
+        privateProjects:
+            free: false
+            selfServe: false
+            enterprise: true
 ---
 
 PostHog gives you tools for data access control and logical separation of data: organizations and projects.
@@ -15,9 +35,9 @@ To switch between organizations, to open the current organization's settings, or
 
 ### Multiple organizations
 
-As a PostHog Cloud user, you can create, manage, and join organizations without limits. For self-hosted see details below.
+<FeatureAvailability availability={_frontmatter.availability.features.multipleOrgs} />
 
-<FeatureAvailability availablePlans={['free', 'standard', 'enterpriseCloud', 'startup', 'scale', 'enterprise']} />
+As a PostHog Cloud user, you can create, manage, and join organizations without limits. For self-hosted see details below.
 
 ### Notifications
 
@@ -46,9 +66,7 @@ To switch between projects, navigate to project settings, or to create new proje
 
 ### Multiple projects
 
-Multiple projects are available on the following plans.
-
-<FeatureAvailability availablePlans={['standard', 'enterpriseCloud', 'startup', 'scale', 'enterprise']} />
+<FeatureAvailability availability={_frontmatter.availability.features.multipleProjects} />
 
 ### Ways of organizing projects
 
@@ -62,13 +80,13 @@ Which way is the best fit for you depends on the characteristics of your product
 
 ## Permissions
 
-By default all organization members have access to all its projects. Their permissions are then dicated by their organization-wide access level.
+By default all organization members have access to all its projects. Their permissions are then dictated by their organization-wide access level.
 
 This makes for the smoothest collaboration. However, if you require access to data to be more granular, see [private projects](#private-projects).
 
 ### Access levels
 
-<FeatureAvailability availablePlans={['standard', 'enterpriseCloud', 'startup', 'scale', 'enterprise']} />
+<FeatureAvailability availability={_frontmatter.availability.features.accessLevels} />
 
 There are three access levels in PostHog: Member, Administrator, and Owner.
 Please note that an organization must have one and only one Owner.
@@ -91,7 +109,7 @@ Access levels can be viewed and changed in the Members section of organization s
 
 ### Private projects
 
-<FeatureAvailability availablePlans={['enterpriseCloud', 'enterprise']} />
+<FeatureAvailability availability={_frontmatter.availability.features.privateProjects} />
 
 If you'd like to restrict access to data within the organization to only those who need it, you can make a project _private_. Projects with this setting enabled become **private by default and invite-only** (except for Administrators and the Owner, who get access implicitly). For members who don't have access to a project, that project is hidden completely, as if it didn't exist.
 

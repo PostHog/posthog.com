@@ -24,8 +24,7 @@ import {
     Zapier,
 } from 'components/Icons/Icons'
 import Link from 'components/Link'
-import { useValues } from 'kea'
-import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
+import usePostHog from '../../hooks/usePostHog'
 import React from 'react'
 
 const icons = {
@@ -55,7 +54,7 @@ const icons = {
 }
 
 export default function DeployOption({ url, icon, title, disablePrefetch, badge }) {
-    const { posthog } = useValues(posthogAnalyticsLogic)
+    const posthog = usePostHog()
     const Icon = icon && icons[icon]
     const badgeClass = badge === 'new' ? 'success' : badge === 'beta' ? 'warning' : null
     return (
@@ -67,7 +66,7 @@ export default function DeployOption({ url, icon, title, disablePrefetch, badge 
                 posthog?.capture('deploy option clicked', { deploy_option: title })
             }}
         >
-            {Icon && <Icon />}
+            {Icon && <Icon className="w-6 h-6" />}
             <span>{title}</span>
             {badge && <span className={`lemon-tag ${badgeClass}`}>{badge}</span>}
         </Link>

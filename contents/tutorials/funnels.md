@@ -5,7 +5,7 @@ showTitle: true
 featuredImage: ../images/tutorials/banners/funnels.png
 featuredTutorial: true
 author: ["yakko-majuri", "andy-vandervell"]
-topics: ["funnels", "user paths", "session recording", "filters"]
+topics: ["funnels", "correlation analysis", "paths", "session recording", "experimentation"]
 date: 2022-04-20
 ---
 
@@ -123,7 +123,7 @@ Once you've built a funnel in PostHog, you can take advantage of one our most us
 
 It's a powerful way to discover eye-opening insights into what your users are actually doing, allowing you to refine your funnel, and better understand your product.
 
-> **Note:** Correlation Analysis is a paid-only feature available on the [Scale](https://license.posthog.com/) and [Enterprise](/signup/self-host/get-in-touch?plan=enterprise#contact) self-hosted plans, and all paid plans on PostHog Cloud. **Paid plans are free up to 1 million events per month** when you enter card details.
+> **Note:** Correlation Analysis is a paid-only feature available on the [Scale](https://license.posthog.com/) and [Enterprise](/get-in-touch?plan=enterprise#contact) self-hosted plans, and all paid plans on PostHog Cloud. **Paid plans are free up to 1 million events per month** when you enter card details.
 
 Let's take a look at the Correlated Events for our example.
 

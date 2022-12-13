@@ -44,7 +44,9 @@ Our [guide to personal data](/blog/what-is-personal-data-pii) provides an overvi
 
 ### Is PostHog GDPR compliant?
 
-Yes, PostHog is GDPR compliant. We have [in-depth GDPR guidance documentation](/docs/privacy/gdpr-compliance) for advice on deploy PostHog in a GDPR-compliant way, including [how to configure GDPR consent in PostHog](/docs/privacy/gdpr-compliance#step-4-configure-consent) and complying with ['right to be forgotten' requests](/docs/privacy/gdpr-compliance#complying-with-right-to-be-forgotten-requests).
+We have [in-depth GDPR guidance documentation](/docs/privacy/gdpr-compliance) for advice on deploying PostHog in a GDPR-compliant way, including [how to configure GDPR consent in PostHog](/docs/privacy/gdpr-compliance#step-4-configure-consent) and complying with ['right to be forgotten' requests](/docs/privacy/gdpr-compliance#complying-with-right-to-be-forgotten-requests).
+
+We also offer [PostHog Cloud EU](https://eu.posthog.com/signup) – a managed version of PostHog with servers hosted in Frankfurt, ensuring user data never leaves EU jurisdiction. 
 
 ### Can I use PostHog to collect user data under HIPAA?
 

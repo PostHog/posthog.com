@@ -17,7 +17,7 @@ That's why, at PostHog, we communicate strategy as 'Nail X', where X is the thin
 
 We [recently switched](https://github.com/PostHog/posthog.com/pull/3395) from Nail Enterprise to Nail Self Serve. This walks you through the previous context, and why we made that change.
 
->James Hawkins is PostHog's Co-Founder & CEO. He launched PostHog with Tim Glaser in February 2020 as part the YCombinator W20 batch. He lives in Cambridge, England with his wife Fran, daughter Ruby, and Wally (a cat).
+>James Hawkins is PostHog's Co-Founder & CEO. He launched PostHog with Tim Glaser in February 2020 as part the Y Combinator W20 batch. He lives in Cambridge, England with his wife Fran, daughter Ruby, and Wally (a cat).
 
 ## Why did we focus on Nail Enterprise in the first place?
 
@@ -74,9 +74,3 @@ I suspect we'll focus on B2C after the above is completed. From customer calls, 
 We already have plenty of (paying) customers in B2C, but to focus on it would require stronger mobile support, greater scalability still, and a suitable pricing model so we capture the right amount of value.
 
 Long term, we think the future of our revenue will come from large enterprise. We're a natural fit - data control, consolidating multiple vendors, and complete extensibility. However, we want to avoid _needing_ to go through complex purchasing decisions whilst there are easier ways to increase our numbers.
-
-_Did you enjoy this article? Get more like it in your inbox every two weeks_
-
- <NewsletterForm
-compact
-/>

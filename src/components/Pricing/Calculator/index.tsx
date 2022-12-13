@@ -1,4 +1,3 @@
-import { TrackedCTA } from 'components/CallToAction'
 import { useActions, useValues } from 'kea'
 import React, { useEffect, useState } from 'react'
 import {
@@ -10,13 +9,12 @@ import {
     pricingLabels,
 } from '../constants'
 import { PricingSlider } from '../PricingSlider'
-import { prettyInt, sliderCurve } from '../PricingSlider/LogSlider'
 import { pricingSliderLogic } from '../PricingSlider/pricingSliderLogic'
 import { motion } from 'framer-motion'
 import Link from 'components/Link'
 import Toggle from 'components/Toggle'
 import { Info } from 'components/Icons/Icons'
-import { posthogAnalyticsLogic } from '../../../logic/posthogAnalyticsLogic'
+import usePostHog from '../../../hooks/usePostHog'
 
 interface IPricingOptions {
     minimumPrice: number
@@ -91,7 +89,7 @@ const cloudOptions = {
     },
     demoCTA: {
         title: 'Join a group demo',
-        url: '/signup/self-host/get-in-touch?plan=cloud&demo=group#demo',
+        url: '/get-in-touch?plan=cloud&demo=group#demo',
     },
 }
 
@@ -103,11 +101,11 @@ const cloudEnterpriseOptions = {
     icon: <CloudIcon className="opacity-30 w-[36px]" />,
     mainCTA: {
         title: 'Get in touch',
-        url: '/signup/self-host/get-in-touch?plan=enterprise#contact',
+        url: '/get-in-touch?plan=enterprise#contact',
     },
     demoCTA: {
         title: 'Book a demo',
-        url: '/signup/self-host/get-in-touch?plan=enterprise&demo=enterprise#demo',
+        url: '/get-in-touch?plan=enterprise&demo=enterprise#demo',
     },
 }
 
@@ -124,7 +122,7 @@ const cloudEnterpriseOptions2 = {
     },
     demoCTA: {
         title: 'Book a demo',
-        url: '/signup/self-host/get-in-touch?plan=enterprise&demo=enterprise#demo',
+        url: '/get-in-touch?plan=enterprise&demo=enterprise#demo',
     },
 }
 
@@ -140,7 +138,7 @@ const selfHostedOptions = {
     },
     demoCTA: {
         title: 'Join a group demo',
-        url: '/signup/self-host/get-in-touch?plan=self-host&demo=group#demo',
+        url: '/get-in-touch?plan=self-host&demo=group#demo',
     },
 }
 
@@ -156,7 +154,7 @@ const selfHostedEnterpriseOptions = {
     },
     demoCTA: {
         title: 'Book a demo',
-        url: '/signup/self-host/get-in-touch?plan=enterprise&demo=enterprise#demo',
+        url: '/get-in-touch?plan=enterprise&demo=enterprise#demo',
     },
 }
 
@@ -173,7 +171,7 @@ export default function Calculator({
     handleEnterpriseModeChange: (checked: boolean) => void
     setCurrentModal: (currentModal: string) => void
 }) {
-    const { posthog } = useValues(posthogAnalyticsLogic)
+    const posthog = usePostHog()
     const { finalMonthlyCost, sliderValue, pricingOption } = useValues(pricingSliderLogic)
     const [showSlider, setShowSlider] = useState(false)
     const [optionDetails, setOptionDetails] = useState<IPricingOptions | undefined>(cloudOptions)
@@ -223,8 +221,7 @@ export default function Calculator({
             className="bg-transparent w-full"
         >
             <div>
-                <h4 className="text-lg font-bold m-0 ">Pricing breakdown</h4>
-                <p className="text-sm mb-2 text-semibold">Pay per event</p>
+                <h4 className="text-base font-bold m-0 ">Volume discounts</h4>
                 {pricingOption && (
                     <>
                         <ul className="grid gap-y-1 m-0 p-0">
@@ -253,11 +250,7 @@ export default function Calculator({
                 )}
 
                 <p className="text-sm pt-2 mt-2 mb-4 pb-0 m-0 text-black/50 border-t border-dashed border-gray-accent-light">
-                    B2C company with millions of users?
-                    <br />
-                    <Link to="/signup/b2c" className="font-bold">
-                        Apply for a volume pricing plan
-                    </Link>
+                    * We offer B2C companies up to 30% off. Get in touch after you've started sending data to PostHog.
                 </p>
 
                 <div className="pt-4 border-t border-gray-accent-light border-dashed">

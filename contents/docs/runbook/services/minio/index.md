@@ -5,7 +5,6 @@ showTitle: true
 ---
 
 MinIO offers high-performance, S3 compatible object storage. We use it to store files like:
-- session recordings
 - file exports
 
 This is a guide for how to operate MinIO with respect to our stack.

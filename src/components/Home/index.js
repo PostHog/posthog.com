@@ -1,6 +1,4 @@
 import StarUsBanner from 'components/StarUsBanner'
-import { useValues } from 'kea'
-import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
 import React from 'react'
 import Layout from '../Layout'
 import { SEO } from '../seo'
@@ -13,11 +11,13 @@ import Hero from './Hero'
 import Apps from './Apps'
 import Pipelines from './Pipelines'
 import Timeline from './Timeline'
+import Roadmap from './Roadmap'
 import Quote from './Quote'
 import Tutorials from './Tutorials'
+import usePostHog from '../../hooks/usePostHog'
 
 const Home = () => {
-    useValues(posthogAnalyticsLogic) // mount this logic
+    usePostHog()
 
     return (
         <>
@@ -34,6 +34,7 @@ const Home = () => {
                 <Apps />
                 <Pipelines />
                 <Timeline />
+                <Roadmap />
                 <Quote />
                 <Community />
                 <Tutorials

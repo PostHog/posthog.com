@@ -70,7 +70,7 @@ Management tasks do come first, as giving context to your team tends to have a m
 There are teams at PostHog that need to work across functions, so we have an anti-silo approach when it comes to the tasks that people work on.
 
 That means:
-* Task setting happens transparently in [Small Teams](structure). Anyone can read notes from or show up to any of the sprint planning meetings.
+* Task setting happens transparently in [Small Teams](/handbook/company/small-teams). Anyone can read notes from or show up to any of the sprint planning meetings.
 * Anyone can give feedback to anyone else on their priorities, and it's our expectation they do so.
 * Every [Small Team](structure) has complete control over what they ship.
 
@@ -91,7 +91,7 @@ Talking about long-term career plans every now and again is really important but
 
 Most people do a weekly or bi-weekly 1-1 with their manager, with a 30min minimum. Any less than this is too short or infrequent. Try to respect 1-1s and not move them around, and make the effort to prepare - they matter a lot to your team! Make sure that 1-1s don't just become a task update session (we do this async or in sprint planning).
 
-Separately, you should take time once every ~3 months to zoom out and talk about your team's growth path at PostHog and how you can support them. Again, the template has some useful questions you can ask. 
+Separately, you should take time once every 6 months to zoom out and talk about your team's growth path at PostHog and how you can support them. Again, the template has some useful questions you can ask. 
 
 > There is no formal structure for a growth path at PostHog - it will be unique to the needs and experience of each person.
 
@@ -135,8 +135,3 @@ There are a million good books out there and you'll want to read more widely, bu
 - [High Growth Handbook](https://www.goodreads.com/book/show/40536148-high-growth-handbook) by Elad Gil (covers a lot of ground beyond management)
 - [The Messy Middle](https://www.goodreads.com/book/show/40179007-the-messy-middle) by Scott Belsky (ditto)
 - [Non Violent Communication](https://www.goodreads.com/book/show/3601593-non-violent-communication-a-language-of-life) by Marshall Rosenberg (communication-focused, not specific to management)
-
-Some good blogs:
-
-- [The Pragmatic Engineer](https://blog.pragmaticengineer.com/author/gergely/)
-- [Cap Watkins](https://capwatkins.com/blog)

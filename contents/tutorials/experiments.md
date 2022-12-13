@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 featuredTutorial: false
 author: ['neil-kakkar']
-topics: ['feature flags']
+topics: ['experimentation', 'feature flags']
 featuredImage: ../images/tutorials/banners/experiments.png
 date: 2022-05-26
 ---
@@ -60,6 +60,8 @@ The response looks something like:
 
 and there you have it, the value for `experiment-feature-flag`.
 
+On the other hand, if you're worried about performance and don't want to make an extra API call, you can leverage local evaluation on our server-side libraries to compute your feature flag values. [Read more to learn how to use local evaluation](/docs/integrate/server/python#local-evaluation)
+
 If you're not using PostHog Feature Flags, check with your provider on how to get the values for a given person.
 
 At the end of this step, you must ensure that every event in the experiment, no matter which library it comes from, has these properties. Otherwise, Experiments UI won't work. `posthog-js` does this for you automatically, but other libraries don't, as of writing.
@@ -99,5 +101,6 @@ And that's all! You should be good to run any experiment you want with these cha
 
 - [How to safely roll out new features using feature flags](/tutorials/feature-flags)
 - [Our guide to great open-source feature flags tools](/blog/best-open-source-feature-flag-tools)
+- [How to run Experiments on new users](/tutorials/new-user-experiments)
 
 <NewsletterTutorial compact/>

@@ -1,5 +1,6 @@
 import AnimateIntoView from 'components/AnimateIntoView'
 import { CallToAction } from 'components/CallToAction'
+import { SignupCTA } from 'components/SignupCTA'
 import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
 import blurb from './images/blurb.svg'
@@ -14,9 +15,7 @@ export default function FooterCTA() {
                     cloud.
                 </p>
                 <div className="flex flex-col sm:flex-row sm:space-x-2 space-y-2 sm:space-y-0">
-                    <CallToAction to="/signup" className="w-full sm:w-48">
-                        Get started - free
-                    </CallToAction>
+                    <SignupCTA className="w-full sm:w-48" />
                     <CallToAction to="/book-a-demo" type="secondary" className="w-full sm:w-48 ">
                         Schedule a demo
                     </CallToAction>

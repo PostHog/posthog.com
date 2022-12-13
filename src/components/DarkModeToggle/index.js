@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useValues, useActions } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
-import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
+import usePostHog from '../../hooks/usePostHog'
 import './style.scss'
 import Toggle from 'components/Toggle'
 import { DarkMode } from 'components/Icons/Icons'
@@ -9,7 +9,7 @@ import { DarkMode } from 'components/Icons/Icons'
 export const DarkModeToggle = () => {
     const { websiteTheme } = useValues(layoutLogic)
     const { setWebsiteTheme } = useActions(layoutLogic)
-    const { posthog } = useValues(posthogAnalyticsLogic)
+    const posthog = usePostHog()
 
     useEffect(() => {
         if (window) {

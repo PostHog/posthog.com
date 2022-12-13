@@ -2,7 +2,7 @@ import { ExternalLink } from 'components/Icons/Icons'
 import { Link as GatsbyLink } from 'gatsby'
 import { useValues } from 'kea'
 import React from 'react'
-import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
+import usePostHog from '../../hooks/usePostHog'
 import type { GatsbyLinkProps } from 'gatsby'
 import Tooltip from 'components/Tooltip'
 import { TooltipContent, TooltipContentProps } from 'components/GlossaryElement'
@@ -14,6 +14,7 @@ export interface Props {
     onClick?: (e: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => void
     disablePrefetch?: boolean
     external?: boolean
+    externalNoIcon?: boolean
     iconClasses?: string
     state?: any
     event?: string
@@ -29,6 +30,7 @@ export default function Link({
     onClick,
     disablePrefetch,
     external,
+    externalNoIcon,
     iconClasses = '',
     state = {},
     event = '',
@@ -36,7 +38,7 @@ export default function Link({
     glossary,
     ...other
 }: Props) {
-    const { posthog } = useValues(posthogAnalyticsLogic)
+    const posthog = usePostHog()
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => {
         if (event && posthog) {
@@ -78,12 +80,12 @@ export default function Link({
         )
     ) : (
         <a
-            target={external ? '_blank' : ''}
+            target={external || externalNoIcon ? '_blank' : ''}
             rel="noopener noreferrer"
             onClick={handleClick}
             {...other}
             href={url}
-            className={className}
+            className={`${className} group`}
         >
             {external ? (
                 <span className="inline-flex justify-center items-center space-x-1">

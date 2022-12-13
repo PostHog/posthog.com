@@ -52,7 +52,7 @@ Putting things in writing helps us clarify our own ideas, as well as allow other
 
 Everyone should help everyone else raise their game. Fatigue sets in when you complete a task, so it's easier for outsiders to help those creating the work to raise their game.
 
-We are direct about the quality of work. That doesn't always mean work needs to be completely polished, as it depends on the speed and impact of a task. Being great at [giving and receiving feedback](/handbook/people/feedback) is a key part of of our culture. 
+We are direct about the quality of work. That doesn't always mean work needs to be completely polished, as it depends on the speed and impact of a task. Being great at [giving and receiving feedback](/handbook/people/feedback) is a key part of our culture. 
 
 ## Bias for impact
 
@@ -71,7 +71,7 @@ We're big believers in the importance of the [maker's schedule](http://www.paulg
 
 One of the benefits of hiring high-performing, self-sufficient, empowered team members is that we don't need to put in place some of the typical corporate structures and processes that can slow teams down. 
 
-We have optimised for this by introducing [Small Teams](/handbook/people/team-structure/team-structure), which prioritise speed by delegating decision-making autonomy as much as possible. 
+We have optimised for this by introducing [Small Teams](/handbook/small-teams/team-structure), which prioritise speed by delegating decision-making autonomy as much as possible. 
 
 Right now, our [management approach](/handbook/company/management) is super simple - James H, Tim and Charles are the only managers, and everyone else reports to one of them. We don't want to create a fancy hierarchy of titles, as we believe this can lead, consciously or not, to people feeling less empowered to make changes and step on toes, especially if they are not in a 'senior' role. 
 

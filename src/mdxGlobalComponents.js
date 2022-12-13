@@ -1,5 +1,12 @@
 // AUTO GENERATED FILE
 
+import { AboutAnchorScrollNavbar } from './components/About/AboutAnchorScrollNavbar'
+import { AboutBlog } from './components/About/AboutBlog'
+import { AboutHero } from './components/About/AboutHero'
+import { AboutInvestors } from './components/About/AboutInvestors'
+import { AboutStory } from './components/About/AboutStory'
+import { AboutTeam } from './components/About/AboutTeam'
+import { AboutTransparency } from './components/About/AboutTransparency'
 import { Accordion } from './components/Accordion'
 import { AnchorScrollNavbar } from './components/AnchorScrollNavbar'
 import { AnimateIntoView } from './components/AnimateIntoView'
@@ -7,6 +14,8 @@ import { AnimatedBurger } from './components/AnimatedBurger'
 import { Apps } from './components/Apps'
 import { AppsList } from './components/AppsList'
 import { ArrayCTA } from './components/ArrayCTA'
+import { AshbyOpenRoles } from './components/AshbyOpenRoles'
+import { Banner } from './components/Banner'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BlockQuote } from './components/BlockQuote'
 import { Blog } from './components/Blog'
@@ -14,6 +23,7 @@ import { BlogFooter } from './components/BlogFooter'
 import { BorderWrapper } from './components/BorderWrapper'
 import { Breadcrumbs } from './components/Breadcrumbs'
 import { CallToAction } from './components/CallToAction'
+import { Caption } from './components/Caption'
 import { Card } from './components/Card'
 import { Benefits } from './components/Careers/Benefits'
 import { CareersHero } from './components/Careers/CareersHero'
@@ -28,16 +38,18 @@ import { CodeBlock } from './components/CodeBlock'
 import { CommunityQuestions } from './components/CommunityQuestions'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { Contact } from './components/Contact'
-import { ContactForm } from './components/ContactForm'
 import { Container } from './components/Container'
 import { ContributorCard } from './components/ContributorCard'
 import { ContributorSearch } from './components/ContributorSearch'
 import { ContributorsChart } from './components/ContributorsChart'
+import { CookieBanner } from './components/CookieBanner'
 import { Customers } from './components/Customers'
 import { DarkModeToggle } from './components/DarkModeToggle'
+import { DemoLink } from './components/DemoLink'
 import { DemoScheduler } from './components/DemoScheduler'
 import { DeployOption } from './components/DeployOption'
 import { DocsPageSurvey } from './components/DocsPageSurvey'
+import { EU } from './components/EU'
 import { FeatureAvailability } from './components/FeatureAvailability'
 import { FeaturesSelfHost } from './components/FeaturesSelfHost'
 import { FloatedImage } from './components/FloatedImage'
@@ -51,10 +63,13 @@ import { Heading } from './components/Heading'
 import { HiddenSection } from './components/HiddenSection'
 import { Home } from './components/Home'
 import { HostingOption } from './components/HostingOption'
+import { Icons } from './components/Icons'
 import { ImageBlock } from './components/ImageBlock'
 import { IngestionAppsList } from './components/IngestionAppsList'
 import { InlineCode } from './components/InlineCode'
+import { LPCTA } from './components/LPCTA'
 import { LandingPageCallToAction } from './components/LandingPage/LandingPageCallToAction'
+import { LibraryComparison } from './components/LibraryComparison'
 import { LibraryFeatures } from './components/LibraryFeatures'
 import { Link } from './components/Link'
 import { Logo } from './components/Logo'
@@ -65,6 +80,7 @@ import { NewsletterForm } from './components/NewsletterForm'
 import { NewsletterTutorial } from './components/NewsletterTutorial'
 import { NextSteps } from './components/NextSteps'
 import { NotFoundPage } from './components/NotFoundPage'
+import { NotProductIcons } from './components/NotProductIcons'
 import { OverflowXSection } from './components/OverflowXSection'
 import { Popover } from './components/Popover'
 import { PostCard } from './components/PostCard'
@@ -83,6 +99,7 @@ import { PricingTable } from './components/Pricing/PricingTable'
 import { ProductPillars } from './components/Pricing/ProductPillars'
 import { Quote } from './components/Pricing/Quote'
 import { Savings } from './components/Pricing/Savings'
+import { SelfHost } from './components/Pricing/SelfHost'
 import { ProductAnchorNavbar } from './components/ProductAnchorNavbar'
 import { ProductFeature } from './components/ProductFeature'
 import { ProductFeaturePlugin } from './components/ProductFeaturePlugin'
@@ -92,13 +109,16 @@ import { ProductPage } from './components/ProductPage'
 import { ProductSectionHeader } from './components/ProductSectionHeader'
 import { Question } from './components/Question'
 import { Quote2 } from './components/Quote2'
+import { RenderInClient } from './components/RenderInClient'
+import { Roadmap } from './components/Roadmap'
 import { RocketHorizontalRule } from './components/RocketHorizontalRule'
-import { SearchBox } from './components/SearchBox'
 import { SectionLinks } from './components/SectionLinks'
 import { DesignedForYourStackBlock } from './components/Sections/DesignedForYourStackBlock'
 import { FeaturedSectionTextLeft } from './components/Sections/FeaturedSectionTextLeft'
 import { FeaturedSectionTextRight } from './components/Sections/FeaturedSectionTextRight'
 import { FeaturedSectionTripleImage } from './components/Sections/FeaturedSectionTripleImage'
+import { SignupCTA } from './components/SignupCTA'
+import { SiteSearchCallout } from './components/SiteSearchCallout'
 import { SliderNav } from './components/SliderNav'
 import { Spacer } from './components/Spacer'
 import { Spinner } from './components/Spinner'
@@ -108,6 +128,7 @@ import { Structure } from './components/Structure'
 import { Subscribe } from './components/Subscribe'
 import { Tab } from './components/Tab'
 import { TeamQuote } from './components/TeamQuote'
+import { Toast } from './components/Toast'
 import { Toggle } from './components/Toggle'
 import { Tooltip } from './components/Tooltip'
 import { TotalCountries } from './components/TotalCountries'
@@ -115,11 +136,16 @@ import { TotalTeam } from './components/TotalTeam'
 import { Tutorials } from './components/Tutorials'
 import { TutorialsSlider } from './components/TutorialsSlider'
 import { VisitLibrary } from './components/VisitLibrary'
-import { WorkableOpenRoles } from './components/WorkableOpenRoles'
-import { WorkableSnippet } from './components/WorkableSnippet'
 import { ZoomImage } from './components/ZoomImage'
 
 export const shortcodes = {
+    AboutAnchorScrollNavbar,
+    AboutBlog,
+    AboutHero,
+    AboutInvestors,
+    AboutStory,
+    AboutTeam,
+    AboutTransparency,
     Accordion,
     AnchorScrollNavbar,
     AnimateIntoView,
@@ -127,6 +153,8 @@ export const shortcodes = {
     Apps,
     AppsList,
     ArrayCTA,
+    AshbyOpenRoles,
+    Banner,
     BasicHedgehogImage,
     BlockQuote,
     Blog,
@@ -134,6 +162,7 @@ export const shortcodes = {
     BorderWrapper,
     Breadcrumbs,
     CallToAction,
+    Caption,
     Card,
     Benefits,
     CareersHero,
@@ -148,16 +177,18 @@ export const shortcodes = {
     CommunityQuestions,
     CompensationCalculator,
     Contact,
-    ContactForm,
     Container,
     ContributorCard,
     ContributorSearch,
     ContributorsChart,
+    CookieBanner,
     Customers,
     DarkModeToggle,
+    DemoLink,
     DemoScheduler,
     DeployOption,
     DocsPageSurvey,
+    EU,
     FeatureAvailability,
     FeaturesSelfHost,
     FloatedImage,
@@ -171,10 +202,13 @@ export const shortcodes = {
     HiddenSection,
     Home,
     HostingOption,
+    Icons,
     ImageBlock,
     IngestionAppsList,
     InlineCode,
+    LPCTA,
     LandingPageCallToAction,
+    LibraryComparison,
     LibraryFeatures,
     Link,
     Logo,
@@ -185,6 +219,7 @@ export const shortcodes = {
     NewsletterTutorial,
     NextSteps,
     NotFoundPage,
+    NotProductIcons,
     OverflowXSection,
     Popover,
     PostCard,
@@ -203,6 +238,7 @@ export const shortcodes = {
     ProductPillars,
     Quote,
     Savings,
+    SelfHost,
     ProductAnchorNavbar,
     ProductFeature,
     ProductFeaturePlugin,
@@ -212,13 +248,16 @@ export const shortcodes = {
     ProductSectionHeader,
     Question,
     Quote2,
+    RenderInClient,
+    Roadmap,
     RocketHorizontalRule,
-    SearchBox,
     SectionLinks,
     DesignedForYourStackBlock,
     FeaturedSectionTextLeft,
     FeaturedSectionTextRight,
     FeaturedSectionTripleImage,
+    SignupCTA,
+    SiteSearchCallout,
     SliderNav,
     Spacer,
     Spinner,
@@ -228,6 +267,7 @@ export const shortcodes = {
     Subscribe,
     Tab,
     TeamQuote,
+    Toast,
     Toggle,
     Tooltip,
     TotalCountries,
@@ -235,7 +275,5 @@ export const shortcodes = {
     Tutorials,
     TutorialsSlider,
     VisitLibrary,
-    WorkableOpenRoles,
-    WorkableSnippet,
     ZoomImage,
 }

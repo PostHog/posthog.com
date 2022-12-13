@@ -27,7 +27,7 @@ Speaking 1:1 with customers is a great way to immerse yourself in their experien
 Have an approximate structure for the interview, and vary the questions to get a range of insights that will help you understand their needs. But don’t be too rigid - if the conversation goes off on a relevant tangent, follow it. It might lead to some subconsciously valuable insights.
 
 ### How does PostHog do this?
-Gathering user feedback is something we invest in as an on-going activity, regularly reaching out to members of the community and speaking with them directly. Often we record and share these calls internally. 
+Gathering user feedback is something we invest in as an ongoing activity, regularly reaching out to members of the community and speaking with them directly. Often we record and share these calls internally. 
 
 We also run separate usability tests with handpicked users when releasing new features. You can find out more about [how we gather user feedback in the PostHog handbook](/handbook/product/user-feedback).
 
@@ -67,7 +67,7 @@ If you're struggling to define the best metrics for your team, [we always recomm
 There is no substitute for observing a user use your product in their natural environment. As long as you randomly sample customers you’re likely to get unbiased results here - the users will not change their behavior due to your presence. Watching session recordings can give valuable insights into why people are failing to achieve something with your product: perhaps they’re accessing your product through their mobile browser and it’s much harder to use. Watching session recordings provides a lot of context for this type of issue. 
 
 ### How does PostHog do this?
-One of the features PostHog offers is the ability to [record and replay user sessions](/docs/user-guides/session-recording) in your product. So, naturally, we use this feature on a daily basis to see how users are interacting with our product and our website - all while redacting any sensitive information to protect their privacy. 
+One of the features PostHog offers is the ability to [record and replay user sessions](/manual/recordings) in your product. So, naturally, we use this feature on a daily basis to see how users are interacting with our product and our website - all while redacting any sensitive information to protect their privacy. 
 
 Session recordings are often an invaluable tool for us, which is why we recently updated them to be faster and easier to use in [PostHog v1.30](/blog/the-posthog-array-1-30-0).
 
@@ -77,9 +77,9 @@ Leveraging first principles is a great way to understand needs without being bia
 Look at your competitor’s products and ask yourself, “Why do they have this feature?”. This will help you identify the problems they were solving for and build a better solution.
 
 ### How does PostHog do this?
-Competitor research is an on-going process at PostHog, which involves both actively looking into our competitor's products and communitities to identify opportunities, as well as the market at large. 
+Competitor research is an ongoing process at PostHog, which involves both actively looking into our competitor's products and communitities to identify opportunities, as well as the market at large. 
 
-There's no shortcut here; research takes time to do and has to be done thoroughly. However, it's also something that is supported by other types of research - many times in user feedback calls we hear from customers who have used competitors in the past, such as Saga, who have [run Mixpanel and PostHog side-by-side to compare performance](/customers/saga).
+There's no shortcut here; research takes time to do and has to be done thoroughly. However, it's also something that is supported by other types of research - many times in user feedback calls we hear from customers who have used competitors in the past, such as Saga, who have run Mixpanel and PostHog side-by-side to compare performance.
 
 ## Further reading
 

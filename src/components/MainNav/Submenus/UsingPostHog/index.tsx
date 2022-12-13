@@ -3,7 +3,7 @@ import React from 'react'
 import RightCol from '../RightCol'
 import CallToAction from '../CallToAction'
 import { Wrapper } from '../Wrapper'
-import SearchBar from 'components/Docs/SearchBar'
+import SearchIconButton from 'components/Search/SearchIconButton'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 
@@ -15,7 +15,9 @@ interface ColMenuItems {
 
 interface Tutorial {
     title: string
-    slug: string
+    fields: {
+        slug: string
+    }
     frontmatter: {
         featuredImage: any
     }
@@ -33,9 +35,9 @@ export default function UsingPosthog({ referenceElement }: { referenceElement: H
             url: '/customers',
         },
         {
-            title: 'Marketplace',
+            title: 'Partner directory',
             description: 'Companies and products who can help with PostHog',
-            url: '/marketplace',
+            url: '/partners',
         },
         {
             title: 'Apps',
@@ -50,7 +52,7 @@ export default function UsingPosthog({ referenceElement }: { referenceElement: H
         {
             title: 'Contact sales',
             description: 'Licensing, upgrade, or demo inquiries',
-            url: '/signup/self-host/get-in-touch#contact',
+            url: '/get-in-touch#contact',
         },
         {
             title: 'PostHog on GitHub',
@@ -94,12 +96,8 @@ export default function UsingPosthog({ referenceElement }: { referenceElement: H
                     <div className="md:border-r border-gray-accent-light border-dashed md:w-[500px]">
                         <div className="md:p-6 md:mb-0 mb-4">
                             <div className="flex items-center w-full justify-between opacity-70">
-                                <h3 className="text-[18px] font-bold m-0 text-black pl-2">User guides</h3>
-                                <SearchBar
-                                    label={false}
-                                    className="flex-grow-0 !p-0 w-auto dark:text-white"
-                                    base={'docs'}
-                                />
+                                <h3 className="text-[18px] font-bold m-0 text-black pl-2">Product manual</h3>
+                                <SearchIconButton location="using-ph-dropdown" initialFilter="manual" />
                             </div>
                             <ol className="m-0 list-none p-0 mt-2">
                                 {userGuides.map(({ title, description, url }: ColMenuItems, index) => {
@@ -124,7 +122,7 @@ export default function UsingPosthog({ referenceElement }: { referenceElement: H
                                 })}
                             </ol>
                             <CallToAction className="inline-block mt-4 !w-full" to="/using-posthog">
-                                Visit user guides
+                                Visit product manual
                             </CallToAction>
                         </div>
                         <div className="py-7 md:px-6 border-t md:border-b-0 border-b md:mb-0 mb-4 border-gray-accent-light border-dashed">
@@ -132,7 +130,7 @@ export default function UsingPosthog({ referenceElement }: { referenceElement: H
                                 <h3 className="text-[18px] font-bold m-0 text-black ">Latest tutorials</h3>
                             </div>
                             <ul className="m-0 list-none p-0 mt-2 grid grid-cols-2 gap-4">
-                                {nodes.map(({ slug, title, frontmatter: { featuredImage } }: Tutorial) => {
+                                {nodes.map(({ fields: { slug }, title, frontmatter: { featuredImage } }: Tutorial) => {
                                     const image = featuredImage && getImage(featuredImage)
                                     return (
                                         <li key={slug}>
@@ -143,7 +141,7 @@ export default function UsingPosthog({ referenceElement }: { referenceElement: H
                                                 <GatsbyImage
                                                     className="rounded bg-tan dark:bg-[#444] pointer-events-none"
                                                     image={image}
-                                                    alt={title}
+                                                    alt={title || ''}
                                                 />
                                             </Link>
                                         </li>
@@ -188,7 +186,9 @@ const query = graphql`
             sort: { fields: frontmatter___date, order: DESC }
         ) {
             nodes {
-                slug
+                fields {
+                    slug
+                }
                 frontmatter {
                     featuredImage {
                         childImageSharp {

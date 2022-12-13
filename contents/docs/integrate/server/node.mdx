@@ -1,5 +1,5 @@
 ---
-title: Node.js library
+title: Node.js
 sidebarTitle: Node.js
 sidebar: Docs
 showTitle: true
@@ -12,6 +12,8 @@ features:
     featureFlags: true
     groupAnalytics: true
 ---
+
+import CohortExpansionSnippet from './snippets/cohort-expansion'
 
 If you're working with Node.js, the official `posthog-node` library is the simple way to integrate your software with PostHog. This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance. And in addition to event capture, [feature flags](https://posthog.com/docs/user-guides/feature-flags) are supported as well.
 
@@ -27,7 +29,7 @@ yarn add posthog-node
 
 In your app, set your API key **before** making any calls.
 
-```javascript
+```node
 import { PostHog } from 'posthog-node'
 
 const client = new PostHog(
@@ -53,7 +55,7 @@ You can find your key in the 'Project Settings' page in PostHog.
 |       `personalApiKey`        | An optional [personal API key](/docs/api/overview#personal-api-keys-recommended) for evaluating feature flags locally |           `null`           |
 | `featureFlagsPollingInterval` | Interval in milliseconds specifying how often feature flags should be fetched from the PostHog API       |          `300000`          |
 
-> **Note:** When using PostHog in an AWS Lambda function or a similar serverless function environment, make sure you set `flushAt` and `flushInterval` to `0`.
+> **Note:** When using PostHog in an AWS Lambda function or a similar serverless function environment, make sure you set `flushAt` to `1` and `flushInterval` to `0`.
 
 ## Making calls
 
@@ -71,10 +73,12 @@ A `capture` call requires:
 Optionally you can submit:
 
 -   `properties`, which is an object with any information you'd like to add
+-   `sendFeatureFlags`, a boolean that determines whether to send current known feature flags with this event. This is useful when running experiments which depends on this event. However, this makes things slow. [Read this tutorial for manually computing this information and speeding things up](/tutorials/experiments#step-2-sending-the-right-events)
+
 
 For example:
 
-```js
+```node
 client.capture({
     distinctId: 'distinct id',
     event: 'movie played',
@@ -91,9 +95,7 @@ To set properties on your users via an event, you can leverage the event propert
 
 ##### $set
 
-**Example**
-
-```js
+```node
 client.capture({
     distinctId: 'distinct id',
     event: 'movie played',
@@ -103,15 +105,11 @@ client.capture({
 })
 ```
 
-**Usage**
-
 When capturing an event, you can pass a property called `$set` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
 
 ##### $set_once
 
-**Example**
-
-```js
+```node
 client.capture({
     distinctId: 'distinct id',
     event: 'movie played',
@@ -120,8 +118,6 @@ client.capture({
     },
 })
 ```
-
-**Usage**
 
 `$set_once` works just like `$set`, except that it will **only set the property if the user doesn't already have that property set**.
 
@@ -139,7 +135,7 @@ An `identify` call requires:
 
 For example:
 
-```js
+```node
 client.identify({
     distinctId: 'user:123',
     properties: {
@@ -163,15 +159,15 @@ If you're using PostHog in the front-end and back-end, doing the `identify` call
 
 An `alias` call requires:
 
--   `distinctId` – the current distinct ID of the user
+-   `distinctId` – the current unique id (logged in user id)
 -   `alias` – the _other_ distinct ID of the user, which will be aliased to the current one
 
 For example:
 
-```js
+```node
 client.alias({
     distinctId: 'user:123',
-    alias: 'user:12345',
+    alias: 'session:12345',
 })
 ```
 
@@ -179,7 +175,7 @@ client.alias({
 
 If you're aiming for a full back-end implementation of PostHog, you can send `pageviews` from your backend, like so:
 
-```js
+```node
 client.capture({
     distinctId: 'distinct id',
     event: '$pageview',
@@ -201,7 +197,7 @@ When using them with one of libraries, you should check if a feature flag is ena
 > **Note:** Whenever we face an error computing the flag, the library returns `undefined`, instead of `true`, `false`, or a string variant value.
 
 
-```js
+```node
 // isFeatureEnabled(key: string, distinctId: string, options: {}): Promise<boolean | undefined>
 const isMyFlagEnabledForUser = await client.isFeatureEnabled('flag-key', 'user distinct id')
 
@@ -217,7 +213,7 @@ If you're using multivariate feature flags, you can also get the value of the fl
 > **Note:** Whenever we face an error computing the flag, the library returns `None`, instead of `true` or `false` or a string variant value.
 
 
-```js
+```node
 // getFeatureFlag(key: string, distinctId: string, options: {}): Promise<string | boolean | undefined>
 const flagValue = await client.getFeatureFlag('flag-key', 'user distinct id')
 ```
@@ -229,7 +225,7 @@ Sometimes, you might want to evaluate feature flags using properties that haven'
 For example, if the `beta-feature` depends on the `is_authorized` property, and you know the value of the property, you can tell PostHog to use this property, like so:
 
 
-```js
+```node
 // getFeatureFlag(
 //    key: string,
 //    distinctId: string,
@@ -244,10 +240,10 @@ For example, if the `beta-feature` depends on the `is_authorized` property, and 
 const flagValue = await client.getFeatureFlag('flag-key', 'user distinct id', {personProperties: {is_authorized: true}})
 ```
 
-The same holds for [groups](manual/group-analytics). If you have a group named `organisation`, you can add properties like so:
+The same holds for [groups](/manual/group-analytics). If you have a group named `organisation`, you can add properties like so:
 
 
-```js
+```node
 const flagValue = await client.getFeatureFlag('flag-key', 'user distinct id', {groups:{'organisation': 'google'}, groupProperties:{'organisation': {'is_authorized': True}})
 ```
 
@@ -255,7 +251,7 @@ const flagValue = await client.getFeatureFlag('flag-key', 'user distinct id', {g
 
 You can also get all known flag values as well. This is useful when you want to seed a frontend client with initial known flags. Like all methods above, this also takes optional person and group properties, if known.
 
-```js
+```node
 await client.getAllFlags('distinct id', {groups: {}, personProperties: {'is_authorized': True}, groupProperties: {}})
 # returns dict of flag key and value pairs.
 ```
@@ -273,23 +269,31 @@ All feature flag evaluation requires an API request to your PostHog servers to g
 
 Then, the flag can be evaluated locally. The method signature looks exactly like above.
 
-```js
+```node
 await client.getFeatureFlag('beta-feature', 'distinct id', {personProperties: {'is_authorized': True}})
 # returns string or None
 ```
 
 > **Note:** New feature flag definitions are polled every 30 seconds by default, which means there will be up to a 30 second delay between you changing the flag definition, and it reflecting on your servers. You can change this default on the client by setting `featureFlagsPollingInterval` during client initialisation.
 
+This works for `getAllFlags` as well. It evaluates all flags locally if possible. If even one flag isn't locally evaluable, it falls back to decide.
+
+```js
+await client.getAllFlags('distinct id', {groups: {}, personProperties: {'is_authorized': True}, groupProperties: {}})
+# returns dict of flag key and value pairs. 
+```
+
 **Restricting evaluation to local only**
 
 Sometimes, performance might matter to you so much that you never want an HTTP request roundtrip delay when computing flags. In this case, you can set the `only_evaluate_locally` parameter to true, which tries to compute flags only with the properties it has. If it fails to compute a flag, it returns `None`, instead of going to PostHog's servers to get the value.
 
+<CohortExpansionSnippet />
 
 #### Reloading feature flags
 
 When initializing PostHog, you can configure the interval at which feature flags are polled (fetched from the server). However, if you need to force a reload, you can use `reloadFeatureFlags`:
 
-```js
+```node
 await client.reloadFeatureFlags()
 
 // Do something with feature flags here
@@ -303,7 +307,7 @@ PostHog 1.31.0 introduced support for [group analytics](/docs/user-guides/group-
 
 -   Capture an event and associate it with a group
 
-```js
+```node
 client.capture({
     event: 'some event',
     distinctId: '[distinct id]',
@@ -313,7 +317,7 @@ client.capture({
 
 -   Update properties on a group
 
-```js
+```node
 client.groupIdentify({
     groupType: 'company',
     groupKey: 'id:5',
@@ -328,7 +332,7 @@ client.groupIdentify({
 
 You should call `shutdown` on your program's exit to exit cleanly:
 
-```js
+```node
 // Stop pending pollers and flush any remaining events
 client.shutdown()
 ```

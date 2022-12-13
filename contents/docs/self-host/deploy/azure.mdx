@@ -13,10 +13,7 @@ import GetInstallationAddress from './snippets/get-installation-address'
 import UpgradingSnippet from './snippets/upgrading'
 import UninstallingSnippet from './snippets/uninstalling'
 import SetupDNS from './snippets/setup-dns'
-import Disclaimer from './snippets/disclaimer'
 import NextSteps from './snippets/next-steps'
-
-<Disclaimer />
 
 > Note: This deployment option is in Beta. See alternative deployment options [here](/docs/self-host#deployment-options).
 
@@ -35,7 +32,7 @@ First, we need to set up a Kubernetes cluster (see the official Azure [documenta
 
 Here's the minimal required `values.yaml` that we'll be using later. You can find an overview of the parameters that can be configured during installation under [chart configuration](/docs/self-host/deploy/configuration).
 
-```yaml
+```yaml file=values.yaml
 cloud: 'azure'
 ingress:
     hostname: <your-hostname>

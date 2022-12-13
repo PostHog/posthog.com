@@ -66,14 +66,14 @@ PostHog still sends financial and revenue data each time, and has modelling to c
 
 Specifically, this is the list we currently care about:
 
-* Quality sign ups (we look for signups that match our [Ideal Customer Profile](../handbook/strategy/strategy#target-customers-for-2022))
+* Quality sign ups (we look for signups that match our [Ideal Customer Profile](../handbook/strategy/overview#target-customers-for-2022))
 * Conversion rate of high quality sign ups to paid
 * Deployment conversion rate
 * Number of discoveries inside PostHog (this is people creating a data visualization with filtering - the more users do this, the better we retain them)
 
 ### 3. We structured the company for autonomy
 
-PostHog uses [small teams](../handbook/people/team-structure/why-small-teams), inspired by Twilio, who were inspired by Amazon. [Jeff Lawson's book](https://www.askyourdeveloper.com/) is a good 101 on this topic. TL;DR - we're 30 people, split into teams of no more than 6. The most crucial concept is that a team can ship into production without any dependencies. This optimizes for autonomy, not control.
+PostHog uses [small teams](../handbook/company/small-teams), inspired by Twilio, who were inspired by Amazon. [Jeff Lawson's book](https://www.askyourdeveloper.com/) is a good 101 on this topic. TL;DR - we're 30 people, split into teams of no more than 6. The most crucial concept is that a team can ship into production without any dependencies. This optimizes for autonomy, not control.
 
 These teams are supported by product people. That means engineers are not told in detail what to do, or what is ok to merge. We put our product people into specific small teams where there is lots of help needed, but many teams run fine without them doing more than informal support (at our current scale at least).
 

@@ -69,7 +69,7 @@ Repository can be found in https://github.com/PostHog/product-internal
 
 Contains internal information related to the PostHog product. Documents any non-public information (as established in these guidelines) that specifically relates to engineering, product, growth or design.
 
-This repository was introduced to aid maintenance and day-to-day usage of internal repositories. Having these discussions together with the company-wide information proved unwieldly. More context on [this decision](https://github.com/PostHog/company-internal/issues/262).
+This repository was introduced to aid maintenance and day-to-day usage of internal repositories. Having these discussions together with the company-wide information proved unwieldy. More context on [this decision](https://github.com/PostHog/company-internal/issues/262).
 
 <blockquote>
 Please be sure to read the README of the repo for guidelines on how to file specific issues.

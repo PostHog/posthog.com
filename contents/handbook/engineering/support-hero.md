@@ -29,12 +29,12 @@ You can view the Support Hero rotation [in PagerDuty here](https://posthog.pager
 
 ### Channels
 
-There are a couple of channels that customer requests come in so make sure you keep an eye on all of them, but the **most support tickets will come into [Zendesk](#Zendesk)**:
+There are a couple of channels that customer requests come in so make sure you keep an eye on all of them, but **most support tickets will come into [Zendesk](#Zendesk)**. Beyond Zendesk, you should keep an eye on:
 
-- [PostHog Users's Slack](https://posthog.com/slack), specifically [#_customer_support](https://posthogusers.slack.com/archives/G01JXEDAL22), where all messages will come in from the other channels (also on [Zendesk](#zendesk)).
-- [#squeak-ping](https://posthog.slack.com/archives/C03B04XGLAZ) which alerts you to questions asked directly on posthog.com (via [Squeak!](https://squeak.posthog.com)'s [Q&A.js](https://squeak.posthog.com/toolkit/qna.js)). [Learn how to use Squeak!](#how-to-use-squeak)
-- GitHub issues, with [the main repo](https://github.com/posthog/posthog/issues) being the most important one.
-- Sentry issues, either [directly](https://sentry.io/organizations/posthog/issues/?project=1899813) or in #sentry in our main Slack.
+- [PostHog Users's Slack](https://posthog.com/slack), specifically `#community-support`. Users who post in `#general` or elsewhere should be instructed to post in `#community-support`
+- Sentry issues, either [directly](https://sentry.io/organizations/posthog/issues/?project=1899813) or in `#sentry` in our main Slack.
+
+Zendesk will also get populated with new issues from people outside the PostHog organization on the `posthog` and `posthog.com` repos, as well as with Squeak questions. These tickets will come with links to the issue or Squeak so you can answer them in the appropriate platform, rather than on Zendesk itself. 
 
 ### Communication
 
@@ -52,10 +52,21 @@ To help manage users' expectations, you might find it useful to share a message 
 
 ### Prioritizing requests
 
-1. Respond to and debug issues for _Priority_ customers (customers on Scale and Enterprise, either current or in our sales process, plus any high-paying Cloud customers)
-2. Respond to and debug issues for _Subscriber_ customers (paying subscribers on Cloud, usually paying $1-500/month)
-3. Respond to and debug issues for _Community_ users (all other free Open Source or free Cloud users)
-4. Fix issues, create PRs
+1. Any user requests in a dedicated channel, or if you're tagged by the Customer Success team, as they'll be customers that either pay us or can pay us a decent amount of money
+2. Any issue in Zendesk marked as 'high' priority (as they'll be paying customers)
+3. Any other Zendesk (including squeak and github) or community slack issues.
+
+### Triaging issues to the relevant small team
+
+As the support hero you should triage any bugs/feature requests that you don't deal with to the relevant small team. They are ultimately responsible for handling bugs and feature requests for their area of the product.
+
+### Support for self-hosted users
+
+Supporting self-hosted users can be particularly tricky/time-consuming!
+
+If the messages are from a dedicated slack, a tag from the CS team or 'high' priority zendesk then these are high-priority and **do prioritize** them accordingly. You'll likely find [these docs useful](https://posthog.com/docs/self-host/deploy/troubleshooting).
+
+However, if it's in the community slack then these are low priority. If you don't have the time to solve it then it's fine to politely point them to the docs for [self-serve open-source support](/docs/self-host/open-source/support#support-for-open-source-deployments-of-posthog) and ask them to file a github issue if they believe something is broken in the docs or deployment setup.
 
 ## Categorizing requests
 
@@ -66,6 +77,7 @@ When you initially respond to an issue in Zendesk add a "tag" with the following
 * Docs confusion _either missing or confusing_.
 * App Performance
 * Ingestion _(either problems and not working or performance)_.
+* Insights
 * Data integrity
 * Deployments/Setup
 * Deployments/Upgrading
@@ -143,7 +155,7 @@ There are a few different ways that support tickets can be created in Zendesk:
 
 _User Slack_
 
-Support requests posted in #community-support are monitored by the [Support Hero](/handbook/engineering/support-hero), who then creates tickets in Zendesk by reacting to the message with the :ticket: trigger emoji. Once created, the Support Hero will triage the request in either Zendesk or directly in Slack via Help, and assign it a priority and assignee.
+Support requests posted in #community-support are monitored by the [Support Hero](/handbook/engineering/support-hero), who then creates tickets in Zendesk using the Zendesk app. Once created, the Support Hero will triage the request in either Zendesk or directly in Slack via Help, and assign it a priority and assignee.
 
 _Dedicated Support Channels_
 
@@ -169,17 +181,17 @@ For marketing, partnership proposals or anything like that, please post in Slack
 
 ### Squeak!
 
-Squeak! is a community curation toolkit created by the [Website & Docs team](/handbook/people/team-structure/website-docs). The ultimate goal of Squeak! is to support our customers and make our community self-sustaining.
+Squeak! is a community curation toolkit created by the [Website & Docs team](/handbook/small-teams/website-docs). The ultimate goal of Squeak! is to support our customers and make our community self-sustaining.
 
 #### Q&A.js by Squeak!
 
 At the end of every page in the docs and handbook is a form where visitors can ask questions about the content of that page. (It also appears on the pricing page, and will be used in other places in the future.) This is an embedded JavaScript snippet we call [Q&A.js](https://squeak.posthog.com/toolkit/qna.js), powered by Squeak!
 
-Q&A.js should help reduce the load of the support hero, but you'll need to make sure questions are getting answered accurately – and in a timely manner.
+Squeak questions appear in Zendesk.
 
 #### Answering questions using Squeak!
 
-When a question is posted, a notification is sent to the [#squeak-ping](https://posthog.slack.com/archives/C03B04XGLAZ) channel in Slack. You can answer a question directly on the page where it was asked. When a reply is posted, the person who asked the question will receive an email notification.
+When a question is posted, it'll appear in Zendesk with a link to Squeak. A notification is also sent to the [#squeak-ping](https://posthog.slack.com/archives/C03B04XGLAZ) channel in Slack. You can answer a question directly on the page where it was asked. When a reply is posted, the person who asked the question will receive an email notification.
 
 The first time you answer a question, you'll need to create a Squeak! account. (You'll be prompted to do this after answering a question, as posting/responding requires authentication.)
 
@@ -195,9 +207,10 @@ Every team has a Secondary on-call rotation. Unlike support hero, you are still 
 
 ### Schedules
 
-- [Secondary - App East](https://posthog.pagerduty.com/schedules#PXUZ9XL)
-- [Secondary - App West](https://posthog.pagerduty.com/schedules#P04FUTJ)
-- [Secondary – Platform Ingestion](https://posthog.pagerduty.com/schedules#PM8YSH8)
-- [Secondary - Platform Infrastructure](https://posthog.pagerduty.com/schedules#P78OOWZ)
+- [Secondary - Product Analytics](https://posthog.pagerduty.com/schedules#PXUZ9XL)
+- [Secondary - Experimentation](https://posthog.pagerduty.com/schedules#P04FUTJ)
+- [Secondary - Session recordings](https://posthog.pagerduty.com/schedules#PUPERAV)
+- [Secondary – Pipeline](https://posthog.pagerduty.com/schedules#PM8YSH8)
+- [Secondary - Infrastructure](https://posthog.pagerduty.com/schedules#P78OOWZ)
 
 PagerDuty doesn't let us have a rotation that automatically selects the person that is support hero to also be the secondary on-call for their team. This means we'll occasionally need to manually shuffle the schedule around.

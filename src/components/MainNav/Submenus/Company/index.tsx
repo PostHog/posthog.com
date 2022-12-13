@@ -3,7 +3,7 @@ import React from 'react'
 import Header from '../Header'
 import { graphql, useStaticQuery } from 'gatsby'
 import Blog from './Blog'
-import SearchBar from 'components/Docs/SearchBar'
+import SearchIconButton from 'components/Search/SearchIconButton'
 import CallToAction from '../CallToAction'
 import { Wrapper } from '../Wrapper'
 
@@ -35,10 +35,10 @@ const Block = ({
 const Handbook = ({ menu }: { menu: HandbookNav[] }) => {
     return (
         <div className="md:py-7 py-6 border-t md:border-b-0 border-b md:mb-0 mb-4 border-gray-accent-light border-dashed">
-            <div className="max-w-2xl mx-auto xl:max-w-auto md:px-6">
+            <div className="max-w-3xl mx-auto xl:max-w-auto md:px-6">
                 <div className="flex items-center w-full justify-between opacity-70">
                     <h3 className="text-[18px] font-bold m-0 text-black ">Handbook</h3>
-                    <SearchBar label={false} className="flex-grow-0 !p-0 w-auto dark:text-white" base={'handbook'} />
+                    <SearchIconButton location="handbook-dropdown" initialFilter="handbook" />
                 </div>
                 <p className="text-[14px] m-0 mt-2 dark:text-white">
                     We're open source and operate in public as much as we can.
@@ -46,13 +46,13 @@ const Handbook = ({ menu }: { menu: HandbookNav[] }) => {
                 <ol className="list-none m-0 p-0 md:grid grid-rows-6 grid-cols-2 grid-flow-col mt-5">
                     {menu.map(({ title, url }: HandbookNav, index) => {
                         return (
-                            <li key={title}>
+                            <li key={title} className="first:hidden">
                                 <Link
                                     className="rounded px-2 py-2.5 h-full hover:bg-tan/50 flex items-center space-x-2 relative active:top-[1px] active:scale-[.99]"
                                     to={url}
                                 >
                                     <span className="text-[14px] text-black/30 text-center leading-none font-semibold dark:text-white w-4 flex items-center">
-                                        {index + 1}.
+                                        {index}.
                                     </span>
                                     <h3 className="text-base m-0 opacity-70 leading-none">{title}</h3>
                                 </Link>
@@ -97,8 +97,8 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                                 <span className="text-red">increase the number of successful products</span> in the
                                 world.
                             </h3>
-                            <CallToAction to="/handbook/company/story" className="mt-3 !px-12">
-                                Read our story
+                            <CallToAction to="/about" className="mt-3 !px-12">
+                                Learn about us
                             </CallToAction>
                         </div>
                         <div className="border-t border-gray-accent-light border-dashed">
@@ -112,8 +112,11 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                                 </Block>
                                 <Block title="Careers" cta={{ url: '/careers', label: 'Explore careers' }}>
                                     <p className="m-0 text-[14px] dark:text-white">
-                                        We're currently hiring for <strong>{jobs.totalCount} roles</strong>. We're
-                                        unlike any company you've ever worked for.
+                                        We're currently hiring for{' '}
+                                        <strong>
+                                            {jobs.totalCount} role{jobs.totalCount > 1 && 's'}
+                                        </strong>
+                                        . We're unlike any company you've ever worked for.
                                     </p>
                                 </Block>
                             </div>
@@ -135,7 +138,7 @@ const query = graphql`
                 fieldValue
             }
         }
-        jobs: allJobs {
+        jobs: allAshbyJobPosting(filter: { isListed: { eq: true } }) {
             totalCount
         }
         sidebars: file(absolutePath: { regex: "//sidebars/sidebars.json$/" }) {

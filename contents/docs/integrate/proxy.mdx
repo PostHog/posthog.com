@@ -1,12 +1,16 @@
 ---
-title: Deploying a reverse proxy to PostHog Cloud 
+title: Deploying a reverse proxy to PostHog Cloud
 sidebar: Docs
 showTitle: true
 ---
 
-## Why use a reverse proxy? 
+A reverse proxy allows you to send events to PostHog Cloud using your own domain.
+This can have a number advantages, most notably being that events sent to your own domain won't be intercepted by tracker blockers.
+By sending events to your own domain, you'll be able to track more users and more events, without having to host PostHog yourself.
 
-You'll want to use a reverse proxy if you want to use PostHog Cloud but still want tracking data to be sent first to your domain, then to us. This helps with tracker blockers or if you have migrated or are migrating off of PostHog open source hosted locally to PostHog Cloud.
+> Note: PostHog Cloud EU requires that the proxy sets the `Host` header to `eu.posthog.com` for requests 
+> sent to https://eu.posthog.com. The instructions below do not account for this. PR's with the requested 
+> changes welcome 🙏
 
 ## Deploying a reverse proxy
 
@@ -24,11 +28,11 @@ You'll want to sub out `YOUR_TRACKING_DOMAIN` for whatever domain you use for pr
 
 CloudFront can be used as a reverse proxy. Although [there are multiple other options if you're using AWS](https://aws.amazon.com/blogs/architecture/serving-content-using-fully-managed-reverse-proxy-architecture/)
 
-NB Cloudfront doesn't forward headers, cookies, or query parameters received from the origin by default. PostHog uses query parameters in its URLs. You need an "origin request policy" as in the instructions below.
+NB CloudFront doesn't forward headers, cookies, or query parameters received from the origin by default. PostHog uses query parameters in its URLs. You need an "origin request policy" as in the instructions below.
 
 #### Create a distribution
 
-1. Create a CloudFront distribution 
+1. Create a CloudFront distribution
 2. Set the origin domain to your PostHog instance. `app.posthog.com` for PostHog cloud.
 3. Allow all HTTP methods
 4. Create, and attach to the distribution, [an "origin request policy"](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy) that forwards all query parameters
@@ -41,6 +45,10 @@ import diagram from '../../images/docs/cloud/cloudfront-proxy/cache-policy.png'
 
 5. Choose the appropriate price class for your use
 6. Once the distribution is deployed set its URL as the api host in your JS snippet or SDK config
+
+### Setting up a CloudFront distribution
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/NvdidHJU-Hk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 You can find out about [CloudFront pricing on the AWS website](https://aws.amazon.com/cloudfront/pricing/)
 

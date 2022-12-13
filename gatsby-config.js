@@ -1,4 +1,5 @@
 const fetch = require(`node-fetch`)
+const algoliaConfig = require('./gatsby/algoliaConfig')
 
 require('dotenv').config({
     path: `.env.${process.env.NODE_ENV}`,
@@ -17,6 +18,12 @@ module.exports = {
     },
     trailingSlash: 'never',
     plugins: [
+        {
+            resolve: `gatsby-source-ashby`,
+            options: {
+                apiKey: process.env.ASHBY_API_KEY,
+            },
+        },
         {
             resolve: `gatsby-source-squeak`,
             options: {
@@ -45,7 +52,6 @@ module.exports = {
             },
         },
         'gatsby-plugin-react-helmet',
-        `gatsby-plugin-netlify`,
         `gatsby-plugin-sass`,
         `gatsby-plugin-typescript`,
         `gatsby-plugin-smoothscroll`,
@@ -113,13 +119,6 @@ module.exports = {
         {
             resolve: `gatsby-source-filesystem`,
             options: {
-                name: `timeline`,
-                path: `${__dirname}/src/data/timeline.json`,
-            },
-        },
-        {
-            resolve: `gatsby-source-filesystem`,
-            options: {
                 name: `testimonials`,
                 path: `${__dirname}/src/data/testimonials.json`,
             },
@@ -132,9 +131,10 @@ module.exports = {
             },
         },
         {
-            resolve: `gatsby-plugin-git-info`,
+            resolve: `gatsby-source-strapi-pages`,
             options: {
-                match: '{src,contents}/**/*.{mdx,md}',
+                strapiURL: process.env.STRAPI_URL,
+                strapiKey: process.env.STRAPI_API_KEY,
             },
         },
         `gatsby-plugin-image`,
@@ -223,31 +223,11 @@ module.exports = {
                                 host: 'localhost',
                                 global: false,
                             },
-                            // By default the HTML entities <>&'" are escaped.
-                            // Add additional HTML escapes by providing a mapping
-                            // of HTML entities and their escape value IE: { '}': '&#123;' }
                             escapeEntities: {},
                         },
                     },
                     `gatsby-remark-mermaid`,
                 ],
-            },
-        },
-        {
-            resolve: `gatsby-plugin-posthog`,
-            options: {
-                // Specify the API key for your PostHog project (required)
-                apiKey: process.env.GATSBY_POSTHOG_API_KEY,
-                // Specify the API host (http://app.posthog.com/ unless in development)
-                apiHost: process.env.GATSBY_POSTHOG_API_HOST,
-                // Puts tracking script in the head instead of the body (optional, default: true)
-                head: true,
-                // Enable posthog analytics tracking during development (optional, default: false)
-                isEnabledDevMode: true,
-                initOptions: {
-                    _capture_metrics: true,
-                    persistence: 'localStorage+cookie',
-                },
             },
         },
         `gatsby-plugin-postcss`,
@@ -428,5 +408,8 @@ module.exports = {
                 ],
             },
         },
+        ...(!process.env.GATSBY_ALGOLIA_APP_ID || !process.env.ALGOLIA_API_KEY || !process.env.GATSBY_ALGOLIA_INDEX_NAME
+            ? []
+            : [algoliaConfig]),
     ],
 }

@@ -11,7 +11,7 @@ featuredImageType: full
 categories: ["Inside PostHog", "Product analytics", "Startups"]
 ---
 
-We’ve talked before about [product-minded engineers](https://posthog.com/blog/turning-engineers-into-product-people) at PostHog. We don’t have PMs dictating a roadmap or solutions - it all comes from engineering. A PostHog engineer has complete autonomy to decide the 'what' (prioritization) and the 'how' (solution) of the features we build, so Product & Design play a role that’s a bit different to the typical tech startup. 
+We’ve talked before about [product-minded engineers](/blog/what-is-a-product-engineer) at PostHog. We don’t have PMs dictating a roadmap or solutions - it all comes from engineering. A PostHog engineer has complete autonomy to decide the 'what' (prioritization) and the 'how' (solution) of the features we build, so Product & Design play a role that’s a bit different to the typical tech startup. 
 
 Let's look at how product development workflow at PostHog, the responsibilities of the Product Team, the benefits & results of this approach, the foundations required to build a team like this, and some pitfalls and learnings we’ve acquired along the way.
 
@@ -79,8 +79,4 @@ Finally, I’d like to share some mistakes we’ve made in our iterative journey
 - **Strongly linked dependencies:** This can happen when you have processes that rely on different people (e.g. design having to review every view that goes into the app) or heavily defined scopes (e.g. if you’re a frontend engineer that can’t touch the backend). When this is present, it’s quite hard to be autonomous and effective because you constantly get blocked by other people. Blurring scopes and removing dependencies makes it easier and faster to ship things. Remember, you have a capable team with good judgement, so no need to encumber the creative process.
 
 _Enjoyed this? Subscribe to our [newsletter](https://posthog.com/newsletter) to hear more from us twice a month!_
-
-<NewsletterForm
-compact
-/>
 

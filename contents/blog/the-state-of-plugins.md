@@ -34,7 +34,7 @@ Above: Pageviews for the Plugin Library (weekly).
 
 Fun fact: the average length for the top six most popular plugins on PostHog is only 57 lines of code. Some, such as the Timestamp Parser, are only 16 lines long! The other thing they have in common is that they cover basic functionality which we haven’t built natively into PostHog yet. 
 
-This is a deliberate decision. It’s true that we could spend engineering time to build these features, such as filtering nested properties, but plugins enable us to quickly solve the same challenge without the resource overhead. Then, once we fully understand the challenge, we can create a better solution — some plugins are literally the duct tape version of full fledged features we’re building at the moment. 
+This is a deliberate decision. It’s true that we could spend engineering time to build these features, such as filtering nested properties, but plugins enable us to quickly solve the same challenge without the resource overhead. Then, once we fully understand the challenge, we can create a better solution — some plugins are literally the duct tape version of full-fledged features we’re building at the moment. 
 
 Plugins also enable us to build useful functionality in a matter of hours. The Twitter Followers plugin hits an API and creates an event once a day. It would never make sense to build this natively, but it took just 30 minutes to make it as a plugin which is used by 30+ teams.
 
@@ -97,7 +97,3 @@ Yet, it can be hard to prioritize fixing these issues. Almost by definition any 
 In the short term I’m currently focusing on fixing known bugs as part of my current sprint, but the _only_ real way to prioritize extensibility is to look at it from a long-term perspective and I hope we can invest ongoing engineering efforts into PostHog in the future.
 
 _Enjoyed this? Subscribe to our [newsletter](https://posthog.com/newsletter) to hear more from us twice a month!_
-
-<NewsletterForm
-compact
-/>

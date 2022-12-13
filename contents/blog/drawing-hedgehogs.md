@@ -35,7 +35,7 @@ Both Sentry and Hasura also use their logos as inspiration for their mascots. Fr
 
 ## Origins of a hedgehog
 
-In the early days of PostHog we often debated whether the hedgehog should be a main character for our brand or if it would be too distracting. Since then, we've jumped from from the original 'hairy thumb' logo designed by our founder and CEO, James, to focusing on 80’s pixel art, to space and rockets and back to hedgehogs. 
+In the early days of PostHog we often debated whether the hedgehog should be a main character for our brand or if it would be too distracting. Since then, we've jumped from the original 'hairy thumb' logo designed by our founder and CEO, James, to focusing on 80’s pixel art, to space and rockets and back to hedgehogs. 
 
 It’s been a process, to say the least, but an informative one. We never should have strayed from our first and one true love: the hedgehog. 
 
@@ -92,6 +92,3 @@ You need to test different versions to find what works - but even after finding 
 
 _Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
 
-<NewsletterForm
-compact
-/>

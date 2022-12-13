@@ -1,23 +1,19 @@
-import WorkableOpenRoles from 'components/WorkableOpenRoles'
+import AshbyOpenRoles from 'components/AshbyOpenRoles'
 import React from 'react'
 import { Structure } from '../../Structure'
 
 export const OpenRoles = () => {
-    // Some of the styling overrides here lives in src/styles/workable-overrides.css
     return (
-        <div id="open-roles">
+        <div id="open-roles" className="mt-16">
             <Structure.Section width="5xl" className="">
-                <h2 className="text-center mb-12">Open roles</h2>
+                <h2 className="text-center text-5xl mb-12">Open roles</h2>
 
                 <div className="md:flex">
                     <div className="flex-1 max-w-md md:mr-16 md:mt-4 mb-12 md:mb-0 mx-auto">
                         <p>We take exceptional people when they come along - and we really mean that!</p>
                         <p>
                             <strong>Don’t see a specific role listed?</strong> That doesn't mean we won't have a spot
-                            for you.{' '}
-                            <a href="mailto:careers@posthog.com?subject=Speculative application!&body=Hi PostHog! Here's a link to my personal website, LinkedIn, CV, or equivalent.">
-                                Send us a speculative application!
-                            </a>
+                            for you. <a href="/careers/speculative-application">Send us a speculative application!</a>
                             <a href=""></a>
                         </p>
                         <p className="mt-2">
@@ -42,7 +38,7 @@ export const OpenRoles = () => {
                         </p>
                     </div>
                     <div className="flex-1 max-w-md mx-auto">
-                        <WorkableOpenRoles />
+                        <AshbyOpenRoles />
                     </div>
                 </div>
             </Structure.Section>

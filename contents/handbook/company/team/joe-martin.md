@@ -17,39 +17,36 @@ I live just outside of London. I'm passionate about punk music, videogame preser
 - I can help you with a broad range of marketing tasks, including sales enablement. 
 - I can help you understand our customers, our competitors or the press. 
 - I can help with literally anything involving writing, editing or proof-reading.
-- I enjoy helping others. You can ask me anything. There are no stupid questions.  
+- I enjoy helping others. You can ask me anything. There are no stupid questions.
+- I help engineering with marketing stuff. Need content for a new feature? I'm your man.
+- I can help you work with many of our customers, partners or other external parties.    
 
 ### How to work with me
-- I can be over-communicative and need to be challenged on this. Tell me if you want the short version.
-- I have a very hands-on attitude and will never say 'That's not my job'. 
-- I may parrot ('_It sounds like..._') to ensure I understand. If I'm wrong, tell me. 
-- I'm truly uncomfortable with being in the limelight. I prefer private thank yous.
+- I can be over-communicative and need to be challenged on this.
+- I have a very hands-on attitude and will never say 'That's not my job'.
+- I'm really uncomfortable with being in the limelight. I prefer private thank yous.
 - I value compassion and inclusivity above everything else. I try to put people first. 
-- Ad-hoc meetings are fine, but weekends are sacred. I generally work 9-6 GMT.
+- I struggle with anxiety and always feel like I'm failing. Direct feedback helps me _lots_. 
 
-## Areas of focus - Q2 2022
+## Areas of focus - Q4 2022
 
-In Q1 I focused on our internal community, content and partnerships, among other things. Among the milestones I set were organizing our first meet-up, securing an enterprise-scale case study, launching the Apps platform and leading partnerships with other orgs. These were all successful.
+Last quarter I focused on collaborating with the growth and product teams to directly contribute to product improvements (such as tutorials and activation flows), growing external communities and partnerships, and becoming more autonomous/skilled technically so that I could contribute directly to the product. These were all successful. 
 
-In Q2, I'm focusing on the following areas:
+This quarter I'm focusing on...
 
-- [ ] **Growth & Product:** Spend more time working with the Growth, Design and Engineering teams to have a direct impact on the product. Join Engineering sprints to find opportunities to collaborate. 
-- [ ] **Technical skills:** Continue to [improve technical skills and become more capable of shipping changes](https://posthog.com/blog/a-non-coders-thoughts-on-everybody-codes-culture-part-two) autonomously. Make changes directly to the product.  
-- [ ] **Scaling impact:** Find opportunities that, like Apps and onboarding, are especially impactful for users. Deprioritize sunk cost projects, such as Marketplace. Default to high-level content feedback over line-edits.
-- [ ] **Community activation:** Focus on opportunities to grow word of mouth by activating PostHog's community outside of Slack and GitHub. Example: G2 reviews, referral programmes, partnerships.  
+- [ ] **Onboarding:** Previously I've provided content and research to inform v1 of our onboarding flows. This quarter, I'm going to take greater ownership of onboarding by delivering improvements to our emails, as well as continuing to work with Growth on improving in-product activation. 
+- [ ] **Announcements:** We have some specific things we want to announce, such as EU Cloud. We also have regular announcements, such as Array. In addition to taking ownership of the former, I'll also find ways to directly improve the latter. A static page for Array? In-app announcements for new features? Better emails? Whatever is needed. 
+- [ ] **Word of mouth growth:** We're starting to get a more detailed view of where our WOM growth comes from. I'll spend time scaling this growth with the marketing team. This could involve a referral program, influencers or levelling up and/our case studies. Maybe all of the above.
+- [ ] **Product design:** This is a personal goal. I'm switching from just-in-case to just-in-time technical learning and focusing on improving my knowledge of product design instead. The goal is to become more effective when providing feedback and when planning in-product proposals. Good thing [we have a generous book budget](/handbook/people/training#books). 
+
+This list is not exhaustive and is meant to guide the sort of work I do at a high level. If something more important comes up where I'll have more impact? Pivoting is fine. 
 
 ## Feedback
-In our last [360 feedback session](/handbook/people/feedback#full-team-feedback-sessions-1), I received feedback on the following points. 
+In past feedback sessions I've been told that I'm an effective communicator and executor, that others recognise how I default to transparency and that I show bravery in how vulnerable and direct I am with feedback. I've had especially positive feedback recently about work I do with external parties and customers, and my ability to take ownership of large projects. 
 
-- I am seen as an effective and flexible executor, planner, writer and storyteller.
-- I am seen as empathetic and extremely supportive of others, especially new colleagues or those with less experience than me. 
-- I am seen as brave when giving feedback and stepping on toes. Others recognize that I default to transparency.
-- Work I do, such as [case studies](/customers), is seen as valuable and showing a lot of insight.
-- I am seen as over-cautious and too detail-orientated when planning new work. 
-- I am seen as over-communicative in social discussions. I talk a lot about diversity, but fail on follow-through.
-- I am seen as biased to my past experiences. This limits my potential impact.
+I've previously used forms to gather feedback from engineering teams, outside of 360 sessions. These teams have given me positive feedback on my ability to prioritize and to give thoughtful, detailed feedback on the product. Constructively I was asked to get more involved in engineering projects at a conceptual stage, when I can be most impactful. PostHog team members can [read notes about this from my previous career chat](https://docs.google.com/document/d/1eCx1FLsc8gbH4x9oML8RcoNlA-KLYS3WBcCh9eP2f88/edit?usp=sharing) for more info. 
 
-A few months later, I had my [career chat](/handbook/people/career-progression) with Marcus and gathered additional feedback. PostHog team members can [read notes from this conversation and summary of the feedback](https://docs.google.com/document/d/1eCx1FLsc8gbH4x9oML8RcoNlA-KLYS3WBcCh9eP2f88/edit?usp=sharing) for more info. 
+Constructively I've had feedback from the team I work with that, because I generate a lot of ideas, the 'wilder' ideas can often overshadow the more thoughtful and impactful concepts. I've also had consistent feedback that I can be overcommunicative and that, when giving feedback, I default to detailed line edits rather than big picture suggestions. As a result I'm currently trying to communicate more conscisely, especially when I'm between major projects and hunting for areas of focus.
 
-I'm always open to more feedback, from anyone. Got some? [Send it to me!](https://forms.gle/UcA5FdAjZJSXiqYG6)
+I'm always open to more feedback, from anyone. Got some? [Send it to me](https://forms.gle/UcA5FdAjZJSXiqYG6)!
 

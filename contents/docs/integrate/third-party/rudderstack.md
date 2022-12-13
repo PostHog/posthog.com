@@ -5,7 +5,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-> **Note:** The [Official RudderStack Docs page for the PostHog integration](https://docs.rudderstack.com/destinations/posthog) provides a better overview of how to set up this integration.
+> **Note:** The [Official RudderStack Docs page for the PostHog integration](https://www.rudderstack.com/docs/destinations/streaming-destinations/posthog/) provides a better overview of how to set up this integration.
 
 ## About RudderStack
 
@@ -15,9 +15,11 @@ RudderStack is an open-source, warehouse-first, customer data platform for devel
 
 #### Can PostHog with RudderStack do everything PostHog does by itself?
 
-No. The PostHog integration with RudderStack gives you access to everything our [JS library](/docs/integrate/client/js) can do, with the exception of autocapture and session recording. All features for your PostHog instance will be the same, but all RudderStack sends to PostHog are events you **manually** send. In addition, PostHog isn't able to show you our [toolbar](/docs/user-guides/toolbar). 
+No. The PostHog integration with RudderStack gives you access to everything our [JS library](/docs/integrate/client/js) can do, with the exception of autocapture and session recording. All features for your PostHog instance will be the same, but all RudderStack sends to PostHog are events you **manually** send. In addition, PostHog isn't able to show you our [toolbar](/docs/user-guides/toolbar).
 
 If you require session recording whilst using the Rudderstack integration, you need to additionally include the PostHog [JS snippet](/docs/integrate/client/js) and disable autocapture so you don't duplicate events.
+
+If you want to use group analytics, each event should include the property `$groups` as an key-value object of group type and ID like `{ "company": "posthog" }`
 
 Alternatively, you can load the PostHog JS snippet via Rudderstack itself, by enabling the [device-mode connection](https://www.rudderstack.com/docs/rudderstack-cloud/rudderstack-connection-modes/#device-mode) setting.
 
@@ -38,4 +40,4 @@ Alternatively, you can load the PostHog JS snippet via Rudderstack itself, by en
 
 ## Sending events
 
-To learn how to send events to PostHog with RudderStack, you should check out the [official RudderStack Docs for this integration](https://docs.rudderstack.com/destinations/posthog). 
+To learn how to send events to PostHog with RudderStack, you should check out the [official RudderStack Docs for this integration](https://www.rudderstack.com/docs/destinations/streaming-destinations/posthog/). 

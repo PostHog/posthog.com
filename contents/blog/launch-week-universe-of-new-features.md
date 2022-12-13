@@ -23,7 +23,7 @@ All of this (and more) lead to huge growth. Users grew by 4x, the number of open
 
 But this is just the beginning. We've also been busy making PostHog a broader and more powerful tool for making great products. 
 
-To celebrate, we're officially launching a new feature or initative every day this week. Welcome to _PostHog Launch Week I: A Universe of New Features_.
+To celebrate, we're officially launching a new feature or initiative every day this week. Welcome to _PostHog Launch Week I: A Universe of New Features_.
 
 ## Chapter I: Data Management
 
@@ -88,6 +88,3 @@ Today, Neil Kakkar shares three things we've learned about running effective A/B
 
 _Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
 
-<NewsletterForm
-compact
-/>

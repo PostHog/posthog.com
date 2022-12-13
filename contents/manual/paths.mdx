@@ -3,9 +3,25 @@ title: Path analysis
 related:
     - ../tutorials/funnels.md
     - ../tutorials/nextjs-supabase-signup-funnel.mdx
----
+availability:
+    free: partial
+    selfServe: full
+    enterprise: full
 
-<FeatureAvailability allPlans restrictedPlans={['free', 'openSource']} />
+    features:
+        cohorts:
+            free: false
+            selfServe: true
+            enterprise: true
+        wildcardGroups:
+            free: false
+            selfServe: true
+            enterprise: true
+        advancedOptions:
+            free: false
+            selfServe: true
+            enterprise: true
+---
 
 ## Overview
 
@@ -91,6 +107,8 @@ This will give us the exact conversion rate of this step, as well as the average
 
 ### Viewing recordings and creating cohorts from a step
 
+<FeatureAvailability availability={_frontmatter.availability.features.cohorts} />
+
 One of the most powerful features of the Paths insight is the ability to see all the users who passed through a specific step.
 To do this, we simply click on the blue number next to the name of step which shows how many users arrived at this point, which will bring up a list of all of these users.
 
@@ -112,7 +130,7 @@ When you first create a Paths insight, you'll see an option right above the grap
 This corresponds to the number of steps a user takes in a single session, with each step corresponding to an event that was sent.
 
 Increasing the number of steps will show a longer portion of a user's journey through your product, but often this can get cluttered when viewing very long journeys.
-To fix this, checkout how to [exclude certain events](#exclusions) or modify some of the [advanced options](#advanced-options) to descrease the visual load.
+To fix this, checkout how to [exclude certain events](#exclusions) or modify some of the [advanced options](#advanced-options) to decrease the visual load.
 
 ### Selecting event types
 
@@ -142,6 +160,8 @@ PostHog has several built-in filters, including OS, Browser, Time, and IP addres
 Filters can also be combined in order to define more complex groups, creating statements equivalent to "Show me users that run MacOS and visited my website using Firefox".
 
 ### Wildcard groups
+
+<FeatureAvailability availability={_frontmatter.availability.features.wildcardGroups} />
 
 Wildcard groups are an advanced feature that allows you to group multiple events together into a single step based on certain patterns.
 Wildcard groups work by using the `*` character to match against an event. All events that contain a certain pattern will be grouped together, and you'll see their name in the paths displayed as the pattern you set.
@@ -178,6 +198,8 @@ Exclusions allow you to remove events entirely from being displayed in a path, a
 
 ### Advanced options
 
+<FeatureAvailability availability={_frontmatter.availability.features.advancedOptions} />
+
 Paths provide a number of more advanced configuration options for customizing the behavior of the insight.
 
 #### Maximum number of paths
@@ -188,7 +210,7 @@ The default number is 50, but oftentimes this will be far too cluttered and redu
 #### Number of people on each path
 
 This option allows you to set two numbers corresponding to the minimum and maximum number of users that can exist on a path. Once again, in this case 'Path' is referring to a movement from one step to another, not from start to finish.
-If the number of users who moved from one step to another is either lower than the minimum, or higher then the maximum, this still will not be displayed. If one of the options is set blank, this means there is no limit for that specific bound.
+If the number of users who moved from one step to another is either lower than the minimum, or higher than the maximum, this still will not be displayed. If one of the options is set blank, this means there is no limit for that specific bound.
 
 This option is very useful when analyzing paths that are visually dense, and allows you to filter off paths with very few users on them to get a better idea of what the majority of users are doing.
 

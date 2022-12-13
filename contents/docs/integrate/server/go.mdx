@@ -1,5 +1,5 @@
 ---
-title: Go library
+title: Go
 sidebarTitle: Go
 sidebar: Docs
 showTitle: true
@@ -12,6 +12,8 @@ features:
     featureFlags: true
     groupAnalytics: true
 ---
+
+import CohortExpansionSnippet from './snippets/cohort-expansion'
 
 This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance.
 
@@ -157,15 +159,15 @@ If you're using PostHog in the front-end and back-end, doing the identify call i
 
 An alias call requires
 
--   `distinct id` the current unique id
--   `alias` the unique ID of the user before
+-   `DistinctId` – the current unique id (logged in user id)
+-   `Alias` – the _other_ distinct ID of the user, which will be aliased to the current one
 
 For example:
 
 ```go
 client.Enqueue(posthog.Alias{
   DistinctId: "user:123",
-  Alias: "user:12345",
+  Alias: "session:12345",
 })
 ```
 
@@ -284,10 +286,19 @@ enabledVariant, err := client.GetFeatureFlag(
 )
 ```
 
+This works for `getAllFlags` as well. It evaluates all flags locally if possible. If even one flag isn't locally evaluable, it falls back to decide.
+
+```go
+featureVariants, _ := client.GetAllFlags(FeatureFlagPayloadNoKey{
+		DistinctId: "distinct-id",
+})
+```
+
 #### Restricting evaluation to local only
 
 Sometimes, performance might matter to you so much that you never want an HTTP request roundtrip delay when computing flags. In this case, you can set the OnlyEvaluateLocally parameter to true, which tries to compute flags only with the properties it has. If it fails to compute a flag, it returns None, instead of going to PostHog's servers to get the value.
 
+<CohortExpansionSnippet />
 
 #### Reloading feature flags
 

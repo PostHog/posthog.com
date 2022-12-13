@@ -1,6 +1,6 @@
 ---
-date: 2022-08-12
-title: The 6 best GDPR-compliant analytics tools
+date: 2022-10-25
+title: The 7 best GDPR-compliant analytics tools
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -17,32 +17,30 @@ And, while there is **no universal legal definition** of what constitutes "GDPR-
 
 1. **You must acquire "unambiguous consent":** Tucking a notice away in your terms and conditions isn't enough. This is why cookie banners are a thing. You need user consent if you're collecting [personally identifiable information](/blog/what-is-personal-data-pii).
 
-2. **Data must be handled securely:** GDPR punishes breaches of privacy and security severely. Data must be held securely and staff  trained in how to handle data. You must also delete any personal data you hold if a user requests it.
+2. **Data must be handled securely:** GDPR punishes breaches of privacy and security severely. Data must be held securely and staff trained in how to handle data. You must also delete any personal data you hold if a user requests it.
 
-3. **Don't transfer EU personal data to the US:** Non-anonymized identifiable information on EU citizens can't be transferred to the US. This is a hot button issue due to [recent rulings against websites](https://isgoogleanalyticsillegal.com/) that transeferred the personal data of EU citizens (e.g. IP addresses) to Google's US-based servers.
+3. **Don't transfer EU personal data to the US:** Non-anonymized identifiable information on EU citizens can't be transferred to the US. This is a hot button issue due to [recent rulings against websites](https://isgoogleanalyticsillegal.com/) that transferred the personal data of EU citizens (e.g. IP addresses) to Google's US-based servers.
 
 ## The best GDPR-compliant analytics tools
 
-There are numerous ways to achieve GDPR compliance, which you can broadly categorize as either good, better or best:
+There are numerous ways to achieve GDPR compliance, which you can broadly categorize as good, better or best:
 
 - **Good:** Data transferred to the US is anonymized
 - **Better:** Data is stored in EU cloud servers
 - **Best:** You self-host and control all data / no personal data is collected
 
-All the tools in this list offer one or more of these methods. We've also chosen a broad range of tools that includes in-depth product analytics platforms, lightweight "privacy first" platforms and open source Google Analytics alternatives.
+All the tools in this list offer one or more of these methods. We've also chosen a broad range of tools that includes in-depth product analytics platforms, lightweight "privacy first" platforms and open source [Google Analytics alternatives](/blog/ga4-alternatives).
 
 ### 1. PostHog
 
 ![PostHog - best gdpr compliant analytics tools](../images/blog/gdpr-compliant-analytics/posthog-gdpr-compliant.png)
 
-[PostHog](https://posthog.com) is an all-in-one, [open source analytics platform](/blog/best-open-source-analytics-tools) that combines  [Product Analytics](/product/#product-analytics), [Session Recording](/product/session-recording), [Feature Flags](/product/feature-flags), [Heatmaps](/product/heatmaps), and [Experimentation](/product/experimentation-suite) into a single platform.
+[PostHog](https://posthog.com) is an all-in-one, [open source analytics platform](/blog/best-open-source-analytics-tools) that combines product analytics, session recording, feature flags, and experimentation into a [single platform](/product). Think Amplitude + Hotjar + LaunchDarkly in one and you're pretty close.
 
-(Think Amplitude + Hotjar + LaunchDarkly in one platform and you're pretty close.)
-
-Unlike [alternative to tools like Amplitude](/blog/posthog-vs-amplitude) and Mixpanel, PostHog can be self-hosted on your own infrastructure, which means you can control exactly where user information is stored and how it is processed – ideal for GDPR and HIPAA compliance. It also supports event auto capture, so you can start collecting useful data immediately without instrumenting events by hand.
+Unlike alternatives [like Amplitude](/blog/posthog-vs-amplitude) and Mixpanel, PostHog can be self-hosted on your own infrastructure, which means you can control exactly where user information is stored and how it is processed – ideal for GDPR and HIPAA compliance. It also supports event autocapture, so you can start collecting useful data immediately without instrumenting events by hand.
 
 #### Who is PostHog for?
-PostHog is especially helpful for product teams that want to understand how users use their product. As it's open source, it's great for early-stage startups, but the powerful toolset and [range of integrations](/apps) means it scales to suit any business size.
+PostHog is especially helpful for product teams that want to understand how users use their product. As it's open source, it's great for early-stage startups, but the powerful toolset and [range of integrations](/apps) means it scales to suit any business size. It's also [useful for marketing teams](/blog/posthog-marketing).
 
 #### Features & benefits
 - An all-in-one analytics suite
@@ -58,16 +56,16 @@ PostHog is especially helpful for product teams that want to understand how user
 
 - **Open Source:** <span className="text-green text-lg">✔</span>
 - **Self Hosting:** <span className="text-green text-lg">✔</span>
-- **EU Cloud Hosting:** Coming Q4 2022 – [join the waitlist](/signup/eu-cloud)
+- **EU Cloud Hosting:** <span className="text-green text-lg">✔</span>
 - **Cookieless Tracking:** <span className="text-green text-lg">✔</span>
 
-PostHog can be deployed onto your own infrastructure, so you retain full control over who your data is shared with and where it is hosted. A cloud-hosted version of PostHog is also available, if you prefer, with servers hosted in the US – PostHog provides guidance on how to [use PostHog Cloud in compliance with GDPR](/docs/privacy/gdpr-compliance).
+PostHog can be deployed onto your own infrastructure, so you retain full control over who your data is shared with and where it is hosted. Alternatively, you can use [PostHog Cloud EU](/eu), a fully-managed service with servers hosted in Frankfurt, Germany.
 
 While PostHog uses cookies by default, it can be [configured not to use cookies](/tutorials/cookieless-tracking). To use PostHog without cookies, data is stored in a Javascript object in `memory` that only lasts the duration of the pageview.
 
 #### How much does PostHog cost?
 
-All paid editions of PostHog are [free to use up to 1 million events per month](/pricing). Paid plans include support for multiple projects, and advanced features like [A/B and multivariate testing](/docs/user-guides/experimentation), [Correlation Analysis](/docs/user-guides/correlation), [Cohorts](/user-guides/cohorts) and [Group Analytics](/docs/user-guides/group-analytics). The open source edition is free to self-host and includes the core product analytics features,  Session Recording and support for one project only.
+All paid editions of PostHog are [free to use up to 1 million events per month](/pricing). Paid plans include support for multiple projects, and advanced features like [A/B and multivariate testing](/manual/experimentation), [correlation analysis](/manual/correlation), [cohorts](/manual/cohorts) and [group analytics](/manual/group-analytics). The open source edition is free to self-host and includes the core product analytics features, session recording, and support for one project only.
 
 <GDPRForm />
 
@@ -75,14 +73,14 @@ All paid editions of PostHog are [free to use up to 1 million events per month](
 
 ![Plausible Analytics - open source analytics tools](../images/blog/open-source-analytics-tools/plausible-screenshot.png)
 
-[Plausible](https://plausible.io/) is a lightweight alternative to tools such as Google Analytics. It offers an effective way to track simple web metrics, such as page views and the number of unique visitors, but lacks the depth of a full product analytics platform such as Mixpanel or PostHog. 
+[Plausible](https://plausible.io/) is a lightweight alternative to tools such as Google Analytics. It offers an effective way to track simple web metrics, such as page views and the number of unique visitors, but lacks the depth of a full product analytics platform. 
 
 Plausible’s lightweight nature does offer several benefits however, such as a small script size which means it has a minimal impact on page performance. This further distinguishes it from the bloat of Google Analytics.
 
 Plausible’s intense focus on privacy makes it an attractive option for individuals, but also imposes restrictions on how data can be used and stored. There’s no way to identify users or track behavior across multiple sessions or devices, for example. 
 
 #### Who is Plausible for?
-Plausible is an alternative to Google Analytics and is a good fit for small content and marketing teams who need to track simple website metrics, or for freelancers and bloggers who only need to monitor small sites. 
+Plausible is a good fit for small content and marketing teams who need to track simple website metrics, or for freelancers and bloggers who only need to monitor small sites. 
 
 #### Features & benefits
 - Lightweight script with minimal page speed impact
@@ -97,7 +95,7 @@ Plausible is an alternative to Google Analytics and is a good fit for small cont
 - **EU Cloud Hosting:** <span className="text-green text-lg">✔</span>
 - **Cookieless Tracking:** <span className="text-green text-lg">✔</span>
 
-Plausible is made and hosted in the EU. It collects no personally identifiable information at all, making it ideal if you want basic, GDPR compliant analytics. It's doesn't collect any personal data, such as IP addresses, so you don't need to acquire permission from users to comply with GDPR.
+Plausible is made and hosted in the EU. It collects no personally identifiable information at all, making it ideal if you want basic, GDPR-compliant analytics. It's doesn't collect any personal data, such as IP addresses, so you don't need to acquire permission from users to comply with GDPR.
 
 #### How much does Plausible cost?
 
@@ -166,7 +164,7 @@ Like PostHog, Countly can be deployed onto your own infrastructure, or in cloud 
 
 #### How much does Countly cost?
 
-Countly doesn't publish pricing on its website. You have to contact sales. Its open source Community Edition is free to self-host, but it exlcudes most of its user behavior features. 
+Countly doesn't publish pricing on its website. You have to contact sales. Its open source Community Edition is free to self-host, but it excludes most of its user behavior features. 
 
 ### 5. Matomo
 
@@ -199,11 +197,43 @@ Matomo offers first-party cookies by default and robust tools to ensure personal
 
 #### How much does Matomo cost?
 
-Matomo's core open source analytics is free to self-host. More advanced features, such as A/B testing and Custom resports, are add-ons charged for annually at varying rates. Its managed cloud service charges by hits (any pageview, event, download etc.) with 1 million hits costing £139 (approx. $170) per month.
+Matomo's core open source analytics is free to self-host. More advanced features, such as A/B testing and Custom reports, are add-ons charged for annually at varying rates. Its managed cloud service charges by hits (any pageview, event, download etc.) with 1 million hits costing £139 (approx. $170) per month.
 
 **Related:** [PostHog and Matomo compared](/blog/posthog-vs-matomo)
 
-### 6. GoAccess
+### 6. TelemetryDeck
+
+![telemetrydeck](../images/blog/ga4-alternatives/telemetrydeck.png)
+
+[TelemetryDeck](https://telemetrydeck.com/) is to app analytics what Plausible and Fathom are to website analytics – a lightweight tool that collects minimal personal information. Consequently, TelemetryDeck says developers can use it without tracking permission banners.
+
+Unlike Plausible and Fathom, TelemetryDeck is an event-based analytics platform, making it more adept at understanding what users are doing in your app. It includes basic retention, funnel, page flow insights, and tracks useful app data such as app version, phone model and OS version, and average usage time.
+
+#### Who is TelemetryDeck for? 
+
+TelemetryDeck is good for individual app developers who want a simple, effective solution for app analytics. It's most comparable to Countly, though it doesn't collect as much information on users, or offer as many features. There are first-party SDKs for Swift, Kotlin (for Android and Java), and Javascript (for Node and websites). There's also a community SDK for the Unity game engine.
+
+#### Features & benefits
+
+- App analytics for Android and iPhone apps
+- Doesn't track any personally identifiable information
+- Tracks app version and phone OS version
+- Basic retention, funnel, and user path visualizations
+
+#### TelemetryDeck and GDPR compliance
+
+- **Open source:** <span className="text-red text-lg">✖</span>
+- **Self-hosting:** <span className="text-red text-lg">✖</span>
+- **EU Cloud Hosting:** <span className="text-green text-lg">✔</span>
+- **Cookieless Tracking:** <span className="text-green text-lg">✔</span>
+
+TelemetryDeck makes GDPR compliance very easy. It doesn't collect enough personal information to require opt-out banners, and it's hosted in the EU.
+
+#### How much does TelemetryDeck cost?
+
+TelemetryDeck's free plan gives you up to 100,000 signals per month – signals are TelemetryDeck's name for events. It has three other plans (Indie, Business and Enterprise) which unlock more signals, support, and user accounts.
+
+### 7. GoAccess
 
 ![GoAccess - open source analytics tools](../images/blog/gdpr-compliant-analytics/goaccess-gdpr-compliant.png)
 
@@ -236,4 +266,3 @@ You can configure GoAccess to either not collect IP addresses or anonymize them,
 GoAccess is open source and has no paid tiers.
 
 <GDPRForm />
-

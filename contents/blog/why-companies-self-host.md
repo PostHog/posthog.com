@@ -20,7 +20,7 @@ Those conversations never end, but through them we've found there are three fund
 
 ## 1) Data privacy
 
-General Data Protection Regulation - four mundane words with huge consequences. Introduced in May 2018, the EU's GDPR is changing the shape of privacy globally. Why? Not only is it one of the toughest, most comprehensive privacy regulations in the world, its rules are extra-territorial. It doesn't matter if your company isn't based in the EU, if you want to process the data of EU citizens then you have to comply.
+General Data Protection Regulation - four mundane words with huge consequences. Introduced in May 2018, the EU's GDPR is changing the shape of privacy globally. Why? Not only is it one of the toughest, most comprehensive privacy regulations in the world, its rules are extraterritorial. It doesn't matter if your company isn't based in the EU, if you want to process the data of EU citizens then you have to comply.
 
 Failure to comply is costly. Under its provisions, regulators can fine companies the greater of €20 million or 4% of global turnover. Amazon and WhatsApp were [fined €746 million](https://www.wired.co.uk/article/amazon-gdpr-fine) and [€225 million](https://www.bbc.co.uk/news/technology-58422465) respectively in 2021. Other nations, notably Japan, South Korea, Israel, Brazil and Canada have either introduced GDPR-like regulations or amended existing legislation to match, while California introduced the [CCPA](https://oag.ca.gov/privacy/ccpa) to protect residents of California.
 
@@ -52,7 +52,7 @@ Issues around data portability are particularly crucial for healthcare companies
 
 Cloud-based and self-hosted analytics do the same thing, so surely they collect the same data? Wrong.
 
-Knowledge sharing tool [Saga](/customers/saga) ran a side-by-side comparison between Mixpanel and a self-hosted instance of PostHog and found a huge difference in the number of events that were tracked.
+Knowledge-sharing tool Saga ran a side-by-side comparison between Mixpanel and a self-hosted instance of PostHog and found a huge difference in the number of tracked events.
 
 "For one event we defined, Mixpanel reported 6,343 occurrences last month," explains Filip Stanev, co-founder of Saga. "PostHog reported what we know to be the true figure, 8,169 — almost 30% more than Mixpanel.”
 

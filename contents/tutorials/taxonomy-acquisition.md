@@ -5,7 +5,7 @@ showTitle: true
 author: ['james-hawkins']
 date: 2021-09-19
 featuredImage: ../images/tutorials/banners/deep-dive.png
-topics: ['dashboards']
+topics: ['dashboards', 'events', 'utm segmentation']
 ---
 
 This tutorial will help you:
@@ -42,7 +42,7 @@ Now you have a sense of how to breakdown acquisition, it's time to figure out wh
 
 You need to define these events within your product, and push them to PostHog. For example, "traffic" may mean people visiting your website, visiting an individual landing page, and so on. Or show both if either could be relevant.
 
-- _Acquisition dashboard:_ [User acqusition](#user-acquisition) over time (this should be placed alongside Activation, Retention, Referral and Revenue - tutorials for those to come another time).
+- _Acquisition dashboard:_ [User acquisition](#user-acquisition) over time (this should be placed alongside Activation, Retention, Referral and Revenue - tutorials for those to come another time).
   - _Deep dive: Acquisition dashboard:_ [Users - traffic](#users--traffic)
     - _Deep dive: traffic dashboard:_ [Users - traffic - by utm_source](#users--traffic--by-utmsource)
     - _Deep dive: traffic dashboard:_ [Users - traffic - by utm_medium](#users--traffic--by-utmmedium)
@@ -50,8 +50,8 @@ You need to define these events within your product, and push them to PostHog. F
     - _Deep dive: traffic dashboard:_ [Users - traffic - by utm_content](#users--traffic--by-utmcontent)
     - _Deep dive: traffic dashboard:_ [Users - traffic - by utm_term](#users--traffic--by-utmterm)
     - _Deep dive: traffic dashboard:_ [Users - traffic - by initial referring domain](#users--traffic--by-initial-referring-domain)
-  - _Deep dive: acqusition dashboard:_ [Users - sign ups - conversion rate](#users--sign-ups--conversion-rate)
-  - _Deep dive: acqusition dashboard:_ Optional: [Users - sign ups - non-funnel](#users--signups--nonfunnel)
+  - _Deep dive: acquisition dashboard:_ [Users - sign ups - conversion rate](#users--sign-ups--conversion-rate)
+  - _Deep dive: acquisition dashboard:_ Optional: [Users - sign ups - non-funnel](#users--signups--nonfunnel)
  
 ## Taxonomy definitions
 

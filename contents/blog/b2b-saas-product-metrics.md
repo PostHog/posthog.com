@@ -1,5 +1,5 @@
 ---
-date: 2022-06-16
+date: 2022-10-26
 title: The most useful B2B SaaS product metrics
 rootPage: /blog
 sidebar: Blog
@@ -7,7 +7,7 @@ showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/b2b-product-metrics/b2b-product-metrics.jpeg
 featuredImageType: full
-categories: ["Guides", "PostHog Academy", "Product analytics"]
+categories: ["Guides"]
 author: ["andy-vandervell"]
 ---
 
@@ -15,21 +15,23 @@ So, you're building a B2B SaaS product.
 
 Everyone knows you've got to measure stuff to succeed. This is not news. 
 
-What, why, and how? These are the questions that matter.
+What, why, and how? These are the questions that matter and the answers lie in the product metrics you track.
 
-In this guide we will:
+In this guide, we'll cover:
 
-1. Reveal [what makes a good metric](#what-makes-a-good-b2b-product-metric) for a B2B product
-2. Explain the [common metrics used by B2B SaaS companies](#common-b2b-saas-product-metrics)
-3. [Recommend metrics](#recommended-b2b-product-metrics) for most B2B SaaS products
+1. [What makes a good metric](#what-makes-a-good-b2b-product-metric) for a B2B product
+2. [The common metrics used by B2B SaaS companies](#common-b2b-saas-product-metrics)
+3. [How to choose your product metrics](#how-to-choose-your-product-metrics) 
 
-Please note: this guide is about _product_ metrics, rather than revenue or wider business metrics. Naturally, they're important too. Most product analytics tools, such as Mixpanel and [Amplitude](/blog/posthog-vs-amplitude), allow you to track the metrics in this guide.
+> **Note:** This guide is about _product_ metrics, not revenue or wider business metrics like customer lifetime value (LTV) or average revenue per user (ARPU). Naturally, they're important too, but this guide is all about the metrics of most interest to product teams.
 
-If you don't already have product analytics, or are thinking of switching, consider PostHog. We're an open-source analytics platform that combines the best of Mixpanel + Hotjar + Optimizely + LaunchDarkly into one tool you can host yourself.
+## What are product metrics?
 
-Read our [product page](/product) and [documentation](/docs) if you're interested.
+Product metrics capture how people use your product **and** how that impacts your business. 
 
-> This article is part of our [PostHog Academy series](/blog/categories/posthog-academy) where we explain the fundamentals of product analytics.
+For example, if the number of new users who successfully use your product (aka new user activation) declines, you can expect this to lead to a decline in the number of paying users.
+
+Product metrics are essential for understanding the overall health of your product and areas of weakness, and they also help guide your product decisions.
 
 ## What makes a good B2B product metric?
 
@@ -47,9 +49,9 @@ Here's what those mean in a little more detail:
 
 It's not realistic to achieve all four in every metric you use, but three out of four is a good benchmark.
 
-## Common B2B SaaS product metrics
+## Common product metrics
 
-Coming up are some of the most common metrics for SaaS products. We explain what they are, how to measure them, and how useful they really are.
+Coming up are some of the most common metrics for products. We explain what they are, how to measure them, and how useful they really are.
 
 Think we missed one? Make a suggestion via [our website repo](https://github.com/PostHog/posthog.com).
 
@@ -88,10 +90,6 @@ The retention rate formula is `((customers at end of period - new customers) / c
 What constitutes a good ratio depends on the sector, but a [2017 report by Mixpanel](https://discover.mixpanel.com/rs/461-OYV-624/images/2017-Mixpanel-Product-Benchmarks-Report.pdf) suggests SaaS products average 13%, and that a good ratio is 20% or more.
 
 **Is it useful?** Yes, but you need to be careful as a large increase in monthly users can skew your ratio. It's best used by late-stage companies with predictable monthly growth, which is probably why it's popular at Facebook.
-
- <NewsletterForm
-compact
-/>
 
 ### Feature usage
 
@@ -163,9 +161,41 @@ Monitoring support requests is best monitored after an update, or the introducti
 
 **Is it useful?** Inviting colleagues to create an account is a sure sign users are getting value from your product, and will reduce churn among your customers. What's not to like about that?
 
-## Recommended B2B product metrics
+## How to choose your product metrics
 
-Every product requires a different metrics, but these are the metrics we'd recommend for most B2B products:
+When choosing your product metrics, first remember the four qualities of good metrics we mentioned earlier: understandable, comparative, specific and actionable.
+
+They're all important in isolation, but more powerful when combined. Here's an example of how this works.
+
+Our product, [PostHog](https://posthog.com/), is all about helping engineers and product teams discover insights about product usage. 
+
+In PostHog, users can:
+
+- Create and analyze insights that track trends over time such as how well users convert, what paths they take, and how well they retain.
+
+- Use dashboards to combine insights into cohesive reports on any element of the product experience.
+
+- View session recordings of real customers to understand where they get stuck or how they use the product.
+
+- Use feature flags to test and run experiments before rolling features out.
+
+To capture all this activity, we created a composite metric we call [Discoveries](/handbook/product/metrics). We define Discoveries as any time a PostHog user analyzes an insight, dashboard, recording, or correlation analysis report for 10 second or more.
+
+What makes this a good product metric for us? Let's break it down:
+
+- **Is easy to understand?** Yes. While it combines several different events into one action, they're all easy for anyone who knows the product to understand.
+
+- **Is it comparable?** Absolutely. We can use this metric to compare power users to average users and compare different cohorts based on multiple criteria (e.g. paying vs non-paying customers, job title etc.). It's also sensitive to changes in the product, so we can see whether our users make more or fewer discoveries when we make a change.
+
+- **Is it specific?** Yes. Again, while it's a composite metric, each individual event captures users getting value from our product.
+
+- **Is it actionable?** Yes. If this metric drops, it immediately gives us several avenues of investigation to understand the cause.
+
+Not all useful product metrics follow this trend – active users is a notable exception – but it's a good acid test to apply to any metric you're considering.
+
+### Recommended B2B product metrics
+
+To help get you started, we've chosen five metrics that are useful for any B2B product. You will want to augment and adapt these for your specific needs, but 
 
 - **Active users (DAU / WAU / MAU)** because it's a fundamental metric that underpins others, and allows you to measure user growth over time.
 
@@ -183,12 +213,12 @@ And if you're in need a product analytics platform to track them, learn [how we 
 
 ## Further reading
 
+For more inspiration around measuring product success, we recommend reading our [guide to AARRR pirate metrics](/blog/aarrr-pirate-funnel) – a popular framework for understanding user behavior and discovering opportunities.
+
+You may also find the following guides useful:
+
 - [How to achieve B2B product market fit](/blog/how-to-product-market-fit): There's no universal standard for achieving market fit, but this guide introduces heuristics to help you find it
 
-- [How to measure product engagement](/blog/how-to-product-market-fit): Guide to defining engagement for your platform, and how to use analytics tools to measure and build on the results
+- [Finding your north star metric](/blog/north-star-metrics): All SaaS products can benefit from a north star metric and this guide will help you find one
 
-- [Finding your north star metric](/blog/north-star-metrics): All Saas products can benefit from a north star metric and this guide will help you find one
-
- <NewsletterForm
-compact
-/>
+- [How to get Stripe payment and revenue data](/tutorials/stripe-payment-data): This tutorial helps you get the data about your customers (and revenue) from Stripe you need to calculate some of these metrics

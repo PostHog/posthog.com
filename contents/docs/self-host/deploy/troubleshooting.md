@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-If you are looking for routine procedures and operations to manage PostHog installations like begin, stop, supervise, and debug a PostHog infrastructure, please take a look at the [runbook](../../runbook) section.
+If you are looking for routine procedures and operations to manage PostHog installations like begin, stop, supervise, and debug a PostHog infrastructure, please take a look at the [runbook](/docs/runbook) section.
 
 ## Troubleshooting
 
@@ -47,7 +47,7 @@ Error while writing to checkpoint file /bitnami/kafka/data/...
 java.io.IOException: No space left on device
 ```
 
-This tells us that the data disk is full. To resize the disk, please follow the [runbook](../../runbook/services/kafka/resize-disk).
+This tells us that the data disk is full. To resize the disk, please follow the [runbook](/docs/runbook/services/kafka/resize-disk).
 
 #### Why did we run into this problem and how to avoid it in the future?
 
@@ -56,7 +56,7 @@ There isn't a way for us to say "if there's less than X% of disk space left, the
 -   size (`logRetentionBytes: _22_000_000_000`) for the minimum size of data on disk before allowed deletion.
 -   time (`logRetentionHours: 24`) for the minimum age before allowed deletion.
 
-We need to configure these well, but monitoring disk util can help catch this problem before we end up in a crash loop.
+We need to configure these well, but a disk monitoring utility can help catch this problem before we end up in a crash loop.
 
 See more in these stack overflow questions ([1](https://stackoverflow.com/questions/52970153/kafka-how-to-avoid-running-out-of-disk-storage), [2](https://stackoverflow.com/questions/53039752/kafka-how-to-calculate-the-value-of-log-retention-byte), [3](https://stackoverflow.com/questions/51823569/kafka-retention-policies)).
 
@@ -72,11 +72,21 @@ The issue might be with cert-manager custom resource definitions already existin
 
 Try running helm upgrade without `--atomic` to fix this issue.
 
+### Namespace deletion stuck at `terminating`
+
+While deleting the namespace, if your Helm release uses `clickhouse.enabled: true` you might end up in the operation being indefinitely stuck.
+
+This is a [known behavior](https://github.com/Altinity/clickhouse-operator/issues/1043) of the `clickhouse-operator` finalizer. Workaround:
+
+* patch CHI removing the finalizer: `kubectl patch chi posthog -n posthog -p '{"metadata":{"finalizers":null}}' --type=merge`
+
+* delete CHI: `kubectl delete chi posthog -n posthog`
+
 ## FAQ
 
 ### How can I increase storage size?
 
-To increase the storage size of the ClickHouse, Kafka or PostgreSQL service, take a look at our [runbook](../../runbook) section.
+To increase the storage size of the ClickHouse, Kafka or PostgreSQL service, take a look at our [runbook](/docs/runbook) section.
 
 ### Are the errors I'm seeing important?
 

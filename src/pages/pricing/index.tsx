@@ -1,14 +1,12 @@
 import Control from 'components/Pricing/Control'
 import React, { useEffect, useState } from 'react'
 import Test from 'components/Pricing/Test'
-
-import { useValues } from 'kea'
-
-import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
+import usePostHog from '../../hooks/usePostHog'
 
 const PricingNew = () => {
-    const { posthog } = useValues(posthogAnalyticsLogic)
+    const posthog = usePostHog()
     const [loading, setLoading] = useState(true)
+
     const [featureFlagEnabled, setFeatureFlagEnabled] = useState(false)
 
     useEffect(() => {

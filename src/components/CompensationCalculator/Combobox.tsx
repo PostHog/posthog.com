@@ -4,12 +4,13 @@ import { SelectorIcon, CheckIcon } from '@heroicons/react/outline'
 import { classNames } from 'lib/utils'
 
 type ComboboxProps = {
-    label: string
+    label?: string
     placeholder?: string
     options: any[]
     value: any | undefined
     onChange: (option: any | undefined) => void
     display?: (option: any) => string
+    description?: string
 }
 
 export const Combobox = (props: ComboboxProps) => {
@@ -38,12 +39,13 @@ export const Combobox = (props: ComboboxProps) => {
         >
             {({ open }) => (
                 <>
-                    <HeadlessCombobox.Label className="text-sm">{props.label}</HeadlessCombobox.Label>
+                    {props.label && <HeadlessCombobox.Label className="text-sm">{props.label}</HeadlessCombobox.Label>}
                     <HeadlessCombobox.Button
                         as="div"
-                        className="flex items-center relative w-full max-w-md focus:outline-none shadow-sm mt-1.5"
+                        className="flex items-center relative w-full focus:outline-none shadow-sm mt-1.5"
                     >
                         <HeadlessCombobox.Input
+                            autoComplete="off"
                             onBlur={() => setFocused(false)}
                             onFocus={(event: React.FocusEvent<HTMLInputElement>) => {
                                 event.target.value = ''
@@ -64,7 +66,9 @@ export const Combobox = (props: ComboboxProps) => {
                             <SelectorIcon className="h-4 w-4 text-gray-accent-light" aria-hidden="true" />
                         </span>
                     </HeadlessCombobox.Button>
-
+                    {props.description && (
+                        <p className="m-0 mt-1.5 text-sm text-black/50 dark:text-white/50">{props.description}</p>
+                    )}
                     <Transition
                         show={open}
                         as={React.Fragment}
@@ -75,7 +79,7 @@ export const Combobox = (props: ComboboxProps) => {
                         leaveFrom="opacity-100"
                         leaveTo="opacity-0"
                     >
-                        <HeadlessCombobox.Options className="absolute top-full mt-1 w-full max-w-lg bg-white dark:bg-gray-accent-dark rounded p-0 z-50 text-sm max-h-[12rem] overflow-y-scroll py-1 focus:outline-none space-y-1 shadow-xl border border-black/10">
+                        <HeadlessCombobox.Options className="absolute top-full mt-1 w-full bg-white dark:bg-gray-accent-dark rounded p-0 z-50 text-sm max-h-[12rem] overflow-y-scroll py-1 focus:outline-none space-y-1 shadow-xl border border-black/10">
                             {filteredOptions.length === 0 && query !== '' ? (
                                 <div className="px-2.5 py-1 text-sm text-gray">No results</div>
                             ) : (

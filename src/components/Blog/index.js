@@ -46,11 +46,12 @@ const Blog = ({
                     <BlogCategoriesList activeSlug={pageContext?.slug} />
                     <Structure.Section width="5xl" className="my-0">
                         {latestPost}
-                        <NewsletterForm
-                            compact
-                            className="bg-offwhite-purple dark:bg-darkmode-purple text-gray-900 dark:text-white"
-                        />
-                        <header className="text-sm text-gray-400 text-center uppercase mb-8">Recent Posts</header>
+                        <div className="border-t border-b border-dashed border-gray-accent-light -my-[1px]">
+                            <div className="max-w-lg mx-auto -my-12">
+                                <NewsletterForm compact className="" />
+                            </div>
+                        </div>
+                        <header className="text-sm text-gray-400 text-center uppercase my-8">Recent Posts</header>
                         <section className="grid md:grid-cols-3 md:gap-4 lg:gap-8">{nonLatestPosts}</section>
                     </Structure.Section>
                 </div>

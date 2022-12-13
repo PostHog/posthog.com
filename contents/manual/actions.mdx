@@ -2,9 +2,11 @@
 title: Actions
 sidebar: Docs
 showTitle: true
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
 ---
-
-<FeatureAvailability allPlans />
 
 > Looking for a tutorial about how to use Actions? Check out our [guide to event tracking](/docs/tutorials/event-tracking-guide#sorting-through-your-events-with-actions).
 
@@ -82,8 +84,13 @@ You can use <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Select
     </li>
 </ul>
 
-### Custom events & page views
-Page views can match urls containing a string or match exactly.
+### Page views
+
+Page views can match urls containing a string, based on a regex or match exactly.
+
+Regex matching is commonly used for URLs containing id-s like `/some/path/123/view`, which could be matched by a regex like `/some/path/\d+/view` into a single action, allowing for further analysis in other areas of PostHog.
+
+### Custom events
 
 Custom events can be sent to your PostHog instance via our API or one of our [libraries](/docs/integrate/overview).
 

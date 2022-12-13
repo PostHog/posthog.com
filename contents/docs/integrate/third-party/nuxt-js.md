@@ -28,13 +28,13 @@ the posthog object and make it available across our application.
 
 The first thing you want to do is to install the [posthog-js library](/docs/integrate/client/js) in your project - so add it using your package manager:
 
-```
+```shell
 yarn add posthog-js
 ```
 
 or
 
-```
+```shell
 npm install --save posthog-js
 ```
 
@@ -46,8 +46,8 @@ import Vue from 'vue'
 
 export default function({ app: { router } }, inject) {
   // Init PostHog
-  posthog.init('POSTHOG_API_KEY', {
-    api_host: 'POSTHOG_HOST',
+  posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_instance_address>',
     capture_pageview: false,
     loaded: () => posthog.identify('unique_id') // If you can already identify your user
   })

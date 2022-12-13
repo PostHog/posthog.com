@@ -76,7 +76,6 @@ const escapeRegex = (str) => {
 }
 
 export default function GlossaryElement({ as = 'p', ...other }) {
-    const { glossary } = useStaticQuery(query)
     const Element = as
     let children = other.children
     if (typeof other.children === 'string') {
@@ -119,22 +118,3 @@ export default function GlossaryElement({ as = 'p', ...other }) {
     }
     return <Element>{children}</Element>
 }
-
-const query = graphql`
-    {
-        glossary: allGlossaryJson {
-            nodes {
-                page {
-                    frontmatter {
-                        title
-                    }
-                    excerpt(pruneLength: 300)
-                }
-                word
-                pluralize
-                slug
-                description
-            }
-        }
-    }
-`

@@ -13,10 +13,7 @@ import GetInstallationAddress from './snippets/get-installation-address'
 import UpgradingSnippet from './snippets/upgrading'
 import UninstallingSnippet from './snippets/uninstalling'
 import SetupDNS from './snippets/setup-dns'
-import Disclaimer from './snippets/disclaimer'
-import NextSteps from "./snippets/next-steps"
-
-<Disclaimer />
+import NextSteps from './snippets/next-steps'
 
 First, we need to set up a Kubernetes cluster (see the official AWS [documentation](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html) for more info). Follow the "Managed nodes - Linux" guide.
 
@@ -33,7 +30,7 @@ First, we need to set up a Kubernetes cluster (see the official AWS [documentati
 
 Here's the minimal required `values.yaml` that we'll be using later. You can find an overview of the parameters that can be configured during installation under [chart configuration](/docs/self-host/deploy/configuration).
 
-```yaml
+```yaml file=values.yaml
 cloud: 'aws'
 ingress:
     hostname: <your-hostname>
@@ -43,10 +40,10 @@ cert-manager:
     enabled: true
 ```
 
-Note: if you are planning to use our [GeoIP integration](https://posthog.com/integrations/geoip), please also add the snippet below
+Note: if you are planning to use our [GeoIP integration](/apps/geoip-enrichment), please also add the snippet below
 to enable proxy protocol support in the load balancer and in the `nginx` ingress controller:
 
-```
+```yaml file=values.yaml
 #
 # For AWS ELB in L4 (TCP) mode, we need to enable some additional config
 # in the ingress controller in order to get the proper IP address forwarded

@@ -113,7 +113,7 @@ Thanks to this work, you can now get critical insights about the majority of Pos
 
 ## What’s next?
 
-Improving deployments for PostHog Cloud and our self-hosting customers is an effort we will keep investing in. Here's a sneak peak at some of the projects in our roadmap:
+Improving deployments for PostHog Cloud and our self-hosting customers is an effort we will keep investing in. Here's a sneak peek at some of the projects in our roadmap:
 
 - keep improving our chart to align to Kubernetes best practices
 
@@ -127,6 +127,3 @@ If you enjoyed reading this look at improving PostHog deployments, we recommend 
 
 _Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
 
-<NewsletterForm
-compact
-/>
