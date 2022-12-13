@@ -105,6 +105,7 @@ import { ProductFooter } from './components/ProductFooter'
 import { ProductIcons } from './components/ProductIcons'
 import { ProductPage } from './components/ProductPage'
 import { ProductSectionHeader } from './components/ProductSectionHeader'
+import { Questions } from './components/Questions'
 import { Quote2 } from './components/Quote2'
 import { Roadmap } from './components/Roadmap'
 import { RocketHorizontalRule } from './components/RocketHorizontalRule'
@@ -240,6 +241,7 @@ export const shortcodes = {
     ProductIcons,
     ProductPage,
     ProductSectionHeader,
+    Questions,
     Quote2,
     Roadmap,
     RocketHorizontalRule,
