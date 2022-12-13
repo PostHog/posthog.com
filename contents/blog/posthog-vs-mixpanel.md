@@ -21,9 +21,9 @@ In this guide, we'll cover:
 
 - Mixpanel and PostHog's [core features](#features)
 - How they [track usage](#tracking--sdks) and [library support](#client-libraries)
-- [Available integrations](#integrations)
-- [Privacy and compliance](#privacy--compliance)
-- [Answer frequently asked questions](#frequently-asked-questions) about PostHog and Mixpanel
+- [Available integrations](#integrations) across multiple categories
+- [Privacy compliance](#privacy-compliance) and [admin options](#admin--security) 
+- [Frequently asked questions](#frequently-asked-questions) about PostHog and Mixpanel
 
 ## How is PostHog different to Mixpanel?
 
@@ -922,6 +922,12 @@ Mixpanel and PostHog both support popular messaging apps and automation platform
 - **PostHog Enterprise:** Our [Enterprise tier](/enterprise) includes single sign-on, private projects, and a dedicated Slack support channel.
 
 ## Frequently asked questions
+
+- [Who should self-host PostHog?](#who-should-self-host-posthog)
+- [How long does it take to deploy PostHog?](#how-long-does-it-take-to-deploy-posthog)
+- [Does PostHog user cookies?](#does-posthog-use-cookies)
+- [How much does PostHog cost?](#how-much-does-posthog-cost)
+- [How much does Mixpanel cost?](#how-much-does-mixpanel-cost)
 
 ### Who should self-host PostHog?
 
