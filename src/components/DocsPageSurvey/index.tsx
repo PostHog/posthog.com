@@ -2,8 +2,7 @@ import React from 'react'
 import cntl from 'cntl'
 import { ThumbsDown, ThumbsUp } from 'components/Icons/Icons'
 import { motion } from 'framer-motion'
-import { useValues } from 'kea'
-import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
+import usePostHog from '../../hooks/usePostHog'
 import { button as callToAction } from 'components/CallToAction'
 
 const button = cntl`
@@ -94,7 +93,7 @@ const ResponseMessage = () => {
 
 export const DocsPageSurvey = () => {
     const [state, setState] = React.useState<'base' | 'helpful' | 'not-helpful' | 'thanks'>('base')
-    const { posthog } = useValues(posthogAnalyticsLogic)
+    const posthog = usePostHog()
 
     const submitResponse = (wasHelpful: boolean) => {
         if (posthog) {

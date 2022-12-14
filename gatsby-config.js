@@ -1,5 +1,4 @@
 const fetch = require(`node-fetch`)
-const slugify = require('slugify')
 const algoliaConfig = require('./gatsby/algoliaConfig')
 
 require('dotenv').config({
