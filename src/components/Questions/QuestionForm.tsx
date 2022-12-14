@@ -50,12 +50,6 @@ export default function Questions(props: QuestionFormProps): JSX.Element {
                                 organizationId={process.env.GATSBY_SQUEAK_ORG_ID as string}
                             />
                         )}
-                        {/*<form className="flex flex-col items-center justify-center">
-                                <h2 className="text-2xl font-bold">Sign in to ask a question</h2>
-                                <p className="text-gray">You need to be signed in to ask a question.</p>
-
-                                <Authentication handleMessageSubmit={() => setShowForm(false)} />
-                            </form>*/}
                     </Dialog.Panel>
                 </div>
             </Dialog>
