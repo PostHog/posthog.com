@@ -177,13 +177,13 @@ We give these values as an estimate for how long to run the experiment. It's pos
 
 Note how the recommended sample size in each case is inversely related to the minimum acceptable improvement. This makes sense, since the smaller the `mde`, the more sensitive your experiment is, and the more data you need to judge significance.
 
-### Bayesian A/B Testing
+### Bayesian A/B testing
 
 We follow a mostly bayesian approach to A/B testing. While running any experiment, we calculate two parameters: (1) Probability of each variant being the best, and (2) whether the results are significant or not.
 
 Below are calculations for each kind of experiment.
 
-### Trend Experiment Calculations
+### Trend experiment calculations
 
 Trend experiments capture count data. For example, if you want to measure the change in total count of clicks, you'd use this kind of experiment.
 
@@ -197,13 +197,13 @@ The probability of a variant being the best is given by:
 
 For calculating significance, we currently measure p-values using a poisson means test. [Here's a good primer of the formula](https://www.evanmiller.org/statistical-formulas-for-programmers.html#count_test). Results are significant when the p-value is less than 0.05
 
-### Trend Experiment Exposure
+### Trend experiment exposure
 
 Since count data can be over a total count, vs. the number of unique users, we use a proxy metric to measure exposure: The number of times `$feature_flag_called` event returns `control` or `test` is the respective exposure for the variant. This event is sent automatically when you do: `posthog.getFeatureFlag()`.
 
 It's possible that a variant showing fewer count data can have higher probability, if its exposure is much smaller as well.
 
-### Funnel Experiment Calculations
+### Funnel experiment calculations
 
 Funnel experiments capture conversion rates. For example, if you want to measure the change in conversion rate for buying a subscription to your site, you'd use this kind of experiment.
 
@@ -215,7 +215,7 @@ The probability of a variant being the best is given by:
 
 ![Probability](../images/docs/user-guides/experimentation/conversion_probability.png)
 
-To calculate significance, we calculate the expected loss, as first mentioned in [VWO's SmartStats whitepaper](https://cdn2.hubspot.net/hubfs/310840/VWO_SmartStats_technical_whitepaper.pdf).
+To calculate significance, we calculate the expected loss, as first mentioned in [VWO's SmartStats whitepaper](https://vwo.com/downloads/VWO_SmartStats_technical_whitepaper.pdf).
 
 To do this, we again run a monte carlo simulation, and calculate loss as:
 
@@ -223,7 +223,7 @@ To do this, we again run a monte carlo simulation, and calculate loss as:
 
 This represents the expected loss in conversion rate if you chose any other variant. If this is below 1%, we declare results as significant.
 
-### Important Note about Significance
+### Important note about significance
 
 In the early days of an experiment, data can vary wildly, and sometimes one variant can seem overwhelmingly better. In this case, our significance calculations might say that the results are significant, but this shouldn't be the case, since we need more data.
 

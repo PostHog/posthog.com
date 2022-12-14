@@ -1,6 +1,6 @@
 ---
 date: 2022-12-01
-title: "What is a product engineer (and why they matter)"
+title: "What is a product engineer (and why they're awesome)"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -83,7 +83,7 @@ Because they build prototypes and are self-reliant, product engineers often have
 
 ### Reliant on automation and CI/CD systems.
 
-Shipping fast and talking to customers requires time on top of engineering requires time. Product engineers get this time by relying on devtools and automation. Ideally, they are spending little of their time on testing, infrastructure, and deployment. Companies might have separate teams for this or rely on the growing number of product enabling product engineers (like some of the ones we’ve quoted here). Developer tooling is a key part of [Ashby’s](https://www.ashbyhq.com/) team:
+Shipping fast and talking to customers requires time on top of engineering. Product engineers get this time by relying on devtools and automation. Ideally, they are spending little of their time on testing, infrastructure, and deployment. Companies might have separate teams for this or rely on the growing number of product enabling product engineers (like some of the ones we’ve quoted here). Developer tooling is a key part of [Ashby’s](https://www.ashbyhq.com/) team:
 
 > “Great developer tooling. Our CI/CD takes ~10m, and we deploy at least 5x a day. Everyone on the team has contributed to developer experience 💪🏾”
 
@@ -117,6 +117,6 @@ As long as building great products is an important goal for many companies, prod
 
 ## Further reading
 
+- [Product engineer vs software engineer: what's the difference?](/blog/product-engineer-vs-software-engineer)
 - [How to harness the awesome power of growth loops](/blog/growth-loops)
-- [22 ways PostHog makes it easier to build great products](/blog/using-posting)
-- [How we found our Ideal Customer Profile](/blog/creating-ideal-customer-profile)
+- [22 ways PostHog makes it easier to build great products](/blog/using-posthog)

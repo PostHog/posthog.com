@@ -13,7 +13,7 @@ import { animateScroll as scroll, Link as ScrollLink } from 'react-scroll'
 import SelfHostOverlay from 'components/Pricing/Overlays/SelfHost'
 import EnterpriseOverlay from 'components/Pricing/Overlays/Enterprise'
 import WhyCloud from 'components/Pricing/Overlays/WhyCloud'
-import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
+import usePostHog from '../../hooks/usePostHog'
 import { useActions, useValues } from 'kea'
 import { CallToAction, TrackedCTA } from 'components/CallToAction'
 import { pricingSliderLogic } from 'components/Pricing/PricingSlider/pricingSliderLogic'
@@ -260,7 +260,7 @@ const Breakdown = ({ planName, ctas }) => {
 
 const PricingBreakdown = () => {
     const { eventNumber } = useValues(pricingSliderLogic)
-    const { posthog } = useValues(posthogAnalyticsLogic)
+    const posthog = usePostHog()
     return (
         <section className={`${section} mt-12 md:px-4`}>
             <h2
@@ -371,7 +371,6 @@ const Test = (): JSX.Element => {
     const [selfHost, setSelfHost] = useState(false)
     const [enterprise, setEnterprise] = useState(false)
     const [currentModal, setCurrentModal] = useState<string | boolean>(false)
-    const { posthog } = useValues(posthogAnalyticsLogic)
     const [showVolumeDiscounts, setShowVolumeDiscounts] = useState(false)
     const [showPlanBuilder, setShowPlanBuilder] = useState(false)
     const [enterpriseModalOpen, setEnterpriseModalOpen] = useState(false)

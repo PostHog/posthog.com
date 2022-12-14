@@ -41,7 +41,7 @@ export const ContributorCard = ({
         children: React.ReactNode
         pageKey: string
     }) => (
-        <Tooltip title={title}>
+        <Tooltip content={title}>
             <span onClick={(e) => handleTooltipContentClick(e, pageKey)}>{children}</span>
         </Tooltip>
     )

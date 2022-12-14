@@ -138,6 +138,7 @@ In this case `clickhouse01` was the coordinator node. It:
 In this case, minimal network traffic happened since the results of a query could be combined independently.
 
 <details><summary>Click to see full `EXPLAIN` plan</summary>
+
 ```
 Expression ((Projection + Before ORDER BY))
 Header: hostname() String
@@ -170,6 +171,7 @@ Header: hostname() String
         Header: hostname() String
                 sum(metric_value) AggregateFunction(sum, Int32)
 ```
+ 
 </details>
 
 ### Example query: LIMIT, filter and aggregate
@@ -376,4 +378,4 @@ More documentation on this can be found at:
 - [Engines](https://kb.altinity.com/engines/)
 - [ZooKeeper schema](https://kb.altinity.com/altinity-kb-setup-and-maintenance/altinity-kb-zookeeper/zookeeper-schema/)
 
-Next in the ClickHouse manual: [Data ingestion](handbook/engineering/clickhouse/data-ingestion)
+Next in the ClickHouse manual: [Data ingestion](/handbook/engineering/clickhouse/data-ingestion)

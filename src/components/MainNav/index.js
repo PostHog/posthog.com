@@ -1,6 +1,8 @@
 import AnimatedBurger from 'components/AnimatedBurger'
 import Link from 'components/Link'
 import Logo from 'components/Logo'
+import { Search } from 'components/Icons/Icons'
+import { useSearch } from 'components/Search/SearchContext'
 import { motion } from 'framer-motion'
 import { graphql, useStaticQuery } from 'gatsby'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
@@ -23,6 +25,7 @@ export default function MainNav() {
             }
         }
     `)
+
     const [expanded, expandMenu] = useState(false)
     const [referenceElement, setReferenceElement] = useState(null)
     const menu = data?.navsJson?.main
@@ -33,6 +36,9 @@ export default function MainNav() {
     }
     const menuLength = menu.length
     const halfMenu = Math.floor(menuLength / 2) + 1
+
+    const { open } = useSearch()
+
     return (
         <div className="flex justify-between items-center max-w-screen-3xl mx-auto lg:relative">
             <Link
@@ -77,7 +83,14 @@ export default function MainNav() {
                     </div>
                 </motion.nav>
             )}
-            <AnimatedBurger className="lg:hidden" onClick={() => expandMenu(!expanded)} active={expanded} />
+
+            <div className="flex items-center space-x-4">
+                <button className="lg:hidden" onClick={() => open('mobile-header')}>
+                    <Search />
+                </button>
+
+                <AnimatedBurger className="lg:hidden" onClick={() => expandMenu(!expanded)} active={expanded} />
+            </div>
         </div>
     )
 }
