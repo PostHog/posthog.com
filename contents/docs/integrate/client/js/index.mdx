@@ -347,26 +347,26 @@ posthog.init('<ph_project_api_key>', {
 
 ### Group analytics
 
-PostHog 1.31.0 introduced support for [group analytics](/docs/user-guides/group-analytics), which allows you to associate users and events with larger groups (teams, organizations, etc.). This feature requires a posthog-js version of `1.16.0` or above.
+Group analytics allows you to associate the events for that person's session with a group (e.g. teams, organizations, etc.). Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.
 
 > **Note: ** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
 
--   Make a group active and update properties
+-  Associate the events for this session with a group
 
 ```js
-posthog.group('company', 'id:5', {
-    company_name: 'Awesome Inc.',
+posthog.group('company', '42dlsfj23f')
+
+posthog.capture("upgraded plan") // this event is associated with company ID `42dlsfj23f`
+```
+
+-  Associate the events for this session with a group AND update the properties of that group
+
+```js
+posthog.group('company', '42dlsfj23f', {
+    name: 'Awesome Inc.', // `name` is a special property to set the name of the group
     employees: 11,
 })
 ```
-
--   Make a group active without updating properties
-
-```js
-posthog.group('company', 'id:77')
-```
-
-Once a group has been made active, all subsequent events that are sent using the client will be associated with that group automatically.
 
 #### Handling logging out
 
