@@ -294,9 +294,9 @@ posthog.reload_feature_flags()
 
 ### Group analytics
 
-PostHog 1.31.0 introduced support for [group analytics](/docs/user-guides/group-analytics), which allows you to associate users and events with larger groups (teams, organizations, etc.). This feature requires a posthog-ruby version of `2.0.0` or above.
+Group analytics allows you to associate an event with a group (e.g. teams, organizations, etc.). Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.
 
-> **Note: ** This is a paid feature and is not available on the open-source or free cloud plan. [Learn more about PostHog pricing](/pricing).
+> **Note: ** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
 
 -   Capture an event and associate it with a group
 
@@ -309,7 +309,7 @@ posthog.capture({
         category: 'romcom'
     }
     groups: {
-        'company': 'id:5'
+        'company': '42dlsfj23f'
     }
 })
 ```
@@ -320,14 +320,13 @@ posthog.capture({
 posthog.group_identify(
   {
     group_type: "organization",
-    group_key: "id:5",
+    group_key: "42dlsfj23f",
     properties: {
-      trait: "value"
+      name: "Awesome Inc."
     }
   }
 )
 ```
-
 
 ## Thank you
 

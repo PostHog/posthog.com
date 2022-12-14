@@ -312,20 +312,19 @@ client.ReloadFeatureFlags()
 
 ### Group analytics
 
-PostHog 1.31.0 introduced support for [group analytics](/docs/user-guides/group-analytics), which allows you to associate users and events with larger groups (teams, organizations, etc.). This feature requires the latest version of posthog-go
+Group analytics allows you to associate an event with a group (e.g. teams, organizations, etc.). Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.
 
 > **Note: ** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
 
--   Capture an event and associate it with a group
+-  Send an event associated with a group
 
 ```go
 client.Enqueue(posthog.Capture{
     DistinctId: "[distinct id]",
     Event:      "some event",
     Groups: posthog.NewGroups().
-        Set("company", "id:5").
+        Set("company", "42dlsfj23f").
 })
-
 ```
 
 -   Update properties on a group
@@ -333,9 +332,9 @@ client.Enqueue(posthog.Capture{
 ```go
 client.Enqueue(posthog.GroupIdentify{
     Type: "company",
-    Key:  "id:5",
+    Key:  "42dlsfj23f",
     Properties: posthog.NewProperties().
-        Set("company_name", "Awesome Inc").
+        Set("company", "Awesome Inc."). // `name` is a special property to set the name of the group
         Set("employees", 11),
 })
 ```
