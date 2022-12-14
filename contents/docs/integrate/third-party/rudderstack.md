@@ -19,7 +19,7 @@ No. The PostHog integration with RudderStack gives you access to everything our 
 
 If you require session recording whilst using the Rudderstack integration, you need to additionally include the PostHog [JS snippet](/docs/integrate/client/js) and disable autocapture so you don't duplicate events.
 
-If you want to use group analytics, each event should include the property `$groups` as an key-value object of group type and ID like `{ "company": "posthog" }`
+If you want to use group analytics, each event should include the property `$groups` as an key-value object of group type and ID like `{ "company": "42dlsfj23f" }` where `42dlsfj23f` is the id of the group.
 
 Alternatively, you can load the PostHog JS snippet via Rudderstack itself, by enabling the [device-mode connection](https://www.rudderstack.com/docs/rudderstack-cloud/rudderstack-connection-modes/#device-mode) setting.
 
