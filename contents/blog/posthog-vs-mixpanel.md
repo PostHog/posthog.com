@@ -33,7 +33,7 @@ Don't mistake us, product analytics is a core part of our platform, but it's jus
 
 ### 2. It's built for engineers
 
-Anyone can use PostHog – just [ask our marketing team](/blog/posthog-vs-amplitude) – but it's designed for engineers first. We believe engineering-led companies are the future of tech and that future requires tools that let [product engineers](https://posthog.com/blog/what-is-a-product-engineer) flex their product muscles. 
+Anyone can use PostHog – just [ask our marketing team](/blog/posthog-vs-amplitude) – but it's designed for engineers first. We believe engineering-led companies are the future of tech and that requires tools that let [engineers](https://posthog.com/blog/what-is-a-product-engineer) flex their product muscles. 
 
 ### 3. We're an open book
 
@@ -60,7 +60,7 @@ PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our 
             <td><strong>Product analytics</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Track events and conversion; analyse user behavior</td>
+            <td>Track events and conversion; analyze user behavior</td>
         </tr>
         <tr>
             <td><strong>Session recording</strong></td>
@@ -78,7 +78,7 @@ PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our 
             <td><strong>Experiments</strong></td>
             <td className="text-center">Enterprise</td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Test changes in production before rolling them out</td>
+            <td>Test changes and analyze their impact</td>
         </tr>
         <tr>
             <td><strong>Heatmaps</strong></td>
@@ -104,7 +104,7 @@ PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our 
 
 - **Experiments:** Mixpanel offers an experiments feature in its Enterprise plan, but it's limited to running simple A/B tests. PostHog's experimentation suite supports A/B and multivariate tests using our integrated feature flagging. Visit our [experimentation product page](/product/experimentation-suite) for more info.
 
-- **Feature flagging:** Mixpanel doesn't have any built-in feature flag functionality. PostHog supports unlimited flags for free, and targeting by percentage or user properties. Visit [our session recording page](/product/feature-flags) for more information.
+- **Feature flagging:** Mixpanel doesn't have any built-in feature flag functionality. PostHog supports unlimited flags for free, and targeting by percentage or user properties. Visit [our feature flag page](/product/feature-flags) for more information.
 
 - **Session recording:** PostHog offers 15,000 session recordings per month for free. Sensitive data can be obscured from recordings using CSS classes. Visit our [session recording page](/product/session-recording) for more information.
 
@@ -137,13 +137,13 @@ PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our 
             <td><strong>Funnels</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Understand conversion between events</td>
+            <td>Understand conversion between events, pages</td>
         </tr>
         <tr>
             <td><strong>Cohorts</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Compare groups of users based on user properties and events</td>
+            <td>Combine users based on properties and events for group analysis</td>
         </tr>
         <tr>
             <td><strong>User paths</strong></td>
@@ -179,7 +179,7 @@ PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our 
             <td><strong>Formulas</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Use custom formulas to create unique insights</td>
+            <td>Use custom formulas to calculate unique insights</td>
         </tr>
         <tr>
             <td><strong>SQL query editor</strong></td>
@@ -232,7 +232,7 @@ PostHog and Mixpanel both support a broad range of tracking options and librarie
             <td><strong>Reverse proxy available</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Send events from your own domain</td>
+            <td>Send events from your own domain to capture more data</td>
         </tr>
         <tr>
             <td><strong>Cross-domain tracking</strong></td>
@@ -260,7 +260,7 @@ PostHog and Mixpanel both support a broad range of tracking options and librarie
 
 Mixpanel, like Amplitude, forces you to manually instrument every event you want to track. Got a question about something you're not already tracking? Tough luck, it's time to write new tracking code and wait for the data! 
 
-Autocapture eliminates this tedious process. Just deploy our snippet and we'll do the hard work. In doing so, you're creating a powerful, retroactive dataset you can call upon whenever you need it. Autocapture is ideal for fast moving teams who want to ship code product improvements quickly. 
+Autocapture eliminates this tedious process. Just deploy our snippet and we'll do the hard work. In doing so, you're creating a powerful dataset you can call upon whenever you need it. Autocapture is ideal for fast moving teams who want to ship code product improvements quickly. 
 
 Some would have you believe that autocapture generates "too much data" that's hard to deal with. Our answer?
 
@@ -325,7 +325,7 @@ To quote Tony Stark: “An intelligence agency which fears intelligence is, hist
 </table>
 </div>
 
-- **JavaScript snippet:** All client libraries support event tracking and user identification for product analytics, but we recommend using PostHog's JavaScript snippet to enjoy all our features. Our iOS libraries also support feature flagging and group analytics. See our [client library documentation](/docs/integrate/client/snippet-installation) for more information.
+- **JavaScript snippet:** All client libraries support event tracking and user identification for product analytics, but we recommend using PostHog's JavaScript snippet to enjoy all our features. See our [client library documentation](/docs/integrate/client/snippet-installation) for more information.
 
 - **Mobile app session recordings:** We don't currently support session recording in mobile apps, but it's currently under consideration as a project for our session recording team. See our [public roadmap](/roadmap) for more info.
 
@@ -402,7 +402,7 @@ Some PostHog features, such as session recording and autocapture, are only avail
 
 Mixpanel claims over 50 official integrations covering a wide-range of use cases. Given its focus on product analytics alone, many of these integrations connect to third-party tools for A/B testing, feature flag, and marketing use cases.
 
-The [PostHog App Store](/apps) has over 50 apps as well, though not all of these are integrations with external tools. PostHog doesn't natively connect with A/B testing or feature flag tools as these features are built into PostHog itself.
+The [PostHog App Store](/apps) has over 50 apps as well, though not all of these are integrations with external tools. Some are apps that modify data flows or add components to your frontend. PostHog doesn't natively connect with A/B testing or feature flag tools as these features are built into PostHog itself.
 
 **Categories:**
 
@@ -927,9 +927,9 @@ Mixpanel and PostHog both support popular messaging apps and automation platform
 
 ### Who should self-host PostHog?
 
-We recommend 95% of companies use [PostHog Cloud](/pricing) – it's fully-managed by us and you can choose [PostHog Cloud EU](/eu) if you need to keep data within the EU. The most common reasons for choosing to self-host PostHog are companies that handle very sensitive data, such as medical and or defense information. 
+We recommend 95% of companies use [PostHog Cloud](/pricing) – it's fully-managed by us and you can choose [PostHog Cloud EU](/eu) if you need to keep data within the EU. The most common reasons for choosing to self-host PostHog are companies that handle very sensitive data, such as medical or defense information. 
 
-Enterprises looking to self-host will require an infrastructure team knowledgeable in Kubernetes and ClickHouse. Our [partner directory](/partners) includes third-party specialists who can support self-hosted deployments. Please [book a call](book-a-demo) to discuss your options and whether self-hosting is right for you.
+Enterprises looking to self-host will require an infrastructure team knowledgeable in Kubernetes and ClickHouse. See our [enterprise self-hosted docs](/docs/self-host/enterprise/overview) and [book a call](book-a-demo) to discuss your options and whether self-hosting is right for you. We also have a [partner directory](/partners) includes third-party specialists who can support self-hosted deployments.
 
 ### How long does it take to deploy PostHog?
 
