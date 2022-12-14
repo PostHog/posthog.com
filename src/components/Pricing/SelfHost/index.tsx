@@ -29,7 +29,7 @@ const EnterpriseSelfHosted = () => {
                 <strong className={descriptionItemClassName}>Starting at $5,000/month</strong>
                 <span>
                     <Tooltip
-                        title={
+                        content={
                             <>
                                 <p className="text-sm m-0">The $5,000/month plan includes:</p>
                                 <ul className="mt-1 pt-0">
