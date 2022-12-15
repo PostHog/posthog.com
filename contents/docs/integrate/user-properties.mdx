@@ -72,13 +72,25 @@ Sometimes we might want to use both `set` and `set_once` usage. Imagine, when we
 
 When two users both contain a property and are merged, the property of the first user (i.e. the distinctId for the alias) are used.
 ```js
-// node sdk
-posthog.people.set('main_id', {'location': 'London'})
-posthog.people.set('secondary_id', {'location': 'Rome'})
+// this uses the node sdk
+client.identify({
+    distinctId: 'main_id',
+    properties: {
+        location: 'London',
+    },
+})
+
+client.identify({
+    distinctId: 'secondary_id',
+    properties: {
+        location: 'Rome',
+    },
+})
 
 posthog.alias({
     distinctId: 'main_id',
     alias: 'secondary_id',
 })
-// { location: 'London' }
+
+// for user 'main_id', { location: 'London' }
 ```
