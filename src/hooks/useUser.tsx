@@ -61,6 +61,10 @@ export const UserProvider: React.FC<UserProviderProps> = ({ apiHost, organizatio
                 },
             })
 
+            if (!res.ok) {
+                return null
+            }
+
             const data = await res.json()
 
             if (data.error) {
