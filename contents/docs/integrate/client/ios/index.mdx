@@ -132,21 +132,33 @@ Hence **starting with posthog-ios version 1.2.0** we have removed all references
 
 ### Group analytics
 
-PostHog 1.31.0 introduced support for [group analytics](/docs/user-guides/group-analytics), which allows you to associate users and events with larger groups (teams, organizations, etc.). This feature requires posthog-ios version of `2.0.0` or above.
+Group analytics allows you to associate the events for that person's session with a group (e.g. teams, organizations, etc.). Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.
 
 > **Note: ** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
 
--   Capture an event and associate it with a group
+-  Associate the events for this session with a group
 
 ```objectivec
-[[PHGPostHog sharedPostHog] group:@"some-type" groupKey:@"some-key" properties:@{ @"name": @"some-company-name" }];
+[[PHGPostHog sharedPostHog] group:@"organization" groupKey:@"42dlsfj23f"];
 ```
 
 ```swift
-posthog.group( "some-type", groupKey: "some-key", properties: [
-    "name": "some-company-name"
+posthog.group( "some-type", groupKey: "42dlsfj23f")
+```
+
+-  Associate the events for this session with a group AND update the properties of that group
+
+```objectivec
+[[PHGPostHog sharedPostHog] group:@"organization" groupKey:@"42dlsfj23f" properties:@{ @"name": @"Awesome Inc." }];
+```
+
+```swift
+posthog.group( "organization", groupKey: "42dlsfj23f", properties: [
+    "name": "ACME Corp"
 ])
 ```
+
+The `name` is a special property which is used in the PostHog UI for the name of the Group. If you don't specify a `name` property, the group ID will be used instead.
 
 ### Feature Flags
 

@@ -10,16 +10,14 @@ related:
     - ../tutorials/tracking-teams.md
 ---
 
-Groups are a feature which enable you to aggregate events by any entity other than an individual user - such as a company, device, or project. Essentially, groups enable these entities to send events in the same way as a user. 
+> **Note: ** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
+
+Groups enables you to associate events with an group/entity - such as a company, community, or project. You can then analyze these events as if they were sent by that entity in [insights](/manual/insights), [feature flags](/manual/feature-flags), and [experiments](/manual/experimentation).
 
 Here are some of the questions that group analytics can help answer:
 - How many companies signed up in the last month?
-- Which posts have had the most activity?
-- How many projects were created in the past month?
-- How does the conversion rate differ between small and large companies?
-- Which communities are growing the fastest?
-
-Groups can be used in other parts of the PostHog suite, including [insights](/manual/insights), [feature flags](/manual/feature-flags), and [experiments](/manual/experimentation).
+- What kind of communities are using my product the most?
+- Which projects is this person associated with?
 
 ## Understanding group analytics
 
@@ -35,7 +33,7 @@ This could be things such as making groups for each company that uses your app, 
 
 ### Groups vs group types
 
-When considering group analytics, it is also important to make the distinction between 'Groups' and 'Group types'.
+When considering group analytics, it is also important to make the distinction between 'Group types' and 'Groups'.
 A 'group type' is the name for given to the kind of object you are aggregating on (`company`, `project`, `post`), whereas a group is a particular member of that type.
 
 > **Tip:** If you're familiar with object-oriented thinking, you can think of each 'group type' as a class, with each 'group' being a unique instance of that class.
@@ -66,21 +64,21 @@ This section will give an overview of setting up your first group within PostHog
 ### Creating groups
 
 Groups and group types are defined directly from our libraries when sending events.
-In the examples below, we'll be tracking a company whose ID in the product is `kd4m8z`. That's why we'll be using group type `company` and group key `kd4m8z`.
+In the examples below, we'll be tracking a company whose ID in the product is `42dlsfj23f`. That's why we'll be using group type `company` and group key `42dlsfj23f`.
 
 > We advise against using the _name_ of the company (or any other group) as they key, because that's rarely guaranteed to be unique, and conflicts can affect the quality of analytics data.
 
 <MultiLanguage>
 
 ```js
-// All subsequent events will be associated with company `kd4m8z`
-posthog.group('company', 'kd4m8z');
+// All events for that session will be associated with company `42dlsfj23f`
+posthog.group('company', '42dlsfj23f');
 
 posthog.capture('some event')
 ```
 
 ```python
-posthog.capture('[distinct id]', 'some event', groups={'company': 'kd4m8z'})
+posthog.capture('[distinct id]', 'some event', groups={'company': '42dlsfj23f'})
 ```
 
 ```go
@@ -88,7 +86,7 @@ client.Enqueue(posthog.Capture{
     DistinctId: "[distinct id]",
     Event: "beep",
     Groups: posthog.NewGroups().
-        Set("company", "kd4m8z").
+        Set("company", "42dlsfj23f").
 })
 ```
 
@@ -96,7 +94,7 @@ client.Enqueue(posthog.Capture{
 posthog.capture({
     event: 'beep',
     distinctId: '[distinct id]',
-    groups: { company: 'kd4m8z' }
+    groups: { company: '42dlsfj23f' }
 })
 ```
 
@@ -104,14 +102,14 @@ posthog.capture({
 PostHog::capture(array(
     'distinctId' => '[distinct id]',
     'event' => 'beep',
-    '$groups' => array("company" => "kd4m8z")
+    '$groups' => array("company" => "42dlsfj23f")
 ));
 ```
 
 ```segment
 analytics.track('beep', {
     "$groups": {
-        "company": "kd4m8z"
+        "company": "42dlsfj23f"
     }
 })
 ```
@@ -120,7 +118,7 @@ analytics.track('beep', {
 
 > **Tip:** When specifying the group type, use the singular version for clarity (`company` instead of `companies`).
 
-We now have one `company`-type group with ID `kd4m8z`, and the event `beep` that we sent will be attached to this newly created group.
+We now have one `company`-type group with ID `42dlsfj23f`, and the event `beep` that we sent will be attached to this newly created group.
 
 ### Setting and updating group properties
 
@@ -133,7 +131,7 @@ Continuing with the previous example of using `company` as our group type, we mi
 <MultiLanguage>
 
 ```js
-posthog.group('company', 'id:5', {
+posthog.group('company', '42dlsfj23f', {
     name: 'PostHog',
     user_count: 33,
     date_joined: '2020-01-23T00:00:00.000Z'
@@ -141,7 +139,7 @@ posthog.group('company', 'id:5', {
 ```
 
 ```python
-posthog.group_identify('company', 'id:5', {
+posthog.group_identify('company', '42dlsfj23f', {
     'name': 'PostHog',
     'user_count': 33,
     'date_joined': '2020-01-23T00:00:00.000Z'
@@ -151,7 +149,7 @@ posthog.group_identify('company', 'id:5', {
 ```go
 client.Enqueue(posthog.GroupIdentify{
     Type: "company",
-    Key:  "id:5",
+    Key:  "42dlsfj23f",
     Properties: posthog.NewProperties().
         Set("name", "PostHog").
         Set("user_count", 33).
@@ -162,7 +160,7 @@ client.Enqueue(posthog.GroupIdentify{
 ```node
 posthog.groupIdentify({
     groupType: 'company',
-    groupKey: 'id:5',
+    groupKey: '42dlsfj23f',
     properties: {
         name: 'PostHog',
         user_count: 33,
@@ -174,7 +172,7 @@ posthog.groupIdentify({
 ```php
 PostHog::groupIdentify(array(
     'groupType' => 'company',
-    'groupKey' => 'id:5',
+    'groupKey' => '42dlsfj23f',
     'properties' => array("name" => "PostHog", "user_count" => 11, "date_joined": "2020-01-23T00:00:00.000Z")
 ));
 ```
@@ -182,7 +180,7 @@ PostHog::groupIdentify(array(
 ```segment
 analytics.track('$groupidentify', {
     "$group_type": "company",
-    "$group_key": "id:5",
+    "$group_key": "42dlsfj23f",
     "$group_set": {
         "name": "PostHog",
         "user_count": 33,
@@ -193,7 +191,7 @@ analytics.track('$groupidentify', {
 
 </MultiLanguage>
 
-Properties on groups behave in the exact same way as properties on persons within insights. They can also be used within exepriments and feature flags to rollout features to specific groups.
+Properties on groups behave in the exact same way as properties on persons within insights. They can also be used within experiments and feature flags to rollout features to specific groups.
 
 > **Note:** The PostHog UI identifies a group using the `name` property. If no `name` property is found, it falls back to the group key.
 
@@ -255,7 +253,7 @@ You will also need to update your event tracking code (covered below), for the f
 <MultiLanguage>
 
 ```js
-// Make sure you have called posthog.group() beforehand
+// Make sure you have called posthog.group() earlier in that session
 
 if (posthog.isFeatureEnabled('new-groups-feature')) {
     // Do something
@@ -263,18 +261,18 @@ if (posthog.isFeatureEnabled('new-groups-feature')) {
 ```
 
 ```python
-if posthog.feature_enabled("new-groups-feature", "[distinct id]", groups={"company": "id:5"}):
+if posthog.feature_enabled("new-groups-feature", "[distinct id]", groups={"company": "42dlsfj23f"}):
     # Do something
 ```
 
 ```php
-if (PostHog::isFeatureEnabled('new-groups-feature', '[distinct id]', false, array("company" => "id:5"))) {
+if (PostHog::isFeatureEnabled('new-groups-feature', '[distinct id]', false, array("company" => "42dlsfj23f"))) {
     // Do something
 }
 ```
 
 ```node
-const isFlagEnabled = await posthog.isFeatureEnabled('new-groups-feature', '[distinct id]', false, { company: 'id:5' })
+const isFlagEnabled = await posthog.isFeatureEnabled('new-groups-feature', '[distinct id]', false, { company: '42dlsfj23f' })
 
 if (isFlagEnabled) {
     // Toggle feature-flag specific behavior
@@ -295,8 +293,4 @@ if (isFlagEnabled) {
 
 ## Further reading
 
-Want to know more about what's possible with Groups in PostHog? Try these tutorials:
-
--   [How to track how teams use your product](/tutorials/tracking-teams)
-
-Want more? Check our [full list of PostHog tutorials](https://posthog.com/tutorials).
+Want more? Check out [Frontend vs Backend Group Analytics](/tutorials/frontend-vs-backend-group-analytics).
