@@ -9,6 +9,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const BlogPostTemplate = path.resolve(`src/templates/BlogPost.js`)
     const PlainTemplate = path.resolve(`src/templates/Plain.js`)
     const BlogCategoryTemplate = path.resolve(`src/templates/BlogCategory.tsx`)
+    const BlogTemplate = path.resolve(`src/templates/Blog.tsx`)
     const CustomerTemplate = path.resolve(`src/templates/Customer.js`)
     const PluginTemplate = path.resolve(`src/templates/Plugin.js`)
     const AppTemplate = path.resolve(`src/templates/App.js`)
@@ -135,6 +136,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 }
             }
             blogPosts: allMdx(filter: { isFuture: { eq: false }, fields: { slug: { regex: "/^/blog/" } } }) {
+                totalCount
                 nodes {
                     id
                     headings {
@@ -326,21 +328,11 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     }
 
-    const categories = {}
-    result.data.categories.group.forEach(({ category, totalCount }) => {
-        const postsPerPage = 10
+    const createPaginatedPages = ({ postsPerPage = 10, totalCount, base, template, extraContext = {} }) => {
         const numPages = Math.ceil(totalCount / postsPerPage)
-        const slug = slugify(category, { lower: true })
-        const url = `/blog/categories/${slug}`
-        categories[category] = {
-            slug,
-            url,
-        }
         Array.from({ length: numPages }).forEach((_, i) => {
-            const base = `/blog/categories/${slug}`
             const context = {
-                category,
-                slug,
+                ...extraContext,
                 limit: postsPerPage,
                 skip: i * postsPerPage,
                 numPages,
@@ -349,11 +341,25 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             }
             createPage({
                 path: i === 0 ? base : `${base}/${i + 1}`,
-                component: BlogCategoryTemplate,
+                component: template,
                 context,
             })
         })
+    }
+
+    const categories = {}
+    result.data.categories.group.forEach(({ category, totalCount }) => {
+        const slug = slugify(category, { lower: true })
+        const base = `/blog/categories/${slug}`
+        categories[category] = {
+            slug,
+            url: base,
+        }
+
+        createPaginatedPages({ totalCount, base, template: BlogCategoryTemplate, extraContext: { category, slug } })
     })
+
+    createPaginatedPages({ totalCount: result.data.blogPosts.totalCount, base: '/blog/all', template: BlogTemplate })
 
     result.data.allMdx.nodes.forEach((node) => {
         createPage({

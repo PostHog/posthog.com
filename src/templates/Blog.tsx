@@ -1,0 +1,61 @@
+import PostLayout from 'components/PostLayout'
+import { graphql } from 'gatsby'
+import React, { useEffect, useState } from 'react'
+import { SEO } from 'components/seo'
+import blogMenu from 'components/Blog/blogMenu'
+import Layout from 'components/Layout'
+import { Posts } from 'components/Blog'
+import Pagination from 'components/Pagination'
+import { NewsletterForm } from 'components/NewsletterForm'
+
+const BlogCategory = ({
+    data: {
+        allPostsRecent: { edges: allPostsRecent },
+    },
+    pageContext: { numPages, currentPage, base },
+}) => {
+    return (
+        <Layout>
+            <SEO title={`All posts - PostHog`} />
+
+            <PostLayout
+                breadcrumb={[{ name: 'Blog', url: '/blog' }, { name: 'All' }]}
+                article={false}
+                title="Blog"
+                menu={blogMenu()}
+                hideSidebar
+                hideSurvey
+            >
+                <div className="mt-6 mb-12">
+                    <Posts
+                        title="All posts"
+                        action={<p className="m-0 leading-none font-semibold">{currentPage}</p>}
+                        posts={allPostsRecent.slice(0, 4)}
+                    />
+                    <NewsletterForm />
+                    <Posts posts={allPostsRecent.slice(4)} />
+                    <Pagination currentPage={currentPage} numPages={numPages} base={base} />
+                </div>
+            </PostLayout>
+        </Layout>
+    )
+}
+
+export default BlogCategory
+
+export const pageQuery = graphql`
+    query ($skip: Int!, $limit: Int!) {
+        allPostsRecent: allMdx(
+            limit: $limit
+            skip: $skip
+            sort: { order: DESC, fields: [frontmatter___date] }
+            filter: { isFuture: { ne: true }, fields: { slug: { regex: "/^/blog/" } } }
+        ) {
+            edges {
+                node {
+                    ...BlogFragment
+                }
+            }
+        }
+    }
+`
