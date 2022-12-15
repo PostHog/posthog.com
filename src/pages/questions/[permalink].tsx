@@ -9,6 +9,7 @@ import useSWR from 'swr'
 
 import type { Question } from 'components/Questions'
 import QuestionSidebar from 'components/Questions/QuestionSidebar'
+import Link from 'components/Link'
 
 type QuestionPageProps = {
     params: {
@@ -36,7 +37,13 @@ export default function QuestionPage(props: QuestionPageProps) {
                 hideSurvey
             >
                 {question && (
-                    <section className="max-w-5xl mx-auto py-12">
+                    <section className="max-w-5xl mx-auto">
+                        <div className="mb-4">
+                            <Link to="/questions" className="text-gray hover:text-gray-accent-light">
+                                ← Back to Questions
+                            </Link>
+                        </div>
+
                         <FullQuestion
                             apiHost={process.env.GATSBY_SQUEAK_API_HOST as string}
                             organizationId={process.env.GATSBY_SQUEAK_ORG_ID as string}
