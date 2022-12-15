@@ -7,6 +7,8 @@ export interface CategoryInterface {
     hideFromNavigation?: boolean
 }
 
+export const homeCategories = ['Guides', 'CEO diaries', 'Engineering', 'HogMail', 'Privacy', 'Product updates']
+
 export const BlogCategories: CategoryInterface[] = [
     {
         title: 'All',

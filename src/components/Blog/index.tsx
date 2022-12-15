@@ -10,6 +10,7 @@ import { SEO } from '../seo'
 import slugify from 'slugify'
 import { NewsletterForm } from 'components/NewsletterForm'
 import { blog } from '../../sidebars/sidebars.json'
+import { homeCategories } from './constants/categories'
 
 export const Posts = ({ posts, title, action }) => {
     return (
@@ -94,7 +95,10 @@ const Blog = ({
                     action={<PostToggle checked={allPostsFilter === 'popular'} onChange={handleToggleChange} />}
                 />
                 <NewsletterForm />
-                {categories.group.map(({ category, edges }) => {
+                {homeCategories.map((categoryToShow) => {
+                    const categoryData = categories.group.find(({ category }) => category === categoryToShow)
+                    if (!categoryData) return null
+                    const { category, edges } = categoryData
                     const slug = slugify(category, { lower: true })
                     const url = `/blog/categories/${slug}`
                     return (
