@@ -290,6 +290,8 @@ posthog.group_identify('company', '42dlsfj23f', {
 })
 ```
 
+The `name` is a special property which is used in the PostHog UI for the name of the Group. If you don't specify a `name` property, the group ID will be used instead.
+
 ### Sending page views
 
 If you're aiming for a full back-end implementation of PostHog, you can send `pageviews` from your backend

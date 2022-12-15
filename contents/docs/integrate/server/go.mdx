@@ -334,10 +334,12 @@ client.Enqueue(posthog.GroupIdentify{
     Type: "company",
     Key:  "42dlsfj23f",
     Properties: posthog.NewProperties().
-        Set("company", "Awesome Inc."). // `name` is a special property to set the name of the group
+        Set("name", "Awesome Inc.").
         Set("employees", 11),
 })
 ```
+
+The `name` is a special property which is used in the PostHog UI for the name of the Group. If you don't specify a `name` property, the group ID will be used instead.
 
 ## Thank you
 

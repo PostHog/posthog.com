@@ -158,6 +158,8 @@ posthog.group( "organization", groupKey: "42dlsfj23f", properties: [
 ])
 ```
 
+The `name` is a special property which is used in the PostHog UI for the name of the Group. If you don't specify a `name` property, the group ID will be used instead.
+
 ### Feature Flags
 
 PostHog v1.10.0 introduced [Feature Flags](/docs/user-guides/feature-flags), which allow you to safely deploy and roll back new features.
