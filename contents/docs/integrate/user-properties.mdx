@@ -5,41 +5,80 @@ sidebar: Docs
 showTitle: true
 ---
 
-In addition to events having properties, users can also have properties. There are three different methods that can be used: `set`, `set_once` and `$unset`. Depending on the integration library the actual function calls look a bit different, but internally they all work the same way. Note that all methods can be used in properties with normal event capture, e.g. using our [js library](/docs/integrate/client/js):
+Users have properties. 
+
+To update the properties of a user you can use: `set`, `set_once` and `$unset`. Depending on the integration library the actual function calls look a bit different, but internally they all work the same way.
+
+- `set`: Set the property even if the property exists on the person
+```js
+posthog.people.set( { location: 'London'  })
+
+// { location: 'London' }
+```
+
+- `set_once`: Update the property if the property does not exist on the person
+```js
+posthog.people.set_once( { initial_location: 'Rome'})
+posthog.people.set_once( { initial_location: 'London'})
+
+// { initial_location: 'Rome' }
+```
+
+// TODO: does this actually work? I haven't seen this documented anywhere
+- `unset`: Remove a property from a user if exists
+```js
+posthog.people.unset('location')
+```
+
+All these methods can be used in properties with normal event capture:
+
+- Set the properties through a capture
 ```js
 posthog.capture(
     'Set some user properties', 
     { 
         $set: { location: 'London'  },
-        $set_once: { referred_by: 'some ID' },
+        $set_once: { initial_location: 'London' },
         $unset: [ 'priority' ],
     }
 ```
 
 ## When to use `set` and `set_once`?
 
-Use `set`, when the value should always be the newest one, e.g. user email, if user does an update to their email, we always want to use the latest value.
+Use `set` when we want the value should always be the newest one. For example, to update the email for a user.
 
-Use `set_once` when we want the first value and it to never be updated afterwards, e.g. initial URL for the first URL we ever saw this user on.
+Use `set_once` when we want to set the first value and it to never be updated afterwards, e.g. the first URL that referred a user to the site.
 
-Sometimes we might want to mix `set` and `set_once` usage. Imagine, when we have some heuristics that help us determine a value, but users can also specify it. In these cases it might be beneficial to use `set_once` for the heuristically computed value and `set` for user specified value. Note that we will never override an existing value if `set_once` is used, so if heuristics are used on a continuous basis that would not be a good strategy.
+In summary: `set` always overrides, `set_once` only writes when the property doesn't already exist on the user.
 
-## How do values get overridden?
+For example:
+```js
+posthog.people.set( { location: 'London'  })
+posthog.people.set( { location: 'Rome'  })
 
-`set` always overrides, `set_once` only writes when the value doesn't exist.
+// { location: 'Rome' }
 
-`identify` and `alias` upon name conflict use the value the first user provided. This series of calls would mean we end up with `location` being `Rome`:
-```python
-posthog.capture('anon', event='set location', properties={'$set': {'location': 'Paris'}})
-posthog.capture('Alice', event='set location', properties={'$set_once': {'location': 'Rome'}})
-posthog.alias('Alice', 'anon')
+posthog.people.set_once( { initial_location: 'London'  })
+posthog.people.set_once( { initial_location: 'Rome'  })
+
+// { location: 'London' }
 ```
 
-Note that we ignore the event timestamps and just process everything at ingestion time.
+Sometimes we might want to use both `set` and `set_once` usage. Imagine, when we have some heuristics that help us determine a value, but users can also specify it. In these cases it might be beneficial to use `set_once` for the heuristically computed value and `set` for user specified value. This way we can ensure that the user specified value is always used, but if the user doesn't specify it, we can still use the heuristically computed value.
 
+## How are properties managed when merging or aliasing users
 
+// TODO: Confirm this with Tiina. Is this what this section means: https://posthog.com/docs/integrate/user-properties#how-do-values-get-overridden
 
+When two users both contain a property and are merged, the property of the first user (i.e. the distinctId for the alias) are used.
+```js
+// node sdk
+posthog.people.set('main_id', {'location': 'London'})
+posthog.people.set('secondary_id', {'location': 'Rome'})
 
-
-
-
+posthog.alias({
+    distinctId: 'main_id',
+    alias: 'secondary_id',
+})
+// { location: 'London' }
+```
