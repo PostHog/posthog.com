@@ -51,7 +51,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         'https://api.github.com/repos/posthog/posthog/issues?sort=comments&per_page=5'
     ).then((res) => res.json())
     postHogIssues.forEach((issue) => {
-        const { html_url, title, number, user, comments } = issue
+        const { html_url, title, number, user, comments, reactions, labels, body, updated_at } = issue
         const data = {
             url: html_url,
             title,
@@ -62,6 +62,14 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                 avatar: user?.avatar_url,
                 url: user?.html_url,
             },
+            reactions,
+            labels,
+            body,
+            updated_at,
+        }
+        if (data.reactions) {
+            data.reactions.plus1 = data.reactions['+1']
+            data.reactions.minus1 = data.reactions['-1']
         }
         const node = {
             id: createNodeId(`posthog-issue-${title}`),
@@ -70,6 +78,8 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             internal: {
                 type: `PostHogIssue`,
                 contentDigest: createContentDigest(data),
+                content: body,
+                mediaType: 'text/markdown',
             },
             ...data,
         }
@@ -80,7 +90,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         'https://api.github.com/repos/posthog/posthog/pulls?sort=popularity&per_page=5'
     ).then((res) => res.json())
     postHogPulls.forEach((issue) => {
-        const { html_url, title, number, user } = issue
+        const { html_url, title, number, user, reactions, labels, body, updated_at } = issue
         const data = {
             url: html_url,
             title,
@@ -90,6 +100,14 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                 avatar: user?.avatar_url,
                 url: user?.html_url,
             },
+            reactions,
+            labels,
+            body,
+            updated_at,
+        }
+        if (data.reactions) {
+            data.reactions.plus1 = data.reactions['+1']
+            data.reactions.minus1 = data.reactions['-1']
         }
         const node = {
             id: createNodeId(`posthog-pull-${title}`),
@@ -98,6 +116,8 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             internal: {
                 type: `PostHogPull`,
                 contentDigest: createContentDigest(data),
+                content: body,
+                mediaType: 'text/markdown',
             },
             ...data,
         }

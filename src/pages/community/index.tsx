@@ -13,6 +13,8 @@ import { CallToAction } from 'components/CallToAction'
 import { Login as SqueakLogin } from 'squeak-react'
 import Spinner from 'components/Spinner'
 import { useStaticQuery } from 'gatsby'
+import Tooltip from 'components/Tooltip'
+import GitHubTooltip, { Author } from 'components/GitHubTooltip'
 
 const Avatar = (props: { className?: string; src?: string }) => {
     return (
@@ -150,13 +152,44 @@ const Activity = ({ questions, questionsLoading }) => {
     )
 }
 
-const Issue = ({ number, title, url }: { number: number; title: string; url: string }) => {
+const Issue = ({
+    number,
+    title,
+    url,
+    reactions,
+    body,
+    user,
+    labels,
+    preview = true,
+    updated_at,
+}: {
+    number: number
+    title: string
+    url: string
+}) => {
     return (
         <>
             <p className="m-0 text-base opacity-60 min-w-[50px] flex-shrink-0">#{number}</p>
-            <Link className="text-base font-bold text-ellipsis overflow-hidden whitespace-nowrap flex-grow" to={url}>
-                {title}
-            </Link>
+            <Tooltip
+                className="text-ellipsis overflow-hidden whitespace-nowrap flex-grow text-red"
+                content={
+                    <GitHubTooltip
+                        reactions={reactions}
+                        body={body}
+                        user={user}
+                        labels={labels}
+                        updated_at={updated_at}
+                        title={title}
+                        url={url}
+                    />
+                }
+            >
+                <span className="relative">
+                    <Link className="text-base font-bold" to={url}>
+                        {title}
+                    </Link>
+                </span>
+            </Tooltip>
         </>
     )
 }
@@ -190,16 +223,8 @@ const ActivePulls = ({ pulls }) => {
                 {pulls.map((pull) => {
                     return (
                         <ListItem key={pull?.id}>
-                            <Issue {...pull} />
-                            <Link
-                                to={pull?.user?.url}
-                                className="flex items-center space-x-2 flex-shrink-0 xl:w-[200px]"
-                            >
-                                <img className="rounded-full w-[30px] h-[30px]" src={pull?.user?.avatar} />
-                                <p className="m-0 text-ellipsis overflow-hidden whitespace-nowrap xl:block hidden">
-                                    {pull?.user?.username}
-                                </p>
-                            </Link>
+                            <Issue preview={false} {...pull} />
+                            <Author url={pull?.user?.url} avatar={pull?.user?.avatar} username={pull?.user?.username} />
                         </ListItem>
                     )
                 })}
@@ -427,6 +452,19 @@ export const query = graphql`
                     url
                     username
                 }
+                reactions {
+                    hooray
+                    heart
+                    eyes
+                    plus1
+                }
+                body: childMdx {
+                    excerpt(pruneLength: 300)
+                }
+                labels {
+                    name
+                }
+                updated_at(formatString: "MMMM DD, YYYY")
             }
         }
         pulls: allPostHogPull {
@@ -440,6 +478,10 @@ export const query = graphql`
                     url
                     username
                 }
+                body: childMdx {
+                    excerpt(pruneLength: 300)
+                }
+                updated_at(formatString: "MMMM DD, YYYY")
             }
         }
         postHogComStats: gitHubStats(repo: { eq: "posthog.com" }) {

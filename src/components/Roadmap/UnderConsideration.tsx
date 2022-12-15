@@ -3,6 +3,45 @@ import Link from 'components/Link'
 import React from 'react'
 import { IRoadmap } from '.'
 
+export const Reactions = ({ reactions, className = '' }) => {
+    return (
+        <ul className={`list-none m-0 p-0 flex items-center space-x-4 text-sm font-semibold mt-1 ${className}`}>
+            {reactions?.heart > 0 && (
+                <li className="flex space-x-1 items-center">
+                    <>
+                        <span>❤️</span>
+                        <span className="text-black/60 dark:text-white/60">{reactions.heart}</span>
+                    </>
+                </li>
+            )}
+            {reactions?.eyes > 0 && (
+                <li className="flex space-x-1 items-center">
+                    <>
+                        <span>👀</span>
+                        <span className="text-black/60 dark:text-white/60">{reactions.eyes}</span>
+                    </>
+                </li>
+            )}
+            {reactions?.hooray > 0 && (
+                <li className="flex space-x-1 items-center">
+                    <>
+                        <span>🎉</span>
+                        <span className="text-black/60 dark:text-white/60">{reactions.hooray}</span>
+                    </>
+                </li>
+            )}
+            {reactions?.plus1 > 0 && (
+                <li className="flex space-x-1 items-center">
+                    <>
+                        <span>👍</span>
+                        <span className="text-black/60 dark:text-white/60">{reactions.plus1}</span>
+                    </>
+                </li>
+            )}
+        </ul>
+    )
+}
+
 export function UnderConsideration(props: IRoadmap) {
     const { title, html_url, number, reactions } = props.githubPages[0]
     return (
@@ -12,40 +51,7 @@ export function UnderConsideration(props: IRoadmap) {
                     <span>{title}</span>
                     <span className="text-sm text-black opacity-50">#{number}</span>
                 </Link>
-                <ul className="list-none m-0 p-0 sm:pb-2 flex items-center space-x-4 text-sm font-semibold mt-1">
-                    {reactions.heart > 0 && (
-                        <li className="flex space-x-1 items-center">
-                            <>
-                                <span>❤️</span>
-                                <span className="text-black/60">{reactions.heart}</span>
-                            </>
-                        </li>
-                    )}
-                    {reactions.eyes > 0 && (
-                        <li className="flex space-x-1 items-center">
-                            <>
-                                <span>👀</span>
-                                <span className="text-black/60">{reactions.eyes}</span>
-                            </>
-                        </li>
-                    )}
-                    {reactions.hooray > 0 && (
-                        <li className="flex space-x-1 items-center">
-                            <>
-                                <span>🎉</span>
-                                <span className="text-black/60">{reactions.hooray}</span>
-                            </>
-                        </li>
-                    )}
-                    {reactions.plus1 > 0 && (
-                        <li className="flex space-x-1 items-center">
-                            <>
-                                <span>👍</span>
-                                <span className="text-black/60">{reactions.plus1}</span>
-                            </>
-                        </li>
-                    )}
-                </ul>
+                <Reactions className="sm:pb-2" reactions={reactions} />
             </div>
             <div className="grow-0 shrink-0">
                 <Link
