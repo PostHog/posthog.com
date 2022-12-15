@@ -1,40 +1,14 @@
-### Objective: Improve developer experience for creating and deploying flags
+### Objective: Eliminate the biggest reasons product engineers would choose a competitor over PostHog Feature Flags
 
-* **Rationale:**
-     * Feature flags is a high friction feature. Unlike adding a snippet or simple line to track an event, engineers and product owners need to plan for their product to work with the flag on and off. 
-     To fully enable engineers to build with feature flags, we should make it remarkably easy to create flags.
- 
-- **Key Result:** Double the number organizations per month that implement a feature flag
+- **Key Result:** Support JSON in feature flags
+- **Key Result:** Make feature flags more resilient
+- **Key Result:** Release flag scheduling (auto-rollouts) to 5 happy Beta users and/or Release auto Rollbacks to general availability
+- **Key Result:** Double the number of organizations that use feature flags
+
+### Objective: Make the experience of creating a feature flag in PostHog slicker
+
+- **Key Result:** Release V2 of the feature flag creation experience
+- **Key Result:** Embed docs with a side panel into the feature flag creation experience
+- **Key Result:** Integrate feature flags into CI with code references
+- **Key Result:** Allow users to copy and compare feature flags across projects
 - **Key Result:** Reduction in time spent between creating a feature flag and receiving the first event
-    
-Possible avenues:
-- Auto detection of feature flags being sent that don't have a corresponding flag in posthog and easy creation (like github asking for branch to PR)
-- API Enablement. Create experiments or feature flags using posthog API.
-- Better hook and time to deployment with feature flag creation when someone lands on the feature flag page
-- JSON flags, feature flag resiliency
-
-### Objective: Understand similarities between users throughout posthog
-
-* **Rationale:**
-     * Help engineers stay focused on building. Give them as close to the answers and insights as possible with ample proof and dropoff points for further exploration.
- 
-- **Key Result:** Actionable discoveries on cohorts that are tracked by the Posthog Team
-- **Key Result:** 80% of external users give the maximum satisfaction score (:heart_eyes: ) for the new correlation features (if deployed)
-
- Possible avenues:
-- [Cohort correlation](https://github.com/PostHog/posthog/issues/7875). What are property and behavioral similarities between users in this cohort
-- Experiment correlation. What are property and behavioral similarities between successful and failing variants
-
-
-### Objective: Nail feature analysis
-
-* **Rationale:**
-     * We have internal power users on the growth team who actively find value in deploying with experiments. Making the act of quick insights for features seamless sets us up to deliver an opinionated workflow
-
-- **Key Result:** Internal growth team requests are primarily feature requests rather than usability and bug requests
-- **Key Result:** Experiments NPS score of 40
-
-Possible avenues:
-- Complete visibility into who's seeing a flag enabled feature. See recordings connected with users
-- Clarity around how users are bucketed in experiments. How do release conditions relate to control vs variants and how do variant overrides relate to those?
-- [Experiments UX](https://github.com/PostHog/posthog/issues/10426)
