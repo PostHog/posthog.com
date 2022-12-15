@@ -7,6 +7,7 @@ import Layout from 'components/Layout'
 import { Posts } from 'components/Blog'
 import Pagination from 'components/Pagination'
 import { NewsletterForm } from 'components/NewsletterForm'
+import { blog } from '../sidebars/sidebars.json'
 
 const BlogCategory = ({
     data: {
@@ -22,7 +23,7 @@ const BlogCategory = ({
                 breadcrumb={[{ name: 'Blog', url: '/blog' }, { name: 'All' }]}
                 article={false}
                 title="Blog"
-                menu={blogMenu()}
+                menu={blog}
                 hideSidebar
                 hideSurvey
             >

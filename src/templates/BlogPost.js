@@ -17,6 +17,7 @@ import { MdxCodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
 import { NewsletterForm } from 'components/NewsletterForm'
 import blogMenu from 'components/Blog/blogMenu'
+import { blog } from '../sidebars/sidebars.json'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
@@ -128,7 +129,7 @@ export default function BlogPost({ data, pageContext, location }) {
                 filePath={filePath}
                 tableOfContents={tableOfContents}
                 breadcrumb={[{ name: 'Blog', url: '/blog' }, ...categories]}
-                menu={blogMenu()}
+                menu={blog}
                 hideSurvey
                 sidebar={
                     <BlogPostSidebar

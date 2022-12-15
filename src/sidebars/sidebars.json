@@ -2119,5 +2119,25 @@
             "name": "Zendesk Connector",
             "url": "/apps/zendesk-connector"
         }
+    ],
+    "blog": [
+        {
+            "name": "Home",
+            "url": "/blog"
+        },
+        {
+            "name": "All",
+            "url": "/blog/all"
+        },
+        {
+            "name": "Guides",
+            "url": "/blog/categories/guides",
+            "children": [
+                {
+                    "name": "Product engineer vs software engineer: what's the difference?",
+                    "url": "/blog/product-engineer-vs-software-engineer"
+                }
+            ]
+        }
     ]
 }

@@ -2,11 +2,11 @@ import PostLayout from 'components/PostLayout'
 import { graphql } from 'gatsby'
 import React, { useEffect, useState } from 'react'
 import { SEO } from 'components/seo'
-import blogMenu from 'components/Blog/blogMenu'
 import Layout from 'components/Layout'
 import { Posts, PostToggle } from 'components/Blog'
 import Pagination from 'components/Pagination'
 import { NewsletterForm } from 'components/NewsletterForm'
+import { blog } from '../sidebars/sidebars.json'
 
 const BlogCategory = ({
     data: {
@@ -36,7 +36,7 @@ const BlogCategory = ({
                 breadcrumb={[{ name: 'Blog', url: '/blog' }, { name: category }]}
                 article={false}
                 title="Blog"
-                menu={blogMenu()}
+                menu={blog}
                 hideSidebar
                 hideSurvey
             >

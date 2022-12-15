@@ -8,8 +8,8 @@ import React, { useState } from 'react'
 import Layout from '../Layout'
 import { SEO } from '../seo'
 import slugify from 'slugify'
-import blogMenu from './blogMenu'
 import { NewsletterForm } from 'components/NewsletterForm'
+import { blog } from '../../sidebars/sidebars.json'
 
 export const Posts = ({ posts, title, action }) => {
     return (
@@ -86,7 +86,7 @@ const Blog = ({
         <Layout>
             <SEO title="Blog - PostHog" />
 
-            <PostLayout article={false} title="Blog" menu={blogMenu()} hideSidebar hideSurvey>
+            <PostLayout article={false} title="Blog" menu={blog} hideSidebar hideSurvey>
                 <h1 className="mb-6 mt-0">Blog</h1>
                 <Posts
                     title={`Most ${allPostsFilter} articles`}
