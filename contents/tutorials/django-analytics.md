@@ -338,7 +338,7 @@ class PostListView(ListView):
         return context
 ```
 
-Implementing this enalbes you to combine user data from events in the front and backend to identify them and get a better understanding of their behavior.
+Implementing this enables you to combine user data from events in the front and backend to identify them and get a better understanding of their behavior.
 
 ### Using feature flags
 
