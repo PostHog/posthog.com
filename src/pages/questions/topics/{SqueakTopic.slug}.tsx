@@ -8,6 +8,7 @@ import { squeakProfileLink } from 'lib/utils'
 import { Squeak } from 'squeak-react'
 import { graphql } from 'gatsby'
 import { useTopicMenu } from 'lib/useTopicMenu'
+import Link from 'components/Link'
 
 interface ITopic {
     label: string
@@ -54,6 +55,12 @@ export default function SqueakTopics({ data }: IProps) {
             <Layout>
                 <PostLayout title={data.squeakTopic.label} menu={menu} sidebar={<TopicSidebar />} hideSurvey>
                     <section className="my-8 lg:my-0">
+                        <div className="mb-4">
+                            <Link to="/questions" className="text-gray hover:text-gray-accent-light">
+                                ← Back to Questions
+                            </Link>
+                        </div>
+
                         <Squeak
                             profileLink={squeakProfileLink}
                             limit={5}

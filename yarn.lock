@@ -20649,10 +20649,10 @@ sprintf-js@~1.0.2:
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
   integrity sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==
 
-squeak-react@^4.3.1:
-  version "4.3.1"
-  resolved "https://registry.yarnpkg.com/squeak-react/-/squeak-react-4.3.1.tgz#1c888877a9b30bc1b9dc0bd3b446c36a1508cb26"
-  integrity sha512-Ajnj/F2YrysuvmX6sdj7oSTq+qv+YhjV4O6zcCHl0fMh8liGy+qdEs1kFIvzwPrrtbwEnMJQ5GHyOrUKcvT/bw==
+squeak-react@^4.3.2:
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/squeak-react/-/squeak-react-4.3.2.tgz#32fd9e71e09a07e3ab0eb2e9d7b4eceea2dacd7c"
+  integrity sha512-ufMdYfAh8EOB91ox8+gCI6NYdnY3P/qLX6DvpASrRnDI08sWTBbFNVVnB2dvFPlm9JPCM3Pljgw0Qur/Jf55DA==
   dependencies:
     rehype-sanitize "^5.0.1"
 

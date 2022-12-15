@@ -53,7 +53,7 @@ export default function Questions() {
                                 <div className="ml-auto flex items-center space-x-3">
                                     <Listbox as="div" className="relative" value={sortBy} onChange={setSortBy}>
                                         <Listbox.Label className="sr-only">Sort by</Listbox.Label>
-                                        <Listbox.Button className="relative w-32 flex items-center py-2 px-3 text-left bg-white rounded shadow-lg cursor-pointer text-sm text-gray border border-gray/30">
+                                        <Listbox.Button className="relative w-32 flex items-center py-2 px-3 text-left bg-white/50 rounded shadow-lg cursor-pointer text-sm text-gray border border-gray/30">
                                             <span className="block truncate">
                                                 {sortBy === 'newest'
                                                     ? 'Newest'
