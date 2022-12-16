@@ -11,13 +11,13 @@ featuredImageType: full
 categories: ["Startups", "Guides"]
 ---
 
-Building tools for product engineers is a big trend right now. Every week brings a flashy launch of a new tool intersecting product and engineering. This is because building a great product users value is a proven way to succeed as a business. Helping product engineers make this happen is valuable.
+Building tools for [product engineers](/blog/what-is-a-product-engineer/) is a big trend right now. Every week brings a flashy launch of a new tool intersecting product and engineering. This is because building a great product users value is a proven way to succeed as a business. Helping product engineers make this happen is valuable.
 
 Tools for product engineers differ from both the tools for software engineers and product managers. The engineering tools focus on speed and automation rather than the traditional customization and stability. The product tools are streamlined for technical users, rather than being an all-encompassing “business tool.”
 
 This post will go over the tools built and used to help product engineers accomplish their work of building great products for users, from the beginning stages of talking to users all the way to maintaining ownership over issues and bugs in production.
 
-## Talking to users
+## Tools for talking to users
 
 Product engineers are more focused on users than traditional software engineers are. This means they must talk to them. The tools for doing this aren’t groundbreaking, but they are useful for accomplishing product engineers’ goal of building product users value.
 
@@ -25,7 +25,7 @@ To talk with users, product engineers use tools like Zoom, Google Meet, Slack (e
 
 Unlike product managers, product engineers don’t use survey tools. The data received from surveys is too indirect to be useful. It might be valuable for product and marketing teams to get a general idea of users, but product engineers focus on direct feedback on what they are building.
 
-## Get data on how users are using the product
+## Tools for understanding user behavior
 
 Product engineers supplement talking to users with product analytics and usage data. This data enables them to measure the impact of their work and discover new areas for improvement. It helps them set goals, measure key results, and prioritize future work.
 
@@ -35,7 +35,7 @@ For example, a product engineer sets an OKR to increase feature usage by paid us
 
 On top of PostHog, product engineers often use customer data platform or ETL tools like [Segment](/docs/integrate/third-party/segment), [Hightouch](/blog/hightouch-posthog-reverse-etl-integration), [Airbyte](/docs/apps/airbyte-export), Integrate.io, and Fivetran to move and combine data between sources and storage locations. 
 
-## Using knowledge to prioritize properly and stay on track
+## Tools for organizing knowledge and priorities
 
 Once product engineers talk with users and analyze usage data, they should be starting to form ideas on what is impactful to build. All this research and analysis is wasted if it does not lead to shipping better products.
 
@@ -47,7 +47,7 @@ An example specifically built for product engineers is [Linear](https://linear.a
 
 Like the “talking to users” tools, many of these tools won’t be shocking to you. Other note-taking and task management tools product engineers use include GitHub, Google Docs, Trello, Notion, Asana, and Coda. 
 
-## Going fast with CI/CD and testing
+## Tools for going fast with CI/CD and testing
 
 Product engineers want to ship new features to users fast. This not only means writing code but integrating with existing code and deploying. Product engineering teams are often shipping multiple updates per day. This means they need a strong continuous integration and deployment pipeline (CI/CD) to ensure the transition from local development to production goes smoothly.
 
@@ -57,7 +57,7 @@ Because they ship fast, product engineers also must make sure they aren’t brea
 
 Even with all this preventative work, breaking changes can still happen. Feature flags help prevent this. Luckily, if you’re using PostHog for analytics, you can also use it for feature flags to help roll out and roll back changes quickly.
 
-## Automating away infrastructure work
+## Tools for automating away infrastructure work
 
 Along with CI/CD is the automation of infrastructure work. Product engineers want to ship fast, and dealing with optimizing infrastructure prevents this. They care more about spinning up new infrastructure quickly compared to optimizing it.
 
@@ -67,7 +67,7 @@ A trend that appeals to product engineers is bringing the writing of code and de
 
 Other examples of these code and infrastructure combo include [Supabase](https://supabase.com/), [PlanetScale](https://planetscale.com/), and [Hasura](/customers/hasura). They abstract away infrastructure work while providing speed.  Software engineers and large teams might find their limited customization and options constraining.
 
-## Ownership over bugs and incidents
+## Tools for owning bugs and incidents
 
 As Uncle Ben from Spiderman once said “with great product power, comes great product responsibility” (I’m paraphrasing). Ownership over the complete product experience is important for product engineers. This means they are responsible for bugs, issues, and incidents in their product.
 
