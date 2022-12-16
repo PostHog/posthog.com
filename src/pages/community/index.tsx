@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { graphql, PageProps } from 'gatsby'
-import { docs } from '../../sidebars/sidebars.json'
+import { community } from '../../sidebars/sidebars.json'
 import SEO from 'components/seo'
 import Layout from 'components/Layout'
 import PostLayout, { SidebarSection } from 'components/PostLayout'
@@ -308,7 +308,7 @@ export default function CommunityPage({ params }: PageProps) {
                         <PostLayout
                             menuWidth={320}
                             title="Profile"
-                            menu={docs}
+                            menu={community}
                             sidebar={
                                 <ProfileSidebar
                                     setProfile={setProfile}
