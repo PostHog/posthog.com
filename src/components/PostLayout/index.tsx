@@ -602,7 +602,7 @@ export default function PostLayout({
                                 </div>
                             </div>
 
-                            <div ref={bottomSidebarSection} className="lg:pt-6 !border-t-0 mt-auto sticky bottom-0">
+                            <div ref={bottomSidebarSection} className="lg:pt-6 !border-t-0 mt-auto lg:sticky bottom-0">
                                 {view === 'Article' && toc?.length > 1 && !showTocButton && (
                                     <div
                                         style={{ visibility: showTocButton === null ? 'hidden' : 'visible' }}
