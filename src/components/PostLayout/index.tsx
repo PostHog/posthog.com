@@ -283,7 +283,7 @@ const Menu = ({
                             {isActive && (
                                 <motion.span
                                     variants={variants}
-                                    className="absolute w-[4px] bg-tan dark:bg-primary rounded-[2px] top-[2px] h-[calc(100%_-_4px)] left-0"
+                                    className="absolute w-[4px] bg-red rounded-[2px] top-[2px] h-[calc(100%_-_4px)] left-0"
                                     initial="hidden"
                                     animate="visible"
                                     exit="hidden"
