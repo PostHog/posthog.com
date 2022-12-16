@@ -198,7 +198,7 @@ const ActiveIssues = ({ issues }) => {
     return (
         <div id="active-issues" className="mb-12">
             <SectionTitle>Most active issues</SectionTitle>
-            <ul className="m-0 p-0 list-none">
+            <ul className="m-0 p-0 list-none mb-6">
                 {issues.map((issue) => {
                     const { comments, ...other } = issue
                     return (
@@ -211,6 +211,9 @@ const ActiveIssues = ({ issues }) => {
                     )
                 })}
             </ul>
+            <CallToAction width="full" to="https://github.com/PostHog/posthog/issues">
+                See active issues on GitHub
+            </CallToAction>
         </div>
     )
 }
@@ -219,7 +222,7 @@ const ActivePulls = ({ pulls }) => {
     return (
         <div id="active-pulls" className="mb-12">
             <SectionTitle>Most active PRs</SectionTitle>
-            <ul className="m-0 p-0 list-none">
+            <ul className="m-0 p-0 list-none mb-6">
                 {pulls.map((pull) => {
                     return (
                         <ListItem key={pull?.id}>
@@ -229,6 +232,9 @@ const ActivePulls = ({ pulls }) => {
                     )
                 })}
             </ul>
+            <CallToAction width="full" to="https://github.com/PostHog/posthog/pulls">
+                See active PRs on GitHub
+            </CallToAction>
         </div>
     )
 }
