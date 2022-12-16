@@ -10,9 +10,9 @@ topics: ["configuration", "feature flags", "persons", "events"]
 
 Django is a popular Python web framework. It’s used by thousands of teams and developers around the world, including PostHog, to build apps, websites, APIs, and more.
 
-In this tutorial, we go from nothing to a full Django app with all of the PostHog tools setup. These include autocapture, session recordings, custom event capture, connecting frontend and backend user identification, and feature flags.
+In this tutorial, we go from nothing to a full Django app with all of the PostHog tools setup. These include [autocapture](/docs/integrate/client/js#autocapture), [session recordings](/manual/recordings), custom event capture, connecting frontend and backend user identification, and [feature flags](/manual/feature-flags).
 
-To skip the basic Django app setup and go straight to the PostHog setup, [click here](#3-adding-posthog).
+> Already know how to setup a Django app? [Skip the app setup and go straight to the PostHog setup](#3-adding-posthog).
 
 ## 1. Setting up a basic Django app
 
@@ -60,7 +60,7 @@ python manage.py migrate
 
 ## 2. Adding basic functionality to the Django app
 
-With a basic site up, it is time to customize it to what we need. We won’t do anything fancy for this tutorial. Our app will be a basic blog with basic user authentication to show off all the features of PostHog. 
+With a site up, it is time to customize it to what we need. We won’t do anything fancy for this tutorial. Our app will be a blog with basic user authentication to show off all the features of PostHog. 
 
 The first step in doing this is creating a Django app with the name `blog`.
 
@@ -199,13 +199,13 @@ urlpatterns = [
 ]
 ```
 
-Once you save all of this, reload your server, and open your [development site](http://127.0.0.1:8000/), you should see a page with a list of blog posts.
+Once you save all of this, reload your server, and open your [development site](http://127.0.0.1:8000/). You should see a page with a list of blog posts.
 
 ![Blog](../images/tutorials/django-analytics/blog.png)
 
 ## 3. Adding PostHog
 
-With a basic Django app all setup, we can add PostHog to track user behavior. We can do this in two ways, adding the snippet and using the Python library.
+With a basic Django app all setup, we can add PostHog to track user behavior. We can do this in two ways, adding the snippet or using the Python library.
 
 ### Adding the snippet
 
@@ -240,7 +240,7 @@ In a new project’s getting started flow or your project settings, copy the HTM
 </html>
 ```
 
-Once you save and reload, autocapture immediately starts working. Refreshing the page gives you a `pageview` event, and you’ll be all setup to capture more events as you add more functionality.
+Once you save and reload, autocapture immediately starts working. Refreshing the page gives you a `pageview` event, and you’ll be all setup to capture more events as you add more functionality. To verify that your `pageview` events are captured correctly, login to PostHog and check the Live Events feed via the sidebar. 
 
 ### Installing and using the library
 
