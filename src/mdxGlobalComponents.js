@@ -57,6 +57,7 @@ import { Footer } from './components/Footer'
 import { FooterCTA } from './components/FooterCTA'
 import { FullWidthBorderSlider } from './components/FullWidthBorderSlider'
 import { GDPRForm } from './components/GDPRForm'
+import { GitHubTooltip } from './components/GitHubTooltip'
 import { GithubIcon } from './components/GithubIcon'
 import { GlossaryElement } from './components/GlossaryElement'
 import { Heading } from './components/Heading'
@@ -196,6 +197,7 @@ export const shortcodes = {
     FooterCTA,
     FullWidthBorderSlider,
     GDPRForm,
+    GitHubTooltip,
     GithubIcon,
     GlossaryElement,
     Heading,

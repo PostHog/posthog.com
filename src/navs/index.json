@@ -27,7 +27,7 @@
         },
         {
             "title": "Community",
-            "url": "/questions",
+            "url": "/community",
             "sub": {
                 "component": "Community"
             }
