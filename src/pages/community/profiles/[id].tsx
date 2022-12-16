@@ -13,7 +13,7 @@ import { OrgProvider, UserProvider, useUser, Question } from 'squeak-react'
 import Modal from 'components/Modal'
 import EditProfile from 'components/Profiles/EditProfile'
 
-type SqueakProfile = {
+export type SqueakProfile = {
     id: string
     first_name?: string
     last_name?: string

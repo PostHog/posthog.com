@@ -43,7 +43,7 @@ export function FeatureAvailability({ availability }: FeatureAvailabilityProps):
                     <div>
                         <h5 className="flex items-center space-x-1.5 text-base !my-0">
                             <span>Open-source</span>
-                            <Tooltip title="Free and Open-source">
+                            <Tooltip content="Free and Open-source">
                                 <span>
                                     <InfoIcon className="w-4 h-4" />
                                 </span>
@@ -55,7 +55,7 @@ export function FeatureAvailability({ availability }: FeatureAvailabilityProps):
                 <div>
                     <h5 className="flex items-center space-x-1.5 text-base !my-0">
                         {diffOpenSource ? <span>Free</span> : <span>Free / Open-source</span>}
-                        <Tooltip title="PostHog Cloud (no credit card added) or FOSS">
+                        <Tooltip content="PostHog Cloud (no credit card added) or FOSS">
                             <span>
                                 <InfoIcon className="w-4 h-4" />
                             </span>
@@ -66,7 +66,7 @@ export function FeatureAvailability({ availability }: FeatureAvailabilityProps):
                 <div>
                     <h5 className="flex items-center space-x-1.5 text-base !my-0">
                         <span>Self-serve</span>
-                        <Tooltip title="PostHog Cloud or Self-hosted (with credit card entered)">
+                        <Tooltip content="PostHog Cloud or Self-hosted (with credit card entered)">
                             <span>
                                 <InfoIcon className="w-4 h-4" />
                             </span>
@@ -77,7 +77,7 @@ export function FeatureAvailability({ availability }: FeatureAvailabilityProps):
                 <div>
                     <h5 className="flex items-center space-x-1.5 text-base !my-0">
                         <span>Enterprise</span>
-                        <Tooltip title="PostHog Cloud or Self-hosted (with enterprise license)">
+                        <Tooltip content="PostHog Cloud or Self-hosted (with enterprise license)">
                             <span>
                                 <InfoIcon className="w-4 h-4" />
                             </span>

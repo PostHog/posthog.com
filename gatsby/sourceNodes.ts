@@ -1,6 +1,7 @@
 import fetch from 'node-fetch'
 import { MenuBuilder } from 'redoc'
 import { GatsbyNode } from 'gatsby'
+import parseLinkHeader from 'parse-link-header'
 
 export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createContentDigest, createNodeId }) => {
     const { createNode } = actions
@@ -45,6 +46,120 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             components: JSON.stringify(api_endpoints.components),
         })
     }
+
+    const postHogIssues = await fetch(
+        'https://api.github.com/repos/posthog/posthog/issues?sort=comments&per_page=5'
+    ).then((res) => res.json())
+    postHogIssues.forEach((issue) => {
+        const { html_url, title, number, user, comments, reactions, labels, body, updated_at } = issue
+        const data = {
+            url: html_url,
+            title,
+            number,
+            comments,
+            user: {
+                username: user?.login,
+                avatar: user?.avatar_url,
+                url: user?.html_url,
+            },
+            reactions,
+            labels,
+            body,
+            updated_at,
+        }
+        if (data.reactions) {
+            data.reactions.plus1 = data.reactions['+1']
+            data.reactions.minus1 = data.reactions['-1']
+        }
+        const node = {
+            id: createNodeId(`posthog-issue-${title}`),
+            parent: null,
+            children: [],
+            internal: {
+                type: `PostHogIssue`,
+                contentDigest: createContentDigest(data),
+                content: body,
+                mediaType: 'text/markdown',
+            },
+            ...data,
+        }
+        createNode(node)
+    })
+
+    const postHogPulls = await fetch(
+        'https://api.github.com/repos/posthog/posthog/pulls?sort=popularity&per_page=5'
+    ).then((res) => res.json())
+    postHogPulls.forEach((issue) => {
+        const { html_url, title, number, user, labels, body, updated_at } = issue
+        const data = {
+            url: html_url,
+            title,
+            number,
+            user: {
+                username: user?.login,
+                avatar: user?.avatar_url,
+                url: user?.html_url,
+            },
+            labels,
+            body,
+            updated_at,
+        }
+
+        const node = {
+            id: createNodeId(`posthog-pull-${title}`),
+            parent: null,
+            children: [],
+            internal: {
+                type: `PostHogPull`,
+                contentDigest: createContentDigest(data),
+                content: body,
+                mediaType: 'text/markdown',
+            },
+            ...data,
+        }
+        createNode(node)
+    })
+
+    const createGitHubStatsNode = async (owner, repo) => {
+        const repoStats = await fetch(`https://api.github.com/repos/${owner}/${repo}`).then((res) => res.json())
+        const contributors = await fetch(`https://api.github.com/repos/${owner}/${repo}/contributors?per_page=1`).then(
+            (res) => {
+                const link = parseLinkHeader(res.headers.get('link'))
+                const number = link?.last?.page
+                return number && Number(number)
+            }
+        )
+        const commits = await fetch(`https://api.github.com/repos/${owner}/${repo}/commits?per_page=1`).then((res) => {
+            const link = parseLinkHeader(res.headers.get('link'))
+            const number = link?.last?.page
+            return number && Number(number)
+        })
+        const { stargazers_count, forks_count } = repoStats
+
+        const data = {
+            owner,
+            repo,
+            stars: stargazers_count,
+            forks: forks_count,
+            commits,
+            contributors,
+        }
+
+        const node = {
+            id: createNodeId(`github-stats-${repo}`),
+            parent: null,
+            children: [],
+            internal: {
+                type: `GitHubStats`,
+                contentDigest: createContentDigest(data),
+            },
+            ...data,
+        }
+        createNode(node)
+    }
+
+    await createGitHubStatsNode('posthog', 'posthog')
+    await createGitHubStatsNode('posthog', 'posthog.com')
 
     const integrations = await fetch(
         'https://raw.githubusercontent.com/PostHog/integrations-repository/main/integrations.json'

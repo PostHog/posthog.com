@@ -407,7 +407,7 @@ export const sidebarButtonClasses =
 const SidebarAction = ({ children, title, width, className = '', href, onClick }: ISidebarAction) => {
     return (
         <li style={width ? { width } : {}} className={`flex items-center justify-center ${className}`}>
-            <Tooltip className="flex" title={title}>
+            <Tooltip className="flex" content={title}>
                 <span className="relative flex">
                     {href ? (
                         <Link className={sidebarButtonClasses} to={href}>
@@ -565,7 +565,7 @@ export default function PostLayout({
             <div
                 style={{
                     gridAutoColumns: menu
-                        ? `${menuWidth}px 1fr 1fr 265px`
+                        ? `${menuWidth}px 1fr 1fr ${menuWidth}px`
                         : `1fr minmax(auto, ${contentWidth}px) minmax(max-content, 1fr)`,
                 }}
                 className="w-full relative lg:grid lg:grid-flow-col items-start -mb-20"
