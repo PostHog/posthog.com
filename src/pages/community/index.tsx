@@ -325,6 +325,7 @@ export default function CommunityPage({ params }: PageProps) {
                             ]}
                             hideSurvey
                         >
+                            <div className="xl:pt-0 pt-8"></div>
                             {profile && <Activity questionsLoading={questionsLoading} questions={questions} />}
                             <ActiveIssues issues={issues.nodes} />
                             <ActivePulls pulls={pulls.nodes} />
