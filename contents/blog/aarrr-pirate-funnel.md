@@ -10,7 +10,7 @@ author:
 featuredImage: ../images/blog/aarrr-pirate-funnel/pirate-metrics.jpeg
 featuredImageType: full
 category: Product analytics
-topics:
+tags:
   - Guides
 ---
 

@@ -9,7 +9,7 @@ author:
   - marcus-hyett
 featuredImage: ../images/blog/new-vp-nailing-funnels/new-vp-nailing-funnels.png
 category: Inside PostHog
-topics:
+tags:
   - Product analytics
 ---
 

@@ -10,7 +10,7 @@ author:
 featuredImage: ../images/blog/Collaboration.png
 featuredImageType: full
 category: Product updates
-topics:
+tags:
   - Launch week
 ---
 

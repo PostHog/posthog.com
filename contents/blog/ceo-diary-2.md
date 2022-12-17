@@ -10,7 +10,7 @@ author:
 featuredImage: ../images/blog/ceo-diary.png
 featuredImageType: full
 category: CEO diaries
-topics:
+tags:
   - Inside PostHog
 ---
 

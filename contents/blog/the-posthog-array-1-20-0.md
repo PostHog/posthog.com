@@ -8,7 +8,7 @@ hideAnchor: true
 featuredImage: ../images/blog/array/default.png
 featuredImageType: standard
 category: Release notes
-topics:
+tags:
   - Product updates
 ---
 

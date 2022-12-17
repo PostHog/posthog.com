@@ -10,7 +10,7 @@ featuredImageType: full
 author:
   - karl-aksel-puulmann
 category: Engineering
-topics:
+tags:
   - Product updates
   - Launch week
 ---

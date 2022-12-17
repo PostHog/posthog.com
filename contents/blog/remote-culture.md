@@ -6,7 +6,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 category: Startups
-topics:
+tags:
   - Inside PostHog
 ---
 

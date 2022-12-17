@@ -12,7 +12,7 @@ excerpt: >-
   dashboards, Altinity Cloud support for ClickHouse, configuring your instance
   from the PostHog UI and 290+ improvements/fixes.
 category: Release notes
-topics:
+tags:
   - Product updates
 ---
 

@@ -10,7 +10,7 @@ author:
 featuredImage: ../images/blog/posthog-release-notes-blog.png
 featuredImageType: full
 category: Startups
-topics:
+tags:
   - Inside PostHog
   - Guides
 ---

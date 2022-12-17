@@ -10,7 +10,7 @@ author:
 featuredImage: ../images/blog/product-at-posthog.png
 featuredImageType: full
 category: Inside PostHog
-topics:
+tags:
   - Product analytics
   - Startups
 ---

@@ -10,7 +10,7 @@ author:
 featuredImage: ../images/blog/experiments.jpeg
 featuredImageType: full
 category: Product updates
-topics:
+tags:
   - Launch week
   - Guides
 ---

@@ -10,7 +10,7 @@ author:
 featuredImage: ../images/blog/titles.png
 featuredImageType: full
 category: Startups
-topics:
+tags:
   - Inside PostHog
 ---
 

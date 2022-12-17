@@ -10,7 +10,7 @@ featuredImageType: full
 author:
   - simon-fisher
 category: Guides
-topics:
+tags:
   - Product analytics
 ---
 

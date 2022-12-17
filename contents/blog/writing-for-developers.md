@@ -10,7 +10,7 @@ author:
   - james-hawkins
 featuredImageType: full
 category: Startups
-topics:
+tags:
   - CEO diaries
   - Inside PostHog
 ---

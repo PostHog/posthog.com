@@ -10,7 +10,7 @@ author:
 featuredImage: ../images/blog/transparency.jpeg
 featuredImageType: full
 category: CEO diaries
-topics:
+tags:
   - Inside PostHog
   - Startups
 ---

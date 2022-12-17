@@ -10,7 +10,7 @@ author:
 featuredImage: ../images/blog/migrating-hog.png
 featuredImageType: full
 category: Engineering
-topics:
+tags:
   - Product updates
 ---
 

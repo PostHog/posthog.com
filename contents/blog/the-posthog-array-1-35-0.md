@@ -13,7 +13,7 @@ excerpt: >-
   support organization-level SAML login on both Cloud and Self-Hosted instances.
   Plus check out your Project Homepage for a few additional goodies.
 category: Release notes
-topics:
+tags:
   - Product updates
 ---
 

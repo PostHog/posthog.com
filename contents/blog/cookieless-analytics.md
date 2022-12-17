@@ -12,7 +12,7 @@ author:
 featuredImage: ../images/blog/cookieless-analytics.png
 featuredImageType: full
 category: Guides
-topics:
+tags:
   - Privacy
 ---
 

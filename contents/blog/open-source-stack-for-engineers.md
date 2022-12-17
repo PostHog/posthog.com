@@ -10,7 +10,7 @@ featuredImageType: full
 author:
   - joe-martin
 category: Open source
-topics:
+tags:
   - Guides
 ---
 

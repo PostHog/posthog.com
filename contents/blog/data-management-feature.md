@@ -10,7 +10,7 @@ featuredImageType: full
 author:
   - alex-kim
 category: Product updates
-topics:
+tags:
   - Launch week
 ---
 

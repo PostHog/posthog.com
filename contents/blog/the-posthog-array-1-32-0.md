@@ -12,7 +12,7 @@ excerpt: >-
   page, introduces vertical funnels and sets the stage for the launch of
   Experimentation!
 category: Release notes
-topics:
+tags:
   - Product updates
 ---
 

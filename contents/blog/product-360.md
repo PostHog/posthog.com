@@ -10,7 +10,7 @@ author:
 featuredImage: ../images/blog/product-people.png
 featuredImageType: full
 category: CEO diaries
-topics:
+tags:
   - Inside PostHog
   - Engineering
 ---

@@ -11,7 +11,7 @@ author:
 featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
 category: Inside PostHog
-topics:
+tags:
   - Engineering
 ---
 

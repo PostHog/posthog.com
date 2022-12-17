@@ -10,7 +10,7 @@ featuredImageType: full
 author:
   - andy-vandervell
 category: Privacy
-topics:
+tags:
   - Guides
 ---
 

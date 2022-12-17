@@ -8,7 +8,7 @@ hideAnchor: true
 author:
   - james-hawkins
 category: CEO diaries
-topics:
+tags:
   - Inside PostHog
 ---
 

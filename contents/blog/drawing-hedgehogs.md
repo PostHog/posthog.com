@@ -10,7 +10,7 @@ author:
 featuredImage: ../images/blog/blog-hedgehog-design.png
 featuredImageType: full
 category: General
-topics:
+tags:
   - Inside PostHog
 ---
 

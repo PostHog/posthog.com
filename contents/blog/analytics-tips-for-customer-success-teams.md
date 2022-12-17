@@ -10,7 +10,7 @@ author:
 featuredImage: ../images/blog/green-blog-image.jpg
 featuredImageType: full
 category: Guides
-topics:
+tags:
   - Using PostHog
 ---
 

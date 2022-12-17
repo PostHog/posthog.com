@@ -3,7 +3,7 @@ title: User Agent Populator
 github: https://github.com/weyert/useragentplugin
 installUrl: https://app.posthog.com/project/apps?name=User%20Agent%20Populator
 thumbnail: ../../apps/thumbnails/user-agent-enhancer.png
-topics:
+tags:
     - user-agent
 ---
 

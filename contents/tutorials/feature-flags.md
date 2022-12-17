@@ -5,7 +5,7 @@ showTitle: true
 featuredImage: ../images/tutorials/banners/feature-flags.png
 featuredTutorial: false
 author: ['yakko-majuri']
-topics: ['feature flags']
+tags: ['feature flags']
 featuredVideo: https://youtube.com/embed/aUILrrrlu50?start=950
 date: 2020-09-24
 ---

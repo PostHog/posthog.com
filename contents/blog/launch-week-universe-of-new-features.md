@@ -10,7 +10,7 @@ featuredImageType: full
 author:
   - andy-vandervell
 category: Product updates
-topics:
+tags:
   - Launch week
 ---
 

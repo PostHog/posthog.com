@@ -12,7 +12,7 @@ excerpt: >-
   default homepage for projects, smart names for all insights, an entire Data
   Management tool as well as support for horizontal scalability!
 category: Release notes
-topics:
+tags:
   - Product updates
 ---
 

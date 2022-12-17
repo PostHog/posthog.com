@@ -8,7 +8,7 @@ hideAnchor: true
 featuredImage: ../images/blog/posthog-blog-image.png
 featuredImageType: full
 category: Guides
-topics:
+tags:
   - Using PostHog
 ---
 

@@ -32,7 +32,7 @@ export const pageQuery = graphql`
             sort: { order: DESC, fields: [frontmatter___date] }
             filter: { isFuture: { eq: false }, frontmatter: { rootPage: { eq: "/blog" }, date: { ne: null } } }
         ) {
-            group(field: frontmatter___categories, limit: 2) {
+            group(field: frontmatter___category, limit: 2) {
                 category: fieldValue
                 edges {
                     node {

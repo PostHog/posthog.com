@@ -10,7 +10,7 @@ author:
 featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 category: Guides
-topics:
+tags:
   - Product analytics
   - PostHog Academy
 ---

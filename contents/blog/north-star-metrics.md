@@ -10,7 +10,7 @@ author:
 featuredImage: ../images/blog/give-back-friday.png
 featuredImageType: full
 category: Guides
-topics:
+tags:
   - Product analytics
 ---
 

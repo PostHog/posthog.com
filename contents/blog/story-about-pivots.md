@@ -8,7 +8,7 @@ hideAnchor: true
 featuredImage: ../images/blog/story-about-pivots.png
 featuredImageType: full
 category: General
-topics:
+tags:
   - Inside PostHog
   - CEO diaries
 ---

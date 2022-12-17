@@ -12,7 +12,7 @@ excerpt: >-
   revamped overall user experience on Insights and 350+ more improvements and
   fixes.
 category: Release notes
-topics:
+tags:
   - Product updates
 ---
 

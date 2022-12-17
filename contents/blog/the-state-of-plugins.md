@@ -10,7 +10,7 @@ author:
 featuredImage: ../images/blog/running-content.png
 featuredImageType: full
 category: Engineering
-topics:
+tags:
   - Product updates
 ---
 

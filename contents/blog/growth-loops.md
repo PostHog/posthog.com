@@ -10,7 +10,7 @@ author:
 featuredImage: ../images/blog/posthog-marketing/marketing-hog.jpg
 featuredImageType: full
 category: Product analytics
-topics:
+tags:
   - Guides
 ---
 

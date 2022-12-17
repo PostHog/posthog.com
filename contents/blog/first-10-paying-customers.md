@@ -12,7 +12,7 @@ author:
 featuredImage: ../images/blog/first-10-customers.png
 featuredImageType: full
 category: Guides
-topics:
+tags:
   - Startups
 ---
 

@@ -12,7 +12,7 @@ excerpt: >-
   Significantly revamped performance for slower queries, advanced engagement
   cohorts, SAML support, and many more improvements and fixes.
 category: Release notes
-topics:
+tags:
   - Product updates
 ---
 

@@ -12,7 +12,7 @@ excerpt: >-
   with Correlation analysis, saving insights for future use and a fully revamped
   recordings playback experience and more than 350 improvements/fixes more.
 category: Release notes
-topics:
+tags:
   - Product updates
 ---
 

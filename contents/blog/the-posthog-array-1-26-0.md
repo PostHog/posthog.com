@@ -10,7 +10,7 @@ excerpt: >-
   PostHog 1.26.0 is here! Read about our Series B raise, our new features, and
   find out who are the 4 new team members we've onboarded.
 category: Release notes
-topics:
+tags:
   - Product updates
 ---
 

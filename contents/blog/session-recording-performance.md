@@ -10,7 +10,7 @@ author:
 featuredImage: ../images/blog/session-recording-performance/session-recording.jpg
 featuredImageType: full
 category: Inside PostHog
-topics:
+tags:
   - Engineering
 ---
 

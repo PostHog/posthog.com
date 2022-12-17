@@ -5,7 +5,7 @@ showTitle: true
 author: ['ian-vanagas']
 date: 2022-10-31
 featuredImage: ../images/tutorials/banners/power-users.png
-topics: ['trends', 'cohorts', 'session recordings']
+tags: ['trends', 'cohorts', 'session recordings']
 ---
 
 Power users are your best and most important customers. They're knowledgable, willing to learn, and more likely to give feedback than average users. They're also more demanding.

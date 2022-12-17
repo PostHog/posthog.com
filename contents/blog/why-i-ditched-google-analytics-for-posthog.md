@@ -9,7 +9,7 @@ featuredImage: ../images/blog/posthog-engineering-blog.png
 author:
   - colin-wren
 category: Inside PostHog
-topics:
+tags:
   - Comparisons
 ---
 

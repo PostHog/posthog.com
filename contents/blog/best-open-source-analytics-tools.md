@@ -11,7 +11,7 @@ author:
 featuredImage: ../images/blog/product-people.png
 featuredImageType: full
 category: Guides
-topics:
+tags:
   - Open source
 ---
 

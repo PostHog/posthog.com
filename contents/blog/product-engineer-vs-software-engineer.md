@@ -10,7 +10,7 @@ author:
 featuredImage: ../images/blog/product-engineer.jpg
 featuredImageType: full
 category: Startups
-topics:
+tags:
   - Guides
 ---
 

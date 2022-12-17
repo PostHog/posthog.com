@@ -5,7 +5,7 @@ showTitle: true
 author: ['ian-vanagas']
 date: 2022-12-08
 featuredImage: ../images/tutorials/banners/performance-marketing.png
-topics: ['funnels', 'insights']
+tags: ['funnels', 'insights']
 --- 
 
 Performance marketing is paying for ads, attention, and clicks to your site where you try to convert them into users and customers. Companies use channels like Google, Facebook, other social media, ad networks, and sponsorships to do this. 

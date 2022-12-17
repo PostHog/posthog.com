@@ -10,7 +10,7 @@ author:
 featuredImage: ../images/blog/how-to-pick-cofounder.png
 featuredImageType: full
 category: Inside PostHog
-topics:
+tags:
   - Startups
 ---
 

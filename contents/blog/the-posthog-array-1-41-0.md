@@ -8,7 +8,7 @@ hideAnchor: true
 featuredImage: ../images/blog/posthog-array-blog.png
 featuredImageType: full
 category: Release notes
-topics:
+tags:
   - Product updates
 ---
 

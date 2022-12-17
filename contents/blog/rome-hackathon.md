@@ -10,7 +10,7 @@ author:
 featuredImage: ../images/blog/planning-a-company-offsite/planning-offsite.jpeg
 featuredImageType: full
 category: Inside PostHog
-topics:
+tags:
   - Startups
 ---
 

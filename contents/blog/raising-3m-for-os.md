@@ -10,7 +10,7 @@ featuredImageType: full
 author:
   - james-hawkins
 category: CEO diaries
-topics:
+tags:
   - Inside PostHog
   - Open source
 ---

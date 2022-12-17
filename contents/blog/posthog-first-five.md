@@ -10,7 +10,7 @@ author:
 featuredImage: ../images/blog/posthog-first-five/first-five.jpg
 featuredImageType: full
 category: Inside PostHog
-topics:
+tags:
   - Startups
 ---
 

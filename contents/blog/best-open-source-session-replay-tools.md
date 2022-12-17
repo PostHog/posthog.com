@@ -10,7 +10,7 @@ featuredImageType: full
 author:
   - hanna-crombie
 category: Guides
-topics:
+tags:
   - Open source
 ---
 

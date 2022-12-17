@@ -7,7 +7,7 @@ showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/hacktoberfest/hacktoberfest.png
 category: Engineering
-topics:
+tags:
   - Open source
 ---
 ### Let the pull requests come in!

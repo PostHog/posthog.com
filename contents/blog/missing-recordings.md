@@ -10,7 +10,7 @@ featuredImageType: full
 author:
   - rick-marron
 category: Engineering
-topics:
+tags:
   - Inside PostHog
 ---
 

@@ -10,7 +10,7 @@ featuredImageType: full
 author:
   - grace-mckenzie
 category: Inside PostHog
-topics:
+tags:
   - Guides
   - Startups
 ---

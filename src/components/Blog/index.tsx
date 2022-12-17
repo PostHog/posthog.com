@@ -26,7 +26,7 @@ export const Posts = ({ posts, title, action }) => {
                     const {
                         node: {
                             id,
-                            frontmatter: { date, title, featuredImage, authors, categories },
+                            frontmatter: { date, title, featuredImage, authors, category },
                             fields: { slug },
                         },
                     } = post
@@ -36,7 +36,7 @@ export const Posts = ({ posts, title, action }) => {
                             <Link className="text-white hover:text-white" to={slug}>
                                 <GatsbyImage image={getImage(featuredImage)} />
                                 <div className="bg-black/60 absolute inset-0 p-6 flex flex-col h-full w-full">
-                                    {categories && <p className="m-0 text-sm opacity-80">{categories.join(', ')}</p>}
+                                    {category && <p className="m-0 text-sm opacity-80">{category}</p>}
                                     <h5 className="text-2xl m-0">{title}</h5>
                                     <p className="m-0 text-base font-light mt-2">{date}</p>
                                     <ul className="list-none m-0 p-0 mt-auto grid gap-y-2">
@@ -123,7 +123,7 @@ export const BlogFragment = graphql`
             date(formatString: "MMM D, YYYY")
             title
             rootPage
-            categories
+            category
             featuredImage {
                 publicURL
                 childImageSharp {

@@ -10,7 +10,7 @@ hideAnchor: true
 featuredImage: ../images/blog/non-coders-thoughts/non-coders-thoughts.jpg
 featuredImageType: full
 category: Inside PostHog
-topics:
+tags:
   - Startups
 ---
 

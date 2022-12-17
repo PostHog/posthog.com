@@ -11,7 +11,7 @@ excerpt: >-
   dive deeper to understand why your users aren't converting. Plus 400+
   improvements & fixes.
 category: Release notes
-topics:
+tags:
   - Product updates
 ---
 

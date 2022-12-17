@@ -10,7 +10,7 @@ author:
 featuredImage: ../images/blog/posthog-company-culture-blog.png
 featuredImageType: full
 category: Guides
-topics:
+tags:
   - Privacy
 ---
 

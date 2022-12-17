@@ -10,7 +10,7 @@ featuredImageType: full
 author:
   - andy-vandervell
 category: Guides
-topics:
+tags:
   - Comparisons
 ---
 
