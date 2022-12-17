@@ -6,9 +6,13 @@ featuredImage: ../images/blog/writing-for-developers/writing-for-developers.png
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["james-hawkins"]
+author:
+  - james-hawkins
 featuredImageType: full
-categories: ["Startups", "CEO diaries", "Inside PostHog"]
+category: Startups
+topics:
+  - CEO diaries
+  - Inside PostHog
 ---
 
 As a founder, one of the most surprisingly important skills I've realized I have is hitting the front page of [Hacker News](https://news.ycombinator.com).

@@ -1,14 +1,17 @@
 ---
 date: 2021-10-07
-title: How we designed the PostHog mascot 
+title: How we designed the PostHog mascot
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["lottie-coxon"]
+author:
+  - lottie-coxon
 featuredImage: ../images/blog/blog-hedgehog-design.png
 featuredImageType: full
-categories: ["General", "Inside PostHog"]
+category: General
+topics:
+  - Inside PostHog
 ---
 
 Creating mascots goes beyond just putting iPencil to iPad. It’s a long, confusing, and sometimes frustrating process which requires a lot of patience and tolerance for drawing hedgehogs 12 hours a day.

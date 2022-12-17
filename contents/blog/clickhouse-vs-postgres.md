@@ -1,14 +1,17 @@
 ---
 date: 2022-10-28
-title: "In-depth: ClickHouse vs PostgreSQL"
+title: 'In-depth: ClickHouse vs PostgreSQL'
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["mathew-pregasen"]
+author:
+  - mathew-pregasen
 featuredImage: ../images/blog/clickhouse-vs-postgres/postgres-vs-clickhouse.png
 featuredImageType: full
-categories: ["Engineering", "Guides"]
+category: Engineering
+topics:
+  - Guides
 ---
 
 Honestly, it is a bit ridiculous to compare Postgres and ClickHouse. The two database solutions are as similar as grapes and grapefruit. ClickHouse was created for a specific purpose; PostgreSQL (aka Postgres) was designed to be flexible and all-purpose. 

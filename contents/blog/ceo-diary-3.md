@@ -5,10 +5,13 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["CEO diaries", "Inside PostHog"]
-author: ["james-hawkins"]
+author:
+  - james-hawkins
 featuredImage: ../images/blog/blog-generic-4.png
 featuredImageType: full
+category: CEO diaries
+topics:
+  - Inside PostHog
 ---
 
 It has been a dramatic month.

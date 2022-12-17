@@ -5,7 +5,10 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["General", "Engineering", "Guides"]
+category: General
+topics:
+  - Engineering
+  - Guides
 ---
 
 ## Moving fast is easy. Moving fast with confidence is hard.

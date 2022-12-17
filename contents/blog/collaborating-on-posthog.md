@@ -5,10 +5,13 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["paolodamico"]
+author:
+  - paolodamico
 featuredImage: ../images/blog/Collaboration.png
 featuredImageType: full
-categories: ["Product updates", "Launch week"]
+category: Product updates
+topics:
+  - Launch week
 ---
 
 PostHog is better with teammates. You only have to create a [dashboard](/docs/user-guides/dashboards) once, but it becomes more valuable every time you invite someone from your organization to view it. And this isn't just some vague truism: it's a measurable fact.

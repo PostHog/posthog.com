@@ -5,10 +5,14 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: [marcus-hyett]
+author:
+  - marcus-hyett
 featuredImage: ../images/blog/product-people.png
 featuredImageType: full
-categories: ["Guides", "Product analytics", "PostHog Academy"]
+category: Guides
+topics:
+  - Product analytics
+  - PostHog Academy
 ---
 
 User segmentation is a term which is thrown around a lot within product-led teams, but what does it mean? In this article we'll explain what user segmentation is, why it's important and give examples of how segmenting your userbase can uncover important customer insights.

@@ -6,7 +6,9 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/hacktoberfest/hacktoberfest.png
-categories: ["Engineering", "Open source"]
+category: Engineering
+topics:
+  - Open source
 ---
 ### Let the pull requests come in!
 

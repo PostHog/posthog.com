@@ -1,14 +1,17 @@
 ---
 date: 2022-11-02
-title: "Tell me about features, not benefits"
+title: 'Tell me about features, not benefits'
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["CEO diaries", "Inside PostHog"]
-author: ["james-hawkins"]
+author:
+  - james-hawkins
 featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
+category: CEO diaries
+topics:
+  - Inside PostHog
 ---
 
 Features tell, benefits sell. Well, they used to.

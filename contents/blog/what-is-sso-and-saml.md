@@ -5,9 +5,11 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Guides", "Using PostHog"]
 featuredImage: ../images/blog/posthog-blog-image.png
 featuredImageType: full
+category: Guides
+topics:
+  - Using PostHog
 ---
 
 Existing at an intersection of convenience and security, single sign-on (SSO) authentication is used and appreciated by both IT teams _and_ everyday users — which is why we strongly recommend setting it up on new PostHog instances. In this article we’ll explain what SSO and SAML are, and why you should use it.

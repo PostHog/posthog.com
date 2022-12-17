@@ -5,9 +5,12 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["General", "Inside PostHog", "CEO diaries"]
 featuredImage: ../images/blog/story-about-pivots.png
 featuredImageType: full
+category: General
+topics:
+  - Inside PostHog
+  - CEO diaries
 ---
 
 PostHog has pivoted _a lot_.

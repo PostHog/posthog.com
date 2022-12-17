@@ -5,11 +5,14 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-keywords:
+keywords: null
 featuredImage: ../images/blog/posthog-blog-image.png
 featuredImageType: full
-author: ['avi-press']
-categories: ['Open source', 'Startups']
+author:
+  - avi-press
+category: Open source
+topics:
+  - Startups
 ---
 
 The famous line from Marc Andreesen that _“software is eating the world”_ has become part and parcel of modern technology’s canon and it continues to act as a rallying cry for the industry as a whole.

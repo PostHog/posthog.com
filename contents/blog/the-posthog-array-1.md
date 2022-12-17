@@ -5,9 +5,11 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Release notes", "Product updates"]
 featuredImage: ../images/blog/array/default.png
 featuredImageType: standard
+category: Release notes
+topics:
+  - Product updates
 ---
 
 This is the first of (what we hope are many) PostHog weekly roundup posts. We want to let the community know what we have been up to, a few of our favorite comments, issues, and pull requests as well as some key repos and projects we have noticed over the course of the week.

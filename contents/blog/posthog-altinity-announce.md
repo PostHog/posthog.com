@@ -5,10 +5,11 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["joe-martin"]
+author:
+  - joe-martin
 featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
-categories: ["Product updates"]
+category: Product updates
 ---
 
 That’s right, we’re [teaming up with Altinity](https://altinity.com/blog/announcing-the-new-altinity-posthog-partnership). It’s an exciting new partnership that also marks the launch of the [PostHog Marketplace](/marketplace). Double announcement!

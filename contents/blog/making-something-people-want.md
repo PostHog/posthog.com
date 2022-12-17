@@ -5,10 +5,14 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["CEO diaries", "Inside PostHog", "Startups"]
-author: ["james-hawkins"]
+author:
+  - james-hawkins
 featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
+category: CEO diaries
+topics:
+  - Inside PostHog
+  - Startups
 ---
 
 It's one thing to build _something_, it's another to build something that _people want_.

@@ -5,10 +5,14 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["paolodamico"]
+author:
+  - paolodamico
 featuredImage: ../images/blog/product-at-posthog.png
 featuredImageType: full
-categories: ["Inside PostHog", "Product analytics", "Startups"]
+category: Inside PostHog
+topics:
+  - Product analytics
+  - Startups
 ---
 
 We’ve talked before about [product-minded engineers](/blog/what-is-a-product-engineer) at PostHog. We don’t have PMs dictating a roadmap or solutions - it all comes from engineering. A PostHog engineer has complete autonomy to decide the 'what' (prioritization) and the 'how' (solution) of the features we build, so Product & Design play a role that’s a bit different to the typical tech startup. 

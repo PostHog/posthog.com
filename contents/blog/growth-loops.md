@@ -1,14 +1,17 @@
 ---
 date: 2022-10-31
-title: "How to harness the awesome power of growth loops"
+title: How to harness the awesome power of growth loops
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 featuredImage: ../images/blog/posthog-marketing/marketing-hog.jpg
 featuredImageType: full
-categories: ["Product analytics", "Guides"]
+category: Product analytics
+topics:
+  - Guides
 ---
 
 A growth loop is a series of actions that amplify each other to fuel perpetual growth. New inputs repeatedly power the series to exponentially grow the whole. Companies use growth loops to align their product and distribution to have the greatest impact.

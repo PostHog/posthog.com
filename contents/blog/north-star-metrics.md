@@ -5,10 +5,13 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["andy-vandervell"]
+author:
+  - andy-vandervell
 featuredImage: ../images/blog/give-back-friday.png
 featuredImageType: full
-categories: ["Guides", "Product analytics"]
+category: Guides
+topics:
+  - Product analytics
 ---
 
 Successful products need actionable metrics and for many businesses this starts with identifying what many refer to as a 'North Star' metric.

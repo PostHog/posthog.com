@@ -7,8 +7,9 @@ showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/b2b-product-metrics/b2b-product-metrics.jpeg
 featuredImageType: full
-categories: ["Guides"]
-author: ["andy-vandervell"]
+author:
+  - andy-vandervell
+category: Guides
 ---
 
 So, you're building a B2B SaaS product.

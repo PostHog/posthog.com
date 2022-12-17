@@ -1,14 +1,18 @@
 ---
 date: 2022-05-18
-title: Reflecting on YC, 2 years on
+title: 'Reflecting on YC, 2 years on'
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["CEO diaries", "Inside PostHog", "Startups"]
-author: ["james-hawkins"]
+author:
+  - james-hawkins
 featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
+category: CEO diaries
+topics:
+  - Inside PostHog
+  - Startups
 ---
 
 [Y Combinator](https://www.ycombinator.com/) (YC) is seen as the world's best, and most prolific, three-month accelerator program. Upwards of 7,000 founders have taken part. Yet, no one really talks about what happens afterwards.

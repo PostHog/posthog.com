@@ -5,9 +5,11 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Release notes", "Product updates"]
 featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
+category: Release notes
+topics:
+  - Product updates
 ---
 
 We're excited to announce that we have launched a new app with [Avo](https://www.avo.app/), a leading data governance platform which enables you track data consistently and scalably across multiple platforms. 

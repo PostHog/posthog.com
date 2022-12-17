@@ -1,14 +1,17 @@
 ---
 date: 2022-12-08
-title: "Product engineer vs software engineer: what's the difference?"
+title: 'Product engineer vs software engineer: what''s the difference?'
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 featuredImage: ../images/blog/product-engineer.jpg
 featuredImageType: full
-categories: ["Startups", "Guides"]
+category: Startups
+topics:
+  - Guides
 ---
 
 Software companies are changing. Where once product managers and software engineers dominated, now a new role is emerging: the [product engineer](/blog/what-is-a-product-engineer).

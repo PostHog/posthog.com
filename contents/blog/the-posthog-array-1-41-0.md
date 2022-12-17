@@ -1,13 +1,15 @@
 ---
 date: 2022-11-02
-title: "Array 1.41.0: Improving performance by up to 400%"
+title: 'Array 1.41.0: Improving performance by up to 400%'
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ['Release notes', 'Product updates']
 featuredImage: ../images/blog/posthog-array-blog.png
 featuredImageType: full
+category: Release notes
+topics:
+  - Product updates
 ---
 
 Want to know more about what we're up to? [Subscribe to HogMail, our newsletter](/newsletter), which we send every two weeks!

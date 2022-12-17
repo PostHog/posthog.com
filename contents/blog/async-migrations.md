@@ -5,10 +5,13 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ['yakko-majuri']
+author:
+  - yakko-majuri
 featuredImage: ../images/blog/migrating-hog.png
 featuredImageType: full
-categories: ['Engineering', 'Product updates']
+category: Engineering
+topics:
+  - Product updates
 ---
 
 In this world nothing is certain except death, taxes, and database migrations.

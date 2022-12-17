@@ -5,10 +5,13 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["CEO diaries", "Inside PostHog"]
-author: ["james-hawkins"]
+author:
+  - james-hawkins
 featuredImage: ../images/blog/ceo-diary.png
 featuredImageType: full
+category: CEO diaries
+topics:
+  - Inside PostHog
 ---
 
 _We are open source_ is [literally our top value](../handbook/company/values)... and what better way to be transparent than to share a diary?

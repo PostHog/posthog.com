@@ -1,14 +1,19 @@
 ---
 date: 2021-08-23
-title: Google is about to make it a lot harder to track website and app users without third-party cookies
+title: >-
+  Google is about to make it a lot harder to track website and app users without
+  third-party cookies
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["marcus-hyett"]
+author:
+  - marcus-hyett
 featuredImage: ../images/blog/cookieless-analytics.png
 featuredImageType: full
-categories: ["Guides", "Privacy"]
+category: Guides
+topics:
+  - Privacy
 ---
 
 Google [says](https://blog.google/products/chrome/updated-timeline-privacy-sandbox-milestones/) they intend to deprecate the use of third-party cookies in 2023. But why is this important, and how will this affect product analytics?

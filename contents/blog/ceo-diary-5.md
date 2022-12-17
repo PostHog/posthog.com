@@ -5,10 +5,13 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["CEO diaries", "Inside PostHog"]
-author: ["james-hawkins"]
+author:
+  - james-hawkins
 featuredImage: ../images/blog/ceo-diary.png
 featuredImageType: full
+category: CEO diaries
+topics:
+  - Inside PostHog
 ---
 
 2021 went well for PostHog - especially given we're not even two years old yet.

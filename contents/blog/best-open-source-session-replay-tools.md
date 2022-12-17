@@ -7,8 +7,11 @@ showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/posthog-company-culture-blog.png
 featuredImageType: full
-author: ["hanna-crombie"]
-categories: ["Guides", "Open source"]
+author:
+  - hanna-crombie
+category: Guides
+topics:
+  - Open source
 ---
 
 Most analytics tools just give you the hard numbers: views, clicks, conversions. This is a good starting point, but statistics alone give you an incomplete picture – why did the user rageclick or fail to convert? Enter session recording.

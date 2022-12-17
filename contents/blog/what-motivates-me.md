@@ -5,10 +5,13 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["CEO diaries", "Inside PostHog"]
-author: ["james-hawkins"]
+author:
+  - james-hawkins
 featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
+category: CEO diaries
+topics:
+  - Inside PostHog
 ---
 
 PostHog got pretty far (17k customers across all our products, went through Y Combinator, seed, series A and B raised, $MM revenue) before I really figured out what motivates me.

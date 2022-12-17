@@ -1,14 +1,17 @@
 ---
 date: 2022-06-21
-title: "The two ways to estimate your monthly event usage"
+title: The two ways to estimate your monthly event usage
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/data-management-feature/posthog-data-management.png
 featuredImageType: full
-categories: ["Guides", "Product analytics"]
-author: ["simon-fisher"]
+author:
+  - simon-fisher
+category: Guides
+topics:
+  - Product analytics
 ---
 
 When talking through our editions and pricing options with potential customers I'm often asked "How can I estimate my event count?"

@@ -1,14 +1,17 @@
 ---
 date: 2021-06-25
 title: A non-coder's thoughts on an 'Everybody Codes' culture
-author: ["joe-martin"]
-rootPage: /blog 
-sidebar: Blog 
-showTitle: true 
-hideAnchor: true 
+author:
+  - joe-martin
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
 featuredImage: ../images/blog/non-coders-thoughts/non-coders-thoughts.jpg
 featuredImageType: full
-categories: ["Inside PostHog", "Startups"]
+category: Inside PostHog
+topics:
+  - Startups
 ---
 
 One of PostHog’s core values is that everybody codes. That doesn’t mean everyone needs previous experience as a developer or engineer, but we encourage everyone to learn and practice the basics of shipping, no matter their role. 

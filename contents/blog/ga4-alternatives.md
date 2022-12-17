@@ -1,14 +1,15 @@
 ---
 date: 2022-10-19
-title: "The best GA4 alternatives for apps and websites"
+title: The best GA4 alternatives for apps and websites
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["andy-vandervell"]
+author:
+  - andy-vandervell
 featuredImage: ../images/blog/posthog-company-culture-blog.png
 featuredImageType: full
-categories: ["Guides"]
+category: Guides
 ---
 
 In July 2023, Google will sunset Universal Analytics (UA), forcing users to switch to Google Analytics 4 (GA4) or another provider.

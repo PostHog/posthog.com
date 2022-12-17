@@ -5,10 +5,14 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["charles-cook"]
+author:
+  - charles-cook
 featuredImage: ../images/blog/posthog-release-notes-blog.png
 featuredImageType: full
-categories: ["Startups", "Inside PostHog", "Guides"]
+category: Startups
+topics:
+  - Inside PostHog
+  - Guides
 ---
 
 Ok, so you’ve read *Zero to One* and *The Hard Thing About Hard Things*, but what are all the boring admin things that are actually going to drain 40% of your time which no one has told you about?

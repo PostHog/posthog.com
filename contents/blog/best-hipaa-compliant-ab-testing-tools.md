@@ -1,14 +1,17 @@
 ---
 date: 2022-09-07
-title: "The best HIPAA-compliant A/B testing tools"
+title: The best HIPAA-compliant A/B testing tools
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["andy-vandervell"]
+author:
+  - andy-vandervell
 featuredImage: ../images/blog/posthog-company-culture-blog.png
 featuredImageType: full
-categories: ["Guides","Privacy"]
+category: Guides
+topics:
+  - Privacy
 ---
 
 What do Google Optimize, Optimizely, Convert, Webtrends Optimize and Splitbee have in common?

@@ -1,14 +1,18 @@
 ---
 date: 2022-09-28
-title: "How (and why) our marketing team uses PostHog"
+title: How (and why) our marketing team uses PostHog
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Inside PostHog", "Guides", "Using PostHog"]
-author: ["andy-vandervell"]
+author:
+  - andy-vandervell
 featuredImage: ../images/blog/posthog-marketing/marketing-hog.jpg
 featuredImageType: full
+category: Inside PostHog
+topics:
+  - Guides
+  - Using PostHog
 ---
 
 We learned an interesting fact recently: only 20% of our users track their marketing website **and** their product using PostHog. This is our fault. We market to engineers at PostHog, so it's not a surprise we're less used for marketing.

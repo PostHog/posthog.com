@@ -5,10 +5,15 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ['Release notes', 'Product updates']
 featuredImage: ../images/blog/posthog-array-blog.png
 featuredImageType: full
-excerpt: PostHog 1.32.0 makes it easier to find what you want in the Persons & Groups page, introduces vertical funnels and sets the stage for the launch of Experimentation!
+excerpt: >-
+  PostHog 1.32.0 makes it easier to find what you want in the Persons & Groups
+  page, introduces vertical funnels and sets the stage for the launch of
+  Experimentation!
+category: Release notes
+topics:
+  - Product updates
 ---
 
 <blockquote class='warning-note'>

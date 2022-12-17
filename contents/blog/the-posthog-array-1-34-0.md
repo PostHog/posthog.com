@@ -5,10 +5,15 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ['Release notes', 'Product updates']
 featuredImage: ../images/blog/posthog-array-blog.png
 featuredImageType: full
-excerpt: PostHog 1.34.0 focuses on supporting collaboration. New features include a new default homepage for projects, smart names for all insights, an entire Data Management tool as well as support for horizontal scalability!
+excerpt: >-
+  PostHog 1.34.0 focuses on supporting collaboration. New features include a new
+  default homepage for projects, smart names for all insights, an entire Data
+  Management tool as well as support for horizontal scalability!
+category: Release notes
+topics:
+  - Product updates
 ---
 
 PostHog 1.34.0 focuses on supporting collaboration and helping you to find and share insights on PostHog. New features in this update include a new default homepage for projects, smart names for all insights and an entire Data Management tool!

@@ -7,8 +7,11 @@ showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/using-posthog/posthog-features.jpg
 featuredImageType: full
-author: ["andy-vandervell"]
-categories: ["Guides", "Product analytics"]
+author:
+  - andy-vandervell
+category: Guides
+topics:
+  - Product analytics
 ---
 
 PostHog is a growing platform.

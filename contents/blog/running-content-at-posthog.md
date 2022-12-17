@@ -5,10 +5,13 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["mo-shehu"]
+author:
+  - mo-shehu
 featuredImage: ../images/blog/running-content.png
 featuredImageType: full
-categories: ["Inside PostHog", "Startups"]
+category: Inside PostHog
+topics:
+  - Startups
 ---
 
 ## Why you need content

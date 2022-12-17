@@ -5,10 +5,13 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: [joe-martin]
+author:
+  - joe-martin
 featuredImage: ../images/blog/blog-generic-4.png
 featuredImageType: full
-categories: ["Guides", "Product analytics"]
+category: Guides
+topics:
+  - Product analytics
 ---
 
 There are lots of ways to do analytics. You can do SQL. You can do it in the cloud. You can not do it at all and hire an analytics agency or consultancy instead. But by far one of the most popular (and, we think, best) ways is _self-service_ analytics. 

@@ -5,9 +5,11 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Release notes", "Product updates"]
 featuredImage: ../images/blog/array/default.png
 featuredImageType: standard
+category: Release notes
+topics:
+  - Product updates
 ---
 
 This is our most exciting release to date. Here we go: 🎉
