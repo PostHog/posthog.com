@@ -23,7 +23,7 @@ export default function blogMenu() {
 export const query = graphql`
     {
         blogPosts: allMdx(filter: { isFuture: { eq: false }, fields: { slug: { regex: "/^/blog/" } } }) {
-            categories: group(field: frontmatter___categories) {
+            categories: group(field: frontmatter___category) {
                 category: fieldValue
                 posts: nodes {
                     fields {

@@ -102,7 +102,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                         slug
                     }
                 }
-                categories: group(field: frontmatter___topics) {
+                categories: group(field: frontmatter___tags) {
                     fieldValue
                 }
                 contributors: group(field: frontmatter___authorData___name) {
@@ -151,7 +151,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                         slug
                     }
                     frontmatter {
-                        categories
+                        category
                     }
                 }
             }
@@ -219,7 +219,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 sort: { order: DESC, fields: [frontmatter___date] }
                 filter: { isFuture: { eq: false }, frontmatter: { rootPage: { eq: "/blog" }, date: { ne: null } } }
             ) {
-                group(field: frontmatter___categories) {
+                group(field: frontmatter___category) {
                     category: fieldValue
                     totalCount
                 }
@@ -447,7 +447,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 
     result.data.blogPosts.nodes.forEach((node) => {
         const { slug } = node.fields
-        const postCategories = node.frontmatter.categories || []
+        const postCategory = node.frontmatter.category
         const tableOfContents = node.headings && formatToc(node.headings)
         createPage({
             path: replacePath(slug),
@@ -455,7 +455,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             context: {
                 id: node.id,
                 tableOfContents,
-                categories: postCategories.map((category) => ({ name: category, url: categories[category]?.url })),
+                categories: [{ name: postCategory, url: categories[postCategory]?.url }],
                 slug,
             },
         })

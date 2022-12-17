@@ -70,7 +70,7 @@ const BlogPostSidebar = ({ contributors, date, filePath, title, categories, loca
                     <PageViews pageViews={pageViews.toLocaleString()} />
                 </SidebarSection>
             )}
-            {categories?.length > 0 && (
+            {categories && (
                 <SidebarSection title="Topic(s)">
                     <Topics topics={categories} />
                 </SidebarSection>

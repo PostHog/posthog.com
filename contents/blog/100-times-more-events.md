@@ -1,6 +1,6 @@
 ---
 date: 2021-05-17
-title: 'Why we're giving away 100 times more cloud usage, free'
+title: "Why we're giving away 100 times more cloud usage, free"
 rootPage: /blog
 sidebar: Blog
 showTitle: true

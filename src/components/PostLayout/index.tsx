@@ -608,95 +608,100 @@ export default function PostLayout({
                             </div>
 
                             <div ref={bottomSidebarSection} className="lg:pt-6 !border-t-0 mt-auto sticky bottom-0">
-                                {view === 'Article' && toc?.length > 1 && !showTocButton && (
-                                    <div
-                                        style={{ visibility: showTocButton === null ? 'hidden' : 'visible' }}
-                                        className="px-4 lg:px-8 lg:pb-4 lg:block hidden"
-                                    >
-                                        <h4 className="text-black dark:text-white font-semibold opacity-25 m-0 mb-1 text-sm">
-                                            Jump to:
-                                        </h4>
-                                        <Scrollspy
-                                            offset={-50}
-                                            className="list-none m-0 p-0 flex flex-col"
-                                            items={tableOfContents?.map((navItem) => navItem.url)}
-                                            currentClassName="active-product"
+                                <div className="bg-tan dark:bg-primary">
+                                    {view === 'Article' && toc?.length > 1 && !showTocButton && (
+                                        <div
+                                            style={{ visibility: showTocButton === null ? 'hidden' : 'visible' }}
+                                            className="px-4 lg:px-8 lg:pb-4 lg:block hidden"
                                         >
-                                            {toc.map((navItem, index) => (
-                                                <li className="relative leading-none m-0" key={navItem.url}>
-                                                    <InternalSidebarLink
-                                                        url={navItem.url}
-                                                        name={navItem.value}
-                                                        depth={navItem.depth}
-                                                        className="hover:opacity-100 opacity-60 text-[14px] py-1 block relative active:top-[0.5px] active:scale-[.99]"
-                                                    />
-                                                </li>
-                                            ))}
-                                        </Scrollspy>
-                                    </div>
-                                )}
-                                <ul className="list-none pl-2 pr-3 py-1 flex mt-0 mb-10 lg:mb-0 border-t border-gray-accent-light border-dashed dark:border-gray-accent-dark items-center">
-                                    {view === 'Article' && toc?.length > 1 && showTocButton && (
-                                        <SidebarAction title="On this page">
-                                            <Popover
-                                                button={
-                                                    <span className={sidebarButtonClasses}>
-                                                        <InfoOutlined />
-                                                    </span>
-                                                }
+                                            <h4 className="text-black dark:text-white font-semibold opacity-25 m-0 mb-1 text-sm">
+                                                Jump to:
+                                            </h4>
+                                            <Scrollspy
+                                                offset={-50}
+                                                className="list-none m-0 p-0 flex flex-col"
+                                                items={tableOfContents?.map((navItem) => navItem.url)}
+                                                currentClassName="active-product"
                                             >
-                                                <div className="p-4 w-[250px] text-left">
-                                                    <h4 className="text-[13px] mb-2">On this page</h4>
-                                                    <Scrollspy
-                                                        offset={-50}
-                                                        className="list-none m-0 p-0 flex flex-col"
-                                                        items={tableOfContents?.map((navItem) => navItem.url)}
-                                                        currentClassName="active-product"
-                                                    >
-                                                        {toc.map((navItem, index) => (
-                                                            <li className="relative leading-none m-0" key={navItem.url}>
-                                                                <InternalSidebarLink
-                                                                    url={navItem.url}
-                                                                    name={navItem.value}
-                                                                    depth={navItem.depth}
-                                                                    className="hover:opacity-100 opacity-60 text-[14px] py-1 block relative active:top-[0.5px] active:scale-[.99]"
-                                                                />
-                                                            </li>
-                                                        ))}
-                                                    </Scrollspy>
-                                                </div>
-                                            </Popover>
-                                        </SidebarAction>
+                                                {toc.map((navItem, index) => (
+                                                    <li className="relative leading-none m-0" key={navItem.url}>
+                                                        <InternalSidebarLink
+                                                            url={navItem.url}
+                                                            name={navItem.value}
+                                                            depth={navItem.depth}
+                                                            className="hover:opacity-100 opacity-60 text-[14px] py-1 block relative active:top-[0.5px] active:scale-[.99]"
+                                                        />
+                                                    </li>
+                                                ))}
+                                            </Scrollspy>
+                                        </div>
                                     )}
-                                    {filePath && (
-                                        <>
-                                            <SidebarAction
-                                                href={`https://github.com/PostHog/posthog.com/tree/master/contents/${filePath}`}
-                                                title="Edit this page"
-                                            >
-                                                <Edit />
+                                    <ul className="list-none pl-2 pr-3 py-1 flex mt-0 mb-10 lg:mb-0 border-t border-gray-accent-light border-dashed dark:border-gray-accent-dark items-center">
+                                        {view === 'Article' && toc?.length > 1 && showTocButton && (
+                                            <SidebarAction title="On this page">
+                                                <Popover
+                                                    button={
+                                                        <span className={sidebarButtonClasses}>
+                                                            <InfoOutlined />
+                                                        </span>
+                                                    }
+                                                >
+                                                    <div className="p-4 w-[250px] text-left">
+                                                        <h4 className="text-[13px] mb-2">On this page</h4>
+                                                        <Scrollspy
+                                                            offset={-50}
+                                                            className="list-none m-0 p-0 flex flex-col"
+                                                            items={tableOfContents?.map((navItem) => navItem.url)}
+                                                            currentClassName="active-product"
+                                                        >
+                                                            {toc.map((navItem, index) => (
+                                                                <li
+                                                                    className="relative leading-none m-0"
+                                                                    key={navItem.url}
+                                                                >
+                                                                    <InternalSidebarLink
+                                                                        url={navItem.url}
+                                                                        name={navItem.value}
+                                                                        depth={navItem.depth}
+                                                                        className="hover:opacity-100 opacity-60 text-[14px] py-1 block relative active:top-[0.5px] active:scale-[.99]"
+                                                                    />
+                                                                </li>
+                                                            ))}
+                                                        </Scrollspy>
+                                                    </div>
+                                                </Popover>
                                             </SidebarAction>
+                                        )}
+                                        {filePath && (
+                                            <>
+                                                <SidebarAction
+                                                    href={`https://github.com/PostHog/posthog.com/tree/master/contents/${filePath}`}
+                                                    title="Edit this page"
+                                                >
+                                                    <Edit />
+                                                </SidebarAction>
+                                                <SidebarAction
+                                                    title="Raise an issue"
+                                                    href={`https://github.com/PostHog/posthog.com/issues/new?title=Feedback on: ${title}&body=**Issue with: /${filePath}**\n\n`}
+                                                >
+                                                    <Issue />
+                                                </SidebarAction>
+                                            </>
+                                        )}
+                                        <div className="ml-auto flex">
                                             <SidebarAction
-                                                title="Raise an issue"
-                                                href={`https://github.com/PostHog/posthog.com/issues/new?title=Feedback on: ${title}&body=**Issue with: /${filePath}**\n\n`}
+                                                className="hidden xl:block"
+                                                title="Toggle content width"
+                                                onClick={handleFullWidthContentChange}
                                             >
-                                                <Issue />
+                                                <ExpandDocument expanded={fullWidthContent} />
                                             </SidebarAction>
-                                        </>
-                                    )}
-                                    <div className="ml-auto flex">
-                                        <SidebarAction
-                                            className="hidden xl:block"
-                                            title="Toggle content width"
-                                            onClick={handleFullWidthContentChange}
-                                        >
-                                            <ExpandDocument expanded={fullWidthContent} />
-                                        </SidebarAction>
-                                        <SidebarAction className="ml-2" width="auto" title="Toggle dark mode">
-                                            <DarkModeToggle />
-                                        </SidebarAction>
-                                    </div>
-                                </ul>
+                                            <SidebarAction className="ml-2" width="auto" title="Toggle dark mode">
+                                                <DarkModeToggle />
+                                            </SidebarAction>
+                                        </div>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </aside>
