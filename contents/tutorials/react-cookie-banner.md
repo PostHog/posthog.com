@@ -287,9 +287,9 @@ To make sure everything works, try the following steps:
 - Reload the page.
 - Check that the banner doesn’t load.
 
-If all that works, you’ve done it. You’ve set up a basic tracking cookies opt out banner in React. From here, you can customize it to your needs (such as adding other cookies) and the rest of your site’s design.
+If all that works, you’ve done it. You’ve set up a basic tracking cookies consent banner in React. From here, you can customize it to your needs (such as adding other cookies) and the rest of your site’s design.
 
-## Beyond opt out banners
+## Beyond cookie consent banners
 
 If you’re interested in going further into tracking, data management, and cookies, check out these other resources:
 
