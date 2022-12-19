@@ -465,9 +465,7 @@ export const query = graphql`
                     eyes
                     plus1
                 }
-                body: childMdx {
-                    excerpt(pruneLength: 300)
-                }
+                body
                 labels {
                     name
                 }
@@ -485,9 +483,7 @@ export const query = graphql`
                     url
                     username
                 }
-                body: childMdx {
-                    excerpt(pruneLength: 300)
-                }
+                body
                 updated_at(formatString: "MMMM DD, YYYY")
             }
         }
