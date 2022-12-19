@@ -2,6 +2,7 @@ import { CallToAction } from 'components/CallToAction'
 import Link from 'components/Link'
 import { Reactions } from 'components/Roadmap/UnderConsideration'
 import React from 'react'
+import Markdown from 'markdown-to-jsx'
 
 interface IUser {
     url: string
@@ -16,9 +17,7 @@ interface IGitHubTooltip {
         eyes: number
         plus1: number
     }
-    body: {
-        excerpt: string
-    }
+    body: string
     user: IUser
     labels: [
         {
@@ -66,9 +65,53 @@ export default function GitHubTooltip({
         <div className="p-2 flex">
             <div className="max-w-[300px] flex flex-col">
                 <h5 className="m-0">{title}</h5>
-                <p className="m-0 mt-1 text-sm mb-4">
-                    {body?.excerpt.replace('Is your feature request related to a problem?', '').trim()}
-                </p>
+                <div className="m-0 mt-1 text-sm mb-4 max-h-[250px] overflow-hidden relative text-">
+                    <Markdown
+                        options={{
+                            disableParsingRawHTML: true,
+                            overrides: {
+                                h1: {
+                                    props: {
+                                        className: 'text-base my-1',
+                                    },
+                                },
+                                h2: {
+                                    props: {
+                                        className: 'text-base my-1',
+                                    },
+                                },
+                                h3: {
+                                    props: {
+                                        className: 'text-base my-1',
+                                    },
+                                },
+                                h4: {
+                                    props: {
+                                        className: 'text-base my-1',
+                                    },
+                                },
+                                h5: {
+                                    props: {
+                                        className: 'text-base my-1',
+                                    },
+                                },
+                                p: {
+                                    props: {
+                                        className: 'text-sm my-1',
+                                    },
+                                },
+                                li: {
+                                    props: {
+                                        className: 'text-sm my-1',
+                                    },
+                                },
+                            },
+                        }}
+                    >
+                        {body}
+                    </Markdown>
+                    <div className="absolute inset-0 h-full w-full bg-gradient-to-t from-white/100 via-white/50 to-white/0" />
+                </div>
                 <CallToAction className="mb-1 mt-auto" size="xs" to={url}>
                     Continue reading on GitHub
                 </CallToAction>
