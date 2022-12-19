@@ -75,7 +75,7 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
                                     <Tooltip
                                         placement="top-end"
                                         className="whitespace-nowrap"
-                                        title={
+                                        content={
                                             <div className="flex space-x-1 items-center">
                                                 <span className="text-xs">{name}</span>
                                                 <span className="w-[14px] flex">

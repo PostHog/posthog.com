@@ -161,6 +161,24 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     type AshbyJob implements Node {
       customFields: [AshbyJobCustomFields],
     }
+    type GitHubUser  {
+      username: String,
+      avatar: String,
+      url: String
+    }
+    type PostHogIssue implements Node {
+      user: GitHubUser
+      url: String
+      title: String
+      number: Int
+      comments: Int
+    }
+    type PostHogPull implements Node {
+      user: GitHubUser
+      url: String
+      title: String
+      number: Int
+    }
   `)
     createTypes([
         schema.buildObjectType({

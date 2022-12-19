@@ -1640,10 +1640,6 @@
                             "name": "Intercom Connector"
                         },
                         {
-                            "url": "/docs/apps/migrator-3000",
-                            "name": "Migrator 3000"
-                        },
-                        {
                             "url": "/docs/apps/pagerduty-connector",
                             "name": "PagerDuty Connector"
                         },
@@ -2024,10 +2020,6 @@
             "url": "/apps/ingestion-alert"
         },
         {
-            "name": "Migrator 3000",
-            "url": "/apps/migrator-3000"
-        },
-        {
             "name": "n8n Connector",
             "url": "/apps/n8n"
         },
@@ -2126,6 +2118,32 @@
         {
             "name": "Zendesk Connector",
             "url": "/apps/zendesk-connector"
+        }
+    ],
+    "community": [
+        {
+            "name": "Dashboard",
+            "url": "/community"
+        },
+        {
+            "name": "Questions",
+            "url": "/questions"
+        },
+        {
+            "name": "Roadmap",
+            "url": "/roadmap"
+        },
+        {
+            "name": "Changelog",
+            "url": "/roadmap/changelog"
+        },
+        {
+            "name": "Partners",
+            "url": "/partners"
+        },
+        {
+            "name": "Contributors",
+            "url": "/contributors"
         }
     ]
 }

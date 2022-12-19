@@ -15,11 +15,11 @@ This document covers:
 
 At PostHog, we store JSON data as `VARCHAR` (or `String`) columns.
 
-Relevant properties are then parsed out from query-time using [`JSONExtract` functions](https://clickhouse.com/docs/en/sql-reference/functions/json-functions/#jsonhasjson-indices_or_keys).
+Relevant properties are then parsed out from the `String` columns at query-time using [`JSONExtract` functions](https://clickhouse.com/docs/en/sql-reference/functions/json-functions/#jsonhasjson-indices_or_keys).
 
 This has the following problems:
 1. These columns end up really large even after compression, meaning slow I/O
-2. It requires CPU parse properties
+2. It requires CPU to parse properties
 3. Data is not stored optimally. As an example, JSON keys are frequently repeated and numbers are stored as strings.
 
 ### Compressing JSON

@@ -3,6 +3,8 @@ import { GatsbyNode } from 'gatsby'
 import path from 'path'
 import slugify from 'slugify'
 import fetch from 'node-fetch'
+const Slugger = require('github-slugger')
+const markdownLinkExtractor = require('markdown-link-extractor')
 
 export const createPages: GatsbyNode['createPages'] = async ({ actions: { createPage }, graphql }) => {
     const BlogPostTemplate = path.resolve(`src/templates/BlogPost.js`)
@@ -52,6 +54,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     fields {
                         slug
                     }
+                    rawBody
                 }
             }
             apidocs: allApiEndpoint {
@@ -71,6 +74,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     fields {
                         slug
                     }
+                    rawBody
                 }
             }
             manual: allMdx(filter: { fields: { slug: { regex: "/^/manual/" } }, frontmatter: { title: { ne: "" } } }) {
@@ -83,6 +87,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     fields {
                         slug
                     }
+                    rawBody
                 }
             }
             tutorials: allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }) {
@@ -273,6 +278,9 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     function createPosts(data, menu, template, breadcrumbBase, context) {
         const menuFlattened = flattenMenu(result.data.sidebars.childSidebarsJson[menu])
         data.forEach((node) => {
+            const links =
+                node?.rawBody &&
+                markdownLinkExtractor(node?.rawBody)?.map((url) => url.replace(/https:\/\/posthog.com|#.*/gi, ''))
             const slug = node.fields?.slug || node.url
             let next = null
             let previous = null
@@ -302,6 +310,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     breadcrumbBase: breadcrumbBase || menuFlattened[0],
                     tableOfContents,
                     slug,
+                    links,
                     searchFilter: menu,
                     ...(context ? context(node) : {}),
                 },
@@ -310,11 +319,13 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     }
 
     function formatToc(headings) {
+        // need to use slugger for header links to match
+        const slugger = new Slugger()
         return headings.map((heading) => {
             return {
                 ...heading,
                 depth: heading.depth - 2,
-                url: slugify(heading.value),
+                url: slugger.slug(heading.value),
             }
         })
     }

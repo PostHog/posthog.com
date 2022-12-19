@@ -271,24 +271,26 @@ Sometimes, performance might matter to you so much that you never want an HTTP r
 
 ### Group analytics
 
-PostHog 1.31.0 introduced support for [group analytics](/docs/user-guides/group-analytics), which allows you to associate users and events with larger groups (teams, organizations, etc.). This feature requires a posthog-python version of `1.4.3` or above.
+Group analytics allows you to associate an event with a group (e.g. teams, organizations, etc.). Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.
 
 > **Note: ** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
 
 -   Capture an event and associate it with a group
 
 ```python
-posthog.capture('[distinct id]', 'some event', groups={'company': 'id:5'})
+posthog.capture('[distinct id]', 'some event', groups={'company': '42dlsfj23f'})
 ```
 
 -   Update properties on a group
 
 ```python
-posthog.group_identify('company', 'id:10', {
-    'company_name': 'company_name',
+posthog.group_identify('company', '42dlsfj23f', {
+    'name': 'Awesome Inc.',
     'employees': 11
 })
 ```
+
+The `name` is a special property which is used in the PostHog UI for the name of the Group. If you don't specify a `name` property, the group ID will be used instead.
 
 ### Sending page views
 
