@@ -320,7 +320,7 @@ export function Footer(): JSX.Element {
                 <div className="relative -top-6">
                     <Link
                         to="/"
-                        className="left-[calc(50%-40px)] w-20 h-12 inline-flex justify-center items-center absolute z-10 rounded !bg-tan hover:!bg-gray-accent-light/90 px-4 active:!bg-gray-accent-light/100 dark:!hover:gray-accent-dark border border-dashed border-gray-accent-light dark:border-gray-accent-dark hover:scale-[1.02] active:top-[1px] active:scale-[.99] transition-all"
+                        className="left-[calc(50%-40px)] w-20 h-12 inline-flex justify-center items-center absolute z-10 rounded dark:!bg-primary !bg-tan hover:!bg-gray-accent-light/90 px-4 active:!bg-gray-accent-light/100 dark:!hover:gray-accent-dark border border-dashed border-gray-accent-light dark:border-gray-accent-dark hover:scale-[1.02] active:top-[1px] active:scale-[.99] transition-all"
                     >
                         <span className="inline-block">{ProductIcons.posthogMonochrome}</span>
                     </Link>

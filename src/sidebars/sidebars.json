@@ -2119,5 +2119,31 @@
             "name": "Zendesk Connector",
             "url": "/apps/zendesk-connector"
         }
+    ],
+    "community": [
+        {
+            "name": "Dashboard",
+            "url": "/community"
+        },
+        {
+            "name": "Questions",
+            "url": "/questions"
+        },
+        {
+            "name": "Roadmap",
+            "url": "/roadmap"
+        },
+        {
+            "name": "Changelog",
+            "url": "/roadmap/changelog"
+        },
+        {
+            "name": "Partners",
+            "url": "/partners"
+        },
+        {
+            "name": "Contributors",
+            "url": "/contributors"
+        }
     ]
 }
