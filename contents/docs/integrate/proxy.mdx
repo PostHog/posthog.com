@@ -56,5 +56,11 @@ Community Slack user CJ Enright shared their AWS CDK code for creating this reve
 
 You can view that here: https://gist.github.com/pauldambra/9af02d9ea42ffafcfc7c01dc38039958
 
-### Summary
-That's it! A few resources here will go a long way. Reach out if you hit any snags!
+## Cloudflare Proxy
+
+If you're using Cloudflare, you can use their proxy to forward requests to PostHog Cloud.
+
+1. Create a new CNAME record for your domain. It should point to `app.posthog.com` or `eu.posthog.com` depending on your region, and have proxy enabled.
+      - e.g. `CNAME, e, app.posthog.com, proxy enabled`
+
+TODO: add in any extra configuration options needed e.g. disablying caching
