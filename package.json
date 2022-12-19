@@ -183,7 +183,7 @@
         "hastscript": "^7.0.2",
         "husky": "^4.2.5",
         "jest": "^27.0.6",
-        "lint-staged": "^10.2.12",
+        "lint-staged": "^10.5.4",
         "mem": "^5.1.1",
         "postcss": "^8.4.14",
         "prettier": "^2.1.0",
@@ -201,12 +201,8 @@
             "pre-commit": "node ./scripts/mdxImportGen && git add src/mdxGlobalComponents.js && lint-staged"
         }
     },
-    "workspaces": [
-        "plugins/*"
-    ],
     "lint-staged": {
         "*.{html,js,ts,tsx,json,yml,css,scss}": "prettier --write",
         "*.{js,ts,tsx}": "eslint"
-    },
-    "packageManager": "yarn@3.2.2"
+    }
 }
