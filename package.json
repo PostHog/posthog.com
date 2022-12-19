@@ -8,9 +8,7 @@
         "type": "git",
         "url": "https://github.com/PostHog/posthog.com"
     },
-    "keywords": [
-        "gatsby"
-    ],
+    "keywords": ["gatsby"],
     "private": true,
     "scripts": {
         "build": "gatsby build",
@@ -202,7 +200,7 @@
         }
     },
     "lint-staged": {
-        "*.{html,js,ts,tsx,json,yml,css,scss}": "pnpm prettier --write",
-        "*.{js,ts,tsx}": "pnpm eslint"
+        "*.{html,js,ts,tsx,json,yml,css,scss}": "prettier --write",
+        "*.{js,ts,tsx}": "eslint"
     }
 }
