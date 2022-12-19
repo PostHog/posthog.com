@@ -3,9 +3,9 @@ import PostLayout from 'components/PostLayout'
 import { SEO } from 'components/seo'
 import { graphql } from 'gatsby'
 import { createHubSpotContact } from 'lib/utils'
-import { useTopicMenu } from 'lib/useTopicMenu'
 import React from 'react'
 import { FullQuestion } from 'squeak-react'
+import { community } from '../../sidebars/sidebars.json'
 
 import type { Question } from 'components/Questions'
 import QuestionSidebar from 'components/Questions/QuestionSidebar'
@@ -24,14 +24,12 @@ type QuestionPageProps = {
 }
 
 export default function QuestionPage(props: QuestionPageProps) {
-    const menu = useTopicMenu()
-
     return (
         <Layout>
             <SEO title={`${props.data.question.subject} - PostHog`} />
             <PostLayout
                 title={props.data.question.subject}
-                menu={menu}
+                menu={community}
                 sidebar={<QuestionSidebar question={props.data.question} />}
                 hideSurvey
             >

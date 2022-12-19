@@ -7,8 +7,8 @@ import { SEO } from 'components/seo'
 import { squeakProfileLink } from 'lib/utils'
 import { Squeak } from 'squeak-react'
 import { graphql } from 'gatsby'
-import { useTopicMenu } from 'lib/useTopicMenu'
 import Link from 'components/Link'
+import { community } from '../../../sidebars/sidebars.json'
 
 interface ITopic {
     label: string
@@ -47,13 +47,11 @@ const TopicSidebar = () => {
 }
 
 export default function SqueakTopics({ data }: IProps) {
-    const menu = useTopicMenu()
-
     return (
         <>
             <SEO title={`${data.squeakTopic.label} - PostHog`} />
             <Layout>
-                <PostLayout title={data.squeakTopic.label} menu={menu} sidebar={<TopicSidebar />} hideSurvey>
+                <PostLayout title={data.squeakTopic.label} menu={community} sidebar={<TopicSidebar />} hideSurvey>
                     <section className="my-8 lg:my-0">
                         <div className="mb-4">
                             <Link to="/questions" className="text-gray hover:text-gray-accent-light">

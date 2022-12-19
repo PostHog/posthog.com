@@ -1,19 +1,18 @@
 import React, { useState } from 'react'
 
-import { useTopicMenu } from 'lib/useTopicMenu'
 import { Listbox } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/outline'
 import useSWRInfinite from 'swr/infinite'
 
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
+import { community } from '../../sidebars/sidebars.json'
 import PostLayout from 'components/PostLayout'
 import SidebarSearchBox from 'components/Search/SidebarSearchBox'
 import QuestionsTable from 'components/Questions/QuestionsTable'
 import QuestionForm from 'components/Questions/QuestionForm'
 
 export default function Questions() {
-    const menu = useTopicMenu()
     const [sortBy, setSortBy] = useState<'newest' | 'activity' | 'popular'>('newest')
 
     const { data, size, setSize, isLoading, mutate } = useSWRInfinite<any[]>(
@@ -33,7 +32,7 @@ export default function Questions() {
 
     return (
         <Layout>
-            <PostLayout title={'Questions'} menu={menu} hideSurvey>
+            <PostLayout title={'Questions'} menu={community} hideSurvey>
                 <SEO title={'Questions - PostHog'} />
 
                 <div className="max-w-6xl mx-auto space-y-8 my-8">

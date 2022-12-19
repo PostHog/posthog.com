@@ -2,10 +2,10 @@ import Layout from 'components/Layout'
 import PostLayout from 'components/PostLayout'
 import { SEO } from 'components/seo'
 import { createHubSpotContact } from 'lib/utils'
-import { useTopicMenu } from 'lib/useTopicMenu'
 import React from 'react'
 import { FullQuestion } from 'squeak-react'
 import useSWR from 'swr'
+import { community } from '../../sidebars/sidebars.json'
 
 import type { Question } from 'components/Questions'
 import QuestionSidebar from 'components/Questions/QuestionSidebar'
@@ -18,7 +18,6 @@ type QuestionPageProps = {
 }
 
 export default function QuestionPage(props: QuestionPageProps) {
-    const menu = useTopicMenu()
     const { data: question } = useSWR<Question>(
         `${process.env.GATSBY_SQUEAK_API_HOST}/api/v1/questions?organizationId=${process.env.GATSBY_SQUEAK_ORG_ID}&permalink=${props.params.permalink}`,
         (url) =>
@@ -32,7 +31,7 @@ export default function QuestionPage(props: QuestionPageProps) {
             <SEO title={`${question?.subject} - PostHog`} />
             <PostLayout
                 title={question?.subject || ''}
-                menu={menu}
+                menu={community}
                 sidebar={<QuestionSidebar question={question} />}
                 hideSurvey
             >
