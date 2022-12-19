@@ -57,6 +57,8 @@ const deployment = [
     { name: 'Hobby', to: '/docs/self-host/deploy/hobby', icon: 'docker', badge: undefined },
 ]
 
+iaerst
+
 const libraries = [
     { name: 'JavaScript', to: '/docs/integrate/client/js', icon: 'js' },
     { name: 'NodeJS', to: '/docs/integrate/server/node', icon: 'nodejs' },
