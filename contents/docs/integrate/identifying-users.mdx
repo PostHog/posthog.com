@@ -75,10 +75,14 @@ For when a user signs up to your service you may trigger some events on the fron
 ### Example login flow
 
 On the backend (example with Node.JS) you receive the signup / login code and track the user
+
 ```js
 const user = await createUser();
-posthog.identify(user.id, {
-  email: user.email
+posthog.identify({
+  distinctId: user.id,
+  properties: {
+    email: user.email
+  }
 })
 ```
 
