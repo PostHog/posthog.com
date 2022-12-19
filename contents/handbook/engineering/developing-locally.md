@@ -346,6 +346,10 @@ With PyCharm's built in support for Django, it's fairly easy to setup debugging 
 3. Point PyCharm to the project root (`posthog/`) and settings (`posthog/posthog/settings.py`) file.
 4. Add these environment variables
 
+## Extra: Working with billing and running in Cloud mode locally
+
+To work with the billing service, and to run a version of PostHog Cloud locally, check out [this useful guide](https://github.com/PostHog/billing/blob/main/docs/running-posthog-with-billing.md) (internal only)
+
 ```
 DEBUG=1;
 KAFKA_HOSTS=kafka:9092;
