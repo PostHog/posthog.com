@@ -181,7 +181,7 @@
         "eslint": "^7.9.0",
         "eslint-plugin-react": "^7.20.6",
         "hastscript": "^7.0.2",
-        "husky": "^4.2.5",
+        "husky": "^8.0.2",
         "jest": "^27.0.6",
         "lint-staged": "^10.5.4",
         "mem": "^5.1.1",
@@ -198,11 +198,11 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "node ./scripts/mdxImportGen && git add src/mdxGlobalComponents.js && lint-staged"
+            "pre-commit": "node ./scripts/mdxImportGen && git add src/mdxGlobalComponents.js && pnpm lint-staged"
         }
     },
     "lint-staged": {
-        "*.{html,js,ts,tsx,json,yml,css,scss}": "prettier --write",
-        "*.{js,ts,tsx}": "eslint"
+        "*.{html,js,ts,tsx,json,yml,css,scss}": "pnpm prettier --write",
+        "*.{js,ts,tsx}": "pnpm eslint"
     }
 }
