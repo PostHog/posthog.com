@@ -78,8 +78,6 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             internal: {
                 type: `PostHogIssue`,
                 contentDigest: createContentDigest(data),
-                content: body,
-                mediaType: 'text/markdown',
             },
             ...data,
         }
@@ -112,8 +110,6 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             internal: {
                 type: `PostHogPull`,
                 contentDigest: createContentDigest(data),
-                content: body,
-                mediaType: 'text/markdown',
             },
             ...data,
         }
