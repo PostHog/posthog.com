@@ -17,9 +17,9 @@ export const QuestionsTable = ({ questions, isLoading, setSize }: QuestionsTable
     return (
         <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-                <div className="overflow-hidden border border-dashed border-gray-accent-light">
+                <div className="overflow-hidden border border-dashed border-gray-accent-light dark:border-gray-accent-dark">
                     <table className="min-w-full">
-                        <thead className="bg-gray-50 border-b border-gray-accent-light border-dashed">
+                        <thead className="bg-gray-50 border-b border-gray-accent-light border-dashed dark:border-gray-accent-dark">
                             <tr className="">
                                 <th
                                     scope="col"
@@ -38,7 +38,7 @@ export const QuestionsTable = ({ questions, isLoading, setSize }: QuestionsTable
                                 </th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-gray-accent-light divide-dashed">
+                        <tbody className="divide-y divide-gray-accent-light divide-dashed dark:divide-gray-accent-dark">
                             {questions.length > 0
                                 ? questions.map((question) => {
                                       const latestReply = question.replies[question.replies.length - 1]
@@ -114,16 +114,16 @@ export const QuestionsTable = ({ questions, isLoading, setSize }: QuestionsTable
                                 : new Array(10).fill(0).map((_, i) => (
                                       <tr key={i} className="">
                                           <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 sm:pl-6 space-y-2">
-                                              <div className="w-60 w-3/4 h-4 bg-gray-accent-light rounded-sm animate-pulse"></div>
-                                              <div className="w-96 w-3/4 h-4 bg-gray-accent-light rounded-sm animate-pulse"></div>
-                                              <div className="w-36 w-3/4 h-4 bg-gray-accent-light rounded-sm animate-pulse"></div>
+                                              <div className="w-96 w-3/4 h-4 bg-gray-accent-light dark:bg-gray-accent-dark rounded-sm animate-pulse"></div>
+                                              <div className="w-60 w-3/4 h-4 bg-gray-accent-light dark:bg-gray-accent-dark rounded-sm animate-pulse"></div>
+                                              <div className="w-36 w-3/4 h-4 bg-gray-accent-light dark:bg-gray-accent-dark rounded-sm animate-pulse"></div>
                                           </td>
 
                                           <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-6 text-gray font-semibold animate-pulse">
-                                              <div className="w-3/4 h-4 bg-gray-accent-light rounded-sm animate-pulse"></div>
+                                              <div className="w-3/4 h-4 bg-gray-accent-light dark:bg-gray-accent-dark rounded-sm animate-pulse"></div>
                                           </td>
                                           <td className="whitespace-nowrap p-4 text-sm text-gray-500 text-gray font-semibold animate-pulse">
-                                              <div className="w-3/4 h-4 bg-gray-accent-light rounded-sm animate-pulse"></div>
+                                              <div className="w-3/4 h-4 bg-gray-accent-light dark:bg-gray-accent-dark rounded-sm animate-pulse"></div>
                                           </td>
                                       </tr>
                                   ))}
@@ -131,7 +131,7 @@ export const QuestionsTable = ({ questions, isLoading, setSize }: QuestionsTable
                     </table>
                 </div>
 
-                <div className="py-2 border-l border-b border-r border-gray-accent-light border-dashed flex justify-center item-center">
+                <div className="py-2 border-l border-b border-r border-gray-accent-light dark:border-gray-accent-dark border-dashed flex justify-center item-center">
                     <button
                         className="py-2 px-4 hover:bg-gray-accent-light text-gray font-semibold rounded"
                         onClick={() => setSize((size) => size + 1)}

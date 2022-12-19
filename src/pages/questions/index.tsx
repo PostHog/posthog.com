@@ -53,7 +53,7 @@ export default function Questions() {
                                 <div className="ml-auto flex items-center space-x-3">
                                     <Listbox as="div" className="relative" value={sortBy} onChange={setSortBy}>
                                         <Listbox.Label className="sr-only">Sort by</Listbox.Label>
-                                        <Listbox.Button className="relative w-32 flex items-center py-2 px-3 text-left bg-white/50 rounded shadow-lg cursor-pointer text-sm text-gray border border-gray/30">
+                                        <Listbox.Button className="relative w-32 flex items-center py-2 px-3 text-left bg-white/50 rounded shadow-lg cursor-pointer text-sm text-gray border border-gray/30 dark:bg-gray-accent-dark">
                                             <span className="block truncate">
                                                 {sortBy === 'newest'
                                                     ? 'Newest'
@@ -65,7 +65,7 @@ export default function Questions() {
                                             <ChevronDownIcon className="ml-auto w-4 h-4 pointer-events-none text-gray-accent-light" />
                                         </Listbox.Button>
 
-                                        <Listbox.Options className="absolute z-10 w-full text-gray mt-1 py-1 text-sm border border-gray/30 overflow-auto text-base bg-white rounded shadow-lg max-h-60 focus:outline-none sm:text-sm list-none p-0">
+                                        <Listbox.Options className="absolute z-10 w-full text-gray mt-1 py-1 text-sm border border-gray/30 overflow-auto text-base bg-white dark:bg-gray-accent-dark dark:text-white rounded shadow-lg max-h-60 focus:outline-none sm:text-sm list-none p-0">
                                             {['Newest', 'Activity', 'Popular'].map((option) => (
                                                 <Listbox.Option
                                                     key={option}
