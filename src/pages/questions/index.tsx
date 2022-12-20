@@ -6,7 +6,7 @@ import useSWRInfinite from 'swr/infinite'
 
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
-import { community } from '../../sidebars/sidebars.json'
+import communityMenu from 'sidebars/community.json'
 import PostLayout from 'components/PostLayout'
 import SidebarSearchBox from 'components/Search/SidebarSearchBox'
 import QuestionsTable from 'components/Questions/QuestionsTable'
@@ -32,7 +32,7 @@ export default function Questions() {
 
     return (
         <Layout>
-            <PostLayout title={'Questions'} menu={community} hideSurvey>
+            <PostLayout title={'Questions'} menu={communityMenu} hideSurvey>
                 <SEO title={'Questions - PostHog'} />
 
                 <div className="max-w-6xl mx-auto space-y-8 my-8">

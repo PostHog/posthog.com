@@ -11,6 +11,8 @@ import { flattenMenu } from './utils'
 import fetch from 'node-fetch'
 import { GatsbyNode } from 'gatsby'
 
+import { handbook, docs } from '../src/sidebars'
+
 export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
     const { data } = await graphql(`
         query {
@@ -70,46 +72,6 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
                         featuredImage {
                             absolutePath
                         }
-                    }
-                }
-            }
-            sidebars: file(absolutePath: { regex: "//sidebars/sidebars.json$/" }) {
-                childSidebarsJson {
-                    handbook {
-                        children {
-                            children {
-                                children {
-                                    name
-                                    url
-                                }
-                                name
-                                url
-                            }
-                            name
-                            url
-                        }
-                        name
-                        url
-                    }
-                    docs {
-                        children {
-                            children {
-                                children {
-                                    name
-                                    url
-                                }
-                                name
-                                url
-                            }
-                            name
-                            url
-                        }
-                        name
-                        url
-                    }
-                    apps {
-                        name
-                        url
                     }
                 }
             }
@@ -224,9 +186,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
         })
     }
 
-    const handbookMenu = data.sidebars.childSidebarsJson.handbook
-    const docsMenu = data.sidebars.childSidebarsJson.docs
-    const docsHandbookMenus = flattenMenu([...handbookMenu, ...docsMenu])
+    const docsHandbookMenus = flattenMenu([...handbook, ...docs])
 
     // Docs and Handbook OG
     for (const post of data.docsHandbook.nodes) {

@@ -5,7 +5,7 @@ import Link from 'components/Link'
 import { SEO } from 'components/seo'
 import { graphql } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import { docs } from '../../sidebars/sidebars.json'
+import docs from 'sidebars/docs.json'
 import PostLayout from 'components/PostLayout'
 
 const CardView = ({ data }) => {

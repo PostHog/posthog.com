@@ -2,9 +2,9 @@
     "compilerOptions": {
         "baseUrl": "./src",
         "paths": {
-            "types/*": ["./types/*"]
+            "types/*": ["./types/*"],
+            "sidebars/*": ["./sidebars/*"]
         },
-        // https://www.sitepoint.com/react-with-typescript-best-practices/
         "allowJs": true, // Allow JavaScript files to be compiled
         "skipLibCheck": true, // Skip type checking of all declaration files
         "esModuleInterop": true, // Disables namespace imports (import * as fs from "fs") and enables CJS/AMD/UMD style imports (import fs from "fs")

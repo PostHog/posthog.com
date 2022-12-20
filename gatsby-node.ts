@@ -26,13 +26,14 @@ export const onCreatePage: GatsbyNode['onCreatePage'] = async ({ page, actions }
 export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ stage, actions }) => {
     actions.setWebpackConfig({
         resolve: {
-            extensions: ['.js', '.ts', '.tsx'],
+            extensions: ['.js', '.ts', '.tsx', '.json'],
             alias: {
                 '~': path.resolve(__dirname, 'src'),
                 lib: path.resolve(__dirname, 'src', 'lib'),
                 types: path.resolve(__dirname, 'src', 'types'),
                 images: path.resolve(__dirname, 'src', 'images'),
                 components: path.resolve(__dirname, 'src', 'components'),
+                sidebars: path.resolve(__dirname, 'src', 'sidebars'),
                 logic: path.resolve(__dirname, 'src', 'logic'),
             },
         },

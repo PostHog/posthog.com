@@ -6,6 +6,7 @@ import Blog from './Blog'
 import SearchIconButton from 'components/Search/SearchIconButton'
 import CallToAction from '../CallToAction'
 import { Wrapper } from '../Wrapper'
+import handbookMenu from 'sidebars/handbook.json'
 
 interface HandbookNav {
     title: string
@@ -69,16 +70,14 @@ const Handbook = ({ menu }: { menu: HandbookNav[] }) => {
 }
 
 export default function Docs({ referenceElement }: { referenceElement: HTMLDivElement }) {
-    const { teamMembers, jobs, sidebars } = useStaticQuery(query)
+    const { teamMembers, jobs } = useStaticQuery(query)
 
-    const handbookMenu = sidebars.childSidebarsJson.handbook
-        .slice(1, sidebars.childSidebarsJson.handbook.length)
-        .map(({ name, url, children }: { name: string; url: string; children: { name: string; url: string }[] }) => {
-            return {
-                title: name,
-                url: url || children.filter(({ url }) => url)[0].url,
-            }
-        })
+    const menu = handbookMenu.slice(1).map(({ name, url, children }) => {
+        return {
+            title: name,
+            url: url || (children?.filter(({ url }) => url)[0].url as string),
+        }
+    })
 
     return (
         <Wrapper
@@ -121,7 +120,7 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                                 </Block>
                             </div>
                         </div>
-                        <Handbook menu={handbookMenu} />
+                        <Handbook menu={menu} />
                     </div>
                     <Blog />
                 </div>
@@ -140,18 +139,6 @@ const query = graphql`
         }
         jobs: allAshbyJobPosting(filter: { isListed: { eq: true } }) {
             totalCount
-        }
-        sidebars: file(absolutePath: { regex: "//sidebars/sidebars.json$/" }) {
-            childSidebarsJson {
-                handbook {
-                    children {
-                        name
-                        url
-                    }
-                    name
-                    url
-                }
-            }
         }
     }
 `

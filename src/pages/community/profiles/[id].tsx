@@ -1,7 +1,7 @@
 import React from 'react'
 import { PageProps } from 'gatsby'
 
-import { docs } from '../../../sidebars/sidebars.json'
+import community from 'sidebars/community.json'
 
 import SEO from 'components/seo'
 import Layout from 'components/Layout'
@@ -149,7 +149,7 @@ export default function ProfilePage({ params }: PageProps) {
                                 { name: 'Community', url: '/questions' },
                                 { name: 'Profile', url: `/community/profiles/${id}` },
                             ]}
-                            menu={docs}
+                            menu={community}
                             sidebar={<ProfileSidebar setEditModalOpen={setEditModalOpen} profile={profile} />}
                             hideSurvey
                         >

@@ -6,8 +6,7 @@ import DeployOption from 'components/DeployOption'
 import { StaticImage } from 'gatsby-plugin-image'
 import Link from 'components/Link'
 import PostLayout from 'components/PostLayout'
-import { docs } from '../sidebars/sidebars.json'
-import SearchBox from 'components/Search/SearchBox'
+import docs from 'sidebars/docs.json'
 
 const quickLinks = [
     {
