@@ -7,35 +7,33 @@ showTitle: true
 
 ## Setting properties
 
-To update the properties of a user you can use `identify`, `set`, `set_once`, and `$unset`. Depending on the integration library the actual function calls look a bit different, but internally they all work the same way.
+The easiest way to set properties is to add the properties to the `identify` function during the initial login.
 
-- `identify`: Identify the user and set the properties
+- Identify the user and set the user properties
 ```js
 posthog.identify('user_id', {
-    name: 'James PostHog', // also sets the display name for the PostHog UI
+    name: 'James PostHog', // also sets the display name in the PostHog UI
     email: 'hey@posthog.com',
 })
+
+// { name: 'James PostHog', email: 'hey@posthog.com' }
 ```
 
-- `set`: Set the property even if the property exists on the person
+To update the properties of a user you can use `set`, `set_once`, and `$unset`. Depending on the integration library the actual function calls look a bit different, but internally they all work the same way.
+
+- `set`: Set the property even if the property exists on the user
 ```js
 posthog.people.set( { location: 'London'  })
 
 // { location: 'London' }
 ```
 
-- `set_once`: Update the property if the property does not exist on the person
+- `set_once`: Set the property if the property does not exist on the user
 ```js
 posthog.people.set_once( { initial_location: 'Rome'})
 posthog.people.set_once( { initial_location: 'London'})
 
 // { initial_location: 'Rome' }
-```
-
-// TODO: the unset property doesn't seem to exist?
-- `unset`: Remove a property from a user if exists
-```js
-posthog.people.unset('location')
 ```
 
 All these methods can be used in properties with normal event capture:
@@ -53,7 +51,7 @@ posthog.capture(
 
 ## When to use `set` and `set_once`?
 
-Use `set` when we want the value should always be the newest one. For example, to update the email for a user.
+Use `set` when we want the value to be the most recently sent value. For example, to update the email for a user.
 
 Use `set_once` when we want to set the first value and it to never be updated afterwards, e.g. the first URL that referred a user to the site.
 
@@ -72,40 +70,67 @@ posthog.people.set_once( { initial_location: 'Rome'  })
 // { location: 'London' }
 ```
 
-Sometimes we might want to use both `set` and `set_once` usage. Imagine, when we have some heuristics that help us determine a value, but users can also specify it. In these cases it might be beneficial to use `set_once` for the heuristically computed value and `set` for user specified value. This way we can ensure that the user specified value is always used, but if the user doesn't specify it, we can still use the heuristically computed value.
+Note: that we ignore the event timestamps and just process everything at ingestion time.
+
+Sometimes we might want to mix `set` and `set_once` usage. Imagine, when we have some heuristics that help us determine a value, but users can also specify it. In these cases it might be beneficial to use `set_once` for the heuristically computed value and `set` for user specified value. This way we can ensure that the user specified value is always used, but if the user doesn't specify it, we can still use the heuristically computed value.
 
 ## How are properties managed when merging or aliasing users
 
 // TODO: Confirm this with Tiina. Is this what this section means: https://posthog.com/docs/integrate/user-properties#how-do-values-get-overridden
 
-When two users both contain a property and are merged, the property of the first user (i.e. the distinctId for the alias) are used.
+When an anonymous user is identified as user (A), all the properties of the anonymous user are added to user (A). If there is a conflict, the properties of user (A) are kept.
 ```js
-// this uses the node sdk
 client.identify({
-    distinctId: 'main_id',
+    distinctId: 'user_A',
+    properties: {
+        name: 'User A',
+        location: 'London',
+        timezone: 'GMT',
+    },
+})
+
+client.reset()
+
+// as an anonymous user
+posthog.people.set({ name: 'Anonymous User', phone: '0800-POSTHOG' })
+
+client.identify({
+    distinctId: 'user_A',
+    properties: {
+        timezone: 'GMT+1', // daylight saving time
+    },
+})
+
+// for user 'user_A', { name: 'User A', location: 'London', phone: '0800-POSTHOG', timezone: 'GMT+1' }
+```
+
+When a user (B) is merged into another user (A), all the properties of the user (B) are added to user (A). If there is a conflict, the properties of user (A) are kept.
+```js
+client.identify({
+    distinctId: 'user_A',
     properties: {
         location: 'London',
+        name: 'User A',
     },
 })
 
 client.identify({
-    distinctId: 'secondary_id',
+    distinctId: 'user_B',
     properties: {
+        name: 'User B',
         location: 'Rome',
+        phone: '0800-POSTHOG',
     },
 })
 
-posthog.alias({
-    distinctId: 'main_id',
-    alias: 'secondary_id',
-})
+posthog.alias('user_A', 'user_B')
 
-// for user 'main_id', { location: 'London' }
+// for user 'user_A', { name: 'User A', location: 'London', phone: '0800-POSTHOG' }
 ```
 
 ## Default user properties
 
-If the `name` is not set, the `email` is used as the name in the PostHog UI.
+The `name` property is used as the display name in the PostHog UI. If the `name` is not set, the `email` is used as the name in the PostHog UI.
 
 The following properties are automatically set for all users when using the `posthog-js` library.
 
