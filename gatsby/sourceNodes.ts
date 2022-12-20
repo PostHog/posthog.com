@@ -47,9 +47,11 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         })
     }
 
-    const postHogIssues = await fetch(
-        'https://api.github.com/repos/posthog/posthog/issues?sort=comments&per_page=5'
-    ).then((res) => res.json())
+    const postHogIssues =
+        /*(await fetch('https://api.github.com/repos/posthog/posthog/issues?sort=comments&per_page=5').then((res) =>
+            res.json()
+        )) || */ []
+
     postHogIssues.forEach((issue) => {
         const { html_url, title, number, user, comments, reactions, labels, body, updated_at } = issue
         const data = {
@@ -84,9 +86,11 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         createNode(node)
     })
 
-    const postHogPulls = await fetch(
-        'https://api.github.com/repos/posthog/posthog/pulls?sort=popularity&per_page=5'
-    ).then((res) => res.json())
+    const postHogPulls =
+        /*(await fetch('https://api.github.com/repos/posthog/posthog/pulls?sort=popularity&per_page=5').then((res) =>
+            res.json()
+        )) || */ []
+
     postHogPulls.forEach((issue) => {
         const { html_url, title, number, user, labels, body, updated_at } = issue
         const data = {
