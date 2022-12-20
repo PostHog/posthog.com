@@ -133,7 +133,7 @@ const Activity = ({ questions, questionsLoading }) => {
                                     </p>
                                     <Link
                                         className="font-bold text-ellipsis overflow-hidden whitespace-nowrap"
-                                        to={`/question/${question?.permalink}`}
+                                        to={`/questions/${question?.permalink}`}
                                     >
                                         {question?.subject}
                                     </Link>

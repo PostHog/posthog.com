@@ -48,7 +48,9 @@ export const QuestionsTable = ({ questions, isLoading, setSize }: QuestionsTable
                                               <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 sm:pl-6 space-y-2">
                                                   <div className="flex items-center space-x-2">
                                                       <Link to={`/questions/${question.permalink}`}>
-                                                          <span className="text-[16px]">{question.subject}</span>
+                                                          <span className="text-[16px] font-bold">
+                                                              {question.subject}
+                                                          </span>
                                                       </Link>
                                                       {question.topics.map(
                                                           ({ topic }: { topic: { id: string; label: string } }) => {
