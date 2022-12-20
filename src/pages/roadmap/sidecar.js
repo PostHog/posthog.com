@@ -22,7 +22,10 @@ export default function RoadmapPage() {
         <Layout>
             <SEO title="PostHog Roadmap" />
             <OrgProvider
-                value={{ organizationId: 'a898bcf2-c5b9-4039-82a0-a00220a8c626', apiHost: 'https://squeak.cloud' }}
+                value={{
+                    organizationId: process.env.GATSBY_SQUEAK_ORG_ID,
+                    apiHost: process.env.GATSBY_SQUEAK_API_HOST,
+                }}
             >
                 <UserProvider>
                     <div className="border-t border-dashed border-gray-accent-light">

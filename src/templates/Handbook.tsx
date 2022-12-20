@@ -172,7 +172,7 @@ export const AppParametersFactory: (params: AppParametersProps) => React.FC = ({
 
                                 <td>
                                     {option.description || option.hint ? (
-                                        <Markdown>{option.description || option.hint}</Markdown>
+                                        <Markdown>{option.description || option.hint || ''}</Markdown>
                                     ) : null}
                                 </td>
                             </tr>

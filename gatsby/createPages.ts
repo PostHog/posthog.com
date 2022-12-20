@@ -15,8 +15,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const AppTemplate = path.resolve(`src/templates/App.js`)
     const ProductTemplate = path.resolve(`src/templates/Product.js`)
     const HostHogTemplate = path.resolve(`src/templates/HostHog.js`)
-    const Question = path.resolve(`src/templates/Question.js`)
-    const SqueakTopic = path.resolve(`src/templates/SqueakTopic.tsx`)
     const Job = path.resolve(`src/templates/Job.tsx`)
 
     // Tutorials
@@ -228,27 +226,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 nodes {
                     id
                     slug
-                }
-            }
-            questions: allQuestion {
-                nodes {
-                    id
-                }
-            }
-            squeakTopics: allSqueakTopic {
-                nodes {
-                    label
-                    topicId
-                    slug
-                }
-            }
-            squeakTopicGroups: allSqueakTopicGroup {
-                nodes {
-                    label
-                    topics {
-                        id
-                        label
-                    }
                 }
             }
             jobs: allAshbyJobPosting {
@@ -528,34 +505,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 },
             })
         }
-    })
-
-    const menu = []
-    result.data.squeakTopicGroups.nodes.forEach(({ label, topics }) => {
-        menu.push({ name: label })
-        topics.forEach(({ label }) => {
-            menu.push({
-                name: label,
-                url: `/questions/${slugify(label, {
-                    lower: true,
-                })}`,
-            })
-        })
-    })
-
-    result.data.squeakTopics.nodes.forEach((node) => {
-        const { slug, label, topicId } = node
-
-        createPage({
-            path: `questions/${slug}`,
-            component: SqueakTopic,
-            context: {
-                id: topicId,
-                topics: result.data.squeakTopics.nodes,
-                label,
-                menu,
-            },
-        })
     })
 
     if (process.env.ASHBY_API_KEY && process.env.GITHUB_API_KEY) {

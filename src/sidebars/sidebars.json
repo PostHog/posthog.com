@@ -2127,7 +2127,37 @@
         },
         {
             "name": "Questions",
-            "url": "/questions"
+            "url": "/questions",
+            "children": [
+                {
+                    "name": "Apps",
+                    "url": "/questions/topics/apps"
+                },
+                {
+                    "name": "Identify users",
+                    "url": "/questions/topics/identify-users"
+                },
+                {
+                    "name": "Events",
+                    "url": "/questions/topics/events"
+                },
+                {
+                    "name": "Migration",
+                    "url": "/questions/topics/migration"
+                },
+                {
+                    "name": "Trends",
+                    "url": "/questions/topics/trends"
+                },
+                {
+                    "name": "Funnels",
+                    "url": "/questions/topics/funnels"
+                },
+                {
+                    "name": "Cohorts",
+                    "url": "/questions/topics/cohorts"
+                }
+            ]
         },
         {
             "name": "Roadmap",
