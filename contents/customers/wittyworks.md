@@ -4,7 +4,8 @@ customer: Witty Works
 logo: ../images/customers/wittyworks/witty-logo.png
 featuredImage: ../images/customers/wittyworks/featured.png
 industries:
-    - SaaS, Browser extension
+    - SaaS
+    - Browser extension
 users:
     - Marketing
     - Engineering
