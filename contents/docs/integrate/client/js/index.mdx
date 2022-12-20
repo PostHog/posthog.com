@@ -131,11 +131,12 @@ import JSIdentify from './snippets/identify.mdx'
 If you use multiple distinct IDs for the same user (e.g. a logical ID and a UUID), you may want to set both for the same user. This way, if PostHog receives events for either ID, it will properly match them to the same person. This is also helpful if you want to associate anonymous IDs with an identified person (we actually do this automatically when you call `.identify`). To associate multiple IDs to the same person, you do an **alias** call, as shown below.
 
 ```js
-posthog.alias('[new ID]', '[original ID]')
+posthog.alias('[distinct ID]', '[alias ID]')
 ```
 
 Any events sent to either will be received under the same person.
-Note that the `'[original ID]'` cannot be previously identified nor associated with multiple distinct ids.
+
+Note: that the `'[alias ID]'` cannot be associated with multiple distinct ids.
 
 ### Reset after logout
 
