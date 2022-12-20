@@ -8,7 +8,7 @@ featuredImage: ../images/tutorials/banners/canary-release.png
 topics: ["feature flags", "persons"]
 ---
 
-Few things are worse for a developer than shipping a new feature, having it unexpectedly break, and frantically work to fix it. This can negatively impact your product, user experience, and engineering productivity. To mitigate problems with new features, teams often roll out features gradually to test for issues.
+Few things are worse for a developer than shipping a new feature, having it unexpectedly break, and then scrambling to fix it. This can negatively impact your product, user experience, and engineering productivity. To mitigate problems with new features, teams often roll out features gradually to test for issues.
 
 This gradual release is also known as a canary release or deployment. This tutorial covers what it is, and how to set it up and monitor it in PostHog.
 
@@ -16,11 +16,11 @@ This gradual release is also known as a canary release or deployment. This tutor
 
 A canary release or canary deployment is the process of rolling out a new feature to a subset of users before releasing it to a larger group. Developers check the new feature is working without issues on the limited group. They watch for issues and analyze usage metrics to make sure. Once satisfied with tests and analysis, the feature rolls out to a larger group (or everyone).
 
-The name comes from the phrase “canary in a coal mine” which alludes to miners bringing a canary into mines with them. If there were toxic gases, the canary dies and stops chirping, giving an early warning to the miners to get out before they do the same. Testing on a small group of users acts as a canary for issues with the feature, preventing those issues from affecting a larger group.
+The name comes from the phrase “canary in a coal mine” which alludes to miners bringing a canary into mines with them. If there were toxic gases, the canary would die and stop chirping, giving an early warning to the miners to get out before they do the same. Testing on a small group of users acts as a canary for issues with the feature, preventing those issues from affecting a larger group.
 
 ## Prerequisites for canary releases
 
-To setup a canary release in PostHog, we use feature flags. Before we do this, we need  user identification setup.
+To setup a canary release in PostHog, we use feature flags. Before we do this, we need user identification setup.
 
 Feature flags check the distinct ID of the user to decide if they should return `true` or `false`. This means users need a distinct ID unless the feature flag rolls out to everyone. Our snippet and JavaScript library automatically create anonymous ones, but [identifying users](/docs/integrate/identifying-users) with a distinct ID you set (like email) is a better and more accurate option.
 
@@ -52,9 +52,9 @@ At PostHog, we do all of these. Our feature flag page contains features at diffe
 
 The key to a canary release is hearing from the “canary.” Getting feedback and hearing issues is critical to the process whether it is from your team, a limited group of external users, or everyone. Setting clear expectations and having channels for communication enables the canary release to work. Without them, issues go unreported and cause problems for more users than needed.
 
-On top of hearing about issues from users, you can see issues in PostHog. This looks like key metrics or events decreasing, or the number of errors increasing. The benefit of having all your product data in one place is that all your data about your canary release is in one place too.
+On top of hearing about issues from users, you can see issues in PostHog. This may look like key metrics or events decreasing, or the number of errors increasing. The benefit of having all your product data in one place is that all your data about your canary release is in one place too.
 
-You can filter your insights by a feature flag to see how the release is progressing. For example, if you are running an experiment on the signup page, it is useful to know if it is improving signup conversion. You can set up a funnel for the conversion, then breakdown by the feature flag name.
+You can filter your insights by a feature flag to see how the release is progressing. For example, if you are running an experiment on a signup page, it is useful to know if it is improving signup conversion. You can set up a funnel for the conversion, then breakdown by the feature flag name.
 
 ![Funnel](../images/tutorials/canary-release/funnel.png)
 
