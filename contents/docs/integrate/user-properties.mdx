@@ -128,22 +128,50 @@ posthog.alias('user_A', 'user_B')
 // for user 'user_A', { name: 'User A', location: 'London', phone: '0800-POSTHOG' }
 ```
 
+Any events sent to either `user_A` or `user_B` will be received under the same person.
+
+Note: that the `'[alias ID]'` cannot be associated with multiple distinct ids.
+
+## Person Display Name
+
+The person display name is the name that is shown in the PostHog UI. The person properties that are used as the display name can be configured in Project Settings.
+
 ## Default user properties
 
-The `name` property is used as the display name in the PostHog UI. If the `name` is not set, the `email` is used as the name in the PostHog UI.
+It's often useful to set the `email` property for a user. This is useful for many of the apps, filtering users in the PostHog UI and as the Person Display Name.
 
-The following properties are automatically set for all users when using the `posthog-js` library.
+The following properties are automatically set for all users when using the `posthog-js` library:
 
 | Property | Property Name | Description | Example |
 | :--- | :--- | :--- | :--- |
-| `email` | Email Address | Email address of the user. | hey@posthog.com |
-| `name` | Name | Name of the user. | John Doe |
 | `utm_campaign` | UTM Campaign | UTM campaign tag (last-touch). | feature launch, discount |
 | `utm_content` | UTM Content | UTM content tag (last-touch). | bottom link, second button |
 | `utm_medium` | UTM Medium | UTM medium tag (last-touch). | Social, Organic, Paid, Email |
 | `utm_source` | UTM Source | UTM source tag (last-touch). | Google, Bing, Twitter, Facebook |
 | `$browser` | Browser | Name of the browser the user has used. | Chrome, Firefox |
 | `$browser_version` | Browser Version | The version of the browser that was used. Used in combination with Browser. | 70, 79 |
+| `$initial_browser` | Initial Browser | Name of the browser the user first used (first-touch). | Chrome, Firefox |
+| `$initial_browser_version` | Initial Browser Version | The version of the browser that the user first used (first-touch). Used in combination with Browser. | 70, 79 |
+| `$initial_current_url` | Initial Current URL | The first URL the user visited, including all the trimings. | https://example.com/interesting-article?parameter=true |
+| `$initial_device_type` | Initial Device Type | The initial type of device that was used (first-touch). | Mobile, Tablet, Desktop |
+| `$initial_os` | Initial OS | The operating system that the user first used (first-touch). | Windows, Mac OS X |
+| `$initial_pathname` | Initial Path Name | The path of the Current URL, which means everything in the url after the domain. Data from the first time this user was seen. | /pricing, /about-us/team |
+| `$initial_referrer` | Initial Referrer URL | URL of where the user came from most recently (last-touch). Data from the first time this user was seen. | https://google.com/search?q=posthog&rlz=1C... |
+| `$initial_referring_domain` | Initial Referring Domain | Domain of where the user came from most recently (last-touch). Data from the first time this user was seen. | google.com, facebook.com |
+| `$initial_utm_campaign` | Initial UTM Campaign | UTM campaign tag (first-touch). | feature launch, discount |
+| `$initial_utm_content` | Initial UTM Content | UTM content tag (first-touch). | bottom link, second button |
+| `$initial_utm_medium` | Initial UTM Medium | UTM medium tag (first-touch). | Social, Organic, Paid, Email |
+| `$initial_utm_source` | Initial UTM Source | UTM source tag (first-touch). | Google, Bing, Twitter, Facebook |
+| `$os` | OSThe operating system of the user. | Windows, Mac OS X |
+| `$referrer` | Referrer URL | URL of where the user came from most recently (last-touch). | https://google.com/search?q=posthog&rlz=1C... |
+| `$referring_domain` | Referring Domain | Domain of where the user came from most recently (last-touch). | google.com, facebook.com |
+
+### GeoIP Properties
+
+By default, the GeoIP plugin is turned on which adds the following properties to all events.
+
+| Property | Property Name | Description | Example |
+| :--- | :--- | :--- | :--- |
 | `$geoip_city_name` | City Name | Name of the city matched to this event's IP address. | Sydney, Chennai, Brooklyn |
 | `$geoip_continent_code` | Continent Code | Code of the continent matched to this event's IP address. | OC, AS,  NA |
 | `$geoip_continent_name` | Continent Name | Name of the continent matched to this event's IP address. | Oceania, Asia, North America |
@@ -157,10 +185,6 @@ The following properties are automatically set for all users when using the `pos
 | `$geoip_subdivision_2_code` | Subdivision 2 Code | Code of the second subdivision matched to this event's IP address. |
 | `$geoip_subdivision_2_name` | Subdivision 2 Name | Name of the second subdivision matched to this event's IP address. |
 | `$geoip_time_zone` | Timezone | Timezone matched to this event's IP address. | Australia/Sydney, Asia/Kolkata, America/New_York |
-| `$initial_browser` | Initial Browser | Name of the browser the user first used (first-touch). | Chrome, Firefox |
-| `$initial_browser_version` | Initial Browser Version | The version of the browser that the user first used (first-touch). Used in combination with Browser. | 70, 79 |
-| `$initial_current_url` | Initial Current URL | The first URL the user visited, including all the trimings. | https://example.com/interesting-article?parameter=true |
-| `$initial_device_type` | Initial Device Type | The initial type of device that was used (first-touch). | Mobile, Tablet, Desktop |
 | `$initial_geoip_city_name` | Initial City Name | Name of the city matched to this event's IP address. Data from the first time this user was seen. | Sydney, Chennai, Brooklyn |
 | `$initial_geoip_continent_code` | Initial Continent Code | Code of the continent matched to this event's IP address. Data from the first time this user was seen. | OC, AS,  NA |
 | `$initial_geoip_continent_name` | Initial Continent Name | Name of the continent matched to this event's IP address. Data from the first time this user was seen. | Oceania, Asia, North America |
@@ -174,14 +198,3 @@ The following properties are automatically set for all users when using the `pos
 | `$initial_geoip_subdivision_2_code` | Initial Subdivision 2 Code | Code of the second subdivision matched to this event's IP address. Data from the first time this user was seen. |
 | `$initial_geoip_subdivision_2_name` | Initial Subdivision 2 Name | Name of the second subdivision matched to this event's IP address. Data from the first time this user was seen. |
 | `$initial_geoip_time_zone` | Initial Timezone | Timezone matched to this event's IP address. Data from the first time this user was seen. | Australia/Sydney, Asia/Kolkata, America/New_York |
-| `$initial_os` | Initial OS | The operating system that the user first used (first-touch). | Windows, Mac OS X |
-| `$initial_pathname` | Initial Path Name | The path of the Current URL, which means everything in the url after the domain. Data from the first time this user was seen. | /pricing, /about-us/team |
-| `$initial_referrer` | Initial Referrer URL | URL of where the user came from most recently (last-touch). Data from the first time this user was seen. | https://google.com/search?q=posthog&rlz=1C... |
-| `$initial_referring_domain` | Initial Referring Domain | Domain of where the user came from most recently (last-touch). Data from the first time this user was seen. | google.com, facebook.com |
-| `$initial_utm_campaign` | Initial UTM Campaign | UTM campaign tag (first-touch). | feature launch, discount |
-| `$initial_utm_content` | Initial UTM Content | UTM content tag (first-touch). | bottom link, second button |
-| `$initial_utm_medium` | Initial UTM Medium | UTM medium tag (first-touch). | Social, Organic, Paid, Email |
-| `$initial_utm_source` | Initial UTM Source | UTM source tag (first-touch). | Google, Bing, Twitter, Facebook |
-| `$os` | OSThe operating system of the user. | Windows, Mac OS X |
-| `$referrer` | Referrer URL | URL of where the user came from most recently (last-touch). | https://google.com/search?q=posthog&rlz=1C... |
-| `$referring_domain` | Referring Domain | Domain of where the user came from most recently (last-touch). | google.com, facebook.com |
