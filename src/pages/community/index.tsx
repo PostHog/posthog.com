@@ -15,6 +15,8 @@ import Spinner from 'components/Spinner'
 import { useStaticQuery } from 'gatsby'
 import Tooltip from 'components/Tooltip'
 import GitHubTooltip, { Author } from 'components/GitHubTooltip'
+import QuestionsTable from 'components/Questions/QuestionsTable'
+import useSWRInfinite from 'swr/infinite'
 
 const Avatar = (props: { className?: string; src?: string }) => {
     return (
@@ -218,6 +220,34 @@ const ActiveIssues = ({ issues }) => {
     )
 }
 
+const RecentQuestions = () => {
+    const [sortBy, setSortBy] = useState<'newest' | 'activity' | 'popular'>('newest')
+
+    const { data, size, setSize, isLoading, mutate } = useSWRInfinite<any[]>(
+        (offset) =>
+            `${process.env.GATSBY_SQUEAK_API_HOST}/api/v1/questions?organizationId=${
+                process.env.GATSBY_SQUEAK_ORG_ID
+            }&start=${offset * 5}&perPage=5&published=true&sortBy=${sortBy}`,
+        (url: string) =>
+            fetch(url)
+                .then((r) => r.json())
+                .then((r) => r.questions)
+    )
+
+    const questions = React.useMemo(() => {
+        return data?.flat() || []
+    }, [size, data])
+    return (
+        <div id="recent-questions" className="mb-12">
+            <SectionTitle>Recent questions</SectionTitle>
+            <QuestionsTable hideLoadMore questions={questions} size={size} setSize={setSize} isLoading={isLoading} />
+            <CallToAction className="mt-4" width="full" to="/questions">
+                See all questions
+            </CallToAction>
+        </div>
+    )
+}
+
 const ActivePulls = ({ pulls }) => {
     return (
         <div id="active-pulls" className="mb-12">
@@ -320,6 +350,7 @@ export default function CommunityPage({ params }: PageProps) {
                             }
                             tableOfContents={[
                                 ...(profile ? [{ url: 'my-activity', value: 'My activity', depth: 0 }] : []),
+                                { url: 'recent-questions', value: 'Recent questions', depth: 0 },
                                 { url: 'active-issues', value: 'Most active issues', depth: 0 },
                                 { url: 'active-pulls', value: 'Most active PRs', depth: 0 },
                             ]}
@@ -327,6 +358,7 @@ export default function CommunityPage({ params }: PageProps) {
                         >
                             <div className="xl:pt-0 pt-8"></div>
                             {profile && <Activity questionsLoading={questionsLoading} questions={questions} />}
+                            <RecentQuestions />
                             <ActiveIssues issues={issues.nodes} />
                             <ActivePulls pulls={pulls.nodes} />
                         </PostLayout>

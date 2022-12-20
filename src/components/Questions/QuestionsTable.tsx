@@ -11,9 +11,10 @@ type QuestionsTableProps = {
     isLoading: boolean
     size: number
     setSize: (size: number | ((_size: number) => number)) => any
+    hideLoadMore?: boolean
 }
 
-export const QuestionsTable = ({ questions, isLoading, setSize }: QuestionsTableProps) => {
+export const QuestionsTable = ({ questions, isLoading, setSize, hideLoadMore }: QuestionsTableProps) => {
     return (
         <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
@@ -133,15 +134,17 @@ export const QuestionsTable = ({ questions, isLoading, setSize }: QuestionsTable
                     </table>
                 </div>
 
-                <div className="py-2 border-l border-b border-r border-gray-accent-light dark:border-gray-accent-dark border-dashed flex justify-center item-center">
-                    <button
-                        className="py-2 px-4 hover:bg-gray-accent-light text-gray font-semibold rounded"
-                        onClick={() => setSize((size) => size + 1)}
-                        disabled={isLoading}
-                    >
-                        Load more
-                    </button>
-                </div>
+                {!hideLoadMore && (
+                    <div className="py-2 border-l border-b border-r border-gray-accent-light dark:border-gray-accent-dark border-dashed flex justify-center item-center">
+                        <button
+                            className="py-2 px-4 hover:bg-gray-accent-light text-gray font-semibold rounded"
+                            onClick={() => setSize((size) => size + 1)}
+                            disabled={isLoading}
+                        >
+                            Load more
+                        </button>
+                    </div>
+                )}
             </div>
         </div>
     )
