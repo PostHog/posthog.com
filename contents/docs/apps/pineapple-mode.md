@@ -31,8 +31,6 @@ First, you need to manually opt in to the site apps beta. You can do this by con
 
 Once you've opted in, simply visit the 'Apps' page in your PostHog instance, search for 'Pineapple Mode' and press install. You may then need to refresh your page. Here's what you should expect:
 
-![site-apps](../images/blog/array/1-41-0-site-apps.gif)
-
 ## Can I make my own site apps?
 
 You certainly can. Check our tutorial about [how to build a site app in PostHog](/tutorials/build-site-app) to get started. 

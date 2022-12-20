@@ -66,7 +66,7 @@ Supporting self-hosted users can be particularly tricky/time-consuming!
 
 If the messages are from a dedicated slack, a tag from the CS team or 'high' priority zendesk then these are high-priority and **do prioritize** them accordingly. You'll likely find [these docs useful](https://posthog.com/docs/self-host/deploy/troubleshooting).
 
-However, if it's in the community slack then these are low priority. If you don't have the time to solve it then it's fine to politely point them to the docs for [self-serve open-source support](/docs/self-host/open-source/support#support-for-open-source-deployments-of-posthog) and ask them to file a github issue if they believe something is broken in the docs or deployment setup. *Note:* If it's legacy (signed up before December 2022) PostHog Scale user that's self-hosting and it's an easy answer resolve it, otherwise point them to [posthog self-hosting overview](https://posthog.com/docs/self-host), filing an issue in one of our repos or offer help with moving to the cloud.
+However, if it's in the community slack then these are low priority. If you don't have the time to solve it then it's fine to politely point them to the docs for [self-serve open-source support](/docs/self-host/open-source/support#support-for-open-source-deployments-of-posthog) and ask them to file a github issue if they believe something is broken in the docs or deployment setup.
 
 ## Categorizing requests
 

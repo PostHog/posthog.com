@@ -38,7 +38,7 @@ On the frontend, you also use the `group` call to update the properties of your 
 
 ```js
 posthog.group('company', 'posthog', {
-    company_name: 'PostHog',
+    name: 'PostHog',
     score: 99,
 })
 ```
@@ -96,7 +96,7 @@ You also can’t update the group properties from the capture call. You must use
 
 ```python
 posthog.group_identify('company', 'posthog', {
-    'company_name': 'PostHog',
+    'name': 'PostHog',
     'score': 99
 })
 ```
@@ -106,7 +106,7 @@ client.Enqueue(posthog.GroupIdentify{
     Type: "company",
     Key:  "posthog",
     Properties: posthog.NewProperties().
-        Set("company_name", "PostHog").
+        Set("name", "PostHog").
         Set("score", 99),
 })
 ```
@@ -116,7 +116,7 @@ posthog.groupIdentify({
     groupType: 'company',
     groupKey: 'posthog',
     properties: {
-        company_name: 'PostHog',
+        name: 'PostHog',
         score: 99
     }
 })
@@ -126,7 +126,7 @@ posthog.groupIdentify({
 PostHog::groupIdentify(array(
     'groupType' => 'company',
     'groupKey' => 'posthog',
-    'properties' => array("company_name" => "PostHog", "score" => 99)
+    'properties' => array("name" => "PostHog", "score" => 99)
 ));
 ```
 
@@ -135,7 +135,7 @@ analytics.track('$groupidentify', {
     "$group_type": "company",
     "$group_key": "posthog",
     "$group_set": {
-        "company_name": "PostHog",
+        "name": "PostHog",
         "score": 99
     }
 })
@@ -150,7 +150,5 @@ The benefit of the backend is that you don’t have to call `reset()` when you�
 ## Next steps in group analytics
 
 This should give you a better understanding of how you need to implement frontend vs backend group analytics. From here, you can utilize your group analytics to [view groups and their properties](/manual/group-analytics#viewing-groups-and-their-properties), [analyze group insights](/manual/group-analytics#analyzing-group-insights), and [setup group feature flags](/manual/group-analytics#integrating-groups-with-feature-flags). 
-
-Check out [tracking how teams use your product](/tutorials/tracking-teams) for more ideas.
 
 <NewsletterTutorial compact/>

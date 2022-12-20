@@ -164,19 +164,19 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
     <code>$PATH</code>. Otherwise the command line will use your system Node.js version instead.
 </blockquote>
 
-2. Install the latest Node.js 16 (the version used by PostHog in production) with `nvm install 16`. You can start using it in the current shell with `nvm use 16`.
+2. Install the latest Node.js 18 (the version used by PostHog in production) with `nvm install 18`. You can start using it in the current shell with `nvm use 18`.
 
-3. Install yarn with `npm install -g yarn@1`.
+3. Install pnpm with `npm install -g pnpm`.
 
-4. Install Node packages by running `yarn`.
+4. Install Node packages by running `pnpm i`.
 
-5. Run `yarn typegen:write` to generate types for [Kea](https://keajs.org/) state management logics used all over the frontend.
+5. Run `pnpm typegen:write` to generate types for [Kea](https://keajs.org/) state management logics used all over the frontend.
 
-> The first time you run typegen, it may get stuck in a loop. If so, cancel the process (`Ctrl+C`), discard all changes in the working directory (`git reset --hard`), and run `yarn typegen:write` again. You may need to discard all changes once more when the second round of type generation completes.
+> The first time you run typegen, it may get stuck in a loop. If so, cancel the process (`Ctrl+C`), discard all changes in the working directory (`git reset --hard`), and run `pnpm typegen:write` again. You may need to discard all changes once more when the second round of type generation completes.
 
 ### 3. Prepare plugin server
 
-Assuming Node.js is installed, run `yarn --cwd plugin-server` to install all required packages. You'll also need to install the `brotli` compression library:
+Assuming Node.js is installed, run `pnpm i --dir plugin-server` to install all required packages. You'll also need to install the `brotli` compression library:
 
 - On macOS:
     ```bash
@@ -322,7 +322,7 @@ For Cypress end-to-end test, run `bin/e2e-test-runner`. This will temporarily in
 
 Once you're done, terminate the command with cmd + C. Be sure to wait until the command terminates gracefully so temporary dependencies are removed from `package.json` and you don't commit them accidentally.
 
-For frontend tests, all you need is `yarn test`.
+For frontend tests, all you need is `pnpm test`.
 
 ## Extra: Working with feature flags
 
@@ -351,3 +351,7 @@ DEBUG=1;
 KAFKA_HOSTS=kafka:9092;
 DATABASE_URL=postgres://posthog:posthog@localhost:5432/posthog
 ```
+
+## Extra: Adding an enterprise license (PostHog employees only)
+
+If you're a PostHog employee, you can add an enterprise license to your local instance by following this [internal guide](https://github.com/PostHog/billing/blob/main/docs/running-posthog-with-billing.md). This is particularly useful if developing enterprise features or testing billing-related functionality.

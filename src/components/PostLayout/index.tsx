@@ -283,7 +283,7 @@ const Menu = ({
                             {isActive && (
                                 <motion.span
                                     variants={variants}
-                                    className="absolute w-[4px] bg-tan dark:bg-primary rounded-[2px] top-[2px] h-[calc(100%_-_4px)] left-0"
+                                    className="absolute w-[4px] bg-red rounded-[2px] top-[2px] h-[calc(100%_-_4px)] left-0"
                                     initial="hidden"
                                     animate="visible"
                                     exit="hidden"
@@ -402,7 +402,7 @@ export const sidebarButtonClasses =
 const SidebarAction = ({ children, title, width, className = '', href, onClick }: ISidebarAction) => {
     return (
         <li style={width ? { width } : {}} className={`flex items-center justify-center ${className}`}>
-            <Tooltip className="flex" title={title}>
+            <Tooltip className="flex" content={title}>
                 <span className="relative flex">
                     {href ? (
                         <Link className={sidebarButtonClasses} to={href}>
@@ -560,7 +560,7 @@ export default function PostLayout({
             <div
                 style={{
                     gridAutoColumns: menu
-                        ? `${menuWidth}px 1fr 1fr 265px`
+                        ? `${menuWidth}px 1fr 1fr ${menuWidth}px`
                         : `1fr minmax(auto, ${contentWidth}px) minmax(max-content, 1fr)`,
                 }}
                 className="w-full relative lg:grid lg:grid-flow-col items-start -mb-20"
@@ -602,7 +602,7 @@ export default function PostLayout({
                                 </div>
                             </div>
 
-                            <div ref={bottomSidebarSection} className="lg:pt-6 !border-t-0 mt-auto sticky bottom-0">
+                            <div ref={bottomSidebarSection} className="lg:pt-6 !border-t-0 mt-auto lg:sticky bottom-0">
                                 {view === 'Article' && toc?.length > 1 && !showTocButton && (
                                     <div
                                         style={{ visibility: showTocButton === null ? 'hidden' : 'visible' }}
