@@ -49,10 +49,6 @@
                 "url": "/docs/integrate/libraries"
             },
             {
-                "name": "Badge",
-                "url": "/docs/integrate/badge"
-            },
-            {
                 "name": "Browser Extensions",
                 "url": "/docs/integrate/browser-extension"
             },
@@ -175,28 +171,6 @@
                     {
                         "name": "WordPress",
                         "url": "/docs/integrate/third-party/wordpress"
-                    }
-                ]
-            },
-            {
-                "name": "Webhooks",
-                "url": "",
-                "children": [
-                    {
-                        "name": "Message formatting",
-                        "url": "/docs/integrate/webhooks/message-formatting"
-                    },
-                    {
-                        "name": "Microsoft Teams",
-                        "url": "/docs/integrate/webhooks/microsoft-teams"
-                    },
-                    {
-                        "name": "Slack",
-                        "url": "/docs/integrate/webhooks/slack"
-                    },
-                    {
-                        "name": "Discord",
-                        "url": "/docs/integrate/webhooks/discord"
                     }
                 ]
             }
@@ -669,6 +643,28 @@
         ]
     },
     {
+        "name": "Webhooks",
+        "url": "",
+        "children": [
+            {
+                "name": "Message formatting",
+                "url": "/docs/webhooks/message-formatting"
+            },
+            {
+                "name": "Microsoft Teams",
+                "url": "/docs/webhooks/microsoft-teams"
+            },
+            {
+                "name": "Slack",
+                "url": "/docs/webhooks/slack"
+            },
+            {
+                "name": "Discord",
+                "url": "/docs/webhooks/discord"
+            }
+        ]
+    },
+    {
         "name": "Privacy",
         "url": "",
         "children": [
@@ -713,6 +709,10 @@
             {
                 "name": "Recognizing contributions",
                 "url": "/docs/contribute/recognizing-contributions"
+            },
+            {
+                "name": "Badge",
+                "url": "/docs/contribute/badge"
             }
         ]
     },
