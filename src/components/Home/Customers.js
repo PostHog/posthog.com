@@ -1,7 +1,7 @@
 import React from 'react'
 import { heading, section } from './classes'
 import airbus from './images/airbus.svg'
-import brex from './images/brex.svg'
+import pry from './images/customers/pry/logo.svg'
 import clickhouse from './images/clickhouse.svg'
 import hasura from './images/hasura.svg'
 import ing from './images/ing.svg'
@@ -44,13 +44,13 @@ export default function Customers() {
                 <ul className="list-none m-0 p-0 grid grid-cols-2 md:grid-cols-4 border-b border-r border-dashed border-gray-accent-light">
                     <Customer className="max-h-[44px]" image={yCombinator} />
                     <Customer className="max-h-[36px]" image={staples} />
-                    <Customer className="max-h-[45px]" image={brex} />
+                    <Customer className="max-h-[35px]" image={clickhouse} />
                     <Customer className="max-h-[36px]" image={airbus} />
 
                     <Customer className="max-h-[46px]" image={phantom} />
                     <Customer className="max-h-[50px]" image={ing} />
                     <Customer className="max-h-[40px]" image={outbrain} />
-                    <Customer className="max-h-[35px]" image={clickhouse} />
+                    <Customer className="max-h-[45px]" image={pry} />
 
                     <Customer className="max-h-[50px]" image={joybird} />
                     <Customer className="max-h-[35px]" image={vendasta} />
