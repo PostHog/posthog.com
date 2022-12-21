@@ -1,23 +1,28 @@
 import Chip from 'components/Chip'
-import { useValues } from 'kea'
 import React, { useEffect, useState } from 'react'
 import usePostHog from '../../hooks/usePostHog'
-import { BasicHedgehogImage } from '../BasicHedgehogImage'
 import { CallToAction } from '../CallToAction'
 import Layout from '../Layout'
 import Lottie from 'react-lottie'
-import pizzaFight from '../../lotties/pizza-fight.json'
+import { StaticImage } from 'gatsby-plugin-image'
 import SearchBox from 'components/Search/SearchBox'
 
 export default function NotFoundPage(): JSX.Element {
     const posthog = usePostHog()
+    const [hogData, setHogData] = useState<any | null>(null)
     const [submittedPreference, setSubmittedPreference] = useState(false)
 
     useEffect(() => {
-        if (posthog) {
-            // Allows us to identify which pages are triggering 404s
-            posthog.capture('page_404')
-        }
+        fetch('/lotties/pizza-fight.json', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept-Encoding': 'gzip, deflate, br',
+            },
+        })
+            .then((res) => res.json())
+            .then(setHogData)
+
+        posthog?.capture('page_404')
     }, [])
 
     const capturePineapplePreference = (userLikesPineappleOnPizzaAkaTheyreCorrect = false) => {
@@ -40,9 +45,9 @@ export default function NotFoundPage(): JSX.Element {
                         fix it!
                     </p>
 
-                    <div className="m-4 py-8 flex flex-col items-center gap-2">
+                    <div className="m-4 pt-8 pb-4 flex flex-col items-center gap-2">
                         <h3>You might have better luck searching.</h3>
-                        <SearchBox placeholder="Search..." />
+                        <SearchBox placeholder="Search..." location="404" />
                         <p className="text-sm max-w-lg mx-auto px-4 pt-2 text-center opacity-75">
                             This searches our docs, API, product manual, tutorials, blog, community questions, and
                             company handbook – <em>and it's actually pretty good!</em>
@@ -70,13 +75,17 @@ export default function NotFoundPage(): JSX.Element {
                 </div>
                 <div className="-mt-20 sm:-mt-32 max-w-2xl w-full mx-auto relative h-[378px]">
                     <span className="w-full h-[2px] bg-black absolute left-0 bottom-[20%] rounded-md" />
-                    <Lottie
-                        options={{
-                            loop: true,
-                            autoplay: true,
-                            animationData: pizzaFight,
-                        }}
-                    />
+                    {hogData ? (
+                        <Lottie
+                            options={{
+                                loop: true,
+                                autoplay: true,
+                                animationData: hogData,
+                            }}
+                        />
+                    ) : (
+                        <StaticImage src="../../images/pizza-fight.svg" alt="Pizza fight" placeholder="blurred" />
+                    )}
                 </div>
                 <CallToAction type="primary" width="84" to="/">
                     Take me back to the homepage

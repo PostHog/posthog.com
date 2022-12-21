@@ -1,12 +1,65 @@
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 import Lottie from 'react-lottie'
-import AboutHog1 from '../../../lotties/about-hog-1.json'
-import AboutHog2 from '../../../lotties/about-hog-2.json'
-import AboutHog3 from '../../../lotties/about-hog-3.json'
-import AboutHog4 from '../../../lotties/about-hog-4.json'
+
+const LazyHog = ({ data, placeholder }: { data: any; placeholder: React.ReactElement }) => {
+    return data ? (
+        <Lottie
+            options={{
+                loop: true,
+                autoplay: true,
+                animationData: data,
+            }}
+        />
+    ) : (
+        placeholder
+    )
+}
 
 export const AboutHero = () => {
+    const [hog1Data, setHog1Data] = React.useState<any | null>(null)
+    const [hog2Data, setHog2Data] = React.useState<any | null>(null)
+    const [hog3Data, setHog3Data] = React.useState<any | null>(null)
+    const [hog4Data, setHog4Data] = React.useState<any | null>(null)
+
+    React.useEffect(() => {
+        fetch('/lotties/about-hog-1.json', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept-Encoding': 'gzip, deflate, br',
+            },
+        })
+            .then((res) => res.json())
+            .then(setHog1Data)
+
+        fetch('/lotties/about-hog-2.json', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept-Encoding': 'gzip, deflate, br',
+            },
+        })
+            .then((res) => res.json())
+            .then(setHog2Data)
+
+        fetch('/lotties/about-hog-3.json', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept-Encoding': 'gzip, deflate, br',
+            },
+        })
+            .then((res) => res.json())
+            .then(setHog3Data)
+
+        fetch('/lotties/about-hog-4.json', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept-Encoding': 'gzip, deflate, br',
+            },
+        })
+            .then((res) => res.json())
+            .then(setHog4Data)
+    }, [])
+
     return (
         <>
             <header id="our-story" className="pb-4 md:pb-8 px-4 md:px-12">
@@ -24,41 +77,37 @@ export const AboutHero = () => {
             <div className="flex flex-col md:flex-row justify-center items-center max-w-screen-xl mx-auto gap-4 md:gap-16 px-4 md:px-8 pb-12">
                 <div className="flex justify-between items-center">
                     <div className="">
-                        <Lottie
-                            options={{
-                                loop: true,
-                                autoplay: true,
-                                animationData: AboutHog1,
-                            }}
+                        <LazyHog
+                            data={hog1Data}
+                            placeholder={
+                                <StaticImage src="../../../images/about-hog-1.svg" alt="Hog" placeholder="blurred" />
+                            }
                         />
                     </div>
                     <div className="">
-                        <Lottie
-                            options={{
-                                loop: true,
-                                autoplay: true,
-                                animationData: AboutHog2,
-                            }}
+                        <LazyHog
+                            data={hog2Data}
+                            placeholder={
+                                <StaticImage src="../../../images/about-hog-2.svg" alt="Hog" placeholder="blurred" />
+                            }
                         />
                     </div>
                 </div>
                 <div className="flex justify-between items-center">
                     <div className="">
-                        <Lottie
-                            options={{
-                                loop: true,
-                                autoplay: true,
-                                animationData: AboutHog3,
-                            }}
+                        <LazyHog
+                            data={hog3Data}
+                            placeholder={
+                                <StaticImage src="../../../images/about-hog-3.svg" alt="Hog" placeholder="blurred" />
+                            }
                         />
                     </div>
                     <div className="">
-                        <Lottie
-                            options={{
-                                loop: true,
-                                autoplay: true,
-                                animationData: AboutHog4,
-                            }}
+                        <LazyHog
+                            data={hog4Data}
+                            placeholder={
+                                <StaticImage src="../../../images/about-hog-4.svg" alt="Hog" placeholder="blurred" />
+                            }
                         />
                     </div>
                 </div>
