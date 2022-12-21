@@ -12,8 +12,10 @@ export const Tab: React.FC & {
         <HeadlessTab
             className={({ selected }) =>
                 classNames(
-                    selected ? 'bg-red text-white' : 'bg-white dark:bg-gray-accent-dark',
-                    'px-4 py-1.5 rounded shadow-sm text-sm font-medium whitespace-nowrap'
+                    selected
+                        ? 'text-red border-b-2 border-red'
+                        : 'border-b-2 border-transparent hover:border-gray-accent-light',
+                    'pt-3 pb-2.5 text-base -mb-px font-semibold whitespace-nowrap'
                 )
             }
         >
@@ -24,7 +26,7 @@ export const Tab: React.FC & {
 
 const TabGroup: typeof HeadlessTab.Group = ({ children }) => {
     return (
-        <HeadlessTab.Group as="div" className="my-6">
+        <HeadlessTab.Group as="div" className="my-4">
             {children}
         </HeadlessTab.Group>
     )
@@ -34,7 +36,10 @@ TabGroup.displayName = 'TabGroup'
 
 const TabList: typeof HeadlessTab.List = ({ children, className, ...props }) => {
     return (
-        <HeadlessTab.List {...props} className={`space-x-3 flex items-center overflow-x-auto ${className}`}>
+        <HeadlessTab.List
+            {...props}
+            className={`space-x-6 flex whitespace-nowrap border-b border-gray-accent-light ${className}`}
+        >
             {children}
         </HeadlessTab.List>
     )
