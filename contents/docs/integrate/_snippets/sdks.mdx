@@ -1,33 +1,9 @@
-#### Client SDKs
+import { Client, Server } from "components/SDKs"
 
-Client libraries let you send events to PostHog from your frontend website or app. This is generally the best option for tracking UI related events as well as events from anonymous users.
+### Client SDKs
 
-**Official libraries**
+<Client />
 
--   [JavaScript](/docs/integrate/client/js)
--   [Android](/docs/integrate/client/android)
--   [iOS](/docs/integrate/client/ios)
--   [Flutter](/docs/integrate/client/flutter)
--   [React Native](/docs/integrate/client/react-native)
+### Server SDKs
 
-Check out the pages above for information on how to set-up each library, as well as which features each library supports.
-
-#### Server SDKs
-
-Server libraries let you send events to PostHog directly from your backend server. In most cases, sending events from the server-side is the best and most reliable option, however this generally only works well for users who are signed in.
-
-**Official libraries**
-
--   [NodeJS](/docs/integrate/server/node)
--   [Python](/docs/integrate/server/python)
--   [PHP](/docs/integrate/server/php)
--   [Ruby](/docs/integrate/server/ruby)
--   [Golang](/docs/integrate/server/go)
--   [Java](/docs/integrate/server/java)
-
-**Community libraries**
-
--   [Elixir](/docs/integrate/server/elixir)
--   [Nim](https://github.com/Yardanico/posthog-nim)
-
-Check out the pages above for information on how to set-up each library, as well as which features each library supports. _As a note, session recording is only supported in client-side libraries._
+<Server />

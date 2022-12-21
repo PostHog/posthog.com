@@ -31,81 +31,35 @@ type LibraryData = {
     }
 }
 
-export const LibraryComparison = () => {
-    const { clientLibs, serverLibs } = useStaticQuery<LibraryData>(query)
+export const Client = () => {
+    const { clientLibs } = useStaticQuery<LibraryData>(query)
 
     const renderAvailability = (isAvailable?: boolean) => {
         return isAvailable ? <img className="w-4 h-4" src={CheckIcon} /> : <img className="w-4 h-4" src={XIcon} />
     }
 
     return (
-        <>
-            <h2>Client libraries</h2>
+        <div className="overflow-x-scroll grid grid-cols-3 gap-6">
+            {clientLibs.nodes.map((node) => (
+                <div className="p-2 border border-gray-200 rounded-sm shadow-sm">
+                    <p className="text-lg font-bold">{node.frontmatter.title}</p>
+                </div>
+            ))}
+        </div>
+    )
+}
 
-            <div className="overflow-x-scroll">
-                <table>
-                    <thead>
-                        <tr>
-                            <th className="w-48">Library</th>
-                            <th>Event Capture</th>
-                            <th>User Identification</th>
-                            <th>Autocapture</th>
-                            <th>Session recording</th>
-                            <th>Feature Flags</th>
-                            <th>Group Analytics</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {clientLibs.nodes
-                            .filter((lib) => lib.frontmatter.features)
-                            .map((lib) => (
-                                <tr key={lib.fields.slug}>
-                                    <td>
-                                        <a href={lib.fields.slug}>{lib.frontmatter.title}</a>
-                                    </td>
-                                    <td>{renderAvailability(lib.frontmatter.features?.eventCapture)}</td>
-                                    <td>{renderAvailability(lib.frontmatter.features?.userIdentification)}</td>
-                                    <td>{renderAvailability(lib.frontmatter.features?.autoCapture)}</td>
-                                    <td>{renderAvailability(lib.frontmatter.features?.sessionRecording)}</td>
-                                    <td>{renderAvailability(lib.frontmatter.features?.featureFlags)}</td>
-                                    <td>{renderAvailability(lib.frontmatter.features?.groupAnalytics)}</td>
-                                </tr>
-                            ))}
-                    </tbody>
-                </table>
-            </div>
+export const Server = () => {
+    const { serverLibs } = useStaticQuery<LibraryData>(query)
 
-            <h2>Server libraries</h2>
-
-            <div className="overflow-x-scroll mb-4">
-                <table>
-                    <thead>
-                        <tr>
-                            <th className="w-24">Library</th>
-                            <th>Event Capture</th>
-                            <th>User Identification</th>
-                            <th>Feature Flags</th>
-                            <th>Group Analytics</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {serverLibs.nodes
-                            .filter((lib) => lib.frontmatter.features)
-                            .map((lib) => (
-                                <tr key={lib.fields.slug}>
-                                    <td>
-                                        <a href={lib.fields.slug}>{lib.frontmatter.title}</a>
-                                    </td>
-                                    <td>{renderAvailability(lib.frontmatter.features?.eventCapture)}</td>
-                                    <td>{renderAvailability(lib.frontmatter.features?.userIdentification)}</td>
-                                    <td>{renderAvailability(lib.frontmatter.features?.featureFlags)}</td>
-                                    <td>{renderAvailability(lib.frontmatter.features?.groupAnalytics)}</td>
-                                </tr>
-                            ))}
-                    </tbody>
-                </table>
-            </div>
-        </>
+    return (
+        <div className="overflow-x-scroll grid grid-cols-3 gap-6">
+            {serverLibs.nodes.map((node) => (
+                <div className="p-2 border border-gray-200 rounded-sm shadow-sm">
+                    <p className="text-lg font-bold">{node.frontmatter.title}</p>
+                </div>
+            ))}
+        </div>
     )
 }
 
@@ -141,4 +95,7 @@ const query = graphql`
     }
 `
 
-export default LibraryComparison
+export const SDKs = {
+    Client,
+    Server,
+}
