@@ -57,10 +57,6 @@
                 "url": "",
                 "children": [
                     {
-                        "name": "Snippet installation",
-                        "url": "/docs/integrate/client/snippet-installation"
-                    },
-                    {
                         "name": "Android",
                         "url": "/docs/integrate/client/android"
                     },
