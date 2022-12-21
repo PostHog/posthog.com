@@ -447,12 +447,14 @@ const Survey = ({ contentContainerClasses = '' }) => {
     )
 }
 
+const defaultMenuWidth = { left: 265, right: 265 }
+
 export default function PostLayout({
     tableOfContents,
     children,
     sidebar,
     contentWidth = 650,
-    menuWidth = 265,
+    menuWidth = defaultMenuWidth,
     questions,
     menu,
     article = true,
@@ -560,7 +562,9 @@ export default function PostLayout({
             <div
                 style={{
                     gridAutoColumns: menu
-                        ? `${menuWidth}px 1fr 1fr ${menuWidth}px`
+                        ? `${menuWidth?.left ?? defaultMenuWidth?.left}px 1fr 1fr ${
+                              menuWidth?.right ?? defaultMenuWidth?.right
+                          }px`
                         : `1fr minmax(auto, ${contentWidth}px) minmax(max-content, 1fr)`,
                 }}
                 className="w-full relative lg:grid lg:grid-flow-col items-start -mb-20"

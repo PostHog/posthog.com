@@ -336,7 +336,7 @@ export default function CommunityPage({ params }: PageProps) {
                             </div>
                         </Modal>
                         <PostLayout
-                            menuWidth={320}
+                            menuWidth={{ right: 320 }}
                             title="Profile"
                             menu={community}
                             sidebar={

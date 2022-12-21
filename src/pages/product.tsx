@@ -151,7 +151,7 @@ export default function Product() {
                 article={false}
                 contentContainerClassName="w-full pb-12 md:px-12 md:-mt-8"
                 menuType="scroll"
-                menuWidth={350}
+                menuWidth={{ left: 350, right: 350 }}
             >
                 <div className="sticky top-0 z-10 bg-tan lg:hidden mb-6 py-2">
                     <div className="pl-5">
