@@ -12,6 +12,7 @@ import React from 'react'
 import { shortcodes } from '../mdxGlobalComponents'
 import Link from 'components/Link'
 import FooterCTA from 'components/FooterCTA'
+import PostLayout, { SidebarSection, Topics } from 'components/PostLayout'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
@@ -24,10 +25,9 @@ const components = {
     a: A,
 }
 
-const Tags = ({ title, tags }) => {
+const Tags = ({ tags }) => {
     return (
         <li className="border-b border-dashed border-gray-accent-light">
-            <h4 className="text-gray m-0 text-[15px]">{title}</h4>
             <ul className="list-none m-0 p-0 text-lg flex flex-wrap">
                 {tags.map((tag, index) => {
                     return (
@@ -41,8 +41,26 @@ const Tags = ({ title, tags }) => {
     )
 }
 
-export default function Customer({ data }) {
+const CustomerSidebar = ({ industries, users, toolsUsed, logo }) => {
+    return (
+        <>
+            <SidebarSection>{logo && <img className="w-full max-w-[200px]" src={logo.publicURL} />}</SidebarSection>
+            <SidebarSection title="Industry">
+                <Topics topics={industries.map((industry) => ({ name: industry }))} />
+            </SidebarSection>
+            <SidebarSection title="Users">
+                <Topics topics={users.map((user) => ({ name: user }))} />
+            </SidebarSection>
+            <SidebarSection title="Tools used">
+                <Topics topics={toolsUsed.map((toolUsed) => ({ name: toolUsed }))} />
+            </SidebarSection>
+        </>
+    )
+}
+
+export default function Customer({ data, pageContext: { tableOfContents } }) {
     const {
+        allCustomers,
         customerData: {
             body,
             excerpt,
@@ -50,6 +68,7 @@ export default function Customer({ data }) {
             frontmatter: { title, customer, logo, description, industries, users, toolsUsed, featuredImage },
         },
     } = data
+
     return (
         <>
             <SEO
@@ -59,38 +78,39 @@ export default function Customer({ data }) {
                 image={`/og-images/${fields.slug.replace(/\//g, '')}.jpeg`}
             />
             <Layout>
-                <div className="px-4 sticky top-[-2px] bg-tan dark:bg-primary z-10">
-                    <Breadcrumbs
-                        crumbs={[
-                            {
-                                title: 'Customers',
-                                url: '/customers',
-                            },
-                            {
-                                title: customer,
-                            },
-                        ]}
-                    />
-                </div>
-                <div className="max-w-screen-lg lg:max-w-screen-lg 2xl:max-w-screen-xl mx-auto px-4 flex flex-col md:flex-row items-start mt-16 md:mt-20">
-                    <aside className="md:mr-9 mb-9 md:mb-0 md:sticky top-20 md:pr-9 md:border-r border-dashed border-gray-accent-light w-full md:w-auto">
-                        {logo && <img className="w-full max-w-[200px]" src={logo.publicURL} />}
-                        <ul className="list-none flex-col flex space-y-8 p-0 mt-10 min-w-[250px]">
-                            <Tags title="Industry" tags={industries} />
-                            <Tags title="Users" tags={users} />
-                            <Tags title="Tools used" tags={toolsUsed} />
-                        </ul>
-                    </aside>
-                    <div>
-                        <section className="article-content customer-content">
-                            <h1 className="text-5xl leading-none">{title}</h1>
-                            <MDXProvider components={components}>
-                                <MDXRenderer>{body}</MDXRenderer>
-                            </MDXProvider>
-                        </section>
-                        <FooterCTA />
-                    </div>
-                </div>
+                <PostLayout
+                    tableOfContents={tableOfContents}
+                    hideSearch
+                    menu={[
+                        { name: 'Customers' },
+                        ...allCustomers?.nodes?.map(({ fields: { slug }, frontmatter: { customer } }) => ({
+                            name: customer,
+                            url: slug,
+                        })),
+                    ]}
+                    title={title}
+                    hideSurvey
+                    sidebar={
+                        <CustomerSidebar logo={logo} industries={industries} toolsUsed={toolsUsed} users={users} />
+                    }
+                    breadcrumb={[
+                        {
+                            name: 'Customers',
+                            url: '/customers',
+                        },
+                        {
+                            name: customer,
+                        },
+                    ]}
+                >
+                    <section className="article-content customer-content">
+                        <h1 className="text-5xl leading-none">{title}</h1>
+                        <MDXProvider components={components}>
+                            <MDXRenderer>{body}</MDXRenderer>
+                        </MDXProvider>
+                    </section>
+                    <FooterCTA />
+                </PostLayout>
             </Layout>
         </>
     )
@@ -98,6 +118,19 @@ export default function Customer({ data }) {
 
 export const query = graphql`
     query Customer($id: String!) {
+        allCustomers: allMdx(
+            filter: { fields: { slug: { regex: "/^/customers/" } } }
+            sort: { fields: frontmatter___customer, order: ASC }
+        ) {
+            nodes {
+                fields {
+                    slug
+                }
+                frontmatter {
+                    customer
+                }
+            }
+        }
         customerData: mdx(id: { eq: $id }) {
             body
             excerpt(pruneLength: 150)

@@ -4,7 +4,8 @@ customer: Momentum Dash
 logo: ../images/customers/momentumdash/momentum_dash_logo.svg
 featuredImage: ../images/customers/momentumdash/featured_momentumdash.jpeg
 industries:
-    - SaaS, Browser extension
+    - SaaS
+    - Browser extension
 users:
     - Product
     - Engineering
