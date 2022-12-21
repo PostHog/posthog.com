@@ -131,6 +131,10 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             customers: allMdx(filter: { fields: { slug: { regex: "/^/customers/" } } }) {
                 nodes {
                     id
+                    headings {
+                        depth
+                        value
+                    }
                     fields {
                         slug
                     }
@@ -425,11 +429,13 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 
     result.data.customers.nodes.forEach((node) => {
         const { slug } = node.fields
+        const tableOfContents = node.headings && formatToc(node.headings)
         createPage({
             path: slug,
             component: CustomerTemplate,
             context: {
                 id: node.id,
+                tableOfContents,
             },
         })
     })
