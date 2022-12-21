@@ -51,10 +51,10 @@ const Login = () => {
         </>
     ) : (
         <>
-            <p className="m-0 text-base">
+            <p className="m-0 text-sm">
                 Your PostHog.com community profile lets you ask questions and get early access to beta features.
             </p>
-            <p className="text-sm mt-2">
+            <p className="text-[13px] mt-2 p-2 bg-gray-accent-light dark:bg-gray-accent-dark rounded">
                 <strong>Tip:</strong> If you've ever asked a question on PostHog.com, you already have an account!
             </p>
             <CallToAction onClick={() => setLogin({ type: 'login' })} width="full" size="sm">
@@ -356,7 +356,6 @@ export default function CommunityPage({ params }: PageProps) {
                             ]}
                             hideSurvey
                         >
-                            <div className="xl:pt-0 pt-8"></div>
                             {profile && <Activity questionsLoading={questionsLoading} questions={questions} />}
                             <RecentQuestions />
                             <ActiveIssues issues={issues.nodes} />

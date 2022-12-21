@@ -88,9 +88,11 @@ export default function Link({
             className={`${className} group`}
         >
             {external ? (
-                <span className="inline-flex justify-center items-center space-x-1">
-                    <span>{children}</span>
-                    <ExternalLink className={iconClasses} />
+                <span className="inline-flex justify-center items-center space-x-1 group">
+                    <span className="font-semibold">{children}</span>
+                    <ExternalLink
+                        className={`text-primary dark:text-primary-dark opacity-30 group-hover:opacity-50 ${iconClasses}`}
+                    />
                 </span>
             ) : (
                 children
