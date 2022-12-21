@@ -95,7 +95,7 @@ const sections = [
         ],
     },
     {
-        name: 'Session Recording pricing breakdown',
+        name: 'Session recording pricing breakdown',
         features: [
             {
                 name: 'First 15,000 recordings/mo',
