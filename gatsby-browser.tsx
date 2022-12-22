@@ -4,6 +4,7 @@ import './src/styles/global.css'
 import HandbookLayout from './src/templates/Handbook'
 import Product from './src/templates/Product'
 import Job from './src/templates/Job'
+import QuestionTopic from './src/pages/questions/topics/{SqueakTopic.slug}'
 import { Provider as ToastProvider } from './src/context/toast'
 import { RouteUpdateArgs } from 'gatsby'
 
@@ -46,6 +47,8 @@ export const wrapPageElement = ({ element, props }) => {
         <Product {...props} />
     ) : /^careers\//.test(slug) ? (
         <Job {...props} />
+    ) : /^questions\/topics\//.test(slug) ? (
+        <QuestionTopic {...props} />
     ) : (
         element
     )

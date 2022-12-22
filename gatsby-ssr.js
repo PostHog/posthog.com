@@ -11,6 +11,7 @@ import { initKea, wrapElement } from './kea'
 import HandbookLayout from './src/templates/Handbook'
 import Product from './src/templates/Product'
 import Job from './src/templates/Job'
+import QuestionTopic from './src/pages/questions/topics/{SqueakTopic.slug}'
 
 export const wrapPageElement = ({ element, props }) => {
     const slug = props.location.pathname.substring(1)
@@ -26,6 +27,8 @@ export const wrapPageElement = ({ element, props }) => {
                 <Product {...props} />
             ) : /^careers\//.test(slug) ? (
                 <Job {...props} />
+            ) : /^questions\/topics\//.test(slug) ? (
+                <QuestionTopic {...props} />
             ) : (
                 element
             ),

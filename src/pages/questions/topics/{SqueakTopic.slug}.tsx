@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { CallToAction } from 'components/CallToAction'
 import { Slack } from 'components/Icons/Icons'
 import Layout from 'components/Layout'
@@ -9,6 +9,8 @@ import { Squeak } from 'squeak-react'
 import { graphql } from 'gatsby'
 import Link from 'components/Link'
 import { community } from '../../../sidebars/sidebars.json'
+import useSWRInfinite from 'swr/infinite'
+import QuestionsTable from 'components/Questions/QuestionsTable'
 
 interface ITopic {
     label: string
@@ -46,27 +48,41 @@ const TopicSidebar = () => {
     )
 }
 
-export default function SqueakTopics({ data }: IProps) {
+export default function SqueakTopics({ data: pageData }: IProps) {
+    const [sortBy] = useState<'newest' | 'activity' | 'popular'>('newest')
+
+    const { data, size, setSize, isLoading, mutate } = useSWRInfinite<any[]>(
+        (offset) =>
+            `${process.env.GATSBY_SQUEAK_API_HOST}/api/v1/questions?organizationId=${
+                process.env.GATSBY_SQUEAK_ORG_ID
+            }&start=${offset * 20}&perPage=20&published=true&sortBy=${sortBy}&topic=${pageData.squeakTopic.topicId}`,
+        (url: string) =>
+            fetch(url)
+                .then((r) => r.json())
+                .then((r) => r.questions)
+    )
+
+    const questions = React.useMemo(() => {
+        return data?.flat() || []
+    }, [size, data])
+
     return (
         <>
-            <SEO title={`${data.squeakTopic.label} - PostHog`} />
+            <SEO title={`${pageData.squeakTopic.label} - PostHog`} />
             <Layout>
-                <PostLayout title={data.squeakTopic.label} menu={community} sidebar={<TopicSidebar />} hideSurvey>
-                    <section className="my-8 lg:my-0">
+                <PostLayout title={pageData.squeakTopic.label} menu={community} sidebar={<TopicSidebar />} hideSurvey>
+                    <section className="my-8 lg:my-0 pb-12">
                         <div className="mb-4">
                             <Link to="/questions" className="text-gray hover:text-gray-accent-light">
                                 ← Back to Questions
                             </Link>
                         </div>
-
-                        <Squeak
-                            profileLink={squeakProfileLink}
-                            limit={5}
-                            topics={false}
-                            slug={null}
-                            apiHost={process.env.GATSBY_SQUEAK_API_HOST as string}
-                            organizationId={process.env.GATSBY_SQUEAK_ORG_ID as string}
-                            topic={data.squeakTopic.topicId}
+                        <QuestionsTable
+                            hideLoadMore
+                            questions={questions}
+                            size={size}
+                            setSize={setSize}
+                            isLoading={isLoading}
                         />
                     </section>
                 </PostLayout>
