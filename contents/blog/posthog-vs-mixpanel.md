@@ -277,7 +277,7 @@ PostHog and Mixpanel both support a broad range of tracking options and librarie
             <td className="w-3/12"></td>
             <td><strong>Mixpanel</strong></td>
             <td><strong>PostHog</strong></td>
-            <td><strong>PostHog feature support</strong></td>
+            <td><strong>Notes for PostHog</strong></td>
         </tr>
     </thead>
     <tbody>
@@ -344,7 +344,7 @@ Some PostHog features, such as session recording and autocapture, are only avail
             <td className="w-3/12"></td>
             <td><strong>Mixpanel</strong></td>
             <td><strong>PostHog</strong></td>
-            <td><strong>PostHog feature support</strong></td>
+            <td><strong>Notes for PostHog</strong></td>
         </tr>
     </thead>
     <tbody>
