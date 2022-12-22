@@ -29,7 +29,7 @@ In this guide, we'll cover:
 
 ### 1. PostHog does more than product analytics
 
-Don't mistake us, product analytics is a core part of our platform, but it's just one cog in a suite of vital tools for product and data teams. When you adopt PostHog you also get session recording (with console logs), feature flagging, A/B and multivariate testing, and customizable data pipelines – all seamlessly integrated and with just one bill to pay.
+Product analytics is a core part of our platform, but it's just one cog in a suite of vital tools for product and data teams. When you adopt PostHog you also get session recording (with console logs), feature flagging, A/B and multivariate testing, and customizable data pipelines – all seamlessly integrated.
 
 ### 2. It's built for engineers
 
@@ -106,7 +106,7 @@ PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our 
 
 - **Feature flagging:** Mixpanel doesn't have any built-in feature flag functionality. PostHog supports unlimited flags for free, and targeting by percentage or user properties. Visit [our feature flag page](/product/feature-flags) for more information.
 
-- **Session recording:** PostHog offers 15,000 session recordings per month for free. Sensitive data can be obscured from recordings using CSS classes. Visit our [session recording page](/product/session-recording) for more information.
+- **Session recording:** PostHog offers 15,000 session recordings (with console logs) per month for free. Visit our [session recording page](/product/session-recording) for more information.
 
 ### Product analytics
 
@@ -191,13 +191,13 @@ PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our 
 </table>
 </div>
 
-- **Correlation analysis:** When viewing a funnel in PostHog, [correlation analysis](/product/correlation-analysis) automatically suggests events and properties that correlate to success or failure – e.g. "people who converted were 10x more likely to versus people who dropped off". We use transparent, testable statistical models – no phony "AI" here.
+- **Correlation analysis:** When viewing a funnel in PostHog, [correlation analysis](/product/correlation-analysis) automatically suggests events and properties that correlate to success or failure. We use transparent, testable statistical models – no phony "AI" here.
 
 - **SQL query editor:** Mixpanel doesn't support SQL queries, instead opting for its own query language, JQL (JavaScript Query Language). PostHog's SQL query editor is [currently in development](/PostHog/posthog/issues/12352).
 
 ## Tracking & SDKs
 
-PostHog and Mixpanel both support a broad range of tracking options and libraries. The main difference is PostHog supports event autocapture, so you don't have to manually instrument all your events to track them,
+PostHog and Mixpanel both support a broad range of tracking options and libraries, and manual event instrumentation. But PostHog also supports event autocapture, so you don't have to manually instrument all your events to track them,
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -226,7 +226,7 @@ PostHog and Mixpanel both support a broad range of tracking options and librarie
             <td><strong>Combined events</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Track related events as a single trackable action</td>
+            <td>Track related events as a single trackable action or behavior</td>
         </tr>
         <tr>
             <td><strong>Reverse proxy available</strong></td>
@@ -258,7 +258,7 @@ PostHog and Mixpanel both support a broad range of tracking options and librarie
 
 ### Why autocapture?
 
-Mixpanel, like Amplitude, forces you to manually instrument every event you want to track. Got a question about something you're not already tracking? Tough luck, it's time to write new tracking code and wait for the data! 
+Mixpanel, like Amplitude, forces you to manually instrument every event you want to track. That means you can only create queries based on events you've chosen to track in advance. Every time you think of something new to track, you then need to wait for the data. 
 
 Autocapture eliminates this tedious process. Just deploy our snippet and we'll do the hard work. In doing so, you're creating a powerful dataset you can call upon whenever you need it. Autocapture is ideal for fast moving teams who want to ship code product improvements quickly. 
 
@@ -317,8 +317,8 @@ To quote Tony Stark: “An intelligence agency which fears intelligence is, hist
         </tr>
         <tr>
             <td><strong>Unity</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td>Event tracking for game developers</td>
         </tr>
     </tbody>
@@ -333,7 +333,6 @@ To quote Tony Stark: “An intelligence agency which fears intelligence is, hist
 
 ### Server libraries
 
-Some PostHog features, such as session recording and autocapture, are only available via our client-side libraries.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -398,6 +397,7 @@ Some PostHog features, such as session recording and autocapture, are only avail
 </table>
 </div>
 
+Some PostHog features, such as session recording and autocapture, are only available via our client-side libraries.
 ## Integrations
 
 Mixpanel claims over 50 official integrations covering a wide-range of use cases. Given its focus on product analytics alone, many of these integrations connect to third-party tools for A/B testing, feature flag, and marketing use cases.
@@ -653,7 +653,7 @@ As an open source platform designed for technical teams, PostHog integrates with
 
 ### Marketing & sales
 
-Both platforms support a wide-range of sales and marketing tools to support automation flows and syncing of user data.
+Both platforms integrate with a wide-range of sales and marketing tools to support automation flows and user data synchronization. 
 
 Mixpanel has a specific advantage in connecting to Google and Facebook's advertising platforms directly, enabling in-product tracking of campaign ROI. 
 
