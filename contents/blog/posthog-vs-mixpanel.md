@@ -1,11 +1,11 @@
 ---
-date: 2022-12-05
+date: 2022-12-22
 title: PostHog vs Mixpanel
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImage: ../images/blog/posthog-vs-mixpanel/posthog-vs-mixpanel.jpeg
 featuredImageType: full
 author: ["andy-vandervell"]
 categories: ["Guides", "Comparisons"]
@@ -42,6 +42,8 @@ PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our 
 > This guide compares Mixpanel's self-serve Growth plan with PostHog Cloud. Features available on other plans are marked as such.
 
 ## Features
+
+
 
 ### Platform
 
@@ -182,8 +184,8 @@ PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our 
             <td>Use custom formulas to calculate unique insights</td>
         </tr>
         <tr>
-            <td><strong>SQL query editor</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td><strong>Query editor</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center">Coming Q1 2023</td>
             <td>Write your own queries in SQL</td>
         </tr>          
@@ -193,7 +195,7 @@ PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our 
 
 - **Correlation analysis:** When viewing a funnel in PostHog, [correlation analysis](/product/correlation-analysis) automatically suggests events and properties that correlate to success or failure. We use transparent, testable statistical models – no phony "AI" here.
 
-- **SQL query editor:** Mixpanel doesn't support SQL queries, instead opting for its own query language, JQL (JavaScript Query Language). PostHog's SQL query editor is [currently in development](/PostHog/posthog/issues/12352).
+- **Query editor:** Mixpanel doesn't support SQL queries, instead opting for its own query language, JQL (JavaScript Query Language). PostHog's SQL query editor is [currently in development](/PostHog/posthog/issues/12352).
 
 ## Tracking & SDKs
 
@@ -446,7 +448,7 @@ The [PostHog App Store](/apps) has over 50 apps as well, though not all of these
         <tr>
             <td><strong>Azure Blob Storage</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Export data to Microsoft Azure</td>
         </tr>
         <tr>
@@ -515,12 +517,6 @@ The [PostHog App Store](/apps) has over 50 apps as well, though not all of these
             <td>Import data from Redshift for analysis</td>
         </tr>
         <tr>
-            <td><strong>Amazon Kinesis</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Stream events from Amazon Kinesis stream</td>
-        </tr>
-        <tr>
             <td><strong>Amazon S3</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
@@ -540,7 +536,7 @@ The [PostHog App Store](/apps) has over 50 apps as well, though not all of these
         </tr>
         <tr>
             <td><strong>Snowflake</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Import Snowflake data for analysis</td>
         </tr>
@@ -561,12 +557,6 @@ The [PostHog App Store](/apps) has over 50 apps as well, though not all of these
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Ingest events tracked in RudderStack</td>
-        </tr>
-        <tr>
-            <td><strong>mParticle</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Ingest events tracked in mParticle CDP</td>
         </tr>
         <tr>
             <td><strong>Hightouch</strong></td>
