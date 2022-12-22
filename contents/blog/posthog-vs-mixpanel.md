@@ -258,15 +258,15 @@ PostHog and Mixpanel both support a broad range of tracking options and librarie
 </table>
 </div>
 
-### Why autocapture?
-
-Mixpanel, like Amplitude, forces you to manually instrument every event you want to track. That means you can only create queries based on events you've chosen to track in advance. Every time you think of something new to track, you then need to wait for the data. 
-
-Autocapture eliminates this tedious process. Just deploy our snippet and we'll do the hard work. In doing so, you're creating a powerful dataset you can call upon whenever you need it. Autocapture is ideal for fast moving teams who want to ship code product improvements quickly. 
-
-Some would have you believe that autocapture generates "too much data" that's hard to deal with. Our answer?
-
-To quote Tony Stark: “An intelligence agency which fears intelligence is, historically, not awesome.”
+> ### Why autocapture?
+>
+>Mixpanel, like Amplitude, forces you to manually instrument every event you want to track. That means you can only create queries based on events you've chosen to track in advance. Every time you think of something new to track, you then need to wait for the data. 
+>
+>Autocapture eliminates this tedious process. Just deploy our snippet and we'll do the hard work. In doing so, you're creating a powerful dataset you can call upon whenever you need it. Autocapture is ideal for fast moving teams who want to ship code product improvements quickly. 
+>
+> Some would have you believe that autocapture generates "too much data" that's hard to deal with. Our answer?
+> 
+> To quote Tony Stark: “An intelligence agency which fears intelligence is, historically, not awesome.”
 
 ### Client libraries
 
