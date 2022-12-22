@@ -17,13 +17,13 @@ Want to know how PostHog and Mixpanel are different? If you remember nothing els
 
 2. PostHog is an all-in-one platform that _includes_ product analytics **and** a whole bunch more.
 
-In this guide, we'll cover:
+**Contents**
 
-- Mixpanel and PostHog's [core features](#features)
-- How they [track usage](#tracking--sdks) and [library support](#client-libraries)
-- [Available integrations](#integrations) across multiple categories
+- [Feature comparison](#feature-comparison)
+- [Tracking & SDKs](#tracking--sdks)
+- [Integrations](#integrations)
 - [Privacy compliance](#privacy-compliance) and [admin options](#admin--security) 
-- [Frequently asked questions](#frequently-asked-questions) about PostHog and Mixpanel
+- [Frequently asked questions](#frequently-asked-questions)
 
 ## How is PostHog different to Mixpanel?
 
@@ -41,9 +41,7 @@ PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our 
 
 > This guide compares Mixpanel's self-serve Growth plan with PostHog Cloud. Features available on other plans are marked as such.
 
-## Features
-
-
+## Feature comparison
 
 ### Platform
 
@@ -197,6 +195,8 @@ PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our 
 
 - **Query editor:** Mixpanel doesn't support SQL queries, instead opting for its own query language, JQL (JavaScript Query Language). PostHog's SQL query editor is [currently in development](/PostHog/posthog/issues/12352).
 
+<ArrayCTA />
+
 ## Tracking & SDKs
 
 PostHog and Mixpanel both support a broad range of tracking options and libraries, and manual event instrumentation. But PostHog also supports event autocapture, so you don't have to manually instrument all your events to track them,
@@ -277,7 +277,7 @@ To quote Tony Stark: “An intelligence agency which fears intelligence is, hist
             <td className="w-3/12"></td>
             <td><strong>Mixpanel</strong></td>
             <td><strong>PostHog</strong></td>
-            <td></td>
+            <td><strong>PostHog feature support</strong></td>
         </tr>
     </thead>
     <tbody>
@@ -291,37 +291,37 @@ To quote Tony Stark: “An intelligence agency which fears intelligence is, hist
             <td><strong>React Native</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>PostHog: Session recording not available</td>
+            <td>Session recording not available</td>
         </tr>
         <tr>
             <td><strong>Flutter</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>PostHog: Event tracking and user identification only</td>
+            <td>Event tracking and user identification only</td>
         </tr>
         <tr>
             <td><strong>iOS (Swift)</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>PostHog: Autocapture and session recording not available</td>
+            <td>Autocapture and session recording not available</td>
         </tr>
         <tr>
             <td><strong>iOS (Objective-C)</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>PostHog: Autocapture and session recording not available</td>
+            <td>Autocapture and session recording not available</td>
         </tr>
         <tr>
             <td><strong>Android</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>PostHog: Event tracking and user identification only</td>
+            <td>Event tracking and user identification only</td>
         </tr>
         <tr>
             <td><strong>Unity</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Event tracking for game developers</td>
+            <td></td>
         </tr>
     </tbody>
 </table>
@@ -335,6 +335,7 @@ To quote Tony Stark: “An intelligence agency which fears intelligence is, hist
 
 ### Server libraries
 
+Some PostHog features, such as session recording and autocapture, are only available via our client-side libraries.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -343,7 +344,7 @@ To quote Tony Stark: “An intelligence agency which fears intelligence is, hist
             <td className="w-3/12"></td>
             <td><strong>Mixpanel</strong></td>
             <td><strong>PostHog</strong></td>
-            <td></td>
+            <td><strong>PostHog feature support</strong></td>
         </tr>
     </thead>
     <tbody>
@@ -351,55 +352,56 @@ To quote Tony Stark: “An intelligence agency which fears intelligence is, hist
             <td><strong>Node.js</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>PostHog: Supports events, feature flags, user ID, and group analytics</td>
+            <td>Supports events, feature flags, user ID, and group analytics</td>
         </tr>
         <tr>
             <td><strong>Go</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>PostHog: Supports events, feature flags, user ID, and group analytics</td>
+            <td>Supports events, feature flags, user ID, and group analytics</td>
         </tr>
         <tr>
             <td><strong>Python</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>PostHog: Supports events, feature flags, user ID, and group analytics</td>
+            <td>Supports events, feature flags, user ID, and group analytics</td>
         </tr>
         <tr>
             <td><strong>Rust</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center">Alpha</td>
-            <td>PostHog: Under development, not recommended for production</td>
+            <td>Under development, not recommended for production</td>
         </tr>
         <tr>
             <td><strong>Java</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center">Beta</td>
-            <td>PostHog: Support events and user ID</td>
+            <td>Support events and user ID</td>
         </tr>
         <tr>
             <td><strong>PHP</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>PostHog: Supports events, feature flags, user ID, and group analytics</td>
+            <td>Supports events, feature flags, user ID, and group analytics</td>
         </tr>
         <tr>
             <td><strong>Ruby</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>PostHog: Supports events, feature flags, user ID, and group analytics</td>
+            <td>Supports events, feature flags, user ID, and group analytics</td>
         </tr>
         <tr>
             <td><strong>Elixir</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>PostHog: Community maintained</td>
+            <td>Community maintained</td>
         </tr>
     </tbody>
 </table>
 </div>
 
-Some PostHog features, such as session recording and autocapture, are only available via our client-side libraries.
+<ArrayCTA />
+
 ## Integrations
 
 Mixpanel claims over 50 official integrations covering a wide-range of use cases. Given its focus on product analytics alone, many of these integrations connect to third-party tools for A/B testing, feature flag, and marketing use cases.
@@ -797,6 +799,8 @@ Mixpanel and PostHog both support popular messaging apps and automation platform
 </table>
 </div>
 
+<ArrayCTA />
+
 ## Privacy, admin & security
 
 ### Privacy compliance
@@ -868,7 +872,7 @@ Mixpanel and PostHog both support popular messaging apps and automation platform
         <tr>
             <td><strong>SOC 2 certification</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center">Coming Q4</td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Externally audited security</td>
         </tr>
         <tr>
@@ -907,6 +911,8 @@ Mixpanel and PostHog both support popular messaging apps and automation platform
 
 - **PostHog Enterprise:** Our [Enterprise tier](/enterprise) includes single sign-on, private projects, and a dedicated Slack support channel.
 
+<ArrayCTA />
+
 ## Frequently asked questions
 
 - [Who should self-host PostHog?](#who-should-self-host-posthog)
@@ -923,7 +929,11 @@ Enterprises looking to self-host will require an infrastructure team knowledgeab
 
 ### How long does it take to deploy PostHog?
 
-When using PostHog Cloud, mere minutes. All you need to do is include a tracking snippet in your website and you're good to go. See our guide to [getting started on PostHog Cloud](/docs/getting-started/cloud) for more info.
+When using PostHog Cloud, mere minutes. All you need to do is include a tracking snippet in your product or website and (thanks to autocapture) you're good to go. See our guide to [getting started on PostHog Cloud](/docs/getting-started/cloud) for more info.
+
+### How long does it take to deploy Mixpanel?
+
+Integrating Mixpanel is simple enough – you can embed its snippet within `<head>` or install via NPM – but its lack of autocapture means you'll need invest time and resources to instrument events manually be
 
 ### Does PostHog use cookies?
 
@@ -956,3 +966,5 @@ Discounts for annual contracts are available on application.
 Mixpanel prices based on "Monthly Track Users" (MTUs) and applies a limit of 1,000 events per MTU. A company with 10,000 MTUs would pay $190 per month, or £133 per month if you pay annually.
 
 Mixpanel also offers a free tier with a 100k MTU limit, however it applies numerous feature limits – e.g. you can create but **not save** cohorts.
+
+<ArrayCTA />
