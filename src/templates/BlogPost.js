@@ -54,7 +54,7 @@ const Intro = ({ featuredImage, title, featuredImageType, contributors }) => {
     )
 }
 
-const BlogPostSidebar = ({ contributors, date, filePath, title, categories, location, pageViews }) => {
+const BlogPostSidebar = ({ contributors, date, filePath, title, tags, location, pageViews }) => {
     return (
         <>
             {contributors && (
@@ -70,9 +70,9 @@ const BlogPostSidebar = ({ contributors, date, filePath, title, categories, loca
                     <PageViews pageViews={pageViews.toLocaleString()} />
                 </SidebarSection>
             )}
-            {categories && (
-                <SidebarSection title="Topic(s)">
-                    <Topics topics={categories} />
+            {tags && (
+                <SidebarSection title="Tag(s)">
+                    <Topics topics={tags.map((tag) => ({ name: tag }))} />
                 </SidebarSection>
             )}
             <SidebarSection>
@@ -92,7 +92,7 @@ const BlogPostSidebar = ({ contributors, date, filePath, title, categories, loca
 export default function BlogPost({ data, pageContext, location }) {
     const { postData } = data
     const { body, excerpt, fields } = postData
-    const { date, title, featuredImage, featuredImageType, contributors, description } = postData?.frontmatter
+    const { date, title, featuredImage, featuredImageType, contributors, description, tags } = postData?.frontmatter
     const lastUpdated = postData?.parent?.fields?.gitLogLatestDate
     const filePath = postData?.parent?.relativePath
     const components = {
@@ -133,7 +133,7 @@ export default function BlogPost({ data, pageContext, location }) {
                 hideSurvey
                 sidebar={
                     <BlogPostSidebar
-                        categories={categories}
+                        tags={tags}
                         contributors={contributors}
                         date={date}
                         filePath={filePath}
