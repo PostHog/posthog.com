@@ -915,7 +915,7 @@ Mixpanel and PostHog both support popular messaging apps and automation platform
 
 - [Who should self-host PostHog?](#who-should-self-host-posthog)
 - [How long does it take to deploy PostHog?](#how-long-does-it-take-to-deploy-posthog)
-- [How long does it take to deploy Mixpanel](#how-long-does-it-take-to-deploy-mixpanel
+- [How long does it take to deploy Mixpanel](#how-long-does-it-take-to-deploy-mixpanel)
 - [Does PostHog user cookies?](#does-posthog-use-cookies)
 - [How much does PostHog cost?](#how-much-does-posthog-cost)
 - [How much does Mixpanel cost?](#how-much-does-mixpanel-cost)
