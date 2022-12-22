@@ -88,7 +88,7 @@ They have tools to help them with this. These include:
 ![Sentry](../images/blog/product-engineer-tools/sentry.png)
 <Caption>Sentry provides multiple tools (including stack traces) for monitoring errors and problems in your code.</Caption>
 
-Product engineers are reliant on these because they are responsible for the products they ship. They can't pawn maintanance off on other team members. Making sure they keep track of performance and deal with issues effectively is vital. It also ensures they remain focused on shipping high quality code the first time.
+Product engineers are reliant on these because they are responsible for the products they ship. They can't pawn maintenance off on other team members. Making sure they keep track of performance and deal with issues effectively is vital. It also ensures they remain focused on shipping high quality code the first time.
 
 ## What is the point of all these tools?
 
