@@ -17,13 +17,13 @@ Want to know how PostHog and Mixpanel are different? If you remember nothing els
 
 2. PostHog is an all-in-one platform that _includes_ product analytics **and** a whole bunch more.
 
-**Contents**
+In this guide, we will compare:
 
-- [Feature comparison](#feature-comparison)
-- [Tracking & SDKs](#tracking--sdks)
-- [Integrations](#integrations)
+- PostHog and Mixpanel's [core features](#feature-comparison)
+- [How they track user behavior](#tracking--sdks) and [library support](#client-libraries)
+- Available [integrations](#integrations) with [data platforms](#data-export), [marketing](#marketing--sales), [dev tools](#dev-tools--support), and more 
 - [Privacy compliance](#privacy-compliance) and [admin options](#admin--security) 
-- [Frequently asked questions](#frequently-asked-questions)
+- [Frequently asked questions](#frequently-asked-questions) about PostHog and Mixpanel
 
 ## How is PostHog different to Mixpanel?
 
@@ -966,5 +966,9 @@ Discounts for annual contracts are available on application.
 Mixpanel prices based on "Monthly Track Users" (MTUs) and applies a limit of 1,000 events per MTU. A company with 10,000 MTUs would pay $190 per month, or £133 per month if you pay annually.
 
 Mixpanel also offers a free tier with a 100k MTU limit, however it applies numerous feature limits – e.g. you can create but **not save** cohorts.
+
+### How do PostHog and Mixpanel compare to Amplitude?
+
+Amplitude is closer to Mixpanel than PostHog – it doesn't support features session recordings or feature flagging, and doesn't offer autocapture. Read our [PostHog vs Amplitude](/blog/posthog-vs-amplitude) comparison for information.
 
 <ArrayCTA />
