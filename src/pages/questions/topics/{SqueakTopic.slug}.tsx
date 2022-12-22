@@ -1,11 +1,14 @@
+import React from 'react'
 import { CallToAction } from 'components/CallToAction'
 import { Slack } from 'components/Icons/Icons'
 import Layout from 'components/Layout'
 import PostLayout, { SidebarSection } from 'components/PostLayout'
 import { SEO } from 'components/seo'
 import { squeakProfileLink } from 'lib/utils'
-import React from 'react'
 import { Squeak } from 'squeak-react'
+import { graphql } from 'gatsby'
+import Link from 'components/Link'
+import { community } from '../../../sidebars/sidebars.json'
 
 interface ITopic {
     label: string
@@ -13,8 +16,15 @@ interface ITopic {
 }
 
 interface IProps {
+    data: {
+        squeakTopic: {
+            id: string
+            topicId: string
+            label: string
+        }
+    }
     pageContext: {
-        label: string
+        id: string
         topics: ITopic[]
     }
 }
@@ -36,26 +46,27 @@ const TopicSidebar = () => {
     )
 }
 
-export default function SqueakTopics({ pageContext: { id, label, menu } }: IProps) {
+export default function SqueakTopics({ data }: IProps) {
     return (
         <>
-            <SEO title={`${label} - PostHog`} />
+            <SEO title={`${data.squeakTopic.label} - PostHog`} />
             <Layout>
-                <PostLayout
-                    title={label}
-                    menu={[{ name: 'Questions', url: '', children: menu }]}
-                    sidebar={<TopicSidebar />}
-                    hideSurvey
-                >
+                <PostLayout title={data.squeakTopic.label} menu={community} sidebar={<TopicSidebar />} hideSurvey>
                     <section className="my-8 lg:my-0">
+                        <div className="mb-4">
+                            <Link to="/questions" className="text-gray hover:text-gray-accent-light">
+                                ← Back to Questions
+                            </Link>
+                        </div>
+
                         <Squeak
                             profileLink={squeakProfileLink}
                             limit={5}
                             topics={false}
                             slug={null}
-                            apiHost={'https://squeak.cloud'}
-                            organizationId="a898bcf2-c5b9-4039-82a0-a00220a8c626"
-                            topic={id}
+                            apiHost={process.env.GATSBY_SQUEAK_API_HOST as string}
+                            organizationId={process.env.GATSBY_SQUEAK_ORG_ID as string}
+                            topic={data.squeakTopic.topicId}
                         />
                     </section>
                 </PostLayout>
@@ -63,3 +74,13 @@ export default function SqueakTopics({ pageContext: { id, label, menu } }: IProp
         </>
     )
 }
+
+export const query = graphql`
+    query ($id: String!) {
+        squeakTopic(id: { eq: $id }) {
+            id
+            topicId
+            label
+        }
+    }
+`

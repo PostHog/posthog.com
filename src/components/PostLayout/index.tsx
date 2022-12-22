@@ -68,19 +68,19 @@ export const SidebarSection = ({
 }
 
 export const Topics = ({ topics }: { topics: ITopic[] }) => {
+    const buttonClasses = `px-4 py-2 inline-block bg-gray-accent-light border-black/80 rounded-sm font-semibold text-sm leading-none`
     return (
         <ul className="list-none p-0 flex items-start flex-wrap -m-1">
             {topics.map(({ name, url, state }: ITopic) => {
                 return (
                     <li className="m-1" key={name}>
-                        <Chip
-                            state={state}
-                            className="dark:text-white/80 dark:hover:text-white/80 text-black/80 hover:text-black/80 dark:border-gray-accent-dark !bg-[#2D2D2D] !bg-opacity-5 !text-xs"
-                            href={url}
-                            size="xs"
-                        >
-                            {name}
-                        </Chip>
+                        {url ? (
+                            <Link className={`${buttonClasses} text-red dark:text-red`} to={url} state={state}>
+                                {name}
+                            </Link>
+                        ) : (
+                            <span className={`${buttonClasses} dark:text-black`}>{name}</span>
+                        )}
                     </li>
                 )
             })}
@@ -288,7 +288,7 @@ const Menu = ({
                             {isActive && (
                                 <motion.span
                                     variants={variants}
-                                    className="absolute w-[4px] bg-tan dark:bg-primary rounded-[2px] top-[2px] h-[calc(100%_-_4px)] left-0"
+                                    className="absolute w-[4px] bg-red rounded-[2px] top-[2px] h-[calc(100%_-_4px)] left-0"
                                     initial="hidden"
                                     animate="visible"
                                     exit="hidden"
@@ -572,7 +572,11 @@ export default function PostLayout({
             >
                 {menu && (
                     <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:block hidden relative z-20">
-                        <aside className="lg:sticky bg-tan dark:bg-primary top-0 flex-shrink-0 w-full justify-self-end px-4 lg:box-border my-10 lg:my-0 mr-auto overflow-y-auto lg:h-screen pb-10">
+                        <aside
+                            className={`lg:sticky bg-tan dark:bg-primary top-0 flex-shrink-0 w-full justify-self-end px-4 lg:box-border my-10 lg:my-0 mr-auto overflow-y-auto lg:h-screen pb-10 ${
+                                hideSearch ? 'pt-5' : ''
+                            }`}
+                        >
                             {!hideSearch && (
                                 <div className="lg:sticky top-0 z-20 pt-4 -mx-2 px-1 bg-tan dark:bg-primary relative">
                                     <SidebarSearchBox />
@@ -607,7 +611,7 @@ export default function PostLayout({
                                 </div>
                             </div>
 
-                            <div ref={bottomSidebarSection} className="lg:pt-6 !border-t-0 mt-auto sticky bottom-0">
+                            <div ref={bottomSidebarSection} className="lg:pt-6 !border-t-0 mt-auto lg:sticky bottom-0">
                                 <div className="bg-tan dark:bg-primary">
                                     {view === 'Article' && toc?.length > 1 && !showTocButton && (
                                         <div

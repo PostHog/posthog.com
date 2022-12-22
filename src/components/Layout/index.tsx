@@ -4,6 +4,7 @@ import { Footer } from '../Footer/Footer'
 import CookieBanner from 'components/CookieBanner'
 import usePostHog from '../../hooks/usePostHog'
 import { SearchProvider } from 'components/Search/SearchContext'
+import { UserProvider } from '../../hooks/useUser'
 import Banner from '../Banner/index'
 
 import './Fonts.scss'
@@ -22,13 +23,18 @@ const Layout = ({ children, className = '' }: { children: React.ReactNode; class
 
     return (
         <SearchProvider>
-            <div className={className}>
-                <Banner />
-                <Header />
-                <main>{children}</main>
-                <Footer />
-                <CookieBanner />
-            </div>
+            <UserProvider
+                apiHost={process.env.GATSBY_SQUEAK_API_HOST as string}
+                organizationId={process.env.GATSBY_SQUEAK_ORG_ID as string}
+            >
+                <div className={className}>
+                    <Banner />
+                    <Header />
+                    <main>{children}</main>
+                    <Footer />
+                    <CookieBanner />
+                </div>
+            </UserProvider>
         </SearchProvider>
     )
 }

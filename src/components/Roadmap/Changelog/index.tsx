@@ -5,8 +5,8 @@ import groupBy from 'lodash.groupby'
 import { SEO } from 'components/seo'
 import PostLayout from 'components/PostLayout'
 import Link from 'components/Link'
-import { Check } from 'components/Icons/Icons'
 import Checkbox from 'components/Checkbox'
+import { community } from '../../../sidebars/sidebars.json'
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
@@ -80,20 +80,7 @@ export default function Changelog() {
     return (
         <Layout>
             <SEO title="PostHog Changelog" />
-            <PostLayout
-                contentWidth={'100%'}
-                article={false}
-                title={'Changelog'}
-                hideSearch
-                hideSurvey
-                menu={[
-                    { name: 'Questions', url: '/questions' },
-                    { name: 'Roadmap', url: '/roadmap' },
-                    { name: 'Changelog', url: '/roadmap/changelog' },
-                    { name: 'Contributors', url: '/contributors' },
-                    { name: 'Core team', url: '/handbook/company/team' },
-                ]}
-            >
+            <PostLayout contentWidth={'100%'} article={false} title={'Changelog'} hideSurvey menu={community}>
                 <h1 className="font-bold text-5xl mb-2 lg:mt-0">Changelog</h1>
                 <p className="text-black/80">Here's a history of everything we've built.</p>
                 <div className="border-y border-dashed border-gray-accent-light py-4 flex space-x-6 flex-nowrap overflow-auto whitespace-nowrap scrollbar-hide">

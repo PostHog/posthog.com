@@ -21,9 +21,9 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
     async function subscribe(email: string) {
         setLoading(true)
         if (email) {
-            const res = await fetch('https://squeak.cloud/api/roadmap/subscribe', {
+            const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmap/subscribe`, {
                 method: 'POST',
-                body: JSON.stringify({ id: roadmapId, organizationId: 'a898bcf2-c5b9-4039-82a0-a00220a8c626' }),
+                body: JSON.stringify({ id: roadmapId, organizationId: process.env.GATSBY_SQUEAK_ORG_ID }),
                 credentials: 'include',
                 headers: {
                     Accept: 'application/json',
@@ -47,9 +47,9 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
     async function unsubscribe(email: string) {
         setLoading(true)
         if (email) {
-            const res = await fetch('https://squeak.cloud/api/roadmap/unsubscribe', {
+            const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmap/unsubscribe`, {
                 method: 'POST',
-                body: JSON.stringify({ id: roadmapId, organizationId: 'a898bcf2-c5b9-4039-82a0-a00220a8c626' }),
+                body: JSON.stringify({ id: roadmapId, organizationId: process.env.GATSBY_SQUEAK_ORG_ID }),
                 credentials: 'include',
                 headers: {
                     Accept: 'application/json',
@@ -148,8 +148,8 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
 
                             <Login
                                 onSubmit={(data: { email: string }) => subscribe(data?.email)}
-                                apiHost="https://squeak.cloud"
-                                organizationId="a898bcf2-c5b9-4039-82a0-a00220a8c626"
+                                apiHost={process.env.GATSBY_SQUEAK_API_HOST}
+                                organizationId={process.env.GATSBY_SQUEAK_ORG_ID}
                             />
                         </>
                     ) : (

@@ -9,6 +9,7 @@ import { UnderConsideration } from './UnderConsideration'
 import { InProgress } from './InProgress'
 import { OrgProvider, UserProvider } from 'squeak-react'
 import { ImageDataLike, StaticImage } from 'gatsby-plugin-image'
+import { community } from '../../sidebars/sidebars.json'
 
 interface IGitHubPage {
     title: string
@@ -127,24 +128,14 @@ export default function Roadmap() {
         <Layout>
             <SEO title="PostHog Roadmap" />
             <OrgProvider
-                value={{ organizationId: 'a898bcf2-c5b9-4039-82a0-a00220a8c626', apiHost: 'https://squeak.cloud' }}
+                value={{
+                    organizationId: process.env.GATSBY_SQUEAK_ORG_ID as string,
+                    apiHost: process.env.GATSBY_SQUEAK_API_HOST as string,
+                }}
             >
                 <UserProvider>
                     <div className="border-t border-dashed border-gray-accent-light">
-                        <PostLayout
-                            contentWidth={'100%'}
-                            article={false}
-                            title={'Roadmap'}
-                            hideSearch
-                            hideSurvey
-                            menu={[
-                                { name: 'Questions', url: '/questions' },
-                                { name: 'Roadmap', url: '/roadmap' },
-                                { name: 'Changelog', url: '/roadmap/changelog' },
-                                { name: 'Contributors', url: '/contributors' },
-                                { name: 'Core team', url: '/handbook/company/team' },
-                            ]}
-                        >
+                        <PostLayout contentWidth={'100%'} article={false} title={'Roadmap'} hideSurvey menu={community}>
                             <div className="relative">
                                 <h1 className="font-bold text-5xl mb-8 lg:-mt-8 xl:-mt-0">Roadmap</h1>
                                 <figure className="-mx-5 -mt-8 sm:-mt-20 lg:-mx-12 xl:-mt-32">

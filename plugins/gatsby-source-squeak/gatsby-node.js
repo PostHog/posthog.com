@@ -7,17 +7,15 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, cache
     const { createNode, createParentChildLink } = actions
 
     const getQuestions = async () => {
-        const response = await fetch(`${apiHost}/api/questions`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                organizationId,
-                perPage: 1000,
-                published: true,
-            }),
-        })
+        const response = await fetch(
+            `${apiHost}/api/v1/questions?organizationId=${organizationId}&perPage=1000&published=true`,
+            {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+        )
 
         if (response.status !== 200) {
             return []
@@ -54,19 +52,9 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, cache
 
     const questions = await getQuestions()
 
-    questions.forEach(({ question: { slug, id, subject, replies, published, resolved, profile_id, permalink } }) => {
-        const question = {
-            slug,
-            replies,
-            published,
-            resolved,
-            subject,
-            permalink: permalink,
-            profileId: profile_id,
-        }
-
+    questions.forEach((question) => {
         const node = {
-            id: createNodeId(`question-${id}`),
+            id: createNodeId(`question-${question.id}`),
             parent: null,
             children: [],
             internal: {
@@ -75,8 +63,9 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, cache
             },
             ...question,
         }
+
         createNode(node)
-        replies && createReplies(node, replies)
+        createReplies(node, question.replies)
     })
 
     const topics = await fetch(`${apiHost}/api/topics?organizationId=${organizationId}`).then((res) => res.json())
@@ -115,7 +104,12 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, cache
             },
             label: label,
             topicId: id,
-            topics: topic,
+            topics: topic.map((topic) => {
+                return {
+                    ...topic,
+                    slug: slugify(topic.label, { lower: true }),
+                }
+            }),
             slug: slugify(label, { lower: true }),
         }
         createNode(node)
