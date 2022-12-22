@@ -927,11 +927,13 @@ Enterprises looking to self-host will require an infrastructure team knowledgeab
 
 ### How long does it take to deploy PostHog?
 
-When using PostHog Cloud, mere minutes. All you need to do is include a tracking snippet in your product or website and (thanks to autocapture) you're good to go. See our guide to [getting started on PostHog Cloud](/docs/getting-started/cloud) for more info.
+When using PostHog Cloud, mere minutes. All you need to do is include a tracking snippet in your product or website and (thanks to autocapture) you're immediately capturing events. Once up and running, you can enable session recording via your project settings. 
+
+See our guide to [getting started on PostHog Cloud](/docs/getting-started/cloud) for more info.
 
 ### How long does it take to deploy Mixpanel?
 
-Integrating Mixpanel is simple enough – you can embed its snippet within `<head>` or install via NPM – but its lack of autocapture means you'll need invest time and resources to instrument events manually be
+Integrating Mixpanel is simple enough – you can embed its snippet within `<head>` or install via NPM – but the lack of autocapture means you need to invest time and resources to instrument events manually before you can start creating insights.
 
 ### Does PostHog use cookies?
 
