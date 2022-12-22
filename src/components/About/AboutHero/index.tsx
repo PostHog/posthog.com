@@ -23,41 +23,10 @@ export const AboutHero = () => {
     const [hog4Data, setHog4Data] = React.useState<any | null>(null)
 
     React.useEffect(() => {
-        fetch('/lotties/about-hog-1.json', {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept-Encoding': 'gzip, deflate, br',
-            },
-        })
-            .then((res) => res.json())
-            .then(setHog1Data)
-
-        fetch('/lotties/about-hog-2.json', {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept-Encoding': 'gzip, deflate, br',
-            },
-        })
-            .then((res) => res.json())
-            .then(setHog2Data)
-
-        fetch('/lotties/about-hog-3.json', {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept-Encoding': 'gzip, deflate, br',
-            },
-        })
-            .then((res) => res.json())
-            .then(setHog3Data)
-
-        fetch('/lotties/about-hog-4.json', {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept-Encoding': 'gzip, deflate, br',
-            },
-        })
-            .then((res) => res.json())
-            .then(setHog4Data)
+        import('../../../../static/lotties/about-hog-1.json').then((data) => setHog1Data(data.default))
+        import('../../../../static/lotties/about-hog-2.json').then((data) => setHog2Data(data.default))
+        import('../../../../static/lotties/about-hog-3.json').then((data) => setHog3Data(data.default))
+        import('../../../../static/lotties/about-hog-4.json').then((data) => setHog4Data(data.default))
     }, [])
 
     return (

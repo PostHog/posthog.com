@@ -13,14 +13,7 @@ export default function NotFoundPage(): JSX.Element {
     const [submittedPreference, setSubmittedPreference] = useState(false)
 
     useEffect(() => {
-        fetch('/lotties/pizza-fight.json', {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept-Encoding': 'gzip, deflate, br',
-            },
-        })
-            .then((res) => res.json())
-            .then(setHogData)
+        import('../../../static/lotties/pizza-fight.json').then((data) => setHogData(data.default))
 
         posthog?.capture('page_404')
     }, [])
