@@ -911,8 +911,6 @@ Mixpanel and PostHog both support popular messaging apps and automation platform
 
 - **PostHog Enterprise:** Our [Enterprise tier](/enterprise) includes single sign-on, private projects, and a dedicated Slack support channel.
 
-<ArrayCTA />
-
 ## Frequently asked questions
 
 - [Who should self-host PostHog?](#who-should-self-host-posthog)
