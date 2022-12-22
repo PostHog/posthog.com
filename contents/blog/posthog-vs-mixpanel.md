@@ -104,7 +104,7 @@ PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our 
 
 - **Experiments:** Mixpanel offers an experiments feature in its Enterprise plan, but it's limited to running simple A/B tests. PostHog's experimentation suite supports A/B and multivariate tests using our integrated feature flagging. Visit our [experimentation product page](/product/experimentation-suite) for more info.
 
-- **Feature flagging:** Mixpanel doesn't have any built-in feature flag functionality. PostHog supports unlimited flags for free, and targeting by percentage or user properties. Visit [our feature flag page](/product/feature-flags) for more information.
+- **Feature flagging:** Mixpanel doesn't have any built-in feature flag functionality. PostHog Cloud includes unlimited flags for free. Visit [our feature flag page](/product/feature-flags) for more information.
 
 - **Session recording:** PostHog offers 15,000 session recordings (with console logs) per month for free. Visit our [session recording page](/product/session-recording) for more information.
 
