@@ -1,5 +1,5 @@
 ---
-date: 2022-12-14
+date: 2022-12-23
 title: The 6 essential tools of product engineers
 rootPage: /blog
 sidebar: Blog
@@ -11,18 +11,18 @@ featuredImageType: full
 categories: ["Startups", "Guides"]
 ---
 
-Like every role, [product engineers](/blog/what-is-a-product-engineer/) have a set of essential tools for their work. These tools are a mix of engineering and product, streamlined to their unique needs. This post goes over the 6 essential tools that help product engineers get insights from users, ship improvements quickly, and build great products.
+Like every role, [product engineers](/blog/what-is-a-product-engineer/) have a set of essential tools for their work, but their need to gather insights, ideate and deploy solutions independently makes creating efficient stack all the more important. Here we explore the popular engineering, product and automation tools that will help you gather insights and deploy product improvements at speed.
 
 ## Tools for talking to users
 
-Core to product engineers' success is a focus on users. This means they must talk to them. The tools for doing this aren’t groundbreaking, but they are useful for accomplishing the goal of building a product users' value.
+Product engineers focus on users, which means you **must** talk to them. The tools for doing this aren’t groundbreaking, but they are useful for accomplishing the goal of building a product users' value.
 
-To talk with users, product engineers use tools like Zoom, Google Meet, Slack (especially shared channels), [Superhuman](https://superhuman.com/), [Cron](https://cron.com/) (calendar), Calendly, and [SavvyCal](https://savvycal.com/). They also take advantage of automation by using tools like [customer.io](https://customer.io/), aha.io, [n8n.io](https://n8n.io/), and Zapier. They use these to gather feedback, run user interviews, and test ideas.
+Tools like Zoom, Google Meet, Slack (especially shared channels) are obvious starting points, but consider [Superhuman](https://superhuman.com/) for streamlining email, and tools like [Cron](https://cron.com/), Calendly, and [SavvyCal](https://savvycal.com/) for improving your calendar workflow. Automation tools like [customer.io](https://customer.io/), aha.io, [n8n.io](https://n8n.io/), and Zapier are also useful.
 
 ![User interview](../images/blog/product-engineer-tools/user-interview.jpeg)
 <Caption>We use a combination of Zapier, customer.io, Calendy, feature flags, and our <a href="https://github.com/PostHog/user-interview-app">interview app</a> to automate scheduling user interviews.</Caption>
 
-Unlike product managers, survey tools aren't used by product engineers. The data received from surveys is too indirect to be useful. General user information is valuable to the product and marketing teams, but product engineers need direct feedback on what they are building.
+We recommend avoiding survey tools, though. While general user information is valuable to product and marketing teams, product engineers need direct feedback on what they are building.
 
 ## Tools for understanding user behavior
 
@@ -35,20 +35,18 @@ For example, a product engineer sets an OKR to increase feature usage by paid us
 ![Session recordings](../images/blog/product-engineer-tools/session-recordings.png)
 <Caption>PostHog's <a href="/product/session-recording">session recordings</a> visualize what users are actually doing in your product</Caption>
 
-On top of PostHog, customer data platform or ETL tools like [Segment](/docs/integrate/third-party/segment), [Hightouch](/blog/hightouch-posthog-reverse-etl-integration), [Airbyte](/docs/apps/airbyte-export), Integrate.io, and Fivetran are often used to move and combine data between sources and storage locations. This enables product engineers to have the data they need for analysis, where they need it.
+On top of PostHog, customer data platform or ETL tools like [Segment](/docs/integrate/third-party/segment), [Hightouch](/blog/hightouch-posthog-reverse-etl-integration), [Airbyte](/docs/apps/airbyte-export), Integrate.io, and Fivetran are useful for moving and combining data between sources and storage locations. This enables product engineers to have the data they need for analysis, where they need it.
 
 ## Tools for organizing knowledge and priorities
 
-Once product engineers gather insights from users and data, they should develop ideas of what is impactful to build. It is a waste if this research and analysis does not lead to shipping better products.
-
-Note-taking and task management tools help with this, but many also weigh down individuals and teams. They introduce unnecessary work that gets in the way of shipping products that help users (**cough** Jira). The ones for product engineers ideally don’t do this.
+Insights from users and data help product engineers develop high-impact ideas to build, but you'll need a way to organise all these ideas as well. Note-taking and task management tools help with this, but many also weigh down individuals and teams by introducing unnecessary work that gets in the way of shipping products (**cough** Jira). The ones for product engineers ideally don’t do this.
 
 An example specifically built for product engineers is [Linear](https://linear.app/). Linear is a task management app focused on helping teams build great products. It does this by having engineer-focused design and functionality, while still being a product tool. In practice, this means being keyboard first, streamlined for technical use cases, engineering-focused automations and integrations, and quick loading speeds.
 
 ![Linear](../images/blog/product-engineer-tools/linear.png)
 <Caption>The benefits of Linear built specifically for product engineers.</Caption>
 
-Like the “talking to users” tools, many of these tools won’t be shocking to you. Other note-taking and task management tools product engineers rely on include GitHub, Google Docs, Trello, Notion, Asana, and Coda. Each of these helps product engineers track and prioritize work.
+Like the “talking to users” tools, many of these tools won’t be shocking to you. Other note-taking and task management tools product engineers rely on include GitHub, Google Docs, Trello, Notion, Asana, and Coda. Use what you're comfortable with, but we recommend trying Linear if you haven't already.
 
 ## Tools for going fast with CI/CD and testing
 
@@ -69,7 +67,7 @@ Along with CI/CD is the automation of infrastructure work. Product engineers wan
 
 Many infrastructure-as-a-service companies exist, including the big ones like Google Cloud, AWS, Cloudflare, Heroku, and Azure. There are many alternatives to these that product engineers might prefer because of their deployment speed and tailored use cases (such as serverless or edge computing). These include [Netlify](https://www.netlify.com/), [Render](https://render.com/), [fly.io](http://fly.io), [Vultr](https://www.vultr.com/), and [Railway](https://railway.app/).
 
-A trend that appeals to product engineers is bringing the code framework and infrastructure closer together, optimizing both for each other. The best example of this is [Vercel](https://vercel.com/), which also develops the [Next.js](https://nextjs.org/) framework popular with product engineers. Vercel helps deploy highly performant frontend code fast and is tightly integrated with Next.js to maximize benefits from the framework's design.
+A trend popular among product engineers is bringing the code framework and infrastructure closer together, optimizing both for each other. The best example of this is [Vercel](https://vercel.com/), which also develops the [Next.js](https://nextjs.org/) framework popular with product engineers. Vercel helps deploy highly performant frontend code fast and is tightly integrated with Next.js to maximize benefits from the framework's design.
 
 ![Vercel and Next.js](../images/blog/product-engineer-tools/vercel.png)
 <Caption>The benefits of integrating infrastructure and code from Vercel and Next.js.</Caption>
@@ -80,10 +78,10 @@ Other examples of these code and infrastructure combos include [Supabase](https:
 
 As Uncle Ben from Spiderman once said “with great product power, comes great product responsibility” (I’m paraphrasing). Ownership over the complete product experience is important for product engineers. This means being responsible for bugs, issues, and incidents in their product.
 
-They have tools to help them with this. These include:
-- [Grafana](https://grafana.com/), [Better Stack](https://betterstack.com/), [Metabase](https://www.metabase.com/), and more provide observability into issues in your code. 
+Good tools for this include:
+- [Grafana](https://grafana.com/), [Better Stack](https://betterstack.com/), [Metabase](https://www.metabase.com/), and more to provide observability into issues in your code. 
 - [Sentry](https://sentry.io/welcome/) and [LogRocket](https://logrocket.com/) to monitor errors. 
-- [Incident.io](http://Incident.io) and [PagerDuty](https://www.pagerduty.com/) help teams respond to incidents when they happen.
+- [Incident.io](http://Incident.io) and [PagerDuty](https://www.pagerduty.com/) to help teams respond to incidents when they happen.
 
 ![Sentry](../images/blog/product-engineer-tools/sentry.png)
 <Caption>Sentry provides multiple tools (including stack traces) for monitoring errors and problems in your code.</Caption>
