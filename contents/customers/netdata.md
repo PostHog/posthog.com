@@ -4,7 +4,8 @@ customer: Netdata
 logo: ../images/customers/netdata/netdata_logo.png
 featuredImage: ../images/customers/netdata/netdata_featured.png
 industries:
-    - SaaS, DevTool
+    - SaaS
+    - Developer tool
 users:
     - Product
     - Engineering

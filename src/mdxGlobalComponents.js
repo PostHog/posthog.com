@@ -57,7 +57,9 @@ import { Footer } from './components/Footer'
 import { FooterCTA } from './components/FooterCTA'
 import { FullWidthBorderSlider } from './components/FullWidthBorderSlider'
 import { GDPRForm } from './components/GDPRForm'
+import { GitHubTooltip } from './components/GitHubTooltip'
 import { GithubIcon } from './components/GithubIcon'
+import { GlossaryElement } from './components/GlossaryElement'
 import { Heading } from './components/Heading'
 import { HiddenSection } from './components/HiddenSection'
 import { Home } from './components/Home'
@@ -98,6 +100,7 @@ import { PricingTable } from './components/Pricing/PricingTable'
 import { ProductPillars } from './components/Pricing/ProductPillars'
 import { Quote } from './components/Pricing/Quote'
 import { Savings } from './components/Pricing/Savings'
+import { SelfHost } from './components/Pricing/SelfHost'
 import { ProductAnchorNavbar } from './components/ProductAnchorNavbar'
 import { ProductFeature } from './components/ProductFeature'
 import { ProductFeaturePlugin } from './components/ProductFeaturePlugin'
@@ -105,8 +108,9 @@ import { ProductFooter } from './components/ProductFooter'
 import { ProductIcons } from './components/ProductIcons'
 import { ProductPage } from './components/ProductPage'
 import { ProductSectionHeader } from './components/ProductSectionHeader'
-import { Question } from './components/Question'
+import { Questions } from './components/Questions'
 import { Quote2 } from './components/Quote2'
+import { RenderInClient } from './components/RenderInClient'
 import { Roadmap } from './components/Roadmap'
 import { RocketHorizontalRule } from './components/RocketHorizontalRule'
 import { SectionLinks } from './components/SectionLinks'
@@ -193,7 +197,9 @@ export const shortcodes = {
     FooterCTA,
     FullWidthBorderSlider,
     GDPRForm,
+    GitHubTooltip,
     GithubIcon,
+    GlossaryElement,
     Heading,
     HiddenSection,
     Home,
@@ -234,6 +240,7 @@ export const shortcodes = {
     ProductPillars,
     Quote,
     Savings,
+    SelfHost,
     ProductAnchorNavbar,
     ProductFeature,
     ProductFeaturePlugin,
@@ -241,8 +248,9 @@ export const shortcodes = {
     ProductIcons,
     ProductPage,
     ProductSectionHeader,
-    Question,
+    Questions,
     Quote2,
+    RenderInClient,
     Roadmap,
     RocketHorizontalRule,
     SectionLinks,

@@ -101,7 +101,7 @@ As the below graphic from Google Trends shows, we've seen a consistent increase 
 
 ![brand trend](../images/blog/posthog-marketing/brand-trend.png)
 
-(For those interested, the trend line is generated using the [Glimpse Chrome extension](https://chrome.google.com/webstore/detail/google-trends-supercharge/ocmojhiloccgbpjnkeiooioedaklapap). I highlight recommend it!)
+(For those interested, the trend line is generated using the [Glimpse Chrome extension](https://chrome.google.com/webstore/detail/google-trends-supercharge/ocmojhiloccgbpjnkeiooioedaklapap). I highly recommend it!)
 
 We use insights to help isolate the impact of our SEO content efforts from this organic word of mouth growth. For example, the insight below shows the weekly cumulative growth of all our SEO content since the beginning of the year.
 

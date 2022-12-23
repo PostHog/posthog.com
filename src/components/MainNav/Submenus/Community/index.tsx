@@ -84,7 +84,7 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                                                                 <li key={label}>
                                                                     <Link
                                                                         className="text-sm font-bold text-red"
-                                                                        to={`/questions/${slugify(label, {
+                                                                        to={`/questions/topics/${slugify(label, {
                                                                             lower: true,
                                                                         })}`}
                                                                     >

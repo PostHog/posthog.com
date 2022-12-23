@@ -247,7 +247,7 @@ Sometimes, performance might matter to you so much that you never want an HTTP r
 
 ### Group analytics
 
-PostHog 1.31.0 introduced support for [group analytics](/docs/user-guides/group-analytics), which allows you to associate users and events with larger groups (teams, organizations, etc.). This feature requires a posthog-php version of `2.1.0` or above.
+Group analytics allows you to associate an event with a group (e.g. teams, organizations, etc.). This feature requires a posthog-php version of `2.1.0` or above. Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.
 
 > **Note: ** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
 
@@ -257,7 +257,7 @@ PostHog 1.31.0 introduced support for [group analytics](/docs/user-guides/group-
 PostHog::capture(array(
     'distinctId' => '[distinct id]',
     'event' => 'some event',
-    '$groups' => array("company" => "id:5")
+    '$groups' => array("company" => "42dlsfj23f")
 ));
 ```
 
@@ -266,10 +266,12 @@ PostHog::capture(array(
 ```php
 PostHog::groupIdentify(array(
     'groupType' => 'company',
-    'groupKey' => 'id:5',
-    'properties' => array("company_name" => "Awesome Inc", "employees" => 11)
+    'groupKey' => '42dlsfj23f',
+    'properties' => array("name" => "Awesome Inc.", "employees" => 11)
 ));
 ```
+
+The `name` is a special property which is used in the PostHog UI for the name of the Group. If you don't specify a `name` property, the group ID will be used instead.
 
 ## Thank you
 

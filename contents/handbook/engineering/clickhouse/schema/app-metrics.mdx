@@ -8,7 +8,7 @@ PostHog provides Apps for data imports, exports and transformation purposes.
 
 App metrics helps users of apps want to know whether the apps are reliable and have tooling to debug errors.
 
-When designing the schema, we needed ingestion of these stats should be as 'cheap' as possible. On the flip side,
+When designing the schema, we needed ingestion of these stats to be as 'cheap' as possible. On the flip side,
 queries against the data did not need to support much beyond time-range filtering.
 
 ## Schema
@@ -107,7 +107,7 @@ This runs the risk of data storage increasing significantly if a lot of large er
 
 For this reason `error_details` column uses ZSTD(3) codec.
 
-Sorting sort by error_type also has a significance: `error_details` of a given error type should be similar and compress well.
+Sorting by error_type also has a significance: `error_details` of a given error type should be similar and compress well.
 
 In the future, we might introduce `TTL`s for the error columns if storage becomes a problem or periodically
 wipe error data in other ways.
@@ -155,4 +155,4 @@ The reason we were able to leverage pre-aggregation to this extent was since we 
 These queries all lend itself well to pre-aggregation, meaning an expert schema could store this data very cheaply at the cost
 of some flexibility.
 
-Next schema in the ClickHouse manual: [app_metrics](/handbook/engineering/clickhouse/schema/person-distinct-id)
+Next schema in the ClickHouse manual: [person_distinct_id](/handbook/engineering/clickhouse/schema/person-distinct-id)

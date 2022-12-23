@@ -2,10 +2,12 @@ import { ExternalLink } from 'components/Icons/Icons'
 import { Link as GatsbyLink } from 'gatsby'
 import { useValues } from 'kea'
 import React from 'react'
-import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
+import usePostHog from '../../hooks/usePostHog'
 import type { GatsbyLinkProps } from 'gatsby'
+import Tooltip from 'components/Tooltip'
+import { TooltipContent, TooltipContentProps } from 'components/GlossaryElement'
 
-interface Props {
+export interface Props {
     to: string
     children: React.ReactNode
     className?: string
@@ -17,6 +19,8 @@ interface Props {
     state?: any
     event?: string
     href?: string
+    glossary?: TooltipContentProps[]
+    preview?: TooltipContentProps
 }
 
 export default function Link({
@@ -31,9 +35,10 @@ export default function Link({
     state = {},
     event = '',
     href,
+    glossary,
     ...other
 }: Props) {
-    const { posthog } = useValues(posthogAnalyticsLogic)
+    const posthog = usePostHog()
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => {
         if (event && posthog) {
@@ -43,14 +48,36 @@ export default function Link({
     }
     const url = to || href
     const internal = !disablePrefetch && url && /^\/(?!\/)/.test(url)
+    const preview =
+        other.preview ||
+        glossary?.find((glossaryItem) => {
+            return glossaryItem?.slug === url?.replace(/https:\/\/posthog.com/gi, '')
+        })
     return onClick && !url ? (
         <button onClick={handleClick} className={className}>
             {children}
         </button>
     ) : internal ? (
-        <GatsbyLink {...other} to={url} className={className} state={state} onClick={handleClick}>
-            {children}
-        </GatsbyLink>
+        preview ? (
+            <Tooltip
+                content={
+                    <TooltipContent
+                        title={preview.title}
+                        slug={url}
+                        description={preview.description}
+                        video={preview.video}
+                    />
+                }
+            >
+                <GatsbyLink {...other} to={url} className={className} state={state} onClick={handleClick}>
+                    {children}
+                </GatsbyLink>
+            </Tooltip>
+        ) : (
+            <GatsbyLink {...other} to={url} className={className} state={state} onClick={handleClick}>
+                {children}
+            </GatsbyLink>
+        )
     ) : (
         <a
             target={external || externalNoIcon ? '_blank' : ''}

@@ -24,6 +24,7 @@ import { CallToAction } from 'components/CallToAction'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import Tooltip from 'components/Tooltip'
 import CommunityQuestions from 'components/CommunityQuestions'
+import { formatNode } from 'components/GlossaryElement'
 import Markdown from 'markdown-to-jsx'
 import CheckIcon from '../images/check.svg'
 import XIcon from '../images/x.svg'
@@ -35,19 +36,19 @@ const renderAvailabilityIcon = (availability: 'full' | 'partial' | 'none') => {
     switch (availability) {
         case 'full':
             return (
-                <Tooltip title="This plan has full access to this feature">
+                <Tooltip content="This plan has full access to this feature">
                     <img src={CheckIcon} alt="Available" className="h-4 w-4" aria-hidden="true" />
                 </Tooltip>
             )
         case 'partial':
             return (
-                <Tooltip title="Some parts of this feature are not available on this plan">
+                <Tooltip content="Some parts of this feature are not available on this plan">
                     <img src={WarningIcon} alt="Partially available" className="h-4 w-4" aria-hidden="true" />
                 </Tooltip>
             )
         case 'none':
             return (
-                <Tooltip title="This feature is not available on this plan">
+                <Tooltip content="This feature is not available on this plan">
                     <img src={XIcon} alt="Not available" className="h-4 w-4" aria-hidden="true" />
                 </Tooltip>
             )
@@ -171,7 +172,7 @@ export const AppParametersFactory: (params: AppParametersProps) => React.FC = ({
 
                                 <td>
                                     {option.description || option.hint ? (
-                                        <Markdown>{option.description || option.hint}</Markdown>
+                                        <Markdown>{option.description || option.hint || ''}</Markdown>
                                     ) : null}
                                 </td>
                             </tr>
@@ -186,7 +187,7 @@ export const AppParametersFactory: (params: AppParametersProps) => React.FC = ({
 }
 
 export default function Handbook({
-    data: { post, nextPost, mission, objectives },
+    data: { post, nextPost, glossary, mission, objectives },
     pageContext: { menu, breadcrumb = [], breadcrumbBase, tableOfContents, searchFilter },
     location,
 }) {
@@ -217,7 +218,13 @@ export default function Handbook({
         typeof window !== 'undefined' ? Boolean(getCookie('ph_current_project_token')) : false
     )
 
-    const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
+    const A = (props) => (
+        <Link
+            {...props}
+            glossary={glossary?.nodes?.map(formatNode)}
+            className="text-red hover:text-red font-semibold"
+        />
+    )
 
     const components = {
         Team,
@@ -324,7 +331,24 @@ export default function Handbook({
 }
 
 export const query = graphql`
-    query HandbookQuery($id: String!, $nextURL: String!, $mission: String, $objectives: String) {
+    query HandbookQuery($id: String!, $nextURL: String!, $links: [String!]!, $mission: String, $objectives: String) {
+        countries: allMdx(filter: { fields: { slug: { regex: "/^/team/" } } }) {
+            group(field: frontmatter___country) {
+                totalCount
+            }
+        }
+        glossary: allMdx(filter: { fields: { slug: { in: $links } } }) {
+            nodes {
+                fields {
+                    slug
+                }
+                frontmatter {
+                    title
+                    featuredVideo
+                }
+                excerpt(pruneLength: 300)
+            }
+        }
         nextPost: mdx(fields: { slug: { eq: $nextURL } }) {
             excerpt(pruneLength: 500)
             frontmatter {
