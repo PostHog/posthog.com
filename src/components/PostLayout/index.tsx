@@ -634,7 +634,7 @@ export default function PostLayout({
                                         </Scrollspy>
                                     </div>
                                 )}
-                                <ul className="list-none pl-2 pr-3 py-1 flex mt-0 mb-10 lg:mb-0 border-t border-gray-accent-light border-dashed dark:border-gray-accent-dark items-center">
+                                <ul className="list-none pl-2 pr-3 py-1 flex mt-0 mb-10 lg:mb-0 border-t border-gray-accent-light border-dashed dark:border-gray-accent-dark items-center bg-tan/40 dark:bg-primary/40 backdrop-blur">
                                     {view === 'Article' && toc?.length > 1 && showTocButton && (
                                         <SidebarAction title="On this page">
                                             <Popover

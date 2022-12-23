@@ -153,9 +153,9 @@ export const QuestionsTable = ({
             </li>
 
             {!hideLoadMore && (
-                <li className="py-2 border-l border-b border-r border-gray-accent-light dark:border-gray-accent-dark border-dashed flex justify-center item-center">
+                <li className="py-2 list-none">
                     <button
-                        className="py-2 px-4 hover:bg-gray-accent-light text-gray font-semibold rounded"
+                        className="p-3 block w-full hover:bg-gray-accent-light text-primary/75 dark:text-primary-dark/75 hover:text-red rounded text-[15px] font-bold bg-gray-accent-light dark:bg-gray-accent-dark relative active:top-[0.5px] active:scale-[.99]"
                         onClick={() => setSize((size) => size + 1)}
                         disabled={isLoading}
                     >

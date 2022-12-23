@@ -84,19 +84,20 @@ const Profile = ({
     const name = [profile?.first_name, profile?.last_name].filter(Boolean).join(' ')
     return (
         <div>
-            <div className="flex items-center space-x-2 mt-4 mb-6">
+            <Link
+                to={`/community/profiles/${id}`}
+                className="flex items-center space-x-2 mt-2 mb-1 -mx-2 relative active:top-[1px] active:scale-[.99] hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark rounded p-2"
+            >
                 <Avatar src={avatar} className="w-[40px] h-[40px]" />
-                <div>{name && <p className="m-0 font-semibold">{name}</p>}</div>
-            </div>
-            <CallToAction to={`/community/profiles/${id}`} width="full" size="xs" type="secondary">
-                Visit profile
-            </CallToAction>
+                <div>{name && <p className="m-0 font-bold">{name}</p>}</div>
+            </Link>
+
             <CallToAction
                 onClick={() => setEditModalOpen(true)}
                 width="full"
                 size="xs"
-                type="outline"
-                className="mt-2 border-black/30"
+                type="secondary"
+                className="mt-2"
             >
                 Edit profile
             </CallToAction>
@@ -134,13 +135,13 @@ const Activity = ({ questions, questionsLoading }) => {
                                         {profile?.id === user?.profile?.id ? 'You started a thread' : 'You replied to'}:
                                     </p>
                                     <Link
-                                        className="font-bold text-ellipsis overflow-hidden whitespace-nowrap"
+                                        className="font-bold text-ellipsis overflow-hidden whitespace-nowrap text-base"
                                         to={`/questions/${question?.permalink}`}
                                     >
                                         {question?.subject}
                                     </Link>
                                 </div>
-                                <p className="m-0 font-semibold opacity-60 flex-shrink-0 xl:w-[200px]">
+                                <p className="m-0 font-semibold opacity-60 flex-shrink-0 text-sm xl:w-[200px]">
                                     {numReplies} {numReplies === 1 ? 'reply' : 'replies'}
                                 </p>
                             </ListItem>
@@ -213,7 +214,7 @@ const ActiveIssues = ({ issues }) => {
                     )
                 })}
             </ul>
-            <CallToAction width="full" to="https://github.com/PostHog/posthog/issues">
+            <CallToAction width="full" type="secondary" to="https://github.com/PostHog/posthog/issues">
                 See active issues on GitHub
             </CallToAction>
         </div>
@@ -241,8 +242,8 @@ const RecentQuestions = () => {
         <div id="recent-questions" className="mb-12">
             <SectionTitle>Recent questions</SectionTitle>
             <QuestionsTable hideLoadMore questions={questions} size={size} setSize={setSize} isLoading={isLoading} />
-            <CallToAction className="mt-4" width="full" to="/questions">
-                See all questions
+            <CallToAction className="mt-4" type="secondary" width="full" to="/questions">
+                Browse all questions
             </CallToAction>
         </div>
     )
@@ -262,7 +263,7 @@ const ActivePulls = ({ pulls }) => {
                     )
                 })}
             </ul>
-            <CallToAction width="full" to="https://github.com/PostHog/posthog/pulls">
+            <CallToAction width="full" type="secondary" to="https://github.com/PostHog/posthog/pulls">
                 See active PRs on GitHub
             </CallToAction>
         </div>
@@ -377,7 +378,7 @@ interface IGitHubStats {
 
 const Stat = ({ label, count }: { label: string; count: number }) => {
     return (
-        <li className="flex flex-col">
+        <li className="flex flex-col flex-1">
             <h5 className="m-0 text-sm opacity-60 font-semibold">{label}</h5>
             <p className="m-0 text-sm font-semibold">{count.toLocaleString()}</p>
         </li>
@@ -397,11 +398,11 @@ const Stats = ({
 }) => {
     return (
         <div className="mb-6">
-            <Link to={`https://github.com/${owner}/${repo}`} external>
+            <Link to={`https://github.com/${owner}/${repo}`} external className="font-semibold">
                 {owner}/{repo}
             </Link>
             <p className="m-0 text-sm">{description}</p>
-            <ul className="m-0 p-0 list-none flex space-x-2 mt-2">
+            <ul className="m-0 p-0 list-none flex space-x-3 mt-2">
                 <Stat label="Stars" count={stats?.stars} />
                 <Stat label="Contributors" count={stats?.contributors} />
                 <Stat label="Forks" count={stats?.forks} />
@@ -447,14 +448,20 @@ const ProfileSidebar = ({
                 <div className="mb-2 flex items-baseline justify-between">
                     <h4 className="m-0">My profile</h4>
                     {profile && (
-                        <button onClick={handleSignOut} className="text-red font-semibold text-sm">
-                            Sign out
+                        <button onClick={handleSignOut} className="text-red font-bold text-sm">
+                            Logout
                         </button>
                     )}
                 </div>
                 {profile ? <Profile setEditModalOpen={setEditModalOpen} profile={profile} /> : <Login />}
             </SidebarSection>
             <SidebarSection title="Stats for our popular repos">
+                <Stats
+                    stats={postHogStats}
+                    owner="posthog"
+                    repo="posthog"
+                    description="The app you're here to learn about"
+                />
                 <Stats
                     stats={postHogComStats}
                     owner="posthog"
@@ -464,12 +471,6 @@ const ProfileSidebar = ({
                             The very website you're on <i>right now</i>!
                         </>
                     }
-                />
-                <Stats
-                    stats={postHogStats}
-                    owner="posthog"
-                    repo="posthog"
-                    description="The app you're here to learn about"
                 />
             </SidebarSection>
         </div>
