@@ -1,6 +1,6 @@
 ---
 date: 2022-12-23
-title: The 6 essential tools of product engineers
+title: The essential tools used by product engineers
 rootPage: /blog
 sidebar: Blog
 showTitle: true
