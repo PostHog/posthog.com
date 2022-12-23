@@ -12,9 +12,16 @@ type QuestionsTableProps = {
     size: number
     setSize: (size: number | ((_size: number) => number)) => any
     hideLoadMore?: boolean
+    className?: string
 }
 
-export const QuestionsTable = ({ questions, isLoading, setSize, hideLoadMore }: QuestionsTableProps) => {
+export const QuestionsTable = ({
+    questions,
+    isLoading,
+    setSize,
+    hideLoadMore,
+    className = '',
+}: QuestionsTableProps) => {
     return (
         <ul className="m-0 -my-4 p-0">
             <li className="divide-y divide-gray-accent-light divide-dashed dark:divide-gray-accent-dark list-none">
@@ -23,7 +30,7 @@ export const QuestionsTable = ({ questions, isLoading, setSize, hideLoadMore }: 
                           const latestReply = question.replies[question.replies.length - 1]
 
                           return (
-                              <div key={question.id} className="sm:grid sm:grid-cols-4 sm:gap-2 py-4">
+                              <div key={question.id} className={`grid xl:grid-cols-4 sm:gap-2 py-4 ${className}`}>
                                   <div className="hidden sm:block">
                                       <a
                                           href={`/community/profiles/${question.profile.id}`}
