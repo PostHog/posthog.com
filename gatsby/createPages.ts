@@ -10,6 +10,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const BlogPostTemplate = path.resolve(`src/templates/BlogPost.js`)
     const PlainTemplate = path.resolve(`src/templates/Plain.js`)
     const BlogCategoryTemplate = path.resolve(`src/templates/BlogCategory.tsx`)
+    const BlogTagTemplate = path.resolve(`src/templates/BlogTag.tsx`)
     const BlogTemplate = path.resolve(`src/templates/Blog.tsx`)
     const CustomerTemplate = path.resolve(`src/templates/Customer.js`)
     const PluginTemplate = path.resolve(`src/templates/Plugin.js`)
@@ -154,6 +155,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     }
                     frontmatter {
                         category
+                        tags
                     }
                 }
             }
@@ -221,8 +223,12 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 sort: { order: DESC, fields: [frontmatter___date] }
                 filter: { isFuture: { eq: false }, frontmatter: { rootPage: { eq: "/blog" }, date: { ne: null } } }
             ) {
-                group(field: frontmatter___category) {
+                categories: group(field: frontmatter___category) {
                     category: fieldValue
+                    totalCount
+                }
+                tags: group(field: frontmatter___tags) {
+                    tag: fieldValue
                     totalCount
                 }
             }
@@ -337,7 +343,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     }
 
     const categories = {}
-    result.data.categories.group.forEach(({ category, totalCount }) => {
+    result.data.categories.categories.forEach(({ category, totalCount }) => {
         const slug = slugify(category, { lower: true })
         const base = `/blog/categories/${slug}`
         categories[category] = {
@@ -346,6 +352,18 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         }
 
         createPaginatedPages({ totalCount, base, template: BlogCategoryTemplate, extraContext: { category, slug } })
+    })
+
+    result.data.categories.tags.forEach(({ tag, totalCount }) => {
+        const slug = slugify(tag, { lower: true })
+        const base = `/blog/tags/${slug}`
+
+        createPaginatedPages({
+            totalCount,
+            base,
+            template: BlogTagTemplate,
+            extraContext: { tag, slug },
+        })
     })
 
     createPaginatedPages({ totalCount: result.data.blogPosts.totalCount, base: '/blog/all', template: BlogTemplate })
@@ -428,7 +446,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 
     result.data.blogPosts.nodes.forEach((node) => {
         const { slug } = node.fields
-        const postCategory = node.frontmatter.category
         const tableOfContents = node.headings && formatToc(node.headings)
         createPage({
             path: replacePath(slug),
@@ -436,7 +453,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             context: {
                 id: node.id,
                 tableOfContents,
-                categories: [{ name: postCategory, url: categories[postCategory]?.url }],
                 slug,
             },
         })

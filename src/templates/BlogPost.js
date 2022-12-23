@@ -18,6 +18,7 @@ import { shortcodes } from '../mdxGlobalComponents'
 import { NewsletterForm } from 'components/NewsletterForm'
 import blogMenu from 'components/Blog/blogMenu'
 import { blog } from '../sidebars/sidebars.json'
+import slugify from 'slugify'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
@@ -72,7 +73,9 @@ const BlogPostSidebar = ({ contributors, date, filePath, title, tags, location, 
             )}
             {tags && (
                 <SidebarSection title="Tag(s)">
-                    <Topics topics={tags.map((tag) => ({ name: tag }))} />
+                    <Topics
+                        topics={tags.map((tag) => ({ name: tag, url: `/blog/tags/${slugify(tag, { lower: true })}` }))}
+                    />
                 </SidebarSection>
             )}
             <SidebarSection>
@@ -92,7 +95,8 @@ const BlogPostSidebar = ({ contributors, date, filePath, title, tags, location, 
 export default function BlogPost({ data, pageContext, location }) {
     const { postData } = data
     const { body, excerpt, fields } = postData
-    const { date, title, featuredImage, featuredImageType, contributors, description, tags } = postData?.frontmatter
+    const { date, title, featuredImage, featuredImageType, contributors, description, tags, category } =
+        postData?.frontmatter
     const lastUpdated = postData?.parent?.fields?.gitLogLatestDate
     const filePath = postData?.parent?.relativePath
     const components = {
@@ -109,7 +113,9 @@ export default function BlogPost({ data, pageContext, location }) {
         a: A,
         ...shortcodes,
     }
-    const { categories, tableOfContents } = pageContext
+    const { tableOfContents } = pageContext
+
+    console.log(tags)
 
     return (
         <Layout>
@@ -128,7 +134,7 @@ export default function BlogPost({ data, pageContext, location }) {
                 contentWidth={790}
                 filePath={filePath}
                 tableOfContents={tableOfContents}
-                breadcrumb={[{ name: 'Blog', url: '/blog' }, ...categories]}
+                breadcrumb={[{ name: 'Blog', url: '/blog' }, { name: category }]}
                 menu={blog}
                 hideSurvey
                 sidebar={
@@ -175,6 +181,7 @@ export const query = graphql`
                 sidebar
                 showTitle
                 tags
+                category
                 hideAnchor
                 description
                 featuredImageType
