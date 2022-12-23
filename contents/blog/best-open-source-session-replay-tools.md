@@ -50,9 +50,7 @@ PostHog is an all-in-one, [open-source product analytics](/blog/best-open-source
 
 ### Who is PostHog for?
 
-We think PostHog is the best tool for product-minded developers, data engineers and product teams. The fully comprehensive suite of analytics tools make it an ideal choice for any company that wants to gain wide-ranging insights into their usage and engagement metrics, while keeping all of their data in one manageable platform. 
-
-Are we biased here? Yes. Are we wrong? We'll let you be the judge. As we're open source, you can [self-host PostHog for free](/pricing) to find out for yourself.
+We think PostHog is the best tool for [product-minded developers](/blog/what-is-a-product-engineer), data engineers and product teams. The fully comprehensive suite of analytics tools make it an ideal choice for any company that wants to gain wide-ranging insights into their usage and engagement metrics, while keeping all of their data in one manageable platform. Are we biased here? Yes. Are we wrong? We'll let you be the judge.
 
 ### Strengths
 
@@ -67,9 +65,7 @@ Are we biased here? Yes. Are we wrong? We'll let you be the judge. As we're open
 
 ### How much does it cost?
 
-PostHog (self-hosted and cloud) is free up to 1 million captured events each month when you enter card details.
-
-[Session recording](/docs/user-guides/recordings) is **included at no extra cost** in all plans.
+PostHog includes 15,000 recordings per month for free on [PostHog Cloud](/pricing) – 1 million events are also included at no cost for tracking product analytics as well.
 
 ### Is it open source?
 
