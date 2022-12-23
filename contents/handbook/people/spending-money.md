@@ -31,11 +31,11 @@ You should default to using your company card in all cases - it has no transacti
 ### Brex
 
 - Buy something on your Brex card.
-- If it's a digital invoice, just forward it to receipts@brex.com with a note explaining what it is for. If it's a physical receipt, respond to the Brex or SMS notification with a picture of your receipt and a note.
-- You _only_ need to submit receipts for purchases of $75 or more. However, you still need to keep copies of all of your receipts, in case we ever get audited. 
+- If it's a digital invoice, just forward it to receipts@brex.com with a note explaining what it is for. If it's a physical receipt, take a picture and upload it with a note: you can use the Brex app, email or reply to the SMS notification.
+- You only need to submit receipts for purchases of _$75 or more_. However, you still need to keep copies of all of your receipts, in case we ever get audited. Either send them to Brex, or archive them _electronically_ by other means.
 - That's it!
 
-Make sure you forward digital invoices to Brex from your PostHog email address - it won't work if you send from your personal email address.
+By default, the email forwarding feature only accepts emails from your PostHog address. You can contact Brex support to enabled forwarding from your personal email address if needed.
 
 ### Revolut
 
