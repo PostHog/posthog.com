@@ -8,23 +8,23 @@ featuredImage: ../images/tutorials/banners/session-recordings-for-support.png
 topics: ['session recordings', 'sentry']
 ---
 
-On top of being useful for understanding users’ behavior in your product, session recordings can help you solve problems with your product. You can use them to figure out issues, understand why those issues are happening, and work to fix them. Using session recordings helps you provide a better experience to users, and this is what we’ll go over in this tutorial.
+On top of being useful for understanding users’ behavior in your product, session recordings can help you solve problems with your product. You can use them to discover issues, understand why they are happening, and work to fix them. Using session recordings helps you provide a better support experience to users, and getting the most out of them is what we’ll go over in this tutorial.
 
-## Finding relevant sessions and users needing support
+## Finding relevant sessions for users needing support
 
-When a user reports an issue, a session recording can turn a long conversation into a short recording viewing. They also include easy access to relevant properties (like OS, browser, and custom properties). This helps your team diagnose issues and find solutions faster.
+When a user reports an issue, a session recording turns a long conversation into a short recording viewing. This is because you can see what actions they took, rather than asking them to explain their situation. It also provides easy access to relevant data and properties (like OS, browser, and custom properties). This helps your team diagnose issues and find solutions faster.
 
-To find recordings from a specific user needing support, you can search for the user in PostHog and check their session recordings tab. You can also filter on the sessions recording page for specific users or properties. For example, to find a session recording where I was having a problem, I can filter for the Rageclick event, email is mine, and within the last 24 hours.
+To find recordings from a specific user needing support, you can search for the user in PostHog and check their session recordings tab. You can also filter the sessions recording page for specific users or events. For example, to find a session recording where I was having a problem, I can filter for the Rageclick event, email is mine, and within the last 24 hours.
 
 ![Filters](../images/tutorials/session-recordings-for-support/filter.png)
 
-Once you’ve found a relevant recording, you click the toggle above the events to show the ones matching your filters. You can also search for other events within the session (such as errors) and go straight there. This brings you to times when those events happened, and added context through event properties.
+Once you’ve found a relevant recording, click the toggle above the events to show the ones matching your filters to go straight to the issue. You can also search for other events within the session (such as errors). This brings you to times when those events happened as well as the usage and data connected to the issue.
 
-Finding the session recording connected to the issue saves you time in multiple ways. You don’t have to go back and forth with the user for details. You get the session and data context which enables you to respond better. Finally, if it is a bug, you have the steps to debug and recreate you can easily share with your team.
+Finding a session recording connected to the issue saves you time in multiple ways. You don’t have to go back and forth with the user for details. You get the session and data context which enables you to respond better. Finally, if it is a bug, you have the steps to debug and recreate you can easily share with your team.
 
 ### Sharing recordings as a support team
 
-Once you’ve found a session recording, you can share a link with your teammates (including a timestamp). This helps them access the recording and details (like the user and their properties) quickly. Just click the share button at the top of the recording viewer to open this modal.
+Once you’ve found a session recording related to an issue, you can share a link with your teammates (including a timestamp). This helps them access the recording and details (like the user and their properties) quickly. Just click the share button at the top of the recording viewer to open this modal.
 
 ![Share](../images/tutorials/session-recordings-for-support/share.png)
 
@@ -34,7 +34,7 @@ You can share these links on the platforms you do support such as Zendesk, Slack
 
 You can combine PostHog’s suite of product tools for a better support experience. Because errors hurt user experience, capturing and monitoring them is vital to triage and resolve them. Using custom event capture and integrations can enable PostHog to capture errors. You can then use that error data to analyze session recordings and provide support.
 
-The most basic way to do this is to send custom error events in problem areas using a basic capture call. In an extremely basic form, it looks like this:
+The most basic way to do this is to send custom error events in problem areas using a capture call. In an extremely basic form, it looks like this:
 
 ```js
 function get_pizza() {
@@ -55,7 +55,7 @@ You could then use the `error` event to understand their frequency, details, and
 
 ### Console logs in recordings
 
-PostHog also includes the option to record console logs. This is useful for getting errors that log to the console. To turn this on, go to project settings and under recordings toggle on “Capture console logs.” This adds console logs (as well as errors and warnings) to a separate tab with the details for each.
+PostHog also includes the option to record console logs. This is useful for getting errors that log to the console. To turn this on, go to project settings and under recordings toggle “Capture console logs.” This adds console logs (as well as errors and warnings) to a separate tab with the details for each.
 
 ![Console](../images/tutorials/session-recordings-for-support/console.png)
 
@@ -103,11 +103,11 @@ with configure_scope() as scope:
 
 </MultiLanguage>
 
-Once set up, this creates exception events with the properties `Sentry URL` (with a link to the details in Sentry) and `Sentry tags` (with a link to the user and recording in PostHog). You can use these events to filter session recordings further, combining session recordings with the error data Sentry captures.
+Once set up, this creates exception events with the properties `Sentry URL` (with a link to the details in Sentry) and `Sentry tags` (with a link to the user and recording in PostHog). You can use these events to filter session recordings further, combining them with the error data Sentry captures.
 
 ![Exceptions](../images/tutorials/session-recordings-for-support/exception.png)
 
-Doing this enables you to further improve the support experience for users, especially technical ones. It speeds up the debugging and triaging process for your team, giving you data and details on what is going wrong. Finally, it enables the product to be continually improved and fixed faster, which leads to a higher quality overall product.
+Doing this enables you to further improve the support experience for users, especially technical ones. It speeds up the debugging and triaging process for your team, giving you data and details on what is going wrong. Ultimately, it enables the product to be continually improved and fixed faster, which leads to a higher quality overall product.
 
 ## Further reading
 
