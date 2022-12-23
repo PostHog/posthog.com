@@ -239,6 +239,20 @@ h4 {
     }
 }
 
+#recent-questions {
+    container-type: inline-size;
+}
+
+@container (min-width: 583px) and (max-width: 650px) {
+    #recent-questions ul li .grid {
+        @apply block;
+
+        > div {
+            @apply mb-2;
+        }
+    }
+}
+
 /* animated underlined links */
 .article-content a:not(.cta) {
     background: linear-gradient(to right, rgba(191, 191, 188, 0), rgba(191, 191, 188, 0)),
