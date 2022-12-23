@@ -3,7 +3,7 @@ title: How to further explore insights with session recordings
 sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
-date: 2022-12-06
+date: 2022-12-23
 featuredImage: ../images/tutorials/banners/explore-insights-session-recordings.png
 topics: ['insights', 'session recording']
 ---
