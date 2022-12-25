@@ -16,7 +16,7 @@ import { useStaticQuery } from 'gatsby'
 import Tooltip from 'components/Tooltip'
 import GitHubTooltip, { Author } from 'components/GitHubTooltip'
 
-const Avatar = (props: { className?: string; src?: string }) => {
+export const Avatar = (props: { className?: string; src?: string }) => {
     return (
         <div className={`overflow-hidden rounded-full ${props.className}`}>
             {props.src ? (
@@ -37,7 +37,7 @@ const Avatar = (props: { className?: string; src?: string }) => {
     )
 }
 
-const Login = () => {
+export const Login = () => {
     const [login, setLogin] = useState<null | { type: 'login' | 'signup' }>(null)
     return login ? (
         <>
@@ -71,7 +71,7 @@ const Login = () => {
     )
 }
 
-const Profile = ({
+export const Profile = ({
     profile,
     setEditModalOpen,
 }: {

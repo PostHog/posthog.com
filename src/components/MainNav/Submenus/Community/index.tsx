@@ -1,18 +1,43 @@
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
-import React, { useState } from 'react'
-import { Squeak } from 'squeak-react'
+import React from 'react'
+import { OrgProvider, UserProvider, useUser } from 'squeak-react'
 import Header from '../Header'
 import RightCol from '../RightCol'
 import CallToAction from '../CallToAction'
 import { Wrapper } from '../Wrapper'
 import { graphql, useStaticQuery } from 'gatsby'
 import slugify from 'slugify'
+import { Avatar, Login } from '../../../../pages/community'
 
 interface ColMenuItems {
     title: string
     description: string
     url: string
+}
+
+const Profile = () => {
+    const { user } = useUser()
+    const profile = user?.profile
+    return profile ? (
+        <div>
+            <div className="flex items-center space-x-2 mt-4 mb-3">
+                <Avatar src={profile.avatar} className="w-[40px] h-[40px]" />
+                <div>
+                    {
+                        <p className="m-0 font-semibold">
+                            {[profile?.first_name, profile?.last_name].filter(Boolean).join(' ')}
+                        </p>
+                    }
+                </div>
+            </div>
+            <CallToAction to={`/community/profiles/${profile?.id}`} className="!w-full" size="xs" type="secondary">
+                Visit profile
+            </CallToAction>
+        </div>
+    ) : (
+        <Login />
+    )
 }
 
 export default function Docs({ referenceElement }: { referenceElement: HTMLDivElement }) {
@@ -141,7 +166,21 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                             </CallToAction>
                         </div>
                     </div>
-                    <RightCol title="Resources">
+                    <RightCol title="My profile">
+                        <div className="px-3">
+                            <OrgProvider
+                                value={{
+                                    organizationId: 'a898bcf2-c5b9-4039-82a0-a00220a8c626',
+                                    apiHost: 'https://squeak.cloud',
+                                }}
+                            >
+                                <UserProvider>
+                                    <div className="mb-6">
+                                        <Profile />
+                                    </div>
+                                </UserProvider>
+                            </OrgProvider>
+                        </div>
                         <ol className="m-0 list-none p-0">
                             {resources.map(({ title, description, url }: ColMenuItems) => {
                                 return (
