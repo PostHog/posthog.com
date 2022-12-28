@@ -33,7 +33,7 @@ const BlogCategory = ({
             <SEO title={`${category} - PostHog`} />
 
             <PostLayout
-                breadcrumb={[{ name: 'Blog', url: '/blog' }, { name: category }]}
+                breadcrumb={[{ name: 'Blog', url: '/blog' }, { name: 'Categories' }, { name: category }]}
                 article={false}
                 title="Blog"
                 menu={blog}

@@ -2126,10 +2126,6 @@
             "url": "/blog"
         },
         {
-            "name": "All",
-            "url": "/blog/all"
-        },
-        {
             "name": "Guides",
             "url": "/blog/categories/guides",
             "children": [

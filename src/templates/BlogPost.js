@@ -115,8 +115,6 @@ export default function BlogPost({ data, pageContext, location }) {
     }
     const { tableOfContents } = pageContext
 
-    console.log(tags)
-
     return (
         <Layout>
             <SEO
@@ -134,7 +132,10 @@ export default function BlogPost({ data, pageContext, location }) {
                 contentWidth={790}
                 filePath={filePath}
                 tableOfContents={tableOfContents}
-                breadcrumb={[{ name: 'Blog', url: '/blog' }, { name: category }]}
+                breadcrumb={[
+                    { name: 'Blog', url: '/blog' },
+                    { name: category, url: `/blog/categories/${slugify(category, { lower: true })}` },
+                ]}
                 menu={blog}
                 hideSurvey
                 sidebar={

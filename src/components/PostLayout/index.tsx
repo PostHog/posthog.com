@@ -383,13 +383,12 @@ const Breadcrumb = ({ crumbs }: { crumbs: ICrumb[] }) => {
     return (
         <ul className="list-none flex mt-8 lg:mt-0 p-0 mb-2 whitespace-nowrap overflow-auto">
             {crumbs.map(({ name, url }, index) => {
-                const active = index === crumbs.length - 1
                 return (
                     <li
                         key={index}
                         className={`after:mx-2 after:text-gray-accent-light last:after:hidden after:content-["/"]`}
                     >
-                        {active ? (
+                        {!url ? (
                             <span className="text-black/40 dark:text-white/40 font-semibold">{name}</span>
                         ) : (
                             <Link to={url}>{name}</Link>

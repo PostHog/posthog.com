@@ -79,10 +79,6 @@ const Blog = ({
 }) => {
     const [allPostsFilter, setAllPostsFilter] = useState<'recent' | 'popular'>('recent')
 
-    const handleToggleChange = (checked: boolean) => {
-        setAllPostsFilter(checked ? 'popular' : 'recent')
-    }
-
     return (
         <Layout>
             <SEO title="Blog - PostHog" />
@@ -92,7 +88,7 @@ const Blog = ({
                 <Posts
                     title={`Most ${allPostsFilter} articles`}
                     posts={allPostsFilter === 'popular' ? allPostsPopular : allPostsRecent}
-                    action={<PostToggle checked={allPostsFilter === 'popular'} onChange={handleToggleChange} />}
+                    action={<Link to="/blog/all">View all</Link>}
                 />
                 <NewsletterForm />
                 {homeCategories.map((categoryToShow) => {

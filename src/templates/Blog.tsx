@@ -30,7 +30,11 @@ const BlogCategory = ({
                 <div className="mt-6 mb-12">
                     <Posts
                         title="All posts"
-                        action={<p className="m-0 leading-none font-semibold">{currentPage}</p>}
+                        action={
+                            <p className="m-0 leading-none font-semibold">
+                                Page {currentPage} of {numPages}
+                            </p>
+                        }
                         posts={allPostsRecent.slice(0, 4)}
                     />
                     <NewsletterForm />

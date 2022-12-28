@@ -33,7 +33,7 @@ const BlogTag = ({
             <SEO title={`${tag} - PostHog`} />
 
             <PostLayout
-                breadcrumb={[{ name: 'Blog', url: '/blog' }, { name: tag }]}
+                breadcrumb={[{ name: 'Blog', url: '/blog' }, { name: 'Tags' }, { name: tag }]}
                 article={false}
                 title="Blog"
                 menu={blog}
@@ -63,7 +63,7 @@ export const pageQuery = graphql`
             limit: $limit
             skip: $skip
             sort: { order: DESC, fields: [frontmatter___date] }
-            filter: { isFuture: { eq: false }, frontmatter: { category: { in: [$tag] } } }
+            filter: { isFuture: { eq: false }, frontmatter: { tags: { in: [$tag] } } }
         ) {
             edges {
                 node {
@@ -75,7 +75,7 @@ export const pageQuery = graphql`
             limit: $limit
             skip: $skip
             sort: { order: DESC, fields: [fields___pageViews] }
-            filter: { isFuture: { eq: false }, frontmatter: { category: { in: [$tag] } } }
+            filter: { isFuture: { eq: false }, frontmatter: { tags: { in: [$tag] } } }
         ) {
             edges {
                 node {
