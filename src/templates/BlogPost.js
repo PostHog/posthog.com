@@ -134,7 +134,9 @@ export default function BlogPost({ data, pageContext, location }) {
                 tableOfContents={tableOfContents}
                 breadcrumb={[
                     { name: 'Blog', url: '/blog' },
-                    { name: category, url: `/blog/categories/${slugify(category, { lower: true })}` },
+                    ...(category
+                        ? [{ name: category, url: `/blog/categories/${slugify(category, { lower: true })}` }]
+                        : [{}]),
                 ]}
                 menu={blog}
                 hideSurvey
