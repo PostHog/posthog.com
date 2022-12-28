@@ -1,4 +1,6 @@
 import { GitHub, LinkedIn, Twitter } from 'components/Icons/Icons'
+import { InlineCode } from 'components/InlineCode'
+import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
 export interface CategoryInterface {
     title: string
@@ -60,3 +62,35 @@ export const socialLinks: SocialLinksInterface = {
     linkedin: { icon: <LinkedIn />, label: 'LinkedIn' },
     github: { icon: <GitHub />, label: 'GitHub' },
 }
+
+export const CategoryData = ({ type = 'categories' }: { type: 'categories' | 'tags' }) => {
+    const { data } = useStaticQuery(query)
+
+    return (
+        <ul className="list-none m-0 p-0 mt-1">
+            {data[type]?.map((item) => {
+                return (
+                    <li key={item.fieldValue}>
+                        <InlineCode>{item.fieldValue}</InlineCode>
+                    </li>
+                )
+            })}
+        </ul>
+    )
+}
+
+const query = graphql`
+    {
+        data: allMdx(
+            sort: { order: DESC, fields: [frontmatter___date] }
+            filter: { isFuture: { eq: false }, frontmatter: { rootPage: { eq: "/blog" }, date: { ne: null } } }
+        ) {
+            categories: group(field: frontmatter___category) {
+                fieldValue
+            }
+            tags: group(field: frontmatter___tags) {
+                fieldValue
+            }
+        }
+    }
+`
