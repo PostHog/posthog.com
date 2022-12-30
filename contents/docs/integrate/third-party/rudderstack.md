@@ -19,6 +19,7 @@ Make sure you have a Rudderstack account **and** a PostHog account, using [PostH
     ![RudderStack Dashboard](../../../images/rs-posthog-config.png)
 4. (Recommended for websites or web apps) In the rudderstack console set `Use device-mode to send events` to `true` so that the events originate from the client side and are less likely to be blocked.
 5. (Recommended for websites or web apps) In the rudderstack console set `Enable autocapture with PostHog` to `true`. This will automatically capture events from your website or web app.
+6. Repeat the above for each of your sources you want to send data to PostHog.
 
 For more information see the [Rudderstack guide for setting up PostHog](https://www.rudderstack.com/docs/destinations/streaming-destinations/posthog/setting-up-posthog/)
 
