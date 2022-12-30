@@ -57,6 +57,10 @@ Pros:
 Cons:
 - We don't yet have as many 3rd party integrations as existing 3rd party CDPs - particularly for marketing platforms (for Facebook Ads, Google Ads, TikTok Ads etc.). If you need these extra exports immediately and you have the time and money for a 3rd party CDP you might want to go with option 2.
 
+Instructions:
+1. Install PostHog
+2. Setup the PostHog apps you need
+
 ## Option 2: Use a 3rd party CDP with PostHog as a destination
 
 If you already have a CDP being used extensively, you'll likely want to integrate PostHog with the CDP. For your frontend sources you'll want to configure PostHog as a device mode destination to ensure you get the full functionality.
@@ -88,7 +92,9 @@ Cons:
 - Data into PostHog first passes through a CDP, adding risk that it's dropped.
 - Variable support by the CDP libraries for PostHog.
 
-If using feature flags and/or session recordings, the true flow of data will end up looking more like this:
+Instructions: see the [Segment integration instructions](/docs/integrate/third-party/segment) or [Rudderstack integration instructions](/docs/integrate/third-party/rudderstack) depending on which CDP you are using.
+
+If using feature flags and/or session recordings, the true flow of data will end up looking more like the following. With the custom events going through the 3rd party CDP, and the PostHog specific data (like autocapture events, session recordings, and feature flag calls) going directly to PostHog.
 
 ```mermaid
 graph LR
