@@ -5,7 +5,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-Segment is a Customer Data Platform (CDP) that allows you to easily manage data and integrations with services across your Growth, Product, and Marketing stack. By tracking events and users via Segment’s API and libraries, you can send your product’s data to all of your analytics/marketing platforms, with minimal instrumentation code. They offer support for most platforms, including iOS, Android, JavaScript, Node.js, PHP, and more.
+Segment is a Customer Data Platform (CDP) that allows you to easily manage data and integrations with services across your growth, product, and marketing stack. By tracking events and users via Segment’s API and libraries, you can send your product’s data to all of your analytics/marketing platforms, with minimal instrumentation code. They offer support for most platforms, including iOS, Android, JavaScript, Node.js, PHP, and more.
 
 > Before integrating with Segment, we recommend you read our [CDP integration guide](/docs/integrate/cdp) to understand the different options for integrating with PostHog.
 
@@ -43,13 +43,19 @@ Note: It's possible to use PostHog as a simple Segment destination as mentioned 
 
 ### Adding PostHog as a simple Segment destination (minimal feature support)
 
-The standard Segment analytics only supports simple tracking of **pageviews**, **custom events** and **identifying users**. As such, we only recommend this method for basic tracking of non-client javascript events e.g. sending your server-side events to PostHog.
+The simple Segment destination only supports tracking of **pageviews**, **custom events** and **identifying users** - it does not support **autocapture**, **session recording**, **feature flags**, **heatmaps** or the **toolbar**. As such, we only recommend this method for basic tracking of events that are not using the client sidce javascript library e.g. sending your server-side events to PostHog.
 
 1. In the Segment workspace, create a new project and enable PostHog as an integration. We are listed as a 'Destination' on Segment
 2. Grab the PostHog API key from the 'Project Settings' page in PostHog
 3. Use one of Segment's libraries to send events
 4. See the events coming into PostHog
 
-## Bonus: Group analytics
+## Sending events to PostHog
+
+Once you have set up Segment and the destination properly configured, can use it to send events to PostHog. You can do this through the Segment API, or one of the Segment libraries. For example, with javascript you can use the `analytics.track('Event Name')` function to send events to Segment, which will then be sent to PostHog.
+
+For the full list of functions see the relevant SDK docs e.g. the [Javascript SDK](https://segment.com/docs/connections/sources/catalog/libraries/website/javascript/).
+
+### Using group analytics
 
 If you want to use group analytics, each event should include the property `$groups` as an key-value object of group type and ID like `{ "company": "42dlsfj23f" }` where `42dlsfj23f` is the id of the group.
