@@ -7,6 +7,8 @@ showTitle: true
 
 > **Note:** The [Official RudderStack Docs page for the PostHog integration](https://www.rudderstack.com/docs/destinations/streaming-destinations/posthog/) provides a better overview of how to set up this integration.
 
+> Before integrating with Rudderstack, we recommend you read our [CDP integration guide](/docs/integrate/cdp) to understand the different options for integrating with PostHog.
+
 ## About RudderStack
 
 RudderStack is an open-source, warehouse-first, customer data platform for developers. It allows you to collect and deliver customer event data to a variety of destinations such as data warehouses and analytics platforms.

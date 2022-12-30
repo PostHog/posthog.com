@@ -49,3 +49,7 @@ The standard Segment analytics only supports simple tracking of **pageviews**, *
 2. Grab the PostHog API key from the 'Project Settings' page in PostHog
 3. Use one of Segment's libraries to send events
 4. See the events coming into PostHog
+
+## Bonus: Group analytics
+
+If you want to use group analytics, each event should include the property `$groups` as an key-value object of group type and ID like `{ "company": "42dlsfj23f" }` where `42dlsfj23f` is the id of the group.
