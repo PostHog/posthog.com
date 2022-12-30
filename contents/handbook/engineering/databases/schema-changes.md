@@ -16,7 +16,7 @@ Before making a schema change, consider:
 - Do we need the schema change at all? Would this be better solved with an application-level code change instead?
 - Is my change backwards compatible? Both old and new code _will_ be running in parallel in both posthog cloud and self-hosted, so breaking changes can and will cause outages.
 - Can I deploy my schema change separately from application code change? For non-trivial changes, you want to deploy schema change first to ensure it's easy to roll back and if it's backwards compatible.
-- Am I doing a blocking migration? Migrations which lock huge tables can easily cause outages. 
+- Am I doing a blocking migration? Migrations which lock huge tables can easily cause outages.
 
 If you're doing anything tricky, it is worth reading up on zero-downtime migrations and make sure you know how the change will work operationally in practice.
 
@@ -28,7 +28,8 @@ The reason is that the Django ORM **always** specifies tables and columns to fet
 
 To avoid this pain, **AVOID deleting/renaming models and fields**. Instead:
 - if the name is no longer relevant, keep it the same in the database – feel free to change the naming in Python/JS code, but make sure the change ISN'T reflected in the database,
-- if the field itself is no longer relevant, just clearly mark it with a `# DEPRECATED` comment in code and leave it be.
+- if the field itself is no longer relevant, just clearly mark it with a `# DEPRECATED` comment in code
+- make the field not be queried by overriding `get_queryset` in a Manager object. See [this PR](https://github.com/PostHog/posthog/pull/13512) for an example.
 
 ## Design for scale
 
