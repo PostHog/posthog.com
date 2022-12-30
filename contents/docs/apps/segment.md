@@ -20,24 +20,11 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 You'll also need access to a Segment workspace.
 
-### How do I get started with the Segment Connector app?
+### How do I get started with the Segment Connector App?
 
-1. In your Segment workspace, create a new project and enable PostHog as an integration. We are listed as a 'Destination' on Segment.
-2. Grab the PostHog API key from the 'Project Settings' page in PostHog.
-3. Use one of Segment's libraries to send events.
-4. See the events coming into PostHog.
+Before integrating with Segment, we recommend you read our [CDP integration guide](/docs/integrate/cdp) to understand the different options for integrating with PostHog.
 
-### Can PostHog with Segment do everything PostHog does by itself?
-
-We are _big_ fans of Segment, and many people in our team use it now or have used it in the past. However, it comes with some limitations for PostHog.
-
-The Segment app gives you access to some things our JS library can do, but using Segment alone means you can't have autocapture, feature flags, session recording, heatmaps or the toolbar. Segment is also more easily blocked by ad-blockers.
-
-To get around these limitations, you can install the PostHog snippet or posthog-js alongside your Segment integration. You can then use Segment for any custom events (for example `segment.track('user sign up')`), and posthog-js will automatically give you access to all the extra features.
-
-### Where can I find out more?
-
-Further information about PostHog's Segment Connector is available in [Segment's integration catalog](https://segment.com/catalog/integrations/posthog/).
+When you are ready to integrate, read the PostHog [integration guide with Segment](/docs/integrate/third-party/segment).
 
 ### Who maintains this app?
 

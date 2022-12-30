@@ -9,7 +9,7 @@ showTitle: true
 
 A CDP is a Customer Data Platform. It is a platform that allows you to collect, and send customer data to other tools like product analytics (PostHog!), marketing automation tools, your CRM, data warehouses etc.
 
-The most common CDPs are Segment and Rudderstack, both of which work with PostHog.
+The most common CDPs are [Segment](/docs/integrate/third-party/segment) and [Rudderstack](contents/docs/integrate/third-party/rudderstack), both of which work with PostHog.
 
 If you already have a Customer Data Platforms (CDP) setup or are thinking of using one this guide will help you decide how to integrate with PostHog.
 
