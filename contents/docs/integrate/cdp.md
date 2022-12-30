@@ -37,14 +37,6 @@ In general, we'd highly recommend starting with PostHog as your CDP using the va
 
 If you later need some extra destinations that we don't yet have you have several options: you can send your PostHog data to a 3rd party CDP ([see extra info here](#sending-posthog-data-to-a-3rd-party-cdp-for-extra-destinations)), create your own app, or fully transition to a 3rd party CDP (option 2). Every month we are adding more destinations.
 
-Advantages:
-- Least expensive as you don't need a 3rd party CDP.
-- You don't have a 3rd party CDP before PostHog reducing risk of data being dropped.
-- Works with all the features of PostHog (analytics, autocapture, feature flags, session recording, etc.)
-
-Disadvantages:
-- We don't yet have as many 3rd party integrations as existing 3rd party CDPs - particularly for marketing platforms (for Facebook Ads, Google Ads, TikTok Ads etc.). If you need these extra exports immediately and you have the time and money for a 3rd party CDP you might want to go with option 2.
-
 ```mermaid
 graph LR
 A[Website - PostHog Javascript] --> B[PostHog]
@@ -56,6 +48,14 @@ B[PostHog] --> I[Intercom]
 B[PostHog] --> K[Customer.io]
 B[PostHog] --> F[Data warehouse e.g. Big Query / Snowflake]
 ```
+
+Pros:
+- Least expensive as you don't need a 3rd party CDP.
+- You don't have a 3rd party CDP before PostHog reducing risk of data being dropped.
+- Works with all the features of PostHog (analytics, autocapture, feature flags, session recording, etc.)
+
+Cons:
+- We don't yet have as many 3rd party integrations as existing 3rd party CDPs - particularly for marketing platforms (for Facebook Ads, Google Ads, TikTok Ads etc.). If you need these extra exports immediately and you have the time and money for a 3rd party CDP you might want to go with option 2.
 
 ## Option 2: Use a 3rd party CDP with PostHog as a destination
 
@@ -88,7 +88,7 @@ Cons:
 - Data into PostHog first passes through a CDP, adding risk that it's dropped.
 - Variable support by the CDP libraries for PostHog.
 
-If using feature flags and/or session recordings, it will end up looking more like this:
+If using feature flags and/or session recordings, the true flow of data will end up looking more like this:
 
 ```mermaid
 graph LR
