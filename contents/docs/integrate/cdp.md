@@ -33,7 +33,7 @@ C --> |No| E[Option 1<br/>Use PostHog as a CDP]
 
 ## Option 1: Use PostHog as a CDP
 
-If general, we'd highly recommend starting with PostHog as your CDP using the variety of imports and exports apps that we have. This is the easiest and least expensive way to get started.
+In general, we'd highly recommend starting with PostHog as your CDP using the variety of imports and exports apps that we have. This is the easiest and least expensive way to get started.
 
 If you later need some extra destinations that we don't yet have you have several options: you can send your PostHog data to a 3rd party CDP ([see extra info here](#sending-posthog-data-to-a-3rd-party-cdp-for-extra-destinations)), create your own app, or fully transition to a 3rd party CDP (option 2). Every month we are adding more destinations.
 
@@ -109,18 +109,11 @@ G --> K[Customer.io]
 G --> F[Data warehouse e.g. Big Query / Snowflake]
 ```
 
-## Working with marketing platforms
-
-Don't yet have device mode integrations
-Only use server side integrations
-Integrate both a 3rd party CDP and PostHog
-Use Option 2 with PostHog as a destination to the 3rd party CDP
-
 ## Sending PostHog data to a 3rd party CDP for extra destinations
 
 If there's key exports you are looking for that we don't currently have, you can use the data export app to send the PostHog data to the 3rd party CDP and then add the extra destinations you need.
 
-Note: this won't work for device mode sources with the CDP such as Facebook Ads and Google Ads. If you are looking for this we'd recommend integrating the marketing platforms directly, using Google Tag Manager or using a 3rd party CDP as your primary CDP (option 2).
+Note: this won't work for the CDP device-mode sources such as Facebook Ads and Google Ads (where the CDP injects the marketing script onto the page). If need this we'd recommend integrating the marketing platforms directly, using Google Tag Manager or using a 3rd party CDP as your primary CDP (option 2).
 
 ```mermaid
 graph LR
