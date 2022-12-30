@@ -7,7 +7,7 @@ topics:
 
 ### What does the Ruddestack Connect app do?
 
-The Ruddestack Connect app enables you to send events to PostHog, via Segment.
+The Ruddestack Connect app enables you to send events to PostHog, via Rudderstack.
 
 RudderStack is an open-source, customer data platform for developers. It allows you to collect and deliver customer event data to a variety of destinations across your growth, product, and marketing stack.
 
