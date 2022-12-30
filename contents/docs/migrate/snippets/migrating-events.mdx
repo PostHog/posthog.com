@@ -23,4 +23,5 @@ Instructions for using [PostHog Replicator app](/docs/apps/replicator):
    - `Host`: the hostname of your new PostHog instance e.g. `app.posthog.com` if you are using US cloud, `eu.posthog.com` if you were are EU cloud, or the domain you'll be sending events to if you are self-hosting
    - `Project API Key`: the API key for the new project that you want to send events to - found in the project settings page.
 6. See events come into the new PostHog instance, identically to the originals
-7. To track progress of the export you can click the graph icon next to the Replicator app and then click on the "Historical Exports" tab
+7. Once the Replicator is activated, go back to the configuration menu and click the gear next to "Export historical events" under "Jobs." On the calendar, select a start and end date, then click "Run job now." This will begin the process of historical events being import (and might take a while). You can see the progress in logs or by clicking the "App metrics" button (graph) and going to the "Historical exports" tab.
+8. To track progress of the export you can click the graph icon next to the Replicator app and then click on the "Historical Exports" tab
