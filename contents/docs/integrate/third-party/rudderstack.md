@@ -17,7 +17,8 @@ Make sure you have a Rudderstack account **and** a PostHog account, using [PostH
 2. Assign a name to your destination (e.g. PostHog production) and click Continue.
 3. Add your PostHog 'Project API Key' as the Team API key (**Do not use a Personal API key**) and your host url as `Your-Instance` (`https://app.posthog.com` if you're on PostHog Cloud):
     ![RudderStack Dashboard](../../../images/rs-posthog-config.png)
-4. (Recommended) If you are setting up PostHog for your website or web app, configure `Use device-mode to send events` to `true`.
+4. (Recommended for websites or web apps) In the rudderstack console set `Use device-mode to send events` to `true` so that the events originate from the client side and are less likely to be blocked.
+5. (Recommended for websites or web apps) In the rudderstack console set `Enable autocapture with PostHog` to `true`. This will automatically capture events from your website or web app.
 
 For more information see the [Rudderstack guide for setting up PostHog](https://www.rudderstack.com/docs/destinations/streaming-destinations/posthog/setting-up-posthog/)
 
