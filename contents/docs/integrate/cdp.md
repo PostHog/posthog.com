@@ -15,12 +15,10 @@ If you already have a Customer Data Platforms (CDP) setup or are thinking of usi
 
 ## Which PostHog CDP setup should I use?
 
-PostHog has many of the imports and exports of common (CDPs) built-in. This means there's a variety of options for how you could integrate PostHog with a 3rd party CDP:
+PostHog has many of the imports and exports of common (CDPs) built-in. This means there's two options for how you could integrate PostHog with a 3rd party CDP:
 
-1. Use PostHog as a CDP (recommend if you don't have a 3rd party CDP set up)
-2. Use PostHog as the main CDP, and a 3rd party CDP for extra destinations
-3. Use PostHog in front of a 3rd party CDP
-4. Use a 3rd party CDP, with PostHog as a destination
+1. Use PostHog as a CDP (recommended if you don't have a 3rd party CDP set up and we have the exports you need)
+2. Use a 3rd party CDP and integrate PostHog
 
 Which method you choose will depend on what your goals are, what you have already set up, and how much time and money you are willing to invest.
 
@@ -28,16 +26,16 @@ Here's a decision tree that you might find handy:
 
 ```mermaid
 graph TD
-A[Are you already extensively using a 3rd party CDP?] --> |Yes| B[Option 4<br/>Use the existing 3rd party CDP with PostHog as a destination]
-A --> |No| C[Are there any exports you need that PostHog doesn't have yet?<br/>e.g. paid marketing platforms] --> |Yes| D[Option 2 recommended<br/>Option 3 also works]
+A[Are you extensively using a 3rd party CDP?] --> |Yes| B[Option 2<br/>Use a 3rd party CDP and integrate PostHog]
+A --> |No| C[Are there any exports you need immediately that PostHog doesn't have yet?<br/>e.g. paid marketing platforms] --> |Yes| D[Option 2]
 C --> |No| E[Option 1<br/>Use PostHog as a CDP]
 ```
 
 ## Option 1: Use PostHog as a CDP
 
-If general, we'd highly recommend starting with PostHog as the CDP using the variety of imports and exports apps that we have. This is the easiest and least expensive way to get started.
+If general, we'd highly recommend starting with PostHog as your CDP using the variety of imports and exports apps that we have. This is the easiest and least expensive way to get started.
 
-If you later need some extra destinations that we don't yet have. You can either build your own export app or add a 3rd party CDP (Option 2 recommend, Option 3 also works) on top of PostHog. Every month we are adding more destinations.
+If you later need some extra destinations that we don't yet have you have several options: you can send your PostHog data to a 3rd party CDP ([see extra info here](#sending-posthog-data-to-a-3rd-party-cdp-for-extra-destinations)), create your own app, or fully transition to a 3rd party CDP (option 2). Every month we are adding more destinations.
 
 Advantages:
 - Least expensive as you don't need a 3rd party CDP.
@@ -45,7 +43,7 @@ Advantages:
 - Works with all the features of PostHog (analytics, autocapture, feature flags, session recording, etc.)
 
 Disadvantages:
-- We don't yet have as many 3rd party integrations as existing 3rd party CDPs - particularly for marketing platforms (for Facebook Ads, Google Ads, TikTok Ads etc.). If you need the exports immediately we'd recommend adding a 3rd party CDP (Option 2 recommend, Option 3 also works) once you are setup.
+- We don't yet have as many 3rd party integrations as existing 3rd party CDPs - particularly for marketing platforms (for Facebook Ads, Google Ads, TikTok Ads etc.). If you need these extra exports immediately and you have the time and money for a 3rd party CDP you might want to go with option 2.
 
 ```mermaid
 graph LR
@@ -59,70 +57,9 @@ B[PostHog] --> K[Customer.io]
 B[PostHog] --> F[Data warehouse e.g. Big Query / Snowflake]
 ```
 
-## Option 2: Use PostHog as the main CDP, connected to a 3rd party CDP for extra destinations
+## Option 2: Use a 3rd party CDP with PostHog as a destination
 
-If there's a large number of destinations you need to send data to, such as marketing platforms (Facebook Ads, Google Ads, TikTok Ads etc.), then you'll likely want to use a 3rd party CDP in addition to PostHog. We'd recommend Option 2, as this means you have the option to just use PostHog if we later add the destinations you need; however Option 3 also works.
-
-To set this up, use the PostHog export app to send data to a 3rd party CDP and onto the destinations you need. It's also on our roadmap to add more destinations to PostHog directly and so you may be able to remove this 3rd party CDP in the future.
-
-```mermaid
-graph LR
-A[Website - PostHog Javascript] --> B[PostHog]
-C[iOS App - PostHog Swift] --> B[PostHog]
-D[Android App - PostHog Java] --> B[PostHog]
-E[Backend - PostHog Python] --> B[PostHog]
-B --> G
-G[3rd party CDP e.g. Segment/Rudderstack] --> N[Google Ads]
-G --> O[Facebook Ads]
-B --> H[Saleforce]
-B --> I[Intercom]
-B --> K[Customer.io]
-B --> F[Data warehouse e.g. Big Query / Snowflake]
-```
-
-Pros:
-- Many more destinations available than PostHog alone, including the marketing destinations.
-- You don't have a 3rd party CDP before PostHog reducing risk of data being dropped.
-- Works with all the features of PostHog (analytics, autocapture, feature flags, session recording, etc.).
-- Can control within PostHog what data is sent onto the CDP and the extra destinations.
-
-Cons:
-- More expensive than Option 1 as you now need to pay for a 3rd party CDP.
-- You need to manage two platforms, which adds some complexity.
-
-### Option 3: Using PostHog in front of a 3rd party CDP
-
-An alternative to Option 2 would be to have PostHog in front of a 3rd party CDP. Only one export app from PostHog is used (to send data to the CDP). And then the CDP is used to send data to the destinations you need.
-
-```mermaid
-graph LR
-L[Facebook ads] --> G
-M[Google ads] --> G
-A[Website - PostHog Javascript] --> B[PostHog]
-C[iOS App - PostHog Swift] --> B[PostHog]
-D[Android App - PostHog Java] --> B[PostHog]
-E[Backend - PostHog Python] --> B[PostHog]
-B[PostHog] --> G[3rd party CDP e.g. Segment/Rudderstack]
-G --> N[Google Ads]
-G --> O[Facebook Ads]
-G --> H[Saleforce]
-G --> I[Intercom]
-G --> K[Customer.io]
-G --> F[Data warehouse e.g. Big Query / Snowflake]
-```
-
-Pros:
-- Many more destinations available than PostHog alone, including the marketing destinations (the same number of destinations as Option 2)
-- Works with all the features of PostHog (analytics, autocapture, feature flags, session recording, etc.)
-
-Cons:
-- More expensive than Option 1 as you now need to pay for a 3rd party CDP.
-- You now have 2 destinations (PostHog and the CDP) in front of your destinations, which can adds more risk of data being dropped.
-- More dependent on the 3rd party CDP, making it harder to transition to only PostHog as a CDP if in future we add the extra destinations that you need.
-
-## Option 4: Use a 3rd party CDP with PostHog as a destination
-
-If you already have a CDP being used extensively, the quickest way to get started is to to add PostHog as a destination to that CDP. For your frontend sources you'll want to configure PostHog as a device mode destination to ensure you get the full functionality.
+If you already have a CDP being used extensively, you'll likely want to integrate PostHog with the CDP. For your frontend sources you'll want to configure PostHog as a device mode destination to ensure you get the full functionality.
 
 ```mermaid
 graph LR
@@ -140,9 +77,9 @@ G --> F[Data warehouse e.g. Big Query / Snowflake]
 ```
 
 Pros:
-- You can quickly integrate PostHog with your existing CDP.
+- You can integrate PostHog with your existing CDP.
 - Can manage all your sources and destinations in one place (the 3rd party CDP).
-- Many more destinations available than PostHog alone (same as Option 2 and 3)
+- The 3rd party CDP has more destinations available than PostHog alone
 
 Cons:
 - You'll need to pay for a 3rd party CDP.
@@ -171,3 +108,41 @@ G --> I[Intercom]
 G --> K[Customer.io]
 G --> F[Data warehouse e.g. Big Query / Snowflake]
 ```
+
+## Working with marketing platforms
+
+Don't yet have device mode integrations
+Only use server side integrations
+Integrate both a 3rd party CDP and PostHog
+Use Option 2 with PostHog as a destination to the 3rd party CDP
+
+## Sending PostHog data to a 3rd party CDP for extra destinations
+
+If there's key exports you are looking for that we don't currently have, you can use the data export app to send the PostHog data to the 3rd party CDP and then add the extra destinations you need.
+
+Note: this won't work for device mode sources with the CDP such as Facebook Ads and Google Ads. If you are looking for this we'd recommend integrating the marketing platforms directly, using Google Tag Manager or using a 3rd party CDP as your primary CDP (option 2).
+
+```mermaid
+graph LR
+A[Website - PostHog Javascript] --> B[PostHog]
+C[iOS App - PostHog Swift] --> B[PostHog]
+D[Android App - PostHog Java] --> B[PostHog]
+E[Backend - PostHog Python] --> B[PostHog]
+B --> G
+G[3rd party CDP e.g. Segment/Rudderstack] --> N[Extra destinations]
+B --> H[Saleforce]
+B --> I[Intercom]
+B --> K[Customer.io]
+B --> F[Data warehouse e.g. Big Query / Snowflake]
+```
+
+Pros:
+- More destinations available than PostHog alone
+- You don't have a 3rd party CDP before PostHog reducing risk of data being dropped
+- Works with all the features of PostHog (analytics, autocapture, feature flags, session recording, etc.)
+- Can control within PostHog what data is sent onto the CDP and the extra destinations
+
+Cons:
+- Can't use the CDP for device mode sources such as Facebook Ads and Google Ads
+- More expensive than Option 1 as you now need to pay for a 3rd party CDP
+- You need to manage two platforms, which adds some complexity
