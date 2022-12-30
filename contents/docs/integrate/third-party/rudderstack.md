@@ -24,10 +24,6 @@ For more information see the [Rudderstack guide for setting up PostHog](https://
 
 ## Sending events to PostHog
 
-Once you have set up Rudderstack and PostHog, you can use Rudderstack to send events to PostHog. You send events through the Rudderstack API, or one of the Rudderstack libraries. For example, with javascript you can use the `analytics.track('Event Name')` function which will send the events to your Rudderstack destinations including PostHog.
+Once you have set up Rudderstack and PostHog, you can use Rudderstack to send events to PostHog. You can send events through the Rudderstack API, or one of the Rudderstack libraries. For example, with javascript you can use the `analytics.track('Event Name')` function which will send the events to your Rudderstack destinations including PostHog.
 
 For the full list of functions see the relevant SDK docs e.g. the [Javascript SDK](https://www.rudderstack.com/docs/sources/event-streams/sdks/rudderstack-javascript-sdk/supported-api/#track).
-
-### Using group analytics
-
-If you want to use group analytics, each event should include the property `$groups` as an key-value object of group type and ID like `{ "company": "42dlsfj23f" }` where `42dlsfj23f` is the id of the group.

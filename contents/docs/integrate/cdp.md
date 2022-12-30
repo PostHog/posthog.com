@@ -1,5 +1,5 @@
 ---
-title: Integrating with a CDP
+title: Using PostHog with a CDP
 sidebarTitle: CDPs
 sidebar: Docs
 showTitle: true
