@@ -1,25 +1,25 @@
 ---
-title: Rudderstack Connector
+title: Rudderstack Importer
 thumbnail: ../../apps/thumbnails/rudderstack-export.png
 topics:
     - rudderstack
 ---
 
-### What does the Ruddestack Connect app do?
+### What does the Ruddestack Importer do?
 
-The Ruddestack Connect app enables you to send events to PostHog, via Rudderstack.
+The Ruddestack Importer app enables you to send events to PostHog, via Rudderstack.
 
 RudderStack is an open-source, customer data platform for developers. It allows you to collect and deliver customer event data to a variety of destinations across your growth, product, and marketing stack.
 
 ### What are the requirements for this app?
 
-Using the Rudderstack connector requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+Using the Rudderstack Import requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
 You'll also need access to a Rudderstack workspace.
 
-### How do I get started with the Rudderstack Connector App?
+### How do I get started with the Rudderstack Importer?
 
 Before integrating with Rudderstack, we recommend you read our [CDP integration guide](/docs/integrate/cdp) to understand the different options for integrating your CDP with PostHog.
 

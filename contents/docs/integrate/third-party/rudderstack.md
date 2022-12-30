@@ -9,7 +9,7 @@ RudderStack is an open-source, customer data platform for developers. It allows 
 
 > Before integrating with Rudderstack, we recommend you read our [CDP integration guide](/docs/integrate/cdp) to understand the different options for integrating with PostHog.
 
-## Setting up Rudderstack
+## Setting up the Rudderstack Importer
 
 Make sure you have a Rudderstack account **and** a PostHog account, using [PostHog Cloud](https://app.posthog.com/signup) or self-hosting.
 
