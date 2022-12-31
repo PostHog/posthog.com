@@ -97,7 +97,7 @@ module.exports = {
             {
                 query: `
                             {
-                              questions: allQuestion {
+                              questions: allQuestion(filter: {permalink: {ne: null}}) {
                                 nodes {
                                   id
                                   title: subject
