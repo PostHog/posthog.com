@@ -23,7 +23,7 @@ Here's a decision tree you might find useful:
 
 ```mermaid
 graph TD
-    A[Do you need to export a large number of events? Above 10,000] --> |Yes| B[Use a data export app]
+    A[Do you need to export a large number of events? Above 3,500] --> |Yes| B[Use a data export app]
     A --> |No| C[Do you need to run regular exports e.g. once a day or once a week?]
     C --> |Yes| B
     C --> |No| E[Use the PostHog UI or the Events API]
