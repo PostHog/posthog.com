@@ -201,7 +201,7 @@ You should now have a nice financial plan similar to the one pictured above set 
 
 Once a month, after we've received our monthly financial report from Fondo (remember that?), we review how we performed against our budget in Pry. You can also reallocate revenue and expenses to different categories in Pry by simply dragging and dropping, but be aware that this doesn't change anything in QuickBooks. 
 
-![pry image 2](../images/pry_image_2.jpg)
+![pry image 2](../images/pry-image-2.jpg)
 
 Our process is pleasingly simple:
 
