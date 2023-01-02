@@ -3,7 +3,7 @@ title: How to use session recordings to improve your support experience
 sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
-date: 2022-12-22
+date: 2023-01-02
 featuredImage: ../images/tutorials/banners/session-recordings-for-support.png
 topics: ['session recordings', 'sentry']
 ---
