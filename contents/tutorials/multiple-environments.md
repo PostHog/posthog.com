@@ -28,11 +28,11 @@ The downside of using multiple projects is you cannot directly copy actions, das
 
 ### Feature flags with multiple projects
 
-Testing feature flags in development and staging environments ensures they are working properly, but you must recreate the flags in each project to use them in separate environments. 
+Testing feature flags in development and staging environments ensure they are working properly, but you must recreate the flags in each project to use them in separate environments. 
 
 Luckily, creating a new flag is relatively simple. Make sure to use the same flag keys and variants between the projects, and the flag behaves the same. You also don’t have to worry about rollout percentages for test or staging environments (you can roll out to everyone on your team).
 
-*We’re also gathering feedback on how to use feature flags with multiple projects. Leave your support and feedback in [the issue here](https://github.com/PostHog/posthog/issues/13160).*
+*We are also gathering feedback on how to use feature flags with multiple projects. Leave your support and feedback in [the issue here](https://github.com/PostHog/posthog/issues/13160).*
 
 ## Conditional initialization
 
@@ -66,22 +66,22 @@ Another popular option is checking if the URL includes `localhost` or `127.0.0.1
 
 Setting this up correctly prevents capturing non-production event data. It enables you to continue using the same insights, feature flags, and other PostHog tools in development and staging because you only use a single project for all your data.
 
-> **Note:** If you are using multiple projects, be careful not opt out of capture unnecessarily. You can instead check for the environment and tune autocapture to capture the right data. You can learn about autocapture tuning in [our docs](https://posthog.com/docs/integrate/client/js#tuning-autocapture).
+> **Note:** If you are using multiple projects, be careful not to opt out of capture unnecessarily. You can instead check for the environment and tune autocapture to capture the right data. You can learn about autocapture tuning in [our docs](https://posthog.com/docs/integrate/client/js#tuning-autocapture).
 
 ## Filtering internal and test users
 
 The previous options capture data to separate projects or don’t capture data at all, but there is another option. This is to capture data normally and filter internal users from your analysis.
 
-PostHog provides a toggle to filter internal users (as defined by you) from your analysis and visualization. To set up what users or events get filtered, go to Project Settings, scroll down to “Filter out internal and test users,” and add filters removing your internal users and events. This could include: 
+PostHog provides a toggle to filter internal users (as defined by you) from your analysis and visualization. To set up what users or events get filtered, go to Project Settings, scroll down to “Filter out internal and test users,” and add filters removing your internal users and events. This could include filters like: 
 - `distinct ID does not contain your domain`
 - `host is not local hosts`
 - `environment is not development`
 
-As an example, here’s what our filters look like at PostHog:
+As an example, here’s what our internal filters look like at PostHog:
 
 ![Filter](../images/tutorials/multiple-environments/filter.png)
 
-You can automatically enable filtering in all new insights with the toggle at the bottom, or enable it on insights manually each time.
+You can automatically enable filtering in all new insights with the toggle at the bottom, or enable it manually on each insight.
 
 > **Note:** Filtering internal and test users does not prevent the capture of data from these users (it still shows up in the event’s list for example).
 
