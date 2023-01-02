@@ -3,7 +3,7 @@ title: How to setup PostHog for multiple environments (development, staging, pro
 sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
-date: 2022-12-21
+date: 2023-01-02
 featuredImage: ../images/tutorials/banners/multiple-environments.png
 topics: ["configuration"]
 ---
@@ -14,13 +14,13 @@ Using multiple environments requires splitting the data from each of them. If no
 
 ## Using multiple projects
 
-The best practice for using PostHog with multiple environments is using multiple projects. This enables developers to test event capture and tools without ruining the data in production.
+The best practice for using PostHog with multiple environments is using multiple projects. This enables developers to test event capture, session recordings, and feature flags without polluting the data in production.
 
-Creating new projects in PostHog is simple. In your instance, click your project name and then the “New project” button. Be sure to name your project to make it clear it is not production, like “development” or “staging.”
+Creating a new project in PostHog is simple. In your instance, click your project name and then the “New project” button. Be sure to name your project to make it clear it is not production, like “development” or “staging.”
 
 ![Projects](../images/tutorials/multiple-environments/project.png)
 
-This takes you through the project setup flow again and gives you a new project API key. You can keep your old key for production, and replace it with the new one in the relevant environment. You'll likely need environment variables for this (like a `.env` file) if you haven't set those up. Doing this connects each of your environments to a different PostHog project.
+This takes you through the project setup flow again and gives you a new project API key. You can keep your old key for production, and add the new one in the relevant environment. You'll likely need environment variables for this (like a `.env` file) if you haven't set those up. Initializing PostHog with a different key in each environment connects them to a different project.
 
 The downside of using multiple projects is you cannot directly copy actions, dashboards, insights, experiments, feature flags, and other data created in PostHog between them. This means manually recreating them in each project if needed.
 
@@ -28,9 +28,9 @@ The downside of using multiple projects is you cannot directly copy actions, das
 
 ### Feature flags with multiple projects
 
-Development and staging environments help test feature flags, but you must recreate the flags in each project to use them in separate environments. 
+Testing feature flags in development and staging environments ensures they are working properly, but you must recreate the flags in each project to use them in separate environments. 
 
-Luckily, creating a new flag is relatively simple. Make sure to use the same flag keys and variants between the projects, and they work the same. You also don’t have to worry about rollout percentages for test or staging environments (you can roll out to everyone on your team).
+Luckily, creating a new flag is relatively simple. Make sure to use the same flag keys and variants between the projects, and the flag behaves the same. You also don’t have to worry about rollout percentages for test or staging environments (you can roll out to everyone on your team).
 
 *We’re also gathering feedback on how to use feature flags with multiple projects. Leave your support and feedback in [the issue here](https://github.com/PostHog/posthog/issues/13160).*
 
@@ -64,7 +64,7 @@ Another popular option is checking if the URL includes `localhost` or `127.0.0.1
 </script>
 ```
 
-Setting this up correctly prevents capturing event data in non-production instances. It enables you to continue using the same insights, feature flags, and other PostHog tools in development and staging because you only use a single project for all your data.
+Setting this up correctly prevents capturing non-production event data. It enables you to continue using the same insights, feature flags, and other PostHog tools in development and staging because you only use a single project for all your data.
 
 > **Note:** If you are using multiple projects, be careful not opt out of capture unnecessarily. You can instead check for the environment and tune autocapture to capture the right data. You can learn about autocapture tuning in [our docs](https://posthog.com/docs/integrate/client/js#tuning-autocapture).
 
@@ -72,7 +72,10 @@ Setting this up correctly prevents capturing event data in non-production instan
 
 The previous options capture data to separate projects or don’t capture data at all, but there is another option. This is to capture data normally and filter internal users from your analysis.
 
-PostHog provides a toggle to filter internal users (as defined by you) from your analysis and visualization. To set up what users or events get filtered, go to project settings, scroll down to “Filter out internal and test users,” and add filters removing your internal users and events. This could include `distinct ID does not contain your domain`, `host is not local hosts`, and `environment is not development`. 
+PostHog provides a toggle to filter internal users (as defined by you) from your analysis and visualization. To set up what users or events get filtered, go to Project Settings, scroll down to “Filter out internal and test users,” and add filters removing your internal users and events. This could include: 
+- `distinct ID does not contain your domain`
+- `host is not local hosts`
+- `environment is not development`
 
 As an example, here’s what our filters look like at PostHog:
 
