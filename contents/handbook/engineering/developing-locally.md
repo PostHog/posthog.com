@@ -37,6 +37,8 @@ This is what we'll be using in the guide below.
 > It is also technically possible to run PostHog in Docker completely, but syncing changes is then much slower, and for development you need PostHog dependencies installed on the host anyway (such as formatting or typechecking tools).
 > The other way around – everything on the host, is not practical due to significant complexities involved in instantiating Kafka or ClickHouse from scratch.
 
+> [Podman](https://podman.io/) and [`podman-compose`](https://github.com/containers/podman-compose) can be used as alternatives to Docker and `docker compose` respectively to allow rootless containers. The commands used in this documentation are analogous to the commands used with Podman (e.g. `podman-compose -f docker-compose.dev.yml up` instead of `docker compose -f docker-compose.dev.yml up`)
+
 The instructions here assume you're running macOS or the current Ubuntu Linux LTS (22.04).
 
 For other Linux distros, adjust the steps as needed (e.g. use `dnf` or `pacman` in place of `apt`).
@@ -78,6 +80,8 @@ In case some steps here have fallen out of date, please tell us about it – fee
 
     ClickHouse and Kafka won't be able to talk to each other without these mapped hosts.
 
+    > If running Podman, `/etc/hosts` could be used as the base hosts file for containers by default. This can make hostname resolution fail in the ClickHouse container, and can be mended by setting `base_hosts_file="none"` in [`containers.conf`](https://github.com/containers/common/blob/main/docs/containers.conf.5.md#containers-table). This can be an issue only in newer versions of the OCI runtime, as the change was introduced in April 2022.
+
 2. Clone the [PostHog repository](https://github.com/posthog/posthog). All future commands assume you're inside the `posthog/` folder.
 
     ```bash
@@ -100,7 +104,7 @@ docker compose -f docker-compose.dev.yml up
 
 > **Friendly tip 2:** If you see "Exit Code 137" anywhere, it means that the container has run out of memory. In this case you need to allocate more RAM in Docker Desktop settings.
 
-> **Friendly tip 3:** You _might_ need `sudo` – see [Docker docs on managing Docker as a non-root user](https://docs.docker.com/engine/install/linux-postinstall).
+> **Friendly tip 3:** You _might_ need `sudo` – see [Docker docs on managing Docker as a non-root user](https://docs.docker.com/engine/install/linux-postinstall). Or look into [Podman](https://podman.io/getting-started/installation) as an alternative that supports rootless containers.
 
 >**Friendly tip 4:** If you see `Error: (HTTP code 500) server error - Ports are not available: exposing port TCP 0.0.0.0:5432 -> 0.0.0.0:0: listen tcp 0.0.0.0:5432: bind: address already in use`,  - refer to this [stackoverflow answer](https://stackoverflow.com/questions/38249434/docker-postgres-failed-to-bind-tcp-0-0-0-05432-address-already-in-use). In most cases, you can solve this by stopping the `postgresql` service.
 ```bash
@@ -127,6 +131,10 @@ d2d00eae3fc0   redis:6.2.7-alpine                  "docker-entrypoint.s…"   3 
 
 # docker logs posthog-clickhouse-1 -n 1
 Saved preprocessed configuration to '/var/lib/clickhouse/preprocessed_configs/users.xml'.
+
+# ClickHouse writes logs to `/var/log/clickhouse-server/clickhouse-server.log` and error logs to `/var/log/clickhouse-server/clickhouse-server.err.log` instead of stdin. It can be useful to `cat` these files if there are any issues:
+# docker exec posthog-clickhouse-1 cat /var/log/clickhouse-server/clickhouse-server.log
+# docker exec posthog-clickhouse-1 cat /var/log/clickhouse-server/clickhouse-server.err.log
 
 # docker logs posthog-kafka-1
 [2021-12-06 13:47:23,814] INFO [KafkaServer id=1001] started (kafka.server.KafkaServer)
