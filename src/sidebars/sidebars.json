@@ -1115,24 +1115,28 @@
             ]
         },
         {
-            "name": "Migrate",
+            "name": "Migrate & Export",
             "url": "",
             "children": [
+                {
+                    "name": "Migrate between PostHog instances",
+                    "url": "/docs/migrate/migrate-between-cloud-and-self-hosted"
+                },
+                {
+                    "name": "Migrate from Amplitude",
+                    "url": "/docs/migrate/migrate-from-amplitude"
+                },
+                {
+                    "name": "Migrate to PostHog Cloud EU",
+                    "url": "/tutorials/migrate-eu-cloud"
+                },
                 {
                     "name": "To another self-hosted instance",
                     "url": "/docs/migrate/migrate-to-another-self-hosted-instance"
                 },
                 {
-                    "name": "To PostHog from Amplitude",
-                    "url": "/docs/migrate/migrate-from-amplitude"
-                },
-                {
-                    "name": "To PostHog Cloud EU",
-                    "url": "/tutorials/migrate-eu-cloud"
-                },
-                {
-                    "name": "Between Cloud and self-hosted",
-                    "url": "/docs/migrate/migrate-between-cloud-and-self-hosted"
+                    "name": "Export your events",
+                    "url": "/docs/migrate/export-events"
                 }
             ]
         },
