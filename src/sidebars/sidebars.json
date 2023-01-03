@@ -2126,13 +2126,20 @@
     ],
     "community": [
         {
+            "name": "Community"
+        },
+        {
             "name": "Dashboard",
             "url": "/community"
         },
         {
-            "name": "Questions",
-            "url": "/questions",
+            "name": "Questions?",
+            "url": "",
             "children": [
+                {
+                    "name": "Recent questions",
+                    "url": "/questions"
+                },
                 {
                     "name": "Apps",
                     "url": "/questions/topics/apps"
