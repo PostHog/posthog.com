@@ -1327,6 +1327,10 @@
                     "url": "/docs/privacy/ccpa-compliance"
                 },
                 {
+                    "name": "SOC 2",
+                    "url": "/handbook/company/security#soc-2"
+                },
+                {
                     "name": "Data egress & compliance",
                     "url": "/docs/privacy/egress"
                 },
