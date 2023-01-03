@@ -1,5 +1,5 @@
 ---
-title: Rudderstack Importer
+title: RudderStack Importer
 thumbnail: ../../apps/thumbnails/rudderstack-export.png
 topics:
     - rudderstack
@@ -7,27 +7,27 @@ topics:
 
 ### What does the Ruddestack Importer do?
 
-The Ruddestack Importer app enables you to send events to PostHog, via Rudderstack.
+The Ruddestack Importer app enables you to send events to PostHog, via RudderStack.
 
 RudderStack is an open-source, customer data platform for developers. It allows you to collect and deliver customer event data to a variety of destinations across your growth, product, and marketing stack.
 
 ### What are the requirements for this app?
 
-Using the Rudderstack Import requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+Using the RudderStack Import requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
-You'll also need access to a Rudderstack workspace.
+You'll also need access to a RudderStack workspace.
 
-### How do I get started with the Rudderstack Importer?
+### How do I get started with the RudderStack Importer?
 
-Before integrating with Rudderstack, we recommend you read our [CDP integration guide](/docs/integrate/cdp) to understand the different options for integrating your CDP with PostHog.
+Before integrating with RudderStack, we recommend you read our [CDP integration guide](/docs/integrate/cdp) to understand the different options for integrating your CDP with PostHog.
 
-When you are ready to integrate, read the PostHog [integration guide with Rudderstack](/docs/integrate/third-party/rudderstack).
+When you are ready to integrate, read the PostHog [integration guide with RudderStack](/docs/integrate/third-party/rudderstack).
 
 ### Who maintains this app?
 
-This app is maintained by Rudderstack.
+This app is maintained by RudderStack.
 
 ### What if I have feedback on this app?
 

@@ -9,7 +9,7 @@ showTitle: true
 
 A CDP is a Customer Data Platform. It is a platform that allows you to collect, and send customer data to other tools like product analytics (PostHog!), marketing automation tools, your CRM, data warehouses etc.
 
-The most common CDPs are [Segment](/docs/integrate/third-party/segment) and [Rudderstack](/docs/integrate/third-party/rudderstack), both of which work with PostHog.
+The most common CDPs are [Segment](/docs/integrate/third-party/segment) and [RudderStack](/docs/integrate/third-party/rudderstack), both of which work with PostHog.
 
 If you already have a Customer Data Platforms (CDP) setup or are thinking of using one this guide will help you decide how to integrate with PostHog.
 
@@ -71,7 +71,7 @@ A[Website - CDP Javascript] --> G
 C[iOS App - CDP Swift] --> G
 D[Android App - CDP Java] --> G
 E[Backend - CDP Python] --> G
-G[3rd party - CDP e.g. Segment/Rudderstack] --> B[PostHog]
+G[3rd party - CDP e.g. Segment/RudderStack] --> B[PostHog]
 G --> N[Google Ads]
 G --> O[Facebook Ads]
 G --> H[Saleforce]
@@ -87,12 +87,12 @@ Pros:
 
 Cons:
 - You'll need to pay for a 3rd party CDP.
-- You won't be able to use PostHog autocapture of events and so you'll need to manually instrument each event you want to track.
-- Enabling feature flags and session recordings requires some extra setup in addition to adding PostHog as a destination.
-- Data into PostHog first passes through a CDP, adding risk that it's dropped.
-- Variable support by the CDP libraries for PostHog.
+- If you use PostHog's event autocapture, the other CDP destinations will not receive the autocapture events.
+- Enabling feature flags and session recordings requires extra setup (instructions are included for [Segment integration instructions](/docs/integrate/third-party/segment) or [RudderStack integration instructions](/docs/integrate/third-party/rudderstack)) or manually installing the PostHog script.
+- Data to PostHog first passes through a CDP, adding risk that it's dropped.
+- Variable support by the CDP libraries for PostHog's features.
 
-Instructions: see the [Segment integration instructions](/docs/integrate/third-party/segment) or [Rudderstack integration instructions](/docs/integrate/third-party/rudderstack) depending on which CDP you are using.
+Instructions: see the [Segment integration instructions](/docs/integrate/third-party/segment) or [RudderStack integration instructions](/docs/integrate/third-party/rudderstack) depending on which CDP you are using.
 
 If using feature flags and/or session recordings, the true flow of data will end up looking more like the following. With the custom events going through the 3rd party CDP, and the PostHog specific data (like autocapture events, session recordings, and feature flag calls) going directly to PostHog.
 
@@ -128,7 +128,7 @@ C[iOS App - PostHog Swift] --> B[PostHog]
 D[Android App - PostHog Java] --> B[PostHog]
 E[Backend - PostHog Python] --> B[PostHog]
 B --> G
-G[3rd party CDP e.g. Segment/Rudderstack] --> N[Extra destinations]
+G[3rd party CDP e.g. Segment/RudderStack] --> N[Extra destinations]
 B --> H[Saleforce]
 B --> I[Intercom]
 B --> K[Customer.io]
