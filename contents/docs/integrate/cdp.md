@@ -9,7 +9,7 @@ showTitle: true
 
 A CDP is a Customer Data Platform. It is a platform that allows you to collect, and send customer data to other tools like product analytics (PostHog!), marketing automation tools, your CRM, data warehouses etc.
 
-The most common CDPs are [Segment](/docs/integrate/third-party/segment) and [Rudderstack](contents/docs/integrate/third-party/rudderstack), both of which work with PostHog.
+The most common CDPs are [Segment](/docs/integrate/third-party/segment) and [Rudderstack](/docs/integrate/third-party/rudderstack), both of which work with PostHog.
 
 If you already have a Customer Data Platforms (CDP) setup or are thinking of using one this guide will help you decide how to integrate with PostHog.
 
@@ -58,8 +58,8 @@ Cons:
 - We don't yet have as many 3rd party integrations as existing 3rd party CDPs - particularly for marketing platforms (for Facebook Ads, Google Ads, TikTok Ads etc.). If you need these extra exports immediately and you have the time and money for a 3rd party CDP you might want to go with option 2.
 
 Instructions:
-1. Install PostHog
-2. Setup the PostHog apps you need
+1. Setup PostHog
+2. Install the [PostHog apps](/apps) you need
 
 ## Option 2: Use a 3rd party CDP with PostHog as a destination
 
@@ -119,7 +119,7 @@ G --> F[Data warehouse e.g. Big Query / Snowflake]
 
 If there's key exports you are looking for that we don't currently have, you can use the data export app to send the PostHog data to the 3rd party CDP and then add the extra destinations you need.
 
-Note: this won't work for the CDP device-mode sources such as Facebook Ads and Google Ads (where the CDP injects the marketing script onto the page). If need this we'd recommend integrating the marketing platforms directly, using Google Tag Manager or using a 3rd party CDP as your primary CDP (option 2).
+Note: this won't work for the CDP device-mode sources such as Facebook Ads and Google Ads (where the CDP injects the marketing script onto the page). If you need this we'd recommend integrating the marketing platforms directly, using Google Tag Manager or using a 3rd party CDP as your primary CDP (option 2).
 
 ```mermaid
 graph LR
