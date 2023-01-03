@@ -953,6 +953,10 @@
                     "url": "/docs/integrate/user-properties"
                 },
                 {
+                    "name": "Using a CDP",
+                    "url": "/docs/integrate/cdp"
+                },
+                {
                     "name": "Deploying a reverse proxy",
                     "url": "/docs/integrate/proxy"
                 },
@@ -1578,6 +1582,10 @@
                             "name": "Redshift Import"
                         },
                         {
+                            "url": "/docs/apps/rudderstack-import",
+                            "name": "Rudderstack Import"
+                        },
+                        {
                             "url": "/docs/apps/segment",
                             "name": "Segment Connector"
                         },
@@ -2064,7 +2072,7 @@
             "url": "/apps/replicator"
         },
         {
-            "name": "Rudderstack Export",
+            "name": "RudderStack Export",
             "url": "/apps/rudderstack-export"
         },
         {
