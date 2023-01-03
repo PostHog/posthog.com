@@ -71,7 +71,7 @@ A[Website - CDP Javascript] --> G
 C[iOS App - CDP Swift] --> G
 D[Android App - CDP Java] --> G
 E[Backend - CDP Python] --> G
-G[3rd part - CDP e.g. Segment/Rudderstack] --> B[PostHog]
+G[3rd party - CDP e.g. Segment/Rudderstack] --> B[PostHog]
 G --> N[Google Ads]
 G --> O[Facebook Ads]
 G --> H[Saleforce]
