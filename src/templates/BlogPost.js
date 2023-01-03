@@ -96,6 +96,7 @@ export default function BlogPost({ data, pageContext, location }) {
         h5: H5,
         h6: H6,
         pre: MdxCodeBlock,
+        MultiLanguage: MdxCodeBlock,
         inlineCode: InlineCode,
         blockquote: Blockquote,
         img: ZoomImage,
