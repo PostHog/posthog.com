@@ -82,4 +82,4 @@ We celebrate all the big and little milestones at PostHog, including birthdays a
 We have partnered with [Batch](https://batchusa.com/pages/about-us) to gift all team members with a personalized giftset for their birthday. 
 
 ### Anniversaries
-As for your first-year anniversary with PostHog, you will receive a giftcard from [Giftogram](https://giftogram.com/) where you can select a giftcard from a designated brand. Meanwhile, if you're coming up on your second-year anniversary you'll be gifted a [Lego customized minifig](https://fab-bricks.com/account.php?action=view_order&order_id=138816) in a display case. 
+On your first-year anniversary with PostHog, you will receive a giftcard from [Giftogram](https://giftogram.com/) which can be used on a wide selection of brands. On your second-year anniversary you'll be gifted a [customized Lego minifig](https://minifig.fab-bricks.com/) in a display case. 
