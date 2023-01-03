@@ -31,4 +31,4 @@ graph TD
 
 ## Why are there limitations on the PostHog UI export and the events API?
 
-The PostHog UI and the events API are designed to quickly respond with a small number of events. To prevent your queries running slower when another using is trying to export large numbers of events we've built a separate system for managing the exporting of large number of events using apps.
+The PostHog UI and the events API are designed to quickly respond with a small number of events. To prevent your queries running slower when another user is trying to export large numbers of events we've built a separate system for managing the exporting of large number of events using apps.
