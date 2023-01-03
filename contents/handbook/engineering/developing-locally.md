@@ -333,7 +333,7 @@ This means that your activity is immediately reflected in the current project, w
 
 So, when working with a feature based on feature flag `foo-bar`, [add a feature flag with this key to your local instance](http://localhost:8000/feature_flags/new) and release it there.
 
-If you'd like to have ALL feature flags that exist in PostHog at your disposal right away, run `python3 manage.py sync_feature_flags` – they will be added to each project in the instance, fully rolled out by default.
+If you'd like to have ALL feature flags that exist in PostHog at your disposal right away, run `DEBUG=1 python3 manage.py sync_feature_flags` – they will be added to each project in the instance, fully rolled out by default.
 
 This command automatically turns any feature flag ending in `_EXPERIMENT` as a multivariate flag with `control` and `test` variants.
 
@@ -351,3 +351,7 @@ DEBUG=1;
 KAFKA_HOSTS=kafka:9092;
 DATABASE_URL=postgres://posthog:posthog@localhost:5432/posthog
 ```
+
+## Extra: Adding an enterprise license (PostHog employees only)
+
+If you're a PostHog employee, you can add an enterprise license to your local instance by following this [internal guide](https://github.com/PostHog/billing/blob/main/docs/running-posthog-with-billing.md). This is particularly useful if developing enterprise features or testing billing-related functionality.

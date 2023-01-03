@@ -39,7 +39,7 @@ const cloudPlans: IPlan[] = [
         title: 'with Enterprise package',
         description: 'Slack-based priority support, SSO, advanced permissions',
         pricing: {
-            event: 0.00045,
+            event: 0.0005626,
             monthly: 450,
         },
         mainCTA: {

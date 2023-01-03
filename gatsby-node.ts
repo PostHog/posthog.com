@@ -21,10 +21,6 @@ export const onCreatePage: GatsbyNode['onCreatePage'] = async ({ page, actions }
         page.matchPath = '/next-steps/*'
         createPage(page)
     }
-    if (page.path.match(/^\/question$/)) {
-        page.matchPath = '/question/*'
-        createPage(page)
-    }
 }
 
 export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ stage, actions }) => {

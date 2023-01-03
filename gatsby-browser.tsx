@@ -3,7 +3,6 @@ import { initKea, wrapElement } from './kea'
 import './src/styles/global.css'
 import HandbookLayout from './src/templates/Handbook'
 import Product from './src/templates/Product'
-import SqueakTopic from './src/templates/SqueakTopic'
 import Job from './src/templates/Job'
 import { Provider as ToastProvider } from './src/context/toast'
 import { RouteUpdateArgs } from 'gatsby'
@@ -45,8 +44,6 @@ export const wrapPageElement = ({ element, props }) => {
         <HandbookLayout {...props} />
     ) : /^product\//.test(slug) ? (
         <Product {...props} />
-    ) : /^questions\//.test(slug) ? (
-        <SqueakTopic {...props} />
     ) : /^careers\//.test(slug) ? (
         <Job {...props} />
     ) : (

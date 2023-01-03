@@ -143,7 +143,7 @@ export const CompensationCalculator = ({
                     <Combobox value={job} onChange={setItem('job')} options={Object.keys(sfBenchmark)} />
                 </Section>
             )}
-            <Section title={'Location'} description={descriptions['location'] && descriptions['location']}>
+            <Section title={'Location (based on market rates)'} description={descriptions['location'] && descriptions['location']}>
                 <div className="grid grid-cols-2 gap-x-4">
                     <Combobox label="Country" value={country} onChange={setItem('country')} options={countries} />
                     <Combobox
