@@ -452,12 +452,14 @@ const Survey = ({ contentContainerClasses = '' }) => {
     )
 }
 
+const defaultMenuWidth = { left: 265, right: 265 }
+
 export default function PostLayout({
     tableOfContents,
     children,
     sidebar,
     contentWidth = 650,
-    menuWidth = 265,
+    menuWidth = defaultMenuWidth,
     questions,
     menu,
     article = true,
@@ -520,7 +522,7 @@ export default function PostLayout({
     const toc = tableOfContents?.filter((item) => item.depth > -1 && item.depth < 2)
     const contentContainerClasses =
         contentContainerClassName ||
-        `px-5 lg:px-12 w-full transition-all ${
+        `px-5 lg:px-6 xl:px-12 w-full transition-all ${
             hideSidebar ? 'lg:max-w-5xl' : !fullWidthContent ? 'lg:max-w-3xl' : 'lg:max-w-full'
         } ${menu ? 'mx-auto' : 'lg:ml-auto'}`
 
@@ -565,7 +567,9 @@ export default function PostLayout({
             <div
                 style={{
                     gridAutoColumns: menu
-                        ? `${menuWidth}px 1fr 1fr ${menuWidth}px`
+                        ? `${menuWidth?.left ?? defaultMenuWidth?.left}px 1fr 1fr ${
+                              menuWidth?.right ?? defaultMenuWidth?.right
+                          }px`
                         : `1fr minmax(auto, ${contentWidth}px) minmax(max-content, 1fr)`,
                 }}
                 className="w-full relative lg:grid lg:grid-flow-col items-start -mb-20"
@@ -639,7 +643,7 @@ export default function PostLayout({
                                         </Scrollspy>
                                     </div>
                                 )}
-                                <ul className="list-none pl-2 pr-3 py-1 flex mt-0 mb-10 lg:mb-0 border-t border-gray-accent-light border-dashed dark:border-gray-accent-dark items-center">
+                                <ul className="list-none pl-2 pr-3 py-1 flex mt-0 mb-10 lg:mb-0 border-t border-gray-accent-light border-dashed dark:border-gray-accent-dark items-center bg-tan/40 dark:bg-primary/40 backdrop-blur">
                                     {view === 'Article' && toc?.length > 1 && showTocButton && (
                                         <SidebarAction title="On this page">
                                             <Popover
