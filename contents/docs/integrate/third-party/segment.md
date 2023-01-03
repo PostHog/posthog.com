@@ -14,8 +14,8 @@ Segment is a Customer Data Platform (CDP) that allows you to easily manage data 
 Make sure you have a [Segment account](https://segment.com/docs/#getting-started) **and** a PostHog account, using [PostHog Cloud](https://app.posthog.com/signup) or self-hosting.
 
 1. For each source that you want to send data to PostHog:
-   1. If it's a website or web app - follow [Setting up Segment with your website](#setting-up-segment-with-your-website-all-features-supported)
-   2. For all other sources, follow the instructions for [Adding PostHog as a simple Segment destination](#adding-posthog-as-a-simple-segment-destination-minimal-feature-support)
+2. If it's a website or web app - follow [Setting up Segment with your website](#setting-up-segment-with-your-website-all-features-supported)
+3. For all other sources, follow the instructions for [Adding PostHog as a simple Segment destination](#adding-posthog-as-a-simple-segment-destination-minimal-feature-support)
 
 ### Setting up Segment with your website (all features supported)
 
