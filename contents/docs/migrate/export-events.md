@@ -15,7 +15,7 @@ There are several ways to export your events depending on your use case:
    - To export your historical data you'll want to connect the app and then run a historical export.
    - Additionally, these apps stream all new events to the destination. This keeps your destination up to date with new events as they come in.
 
-If you're looking to migrate to a new PostHog instance follow the [migrating between PostHog instances guide](/docs/migrate/migrate-between-cloud-and-self-hosted.mdx).
+If you're looking to migrate to a new PostHog instance follow the [migrating between PostHog instances guide](/docs/migrate/migrate-between-cloud-and-self-hosted).
 
 ## Not sure which export method to use?
 
