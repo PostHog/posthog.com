@@ -37,8 +37,6 @@ This is what we'll be using in the guide below.
 > It is also technically possible to run PostHog in Docker completely, but syncing changes is then much slower, and for development you need PostHog dependencies installed on the host anyway (such as formatting or typechecking tools).
 > The other way around – everything on the host, is not practical due to significant complexities involved in instantiating Kafka or ClickHouse from scratch.
 
-> [Podman](https://podman.io/) and [`podman-compose`](https://github.com/containers/podman-compose) can be used as alternatives to Docker and `docker compose` respectively to allow rootless containers. The commands used in this documentation are analogous to the commands used with Podman (e.g. `podman-compose -f docker-compose.dev.yml up` instead of `docker compose -f docker-compose.dev.yml up`)
-
 The instructions here assume you're running macOS or the current Ubuntu Linux LTS (22.04).
 
 For other Linux distros, adjust the steps as needed (e.g. use `dnf` or `pacman` in place of `apt`).
@@ -80,7 +78,7 @@ In case some steps here have fallen out of date, please tell us about it – fee
 
     ClickHouse and Kafka won't be able to talk to each other without these mapped hosts.
 
-    > If running Podman, `/etc/hosts` could be used as the base hosts file for containers by default. This can make hostname resolution fail in the ClickHouse container, and can be mended by setting `base_hosts_file="none"` in [`containers.conf`](https://github.com/containers/common/blob/main/docs/containers.conf.5.md#containers-table). This can be an issue only in newer versions of the OCI runtime, as the change was introduced in April 2022.
+    > If you are using a newer (>=4.1) version of Podman instead of Docker, the host machine's `/etc/hosts` is used as the base hosts file for containers by default, instead of container's `/etc/hosts` like in Docker. This can make hostname resolution fail in the ClickHouse container, and can be mended by setting `base_hosts_file="none"` in [`containers.conf`](https://github.com/containers/common/blob/main/docs/containers.conf.5.md#containers-table).
 
 2. Clone the [PostHog repository](https://github.com/posthog/posthog). All future commands assume you're inside the `posthog/` folder.
 
@@ -132,7 +130,7 @@ d2d00eae3fc0   redis:6.2.7-alpine                  "docker-entrypoint.s…"   3 
 # docker logs posthog-clickhouse-1 -n 1
 Saved preprocessed configuration to '/var/lib/clickhouse/preprocessed_configs/users.xml'.
 
-# ClickHouse writes logs to `/var/log/clickhouse-server/clickhouse-server.log` and error logs to `/var/log/clickhouse-server/clickhouse-server.err.log` instead of stdin. It can be useful to `cat` these files if there are any issues:
+# ClickHouse writes logs to `/var/log/clickhouse-server/clickhouse-server.log` and error logs to `/var/log/clickhouse-server/clickhouse-server.err.log` instead of stdout/stsderr. It can be useful to `cat` these files if there are any issues:
 # docker exec posthog-clickhouse-1 cat /var/log/clickhouse-server/clickhouse-server.log
 # docker exec posthog-clickhouse-1 cat /var/log/clickhouse-server/clickhouse-server.err.log
 
