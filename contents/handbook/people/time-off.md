@@ -76,7 +76,7 @@ We are aware that there are local laws around time off for new parents in every 
 
 ## Birthday and anniversaries
 
-We celebrate all the big and little milestones at PostHog which includes birthdays and anniversaries. We want to celebrate each team member as a reminder how much we appreciate each individual. 
+We celebrate all the big and little milestones at PostHog, including birthdays and work anniversaries. We celebrate each team member as a reminder of how much we appreciate them. 
 
 ### Birthdays
 We have partnered with [Batch](https://batchusa.com/pages/about-us) to gift all team members with a personalized giftset for their birthday. 
