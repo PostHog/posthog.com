@@ -1,5 +1,5 @@
 ---
-title: RudderStack Importer
+title: RudderStack Import
 thumbnail: ../../apps/thumbnails/rudderstack-export.png
 topics:
     - rudderstack
@@ -19,7 +19,7 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 You'll also need access to a RudderStack workspace.
 
-### How do I get started with the RudderStack Importer?
+### How do I get started with the RudderStack Import?
 
 Before integrating with RudderStack, we recommend you read our [CDP integration guide](/docs/integrate/cdp) to understand the different options for integrating your CDP with PostHog.
 
