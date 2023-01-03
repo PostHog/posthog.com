@@ -150,14 +150,15 @@ Druid and ClickHouse are similar solutions solving the same problem with dramati
 
 **Pros**
 
-- Simple to set-up, can operate out of a single instance
 - Low latency
+- Simple to set-up, can operate out of a single instance
 - Materialized Views expedite aggregations at the data level
 
 **Cons**
 
-- Cannot return data immediately after insert
 - Expects users to batch data
+- Cannot return data immediately after insert
+
 
 ### Druid Pros & Cons
 
@@ -169,6 +170,6 @@ Druid and ClickHouse are similar solutions solving the same problem with dramati
 
 **Cons**
 
-- More latency due to multiple layers
 - Expensive set-up
 - Harder to maintain
+- More latency due to multiple layers
