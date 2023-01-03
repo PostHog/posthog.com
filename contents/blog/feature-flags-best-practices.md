@@ -17,7 +17,7 @@ There are several best practices for implementing feature flags correctly. This 
 
 ## 1. Use local evaluation for faster flags
 
-An underused feature of PostHog’s feature flag tool is the ability to evaluate flags locally. By using the already received feature flag data, your application doesn’t need another request to check if the flag is active. 
+An underrated feature of PostHog’s feature flag tool is the ability to evaluate flags locally. By using the already received feature flag data, your application doesn’t need another request to check if the flag is active. 
 
 Fewer requests mean feature flags evaluate faster and show to more users. Local evaluation is also useful for speeding up code with multiple flags, such as loops. Instead of waiting for multiple requests, your code can run right away (if the flag is active). 
 
@@ -83,7 +83,7 @@ enabledVariant, err := client.GetFeatureFlag(
 
 ## 2. Bootstrap your flags to set them before the library loads
 
-Bootstrapping your flags makes them available as soon as possible, before the library loads. This is useful if you want your flags to be available when the user first loads the page, such as on a landing page. 
+Bootstrapping your flags makes them available as soon as possible, before the library loads. This is useful if you want your flags to be available when the page first loads, such as on a landing page. 
 
 Without bootstrapping, you must wait for the library to load and then make a request. By the time your application gets the flag data, it is too late. Your page loads without the feature flag data and any code behind the flags (after this they save as cookies for easy access).
 
@@ -103,7 +103,7 @@ posthog.init('<ph_project_api_key>', {
 })
 ```
 
-You can get values for the bootstrap object by using a server-side library. Call `getAllFlags` with a server-side library, then add those values as the `featureFlags` object. This enables your flags to be available instantly on page load. See more about bootstrapping flags in [our JavaScript docs](/docs/integrate/client/js#bootstrapping-flags).
+You can get values for the bootstrap object by using a server-side library. Call `getAllFlags` with a server-side library, then add those values as the `featureFlags` object in your client-side initialization. This enables your flags to be available instantly on page load. See more about bootstrapping flags in [our JavaScript docs](/docs/integrate/client/js#bootstrapping-flags).
 
 > Bootstrapping your flags also ensures events have accurate feature flag data. If you capture events before receiving feature flags data, data can be missing. Bootstrapping prevents this.
 
@@ -123,7 +123,7 @@ Because feature flags evaluate based on the distinct ID of the user, having accu
 
 Having at least a “sticky” ID (like a cookie, which is the default) ensures the user gets a consistent flag evaluation in your product. Without identification, PostHog wouldn’t know what feature flags to show them. We default to not showing flags, but if the distinct ID changes often, we could show multiple variants to the same user.
 
-Accurate identification includes setting up group analytics and person properties if you plan to use them to rollout feature flags. Users must be a part of groups or have a property before PostHog can decide to show them a feature flag relying on that group or property. 
+Accurate identification includes setting up group analytics and person properties if you use them to rollout feature flags. Users must be a part of groups or have a property before PostHog can decide to show them a feature flag relying on that group or property. 
 
 ## 5. Name your feature flags well
 
@@ -137,21 +137,19 @@ Here is some advice on naming your feature flags, they should:
 
 None of these are laws, you can do what you want with the naming of feature flags. They are suggestions. A lot of this advice is relatively standard for naming variables in software development, feel free to take all their advice too.
 
-![I'm a tutorial](../images/blog/feature-flags-best-practices/im-a-tutorial.png)
-
 ## 6. Minimize or group changes behind them
 
 A best practice is having a single feature flag control a single component, function, method, class, or other pieces of code.
 
 Having a flag in multiple places can be confusing. Developers expect single-use feature flags, and when they aren’t, this can cause unintended consequences. For example, a developer could remove the flag in one place without removing it in another.
 
-Multiple uses of the same feature flags also increases maintenance and overhead. Every time a developer sees a feature flag, they must figure out its status and impact on code. If active, they must work around it and maintain fallbacks.
+Multiple uses of the same feature flags increases maintenance and overhead. Every time a developer sees a feature flag, they must figure out its status and impact on code. If active, they must work around it and maintain multiple fallbacks.
 
-Having too many changes behind a feature flag also makes it difficult to maintain. If you are doing experiments, it can make the relevant parts difficult to identify. It makes it more likely the parts of your feature flag break. Keeping your flags focused is best.
+Having too many changes behind a feature flag makes it difficult to maintain. If you are doing experiments, it can make the relevant parts difficult to identify. It makes it more likely the parts of your feature flag break. Keeping your flags focused is best.
 
 ## 7. Roll out for specific groups
 
-Feature flags are usually checked at the person level, but there are other ways. One particularly useful and under-utilized way is rolling out based on groups.
+Feature flags are usually checked at the person level, but there are other ways. One useful and under-utilized way is rolling out based on groups.
 
 For example, a customer complains about an issue with your product. You create a fix for them but aren’t sure it will work for everyone. You can roll it out behind a feature flag and set the distribution to members of that company.
 
