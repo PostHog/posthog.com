@@ -45,7 +45,7 @@ ClickHouse's cornerstone principle is that ClickHouse should do the work for you
 
 What is a materialized view? A materialized view, unlike a normal view, is a separate table of data generated at a specific point of time from the base tables. When you query a normal view, the view is re-queried before being queried from. 
 
-While Postgres, a row-based OLTP databse, supports materialized views, they aren’t good for dynamic data since refreshing them is expensive. ClickHouse uniquely can efficiently update materialized views upon new data within a delay threshold. 
+While Postgres, a row-based OLTP database, supports materialized views, they aren’t good for dynamic data since refreshing them is expensive. ClickHouse uniquely can efficiently update materialized views upon new data within a delay threshold. 
 
 Granted, dynamic materialized views aren’t exactly an architectural element in the same way RAM, CPU, and Disc are. But they impact how architecture is used. 
 
