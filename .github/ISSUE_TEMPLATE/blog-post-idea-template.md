@@ -15,7 +15,7 @@ _Explain the idea in a sentence or two_
 
 _how it will it be useful or interesting for readers/viewers_
 
-## Possible headlines
+## Headlines options
 
 _think of two of three possible headlines we could use_
 
