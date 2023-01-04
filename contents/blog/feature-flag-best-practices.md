@@ -11,9 +11,9 @@ featuredImageType: full
 categories: ["Guides", "Using PostHog"]
 ---
 
-Feature flags (also known as feature toggles) enable teams to make changes to their applications quickly and safely. They check whether a piece of code should be active or not and a simple UI to create and manage those checks. This enables fast feature testing, rollout, and rollback.
+Feature flags, aka feature toggles, are awesome. New feature for your beta test group? Use a feature flag. Testing multiple variants of a new UX? Use a feature flag. Kill switch to prevent performance problems? Yup, feature flag. We could go on, but suffice to say the benefits of feature flags are numerous.
 
-There are several best practices for implementing feature flags correctly. This post goes over 8 of them, from using local evaluation to deciding when to remove feature flags.
+This post explores feature flag best practices, such as deciding when to remove them and naming conventions. Some are specific to using [feature flags in PostHog](/product/feature-flags), but the principles apply no matter what [feature flag tool](/blog/best-open-source-feature-flag-tools) you use.
 
 ## 1. Use local evaluation for faster flags
 
@@ -129,7 +129,7 @@ Accurate identification includes setting up group analytics and person propertie
 
 ## 5. Name your feature flags well
 
-Here is some advice on naming your feature flags, they should:
+Here is some practical advice on naming your feature flags to avoid confusion. None of these are laws and you can create your own conventions, but for us names should:
 
 - Relate to the feature you are flagging. Make them predictable to the next person who reads them. Their key and name should provide insight into what they do.
 
@@ -141,11 +141,9 @@ Here is some advice on naming your feature flags, they should:
 
 - Use name “types” if you have a large number of flags. This helps organize them and makes their purpose clear. Types might include experiments, releases, and permissions. For example, instead of `new-billing`, they would be `new-billing-experiment` or `new-billing-release`.
 
-None of these are laws, you can do what you want with the naming of feature flags. They are suggestions. A lot of this advice is relatively standard for naming variables in software development, feel free to take all their advice too.
-
 ## 6. Minimize or group changes behind them
 
-A best practice is having a single feature flag control a single component, function, method, class, or other pieces of code.
+It's best to use a single feature flag control a single component, function, method, class, or other pieces of code.
 
 Having a flag in multiple places can be confusing. Developers expect single-use feature flags, and when they aren’t, this can cause unintended consequences. For example, a developer could remove the flag in one place without removing it in another.
 
@@ -168,8 +166,6 @@ This enables you to coordinate and communicate with those groups while rolling o
 > **💡 PostHog Tip:** Be sure to identify users as part of that group using [group analytics](/manual/group-analytics).
 
 ## 8. Remove flags at the right time
-
-Feature flags have a cost. Like any piece of code, they have maintenance associated with them. Although they are easy to create and add, figuring out when to remove them can be challenging.
 
 Leaving flags in your code for too long can confuse future developers, especially if it is already rolled out and integrated. It can confuse those reading the code and the flag’s detail in PostHog.
 
