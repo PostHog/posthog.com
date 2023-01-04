@@ -67,7 +67,7 @@ Similar to product, designers support small teams. [Read our guide](/handbook/en
 
 ## Managing larger cross-team projects
 
-Each project should be owned by an individual within a single small team. However, some projects affect multiple other teams and require work from them. For example, the performance work owned by Karl in product analytics requires support from the pipeline and infrastructure team.
+Each project should be owned by an individual within a single small team. However, some projects affect multiple other teams and require their support. For example, the performance work owned by Karl in product analytics requires support from the pipeline and infrastructure team.
 
 For these projects, we recommend the individual owning it write a status update every 2 weeks on slack and add a link to this update in the "Updates on bigger projects that affect multiple teams" section of the all hands doc.
 
