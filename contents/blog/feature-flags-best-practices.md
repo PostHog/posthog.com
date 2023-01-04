@@ -79,7 +79,7 @@ enabledVariant, err := client.GetFeatureFlag(
 
 </MultiLanguage>
 
-> **Note:** To enable local evaluation of feature flags, you may also need to set a `personal_api_key` in your server-side initialization. Check the [integrations docs](/docs/integrate) for details.
+> **💡 PostHog Tip:** To enable local evaluation of feature flags, you may also need to set a `personal_api_key` in your server-side initialization. Check the [integrations docs](/docs/integrate) for details.
 
 ## 2. Bootstrap your flags to set them before the library loads
 
@@ -165,17 +165,17 @@ Enabling flags for specific groups allows the experience to be consistent for th
 
 This enables you to coordinate and communicate with those groups while rolling out features. This can be especially useful for massive features, organizations, and integrations. It allows you to beta test functionality, do [canary releases](/tutorials/canary-release), and deal with issues before a larger rollout.
 
-> **Note:** Be sure to identify users as part of that group using [group analytics](/manual/group-analytics).
+> **💡 PostHog Tip:** Be sure to identify users as part of that group using [group analytics](/manual/group-analytics).
 
 ## 8. Remove flags at the right time
 
 Feature flags have a cost. Like any piece of code, they have maintenance associated with them. Although they are easy to create and add, figuring out when to remove them can be challenging.
 
-Leaving flags in your code for too long can confuse future developers, especially it is already rolled out and integrated. It can confuse those reading the code and the flag’s detail in PostHog.
+Leaving flags in your code for too long can confuse future developers, especially if it is already rolled out and integrated. It can confuse those reading the code and the flag’s detail in PostHog.
 
 Stale flags are also liabilities in code that cause problems if left too long. For example, there could be problems with your feature flags causing them to not trigger or return the wrong value. With a large number of old, stale feature flags, this becomes a major problem. 
 
-Everyone has different opinions of when to remove their feature flags, but here are some ideas:
+Everyone has different opinions on when to remove their feature flags, but here are some ideas:
 
 - If there were multiple release cycles without an issue. Schedule cleanup along with other post-release or sprint work.
 
