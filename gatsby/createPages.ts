@@ -3,8 +3,8 @@ import { GatsbyNode } from 'gatsby'
 import path from 'path'
 import slugify from 'slugify'
 import fetch from 'node-fetch'
-const Slugger = require('github-slugger')
-const markdownLinkExtractor = require('markdown-link-extractor')
+import Slugger from 'github-slugger'
+import markdownLinkExtractor from 'markdown-link-extractor'
 
 export const createPages: GatsbyNode['createPages'] = async ({ actions: { createPage }, graphql }) => {
     const BlogPostTemplate = path.resolve(`src/templates/BlogPost.js`)
@@ -24,7 +24,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 
     // Docs
     const ApiEndpoint = path.resolve(`src/templates/ApiEndpoint.tsx`)
-    const HandbookTemplate = path.resolve(`src/templates/Handbook.tsx`)
+    const HandbookTemplate = path.resolve(`src/templates/Handbook/index.tsx`)
 
     const result = await graphql(`
         {
