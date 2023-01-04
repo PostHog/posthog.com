@@ -13,8 +13,8 @@ import SidebarSearchBox from 'components/Search/SidebarSearchBox'
 import TableOfContents from './TableOfContents'
 import Sidebar from './Sidebar'
 
-export { default as ShareLinks } from './ShareLinks'
-export { default as Contributors } from './Contributors'
+export { ShareLinks } from './ShareLinks'
+export { Contributors } from './Contributors'
 export { SidebarSection } from './Sidebar'
 
 export const Topics = ({ topics }: { topics: ITopic[] }) => {

@@ -55,5 +55,3 @@ export const ShareLinks: React.FC<ShareLinksProps> = ({ title, href }) => {
         </div>
     )
 }
-
-export default ShareLinks

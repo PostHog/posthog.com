@@ -80,5 +80,3 @@ export const Contributors: React.FC<ContributorsProps> = ({ contributors, classN
         </ul>
     )
 }
-
-export default Contributors
