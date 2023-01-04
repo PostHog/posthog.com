@@ -68,14 +68,19 @@ export const SidebarSection = ({
 }
 
 export const Topics = ({ topics }: { topics: ITopic[] }) => {
+    const buttonClasses = `px-4 py-2 inline-block bg-gray-accent-light border-black/80 rounded-sm font-semibold text-sm leading-none`
     return (
         <ul className="list-none p-0 flex items-start flex-wrap -m-1">
             {topics.map(({ name, url, state }: ITopic) => {
                 return (
                     <li className="m-1" key={name}>
-                        <Chip state={state} className="text-red hover:text-red" href={url} size="xs">
-                            {name}
-                        </Chip>
+                        {url ? (
+                            <Link className={`${buttonClasses} text-red dark:text-red`} to={url} state={state}>
+                                {name}
+                            </Link>
+                        ) : (
+                            <span className={`${buttonClasses} dark:text-black`}>{name}</span>
+                        )}
                     </li>
                 )
             })}
@@ -447,12 +452,14 @@ const Survey = ({ contentContainerClasses = '' }) => {
     )
 }
 
+const defaultMenuWidth = { left: 265, right: 265 }
+
 export default function PostLayout({
     tableOfContents,
     children,
     sidebar,
     contentWidth = 650,
-    menuWidth = 265,
+    menuWidth = defaultMenuWidth,
     questions,
     menu,
     article = true,
@@ -515,7 +522,7 @@ export default function PostLayout({
     const toc = tableOfContents?.filter((item) => item.depth > -1 && item.depth < 2)
     const contentContainerClasses =
         contentContainerClassName ||
-        `px-5 lg:px-12 w-full transition-all ${
+        `px-5 lg:px-6 xl:px-12 w-full transition-all ${
             hideSidebar ? 'lg:max-w-5xl' : !fullWidthContent ? 'lg:max-w-3xl' : 'lg:max-w-full'
         } ${menu ? 'mx-auto' : 'lg:ml-auto'}`
 
@@ -560,14 +567,20 @@ export default function PostLayout({
             <div
                 style={{
                     gridAutoColumns: menu
-                        ? `${menuWidth}px 1fr 1fr ${menuWidth}px`
+                        ? `${menuWidth?.left ?? defaultMenuWidth?.left}px 1fr 1fr ${
+                              menuWidth?.right ?? defaultMenuWidth?.right
+                          }px`
                         : `1fr minmax(auto, ${contentWidth}px) minmax(max-content, 1fr)`,
                 }}
                 className="w-full relative lg:grid lg:grid-flow-col items-start -mb-20"
             >
                 {menu && (
                     <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:block hidden relative z-20">
-                        <aside className="lg:sticky bg-tan dark:bg-primary top-0 flex-shrink-0 w-full justify-self-end px-4 lg:box-border my-10 lg:my-0 mr-auto overflow-y-auto lg:h-screen pb-10">
+                        <aside
+                            className={`lg:sticky bg-tan dark:bg-primary top-0 flex-shrink-0 w-full justify-self-end px-4 lg:box-border my-10 lg:my-0 mr-auto overflow-y-auto lg:h-screen pb-10 ${
+                                hideSearch ? 'pt-5' : ''
+                            }`}
+                        >
                             {!hideSearch && (
                                 <div className="lg:sticky top-0 z-20 pt-4 -mx-2 px-1 bg-tan dark:bg-primary relative">
                                     <SidebarSearchBox />
@@ -630,7 +643,7 @@ export default function PostLayout({
                                         </Scrollspy>
                                     </div>
                                 )}
-                                <ul className="list-none pl-2 pr-3 py-1 flex mt-0 mb-10 lg:mb-0 border-t border-gray-accent-light border-dashed dark:border-gray-accent-dark items-center">
+                                <ul className="list-none pl-2 pr-3 py-1 flex mt-0 mb-10 lg:mb-0 border-t border-gray-accent-light border-dashed dark:border-gray-accent-dark items-center bg-tan/40 dark:bg-primary/40 backdrop-blur">
                                     {view === 'Article' && toc?.length > 1 && showTocButton && (
                                         <SidebarAction title="On this page">
                                             <Popover
