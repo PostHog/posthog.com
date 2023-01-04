@@ -1,6 +1,6 @@
 ---
 date: 2023-01-03
-title: 8 best practices for feature flags and toggles
+title: Master feature flags: best practice, tips and examples
 rootPage: /blog
 sidebar: Blog
 showTitle: true
