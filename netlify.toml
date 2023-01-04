@@ -2562,3 +2562,9 @@
     from = "/docs/self-host/open-source/support"
     to = "/docs/self-host/deploy/support"
 
+
+
+# Added: 2023-01-04
+[[redirects]]
+    from = "/blog/using-posthog"
+    to = "/blog/using-posting"
