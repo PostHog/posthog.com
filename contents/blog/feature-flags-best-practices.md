@@ -112,7 +112,9 @@ You can get values for the bootstrap object by using a server-side library. Call
 If a feature flag returns `false` or fails and returns `none`, you want to make sure you fallback to working code. This is a best practice for a few reasons:
 
 - If there is a PostHog-related problem with the flag, we return `None`. Having a fallback handles this.
+
 - If you use experiments, the fallback is the control the test is comparing against. If your fallback doesn’t work properly, it causes the experiment to be inaccurate.
+
 - If you rollback your code using a feature flag, knowing you are rolling back to working code helps you do it quickly.
 
 To fallback consistently, keep new changes separate from existing code and behind a feature flag. Test that flags returning `false` fallback to old code and that the fallback code works. This ensures your apps continue to work, even if the code behind the flag isn’t used.
@@ -130,9 +132,13 @@ Accurate identification includes setting up group analytics and person propertie
 Here is some advice on naming your feature flags, they should:
 
 - Relate to the feature you are flagging. Make them predictable to the next person who reads them. Their key and name should provide insight into what they do.
+
 - Be searchable in your code. If they are too similar to other code, you can’t find them easily or people will mistake their functionality.
+
 - Get saved as constants in a single file. PostHog saves our feature flags as [constants](https://github.com/PostHog/posthog/blob/master/frontend/src/lib/constants.tsx) that get accessed to maintain consistency and legibility.
+
 - Use positive wording. PostHog does the same. Our library checks feature flags by calling `isFeatureEnabled`. Using “negative” wording, such as `disable-feature`, can be confusing.
+
 - Use name “types” if you have a large number of flags. This helps organize them and makes their purpose clear. Types might include experiments, releases, and permissions. For example, instead of `new-billing`, they would be `new-billing-experiment` or `new-billing-release`.
 
 None of these are laws, you can do what you want with the naming of feature flags. They are suggestions. A lot of this advice is relatively standard for naming variables in software development, feel free to take all their advice too.
@@ -172,10 +178,15 @@ Stale flags are also liabilities in code that cause problems if left too long. F
 Everyone has different opinions of when to remove their feature flags, but here are some ideas:
 
 - If there were multiple release cycles without an issue. Schedule cleanup along with other post-release or sprint work.
+
 - If they are old and deal with core functionality.
+
 - If the feature causes problems and the flag is permanently turned off. Create a new flag for the fix.
+
 - If there are active feature flags under or over that feature flag.
+
 - Provide a date or guidance on when to remove a feature flag in the description or comment.
+
 - Restrict full rollout to removing the flag, such as limiting rolls out to 95% of users until removed.
 
 Whatever you choose, it should be clear to your team when to remove a feature flag. This limits the overhead and staleness of flags.
