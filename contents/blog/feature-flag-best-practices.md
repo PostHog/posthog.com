@@ -8,7 +8,7 @@ hideAnchor: true
 author: ["ian-vanagas"]
 featuredImage: ../images/blog/green-blog-image.jpg
 featuredImageType: full
-categories: ["Startups", "Guides"]
+categories: ["Guides", "Using PostHog"]
 ---
 
 Feature flags (also known as feature toggles) enable teams to make changes to their applications quickly and safely. They check whether a piece of code should be active or not and a simple UI to create and manage those checks. This enables fast feature testing, rollout, and rollback.
