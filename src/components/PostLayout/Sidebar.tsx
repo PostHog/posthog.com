@@ -18,7 +18,7 @@ export const SidebarSection = ({
     className?: string
 }) => {
     return (
-        <div className={`px-6 ${className}`}>
+        <div className={`py-4 px-6 ${className}`}>
             {title && <h3 className="text-black dark:text-white font-semibold opacity-25 m-0 mb-2 text-sm">{title}</h3>}
             {children}
         </div>
@@ -68,7 +68,7 @@ const Sidebar: React.FC<SidebarProps> = ({
     return (
         <aside key={`${title}-sidebar`} className="w-full my-10 lg:my-0 mr-auto h-full lg:px-0 px-4 box-border">
             <div className="lg:h-screen sticky flex flex-col top-0">
-                <div className="flex-grow flex flex-col space-y-4 overflow-y-auto lg:pb-24">
+                <div className="flex-grow flex flex-col overflow-y-auto lg:pb-24">
                     {children && <div className="relative flex-initial">{children}</div>}
 
                     <div className="flex-grow">
