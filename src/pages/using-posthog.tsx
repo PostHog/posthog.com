@@ -226,6 +226,13 @@ const categories: {
                 icon: ProductIcons.projects,
             },
             {
+                name: 'Role based access',
+                url: '/manual/role-based-access',
+                category: 'role based access',
+                description: 'Create roles to group team members and control access for features',
+                icon: ProductIcons.teamCollaboration,
+            },
+            {
                 name: 'Settings',
                 url: '/manual/application-settings',
                 category: 'settings',
