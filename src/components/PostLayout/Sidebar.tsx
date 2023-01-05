@@ -68,7 +68,7 @@ const Sidebar: React.FC<SidebarProps> = ({
     return (
         <aside key={`${title}-sidebar`} className="w-full my-10 lg:my-0 mr-auto h-full lg:px-0 px-4 box-border">
             <div className="lg:h-screen sticky flex flex-col top-0">
-                <div className="flex-grow flex flex-col space-y-4 overflow-y-auto pb-24">
+                <div className="flex-grow flex flex-col space-y-4 overflow-y-auto lg:pb-24">
                     {children && <div className="relative flex-initial">{children}</div>}
 
                     <div className="flex-grow">
