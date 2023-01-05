@@ -134,10 +134,10 @@ create new persons, these persons will have a "first seen" property in the futur
 
 If you are using one of our [libraries](/docs/integrate#libraries) event timestamps will be handled for you. However, users doing manual instrumentation, we provide you with several mechanisms to set event timestamps:
 
-* If the payload contains `timestamp` and `sent_at`, then the payload's `sent_at` and the capture time recorded by the server will be used to compute the client's clock skew. This skew will be used to adjust `timestamp` to arrive at the event timestamp. Due to this added level of precision, this is the recommended alternative and the one used by our [libraries](/docs/integrate#libraries)
-* If the payload includes a `timestamp`, but no `sent_at`, then `timestamp` will directly be used as the event timestamp.
-* If `offset` is included in the payload, then the payload's `offset` will be subtracted from the capture time recorded by the server to obtain the event timestamp. The first two alternatives have higher priority so `offset` will be ignored if `timestamp` is present.
-* Finally, as a fallback when no `timestamp` or `offset` are included in the payload, the capture time recorded by the server is then taken as the event timestamp as a fallback.
+* If the payload contains `timestamp` and `sent_at` fields, the `sent_at` field is compared to the server time to account for clock skew. The event's `timestamp` is adjusted by this difference before being stored. This is the method our libraries use.
+* If the payload includes a `timestamp` but no `sent_at` field, then `timestamp` will directly be used as the event timestamp.
+* If `offset` is included in the payload, then this value will be subtracted from the capture time recorded by the server to obtain the event timestamp. The first two alternatives have higher priority so `offset` will be ignored if `timestamp` is present.
+* Finally, as a fallback when no `timestamp` or `offset` are included in the payload, the capture time recorded by the server is used as the event timestamp.
 
 To ensure maximum compatibility with PostHog, `timestamp` and `sent_at` fields should be in `ISO-8601` format.
 
