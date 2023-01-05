@@ -195,7 +195,7 @@ Here are the steps for an RFC:
    1. The decision to be made
    2. Who will make the decision
       - By default this should be the person who will own the project and do the work. In the rare case that it's a non-reversible decision it might be more appropriate have the team lead be the decision maker.
-   3. When will the decision should be made (normally less than 1 week)
+   3. When the decision will be made by (normally less than 1 week). You don't need to wait for this date if you've already received input from the key people you need.
    4. The specific people that you want feedback from (as github assignees) and optionally the type of feedback you are looking for
    5. The problem
    6. The recommendation
@@ -221,6 +221,7 @@ You most likely **should** write an RFC when any of the following is true (this 
 - If you aren't on the team owning the area and haven't been assigned for feedback it's worth double-checking whether your input will be useful or add noise. Or wait for the people closest to first discuss the problem. At PostHog, we don't make decisions by committee - instead we have great people divide and conquer. This particularly applies to the controversial areas such as pricing.
 - As the decision maker, you should use your judgment as to which comments you want to respond fully to. It's fine to politely decline a question if you think it's not required for the decision being made.
 - If you're introducing new technologies you'll likely want to tag someone from team infrastructure.
+- You don't need to wait until the date you've said to make the decision if you've already consulted with the key people.
 
 ## Internal meetings
 
