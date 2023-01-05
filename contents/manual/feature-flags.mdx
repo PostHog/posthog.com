@@ -45,7 +45,6 @@ Consider this case: An anonymous person comes to your website and you show them 
 
 With usual feature flags, the flag value can change when someone logs in, or changes their identity. So, once they login, they may see a red call to action instead.
 
-
 This usually is not a problem since experiments run either completely for anonymous users, or completely for logged in users.
 
 However, with some businesses, like e-commerce, it's very common to browse things anonymously and login right before checking out. In cases like these you can preserve the feature flag values by checking this checkbox.
@@ -57,7 +56,6 @@ Note that there are some performance trade-offs here. Specifically,
 1. Enabling this slows down the feature flag response.
 2. It disables local evaluation of the feature flag.
 3. It disables bootstrapping this feature flag.
-
 
 ## Implementing the feature flag
 
@@ -231,6 +229,30 @@ enabledVariant, err := client.GetFeatureFlag(
 ```
 
 </MultiLanguage>
+
+## Using locally
+
+To test feature flags locally, you can open your developer tools and override the feature flags. You will get a warning that you're manually overriding feature flags.
+
+```js
+posthog.feature_flags.override(['feature-flag-1', 'feature-flag-2'])
+```
+
+This will persist until you call override again with the argument `false`:
+
+```js
+posthog.feature_flags.override(false)
+```
+
+To see the feature flags that are currently active for you, you can call:
+
+```js
+posthog.feature_flags.getFlags()
+```
+
+```
+
+<br />
 
 ## Roll out the feature flag
 
