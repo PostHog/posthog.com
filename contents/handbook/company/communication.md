@@ -187,7 +187,7 @@ James (H) and Cory are admins on the Pitch account. Because Pitch charges per se
 
 ## Requests for comment (RFCs)
 
-We use Request For Comments (RFCs) to communicate and gather feedback on a decision.
+We use RFCs to communicate and gather feedback on a decision. RFCs are useful because they help us stay transparent, and the process of writing them forces you to clearly articulate your thoughts in a structured way. 
 
 Here are the steps for an RFC:
 1. Someone identifies a problem and a decision to be made
@@ -196,34 +196,34 @@ Here are the steps for an RFC:
    2. Who will make the decision
       - By default this should be the person who will own the project and do the work. In the rare case that it's a non-reversible decision it might be more appropriate have the team lead be the decision maker.
    3. When the decision will be made by (normally less than 1 week). You don't need to wait for this date if you've already received input from the key people you need.
-   4. The specific people that you want feedback from (as github assignees)
+   4. The specific people that you want feedback from (as GitHub assignees)
       - It can be useful to say which people are required vs which are welcome but optional so others know if they need to respond
    5. The problem
    6. The recommendation
-   7. Useful context for the people giving feedback (for product decisions, [this github template](https://github.com/PostHog/product-internal/blob/main/.github/ISSUE_TEMPLATE/request-for-comments.md) is useful)
-3. Share the RFC in the `#github-rfcs` slack channel if it isn't already there
+   7. Useful context for the people giving feedback (for product decisions, [this GitHub template](https://github.com/PostHog/product-internal/blob/main/.github/ISSUE_TEMPLATE/request-for-comments.md) is useful)
+3. Share the RFC in the `#general` Slack channel if it isn't already there
 4. If an RFC is cross-team and is causing a large amount of disagreement, it might be worth having a sync meeting to reach a decision
-5. Once a decision is made, the person making the decision should include the decision in the pull request, merge it in and share this internally within the company.
+5. Once a decision is made, the person making the decision should include the decision in the pull request, merge it in and share this in `#general` again. 
 
 ### When should you write an RFC?
 
 You most likely **should** write an RFC when any of the following is true (this is a non-exhaustive list):
 - It affects multiple teams
-- It will be a large amount of work (more than 2-3 weeks of engineering time)
+- It will be a large amount of work (more than 2-3 weeks of people's time)
 - It's introducing a new technology
 - It's a major new feature, change to the product, or change to the company
-- It will have a major customer impact e.g. pricing
+- It will have a major customer impact, e.g. pricing
 
 ### Top tips for RFCs
 
-- RFCs can be very short and are often better than making decisions by slack threads.
-- You don't need to have a long decision-making time e.g. 2 days is fine for smaller changes if you receive the relevant input and are confident in your decision.
+- RFCs can be very short and are often better than making decisions by Slack threads.
+- You don't need to have a long decision-making time - 2 days is fine for smaller changes if you receive the relevant input and are confident in your decision.
 - You don't need to reach full agreement to decide, particularly if the decision is reversible. Instead, it should be when the decision maker has considered the feedback and is confident in their decision.
 - If you aren't on the team owning the area and haven't been assigned for feedback it's worth double-checking whether your input will be useful or add noise. Or wait for the people closest to first discuss the problem. At PostHog, we don't make decisions by committee - instead we have great people divide and conquer. This particularly applies to the controversial areas such as pricing.
 - As the decision maker, you should use your judgment as to which comments you want to respond fully to. It's fine to politely decline a question if you think it's not required for the decision being made.
-- If you're introducing new technologies you'll likely want to tag someone from team infrastructure.
+- If you're introducing new technologies, you'll likely want to tag someone from Team Infrastructure.
 - You don't need to wait until the date you've said to make the decision if you've already consulted with the key people.
-- Make it easy for others to give feedback e.g. if you only need input from someone on the Infra team about adding websockets then say that, rather than leaving it for them to work out
+- Make it easy for others to give feedback, e.g. if you only need input from someone on the Infra team about adding websockets then say that, rather than leaving it for them to work out
 
 ## Internal meetings
 
