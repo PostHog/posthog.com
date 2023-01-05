@@ -132,14 +132,14 @@ create new persons, these persons will have a "first seen" property in the futur
 
 ## How event timestamps are computed
 
-If you are using PostHog.js event timestamps will be handled for you. However, users doing manual instrumentation, we provide you with several mechanisms to set event timestamps:
+If you are using one of our [libraries](/docs/integrate#libraries) event timestamps will be handled for you. However, users doing manual instrumentation, we provide you with several mechanisms to set event timestamps:
 
-* If the payload contains `timestamp` and `sent_at`, then the payload's `sent_at` and the capture time recorded by the server will be used to compute the client's clock skew. This skew will be used to adjust `timestamp` to arrive at the event timestamp. Due to this added level of precision, this is the recommended alternative and the one used by PostHog.js.
+* If the payload contains `timestamp` and `sent_at`, then the payload's `sent_at` and the capture time recorded by the server will be used to compute the client's clock skew. This skew will be used to adjust `timestamp` to arrive at the event timestamp. Due to this added level of precision, this is the recommended alternative and the one used by our [libraries](/docs/integrate#libraries)
 * If the payload includes a `timestamp`, but no `sent_at`, then `timestamp` will directly be used as the event timestamp.
 * If `offset` is included in the payload, then the payload's `offset` will be subtracted from the capture time recorded by the server to obtain the event timestamp. The first two alternatives have higher priority so `offset` will be ignored if `timestamp` is present.
 * Finally, as a fallback when no `timestamp` or `offset` are included in the payload, the capture time recorded by the server is then taken as the event timestamp as a fallback.
 
-To ensure maximum compatibility with PostHog, all time-related data should be formatted as described in the ISO-8601 standard.
+To ensure maximum compatibility with PostHog, `timestamp` and `sent_at` fields should be in `ISO-8601` format.
 
 ## Data Management best practices
 
