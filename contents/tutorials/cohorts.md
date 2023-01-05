@@ -86,7 +86,7 @@ Cohorts can be used in combination with most of PostHog's features in powerful w
 
 ![Feature flags by cohort](../images/tutorials/cohorts/feature-flags.png)
 
-You can create [feature flags](/docs/tutorials/feature-flags) that target specific cohorts in order to roll out features to specific users first, or simply to see how features perform against different cohorts. 
+You can create [feature flags](/manual/feature-flags) that target specific cohorts in order to roll out features to specific users first, or simply to see how features perform against different cohorts. 
 
 Examples:
 
