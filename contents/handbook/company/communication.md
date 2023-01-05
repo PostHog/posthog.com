@@ -108,28 +108,21 @@ Not every solution will solve the problem at hand. Keep discussions focused by _
 
 #### Issues
 
-GitHub Issues are useful when there isn't a specific code change that is being proposed or needed. For example, you may want to start an issue for tracking progress or for project management purposes that do not pertain to code commits. This can be particularly useful when tracking team tasks and creating issue boards.
+GitHub Issues are useful when there isn't a specific code or document change that is being proposed or needed. For example, you may want to start an issue for tracking progress or for project management purposes that do not pertain to code commits. This can be particularly useful when tracking team tasks and creating issue boards.
 
 However, it is still important to maintain focus when opening issues by defining a single specific topic of discussion as well as defining the desired outcome that would result in the resolution of the issue. The point is to not keep issues open-ended and to prevent issues from going stale due to lack of resolution. For example, a team member may open an issue to track the progress of a blog post with associated to-do items that need to be completed by a certain date (e.g. first draft, peer review, publish). Once the specific items are completed, the issue can successfully be closed.
 
 > **Note:** If you're new to using GitHub, [check out this handy primer](/handbook/company/new-to-github) - it's specific to how we use GitHub at PostHog. You'll learn the key concepts and how to manage notifications. It's important, as this is where the bulk of our company-wide communication happens. (Think of GitHub notifications as a replacement for your work email.)
-
-### Product definitions & decisions
-
-It's best practice to get feedback from other members of the team when making a product decision or defining a complex problem that needs to be solved. This may start with an Issue, but it's essential that these do not spiral out of control - as soon as an issue has more than 5 comments, it becomes difficult for someone to "catch up". To avoid this problem, when we're documenting a decision or a definition for a project or project, we should start with a Pull Request.
-
-You should start by adding a "request for comments" (RFC) markdown file into to a public repo (e.g. posthog/meta), here's a template (https://github.com/PostHog/meta/pull/19) and adding people you need feedback from as a reviewer. On the rare occasion that this cannot be public, create the PR in the product-internal repo.
-
-If you see an Issue which is spiraling out of control with comments, you are empowered to call this out and direct the owner of the Issue to move this to a PR.
-
-When a decision is fully aligned on, the PR should be merged.
 
 #### Keeping on top of reviews, issues and notifications
 
 Keeping track of everything that's happening in GitHub can be daunting, but it's important to make sure your team receives reviews and feedback on a timely manner.
 
 To keep on top of this, we suggest going through issues where you've been mentioned regularly. Some tricks which can help are:
-- [Turning on GitHub email notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/configuring-notifications) and using filters to file them away.
+- (Highly recommended) [Turn on Github slack notifications](https://rasim.pro/blog/personal-slack-github-notifications-for-pull-requests-reviewers-how-to-set-up/)
+  - This will send you a slack notification when someone mentions you in a PR or issue. You can also get periodic reminders for PRs that you've been requested to review.
+- (Highly recommended) Join the `#github-rfcs` channel on Slack. This is where we post all the RFCs.
+- [Turning on GitHub email notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/configuring-notifications) and use filters to focus on your teams activity.
 - [Using the GitHub notifier extension.](https://chrome.google.com/webstore/detail/notifier-for-github/lmjdlojahmbbcodnpecnjnmlddbkjhnn?hl=en)
 
 #### Tip for easy searching through everything
@@ -192,6 +185,42 @@ James (H) and Cory are admins on the Pitch account. Because Pitch charges per se
 1. We use sentence case for titles.
 1. When writing numbers in the thousands to the billions, it's acceptable to abbreviate them (like 10M or 100B - capital letter, no space). If you write out the full number, use commas (like 15,000,000).
 
+## Requests for comment (RFCs)
+
+We use Request For Comments (RFCs) to communicate and gather feedback on a decision.
+
+Here are the steps for an RFC:
+1. Someone identifies a problem and a decision to be made
+2. They create an RFC as a pull request (normally into PostHog/posthog or PostHog/posthog.com unless in the rare case it's confidential where we use PostHog/product-internal) with the title `RFC: ...`. The RFC should include:
+   1. The decision to be made
+   2. Who will make the decision
+      - By default this should be the person who will own the project and do the work. In the rare case that it's a non-reversible decision it might be more appropriate have the team lead be the decision maker.
+   3. When will the decision should be made (normally less than 1 week)
+   4. The specific people that you want feedback from (as github assignees) and optionally the type of feedback you are looking for
+   5. The problem
+   6. The recommendation
+   7. Useful context for the people giving feedback (for product decisions, [this github template](https://github.com/PostHog/product-internal/blob/main/.github/ISSUE_TEMPLATE/request-for-comments.md) is useful)
+3. Share the RFC in the `#github-rfcs` slack channel if it isn't already there
+4. If an RFC is cross-team and is causing a large amount of disagreement, it might be worth having a sync meeting to reach a decision
+5. Once a decision is made, the person making the decision should include the decision in the pull request, merge it in and share this internally within the company.
+
+### When should you write an RFC?
+
+You most likely **should** write an RFC when any of the following is true (this is a non-exhaustive list):
+- It affects multiple teams
+- It will be a large amount of work (more than 2-3 weeks of engineering time)
+- It's introducing a new technology
+- It's a major new feature, change to the product, or change to the company
+- It will have a major customer impact e.g. pricing
+
+### Top tips for RFCs
+
+- RFCs can be very short and are often better than making decisions by slack threads.
+- You don't need to have a long decision-making time e.g. 2 days is fine for smaller changes if you receive the relevant input and are confident in your decision.
+- You don't need to reach full agreement to decide, particularly if the decision is reversible. Instead, it should be when the decision maker has considered the feedback and is confident in their decision.
+- If you aren't on the team owning the area and haven't been assigned for feedback it's worth double-checking whether your input will be useful or add noise. Or wait for the people closest to first discuss the problem. At PostHog, we don't make decisions by committee - instead we have great people divide and conquer. This particularly applies to the controversial areas such as pricing.
+- As the decision maker, you should use your judgment as to which comments you want to respond fully to. It's fine to politely decline a question if you think it's not required for the decision being made.
+- If you're introducing new technologies you'll likely want to tag someone from team infrastructure.
 
 ## Internal meetings
 
