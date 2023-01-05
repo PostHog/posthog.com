@@ -224,6 +224,7 @@ You most likely **should** write an RFC when any of the following is true (this 
 - If you're introducing new technologies, you'll likely want to tag someone from Team Infrastructure.
 - You don't need to wait until the date you've said to make the decision if you've already consulted with the key people.
 - Make it easy for others to give feedback, e.g. if you only need input from someone on the Infra team about adding websockets then say that, rather than leaving it for them to work out
+- Write your RFC with the busy reader in mind. For example, if there is a lot of technical context to give, write a summary that people can read through quickly to get a high level overview of the proposed changes, then go deeper below, or in appendices.
 
 ## Internal meetings
 
