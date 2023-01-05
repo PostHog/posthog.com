@@ -230,7 +230,7 @@ const categories: {
                 url: '/manual/role-based-access',
                 category: 'role based access',
                 description: 'Create roles to group team members and control access for features',
-                icon: ProductIcons.teamCollaboration,
+                icon: ProductIcons.userPermissions,
             },
             {
                 name: 'Settings',
