@@ -14,7 +14,7 @@ import TableOfContents from './TableOfContents'
 import Sidebar from './Sidebar'
 
 export { ShareLinks } from './ShareLinks'
-export { Contributors } from './Contributors'
+export { Contributors, ContributorImage } from './Contributors'
 export { SidebarSection } from './Sidebar'
 
 export const Topics = ({ topics }: { topics: ITopic[] }) => {

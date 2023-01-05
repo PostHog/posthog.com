@@ -2,7 +2,7 @@ import { graphql, useStaticQuery } from 'gatsby'
 import { getImage } from 'gatsby-plugin-image'
 import React from 'react'
 import ReactCountryFlag from 'react-country-flag'
-import { ContributorImage } from '../PostLayout/index'
+import { ContributorImage } from 'components/PostLayout'
 
 export default function TeamMembers({ team }: { team: string }) {
     const {
@@ -22,7 +22,7 @@ export default function TeamMembers({ team }: { team: string }) {
                     return (
                         <li className="!m-0 flex space-x-4 items-center py-4" key={name}>
                             <figure className="mb-0">
-                                <ContributorImage image={getImage(headshot)} />
+                                <ContributorImage name={name} image={getImage(headshot)} />
                             </figure>
                             <div>
                                 <span className="flex items-center md:flex-row space-x-2">
