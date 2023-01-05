@@ -196,12 +196,12 @@ export default function PostLayout({
                           }px`
                         : `1fr minmax(auto, ${contentWidth}px) minmax(max-content, 1fr)`,
                 }}
-                className="w-full relative lg:grid lg:grid-flow-col items-start -mb-20"
+                className="w-full relative lg:grid lg:grid-flow-col items-stretch -mb-20"
             >
                 {menu && (
                     <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:block hidden relative z-20">
                         <aside
-                            className={`lg:sticky bg-tan dark:bg-primary top-0 flex-shrink-0 w-full justify-self-end px-4 lg:box-border my-10 lg:my-0 mr-auto overflow-y-auto lg:h-screen pb-10 ${
+                            className={`lg:sticky bg-tan dark:bg-primary top-0 flex-shrink-0 w-full justify-self-end px-4 lg:box-border my-10 lg:my-0 mr-auto overflow-y-auto overscroll-contain lg:h-screen pb-10 ${
                                 hideSearch ? 'pt-5' : ''
                             }`}
                         >
@@ -227,7 +227,7 @@ export default function PostLayout({
                     {!hideSurvey && <Survey contentContainerClasses={contentContainerClasses} />}
                     {nextPost && <NextPost {...nextPost} contentContainerClasses={contentContainerClasses} />}
                 </article>
-                {!hideSidebar && sidebar && (
+                {!hideSidebar && (
                     <Sidebar
                         title={title}
                         view={view}
@@ -235,7 +235,9 @@ export default function PostLayout({
                         tableOfContents={tableOfContents}
                         fullWidthContent={fullWidthContent}
                         handleFullWidthContentChange={handleFullWidthContentChange}
-                    />
+                    >
+                        {sidebar}
+                    </Sidebar>
                 )}
             </div>
         </div>

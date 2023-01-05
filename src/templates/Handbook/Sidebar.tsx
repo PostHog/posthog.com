@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'components/Link'
-import { Contributors, ShareLinks, SidebarSection } from 'components/PostLayout'
+import { Contributors, SidebarSection } from 'components/PostLayout'
 import Tooltip from 'components/Tooltip'
 import CheckIcon from '../../images/check.svg'
 import XIcon from '../../images/x.svg'
@@ -61,10 +61,6 @@ const HandbookSidebar = ({ contributors, title, location, availability, related 
                     </div>
                 </SidebarSection>
             )}
-
-            <SidebarSection title="Share">
-                <ShareLinks title={title} href={location.href} />
-            </SidebarSection>
 
             {related && (
                 <SidebarSection title="Related articles">
