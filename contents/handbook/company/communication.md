@@ -196,7 +196,8 @@ Here are the steps for an RFC:
    2. Who will make the decision
       - By default this should be the person who will own the project and do the work. In the rare case that it's a non-reversible decision it might be more appropriate have the team lead be the decision maker.
    3. When the decision will be made by (normally less than 1 week). You don't need to wait for this date if you've already received input from the key people you need.
-   4. The specific people that you want feedback from (as github assignees) and optionally the type of feedback you are looking for
+   4. The specific people that you want feedback from (as github assignees)
+      - It can be useful to say which people are required vs which are welcome but optional so others know if they need to respond
    5. The problem
    6. The recommendation
    7. Useful context for the people giving feedback (for product decisions, [this github template](https://github.com/PostHog/product-internal/blob/main/.github/ISSUE_TEMPLATE/request-for-comments.md) is useful)
@@ -222,6 +223,7 @@ You most likely **should** write an RFC when any of the following is true (this 
 - As the decision maker, you should use your judgment as to which comments you want to respond fully to. It's fine to politely decline a question if you think it's not required for the decision being made.
 - If you're introducing new technologies you'll likely want to tag someone from team infrastructure.
 - You don't need to wait until the date you've said to make the decision if you've already consulted with the key people.
+- Make it easy for others to give feedback e.g. if you only need input from someone on the Infra team about adding websockets then say that, rather than leaving it for them to work out
 
 ## Internal meetings
 
