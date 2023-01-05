@@ -71,7 +71,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                 <div className="flex-grow flex flex-col overflow-y-auto lg:pb-24">
                     {children && <div className="relative flex-initial">{children}</div>}
 
-                    <div className="flex-grow">
+                    <div className="flex-grow py-4">
                         {view === 'Article' && tableOfContents.length > 1 && (
                             <div className="px-4 lg:px-6 lg:block hidden">
                                 <h4 className="text-black dark:text-white font-semibold opacity-25 m-0 mb-1 text-sm">
