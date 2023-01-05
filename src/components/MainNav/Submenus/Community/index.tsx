@@ -1,7 +1,6 @@
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
-import { OrgProvider, UserProvider, useUser } from 'squeak-react'
 import Header from '../Header'
 import RightCol from '../RightCol'
 import CallToAction from '../CallToAction'
@@ -9,6 +8,7 @@ import { TwoCol, Wrapper } from '../Wrapper'
 import { graphql, useStaticQuery } from 'gatsby'
 import slugify from 'slugify'
 import { Avatar, Login } from '../../../../pages/community'
+import { useUser } from 'squeak-react'
 
 interface ColMenuItems {
     title: string
@@ -233,18 +233,9 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                     </div>
                     <RightCol title="My profile">
                         <div className="px-3">
-                            <OrgProvider
-                                value={{
-                                    organizationId: 'a898bcf2-c5b9-4039-82a0-a00220a8c626',
-                                    apiHost: 'https://squeak.cloud',
-                                }}
-                            >
-                                <UserProvider>
-                                    <div className="mb-6">
-                                        <Profile />
-                                    </div>
-                                </UserProvider>
-                            </OrgProvider>
+                            <div className="mb-6">
+                                <Profile />
+                            </div>
                         </div>
                         <ol className="m-0 list-none p-0">
                             {resources.map(({ title, description, url }: ColMenuItems) => {
