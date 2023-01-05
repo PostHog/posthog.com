@@ -219,7 +219,7 @@ Reload the page, click around, and you should start to see some events in your P
 
 > If you have multiple pages (others besides `index.ejs`), use partials or `include`. This adds the header on every page so that the PostHog snippet loads everywhere. 
 
-### Installing the PostHog Node library
+### Installing the PostHog Node.js library
 
 The snippet is great for autocapture, session recordings, and the basics. If you want all the features PostHog provides and more customizability, install the PostHog Node library. To do this, run:
 
@@ -345,7 +345,7 @@ client.identify({
 })
 ```
 
-### Feature flags
+### Setting up feature flags
 
 The final tool to implement is feature flags. This feature flag shows a call-to-action (CTA) to go to the PostHog site below each blog post. To do this, start by creating a feature flag in PostHog named “blog-cta” and set the release condition to 100% for testing.
 
