@@ -1,8 +1,6 @@
 ---
-title: Integrate PostHog with Shopify
-sidebarTitle: Shopify
-sidebar: Docs
-showTitle: true
+title: Shopify
+icon: ../../../images/docs/integrate/frameworks/shopify.svg
 ---
 
 ## Objective

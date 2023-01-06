@@ -1,8 +1,6 @@
 ---
-title: How to set up WordPress analytics and stats with PostHog
-sidebarTitle: WordPress
-sidebar: Docs
-showTitle: true
+title: WordPress
+icon: ../../../images/docs/integrate/frameworks/wordpress.svg
 ---
 
 Getting analytics about your [WordPress](https://www.wordpress.org/) site is simple with PostHog. Get data about traffic, usage, and user behavior with our free, open-source analytics platform. Once you have that data, you can discover insights and build dashboards with our suite of analytics tools.
