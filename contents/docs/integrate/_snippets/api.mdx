@@ -1,7 +1,54 @@
-## API
-
-Events can also be ingested directly using our API and the [`/capture`](/docs/api/post-only-endpoints#capture) endpoint, which is the same endpoint that all of our libraries use behind the scenes.
+Events can be ingested directly using our API and the [`/capture`](/docs/api/post-only-endpoints#capture) endpoint, which is the same endpoint that all of our libraries use behind the scenes.
 
 Generally, this isn't something you'll need to use when integrating PostHog, but if you're working with a language or framework that PostHog doesn't support yet, this will allow you to still send events.
+
+
+> **Note:** For this API, you should use your 'Project API Key' from the 'Project' page in PostHog. This is the same key used in your frontend snippet.
+
+# Sending events
+
+Events can be sent either one at a time, or together in a batch. There is no limit on the number of events you can send in a batch, but the entire request body must be less than `20MB` by default.
+
+<MultiLanguage>
+
+```shell label=Single
+POST https://[your-instance].com/capture/
+Content-Type: application/json
+Body:
+{
+    "api_key": "<ph_project_api_key>",
+    "event": "[event name]",
+    "properties": {
+        "distinct_id": "[your users' distinct id]",
+        "key1": "value1",
+        "key2": "value2"
+    },
+    "timestamp": "[optional timestamp in ISO 8601 format]"
+}
+```
+
+```shell label=Batch
+POST https://[your-instance].com/batch/
+Content-Type: application/json
+Body:
+{
+    "api_key": "<ph_project_api_key>",
+    "batch": [
+        {
+            "event": "[event name]",
+            "properties": {
+                "distinct_id": "[your users' distinct id]",
+                "key1": "value1",
+                "key2": "value2"
+            },
+            "timestamp": "[optional timestamp in ISO 8601 format]"
+        },
+        ...
+    ]
+}
+```
+</MultiLanguage>
+
+> **Note:** Timestamp is optional. If not set, it'll automatically be set to the current time.
 
 For more information, read our [API docs](/docs/api/post-only-endpoints).
