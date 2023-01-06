@@ -41,8 +41,10 @@ export const Login = () => {
     const [login, setLogin] = useState<null | { type: 'login' | 'signup' }>(null)
     return login ? (
         <>
-            <p className="m-0 text-sm font-bold">Note: PostHog.com authentication is separate from your PostHog app.</p>
-            <p className="text-sm mt-2">
+            <p className="m-0 text-sm font-bold dark:text-white">
+                Note: PostHog.com authentication is separate from your PostHog app.
+            </p>
+            <p className="text-sm mt-2 dark:text-white">
                 We suggest signing up with your personal email. Soon you'll be able to link your PostHog app account.
             </p>
             <SqueakLogin />

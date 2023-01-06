@@ -100,7 +100,7 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                                     </h3>
                                     <CallToAction to="/questions">Ask a question</CallToAction>
                                 </div>
-                                <p className="mt-4">
+                                <p className="mt-4 dark:text-white">
                                     Ask and answer community questions about PostHog. These questions are posted across
                                     PostHog.com and aggregated here.
                                 </p>
