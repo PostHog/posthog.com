@@ -219,7 +219,7 @@ You most likely **should** write an RFC when any of the following is true (this 
 - RFCs can be very short and are often better than making decisions by Slack threads.
 - You don't need to have a long decision-making time - 2 days is fine for smaller changes if you receive the relevant input and are confident in your decision.
 - You don't need to reach full agreement to decide, particularly if the decision is reversible. Instead, it should be when the decision maker has considered the feedback and is confident in their decision.
-- If you aren't on the team owning the area and haven't been assigned for feedback it's worth double-checking whether your input will be useful or add noise. Or wait for the people closest to first discuss the problem. At PostHog, we don't make decisions by committee - instead we have great people divide and conquer. This particularly applies to the controversial areas such as pricing.
+- Double-check whether your input will be useful or add noise. Or wait for the people closest to first discuss the problem. At PostHog, we don't make decisions by committee - instead we have great people divide and conquer. This particularly applies to the controversial areas such as pricing.
 - As the decision maker, you should use your judgment as to which comments you want to respond fully to. It's fine to politely decline a question if you think it's not required for the decision being made.
 - If you're introducing new technologies, you'll likely want to tag someone from Team Infrastructure.
 - You don't need to wait until the date you've said to make the decision if you've already consulted with the key people.
