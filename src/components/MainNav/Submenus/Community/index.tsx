@@ -5,7 +5,7 @@ import Header from '../Header'
 import RightCol from '../RightCol'
 import CallToAction from '../CallToAction'
 import { TwoCol, Wrapper } from '../Wrapper'
-import { graphql, useStaticQuery } from 'gatsby'
+import { graphql, navigate, useStaticQuery } from 'gatsby'
 import slugify from 'slugify'
 import { Avatar, Login } from '../../../../pages/community'
 import { useUser } from 'squeak-react'
@@ -36,7 +36,7 @@ const Profile = () => {
             </CallToAction>
         </div>
     ) : (
-        <Login />
+        <Login onSubmit={() => navigate('/community')} />
     )
 }
 

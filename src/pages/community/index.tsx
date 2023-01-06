@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { graphql, PageProps } from 'gatsby'
+import { graphql, navigate, PageProps } from 'gatsby'
 import { community } from '../../sidebars/sidebars.json'
 import SEO from 'components/seo'
 import Layout from 'components/Layout'
@@ -37,7 +37,7 @@ export const Avatar = (props: { className?: string; src?: string }) => {
     )
 }
 
-export const Login = () => {
+export const Login = ({ onSubmit = () => undefined }: { onSubmit?: () => void }) => {
     const [login, setLogin] = useState<null | { type: 'login' | 'signup' }>(null)
     return login ? (
         <>
@@ -47,7 +47,7 @@ export const Login = () => {
             <p className="text-sm mt-2 dark:text-white">
                 We suggest signing up with your personal email. Soon you'll be able to link your PostHog app account.
             </p>
-            <SqueakLogin />
+            <SqueakLogin onSubmit={onSubmit} />
         </>
     ) : (
         <>
