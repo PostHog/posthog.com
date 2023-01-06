@@ -84,7 +84,7 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
         },
     ]
 
-    const topicGroupsToShow = ['Deployment', 'Features']
+    const topicGroupsToShow = ['Product features', 'Setup & platform']
 
     return (
         <Wrapper referenceElement={referenceElement} placement="bottom-end">
