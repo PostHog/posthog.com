@@ -201,9 +201,12 @@ Here are the steps for an RFC:
    5. The problem
    6. The recommendation
    7. Useful context for the people giving feedback (for product decisions, [this GitHub template](https://github.com/PostHog/product-internal/blob/main/.github/ISSUE_TEMPLATE/request-for-comments.md) is useful)
-3. Share the RFC in the `#general` Slack channel if it isn't already there
+3. Share the RFC:
+   1. Post in the relevant Slack channel (normally the teams slack channel, or `#general` if it's a bigger cross-team RFC)
+   2. Tag the people you need input from in the slack thread or DM them - it's your responsibility to nudge the relevant people for their input
+   3. Post in `#github-rfcs` if it isn't already there automatically (so that people interested in RFCs across the company can stay in the loop)
 4. If an RFC is cross-team and is causing a large amount of disagreement, it might be worth having a sync meeting to reach a decision
-5. Once a decision is made, the person making the decision should include the decision in the pull request, merge it in and share this in `#general` again. 
+5. Once a decision is made, the person making the decision should include the decision in the pull request, merge it in and share this in the relevant channel and `#github-rfcs` again.
 
 ### When should you write an RFC?
 
@@ -225,6 +228,7 @@ You most likely **should** write an RFC when any of the following is true (this 
 - You don't need to wait until the date you've said to make the decision if you've already consulted with the key people.
 - Make it easy for others to give feedback, e.g. if you only need input from someone on the Infra team about adding websockets then say that, rather than leaving it for them to work out
 - Write your RFC with the busy reader in mind. For example, if there is a lot of technical context to give, write a summary that people can read through quickly to get a high level overview of the proposed changes, then go deeper below, or in appendices.
+- It's fine to nudge people on slack if they are being slow to give feedback
 
 ## Internal meetings
 
