@@ -977,8 +977,8 @@
                     "url": "",
                     "children": [
                         {
-                            "name": "Snippet installation",
-                            "url": "/docs/integrate/client/snippet-installation"
+                            "name": "JavaScript",
+                            "url": "/docs/integrate/client/js"
                         },
                         {
                             "name": "Android",
@@ -987,10 +987,6 @@
                         {
                             "name": "iOS",
                             "url": "/docs/integrate/client/ios"
-                        },
-                        {
-                            "name": "JavaScript",
-                            "url": "/docs/integrate/client/js"
                         },
                         {
                             "name": "Flutter",

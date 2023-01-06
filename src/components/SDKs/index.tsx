@@ -1,5 +1,6 @@
 import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
+import Link from 'components/Link'
 import CheckIcon from '../../images/check.svg'
 import XIcon from '../../images/x.svg'
 
@@ -9,6 +10,9 @@ type LibraryNode = {
     }
     frontmatter: {
         title: string
+        icon: {
+            publicURL: string
+        }
         features: LibraryFeatures | null
     }
 }
@@ -31,19 +35,23 @@ type LibraryData = {
     }
 }
 
+const SDK = (props: LibraryNode) => (
+    <Link
+        to={props.fields.slug}
+        className="px-3 !py-2 border-none shadow-none rounded-sm shadow-sm flex items-center space-x-3 text-gray"
+    >
+        <img src={props.frontmatter.icon?.publicURL} className="w-8 h-8" />
+        <p className="text-lg font-bold !mb-0">{props.frontmatter.title}</p>
+    </Link>
+)
+
 export const Client = () => {
     const { clientLibs } = useStaticQuery<LibraryData>(query)
-
-    const renderAvailability = (isAvailable?: boolean) => {
-        return isAvailable ? <img className="w-4 h-4" src={CheckIcon} /> : <img className="w-4 h-4" src={XIcon} />
-    }
 
     return (
         <div className="overflow-x-scroll grid grid-cols-3 gap-6">
             {clientLibs.nodes.map((node) => (
-                <div className="p-2 border border-gray-200 rounded-sm shadow-sm">
-                    <p className="text-lg font-bold">{node.frontmatter.title}</p>
-                </div>
+                <SDK {...node} />
             ))}
         </div>
     )
@@ -55,9 +63,7 @@ export const Server = () => {
     return (
         <div className="overflow-x-scroll grid grid-cols-3 gap-6">
             {serverLibs.nodes.map((node) => (
-                <div className="p-2 border border-gray-200 rounded-sm shadow-sm">
-                    <p className="text-lg font-bold">{node.frontmatter.title}</p>
-                </div>
+                <SDK {...node} />
             ))}
         </div>
     )
@@ -67,22 +73,25 @@ const query = graphql`
     {
         clientLibs: allMdx(filter: { slug: { glob: "docs/integrate/client/*" } }) {
             nodes {
-                ...Library
+                ...SDK
             }
         }
         serverLibs: allMdx(filter: { slug: { glob: "docs/integrate/server/*" } }) {
             nodes {
-                ...Library
+                ...SDK
             }
         }
     }
 
-    fragment Library on Mdx {
+    fragment SDK on Mdx {
         fields {
             slug
         }
         frontmatter {
             title
+            icon {
+                publicURL
+            }
             features {
                 eventCapture
                 userIdentification

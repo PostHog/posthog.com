@@ -621,6 +621,10 @@
         {
             "source": "/blog/using-posting",
             "destination": "/blog/using-posthog"
+        },
+        {
+            "source": "/docs/integrate/client/snippet-installation",
+            "destination": "/docs/integrate"
         }
     ],
     "rewrites": [
