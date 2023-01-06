@@ -25,7 +25,7 @@ const Profile = () => {
                 <Avatar src={profile.avatar} className="w-[40px] h-[40px]" />
                 <div>
                     {
-                        <p className="m-0 font-semibold">
+                        <p className="m-0 font-semibold dark:text-white">
                             {[profile?.first_name, profile?.last_name].filter(Boolean).join(' ')}
                         </p>
                     }

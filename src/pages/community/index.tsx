@@ -51,10 +51,10 @@ export const Login = () => {
         </>
     ) : (
         <>
-            <p className="m-0 text-base">
+            <p className="m-0 text-base dark:text-white">
                 Your PostHog.com community profile lets you ask questions and get early access to beta features.
             </p>
-            <p className="text-sm mt-2">
+            <p className="text-sm mt-2 dark:text-white">
                 <strong>Tip:</strong> If you've ever asked a question on PostHog.com, you already have an account!
             </p>
             <CallToAction onClick={() => setLogin({ type: 'login' })} width="full" size="sm">
