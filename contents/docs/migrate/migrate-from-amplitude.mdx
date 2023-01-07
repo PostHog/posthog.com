@@ -49,8 +49,8 @@ const eventMessage = {
     $set: { ...user_properties, ...group_properties },
     $geoip_disable: true,
   },
-  event: event_name,
-  distinctId: distinctId,
+  event: event_type,
+  distinct_id: distinctId,
   timestamp: event_time,
 };
 ```
@@ -78,7 +78,7 @@ We'd ideally like to be able to attribute "Application installed" to the user wi
 
 ```js
 const aliasMessage = {
-  distinctId: user_id, // 123
+  distinct_id: user_id, // 123
   aliasId: device_id, // 551dc114-7604-430c-a42f-cf81a3059d2b
 };
 ```
