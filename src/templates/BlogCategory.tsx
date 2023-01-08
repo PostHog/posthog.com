@@ -30,7 +30,7 @@ const BlogCategory = ({
 
     return (
         <Layout>
-            <SEO title={`${category} - PostHog`} />
+            <SEO title={`Blog - ${category} - PostHog`} />
 
             <PostLayout
                 breadcrumb={[{ name: 'Blog', url: '/blog' }, { name: 'Categories' }, { name: category }]}
@@ -63,7 +63,11 @@ export const pageQuery = graphql`
             limit: $limit
             skip: $skip
             sort: { order: DESC, fields: [frontmatter___date] }
-            filter: { isFuture: { eq: false }, frontmatter: { category: { eq: $category } } }
+            filter: {
+                isFuture: { eq: false }
+                frontmatter: { category: { eq: $category } }
+                fields: { slug: { regex: "/^/blog/" } }
+            }
         ) {
             edges {
                 node {
@@ -75,7 +79,11 @@ export const pageQuery = graphql`
             limit: $limit
             skip: $skip
             sort: { order: DESC, fields: [fields___pageViews] }
-            filter: { isFuture: { eq: false }, frontmatter: { category: { eq: $category } } }
+            filter: {
+                isFuture: { eq: false }
+                frontmatter: { category: { eq: $category } }
+                fields: { slug: { regex: "/^/blog/" } }
+            }
         ) {
             edges {
                 node {

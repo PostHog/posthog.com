@@ -20,6 +20,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const Job = path.resolve(`src/templates/Job.tsx`)
 
     // Tutorials
+    const TutorialsTemplate = path.resolve(`src/templates/tutorials/index.tsx`)
     const TutorialTemplate = path.resolve(`src/templates/tutorials/Tutorial.tsx`)
     const TutorialsCategoryTemplate = path.resolve(`src/templates/tutorials/TutorialsCategory.tsx`)
     const TutorialsAuthorTemplate = path.resolve(`src/templates/tutorials/TutorialsAuthor.tsx`)
@@ -91,6 +92,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 }
             }
             tutorials: allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }) {
+                totalCount
                 nodes {
                     id
                     headings {
@@ -102,7 +104,8 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     }
                 }
                 categories: group(field: frontmatter___tags) {
-                    fieldValue
+                    totalCount
+                    category: fieldValue
                 }
                 contributors: group(field: frontmatter___authorData___name) {
                     fieldValue
@@ -422,14 +425,15 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     })
 
-    result.data.tutorials.categories.forEach(({ fieldValue }) => {
-        const slug = `/tutorials/categories/${slugify(fieldValue, { lower: true })}`
-        createPage({
-            path: slug,
-            component: TutorialsCategoryTemplate,
-            context: {
-                activeFilter: fieldValue,
-            },
+    result.data.tutorials.categories.forEach(({ category, totalCount }) => {
+        const slug = slugify(category, { lower: true })
+        const base = `/tutorials/categories/${slug}`
+
+        createPaginatedPages({
+            totalCount,
+            base,
+            template: TutorialsCategoryTemplate,
+            extraContext: { activeFilter: category, slug },
         })
     })
 
@@ -442,6 +446,12 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 activeFilter: fieldValue,
             },
         })
+    })
+
+    createPaginatedPages({
+        totalCount: result.data.tutorials.totalCount,
+        base: '/tutorials/all',
+        template: TutorialsTemplate,
     })
 
     result.data.blogPosts.nodes.forEach((node) => {
