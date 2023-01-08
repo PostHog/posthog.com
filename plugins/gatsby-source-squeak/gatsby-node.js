@@ -232,12 +232,26 @@ exports.createSchemaCustomization = async ({ actions }) => {
           minus1: Int
         }
 
+        type SqueakGitHubPageUser {
+            login: String,
+            avatar_url: String,
+            html_url: String
+        }
+
+        type SqueakGitHubPageLabel {
+            name: String
+        }
+
         type SqueakGitHubPage {
             title: String,
             html_url: String,
             number: Int,
             closed_at: Date,
             reactions: SqueakGitHubReactions,
+            body: String,
+            updated_at: Date,
+            user: SqueakGitHubPageUser,
+            labels: [SqueakGitHubPageLabel]
         }
 
         type SqueakRoadmap implements Node {

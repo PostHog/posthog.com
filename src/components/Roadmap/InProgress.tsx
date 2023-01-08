@@ -6,6 +6,8 @@ import { Login, useUser } from 'squeak-react'
 import Spinner from 'components/Spinner'
 import { useToast } from '../../hooks/toast'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import Tooltip from 'components/Tooltip'
+import GitHubTooltip from 'components/GitHubTooltip'
 
 export function InProgress(props: IRoadmap & { className?: string; more?: boolean; stacked?: boolean }) {
     const { addToast } = useToast()
@@ -113,18 +115,35 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
             )}
             {githubPages && more && (
                 <ul className="list-none m-0 p-0 pb-4 grid gap-y-2 mt-4">
-                    {githubPages.map((page) => {
+                    {githubPages.map(({ title, html_url, reactions, body, user, labels, updated_at, closed_at }) => {
                         return (
-                            <li key={page.title}>
-                                <Link
-                                    to={page.html_url}
-                                    className="text-[14px] flex items-start font-semibold space-x-1 text-black dark:text-white leading-tight cta"
+                            <li key={title}>
+                                <Tooltip
+                                    className="text-ellipsis overflow-hidden whitespace-nowrap flex-grow text-red"
+                                    content={
+                                        <GitHubTooltip
+                                            reactions={reactions}
+                                            body={body}
+                                            user={user}
+                                            labels={labels}
+                                            updated_at={updated_at}
+                                            title={title}
+                                            url={html_url}
+                                        />
+                                    }
                                 >
-                                    <span className="inline-block mt-.5">
-                                        {page.closed_at ? <ClosedIssue /> : <OpenIssue />}
+                                    <span className="relative">
+                                        <Link
+                                            to={html_url}
+                                            className="text-[14px] inline-flex items-start font-semibold space-x-1 text-black dark:text-white leading-tight cta"
+                                        >
+                                            <span className="inline-block mt-.5">
+                                                {closed_at ? <ClosedIssue /> : <OpenIssue />}
+                                            </span>
+                                            <span>{title}</span>
+                                        </Link>
                                     </span>
-                                    <span>{page.title}</span>
-                                </Link>
+                                </Tooltip>
                             </li>
                         )
                     })}

@@ -10,6 +10,7 @@ import { InProgress } from './InProgress'
 import { OrgProvider, UserProvider } from 'squeak-react'
 import { ImageDataLike, StaticImage } from 'gatsby-plugin-image'
 import { community } from '../../sidebars/sidebars.json'
+import { IUser } from 'components/GitHubTooltip'
 
 interface IGitHubPage {
     title: string
@@ -22,6 +23,10 @@ interface IGitHubPage {
         eyes: number
         plus1: number
     }
+    user: IUser
+    body: string
+    updated_at: string
+    labels: [{ name: string }]
 }
 
 interface ITeam {
@@ -260,6 +265,16 @@ const query = graphql`
                     html_url
                     number
                     closed_at
+                    body
+                    updated_at(formatString: "MMMM DD, YYYY")
+                    user {
+                        username: login
+                        avatar: avatar_url
+                        url: html_url
+                    }
+                    labels {
+                        name
+                    }
                     reactions {
                         hooray
                         heart

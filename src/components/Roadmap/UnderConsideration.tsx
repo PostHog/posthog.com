@@ -2,6 +2,8 @@ import { GitHub } from 'components/Icons/Icons'
 import Link from 'components/Link'
 import React from 'react'
 import { IRoadmap } from '.'
+import GitHubTooltip from 'components/GitHubTooltip'
+import Tooltip from 'components/Tooltip'
 
 export const Reactions = ({ reactions, className = '' }) => {
     return (
@@ -43,14 +45,31 @@ export const Reactions = ({ reactions, className = '' }) => {
 }
 
 export function UnderConsideration(props: IRoadmap) {
-    const { title, html_url, number, reactions } = props.githubPages[0]
+    const { title, html_url, number, reactions, body, user, labels, updated_at } = props.githubPages[0]
     return (
         <li className="sm:flex xl:flex-col space-y-2 sm:space-y-0 border-t border-dashed border-gray-accent-light first:border-t-0 px-4 py-4 sm:py-2 xl:pb-4 bg-white rounded-sm shadow-xl relative">
             <div className="flex-1 sm:mt-2">
-                <Link to={html_url} className="text-red flex-1 space-x-1 items-center">
-                    <span>{title}</span>
-                    <span className="text-sm text-black opacity-50">#{number}</span>
-                </Link>
+                <Tooltip
+                    className="text-ellipsis overflow-hidden whitespace-nowrap flex-grow text-red"
+                    content={
+                        <GitHubTooltip
+                            reactions={reactions}
+                            body={body}
+                            user={user}
+                            labels={labels}
+                            updated_at={updated_at}
+                            title={title}
+                            url={html_url}
+                        />
+                    }
+                >
+                    <span className="relative">
+                        <Link to={html_url} className="text-red flex-1 space-x-1 items-center">
+                            <span>{title}</span>
+                            <span className="text-sm text-black opacity-50">#{number}</span>
+                        </Link>
+                    </span>
+                </Tooltip>
                 <Reactions className="sm:pb-2" reactions={reactions} />
             </div>
             <div className="grow-0 shrink-0">
