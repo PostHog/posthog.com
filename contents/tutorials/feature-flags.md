@@ -5,7 +5,7 @@ showTitle: true
 featuredImage: ../images/tutorials/banners/feature-flags.png
 featuredTutorial: false
 author: ['yakko-majuri']
-topics: ['feature flags']
+tags: ['feature flags']
 featuredVideo: https://youtube.com/embed/aUILrrrlu50?start=950
 date: 2020-09-24
 ---
@@ -161,7 +161,7 @@ Calling this function will force PostHog to hit the endpoint for the updated inf
 
 ## Putting your flag to use
 
-Feature flags are a very powerful piece of functionality that can be used in a wide variety of ways. How you use them will depend on your particular pain points and processes – we recommend reading our [guide to feature flag best practices](/blog/feature-flag-best-practices) for tips on this. 
+Feature flags are a very powerful piece of functionality that can be used in a wide variety of ways. How you use them will depend on your particular painpoints and internal best practices. 
 
 Here are some suggestions of use cases that could fit nicely with feature flags:
 

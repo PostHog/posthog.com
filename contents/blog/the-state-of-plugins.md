@@ -5,10 +5,13 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["yakko-majuri"]
+author:
+  - yakko-majuri
 featuredImage: ../images/blog/running-content.png
 featuredImageType: full
-categories: ["Engineering", "Product updates"]
+category: Engineering
+tags:
+  - Product updates
 ---
 
 > **Update (May 2022):** Plugins are now known as [apps](/apps)!

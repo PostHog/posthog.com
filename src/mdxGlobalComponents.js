@@ -83,6 +83,7 @@ import { NextSteps } from './components/NextSteps'
 import { NotFoundPage } from './components/NotFoundPage'
 import { NotProductIcons } from './components/NotProductIcons'
 import { OverflowXSection } from './components/OverflowXSection'
+import { Pagination } from './components/Pagination'
 import { Popover } from './components/Popover'
 import { PostCard } from './components/PostCard'
 import { PostLayout } from './components/PostLayout'
@@ -223,6 +224,7 @@ export const shortcodes = {
     NotFoundPage,
     NotProductIcons,
     OverflowXSection,
+    Pagination,
     Popover,
     PostCard,
     PostLayout,

@@ -18,7 +18,7 @@ export default function MenuItem({ menuItem, referenceElement }) {
     return (
         <li
             onMouseEnter={() => !breakpoints.md && setHovered(true)}
-            onMouseLeave={(e) => !e.target.shadowRoot && !breakpoints.md && setHovered(false)}
+            onMouseLeave={() => !breakpoints.md && setHovered(false)}
             className={menuItemClass(hideBorder)}
         >
             <span className="flex justify-between items-center">

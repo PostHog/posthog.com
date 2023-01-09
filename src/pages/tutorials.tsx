@@ -13,7 +13,7 @@ export const pageQuery = graphql`
             nodes {
                 ...TutorialsFragment
             }
-            categories: group(field: frontmatter___topics) {
+            categories: group(field: frontmatter___tags) {
                 fieldValue
             }
             contributors: group(field: frontmatter___authorData___name) {

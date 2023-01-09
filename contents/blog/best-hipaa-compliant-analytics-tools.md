@@ -5,10 +5,15 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["joe-martin"]
+author:
+  - joe-martin
 featuredImage: ../images/blog/posthog-company-culture-blog.png
 featuredImageType: full
-categories: ["Guides", "Privacy",]
+category: General
+tags:
+  - Privacy
+  - Comparisons
+  - Guides
 ---
 
 HIPAA, which stands for the Health Insurance Portability and Accountability Act, is a piece of legislation which was first introduced in 1996. Its main goal is to ensure that personally identifiable information is protected, with $1M+ fines and 10+ year prison sentences used to enforce adherence. 

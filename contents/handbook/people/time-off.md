@@ -73,13 +73,3 @@ If you have been at PostHog for under 1 year, we will pay you according to your 
 Please communicate parental leave to James or Tim as soon as you feel comfortable doing so, and in any case at least 2 months before it will begin. They will let the People & Ops team know, who will follow up on any logistical arrangements around salary etc. 
 
 We are aware that there are local laws around time off for new parents in every country, and that these may vary. Wherever there is a discrepancy between local regulations and PostHog policy, local laws will override PostHog.
-
-## Birthday and anniversaries
-
-We celebrate all the big and little milestones at PostHog, including birthdays and work anniversaries. We celebrate each team member as a reminder of how much we appreciate them. 
-
-### Birthdays
-We have partnered with [Batch](https://batchusa.com/pages/about-us) to gift all team members with a personalized giftset for their birthday. 
-
-### Anniversaries
-On your first-year anniversary with PostHog, you will receive a giftcard from [Giftogram](https://giftogram.com/) which can be used on a wide selection of brands. On your second-year anniversary you'll be gifted a [customized Lego minifig](https://minifig.fab-bricks.com/) in a display case. 

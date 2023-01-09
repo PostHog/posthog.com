@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { CallToAction } from '../CallToAction'
 import { mergeClassList } from '../../lib/utils'
+import envelope from '../Blog/images/envelope.svg'
 
 export const NewsletterForm = ({
     sidebar = false,
@@ -16,28 +17,17 @@ export const NewsletterForm = ({
     className?: string
 }): JSX.Element => {
     const [email, setEmail] = useState('')
-    const classList = mergeClassList('w-full p-4 relative z-10', className)
+    const classList = mergeClassList('w-full p-4 relative z-10 text-center', className)
 
     return sidebar ? (
-        <div className="flex w-full h-full p-1">
+        <div className="flex w-full h-full p-1 bg-white dark:bg-gray-accent-dark rounded-md">
             <div className={classList}>
                 <div className="flex flex-col">
-                    <figure className="shrink-0 grow-0 basis-12 m-0 text-black dark:text-white">
-                        <svg
-                            className="block h-12 mb-0 fill-current"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 50 50"
-                        >
-                            <path d="M41.5 7.5c-3.86 0-7 3.14-7 7s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7Z" fill="#F54E00" />
-                            <path d="M41.5 23.5c.34 0 .67-.02 1-.06V36.5c0 1.654-1.346 3-3 3h-32c-1.654 0-3-1.346-3-3v-20c0-1.654 1.346-3 3-3h25.06c-.04.33-.06.66-.06 1 0 2.125.74 4.074 1.97 5.615l-8.849 8.85a3.005 3.005 0 0 1-4.244 0l-11.172-11.17a1 1 0 1 0-1.414 1.414l11.17 11.17a4.984 4.984 0 0 0 3.535 1.46c1.28 0 2.56-.484 3.535-1.46l8.85-8.85A8.987 8.987 0 0 0 41.5 23.5Z" />
-                        </svg>
-                    </figure>
-
-                    <span className="flex flex-col flex-grow leading-tight font-bold text-xl md:text-lg">
+                    <img className="w-[75px] mx-auto" src={envelope} />
+                    <p className="leading-tight font-bold text-sm m-0 mt-2">
                         The best of PostHog. <br />
-                        Delivered twice a month.
-                    </span>
+                        Delivered <span className="text-red">twice</span> a month.
+                    </p>
                 </div>
                 <div className="mt-4 md:mt-2">
                     <form
@@ -52,7 +42,7 @@ export const NewsletterForm = ({
                         <input
                             type="email"
                             name="EMAIL"
-                            className="block w-full px-4 py-2 flex-1 bg-white rounded-sm border-0 font-semibold text-lg md:text-base outline-none max-w-sm"
+                            className="block w-full px-2 py-2 flex-1 bg-white border-gray-accent-light rounded-sm font-semibold text-base outline-none max-w-sm"
                             id="mce-EMAIL"
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder="email@address.com"
@@ -70,7 +60,7 @@ export const NewsletterForm = ({
                         </div>
                         <input
                             type="submit"
-                            className="bg-red text-white shrink-0 grow-0 basis-auto font-bold lg:mt-0 border-none cursor-pointer px-5 py-3 md:py-2 w-full rounded-sm relative active:top-[1px] active:scale-[.99]"
+                            className="bg-red text-white shrink-0 grow-0 basis-auto font-bold lg:mt-0 text-base border-none cursor-pointer px-5 py-3 md:py-2 w-full rounded-sm relative active:top-[1px] active:scale-[.99]"
                             value="Sign me up!"
                         />
                     </form>
@@ -174,71 +164,50 @@ export const NewsletterForm = ({
             </form>
         </div>
     ) : (
-        <div className="w-11/12 max-w-4xl mx-auto mb-48">
-            <div className="bg-blue text-white w-full h-full p-1 rounded-xl">
-                <div
-                    className="rounded-lg flex justify-between flex-col lg:flex-row p-8 relative z-10"
-                    style={{ backgroundColor: bgColor }}
-                >
-                    <div className="w-full lg:w-2/3 lg:mr-4 text-white">
-                        <h5 className="text-white text-3xl gosha">Your inbox but better...</h5>
-                        <p className="opacity-80 text-sm">
-                            Our newsletter keeps you up to date on what great things we are doing here at PostHog, and
-                            trust me you don’t want to miss a thing.
-                        </p>
-                        <p className="opacity-80 mt-2 text-sm">
-                            Don't worry, you can unsubscribe at any time, no hard feelings.
-                        </p>
-                    </div>
-
-                    <div className="w-full lg:w-1/3 lg:ml-4">
-                        <form
-                            action="https://posthog.us19.list-manage.com/subscribe/post?u=292207b434c26e77b45153b96&id=97194afa0a"
-                            method="post"
-                            id="mc-embedded-subscribe-form"
-                            name="mc-embedded-subscribe-form"
-                            className="validate"
-                            target="_blank"
-                            noValidate
-                        >
-                            <div id="mc_embed_signup_scroll">
-                                <strong className="text-white gosha text-lg">Join our newsletter</strong>
-                                <label className="text-white opacity-80 mt-3 block" htmlFor="mce-EMAIL">
-                                    Email address
-                                </label>
-                                <input
-                                    type="email"
-                                    name="EMAIL"
-                                    className="block w-full py-2 px-3 bg-white text-gray-900 rounded my-1"
-                                    id="mce-EMAIL"
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    placeholder="Email address"
-                                    value={email}
-                                    required
-                                />
-                                {/* real people should not fill this in and expect good things - do not remove this or risk form bot signups*/}
-                                <div style={{ position: 'absolute', left: '-5000px' }} aria-hidden="true">
-                                    <input
-                                        type="text"
-                                        name="b_292207b434c26e77b45153b96_97194afa0a"
-                                        tabIndex={-1}
-                                        defaultValue
-                                    />
-                                </div>
-                                <div className="clear">
-                                    <CallToAction
-                                        type="primary"
-                                        icon="check"
-                                        width="full"
-                                        className="text-white border-white border-2 mt-2 hover:bg-white hover:bg-opacity-20"
-                                        submit={true}
-                                    >
-                                        Join the List
-                                    </CallToAction>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+        <div className="flex w-full h-full p-1 bg-white dark:bg-gray-accent-dark rounded-md mb-12">
+            <div className="w-full p-4 relative z-10 flex md:flex-row flex-col md:space-x-12 md:space-y-0 space-y-2 items-center">
+                <div className="flex space-x-2 items-center">
+                    <img className="w-[75px] mx-auto" src={envelope} />
+                    <p className="leading-tight font-bold text-sm m-0">
+                        The best of PostHog. <br />
+                        Delivered <span className="text-red">twice</span> a month.
+                    </p>
+                </div>
+                <div className="flex-grow">
+                    <form
+                        action="https://posthog.us19.list-manage.com/subscribe/post?u=292207b434c26e77b45153b96&id=97194afa0a"
+                        method="post"
+                        id="mc-embedded-subscribe-form"
+                        name="mc-embedded-subscribe-form"
+                        className="validate w-full mb-0 flex md:flex-row flex-col items-center"
+                        target="_blank"
+                        noValidate
+                    >
+                        <input
+                            type="email"
+                            name="EMAIL"
+                            className="block w-full px-2 py-2 md:mr-2 md:mb-0 mb-2 flex-grow bg-white border-gray-accent-light rounded-sm font-semibold text-base outline-none max-w-sm"
+                            id="mce-EMAIL"
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="email@address.com"
+                            value={email}
+                            required
+                        />
+                        {/* real people should not fill this in and expect good things - do not remove this or risk form bot signups*/}
+                        <div style={{ position: 'absolute', left: '-5000px' }} aria-hidden="true">
+                            <input
+                                type="text"
+                                name="b_292207b434c26e77b45153b96_97194afa0a"
+                                tabIndex={-1}
+                                defaultValue
+                            />
+                        </div>
+                        <input
+                            type="submit"
+                            className="bg-red text-white h-full grow-0 basis-auto font-bold m-0 text-base border-none cursor-pointer px-5 py-3 md:py-2 w-full max-w-[250px] rounded-sm relative active:top-[1px] active:scale-[.99] flex-shrink"
+                            value="Sign me up!"
+                        />
+                    </form>
                 </div>
             </div>
         </div>

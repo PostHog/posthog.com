@@ -69,9 +69,6 @@ export interface IProps {
     hideSearch?: boolean
     contentContainerClassName?: string
     menuType?: 'scroll' | 'standard'
-    menuWidth?: {
-        left?: number
-        right?: number
-    }
+    menuWidth?: number
     searchFilter?: string
 }

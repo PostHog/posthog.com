@@ -5,7 +5,7 @@ showTitle: true
 author: ['ian-vanagas']
 date: 2022-10-11
 featuredImage: ../images/tutorials/banners/migrate-eu-cloud.png
-topics: ['configuration', 'settings']
+tags: ['configuration', 'settings']
 ---
 
 > **Warning:** Migrating event data to PostHog's EU Cloud is a time-consuming process, likely to take several days or weeks. We strongly recommend users with a large amount of event data begin by setting up and connecting a new EU cloud instance and migrating data later, if needed. There is currently **no way** for Cloud instances to migrate the following data (although it is accessible via the PostHog API and self-hosted instances can use the [migrate metadata script](https://github.com/PostHog/posthog-migrate-meta)):

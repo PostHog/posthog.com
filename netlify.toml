@@ -2566,3 +2566,9 @@
 [[redirects]]
     from = "/blog/using-posting"
     to = "/blog/using-posthog"
+
+# Added: 2022-12-13
+[[redirects]]
+    from = "/blog/using-posthog"
+    to = "/blog/using-posting"
+
