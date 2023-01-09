@@ -9,9 +9,9 @@ featuredImage: ../images/blog/data-management-feature/posthog-data-management.pn
 featuredImageType: full
 author:
   - simon-fisher
-category: Guides
+category: Using PostHog
 tags:
-  - Product analytics
+  - Guides
 ---
 
 When talking through our editions and pricing options with potential customers I'm often asked "How can I estimate my event count?"

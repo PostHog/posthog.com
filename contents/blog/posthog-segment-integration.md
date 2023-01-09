@@ -5,7 +5,9 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-category: Product updates
+category: PostHog news
+tags: 
+  - Product updates
 ---
 
 

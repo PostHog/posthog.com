@@ -10,9 +10,6 @@ author:
 featuredImage: ../images/blog/product-people.png
 featuredImageType: full
 category: CEO diaries
-tags:
-  - Inside PostHog
-  - Engineering
 ---
 
 When PostHog was fresh out of YC last year, there were two things we focused on: (i) build and (ii) talk to customers. Hiring a product person felt like it would slow us down. Engineers on our team would speak to our users (also engineers) - surely they'd know what's best to prioritize? We didn't want our engineers to be "shielded" from our customers.

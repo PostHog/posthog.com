@@ -9,10 +9,10 @@ author:
   - joe-martin
 featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
-category: Guides
+category: Product growth
 tags:
   - Product analytics
-  - PostHog Academy
+  - Explainers
 ---
 ## What is product analytics?
 

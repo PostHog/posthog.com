@@ -10,8 +10,6 @@ author:
 featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 category: CEO diaries
-tags:
-  - Inside PostHog
 ---
 
 Since we started PostHog, our team has interviewed 725 people.

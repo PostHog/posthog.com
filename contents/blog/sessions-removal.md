@@ -9,7 +9,9 @@ author:
   - paolodamico
 featuredImage: ../images/blog/generic-release-notes.png
 featuredImageType: full
-category: Product updates
+category: PostHog news
+tags:
+  - Product updates
 ---
 
 This blog post explains why we're removing the "Sessions" page in PostHog. This page used to contain a daily list of all sessions by your users, separating them by periods where inactivity lasted longer than 30 minutes. In addition, this is where you would be able to access [recordings](/docs/user-guides/recordings).

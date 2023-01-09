@@ -9,9 +9,9 @@ author:
   - joe-martin
 featuredImage: ../images/blog/posthog-blog-image.png
 featuredImageType: full
-category: Guides
+category: Using PostHog
 tags:
-  - Using PostHog
+  - Explainers
 ---
 
 So, you’ve installed your snippet and started tracking data in PostHog. What’s next? 

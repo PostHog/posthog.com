@@ -9,9 +9,11 @@ author:
   - andy-vandervell
 featuredImage: ../images/blog/give-back-friday.png
 featuredImageType: full
-category: Guides
+category: Product growth
 tags:
   - Product analytics
+  - Guides
+  - Product metrics
 ---
 
 Successful products need actionable metrics and for many businesses this starts with identifying what many refer to as a 'North Star' metric.

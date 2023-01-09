@@ -9,10 +9,11 @@ author:
   - neil-kakkar
 featuredImage: ../images/blog/experiments.jpeg
 featuredImageType: full
-category: Product updates
+category: Product growth
 tags:
   - Launch week
   - Guides
+  - Product updates
 ---
 
 We just launched our Experimentation suite, and there's a ton we learned about running successful experiments.

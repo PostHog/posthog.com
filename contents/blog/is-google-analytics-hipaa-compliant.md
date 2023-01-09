@@ -9,9 +9,10 @@ featuredImage: ../images/blog/hipaa-compliant-product-analytics.png
 featuredImageType: full
 author:
   - andy-vandervell
-category: Privacy
+category: General
 tags:
-  - Guides
+  - Privacy
+  - Explainers
 ---
 
 HIPAA, which stands for the Health Insurance Portability and Accountability Act, regulates how individuals and organizations are required to secure, handle and transmit protected health information (PHI) – and the stringent penalties for failing to do so.

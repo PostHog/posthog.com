@@ -5,9 +5,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-category: General
+category: Engineering
 tags:
-  - Engineering
   - Guides
 ---
 

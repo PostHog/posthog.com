@@ -9,10 +9,7 @@ author:
   - james-hawkins
 featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
-category: CEO diaries
-tags:
-  - Inside PostHog
-  - Startups
+category: Startups
 ---
 
 Since PostHog raised Venture Capital (VC), we've had far less stress, and far more fun.

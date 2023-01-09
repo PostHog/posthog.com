@@ -12,6 +12,7 @@ featuredImageType: full
 category: Engineering
 tags:
   - Guides
+  - ClickHouse
 ---
 
 Honestly, it is a bit ridiculous to compare Postgres and ClickHouse. The two database solutions are as similar as grapes and grapefruit. ClickHouse was created for a specific purpose; PostgreSQL (aka Postgres) was designed to be flexible and all-purpose. 

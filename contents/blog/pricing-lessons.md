@@ -10,8 +10,6 @@ author:
 featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 category: CEO diaries
-tags:
-  - Inside PostHog
 ---
 
 Imagine being able to grow twice as fast with just a few hours of work. Changing your pricing has a real chance to get you there. 

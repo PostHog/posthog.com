@@ -9,7 +9,10 @@ author:
   - andy-vandervell
 featuredImage: ../images/blog/posthog-company-culture-blog.png
 featuredImageType: full
-category: Guides
+category: General
+tags:
+  - Guides
+  - Comparisons
 ---
 
 In July 2023, Google will sunset Universal Analytics (UA), forcing users to switch to Google Analytics 4 (GA4) or another provider.

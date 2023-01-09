@@ -9,10 +9,10 @@ author:
   - marcus-hyett
 featuredImage: ../images/blog/posthog-blog-image.png
 featuredImageType: full
-category: Guides
+category: Product growth
 tags:
   - Product analytics
-  - PostHog Academy
+  - Guides
 ---
 
 Understanding the needs of your users better than anyone else is critical for the success of any product.

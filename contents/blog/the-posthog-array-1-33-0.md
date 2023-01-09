@@ -11,9 +11,10 @@ excerpt: >-
   Introducing a full multivariate Experimentation suite, granular permissions on
   dashboards, Altinity Cloud support for ClickHouse, configuring your instance
   from the PostHog UI and 290+ improvements/fixes.
-category: Release notes
+category: PostHog news
 tags:
   - Product updates
+  - Release notes
 ---
 
 PostHog 1.33.0 introduces a full Experimentation suite, enabling you to run multivariate experiments to ensure you maximize value for your end users. Introducing also support for a managed ClickHouse infrastructure through Altinity Cloud, insight legends and insight permalinks. Plus, there are over 290+ improvements and bugfixes included!

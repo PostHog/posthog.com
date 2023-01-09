@@ -9,9 +9,7 @@ author:
   - charles-cook
 featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
-category: Inside PostHog
-tags:
-  - Startups
+category: Startups
 ---
 
 Today I’d like to ~~rant~~ talk about how non-engineering people at startups – especially execs – treat engineers like a fundamentally different type of human being. A whole new species, with a different set of personal motivations, goals, frustrations, and passions to the rest of the company.

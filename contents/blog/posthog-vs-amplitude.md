@@ -10,9 +10,9 @@ featuredImageType: full
 author:
   - andy-vandervell
   - joe-martin
-category: Guides
+category: General
 tags:
-  - Open source
+  - Guides
   - Comparisons
 ---
 

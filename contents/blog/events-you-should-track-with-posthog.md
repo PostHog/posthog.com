@@ -9,9 +9,9 @@ author:
   - joe-martin
 featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
-category: Guides
+category: Using PostHog
 tags:
-  - Using PostHog
+  - Guides
 ---
 
 It can be tricky to know which events you should start tracking first if you haven’t used product analytics before. That’s why we recommend using PostHog’s autocapture. It's also why we give everyone their first million events for free, every month – so you can track many of the events you need out of the box and without worrying about cost. 

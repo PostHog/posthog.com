@@ -11,6 +11,8 @@ featuredImage: ../images/blog/is-ga-illegal-microsite.png
 author:
   - cory-watilo
 category: Inside PostHog
+tags:
+  - Privacy
 ---
 
 On January 14, 2022, the world learned that Austria had declared Google Analytics to be illegal (in its default form), since it transmits IP addresses to the United States. The Netherlands declared the same view only days later.

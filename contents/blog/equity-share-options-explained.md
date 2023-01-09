@@ -9,9 +9,9 @@ author:
   - grace-mckenzie
 featuredImage: ../images/blog/equity.png
 featuredImageType: full
-category: Inside PostHog
+category: Startups
 tags:
-  - Startups
+  - Guides
 ---
 
 If you’ve ever worked for a startup, or read about a Unicorn tech company turning employees into multi-millionaires overnight, chances are you've heard of equity.

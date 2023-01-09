@@ -9,9 +9,10 @@ featuredImage: ../images/blog/launch-week-teaser.jpeg
 featuredImageType: full
 author:
   - andy-vandervell
-category: Product updates
+category: PostHog news
 tags:
   - Launch week
+  - Product updates
 ---
 
 PostHog made huge strides in 2021. To name just a few landmarks, we: 

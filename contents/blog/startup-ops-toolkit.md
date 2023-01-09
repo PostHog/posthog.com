@@ -11,7 +11,6 @@ featuredImage: ../images/blog/posthog-release-notes-blog.png
 featuredImageType: full
 category: Startups
 tags:
-  - Inside PostHog
   - Guides
 ---
 

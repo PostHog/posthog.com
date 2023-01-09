@@ -9,9 +9,11 @@ author:
   - andy-vandervell
 featuredImage: ../images/blog/posthog-company-culture-blog.png
 featuredImageType: full
-category: Guides
+category: General
 tags:
   - Privacy
+  - Comparisons
+  - Guides
 ---
 
 What do Google Optimize, Optimizely, Convert, Webtrends Optimize and Splitbee have in common?

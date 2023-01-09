@@ -9,9 +9,10 @@ author:
   - joe-martin
 featuredImage: ../images/blog/blog-generic-4.png
 featuredImageType: full
-category: Guides
+category: Product growth
 tags:
   - Product analytics
+  - Explainers
 ---
 
 There are lots of ways to do analytics. You can do SQL. You can do it in the cloud. You can not do it at all and hire an analytics agency or consultancy instead. But by far one of the most popular (and, we think, best) ways is _self-service_ analytics. 
@@ -30,8 +31,10 @@ This is usually because an organization has a specific data analysis function in
 
 There are a few reasons organizations may prefer this approach: 
 
-- *Security:* Limiting who has access to the raw data, which can include personally identifying information (PII), is generally wise and can be a matter of regulation in some industries. 
-- *Expertise:* A specialized team enables organizations to leverage expertise most effectively, not only for running queries but also in terms of data structure and management. The team can also interact with data directly, rather than requiring accessible tooling. 
+- *Security:* Limiting who has access to the raw data, which can include personally identifying information (PII), is generally wise and can be a matter of regulation in some industries.
+
+- *Expertise:* A specialized team enables organizations to leverage expertise most effectively, not only for running queries but also in terms of data structure and management. The team can also interact with data directly, rather than requiring accessible tooling.
+
 - *Efficiency:* In theory, routing requests through a centralized team should eliminate duplicate work.
 
 It’s important to emphasize that efficiency gains in particular can be a controversial point in some organizations. Centralized teams aren’t always as efficient as they may seem and a reality in many organizations is that data specialists may spend a lot of time building simple dashboards for business leadership or may lack the wider context to prioritize effectively.

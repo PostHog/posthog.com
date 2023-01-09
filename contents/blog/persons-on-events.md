@@ -7,7 +7,7 @@ showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
-category: Release notes
+category: Engineering
 tags:
   - Product updates
 ---

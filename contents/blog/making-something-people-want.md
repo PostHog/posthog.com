@@ -9,10 +9,9 @@ author:
   - james-hawkins
 featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
-category: CEO diaries
+category: Startups
 tags:
-  - Inside PostHog
-  - Startups
+  - Guides
 ---
 
 It's one thing to build _something_, it's another to build something that _people want_.
@@ -21,7 +20,7 @@ This principle, and the ones that follow in this post, applied at 0 users and ar
 
 ## We started with a problem we'd had
 
-We pivoted, [a lot](pivot-to-posthog). We repeatedly set out to solve problems we'd had in our previous careers.
+We pivoted, [a lot](/blog/story-about-pivots). We repeatedly set out to solve problems we'd had in our previous careers.
 
 Every idea failed. However, a pattern emerged:
 

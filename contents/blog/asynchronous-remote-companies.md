@@ -10,8 +10,6 @@ author:
 featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 category: CEO diaries
-tags:
-  - Inside PostHog
 ---
 
 Even when Tim (my cofounder) and I were doing a [Y Combinator](https://ycombinator.com) (YC) batch in 2020, we realized we got more work done when we worked asynchronously. 

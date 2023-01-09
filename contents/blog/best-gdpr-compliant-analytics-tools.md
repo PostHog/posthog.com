@@ -10,8 +10,10 @@ author:
   - andy-vandervell
 featuredImage: ../images/blog/posthog-company-culture-blog.png
 featuredImageType: full
-category: Guides
+category: General
 tags:
+  - Guides
+  - Comparisons
   - Privacy
 ---
 

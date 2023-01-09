@@ -9,7 +9,16 @@ export interface CategoryInterface {
     hideFromNavigation?: boolean
 }
 
-export const homeCategories = ['Guides', 'CEO diaries', 'Engineering', 'HogMail', 'Privacy', 'Product updates']
+export const homeCategories = [
+    'Product growth',
+    'Startups',
+    'CEO diaries',
+    'Inside PostHog',
+    'Engineering',
+    'Using PostHog',
+    'PostHog news',
+    'General',
+]
 
 export const BlogCategories: CategoryInterface[] = [
     {

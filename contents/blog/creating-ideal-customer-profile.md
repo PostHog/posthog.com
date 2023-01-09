@@ -9,10 +9,11 @@ author:
   - james-hawkins
 featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
-category: CEO diaries
+category: Product growth
 tags:
-  - Inside PostHog
-  - Startups
+  - Guides
+  - Product metrics
+
 ---
 
 Creating an Ideal Customer Profile is one of the most important things we've ever done at PostHog.
