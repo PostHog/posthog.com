@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { graphql, PageProps } from 'gatsby'
+import { graphql, navigate, PageProps } from 'gatsby'
 import { community } from '../../sidebars/sidebars.json'
 import SEO from 'components/seo'
 import Layout from 'components/Layout'
@@ -18,7 +18,7 @@ import GitHubTooltip, { Author } from 'components/GitHubTooltip'
 import QuestionsTable from 'components/Questions/QuestionsTable'
 import useSWRInfinite from 'swr/infinite'
 
-const Avatar = (props: { className?: string; src?: string }) => {
+export const Avatar = (props: { className?: string; src?: string }) => {
     return (
         <div className={`overflow-hidden rounded-full ${props.className}`}>
             {props.src ? (
@@ -39,22 +39,24 @@ const Avatar = (props: { className?: string; src?: string }) => {
     )
 }
 
-const Login = () => {
+export const Login = ({ onSubmit = () => undefined }: { onSubmit?: () => void }) => {
     const [login, setLogin] = useState<null | { type: 'login' | 'signup' }>(null)
     return login ? (
         <>
-            <p className="m-0 text-sm font-bold">Note: PostHog.com authentication is separate from your PostHog app.</p>
-            <p className="text-sm mt-2">
+            <p className="m-0 text-sm font-bold dark:text-white">
+                Note: PostHog.com authentication is separate from your PostHog app.
+            </p>
+            <p className="text-sm mt-2 dark:text-white">
                 We suggest signing up with your personal email. Soon you'll be able to link your PostHog app account.
             </p>
-            <SqueakLogin />
+            <SqueakLogin onSubmit={onSubmit} />
         </>
     ) : (
         <>
-            <p className="m-0 text-sm">
+            <p className="m-0 text-sm dark:text-white">
                 Your PostHog.com community profile lets you ask questions and get early access to beta features.
             </p>
-            <p className="text-[13px] mt-2 p-2 bg-gray-accent-light dark:bg-gray-accent-dark rounded">
+            <p className="text-[13px] mt-2 dark:text-white p-2 bg-gray-accent-light dark:bg-gray-accent-dark rounded">
                 <strong>Tip:</strong> If you've ever asked a question on PostHog.com, you already have an account!
             </p>
             <CallToAction onClick={() => setLogin({ type: 'login' })} width="full" size="sm">
@@ -73,7 +75,7 @@ const Login = () => {
     )
 }
 
-const Profile = ({
+export const Profile = ({
     profile,
     setEditModalOpen,
 }: {

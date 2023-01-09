@@ -408,6 +408,10 @@
                         {
                             "name": "Jobs",
                             "url": "/handbook/engineering/posthog-com/jobs"
+                        },
+                        {
+                            "name": "Roadmap",
+                            "url": "/handbook/engineering/posthog-com/roadmap"
                         }
                     ]
                 },
