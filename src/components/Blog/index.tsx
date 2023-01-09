@@ -35,10 +35,12 @@ export const Posts = ({ posts, title, action }) => {
                         <li className="relative rounded-md overflow-hidden" key={id}>
                             <Link className="text-white hover:text-white" to={slug}>
                                 <GatsbyImage image={getImage(featuredImage)} />
-                                <div className="bg-black/60 absolute inset-0 p-6 flex flex-col h-full w-full">
+                                <div className="bg-gradient-to-b from-black/50 via-black/20  to-black/50 absolute inset-0 p-6 flex flex-col h-full w-full">
                                     {category && <p className="m-0 text-sm opacity-80">{category}</p>}
-                                    <h5 className="text-2xl m-0">{title}</h5>
-                                    <p className="m-0 text-base font-light mt-2">{date}</p>
+                                    <h3 className="text-2xl m-0 leading-tight [text-shadow:0_2px_10px_rgba(0,0,0,0.4)]">
+                                        {title}
+                                    </h3>
+                                    <p className="m-0 text-sm font-light mt-1">{date}</p>
                                     <ul className="list-none m-0 p-0 mt-auto grid gap-y-2">
                                         {authors?.slice(0, 2).map(({ name, image }) => {
                                             return (
