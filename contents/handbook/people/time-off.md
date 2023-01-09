@@ -76,50 +76,47 @@ We are aware that there are local laws around time off for new parents in every 
 
 ## Birthday and anniversaries
 
-We celebrate all the big and little milestones at PostHog, including birthdays and work anniversaries. We celebrate each team member as a reminder of how much we appreciate them. 
+We celebrate all the big and little milestones at PostHog, including birthdays and work anniversaries. We celebrate each team member as a reminder of how much we appreciate them. Coua is currently responsible for organizing these. 
 
 ### Birthdays
-We have partnered with [Batch](https://batchusa.com/pages/about-us) to gift all team members with a personalized giftset for their birthday. All gifts are to arrive 1-3 business days prior to the actual day. 
 
-Orders are completed by conducting the following steps:
+We have partnered with [Batch](https://batchusa.com/pages/about-us) to send all team members a personalized giftset for their birthday. All gifts are to arrive 1-3 business days prior to the actual day. 
+
+These are the steps for making an order:
+
 1. Complete all necessary information on the “Birthday tab” with the [customer order sheet](https://docs.google.com/spreadsheets/d/1OhYz-ws20VKtQ0NnoCEzw1i4V4XAiz3e/edit?usp=sharing&ouid=109235309101749414478&rtpof=true&sd=true) and send to Bri Nightingale, CSM at bri@batchusa.com 
 2. Bri will send an invoice to be paid with steps on how to make the purchase payment
 3. All set! 
-*Birthday gifts will usually arrive on the day of or 1-3 days prior to the actual birthday
-Shipping fees: US shipping is free while EU will have additional fees for shipping
+
+Birthday gifts will usually arrive on the day of or 1-3 days prior to the actual birthday. US shipping is free, while EU will have additional fees.
 
 
 ### Anniversaries
-On your first-year anniversary with PostHog, you will receive a giftcard from [Giftogram](https://giftogram.com/) which can be used on a wide selection of brands. On your second-year anniversary you'll be gifted a [customized Lego minifig](https://minifig.fab-bricks.com/) in a display case and on your third-year anniversary, you'll receive a personalized gift from [Batch](batchusa.com). 
 
-Orders are compelted by completing the following steps:
+On your first-year anniversary with PostHog, you will receive a giftcard from [Giftogram](https://giftogram.com/) which can be used on a wide selection of brands. On your second-year anniversary you'll be gifted a [customized Lego minifig](https://minifig.fab-bricks.com/) in a display case, and on your third-year anniversary, you'll receive a personalized gift from [Batch](batchusa.com). 
 
-### 1st year anniversary - $50 for US gift cards/$55 for EU gift cards to cover service fees)
+1st year anniversary - $50 for US gift cards/$55 for EU gift cards to cover service fees):
+
 1. Login into [Giftogram](https://app.giftogram.com/sign-in) by using your gmail credentials
 2. Two ways to create a new Giftogram, on the tool bar above where it says “Create and Send'' or you can click on the right hand side on the blue button “Send a Giftogram''. 
-3. Walk-through the following steps:
-- Select the appropriate campaign: US Campaign= US team members, GCode Campaign= EU team members, and CA Campaign= Canada team members
-- Select a card design of your choice (easiest to just use the anniversary theme)
+3. Walk through the following steps:
+  - Select the appropriate campaign: US Campaign= US team members, GCode Campaign= EU team members, and CA Campaign= Canada team members
+  - Select a card design of your choice (easiest to just use the anniversary theme)
+  - Next screen, select “individual”, email as a delivery method, and add value (see above for amount) and continue to the next step
+  - Enter the individual’s PostHog email address. You can add multiple email addresses if there is one then one anniversary. The amount will add itself on the right hand side as you add more individuals. Then, continue to the next step
+  - Delivery message; select PostHog team as the sender and select the drop down “1st year anniversary” as the pre-populated message or you can create your own personal message 
+  - Last step, schedule the delivery date and you’re done! 
 
-<img width="546" alt="Screenshot 2023-01-06 at 5 03 54 PM" src="https://user-images.githubusercontent.com/102759617/211114314-e75ff141-e3c9-443c-9fbe-b6a3701064b5.png">
+### 2nd year anniversary - Customized Lego figurine:
 
-- Next screen, select “individual”, email as a delivery method, and add value (see above for amount) and continue to the next step
-- Enter the individual’s posthog email address (you can add multiple email addresses if there is one then one anniversary. The amount will add itself on the right hand side as you add more individuals) and continue to the next step
-- Delivery message; select PostHog team as the sender and select the drop down “1st year anniversary” as the pre-populated message or you can create your own personal message 
-- Last step, schedule your delivery date and you’re done! 
-
-### 2nd year anniversary - Customized Lego figurine 
-1. Log into [Fab-brick](https://fab-bricks.com/login.php) (login credential is shared in People & Ops 1Password vault)
+1. Log into [Fab-brick](https://fab-bricks.com/login.php) (login credentials are shared in People & Ops 1Password vault)
 2. Select the third tab “MiniFig Creator” and design your mini fig to look like the individual you’re celebrating! 
-3. Make sure to include a display case and the three tier brick option (see below for an example)
-4. After you’ve completed your design, check out. There should already be a Brex card on file. 
-- Please make sure you add the individual’s correct mailing address
+3. Make sure to include a display case and the three tier brick option
+4. After you’ve completed your design, check out. There should already be a Brex card on file. Please make sure you add the individual’s correct mailing address.
 
-<img width="276" alt="Screenshot 2023-01-06 at 5 06 20 PM" src="https://user-images.githubusercontent.com/102759617/211114511-883c25e3-47cb-4382-bdf2-1d68f58621ad.png">
+### 3rd year anniversary- via [Batch](https://batchusa.com/):
 
-### 3rd year anniversary- via [Batch](https://batchusa.com/)
 1. Complete all necessary information on the “Third Anniversary tab” with the [customer order sheet](https://docs.google.com/spreadsheets/d/1OhYz-ws20VKtQ0NnoCEzw1i4V4XAiz3e/edit?usp=sharing&ouid=109235309101749414478&rtpof=true&sd=true) and send to Bri Nightingale, CSM at bri@batchusa.com 
 2. Bri will send an invoice to be paid with steps on how to make the purchase payment
-3. All set! 
-*Gift(s) will usually arrive on the day of or 1-3 days prior to the actual anniversary date 
-Shipping fees: US shipping is free while EU will have additional fees for shipping
+
+Gift(s) will usually arrive on the day of or 1-3 days prior to the actual anniversary date. Shipping fees: US shipping is free while EU will have additional fees for shipping.
