@@ -973,7 +973,7 @@
                     "url": "/docs/integrate/badge"
                 },
                 {
-                    "name": "Browser Extensions",
+                    "name": "Browser extensions",
                     "url": "/docs/integrate/browser-extension"
                 },
                 {
@@ -1123,7 +1123,7 @@
             ]
         },
         {
-            "name": "Migrate & Export",
+            "name": "Migrate & export",
             "url": "",
             "children": [
                 {
