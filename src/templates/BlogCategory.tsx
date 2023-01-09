@@ -7,6 +7,7 @@ import { Posts, PostToggle } from 'components/Blog'
 import Pagination from 'components/Pagination'
 import { NewsletterForm } from 'components/NewsletterForm'
 import { blog } from '../sidebars/sidebars.json'
+import CommunityCTA from 'components/CommunityCTA'
 
 const BlogCategory = ({
     data: {
@@ -47,7 +48,9 @@ const BlogCategory = ({
                         action={<PostToggle checked={allPostsFilter === 'popular'} onChange={handleToggleChange} />}
                     />
                     <NewsletterForm />
-                    <Posts posts={posts.slice(4)} />
+                    <Posts posts={posts.slice(4, 10)} />
+                    <CommunityCTA />
+                    <Posts posts={posts.slice(10)} />
                     <Pagination currentPage={currentPage} numPages={numPages} base={base} />
                 </div>
             </PostLayout>

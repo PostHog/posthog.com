@@ -8,6 +8,7 @@ import { Posts } from 'components/Blog'
 import Pagination from 'components/Pagination'
 import { NewsletterForm } from 'components/NewsletterForm'
 import { blog } from '../sidebars/sidebars.json'
+import CommunityCTA from 'components/CommunityCTA'
 
 const BlogCategory = ({
     data: {
@@ -38,7 +39,9 @@ const BlogCategory = ({
                         posts={allPostsRecent.slice(0, 4)}
                     />
                     <NewsletterForm />
-                    <Posts posts={allPostsRecent.slice(4)} />
+                    <Posts posts={allPostsRecent.slice(4, 10)} />
+                    <CommunityCTA />
+                    <Posts posts={allPostsRecent.slice(10)} />
                     <Pagination currentPage={currentPage} numPages={numPages} base={base} />
                 </div>
             </PostLayout>
