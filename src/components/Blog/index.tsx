@@ -34,7 +34,7 @@ export const Posts = ({ posts, title, action }) => {
                     return (
                         <li className="relative rounded-md overflow-hidden" key={id}>
                             <Link className="text-white hover:text-white" to={slug}>
-                                <GatsbyImage image={getImage(featuredImage)} />
+                                <GatsbyImage className="md:w-auto w-full" image={getImage(featuredImage)} />
                                 <div className="bg-gradient-to-b from-black/50 via-black/20  to-black/50 absolute inset-0 p-6 flex flex-col h-full w-full">
                                     {category && <p className="m-0 text-sm opacity-80">{category}</p>}
                                     <h3 className="text-2xl m-0 leading-tight [text-shadow:0_2px_10px_rgba(0,0,0,0.4)]">
@@ -125,7 +125,7 @@ export const BlogFragment = graphql`
             featuredImage {
                 publicURL
                 childImageSharp {
-                    gatsbyImageData(width: 480, height: 270, layout: FULL_WIDTH)
+                    gatsbyImageData(width: 480, height: 270)
                 }
             }
             authors: authorData {
