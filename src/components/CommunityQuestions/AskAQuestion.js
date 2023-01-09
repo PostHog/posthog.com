@@ -1,15 +1,14 @@
 import { useLocation } from '@reach/router'
 import { Formik } from 'formik'
-import { useValues } from 'kea'
 import React, { useState } from 'react'
-import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
+import usePostHog from '../../hooks/usePostHog'
 import AskQuestion from './AskQuestion'
 import Avatar from './Avatar'
 import QuestionSubmitted from './QuestionSubmitted'
 
 export default function AskAQuestion() {
     const location = useLocation()
-    const { posthog } = useValues(posthogAnalyticsLogic)
+    const posthog = usePostHog()
     const [timestamp, setTimestamp] = useState(null)
     const [emailSubmitted, setEmailSubmitted] = useState(false)
     return (

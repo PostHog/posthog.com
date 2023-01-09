@@ -3,6 +3,8 @@ import { GatsbyNode } from 'gatsby'
 import path from 'path'
 import slugify from 'slugify'
 import fetch from 'node-fetch'
+const Slugger = require('github-slugger')
+const markdownLinkExtractor = require('markdown-link-extractor')
 
 export const createPages: GatsbyNode['createPages'] = async ({ actions: { createPage }, graphql }) => {
     const BlogPostTemplate = path.resolve(`src/templates/BlogPost.js`)
@@ -13,8 +15,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const AppTemplate = path.resolve(`src/templates/App.js`)
     const ProductTemplate = path.resolve(`src/templates/Product.js`)
     const HostHogTemplate = path.resolve(`src/templates/HostHog.js`)
-    const Question = path.resolve(`src/templates/Question.js`)
-    const SqueakTopic = path.resolve(`src/templates/SqueakTopic.tsx`)
     const Job = path.resolve(`src/templates/Job.tsx`)
 
     // Tutorials
@@ -52,6 +52,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     fields {
                         slug
                     }
+                    rawBody
                 }
             }
             apidocs: allApiEndpoint {
@@ -71,6 +72,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     fields {
                         slug
                     }
+                    rawBody
                 }
             }
             manual: allMdx(filter: { fields: { slug: { regex: "/^/manual/" } }, frontmatter: { title: { ne: "" } } }) {
@@ -83,6 +85,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     fields {
                         slug
                     }
+                    rawBody
                 }
             }
             tutorials: allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }) {
@@ -128,6 +131,10 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             customers: allMdx(filter: { fields: { slug: { regex: "/^/customers/" } } }) {
                 nodes {
                     id
+                    headings {
+                        depth
+                        value
+                    }
                     fields {
                         slug
                     }
@@ -225,27 +232,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     slug
                 }
             }
-            questions: allQuestion {
-                nodes {
-                    id
-                }
-            }
-            squeakTopics: allSqueakTopic {
-                nodes {
-                    label
-                    topicId
-                    slug
-                }
-            }
-            squeakTopicGroups: allSqueakTopicGroup {
-                nodes {
-                    label
-                    topics {
-                        id
-                        label
-                    }
-                }
-            }
             jobs: allAshbyJobPosting {
                 nodes {
                     id
@@ -273,6 +259,9 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     function createPosts(data, menu, template, breadcrumbBase, context) {
         const menuFlattened = flattenMenu(result.data.sidebars.childSidebarsJson[menu])
         data.forEach((node) => {
+            const links =
+                node?.rawBody &&
+                markdownLinkExtractor(node?.rawBody)?.map((url) => url.replace(/https:\/\/posthog.com|#.*/gi, ''))
             const slug = node.fields?.slug || node.url
             let next = null
             let previous = null
@@ -302,6 +291,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     breadcrumbBase: breadcrumbBase || menuFlattened[0],
                     tableOfContents,
                     slug,
+                    links,
                     searchFilter: menu,
                     ...(context ? context(node) : {}),
                 },
@@ -310,11 +300,13 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     }
 
     function formatToc(headings) {
+        // need to use slugger for header links to match
+        const slugger = new Slugger()
         return headings.map((heading) => {
             return {
                 ...heading,
                 depth: heading.depth - 2,
-                url: slugify(heading.value),
+                url: slugger.slug(heading.value),
             }
         })
     }
@@ -437,11 +429,13 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 
     result.data.customers.nodes.forEach((node) => {
         const { slug } = node.fields
+        const tableOfContents = node.headings && formatToc(node.headings)
         createPage({
             path: slug,
             component: CustomerTemplate,
             context: {
                 id: node.id,
+                tableOfContents,
             },
         })
     })
@@ -517,34 +511,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 },
             })
         }
-    })
-
-    const menu = []
-    result.data.squeakTopicGroups.nodes.forEach(({ label, topics }) => {
-        menu.push({ name: label })
-        topics.forEach(({ label }) => {
-            menu.push({
-                name: label,
-                url: `/questions/${slugify(label, {
-                    lower: true,
-                })}`,
-            })
-        })
-    })
-
-    result.data.squeakTopics.nodes.forEach((node) => {
-        const { slug, label, topicId } = node
-
-        createPage({
-            path: `questions/${slug}`,
-            component: SqueakTopic,
-            context: {
-                id: topicId,
-                topics: result.data.squeakTopics.nodes,
-                label,
-                menu,
-            },
-        })
     })
 
     if (process.env.ASHBY_API_KEY && process.env.GITHUB_API_KEY) {

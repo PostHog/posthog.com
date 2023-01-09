@@ -5,6 +5,7 @@ import { heading, section } from './classes'
 import Icon from './Icon'
 import Slider from './Slider'
 import { DemoLink } from 'components/DemoLink'
+import { SignupCTA } from 'components/SignupCTA'
 
 export const FeatureStrip = ({ className = '' }) => {
     return (
@@ -53,13 +54,7 @@ export default function Hero() {
                     </h2>
 
                     <div className="flex flex-col md:flex-row justify-center items-center gap-2">
-                        <CallToAction
-                            type="primary"
-                            className="!w-full md:!w-48 shadow-xl"
-                            to="https://app.posthog.com/signup"
-                        >
-                            Get started - free
-                        </CallToAction>
+                        <SignupCTA className="!w-full md:!w-44 shadow-xl !px-4" />
                         <DemoLink />
                     </div>
                 </div>

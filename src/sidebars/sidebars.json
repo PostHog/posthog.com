@@ -953,6 +953,10 @@
                     "url": "/docs/integrate/user-properties"
                 },
                 {
+                    "name": "Using a CDP",
+                    "url": "/docs/integrate/cdp"
+                },
+                {
                     "name": "Deploying a reverse proxy",
                     "url": "/docs/integrate/proxy"
                 },
@@ -1115,24 +1119,28 @@
             ]
         },
         {
-            "name": "Migrate",
+            "name": "Migrate & Export",
             "url": "",
             "children": [
+                {
+                    "name": "Migrate between PostHog instances",
+                    "url": "/docs/migrate/migrate-between-cloud-and-self-hosted"
+                },
+                {
+                    "name": "Migrate from Amplitude",
+                    "url": "/docs/migrate/migrate-from-amplitude"
+                },
+                {
+                    "name": "Migrate to PostHog Cloud EU",
+                    "url": "/tutorials/migrate-eu-cloud"
+                },
                 {
                     "name": "To another self-hosted instance",
                     "url": "/docs/migrate/migrate-to-another-self-hosted-instance"
                 },
                 {
-                    "name": "To PostHog from Amplitude",
-                    "url": "/docs/migrate/migrate-from-amplitude"
-                },
-                {
-                    "name": "To PostHog Cloud EU",
-                    "url": "/tutorials/migrate-eu-cloud"
-                },
-                {
-                    "name": "Between Cloud and self-hosted",
-                    "url": "/docs/migrate/migrate-between-cloud-and-self-hosted"
+                    "name": "Export your events",
+                    "url": "/docs/migrate/export-events"
                 }
             ]
         },
@@ -1325,6 +1333,10 @@
                 {
                     "name": "CCPA guidance",
                     "url": "/docs/privacy/ccpa-compliance"
+                },
+                {
+                    "name": "SOC 2",
+                    "url": "/handbook/company/security#soc-2"
                 },
                 {
                     "name": "Data egress & compliance",
@@ -1570,12 +1582,20 @@
                             "name": "Redshift Import"
                         },
                         {
+                            "url": "/docs/apps/rudderstack-import",
+                            "name": "Rudderstack Import"
+                        },
+                        {
                             "url": "/docs/apps/segment",
                             "name": "Segment Connector"
                         },
                         {
                             "url": "/docs/apps/shopify",
                             "name": "Shopify Connector"
+                        },
+                        {
+                            "url": "/docs/apps/stripe-connector",
+                            "name": "Stripe Connector"
                         },
                         {
                             "url": "/docs/apps/twitter-followers",
@@ -1598,6 +1618,10 @@
                         {
                             "url": "/docs/apps/s3-export",
                             "name": "Amazon S3 Export"
+                        },
+                        {
+                            "url": "/docs/apps/s3-export",
+                            "name": "Avo Inspector"
                         },
                         {
                             "url": "/docs/apps/bigquery-export",
@@ -1630,10 +1654,6 @@
                         {
                             "url": "/docs/apps/intercom",
                             "name": "Intercom Connector"
-                        },
-                        {
-                            "url": "/docs/apps/migrator-3000",
-                            "name": "Migrator 3000"
                         },
                         {
                             "url": "/docs/apps/pagerduty-connector",
@@ -1728,6 +1748,10 @@
                     "url": "",
                     "children": [
                         {
+                            "url": "/docs/apps/advanced-geoip",
+                            "name": "Advanced GeoIP Enricher"
+                        },
+                        {
                             "url": "/docs/apps/automatic-cohort-creator",
                             "name": "Automatic Cohort Creator"
                         },
@@ -1750,6 +1774,16 @@
                         {
                             "url": "/docs/apps/user-agent-populator",
                             "name": "User Agent Populator"
+                        }
+                    ]
+                },
+                {
+                    "name": "Site apps",
+                    "url": "",
+                    "children": [
+                        {
+                            "url": "/docs/apps/pineapple-mode",
+                            "name": "Pineapple Mode"
                         }
                     ]
                 }
@@ -2002,10 +2036,6 @@
             "url": "/apps/ingestion-alert"
         },
         {
-            "name": "Migrator 3000",
-            "url": "/apps/migrator-3000"
-        },
-        {
             "name": "n8n Connector",
             "url": "/apps/n8n"
         },
@@ -2042,7 +2072,7 @@
             "url": "/apps/replicator"
         },
         {
-            "name": "Rudderstack Export",
+            "name": "RudderStack Export",
             "url": "/apps/rudderstack-export"
         },
         {
@@ -2104,6 +2134,69 @@
         {
             "name": "Zendesk Connector",
             "url": "/apps/zendesk-connector"
+        }
+    ],
+    "community": [
+        {
+            "name": "Community"
+        },
+        {
+            "name": "Dashboard",
+            "url": "/community"
+        },
+        {
+            "name": "Questions?",
+            "url": "",
+            "children": [
+                {
+                    "name": "Recent questions",
+                    "url": "/questions"
+                },
+                {
+                    "name": "Apps",
+                    "url": "/questions/topics/apps"
+                },
+                {
+                    "name": "Identify users",
+                    "url": "/questions/topics/identify-users"
+                },
+                {
+                    "name": "Events",
+                    "url": "/questions/topics/events"
+                },
+                {
+                    "name": "Migration",
+                    "url": "/questions/topics/migration"
+                },
+                {
+                    "name": "Trends",
+                    "url": "/questions/topics/trends"
+                },
+                {
+                    "name": "Funnels",
+                    "url": "/questions/topics/funnels"
+                },
+                {
+                    "name": "Cohorts",
+                    "url": "/questions/topics/cohorts"
+                }
+            ]
+        },
+        {
+            "name": "Roadmap",
+            "url": "/roadmap"
+        },
+        {
+            "name": "Changelog",
+            "url": "/roadmap/changelog"
+        },
+        {
+            "name": "Partners",
+            "url": "/partners"
+        },
+        {
+            "name": "Contributors",
+            "url": "/contributors"
         }
     ]
 }

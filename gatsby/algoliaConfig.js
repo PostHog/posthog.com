@@ -1,4 +1,6 @@
-const slugify = require('slugify')
+const { createContentDigest } = require('gatsby-core-utils')
+const Slugger = require('github-slugger')
+const slugger = new Slugger()
 
 const retrievePages = (type, regex) => {
     return {
@@ -28,18 +30,20 @@ const retrievePages = (type, regex) => {
             }
         `,
         transformer: ({ data }) =>
-            data.docs.nodes.map(({ id, frontmatter, headings, ...page }) => {
-                return {
-                    ...page,
-                    headings: headings.map((heading) => ({
-                        ...heading,
-                        fragment: slugify(heading.value, { lower: true }),
-                    })),
-                    id,
-                    title: frontmatter.title,
-                    type,
-                }
-            }),
+            data.docs.nodes
+                .filter(({ frontmatter }) => frontmatter.title)
+                .map(({ id, frontmatter, headings, ...page }) => {
+                    return {
+                        ...page,
+                        headings: headings.map((heading) => ({
+                            ...heading,
+                            fragment: slugger.slug(heading.value),
+                        })),
+                        id,
+                        title: frontmatter.title,
+                        type,
+                    }
+                }),
     }
 }
 
@@ -60,6 +64,7 @@ module.exports = {
             retrievePages('handbook', '/^handbook/'),
             retrievePages('tutorial', '/^tutorials/'),
             retrievePages('blog', '/^blog/'),
+            retrievePages('customers', '/^customers/'),
             {
                 query: `
                             {
@@ -92,7 +97,7 @@ module.exports = {
             {
                 query: `
                             {
-                              questions: allQuestion {
+                              questions: allQuestion(filter: {permalink: {ne: null}}) {
                                 nodes {
                                   id
                                   title: subject
@@ -116,6 +121,121 @@ module.exports = {
                             type: 'question',
                         }
                     })
+                },
+            },
+            {
+                query: `{ query: sitePage { id } }`,
+                transformer: () => {
+                    return [
+                        {
+                            id: createContentDigest('docs'),
+                            title: 'Docs',
+                            type: 'docs',
+                            slug: 'docs',
+                            headings: [
+                                { value: 'Get started', depth: 2 },
+                                { value: 'Important links', depth: 2 },
+                            ],
+                            internal: {
+                                contentDigest: createContentDigest('docs'),
+                            },
+                        },
+                        {
+                            id: createContentDigest('handbook'),
+                            title: 'Handbook',
+                            type: 'handbook',
+                            slug: 'handbook',
+                            headings: [
+                                { value: 'Company', depth: 2 },
+                                { value: 'How we work', depth: 2 },
+                                { value: 'People', depth: 2 },
+                                { value: 'Engineering', depth: 2 },
+                                { value: 'Design', depth: 2 },
+                                { value: 'Sales & marketing', depth: 2 },
+                            ],
+                            internal: {
+                                contentDigest: createContentDigest('handbook'),
+                            },
+                        },
+                        {
+                            id: createContentDigest('blog'),
+                            title: 'Blog',
+                            type: 'blog',
+                            slug: 'blog',
+                            headings: [
+                                { value: 'Inside PostHog', depth: 2 },
+                                { value: 'Product updates', depth: 2 },
+                                { value: 'Guides', depth: 2 },
+                                { value: 'Startups', depth: 2 },
+                                { value: 'Open source', depth: 2 },
+                                { value: 'CEO diaries', depth: 2 },
+                            ],
+                            internal: {
+                                contentDigest: createContentDigest('blog'),
+                            },
+                        },
+                        {
+                            id: createContentDigest('pricing'),
+                            title: 'Pricing',
+                            type: 'manual',
+                            slug: 'pricing',
+                            headings: [
+                                { value: 'Products', depth: 2 },
+                                { value: 'Pricing calculator', depth: 2 },
+                                { value: 'What comes in PostHog?', depth: 2 },
+                                { value: 'Want to self-host PostHog?', depth: 2 },
+                                { value: 'Compare all plans', depth: 2 },
+                                { value: 'Questions', depth: 2 },
+                            ],
+                            internal: {
+                                contentDigest: createContentDigest('pricing'),
+                            },
+                        },
+                        {
+                            id: createContentDigest('using-posthog'),
+                            title: 'Product manual',
+                            type: 'manual',
+                            slug: 'using-posthog',
+                            headings: [
+                                { value: '1. Product analytics', depth: 2 },
+                                { value: '2. Visualize', depth: 2 },
+                                { value: '3. Optimize', depth: 2 },
+                                { value: '4. Data', depth: 2 },
+                                { value: '5. Project settings', depth: 2 },
+                            ],
+                            internal: {
+                                contentDigest: createContentDigest('using-posthog'),
+                            },
+                        },
+                        {
+                            id: createContentDigest('questions'),
+                            title: 'Questions',
+                            type: 'community',
+                            slug: 'questions',
+                            headings: [
+                                { value: 'Features', depth: 2 },
+                                { value: 'Deployment', depth: 2 },
+                                { value: 'Data', depth: 2 },
+                            ],
+                            internal: {
+                                contentDigest: createContentDigest('questions'),
+                            },
+                        },
+                        {
+                            id: createContentDigest('roadmap'),
+                            title: 'Roadmap',
+                            type: 'community',
+                            slug: 'roadmap',
+                            headings: [
+                                { value: 'Under consideration', depth: 2 },
+                                { value: 'In progress', depth: 2 },
+                                { value: 'Recently shipped', depth: 2 },
+                            ],
+                            internal: {
+                                contentDigest: createContentDigest('roadmap'),
+                            },
+                        },
+                    ]
                 },
             },
         ],

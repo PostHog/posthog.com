@@ -5,37 +5,28 @@ sidebar: Docs
 showTitle: true
 ---
 
-> **Note:** The [Official RudderStack Docs page for the PostHog integration](https://www.rudderstack.com/docs/destinations/streaming-destinations/posthog/) provides a better overview of how to set up this integration.
+RudderStack is an open-source, customer data platform for developers. It allows you to collect and deliver customer event data to a variety of destinations across your growth, product, and marketing stack.
 
-## About RudderStack
+> Before integrating with RudderStack, we recommend you read our [CDP integration guide](/docs/integrate/cdp) to understand the different options for integrating with PostHog.
 
-RudderStack is an open-source, warehouse-first, customer data platform for developers. It allows you to collect and deliver customer event data to a variety of destinations such as data warehouses and analytics platforms.
+## Setting up the RudderStack Import
 
-![RudderStack Dashboard](../../../images/rudderstack-dashboard.png)
+Make sure you have a RudderStack account **and** a PostHog account, using [PostHog Cloud](https://app.posthog.com/signup) or self-hosting.
 
-#### Can PostHog with RudderStack do everything PostHog does by itself?
-
-No. The PostHog integration with RudderStack gives you access to everything our [JS library](/docs/integrate/client/js) can do, with the exception of autocapture and session recording. All features for your PostHog instance will be the same, but all RudderStack sends to PostHog are events you **manually** send. In addition, PostHog isn't able to show you our [toolbar](/docs/user-guides/toolbar). 
-
-If you require session recording whilst using the Rudderstack integration, you need to additionally include the PostHog [JS snippet](/docs/integrate/client/js) and disable autocapture so you don't duplicate events.
-
-Alternatively, you can load the PostHog JS snippet via Rudderstack itself, by enabling the [device-mode connection](https://www.rudderstack.com/docs/rudderstack-cloud/rudderstack-connection-modes/#device-mode) setting.
-
-## Setting up the integration
-
-0. Make sure you have a [RudderStack account](https://rudderstack.com/) **and** a PostHog account, either [self-hosted](/docs/deployment) or using [PostHog Cloud](https://app.posthog.com/signup).
-1. [Integrate a RudderStack source for your events](https://docs.rudderstack.com/how-to-guides/adding-source-and-destination-rudderstack)
-1. Select PostHog as your _destination_ for the selected source from the step above
-1. Add your PostHog token and host details:
-    <br/>
-    
+1. From your RudderStack dashboard, add each source and select PostHog from the list of destinations.
+2. Assign a name to your destination (e.g. PostHog production) and click Continue.
+3. Add your PostHog 'Project API Key' as the Team API key (**Do not use a Personal API key**) and your host url as `Your-Instance` (`https://app.posthog.com` if you're on PostHog Cloud):
     ![RudderStack Dashboard](../../../images/rs-posthog-config.png)
-    
-    <br/>
-    
-    > 'Team API Key' refers to your PostHog 'Project API Key' (token), that can be found in 'Project Settings'. **Do not use a Personal API Key for this.** 'Your Instance' refers to the address of your PostHog instance, which is `https://app.posthog.com` if you're on PostHog Cloud.
-1. You're all set!
+    - If it's a website or web app:
+      1. In the rudderstack console set `Use device-mode to send events` to `true` so that the events originate from the client side. Additionally, this will enable the toolbar and heatmaps.
+      2. Set `Enable autocapture with PostHog` to `true`. This will automatically capture events from your website or web app  
+        ![RudderStack Dashboard](../../../images/rs-device-mode.png)
+    - If it's not a website or web app (e.g. a mobile app or server), to use the full set of features such as feature flags and session recordings manually install the [PostHog SDK docs](/docs/integrate) in addition to adding PostHog as the event destination in RudderStack.
 
-## Sending events
+For more information see the [RudderStack guide for setting up PostHog](https://www.rudderstack.com/docs/destinations/streaming-destinations/posthog/setting-up-posthog/)
 
-To learn how to send events to PostHog with RudderStack, you should check out the [official RudderStack Docs for this integration](https://www.rudderstack.com/docs/destinations/streaming-destinations/posthog/). 
+## Sending events to PostHog
+
+Once you have set up RudderStack and PostHog, you can use RudderStack to send events to PostHog. You can send events through the RudderStack API, or one of the RudderStack libraries. For example, with javascript you can use the `analytics.track('Event Name')` function which will send the events to your RudderStack destinations including PostHog.
+
+For the full list of functions see the relevant SDK docs e.g. the [Javascript SDK](https://www.rudderstack.com/docs/sources/event-streams/sdks/rudderstack-javascript-sdk/supported-api/#track).

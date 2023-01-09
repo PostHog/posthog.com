@@ -1,13 +1,12 @@
 import { Close } from 'components/Icons/Icons'
 import Link from 'components/Link'
 import { AnimatePresence, motion } from 'framer-motion'
-import { useValues } from 'kea'
-import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
+import usePostHog from '../../hooks/usePostHog'
 import React, { useEffect, useState } from 'react'
 import GitHubButton from 'react-github-btn'
 
 export default function StarUsBanner() {
-    const { posthog } = useValues(posthogAnalyticsLogic)
+    const posthog = usePostHog()
     const [visible, setVisible] = useState(false)
 
     useEffect(() => {

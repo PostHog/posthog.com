@@ -1,14 +1,13 @@
 import { useLocation } from '@reach/router'
 import Chip from 'components/Chip'
 import { DemoScheduler } from 'components/DemoScheduler'
-import { useValues } from 'kea'
-import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
+import usePostHog from '../../hooks/usePostHog'
 import queryString from 'query-string'
 import React, { useEffect, useState } from 'react'
 import HubspotForm from 'react-hubspot-form'
 
 export default function Contact(props) {
-    const { posthog } = useValues(posthogAnalyticsLogic)
+    const posthog = usePostHog()
     const location = useLocation()
     const [activeTab, setActiveTab] = useState('demo')
     const [demoType, setDemoType] = useState(props.demoType || 'scale')
@@ -61,7 +60,7 @@ export default function Contact(props) {
                                 iframeSrc={
                                     {
                                         paid: 'https://calendly.com/d/ckz-37j-jz9/posthog-scale-customer-success-demo',
-                                        qa: 'https://calendly.com/cameron-posthog/15-minute-posthog-q-a',
+                                        qa: 'https://calendly.com/d/hxx-tx7-qrs/posthog-15-minute-quick-chat',
                                     }[demoType]
                                 }
                             />

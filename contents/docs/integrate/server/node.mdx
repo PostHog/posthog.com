@@ -253,7 +253,7 @@ You can also get all known flag values as well. This is useful when you want to 
 
 ```node
 await client.getAllFlags('distinct id', {groups: {}, personProperties: {'is_authorized': True}, groupProperties: {}})
-# returns dict of flag key and value pairs.
+// returns dict of flag key and value pairs.
 ```
 
 #### Local Evaluation
@@ -271,16 +271,16 @@ Then, the flag can be evaluated locally. The method signature looks exactly like
 
 ```node
 await client.getFeatureFlag('beta-feature', 'distinct id', {personProperties: {'is_authorized': True}})
-# returns string or None
+// returns string or None
 ```
 
 > **Note:** New feature flag definitions are polled every 30 seconds by default, which means there will be up to a 30 second delay between you changing the flag definition, and it reflecting on your servers. You can change this default on the client by setting `featureFlagsPollingInterval` during client initialisation.
 
 This works for `getAllFlags` as well. It evaluates all flags locally if possible. If even one flag isn't locally evaluable, it falls back to decide.
 
-```js
+```node
 await client.getAllFlags('distinct id', {groups: {}, personProperties: {'is_authorized': True}, groupProperties: {}})
-# returns dict of flag key and value pairs. 
+// returns dict of flag key and value pairs. 
 ```
 
 **Restricting evaluation to local only**
@@ -301,7 +301,7 @@ await client.reloadFeatureFlags()
 
 ### Group analytics
 
-PostHog 1.31.0 introduced support for [group analytics](/docs/user-guides/group-analytics), which allows you to associate users and events with larger groups (teams, organizations, etc.). This feature requires a posthog-node version of `1.2.0` or above.
+Group analytics allows you to associate an event with a group (e.g. teams, organizations, etc.). Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.
 
 > **Note: ** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
 
@@ -311,7 +311,7 @@ PostHog 1.31.0 introduced support for [group analytics](/docs/user-guides/group-
 client.capture({
     event: 'some event',
     distinctId: '[distinct id]',
-    groups: { company: 'id:5' },
+    groups: { company: '42dlsfj23f' },
 })
 ```
 
@@ -320,9 +320,9 @@ client.capture({
 ```node
 client.groupIdentify({
     groupType: 'company',
-    groupKey: 'id:5',
+    groupKey: '42dlsfj23f',
     properties: {
-        company_name: 'Awesome Inc',
+        name: 'Awesome Inc',
         employees: 11,
     },
 })

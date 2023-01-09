@@ -44,7 +44,7 @@ const ValidationSchema = Yup.object().shape({
     github: Yup.string().url('Invalid URL').nullable(),
     linkedin: Yup.string().url('Invalid URL').nullable(),
     twitter: Yup.string().url('Invalid URL').nullable(),
-    biography: Yup.string().max(280, 'Exceeds 280 characters').nullable(),
+    biography: Yup.string().max(3000, 'Please limit your bio to 3,000 characters, you wordsmith!').nullable(),
 })
 
 export default function EditProfile({ profile, onSubmit }) {
@@ -55,7 +55,7 @@ export default function EditProfile({ profile, onSubmit }) {
     const handleSubmit = async (values, { setSubmitting, resetForm }) => {
         setSubmitting(true)
         const profile = await fetch(
-            `https://squeak.cloud/api/profiles/${id}?organizationId=a898bcf2-c5b9-4039-82a0-a00220a8c626`,
+            `${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${id}?organizationId=${process.env.GATSBY_SQUEAK_ORG_ID}`,
             {
                 method: 'PATCH',
                 body: JSON.stringify(values),

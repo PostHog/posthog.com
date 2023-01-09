@@ -36,19 +36,41 @@ import JSCaptureIgnoreElements from './snippets/capture-ignore-elements.mdx'
 
 <JSAutoCapture />
 
+#### Tuning autocapture
+
+You can configure autocapture using allowlists. If an array is passed for an allowlist, autocapture events will only be sent for elements matching at least one of the items in the array.
+
+For example, to only capture clicks on buttons on the docs section of the website that contain the data attribute `ph-autocapture` you can do:
+
+```js
+posthog.init('<ph_project_api_key>',
+    {
+        api_host: '<ph_instance_address>',
+        autocapture: {
+                event_allowlist: ['click'], // DOM events from this list ['click', 'change', 'submit']
+                url_allowlist: ['posthog.com\.\/docs\/.*'], // strings or RegExps
+                element_allowlist: ['button'], // DOM elements from this list ['a', 'button', 'form', 'input', 'select', 'textarea', 'label']
+                css_selector_allowlist: ['[ph-autocapture]'] // List of CSS selectors
+            }
+    }
+)
+```
+
+The allowlists only filter autocapture events, they won't affect the data collected by session recordings.
+
 <JSCaptureIgnoreElements />
 
-#### Important notes on autocapture
+Alternatively you can disable autocapture completely by setting `autocapture: false` in the config.
 
-While autocapture allows you to track the majority of general events on your website right out of the gate, it is important to note that, for security reasons, PostHog is very conservative regarding `input` tags. In order to prevent passwords or other sensitive data from being collected, very little data is collected from inputs with autocapture.
+Disabling autocapture **will not disable session recording**. You can disable session recording using `disable_session_recording` or by turning it off in your project's settings.
+
+#### Autocapture on input elements
+
+For security reasons, PostHog is very conservative regarding `input` tags to prevent passwords or other sensitive data from being collected.
 
 Specifically, PostHog autocapture will grab only the `name`, `id`, and `class` attributes from `input` tags.
 
-As such, you should be aware of this when you start, in order to understand why you may be getting less data than expected.
-
-If you need to collect more data from inputs, you should look into [Custom events and Actions](/docs/user-guides/actions).
-
-Another important thing to note is that disabling autocapture **will not disable session recording**. You can disable session recording too using `disable_session_recording` or by turning it off in your project's settings.
+Sometimes less data might be collected than expected. If you need to collect more data from inputs, you should look into [Custom events and Actions](/docs/user-guides/actions).
 
 ### Website vs app
 
@@ -109,11 +131,12 @@ import JSIdentify from './snippets/identify.mdx'
 If you use multiple distinct IDs for the same user (e.g. a logical ID and a UUID), you may want to set both for the same user. This way, if PostHog receives events for either ID, it will properly match them to the same person. This is also helpful if you want to associate anonymous IDs with an identified person (we actually do this automatically when you call `.identify`). To associate multiple IDs to the same person, you do an **alias** call, as shown below.
 
 ```js
-posthog.alias('[new ID]', '[original ID]')
+posthog.alias('[distinct ID]', '[alias ID]')
 ```
 
 Any events sent to either will be received under the same person.
-Note that the `'[original ID]'` cannot be previously identified nor associated with multiple distinct ids.
+
+Note: that the `'[alias ID]'` cannot be associated with multiple distinct ids.
 
 ### Reset after logout
 
@@ -325,26 +348,28 @@ posthog.init('<ph_project_api_key>', {
 
 ### Group analytics
 
-PostHog 1.31.0 introduced support for [group analytics](/docs/user-guides/group-analytics), which allows you to associate users and events with larger groups (teams, organizations, etc.). This feature requires a posthog-js version of `1.16.0` or above.
+Group analytics allows you to associate the events for that person's session with a group (e.g. teams, organizations, etc.). Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.
 
 > **Note: ** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
 
--   Make a group active and update properties
+-  Associate the events for this session with a group
 
 ```js
-posthog.group('company', 'id:5', {
-    company_name: 'Awesome Inc.',
+posthog.group('company', '42dlsfj23f')
+
+posthog.capture("upgraded plan") // this event is associated with company ID `42dlsfj23f`
+```
+
+-  Associate the events for this session with a group AND update the properties of that group
+
+```js
+posthog.group('company', '42dlsfj23f', {
+    name: 'Awesome Inc.',
     employees: 11,
 })
 ```
 
--   Make a group active without updating properties
-
-```js
-posthog.group('company', 'id:77')
-```
-
-Once a group has been made active, all subsequent events that are sent using the client will be associated with that group automatically.
+The `name` is a special property which is used in the PostHog UI for the name of the Group. If you don't specify a `name` property, the group ID will be used instead.
 
 #### Handling logging out
 

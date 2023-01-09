@@ -18,19 +18,7 @@ const tiers = [
         description: 'Quis suspendisse ut fermentum neque vivamus non tellus.',
     },
     {
-        name: 'Self-Hosted',
-        href: '#',
-        priceMonthly: 59,
-        description: 'Orci volutpat ut sed sed neque, dui eget. Quis tristique non.',
-    },
-    {
         name: '+ Enterprise package',
-        href: '#',
-        priceMonthly: 59,
-        description: 'Orci volutpat ut sed sed neque, dui eget. Quis tristique non.',
-    },
-    {
-        name: 'Open Source',
         href: '#',
         priceMonthly: 59,
         description: 'Orci volutpat ut sed sed neque, dui eget. Quis tristique non.',
@@ -61,7 +49,7 @@ const sections = [
                     'PostHog Cloud': 'Free – every month',
                     '+ Enterprise Cloud package': '$450 (flat fee)',
                     'Self-Hosted': 'Free – every month',
-                    '+ Enterprise package': '$450 (flat fee)',
+                    '+ Enterprise package': '$5000 (flat fee)',
                 },
             },
             {
@@ -69,9 +57,9 @@ const sections = [
                 tiers: {
                     'Open Source': 'Free',
                     'PostHog Cloud': '$0.000450',
-                    '+ Enterprise Cloud package': '$0.000450',
+                    '+ Enterprise Cloud package': '$0.00056260',
                     'Self-Hosted': '$0.000450',
-                    '+ Enterprise package': '$0.000450',
+                    '+ Enterprise package': 'Included',
                 },
             },
             {
@@ -79,9 +67,9 @@ const sections = [
                 tiers: {
                     'Open Source': 'Free',
                     'PostHog Cloud': '$0.000225',
-                    '+ Enterprise Cloud package': '$0.000450',
+                    '+ Enterprise Cloud package': '$0.00028125',
                     'Self-Hosted': '$0.000225',
-                    '+ Enterprise package': '$0.000450',
+                    '+ Enterprise package': 'Included',
                 },
             },
             {
@@ -89,9 +77,9 @@ const sections = [
                 tiers: {
                     'Open Source': 'Free',
                     'PostHog Cloud': '$0.000075',
-                    '+ Enterprise Cloud package': '$0.000090',
+                    '+ Enterprise Cloud package': '$0.00009375',
                     'Self-Hosted': '$0.000075',
-                    '+ Enterprise package': '$0.000090',
+                    '+ Enterprise package': '$0.00009375 after 40m events',
                 },
             },
             {
@@ -99,9 +87,64 @@ const sections = [
                 tiers: {
                     'Open Source': 'Free',
                     'PostHog Cloud': '$0.000025',
-                    '+ Enterprise Cloud package': '$0.000025',
+                    '+ Enterprise Cloud package': '$0.00003125',
                     'Self-Hosted': '$0.000025',
-                    '+ Enterprise package': '$0.000025',
+                    '+ Enterprise package': '$0.00003125',
+                },
+            },
+        ],
+    },
+    {
+        name: 'Session recording pricing breakdown',
+        features: [
+            {
+                name: 'First 15,000 recordings/mo',
+                tiers: {
+                    'Open Source': 'Free',
+                    'PostHog Cloud': 'Free – every month',
+                    '+ Enterprise Cloud package': 'Free – every month',
+                    'Self-Hosted': 'Free – every month',
+                    '+ Enterprise package': 'Free – every month',
+                },
+            },
+            {
+                name: '15,001 - 50,000',
+                tiers: {
+                    'Open Source': 'Free',
+                    'PostHog Cloud': '$0.0050',
+                    '+ Enterprise Cloud package': '$0.00625',
+                    'Self-Hosted': '---',
+                    '+ Enterprise package': 'Included',
+                },
+            },
+            {
+                name: '50,001 - 150,000',
+                tiers: {
+                    'Open Source': 'Free',
+                    'PostHog Cloud': '$0.0045',
+                    '+ Enterprise Cloud package': '$0.005625',
+                    'Self-Hosted': '---',
+                    '+ Enterprise package': '$0.005625 after 80k recordings',
+                },
+            },
+            {
+                name: '150,001 to 500,000',
+                tiers: {
+                    'Open Source': 'Free',
+                    'PostHog Cloud': '$0.0040',
+                    '+ Enterprise Cloud package': '$0.00500',
+                    'Self-Hosted': '---',
+                    '+ Enterprise package': '$0.00500',
+                },
+            },
+            {
+                name: '500,000 +',
+                tiers: {
+                    'Open Source': 'Free',
+                    'PostHog Cloud': '$0.0035',
+                    '+ Enterprise Cloud package': '$0.004375',
+                    'Self-Hosted': '---',
+                    '+ Enterprise package': '$0.004375',
                 },
             },
         ],
@@ -718,7 +761,7 @@ export const PlanComparison = ({ className = '' }) => {
                         <thead>
                             <tr>
                                 <th
-                                    className="py-2 px-3 text-[14px] font-medium text-almost-black border-white/10 sticky top-0 w-[180px] z-10 bg-opacity-50"
+                                    className="py-2 px-3 text-[14px] font-medium text-almost-black border-white/10 sticky top-0 w-[200px] z-10 bg-opacity-50"
                                     scope="col"
                                 >
                                     <span className="sr-only">Feature by</span>
@@ -727,7 +770,7 @@ export const PlanComparison = ({ className = '' }) => {
                                 {tiers.map((tier) => (
                                     <th
                                         key={tier.name}
-                                        className="py-2 px-3 text-sm text-left font-bold text-almost-black leading-tight border-white/10 sticky top-0  z-10 bg-opacity-75 bg-tan"
+                                        className="py-2 px-3 text-sm text-left font-bold text-almost-black leading-tight border-white/10 sticky top-0  z-10 bg-opacity-75 bg-tan w-full"
                                         scope="col"
                                     >
                                         {tier.name}

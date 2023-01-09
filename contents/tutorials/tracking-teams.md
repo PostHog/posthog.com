@@ -5,7 +5,7 @@ showTitle: true
 author: ['yakko-majuri']
 date: 2021-04-08
 featuredImage: ../images/tutorials/banners/user-model.png
-topics: ['configuration', 'group analytics']
+topics: ['configuration']
 ---
 
 _Estimated reading time: 12 minutes_ ☕☕☕
@@ -14,7 +14,7 @@ When using PostHog or any other product analytics tool, there are two key entiti
 
 Every event that you capture is associated with a user, which generally corresponds to a person.
 
-However, what if you want your analytics to be based on an entity larger than one person, such as an organization, or smaller than one person, such as a project created by a user? 
+However, what if you want your analytics to be based on an entity larger than one person, such as an organization, or smaller than one person, such as a project created by a user?
 
 In this tutorial, we will explain how to structure your analytics to fit these needs. We will use PostHog Cloud as an example, and show how we could track our events on an organization basis, rather than a person basis, aiming to answer the following questions:
 
@@ -25,7 +25,7 @@ In this tutorial, we will explain how to structure your analytics to fit these n
 - What is the average number of projects per organization?
 - What is our total revenue?
 - What is the average revenue per organization?
-- How many organizations are there at each pricing tier? 
+- How many organizations are there at each pricing tier?
 
 ## Prerequisites
 
@@ -40,7 +40,7 @@ Every event in PostHog has an associated distinct ID, which determines which use
 
 When using PostHog in your backend, you will always specify this distinct ID yourself, whereas in the frontend we derive it for you.
 
-Now, what happens when a user lands on your website and there's no record of them in PostHog already? Well, PostHog provisions an anonymous yet unique ID for the user which ensures that we can differentiate between unique users in our analytics. 
+Now, what happens when a user lands on your website and there's no record of them in PostHog already? Well, PostHog provisions an anonymous yet unique ID for the user which ensures that we can differentiate between unique users in our analytics.
 
 However, when the user does something identifiable on your app, like logging in, you are then able to identify them yourself, in order to be able to:
 
@@ -49,7 +49,7 @@ However, when the user does something identifiable on your app, like logging in,
 - Associate this user with an ID that is already used elsewhere in your application
 - Combine the activity of a user from before they're logged to after
 
-In most cases, users are identified using either email, username, or an internal unique identifier. This helps us differentiate between one person and another. 
+In most cases, users are identified using either email, username, or an internal unique identifier. This helps us differentiate between one person and another.
 
 If you're unfamiliar with how to identify users, here's an example from our JavaScript Library:
 
@@ -57,7 +57,7 @@ If you're unfamiliar with how to identify users, here's an example from our Java
 posthog.identify('your desired id')
 ```
 
-However, if we want to do organization-based, rather than person-based analytics, we can use `posthog.identify` to our advantage. 
+However, if we want to do organization-based, rather than person-based analytics, we can use `posthog.identify` to our advantage.
 
 Using the PostHog Cloud example, when a user logs in, we can either identify them by something unique to the person, like an email:
 
@@ -75,7 +75,7 @@ So what are the implications of doing things this way?
 
 Above all, you first want to make sure organization names are unique, to prevent events being merged across organizations.
 
-With that criterion fulfilled, what will now happen is that all events from people in that organization will be associated with the same PostHog user. 
+With that criterion fulfilled, what will now happen is that all events from people in that organization will be associated with the same PostHog user.
 
 As such, if we were to filter a PostHog chart by 'Active Users', we will actually be looking at unique organizations, rather than unique persons that performed an event.
 
@@ -122,7 +122,7 @@ Once we have this event set up, we can now tackle 3 of our metrics:
 2. How many total users are there?
 3. What is the average number of users per organization?
 
-To get the answers for points 1 and 2, we can use the following table: 
+To get the answers for points 1 and 2, we can use the following table:
 
 ![Chart Image](../images/tutorials/user-model/user-totals.png)
 
@@ -140,7 +140,7 @@ To get that, we can select the total volume of `account_created` events, and the
 
 ## Total projects
 
-In PostHog Cloud, organizations are composed of multiple users, and these users can create various projects. 
+In PostHog Cloud, organizations are composed of multiple users, and these users can create various projects.
 
 To establish metrics on the number of projects, we can use a similar approach as above. This will allow us to tackle:
 
@@ -180,7 +180,7 @@ Another thing we can do is get the maximum number of projects any organization h
 
 ![Chart image](../images/tutorials/user-model/project_max.png)
 
-This could be useful in informing architectural decisions, as you can have an idea of what the limits of your platform should be. 
+This could be useful in informing architectural decisions, as you can have an idea of what the limits of your platform should be.
 
 Exploratory questions that could come out of this include:
 
@@ -196,7 +196,7 @@ Another very useful thing to track on an organization basis is revenue. So how d
 
 1. What is our total revenue?
 2. What is the average revenue per organization?
-3. How many organizations are there at each pricing tier? 
+3. How many organizations are there at each pricing tier?
 
 First, once again, we need an event. In PostHog Cloud, users are billed monthly, so let's set up an event to be triggered every time a customer pays their invoice:
 
@@ -212,7 +212,7 @@ Now, we can find our total revenue by selecting the 'sum' operation on the `purc
 
 <small class='centered'>Disclaimer: The data shown above is **demo data**.</small>
 
-Above, we establish that our total revenue is 1,753,000 USD (given that our `purchase_value` is in thousands of dollars). We have also set up a breakdown by the `plan` property. 
+Above, we establish that our total revenue is 1,753,000 USD (given that our `purchase_value` is in thousands of dollars). We have also set up a breakdown by the `plan` property.
 
 Thus, this not only gives us our total revenue, but also shows us a breakdown by each pricing plan.
 
@@ -230,15 +230,15 @@ Now, to find the average purchase value, there are two approaches in this case:
 
 ![Chart Image](../images/tutorials/user-model/average-revenue.png)
 
-With the graph above, we're using PostHog's built-in mathematical operations to get the average purchase value per month. 
+With the graph above, we're using PostHog's built-in mathematical operations to get the average purchase value per month.
 
 #### 2. Sum of purchases divided by total purchases
 
 ![Chart Image](../images/tutorials/user-model/average-revenue-2.png)
 
-In this case, we are doing the same as above, but with an extra step. We first calculate the sum of purchases, and then divide it by the total number of purchases. 
+In this case, we are doing the same as above, but with an extra step. We first calculate the sum of purchases, and then divide it by the total number of purchases.
 
-While in this case we get the same results (except for the final data point simply because of when the screenshots were taken), it is useful to be aware of this method as it gives you more flexibility for your averages. 
+While in this case we get the same results (except for the final data point simply because of when the screenshots were taken), it is useful to be aware of this method as it gives you more flexibility for your averages.
 
 For example, if organizations in your platform can do a purchase more than once per month, you can set the second event to be filtered by `Active Users`, giving you the average revenue per organization that month, rather than the average revenue per purchase event during the month.
 
@@ -256,6 +256,7 @@ We learned that:
 But, most importantly, we learned that while PostHog is built with certain frameworks in mind (such as the person-event model), given the flexibility of our API and metric-building capabilities, you are likely to find a way to track your product exactly how you want to.
 
 ## Further reading
+
 - [The guide to frontend vs backend group analytics implementations](/tutorials/frontend-vs-backend-group-analytics)
 - [Analyzing user behavior with cohorts](/tutorials/cohorts)
 

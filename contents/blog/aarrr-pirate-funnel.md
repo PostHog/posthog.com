@@ -36,7 +36,7 @@ Tracking the five pirate metrics will give you a complete, end-to-end view of us
 
 McClure visualized the AARRR funnel in a table like the one below. 
 
-This version is what the funnel might look like for our product, PostHog, an all-in-one product platform comprising [product analytics](/product), [session recording](/product/session-recording), [feature flags](/product/feature-flags) and [more](/blog/using-posting) – note, the figures here are purely illustrative.
+This version is what the funnel might look like for our product, PostHog, an all-in-one product platform comprising [product analytics](/product), [session recording](/product/session-recording), [feature flags](/product/feature-flags) and [more](/blog/using-posthog) – note, the figures here are purely illustrative.
 
 | **Category** | **User Status**                                      | **Conversion** |
 |--------------|------------------------------------------------------|----------------|
