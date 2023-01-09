@@ -2566,3 +2566,9 @@
 [[redirects]]
     from = "/blog/using-posting"
     to = "/blog/using-posthog"
+
+
+# Added: 2023-01-09
+[[redirects]]
+    from = "/docs/integrate/client/snippet-installation"
+    to = "/docs/integrate/_snippets/snippet"
