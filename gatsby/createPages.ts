@@ -323,7 +323,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     }
 
-    const createPaginatedPages = ({ postsPerPage = 10, totalCount, base, template, extraContext = {} }) => {
+    const createPaginatedPages = ({ postsPerPage = 20, totalCount, base, template, extraContext = {} }) => {
         const numPages = Math.ceil(totalCount / postsPerPage)
         Array.from({ length: numPages }).forEach((_, i) => {
             const context = {
