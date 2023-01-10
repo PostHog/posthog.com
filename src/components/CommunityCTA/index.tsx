@@ -24,7 +24,7 @@ export default function CommunityCTA() {
                         }}
                     />
                 ) : (
-                    <StaticImage src="../../images/about-hog-1.svg" alt="Hog" placeholder="blurred" />
+                    <StaticImage width={300} src="../../images/about-hog-1.svg" alt="Hog" placeholder="blurred" />
                 )}
             </div>
             <div className="max-w-[400px]">
