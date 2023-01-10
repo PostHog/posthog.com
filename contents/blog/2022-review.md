@@ -11,7 +11,7 @@ featuredImage: ../images/blog/ceo-diary.png
 featuredImageType: full
 ---
 
-2022 was an exceptionally good year for PostHog. Here's my short review.
+2022 was an exceptionally good year for PostHog. Here's my personal perspective on how it went.
 
 ## How it went
 
@@ -27,11 +27,27 @@ We still have work to do. We're working on gross margin - we've done close to ze
 
 We remained disciplined and let people go when we needed to. This helps us retain an ambitious and performance-oriented culture. Whilst these moments are painful, we received positive feedback from our team when we explained why we made these decisions, transparently. We are compassionate but reasonable (4 months notice - our attitude is letting people go earlier is better for everyone, a big payout for them is kinder in return, so having the the latter, means the former condition is met).
 
-### Tim and I held each other accountable, and solved issues with our roles
+### Tim and I wound up in the wrong roles, but we spotted this and fixed them
 
-At one point, I was getting the little things done, but not the big ones. Tim suggested I hire Kendal (Exec Assistant). She helped solve this.
+Tim and I realized we were managing the wrong teams because the game had changed. I was good at early sales, but he's the right person to help us scale things there.
 
-At another stage, Tim and I realised we were managing the wrong teams because the game had changed. I was good at early sales, but he's the right person to help us scale things there. Likewise in product, we want to go from good to great and that'll take more design skill which I can help with. We swapped a bunch of priorities around with each other, and - so far - it feels much better!
+Likewise in product, we want to go from good to great and that'll take more design skill which I can help with. We swapped a bunch of priorities around with each other, and - so far - it feels much better.
+
+There are two reasons we spotted this - (1) feedback from our teams and (2) a love / tradition of going for "salt of the earth curries".
+
+We do [360 feedback dinners](../handbook/people/feedback) at offsites, but this feedback came from asking these questions about each other on the exec team in our 1:1s:
+
+* What do I do that you experience as world-class?
+* What do I do where I appear to be experiencing fun, peace or joy (if different from above)
+* What do I do that I am good at but that I don't appear to enjoy?
+* What do I do that I am not better at than others?
+* What do I do that I am actually worse than others?
+
+Secondly, Tim and I love going for an inexpensive curry every couple of weeks when we work together casually in person (we're all remote, but we do make an effort to hang out). This means specifically an unpretentious but tasty curry somewhere. This happenns frankly because my wife isn't a huge fan of them, so nearly every time we meet, I jump at the chance and I _think_ I've converted Tim. During one of these, we talked through the feedback we'd received. It's a good reminder to hang out and not make every interaction 'zoomformulaic'.
+
+### I was prioritizing badly, but Tim held me accountable and we fixed that too
+
+At one point, I was getting the individual contributor work done, but not prioritizing things like company vision/OKRs. Tim suggested I hire [Kendal](../handbook/company/team#kendal-hall-executive-assistant) (Exec Assistant) to help solve this. I felt really silly hiring someone to manage my time and to keep me organised, but the reality was - this means I can give more value to the company, which helps everyone. Having a nudge from someone else was what I needed to commit.
 
 ### A crappy family situation got much better
 
@@ -41,25 +57,31 @@ My (then) 1 year old daughter got diagnosed with bilateral retinoblastoma (a typ
 
 We made too many improvements to list on user facing functionality, and infra / ingestion based functionality. It feels like we can make new things appear, although Q1 will be a big test - it'll be one of our most ambitious quarters.
 
-Other teams also get their work out the door quickly, unimpeded by bureaucracy / excessive planning. We've had a ton of marketing content appearing, a smooth time with our People and Ops team, and a growth team that can't stop producing winning variants!
+Other teams also get their work out the door quickly, unimpeded by bureaucracy / excessive planning. We've had a ton of marketing content appearing, a smooth time with our [People and Ops team](../handbook/small-teams/people), and a [Growth Team](../handbook/small-teams/growth) that can't stop producing winning variants!
 
 ### I'm really glad we're not doing outbound / went for a growth team instead
 
 It is always tempting to hire an outbound sales team. After all, we can sell the product and retain users, to a tightly defined audience.
 
-However, it just feels like it'd be very hard to do outbound sales to developers. I can't think of a worse group to target this way (this is coming from a place of experience - I've run outbound sales teams before).
+However, it just feels like [it'd be very hard to do outbound sales](../handbook/growth/sales/overview#strategy) to developers. I can't think of a worse group to target this way (this is coming from a place of experience - [I've run outbound sales teams](https://www.linkedin.com/in/j-hawkins/) before).
 
 Instead, we set up a growth team. We've had dramatic results from doing this - such as 25% improvements in our activation flow from single experiments. Yep, one experiment has led to a 25% increase in our monthly growth, forever. That's why we have such a low CAC payback period...
 
-If we _had_ hired a sales team, I guarantee we'd be focussing on how to send more cold emails more effectively versus the more leveraged work of improving our onboarding, activation and billing flows.
+If we _had_ hired a sales team, I guarantee we'd be focusing on how to send more cold emails more effectively versus the more leveraged work of improving our onboarding, activation and billing flows.
 
-### We can take pride in not focussing on number of staff / investors
+### We can take pride in not focusing on number of staff / investors
 
 Lots of companies raised very hyped funding rounds in 2021 - we didn't. We are confident we made the right call not to do this, but we felt that we were going against the grain. It was really cool to talk about this stuff openly with our team, and to see how quickly we started taking pride in building a real company.
 
 ### Doing more of what works in many parts of the company has been great
 
 In Go To Market, it's always tempting to explore new channels. However, in 2022, we really benefited from understanding where our growth was _actually_ coming from, and doing more of those things. This meant content marketing and word of mouth growth.
+
+### Our free support quality has been a bit variable
+
+We get around twice as many community support questions now as we did last year. We've not tracked it, but it feels like we're a lot more rushed as a result when trying to get to everything.
+
+We've implemented multiple things to try to improve this - Squeak, 
 
 ### Staying on top of i/c work as a cofounder with 40 people is hard
 
