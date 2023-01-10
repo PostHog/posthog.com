@@ -100,7 +100,7 @@ On your first-year anniversary with PostHog, you will receive a giftcard from [G
 1. Login into [Giftogram](https://app.giftogram.com/sign-in) by using your gmail credentials
 2. Two ways to create a new Giftogram, on the tool bar above where it says “Create and Send'' or you can click on the right hand side on the blue button “Send a Giftogram''. 
 3. Walk through the following steps:
-  - Select the appropriate campaign: US Campaign= US team members, GCode Campaign= EU team members, and CA Campaign= Canada team members
+  - Select the appropriate campaign: US Campaign= US team members, GCode Campaign= EU+ALL team members, and CA Campaign= Canada team members
   - Select a card design of your choice (easiest to just use the anniversary theme)
   - Next screen, select “individual”, email as a delivery method, and add value (see above for amount) and continue to the next step
   - Enter the individual’s PostHog email address. You can add multiple email addresses if there is one then one anniversary. The amount will add itself on the right hand side as you add more individuals. Then, continue to the next step
