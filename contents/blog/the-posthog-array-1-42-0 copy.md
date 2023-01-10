@@ -61,11 +61,12 @@ View the commit log in GitHub for a full history of changes: [`release-1.42.4...
 We’re always working on improving PostHog and would love to talk to you! Please [schedule a 30 minute call](https://calendly.com/posthog-feedback) with one of our Product, Engineering, or Marketing team members to help us understand how to improve. As a thank you for your time, we'll be giving away awesome [PostHog merch](https://merch.posthog.com)!
 
 ## Contributions from the community
-We always welcome contributions from our community and this time we want to thank the following people...
+We always welcome contributions from our community and this time we want to thank the following people this month...
 
-Joe to add contributors here.
+- @Ismaaa for [correcting some mistakes in our onboarding documentation](https://github.com/PostHog/posthog.com/pull/1840)
+- @Johanholmerin for [fixing an issue when copying non-extensible objects](https://github.com/PostHog/posthog-js/pull/478)
 
-Do you want to get involved in making PostHog better? Check out our [contributing resources](/docs/contribute) to get started, or head to [our Slack group](/slack). We also have a [list of Good First Issues](https://github.com/PostHog/posthog/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) for ideas on where you can contribute!
+Want to get involved in making PostHog better? Check out our [contributing resources](/docs/contribute) to get started, or head to [our Slack group](/slack). We also have a [list of Good First Issues](https://github.com/PostHog/posthog/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) for ideas on where you can contribute!
 
 ## Open roles at PostHog
 Want to join us in helping make more products successful? We're currently hiring for remote candidates in the following role:
