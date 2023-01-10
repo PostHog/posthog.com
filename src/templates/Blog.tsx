@@ -40,8 +40,12 @@ const BlogCategory = ({
                     />
                     <NewsletterForm />
                     <Posts posts={allPostsRecent.slice(4, 12)} />
-                    <CommunityCTA />
-                    <Posts posts={allPostsRecent.slice(12)} />
+                    {allPostsRecent.length > 12 && (
+                        <>
+                            <CommunityCTA />
+                            <Posts posts={allPostsRecent.slice(12)} />
+                        </>
+                    )}
                     <Pagination currentPage={currentPage} numPages={numPages} base={base} />
                 </div>
             </PostLayout>

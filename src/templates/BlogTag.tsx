@@ -51,8 +51,12 @@ const BlogTag = ({
                     />
                     <NewsletterForm />
                     <Posts posts={posts.slice(4, 12)} />
-                    <CommunityCTA />
-                    <Posts posts={posts.slice(12)} />
+                    {posts.length > 12 && (
+                        <>
+                            <CommunityCTA />
+                            <Posts posts={posts.slice(12)} />
+                        </>
+                    )}
                     <Pagination currentPage={currentPage} numPages={numPages} base={base} />
                 </div>
             </PostLayout>

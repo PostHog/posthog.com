@@ -51,8 +51,12 @@ const BlogCategory = ({
                     />
                     <NewsletterForm />
                     <Posts posts={posts.slice(4, 12)} />
-                    <CommunityCTA />
-                    <Posts posts={posts.slice(12)} />
+                    {posts.length > 12 && (
+                        <>
+                            <CommunityCTA />
+                            <Posts posts={posts.slice(12)} />
+                        </>
+                    )}
                     <Pagination currentPage={currentPage} numPages={numPages} base={base} />
                 </div>
             </PostLayout>
@@ -65,7 +69,7 @@ export default BlogCategory
 export const pageQuery = graphql`
     query ($skip: Int!, $limit: Int!, $category: String) {
         allPostsRecent: allMdx(
-            limit: $limit
+            limit: 13
             skip: $skip
             sort: { order: DESC, fields: [frontmatter___date] }
             filter: { isFuture: { eq: false }, frontmatter: { category: { eq: $category }, date: { ne: null } } }
