@@ -43,7 +43,7 @@ We do [360 feedback dinners](../handbook/people/feedback) at offsites, but this 
 * What do I do that I am not better at than others?
 * What do I do that I am actually worse than others?
 
-Secondly, Tim and I love going for an inexpensive curry every couple of weeks when we work together casually in person (we're all remote, but we do make an effort to hang out). This means specifically an unpretentious but tasty curry somewhere. This happenns frankly because my wife isn't a huge fan of them, so nearly every time we meet, I jump at the chance and I _think_ I've converted Tim. During one of these, we talked through the feedback we'd received. It's a good reminder to hang out and not make every interaction 'zoomformulaic'.
+Secondly, Tim and I love going for an inexpensive curry every couple of weeks when we work together casually in person (we're all remote, but we do make an effort to hang out). This means specifically an unpretentious but tasty curry somewhere. This happens frankly because my wife isn't a huge fan of them, so nearly every time we meet, I jump at the chance and I _think_ I've converted Tim. During one of these, we talked through the feedback we'd received. It's a good reminder to hang out and not make every interaction 'zoomformulaic'.
 
 ### I was prioritizing badly, but Tim held me accountable and we fixed that too
 
