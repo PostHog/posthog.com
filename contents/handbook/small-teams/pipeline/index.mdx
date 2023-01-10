@@ -17,19 +17,16 @@ hideAnchor: false
 
 ## Responsibilities
 
-Team Ingestion owns our ingestion pipeline end-to-end. That means we own the Django server ingestion API, the ingestion (plugin) server, as well as our client libraries, Kafka and ClickHouse setup, where it pertains to event ingestion.
+Team Ingestion owns our ingestion pipeline end-to-end. That means we own:
+- Django server ingestion API
+- Ingestion app server
+- Exports and webhooks
+- Transformation apps
+- Client libraries, where it pertains to event ingestion
+- Kafka and ClickHouse setup, where it pertains to event ingestion
+- Async migrations
 
 Our work generally falls into one of three categories:
-
-### Scaffolding to support core PostHog features
-
-In order to achieve company goals or introduce new features (often owned by other teams), changes to our ingestion pipeline may be required.
-
-An example of this is the work to remodel our events to store person and group data, which is essential to ensuring we can provide fast querying for users.
-
-While querying data is not owned by this team, the change to enable faster queries inevitably requires a large restructuring of our events pipeline, and thus we are owners of that component of the project.
-
-In short, a core responsibility of our team is to enable other teams to be successful.
 
 ### Ingestion robustness
 
@@ -43,14 +40,17 @@ To do so, we must ensure:
 
 Thus, it is our responsibility to consistently revise our past decisions and improve processes where we see fit, from client library behaviors to ClickHouse schemas.
 
-### Extensibility
+### Scaffolding to support core PostHog features
 
-Our ingestion pipeline is powerful because it allows for plugins to be built on top of it, to do things like transform and export events, and well as import data from third parties.
+In order to achieve company goals or introduce new features (often owned by other teams), changes to our ingestion pipeline may be required.
 
-It is our responsibility to ensure that the extensibility of the pipeline does not interfere with ingestion robustness, as well as:
+An example of this is the work to remodel our events to store person and group data, which is essential to ensuring we can provide fast querying for users. While querying data is not owned by this team, the change to enable faster queries requires a large restructuring of our events pipeline, and thus we are owners of that component of the project.
 
-- Build new features to support plugin developers in building more powerful tools
-- Ensure a delightful experience for plugin developers
+In short, a core responsibility of our team is to enable other teams to be successful.
+
+### Pipelines
+
+We're building the most extensible and integrated data pipeline, which we treat as a separate product just like product analytics and feature flags, for example. The PostHog data warehouse is one destination, and the most important, but we care about getting data into all the places where it is valuable.
 
 ## How do we work?
 
