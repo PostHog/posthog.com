@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['yakko-majuri']
 date: 2020-11-04
-featuredImage: ../images/tutorials/banners/retention.png
+featuredImage: ../images/tutorials/banners/tutorial-15.png
 tags: ['retention', 'stickiness']
 ---
 

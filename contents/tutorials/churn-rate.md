@@ -4,12 +4,12 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-10-10
-featuredImage: ../images/tutorials/banners/churn-rate.png
+featuredImage: ../images/tutorials/banners/tutorial-15.png
 tags: ['insights', 'trends', 'lifecycle', 'cohorts', 'actions']
 ---
 
-- **Level:** Easy 🦔
-- **Estimated reading time:** 6 minutes ☕️
+- **Level:** Easy 🦔
+- **Estimated reading time:** 6 minutes ☕️
 
 The word churn once reminded people of fresh butter, now it brings thoughts of lost users and revenue.
 

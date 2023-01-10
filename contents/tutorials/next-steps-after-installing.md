@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-11-15
-featuredImage: ../images/tutorials/banners/next-steps-after-installing.png
+featuredImage: ../images/tutorials/banners/tutorial-4.png
 tags: ["configuration", "events", "dashboards", "team collaboration", "notifications and alerts", "experimentation"]
 ---
 
