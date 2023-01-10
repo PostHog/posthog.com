@@ -1,5 +1,5 @@
 ---
-date: 2023-01-03
+date: 2023-01-10
 title: "Introduction: ClickHouse vs Druid"
 rootPage: /blog
 sidebar: Blog
@@ -11,19 +11,19 @@ featuredImageType: full
 categories: ["Engineering", "Guides"]
 ---
 
-Contrary to what the names might suggest, ClickHouse isn’t an influencer house and Druid isn’t a Star Wars character – they are both OLAP databases designed to store lots of data. 
+Contrary to what the names might suggest, ClickHouse isn’t an TikTok influencer house and Druid isn’t (just) a D&D character class – they're both OLAP databases designed to store lots of data. 
 
-OLAP, unlike OLTP databases like mySQL, store data in a columnar format, ripe for aggregations. But while ClickHouse and Druid solve a fundamentally similar problem, they do so via dramatically different approaches. 
+OLAP, unlike OLTP databases like mySQL (see below), store data in a columnar format, ripe for aggregations. But, while ClickHouse and Druid solve a fundamentally similar problem, they do so via dramatically different approaches. 
 
 ![OLAP vs OLTP](../images/blog/clickhouse-vs-postgres/rows-vs-columns.png)  
 
 Business intelligence tools, stock market trading books, and apps with lots of charts and graphs are all examples of products that could benefit from OLAP databases. 
 
-At PostHog, we use ClickHouse to power our analytics warehouse – lovingly dubbed our Events Mansion. ClickHouse was a saving grace when our Postgres set-up was crumbling to a crash given our growth. 
+At PostHog, we use ClickHouse to power our analytics warehouse – lovingly dubbed our Events Mansion. ClickHouse was a saving grace when our Postgres set-up was grinding to a halt due to our growth. 
 
 But what about Apache Druid? An accomplished database in its own right, Druid approaches common analytical problems very differently. 
 
-In this article, we’ll explore exactly how Druid differs from ClickHouse, including how they work, who uses which and why.
+In this article, we’ll explore those differences, including how they work, who uses which and why.
 
 > Want to know more about OLAP (column-based) vs OLTP (row-based) databases? Read our guide [comparing ClickHouse (OLAP) and PostgreSQL](/blog/clickhouse-vs-postgres), the most popular open-source OLTP database.
 
@@ -33,9 +33,9 @@ Have you ever been asked if you'd prefer to fight a hundred duck-sized horses or
 
 Well, Druid is the former and ClickHouse is the latter. If that analogy doesn't work, consider this instead:
 
-- ClickHouse is like a lakefront mansion. You upkeep the house, polish the interior, and only grow it with endless expanding wings. 
+- ClickHouse is like a lakefront mansion. You keep the house, polish the interior, and extend it with extra wings when the need arises. 
 
-- Druid is a master-plan community like [The Villages](https://en.wikipedia.org/wiki/The_Villages,_Florida) where each house is interconnected by roads and (in some cases) a shared canal because... canals are nice? 
+- Druid is a master-plan community like [The Villages](https://en.wikipedia.org/wiki/The_Villages,_Florida) where each house is interconnected by roads and (in some cases) a shared canal because... canals are nice?
 
 ClickHouse is about keeping every component of the database tightly woven via a single binary executable; Druid’s architecture is modular, configurable, and consequently more complicated. 
 
@@ -43,13 +43,17 @@ ClickHouse is about keeping every component of the database tightly woven via a 
 
 ClickHouse's cornerstone principle is that ClickHouse should do the work for you. ClickHouse automatically ingests, compresses, and creates [materialized views of data](/blog/clickhouse-materialized-columns) with minimal set-up required from the user.
 
-What is a materialized view? A materialized view, unlike a normal view, is a separate table of data generated at a specific point of time from the base tables. When you query a normal view, the view is re-queried before being queried from. 
+Here's what that looks like in practice:
+
+![ClickHouse architecture diagram](../images/blog/clickhouse-vs-druid/clickhouse-architecture.png)  
+
+What is a materialized view? A materialized view, unlike a normal view, is a separate table of data generated at a specific point of time from the base tables. When you query a normal view, the view is re-queried before being queried from.
 
 While Postgres, a row-based OLTP database, supports materialized views, they aren’t good for dynamic data since refreshing them is expensive. ClickHouse uniquely can efficiently update materialized views upon new data within a delay threshold. 
 
 Granted, dynamic materialized views aren’t exactly an architectural element in the same way RAM, CPU, and Disc are. But they impact how architecture is used. 
 
-Most databases achieve speed by caching calculated results after an initial slow query. ClickHouse’s materialized views do the heavy-lifting ahead of time, and constantly are updating so that they’re never ***too*** out-of-date. For a lot of data-driven applications, this is a happy medium. 
+Most databases achieve speed by caching calculated results after an initial slow query. ClickHouse’s materialized views do the heavy-lifting ahead of time, and are constantly updating so that they’re never ***too*** out-of-date. This is a happy medium for a lot of data-driven applications, and contributes to ClickHouse's reputation for extremely fast query performance on large datasets.
 
 - **Apache Zookeeper:** ClickHouse does admit a flaw in its single executable promise. If the database is expected to have replicas, it requires Apache Zookeeper to manage the redundancies. However, this is a rather thin layer atop of a ClickHouse cluster, and something that most databases require.
 
@@ -61,9 +65,9 @@ Most databases achieve speed by caching calculated results after an initial slow
 
 Druid is all about modularity. Druid separates the Query Nodes, Data Nodes, and Storage Nodes into three separate machines. Does that mean there is extra latency? By the Druid’s team’s own concession, an unapologetic yes. Druid’s argument is that intra-database latency is justifiable for the customizable and precision benefits of its approach. 
 
-Let’s take a look at a Druid set-up: 
+Let’s take a look at a Druid setup: 
 
-![OLAP vs OLTP](../images/blog/clickhouse-vs-druid/druid-architecture.png)  
+![Druid architecture diagram](../images/blog/clickhouse-vs-druid/druid-architecture.png)  
 
 Druid is built for massive applications with unique data streaming needs. For instance, imagine an application that needs to take the last stock trade into account before returning a value. 
 
@@ -111,30 +115,30 @@ Of course, you can utilize ClickHouse even with these constraints if you utilize
 - Simplified internal architecture
 - Materialized views
 
-Speaking from experience, if you run a massive website analytics operation like ours, you should use ClickHouse 😉. 
+Speaking from experience, if you run a billion-event [product analytics platform](/product) like ours, you should use ClickHouse 😉. 
 
 ### When to use Druid
 
 Druid is an ideal solution for teams that require a modular design with precision. If you need to fetch data immediately after the data was streamed, Druid is the ideal solution. However, there are some key caveats that you need to be aware of: 
 
-- Druid is more complex to setup and maintain
+- Druid is more complex to set up and maintain
 - Druid is more expensive as it requires more machines and systems
 
 Additionally, Druid is the best solution for applications that need real-time data reporting with precision. For instance, a stock market order-book app may utilize Druid because users expect accurate and aggregate financial data in real-time. 
 
 ### Which companies use ClickHouse and why?
 
-- **Posthog:** We [switched from Postgres to Clickhouse](/blog/how-we-turned-clickhouse-into-our-eventmansion) as we scaled and never looked back. By utilizing ClickHouse’s dedicated engines and materialized views, we are able to efficiently return event data to our users with minimal overhead and support billion-event scale companies.
+- **PostHog:** We [switched from Postgres to Clickhouse](/blog/how-we-turned-clickhouse-into-our-eventmansion) as we scaled and never looked back. By utilizing ClickHouse’s dedicated engines and materialized views, we are able to efficiently return event data to our users with minimal overhead and support billion-event scale companies.
 
 - **Ebay:** Ebay [switched](https://www.youtube.com/watch?v=KI0AqpmcSOk) from Druid to ClickHouse with Apache Zookeeper to dramatically reduce its server costs and simplify its backend. Originally, Ebay’s Druid setup was sprawling and complicated to maintain, racking up serious engineering costs. After switching to ClickHouse, Ebay’s overall infrastructure was reduced by a whopping 90%.
 
-- **Uber:** Uber [moved](https://www.uber.com/blog/logging/) its logging platform to ClickHouse, improving data compression and halving its infrastructure costs. Given that Uber needs to log a lot of geographical information during car rides, ClickHouse was the apt solution for streaming data to.
+- **Uber:** Uber [moved](https://www.uber.com/blog/logging/) its logging platform to ClickHouse, improving data compression and halving its infrastructure costs. Given that Uber needs to log a lot of geographical information during car rides, ClickHouse was the apt solution for streaming data.
 
 ### Which companies use Druid and why?
 
 - **Airbnb:*** Druid enables Airbnb to analyze both historical and real-time metrics, returning data for Airbnb hosts quickly and interactively. Because Airbnb processes hundreds of transactions every minute, Druid enables them to return accurate pricing shifts efficiently.
 
-- **Lyft:** Probably the best example on how Druid and ClickHouse **could** be used interchangeably with additional architecture is Uber’s cousin’s choice in Druid. Lyft utilize Druid, with some [additional set-up](https://www.youtube.com/watch?v=ovZ9iAkQllo), to achieve similar needs that Uber has.
+- **Lyft:** Probably the best example on how Druid and ClickHouse **could** be used interchangeably with additional architecture is Uber’s cousin’s choice in Druid. Lyft utilizes Druid, with some [additional set-up](https://www.youtube.com/watch?v=ovZ9iAkQllo), to achieve similar needs that Uber has.
 
 - **Rovio:** The makers of everyone’s favorite angry ducklings game, Rovio uses Druid to chop and pivot time-series dashboards filled with data from their millions of players.
 
@@ -149,14 +153,14 @@ While both offer enormous advantages over traditional databases for columnar dat
 **Pros**
 
 - Low latency
-- Simple to set-up, can operate out of a single instance
+- Simple to set up, can operate out of a single instance
 - Materialized Views expedite aggregations at the data level
+- Extremely fast query performance on large datasets
 
 **Cons**
 
 - Expects users to batch data
 - Cannot return data immediately after insert
-
 
 ### Druid
 
@@ -168,10 +172,16 @@ While both offer enormous advantages over traditional databases for columnar dat
 
 **Cons**
 
-- Expensive set-up
+- Expensive setup
 - Harder to maintain
 - More latency due to multiple layers
 
 ### Further reading
 
-- 
+- [Altinity's 2021 analysis](https://altinity.com/blog/clickhouse-nails-cost-efficiency-challenge-against-druid-rockset) comparing the performance and cost efficiency of ClickHouse, Druid and Rockset. Altinity, maintains a useful [database of ClickHouse benchmarks](https://altinity.com/blog/tag/benchmark/) in a variety of use cases. 
+
+- ClickHouse's CTO, Alexey Milovidov, [2022 talk "Building for Fast"](https://www.youtube.com/watch?v=CAS2otEoerM).
+
+- [How we turned ClickHouse into our event mansion](/blog/how-we-turned-clickhouse-into-our-eventmansion) by our own James Greenhill explores in more depth why we chose ClickHouse for PostHog. We also maintain an internal [ClickHouse manual](/handbook/engineering/clickhouse).  
+
+
