@@ -13,6 +13,8 @@ featuredImageType: full
 
 2022 was an exceptionally good year for PostHog. Here's my personal perspective on how it went.
 
+![Our 2022 revenue growth over time, which increases by 6 times](../images/revenue-end-2022.jpg)
+
 ## How it went
 
 ### We grew very fast _and_ are much more durable
@@ -21,7 +23,7 @@ featuredImageType: full
 - We hit a 2 month [CAC payback period](https://www.thesaascfo.com/cac-payback-period/), salaries included. Around [12 months](https://www.geckoboard.com/best-practice/kpi-examples/cac-payback-period/#:~:text=The%20general%20benchmark%20for%20startups,have%20greater%20access%20to%20capital.) is seen as exceptional.
 - We are comfortably default alive and will likely be profitable in 2023
 
-We still have work to do. We're working on gross margin - we've done close to zero cost optimization on our hosting so far, and we want to hit a higher absolute level of revenue (around $10M ARR) before we fundraise again.
+We still have work to do. We're working on gross margin - we've done close to zero cost optimization on our hosting so far, and we want to hit a higher absolute level of revenue (around $10M ARR) without significantly spending more before we fundraise again.
 
 ## We let people go when we needed to 
 
@@ -29,13 +31,15 @@ We remained disciplined and let people go when we needed to. This helps us retai
 
 ### Tim and I wound up in the wrong roles, but we spotted this and fixed them
 
-Tim and I realized we were managing the wrong teams because the game had changed. I was good at early sales, but he's the right person to help us scale things there.
+Tim and I realized we were managing the wrong teams because the game had changed. I was good at early sales, but we've moved on from that and now he's the right person to help us scale things there.
 
-Likewise in product, we want to go from good to great and that'll take more design skill which I can help with. We swapped a bunch of priorities around with each other, and - so far - it feels much better.
+Likewise in product, we want to go from good to great and that'll take more design attention which I can help with.
 
-There are two reasons we spotted this - (1) feedback from our teams and (2) a love / tradition of going for "salt of the earth curries".
+Tim and I therefore swapped a bunch of priorities around with each other, and - so far - it feels much better.
 
-We do [360 feedback dinners](../handbook/people/feedback) at offsites, but this feedback came from asking these questions about each other on the exec team in our 1:1s:
+There are two reasons we spotted this - the combination of (1) feedback from our teams and (2) a love / tradition of going for "salt of the earth curries".
+
+We regularly do [360 feedback dinners](../handbook/people/feedback) at offsites, but this feedback came from asking these questions about each other on the exec team in our 1:1s, randomly:
 
 * What do I do that you experience as world-class?
 * What do I do where I appear to be experiencing fun, peace or joy (if different from above)
@@ -43,15 +47,15 @@ We do [360 feedback dinners](../handbook/people/feedback) at offsites, but this 
 * What do I do that I am not better at than others?
 * What do I do that I am actually worse than others?
 
-Secondly, Tim and I love going for an inexpensive curry every couple of weeks when we work together casually in person (we're all remote, but we do make an effort to hang out). This means specifically an unpretentious but tasty curry somewhere. This happenns frankly because my wife isn't a huge fan of them, so nearly every time we meet, I jump at the chance and I _think_ I've converted Tim. During one of these, we talked through the feedback we'd received. It's a good reminder to hang out and not make every interaction 'zoomformulaic'.
+Secondly, Tim and I love going for a curry every couple of weeks when we work together in person (we're all remote, but we do make an effort to hang out). This means specifically an unpretentious but tasty curry somewhere. This happens frankly because my wife isn't a huge fan of them, so nearly every time we meet, I jump at the chance and I _think_ I've converted Tim. During one of these, we talked through the feedback we'd received. It's a good reminder to hang out and not make every interaction 'zoomformulaic'.
 
 ### I was prioritizing badly, but Tim held me accountable and we fixed that too
 
-At one point, I was getting the individual contributor work done, but not prioritizing things like company vision/OKRs. Tim suggested I hire [Kendal](../handbook/company/team#kendal-hall-executive-assistant) (Exec Assistant) to help solve this. I felt really silly hiring someone to manage my time and to keep me organised, but the reality was - this means I can give more value to the company, which helps everyone. Having a nudge from someone else was what I needed to commit.
+At one point, I was getting the individual contributor work done, but not prioritizing things like company vision/OKRs. Knowing when to do this is a real skill - too much of it and you're setting a silly culture of planning over trying stuff out. Too little, and you don't have a clear direction. Tim suggested I hire [Kendal](../handbook/company/team#kendal-hall-executive-assistant) (Exec Assistant) to help solve this. I felt really silly hiring someone to manage my time and to keep me organised, but the reality is that I can now give more value to the company, which helps everyone. Having a nudge from someone else was what I needed to commit.
 
 ### A crappy family situation got much better
 
-My (then) 1 year old daughter got diagnosed with bilateral retinoblastoma (a type of cancer) in 2021. She lost an eye as a result, has her vision permanently damaged in the other, and had to go through chemo. We were delighted to wrap up treatment in the Spring 2022. We were lucky that it went perfectly... she was cured, and now we're in regular monitoring mode. When she got diagnosed, I chose to focus on revenue over fundraising (instead of trying to both whilst taking care of her), and now a year and a half on, I'm very glad that's what we picked.
+My (then) 1 year old daughter got diagnosed with bilateral retinoblastoma (a type of cancer) in 2021. She lost an eye as a result, has her vision permanently damaged in the other, and had to go through chemo. We were delighted to wrap up treatment in the Spring 2022. We were lucky that it went perfectly... she was "cured" (as far as you can be of cancer), and now we're in regular monitoring mode. When she got diagnosed, I chose to focus on revenue over fundraising (instead of trying to both whilst taking care of her), and now a year and a half on, I'm very glad that's what we picked.
 
 ### We are shipping stuff
 
@@ -71,7 +75,7 @@ If we _had_ hired a sales team, I guarantee we'd be focusing on how to send more
 
 ### We can take pride in not focusing on number of staff / investors
 
-Lots of companies raised very hyped funding rounds in 2021 - we didn't. We are confident we made the right call not to do this, but we felt that we were going against the grain. It was really cool to talk about this stuff openly with our team, and to see how quickly we started taking pride in building a real company.
+Lots of companies raised very hyped funding rounds in 2021 - we had demand, but ultimately chose not to move forward. We are confident we made the right call not to do this, but we felt at the time that we were going against the grain. It was really cool to talk about this stuff openly with our team, and to see how quickly we started taking pride in building a real company.
 
 ### Doing more of what works in many parts of the company has been great
 
@@ -81,9 +85,11 @@ In Go To Market, it's always tempting to explore new channels. However, in 2022,
 
 We get around twice as many community support questions now as we did last year. We've not tracked it, but it feels like we're a lot more rushed as a result when trying to get to everything.
 
-We've implemented multiple things to try to improve this - Squeak, 
+We've implemented multiple things to try to improve this - [Squeak!](https://github.com/PostHog/squeak), a backup infra hero, generally prioritizing cloud (since it's a better experience if possible) (and launching [Cloud EU](posthog-cloud-eu) to help with GDPR compliance), and hiring Paul H to work on our docs full time. 
 
-### Staying on top of i/c work as a cofounder with 40 people is hard
+These improvements caused a 75% drop in the likelihood of each user to need support, but that was outweighed by how much growth we had. There are therefore more things to come here - this is an ongoing challenge as we keep scaling. 
+
+### Staying on top of i/c work as a cofounder with 40 people is hard
 
 Tim and I have both felt this at different times. We think it's very important we both do individual work - simply, it's more fun to work _alongside_ someone, and that's only the case if we do some actual work. Longer term, we want a culture that values individual contribution, so we should do this ourselves.
 
@@ -96,5 +102,6 @@ However, it is tough pulling this off whilst making sure the entire company runs
 * we build a real machine around certain things that are working - like content and customer success, so we can get more done and/or to a higher standard without more people.
 * we've a PostHog 3000 project to pull off. It'll affect multiple teams, so managing to do that without a coordination mess happening will prevent us from being slow at shipping features.
 * keeping on top of our infra/ingestion. We have a ridiculous number of events coming in, we must stay up and reliable. We've hired a lot here so far, but we've a huge surface area to manage.
+* we should get more marketing benefit from all the cool stuff we ship. Lots of ideas about doing more with our [roadmap](../roadmap) here
 
 _Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
