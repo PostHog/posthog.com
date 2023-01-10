@@ -57,7 +57,11 @@ export const pageQuery = graphql`
             limit: $limit
             skip: $skip
             sort: { order: DESC, fields: [frontmatter___date] }
-            filter: { isFuture: { ne: true }, fields: { slug: { regex: "/^/blog/" } } }
+            filter: {
+                isFuture: { ne: true }
+                frontmatter: { date: { ne: null } }
+                fields: { slug: { regex: "/^/blog/" } }
+            }
         ) {
             edges {
                 node {

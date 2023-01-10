@@ -142,7 +142,13 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     }
                 }
             }
-            blogPosts: allMdx(filter: { isFuture: { eq: false }, fields: { slug: { regex: "/^/blog/" } } }) {
+            blogPosts: allMdx(
+                filter: {
+                    isFuture: { eq: false }
+                    frontmatter: { date: { ne: null } }
+                    fields: { slug: { regex: "/^/blog/" } }
+                }
+            ) {
                 totalCount
                 nodes {
                     id
@@ -221,7 +227,11 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             }
             categories: allMdx(
                 sort: { order: DESC, fields: [frontmatter___date] }
-                filter: { isFuture: { eq: false }, frontmatter: { rootPage: { eq: "/blog" }, date: { ne: null } } }
+                filter: {
+                    isFuture: { eq: false }
+                    fields: { slug: { regex: "/^/blog/" } }
+                    frontmatter: { date: { ne: null } }
+                }
             ) {
                 categories: group(field: frontmatter___category) {
                     category: fieldValue

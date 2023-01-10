@@ -68,8 +68,9 @@ export const pageQuery = graphql`
             limit: $limit
             skip: $skip
             sort: { order: DESC, fields: [frontmatter___date] }
-            filter: { isFuture: { eq: false }, frontmatter: { category: { eq: $category } } }
+            filter: { isFuture: { eq: false }, frontmatter: { category: { eq: $category }, date: { ne: null } } }
         ) {
+            totalCount
             edges {
                 node {
                     ...BlogFragment
@@ -80,8 +81,9 @@ export const pageQuery = graphql`
             limit: $limit
             skip: $skip
             sort: { order: DESC, fields: [fields___pageViews] }
-            filter: { isFuture: { eq: false }, frontmatter: { category: { eq: $category } } }
+            filter: { isFuture: { eq: false }, frontmatter: { category: { eq: $category }, date: { ne: null } } }
         ) {
+            totalCount
             edges {
                 node {
                     ...BlogFragment

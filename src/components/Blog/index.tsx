@@ -3,7 +3,7 @@ import Link from 'components/Link'
 import PostLayout from 'components/PostLayout'
 import Toggle from 'components/Toggle'
 import { graphql } from 'gatsby'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import { GatsbyImage, getImage, StaticImage } from 'gatsby-plugin-image'
 import React, { useState } from 'react'
 import Layout from '../Layout'
 import { SEO } from '../seo'
@@ -45,9 +45,21 @@ export const Posts = ({ posts, title, action, titleBorder }) => {
                             className="relative active:top-[1px] active:scale-[.99] shadow-lg after:border-0 hover:after:border-1 after:border-black/25 after:rounded-md after:-inset-1.5 after:absolute"
                             key={id}
                         >
-                            <div className="relative rounded-md overflow-hidden z-10">
+                            <div className="relative rounded-md overflow-hidden z-10 h-full w-full">
                                 <Link className="text-white hover:text-white" to={slug}>
-                                    <GatsbyImage className="md:w-auto w-full" image={getImage(featuredImage)} />
+                                    {featuredImage ? (
+                                        <GatsbyImage
+                                            alt={title}
+                                            className="md:w-auto w-full"
+                                            image={getImage(featuredImage)}
+                                        />
+                                    ) : (
+                                        <StaticImage
+                                            className="md:w-auto w-full"
+                                            alt={title}
+                                            src="./images/default.jpg"
+                                        />
+                                    )}
                                     <div className="bg-gradient-to-b from-black/50 via-black/20  to-black/50 absolute inset-0 p-5 flex flex-col h-full w-full">
                                         {category && <p className="m-0 text-sm opacity-80">{category}</p>}
                                         <h3 className="text-2xl m-0 leading-7 [text-shadow:0_2px_10px_rgba(0,0,0,0.4)] line-clamp-3">
