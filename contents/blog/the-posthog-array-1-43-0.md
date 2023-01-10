@@ -34,13 +34,19 @@ Any notes about async migrations, etc. go here.
 
 @Karl to add a sentence or two here. 
 
-### New: Item 3
+### New: Feature flag variant overrides
+Ever created a multivariate feature flag, and wanted to show the control variant to specific users? Or, maybe you found a new cohort you'd like to add to the test variant? Now you can!
 
-@Karl to add a sentence or two here. 
+1.43.0 adds the ability to  manually override variants via the flag edit screen. It's great for ensuring users get the experience you want, but is also useful for testing as it enables you to deterministically choose a variant, and test across client-side and server-side feature flags.
 
-### Improved: Item 4
+### Improved: More experiment variants and improved flow
+A regular complaint used to be that, if you made a mistake while making an experiment, you couldn't go back to fix. Well, we fixed that so you can now:
 
-@Karl or Ben to add a sentence or two here. 
+1. Restart a running experiment while keeping everything the same and using the same feature flag key.
+2. Change the main metric on a running experiment.
+3. Change the secondary metrics on a running experiment.
+
+Finally, as a bonus, you can now have up to nine variants in an experiment, instead of the usual three!
 
 ### Apps: Item 5
 
