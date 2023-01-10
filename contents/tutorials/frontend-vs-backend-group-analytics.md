@@ -43,7 +43,7 @@ posthog.group('company', 'posthog', {
 })
 ```
 
-Because sessions connect users and groups, you need to call `posthog.reset()` when a user changes (logs out) to ensure events aren’t captured as belonging to that user and group. If you want to connect the user back to a group, you’ll need to call `posthog.group()` again.
+Because sessions connect users and groups, you need to call `posthog.reset()` when a user changes (logs out) to ensure events aren’t captured as belonging to that user and group. You could also call `posthog.resetGroup()` to only reset the group, not the user. If you want to connect the user back to a group, you’ll need to call `posthog.group()` again.
 
 ## Backend group analytics implementation
 
@@ -89,6 +89,8 @@ analytics.track('login', {
 ```
 
 </MultiLanguage>
+
+> The API level property is `$groups` and is within the `properties` object. Libraries transform `groups` to this for you.
 
 You also can’t update the group properties from the capture call. You must use a separate `group_identify` which looks like this:
 
