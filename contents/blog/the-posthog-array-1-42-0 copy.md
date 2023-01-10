@@ -52,7 +52,7 @@ You think that's it? Not by a long shot! Version 1.43 also adds hundreds of othe
 
 - **Improvement:** 
 - **Improvement:** 
-- **Fix:** 
+- **Fix:** Webhooks for actions with null checks weren't firing correctly. [This is now fixed.](https://github.com/PostHog/posthog/issues/12893)
 - **Fix:** 
 
 View the commit log in GitHub for a full history of changes: [`release-1.42.4...release-1.43.0`](https://github.com/PostHog/posthog/compare/release-1.41.4...release-1.42.0).
