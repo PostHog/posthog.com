@@ -22,8 +22,8 @@ Any notes about async migrations, etc. go here.
 
 - [New: Item 1](#new-item-1)
 - [New: Item 2](#new-item-2)
-- [New: Item 3](#new-item-3)
-- [Improved: Item 4](#improved-item-4)
+- [New: Feature flag variant overrides](#new-feature-flag-variant-overrides)
+- [Improved: More experiment variants and improved flow](#improved-more-experiment-variants-and-improved-flow)
 - [Apps: Item 3](#apps-item-5)
 
 ### New: Item 1
