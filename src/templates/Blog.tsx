@@ -39,9 +39,9 @@ const BlogCategory = ({
                         posts={allPostsRecent.slice(0, 4)}
                     />
                     <NewsletterForm />
-                    <Posts posts={allPostsRecent.slice(4, 10)} />
+                    <Posts posts={allPostsRecent.slice(4, 12)} />
                     <CommunityCTA />
-                    <Posts posts={allPostsRecent.slice(10)} />
+                    <Posts posts={allPostsRecent.slice(12)} />
                     <Pagination currentPage={currentPage} numPages={numPages} base={base} />
                 </div>
             </PostLayout>

@@ -48,9 +48,9 @@ const BlogCategory = ({
                         action={<PostToggle checked={allPostsFilter === 'popular'} onChange={handleToggleChange} />}
                     />
                     <NewsletterForm />
-                    <Posts posts={posts.slice(4, 10)} />
+                    <Posts posts={posts.slice(4, 12)} />
                     <CommunityCTA />
-                    <Posts posts={posts.slice(10)} />
+                    <Posts posts={posts.slice(12)} />
                     <Pagination currentPage={currentPage} numPages={numPages} base={base} />
                 </div>
             </PostLayout>
