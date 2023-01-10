@@ -289,7 +289,7 @@
         { "source": "/docs/tutorials/cohorts", "destination": "/tutorials/cohorts" },
         { "source": "/docs/tutorials/deleting-data", "destination": "/tutorials/deleting-data" },
         { "source": "/docs/tutorials/event-tracking-guide", "destination": "/tutorials/event-tracking-guide" },
-        { "source": "/docs/tutorials/feature-flags", "destination": "/tutorials/feature-flags" },
+        { "source": "/docs/tutorials/feature-flags", "destination": "/manual/feature-flags" },
         { "source": "/docs/tutorials/funnels", "destination": "/tutorials/funnels" },
         {
             "source": "/docs/tutorials/how-to-embed-shared-dashboard",
@@ -629,6 +629,10 @@
         {
             "source": "/docs/integrate/client/snippet-installation",
             "destination": "/docs/integrate"
+        },
+        {
+            "source": "/tutorials/feature-flags",
+            "destination": "/manual/feature-flags"
         }
     ],
     "rewrites": [
