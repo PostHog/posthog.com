@@ -8,6 +8,7 @@ import Pagination from 'components/Pagination'
 import { NewsletterForm } from 'components/NewsletterForm'
 import { blog } from '../sidebars/sidebars.json'
 import CommunityCTA from 'components/CommunityCTA'
+import { capitalize } from 'instantsearch.js/es/lib/utils'
 
 const BlogCategory = ({
     data: {
@@ -16,15 +17,15 @@ const BlogCategory = ({
     },
     pageContext: { category, numPages, currentPage, base },
 }) => {
-    const [allPostsFilter, setAllPostsFilter] = useState<'recent' | 'popular'>('recent')
+    const [allPostsFilter, setAllPostsFilter] = useState<'latest' | 'popular'>('latest')
     const handleToggleChange = (checked: boolean) => {
-        const postsFilter = checked ? 'popular' : 'recent'
+        const postsFilter = checked ? 'popular' : 'latest'
         localStorage.setItem('postsFilter', postsFilter)
         setAllPostsFilter(postsFilter)
     }
 
     useEffect(() => {
-        setAllPostsFilter(localStorage.getItem('postsFilter') || 'recent')
+        setAllPostsFilter(localStorage.getItem('postsFilter') || 'latest')
     }, [])
 
     const posts = allPostsFilter === 'popular' ? allPostsPopular : allPostsRecent
@@ -43,6 +44,7 @@ const BlogCategory = ({
             >
                 <div className="mt-6 mb-12">
                     <Posts
+                        titleBorder
                         title={category}
                         posts={posts.slice(0, 4)}
                         action={<PostToggle checked={allPostsFilter === 'popular'} onChange={handleToggleChange} />}

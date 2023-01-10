@@ -28,9 +28,10 @@ export default function CommunityCTA() {
                 )}
             </div>
             <div className="max-w-[400px]">
-                <h3 className="m-0">Join the PostHog.com community!</h3>
+                <h3 className="m-0">Join the PostHog.com community</h3>
                 <p className="mt-2 mb-5">
-                    Ask and answer questions, engage with other PostHog users, and get early access to new features!
+                    Get help or answer questions from the PostHog community, vote on the roadmap, and get early access
+                    to new features.
                 </p>
                 <CallToAction size="sm" to="/community">
                     Check it out

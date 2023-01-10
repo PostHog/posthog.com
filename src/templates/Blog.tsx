@@ -32,7 +32,7 @@ const BlogCategory = ({
                     <Posts
                         title="All posts"
                         action={
-                            <p className="m-0 leading-none font-semibold">
+                            <p className="m-0 leading-none font-semibold text-sm opacity-50">
                                 Page {currentPage} of {numPages}
                             </p>
                         }

@@ -36,7 +36,7 @@ export default function Pagination({
 
     return (
         pagination?.items.length > 1 && (
-            <nav className="flex items-center justify-center space-x-2">
+            <nav className="flex items-center justify-center space-x-2 pb-16 sm:pb-12 lg:pb-0">
                 {pagination?.items.map(({ label, url }) => {
                     return url ? (
                         <Link

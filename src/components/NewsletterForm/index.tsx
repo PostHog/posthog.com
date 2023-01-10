@@ -166,7 +166,7 @@ export const NewsletterForm = ({
             </form>
         </div>
     ) : (
-        <div className="flex w-full h-full p-1 bg-white dark:bg-gray-accent-dark rounded-md mb-12">
+        <div className="flex w-full h-full p-1 bg-white dark:bg-gray-accent-dark rounded-md mb-6 shadow-xl">
             <div className="w-full p-4 relative z-10 flex md:flex-row flex-col md:space-x-12 md:space-y-0 space-y-2 items-center">
                 <div className="flex space-x-2 items-center">
                     <img className="w-[75px] mx-auto" src={envelope} />

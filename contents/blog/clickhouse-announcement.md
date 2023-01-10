@@ -9,7 +9,7 @@ author:
   - mo-shehu
 featuredImage: ../images/blog/clickhouse-announcement.png
 featuredImageType: full
-category: PostHog new
+category: PostHog news
 tags:
   - Product updates
   - ClickHouse
