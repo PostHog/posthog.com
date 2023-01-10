@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-10-31
-featuredImage: ../images/tutorials/banners/power-users.png
+featuredImage: ../images/tutorials/banners/tutorial-5.png
 tags: ['trends', 'cohorts', 'session recordings']
 ---
 

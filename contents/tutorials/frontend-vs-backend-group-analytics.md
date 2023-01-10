@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-11-09
-featuredImage: ../images/tutorials/banners/frontend-vs-backend-group-analytics.png
+featuredImage: ../images/tutorials/banners/tutorial-11.png
 tags: ["configuration","group analytics"]
 ---
 

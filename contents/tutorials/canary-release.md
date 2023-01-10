@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-12-19
-featuredImage: ../images/tutorials/banners/canary-release.png
+featuredImage: ../images/tutorials/banners/tutorial-2.png
 tags: ["feature flags", "persons"]
 ---
 

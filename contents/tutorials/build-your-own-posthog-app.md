@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['joe-martin']
 date: 2022-10-04
-featuredImage: ../images/tutorials/banners/how-to-build-app.png
+featuredImage: ../images/tutorials/banners/tutorial-1.png
 tags: ["apps"]
 ---
 

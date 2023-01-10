@@ -3,7 +3,7 @@ title: How to track key B2B product metrics
 sidebar: Docs
 showTitle: true
 author: ['yakko-majuri']
-featuredImage: ../images/tutorials/banners/b2b.png
+featuredImage: ../images/tutorials/banners/tutorial-4.png
 tags: ['feature flags', 'trends', 'insights']
 date: 2020-11-17
 ---

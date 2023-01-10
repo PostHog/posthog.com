@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-12-15
-featuredImage: ../images/tutorials/banners/django-analytics.png
+featuredImage: ../images/tutorials/banners/django.png
 tags: ["configuration", "feature flags", "persons", "events"]
 ---
 
