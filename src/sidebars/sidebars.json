@@ -408,6 +408,10 @@
                         {
                             "name": "Jobs",
                             "url": "/handbook/engineering/posthog-com/jobs"
+                        },
+                        {
+                            "name": "Roadmap",
+                            "url": "/handbook/engineering/posthog-com/roadmap"
                         }
                     ]
                 },
@@ -965,7 +969,7 @@
                     "url": "/docs/integrate/badge"
                 },
                 {
-                    "name": "Browser Extensions",
+                    "name": "Browser extensions",
                     "url": "/docs/integrate/browser-extension"
                 },
                 {
@@ -1115,7 +1119,7 @@
             ]
         },
         {
-            "name": "Migrate",
+            "name": "Migrate & export",
             "url": "",
             "children": [
                 {
