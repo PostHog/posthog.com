@@ -1,6 +1,6 @@
 ---
 date: 2023-01-16
-title: "Array 1.43.0: HIGHLIGHTS"
+title: "Array 1.43.0: Massive performance improvements!"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -21,16 +21,16 @@ Any notes about async migrations, etc. go here.
 **Release highlights:**
 
 - [New: Performance improvements](#new-performance-improvements)
-- [New: Item 2](#new-item-2)
+- [New: Better insight searching](#new-better-insight-searching)
 - [New: Feature flag variant overrides](#new-feature-flag-variant-overrides)
 - [Improved: More experiment variants and improved flow](#improved-more-experiment-variants-and-improved-flow)
-- [Apps: Item 3](#apps-item-5)
+- [Improved: Query cancelling improvements](#improved-query-cancelling-improvements)
 
 ### New: Performance improvements
 
 @Karl to add a sentence or two here. 
 
-### New: Improved insight searching
+### New: Better insight searching
 We don't just want searching for insights to be functional. We want it to be a world-class, joy-sparking event! So, we've updated search to include the description field and any tags which have been applied!
 
 This sounds like a small change, but it makes a massive difference for teams that organize data well and generate a lot of insights!
@@ -48,6 +48,11 @@ A regular complaint used to be that, if you made a mistake while making an exper
 3. Change the secondary metrics on a running experiment.
 
 Finally, as a bonus, you can now have up to nine variants in an experiment, instead of the usual three!
+
+### Improved: Query cancelling improvements
+PostHog already had some cancellation logic that abandoned running queries if filters were changed, but what if the user just went and did something else? Then we'd leave a query running in ClickHouse, slowing everything down. 
+
+Until now! 1.43.0 adds calls into the dashboard and insight logic when an insight is abandoned, attempting to cancel the query. The benefit? Less resource hogging, faster queries for all!
 
 ### Other improvements & fixes
 
