@@ -67,5 +67,5 @@ Canary releases ensures higher quality features get shipped leading to a better 
 ## Further reading
 
 - [How to run Experiments without feature flags](/tutorials/experiments)
-- [How to safely roll out new features](/tutorials/feature-flags)
+- [Setting up and using feature flags](/manual/feature-flags)
 - [Setting up Django analytics, feature flags, and more with PostHog](/tutorials/django-analytics)
