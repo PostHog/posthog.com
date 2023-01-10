@@ -20,7 +20,7 @@ export const NewsletterForm = ({
     const classList = mergeClassList('w-full p-4 relative z-10 text-center', className)
 
     return sidebar ? (
-        <div className="flex w-full h-full p-1 bg-white dark:bg-gray-accent-dark rounded-md">
+        <div className="flex w-full h-full p-1 bg-white dark:bg-gray-accent-dark rounded-md shadow-xl">
             <div className={classList}>
                 <div className="flex flex-col">
                     <img className="w-[75px] mx-auto" src={envelope} />

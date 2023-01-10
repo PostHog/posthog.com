@@ -40,8 +40,10 @@ export default function Pagination({
                 {pagination?.items.map(({ label, url }) => {
                     return url ? (
                         <Link
-                            className={`w-[35px] h-[35px] bg-white dark:bg-gray-accent-dark rounded-sm p-1 flex items-center justify-center relative active:top-[0.5px] active:scale-[.98] shadow-sm font-bold ${
-                                label === currentPage ? 'border border-gray-accent-dark dark:border-white/80' : ''
+                            className={`w-[35px] h-[35px] bg-white dark:bg-gray-accent-dark rounded-sm p-1 flex items-center justify-center relative hover:top-[-.5px] active:top-[.5px] active:scale-[.98] shadow-sm font-bold ${
+                                label === currentPage
+                                    ? 'bg-transparent text-primary dark:text-primary-dark shadow-none'
+                                    : ''
                             }`}
                             to={url}
                         >

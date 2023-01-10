@@ -34,7 +34,7 @@ const Intro = ({ featuredImage, title, featuredImageType, contributors }) => {
                     <GatsbyImage
                         className={`rounded-md z-0 relative ${
                             featuredImageType === 'full'
-                                ? 'before:h-1/2 before:left-0 before:right-0 before:bottom-0 before:z-[1] before:absolute before:bg-gradient-to-t before:from-black/75'
+                                ? 'before:h-3/4 before:left-0 before:right-0 before:bottom-0 before:z-[1] before:absolute before:bg-gradient-to-t before:from-black/75 [text-shadow:0_2px_10px_rgba(0,0,0,0.4)]'
                                 : ''
                         }`}
                         image={getImage(featuredImage)}
