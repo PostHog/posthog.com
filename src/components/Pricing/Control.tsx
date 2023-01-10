@@ -301,11 +301,13 @@ const Control = (): JSX.Element => {
 
                     <div className={`${gridCell} ${gridCellMid} lg:order-6`}>
                         <p className="opacity-60 mb-0 text-sm">Pricing</p>
+                        <div></div>
                         <p className="mb-0">
                             <span className="font-bold text-lg">Free</span>
                         </p>
-                        <p className="text-xs opacity-50 mb-0 font-semibold">
-                            We may charge for additional features in the future
+                        <p className="text-sm opacity-70 -mb-8 font-semibold">
+                            For boolean flags. Multivariate flags & experiments included with Product analytics + data
+                            stack
                         </p>
                     </div>
 
