@@ -20,19 +20,20 @@ Any notes about async migrations, etc. go here.
 
 **Release highlights:**
 
-- [New: Item 1](#new-item-1)
+- [New: Performance improvements](#new-performance-improvements)
 - [New: Item 2](#new-item-2)
 - [New: Feature flag variant overrides](#new-feature-flag-variant-overrides)
 - [Improved: More experiment variants and improved flow](#improved-more-experiment-variants-and-improved-flow)
 - [Apps: Item 3](#apps-item-5)
 
-### New: Item 1
+### New: Performance improvements
 
 @Karl to add a sentence or two here. 
 
-### New: Item 2
+### New: Improved insight searching
+We don't just want searching for insights to be functional. We want it to be a world-class, joy-sparking event! So, we've updated search to include the description field and any tags which have been applied!
 
-@Karl to add a sentence or two here. 
+This sounds like a small change, but it makes a massive difference for teams that organize data well and generate a lot of insights!
 
 ### New: Feature flag variant overrides
 Ever created a multivariate feature flag, and wanted to show the control variant to specific users? Or, maybe you found a new cohort you'd like to add to the test variant? Now you can!
@@ -56,7 +57,6 @@ You think that's it? Not by a long shot! Version 1.43 also adds hundreds of othe
 - **Improvement:** We made [a simpler, faster process for querying](https://github.com/PostHog/posthog/pull/13529) `my_last_viewed_at`
 - **Improvement:** We've switch to use `pnpm` instead of `yarn` to [manage dependencies](https://github.com/PostHog/posthog/pull/13190).
 - **Fix:** Webhooks for actions with null checks weren't firing correctly. [This is now fixed.](https://github.com/PostHog/posthog/issues/12893)
-- **Fix:** 
 
 View the full commit log in GitHub for a full history of changes: [`release-1.42.4...release-1.43.0`](https://github.com/PostHog/posthog/compare/release-1.42.0...release-1.43.0).
 
