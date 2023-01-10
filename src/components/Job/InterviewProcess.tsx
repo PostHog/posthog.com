@@ -16,17 +16,17 @@ const defaultInterviewProcess: IInterviewProcess[] = [
     {
         title: 'Culture interview',
         description:
-            'Our goal is to explore your motivations to join our team, learn why you’d be a great fit, and answer questions about us.',
+            'You'll meet a member of our talent team. Our goal is to explore your motivations to join our team, learn why you’d be a great fit, and answer any questions you have.',
         badge: '30-min video call',
     },
     {
         title: 'Technical interview',
-        description: `You'll meet the hiring team who will evaluate skills needed to be successful in your role. No live coding.`,
-        badge: '45 minutes, varies by role',
+        description: `You'll meet the Team Lead who will evaluate skills needed to be successful in your role. No live coding. If you are applying for an engineering role, this is usually followed by a 30min call with our CTO, Tim.`,
+        badge: '60-min video call, varies by role',
     },
     {
         title: 'PostHog SuperDay',
-        description: `You’ll join a standup, meet the team, and work on a task related to your role, offering a realistic view of what it’s like working at PostHog.`,
+        description: `You’ll have a kickoff meeting, meet the team, and work on a task related to your role, offering a realistic view of what it’s like to work at PostHog.`,
         badge: 'Paid day of work',
     },
     {
