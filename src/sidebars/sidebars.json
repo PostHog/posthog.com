@@ -338,6 +338,10 @@
                         {
                             "name": "Bug prioritization",
                             "url": "/handbook/engineering/bug-prioritization"
+                        },
+                        {
+                            "name": "Pricing principles",
+                            "url": "/handbook/engineering/feature-pricing"
                         }
                     ]
                 },
