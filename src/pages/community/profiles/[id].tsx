@@ -1,7 +1,7 @@
 import React from 'react'
 import { PageProps } from 'gatsby'
 
-import { docs } from '../../../sidebars/sidebars.json'
+import docs from 'sidebars/docs.json'
 
 import SEO from 'components/seo'
 import Layout from 'components/Layout'

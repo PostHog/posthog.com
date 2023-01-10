@@ -5,7 +5,7 @@ import { createHubSpotContact } from 'lib/utils'
 import React from 'react'
 import { FullQuestion } from 'squeak-react'
 import useSWR from 'swr'
-import { community } from '../../sidebars/sidebars.json'
+import community from 'sidebars/community.json'
 
 import type { Question } from 'components/Questions'
 import QuestionSidebar from 'components/Questions/QuestionSidebar'

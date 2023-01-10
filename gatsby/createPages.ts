@@ -3,6 +3,7 @@ import { GatsbyNode } from 'gatsby'
 import path from 'path'
 import slugify from 'slugify'
 import fetch from 'node-fetch'
+import sidebars from '../src/sidebars/index'
 const Slugger = require('github-slugger')
 const markdownLinkExtractor = require('markdown-link-extractor')
 
@@ -155,66 +156,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     }
                 }
             }
-            sidebars: file(absolutePath: { regex: "//sidebars/sidebars.json$/" }) {
-                childSidebarsJson {
-                    handbook {
-                        children {
-                            children {
-                                children {
-                                    children {
-                                        children {
-                                            name
-                                            url
-                                        }
-                                        name
-                                        url
-                                    }
-                                    name
-                                    url
-                                }
-                                name
-                                url
-                            }
-                            name
-                            url
-                        }
-                        name
-                        url
-                    }
-                    docs {
-                        children {
-                            children {
-                                children {
-                                    children {
-                                        children {
-                                            name
-                                            url
-                                        }
-                                        name
-                                        url
-                                    }
-                                    name
-                                    url
-                                }
-                                name
-                                url
-                            }
-                            name
-                            url
-                        }
-                        name
-                        url
-                    }
-                    apps {
-                        name
-                        url
-                    }
-                    product {
-                        name
-                        url
-                    }
-                }
-            }
             categories: allMdx(limit: 1000) {
                 group(field: frontmatter___categories) {
                     category: fieldValue
@@ -257,7 +198,8 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     }
 
     function createPosts(data, menu, template, breadcrumbBase, context) {
-        const menuFlattened = flattenMenu(result.data.sidebars.childSidebarsJson[menu])
+        const menuFlattened = flattenMenu(sidebars[menu])
+
         data.forEach((node) => {
             const links =
                 node?.rawBody &&
@@ -286,7 +228,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     nextURL,
                     next,
                     previous,
-                    menu: result.data.sidebars.childSidebarsJson[menu],
+                    menu: sidebars[menu],
                     breadcrumb,
                     breadcrumbBase: breadcrumbBase || menuFlattened[0],
                     tableOfContents,
@@ -368,7 +310,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             context: {
                 id: node.id,
                 tableOfContents,
-                menu: result.data.sidebars.childSidebarsJson.docs,
+                menu: sidebars.docs,
                 pageViews,
                 slug,
             },
@@ -445,7 +387,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         const { documentation } = node.frontmatter
         let next = null
         let previous = null
-        const sidebar = result.data.sidebars.childSidebarsJson.apps
+        const sidebar = sidebars.apps
         sidebar.some((item, index) => {
             if (item.url === slug) {
                 next = sidebar[index + 1]
@@ -469,7 +411,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         const { documentation } = node.frontmatter
         let next = null
         let previous = null
-        const sidebar = result.data.sidebars.childSidebarsJson.product
+        const sidebar = sidebars.product
         sidebar.some((item, index) => {
             if (item.url === slug) {
                 next = sidebar[index + 1]
