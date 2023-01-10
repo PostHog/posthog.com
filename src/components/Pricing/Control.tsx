@@ -29,6 +29,7 @@ import { NotProductIcons } from '../NotProductIcons/NotProductIcons'
 import Breakdown from './Breakdown'
 import { RenderInClient } from 'components/RenderInClient'
 import SelfHost from './SelfHost'
+import { Script } from 'gatsby'
 
 const Benefit = ({ children }) => {
     return (
@@ -546,6 +547,32 @@ const Control = (): JSX.Element => {
                     </div>
                 </div>
             </section>
+            <Script>
+                {`
+                (function (w, d, t) {
+                    w.$unthreadSettings = {
+                    baseUrl: 'https://posthog.unthread.io',
+                    widgetId: '82bbc8b4-485f-4c15-9ada-e69f0e54c6bd'
+                    };
+
+                    var u = function() {
+                    u.c(arguments);
+                    };
+                    u.q = [];
+                    u.c = function(args) {
+                    u.q.push(args);
+                    };
+                    w.$unthread = u;
+
+                    var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+                    g.src = w.$unthreadSettings.baseUrl + '/widget/js/wrapper.js';
+                    g.defer = true;
+                    g.async = true;
+                    s.parentNode.insertBefore(g, s);
+                    w.$unthread('start');
+                })(window, document, 'script');
+                `}
+            </Script>
         </Layout>
     )
 }
