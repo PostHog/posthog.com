@@ -57,8 +57,10 @@ You think that's it? Not by a long shot! Version 1.43 also adds hundreds of othe
 
 View the commit log in GitHub for a full history of changes: [`release-1.42.4...release-1.43.0`](https://github.com/PostHog/posthog/compare/release-1.41.4...release-1.42.0).
 
-## Give us your feedback
-We’re always working on improving PostHog and would love to talk to you! Please [schedule a 30 minute call](https://calendly.com/posthog-feedback) with one of our Product, Engineering, or Marketing team members to help us understand how to improve. As a thank you for your time, we'll be giving away awesome [PostHog merch](https://merch.posthog.com)!
+## Share your feedback
+We'd love to hear anything you have to say about PostHog, good or bad. As a thank you, we'll share some awesome [PostHog merch](https://merch.posthog.com).
+
+ Want to get involved? [Schedule a 30 minute call](https://calendly.com/posthog-feedback) with one of our teams to help us make PostHog even better!
 
 ## Contributions from the community
 We always welcome contributions from our community and this time we want to thank the following people this month...
@@ -66,10 +68,10 @@ We always welcome contributions from our community and this time we want to than
 - @Ismaaa for [correcting some mistakes in our onboarding documentation](https://github.com/PostHog/posthog.com/pull/1840)
 - @Johanholmerin for [fixing an issue when copying non-extensible objects](https://github.com/PostHog/posthog-js/pull/478)
 
-Want to get involved in making PostHog better? Check out our [contributing resources](/docs/contribute) to get started, or head to [our Slack group](/slack). We also have a [list of Good First Issues](https://github.com/PostHog/posthog/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) for ideas on where you can contribute!
+Want to build with us? Check out our [contributing resources](/docs/contribute) to get started. We have a [list of Good First Issues](https://github.com/PostHog/posthog/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) for ideas on where you can contribute!
 
 ## Open roles at PostHog
-Want to join us in helping make more products successful? We're currently hiring for remote candidates in the following role:
+We're currently hiring for remote candidates in the following role:
 
 - [Full Stack Engineer - Experimentation Team](/careers/full-stack-engineer-experimentation)
 
