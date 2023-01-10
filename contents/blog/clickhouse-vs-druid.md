@@ -19,11 +19,11 @@ OLAP, unlike OLTP databases like mySQL (see below), store data in a columnar for
 
 Business intelligence tools, stock market trading books, and apps with lots of charts and graphs are all examples of products that could benefit from OLAP databases. 
 
-At PostHog, we use ClickHouse to power our analytics warehouse – lovingly dubbed our Events Mansion. ClickHouse was a saving grace when our Postgres set-up was grinding to a halt due to our growth. 
+At PostHog, we use ClickHouse to power our analytics warehouse – lovingly dubbed our Events Mansion. ClickHouse was a saving grace when our Postgres setup was grinding to a halt due to our growth. 
 
 But what about Apache Druid? An accomplished database in its own right, Druid approaches common analytical problems very differently. 
 
-In this article, we’ll explore those differences, including how they work, who uses which and why.
+In this article, we’ll explore those differences, including how they work, who uses which, and why.
 
 > Want to know more about OLAP (column-based) vs OLTP (row-based) databases? Read our guide [comparing ClickHouse (OLAP) and PostgreSQL](/blog/clickhouse-vs-postgres), the most popular open-source OLTP database.
 
@@ -61,9 +61,9 @@ Most databases achieve speed by caching calculated results after an initial slow
 
 - **Dedicated Engines:** ClickHouse boasts a number of dedicated engines that utilize parallel calculations to expedite data crunching. For instance, the SummingMergeTree Engine is able to sum values throughout a database significantly faster than a linear analog. This makes Clickhouse apt for analytics products that need to do a lot of algebraic math across vast datasets.
 
-### How Druid Works
+### How Druid works
 
-Druid is all about modularity. Druid separates the Query Nodes, Data Nodes, and Storage Nodes into three separate machines. Does that mean there is extra latency? By the Druid’s team’s own concession, an unapologetic yes. Druid’s argument is that intra-database latency is justifiable for the customizable and precision benefits of its approach. 
+Druid is all about modularity. Druid separates the query, data, and storage nodes into three separate machines. Does that mean there is extra latency? By the Druid’s team’s own concession, an unapologetic yes. Druid’s argument is that intra-database latency is justifiable for the customizable and precision benefits of its approach. 
 
 Let’s take a look at a Druid setup: 
 
@@ -71,21 +71,21 @@ Let’s take a look at a Druid setup:
 
 Druid is built for massive applications with unique data streaming needs. For instance, imagine an application that needs to take the last stock trade into account before returning a value. 
 
-ClickHouse would stumble with this – ClickHouse doesn’t guarantee newly ingested data will be included in the next query result. Druid, meanwhile, does – efficiently, too, by storing the newly streamed data temporarily in the Data nodes whilst simultaneously packing and shipping it off to deep storage. 
+ClickHouse would stumble with this – ClickHouse doesn’t guarantee newly ingested data is included in the next query result. Druid, meanwhile, does – efficiently, too, by storing the newly streamed data temporarily in the data nodes whilst simultaneously packing and shipping it off to deep storage. 
 
-Remember that detailed analogy between the mansion and neighborhood? For Druid, the query nodes are the roads, the data nodes are the houses, and storage is the sprawling, shared lake. 
+Remember that analogy between the mansion and master-plan community? For Druid, the query nodes are the roads, the data nodes are the houses, and storage is the sprawling, shared lake. 
 
 #### Cattle vs Pets
 
 Druid expects you to treat its nodes like cattle, constantly removing and adding nodes at a whim. You would never do that with ClickHouse instances since each ClickHouse instance likely plays a critical role in your application’s stability. Druid, meanwhile, expects you to utilize up to ten thousand data nodes, each which could be taken offline and maintained without impacting the application.  
 
-Of course, this means that Druid requires more maintenance work. **Much** more maintenance work. Not just that, but server costs, too. Druid is built for large enterprise clients with complex needs with massive financial backing to support the architecture. ClickHouse, meanwhile, is a one-size-fits-most solution; scalable, just not in the same multidimensional, multi-structural way as Druid is.  
+Of course, this means that Druid requires more maintenance work. **Much** more maintenance work. Not just that, but server costs, too. Druid is built for large enterprise clients with complex needs and massive financial backing to support the architecture. ClickHouse, meanwhile, is a one-size-fits-most solution; scalable, just not in the same multidimensional, multi-structural way as Druid is.  
 
-#### Stream Data over Batch Data
+#### Stream data over batch data
 
-Some databases, like ClickHouse, expect data to be batched – this is because ClickHouse re-renders materialized views, and prefers to do that for a collection of data, not for every arbitrary insert. But Druid has different priorities. 
+ClickHouse, expects data to be batched – this is because ClickHouse re-renders materialized views, and prefers to do that for a collection of data, not for every arbitrary insert. But Druid has different priorities. 
 
-When stream data is ingested into Druid, it stores the stream data ephemerally at the data layer while in parallel storing the same data in the storage layer. This is similar to a cache, but notably makes data available in-memory before it was even fetched once. 
+When stream data is ingested into Druid, it stores the stream data ephemerally in the data node while in parallel storing the same data in the storage node. This is similar to a cache, but notably makes data available in-memory before it was even fetched once. 
 
 You can consider this approach somewhat similar to the philosophy behind ClickHouse’s dynamic materialized views, however, the end deliverable is different. ClickHouse is able to calculate results that utilize the entire database minus recent data (such as an all-time average) without buffering the entire database into memory. Druid, meanwhile, is able to return the **recent** data extremely fast. 
 
@@ -93,11 +93,11 @@ You can consider this approach somewhat similar to the philosophy behind ClickHo
 
 - **Prioritization (Tiering):** One of Druid’s hallmark features is prioritization. While Clickhouse strives to make every query hypothetically efficient, Druid allows users to prioritize queries. Mission-critical queries can force low-priority queries to pause / get delayed. This is an ideal feature for applications where the most expensive queries are the least required to be fast.
 
-## Uses Cases
+## Use cases
 
 While ClickHouse and Druid both strive to solve the same problem, their shortcomings and strengths actually provides a strong case for when you should and shouldn’t use each. 
 
-Let’s explore these various factors for both. 
+Let’s explore these factors for both. 
 
 ### When to use ClickHouse
 
@@ -138,7 +138,7 @@ Additionally, Druid is the best solution for applications that need real-time da
 
 - **Airbnb:*** Druid enables Airbnb to analyze both historical and real-time metrics, returning data for Airbnb hosts quickly and interactively. Because Airbnb processes hundreds of transactions every minute, Druid enables them to return accurate pricing shifts efficiently.
 
-- **Lyft:** Probably the best example on how Druid and ClickHouse **could** be used interchangeably with additional architecture is Uber’s cousin’s choice in Druid. Lyft utilizes Druid, with some [additional set-up](https://www.youtube.com/watch?v=ovZ9iAkQllo), to achieve similar needs that Uber has.
+- **Lyft:** Probably the best example on how Druid and ClickHouse **could** be used interchangeably with additional architecture is Uber’s cousin’s choice in Druid. Lyft utilizes Druid, with some [additional setup](https://www.youtube.com/watch?v=ovZ9iAkQllo), to achieve similar results as Uber has.
 
 - **Rovio:** The makers of everyone’s favorite angry ducklings game, Rovio uses Druid to chop and pivot time-series dashboards filled with data from their millions of players.
 
