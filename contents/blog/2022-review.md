@@ -1,5 +1,5 @@
 ---
-date: 2023-01-03
+date: 2023-01-10
 title: Things I learned in 2022
 rootPage: /blog
 sidebar: Blog
