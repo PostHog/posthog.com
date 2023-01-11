@@ -4,7 +4,7 @@ import Snippet from "../snippet.mdx"
 
 > This is the simplest way to get PostHog up and running on your website, and only takes a few minutes to set-up. (This method generally works best for non-technical users or for very simple websites which don't need advanced tracking.) If you're using npm, or want to instrument custom events directly from your code, visit the dedicated [JavaScript library](/docs/integrate/client/js) page.
 
-#### Add to your website
+#### Add to your website &amp; app
 
 Paste this snippet within the `<head>` tags of your website - ideally just inside the closing `</head>` tag. (You will need to do this for all pages that you wish to track.)
 
@@ -14,11 +14,11 @@ Be sure to replace `<ph_project_api_key>` and `<ph_instance_address>` with your 
 
 #### What this code does
 
-After including the snippet on your website, it will automatically start to:
+After adding the snippet to your website, it will automatically start to:
 
 -   Capture `$pageview` events when a user visits a page
 -   Track when users [click on links or buttons](/docs/user-guides/events#autocapture-event-tracking)
--   Record videos of [user sessions](/docs/user-guides/recordings) that you can play back
+-   [Record videos of user sessions](/docs/user-guides/recordings) that you can play back
 
 ### Tips
 
