@@ -53,12 +53,14 @@ type LibraryData = {
 const IntegrateOption = (props: LibraryNode | FrameworkNode) => (
     <Link
         to={props.fields.slug}
-        className="cta px-4 !py-3 shadow-none shadow-sm flex items-center space-x-3 text-gray border-r border-b border-dashed border-gray-accent-light hover:bg-gray-accent-light"
+        className="cta p-0.5 text-primary/75 hover:text-primary/90 dark:text-primary-dark/75 dark:hover:text-primary-dark/90 border-r border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark"
     >
-        <div className="w-8 h-8 rounded flex items-center justify-center">
-            <img src={props.frontmatter.icon?.publicURL} className="w-6 h-6" />
+        <div className="px-4 !py-3 flex items-center relative rounded hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark active:top-[0.5px] active:scale-[.99]">
+            <span className="w-8 h-8 rounded flex items-center justify-center mr-1.5">
+                <img src={props.frontmatter.icon?.publicURL} className="w-6 h-6" />
+            </span>
+            <h4 className="!text-base font-semibold !m-0 p-0 whitespace-nowrap">{props.frontmatter.title}</h4>
         </div>
-        <p className="text-lg font-semibold !mb-0 whitespace-nowrap text-black">{props.frontmatter.title}</p>
     </Link>
 )
 
@@ -66,9 +68,9 @@ export const Client = () => {
     const { clientLibs } = useStaticQuery<LibraryData>(query)
 
     return (
-        <div className="grid grid-cols-3 border-t border-l border-dashed border-gray-accent-light">
+        <div className="grid grid-cols-3 -mt-2 mb-6 border-t border-l border-dashed border-gray-accent-light dark:border-gray-accent-dark">
             {clientLibs.nodes.map((node) => (
-                <IntegrateOption {...node} />
+                <IntegrateOption key={node.frontmatter.title} {...node} />
             ))}
         </div>
     )
@@ -78,9 +80,9 @@ export const Server = () => {
     const { serverLibs } = useStaticQuery<LibraryData>(query)
 
     return (
-        <div className="grid grid-cols-3 border-t border-l border-dashed border-gray-accent-light">
+        <div className="grid grid-cols-3 -mt-2 mb-6 border-t border-l border-dashed border-gray-accent-light dark:border-gray-accent-dark">
             {serverLibs.nodes.map((node) => (
-                <IntegrateOption {...node} />
+                <IntegrateOption key={node.frontmatter.title} {...node} />
             ))}
         </div>
     )
@@ -90,9 +92,9 @@ export const Frameworks = () => {
     const { frameworks } = useStaticQuery<LibraryData>(query)
 
     return (
-        <div className="grid grid-cols-2 border-t border-l border-dashed border-gray-accent-light">
+        <div className="grid grid-cols-2 -mt-2 mb-6 border-t border-l border-dashed border-gray-accent-light dark:border-gray-accent-dark">
             {frameworks.nodes.map((node) => (
-                <IntegrateOption {...node} />
+                <IntegrateOption key={node.frontmatter.title} {...node} />
             ))}
         </div>
     )
