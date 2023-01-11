@@ -69,7 +69,7 @@ export default BlogCategory
 export const pageQuery = graphql`
     query ($skip: Int!, $limit: Int!, $category: String) {
         allPostsRecent: allMdx(
-            limit: 13
+            limit: $limit
             skip: $skip
             sort: { order: DESC, fields: [frontmatter___date] }
             filter: { isFuture: { eq: false }, frontmatter: { category: { eq: $category }, date: { ne: null } } }
