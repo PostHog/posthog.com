@@ -92,7 +92,7 @@ const menu = [
 const Container = ({ children }) => <div className="max-w-5xl mx-auto px-12">{children}</div>
 
 export default function Product({ data, location }) {
-    const { pageData, documentation, sidebars } = data
+    const { pageData, documentation } = data
     const {
         body,
         excerpt,
@@ -237,12 +237,6 @@ export const query = graphql`
             headings {
                 depth
                 value
-            }
-        }
-        sidebars: sidebarsJson {
-            product {
-                name
-                url
             }
         }
     }

@@ -17,7 +17,7 @@ import { MdxCodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
 import { NewsletterForm } from 'components/NewsletterForm'
 import blogMenu from 'components/Blog/blogMenu'
-import { blog } from '../sidebars/sidebars.json'
+import blog from 'sidebars/blog.json'
 import slugify from 'slugify'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />

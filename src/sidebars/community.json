@@ -1,0 +1,63 @@
+[
+    {
+        "name": "Community"
+    },
+    {
+        "name": "Dashboard",
+        "url": "/community"
+    },
+    {
+        "name": "Questions?",
+        "url": "",
+        "children": [
+            {
+                "name": "Recent questions",
+                "url": "/questions"
+            },
+            {
+                "name": "Apps",
+                "url": "/questions/topics/apps"
+            },
+            {
+                "name": "Identify users",
+                "url": "/questions/topics/identify-users"
+            },
+            {
+                "name": "Events",
+                "url": "/questions/topics/events"
+            },
+            {
+                "name": "Migration",
+                "url": "/questions/topics/migration"
+            },
+            {
+                "name": "Trends",
+                "url": "/questions/topics/trends"
+            },
+            {
+                "name": "Funnels",
+                "url": "/questions/topics/funnels"
+            },
+            {
+                "name": "Cohorts",
+                "url": "/questions/topics/cohorts"
+            }
+        ]
+    },
+    {
+        "name": "Roadmap",
+        "url": "/roadmap"
+    },
+    {
+        "name": "Changelog",
+        "url": "/roadmap/changelog"
+    },
+    {
+        "name": "Partners",
+        "url": "/partners"
+    },
+    {
+        "name": "Contributors",
+        "url": "/contributors"
+    }
+]

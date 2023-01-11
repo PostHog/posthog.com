@@ -4,7 +4,7 @@ import { SEO } from 'components/seo'
 import { StaticImage } from 'gatsby-plugin-image'
 import Link from 'components/Link'
 import PostLayout from 'components/PostLayout'
-import { handbook } from '../sidebars/sidebars.json'
+import handbook from 'sidebars/handbook.json'
 
 const otherLinks = [
     {
