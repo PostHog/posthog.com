@@ -16,7 +16,7 @@ interface BlogPostLayoutProps {
     blogDate?: string
     blogUpdatedDate?: string
     authorDetails?: AuthorsData
-    tags: { title: string; url: string }[]
+    categories: { title: string; url: string }[]
 }
 
 export function BlogPostLayout({
@@ -28,7 +28,7 @@ export function BlogPostLayout({
     blogDate,
     blogUpdatedDate,
     authorDetails,
-    tags,
+    categories,
 }: BlogPostLayoutProps): JSX.Element {
     return (
         <div className="text-primary dark:text-primary-dark">
@@ -37,7 +37,7 @@ export function BlogPostLayout({
                     <Crumb title="Blog" url="/blog" />
                     <li>
                         <ul className="list-none p-0 m-0 flex ">
-                            {tags.map((category, index) => {
+                            {categories.map((category, index) => {
                                 const { title, url } = category
                                 return (
                                     <Crumb

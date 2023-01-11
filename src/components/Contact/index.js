@@ -60,7 +60,7 @@ export default function Contact(props) {
                                 iframeSrc={
                                     {
                                         paid: 'https://calendly.com/d/ckz-37j-jz9/posthog-scale-customer-success-demo',
-                                        qa: 'https://calendly.com/cameron-posthog/15-minute-posthog-q-a',
+                                        qa: 'https://calendly.com/d/hxx-tx7-qrs/posthog-15-minute-quick-chat',
                                     }[demoType]
                                 }
                             />

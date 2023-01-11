@@ -3,7 +3,7 @@ title: Ingestion Alert
 github: https://github.com/PostHog/ingestion-alert-plugin
 installUrl: https://app.posthog.com/project/apps?name=Posthog+Ingestion+Alert+Plugin
 thumbnail: ../../apps/thumbnails/ingestion-alert.png
-tags:
+topics:
     - ingestion-alert
 ---
 

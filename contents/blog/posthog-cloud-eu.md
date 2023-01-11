@@ -5,13 +5,10 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author:
-  - andy-vandervell
+categories: ["Product updates"]
+author: ["andy-vandervell"]
 featuredImage: ../images/blog/posthog-eu-blog.png
 featuredImageType: full
-category: PostHog news
-tags: 
-  - Product updates
 ---
 
 It's no secret that some popular analytics tools, such as Google Analytics, have fallen foul of GDPR regulations in the EU. That's one reason why we've enabled users to self-host PostHog, or to anonymize user data in a way which complies with GDPR. 

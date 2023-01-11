@@ -5,13 +5,10 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author:
-  - joe-martin
+author: ['joe-martin']
 featuredImage: ../images/blog/give-back-friday.png
 featuredImageType: full
-category: PostHog news
-tags:
-  - Open source
+categories: ["Open source"]
 ---
 
 Black Friday is normally an occasion to shop around for a new TV or mobile phone. But we wanted to do something a little different, something to celebrate and support the open source community which we both rely upon and are proud to be part of.  So, we're announcing our Give Back Friday campaign:

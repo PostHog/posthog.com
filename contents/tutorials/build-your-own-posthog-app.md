@@ -5,7 +5,7 @@ showTitle: true
 author: ['joe-martin']
 date: 2022-10-04
 featuredImage: ../images/tutorials/banners/how-to-build-app.png
-tags: ["apps"]
+topics: ["apps"]
 ---
 
 **Estimated reading time:** 10 minutes ☕☕☕

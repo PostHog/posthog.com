@@ -1,17 +1,14 @@
 ---
 date: 2022-08-31
-title: Benchmarking the impact of session recording on performance
+title: "Benchmarking the impact of session recording on performance"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author:
-  - mathew-pregasen
+author: ["mathew-pregasen"]
 featuredImage: ../images/blog/session-recording-performance/session-recording.jpg
 featuredImageType: full
-category: Engineering
-tags:
-  - Session recording
+categories: ["Inside PostHog", "Engineering"]
 ---
 
 The 2010s were marked by an explosion of tools focused on data. One of the biggest was session recording – a screen-recording-like service that tracked a user’s activity. Typically, session recording (SR) was popular with marketers and product managers as a tool to learn more about a user’s experience. 

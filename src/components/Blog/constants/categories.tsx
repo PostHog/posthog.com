@@ -1,6 +1,4 @@
 import { GitHub, LinkedIn, Twitter } from 'components/Icons/Icons'
-import { InlineCode } from 'components/InlineCode'
-import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
 export interface CategoryInterface {
     title: string
@@ -8,17 +6,6 @@ export interface CategoryInterface {
     link: string
     hideFromNavigation?: boolean
 }
-
-export const homeCategories = [
-    'Product growth',
-    'Startups',
-    'CEO diaries',
-    'Inside PostHog',
-    'Engineering',
-    'Using PostHog',
-    'PostHog news',
-    'General',
-]
 
 export const BlogCategories: CategoryInterface[] = [
     {
@@ -71,39 +58,3 @@ export const socialLinks: SocialLinksInterface = {
     linkedin: { icon: <LinkedIn />, label: 'LinkedIn' },
     github: { icon: <GitHub />, label: 'GitHub' },
 }
-
-export const CategoryData = ({ type = 'categories' }: { type: 'categories' | 'tags' }) => {
-    const { data } = useStaticQuery(query)
-
-    return (
-        <ul className="list-none m-0 p-0 mt-1">
-            {data[type]?.map((item) => {
-                return (
-                    <li key={item.fieldValue}>
-                        <InlineCode>{item.fieldValue}</InlineCode>
-                    </li>
-                )
-            })}
-        </ul>
-    )
-}
-
-const query = graphql`
-    {
-        data: allMdx(
-            sort: { order: DESC, fields: [frontmatter___date] }
-            filter: {
-                isFuture: { eq: false }
-                fields: { slug: { regex: "/^/blog/" } }
-                frontmatter: { date: { ne: null } }
-            }
-        ) {
-            categories: group(field: frontmatter___category) {
-                fieldValue
-            }
-            tags: group(field: frontmatter___tags) {
-                fieldValue
-            }
-        }
-    }
-`

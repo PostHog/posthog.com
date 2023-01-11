@@ -5,7 +5,7 @@ showTitle: true
 author: ['ian-vanagas']
 date: 2022-11-15
 featuredImage: ../images/tutorials/banners/next-steps-after-installing.png
-tags: ["configuration", "events", "dashboards", "team collaboration", "notifications and alerts", "experimentation"]
+topics: ["configuration", "events", "dashboards", "team collaboration", "notifications and alerts", "experimentation"]
 ---
 
 You created a PostHog account and installed it on your site, but what’s next? This tutorial goes over what to do after signing up and installing PostHog (we are assuming you’ve done both).

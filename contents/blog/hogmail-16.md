@@ -1,15 +1,14 @@
 ---
 date: 2022-11-08
-title: 'HogMail #16'
+title: "HogMail #16"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author:
-  - andy-vandervell
+author: ["andy-vandervell"]
 featuredImage: ../images/blog/hogmail.png
 featuredImageType: full
-category: HogMail
+categories: ["HogMail"]
 ---
 
 > Welcome to HogMail, our newsletter featuring the best of the PostHog blog, tutorials, product guides, and curated articles on building great products and companies. We send it every two weeks. [Signup here](/newsletter) so you don't miss it.

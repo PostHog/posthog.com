@@ -5,14 +5,10 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author:
-  - joe-martin
+author: [joe-martin]
 featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
-category: General
-tags:
-  - Product analytics
-  - Explainers
+categories: ["Product analytics"]
 ---
 
 Is autocapture bad? Has it ever been good? Earlier this year Amplitude posed these questions in a blogpost by Product Evangelist Adam Greco. Yes, he said, ‘[Auto-track is still bad](https://amplitude.com/blog/autotrack-is-bad)’ – and he went on to explain the four main reasons why.

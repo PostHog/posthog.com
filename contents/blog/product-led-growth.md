@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-category: CEO diaries
+categories: ["General", "Startups"]
 ---
 
 <!-- ![PLG Banner](../images/plg-header.png) -->

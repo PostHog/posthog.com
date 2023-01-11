@@ -1,16 +1,13 @@
 ---
 date: 2022-11-30
-title: 'Array 1.42.0: Get beta features via our roadmap!'
+title: "Array 1.42.0: Get beta features via our roadmap!"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+categories: ['Release notes', 'Product updates']
 featuredImage: ../images/blog/posthog-array-blog.png
 featuredImageType: full
-category: PostHog news
-tags:
-  - Product updates
-  - Release notes
 ---
 
 Want to know more about what we're up to? Check out [our roadmap](/roadmap) to see what we're working on and what new beta features are available! You can also subscribe to [our Hogmail newsletter](/newsletter)!

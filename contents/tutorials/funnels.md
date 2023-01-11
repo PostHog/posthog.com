@@ -5,7 +5,7 @@ showTitle: true
 featuredImage: ../images/tutorials/banners/funnels.png
 featuredTutorial: true
 author: ["yakko-majuri", "andy-vandervell"]
-tags: ["funnels", "correlation analysis", "paths", "session recording", "experimentation"]
+topics: ["funnels", "correlation analysis", "paths", "session recording", "experimentation"]
 date: 2022-04-20
 ---
 

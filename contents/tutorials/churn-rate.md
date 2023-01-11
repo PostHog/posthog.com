@@ -5,7 +5,7 @@ showTitle: true
 author: ['ian-vanagas']
 date: 2022-10-10
 featuredImage: ../images/tutorials/banners/churn-rate.png
-tags: ['insights', 'trends', 'lifecycle', 'cohorts', 'actions']
+topics: ['insights', 'trends', 'lifecycle', 'cohorts', 'actions']
 ---
 
 - **Level:** Easy 🦔

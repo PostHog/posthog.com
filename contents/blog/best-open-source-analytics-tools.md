@@ -5,16 +5,10 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author:
-  - joe-martin
-  - andy-vandervell
+author: ["joe-martin", "andy-vandervell"]
 featuredImage: ../images/blog/product-people.png
 featuredImageType: full
-category: General
-tags:
-  - Open source
-  - Guides
-  - Comparisons
+categories: ["Guides", "Open source"]
 ---
 
 It's a truth universally acknowledged that every business reliant on a monolithic enterprise product has need of an open source alternative... probably.

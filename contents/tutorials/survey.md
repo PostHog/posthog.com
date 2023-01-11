@@ -5,7 +5,7 @@ showTitle: true
 author: ['yakko-majuri']
 date: 2022-07-15
 featuredImage: ../images/tutorials/banners/surveys.png
-tags: ["configuration", "events"]
+topics: ["configuration", "events"]
 ---
 
 - **Level:** Easy 🦔

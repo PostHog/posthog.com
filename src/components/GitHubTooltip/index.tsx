@@ -110,7 +110,7 @@ export default function GitHubTooltip({
                     >
                         {body}
                     </Markdown>
-                    <div className="absolute inset-0 h-full w-full bg-gradient-to-t from-white/100 via-white/50 to-white/0" />
+                    <div className="absolute inset-0 h-full w-full bg-gradient-to-t from-white/100 via-white/50 to-white/0 dark:from-[#484848]/100 dark:via-[#484848]/50 dark:to-[#484848]/0" />
                 </div>
                 <CallToAction className="mb-1 mt-auto" size="xs" to={url}>
                     Continue reading on GitHub

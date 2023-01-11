@@ -5,11 +5,10 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author:
-  - mo-shehu
+author: ["mo-shehu"]
 featuredImage: ../images/blog/joe-martin-intro.png
 featuredImageType: full
-category: Inside PostHog
+categories: ["Inside PostHog"]
 ---
 
 Before joining PostHog, [Joe Martin](https://posthog.com/handbook/company/team#joe-martin-product-marketer) had never owned a Mac.

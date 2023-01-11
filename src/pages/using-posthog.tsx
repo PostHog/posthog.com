@@ -409,7 +409,7 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
 export const query = graphql`
     {
         tutorials: allMdx(filter: { slug: { glob: "tutorials/*" } }) {
-            group(field: frontmatter___tags) {
+            group(field: frontmatter___topics) {
                 category: fieldValue
                 nodes {
                     frontmatter {
