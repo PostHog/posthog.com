@@ -2561,8 +2561,3 @@
 [[redirects]]
     from = "/docs/self-host/open-source/support"
     to = "/docs/self-host/deploy/support"
-
-# Added: 2022-12-12
-[[redirects]]
-    from = "/blog/using-posting"
-    to = "/blog/using-posthog"
