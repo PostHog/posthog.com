@@ -95,7 +95,7 @@ This displays a new menu where you can select various ranges, and view a list of
 
 If you have a page where the URL has an ID or repeating part (e.g. `/my-shop/product/a-product-id`), you can use this menu to add wildcards into the URL that the toolbar searches. Wildcards will match any value in that part of the URL.
 
-Showing clicks across all product pages for example by using `/my-shop/product/*`
+For example, to show clicks across all product pages, replace `a-product-id` with `*` so the URL looks like `/my-shop/product/*`
 
 ![a gif of the toolbar popover menu being used to add a wildcard into the URL](../images/tutorials/toolbar/wildcards.gif)
 
