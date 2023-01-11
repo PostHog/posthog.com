@@ -95,7 +95,7 @@ Want to build with us? Check out our [contributing resources](/docs/contribute) 
 We're currently hiring for remote candidates in the following role:
 
 - [Full Stack Engineer - Experimentation Team](/careers/full-stack-engineer-experimentation)
-- [Sire Reliability Engineer](/careers/site-reliability-engineer)
+- [Site Reliability Engineer](/careers/site-reliability-engineer)
 
 Check out our [careers page](https://posthog.com/careers) for more info about our all-remote team and transparent culture. [You can also send a speculative application!](mailto:careers@posthog.com)
 
