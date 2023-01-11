@@ -21,6 +21,7 @@ Any notes about async migrations, etc. go here.
 **Release highlights:**
 
 - [New: Performance improvements](#new-performance-improvements)
+- [New: Role based access](#role-based-access)
 - [New: Better insight searching](#new-better-insight-searching)
 - [New: Feature flag variant overrides](#new-feature-flag-variant-overrides)
 - [New: Export recordings to file](#new-export-recordings-to-file)
@@ -32,6 +33,10 @@ Any notes about async migrations, etc. go here.
 ### New: Performance improvements
 
 @Karl to add a sentence or two here. 
+
+### New: Role based access
+
+We can now create roles and group team members together, along with being able to customize feature flags access for team members! Having access control helps reduce accidental changes and ensures confidence when shipping a new feature.
 
 ### New: Better insight searching
 ![insight searching](../images/blog/array/1-43-0-search.gif)
