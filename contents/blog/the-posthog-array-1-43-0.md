@@ -72,7 +72,7 @@ Following up on our new Playlists feature, we focused on the UX of browsing and 
 You think that's it? Not by a long shot! Version 1.43 also adds hundreds of other improvements and fixes, including...
 
 - **Improvement:** [We've consolidated container build workflows and made changes to build and push multi-arch images](https://github.com/PostHog/posthog/pull/13543).
-- **Improvement:** We made [a simpler, faster process for querying](https://github.com/PostHog/posthog/pull/13529) `my_last_viewed_at`
+- **Improvement:** We made [a simpler, faster process for querying the recently viewed insights on your home page](https://github.com/PostHog/posthog/pull/13529)
 - **Improvement:** We've switch to use `pnpm` instead of `yarn` to [manage dependencies](https://github.com/PostHog/posthog/pull/13190).
 - **Fix:** Webhooks for actions with null checks weren't firing correctly. [This is now fixed.](https://github.com/PostHog/posthog/issues/12893)
 
