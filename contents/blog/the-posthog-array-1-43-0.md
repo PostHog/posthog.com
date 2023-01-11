@@ -40,6 +40,9 @@ Ever created a multivariate feature flag, and wanted to show the control variant
 
 1.43.0 adds the ability to  manually override variants via the flag edit screen. It's great for ensuring users get the experience you want, but is also useful for testing as it enables you to deterministically choose a variant, and test across client-side and server-side feature flags.
 
+### New: Export recordings to file
+Sometimes a recording can be so insightful, so important that you think - I want to keep a record of this forever. Well now you can export any recording to a file and load it back into PostHog for playback in the future. Whether it is to commerate your first recorded signup or for compliance reasons, the tools are now in your hands.
+
 ### Improved: More experiment variants and improved flow
 A regular complaint used to be that, if you made a mistake while making an experiment, you couldn't go back to fix. Well, we fixed that so you can now:
 
@@ -53,6 +56,13 @@ Finally, as a bonus, you can now have up to nine variants in an experiment, inst
 PostHog already had some cancellation logic that abandoned running queries if filters were changed, but what if the user just went and did something else? Then we'd leave a query running in ClickHouse, slowing everything down. 
 
 Until now! 1.43.0 adds calls into the dashboard and insight logic when an insight is abandoned, attempting to cancel the query. The benefit? Less resource hogging, faster queries for all!
+
+### Improved: Recording playback controls 
+The recording "seekbar" has been revamped to make it clearer in which sections the user was active, where tracked events occur and what time you are scrubbing to.
+
+### Improved: Browsing recordings and creating playlists
+Following up on our new Playlists feature, we focused on the UX of browsing and pinning recordings to be as quick and intuitive as possible. The recordings list now scrolls independently of the player and creating a playlists of pinned recordings is much faster.
+
 
 ### Other improvements & fixes
 
