@@ -5,9 +5,12 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Release notes", "Product updates"]
 featuredImage: ../images/blog/array/default.png
 featuredImageType: standard
+category: PostHog news
+tags:
+  - Product updates
+  - Release notes
 ---
 
 Another week, another PostHog Array. We're steadily working towards parity with other tools. This week's highlights include a new website, multiple dashboards, a sleek new design and breaking down by cohorts.

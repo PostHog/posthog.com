@@ -5,10 +5,16 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["joe-martin", "andy-vandervell"]
+author:
+  - joe-martin
+  - andy-vandervell
 featuredImage: ../images/blog/posthog-company-culture-blog.png
 featuredImageType: full
-categories: ["Guides", "Privacy"]
+category: General
+tags:
+  - Guides
+  - Comparisons
+  - Privacy
 ---
 
 The GDPR places significant restrictions on how you can use tools like Google Analytics to track and collect user data.

@@ -165,6 +165,8 @@ rootPage: /blog
 author: ["yakko-majuri"]
 featuredImage: ../images/blog/running-content.png
 featuredImageType: full
+category: Guides
+tags: ["Using PostHog", "Privacy"]
 ---
 ```
 
@@ -174,6 +176,12 @@ featuredImageType: full
 - `author`: the author(s) of the post. correlates to your handle located in /src/data/authors.json
 - `featuredImage`: the URL of the image that appears at the top of the post and on the blog listing page
 - `featuredImageType`: `standard` | `full` - determines the width of the featured image on the blog post
+- `category`: the broader category the post belongs to. one of the following:
+  - <CategoryData />
+- `tags`: the more specific tag(s) the post belongs to. an array containing any number of the following:
+  - <CategoryData type="tags" />
+
+
 
 ##### Docs & Handbook
 
