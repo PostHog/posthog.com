@@ -3,53 +3,7 @@ import { motion } from 'framer-motion'
 import { usePopper } from 'react-popper'
 import type { Placement } from '@popperjs/core'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
-import CallToAction from './CallToAction'
-
-export const Block = ({
-    title,
-    children,
-    cta,
-}: {
-    title: string
-    children: React.ReactNode
-    cta: { url: string; label: string }
-}) => {
-    return (
-        <div className="py-6 md:px-6 xl:px-12 flex flex-col">
-            <div className="mb-4">
-                <h3 className="text-[18px] font-bold mt-0 mb-2 text-black/70">{title}</h3>
-                <div>{children}</div>
-            </div>
-            <CallToAction to={cta.url} className="mt-auto !w-full">
-                {cta.label}
-            </CallToAction>
-        </div>
-    )
-}
-
-interface IColumnProps {
-    title: string
-    cta: {
-        url: string
-        label: string
-    }
-    children: React.ReactNode
-}
-
-export const TwoCol = ({ left, right }: { left: IColumnProps; right: IColumnProps }) => {
-    return (
-        <div className="border-t border-gray-accent-light border-dashed">
-            <div className="grid sm:grid-cols-2 sm:divide-x sm:divide-y-0 divide-y divide-dashed divide-gray-accent-light max-w-3xl mx-auto xl:max-w-auto">
-                <Block title={left.title} cta={left.cta}>
-                    {left.children}
-                </Block>
-                <Block title={right.title} cta={right.cta}>
-                    {right.children}
-                </Block>
-            </div>
-        </div>
-    )
-}
+import { HTMLProps } from 'html'
 
 export function Wrapper({
     className = '',

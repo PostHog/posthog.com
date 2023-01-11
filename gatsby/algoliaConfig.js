@@ -1,6 +1,5 @@
+const slugify = require('slugify')
 const { createContentDigest } = require('gatsby-core-utils')
-const Slugger = require('github-slugger')
-const slugger = new Slugger()
 
 const retrievePages = (type, regex) => {
     return {
@@ -37,7 +36,7 @@ const retrievePages = (type, regex) => {
                         ...page,
                         headings: headings.map((heading) => ({
                             ...heading,
-                            fragment: slugger.slug(heading.value),
+                            fragment: slugify(heading.value, { lower: true }),
                         })),
                         id,
                         title: frontmatter.title,
@@ -97,7 +96,7 @@ module.exports = {
             {
                 query: `
                             {
-                              questions: allQuestion(filter: {permalink: {ne: null}}) {
+                              questions: allQuestion {
                                 nodes {
                                   id
                                   title: subject

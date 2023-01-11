@@ -115,32 +115,6 @@ The events with invalid uuids are dropped.
 There are very few cases where it would be good to provide an event uuid.
 Furthermore there are some gotchas to be aware of, for example deduping based on event uuid is not guaranteed due to how merges work in ClickHouse.
 
-### Ignored an invalid timestamp, event was still ingested
-
-When sending events, the `timestamp` and `sent_at` fields should be in `ISO 8601` format. Because parsing failed,
-these fields were ignored and [the event timestamp was computed](#how-event-timestamps-are-computed) as if they
-were omitted. These events have still been ingested, but their timestamp might be off.
-
-### An event was sent more than 23 hours in the future
-
-This warning indicates a bug in your instrumentation, as we don't expect events to be sent from the future.
-Read about [how we compute event timestamps](#how-event-timestamps-are-computed) and review your
-instrumentation code (the `sent_at` or the `offset` values might be wrong).
-
-These events have been ingested and stored, but will not show up in the UI. If these events
-create new persons, these persons will have a "first seen" property in the future.
-
-## How event timestamps are computed
-
-If you are using one of our [libraries](/docs/integrate#libraries) event timestamps will be handled for you. However, users doing manual instrumentation, we provide you with several mechanisms to set event timestamps:
-
-* If the payload contains `timestamp` and `sent_at` fields, the `sent_at` field is compared to the server time to account for clock skew. The event's `timestamp` is adjusted by this difference before being stored. This is the method our libraries use.
-* If the payload includes a `timestamp` but no `sent_at` field, then `timestamp` will directly be used as the event timestamp.
-* If `offset` is included in the payload, then this value is interpreted as milliseconds and will be subtracted from the capture time recorded by the server to obtain the event timestamp. The first two alternatives have higher priority so `offset` will be ignored if `timestamp` is present.
-* Finally, as a fallback when no `timestamp` or `offset` are included in the payload, the capture time recorded by the server is used as the event timestamp.
-
-To ensure maximum compatibility with PostHog, `timestamp` and `sent_at` fields should be in `ISO-8601` format.
-
 ## Data Management best practices
 
 **1. The more definitions you add, the easier it will be for your teammates to understand what each event and property represents**

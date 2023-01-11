@@ -5,24 +5,6 @@ title: Operations
 This document gives an overview of the kitchen side of ClickHouse: how various operations work,
 what tricky migrations we have experience with as well as various settings and tips.
 
-## System tables
-
-ClickHouse exposes a **lot** of information about its internals in [`system` tables](https://clickhouse.com/docs/en/operations/system-tables/).
-
-Some stand-out tables:
-- [`system.query_log`](https://clickhouse.com/docs/en/operations/system-tables/query_log) and [`system.processes`](https://clickhouse.com/docs/en/operations/system-tables/processes) contain information on queries executed on the server
-- [`system.tables`](https://clickhouse.com/docs/en/operations/system-tables/tables/) and [`system.columns`](https://clickhouse.com/docs/en/operations/system-tables/columns) 
-  contain metadata about tables and columns
-- [`system.merges`](https://clickhouse.com/docs/en/operations/system-tables/merges) and [`system.mutations`](https://clickhouse.com/docs/en/operations/system-tables/mutations)
-  contain information about ongoing operations
-- [`system.replicated_fetches`](https://clickhouse.com/docs/en/operations/system-tables/replicated_fetches) and 
-  [`system.replication_queue`](https://clickhouse.com/docs/en/operations/system-tables/replication_queue) contain information about data replication
-- [`system.errors`](https://clickhouse.com/docs/en/operations/system-tables/errors) and [`system.crash_log`](https://clickhouse.com/docs/en/operations/system-tables/crash-log)
-  contain information about errors and crashes respectively
-- [`system.distributed_ddl_queue`](https://clickhouse.com/docs/en/operations/system-tables/distributed_ddl_queue) shows information to help diagnose progress of `ON CLUSTER` commands
-
-For examples of usage and tips, check out [this ClickHouse blog article](https://clickhouse.com/blog/clickhouse-debugging-issues-with-system-tables)
-
 ## Settings
 
 ClickHouse provides daunting amounts of configuration on all levels. This section provides

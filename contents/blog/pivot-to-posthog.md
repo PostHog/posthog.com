@@ -5,8 +5,11 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["james-hawkins"]
-categories: ["CEO diaries", "Inside PostHog"]
+author:
+  - james-hawkins
+category: CEO diaries
+tags:
+  - Y Combinator
 ---
 
 YC has been running for 15 years, and getting bigger every year.

@@ -133,15 +133,6 @@ h4 {
         @apply mb-0.5;
     }
 
-    .caption + * {
-        @apply mt-6;
-    }
-
-    .caption + div,
-    .caption + h2 {
-        @apply mt-4;
-    }
-
     code {
         @apply font-medium text-sm;
     }
@@ -244,20 +235,6 @@ h4 {
         img.blog-post-img-large {
             max-width: 100%;
             margin-left: 0;
-        }
-    }
-}
-
-#recent-questions {
-    container-type: inline-size;
-}
-
-@container (min-width: 583px) and (max-width: 650px) {
-    #recent-questions ul li .grid {
-        @apply block;
-
-        > div {
-            @apply mb-2;
         }
     }
 }

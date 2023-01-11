@@ -1,13 +1,15 @@
 ---
 date: 2022-11-02
-title: "How we’re improving performance by combining persons and events"
+title: How we’re improving performance by combining persons and events
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ['Release notes', 'Product updates']
 featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
+category: Engineering
+tags:
+  - Product updates
 ---
 
 In [a previous product update](/blog/the-posthog-array-1-39-0) we announced a beta for a substantial change to the way we handle persons and events on PostHog. Today, after gathering your feedback and seeing the improvements to query performance, we’re rolling this change out as part of the 1.41.0 update. It is available now for self-hosted users and PostHog Cloud users can expect to see the benefits soon as we roll it out.

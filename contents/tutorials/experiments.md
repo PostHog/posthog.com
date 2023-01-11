@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 featuredTutorial: false
 author: ['neil-kakkar']
-topics: ['experimentation', 'feature flags']
+tags: ['experimentation', 'feature flags']
 featuredImage: ../images/tutorials/banners/experiments.png
 date: 2022-05-26
 ---

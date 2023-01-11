@@ -1,14 +1,18 @@
 ---
 date: '2022-03-22'
-title: 'The secrets of PostHog query performance'
+title: The secrets of PostHog query performance
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/lw-queries.png
 featuredImageType: full
-categories: ['Engineering', 'Product updates', 'Launch week']
-author: ['karl-aksel-puulmann']
+author:
+  - karl-aksel-puulmann
+category: Engineering
+tags:
+  - Product updates
+  - Launch week
 ---
 
 We want PostHog to become the first choice for product analytics at any scale. To do that, users should have a smooth experience exploring their product data - including not waiting minutes for queries to load.

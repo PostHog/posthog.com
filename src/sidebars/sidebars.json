@@ -957,10 +957,6 @@
                     "url": "/docs/integrate/user-properties"
                 },
                 {
-                    "name": "Using a CDP",
-                    "url": "/docs/integrate/cdp"
-                },
-                {
                     "name": "Deploying a reverse proxy",
                     "url": "/docs/integrate/proxy"
                 },
@@ -1105,24 +1101,20 @@
             "url": "",
             "children": [
                 {
-                    "name": "Migrate between PostHog instances",
-                    "url": "/docs/migrate/migrate-between-cloud-and-self-hosted"
-                },
-                {
-                    "name": "Migrate from Amplitude",
-                    "url": "/docs/migrate/migrate-from-amplitude"
-                },
-                {
-                    "name": "Migrate to PostHog Cloud EU",
-                    "url": "/tutorials/migrate-eu-cloud"
-                },
-                {
                     "name": "To another self-hosted instance",
                     "url": "/docs/migrate/migrate-to-another-self-hosted-instance"
                 },
                 {
-                    "name": "Export your events",
-                    "url": "/docs/migrate/export-events"
+                    "name": "To PostHog from Amplitude",
+                    "url": "/docs/migrate/migrate-from-amplitude"
+                },
+                {
+                    "name": "To PostHog Cloud EU",
+                    "url": "/tutorials/migrate-eu-cloud"
+                },
+                {
+                    "name": "Between Cloud and self-hosted",
+                    "url": "/docs/migrate/migrate-between-cloud-and-self-hosted"
                 }
             ]
         },
@@ -1337,10 +1329,6 @@
                 {
                     "name": "CCPA guidance",
                     "url": "/docs/privacy/ccpa-compliance"
-                },
-                {
-                    "name": "SOC 2",
-                    "url": "/handbook/company/security#soc-2"
                 },
                 {
                     "name": "Data egress & compliance",
@@ -1588,10 +1576,6 @@
                         {
                             "url": "/docs/apps/redshift-import",
                             "name": "Redshift Import"
-                        },
-                        {
-                            "url": "/docs/apps/rudderstack-import",
-                            "name": "Rudderstack Import"
                         },
                         {
                             "url": "/docs/apps/segment",
@@ -2080,7 +2064,7 @@
             "url": "/apps/replicator"
         },
         {
-            "name": "RudderStack Export",
+            "name": "Rudderstack Export",
             "url": "/apps/rudderstack-export"
         },
         {
@@ -2144,22 +2128,53 @@
             "url": "/apps/zendesk-connector"
         }
     ],
-    "community": [
+    "blog": [
         {
-            "name": "Community"
+            "name": "Blog",
+            "url": "/blog"
         },
+        {
+            "name": "CEO diaries",
+            "url": "/blog/categories/ceo-diaries"
+        },
+        {
+            "name": "Engineering",
+            "url": "/blog/categories/engineering"
+        },
+        {
+            "name": "HogMail",
+            "url": "/blog/categories/hogmail"
+        },
+        {
+            "name": "Inside PostHog",
+            "url": "/blog/categories/inside-posthog"
+        },
+        {
+            "name": "PostHog news",
+            "url": "/blog/categories/posthog-news"
+        },
+        {
+            "name": "Product growth",
+            "url": "/blog/categories/product-growth"
+        },
+        {
+            "name": "Startups",
+            "url": "/blog/categories/startups"
+        },
+        {
+            "name": "Using PostHog",
+            "url": "/blog/categories/using-posthog"
+        }
+    ],
+    "community": [
         {
             "name": "Dashboard",
             "url": "/community"
         },
         {
-            "name": "Questions?",
-            "url": "",
+            "name": "Questions",
+            "url": "/questions",
             "children": [
-                {
-                    "name": "Recent questions",
-                    "url": "/questions"
-                },
                 {
                     "name": "Apps",
                     "url": "/questions/topics/apps"

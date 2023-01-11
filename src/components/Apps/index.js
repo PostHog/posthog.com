@@ -1,11 +1,10 @@
 import Chip from 'components/Chip'
 import FooterCTA from 'components/FooterCTA'
 import { graphql, useStaticQuery } from 'gatsby'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import AppsList from '../AppsList'
 import Layout from '../Layout'
 import { SEO } from 'components/seo'
-import { navigate } from 'gatsby'
 
 const filters = [
     {
@@ -34,7 +33,7 @@ const filters = [
     },
 ]
 
-function AppsPage({ location }) {
+function AppsPage() {
     const {
         apps: { nodes },
     } = useStaticQuery(query)
@@ -60,18 +59,9 @@ function AppsPage({ location }) {
     }
 
     const resetFilters = () => {
-        navigate('?')
         setCurrentFilter('all')
         setFilteredApps(apps)
     }
-
-    useEffect(() => {
-        const params = new URLSearchParams(location?.search)
-        const filter = params.get('filter')
-        const value = params.get('value')
-
-        if (filter && value) filterApps(filter, value)
-    }, [location])
 
     return (
         <Layout>
@@ -93,7 +83,7 @@ function AppsPage({ location }) {
                 <Chip onClick={resetFilters} active={currentFilter === 'all'} text="All" />
                 {filters.map(({ type, name }) => (
                     <Chip
-                        onClick={() => navigate(`?filter=${type}&value=${name.toLowerCase()}`)}
+                        onClick={() => filterApps(type, name.toLowerCase())}
                         active={currentFilter === name.toLowerCase()}
                         key={name}
                         text={name}

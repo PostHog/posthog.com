@@ -5,10 +5,14 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["marcus-hyett"]
+author:
+  - marcus-hyett
 featuredImage: ../images/blog/simpler-self-deployments.png
 featuredImageType: full
-categories: ["Guides", "Product analytics", "PostHog Academy"]
+category: Product growth
+tags:
+  - Product analytics
+  - Guides
 ---
 
 Customer retention metrics are some of the most important to understand and the most vital to the long term success of any product. In this article we’ll explain what customer retention is, why it’s important and some examples of tactics you can use to improve customer retention and reduce churn in your user base. 
@@ -22,9 +26,7 @@ Customer retention metrics are some of the most important to understand and the 
 - [Understanding cohort retention](#understanding-cohort-retention)
 - [How to read retention tables](#how-to-read-retention-tables)
 - [How to improve customer retention and reduce churn](#how-to-improve-customer-retention-and-reduce-churn)
-- [Further reading](#further-reading) 
-
-> This article is part of our [PostHog Academy series](/blog/categories/posthog-academy) where we explain the fundamentals of product analytics. Marcus Hyett is VP of Product at PostHog. Prior to PostHog, he was a Senior Product Manager at Meta working on ecommerce experiences across Instagram and its family of apps. 
+- [Further reading](#further-reading)
 
 ## What is customer retention?
 

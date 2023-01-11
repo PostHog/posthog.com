@@ -7,8 +7,13 @@ showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/posthog-vs-amplitude/posthog-vs-amplitude.jpg
 featuredImageType: full
-author: ["andy-vandervell", "joe-martin"]
-categories: ["Guides", "Open source", "Comparisons"]
+author:
+  - andy-vandervell
+  - joe-martin
+category: General
+tags:
+  - Guides
+  - Comparisons
 ---
 
 PostHog and Amplitude are both offer product analytics. That means they tell you where users are coming from and how they interact with your product, so that you can find ways to make it better.
