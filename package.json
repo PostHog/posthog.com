@@ -8,9 +8,7 @@
         "type": "git",
         "url": "https://github.com/PostHog/posthog.com"
     },
-    "keywords": [
-        "gatsby"
-    ],
+    "keywords": ["gatsby"],
     "private": true,
     "scripts": {
         "build": "gatsby build",
@@ -19,7 +17,6 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "typegen": "kea-typegen write .",
         "update-sprite": "svg-sprite -s --symbol-dest src/components/productFeature/images/icons --symbol-sprite sprited-icons.svg src/components/productFeature/images/icons/*.svg",
-        "generate-redirects": "git diff origin/master $(git branch --show-current) > pr_diff && DEBUG=true RUN_AS_SCRIPT=true node ./scripts/safe_rename.js",
         "test-redirects": "jest scripts",
         "storybook": "start-storybook -s ./static -p 6006",
         "build-storybook": "build-storybook"
@@ -203,9 +200,7 @@
             "pre-commit": "node ./scripts/mdxImportGen && git add src/mdxGlobalComponents.js && lint-staged"
         }
     },
-    "workspaces": [
-        "plugins/*"
-    ],
+    "workspaces": ["plugins/*"],
     "lint-staged": {
         "*.{html,js,ts,tsx,json,yml,css,scss}": "prettier --write",
         "*.{js,ts,tsx}": "eslint"
