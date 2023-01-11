@@ -7,9 +7,10 @@ showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/array/default.png
 featuredImageType: standard
-category: Release notes
+category: PostHog news
 tags:
   - Product updates
+  - Release notes
 ---
 
 Major update time (hence the change to 1.*1*.0) - push-based integrations have been introduced!

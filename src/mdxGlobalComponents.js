@@ -35,6 +35,7 @@ import { WorkingAtPostHog } from './components/Careers/WorkingAtPostHog'
 import { Checkbox } from './components/Checkbox'
 import { Chip } from './components/Chip'
 import { CodeBlock } from './components/CodeBlock'
+import { CommunityCTA } from './components/CommunityCTA'
 import { CommunityQuestions } from './components/CommunityQuestions'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { Contact } from './components/Contact'
@@ -176,6 +177,7 @@ export const shortcodes = {
     Checkbox,
     Chip,
     CodeBlock,
+    CommunityCTA,
     CommunityQuestions,
     CompensationCalculator,
     Contact,

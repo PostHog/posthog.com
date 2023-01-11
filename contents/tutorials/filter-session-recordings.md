@@ -5,7 +5,8 @@ showTitle: true
 featuredImage: ../images/tutorials/banners/tutorial-12.png
 featuredTutorial: false
 author: ['joe-martin']
-tags: ['session recording']
+topics: ['session recording']
+featuredVideo: https://www.youtube.com/embed/3BS5h2gkz90
 date: 2022-11-03
 ---
 

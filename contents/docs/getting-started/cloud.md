@@ -15,7 +15,7 @@ It also comes with 1m events free each month.
 
 ## 1. Create an account
 
-To create a PostHog Cloud account, navigate to [app.posthog.com](https://app.posthog.com/signup) and fill in the details for your new account.
+Set up a [PostHog Cloud account](https://app.posthog.com/signup) (hosted in the US), or if you're looking for a GDPR-ready environment, try [PostHog Cloud EU](https://eu.posthog.com/signup).
 
 ## 2. Set up your project
 

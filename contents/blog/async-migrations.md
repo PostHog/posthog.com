@@ -11,6 +11,7 @@ featuredImage: ../images/blog/migrating-hog.png
 featuredImageType: full
 category: Engineering
 tags:
+  - ClickHouse
   - Product updates
 ---
 

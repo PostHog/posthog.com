@@ -7,9 +7,10 @@ showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/array/default.png
 featuredImageType: standard
-category: Release notes
+category: PostHog news
 tags:
   - Product updates
+  - Release notes
 ---
 
 Big new integration - PostHog now has a library for iOS!

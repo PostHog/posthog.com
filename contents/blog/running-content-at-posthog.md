@@ -11,7 +11,7 @@ featuredImage: ../images/blog/running-content.png
 featuredImageType: full
 category: Inside PostHog
 tags:
-  - Startups
+  - Marketing
 ---
 
 ## Why you need content

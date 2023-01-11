@@ -8,7 +8,7 @@ hideAnchor: true
 category: Engineering
 ---
 
-PostHog ship every two weeks, unless it makes more sense not to.
+PostHog ships every two weeks, unless it makes more sense not to.
 
 ## Why?
 

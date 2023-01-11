@@ -145,7 +145,13 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     }
                 }
             }
-            blogPosts: allMdx(filter: { isFuture: { eq: false }, fields: { slug: { regex: "/^/blog/" } } }) {
+            blogPosts: allMdx(
+                filter: {
+                    isFuture: { eq: false }
+                    frontmatter: { date: { ne: null } }
+                    fields: { slug: { regex: "/^/blog/" } }
+                }
+            ) {
                 totalCount
                 nodes {
                     id
@@ -224,7 +230,11 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             }
             categories: allMdx(
                 sort: { order: DESC, fields: [frontmatter___date] }
-                filter: { isFuture: { eq: false }, frontmatter: { rootPage: { eq: "/blog" }, date: { ne: null } } }
+                filter: {
+                    isFuture: { eq: false }
+                    fields: { slug: { regex: "/^/blog/" } }
+                    frontmatter: { date: { ne: null } }
+                }
             ) {
                 categories: group(field: frontmatter___category) {
                     category: fieldValue
@@ -326,7 +336,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     }
 
-    const createPaginatedPages = ({ postsPerPage = 10, totalCount, base, template, extraContext = {} }) => {
+    const createPaginatedPages = ({ postsPerPage = 20, totalCount, base, template, extraContext = {} }) => {
         const numPages = Math.ceil(totalCount / postsPerPage)
         Array.from({ length: numPages }).forEach((_, i) => {
             const context = {

@@ -5,9 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-category: General
-tags:
-  - Startups
+category: CEO diaries
 ---
 
 <!-- ![PLG Banner](../images/plg-header.png) -->

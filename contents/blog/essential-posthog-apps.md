@@ -9,9 +9,9 @@ author:
   - joe-martin
 featuredImage: ../images/blog/posthog-array-blog.png
 featuredImageType: full
-category: Guides
+category: Using PostHog
 tags:
-  - Using PostHog
+  - Guides
 ---
 
 PostHog apps are a powerful, but hard to explain part of the platform. They’re powerful because they can do almost anything — and they’re hard to explain because they do almost anything.

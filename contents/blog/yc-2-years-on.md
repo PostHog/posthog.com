@@ -11,8 +11,7 @@ featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 category: CEO diaries
 tags:
-  - Inside PostHog
-  - Startups
+  - Y Combinator
 ---
 
 [Y Combinator](https://www.ycombinator.com/) (YC) is seen as the world's best, and most prolific, three-month accelerator program. Upwards of 7,000 founders have taken part. Yet, no one really talks about what happens afterwards.

@@ -10,9 +10,7 @@ author:
   - ian-vanagas
 featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
-category: Inside PostHog
-tags:
-  - Engineering
+category: Engineering
 ---
 
 PostHog's mission is to increase the number of successful products in the world. To achieve it, we're building a comprehensive [suite of analytics and data tools](/product) (see [our roadmap](/roadmap) for what we're working on now). 

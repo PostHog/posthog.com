@@ -10,9 +10,11 @@ author:
   - andy-vandervell
 featuredImage: ../images/blog/product-people.png
 featuredImageType: full
-category: Guides
+category: General
 tags:
   - Open source
+  - Guides
+  - Comparisons
 ---
 
 It's a truth universally acknowledged that every business reliant on a monolithic enterprise product has need of an open source alternative... probably.

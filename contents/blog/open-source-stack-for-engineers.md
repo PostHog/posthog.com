@@ -9,9 +9,10 @@ featuredImage: ../images/blog/posthog-company-culture-blog.png
 featuredImageType: full
 author:
   - joe-martin
-category: Open source
+category: General
 tags:
   - Guides
+  - Open source
 ---
 
 At PostHog, we believe an open source approach doesn’t just lead to greater growth; it also leads to better products. That’s what inspired us to make our platform open source, to adopt [a transparent company culture](/careers), and also why we try to use open source software wherever we can in our stack. 

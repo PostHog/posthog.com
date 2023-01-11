@@ -7,10 +7,7 @@ showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/story-about-pivots.png
 featuredImageType: full
-category: General
-tags:
-  - Inside PostHog
-  - CEO diaries
+category: CEO diaries
 ---
 
 PostHog has pivoted _a lot_.

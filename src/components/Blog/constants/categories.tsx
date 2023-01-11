@@ -9,7 +9,16 @@ export interface CategoryInterface {
     hideFromNavigation?: boolean
 }
 
-export const homeCategories = ['Guides', 'CEO diaries', 'Engineering', 'HogMail', 'Privacy', 'Product updates']
+export const homeCategories = [
+    'Product growth',
+    'Startups',
+    'CEO diaries',
+    'Inside PostHog',
+    'Engineering',
+    'Using PostHog',
+    'PostHog news',
+    'General',
+]
 
 export const BlogCategories: CategoryInterface[] = [
     {
@@ -83,7 +92,11 @@ const query = graphql`
     {
         data: allMdx(
             sort: { order: DESC, fields: [frontmatter___date] }
-            filter: { isFuture: { eq: false }, frontmatter: { rootPage: { eq: "/blog" }, date: { ne: null } } }
+            filter: {
+                isFuture: { eq: false }
+                fields: { slug: { regex: "/^/blog/" } }
+                frontmatter: { date: { ne: null } }
+            }
         ) {
             categories: group(field: frontmatter___category) {
                 fieldValue

@@ -9,9 +9,9 @@ author:
   - mathew-pregasen
 featuredImage: ../images/blog/session-recording-performance/session-recording.jpg
 featuredImageType: full
-category: Inside PostHog
+category: Engineering
 tags:
-  - Engineering
+  - Session recording
 ---
 
 The 2010s were marked by an explosion of tools focused on data. One of the biggest was session recording – a screen-recording-like service that tracked a user’s activity. Typically, session recording (SR) was popular with marketers and product managers as a tool to learn more about a user’s experience. 

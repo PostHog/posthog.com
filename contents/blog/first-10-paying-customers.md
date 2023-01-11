@@ -11,9 +11,9 @@ author:
   - mo-shehu
 featuredImage: ../images/blog/first-10-customers.png
 featuredImageType: full
-category: Guides
+category: Product growth
 tags:
-  - Startups
+  - Guides
 ---
 
 Creating a product that people need and are willing to pay for is hard. At PostHog, it took us months to get to 10 paying customers — this after [pivoting](https://posthog.com/blog/story-about-pivots) several times before we finally landed on product analytics. We tried a million things and took some hard knocks, so here are a few shortcuts to get to customer #10 faster.

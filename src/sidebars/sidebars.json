@@ -408,6 +408,10 @@
                         {
                             "name": "Jobs",
                             "url": "/handbook/engineering/posthog-com/jobs"
+                        },
+                        {
+                            "name": "Roadmap",
+                            "url": "/handbook/engineering/posthog-com/roadmap"
                         }
                     ]
                 },
@@ -953,6 +957,10 @@
                     "url": "/docs/integrate/user-properties"
                 },
                 {
+                    "name": "Using a CDP",
+                    "url": "/docs/integrate/cdp"
+                },
+                {
                     "name": "Deploying a reverse proxy",
                     "url": "/docs/integrate/proxy"
                 },
@@ -965,7 +973,7 @@
                     "url": "/docs/integrate/badge"
                 },
                 {
-                    "name": "Browser Extensions",
+                    "name": "Browser extensions",
                     "url": "/docs/integrate/browser-extension"
                 },
                 {
@@ -1115,24 +1123,28 @@
             ]
         },
         {
-            "name": "Migrate",
+            "name": "Migrate & export",
             "url": "",
             "children": [
+                {
+                    "name": "Migrate between PostHog instances",
+                    "url": "/docs/migrate/migrate-between-cloud-and-self-hosted"
+                },
+                {
+                    "name": "Migrate from Amplitude",
+                    "url": "/docs/migrate/migrate-from-amplitude"
+                },
+                {
+                    "name": "Migrate to PostHog Cloud EU",
+                    "url": "/tutorials/migrate-eu-cloud"
+                },
                 {
                     "name": "To another self-hosted instance",
                     "url": "/docs/migrate/migrate-to-another-self-hosted-instance"
                 },
                 {
-                    "name": "To PostHog from Amplitude",
-                    "url": "/docs/migrate/migrate-from-amplitude"
-                },
-                {
-                    "name": "To PostHog Cloud EU",
-                    "url": "/tutorials/migrate-eu-cloud"
-                },
-                {
-                    "name": "Between Cloud and self-hosted",
-                    "url": "/docs/migrate/migrate-between-cloud-and-self-hosted"
+                    "name": "Export your events",
+                    "url": "/docs/migrate/export-events"
                 }
             ]
         },
@@ -1325,6 +1337,10 @@
                 {
                     "name": "CCPA guidance",
                     "url": "/docs/privacy/ccpa-compliance"
+                },
+                {
+                    "name": "SOC 2",
+                    "url": "/handbook/company/security#soc-2"
                 },
                 {
                     "name": "Data egress & compliance",
@@ -1568,6 +1584,10 @@
                         {
                             "url": "/docs/apps/redshift-import",
                             "name": "Redshift Import"
+                        },
+                        {
+                            "url": "/docs/apps/rudderstack-import",
+                            "name": "Rudderstack Import"
                         },
                         {
                             "url": "/docs/apps/segment",
@@ -2056,7 +2076,7 @@
             "url": "/apps/replicator"
         },
         {
-            "name": "Rudderstack Export",
+            "name": "RudderStack Export",
             "url": "/apps/rudderstack-export"
         },
         {
@@ -2122,29 +2142,58 @@
     ],
     "blog": [
         {
-            "name": "Home",
+            "name": "Blog",
             "url": "/blog"
         },
         {
-            "name": "Guides",
-            "url": "/blog/categories/guides",
-            "children": [
-                {
-                    "name": "Product engineer vs software engineer: what's the difference?",
-                    "url": "/blog/product-engineer-vs-software-engineer"
-                }
-            ]
+            "name": "CEO diaries",
+            "url": "/blog/categories/ceo-diaries"
+        },
+        {
+            "name": "Engineering",
+            "url": "/blog/categories/engineering"
+        },
+        {
+            "name": "HogMail",
+            "url": "/blog/categories/hogmail"
+        },
+        {
+            "name": "Inside PostHog",
+            "url": "/blog/categories/inside-posthog"
+        },
+        {
+            "name": "PostHog news",
+            "url": "/blog/categories/posthog-news"
+        },
+        {
+            "name": "Product growth",
+            "url": "/blog/categories/product-growth"
+        },
+        {
+            "name": "Startups",
+            "url": "/blog/categories/startups"
+        },
+        {
+            "name": "Using PostHog",
+            "url": "/blog/categories/using-posthog"
         }
     ],
     "community": [
+        {
+            "name": "Community"
+        },
         {
             "name": "Dashboard",
             "url": "/community"
         },
         {
-            "name": "Questions",
-            "url": "/questions",
+            "name": "Questions?",
+            "url": "",
             "children": [
+                {
+                    "name": "Recent questions",
+                    "url": "/questions"
+                },
                 {
                     "name": "Apps",
                     "url": "/questions/topics/apps"

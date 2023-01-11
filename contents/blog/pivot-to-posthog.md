@@ -9,7 +9,7 @@ author:
   - james-hawkins
 category: CEO diaries
 tags:
-  - Inside PostHog
+  - Y Combinator
 ---
 
 YC has been running for 15 years, and getting bigger every year.

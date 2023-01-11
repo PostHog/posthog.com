@@ -9,9 +9,10 @@ author:
   - lottie-coxon
 featuredImage: ../images/blog/blog-hedgehog-design.png
 featuredImageType: full
-category: General
+category: Inside PostHog
 tags:
-  - Inside PostHog
+  - Marketing
+  - Guides
 ---
 
 Creating mascots goes beyond just putting iPencil to iPad. It’s a long, confusing, and sometimes frustrating process which requires a lot of patience and tolerance for drawing hedgehogs 12 hours a day.

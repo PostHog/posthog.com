@@ -9,7 +9,7 @@ author:
   - james-hawkins
 category: CEO diaries
 tags:
-  - Inside PostHog
+  - Y Combinator 
 ---
 
 I'm [James](https://twitter.com/james406), and I work with [Tim](https://twitter.com/timgl). We are the co-founders of PostHog - a current batch YC company.

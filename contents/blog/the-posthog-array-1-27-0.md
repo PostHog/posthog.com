@@ -10,9 +10,10 @@ excerpt: >-
   PostHog 1.27.0 is here! Completely redesigned funnels experience will help you
   dive deeper to understand why your users aren't converting. Plus 400+
   improvements & fixes.
-category: Release notes
+category: PostHog news
 tags:
   - Product updates
+  - Release notes
 ---
 
 PostHog 1.27.0 is here! 

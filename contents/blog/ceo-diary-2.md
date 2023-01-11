@@ -7,11 +7,9 @@ showTitle: true
 hideAnchor: true
 author:
   - james-hawkins
-featuredImage: ../images/blog/ceo-diary.png
+featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 category: CEO diaries
-tags:
-  - Inside PostHog
 ---
 
 Last week we had an offsite in the beautiful Portuguese countryside, an hour's bus journey from Porto. We uploaded a highlight reel of the retreat to [TikTok](https://vm.tiktok.com/ZMRUGX4XW/).

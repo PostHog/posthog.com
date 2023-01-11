@@ -12,9 +12,10 @@ excerpt: >-
   where your users are coming from with the World Map. Additionally we now
   support organization-level SAML login on both Cloud and Self-Hosted instances.
   Plus check out your Project Homepage for a few additional goodies.
-category: Release notes
+category: PostHog news
 tags:
   - Product updates
+  - Release notes
 ---
 
 PostHog 1.35.0 introduces audit logs and a brand new world map view to help you visualize where your users are coming from. Additionally, we now support organization-level SAML login on both Cloud and Self-Hosted instances. Plus, check out your project homepage for a few additional goodies!

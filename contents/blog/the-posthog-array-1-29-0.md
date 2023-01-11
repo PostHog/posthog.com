@@ -11,9 +11,10 @@ excerpt: >-
   Fully revamped Paths experience enables you to better explore what actions
   your users take. New features include multivariate feature flags, private
   projects and DAU/WAU/MAU graphs.
-category: Release notes
+category: PostHog news
 tags:
   - Product updates
+  - Release notes
 ---
 
 

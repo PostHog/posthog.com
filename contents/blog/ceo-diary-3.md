@@ -7,11 +7,9 @@ showTitle: true
 hideAnchor: true
 author:
   - james-hawkins
-featuredImage: ../images/blog/blog-generic-4.png
+featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 category: CEO diaries
-tags:
-  - Inside PostHog
 ---
 
 It has been a dramatic month.

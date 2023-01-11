@@ -8,7 +8,7 @@ hideAnchor: true
 author:
   - marcus-hyett
 featuredImage: ../images/blog/new-vp-nailing-funnels/new-vp-nailing-funnels.png
-category: Inside PostHog
+category: Product growth
 tags:
   - Product analytics
 ---

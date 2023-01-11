@@ -7,9 +7,10 @@ showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/array/default.png
 featuredImageType: standard
-category: Release notes
+category: PostHog news
 tags:
   - Product updates
+  - Release notes
 ---
 
 Shared dashboards, global annotations, retention table improvements and a metric ton of bug fixes. This week's PostHog array has it all.

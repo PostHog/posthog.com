@@ -9,7 +9,8 @@ author:
   - james-hawkins
 category: CEO diaries
 tags:
-  - Inside PostHog
+  - Product updates
+  - Y Combinator
 ---
 
 [PostHog launched on Hacker News](https://news.ycombinator.com/item?id=22376732). We were pleased with the reception. The reason we launched wasn’t trying to get the world’s attention – we wanted to find a group of people who loved it, as quickly as possible.

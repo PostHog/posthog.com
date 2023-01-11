@@ -8,6 +8,7 @@ import { Posts } from 'components/Blog'
 import Pagination from 'components/Pagination'
 import { NewsletterForm } from 'components/NewsletterForm'
 import { blog } from '../sidebars/sidebars.json'
+import CommunityCTA from 'components/CommunityCTA'
 
 const BlogCategory = ({
     data: {
@@ -31,14 +32,20 @@ const BlogCategory = ({
                     <Posts
                         title="All posts"
                         action={
-                            <p className="m-0 leading-none font-semibold">
+                            <p className="m-0 leading-none font-semibold text-sm opacity-50">
                                 Page {currentPage} of {numPages}
                             </p>
                         }
                         posts={allPostsRecent.slice(0, 4)}
                     />
                     <NewsletterForm />
-                    <Posts posts={allPostsRecent.slice(4)} />
+                    <Posts posts={allPostsRecent.slice(4, 12)} />
+                    {allPostsRecent.length > 12 && (
+                        <>
+                            <CommunityCTA />
+                            <Posts posts={allPostsRecent.slice(12)} />
+                        </>
+                    )}
                     <Pagination currentPage={currentPage} numPages={numPages} base={base} />
                 </div>
             </PostLayout>
@@ -54,7 +61,11 @@ export const pageQuery = graphql`
             limit: $limit
             skip: $skip
             sort: { order: DESC, fields: [frontmatter___date] }
-            filter: { isFuture: { ne: true }, fields: { slug: { regex: "/^/blog/" } } }
+            filter: {
+                isFuture: { ne: true }
+                frontmatter: { date: { ne: null } }
+                fields: { slug: { regex: "/^/blog/" } }
+            }
         ) {
             edges {
                 node {

@@ -9,9 +9,7 @@ author:
   - mo-shehu
 featuredImage: ../images/blog/how-to-pick-cofounder.png
 featuredImageType: full
-category: Inside PostHog
-tags:
-  - Startups
+category: Startups
 ---
 
 What could be worse than handing out 50% of your company's equity to a co-founder who doesn't understand the product as much as you do, and all they seem to bring is the ability to talk?

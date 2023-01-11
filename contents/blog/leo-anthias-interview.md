@@ -11,9 +11,10 @@ author:
   - mo-shehu
 featuredImage: ../images/blog/leo-anthias.png
 featuredImageType: full
-category: Open source
+category: Startups
 tags:
   - Startups
+  - Open source
 ---
 _(Welcome to another episode of PostHog's Community Conversations where we chat to our contributors and users.)_
 

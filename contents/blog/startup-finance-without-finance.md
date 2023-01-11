@@ -9,9 +9,9 @@ author:
   - charles-cook
 featuredImage: ../images/blog/equity.png
 featuredImageType: full
-category: Inside PostHog
+category: Startups
 tags:
-  - Startups
+  - Guides
 ---
 
 We run finance at PostHog without a dedicated finance person. This is a comprehensive, step-by-step guide to do just that. If you implement _everything_ below, it should take one person a week to complete. 

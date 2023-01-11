@@ -11,9 +11,10 @@ excerpt: >-
   Understand your conversion rates better, PostHog 1.28.0 has launched!
   Significantly revamped performance for slower queries, advanced engagement
   cohorts, SAML support, and many more improvements and fixes.
-category: Release notes
+category: PostHog news
 tags:
   - Product updates
+  - Release notes
 ---
 
 > 💡 This version contains a patch release (1.28.1), [read about it](#posthog-1281-patch) below.

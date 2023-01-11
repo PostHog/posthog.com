@@ -9,10 +9,9 @@ hideAnchor: true
 author:
   - james-hawkins
 featuredImageType: full
-category: Startups
+category: CEO diaries
 tags:
-  - CEO diaries
-  - Inside PostHog
+  - Marketing
 ---
 
 As a founder, one of the most surprisingly important skills I've realized I have is hitting the front page of [Hacker News](https://news.ycombinator.com).

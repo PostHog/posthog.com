@@ -11,7 +11,7 @@ featuredImage: ../images/blog/titles.png
 featuredImageType: full
 category: Startups
 tags:
-  - Inside PostHog
+  - Guides
 ---
 
 One huge mistake some startups make is using titles to establish and reinforce hierarchy. This is dangerous for two reasons:

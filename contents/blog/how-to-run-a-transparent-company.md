@@ -9,10 +9,10 @@ author:
   - james-hawkins
 featuredImage: ../images/blog/transparency.jpeg
 featuredImageType: full
-category: CEO diaries
+category: Startups
 tags:
-  - Inside PostHog
-  - Startups
+  - Guides
+  - Open source
 ---
 
 There really hasn't been a single situation where transparency hasn't been to our company's advantage.

@@ -11,7 +11,7 @@ author:
   - marcus-hyett
 featuredImage: ../images/blog/cookieless-analytics.png
 featuredImageType: full
-category: Guides
+category: General
 tags:
   - Privacy
 ---

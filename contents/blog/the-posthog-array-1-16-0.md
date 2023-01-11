@@ -7,9 +7,10 @@ showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/array/default.png
 featuredImageType: standard
-category: Release notes
+category: PostHog news
 tags:
   - Product updates
+  - Release notes
 ---
 
 Following our largest release to date, we are now back on a more regular release schedule. And, given that scalability was the focus of the previous release, we thought it was time for some fresh new features. 

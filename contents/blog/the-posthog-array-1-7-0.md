@@ -7,9 +7,10 @@ showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/array/default.png
 featuredImageType: standard
-category: Release notes
+category: PostHog news
 tags:
   - Product updates
+  - Release notes
 ---
 
 This week's update brings a React Native integration, time comparisons, easy access to user data from graphs, better user friendliness, and much stronger frontend testing.

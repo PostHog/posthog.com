@@ -9,10 +9,11 @@ author:
   - andy-vandervell
 featuredImage: ../images/blog/posthog-marketing/marketing-hog.jpg
 featuredImageType: full
-category: Inside PostHog
+category: Using PostHog
 tags:
   - Guides
-  - Using PostHog
+  - Product analytics
+  - Marketing
 ---
 
 We learned an interesting fact recently: only 20% of our users track their marketing website **and** their product using PostHog. This is our fault. We market to engineers at PostHog, so it's not a surprise we're less used for marketing.

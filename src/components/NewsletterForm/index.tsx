@@ -20,13 +20,15 @@ export const NewsletterForm = ({
     const classList = mergeClassList('w-full p-4 relative z-10 text-center', className)
 
     return sidebar ? (
-        <div className="flex w-full h-full p-1 bg-white dark:bg-gray-accent-dark rounded-md">
+        <div className="flex w-full h-full p-1 bg-white dark:bg-gray-accent-dark rounded-md shadow-xl">
             <div className={classList}>
                 <div className="flex flex-col">
                     <img className="w-[75px] mx-auto" src={envelope} />
-                    <p className="leading-tight font-bold text-sm m-0 mt-2">
+                    <p className="leading-tight font-bold m-0 mt-2">
                         The best of PostHog. <br />
-                        Delivered <span className="text-red">twice</span> a month.
+                        <span className="text-sm">
+                            Delivered <span className="text-red">twice</span> a month.
+                        </span>
                     </p>
                 </div>
                 <div className="mt-4 md:mt-2">
@@ -42,7 +44,7 @@ export const NewsletterForm = ({
                         <input
                             type="email"
                             name="EMAIL"
-                            className="block w-full px-2 py-2 flex-1 bg-white border-gray-accent-light rounded-sm font-semibold text-base outline-none max-w-sm"
+                            className="block w-full px-2 py-2 flex-1 bg-white border-gray-accent-light rounded-sm font-semibold text-sm outline-none max-w-sm"
                             id="mce-EMAIL"
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder="email@address.com"
@@ -60,7 +62,7 @@ export const NewsletterForm = ({
                         </div>
                         <input
                             type="submit"
-                            className="bg-red text-white shrink-0 grow-0 basis-auto font-bold lg:mt-0 text-base border-none cursor-pointer px-5 py-3 md:py-2 w-full rounded-sm relative active:top-[1px] active:scale-[.99]"
+                            className="bg-red text-white shrink-0 grow-0 basis-auto font-bold lg:mt-0 text-sm border-none cursor-pointer px-5 py-3 md:py-2 w-full rounded-sm relative active:top-[1px] active:scale-[.99]"
                             value="Sign me up!"
                         />
                     </form>
@@ -164,11 +166,11 @@ export const NewsletterForm = ({
             </form>
         </div>
     ) : (
-        <div className="flex w-full h-full p-1 bg-white dark:bg-gray-accent-dark rounded-md mb-12">
+        <div className="flex w-full h-full p-1 bg-white dark:bg-gray-accent-dark rounded-md mb-6 shadow-xl">
             <div className="w-full p-4 relative z-10 flex md:flex-row flex-col md:space-x-12 md:space-y-0 space-y-2 items-center">
                 <div className="flex space-x-2 items-center">
                     <img className="w-[75px] mx-auto" src={envelope} />
-                    <p className="leading-tight font-bold text-sm m-0">
+                    <p className="leading-tight font-bold m-0">
                         The best of PostHog. <br />
                         Delivered <span className="text-red">twice</span> a month.
                     </p>
