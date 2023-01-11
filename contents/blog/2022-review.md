@@ -1,6 +1,6 @@
 ---
 date: 2023-01-11
-title: CEO Diary: The things I learned in 2022
+title: "CEO Diary: The things I learned in 2022"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
