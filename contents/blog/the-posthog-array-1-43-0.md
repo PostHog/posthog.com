@@ -44,7 +44,7 @@ Ever created a multivariate feature flag, and wanted to show the control variant
 1.43.0 adds the ability to  manually override variants via the flag edit screen. It's great for ensuring users get the experience you want, but is also useful for testing as it enables you to deterministically choose a variant, and test across client-side and server-side feature flags.
 
 ### New: Export recordings to file
-Sometimes a recording can be so insightful, so important that you think - I want to keep a record of this forever. Well now you can export any recording to a file and load it back into PostHog for playback in the future. Whether it is to commerate your first recorded signup or for compliance reasons, the tools are now in your hands.
+Sometimes a recording can be so insightful, so important that you think - I want to keep a record of this forever. Well now you can export any recording to a file and load it back into PostHog for playback in the future. Whether it is to commemorate your first recorded signup or for compliance reasons, the tools are now in your hands.
 
 ### Improved: More experiment variants and improved flow
 A regular complaint used to be that, if you made a mistake while making an experiment, you couldn't go back to fix. Well, we fixed that so you can now:
