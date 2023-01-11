@@ -85,9 +85,21 @@ Here's another example from our website with the heatmap enabled:
 
 What the toolbar is doing here is displaying the number of clicks on each of those elements over the past 7 days.
 
-You can change the date range of the heatmap by clicking on the number next to the (🔥) icon on the toolbar. This displays a new menu where you can select various ranges, and view a list of the most clicked on elements in descending order.
+You can change the date range of the heatmap by clicking on the number next to the (🔥) icon on the toolbar. 
 
-Numbers at the bottom or top of the screen just indicate that there are more elements that are not currently being displayed on the page. 
+![The toolbar with the hteamp showing and a little number next to it](../images/tutorials/toolbar/toolbar-heatmap-icon.png)
+
+This displays a new menu where you can select various ranges, and view a list of the most clicked on elements in descending order.
+
+### Using wildcards to search "slug" URLs
+
+If you have a page where the URL has an ID or repeating part (e.g. `/my-shop/product/a-product-id`), you can use this menu to add wildcards into the URL that the toolbar searches. Wildcards will match any value in that part of the URL.
+
+For example, to show clicks across all product pages, replace `a-product-id` with `*` so the URL looks like `/my-shop/product/*`
+
+![a gif of the toolbar popover menu being used to add a wildcard into the URL](../images/tutorials/toolbar/wildcards.gif)
+
+Numbers at the bottom or top of the screen indicate that there are more elements that are not currently being displayed on the page. 
 
 With the heatmap enabled, if you then click on an element, you will also be able to see its ranking on the page and create an action from it.
 
