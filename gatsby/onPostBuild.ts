@@ -10,6 +10,7 @@ import jobTemplate from '../src/templates/OG/job.js'
 import { flattenMenu } from './utils'
 import fetch from 'node-fetch'
 import { GatsbyNode } from 'gatsby'
+import sidebars from '../src/sidebars/index'
 
 export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
     const { data } = await graphql(`
@@ -70,46 +71,6 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
                         featuredImage {
                             absolutePath
                         }
-                    }
-                }
-            }
-            sidebars: file(absolutePath: { regex: "//sidebars/sidebars.json$/" }) {
-                childSidebarsJson {
-                    handbook {
-                        children {
-                            children {
-                                children {
-                                    name
-                                    url
-                                }
-                                name
-                                url
-                            }
-                            name
-                            url
-                        }
-                        name
-                        url
-                    }
-                    docs {
-                        children {
-                            children {
-                                children {
-                                    name
-                                    url
-                                }
-                                name
-                                url
-                            }
-                            name
-                            url
-                        }
-                        name
-                        url
-                    }
-                    apps {
-                        name
-                        url
                     }
                 }
             }
@@ -224,8 +185,8 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
         })
     }
 
-    const handbookMenu = data.sidebars.childSidebarsJson.handbook
-    const docsMenu = data.sidebars.childSidebarsJson.docs
+    const handbookMenu = sidebars.handbook
+    const docsMenu = sidebars.docs
     const docsHandbookMenus = flattenMenu([...handbookMenu, ...docsMenu])
 
     // Docs and Handbook OG

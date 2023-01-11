@@ -7,7 +7,7 @@ import Layout from 'components/Layout'
 import { Posts } from 'components/Blog'
 import Pagination from 'components/Pagination'
 import { NewsletterForm } from 'components/NewsletterForm'
-import { blog } from '../sidebars/sidebars.json'
+import blog from 'sidebars/blog.json'
 import CommunityCTA from 'components/CommunityCTA'
 
 const BlogCategory = ({

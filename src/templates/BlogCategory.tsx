@@ -6,7 +6,7 @@ import Layout from 'components/Layout'
 import { Posts, PostToggle } from 'components/Blog'
 import Pagination from 'components/Pagination'
 import { NewsletterForm } from 'components/NewsletterForm'
-import { blog } from '../sidebars/sidebars.json'
+import blog from 'sidebars/blog.json'
 import CommunityCTA from 'components/CommunityCTA'
 import { capitalize } from 'instantsearch.js/es/lib/utils'
 
