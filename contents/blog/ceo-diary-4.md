@@ -1,10 +1,15 @@
 ---
 date: 2021-12-09
 title: '"How come your website is so nice?"'
-categories: ["CEO diaries", "Inside PostHog"]
-author: ["james-hawkins"]
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+author:
+  - james-hawkins
 featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
+category: CEO diaries
 ---
 
 I've been asked this three times today, so I thought I'd explain it from a founder's perspective. This is what I've learned so far.

@@ -2144,6 +2144,44 @@
             "url": "/apps/zendesk-connector"
         }
     ],
+    "blog": [
+        {
+            "name": "Blog",
+            "url": "/blog"
+        },
+        {
+            "name": "CEO diaries",
+            "url": "/blog/categories/ceo-diaries"
+        },
+        {
+            "name": "Engineering",
+            "url": "/blog/categories/engineering"
+        },
+        {
+            "name": "HogMail",
+            "url": "/blog/categories/hogmail"
+        },
+        {
+            "name": "Inside PostHog",
+            "url": "/blog/categories/inside-posthog"
+        },
+        {
+            "name": "PostHog news",
+            "url": "/blog/categories/posthog-news"
+        },
+        {
+            "name": "Product growth",
+            "url": "/blog/categories/product-growth"
+        },
+        {
+            "name": "Startups",
+            "url": "/blog/categories/startups"
+        },
+        {
+            "name": "Using PostHog",
+            "url": "/blog/categories/using-posthog"
+        }
+    ],
     "community": [
         {
             "name": "Community"

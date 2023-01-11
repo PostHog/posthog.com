@@ -1,11 +1,11 @@
 ---
-title: How to define, identify and analyze power users
+title: How to identify and analyze power users
 sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-10-31
 featuredImage: ../images/tutorials/banners/power-users.png
-topics: ['trends', 'cohorts', 'session recordings']
+tags: ['trends', 'cohorts', 'session recordings']
 ---
 
 Power users are your best and most important customers. They're knowledgable, willing to learn, and more likely to give feedback than average users. They're also more demanding.
@@ -16,7 +16,7 @@ Locking them in will give you a competitive advantage, but they're also more lik
 
 In this tutorial, we’ll cover how to **identify** and **analyze power users** so you can keep them happy and convert your average users into power users. All you need to start is a PostHog instance (and some users).
 
-## How to define your power users
+## Defining your power users
 
 There is no one-size-fits-all definition for power users – every company and product has its own. Defining what they do is key to identifying and analyzing them. Ideally, your power users should align with your ideal customer profile and your [key product metrics](/blog/b2b-saas-product-metrics).
 
@@ -36,7 +36,7 @@ For example, at PostHog, we define power users as users with a high number of [d
 
 > A test carried out on Oct 6 with cohorts from Aug 8 to Aug 29, 2021 revealed that Discoveries show 2.3x more retained users (in absolute numbers) and had an F1-score 33% higher than for Discovered Learnings.
 
-## Identifying your power users
+## Identifying your power user
 
 Once you’ve decided your definition is a good one, you can use it to create a cohort. To create a power user cohort, we rely on two criteria:
 
@@ -51,7 +51,7 @@ In Hedgebox, our imanginary Dropbox clone, we’ll use `uploaded_file` as the po
 
 Make sure to add the title (that is searchable) and description, then select a type (static vs dynamic). You likely want to make this cohort dynamic to ensure it updates with users matching the criteria now. Finally, we’ll click save to use this power user cohort in analysis.
 
-## Analyzing your power users
+## Analyzing power users
 
 Once we’ve saved a cohort, we immediately get a list of users who fit our power user criteria. We can start by using this list to check for session recordings. To do so, go to recordings, filter by persons and cohorts, then search for your power user cohort. From there you can filter further by events, date, or duration. Analyzing these recordings gives you insights into how power users use your product, and enables you to build a better one for them.
 
