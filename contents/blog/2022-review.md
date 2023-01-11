@@ -19,7 +19,7 @@ It's always helpful to look back on the year just gone, and 2022 was an exceptio
 
 ![Our 2022 revenue growth over time, which increases by 6 times](../images/revenue-end-2022.jpg)
 
-- Revenue grew nearly 6 times, without any outbound sales team.
+- Revenue grew nearly 6x without any outbound sales team.
 
 - We hit a 2 month [CAC payback period](https://www.thesaascfo.com/cac-payback-period/), salaries included. Around [12 months](https://www.geckoboard.com/best-practice/kpi-examples/cac-payback-period/#:~:text=The%20general%20benchmark%20for%20startups,have%20greater%20access%20to%20capital.) is seen as exceptional.
 
