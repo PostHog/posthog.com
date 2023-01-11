@@ -89,7 +89,7 @@ If we _had_ hired a sales team, I guarantee we'd be focusing on how to send more
 
 Lots of companies raised very hyped funding rounds in 2021 – we had demand, but ultimately chose not to move forward. We are confident we made the right call not to do this, but we felt at the time that we were going against the grain. It was really cool to talk about this stuff openly with our team, and to see how quickly we started taking pride in building a real company.
 
-### Doing more of what works in many parts of the company has been great
+### Doing more of what works in many parts of the company has been great
 
 In Go To Market, it's always tempting to explore new channels. However, in 2022, we really benefited from understanding where our growth was _actually_ coming from, and doing more of those things. This meant content marketing and word of mouth growth.
 
