@@ -1,6 +1,6 @@
 ---
 date: 2023-01-10
-title: "Introduction: ClickHouse vs Druid"
+title: "In-depth: ClickHouse vs Druid"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -11,13 +11,13 @@ featuredImageType: full
 categories: ["Engineering", "Guides"]
 ---
 
-Contrary to what the names might suggest, ClickHouse isn’t an TikTok influencer house and Druid isn’t (just) a D&D character class – they're both OLAP databases designed to store lots of data. 
+Contrary to what the names might suggest, ClickHouse isn’t an TikTok influencer house and Druid isn’t (just) a D&D character class – they're both modern online analytical processing (OLAP) databases designed to store and retrieve lots of data fast. 
 
-OLAP, unlike OLTP databases like mySQL (see below), store data in a columnar format, ripe for aggregations. But, while ClickHouse and Druid solve a fundamentally similar problem, they do so via dramatically different approaches. 
+OLAP databases store data in a columnar format that is primed for aggregations, unlike online _transaction_ processing (OLTP) ones like mySQL (see below). But, while ClickHouse and Druid solve a fundamentally similar problem, they do so via dramatically different approaches. 
 
 ![OLAP vs OLTP](../images/blog/clickhouse-vs-postgres/rows-vs-columns.png)  
 
-Business intelligence tools, stock market trading books, and apps with lots of charts and graphs are all examples of products that could benefit from OLAP databases. 
+Products with massive volumes of data, like business intelligence tools, stock market trading books, and apps with lots of charts and graphs, can benefit from using  OLAP databases. 
 
 At PostHog, we use ClickHouse to power our analytics warehouse – lovingly dubbed our Events Mansion. ClickHouse was a saving grace when our Postgres setup was grinding to a halt due to our growth. 
 
@@ -35,7 +35,7 @@ Well, Druid is the former and ClickHouse is the latter. If that analogy doesn't 
 
 - ClickHouse is like a lakefront mansion. You keep the house, polish the interior, and extend it with extra wings when the need arises. 
 
-- Druid is a master-plan community like [The Villages](https://en.wikipedia.org/wiki/The_Villages,_Florida) where each house is interconnected by roads and (in some cases) a shared canal because... canals are nice?
+- Druid is a master-plan suburban community where each house is interconnected by roads and (in some cases) a shared canal because... canals are nice?
 
 ClickHouse is about keeping every component of the database tightly woven via a single binary executable; Druid’s architecture is modular, configurable, and consequently more complicated. 
 
@@ -47,11 +47,10 @@ Here's what that looks like in practice:
 
 ![ClickHouse architecture diagram](../images/blog/clickhouse-vs-druid/clickhouse-architecture.png)  
 
-What is a materialized view? A materialized view, unlike a normal view, is a separate table of data generated at a specific point of time from the base tables. When you query a normal view, the view is re-queried before being queried from.
+What is a materialized view? A materialized view, unlike a normal view, is a separate table of data generated at a specific time from the base tables. This makes running queries on data in materialized views more efficient (if set up correctly). Materialized views don't need to be re-queried before being queried from, unlike normal views.
 
 While Postgres, a row-based OLTP database, supports materialized views, they aren’t good for dynamic data since refreshing them is expensive. ClickHouse uniquely can efficiently update materialized views upon new data within a delay threshold. 
 
-Granted, dynamic materialized views aren’t exactly an architectural element in the same way RAM, CPU, and Disc are. But they impact how architecture is used. 
 
 Most databases achieve speed by caching calculated results after an initial slow query. ClickHouse’s materialized views do the heavy-lifting ahead of time, and are constantly updating so that they’re never ***too*** out-of-date. This is a happy medium for a lot of data-driven applications, and contributes to ClickHouse's reputation for extremely fast query performance on large datasets.
 
@@ -77,7 +76,9 @@ Remember that analogy between the mansion and master-plan community? For Druid, 
 
 #### Cattle vs Pets
 
-Druid expects you to treat its nodes like cattle, constantly removing and adding nodes at a whim. You would never do that with ClickHouse instances since each ClickHouse instance likely plays a critical role in your application’s stability. Druid, meanwhile, expects you to utilize up to ten thousand data nodes, each which could be taken offline and maintained without impacting the application.  
+Druid expects you to treat its nodes like cattle, constantly removing and adding nodes on a whim. You would never do that with ClickHouse instances since each ClickHouse instance likely plays a critical role in your application’s stability. 
+
+You have to treat ClickHouse more like your pet, caring about it individually and making sure it stays alive. Druid, meanwhile, expects you to utilize up to ten thousand data nodes, each which could be taken offline and maintained without impacting the application.
 
 Of course, this means that Druid requires more maintenance work. **Much** more maintenance work. Not just that, but server costs, too. Druid is built for large enterprise clients with complex needs and massive financial backing to support the architecture. ClickHouse, meanwhile, is a one-size-fits-most solution; scalable, just not in the same multidimensional, multi-structural way as Druid is.  
 
@@ -95,13 +96,13 @@ You can consider this approach somewhat similar to the philosophy behind ClickHo
 
 ## Use cases
 
-While ClickHouse and Druid both strive to solve the same problem, their shortcomings and strengths actually provides a strong case for when you should and shouldn’t use each. 
+ClickHouse and Druid strive to solve the same problem, but they have unique strengths and weaknesses that make them ideal for different use cases.
 
 Let’s explore these factors for both. 
 
 ### When to use ClickHouse
 
-As with any complex and simple tool, you should default to the simpler tool if you can. ClickHouse is easy to setup, doesn’t involve multi-piece architecture to maintain, and has a war-chest of tools for a majority of needs. 
+As with any technical comparison, you should default to the simpler tool if you can. ClickHouse is easy to setup, doesn’t involve multi-piece architecture to maintain, and has a chest of tools for a majority of needs. 
 
 In fact, it’s less about when you should use ClickHouse and more about when you shouldn’t. Here are some reasons for why ClickHouse may **not** be the right solution for you: 
 
@@ -119,7 +120,7 @@ Speaking from experience, if you run a billion-event [product analytics platform
 
 ### When to use Druid
 
-Druid is an ideal solution for teams that require a modular design with precision. If you need to fetch data immediately after the data was streamed, Druid is the ideal solution. However, there are some key caveats that you need to be aware of: 
+Druid is an ideal solution for teams that require a modular design with precision. If you need to fetch data immediately after the data was streamed, Druid is great. However, there are some key caveats that you need to be aware of: 
 
 - Druid is more complex to set up and maintain
 - Druid is more expensive as it requires more machines and systems
@@ -144,7 +145,7 @@ Additionally, Druid is the best solution for applications that need real-time da
 
 ## Summary
 
-Druid and ClickHouse are similar solutions solving the same problem with dramatically different designs. ClickHouse champions simplicity and a unified instance; Druid is complex but highly configurable. 
+Druid and ClickHouse both seek to handle large volumes of data at speed, but they do so in completely different ways. ClickHouse champions simplicity and a unified instance; Druid is complex but highly configurable. 
 
 While both offer enormous advantages over traditional databases for columnar data, companies should strongly consider their needs when making choice between the two. 
 
