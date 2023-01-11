@@ -16,10 +16,9 @@ const DemoCallInfo = () => (
             The setup calls take place in small groups with Cameron from our Customer Success team, and run for about an
             hour. Before the call, we recommend you <a href="https://app.posthog.com/">sign up to our Cloud version</a>{' '}
             and try your hand at
-            <Link to="/docs/integrate/client/snippet-installation"> installing our snippet</Link> on your website. Doing
-            so would allow us to tailor the onboarding to your needs, leveraging data from your own website instead of
-            demo data. However, if you prefer to get a demo first, we'll give you access to a demo playground during our
-            call.
+            <Link to="/docs/integrate"> installing our snippet</Link> on your website. Doing so would allow us to tailor
+            the onboarding to your needs, leveraging data from your own website instead of demo data. However, if you
+            prefer to get a demo first, we'll give you access to a demo playground during our call.
         </p>
         <br />
         <p>
