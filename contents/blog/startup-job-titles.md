@@ -5,13 +5,10 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author:
-  - mo-shehu
+author: ["mo-shehu"]
 featuredImage: ../images/blog/titles.png
 featuredImageType: full
-category: Startups
-tags:
-  - Guides
+categories: ["Startups", "Inside PostHog"]
 ---
 
 One huge mistake some startups make is using titles to establish and reinforce hierarchy. This is dangerous for two reasons:

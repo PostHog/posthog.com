@@ -7,12 +7,8 @@ showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/data-management-feature/posthog-data-management.png
 featuredImageType: full
-author:
-  - alex-kim
-category: PostHog news
-tags:
-  - Launch week
-  - Product updates
+author: ["alex-kim"]
+categories: ["Product updates", "Launch week"]
 ---
 
 PostHog is growing fast. In just the last year we've measured ~36.5B total events ingested in PostHog Cloud, and hundreds of self-hosted users reached the 1M total ingested events milestone.

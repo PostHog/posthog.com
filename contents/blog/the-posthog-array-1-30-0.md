@@ -5,16 +5,10 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+categories: ['Release notes', 'Product updates']
 featuredImage: ../images/blog/array/1-30-0.png
 featuredImageType: full
-excerpt: >-
-  Brand new and faster user interface, automatic conversion signal detection
-  with Correlation analysis, saving insights for future use and a fully revamped
-  recordings playback experience and more than 350 improvements/fixes more.
-category: PostHog news
-tags:
-  - Product updates
-  - Release notes
+excerpt: Brand new and faster user interface, automatic conversion signal detection with Correlation analysis, saving insights for future use and a fully revamped recordings playback experience and more than 350 improvements/fixes more.
 ---
 
 PostHog 1.30.0 is a milestone release! We've introduced a brand new, faster user interface, automatic conversion signal detection with correlation analysis, the ability to save insights for future use and a fully revamped recordings playback experience. And that's just for starters!

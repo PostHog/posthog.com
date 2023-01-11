@@ -7,13 +7,8 @@ showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/b2b-product-metrics/b2b-product-metrics.jpeg
 featuredImageType: full
-author:
-  - andy-vandervell
-category: Product growth
-tags:
-  - Guides
-  - Product analytics
-  - Product metrics
+categories: ["Guides"]
+author: ["andy-vandervell"]
 ---
 
 So, you're building a B2B SaaS product.

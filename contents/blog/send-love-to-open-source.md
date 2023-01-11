@@ -7,11 +7,8 @@ showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/send-love-to-open-source.png
 featuredImageType: standard
-author:
-  - andy-vandervell
-category: General
-tags:
-  - Open source
+author: ["andy-vandervell"]
+categories: ["Open source"]
 ---
 
 Valentine's Day is coming up and we'd like to share our love for the open-source community that helps power PostHog! Here's how:

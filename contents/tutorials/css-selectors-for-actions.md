@@ -5,7 +5,7 @@ showTitle: true
 author: ['igor-kotua']
 date: 2022-07-06
 featuredImage: ../images/tutorials/banners/css-selectors-for-actions.png
-tags: ["actions", "toolbar"]
+topics: ["actions", "toolbar"]
 ---
 
 _Estimated reading time: 7 minutes_ ☕

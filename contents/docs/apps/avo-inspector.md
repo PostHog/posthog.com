@@ -3,7 +3,7 @@ title: Avo Inspector
 github: https://github.com/PostHog/posthog-avo-plugin
 installUrl: https://app.posthog.com/project/apps?name=avo-inspector
 thumbnail: ../../apps/thumbnails/avo-logo.png
-tags:
+topics:
     - avo-inspector
 ---
 

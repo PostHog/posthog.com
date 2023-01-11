@@ -1,6 +1,6 @@
 ---
 title: Sentry Connector
-tags:
+topics:
     - sentry-connector
 ---
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { graphql, PageProps } from 'gatsby'
+import { graphql, navigate, PageProps } from 'gatsby'
 import { community } from '../../sidebars/sidebars.json'
 import SEO from 'components/seo'
 import Layout from 'components/Layout'
@@ -15,8 +15,10 @@ import Spinner from 'components/Spinner'
 import { useStaticQuery } from 'gatsby'
 import Tooltip from 'components/Tooltip'
 import GitHubTooltip, { Author } from 'components/GitHubTooltip'
+import QuestionsTable from 'components/Questions/QuestionsTable'
+import useSWRInfinite from 'swr/infinite'
 
-const Avatar = (props: { className?: string; src?: string }) => {
+export const Avatar = (props: { className?: string; src?: string }) => {
     return (
         <div className={`overflow-hidden rounded-full ${props.className}`}>
             {props.src ? (
@@ -37,22 +39,24 @@ const Avatar = (props: { className?: string; src?: string }) => {
     )
 }
 
-const Login = () => {
+export const Login = ({ onSubmit = () => undefined }: { onSubmit?: () => void }) => {
     const [login, setLogin] = useState<null | { type: 'login' | 'signup' }>(null)
     return login ? (
         <>
-            <p className="m-0 text-sm font-bold">Note: PostHog.com authentication is separate from your PostHog app.</p>
-            <p className="text-sm mt-2">
+            <p className="m-0 text-sm font-bold dark:text-white">
+                Note: PostHog.com authentication is separate from your PostHog app.
+            </p>
+            <p className="text-sm mt-2 dark:text-white">
                 We suggest signing up with your personal email. Soon you'll be able to link your PostHog app account.
             </p>
-            <SqueakLogin />
+            <SqueakLogin onSubmit={onSubmit} />
         </>
     ) : (
         <>
-            <p className="m-0 text-base">
+            <p className="m-0 text-sm dark:text-white">
                 Your PostHog.com community profile lets you ask questions and get early access to beta features.
             </p>
-            <p className="text-sm mt-2">
+            <p className="text-[13px] mt-2 dark:text-white p-2 bg-gray-accent-light dark:bg-gray-accent-dark rounded">
                 <strong>Tip:</strong> If you've ever asked a question on PostHog.com, you already have an account!
             </p>
             <CallToAction onClick={() => setLogin({ type: 'login' })} width="full" size="sm">
@@ -71,7 +75,7 @@ const Login = () => {
     )
 }
 
-const Profile = ({
+export const Profile = ({
     profile,
     setEditModalOpen,
 }: {
@@ -82,19 +86,20 @@ const Profile = ({
     const name = [profile?.first_name, profile?.last_name].filter(Boolean).join(' ')
     return (
         <div>
-            <div className="flex items-center space-x-2 mt-4 mb-6">
+            <Link
+                to={`/community/profiles/${id}`}
+                className="flex items-center space-x-2 mt-2 mb-1 -mx-2 relative active:top-[1px] active:scale-[.99] hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark rounded p-2"
+            >
                 <Avatar src={avatar} className="w-[40px] h-[40px]" />
-                <div>{name && <p className="m-0 font-semibold">{name}</p>}</div>
-            </div>
-            <CallToAction to={`/community/profiles/${id}`} width="full" size="xs" type="secondary">
-                Visit profile
-            </CallToAction>
+                <div>{name && <p className="m-0 font-bold">{name}</p>}</div>
+            </Link>
+
             <CallToAction
                 onClick={() => setEditModalOpen(true)}
                 width="full"
                 size="xs"
-                type="outline"
-                className="mt-2 border-black/30"
+                type="secondary"
+                className="mt-2"
             >
                 Edit profile
             </CallToAction>
@@ -132,13 +137,13 @@ const Activity = ({ questions, questionsLoading }) => {
                                         {profile?.id === user?.profile?.id ? 'You started a thread' : 'You replied to'}:
                                     </p>
                                     <Link
-                                        className="font-bold text-ellipsis overflow-hidden whitespace-nowrap"
+                                        className="font-bold text-ellipsis overflow-hidden whitespace-nowrap text-base"
                                         to={`/questions/${question?.permalink}`}
                                     >
                                         {question?.subject}
                                     </Link>
                                 </div>
-                                <p className="m-0 font-semibold opacity-60 flex-shrink-0 xl:w-[200px]">
+                                <p className="m-0 font-semibold opacity-60 flex-shrink-0 text-sm xl:w-[200px]">
                                     {numReplies} {numReplies === 1 ? 'reply' : 'replies'}
                                 </p>
                             </ListItem>
@@ -211,8 +216,36 @@ const ActiveIssues = ({ issues }) => {
                     )
                 })}
             </ul>
-            <CallToAction width="full" to="https://github.com/PostHog/posthog/issues">
+            <CallToAction width="full" type="secondary" to="https://github.com/PostHog/posthog/issues">
                 See active issues on GitHub
+            </CallToAction>
+        </div>
+    )
+}
+
+const RecentQuestions = () => {
+    const [sortBy, setSortBy] = useState<'newest' | 'activity' | 'popular'>('newest')
+
+    const { data, size, setSize, isLoading, mutate } = useSWRInfinite<any[]>(
+        (offset) =>
+            `${process.env.GATSBY_SQUEAK_API_HOST}/api/v1/questions?organizationId=${
+                process.env.GATSBY_SQUEAK_ORG_ID
+            }&start=${offset * 5}&perPage=5&published=true&sortBy=${sortBy}`,
+        (url: string) =>
+            fetch(url)
+                .then((r) => r.json())
+                .then((r) => r.questions)
+    )
+
+    const questions = React.useMemo(() => {
+        return data?.flat() || []
+    }, [size, data])
+    return (
+        <div id="recent-questions" className="mb-12">
+            <SectionTitle>Recent questions</SectionTitle>
+            <QuestionsTable hideLoadMore questions={questions} size={size} setSize={setSize} isLoading={isLoading} />
+            <CallToAction className="mt-4" type="secondary" width="full" to="/questions">
+                Browse all questions
             </CallToAction>
         </div>
     )
@@ -232,7 +265,7 @@ const ActivePulls = ({ pulls }) => {
                     )
                 })}
             </ul>
-            <CallToAction width="full" to="https://github.com/PostHog/posthog/pulls">
+            <CallToAction width="full" type="secondary" to="https://github.com/PostHog/posthog/pulls">
                 See active PRs on GitHub
             </CallToAction>
         </div>
@@ -306,7 +339,7 @@ export default function CommunityPage({ params }: PageProps) {
                             </div>
                         </Modal>
                         <PostLayout
-                            menuWidth={320}
+                            menuWidth={{ right: 320 }}
                             title="Profile"
                             menu={community}
                             sidebar={
@@ -320,13 +353,14 @@ export default function CommunityPage({ params }: PageProps) {
                             }
                             tableOfContents={[
                                 ...(profile ? [{ url: 'my-activity', value: 'My activity', depth: 0 }] : []),
+                                { url: 'recent-questions', value: 'Recent questions', depth: 0 },
                                 { url: 'active-issues', value: 'Most active issues', depth: 0 },
                                 { url: 'active-pulls', value: 'Most active PRs', depth: 0 },
                             ]}
                             hideSurvey
                         >
-                            <div className="xl:pt-0 pt-8"></div>
                             {profile && <Activity questionsLoading={questionsLoading} questions={questions} />}
+                            <RecentQuestions />
                             <ActiveIssues issues={issues.nodes} />
                             <ActivePulls pulls={pulls.nodes} />
                         </PostLayout>
@@ -346,7 +380,7 @@ interface IGitHubStats {
 
 const Stat = ({ label, count }: { label: string; count: number }) => {
     return (
-        <li className="flex flex-col">
+        <li className="flex flex-col flex-1">
             <h5 className="m-0 text-sm opacity-60 font-semibold">{label}</h5>
             <p className="m-0 text-sm font-semibold">{count.toLocaleString()}</p>
         </li>
@@ -366,11 +400,11 @@ const Stats = ({
 }) => {
     return (
         <div className="mb-6">
-            <Link to={`https://github.com/${owner}/${repo}`} external>
+            <Link to={`https://github.com/${owner}/${repo}`} external className="font-semibold">
                 {owner}/{repo}
             </Link>
             <p className="m-0 text-sm">{description}</p>
-            <ul className="m-0 p-0 list-none flex space-x-2 mt-2">
+            <ul className="m-0 p-0 list-none flex space-x-3 mt-2">
                 <Stat label="Stars" count={stats?.stars} />
                 <Stat label="Contributors" count={stats?.contributors} />
                 <Stat label="Forks" count={stats?.forks} />
@@ -416,14 +450,20 @@ const ProfileSidebar = ({
                 <div className="mb-2 flex items-baseline justify-between">
                     <h4 className="m-0">My profile</h4>
                     {profile && (
-                        <button onClick={handleSignOut} className="text-red font-semibold text-sm">
-                            Sign out
+                        <button onClick={handleSignOut} className="text-red font-bold text-sm">
+                            Logout
                         </button>
                     )}
                 </div>
                 {profile ? <Profile setEditModalOpen={setEditModalOpen} profile={profile} /> : <Login />}
             </SidebarSection>
             <SidebarSection title="Stats for our popular repos">
+                <Stats
+                    stats={postHogStats}
+                    owner="posthog"
+                    repo="posthog"
+                    description="The app you're here to learn about"
+                />
                 <Stats
                     stats={postHogComStats}
                     owner="posthog"
@@ -433,12 +473,6 @@ const ProfileSidebar = ({
                             The very website you're on <i>right now</i>!
                         </>
                     }
-                />
-                <Stats
-                    stats={postHogStats}
-                    owner="posthog"
-                    repo="posthog"
-                    description="The app you're here to learn about"
                 />
             </SidebarSection>
         </div>

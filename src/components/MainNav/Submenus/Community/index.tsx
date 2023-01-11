@@ -1,13 +1,14 @@
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
-import React, { useState } from 'react'
-import { Squeak } from 'squeak-react'
+import React from 'react'
 import Header from '../Header'
 import RightCol from '../RightCol'
 import CallToAction from '../CallToAction'
-import { Wrapper } from '../Wrapper'
-import { graphql, useStaticQuery } from 'gatsby'
+import { TwoCol, Wrapper } from '../Wrapper'
+import { graphql, navigate, useStaticQuery } from 'gatsby'
 import slugify from 'slugify'
+import { Avatar, Login } from '../../../../pages/community'
+import { useUser } from 'squeak-react'
 
 interface ColMenuItems {
     title: string
@@ -15,8 +16,35 @@ interface ColMenuItems {
     url: string
 }
 
+const Profile = () => {
+    const { user } = useUser()
+    const profile = user?.profile
+    return profile ? (
+        <div>
+            <div className="flex items-center space-x-2 mt-4 mb-3">
+                <Avatar src={profile.avatar} className="w-[40px] h-[40px]" />
+                <div>
+                    {
+                        <p className="m-0 font-semibold dark:text-white">
+                            {[profile?.first_name, profile?.last_name].filter(Boolean).join(' ')}
+                        </p>
+                    }
+                </div>
+            </div>
+            <CallToAction to={`/community/profiles/${profile?.id}`} className="!w-full" size="xs" type="secondary">
+                Visit profile
+            </CallToAction>
+        </div>
+    ) : (
+        <Login onSubmit={() => navigate('/community')} />
+    )
+}
+
 export default function Docs({ referenceElement }: { referenceElement: HTMLDivElement }) {
-    const { topicGroups } = useStaticQuery(query)
+    const {
+        topicGroups,
+        questions: { allTopics },
+    } = useStaticQuery(query)
 
     const resources: ColMenuItems[] = [
         {
@@ -56,6 +84,8 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
         },
     ]
 
+    const topicGroupsToShow = ['Product features', 'Setup & platform']
+
     return (
         <Wrapper referenceElement={referenceElement} placement="bottom-end">
             <section className="flex md:flex-col flex-col-reverse">
@@ -70,34 +100,68 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                                     </h3>
                                     <CallToAction to="/questions">Ask a question</CallToAction>
                                 </div>
-                                <ul className="grid grid-cols-3 m-0 p-0 list-none mt-2">
-                                    {topicGroups.nodes.map(({ label, topics }) => {
-                                        return (
-                                            topics.length > 0 && (
-                                                <li>
-                                                    <h3 className="text-base opacity-70 m-0 md:mr-6 text-black">
-                                                        {label}
-                                                    </h3>
-                                                    <ul className="list-none m-0 p-0 mt-2 ">
-                                                        {topics.map(({ label }) => {
-                                                            return (
-                                                                <li key={label}>
-                                                                    <Link
-                                                                        className="text-sm font-bold text-red"
-                                                                        to={`/questions/topics/${slugify(label, {
-                                                                            lower: true,
-                                                                        })}`}
-                                                                    >
-                                                                        {label}
-                                                                    </Link>
-                                                                </li>
-                                                            )
-                                                        })}
-                                                    </ul>
-                                                </li>
+                                <p className="mt-4 dark:text-white">
+                                    Ask and answer community questions about PostHog. These questions are posted across
+                                    PostHog.com and aggregated here.
+                                </p>
+                                <ul className="grid grid-cols-2 m-0 p-0 list-none mt-2 gap-x-6">
+                                    {topicGroups.nodes
+                                        .filter((node) => topicGroupsToShow.includes(node.label))
+                                        .map(({ label, topics }) => {
+                                            return (
+                                                topics.length > 0 && (
+                                                    <li>
+                                                        <h3 className="text-base opacity-70 m-0 md:mr-6 text-black">
+                                                            {label}
+                                                        </h3>
+                                                        <ul className="list-none m-0 p-0 mt-2 ">
+                                                            {topics
+                                                                .sort((a, b) => {
+                                                                    return (
+                                                                        allTopics.find(
+                                                                            (topic) => topic.topic === b.label
+                                                                        )?.count -
+                                                                        allTopics.find(
+                                                                            (topic) => topic.topic === a.label
+                                                                        )?.count
+                                                                    )
+                                                                })
+                                                                .slice(0, 4)
+                                                                .map(({ label }) => {
+                                                                    return (
+                                                                        <li
+                                                                            className="last:border-b-0 py-2 border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark"
+                                                                            key={label}
+                                                                        >
+                                                                            <Link
+                                                                                className="text-sm font-bold text-red flex w-full space-x-2"
+                                                                                to={`/questions/topics/${slugify(
+                                                                                    label,
+                                                                                    {
+                                                                                        lower: true,
+                                                                                    }
+                                                                                )}`}
+                                                                            >
+                                                                                <span>{label}</span>
+                                                                                <span className="text-black dark:text-white opacity-50 font-semibold">
+                                                                                    (
+                                                                                    {
+                                                                                        allTopics.find(
+                                                                                            (topic) =>
+                                                                                                topic.topic === label
+                                                                                        )?.count
+                                                                                    }
+                                                                                    )
+                                                                                </span>
+                                                                            </Link>
+                                                                        </li>
+                                                                    )
+                                                                })}
+                                                        </ul>
+                                                    </li>
+                                                )
                                             )
-                                        )
-                                    })}
+                                        })}
                                 </ul>
                             </div>
 
@@ -107,6 +171,32 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                                 </CallToAction>
                             </div>
                         </div>
+                        <TwoCol
+                            left={{
+                                title: 'Roadmap',
+                                cta: {
+                                    url: '/roadmap',
+                                    label: 'Browse roadmap',
+                                },
+                                children: (
+                                    <p className="m-0 text-[14px] dark:text-white">
+                                        See what we're building, and help us decide what to build next.
+                                    </p>
+                                ),
+                            }}
+                            right={{
+                                title: 'Changelog',
+                                cta: {
+                                    url: '/roadmap/changelog',
+                                    label: 'Browse changelog',
+                                },
+                                children: (
+                                    <p className="m-0 text-[14px] dark:text-white">
+                                        Take a trip down memory lane of our top company and product milestones.
+                                    </p>
+                                ),
+                            }}
+                        />
                         <div className="py-7 md:px-6 lg:px-9 border-t md:border-b-0 border-b md:mb-0 mb-4 border-gray-accent-light border-dashed">
                             <div className="grid sm:grid-cols-2 items-center">
                                 <div>
@@ -141,7 +231,12 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                             </CallToAction>
                         </div>
                     </div>
-                    <RightCol title="Resources">
+                    <RightCol title="My profile">
+                        <div className="px-3">
+                            <div className="mb-6">
+                                <Profile />
+                            </div>
+                        </div>
                         <ol className="m-0 list-none p-0">
                             {resources.map(({ title, description, url }: ColMenuItems) => {
                                 return (
@@ -175,6 +270,12 @@ const query = graphql`
                     id
                     label
                 }
+            }
+        }
+        questions: allQuestion {
+            allTopics: group(field: topics___topic___label) {
+                topic: fieldValue
+                count: totalCount
             }
         }
     }

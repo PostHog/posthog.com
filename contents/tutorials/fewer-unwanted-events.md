@@ -5,7 +5,7 @@ showTitle: true
 author: ['ian-vanagas']
 date: 2022-10-20
 featuredImage: ../images/tutorials/banners/fewer-unwanted-events.png
-tags: ['events', 'apps', 'data management']
+topics: ['events', 'apps', 'data management']
 ---
 
 **Estimated reading time:** 5 minutes ☕

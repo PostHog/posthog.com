@@ -7,12 +7,8 @@ showTitle: true
 hideAnchor: true
 featuredImage: ../images/posthog-vs-matomo/posthog-vs-matomo.jpeg
 featuredImageType: full
-author:
-  - andy-vandervell
-category: General
-tags:
-  - Comparisons
-  - Guides
+categories: ["Guides", "Comparisons"]
+author: ["andy-vandervell"]
 ---
 
 PostHog and Matomo are both [open-source analytics platforms](/blog/best-open-source-analytics-tools) you can self-host on your own infrastructure, giving you complete control over your data and unrivaled privacy compliance. However, there are some important differences between the two platforms.

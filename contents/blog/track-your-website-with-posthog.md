@@ -1,18 +1,14 @@
 ---
 date: 2022-10-10
-title: How (and why) to track your website with PostHog
+title: 'How (and why) to track your website with PostHog'
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author:
-  - joe-martin
+categories: ["Guides", "Using PostHog"]
+author: ["joe-martin"]
 featuredImage: ../images/blog/orange-blog-image.jpg
 featuredImageType: full
-category: Using PostHog
-tags:
-  - Guides
-  - Product analytics
 ---
 
 PostHog may have been built for product analytics, but that doesn’t mean you can only deploy it on your core product — you can also use it to gather analytics from your marketing website too. Internally at PostHog this is exactly what we do, tracking analytics from both the product and this very website within a single project. 

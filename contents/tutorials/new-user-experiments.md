@@ -5,7 +5,7 @@ showTitle: true
 author: ['ian-vanagas']
 date: 2022-10-10
 featuredImage: ../images/tutorials/banners/new-user-experiments.png
-tags: ['experimentation', 'feature flags']
+topics: ['experimentation', 'feature flags']
 ---
 
 - **Level:** Medium 🦔🦔

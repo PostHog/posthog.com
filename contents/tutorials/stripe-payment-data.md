@@ -5,7 +5,7 @@ showTitle: true
 author: ['ian-vanagas']
 date: 2022-10-21
 featuredImage: ../images/tutorials/banners/stripe-payment-data.png
-tags: ['trends', 'apps']
+topics: ['trends', 'apps']
 ---
 Stripe is one of the most popular payment platforms online. Connecting data from there with product data is critical for many businesses. It allows them to connect product usage with what’s keeping the product alive (revenue).
 

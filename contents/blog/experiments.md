@@ -5,15 +5,10 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author:
-  - neil-kakkar
+author: ["neil-kakkar"]
 featuredImage: ../images/blog/experiments.jpeg
 featuredImageType: full
-category: Product growth
-tags:
-  - Launch week
-  - Guides
-  - Product updates
+categories: ["Product updates", "Launch week", "Guides"]
 ---
 
 We just launched our Experimentation suite, and there's a ton we learned about running successful experiments.

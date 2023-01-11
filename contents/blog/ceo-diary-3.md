@@ -5,11 +5,10 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author:
-  - james-hawkins
-featuredImage: ../images/blog/posthog-ceo-diary-blog.png
+categories: ["CEO diaries", "Inside PostHog"]
+author: ["james-hawkins"]
+featuredImage: ../images/blog/blog-generic-4.png
 featuredImageType: full
-category: CEO diaries
 ---
 
 It has been a dramatic month.

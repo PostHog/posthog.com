@@ -5,7 +5,7 @@ showTitle: true
 author: ['ian-vanagas']
 date: 2022-11-22
 featuredImage: ../images/tutorials/banners/feature-retention.png
-tags: ["stickiness", "dashboards", "retention"]
+topics: ["stickiness", "dashboards", "retention"]
 ---
 
 Every company wants to build a product that keeps users coming back. Returning and reoccurring users are often your best ones. Many teams focus on improving user retention metrics, like weekly active users or customer retention.

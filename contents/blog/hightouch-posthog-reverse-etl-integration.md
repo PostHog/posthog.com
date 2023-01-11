@@ -7,11 +7,8 @@ showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/posthog-array-blog.png
 featuredImageType: full
-author:
-  - andy-vandervell
-category: PostHog news
-tags:
-  - Product updates
+author: ["andy-vandervell"]
+categories: ["Product updates"]
 ---
 
 We're delighted to announce that [Hightouch](https://hightouch.io/) has released an integration with PostHog so you can sync modeled data from your data warehouse into PostHog.

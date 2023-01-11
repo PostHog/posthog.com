@@ -1,16 +1,13 @@
 ---
 date: 2022-09-26
-title: 'Array 1.40.0: Interface improvements and more!'
+title: "Array 1.40.0: Interface improvements and more!"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+categories: ['Release notes', 'Product updates']
 featuredImage: ../images/blog/posthog-array-blog.png
 featuredImageType: full
-category: PostHog news
-tags:
-  - Product updates
-  - Release notes
 ---
 
 Want to know more about what we're up to? [Subscribe to HogMail, our newsletter](/newsletter), which we send every two weeks!

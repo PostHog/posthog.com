@@ -1,18 +1,14 @@
 ---
 date: 2022-08-31
-title: How to run a transparent startup
+title: "How to run a transparent startup"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author:
-  - james-hawkins
+categories: ["CEO diaries", "Inside PostHog", "Startups"]
+author: ["james-hawkins"]
 featuredImage: ../images/blog/transparency.jpeg
 featuredImageType: full
-category: Startups
-tags:
-  - Guides
-  - Open source
 ---
 
 There really hasn't been a single situation where transparency hasn't been to our company's advantage.

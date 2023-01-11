@@ -1,18 +1,14 @@
 ---
 date: 2022-03-23
-title: 'PostHog Launch Week I: A Universe of New Features'
+title: "PostHog Launch Week I: A Universe of New Features"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/launch-week-teaser.jpeg
 featuredImageType: full
-author:
-  - andy-vandervell
-category: PostHog news
-tags:
-  - Launch week
-  - Product updates
+author: ["andy-vandervell"]
+categories: ["Product updates", "Launch week"]
 ---
 
 PostHog made huge strides in 2021. To name just a few landmarks, we: 

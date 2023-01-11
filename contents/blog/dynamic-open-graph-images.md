@@ -1,21 +1,15 @@
 ---
 date: 2022-03-03
-title: Using Gatsby and Puppeteer to create dynamic Open Graph images
+title: "Using Gatsby and Puppeteer to create dynamic Open Graph images"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author:
-  - cory-watilo
+author: ["cory-watilo"]
+categories: ["Inside PostHog"]
 featuredImage: ../images/blog/actual-post-open-graph-image.png
 featuredImageType: full
-excerpt: >-
-  The image preview you see when sharing a link is a great opportunity to get
-  your brand’s message in front of people without them even clicking through to
-  your website. Most sites just opt to display a logo and some brand elements.
-category: General
-tags:
-  - Marketing
+excerpt: The image preview you see when sharing a link is a great opportunity to get your brand’s message in front of people without them even clicking through to your website. Most sites just opt to display a logo and some brand elements.
 ---
 
 ## The TL;DR version:
