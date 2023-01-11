@@ -192,6 +192,10 @@ If a candidate hasn't customized the application or resume to the role, it is a 
 
 Candidates who are unsuccessful at this stage will receive an automated rejection email, unless they personalized their application, in which we will try to send a personalized reply.
 
+### Speculative Application
+
+We stand by what we say, and we do take speculative applications seriously. The People and Ops team reviews every single speculative application weekly and if there is a possible fit for future openings, we will place the applicant into the appropriate [Ashby talent project](https://app.ashbyhq.com/projects) (i.e. full stack engineers, platform, product, website & docs, customer success, PlOps, and marketing) and notify the applicant of this via email. 
+
 ### First interview - culture interview with People & Ops 
 
 We start with an interview which is designed to get the overall picture on what a candidate is looking for, and to explain who we are. A template scorecard has been created for this stage in Ashby.
