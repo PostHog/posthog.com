@@ -1,8 +1,18 @@
 import Snippet from "../snippet.mdx"
 
-This is the simplest way to get PostHog up and running on your website, and only takes a few minutes to set-up.
+### Quick start: JavaScript snippet (recommended)
+
+> This is the simplest way to get PostHog up and running on your website, and only takes a few minutes to set-up. (This method generally works best for non-technical users or for very simple websites which don't need advanced tracking.) If you're using npm, or want to instrument custom events directly from your code, visit the dedicated [JavaScript libary](/docs/integrate/client/js) page.
+
+#### Add to your website
+
+Paste this snippet within the `<head>` tags of your website - ideally just inside the closing `</head>` tag. (You will need to do this for all pages that you wish to track.)
 
 <Snippet />
+
+Be sure to replace `<ph_project_api_key>` and `<ph_instance_address>` with your project's values. (You can find the snippet pre-filled with this data in the PostHog app under Project / Settings. _(Quick links if you use [PostHog Cloud US](https://app.posthog.com/project/settings) or [PostHog Cloud EU](https://eu.posthog.com/project/settings))_
+
+#### What this code does
 
 After including the snippet on your website, it will automatically start to:
 
@@ -10,32 +20,15 @@ After including the snippet on your website, it will automatically start to:
 -   Track when users [click on links or buttons](/docs/user-guides/events#autocapture-event-tracking)
 -   Record videos of [user sessions](/docs/user-guides/recordings) that you can play back
 
-If you do need to set up more detailed tracking, take a look at our [client libraries](#client-libraries).
+### Tips
 
-### Finding the snippet
+- **Add the snippet on your (marketing) website _and_ your application using the same PostHog project.** That means you'll be able to follow a user from the moment they come onto your website, all the way through sign up and their actual usage of your product.
+- **Track users across multiple domains** by including the same project snippet on all sites you wish to track.
+- **Disable tracking sensitive information** by adding the `ph-no-capture` class to elements you don't want to track. (We do this automatically for common fields like passwords and credit cards.)
 
-This snippet will be provided to you during setup, but, if you need to access it afterwards, you can find it under 'Project' -> 'Settings':
+### Next steps
 
-![Snippet Settings Screenshot](../../../images/features/snippet/snippet-settings.png)
+- **Add permitted domains in your PostHog project settings** so you can create [actions](/manual/actions) using the [PostHog toolbar](/manual/toolbar) directly on your site - _a convenient low-code option_.
+- Send [custom events](/docs/integrate/client/js#send-custom-events-with-posthogcapture) from your codebase for things like signups, purchases, and more KPIs.
 
-### Adding the snippet to your website
-
-Having copied the snippet from the Settings page, you should now paste this within the `<head>` tags of your website, ideally just above the closing `</head>` tag. You will need to do this for all pages that you wish to track.
-
-### Website vs app
-
-We recommend adding the PostHog snippet both on your homepage and your application (if you have one). That means you'll be able to follow a user from the moment they come onto your website, all the way through Sign Up and their actual usage of your product.
-
-### Adding multiple domains
-
-PostHog supports tracking across multiple domains - just include the same snippet on all the websites you wish to track under the same project.
-
-However, you can also configure "permitted domains" in your 'Project Settings'. These are domains where you'll be able to record user sessions and use the PostHog toolbar.
-
-### Ignore/censor elements
-
-PostHog puts a great amount of effort into making sure it doesn't capture any sensitive data from your website. If there are other elements you don't want to be captured, you can add the `ph-no-capture` class name.
-
-```html
-<button class="ph-no-capture">Sensitive information here</button>
-```
+The dedicated [JavaScript libary](/docs/integrate/client/js) page has more details about everything you can do with `posthog.js`.
