@@ -9,7 +9,6 @@ export default function Tooltip({
     offset = [0, 10],
     className = '',
     tooltipClassName = '',
-    tooltipWrapperClassName = '',
     placement = 'bottom',
 }: {
     children: JSX.Element
@@ -17,7 +16,6 @@ export default function Tooltip({
     offset?: [number, number]
     className?: string
     tooltipClassName?: string
-    tooltipWrapperClassName?: string
     placement?: Placement
 }) {
     const [open, setOpen] = useState(false)
@@ -40,7 +38,7 @@ export default function Tooltip({
             {open &&
                 createPortal(
                     <div
-                        className={`z-50 ${tooltipWrapperClassName}`}
+                        className="z-[10000]"
                         role="tooltip"
                         ref={setPopperElement}
                         style={{ ...styles.popper, paddingTop: offset[1], paddingBottom: offset[1] }}

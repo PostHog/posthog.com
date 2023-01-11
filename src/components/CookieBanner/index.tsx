@@ -55,7 +55,6 @@ export default function CookieBanner() {
                 }
                 placement="right"
                 tooltipClassName="max-w-[325px] shadow-xl text-xs backdrop-blur bg-white/75 -ml-12 !px-4 !py-2"
-                tooltipWrapperClassName="z-[10000]"
                 offset={[0, 0]}
             >
                 <div className="relative max-w-[280px]">
