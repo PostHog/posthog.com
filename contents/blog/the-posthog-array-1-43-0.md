@@ -34,17 +34,21 @@ Any notes about async migrations, etc. go here.
 @Karl to add a sentence or two here. 
 
 ### New: Better insight searching
+![insight searching](../images/blog/array/1-43-0-search.gif)
+
 We don't want searching for insights to be just functional. We want it to be a world-class, joy-sparking event! So, we've updated search to include the description field and any tags which have been applied.
 
 This sounds like a small change, but it makes a massive difference for teams that organize data well and generate a lot of insights!
 
+### Improved: Browsing recordings and creating playlists
+Following up on our new playlists feature, we've improve the recordings UX to make browsing and pinning recordings as quick and intuitive as possible. You can now scroll the list of recordings independently of the player and creating a playlists of pinned recordings is much faster too!
+
 ### New: Feature flag variant overrides
+![flag overrides](../images/blog/array/1-43-0-feature-override.gif)
+
 Ever created a multivariate feature flag, and wanted to show the control variant to specific users? Or, maybe you found a new cohort you'd like to add to the test variant? Now you can!
 
 1.43.0 adds the ability to manually override variants via the flag edit screen. It's great for ensuring users get the intended experience, but is also useful for testing as it enables you to deterministically choose a variant, and test across client-side and server-side feature flags.
-
-### New: Export recordings to file
-Sometimes a recording can be so insightful, so important, that you think - "I want to keep a record of this forever." Well, now you can export any recording to a file and load it back into PostHog for playback in the future. Whether it is to commemorate your first sale or for compliance reasons, the tools are now in your hands.
 
 ### Improved: More experiment variants and improved flow
 A regular complaint used to be that, if you made a mistake while making an experiment, you couldn't go back to fix it. Well, we fixed that so you can now:
@@ -55,16 +59,20 @@ A regular complaint used to be that, if you made a mistake while making an exper
 
 Finally, as a bonus, you can now have up to nine variants in an experiment, instead of the usual three!
 
+### New: Export recordings to file
+![export recordings](../images/blog/array/1-43-0-exports.gif)
+
+Sometimes a recording can be so insightful, so important, that you think - "I want to keep a record of this forever." Well, now you can export any recording to a file and load it back into PostHog for playback in the future. Whether it is to commemorate your first sale or for compliance reasons, the tools are now in your hands.
+
 ### Improved: Query cancelling improvements
 PostHog already had some cancellation logic that abandoned running queries if filters were changed, but what if you just went and did something else? Then we'd leave a query running in ClickHouse, slowing everything down. 
 
 Until now! 1.43.0 adds calls into the dashboard and insight logic when an insight is abandoned, attempting to cancel the query. The benefit? Less resource hogging, faster queries for all!
 
 ### Improved: Recording playback controls 
-We've revamped the recording seekbar to make it easier to find user activity at a glance, to show where tracked events occur and display what time you're scrubbing to.
+![recording controls](../images/blog/array/1-43-0-recording-controls.gif)
 
-### Improved: Browsing recordings and creating playlists
-Following up on our new playlists feature, we've improve the recordings UX to make browsing and pinning recordings as quick and intuitive as possible. You can now scroll the list of recordings independently of the player and creating a playlists of pinned recordings is much faster too!
+We've revamped the recording seekbar to make it easier to find user activity at a glance, to show where tracked events occur and display what time you're scrubbing to.
 
 ### Other improvements & fixes
 You think that's it? Not by a long shot! Version 1.43 also adds hundreds of other improvements and fixes, including...
