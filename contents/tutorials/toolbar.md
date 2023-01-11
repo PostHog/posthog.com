@@ -93,7 +93,7 @@ This displays a new menu where you can select various ranges, and view a list of
 
 ### Using wildcards to search "slug" URLs
 
-If you have a page where the URL has an ID or repeating part e.g. `/my-shop/product/a-product-id`. You can use this menu to add wild-cards into the URL that the toolbar searches.
+If you have a page where the URL has an ID or repeating part (e.g. `/my-shop/product/a-product-id`), you can use this menu to add wildcards into the URL that the toolbar searches. Wildcards will match any value in that part of the URL.
 
 Showing clicks across all product pages for example by using `/my-shop/product/*`
 
