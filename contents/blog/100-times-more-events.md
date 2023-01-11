@@ -1,17 +1,14 @@
 ---
 date: 2021-05-17
-title: "Why we're giving away 100 times more cloud usage, free"
+title: Why we're giving away 100 times more cloud usage, free
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/100x/100x.png
 featuredImageType: full
-author:
-  - james-hawkins
-category: PostHog news
-tags: 
-  - Product updates
+author: ["james-hawkins"]
+categories: ["Product updates"]
 ---
 
 Today, we're announcing that we're giving away 1 million ingested events/month on [Cloud](https://app.posthog.com/signup), for free. That's up from 10k/month that we were offering before.

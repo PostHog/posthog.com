@@ -190,5 +190,5 @@ Whatever you choose, it should be clear to your team when to remove a feature fl
 ## Further reading
 
 - [How to run Experiments without feature flags](/tutorials/experiments)
-- [Setting up and using feature flags](/manual/feature-flags)
+- [How to safely roll out new features](/tutorials/feature-flags)
 - [How to do a canary release with feature flags ](/tutorials/canary-release)

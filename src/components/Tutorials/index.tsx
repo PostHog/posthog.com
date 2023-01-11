@@ -176,7 +176,7 @@ export const tutorialsFragment = graphql`
         frontmatter {
             title
             date(formatString: "MMM 'YY")
-            Category: tags
+            Category: topics
             Contributor: authorData {
                 id
                 image {

@@ -7,14 +7,8 @@ showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/using-posthog/posthog-features.jpg
 featuredImageType: full
-author:
-  - andy-vandervell
-category: Using PostHog
-tags:
-  - Product analytics
-  - Session recording
-  - Feature flags
-  - Guides
+author: ["andy-vandervell"]
+categories: ["Guides", "Product analytics"]
 ---
 
 PostHog is a growing platform.

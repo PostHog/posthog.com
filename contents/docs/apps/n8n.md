@@ -1,7 +1,7 @@
 ---
 title: n8n Connector
 thumbnail: ../../apps/thumbnails/n8n.png
-tags:
+topics:
     - n8n
 ---
 

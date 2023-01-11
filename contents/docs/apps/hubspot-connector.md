@@ -3,7 +3,7 @@ title: Hubspot Connector
 github: https://github.com/PostHog/hubspot-plugin
 installUrl: https://app.posthog.com/project/apps?name=Hubspot
 thumbnail: ../../apps/thumbnails/hubspot.svg
-tags:
+topics:
     - hubspot
 ---
 

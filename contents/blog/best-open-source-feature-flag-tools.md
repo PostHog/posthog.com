@@ -7,14 +7,8 @@ showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/posthog-company-culture-blog.png
 featuredImageType: full
-author:
-  - hanna-crombie
-category: General
-tags: 
-  - Open source
-  - Guides
-  - Comparisons
-  - Feature flags
+author: ["hanna-crombie"]
+categories: ["Open source"]
 ---
 
 Feature flags, aka feature toggles, turn specific functions on and off during runtime. Rather than maintaining multiple feature branches in your source code, feature flags hide code or behaviors and allow you to enable or disable features on demand and without deploying new code.

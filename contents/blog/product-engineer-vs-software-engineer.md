@@ -5,13 +5,10 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author:
-  - ian-vanagas
+author: ["ian-vanagas"]
 featuredImage: ../images/blog/product-engineer.jpg
 featuredImageType: full
-category: Engineering
-tags:
-  - Explainers
+categories: ["Startups", "Guides"]
 ---
 
 Software companies are changing. Where once product managers and software engineers dominated, now a new role is emerging: the [product engineer](/blog/what-is-a-product-engineer).
@@ -75,4 +72,4 @@ Picking what is right is up to the company and its goals. If you're a small team
 
 - [What is a product engineer (and why they matter)](/blog/what-is-a-product-engineer/)
 - [Startups, stop treating engineers like a different species](/blog/stop-treating-engineers-differently)
-- [The really important job interview questions engineers should ask (but don't)](/blog/what-to-ask-in-interviews)
+- [The best tools for product engineers](/blog/product-engineer-tools)

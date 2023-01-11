@@ -5,10 +5,10 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-category: Engineering
+categories: ["Engineering"]
 ---
 
-PostHog ships every two weeks, unless it makes more sense not to.
+PostHog ship every two weeks, unless it makes more sense not to.
 
 ## Why?
 

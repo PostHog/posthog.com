@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 featuredImage: ../images/tutorials/banners/property-filter-tutorial.png
 author: ["lukas-smith"]
-tags: ["apps", "configuration", "data management"]
+topics: ["apps", "configuration", "data management"]
 date: 2022-07-01
 ---
 

@@ -5,7 +5,7 @@ showTitle: true
 author: ['yakko-majuri']
 date: 2020-11-04
 featuredImage: ../images/tutorials/banners/retention.png
-tags: ['retention', 'stickiness']
+topics: ['retention', 'stickiness']
 ---
 
 _Estimated reading time: 8 minutes_ ☕☕

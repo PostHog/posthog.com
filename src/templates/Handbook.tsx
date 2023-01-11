@@ -31,7 +31,6 @@ import XIcon from '../images/x.svg'
 import WarningIcon from '../images/warning.svg'
 import TeamRoadmap from 'components/TeamRoadmap'
 import TeamMembers from 'components/TeamMembers'
-import { CategoryData } from 'components/Blog/constants/categories'
 
 const renderAvailabilityIcon = (availability: 'full' | 'partial' | 'none') => {
     switch (availability) {
@@ -247,7 +246,6 @@ export default function Handbook({
         Objectives: (_props) => (objectives?.body ? MDX({ body: objectives.body }) : null),
         TeamRoadmap: (props) => TeamRoadmap({ team: title?.replace(/team/gi, '').trim(), ...props }),
         TeamMembers: (props) => TeamMembers({ team: title?.replace(/team/gi, '').trim(), ...props }),
-        CategoryData,
         ...shortcodes,
     }
 

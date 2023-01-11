@@ -6,11 +6,8 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/posthog-engineering-blog.png
-author:
-  - colin-wren
-category: General
-tags:
-  - Comparisons
+author: ["colin-wren"]
+categories: ["Inside PostHog", "Comparisons"]
 ---
 
 _By Colin Wren, Co-founder of [Reciprocal.dev](https://reciprocal.dev/)._

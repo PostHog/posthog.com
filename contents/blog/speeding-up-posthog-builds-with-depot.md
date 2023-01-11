@@ -5,12 +5,10 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author:
-  - kyle-galbraith
-  - jacob-gillespie
+author: ["kyle-galbraith", "jacob-gillespie"]
 featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
-category: Engineering
+categories: ["Inside PostHog", "Open source"]
 ---
 
 PostHog recently swapped out Docker for Depot in their container image builds within GitHub Actions. The results are outstanding, taking the average build time from 16 minutes to 3 minutes. Building the PostHog images via `depot build` instead of `docker build` is over five times faster, so PostHog invited us — the founders of Depot — to share more about how Depot works and will benefit the PostHog community.

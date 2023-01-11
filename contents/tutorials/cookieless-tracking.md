@@ -6,7 +6,7 @@ featuredImage: ../images/tutorials/banners/cookies-tracking.png
 featuredTutorial: false
 date: 2022-08-03
 author: ['joe-martin']
-tags: ['configuration']
+topics: ['configuration']
 ---
 
 - **Level:** Medium 🦔🦔

@@ -5,14 +5,10 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author:
-  - joe-martin
+author: ["joe-martin"]
 featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
-category: Product growth
-tags:
-  - Product analytics
-  - Explainers
+categories: ["Guides", "Product analytics", "PostHog Academy"]
 ---
 ## What is product analytics?
 

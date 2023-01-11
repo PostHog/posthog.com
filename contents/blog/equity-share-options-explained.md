@@ -1,17 +1,14 @@
 ---
 date: 2022-11-09
-title: Creating an employee-friendly startup share option scheme
+title: "Creating an employee-friendly startup share option scheme"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author:
-  - grace-mckenzie
+categories: ["Inside PostHog", "Startups"]
+author: ["grace-mckenzie"]
 featuredImage: ../images/blog/equity.png
 featuredImageType: full
-category: Startups
-tags:
-  - Guides
 ---
 
 If you’ve ever worked for a startup, or read about a Unicorn tech company turning employees into multi-millionaires overnight, chances are you've heard of equity.

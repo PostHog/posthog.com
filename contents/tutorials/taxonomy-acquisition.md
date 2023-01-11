@@ -5,7 +5,7 @@ showTitle: true
 author: ['james-hawkins']
 date: 2021-09-19
 featuredImage: ../images/tutorials/banners/deep-dive.png
-tags: ['dashboards', 'events', 'utm segmentation']
+topics: ['dashboards', 'events', 'utm segmentation']
 ---
 
 This tutorial will help you:

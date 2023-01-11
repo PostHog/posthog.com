@@ -1,15 +1,14 @@
 ---
 date: 2021-06-23
 title: How we do hiring & HR at PostHog
-author:
-  - mo-shehu
+author: ["mo-shehu"]
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 featuredImage: ../images/blog/how-we-do-hr/how-we-do-hr.png
 featuredImageType: full
 hideAnchor: true
-category: Inside PostHog
+categories: ["Guides", "Inside PostHog"]
 ---
 <iframe width="560" height="315" src="https://www.youtube.com/embed/gMYWond64lM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 

@@ -3,7 +3,7 @@ title: PagerDuty Connector
 github: https://github.com/PostHog/posthog-pagerduty-plugin
 installUrl: https://app.posthog.com/project/apps?name=PagerDuty
 thumbnail: ../../apps/thumbnails/pagerduty.svg
-tags:
+topics:
     - pagerduty connector
 ---
 

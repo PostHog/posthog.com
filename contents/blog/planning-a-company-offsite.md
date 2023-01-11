@@ -1,17 +1,14 @@
 ---
 date: 2022-08-17
-title: How to plan a killer company offsite in just 8 weeks
+title: "How to plan a killer company offsite in just 8 weeks"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/planning-a-company-offsite/planning-offsite.jpeg
 featuredImageType: full
-author:
-  - grace-mckenzie
-category: Startups
-tags:
-  - Guides
+author: ["grace-mckenzie"]
+categories: ["Inside PostHog", "Guides", "Startups"]
 ---
 
 As a company born at the beginning of the pandemic, PostHog has been fully-remote from its inception. Our team is 30+ people distributed across 10 countries; we have no central office, but [we still value getting together](/blog/asynchronous-remote-companies) in person. 

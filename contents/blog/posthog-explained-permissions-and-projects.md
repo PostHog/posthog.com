@@ -1,17 +1,14 @@
 ---
 date: 2022-10-10
-title: 'Permissions and projects in PostHog, explained'
+title: "Permissions and projects in PostHog, explained"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author:
-  - joe-martin
+author: ["joe-martin"]
 featuredImage: ../images/blog/posthog-blog-image.png
 featuredImageType: full
-category: Using PostHog
-tags:
-  - Explainers
+categories: ["Guides", "Using PostHog"]
 ---
 
 So, you’ve installed your snippet and started tracking data in PostHog. What’s next? 

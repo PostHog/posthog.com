@@ -1,13 +1,11 @@
 ---
 date: 2021-06-04
-title: >-
-  Frontend filters & backend SQL - A chat with Eric Duong, Sam Winslow, James
-  Greenhill, and Buddy Williams
+title: Frontend filters & backend SQL - A chat with Eric Duong, Sam Winslow, James Greenhill, and Buddy Williams
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-category: Engineering
+categories: ["Engineering"]
 ---
 
 By: [Engineering @ PostHog](https://www.linkedin.com/company/posthog)

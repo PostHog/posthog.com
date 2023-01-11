@@ -164,7 +164,7 @@ export const query = graphql`
             frontmatter {
                 title
                 description
-                categories: tags
+                categories: topics
                 contributors: authorData {
                     id
                     image {

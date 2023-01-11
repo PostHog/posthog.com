@@ -5,13 +5,10 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author:
-  - michael-matloka
+categories: ["Engineering", "Guides"]
+author: ["michael-matloka"]
 featuredImage: ../images/blog/simpler-self-deployments.png
 featuredImageType: full
-category: Engineering
-tags:
-  - Guides
 ---
 
 When developing software, there's no shortage of work: building new features, fixing bugs, maintaining infrastructure, launching new systems, phasing deprecated solutions out, ensuring security, keeping track of dependencies… Whew. And that's before we get to product, people, or ops considerations.

@@ -5,7 +5,7 @@ showTitle: true
 author: ['joe-martin']
 date: 2022-10-04
 featuredImage: ../images/tutorials/banners/create-new-events-the-easy-way.png
-tags: ["actions", "toolbar"]
+topics: ["actions", "toolbar"]
 ---
 
 **Estimated reading time:** 6 minutes ☕☕

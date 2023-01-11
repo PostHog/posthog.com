@@ -1,16 +1,14 @@
 ---
 date: 2022-11-21
-title: How PostHog built an app server (from MVP to billions of events)
+title: "How PostHog built an app server (from MVP to billions of events)"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author:
-  - marius-andra
-  - ian-vanagas
+author: ["marius-andra", "ian-vanagas"]
 featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
-category: Engineering
+categories: ["Inside PostHog", "Engineering"]
 ---
 
 PostHog's mission is to increase the number of successful products in the world. To achieve it, we're building a comprehensive [suite of analytics and data tools](/product) (see [our roadmap](/roadmap) for what we're working on now). 

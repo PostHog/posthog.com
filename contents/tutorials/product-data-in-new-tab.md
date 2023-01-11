@@ -5,7 +5,7 @@ showTitle: true
 author: ['ian-vanagas']
 date: 2022-11-04
 featuredImage: ../images/tutorials/banners/product-data-in-new-tab.png
-tags: ['apps']
+topics: ['apps']
 ---
 
 Keeping product analytics top of mind keeps you focused on what matters to your product and customers. It reminds you about the state of the product, and what you need to do to improve it.

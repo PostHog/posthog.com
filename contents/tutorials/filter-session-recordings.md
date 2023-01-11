@@ -6,7 +6,6 @@ featuredImage: ../images/tutorials/banners/filter-sessions.png
 featuredTutorial: false
 author: ['joe-martin']
 topics: ['session recording']
-featuredVideo: https://www.youtube.com/embed/3BS5h2gkz90
 date: 2022-11-03
 ---
 
