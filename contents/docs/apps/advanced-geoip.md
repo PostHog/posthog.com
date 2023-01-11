@@ -3,7 +3,7 @@ title: Advanced GeoIP
 github: https://github.com/paolodamico/posthog-app-advanced-geoip
 installUrl: https://app.posthog.com/project/apps?name=advanced-geo-ip
 thumbnail: ../../apps/thumbnails/advanced-geoip.png
-topics:
+tags:
     - advanced-geoip
 ---
 

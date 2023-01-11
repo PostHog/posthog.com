@@ -5,7 +5,7 @@ showTitle: true
 featuredImage: ../images/tutorials/banners/internal-users-filter.png
 featuredTutorial: false
 author: ["joe-martin"]
-topics: ['filters', 'settings']
+tags: ['filters', 'settings']
 date: 2022-02-14
 ---
 

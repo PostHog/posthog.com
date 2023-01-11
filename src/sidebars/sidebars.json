@@ -1283,28 +1283,6 @@
                             "url": "/docs/integrate/third-party/wordpress"
                         }
                     ]
-                },
-                {
-                    "name": "Webhooks",
-                    "url": "",
-                    "children": [
-                        {
-                            "name": "Message formatting",
-                            "url": "/docs/integrate/webhooks/message-formatting"
-                        },
-                        {
-                            "name": "Microsoft Teams",
-                            "url": "/docs/integrate/webhooks/microsoft-teams"
-                        },
-                        {
-                            "name": "Slack",
-                            "url": "/docs/integrate/webhooks/slack"
-                        },
-                        {
-                            "name": "Discord",
-                            "url": "/docs/integrate/webhooks/discord"
-                        }
-                    ]
                 }
             ]
         },
@@ -1475,6 +1453,28 @@
                 {
                     "name": "Data model",
                     "url": "/docs/data-model"
+                }
+            ]
+        },
+        {
+            "name": "Webhooks",
+            "url": "",
+            "children": [
+                {
+                    "name": "Message formatting",
+                    "url": "/docs/integrate/webhooks/message-formatting"
+                },
+                {
+                    "name": "Microsoft Teams",
+                    "url": "/docs/integrate/webhooks/microsoft-teams"
+                },
+                {
+                    "name": "Slack",
+                    "url": "/docs/integrate/webhooks/slack"
+                },
+                {
+                    "name": "Discord",
+                    "url": "/docs/integrate/webhooks/discord"
                 }
             ]
         },
@@ -1706,6 +1706,10 @@
                         {
                             "name": "Notifications & alerts",
                             "url": "/manual/notifications-and-alerts"
+                        },
+                        {
+                            "name": "Role based access",
+                            "url": "/manual/role-based-access"
                         }
                     ]
                 }
@@ -2324,6 +2328,44 @@
         {
             "name": "Zendesk Connector",
             "url": "/apps/zendesk-connector"
+        }
+    ],
+    "blog": [
+        {
+            "name": "Blog",
+            "url": "/blog"
+        },
+        {
+            "name": "CEO diaries",
+            "url": "/blog/categories/ceo-diaries"
+        },
+        {
+            "name": "Engineering",
+            "url": "/blog/categories/engineering"
+        },
+        {
+            "name": "HogMail",
+            "url": "/blog/categories/hogmail"
+        },
+        {
+            "name": "Inside PostHog",
+            "url": "/blog/categories/inside-posthog"
+        },
+        {
+            "name": "PostHog news",
+            "url": "/blog/categories/posthog-news"
+        },
+        {
+            "name": "Product growth",
+            "url": "/blog/categories/product-growth"
+        },
+        {
+            "name": "Startups",
+            "url": "/blog/categories/startups"
+        },
+        {
+            "name": "Using PostHog",
+            "url": "/blog/categories/using-posthog"
         }
     ],
     "community": [

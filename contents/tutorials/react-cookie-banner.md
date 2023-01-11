@@ -6,7 +6,7 @@ featuredImage: ../images/tutorials/banners/react-cookie-banner.png
 featuredTutorial: false
 date: 2022-10-03
 author: ['ian-vanagas']
-topics: ['configuration']
+tags: ['configuration']
 ---
 
 - **Level:** Medium 🦔🦔

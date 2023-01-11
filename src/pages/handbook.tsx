@@ -66,7 +66,7 @@ const otherLinks = [
 export const Handbook: React.FC = () => {
     return (
         <Layout>
-            <SEO title="Handbook - PostHog" />
+            <SEO image="/images/handbook.png" title="Handbook - PostHog" />
 
             <PostLayout article={false} title={'Handbook'} menu={handbook} hideSidebar hideSurvey>
                 <div className="space-y-16 lg:space-y-20 lg:-mt-12 mb-8">

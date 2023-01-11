@@ -5,10 +5,16 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ['Release notes', 'Product updates']
 featuredImage: ../images/blog/posthog-array-blog.png
 featuredImageType: full
-excerpt: PostHog 1.31.0 introduces Group Analytics, improved Correlation Analysis, a revamped overall user experience on Insights and 350+ more improvements and fixes.
+excerpt: >-
+  PostHog 1.31.0 introduces Group Analytics, improved Correlation Analysis, a
+  revamped overall user experience on Insights and 350+ more improvements and
+  fixes.
+category: PostHog news
+tags:
+  - Product updates
+  - Release notes
 ---
 
 Happy holidays from PostHog! PostHog 1.31.0 is our last release of the year, introducing Group Analytics, improved Correlation Analysis, a revamped user experience on Insights and 350+ more improvements and fixes. Please note that Postgres-based installations are no longer supported for PostHog 1.31.0.

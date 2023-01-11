@@ -226,6 +226,13 @@ const categories: {
                 icon: ProductIcons.projects,
             },
             {
+                name: 'Role based access',
+                url: '/manual/role-based-access',
+                category: 'role based access',
+                description: 'Create roles to group team members and control access for features',
+                icon: ProductIcons.userPermissions,
+            },
+            {
                 name: 'Settings',
                 url: '/manual/application-settings',
                 category: 'settings',
@@ -402,7 +409,7 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
 export const query = graphql`
     {
         tutorials: allMdx(filter: { slug: { glob: "tutorials/*" } }) {
-            group(field: frontmatter___topics) {
+            group(field: frontmatter___tags) {
                 category: fieldValue
                 nodes {
                     frontmatter {

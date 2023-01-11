@@ -78,7 +78,7 @@
         "gatsby-source-ashby": "^1.0.3",
         "gatsby-source-filesystem": "^4.20.0",
         "gatsby-transformer-json": "^4.20.0",
-        "gatsby-transformer-remark": "^5.20.0",
+        "gatsby-transformer-remark": "^5.25.1",
         "gatsby-transformer-sharp": "^4.20.0",
         "git-url-parse": "^11.6.0",
         "github-slugger": "^1.4.0",

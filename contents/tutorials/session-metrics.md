@@ -5,7 +5,7 @@ showTitle: true
 author: ['ian-vanagas']
 date: 2022-09-26
 featuredImage: ../images/tutorials/banners/session-metrics.png
-topics: ['trends', 'sessions']
+tags: ['trends', 'sessions']
 ---
 
 - **Level:** Easy 🦔

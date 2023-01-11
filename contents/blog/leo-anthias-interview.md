@@ -1,14 +1,20 @@
 ---
 date: 2021-08-06
-title: Building an open source data science publishing platform - An interview with Datapane CEO, Leo Anthias
+title: >-
+  Building an open source data science publishing platform - An interview with
+  Datapane CEO, Leo Anthias
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["mo-shehu"]
+author:
+  - mo-shehu
 featuredImage: ../images/blog/leo-anthias.png
 featuredImageType: full
-categories: ["Open source", "Startups"]
+category: Startups
+tags:
+  - Startups
+  - Open source
 ---
 _(Welcome to another episode of PostHog's Community Conversations where we chat to our contributors and users.)_
 
