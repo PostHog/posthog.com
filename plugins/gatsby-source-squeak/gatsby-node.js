@@ -246,10 +246,20 @@ exports.createSchemaCustomization = async ({ actions }) => {
             title: String,
             html_url: String,
             number: Int,
-            closed_at: Date,
             reactions: SqueakGitHubReactions,
             body: String,
-            updated_at: Date,
+            updated_at(
+                difference: String
+                formatString: String
+                fromNow: Boolean
+                locale: String
+            ): Date,
+            closed_at(
+                difference: String
+                formatString: String
+                fromNow: Boolean
+                locale: String
+            ): Date,
             user: SqueakGitHubPageUser,
             labels: [SqueakGitHubPageLabel]
         }
