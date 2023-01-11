@@ -1,5 +1,5 @@
 ---
-date: 2023-01-16
+date: 2023-01-10
 title: "Array 1.43.0: Massive performance improvements!"
 rootPage: /blog
 sidebar: Blog
@@ -60,7 +60,7 @@ A regular complaint used to be that, if you made a mistake while making an exper
 Finally, as a bonus, you can now have up to nine variants in an experiment, instead of the usual three!
 
 ### New: Export recordings to file
-![export recordings](../images/blog/array/1-43-0-exports.gif)
+![export recordings](../images/blog/array/1-43-0-export.gif)
 
 Sometimes a recording can be so insightful, so important, that you think - "I want to keep a record of this forever." Well, now you can export any recording to a file and load it back into PostHog for playback in the future. Whether it is to commemorate your first sale or for compliance reasons, the tools are now in your hands.
 
@@ -70,7 +70,7 @@ PostHog already had some cancellation logic that abandoned running queries if fi
 Until now! 1.43.0 adds calls into the dashboard and insight logic when an insight is abandoned, attempting to cancel the query. The benefit? Less resource hogging, faster queries for all!
 
 ### Improved: Recording playback controls 
-![recording controls](../images/blog/array/1-43-0-recording-controls.gif)
+![recording controls](../images/blog/array/1-43-0-seekbar.gif)
 
 We've revamped the recording seekbar to make it easier to find user activity at a glance, to show where tracked events occur and display what time you're scrubbing to.
 
