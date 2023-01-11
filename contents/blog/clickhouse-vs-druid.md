@@ -54,7 +54,7 @@ While Postgres, a row-based OLTP database, supports materialized views, they are
 
 Most databases achieve speed by caching calculated results after an initial slow query. ClickHouse’s materialized views do the heavy-lifting ahead of time, and are constantly updating so that they’re never ***too*** out-of-date. This is a happy medium for a lot of data-driven applications, and contributes to ClickHouse's reputation for extremely fast query performance on large datasets.
 
-- **Apache Zookeeper:** ClickHouse does admit a flaw in its single executable promise. If the database is expected to have replicas, it requires Apache Zookeeper to manage the redundancies. However, this is a rather thin layer atop of a ClickHouse cluster, and something that most databases require.
+- **Apache Zookeeper:** ClickHouse does admit a flaw in its single executable promise. If the database is expected to have replicas, it requires Apache Zookeeper to manage the redundancies. However, this is a rather thin layer atop of a ClickHouse cluster, an a problem addressed by the introduction of [ClickHouse Keeper](https://clickhouse.com/docs/en/operations/clickhouse-keeper/). 
 
 - **Caches:** ClickHouse boasts [different types of caches](https://clickhouse.com/docs/zh/operations/caches/) for discrete optimizations. ClickHouse’s MergeTree table family has unique caches that improve data fetches.
 
