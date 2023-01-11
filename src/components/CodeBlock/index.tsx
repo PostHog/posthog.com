@@ -152,8 +152,16 @@ export const CodeBlock = ({
         }
     }, [])
 
+    const replaceProjectInfo = (code: string) => {
+        if (!projectName || !projectToken) {
+            return code
+        }
+
+        return code.replace("'<ph_project_api_key>'", projectToken).replace("'<ph_project_name>'", projectName)
+    }
+
     const copyToClipboard = () => {
-        navigator.clipboard.writeText(currentLanguage.code)
+        navigator.clipboard.writeText(replaceProjectInfo(currentLanguage.code))
 
         setTooltipVisible(true)
         setTimeout(() => {
