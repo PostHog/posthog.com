@@ -23,8 +23,11 @@ Any notes about async migrations, etc. go here.
 - [New: Performance improvements](#new-performance-improvements)
 - [New: Better insight searching](#new-better-insight-searching)
 - [New: Feature flag variant overrides](#new-feature-flag-variant-overrides)
+- [New: Export recordings to file](#new-export-recordings-to-file)
 - [Improved: More experiment variants and improved flow](#improved-more-experiment-variants-and-improved-flow)
 - [Improved: Query cancelling improvements](#improved-query-cancelling-improvements)
+- [Improved: Recording playback controls](#improved-recording-playback-controls)
+- [Improved: Browsing recordings and creating playlists](#improved-browsing-recordings-and-creating-playlists)
 
 ### New: Performance improvements
 
@@ -78,7 +81,7 @@ View the full commit log in GitHub for a full history of changes: [`release-1.42
 ## Share your feedback
 We'd love to hear anything you have to say about PostHog, good or bad. As a thank you, we'll share some awesome [PostHog merch](https://merch.posthog.com).
 
- Want to get involved? [Schedule a 30 minute call](https://calendly.com/posthog-feedback) with one of our teams to help us make PostHog even better!
+Want to get involved? [Schedule a 30 minute call](https://calendly.com/posthog-feedback) with one of our teams to help us make PostHog even better!
 
 ## Contributions from the community
 We always welcome contributions from our community and this time we want to thank the following people this month...
