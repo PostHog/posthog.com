@@ -14,13 +14,6 @@ export const onRouteUpdate = ({ location, prevLocation }: RouteUpdateArgs) => {
     // This is checked and set on initial load in the body script set in gatsby-ssr.js
     // Checking for prevLocation prevents this from happening twice
     if (typeof window !== 'undefined' && prevLocation) {
-        // show chat widget if on pricing page & hide if not
-        // chat widget gets mounted in gatsby-ssr.js
-        const unthread = window?.$unthread
-        if (unthread) {
-            unthread(window.location.pathname === '/pricing' ? 'start' : 'stop')
-        }
-
         var slug = location.pathname.substring(1)
         var theme = /^handbook|^docs|^blog|^integrations|^tutorials|^questions|^manual|^using-posthog|^community/.test(
             slug

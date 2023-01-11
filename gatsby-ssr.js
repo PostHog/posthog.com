@@ -69,34 +69,5 @@ export const onRenderBody = function ({ setPreBodyComponents }) {
       `,
             },
         }),
-        React.createElement('script', {
-            key: 'chat',
-            dangerouslySetInnerHTML: {
-                __html: `
-(function (w, d, t) {
-    w.$unthreadSettings = {
-    baseUrl: 'https://posthog.unthread.io',
-    widgetId: '82bbc8b4-485f-4c15-9ada-e69f0e54c6bd'
-    };
-
-    var u = function() {
-    u.c(arguments);
-    };
-    u.q = [];
-    u.c = function(args) {
-    u.q.push(args);
-    };
-    w.$unthread = u;
-
-    var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
-    g.src = w.$unthreadSettings.baseUrl + '/widget/js/wrapper.js';
-    g.defer = true;
-    g.async = true;
-    s.parentNode.insertBefore(g, s);
-    w.$unthread(w.location.pathname === '/pricing' ? 'start' : 'stop');
-})(window, document, 'script');
-      `,
-            },
-        }),
     ])
 }
