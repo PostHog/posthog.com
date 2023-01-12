@@ -16,15 +16,15 @@ It requires both a PostHog and Webflow account, along with a Webflow paid site p
 
 ## Create a Webflow site
 
-First, you need a Webflow site to add PostHog to. Sign up at [webflow.com](https://webflow.com/), go through the tutorial, and create a new site. There are pre-made templates available to make this process easy, such as the one we've used for this tutorial. Once you're happy with the site you've made, publish it. 
+First, you need a Webflow site to add PostHog to. Sign up at [webflow.com](https://webflow.com/), go through the tutorial, and create a new site. There are pre-made templates available to make this process easy, such as the one we used for this tutorial. Once you're happy with the site you've made, publish it. 
 
-You should get a `.webflow.io` URL we can use to test with. Once you’ve published your site, go to the top right menu and open the Project Settings page.
+You should get a `.webflow.io` URL we can test with. Once you published your site, go to the top right menu and open the Project Settings page.
 
 ![Webflow publishing](../images/tutorials/webflow/webflow.gif)
 
 ## Adding PostHog to your Webflow site
 
-In PostHog, get the JavaScript snippet from the Getting Started page or your Project settings. It looks like this:
+In PostHog, get the JavaScript snippet from the Getting Started page or in your Project settings. It looks like this:
 
 ```html
 <script>
@@ -33,11 +33,11 @@ In PostHog, get the JavaScript snippet from the Getting Started page or your Pro
 </script>
 ```
 
-Copy the snippet and go back to Webflow. In the Webflow “Project Settings” page, go to the “Custom Code” tab. If you haven’t already, you must add a site plan to enable custom code. Once active, just paste the PostHog snippet in and save the changes.
+Copy the snippet and go back to Webflow. In the Webflow “Project Settings” page, go to the “Custom Code” tab. If you haven’t already, add a site plan to enable custom code. Once active, just paste the PostHog snippet in and save the changes.
 
 ![PostHog snippet](../images/tutorials/webflow/posthog-webflow.gif)
 
-Once you’ve done that, publish the site again, go to the published site, refresh and click around (to capture some events). After a minute, events appear in PostHog. 
+Once you’ve done that, publish the site again, go to the published site, refresh, and click around (to capture some events). After a minute, events appear in PostHog. 
 
 ![PostHog events](../images/tutorials/webflow/events.png)
 
