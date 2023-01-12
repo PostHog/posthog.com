@@ -307,7 +307,7 @@
                         "url": "/docs/integrate/client/android",
                         "badge": {
                             "title": "Popular",
-                            "className": "bg-blue/10 text-blue dark:text-white dark:bg-blue/50"
+                            "className": "!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50"
                         }
                     },
                     {
@@ -327,7 +327,7 @@
                         "url": "/docs/integrate/client/ios",
                         "badge": {
                             "title": "Popular",
-                            "className": "bg-blue/10 text-blue dark:text-white dark:bg-blue/50"
+                            "className": "!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50"
                         }
                     },
                     {
@@ -339,7 +339,7 @@
                         "url": "/docs/integrate/client/js",
                         "badge": {
                             "title": "Popular",
-                            "className": "bg-blue/10 text-blue dark:text-white dark:bg-blue/50"
+                            "className": "!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50"
                         }
                     },
                     {
@@ -367,7 +367,7 @@
                         "url": "/docs/integrate/client/react-native",
                         "badge": {
                             "title": "Popular",
-                            "className": "bg-blue/10 text-blue dark:text-white dark:bg-blue/50"
+                            "className": "!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50"
                         }
                     },
                     {
