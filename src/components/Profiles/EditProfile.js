@@ -3,6 +3,7 @@ import { Form, Field, Formik } from 'formik'
 import Button from 'components/CommunityQuestions/Button'
 import Icons, { Markdown } from 'components/Icons'
 import * as Yup from 'yup'
+import TextareaAutosize from 'react-textarea-autosize'
 
 const fields = {
     first_name: {
@@ -22,7 +23,8 @@ const fields = {
     biography: {
         component: (
             <Field
-                as="textarea"
+                minRows={6}
+                as={TextareaAutosize}
                 type="text"
                 name="biography"
                 placeholder="280 characters or less..."
