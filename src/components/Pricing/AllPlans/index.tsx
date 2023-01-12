@@ -10,6 +10,7 @@ interface IPlan {
     pricing: {
         event: number
         monthly?: number
+        other?: string
     }
     mainCTA: {
         title: string
@@ -24,8 +25,8 @@ interface IPlan {
 
 const cloudPlans: IPlan[] = [
     {
-        title: 'Self-serve',
-        description: 'with community support',
+        title: 'Standard',
+        description: 'with community support & volume discounts',
         pricing: {
             event: 0.00045,
         },
@@ -36,11 +37,11 @@ const cloudPlans: IPlan[] = [
         pricingOption: 'cloud',
     },
     {
-        title: 'with Enterprise package',
-        description: 'Slack-based priority support, SSO, advanced permissions',
+        title: 'Enterprise',
+        description: 'SSO, priority support, advanced permissions, team training',
         pricing: {
-            event: 0.0005626,
-            monthly: 450,
+            event: 0,
+            other: 'Contact us',
         },
         mainCTA: {
             title: 'Get in touch',
@@ -52,10 +53,10 @@ const cloudPlans: IPlan[] = [
 
 const selfHostPlans: IPlan[] = [
     {
-        title: 'Enterprise starting from $5,000/month',
-        description: 'Slack-based priority support, SSO, advanced permissions',
+        title: 'Enterprise Self-hosted',
+        description: 'SSO, priority support, advanced permissions, team training',
         pricing: {
-            monthly: 5000,
+            other: 'Contact us',
             event: 0,
         },
         mainCTA: {
@@ -73,12 +74,18 @@ const Plan = ({ plan }: { plan: IPlan }) => {
             <div className="my-2">
                 <h5 className="text-sm opacity-50 m-0 font-medium">Pricing</h5>
                 <p className="m-0">
-                    {plan.pricing.monthly && (
+                    {plan.pricing.monthly ? (
                         <span>
                             <strong>${plan.pricing.monthly}</strong>
                             <span className="text-[13px] opacity-50">/mo</span>
                             <span className="inline-block opacity-50 mx-2">{plan.pricing.event ? '+' : ''}</span>
                         </span>
+                    ) : (
+                        plan.pricing.other && (
+                            <span>
+                                <strong>{plan.pricing.other}</strong>
+                            </span>
+                        )
                     )}
                     <span>
                         <strong>{plan.pricing.event ? `$${plan.pricing.event}` : ''}</strong>
