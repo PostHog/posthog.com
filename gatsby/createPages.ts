@@ -23,7 +23,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const TutorialsTemplate = path.resolve(`src/templates/tutorials/index.tsx`)
     const TutorialTemplate = path.resolve(`src/templates/tutorials/Tutorial.tsx`)
     const TutorialsCategoryTemplate = path.resolve(`src/templates/tutorials/TutorialsCategory.tsx`)
-    const TutorialsAuthorTemplate = path.resolve(`src/templates/tutorials/TutorialsAuthor.tsx`)
 
     // Docs
     const ApiEndpoint = path.resolve(`src/templates/ApiEndpoint.tsx`)
@@ -444,17 +443,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             base,
             template: TutorialsCategoryTemplate,
             extraContext: { activeFilter: category, slug },
-        })
-    })
-
-    result.data.tutorials.contributors.forEach(({ fieldValue }) => {
-        const slug = `/tutorials/contributors/${slugify(fieldValue, { lower: true })}`
-        createPage({
-            path: slug,
-            component: TutorialsAuthorTemplate,
-            context: {
-                activeFilter: fieldValue,
-            },
         })
     })
 
