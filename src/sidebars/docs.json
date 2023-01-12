@@ -343,14 +343,6 @@
                         }
                     },
                     {
-                        "name": "Next.js",
-                        "url": "/docs/integrate/third-party/next-js"
-                    },
-                    {
-                        "name": "Nuxt.js",
-                        "url": "/docs/integrate/third-party/nuxt-js"
-                    },
-                    {
                         "name": "Node.js",
                         "url": "/docs/integrate/server/node"
                     },
@@ -405,6 +397,14 @@
                     {
                         "name": "Google Tag Manager",
                         "url": "/docs/integrate/third-party/google-tag-manager"
+                    },
+                    {
+                        "name": "Next.js",
+                        "url": "/docs/integrate/third-party/next-js"
+                    },
+                    {
+                        "name": "Nuxt.js",
+                        "url": "/docs/integrate/third-party/nuxt-js"
                     },
                     {
                         "name": "Retool",
