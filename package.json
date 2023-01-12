@@ -136,6 +136,7 @@
         "react-simple-maps": "^3.0.0",
         "react-slick": "^0.28.1",
         "react-string-replace": "^1.1.0",
+        "react-textarea-autosize": "^8.4.0",
         "redoc": "^2.0.0-rc.62",
         "redux": "^4.0.5",
         "rehype-sanitize": "^5.0.1",
