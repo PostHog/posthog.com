@@ -1,5 +1,5 @@
 ---
-date: 2023-01-10
+date: 2023-01-12
 title: "In-depth: ClickHouse vs Druid"
 rootPage: /blog
 sidebar: Blog
@@ -8,7 +8,10 @@ hideAnchor: true
 author: ["mathew-pregasen"]
 featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
-categories: ["Engineering", "Guides"]
+category: Engineering
+tags:
+  - Explainers
+  - ClickHouse
 ---
 
 Contrary to what the names might suggest, ClickHouse isn’t an TikTok influencer house and Druid isn’t (just) a D&D character class – they're both modern online analytical processing (OLAP) databases designed to store and retrieve lots of data fast. 
@@ -183,6 +186,4 @@ While both offer enormous advantages over traditional databases for columnar dat
 
 - ClickHouse's CTO, Alexey Milovidov, [2022 talk "Building for Fast"](https://www.youtube.com/watch?v=CAS2otEoerM).
 
-- [How we turned ClickHouse into our event mansion](/blog/how-we-turned-clickhouse-into-our-eventmansion) by our own James Greenhill explores in more depth why we chose ClickHouse for PostHog. We also maintain an internal [ClickHouse manual](/handbook/engineering/clickhouse).  
-
-
+- [How we turned ClickHouse into our event mansion](/blog/how-we-turned-clickhouse-into-our-eventmansion) by our own James Greenhill explores in more depth why we chose ClickHouse for PostHog. We also maintain an internal [ClickHouse manual](/handbook/engineering/clickhouse).
