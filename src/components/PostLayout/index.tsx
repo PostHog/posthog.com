@@ -230,7 +230,7 @@ const Menu = ({
             ? 'hover:bg-gray-accent-light active:bg-[#DBDCD6] dark:hover:bg-gray-accent-dark transition min-h-[36px]'
             : ''
     } ${children && open ? 'bg-gray-accent-light dark:bg-gray-accent-dark font-bold' : ''}`
-    const badgeClasses = `bg-gray-accent dark:bg-gray-accent-dark text-xs m-[-2px] font-medium rounded-sm px-1 py-0.5 inline-block`
+    const badgeClasses = `bg-gray-accent/50 text-primary/75 dark:text-primary-dark/60 dark:bg-gray-accent-dark text-xs m-[-2px] font-medium rounded-sm px-1 py-0.5 inline-block`
 
     useEffect(() => {
         const isOpen = (children?: IMenu[]): boolean | undefined => {
@@ -280,9 +280,7 @@ const Menu = ({
                                 setOpen(!open)
                             }
                         }}
-                        className={`${buttonClasses} ${
-                            !topLevel ? 'opacity-50' : ''
-                        } hover:opacity-100 transition-opacity ${isActive || isWithChild ? 'opacity-100' : ''}`}
+                        className={`${buttonClasses} ${!topLevel ? 'group' : ''} ${isActive || isWithChild ? '' : ''}`}
                         to={url}
                         {...menuLinkProps}
                     >
@@ -305,7 +303,11 @@ const Menu = ({
                         ) : (
                             <>
                                 <span>
-                                    <span className={badge?.title ? 'mr-1.5' : ''}>{name}</span>
+                                    <span
+                                        className={`opacity-50 group-hover:opacity-100 ${badge?.title ? 'mr-1.5' : ''}`}
+                                    >
+                                        {name}
+                                    </span>
                                     {badge?.title && (
                                         <span className={`${badgeClasses} ${badge.className || ''}`}>
                                             {' '}
