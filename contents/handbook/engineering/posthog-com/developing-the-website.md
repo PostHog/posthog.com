@@ -371,26 +371,19 @@ The sidebar is generated from each of the files in `/src/sidebars`.
 
 #### Redirects
 
-Redirects are managed in `netlify.toml` which is located in the root folder.
+Redirects are managed in `vercel.json` which is located in the root folder.
 
-To declare a new redirect, open `netlify.toml` and add an entry with the `[[redirects]]` heading:
-
-```
-[[redirects]]
-    from = "/docs/integrations/android-integration"
-    to = "/docs/libraries/android"
-```
-
-The default HTTP status code is 301, but if you need to define a different status code, it can be changed like this:
+To declare a new redirect, open `vercel.json` and add an entry to the `redirects` list:
 
 ```
-[[redirects]]
-    from = "/docs/integrations/android-integration"
-    to = "/docs/libraries/android"
-    status = 302
+{ "source": "/docs/contributing/stack", "destination": "/docs/contribute/stack" }
 ```
 
->  If you ever need to rename a file to get a different slug, a redirect is automatically created with the Safe Redirects action
+The default HTTP status code is 308 (permanent), but if the redirect should be temporary (307), it can be updated like this:
+
+```
+{ "source": "/docs/contributing/stack", "destination": "/docs/contribute/stack", "permanent": false }
+```
 
 ## Committing changes
 
@@ -508,7 +501,7 @@ If you know who you would like to review the pull request, select them in the **
 
 ## Preview branch
 
-After a series of checks are run (to ensure nothing in your pull request breaks the website), Netlify will generate a preview link available on the `netlify/posthog/deploy-preview` line. This includes all of your changes so you can preview before your pull request is merged.
+After a series of checks are run (to ensure nothing in your pull request breaks the website), Vercel will generate a preview link available in the Vercel bot comment. This includes all of your changes so you can preview before your pull request is merged.
 
 ![Preview branch](../../../images/docs/contribute/preview-branch.png)
 
@@ -520,4 +513,4 @@ To get changes into production, the website deploys automatically from `master`.
 
 #### Acknowledgements
 
-This website is based on [Gatsby](https://gatsbyjs.org) and is hosted with [Netlify](https://www.netlify.com/).
+This website is based on [Gatsby](https://gatsbyjs.org) and is hosted with [Vercel](https://vercel.com).
