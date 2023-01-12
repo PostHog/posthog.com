@@ -307,14 +307,6 @@
                         "url": "/docs/integrate/client/android"
                     },
                     {
-                        "name": "Docusaurus v2",
-                        "url": "/docs/integrate/third-party/docusaurus",
-                        "badge": {
-                            "title": "3rd party",
-                            "className": "bg-red"
-                        }
-                    },
-                    {
                         "name": "Elixir",
                         "url": "/docs/integrate/server/elixir"
                     },
@@ -387,11 +379,12 @@
                 "url": "",
                 "children": [
                     {
+                        "name": "Docusaurus v2",
+                        "url": "/docs/integrate/third-party/docusaurus"
+                    },
+                    {
                         "name": "Google Tag Manager",
-                        "url": "/docs/integrate/third-party/google-tag-manager",
-                        "badge": {
-                            "title": "3rd party"
-                        }
+                        "url": "/docs/integrate/third-party/google-tag-manager"
                     },
                     {
                         "name": "Retool",
@@ -411,24 +404,15 @@
                     },
                     {
                         "name": "Shopify",
-                        "url": "/docs/integrate/third-party/shopify",
-                        "badge": {
-                            "title": "3rd party"
-                        }
+                        "url": "/docs/integrate/third-party/shopify"
                     },
                     {
                         "name": "Slack",
-                        "url": "/docs/integrate/third-party/slack",
-                        "badge": {
-                            "title": "3rd party"
-                        }
+                        "url": "/docs/integrate/third-party/slack"
                     },
                     {
                         "name": "WordPress",
-                        "url": "/docs/integrate/third-party/wordpress",
-                        "badge": {
-                            "title": "3rd party"
-                        }
+                        "url": "/docs/integrate/third-party/wordpress"
                     }
                 ]
             },
