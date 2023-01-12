@@ -219,6 +219,7 @@ const Menu = ({
     topLevel,
     menuType = 'standard',
     icon,
+    badge,
 }: IMenu) => {
     const location = useLocation()
     const pathname = replacePath(location?.pathname)
@@ -229,6 +230,7 @@ const Menu = ({
             ? 'hover:bg-gray-accent-light active:bg-[#DBDCD6] dark:hover:bg-gray-accent-dark transition min-h-[36px]'
             : ''
     } ${children && open ? 'bg-gray-accent-light dark:bg-gray-accent-dark font-bold' : ''}`
+    const badgeClasses = `bg-gray-accent dark:bg-gray-accent-dark text-xs m-[-2px] font-medium rounded-sm px-1 py-0.5 inline-block`
 
     useEffect(() => {
         const isOpen = (children?: IMenu[]): boolean | undefined => {
@@ -301,7 +303,17 @@ const Menu = ({
                                 <span>{name}</span>
                             </span>
                         ) : (
-                            <span>{name}</span>
+                            <>
+                                <span>
+                                    <span className={badge?.title ? 'mr-1.5' : ''}>{name}</span>
+                                    {badge?.title && (
+                                        <span className={`${badgeClasses} ${badge.className || ''}`}>
+                                            {' '}
+                                            {badge.title}
+                                        </span>
+                                    )}
+                                </span>
+                            </>
                         )}
                         {isWithChild && <Chevron open={open ?? false} />}
                     </MenuLink>
@@ -310,15 +322,23 @@ const Menu = ({
                         {isWithChild ? (
                             <>
                                 <Link
-                                    className="text-inherit hover:text-inherit flex-grow pl-3 py-1"
+                                    className="text-inherit hover:text-inherit flex-grow pl-3 py-1 leading-tight"
                                     to={children[0]?.url || ''}
                                 >
-                                    {name}
+                                    <span>
+                                        <span className={badge?.title ? 'mr-1.5' : ''}>{name}</span>
+                                        {badge?.title && (
+                                            <span className={`${badgeClasses} ${badge.className || ''}`}>
+                                                {' '}
+                                                {badge.title}
+                                            </span>
+                                        )}
+                                    </span>
                                 </Link>
                                 <Chevron className="mr-2" open={open ?? false} />
                             </>
                         ) : (
-                            <span className="inline-block pl-3 pr-2 py-1">name</span>
+                            <span className="inline-block pl-3 pr-2 py-1">{name}</span>
                         )}
                     </button>
                 )}

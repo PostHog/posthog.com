@@ -21,6 +21,10 @@ export interface IMenu {
     handleLinkClick?: () => void
     topLevel?: boolean
     menuType?: 'scroll' | 'standard'
+    badge?: {
+        title: string
+        className?: string
+    }
 }
 
 export interface ICrumb {
