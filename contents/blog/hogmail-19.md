@@ -50,6 +50,8 @@ But the real game changer is defaulting to asynchronous communication and writin
 We often get asked how to achieve the fabled product-market fit (PMF), mainly because [there is no universal standard](https://posthog.com/blog/how-to-product-market-fit) and, as Run the Business points out in [Product Market Flex](https://runthebusiness.substack.com/p/product-market-flex), it's not a stationary target:
 
 >"At any given moment in time, even if you have PMF, you still need to be working towards a future state where the market has evolved, and your product has kept up."
+
+![product market fit](../images/blog/product-market-flex.jpeg)
  
 The author goes on to argue teams can flex two dimensions to achieve PMF: (i) reduce the effort by the user to get value (product); and (ii) increase user literacy (go-to-market).
 
