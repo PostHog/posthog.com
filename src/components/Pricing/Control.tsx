@@ -426,13 +426,23 @@ const Control = (): JSX.Element => {
 
                         <div className="pl-10 relative mb-8">
                             <span className="w-6 h-6 absolute top-0 left-1">{NotProductIcons.enterprise}</span>
-
-                            <h5 className="text-base mb-0">Enterprise package</h5>
+                            <h5 className="text-base mb-0">SAML SSO</h5>
                             <p className="text-[15px] mb-1">
-                                SAML SSO, advanced permissions, dedicated Slack support channel
+                                Enforce login through an SSO provider to fit all your compliance / IT needs
                             </p>
-                            <p className="text-sm text-black/70">
-                                Add <strong className="text-black/100">25%</strong> to total bill ($450/mo min)
+                        </div>
+                        <div className="pl-10 relative mb-8">
+                            <span className="w-6 h-6 absolute top-0 left-1">{NotProductIcons.enterprise}</span>
+                            <h5 className="text-base mb-0">Advanced permissions</h5>
+                            <p className="text-[15px] mb-1">
+                                Set up complex permissions for your team for dashboards, feature flags, and more
+                            </p>
+                        </div>
+                        <div className="pl-10 relative mb-8">
+                            <span className="w-6 h-6 absolute top-0 left-1">{NotProductIcons.enterprise}</span>
+                            <h5 className="text-base mb-0">Dedicated Slack support channel</h5>
+                            <p className="text-[15px] mb-1">
+                                Get the help you need when you need it directly from our team in Slack
                             </p>
                         </div>
 
