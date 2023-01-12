@@ -21,38 +21,32 @@ Any notes about async migrations, etc. go here.
 **Release highlights:**
 
 - [New: Performance improvements](#new-performance-improvements)
-- [New: Role based access](#role-based-access)
 - [New: Better insight searching](#new-better-insight-searching)
 - [New: Feature flag variant overrides](#new-feature-flag-variant-overrides)
 - [New: Export recordings to file](#new-export-recordings-to-file)
+- [New: Role-based access for feature flags](#new-role-based-access-for-feature-flags)
 - [Improved: More experiment variants and improved flow](#improved-more-experiment-variants-and-improved-flow)
-- [Improved: Query cancelling improvements](#improved-query-cancelling-improvements)
 - [Improved: Recording playback controls](#improved-recording-playback-controls)
 - [Improved: Browsing recordings and creating playlists](#improved-browsing-recordings-and-creating-playlists)
 
 ### New: Performance improvements
 
-We don't want you to spend time waiting on machines so performance has had a renewed focus. Some improvements shipped this release:
+Nobody likes waiting for results, so we've put a renewed focus into performance recently and shipped a huge number of improvements. Here are just some of the highlights: 
 
-- ClickHouse 22.8 support. This release also enables an important query optimization which will speed up some expensive queries up to 30%.
-- Reworked dashboard cache refreshing logic - your dashboards should now be more up-to-date
-- When updating dashboard filters we now may hit the cache for faster results
-- Improved query cancellation when navigating away from trends or dashboards
-- Reduced dashboard API response size. Existing `items` field is now deprecated and removed next release
-- Property filters modal has received a speedup
-- Home dashboards are no longer loaded twice
-- When refreshing dashboards we now reload tiles in the same order as they're placed in visually
-- When loading dashboards, we no longer load data from redis twice
-- When updating dashboard filters, we now use cached data instead of always refreshing immediately
-- Trends queries received an update which will reduce cross-shard traffic significantly and speed up queries
-- Improved celery housekeeping tasks to require less ClickHouse resources. Run 0008 async migration to get full benefits of this.
-- Many other small and large API speedups 
+- Added ClickHouse 22.8 support and optimized expensive queries to be up to 30% faster
+- Updated trends queries to reduce cross-shard traffic significantly and speed up queries
+- Reworked dashboard cache refresh logic so dashboards are more up-to-date
+- Reduced dashboard API response size and deprecated the `items` field
+- Updated dashboard filters to use cached data instead of refreshing immediately
+- We no longer load dashboard data from redis twice and tiles are loaded in visual order
+- Improved query cancellation logic when navigating away from trends or dashboards
+- Improved Celery housekeeping tasks to require less ClickHouse resources 
+- Prevented home dashboards from loading twice 
+- Sped up the property filters modal
 
-Last but not least, we now also have a [ClickHouse manual](/handbook/engineering/clickhouse) where we're gathering information we have learned about the database powering PostHog.
+> To unlock the full benefits of these the Celery updates, [run async migration 0008](/docs/runbook/async-migrations).
 
-### New: Role based access
-
-We can now create roles and group team members together, along with being able to customize feature flags access for team members! Having access control helps reduce accidental changes and ensures confidence when shipping a new feature.
+Last but not least, we now also have a [ClickHouse manual](/handbook/engineering/clickhouse) where we gather information about the database powering PostHog.
 
 ### New: Better insight searching
 ![insight searching](../images/blog/array/1-43-0-search.gif)
@@ -85,10 +79,8 @@ Finally, as a bonus, you can now have up to nine variants in an experiment, inst
 
 Sometimes a recording can be so insightful, so important, that you think - "I want to keep a record of this forever." Well, now you can export any recording to a file and load it back into PostHog for playback in the future. Whether it is to commemorate your first sale or for compliance reasons, the tools are now in your hands.
 
-### Improved: Query cancelling improvements
-PostHog already had some cancellation logic that abandoned running queries if filters were changed, but what if you just went and did something else? Then we'd leave a query running in ClickHouse, slowing everything down. 
-
-Until now! 1.43.0 adds calls into the dashboard and insight logic when an insight is abandoned, attempting to cancel the query. The benefit? Less resource hogging, faster queries for all!
+### New: Role-based access for feature flags
+You can now create roles and group team members together, along with customizing feature flags access for team members! Having access control helps reduce accidental changes and ensures confidence when shipping a new feature.
 
 ### Improved: Recording playback controls 
 ![recording controls](../images/blog/array/1-43-0-seekbar.gif)
