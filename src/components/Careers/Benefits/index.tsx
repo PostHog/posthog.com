@@ -84,7 +84,7 @@ export const benefits = [
     },
     {
         title: 'Carbon offsetting',
-        details: 'for work travel with Project Wren',
+        details: 'We protect the environment when we travel for work with Project Wren.',
         image: carbonOffsettingImg,
     },
     {
@@ -100,7 +100,7 @@ export const benefits = [
     {
         title: 'Company offsites',
         details:
-            'Each year we organise fully paid company offsites - last year we went to a villa in Portugal! Sometimes it’s good to speak face to face.',
+            'Each year we organise fully paid company offsites - last year we went to Iceland! Sometimes it’s good to speak face to face.',
         image: companyOffsitesImg,
     },
 ]
