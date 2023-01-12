@@ -276,6 +276,7 @@ function Home({ navigation }) {
       value: text
     })
   }
+}
 //...
 ```
 
