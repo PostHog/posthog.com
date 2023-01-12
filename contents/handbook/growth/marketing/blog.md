@@ -102,7 +102,7 @@ Submit a PR to [posthog/posthog.com](https://github.com/posthog/posthog.com) wit
   
 - Add a meta description using `description` in the frontmatter section (optional)
 
-- Set the date of the blog post to the intended publishing date in the format `YYYY-MM-DD`. Posts dated [in the future](https://github.com/PostHog/posthog.com/pull/2964) won't display on the site until their specified date, though a build is required day-of in order to publish the post. (The Website & Docs team or other Netlify admins can kick off a manual build.)
+- Set the date of the blog post to the intended publishing date in the format `YYYY-MM-DD`. Posts dated [in the future](https://github.com/PostHog/posthog.com/pull/2964) won't display on the site until their specified date, though a build is required day-of in order to publish the post. (The Website & Docs team or other Vercel admins can kick off a manual build.)
 
 - Create an annotation on [app.posthog.com](https://app.posthog.com) for the content to track the effect.
 
