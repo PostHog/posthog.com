@@ -32,7 +32,23 @@ Any notes about async migrations, etc. go here.
 
 ### New: Performance improvements
 
-@Karl to add a sentence or two here. 
+We don't want you to spend time waiting on machines so performance has had a renewed focus. Some improvements shipped this release:
+
+- ClickHouse 22.8 support. This release also enables an important query optimization which will speed up some expensive queries up to 30%.
+- Reworked dashboard cache refreshing logic - your dashboards should now be more up-to-date
+- When updating dashboard filters we now may hit the cache for faster results
+- Improved query cancellation when navigating away from trends or dashboards
+- Reduced dashboard API response size. Existing `items` field is now deprecated and removed next release
+- Property filters modal has received a speedup
+- Home dashboards are no longer loaded twice
+- When refreshing dashboards we now reload tiles in the same order as they're placed in visually
+- When loading dashboards, we no longer load data from redis twice
+- When updating dashboard filters, we now use cached data instead of always refreshing immediately
+- Trends queries received an update which will reduce cross-shard traffic significantly and speed up queries
+- Improved celery housekeeping tasks to require less ClickHouse resources. Run 0008 async migration to get full benefits of this.
+- Many other small and large API speedups 
+
+Last but not least, we now also have a [ClickHouse manual](/handbook/engineering/clickhouse) where we're gathering information we have learned about the database powering PostHog.
 
 ### New: Role based access
 
