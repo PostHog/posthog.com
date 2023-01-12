@@ -20,7 +20,7 @@ Set up a [PostHog Cloud account](https://app.posthog.com/signup) (hosted in the 
 ## 2. Set up your project
 
 After signing up, you'll see a screen that asks you how you'd like to send events.
-Select whichever option best matches your use case, or select 'Just Exploring' if you don't want to set up a full integration quite yet.
+Select whichever option best matches your use case. If you're not ready to set up your integration yet, you can explore the demo project or invite a team member to help you start ingesting events.
 
 > For web-based projects, the easiest way to get started is by adding the [JavaScript snippet](/docs/integrate) to your website and app.
 
