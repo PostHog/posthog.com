@@ -8,7 +8,7 @@ hideAnchor: true
 author: ["ian-vanagas"]
 featuredImage: ../images/blog/green-blog-image.jpg
 featuredImageType: full
-categories: ["Using PostHog"]
+category: Using PostHog
 tags:
   - Using PostHog
   - Feature flags

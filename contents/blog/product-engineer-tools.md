@@ -8,7 +8,7 @@ hideAnchor: true
 author: ["ian-vanagas"]
 featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
-categories: Engineering
+category: Engineering
 tags:
   - Guides
 ---

@@ -8,7 +8,7 @@ hideAnchor: true
 featuredImage: ../images/blog/posthog-vs-mixpanel/posthog-vs-mixpanel.jpeg
 featuredImageType: full
 author: ["andy-vandervell"]
-categories: General
+category: General
 tags:
   - Comparisons
   - Guides
