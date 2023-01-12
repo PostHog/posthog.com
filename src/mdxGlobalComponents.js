@@ -136,7 +136,6 @@ import { Toggle } from './components/Toggle'
 import { Tooltip } from './components/Tooltip'
 import { TotalCountries } from './components/TotalCountries'
 import { TotalTeam } from './components/TotalTeam'
-import { Tutorials } from './components/Tutorials'
 import { TutorialsSlider } from './components/TutorialsSlider'
 import { VisitLibrary } from './components/VisitLibrary'
 import { ZoomImage } from './components/ZoomImage'
@@ -278,7 +277,6 @@ export const shortcodes = {
     Tooltip,
     TotalCountries,
     TotalTeam,
-    Tutorials,
     TutorialsSlider,
     VisitLibrary,
     ZoomImage,

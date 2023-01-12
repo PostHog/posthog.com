@@ -1,8 +1,6 @@
 ---
-title: Integrate PostHog with Shopify
-sidebarTitle: Shopify
-sidebar: Docs
-showTitle: true
+title: Shopify
+icon: ../../../images/docs/integrate/frameworks/shopify.svg
 ---
 
 ## Objective
@@ -21,7 +19,7 @@ To follow this tutorial along, you should:
 
 ## Step-by-step instructions
 
-1. Get your [PostHog snippet](/docs/integrate/client/snippet-installation) from your 'Project Settings' or the initial PostHog setup
+1. Get your [PostHog snippet](/docs/integrate) from your 'Project Settings' or the initial PostHog setup
 1. Login to your Shopify dashboard
 1. Go to 'Online Store' -> 'Themes' (see image below)
 1. On your theme, click 'Actions' -> 'Edit code' (see image below)

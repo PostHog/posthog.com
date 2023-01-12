@@ -623,6 +623,14 @@
             "destination": "/blog/using-posthog"
         },
         {
+            "source": "/docs/integrate/third-party/slack",
+            "destination": "/manual/subscriptions"
+        },
+        {
+            "source": "/docs/integrate/client/snippet-installation",
+            "destination": "/docs/integrate"
+        },
+        {
             "source": "/tutorials/feature-flags",
             "destination": "/manual/feature-flags"
         }

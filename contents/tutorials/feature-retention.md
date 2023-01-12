@@ -16,7 +16,7 @@ This tutorial will help you discover the features that drive retention and keep 
 
 The first step in understanding feature retention is knowing what data you have. You need data from your product’s features to know anything about their retention. There are two ways to do this:
 
-1. Add the [snippet](/docs/integrate/client/snippet-installation) or install the [JavaScript library](/docs/integrate/client/js) to enable [autocapture](/docs/integrate/client/js#autocapture). Find autocaptured events related to the feature (views, button presses, inputs). Create an [action](/manual/actions) (a combination of events) using the toolbar or under “Data Management” in the sidebar to represent that feature’s usage.
+1. Add the [snippet](/docs/integrate) or install the [JavaScript library](/docs/integrate/client/js) to enable [autocapture](/docs/integrate/client/js#autocapture). Find autocaptured events related to the feature (views, button presses, inputs). Create an [action](/manual/actions) (a combination of events) using the toolbar or under “Data Management” in the sidebar to represent that feature’s usage.
 
 2. Add event capture calls manually into the code that encompasses the feature usage. Use functions, methods, hooks, or other structures in your code to represent a feature’s usage.
 
