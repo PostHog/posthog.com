@@ -280,7 +280,9 @@ const Menu = ({
                                 setOpen(!open)
                             }
                         }}
-                        className={`${buttonClasses} ${!topLevel ? 'group' : ''} ${isActive || isWithChild ? '' : ''}`}
+                        className={`${buttonClasses} ${!topLevel ? 'group' : ''} ${
+                            isActive || isWithChild ? 'active' : ''
+                        }`}
                         to={url}
                         {...menuLinkProps}
                     >

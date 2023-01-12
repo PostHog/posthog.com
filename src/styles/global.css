@@ -262,6 +262,14 @@ h4 {
     }
 }
 
+/* scope to left nav */
+.z-20 {
+    /* make active nav item full strength */
+    .active span.opacity-50 {
+        @apply opacity-100;
+    }
+}
+
 /* animated underlined links */
 .article-content a:not(.cta) {
     background: linear-gradient(to right, rgba(191, 191, 188, 0), rgba(191, 191, 188, 0)),
