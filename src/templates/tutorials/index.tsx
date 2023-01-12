@@ -6,7 +6,7 @@ import Layout from 'components/Layout'
 import { Posts } from 'components/Blog'
 import Pagination from 'components/Pagination'
 import { NewsletterForm } from 'components/NewsletterForm'
-import { docs } from '../../sidebars/sidebars.json'
+import docs from 'sidebars/docs.json'
 
 const Tutorials = ({
     data: {

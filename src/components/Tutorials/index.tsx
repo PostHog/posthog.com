@@ -6,7 +6,7 @@ import Layout from '../Layout'
 import { SEO } from '../seo'
 import slugify from 'slugify'
 import { NewsletterForm } from 'components/NewsletterForm'
-import { docs } from '../../sidebars/sidebars.json'
+import docs from 'sidebars/docs.json'
 import { capitalize } from 'instantsearch.js/es/lib/utils'
 import { Posts } from 'components/Blog'
 

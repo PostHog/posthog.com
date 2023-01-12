@@ -21,6 +21,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const Job = path.resolve(`src/templates/Job.tsx`)
 
     // Tutorials
+    const TutorialsTemplate = path.resolve(`src/templates/tutorials/index.tsx`)
     const TutorialTemplate = path.resolve(`src/templates/tutorials/Tutorial.tsx`)
     const TutorialsCategoryTemplate = path.resolve(`src/templates/tutorials/TutorialsCategory.tsx`)
 
