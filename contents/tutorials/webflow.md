@@ -10,13 +10,13 @@ topics: ["configuration"]
 
 Webflow is one of the most popular no-code site builders. It makes building high-quality marketing sites, blogs, landing pages, and ecommerce stores a breeze. 
 
-To ensure your Webflow site is as good as possible, you need data about its usage. PostHog provides tools to capture and analyze this data. This tutorial goes over how to add PostHog to your Webflow site to capture pageviews, events like button clicks, session recordings, and more.
+To ensure your [Webflow](https://webflow.com/) site is as good as possible, you need data about its usage. PostHog provides tools to capture and analyze this data. This tutorial goes over how to add PostHog to your Webflow site to capture pageviews, events like button clicks, session recordings, and more.
 
 It requires both a PostHog and Webflow account, along with a Webflow paid site plan (PostHog is free up to 1M events and 15k session recordings per month).
 
 ## Create a Webflow site
 
-First, you need a Webflow site to add PostHog. Sign up at [webflow.com](https://webflow.com/), go through the tutorial, and create a new site once done (I used a template). Modify it as much as you like and publish once ready. 
+First, you need a Webflow site to add PostHog to. Sign up at [webflow.com](https://webflow.com/), go through the tutorial, and create a new site. There are pre-made templates available to make this process easy, such as the one we've used for this tutorial. Once you're happy with the site you've made, publish it. 
 
 You should get a `.webflow.io` URL we can use to test with. Once you’ve published your site, go to the top right menu and open the Project Settings page.
 
@@ -24,7 +24,7 @@ You should get a `.webflow.io` URL we can use to test with. Once you’ve publis
 
 ## Adding PostHog to your Webflow site
 
-In PostHog, get the JavaScript snippet from the Getting Started page or in your Project settings. It looks like this:
+In PostHog, get the JavaScript snippet from the Getting Started page or your Project settings. It looks like this:
 
 ```html
 <script>
