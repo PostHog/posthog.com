@@ -12,9 +12,7 @@ featuredImageType: full
 
 Want to know more about what we're up to? Check out [our roadmap](/roadmap) to see what we're working on and what new beta features are available! You can also subscribe to [our Hogmail newsletter](/newsletter)!
 
-## Update guide for self-hosted users
-
-Any notes about async migrations, etc. go here.
+> **Need to update a self-hosted instance?** [Check the runbook docs for instructions](/docs/runbook/upgrading-posthog)!
 
 ## PostHog 1.43.0 release notes
 
@@ -44,7 +42,7 @@ Nobody likes waiting for results, so we've put a renewed focus into performance 
 - Prevented home dashboards from loading twice 
 - Sped up the property filters modal
 
-> To unlock the full benefits of these the Celery updates, [run async migration 0008](/docs/runbook/async-migrations).
+> To unlock the full benefits of Celery updates on a self-hosted instance of PostHog, please [run async migration 0008](/docs/runbook/async-migrations).
 
 Last but not least, we now also have a [ClickHouse manual](/handbook/engineering/clickhouse) where we gather information about the database powering PostHog.
 
