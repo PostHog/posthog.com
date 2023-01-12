@@ -304,7 +304,11 @@
                 "children": [
                     {
                         "name": "Android",
-                        "url": "/docs/integrate/client/android"
+                        "url": "/docs/integrate/client/android",
+                        "badge": {
+                            "title": "Popular",
+                            "className": "bg-blue/10 text-blue dark:text-white dark:bg-blue/50"
+                        }
                     },
                     {
                         "name": "Elixir",
@@ -315,19 +319,16 @@
                         "url": "/docs/integrate/client/flutter"
                     },
                     {
-                        "name": "Gatsby",
-                        "url": "/docs/integrate/third-party/gatsby",
-                        "badge": {
-                            "title": "3rd party"
-                        }
-                    },
-                    {
                         "name": "Go",
                         "url": "/docs/integrate/server/go"
                     },
                     {
                         "name": "iOS",
-                        "url": "/docs/integrate/client/ios"
+                        "url": "/docs/integrate/client/ios",
+                        "badge": {
+                            "title": "Popular",
+                            "className": "bg-blue/10 text-blue dark:text-white dark:bg-blue/50"
+                        }
                     },
                     {
                         "name": "Java",
@@ -335,14 +336,15 @@
                     },
                     {
                         "name": "JavaScript",
-                        "url": "/docs/integrate/client/js"
+                        "url": "/docs/integrate/client/js",
+                        "badge": {
+                            "title": "Popular",
+                            "className": "bg-blue/10 text-blue dark:text-white dark:bg-blue/50"
+                        }
                     },
                     {
                         "name": "Next.js",
-                        "url": "/docs/integrate/third-party/next-js",
-                        "badge": {
-                            "title": "3rd party"
-                        }
+                        "url": "/docs/integrate/third-party/next-js"
                     },
                     {
                         "name": "Nuxt.js",
@@ -362,7 +364,11 @@
                     },
                     {
                         "name": "React Native",
-                        "url": "/docs/integrate/client/react-native"
+                        "url": "/docs/integrate/client/react-native",
+                        "badge": {
+                            "title": "Popular",
+                            "className": "bg-blue/10 text-blue dark:text-white dark:bg-blue/50"
+                        }
                     },
                     {
                         "name": "Ruby",
@@ -375,12 +381,26 @@
                 ]
             },
             {
+                "name": "Library comparison",
+                "url": "/docs/integrate/libraries"
+            },
+            {
                 "name": "Integrations",
                 "url": "",
                 "children": [
                     {
                         "name": "Docusaurus v2",
-                        "url": "/docs/integrate/third-party/docusaurus"
+                        "url": "/docs/integrate/third-party/docusaurus",
+                        "badge": {
+                            "title": "3rd party"
+                        }
+                    },
+                    {
+                        "name": "Gatsby",
+                        "url": "/docs/integrate/third-party/gatsby",
+                        "badge": {
+                            "title": "3rd party"
+                        }
                     },
                     {
                         "name": "Google Tag Manager",
@@ -415,10 +435,6 @@
                         "url": "/docs/integrate/third-party/wordpress"
                     }
                 ]
-            },
-            {
-                "name": "Library comparison",
-                "url": "/docs/integrate/libraries"
             },
             {
                 "name": "Ingest live data",
