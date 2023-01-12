@@ -8,7 +8,11 @@ hideAnchor: true
 featuredImage: ../images/blog/posthog-vs-mixpanel/posthog-vs-mixpanel.jpeg
 featuredImageType: full
 author: ["andy-vandervell"]
-categories: ["Guides", "Comparisons"]
+categories: General
+tags:
+  - Comparisons
+  - Guides
+  - Product analytics
 ---
 
 Want to know how PostHog and Mixpanel are different? If you remember nothing else, remember these two points:

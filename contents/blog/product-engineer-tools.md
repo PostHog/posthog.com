@@ -8,7 +8,9 @@ hideAnchor: true
 author: ["ian-vanagas"]
 featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
-categories: ["Startups", "Guides"]
+categories: Engineering
+tags:
+  - Guides
 ---
 
 Like every role, [product engineers](/blog/what-is-a-product-engineer/) have a set of essential tools for their work. Their need to gather insights, ideate, and deploy solutions independently makes creating an efficient stack all the more important. Here we explore the popular engineering, product, and automation tools that will help you gather insights and deploy product improvements fast.
