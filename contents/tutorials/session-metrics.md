@@ -4,12 +4,12 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-09-26
-featuredImage: ../images/tutorials/banners/session-metrics.png
+featuredImage: ../images/tutorials/banners/tutorial-8.png
 tags: ['trends', 'sessions']
 ---
 
-- **Level:** Easy 🦔
-- **Estimated reading time:** 5 minutes ☕️
+- **Level:** Easy 🦔
+- **Estimated reading time:** 5 minutes ☕️
 
 Analyzing where users spend their time in your product is vital for understanding which features they value most. There are numerous ways to do this, but one of the most common is to track metrics like time on site, time on page, average session duration, and pages per session. 
 
@@ -22,7 +22,7 @@ In this tutorial, we will use sessions to calculate and visualize a variety of s
 To follow this tutorial along, you need to have:
 
 1. **[Deployed PostHog](/docs/getting-started/cloud)**.
-2. Installed **[posthog-js](/docs/integrate/client/js)** or added the **[PostHog snippet](/docs/integrate/client/js)** to your site.
+2. Installed **[posthog-js](/docs/integrate/client/js)** or added the **[PostHog snippet](/docs/integrate/client/js)** to your site.
 
 ## Time on site
 
