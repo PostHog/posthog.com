@@ -26,7 +26,7 @@ The downside of using multiple projects is that you cannot directly copy actions
 
 ### Creating and using environment variables
 
-To create an enviroment variable, create a `.env` file in the root of your project and add your API key as a variable.
+To create an environment variable, create a `.env` file in the root of your project and add your API key as a variable.
 
 ```
 POSTHOG_API_KEY=<ph_project_api_key>
