@@ -3,7 +3,7 @@ title: How to setup PostHog for multiple environments (development, staging, pro
 sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
-date: 2023-01-02
+date: 2023-01-13
 featuredImage: ../images/tutorials/banners/multiple-environments.png
 topics: ["configuration"]
 ---
