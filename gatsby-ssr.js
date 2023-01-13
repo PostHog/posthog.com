@@ -93,7 +93,6 @@ export const onRenderBody = function ({ setPreBodyComponents }) {
     g.defer = true;
     g.async = true;
     s.parentNode.insertBefore(g, s);
-    w.$unthread(w.location.pathname === '/pricing' ? 'start' : 'stop');
 })(window, document, 'script');
       `,
             },

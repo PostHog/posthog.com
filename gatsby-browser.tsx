@@ -17,8 +17,9 @@ export const onRouteUpdate = ({ location, prevLocation }: RouteUpdateArgs) => {
         // show chat widget if on pricing page & hide if not
         // chat widget gets mounted in gatsby-ssr.js
         const unthread = window?.$unthread
-        if (unthread) {
-            unthread(window.location.pathname === '/pricing' ? 'start' : 'stop')
+        if (unthread && window.location.pathname !== '/pricing') {
+            if (document.body.style.paddingRight) document.body.style.paddingRight = ''
+            unthread('stop')
         }
 
         var slug = location.pathname.substring(1)

@@ -29,6 +29,7 @@ import { NotProductIcons } from '../NotProductIcons/NotProductIcons'
 import Breakdown from './Breakdown'
 import { RenderInClient } from 'components/RenderInClient'
 import SelfHost from './SelfHost'
+import ChatHog from 'components/ChatHog'
 
 const Benefit = ({ children }) => {
     return (
@@ -574,6 +575,7 @@ const Control = (): JSX.Element => {
                     </div>
                 </div>
             </section>
+            <ChatHog />
         </Layout>
     )
 }
