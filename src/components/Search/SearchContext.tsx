@@ -20,6 +20,7 @@ export type SearchLocation =
     | 'handbook-dropdown'
     | 'questions'
     | 'mobile-header'
+    | '404'
 export type SearchResultType = 'blog' | 'docs' | 'api' | 'question' | 'handbook' | 'manual'
 
 const searchClient = algoliasearch(

@@ -3,7 +3,7 @@ title: Sales and revenue tracking
 sidebar: Docs
 showTitle: true
 author: ['yakko-majuri']
-topics: ['funnels', 'configuration', 'events']
+tags: ['funnels', 'configuration', 'events']
 date: 2020-11-18
 featuredImage: ../images/tutorials/banners/revenue.png
 ---
@@ -218,7 +218,7 @@ Tracking revenue is just the start.
 
 ### Other relevant tutorials
 
-- [How to safely roll out new features](/docs/tutorials/feature-flags)
+- [Setting up and using feature flags](/manual/feature-flags)
 - [Analyzing your conversion with Funnels](/docs/tutorials/funnels)
 
 <NewsletterTutorial compact/>

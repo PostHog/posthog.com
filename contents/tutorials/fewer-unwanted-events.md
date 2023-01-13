@@ -4,8 +4,8 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-10-20
-featuredImage: ../images/tutorials/banners/fewer-unwanted-events.png
-topics: ['events', 'apps', 'data management']
+featuredImage: ../images/tutorials/banners/tutorial-8.png
+tags: ['events', 'apps', 'data management']
 ---
 
 **Estimated reading time:** 5 minutes ☕

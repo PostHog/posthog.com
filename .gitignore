@@ -22,8 +22,6 @@ pr_diff
 
 recipe-server.log
 
-# Local Netlify folder
-.netlify
 static/fonts/MatterSQItalicVF.woff
 static/fonts/MatterSQItalicVF.woff2
 static/fonts/MatterSQVF.woff

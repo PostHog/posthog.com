@@ -111,7 +111,7 @@ Near the bottom of a pull request page, you'll see a box like this:
 
 (Note: This box only appears if you're a member of the PostHog GitHub org - it's not available to the public.)
 
-You can click the _Details_ link on the line that says `netlify/posthog/deploy-preview` to see the preview.
+You can click the _Visit Preview_ link in the Vercel bot comment to see the preview.
 
 ### Merging changes
 

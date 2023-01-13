@@ -4,6 +4,7 @@ sidebarTitle: JavaScript
 sidebar: Docs
 showTitle: true
 github: https://github.com/PostHog/posthog-js
+icon: ../../../../images/docs/integrate/js.svg
 features:
     eventCapture: true
     userIdentification: true
@@ -13,7 +14,7 @@ features:
     groupAnalytics: true
 ---
 
-> **Note:** You can just use our [snippet](/docs/integrate/client/snippet-installation) to start capturing events with our JS.
+> **Note:** You can just use our [snippet](/docs/integrate) to start capturing events with our JS.
 
 This page of the Docs refers to our [posthog-js](https://github.com/PostHog/posthog-js) library.
 
@@ -72,13 +73,17 @@ Specifically, PostHog autocapture will grab only the `name`, `id`, and `class` a
 
 Sometimes less data might be collected than expected. If you need to collect more data from inputs, you should look into [Custom events and Actions](/docs/user-guides/actions).
 
-### Website vs app
+### Track across marketing website &amp; app
 
 We recommend putting PostHog both on your homepage and your application if applicable. That means you'll be able to follow a user from the moment they come onto your website, all the way through signup and actually using your product.
 
 > PostHog automatically sets a cross-domain cookie, so if your website is `yourapp.com` and your app is on `app.yourapp.com` users will be followed when they go from one to the other.
 
-### Capture
+### Permitted domains
+
+You can also configure "permitted domains" in your 'Project Settings'. These are domains where you'll be able to record user sessions and use the PostHog toolbar.
+
+### Send custom events with `posthog.capture`
 
 import JSCapture from './snippets/capture.mdx'
 
@@ -89,6 +94,14 @@ import JSCapture from './snippets/capture.mdx'
 To set properties on a user, you can use the `posthog.people.set` and `posthog.people.set_once` methods.
 
 However, you can also leverage the event properties `$set` and `$set_once` to do this via an event.
+
+### Avoid tracking sensitive data
+
+PostHog puts a great amount of effort into making sure it doesn't capture any sensitive data from your website (such as fields like passwords and credit card inputs). If there are other elements you don't want to be captured, you can add the `ph-no-capture` CSS class.
+
+```html
+<button class="ph-no-capture">Sensitive information here</button>
+```
 
 ##### $set
 

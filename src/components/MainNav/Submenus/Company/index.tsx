@@ -5,31 +5,12 @@ import { graphql, useStaticQuery } from 'gatsby'
 import Blog from './Blog'
 import SearchIconButton from 'components/Search/SearchIconButton'
 import CallToAction from '../CallToAction'
-import { Wrapper } from '../Wrapper'
+import { TwoCol, Wrapper } from '../Wrapper'
+import handbookSidebar from 'sidebars/handbook.json'
 
 interface HandbookNav {
     title: string
     url: string
-}
-
-const Block = ({
-    title,
-    children,
-    cta,
-}: {
-    title: string
-    children: React.ReactNode
-    cta: { url: string; label: string }
-}) => {
-    return (
-        <div className="py-6 md:px-6 xl:px-12">
-            <h3 className="text-[18px] font-bold mt-0 mb-2 text-black/70">{title}</h3>
-            <>{children}</>
-            <CallToAction to={cta.url} className="mt-4 !w-full">
-                {cta.label}
-            </CallToAction>
-        </div>
-    )
 }
 
 const Handbook = ({ menu }: { menu: HandbookNav[] }) => {
@@ -69,16 +50,14 @@ const Handbook = ({ menu }: { menu: HandbookNav[] }) => {
 }
 
 export default function Docs({ referenceElement }: { referenceElement: HTMLDivElement }) {
-    const { teamMembers, jobs, sidebars } = useStaticQuery(query)
+    const { teamMembers, jobs } = useStaticQuery(query)
 
-    const handbookMenu = sidebars.childSidebarsJson.handbook
-        .slice(1, sidebars.childSidebarsJson.handbook.length)
-        .map(({ name, url, children }: { name: string; url: string; children: { name: string; url: string }[] }) => {
-            return {
-                title: name,
-                url: url || children.filter(({ url }) => url)[0].url,
-            }
-        })
+    const handbookMenu = handbookSidebar.slice(1, handbookSidebar.length - 1).map(({ name, url, children }) => {
+        return {
+            title: name,
+            url: url || children?.filter(({ url }) => url)[0].url,
+        }
+    })
 
     return (
         <Wrapper
@@ -101,16 +80,25 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                                 Learn about us
                             </CallToAction>
                         </div>
-                        <div className="border-t border-gray-accent-light border-dashed">
-                            <div className="grid sm:grid-cols-2 sm:divide-x sm:divide-y-0 divide-y divide-dashed divide-gray-accent-light max-w-3xl mx-auto xl:max-w-auto">
-                                <Block title="Team" cta={{ url: '/handbook/company/team', label: 'Meet the team' }}>
+                        <TwoCol
+                            left={{
+                                title: 'Team',
+                                cta: {
+                                    url: '/handbook/company/team',
+                                    label: 'Meet the team',
+                                },
+                                children: (
                                     <p className="m-0 text-[14px] dark:text-white">
                                         Our <strong>{teamMembers.totalCount} team members</strong> work from{' '}
                                         <strong>{teamMembers.group.length - 1} countries</strong>. Some travel
                                         full-time.
                                     </p>
-                                </Block>
-                                <Block title="Careers" cta={{ url: '/careers', label: 'Explore careers' }}>
+                                ),
+                            }}
+                            right={{
+                                title: 'Careers',
+                                cta: { url: '/careers', label: 'Explore careers' },
+                                children: (
                                     <p className="m-0 text-[14px] dark:text-white">
                                         We're currently hiring for{' '}
                                         <strong>
@@ -118,9 +106,10 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                                         </strong>
                                         . We're unlike any company you've ever worked for.
                                     </p>
-                                </Block>
-                            </div>
-                        </div>
+                                ),
+                            }}
+                        />
+
                         <Handbook menu={handbookMenu} />
                     </div>
                     <Blog />
@@ -140,18 +129,6 @@ const query = graphql`
         }
         jobs: allAshbyJobPosting(filter: { isListed: { eq: true } }) {
             totalCount
-        }
-        sidebars: file(absolutePath: { regex: "//sidebars/sidebars.json$/" }) {
-            childSidebarsJson {
-                handbook {
-                    children {
-                        name
-                        url
-                    }
-                    name
-                    url
-                }
-            }
         }
     }
 `

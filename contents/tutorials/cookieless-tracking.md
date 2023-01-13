@@ -2,11 +2,11 @@
 title: How to use PostHog without cookie banners
 sidebar: Docs
 showTitle: true
-featuredImage: ../images/tutorials/banners/cookies-tracking.png
+featuredImage: ../images/tutorials/banners/cookieless-tracking.png
 featuredTutorial: false
 date: 2022-08-03
 author: ['joe-martin']
-topics: ['configuration']
+tags: ['configuration']
 ---
 
 - **Level:** Medium 🦔🦔

@@ -1,14 +1,17 @@
 ---
 date: 2022-12-01
-title: "What is a product engineer (and why they're awesome)"
+title: What is a product engineer (and why they're awesome)
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
-categories: ["Startups", "Guides"]
+category: Engineering
+tags:
+  - Explainers
 ---
 
 Startups see their path to success as building a product many people want and pay for. Out of this need came the role of product engineer. They are a core part of many teams building the next generation of great products. More startups are hiring product engineers, and more people are building the skills needed to be one.

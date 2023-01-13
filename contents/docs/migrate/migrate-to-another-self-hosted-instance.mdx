@@ -4,30 +4,26 @@ sidebar: Docs
 showTitle: true
 ---
 
-import ExportingEventsSnippet from './snippets/exporting-events'
-
-> If you're attempting this migration, feel free to ask questions and provide feedback via the [PostHog Communty Slack workspace](/slack) or [a GitHub issue](https://github.com/PostHog/posthog.com/issues). You should also be aware that **some of the steps on this document are potentially destructive**! Proceed with caution.
-
-**PostHog backed by PostgreSQL is now deprecated**. We will continue to provide support to Postgres backed installs but we strongly encourage you to migrate to PostHog backed by ClickHouse for [vastly superior performance](/docs/self-host/postgres-vs-clickhouse), as well as to receive new features and continued support in the future.
+import MigratingEventsSnippet from './snippets/migrating-events'
 
 > Note: If you're looking for a more hands-off experience we recommend migrating to [PostHog Cloud](/docs/migrate/migrate-between-cloud-and-self-hosted).
 
-## Requirements
+## Migrating event data using the Replicator App
 
--   You should have a **clean** [ClickHouse-backed PostHog instance up and running](/docs/self-host). Your new PostHog instance should have **no ingested events**. We recommend using a fresh and unused installation.
--   Your old and new instances should both be running the **exact** same version of PostHog (minimum `1.30.0`).
+<MigratingEventsSnippet />
 
-> **Having difficulties upgrading your Postgres-backed instance due to long-running migrations?** Check out [this guide](/docs/self-host/postgres-upgrade-migrations).
+## Migrating non-event data
 
-## Approach
+To migrate the non-event data (such as user information, feature flags, dashboard configurations, etc) we'll need to create a data dump and load that into the new instance. This non-event data is stored in Postgres.
 
-ClickHouse-backed PostHog instances uses a Postgres database to store data that is not used in analytical queries, such as user information, feature flags, dashboard configurations, etc. However, tables that contain data used to run analytical queries such as events, persons, and person distinct IDs is now stored in ClickHouse.
+> This is only officially supported for importing events into a new cloud instance of PostHog or an enterprise self-hosted instance using Kubernetes. If you're using a different deployment method, you can still try this approach but we can't guarantee it will work.
 
-With this migration, we will copy over the Postgres data that is still stored in Postgres to the new instance using tools from the Postgres ecosystem, and then migrate over your events using a PostHog plugin. The events migration will in turn create the necessary person, person distinct ID, and related records in ClickHouse.
+- You should have a **clean** enterprise self-hosted PostHog instance up and running. Your new PostHog instance should have **no ingested events**. We recommend using a fresh and unused installation.
+- Your old and new instances should both be running the **exact** same version of PostHog (minimum `1.30.0`).
 
-## Exporting Postgres Data
+### Exporting Postgres Data
 
-> Please note that this guide assumes your PostHog pods are running in the `posthog` namespace, thus appending `-n posthog` to `kubectl` commands. Substitute `posthog` for the namespace applicable to you, or omit the `-n` flag if you're using the `default` namespace.
+> Please note that this guide assumes your PostHog pods are running in the `posthog` kubernetes namespace, thus appending `-n posthog` to `kubectl` commands. Substitute `posthog` for the namespace applicable to you, or omit the `-n` flag if you're using the `default` namespace.
 
 ### 1. Creating a data dump from your old instance
 
@@ -239,8 +235,6 @@ posthog-posthog-zookeeper-2                         1/1     Running   0         
 posthog-web-78dns2f5d7-6zdkc                        1/1     Running   0          11d
 posthog-worker-7857nd8268-j8c4f                     1/1     Running   0          11d
 ```
-
-<ExportingEventsSnippet />
 
 ## Moving a license key
 

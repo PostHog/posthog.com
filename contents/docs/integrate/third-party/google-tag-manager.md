@@ -1,8 +1,6 @@
 ---
-title: Integrate PostHog with Google Tag Manager
-sidebarTitle: Google Tag Manager
-sidebar: Docs
-showTitle: true
+title: Google Tag Manager
+icon: ../../../images/docs/integrate/frameworks/gtm.svg
 ---
 
 ## Objective

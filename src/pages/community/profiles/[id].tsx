@@ -1,7 +1,7 @@
 import React from 'react'
 import { PageProps } from 'gatsby'
 
-import { docs } from '../../../sidebars/sidebars.json'
+import docs from 'sidebars/docs.json'
 
 import SEO from 'components/seo'
 import Layout from 'components/Layout'
@@ -12,6 +12,7 @@ import Markdown from 'markdown-to-jsx'
 import { OrgProvider, UserProvider, useUser, Question } from 'squeak-react'
 import Modal from 'components/Modal'
 import EditProfile from 'components/Profiles/EditProfile'
+import useSWR from 'swr'
 
 export type SqueakProfile = {
     id: string
@@ -65,59 +66,24 @@ const Avatar = (props: { className?: string; src?: string }) => {
 export default function ProfilePage({ params }: PageProps) {
     const id = params.id || params['*']
 
-    const [profile, setProfile] = React.useState<SqueakProfile | undefined>(undefined)
     const [editModalOpen, setEditModalOpen] = React.useState(false)
-    const [questions, setQuestions] = React.useState([])
+
+    const { data: profile, mutate: profileMutate } = useSWR<SqueakProfile>(
+        `${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${id}?organizationId=${process.env.GATSBY_SQUEAK_ORG_ID}`,
+        (url) => fetch(url).then((res) => res.json())
+    )
+    const { data: questions } = useSWR(
+        `${process.env.GATSBY_SQUEAK_API_HOST}/api/v1/questions?organizationId=${process.env.GATSBY_SQUEAK_ORG_ID}&profileId=${id}&published=true`,
+        (url: string) =>
+            fetch(url)
+                .then((res) => res.json())
+                .then((data) => data.questions || [])
+    )
 
     const name = [profile?.first_name, profile?.last_name].filter(Boolean).join(' ')
 
-    React.useEffect(() => {
-        if (id) {
-            fetch(
-                `${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${id}?organizationId=${process.env.GATSBY_SQUEAK_ORG_ID}`
-            )
-                .then((res) => {
-                    if (res.status === 404) {
-                        throw new Error('not found')
-                    }
-
-                    return res.json()
-                })
-                .then((profile) => {
-                    setProfile(profile)
-                })
-                .catch((err) => {
-                    console.error(err)
-                })
-            fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions`, {
-                method: 'POST',
-                body: JSON.stringify({
-                    organizationId: process.env.GATSBY_SQUEAK_ORG_ID,
-                    profileId: id,
-                    published: true,
-                }),
-                headers: {
-                    'content-type': 'application/json',
-                },
-            })
-                .then((res) => {
-                    if (res.status === 404) {
-                        throw new Error('not found')
-                    }
-
-                    return res.json()
-                })
-                .then((questions) => {
-                    setQuestions(questions?.questions)
-                })
-                .catch((err) => {
-                    console.error(err)
-                })
-        }
-    }, [id])
-
-    const handleEditProfile = (updatedProfile) => {
-        setProfile({ ...profile, ...updatedProfile })
+    const handleEditProfile = (updatedProfile: SqueakProfile) => {
+        profileMutate({ ...profile, ...updatedProfile }, false)
         setEditModalOpen(false)
     }
 
@@ -137,8 +103,10 @@ export default function ProfilePage({ params }: PageProps) {
                                 onClick={() => setEditModalOpen(false)}
                                 className="flex flex-start justify-center absolute w-full p-4"
                             >
-                                className="max-w-xl bg-white dark:bg-black rounded-md relative w-full p-5"
-                                <div onClick={(e) => e.stopPropagation()}>
+                                <div
+                                    className="max-w-xl bg-white dark:bg-black rounded-md relative w-full p-5"
+                                    onClick={(e) => e.stopPropagation()}
+                                >
                                     <EditProfile onSubmit={handleEditProfile} profile={profile} />
                                 </div>
                             </div>
