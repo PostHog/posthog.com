@@ -17,13 +17,12 @@ Want to know more about what we're up to? Check out [our roadmap](/roadmap) to s
 ## PostHog 1.43.0 release notes
 
 **Release highlights:**
-
 - [New: Performance improvements](#new-performance-improvements)
 - [New: Feature flag variant overrides](#new-feature-flag-variant-overrides)
 - [New: Export recordings to file](#new-export-recordings-to-file)
 - [New: Better insight searching](#new-better-insight-searching)
-- [New: Show event/property counts in persons modal](#new-show-eventproperty-counts-in-persons-modal)
 - [New: Role-based access for feature flags](#new-role-based-access-for-feature-flags)
+- [New: Show event/property counts in persons modal](#new-show-eventproperty-counts-in-persons-modal)
 - [Improved: More experiment variants and improved flow](#improved-more-experiment-variants-and-improved-flow)
 - [Improved: Recording playback controls](#improved-recording-playback-controls)
 - [Improved: Browsing recordings and creating playlists](#improved-browsing-recordings-and-creating-playlists)
@@ -47,6 +46,23 @@ Nobody likes waiting for results, so we've put a renewed focus into performance 
 
 Last but not least, we now also have a [ClickHouse manual](/handbook/engineering/clickhouse) where we gather information about the database powering PostHog.
 
+### New: Feature flag variant overrides
+![flag overrides](../images/blog/array/1-43-0-feature-override.gif)
+
+Ever created a multivariate feature flag, and wanted to show the control variant to specific users? Or, maybe you found a new cohort you'd like to add to the test variant? Now you can!
+
+1.43.0 adds the ability to manually override variants via the flag edit screen. It's great for ensuring users get the intended experience, but is also useful for testing as it enables you to deterministically choose a variant, and test across client-side and server-side feature flags.
+
+### New: Export recordings to file
+![export recordings](../images/blog/array/1-43-0-export.gif)
+
+Sometimes a recording can be so insightful, so important, that you think - "I want to keep a record of this forever." Well, now you can export any recording to a file and load it back into PostHog for playback in the future. Whether it is to commemorate your first sale or for compliance reasons, the tools are now in your hands.
+
+### New: Role-based access for feature flags
+![ff-roles](../images/blog/array/1-43-0-ff-roles.gif)
+
+You can now create roles and group team members together, along with customizing feature flags access for team members! Having access control helps reduce accidental changes and ensures confidence when shipping a new feature.
+
 ### New: Better insight searching
 ![insight searching](../images/blog/array/1-43-0-search.gif)
 
@@ -54,15 +70,10 @@ We don't want searching for insights to be just functional. We want it to be a w
 
 This sounds like a small change, but it makes a massive difference for teams that organize data well and generate a lot of insights!
 
-### Improved: Browsing recordings and creating playlists
-Following up on our new playlists feature, we've improve the recordings UX to make browsing and pinning recordings as quick and intuitive as possible. You can now scroll the list of recordings independently of the player and creating a playlists of pinned recordings is much faster too!
+### New: Show event/property counts in persons modal
+![persons modal](../images/blog/array/1-43-0-modal.gif)
 
-### New: Feature flag variant overrides
-![flag overrides](../images/blog/array/1-43-0-feature-override.gif)
-
-Ever created a multivariate feature flag, and wanted to show the control variant to specific users? Or, maybe you found a new cohort you'd like to add to the test variant? Now you can!
-
-1.43.0 adds the ability to manually override variants via the flag edit screen. It's great for ensuring users get the intended experience, but is also useful for testing as it enables you to deterministically choose a variant, and test across client-side and server-side feature flags.
+We've updated the persons modal that appears when you select a data point on a query to show event and property counts on that person. This is especially helpful for finding out who your power users are, as you can quickly scan to see which users have completed an event the most!
 
 ### Improved: More experiment variants and improved flow
 A regular complaint used to be that, if you made a mistake while making an experiment, you couldn't go back to fix it. Well, we fixed that so you can now:
@@ -73,27 +84,20 @@ A regular complaint used to be that, if you made a mistake while making an exper
 
 Finally, as a bonus, you can now have up to nine variants in an experiment, instead of the usual three!
 
-### New: Export recordings to file
-![export recordings](../images/blog/array/1-43-0-export.gif)
-
-Sometimes a recording can be so insightful, so important, that you think - "I want to keep a record of this forever." Well, now you can export any recording to a file and load it back into PostHog for playback in the future. Whether it is to commemorate your first sale or for compliance reasons, the tools are now in your hands.
-
-### New: Role-based access for feature flags
-You can now create roles and group team members together, along with customizing feature flags access for team members! Having access control helps reduce accidental changes and ensures confidence when shipping a new feature.
+### Improved: Browsing recordings and creating playlists
+Following up on our new playlists feature, we've improve the recordings UX to make browsing and pinning recordings as quick and intuitive as possible. You can now scroll the list of recordings independently of the player and creating a playlists of pinned recordings is much faster too!
 
 ### Improved: Recording playback controls 
-![recording controls](../images/blog/array/1-43-0-seekbar.gif)
-
 We've revamped the recording seekbar to make it easier to find user activity at a glance, to show where tracked events occur and display what time you're scrubbing to.
 
 ### Other improvements & fixes
 You think that's it? Not by a long shot! Version 1.43 also adds hundreds of other improvements and fixes, including...
 
-- **Improvement:** [We've consolidated container build workflows and made changes to build and push multi-arch images](https://github.com/PostHog/posthog/pull/13543).
 - **Improvement:** We made [a simpler, faster process for querying the recently viewed insights on your home page](https://github.com/PostHog/posthog/pull/13529)
-- **Improvement:** We've switched to use `pnpm` instead of `yarn` to [manage dependencies](https://github.com/PostHog/posthog/pull/13190).
 - **Fix:** Webhooks for actions with null checks weren't firing correctly. [This is now fixed.](https://github.com/PostHog/posthog/issues/12893)
 - **Fix:** Trends "Weekly active users" and "Monthly active users" aggregation options used to return "Total count" results for non-time-series chart types, such as pie chart or world map. [Now proper results – the actual count of weekly/monthly active users – are returned.](https://github.com/PostHog/posthog/issues/13131) The reference point for this calculation is the last day of the insight's time range (so for an insight with a range Aug 1-Sep 30, pie chart "Weekly active users" is the count of users between Sep 24 and 30, inclusive.)
+- **Improvement:** [We've consolidated container build workflows and made changes to build and push multi-arch images](https://github.com/PostHog/posthog/pull/13543).
+- **Improvement:** We've switched to use `pnpm` instead of `yarn` to [manage dependencies](https://github.com/PostHog/posthog/pull/13190).
 
 View the full commit log in GitHub for a full history of changes: [`release-1.42.4...release-1.43.0`](https://github.com/PostHog/posthog/compare/release-1.42.0...release-1.43.0).
 
