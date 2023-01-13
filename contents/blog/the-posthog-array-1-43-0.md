@@ -88,10 +88,11 @@ We've revamped the recording seekbar to make it easier to find user activity at 
 ### Other improvements & fixes
 You think that's it? Not by a long shot! Version 1.43 also adds hundreds of other improvements and fixes, including...
 
-- **Improvement:** [We've consolidated container build workflows and made changes to build and push multi-arch images](https://github.com/PostHog/posthog/pull/13543).
-- **Improvement:** We made [a simpler, faster process for querying the recently viewed insights on your home page](https://github.com/PostHog/posthog/pull/13529)
-- **Improvement:** We've switched to use `pnpm` instead of `yarn` to [manage dependencies](https://github.com/PostHog/posthog/pull/13190).
+- **Fix:** Trends "Weekly active users" and "Monthly active users" aggregation options used to return "Total count" results for non-time-series chart types, such as pie chart or world map. [Now proper results – the actual count of weekly/monthly active users – are returned.](https://github.com/PostHog/posthog/issues/13131) The reference point for this calculation is the last day of the insight's time range (so for an insight with a range Aug 1-Sep 30, pie chart "Weekly active users" is the count of users between Sep 24 and 30, inclusive.)
 - **Fix:** Webhooks for actions with null checks weren't firing correctly. [This is now fixed.](https://github.com/PostHog/posthog/issues/12893)
+- **Improvement:** We made [a simpler, faster process for querying the recently viewed insights on your home page](https://github.com/PostHog/posthog/pull/13529)
+- **Improvement:** [We've consolidated container build workflows and made changes to build and push multi-arch images](https://github.com/PostHog/posthog/pull/13543).
+- **Improvement:** We've switched to use `pnpm` instead of `yarn` to [manage dependencies](https://github.com/PostHog/posthog/pull/13190)
 
 View the full commit log in GitHub for a full history of changes: [`release-1.42.4...release-1.43.0`](https://github.com/PostHog/posthog/compare/release-1.42.0...release-1.43.0).
 
