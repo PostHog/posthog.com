@@ -49,7 +49,9 @@ ClickHouse was designed for products that require fetched aggregate data, such a
 
 It’s important to realize that ClickHouse is rarely used alone. Because ClickHouse is bad at update-heavy data, it’s not a great database to run the day-to-day usage of an app. If ClickHouse powered Tinder, the only match users would have is with a loading modal. Anyone who uses ClickHouse is also using Postgres or another rows-based relational database for the non-specialized bits of their product.
 
-One previously-used [analogy](https://www.youtube.com/watch?v=aRT8E0nD_LE) to compare OLTP databases (Postgres) with OLAP databases (ClickHouse) is Teachers vs Principals. A teacher (akin to Postgres) would be able to efficiently answer the question “How is Johnny, the 4th grader, doing in Math?”. A principal (akin to Clickhouse) wouldn’t know who Johnny is, but would be able to quickly provide the student body’s national exam pass rate.  
+One previously-used [analogy](https://www.youtube.com/watch?v=aRT8E0nD_LE) to compare OLTP databases (Postgres) with OLAP databases (ClickHouse) is Teachers vs Principals. A teacher (akin to Postgres) would be able to efficiently answer the question “How is Johnny, the 4th grader, doing in Math?”. A principal (akin to Clickhouse) wouldn’t know who Johnny is, but would be able to quickly provide the student body’s national exam pass rate.
+
+> 📖 **Further reading:** ClickHouse is just one of many OLAP databases on the market. Read our [ClickHouse and Druid comparison](/blog/clickhouse-vs-druid) for an in-depth look at how they solve the same problem in two contrasting ways.
 
 ### Simple Cases
  
