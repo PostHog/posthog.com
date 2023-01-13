@@ -1,5 +1,5 @@
 ---
-date: 2023-01-12
+date: 2023-01-13
 title: Feature flag benefits, types and use cases, explained
 rootPage: /blog
 sidebar: Blog
@@ -18,10 +18,10 @@ tags:
 Feature flags (aka feature toggles) are a powerful tool to help improve your product. They enable engineering teams to conditionally run code, display components, and control access based on release conditions. These conditions check user data, group data, and percentages to decide whether to activate or not.
 
 In this post, we explore four benefits of feature flags along with use cases and types for each. The four biggest benefits and uses of feature flags are:
-1. [shipping faster](#1-ship-faster-and-maintain-momentum)
-2. [mitigating risk](#2-mitigate-risk)
-3. [testing changes](#3-test-changes-in-production)
-4. [managing access](#4-manage-access)
+1. [Shipping faster](#1-ship-faster-and-maintain-momentum)
+2. [Mitigating risk](#2-mitigate-risk)
+3. [Testing changes](#3-test-changes-in-production)
+4. [Managing access](#4-manage-access)
 
 ## Feature flag benefits and use cases
 
@@ -60,7 +60,7 @@ If there are problems with a feature, feature flags can act as kill switches. Th
 
 > **Defining percentage, conditional, and tiered rollouts:** 
 > - Percentage rollouts release a feature to a percentage of users or groups, and then increase that percentage over time.
-> - Conditional rollouts release a feature to specific users or groups based on some filter or condition. The filter or condition expands to more users or groups over time.
+> - Conditional rollouts release a feature to specific users or groups based on a filter or condition. The filter or condition expands to more users or groups over time.
 > - Tiered rollouts release a feature to specific infrastructure, regions, groups or users, and progresses to more of the same type over time.
 
 ### 3. Test changes (in production)
@@ -95,13 +95,122 @@ Feature flags also enable you to run alphas and betas of new features easily. Ea
 
 - A user has been abusing your app. They have been sending too many requests or using the feature inappropriately. You can use a permission-type feature flag to prevent or throttle access to key parts of your app from them.
 
-## Feature flag types
+## A summary of feature flag types
 
 Each use case fits into one of three types, here’s a summary of them:
 
 - **Release (Beta, Canary):** Enable a feature for a percentage or category of users or groups, and monitor the impact. Roll back if there are issues. Roll out to everyone once ready.
 - **Permission:** Grant or deny access to a feature to specific users or groups.
 - **Experiment (A/B):** Compare two or more versions of a feature or component for users or groups, and monitor the impact the variations have on a set of key metrics. Roll out the winning variation.
+
+## Comparing feature flag tools
+
+There are multiple tools that provide feature flags. Each has different features, here's a comparison of them:
+
+<div className="overflow-x-auto -mx-5 px-5">
+<table className="w-full mt-4" style="min-width: 600px;">
+    <thead>
+        <tr>
+			<td className="w-3/12"></td>
+            <td><strong>PostHog</strong></td>
+            <td><strong>Optimizely</strong></td>
+            <td><strong>Flagsmith</strong></td>
+            <td><strong>GrowthBook</strong></td>
+            <td><strong>LaunchDarkly</strong></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Release</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>Permissions</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>Experiments</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>Multi-variate flags</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>Activity logs</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>Multi-environment support</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>Scheduling</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>Product analytics</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+        </tr>  
+        <tr>
+            <td><strong>Open source</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+        </tr>  
+        <tr>
+            <td><strong>Self-hostable</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+        </tr>  
+        <tr>
+            <td><strong>Unlimited flags for free</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+        </tr>   
+    </tbody>
+</table>
+</div>
 
 ## Further reading
 
