@@ -1,11 +1,10 @@
 import { ExternalLink } from 'components/Icons/Icons'
 import { Link as GatsbyLink } from 'gatsby'
-import { useValues } from 'kea'
 import React from 'react'
 import usePostHog from '../../hooks/usePostHog'
-import type { GatsbyLinkProps } from 'gatsby'
 import Tooltip from 'components/Tooltip'
-import { TooltipContent, TooltipContentProps } from 'components/GlossaryElement'
+import LinkPreview from 'components/LinkPreview'
+import { ILinkPreview } from 'components/LinkPreview'
 
 export interface Props {
     to: string
@@ -19,8 +18,8 @@ export interface Props {
     state?: any
     event?: string
     href?: string
-    glossary?: TooltipContentProps[]
-    preview?: TooltipContentProps
+    glossary?: ILinkPreview[]
+    preview?: ILinkPreview
 }
 
 export default function Link({
@@ -39,7 +38,6 @@ export default function Link({
     ...other
 }: Props) {
     const posthog = usePostHog()
-
     const handleClick = (e: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => {
         if (event && posthog) {
             posthog.capture(event)
@@ -51,7 +49,7 @@ export default function Link({
     const preview =
         other.preview ||
         glossary?.find((glossaryItem) => {
-            return glossaryItem?.slug === url?.replace(/https:\/\/posthog.com/gi, '')
+            return glossaryItem?.url === url?.replace(/https:\/\/posthog.com/gi, '')
         })
     return onClick && !url ? (
         <button onClick={handleClick} className={className}>
@@ -61,11 +59,15 @@ export default function Link({
         preview ? (
             <Tooltip
                 content={
-                    <TooltipContent
+                    <LinkPreview
                         title={preview.title}
-                        slug={url}
-                        description={preview.description}
+                        url={url}
+                        body={preview.body}
                         video={preview.video}
+                        date={preview.date}
+                        users={preview.users}
+                        ctaText="Continue reading"
+                        tableOfContents={preview.tableOfContents}
                     />
                 }
             >

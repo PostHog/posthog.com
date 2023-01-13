@@ -14,9 +14,10 @@ import { Login as SqueakLogin } from 'squeak-react'
 import Spinner from 'components/Spinner'
 import { useStaticQuery } from 'gatsby'
 import Tooltip from 'components/Tooltip'
-import GitHubTooltip, { Author } from 'components/GitHubTooltip'
+import { Author } from 'components/GitHubTooltip'
 import QuestionsTable from 'components/Questions/QuestionsTable'
 import useSWRInfinite from 'swr/infinite'
+import LinkPreview from 'components/LinkPreview'
 
 export const Avatar = (props: { className?: string; src?: string }) => {
     return (
@@ -178,12 +179,12 @@ const Issue = ({
             <Tooltip
                 className="text-ellipsis overflow-hidden whitespace-nowrap flex-grow text-red"
                 content={
-                    <GitHubTooltip
+                    <LinkPreview
                         reactions={reactions}
-                        body={body}
-                        user={user}
+                        body={{ content: body, type: 'markdown' }}
+                        users={[user]}
                         labels={labels}
-                        updated_at={updated_at}
+                        date={updated_at}
                         title={title}
                         url={url}
                     />

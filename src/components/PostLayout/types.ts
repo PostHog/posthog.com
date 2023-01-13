@@ -48,12 +48,14 @@ export interface INextPost {
     }
 }
 
+export interface ITableOfContents {
+    url: string
+    value: string
+    depth: number
+}
+
 export interface IProps {
-    tableOfContents?: {
-        url: string
-        value: string
-        depth: number
-    }[]
+    tableOfContents?: ITableOfContents[]
     children: React.ReactNode
     sidebar?: React.ReactNode
     contentWidth?: number | string

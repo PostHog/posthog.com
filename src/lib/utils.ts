@@ -1,4 +1,5 @@
 import { AuthorsData, LibraryPluginType } from 'types'
+import Slugger from 'github-slugger'
 
 export const unsafeHash = (str: string) => {
     let a = 1,
@@ -108,3 +109,15 @@ export const kebabCase = (string) =>
         .toLowerCase()
 
 export const squeakProfileLink = (profile) => (profile ? `/community/profiles/${profile.id}` : '')
+
+export const formatToc = (headings) => {
+    // need to use slugger for header links to match
+    const slugger = new Slugger()
+    return headings.map((heading) => {
+        return {
+            ...heading,
+            depth: heading.depth - 2,
+            url: slugger.slug(heading.value),
+        }
+    })
+}

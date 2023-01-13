@@ -24,7 +24,6 @@ import { CallToAction } from 'components/CallToAction'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import Tooltip from 'components/Tooltip'
 import CommunityQuestions from 'components/CommunityQuestions'
-import { formatNode } from 'components/GlossaryElement'
 import Markdown from 'markdown-to-jsx'
 import CheckIcon from '../images/check.svg'
 import XIcon from '../images/x.svg'
@@ -32,6 +31,7 @@ import WarningIcon from '../images/warning.svg'
 import TeamRoadmap from 'components/TeamRoadmap'
 import TeamMembers from 'components/TeamMembers'
 import { CategoryData } from 'components/Blog/constants/categories'
+import { formatNode } from 'components/LinkPreview'
 
 const renderAvailabilityIcon = (availability: 'full' | 'partial' | 'none') => {
     switch (availability) {
@@ -348,7 +348,7 @@ export const query = graphql`
                     title
                     featuredVideo
                 }
-                excerpt(pruneLength: 300)
+                body
             }
         }
         nextPost: mdx(fields: { slug: { eq: $nextURL } }) {

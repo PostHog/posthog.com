@@ -4,6 +4,7 @@ import path from 'path'
 import slugify from 'slugify'
 import fetch from 'node-fetch'
 import sidebars from '../src/sidebars/index'
+import { formatToc } from '../src/lib/utils'
 const Slugger = require('github-slugger')
 const markdownLinkExtractor = require('markdown-link-extractor')
 
@@ -260,18 +261,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     ...(context ? context(node) : {}),
                 },
             })
-        })
-    }
-
-    function formatToc(headings) {
-        // need to use slugger for header links to match
-        const slugger = new Slugger()
-        return headings.map((heading) => {
-            return {
-                ...heading,
-                depth: heading.depth - 2,
-                url: slugger.slug(heading.value),
-            }
         })
     }
 

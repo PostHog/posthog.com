@@ -74,6 +74,7 @@ import { LandingPageCallToAction } from './components/LandingPage/LandingPageCal
 import { LibraryComparison } from './components/LibraryComparison'
 import { LibraryFeatures } from './components/LibraryFeatures'
 import { Link } from './components/Link'
+import { LinkPreview } from './components/LinkPreview'
 import { Logo } from './components/Logo'
 import { MainNav } from './components/MainNav'
 import { MdxAnchorHeaders } from './components/MdxAnchorHeaders'
@@ -215,6 +216,7 @@ export const shortcodes = {
     LibraryComparison,
     LibraryFeatures,
     Link,
+    LinkPreview,
     Logo,
     MainNav,
     MdxAnchorHeaders,
