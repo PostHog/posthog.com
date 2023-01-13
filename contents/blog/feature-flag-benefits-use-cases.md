@@ -37,7 +37,7 @@ Feature flags also prevent the loss of momentum from issues with new features. I
 
 #### Use cases
 
-- You identify a major bug with a new feature. The developer who shipped the feature turns off the feature flag. They then complete a quick fix and ship it behind a bug-fix-type feature flag. They then continue to improve and clean up the bug fix and roll it out further once ready.
+- You identify a major bug with a new feature. The developer who shipped the feature turns off the feature flag. They then complete a quick fix and ship it behind a release-type feature flag. They then continue to improve and clean up the bug fix and roll it out further once ready.
 
 - The team is planning the release of a big feature. It requires testing, a tiered rollout, customer communication, and marketing. The developer completes the feature, and puts it behind a release-type feature flag. They hand off the release to the product manager who owns the feature. The developer can get back to work while the PM coordinates with QA, customer success, and marketing on a rollout.
 
@@ -58,6 +58,11 @@ If there are problems with a feature, feature flags can act as kill switches. Th
 
 - You’re in a situation where every change to your app needs a review to release (such as iOS App Store or Chrome Web Store). Instead of having to wait for a review to make a change, using a feature flag enables faster rollbacks. Fixes to issues aren’t delayed by review, mitigating their impact when they arise.
 
+> **Defining percentage, conditional, and tiered rollouts:** 
+> - Percentage rollouts release a feature to a percentage of users or groups, and then increase that percentage over time.
+> - Conditional rollouts release a feature to specific users or groups based on some filter or condition. The filter or condition expands to more users or groups over time.
+> - Tiered rollouts release a feature to specific infrastructure, regions, groups or users, and progresses to more of the same type over time.
+
 ### 3. Test changes (in production)
 
 Feature flags enable better testing of changes by testing them closer to reality. When a change ships into production behind a feature flag and people who need access can get access. Instead of needing specific testing environments, you can test in production.
@@ -70,9 +75,9 @@ Testing changes in production also means you can run experiments. You can test v
 
 #### Use cases
 
-- To test multiple variations of a pricing table with different information, you set up an experiment with multiple flag variants and track conversion on that page. At the end of the experiment, roll out the winning variant and roll back the losing ones.
+- To test multiple variations of a pricing table with different information, you set up an experiment-type flag with multiple variants and track conversion on that page. At the end of the experiment, roll out the winning variant and roll back the losing ones.
 
-- Have a feature but you aren’t sure how it integrates in production. Ship it behind a test-type feature flag, and set distribution to yourself. If a teammate wants to test it too, you can add them to the release conditions as well.
+- Have a feature but you aren’t sure how it integrates in production. Ship it behind a permission-type feature flag, and set distribution to yourself. If a teammate wants to test it too, you can add them to the release conditions as well.
 
 ### 4. Manage access
 
@@ -89,6 +94,14 @@ Feature flags also enable you to run alphas and betas of new features easily. Ea
 - Put premium features behind a permission-type feature flag. Once users sign up, get the sales or customer success team to add them to the feature flag distribution. If they churn, remove them from the feature flag release conditions.
 
 - A user has been abusing your app. They have been sending too many requests or using the feature inappropriately. You can use a permission-type feature flag to prevent or throttle access to key parts of your app from them.
+
+## Feature flag types
+
+Each use case fits into one of three types, here’s a summary of them:
+
+- **Release (Beta, Canary):** Enable a feature for a percentage or category of users or groups, and monitor the impact. Roll back if there are issues. Roll out to everyone once ready.
+- **Permission:** Grant or deny access to a feature to specific users or groups.
+- **Experiment (A/B):** Compare two or more versions of a feature or component for users or groups, and monitor the impact the variations have on a set of key metrics. Roll out the winning variation.
 
 ## Further reading
 
