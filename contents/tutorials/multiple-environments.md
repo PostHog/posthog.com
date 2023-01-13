@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2023-01-13
-featuredImage: ../images/tutorials/banners/multiple-environments.png
+featuredImage: ../images/tutorials/banners/tutorial-1.png
 topics: ["configuration"]
 ---
 
