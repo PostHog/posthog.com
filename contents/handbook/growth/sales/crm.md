@@ -148,7 +148,7 @@ The hands-on pipeline stages with associated deal probabilities are as follows:
 If after a demo call you feel like a customer doesn't fit our hands-on ICP then you should move them to the self-serve pipeline's Demo Completed stage, and then automation will take care of it.  Points to consider:
 * What is their usage volume?  Around 5m monthly events and 100k recordings should be hands-on
 * Do they want an annual commitment? If so then we should keep them in the hands-on pipeline
-* Will they need help with a guided evaluation? If so and their potential value is high enough then create a Slack Connect chanel to assist them during the evaluation and keep them in the hands-on pipeline
+* Will they need help with a guided evaluation? If so and their potential value is high enough then create a Slack Connect channel to assist them during the evaluation and keep them in the hands-on pipeline
 * If none of the above apply, move them to self-serve
 
 When moving someone to self-serve we should set them up for success by using the [Post Demo route to self-serve](https://app.hubspot.com/templates/6958578/edit/37311756?q=route%20to&page=1).  This encourages them to sign up to PostHog Cloud and our User Slack and provides some helpful getting started pointers.  If there were any follow-up questions from initial meeting we should answer those in this email as well.
