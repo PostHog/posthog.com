@@ -24,9 +24,11 @@ This takes you through the project setup flow again and gives you a new project 
 
 The downside of using multiple projects is that you cannot directly copy actions, dashboards, insights, experiments, feature flags, and other data created in PostHog between them. This means you must manually recreate them in each project if needed.
 
+*Have strong opinions about how we handle environments? We’d love to get your support and feedback in the [relevant issue](https://github.com/PostHog/posthog/issues/13418).*
+
 ### Creating and using environment variables
 
-To create an environment variable, create a `.env` file in the root of your project and add your API key as a variable.
+To create an enviroment variable, create a `.env` file in the root of your project and add your API key as a variable.
 
 ```
 POSTHOG_API_KEY=<ph_project_api_key>
@@ -35,7 +37,7 @@ POSTHOG_API_KEY=<ph_project_api_key>
 Next, either install the relevant library for your project or set the variables in your system by entering these in your terminal:
 
 <MultiLanguage>
-  
+
 ```js
 npm install dotenv
 ```
@@ -52,7 +54,7 @@ gem install dotenv
 export POSTHOG_API_KEY=<ph_project_api_key>
 ```
 
-```bash
+```php
 export POSTHOG_API_KEY=<ph_project_api_key>
 ```
 
@@ -96,8 +98,6 @@ echo getenv('POSTHOG_API_KEY');
 fmt.Println(os.Getenv("POSTHOG_API_KEY"))
 ```
 </MultiLanguage>
-
-*Have strong opinions about how we handle environments? We’d love to get your support and feedback in the [relevant issue](https://github.com/PostHog/posthog/issues/13418).*
 
 ### Feature flags with multiple projects
 
