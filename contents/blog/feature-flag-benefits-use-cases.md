@@ -1,6 +1,6 @@
 ---
 date: 2023-01-12
-title: The benefits, types, and use cases of feature flags explained
+title: Feature flag benefits, types and use cases, explained
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -25,7 +25,7 @@ In this post, we explore four benefits of feature flags along with use cases and
 
 ### 1. Ship faster and maintain momentum
 
-Feature flags enable developers to ship code faster. They do this by disconnecting deployment from release. Instead of releasing code for use by everyone once deployed, it lives behind a feature flag and releases separately. This frees developers from worrying as much about releases.
+Feature flags disconnect deployment from release, enabling developers to ship code faster. Instead of releasing code for use by everyone once deployed, it lives behind a feature flag and releases separately. This frees developers from worrying as much about releases.
 
 Using feature flags improves the deployment and integration process. Feature flags help developers merge and integrate their changes more often. Because developers aren’t waiting to deploy, metrics like deployment frequency and time improve. You avoid stale branches and code because it isn’t sitting dormant. All of these benefit DevOps teams especially. 
 
@@ -36,6 +36,7 @@ Feature flags also prevent the loss of momentum from issues with new features. I
 #### Use cases
 
 - You identify a major bug with a new feature. The developer who shipped the feature turns off the feature flag. They then complete a quick fix and ship it behind a bug-fix-type feature flag. They then continue to improve and clean up the bug fix and roll it out further once ready.
+
 - The team is planning the release of a big feature. It requires testing, a tiered rollout, customer communication, and marketing. The developer completes the feature, and puts it behind a release-type feature flag. They hand off the release to the product manager who owns the feature. The developer can get back to work while the PM coordinates with QA, customer success, and marketing on a rollout.
 
 ### 2. Mitigate risk
@@ -73,9 +74,9 @@ Testing changes in production also means you can run experiments. You can test v
 
 ### 4. Manage access
 
-Feature flags can act as permissions. They can allow or deny access to features to certain users. They act as a gate anywhere in the code, that you can turn on or off quickly, without changes to the code.
+Feature flags can act as permissions, granting or denying certain users access to features. They act as a gate anywhere in the code, that you can turn on or off quickly, without changes to the code.
 
-Instead of needing to have toggles inside your app to enable access to certain areas, you can set them up as feature flags. This enables teams to have quick and easy permissions. No need for custom user fields, modification in an admin panel, and additional checks, you can use feature flags and all the data you already have.
+Replacing in-app toggles with feature flags eliminates the need for custom user fields, admin panel modifications, and additional checks, granting teams quick, easy and flexible permissions.
 
 Complex permission logic isn’t needed, engineering teams can just use a feature flag. This simplifies and distributes permission and access management. This means that a sales, support, or customer success team can then add permissions to their workflows and responsibilities. This takes work off the plate of developers. 
 
