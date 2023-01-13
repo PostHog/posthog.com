@@ -1,5 +1,5 @@
 ---
-date: 2023-01-12
+date: 2023-01-13
 title: "In-depth: ClickHouse vs Druid"
 rootPage: /blog
 sidebar: Blog
