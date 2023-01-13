@@ -1,0 +1,36 @@
+import Snippet from "../snippet.mdx"
+
+<h3 class="flex items-center">
+    JavaScript snippet <span class="inline-block border border-blue rounded-sm px-1 py-0.5 text-xs text-blue uppercase font-semibold ml-2">Recommended</span>
+</h3>
+
+> This is the simplest way to get PostHog up and running on your website, and only takes a few minutes to set-up.
+
+#### Add to your website &amp; app
+
+Paste this snippet within the `<head>` tags of your website - ideally just inside the closing `</head>` tag - on all pages that you wish to track.
+
+<Snippet />
+
+Be sure to replace `<ph_project_api_key>` and `<ph_instance_address>` with your project's values. (You can find the snippet pre-filled with this data in the PostHog app under Project / Settings. _(Quick links if you use [PostHog Cloud US](https://app.posthog.com/project/settings) or [PostHog Cloud EU](https://eu.posthog.com/project/settings))_
+
+#### What this code does
+
+After adding the snippet to your website, it will automatically start to:
+
+-   Capture `$pageview` events when a user visits a page
+-   Track when users [click on links or buttons](/docs/user-guides/events#autocapture-event-tracking)
+-   [Record videos of user sessions](/docs/user-guides/recordings) that you can play back (if you've enabled the Session recordings feature, which we highly recommend!)
+
+### Tips
+
+- **Add the snippet on your (marketing) website _and_ your application using the same PostHog project.** That means you'll be able to follow a user from the moment they come onto your website, all the way through sign up and their actual usage of your product.
+- **Track users across multiple domains** by including the same project snippet on all sites you wish to track.
+- **Disable tracking sensitive information** by adding the `ph-no-capture` class to elements you don't want to track. (We do this automatically for common fields like passwords and credit cards.)
+
+### Next steps
+
+- **Add permitted domains in your PostHog project settings** so you can create [actions](/manual/actions) using the [PostHog toolbar](/manual/toolbar) directly on your site - _a convenient low-code option_.
+- Send [custom events](/docs/integrate/client/js#send-custom-events-with-posthogcapture) from your codebase for things like signups, purchases, and more KPIs.
+
+The dedicated [JavaScript library](/docs/integrate/client/js) page has more details about everything you can do with `posthog-js`.

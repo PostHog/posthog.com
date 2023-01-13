@@ -8,7 +8,10 @@ hideAnchor: true
 author: ["ian-vanagas"]
 featuredImage: ../images/blog/green-blog-image.jpg
 featuredImageType: full
-categories: ["Guides", "Using PostHog"]
+category: Using PostHog
+tags:
+  - Using PostHog
+  - Feature flags
 ---
 
 Feature flags, aka feature toggles, are awesome. New feature for your beta test group? Use a feature flag. Testing multiple variants of a new UX? Use a feature flag. Kill switch to prevent performance problems? Yup, feature flag. We could go on, but safe to say they are many benefits to feature flags.

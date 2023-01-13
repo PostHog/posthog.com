@@ -2,7 +2,7 @@
 title: "How to use filters + session recordings to understand user friction" 
 sidebar: Docs
 showTitle: true
-featuredImage: ../images/tutorials/banners/filter-sessions.png
+featuredImage: ../images/tutorials/banners/tutorial-12.png
 featuredTutorial: false
 author: ['joe-martin']
 topics: ['session recording']

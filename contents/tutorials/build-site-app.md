@@ -4,13 +4,13 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-11-02
-featuredImage: ../images/tutorials/banners/build-site-app.png
+featuredImage: ../images/tutorials/banners/tutorial-1.png
 tags: ["apps", "site-apps"]
 ---
 
 Site apps make it quick and easy to add features such as forms and banners to your site through our JavaScript library. This enables you to do things like capture feedback, add notifications, provide support, and more. These apps can then capture data for analysis in PostHog. You can learn 
 
-In this tutorial, we’ll teach you how to build a site app. If you're looking for a broader overview of apps, you can find it [in our docs](/docs/apps). Our app will show up on our product site as button users can click to send us a customizable message captured as a PostHog event. To complete this tutorial, you only need [Node installed](https://nodejs.org/en/download/) to build and run the app.
+In this tutorial, we’ll teach you how to build a site app. If you're looking for a broader overview of apps, you can find it [in our docs](/docs/apps). Our app will show up on our product site as button users can click to send us a customizable message captured as a PostHog event. To complete this tutorial, you only need [Node installed](https://nodejs.org/en/download/) to build and run the app.
 
 > PostHog Cloud users cannot currently add custom or third-party apps for security reasons. Have an app you want to add to PostHog? [Let us know](/slack)!
 

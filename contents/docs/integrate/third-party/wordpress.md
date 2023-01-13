@@ -1,8 +1,6 @@
 ---
-title: How to set up WordPress analytics and stats with PostHog
-sidebarTitle: WordPress
-sidebar: Docs
-showTitle: true
+title: WordPress
+icon: ../../../images/docs/integrate/frameworks/wordpress.svg
 ---
 
 Getting analytics about your [WordPress](https://www.wordpress.org/) site is simple with PostHog. Get data about traffic, usage, and user behavior with our free, open-source analytics platform. Once you have that data, you can discover insights and build dashboards with our suite of analytics tools.
@@ -33,7 +31,7 @@ The instructions below detail how to use the WordPress built-in functionality fo
 
 > Using the Theme Editor is very convenient, but you have to consider the potential draw-backs of having template files writable, which many prefer to disable for security purposes. Also, wrongfully editing a file may cause problems so be sure to perform appropriate backups before attempting this.
 
-1. Get your [PostHog snippet](/docs/integrate/client/snippet-installation) from your 'Project Settings' or the initial PostHog setup.
+1. Get your [PostHog snippet](/docs/integrate) from your 'Project Settings' or the initial PostHog setup.
 2. Login to your WordPress admin dashboard.
 3. Go to 'Appearance' -> 'Theme Editor'.
 4. Select your theme in the editor drop-down menu to the right and click the `header.php` file in the file column to the right (see image below).
