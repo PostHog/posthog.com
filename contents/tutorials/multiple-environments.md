@@ -64,7 +64,7 @@ os.Setenv("POSTHOG_API_KEY", "<ph_project_api_key>")
 
 </MultiLanguage>
 
-After doing this, you can get the environment variable using the library like this: 
+After doing this, you can get the environment variable using the library or language like this: 
 
 <MultiLanguage>
 
