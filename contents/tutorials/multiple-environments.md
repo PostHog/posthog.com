@@ -35,7 +35,9 @@ Luckily, creating a new flag is simple. Make sure to use the same flag keys and 
 *We are also gathering feedback on how to use feature flags with multiple projects. Leave your support and feedback in [the issue here](https://github.com/PostHog/posthog/issues/13160).*
 
 ## Conditional initialization
-### Opt-out of tracking on initialization
+
+### Opt-out of capturing on initialization
+
 Another way to split up projects is by changing how you initialize PostHog based on the environment. For example, if you didn’t want to track your staging environment at all, initialize PostHog without a token and opt out of capturing immediately. This is what we do in our development environment.
 
 ```js
@@ -51,7 +53,9 @@ posthog.init(
 ```
 
 This method enable you to run whatever checks you want, making it useful for changing PostHog's behavior between environments. You can see the full list of config options in [our JavaScript docs](/docs/integrate/client/js#config).
-### Opt-out of tracking based on URL
+
+### Opt-out of capturing based on URL
+
 Another popular option is checking if the URL includes `localhost` or `127.0.0.1` (local IP) and opting out of capturing if so. If you were using the HTML snippet, this would look like:
 
 ```html
