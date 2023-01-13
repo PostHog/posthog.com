@@ -28,7 +28,7 @@ The downside of using multiple projects is that you cannot directly copy actions
 
 ### Creating and using environment variables
 
-To create an enviroment variable, create a `.env` file in the root of your project and add your API key as a variable.
+To create an environment variable, create a `.env` file in the root of your project and add your API key as a variable.
 
 ```
 POSTHOG_API_KEY=<ph_project_api_key>
@@ -125,7 +125,7 @@ posthog.init(
   )
 ```
 
-This method enable you to run whatever checks you want, making it useful for changing PostHog's behavior between environments. You can see the full list of config options in [our JavaScript docs](/docs/integrate/client/js#config).
+This method enables you to run whatever checks you want, making it useful for changing PostHog's behavior between environments. You can see the full list of config options in [our JavaScript docs](/docs/integrate/client/js#config).
 
 ### Opt-out of capturing based on URL
 
