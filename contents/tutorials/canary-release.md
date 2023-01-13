@@ -4,8 +4,8 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-12-19
-featuredImage: ../images/tutorials/banners/canary-release.png
-topics: ["feature flags", "persons"]
+featuredImage: ../images/tutorials/banners/tutorial-2.png
+tags: ["feature flags", "persons"]
 ---
 
 Few things are worse for a developer than shipping a new feature, having it unexpectedly break, and then scrambling to fix it. This can negatively impact your product, user experience, and engineering productivity. To mitigate problems with new features, teams often roll out features gradually to test for issues.
@@ -67,5 +67,5 @@ Canary releases ensures higher quality features get shipped leading to a better 
 ## Further reading
 
 - [How to run Experiments without feature flags](/tutorials/experiments)
-- [How to safely roll out new features](/tutorials/feature-flags)
+- [Setting up and using feature flags](/manual/feature-flags)
 - [Setting up Django analytics, feature flags, and more with PostHog](/tutorials/django-analytics)

@@ -4,8 +4,8 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-11-21
-featuredImage: ../images/tutorials/banners/identifying-users-guide.png
-topics: ["configuration", "persons"]
+featuredImage: ../images/tutorials/banners/tutorial-5.png
+tags: ["configuration", "persons"]
 ---
 
 To understand your product’s usage, you must know **who** did **what.** Many of the most valuable insights require an accurate understanding of the user using your product. To make sure user data and events are as accurate as possible, it is critical to identify users properly.

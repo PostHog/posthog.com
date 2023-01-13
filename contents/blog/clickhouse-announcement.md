@@ -5,10 +5,14 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["mo-shehu"]
+author:
+  - mo-shehu
 featuredImage: ../images/blog/clickhouse-announcement.png
 featuredImageType: full
-categories: ["Product updates"]
+category: PostHog news
+tags:
+  - Product updates
+  - ClickHouse
 ---
 We're excited to announce a major under-the-hood upgrade for PostHog Open Source! Over the past few weeks, our team have been hard at work moving over from Postgres to ClickHouse, the same database that powers PostHog Cloud.
 

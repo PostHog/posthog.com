@@ -1,14 +1,15 @@
 ---
 date: 2022-10-06
-title: "All the cool things we built at our Rome hackathon"
+title: All the cool things we built at our Rome hackathon
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 featuredImage: ../images/blog/planning-a-company-offsite/planning-offsite.jpeg
 featuredImageType: full
-categories: ["Inside PostHog", "Startups"]
+category: Inside PostHog
 ---
 
 As an all-remote team, we know how important getting together in person is (we’ve [written about this before](/blog/asynchronous-remote-companies)). Our [product analytics team](/handbook/small-teams/product-analytics) (plus Luke, Annika, Cory, and Lottie) recently got back from an offsite in Rome – see also [how we plan a killer offsite in 8 weeks](/blog/planning-a-company-offsite). 

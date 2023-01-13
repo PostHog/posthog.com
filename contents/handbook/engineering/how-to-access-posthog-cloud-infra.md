@@ -18,8 +18,8 @@ to get AWS access. !!! Please follow the whole document !!!
 After you got access to the EKS cluster and our internal network:
 
 - `kubectl -n posthog get pods` (get names of pods, you'll want a "web" pod most likely)
-- `kubectl exec --stdin --tty <POD_NAME> -- /bin/bash` (get a shell to the running container)
-- `kubectl exec <POD_NAME> env` (run individual commands in a container)
+- `kubectl -n posthog exec --stdin --tty <POD_NAME> -- /bin/bash` (get a shell to the running container)
+- `kubectl -n posthog exec <POD_NAME> env` (run individual commands in a container)
 
 Note: if you need a Django shell, just run the following after connecting:
 

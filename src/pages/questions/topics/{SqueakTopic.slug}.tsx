@@ -8,7 +8,7 @@ import { squeakProfileLink } from 'lib/utils'
 import { Squeak } from 'squeak-react'
 import { graphql } from 'gatsby'
 import Link from 'components/Link'
-import { community } from '../../../sidebars/sidebars.json'
+import community from 'sidebars/community.json'
 
 interface ITopic {
     label: string
@@ -54,10 +54,12 @@ export default function SqueakTopics({ data }: IProps) {
                 <PostLayout title={data.squeakTopic.label} menu={community} sidebar={<TopicSidebar />} hideSurvey>
                     <section className="my-8 lg:my-0">
                         <div className="mb-4">
-                            <Link to="/questions" className="text-gray hover:text-gray-accent-light">
-                                ← Back to Questions
+                            <Link to="/questions" className="text-gray">
+                                &larr; Back to questions
                             </Link>
                         </div>
+
+                        <h2>Questions tagged with "{data.squeakTopic.label}"</h2>
 
                         <Squeak
                             profileLink={squeakProfileLink}

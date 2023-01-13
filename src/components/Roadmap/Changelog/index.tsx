@@ -6,7 +6,7 @@ import { SEO } from 'components/seo'
 import PostLayout from 'components/PostLayout'
 import Link from 'components/Link'
 import Checkbox from 'components/Checkbox'
-import { community } from '../../../sidebars/sidebars.json'
+import community from 'sidebars/community.json'
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 

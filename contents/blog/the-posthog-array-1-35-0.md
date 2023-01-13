@@ -1,14 +1,21 @@
 ---
 date: 2022-04-25
-title: "Array 1.35.0: Introducing SAML, world map view and new plugins"
+title: 'Array 1.35.0: Introducing SAML, world map view and new plugins'
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Release notes", "Product updates"]
 featuredImage: ../images/blog/posthog-array-blog.png
 featuredImageType: full
-excerpt: PostHog 1.35.0 introduces activity logs and a brand new way of visualizing where your users are coming from with the World Map. Additionally we now support organization-level SAML login on both Cloud and Self-Hosted instances. Plus check out your Project Homepage for a few additional goodies.
+excerpt: >-
+  PostHog 1.35.0 introduces activity logs and a brand new way of visualizing
+  where your users are coming from with the World Map. Additionally we now
+  support organization-level SAML login on both Cloud and Self-Hosted instances.
+  Plus check out your Project Homepage for a few additional goodies.
+category: PostHog news
+tags:
+  - Product updates
+  - Release notes
 ---
 
 PostHog 1.35.0 introduces audit logs and a brand new world map view to help you visualize where your users are coming from. Additionally, we now support organization-level SAML login on both Cloud and Self-Hosted instances. Plus, check out your project homepage for a few additional goodies!

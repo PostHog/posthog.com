@@ -1,14 +1,18 @@
 ---
 date: 2021-05-28
 title: How to turn your engineers into product people
-featuredImage: ../images/blog/turning-engineers-into-product-people/turning-engineers-into-product-people.png
+featuredImage: >-
+  ../images/blog/turning-engineers-into-product-people/turning-engineers-into-product-people.png
 featuredImageType: full
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["mo-shehu"]
-categories: ["Startups", "Product analytics"]
+author:
+  - mo-shehu
+category: Startups
+tags:
+  - Product analytics
 ---
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Kz4aX1NIzUQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 

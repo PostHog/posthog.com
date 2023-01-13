@@ -152,8 +152,16 @@ export const CodeBlock = ({
         }
     }, [])
 
+    const replaceProjectInfo = (code: string) => {
+        if (!projectName || !projectToken) {
+            return code
+        }
+
+        return code.replace("'<ph_project_api_key>'", projectToken).replace("'<ph_project_name>'", projectName)
+    }
+
     const copyToClipboard = () => {
-        navigator.clipboard.writeText(currentLanguage.code)
+        navigator.clipboard.writeText(replaceProjectInfo(currentLanguage.code))
 
         setTooltipVisible(true)
         setTimeout(() => {
@@ -162,7 +170,7 @@ export const CodeBlock = ({
     }
 
     return (
-        <div className="relative my-2">
+        <div className="relative mt-2 mb-4">
             <div className="bg-black/90 text-gray px-3 py-1.5 text-sm flex items-center w-full rounded-t">
                 {selector === 'tabs' && languages.length > 1 ? (
                     <Tab.Group onChange={(index) => onChange?.(languages[index])}>

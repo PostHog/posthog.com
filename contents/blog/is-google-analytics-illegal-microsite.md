@@ -1,13 +1,18 @@
 ---
 date: 2022-05-09
-title: "Using Google Analytics was deemed 'illegal' in some EU countries. We built a microsite in 48 hours to capitalize on the news."
+title: >-
+  Using Google Analytics was deemed 'illegal' in some EU countries. We built a
+  microsite in 48 hours to capitalize on the news.
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/is-ga-illegal-microsite.png
-author: ["cory-watilo"]
-categories: ["Inside PostHog"]
+author:
+  - cory-watilo
+category: Inside PostHog
+tags:
+  - Privacy
 ---
 
 On January 14, 2022, the world learned that Austria had declared Google Analytics to be illegal (in its default form), since it transmits IP addresses to the United States. The Netherlands declared the same view only days later.

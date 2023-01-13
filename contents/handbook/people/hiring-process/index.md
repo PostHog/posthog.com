@@ -29,6 +29,8 @@ This has resulted in the highest number of qualified and motivated candidates re
 | **Position title**        | **Location we're happy to hire in** | **Small Team**        | **Manager** | **Interview Process**                                                                                                                          | **SuperDay Task**              |
 |---------------------------|----------------------------------------|-----------------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|
 | Full Stack Engineer       | GMT -5:00 to +2:00                   | Experimentation  | Eric | 1) Culture Screen - Coua<br/> 2) Technical Screen - Eric<br/> 3) Engineering Culture Screen - Tim<br/> 4) SuperDay Assessment - Eric, Li, Neil, Tim & James H. | Live Task (link not available) |
+| Full Stack Engineer       | GMT 0:00 to +2:00                   | Product Analytics  | Marius | 1) Culture Screen - Coua<br/> 2) Technical Screen - Marius<br/> 3) Engineering Culture Screen - Tim<br/> 4) SuperDay Assessment - Marius, Paul, Michael, Karl, Luke, Tim & James H. | Live Task (link not available) |
+| Site Reliability Engineer       | GMT -8:00 to +2:00                   | Infrastructure  | Ellie | 1) Culture Screen - Coua<br/> 2) Technical Screen - Ellie<br/> 3) Engineering Culture Screen - Tim<br/> 4) SuperDay Assessment - Ellie, Daniel, Harry, James G., Tim & James H. | Live Task (link not available) |
 
 Tasks are only available internally - please do not share these publicly. 
 
@@ -191,6 +193,10 @@ The People & Ops team reviews applications and resumes/portfolios carefully and 
 If a candidate hasn't customized the application or resume to the role, it is a flag they aren't that excited about working at PostHog. Cover letters are definitely _not_ mandatory, but at an interview stage, it's important to note how passionate they seem about the company. Did they try out the software already? Did they read the handbook? Are they in our community Slack?
 
 Candidates who are unsuccessful at this stage will receive an automated rejection email, unless they personalized their application, in which we will try to send a personalized reply.
+
+### Speculative Application
+
+We stand by what we say, and we do take speculative applications seriously. The People and Ops team reviews every single speculative application weekly and if there is a possible fit for future openings, we will place the applicant into the appropriate [Ashby talent project](https://app.ashbyhq.com/projects) (i.e. full stack engineers, platform, product, website & docs, customer success, PlOps, and marketing) and notify the applicant of this via email. 
 
 ### First interview - culture interview with People & Ops 
 

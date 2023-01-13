@@ -6,7 +6,7 @@ import { InlineCode } from 'components/InlineCode'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
 import { H1, H2, H3, H4, H5, H6 } from 'components/MdxAnchorHeaders'
-import PostLayout, { Contributors, ShareLinks, SidebarSection, Text, Topics } from 'components/PostLayout'
+import PostLayout, { Contributors, PageViews, ShareLinks, SidebarSection, Text, Topics } from 'components/PostLayout'
 import { SEO } from 'components/seo'
 import { ZoomImage } from 'components/ZoomImage'
 import { graphql } from 'gatsby'
@@ -16,6 +16,9 @@ import React from 'react'
 import { MdxCodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
 import { NewsletterForm } from 'components/NewsletterForm'
+import blogMenu from 'components/Blog/blogMenu'
+import blog from 'sidebars/blog.json'
+import slugify from 'slugify'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
@@ -31,7 +34,7 @@ const Intro = ({ featuredImage, title, featuredImageType, contributors }) => {
                     <GatsbyImage
                         className={`rounded-md z-0 relative ${
                             featuredImageType === 'full'
-                                ? 'before:h-1/2 before:left-0 before:right-0 before:bottom-0 before:z-[1] before:absolute before:bg-gradient-to-t before:from-black/75'
+                                ? 'before:h-3/4 before:left-0 before:right-0 before:bottom-0 before:z-[1] before:absolute before:bg-gradient-to-t before:from-black/75 [text-shadow:0_2px_10px_rgba(0,0,0,0.4)]'
                                 : ''
                         }`}
                         image={getImage(featuredImage)}
@@ -52,7 +55,7 @@ const Intro = ({ featuredImage, title, featuredImageType, contributors }) => {
     )
 }
 
-const BlogPostSidebar = ({ contributors, date, filePath, title, categories, location }) => {
+const BlogPostSidebar = ({ contributors, date, filePath, title, tags, location, pageViews }) => {
     return (
         <>
             {contributors && (
@@ -63,9 +66,16 @@ const BlogPostSidebar = ({ contributors, date, filePath, title, categories, loca
             <SidebarSection title="Share">
                 <ShareLinks title={title} href={location.href} />
             </SidebarSection>
-            {categories?.length > 0 && (
-                <SidebarSection title="Topic(s)">
-                    <Topics topics={categories} />
+            {pageViews?.length > 0 && (
+                <SidebarSection>
+                    <PageViews pageViews={pageViews.toLocaleString()} />
+                </SidebarSection>
+            )}
+            {tags && (
+                <SidebarSection title="Tag(s)">
+                    <Topics
+                        topics={tags.map((tag) => ({ name: tag, url: `/blog/tags/${slugify(tag, { lower: true })}` }))}
+                    />
                 </SidebarSection>
             )}
             <SidebarSection>
@@ -85,7 +95,8 @@ const BlogPostSidebar = ({ contributors, date, filePath, title, categories, loca
 export default function BlogPost({ data, pageContext, location }) {
     const { postData } = data
     const { body, excerpt, fields } = postData
-    const { date, title, featuredImage, featuredImageType, contributors, description } = postData?.frontmatter
+    const { date, title, featuredImage, featuredImageType, contributors, description, tags, category } =
+        postData?.frontmatter
     const lastUpdated = postData?.parent?.fields?.gitLogLatestDate
     const filePath = postData?.parent?.relativePath
     const components = {
@@ -102,7 +113,7 @@ export default function BlogPost({ data, pageContext, location }) {
         a: A,
         ...shortcodes,
     }
-    const { categories, tableOfContents } = pageContext
+    const { tableOfContents } = pageContext
 
     return (
         <Layout>
@@ -121,16 +132,23 @@ export default function BlogPost({ data, pageContext, location }) {
                 contentWidth={790}
                 filePath={filePath}
                 tableOfContents={tableOfContents}
-                breadcrumb={[{ name: 'Blog', url: '/blog' }, ...categories]}
+                breadcrumb={[
+                    { name: 'Blog', url: '/blog' },
+                    ...(category
+                        ? [{ name: category, url: `/blog/categories/${slugify(category, { lower: true })}` }]
+                        : [{}]),
+                ]}
+                menu={blog}
                 hideSurvey
                 sidebar={
                     <BlogPostSidebar
-                        categories={categories}
+                        tags={tags}
                         contributors={contributors}
                         date={date}
                         filePath={filePath}
                         title={title}
                         location={location}
+                        pageViews={fields?.pageViews}
                     />
                 }
             >
@@ -158,6 +176,7 @@ export const query = graphql`
             excerpt(pruneLength: 150)
             fields {
                 slug
+                pageViews
             }
             frontmatter {
                 date(formatString: "MMM DD, YYYY")
@@ -165,6 +184,7 @@ export const query = graphql`
                 sidebar
                 showTitle
                 tags
+                category
                 hideAnchor
                 description
                 featuredImageType
