@@ -13,7 +13,9 @@ tags:
   - Feature flags
 ---
 
-Feature flags (aka feature toggles) are a powerful tool to help improve your product. They enable engineering teams to conditionally run code, display components, and enable access based on release conditions. These conditions check user data, group data, and percentages to decide whether to activate or not.
+## What is a feature flag?
+
+Feature flags (aka feature toggles) are a powerful tool to help improve your product. They enable engineering teams to conditionally run code, display components, and control access based on release conditions. These conditions check user data, group data, and percentages to decide whether to activate or not.
 
 In this post, we explore four benefits of feature flags along with use cases and types for each. The four biggest benefits and uses of feature flags are:
 1. [shipping faster](#1-ship-faster-and-maintain-momentum)
