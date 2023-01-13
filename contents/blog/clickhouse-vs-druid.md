@@ -57,7 +57,7 @@ While Postgres, a row-based OLTP database, supports materialized views, they are
 
 Most databases achieve speed by caching calculated results after an initial slow query. ClickHouse’s materialized views do the heavy-lifting ahead of time, and are constantly updating so that they’re never ***too*** out-of-date. This is a happy medium for a lot of data-driven applications, and contributes to ClickHouse's reputation for extremely fast query performance on large datasets.
 
-- **Apache Zookeeper:** ClickHouse does admit a flaw in its single executable promise. If the database is expected to have replicas, it requires Apache Zookeeper to manage the redundancies. However, this is a rather thin layer atop of a ClickHouse cluster, an a problem addressed by the introduction of [ClickHouse Keeper](https://clickhouse.com/docs/en/operations/clickhouse-keeper/). 
+- **Apache Zookeeper:** ClickHouse does admit a flaw in its single executable promise. If the database is expected to have replicas, it requires Apache Zookeeper to manage the redundancies. However, this is a rather thin layer atop of a ClickHouse cluster, and a problem addressed by the introduction of [ClickHouse Keeper](https://clickhouse.com/docs/en/operations/clickhouse-keeper/). 
 
 - **Caches:** ClickHouse boasts [different types of caches](https://clickhouse.com/docs/zh/operations/caches/) for discrete optimizations. ClickHouse’s MergeTree table family has unique caches that improve data fetches.
 
@@ -152,33 +152,33 @@ Druid and ClickHouse both seek to handle large volumes of data at speed, but the
 
 While both offer enormous advantages over traditional databases for columnar data, companies should strongly consider their needs when making choice between the two. 
 
-### ClickHouse
+### ClickHouse pros and cons
 
-**Pros**
+> **Pros**
+>
+> - Low latency
+> - Simple to set up, can operate out of a single instance
+> - Materialized Views expedite aggregations at the data level
+> - Extremely fast query performance on large datasets
 
-- Low latency
-- Simple to set up, can operate out of a single instance
-- Materialized Views expedite aggregations at the data level
-- Extremely fast query performance on large datasets
+> **Cons**
+>
+> - Expects users to batch data
+> - Cannot return data immediately after insert
 
-**Cons**
+### Druid pros and cons
 
-- Expects users to batch data
-- Cannot return data immediately after insert
+> **Pros**
+>
+> - Highly configurable and scalable
+> - Can return data immediately after insert
+> - Has prioritization of queries built natively
 
-### Druid
-
-**Pros**
-
-- Highly configurable and scalable
-- Can return data immediately after insert
-- Has prioritization of queries built natively
-
-**Cons**
-
-- Expensive setup
-- Harder to maintain
-- More latency due to multiple layers
+> **Cons**
+>
+> - Expensive setup
+> - Harder to maintain
+> - More latency due to multiple layers
 
 ### Further reading
 
