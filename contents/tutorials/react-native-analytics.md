@@ -12,7 +12,7 @@ React Native is a popular mobile app framework for writing native mobile apps us
 
 In this tutorial, we show how to create a basic React Native app using Expo (a suite of dev tools for React Native). We then add PostHog to that app and set up tools like autocapture, user identification, and feature flags.
 
-Already know how to set up a React Native app? Click here to skip to the PostHog setup.
+> Already know how to set up a React Native app? [Click here to skip to the PostHog setup](/tutorials/react-native-analytics#3-adding-posthog-to-our-react-native-app).
 
 ## 1. Creating the basic React Native app with Expo
 
