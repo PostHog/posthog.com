@@ -1,14 +1,18 @@
 ---
 date: 2022-08-03
-title: "Building an AARRR pirate funnel (how and why)"
+title: Building an AARRR pirate funnel (how and why)
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: [andy-vandervell]
+author:
+  - andy-vandervell
 featuredImage: ../images/blog/aarrr-pirate-funnel/pirate-metrics.jpeg
 featuredImageType: full
-categories: ["Product analytics", "Guides"]
+category: Product growth
+tags:
+  - Guides
+  - Product analytics
 ---
 
 The AARRR framework, also known as "pirate metrics" or the AARRR funnel, is a classic framework for understanding customer behavior. It's useful for marketers, product managers and growth hackers at startups.

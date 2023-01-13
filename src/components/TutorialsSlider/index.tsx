@@ -8,7 +8,7 @@ export default function TutorialsSlider({ topic }: { topic: string }): any {
         allMdx: { nodes },
     } = useStaticQuery(query)
     const tutorials = nodes.filter((tutorial) =>
-        tutorial?.frontmatter?.topics?.some((tutorialTopic) => tutorialTopic === topic)
+        tutorial?.frontmatter?.tags?.some((tutorialTag) => tutorialTag === topic)
     )
     const [activeSlide, setActiveSlide] = useState(0)
 
@@ -48,7 +48,7 @@ export const query = graphql`
                 }
                 frontmatter {
                     title
-                    topics
+                    tags
                     authors: authorData {
                         id
                         image {

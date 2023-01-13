@@ -6,7 +6,7 @@ featuredImage: ../images/tutorials/banners/posthog-for-vuejs.png
 featuredTutorial: false
 date: 2022-08-17
 author: ['mathew-pregasen']
-topics: ['configuration']
+tags: ['configuration']
 ---
 
 I discovered [Vue](https://vuejs.org) around the beginning of 2017. Back then, the Vue community, fostered by [Evan You](https://evanyou.me), was small and budding, filled with PHP/Laravel enthusiasts. The framework itself was also young. I remember discovering copious outdated tutorials. Vue had *significantly* re-imagined itself between versions 1.x and 2.x.

@@ -2,11 +2,11 @@
 title: How to segment users
 sidebar: Docs
 showTitle: true
-featuredImage: ../images/tutorials/banners/how-to-segment-users-banner.png
+featuredImage: ../images/tutorials/banners/tutorial-12.png
 featuredTutorial: true
 date: 2022-02-14
 author: ['marcus-hyett']
-topics: ['trends', 'insights', 'cohorts']
+tags: ['trends', 'insights', 'cohorts']
 ---
 
 _Estimated reading time: 10 minutes_ ☕☕☕

@@ -1,14 +1,15 @@
 ---
 date: 2021-07-21
-title: Introducing Phil Leggetter, our new head of Developer Relations
+title: 'Introducing Phil Leggetter, our new head of Developer Relations'
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["mo-shehu"]
+author:
+  - mo-shehu
 featuredImage: ../images/blog/intro-phil.png
 featuredImageType: full
-categories: ["Inside PostHog"]
+category: Inside PostHog
 ---
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/VKSPhPbhyRs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

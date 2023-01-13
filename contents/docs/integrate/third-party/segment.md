@@ -1,8 +1,6 @@
 ---
-title: Segment Integration
-sidebarTitle: Segment
-sidebar: Docs
-showTitle: true
+title: Segment
+icon: ../../../images/docs/integrate/frameworks/segment.svg
 ---
 
 Segment is a Customer Data Platform (CDP) that allows you to easily manage data and integrations with services across your growth, product, and marketing stack. By tracking events and users via Segment’s API and libraries, you can send your product’s data to all of your analytics/marketing platforms, with minimal instrumentation code. They offer support for most platforms, including iOS, Android, JavaScript, Node.js, PHP, and more.

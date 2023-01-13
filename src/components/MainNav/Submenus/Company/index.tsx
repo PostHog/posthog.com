@@ -6,6 +6,7 @@ import Blog from './Blog'
 import SearchIconButton from 'components/Search/SearchIconButton'
 import CallToAction from '../CallToAction'
 import { TwoCol, Wrapper } from '../Wrapper'
+import handbookSidebar from 'sidebars/handbook.json'
 
 interface HandbookNav {
     title: string
@@ -49,16 +50,14 @@ const Handbook = ({ menu }: { menu: HandbookNav[] }) => {
 }
 
 export default function Docs({ referenceElement }: { referenceElement: HTMLDivElement }) {
-    const { teamMembers, jobs, sidebars } = useStaticQuery(query)
+    const { teamMembers, jobs } = useStaticQuery(query)
 
-    const handbookMenu = sidebars.childSidebarsJson.handbook
-        .slice(1, sidebars.childSidebarsJson.handbook.length)
-        .map(({ name, url, children }: { name: string; url: string; children: { name: string; url: string }[] }) => {
-            return {
-                title: name,
-                url: url || children.filter(({ url }) => url)[0].url,
-            }
-        })
+    const handbookMenu = handbookSidebar.slice(1, handbookSidebar.length - 1).map(({ name, url, children }) => {
+        return {
+            title: name,
+            url: url || children?.filter(({ url }) => url)[0].url,
+        }
+    })
 
     return (
         <Wrapper
@@ -130,18 +129,6 @@ const query = graphql`
         }
         jobs: allAshbyJobPosting(filter: { isListed: { eq: true } }) {
             totalCount
-        }
-        sidebars: file(absolutePath: { regex: "//sidebars/sidebars.json$/" }) {
-            childSidebarsJson {
-                handbook {
-                    children {
-                        name
-                        url
-                    }
-                    name
-                    url
-                }
-            }
         }
     }
 `

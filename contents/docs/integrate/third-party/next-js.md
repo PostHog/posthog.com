@@ -1,8 +1,6 @@
 ---
-title: Analytics for Next.js apps with PostHog
-sidebarTitle: Next.js
-sidebar: Docs
-showTitle: true
+title: Next.js
+icon: ../../../images/docs/integrate/frameworks/nextjs.svg
 ---
 
 PostHog makes it easy to get data about traffic and usage of your [Next.js](https://nextjs.org/) app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
