@@ -34,11 +34,7 @@ const TutorialsCategory = ({
             <SEO title={`Tutorials - ${capitalize(activeFilter)} - PostHog`} />
 
             <PostLayout
-                breadcrumb={[
-                    { name: 'Tutorials', url: '/tutorials' },
-                    { name: 'Categories' },
-                    { name: capitalize(activeFilter) },
-                ]}
+                breadcrumb={[{ name: 'Tutorials', url: '/tutorials' }, { name: capitalize(activeFilter) }]}
                 article={false}
                 title="Tutorials"
                 menu={docs}
