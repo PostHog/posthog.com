@@ -11,14 +11,19 @@ export default function ChatHog() {
         }
     }
     return (
-        <div className="fixed bottom-0 right-2 text-left">
-            <div className="bg-white p-4 rounded-md shadow-lg max-w-[250px] mb-4">
+        <div className="fixed bottom-0 right-2 text-left group">
+            <div className="bg-white p-4 rounded-md shadow-lg max-w-[250px] mb-4 hidden group-hover:block">
                 <h3 className="m-0 text-lg">Pricing questions?</h3>
                 <p className="m-0 text-sm mb-2">Our customer success hedgehogs are ready to help.</p>
                 <button
                     onClick={handleClick}
                     style={{ border: '1px solid #E5E7E0' }}
-                    className={button('secondary', 'full', 'shadow-none text-red', 'xs')}
+                    className={button(
+                        'outline',
+                        'full',
+                        'shadow-none text-red hover:!text-red hover:!border-black/30 transition-colors',
+                        'xs'
+                    )}
                 >
                     Ask a question
                 </button>
