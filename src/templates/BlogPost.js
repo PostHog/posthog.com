@@ -38,7 +38,7 @@ export const Intro = ({ featuredImage, title, featuredImageType, contributors, t
                                       titlePosition === 'bottom' ? 'before:bottom-0' : 'before:top-0'
                                   } before:z-[1] before:absolute ${
                                       titlePosition === 'bottom' ? 'before:bg-gradient-to-t' : 'before:bg-gradient-to-b'
-                                  } before:from-black/75 [text-shadow:0_2px_10px_rgba(0,0,0,0.4)]`
+                                  } before:from-black/75 [text-shadow:0_2px_10px_rgba(0,0,0,0.4)] lg:before:block before:hidden`
                                 : ''
                         }`}
                         image={getImage(featuredImage)}
