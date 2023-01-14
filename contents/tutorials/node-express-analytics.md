@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2023-01-05
-featuredImage: ../images/tutorials/banners/node-express-analytics.png
+featuredImage: ../images/tutorials/banners/nodejs.png
 topics: ["configuration", "feature flags", "persons", "events"]
 ---
 
