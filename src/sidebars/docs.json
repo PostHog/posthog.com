@@ -1165,8 +1165,12 @@
     },
     {
         "name": "Tutorials",
-        "url": "/tutorials",
+        "url": "",
         "children": [
+            {
+                "name": "All",
+                "url": "/tutorials"
+            },
             {
                 "name": "Actions",
                 "url": "/tutorials/categories/actions"
