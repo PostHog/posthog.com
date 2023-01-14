@@ -23,10 +23,10 @@ import slugify from 'slugify'
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
 const Title = ({ children, className = '' }) => {
-    return <h1 className={`text-3xl md:text-4xl lg:text-4xl mt-3 mb-0 lg:mb-5 lg:mt-0 ${className}`}>{children}</h1>
+    return <h1 className={`text-3xl md:text-4xl lg:text-4xl mt-3 mb-0 lg:my-5 ${className}`}>{children}</h1>
 }
 
-const Intro = ({ featuredImage, title, featuredImageType, contributors }) => {
+export const Intro = ({ featuredImage, title, featuredImageType, contributors, titlePosition = 'bottom' }) => {
     return (
         <div className="mt-4 lg:mb-7 mb-4 overflow-hidden">
             {featuredImage && (
@@ -34,13 +34,23 @@ const Intro = ({ featuredImage, title, featuredImageType, contributors }) => {
                     <GatsbyImage
                         className={`rounded-md z-0 relative ${
                             featuredImageType === 'full'
-                                ? 'before:h-3/4 before:left-0 before:right-0 before:bottom-0 before:z-[1] before:absolute before:bg-gradient-to-t before:from-black/75 [text-shadow:0_2px_10px_rgba(0,0,0,0.4)]'
+                                ? `before:h-3/4 before:left-0 before:right-0 ${
+                                      titlePosition === 'bottom' ? 'before:bottom-0' : 'before:top-0'
+                                  } before:z-[1] before:absolute ${
+                                      titlePosition === 'bottom' ? 'before:bg-gradient-to-t' : 'before:bg-gradient-to-b'
+                                  } before:from-black/75 [text-shadow:0_2px_10px_rgba(0,0,0,0.4)]`
                                 : ''
                         }`}
                         image={getImage(featuredImage)}
                     />
                     {featuredImageType === 'full' && (
-                        <Title className="lg:absolute bottom-0 lg:text-white text-primary lg:px-8">{title}</Title>
+                        <Title
+                            className={`lg:absolute ${
+                                titlePosition === 'bottom' ? 'bottom-0' : 'top-0'
+                            } lg:text-white text-primary lg:px-8`}
+                        >
+                            {title}
+                        </Title>
                     )}
                 </div>
             )}

@@ -19,6 +19,7 @@ import { shortcodes } from '../../mdxGlobalComponents'
 import slugify from 'slugify'
 import { MdxCodeBlock } from 'components/CodeBlock'
 import MobileSidebar from 'components/Docs/MobileSidebar'
+import { Intro } from '../../templates/BlogPost'
 
 const ViewButton = ({ title, view, setView }) => {
     return (
@@ -127,11 +128,14 @@ export default function Tutorial({ data, pageContext: { pageViews, tableOfConten
                     />
                 }
             >
-                <h1 className="text-4xl mb-6 mt-0">{title}</h1>
-                <GatsbyImage
-                    className="mb-6 bg-[#E5E7E0] dark:bg-[#2C2C2C] rounded-md"
-                    image={getImage(featuredImage)}
+                <Intro
+                    contributors={contributors}
+                    featuredImage={featuredImage}
+                    title={title}
+                    featuredImageType="full"
+                    titlePosition="top"
                 />
+
                 {featuredVideo && (
                     <div className="mb-6 flex space-x-2">
                         <ViewButton view={view} title="Article" setView={setView} />
