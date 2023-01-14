@@ -14,11 +14,11 @@ interface ColMenuItems {
 }
 
 interface Tutorial {
-    title: string
     fields: {
         slug: string
     }
     frontmatter: {
+        title: string
         featuredImage: any
     }
 }
@@ -130,12 +130,12 @@ export default function UsingPosthog({ referenceElement }: { referenceElement: H
                                 <h3 className="text-[18px] font-bold m-0 text-black ">Latest tutorials</h3>
                             </div>
                             <ul className="m-0 list-none p-0 mt-2 grid grid-cols-2 gap-4">
-                                {nodes.map(({ fields: { slug }, title, frontmatter: { featuredImage } }: Tutorial) => {
+                                {nodes.map(({ fields: { slug }, frontmatter: { title, featuredImage } }: Tutorial) => {
                                     const image = featuredImage && getImage(featuredImage)
                                     return (
                                         <li key={slug}>
                                             <Link
-                                                className="inline-block relative active:top-[1px] active:scale-[.99]"
+                                                className="inline-block relative active:top-[1px] active:scale-[.99] before:h-full before:left-0 before:right-0 before:top-0 before:z-[1] before:absolute before:bg-gradient-to-b before:from-black/75 [text-shadow:0_2px_10px_rgba(0,0,0,0.4)]"
                                                 to={slug}
                                             >
                                                 <GatsbyImage
@@ -143,6 +143,9 @@ export default function UsingPosthog({ referenceElement }: { referenceElement: H
                                                     image={image}
                                                     alt={title || ''}
                                                 />
+                                                <p className="absolute top-0 text-white text-sm my-2 mx-2 z-10">
+                                                    {title}
+                                                </p>
                                             </Link>
                                         </li>
                                     )
@@ -190,6 +193,7 @@ const query = graphql`
                     slug
                 }
                 frontmatter {
+                    title
                     featuredImage {
                         childImageSharp {
                             gatsbyImageData(placeholder: NONE)
