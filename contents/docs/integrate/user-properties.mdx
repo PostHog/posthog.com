@@ -76,8 +76,6 @@ Sometimes we might want to mix `set` and `set_once` usage. Imagine, when we have
 
 ## How are properties managed when merging or aliasing users
 
-// TODO: Confirm this with Tiina. Is this what this section means: https://posthog.com/docs/integrate/user-properties#how-do-values-get-overridden
-
 When an anonymous user is identified as user (A), all the properties of the anonymous user are added to user (A). If there is a conflict, the properties of user (A) are kept.
 ```js
 client.identify({
