@@ -128,50 +128,6 @@ const sections = [
         ],
     },
     {
-        name: 'Instance & deployment',
-        features: [
-            {
-                name: 'Hosting',
-                tiers: {
-                    Scale: true,
-                    Enterprise: false,
-                    'Scale Plus': true,
-                },
-            },
-            {
-                name: 'User data stays on your infrastructure',
-                tiers: {
-                    Scale: false,
-                    Enterprise: true,
-                    'Scale Plus': false,
-                },
-            },
-            {
-                name: 'Initial setup',
-                tiers: {
-                    Scale: 'Instant',
-                    Enterprise: '1-3 days',
-                    'Scale Plus': 'Instant',
-                },
-            },
-            {
-                name: 'Server management',
-                tiers: {
-                    Scale: 'Managed by PostHog',
-                    Enterprise: 'Third-party support available',
-                    'Scale Plus': 'Managed by PostHog',
-                },
-            },
-            {
-                name: 'Operate in air gapped environment',
-                tiers: {
-                    Scale: false,
-                    Enterprise: true,
-                },
-            },
-        ],
-    },
-    {
         name: 'Plan allowances',
         features: [
             {
@@ -344,7 +300,16 @@ const sections = [
                 },
             },
             {
-                name: 'User permissions',
+                name: 'Private projects',
+                docsLink: 'docs/user-guides/organizations-and-projects#private-projects',
+                tiers: {
+                    Scale: false,
+                    Enterprise: true,
+                    'Scale Plus': true,
+                },
+            },
+            {
+                name: 'Basic user permissions',
                 docsLink: 'docs/user-guides/organizations-and-projects#permissions',
                 tiers: {
                     Scale: true,
@@ -356,25 +321,8 @@ const sections = [
                 name: 'Advanced user permissions',
                 tiers: {
                     Scale: false,
-                    Enterprise: true,
-                    'Scale Plus': true,
-                },
-            },
-            {
-                name: 'Private projects',
-                docsLink: 'docs/user-guides/organizations-and-projects#private-projects',
-                tiers: {
-                    Scale: false,
-                    Enterprise: true,
-                    'Scale Plus': true,
-                },
-            },
-            {
-                name: 'Backup configuration',
-                tiers: {
-                    Scale: false,
-                    Enterprise: true,
                     'Scale Plus': false,
+                    Enterprise: true,
                 },
             },
         ],
@@ -437,7 +385,7 @@ const sections = [
                 tiers: {
                     Scale: '$10k/month spend or above',
                     Enterprise: true,
-                    'Scale Plus': true,
+                    'Scale Plus': '$10k/month spend or above',
                 },
             },
             {
@@ -460,8 +408,8 @@ const sections = [
                 name: 'Training sessions',
                 tiers: {
                     Scale: false,
+                    'Scale Plus': false,
                     Enterprise: true,
-                    'Scale Plus': true,
                 },
             },
             {
@@ -473,19 +421,11 @@ const sections = [
                 },
             },
             {
-                name: 'Remote monitoring',
-                tiers: {
-                    Scale: false,
-                    Enterprise: true,
-                    'Scale Plus': false,
-                },
-            },
-            {
                 name: 'Terms and conditions',
                 tiers: {
                     Scale: 'Standard',
+                    'Scale Plus': 'Standard',
                     Enterprise: 'Bespoke',
-                    'Scale Plus': 'Bespoke',
                 },
             },
             {
@@ -500,8 +440,8 @@ const sections = [
                 name: 'Bespoke pricing',
                 tiers: {
                     Scale: false,
+                    'Scale Plus': false,
                     Enterprise: true,
-                    'Scale Plus': true,
                 },
             },
             {
