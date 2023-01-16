@@ -25,7 +25,7 @@ interface IPlan {
 
 const cloudPlans: IPlan[] = [
     {
-        title: 'Standard',
+        title: 'Scale',
         description: 'with community support & volume discounts',
         pricing: {
             event: 0.00045,
@@ -37,24 +37,24 @@ const cloudPlans: IPlan[] = [
         pricingOption: 'cloud',
     },
     {
-        title: 'Enterprise',
-        description: 'SSO, priority support, advanced permissions, team training',
+        title: 'Scale Plus',
+        description: 'SSO, project permissions, dashboard permissions',
         pricing: {
             event: 0,
             other: 'Contact us',
         },
         mainCTA: {
-            title: 'Get in touch',
-            url: '/signup/cloud/enterprise',
+            title: 'Get started',
+            url: 'https://app.posthog.com/signup',
         },
-        pricingOption: 'cloud-enterprise',
+        pricingOption: 'scale-plus',
     },
 ]
 
-const selfHostPlans: IPlan[] = [
+const enterprisePlans: IPlan[] = [
     {
-        title: 'Enterprise Self-hosted',
-        description: 'SSO, priority support, advanced permissions, team training',
+        title: 'Enterprise',
+        description: 'Priority support, advanced permissions, team training',
         pricing: {
             other: 'Contact us',
             event: 0,
@@ -63,7 +63,7 @@ const selfHostPlans: IPlan[] = [
             title: 'Book a call',
             url: '/book-a-demo',
         },
-        pricingOption: 'self-hosted-enterprise',
+        pricingOption: 'enterprise',
     },
 ]
 
@@ -152,17 +152,17 @@ export default function AllPlans() {
             >
                 <PlanSection
                     className="md:col-span-2"
-                    title="PostHog Cloud"
-                    subtitle="Turnkey, hosted & managed by PostHog"
+                    title="Standard"
+                    subtitle="Everything you need to build great products"
                     Icon={CloudIcon}
                     plans={cloudPlans}
                 />
                 <PlanSection
                     className="md:col-span-1"
-                    title="Self-hosted"
-                    subtitle="Deploy to your private cloud or infrastructure"
+                    title="Enterprise"
+                    subtitle="+ Security, compliance, and permissioning"
                     Icon={SelfHostIcon}
-                    plans={selfHostPlans}
+                    plans={enterprisePlans}
                 />
             </div>
             {showComparison && (
