@@ -9,7 +9,7 @@ category: PostHog news
 tags:
   - Product updates
   - Release notes
-featuredImage: ../images/blog/array/array-1-43-0.jpg
+featuredImage: ../images/blog/posthog-array-blog.png
 featuredImageType: full
 ---
 
