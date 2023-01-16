@@ -422,30 +422,6 @@ const Control = (): JSX.Element => {
                         </div>
                     </div>
                     <div>
-                        <h4 className="border-b border-dashed border-gray-accent-light pb-2 mb-3">Addons</h4>
-
-                        <div className="pl-10 relative mb-8">
-                            <span className="w-6 h-6 absolute top-0 left-1">{NotProductIcons.enterprise}</span>
-                            <h5 className="text-base mb-0">SAML SSO</h5>
-                            <p className="text-[15px] mb-1">
-                                Enforce login through an SSO provider to fit all your compliance / IT needs
-                            </p>
-                        </div>
-                        <div className="pl-10 relative mb-8">
-                            <span className="w-6 h-6 absolute top-0 left-1">{NotProductIcons.enterprise}</span>
-                            <h5 className="text-base mb-0">Advanced permissions</h5>
-                            <p className="text-[15px] mb-1">
-                                Set up complex permissions for your team for dashboards, feature flags, and more
-                            </p>
-                        </div>
-                        <div className="pl-10 relative mb-8">
-                            <span className="w-6 h-6 absolute top-0 left-1">{NotProductIcons.enterprise}</span>
-                            <h5 className="text-base mb-0">Dedicated Slack support channel</h5>
-                            <p className="text-[15px] mb-1">
-                                Get the help you need when you need it directly from our team in Slack
-                            </p>
-                        </div>
-
                         <h4 className="border-b border-dashed border-gray-accent-light pb-2 mb-3">Discounts</h4>
 
                         <div className="pl-10 relative mb-4">
@@ -471,16 +447,16 @@ const Control = (): JSX.Element => {
             </section>
             <section className={`${section} mb-12 mt-12 md:mt-24 md:px-4`}>
                 <h2 className="text-2xl m-0 flex items-center border-b border-dashed border-gray-accent-light pb-4">
+                    Compare all plans
+                </h2>
+                <AllPlans />
+            </section>
+            <section className={`${section} mb-12 mt-12 md:mt-24 md:px-4`}>
+                <h2 className="text-2xl m-0 flex items-center border-b border-dashed border-gray-accent-light pb-4">
                     <SelfHostIcon className="opacity-30 w-[36px] mr-2" />
                     <span>Want to self-host PostHog?</span>
                 </h2>
                 <SelfHost />
-            </section>
-            <section className={`${section} mb-12 mt-12 md:mt-24 md:px-4`}>
-                <h2 className="text-2xl m-0 flex items-center border-b border-dashed border-gray-accent-light pb-4">
-                    Compare all plans
-                </h2>
-                <AllPlans />
             </section>
             <section className={`${section} mb-12 mt-12 md:mt-24 md:px-4`}>
                 <h2 className="text-2xl m-0 mb-6 pb-6 border-b border-gray-accent-light border-dashed">Questions</h2>
