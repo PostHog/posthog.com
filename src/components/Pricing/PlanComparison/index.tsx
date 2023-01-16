@@ -401,7 +401,7 @@ const sections = [
                 tiers: {
                     Scale: false,
                     Enterprise: true,
-                    'Scale Plus': true,
+                    'Scale Plus': false,
                 },
             },
             {
