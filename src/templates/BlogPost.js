@@ -26,10 +26,18 @@ const Title = ({ children, className = '' }) => {
     return <h1 className={`text-3xl md:text-4xl lg:text-4xl mt-3 mb-0 lg:my-5 ${className}`}>{children}</h1>
 }
 
-export const Intro = ({ featuredImage, title, featuredImageType, contributors, titlePosition = 'bottom' }) => {
+export const Intro = ({
+    featuredImage,
+    featuredVideo,
+    title,
+    featuredImageType,
+    contributors,
+    titlePosition = 'bottom',
+}) => {
     return (
         <div className="mt-4 lg:mb-7 mb-4 overflow-hidden">
-            {featuredImage && (
+            {featuredVideo && <iframe src={featuredVideo} />}
+            {!featuredVideo && featuredImage && (
                 <div className="relative">
                     <GatsbyImage
                         className={`rounded-md z-0 relative ${
@@ -54,7 +62,7 @@ export const Intro = ({ featuredImage, title, featuredImageType, contributors, t
                     )}
                 </div>
             )}
-            {featuredImageType !== 'full' && <Title className="lg:mt-7 mt-4">{title}</Title>}
+            {(featuredVideo || featuredImageType !== 'full') && <Title className="lg:mt-7 mt-4">{title}</Title>}
             {contributors && (
                 <Contributors
                     contributors={contributors}
@@ -105,7 +113,7 @@ const BlogPostSidebar = ({ contributors, date, filePath, title, tags, location, 
 export default function BlogPost({ data, pageContext, location }) {
     const { postData } = data
     const { body, excerpt, fields } = postData
-    const { date, title, featuredImage, featuredImageType, contributors, description, tags, category } =
+    const { date, title, featuredImage, featuredVideo, featuredImageType, contributors, description, tags, category } =
         postData?.frontmatter
     const lastUpdated = postData?.parent?.fields?.gitLogLatestDate
     const filePath = postData?.parent?.relativePath
@@ -165,6 +173,7 @@ export default function BlogPost({ data, pageContext, location }) {
                 <Intro
                     title={title}
                     featuredImage={featuredImage}
+                    featuredVideo={featuredVideo}
                     featuredImageType={featuredImageType}
                     contributors={contributors}
                 />
@@ -198,6 +207,7 @@ export const query = graphql`
                 hideAnchor
                 description
                 featuredImageType
+                featuredVideo
                 featuredImage {
                     publicURL
                     childImageSharp {
