@@ -20,18 +20,6 @@ Want to know more about what we're up to? Check out [our roadmap](/roadmap) to s
 > **Need to update a self-hosted instance?** [Check the runbook docs for instructions](/docs/runbook/upgrading-posthog)!
 
 ## PostHog 1.43.0 release notes
-
-**Release highlights:**
-- [New: Performance improvements](#new-performance-improvements)
-- [New: Feature flag variant overrides](#new-feature-flag-variant-overrides)
-- [New: Export recordings to file](#new-export-recordings-to-file)
-- [New: Better insight searching](#new-better-insight-searching)
-- [New: Role-based access for feature flags](#new-role-based-access-for-feature-flags)
-- [New: Show event/property counts in persons modal](#new-show-eventproperty-counts-in-persons-modal)
-- [Improved: More experiment variants and improved flow](#improved-more-experiment-variants-and-improved-flow)
-- [Improved: Recording playback controls](#improved-recording-playback-controls)
-- [Improved: Browsing recordings and creating playlists](#improved-browsing-recordings-and-creating-playlists)
-
 ### New: Performance improvements
 
 Nobody likes waiting for results, so we've put a renewed focus into performance recently and shipped a huge number of improvements. Here are just some of the highlights: 
