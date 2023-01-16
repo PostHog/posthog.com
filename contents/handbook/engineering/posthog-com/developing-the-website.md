@@ -163,6 +163,7 @@ date: 2021-11-16
 title: The state of plugins on PostHog
 rootPage: /blog
 author: ["yakko-majuri"]
+featuredVideo: https://www.youtube-nocookie.com/embed/TCyCryTiTbQ
 featuredImage: ../images/blog/running-content.png
 featuredImageType: full
 category: Guides
@@ -174,6 +175,7 @@ tags: ["Using PostHog", "Privacy"]
 - `title`: the title that appears at the top of the blog post and on the blog listing page
 - `rootPage`: necessary for listing all blog posts on /blog. should always be set to `/blog`
 - `author`: the author(s) of the post. correlates to your handle located in /src/data/authors.json
+- `featuredVideo`: the iframe src of the video that appears at the top of the post. replaces the featured image on post pages.
 - `featuredImage`: the URL of the image that appears at the top of the post and on the blog listing page
 - `featuredImageType`: `standard` | `full` - determines the width of the featured image on the blog post
 - `category`: the broader category the post belongs to. one of the following:
