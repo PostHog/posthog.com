@@ -40,8 +40,8 @@ const cloudPlans: IPlan[] = [
         title: 'Scale Plus',
         description: 'SSO, project permissions, dashboard permissions',
         pricing: {
-            event: 0,
-            other: 'Contact us',
+            event: 0.0005626,
+            monthly: 450,
         },
         mainCTA: {
             title: 'Get started',

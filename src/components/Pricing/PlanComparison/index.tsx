@@ -44,7 +44,7 @@ const sections = [
                 name: 'First 1 million events/mo',
                 tiers: {
                     Scale: 'Free – every month',
-                    'Scale Plus': 'Contact us',
+                    'Scale Plus': '$450 (flat fee)',
                     Enterprise: 'Custom',
                 },
             },
@@ -52,7 +52,7 @@ const sections = [
                 name: '1-2 million',
                 tiers: {
                     Scale: '$0.000450',
-                    'Scale Plus': 'Contact us',
+                    'Scale Plus': '$0.00056260',
                     Enterprise: 'Custom',
                 },
             },
@@ -60,7 +60,7 @@ const sections = [
                 name: '2-10 million',
                 tiers: {
                     Scale: '$0.000225',
-                    'Scale Plus': 'Contact us',
+                    'Scale Plus': '$0.00028125',
                     Enterprise: 'Custom',
                 },
             },
@@ -68,7 +68,7 @@ const sections = [
                 name: '10-100 million',
                 tiers: {
                     Scale: '$0.000075',
-                    'Scale Plus': 'Contact us',
+                    'Scale Plus': '$0.00009375',
                     Enterprise: 'Custom',
                 },
             },
@@ -76,7 +76,7 @@ const sections = [
                 name: '100 million - 1 billion',
                 tiers: {
                     Scale: '$0.000025',
-                    'Scale Plus': 'Contact us',
+                    'Scale Plus': '$0.00003125',
                     Enterprise: 'Custom',
                 },
             },
@@ -89,7 +89,7 @@ const sections = [
                 name: 'First 15,000 recordings/mo',
                 tiers: {
                     Scale: 'Free – every month',
-                    'Scale Plus': 'Contact us',
+                    'Scale Plus': 'Free – every month',
                     Enterprise: 'Custom',
                 },
             },
@@ -97,7 +97,7 @@ const sections = [
                 name: '15,001 - 50,000',
                 tiers: {
                     Scale: '$0.0050',
-                    'Scale Plus': 'Contact us',
+                    'Scale Plus': '$0.00625',
                     Enterprise: 'Custom',
                 },
             },
@@ -105,7 +105,7 @@ const sections = [
                 name: '50,001 - 150,000',
                 tiers: {
                     Scale: '$0.0045',
-                    'Scale Plus': 'Contact us',
+                    'Scale Plus': '$0.005625',
                     Enterprise: 'Custom',
                 },
             },
@@ -113,7 +113,7 @@ const sections = [
                 name: '150,001 to 500,000',
                 tiers: {
                     Scale: '$0.0040',
-                    'Scale Plus': 'Contact us',
+                    'Scale Plus': '$0.00500',
                     Enterprise: 'Custom',
                 },
             },
@@ -121,7 +121,7 @@ const sections = [
                 name: '500,000 +',
                 tiers: {
                     Scale: '$0.0035',
-                    'Scale Plus': 'Contact us',
+                    'Scale Plus': '$0.004375',
                     Enterprise: 'Custom',
                 },
             },
