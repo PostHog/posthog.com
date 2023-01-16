@@ -5,7 +5,10 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ['Release notes', 'Product updates']
+category: PostHog news
+tags:
+  - Product updates
+  - Release notes
 featuredImage: ../images/blog/posthog-array-blog.png
 featuredImageType: full
 ---
