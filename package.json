@@ -8,9 +8,7 @@
         "type": "git",
         "url": "https://github.com/PostHog/posthog.com"
     },
-    "keywords": [
-        "gatsby"
-    ],
+    "keywords": ["gatsby"],
     "private": true,
     "scripts": {
         "build": "gatsby build",
@@ -30,22 +28,15 @@
         "@heroicons/react": "^1.0.6",
         "@hubspot/api-client": "^7.1.2",
         "@popperjs/core": "^2.11.2",
-        "@slack/bolt": "^3.8.1",
-        "@supabase/supabase-js": "^1.29.4",
         "@types/lodash.groupby": "^4.6.7",
         "@types/react-slick": "^0.23.10",
         "@typescript-eslint/eslint-plugin": "^4.20.0",
-        "@uiw/react-md-editor": "^3.9.5",
         "algoliasearch": "^4.14.2",
-        "busboy": "^1.6.0",
         "chart.js": "^2.9.4",
         "chrome-aws-lambda": "^10.1.0",
         "cntl": "^1.0.0",
         "core-js": "^3.21.1",
-        "country-code-emoji": "^2.3.0",
         "dotenv": "^10.0.0",
-        "eslint-plugin-flowtype": "^2.50.3",
-        "form-data": "^4.0.0",
         "formik": "^2.2.9",
         "framer-motion": "^4.1.17",
         "fuse.js": "^6.6.2",
@@ -97,7 +88,6 @@
         "markdown-to-jsx": "^7.1.7",
         "md5": "^2.3.0",
         "mermaid": "^9.1.5",
-        "mobx": "^6.3.13",
         "multiparty": "^4.2.3",
         "node-fetch": "^2.6.1",
         "parse-link-header": "^2.0.0",
@@ -202,9 +192,7 @@
             "pre-commit": "node ./scripts/mdxImportGen && git add src/mdxGlobalComponents.js && lint-staged"
         }
     },
-    "workspaces": [
-        "plugins/*"
-    ],
+    "workspaces": ["plugins/*"],
     "lint-staged": {
         "*.{html,js,ts,tsx,json,yml,css,scss}": "prettier --write",
         "*.{js,ts,tsx}": "eslint"
