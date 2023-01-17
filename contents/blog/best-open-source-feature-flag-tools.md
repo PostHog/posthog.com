@@ -118,7 +118,7 @@ Harness’s feature flags module is free with unlimited flags and environments f
 
 ### Open source license
 
-Harness has several open source options depending on company size and the level of support required. A free, team-maintained edition is available to certain businesses under the Polyform Small Business License, and there are community editions under Apache 2.0 and PolyForm Sheild. Learn more on [GitHub](https://github.com/harness).
+Harness has several open source options depending on company size and the level of support required. A free, team-maintained edition is available to certain businesses under the Polyform Small Business License, and there are community editions under Apache 2.0 and PolyForm Shield. Learn more on [GitHub](https://github.com/harness).
 
 ## 4. [Unleash](https://www.getunleash.io/)
 
