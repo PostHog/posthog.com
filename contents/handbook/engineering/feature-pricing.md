@@ -38,4 +38,4 @@ Sometimes these principles still leave room for questioning - what, if any, shou
 - Features that have the potential to vastly grow our word-of-mouth should be free.
   - Eg. we shouldn't (and don't) charge for extra users in an org because the more people we get inside PostHog, the better.
 - Features that are focused around extra security, permissioning, compliance, or other enterprise-style upgrades should be reserved for our enterprise pricing tier.
-- When possible, we should try to grandfather existing customers' pricing tiers to avoid unexpected pricing changes. However, this does not mean that they should get all new features, only that they get to continue using their existing features at the price they originally agreed to. Upgrading to a "current" plan to get new features should be easy.
+- Unless there is a very good reason not to, we should grandfather existing customers' pricing tiers to avoid unexpected pricing changes.
