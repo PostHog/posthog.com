@@ -643,6 +643,7 @@
         },
         { "source": "/next-steps/(.*)", "destination": "/next-steps" },
         { "source": "/question/(.*)", "destination": "/question" },
-        { "source": "/careers/(.*)", "destination": "/careers" }
+        { "source": "/careers/(.*)", "destination": "/careers" },
+        { "source": "/api", "destination": "/docs/api" }
     ]
 }
