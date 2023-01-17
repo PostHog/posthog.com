@@ -116,6 +116,12 @@ As mentioned above this was a long standing issue and big gap. Excellent and qui
 * [dns-over-wikipedia](https://github.com/aaronjanse/dns-over-wikipedia) (redirects idk domains using the official link in wikipedia.)
 * [bungholio](https://github.com/johntitus/bungholio) (Get text alerts when products become available on Amazon – useful if resistance bands are as sparse in your location as they are in Aaron’s.)
 
+## Share your feedback
+We'd love to hear anything you have to say about PostHog, good or bad. As a thank you, we'll share some awesome [PostHog merch](https://merch.posthog.com).
+
+Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog.com) with one of our teams to help us make PostHog even better!
+
+
 ## PostHog news
 
 * We migrated our docs so we could host them ourselves – using docsify to generate our site. We’re pleased with it so far and have used it again for our company handbook.

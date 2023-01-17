@@ -86,13 +86,11 @@ This might not be news to all of you, since we have been experimenting with our 
 
 In addition to the average, sum, maximum, and minimum operations available to numerical properties in trends, we now also support median, and 90th, 95th, and 99th percentiles.
 
-### [User Interviews](https://calendly.com/posthog-feedback)
+## Share your feedback
+We'd love to hear anything you have to say about PostHog, good or bad. As a thank you, we'll share some awesome [PostHog merch](https://merch.posthog.com).
 
-We’re working hard to improve PostHog and would love to talk to you about your experience with the product. 
+Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog.com) with one of our teams to help us make PostHog even better!
 
-If you're interested in helping us out, you can schedule a quick 30-min call with us [on Calendly](https://calendly.com/posthog-feedback). 
-
-Oh, and we're giving away some awesome [PostHog merch](https://merch.posthog.com) as a thank you!
 
 ## Favorite Issue
 
@@ -103,6 +101,11 @@ Our session recording feature is getting better by the day! The latest improveme
 ## PostHog News
 
 Eltje has joined us to lead our efforts on the People & Talent front, bringing some much-needed experience as we grow our team. Like James, she was a professional cyclist before venturing into talent, and she is (unfortunately) a lover of pineapple on pizza.
+
+## Share your feedback
+We'd love to hear anything you have to say about PostHog, good or bad. As a thank you, we'll share some awesome [PostHog merch](https://merch.posthog.com).
+
+Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog.com) with one of our teams to help us make PostHog even better!
 
 ## Community Shoutouts
 

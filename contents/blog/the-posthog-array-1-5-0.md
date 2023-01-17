@@ -61,6 +61,12 @@ You were already able to create cohorts, but now you can use them in trends to f
 
 The PostHog team is busy working out how to present all the information in PostHog while you're developing. Feel free to add your own ideas here!
 
+## Share your feedback
+We'd love to hear anything you have to say about PostHog, good or bad. As a thank you, we'll share some awesome [PostHog merch](https://merch.posthog.com).
+
+Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog.com) with one of our teams to help us make PostHog even better!
+
+
 ## Weekly round up
 
 * [Amazon Writing Style Tips](https://twitter.com/destraynor/status/1258372157706510336). Writing is crucial for remote teams and we loved these tips from Amazon.
