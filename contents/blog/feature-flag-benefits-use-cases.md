@@ -109,13 +109,21 @@ Feature flags also enable you to run alphas and betas of new features easily. Ea
 
 ## Choosing a feature flag tool
 
-There are multiple tools that provide feature flags. Each has different features, here's a comparison of them:
+There are many tools you can use to leverage feature flags and capture their benefits. Choosing the right one can be difficult, so we put together a summary and comparison of some of the top options:
+
+- **PostHog** is a suite of product and data tools built for engineers. It includes many product tools including feature flags, A/B testing, and experimentation. The feature flags tools have multi-variate flags, percentage and property release conditions, integrations with popular languages, bootstrapping, local evaluation, and more.
+- **Optimizely** is a digital experience platform that orchestrates, monetizes, and experiments with content. Their experimentation tool enables web and feature experimentation to test and optimize every custom touchpoint.
+- **Flagsmith** is a feature flag and remote config service. They help teams release features with confidence, manage flags across applications, and drive tests. They provide segmentation, percentage rollouts, and change tracking.
+- **GrowthBook** is an open source platform for feature flagging and experimentation. It enables teams to release confidently and be data-driven. It is built for data-driven teams, with SDKs, transparency, automations, and an easy-to-use interface.
+- **LaunchDarkly** is a platform for managing feature flags. They help teams innovate faster, deploy fearlessly, and make each release a masterpiece. Their feature flag platform provides instant rollouts and rollbacks, rules matching, and experimentation.
+
+Each has different features, here's a comparison of them:
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
     <thead>
         <tr>
-			<td className="w-3/12"></td>
+		    <td className="w-3/12"></td>
             <td><strong>PostHog</strong></td>
             <td><strong>Optimizely</strong></td>
             <td><strong>Flagsmith</strong></td>
@@ -151,7 +159,7 @@ There are multiple tools that provide feature flags. Each has different features
         <tr>
             <td><strong>Multi-variate flags</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
@@ -159,7 +167,7 @@ There are multiple tools that provide feature flags. Each has different features
         <tr>
             <td><strong>Activity logs</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
@@ -184,8 +192,8 @@ There are multiple tools that provide feature flags. Each has different features
             <td><strong>Product analytics</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
         </tr>  
         <tr>
