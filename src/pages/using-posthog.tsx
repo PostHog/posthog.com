@@ -359,7 +359,15 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
                                                 className="bg-tan dark:bg-gray-accent-dark border-2 border-solid border-tan hover:border-orange relative active:top-[0.5px] active:scale-[.99]"
                                             >
                                                 <Link to={tutorial.fields.slug}>
-                                                    <GatsbyImage image={getImage(tutorial.frontmatter.featuredImage)} />
+                                                    <GatsbyImage
+                                                        alt={tutorial.frontmatter.title}
+                                                        image={getImage(tutorial.frontmatter.featuredImage)}
+                                                    />
+                                                    <div className="absolute w-full h-full inset-0 from-black/75 [text-shadow:0_2px_10px_rgba(0,0,0,0.4)] bg-gradient-to-b">
+                                                        <p className="m-0 text-white p-4 text-xl font-bold">
+                                                            {tutorial.frontmatter.title}
+                                                        </p>
+                                                    </div>
                                                 </Link>
                                             </li>
                                         ))}
@@ -444,6 +452,7 @@ export const query = graphql`
                     slug
                 }
                 frontmatter {
+                    title
                     featuredImage {
                         childImageSharp {
                             gatsbyImageData(placeholder: NONE)
