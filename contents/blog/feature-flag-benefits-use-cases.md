@@ -224,6 +224,10 @@ Each has different features, here's a comparison of them:
 </table>
 </div>
 
+Except for PostHog, each of these tools focuses specifically on feature flags. In doing so, they miss out on the benefits of having all of your data in one place. For example, to get data on the usage of a feature flag, you would need to integrate a third-party analytics platform. 
+
+PostHog has all the tools you need to build a great product, and they are integrated together. Feature flags are connected to analytics and visualizations which are connected to session recordings. [Try us out and get unlimited feature flags, 1M events and 15k session recordings per month for free](https://app.posthog.com/signup).
+
 ## Further reading
 
 - [Master Feature Flags: Best practice, tips and examples](/blog/feature-flag-best-practices)
