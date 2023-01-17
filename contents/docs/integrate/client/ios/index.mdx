@@ -4,6 +4,7 @@ sidebarTitle: iOS
 sidebar: Docs
 showTitle: true
 github: https://github.com/PostHog/posthog-ios
+icon: ../../../../images/docs/integrate/ios.svg
 features:
     eventCapture: true
     userIdentification: true
@@ -129,14 +130,13 @@ Starting with iOS 14, Apple will further restrict apps that track users. Any ref
 
 Hence **starting with posthog-ios version 1.2.0** we have removed all references to Apple's AdSupport framework.
 
-
 ### Group analytics
 
 Group analytics allows you to associate the events for that person's session with a group (e.g. teams, organizations, etc.). Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.
 
 > **Note: ** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
 
--  Associate the events for this session with a group
+-   Associate the events for this session with a group
 
 ```objectivec
 [[PHGPostHog sharedPostHog] group:@"organization" groupKey:@"42dlsfj23f"];
@@ -146,7 +146,7 @@ Group analytics allows you to associate the events for that person's session wit
 posthog.group( "some-type", groupKey: "42dlsfj23f")
 ```
 
--  Associate the events for this session with a group AND update the properties of that group
+-   Associate the events for this session with a group AND update the properties of that group
 
 ```objectivec
 [[PHGPostHog sharedPostHog] group:@"organization" groupKey:@"42dlsfj23f" properties:@{ @"name": @"Awesome Inc." }];

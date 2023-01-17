@@ -289,7 +289,7 @@
         { "source": "/docs/tutorials/cohorts", "destination": "/tutorials/cohorts" },
         { "source": "/docs/tutorials/deleting-data", "destination": "/tutorials/deleting-data" },
         { "source": "/docs/tutorials/event-tracking-guide", "destination": "/tutorials/event-tracking-guide" },
-        { "source": "/docs/tutorials/feature-flags", "destination": "/tutorials/feature-flags" },
+        { "source": "/docs/tutorials/feature-flags", "destination": "/manual/feature-flags" },
         { "source": "/docs/tutorials/funnels", "destination": "/tutorials/funnels" },
         {
             "source": "/docs/tutorials/how-to-embed-shared-dashboard",
@@ -430,6 +430,7 @@
         { "source": "/blog/the-posthog-array-1-37-1", "destination": "/blog/the-posthog-array-1-37-0" },
         { "source": "/handbook/engineering/app-west", "destination": "/handbook/small-teams/experimentation" },
         { "source": "/docs/self-host/configure/async-migrations", "destination": "/docs/runbook/async-migrations" },
+        { "source": "/tutorials/spa", "destination": "/tutorials/single-page-app-pageviews" },
         {
             "source": "/docs/self-host/configure/async-migrations/0001-events-sample-by",
             "destination": "/docs/runbook/async-migrations/0001-events-sample-by"
@@ -621,6 +622,18 @@
         {
             "source": "/blog/using-posting",
             "destination": "/blog/using-posthog"
+        },
+        {
+            "source": "/docs/integrate/third-party/slack",
+            "destination": "/manual/subscriptions"
+        },
+        {
+            "source": "/docs/integrate/client/snippet-installation",
+            "destination": "/docs/integrate"
+        },
+        {
+            "source": "/tutorials/feature-flags",
+            "destination": "/manual/feature-flags"
         }
     ],
     "rewrites": [

@@ -5,10 +5,13 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["CEO diaries", "Inside PostHog"]
-author: ["james-hawkins"]
+author:
+  - james-hawkins
 featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
+category: CEO diaries
+tags:
+  - Marketing
 ---
 
 Imagine you're working on something for other developers that you really, _really_ want to be great.

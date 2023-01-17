@@ -35,6 +35,7 @@ import { WorkingAtPostHog } from './components/Careers/WorkingAtPostHog'
 import { Checkbox } from './components/Checkbox'
 import { Chip } from './components/Chip'
 import { CodeBlock } from './components/CodeBlock'
+import { CommunityCTA } from './components/CommunityCTA'
 import { CommunityQuestions } from './components/CommunityQuestions'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { Contact } from './components/Contact'
@@ -83,6 +84,7 @@ import { NextSteps } from './components/NextSteps'
 import { NotFoundPage } from './components/NotFoundPage'
 import { NotProductIcons } from './components/NotProductIcons'
 import { OverflowXSection } from './components/OverflowXSection'
+import { Pagination } from './components/Pagination'
 import { Popover } from './components/Popover'
 import { PostCard } from './components/PostCard'
 import { PostLayout } from './components/PostLayout'
@@ -134,7 +136,6 @@ import { Toggle } from './components/Toggle'
 import { Tooltip } from './components/Tooltip'
 import { TotalCountries } from './components/TotalCountries'
 import { TotalTeam } from './components/TotalTeam'
-import { Tutorials } from './components/Tutorials'
 import { TutorialsSlider } from './components/TutorialsSlider'
 import { VisitLibrary } from './components/VisitLibrary'
 import { ZoomImage } from './components/ZoomImage'
@@ -175,6 +176,7 @@ export const shortcodes = {
     Checkbox,
     Chip,
     CodeBlock,
+    CommunityCTA,
     CommunityQuestions,
     CompensationCalculator,
     Contact,
@@ -223,6 +225,7 @@ export const shortcodes = {
     NotFoundPage,
     NotProductIcons,
     OverflowXSection,
+    Pagination,
     Popover,
     PostCard,
     PostLayout,
@@ -274,7 +277,6 @@ export const shortcodes = {
     Tooltip,
     TotalCountries,
     TotalTeam,
-    Tutorials,
     TutorialsSlider,
     VisitLibrary,
     ZoomImage,

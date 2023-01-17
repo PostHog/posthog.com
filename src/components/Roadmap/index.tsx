@@ -9,7 +9,7 @@ import { UnderConsideration } from './UnderConsideration'
 import { InProgress } from './InProgress'
 import { OrgProvider, UserProvider } from 'squeak-react'
 import { ImageDataLike, StaticImage } from 'gatsby-plugin-image'
-import { community } from '../../sidebars/sidebars.json'
+import community from 'sidebars/community.json'
 
 interface IGitHubPage {
     title: string

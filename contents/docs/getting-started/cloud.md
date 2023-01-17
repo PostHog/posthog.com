@@ -15,12 +15,14 @@ It also comes with 1m events free each month.
 
 ## 1. Create an account
 
-To create a PostHog Cloud account, navigate to [app.posthog.com](https://app.posthog.com/signup) and fill in the details for your new account.
+Set up a [PostHog Cloud account](https://app.posthog.com/signup) (hosted in the US), or if you're looking for a GDPR-ready environment, try [PostHog Cloud EU](https://eu.posthog.com/signup).
 
 ## 2. Set up your project
 
-Once you've got your account set-up, you should see a screen that asks you where you'd like to send events from.
-Select whichever option best matches your use case, or select 'Just Exploring' if you don't want to set up a full integration quite yet.
+After signing up, you'll see a screen that asks you how you'd like to send events.
+Select whichever option best matches your use case. If you're not ready to set up your integration yet, you can explore the demo project or invite a team member to help you start ingesting events.
+
+> For web-based projects, the easiest way to get started is by adding the [JavaScript snippet](/docs/integrate) to your website and app.
 
 ![selecting where you want to intregrate PostHog to](../../images/docs/getting-started/welcome.png)
 

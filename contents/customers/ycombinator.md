@@ -40,7 +40,7 @@ Y Combinator empowers each team to choose its own processes, tools, and OKRs. So
 
 PostHog also offered the benefit of autocapture, which enabled the team to get started quickly without wasting weeks defining tracking plans. 
 
-“Tools we looked at either weren't robust enough, or required a huge amount of work to instrument,” said Cat. “But with PostHog, we could autocapture most events using [the JS snippet](/docs/integrate/client/snippet-installation) and still [configure custom events](/tutorials/event-tracking-guide) when we needed to. It was the perfect balance.”
+“Tools we looked at either weren't robust enough, or required a huge amount of work to instrument,” said Cat. “But with PostHog, we could autocapture most events using [the JS snippet](/docs/integrate/client/js) and still [configure custom events](/tutorials/event-tracking-guide) when we needed to. It was the perfect balance.”
 
 ![Y Combinator analytics screenshot](../images/customers/ycombinator/ycombinator-analytics.png)
 

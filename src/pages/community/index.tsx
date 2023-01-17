@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { graphql, navigate, PageProps } from 'gatsby'
-import { community } from '../../sidebars/sidebars.json'
+import community from 'sidebars/community.json'
 import SEO from 'components/seo'
 import Layout from 'components/Layout'
 import PostLayout, { SidebarSection } from 'components/PostLayout'

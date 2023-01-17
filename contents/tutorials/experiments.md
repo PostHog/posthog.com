@@ -4,8 +4,8 @@ sidebar: Docs
 showTitle: true
 featuredTutorial: false
 author: ['neil-kakkar']
-topics: ['experimentation', 'feature flags']
-featuredImage: ../images/tutorials/banners/experiments.png
+tags: ['experimentation', 'feature flags']
+featuredImage: ../images/tutorials/banners/tutorial-2.png
 date: 2022-05-26
 ---
 
@@ -99,7 +99,7 @@ And that's all! You should be good to run any experiment you want with these cha
 
 ### Further reading
 
-- [How to safely roll out new features using feature flags](/tutorials/feature-flags)
+- [Setting up and using feature flags](/manual/feature-flags)
 - [Our guide to great open-source feature flags tools](/blog/best-open-source-feature-flag-tools)
 - [How to run Experiments on new users](/tutorials/new-user-experiments)
 

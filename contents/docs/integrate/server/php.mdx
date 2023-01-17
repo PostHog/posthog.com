@@ -4,6 +4,7 @@ sidebarTitle: PHP
 sidebar: Docs
 showTitle: true
 github: https://github.com/PostHog/posthog-php
+icon: ../../../images/docs/integrate/php.svg
 features:
     eventCapture: true
     userIdentification: true
@@ -148,8 +149,8 @@ The same concept applies for when a user logs in.
 If you're using PostHog in the front-end and back-end, doing the identify call in the frontend will be enough.
 
 An alias call requires:
--   `distinctId` – the current unique id (logged in user id)
--   `alias` – the _other_ distinct ID of the user, which will be aliased to the current one
+-   `distinctId` – the user id
+-   `alias` – the anonymous session distinct ID
 
 For example:
 

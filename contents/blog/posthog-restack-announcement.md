@@ -5,10 +5,13 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["joe-martin"]
+author:
+  - joe-martin
 featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
-categories: ["Product updates"]
+category: PostHog news
+tags:
+  - Product updates
 ---
 
 Over the last few months, we’ve steadily grown the number of businesses offering services through [the PostHog Marketplace](/marketplace). We’ve added partnerships with teams such as [Altinity](/blog/posthog-altinity-announce), Birch and, as of today, [Restack](/marketplace/restack). 

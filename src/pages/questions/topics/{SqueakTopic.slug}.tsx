@@ -8,7 +8,7 @@ import { squeakProfileLink } from 'lib/utils'
 import { Squeak } from 'squeak-react'
 import { graphql } from 'gatsby'
 import Link from 'components/Link'
-import { community } from '../../../sidebars/sidebars.json'
+import community from 'sidebars/community.json'
 
 interface ITopic {
     label: string

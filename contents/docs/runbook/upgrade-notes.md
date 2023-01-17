@@ -11,6 +11,10 @@ Self-hosted users must run async migrations 0005-0007 before updating to PostHog
 
 If you haven't run async migrations 0005-0007 yet, or if they aren't available on your current version,  we recommend upgrading to PostHog version 1.41.4 first, _then_ running the async migrations, then upgrading to 1.42.0.
 
+Note: for async migration 0007 disable the post checks in the advanced options when kicking off the async migration (otherwise you might see them fail and need to re-run the migration with them disabled).
+
+If you are not upgrading forward and staying on PostHog version 1.42 (not recommended), then turn off persons-on-events in the instance settings page in the app, in version 1.43 it's already disabled by default.
+
 ### 29.0.0
 
 This version upgrades PostHog version to 1.41.1, which comes with some breaking changes. The upgrade guide is [here](https://posthog.com/blog/the-posthog-array-1-41-0#1410-update-guide-for-selfhosted-users).

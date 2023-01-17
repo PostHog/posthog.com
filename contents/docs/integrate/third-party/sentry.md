@@ -1,8 +1,6 @@
 ---
-title: Sentry Integration
-sidebarTitle: Sentry
-sidebar: Docs
-showTitle: true
+title: Sentry
+icon: ../../../images/docs/integrate/frameworks/sentry.svg
 ---
 
 ## Why does this exist?
