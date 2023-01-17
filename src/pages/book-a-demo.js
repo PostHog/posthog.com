@@ -37,16 +37,16 @@ const Editions = ({ setDemoType }) => {
                         <div className="space-y-4 w-full">
                             <Title
                                 title="Full feature set (paid)"
-                                subtitle="First million events per month free. Cloud (Saas) or self-hosted. All of PostHog's advanced analytics tools."
+                                subtitle="First million events per month free. Cloud (Saas). All of PostHog's advanced analytics tools."
                             />
                             <CallToAction
                                 width="full"
                                 className="box-border"
                                 type="primary"
-                                onClick={() => setDemoType('paid')}
+                                onClick={() => setDemoType('demo')}
                                 event={{ name: 'book a demo: clicked paid demo' }}
                             >
-                                Book a personalized demo
+                                Request a personalized demo
                             </CallToAction>
                         </div>
                     </div>
@@ -78,7 +78,7 @@ const Book = ({ demoType }) => {
     return (
         <>
             <Intro>
-                <Contact activeTab="demo" demoType={demoType} />
+                <Contact activeTab={demoType} />
             </Intro>
         </>
     )
