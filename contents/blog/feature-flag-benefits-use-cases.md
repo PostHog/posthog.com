@@ -107,7 +107,7 @@ Feature flags also enable you to run alphas and betas of new features easily. Ea
 
 - A user has been abusing your app. They have been sending too many requests or using the feature inappropriately. You can use a permission-type feature flag to prevent or throttle access to key parts of your app from them.
 
-## Comparing feature flag tools
+## Choosing a feature flag tool
 
 There are multiple tools that provide feature flags. Each has different features, here's a comparison of them:
 
