@@ -17,7 +17,16 @@ tags:
 
 Feature flags (aka feature toggles) are a powerful tool to help improve your product. They enable engineering teams to conditionally run code, display components, and control access based on release conditions. These conditions check user data, group data, and percentages to decide whether to activate or not.
 
-In this post, we explore four benefits of feature flags along with use cases and types for each. The four biggest benefits and uses of feature flags are:
+There are three broad categories of of feature flags:
+
+- **Release (Beta, Canary):** Enable a feature for a percentage or category of users or groups, and monitor the impact. Roll back if there are issues. Roll out to everyone once ready.
+
+- **Permission:** Grant or deny access to a feature to specific users or groups.
+
+- **Experiment (A/B):** Compare two or more versions of a feature or component for users or groups, and monitor the impact the variations have on a set of key metrics. Roll out the winning variation.
+
+In this post, we explore four benefits to using these feature flag types, such as:
+
 1. [Shipping faster](#1-ship-faster-and-maintain-momentum)
 2. [Mitigating risk](#2-mitigate-risk)
 3. [Testing changes](#3-test-changes-in-production)
@@ -58,10 +67,13 @@ If there are problems with a feature, feature flags can act as kill switches. Th
 
 - You’re in a situation where every change to your app needs a review to release (such as iOS App Store or Chrome Web Store). Instead of having to wait for a review to make a change, using a feature flag enables faster rollbacks. Fixes to issues aren’t delayed by review, mitigating their impact when they arise.
 
-> **Defining percentage, conditional, and tiered rollouts:** 
-> - Percentage rollouts release a feature to a percentage of users or groups, and then increase that percentage over time.
-> - Conditional rollouts release a feature to specific users or groups based on a filter or condition. The filter or condition expands to more users or groups over time.
-> - Tiered rollouts release a feature to specific infrastructure, regions, groups or users, and progresses to more of the same type over time.
+> #### Rollout types explained:
+> 
+> - **Percentage rollouts** release a feature to a percentage of users or groups, and then increase that percentage over time.
+>
+> - **Conditional rollouts** release a feature to specific users or groups based on a filter or condition. The filter or condition expands to more users or groups over time.
+>
+> - **Tiered rollouts** release a feature to specific infrastructure, regions, groups or users, and progresses to more of the same type over time.
 
 ### 3. Test changes (in production)
 
@@ -94,14 +106,6 @@ Feature flags also enable you to run alphas and betas of new features easily. Ea
 - Put premium features behind a permission-type feature flag. Once users sign up, get the sales or customer success team to add them to the feature flag distribution. If they churn, remove them from the feature flag release conditions.
 
 - A user has been abusing your app. They have been sending too many requests or using the feature inappropriately. You can use a permission-type feature flag to prevent or throttle access to key parts of your app from them.
-
-## A summary of feature flag types
-
-Each use case fits into one of three types, here’s a summary of them:
-
-- **Release (Beta, Canary):** Enable a feature for a percentage or category of users or groups, and monitor the impact. Roll back if there are issues. Roll out to everyone once ready.
-- **Permission:** Grant or deny access to a feature to specific users or groups.
-- **Experiment (A/B):** Compare two or more versions of a feature or component for users or groups, and monitor the impact the variations have on a set of key metrics. Roll out the winning variation.
 
 ## Comparing feature flag tools
 
