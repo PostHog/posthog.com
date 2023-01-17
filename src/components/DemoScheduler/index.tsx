@@ -4,7 +4,7 @@ import { CalendlyEventListener, EventScheduledEvent, InlineWidget } from 'react-
 import usePostHog from '../../hooks/usePostHog'
 
 export const DemoScheduler = ({
-    iframeSrc = 'https://calendly.com/d/ckz-37j-jz9/posthog-scale-customer-success-demo',
+    iframeSrc = 'https://calendly.com/d/hxx-tx7-qrs/posthog-15-minute-quick-chat',
     type = 'scale',
 }: {
     iframeSrc?: string
