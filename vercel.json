@@ -634,6 +634,10 @@
         {
             "source": "/tutorials/feature-flags",
             "destination": "/manual/feature-flags"
+        },
+        {
+            "source": "/docs/integrate/ingest-historic-data",
+            "destination": "/docs/migrate/import-historic-data"
         }
     ],
     "rewrites": [
