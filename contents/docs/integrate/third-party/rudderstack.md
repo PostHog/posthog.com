@@ -1,8 +1,6 @@
 ---
-title: RudderStack Integration
-sidebarTitle: RudderStack
-sidebar: Docs
-showTitle: true
+title: RudderStack
+icon: ../../../images/docs/integrate/frameworks/rudderstack.svg
 ---
 
 RudderStack is an open-source, customer data platform for developers. It allows you to collect and deliver customer event data to a variety of destinations across your growth, product, and marketing stack.

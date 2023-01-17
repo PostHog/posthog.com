@@ -2,11 +2,11 @@
 title: Building a tracking cookies consent banner in React
 sidebar: Docs
 showTitle: true
-featuredImage: ../images/tutorials/banners/react-cookie-banner.png
+featuredImage: ../images/tutorials/banners/tutorial-3.png
 featuredTutorial: false
 date: 2022-10-03
 author: ['ian-vanagas']
-topics: ['configuration']
+tags: ['configuration']
 ---
 
 - **Level:** Medium 🦔🦔
@@ -143,7 +143,7 @@ When we head back to the local site, we’ll see our cookie banner at the bottom
 
 ![Tutorial banner](../images/tutorials/react-cookie-banner/final-banner.png)
 
-> 💯: For bonus points, you can click each of the buttons and go view the associated events in your PostHog instance.
+> 💯: For bonus points, you can click each of the buttons and go view the associated events in your PostHog instance.
 
 ## Step 4: Adding the opt out (or in) logic
 

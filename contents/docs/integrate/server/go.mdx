@@ -4,6 +4,7 @@ sidebarTitle: Go
 sidebar: Docs
 showTitle: true
 github: https://github.com/PostHog/posthog-go
+icon: ../../../images/docs/integrate/go.svg
 features:
     eventCapture: true
     userIdentification: true
@@ -158,9 +159,8 @@ The same concept applies for when a user logs in.
 If you're using PostHog in the front-end and back-end, doing the identify call in the frontend will be enough.
 
 An alias call requires
-
--   `DistinctId` – the current unique id (logged in user id)
--   `Alias` – the _other_ distinct ID of the user, which will be aliased to the current one
+-   `DistinctId` – the user id
+-   `Alias` – the anonymous session distinct ID
 
 For example:
 

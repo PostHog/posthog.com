@@ -5,10 +5,15 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["joe-martin"]
+author:
+  - joe-martin
 featuredImage: ../images/blog/posthog-marketing/marketing-hog.jpg
 featuredImageType: full
-categories: ["Guides", "Using PostHog"]
+category: Using PostHog
+tags:
+  - Guides
+  - Marketing
+  - Session recording
 ---
 
 One of the great things about PostHog is that it democratizes your product strategy by making analytics accessible to more than just analysts. There’s no need for old-fashioned SQL queries or complex business intelligence tools — marketing teams are empowered to get all the information they need by themselves. 

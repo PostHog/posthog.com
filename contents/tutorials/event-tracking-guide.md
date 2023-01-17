@@ -1,11 +1,11 @@
 ---
-title: Complete guide to event tracking 
+title: Complete guide to event tracking
 sidebar: Docs
 showTitle: true
 author: ['ian-vanagas', 'yakko-majuri']
 date: 2022-09-23
-featuredImage: ../images/tutorials/banners/actions.png
-topics: ['actions', 'events']
+featuredImage: ../images/tutorials/banners/tutorial-18.png
+tags: ['actions', 'events']
 ---
 
 - **Level:** Medium 🦔🦔
@@ -27,7 +27,7 @@ To set up autocapture:
 
 3. Paste the block into your site’s HTML in the `<head>` tags (ideally at the end). This should be an HTML page that acts as a base or template page (with other scripts your page loads) to ensure all possible events are captured.
 
-This allows autocapture to capture events like clicks, change of inputs, or submission of **`a`**, **`button`**, **`form`**, **`input`**, **`select`**, **`textarea`**, and **`label`** tags. Once set up, those events flow automatically into PostHog for you to see and analyze. For a detailed guide on how to install the snippet, read our **[installation guide](https://posthog.com/docs/integrate/client/snippet-installation)**.
+This allows autocapture to capture events like clicks, change of inputs, or submission of **`a`**, **`button`**, **`form`**, **`input`**, **`select`**, **`textarea`**, and **`label`** tags. Once set up, those events flow automatically into PostHog for you to see and analyze. For a detailed guide on how to install the snippet, read our **[installation guide](https://posthog.com/docs/integrate/client/snippet-installation)**.
 
 Autocapture can also be set up by installing the **[posthog-js](https://github.com/PostHog/posthog-js)** library, details of which can be [found here](https://posthog.com/docs/integrate/client/js), but we’ll also explain it when we cover setting up custom events below.
 
@@ -37,7 +37,7 @@ Although we are proud of our autocapture feature, we know it isn’t enough for 
 
 First, event autocapture can be overwhelming. In high-volume instances, where events come in at a high rate, the live events table can contain so much information it can be difficult to determine exactly what you care about. Remember that every click, change of input, or submission is tracked here. Without proper filters, actions, and insights set up, this data can be overwhelming.
 
-Second, autocapture is a general solution that provides value to many users. To get the most out of PostHog, you should be using custom events. Custom events let you track *exactly* the behavior you care about, ranging from a user hovering an input, to a function call in your backend.
+Second, autocapture is a general solution that provides value to many users. To get the most out of PostHog, you should be using custom events. Custom events let you track *exactly* the behavior you care about, ranging from a user hovering an input, to a function call in your backend.
 
 ## Setting up custom events
 
@@ -80,7 +80,7 @@ def movie_played(movie):
 	)
 ```
 
-Adding more of these capture calls in the right places in your codebase creates a flow of event tracking data into PostHog. For more information on setting this up, read the **[live data ingestion guide](https://posthog.com/docs/integrate/ingest-live-data).**
+Adding more of these capture calls in the right places in your codebase creates a flow of event tracking data into PostHog. For more information on setting this up, read the **[live data ingestion guide](https://posthog.com/docs/integrate/ingest-live-data).**
 
 ## Getting custom events right
 

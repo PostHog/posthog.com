@@ -4,6 +4,7 @@ sidebarTitle: Python
 sidebar: Docs
 showTitle: true
 github: https://github.com/PostHog/posthog-python
+icon: ../../../images/docs/integrate/python.svg
 features:
     eventCapture: true
     userIdentification: true
@@ -159,8 +160,8 @@ If you're using PostHog in the front-end and back-end, doing the `identify` call
 
 An `alias` call requires:
 
--   `distinct id` – the current unique id (logged in user id)
--   `alias` – the _other_ distinct ID of the user, which will be aliased to the current one
+-   `distinct id` – the user id
+-   `alias` – the anonymous session distinct ID
 
 For example:
 ```python

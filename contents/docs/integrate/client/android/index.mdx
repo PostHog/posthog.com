@@ -4,6 +4,7 @@ sidebarTitle: Android
 sidebar: Docs
 showTitle: true
 github: https://github.com/PostHog/posthog-android
+icon: ../../../../images/docs/integrate/android.svg
 features:
     eventCapture: true
     userIdentification: true
@@ -165,13 +166,13 @@ Group analytics allows you to associate the events for that person's session wit
 
 > **Note: ** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
 
--  Associate the events for this session with a group
+-   Associate the events for this session with a group
 
 ```java
 PostHog.with(this).group("organization", "42dlsfj23f") // organization is the group type, 42dlsfj23f is the group ID
 ```
 
--  Associate the events for this session with a group AND update the properties of that group
+-   Associate the events for this session with a group AND update the properties of that group
 
 ```java
 PostHog.with(this).group("organization", "42dlsfj23f", new Properties().putValue("name", "Awesome Inc."));

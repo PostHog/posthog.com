@@ -4,6 +4,7 @@ sidebarTitle: React Native
 sidebar: Docs
 showTitle: true
 github: https://github.com/PostHog/posthog-react-native
+icon: ../../../../images/docs/integrate/react.svg
 features:
     eventCapture: true
     userIdentification: true
@@ -14,7 +15,6 @@ features:
 ---
 
 Purely built for React Native, this library allows you to integrate PostHog with your React Native project. For React Native projects built with Expo, there are no mobile native dependencies outside of supported Expo packages.
-
 
 ## Installation
 
@@ -34,11 +34,11 @@ import ReactNativeConfigure from './snippets/configure.mdx'
 
 Autocapture tracks these events:
 
-* **Application Opened** - once when the App is opened from a closed state
-* **Application Became Active** - when the App comes to the foreground (e.g. from the app switcher)
-* **Application Backgrounded** - when the App is sent to the background by the user
-* **$screen** - when the user navigates (if using @react-navigation/native)
-* **$autocapture** - touch events when the user interacts with the screen
+-   **Application Opened** - once when the App is opened from a closed state
+-   **Application Became Active** - when the App comes to the foreground (e.g. from the app switcher)
+-   **Application Backgrounded** - when the App is sent to the background by the user
+-   **$screen** - when the user navigates (if using @react-navigation/native)
+-   **$autocapture** - touch events when the user interacts with the screen
 
 With Autocapture, all touch events for children of `PosthogProvider` will be tracked, capturing a snapshot of the view hierarchy at that point. This allows you to create Insights in PostHog without having to add many custom events.
 
@@ -55,10 +55,11 @@ If there are elements you don't want to be captured, you can add the `ph-no-capt
 ```
 
 Basic usage:
+
 ```jsx
 // App.(js|ts)
-import {PostHogProvider} from 'posthog-react-native'
-import {NavigationContainer} from '@react-navigation/native';
+import { PostHogProvider } from 'posthog-react-native'
+import { NavigationContainer } from '@react-navigation/native'
 
 export function App() {
     return (
@@ -83,7 +84,7 @@ You can tweak how autocapture works by passing custom options.
     noCaptureProp: "ph-no-capture",
 
     navigation: {
-        // By default only the Screen name is tracked but it is possible to track the 
+        // By default only the Screen name is tracked but it is possible to track the
         // params or modify the name by intercepting theautocapture like so
         routeToName: (name, params) => {
             if (params.id) return `${name}/${params.id}`
@@ -141,8 +142,6 @@ posthog.capture('some event', { $set_once: { userProperty: 'value' } })
 
 `$set_once` works just like `$set`, except that it will **only set the property if the user doesn't already have that property set**.
 
-
-
 ### Super Properties
 
 Super Properties are properties associated with events that are set once and then sent with every `capture` call, be it a $screen, an autocaptured touch, or anything else.
@@ -174,8 +173,6 @@ This will remove the Super Property and subsequent events will not include it.
 
 If you are doing this as part of a user logging out you can instead simply use `posthog.reset` which takes care of clearing all stored Super Properties and more.
 
-
-
 ### Flush
 
 You can set the number of events in the configuration that should queue before flushing.
@@ -206,7 +203,7 @@ By default, PostHog has tracking enabled unless it is forcefully disabled by def
 
 You can give your users the option to opt in or out by calling the relevant methods. Once these have been called they are persisted and will be respected until optIn/Out is called again or the `reset` function is called.
 
-To Opt in/out of tracking, use the following calls. 
+To Opt in/out of tracking, use the following calls.
 
 ```javascript
 posthog.optIn() // opt in
@@ -220,41 +217,35 @@ If you still wish capture these events but want to create a distinction between 
 Feature Flags can be loaded directly or via a helpful hook
 
 ```js
-import { useFeatureFlag } from "posthog-react-native"
+import { useFeatureFlag } from 'posthog-react-native'
 
 const MyComponent = () => {
-    const showFlaggedFeature = useFeatureFlag("my-flag-id")
-    const multiVariantFeature = useFeatureFlag("my-multivariant-feature-flag-id")
+    const showFlaggedFeature = useFeatureFlag('my-flag-id')
+    const multiVariantFeature = useFeatureFlag('my-multivariant-feature-flag-id')
 
     if (showFlaggedFeature === undefined) {
         // the response is undefined if the flags are being loaded
         return null
     }
 
-    return showFlaggedFeature ? (
-        <Text>Testing feature 😄</Text>
-    ) : (
-        <Text>Not Testing feature 😢</Text>
-    )
+    return showFlaggedFeature ? <Text>Testing feature 😄</Text> : <Text>Not Testing feature 😢</Text>
 }
 ```
 
 Alternatively you can call load the feature flags directly:
+
 ```js
 // Defaults to undefined if not loaded yet or if there was a problem loading
-posthog.getFeatureFlag("my-flag")
+posthog.getFeatureFlag('my-flag')
 // Multi variant feature flags are returned as a string
-posthog.getFeatureFlag("my-multivariant-flag") 
-
+posthog.getFeatureFlag('my-multivariant-flag')
 ```
 
-PostHog will load feature flags when instantiated and will refresh whenever other methods are called that could affect the flag such as `.group()`. If you have the need to forcefully trigger the refresh however you can use `reloadFeatureFlagsAsync` 
+PostHog will load feature flags when instantiated and will refresh whenever other methods are called that could affect the flag such as `.group()`. If you have the need to forcefully trigger the refresh however you can use `reloadFeatureFlagsAsync`
+
 ```js
-posthog.reloadFeatureFlagsAsync()
-  .then(refreshedFlags => console.log(refreshedFlags))
+posthog.reloadFeatureFlagsAsync().then((refreshedFlags) => console.log(refreshedFlags))
 ```
-
-
 
 #### Bootstrapping Flags
 
@@ -264,7 +255,6 @@ In cases like these, where you want flags to be immediately available on page lo
 
 This allows you to pass in a distinctID and feature flags during library initialisation, like so:
 
-
 ```js
 const posthog = await Posthog.initAsync('<ph_project_api_key>', {
     host: 'https://app.posthog.com',
@@ -273,16 +263,15 @@ const posthog = await Posthog.initAsync('<ph_project_api_key>', {
         featureFlags: {
             'flag-1': true,
             'variant-flag': 'control',
-            'other-flag': false
-        }
-    }
+            'other-flag': false,
+        },
+    },
 })
 ```
 
 To compute these flag values, use the corresponding `getAllFlags` method in your server-side library. Note that bootstrapping flags requires server-side initialisation.
 
 If the ID you're passing in is an identified ID (that is, an ID with which you've called `posthog.identify()` elsewhere), you can also pass in the `isIdentifiedID` bootstrap option, which ensures that this ID is treated as an identified ID in the library. This is helpful as it warns you when you try to do something wrong with this ID, like calling `identify` again.
-
 
 ```js
 const posthog = await Posthog.initAsync('<ph_project_api_key>', {
@@ -293,15 +282,13 @@ const posthog = await Posthog.initAsync('<ph_project_api_key>', {
         featureFlags: {
             'flag-1': true,
             'variant-flag': 'control',
-            'other-flag': false
-        }
-    }
+            'other-flag': false,
+        },
+    },
 })
 ```
 
-
 > **Note:** Passing in a distinctID to bootstrap replaces any existing IDs, which means you may fail to connect any old anonymous user events with the logged in person, if your logic calls identify in the frontend immediately on login. In this case, you can omit passing in the distinctID.
-
 
 ### Group analytics
 
@@ -309,15 +296,15 @@ Group analytics allows you to associate the events for that person's session wit
 
 > **Note: ** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
 
--  Associate the events for this session with a group
+-   Associate the events for this session with a group
 
 ```js
 posthog.group('company', '42dlsfj23f')
 
-posthog.capture("upgraded plan") // this event is associated with company ID `42dlsfj23f`
+posthog.capture('upgraded plan') // this event is associated with company ID `42dlsfj23f`
 ```
 
--  Associate the events for this session with a group AND update the properties of that group
+-   Associate the events for this session with a group AND update the properties of that group
 
 ```js
 posthog.group('company', '42dlsfj23f', {
@@ -337,7 +324,6 @@ See [autocapture](#autocapture) for configuration.
 If you want to manually send a new screen capture event, use the `screen` function. This function requires a `name`. You may also pass in an optional `properties` object.
 
 ```javascript
-
 posthog.screen('Dashboard', {
     background: 'blue',
     hero: 'superhog',

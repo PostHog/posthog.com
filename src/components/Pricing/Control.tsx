@@ -293,7 +293,13 @@ const Control = (): JSX.Element => {
 
                     <header className={`${gridCell} ${gridCellTop} pb-4 lg:pb-0 lg:order-3`}>
                         <span className="w-9 h-9 flex mb-1">{ProductIcons.experiments}</span>
-                        <h3 className="text-lg mb-0 pb-0">Feature flags + experiments</h3>
+                        <h3 className="text-lg mb-0 pb-0">
+                            Experiments{' '}
+                            <span className="border border-gray-accent-light text-black/75 p-0.5 text-xs font-semibold uppercase rounded-[2px]">
+                                Beta
+                            </span>{' '}
+                            + feature flags
+                        </h3>
                         <p className="text-[15px] opacity-75 leading-tight font-semibold mb-0">
                             Multivariate flags, user targeting/exclusions, secondary goals
                         </p>
@@ -301,16 +307,38 @@ const Control = (): JSX.Element => {
 
                     <div className={`${gridCell} ${gridCellMid} lg:order-6`}>
                         <p className="opacity-60 mb-0 text-sm">Pricing</p>
+                        <div></div>
                         <p className="mb-0">
-                            <span className="font-bold text-lg">Free</span>
-                        </p>
-                        <p className="text-xs opacity-50 mb-0 font-semibold">
-                            We may charge for additional features in the future
+                            <span className="font-bold text-lg">Free during beta</span>
                         </p>
                     </div>
 
-                    <div className={`${gridCell} ${gridCellBottom} lg:order-9`}>
-                        {/* feature flags pricing breakdown (empty for now) */}
+                    <div className={`${gridCell} ${gridCellBottom} lg:order-9 flex flex-col justify-between`}>
+                        <div>
+                            <h4 className="text-base font-bold m-0 ">Features</h4>
+                            <ul className="grid gap-y-1 mt-2 mb-4 p-0">
+                                <li className="flex items-center space-x-2 justify-between text-black/50 border-b border-dashed border-gray-accent-light pb-2 last:pb-0 last:border-b-0">
+                                    <p className="text-sm font-medium m-0">Boolean feature flags</p>
+                                    <p className="font-bold m-0 text-black/100">Free</p>
+                                </li>
+                                <li className="flex items-center space-x-2 justify-between text-black/50 border-b border-dashed border-gray-accent-light pb-2 last:pb-0 last:border-b-0">
+                                    <p className="text-sm font-medium m-0">Multivariate feature flags</p>
+                                    <p className="font-bold m-0 text-black/100 flex gap-1 items-center">
+                                        <span className="w-2 h-2 rounded-full flex bg-red"></span>Free
+                                    </p>
+                                </li>
+                                <li className="flex items-center space-x-2 justify-between text-black/50 border-b border-dashed border-gray-accent-light pb-2 last:pb-0 last:border-b-0">
+                                    <p className="text-sm font-medium m-0">Experiments</p>
+                                    <p className="font-bold m-0 text-black/100 flex gap-1 items-center">
+                                        <span className="w-2 h-2 rounded-full flex bg-red"></span>Free
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <p className="text-sm text-black/50 -mb-2 font-medium flex relative pl-4 leading-tight pb-2 md:pb-0 before:w-2 before:h-2 before:rounded-full before:flex before:bg-red before:left-0 before:top-1.5 before:content-[''] before:absolute">
+                            Free during beta. Add a payment method for complimentary access.
+                        </p>
                     </div>
                 </div>
             </section>

@@ -3,8 +3,8 @@ title: How to track key B2B product metrics
 sidebar: Docs
 showTitle: true
 author: ['yakko-majuri']
-featuredImage: ../images/tutorials/banners/b2b.png
-topics: ['feature flags', 'trends', 'insights']
+featuredImage: ../images/tutorials/banners/tutorial-4.png
+tags: ['feature flags', 'trends', 'insights']
 date: 2020-11-17
 ---
 
@@ -121,7 +121,7 @@ Here, we can clearly see the usage of our product by company. This can be useful
 - It lets you contact companies that have not been using the product much
 - It allows you to determine what companies you have a better chance of converting to a premium plan
 
-Additionally, you can also break down data by any other property you like, as well as by specific cohorts you have set. This lets you compare metrics across marketing campaigns, referral domains, software version, browser, and anything else that is valuable to you. You are also able to compare between features when using [feature flags](/docs/tutorials/feature-flags).
+Additionally, you can also break down data by any other property you like, as well as by specific cohorts you have set. This lets you compare metrics across marketing campaigns, referral domains, software version, browser, and anything else that is valuable to you. You are also able to compare between features when using [feature flags](/manual/feature-flags).
 
 ##### What company is most likely to convert into a paying customer?
 
@@ -182,7 +182,7 @@ Keeping an eye on how your features are performing is key to determining if ther
 
 B2B businesses can also greatly benefit from using feature flags. 
 
-> **Note:** For an in-depth walkthrough of our Feature Flags functionality, check out the [dedicated tutorial](/docs/tutorials/feature-flags).
+> **Note:** For an in-depth walkthrough of our Feature Flags functionality, check out [our manual](/manual/feature-flags).
 
 If you're unaware, feature flags are a PostHog feature that allows you to safely deploy and roll back new features. It means you can deploy features and then slowly roll them out to your users. If something has gone wrong, you can roll back new features without having to re-deploy your application.
 

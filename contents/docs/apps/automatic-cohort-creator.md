@@ -3,7 +3,7 @@ title: Automatic Cohort Creator
 github: https://github.com/PostHog/posthog-automatic-cohorts-plugin
 installUrl: https://app.posthog.com/project/apps?name=Automatic%20Cohort%20Creator
 thumbnail: ../../apps/thumbnails/automatic-cohort-creator.png
-topics:
+tags:
     - auto-cohort
 ---
 

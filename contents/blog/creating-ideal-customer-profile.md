@@ -1,14 +1,19 @@
 ---
 date: 2022-11-14
-title: "How we found our Ideal Customer Profile"
+title: How we found our Ideal Customer Profile
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["CEO diaries", "Inside PostHog", "Startups"]
-author: ["james-hawkins"]
+author:
+  - james-hawkins
 featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
+category: Product growth
+tags:
+  - Guides
+  - Product metrics
+
 ---
 
 Creating an Ideal Customer Profile is one of the most important things we've ever done at PostHog.
