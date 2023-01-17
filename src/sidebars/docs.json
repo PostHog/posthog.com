@@ -890,6 +890,10 @@
                     {
                         "name": "Notifications & alerts",
                         "url": "/manual/notifications-and-alerts"
+                    },
+                    {
+                        "name": "Role based access",
+                        "url": "/manual/role-based-access"
                     }
                 ]
             }
