@@ -29,10 +29,6 @@
                 "url": "/docs/integrate/ingest-live-data"
             },
             {
-                "name": "Ingest historical data",
-                "url": "/docs/integrate/ingest-historic-data"
-            },
-            {
                 "name": "Identify users",
                 "url": "/docs/integrate/identifying-users"
             },
@@ -474,6 +470,10 @@
         "name": "Migrate & export",
         "url": "",
         "children": [
+            {
+                "name": "Import historical data",
+                "url": "/docs/migrate/import-historic-data"
+            },
             {
                 "name": "Migrate between PostHog instances",
                 "url": "/docs/migrate/migrate-between-cloud-and-self-hosted"
