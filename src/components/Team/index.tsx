@@ -1,5 +1,5 @@
 import { MDXProvider } from '@mdx-js/react'
-import { GithubIcon } from 'components/GithubIcon'
+import { GitHub } from 'components/Icons'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
@@ -27,7 +27,12 @@ export default function Team() {
                         <div className="team-row">
                             <div className="team-left-text">
                                 <h3 id={kebabCase(name) + '-' + kebabCase(jobTitle)}>{title}</h3>
-                                <GithubIcon username={github} />
+                                <a
+                                    href={`https://github.com/${github}`}
+                                    className="github-user-link inline-block -mt-4 mb-4 opacity-75 hover:opacity-100"
+                                >
+                                    <GitHub />
+                                </a>
                                 <div className="team-left-bio">
                                     <MDXProvider components={shortcodes}>
                                         <MDXRenderer>{body}</MDXRenderer>
