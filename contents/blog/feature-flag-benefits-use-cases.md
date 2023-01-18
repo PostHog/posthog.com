@@ -1,5 +1,5 @@
 ---
-date: 2023-01-13
+date: 2023-01-18
 title: Feature flag benefits, types and use cases, explained
 rootPage: /blog
 sidebar: Blog
@@ -112,9 +112,13 @@ Feature flags also enable you to run alphas and betas of new features easily. Ea
 There are many tools you can use to leverage feature flags and capture their benefits. Choosing the right one can be difficult, so we put together a summary and comparison of some of the top options:
 
 - **PostHog** is a suite of product and data tools built for engineers. It includes many product tools including feature flags, A/B testing, and experimentation. The feature flags tools have multi-variate flags, percentage and property release conditions, integrations with popular languages, bootstrapping, local evaluation, and more.
+
 - **Optimizely** is a digital experience platform that orchestrates, monetizes, and experiments with content. Their experimentation tool enables web and feature experimentation to test and optimize every custom touchpoint.
+
 - **Flagsmith** is a feature flag and remote config service. They help teams release features with confidence, manage flags across applications, and drive tests. They provide segmentation, percentage rollouts, and change tracking.
+
 - **GrowthBook** is an open source platform for feature flagging and experimentation. It enables teams to release confidently and be data-driven. It is built for data-driven teams, with SDKs, transparency, automations, and an easy-to-use interface.
+
 - **LaunchDarkly** is a platform for managing feature flags. They help teams innovate faster, deploy fearlessly, and make each release a masterpiece. Their feature flag platform provides instant rollouts and rollbacks, rules matching, and experimentation.
 
 Each has different features, here's a comparison of them:
@@ -226,7 +230,9 @@ Each has different features, here's a comparison of them:
 
 Except for PostHog, each of these tools focuses specifically on feature flags. In doing so, they miss out on the benefits of having all of your data in one place. For example, to get data on the usage of a feature flag, you would need to integrate a third-party analytics platform. 
 
-PostHog has all the tools you need to build a great product, and they are integrated together. Feature flags are connected to analytics and visualizations which are connected to session recordings. [Try us out and get unlimited feature flags, 1M events, and 15k session recordings per month for free](https://app.posthog.com/signup).
+PostHog has all the tools you need to build a great product, and they are integrated together. Feature flags are connected to analytics and visualizations which are connected to session recordings. [Our starter plan](/pricing) includes unlimited events, 1M events and 15k recordings for free
+
+<ArrayCTA />
 
 ## Further reading
 
