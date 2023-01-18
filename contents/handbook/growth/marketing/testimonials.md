@@ -29,7 +29,9 @@ AND
 
 This process is handled in Customer.io using the `G2 Review Requests` segment and the `G2 Review Requester` campaign workflow. Users are only asked to review PostHog once, with a 2-day delay after the targeting confirms a match. This is important so we can avoid bombarding users with emails and do not nag users for reviews after the initial request. 
 
-More information about the G2 review process is available in [the initial G2 automation RFC](https://github.com/PostHog/meta/pull/83/files). 
+More information about the G2 review process is available in [the initial G2 automation RFC](https://github.com/PostHog/meta/pull/83/files).
+
+New reviews are automatically collected for team members in the internal #posthogfeedback Slack channel.
 
 ## Testimonials
 We speak to our users regularly and are often fortunate enough that they say nice things about our product or our way of working. Other times users talk about us in public, such as on social media or on review platforms and forums. 
