@@ -634,6 +634,42 @@
         {
             "source": "/tutorials/feature-flags",
             "destination": "/manual/feature-flags"
+        },
+        {
+            "source": "/blog/categories/comparisons",
+            "destination": "/blog/tags/comparisons"
+        },
+        {
+            "source": "/blog/categories/guides",
+            "destination": "/blog/tags/guides"
+        },
+        {
+            "source": "/blog/categories/product-analytics",
+            "destination": "/blog/tags/product-analytics"
+        },
+        {
+            "source": "/blog/categories/product-analytics",
+            "destination": "/blog/tags/product-analytics"
+        },
+        {
+            "source": "/blog/categories/product-updates",
+            "destination": "/blog/tags/product-updates"
+        },
+        {
+            "source": "/blog/categories/release-notes",
+            "destination": "/blog/tags/release-notes"
+        },
+        {
+            "source": "/blog/categories/privacy",
+            "destination": "/blog/tags/privacy"
+        },
+        {
+            "source": "/blog/categories/open-source",
+            "destination": "/blog/tags/open-source"
+        },
+        {
+            "source": "/blog/tags/startups",
+            "destination": "/blog/categories/startups"
         }
     ],
     "rewrites": [
