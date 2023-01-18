@@ -6,7 +6,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: ["ian-vanagas"]
-featuredImage: ../images/blog/posthog-marketing/marketing-hog.jpg
+featuredImage: ../images/blog/experiment-hog.jpg
 featuredImageType: full
 categories: Using PostHog
 tags:
