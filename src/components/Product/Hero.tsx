@@ -206,19 +206,28 @@ export default function Hero() {
                     </CallToAction>
                 </div>
             </div>
-            <Slider
-                beforeChange={(_oldIndex, newIndex) => setActiveSlide(newIndex)}
-                className="product-hogs-slider"
-                {...sliderSettings}
-            >
-                {slides.map((slide, index) => {
-                    return (
-                        <Link key={index} className="cursor-pointer" smooth duration={300} offset={-57} to={slide.url}>
-                            <Slide {...slide} />
-                        </Link>
-                    )
-                })}
-            </Slider>
+            <div className="min-h-[432px]">
+                <Slider
+                    beforeChange={(_oldIndex, newIndex) => setActiveSlide(newIndex)}
+                    className="product-hogs-slider"
+                    {...sliderSettings}
+                >
+                    {slides.map((slide, index) => {
+                        return (
+                            <Link
+                                key={index}
+                                className="cursor-pointer"
+                                smooth
+                                duration={300}
+                                offset={-57}
+                                to={slide.url}
+                            >
+                                <Slide {...slide} />
+                            </Link>
+                        )
+                    })}
+                </Slider>
+            </div>
         </section>
     )
 }
