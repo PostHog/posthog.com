@@ -19,7 +19,7 @@ tags:
 
 Feature flags, aka feature toggles, turn specific functions on and off during runtime. Rather than maintaining multiple feature branches in your source code, feature flags hide code or behaviors and allow you to enable or disable features on demand and without deploying new code.
 
-They're useful for:
+[Feature flag benefits](/blog/feature-flag-benefits-use-cases) include the ability to:
 
 - **Safely releasing features** by eliminating complex branching and gradually rolling out feature access so you can [react quickly if issues arise](https://posthog.com/customers/phantom).
 

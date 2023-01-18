@@ -17,7 +17,7 @@ tags:
 
 Feature flags (aka feature toggles) are a powerful tool to help improve your product. They enable engineering teams to conditionally run code, display components, and control access based on release conditions. These conditions check user data, group data, and percentages to decide whether to activate or not.
 
-There are three broad categories of of feature flags:
+There are three broad types of feature flags:
 
 - **Release (Beta, Canary):** Enable a feature for a percentage or category of users or groups, and monitor the impact. Roll back if there are issues. Roll out to everyone once ready.
 
@@ -115,11 +115,11 @@ There are many tools you can use to leverage feature flags and capture their ben
 
 - **Optimizely** is a digital experience platform that orchestrates, monetizes, and experiments with content. Their experimentation tool enables web and feature experimentation to test and optimize every custom touchpoint.
 
-- **Flagsmith** is a feature flag and remote config service. They help teams release features with confidence, manage flags across applications, and drive tests. They provide segmentation, percentage rollouts, and change tracking.
+- **Flagsmith** is a feature flag and remote config service. It helps teams release features with confidence, manage flags across applications, and drive tests. Its provides segmentation, percentage rollouts, and change tracking.
 
 - **GrowthBook** is an open source platform for feature flagging and experimentation. It enables teams to release confidently and be data-driven. It is built for data-driven teams, with SDKs, transparency, automations, and an easy-to-use interface.
 
-- **LaunchDarkly** is a platform for managing feature flags. They help teams innovate faster, deploy fearlessly, and make each release a masterpiece. Their feature flag platform provides instant rollouts and rollbacks, rules matching, and experimentation.
+- **LaunchDarkly** is a platform for managing feature flags. It helps teams innovate faster, deploy fearlessly, and make each release a masterpiece. Its feature flag platform provides instant rollouts and rollbacks, rules matching, and experimentation.
 
 Each has different features, here's a comparison of them:
 
