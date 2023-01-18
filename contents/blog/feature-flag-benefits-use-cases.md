@@ -8,7 +8,7 @@ hideAnchor: true
 author: ["ian-vanagas"]
 featuredImage: ../images/blog/experiment-hog.jpg
 featuredImageType: full
-categories: Using PostHog
+category: Using PostHog
 tags:
   - Feature flags
 ---
