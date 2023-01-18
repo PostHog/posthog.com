@@ -13,6 +13,34 @@
             {
                 "name": "Quickstart with PostHog Cloud",
                 "url": "/docs/getting-started/cloud"
+            },
+            {
+                "name": "Install PostHog",
+                "url": "/docs/getting-started/installation"
+            },
+            {
+                "name": "Sending events",
+                "url": "/docs/getting-started/sending-events"
+            },
+            {
+                "name": "Identifying users",
+                "url": "/docs/getting-started/identifying-users"
+            },
+            {
+                "name": "Group analytics",
+                "url": "/docs/getting-started/group-analytics"
+            },
+            {
+                "name": "Feature flags",
+                "url": "/docs/getting-started/feature-flags"
+            },
+            {
+                "name": "Experiments",
+                "url": "/docs/getting-started/experiments"
+            },
+            {
+                "name": "Actions & data management",
+                "url": "/docs/getting-started/actions"
             }
         ]
     },
