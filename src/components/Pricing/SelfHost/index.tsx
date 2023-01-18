@@ -15,7 +15,7 @@ const OpenSourceDescription = () => {
             <li className={descriptionItemClassName}>Deploy with Docker on your own sever. </li>
             <li className={descriptionItemClassName}>Made for hobby projects with {'<100k'} events/month. </li>
             <li className={descriptionItemClassName}>
-                <strong>MIT-licensed without guarantee.</strong>
+                <strong>MIT licensed without guarantee.</strong>
             </li>
         </ul>
     )
