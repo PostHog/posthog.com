@@ -210,5 +210,5 @@
         "*.{html,js,ts,tsx,json,yml,css,scss}": "prettier --write",
         "*.{js,ts,tsx}": "eslint"
     },
-    "packageManager": "yarn@1.22.19"
+    "packageManager": "yarn@3.3.1"
 }
