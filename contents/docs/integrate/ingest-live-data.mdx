@@ -24,15 +24,15 @@ If you prefer to learn by doing, you can get started on the web with the [JavaSc
 
 Install the library for the platform you are building your application for.
 
-import JSInstall from './client/js/snippets/install.mdx'
-import AndroidInstall from './client/android/snippets/install.mdx'
-import AndroidConfigure from './client/android/snippets/configure.mdx'
-import IOSInstall from './client/ios/snippets/install.mdx'
-import IOSConfigure from './client/ios/snippets/configure.mdx'
-import FlutterPackage from './client/flutter/snippets/package.mdx'
-import FlutterInstall from './client/flutter/snippets/install.mdx'
-import ReactNativeInstall from './client/react-native/snippets/install.mdx'
-import ReactNativeConfigure from './client/react-native/snippets/configure.mdx'
+import JSInstall from '../sdks/js/\_snippets/install.mdx'
+import AndroidInstall from '../sdks/android/\_snippets/install.mdx'
+import AndroidConfigure from '../sdks/android/\_snippets/configure.mdx'
+import IOSInstall from '../sdks/ios/\_snippets/install.mdx'
+import IOSConfigure from '../sdks/ios/\_snippets/configure.mdx'
+import FlutterPackage from '../sdks/flutter/\_snippets/package.mdx'
+import FlutterInstall from '../sdks/flutter/\_snippets/install.mdx'
+import ReactNativeInstall from '../sdks/react-native/\_snippets/install.mdx'
+import ReactNativeConfigure from '../sdks/react-native/\_snippets/configure.mdx'
 
 import Tab from "components/Tab"
 
@@ -70,8 +70,8 @@ import Tab from "components/Tab"
 
 # Use autocapture
 
-import JSAutoCapture from './client/js/snippets/autocapture.mdx'
-import JSCaptureIgnoreElements from './client/js/snippets/capture-ignore-elements.mdx'
+import JSAutoCapture from '../sdks/js/\_snippets/autocapture.mdx'
+import JSCaptureIgnoreElements from '../sdks/js/\_snippets/capture-ignore-elements.mdx'
 
 > Autocapture is presently only available in the web browser using the JavaScript library. For non-browser platforms and for situations where you wish to manually capture events, see the [capture user events](#capture-user-events) section.
 
@@ -85,7 +85,7 @@ This allows you to send more context than the default event info that PostHog ca
 <MultiLanguage selector="tabs">
 
 ```js
-posthog.capture('[event-name]', {property1: 'value', property2: 'another value'});
+posthog.capture('[event-name]', { property1: 'value', property2: 'another value' })
 ```
 
 ```android
@@ -123,10 +123,10 @@ Optionally you can submit:
 
 # Identify users
 
-import JSIdentify from './client/js/snippets/identify.mdx'
-import AndroidIdentify from './client/android/snippets/identify.mdx'
-import IOSIdentify from './client/ios/snippets/identify.mdx'
-import ReactNativeIdentify from './client/react-native/snippets/identify.mdx'
+import JSIdentify from '../sdks/js/\_snippets/identify.mdx'
+import AndroidIdentify from '../sdks/android/\_snippets/identify.mdx'
+import IOSIdentify from '../sdks/ios/\_snippets/identify.mdx'
+import ReactNativeIdentify from '../sdks/react-native/\_snippets/identify.mdx'
 
 <Tab.Group>
 <Tab.List>
