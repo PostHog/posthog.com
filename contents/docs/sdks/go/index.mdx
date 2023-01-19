@@ -14,7 +14,7 @@ features:
     groupAnalytics: true
 ---
 
-import CohortExpansionSnippet from './snippets/cohort-expansion'
+import CohortExpansionSnippet from '../\_snippets/cohort-expansion'
 
 This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance.
 
@@ -159,6 +159,7 @@ The same concept applies for when a user logs in.
 If you're using PostHog in the front-end and back-end, doing the identify call in the frontend will be enough.
 
 An alias call requires
+
 -   `DistinctId` – the user id
 -   `Alias` – the anonymous session distinct ID
 
@@ -212,7 +213,7 @@ if (isFlagEnabledForUser) {
 
 **Get a flag value**
 
-If you're using multivariate feature flags, you can also get the value of the flag, as well as whether or not it is enabled. 
+If you're using multivariate feature flags, you can also get the value of the flag, as well as whether or not it is enabled.
 
 > **Note:** Whenever we face an error computing the flag, the library returns `None`, instead of `true` or `false` or a string variant value.
 
@@ -274,7 +275,6 @@ All feature flag evaluation requires an API request to your PostHog servers to g
 
 The method call looks just like above
 
-
 ```go
 enabledVariant, err := client.GetFeatureFlag(
 		FeatureFlagPayload{
@@ -316,7 +316,7 @@ Group analytics allows you to associate an event with a group (e.g. teams, organ
 
 > **Note: ** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
 
--  Send an event associated with a group
+-   Send an event associated with a group
 
 ```go
 client.Enqueue(posthog.Capture{

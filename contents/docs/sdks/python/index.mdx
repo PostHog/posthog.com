@@ -13,7 +13,8 @@ features:
     featureFlags: true
     groupAnalytics: true
 ---
-import CohortExpansionSnippet from './snippets/cohort-expansion'
+
+import CohortExpansionSnippet from '../\_snippets/cohort-expansion'
 
 This is an optional library you can install if you're working with Python. It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server side application that needs performance.
 
@@ -164,6 +165,7 @@ An `alias` call requires:
 -   `alias` – the anonymous session distinct ID
 
 For example:
+
 ```python
 posthog.alias('user:123', 'session:12345');
 ```
@@ -177,7 +179,6 @@ When using them with one of libraries, you should check if a feature flag is ena
 **How to check if a flag is enabled**
 
 > **Note:** Whenever we face an error computing the flag, the library returns `None`, instead of `true`, `false`, or a string variant value.
-
 
 ```python
 posthog.feature_enabled('beta-feature', 'distinct id')
@@ -202,7 +203,6 @@ If you're using multivariate feature flags, you can also get not just whether th
 
 > **Note:** Whenever we face an error computing the flag, the library returns `None`, instead of `true`, `false`, or a string variant value.
 
-
 ```python
 posthog.get_feature_flag('beta-feature', 'distinct id')
 # returns string or True or False or None
@@ -214,14 +214,12 @@ Sometimes, you might want to evaluate feature flags using properties that haven'
 
 For example, if the `beta-feature` depends on the `is_authorized` property, and you know the value of the property, you can tell PostHog to use this property, like so:
 
-
 ```python
 posthog.get_feature_flag('beta-feature', 'distinct id', person_properties={'is_authorized': True})
 # returns string or None
 ```
 
 The same holds for groups. If you have a group name `organisation`, you can add properties like so:
-
 
 ```python
 posthog.get_feature_flag('beta-feature', 'distinct id', groups={'organisation': 'google'}, group_properties={'organisation': {'is_authorized': True})
