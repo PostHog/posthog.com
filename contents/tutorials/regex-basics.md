@@ -20,7 +20,7 @@ Other important symbols to know:
 
 - `.` is any symbol other than newlines
 - Square brackets `[]` mean any of the characters included. `[abc]` checks any of A, B, or C. Include a `-` to check for a range. `[a-c]` is equivalent to the last example, `[4-7]` is equivalent to 4, 5, 6, and 7.
-- Round brackets `()` are a group of one or more symbols. `(ABC)` checkes for exactly "ABC."
+- Round brackets `()` are a group of one or more symbols. `(ABC)` checks for exactly "ABC."
 - `+` checks the preceding item matches 1 or more times. `*` matches zero or more times. `.*` would match everything minus newlines.
 - `\w`, `\d`, `\s` represent a word, digit, and whitespace. Capitalize them to represent NOT a word, digit, or whitespace.
 
