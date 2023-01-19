@@ -25,7 +25,7 @@ Both versions of PostHog should ideally be running the same version.
 
 ### How do I use the Replicator app?
 
-<MigratingEvents>
+<MigratingEvents/>
 
 1. Log in to your PostHog instance
 2. Click 'Apps' on the left-hand tool bar
