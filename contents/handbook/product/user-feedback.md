@@ -21,7 +21,7 @@ The following are great ways to invite users for an interview:
 
 **Scheduling**
 - Make sure all feedback calls are registered in the [User interviews calendar](https://calendar.google.com/calendar/?cid=Y19tczllaWN1Ym92ZGgxYWhzNmtoY2xpNTQ3b0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t). If the invite was created from your own calendar, you can simply add "User interviews" as an invitee.
-- Not a hard rule, but it's usually good to limit the number of team members (around two) joining from our side to foment a more intimate chat. 
+- Not a hard rule, but it's usually good to limit the number of team members (around two) joining from our side to foment a more intimate chat.
 
 **During the call**
 - If you'd like to record the call, do ask before!
