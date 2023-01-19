@@ -8,7 +8,7 @@ featuredImage: ../images/tutorials/banners/tutorial-4.png
 topics: ["insights"]
 ---
 
-Regular expressions or regex is a way to search the text for patterns. It is a structure of symbols that finds text matching what you want. In doing so, it is a powerful way to filter and validate strings of text.
+Regular expressions or regex is a way to search text for patterns. It is a structure of symbols that finds text matching what you want. In doing so, it is a powerful way to filter and validate strings of text.
 
 PostHog provides the ability to use regex to filter properties in many tools from insights to cohorts to feature flags. This tutorial shows you the basics of regex as well as PostHog-specific use cases to take advantage of.
 
@@ -19,32 +19,32 @@ Regex is a string of symbols representing a search on a string. A basic regex pa
 Other important symbols to know:
 
 - `.` is any symbol other than newlines
-- Square brackets mean any of the characters included. `[abc]` means any of A, B, or C. Include a `-` to mean a range. `[a-c]` is equivalent to the last example.
-- Round brackets `()` are a group of one or more symbols. `(ABC)` looks for exactly "ABC."
-- `+` means the preceding item matches 1 or more times. `*` means zero or more times. `.*` would match everything minus newlines.
+- Square brackets `[]` mean any of the characters included. `[abc]` checks any of A, B, or C. Include a `-` to check for a range. `[a-c]` is equivalent to the last example, `[4-7]` is equivalent to 4, 5, 6, and 7.
+- Round brackets `()` are a group of one or more symbols. `(ABC)` checkes for exactly "ABC."
+- `+` checks the preceding item matches 1 or more times. `*` matches zero or more times. `.*` would match everything minus newlines.
 - `\w`, `\d`, `\s` represent a word, digit, and whitespace. Capitalize them to represent NOT a word, digit, or whitespace.
 
-There are many more symbols representing many more use cases, they include special characters, escaped characters, logic, lookahead, and more. These basics give you an idea of what regex can do, and to provide an even more detailed idea, let’s go over some use cases in PostHog.
+There are many more symbols representing many more use cases, they include special characters, escaped characters, logic, lookahead, and more. You can play around and learn more regex on a site like [RegExr](https://regexr.com/) or [Regex101](https://regex101.com/). The basics give you an idea of what regex can do, but to provide practical details, let’s go over some use cases in PostHog.
 
 ## Using regex in PostHog
 
-With all the options, getting started with regex can be overwhelming, so here are some PostHog-specific use cases to get you started. PostHog doesn’t require you to add the forward slashes to the start and end of your pattern or expression flags (like `g`).
+With all the options, getting started with regex can be overwhelming, so here are some PostHog-specific use cases to get you started. PostHog doesn’t require you to add the forward slashes `/` to the start and end of your pattern or expression flags (like `g`), we automatically do that for you.
 
 ### Matching dates
 
-You can use regex to match dates, specifically, a range of dates like a week or month. This is useful if you want to find events, signups, or users who signed up in a specific time frame. 
+You can use regex to match dates, specifically, a range of dates like a week or month. This is useful if you want to find events, signups, or users properties in a specific time frame. 
 
 If you wanted to create a cohort of users who signed up in September of 2022, you can use `2022-09-.+`. This will match any date in September of 2022. The `.+` at the end means any number of characters after the date.
 
-![Cohprt](../images/tutorials/regex-basics/cohort.png)
+![Cohort](../images/tutorials/regex-basics/cohort.png)
 
-This is also useful if you wanted a range of dates. You can use the square brackets to specify a range of dates. For example if you wanted sign ups between April 5-9th in 2022, you can use `2022-04-0[5-9]+`. 
+This is also useful if you wanted a range of dates. You can use the square brackets to specify a range of dates. For example, if you wanted sign ups between April 5-9th in 2022, you can use `2022-04-0[5-9]+`. 
 
 ### Matching URL patterns
 
 One of the most popular uses of regex in PostHog is matching URL patterns. This is useful if you have a URL scheme for pages of the same type.
 
-For example, if you wanted to get stats from every tutorial on PostHog, use `https:\/\/posthog\.com\/tutorials\/.+`. To do this, our pattern needed a bunch of backslashes to escape characters. Without this, regex would recognize the forward slashes and periods as different symbols.
+For example, if you wanted to get stats from every tutorial on PostHog, use `https:\/\/posthog\.com\/tutorials\/.+`. This pattern needed a bunch of backslashes `\` to escape characters. Without this, regex would recognize the forward slashes and periods as different symbols.
 
 ![URL](../images/tutorials/regex-basics/url.png)
 
