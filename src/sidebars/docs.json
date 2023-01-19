@@ -25,43 +25,7 @@
                 "url": "/docs/integrate"
             },
             {
-                "name": "Ingest live data",
-                "url": "/docs/integrate/ingest-live-data"
-            },
-            {
-                "name": "Ingest historical data",
-                "url": "/docs/integrate/ingest-historic-data"
-            },
-            {
-                "name": "Identify users",
-                "url": "/docs/integrate/identifying-users"
-            },
-            {
-                "name": "User properties",
-                "url": "/docs/integrate/user-properties"
-            },
-            {
-                "name": "Using a CDP",
-                "url": "/docs/integrate/cdp"
-            },
-            {
-                "name": "Deploying a reverse proxy",
-                "url": "/docs/integrate/proxy"
-            },
-            {
-                "name": "Library comparison",
-                "url": "/docs/integrate/libraries"
-            },
-            {
-                "name": "Badge",
-                "url": "/docs/integrate/badge"
-            },
-            {
-                "name": "Browser extensions",
-                "url": "/docs/integrate/browser-extension"
-            },
-            {
-                "name": "Client libraries",
+                "name": "Libraries",
                 "url": "",
                 "children": [
                     {
@@ -73,12 +37,28 @@
                         }
                     },
                     {
+                        "name": "Elixir",
+                        "url": "/docs/integrate/server/elixir"
+                    },
+                    {
+                        "name": "Flutter",
+                        "url": "/docs/integrate/client/flutter"
+                    },
+                    {
+                        "name": "Go",
+                        "url": "/docs/integrate/server/go"
+                    },
+                    {
                         "name": "iOS",
                         "url": "/docs/integrate/client/ios",
                         "badge": {
                             "title": "Popular",
                             "className": "!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50"
                         }
+                    },
+                    {
+                        "name": "Java",
+                        "url": "/docs/integrate/server/java"
                     },
                     {
                         "name": "JavaScript",
@@ -89,8 +69,16 @@
                         }
                     },
                     {
-                        "name": "Flutter",
-                        "url": "/docs/integrate/client/flutter"
+                        "name": "Node.js",
+                        "url": "/docs/integrate/server/node"
+                    },
+                    {
+                        "name": "PHP",
+                        "url": "/docs/integrate/server/php"
+                    },
+                    {
+                        "name": "Python",
+                        "url": "/docs/integrate/server/python"
                     },
                     {
                         "name": "React Native",
@@ -99,58 +87,38 @@
                             "title": "Popular",
                             "className": "!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50"
                         }
-                    }
-                ]
-            },
-            {
-                "name": "Server libraries",
-                "url": "",
-                "children": [
-                    {
-                        "name": "Node.js",
-                        "url": "/docs/integrate/server/node"
-                    },
-                    {
-                        "name": "Go",
-                        "url": "/docs/integrate/server/go"
-                    },
-                    {
-                        "name": "Python",
-                        "url": "/docs/integrate/server/python"
-                    },
-                    {
-                        "name": "Rust",
-                        "url": "/docs/integrate/server/rust"
-                    },
-                    {
-                        "name": "Java",
-                        "url": "/docs/integrate/server/java"
-                    },
-                    {
-                        "name": "PHP",
-                        "url": "/docs/integrate/server/php"
                     },
                     {
                         "name": "Ruby",
                         "url": "/docs/integrate/server/ruby"
                     },
                     {
-                        "name": "Elixir",
-                        "url": "/docs/integrate/server/elixir"
+                        "name": "Rust",
+                        "url": "/docs/integrate/server/rust"
                     }
                 ]
             },
             {
-                "name": "Third party",
+                "name": "Library comparison",
+                "url": "/docs/integrate/libraries"
+            },
+            {
+                "name": "Integrations",
                 "url": "",
                 "children": [
                     {
                         "name": "Docusaurus v2",
-                        "url": "/docs/integrate/third-party/docusaurus"
+                        "url": "/docs/integrate/third-party/docusaurus",
+                        "badge": {
+                            "title": "3rd party"
+                        }
                     },
                     {
                         "name": "Gatsby",
-                        "url": "/docs/integrate/third-party/gatsby"
+                        "url": "/docs/integrate/third-party/gatsby",
+                        "badge": {
+                            "title": "3rd party"
+                        }
                     },
                     {
                         "name": "Google Tag Manager",
@@ -193,6 +161,38 @@
                         "url": "/docs/integrate/third-party/wordpress"
                     }
                 ]
+            },
+            {
+                "name": "Ingest live data",
+                "url": "/docs/integrate/ingest-live-data"
+            },
+            {
+                "name": "Ingest historical data",
+                "url": "/docs/integrate/ingest-historic-data"
+            },
+            {
+                "name": "Identify users",
+                "url": "/docs/integrate/identifying-users"
+            },
+            {
+                "name": "User properties",
+                "url": "/docs/integrate/user-properties"
+            },
+            {
+                "name": "Using a CDP",
+                "url": "/docs/integrate/cdp"
+            },
+            {
+                "name": "Deploying a reverse proxy",
+                "url": "/docs/integrate/proxy"
+            },
+            {
+                "name": "Badge",
+                "url": "/docs/integrate/badge"
+            },
+            {
+                "name": "Browser extensions",
+                "url": "/docs/integrate/browser-extension"
             }
         ]
     },
@@ -890,6 +890,10 @@
                     {
                         "name": "Notifications & alerts",
                         "url": "/manual/notifications-and-alerts"
+                    },
+                    {
+                        "name": "Role based access",
+                        "url": "/manual/role-based-access"
                     }
                 ]
             }
