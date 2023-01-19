@@ -24,7 +24,7 @@ This migration has two parts:
 
 1. Access your Clickhouse database and export all your events to disk (including uuid, timestamp, distinctid, event, properties, $group0, $group[1-3])
 2. Disable the geo-ip plugin of your new PostHog instance
-3. Write a script to send them as new requests (likely easiest with our node or python library). Here's an example of how we do it with the [Replicator app](https://github.com/PostHog/posthog-plugin-replicator/blob/main/index.ts).
+3. Write a script to send them as new requests (likely easiest with our [node](/docs/integrate/server/node) or [python](/docs/integrate/server/python) library). Here's an example of how we do it with the [Replicator app](https://github.com/PostHog/posthog-plugin-replicator/blob/main/index.ts).
 4. Re-enable the Geo-ip plugin
 
 ## Migrate your meta data
