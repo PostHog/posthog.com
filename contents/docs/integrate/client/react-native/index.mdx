@@ -37,7 +37,7 @@ Autocapture tracks these events:
 -   **Application Opened** - once when the App is opened from a closed state
 -   **Application Became Active** - when the App comes to the foreground (e.g. from the app switcher)
 -   **Application Backgrounded** - when the App is sent to the background by the user
--   **$screen** - when the user navigates (if using @react-navigation/native)
+-   **$screen** - when the user navigates (if using `@react-navigation/native` or `react-native-navigation`)
 -   **$autocapture** - touch events when the user interacts with the screen
 
 With Autocapture, all touch events for children of `PosthogProvider` will be tracked, capturing a snapshot of the view hierarchy at that point. This allows you to create Insights in PostHog without having to add many custom events.
@@ -54,10 +54,11 @@ If there are elements you don't want to be captured, you can add the `ph-no-capt
 <View ph-no-capture>Sensitive view here</View>
 ```
 
-Basic usage:
+Tracking Screen views and touches with `@react-navigation/native`:
 
 ```jsx
 // App.(js|ts)
+
 import { PostHogProvider } from 'posthog-react-native'
 import { NavigationContainer } from '@react-navigation/native'
 
@@ -72,6 +73,55 @@ export function App() {
 }
 ```
 
+Tracking Screen views and touches with `react-native-navigation`:
+
+```jsx
+import PostHog, { PostHogProvider } from 'posthog-react-native'
+import { Navigation } from 'react-native-navigation';
+
+export const posthogAsync = PostHog.initAsync('<ph_project_api_key>');
+
+// Simplify the wrapping of your Screens with a shared PostHogProvider
+export const SharedPostHogProvider = (props: any) => {
+  return (
+    <PostHogProvider client={posthogAsync} autocapture={{
+      captureLifecycleEvents: false,  // Lifecycle events are handled differently for react-native-navigation
+      captureTouches: true,
+    }}>
+      {props.children}
+    </PostHogProvider>
+  );
+};
+
+export const MyScreen = () => {
+  return (
+    // Every screen needs to be wrapped with this provider if you want to use capture touches or use the hooks
+    <SharedPostHogProvider>
+      <View>
+        ...
+      </View>
+    </SharedPostHogProvider>
+  );
+};
+
+
+Navigation.registerComponent('Screen', () => MyScreen);
+
+Navigation.events().registerAppLaunchedListener(async () => {
+  (await posthogAsync).initReactNativeNavigation({
+    navigation: {
+      // (Optional) Set the name based on the route. Defaults to the route name.
+      routeToName: (name, properties) => name,
+      // (Optional) Tracks all passProps as properties. Defaults to undefined
+      routeToProperties: (name, properties) => properties,
+    },
+  });
+});
+```
+
+
+#### Additional configuration
+
 You can tweak how autocapture works by passing custom options.
 
 ```tsx
@@ -82,6 +132,7 @@ You can tweak how autocapture works by passing custom options.
     ignoreLabels: [], // Any labels here will be ignored from the stack in touch events
     customLabelProp: "ph-label",
     noCaptureProp: "ph-no-capture",
+    propsToCapture = ["testID"], // Limit which props are captured. By default, identifiers and text content are captured.
 
     navigation: {
         // By default only the Screen name is tracked but it is possible to track the
@@ -91,7 +142,7 @@ You can tweak how autocapture works by passing custom options.
             return name
         },
         routeToParams: (name, params) => {
-            if (name === "SensitiveScreen) return undefined
+            if (name === "SensitiveScreen") return undefined
             return params
         },
     }
