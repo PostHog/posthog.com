@@ -1,23 +1,29 @@
+---
+title: Migrate between PostHog instances
+sidebar: Docs
+showTitle: true
+---
+
 > If you're attempting this migration, feel free to ask questions and provide feedback via the [PostHog Communty Slack workspace](/slack) or [a GitHub issue](https://github.com/PostHog/posthog.com/issues).
 
-### Requirements
+## Requirements
 
 - Existing PostHog instance that you can login to (Self-hosted versions need a minimum version of `1.30.0`, if you version is lower you'll need to upgrade to this version first)
 - A new PostHog instance
 
-### Approach
+## Approach
 
-This upgrade has two parts:
-1. Migrate your events, this will also create the necessary person, person distinct ID, and related records in cloud.
-2. Migrating your project meta data (projects, dashboards, insights, actions, cohorts, feature flags, experiments, annotations).
-   - Note! It won't move over the following
+This migration has two parts:
+1. [Migrate your events](#migrate-your-events), this will also create the necessary person, person distinct ID, and related records.
+2. [Migrate your meta data](#migrate-your-meta-data) (projects, dashboards, insights, actions, cohorts, feature flags, experiments, annotations).
+   - Note! It won't move over the following:
      1. Project API Key. You'll need to replace the API key in your code with the new API key.
      2. "created by" information. Every object will appear as if it was created by you.
      3. "created at" information. Every object will appear as if it was created on the time you ran this script.
 
-### Instructions
+## Migrate your events
 
-Instructions for using [PostHog Replicator app](/docs/apps/replicator):
+To migrate your events we'll be using the [PostHog Replicator app](/docs/apps/replicator):
 
 1. Log in to your old PostHog instance
 2. Click 'Apps' on the left-hand tool bar
@@ -29,3 +35,19 @@ Instructions for using [PostHog Replicator app](/docs/apps/replicator):
 6. See events come into the new PostHog instance, identically to the originals
 7. Once the Replicator is activated, go back to the configuration menu and click the gear next to "Export historical events" under "Jobs." On the calendar, select a start and end date, then click "Run job now." This will begin the process of historical events being import (and might take a while). You can see the progress in logs or by clicking the "App metrics" button (graph) and going to the "Historical exports" tab.
 8. To track progress of the export you can click the graph icon next to the Replicator app and then click on the "Historical Exports" tab
+
+## Migrate your meta data
+
+Follow the instructions on the [PostHog migrate metadata repo](https://github.com/PostHog/posthog-migrate-meta):
+1. Clone the repo and cd into it
+   ```bash
+   git clone https://github.com/PostHog/posthog-migrate-meta
+   cd posthog-migrate-meta
+   ```
+2. Install the dependencies by running `yarn`
+3. Run the script
+    ```bash
+    ts-node --source [posthog instance you want to migrate from] --sourcekey [personal api key for that instance] --destination [posthog instance you want to migrate to.] --destinationkey [personal api key for destination instance]
+    ```
+
+For more information on the options see the [repo's readme](https://github.com/PostHog/posthog-migrate-meta)

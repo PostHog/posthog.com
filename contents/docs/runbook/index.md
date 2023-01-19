@@ -15,9 +15,9 @@ This section contains routine procedures and operations to manage your self-host
 
 ### Migrating
 
--   [To another self-hosted instance](/docs/migrate/migrate-to-another-self-hosted-instance)
+-   [To another self-hosted instance](/docs/migrate/migrate-between-posthog-instances)
 -   [To PostHog from Amplitude](/docs/migrate/migrate-from-amplitude/)
--   [Between Cloud and self-hosted](/docs/migrate/migrate-between-cloud-and-self-hosted)
+-   [Between Cloud and self-hosted](/docs/migrate/migrate-between-posthog-instances)
 
 ### Services
 

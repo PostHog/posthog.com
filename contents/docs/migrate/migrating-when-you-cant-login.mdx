@@ -1,25 +1,40 @@
 ---
-title: Migrate to another self-hosted instance
+title: Migrating from a not working PostHog self-hosted instance
 sidebar: Docs
 showTitle: true
 ---
 
-import MigratingEventsSnippet from './snippets/migrating-events'
+> If you're attempting this migration, feel free to ask questions and provide feedback via the [PostHog Communty Slack workspace](/slack) or [a GitHub issue](https://github.com/PostHog/posthog.com/issues).
 
-> Note: If you're looking for a more hands-off experience we recommend migrating to [PostHog Cloud](/docs/migrate/migrate-between-cloud-and-self-hosted).
+If you **can** login to your PostHog instance we highly recommend the [migrating between PostHog instances guide](/docs/migrate/migrate-between-posthog-instances)
 
-## Migrating event data using the Replicator App
+## Requirements
 
-<MigratingEventsSnippet />
+- Existing PostHog self-hosted instance that you can no longer login too
+- A new PostHog instance
 
-## Migrating non-event data
+## Approach
+
+This migration has two parts:
+1. [Migrate your events](#migrate-your-events), this will also create the necessary person, person distinct ID, and related records.
+2. [Migrate your meta data](#migrate-your-meta-data) (projects, dashboards, insights, actions, cohorts, feature flags, experiments, annotations).
+   - Note! It won't move over the following:
+
+## Migrate your events
+
+1. Access your Clickhouse database and export all your events to disk (including uuid, timestamp, distinctid, event, properties, $group0, $group[1-3])
+2. Disable the geo-ip plugin of your new PostHog instance
+3. Write a script to send them as new requests (likely easiest with our node or python library). Here's an example of how we do it with the [Replicator app](https://github.com/PostHog/posthog-plugin-replicator/blob/main/index.ts).
+4. Re-enable the Geo-ip plugin
+
+## Migrate your meta data
 
 To migrate the non-event data (such as user information, feature flags, dashboard configurations, etc) we'll need to create a data dump and load that into the new instance. This non-event data is stored in Postgres.
 
 > This is only officially supported for importing events into a new cloud instance of PostHog or an enterprise self-hosted instance using Kubernetes. If you're using a different deployment method, you can still try this approach but we can't guarantee it will work.
 
-- You should have a **clean** enterprise self-hosted PostHog instance up and running. Your new PostHog instance should have **no ingested events**. We recommend using a fresh and unused installation.
-- Your old and new instances should both be running the **exact** same version of PostHog (minimum `1.30.0`).
+- You should have a **clean** PostHog cloud or self-hosted PostHog instance up and running. Your new PostHog instance should have **no ingested events**. We recommend using a fresh and unused installation.
+- Your old and new instances should both be running the **exact** same version of PostHog (minimum `1.30.0`). TODO: Understand if this minimum is required
 
 ### Exporting Postgres Data
 
@@ -71,7 +86,13 @@ If your old instance was deployed using the Helm chart, you can use:
 kubectl cp <postgres-pod-name>:/tmp/export.sql ./export.sql # -n posthog
 ```
 
-### 2. Accessing Postgres on your new instance
+### Option 1 - Migrating to PostHog Cloud
+
+If you are migrating to PostHog cloud, you'll need to write a script to process this data and create the following resources on PostHog cloud. The [PostHog migrate code](https://github.com/PostHog/posthog-migrate-meta/blob/main/index.ts) which we use to migrate between two cloud instances will likely be useful.
+
+### Option 2 - Migrating to another PostHog self-hosted instance
+
+#### 2. Migrating to another PostHog instance
 
 To access Postgres on your new PostHog instance (Kubernetes cluster), you should do the following:
 
@@ -99,7 +120,7 @@ To access Postgres on your new PostHog instance (Kubernetes cluster), you should
 
     Postgres will ask you for the password. Use the value you found from step 1.
 
-### 3. Deleting data in the new instance
+#### 3. Deleting data in the new instance
 
 In order to correctly migrate your data over, we need to make sure the tables we're importing into are completely empty. This will ensure that the foreign key mappings are set up correctly.
 
@@ -140,7 +161,7 @@ CASCADE;
 
 The command output may indicate that some other tables were also truncated. This is normal and expected.
 
-### 4. Copying your data file to the Postgres pod
+#### 4. Copying your data file to the Postgres pod
 
 In order to copy the data to the new Postgres instance, we must first have the data accessible in our Postgres pod, where we're able to access our instance.
 
@@ -153,7 +174,7 @@ kubectl cp export.sql posthog-posthog-postgresql-0:/tmp/export.sql -n posthog
 
 This will copy the export file to a `tmp/` directory in the Postgres pod.
 
-### 5. Loading the data into the new instance
+#### 5. Loading the data into the new instance
 
 With the export file now in the right place, we can finally import the data!
 
@@ -198,7 +219,7 @@ If errors persist, reach out to us on [Slack](/slack).
 
 And that's it! If you see no errors, your data should now have been migrated over.
 
-### 6. Upgrade
+#### 6. Upgrade
 
 As a final step, we should update the cluster with the following command:
 
