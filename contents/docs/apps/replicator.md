@@ -7,6 +7,8 @@ tags:
     - replicator
 ---
 
+import MigratingEvents from "../migrate/snippets/migrating-events.mdx"
+
 ### What does the Replicator app do?
 
 The Replicator app copies events from one PostHog instance to another, at the moment they are ingested. No changes are made to the events by this app if it runs in isolation.
@@ -21,7 +23,9 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 Both versions of PostHog should ideally be running the same version.
 
-### How do I install the PostHog Replicator app?
+### How do I use the Replicator app?
+
+<MigratingEvents/>
 
 1. Log in to your PostHog instance
 2. Click 'Apps' on the left-hand tool bar
