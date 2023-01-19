@@ -8,6 +8,8 @@ featuredImage: ../images/tutorials/banners/tutorial-4.png
 tags: ['configuration', 'settings']
 ---
 
+import MigratingEvents from "../docs/migrate/snippets/migrating-events.mdx"
+
 > **Warning:** Migrating event data to PostHog's EU Cloud is a time-consuming process, likely to take several days or weeks. We strongly recommend users with a large amount of event data begin by setting up and connecting a new EU cloud instance and migrating data later, if needed.
 
 For many companies, teams, and products, keeping customer data within the EU is critical for compliance with regulations such as GDPR. To help them with this, we’ve created an EU Cloud hosting option. It includes all the features of PostHog, with data being hosted in the EU (specifically Germany).
@@ -28,17 +30,7 @@ To start with EU Cloud, you can go to the [cloud signup page](https://app.postho
 
 ## Migrating events using the Replicator Plugin
 
-Once you’ve created your EU Cloud account, you can immediately start migrating data there. To do this, in your original PostHog instance (either Cloud or self-hosted), go to Apps and search for the [Replicator app](/apps/replicator). Install it and then configure it to point to your EU Cloud instance.
-
-![Replicator app](../images/tutorials/migrate-eu-cloud/replicator.png)
-
-In the configuration menu (blue gear), enter the host (`eu.posthog.com`) and project key from your EU Cloud instance settings.
-
-![Replicator config](../images/tutorials/migrate-eu-cloud/replicator-config.png)
-
-After clicking save and activating it (toggle on the left side), the Replicator will start to run. Any events added to your old instance will be replicated in your EU Cloud instance. It can take a little while (15-20 minutes) for the first events to show up.
-
-Once the Replicator is activated, go back to the configuration menu and click the gear next to "Export historical events" under "Jobs." On the calendar, select a start and end date, then click "Run job now." This will begin the process of historical events being import (and might take a while). You can see the progress in logs or by clicking the "App metrics" button (graph) and going to the "Historical exports" tab.
+<MigratingEvents/>
 
 ## Finished complete migration
 

@@ -487,8 +487,8 @@
                 "url": "/tutorials/migrate-eu-cloud"
             },
             {
-                "name": "Migrate when you can't login",
-                "url": "/docs/migrate/migrate-when-you-cant-login"
+                "name": "Migrate from a broken self-hosted instance",
+                "url": "/docs/migrate/migrate-broken-self-hosted"
             },
             {
                 "name": "Export your events",
