@@ -186,7 +186,7 @@ Our Customer Success team uses Unthread to track the resolution of threads in Sl
 
 * You can also see conversations which have been assigned to you in the Unthread app Home page.
 
-* You can close a conversation by using the context menu either in the Unthread app Home page or the More Actions context menu in the Slack thread itself.
+* You can close a conversation by using the context menu either in the Unthread app Home page or the More Actions context menu in the Slack thread itself.  Adding a ✅ reaction to a thread will also mark it as closed (👀 will move it to in progress)
 
 * You can also re-assign the conversation in the same way if you need (for example) a secondary person to take over.
 
