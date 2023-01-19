@@ -1,6 +1,6 @@
 To migrate your events, we'll be using the [PostHog Replicator app](/docs/apps/replicator):
 
-1. Disable the geo-ip plugin of your new PostHog instance
+1. Disable the GeoIP plugin of your new PostHog instance
 2. Log in to your old PostHog instance
 3. Click 'Apps' on the left-hand tool bar
 4. Search for 'Replicator'
@@ -11,4 +11,4 @@ To migrate your events, we'll be using the [PostHog Replicator app](/docs/apps/r
 7. After clicking save and activating it (toggle on the left side), the Replicator will start to run. Any events added to your old instance will be replicated in your new instance. It can take a little while (15-20 minutes) for the first events to show up.
 8. Once the Replicator is activated, go back to the configuration menu and click the gear next to "Export historical events" under "Jobs." On the calendar, select a start and end date, then click "Run job now." This will begin the process of historical events being import (and might take a while). You can see the progress in logs or by clicking the "App metrics" button (graph) and going to the "Historical exports" tab.
 9. To track progress of the export you can click the graph icon next to the Replicator app and then click on the "Historical Exports" tab
-10. Re-enable the geo-ip plugin of your new PostHog instance
+10. Re-enable the GeoIP plugin of your new PostHog instance

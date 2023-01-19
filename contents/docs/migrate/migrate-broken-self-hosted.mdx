@@ -23,13 +23,13 @@ This migration has two parts:
 ## Migrate your events
 
 1. Access your Clickhouse database and export all your events to disk (including uuid, timestamp, distinctid, event, properties, $group0, $group[1-3])
-2. Disable the geo-ip plugin of your new PostHog instance
+2. Disable the GeoIP plugin of your new PostHog instance
 3. Write a script to send them as new requests (likely easiest with our [node](/docs/integrate/server/node) or [python](/docs/integrate/server/python) library). Here's an example of how we do it with the [Replicator app](https://github.com/PostHog/posthog-plugin-replicator/blob/main/index.ts).
-4. Re-enable the Geo-ip plugin
+4. Re-enable the GeoIP plugin
 
 ## Migrate your meta data
 
-To migrate the non-event data (such as user information, feature flags, dashboard configurations, etc) we'll need to create a data dump and load that into the new instance. This non-event data is stored in Postgres.
+To migrate the non-event data (such as user information, feature flags, dashboard configurations, etc), we'll need to create a data dump and load that into the new instance. This non-event data is stored in Postgres.
 
 > This is only officially supported for importing events into a new cloud instance of PostHog or an enterprise self-hosted instance using Kubernetes. If you're using a different deployment method, you can still try this approach but we can't guarantee it will work.
 
