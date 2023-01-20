@@ -140,7 +140,9 @@ export default function ProfilePage({ params }: PageProps) {
                                             <section>
                                                 <h3>Biography</h3>
 
-                                                <Markdown>{profile.biography}</Markdown>
+                                                <Markdown options={{ disableParsingRawHTML: true }}>
+                                                    {profile.biography}
+                                                </Markdown>
                                             </section>
                                         )}
                                     </section>
