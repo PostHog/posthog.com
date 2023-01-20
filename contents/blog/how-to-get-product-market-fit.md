@@ -155,11 +155,31 @@ Cycling through the above is the way to cement your product market fit - it also
 
 This will help you get your first customer and then it'll help you figure out your Ideal Customer Profile.
 
-* Write down needs, behaviors and attributes your customers have in common
-* For example, we looked at...
+Write down needs, haves and attributes you think your Ideal Customer Profile users might have in common. These should be _very_ specific. They could be individual-level and/or company-level things.
 
-TODO INSERT WHAT WE USED HERE and the giant spreadsheet
+Do not just assume one or two things like "engineers in startups with over 100 staff". The specific things we considered at PostHog were:
 
+* Needs
+  * to control user data
+  * to excel at product led growth to remain competitive
+  * have budget and savvy engineers are the decision makers
+  * do _not_ need to put us through a formal procurement process
+* Haves
+  * have achieved product market fit
+  * have an unsuccessful centra lanalytics function
+  * have products aimed at businesses
+  * have deployed our open source product successfully
+  * have used one of our free products
+
+Feel free to include some anti-needs and haves too - things your Ideal Customer Profile _doesn't_ need or have.
+
+List out all the potential users you could sell down the first column in a spreadsheet, and score them against all of these attributes. Color-code the spreadsheet so you can spot patterns easily. As you start to see if people are happy to pay 
+
+Be upfront with customers. If you never set any commercial expectation with them early on, this step may prove tricky.  You probably didn't want to approach the topic as the last thing you wanted was to do anything that could scare them off. If this was the case, then consider you may find it easier to sell newer users who have had clearer expectations set. Use your website to make clear that your service is a paid one (perhaps, for example, once you're out of beta - and be clear around what that means too).
+
+You will also need some pricing. You are likely to change this a bunch of times. Step 1 is to create some kind of internal table for you to use and iterate. Step 2 may be to make this transparent online and step 3 - for companies focusing on self-serve - is to enable people to pay without talking to you. Don't leap straight to self serve though, since you'll get fewer lessons from users - you're not trying to optimize revenue growth early on, you're trying to optimize your ability to learn.
+
+Now it's to get your first reference customer. This means a customer that pays full list price, is using the product as you expect, and would happily recommend you to others.
 
 # Designing your company to do the above as easily as possible
 
@@ -181,7 +201,7 @@ Treat each other as partners. Failure mode is when the CEO bosses the CTO around
 
 Live together. For those that this is the most painful (I'm looking at you, people with families), living together for a set period allows you to focus on getting things off the ground when your ability to get work done is the bottleneck for everything. One of the most impactful things about doing YC was having a socially exceptable excuse to do nothing other than work for 3 months. It was unsustainable 
 
-Define your roles clearly - divide and conquer. Tim wrote code, I did _literally_ everything else - finding users, the website, product design in Figma, and grocery shopping. Try not to interrupt each other - we wrote up discussion topics during the day and then went through them together when we both weren't trying to get something else done.
+Define your roles clearly - divide and conquer. Tim wrote code, I did everything else - finding users, the website, product design in Figma, and grocery shopping. Try not to interrupt each other - we wrote up discussion topics during the day and then went through them together when we both weren't trying to get something else done.
 
 Weekly sprints. This makes you prioritize what to work on. They shouldn't be longer as that's too slow. Any faster means you'll spend too much time talking and not doing. The latter gives you the clearest lessons.
 
@@ -213,7 +233,11 @@ Whatever you do, if you pivot, is have a clear view of which level you're going 
 
 This, especially applied to your website, is probably more important than you think.
 
+When it comes to the website, most people will grab a template to get something thrown together quickly.
 
+To quote Cory, our lead designer, self-proclaimed webmaster, "we didn't start by thinking we could build the slickest website, so we built one that felt different instead".
+
+When it comes to the product, you want to a competent-feeling product, but in most cases, it doesn't need to be best-in-class.
 
 ## Building stuff
 
@@ -226,6 +250,14 @@ That latest sexy javascript framework will _not_ help you hire anyone who cares 
 We have the concept of closing the loop.
 
 Don't put anything between the person writing the code and your users. This will slow you down and will cause confusion.
+
+## Sales
+
+Reduce the risk for your earliest customers. Charge them monthly rather than annually (unless they've a preference for the latter).
+
+There are multiple methods available. You can charge a recurring monthly rate, or you can charge on usage.
+
+TODO add more detail on pricing here.
 
 ## Pivoting
 
