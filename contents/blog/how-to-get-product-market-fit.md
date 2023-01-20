@@ -1,5 +1,5 @@
 ---
-date: 2022-12-06
+date: 2023-01-19
 title: Complete guide - how to get product market fit
 rootPage: /blog
 sidebar: Blog
@@ -11,9 +11,11 @@ featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 ---
 
-Getting to product market fit is like a giant game of snakes and ladders. You can fail in multiple places and need to drop back a step, or even pivot completely. It is not an adventure that takes you in a straight line.
+The best analogy I can think of for getting to product market fit is playing a game of [snakes and ladders](https://en.wikipedia.org/wiki/Snakes_and_ladders). You can fail in multiple places and need to drop back a step, or even pivot completely. It's pretty damn unlikely it'll take you in a straight line.
 
-Although many lessons are universal, here's a guide tailored to b2b software. It's based on what we learned at PostHog going first through 5 or 6 pivots, then growing zero to $MM in revenue, and 20K+ customers.
+The _only_ objective that matters _before_ you have product market fit, is _getting_ product market fit. Hence this guide.
+
+This guide is based on what we learned at PostHog going first through 5 or 6 pivots, then growing zero to $MM in revenue, and 20K+ customers who are focused on achieving this or scaling afterwards. It also incorporates what we've seen from ~40 [YCombinator](https://ycombinator.com/) startups that we've had calls with to consult them on this topic!
 
 # The Product Market Fit Game
 
@@ -21,7 +23,7 @@ Although many lessons are universal, here's a guide tailored to b2b software. It
 
 Start by solving a problem you've had yourself. It needs to be a big problem, that you've actually tried to solve too - if it's something you've never attempted to fix, then it isn't a big enough problem.
 
-Some people spend months or years thinking about this and make no actual progress as a result. You learn more by trying something out than hypothesizing. If you fail, try something else!
+Some people spend months or years thinking about their idea and make no actual progress as a result. You learn more by trying something out than hypothesizing. If you fail, try something else!
 
 The type of idea you have will greatly influence your life.
 
@@ -71,10 +73,15 @@ Work your way from top to bottom:
 * You are talking to the wrong stakeholders
   * Solution: why did you have this problem, but those speaking to you don't?
 * The problem you want to solve isn't there
-  * Solution: pivot
+  * Solution: pivot. Find a new problem to solve.
 
 ## Level 2 - Getting users to use your product
 
+The goal here is to see if people actually care, as quickly as possible. No matter how excited you got after interviewing people about their problems, there's no substitute for seeing what people _do_ instead of what they _say_.
+
+Therefore, you should try to get to this stage as _quickly_ as possible. What worked well for PostHog was having 1 founder (me) focused on user interviews whilst the other founder (Tim) started building from day 1. To give you a sense of timing, we averaged around a week to get something out that people could use.
+
+'The Lean Startup' by Eric Ries is a helpful extra resource here.
 
 
 ## Level 3 - Making sure users are using your product repeatedly
@@ -101,9 +108,17 @@ Daily standups. This makes you accountable to getting your work done. List out w
 
 ## Equipment - hardware and software]
 
+## Motivation
+
+If you aren't excited about what you're working on, pivot. It's as simple as that. You're going to go a lot further if you're working on something that feels like it's _your_ startup versus someone else's.
+
 ## Pivots
 
 Fun fact, we did this 6 ish times at PostHog.
+
+It feels scary to pivot. A lot of the hustle/grind culture around startups would make you think that the very best startups took years and years of work to get off the ground.
+
+
 
 TODO: insert link
 
@@ -121,65 +136,6 @@ TODO: insert link
 
 ## Product
 
+## Pivoting
 
-# Ignore below - crap from another article i nearly wrote
-
-
-
-
-We built roughly a new startup every month for the first 6 months of working together, before we built PostHog.
-
-If you get to the end of this list, you should keep going as you're probably on the way to product market fit.
-
-* the MVP is complete and you've launched it
-* you've spoken to potential users and they've signed up
-* you've spoken to users and have incorporated their feedback
-* your users keep using it
-* you've sold it for money
-* you can do the above 5x more fairly easily
-
-If you got to the end, you shouldn't pivot. Oh, and you're probably en route to a life changing outcome!
-
-## I'm not ready for users yet
-
-You cannot truly validate an idea without trying it. You have to find a way to figure out if anyone will use it faster.
-
-## No one wants to talk to me
-
-Either you aren't explaining the problem you solve clearly, you aren't actually trying to talk to users, or the problem isn't a problem people have any interest in solving with you.
-
-Be very clear with what you're asking for, and the problem you solve.
-
-Approach potential users being transparent. "Hey I'm building a startup to solve problem X, I'm trying to get some early user feedback - I was curious if this is a problem you have?" This rules out people say no to you because you're trying to sell. 
-
-If you're hustling through those you know, and sending thoughtful, clear messages, and no one will take a call, pick a new problem.
-
-## No one will sign up
-
-Either the problem you're solving isn't serious enough, or your solution doesn't look like it'll solve it.
-
-## No one will give me feedback
-
-* If you're getting literally no feedback, it's a sign that no one cares. If they _needed_ your product, they'd be more engaged.
-
-If you want to get more, show users that you listen and act on feedback.
-
-<INSERT IMAGE OF A SLACK DISCUSSION WHERE WE DO THIS>
-
-How you're trying to get feedback matters.
-
-* We get 20x higher response rates through Slack. We've recently started doing this in our product directly too.
-* Be specific and make it easy for users to respond to you. What type of feedback is most useful?
-* We're experimenting with asking inside the app.
-
-## My users churn
-
-First, how often would you expect a user to need to use your product?
-
-## Selling it for money
-
-
-
-## My customers feel different
-
-Now you're tryign to repeat the process. Ideally, you can repeatedly sell the same thing, with the same technique. 
+Be decisive=
