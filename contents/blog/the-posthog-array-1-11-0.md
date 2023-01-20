@@ -70,7 +70,11 @@ Thanks for [the feedback on our feedback ticket](https://github.com/PostHog/post
 
 The inkt was barely dry on this issue before Kacppian picked it up. Look for this feature in the next release!
 
-## Weekly round up
+## Share your feedback
+We'd love to hear anything you have to say about PostHog, good or bad. As a thank you, we'll share some awesome [PostHog merch](https://merch.posthog.com).
+
+Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog.com) with one of our teams to help us make PostHog even better!
+
 
 
 ## PostHog news

@@ -476,7 +476,7 @@
         "children": [
             {
                 "name": "Migrate between PostHog instances",
-                "url": "/docs/migrate/migrate-between-cloud-and-self-hosted"
+                "url": "/docs/migrate/migrate-between-posthog-instances"
             },
             {
                 "name": "Migrate from Amplitude",
@@ -487,8 +487,8 @@
                 "url": "/tutorials/migrate-eu-cloud"
             },
             {
-                "name": "To another self-hosted instance",
-                "url": "/docs/migrate/migrate-to-another-self-hosted-instance"
+                "name": "Migrate from a broken self-hosted instance",
+                "url": "/docs/migrate/migrate-broken-self-hosted"
             },
             {
                 "name": "Export your events",

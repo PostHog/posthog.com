@@ -122,6 +122,12 @@ Other cool stuff from around the web:
 * [Funding for moonshots](https://apolloprojects.com/) - get your own $3M.
 * [Strandbeest](https://www.strandbeest.com/) - wooden, walking sculptures… they're pretty weird.
 
+## Share your feedback
+We'd love to hear anything you have to say about PostHog, good or bad. As a thank you, we'll share some awesome [PostHog merch](https://merch.posthog.com).
+
+Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog.com) with one of our teams to help us make PostHog even better!
+
+
 ## PostHog news
 
 We've had a wonderful two weeks.
