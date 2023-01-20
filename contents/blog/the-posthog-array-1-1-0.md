@@ -138,6 +138,12 @@ We’re very excited to be growing the group and this is the first of what we ho
 * [Delivery Slot Finder](https://github.com/ahertel/Amazon-Fresh-Whole-Foods-delivery-slot-finder) (We keep seeing repos appear that make it easier to stay at home and this was our favorite this week)
 * [EbookFoundation Free programming books](https://github.com/EbookFoundation/free-programming-books) (If you are looking for things to do at home other than contribute to open source Aaron has been looking at this) 
 
+## Share your feedback
+We'd love to hear anything you have to say about PostHog, good or bad. As a thank you, we'll share some awesome [PostHog merch](https://merch.posthog.com).
+
+Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog.com) with one of our teams to help us make PostHog even better!
+
+
 ## PostHog news
 
 * It’s been a big week at PostHog towers, this was another really big release and now our [future updates](https://github.com/PostHog/posthog/projects/5) will be focusing on [our roadmap](/handbook/strategy/roadmap). James has put a lot of work in ensuring PostHog abides by its [values](/handbook/company/values) and remains transparent  – if you have thoughts write an issue or create a pr.

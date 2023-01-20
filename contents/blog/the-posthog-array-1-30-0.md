@@ -99,11 +99,11 @@ The recordings experience just got a lot better. We added a new recordings tab t
 1. This version (`1.30.0`) will be the last version where we support a Postgres-only deployment of PostHog. See [our migration guide](/docs/migrate/migrate-between-posthog-instances) for instructions on moving over to a ClickHouse version. ClickHouse provides faster queries and is optimized for very large volumes of data, and you will also get a new lot of features.
 2. We're now fully removing the legacy Sessions list page. Read more about it, [in this blog post](/blog/sessions-removal).
 
-### Help us improve PostHog
+## Share your feedback
+We'd love to hear anything you have to say about PostHog, good or bad. As a thank you, we'll share some awesome [PostHog merch](https://merch.posthog.com).
 
-We’re working hard to improve the PostHog experience and would love to talk to you! Please join one of our Product, Engineering, or Marketing team members on a quick 30-min call to help us understand how to improve. Schedule directly [on Calendly](https://calendly.com/posthog-feedback).
+Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog.com) with one of our teams to help us make PostHog even better!
 
-As a small thank you for your time, we're giving away awesome [PostHog merch](https://merch.posthog.com)!
 
 ## Community
 
