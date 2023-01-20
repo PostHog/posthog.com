@@ -94,19 +94,37 @@ Therefore, you should try to get to this stage as _quickly_ as possible. What wo
 
 # Designing your company to do the above as easily as possible
 
-## Get a cofounder
+## Deciding to work with a cofounder
+
+If you're looking to build a huge, VC backed company, please just do this. It'll take a long time, there will be thousands of decisions to take. The only true way to fail is to give up. With the right person, you're more likely to persist with two people.
+
+For a SaaS business, there are some principles I'd follow:
+
+* ideally _both_ of you are technical. You need a machine than can rapidly get through the levels above - and your ability to ship software quickly is going to be the biggest blocker in the early days.
+* critical: at least _one_ of you must be happy doing sales _most_ of the time. You don't need experience here, but you must embrace this challenge. There is a lot of sales in startups - recruiting early users, a team, investors and so on.
+* critical: you _both_ must be happy to talk to users.
+
+You are getting committed to something that may outlast the average marriage. Let that sink in. Your goal is never to be right, it's to get good at figuring problems out together.
+
+Treat each other as partners. Failure mode is when the CEO bosses the CTO around and makes all the decisions. Then you aren't cofounders.
 
 ## How to work together in the early days 
 
-Weekly sprints. This makes you prioritize what to work on. They shouldn't be longer as that's too slow. Any faster means you'll spend too much time talking and not doing!
+Live together. For those that this is the most painful (I'm looking at you, people with families), living together for a set period allows you to focus on getting things off the ground when your ability to get work done is the bottleneck for everything. One of the most impactful things about doing YC was having a socially exceptable excuse to do nothing other than work for 3 months. It was unsustainable 
+
+Define your roles clearly - divide and conquer. Tim wrote code, I did _literally_ everything else - finding users, the website, product design in Figma, and grocery shopping. Try not to interrupt each other - we wrote up discussion topics during the day and then went through them together when we both weren't trying to get something else done.
+
+Weekly sprints. This makes you prioritize what to work on. They shouldn't be longer as that's too slow. Any faster means you'll spend too much time talking and not doing. The latter gives you the clearest lessons.
 
 Daily standups. This makes you accountable to getting your work done. List out what you got done yesterday and what you plan to do today.
 
-## Your personal life
+Optimize for not breaking up. I'm an advocate for 50:50 equity and pay if suggested by the "more experienced" person - this means you're really partners, and it reduces an area that could cause resentment. Any difference in experience will become irrelevant after a few years anyway.
 
-## Finance
+## Spending money
 
-## Equipment - hardware and software]
+Spend as little as you can, within reason. Mainly, do _not_ hire anyone until you've got product market fit. This simply gives you longer to get there, and if the two of you can't get it, no one else stands a chance.
+
+I'm an advocate for a decent computer and your own room if you're living together. The former means you don't get pulled out of your flow and the latter means some privacy so you can decompress when you really need to. But hey, whatever works for you. Gym membership will be worth it too.
 
 ## Motivation
 
@@ -128,14 +146,28 @@ TODO: insert link
 
 # Skills you will need
 
-## Go To Market
+## Finding users
+
+
 
 ## Design
 
-## Engineering
 
-## Product
+
+## Building stuff
+
+You are trying to figure out if anyone cares - you are _not_ building something hyperscalable. Use a software stack you've used before, as long as it's reasonably popular. We used django and react in the early days.
+
+That latest sexy javascript framework will _not_ help you hire anyone who cares about what matters.
+
+## Dealing with existing users
+
+We have the concept of closing the loop.
+
+Don't put anything between the person writing the code and your users. This will slow you down and will cause confusion.
 
 ## Pivoting
 
-Be decisive=
+It's normal. Since most startups fail, you're probably doing something wrong if you _don't_ pivot. The media would make you think that building a startup requires years of grinding away on the same idea. At PostHog, we pivoted six times in the first six months.
+
+Be decisive.
