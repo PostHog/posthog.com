@@ -33,6 +33,8 @@ Alternatively, if you work on a problem no one has tackled, then you mus Overall
 
 Be especially wary about building what's trendy. Be wary that you'll feel pressure from some VCs to work on the latest technology, and you'll see other companies in the trendiest spaces raising a bunch of money and getting PR. Do not be fooled - neither of these things mean success. This will put you in the "solution finding a problem" category, which doesn't work. Of course, there are exceptions - the flipside is that a fundamental shift in technology may unlock the ability to solve problems that were previously unsolved. However, it means you are a solution looking for a problem, and that hardly ever works. 
 
+Write down every single customer conversation. Be thorough. It's easy to get recency bias or you may want to come back to a detail that didn't seem important at the time. We built a Google Doc over 100 pages long in the first few weeks of doing this.
+
 ## Level 1 - Validating the problem and getting users to talk to you
 
 Now that you _think_ there is a problem, you should start seeing if others see the same issue. To get meetings, prioritize:
@@ -61,6 +63,8 @@ Try to find as specific a problem as you can. The clearer the problem is, the si
 There's only so much you can validate in this way. You will get the clearest lessons from seeing if people _actually_ use, return to and pay for, your product. Do not lose too much time to validation in advance - this should be a quick, intense period.
 
 At PostHog, we found it helpful to have Tim (my cofounder) coding constantly whilst I spend most of my time getting feedback in the early days. We were willing to throw away all our work. And we did, through five or six pivots. Having one of us constantly building meant we could validate more clearly by seeing if the most excited users would use our products, much more quickly.
+
+If there's an obvious desire from the user to see if you can solve their problem, be ultra-accessible to these early potential users. People's emails are filled with junk, and they feel weirdly formal. Instead, get your customer setup on WhatsApp or in a private Slack channel or Discord as you share your solution with them. This communication will be critical throughout the rest of the levels.
 
 You need to try to get out of this role into level 2 as quickly as possible - validating by seeing if users try to use it, instead of using only the conversations you're having. I'd advocate one cofounder focusses on this, whilst the other is continuously building then throwing things away as needed. To give a real-life example, Tim and I spent about 1 week in level 1 on average.
 
@@ -99,7 +103,7 @@ These are all the reasons why users may not be using your product:
 * Users cannot access your solution.
   * Here's what happened with the very first PostHog users. Double/triple check it's possible to start using your product.
 
-![](../images/02/Screenshot-2020-02-25-at-21.52.15.png)
+![a whatsapp screenshot of our first potential user telling us the login page was broken](../images/02/Screenshot-2020-02-25-at-21.52.15.png)
 
 * Users are worried about using your solution.
   * Does your solution require, for example, a lot of personal or private company data to operate? Seek feedback "hey, I saw you've not used it yet - could I get some really blunt feedback. Did something put you off?" Can you reduce how much data you need access to, or can you make your product, website and approach feel more mature to signify competence?
@@ -110,16 +114,51 @@ These are all the reasons why users may not be using your product:
 
 ## Level 3 - Making sure users are using your product repeatedly
 
-Hooray, so people are showing up. Now you need to see if they're coming back or not.
+Hooray, so people are showing up. Now you need to see if they're coming back or not. Figure out what your expected frequency is for usage, and check if that's roughly how often users are using your product. Users will return if you can repeatedly solve a problem for them.
 
 !> tools like PostHog will show you exactly _how_ users are using your product in this situation.
 
+Avoid relying on things like reminder emails to log back into your product - if it takes this sort of effort to retain users, then the root cause is that the product isn't valuable, not that you're not reminding people to use it.
 
+Once you've got some usage happening, measure which features are being used the most. You should also watch users using your product. This is another place we can help you through session recordings - is it what you expect? If you can see users getting confused as they do this.
 
-## Level 4 - Your first sale
+Start "closing the loop" with users. This is a simple process to improve your product. It goes like this:
 
-## Level 5 - Your first 5 reference customers
+* User uses product
+* You get feedback
+* You build new feature based on the above or you reject their feedback
+* You go back to the user with the outcome of the above (like a link or gif to a new feature, or a clarification question)
+* Repeat the above
 
+Cycling through the above is the way to cement your product market fit - it also brings a ton of benefits:
+
+* it means that you will demonstrate users that you listen to their feedback so that you get more feedback.
+* your product will get better - you should weight user feedback very heavily compared to your instincts around what to build.
+* it will bring you more users through word of mouth. The one thing you can compete on is speed - you can outperform any competitors by providing a ridiculously excellent experience to your early users. So they will tell their friends.
+
+## Failure modes
+
+* Users aren't activating. This means although they _signed up_, they aren't managing to _configure_ / really get started with your product properly. Therefore they _never_ get any value from it.
+  * Activate your users manually. The classic example is the founders of Stripe [used to visit their first users in person](http://paulgraham.com/ds.html#Manual) to integrate their product for them. Do things that don't scale. The bonus of this approach is that you'll get deeper customer interaction, so you'll learn more and you'll get a better relationship which will help you get more feedback.
+  * Or make your activation simpler.
+* You are getting conflicting feedback on what to build.
+  * Go to Level 4, this will help clarify which users are your Ideal Customer Profile, and which aren't. Hopefully this exercise will help you pick a clearer direction. 
+* Your product isn't solving your users' problem, hence there is no point coming back.
+* Your product is painful to use.
+  * Get feedback from users.
+* Your users don't need to login repeatedly.
+  * Perhaps you've completely automatically solved the problem now with no further user work. Proceed to Level 4 and validate this by seeing if they will pay for it.
+* Your users used the product as you'd hope, but they don't experience this problem very often.
+  * Proceed to Level 4. It may be hard to get significant revenue for an infrequent problem, or it may be that you don't experience much demand. If it was extremely hard finding the first users _and_ it's hard to charge much for the product, this problem isn't a big enough one - go back to Level 0.
+
+## Level 4 - Your first 5 reference customers
+
+This will help you get your first customer and then it'll help you figure out your Ideal Customer Profile.
+
+* Write down needs, behaviors and attributes your customers have in common
+* For example, we looked at...
+
+TODO INSERT WHAT WE USED HERE and the giant spreadsheet
 
 
 # Designing your company to do the above as easily as possible
