@@ -62,6 +62,8 @@ There's only so much you can validate in this way. You will get the clearest les
 
 At PostHog, we found it helpful to have Tim (my cofounder) coding constantly whilst I spend most of my time getting feedback in the early days. We were willing to throw away all our work. And we did, through five or six pivots. Having one of us constantly building meant we could validate more clearly by seeing if the most excited users would use our products, much more quickly.
 
+You need to try to get out of this role into level 2 as quickly as possible - validating by seeing if users try to use it, instead of using only the conversations you're having. I'd advocate one cofounder focusses on this, whilst the other is continuously building then throwing things away as needed. To give a real-life example, Tim and I spent about 1 week in level 1 on average.
+
 ### Failure modes
 
 Work your way from top to bottom:
@@ -77,14 +79,42 @@ Work your way from top to bottom:
 
 ## Level 2 - Getting users to use your product
 
-The goal here is to see if people actually care, as quickly as possible. No matter how excited you got after interviewing people about their problems, there's no substitute for seeing what people _do_ instead of what they _say_.
+!> You need to _keep_ talking to users throughout this step for feedback, but now you can validate better since you've some kind of product to show people.
 
-Therefore, you should try to get to this stage as _quickly_ as possible. What worked well for PostHog was having 1 founder (me) focused on user interviews whilst the other founder (Tim) started building from day 1. To give you a sense of timing, we averaged around a week to get something out that people could use.
+The goal here is to see if people actually care, as quickly as possible. No matter how excited you got after interviewing people about their problems, there's no substitute for seeing what people _do_ instead of what they _say_. With one of the ideas Tim and I worked on before we pivoted to PostHog, we had 15 companies who "wanted to try it". We built a product, sent the invite link to them - and only _one_ even clicked the link and started using it. It's a good thing we hadn't spent 6+ months building the "perfect" product before this happened.
 
-'The Lean Startup' by Eric Ries is a helpful extra resource here.
+The most obvious users to start with here are those that you've already met during Level 1. During these calls, you should have been identifying a _problem_ that these users have. Now you have a _solution_ you should email them saying so!
 
+## Failure modes
+
+These are all the reasons why users may not be using your product:
+
+* Users have no idea what your solution is, so they think it could be a waste of time.
+  * Even if your product is free, people's time is not. The more senior your likely users, the stronger this effect. Can you work with someone that _reports_ to the person you were targeting to get things setup? If you struggle to get responsiveness, start questioning if something else on this causing issues - even a senior stakeholder will put in work to solve a major problem.
+  * The way you explain your product matters. If it's complicated, people won't understand it. Describe it like you would when speaking to a friend.
+  * Ask users if the above is why they didn't start using it. Demonstrate you are open to direct feedback in your message or on a call.
+* Users are sceptical your solution will solve the problem, so there's no point trying.
+  * You may lack credibility. This is where design matters. If your website is a mess, your emails and the way you present yourself feel like you don't have it together, then another busines won't want to spend time with you. At best, it'll be a waste of time, at worst, your product may be insecure or could cause them issues. Hopefully, during Level 0, you picked this idea because you've encountered it personally. That might mean you're well-qualified to solve it for others. Clarify your credentials, if relevant and impressive, when you interact with them. You are unlikely to get any feedback along these lines - as users probably won't want to tell you this, so they may go silent or - worse - they may give you misleading feedback that it's something else.
+  * If, from your website, email or interactions with users, they disagree with your approach - then they're likely not to bother trying it. "Software can't solve a people problem", for example. "AI looks cool but won't work in real-life applications because it's not accurate enough".
+* Users cannot access your solution.
+  * Here's what happened with the very first PostHog users. Double/triple check it's possible to start using your product.
+
+![](../images/02/Screenshot-2020-02-25-at-21.52.15.png)
+
+* Users are worried about using your solution.
+  * Does your solution require, for example, a lot of personal or private company data to operate? Seek feedback "hey, I saw you've not used it yet - could I get some really blunt feedback. Did something put you off?" Can you reduce how much data you need access to, or can you make your product, website and approach feel more mature to signify competence?
+* Users don't want to solve this problem. Many problems aren't high priority.
+  * Pivot to a new problem. Back to Level 0.
+* Users don't really have the problem you thought they had from your interviews.
+  * Pivot to a new problem. Back to Level 0.
 
 ## Level 3 - Making sure users are using your product repeatedly
+
+Hooray, so people are showing up. Now you need to see if they're coming back or not.
+
+!> tools like PostHog will show you exactly _how_ users are using your product in this situation.
+
+
 
 ## Level 4 - Your first sale
 
@@ -132,25 +162,17 @@ If you aren't excited about what you're working on, pivot. It's as simple as tha
 
 ## Pivots
 
-Fun fact, we did this 6 ish times at PostHog.
+It feels scary to pivot.
 
-It feels scary to pivot. A lot of the hustle/grind culture around startups would make you think that the very best startups took years and years of work to get off the ground.
+A lot of the hustle/grind culture around startups would make you think that the very best startups took years and years of work to get off the ground. The reality, once we got into YC, was the opposite. It felt like the _majority_ of the best companies there pivoted - most ideas people were working on needed to change.
 
-
-
-TODO: insert link
-
-
-
-
+Whatever you do, if you pivot, is have a clear view of which level you're going back to. Do not try to get an existing solution that you've built to solve a new problem - think through a new problem from scratch.
 
 # Skills you will need
 
-## Finding users
-
-
-
 ## Design
+
+This, especially applied to your website, is probably more important than you think.
 
 
 
