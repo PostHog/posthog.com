@@ -102,11 +102,14 @@ export default function EditProfile({ profile, onSubmit }) {
         if (typeof avatar === 'object') {
             const formData = new FormData()
             formData.append('image', avatar)
-            const uploadedImage = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/image`, {
-                method: 'POST',
-                body: formData,
-                credentials: 'include',
-            }).then((res) => res.json())
+            const uploadedImage = await fetch(
+                `${process.env.GATSBY_SQUEAK_API_HOST}/api/image?organizationId=${process.env.GATSBY_SQUEAK_ORG_ID}`,
+                {
+                    method: 'POST',
+                    body: formData,
+                    credentials: 'include',
+                }
+            ).then((res) => res.json())
             image = uploadedImage
         }
         const profile = await fetch(
