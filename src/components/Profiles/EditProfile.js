@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Form, Field, Formik } from 'formik'
 import Button from 'components/CommunityQuestions/Button'
 import Icons, { Markdown } from 'components/Icons'
@@ -46,10 +46,11 @@ const fields = {
 }
 
 function Avatar({ values, setFieldValue }) {
+    const inputRef = useRef()
     const [imageURL, setImageURL] = useState(values?.avatar)
 
     const handleChange = (e) => {
-        const file = e.currentTarget.files[0]
+        const file = e.target.files[0]
         setFieldValue('avatar', file)
         const reader = new FileReader()
         reader.onloadend = () => {
@@ -59,20 +60,46 @@ function Avatar({ values, setFieldValue }) {
         reader.readAsDataURL(file)
     }
 
+    useEffect(() => {
+        if (!values.avatar) inputRef.current.value = null
+        setImageURL(values.avatar)
+    }, [values.avatar])
+
     return (
-        <div className="relative w-full aspect-square rounded-full flex justify-center items-center border border-gray-accent-light dark:border-gray-accent-dark text-black/50 dark:text-white/50 overflow-hidden">
+        <div className="relative w-full aspect-square rounded-full flex justify-center items-center border border-gray-accent-light dark:border-gray-accent-dark text-black/50 dark:text-white/50 overflow-hidden group">
             {imageURL ? (
                 <img className="w-full h-full absolute inset-0 object-cover" src={imageURL} />
             ) : (
                 <DefaultAvatar className="w-[60px] h-[60px] absolute bottom-0" />
             )}
-            <input
-                onChange={handleChange}
-                accept=".jpg, .png, .gif, .jpeg"
-                className="opacity-0 absolute w-full h-full inset-0 cursor-pointer"
-                name="avatar"
-                type="file"
-            />
+            <div
+                className={`grid ${
+                    imageURL ? 'grid-cols-2' : 'grid-cols-1'
+                } items-center w-full h-full z-10 bg-white/90 dark:bg-black/80 divide divide-x divide-dashed divide-gray-accent-light opacity-0 group-hover:opacity-100 transition-opacity`}
+            >
+                {imageURL && (
+                    <button
+                        onClick={(e) => {
+                            e.preventDefault()
+                            setFieldValue('avatar', null)
+                        }}
+                        className="w-full h-full flex items-center justify-center text-4xl group"
+                    >
+                        &#215;
+                    </button>
+                )}
+                <div className="relative w-full h-full flex items-center justify-center group">
+                    <span className="text-3xl">&#8593;</span>
+                    <input
+                        ref={inputRef}
+                        onChange={handleChange}
+                        accept=".jpg, .png, .gif, .jpeg"
+                        className="opacity-0 absolute w-full h-full top-0 left-0 cursor-pointer"
+                        name="avatar"
+                        type="file"
+                    />
+                </div>
+            </div>
         </div>
     )
 }
@@ -98,8 +125,8 @@ export default function EditProfile({ profile, onSubmit }) {
 
     const handleSubmit = async ({ avatar, ...values }, { setSubmitting, resetForm }) => {
         setSubmitting(true)
-        let image = null
-        if (typeof avatar === 'object') {
+        let image = avatar
+        if (avatar && typeof avatar === 'object') {
             const formData = new FormData()
             formData.append('image', avatar)
             const uploadedImage = await fetch(
@@ -112,11 +139,17 @@ export default function EditProfile({ profile, onSubmit }) {
             ).then((res) => res.json())
             image = uploadedImage
         }
+
+        const body = {
+            ...values,
+            ...((image && typeof image !== 'string') || image === null ? { image } : {}),
+        }
+        console.log(body)
         const profile = await fetch(
             `${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${id}?organizationId=${process.env.GATSBY_SQUEAK_ORG_ID}`,
             {
                 method: 'PATCH',
-                body: JSON.stringify({ ...values, image }),
+                body: JSON.stringify(body),
                 credentials: 'include',
                 headers: {
                     Accept: 'application/json',
