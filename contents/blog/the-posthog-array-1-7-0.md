@@ -103,6 +103,12 @@ We also have a few backlog bugs to tackle - we will work through these.
 * Get reading [free programming books](https://github.com/EbookFoundation/free-programming-books).
 * Also - [don't miss the rocket launch](https://www.kennedyspacecenter.com/launches-and-events/events-calendar/see-a-rocket-launch) later today!
 
+## Share your feedback
+We'd love to hear anything you have to say about PostHog, good or bad. As a thank you, we'll share some awesome [PostHog merch](https://merch.posthog.com).
+
+Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog.com) with one of our teams to help us make PostHog even better!
+
+
 ## PostHog news
 
 We've had a big influx of Y Combinator S20 companies deploying the platform. It has been fun to meet everyone at the start of their journey - especially since new projects should have product analytics installed!
