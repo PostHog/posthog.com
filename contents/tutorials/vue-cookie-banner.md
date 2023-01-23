@@ -10,17 +10,17 @@ topics: ['configuration']
 
 With internet privacy regulations, like GDPR, coming into effect, managing cookies is becoming increasingly important. Cookies are pieces of information apps set in users’ browsers to help them store information and identity. It’s possible to use [PostHog without cookies](/tutorials/cookieless-tracking), but it’s simpler to use them.
 
-To ensure you are compliant with regulations like GDPR, your app must receive consent to use cookies. The cookie consent banner is a way to do this, and this tutorial shows you how to build one in Vue, a popular JavaScript framework.
+To ensure you are compliant with regulations such as GDPR, your app must receive consent to use cookies. One way to do this is with a cookie consent banner, and this tutorial shows you how to build one in Vue, a popular JavaScript framework.
 
 ## Step 1: Setting up our Vue app
 
-First, if you haven’t used Vue before, install the command line interface (CLI). You also need a package manager like npm, which you can get by installing [Node](https://nodejs.org/en/).
+First, if you haven’t used Vue before, install the command line interface (CLI). You also need a package manager such as npm, which you can get by installing [Node](https://nodejs.org/en/).
 
 ```bash
 npm install -g @vue/cli
 ```
 
-After installing the CLI, you can create the Vue project. We are naming ours "tutorial." When the CLI prompts you with options, choose `vue3` and `npm` (or yarn, it doesn’t matter).
+After installing the CLI, you can create the Vue project. We are naming ours "tutorial." When the CLI prompts you with options, choose `vue3` and `npm` (or `yarn`, it doesn’t matter).
 
 ```bash
 vue create tutorial
