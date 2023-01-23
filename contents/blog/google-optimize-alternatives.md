@@ -23,20 +23,15 @@ The statement went on to say Google is working on adding A/B testing functionali
 
 If this sounds like bad news to you, consider one of following six Google Optimize alternatives instead. 
 
-> **How did choose these tools?** There are dozens of A/B testing platforms, so we tried to include a cross-section of tools designed for engineers, marketing teams, and different use cases. We prioritized tools that are self-serve (i.e. no demo or quote needed to open an account) and/or have transparent pricing.
+> **How did we choose these tools?** There are dozens of A/B testing platforms, so we tried to include a cross-section of tools designed for engineers, marketing teams, and different use cases. We prioritized tools that are self-serve (i.e. no demo or quote needed to open an account) and/or have transparent pricing.
 
 ## 1. PostHog
 
-- **Free tier:** Yes
-- **Transparent pricing:** Yes
-- **Unlimited experiments:** Yes
-- **A/B and multivariate tests:** Yes
-- **Session recording:** Yes
-- **Product analytics:** Yes
-- **Feature flags:** Yes
-- **Multi-armed bandit:** No
-- **Visual editor:** No
-- **Landing page builder:** No
+![google optimize alternatives](../images/apps/experimentation-suite.png)
+
+- **Free tier:** <span className="text-green text-lg">✔</span>
+- **Transparent pricing:** <span className="text-green text-lg">✔</span>
+- **Unlimited experiments:** <span className="text-green text-lg">✔</span>
 - **Best for:** Product and engineering teams
 
 [PostHog](posthog.com/) is a comprehensive Google Optimize and [GA4 alternative](/blog/ga4-alternatives) that integrates A/B and multivariate testing with event-based analytics, session recording, and feature flags.
@@ -60,19 +55,14 @@ PostHog offers **unlimited experiments** on PostHog Cloud, which includes 1 mill
 
 ## 2. Unbounce
 
-- **Free tier:** No
-- **Transparent pricing:** Yes
-- **Unlimited experiments:** No
-- **A/B and multivariate tests:** No
-- **Session recording:** No
-- **Product analytics:** No
-- **Feature flags:** No
-- **Multi-armed bandit:** Yes
-- **Visual editor:** Yes
-- **Landing page builder:** Yes
+![google optimize alternatives](../images/blog/google-optimize-alternatives/unbounce.png)
+
+- **Free tier:** <span className="text-red text-lg">✖</span>
+- **Transparent pricing:** <span className="text-green text-lg">✔</span>
+- **Unlimited experiments:** <span className="text-red text-lg">✖</span>
 - **Best for:** Marketing teams
 
-[Unbounce](unbounce.com) is a popular content marketing platform among small and medium-size businesses. Rather than conduct typical A/B and multivariate tests, it allows marketers to quickly create landing pages using its page builder and AI copy writing tools, then use its 'Smart Traffic' system to automatically direct users to the best-performing variant.
+[Unbounce](unbounce.com) is a popular content marketing platform among small and medium-size businesses. It allows marketers to quickly create landing pages using its page builder and AI copy writing tools, then use its 'Smart Traffic' system to automatically direct users to the best-performing variant. It supports traditional A/B tests, too.
 
 This 'Smart Traffic' system is what's known as 'multi-armed bandit' testing, where machine learning is used to dynamically allocate traffic to the best performing variant. This is especially effective in marketing scenarios as Unbounce says it can direct visitors to their ideal variant after just 50 visits. Conversion rates should improve the longer a test is run as the algorithm learns.
 
@@ -90,16 +80,11 @@ Unbounce offers a pleasing range of transparently-priced plans. Its entry-level 
 
 ## 3. GrowthBook
 
-- **Free tier:** Yes
-- **Transparent pricing:** Yes
-- **Unlimited experiments:** Yes
-- **A/B and multivariate tests:** Yes
-- **Session recording:** No
-- **Product analytics:** No
-- **Feature flags:** Yes
-- **Multi-armed bandit:** No
-- **Visual editor:** Yes
-- **Landing page builder:** No
+![google optimize alternatives](../images/blog/open-source-testing-tools/growthbook.png)
+
+- **Free tier:** <span className="text-green text-lg">✔</span>
+- **Transparent pricing:** <span className="text-green text-lg">✔</span>
+- **Unlimited experiments:** <span className="text-green text-lg">✔</span>
 - **Best for:** Product and engineering teams
 
 [GrowthBook](www.growthbook.io/) is a popular open-source feature flagging and experimentation platform. It supports A/B and multivariate tests, and integrates with a range of popular analytics tools, such as Google Analytics (UA), Mixpanel, Matomo, and most popular data warehouses.
@@ -118,23 +103,18 @@ GrowthBook offers unlimited traffic (subject to a fair use policy), feature flag
 
 ## 4. Instapage
 
-- **Free tier:** No
+![google optimize alternatives](../images/blog/google-optimize-alternatives/instapage.png)
+
+- **Free tier:** <span className="text-red text-lg">✖</span>
 - **Transparent pricing:** Partial
-- **Unlimited experiments:** Yes
-- **A/B and multivariate tests:** Yes
-- **Session recording:** No
-- **Product analytics:** No
-- **Feature flags:** No
-- **Multi-armed bandit:** No
-- **Visual editor:** Yes
-- **Landing page builder:** Yes
+- **Unlimited experiments:** <span className="text-green text-lg">✔</span>
 - **Best for:** Marketing teams
 
 [Instapage](https://instapage.com/) is a marketing optimization platform built around a landing page builder and experimentation suite. It doesn't support multi-armed bandit testing like Unbounce, but it does include a range of useful features for marketing teams, such as personalized landing pages based on ad creative, AMP page support, loading speed optimizations, and dynamic text replacement for PPC campaigns.
 
 ### How much does Instapage cost?
 
-Instapage's self-serve plan costs $299 per month ($199 if billed annually) and includes most of its core features with no usage limits. Its upgrade plans are 'price on application' and add numerous value-add features, such as heatmaps, custom font support, and consulting services.
+Instapage's self-serve plan costs $299 per month ($199 if billed annually) and includes most of its core features with no usage limits. It doesn't publish pricing on its upgrade plans, which add numerous value-add features, such as heatmaps, custom font support, and consulting services.
 
 ### Companies that use Instapage
 
@@ -144,16 +124,11 @@ Instapage's self-serve plan costs $299 per month ($199 if billed annually) and i
 
 ## 5. VWO Testing
 
-- **Free tier:** Yes
-- **Transparent pricing:** No
-- **Unlimited experiments:** Yes
-- **A/B and multivariate tests:** Yes
-- **Session recording:** No
-- **Product analytics:** No
-- **Feature flags:** No
-- **Multi-armed bandit:** No
-- **Visual editor:** Yes
-- **Landing page builder:** No
+![google optimize alternatives](../images/blog/google-optimize-alternatives/vwo-testing.png)
+
+- **Free tier:** <span className="text-green text-lg">✔</span>
+- **Transparent pricing:** <span className="text-red text-lg">✖</span>
+- **Unlimited experiments:** <span className="text-green text-lg">✔</span>
 - **Best for:** Marketing teams
 
 [VWO](vwo.com) is a testing platform that primarily targets large enterprises. Its experimentation platform includes support for A/B and multivariate tests, and a visual editor, though some features are locked behind its numerous product tiers. Geo-targeting, for example, is only available on the 'Pro' tier of VWO Testing, while feature flags are only available as part of its VWO FullStack product.
@@ -170,16 +145,11 @@ Outside of its new Starter plan, VWO is largely a 'price on application' product
 
 ## 6. LaunchDarkly
 
-- **Free tier:** Yes
+![google optimize alternatives](../images/blog/google-optimize-alternatives/launch-darkly-experiment.png)
+
+- **Free tier:** <span className="text-green text-lg">✔</span>
 - **Transparent pricing:** Partial
-- **Unlimited experiments:** No
-- **A/B and multivariate tests:** Yes
-- **Session recording:** No
-- **Product analytics:** No
-- **Feature flags:** Yes
-- **Multi-armed bandit:** No
-- **Visual editor:** No
-- **Landing page builder:** No
+- **Unlimited experiments:** <span className="text-red text-lg">✖</span>
 - **Best for:** Engineering and product teams
 
 [LaunchDarkly](launchdarkly.com) is a leading platform for feature management (feature flags) that also enables experimentation. Like all the products in this list, it supports A/B and multivariate testing. In contrast to Unbounce, however, LaunchDarkly is designed for product and engineering teams, so it lacks marketing-friendly features like a visual editor. 
