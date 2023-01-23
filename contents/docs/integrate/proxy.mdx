@@ -8,7 +8,7 @@ A reverse proxy allows you to send events to PostHog Cloud using your own domain
 
 This means that events are sent from your own domain and are less likely to be intercepted by tracking blockers. You be able to capture more usage data without having to self-host PostHog.
 
-Setting up a reverse proxy means setting up a service to redirect requests from a subdomain you choose (like `e.yourdomain.com`) to PostHog. It is best practice to use a subdomain that does not include `posthog`, `analytics`, `tracking` or other similar words. 
+Setting up a reverse proxy means setting up a service to redirect requests from a subdomain you choose (like `e.yourdomain.com`) to PostHog. It is best practice to use a subdomain that does not include `posthog`, `analytics`, `tracking`, or other similar words. 
 
 You then use this subdomain as your instance host in the initialization of PostHog instead of `app.posthog.com` or `eu.posthog.com`.
 
@@ -33,7 +33,7 @@ Make sure your DNS records point to your machine and that ports 80 and 443 are o
 
 CloudFront can be used as a reverse proxy. Although [there are multiple other options if you're using AWS](https://aws.amazon.com/blogs/architecture/serving-content-using-fully-managed-reverse-proxy-architecture/)
 
-CloudFront doesn't forward headers, cookies, or query parameters received from the origin which PostHog uses by default. To set these up, you need an "origin request policy" as in the instructions below.
+CloudFront doesn't forward headers, cookies, or query parameters received from the origin that PostHog uses by default. To set these up, you need an "origin request policy" as in the instructions below.
 
 #### Create a distribution
 
@@ -49,7 +49,7 @@ import diagram from '../../images/docs/cloud/cloudfront-proxy/cache-policy.png'
 <img src={diagram} alt="a screenshot of the cloudfront cache policy settings" />
 
 5. Choose the appropriate price class for your use
-6. Once the distribution is deployed set its URL as the api host in your JS snippet or SDK config
+6. Once the distribution is deployed set its URL as the API host in your JS snippet or SDK config
 
 You can view [AWS CDK code for creating a reverse proxy here](https://gist.github.com/pauldambra/9af02d9ea42ffafcfc7c01dc38039958) (originally shared by CJ Enright in our Slack community, 100 🦔 points for them 💖!).
 
