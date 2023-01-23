@@ -29,10 +29,10 @@ It's important that every time we create a new feature or shift our pricing plan
 
 Sometimes these principles still leave room for questioning - what, if any, should be available in the free tier? What about enterprise customers? For these types of questions, we've defined a runbook for deciding which plans and at what limits features should generally be assigned to.
 
-- For each feature that is released, we should always ask ourselves how it should be priced. A default behavior is good, but it shouldn't be used as a replacement for critically thinking about where something fits into our pricing scheme,
+- For each feature that is released, we should always ask ourselves how it should be priced. A default behavior is good, but it shouldn't be used as a replacement for critically thinking about where something fits into our pricing scheme.
 - Default assumption for new features is that full usage is only available on the paid plans.
 - Features that need to be experienced in order to demonstrate value should be available on the free plan but with a reasonable limit
-- Features that increase our stickiness should be available on the free plan but with a reasonable limit
+- Features that increase our stickiness should be available on the free plan but with a reasonable limit.
   - A good question to ask yourself here is, "If I were to switch away from PostHog, would I feel like I am losing anything by switching?"
   - For example, if someone were to consider moving from PostHog to some other provider, Cohorts would need to be manually recreated in the other provider, which would be tedious. However, something like Web Performance just happens and doesn't require any user involvement, so isn't necessarily a stickyness-generating thing.
 - Features that have the potential to vastly grow our word-of-mouth should be free.
