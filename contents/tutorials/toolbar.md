@@ -99,9 +99,11 @@ If you have a lot of events, you may need to load more data to see everything yo
 
 ### Matching links within the page
 
-The toolbar does not match links in the page by their `href` attribute. This means if you have a button on your page with a unique link in it, the toolbar will count every click on that button as a click on the same element. This is useful for links that include IDs or other unique values, but can be confusing if you have multiple links with the same URL. For example, if you have a list of links that changes based on the logged in user. The toolbar shows all the clicks on the element's by position in the list, rather than by the link they point to.
+The toolbar does not match links in the page by their `href` attribute. This means if you have a button on your page with a unique link in it, the toolbar will count every click on that button as a click on the same element. This is useful for links that include IDs or other unique values, but can be confusing if you want to distinguish between links that vary for different users. 
 
-You can switch this behavior by clicking on the number next to the (🔥) icon on the toolbar, and then clicking on the "Match links by their target URL" button.
+For example, if you have a list of links that changes based on the logged in user. The toolbar shows all the clicks on the element's by position in the list, rather than by the link they point to.
+
+You can switch this behavior by clicking on the number next to the (🔥) icon on the toolbar, and then clicking on the "Match links by their target URL" button. Then the toolbar will match links by their `href` attribute. So we'll only show clicks for the links currently in the list.
 
 ### Using wildcards to search "slug" URLs
 
