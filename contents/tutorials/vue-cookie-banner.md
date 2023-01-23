@@ -93,7 +93,7 @@ cd components
 touch CookieBanner.vue
 ```
 
-For our cookie banner, create a basic component with some details about cookies, buttons to accept and decline, and some basic styling.
+For our cookie banner, create a basic component with some details about cookies, buttons to accept and decline, and some basic styling. You can customize it more if you like (our [posthog.com cookie banner](https://github.com/PostHog/posthog.com/blob/master/src/components/CookieBanner/index.tsx) can provide some inspiration).
 
 ```js
 // components/CookieBanner.vue
