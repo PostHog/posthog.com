@@ -1,5 +1,5 @@
 ---
-title: "Product engineer vs product manager: what's the difference"
+title: "Product engineer vs product manager: What's the difference"
 date: 2023-01-24
 author: ["ian-vanagas"]
 showTitle: true
@@ -13,9 +13,9 @@ tags:
     - Explainers
 ---
 
-Are [product engineers](/blog/what-is-a-product-engineer) a better choice for your startup than product managers are, or do you need both? To answer that, we're comparing the approaches they take to product development – we recently compared [product engineers and software engineers](/blog/product-engineer-vs-software-engineer) too, if you're interested.
+Are [product engineers](/blog/what-is-a-product-engineer) a better choice for your startup than product managers are, or do you need both? To answer that, this post compares the approaches they take to product development, like we recently did with [product engineers and software engineers](/blog/product-engineer-vs-software-engineer), if you're interested.
 
-The ELI5 here is product engineers are a hybrid of software engineer and product manager. They have the same goals as product managers, but they ship code and approach problems in a more direct, iterative way. To help you understand both roles better, we'll:
+The ELI5 here is product engineers are a hybrid of software engineer and product manager. They have the same goals as product managers, but they ship code and approach problems in a more direct, iterative way, like software engineers. To help you understand both roles, we:
 - Compare how both work to build a product
 - Explain how the rise of product engineers impacts product managers
 - Explore how they can work together
@@ -32,11 +32,11 @@ Product managers go into further depth here, often writing up reports and recomm
 
 ### Stage 2: Building the product
 
-This is where product engineers and managers begin to diverge. Product engineers dive quickly into building. They get their hands dirty writing code. They prototype and experiment. They ship previews, MVPs, and betas of features to get hands-on, direct feedback on the product.
+This is where product engineers and managers begin to diverge. Product engineers dive quickly into building. They get their hands dirty writing code. They prototype and experiment. They ship previews, MVPs, and betas of features to get hands-on, direct feedback.
 
 Product managers take more time before handing off work to engineers. They do further research into the business case for a product and understand where it aligns in the competitive landscape. They also spend time gaining depth into what the needs of users are and understanding their business and technology stack. 
 
-They use all this information to craft plans, requirements, and specs that solve the user needs they identified. They must translate this into something the whole team can understand. Product engineers face a similar task but have a smaller group to communicate with. Both roles require communication skills, but product managers place a higher emphasis on them.
+They use all this information to craft plans, requirements, and specs that solve the identified user needs. Product managers must translate this into something the whole team can understand. Product engineers face a similar task but have a smaller group to communicate with. Both roles require communication skills, but product managers place a higher emphasis on them.
 
 Once product managers complete their analysis and plans, they manage a team of "stakeholders" to get a product shipped. This can include design, marketing, ops, engineering, and more. They work with all of these teams to get the feature developed and launched. This ensures alignment across teams and lowers the risk of potential issues.
 
@@ -55,11 +55,12 @@ Both roles are responsible for their product after launch. This means listening 
 Searches for product engineers have grown 80% in the last 12 month, so what does this mean for product managers?
 
 ![product-engineer-trends](../images/blog/product-engineer-trend.png)
+
 Product engineers are taking on many of the responsibilities product managers once had, especially at early-stage companies. By making product decisions and shipping code, product engineers can better help companies find product-market fit. This often requires rapid experimentation rather than research and planning.
 
 But this doesn't mean product managers are going extinct – companies still value the depth product managers offer. Their value is in managing a complex information, business, and stakeholder environment. This information can become too much for engineers to manage in large organizations. The stakeholder environment is also taxing for engineers to deal with, disconnecting them from what they are good at: writing and shipping code.
 
-With the rise of product engineers, product managers will specialize more in the later stages when companies enter a more complex environment. They are better able to see the "bigger picture," deal with bureaucracy, and dive deep into analysis details. These are all critical for the success of large companies, but don’t matter as much in the early stages.
+With the rise of product engineers, product managers will specialize more in the later stages when companies enter a more complex environment. They are better able to see the "bigger picture," deal with bureaucracy, and dive deep into analysis details. These are all critical for the success of large companies, but don’t matter **as much** in the early stages.
 
 ## How can product engineers and managers work together?
 
