@@ -267,7 +267,10 @@ Body:
 ```shell
 curl -v -L --header "Content-Type: application/json" -d '  {
     "api_key": "<ph_project_api_key>",
-    "distinct_id": "1234"
+    "distinct_id": "1234",
+    "groups" : { 
+        "groupingName": "groupId"
+    }
 }' https://app.posthog.com/decide?v=2
 ```
 
