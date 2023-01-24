@@ -28,7 +28,9 @@ If you are struggling to hire for a role, first ask yourself 'am I spending 20% 
 
 ## Myth #2: Hiring gets easier when other companies are making cuts
 
-Not really - the best people are always in demand and will have lined up 5 interviews within 24hrs of posting on LinkedIn. Often the 'cuts' that are being made are in non-core product areas, or in more manager-y type roles that are unlikely to be relevant to your early stage startup. 
+Not really.
+
+The best people are always in demand and will have lined up five interviews within 24 hours of posting on LinkedIn. Often the 'cuts' that are being made are in non-core product areas, or in more manager-y type roles that are unlikely to be relevant to your early-stage startup. 
 
 Hiring _should_ always be difficult because your bar should keep going up with each hire. Imagine if developing amazing new product features was easy. It would probably mean that you were building uninspiring stuff, or features that are easily replicable. 
 
