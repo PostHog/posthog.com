@@ -39,7 +39,7 @@ Hiring _should_ always be difficult because your bar should keep going up with e
 
 The most popular tools for startups are similar enough that they won't make a difference between recruiting going well and badly for you. A recruiter blaming your ATS is like an engineer blaming your choice of IDE – it only matters to personal productivity in the very short term. 
 
-When you are hiring a recruiter, be very wary if the most important thing to them is to migrate to a new ATS. 
+Don't hire a recruiter whose first priority is migrating to a new ATS. 
 
 ## Myth #4: Looking at pipeline data is only something 'bigger' companies should do
 
