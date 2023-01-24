@@ -12,7 +12,9 @@ featuredImageType: full
 category: Startups
 ---
 
-These are some of the myths and truths I've learned about hiring for startups over the past decade. I hope they will help you turn recruitment into a more tolerable and less frustrating experience. 
+These are some of the myths and truths I've learned about hiring for startups over the past decade. Over that time, I've managed and hired for teams across engineering, ops, people, marketing, and design, interviewing some 800 people in the process. Some of these teams were highly successful. Others weren't. 
+
+I hope these tips will help you turn recruitment into a more tolerable and less frustrating experience. 
 
 ## Myth #1: Recruiters are responsible for hiring
 People who get this wrong fail 100% of the time.
@@ -78,3 +80,9 @@ Number of applications, number of initial phone screens, number of candidates so
 I once managed to get 900 applications in 48 hours for an ops role at a company with pretty low brand recognition that was only advertising on LinkedIn with minimal budget. That doesn't make me a good recruiter. 
 
 The number of people at late/final stages of your process, and their conversion rates to offers made are the only numbers that really matter.
+
+## Further reading
+
+- [What we learned about hiring from our first five employees](https://posthog.com/blog/posthog-first-five)
+- [The ops toolkit for early-stage startups](https://posthog.com/blog/startup-ops-toolkit)
+- [Startups, stop treating engineers like a different species](https://posthog.com/blog/stop-treating-engineers-differently)
