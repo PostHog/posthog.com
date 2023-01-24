@@ -28,16 +28,18 @@ I live just outside of London. I'm passionate about punk music, videogame preser
 - I value compassion and inclusivity above everything else. I try to put people first. 
 - I struggle with anxiety and always feel like I'm failing. Direct feedback helps me _lots_. 
 
-## Areas of focus - Q4 2022
+## Areas of focus - H1 2023
 
-Last quarter I focused on collaborating with the growth and product teams to directly contribute to product improvements (such as tutorials and activation flows), growing external communities and partnerships, and becoming more autonomous/skilled technically so that I could contribute directly to the product. These were all successful. 
+In Q4 2022 I focused on improving announcements, growing word of mouth and collaborating with Growth to improve onboarding. Projects in these areas included [the launch of PostHog EU](/eu), scaling up our investment in [our G2 profile](https://www.g2.com/products/posthog/reviews), creating new case studies and migrating to Customer.io to create new first onboarding flow. Results and feedback across these project has been positive. 
 
-This quarter I'm focusing on...
+There were also projects which I failed to focus on, or chose to deprioritize. These included launching a PostHog ambassador program and doing deeper work with [our partners](/marketplace). I also completely failed to read any of the Product Design books I bought.
 
-- [ ] **Onboarding:** Previously I've provided content and research to inform v1 of our onboarding flows. This quarter, I'm going to take greater ownership of onboarding by delivering improvements to our emails, as well as continuing to work with Growth on improving in-product activation. 
-- [ ] **Announcements:** We have some specific things we want to announce, such as EU Cloud. We also have regular announcements, such as Array. In addition to taking ownership of the former, I'll also find ways to directly improve the latter. A static page for Array? In-app announcements for new features? Better emails? Whatever is needed. 
-- [ ] **Word of mouth growth:** We're starting to get a more detailed view of where our WOM growth comes from. I'll spend time scaling this growth with the marketing team. This could involve a referral program, influencers or levelling up and/our case studies. Maybe all of the above.
-- [ ] **Product design:** This is a personal goal. I'm switching from just-in-case to just-in-time technical learning and focusing on improving my knowledge of product design instead. The goal is to become more effective when providing feedback and when planning in-product proposals. Good thing [we have a generous book budget](/handbook/people/training#books). 
+In the first half of 2023 I'm focusing on the same basic areas, but with new projects to support them.
+
+- [ ] **Onboarding:** I'll continue to leverage Customer.io by trialling new campaigns which upsell or accelerate our users to additional products, such as Session Recording. I'll continue to improve and optimize the onboarding process and make word-of-mouth amplification part of that process too. I'll invest time in creating dashboard templates, when possible. 
+- [ ] **Announcements:** I'll overhaul our approach to release announcements, create a process for handling service disruption notifications better and continue to support [the Roadmap project](/roadmap).
+- [ ] **Word of mouth growth:** I'll continue to improve our G2 ranking and completely automate the process for reviews, with the aim of moving us into the Top Ten competitors. I'll collect and hand over feedback we get to the relevant teams. I'll test some small-scale event sponsorships too.
+- [ ] **Personal Goal:** I'm going to read those product design books.  
 
 This list is not exhaustive and is meant to guide the sort of work I do at a high level. If something more important comes up where I'll have more impact? Pivoting is fine. 
 

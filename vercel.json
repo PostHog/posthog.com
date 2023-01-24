@@ -368,7 +368,7 @@
         { "source": "/tutorials/b2b", "destination": "/blog/b2b-saas-product-metrics" },
         {
             "source": "/docs/self-host/migrate-to-cloud",
-            "destination": "/docs/self-host/migrate/migrate-between-cloud-and-self-hosted"
+            "destination": "/docs/migrate/migrate-between-posthog-instances"
         },
         { "source": "/tutorials/categories/plugins", "destination": "/tutorials/categories/apps" },
         { "source": "/startups", "destination": "/pricing" },
@@ -521,7 +521,7 @@
         { "source": "/docs/cloud/proxy", "destination": "/docs/integrate/proxy" },
         {
             "source": "/docs/self-host/migrate/migrate-between-cloud-and-self-hosted",
-            "destination": "/docs/migrate/migrate-between-cloud-and-self-hosted"
+            "destination": "/docs/migrate/migrate-between-posthog-instances"
         },
         {
             "source": "/docs/self-host/migrate/migrate-from-amplitude",
@@ -529,11 +529,19 @@
         },
         {
             "source": "/docs/self-host/migrate-from-postgres-to-clickhouse",
-            "destination": "/docs/migrate/migrate-to-another-self-hosted-instance"
+            "destination": "/docs/migrate/migrate-between-posthog-instances"
         },
         {
             "source": "/docs/self-host/migrate/migrate-to-another-self-hosted-instance",
-            "destination": "/docs/migrate/migrate-to-another-self-hosted-instance"
+            "destination": "/docs/migrate/migrate-between-posthog-instances"
+        },
+        {
+            "source": "/docs/migrate/migrate-to-another-self-hosted-instance",
+            "destination": "/docs/migrate/migrate-between-posthog-instances"
+        },
+        {
+            "source": "/docs/migrate/migrate-between-cloud-and-self-hosted",
+            "destination": "/docs/migrate/migrate-between-posthog-instances"
         },
         { "source": "/handbook/product/pm-rampup", "destination": "/handbook/people/ramp-up/product-manager" },
         {
@@ -634,6 +642,42 @@
         {
             "source": "/tutorials/feature-flags",
             "destination": "/manual/feature-flags"
+        },
+        {
+            "source": "/blog/categories/comparisons",
+            "destination": "/blog/tags/comparisons"
+        },
+        {
+            "source": "/blog/categories/guides",
+            "destination": "/blog/tags/guides"
+        },
+        {
+            "source": "/blog/categories/product-analytics",
+            "destination": "/blog/tags/product-analytics"
+        },
+        {
+            "source": "/blog/categories/product-analytics",
+            "destination": "/blog/tags/product-analytics"
+        },
+        {
+            "source": "/blog/categories/product-updates",
+            "destination": "/blog/tags/product-updates"
+        },
+        {
+            "source": "/blog/categories/release-notes",
+            "destination": "/blog/tags/release-notes"
+        },
+        {
+            "source": "/blog/categories/privacy",
+            "destination": "/blog/tags/privacy"
+        },
+        {
+            "source": "/blog/categories/open-source",
+            "destination": "/blog/tags/open-source"
+        },
+        {
+            "source": "/blog/tags/startups",
+            "destination": "/blog/categories/startups"
         }
     ],
     "rewrites": [
@@ -643,6 +687,7 @@
         },
         { "source": "/next-steps/(.*)", "destination": "/next-steps" },
         { "source": "/question/(.*)", "destination": "/question" },
-        { "source": "/careers/(.*)", "destination": "/careers" }
+        { "source": "/careers/(.*)", "destination": "/careers" },
+        { "source": "/api", "destination": "/docs/api" }
     ]
 }

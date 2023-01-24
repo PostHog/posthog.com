@@ -5,6 +5,72 @@ title: Architecture
 The following pages in this section cover [Data model](/docs/how-posthog-works/data-model),  [Ingestion pipeline](/docs/how-posthog-works/ingestion-pipeline), [ClickHouse](/docs/how-posthog-works/clickhouse) and [Querying data](/docs/how-posthog-works/queries). 
 This document gives an overview of the general architecture. How our cloud or a deployed PostHog [Helm chart](https://github.com/PostHog/charts-clickhouse/) works on Kubernetes.
 
+## Zooming right out
+
+There are only a few systems to consider. A Website and API is presented for users. An API for Client Apps. A plugin service for processing events on ingestion. And a worker service for processing events in response to triggers (e.g. timers)
+
+```mermaid
+graph LR
+    u[User]
+    sdk[Client Apps/SDKs]
+    ex[Export Sink]
+    dj[Web/API]
+    p[plugin/worker service]
+    c[Celery]
+    ds[(Data stores)]
+    u-->dj
+    sdk --> dj
+    p --> ex
+    dj --> p
+    p <--> ds
+    dj-->c
+    c <--> ds
+    dj <--> ds
+```
+
+## Zooming closer
+
+Starts to reveal the flow between parts of the system
+
+```mermaid
+graph LR
+    u[User]
+    sdk[Client Apps/SDKs]
+    ex[Export Sink]
+    ds[(Data stores)]
+
+    subgraph Web/API
+        w[Web]
+        c[Capture API]
+        d[Decide API]
+        cr[cron]
+        ce[Celery]
+    end
+
+    subgraph "plugin/worker service"
+        i[Ingestion]
+        a[Async]
+        t[timer]
+    end
+
+    u-->|views insights and more|w
+    sdk-->|send events|c
+    sdk-->|read|d
+    w-->ds
+    c-->|write events|i
+    i-->|onEvent|a
+    i-->|save events|ds
+    t-->|onTimer|a
+    a-->|export events|ex
+    d-->|e.g. read flags|ds
+    ds-->|read events|a
+    w-->|start task|ce
+    cr-->|on schedule|ce
+    ce-->ds
+```
+
+## Zoomed right in
+
 ```mermaid
 flowchart TD
     classDef sgraph fill-opacity:0,stroke-width:3px,stroke-dasharray:5,stroke:#000

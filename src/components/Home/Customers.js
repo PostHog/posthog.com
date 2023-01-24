@@ -9,7 +9,7 @@ import landmark from './images/landmark.svg'
 import Logomark from './images/Logomark'
 import outbrain from './images/outbrain.svg'
 import phantom from './images/phantom.svg'
-import pry from './images/pry.svg'
+import questdb from './images/questdb.svg'
 import staples from './images/staples.svg'
 import vendasta from './images/vendasta.svg'
 import yCombinator from './images/y-combinator.svg'
@@ -54,7 +54,7 @@ export default function Customers() {
 
                     <Customer className="max-h-[50px]" image={joybird} />
                     <Customer className="max-h-[35px]" image={vendasta} />
-                    <Customer className="max-h-[45px]" image={pry} />
+                    <Customer className="max-h-[45px]" image={questdb} />
                     <Customer className="max-h-[50px]" image={landmark} />
                 </ul>
             </div>

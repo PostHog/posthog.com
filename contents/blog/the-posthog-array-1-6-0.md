@@ -80,6 +80,12 @@ Last week was a call for discussion, now there's some really good commentary on 
 * [Far future timeline](https://en.wikipedia.org/wiki/Timeline_of_the_far_future). This gave me a mild existential crisis until I got to what happens after universe heat death.
 * [Developer search engine](https://quickref.dev/). The lack of commercial focus here is pretty neat although I still wish someone would build a manually curated blog search engine as an open source project.
 
+## Share your feedback
+We'd love to hear anything you have to say about PostHog, good or bad. As a thank you, we'll share some awesome [PostHog merch](https://merch.posthog.com).
+
+Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog.com) with one of our teams to help us make PostHog even better!
+
+
 ## PostHog news
 
 Overall, we're feeling pretty pleased with ourselves this week - the level of polish in the product has gone up quite dramatically. We've got a design candidate lined up, to be disclosed shortly, to help achieve the same with our website and documentation too.
