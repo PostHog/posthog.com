@@ -55,7 +55,7 @@ Currently, the toolbar lets you:
 1. Highlight elements associated to a custom event / action
 1. View and control active feature flags
 
-Our team uses the toolbar daily, mostly to get a quick overview of clicks (and therefore decide what pages need attention) and to create actions. This helps us to do things like prioritize which parts of our website or product to redesign, as any PostHog user can see the potential impact of their work. 
+Our team uses the toolbar daily, mostly to get a quick overview of clicks (and therefore decide which pages need attention) and to create actions. This helps us to do things such as prioritize which parts of our website or product to redesign, as any PostHog user can see the potential impact of their work. 
 
 Overall, the toolbar offers valuable context on how users are navigating your website or application, helping you design the menus, determine how to display information, and structure your product in a way that steers users towards the actions you would like them to perform.
 
@@ -81,7 +81,7 @@ With the heatmap on, you should now see that clickable elements on your website 
 
 Here's another example from our website with the heatmap enabled:
 
-![An exampe from the posthog website showing the heatmap highlighting a number of page elements. Some showing a count of clicks and one also showing a rage-click](../images/tutorials/toolbar/posthog-heatmap-example.png)
+![An example from the PostHog website showing the heatmap highlighting a number of page elements. Some showing a count of clicks and one also showing a rage-click](../images/tutorials/toolbar/posthog-heatmap-example.png)
 
 What the toolbar is doing here is displaying the number of clicks on each of those elements over the last day. The count at the top right of the box shows the number of clicks on that element, and the count at the top left shows the number of rage-clicks on that element.
 
