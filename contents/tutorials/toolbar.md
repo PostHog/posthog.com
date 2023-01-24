@@ -105,6 +105,20 @@ For example, if you have a list of links that changes based on the logged in use
 
 You can switch this behavior by clicking on the number next to the (🔥) icon on the toolbar, and then clicking on the "Match links by their target URL" button. Then the toolbar will match links by their `href` attribute. So we'll only show clicks for the links currently in the list.
 
+As an example, on the PostHog app homepage there is a list of recently viewed insights. The items in the list change based on the user and that user's interactions on the app.
+
+![the list of recent insights showing several clicks](../images/tutorials/toolbar/not-matching-by-link.png)
+
+When we disable the "Match links by their target URL" option, we can see that the toolbar is matching the links by their position in the list, and so see multiple clicks on the links in the list. Links in these positions have been interacted with by multiple users.
+
+So, you can answer questions like "Do people click on the first item in the list more than other items?"
+
+![the list of recent insights showing no clicks](../images/tutorials/toolbar/matching-by-link.png)
+
+When we enable the "Match links by their target URL" option, we can see that the toolbar is now matching the links by their `href` attribute, and so see no clicks on the links in the list. These exact links have not been interacted with by any user.
+
+So, you can answer questions like "Do people click on this link more when it is in the list?"
+
 ### Using wildcards to search "slug" URLs
 
 If you have a page where the URL has an ID or repeating part (e.g. `/my-shop/product/a-product-id`), you can use this menu to add wildcards into the URL that the toolbar searches. Wildcards will match any value in that part of the URL.
