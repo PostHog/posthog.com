@@ -17,7 +17,7 @@ These are some of the myths and truths I've learned about hiring for startups ov
 ## Myth #1: Recruiters are responsible for hiring
 People who get this wrong fail 100% of the time.
 
-_Managers_ are responsible for hiring:
+_Managers_ are responsible for hiring. Why? Think about it this way:
 
 - Managers are responsible for the output of their teams. 
 - Output can be increased by hiring more people. 
