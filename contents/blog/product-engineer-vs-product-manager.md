@@ -1,12 +1,12 @@
 ---
 title: "Product engineer vs product manager: what's the difference"
-date: 2023-01-20
+date: 2023-01-24
 author: ["ian-vanagas"]
 showTitle: true
 rootpage: /blog
 sidebar: Blog
 hideAnchor: true
-featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImage: ../images/blog/product-engineer.jpg
 featuredImageType: full
 category: Engineering
 tags: 
@@ -38,11 +38,11 @@ Product managers take more time before handing off work to engineers. They do fu
 
 They use all this information to craft plans, requirements, and specs that solve the user needs they identified. They must translate this into something the whole team can understand. Product engineers face a similar task but have a smaller group to communicate with. Both roles require communication skills, but product managers place a higher emphasis on them.
 
-Once product managers completed their analysis and plans, they manage a team of "stakeholders" to get a product shipped. This can include design, marketing, ops, engineering, and more. They work with all of these teams to get the feature developed and launched. This ensures alignment across teams and lowers the risk of potential issues.
+Once product managers complete their analysis and plans, they manage a team of "stakeholders" to get a product shipped. This can include design, marketing, ops, engineering, and more. They work with all of these teams to get the feature developed and launched. This ensures alignment across teams and lowers the risk of potential issues.
 
 > **Sidenote:** If you hear the word "stakeholders," you are likely talking to a product manager. They deal with many, internally and externally.
 
-Product engineers, on the other hand, ship on their own. They figure out requirements, designs, infrastructure needs, and implementation details. They rely on their broad set of technical skills for this. They may need help in design, DevOps, or infrastructure, but mostly act like a pack of wolves in search of product market fit.
+Product engineers, on the other hand, ship on their own. They figure out requirements, designs, infrastructure needs, and implementation details. They rely on their broad set of technical skills for this. They may need help in design, DevOps, or infrastructure, but mostly act like a pack of wolves in search of [product-market fit](/blog/how-to-product-market-fit).
 
 ### Launching and beyond
 
