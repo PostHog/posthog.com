@@ -15,6 +15,7 @@ category: Startups
 These are some of the myths and truths I've learned about hiring for startups over the past decade. I hope they will help you turn recruitment into a more tolerable and less frustrating experience. 
 
 ## Myth #1: Recruiters are responsible for hiring
+People who get this wrong fail 100% of the time.
 
 _Managers_ are responsible for hiring:
 
