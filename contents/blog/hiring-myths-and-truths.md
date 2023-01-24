@@ -57,7 +57,7 @@ Follow this devastatingly simple process:
 
 - Include a salary range. If you can't afford to pay a good salary, then let expensive people self-select out - it's ok!
 
-Congrats - you are now beating 90% of specs out there. Optional extra: add some personality/weirdness. 
+Congrats, you are now beating 90% of specs out there. Optional extra: add some personality/weirdness. 
 
 Recruiters are not copywriters with expertise in every technical detail, so don't force them to write the spec without help. A job spec is an advert for your company, so treat it as such. Recruiting is more leveraged than blog posts, and yet people put in half the effort into the ad copy. 
 
