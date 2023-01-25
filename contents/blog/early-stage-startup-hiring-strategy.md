@@ -12,9 +12,9 @@ featuredImageType: full
 category: Startups
 ---
 
-I've spent over a decade hiring for startups. I've managed and hired for teams across engineering, ops, people, marketing, and design, interviewing some 800 people in the process. Some of these teams were highly successful. Others weren't.
+I've spent over a decade hiring for startups, especially early-stage ones. I've managed and hired for teams across engineering, ops, people, marketing, and design, interviewing some 800 people in the process. Some of these teams were highly successful. Others weren't.
 
-These are some of the destructive myths and important truths I've learned about hiring for startups over that time, which I apply to how we hire at PostHog. I hope these tips will help you turn recruitment into a more tolerable and less frustrating experience. 
+These are the destructive myths and important truths I've learned about startup hiring strategy over that time, which I apply to [how we hire at PostHog](/careers). I hope these tips will help you turn recruitment into a more tolerable and less frustrating experience. 
 
 ## Myth #1: Recruiters are responsible for hiring
 
