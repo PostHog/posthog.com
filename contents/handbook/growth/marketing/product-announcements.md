@@ -62,3 +62,12 @@ We do not typically do PR for anything other than company-level news. We have se
 
 Examples of major announcements include [persons on events](/blog/persons-on-events) and the [launch of EU Cloud](/eu).
 
+## Announcing scheduled maintenance
+
+Occasionally, we have to conduct scheduled maintenance. When this happens, it's important that we tell users about it in advance if they would experience any disruption. 
+
+> If you're aware of any upcoming maintenance which would cause disruption, please inform the Marketing and Customer Success teams as soon as possible. Marketing will ensure that users are notified as the work is planned and completed. Customer Success may wish to inform specific users at the time. 
+
+Typically, Marketing takes responsible for informing users about maintenance work beforehand by telling users who will be impacted through email and other channels. 
+
+While maintenance is being carried out, we typically use the Notification Bar app within PostHog to tell users that work is ongoing and direct them firstly to `/service-message` where we will provide further information. Once the maintenance is finished, the `service-message` page is updated to reflect that no maintenance is underway, and the banner is removed. 
