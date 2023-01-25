@@ -66,9 +66,8 @@ export const HandbookSidebar = ({ contributors, title, location, availability, r
     return (
         <>
             {contributors && (
-                <SidebarSection title={`Author${contributors?.length > 1 ? 's' : ''}`}>
+                <SidebarSection>
                     <Contributors
-                        className="flex flex-col space-y-2"
                         contributors={contributors.map(({ url, username, avatar, teamData }) => ({
                             url,
                             name: teamData?.name || username,

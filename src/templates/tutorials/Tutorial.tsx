@@ -42,9 +42,8 @@ const TutorialSidebar = ({ contributors, location, title, pageViews, categories 
     return (
         <>
             {contributors?.length > 0 && (
-                <SidebarSection title={`Contributor${contributors?.length > 1 ? 's' : ''}`}>
+                <SidebarSection>
                     <Contributors
-                        className="flex flex-col space-y-2"
                         contributors={contributors.map((contributor) => ({
                             ...contributor,
                         }))}

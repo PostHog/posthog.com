@@ -60,7 +60,9 @@ export const SidebarSection = ({
     className?: string
 }) => {
     return (
-        <div className={`py-4 px-6 ${className}`}>
+        <div
+            className={`py-4 px-6 border-b border-gray-accent-light dark:border-gray-accent-dark border-dashed ${className}`}
+        >
             {title && <h3 className="text-black dark:text-white font-semibold opacity-25 m-0 mb-2 text-sm">{title}</h3>}
             {children}
         </div>
@@ -119,7 +121,9 @@ export const ShareLinks = ({ title, href }: { title: string; href: string }) => 
 export const ContributorImage = ({ image, name, className = '', imgClassName = '' }) => {
     const gatsbyImage = image && getImage(image)
     return (
-        <div className={`w-[38px] h-[38px] relative rounded-full overflow-hidden ${className}`}>
+        <div
+            className={`w-[32px] h-[32px] relative rounded-full overflow-hidden border-2 border-tan dark:border-primary ${className}`}
+        >
             {gatsbyImage ? (
                 <GatsbyImage
                     imgClassName={`rounded-full ${imgClassName}`}
@@ -143,12 +147,19 @@ export const ContributorImage = ({ image, name, className = '', imgClassName = '
     )
 }
 
-export const Contributor = ({ image, name }: IContributor) => {
+export const Contributor = ({
+    image,
+    name,
+    url,
+    state,
+    text = false,
+}: IContributor & { text?: boolean; url?: string }) => {
+    const Container = url ? Link : 'div'
     return (
-        <>
+        <Container {...(url ? { to: url, state } : {})} className="flex space-x-2 items-center no-underline">
             <ContributorImage image={image} name={name} />
-            <span className="author text-[14px] font-semibold">{name}</span>
-        </>
+            {text && <span className="author text-[14px] font-semibold">{name}</span>}
+        </Container>
     )
 }
 
@@ -159,25 +170,50 @@ export const Contributors = ({
     contributors: IContributor[]
     className?: string
 }) => {
-    const classes = 'flex space-x-2 items-center no-underline'
+    const multiple = contributors?.length > 1
+    const maxContributorsToShow = 4
     return (
-        <ul className={`list-none m-0 p-0 ${className}`}>
-            {contributors.slice(0, 3).map(({ image, name, url, state }) => {
-                return (
-                    <li key={name}>
-                        {url ? (
-                            <Link state={state} className={classes} to={url}>
-                                <Contributor image={image} name={name} />
-                            </Link>
-                        ) : (
-                            <span className={classes}>
-                                <Contributor image={image} name={name} />
-                            </span>
-                        )}
-                    </li>
-                )
-            })}
-        </ul>
+        <div className="flex space-x-2 items-center justify-between">
+            {multiple && (
+                <h3 className="text-black dark:text-white font-semibold opacity-25 m-0 text-sm flex space-x-1 items-center">
+                    <span>Contributors</span>
+                    <span
+                        className={`w-[20px] h-[20px] bg-black/50 dark:bg-white/50 flex items-center justify-center rounded-full ${
+                            contributors.length > maxContributorsToShow ? 'text-xs' : ''
+                        }`}
+                    >
+                        {contributors.length > maxContributorsToShow
+                            ? `${maxContributorsToShow}+`
+                            : contributors.length}
+                    </span>
+                </h3>
+            )}
+            <ul className={`list-none m-0 p-0 flex ${className}`}>
+                {contributors.slice(0, maxContributorsToShow).map(({ image, name, url, state }) => {
+                    return (
+                        <li className="first:-ml-0 -ml-2" key={name}>
+                            {multiple ? (
+                                <Tooltip
+                                    placement="top-end"
+                                    className="whitespace-nowrap"
+                                    content={
+                                        <div className="flex space-x-1 items-center">
+                                            <span className="text-xs font-semibold">{name}</span>
+                                        </div>
+                                    }
+                                >
+                                    <span className="relative">
+                                        <Contributor image={image} name={name} url={url} state={state} />
+                                    </span>
+                                </Tooltip>
+                            ) : (
+                                <Contributor image={image} name={name} url={url} state={state} text />
+                            )}
+                        </li>
+                    )
+                })}
+            </ul>
+        </div>
     )
 }
 

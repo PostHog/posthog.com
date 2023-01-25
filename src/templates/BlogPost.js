@@ -6,7 +6,15 @@ import { InlineCode } from 'components/InlineCode'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
 import { H1, H2, H3, H4, H5, H6 } from 'components/MdxAnchorHeaders'
-import PostLayout, { Contributors, PageViews, ShareLinks, SidebarSection, Text, Topics } from 'components/PostLayout'
+import PostLayout, {
+    Contributor,
+    Contributors,
+    PageViews,
+    ShareLinks,
+    SidebarSection,
+    Text,
+    Topics,
+} from 'components/PostLayout'
 import { SEO } from 'components/seo'
 import { ZoomImage } from 'components/ZoomImage'
 import { graphql } from 'gatsby'
@@ -64,10 +72,11 @@ export const Intro = ({
             )}
             {(featuredVideo || featuredImageType !== 'full') && <Title className="lg:mt-7 mt-4">{title}</Title>}
             {contributors && (
-                <Contributors
-                    contributors={contributors}
-                    className="flex lg:hidden flex-row space-y-0 space-x-4 my-3"
-                />
+                <div className="lg:hidden my-3">
+                    {contributors.map((contributor) => (
+                        <Contributor image={contributor.image} name={contributor.name} key={contributor.name} text />
+                    ))}
+                </div>
             )}
         </div>
     )
@@ -77,8 +86,8 @@ const BlogPostSidebar = ({ contributors, date, filePath, title, tags, location, 
     return (
         <>
             {contributors && (
-                <SidebarSection className="lg:block hidden" title={`Author${contributors?.length > 1 ? 's' : ''}`}>
-                    <Contributors className="flex flex-col space-y-2" contributors={contributors} />
+                <SidebarSection className="lg:block hidden">
+                    <Contributors contributors={contributors} />
                 </SidebarSection>
             )}
             <SidebarSection title="Share">
