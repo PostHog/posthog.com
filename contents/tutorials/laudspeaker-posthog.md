@@ -1,0 +1,84 @@
+---
+title: How to automate customer journeys with PostHog with Laudspeaker
+sidebar: Docs
+showTitle: true
+author: ['Laudspeaker']
+date: 2023-30-01
+featuredImage: ../images/tutorials/banners/tutorial-1.png
+tags: ["apps", "site-apps"]
+---
+
+Laudspeaker is a cross-channel customer messaging platform and an open source alternative to platforms such as Customer.io, Braze, or Iterable. It enables you to create automated customer journeys so your users receive messages when they complete specific actions on your site. 
+
+Given that Laudspeaker and PostHog are both open source, and both track events across your product, integrating them can be especially powerful. You can use the [Laudspeaker Connector](/apps/laudspeaker-connector) for PostHog to trigger event customer journeys in Laudspeaker based on PostHog events, creating a wide variety of journeys, including:
+
+- Automated onboarding flows triggered by sign-up events
+- Ecommerce re-engagement journeys based on incomplete purchases
+- Renewal journeys when a users' subscription or trial is coming to an end
+
+In this tutorial we'll explain how to connect PostHog and Laudspeaker to create a simple customer journey. To get started you'll need a Laudspeaker account, and a PostHog instance.
+
+## Connecting PostHog and Laudspeaker
+
+### Step 1: Install the Laudspeaker connector
+
+To start with, go to the Apps section of your PostHog instance, search for and install the Laudspeaker Connector. 
+
+---image---
+
+To configure the connector correctly you will need to supply the Laudspeaker endpoint. If you are self-hosting Laudspeaker this is under your domain, otherwise it is `app.laudspeaker.com/events/posthog`
+
+You will also need to enter a Laudspeaker api key, which can be found in your Laudspeaker settings:
+
+---image---
+
+Finally, you need to supply the name of your email field in PostHog, so Laudspeaker knows what a users' email address is. Typically this is saved under field names such as `email` `$email`, or `Email`. 
+
+---image---
+
+### Step 2: Import your customers to Laudspeaker
+
+In Laudspeaker, go to your Settings and navigate to PostHog.
+
+---image---
+
+You need to add your PostHog API key, which is created in PostHog's settings page. You'll also need to add your Project ID, then click Sync.
+
+Once Laudspeaker and PostHog are synced, users which you already have in PostHog will become available in Laudspeaker and be visible under the People page. 
+
+---image---
+
+## Creating your first journey
+
+Laudspeaker makes it simple to create new customer journeys, via the Journey Builder. There are existing templates to work with, or you can start from scratch. 
+
+All Laudspeaker journeys are composed of three parts: steps, triggers, and messages. A simple example would be a welcome email which is sent to new users when PostHog detects a sign-up event.
+
+### Step 1: Create steps
+
+In Laudspeaker, create two steps for your users:
+
+- `Not signed up`, to be used before a user signs up
+- `Signed up`, to be used once a user has signed up
+
+---image---
+
+### Step 2: Configure triggers
+
+Next, connect a trigger to to the `Not signed up` step and configure it so that users receive a welcome message when they sign up. For the purpose of this tutorial, we'll assume this event is sent when users view the `/onboarding` page for the first time.
+
+- Click the first step, then select an event-based trigger
+- Select PostHog, then the `pageview` event
+- Add conditions to the event and specify that the `current_URL` string contains `/onboarding`
+
+---image---
+
+Now, when a user navigates to a page with `/onboarding` in its URL for the first time, that user will move from the `Not Signed Up` step to the `Signed up` step in this journey. 
+
+Now we simply add an email template to the `signed up` step and Laudspeaker will send that email when that step is triggered. Hit Save, then Start to activate the journey. 
+
+---image---
+
+PostHog can track many more events, including custom-defined actions. Laudspeaker supports these too, enabling you to create a wide range of customer journeys. Check [the official Laudspeaker website](https://laudspeaker.com/) for more information about what's possible, or [ask a question via the PostHog community](/questions). 
+
+<NewsletterTutorial compact/>
