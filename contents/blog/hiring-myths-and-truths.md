@@ -1,22 +1,23 @@
 ---
 date: 2022-01-20
-title: Basic myths and truths about hiring that startups keep getting wrong
+title: Myths (and truths) I've learned from 10 years of startup hiring
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 author:
   - charles-cook
-featuredImage: ../images/blog/posthog-ceo-diary-blog.png
+featuredImage: ../images/blog/posthog-blog-image.png
 featuredImageType: full
 category: Startups
 ---
 
-These are some of the myths and truths I've learned about hiring for startups over the past decade. Over that time, I've managed and hired for teams across engineering, ops, people, marketing, and design, interviewing some 800 people in the process. Some of these teams were highly successful. Others weren't. 
+I've spent over a decade hiring for startups. I've managed and hired for teams across engineering, ops, people, marketing, and design, interviewing some 800 people in the process. Some of these teams were highly successful. Others weren't.
 
-I hope these tips will help you turn recruitment into a more tolerable and less frustrating experience. 
+These are some of the destructive myths and important truths I've learned about hiring for startups over that time, which I apply to how we hire at PostHog. I hope these tips will help you turn recruitment into a more tolerable and less frustrating experience. 
 
 ## Myth #1: Recruiters are responsible for hiring
+
 People who get this wrong fail 100% of the time.
 
 _Managers_ are responsible for hiring. Why? Think about it this way:
@@ -47,7 +48,7 @@ Don't hire a recruiter whose first priority is migrating to a new ATS.
 
 For startups, looking at pipeline data is _more_ important and leveraged than it is for larger companies. Why? Because the impact of every minute wasted interviewing and hiring the wrong people is exponentially higher. Look at later stages (i.e. offers, final interviews) to see which channels are most effective for you and be brutally honest about what's working. 
 
-For example, we found for a recent SRE role that our conversion from application to interview stage was amazing for sourced candidates. However, 0 out of 6 final stage candidates who were sourced got an offer, which is unusually low  – usually our conversion rate at that stage is ~33%. We went inbound-only for that role and the positive impact was immediate. We had fewer applicants overall, but a much higher number of relevant and engaged people. 
+For example, we found for a recent SRE role that our conversion from application to interview stage was amazing for sourced candidates. However, 0 out of 6 final stage candidates who were sourced got an offer, which is unusually low – usually our conversion rate at that stage is ~33%. We went inbound-only for that role and the positive impact was immediate. We had fewer applicants overall, but a much higher number of relevant and engaged people. 
 
 ## Truth #1: The bar for writing good job ads is depressingly low
 
