@@ -1,5 +1,5 @@
 ---
-title: "Product engineer vs product manager: What's the difference"
+title: "Product engineer vs product manager: What's the difference?"
 date: 2023-01-24
 author: ["ian-vanagas"]
 showTitle: true
