@@ -20,31 +20,26 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 
 <details> 
   <summary> Who does this maintenance effect? </summary>
-  <br />
 This disruption will only impact users on our US Cloud, regardless of where they are in the world. Self-hosted and EU Cloud users are unaffected.
 </details>
 
 <details> 
 <summary> What will the impact be?</summary>
-  <br />
-We expect only temporarily inconvenience. <b>No data or events will be lost</b>. New events and sessions will be delayed and some insights may experience errors until the maintenance is complete. New data and events will become accessible once the maintenance is complete, and PostHog will remain operational and accessible throughout.
+We expect only temporarily inconvenience. <b>No data or events will be lost</b>. New events and sessions will be delayed and some insights may experience errors until the maintenance is complete. New data and events will become accessible once the maintenance is complete, and PostHog will remain operational and accessible.
 </details>
 
 <details> 
 <summary> Will I lose any data?</summary>
-  <br />
-No, no events or data will be lost. Data and events which occur during the maintenance period will be delayed, and made accessible once the updates are complete. 
+No, no events or data will be lost. Events during the maintenance period will be delayed, and become accessible once the updates are complete. 
 </details>
 
 <details> 
   <summary> What is being worked on? </summary>
-  <br />
-Our Infrastructure Team is making some changes which are required to move PostHog's US Cloud to a new database. This is part of essential work to make sure PostHog remains scalable. We're open source, so you can find out more about the work we're doing in [our Github repos](https://github.com/PostHog). 
+Our Infrastructure Team is making some changes which are required to move PostHog's US Cloud to a new database. This is part of essential work to make sure PostHog remains scalable.
 </details>
 
 <details> 
   <summary> How long will this take? </summary>
-  <br />
 We started the maintenance work at XXXXXXXX and expect it to take no more than two hours. Once the work is complete we will remove the in-app banner and service will return to normal. 
 </details>
 
