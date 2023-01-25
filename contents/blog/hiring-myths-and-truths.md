@@ -1,5 +1,5 @@
 ---
-date: 2022-01-20
+date: 2022-01-25
 title: Myths (and truths) I've learned from 10 years of startup hiring
 rootPage: /blog
 sidebar: Blog
