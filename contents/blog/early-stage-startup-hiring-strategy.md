@@ -1,5 +1,5 @@
 ---
-date: 2022-01-25
+date: 2023-01-25
 title: Myths (and truths) I've learned from 10 years of startup hiring
 rootPage: /blog
 sidebar: Blog
@@ -10,6 +10,8 @@ author:
 featuredImage: ../images/blog/posthog-blog-image.png
 featuredImageType: full
 category: Startups
+tags:
+  - Guides
 ---
 
 I've spent over a decade hiring for startups, especially early-stage ones. I've managed and hired for teams across engineering, ops, people, marketing, and design, interviewing some 800 people in the process. Some of these teams were highly successful. Others weren't.
