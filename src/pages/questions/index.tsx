@@ -35,7 +35,7 @@ export default function Questions() {
             <PostLayout title={'Questions'} menu={community} hideSurvey>
                 <SEO title={'Questions - PostHog'} />
 
-                <div className="max-w-6xl mx-auto space-y-8 my-8">
+                <div className="max-w-6xl mx-auto space-y-8">
                     <section>
                         <div className="space-y-2">
                             <h1 className="text-5xl m-0">Questions?</h1>

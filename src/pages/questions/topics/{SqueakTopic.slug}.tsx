@@ -52,7 +52,7 @@ export default function SqueakTopics({ data }: IProps) {
             <SEO title={`${data.squeakTopic.label} - PostHog`} />
             <Layout>
                 <PostLayout title={data.squeakTopic.label} menu={community} sidebar={<TopicSidebar />} hideSurvey>
-                    <section className="my-8 lg:my-0">
+                    <section>
                         <div className="mb-4">
                             <Link to="/questions" className="text-gray">
                                 &larr; Back to questions

@@ -276,7 +276,7 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
             <PostLayout article={false} survey={false} title={'Docs'} menu={docs} hideSidebar>
                 <div className="space-y-12">
                     <section className="px-1">
-                        <h1 className="text-5xl mb-4">Using PostHog</h1>
+                        <h1 className="text-5xl mt-0 mb-4">Using PostHog</h1>
                         <p className="max-w-2xl">
                             This section covers everything you need to know about using PostHog. If you're looking for
                             help tracking events or deploying a self-host version of PostHog,{' '}

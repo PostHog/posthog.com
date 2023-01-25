@@ -78,4 +78,5 @@ export interface IProps {
         right?: number
     }
     searchFilter?: string
+    mobileMenu?: boolean
 }

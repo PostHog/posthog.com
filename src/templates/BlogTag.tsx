@@ -42,23 +42,21 @@ const BlogTag = ({
                 hideSidebar
                 hideSurvey
             >
-                <div className="my-6">
-                    <Posts
-                        titleBorder
-                        title={tag}
-                        posts={posts.slice(0, 4)}
-                        action={<PostToggle checked={allPostsFilter === 'popular'} onChange={handleToggleChange} />}
-                    />
-                    <NewsletterForm />
-                    <Posts posts={posts.slice(4, 12)} />
-                    {posts.length > 12 && (
-                        <>
-                            <CommunityCTA />
-                            <Posts posts={posts.slice(12)} />
-                        </>
-                    )}
-                    <Pagination currentPage={currentPage} numPages={numPages} base={base} />
-                </div>
+                <Posts
+                    titleBorder
+                    title={tag}
+                    posts={posts.slice(0, 4)}
+                    action={<PostToggle checked={allPostsFilter === 'popular'} onChange={handleToggleChange} />}
+                />
+                <NewsletterForm />
+                <Posts posts={posts.slice(4, 12)} />
+                {posts.length > 12 && (
+                    <>
+                        <CommunityCTA />
+                        <Posts posts={posts.slice(12)} />
+                    </>
+                )}
+                <Pagination currentPage={currentPage} numPages={numPages} base={base} />
             </PostLayout>
         </Layout>
     )

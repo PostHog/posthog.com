@@ -405,7 +405,7 @@ export const TableOfContents = ({
 
 const Breadcrumb = ({ crumbs }: { crumbs: ICrumb[] }) => {
     return (
-        <ul className="list-none flex mt-8 lg:mt-0 p-0 mb-2 whitespace-nowrap overflow-auto">
+        <ul className="list-none flex p-0 mb-2 whitespace-nowrap overflow-auto">
             {crumbs.map(({ name, url }, index) => {
                 const active = index === crumbs.length - 1
                 return (
@@ -496,6 +496,7 @@ export default function PostLayout({
     hideSearch,
     contentContainerClassName,
     menuType = 'standard',
+    mobileMenu = true,
     searchFilter,
 }: IProps) {
     const { hash, pathname } = useLocation()
@@ -552,7 +553,7 @@ export default function PostLayout({
 
     return (
         <div id="menu-wrapper" className="border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark">
-            {menu && (
+            {menu && mobileMenu && (
                 <div className="block lg:hidden py-2 px-4 border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark flex justify-between sticky top-[-2px] bg-tan dark:bg-primary z-30">
                     <button onClick={handleMobileMenuClick} className="py-2 px-3">
                         <MobileMenu style={{ transform: `rotate(${mobileMenuOpen ? '180deg' : '0deg'})` }} />
@@ -560,7 +561,7 @@ export default function PostLayout({
                 </div>
             )}
 
-            {menu && (
+            {menu && mobileMenu && (
                 <PushMenu
                     width="calc(100vw - 80px)"
                     customBurgerIcon={false}
@@ -596,7 +597,7 @@ export default function PostLayout({
                           }px`
                         : `1fr minmax(auto, ${contentWidth}px) minmax(max-content, 1fr)`,
                 }}
-                className="w-full relative lg:grid lg:grid-flow-col items-start -mb-20"
+                className="w-full relative lg:grid lg:grid-flow-col items-start"
             >
                 {menu && (
                     <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:block hidden relative z-20">
@@ -617,7 +618,7 @@ export default function PostLayout({
                 <article
                     key={`${title}-article`}
                     id="content-menu-wrapper"
-                    className="col-span-2 lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:pt-12 lg:pb-8 ml-auto w-full h-full box-border"
+                    className="col-span-2 lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:py-12 py-8 ml-auto w-full h-full box-border"
                 >
                     <div className={contentContainerClasses}>
                         {breadcrumb && <Breadcrumb crumbs={breadcrumb} />}

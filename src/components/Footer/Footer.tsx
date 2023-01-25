@@ -315,16 +315,14 @@ export function Footer(): JSX.Element {
     ]
 
     return (
-        <footer className="mt-20 border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark">
-            <div className="relative">
-                <div className="relative -top-6">
-                    <Link
-                        to="/"
-                        className="left-[calc(50%-40px)] w-20 h-12 inline-flex justify-center items-center absolute z-10 rounded dark:!bg-primary !bg-tan hover:!bg-gray-accent-light/90 px-4 active:!bg-gray-accent-light/100 dark:!hover:gray-accent-dark border border-dashed border-gray-accent-light dark:border-gray-accent-dark hover:scale-[1.02] active:top-[1px] active:scale-[.99] transition-all"
-                    >
-                        <span className="inline-block">{ProductIcons.posthogMonochrome}</span>
-                    </Link>
-                </div>
+        <footer className="border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark">
+            <div className="relative -top-6">
+                <Link
+                    to="/"
+                    className="left-[calc(50%-40px)] w-20 h-12 inline-flex justify-center items-center absolute z-10 rounded dark:!bg-primary !bg-tan hover:!bg-gray-accent-light/90 px-4 active:!bg-gray-accent-light/100 dark:!hover:gray-accent-dark border border-dashed border-gray-accent-light dark:border-gray-accent-dark hover:scale-[1.02] active:top-[1px] active:scale-[.99] transition-all"
+                >
+                    <span className="inline-block">{ProductIcons.posthogMonochrome}</span>
+                </Link>
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-3 border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:border-r-0 last:border-r-0 lg:grid-cols-6 w-full max-w-screen-2xl mx-auto">

@@ -35,7 +35,7 @@ export const Intro = ({
     titlePosition = 'bottom',
 }) => {
     return (
-        <div className="mt-4 lg:mb-7 mb-4 overflow-hidden">
+        <div className="lg:mb-7 mb-4 overflow-hidden">
             {featuredVideo && <iframe src={featuredVideo} />}
             {!featuredVideo && featuredImage && (
                 <div className="relative">

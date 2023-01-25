@@ -89,7 +89,7 @@ const menu = [
     { name: 'API', url: '/product#api', icon: ProductIcons.api },
 ]
 
-const Container = ({ children }) => <div className="max-w-5xl mx-auto px-12">{children}</div>
+const Container = ({ children }) => <div className="max-w-5xl mx-auto px-5 lg:px-6 xl:px-12">{children}</div>
 
 export default function Product({ data, location }) {
     const { pageData, documentation } = data
@@ -151,7 +151,7 @@ export default function Product({ data, location }) {
                 contentContainerClassName="w-full"
                 article={false}
             >
-                <div className="border-b border-gray-accent-light border-dashed py-3 lg:-mt-12">
+                <div className="border-b border-gray-accent-light border-dashed py-3 -mt-8 lg:-mt-12">
                     <div className="flex justify-between items-center max-w-5xl mx-auto px-5">
                         <div className="md:flex-1">
                             {previous?.url && (
