@@ -19,6 +19,7 @@ import {
     LinkIcon,
     Mail,
     MobileMenu,
+    RightArrow,
     Twitter,
 } from 'components/Icons/Icons'
 import Link from 'components/Link'
@@ -198,7 +199,7 @@ export const Contributors = ({
                 <h3 className="text-black dark:text-white font-semibold opacity-25 m-0 text-sm flex space-x-1 items-center">
                     <span>Contributors</span>
                     <span
-                        className={`w-[20px] h-[20px] bg-black/50 dark:bg-white/50 flex items-center justify-center rounded-full ${
+                        className={`w-[20px] h-[20px] bg-black/40 dark:bg-white/40 flex items-center justify-center rounded-full ${
                             contributors.length > maxContributorsToShow ? 'text-xs' : ''
                         }`}
                     >
@@ -460,24 +461,29 @@ export const TableOfContents = ({
 }
 
 const Breadcrumb = ({ crumbs }: { crumbs: ICrumb[] }) => {
+    const crumbsFiltered = crumbs?.filter(({ url }) => url && url !== location.pathname)
+    const last = crumbsFiltered[crumbsFiltered.length - 1]
     return (
-        <ul className="list-none flex p-0 m-0 whitespace-nowrap overflow-auto">
-            {crumbs.map(({ name, url }, index) => {
-                const active = index === crumbs.length - 1
-                return (
-                    <li
-                        key={index}
-                        className={`after:mx-2 after:text-gray-accent-light last:after:hidden after:content-["/"]`}
-                    >
-                        {active ? (
-                            <span className="text-black/40 dark:text-white/40 font-semibold">{name}</span>
-                        ) : (
+        <>
+            <ul className="list-none hidden p-0 m-0 whitespace-nowrap overflow-auto sm:flex">
+                {crumbsFiltered.map(({ name, url }, index) => {
+                    return (
+                        <li
+                            key={index}
+                            className={`after:mx-2 after:text-gray-accent-light last:after:hidden after:content-["/"]`}
+                        >
                             <Link to={url}>{name}</Link>
-                        )}
-                    </li>
-                )
-            })}
-        </ul>
+                        </li>
+                    )
+                })}
+            </ul>
+            <Link className="sm:hidden flex space-x-1 items-center" to={last.url}>
+                <span>
+                    <RightArrow className="transform -scale-x-1 w-5 h-5" />
+                </span>
+                <span>{last.name}</span>
+            </Link>
+        </>
     )
 }
 
@@ -676,13 +682,13 @@ export default function PostLayout({
                                     : `minmax(auto, ${contentWidth}px) minmax(max-content, 1fr)`,
                             }}
                             className={
-                                'py-4 border-b border-gray-accent-light dark:border-gray-accent-dark border-dashed lg:grid lg:grid-flow-col items-center'
+                                'pt-4 sm:pb-4 pb-0 sm:border-b border-gray-accent-light dark:border-gray-accent-dark border-dashed lg:grid lg:grid-flow-col items-center'
                             }
                         >
                             <div className={`${contentContainerClasses} grid-cols-1`}>
                                 <Breadcrumb crumbs={breadcrumb} />
                             </div>
-                            <div className="ml-auto px-6 lg:mt-0 mt-4">
+                            <div className="ml-auto px-6 lg:mt-0 mt-4 lg:block hidden">
                                 <ShareLinks href={location.href} title={title} />
                             </div>
                         </section>
@@ -714,7 +720,7 @@ export default function PostLayout({
                             >
                                 <div className="h-full flex flex-col divide-y divide-gray-accent-light dark:divide-gray-accent-dark divide-dashed">
                                     <div className="relative h-full">
-                                        <div ref={topSidebarSection} className="pt-4 top-10 sticky">
+                                        <div ref={topSidebarSection} className="top-0 sticky">
                                             {sidebar}
                                         </div>
                                     </div>

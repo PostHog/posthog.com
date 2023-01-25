@@ -94,10 +94,6 @@ export const HandbookSidebar = ({ contributors, title, location, availability, r
                 </SidebarSection>
             )}
 
-            <SidebarSection title="Share">
-                <ShareLinks title={title} href={location.href} />
-            </SidebarSection>
-
             {related && (
                 <SidebarSection title="Related articles">
                     <ul className="p-0 space-y-1.5">

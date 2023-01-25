@@ -34,14 +34,7 @@ const BlogTag = ({
         <Layout>
             <SEO title={`${tag} - PostHog`} />
 
-            <PostLayout
-                breadcrumb={[{ name: 'Blog', url: '/blog' }, { name: tag }]}
-                article={false}
-                title="Blog"
-                menu={blog}
-                hideSidebar
-                hideSurvey
-            >
+            <PostLayout article={false} title="Blog" menu={blog} hideSidebar hideSurvey>
                 <Posts
                     titleBorder
                     title={tag}

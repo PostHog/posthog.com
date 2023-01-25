@@ -34,14 +34,7 @@ const BlogCategory = ({
         <Layout>
             <SEO title={`${category} - PostHog`} />
 
-            <PostLayout
-                breadcrumb={[{ name: 'Blog', url: '/blog' }, { name: category }]}
-                article={false}
-                title="Blog"
-                menu={blog}
-                hideSidebar
-                hideSurvey
-            >
+            <PostLayout article={false} title="Blog" menu={blog} hideSidebar hideSurvey>
                 <Posts
                     titleBorder
                     title={category}

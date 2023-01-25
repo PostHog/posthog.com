@@ -67,20 +67,22 @@ export const Intro = ({
                     />
                     {featuredImageType === 'full' && (
                         <>
-                            <ul className="m-0 p-0 flex space-x-2 absolute top-4 right-4 list-none">
-                                {tags.map((tag) => {
-                                    return (
-                                        <li key={tag}>
-                                            <Link
-                                                className="bg-white/80 rounded-full px-2 py-1"
-                                                to={`/blog/tags/${slugify(tag, { lower: true })}`}
-                                            >
-                                                {tag}
-                                            </Link>
-                                        </li>
-                                    )
-                                })}
-                            </ul>
+                            {tags?.length > 0 && (
+                                <ul className="m-0 p-0 flex space-x-2 absolute top-4 right-4 list-none">
+                                    {tags.map((tag) => {
+                                        return (
+                                            <li key={tag}>
+                                                <Link
+                                                    className="bg-white/80 rounded-full px-2 py-1"
+                                                    to={`/blog/tags/${slugify(tag, { lower: true })}`}
+                                                >
+                                                    {tag}
+                                                </Link>
+                                            </li>
+                                        )
+                                    })}
+                                </ul>
+                            )}
                             <div
                                 className={`lg:absolute flex flex-col lg:px-8 lg:py-4 ${
                                     titlePosition === 'bottom' ? 'bottom-0' : 'top-0'
