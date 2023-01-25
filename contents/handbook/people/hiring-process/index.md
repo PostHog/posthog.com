@@ -10,7 +10,7 @@ hideAnchor: true
 
 Our goal is to build a [diverse](/handbook/company/diversity), world-class team that allows us to act and iterate fast, with a high level of [autonomy and innovation](/handbook/company/small-teams).
 
-Our recruitment strategy is to run:
+Our [recruitment strategy](/blog/early-stage-startup-hiring-strategy) is to run:
 - **100% inbound by default** - effectively a word of mouth strategy, like our marketing and sales model.
 - Supplement this with **occasional, targeted sourcing** to increase the pool of diverse candidates (if needed).
 
