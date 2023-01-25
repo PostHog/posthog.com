@@ -12,10 +12,10 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 ![Builder Hog](./images/service-message/worker-hog.png)
 <br />
 
-<h1 className="text-center px-2 pt-4 md:px-8 text-3xl md:text-5xl xl:text-6xl relative z-20" style={{ marginTop: "-2rem", marginBottom: "-.5rem" }}>PostHog is undergoing <span className="text-red">scheduled</span> maintenance</h1>
+<h1 className="text-center px-2 pt-4 pb-2 md:px-8 text-3xl md:text-5xl xl:text-6xl relative z-20" style={{ marginTop: "-2rem", marginBottom: "-.5rem" }}>PostHog is undergoing <span className="text-red">scheduled</span> maintenance</h1>
 
 <Hero
-    subtitle="At TIME we began upgrading PostHog's infrastructure. The maintenance is expected to take approximately two hours."
+    subtitle="We started work at 07:00 GMT on 1 Feb 2023. The maintenance is expected to take approximately two hours."
 />
 
 <details> 
@@ -40,7 +40,7 @@ Our Infrastructure Team is making some changes which are required to move PostHo
 
 <details> 
   <summary> How long will this take? </summary>
-We started the maintenance work at XXXXXXXX and expect it to take no more than two hours. Once the work is complete we will remove the in-app banner and service will return to normal. 
+We started the maintenance work at 07:00 GMT on 1 Feb 2023 and expect it to take no more than two hours. Once the work is complete we will remove the in-app banner and service will return to normal. 
 </details>
 
 <div className="centered py-5">
