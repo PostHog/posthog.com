@@ -13,10 +13,10 @@ import Chip from 'components/Chip'
 import {
     Edit,
     ExpandDocument,
-    Facebook,
     InfoOutlined,
     Issue,
     LinkedIn,
+    LinkIcon,
     Mail,
     MobileMenu,
     Twitter,
@@ -95,11 +95,17 @@ export const PageViews = ({ pageViews }: { pageViews: string | number }) => {
 }
 
 export const ShareLinks = ({ title, href }: { title: string; href: string }) => {
+    const [copied, setCopied] = useState(false)
+    const handleCopyClick = () => {
+        const url = `${href.replace(/#.*/, '')}`
+        navigator.clipboard.writeText(url)
+        setCopied(true)
+        setTimeout(() => {
+            setCopied(false)
+        }, 5000)
+    }
     return (
         <div className="opacity-50 flex space-x-3 items-center">
-            <ShareLink url={`https://www.facebook.com/sharer/sharer.php?u=${href}`}>
-                <Facebook />
-            </ShareLink>
             <ShareLink
                 url={`https://twitter.com/intent/tweet?url=${href}&text=Check%20out%20this%20article%20from%20%40posthog%0A%0A`}
             >
@@ -114,6 +120,16 @@ export const ShareLinks = ({ title, href }: { title: string; href: string }) => 
             >
                 <Mail />
             </a>
+            <button className="relative" onClick={handleCopyClick}>
+                <Tooltip
+                    placement="top-end"
+                    content={<p className="m-0 font-semibold text-sm">{copied ? 'Copied!' : 'Copy page URL'}</p>}
+                >
+                    <span className="relative">
+                        <LinkIcon className="w-[25px] h-[25px]" />
+                    </span>
+                </Tooltip>
+            </button>
         </div>
     )
 }
@@ -441,7 +457,7 @@ export const TableOfContents = ({
 
 const Breadcrumb = ({ crumbs }: { crumbs: ICrumb[] }) => {
     return (
-        <ul className="list-none flex p-0 mb-2 whitespace-nowrap overflow-auto">
+        <ul className="list-none flex p-0 m-0 whitespace-nowrap overflow-auto">
             {crumbs.map(({ name, url }, index) => {
                 const active = index === crumbs.length - 1
                 return (
@@ -627,11 +643,7 @@ export default function PostLayout({
             )}
             <div
                 style={{
-                    gridAutoColumns: menu
-                        ? `${menuWidth?.left ?? defaultMenuWidth?.left}px 1fr 1fr ${
-                              menuWidth?.right ?? defaultMenuWidth?.right
-                          }px`
-                        : `1fr minmax(auto, ${contentWidth}px) minmax(max-content, 1fr)`,
+                    gridAutoColumns: menu ? `${menuWidth?.left ?? defaultMenuWidth?.left}px 1fr` : `1fr 1fr`,
                 }}
                 className="w-full relative lg:grid lg:grid-flow-col items-start"
             >
@@ -651,125 +663,160 @@ export default function PostLayout({
                         </aside>
                     </div>
                 )}
-                <article
-                    key={`${title}-article`}
-                    id="content-menu-wrapper"
-                    className="col-span-2 lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:py-12 py-8 ml-auto w-full h-full box-border"
-                >
-                    <div className={contentContainerClasses}>
-                        {breadcrumb && <Breadcrumb crumbs={breadcrumb} />}
-                        <div>{children}</div>
-                        {questions}
-                    </div>
-                    {!hideSurvey && <Survey contentContainerClasses={contentContainerClasses} />}
-                    {nextPost && <NextPost {...nextPost} contentContainerClasses={contentContainerClasses} />}
-                </article>
-                {!hideSidebar && sidebar && (
-                    <aside
-                        key={`${title}-sidebar`}
-                        className="flex-shrink-0 w-full justify-self-end my-10 lg:my-0 mr-auto h-full lg:px-0 px-4 box-border"
+                <div>
+                    {breadcrumb && (
+                        <section
+                            style={{
+                                gridAutoColumns: menu
+                                    ? `1fr ${menuWidth?.right ?? defaultMenuWidth?.right}px`
+                                    : `minmax(auto, ${contentWidth}px) minmax(max-content, 1fr)`,
+                            }}
+                            className={
+                                'py-4 border-b border-gray-accent-light dark:border-gray-accent-dark border-dashed lg:grid lg:grid-flow-col items-center'
+                            }
+                        >
+                            <div className={`${contentContainerClasses} grid-cols-1`}>
+                                <Breadcrumb crumbs={breadcrumb} />
+                            </div>
+                            <div className="ml-auto px-6 lg:mt-0 mt-4">
+                                <ShareLinks href={location.href} title={title} />
+                            </div>
+                        </section>
+                    )}
+                    <div
+                        className="lg:grid lg:grid-flow-col items-start"
+                        style={{
+                            gridAutoColumns: menu
+                                ? `1fr ${menuWidth?.right ?? defaultMenuWidth?.right}px`
+                                : `minmax(auto, ${contentWidth}px) minmax(max-content, 1fr)`,
+                        }}
                     >
-                        <div className="h-full flex flex-col divide-y divide-gray-accent-light dark:divide-gray-accent-dark divide-dashed">
-                            <div className="relative h-full">
-                                <div ref={topSidebarSection} className="pt-4 top-10 sticky">
-                                    {sidebar}
-                                </div>
+                        <article
+                            key={`${title}-article`}
+                            id="content-menu-wrapper"
+                            className="lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:py-12 py-8 ml-auto w-full h-full box-border"
+                        >
+                            <div className={contentContainerClasses}>
+                                <div>{children}</div>
+                                {questions}
                             </div>
+                            {!hideSurvey && <Survey contentContainerClasses={contentContainerClasses} />}
+                            {nextPost && <NextPost {...nextPost} contentContainerClasses={contentContainerClasses} />}
+                        </article>
+                        {!hideSidebar && sidebar && (
+                            <aside
+                                key={`${title}-sidebar`}
+                                className="flex-shrink-0 w-full justify-self-end my-10 lg:my-0 mr-auto h-full lg:px-0 px-4 box-border"
+                            >
+                                <div className="h-full flex flex-col divide-y divide-gray-accent-light dark:divide-gray-accent-dark divide-dashed">
+                                    <div className="relative h-full">
+                                        <div ref={topSidebarSection} className="pt-4 top-10 sticky">
+                                            {sidebar}
+                                        </div>
+                                    </div>
 
-                            <div ref={bottomSidebarSection} className="lg:pt-6 !border-t-0 mt-auto lg:sticky bottom-0">
-                                {view === 'Article' && toc?.length > 1 && !showTocButton && (
                                     <div
-                                        style={{ visibility: showTocButton === null ? 'hidden' : 'visible' }}
-                                        className="px-4 lg:px-8 lg:pb-4 lg:block hidden"
+                                        ref={bottomSidebarSection}
+                                        className="lg:pt-6 !border-t-0 mt-auto lg:sticky bottom-0"
                                     >
-                                        <h4 className="text-black dark:text-white font-semibold opacity-25 m-0 mb-1 text-sm">
-                                            Jump to:
-                                        </h4>
-                                        <Scrollspy
-                                            offset={-50}
-                                            className="list-none m-0 p-0 flex flex-col"
-                                            items={tableOfContents?.map((navItem) => navItem.url)}
-                                            currentClassName="active-product"
-                                        >
-                                            {toc.map((navItem, index) => (
-                                                <li className="relative leading-none m-0" key={navItem.url}>
-                                                    <InternalSidebarLink
-                                                        url={navItem.url}
-                                                        name={navItem.value}
-                                                        depth={navItem.depth}
-                                                        className="hover:opacity-100 opacity-60 text-[14px] py-1 block relative active:top-[0.5px] active:scale-[.99]"
-                                                    />
-                                                </li>
-                                            ))}
-                                        </Scrollspy>
-                                    </div>
-                                )}
-                                <ul className="list-none pl-2 pr-3 py-1 flex mt-0 mb-10 lg:mb-0 border-t border-gray-accent-light border-dashed dark:border-gray-accent-dark items-center bg-tan/40 dark:bg-primary/40 backdrop-blur">
-                                    {view === 'Article' && toc?.length > 1 && showTocButton && (
-                                        <SidebarAction title="On this page">
-                                            <Popover
-                                                button={
-                                                    <span className={sidebarButtonClasses}>
-                                                        <InfoOutlined />
-                                                    </span>
-                                                }
+                                        {view === 'Article' && toc?.length > 1 && !showTocButton && (
+                                            <div
+                                                style={{ visibility: showTocButton === null ? 'hidden' : 'visible' }}
+                                                className="px-4 lg:px-8 lg:pb-4 lg:block hidden"
                                             >
-                                                <div className="p-4 w-[250px] text-left">
-                                                    <h4 className="text-[13px] mb-2">On this page</h4>
-                                                    <Scrollspy
-                                                        offset={-50}
-                                                        className="list-none m-0 p-0 flex flex-col"
-                                                        items={tableOfContents?.map((navItem) => navItem.url)}
-                                                        currentClassName="active-product"
+                                                <h4 className="text-black dark:text-white font-semibold opacity-25 m-0 mb-1 text-sm">
+                                                    Jump to:
+                                                </h4>
+                                                <Scrollspy
+                                                    offset={-50}
+                                                    className="list-none m-0 p-0 flex flex-col"
+                                                    items={tableOfContents?.map((navItem) => navItem.url)}
+                                                    currentClassName="active-product"
+                                                >
+                                                    {toc.map((navItem, index) => (
+                                                        <li className="relative leading-none m-0" key={navItem.url}>
+                                                            <InternalSidebarLink
+                                                                url={navItem.url}
+                                                                name={navItem.value}
+                                                                depth={navItem.depth}
+                                                                className="hover:opacity-100 opacity-60 text-[14px] py-1 block relative active:top-[0.5px] active:scale-[.99]"
+                                                            />
+                                                        </li>
+                                                    ))}
+                                                </Scrollspy>
+                                            </div>
+                                        )}
+                                        <ul className="list-none pl-2 pr-3 py-1 flex mt-0 mb-10 lg:mb-0 border-t border-gray-accent-light border-dashed dark:border-gray-accent-dark items-center bg-tan/40 dark:bg-primary/40 backdrop-blur">
+                                            {view === 'Article' && toc?.length > 1 && showTocButton && (
+                                                <SidebarAction title="On this page">
+                                                    <Popover
+                                                        button={
+                                                            <span className={sidebarButtonClasses}>
+                                                                <InfoOutlined />
+                                                            </span>
+                                                        }
                                                     >
-                                                        {toc.map((navItem, index) => (
-                                                            <li className="relative leading-none m-0" key={navItem.url}>
-                                                                <InternalSidebarLink
-                                                                    url={navItem.url}
-                                                                    name={navItem.value}
-                                                                    depth={navItem.depth}
-                                                                    className="hover:opacity-100 opacity-60 text-[14px] py-1 block relative active:top-[0.5px] active:scale-[.99]"
-                                                                />
-                                                            </li>
-                                                        ))}
-                                                    </Scrollspy>
-                                                </div>
-                                            </Popover>
-                                        </SidebarAction>
-                                    )}
-                                    {filePath && (
-                                        <>
-                                            <SidebarAction
-                                                href={`https://github.com/PostHog/posthog.com/tree/master/contents/${filePath}`}
-                                                title="Edit this page"
-                                            >
-                                                <Edit />
-                                            </SidebarAction>
-                                            <SidebarAction
-                                                title="Raise an issue"
-                                                href={`https://github.com/PostHog/posthog.com/issues/new?title=Feedback on: ${title}&body=**Issue with: /${filePath}**\n\n`}
-                                            >
-                                                <Issue />
-                                            </SidebarAction>
-                                        </>
-                                    )}
-                                    <div className="ml-auto flex">
-                                        <SidebarAction
-                                            className="hidden xl:block"
-                                            title="Toggle content width"
-                                            onClick={handleFullWidthContentChange}
-                                        >
-                                            <ExpandDocument expanded={fullWidthContent} />
-                                        </SidebarAction>
-                                        <SidebarAction className="ml-2" width="auto" title="Toggle dark mode">
-                                            <DarkModeToggle />
-                                        </SidebarAction>
+                                                        <div className="p-4 w-[250px] text-left">
+                                                            <h4 className="text-[13px] mb-2">On this page</h4>
+                                                            <Scrollspy
+                                                                offset={-50}
+                                                                className="list-none m-0 p-0 flex flex-col"
+                                                                items={tableOfContents?.map((navItem) => navItem.url)}
+                                                                currentClassName="active-product"
+                                                            >
+                                                                {toc.map((navItem, index) => (
+                                                                    <li
+                                                                        className="relative leading-none m-0"
+                                                                        key={navItem.url}
+                                                                    >
+                                                                        <InternalSidebarLink
+                                                                            url={navItem.url}
+                                                                            name={navItem.value}
+                                                                            depth={navItem.depth}
+                                                                            className="hover:opacity-100 opacity-60 text-[14px] py-1 block relative active:top-[0.5px] active:scale-[.99]"
+                                                                        />
+                                                                    </li>
+                                                                ))}
+                                                            </Scrollspy>
+                                                        </div>
+                                                    </Popover>
+                                                </SidebarAction>
+                                            )}
+                                            {filePath && (
+                                                <>
+                                                    <SidebarAction
+                                                        href={`https://github.com/PostHog/posthog.com/tree/master/contents/${filePath}`}
+                                                        title="Edit this page"
+                                                    >
+                                                        <Edit />
+                                                    </SidebarAction>
+                                                    <SidebarAction
+                                                        title="Raise an issue"
+                                                        href={`https://github.com/PostHog/posthog.com/issues/new?title=Feedback on: ${title}&body=**Issue with: /${filePath}**\n\n`}
+                                                    >
+                                                        <Issue />
+                                                    </SidebarAction>
+                                                </>
+                                            )}
+                                            <div className="ml-auto flex">
+                                                <SidebarAction
+                                                    className="hidden xl:block"
+                                                    title="Toggle content width"
+                                                    onClick={handleFullWidthContentChange}
+                                                >
+                                                    <ExpandDocument expanded={fullWidthContent} />
+                                                </SidebarAction>
+                                                <SidebarAction className="ml-2" width="auto" title="Toggle dark mode">
+                                                    <DarkModeToggle />
+                                                </SidebarAction>
+                                            </div>
+                                        </ul>
                                     </div>
-                                </ul>
-                            </div>
-                        </div>
-                    </aside>
-                )}
+                                </div>
+                            </aside>
+                        )}
+                    </div>
+                </div>
             </div>
         </div>
     )
