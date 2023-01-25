@@ -34,7 +34,7 @@ Switching to PostHog enabled Contra to consolidate feature flags, session record
     />
 </BorderWrapper>
 
-“Previously the teams all used different tools,” said Allison. “That led to a lot of confusion, because we were onboarding teams to all these different tools and it was clearly creating complexity and leading to inconsistencies…We had issues with LaunchDarkly especially, and feature flags are very important to us.”
+“Previously the teams all used different tools,” said Allison. “That led to a lot of confusion, because we were onboarding teams to all these different tools and it was clearly creating complexity and leading to inconsistencies… We had issues with LaunchDarkly especially, and feature flags are very important to us.”
 
 Feature flags in particular are important because the engineering team deploys all new product features behind flags and follows a careful ‘slow roll-out’ strategy. All features are first deployed to beta users, then 20% of all users, followed by 50% of all users and finally 100% of all users. Switching feature flags to PostHog enables Contra to continue testing with this method, while also analyzing feature adoption and performance in the same tool. 
 
