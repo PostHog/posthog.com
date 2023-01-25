@@ -138,7 +138,7 @@ export const ContributorImage = ({ image, name, className = '', imgClassName = '
     const gatsbyImage = image && getImage(image)
     return (
         <div
-            className={`w-[32px] h-[32px] relative rounded-full overflow-hidden border-2 border-tan dark:border-primary ${className}`}
+            className={`w-[32px] h-[32px] relative rounded-full overflow-hidden border-2 border-tan dark:border-primary transition-all ${className}`}
         >
             {gatsbyImage ? (
                 <GatsbyImage
@@ -173,7 +173,11 @@ export const Contributor = ({
     const Container = url ? Link : 'div'
     return (
         <Container {...(url ? { to: url, state } : {})} className="flex space-x-2 items-center no-underline">
-            <ContributorImage image={image} name={name} />
+            <ContributorImage
+                className={url ? 'hover:border-red hover:z-10 dark:hover:border-red' : ''}
+                image={image}
+                name={name}
+            />
             {text && <span className="author text-[14px] font-semibold">{name}</span>}
         </Container>
     )
