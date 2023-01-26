@@ -31,7 +31,7 @@ Ways to invite users for an interview:
 1. Add the notes to the [Google Doc][feedback-doc], linking the recording if you did one.
 2. If the user reported specific bug reports or specific feature requests, open the relevant issues in GitHub. Be sure to link to their Hubspot record in case Engineering needs more context when scoping/building.
 3. Generate the reward for the user (see below).
-   1. Most of the time, the reward will be a gift card for the [PostHog merch store](https://merch.posthog.com/). If it's the case, create the gift card in Shopify. Make sure to **add a link to their Hubspot profile** in the notes section and set the **default expiration date** (5 years), and make note of the gift card code.
+   1. Most of the time, the reward will be a gift card for the [PostHog merch store](https://merch.posthog.com/). If it's the case, create the gift card in Shopify.
 4. Follow-up with the user. Send any applicable rewards, links to any opened GitHub issues, and answers to any outstanding questions.
 
 ### Rewards 
