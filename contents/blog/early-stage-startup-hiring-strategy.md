@@ -20,8 +20,6 @@ These are the destructive myths and important truths I've learned about startup 
 
 ## Myth: Recruiters are responsible for hiring
 
-People who get this wrong fail 100% of the time.
-
 _Managers_ are responsible for hiring. Why? Think about it this way:
 
 - Managers are responsible for the output of their teams. 
@@ -34,7 +32,7 @@ If you are struggling to hire for a role, first ask yourself 'am I spending 20% 
 
 ## Truth: The bar for writing good job ads is depressingly low
 
-Follow this devastatingly simple process:
+There are a million guides on 'writing job ads that wow' out there, and they all seem to miss out the most obvious stuff. We follow this devastatingly simple process:
 
 - Outline the _exact_ process they will follow (meet X person by name, do Y task etc.). Do not make the process up for each candidate.
  
@@ -42,7 +40,7 @@ Follow this devastatingly simple process:
 
 - Include a salary range. If you can't afford to pay a good salary, then let expensive people self-select out - it's ok!
 
-Congrats, you are now beating 90% of specs out there. Optional extra: add some personality/weirdness. 
+Congrats, you are now beating 90% of ads out there. Optional extra: add some personality/weirdness. 
 
 Recruiters are not copywriters with expertise in every technical detail, so don't force them to write the spec without help. A job spec is an advert for your company, so treat it as such. Recruiting is more leveraged than blog posts, and yet people put in half the effort into the ad copy. 
 
@@ -52,9 +50,11 @@ You want people to filter themselves out of the process if the work isn't appeal
 
 Not really.
 
-The best people are always in demand and will have lined up five interviews within 24 hours of posting on LinkedIn. Often the 'cuts' that are being made are in non-core product areas, or in more manager-y type roles that are unlikely to be relevant to your early-stage startup. 
+The best people are always in demand and will have lined up five interviews within 24 hours of posting on LinkedIn. Often (but not always) the 'cuts' that are being made are in non-core product areas, or in more manager-y type roles that are unlikely to be relevant to your early-stage startup. 
 
 Hiring _should_ always be difficult because your bar should keep going up with each hire. Imagine if developing amazing new product features was easy. It would probably mean that you were building uninspiring stuff, or features that are easily replicable.
+
+Pro tip - reach out to the people who _didn't_ get cut, as they're probably not feeling great about hanging around at those companies any more having seen a bunch of their colleagues leave. 
 
 ## Truth: Getting people to do actual (paid) work for you is 10x more effective than interviews
 
