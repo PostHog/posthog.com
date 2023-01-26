@@ -655,7 +655,7 @@ export default function PostLayout({
                 style={{
                     gridAutoColumns: menu ? `${menuWidth?.left ?? defaultMenuWidth?.left}px 1fr` : `1fr 1fr`,
                 }}
-                className="w-full relative lg:grid lg:grid-flow-col items-start"
+                className="w-full relative lg:grid lg:grid-flow-col"
             >
                 {menu && (
                     <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:block hidden relative z-20">
@@ -673,7 +673,7 @@ export default function PostLayout({
                         </aside>
                     </div>
                 )}
-                <div>
+                <div className="flex flex-col">
                     {breadcrumb && (
                         <section
                             style={{
@@ -694,7 +694,7 @@ export default function PostLayout({
                         </section>
                     )}
                     <div
-                        className="lg:grid lg:grid-flow-col items-start"
+                        className="lg:grid lg:grid-flow-col items-start flex-grow"
                         style={{
                             gridAutoColumns: menu
                                 ? `1fr ${menuWidth?.right ?? defaultMenuWidth?.right}px`
