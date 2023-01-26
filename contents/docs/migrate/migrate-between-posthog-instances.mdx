@@ -27,7 +27,6 @@ This migration has two parts:
 
 <MigratingEvents/>
 
-
 ## Migrate your meta data
 
 Follow the instructions on the [PostHog migrate metadata repo](https://github.com/PostHog/posthog-migrate-meta):
@@ -43,3 +42,13 @@ Follow the instructions on the [PostHog migrate metadata repo](https://github.co
     ```
 
 For more information on the options see the [repo's readme](https://github.com/PostHog/posthog-migrate-meta)
+
+## Migrating your custom apps if you are moving from self-hosted to cloud
+
+Have a custom PostHog app on your self-hosted instance that you'd like to move to the cloud? There are several options:
+1. (Recommended) If you can make your app generalizable enough that others can benefit then [submit your app](https://posthog.com/docs/apps/build/tutorial#submitting-your-app) to the store.
+   - To make it generalizable you'll want to convert anything which is specific to your configuration into a plugin.json config value
+2. If you can't make your app generalizable, you have several options:
+   1. If the app was transforming events before ingestion you could move this logic from the app into your client before you send the event
+   2. If the app was mainly to send events to a custom URL, we are soon releasing a webhook destination. You can subscribe for updates on the [roadmap](/roadmap)
+   3. If the options above don't work and you were previously paying a substantial amount self-hosting then email us at [hey@posthog.com](mailto:hey@posthog.com) with a link to the public github repo and we can see if it's appropriate as a private cloud app.
