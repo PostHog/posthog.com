@@ -88,18 +88,53 @@ Submit a PR to [posthog/posthog.com](https://github.com/posthog/posthog.com) wit
 
 - Add the author of the post as an array (not a string), [like in this example](https://github.com/PostHog/posthog.com/blob/master/contents/blog/100-times-more-events.md). If this is your first time posting to the blog, add yourself to [authors.json](https://github.com/PostHog/posthog.com/blob/master/src/data/authors.json).
 
-- Assign the post categories (you can use more than one) using `categories` in the frontmatter section. The available categories are **Inside PostHog**, **Product updates**, **Engineering**, **Product analytics**, **Guides**, **Open source**, **Privacy**, **Startups** and **CEO diaries**. Categories should be listed as an array and can be written one of two ways:
+- Assign the post **just one** `category` and any relevant tags using `category` and `tags` in the frontmatter section, as follows:
 
   ```
-  categories:
-    - CEO diaries
-    - General
+  category: Startups
   ```
  
   ```
-  categories: ["CEO diaries", "General"]
+  tags:
+    - Guides
+    - Open source
   ```
-  
+
+The following are our pre-approved categories and tags. Please **don't create new ones without Andy's approval:**
+
+```
+**Categories:**
+
+- **Inside PostHog:** Behind-the-scenes on our culture, what we’re doing
+- **Using PostHog:** Guides about doing stuff in PostHog
+- **PostHog news:** Product updates, release notes and announcements
+- **CEO diaries:** Insights from James Hawkins
+- **Startups:** Guides and insights on startup life
+- **HogMail:** The PostHog newsletter on the blog
+- **Product growth:** Guides about product analytics, growth hacking et al.
+- **Engineering:** Blogs about engineering at PostHog
+- **General:** Category for blog posts with no obvious category
+```
+
+```
+**Tags:**
+
+- **Guides:** Any and all guides from all categories (actionable)
+- **Explainers:** Blogs explaining a concept or idea (non-actionable)
+- **Product analytics:** Blogs about about product analytics
+- **Product metrics:** Blogs about metrics and what to track
+- **Session recording:** Blogs about using session recording
+- **Feature flags:** Blogs about using feature flags
+- **Marketing**: Blogs about marketing
+- **Privacy:** Blogs about GDPR and other fun stuff
+- **Open source:** Blogs about open source products and projects
+- **Release notes:** PostHog release notes
+- **Product updates:** General product updates
+- **Comparisons:** PostHog vs other things
+- **ClickHouse**: Blogs about ClickHouse
+- **Y Combinator:** Blogs about YC
+```
+
 - Add a meta description using `description` in the frontmatter section (optional)
 
 - Set the date of the blog post to the intended publishing date in the format `YYYY-MM-DD`. Posts dated [in the future](https://github.com/PostHog/posthog.com/pull/2964) won't display on the site until their specified date, though a build is required day-of in order to publish the post. (The Website & Docs team or other Vercel admins can kick off a manual build.)
