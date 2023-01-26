@@ -38,7 +38,8 @@ Ways to invite users for an interview:
 ### Rewards 
 We strongly value our users' time. As such, we usually send a small gift of appreciation. We have the following general _guidelines_, but just use your best judgement.
 - Generally we send users a gift card to the [PostHog merch store](https://merch.posthog.com/) with around $30 of value.
-- When the above is not an option (e.g. shipping restrictions, user has received merch already) we default to Amazon gift cards. Use your Brex card to purchase these (and remember to follow our [spending guidelines](/handbook/people/spending-money)). Contact Paolo to join our Amazon Business account.
+- When the above is not an option (e.g. user has received merch already) we can offer the user a $30 gift card with [Open Collective](https://opencollective.com/).
+- The instructions on how to create gift cards can be found [here](https://posthog.com/handbook/growth/sales/yc-onboarding#after-the-call)
     > To avoid operationally complexity, we try to send only Amazon US cards, but generally sending cards on Amazon UK, IT, DE, MX or BR has worked in the past. Due to card restrictions, **we can't support Amazon IN**.
 
 ### Repositories of information 
