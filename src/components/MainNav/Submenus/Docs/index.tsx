@@ -55,6 +55,11 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
             description: 'Hook it real good',
             url: '/docs/integrate/webhooks/message-formatting',
         },
+        {
+            title: "What's new?",
+            description: 'New features, fresh from the repo',
+            url: '/blog/categories/posthog-news',
+        },
     ]
 
     return (
