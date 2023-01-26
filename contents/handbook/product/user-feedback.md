@@ -29,7 +29,8 @@ Ways to invite users for an interview:
 
 **After the call**
 1. Add the notes to the [Google Doc][feedback-doc], linking the recording if you did one.
-2. If the user reported specific bug reports or specific feature requests, open the relevant issues in GitHub. Be sure to link to their Hubspot record in case Engineering needs more context when scoping/building.
+2. Share a short summary of the user interview in the `#posthog-feedback` Slack channel
+3. If the user reported specific bug reports or specific feature requests, open the relevant issues in GitHub. Be sure to link to their Hubspot record in case Engineering needs more context when scoping/building.
 3. Generate the reward for the user (see below).
    1. Most of the time, the reward will be a gift card for the [PostHog merch store](https://merch.posthog.com/). If it's the case, create the gift card in Shopify.
 4. Follow-up with the user. Send any applicable rewards, links to any opened GitHub issues, and answers to any outstanding questions.
