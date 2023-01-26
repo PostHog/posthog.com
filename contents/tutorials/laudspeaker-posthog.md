@@ -1,8 +1,8 @@
 ---
-title: How to automate customer journeys with PostHog with Laudspeaker
+title: Automating users journeys with PostHog with Laudspeaker
 sidebar: Docs
 showTitle: true
-author: ['Laudspeaker']
+author: ['laudspeaker']
 date: 2023-30-01
 featuredImage: ../images/tutorials/banners/tutorial-1.png
 tags: ["apps", "site-apps"]
@@ -24,29 +24,29 @@ In this tutorial we explain how to connect PostHog and Laudspeaker to create a s
 
 To start, go to the Apps section of your PostHog instance, search for and install the Laudspeaker Connector. 
 
----image---
+![Laudspeaker PostHog App](../images/tutorials/laudspeaker/laudspeakerinposthog.png)
 
 To configure the connector correctly, you need to supply the Laudspeaker endpoint. If you are self-hosting Laudspeaker, this is under your domain, otherwise it is `app.laudspeaker.com/events/posthog`.
 
 You also need to enter a Laudspeaker API key, which can be found in your Laudspeaker settings:
 
----image---
+![Laudspeaker PostHog App API settings](../images/tutorials/laudspeaker/laudspeaker_settings_api.png)
 
 Finally, you need to supply the name of your email property in PostHog, so Laudspeaker knows what a users' email address is. Typically, this is saved under property names such as `email`, `$email`, or `Email`. 
 
----image---
+![Laudspeaker PostHog App](../images/tutorials/laudspeaker/phappinfo.png)
 
 ### Step 2: Import your customers to Laudspeaker
 
-In Laudspeaker, go to your Settings and navigate to PostHog.
+If you'd like to import your existing users into Laudspeaker, go to your Settings and navigate to PostHog. You can optionally skip this step, if you prefer.
 
----image---
+![Laudspeaker settings](../images/tutorials/laudspeaker/settingsph.png)
 
 You need to add your PostHog API key and project ID, both of which can be found in PostHog's settings page. Once added, click Sync.
 
 Once Laudspeaker and PostHog are synced, users in PostHog become available in Laudspeaker and are visible under the People page. 
 
----image---
+![Laudspeaker People](../images/tutorials/laudspeaker/peoplepage.png)
 
 ## Creating your first journey
 
@@ -61,7 +61,7 @@ In Laudspeaker, create two steps for your users:
 - `Not signed up`, to be used before a user signs up
 - `Signed up`, to be used once a user has signed up
 
----image---
+![Laudspeaker Tutorial](../images/tutorials/laudspeaker/twosteps.png)
 
 ### Step 2: Configure triggers
 
@@ -71,13 +71,13 @@ Next, connect a trigger to to the `Not signed up` step and configure it so that 
 - Select PostHog, then the `pageview` event
 - Add conditions to the event and specify that the `current_url` string contains `/onboarding`
 
----image---
+![Laudspeaker Trigger](../images/tutorials/laudspeaker/onboardingtrigger.png)
 
 Now, when a user navigates to a page with `/onboarding` in its URL for the first time, that user moves from the `Not Signed Up` step to the `Signed up` step in this journey. 
 
 Add an email template to the `signed up` step and Laudspeaker sends that email when the step is triggered. Hit Save then Start to activate the journey. 
 
----image---
+![Laudspeaker Flow](../images/tutorials/laudspeaker/triggerfromtwosteps.png)
 
 PostHog can track many more events, including custom-defined actions. Laudspeaker supports these too, enabling you to create a wide range of customer journeys. Check [the official Laudspeaker website](https://laudspeaker.com/) for more information about what's possible, or [ask a question via the PostHog community](/questions). 
 
