@@ -95,7 +95,7 @@ export const SharedPostHogProvider = (props: any) => {
 
 export const MyScreen = () => {
   return (
-    // Every screen needs to be wrapped with this provider if you want to capture touches or use the hooks
+    // Every screen needs to be wrapped with this provider if you want to capture touches or use the hook `usePostHog()` 
     <SharedPostHogProvider>
       <View>
         ...
