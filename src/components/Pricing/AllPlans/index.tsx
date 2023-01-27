@@ -1,6 +1,6 @@
 import { TrackedCTA } from 'components/CallToAction'
 import React, { useState } from 'react'
-import { PlanComparison } from '../PlanComparison'
+import { PlanComparison } from '../control/PlanComparison'
 import { CloudIcon, SelfHostIcon } from '../Calculator/index'
 import { motion } from 'framer-motion'
 

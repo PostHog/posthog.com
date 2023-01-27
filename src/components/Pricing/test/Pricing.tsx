@@ -6,23 +6,20 @@ import { Quote } from 'components/Pricing/Quote'
 import 'components/Pricing/styles/index.scss'
 import { SEO } from '../../seo'
 import cntl from 'cntl'
-import Link from 'components/Link'
 import { SelfHostIcon } from 'components/Pricing/Calculator/index'
-import AllPlans from 'components/Pricing/AllPlans'
 import { animateScroll as scroll } from 'react-scroll'
 import SelfHostOverlay from 'components/Pricing/Overlays/SelfHost'
 import EnterpriseOverlay from 'components/Pricing/Overlays/Enterprise'
 import WhyCloud from 'components/Pricing/Overlays/WhyCloud'
 import usePostHog from '../../../hooks/usePostHog'
 import { useActions, useValues } from 'kea'
-import { TrackedCTA } from 'components/CallToAction'
 import Enterprise from 'components/Pricing/Modals/Enterprise'
 import { pricingSliderLogic } from 'components/Pricing/PricingSlider/pricingSliderLogic'
 import { LogSlider } from 'components/Pricing/PricingSlider/LogSlider'
 import { ProductIcons } from '../../ProductIcons/ProductIcons'
 import { NotProductIcons } from '../../NotProductIcons/NotProductIcons'
-import { RenderInClient } from 'components/RenderInClient'
 import SelfHost from '../SelfHost'
+import { PlanComparisonTest } from './PlanComparisonTest'
 
 export const section = cntl`
     max-w-6xl
@@ -114,31 +111,11 @@ const PricingTest = (): JSX.Element => {
                             Use PostHog free forever (with generous usage limits). Or pay per use and get unrestricted
                             access to everything.
                         </p>
-                        <RenderInClient>
-                            <TrackedCTA
-                                event={{
-                                    name: `clicked Get started - free`,
-                                    type: enterpriseMode ? 'cloud-enterprise' : 'cloud',
-                                }}
-                                type="primary"
-                                width="full lg:w-auto"
-                                className="shadow-md"
-                                to={
-                                    enterpriseMode
-                                        ? 'https://posthog.com/signup/cloud/enterprise'
-                                        : `https://${
-                                              posthog?.isFeatureEnabled &&
-                                              posthog?.isFeatureEnabled('direct-to-eu-cloud')
-                                                  ? 'eu'
-                                                  : 'app'
-                                          }.posthog.com/signup`
-                                }
-                            >
-                                {enterpriseMode ? 'Get in touch' : 'Get started - free'}
-                            </TrackedCTA>
-                        </RenderInClient>
                     </div>
                 </div>
+            </section>
+            <section className={`${section} mb-12 mt-12 md:px-4`}>
+                <PlanComparisonTest />
             </section>
 
             <section className={`${section} mb-12`}>
@@ -237,12 +214,6 @@ const PricingTest = (): JSX.Element => {
                         </div>
                     </div>
                 </div>
-            </section>
-            <section className={`${section} mb-12 mt-12 md:mt-24 md:px-4`}>
-                <h2 className="text-2xl m-0 flex items-center border-b border-dashed border-gray-accent-light pb-4">
-                    Compare all plans
-                </h2>
-                <AllPlans />
             </section>
             <section className={`${section} mb-12 mt-12 md:mt-24 md:px-4`}>
                 <h2 className="text-2xl m-0 flex items-center border-b border-dashed border-gray-accent-light pb-4">
