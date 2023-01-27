@@ -41,7 +41,7 @@ const features = [
         url: '/product/collaboration',
         icon: ProductIcons.teamCollaboration,
     },
-    { name: 'Insights' },
+    { name: 'Visualization' },
     {
         name: 'Session recording',
         url: '/product/session-recording',
@@ -59,7 +59,7 @@ const features = [
         icon: ProductIcons.featureFlags,
     },
     {
-        name: 'Experimentation',
+        name: 'Experiments',
         url: '/product/experimentation-suite',
         icon: ProductIcons.experiments,
     },
