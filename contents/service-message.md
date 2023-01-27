@@ -30,7 +30,7 @@ We expect only temporarily inconvenience. <b>No data or events will be lost</b>.
 
 <details> 
 <summary> Will I lose any data?</summary>
-No, no events or data will be lost. Events during the maintenance period will be delayed, and become accessible once the updates are complete. 
+No. No events or data will be lost. Events during the maintenance period will be delayed, and become accessible once the updates are complete. 
 </details>
 
 <details> 
@@ -40,7 +40,7 @@ Our Infrastructure Team is making some changes which are required to move PostHo
 
 <details> 
   <summary> How long will this take? </summary>
-We started the maintenance work at 08:00 CET on 1 Feb 2023 and expect it to take no more than two hours. Once the work is complete we will remove the in-app banner and service will return to normal. 
+We started the maintenance work at 08:00 CET (23:00 PST / 02:00 EST / 07:00 GMT) on 1 Feb 2023 and expect it to take no more than two hours. Once the work is complete we will remove the in-app banner and service will return to normal. 
 </details>
 
 <div className="centered py-5">
