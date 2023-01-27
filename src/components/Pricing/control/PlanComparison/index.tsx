@@ -17,12 +17,6 @@ const tiers = [
         description: 'Quis suspendisse ut fermentum neque vivamus non tellus.',
     },
     {
-        name: 'Scale Plus',
-        href: '#',
-        priceMonthly: 9,
-        description: 'Quis suspendisse ut fermentum neque vivamus non tellus.',
-    },
-    {
         name: 'Enterprise',
         href: '#',
         priceMonthly: 59,
@@ -594,7 +588,7 @@ export const PlanComparison = ({ className = '' }) => {
                             <thead>
                                 <tr>
                                     <th
-                                        className="py-2 px-3 text-[14px] font-medium text-almost-black border-white/10 sticky top-0 w-[200px] z-10 bg-opacity-50"
+                                        className="py-2 px-3 text-[14px] font-medium text-almost-black border-white/10 sticky top-0 w-[300px] z-10 bg-opacity-50"
                                         scope="col"
                                     >
                                         <span className="sr-only">Feature by</span>
@@ -632,7 +626,7 @@ export const PlanComparison = ({ className = '' }) => {
                                         {section.features.map((feature) => (
                                             <tr className="align-top" key={feature.name}>
                                                 <th
-                                                    className="py-2 px-3 text-sm font-medium text-almost-black text-left border-white/10 w-[180px]"
+                                                    className="py-2 px-3 text-sm font-medium text-almost-black text-left border-white/10 w-[240px]"
                                                     scope="row"
                                                 >
                                                     {typeof feature.docsLink === 'string' ? (

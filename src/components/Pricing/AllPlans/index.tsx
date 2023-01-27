@@ -26,7 +26,7 @@ interface IPlan {
 const cloudPlans: IPlan[] = [
     {
         title: 'Scale',
-        description: 'with community support & volume discounts',
+        description: 'Everything you need to build great products',
         pricing: {
             event: 0.00045,
         },
@@ -36,25 +36,12 @@ const cloudPlans: IPlan[] = [
         },
         pricingOption: 'cloud',
     },
-    {
-        title: 'Scale Plus',
-        description: 'SSO, project permissions, dashboard permissions',
-        pricing: {
-            event: 0.0005626,
-            monthly: 450,
-        },
-        mainCTA: {
-            title: 'Get started',
-            url: 'https://app.posthog.com/signup',
-        },
-        pricingOption: 'scale-plus',
-    },
 ]
 
 const enterprisePlans: IPlan[] = [
     {
         title: 'Enterprise',
-        description: 'Priority support, advanced permissions, team training',
+        description: '+ Security, compliance, and permissioning',
         pricing: {
             other: 'Contact us',
             event: 0,
@@ -97,7 +84,7 @@ const Plan = ({ plan }: { plan: IPlan }) => {
             <TrackedCTA
                 event={{ name: `clicked ${plan.mainCTA.title}`, type: plan.pricingOption }}
                 type="primary"
-                width="full"
+                width="56"
                 className="shadow-md mt-auto"
                 to={plan.mainCTA.url}
                 size="sm"
@@ -123,16 +110,7 @@ const PlanSection = ({
 }) => {
     return (
         <div className={`flex flex-col ${className}`}>
-            <div className="flex">
-                <Icon className="opacity-30 w-[36px] mr-2" />
-                <div>
-                    <h3 className="m-0 text-lg">{title}</h3>
-                    <p className="m-0 text-black/50 font-medium text-[14px]">{subtitle}</p>
-                </div>
-            </div>
-            <ul
-                className={`grow list-none grid m-0 p-0 sm:gap-x-6 sm:gap-y-0 gap-y-6 mt-5 pt-9 border-gray-accent-light border-dashed border-t sm:grid-cols-${plans.length}`}
-            >
+            <ul className={`grow list-none grid m-0 p-0 sm:gap-x-6 sm:gap-y-0 gap-y-6 sm:grid-cols-${plans.length}`}>
                 {plans.map((plan) => {
                     return <Plan key={plan.title} plan={plan} />
                 })}
@@ -146,12 +124,12 @@ export default function AllPlans() {
     return (
         <>
             <div
-                className={`grid md:grid-cols-3 md:gap-x-6 md:gap-y-0 gap-y-10 my-9 transition-all ${
-                    showComparison ? 'lg:ml-[180px]' : ''
+                className={`grid md:grid-cols-2 md:gap-x-6 md:gap-y-0 gap-y-10 my-9 transition-all ${
+                    showComparison ? 'lg:ml-[300px]' : ''
                 }`}
             >
                 <PlanSection
-                    className="md:col-span-2"
+                    className="md:col-span-1"
                     title="Standard"
                     subtitle="Everything you need to build great products"
                     Icon={CloudIcon}
