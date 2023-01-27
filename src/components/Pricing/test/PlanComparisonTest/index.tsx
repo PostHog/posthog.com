@@ -82,8 +82,6 @@ const getProductTiers = (product?: BillingProductV2Type): JSX.Element => {
         return (
             <>
                 <span className="font-bold text-base">Free</span>
-                {product?.free_allocation &&
-                    ` up to ${convertLargeNumberToWords(product?.free_allocation)} ${product.type}/mo`}
             </>
         )
     }
@@ -146,7 +144,7 @@ export const PlanComparisonTest = ({ className = '' }) => {
     const planColumns = 2
 
     const excludedFeatures = ['dashboard_collaboration', 'ingestion_taxonomy']
-    const borderStyle = 'border-b-3 border-dotted border-black/10 pb-6'
+    const borderStyle = 'border-b border-dashed border-gray-accent-light pb-6'
 
     useEffect(() => {
         const fetchPlans = async () => {
