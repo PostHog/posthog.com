@@ -17,6 +17,7 @@ hideAnchor: false
       - Guido Iaquinti, Site Reliability Engineer
       - Daniel Jaramillo, Site Reliability Engineer
     - Emanuele Capparelli, Growth Engineer
+      - Raquel Smith, Growth Engineer
     - Harry Waye, Full Stack Engineer
     - **Simon Fisher, Customer Success Lead**
       - Cameron DeLeone, Customer Success Manager
@@ -71,6 +72,7 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 - [Ben White](/handbook/company/team#ben-white-full-stack-engineer) (Team lead, Full Stack Engineer)
 - [Alex Kim](/handbook/company/team#alex-kim-full-stack-engineer) (Full Stack Engineer)
 - [Emanuele Capparelli](/handbook/company/team#ben-white-full-stack-engineer) (Growth Engineer)
+- Raquel Smith (Growth Engineer)
 - Product: Supported by Annika Schmid
 - Product design: Supported by Cory Watilo
 
