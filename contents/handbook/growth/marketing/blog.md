@@ -102,38 +102,34 @@ Submit a PR to [posthog/posthog.com](https://github.com/posthog/posthog.com) wit
 
 The following are our pre-approved categories and tags. Please **don't create new ones without Andy's approval:**
 
-```
-**Categories:**
+> **Categories:**
+>
+> - **Inside PostHog:** Behind-the-scenes on our culture, what we’re doing
+> - **Using PostHog:** Guides about doing stuff in PostHog
+> - **PostHog news:** Product updates, release notes and announcements
+> - **CEO diaries:** Insights from James Hawkins
+> - **Startups:** Guides and insights on startup life
+> - **HogMail:** The PostHog newsletter on the blog
+> - **Product growth:** Guides about product analytics, growth hacking et al.
+> - **Engineering:** Blogs about engineering at PostHog
+> - **General:** Category for blog posts with no obvious category
 
-- **Inside PostHog:** Behind-the-scenes on our culture, what we’re doing
-- **Using PostHog:** Guides about doing stuff in PostHog
-- **PostHog news:** Product updates, release notes and announcements
-- **CEO diaries:** Insights from James Hawkins
-- **Startups:** Guides and insights on startup life
-- **HogMail:** The PostHog newsletter on the blog
-- **Product growth:** Guides about product analytics, growth hacking et al.
-- **Engineering:** Blogs about engineering at PostHog
-- **General:** Category for blog posts with no obvious category
-```
-
-```
-**Tags:**
-
-- **Guides:** Any and all guides from all categories (actionable)
-- **Explainers:** Blogs explaining a concept or idea (non-actionable)
-- **Product analytics:** Blogs about about product analytics
-- **Product metrics:** Blogs about metrics and what to track
-- **Session recording:** Blogs about using session recording
-- **Feature flags:** Blogs about using feature flags
-- **Marketing**: Blogs about marketing
-- **Privacy:** Blogs about GDPR and other fun stuff
-- **Open source:** Blogs about open source products and projects
-- **Release notes:** PostHog release notes
-- **Product updates:** General product updates
-- **Comparisons:** PostHog vs other things
-- **ClickHouse**: Blogs about ClickHouse
-- **Y Combinator:** Blogs about YC
-```
+>**Tags:**
+>
+> - **Guides:** Any and all guides from all categories (actionable)
+> - **Explainers:** Blogs explaining a concept or idea (non-actionable)
+> - **Product analytics:** Blogs about about product analytics
+> - **Product metrics:** Blogs about metrics and what to track
+> - **Session recording:** Blogs about using session recording
+> - **Feature flags:** Blogs about using feature flags
+> - **Marketing**: Blogs about marketing
+> - **Privacy:** Blogs about GDPR and other fun stuff
+> - **Open source:** Blogs about open source products and projects
+> - **Release notes:** PostHog release notes
+> - **Product updates:** General product updates
+> - **Comparisons:** PostHog vs other things
+> - **ClickHouse**: Blogs about ClickHouse
+> - **Y Combinator:** Blogs about YC
 
 - Add a meta description using `description` in the frontmatter section (optional)
 
