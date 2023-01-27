@@ -1,8 +1,8 @@
-import Control from 'components/Pricing/Control'
+import Pricing from 'components/Pricing/Pricing'
 import React from 'react'
 
-const PricingNew = () => {
-    return <Control />
+const PricingPage = (): JSX.Element => {
+    return <Pricing />
 }
 
-export default PricingNew
+export default PricingPage

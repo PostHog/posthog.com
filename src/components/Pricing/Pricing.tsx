@@ -4,13 +4,10 @@ import React, { useState, useRef, useEffect } from 'react'
 import { FAQs } from 'components/Pricing/FAQs'
 import { Quote } from 'components/Pricing/Quote'
 import 'components/Pricing/styles/index.scss'
-import { SEO } from '../../components/seo'
+import { SEO } from '../seo'
 import cntl from 'cntl'
 import Link from 'components/Link'
-import { Info } from 'components/Icons/Icons'
-import Calculator from 'components/Pricing/Calculator/index'
-import { CloudIcon, SelfHostIcon } from 'components/Pricing/Calculator/index'
-import ProductPillars from 'components/Pricing/ProductPillars/index'
+import { SelfHostIcon } from 'components/Pricing/Calculator/index'
 import Features from 'components/Pricing/Features/index'
 import AllPlans from 'components/Pricing/AllPlans'
 import { animateScroll as scroll } from 'react-scroll'
@@ -22,37 +19,12 @@ import { useActions, useValues } from 'kea'
 import { TrackedCTA } from 'components/CallToAction'
 import Enterprise from 'components/Pricing/Modals/Enterprise'
 import { pricingSliderLogic } from 'components/Pricing/PricingSlider/pricingSliderLogic'
-import { LogSlider, prettyInt, sliderCurve } from 'components/Pricing/PricingSlider/LogSlider'
-import { pricing, pricingLabels } from 'components/Pricing/constants'
+import { LogSlider } from 'components/Pricing/PricingSlider/LogSlider'
 import { ProductIcons } from '../ProductIcons/ProductIcons'
 import { NotProductIcons } from '../NotProductIcons/NotProductIcons'
 import Breakdown from './Breakdown'
 import { RenderInClient } from 'components/RenderInClient'
 import SelfHost from './SelfHost'
-
-const Benefit = ({ children }) => {
-    return (
-        <li className="font-medium text-[15px] flex gap-x-1.5 items-start leading-tight">
-            <span className="w-[24px] flex justify-center items-center flex-shrink-0 mt-[2px]">
-                <Check />
-            </span>
-            <span>{children}</span>
-        </li>
-    )
-}
-
-const Check = () => {
-    return (
-        <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M2.9947 5.52548L6.4635 8.99428L14.7025 0.75528C15.2095 0.24824 16.0369 0.24824 16.5439 0.75528L17.3259 1.53732C17.833 2.04436 17.833 2.8717 17.3259 3.37872L7.46034 13.2443C6.95566 13.749 6.13534 13.7521 5.62674 13.2521L0.389145 8.10213C0.126645 7.84509 -0.00381509 7.52713 8.49096e-05 7.15995C0.00399111 6.79277 0.141491 6.47791 0.408685 6.22635L1.18056 5.49979C1.69306 5.01775 2.49696 5.02947 2.99462 5.52714L2.9947 5.52548Z"
-                fill="#BFBFBC"
-            />
-        </svg>
-    )
-}
 
 export const section = cntl`
     max-w-6xl
@@ -91,69 +63,15 @@ export const gridCellBottom = cntl`
     rounded-b-md
 `
 
-const Button = ({
-    onClick,
-    children,
-    active,
-}: {
-    onClick?: () => void
-    children: React.ReactNode
-    active?: boolean
-}) => {
-    return (
-        <button
-            className={`text-lg font-bold flex items-center flex-grow sm:flex-grow-0 sm:w-[186px] justify-between px-4 py-2 bg-white rounded-sm shadow-sm text-black/70 hover:text-black/95 relative active:top-[1px] active:scale-[.97] active:border-[2.5px] active:border-red transition-none ${
-                active ? 'border-red' : 'border-white'
-            } border-[2.5px] transition-colors`}
-            onClick={onClick}
-        >
-            <span>{children}</span>
-
-            <svg
-                className={`${active ? 'opacity-100' : 'opacity-0'} transition-none`}
-                width="18"
-                height="14"
-                viewBox="0 0 18 14"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-            >
-                <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M2.9947 5.52548L6.4635 8.99428L14.7025 0.75528C15.2095 0.24824 16.0369 0.24824 16.5439 0.75528L17.3259 1.53732C17.833 2.04436 17.833 2.8717 17.3259 3.37872L7.46034 13.2443C6.95566 13.749 6.13534 13.7521 5.62674 13.2521L0.389145 8.10213C0.126645 7.84509 -0.00381509 7.52713 8.49096e-05 7.15995C0.00399111 6.79277 0.141491 6.47791 0.408685 6.22635L1.18056 5.49979C1.69306 5.01775 2.49696 5.02947 2.99462 5.52714L2.9947 5.52548Z"
-                    fill="#F54E00"
-                />
-            </svg>
-        </button>
-    )
-}
-
-const B2C = () => {
-    return (
-        <div className="col-span-3 border-dashed border-gray-accent border py-2 mt-2 text-center px-4 bg-black bg-opacity-[2%]">
-            B2C company with insane event volume?{' '}
-            <Link to="/signup/b2c" className="font-bold text-orange inline-block">
-                Apply for a discount
-            </Link>
-        </div>
-    )
-}
-
 const Control = (): JSX.Element => {
-    const [selfHost, setSelfHost] = useState(false)
-    const [enterprise, setEnterprise] = useState(false)
     const [currentModal, setCurrentModal] = useState<string | boolean>(false)
     const posthog = usePostHog()
-    const [showVolumeDiscounts, setShowVolumeDiscounts] = useState(false)
     const [showPlanBuilder, setShowPlanBuilder] = useState(false)
     const [enterpriseModalOpen, setEnterpriseModalOpen] = useState(false)
     const [whyCloudOpen, setWhyCloudOpen] = useState(false)
     const builderRef = useRef<HTMLDivElement>()
     const {
         cloudCost,
-        selfHostedCost,
-        cloudEnterpriseCost,
-        selfHostedEnterpriseCost,
         sessionRecordingCost,
         sliderValue,
         sessionRecordingSliderValue,
@@ -162,16 +80,7 @@ const Control = (): JSX.Element => {
         eventNumber,
     } = useValues(pricingSliderLogic)
     const [enterpriseMode, setEnterpriseMode] = useState(false)
-    const { setPricingOption, setSessionRecordingSliderValue, setSliderValue } = useActions(pricingSliderLogic)
-
-    const handleEnterpriseModeChange = (checked: boolean) => {
-        setPricingOption(checked ? 'cloud-enterprise' : 'cloud')
-        setEnterpriseMode(checked)
-    }
-
-    const handleInfo = (currentModal: string) => {
-        setCurrentModal(currentModal)
-    }
+    const { setSessionRecordingSliderValue, setSliderValue } = useActions(pricingSliderLogic)
 
     useEffect(() => {
         if (showPlanBuilder) builderRef.current?.scrollIntoView({ behavior: 'smooth' })
