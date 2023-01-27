@@ -10,7 +10,7 @@ topics: ['experimentation', 'feature flags']
 
 Optimizing your marketing site often requires testing small changes against each other, also known as A/B tests. Getting the best site possible requires tweaking, experimenting, and tracking results.
 
-Webflow, as a no-code site builder, makes it easy to make these changes. PostHog, with its built-in experimentation suite, makes it easy to set up and track A/B tests and experiments. 
+[Webflow, a no-code site builder](https://webflow.com/), makes it easy to make these changes. PostHog, with its built-in experimentation suite, makes it easy to set up and track A/B tests and experiments. 
 
 This tutorial shows how to set up A/B tests with Webflow and PostHog to get the most out of your marketing site.
 
@@ -18,7 +18,7 @@ This tutorial shows how to set up A/B tests with Webflow and PostHog to get the 
 
 ## Setup Webflow and PostHog
 
-In case it wasn’t obvious, you need both a Webflow site and a PostHog instance. We covered how to add PostHog to Webflow in another tutorial, but the summary is:
+In case it wasn’t obvious, you need both a Webflow site and a PostHog instance. We covered [how to add PostHog to Webflow](/tutorials/webflow#adding-posthog-to-your-webflow-site) in another tutorial, but the summary is:
 
 1. Get the HTML snippet from your PostHog instance (in "Getting started" or "Project settings")
 2. Go to "Project Settings" of your Webflow site, click the "Custom Code" tab, paste the PostHog snippet
