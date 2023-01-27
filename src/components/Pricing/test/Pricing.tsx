@@ -99,7 +99,7 @@ const PricingTest = (): JSX.Element => {
                     <div className="lg:order-2">
                         <StaticImage
                             alt="The cutest hedgehog you've ever seen driving a red tractor"
-                            src="./images/tractor-hog.png"
+                            src="../images/tractor-hog.png"
                             className="max-w-screen-sm"
                             loading="eager"
                             placeholder="none"
