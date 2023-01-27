@@ -1,0 +1,539 @@
+---
+title: React
+sidebarTitle: React
+sidebar: Docs
+showTitle: true
+github: https://github.com/PostHog/posthog-js
+icon: ../../../../images/docs/integrate/react.svg
+features:
+    eventCapture: true
+    userIdentification: true
+    autoCapture: true
+    sessionRecording: true
+    featureFlags: true
+    groupAnalytics: true
+---
+
+React is the most popular JavaScript web framework. This page provides details on setting up and using PostHog and our `posthog-js` library with React. You can find more details in the [JavaScript library documentation](/docs/integrate/client/js).
+
+> Looking for React Native? Check the [React Native library documentation](/docs/integrate/client/react-native).
+
+## Installing PostHog
+
+There are two ways to install PostHog in your React app, through the `posthog-js` library and the HTML snippet. We recommend using the library.
+
+### Installing the posthog-js library
+
+You can install the library by running this command (with yarn) in your terminal:
+
+```bash
+yarn add posthog-js
+```
+
+or you can use npm:
+
+```bash
+npm install --save posthog-js
+```
+
+Once installed, you can initialize `posthog-js` in your app with your project API key and host. We recommend having this at a high level of your app, such as the `index.js` file.
+
+```js
+import posthog from 'posthog-js'
+posthog.init(<ph_project_api_key>, { api_host: '<ph_instance_address>' })
+```
+
+Once initialized, this provides access to PostHog throughout your app and begins to autocapture events, unless you configure it otherwise.
+
+### Snippet
+
+The second way is adding the HTML snippet. Just paste the Snippet into the `<head>` tags of your React app, such as `public/index.html`.
+
+```html
+<script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init(<ph_project_api_key>, {api_host: '<ph_instance_address>'})
+</script>
+```
+
+This also autocaptures events like inputs, button clicks, and pageviews as well as enables session recordings and full usage of the JavaScript library.
+
+> You must enable session recordings in "Project settings" under "Recordings."
+
+## Autocapture
+
+With either the library or snippet installed, you get the benefit of autocaptured events. This include:
+
+- **pageviews**, including the URL
+- **autocaptured events**, such as any click, change of input, or submission associated with **`a`**, **`button`**, **`form`**, **`input`**, **`select`**, **`textarea`**, and **`label`** tags
+
+If you enable session recordings in project settings under Recordings ("record user session"), session recordings will also be automatically captured of user behavior.
+
+### Tuning autocapture
+
+Autocapture is configurable. You can set up allow lists for events, URLs, elements, and CSS selectors. You can also modify the `true`/`false` value of `autocapture` `capture_pageview`,  `disable_session_recording` during initialization.
+
+You tune autocapture in the `posthog.init()` call no matter if it is the snippet or library. For example, if you wanted to only capture clicks on buttons in the docs section that contains the data attribute `ph-autocapture`, you can do this:
+
+```js
+posthog.init(<ph_project_api_key>,
+  {
+    api_host: '<ph_instance_address>',
+    autocapture: {
+      event_allowlist: ['click'], // DOM events from this list ['click', 'change', 'submit']
+      url_allowlist: ['posthog.com\.\/docs\/.*'], // strings or RegExps
+      element_allowlist: ['button'], // DOM elements from this list ['a', 'button', 'form', 'input', 'select', 'textarea', 'label']
+      css_selector_allowlist: ['[ph-autocapture]'] // List of CSS selectors
+    }
+  }
+)
+```
+
+PostHog makes sure to not capture sensitive data from input fields. PostHog only autocaptures name, id, and class attributes from input tags. If there are other areas you don't want captured, add the `ph-no-capture` class like this:
+
+```html
+<button class='ph-no-capture'>Sensitive information here</button>
+```
+
+## Custom event capture
+
+Autocapture provides many useful events, but often you want to instrument and customize your  events. The way to do this in PostHog is call `posthog.capture`.
+
+```js
+import posthog from 'posthog-js'
+posthog.capture("event-name");
+```
+
+### Adding properties to events
+
+You can also add properties to events to add more details about them. For example, if you wanted to capture a signed up event, that included the user's email and had the source set to Google, the event would look like this.
+
+```js
+posthog.capture(
+	"signed up",
+	{
+		email: user.email,
+		source: "Google"
+	}
+);
+```
+
+### Setting user properties via events
+
+When using the JavaScript library, every event is automatically connected to a user. To add properties to that user, you can use the `$set` and `$set_once` event properties. `$set` adds or modifies the property, and `$set_once` only modifies it (won't change it if already set).
+
+For example, if you wanted to set the user's source property to Google and their email if they didn't have one, you can do this:
+
+```js
+posthog.capture(
+	'signed up', 
+	{ 
+		$set: { source: "Google" },
+		$set_once: { email: user.email } 
+	}
+)
+```
+
+### Adding super properties to user events
+
+You can add super properties to your event that get sent with every capture call from a user. These are different than `$set` and `$set_once`, as they get added to a user's events, not the user themselves.
+
+To set up a super property, call `posthog.register` like this:
+
+```js
+posthog.register({
+	cohort: 'beta',
+	cohort_id: 12,
+})
+```
+
+Every event this user sends has the `cohort` and `cohort_id` values added as properties. If you register super properties again, they overwrite past properties. To only register super properties once, use `register_once` like this:
+
+```js
+posthog.register_once({
+	cohort_source: 'conference'
+})
+```
+
+This ensures a property already set will not be set again.
+
+You can also remove super properties by calling `posthog.unregister`, like this:
+
+```js
+posthog.unregister('cohort_source')
+```
+
+### Pageviews on single page apps
+
+React apps are often single page apps. PostHog captures pageviews based on URL changes, which means single page apps won't trigger a pageview event. 
+
+> Read our full tutorial on [capturing pageviews in single page apps](/tutorials/single-page-app-pageviews).
+
+If you are using `react-router-dom`, you can set up a custom event capture on location change like this:
+
+```js
+
+import { Route, Routes, Link, useLocation } from 'react-router-dom';
+import { Home } from './Home';
+import { About } from './About';
+import * as React from 'react';
+import posthog from 'posthog-js';
+
+function App() {
+  let location = useLocation();
+
+  React.useEffect(() => {
+    posthog.capture('$pageview')
+  }, [location]);
+
+  return (
+    <>
+      <nav>
+        <ul>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/about">About</Link></li>
+        </ul>
+      </nav>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </>
+  );
+}
+
+export default App;
+```
+
+You can use whatever method you like to capture pageviews, just be sure to call a `capture('$pageview')` event when you do it, and include the relevant properties (like `current_url`)
+
+## Identifying users
+
+> We recommend reading [our docs on identifying users](/docs/integrate/identifying-users) to understand how to use this method correctly.
+
+To make sure you understand which users are doing what in your app, you can identify users at any point. Every event has a user distinct ID, our snippet and library provide anonymous IDs, but you can use `posthog.identify` to give them a distinct id you choose.
+
+```js
+posthog.identify(
+    '[user unique id]', // distinct_id, required
+    { userProperty: 'value1' }, // $set, optional
+    { anotherUserProperty: 'value2' } // $set_once, optional
+);
+```
+
+This distinct ID can be anything, but it is usually the distinct ID you use in your database and models. You can also set as many user properties as you want in the identify call, such as email, billing details, date joined, and more.
+
+You should identifying users with this distinct ID as early in their usage as possible, ideally right after initializing PostHog or as soon as they login. We can't call identify straight after `init` because `init` sends a pageview event, you need to wait for PostHog to load, and you can use the loaded method for this.
+
+```js
+posthog.init(<ph_project_api_key>, {
+    api_host: '<ph_instance_address>',
+    loaded: function(posthog) { 
+			posthog.identify('[user unique id]'); 
+		}
+});
+```
+
+When an anonymous user is identified, their new distinct ID and old anonymous ID are automatically aliased together, meaning old and new events from both IDs connect to one person (with the new ID).
+
+### Aliasing multiple users
+
+You can also alias multiple distinct IDs together. This combines multiple persons in PostHog into one. To do this, call `posthog.alias` like this:
+
+```js
+posthog.alias('[distinct ID]', '[alias ID]')
+```
+
+The alias ID cannot combine with multiple distinct IDs. There is a one-to-many mapping between a distinct ID and their aliases.
+
+### Resetting user session
+
+If a user logs out or changes, you want to call `reset` to unset as distinct IDs for the session. Not doing this can cause problems like multiple unrelated users grouped as the same user because their sessions weren't reset.
+
+You can set a user like this:
+
+```js
+posthog.reset()
+```
+
+You can also reset their `device_id` by passing `true` as a parameter.
+
+```js
+posthog.reset(true)
+```
+
+Be sure that the `posthog-js` library loads before you do this, or it won't work.
+
+## Feature flags
+
+Feature flags allow you to safely roll out and roll back features based on percent and property conditions. You create these feature flags in PostHog and access them through the library.
+
+### Basic usage
+
+The most basic usage of a feature flag is evaluating it. This is done with `isFeaturedEnabled`:
+
+```js
+import posthog from 'posthog-js'
+posthog.isFeatureEnabled('flag-name') // returns true or false
+```
+
+This sends a `$feature_flag_called` event to your instance. You can disable this by passing the `send_event` property.
+
+```js
+posthog.isFeatureEnabled(
+  'flag-name',
+  { send_event: false }
+)
+```
+
+### Local evaluation
+
+Flags in our `posthog-js` library evaluate locally. We don't send a request to check flags' status each time a flag evaluates. This makes the flags responses (and your app) faster.
+
+The downside with local evaluation is that, if flags change, PostHog won't update its value until flags are reloaded (which could be the next user session). To reload the flags, call `reloadFeatureFlags` like this:
+
+```js
+posthog.reloadFeatureFlags()
+```
+
+### Bootstrapping flags
+
+If you have a backend that connects to PostHog, you can connect up to the frontend and send flag data that is available before the library loads.
+
+Normally, flags need to wait for the library to load and make a request to PostHog to get feature flag data before they can evaluate. Bootstrapping flags make them available immediately on page load.
+
+To do this, pass a `distinctID` and the flags when initializing the library.
+
+```js
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_instance_host>',
+    bootstrap: {
+        distinctID: 'your-anonymous-id',
+        featureFlags: {
+            'flag-1': true,
+            'variant-flag': 'control',
+            'other-flag': false
+        }
+    }
+})
+```
+
+To compute these flag values, use the corresponding `getAllFlags` method in your server-side library.
+
+If you've already identified the user, you can also pass `isIdentifiedID` which ensures the identified ID is handled properly in the library.
+
+```js
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_instance_host>',
+    bootstrap: {
+        distinctID: 'your-identified-id',
+        isIdentifiedID: true,
+        featureFlags: {
+            'flag-1': true,
+            'variant-flag': 'control',
+            'other-flag': false
+        }
+    }
+})
+```
+
+### Feature flag context and providers
+
+You can trigger functions when feature flags load by calling onFeatureFlags with a function you want to callback to.
+
+```js
+posthog.onFeatureFlags(callback)
+```
+
+You can use this to set up feature flags as context to be used through out your app. This example sets both the key and value of the flag (returned from `variants`) in the context.
+
+```js
+import React from "react";
+import posthog from "posthog-js";
+
+export const FeatureFlags = React.createContext();
+
+export const FeatureFlagProvider = ({ children }) => {
+  
+  const [flags, setFlags] = React.useState(null);
+
+  React.useEffect(() => {
+    posthog.onFeatureFlags(
+      (flags, variants) => setFlags(variants)
+    );
+  }, []);
+
+  return (
+    <FeatureFlags.Provider value={flags}>
+      {children}
+    </FeatureFlags.Provider>
+  );
+};
+```
+
+You can get the full details about feature flags by getting the context (`useContext`) you just set up.
+
+```js
+
+import { FeatureFlags } from './FeatureFlags';
+const flags = React.useContext(FeatureFlags);
+```
+
+> Flags, by default, are **locally evaluated** meaning you can just use `posthog.isFeatureEnabled('keyword')` to evaluate feature flags without making requests. Using a provider is optional if you set up your app correctly.
+
+You could turn this pattern into a [custom hook](https://reactjs.org/docs/hooks-custom.html#extracting-a-custom-hook) instead by defining the flags in a constant, passing that constant into a function, evaluating the flags with that function, then passing back the result.
+
+### Feature flag provider in TypeScript
+
+To keep flags typed throughout, you can set up a constants file.
+
+```ts
+export const FEATURE_FLAGS = {
+    TEST_FLAG: 'test_flag',
+}
+```
+
+You can then access it whenever you access the flags.
+
+```ts
+import { FEATURE_FLAGS } from './constants';
+import posthog from 'posthog-js';
+
+const test_flag = posthog.isFeatureEnabled(FEATURE_FLAGS.TEST_FLAG)
+```
+
+You can also set up a provider as we did in JavaScript.
+
+```ts
+import React, { useState, useEffect } from "react";
+import posthog from "posthog-js";
+
+interface Props {
+  children: React.ReactNode;
+}
+
+export const FeatureFlags = React.createContext<any | null>(null);
+
+export const FeatureFlagProvider: React.FC<Props> = ({ children }) => {
+  const [flags, setFlags] = useState<any | null>(null);
+
+  useEffect(() => {
+    posthog.onFeatureFlags(
+      (flags, variants) => setFlags(variants)
+    );
+  }, []);
+
+  return (
+    <FeatureFlags.Provider value={flags}>
+      {children}
+    </FeatureFlags.Provider>
+  );
+};
+```
+
+You can then access the provider where ever.
+
+```ts
+import { FeatureFlags } from './FeatureFlags';
+import { useContext } from 'react';
+
+const flags = useContext(FeatureFlags);
+```
+
+### Feature flags with Redux
+
+You can use Redux to manage the state of your feature flags. Here's an example implementation using `thunk`.
+
+```js
+import { configureStore, createSlice } from '@reduxjs/toolkit';
+import { Provider, useSelector } from 'react-redux';
+import posthog from "posthog-js";
+import React from 'react';
+
+// Define the slice
+const featureFlagsSlice = createSlice({
+  name: 'featureFlags',
+  initialState: null,
+  reducers: {
+    setFlags: (state, action) => {
+      return action.payload;
+    },
+  },
+});
+
+const { setFlags } = featureFlagsSlice.actions;
+
+// Create the store
+const store = configureStore({
+  reducer: featureFlagsSlice.reducer,
+});
+
+// Define the async action to fetch the flags
+const fetchFlags = () => {
+  return async (dispatch) => {
+    try {
+      posthog.onFeatureFlags((flags) => {
+        dispatch(setFlags(flags));
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
+
+// Provider component
+const FeatureFlagProvider = ({ children }) => {
+  React.useEffect(() => {
+    store.dispatch(fetchFlags());
+  }, []);
+
+  return (
+    <Provider store={store}>
+      {children}
+    </Provider>
+  );
+};
+
+// Hook to access the flags
+const useFeatureFlags = () => {
+  return useSelector(state => state);
+}
+
+export { FeatureFlagProvider, useFeatureFlags };
+```
+
+You can then access the flags with the `useFeatureFlags` function from the file.
+
+```js
+import { useFeatureFlags } from './State';
+const featureFlags = useFeatureFlags();
+```
+
+## Group analytics
+
+Group analytics allow you to associate events from a person's session with a group such as a team or organization.
+
+To associate, future events from a user with a group:
+
+```js
+posthog.group('company', '42dlsfj23f')
+// the current user is added to the `42dlsfj23f` group
+
+posthog.capture("upgraded plan") 
+// this event gets the company ID of `42dlsfj23f`
+```
+
+You can also update the properties of that group using the same `group()` call.
+
+```js
+posthog.group('company', '42dlsfj23f', {
+    name: 'Awesome Inc.',
+    employees: 11,
+})
+```
+
+It is important to call `posthog.reset()` when the user logs out or changes to ensure new events aren't registered under the previously active group. 
+
+## Further reading
+
+See more details about [persistence](/docs/integrate/client/js#persistence), [initialization configuration](/docs/integrate/client/js#config), and more in the [JavaScript library documentation](/docs/integrate/client/js).
