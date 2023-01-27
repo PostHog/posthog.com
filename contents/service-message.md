@@ -25,7 +25,7 @@ This disruption will only impact users on our US Cloud, regardless of where they
 
 <details> 
 <summary> What will the impact be?</summary>
-We expect only temporarily inconvenience. <b>No data or events will be lost</b>. New events and sessions will be delayed and some insights may experience errors until the maintenance is complete. New data and events will become accessible once the maintenance is complete, and PostHog will remain operational and accessible.
+We expect only temporarily inconvenience. <b>No data or events will be lost</b>. New events and sessions will be delayed and some insights may experience errors until the maintenance is complete. New data and events will become accessible once the maintenance is complete, and PostHog will remain operational and accessible throughout.
 </details>
 
 <details> 
@@ -35,7 +35,7 @@ No, no events or data will be lost. Events during the maintenance period will be
 
 <details> 
   <summary> What is being worked on? </summary>
-Our Infrastructure Team is making some changes which are required to move PostHog's US Cloud to a new database. This is part of essential work to make sure PostHog remains scalable.
+Our Infrastructure Team is making some changes which are required to move PostHog's US Cloud to a new database. Specifically, we're migrating our Postgres database from Heroku, to Amazon services. This is part of essential work needed to make sure PostHog remains scalable. Additionally, we expect the new hosting to offer improved performance.
 </details>
 
 <details> 
