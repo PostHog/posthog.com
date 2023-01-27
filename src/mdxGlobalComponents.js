@@ -101,7 +101,9 @@ import { Quote } from './components/Pricing/Quote'
 import { Savings } from './components/Pricing/Savings'
 import { SelfHost } from './components/Pricing/SelfHost'
 import { PlanComparison } from './components/Pricing/control/PlanComparison'
+import { OtherOptions } from './components/Pricing/test/OtherOptions'
 import { PlanComparisonTest } from './components/Pricing/test/PlanComparisonTest'
+import { PricingCalculator } from './components/Pricing/test/PricingCalculator'
 import { ProductAnchorNavbar } from './components/ProductAnchorNavbar'
 import { ProductFeature } from './components/ProductFeature'
 import { ProductFeaturePlugin } from './components/ProductFeaturePlugin'
@@ -241,7 +243,9 @@ export const shortcodes = {
     Savings,
     SelfHost,
     PlanComparison,
+    OtherOptions,
     PlanComparisonTest,
+    PricingCalculator,
     ProductAnchorNavbar,
     ProductFeature,
     ProductFeaturePlugin,
