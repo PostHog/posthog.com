@@ -211,13 +211,28 @@ Optimize for not breaking up. I'm an advocate for 50:50 equity and pay if sugges
 
 ## Spending money
 
-Spend as little as you can, within reason. Mainly, do _not_ hire anyone until you've got product market fit. This simply gives you longer to get there, and if the two of you can't get it, no one else stands a chance.
+Spend as little as you can. If you want to complete a computer game, you don't play it at double speed.
 
-I'm an advocate for a decent computer and your own room if you're living together. The former means you don't get pulled out of your flow and the latter means some privacy so you can decompress when you really need to. But hey, whatever works for you. Gym membership will be worth it too.
+Mainly, do _not_ hire anyone until you've got product market fit. This simply gives you longer to get there, and if the two of you can't get it, no one else stands a chance.
+
+There are a couple of things I _would_ spend a little more on than may feel comfortable (but they're things that have minimal impact compared to hiring). I'm an advocate for a decent computer and your own room if you're living together. The former means you don't get pulled out of your flow and the latter means some privacy so you can decompress when you really need to. But hey, whatever works for you. Gym membership will be worth it too.
+
+"But investors will judge us on our growth rate". Yep, but that'll be a million times higher if you hit product market fit properly versus faking it with paid ads or ineffective salespeople. At the early stages, it's the last few months of data not the first few months that matter anyway.
 
 ## Motivation
 
 If you aren't excited about what you're working on, pivot. It's as simple as that. You're going to go a lot further if you're working on something that feels like it's _your_ startup versus someone else's.
+
+Even if you already know each other well (which I hope you do), talk deeply about motivation with your cofounder as early as possible - ideally before you start working together. These are the types of questions to ask.
+
+* how long are we willing to try to hit product market fit?
+* how long can we afford to try?
+* do we want to raise money or bootstrap the company?
+* what will you want to look back on having achieved when you're 80?
+* what sort of company do you want to run? How would it look and feel day to day?
+* what roles would we each have? Will you feel happy about this in 5 years?
+* would you sell for $1M / $10M / $100M / $1Bn?
+* what kind of work do you want to do / what don't you want to do?
 
 ## Pivots
 
@@ -235,9 +250,13 @@ This, especially applied to your website, is probably more important than you th
 
 When it comes to the website, most people will grab a template to get something thrown together quickly.
 
-To quote Cory, our lead designer, self-proclaimed webmaster, "we didn't start by thinking we could build the slickest website, so we built one that felt different instead".
+To quote Cory, our lead designer, and self-proclaimed webmaster, "we didn't start by thinking we could build the slickest website, so we built one that felt different instead".
 
-When it comes to the product, you want to a competent-feeling product, but in most cases, it doesn't need to be best-in-class.
+When it comes to the product, you want to ship a competent-feeling product, but in most cases, it doesn't need to be best-in-class. I'd argue that your website's design is _more_ important when you're in a phase of trying to get anyone to sign up.
+
+The good news is that design starts with copy. If you get simple, clear language onto your website - that explains what you _do_, and meets the other use cases your visitors may have -, then you're ahead of 75% of other websites.
+
+Don't worry about pixel perfection. I once met (Malthe Sigurdsson)[https://twitter.com/malthe], who ran design at Stripe. He told me that great designers are fast and iterative. They don't get things perfect first time around.
 
 ## Building stuff
 
@@ -247,9 +266,15 @@ That latest sexy javascript framework will _not_ help you hire anyone who cares 
 
 ## Dealing with existing users
 
-We have the concept of closing the loop.
+We have the concept of closing the loop. It goes like this:
 
-Don't put anything between the person writing the code and your users. This will slow you down and will cause confusion.
+1. ship something
+1. get feedback from a user - focus on the problem they're trying to solve not the solution they ask for
+1. if you shipped a feature for them or fixed a bug - tell them! Then go back to step 1.
+
+When you go through this loop, in one hit you manage to improve your product, amaze your users and get word of mouth growth, _and_ you teach your users that you act on feedback so it's worth them giving more of it.
+
+Don't put anything between the person writing the code and your users. This will slow you down and will cause confusion. No one wants to spend time explaining problems to someone that doesn't really get them. It is more effective in the long run to productize answers to users' problems, than it is to spent lots of time triaging issues... which wind up with you or your engineers anyway.
 
 ## Sales
 
