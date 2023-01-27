@@ -34,13 +34,13 @@ If this sounds like bad news to you, consider one of following six Google Optimi
 - **Unlimited experiments:** <span className="text-green text-lg">✔</span>
 - **Best for:** Product and engineering teams
 
-[PostHog](posthog.com/) is a comprehensive Google Optimize and [GA4 alternative](/blog/ga4-alternatives) that integrates A/B and multivariate testing with event-based analytics, session recording, and feature flags.
+[PostHog](https://posthog.com/) is a comprehensive Google Optimize and [GA4 alternative](/blog/ga4-alternatives) that integrates A/B and multivariate testing with event-based analytics, session recording, and feature flags.
 
 PostHog supports A/B and multivariate experiments that target by geography, device, source, cohort, or limitless other user properties. It tracks metric improvement goals for success, secondary goals, and estimates how long it takes to get a statistically significant result. PostHog's experimentation suite is built on its feature flag functionality, making it easy to rollout winning variants.
 
 As an all-in-one platform, PostHog simplifies your data and analytics stack by replacing multiple tools. This makes it easy to quickly create experiments using existing data and cohorts in your product analytics, rather than connecting an external data source.
 
-PostHog has a range of [libraries and SDKs](/docs/integrate), from [JavaScript](/docs/integrate/client/js) to [Python](/docs/integrate/server/python] to [iOS](/docs/integrate/client/ios), to help integrate into your website or apps' codebase. It has has an HTML snippet for easy setup with basic sites, [Shopify](/docs/integrate/third-party/shopify), [Wordpress](/docs/integrate/third-party/wordpress), [Webflow](/tutorials/webflow), and more.
+PostHog has a range of [libraries and SDKs](/docs/integrate), from [JavaScript](/docs/integrate/client/js) to [Python](/docs/integrate/server/python) to [iOS](/docs/integrate/client/ios), to help integrate into your website or apps' codebase. It has has an HTML snippet for easy setup with basic sites, [Shopify](/docs/integrate/third-party/shopify), [Wordpress](/docs/integrate/third-party/wordpress), [Webflow](/tutorials/webflow), and more.
 
 ### How much does PostHog cost?
 
@@ -62,7 +62,7 @@ PostHog offers **unlimited experiments** on PostHog Cloud, which includes 1 mill
 - **Unlimited experiments:** <span className="text-red text-lg">✖</span>
 - **Best for:** Marketing teams
 
-[Unbounce](unbounce.com) is a popular content marketing platform among small and medium-size businesses. It allows marketers to quickly create landing pages using its page builder and AI copy writing tools, then use its 'Smart Traffic' system to automatically direct users to the best-performing variant. It supports traditional A/B tests, too.
+[Unbounce](https://unbounce.com) is a popular content marketing platform among small and medium-size businesses. It allows marketers to quickly create landing pages using its page builder and AI copy writing tools, then use its 'Smart Traffic' system to automatically direct users to the best-performing variant. It supports traditional A/B tests, too.
 
 This 'Smart Traffic' system is what's known as 'multi-armed bandit' testing, where machine learning is used to dynamically allocate traffic to the best performing variant. This is especially effective in marketing scenarios as Unbounce says it can direct visitors to their ideal variant after just 50 visits. Conversion rates should improve the longer a test is run as the algorithm learns.
 
@@ -70,7 +70,7 @@ The downside is Unbounce is only suitable for use on marketing websites – it c
 
 ### How much does Unbounce cost?
 
-Unbounce offers a pleasing range of transparently-priced plans. Its entry-level 'Launch' plan is $99 per month and supports "up to 500 conversions", 20k visitors and one website domain – "conversions" being any time a user completes a conversion goal. Additional plans increase these limits and there's a 25% discount for paying annually. 
+Unbounce offers a pleasing range of transparently-priced plans. Its entry-level 'Launch' plan is $99 per month and supports "up to 500 conversions", 20k visitors, and one website domain – "conversions" being any time a user completes a conversion goal. Additional plans increase these limits and there's a 25% discount for paying annually. 
 
 ### Companies that use Unbounce
 
@@ -87,7 +87,7 @@ Unbounce offers a pleasing range of transparently-priced plans. Its entry-level 
 - **Unlimited experiments:** <span className="text-green text-lg">✔</span>
 - **Best for:** Product and engineering teams
 
-[GrowthBook](www.growthbook.io/) is a popular open-source feature flagging and experimentation platform. It supports A/B and multivariate tests, and integrates with a range of popular analytics tools, such as Google Analytics (UA), Mixpanel, Matomo, and most popular data warehouses.
+[GrowthBook](https"//www.growthbook.io/) is a popular open-source feature flagging and experimentation platform. It supports A/B and multivariate tests, and integrates with a range of popular analytics tools, such as Google Analytics (UA), Mixpanel, Matomo, and most popular data warehouses.
 
 It offers a basic visual editor so non-technical users can create experiments without writing code. GrowthBook's 'Guardrail' feature monitors for unintended second order effects of your change which you're not actively testing for.
 
@@ -131,11 +131,11 @@ Instapage's self-serve plan costs $299 per month ($199 if billed annually) and i
 - **Unlimited experiments:** <span className="text-green text-lg">✔</span>
 - **Best for:** Marketing teams
 
-[VWO](vwo.com) is a testing platform that primarily targets large enterprises. Its experimentation platform includes support for A/B and multivariate tests, and a visual editor, though some features are locked behind its numerous product tiers. Geo-targeting, for example, is only available on the 'Pro' tier of VWO Testing, while feature flags are only available as part of its VWO FullStack product.
+[VWO](https://vwo.com) is a testing platform that primarily targets large enterprises. Its experimentation platform includes support for A/B and multivariate tests, and a visual editor, though some features are locked behind its numerous product tiers. Geo-targeting, for example, is only available on the 'Pro' tier of VWO Testing, while feature flags are only available as part of its VWO FullStack product.
 
 ### How much does VWO cost?
 
-Outside of its new Starter plan, VWO is largely a 'price on application' product. Its Starter plan is free up to 50k visitors per month, and $199 per month up to 100k visitors per month, but it's quite limited. It only supports basic A\B tests and split URL testing, and you can only target based on device.
+Outside of its new Starter plan, VWO is largely a 'price on application' product. Its Starter plan is free up to 50k visitors per month, and $199 per month up to 100k visitors per month, but it's quite limited. It only supports basic A/B tests and split URL testing, and you can only target based on device.
 
 ### Companies that use VWO
 
@@ -152,7 +152,7 @@ Outside of its new Starter plan, VWO is largely a 'price on application' product
 - **Unlimited experiments:** <span className="text-red text-lg">✖</span>
 - **Best for:** Engineering and product teams
 
-[LaunchDarkly](launchdarkly.com) is a leading platform for feature management (feature flags) that also enables experimentation. Like all the products in this list, it supports A/B and multivariate testing. In contrast to Unbounce, however, LaunchDarkly is designed for product and engineering teams, so it lacks marketing-friendly features like a visual editor. 
+[LaunchDarkly](https://launchdarkly.com) is a leading platform for feature management (feature flags) that also enables experimentation. Like all the products in this list, it supports A/B and multivariate testing. In contrast to Unbounce, however, LaunchDarkly is designed for product and engineering teams, so it lacks marketing-friendly features like a visual editor. 
 
 LaunchDarkly is a good option if you require a fully-featured feature flagging tool in addition to experimentation features, and it's particularly popular among enterprises with complex feature control needs.
 

@@ -6,7 +6,7 @@ import { Heading } from 'components/Heading'
 import { InlineCode } from 'components/InlineCode'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
-import PostLayout, { Contributors, PageViews, ShareLinks, SidebarSection, Topics } from 'components/PostLayout'
+import PostLayout, { Contributors, ShareLinks, SidebarSection, Topics } from 'components/PostLayout'
 import { SEO } from 'components/seo'
 import { ZoomImage } from 'components/ZoomImage'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
@@ -38,7 +38,7 @@ const ViewButton = ({ title, view, setView }) => {
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
-const TutorialSidebar = ({ contributors, location, title, pageViews, categories }) => {
+const TutorialSidebar = ({ contributors, location, title, categories }) => {
     return (
         <>
             {contributors?.length > 0 && (
@@ -54,11 +54,6 @@ const TutorialSidebar = ({ contributors, location, title, pageViews, categories 
             <SidebarSection title="Share">
                 <ShareLinks title={title} href={location.href} />
             </SidebarSection>
-            {pageViews && (
-                <SidebarSection>
-                    <PageViews pageViews={pageViews.toLocaleString()} />
-                </SidebarSection>
-            )}
             {categories?.length > 0 && (
                 <SidebarSection title="Filed under...">
                     <Topics
@@ -73,7 +68,7 @@ const TutorialSidebar = ({ contributors, location, title, pageViews, categories 
     )
 }
 
-export default function Tutorial({ data, pageContext: { pageViews, tableOfContents, menu }, location }) {
+export default function Tutorial({ data, pageContext: { tableOfContents, menu }, location }) {
     const { pageData } = data
     const { body, excerpt, fields } = pageData
     const { title, featuredImage, description, contributors, categories, featuredVideo } = pageData?.frontmatter
@@ -123,7 +118,6 @@ export default function Tutorial({ data, pageContext: { pageViews, tableOfConten
                         contributors={contributors}
                         location={location}
                         title={title}
-                        pageViews={pageViews}
                         categories={categories}
                     />
                 }
