@@ -1,5 +1,5 @@
 import { useLocation } from '@reach/router'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React, { useEffect, useState } from 'react'
 import { animateScroll as scroll, Link as ScrollLink } from 'react-scroll'
@@ -543,14 +543,14 @@ const Survey = ({ contentContainerClasses = '' }) => {
 interface IMenu {
     name: string
     url?: string
-    children?: [IMenu]
+    children?: IMenu[]
 }
 
 interface IGetActiveMenu {
-    menu: [IMenu]
+    menu: IMenu[]
     parent?: {
         name: string
-        menu: [IMenu]
+        menu: IMenu[]
     }
 }
 
@@ -559,9 +559,9 @@ const getActiveMenu = ({
     url = location.pathname,
     ...other
 }: {
-    menu: [IMenu]
+    menu: IMenu[]
     url?: string
-    parent?: { menu: [IMenu]; name: string }
+    parent?: { menu: IMenu[]; name: string }
 }): IGetActiveMenu | undefined => {
     let parent = other.parent
     for (const menuItem of menu) {
@@ -586,9 +586,29 @@ const MenuContainer = ({
     children: React.ReactNode
     setOpen: (open: null | string) => void
 }) => {
+    const y = useMotionValue(0)
+    const input = [0, 200]
+    const output = [1, 0]
+    const opacity = useTransform(y, input, output)
+    const [yState, setYState] = useState(y.get())
+
     const handleClose = () => {
         setOpen(null)
     }
+
+    const handleDragEnd = () => {
+        if (yState < 200) {
+            y.stop()
+            y.set(0)
+        } else {
+            setOpen(null)
+        }
+    }
+
+    useEffect(() => {
+        const unsubscribe = y.onChange(setYState)
+        return unsubscribe
+    }, [])
 
     return (
         <motion.div
@@ -596,17 +616,24 @@ const MenuContainer = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed w-full h-full bg-white/70 top-0 left-0"
+            className="fixed w-full h-full bg-white/70 dark:bg-black/70 top-0 left-0"
         >
             <motion.div
-                transition={{ bounce: false }}
                 onClick={(e) => e.stopPropagation()}
                 initial={{ translateY: '100%', opacity: 0 }}
                 animate={{ translateY: 0, opacity: 1 }}
                 exit={{ translateY: '100%', opacity: 0 }}
                 className="px-4 fixed bottom-0 w-full left-0"
             >
-                <div className="bg-white py-4 px-4 rounded-tr-md rounded-tl-md shadow-lg">{children}</div>
+                <motion.div
+                    dragConstraints={{ top: 0 }}
+                    style={{ y, opacity }}
+                    onDragEnd={handleDragEnd}
+                    drag="y"
+                    className="bg-white dark:bg-gray-accent-dark py-4 px-4 rounded-tr-md rounded-tl-md shadow-lg"
+                >
+                    {children}
+                </motion.div>
             </motion.div>
         </motion.div>
     )
@@ -618,20 +645,20 @@ const MobileMenu = ({
     ...other
 }: {
     crumbs: [ICrumb]
-    menu: [IMenu]
+    menu: IMenu[]
     setOpen: (open: null | string) => void
 }) => {
     const [animationDirection, setAnimationDirection] = useState<'forward' | 'backward'>('forward')
-    const [menu, setMenu] = useState(getActiveMenu({ menu: other.menu }))
-    const handleClick = ({ url, menu }: { url?: string; menu?: [IMenu] }) => {
-        if (url) {
-            gatsbyNavigate(url)
-        } else if (menu) {
+    const [menu, setMenu] = useState(getActiveMenu({ menu: other.menu }) || { menu: other.menu })
+    const handleClick = ({ url, menu }: { url?: string; menu?: IMenu[] }) => {
+        if (menu) {
             const newMenu = getActiveMenu({
                 menu: other.menu,
                 url: menu.find((menuItem) => !!menuItem.url)?.url,
             })
             setMenu(newMenu)
+        } else if (url) {
+            gatsbyNavigate(url)
         }
     }
     const container = {
@@ -646,7 +673,7 @@ const MobileMenu = ({
 
     const item = {
         hidden: {
-            translateX: animationDirection === 'forward' ? '-100%' : '100%',
+            translateX: animationDirection === 'forward' ? '-50%' : '50%',
             opacity: 0,
         },
         show: { translateX: 0, opacity: 1 },
@@ -655,21 +682,9 @@ const MobileMenu = ({
     return (
         <MenuContainer setOpen={setOpen}>
             {crumbs && (
-                <div className="pb-4 mb-4 border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark">
+                <div className="pb-4 mb-4 border-b border-dashed border-gray-accent-light/50 ">
                     <Crumbs crumbs={crumbs} />
                 </div>
-            )}
-            {menu?.parent && (
-                <button
-                    className="flex space-x-1 items-center"
-                    onClick={() => {
-                        setAnimationDirection('backward')
-                        handleClick({ menu: menu?.parent?.menu })
-                    }}
-                >
-                    <RightArrow className="transform -scale-x-1 w-5 h-5 color-red" />
-                    <h5 className="m-0 text-base">{menu?.parent?.name}</h5>
-                </button>
             )}
 
             <motion.ul
@@ -677,33 +692,52 @@ const MobileMenu = ({
                 initial="hidden"
                 animate="show"
                 variants={container}
-                className="list-none m-0 p-0 pl-6 mt-2 h-[300px] overflow-auto"
+                className="list-none m-0 p-0 pl-6 mt-2 h-[40vh] overflow-auto"
             >
+                {menu?.parent?.menu && (
+                    <motion.li
+                        initial={{ translateX: '100%', opacity: 0 }}
+                        animate={{ translateX: 0, opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="mb-3 flex items-center relative"
+                    >
+                        <button
+                            className="transform -scale-x-1 text-red -translate-x-full absolute"
+                            onClick={() => {
+                                setAnimationDirection('backward')
+                                handleClick({ menu: menu?.parent?.menu })
+                            }}
+                        >
+                            <RightArrow className="w-6 h-6" />
+                        </button>
+                        <h5 className="m-0 text-base">{menu?.parent?.name}</h5>
+                    </motion.li>
+                )}
                 {menu?.menu?.map(({ name, url, children }, index) => {
                     return (
                         <motion.li
                             variants={item}
-                            transition={{ duration: 0.3 }}
                             exit={{ opacity: 0 }}
-                            className="relative last:mb-0 mb-3"
+                            className={`${url === undefined ? 'mt-5' : ''} relative last:mb-0 mb-3 first:mt-0`}
                             key={name + index + url}
                         >
-                            <button
-                                className={`flex items-center space-x-2 text-black dark:text-white text-base ${
-                                    url === location.pathname ? 'active-product opacity-100' : 'opacity-60'
-                                }`}
-                                onClick={() => {
-                                    setAnimationDirection('forward')
-                                    handleClick({ url, menu: children })
-                                }}
-                            >
-                                <span className="text-left">{name}</span>
-                                {children && (
-                                    <span>
-                                        <RightArrow className="w-3 h-3" />
-                                    </span>
+                            <div className={`text-base`}>
+                                {url === undefined ? (
+                                    <h5 className="m-0 text-base">{name}</h5>
+                                ) : (
+                                    <button
+                                        className={`${
+                                            url === location.pathname ? 'active-product opacity-100' : 'opacity-60'
+                                        } hover:opacity-100`}
+                                        onClick={() => {
+                                            setAnimationDirection('forward')
+                                            handleClick({ url, menu: children })
+                                        }}
+                                    >
+                                        <span className="text-left">{name}</span>
+                                    </button>
                                 )}
-                            </button>
+                            </div>
                         </motion.li>
                     )
                 })}
@@ -712,15 +746,15 @@ const MobileMenu = ({
     )
 }
 
-const MobileNav = ({ crumbs, menu }: { crumbs: [ICrumb]; menu: [IMenu] }) => {
+const MobileNav = ({ crumbs, menu }: { crumbs: [ICrumb]; menu: IMenu[] }) => {
     const [open, setOpen] = useState<null | string>(null)
 
     return (
-        <div className="sticky bottom-0 px-4 pb-4 z-50 sm:block">
+        <div className="sticky bottom-0 px-4 pb-4 z-[99999999] block lg:hidden">
             <button
                 onClick={() => setOpen(open === 'menu' ? null : 'menu')}
                 className={`py-2 px-4 bg-white flex space-x-2 items-center font-semibold rounded-full active:top-[0.5px]
-                active:scale-[.98] transition-transform`}
+                active:scale-[.98] transition-transform text-black shadow-lg`}
             >
                 <Bookmark />
                 <span>Menu</span>
@@ -860,7 +894,7 @@ export default function PostLayout({
                         {!hideSidebar && sidebar && (
                             <aside
                                 key={`${title}-sidebar`}
-                                className="flex-shrink-0 w-full justify-self-end my-10 lg:my-0 mr-auto h-full lg:px-0 px-4 box-border flex flex-col"
+                                className="flex-shrink-0 w-full justify-self-end my-10 lg:my-0 mr-auto h-full lg:px-0 px-4 box-border lg:flex hidden flex-col"
                             >
                                 <div>{sidebar}</div>
                                 <div className="flex flex-grow items-end">

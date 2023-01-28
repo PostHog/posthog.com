@@ -282,7 +282,7 @@ export default function Handbook({
                     }
                     tableOfContents={[...tableOfContents, { depth: 0, value: 'Questions?', url: 'squeak-questions' }]}
                     contentWidth="100%"
-                    breadcrumb={[breadcrumbBase, ...(breadcrumb || [])]}
+                    breadcrumb={[breadcrumbBase, ...(breadcrumb?.slice(0, breadcrumb.length - 1) || [])]}
                     hideSidebar={hideAnchor}
                     nextPost={nextPost}
                 >
