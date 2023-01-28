@@ -710,7 +710,7 @@ const MobileMenu = ({
                         >
                             <RightArrow className="w-6 h-6" />
                         </button>
-                        <h5 className="m-0 text-base">{menu?.parent?.name}</h5>
+                        <h5 className="m-0 text-base font-semibold opacity-40">{menu?.parent?.name}</h5>
                     </motion.li>
                 )}
                 {menu?.menu?.map(({ name, url, children }, index) => {
@@ -727,8 +727,8 @@ const MobileMenu = ({
                                 ) : (
                                     <button
                                         className={`${
-                                            url === location.pathname ? 'active-product opacity-100' : 'opacity-60'
-                                        } hover:opacity-100`}
+                                            url === location.pathname ? 'active-product opacity-90' : 'opacity-50'
+                                        } hover:opacity-100 font-semibold`}
                                         onClick={() => {
                                             setAnimationDirection('forward')
                                             handleClick({ url, menu: children })
