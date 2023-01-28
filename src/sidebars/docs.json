@@ -206,7 +206,7 @@
             },
             {
                 "name": "Open-Source",
-                "url": "/docs/self-host/open-source/deployment",
+                "url": "",
                 "children": [
                     {
                         "name": "Disclaimer",
@@ -224,7 +224,7 @@
             },
             {
                 "name": "Enterprise",
-                "url": "/docs/self-host/enterprise/overview",
+                "url": "",
                 "children": [
                     {
                         "name": "Overview",

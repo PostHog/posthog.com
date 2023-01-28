@@ -1,35 +1,32 @@
 import { useLocation } from '@reach/router'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { animateScroll as scroll, Link as ScrollLink } from 'react-scroll'
 import Scrollspy from 'react-scrollspy'
-import { push as PushMenu } from 'react-burger-menu'
 import { flattenMenu, replacePath } from '../../../gatsby/utils'
-import { IContributor, ICrumb, IMenu, INextPost, IProps, ISidebarAction, ITopic } from './types'
+import { IContributor, ICrumb, INextPost, IProps, ISidebarAction, ITopic } from './types'
 
 import Chip from 'components/Chip'
 import {
+    Bookmark,
     Edit,
     ExpandDocument,
-    InfoOutlined,
     Issue,
     LinkedIn,
     LinkIcon,
     Mail,
-    MobileMenu,
     RightArrow,
     Twitter,
 } from 'components/Icons/Icons'
 import Link from 'components/Link'
 import InternalSidebarLink from 'components/Docs/InternalSidebarLink'
 import { DarkModeToggle } from 'components/DarkModeToggle'
-import { Popover } from 'components/Popover'
 import Tooltip from 'components/Tooltip'
 import { CallToAction } from 'components/CallToAction'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
 import SidebarSearchBox from 'components/Search/SidebarSearchBox'
+import { navigate as gatsbyNavigate } from 'gatsby'
 
 const ShareLink = ({ children, url }: { children: React.ReactNode; url: string }) => {
     const width = 626
@@ -460,23 +457,28 @@ export const TableOfContents = ({
     )
 }
 
+const Crumbs = ({ crumbs, className = '' }) => {
+    return (
+        <ul className={`list-none p-0 m-0 whitespace-nowrap overflow-auto flex ${className}`}>
+            {crumbs.map(({ name, url }, index) => {
+                return (
+                    <li
+                        key={index}
+                        className={`after:mx-2 after:text-gray-accent-light last:after:hidden after:content-["/"]`}
+                    >
+                        <Link to={url}>{name}</Link>
+                    </li>
+                )
+            })}
+        </ul>
+    )
+}
+
 const Breadcrumb = ({ crumbs }: { crumbs: ICrumb[] }) => {
-    const crumbsFiltered = crumbs?.filter(({ url }) => url && url !== location.pathname)
-    const last = crumbsFiltered[crumbsFiltered.length - 1]
+    const last = crumbs[crumbs.length - 1]
     return (
         <>
-            <ul className="list-none hidden p-0 m-0 whitespace-nowrap overflow-auto sm:flex">
-                {crumbsFiltered.map(({ name, url }, index) => {
-                    return (
-                        <li
-                            key={index}
-                            className={`after:mx-2 after:text-gray-accent-light last:after:hidden after:content-["/"]`}
-                        >
-                            <Link to={url}>{name}</Link>
-                        </li>
-                    )
-                })}
-            </ul>
+            <Crumbs crumbs={crumbs} className="sm:flex hidden" />
             <Link className="sm:hidden flex space-x-1 items-center" to={last.url}>
                 <span>
                     <RightArrow className="transform -scale-x-1 w-5 h-5" />
@@ -488,7 +490,7 @@ const Breadcrumb = ({ crumbs }: { crumbs: ICrumb[] }) => {
 }
 
 export const sidebarButtonClasses =
-    'hover:bg-gray-accent-light rounded-[3px] h-8 w-8 flex justify-center items-center hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark my-1 space-x-[1px] transition-colors dark:text-white/50 dark:hover:text-white/100 text-black/50 hover:text-black/100 transition active:top-[0.5px] active:scale-[.9]'
+    'hover:bg-gray-accent-light rounded-[3px] h-8 w-8 flex justify-center items-center hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark my-1 mx-1 space-x-[1px] transition-colors dark:text-white/50 dark:hover:text-white/100 text-black/50 hover:text-black/100 transition active:top-[0.5px] active:scale-[.9]'
 
 const SidebarAction = ({ children, title, width, className = '', href, onClick }: ISidebarAction) => {
     return (
@@ -538,6 +540,198 @@ const Survey = ({ contentContainerClasses = '' }) => {
     )
 }
 
+interface IMenu {
+    name: string
+    url?: string
+    children?: [IMenu]
+}
+
+interface IGetActiveMenu {
+    menu: [IMenu]
+    parent?: {
+        name: string
+        menu: [IMenu]
+    }
+}
+
+const getActiveMenu = ({
+    menu,
+    url = location.pathname,
+    ...other
+}: {
+    menu: [IMenu]
+    url?: string
+    parent?: { menu: [IMenu]; name: string }
+}): IGetActiveMenu | undefined => {
+    let parent = other.parent
+    for (const menuItem of menu) {
+        if (menuItem.url === url) return { menu, parent }
+        if (menuItem.children) parent = { menu, name: menuItem.name }
+        const activeMenu =
+            menuItem?.children &&
+            getActiveMenu({
+                menu: menuItem?.children,
+                url,
+                parent,
+            })
+        if (activeMenu) return activeMenu
+        continue
+    }
+}
+
+const MenuContainer = ({
+    children,
+    setOpen,
+}: {
+    children: React.ReactNode
+    setOpen: (open: null | string) => void
+}) => {
+    const handleClose = () => {
+        setOpen(null)
+    }
+
+    return (
+        <motion.div
+            onClick={handleClose}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed w-full h-full bg-white/70 top-0 left-0"
+        >
+            <motion.div
+                transition={{ bounce: false }}
+                onClick={(e) => e.stopPropagation()}
+                initial={{ translateY: '100%', opacity: 0 }}
+                animate={{ translateY: 0, opacity: 1 }}
+                exit={{ translateY: '100%', opacity: 0 }}
+                className="px-4 fixed bottom-0 w-full left-0"
+            >
+                <div className="bg-white py-4 px-4 rounded-tr-md rounded-tl-md shadow-lg">{children}</div>
+            </motion.div>
+        </motion.div>
+    )
+}
+
+const MobileMenu = ({
+    crumbs,
+    setOpen,
+    ...other
+}: {
+    crumbs: [ICrumb]
+    menu: [IMenu]
+    setOpen: (open: null | string) => void
+}) => {
+    const [animationDirection, setAnimationDirection] = useState<'forward' | 'backward'>('forward')
+    const [menu, setMenu] = useState(getActiveMenu({ menu: other.menu }))
+    const handleClick = ({ url, menu }: { url?: string; menu?: [IMenu] }) => {
+        if (url) {
+            gatsbyNavigate(url)
+        } else if (menu) {
+            const newMenu = getActiveMenu({
+                menu: other.menu,
+                url: menu.find((menuItem) => !!menuItem.url)?.url,
+            })
+            setMenu(newMenu)
+        }
+    }
+    const container = {
+        hidden: { opacity: 0 },
+        show: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.01,
+            },
+        },
+    }
+
+    const item = {
+        hidden: {
+            translateX: animationDirection === 'forward' ? '-100%' : '100%',
+            opacity: 0,
+        },
+        show: { translateX: 0, opacity: 1 },
+    }
+
+    return (
+        <MenuContainer setOpen={setOpen}>
+            {crumbs && (
+                <div className="pb-4 mb-4 border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark">
+                    <Crumbs crumbs={crumbs} />
+                </div>
+            )}
+            {menu?.parent && (
+                <button
+                    className="flex space-x-1 items-center"
+                    onClick={() => {
+                        setAnimationDirection('backward')
+                        handleClick({ menu: menu?.parent?.menu })
+                    }}
+                >
+                    <RightArrow className="transform -scale-x-1 w-5 h-5 color-red" />
+                    <h5 className="m-0 text-base">{menu?.parent?.name}</h5>
+                </button>
+            )}
+
+            <motion.ul
+                key={menu?.parent?.name}
+                initial="hidden"
+                animate="show"
+                variants={container}
+                className="list-none m-0 p-0 pl-6 mt-2 h-[300px] overflow-auto"
+            >
+                {menu?.menu?.map(({ name, url, children }, index) => {
+                    return (
+                        <motion.li
+                            variants={item}
+                            transition={{ duration: 0.3 }}
+                            exit={{ opacity: 0 }}
+                            className="relative last:mb-0 mb-3"
+                            key={name + index + url}
+                        >
+                            <button
+                                className={`flex items-center space-x-2 text-black dark:text-white text-base ${
+                                    url === location.pathname ? 'active-product opacity-100' : 'opacity-60'
+                                }`}
+                                onClick={() => {
+                                    setAnimationDirection('forward')
+                                    handleClick({ url, menu: children })
+                                }}
+                            >
+                                <span className="text-left">{name}</span>
+                                {children && (
+                                    <span>
+                                        <RightArrow className="w-3 h-3" />
+                                    </span>
+                                )}
+                            </button>
+                        </motion.li>
+                    )
+                })}
+            </motion.ul>
+        </MenuContainer>
+    )
+}
+
+const MobileNav = ({ crumbs, menu }: { crumbs: [ICrumb]; menu: [IMenu] }) => {
+    const [open, setOpen] = useState<null | string>(null)
+
+    return (
+        <div className="sticky bottom-0 px-4 pb-4 z-50 sm:block">
+            <button
+                onClick={() => setOpen(open === 'menu' ? null : 'menu')}
+                className={`py-2 px-4 bg-white flex space-x-2 items-center font-semibold rounded-full active:top-[0.5px]
+                active:scale-[.98] transition-transform`}
+            >
+                <Bookmark />
+                <span>Menu</span>
+            </button>
+            <AnimatePresence>
+                {open === 'menu' && <MobileMenu setOpen={setOpen} menu={menu} crumbs={crumbs} />}
+            </AnimatePresence>
+        </div>
+    )
+}
+
 const defaultMenuWidth = { left: 265, right: 265 }
 
 export default function PostLayout({
@@ -561,14 +755,11 @@ export default function PostLayout({
     mobileMenu = true,
     searchFilter,
 }: IProps) {
-    const { hash, pathname } = useLocation()
-    const breakpoints = useBreakpoint()
+    const { hash } = useLocation()
     const [view, setView] = useState('Article')
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const [fullWidthContent, setFullWidthContent] = useState(hideSidebar || !sidebar)
-    const [showTocButton, setShowTocButton] = useState(null)
-    const topSidebarSection = useRef(null)
-    const bottomSidebarSection = useRef(null)
+    const crumbsFiltered = breadcrumb
 
     const handleMobileMenuClick = () => {
         setMobileMenuOpen(!mobileMenuOpen)
@@ -579,19 +770,6 @@ export default function PostLayout({
             scroll.scrollMore(-50)
         }
     }, [])
-
-    useEffect(() => {
-        setShowTocButton(null)
-    }, [tableOfContents])
-
-    useEffect(() => {
-        if (showTocButton === null) {
-            setShowTocButton(
-                topSidebarSection?.current?.getBoundingClientRect().bottom >=
-                    bottomSidebarSection?.current?.getBoundingClientRect().top
-            )
-        }
-    }, [showTocButton])
 
     const handleFullWidthContentChange = () => {
         localStorage.setItem('full-width-content', !fullWidthContent + '')
@@ -614,43 +792,7 @@ export default function PostLayout({
         } ${menu ? 'mx-auto' : 'lg:ml-auto'}`
 
     return (
-        <div id="menu-wrapper" className="border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark">
-            {menu && mobileMenu && (
-                <div className="block lg:hidden py-2 px-4 border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark flex justify-between sticky top-[-2px] bg-tan dark:bg-primary z-30">
-                    <button onClick={handleMobileMenuClick} className="py-2 px-3">
-                        <MobileMenu style={{ transform: `rotate(${mobileMenuOpen ? '180deg' : '0deg'})` }} />
-                    </button>
-                </div>
-            )}
-
-            {menu && mobileMenu && (
-                <PushMenu
-                    width="calc(100vw - 80px)"
-                    customBurgerIcon={false}
-                    customCrossIcon={false}
-                    styles={{
-                        bmOverlay: {
-                            background: 'transparent',
-                        },
-                        bmMenuWrap: {
-                            height: '80%',
-                        },
-                    }}
-                    onClose={() => setMobileMenuOpen(false)}
-                    pageWrapId="content-menu-wrapper"
-                    outerContainerId="menu-wrapper"
-                    overlayClassName="backdrop-blur"
-                    isOpen={mobileMenuOpen}
-                >
-                    <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark pt-6 px-6">
-                        <TableOfContents
-                            menuType={menuType}
-                            handleLinkClick={() => setMobileMenuOpen(false)}
-                            menu={menu}
-                        />
-                    </div>
-                </PushMenu>
-            )}
+        <div className="sm:border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark">
             <div
                 style={{
                     gridAutoColumns: menu ? `${menuWidth?.left ?? defaultMenuWidth?.left}px 1fr` : `1fr 1fr`,
@@ -674,25 +816,26 @@ export default function PostLayout({
                     </div>
                 )}
                 <div className="flex flex-col">
-                    {breadcrumb && (
-                        <section
-                            style={{
-                                gridAutoColumns: menu
-                                    ? `1fr ${menuWidth?.right ?? defaultMenuWidth?.right}px`
-                                    : `minmax(auto, ${contentWidth}px) minmax(max-content, 1fr)`,
-                            }}
-                            className={
-                                'pt-4 sm:pb-4 pb-0 sm:border-b border-gray-accent-light dark:border-gray-accent-dark border-dashed lg:grid lg:grid-flow-col items-center'
-                            }
-                        >
+                    <section
+                        style={{
+                            gridAutoColumns: menu
+                                ? `1fr ${menuWidth?.right ?? defaultMenuWidth?.right}px`
+                                : `minmax(auto, ${contentWidth}px) minmax(max-content, 1fr)`,
+                        }}
+                        className={
+                            'sm:pt-4 sm:pb-4 pb-0 sm:border-b border-gray-accent-light dark:border-gray-accent-dark border-dashed lg:grid lg:grid-flow-col items-center'
+                        }
+                    >
+                        {crumbsFiltered?.length > 0 && (
                             <div className={`${contentContainerClasses} grid-cols-1`}>
-                                <Breadcrumb crumbs={breadcrumb} />
+                                <Breadcrumb crumbs={crumbsFiltered} />
                             </div>
-                            <div className="ml-auto px-6 lg:mt-0 mt-4 lg:block hidden">
-                                <ShareLinks href={location.href} title={title} />
-                            </div>
-                        </section>
-                    )}
+                        )}
+                        <div className="ml-auto px-6 lg:mt-0 mt-4 lg:block hidden">
+                            <ShareLinks href={location.href} title={title} />
+                        </div>
+                    </section>
+
                     <div
                         className="lg:grid lg:grid-flow-col items-start flex-grow"
                         style={{
@@ -704,7 +847,7 @@ export default function PostLayout({
                         <article
                             key={`${title}-article`}
                             id="content-menu-wrapper"
-                            className="lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:py-12 py-8 ml-auto w-full h-full box-border"
+                            className="lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:py-12 py-4 ml-auto w-full h-full box-border"
                         >
                             <div className={contentContainerClasses}>
                                 <div>{children}</div>
@@ -712,28 +855,18 @@ export default function PostLayout({
                             </div>
                             {!hideSurvey && <Survey contentContainerClasses={contentContainerClasses} />}
                             {nextPost && <NextPost {...nextPost} contentContainerClasses={contentContainerClasses} />}
+                            {menu && mobileMenu && <MobileNav menu={menu} crumbs={crumbsFiltered} />}
                         </article>
                         {!hideSidebar && sidebar && (
                             <aside
                                 key={`${title}-sidebar`}
-                                className="flex-shrink-0 w-full justify-self-end my-10 lg:my-0 mr-auto h-full lg:px-0 px-4 box-border"
+                                className="flex-shrink-0 w-full justify-self-end my-10 lg:my-0 mr-auto h-full lg:px-0 px-4 box-border flex flex-col"
                             >
-                                <div className="h-full flex flex-col divide-y divide-gray-accent-light dark:divide-gray-accent-dark divide-dashed">
-                                    <div className="relative h-full">
-                                        <div ref={topSidebarSection} className="top-0 sticky">
-                                            {sidebar}
-                                        </div>
-                                    </div>
-
-                                    <div
-                                        ref={bottomSidebarSection}
-                                        className="lg:pt-6 !border-t-0 mt-auto lg:sticky bottom-0"
-                                    >
-                                        {view === 'Article' && toc?.length > 1 && !showTocButton && (
-                                            <div
-                                                style={{ visibility: showTocButton === null ? 'hidden' : 'visible' }}
-                                                className="px-4 lg:px-8 lg:pb-4 lg:block hidden"
-                                            >
+                                <div>{sidebar}</div>
+                                <div className="flex flex-grow items-end">
+                                    <div className="lg:pt-6 !border-t-0 sticky bottom-0 w-full">
+                                        {view === 'Article' && toc?.length > 1 && (
+                                            <div className="px-4 lg:px-8 lg:pb-4 lg:block hidden">
                                                 <h4 className="text-black dark:text-white font-semibold opacity-25 m-0 mb-1 text-sm">
                                                     Jump to:
                                                 </h4>
@@ -756,44 +889,9 @@ export default function PostLayout({
                                                 </Scrollspy>
                                             </div>
                                         )}
-                                        <ul className="list-none pl-2 pr-3 py-1 flex mt-0 mb-10 lg:mb-0 border-t border-gray-accent-light border-dashed dark:border-gray-accent-dark items-center bg-tan/40 dark:bg-primary/40 backdrop-blur">
-                                            {view === 'Article' && toc?.length > 1 && showTocButton && (
-                                                <SidebarAction title="On this page">
-                                                    <Popover
-                                                        button={
-                                                            <span className={sidebarButtonClasses}>
-                                                                <InfoOutlined />
-                                                            </span>
-                                                        }
-                                                    >
-                                                        <div className="p-4 w-[250px] text-left">
-                                                            <h4 className="text-[13px] mb-2">On this page</h4>
-                                                            <Scrollspy
-                                                                offset={-50}
-                                                                className="list-none m-0 p-0 flex flex-col"
-                                                                items={tableOfContents?.map((navItem) => navItem.url)}
-                                                                currentClassName="active-product"
-                                                            >
-                                                                {toc.map((navItem, index) => (
-                                                                    <li
-                                                                        className="relative leading-none m-0"
-                                                                        key={navItem.url}
-                                                                    >
-                                                                        <InternalSidebarLink
-                                                                            url={navItem.url}
-                                                                            name={navItem.value}
-                                                                            depth={navItem.depth}
-                                                                            className="hover:opacity-100 opacity-60 text-[14px] py-1 block relative active:top-[0.5px] active:scale-[.99]"
-                                                                        />
-                                                                    </li>
-                                                                ))}
-                                                            </Scrollspy>
-                                                        </div>
-                                                    </Popover>
-                                                </SidebarAction>
-                                            )}
+                                        <ul className="list-none p-0 flex mt-0 mb-10 lg:mb-0 border-t border-gray-accent-light border-dashed dark:border-gray-accent-dark items-center bg-tan/40 dark:bg-primary/40 backdrop-blur">
                                             {filePath && (
-                                                <>
+                                                <div className="flex divide-x divide-dashed divide-gray-accent-light dark:divide-gray-accent-dark border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark">
                                                     <SidebarAction
                                                         href={`https://github.com/PostHog/posthog.com/tree/master/contents/${filePath}`}
                                                         title="Edit this page"
@@ -806,9 +904,9 @@ export default function PostLayout({
                                                     >
                                                         <Issue />
                                                     </SidebarAction>
-                                                </>
+                                                </div>
                                             )}
-                                            <div className="ml-auto flex">
+                                            <div className="ml-auto flex divide-x divide-dashed divide-gray-accent-light dark:divide-gray-accent-dark border-l border-dashed border-gray-accent-light dark:border-gray-accent-dark">
                                                 <SidebarAction
                                                     className="hidden xl:block"
                                                     title="Toggle content width"
@@ -816,7 +914,11 @@ export default function PostLayout({
                                                 >
                                                     <ExpandDocument expanded={fullWidthContent} />
                                                 </SidebarAction>
-                                                <SidebarAction className="ml-2" width="auto" title="Toggle dark mode">
+                                                <SidebarAction
+                                                    className="pl-2 pr-2"
+                                                    width="auto"
+                                                    title="Toggle dark mode"
+                                                >
                                                     <DarkModeToggle />
                                                 </SidebarAction>
                                             </div>
