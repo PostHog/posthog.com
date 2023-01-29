@@ -312,7 +312,6 @@ export default function Handbook({
                                     Last updated: <time>{lastUpdated}</time>
                                 </p>
                             )}
-                            {showToc && <MobileSidebar tableOfContents={tableOfContents} />}
                         </div>
                         {features && <LibraryFeatures availability={features} />}
                         <div className="article-content">

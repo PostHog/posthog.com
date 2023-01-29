@@ -2221,3 +2221,30 @@ export const Bookmark = (props: any) => {
         </svg>
     )
 }
+
+export const TableOfContents = (props: any) => {
+    return (
+        <svg {...props} width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M2.13295 1.06697C2.13295 2.48894 0 2.48894 0 1.06697C0 -0.355005 2.13295 -0.355005 2.13295 1.06697Z"
+                fill="currentColor"
+            />
+            <path d="M4.26562 0H15.9984V2.13294H4.26562V0Z" fill="currentColor" />
+            <path
+                d="M2.13295 5.33383C2.13295 6.7558 0 6.7558 0 5.33383C0 3.91086 2.13295 3.91086 2.13295 5.33383Z"
+                fill="currentColor"
+            />
+            <path d="M4.26562 4.26685H15.9984V6.39979H4.26562V4.26685Z" fill="currentColor" />
+            <path
+                d="M2.13295 9.59968C2.13295 11.0227 0 11.0227 0 9.59968C0 8.17771 2.13295 8.17771 2.13295 9.59968Z"
+                fill="currentColor"
+            />
+            <path d="M4.26562 8.53394H15.9984V10.6669H4.26562V8.53394Z" fill="currentColor" />
+            <path
+                d="M2.13295 13.8668C2.13295 15.2887 0 15.2887 0 13.8668C0 12.4448 2.13295 12.4448 2.13295 13.8668Z"
+                fill="currentColor"
+            />
+            <path d="M4.26562 12.7996H15.9984V14.9325H4.26562V12.7996Z" fill="currentColor" />
+        </svg>
+    )
+}

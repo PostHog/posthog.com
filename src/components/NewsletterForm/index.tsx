@@ -49,7 +49,7 @@ export const NewsletterForm = ({
                         <input
                             type="email"
                             name="EMAIL"
-                            className="block w-full px-2 py-2 flex-1 bg-white border-gray-accent-light rounded-sm font-semibold text-sm outline-none max-w-sm pr-7"
+                            className="block w-full px-2 py-2 flex-1 bg-white border-gray-accent-light rounded-sm font-semibold text-sm outline-none pr-7"
                             id="mce-EMAIL"
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder="email@address.com"

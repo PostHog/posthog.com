@@ -113,7 +113,7 @@ const BlogPostSidebar = ({ contributors, date, filePath, title, tags, location, 
     return (
         <>
             {contributors && (
-                <SidebarSection className="lg:block hidden">
+                <SidebarSection>
                     <Contributors contributors={contributors} />
                 </SidebarSection>
             )}

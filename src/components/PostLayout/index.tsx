@@ -18,6 +18,9 @@ import {
     Mail,
     RightArrow,
     Twitter,
+    TableOfContents as TOCIcon,
+    Info,
+    InfoOutlined,
 } from 'components/Icons/Icons'
 import Link from 'components/Link'
 import InternalSidebarLink from 'components/Docs/InternalSidebarLink'
@@ -639,6 +642,22 @@ const MenuContainer = ({
     )
 }
 
+const container = {
+    hidden: { opacity: 0 },
+    show: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.01,
+        },
+    },
+}
+
+const motionListContainer = {
+    initial: 'hidden',
+    animate: 'show',
+    variants: container,
+}
+
 const MobileMenu = ({
     crumbs,
     setOpen,
@@ -661,15 +680,6 @@ const MobileMenu = ({
             gatsbyNavigate(url)
         }
     }
-    const container = {
-        hidden: { opacity: 0 },
-        show: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.01,
-            },
-        },
-    }
 
     const item = {
         hidden: {
@@ -689,9 +699,7 @@ const MobileMenu = ({
 
             <motion.ul
                 key={menu?.parent?.name}
-                initial="hidden"
-                animate="show"
-                variants={container}
+                {...motionListContainer}
                 className="list-none m-0 p-0 pl-6 mt-2 h-[40vh] overflow-auto"
             >
                 {menu?.parent?.menu && (
@@ -746,21 +754,79 @@ const MobileMenu = ({
     )
 }
 
-const MobileNav = ({ crumbs, menu }: { crumbs: [ICrumb]; menu: IMenu[] }) => {
+const MobileTOC = ({ setOpen, toc }) => {
+    const item = {
+        hidden: {
+            translateX: '50%',
+            opacity: 0,
+        },
+        show: { translateX: 0, opacity: 1 },
+    }
+    return (
+        <MenuContainer setOpen={setOpen}>
+            <p className="opacity-40 text-base mt-0 mb-3 font-semibold">On this page</p>
+            <motion.ul
+                {...motionListContainer}
+                className="list-none m-0 p-0 flex flex-col space-y-1 max-h-[40vh] overflow-auto"
+            >
+                {toc?.map((navItem, index) => {
+                    return (
+                        <motion.li variants={item} exit={{ opacity: 0 }} key={index}>
+                            <InternalSidebarLink
+                                onClick={() => setOpen(null)}
+                                url={navItem.url}
+                                name={navItem.value}
+                                depth={navItem.depth}
+                                className="jumpTo text-[15px] pl-6"
+                            />
+                        </motion.li>
+                    )
+                })}
+            </motion.ul>
+        </MenuContainer>
+    )
+}
+
+const MobileSidebar = ({ sidebar, setOpen }: { sidebar: React.ReactNode }) => {
+    return (
+        <MenuContainer setOpen={setOpen}>
+            <div className="h-[40vh] overflow-auto">{sidebar}</div>
+        </MenuContainer>
+    )
+}
+
+const menuButtonClasses = `bg-white flex space-x-2 items-center font-semibold active:top-[0.5px]
+active:scale-[.98] transition-transform text-black shadow-md`
+
+const MobileNav = ({ crumbs, menu, toc, sidebar }: { crumbs: [ICrumb]; menu: IMenu[] }) => {
     const [open, setOpen] = useState<null | string>(null)
 
     return (
         <div className="sticky bottom-0 px-4 pb-4 z-[99999999] block lg:hidden">
-            <button
-                onClick={() => setOpen(open === 'menu' ? null : 'menu')}
-                className={`py-2 px-4 bg-white flex space-x-2 items-center font-semibold rounded-full active:top-[0.5px]
-                active:scale-[.98] transition-transform text-black shadow-lg`}
-            >
-                <Bookmark />
-                <span>Menu</span>
-            </button>
+            <div className="flex">
+                <button onClick={() => setOpen('menu')} className={`py-2 px-4 rounded-full ${menuButtonClasses}`}>
+                    <Bookmark />
+                    <span>Menu</span>
+                </button>
+                <div className="ml-auto flex justify-end divide-x divide-dashed divide-gray-accent-light">
+                    <button
+                        onClick={() => setOpen('toc')}
+                        className={`aspect-square h-full flex items-center justify-center rounded-tl-full rounded-bl-full ${menuButtonClasses}`}
+                    >
+                        <TOCIcon />
+                    </button>
+                    <button
+                        onClick={() => setOpen('sidebar')}
+                        className={`aspect-square h-full flex items-center justify-center rounded-tr-full rounded-br-full  ${menuButtonClasses}`}
+                    >
+                        <InfoOutlined />
+                    </button>
+                </div>
+            </div>
             <AnimatePresence>
                 {open === 'menu' && <MobileMenu setOpen={setOpen} menu={menu} crumbs={crumbs} />}
+                {open === 'toc' && <MobileTOC toc={toc} setOpen={setOpen} />}
+                {open === 'sidebar' && <MobileSidebar sidebar={sidebar} setOpen={setOpen} />}
             </AnimatePresence>
         </div>
     )
@@ -889,7 +955,9 @@ export default function PostLayout({
                             </div>
                             {!hideSurvey && <Survey contentContainerClasses={contentContainerClasses} />}
                             {nextPost && <NextPost {...nextPost} contentContainerClasses={contentContainerClasses} />}
-                            {menu && mobileMenu && <MobileNav menu={menu} crumbs={crumbsFiltered} />}
+                            {menu && mobileMenu && (
+                                <MobileNav menu={menu} toc={toc} crumbs={crumbsFiltered} sidebar={sidebar} />
+                            )}
                         </article>
                         {!hideSidebar && sidebar && (
                             <aside
