@@ -341,6 +341,7 @@ export const PlanComparisonTest = ({ className = '' }) => {
                                                             </div>
                                                         }
                                                         tooltipClassName="max-w-xs m-4"
+                                                        placement={window.innerWidth > 1024 ? 'right' : 'bottom'}
                                                     >
                                                         <span className={`pb-1 mb-2 ${getBorderStyle()}`}>
                                                             {feature.name}
