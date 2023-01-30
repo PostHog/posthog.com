@@ -70,4 +70,15 @@ Occasionally, we have to conduct scheduled maintenance. When this happens, it's 
 
 Typically, Marketing takes responsible for informing users about maintenance work beforehand by telling users who will be impacted through email and other channels. 
 
+When informing users about maintenance, it is important to answer all of the following points:
+
+- When will the maintenance occur?
+- How long will it take?
+- Who will be impacted? 
+- Will any data be lost?
+- Do users need to take any sort of action?
+- How will feature flags and experiments be impacted?
+- What will the impact be? Will insights, etc., still function?
+- Why is the maintenance being done, and what benefit will there be for users?
+
 While maintenance is being carried out, we typically use the Notification Bar app within PostHog to tell users that work is ongoing and direct them firstly to `/service-message` where we will provide further information. Once the maintenance is finished, the `service-message` page is updated to reflect that no maintenance is underway, and the banner is removed. 
