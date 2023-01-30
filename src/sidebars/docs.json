@@ -31,6 +31,10 @@
                 "url": "/docs/getting-started/actions-and-insights"
             },
             {
+                "name": "Session recording",
+                "url": "/docs/getting-started/session-recording"
+            },
+            {
                 "name": "Feature flags",
                 "url": "/docs/getting-started/feature-flags"
             },
