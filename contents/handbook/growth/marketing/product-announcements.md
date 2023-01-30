@@ -4,7 +4,11 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Marketing takes responsibility for coordinating and publicizing news about PostHog, including product announcements. 
+Marketing takes responsibility for coordinating and publicizing news about PostHog, including product announcements. We do this mainly through weekly Array articles, which summarize product updates, PostHog news and sneak peeks of in-progress work.
+
+In addition to the weekly Array article, we also send a 'What's New In PostHog?' email to all users once a month. 
+
+We also use email, social and other channels too, where relevant.
 
 However, not all announcements require the same level of marketing support. We therefore group them into tiers which help us decide what level of investment is required from the Marketing team. Which tier applies is agreed upon by the Marketing and Product teams and agreement should be sought as early as possible if Marketing support is expected.
 
@@ -17,7 +21,7 @@ Minor announcements involve changes which have no noticeable impact on the exper
 
 We may support minor announcements by…
 
-- Including them as ‘Other improvements and fixes’ in PostHog Array.
+- Including them in the weekly Array post.
 - Writing a short Twitter and/or LinkedIn post.
 - Posting in the user Slack group.
 
@@ -28,10 +32,10 @@ Medium announcements involve changes which have a noticeable impact on the exper
 
 We may support medium announcements by…
 
-- Including them in Array release highlights.
+- Including them in the weekly Array as a release highlights.
+- Including them in the monthly What's New In PostHog? email. 
 - Writing a Twitter and LinkedIn post.
-- Sending targeted emails to affected users. 
-- Posting in the user Slack group with a @here tag.
+- Posting in the user Slack group.
 - Writing a tutorial created for week of release.
 - Creating an in-app banner for existing users.
 - Sharing links to the social media announcement internally via Slack, so colleagues can amplify them.
@@ -44,9 +48,10 @@ Major announcements involve changes which have a noticeable impact on the experi
 
 We may support major announcements by…
 
-- Including them as the primary headline items in Array.
+- Including them as the primary headline items in the weekly Array post.
+- Including them in the monthly What's New In PostHog? email. 
 - Writing a Twitter thread and LinkedIn post.
-- Writing a Twitter thread posted by @james406.
+- Writing a Twitter thread to be posted by @james406.
 - Writing a dedicated blog post.
 - Sending targeted emails to all or affected users.
 - Posting in the PostHog user Slack group with a @here tag.
@@ -58,7 +63,25 @@ We may support major announcements by…
 - Sharing links to the social media announcement internally via Slack, so colleagues can amplify them.
 - Sharing the announcement with other external parties, such as integration partners or PPC agencies.
 
-We do not typically do PR for anything other than company-level news. We have separate [processes and guides for managing press announcements](/handbook/growth/marketing/press). 
+We do not typically do public relations for anything other than company-level news. We have separate [processes and guides for managing press announcements](/handbook/growth/marketing/press). 
 
 Examples of major announcements include [persons on events](/blog/persons-on-events) and the [launch of EU Cloud](/eu).
 
+> The marketing team tries to ensure good, regular communication with other teams across PostHog, but mainly relies on [highlighted PRs](https://github.com/PostHog/posthog/pulls?q=is%3Apr+label%3A%22highlight+%3Astar%3A%22+is%3Aclosed) to find what has shipped in order to avoid burdening engineers with more meetings. ***If you have a shipped feature you want to see included in PostHog announcements, please add a highlight tag and a reasonable description to the PR.** Here's [an example of a good PR description](https://github.com/PostHog/posthog/pull/13414). 
+
+## The PostHog Array
+The PostHog array is a weekly article posted on the PostHog blog and amplified through social media, Slack, and other channels. We do not send an all-user email for each PostHog array.
+
+Published on a Wednesday, the PostHog array typically includes the following sections…
+
+- **PostHog news:** A short summary of any important company news, or items which require user action. 
+- **Release highlights:** A short description of 2-4 major or medium features per week, with a gif or video.
+- **Other improvements:** A single sentence list of other notable changes, or bugfixes. 
+- **Sneak peak of the week:** A highlight, from the PostHog all-hands meeting, of a demo for upcoming work. 
+
+In the CTA, we remind users that demos may not represent finished features and that the [Roadmap](/roadmap) exists for those who want to stay abreast of ongoing work. 
+
+## What's New In PostHog?
+Every month, on the last Wednesday/Thursday of the month we use Customer.io to share a broadcast titled 'What's New In PostHog?'
+
+This email, similar to the old Array emails, contains a longer list of release highlights from that months' announcements. It also includes a CTA which directs users to sign up to [Hogmail](/handbook/growth/marketing/newsletter#hogmail-format).
