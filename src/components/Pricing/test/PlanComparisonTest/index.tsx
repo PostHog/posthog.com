@@ -12,7 +12,9 @@ import './styles/index.scss'
 import Modal from 'components/Modal'
 import { capitalizeFirstLetter } from '../../../../utils'
 
-const borderStyle = 'border-b border-dashed border-gray-accent-light pb-6'
+const getBorderStyle = (side: 'b' | 't' | 'l' | 'r' = 'b'): string => {
+    return `border-${side} border-dashed border-gray-accent-light pb-6`
+}
 
 const convertLargeNumberToWords = (
     // The number to convert
@@ -138,7 +140,7 @@ const ProductTiersModal = ({
                                                 : `$${parseFloat(tier.unit_amount_usd).toFixed(numberOfSigFigs)}`}
                                         </p>
                                         {i !== tiers.length - 1 && (
-                                            <div className={`col-span-full ${borderStyle} pb-2 mb-2`} />
+                                            <div className={`col-span-full ${getBorderStyle()} pb-2 mb-2`} />
                                         )}
                                     </>
                                 )
@@ -217,7 +219,8 @@ export const getProductLimit = (product?: BillingProductV2Type): JSX.Element => 
 export const PlanComparisonTest = ({ className = '' }) => {
     const posthog = usePostHog()
     const [availablePlans, setAvailablePlans] = useState<BillingV2PlanType[]>([])
-    const [numberOfColumns, setNumberOfColumns] = useState<number>(10)
+    const [numberOfColumns, setNumberOfColumns] = useState<number>(7)
+    const [numberOfColumnsMobile, setNumberOfColumnsMobile] = useState<number>(4)
     const comparisonFeaturesColumns = 3
     const planColumns = 2
 
@@ -238,6 +241,7 @@ export const PlanComparisonTest = ({ className = '' }) => {
                 console.log(data, 'THE DATA')
                 setAvailablePlans(data.plans)
                 setNumberOfColumns(data.plans?.length * 2 + comparisonFeaturesColumns)
+                setNumberOfColumnsMobile(data.plans?.length * 2)
             })
         }
 
@@ -247,10 +251,12 @@ export const PlanComparisonTest = ({ className = '' }) => {
     return availablePlans?.length > 0 ? (
         <>
             <section className={className}>
-                <div className={`w-full grid grid-cols-${numberOfColumns} relative mb-0`}>
+                <div
+                    className={`w-full grid grid-cols-${numberOfColumnsMobile} lg:grid-cols-${numberOfColumns} relative mb-0`}
+                >
                     {/* PLAN HEADERS */}
                     <div
-                        className={`col-span-${comparisonFeaturesColumns} py-2 pr-6 text-[14px] font-medium text-almost-black sticky top-0 z-10 bg-opacity-95 bg-tan ${borderStyle}`}
+                        className={`col-span-full lg:col-span-${comparisonFeaturesColumns} py-2 pr-6 text-[14px] font-medium text-almost-black sticky top-0 z-10 bg-opacity-95 bg-tan ${getBorderStyle()}`}
                     >
                         <p className="font-bold mb-0">PostHog OS ships with all products</p>
                         <p className="text-black/50">
@@ -261,7 +267,7 @@ export const PlanComparisonTest = ({ className = '' }) => {
                     {availablePlans.map((plan) => (
                         <div
                             key={`${plan.name}-header`}
-                            className={`col-span-${planColumns} py-2 px-3 text-sm text-almost-black leading-tight sticky top-0 z-10 bg-opacity-95 bg-tan w-full ${borderStyle}`}
+                            className={`col-span-${planColumns} py-2 px-3 text-sm text-almost-black leading-tight sticky top-0 z-10 bg-opacity-95 bg-tan w-full ${getBorderStyle()}`}
                         >
                             <div className="flex flex-col h-full justify-between">
                                 <div>
@@ -294,16 +300,18 @@ export const PlanComparisonTest = ({ className = '' }) => {
                                 <>
                                     <div
                                         key={`${feature_group.name}-group`}
-                                        className={`${
-                                            product.tiered ? 'col-span-' + comparisonFeaturesColumns : 'col-span-full'
-                                        } text-almost-black pt-6 pb-2`}
+                                        className={`col-span-full text-center ${
+                                            product.tiered
+                                                ? `lg:col-span-${comparisonFeaturesColumns}`
+                                                : 'col-span-full'
+                                        } text-almost-black pt-6 pb-2 lg:text-left`}
                                     >
                                         <h4>{feature_group.name}</h4>
                                     </div>
                                     {product.tiered
                                         ? availablePlans.map((plan) => (
                                               <div
-                                                  className={`col-span-${planColumns} pl-8 pt-6`}
+                                                  className={`col-span-${planColumns} text-center py-4 lg:text-left lg:pl-8 lg:pt-6`}
                                                   key={`${plan.key}-free-allocation-or-limit`}
                                               >
                                                   <div>
@@ -322,7 +330,8 @@ export const PlanComparisonTest = ({ className = '' }) => {
                                         ?.map((feature) => (
                                             <>
                                                 <div
-                                                    className={`col-span-${comparisonFeaturesColumns} mb-3 pl-8`}
+                                                    className={`col-span-full bg-gray-accent-light py-2 text-center
+                                                                lg:col-span-${comparisonFeaturesColumns} lg:mb-3 lg:pl-8 lg:py-0 lg:bg-transparent lg:text-left`}
                                                     key={`comparison-row-key-${feature.name}`}
                                                 >
                                                     <Tooltip
@@ -334,14 +343,17 @@ export const PlanComparisonTest = ({ className = '' }) => {
                                                         }
                                                         tooltipClassName="max-w-xs m-4"
                                                     >
-                                                        <span className={`pb-1 mb-2 ${borderStyle}`}>
+                                                        <span className={`pb-1 mb-2 ${getBorderStyle()}`}>
                                                             {feature.name}
                                                         </span>
                                                     </Tooltip>
                                                 </div>
-                                                {availablePlans.map((plan) => (
+                                                {availablePlans.map((plan, i) => (
                                                     <div
-                                                        className={`col-span-${planColumns} pl-8`}
+                                                        className={`col-span-${planColumns} flex justify-center pt-2 pb-8 ${
+                                                            i !== availablePlans.length - 1 && getBorderStyle('r')
+                                                        }
+                                                                    lg:pl-8 lg:py-0 lg:text-left lg:justify-start lg:border-none`}
                                                         key={`${plan.name}-${feature.name}-value`}
                                                     >
                                                         <PlanIcon
@@ -360,14 +372,16 @@ export const PlanComparisonTest = ({ className = '' }) => {
                                     {product.tiers && (
                                         <>
                                             <div
-                                                className={`col-span-${comparisonFeaturesColumns} mb-3 font-bold mt-4 pl-8`}
+                                                className={`col-span-full lg:col-span-${comparisonFeaturesColumns} text-center lg:text-left lg:mb-3 font-bold lg:mt-4 py-2 lg:py-0 lg:pl-8 bg-gray-accent-light lg:bg-transparent`}
                                             >
                                                 Pricing
                                             </div>
-                                            {availablePlans.map((plan) => (
+                                            {availablePlans.map((plan, i) => (
                                                 <div
                                                     key={plan.name + '-' + product.name + '-' + 'pricing'}
-                                                    className={`col-span-${planColumns} pl-8 text-sm font-medium text-almost-black mt-4`}
+                                                    className={`col-span-${planColumns} pl-8 text-sm font-medium text-almost-black pt-4 ${
+                                                        i !== availablePlans.length - 1 && getBorderStyle('r')
+                                                    } lg:border-none`}
                                                 >
                                                     <ProductTiers
                                                         product={plan.products.find((p) => p.type === product.type)}
@@ -376,7 +390,7 @@ export const PlanComparisonTest = ({ className = '' }) => {
                                             ))}
                                         </>
                                     )}
-                                    <div className={`col-span-full ${borderStyle} my-4`}></div>
+                                    <div className={`col-span-full ${getBorderStyle()} my-4`}></div>
                                 </>
                             ))}
                         </>
