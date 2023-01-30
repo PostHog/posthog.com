@@ -195,20 +195,8 @@
                 ]
             },
             {
-                "name": "Ingest live data",
-                "url": "/docs/integrate/ingest-live-data"
-            },
-            {
                 "name": "Ingest historical data",
                 "url": "/docs/integrate/ingest-historic-data"
-            },
-            {
-                "name": "Identify users",
-                "url": "/docs/integrate/identifying-users"
-            },
-            {
-                "name": "User properties",
-                "url": "/docs/integrate/user-properties"
             },
             {
                 "name": "Using a CDP",
