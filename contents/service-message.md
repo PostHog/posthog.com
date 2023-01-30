@@ -1,5 +1,5 @@
 ---
-title: Scheduled Maintencace
+title: Scheduled Maintenance
 showTitle: false
 showSidebar: true
 noindex: true
