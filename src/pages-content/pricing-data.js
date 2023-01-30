@@ -64,32 +64,6 @@ const faqs = [
         },
     },
     {
-        q: 'Can I switch between PostHog Cloud and Self-hosted plans?',
-        a: 'You can switch from PostHog Cloud to Self-hosted Scale and vice versa - just email our support team (hey@posthog.com). We will manually transfer your data, for free. If you are switching between PostHog Cloud and Self-hosted Open Source then you can transfer events yourself using our Replicator app - https://posthog.com/docs/apps/replicator.',
-        author: {
-            q: {
-                image: <StaticImage alt="" width={40} src="./images/hog-1.png" />,
-            },
-            a: {
-                image: <StaticImage alt="" width={25} src="./images/team-1.png" />,
-                name: 'Yakko Majuri',
-            },
-        },
-    },
-    {
-        q: 'On the Self-hosted Open Source plan, what happens if I exceed 1 million tracked users?',
-        a: 'There is no hard limit set. You may likely need some kind of support at this scale.',
-        author: {
-            q: {
-                image: <StaticImage alt="" width={40} src="./images/hog-2.png" />,
-            },
-            a: {
-                image: <StaticImage alt="" width={25} src="./images/team-2.png" />,
-                name: 'James Greenhill',
-            },
-        },
-    },
-    {
         q: 'Do I pay anything for stored events?',
         a: 'No, you only pay the fee per captured event in a given month (i.e. you only pay when each event is first received). There are no additional costs or fees.',
         author: {
@@ -103,8 +77,8 @@ const faqs = [
         },
     },
     {
-        q: 'Does session recording impact costs?',
-        a: 'Session recording is currently free to use. This might change in the future.',
+        q: 'Do feature flags and experiments impact costs?',
+        a: 'Feature flags and experiments are currently free to use, though you do need to be on a paid plan to get access. This might change in the future.',
         author: {
             q: {
                 image: <StaticImage alt="" width={40} src="./images/hog-4.png" />,
@@ -117,7 +91,7 @@ const faqs = [
     },
     {
         q: 'How long do you retain data?',
-        a: 'Data (except recordings, see below) in PostHog Cloud is retained for 7 years - after 1 year, data may be moved into cold storage so queries may run more slowly. For Self-hosted deployments, you can manage this yourself or get support with Self-hosted Scale.',
+        a: 'Data (except recordings, see below) is guaranteed to be retained for 7 years on any paid plan and 1 year on a free plan. After 1 year, data may be moved into cold storage so queries may run more slowly.',
         author: {
             q: {
                 image: <StaticImage alt="" width={40} src="./images/hog-5.png" />,
@@ -130,7 +104,7 @@ const faqs = [
     },
     {
         q: 'How long do you retain recordings?',
-        a: 'Recordings are kept on Clickhouse-based installations for 3 weeks. If you are self-hosting, you can change this setting (see Recordings docs). If you are on legacy Postgres recordings are kept indefinitely unless you set a custom retention policy.',
+        a: 'Recordings are kept on Clickhouse-based installations for 3 weeks.',
         author: {
             q: {
                 image: <StaticImage alt="" width={40} src="./images/hog-6.png" />,
@@ -143,7 +117,7 @@ const faqs = [
     },
     {
         q: 'What happens after the data retention period elapses?',
-        a: 'On PostHog Cloud, any event or user data stored for more than the retention period may be permanently deleted from our systems. On the Self-hosted Scale plan, you control your data retention and what happens to your data afterwards.',
+        a: 'Any event or user data stored for more than the retention period may be permanently deleted from our systems.',
         author: {
             q: {
                 image: <StaticImage alt="" width={40} src="./images/hog-7.png" />,
@@ -182,7 +156,7 @@ const faqs = [
     },
     {
         q: 'Do you offer a discount for non-profits?',
-        a: 'Yes in most cases - 50% off all pricing for PostHog Cloud. Create your account, then email sales@posthog.com from the same email address with some basic details on your organization. We will then apply a discount.',
+        a: 'Yes in most cases - 50% off any plan. Create your account, then email sales@posthog.com from the same email address with some basic details on your organization. We will then apply a discount.',
         author: {
             q: {
                 image: <StaticImage alt="" width={40} src="./images/hog-10.png" />,
@@ -195,7 +169,7 @@ const faqs = [
     },
     {
         q: 'Are there any minimums or annual commitments?',
-        a: 'No! We can, however, offer annual commitments (for example, to maintain pricing) if you need them as part of PostHog Enterprise.',
+        a: 'Nope. We can, however, offer annual commitments (for example, to maintain pricing) if you need them as part of PostHog Enterprise.',
         author: {
             q: {
                 image: <StaticImage alt="" width={40} src="./images/hog-11.png" />,
