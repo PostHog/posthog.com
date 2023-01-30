@@ -18,7 +18,7 @@ If you prefer to learn by doing, you can get started on the web with the [JavaSc
 > Note that some events with a never-before-seen distinct ID are deliberately delayed by around a minute.
 > [More on that in the "Event ingestion nuances" section.](#event-ingestion-nuances)
 
-# Install a library
+## Install a library
 
 Install the library for the platform you are building your application for.
 
@@ -66,7 +66,7 @@ import Tab from "components/Tab"
 </Tab.Panels>
 </Tab.Group>
 
-# Use autocapture
+## Use autocapture
 
 import JSAutoCapture from '../integrate/client/js/snippets/autocapture.mdx'
 import JSCaptureIgnoreElements from '../integrate/client/js/snippets/capture-ignore-elements.mdx'
@@ -76,7 +76,7 @@ import JSCaptureIgnoreElements from '../integrate/client/js/snippets/capture-ign
 <JSAutoCapture />
 <JSCaptureIgnoreElements />
 
-# Capture user events
+## Capture user events
 
 This allows you to send more context than the default event info that PostHog captures whenever a user does something. In that case, you can send an event with any metadata you may wish to add.
 
@@ -119,43 +119,7 @@ Optionally you can submit:
 
 -   `properties`, which is an object with any information you'd like to add
 
-# Identify users
-
-import JSIdentify from '../integrate/client/js/snippets/identify.mdx'
-import AndroidIdentify from '../integrate/client/android/snippets/identify.mdx'
-import IOSIdentify from '../integrate/client/ios/snippets/identify.mdx'
-import ReactNativeIdentify from '../integrate/client/react-native/snippets/identify.mdx'
-
-<Tab.Group>
-<Tab.List>
-<Tab>JavaScript</Tab>
-<Tab>Android</Tab>
-<Tab>iOS</Tab>
-<Tab>Flutter</Tab>
-<Tab>React Native</Tab>
-</Tab.List>
-
-<Tab.Panels>
-<Tab.Panel>
-<JSIdentify />
-</Tab.Panel>
-<Tab.Panel>
-<AndroidIdentify />
-</Tab.Panel>
-<Tab.Panel>
-<IOSIdentify />
-</Tab.Panel>
-<Tab.Panel>
-
-<p> See the <a href="/docs/integrate/client/flutter">Flutter library docs</a> for more information.</p>
-</Tab.Panel>
-<Tab.Panel>
-<ReactNativeIdentify />
-</Tab.Panel>
-</Tab.Panels>
-</Tab.Group>
-
-# Event ingestion nuances
+## Event ingestion nuances
 
 It's a priority for us that events are fully processed and saved as soon as possible. However, there is a class of events which we _deliberately_ process with a slight delay. Specifically, an event is delayed by around a minute if it fits **all** of the following three conditions:
 
