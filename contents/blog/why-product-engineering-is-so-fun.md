@@ -6,7 +6,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 author:
-  - raquel-smith
+  - raquel-m-smith
 featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
 category: Engineering
