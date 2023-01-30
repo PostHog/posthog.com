@@ -52,7 +52,7 @@ const plans = {
 const faqs = [
     {
         q: 'How do I know what my volume is?',
-        a: 'The easiest way is to enable a PostHog Cloud plan. If you go over your usage limit but have not set up billing, it will lock you out but it will count the event volumes. This allows you to get a sense of what your volume is.',
+        a: 'The easiest way is to sign up for the Free plan. If you go over your usage limit but have not set up billing, it will lock you out but it will count the event volumes. This allows you to get a sense of what your volume is.',
         author: {
             q: {
                 image: <StaticImage alt="" width={40} src="./images/hog.png" />,
