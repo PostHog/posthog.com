@@ -559,7 +559,7 @@ interface IGetActiveMenu {
 
 const getActiveMenu = ({
     menu,
-    url = location.pathname,
+    url = window?.location.pathname,
     ...other
 }: {
     menu: IMenu[]
@@ -669,6 +669,7 @@ const MobileMenu = ({
     menu: IMenu[]
     setOpen: (open: null | string) => void
 }) => {
+    const { pathname } = useLocation()
     const [animationDirection, setAnimationDirection] = useState<'forward' | 'backward'>('forward')
     const [menu, setMenu] = useState(getActiveMenu({ menu: other.menu }) || { menu: other.menu })
     const handleClick = ({ url, menu }: { url?: string; menu?: IMenu[] }) => {
@@ -737,7 +738,7 @@ const MobileMenu = ({
                                 ) : (
                                     <button
                                         className={`${
-                                            url === location.pathname ? 'active-product opacity-90' : 'opacity-50'
+                                            url === pathname ? 'active-product opacity-90' : 'opacity-50'
                                         } hover:opacity-100 font-semibold`}
                                         onClick={() => {
                                             setAnimationDirection('forward')
@@ -909,7 +910,7 @@ export default function PostLayout({
     darkMode = true,
     searchFilter,
 }: IProps) {
-    const { hash } = useLocation()
+    const { hash, href } = useLocation()
     const [view, setView] = useState('Article')
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const [fullWidthContent, setFullWidthContent] = useState(hideSidebar || !sidebar)
@@ -987,7 +988,7 @@ export default function PostLayout({
 
                             {!hideSidebar && (
                                 <div className="ml-auto px-6 lg:mt-0 mt-4 lg:block hidden">
-                                    <ShareLinks href={location.href} title={title} />
+                                    <ShareLinks href={href} title={title} />
                                 </div>
                             )}
                         </section>
