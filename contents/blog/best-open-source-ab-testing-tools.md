@@ -18,7 +18,7 @@ tags:
 
 Also known as split testing or multivariate testing, A/B testing is the practice of splitting your audience to test variations of a product design, new feature, call to action, landing page – anything you can imagine, really.
 
-Here, we’re sharing our guide to the best free and [open-source tools](/blog/best-open-source-analytics-tools) for experimenting with A/B tests, which will be especially useful if you're looking for an [alternative to Google Optimize](/blog/google-optimize-alternatives) after Google confirmed its sunsetting the product.
+Here, we’re sharing our guide to the best free and [open-source tools](/blog/best-open-source-analytics-tools) for experimenting with A/B tests, which will be especially useful if you're looking for an [alternative to Google Optimize](/blog/google-optimize-alternatives) after Google confirmed it is sunsetting the product.
 
 ## 1. [PostHog](https://posthog.com)
 
