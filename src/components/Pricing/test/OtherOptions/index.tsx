@@ -33,7 +33,7 @@ interface ISection {
     title: string
     icon: React.ReactNode
     description: React.ReactNode
-    cta: { url: string; label: string }
+    cta: { url: string; label: string; type?: string }
 }
 
 const sections: ISection[] = [
@@ -42,8 +42,9 @@ const sections: ISection[] = [
         icon: <EnterpriseIcon />,
         description: <EnterpriseDescription />,
         cta: {
-            url: '/docs/self-host',
-            label: 'Read the docs',
+            url: '/signup/cloud/enterprise',
+            label: 'Get in touch',
+            type: 'primary',
         },
     },
     {
@@ -64,7 +65,12 @@ const Section = ({ title, icon, description, cta }: ISection) => {
             <div className="flex flex-col">
                 <h4 className="m-0 mb-4 leading-tight">{title}</h4>
                 <div className="mb-6">{description}</div>
-                <CallToAction size="sm" type="secondary" className="mt-auto self-start sm:w-auto !w-full" to={cta.url}>
+                <CallToAction
+                    size="sm"
+                    type={cta.type ? cta.type : 'secondary'}
+                    className="mt-auto self-start sm:w-auto !w-full"
+                    to={cta.url}
+                >
                     {cta.label}
                 </CallToAction>
             </div>

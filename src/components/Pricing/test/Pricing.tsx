@@ -94,7 +94,7 @@ const PricingTest = (): JSX.Element => {
 
             <section className={`${section} mb-12 mt-12 md:mt-24 md:px-4`}>
                 <h2 className="text-2xl m-0 flex items-center border-b border-dashed border-gray-accent-light pb-4">
-                    <span>Need something special?</span>
+                    <span>More options</span>
                 </h2>
                 <OtherOptions />
             </section>
