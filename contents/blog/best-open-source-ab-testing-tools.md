@@ -18,7 +18,7 @@ tags:
 
 Also known as split testing or multivariate testing, A/B testing is the practice of splitting your audience to test variations of a product design, new feature, call to action, landing page – anything you can imagine, really.
 
-Here, we’re sharing our guide to the best free and [open-source tools](/blog/best-open-source-analytics-tools) for experimenting with A/B tests because the best things in life are free (and open source, obviously).
+Here, we’re sharing our guide to the best free and [open-source tools](/blog/best-open-source-analytics-tools) for experimenting with A/B tests, which will be especially useful if you're looking for an [alternative to Google Optimize](/blog/google-optimize-alternatives) after Google confirmed its sunsetting the product.
 
 ## 1. [PostHog](https://posthog.com)
 
@@ -28,11 +28,11 @@ PostHog is an [all-in-one product analytics suite](/product) that integrates all
 
 Our A/B testing features, which we call our Experimentation suite, are complemented by other tools like [Feature Flags](/product/feature-flags), [Session Recording](/product/session-recording), [Heatmaps](/product/heatmaps), [User Paths](/product/user-paths) and more, making it one of the most comprehensive analytics platforms around – open source, or otherwise.
 
-[PostHog’s Experimentation suite](https://posthog.com/docs/user-guides/experimentation) allows you to flexibly test your hypotheses with up to three test variants. A control group is also assigned and PostHog will automatically estimate the number of users exposed, and we use Bayesian analysis to calculate the results and ensure they're significant.
+[PostHog’s Experimentation suite](https://posthog.com/docs/user-guides/experimentation) allows you to flexibly test your hypotheses. PostHog will automatically estimate the number of users exposed, and we use Bayesian analysis to calculate the results and ensure they're significant.
 
 ### Who is PostHog for?
 
-PostHog is a great choice for any team that wants a complete view of how people use their product. Not only is the testing functionality comprehensive, it’s tightly integrated with a complete product analytics suite – you don’t need any external tools. You can also [self-host PostHog](/signup/self-host), so data never leaves your infrastructure.
+PostHog is a great choice for any team that wants a complete view of how people use their product. Not only is the testing functionality comprehensive, it’s tightly integrated with a complete product analytics suite – you don’t need any external tools.
 
 ### Strengths
 
@@ -46,7 +46,7 @@ PostHog is a great choice for any team that wants a complete view of how people 
 
 ### How much does it cost?
 
-While Experimentation isn't part of the free-for-life open source release, it's [free to use up to 1 million events per month](/pricing) on PostHog's paid plans – Scale for self-hosted, and PostHog Cloud if your a prefer a fully-managed SaaS experience.
+While Experimentation isn't currently part open source release, it's [free to use up to 1 million events per month](/pricing) on PostHog Cloud when you enter a card. You can set billing limits so you don't get any surprise bills.
 
 ### Open source license
 
