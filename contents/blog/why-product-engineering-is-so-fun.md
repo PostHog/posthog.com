@@ -20,7 +20,7 @@ Maybe it's just me, but I've had more fun as a product engineer than in _any_ ot
 
 ## Optimizing for fun
 
-But first - why does it matter how much fun I'm having? For me, it's simple. I've been at this whole work thing long enough now to happily realize that the amount of fun I have in my work is highly correlated with my job satisfaction. It sounds obvious - if you're not having fun, would you be satisfied with your job? But I've seen a lot of people sacrifice the fun they have for some _thing_ that gives them more money, status, or even just more of a feeling that they've climbed up the next rung of the ladder despite the fact that they aren't quite sure where the ladder is going.
+But first - why does it matter how much fun I'm having? For me, it's simple. I've happily realized that the amount of fun I have in my work is highly correlated with my job satisfaction. It sounds obvious - if you're not having fun, would you be satisfied with your job? But I've seen a lot of people sacrifice the fun they have for some _thing_ that gives them more money, status, or even just more of a feeling that they've climbed up the next rung of the ladder despite the fact that they aren't quite sure where the ladder is going.
 
 The problem is that without the fun in the job you lose your daily drive to do the work. When we do things that we experience as being "fun" our neurons are releasing dopamine and activating the parts of the brain that scientists call pleasure centers [[1]](https://hub.jhu.edu/magazine/2016/summer/neuroscience-of-fun/). When we find activities that activate these pleasure centers, our brains want us to do them again and again. In a work context, this has a couple interesting ramifications:
 
@@ -57,33 +57,33 @@ Let's look at two other roles, specifically two that have been combined to creat
 From first-hand experience, pretty darn fun. We can use our ingredients above and rate the intensity of each to come up with a proxy for fun-ness. Since company culture is so important to #4 (complete transparency into why my work matters), we'll leave it out of our ranking system as it has more to do with the company and less to do with the role. The others are obviously very impacted by culture as well, but we'll assume our roles here are at a company that doesn't completely suck.
 
 1. Challenging problems to solve - 4/5
-  - PMs often need to solve challenging problems around UX, customer needs, scheduling, and politics. The cycle can be slow and frustrating at times, though.
+    - PMs often need to solve challenging problems around UX, customer needs, scheduling, and politics. The cycle can be slow and frustrating at times, though.
 2. Support from other highly motivated colleagues - 3/5
-  - Product management is often cited as being an extremely lonely role (and in my experience this is true). You're often the only one in your role on your team, you are constantly fighting battles for budget and prioritization by yourself, and if anything goes wrong with your product launch, the buck stops with you. 
+    - Product management is often cited as being an extremely lonely role (and in my experience this is true). You're often the only one in your role on your team, you are constantly fighting battles for budget and prioritization by yourself, and if anything goes wrong with your product launch, the buck stops with you. 
 3. The ability to make _important_ decisions - 5/5
-  - This is simply what PMs are there for. Take the given context, decide what to do with it.
+    - This is simply what PMs are there for. Take the given context, decide what to do with it.
 
 Adding this up we get a score of 12/15. Not bad!
 
 ### How fun is Software Engineering? 
 
 1. Challenging problems to solve - 5/5
-  - There is nothing like the dopamine rush you get when you've been working through a problem and you finally get it to work. As a software engineer, this happens usually multiple times per day. 
+    - There is nothing like the dopamine rush you get when you've been working through a problem and you finally get it to work. As a software engineer, this happens usually multiple times per day. 
 2. Support from other highly motivated colleagues - 5/5
-  - Software engineers typically work on a team with at least one other engineer. This team aspect is critical to feeling supported.
+    - Software engineers typically work on a team with at least one other engineer. This team aspect is critical to feeling supported.
 3. The ability to make _important_ decisions - 3/5 (or even 2/5)
-  - While engineers can make important decisions about how something is implemented, they're often completely out of touch with making important decisions about the business. Oftentimes this is because they don't have the context, and they are simply told what to build. 
+    - While engineers can make important decisions about how something is implemented, they're often completely out of touch with making important decisions about the business. Oftentimes this is because they don't have the context, and they are simply told what to build. 
 
 For Software Engineering we get a score of 12 or 13/15. Also not bad.
 
 ### How fun is Product Engineering? 
 
 1. Challenging problems to solve - 5/5
-  - You get the dopamine rush associated with coding, plus the UX problems to solve.
+    - You get the dopamine rush associated with coding, plus the UX problems to solve.
 2. Support from other highly motivated colleagues - 5/5
-  - Similar to software engineering, you often work on a team with other product engineers.
+    - Similar to software engineering, you often work on a team with other product engineers.
 3. The ability to make _important_ decisions - 5/5
-  - Because you're responsible for working with customers and data to decide what gets built, you're inherently making important decisions, similar to product management.
+    - Because you're responsible for working with customers and data to decide what gets built, you're inherently making important decisions, similar to product management.
 
 For Product Engineering we get a score of 15/15. Yes I made this scale up, and yes I've given Product Engineering a perfect score. But you did read the title of this blog post, didn't you? I'm _obviously_ biased.
 
