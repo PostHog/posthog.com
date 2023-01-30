@@ -2,6 +2,51 @@
 title: Integrate PostHog
 ---
 
-import Integrate from "../integrate/index.mdx"
+Once your PostHog instance is up and running, the next step is to start sending events.
 
-<Integrate />
+import Tab from "components/Tab"
+
+import SnippetInstructions from "../integrate/\_snippets/snippet.mdx"
+import SDKs from "../integrate/\_snippets/sdks.mdx"
+import Frameworks from "../integrate/\_snippets/frameworks.mdx"
+import API from "../integrate/\_snippets/api.mdx"
+
+<h3 class="mb-0">Installation</h3>
+
+<!-- prettier-ignore -->
+<Tab.Group>
+    <Tab.List>
+        <Tab>JS snippet</Tab>
+        <Tab count="13">Libraries</Tab>
+        <Tab count="11">Framework guides</Tab>
+        <Tab>API</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+            <SnippetInstructions />
+        </Tab.Panel>
+        <Tab.Panel>
+            <SDKs />
+        </Tab.Panel>
+        <Tab.Panel>
+            <Frameworks />
+        </Tab.Panel>
+        <Tab.Panel>
+            <API />
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>
+
+<br />
+<hr />
+<br />
+
+### What to read next
+
+Learn how to take your PostHog integrations to the next level with these in-depth guides.
+
+-   [Identifying users](/docs/integrate/indentify-users)
+-   [Adding properties to users](/docs/integrate/user-properties)
+-   [Connecting PostHog with your CDP](/docs/integrate/cdp)
+-   [Deploying a reverse proxy](/docs/integrate/proxy)
+-   [Importing historical events](/docs/integrate/ingest-historic-data)
