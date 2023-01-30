@@ -3,7 +3,7 @@ import Link from 'components/Link'
 import Spinner from 'components/Spinner'
 import Tooltip from 'components/Tooltip'
 import usePostHog from '../../../../hooks/usePostHog'
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BillingProductV2Type, BillingV2FeatureType, BillingV2PlanType } from 'types'
 import CheckIcon from '../../../../images/check.svg'
 import WarnIcon from '../../../../images/warning.svg'
@@ -93,7 +93,7 @@ const getProductTiers = (product?: BillingProductV2Type): JSX.Element => {
                 }
 
                 return (
-                    <div key={product.name} className="pr-4">
+                    <div key={product.name + '-tiers-' + i} className="pr-4">
                         {parseFloat(tier.unit_amount_usd) === 0 ? (
                             <div>
                                 <span className="font-bold text-base">Free</span> for the{' '}

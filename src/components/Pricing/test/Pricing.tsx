@@ -6,21 +6,14 @@ import { Quote } from 'components/Pricing/Quote'
 import 'components/Pricing/styles/index.scss'
 import { SEO } from '../../seo'
 import cntl from 'cntl'
-import { SelfHostIcon } from 'components/Pricing/Calculator/index'
 import { animateScroll as scroll } from 'react-scroll'
 import SelfHostOverlay from 'components/Pricing/Overlays/SelfHost'
 import EnterpriseOverlay from 'components/Pricing/Overlays/Enterprise'
 import WhyCloud from 'components/Pricing/Overlays/WhyCloud'
-import usePostHog from '../../../hooks/usePostHog'
-import { useActions, useValues } from 'kea'
 import Enterprise from 'components/Pricing/Modals/Enterprise'
-import { pricingSliderLogic } from 'components/Pricing/PricingSlider/pricingSliderLogic'
-import { LogSlider } from 'components/Pricing/PricingSlider/LogSlider'
-import { ProductIcons } from '../../ProductIcons/ProductIcons'
-import { NotProductIcons } from '../../NotProductIcons/NotProductIcons'
 import { PlanComparisonTest } from './PlanComparisonTest'
 import OtherOptions from './OtherOptions'
-import { Calculator } from './PricingCalculator'
+import { PricingCalculator } from './PricingCalculator'
 
 export const section = cntl`
     max-w-6xl
@@ -61,30 +54,8 @@ export const gridCellBottom = cntl`
 
 const PricingTest = (): JSX.Element => {
     const [currentModal, setCurrentModal] = useState<string | boolean>(false)
-    const posthog = usePostHog()
-    const [showPlanBuilder, setShowPlanBuilder] = useState(false)
     const [enterpriseModalOpen, setEnterpriseModalOpen] = useState(false)
     const [whyCloudOpen, setWhyCloudOpen] = useState(false)
-    const builderRef = useRef<HTMLDivElement>()
-    const {
-        cloudCost,
-        sessionRecordingCost,
-        sliderValue,
-        sessionRecordingSliderValue,
-        monthlyTotal,
-        sessionRecordingEventNumber,
-        eventNumber,
-    } = useValues(pricingSliderLogic)
-    const [enterpriseMode, setEnterpriseMode] = useState(false)
-    const { setSessionRecordingSliderValue, setSliderValue } = useActions(pricingSliderLogic)
-
-    useEffect(() => {
-        if (showPlanBuilder) builderRef.current?.scrollIntoView({ behavior: 'smooth' })
-    }, [showPlanBuilder])
-
-    useEffect(() => {
-        setSliderValue(13.815510557964274)
-    }, [])
 
     return (
         <Layout>
@@ -119,7 +90,7 @@ const PricingTest = (): JSX.Element => {
                 <PlanComparisonTest />
             </section>
 
-            <Calculator />
+            <PricingCalculator />
 
             <section className={`${section} mb-12 mt-12 md:mt-24 md:px-4`}>
                 <h2 className="text-2xl m-0 flex items-center border-b border-dashed border-gray-accent-light pb-4">

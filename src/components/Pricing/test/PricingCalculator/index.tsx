@@ -4,7 +4,7 @@ import { LogSlider } from 'components/Pricing/PricingSlider/LogSlider'
 import { pricingSliderLogic } from 'components/Pricing/PricingSlider/pricingSliderLogic'
 import ProductIcons from 'components/ProductIcons'
 import { useActions, useValues } from 'kea'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 export const section = cntl`
     max-w-6xl
@@ -24,6 +24,10 @@ export const PricingCalculator = () => {
         eventNumber,
     } = useValues(pricingSliderLogic)
     const { setSessionRecordingSliderValue, setSliderValue } = useActions(pricingSliderLogic)
+
+    useEffect(() => {
+        setSliderValue(13.815510557964274)
+    }, [])
 
     return (
         <section className={`${section} mb-12`}>
