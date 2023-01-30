@@ -141,6 +141,7 @@ export default function Roadmap() {
                             title={'Roadmap'}
                             hideSurvey
                             menu={community}
+                            darkMode={false}
                             contentContainerClassName="lg:-mb-12 -mb-8"
                         >
                             <div className="relative">

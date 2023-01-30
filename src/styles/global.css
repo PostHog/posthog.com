@@ -1186,3 +1186,12 @@ iframe[src*='youtube-nocookie.com'] {
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
+
+.mobile-sidebar-container {
+    .dark\:border-gray-accent-dark {
+        @apply dark:border-gray-accent-light/20;
+    }
+    > div:last-of-type {
+        @apply border-b-0;
+    }
+}

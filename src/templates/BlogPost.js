@@ -88,9 +88,7 @@ export const Intro = ({
                                     titlePosition === 'bottom' ? 'bottom-0' : 'top-0'
                                 }`}
                             >
-                                <p className="m-0 opacity-70 lg:text-white text-primary order-last lg:order-first">
-                                    {date}
-                                </p>
+                                <p className="m-0 opacity-70 order-last lg:order-first">{date}</p>
                                 <Title>{title}</Title>
                             </div>
                         </>

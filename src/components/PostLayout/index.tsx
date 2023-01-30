@@ -62,7 +62,7 @@ export const SidebarSection = ({
 }) => {
     return (
         <div
-            className={`py-4 px-6 border-b border-gray-accent-light dark:border-gray-accent-dark border-dashed ${className}`}
+            className={`py-4 px-3 lg:px-6 border-b border-gray-accent-light dark:border-gray-accent-dark border-dashed ${className}`}
         >
             {title && <h3 className="text-black dark:text-white font-semibold opacity-25 m-0 mb-2 text-sm">{title}</h3>}
             {children}
@@ -585,9 +585,11 @@ const getActiveMenu = ({
 const MenuContainer = ({
     children,
     setOpen,
+    className = '',
 }: {
     children: React.ReactNode
     setOpen: (open: null | string) => void
+    className?: string
 }) => {
     const y = useMotionValue(0)
     const input = [0, 200]
@@ -633,7 +635,7 @@ const MenuContainer = ({
                     style={{ y, opacity }}
                     onDragEnd={handleDragEnd}
                     drag="y"
-                    className="bg-white dark:bg-gray-accent-dark py-4 px-4 rounded-tr-md rounded-tl-md shadow-lg"
+                    className={`bg-white dark:bg-gray-accent-dark py-4 px-4 rounded-tr-md rounded-tl-md shadow-lg ${className}`}
                 >
                     {children}
                 </motion.div>
@@ -692,7 +694,7 @@ const MobileMenu = ({
     return (
         <MenuContainer setOpen={setOpen}>
             {crumbs && (
-                <div className="pb-4 mb-4 border-b border-dashed border-gray-accent-light/50 ">
+                <div className="pb-4 mb-4 border-b border-dashed border-gray-accent-light dark:border-gray-accent-light/20 ">
                     <Crumbs crumbs={crumbs} />
                 </div>
             )}
@@ -787,10 +789,41 @@ const MobileTOC = ({ setOpen, toc }) => {
     )
 }
 
-const MobileSidebar = ({ sidebar, setOpen }: { sidebar: React.ReactNode }) => {
+const MobileSidebar = ({ sidebar, setOpen, filePath, title, darkMode }: { sidebar: React.ReactNode }) => {
     return (
-        <MenuContainer setOpen={setOpen}>
-            <div className="h-[40vh] overflow-auto">{sidebar}</div>
+        <MenuContainer className="py-0" setOpen={setOpen}>
+            <div className={`flex flex-col`}>
+                {sidebar && <div className="mobile-sidebar-container h-[40vh] overflow-auto">{sidebar}</div>}
+                <div
+                    className={`mt-auto flex text-sm ${
+                        sidebar
+                            ? 'border-t border-dashed border-gray-accent-light dark:border-gray-accent-light/20'
+                            : ''
+                    }`}
+                >
+                    {filePath && (
+                        <a
+                            className="p-3"
+                            href={`https://github.com/PostHog/posthog.com/tree/master/contents/${filePath}`}
+                        >
+                            Edit this page
+                        </a>
+                    )}
+                    {filePath && title && (
+                        <a
+                            className="p-3 border-l border-gray-accent-light dark:border-gray-accent-light/20 border-dashed"
+                            href={`https://github.com/PostHog/posthog.com/issues/new?title=Feedback on: ${title}&body=**Issue with: /${filePath}**\n\n`}
+                        >
+                            Raise an issue
+                        </a>
+                    )}
+                    {darkMode && (
+                        <div className="ml-auto p-3 border-l border-gray-accent-light dark:border-gray-accent-light/20 border-dashed">
+                            <DarkModeToggle />
+                        </div>
+                    )}
+                </div>
+            </div>
         </MenuContainer>
     )
 }
@@ -798,7 +831,7 @@ const MobileSidebar = ({ sidebar, setOpen }: { sidebar: React.ReactNode }) => {
 const menuButtonClasses = `bg-white flex space-x-2 items-center font-semibold active:top-[0.5px]
 active:scale-[.98] transition-transform text-black shadow-md`
 
-const MobileNav = ({ crumbs, menu, toc, sidebar }: { crumbs: [ICrumb]; menu: IMenu[] }) => {
+const MobileNav = ({ crumbs, menu, toc, sidebar, filePath, title, darkMode }: { crumbs: [ICrumb]; menu: IMenu[] }) => {
     const [open, setOpen] = useState<null | string>(null)
 
     return (
@@ -809,24 +842,44 @@ const MobileNav = ({ crumbs, menu, toc, sidebar }: { crumbs: [ICrumb]; menu: IMe
                     <span>Menu</span>
                 </button>
                 <div className="ml-auto flex justify-end divide-x divide-dashed divide-gray-accent-light">
-                    <button
-                        onClick={() => setOpen('toc')}
-                        className={`aspect-square h-full flex items-center justify-center rounded-tl-full rounded-bl-full ${menuButtonClasses}`}
-                    >
-                        <TOCIcon />
-                    </button>
-                    <button
-                        onClick={() => setOpen('sidebar')}
-                        className={`aspect-square h-full flex items-center justify-center rounded-tr-full rounded-br-full  ${menuButtonClasses}`}
-                    >
-                        <InfoOutlined />
-                    </button>
+                    {toc?.length > 0 && (
+                        <button
+                            onClick={() => setOpen('toc')}
+                            className={`aspect-square h-full flex items-center justify-center rounded-tl-full rounded-bl-full ${menuButtonClasses}`}
+                        >
+                            <TOCIcon />
+                        </button>
+                    )}
+                    {(filePath && title) || sidebar ? (
+                        <button
+                            onClick={() => setOpen('sidebar')}
+                            className={`aspect-square h-full flex items-center justify-center ${
+                                toc?.length ? ' rounded-tr-full rounded-br-full' : 'rounded-full'
+                            }  ${menuButtonClasses}`}
+                        >
+                            <InfoOutlined />
+                        </button>
+                    ) : (
+                        darkMode && (
+                            <div className={`py-2 px-4 rounded-full ${menuButtonClasses}`}>
+                                <DarkModeToggle />
+                            </div>
+                        )
+                    )}
                 </div>
             </div>
             <AnimatePresence>
                 {open === 'menu' && <MobileMenu setOpen={setOpen} menu={menu} crumbs={crumbs} />}
                 {open === 'toc' && <MobileTOC toc={toc} setOpen={setOpen} />}
-                {open === 'sidebar' && <MobileSidebar sidebar={sidebar} setOpen={setOpen} />}
+                {open === 'sidebar' && (
+                    <MobileSidebar
+                        darkMode={darkMode}
+                        filePath={filePath}
+                        title={title}
+                        sidebar={sidebar}
+                        setOpen={setOpen}
+                    />
+                )}
             </AnimatePresence>
         </div>
     )
@@ -853,6 +906,7 @@ export default function PostLayout({
     contentContainerClassName,
     menuType = 'standard',
     mobileMenu = true,
+    darkMode = true,
     searchFilter,
 }: IProps) {
     const { hash } = useLocation()
@@ -916,25 +970,28 @@ export default function PostLayout({
                     </div>
                 )}
                 <div className="flex flex-col">
-                    <section
-                        style={{
-                            gridAutoColumns: menu
-                                ? `1fr ${menuWidth?.right ?? defaultMenuWidth?.right}px`
-                                : `minmax(auto, ${contentWidth}px) minmax(max-content, 1fr)`,
-                        }}
-                        className={
-                            'sm:pt-4 sm:pb-4 pb-0 sm:border-b border-gray-accent-light dark:border-gray-accent-dark border-dashed lg:grid lg:grid-flow-col items-center'
-                        }
-                    >
-                        {crumbsFiltered?.length > 0 && (
+                    {crumbsFiltered?.length > 0 && (
+                        <section
+                            style={{
+                                gridAutoColumns: menu
+                                    ? `1fr ${menuWidth?.right ?? defaultMenuWidth?.right}px`
+                                    : `minmax(auto, ${contentWidth}px) minmax(max-content, 1fr)`,
+                            }}
+                            className={
+                                'sm:pt-4 sm:pb-4 pb-0 sm:border-b border-gray-accent-light dark:border-gray-accent-dark border-dashed lg:grid lg:grid-flow-col items-center'
+                            }
+                        >
                             <div className={`${contentContainerClasses} grid-cols-1`}>
                                 <Breadcrumb crumbs={crumbsFiltered} />
                             </div>
-                        )}
-                        <div className="ml-auto px-6 lg:mt-0 mt-4 lg:block hidden">
-                            <ShareLinks href={location.href} title={title} />
-                        </div>
-                    </section>
+
+                            {!hideSidebar && (
+                                <div className="ml-auto px-6 lg:mt-0 mt-4 lg:block hidden">
+                                    <ShareLinks href={location.href} title={title} />
+                                </div>
+                            )}
+                        </section>
+                    )}
 
                     <div
                         className="lg:grid lg:grid-flow-col items-start flex-grow"
@@ -956,7 +1013,15 @@ export default function PostLayout({
                             {!hideSurvey && <Survey contentContainerClasses={contentContainerClasses} />}
                             {nextPost && <NextPost {...nextPost} contentContainerClasses={contentContainerClasses} />}
                             {menu && mobileMenu && (
-                                <MobileNav menu={menu} toc={toc} crumbs={crumbsFiltered} sidebar={sidebar} />
+                                <MobileNav
+                                    filePath={filePath}
+                                    title={title}
+                                    menu={menu}
+                                    toc={toc}
+                                    crumbs={crumbsFiltered}
+                                    sidebar={sidebar}
+                                    darkMode={darkMode}
+                                />
                             )}
                         </article>
                         {!hideSidebar && sidebar && (
@@ -1016,13 +1081,15 @@ export default function PostLayout({
                                                 >
                                                     <ExpandDocument expanded={fullWidthContent} />
                                                 </SidebarAction>
-                                                <SidebarAction
-                                                    className="pl-2 pr-2"
-                                                    width="auto"
-                                                    title="Toggle dark mode"
-                                                >
-                                                    <DarkModeToggle />
-                                                </SidebarAction>
+                                                {darkMode && (
+                                                    <SidebarAction
+                                                        className="pl-2 pr-2"
+                                                        width="auto"
+                                                        title="Toggle dark mode"
+                                                    >
+                                                        <DarkModeToggle />
+                                                    </SidebarAction>
+                                                )}
                                             </div>
                                         </ul>
                                     </div>

@@ -80,7 +80,14 @@ export default function Changelog() {
     return (
         <Layout>
             <SEO title="PostHog Changelog" />
-            <PostLayout contentWidth={'100%'} article={false} title={'Changelog'} hideSurvey menu={community}>
+            <PostLayout
+                darkMode={false}
+                contentWidth={'100%'}
+                article={false}
+                title={'Changelog'}
+                hideSurvey
+                menu={community}
+            >
                 <h1 className="font-bold text-5xl mb-2 lg:mt-0">Changelog</h1>
                 <p className="text-black/80">Here's a history of everything we've built.</p>
                 <div className="border-y border-dashed border-gray-accent-light py-4 flex space-x-6 flex-nowrap overflow-auto whitespace-nowrap scrollbar-hide">

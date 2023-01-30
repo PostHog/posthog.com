@@ -1,8 +1,7 @@
 import React from 'react'
 import { PageProps } from 'gatsby'
 
-import docs from 'sidebars/docs.json'
-
+import community from 'sidebars/community.json'
 import SEO from 'components/seo'
 import Layout from 'components/Layout'
 import PostLayout, { SidebarSection } from 'components/PostLayout'
@@ -117,7 +116,7 @@ export default function ProfilePage({ params }: PageProps) {
                                 { name: 'Community', url: '/questions' },
                                 { name: 'Profile', url: `/community/profiles/${id}` },
                             ]}
-                            menu={docs}
+                            menu={community}
                             sidebar={<ProfileSidebar setEditModalOpen={setEditModalOpen} profile={profile} />}
                             hideSurvey
                         >
@@ -180,7 +179,7 @@ const ProfileSidebar = ({
     const { user } = useUser()
 
     return profile ? (
-        <div>
+        <>
             {profile.github || profile.twitter || profile.linkedin || profile.website ? (
                 <SidebarSection title="Links">
                     <ul className="p-0 flex space-x-2 items-center list-none m-0">
@@ -266,7 +265,7 @@ const ProfileSidebar = ({
                     </button>
                 </SidebarSection>
             )}
-        </div>
+        </>
     ) : (
         <></>
     )

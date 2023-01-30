@@ -445,7 +445,7 @@ const ProfileSidebar = ({
     }
 
     return (
-        <div>
+        <>
             <SidebarSection>
                 <div className="mb-2 flex items-baseline justify-between">
                     <h4 className="m-0">My profile</h4>
@@ -475,7 +475,7 @@ const ProfileSidebar = ({
                     }
                 />
             </SidebarSection>
-        </div>
+        </>
     )
 }
 

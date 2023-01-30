@@ -150,8 +150,9 @@ export default function Product({ data, location }) {
                 hideSidebar
                 contentContainerClassName="w-full"
                 article={false}
+                darkMode={false}
             >
-                <div className="border-b border-gray-accent-light border-dashed py-3 -mt-8 lg:-mt-12">
+                <div className="border-b border-gray-accent-light border-dashed py-3 -mt-4 lg:-mt-12">
                     <div className="flex justify-between items-center max-w-5xl mx-auto px-5">
                         <div className="md:flex-1">
                             {previous?.url && (

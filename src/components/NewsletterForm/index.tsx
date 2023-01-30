@@ -24,7 +24,7 @@ export const NewsletterForm = ({
         <div>
             <div className="flex items-end space-x-2">
                 <div>
-                    <img className="w-full" src={envelope} />
+                    <img className="w-full max-w-[47px]" src={envelope} />
                 </div>
                 <p className="leading-tight text-sm font-bold m-0 flex-shrink-0">
                     <span className="flex space-x-2 items-center">
