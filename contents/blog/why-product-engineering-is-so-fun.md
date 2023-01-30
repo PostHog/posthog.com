@@ -1,5 +1,5 @@
 ---
-date: 2022-12-01
+date: 2022-02-06
 title: Why I've had more fun as a product engineer than any other role in tech
 rootPage: /blog
 sidebar: Blog
