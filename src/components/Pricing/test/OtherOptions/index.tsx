@@ -1,7 +1,6 @@
 import { CallToAction } from 'components/CallToAction'
 import { GitHub, Info } from 'components/Icons'
 import NotProductIcons from 'components/NotProductIcons'
-import Tooltip from 'components/Tooltip'
 import React from 'react'
 
 const EnterpriseIcon = () => NotProductIcons.enterprise
@@ -78,7 +77,7 @@ const Section = ({ title, icon, description, cta }: ISection) => {
     )
 }
 
-export default function OtherOptions() {
+export default function OtherOptions(): JSX.Element {
     return (
         <div className="grid sm:grid-cols-2 grid-cols-1 sm:gap-y-0 gap-y-6 sm:gap-x-4 my-6">
             {sections.map((section, index) => {

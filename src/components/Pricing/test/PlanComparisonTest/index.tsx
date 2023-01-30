@@ -102,7 +102,7 @@ const ProductTiersModal = ({
     return (
         <Modal open={modalOpen} setOpen={setModalOpen}>
             <div className="flex items-center w-full h-full justify-center">
-                <div className="text-left max-w-xl bg-white rounded-md relative w-full p-5">
+                <div className="text-left max-w-xl bg-white rounded-md relative w-full p-8 m-8">
                     <p className="text-gray mb-1">{capitalizeFirstLetter(product.type)} pricing</p>
                     <p className="mb-1">
                         <span className="font-bold text-base">
@@ -238,7 +238,6 @@ export const PlanComparisonTest = ({ className = '' }) => {
                 headers: headers,
             })
             response.json().then((data) => {
-                console.log(data, 'THE DATA')
                 setAvailablePlans(data.plans)
                 setNumberOfColumns(data.plans?.length * 2 + comparisonFeaturesColumns)
                 setNumberOfColumnsMobile(data.plans?.length * 2)
