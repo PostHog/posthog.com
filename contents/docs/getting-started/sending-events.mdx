@@ -1,0 +1,185 @@
+---
+title: Sending events
+---
+
+PostHog enables you to analyze data in real-time, as events come in. Make full use of this power by ingesting live data with our analytics integrations: [client libraries](/docs/integrate/overview#client-libraries), [server libraries](/docs/integrate/overview#server-libraries), as well as [third-party platforms](/docs/integrate/overview#integrations).
+
+The purpose of this guide is to help you understand some key concepts with a goal of ingesting live data into PostHog. For simplicity, we'll focus on _client_ libraries as a means of data ingestion.
+
+The guide covers the following:
+
+-   [Installing and initializing a PostHog library](#install-a-library)
+-   [How autocapture works with the JavaScript library](#use-autocapture)
+-   [How to capture user events with PostHog](#capture-user-events)
+-   [How to identify and associate users with events](#identify-users)
+
+If you prefer to learn by doing, you can get started on the web with the [JavaScript snippet](/docs/integrate/client/snippet-installation).
+
+> Note that some events with a never-before-seen distinct ID are deliberately delayed by around a minute.
+> [More on that in the "Event ingestion nuances" section.](#event-ingestion-nuances)
+
+# Install a library
+
+Install the library for the platform you are building your application for.
+
+import JSInstall from '../integrate/client/js/snippets/install.mdx'
+import AndroidInstall from '../integrate/client/android/snippets/install.mdx'
+import AndroidConfigure from '../integrate/client/android/snippets/configure.mdx'
+import IOSInstall from '../integrate/client/ios/snippets/install.mdx'
+import IOSConfigure from '../integrate/client/ios/snippets/configure.mdx'
+import FlutterPackage from '../integrate/client/flutter/snippets/package.mdx'
+import FlutterInstall from '../integrate/client/flutter/snippets/install.mdx'
+import ReactNativeInstall from '../integrate/client/react-native/snippets/install.mdx'
+import ReactNativeConfigure from '../integrate/client/react-native/snippets/configure.mdx'
+
+import Tab from "components/Tab"
+
+<Tab.Group>
+<Tab.List>
+<Tab>JavaScript</Tab>
+<Tab>Android</Tab>
+<Tab>iOS</Tab>
+<Tab>Flutter</Tab>
+<Tab>React Native</Tab>
+</Tab.List>
+
+<Tab.Panels>
+<Tab.Panel>
+<JSInstall />
+</Tab.Panel>
+<Tab.Panel>
+<AndroidInstall />
+<AndroidConfigure />
+</Tab.Panel>
+<Tab.Panel>
+<IOSInstall />
+<IOSConfigure />
+</Tab.Panel>
+<Tab.Panel>
+<FlutterPackage />
+<FlutterInstall />
+</Tab.Panel>
+<Tab.Panel>
+<ReactNativeInstall />
+<ReactNativeConfigure />
+</Tab.Panel>
+</Tab.Panels>
+</Tab.Group>
+
+# Use autocapture
+
+import JSAutoCapture from '../integrate/client/js/snippets/autocapture.mdx'
+import JSCaptureIgnoreElements from '../integrate/client/js/snippets/capture-ignore-elements.mdx'
+
+> Autocapture is presently only available in the web browser using the JavaScript library. For non-browser platforms and for situations where you wish to manually capture events, see the [capture user events](#capture-user-events) section.
+
+<JSAutoCapture />
+<JSCaptureIgnoreElements />
+
+# Capture user events
+
+This allows you to send more context than the default event info that PostHog captures whenever a user does something. In that case, you can send an event with any metadata you may wish to add.
+
+<MultiLanguage selector="tabs">
+
+```js
+posthog.capture('[event-name]', { property1: 'value', property2: 'another value' })
+```
+
+```android
+PostHog.with(this)
+       .capture("Button B Clicked", new Properties()
+                                        .putValue("color", "blue")
+                                        .putValue("icon", "new2-final"));
+```
+
+```ios
+// In swift
+posthog.capture("Signed Up", properties: ["plan": "Pro++"])
+
+// In objective-c
+[[PHGPostHog sharedPostHog] capture:@"Signed Up" properties:@{ @"plan": @"Pro++" }];
+```
+
+```react-native
+posthog.capture('Button B Clicked', {
+    color: "blue",
+    icon: "new2-final"
+})
+```
+
+</MultiLanguage>
+
+A `capture` call requires:
+
+-   `event` to specify the event name
+    -   We recommend naming events with "[noun] [verb]", such as `movie played` or `movie updated`, in order to easily identify what your events mean later on (we know this from experience).
+
+Optionally you can submit:
+
+-   `properties`, which is an object with any information you'd like to add
+
+# Identify users
+
+import JSIdentify from '../integrate/client/js/snippets/identify.mdx'
+import AndroidIdentify from '../integrate/client/android/snippets/identify.mdx'
+import IOSIdentify from '../integrate/client/ios/snippets/identify.mdx'
+import ReactNativeIdentify from '../integrate/client/react-native/snippets/identify.mdx'
+
+<Tab.Group>
+<Tab.List>
+<Tab>JavaScript</Tab>
+<Tab>Android</Tab>
+<Tab>iOS</Tab>
+<Tab>Flutter</Tab>
+<Tab>React Native</Tab>
+</Tab.List>
+
+<Tab.Panels>
+<Tab.Panel>
+<JSIdentify />
+</Tab.Panel>
+<Tab.Panel>
+<AndroidIdentify />
+</Tab.Panel>
+<Tab.Panel>
+<IOSIdentify />
+</Tab.Panel>
+<Tab.Panel>
+
+<p> See the <a href="/docs/integrate/client/flutter">Flutter library docs</a> for more information.</p>
+</Tab.Panel>
+<Tab.Panel>
+<ReactNativeIdentify />
+</Tab.Panel>
+</Tab.Panels>
+</Tab.Group>
+
+# Event ingestion nuances
+
+It's a priority for us that events are fully processed and saved as soon as possible. However, there is a class of events which we _deliberately_ process with a slight delay. Specifically, an event is delayed by around a minute if it fits **all** of the following three conditions:
+
+-   isn't from an anonymous user (anonymous users are recognized by having the `distinct_id` the same as the `$device_id` property)
+-   isn't an `$identify` event (e.g. from `posthog.identify()`)
+-   its `distinct_id` cannot be matched to an existing person
+
+This delay mechanism is called the **event buffer**, and it materially improves handling of an edge case which could otherwise inflate unique user counts.
+
+<details>
+
+  <summary>How does the event buffer help?</summary>
+
+Starting with version 1.38.0, PostHog stores the person associated with an event inline with the event record. This greatly improves query performance, but because events are immutable, it also means that persons can't be merged retroactively. See this scenario where that's problematic:
+
+1. User visits signup page, in turn frontend captures anonymous `$pageview` for distinct ID `XYZ` (anonymous distinct ID = device ID).  
+   This event gets person ID `A`.
+2. User click signup button, initiating in a backend request, in turn frontend captures anonymous `$autocapture` (click) for distinct ID `XYZ`.  
+   This event gets person ID `A`.
+3. Signup request is processed in the backend, in turn backend captures identified signup for distinct ID `alice@example`.com.  
+   OOPS! We haven't seen `alice@example.com` before, so this event gets person ID `B`.
+4. Signup request finishes successfully, in turn frontend captures identified $identify aliasing distinct ID `XYZ` to `alice@example.com`.  
+   This event gets person ID `A`.
+
+Here, the event from step 3 got a new person ID `B`, impacting unique users counts. If it were delayed just a bit and processed after the event from step 4, all events would get the expected person ID `A`. This is exactly what the event buffer achieves.
+
+</details>
