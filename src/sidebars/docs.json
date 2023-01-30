@@ -11,8 +11,36 @@
         "url": "",
         "children": [
             {
-                "name": "Quickstart with PostHog Cloud",
-                "url": "/docs/getting-started/cloud"
+                "name": "Quickstart",
+                "url": "/docs/getting-started/quickstart"
+            },
+            {
+                "name": "Integrate PostHog",
+                "url": "/docs/getting-started/integrate"
+            },
+            {
+                "name": "Sending events",
+                "url": "/docs/getting-started/sending-events"
+            },
+            {
+                "name": "Identifying users",
+                "url": "/docs/getting-started/identifying-users"
+            },
+            {
+                "name": "Actions and insights",
+                "url": "/docs/getting-started/actions-and-insights"
+            },
+            {
+                "name": "Feature flags",
+                "url": "/docs/getting-started/feature-flags"
+            },
+            {
+                "name": "Experimentation",
+                "url": "/docs/getting-started/experimentation"
+            },
+            {
+                "name": "Group analytics",
+                "url": "/docs/getting-started/group-analytics"
             }
         ]
     },
