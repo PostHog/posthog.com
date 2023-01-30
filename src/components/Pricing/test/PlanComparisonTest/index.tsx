@@ -9,6 +9,10 @@ import CheckIcon from '../../../../images/check.svg'
 import WarnIcon from '../../../../images/warning.svg'
 import MinusIcon from '../../../../images/x.svg'
 import './styles/index.scss'
+import Modal from 'components/Modal'
+import { capitalizeFirstLetter } from '../../../../utils'
+
+const borderStyle = 'border-b border-dashed border-gray-accent-light pb-6'
 
 const convertLargeNumberToWords = (
     // The number to convert
@@ -76,8 +80,81 @@ export function PlanIcon({
     )
 }
 
-const getProductTiers = (product?: BillingProductV2Type): JSX.Element => {
+const ProductTiersModal = ({
+    product,
+    modalOpen,
+    setModalOpen,
+}: {
+    product: BillingProductV2Type
+    modalOpen: boolean
+    setModalOpen: (open: boolean) => void
+}): JSX.Element | null => {
     const tiers = product?.tiers
+
+    if (!product || !tiers) {
+        return null
+    }
+    const isFirstTierFree = parseFloat(tiers[0].unit_amount_usd) === 0
+    const numberOfSigFigs = tiers.map((tier) => tier.unit_amount_usd.split('.')[1]?.length).sort((a, b) => b - a)[0]
+
+    return (
+        <Modal open={modalOpen} setOpen={setModalOpen}>
+            <div className="flex items-center w-full h-full justify-center">
+                <div className="text-left max-w-xl bg-white rounded-md relative w-full p-5">
+                    <p className="text-gray mb-1">{capitalizeFirstLetter(product.type)} pricing</p>
+                    <p className="mb-1">
+                        <span className="font-bold text-base">
+                            $
+                            {parseFloat(
+                                isFirstTierFree ? tiers?.[1]?.unit_amount_usd : tiers?.[0]?.unit_amount_usd
+                            ).toFixed(numberOfSigFigs)}
+                        </span>
+                        {/* the product types we have are plural, so we need to singularlize them and this works for now */}
+                        <span className="text-gray">/{product.type.replace(/s$/, '')}</span>
+                    </p>
+                    {isFirstTierFree && (
+                        <p className="text-gray">
+                            First {convertLargeNumberToWords(tiers[0].up_to)} {product.type}/mo free
+                        </p>
+                    )}
+                    <div>
+                        <p className="text-gray">Volume discounts</p>
+                        <div className="grid grid-cols-2">
+                            {tiers.map((tier, i) => {
+                                return (
+                                    <>
+                                        <p className="col-span-1 mb-0">
+                                            {i === 0 && isFirstTierFree && 'First '}
+                                            {convertLargeNumberToWords(
+                                                tier.up_to,
+                                                tiers[i - 1]?.up_to,
+                                                true,
+                                                product.type
+                                            )}
+                                        </p>
+                                        <p className="font-bold col-span-1 mb-0">
+                                            {isFirstTierFree && i === 0
+                                                ? 'Free'
+                                                : `$${parseFloat(tier.unit_amount_usd).toFixed(numberOfSigFigs)}`}
+                                        </p>
+                                        {i !== tiers.length - 1 && (
+                                            <div className={`col-span-full ${borderStyle} pb-2 mb-2`} />
+                                        )}
+                                    </>
+                                )
+                            })}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </Modal>
+    )
+}
+
+const ProductTiers = ({ product }: { product?: BillingProductV2Type }): JSX.Element => {
+    const tiers = product?.tiers
+    const [modalOpen, setModalOpen] = useState(false)
+
     if (!product || !tiers) {
         return (
             <>
@@ -105,14 +182,15 @@ const getProductTiers = (product?: BillingProductV2Type): JSX.Element => {
                                 {/* the product types we have are plural, so we need to singularlize them and this works for now */}
                                 <span className="text-gray">/{product.type.replace(/s$/, '')}</span>
                                 <p className="text-sm mb-0">
-                                    <Link
-                                        to=""
-                                        onClick={() => console.log('i clicked it')}
-                                        className="text-red font-bold"
-                                    >
+                                    <Link to="" onClick={() => setModalOpen(true)} className="text-red font-bold">
                                         Volume discounts
                                     </Link>{' '}
                                     after first {convertLargeNumberToWords(tier.up_to)}/mo
+                                    <ProductTiersModal
+                                        modalOpen={modalOpen}
+                                        setModalOpen={setModalOpen}
+                                        product={product}
+                                    />
                                 </p>
                             </>
                         )}
@@ -144,7 +222,6 @@ export const PlanComparisonTest = ({ className = '' }) => {
     const planColumns = 2
 
     const excludedFeatures = ['dashboard_collaboration', 'ingestion_taxonomy']
-    const borderStyle = 'border-b border-dashed border-gray-accent-light pb-6'
 
     useEffect(() => {
         const fetchPlans = async () => {
@@ -292,9 +369,9 @@ export const PlanComparisonTest = ({ className = '' }) => {
                                                     key={plan.name + '-' + product.name + '-' + 'pricing'}
                                                     className={`col-span-${planColumns} pl-8 text-sm font-medium text-almost-black mt-4`}
                                                 >
-                                                    {getProductTiers(
-                                                        plan.products.find((p) => p.type === product.type)
-                                                    )}
+                                                    <ProductTiers
+                                                        product={plan.products.find((p) => p.type === product.type)}
+                                                    />
                                                 </div>
                                             ))}
                                         </>
