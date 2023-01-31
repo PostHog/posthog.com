@@ -71,6 +71,12 @@ This is another PR this week that we have the community to thank for, [solnsubug
 * [Upgraded](https://github.com/PostHog/posthog/pull/663) Kea to 2.0.0-beta.5.
 * We continue to implement AntD as above in [Setup](https://github.com/PostHog/posthog/pull/621).
 
+## Share your feedback
+We'd love to hear anything you have to say about PostHog, good or bad. As a thank you, we'll share some awesome [PostHog merch](https://merch.posthog.com).
+
+Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog.com) with one of our teams to help us make PostHog even better!
+
+
 ## Favorite issue
 
 ### [Copy to clipboard feature for scripts/docs #661](https://github.com/PostHog/posthog/issues/661)

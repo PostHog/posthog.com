@@ -126,6 +126,11 @@ Welcome Chris Clark! Chris joined our Core Experience Team to help us level up o
 
 > I once impulse-purchased a baby goose.
 
+## Share your feedback
+We'd love to hear anything you have to say about PostHog, good or bad. As a thank you, we'll share some awesome [PostHog merch](https://merch.posthog.com).
+
+Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog.com) with one of our teams to help us make PostHog even better!
+
 ## Community Shoutouts
 
 We want to thank each and every community member that contributed to this release of PostHog!

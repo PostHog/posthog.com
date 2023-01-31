@@ -368,7 +368,7 @@
         { "source": "/tutorials/b2b", "destination": "/blog/b2b-saas-product-metrics" },
         {
             "source": "/docs/self-host/migrate-to-cloud",
-            "destination": "/docs/self-host/migrate/migrate-between-cloud-and-self-hosted"
+            "destination": "/docs/migrate/migrate-between-posthog-instances"
         },
         { "source": "/tutorials/categories/plugins", "destination": "/tutorials/categories/apps" },
         { "source": "/startups", "destination": "/pricing" },
@@ -521,7 +521,7 @@
         { "source": "/docs/cloud/proxy", "destination": "/docs/integrate/proxy" },
         {
             "source": "/docs/self-host/migrate/migrate-between-cloud-and-self-hosted",
-            "destination": "/docs/migrate/migrate-between-cloud-and-self-hosted"
+            "destination": "/docs/migrate/migrate-between-posthog-instances"
         },
         {
             "source": "/docs/self-host/migrate/migrate-from-amplitude",
@@ -529,11 +529,19 @@
         },
         {
             "source": "/docs/self-host/migrate-from-postgres-to-clickhouse",
-            "destination": "/docs/migrate/migrate-to-another-self-hosted-instance"
+            "destination": "/docs/migrate/migrate-between-posthog-instances"
         },
         {
             "source": "/docs/self-host/migrate/migrate-to-another-self-hosted-instance",
-            "destination": "/docs/migrate/migrate-to-another-self-hosted-instance"
+            "destination": "/docs/migrate/migrate-between-posthog-instances"
+        },
+        {
+            "source": "/docs/migrate/migrate-to-another-self-hosted-instance",
+            "destination": "/docs/migrate/migrate-between-posthog-instances"
+        },
+        {
+            "source": "/docs/migrate/migrate-between-cloud-and-self-hosted",
+            "destination": "/docs/migrate/migrate-between-posthog-instances"
         },
         { "source": "/handbook/product/pm-rampup", "destination": "/handbook/people/ramp-up/product-manager" },
         {
@@ -670,6 +678,10 @@
         {
             "source": "/blog/tags/startups",
             "destination": "/blog/categories/startups"
+        },
+        {
+            "source": "/docs/integrate/badge",
+            "destination": "/docs/contribute/badge"
         }
     ],
     "rewrites": [
