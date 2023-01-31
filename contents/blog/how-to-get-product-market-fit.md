@@ -278,11 +278,39 @@ Don't put anything between the person writing the code and your users. This will
 
 ## Sales
 
-Reduce the risk for your earliest customers. Charge them monthly rather than annually (unless they've a preference for the latter).
+When you're trying to get to product market fit, do _not_ prioritize scaling. Just focus on getting 1 deal done at a time. Here is how to do that:
+
+1. Intros through your own network, people you worked with, went to school with, where your family work or went to school. Everybody has _some_ network - don't feel like you need to be a sales legend to do this.
+2. If you're in an accelerator, message other companies. Be personalized.
+3. People from companies that your product is perfect for.
+4. Events. You may be able to get free tickets via a partner.
+
+In general, do not do marketing (paid ads / content) expecting to get a sale - these are more scalable methods. Be hands on.
+
+Keep yourself accountable - set some goals for meetings booked and stick to them.
+
+Be hyper responsive. If you respond to people within minutes (whether booking a meeting, or progressing a deal), you'll get them whilst they're available and happy to engage. I used to obsessively respond to people on LinkedIn all day whilst in this phase.
+
+When it comes to pricing, reduce the risk for your earliest customers. Charge them monthly rather than annually (unless they've a preference for the latter - for example because they've a formal procurement process and rigid annual budgets).
 
 There are multiple methods available. You can charge a recurring monthly rate, or you can charge on usage.
 
-TODO add more detail on pricing here.
+Once you're on a call, get the prospect to open up about their challenges, and figure out with them if your product could solve their problems. It's worth qualifying the lead as you do this. The simplest method is BANT:
+
+* Budget
+* Authority
+* Need
+* Timeline
+
+Layer your questions.
+
+* Level 1 - "what are the requirements for this project?", "how will you pick a vendor?", "do you have a set budget?"
+* Level 2 - "this sounds important, why?", "would you consider a product that didn't include that feature?" and so on. 
+* Level 3 - "if your end users were thoroughly trained and using this product effecitvely, what impact would that have on your revenue?", "what does solving this mean for you?".
+
+Prioritize time with those that are best-qualified.
+
+Once someone decides to move forward, you'll need something for people to sign. YC provide a [free sales agreement](https://www.ycombinator.com/sales_agreement/) for SaaS companies.
 
 ## Pivoting
 
