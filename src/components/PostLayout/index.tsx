@@ -1,4 +1,4 @@
-import Post from './post'
+import Post from './Post'
 import { PostProvider, defaultMenuWidth } from './context'
 import { IProps } from './types'
 import React from 'react'
