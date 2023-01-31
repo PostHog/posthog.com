@@ -269,7 +269,7 @@ const Menu = ({
         <ul className={`list-none m-0 p-0 text-lg font-semibold overflow-hidden mb-[1px] ml-4 ${className}`}>
             <li>
                 {(url === undefined || url === null) && name ? (
-                    <p className="text-black dark:text-white font-semibold opacity-40 m-0 mt-3 mb-1 ml-3 text-[15px]">
+                    <p className="text-black dark:text-white font-semibold opacity-40 m-0 mt-4 mb-1 ml-3 text-[12px] uppercase">
                         {name}
                     </p>
                 ) : name && url ? (
