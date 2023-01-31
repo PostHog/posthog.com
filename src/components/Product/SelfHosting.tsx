@@ -7,17 +7,17 @@ import dataWarehouse from './images/data-warehouse.svg'
 
 const features = [
     {
-        title: 'Customer data never leaves your infrastructure',
-        description: 'Self-hosting PostHog makes it much easier to meet HIPAA, GDPR, and SOC 2 requirements.',
+        title: 'Ideal for hobby projects',
+        description: 'Our open-source is ideal for side hustles and hobby projects with up to 100k events per month.',
     },
     {
-        title: 'Capture up to 30% more events than PostHog Cloud',
-        description: 'First-party cookie means privacy tools don’t block PostHog like typical third-party scripts.',
+        title: 'Deploy with Docker',
+        description: 'Get PostHog set up on your own server, with basic analytics tools and no event limits.',
     },
     {
-        title: 'Eliminate 3rd party subprocessors',
+        title: 'Permissive MIT license',
         description:
-            'By using PostHog for event pipelines, product analytics, session recording, feature flags, A/B testing, and your data warehouse, you can reduce reliance on third parties for critical customer data.',
+            'The core of PostHog will always be open source. You are free to add, adapt or alter our code within an MIT license.',
     },
 ]
 
@@ -37,23 +37,18 @@ const deploymentInstructions = [
         title: 'Google Cloud',
         url: '/docs/self-host/deploy/gcp',
     },
-    {
-        Icon: HelmChart,
-        title: 'Helm Chart',
-        url: '/docs/self-host/deploy/other',
-    },
 ]
 
 export default function SelfHosting() {
     return (
         <FeatureWrapperRow
             id="self-hosting"
-            title="Self-hosting"
+            title="Transparent and open source"
             description={
                 <>
                     <p>
-                        Host on-prem or in your private cloud so customer data never leaves your infrastructure.
-                        <strong>Don’t need to self-host?</strong> Use PostHog Cloud and we’ll manage everything for you.
+                        We work transparently, and all our code is released under an MIT license. You can even deploy an
+                        open source version of PostHog for free, with basic analytics!
                     </p>
                     <div className="flex md:flex-row flex-col space-y-4 md:space-y-0 md:space-x-4 justify-between mt-10">
                         <ul className="list-none m-0 p-0 grid gap-y-7 max-w-[450px]">

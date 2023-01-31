@@ -20,8 +20,8 @@ export default function HomeQuote() {
             }
             quote={
                 <span>
-                    "PostHog is a game-changer; it's a full-featured{' '}
-                    <span className="text-red">product analytics suite you can self-host.</span> There's no need to risk
+                    "PostHog is a game-changer;{' '}
+                    <span className="text-red">a full-featured product analytics suite</span>. There's no need to risk
                     breaches by sending data to third parties or to waste time on lengthy compliance checks.{' '}
                     <span className="text-red">You don't even need SQL!"</span>{' '}
                 </span>
