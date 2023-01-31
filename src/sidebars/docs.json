@@ -790,6 +790,13 @@
                     {
                         "name": "Trends",
                         "url": "/manual/trends"
+                    },
+                    {
+                        "name": "HogQL",
+                        "url": "/manual/hogql",
+                        "badge": {
+                            "title": "Beta"
+                        }
                     }
                 ]
             },
