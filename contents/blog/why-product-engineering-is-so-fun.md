@@ -18,16 +18,19 @@ In my career so far (admittedly not _that_ long, though no one mistakes me for a
 
 Maybe it's just me, but I've had more fun as a product engineer than in _any_ other role, hands down. I'll tell you why.
 
-## Optimizing for fun
+## Why optimize for fun?
 
-But first - why does it matter how much fun I'm having? For me, it's simple. I've happily realized that the amount of fun I have in my work is highly correlated with my job satisfaction. It sounds obvious - if you're not having fun, would you be satisfied with your job? But I've seen a lot of people sacrifice the fun they have for some _thing_ that gives them more money, status, or even just more of a feeling that they've climbed up the next rung of the ladder despite the fact that they aren't quite sure where the ladder is going.
+But first... why does optimizing for fun matter? 
 
-The problem is that without the fun in the job you lose your daily drive to do the work. When we do things that we experience as being "fun" our neurons are releasing dopamine and activating the parts of the brain that scientists call pleasure centers [[1]](https://hub.jhu.edu/magazine/2016/summer/neuroscience-of-fun/). When we find activities that activate these pleasure centers, our brains want us to do them again and again. In a work context, this has a couple interesting ramifications:
+For me, it's simple. Having fun while working is highly correlated with my job satisfaction. It sounds obvious, but I've seen many people sacrifice the fun they have for some _thing_ that gives them more money, status, or just the feeling of progressing up the ladder, even if they have no idea where that ladder leads.
 
-1) If we're having fun (and releasing dopamine) while doing our work, we'll not only be okay with doing our work on the daily, we will actively look forward to and pursue it.
+When we find activities we enjoy, our brains want us to do them again and again – see this piece on the [neuroscience of fun](https://hub.jhu.edu/magazine/2016/summer/neuroscience-of-fun/) for why. This has a couple interesting ramifications in a work context:
+
+1) If we're having fun doing our work, we will actively look forward to and pursue it more than normal.
+
 2) When we do things again and again, we tend to get better at them, and thus better at our jobs.
 
-And when you put these two things together, you'll likely find that optimizing for fun in your work results in you wanting to work more and being better at the work you do, which _should_ (hopefully, theoretically) result in the salary increases and promotions that you've been dreaming about all along.
+And when you put these two things together, you'll likely find that optimizing for fun in your work results in you wanting to work more and being better at it. This _should_ (hopefully, theoretically) result in the salary increases and promotions that you've been dreaming about all along.
 
 ## What makes a job fun?
 
@@ -37,7 +40,7 @@ I have found that the critical ingredients for a fun job, for me, boil down to t
 
 1. Challenging problems to solve
 2. Support from other highly motivated colleagues
-3. The ability to make _important_ decisions
+3. The autonomy to make _important_ decisions
 4. Complete transparency into why my work matters
 
 Many companies and roles assume that the first item is the only requirement for a satisfying (aka fun) job. But when you look into the [neuroscience of fun](https://hub.jhu.edu/magazine/2016/summer/neuroscience-of-fun/), it's clear that being with others (#2) and defining direction and guardrails (#3) (with help and context from superiors [#4]) are critical aspects of any fun activity. 
@@ -95,10 +98,12 @@ For product engineering we get a score of 15/15. Yes, I made this scale up, and 
 
 ## So what's the catch?
 
-Ah, there is a catch. There is no perfect score for fun without any downsides. There's a concept of a "fun hangover" in children where they have _such_ a fun day that you know the next day is going to be a complete terror. While slightly different in adults, I'm convinced this concept still applies.
+Ah, there is a catch. There is no perfect score for fun without any downsides. One is the concept of a "fun hangover" in children – where they have _such_ a fun day that you know the next day is going to be a complete terror. While slightly different in adults, I'm convinced this concept still applies.
 
-The catch is this:
+But here's the big one: 
 
-It's really hard to operate simultaneously in both a product and an engineering mindset. The former is an external mindset, and the latter is an internal mindset. Switching between the two takes effort and it's easy to get stuck in one or the other. You have to be very conscious about which mindset you are in - and which one is most useful to you and the company right now - and make that mindset work for the job that currently needs to be done. Sometimes you're in the wrong mindset, and the progress you need to make becomes slow.
+It's **really hard** to operate in a product **and** an engineering mindset **simultaneously**. 
+
+The former is an external mindset; the latter, an internal one. Switching takes effort, so you need to be conscious about which mindset you're in, and whether it's the right mindset for your active task. Progress becomes slow when you get stuck in the wrong one.
 
 Regardless, I'll take the need to context switch. Because after all, I'm optimizing for _fun_.
