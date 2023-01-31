@@ -310,7 +310,7 @@ Layer your questions.
 
 Prioritize time with those that are best-qualified.
 
-Once someone decides to move forward, you'll need something for people to sign. YC provide a [free sales agreement](https://www.ycombinator.com/sales_agreement/) for SaaS companies.
+Once someone decides to move forward, you'll need something for people to sign. YC provide a [free sales agreement](https://www.ycombinator.com/sales_agreement/) for SaaS companies. Be flexible around your earliest customers for the terms they need - it's not about maximizing revenue or contract length, it's about getting your first deal signed and learning.
 
 ## Pivoting
 
