@@ -364,21 +364,22 @@ export default function Apply({ id, info }) {
                                                 Get started - free
                                             </TrackedCTA>
                                         }
-                                    >
-                                        <TrackedCTA
-                                            className="mt-auto"
-                                            html={`https://${
-                                                posthog?.isFeatureEnabled &&
-                                                posthog?.isFeatureEnabled('direct-to-eu-cloud')
-                                                    ? 'eu'
-                                                    : 'app'
-                                            }.posthog.com/signup`}
-                                            size="sm"
-                                            event={{ name: `clicked Continue`, type: 'cloud' }}
-                                        >
-                                            Get started - free
-                                        </TrackedCTA>
-                                    </RenderInClient>
+                                        render={() => (
+                                            <TrackedCTA
+                                                className="mt-auto"
+                                                html={`https://${
+                                                    posthog?.isFeatureEnabled &&
+                                                    posthog?.isFeatureEnabled('direct-to-eu-cloud')
+                                                        ? 'eu'
+                                                        : 'app'
+                                                }.posthog.com/signup`}
+                                                size="sm"
+                                                event={{ name: `clicked Continue`, type: 'cloud' }}
+                                            >
+                                                Get started - free
+                                            </TrackedCTA>
+                                        )}
+                                    />
                                 </div>
                                 <div>
                                     <h5 className="text-base mb-0">Self-hosted</h5>
