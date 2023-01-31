@@ -1,5 +1,5 @@
 import { useLocation } from '@reach/router'
-import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion'
+import { motion, AnimatePresence, useMotionValue, useTransform, useDragControls } from 'framer-motion'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React, { useEffect, useState } from 'react'
 import { animateScroll as scroll, Link as ScrollLink } from 'react-scroll'
@@ -591,6 +591,7 @@ const MenuContainer = ({
     setOpen: (open: null | string) => void
     className?: string
 }) => {
+    const dragControls = useDragControls()
     const y = useMotionValue(0)
     const input = [0, 200]
     const output = [1, 0]
@@ -608,6 +609,10 @@ const MenuContainer = ({
         } else {
             setOpen(null)
         }
+    }
+
+    const startDrag = (e) => {
+        dragControls.start(e)
     }
 
     useEffect(() => {
@@ -634,10 +639,20 @@ const MenuContainer = ({
                     dragConstraints={{ top: 0 }}
                     style={{ y, opacity }}
                     onDragEnd={handleDragEnd}
+                    dragControls={dragControls}
                     drag="y"
-                    className={`bg-white dark:bg-gray-accent-dark py-4 px-4 rounded-tr-md rounded-tl-md shadow-lg ${className}`}
+                    dragListener={false}
+                    className={`bg-white dark:bg-gray-accent-dark pb-4 pt-8 px-4 rounded-tr-md rounded-tl-md shadow-lg ${className}`}
                 >
-                    {children}
+                    <div
+                        onPointerDown={startDrag}
+                        className="absolute left-0 top-0 w-full h-8 flex justify-center items-center space-x-1 group"
+                    >
+                        <div className="w-1 h-1 bg-black dark:bg-white rounded-full group-active:opacity-80 transition-all opacity-30" />
+                        <div className="w-1 h-1 bg-black dark:bg-white rounded-full group-active:opacity-80 transition-all opacity-30" />
+                        <div className="w-1 h-1 bg-black dark:bg-white rounded-full group-active:opacity-80 transition-all opacity-30" />
+                    </div>
+                    <div>{children}</div>
                 </motion.div>
             </motion.div>
         </motion.div>
@@ -703,7 +718,7 @@ const MobileMenu = ({
             <motion.ul
                 key={menu?.parent?.name}
                 {...motionListContainer}
-                className="list-none m-0 p-0 pl-6 mt-2 h-[40vh] overflow-auto"
+                className="list-none m-0 p-0 pl-6 h-[40vh] overflow-auto"
             >
                 {menu?.parent?.menu && (
                     <motion.li
