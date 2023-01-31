@@ -10,7 +10,7 @@ const Pricing = (): JSX.Element => {
 
     return (
         <RenderInClient>
-            {posthog?.isFeatureEnabled && posthog?.isFeatureEnabled('website-pricing-page-test') ? (
+            {posthog?.isFeatureEnabled && posthog?.getFeatureFlag('website-pricing-page-test') === 'test' ? (
                 <PricingTest />
             ) : (
                 <PricingControl />
