@@ -17,158 +17,80 @@
         ]
     },
     {
-        "name": "Integrate PostHog",
+        "name": "SDKs",
+        "url": "/docs/sdks",
+        "children": []
+    },
+    {
+        "name": "Integrations",
         "url": "",
         "children": [
             {
-                "name": "Overview",
-                "url": "/docs/integrate"
+                "name": "Docusaurus v2",
+                "url": "/docs/integrate/third-party/docusaurus",
+                "badge": {
+                    "title": "3rd party"
+                }
             },
             {
-                "name": "Libraries",
-                "url": "",
-                "children": [
-                    {
-                        "name": "Android",
-                        "url": "/docs/integrate/client/android",
-                        "badge": {
-                            "title": "Popular",
-                            "className": "!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50"
-                        }
-                    },
-                    {
-                        "name": "Elixir",
-                        "url": "/docs/integrate/server/elixir"
-                    },
-                    {
-                        "name": "Flutter",
-                        "url": "/docs/integrate/client/flutter"
-                    },
-                    {
-                        "name": "Go",
-                        "url": "/docs/integrate/server/go"
-                    },
-                    {
-                        "name": "iOS",
-                        "url": "/docs/integrate/client/ios",
-                        "badge": {
-                            "title": "Popular",
-                            "className": "!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50"
-                        }
-                    },
-                    {
-                        "name": "Java",
-                        "url": "/docs/integrate/server/java"
-                    },
-                    {
-                        "name": "JavaScript",
-                        "url": "/docs/integrate/client/js",
-                        "badge": {
-                            "title": "Popular",
-                            "className": "!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50"
-                        }
-                    },
-                    {
-                        "name": "Node.js",
-                        "url": "/docs/integrate/server/node"
-                    },
-                    {
-                        "name": "PHP",
-                        "url": "/docs/integrate/server/php"
-                    },
-                    {
-                        "name": "Python",
-                        "url": "/docs/integrate/server/python"
-                    },
-                    {
-                        "name": "React Native",
-                        "url": "/docs/integrate/client/react-native",
-                        "badge": {
-                            "title": "Popular",
-                            "className": "!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50"
-                        }
-                    },
-                    {
-                        "name": "Ruby",
-                        "url": "/docs/integrate/server/ruby"
-                    },
-                    {
-                        "name": "Rust",
-                        "url": "/docs/integrate/server/rust"
-                    }
-                ]
+                "name": "Gatsby",
+                "url": "/docs/integrate/third-party/gatsby",
+                "badge": {
+                    "title": "3rd party"
+                }
             },
+            {
+                "name": "Google Tag Manager",
+                "url": "/docs/integrate/third-party/google-tag-manager"
+            },
+            {
+                "name": "Next.js",
+                "url": "/docs/integrate/third-party/next-js"
+            },
+            {
+                "name": "Nuxt.js",
+                "url": "/docs/integrate/third-party/nuxt-js"
+            },
+            {
+                "name": "Retool",
+                "url": "/docs/integrate/third-party/retool"
+            },
+            {
+                "name": "RudderStack",
+                "url": "/docs/integrate/third-party/rudderstack"
+            },
+            {
+                "name": "Segment",
+                "url": "/docs/integrate/third-party/segment"
+            },
+            {
+                "name": "Sentry",
+                "url": "/docs/integrate/third-party/sentry"
+            },
+            {
+                "name": "Slack",
+                "url": "/docs/integrate/third-party/slack"
+            },
+            {
+                "name": "Shopify",
+                "url": "/docs/integrate/third-party/shopify"
+            },
+            {
+                "name": "WordPress",
+                "url": "/docs/integrate/third-party/wordpress"
+            }
+        ]
+    },
+    {
+        "name": "Products"
+    },
+    {
+        "name": "Product analytics",
+        "url": "/docs/product-analytics",
+        "children": [
             {
                 "name": "Library comparison",
                 "url": "/docs/integrate/libraries"
-            },
-            {
-                "name": "Integrations",
-                "url": "",
-                "children": [
-                    {
-                        "name": "Docusaurus v2",
-                        "url": "/docs/integrate/third-party/docusaurus",
-                        "badge": {
-                            "title": "3rd party"
-                        }
-                    },
-                    {
-                        "name": "Gatsby",
-                        "url": "/docs/integrate/third-party/gatsby",
-                        "badge": {
-                            "title": "3rd party"
-                        }
-                    },
-                    {
-                        "name": "Google Tag Manager",
-                        "url": "/docs/integrate/third-party/google-tag-manager"
-                    },
-                    {
-                        "name": "Next.js",
-                        "url": "/docs/integrate/third-party/next-js"
-                    },
-                    {
-                        "name": "Nuxt.js",
-                        "url": "/docs/integrate/third-party/nuxt-js"
-                    },
-                    {
-                        "name": "Retool",
-                        "url": "/docs/integrate/third-party/retool"
-                    },
-                    {
-                        "name": "RudderStack",
-                        "url": "/docs/integrate/third-party/rudderstack"
-                    },
-                    {
-                        "name": "Segment",
-                        "url": "/docs/integrate/third-party/segment"
-                    },
-                    {
-                        "name": "Sentry",
-                        "url": "/docs/integrate/third-party/sentry"
-                    },
-                    {
-                        "name": "Slack",
-                        "url": "/docs/integrate/third-party/slack"
-                    },
-                    {
-                        "name": "Shopify",
-                        "url": "/docs/integrate/third-party/shopify"
-                    },
-                    {
-                        "name": "WordPress",
-                        "url": "/docs/integrate/third-party/wordpress"
-                    }
-                ]
-            },
-            {
-                "name": "Ingest live data",
-                "url": "/docs/integrate/ingest-live-data"
-            },
-            {
-                "name": "Ingest historical data",
-                "url": "/docs/integrate/ingest-historic-data"
             },
             {
                 "name": "Identify users",
@@ -185,10 +107,20 @@
             {
                 "name": "Deploying a reverse proxy",
                 "url": "/docs/integrate/proxy"
+            }
+        ]
+    },
+    {
+        "name": "Integrate PostHog",
+        "url": "",
+        "children": [
+            {
+                "name": "Overview",
+                "url": "/docs/integrate"
             },
             {
-                "name": "Badge",
-                "url": "/docs/integrate/badge"
+                "name": "Ingest historical data",
+                "url": "/docs/integrate/ingest-historic-data"
             },
             {
                 "name": "Browser extensions",
@@ -737,6 +669,10 @@
             {
                 "name": "Recognizing contributions",
                 "url": "/docs/contribute/recognizing-contributions"
+            },
+            {
+                "name": "Badge",
+                "url": "/docs/integrate/badge"
             }
         ]
     },
