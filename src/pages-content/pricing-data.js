@@ -78,7 +78,7 @@ const faqs = [
     },
     {
         q: 'Do feature flags and experiments impact costs?',
-        a: 'Feature flags and experiments are currently free to use, though you do need to be on a paid plan to get access. This might change in the future.',
+        a: 'While you do need to be on a paid plan to get access, Feature flags and Experiments do not currently incur any extra costs. This may change in the future.',
         author: {
             q: {
                 image: <StaticImage alt="" width={40} src="./images/hog-4.png" />,
