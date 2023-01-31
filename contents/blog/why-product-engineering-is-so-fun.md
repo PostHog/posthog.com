@@ -65,7 +65,7 @@ From first-hand experience, pretty darn fun. We can use our ingredients above an
 2. **Support from other highly motivated colleagues** – 3/5
     - Product management is often cited as being an extremely lonely role (and in my experience this is true). You're often the only one in your role on your team, you are constantly fighting battles for budget and prioritization by yourself, and if anything goes wrong with your product launch, the buck stops with you. 
     
-3. **The ability to make _important_ decisions** – 5/5
+3. **The autonomy to make _important_ decisions** – 5/5
     - This is simply what PMs are there for. Take the given context, decide what to do with it.
 
 Adding this up we get a score of 12/15. Not bad!
@@ -78,7 +78,7 @@ Adding this up we get a score of 12/15. Not bad!
 2. **Support from other highly motivated colleagues** – 5/5
     - Software engineers typically work on a team with at least one other engineer. This team aspect is critical to feeling supported.
     
-3. **The ability to make _important_ decisions** – 3/5 (or even 2/5)
+3. **The autonomy to make _important_ decisions** – 3/5 (or even 2/5)
     - While engineers can make important decisions about how something is implemented, they're often completely out of touch with making important decisions about the business. Oftentimes this is because they don't have the context, and they are simply told what to build. 
 
 For Software Engineering we get a score of 12 or 13/15. Also not bad.
