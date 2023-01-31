@@ -124,7 +124,7 @@ const ProductTiersModal = ({
                         <div className="grid grid-cols-2">
                             {tiers.map((tier, i) => {
                                 return (
-                                    <>
+                                    <React.Fragment key={`tiers-modal-${product.name}-tier-${i}`}>
                                         <p className="col-span-1 mb-0">
                                             {i === 0 && isFirstTierFree && 'First '}
                                             {convertLargeNumberToWords(
@@ -142,7 +142,7 @@ const ProductTiersModal = ({
                                         {i !== tiers.length - 1 && (
                                             <div className={`col-span-full ${getBorderStyle()} pb-2 mb-2`} />
                                         )}
-                                    </>
+                                    </React.Fragment>
                                 )
                             })}
                         </div>
@@ -153,7 +153,7 @@ const ProductTiersModal = ({
     )
 }
 
-const ProductTiers = ({ product }: { product?: BillingProductV2Type }): JSX.Element => {
+const ProductTiers = ({ product, planKey }: { product?: BillingProductV2Type; planKey: string }): JSX.Element => {
     const tiers = product?.tiers
     const [modalOpen, setModalOpen] = useState(false)
 
@@ -168,7 +168,7 @@ const ProductTiers = ({ product }: { product?: BillingProductV2Type }): JSX.Elem
         <div>
             {tiers.map((tier, i) => {
                 if ((parseFloat(tiers[0]?.unit_amount_usd) !== 0 && i > 0) || i > 1) {
-                    return <></>
+                    return <React.Fragment key={product.name + '-tiers-' + i}></React.Fragment>
                 }
 
                 return (
@@ -294,9 +294,9 @@ export const PlanComparisonTest = ({ className = '' }) => {
                     ))}
                     {/* PRODUCTS */}
                     {availablePlans?.[availablePlans.length - 1]?.products?.map((product) => (
-                        <>
+                        <React.Fragment key={`product-${product.type}`}>
                             {product.feature_groups?.map((feature_group) => (
-                                <>
+                                <React.Fragment key={`product-${product.type}-feature-group-${feature_group.name}`}>
                                     <div
                                         key={`${feature_group.name}-group`}
                                         className={`col-span-full text-center ${
@@ -311,7 +311,7 @@ export const PlanComparisonTest = ({ className = '' }) => {
                                         ? availablePlans.map((plan) => (
                                               <div
                                                   className={`col-span-${planColumns} text-center py-4 lg:text-left lg:pl-8 lg:pt-6`}
-                                                  key={`${plan.key}-free-allocation-or-limit`}
+                                                  key={`${plan.key}-${product.name}-free-allocation-or-limit`}
                                               >
                                                   <div>
                                                       {getProductLimit(
@@ -327,7 +327,7 @@ export const PlanComparisonTest = ({ className = '' }) => {
                                         // don't include features that are in the excluded features list
                                         ?.filter((f) => !excludedFeatures.includes(f.key))
                                         ?.map((feature) => (
-                                            <>
+                                            <React.Fragment key={`${feature_group.name}-subfeature-${feature.name}`}>
                                                 <div
                                                     className={`col-span-full bg-gray-accent-light py-2 text-center
                                                                 lg:col-span-${comparisonFeaturesColumns} lg:mb-3 lg:pl-8 lg:py-0 lg:bg-transparent lg:text-left`}
@@ -366,7 +366,7 @@ export const PlanComparisonTest = ({ className = '' }) => {
                                                         />
                                                     </div>
                                                 ))}
-                                            </>
+                                            </React.Fragment>
                                         ))}
                                     {/* PRODUCT PRICING */}
                                     {product.tiers && (
@@ -385,15 +385,16 @@ export const PlanComparisonTest = ({ className = '' }) => {
                                                 >
                                                     <ProductTiers
                                                         product={plan.products.find((p) => p.type === product.type)}
+                                                        planKey={plan.key}
                                                     />
                                                 </div>
                                             ))}
                                         </>
                                     )}
                                     <div className={`col-span-full ${getBorderStyle()} my-4`}></div>
-                                </>
+                                </React.Fragment>
                             ))}
-                        </>
+                        </React.Fragment>
                     ))}
                 </div>
             </section>
