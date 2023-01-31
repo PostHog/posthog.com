@@ -108,16 +108,6 @@
             {
                 "name": "Deploying a reverse proxy",
                 "url": "/docs/integrate/proxy"
-            }
-        ]
-    },
-    {
-        "name": "Integrate PostHog",
-        "url": "",
-        "children": [
-            {
-                "name": "Overview",
-                "url": "/docs/integrate"
             },
             {
                 "name": "Ingest historical data",
