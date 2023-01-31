@@ -2,13 +2,14 @@ import React from 'react'
 import { CallToAction } from 'components/CallToAction'
 import { Slack } from 'components/Icons/Icons'
 import Layout from 'components/Layout'
-import PostLayout, { SidebarSection } from 'components/PostLayout'
+import PostLayout from 'components/PostLayout'
 import { SEO } from 'components/seo'
 import { squeakProfileLink } from 'lib/utils'
 import { Squeak } from 'squeak-react'
 import { graphql } from 'gatsby'
 import Link from 'components/Link'
 import community from 'sidebars/community.json'
+import SidebarSection from 'components/PostLayout/SidebarSection'
 
 interface ITopic {
     label: string

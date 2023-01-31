@@ -1,10 +1,11 @@
-import { ContributorImage, SidebarSection } from 'components/PostLayout'
 import React from 'react'
 import Tooltip from 'components/Tooltip'
 import { kebabCase } from 'lib/utils'
 import Link from 'components/Link'
 import NotProductIcons from 'components/NotProductIcons'
 import ReactCountryFlag from 'react-country-flag'
+import { ContributorImage } from 'components/PostLayout/Contributors'
+import SidebarSection from 'components/PostLayout/SidebarSection'
 
 import { ThumbDown, ThumbUp } from 'components/Icons/Icons'
 

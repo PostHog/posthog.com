@@ -3,7 +3,7 @@ import { graphql, navigate, PageProps } from 'gatsby'
 import community from 'sidebars/community.json'
 import SEO from 'components/seo'
 import Layout from 'components/Layout'
-import PostLayout, { SidebarSection } from 'components/PostLayout'
+import PostLayout from 'components/PostLayout'
 import Link from 'components/Link'
 import { OrgProvider, UserProvider, useUser, Question } from 'squeak-react'
 import Modal from 'components/Modal'
@@ -17,6 +17,7 @@ import Tooltip from 'components/Tooltip'
 import GitHubTooltip, { Author } from 'components/GitHubTooltip'
 import QuestionsTable from 'components/Questions/QuestionsTable'
 import useSWRInfinite from 'swr/infinite'
+import SidebarSection from 'components/PostLayout/SidebarSection'
 
 export const Avatar = (props: { className?: string; src?: string }) => {
     return (

@@ -1,4 +1,4 @@
-import { SidebarSection } from 'components/PostLayout'
+import SidebarSection from 'components/PostLayout/SidebarSection'
 import slugify from 'slugify'
 import React from 'react'
 import Link from 'components/Link'

@@ -4,7 +4,7 @@ import { PageProps } from 'gatsby'
 import community from 'sidebars/community.json'
 import SEO from 'components/seo'
 import Layout from 'components/Layout'
-import PostLayout, { SidebarSection } from 'components/PostLayout'
+import PostLayout from 'components/PostLayout'
 import { GitHub, LinkedIn, Twitter } from 'components/Icons'
 import Link from 'components/Link'
 import Markdown from 'markdown-to-jsx'
@@ -12,6 +12,7 @@ import { OrgProvider, UserProvider, useUser, Question } from 'squeak-react'
 import Modal from 'components/Modal'
 import EditProfile from 'components/Profiles/EditProfile'
 import useSWR from 'swr'
+import SidebarSection from 'components/PostLayout/SidebarSection'
 
 export type SqueakProfile = {
     id: string

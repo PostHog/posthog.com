@@ -1,5 +1,5 @@
 import Layout from 'components/Layout'
-import PostLayout, { TableOfContents } from 'components/PostLayout'
+import PostLayout from 'components/PostLayout'
 import WhatsNext from 'components/Product/WhatsNext'
 import API from 'components/Product/API'
 import CTA from 'components/Product/CTA'

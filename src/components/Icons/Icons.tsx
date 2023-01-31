@@ -67,7 +67,7 @@ export const CircleArrow = ({ className }: { className: string }): JSX.Element =
     )
 }
 
-export const Edit = ({ className }: { className: string }): JSX.Element => {
+export const Edit = ({ className = '' }: { className?: string }): JSX.Element => {
     return (
         <svg
             className={className}
@@ -82,7 +82,7 @@ export const Edit = ({ className }: { className: string }): JSX.Element => {
     )
 }
 
-export const Issue = ({ className }: { className: string }): JSX.Element => {
+export const Issue = ({ className = '' }: { className?: string }): JSX.Element => {
     return (
         <svg
             className={className}
@@ -1871,7 +1871,7 @@ export const DarkMode = (props: any): JSX.Element => {
     )
 }
 
-export const ExpandDocument = ({ expanded, ...props }: { expanded: boolean }) => {
+export const ExpandDocument = ({ expanded, ...props }: { expanded: boolean | undefined }) => {
     return (
         <svg {...props} width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
