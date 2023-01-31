@@ -269,7 +269,7 @@ const Menu = ({
         <ul className={`list-none m-0 p-0 text-lg font-semibold overflow-hidden mb-[1px] ml-4 ${className}`}>
             <li>
                 {(url === undefined || url === null) && name ? (
-                    <p className="text-black dark:text-white font-semibold opacity-25 m-0 mt-3 mb-1 ml-3 text-[15px]">
+                    <p className="text-black dark:text-white font-semibold opacity-40 m-0 mt-3 mb-1 ml-3 text-[15px]">
                         {name}
                     </p>
                 ) : name && url ? (
@@ -297,28 +297,17 @@ const Menu = ({
                                 />
                             )}
                         </AnimatePresence>
-                        {icon ? (
-                            <span className="cursor-pointer flex items-center space-x-2 text-[17px] font-semibold text-black hover:text-black">
-                                <span className="w-[25px]">{icon}</span>
-                                <span>{name}</span>
+
+                        <span className="flex items-center space-x-2">
+                            {icon && <img src={icon} className="w-5 h-5 opacity-50" />}
+
+                            <span className={`opacity-50 group-hover:opacity-100 ${badge?.title ? 'mr-1.5' : ''}`}>
+                                {name}
                             </span>
-                        ) : (
-                            <>
-                                <span>
-                                    <span
-                                        className={`opacity-50 group-hover:opacity-100 ${badge?.title ? 'mr-1.5' : ''}`}
-                                    >
-                                        {name}
-                                    </span>
-                                    {badge?.title && (
-                                        <span className={`${badgeClasses} ${badge.className || ''}`}>
-                                            {' '}
-                                            {badge.title}
-                                        </span>
-                                    )}
-                                </span>
-                            </>
-                        )}
+                            {badge?.title && (
+                                <span className={`${badgeClasses} ${badge.className || ''}`}> {badge.title}</span>
+                            )}
+                        </span>
                         {isWithChild && <Chevron open={open ?? false} />}
                     </MenuLink>
                 ) : (

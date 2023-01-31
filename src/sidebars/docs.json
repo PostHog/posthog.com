@@ -87,6 +87,7 @@
     {
         "name": "Product analytics",
         "url": "/docs/product-analytics",
+        "icon": "/images/product-icons/product-analytics.svg",
         "children": [
             {
                 "name": "Library comparison",
@@ -182,6 +183,7 @@
     {
         "name": "Session recording",
         "url": "/docs/session-recording",
+        "icon": "/images/product-icons/session-recording.svg",
         "children": [
             {
                 "name": "Session Recording",
@@ -192,6 +194,7 @@
     {
         "name": "Feature flags",
         "url": "/docs/experiments",
+        "icon": "/images/product-icons/feature-flags.svg",
         "children": [
             {
                 "name": "Experimentation",
@@ -202,6 +205,7 @@
     {
         "name": "Experiments",
         "url": "/docs/experiments",
+        "icon": "/images/product-icons/experiments.svg",
         "children": [
             {
                 "name": "Experimentation",
@@ -211,7 +215,8 @@
     },
     {
         "name": "Data",
-        "url": "/docs/data-management",
+        "url": "/docs/data",
+        "icon": "/images/product-icons/data.svg",
         "children": [
             {
                 "name": "Actions",
@@ -274,6 +279,7 @@
     {
         "name": "Apps",
         "url": "/docs/apps",
+        "icon": "/images/product-icons/apps.svg",
         "children": [
             {
                 "name": "Import",
