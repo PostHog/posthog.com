@@ -23,6 +23,9 @@ export const RenderInClient = ({
     render: () => JSX.Element
     waitForFlags?: boolean
 }): JSX.Element | null => {
+    if (process.env.DEBUG === '1') {
+        waitForFlags = false
+    }
     const posthog = usePostHog()
     const [hasMounted, setHasMounted] = useState(false)
     const [hasFlags, setHasFlags] = useState(false)
