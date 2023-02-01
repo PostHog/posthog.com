@@ -19,17 +19,22 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 />
 
 <details> 
-  <summary>Who was impacted by the maintenance period?</summary>
+  <summary>Who was impacted by the maintenance?</summary>
 The maintenance only impacted users on our US cloud, who access PostHog via app.posthog.com. We notified these users about this work last week, by email. Self-hosted and EU cloud users were not impacted and will have enjoyed normal service.
+</details>
+
+<details> 
+  <summary>Was there any disruption?</summary>
+We ensured there was minimal disruption for PostHog users. Ingestion was briefly paused while the work was done, and events were stored to be processed once it was complete. There may have been some unusual behaviour within insights while the maintenance was underway, and feature flag persistence did not function for new incoming users only. All other feature flags and experiments continued to function as expected. We notified all impacted users by email the week previous to starting this maintenance, to give them time to prepare and scheduled the work to ensure minimal impact to users.
 </details>
 
 <details>
   <summary>Was any data lost?</summary>
-No. No events or data was lost, as we paused event ingestion for the duration of the work and stored them to be processed once the work was complete. We're now ingesting all events from the two-hour maintenance period. It may take a few hours for PostHog to completely recover from this ingestion lag.
+No. No events or data was lost, as we paused event ingestion for the duration of the work and stored data to be processed once the work was complete. We're now ingesting all events from the  maintenance period. It may take a few hours for PostHog to completely recover from this ingestion lag. 
 </details>
 
 <details> 
-  <summary>How long will PostHog take to recover?</summary>
+  <summary>How long will event ingestion take to catch up?</summary>
 In order to ensure no data was lost, we stored all events that occurred during the maintenance period so that they could be ingested once the work was complete. We're now processing those events. It may take a few hours for PostHog to catch up, and once the system is back to normal we'll remove the in-app notification. 
 </details>
 
