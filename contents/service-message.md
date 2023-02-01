@@ -21,13 +21,13 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 <details> 
   <summary>Who was impacted by the maintenance?</summary>
   <br />
-The maintenance only impacted users on our US cloud, who access PostHog via app.posthog.com. We notified these users about this work last week, by email. Self-hosted and EU cloud users were not impacted and will have enjoyed normal service.
+The maintenance only impacted users on our US cloud, who access PostHog via app.posthog.com. We notified these users about this work last week, by email. Self-hosted and EU cloud users were not impacted and will have enjoyed normal service. 
 </details>
 
 <details> 
   <summary>Was there any disruption?</summary>
   <br />
-We ensured there was minimal disruption for PostHog users. Ingestion was briefly paused while the work was done, and events were stored to be processed once it was complete. There may have been some unusual behaviour within insights while the maintenance was underway, and feature flag persistence did not function for new incoming users only. All other feature flags and experiments continued to function as expected. We notified all impacted users by email the week previous to starting this maintenance, to give them time to prepare and scheduled the work to ensure minimal impact to users.
+We ensured there was minimal disruption for most PostHog users, but some may have experienced a 503 error due to an unexpected issue. We have since recovered from this. Ingestion was briefly paused while the work was done, and events were stored to be processed once it was complete. While the maintenance was underway feature flag persistence did not function for new, incoming users only - all other feature flags and experiments continued to function as expected.
 </details>
 
 <details>
@@ -56,6 +56,12 @@ We migrated our Postgres database from Heroku, to Amazon services. This was esse
   <summary> Was the work successful? </summary>
   <br />
 Yes. The maintenance took a little over the two hour period we anticipated, but was otherwise entirely successful. We'd like to thank the Infrastructure Team for their hard work with this migration. Thanks, team!
+</details>
+
+<details> 
+  <summary> Where can I find out about future maintenance? </summary>
+  <br />
+We always let users know ahead of time if we're planning significant maintenance, but you can also subscribe for updates about unexpected incidents at status.posthog.com
 </details>
 
 <div className="centered py-5">
