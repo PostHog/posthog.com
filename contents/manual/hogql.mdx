@@ -10,6 +10,8 @@ The query builder is powered by `HogQL` which is our own SQL-like dialect for wr
 
 ## What is HogQL?
 
+### Structure of a HogQL query
+
 ### Basic expressions
 
 ```hogql
@@ -17,14 +19,6 @@ concat(properties.$browser, ' ', properties.$geoip_city_name)
 ```
 
 #### Adding new columns to 'Live events'
-
-### Aggregations
-
-### Examples
-
-This section will cover a number of more advanced examples of what's possible with HogQL expressions right now
-
-## HogQL Reference
 
 ### Accessing properties
 
@@ -44,18 +38,37 @@ This section will cover a number of more advanced examples of what's possible wi
 
 > **Note**: We currently do not support using event timestamps in aggregations
 
+#### `-If` with aggregations
+
+All aggregations have a correspoding `-If` version, which allows you to filter out specific events from within the aggregation based on a statement.
+For this version of the aggregation, the first argument is the value you would like to aggregate, withe the second value being a true or false expression.
+If this expression evaluates to false, this particular event won't be included in the aggregation.
+
+**Examples**
+
+-   `avgIf(toInt(properties.$browser_version), properties.$browser == 'Chrome')` - Average Chrome version
+-   `countIf(properties.$browser == 'Chrome')` - Number of events sent from Chrome
+-   `countDistinctIf(properties.$browser_version, properties.$browser == 'Chrome')` - Number of unique Chrome versions
+
+### Aliasing fields
+
+## Example queries
+
 ## Full HogQL reference
 
 Below is a list of all the currently supported functions in HogQL expressions, along with the equivalent function within ClickHouse.
-For deeper reference on the specific intracacies and behaviors of each of these functions, take a look at the [full SQL reference](https://clickhouse.com/docs/en/sql-reference/functions/) for ClickHouse.
+
+For deeper reference on the specific behaviors of each of these functions, take a look at the [full SQL reference](https://clickhouse.com/docs/en/sql-reference/functions/) for ClickHouse.
+
+The full, up-to-date list of supported functions can also be found [here](https://github.com/PostHog/posthog/blob/master/posthog/hogql/hogql.py#L13).
 
 ### Arithmetic
 
 | Operator | ClickHouse equivalent |
 | -------- | --------------------- |
-| "abs"    | "abs"                 |
-| "max2"   | "max2"                |
-| "min2"   | "min2"                |
+| `abs`    | `abs`                 |
+| `max2`   | `max2`                |
+| `min2`   | `min2`                |
 
 ### Type conversion
 
