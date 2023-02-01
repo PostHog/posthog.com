@@ -56,7 +56,6 @@ This table compares the Amplitude Analytics 'Growth' plan to PostHog Cloud, our 
         	<td><strong>Platform</strong></td>
         	<td></td>
         	<td></td>
-        	<td></td>
     	</tr>
 		<tr>
 			<td>Host yourself</td>
@@ -112,7 +111,6 @@ This table compares the Amplitude Analytics 'Growth' plan to PostHog Cloud, our 
         	<td><strong>Features</strong></td>
         	<td></td>
         	<td></td>
-        	<td></td>
     	</tr>
     	<tr>
         	<td>Funnel analysis</td>
@@ -152,7 +150,6 @@ This table compares the Amplitude Analytics 'Growth' plan to PostHog Cloud, our 
     	<tr>
         	<td>Feature Flags</td>
         	<td className="text-center"><span className="text-red text-lg">✖</span>*</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
     	<tr>
