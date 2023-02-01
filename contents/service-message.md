@@ -27,9 +27,9 @@ This disruption will only impact users on our US Cloud, regardless of where they
 <details> 
 <summary> What will the impact be?</summary>
   <br />
-We expect only temporarily inconvenience for most users. No data or events will be lost, as new events and sessions will be delayed until the work is complete. Some insights may experience errors until the maintenance is complete and feature flags will not persist for new incoming users for the duration of the maintenance. Persistent flags will continue working as expected for existing users.
-  <br />
-  <b>At around 12:00 UTC we ran into an unexpected issue</b> which mean some users may experience a 503 error and be unable to access PostHog. We are investigating the cause and recommend impacted users subscribe for incident updates at status.posthog.com. We can assure users that no data is being lost as a result of this disruption.
+  At around 12:00 UTC we ran into an unexpected issue which mean some users may experience a 503 error and be unable to access PostHog. We are investigating the cause and recommend impacted users subscribe for incident updates at status.posthog.com. We can assure users that no data is being lost as a result of this disruption.
+
+  We still expect only temporarily inconvenience for most users. No data or events will be lost, as new events and sessions will be delayed until the work is complete. Some insights may experience errors and feature flags will not persist for new incoming users for the duration of the maintenance. Persistent flags will continue working as expected for existing users.
 </details>
 
 <details> 
