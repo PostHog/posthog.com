@@ -7,7 +7,7 @@ showTitle: true
 hideAnchor: true
 author:
   - mathew-pregasen
-featuredImage: ../images/blog/clickhouse-vs-postgres/postgres-vs-clickhouse.png
+featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
 category: Engineering
 tags:
