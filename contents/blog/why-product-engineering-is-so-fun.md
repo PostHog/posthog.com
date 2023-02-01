@@ -7,11 +7,12 @@ showTitle: true
 hideAnchor: true
 author:
   - raquel-m-smith
-featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImage: ../images/blog/happy-hog.png
 featuredImageType: full
 category: Engineering
 tags:
   - Explainers
+  - Product engineers
 ---
 
 In my career so far (admittedly not _that_ long, though no one mistakes me for a college kid any longer, womp womp) I've done a little bit of a _lot_ of different things. In some rough order I've moderated forums, led customer success, created marketing plans and SEO strategies, built websites and apps, led product at a seed-to-series-A co, coded + ran my own startup, and more. I'm currently a product engineer here at PostHog working on the Growth Team. 
