@@ -28,7 +28,6 @@ const Layout = ({ children, className = '' }: { children: React.ReactNode; class
                 organizationId={process.env.GATSBY_SQUEAK_ORG_ID as string}
             >
                 <div className={className}>
-                    <Banner />
                     <Header />
                     <main>{children}</main>
                     <Footer />
