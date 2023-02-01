@@ -12,40 +12,39 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 ![Builder Hog](./images/service-message/worker-hog.png)
 <br />
 
-<h1 className="text-center px-2 pt-4 pb-2 md:px-8 text-3xl md:text-5xl xl:text-6xl relative z-20" style={{ marginTop: "-2rem", marginBottom: "-.5rem" }}>PostHog is undergoing <span className="text-red">scheduled</span> maintenance</h1>
+<h1 className="text-center px-2 pt-4 pb-2 md:px-8 text-3xl md:text-5xl xl:text-6xl relative z-20" style={{ marginTop: "-2rem", marginBottom: "-.5rem" }}>We've <span className="text-red">finished</span> some scheduled maintenance</h1>
 
 <Hero
-    subtitle="We started work at 07:00 UTC on 1 Feb 2023. The maintenance is expected to take approximately two hours."
+    subtitle="We finished at 10:30 UTC. Event ingestion is catching back up."
 />
 
 <details> 
-  <summary> Who does this maintenance effect? </summary>
-This disruption will only impact users on our US Cloud, regardless of where they are in the world. Self-hosted and EU Cloud users are unaffected.
+  <summary>Who was impacted by the maintenance period?</summary>
+The maintenance only impacted users on our US cloud, who access PostHog via app.posthog.com. We notified these users about this work last week, by email. Self-hosted and EU cloud users were not impacted and will have enjoyed normal service.
+</details>
+
+<details>
+  <summary>Was any data lost?</summary>
+No. No events or data was lost, as we paused event ingestion for the duration of the work and stored them to be processed once the work was complete. We're now ingesting all events from the two-hour maintenance period. It may take a few hours for PostHog to completely recover from this ingestion lag.
 </details>
 
 <details> 
-<summary> What will the impact be?</summary>
-We expect only temporarily inconvenience. <b>No data or events will be lost</b>. New events and sessions will be delayed and some insights may experience errors until the maintenance is complete. New data and events will become accessible once the maintenance is complete, and PostHog will remain operational and accessible throughout. Persistent feature flags will not persist for new incoming users for the duration of the maintenance. Persistent flags will continue working as expected for existing users.
+  <summary>How long will PostHog take to recover?</summary>
+In order to ensure no data was lost, we stored all events that occurred during the maintenance period so that they could be ingested once the work was complete. We're now processing those events. It may take a few hours for PostHog to catch up, and once the system is back to normal we'll remove the in-app notification. 
 </details>
 
 <details> 
-<summary> Will I lose any data?</summary>
-No. No events or data will be lost. Events during the maintenance period will be delayed, and become accessible once the updates are complete. 
+  <summary>Were feature flags or experiments disrupted?</summary>
+Persistent feature flags did not persist for new incoming users for the duration of the maintenance, but continued working as expected for existing users. Feature flags and experiments were otherwise unaffected and continued to function as normal. Now that the work is complete, feature flag persistence is now back to normal.</details>
+
+<details> 
+  <summary> What was upgraded and why? </summary>
+We migrated our Postgres database from Heroku, to Amazon services. This was essential work to make sure PostHog remains scalable and will unlock improved performance for users on our US cloud.
 </details>
 
 <details> 
-<summary> What about feature flags and experiments?</summary>
-Persistent feature flags will not persist for new incoming users for the duration of the maintenance. Persistent flags will continue working as expected for existing users. Feature flags and experiments will otherwise be unaffected and continue to function as normal for existing users. Normal service will immediately recover once the maintenance is completed. We strongly recommend not editing or creating new experiments or feature flags during the maintenance period.
-</details>
-
-<details> 
-  <summary> What is being worked on? </summary>
-Our Infrastructure Team is making some changes which are required to move PostHog's US Cloud to a new database. Specifically, we're migrating our Postgres database from Heroku, to Amazon services. This is part of essential work needed to make sure PostHog remains scalable. Additionally, we expect the new hosting to offer improved performance.
-</details>
-
-<details> 
-  <summary> How long will this take? </summary>
-We started the maintenance work at 07:00 UTC on 1 Feb 2023 and expect it to take no more than two hours. Once the work is complete we will remove the in-app banner and service will return to normal. 
+  <summary> Was the work successful? </summary>
+Yes. The maintenance took a little over the two hour period we anticipated, but was otherwise entirely successful. We'd like to thank the Infrastructure Team for their hard work with this migration. Thanks, team!
 </details>
 
 <div className="centered py-5">
