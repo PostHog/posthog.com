@@ -161,6 +161,14 @@ const languageMap: LanguageMap = {
         language: 'sql',
         label: 'SQL',
     },
+    hogql: {
+        language: 'python',
+        label: 'HogQL',
+    },
+    'hogql-query': {
+        language: 'json',
+        label: 'HogQL',
+    },
     ios: {
         language: 'objectivec',
         label: 'iOS',

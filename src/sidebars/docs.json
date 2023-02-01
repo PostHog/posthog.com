@@ -792,7 +792,7 @@
                         "url": "/manual/trends"
                     },
                     {
-                        "name": "HogQL",
+                        "name": "Query builder & HogQL",
                         "url": "/manual/hogql",
                         "badge": {
                             "title": "Beta"

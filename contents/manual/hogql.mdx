@@ -1,3 +1,146 @@
 ---
-title: HogQL
+title: Query builder & HogQL
 ---
+
+The Query builder in PostHog is an advanced feature which allows for more complex or ad-hoc queries than would be normally possible with our basic insights.
+It is meant to give advanced users the ability to query their data more directly.
+The query builder is powered by `HogQL` which is our own SQL-like dialect for writing custom expressions and aggregations.
+
+> This feature is currently in beta and is still under active development - the features shown here may change at any point
+
+## What is HogQL?
+
+### Basic expressions
+
+```hogql
+concat(properties.$browser, ' ', properties.$geoip_city_name)
+```
+
+#### Adding new columns to 'Live events'
+
+### Aggregations
+
+### Examples
+
+This section will cover a number of more advanced examples of what's possible with HogQL expressions right now
+
+## HogQL Reference
+
+### Accessing properties
+
+### Aggregations
+
+| Operator        | Example                                   | Notes                                                                             |
+| --------------- | ----------------------------------------- | --------------------------------------------------------------------------------- |
+| `count`         | `count()`                                 | Counts the total number of events                                                 |
+| `countDistinct` | `countDistinct(properties.$browser)`      | Counts number of distinct values for a given property                             |
+| `avg`           | `avg(toInt(properties.$browser_version))` | Calculates the average value of a numerical property                              |
+| `sum`           | `sum(toInt(properties.ride_distance))`    | Calculates the sum of a numerical property                                        |
+| `min`           | `min(toInt(properties.$browser_version))` | Calculates the minimum value of a numerical property                              |
+| `max`           | `max(toInt(properties.$browser_version))` | Calculates the maximum value of a numerical property                              |
+| `any`           | `any(properties.distinct_id)`             | Returns the first non-NULL value for a property, which may be different each time |
+
+> **Note**: Arguments to `avg`, `sum`, `min`, and `max` must first be cast to ints using the `toInt` function
+
+> **Note**: We currently do not support using event timestamps in aggregations
+
+### Arithmetic
+
+| Operator | ClickHouse equivalent |
+| -------- | --------------------- |
+| "abs"    | "abs"                 |
+| "max2"   | "max2"                |
+| "min2"   | "min2"                |
+
+### Type conversion
+
+| Operator            | ClickHouse equivalent     |
+| ------------------- | ------------------------- |
+| `toInt`             | `toInt64OrNull`           |
+| `toFloat`           | `toFloat64OrNull`         |
+| `toDecimal`         | `toDecimal64OrNull`       |
+| `toDate`            | `toDateOrNull`            |
+| `toDateTime`        | `parseDateTimeBestEffort` |
+| `toIntervalSecond`  | `toIntervalSecond`        |
+| `toIntervalMinute`  | `toIntervalMinute`        |
+| `toIntervalHour`    | `toIntervalHour`          |
+| `toIntervalDay`     | `toIntervalDay`           |
+| `toIntervalWeek`    | `toIntervalWeek`          |
+| `toIntervalMonth`   | `toIntervalMonth`         |
+| `toIntervalQuarter` | `toIntervalQuarter`       |
+| `toIntervalYear`    | `toIntervalYear`          |
+| `toString`          | `toString`                |
+
+### Date functions
+
+| Operator                  | ClickHouse equivalent     |
+| ------------------------- | ------------------------- |
+| `now`                     | `now`                     |
+| `toMonday`                | `toMonday`                |
+| `toStartOfYear`           | `toStartOfYear`           |
+| `toStartOfQuarter`        | `toStartOfQuarter`        |
+| `toStartOfMonth`          | `toStartOfMonth`          |
+| `toStartOfWeek`           | `toStartOfWeek`           |
+| `toStartOfDay`            | `toStartOfDay`            |
+| `toStartOfHour`           | `toStartOfHour`           |
+| `toStartOfMinute`         | `toStartOfMinute`         |
+| `toStartOfSecond`         | `toStartOfSecond`         |
+| `toStartOfFiveMinutes`    | `toStartOfFiveMinutes`    |
+| `toStartOfTenMinutes`     | `toStartOfTenMinutes`     |
+| `toStartOfFifteenMinutes` | `toStartOfFifteenMinutes` |
+| `toTimezone`              | `toTimezone`              |
+| `age`                     | `age`                     |
+| `dateDiff`                | `dateDiff`                |
+| `dateTrunc`               | `dateTrunc`               |
+| `formatDateTime`          | `formatDateTime`          |
+
+### String functions
+
+| Operator                     | ClickHouse equivalent        |
+| ---------------------------- | ---------------------------- |
+| `length`                     | `lengthUTF8`                 |
+| `empty`                      | `empty`                      |
+| `notEmpty`                   | `notEmpty`                   |
+| `leftPad`                    | `leftPad`                    |
+| `rightPad`                   | `rightPad`                   |
+| `lower`                      | `lower`                      |
+| `upper`                      | `upper`                      |
+| `repeat`                     | `repeat`                     |
+| `format`                     | `format`                     |
+| `concat`                     | `concat`                     |
+| `coalesce`                   | `coalesce`                   |
+| `substring`                  | `substringUTF8`              |
+| `appendTrailingCharIfAbsent` | `appendTrailingCharIfAbsent` |
+| `endsWith`                   | `endsWith`                   |
+| `startsWith`                 | `startsWith`                 |
+| `trim`                       | `trimBoth`                   |
+| `trimLeft`                   | `trimLeft`                   |
+| `trimRight`                  | `trimRight`                  |
+| `extractTextFromHTML`        | `extractTextFromHTML`        |
+| `like`                       | `like`                       |
+| `ilike`                      | `ilike`                      |
+| `notLike`                    | `notLike`                    |
+| `replace`                    | `replace`                    |
+| `replaceOne`                 | `replaceOne`                 |
+
+### Array functions
+
+| Operator | ClickHouse equivalent |
+| -------- | --------------------- |
+| `tuple`  | `tuple`               |
+
+### Conditional statetmens
+
+| Operator  | ClickHouse equivalent |
+| --------- | --------------------- |
+| `ifElse`  | `if`                  |
+| `multiIf` | `multiIf`             |
+
+### Rounding functions
+
+| Operator | ClickHouse equivalent |
+| -------- | --------------------- |
+| `round`  | `round`               |
+| `floor`  | `floor`               |
+| `ceil`   | `ceil`                |
+| `trunc`  | `trunc`               |
