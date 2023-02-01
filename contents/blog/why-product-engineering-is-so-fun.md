@@ -25,7 +25,7 @@ But first... why does optimizing for fun matter?
 
 For me, it's simple. Having fun while working is highly correlated with my job satisfaction. It sounds obvious, but I've seen many people sacrifice the fun they have for some _thing_ that gives them more money, status, or just the feeling of progressing up the ladder, even if they have no idea where that ladder leads.
 
-When we find activities we enjoy, our brains want us to do them again and again – see this piece on the [neuroscience of fun](https://hub.jhu.edu/magazine/2016/summer/neuroscience-of-fun/) for why. This has a couple interesting ramifications in a work context:
+When we find activities we enjoy, our brains want us to do them again and again. This has a couple interesting ramifications in a work context:
 
 1) If we're having fun doing our work, we will actively look forward to and pursue it more than normal.
 
