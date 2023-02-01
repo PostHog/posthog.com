@@ -27,7 +27,9 @@ This disruption will only impact users on our US Cloud, regardless of where they
 <details> 
 <summary> What will the impact be?</summary>
   <br />
-We expect only temporarily inconvenience. <b>No data or events will be lost</b>. New events and sessions will be delayed and some insights may experience errors until the maintenance is complete. New data and events will become accessible once the maintenance is complete, and PostHog will remain operational and accessible throughout. Persistent feature flags will not persist for new incoming users for the duration of the maintenance. Persistent flags will continue working as expected for existing users.
+We expect only temporarily inconvenience for most users. No data or events will be lost, as new events and sessions will be delayed until the work is complete. Some insights may experience errors until the maintenance is complete and feature flags will not persist for new incoming users for the duration of the maintenance. Persistent flags will continue working as expected for existing users.
+  <br />
+  <b>At around 12:00 UTC we ran into an unexpected issue</b> which mean some users may experience a 503 error and be unable to access PostHog. We are investigating the cause and recommend impacted users subscribe for incident updates at status.posthog.com. We can assure users that no data is being lost as a result of this disruption.
 </details>
 
 <details> 
@@ -56,7 +58,7 @@ We started the maintenance work at 07:00 UTC on 1 Feb 2023 and expected it to ta
 <details> 
   <summary> I'm unable to access PostHog, why? </summary>
     <br />
-Some users are reporting a 503 error caused by an unexpected issue. We've declared an incident for this and recommend impacted users subscribe for updates at status.posthog.com, for the latest information.
+Some users are reporting a 503 error caused by an unexpected issue. We've declared an incident for this and recommend impacted users subscribe for updates at status.posthog.com, for the latest information. We can assure users that no data is being lost as a result of this disruption.
 </details>
 
 <div className="centered py-5">
