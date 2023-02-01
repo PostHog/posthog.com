@@ -5,6 +5,7 @@ import CookieBanner from 'components/CookieBanner'
 import usePostHog from '../../hooks/usePostHog'
 import { SearchProvider } from 'components/Search/SearchContext'
 import { UserProvider } from '../../hooks/useUser'
+import Banner from '../Banner/index'
 
 import './Fonts.scss'
 import './Layout.scss'
@@ -27,6 +28,7 @@ const Layout = ({ children, className = '' }: { children: React.ReactNode; class
                 organizationId={process.env.GATSBY_SQUEAK_ORG_ID as string}
             >
                 <div className={className}>
+                    <Banner />
                     <Header />
                     <main>{children}</main>
                     <Footer />
