@@ -5,7 +5,6 @@ showTitle: true
 author: ['ian-vanagas']
 date: 2023-01-05
 featuredImage: ../images/tutorials/banners/nodejs.png
-featuredTutorial: true
 topics: ["configuration", "feature flags", "persons", "events"]
 ---
 
