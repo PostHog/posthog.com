@@ -74,17 +74,17 @@ In the examples below, we'll be tracking a company whose ID in the product is `4
 // All events for that session will be associated with company `42dlsfj23f`
 posthog.group('company', '42dlsfj23f');
 
-posthog.capture('some event')
+posthog.capture('user signed up')
 ```
 
 ```python
-posthog.capture('[distinct id]', 'some event', groups={'company': '42dlsfj23f'})
+posthog.capture('[distinct id]', 'user signed up', groups={'company': '42dlsfj23f'})
 ```
 
 ```go
 client.Enqueue(posthog.Capture{
     DistinctId: "[distinct id]",
-    Event: "beep",
+    Event: "user signed up",
     Groups: posthog.NewGroups().
         Set("company", "42dlsfj23f").
 })
@@ -92,7 +92,7 @@ client.Enqueue(posthog.Capture{
 
 ```node
 posthog.capture({
-    event: 'beep',
+    event: 'user signed up',
     distinctId: '[distinct id]',
     groups: { company: '42dlsfj23f' }
 })
@@ -101,16 +101,15 @@ posthog.capture({
 ```php
 PostHog::capture(array(
     'distinctId' => '[distinct id]',
-    'event' => 'beep',
+    'event' => 'user signed up',
     '$groups' => array("company" => "42dlsfj23f")
 ));
 ```
 
 ```segment
-analytics.track('beep', {
-    "$groups": {
-        "company": "42dlsfj23f"
-    }
+// You'll always need to pass through the $groups object for Segment, even for analytics.js
+analytics.track('user signed up', {
+    $groups: { segment_group: '42dlsfj23f' }
 })
 ```
 
@@ -178,14 +177,10 @@ PostHog::groupIdentify(array(
 ```
 
 ```segment
-analytics.track('$groupidentify', {
-    "$group_type": "company",
-    "$group_key": "42dlsfj23f",
-    "$group_set": {
-        "name": "PostHog",
-        "user_count": 33,
-        "date_joined": "2020-01-23T00:00:00.000Z"
-    }
+analytics.group('42dlsfj23f', {
+    "name": "PostHog",
+    "user_count": 33,
+    "date_joined": "2020-01-23T00:00:00.000Z"
 })
 ```
 

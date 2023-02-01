@@ -187,10 +187,6 @@
                 "url": "/docs/integrate/proxy"
             },
             {
-                "name": "Badge",
-                "url": "/docs/integrate/badge"
-            },
-            {
                 "name": "Browser extensions",
                 "url": "/docs/integrate/browser-extension"
             }
@@ -737,6 +733,10 @@
             {
                 "name": "Recognizing contributions",
                 "url": "/docs/contribute/recognizing-contributions"
+            },
+            {
+                "name": "Badge",
+                "url": "/docs/contribute/badge"
             }
         ]
     },

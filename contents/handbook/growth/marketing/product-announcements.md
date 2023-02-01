@@ -67,6 +67,27 @@ We do not typically do public relations for anything other than company-level ne
 
 Examples of major announcements include [persons on events](/blog/persons-on-events) and the [launch of EU Cloud](/eu).
 
+## Announcing scheduled maintenance
+
+Occasionally, we have to conduct scheduled maintenance. When this happens, it's important that we tell users about it in advance if they would experience any disruption. 
+
+> If you're aware of any upcoming maintenance which would cause disruption, please inform the Marketing and Customer Success teams as soon as possible. Marketing will ensure that users are notified as the work is planned and completed. Customer Success may wish to inform specific users at the time. 
+
+Typically, Marketing takes responsible for informing users about maintenance work beforehand by telling users who will be impacted through email and other channels. 
+
+When informing users about maintenance, it is important to answer all of the following points:
+
+- When will the maintenance occur?
+- How long will it take?
+- Who will be impacted? 
+- Will any data be lost?
+- Do users need to take any sort of action?
+- How will feature flags and experiments be impacted?
+- What will the impact be? Will insights, etc., still function?
+- Why is the maintenance being done, and what benefit will there be for users?
+
+While maintenance is being carried out, we typically use the Notification Bar app within PostHog to tell users that work is ongoing and direct them firstly to `/service-message` where we will provide further information. Once the maintenance is finished, the `service-message` page is updated to reflect that no maintenance is underway, and the banner is removed. 
+
 > The marketing team tries to ensure good, regular communication with other teams across PostHog, but mainly relies on [highlighted PRs](https://github.com/PostHog/posthog/pulls?q=is%3Apr+label%3A%22highlight+%3Astar%3A%22+is%3Aclosed) to find what has shipped in order to avoid burdening engineers with more meetings. ***If you have a shipped feature you want to see included in PostHog announcements, please add a highlight tag and a reasonable description to the PR.** Here's [an example of a good PR description](https://github.com/PostHog/posthog/pull/13414). 
 
 ## The PostHog Array
@@ -85,3 +106,4 @@ In the CTA, we remind users that demos may not represent finished features and t
 Every month, on the last Wednesday/Thursday of the month we use Customer.io to share a broadcast titled 'What's New In PostHog?'
 
 This email, similar to the old Array emails, contains a longer list of release highlights from that months' announcements. It also includes a CTA which directs users to sign up to [Hogmail](/handbook/growth/marketing/newsletter#hogmail-format).
+
