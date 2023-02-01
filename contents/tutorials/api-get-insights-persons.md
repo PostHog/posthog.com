@@ -12,7 +12,7 @@ An API or application programming interface is how computers talk to each other.
 
 This tutorial shows you the basics of the PostHog API. We focus on `GET` requests to retrieve information on insights and persons from your project
 
-## Getting your Personal API key
+## Getting your personal API key
 
 Like most APIs, we must authenticate ourselves before we can access our data in PostHog. To do this, you need a personal API key. 
 
