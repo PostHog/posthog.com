@@ -349,3 +349,29 @@ With the release of V2, the API was kept mostly the same but with some small cha
 2. The `callback` parameter passed as an optional last argument to most of the methods is no longer supported
 2. The method signature for `isFeatureEnabled` and `getFeatureFlag` is slightly modified. See the above documentation for each method for more details.
 3. For specific changes, [see the CHANGELOG](https://github.com/PostHog/posthog-js-lite/blob/master/posthog-node/CHANGELOG.md)
+
+## Using in a short-lived process like AWS Lambda
+
+PostHogs's client SDKs are all designed to queue and batch requests in the background to optimise API calls and network time. For lambda environments (or also when shutting down a standard Node.js app) we provide a method .shutdownAsync which can be awaited and ensures the queued events are all flushed to the API.
+
+For example:
+
+```
+export const handler() {
+
+ posthog.capture({
+      distinctId: 'distinct id',
+      event: 'thing happened'
+  })
+
+ posthog.capture({
+      distinctId: 'distinct id',
+      event: 'other thing happened'
+  })
+
+  // So far 2 events are queued but not sent
+
+  // Calling shutdown, flushed the queue but batched into 1 API call for max efficiency
+  await posthog.shutdownAsync() 
+}
+```
