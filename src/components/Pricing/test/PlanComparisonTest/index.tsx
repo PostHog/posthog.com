@@ -6,11 +6,12 @@ import usePostHog from '../../../../hooks/usePostHog'
 import React, { useEffect, useState } from 'react'
 import { BillingProductV2Type, BillingV2FeatureType, BillingV2PlanType } from 'types'
 import CheckIcon from '../../../../images/check.svg'
-import WarnIcon from '../../../../images/warning.svg'
+import { ProductIcons } from '../../../ProductIcons/ProductIcons'
 import MinusIcon from '../../../../images/x.svg'
 import './styles/index.scss'
 import Modal from 'components/Modal'
 import { capitalizeFirstLetter } from '../../../../utils'
+import { feature } from 'components/Pricing/PricingTable/classes'
 
 const getBorderStyle = (side: 'b' | 't' | 'l' | 'r' = 'b'): string => {
     return `border-${side} border-dashed border-gray-accent-light pb-6`
@@ -56,15 +57,14 @@ export function PlanIcon({
     timeDenominator?: string
 }): JSX.Element {
     return (
-        <div className="flex items-center text-xs text-muted">
+        <div className="flex items-center text-[15px]">
             {!feature ? (
                 <>
-                    <img src={MinusIcon} alt="Checked" className="h-4 w-4 text-red-500" aria-hidden="true" />
+                    <img src={MinusIcon} alt="Checked" className="h-5 w-5 text-red-500" aria-hidden="true" />
                     <span className="sr-only">Not included</span>
                 </>
             ) : feature.limit ? (
                 <>
-                    <img src={WarnIcon} alt="Checked" className="h-4 w-4 text-green-500 mr-4" aria-hidden="true" />
                     {feature.limit &&
                         `${convertLargeNumberToWords(feature.limit, null)} ${feature.unit && feature.unit}${
                             timeDenominator ? `/${timeDenominator}` : ''
@@ -73,9 +73,19 @@ export function PlanIcon({
                 </>
             ) : (
                 <>
-                    <img src={CheckIcon} alt="Checked" className="h-4 w-4 text-green-500 mr-4" aria-hidden="true" />
-                    {feature.note}
-                    <span className="sr-only">Included in {feature.name}</span>
+                    {feature.note ? (
+                        <>{feature.note}</>
+                    ) : (
+                        <>
+                            <img
+                                src={CheckIcon}
+                                alt="Checked"
+                                className="h-5 w-5 text-green-500 mr-4"
+                                aria-hidden="true"
+                            />
+                            <span className="sr-only">Included in {feature.name}</span>
+                        </>
+                    )}
                 </>
             )}
         </div>
@@ -203,6 +213,16 @@ const ProductTiers = ({ product, planKey }: { product?: BillingProductV2Type; pl
     )
 }
 
+const icons = {
+    product_analytics: ProductIcons.analytics,
+    session_recording: ProductIcons.sessionRecording,
+    feature_flags: ProductIcons.featureFlags,
+    experiments: ProductIcons.experiments,
+    integrations: ProductIcons.appLibrary,
+    platform: ProductIcons.dataManagement,
+    support: ProductIcons.analytics,
+}
+
 export const getProductLimit = (product?: BillingProductV2Type): JSX.Element => {
     if (!product) return <></>
     if (!product.free_allocation) {
@@ -251,7 +271,7 @@ export const PlanComparisonTest = ({ className = '' }) => {
         <>
             <section className={className}>
                 <div
-                    className={`w-full grid grid-cols-${numberOfColumnsMobile} lg:grid-cols-${numberOfColumns} relative mb-0`}
+                    className={`w-full grid grid-cols-${numberOfColumnsMobile} lg:grid-cols-${numberOfColumns} relative mb-0 space-y-4`}
                 >
                     {/* PLAN HEADERS */}
                     <div
@@ -303,14 +323,17 @@ export const PlanComparisonTest = ({ className = '' }) => {
                                             product.tiered
                                                 ? `lg:col-span-${comparisonFeaturesColumns}`
                                                 : 'col-span-full'
-                                        } text-almost-black pt-6 pb-2 lg:text-left`}
+                                        } text-primary pt-6 pb-2 lg:text-left justify-center`}
                                     >
-                                        <h4>{feature_group.name}</h4>
+                                        <h4>
+                                            <span className="inline-block h-6 w-6">{icons[feature_group.group]}</span>{' '}
+                                            {feature_group.name}
+                                        </h4>
                                     </div>
                                     {product.tiered
                                         ? availablePlans.map((plan) => (
                                               <div
-                                                  className={`col-span-${planColumns} text-center py-4 lg:text-left lg:pl-8 lg:pt-6`}
+                                                  className={`col-span-${planColumns} text-center py-4 lg:text-left lg:pl-8 lg:pt-6 justify-center`}
                                                   key={`${plan.key}-${product.name}-free-allocation-or-limit`}
                                               >
                                                   <div>
@@ -330,7 +353,7 @@ export const PlanComparisonTest = ({ className = '' }) => {
                                             <React.Fragment key={`${feature_group.name}-subfeature-${feature.name}`}>
                                                 <div
                                                     className={`col-span-full bg-gray-accent-light py-2 text-center
-                                                                lg:col-span-${comparisonFeaturesColumns} lg:mb-3 lg:pl-8 lg:py-0 lg:bg-transparent lg:text-left`}
+                                                                lg:col-span-${comparisonFeaturesColumns} lg:pl-8 lg:py-0 lg:bg-transparent lg:text-left`}
                                                     key={`comparison-row-key-${feature.name}`}
                                                 >
                                                     <Tooltip
