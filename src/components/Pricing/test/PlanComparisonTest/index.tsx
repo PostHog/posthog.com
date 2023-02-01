@@ -271,89 +271,104 @@ export const PlanComparisonTest = ({ className = '' }) => {
         <>
             <section className={className}>
                 <div
-                    className={`w-full grid grid-cols-${numberOfColumnsMobile} lg:grid-cols-${numberOfColumns} relative mb-0 space-y-4`}
+                    className={`w-full grid-cols-${numberOfColumnsMobile} lg:grid-cols-${numberOfColumns} relative mb-0 space-y-4`}
                 >
                     {/* PLAN HEADERS */}
-                    <div
-                        className={`col-span-full lg:col-span-${comparisonFeaturesColumns} py-2 pr-6 text-[14px] font-medium text-almost-black sticky top-0 z-10 bg-opacity-95 bg-tan ${getBorderStyle()}`}
-                    >
-                        <p className="font-bold mb-0">PostHog OS ships with all products</p>
-                        <p className="text-black/50">
-                            You can set billing limits for each, so you only pay for what you want and never receive an
-                            unexpected bill.
-                        </p>
-                    </div>
-                    {availablePlans.map((plan) => (
+                    <div className="hello-world-header flex flex-wrap sticky top-0 z-10">
                         <div
-                            key={`${plan.name}-header`}
-                            className={`col-span-${planColumns} py-2 px-3 text-sm text-almost-black leading-tight sticky top-0 z-10 bg-opacity-95 bg-tan w-full ${getBorderStyle()}`}
+                            className={`basis-[100%] md:basis-0 flex-1 py-2 pr-6 text-[14px] font-medium text-almost-black bg-opacity-95 bg-tan ${getBorderStyle()}`}
                         >
-                            <div className="flex flex-col h-full justify-between">
-                                <div>
-                                    <p className="font-bold mb-0">{plan.name}</p>
-                                    <p className="text-black/50">{plan.description}</p>
-                                </div>
-                                <TrackedCTA
-                                    event={{
-                                        name: `clicked Get started - free`,
-                                        type: 'cloud',
-                                    }}
-                                    type="primary"
-                                    width="full lg:w-auto"
-                                    className="shadow-md"
-                                    to={`https://${
-                                        posthog?.isFeatureEnabled && posthog?.isFeatureEnabled('direct-to-eu-cloud')
-                                            ? 'eu'
-                                            : 'app'
-                                    }.posthog.com/signup`}
-                                >
-                                    Get started - free
-                                </TrackedCTA>
-                            </div>
+                            <p className="font-bold mb-0">PostHog OS ships with all products</p>
+                            <p className="text-black/50">
+                                You can set billing limits for each, so you only pay for what you want and never receive
+                                an unexpected bill.
+                            </p>
                         </div>
-                    ))}
+                        <div className="w-full md:flex-[0_0_60%] flex">
+                            {availablePlans.map((plan) => (
+                                <div
+                                    key={`${plan.name}-header`}
+                                    className={`flex-1 py-2 px-3 text-sm text-almost-black leading-tight bg-opacity-95 bg-tan w-full ${getBorderStyle()}`}
+                                >
+                                    <div className="flex-1 flex flex-col h-full justify-between">
+                                        <div>
+                                            <p className="font-bold mb-0">{plan.name}</p>
+                                            <p className="hidden md:block text-black/50">{plan.description}</p>
+                                        </div>
+                                        <TrackedCTA
+                                            event={{
+                                                name: `clicked Get started - free`,
+                                                type: 'cloud',
+                                            }}
+                                            type="primary"
+                                            width="full lg:w-auto"
+                                            className="shadow-md"
+                                            to={`https://${
+                                                posthog?.isFeatureEnabled &&
+                                                posthog?.isFeatureEnabled('direct-to-eu-cloud')
+                                                    ? 'eu'
+                                                    : 'app'
+                                            }.posthog.com/signup`}
+                                        >
+                                            Get started - free
+                                        </TrackedCTA>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                     {/* PRODUCTS */}
                     {availablePlans?.[availablePlans.length - 1]?.products?.map((product) => (
                         <React.Fragment key={`product-${product.type}`}>
                             {product.feature_groups?.map((feature_group) => (
-                                <React.Fragment key={`product-${product.type}-feature-group-${feature_group.name}`}>
-                                    <div
-                                        key={`${feature_group.name}-group`}
-                                        className={`col-span-full text-center ${
-                                            product.tiered
-                                                ? `lg:col-span-${comparisonFeaturesColumns}`
-                                                : 'col-span-full'
-                                        } text-primary pt-6 pb-2 lg:text-left justify-center`}
-                                    >
-                                        <h4>
-                                            <span className="inline-block h-6 w-6">{icons[feature_group.group]}</span>{' '}
-                                            {feature_group.name}
-                                        </h4>
+                                <div
+                                    className="hello-world"
+                                    key={`product-${product.type}-feature-group-${feature_group.name}`}
+                                >
+                                    <div className="hello-world-subheader flex flex-wrap">
+                                        <div
+                                            key={`${feature_group.name}-group`}
+                                            className={`flex-1 basis-[100%] md:basis-0 text-center ${
+                                                product.tiered
+                                                    ? `lg:col-span-${comparisonFeaturesColumns}`
+                                                    : 'col-span-full'
+                                            } text-primary pt-6 pb-2 lg:text-left justify-center`}
+                                        >
+                                            <h4>
+                                                <span className="inline-block h-6 w-6">
+                                                    {icons[feature_group.group]}
+                                                </span>{' '}
+                                                {feature_group.name}
+                                            </h4>
+                                        </div>
+                                        <div className="plan-group w-full md:flex-[0_0_60%] flex">
+                                            {product.tiered
+                                                ? availablePlans.map((plan) => (
+                                                      <div
+                                                          className={`flex-1 text-center py-4 lg:text-left lg:pl-8 lg:pt-6 justify-center`}
+                                                          key={`${plan.key}-${product.name}-free-allocation-or-limit`}
+                                                      >
+                                                          <div>
+                                                              {getProductLimit(
+                                                                  plan.products?.find((p) => p.type === product.type)
+                                                              )}
+                                                          </div>
+                                                      </div>
+                                                  ))
+                                                : null}
+                                        </div>
                                     </div>
-                                    {product.tiered
-                                        ? availablePlans.map((plan) => (
-                                              <div
-                                                  className={`col-span-${planColumns} text-center py-4 lg:text-left lg:pl-8 lg:pt-6 justify-center`}
-                                                  key={`${plan.key}-${product.name}-free-allocation-or-limit`}
-                                              >
-                                                  <div>
-                                                      {getProductLimit(
-                                                          plan.products?.find((p) => p.type === product.type)
-                                                      )}
-                                                  </div>
-                                              </div>
-                                          ))
-                                        : null}
-
                                     {/* SUB-FEATURES */}
                                     {feature_group.features
                                         // don't include features that are in the excluded features list
                                         ?.filter((f) => !excludedFeatures.includes(f.key))
                                         ?.map((feature) => (
-                                            <React.Fragment key={`${feature_group.name}-subfeature-${feature.name}`}>
+                                            <div
+                                                className="hello-world-row hover:bg-gray-accent-light md:flex"
+                                                key={`${feature_group.name}-subfeature-${feature.name}`}
+                                            >
                                                 <div
-                                                    className={`col-span-full bg-gray-accent-light py-2 text-center
-                                                                lg:col-span-${comparisonFeaturesColumns} lg:pl-8 lg:py-0 lg:bg-transparent lg:text-left`}
+                                                    className={`flex-1 bg-gray-accent-light py-2 text-center lg:pl-8 lg:py-0 lg:bg-transparent lg:text-left`}
                                                     key={`comparison-row-key-${feature.name}`}
                                                 >
                                                     <Tooltip
@@ -371,51 +386,55 @@ export const PlanComparisonTest = ({ className = '' }) => {
                                                         </span>
                                                     </Tooltip>
                                                 </div>
-                                                {availablePlans.map((plan, i) => (
-                                                    <div
-                                                        className={`col-span-${planColumns} flex justify-center pt-2 pb-8 ${
-                                                            i !== availablePlans.length - 1 && getBorderStyle('r')
-                                                        }
-                                                                    lg:pl-8 lg:py-0 lg:text-left lg:justify-start lg:border-none`}
-                                                        key={`${plan.name}-${feature.name}-value`}
-                                                    >
-                                                        <PlanIcon
-                                                            feature={plan.products
-                                                                .find((p) => p.type === product.type)
-                                                                ?.feature_groups?.find(
-                                                                    (fg) => fg.name === feature_group.name
-                                                                )
-                                                                ?.features?.find((f) => f.name === feature.name)}
-                                                        />
-                                                    </div>
-                                                ))}
-                                            </React.Fragment>
+                                                <div className="plan-group-2 w-full md:flex-[0_0_60%] flex">
+                                                    {availablePlans.map((plan, i) => (
+                                                        <div
+                                                            className={`flex-1 flex justify-center pt-2 pb-8 ${
+                                                                i !== availablePlans.length - 1 && getBorderStyle('r')
+                                                            }
+                                                                        lg:pl-8 lg:py-0 lg:text-left lg:justify-start lg:border-none`}
+                                                            key={`${plan.name}-${feature.name}-value`}
+                                                        >
+                                                            <PlanIcon
+                                                                feature={plan.products
+                                                                    .find((p) => p.type === product.type)
+                                                                    ?.feature_groups?.find(
+                                                                        (fg) => fg.name === feature_group.name
+                                                                    )
+                                                                    ?.features?.find((f) => f.name === feature.name)}
+                                                            />
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
                                         ))}
                                     {/* PRODUCT PRICING */}
                                     {product.tiers && (
-                                        <>
+                                        <div className="flex flex-wrap">
                                             <div
-                                                className={`col-span-full lg:col-span-${comparisonFeaturesColumns} text-center lg:text-left lg:mb-3 font-bold lg:mt-4 py-2 lg:py-0 lg:pl-8 bg-gray-accent-light lg:bg-transparent`}
+                                                className={`basis-[100%] md:basis-0 flex-1 text-center lg:text-left lg:mb-3 font-bold lg:mt-4 py-2 lg:py-0 lg:pl-8 bg-gray-accent-light lg:bg-transparent`}
                                             >
                                                 Pricing
                                             </div>
-                                            {availablePlans.map((plan, i) => (
-                                                <div
-                                                    key={plan.name + '-' + product.name + '-' + 'pricing'}
-                                                    className={`col-span-${planColumns} pl-8 text-sm font-medium text-almost-black pt-4 ${
-                                                        i !== availablePlans.length - 1 && getBorderStyle('r')
-                                                    } lg:border-none`}
-                                                >
-                                                    <ProductTiers
-                                                        product={plan.products.find((p) => p.type === product.type)}
-                                                        planKey={plan.key}
-                                                    />
-                                                </div>
-                                            ))}
-                                        </>
+                                            <div className="plan-group-3 w-full md:flex-[0_0_60%] flex">
+                                                {availablePlans.map((plan, i) => (
+                                                    <div
+                                                        key={plan.name + '-' + product.name + '-' + 'pricing'}
+                                                        className={`flex-1 pl-8 text-sm font-medium text-almost-black pt-4 ${
+                                                            i !== availablePlans.length - 1 && getBorderStyle('r')
+                                                        } lg:border-none`}
+                                                    >
+                                                        <ProductTiers
+                                                            product={plan.products.find((p) => p.type === product.type)}
+                                                            planKey={plan.key}
+                                                        />
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
                                     )}
                                     <div className={`col-span-full ${getBorderStyle()} my-4`}></div>
-                                </React.Fragment>
+                                </div>
                             ))}
                         </React.Fragment>
                     ))}
