@@ -16,7 +16,7 @@ tags:
   - Guides
 ---
 
-Passed in 1996, HIPAA (aka Health Insurance Portability and Accountability Act) defines the legals requirements for securing and handling health information.
+Passed in 1996, HIPAA (aka Health Insurance Portability and Accountability Act) defines the legal requirements for securing and handling health information, and the severe penalties for failing to do so.
 
 Data protected under HIPAA is called Protected Health Information (PHI), or ePHI if it is digitized. It includes any data which can be used to identify the past, current or future health status of an individual. This obviously includes test results and diagnoses, but it can also cover birthdays, ethnicity, gender and other information. Even your IP address can be considered ePHI under HIPAA. 
 
