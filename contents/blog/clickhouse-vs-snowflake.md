@@ -71,16 +71,6 @@ Separately, an advantage of ClickHouse Cloud is that it includes some exclusive 
 
 Overall, ClickHouse Cloud or Altinity Cloud are excellent options for companies that want a managed version of ClickHouse on the public cloud. Their emergence closes the gap between ClickHouse and Snowflake. 
 
-### Who uses Snowflake and ClickHouse?
-
-Part of Snowflake’s value prop is the broad appeal to both technical and non-technical users. Snowflake’s marketplace makes connecting business intelligence tools with warehouse data easy, which appeals to teams wanting explore their data. ClickHouse Cloud has a competitive offering, but the current integrations are limited to a select few.
-
-While a managed ClickHouse solution is similar to Snowflake’s integration war chest, it has a long way to go before it is competitive. It does, however, level the playing field considerably. Before ClickHouse Cloud, the on-prem only option made it significantly harder to scale compared to Snowflake’s one-click upgrades.
-
-Some **companies that use** Snowflake include AT&T, Jetblue, Anthem, and Capital One. Snowflake customers tend to be enterprise-level and have to deal with a lot of data. 
-
-**ClickHouse’s customers** include Github, YouTube, Twitter, and Slack. We, at PostHog, also [use ClickHouse](/docs/how-posthog-works/clickhouse). It dramatically improved our analytics data warehouse from our previous Postgres setup and allows us to deliver billion-event scale insights quickly. 
-
 ## Architecture overview
 
 When Snowflake was released in 2012, there were two major paradigms – **Shared-Disk Architecture** and **Shared-Nothing Architecture**.
@@ -121,9 +111,15 @@ Snowflake has some of these features, but with caveats:
 
 Overall, ClickHouse's close-metal optimizations enable it to return aggregate values over a thousand times faster (and cheaper) than Snowflake. However, Snowflake’s approach is considerably more user-friendly as it requires less SQL-level optimization to take advantage of these organizational features.
 
-### Security
+### Who uses Snowflake and ClickHouse?
 
-From a third-party vendor standpoint, Snowflake and ClickHouse Cloud are SOC II Type 2 accredited and have PCI-DSI compliance. Of course, ClickHouse on-prem has no built-in security features beyond ordinary user management.
+Part of Snowflake’s value prop is the broad appeal to both technical and non-technical users. Snowflake’s marketplace makes connecting business intelligence tools with warehouse data easy, which appeals to teams wanting explore their data. ClickHouse Cloud has a competitive offering, but the current integrations are limited to a select few.
+
+While a managed ClickHouse solution is similar to Snowflake’s integration war chest, it has a long way to go before it is competitive. It does, however, level the playing field considerably. Before ClickHouse Cloud, the on-prem only option made it significantly harder to scale compared to Snowflake’s one-click upgrades.
+
+**Snowflake customers** include AT&T, Jetblue, Anthem, and Capital One. Snowflake customers tend to be enterprise-level and have to deal with a lot of data. 
+
+**ClickHouse’s customers** include Github, YouTube, Twitter, and Slack. We, at PostHog, also [use ClickHouse](/docs/how-posthog-works/clickhouse). It dramatically improved our analytics data warehouse from our previous Postgres setup and allows us to deliver billion-event scale insights quickly. 
 
 ## Conclusion
 
