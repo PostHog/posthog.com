@@ -4,7 +4,6 @@ import usePostHog from '../../hooks/usePostHog'
 import { RenderInClient } from 'components/RenderInClient'
 import PricingControl from './control/Pricing'
 import PricingTest from './test/Pricing'
-import Spinner from 'components/Spinner'
 
 const Pricing = (): JSX.Element => {
     const posthog = usePostHog()
@@ -13,9 +12,7 @@ const Pricing = (): JSX.Element => {
         <RenderInClient
             waitForFlags
             render={() =>
-                !posthog?.getFeatureFlag ? (
-                    <Spinner />
-                ) : posthog?.getFeatureFlag('website-pricing-page-test') === 'test' ? (
+                posthog?.getFeatureFlag && posthog?.getFeatureFlag('website-pricing-page-test') === 'test' ? (
                     <PricingTest />
                 ) : (
                     <PricingControl />

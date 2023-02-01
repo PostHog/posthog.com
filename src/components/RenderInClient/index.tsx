@@ -23,7 +23,7 @@ export const RenderInClient = ({
     render: () => JSX.Element
     waitForFlags?: boolean
 }): JSX.Element | null => {
-    if (process.env.DEBUG === '1') {
+    if (process.env.WAIT_FOR_FLAGS === '0') {
         waitForFlags = false
     }
     const posthog = usePostHog()
