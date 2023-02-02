@@ -5,7 +5,7 @@ showTitle: true
 ---
 ## Getting customers to value quickly
 
-We believe our unique value propositon is that we provide a fully-integrated Product Data stack, allowing users to go across Analytics, Recordings and Experimentation with ease.  To that end, we want them to see this value as quickly as possible when evaluating us against other solutions.
+Our moat is that we have a fully-integrated tool that allows customers to go across Analytics, Recordings and Experimentation easily.  We want new customers to see the value of this as quickly as possible when evaluating us against other solutions.
 
 For high-touch prospective customers the following process will get them onboarded quickly so that they can experience the value we provide using their own product data.
 
