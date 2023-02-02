@@ -1,5 +1,5 @@
 ---
-date: 2023-01-31
+date: 2023-02-02
 title: Why I've had more fun as a product engineer than any other role in tech
 rootPage: /blog
 sidebar: Blog
@@ -27,9 +27,9 @@ For me, it's simple. Having fun while working is highly correlated with my job s
 
 When we find activities we enjoy, our brains want us to do them again and again. This has a couple interesting ramifications in a work context:
 
-1) If we're having fun doing our work, we will actively look forward to and pursue it more than normal.
+1. If we're having fun doing our work, we will actively look forward to and pursue it more than normal.
 
-2) When we do things again and again, we tend to get better at them, and thus better at our jobs.
+2. When we do things again and again, we tend to get better at them, and thus better at our jobs.
 
 And when you put these two things together, you'll likely find that optimizing for fun in your work results in you wanting to work more and being better at it. This _should_ (hopefully, theoretically) result in the salary increases and promotions that you've been dreaming about all along.
 
@@ -44,7 +44,7 @@ I have found that the critical ingredients for a fun job, for me, boil down to t
 3. The autonomy to make _important_ decisions
 4. Complete transparency into why my work matters
 
-Many companies and roles assume that the first item is the only requirement for a satisfying (aka fun) job. But when you look into the [neuroscience of fun](https://hub.jhu.edu/magazine/2016/summer/neuroscience-of-fun/), it's clear that being with others (#2) and defining direction and guardrails (#3) (with help and context from superiors [#4]) are critical aspects of any fun activity. 
+Many companies and roles assume that challenging problems to solve (#1) is the only requirement for a satisfying (aka fun) job. But, when you look into the [neuroscience of fun](https://hub.jhu.edu/magazine/2016/summer/neuroscience-of-fun/), it's clear that being with others (#2) and defining direction (#3) with help and context from superiors (#4) are critical aspects of any fun activity. 
 
 ## So what makes product engineering so fun?
 
@@ -58,7 +58,11 @@ Let's look at two other roles, specifically two that have been combined to creat
 
 ### How fun is product management?
 
-From first-hand experience, pretty darn fun. We can use our ingredients above and rate the intensity of each to come up with a proxy for fun-ness. Since company culture is so important to #4 (complete transparency into why my work matters), we'll leave it out of our ranking system as it has more to do with the company and less to do with the role. The others are obviously very impacted by culture as well, but we'll assume our roles here are at a company that doesn't completely suck.
+From first-hand experience, pretty darn fun. 
+
+We can use our ingredients above and rate the intensity of each to come up with a proxy for fun-ness. Since company culture is so important to #4 (complete transparency into why my work matters), we'll leave it out of our ranking system as it has more to do with the company and less to do with the role. 
+
+The others are obviously very impacted by culture as well, but we'll assume our roles here are at a company that doesn't completely suck.
 
 1. **Challenging problems to solve** – 4/5
     - PMs often need to solve challenging problems around UX, customer needs, scheduling, and politics. The cycle can be slow and frustrating at times, though.
