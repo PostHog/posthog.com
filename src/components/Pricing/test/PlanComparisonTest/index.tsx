@@ -13,10 +13,6 @@ import Modal from 'components/Modal'
 import { capitalizeFirstLetter } from '../../../../utils'
 import { feature } from 'components/Pricing/PricingTable/classes'
 
-const getBorderStyle = (side: 'b' | 't' | 'l' | 'r' = 'b'): string => {
-    return `border-${side} border-dashed border-gray-accent-light pb-6`
-}
-
 const convertLargeNumberToWords = (
     // The number to convert
     num: number | null,
@@ -144,9 +140,7 @@ const ProductTiersModal = ({
                                                 ? 'Free'
                                                 : `$${parseFloat(tier.unit_amount_usd).toFixed(numberOfSigFigs)}`}
                                         </p>
-                                        {i !== tiers.length - 1 && (
-                                            <div className={`col-span-full ${getBorderStyle()} pb-2 mb-2`} />
-                                        )}
+                                        {i !== tiers.length - 1 && <div className={`pb-2 mb-2`} />}
                                     </React.Fragment>
                                 )
                             })}
@@ -241,6 +235,7 @@ export const PlanComparisonTest = ({ className = '' }) => {
         'terms_and_conditions',
         'security_assessment',
         'app_metrics',
+        'paths_advanced',
     ]
 
     useEffect(() => {
@@ -267,17 +262,17 @@ export const PlanComparisonTest = ({ className = '' }) => {
             <section className={className}>
                 <div className={`w-full relative mb-0 space-y-4`}>
                     {/* PLAN HEADERS */}
-                    <div className="flex flex-wrap sticky top-0 z-10">
+                    <div className="flex flex-wrap sticky top-0 z-10 -mx-4 md:mx-0">
                         <div
-                            className={`basis-[100%] md:basis-0 flex-1 py-2 pr-6 text-[14px] font-medium text-almost-black bg-opacity-95 bg-tan border-b border-gray-accent-light pb-4`}
+                            className={`basis-[100%] md:basis-0 flex-1 py-2 pr-6 text-[14px] font-medium text-almost-black bg-opacity-95 bg-tan border-b border-gray-accent-light pb-4 pl-4`}
                         >
                             <p className="font-bold mb-0">PostHog OS ships with all products</p>
-                            <p className="text-black/50 text-sm">
+                            <p className="text-black/50 text-sm mb-0">
                                 You can set billing limits for each, so you only pay for what you want and never receive
                                 an unexpected bill.
                             </p>
                         </div>
-                        <div className="w-full bg-tan/90 md:flex-[0_0_60%] flex border-b border-gray-accent-light md:px-4 md:gap-4">
+                        <div className="w-full bg-tan/90 md:flex-[0_0_60%] flex border-b border-gray-accent-light px-4 md:gap-4">
                             {availablePlans.map((plan) => (
                                 <div
                                     key={`${plan.name}-header`}
@@ -347,69 +342,75 @@ export const PlanComparisonTest = ({ className = '' }) => {
                                         </div>
                                     </div>
                                     {/* SUB-FEATURES */}
-                                    {feature_group.features
-                                        // don't include features that are in the excluded features list
-                                        ?.filter((f) => !excludedFeatures.includes(f.key))
-                                        ?.map((feature) => (
-                                            <div
-                                                className="md:pl-8 md:p-2 rounded md:hover:bg-gray-accent-light md:flex"
-                                                key={`${feature_group.name}-subfeature-${feature.name}`}
-                                            >
+                                    <div className="bg-gray-accent-light/80 p-1 rounded md:ml-6">
+                                        {feature_group.features
+                                            // don't include features that are in the excluded features list
+                                            ?.filter((f) => !excludedFeatures.includes(f.key))
+                                            ?.map((feature) => (
                                                 <div
-                                                    className={`flex-1 bg-gray-accent-light py-2 text-center md:py-0 md:bg-transparent md:text-left`}
-                                                    key={`comparison-row-key-${feature.name}`}
+                                                    className="md:p-2 rounded md:hover:bg-gray-accent/50 md:flex"
+                                                    key={`${feature_group.name}-subfeature-${feature.name}`}
                                                 >
-                                                    <Tooltip
-                                                        content={
-                                                            <div className="p-4">
-                                                                <p className="font-bold mb-2">{feature.name}</p>
-                                                                <p className="mb-0">{feature.description}</p>
-                                                            </div>
-                                                        }
-                                                        tooltipClassName="max-w-xs m-4"
-                                                        placement={window.innerWidth > 767 ? 'right' : 'bottom'}
+                                                    <div
+                                                        className={`flex-1 bg-gray-accent/25 rounded py-2 text-center md:py-0 md:bg-transparent md:text-left`}
+                                                        key={`comparison-row-key-${feature.name}`}
                                                     >
-                                                        <span
-                                                            className={`pb-0.5 cursor-default font-bold text-[15px] border-b border-dashed border-gray-accent-light`}
+                                                        <Tooltip
+                                                            content={
+                                                                <div className="p-2">
+                                                                    <p className="font-bold text-[15px] mb-1">
+                                                                        {feature.name}
+                                                                    </p>
+                                                                    <p className="mb-0 text-sm">
+                                                                        {feature.description}
+                                                                    </p>
+                                                                </div>
+                                                            }
+                                                            tooltipClassName="max-w-xs m-4"
+                                                            placement={window.innerWidth > 767 ? 'right' : 'bottom'}
                                                         >
-                                                            {feature.name}
-                                                        </span>
-                                                    </Tooltip>
+                                                            <span
+                                                                className={`pb-0.5 cursor-default font-bold text-[15px] border-b border-dashed border-gray-accent-light`}
+                                                            >
+                                                                {feature.name}
+                                                            </span>
+                                                        </Tooltip>
+                                                    </div>
+                                                    <div className="divide-x md:divide-x-0 divide-gray-accent-light/50 w-full md:flex-[0_0_60%] flex">
+                                                        {availablePlans.map((plan, i) => (
+                                                            <div
+                                                                className={`flex-1 flex justify-center py-4 md:py-0 md:text-left md:justify-start md:border-none`}
+                                                                key={`${plan.name}-${feature.name}-value`}
+                                                            >
+                                                                <PlanIcon
+                                                                    feature={plan.products
+                                                                        .find((p) => p.type === product.type)
+                                                                        ?.feature_groups?.find(
+                                                                            (fg) => fg.name === feature_group.name
+                                                                        )
+                                                                        ?.features?.find(
+                                                                            (f) => f.name === feature.name
+                                                                        )}
+                                                                />
+                                                            </div>
+                                                        ))}
+                                                    </div>
                                                 </div>
-                                                <div className="divide-x md:divide-x-0 divide-gray-accent-light/50 w-full md:flex-[0_0_60%] flex">
-                                                    {availablePlans.map((plan, i) => (
-                                                        <div
-                                                            className={`flex-1 flex justify-center py-4 md:py-0 md:text-left md:justify-start md:border-none`}
-                                                            key={`${plan.name}-${feature.name}-value`}
-                                                        >
-                                                            <PlanIcon
-                                                                feature={plan.products
-                                                                    .find((p) => p.type === product.type)
-                                                                    ?.feature_groups?.find(
-                                                                        (fg) => fg.name === feature_group.name
-                                                                    )
-                                                                    ?.features?.find((f) => f.name === feature.name)}
-                                                            />
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        ))}
+                                            ))}
+                                    </div>
                                     {/* PRODUCT PRICING */}
                                     {product.tiers && (
-                                        <div className="flex flex-wrap md:pl-8 mt-4 px-2">
+                                        <div className="flex flex-wrap md:pl-8 px-2">
                                             <div
-                                                className={`basis-[100%] md:basis-0 flex-1 pt-4 text-center md:text-left font-bold border-t border-gray-accent-light bg-gray-accent-light md:bg-transparent`}
+                                                className={`hidden md:block basis-[100%] md:basis-0 flex-1 pt-4 text-center md:text-left font-bold md:bg-transparent`}
                                             >
                                                 {feature_group.name} pricing
                                             </div>
-                                            <div className="w-full md:flex-[0_0_60%] border-t border-gray-accent-light flex">
+                                            <div className="w-full md:flex-[0_0_60%] flex">
                                                 {availablePlans.map((plan, i) => (
                                                     <div
                                                         key={plan.name + '-' + product.name + '-' + 'pricing'}
-                                                        className={`flex-1 text-sm font-medium text-almost-black pt-4 ${
-                                                            i !== availablePlans.length - 1 && getBorderStyle('r')
-                                                        } md:border-none`}
+                                                        className={`flex-1 text-sm font-medium text-almost-black pt-4 md:border-none`}
                                                     >
                                                         <ProductTiers
                                                             product={plan.products.find((p) => p.type === product.type)}
@@ -420,7 +421,6 @@ export const PlanComparisonTest = ({ className = '' }) => {
                                             </div>
                                         </div>
                                     )}
-                                    <div className={`col-span-full ${getBorderStyle()} my-4`}></div>
                                 </div>
                             ))}
                         </React.Fragment>
