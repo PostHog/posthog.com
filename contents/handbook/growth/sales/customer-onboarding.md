@@ -68,7 +68,7 @@ If they don't already know about AARRR we should share our [AARRR blog post](htt
 
 ### Deliverables
 
-1. A partially filled-in tracking plan detailing Activation and Acquisitoon
+1. A partially filled-in tracking plan detailing Activation and Acquisition
 2. A code snippet showing them how to implement tracking for their product (including Identification and Groups if applicable)
 3. Elements and pages to add opt-out-capture to
 
