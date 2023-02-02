@@ -4,6 +4,7 @@ import React from 'react'
 import SearchIconButton from 'components/Search/SearchIconButton'
 import { Wrapper } from '../Wrapper'
 import { ProductIcons } from '../../../ProductIcons/ProductIcons'
+import { NotProductIcons } from '../../../NotProductIcons/NotProductIcons'
 
 interface IFeature {
     title: string
@@ -18,10 +19,10 @@ interface IColumn {
 }
 
 const gettingStarted: IFeature[] = [
-    { title: 'Quickstart', icon: ProductIcons.sessionRecording },
-    { title: 'JS snippet', icon: ProductIcons.heatmaps },
-    { title: 'SDKs', icon: ProductIcons.featureFlags },
-    { title: 'Migrate to PostHog', icon: ProductIcons.abTesting },
+    { title: 'Quickstart', icon: NotProductIcons.quickstart },
+    { title: 'JS snippet', icon: NotProductIcons.jsSnippet },
+    { title: 'SDKs', icon: NotProductIcons.sdks },
+    { title: 'Migrate to PostHog', icon: NotProductIcons.migrate },
 ]
 
 const products: IFeature[] = [
@@ -33,12 +34,12 @@ const products: IFeature[] = [
 ]
 
 const resources: IFeature[] = [
-    { title: 'Tutorials', icon: ProductIcons.analytics },
+    { title: 'Tutorials', icon: NotProductIcons.tutorials },
     { title: 'Apps', icon: ProductIcons.appLibrary },
-    { title: 'Webhooks', icon: ProductIcons.featureFlags },
+    { title: 'Webhooks', icon: NotProductIcons.webhooks },
     { title: 'API', icon: ProductIcons.api },
-    { title: 'How PostHog works', icon: ProductIcons.projects },
-    { title: 'Privacy', icon: ProductIcons.projects },
+    { title: 'How PostHog works', icon: NotProductIcons.howPostHogWorks },
+    { title: 'Privacy', icon: NotProductIcons.privacy },
 ]
 
 const categories: IColumn[] = [
