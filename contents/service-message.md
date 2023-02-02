@@ -12,53 +12,28 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 ![Builder Hog](./images/service-message/worker-hog.png)
 <br />
 
-<h1 className="text-center px-2 pt-4 pb-2 md:px-8 text-3xl md:text-5xl xl:text-6xl relative z-20" style={{ marginTop: "-2rem", marginBottom: "-.5rem" }}>PostHog is undergoing <span className="text-red">scheduled</span> maintenance</h1>
+<h1 className="text-center px-2 pt-4 pb-2 md:px-8 text-3xl md:text-5xl xl:text-6xl relative z-20" style={{ marginTop: "-2rem", marginBottom: "-.5rem" }}>There's currently <span className="text-red">no</span> maintenance underway</h1>
 
 <Hero
-    subtitle="Updates are taking longer than expected. We'll keep this page updated."
+    subtitle="But we'll let you know if that changes"
 />
 
 <details> 
-  <summary> Who does this maintenance effect? </summary>
+  <summary> Why is this page here? </summary>
   <br />
-This disruption will only impact users on our US Cloud, regardless of where they are in the world. Self-hosted and EU Cloud users are unaffected.
+  When we need to run scheduled maintenance or updates to PostHog we alert impacted users ahead of time by email, then include an in-app notice while the maintenance is running. In both cases, we direct users to this page to get updates and to answer detailed questions. There's no maintenance scheduled currently, so this page is currently in hibernation like an adorable hedgehog.
 </details>
 
 <details> 
-<summary> What will the impact be?</summary>
+<summary> Is there maintenance scheduled? </summary>
   <br />
-  At around 12:00 UTC we ran into an unexpected issue which mean some users may experience a 503 error and be unable to access PostHog. We are investigating the cause and recommend impacted users subscribe for incident updates at status.posthog.com. We can assure users that no data is being lost as a result of this disruption.
-
-  We still expect only temporarily inconvenience for most users. No data or events will be lost, as new events and sessions will be delayed until the work is complete. Some insights may experience errors and feature flags will not persist for new incoming users for the duration of the maintenance. Persistent flags will continue working as expected for existing users.
+  We don't currently have any maintenance scheduled for the immediate future. If that changes, we'll update impacted users directly and post an in-app banner to make sure you're aware.
 </details>
 
 <details> 
-<summary> Will I lose any data?</summary>
+<summary> Is PostHog down? </summary>
   <br />
-No. No events or data will be lost. Events during the maintenance period will be delayed, and become accessible once the updates are complete. 
-</details>
-
-<details> 
-<summary> What about feature flags and experiments?</summary>
-  <br />
-Persistent feature flags will not persist for new incoming users for the duration of the maintenance. Persistent flags will continue working as expected for existing users. Feature flags and experiments will otherwise be unaffected and continue to function as normal for existing users. Normal service will immediately recover once the maintenance is completed. We strongly recommend not editing or creating new experiments or feature flags during the maintenance period.
-</details>
-
-<details> 
-  <summary> What is being worked on? </summary>
-Our Infrastructure Team is making some changes which are required to move PostHog's US Cloud to a new database. Specifically, we're migrating our Postgres database from Heroku, to Amazon services. This is part of essential work needed to make sure PostHog remains scalable. Additionally, we expect the new hosting to offer improved performance.
-</details>
-
-<details> 
-  <summary> How long will this take? </summary>
-    <br />
-We started the maintenance work at 07:00 UTC on 1 Feb 2023 and expected it to take no more than two hours. Unfortunately, we've hit some unexpected delays and work is still ongoing. We'll keep this page updated with more information as it becomes available. 
-</details>
-
-<details> 
-  <summary> I'm unable to access PostHog, why? </summary>
-    <br />
-Some users are reporting a 503 error caused by an unexpected issue. We've declared an incident for this and recommend impacted users subscribe for updates at status.posthog.com, for the latest information. We can assure users that no data is being lost as a result of this disruption.
+  We hope not! But you can always check status.posthog.com to see if there are any outages or disruptions on our end. If you think something is wrong, let us know in the community Slack, or email us at hey@posthog.com.
 </details>
 
 <div className="centered py-5">
