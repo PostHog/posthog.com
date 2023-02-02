@@ -126,8 +126,7 @@ const ProductTiersModal = ({
                             {tiers.map((tier, i) => {
                                 return (
                                     <React.Fragment key={`tiers-modal-${product.name}-tier-${i}`}>
-                                        <p className="col-span-1 mb-0">
-                                            {i === 0 && isFirstTierFree && 'First '}
+                                        <p className="col-span-1 mb-0 border-b border-gray-accent-light border-dashed py-1">
                                             {convertLargeNumberToWords(
                                                 tier.up_to,
                                                 tiers[i - 1]?.up_to,
@@ -135,12 +134,11 @@ const ProductTiersModal = ({
                                                 product.type
                                             )}
                                         </p>
-                                        <p className="font-bold col-span-1 mb-0">
+                                        <p className="font-bold col-span-1 mb-0 border-b border-gray-accent-light border-dashed py-1">
                                             {isFirstTierFree && i === 0
                                                 ? 'Free'
                                                 : `$${parseFloat(tier.unit_amount_usd).toFixed(numberOfSigFigs)}`}
                                         </p>
-                                        {i !== tiers.length - 1 && <div className={`pb-2 mb-2`} />}
                                     </React.Fragment>
                                 )
                             })}
@@ -174,8 +172,8 @@ const ProductTiers = ({ product, planKey }: { product?: BillingProductV2Type; pl
                     <div key={product.name + '-tiers-' + i} className="pr-4">
                         {parseFloat(tier.unit_amount_usd) === 0 ? (
                             <div>
-                                <span className="font-bold text-base">Free</span> for the{' '}
-                                {convertLargeNumberToWords(tier.up_to, null, true, product.type)}
+                                <span className="font-bold text-base">Free</span> up to{' '}
+                                {convertLargeNumberToWords(tier.up_to, null, true, product.type)}, then
                             </div>
                         ) : (
                             <>
@@ -186,7 +184,7 @@ const ProductTiers = ({ product, planKey }: { product?: BillingProductV2Type; pl
                                     <Link to="" onClick={() => setModalOpen(true)} className="text-red font-bold">
                                         Volume discounts
                                     </Link>{' '}
-                                    after first {convertLargeNumberToWords(tier.up_to)}/mo
+                                    after {convertLargeNumberToWords(tier.up_to)}/mo
                                     <ProductTiersModal
                                         modalOpen={modalOpen}
                                         setModalOpen={setModalOpen}
@@ -272,6 +270,7 @@ export const PlanComparisonTest = ({ className = '' }) => {
                                 an unexpected bill.
                             </p>
                         </div>
+
                         <div className="w-full bg-tan/90 md:flex-[0_0_60%] flex border-b border-gray-accent-light px-4 md:gap-4">
                             {availablePlans.map((plan) => (
                                 <div
@@ -315,7 +314,7 @@ export const PlanComparisonTest = ({ className = '' }) => {
                                     <div className="flex flex-wrap">
                                         <div
                                             key={`${feature_group.name}-group`}
-                                            className={`flex-1 basis-[100%] md:basis-0 text-center text-primary pt-6 pb-2 md:text-left justify-center -mx-4 md:mx-0`}
+                                            className={`flex-1 basis-[100%] md:basis-0 text-center text-primary pt-6 md:pb-2 md:text-left justify-center -mx-4 md:mx-0`}
                                         >
                                             <h4 className="mb-0 flex items-center gap-2 w-full justify-center md:justify-start bg-gray-accent-light md:bg-transparent py-4 md:py-0 border-y border-gray-accent-light md:border-0">
                                                 <span className="inline-block h-6 w-6">
@@ -324,11 +323,11 @@ export const PlanComparisonTest = ({ className = '' }) => {
                                                 {feature_group.name}
                                             </h4>
                                         </div>
-                                        <div className="w-full md:flex-[0_0_60%] px-4 flex divide-x md:divide-x-0 divide-gray-accent-light/50">
+                                        <div className="w-full md:flex-[0_0_60%] px-4 flex divide-x md:divide-x-0 divide-gray-accent-light/50 md:gap-4">
                                             {product.tiered
                                                 ? availablePlans.map((plan) => (
                                                       <div
-                                                          className={`flex-1 text-center py-4 md:text-left md:pt-6 justify-center`}
+                                                          className={`flex-1 text-center py-4 md:pl-4 md:first:pl-0 md:text-left md:pt-6 justify-center`}
                                                           key={`${plan.key}-${product.name}-free-allocation-or-limit`}
                                                       >
                                                           <div>
@@ -376,10 +375,10 @@ export const PlanComparisonTest = ({ className = '' }) => {
                                                             </span>
                                                         </Tooltip>
                                                     </div>
-                                                    <div className="divide-x md:divide-x-0 divide-gray-accent-light/50 w-full md:flex-[0_0_60%] flex">
+                                                    <div className="divide-x md:divide-x-0 divide-gray-accent-light/50 w-full md:flex-[0_0_60%] flex md:gap-4">
                                                         {availablePlans.map((plan, i) => (
                                                             <div
-                                                                className={`flex-1 flex justify-center py-4 md:py-0 md:text-left md:justify-start md:border-none`}
+                                                                className={`flex-1 flex justify-center py-4 md:py-0 md:text-left md:justify-start md:border-none pl-4 md:first:pl-0`}
                                                                 key={`${plan.name}-${feature.name}-value`}
                                                             >
                                                                 <PlanIcon
@@ -410,7 +409,7 @@ export const PlanComparisonTest = ({ className = '' }) => {
                                                 {availablePlans.map((plan, i) => (
                                                     <div
                                                         key={plan.name + '-' + product.name + '-' + 'pricing'}
-                                                        className={`flex-1 text-sm font-medium text-almost-black pt-4 md:border-none`}
+                                                        className={`flex-1 pl-6 first:pl-0 text-sm font-medium text-almost-black pt-4 md:border-none`}
                                                     >
                                                         <ProductTiers
                                                             product={plan.products.find((p) => p.type === product.type)}
@@ -425,6 +424,43 @@ export const PlanComparisonTest = ({ className = '' }) => {
                             ))}
                         </React.Fragment>
                     ))}
+                    <div className="flex flex-wrap sticky top-0 z-10 -mx-4 md:mx-0">
+                        <div
+                            className={`basis-[100%] md:basis-0 flex-1 py-2 pr-6 text-[14px] font-medium text-almost-black bg-opacity-95 bg-tan border-b border-gray-accent-light pb-4 pl-4`}
+                        ></div>
+
+                        <div className="w-full bg-tan/90 md:flex-[0_0_60%] flex border-b border-gray-accent-light px-4 md:gap-4">
+                            {availablePlans.map((plan) => (
+                                <div
+                                    key={`${plan.name}-header`}
+                                    className={`grow-0 shrink-0 basis-[50%] py-2 md:px-3 text-sm text-almost-black leading-tight w-full pb-4 pl-1 first:pl-0 pr-1 last:pr-0 border-l border-gray-accent-light/50 first:border-l-0 md:pr-0 md:pl-0 md:border-0`}
+                                >
+                                    <div className="flex-1 flex flex-col h-full justify-between">
+                                        <div>
+                                            <p className="font-bold mb-0 text-center md:text-left">{plan.name}</p>
+                                        </div>
+                                        <TrackedCTA
+                                            event={{
+                                                name: `clicked Get started - free`,
+                                                type: 'cloud',
+                                            }}
+                                            type="primary"
+                                            size="sm"
+                                            className="shadow-md !w-auto"
+                                            to={`https://${
+                                                posthog?.isFeatureEnabled &&
+                                                posthog?.isFeatureEnabled('direct-to-eu-cloud')
+                                                    ? 'eu'
+                                                    : 'app'
+                                            }.posthog.com/signup`}
+                                        >
+                                            Get started - free
+                                        </TrackedCTA>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
             </section>
         </>
