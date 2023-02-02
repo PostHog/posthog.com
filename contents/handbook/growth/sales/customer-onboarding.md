@@ -3,7 +3,7 @@ title: New customer onboarding
 sidebar: Handbook
 showTitle: true
 ---
-## Getting customers to value quickly
+## Day -1 - Session: Initial demo
 
 Our moat is that we have a fully-integrated tool that allows customers to go across Analytics, Recordings and Experimentation easily.  We want new customers to see the value of this as quickly as possible when evaluating us against other solutions.
 
