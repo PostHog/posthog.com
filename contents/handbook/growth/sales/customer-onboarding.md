@@ -37,7 +37,7 @@ We'll need them to be able to demo their product to us, as well as attend two or
 
 Ideally we will also have them in Slack Connect channel so that we can provide responsive support and expose them to the wider PostHog team.
 
-## Day 0 - Kicking things off
+## Day 0 - Session: Kick off
 
 At the start of the evaluation, we want to review their product to understand and advise on the best approach to tracking, as well as address any privacy concerns associated with session recordings.
 
