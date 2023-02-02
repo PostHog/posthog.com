@@ -234,12 +234,14 @@ export const getProductLimit = (product?: BillingProductV2Type): JSX.Element => 
 export const PlanComparisonTest = ({ className = '' }) => {
     const posthog = usePostHog()
     const [availablePlans, setAvailablePlans] = useState<BillingV2PlanType[]>([])
-    const [numberOfColumns, setNumberOfColumns] = useState<number>(7)
-    const [numberOfColumnsMobile, setNumberOfColumnsMobile] = useState<number>(4)
-    const comparisonFeaturesColumns = 3
-    const planColumns = 2
 
-    const excludedFeatures = ['dashboard_collaboration', 'ingestion_taxonomy']
+    const excludedFeatures = [
+        'dashboard_collaboration',
+        'ingestion_taxonomy',
+        'terms_and_conditions',
+        'security_assessment',
+        'app_metrics',
+    ]
 
     useEffect(() => {
         const fetchPlans = async () => {
@@ -254,8 +256,6 @@ export const PlanComparisonTest = ({ className = '' }) => {
             })
             response.json().then((data) => {
                 setAvailablePlans(data.plans)
-                setNumberOfColumns(data.plans?.length * 2 + comparisonFeaturesColumns)
-                setNumberOfColumnsMobile(data.plans?.length * 2)
             })
         }
 
@@ -277,11 +277,11 @@ export const PlanComparisonTest = ({ className = '' }) => {
                                 an unexpected bill.
                             </p>
                         </div>
-                        <div className="w-full bg-tan/90 md:flex-[0_0_60%] flex  border-b border-gray-accent-light ">
+                        <div className="w-full bg-tan/90 md:flex-[0_0_60%] flex border-b border-gray-accent-light md:pl-4">
                             {availablePlans.map((plan) => (
                                 <div
                                     key={`${plan.name}-header`}
-                                    className={`grow-0 shrink-0 basis-[50%] py-2 md:px-3 text-sm text-almost-black leading-tight w-full pb-4 pl-1 first:pl-0 pr-1 last:pr-0 border-l border-gray-accent-light/50 first:border-l-0`}
+                                    className={`grow-0 shrink-0 basis-[50%] py-2 md:px-3 text-sm text-almost-black leading-tight w-full pb-4 pl-1 first:pl-0 pr-1 last:pr-0 border-l border-gray-accent-light/50 first:border-l-0 md:pr-0 md:pl-0 md:border-0`}
                                 >
                                     <div className="flex-1 flex flex-col h-full justify-between">
                                         <div>
