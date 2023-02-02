@@ -12,7 +12,7 @@ const features = [
     },
     {
         title: 'Deploy with Docker',
-        description: 'Get PostHog set up on your own server, with basic analytics tools and no event limits.',
+        description: 'Get PostHog set up on your own server, with basic analytics.',
     },
     {
         title: 'Permissive MIT license',
@@ -42,13 +42,13 @@ const deploymentInstructions = [
 export default function SelfHosting() {
     return (
         <FeatureWrapperRow
-            id="self-hosting"
-            title="Transparent and open source"
+            id="open-source"
+            title="Open source"
             description={
                 <>
                     <p>
-                        We work transparently, and all our code is released under an MIT license. You can even deploy an
-                        open source version of PostHog for free, with basic analytics!
+                        We work transparently, and all our code is released under an MIT license. Kick the tires by
+                        deploying an open source version of PostHog for free with basic analytics.
                     </p>
                     <div className="flex md:flex-row flex-col space-y-4 md:space-y-0 md:space-x-4 justify-between mt-10">
                         <ul className="list-none m-0 p-0 grid gap-y-7 max-w-[450px]">
@@ -65,7 +65,7 @@ export default function SelfHosting() {
                             })}
                         </ul>
                         <div className="flex-shrink-0">
-                            <p className="text-black/50 m-0 mb-3 text-center">Easy deploy instructions</p>
+                            <p className="text-black/50 text-sm m-0 my-3 text-center">Easy deploy instructions</p>
                             <ul className="list-none m-0 p-0 grid divide-y divide-gray-accent-light divide-dashed border border-gray-accent-light border-dashed w-full md:w-[240px]">
                                 {deploymentInstructions.map(({ title, url, Icon }) => {
                                     return (

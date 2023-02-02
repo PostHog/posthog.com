@@ -8,7 +8,7 @@ import DataWarehouse from 'components/Product/DataWarehouse'
 import EventPipelines from 'components/Product/EventPipelines'
 import { IProps, FeatureWrapperCol } from 'components/Product/FeatureWrapper'
 import Hero from 'components/Product/Hero'
-import SelfHosting from 'components/Product/SelfHosting'
+import OpenSource from 'components/Product/OpenSource'
 import { ProductIcons } from 'components/ProductIcons/ProductIcons'
 import { StaticImage } from 'gatsby-plugin-image'
 import React, { useRef, useState } from 'react'
@@ -91,7 +91,7 @@ const menu = [
     { name: 'Apps', url: 'apps', icon: ProductIcons.appLibrary },
     { name: 'Event pipelines', url: 'event-pipelines', icon: ProductIcons.eventPipelines },
     { name: 'Data warehouse', url: 'data-warehouse', icon: ProductIcons.dataWarehouse },
-    { name: 'Self-hosting', url: 'self-hosting', icon: ProductIcons.selfHosting },
+    { name: 'Open source', url: 'open-source', icon: ProductIcons.openSource },
     { name: 'API', url: 'api', icon: ProductIcons.api },
     { name: "What's next?", url: 'roadmap', icon: ProductIcons.experiments },
 ]
@@ -199,7 +199,7 @@ export default function Product() {
                 <Apps />
                 <EventPipelines />
                 <DataWarehouse />
-                <SelfHosting />
+                <OpenSource />
                 <API />
                 <WhatsNext />
                 <CTA className="mt-12 -mx-12 !px-20 !md:px-16 !-mb-12 md:!-mb-20" />
