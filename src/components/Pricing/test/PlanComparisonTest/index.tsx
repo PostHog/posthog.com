@@ -272,12 +272,12 @@ export const PlanComparisonTest = ({ className = '' }) => {
                             className={`basis-[100%] md:basis-0 flex-1 py-2 pr-6 text-[14px] font-medium text-almost-black bg-opacity-95 bg-tan border-b border-gray-accent-light pb-4`}
                         >
                             <p className="font-bold mb-0">PostHog OS ships with all products</p>
-                            <p className="text-black/50">
+                            <p className="text-black/50 text-sm">
                                 You can set billing limits for each, so you only pay for what you want and never receive
                                 an unexpected bill.
                             </p>
                         </div>
-                        <div className="w-full bg-tan/90 md:flex-[0_0_60%] flex border-b border-gray-accent-light md:pl-4">
+                        <div className="w-full bg-tan/90 md:flex-[0_0_60%] flex border-b border-gray-accent-light md:px-4 md:gap-4">
                             {availablePlans.map((plan) => (
                                 <div
                                     key={`${plan.name}-header`}
@@ -286,7 +286,9 @@ export const PlanComparisonTest = ({ className = '' }) => {
                                     <div className="flex-1 flex flex-col h-full justify-between">
                                         <div>
                                             <p className="font-bold mb-0 text-center md:text-left">{plan.name}</p>
-                                            <p className="hidden md:block text-black/50">{plan.description}</p>
+                                            <p className="hidden md:block text-black/50 text-sm mb-3">
+                                                {plan.description}
+                                            </p>
                                         </div>
                                         <TrackedCTA
                                             event={{
@@ -321,7 +323,7 @@ export const PlanComparisonTest = ({ className = '' }) => {
                                     <div className="hello-world-subheader flex flex-wrap">
                                         <div
                                             key={`${feature_group.name}-group`}
-                                            className={`flex-1 basis-[100%] md:basis-0 text-center text-primary pt-6 pb-2 lg:text-left justify-center -mx-4 md:mx-0`}
+                                            className={`flex-1 basis-[100%] md:basis-0 text-center text-primary pt-6 pb-2 md:text-left justify-center -mx-4 md:mx-0`}
                                         >
                                             <h4 className="mb-0 flex items-center gap-2 w-full justify-center md:justify-start bg-gray-accent-light md:bg-transparent py-4 md:py-0 border-y border-gray-accent-light md:border-0">
                                                 <span className="inline-block h-6 w-6">
@@ -334,7 +336,7 @@ export const PlanComparisonTest = ({ className = '' }) => {
                                             {product.tiered
                                                 ? availablePlans.map((plan) => (
                                                       <div
-                                                          className={`flex-1 text-center py-4 lg:text-left lg:pt-6 justify-center`}
+                                                          className={`flex-1 text-center py-4 md:text-left md:pt-6 justify-center`}
                                                           key={`${plan.key}-${product.name}-free-allocation-or-limit`}
                                                       >
                                                           <div>
@@ -353,11 +355,11 @@ export const PlanComparisonTest = ({ className = '' }) => {
                                         ?.filter((f) => !excludedFeatures.includes(f.key))
                                         ?.map((feature) => (
                                             <div
-                                                className="hello-world-row md:ml-6 md:p-2 rounded md:hover:bg-gray-accent-light md:flex"
+                                                className="hello-world-row md:pl-8 md:p-2 rounded md:hover:bg-gray-accent-light md:flex"
                                                 key={`${feature_group.name}-subfeature-${feature.name}`}
                                             >
                                                 <div
-                                                    className={`flex-1 bg-gray-accent-light py-2 text-center lg:py-0 lg:bg-transparent lg:text-left`}
+                                                    className={`flex-1 bg-gray-accent-light py-2 text-center md:py-0 md:bg-transparent md:text-left`}
                                                     key={`comparison-row-key-${feature.name}`}
                                                 >
                                                     <Tooltip
@@ -380,7 +382,7 @@ export const PlanComparisonTest = ({ className = '' }) => {
                                                 <div className="plan-group-2 divide-x md:divide-x-0 divide-gray-accent-light/50 w-full md:flex-[0_0_60%] flex">
                                                     {availablePlans.map((plan, i) => (
                                                         <div
-                                                            className={`flex-1 flex justify-center py-4 md:py-0 lg:text-left lg:justify-start lg:border-none`}
+                                                            className={`flex-1 flex justify-center py-4 md:py-0 md:text-left md:justify-start md:border-none`}
                                                             key={`${plan.name}-${feature.name}-value`}
                                                         >
                                                             <PlanIcon
@@ -398,9 +400,9 @@ export const PlanComparisonTest = ({ className = '' }) => {
                                         ))}
                                     {/* PRODUCT PRICING */}
                                     {product.tiers && (
-                                        <div className="flex flex-wrap md:ml-6 mt-4 px-2">
+                                        <div className="flex flex-wrap md:pl-8 mt-4 px-2">
                                             <div
-                                                className={`basis-[100%] md:basis-0 flex-1 pt-4 text-center lg:text-left font-bold border-t border-gray-accent-light bg-gray-accent-light lg:bg-transparent`}
+                                                className={`basis-[100%] md:basis-0 flex-1 pt-4 text-center md:text-left font-bold border-t border-gray-accent-light bg-gray-accent-light md:bg-transparent`}
                                             >
                                                 {feature_group.name} pricing
                                             </div>
@@ -410,7 +412,7 @@ export const PlanComparisonTest = ({ className = '' }) => {
                                                         key={plan.name + '-' + product.name + '-' + 'pricing'}
                                                         className={`flex-1 text-sm font-medium text-almost-black pt-4 ${
                                                             i !== availablePlans.length - 1 && getBorderStyle('r')
-                                                        } lg:border-none`}
+                                                        } md:border-none`}
                                                     >
                                                         <ProductTiers
                                                             product={plan.products.find((p) => p.type === product.type)}
