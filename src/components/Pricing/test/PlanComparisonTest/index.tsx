@@ -267,7 +267,7 @@ export const PlanComparisonTest = ({ className = '' }) => {
             <section className={className}>
                 <div className={`w-full relative mb-0 space-y-4`}>
                     {/* PLAN HEADERS */}
-                    <div className="hello-world-header flex flex-wrap sticky top-0 z-10">
+                    <div className="flex flex-wrap sticky top-0 z-10">
                         <div
                             className={`basis-[100%] md:basis-0 flex-1 py-2 pr-6 text-[14px] font-medium text-almost-black bg-opacity-95 bg-tan border-b border-gray-accent-light pb-4`}
                         >
@@ -316,11 +316,8 @@ export const PlanComparisonTest = ({ className = '' }) => {
                     {availablePlans?.[availablePlans.length - 1]?.products?.map((product) => (
                         <React.Fragment key={`product-${product.type}`}>
                             {product.feature_groups?.map((feature_group) => (
-                                <div
-                                    className="hello-world"
-                                    key={`product-${product.type}-feature-group-${feature_group.name}`}
-                                >
-                                    <div className="hello-world-subheader flex flex-wrap">
+                                <div key={`product-${product.type}-feature-group-${feature_group.name}`}>
+                                    <div className="flex flex-wrap">
                                         <div
                                             key={`${feature_group.name}-group`}
                                             className={`flex-1 basis-[100%] md:basis-0 text-center text-primary pt-6 pb-2 md:text-left justify-center -mx-4 md:mx-0`}
@@ -332,7 +329,7 @@ export const PlanComparisonTest = ({ className = '' }) => {
                                                 {feature_group.name}
                                             </h4>
                                         </div>
-                                        <div className="plan-group w-full md:flex-[0_0_60%] px-4 flex divide-x md:divide-x-0 divide-gray-accent-light/50">
+                                        <div className="w-full md:flex-[0_0_60%] px-4 flex divide-x md:divide-x-0 divide-gray-accent-light/50">
                                             {product.tiered
                                                 ? availablePlans.map((plan) => (
                                                       <div
@@ -355,7 +352,7 @@ export const PlanComparisonTest = ({ className = '' }) => {
                                         ?.filter((f) => !excludedFeatures.includes(f.key))
                                         ?.map((feature) => (
                                             <div
-                                                className="hello-world-row md:pl-8 md:p-2 rounded md:hover:bg-gray-accent-light md:flex"
+                                                className="md:pl-8 md:p-2 rounded md:hover:bg-gray-accent-light md:flex"
                                                 key={`${feature_group.name}-subfeature-${feature.name}`}
                                             >
                                                 <div
@@ -370,7 +367,7 @@ export const PlanComparisonTest = ({ className = '' }) => {
                                                             </div>
                                                         }
                                                         tooltipClassName="max-w-xs m-4"
-                                                        placement={window.innerWidth > 1024 ? 'right' : 'bottom'}
+                                                        placement={window.innerWidth > 767 ? 'right' : 'bottom'}
                                                     >
                                                         <span
                                                             className={`pb-0.5 cursor-default font-bold text-[15px] border-b border-dashed border-gray-accent-light`}
@@ -379,7 +376,7 @@ export const PlanComparisonTest = ({ className = '' }) => {
                                                         </span>
                                                     </Tooltip>
                                                 </div>
-                                                <div className="plan-group-2 divide-x md:divide-x-0 divide-gray-accent-light/50 w-full md:flex-[0_0_60%] flex">
+                                                <div className="divide-x md:divide-x-0 divide-gray-accent-light/50 w-full md:flex-[0_0_60%] flex">
                                                     {availablePlans.map((plan, i) => (
                                                         <div
                                                             className={`flex-1 flex justify-center py-4 md:py-0 md:text-left md:justify-start md:border-none`}
@@ -406,7 +403,7 @@ export const PlanComparisonTest = ({ className = '' }) => {
                                             >
                                                 {feature_group.name} pricing
                                             </div>
-                                            <div className="plan-group-3 w-full md:flex-[0_0_60%] border-t border-gray-accent-light flex">
+                                            <div className="w-full md:flex-[0_0_60%] border-t border-gray-accent-light flex">
                                                 {availablePlans.map((plan, i) => (
                                                     <div
                                                         key={plan.name + '-' + product.name + '-' + 'pricing'}
