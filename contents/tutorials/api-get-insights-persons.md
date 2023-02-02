@@ -101,7 +101,7 @@ This returns a list of all of our insights.
 
 ### Filtering insights
 
-You can filter for a specific insights by using the `short_id` params with the ID in the URL of the insight. This creates a request like this:
+You can filter for a specific insights by using the `short_id` param with the ID that comes after `/insights/` in the URL of the insight. This creates a request like this:
 
 <MultiLanguage>
 
@@ -126,13 +126,12 @@ export POSTHOG_PERSONAL_API_KEY=<POSTHOG_PERSONAL_API_KEY>
 export POSTHOG_PROJECT_ID=<POSTHOG_PROJECT_ID>
 curl \
     -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
-    https://app.posthog.com/api/projects/$POSTHOG_PROJECT_ID/insights/?short_id=<INSIGHT_SHORT_ID>
-    
+    https://app.posthog.com/api/projects/$POSTHOG_PROJECT_ID/insights/?short_id=<YOUR_INSIGHT_SHORT_ID>
 ```
 
 </MultiLanguage>
 
-To get a cleaner response, you can use the insight ID to only get the details from that insight:
+To get a cleaner response, you can use the insight ID (a number) to get only the details from that insight:
 
 <MultiLanguage>
 
@@ -178,11 +177,11 @@ response = requests.get(
 print(response.get('result')[0]['aggregated_value'])
 ```
 
-With some work, you can take pieces of insights to get the data you want into your application how you want it.
+With some work, you can take pieces of insights to get the data you want into your application or script how you want it. It might require multiple pieces of data or multiple requests though.
 
 ## Getting a specific person
 
-We started this tutorial by getting a specific person (you), but now it is time to get info about the people you actually care about (your users). To get a list of them, call this route:
+We started this tutorial by getting a specific person (you), but now it is time to get info about the people you actually care about (your users). To get a list of them, call the `/api/projects/:project_id/persons/` route:
 
 <MultiLanguage>
 
@@ -212,7 +211,7 @@ curl \
 
 ### Filtering people
 
-Another way to get a specific person is by filtering for them. You can add a `name`, `distinct_id`, or `properties` param to query for users matching those filters. For example, if I wanted only users who have an `$initial_os` property of `Linux`. To do this, you need to create the filter which is a list of dictionaries that include `key`, `value`, `operator`, and `type`. Our filter looks like this unencoded:
+Another way to get a specific person is by filtering for them. You can add a `name`, `distinct_id`, or `properties` param to query for users matching those filters. For example, I want only users who have an `$initial_os` property of `Linux`. To do this, you need to create the filter which is a list of dictionaries that include `key`, `value`, `operator`, and `type`. Our filter looks like this unencoded:
 
 ```
 [{"key":"$initial_os","value":["Linux"],"operator":"exact","type":"person"}]
