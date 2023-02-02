@@ -21,15 +21,7 @@ toolsUsed:
 
 After discovering PostHog, Phantom went through a rapid testing process with the open-source version of the platform. After validating that PostHog met the teams’ needs, Phantom rolled PostHog out fully. 
 
-<BorderWrapper>
-    <Quote
-        imageSource="/images/customers/francesco.jpg"
-        size="md"
-        name="Francesco Agosti"
-        title="CTO & Co-founder, Phantom"
-        quote={`“I liked how PostHog was open-source and how it just worked out of the box from the get-go. It lets you use your own database and it was really easy to deploy and get going.”`}
-    />
-</BorderWrapper>
+<iframe src="https://capture.navattic.com/cldnbhhxq007p08mfdh1uf8bo" width="800" height="640" style="border:none" allow="fullscreen"></iframe>
 
 ## Using analytics to identify growth drivers and improve RPC infrastructure
 
