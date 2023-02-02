@@ -178,7 +178,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
                                             )}
                                             <div className="ml-auto flex">
                                                 <SidebarAction
-                                                    className="hidden xl:block"
+                                                    className="hidden xl:block border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark"
                                                     title="Toggle content width"
                                                     onClick={handleFullWidthContentChange}
                                                 >
