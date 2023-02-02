@@ -353,6 +353,14 @@ export function Footer(): JSX.Element {
                     <ul className="m-0 p-0 list-none sm:ml-auto flex sm:space-x-8 space-x-4 mt-2 sm:mt-0">
                         <li>
                             <Link
+                                to="https://status.posthog.com"
+                                className="font-bold text-sm text-almost-black/70 hover:text-almost-black/90 dark:text-gray dark dark:hover:text-gray"
+                            >
+                                System status
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
                                 to="/docs/contribute/code-of-conduct"
                                 className="font-bold text-sm text-almost-black/70 hover:text-almost-black/90 dark:text-gray dark dark:hover:text-gray"
                             >
