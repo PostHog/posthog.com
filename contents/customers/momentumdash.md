@@ -27,7 +27,7 @@ However, when analytics play such an essential role in the business it’s cruci
 ## A managed ClickHouse service with Altinity
 PostHog seemed like the perfect solution for Momentum Dash as the team could keep costs down and retain ownership — and trust — of data. The Engineering team was also familiar with most of the components required to maintain a self-hosted instance, such as Postgres, Redis and Kafka. 
 
-ClickHouse, however, was a complete unknown. In order to make sure everything was deployed correctly, Momentum Dash reached out to ClickHouse experts [Altinity](https://altinity.com/) via the [PostHog partner directory](https://posthog.com/partners) and signed up for [Alinity.Cloud](https://altinity.com/cloud-database/), which provides a fully managed ClickHouse service to backend PostHog. 
+ClickHouse, however, was a complete unknown. In order to make sure everything was deployed correctly, Momentum Dash reached out to ClickHouse experts [Altinity](https://altinity.com/) and signed up for [Alinity.Cloud](https://altinity.com/cloud-database/), which provides a fully managed ClickHouse service to backend PostHog. 
 
 “Altinity was extremely helpful and the team was very proactive,” says Joe. “They helped provision a test cluster, diagnose and solve issues, and even helped us [materialize some columns](https://posthog.com/blog/clickhouse-materialized-columns) to improve performance.”
 
