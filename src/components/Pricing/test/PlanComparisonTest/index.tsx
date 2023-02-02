@@ -128,11 +128,13 @@ const ProductTiersModal = ({
                                 return (
                                     <React.Fragment key={`tiers-modal-${product.name}-tier-${i}`}>
                                         <p className="col-span-1 mb-0 border-b border-gray-accent-light border-dashed py-1">
-                                            {convertLargeNumberToWords(
-                                                tier.up_to,
-                                                tiers[i - 1]?.up_to,
-                                                true,
-                                                product.type
+                                            {capitalizeFirstLetter(
+                                                convertLargeNumberToWords(
+                                                    tier.up_to,
+                                                    tiers[i - 1]?.up_to,
+                                                    true,
+                                                    product.type
+                                                )
                                             )}
                                         </p>
                                         <p className="font-bold col-span-1 mb-0 border-b border-gray-accent-light border-dashed py-1">
