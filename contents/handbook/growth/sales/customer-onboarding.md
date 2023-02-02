@@ -72,7 +72,7 @@ If they don't already know about AARRR we should share our [AARRR blog post](htt
 2. A code snippet showing them how to implement tracking for their product (including Identification and Groups if applicable)
 3. Elements and pages to add opt-out-capture to
 
-## Day 3 - Using PostHog
+## Day 3 - Session: Using PostHog
 
 The aim of this call is to get the customer familiar with navigating PostHog as well as:
 
