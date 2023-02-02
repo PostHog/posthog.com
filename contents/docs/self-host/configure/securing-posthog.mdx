@@ -4,8 +4,6 @@ sidebar: Docs
 showTitle: true
 ---
 
-import Disclaimer from '../\_snippets/disclaimer.mdx'
-
 ## Restrict access by IP
 
 You can restrict access to PostHog by IP by passing `ALLOWED_IP_BLOCKS`. This is a comma separated list, and can either be individual IP addresses or subnets. For example:
@@ -62,12 +60,14 @@ This `SECRET_KEY` must be passed to PostHog as an environment variable.
 
 ## Securing PostHog Deployments
 
+import Sunset from '../\_snippets/sunset-disclaimer.mdx'
+
+<Sunset />
+
 As part of self-hosting PostHog by deploying it to a Kubernetes cluster, we need to
 make it is secure to threat actors. As every installation is unique, we provide
 in our documentation some general guidelines regarding how to make it secure but
 it is then up to each instance admin to make sure all the best practices are followed.
-
-<Disclaimer />
 
 1. make sure your Kubernetes cluster is provisioned and configured using industries
    best practices
