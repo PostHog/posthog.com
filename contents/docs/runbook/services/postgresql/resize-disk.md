@@ -4,6 +4,10 @@ sidebar: Docs
 showTitle: true
 ---
 
+import Sunset from "../../../self-host/\_snippets/sunset-disclaimer.mdx"
+
+<Sunset />
+
 import ResizeDiskRequirementsSnippet from '../../snippets/resize-disk-requirements'
 
 <ResizeDiskRequirementsSnippet/>
