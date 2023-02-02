@@ -66,9 +66,9 @@ const PricingTest = (): JSX.Element => {
             <SEO title="PostHog Pricing" description="Find out how much it costs to use PostHog" />
             <section>
                 <div
-                    className={`grid lg:grid-cols-2 lg:mt-12 md:mt-18 lg:gap-x-4 gap-y-3 lg:gap-y-0 mb-4 md:px-4 ${section}`}
+                    className={`grid md:grid-cols-2 md:mt-12 md:mt-18 md:gap-x-4 gap-y-3 md:gap-y-0 mb-4 md:px-4 items-center ${section}`}
                 >
-                    <div className="lg:order-2">
+                    <div className="md:order-2">
                         <StaticImage
                             alt="The cutest hedgehog you've ever seen driving a red tractor"
                             src="../images/tractor-hog.png"
@@ -77,11 +77,11 @@ const PricingTest = (): JSX.Element => {
                             placeholder="none"
                         />
                     </div>
-                    <div className="lg:order-1 mb-12">
-                        <h1 className="text-3xl sm:text-4xl md:text-5xl mt-0 mb-2">Pricing</h1>
-                        <p className="text-lg font-semibold opacity-60">
-                            Use PostHog free forever (with generous usage limits). Or pay per use and get unrestricted
-                            access to everything.
+                    <div className="md:order-1">
+                        <h1 className="text-3xl sm:text-4xl md:text-5xl mt-0 mb-4">Pricing</h1>
+                        <p className="text-base font-medium opacity-60 leading-tight">
+                            Use PostHog free forever (with generous usage limits). <br className="hidden lg:block" />
+                            Or pay per use and get unrestricted access to everything.
                         </p>
                     </div>
                 </div>
