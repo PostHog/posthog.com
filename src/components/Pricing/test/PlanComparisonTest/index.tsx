@@ -262,7 +262,7 @@ export const PlanComparisonTest = ({ className = '' }) => {
                     {/* PLAN HEADERS */}
                     <div className="flex flex-wrap sticky top-0 z-10 -mx-4 md:mx-0">
                         <div
-                            className={`basis-[100%] md:basis-0 flex-1 py-2 pr-6 text-[14px] font-medium text-almost-black bg-opacity-95 bg-tan border-b border-gray-accent-light pb-4 pl-4`}
+                            className={`basis-[100%] md:basis-0 flex-1 py-2 pr-6 text-[14px] font-medium text-almost-black bg-opacity-95 bg-tan border-b border-gray-accent-light pb-4`}
                         >
                             <p className="font-bold mb-0">PostHog OS ships with all products</p>
                             <p className="text-black/50 text-sm mb-0">
@@ -275,7 +275,7 @@ export const PlanComparisonTest = ({ className = '' }) => {
                             {availablePlans.map((plan) => (
                                 <div
                                     key={`${plan.name}-header`}
-                                    className={`grow-0 shrink-0 basis-[50%] py-2 md:px-3 text-sm text-almost-black leading-tight w-full pb-4 pl-1 first:pl-0 pr-1 last:pr-0 border-l border-gray-accent-light/50 first:border-l-0 md:pr-0 md:pl-0 md:border-0`}
+                                    className={`py-2 md:px-3 text-sm text-almost-black leading-tight w-full pb-4 pl-1 first:pl-0 pr-1 last:pr-0 border-l border-gray-accent-light/50 first:border-l-0 md:pr-0 md:pl-0 md:border-0`}
                                 >
                                     <div className="flex-1 flex flex-col h-full justify-between">
                                         <div>
@@ -327,7 +327,7 @@ export const PlanComparisonTest = ({ className = '' }) => {
                                             {product.tiered
                                                 ? availablePlans.map((plan) => (
                                                       <div
-                                                          className={`flex-1 text-center py-4 md:pl-4 md:first:pl-0 md:text-left md:pt-6 justify-center`}
+                                                          className={`flex-1 text-center py-4 md:text-left md:pt-6 justify-center`}
                                                           key={`${plan.key}-${product.name}-free-allocation-or-limit`}
                                                       >
                                                           <div>
@@ -378,7 +378,7 @@ export const PlanComparisonTest = ({ className = '' }) => {
                                                     <div className="divide-x md:divide-x-0 divide-gray-accent-light/50 w-full md:flex-[0_0_60%] flex md:gap-4">
                                                         {availablePlans.map((plan, i) => (
                                                             <div
-                                                                className={`flex-1 flex justify-center py-4 md:py-0 md:text-left md:justify-start md:border-none pl-4 md:first:pl-0`}
+                                                                className={`flex-1 flex justify-center py-4 md:py-0 md:text-left md:justify-start md:border-none`}
                                                                 key={`${plan.name}-${feature.name}-value`}
                                                             >
                                                                 <PlanIcon
@@ -409,7 +409,7 @@ export const PlanComparisonTest = ({ className = '' }) => {
                                                 {availablePlans.map((plan, i) => (
                                                     <div
                                                         key={plan.name + '-' + product.name + '-' + 'pricing'}
-                                                        className={`flex-1 pl-6 first:pl-0 text-sm font-medium text-almost-black pt-4 md:border-none`}
+                                                        className={`flex-1 pl-2 first:pl-0 text-sm font-medium text-almost-black pt-4 md:border-none`}
                                                     >
                                                         <ProductTiers
                                                             product={plan.products.find((p) => p.type === product.type)}
@@ -426,14 +426,14 @@ export const PlanComparisonTest = ({ className = '' }) => {
                     ))}
                     <div className="flex flex-wrap sticky top-0 z-10 -mx-4 md:mx-0">
                         <div
-                            className={`basis-[100%] md:basis-0 flex-1 py-2 pr-6 text-[14px] font-medium text-almost-black bg-opacity-95 bg-tan border-b border-gray-accent-light pb-4 pl-4`}
+                            className={`basis-[100%] md:basis-0 flex-1 py-2 pr-6 text-[14px] font-medium text-almost-black bg-opacity-95 bg-tan border-b border-gray-accent-light pb-4`}
                         ></div>
 
                         <div className="w-full bg-tan/90 md:flex-[0_0_60%] flex border-b border-gray-accent-light px-4 md:gap-4">
                             {availablePlans.map((plan) => (
                                 <div
                                     key={`${plan.name}-header`}
-                                    className={`grow-0 shrink-0 basis-[50%] py-2 md:px-3 text-sm text-almost-black leading-tight w-full pb-4 pl-1 first:pl-0 pr-1 last:pr-0 border-l border-gray-accent-light/50 first:border-l-0 md:pr-0 md:pl-0 md:border-0`}
+                                    className={`py-2 md:px-3 text-sm text-almost-black leading-tight w-full pb-4 pl-1 first:pl-0 pr-1 last:pr-0 border-l border-gray-accent-light/50 first:border-l-0 md:pr-0 md:pl-0 md:border-0`}
                                 >
                                     <div className="flex-1 flex flex-col h-full justify-between">
                                         <div>
