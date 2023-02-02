@@ -176,7 +176,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
                                                     </SidebarAction>
                                                 </div>
                                             )}
-                                            <div className="ml-auto flex divide-x divide-dashed divide-gray-accent-light dark:divide-gray-accent-dark border-l border-dashed border-gray-accent-light dark:border-gray-accent-dark">
+                                            <div className="ml-auto flex">
                                                 <SidebarAction
                                                     className="hidden xl:block"
                                                     title="Toggle content width"

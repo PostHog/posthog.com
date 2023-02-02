@@ -37,17 +37,17 @@ export default function ShareLinks(): JSX.Element | null {
         }, 5000)
     }
     return (
-        <div className="opacity-50 flex space-x-3 items-center">
+        <div className="opacity-50 flex space-x-4 items-center">
             <ShareLink
                 url={`https://twitter.com/intent/tweet?url=${href}&text=Check%20out%20this%20article%20from%20%40posthog%0A%0A`}
             >
-                <Twitter className="w-[32px] h-[32px]" />
+                <Twitter className="w-[24px] h-[24px] relative hover:scale-[1.1] active:top-[.5px] active:scale-[.99]" />
             </ShareLink>
             <ShareLink url={`https://www.linkedin.com/shareArticle?url=${href}`}>
-                <LinkedIn className="w-[32px] h-[32px]" />
+                <LinkedIn className="w-[24px] h-[24px] relative hover:scale-[1.1] active:top-[.5px] active:scale-[.99]" />
             </ShareLink>
             <a
-                className="text-primary hover:text-primary dark:text-white dark:hover:text-white"
+                className="text-primary hover:text-primary dark:text-white dark:hover:text-white relative hover:scale-[1.1] active:top-[.5px] active:scale-[.99] w-[24px] h-[16px]"
                 href={`mailto:?subject=${title}&body=${href}`}
             >
                 <Mail />
@@ -58,7 +58,7 @@ export default function ShareLinks(): JSX.Element | null {
                     content={<p className="m-0 font-semibold text-sm">{copied ? 'Copied!' : 'Copy page URL'}</p>}
                 >
                     <span className="relative">
-                        <LinkIcon className="w-[25px] h-[25px]" />
+                        <LinkIcon className="w-[20px] h-[20px] relative hover:scale-[1.1] active:top-[.5px] active:scale-[.99]" />
                     </span>
                 </Tooltip>
             </button>
