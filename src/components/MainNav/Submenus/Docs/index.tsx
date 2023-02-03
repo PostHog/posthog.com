@@ -19,7 +19,7 @@ interface IColumn {
 const gettingStarted: IFeature[] = [
     { title: 'Quickstart', icon: NotProductIcons.quickstart, url: '/docs/getting-started/cloud' },
     { title: 'JS snippet', icon: NotProductIcons.jsSnippet, url: '/docs/integrate' },
-    { title: 'SDKs', icon: NotProductIcons.sdks, url: '/docs/integrate' },
+    { title: 'SDKs', icon: NotProductIcons.sdks, url: '/docs/integrate?tab=sdks#installation' },
 ]
 
 const products: IFeature[] = [
