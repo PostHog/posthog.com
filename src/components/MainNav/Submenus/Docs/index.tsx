@@ -62,16 +62,6 @@ const categories: IColumn[] = [
     },
 ]
 
-const Parent = ({ children, url }: { children: React.ReactNode; url?: string }): JSX.Element => {
-    return url ? (
-        <Link className="text-white hover:text-white" to={url}>
-            {children}
-        </Link>
-    ) : (
-        <>{children}</>
-    )
-}
-
 const Section = ({ title, section, className = '' }: IColumn) => {
     return (
         <ul className={`list-none m-0 p-0 space-y-1 ${className}`}>
@@ -87,9 +77,7 @@ const Section = ({ title, section, className = '' }: IColumn) => {
                                 className="h-full font-semibold text-[14px] flex flex-col gap-2 items-center leading-tight hover:bg-gray-accent-light/50 dark:hover:bg-gray-accent-light/25 rounded p-2 text-center relative hover:scale-[1.02] active:scale-[1] active:top-[1px]"
                             >
                                 <span className="w-6 h-6 flex justify-center items-center flex-shrink-0">{icon}</span>
-                                <Parent url={url}>
-                                    <span>{title}</span>
-                                </Parent>
+                                <span>{title}</span>
                             </Link>
                         </li>
                     )
