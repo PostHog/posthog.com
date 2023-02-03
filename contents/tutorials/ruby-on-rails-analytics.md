@@ -10,9 +10,9 @@ topics: ["configuration", "feature flags", "persons", "events"]
 
 Ruby on Rails is a popular fullstack web framework used by companies like Shopify, GitHub, Twitch, and more.
 
-In this tutorial, we build a basic Ruby on Rails app, add PostHog to it, and then set up some of the key features of PostHog like custom event capture, user identification, and feature flags.
+In this tutorial, we build a basic [Ruby on Rails](https://rubyonrails.org/) app, add PostHog to it, and then set up some of the key features of PostHog, such as custom event capture, user identification, and feature flags.
 
-> Already know how to build a Ruby on Rails app? Skip to the [PostHog integration](#2-integrating-the-posthog-snippet-and-ruby-library).
+> Already know how to build a Ruby on Rails app? Skip to the [PostHog integration step](#2-integrating-the-posthog-snippet-and-ruby-library).
 
 ## 1. Creating a basic Ruby on Rails app
 
@@ -44,7 +44,7 @@ Rails is nice because it has a bunch of commands you can use to generate parts o
 bin/rails generate controller Articles index --skip-routes
 ```
 
-We skip the routes because we set those up manually. In `config/routes.rb`, add the details to our route. The `resources` method lets us define a bunch of routes we want all a once:
+We skip the routes because we will set those up manually. In `config/routes.rb`, add details to the route. The `resources` method lets us define a bunch of routes we want all a once:
 
 ```bash
 Rails.application.routes.draw do
@@ -169,19 +169,19 @@ Next, create a form page for article creation in `app/views/articles/new.html.er
 <% end %>
 ```
 
-You should now have a nice Ruby on Rails app with a home page, article pages, and the ability to add new articles. Feel free to customize it more, but now it is time to add PostHog.
+You should now have a nice Ruby on Rails app with a home page, article pages, and the ability to add new articles. Customize it further if you'd like, then when you're ready it's time to add PostHog.
 
 ![Full app](../images/tutorials/ruby-on-rails-analytics/ruby.gif)
 
 ## 2. Integrating the PostHog snippet and Ruby library
 
-Now our Ruby on Rails app is ready to integrate with PostHog. There are two ways to do this through the snippet and the library. 
+Now our Ruby on Rails app is ready to integrate with PostHog. There are two ways to do this; with the snippet, or the library. The first method enables you to quickly get started with most PostHog features, such as analytics and session recording. If also want to use advanced tools, such as feature flags and experiments, you need to use the library. 
 
 ### Adding the JavaScript snippet
 
 The first way is to use the JavaScript snippet. This provides autocapture of events, pageviews, session recordings, and more.
 
-To set it up, copy the snippet from getting started or your project settings and add it to `views/layouts/application.html.erb`. With no other changes, this file looks like this:
+To set it up, [copy the code snippet from the PostHog docs](/docs/integrate) and add it to `views/layouts/application.html.erb`. With no other changes, this file looks like this:
 
 ```html
 <!DOCTYPE html>
@@ -206,9 +206,9 @@ To set it up, copy the snippet from getting started or your project settings and
 </html>
 ```
 
-> Make sure to turn on session recordings in project settings by scrolling down to "Recordings" and toggling on "Record user sessions"
+> Make sure to turn on session recordings in your PostHog project settings by scrolling down to "Recordings" and toggling on "Record user sessions"
 
-Once you set this up and you click around on the server, you should see events in your PostHog instance from the source `web`.
+Once you've set this up and clicked around on the server, you should see events in your PostHog instance from the source `web`.
 
 ### Adding the Ruby library
 
@@ -238,7 +238,7 @@ With both the library and snippet set up, we can use both of them to capture eve
 
 ### Capturing custom events
 
-The snippet provides autocaptures of pageviews, clicks, inputs, and some other events. If you want customization, you must set up custom event capture.
+The snippet provides autocaptures of pageviews, clicks, inputs, and some other events. If you want to capture events which are more nuanced or unique to your product, you must set up custom event capture.
 
 If we want to capture when someone submits a new article, we can call `$posthog.capture()` with the author string and an event name we choose. In `app/controllers/articles_controller.rb`, this looks like this:
 
