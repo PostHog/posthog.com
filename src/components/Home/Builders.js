@@ -60,7 +60,7 @@ export default function Builders() {
                         <StaticImage quality={100} className="max-w-[320px]" src="./images/builder-hog-mobile.png" />
                     </div>
                     <div className="relative after:h-[calc(100%+2rem)] sm:after:h-[calc(100%+3rem)] after:absolute after:-right-4 sm:after:-right-7 after:top-0 after:w-[2px] after:bg-[#dd512b] lg:after:hidden">
-                        <h2 className="text-6xl sm:text-8xl m-0 lg:text-right text-white leading-none">
+                        <h2 className="text-6xl pb-4 sm:text-8xl m-0 lg:text-right text-white leading-none">
                             Built for <span className="text-yellow">builders</span>
                         </h2>
                         <div className="flex">

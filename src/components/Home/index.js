@@ -35,7 +35,6 @@ const Home = () => {
                 <Builders />
                 <Pricing />
                 <CustomerData />
-                <Pipelines />
                 <Timeline />
                 <Roadmap />
                 <Quote />

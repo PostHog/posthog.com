@@ -1,32 +1,27 @@
 import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
 import ReactCountryFlag from 'react-country-flag'
+import ProductIcons from 'components/ProductIcons'
 import NotProductIcons from 'components/NotProductIcons'
-
-const icons = {
-    privacy: NotProductIcons.privacy,
-    hosting: NotProductIcons.hosting,
-    api: NotProductIcons.api,
-}
 
 const features = [
     {
-        icon: 'privacy',
+        icon: ProductIcons.privacy,
         title: 'Privacy controls',
         description: 'Track users without cookies, anonymize users, configure a reverse proxy',
     },
     {
-        icon: 'hosting',
+        icon: ProductIcons.selfHosting,
         title: 'Choose your hosting location',
         description: 'Store user data in the US or EU depending on your needs',
     },
     {
-        icon: 'api',
+        icon: ProductIcons.api,
         title: 'Total access to customer data',
         description: 'API provides full access to customer and event data',
     },
     {
-        icon: 'code',
+        icon: NotProductIcons.code,
         title: 'Codebase transparency',
         description: 'Audit the entire PostHog codebase for security or compliance on GitHub',
     },
@@ -36,7 +31,7 @@ export default function CustomerData() {
     return (
         <section className="my-24 px-5">
             <div className="max-w-screen-2xl mx-auto">
-                <h2 className="text-3xl sm:text-5xl lg:text-7xl 2xl:text-8xl m-0 text-center mb-6 sm:mb-16">
+                <h2 className="text-4xl sm:text-5xl lg:text-7xl 2xl:text-8xl m-0 text-center mb-6 sm:mb-16">
                     <span className="text-red">Full control</span> of your customer data
                 </h2>
                 <div className="flex justify-center">
@@ -48,7 +43,7 @@ export default function CustomerData() {
                                     key={title}
                                 >
                                     <span className="absolute left-6 top-6.5 inline-block w-8 h-8 text-gray">
-                                        {NotProductIcons.code}
+                                        {icon}
                                     </span>
                                     <h5 className="text-xl font-extrabold m-0 pb-1 pr-4">{title}</h5>
                                     <p className="m-0 text-[15px] pr-4">{description}</p>
