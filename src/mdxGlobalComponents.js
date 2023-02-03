@@ -88,7 +88,6 @@ import { Pagination } from './components/Pagination'
 import { Popover } from './components/Popover'
 import { PostCard } from './components/PostCard'
 import { PostLayout } from './components/PostLayout'
-import { AllPlans } from './components/Pricing/AllPlans'
 import { Calculator } from './components/Pricing/Calculator'
 import { CloudVsSelfHost } from './components/Pricing/CloudVsSelfHost'
 import { FAQs } from './components/Pricing/FAQs'
@@ -100,6 +99,7 @@ import { ProductPillars } from './components/Pricing/ProductPillars'
 import { Quote } from './components/Pricing/Quote'
 import { Savings } from './components/Pricing/Savings'
 import { SelfHost } from './components/Pricing/SelfHost'
+import { AllPlans } from './components/Pricing/control/AllPlans'
 import { PlanComparison } from './components/Pricing/control/PlanComparison'
 import { OtherOptions } from './components/Pricing/test/OtherOptions'
 import { PlanComparisonTest } from './components/Pricing/test/PlanComparisonTest'
@@ -230,7 +230,6 @@ export const shortcodes = {
     Popover,
     PostCard,
     PostLayout,
-    AllPlans,
     Calculator,
     CloudVsSelfHost,
     FAQs,
@@ -242,6 +241,7 @@ export const shortcodes = {
     Quote,
     Savings,
     SelfHost,
+    AllPlans,
     PlanComparison,
     OtherOptions,
     PlanComparisonTest,
