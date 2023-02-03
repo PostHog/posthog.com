@@ -424,7 +424,7 @@
         "children": [
             {
                 "name": "Migrate to PostHog Cloud",
-                "url": "/docs/self-host/migrate-to-cloud"
+                "url": "/docs/migrate/migrate-to-cloud"
             },
             {
                 "name": "Migrate between PostHog instances",

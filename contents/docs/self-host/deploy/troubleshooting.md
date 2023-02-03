@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-import Sunset from "../../../self-host/\_snippets/sunset-disclaimer.mdx"
+import Sunset from "../_snippets/sunset-disclaimer.mdx"
 
 <Sunset />
 
