@@ -1,6 +1,7 @@
 import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
 import ReactCountryFlag from 'react-country-flag'
+import ProductIcons from 'components/ProductIcons'
 
 const features = [
     {
@@ -15,7 +16,7 @@ const features = [
     },
 ]
 
-export default function HostingLocations() {
+export default function CustomerData() {
     return (
         <section className="my-24 px-5">
             <div className="max-w-screen-2xl mx-auto">
@@ -23,14 +24,18 @@ export default function HostingLocations() {
                     <span className="text-red">Full control</span> of your customer data
                 </h2>
                 <div className="flex justify-center">
-                    <ul className="m-0 p-0 list-none inline-grid sm:grid-cols-2 justify-evenly gap-6">
+                    <ul className="m-0 p-0 list-none inline-grid sm:grid-cols-2 justify-evenly">
                         {features.map(({ title, description }) => {
                             return (
-                                <li className="lg:max-w-sm" key={title}>
-                                    <h5 className="text-xl font-extrabold m-0 mb-2 pb-1 border-b border-dashed border-gray-accent-light pr-4">
-                                        {title}
-                                    </h5>
-                                    <p className="m-0 text-sm pr-4">{description}</p>
+                                <li
+                                    className="relative lg:max-w-sm py-4 pl-16 pr-6 first:border-b last:border-t even:border-l border-dashed border-gray-accent-light"
+                                    key={title}
+                                >
+                                    <span className="absolute left-6 top-4 inline-block w-8 h-8">
+                                        {ProductIcons.abTesting}
+                                    </span>
+                                    <h5 className="text-xl font-extrabold m-0 pb-1 pr-4">{title}</h5>
+                                    <p className="m-0 text-[15px] pr-4">{description}</p>
                                 </li>
                             )
                         })}

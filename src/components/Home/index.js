@@ -15,7 +15,7 @@ import usePostHog from '../../hooks/usePostHog'
 import AllInOne from './AllInOne'
 import Builders from './Builders'
 import Pricing from './Pricing'
-import HostingLocations from './HostingLocations'
+import CustomerData from './CustomerData'
 
 const Home = () => {
     usePostHog()
@@ -34,7 +34,7 @@ const Home = () => {
                 <AllInOne />
                 <Builders />
                 <Pricing />
-                <HostingLocations />
+                <CustomerData />
                 <Pipelines />
                 <Timeline />
                 <Roadmap />
