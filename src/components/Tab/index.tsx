@@ -16,7 +16,7 @@ export const Tab: React.FC & {
                     selected
                         ? 'text-red font-bold after:h-[2px] after:bg-red after:bottom-[calc(-.25rem_-_3px)] after:content-[""] after:absolute after:left-0 after:right-0'
                         : 'border-transparent text-primary/75 dark:text-primary-dark/75 hover:border-gray-accent-light hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark/25',
-                    'px-2.5 py-1.5 mb-1.5 text-sm font-semibold whitespace-nowrap rounded relative hover:scale-[1.01] active:scale-[.99] group'
+                    'px-3 py-1.5 mb-1.5 text-sm font-semibold whitespace-nowrap rounded relative hover:scale-[1.01] active:scale-[.99] group'
                 )
             }
         >
