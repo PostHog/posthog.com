@@ -71,15 +71,18 @@ Engineering is spread out into three small teams. Team Platform is a scope-speci
 #### [Session Recording](/handbook/small-teams/session-recording)
 - [Ben White](/handbook/company/team#ben-white-full-stack-engineer) (Team lead, Full Stack Engineer)
 - [Alex Kim](/handbook/company/team#alex-kim-full-stack-engineer) (Full Stack Engineer)
-- [Emanuele Capparelli](/handbook/company/team#ben-white-full-stack-engineer) (Growth Engineer)
-- Raquel Smith (Growth Engineer)
 - Product: Supported by Annika Schmid
 - Product design: Supported by Cory Watilo
 
+#### [Growth](/handbook/small-teams/growth)
+- [Emanuele Capparelli](/handbook/company/team#emanuele-capparelli-growth-engineer) (Growth Engineer)
+- [Raquel Smith](/handbook/company/team#raquel-smith-growth-engineer) (Growth Engineer)
+- Product design: Supported by Cory Watilo
+
 #### [Infrastructure](/handbook/small-teams/infrastructure)
-- [Ellie Huxtable]() (Site Reliability Engineer)
+- [Ellie Huxtable](/handbook/company/team#ellie-huxtable-full-stack-engineer) (Site Reliability Engineer)
 - [Guido Iaquinti](/handbook/company/team#guido-iaquinti-software-engineer) (Site Reliability Engineer)
-- [Daniel Jaramillo]() (Site Reliability Engineer)
+- [Daniel Jaramillo](/handbook/company/team#daniel-esneider-sre-engineer) (Site Reliability Engineer)
 - Product: Supported by [Luke Harries](/handbook/company/team#luke-harries-head-of-product)
 
 #### [Pipeline](/handbook/small-teams/pipeline)
