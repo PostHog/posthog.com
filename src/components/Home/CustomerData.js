@@ -1,16 +1,32 @@
 import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
 import ReactCountryFlag from 'react-country-flag'
-import ProductIcons from 'components/ProductIcons'
+import NotProductIcons from 'components/NotProductIcons'
+
+const icons = {
+    privacy: NotProductIcons.privacy,
+    hosting: NotProductIcons.hosting,
+    api: NotProductIcons.api,
+}
 
 const features = [
     {
+        icon: 'privacy',
         title: 'Privacy controls',
         description: 'Track users without cookies, anonymize users, configure a reverse proxy',
     },
-    { title: 'Choose your hosting location', description: 'Store user data in the US or EU depending on your needs' },
-    { title: 'Total access to customer data', description: 'API provides full access to customer and event data' },
     {
+        icon: 'hosting',
+        title: 'Choose your hosting location',
+        description: 'Store user data in the US or EU depending on your needs',
+    },
+    {
+        icon: 'api',
+        title: 'Total access to customer data',
+        description: 'API provides full access to customer and event data',
+    },
+    {
+        icon: 'code',
         title: 'Codebase transparency',
         description: 'Audit the entire PostHog codebase for security or compliance on GitHub',
     },
@@ -25,14 +41,14 @@ export default function CustomerData() {
                 </h2>
                 <div className="flex justify-center">
                     <ul className="m-0 p-0 list-none inline-grid sm:grid-cols-2 justify-evenly">
-                        {features.map(({ title, description }) => {
+                        {features.map(({ icon, title, description }) => {
                             return (
                                 <li
-                                    className="relative lg:max-w-sm py-4 pl-16 pr-6 first:border-b last:border-t even:border-l border-dashed border-gray-accent-light"
+                                    className="relative md:max-w-md py-8 pl-20 pr-6 border-t first:border-t-0 md:border-t-0 md:first:border-b md:last:border-t md:even:border-l border-dashed border-gray-accent-light"
                                     key={title}
                                 >
-                                    <span className="absolute left-6 top-4 inline-block w-8 h-8">
-                                        {ProductIcons.abTesting}
+                                    <span className="absolute left-6 top-6.5 inline-block w-8 h-8 text-gray">
+                                        {NotProductIcons.code}
                                     </span>
                                     <h5 className="text-xl font-extrabold m-0 pb-1 pr-4">{title}</h5>
                                     <p className="m-0 text-[15px] pr-4">{description}</p>
@@ -42,9 +58,9 @@ export default function CustomerData() {
                     </ul>
                 </div>
                 <div className="relative mt-12 lg:mt-8">
-                    <div className="grid grid-cols-2 relative lg:top-10 w-full max-w-[800px] mx-auto lg:mb-0 mb-6">
-                        <div className="flex space-x-2 justify-center">
-                            <div>
+                    <div className="grid grid-cols-2 relative lg:top-10 w-full max-w-md mx-auto lg:mb-0 mb-6">
+                        <div className="grid md:grid-cols-6 space-y-3 md:space-y-0 md:space-x-3 justify-center">
+                            <div className="col-span-1">
                                 <ReactCountryFlag
                                     style={{ width: 33, height: 'auto' }}
                                     width={33}
@@ -52,13 +68,13 @@ export default function CustomerData() {
                                     countryCode="US"
                                 />
                             </div>
-                            <div>
+                            <div className="col-span-5">
                                 <h6 className="text-base m-0 leading-none">US Cloud</h6>
-                                <p className="m-0 text-[15px]">Hosted in Virginia</p>
+                                <p className="m-0 text-sm md:text-[15px]">Hosted in Virginia</p>
                             </div>
                         </div>
-                        <div className="flex space-x-2 justify-center">
-                            <div>
+                        <div className="grid md:grid-cols-6 space-y-3 md:space-y-0 md:space-x-3 justify-center">
+                            <div className="col-span-1">
                                 <ReactCountryFlag
                                     style={{ width: 33, height: 'auto' }}
                                     width={33}
@@ -66,13 +82,13 @@ export default function CustomerData() {
                                     countryCode="EU"
                                 />
                             </div>
-                            <div>
+                            <div className="col-span-5">
                                 <h6 className="text-base m-0 leading-none">EU Cloud</h6>
-                                <p className="m-0 text-[15px]">Hosted in Frankfurt</p>
+                                <p className="m-0 text-sm md:text-[15px]">Hosted in Frankfurt</p>
                             </div>
                         </div>
                     </div>
-                    <StaticImage src="./images/host-hogs.png" />
+                    <StaticImage src="./images/host-hogs.png" className="-mx-8 md:mx-0" />
                 </div>
             </div>
         </section>
