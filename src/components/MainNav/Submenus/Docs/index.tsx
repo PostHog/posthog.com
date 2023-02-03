@@ -71,7 +71,7 @@ const Section = ({ title, section, className = '' }: IColumn) => {
                                 to={url}
                                 className="h-full font-semibold text-[14px] flex flex-col gap-2 items-center leading-tight hover:bg-gray-accent-light/50 dark:hover:bg-gray-accent-light/25 rounded p-2 text-center relative hover:scale-[1.02] active:scale-[1] active:top-[1px]"
                             >
-                                <span className="w-6 h-6 flex justify-center items-center flex-shrink-0">{icon}</span>
+                                <div className="w-6 h-6 flex justify-center items-center">{icon}</div>
                                 <span>{title}</span>
                             </Link>
                         </li>

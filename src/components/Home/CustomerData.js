@@ -6,7 +6,7 @@ import NotProductIcons from 'components/NotProductIcons'
 
 const features = [
     {
-        icon: ProductIcons.privacy,
+        icon: NotProductIcons.privacy,
         title: 'Privacy controls',
         description: 'Track users without cookies, anonymize users, configure a reverse proxy',
     },
@@ -42,7 +42,7 @@ export default function CustomerData() {
                                     className="relative md:max-w-md py-8 pl-20 pr-6 border-t first:border-t-0 md:border-t-0 md:first:border-b md:last:border-t md:even:border-l border-dashed border-gray-accent-light"
                                     key={title}
                                 >
-                                    <span className="absolute left-6 top-6.5 inline-block w-8 h-8 text-gray">
+                                    <span className="absolute left-8 top-6.5 inline-block w-8 h-8 text-gray">
                                         {icon}
                                     </span>
                                     <h5 className="text-xl font-extrabold m-0 pb-1 pr-4">{title}</h5>
