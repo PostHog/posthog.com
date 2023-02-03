@@ -24,7 +24,7 @@ const categories: {
 }[] = [
     {
         name: '1. Product analytics',
-        anchor: 'produt-analytics',
+        anchor: 'product-analytics',
         manuals: [
             {
                 name: 'Insights',

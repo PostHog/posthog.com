@@ -1,7 +1,5 @@
-import CallToAction from '../CallToAction'
 import Link from 'components/Link'
 import React from 'react'
-import SearchIconButton from 'components/Search/SearchIconButton'
 import { Wrapper } from '../Wrapper'
 import { ProductIcons } from '../../../ProductIcons/ProductIcons'
 import { NotProductIcons } from '../../../NotProductIcons/NotProductIcons'
@@ -9,7 +7,7 @@ import { NotProductIcons } from '../../../NotProductIcons/NotProductIcons'
 interface IFeature {
     title: string
     icon?: React.ReactNode
-    url?: string
+    url: string
 }
 
 interface IColumn {
@@ -19,27 +17,31 @@ interface IColumn {
 }
 
 const gettingStarted: IFeature[] = [
-    { title: 'Quickstart', icon: NotProductIcons.quickstart },
-    { title: 'JS snippet', icon: NotProductIcons.jsSnippet },
-    { title: 'SDKs', icon: NotProductIcons.sdks },
-    { title: 'Migrate to PostHog', icon: NotProductIcons.migrate },
+    { title: 'Quickstart', icon: NotProductIcons.quickstart, url: '/docs/getting-started/cloud' },
+    { title: 'JS snippet', icon: NotProductIcons.jsSnippet, url: '/docs/integrate/client/js' },
+    { title: 'SDKs', icon: NotProductIcons.sdks, url: '/docs/integrate' },
+    {
+        title: 'Migrate to PostHog',
+        icon: NotProductIcons.migrate,
+        url: '/docs/migrate/migrate-between-posthog-instances',
+    },
 ]
 
 const products: IFeature[] = [
-    { title: 'Product analytics', icon: ProductIcons.analytics },
-    { title: 'Session recording', icon: ProductIcons.sessionRecording },
-    { title: 'Feature flags', icon: ProductIcons.featureFlags },
-    { title: 'A/B testing', icon: ProductIcons.abTesting },
-    { title: 'Platform & data', icon: ProductIcons.projects },
+    { title: 'Product analytics', icon: ProductIcons.analytics, url: '/using-posthog#product-analytics' },
+    { title: 'Session recording', icon: ProductIcons.sessionRecording, url: '/manual/recordings' },
+    { title: 'Feature flags', icon: ProductIcons.featureFlags, url: '/manual/feature-flags' },
+    { title: 'A/B testing', icon: ProductIcons.abTesting, url: '/manual/experimentation' },
+    { title: 'Platform & data', icon: ProductIcons.projects, url: '/using-posthog#data' },
 ]
 
 const resources: IFeature[] = [
-    { title: 'Tutorials', icon: NotProductIcons.tutorials },
-    { title: 'Apps', icon: ProductIcons.appLibrary },
-    { title: 'Webhooks', icon: NotProductIcons.webhooks },
-    { title: 'API', icon: ProductIcons.api },
-    { title: 'How PostHog works', icon: NotProductIcons.howPostHogWorks },
-    { title: 'Privacy', icon: NotProductIcons.privacy },
+    { title: 'Tutorials', icon: NotProductIcons.tutorials, url: '/tutorials' },
+    { title: 'Apps', icon: ProductIcons.appLibrary, url: '/apps' },
+    { title: 'Webhooks', icon: NotProductIcons.webhooks, url: '/docs/integrate/webhooks/message-formatting' },
+    { title: 'API', icon: ProductIcons.api, url: '/docs/api' },
+    { title: 'How PostHog works', icon: NotProductIcons.howPostHogWorks, url: '/docs/how-posthog-works' },
+    { title: 'Privacy', icon: NotProductIcons.privacy, url: '/docs/privacy' },
 ]
 
 const categories: IColumn[] = [
@@ -81,7 +83,7 @@ const Section = ({ title, section, className = '' }: IColumn) => {
                     return (
                         <li key={title} className="w-28">
                             <Link
-                                to="/docs"
+                                to={url}
                                 className="h-full font-semibold text-[14px] flex flex-col gap-2 items-center leading-tight hover:bg-gray-accent-light/50 dark:hover:bg-gray-accent-light/25 rounded p-2 text-center relative hover:scale-[1.02] active:scale-[1] active:top-[1px]"
                             >
                                 <span className="w-6 h-6 flex justify-center items-center flex-shrink-0">{icon}</span>
