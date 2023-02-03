@@ -4,55 +4,26 @@ import React, { useState, useRef, useEffect } from 'react'
 import { FAQs } from 'components/Pricing/FAQs'
 import { Quote } from 'components/Pricing/Quote'
 import 'components/Pricing/styles/index.scss'
-import { SEO } from '../../components/seo'
+import { SEO } from '../../seo'
 import cntl from 'cntl'
-import Link from 'components/Link'
-import { Info } from 'components/Icons/Icons'
-import Calculator from 'components/Pricing/Calculator/index'
-import { CloudIcon, SelfHostIcon } from 'components/Pricing/Calculator/index'
-import ProductPillars from 'components/Pricing/ProductPillars/index'
+import { SelfHostIcon } from 'components/Pricing/Calculator/index'
 import Features from 'components/Pricing/Features/index'
-import AllPlans from 'components/Pricing/AllPlans'
+import AllPlans from 'components/Pricing/control/AllPlans'
 import { animateScroll as scroll } from 'react-scroll'
 import SelfHostOverlay from 'components/Pricing/Overlays/SelfHost'
 import EnterpriseOverlay from 'components/Pricing/Overlays/Enterprise'
 import WhyCloud from 'components/Pricing/Overlays/WhyCloud'
-import usePostHog from '../../hooks/usePostHog'
+import usePostHog from '../../../hooks/usePostHog'
 import { useActions, useValues } from 'kea'
 import { TrackedCTA } from 'components/CallToAction'
 import Enterprise from 'components/Pricing/Modals/Enterprise'
 import { pricingSliderLogic } from 'components/Pricing/PricingSlider/pricingSliderLogic'
-import { LogSlider, prettyInt, sliderCurve } from 'components/Pricing/PricingSlider/LogSlider'
-import { pricing, pricingLabels } from 'components/Pricing/constants'
-import { ProductIcons } from '../ProductIcons/ProductIcons'
-import { NotProductIcons } from '../NotProductIcons/NotProductIcons'
-import Breakdown from './Breakdown'
+import { LogSlider } from 'components/Pricing/PricingSlider/LogSlider'
+import { ProductIcons } from '../../ProductIcons/ProductIcons'
+import { NotProductIcons } from '../../NotProductIcons/NotProductIcons'
+import Breakdown from '../Breakdown'
 import { RenderInClient } from 'components/RenderInClient'
-import SelfHost from './SelfHost'
-
-const Benefit = ({ children }) => {
-    return (
-        <li className="font-medium text-[15px] flex gap-x-1.5 items-start leading-tight">
-            <span className="w-[24px] flex justify-center items-center flex-shrink-0 mt-[2px]">
-                <Check />
-            </span>
-            <span>{children}</span>
-        </li>
-    )
-}
-
-const Check = () => {
-    return (
-        <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M2.9947 5.52548L6.4635 8.99428L14.7025 0.75528C15.2095 0.24824 16.0369 0.24824 16.5439 0.75528L17.3259 1.53732C17.833 2.04436 17.833 2.8717 17.3259 3.37872L7.46034 13.2443C6.95566 13.749 6.13534 13.7521 5.62674 13.2521L0.389145 8.10213C0.126645 7.84509 -0.00381509 7.52713 8.49096e-05 7.15995C0.00399111 6.79277 0.141491 6.47791 0.408685 6.22635L1.18056 5.49979C1.69306 5.01775 2.49696 5.02947 2.99462 5.52714L2.9947 5.52548Z"
-                fill="#BFBFBC"
-            />
-        </svg>
-    )
-}
+import SelfHost from '../SelfHost'
 
 export const section = cntl`
     max-w-6xl
@@ -91,69 +62,15 @@ export const gridCellBottom = cntl`
     rounded-b-md
 `
 
-const Button = ({
-    onClick,
-    children,
-    active,
-}: {
-    onClick?: () => void
-    children: React.ReactNode
-    active?: boolean
-}) => {
-    return (
-        <button
-            className={`text-lg font-bold flex items-center flex-grow sm:flex-grow-0 sm:w-[186px] justify-between px-4 py-2 bg-white rounded-sm shadow-sm text-black/70 hover:text-black/95 relative active:top-[1px] active:scale-[.97] active:border-[2.5px] active:border-red transition-none ${
-                active ? 'border-red' : 'border-white'
-            } border-[2.5px] transition-colors`}
-            onClick={onClick}
-        >
-            <span>{children}</span>
-
-            <svg
-                className={`${active ? 'opacity-100' : 'opacity-0'} transition-none`}
-                width="18"
-                height="14"
-                viewBox="0 0 18 14"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-            >
-                <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M2.9947 5.52548L6.4635 8.99428L14.7025 0.75528C15.2095 0.24824 16.0369 0.24824 16.5439 0.75528L17.3259 1.53732C17.833 2.04436 17.833 2.8717 17.3259 3.37872L7.46034 13.2443C6.95566 13.749 6.13534 13.7521 5.62674 13.2521L0.389145 8.10213C0.126645 7.84509 -0.00381509 7.52713 8.49096e-05 7.15995C0.00399111 6.79277 0.141491 6.47791 0.408685 6.22635L1.18056 5.49979C1.69306 5.01775 2.49696 5.02947 2.99462 5.52714L2.9947 5.52548Z"
-                    fill="#F54E00"
-                />
-            </svg>
-        </button>
-    )
-}
-
-const B2C = () => {
-    return (
-        <div className="col-span-3 border-dashed border-gray-accent border py-2 mt-2 text-center px-4 bg-black bg-opacity-[2%]">
-            B2C company with insane event volume?{' '}
-            <Link to="/signup/b2c" className="font-bold text-orange inline-block">
-                Apply for a discount
-            </Link>
-        </div>
-    )
-}
-
-const Control = (): JSX.Element => {
-    const [selfHost, setSelfHost] = useState(false)
-    const [enterprise, setEnterprise] = useState(false)
+const PricingControl = (): JSX.Element => {
     const [currentModal, setCurrentModal] = useState<string | boolean>(false)
     const posthog = usePostHog()
-    const [showVolumeDiscounts, setShowVolumeDiscounts] = useState(false)
     const [showPlanBuilder, setShowPlanBuilder] = useState(false)
     const [enterpriseModalOpen, setEnterpriseModalOpen] = useState(false)
     const [whyCloudOpen, setWhyCloudOpen] = useState(false)
     const builderRef = useRef<HTMLDivElement>()
     const {
         cloudCost,
-        selfHostedCost,
-        cloudEnterpriseCost,
-        selfHostedEnterpriseCost,
         sessionRecordingCost,
         sliderValue,
         sessionRecordingSliderValue,
@@ -162,16 +79,7 @@ const Control = (): JSX.Element => {
         eventNumber,
     } = useValues(pricingSliderLogic)
     const [enterpriseMode, setEnterpriseMode] = useState(false)
-    const { setPricingOption, setSessionRecordingSliderValue, setSliderValue } = useActions(pricingSliderLogic)
-
-    const handleEnterpriseModeChange = (checked: boolean) => {
-        setPricingOption(checked ? 'cloud-enterprise' : 'cloud')
-        setEnterpriseMode(checked)
-    }
-
-    const handleInfo = (currentModal: string) => {
-        setCurrentModal(currentModal)
-    }
+    const { setSessionRecordingSliderValue, setSliderValue } = useActions(pricingSliderLogic)
 
     useEffect(() => {
         if (showPlanBuilder) builderRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -195,7 +103,7 @@ const Control = (): JSX.Element => {
                     <div className="lg:order-2">
                         <StaticImage
                             alt="The cutest hedgehog you've ever seen driving a red tractor"
-                            src="./images/tractor-hog.png"
+                            src="../images/tractor-hog.png"
                             className="max-w-screen-sm"
                             loading="eager"
                             placeholder="none"
@@ -209,29 +117,31 @@ const Control = (): JSX.Element => {
                         <p className="text-lg font-semibold opacity-60">
                             After a generous monthly free tier, pricing scales with usage.
                         </p>
-                        <RenderInClient>
-                            <TrackedCTA
-                                event={{
-                                    name: `clicked Get started - free`,
-                                    type: enterpriseMode ? 'cloud-enterprise' : 'cloud',
-                                }}
-                                type="primary"
-                                width="full lg:w-auto"
-                                className="shadow-md"
-                                to={
-                                    enterpriseMode
-                                        ? 'https://posthog.com/signup/cloud/enterprise'
-                                        : `https://${
-                                              posthog?.isFeatureEnabled &&
-                                              posthog?.isFeatureEnabled('direct-to-eu-cloud')
-                                                  ? 'eu'
-                                                  : 'app'
-                                          }.posthog.com/signup`
-                                }
-                            >
-                                {enterpriseMode ? 'Get in touch' : 'Get started - free'}
-                            </TrackedCTA>
-                        </RenderInClient>
+                        <RenderInClient
+                            render={() => (
+                                <TrackedCTA
+                                    event={{
+                                        name: `clicked Get started - free`,
+                                        type: enterpriseMode ? 'cloud-enterprise' : 'cloud',
+                                    }}
+                                    type="primary"
+                                    width="full lg:w-auto"
+                                    className="shadow-md"
+                                    to={
+                                        enterpriseMode
+                                            ? 'https://posthog.com/signup/cloud/enterprise'
+                                            : `https://${
+                                                  posthog?.isFeatureEnabled &&
+                                                  posthog?.isFeatureEnabled('direct-to-eu-cloud')
+                                                      ? 'eu'
+                                                      : 'app'
+                                              }.posthog.com/signup`
+                                    }
+                                >
+                                    {enterpriseMode ? 'Get in touch' : 'Get started - free'}
+                                </TrackedCTA>
+                            )}
+                        />
                     </div>
                 </div>
             </section>
@@ -450,20 +360,6 @@ const Control = (): JSX.Element => {
                         </div>
                     </div>
                     <div>
-                        <h4 className="border-b border-dashed border-gray-accent-light pb-2 mb-3">Addons</h4>
-
-                        <div className="pl-10 relative mb-8">
-                            <span className="w-6 h-6 absolute top-0 left-1">{NotProductIcons.enterprise}</span>
-
-                            <h5 className="text-base mb-0">Enterprise package</h5>
-                            <p className="text-[15px] mb-1">
-                                SAML SSO, advanced permissions, dedicated Slack support channel
-                            </p>
-                            <p className="text-sm text-black/70">
-                                Add <strong className="text-black/100">25%</strong> to total bill ($450/mo min)
-                            </p>
-                        </div>
-
                         <h4 className="border-b border-dashed border-gray-accent-light pb-2 mb-3">Discounts</h4>
 
                         <div className="pl-10 relative mb-4">
@@ -489,16 +385,16 @@ const Control = (): JSX.Element => {
             </section>
             <section className={`${section} mb-12 mt-12 md:mt-24 md:px-4`}>
                 <h2 className="text-2xl m-0 flex items-center border-b border-dashed border-gray-accent-light pb-4">
+                    Compare all plans
+                </h2>
+                <AllPlans />
+            </section>
+            <section className={`${section} mb-12 mt-12 md:mt-24 md:px-4`}>
+                <h2 className="text-2xl m-0 flex items-center border-b border-dashed border-gray-accent-light pb-4">
                     <SelfHostIcon className="opacity-30 w-[36px] mr-2" />
                     <span>Want to self-host PostHog?</span>
                 </h2>
                 <SelfHost />
-            </section>
-            <section className={`${section} mb-12 mt-12 md:mt-24 md:px-4`}>
-                <h2 className="text-2xl m-0 flex items-center border-b border-dashed border-gray-accent-light pb-4">
-                    Compare all plans
-                </h2>
-                <AllPlans />
             </section>
             <section className={`${section} mb-12 mt-12 md:mt-24 md:px-4`}>
                 <h2 className="text-2xl m-0 mb-6 pb-6 border-b border-gray-accent-light border-dashed">Questions</h2>
@@ -578,4 +474,4 @@ const Control = (): JSX.Element => {
     )
 }
 
-export default Control
+export default PricingControl

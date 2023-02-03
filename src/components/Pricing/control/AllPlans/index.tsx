@@ -1,7 +1,7 @@
 import { TrackedCTA } from 'components/CallToAction'
 import React, { useState } from 'react'
 import { PlanComparison } from '../PlanComparison'
-import { CloudIcon, SelfHostIcon } from '../Calculator/index'
+import { CloudIcon, SelfHostIcon } from '../../Calculator/index'
 import { motion } from 'framer-motion'
 
 interface IPlan {
@@ -10,6 +10,7 @@ interface IPlan {
     pricing: {
         event: number
         monthly?: number
+        other?: string
     }
     mainCTA: {
         title: string
@@ -24,8 +25,8 @@ interface IPlan {
 
 const cloudPlans: IPlan[] = [
     {
-        title: 'Self-serve',
-        description: 'with community support',
+        title: 'Scale',
+        description: 'Everything you need to build great products',
         pricing: {
             event: 0.00045,
         },
@@ -35,34 +36,21 @@ const cloudPlans: IPlan[] = [
         },
         pricingOption: 'cloud',
     },
-    {
-        title: 'with Enterprise package',
-        description: 'Slack-based priority support, SSO, advanced permissions',
-        pricing: {
-            event: 0.0005626,
-            monthly: 450,
-        },
-        mainCTA: {
-            title: 'Get in touch',
-            url: '/signup/cloud/enterprise',
-        },
-        pricingOption: 'cloud-enterprise',
-    },
 ]
 
-const selfHostPlans: IPlan[] = [
+const enterprisePlans: IPlan[] = [
     {
-        title: 'Enterprise starting from $5,000/month',
-        description: 'Slack-based priority support, SSO, advanced permissions',
+        title: 'Enterprise',
+        description: '+ Security, compliance, and permissioning',
         pricing: {
-            monthly: 5000,
+            other: 'Contact us',
             event: 0,
         },
         mainCTA: {
             title: 'Book a call',
             url: '/book-a-demo',
         },
-        pricingOption: 'self-hosted-enterprise',
+        pricingOption: 'enterprise',
     },
 ]
 
@@ -73,12 +61,18 @@ const Plan = ({ plan }: { plan: IPlan }) => {
             <div className="my-2">
                 <h5 className="text-sm opacity-50 m-0 font-medium">Pricing</h5>
                 <p className="m-0">
-                    {plan.pricing.monthly && (
+                    {plan.pricing.monthly ? (
                         <span>
                             <strong>${plan.pricing.monthly}</strong>
                             <span className="text-[13px] opacity-50">/mo</span>
                             <span className="inline-block opacity-50 mx-2">{plan.pricing.event ? '+' : ''}</span>
                         </span>
+                    ) : (
+                        plan.pricing.other && (
+                            <span>
+                                <strong>{plan.pricing.other}</strong>
+                            </span>
+                        )
                     )}
                     <span>
                         <strong>{plan.pricing.event ? `$${plan.pricing.event}` : ''}</strong>
@@ -90,7 +84,7 @@ const Plan = ({ plan }: { plan: IPlan }) => {
             <TrackedCTA
                 event={{ name: `clicked ${plan.mainCTA.title}`, type: plan.pricingOption }}
                 type="primary"
-                width="full"
+                width="56"
                 className="shadow-md mt-auto"
                 to={plan.mainCTA.url}
                 size="sm"
@@ -116,16 +110,7 @@ const PlanSection = ({
 }) => {
     return (
         <div className={`flex flex-col ${className}`}>
-            <div className="flex">
-                <Icon className="opacity-30 w-[36px] mr-2" />
-                <div>
-                    <h3 className="m-0 text-lg">{title}</h3>
-                    <p className="m-0 text-black/50 font-medium text-[14px]">{subtitle}</p>
-                </div>
-            </div>
-            <ul
-                className={`grow list-none grid m-0 p-0 sm:gap-x-6 sm:gap-y-0 gap-y-6 mt-5 pt-9 border-gray-accent-light border-dashed border-t sm:grid-cols-${plans.length}`}
-            >
+            <ul className={`grow list-none grid m-0 p-0 sm:gap-x-6 sm:gap-y-0 gap-y-6 sm:grid-cols-${plans.length}`}>
                 {plans.map((plan) => {
                     return <Plan key={plan.title} plan={plan} />
                 })}
@@ -139,23 +124,23 @@ export default function AllPlans() {
     return (
         <>
             <div
-                className={`grid md:grid-cols-3 md:gap-x-6 md:gap-y-0 gap-y-10 my-9 transition-all ${
-                    showComparison ? 'lg:ml-[180px]' : ''
+                className={`grid md:grid-cols-2 md:gap-x-6 md:gap-y-0 gap-y-10 my-9 transition-all ${
+                    showComparison ? 'lg:ml-[300px]' : ''
                 }`}
             >
                 <PlanSection
-                    className="md:col-span-2"
-                    title="PostHog Cloud"
-                    subtitle="Turnkey, hosted & managed by PostHog"
+                    className="md:col-span-1"
+                    title="Standard"
+                    subtitle="Everything you need to build great products"
                     Icon={CloudIcon}
                     plans={cloudPlans}
                 />
                 <PlanSection
                     className="md:col-span-1"
-                    title="Self-hosted"
-                    subtitle="Deploy to your private cloud or infrastructure"
+                    title="Enterprise"
+                    subtitle="+ Security, compliance, and permissioning"
                     Icon={SelfHostIcon}
-                    plans={selfHostPlans}
+                    plans={enterprisePlans}
                 />
             </div>
             {showComparison && (
