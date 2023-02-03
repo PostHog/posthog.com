@@ -678,6 +678,10 @@
         {
             "source": "/blog/tags/startups",
             "destination": "/blog/categories/startups"
+        },
+        {
+            "source": "/docs/integrate/badge",
+            "destination": "/docs/contribute/badge"
         }
     ],
     "rewrites": [

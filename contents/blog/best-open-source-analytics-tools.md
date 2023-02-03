@@ -10,6 +10,7 @@ author:
   - andy-vandervell
 featuredImage: ../images/blog/product-people.png
 featuredImageType: full
+featuredVideo: https://www.youtube-nocookie.com/embed/vN-aGs5M2k4
 category: General
 tags:
   - Open source

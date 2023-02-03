@@ -69,7 +69,6 @@
         "gatsby-plugin-sharp": "^4.20.0",
         "gatsby-plugin-sitemap": "^5.20.0",
         "gatsby-plugin-smoothscroll": "^1.2.0",
-        "gatsby-plugin-typescript": "^4.20.0",
         "gatsby-remark-autolink-headers": "^5.20.0",
         "gatsby-remark-copy-linked-files": "^5.20.0",
         "gatsby-remark-katex": "^6.20.0",

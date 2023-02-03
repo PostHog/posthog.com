@@ -24,6 +24,9 @@ Things that _shouldn’t_ be an incident
 - Insights returning incorrect data
 - Events being < 5 minutes behind
 - Unable to save insights, create feature flags
+- Expected disruption which happens as part of scheduled maintenance
+
+> Planning some maintenance? Check the [announcements](/handbook/growth/marketing/product-announcements) section instead.
 
 ### Incident severity
 Please refer to the following guidance when choosing the severity for your incident. If you are unsure, it's usually better to over-estimate than under-estimate!

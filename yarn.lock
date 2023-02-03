@@ -11539,19 +11539,6 @@ gatsby-plugin-smoothscroll@^1.2.0:
   dependencies:
     smoothscroll-polyfill "^0.4.4"
 
-gatsby-plugin-typescript@^4.20.0:
-  version "4.23.0"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-typescript/-/gatsby-plugin-typescript-4.23.0.tgz#3a36093abd5060542244a03f9eee56d51ba0087e"
-  integrity sha512-g/BU1f+LytEofWEwihdZZ8LwVebmB71Cpz/GWuDvzyHLGcua59Q60cAAFn0qVgkjrrj05/1c5jcCrkx7grdhIQ==
-  dependencies:
-    "@babel/core" "^7.15.5"
-    "@babel/plugin-proposal-nullish-coalescing-operator" "^7.14.5"
-    "@babel/plugin-proposal-numeric-separator" "^7.14.5"
-    "@babel/plugin-proposal-optional-chaining" "^7.14.5"
-    "@babel/preset-typescript" "^7.15.0"
-    "@babel/runtime" "^7.15.4"
-    babel-plugin-remove-graphql-queries "^4.23.0"
-
 gatsby-plugin-typescript@^4.25.0:
   version "4.25.0"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-typescript/-/gatsby-plugin-typescript-4.25.0.tgz#e498d00a4e811157fae0214bee9bfae13c569ef6"
@@ -22632,9 +22619,9 @@ typescript@^4.0.2:
   integrity sha512-goMHfm00nWPa8UvR/CPSvykqf6dVV8x/dp0c5mFTMTIu0u0FlGWRioyy7Nn0PGAdHxpJZnuO/ut+PpQ8UiHAig==
 
 ua-parser-js@^0.7.30:
-  version "0.7.31"
-  resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.31.tgz#649a656b191dffab4f21d5e053e27ca17cbff5c6"
-  integrity sha512-qLK/Xe9E2uzmYI3qLeOmI0tEOt+TBBQyUIAh4aAgU05FVYzeZrKUdkAZfBNVGRaHVgV0TDkdEngJSw/SyQchkQ==
+  version "0.7.33"
+  resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.33.tgz#1d04acb4ccef9293df6f70f2c3d22f3030d8b532"
+  integrity sha512-s8ax/CeZdK9R/56Sui0WM6y9OFREJarMRHqLB2EwkovemBxNQ+Bqu8GAsUnVcXKgphb++ghr/B2BZx4mahujPw==
 
 uglify-js@^3.1.4:
   version "3.17.0"

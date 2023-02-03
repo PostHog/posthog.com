@@ -21,35 +21,6 @@ const OpenSourceDescription = () => {
     )
 }
 
-const EnterpriseSelfHosted = () => {
-    return (
-        <ul className={descriptionClassName}>
-            <li className={descriptionItemClassName}>Deploy on your private cloud or infrastructure.</li>
-            <li className="flex items-center space-x-2 text-sm">
-                <strong className={descriptionItemClassName}>Starting at $5,000/month</strong>
-                <span>
-                    <Tooltip
-                        content={
-                            <>
-                                <p className="text-sm m-0">The $5,000/month plan includes:</p>
-                                <ul className="mt-1 pt-0">
-                                    <li className="text-sm"> 40m events</li>
-                                    <li className="text-sm">80k sessions</li>
-                                    <li className="text-sm">Self-hosted enterprise support</li>
-                                </ul>
-                            </>
-                        }
-                    >
-                        <span>
-                            <Info className="w-2 h-2" />
-                        </span>
-                    </Tooltip>
-                </span>
-            </li>
-        </ul>
-    )
-}
-
 interface ISection {
     title: string
     icon: React.ReactNode
@@ -65,15 +36,6 @@ const sections: ISection[] = [
         cta: {
             url: '/docs/self-host',
             label: 'Read the docs',
-        },
-    },
-    {
-        title: 'Enterprise Self-Hosted',
-        icon: <EnterpriseIcon />,
-        description: <EnterpriseSelfHosted />,
-        cta: {
-            url: '/book-a-demo',
-            label: 'Book a call',
         },
     },
 ]
