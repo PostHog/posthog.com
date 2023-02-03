@@ -15,8 +15,9 @@ export default function Pricing() {
                         Honest, transparent pricing that doesn’t force you to talk to a human (unless you want to)
                     </h3>
                     <p className="sm:text-lg m-0">
-                        Watch a <Link to="">recorded demo</Link> at your own pace, or{' '}
-                        <Link to="">request a personalized demo</Link> if your business has bespoke needs.
+                        Watch a <Link to="/book-a-demo">recorded demo</Link> at your own pace, or{' '}
+                        <Link to="/book-a-demo#contact">request a personalized demo</Link> if your business has bespoke
+                        needs.
                     </p>
                 </div>
                 <div className="lg:ml-2 lg:mt-0 mt-8">

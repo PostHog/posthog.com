@@ -10,7 +10,7 @@ const features = [
         description: 'Build custom apps, augment or transform data, automate actions based on customer activity',
         cta: {
             text: 'Explore the API',
-            url: '',
+            url: '/docs/api',
         },
     },
     {
@@ -19,12 +19,15 @@ const features = [
         description: (
             <>
                 Connect all your data to PostHog. (And if it doesn’t exist yet,{' '}
-                <Link to="/docs/apps/build">you can build it!</Link>)
+                <Link to="/docs/apps/build" className="text-yellow">
+                    you can build it!
+                </Link>
+                )
             </>
         ),
         cta: {
             text: 'Browse libraries',
-            url: '',
+            url: '/apps?filter=type&value=data-in',
         },
     },
     {
@@ -33,7 +36,7 @@ const features = [
         description: 'Query your data directly if your complex data question can’t be answered in the PostHog UI',
         cta: {
             text: 'Request beta access',
-            url: '',
+            url: '/roadmap',
         },
     },
     {
@@ -43,7 +46,7 @@ const features = [
             'Extend functionality with custom apps for your business or build an app for the PostHog community',
         cta: {
             text: 'Browse apps',
-            url: '',
+            url: '/apps',
         },
     },
 ]
@@ -58,7 +61,7 @@ export default function Builders() {
                     </div>
                     <div className="relative after:h-[calc(100%+2rem)] sm:after:h-[calc(100%+3rem)] after:absolute after:-right-4 sm:after:-right-7 after:top-0 after:w-[2px] after:bg-[#dd512b] lg:after:hidden">
                         <h2 className="text-6xl sm:text-8xl m-0 lg:text-right text-white leading-none">
-                            Built for <span className="text-red">builders</span>
+                            Built for <span className="text-yellow">builders</span>
                         </h2>
                         <div className="flex">
                             <div className="relative max-w-[508px] w-full flex-shrink-0 lg:block hidden">
@@ -75,12 +78,12 @@ export default function Builders() {
                                                 key={feature}
                                             >
                                                 <div className="flex space-x-2 sm:space-x-4 col-span-2">
-                                                    <span className="w-[23px]">{icon}</span>
-                                                    <p className="m-0 text-base font-semibold">{feature}</p>
+                                                    <span className="w-8">{icon}</span>
+                                                    <p className="m-0 text-lg font-bold">{feature}</p>
                                                 </div>
                                                 <div className="col-span-3 sm:ml-0 ml-[31px]">
-                                                    <p className="text-[14px] m-0 mb-2 sm:mt-0 mt-2">{description}</p>
-                                                    <Link className="text-[14px]" to={cta?.url}>
+                                                    <p className="text-[15px] m-0 mb-2 sm:mt-0 mt-2">{description}</p>
+                                                    <Link className="text-[15px] text-yellow" to={cta?.url}>
                                                         {cta?.text}
                                                     </Link>
                                                 </div>
