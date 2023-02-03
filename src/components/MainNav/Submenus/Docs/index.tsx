@@ -64,14 +64,14 @@ const categories: IColumn[] = [
 
 const Section = ({ title, section, className = '' }: IColumn) => {
     return (
-        <ul className={`list-none m-0 p-0 space-y-1 ${className}`}>
+        <ul className={`list-none m-0 p-0 space-y-2 ${className}`}>
             <h5 className="text-[15px] font-semibold opacity-40 m-0 border-b border-dashed border-gray-accent-light pb-1">
                 {title}
             </h5>
             <ul className="list-none p-0 m-0 grid grid-cols-3 md:grid-cols-6 gap-2 dark:text-primary-dark">
                 {section.map(({ title, icon, url }) => {
                     return (
-                        <li key={title} className="w-28">
+                        <li key={title} className="w-[6.5rem]">
                             <Link
                                 to={url}
                                 className="h-full font-semibold text-[14px] flex flex-col gap-2 items-center leading-tight hover:bg-gray-accent-light/50 dark:hover:bg-gray-accent-light/25 rounded p-2 text-center relative hover:scale-[1.02] active:scale-[1] active:top-[1px]"
