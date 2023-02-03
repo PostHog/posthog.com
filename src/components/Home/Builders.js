@@ -81,7 +81,7 @@ export default function Builders() {
                                                     <span className="w-8">{icon}</span>
                                                     <p className="m-0 text-lg font-bold">{feature}</p>
                                                 </div>
-                                                <div className="col-span-3 sm:ml-0 ml-[31px]">
+                                                <div className="col-span-3 ml-10 sm:ml-0">
                                                     <p className="text-[15px] m-0 mb-2 sm:mt-0 mt-2">{description}</p>
                                                     <Link className="text-[15px] text-yellow" to={cta?.url}>
                                                         {cta?.text}

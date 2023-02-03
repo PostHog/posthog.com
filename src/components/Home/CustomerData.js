@@ -39,14 +39,14 @@ export default function CustomerData() {
                         {features.map(({ icon, title, description }) => {
                             return (
                                 <li
-                                    className="relative md:max-w-md py-8 pl-20 pr-6 border-t first:border-t-0 md:border-t-0 md:first:border-b md:last:border-t md:even:border-l border-dashed border-gray-accent-light"
+                                    className="relative md:max-w-md py-4 md:py-8 pl-16 pr-2 md:pl-20 md:pr-6 border-t first:border-t-0 md:border-t-0 md:first:border-b md:last:border-t md:even:border-l border-dashed border-gray-accent-light"
                                     key={title}
                                 >
-                                    <span className="absolute left-8 top-6.5 inline-block w-8 h-8 text-gray">
+                                    <span className="absolute left-4 md:left-8 top-4.5 md:top-6.5 inline-block w-8 h-8 text-gray">
                                         {icon}
                                     </span>
                                     <h5 className="text-xl font-extrabold m-0 pb-1 pr-4">{title}</h5>
-                                    <p className="m-0 text-[15px] pr-4">{description}</p>
+                                    <p className="m-0 text-[15px]">{description}</p>
                                 </li>
                             )
                         })}

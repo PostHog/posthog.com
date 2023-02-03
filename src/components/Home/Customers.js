@@ -40,11 +40,11 @@ export default function Customers() {
         <section className="mb-16 -mt-[1px]">
             <div className="bg-almost-black py-8 md:py-12 xl:py-16 px-4 relative z-20">
                 <h2 className="m-0 text-center text-4xl lg:text-5xl 2xl:text-6xl text-white max-w-screen-2xl mx-auto">
-                    These people <span className="text-yellow">build products users want</span> with
+                    These folks <span className="text-yellow">build products users want</span> with
                     <Logomark className="inline-flex ml-4 -mt-2 h-8 lg:h-10 xl:h-12 2xl:h-14 fill-current" />
                 </h2>
             </div>
-            <div className="mt-8 max-w-screen-2xl mx-auto px-4 2xl:px-0 flex items-center sm:items-end flex-col-reverse sm:flex-row">
+            <div className="mt-8 max-w-screen-2xl mx-auto px-4 2xl:px-0 flex items-center sm:items-end flex-col sm:flex-row">
                 <ul className="list-none m-0 p-0 grid grid-cols-2 md:grid-cols-3 border-b border-r border-dashed border-gray-accent-light flex-grow w-full">
                     <Customer className="max-h-[44px]" image={yCombinator} />
                     <Customer className="max-h-[36px]" image={staples} />
@@ -61,7 +61,7 @@ export default function Customers() {
                     <Customer className="max-h-[45px]" image={questdb} />
                     <Customer className="max-h-[50px]" image={landmark} />
                 </ul>
-                <div ref={ref} className="relative sm:pl-14 sm:pt-0 pt-7 flex-shrink-0">
+                <div ref={ref} className="relative pl-14 mt-4 md:mt-0 sm:pt-0 pt-7 flex-shrink-0">
                     {inView && (
                         <motion.svg
                             initial={{ opacity: 0, translateY: 0 }}
