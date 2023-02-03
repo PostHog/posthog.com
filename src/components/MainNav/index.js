@@ -36,7 +36,7 @@ export default function MainNav() {
         shown: { height: 'auto' },
     }
     const menuLength = menu.length
-    const halfMenu = Math.floor(menuLength / 2) + 1
+    const halfMenu = Math.floor(menuLength / 2)
 
     const { open } = useSearch()
 

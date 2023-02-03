@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Tab as HeadlessTab } from '@headlessui/react'
 import { classNames } from 'lib/utils'
 
@@ -16,7 +16,7 @@ export const Tab: React.FC & {
                     selected
                         ? 'text-red font-bold after:h-[2px] after:bg-red after:bottom-[calc(-.25rem_-_3px)] after:content-[""] after:absolute after:left-0 after:right-0'
                         : 'border-transparent text-primary/75 dark:text-primary-dark/75 hover:border-gray-accent-light hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark/25',
-                    'px-2.5 py-1.5 mb-1.5 text-sm font-semibold whitespace-nowrap rounded relative hover:scale-[1.01] active:scale-[.99] group'
+                    'px-3 py-1.5 mb-1.5 text-sm font-semibold whitespace-nowrap rounded relative hover:scale-[1.01] active:scale-[.99] group'
                 )
             }
         >
@@ -30,9 +30,28 @@ export const Tab: React.FC & {
     )
 }
 
-const TabGroup: typeof HeadlessTab.Group = ({ children }) => {
+const TabGroup: typeof HeadlessTab.Group = ({ children, tabs }) => {
+    const [selectedIndex, setSelectedIndex] = useState(0)
+    const hasTabs = tabs?.length > 0
+
+    const handleChange = (index: number) => {
+        if (hasTabs && typeof window !== 'undefined') {
+            const url = new URL(window.location)
+            url.searchParams.set('tab', tabs[index])
+            window.history.pushState({}, '', url)
+        }
+        setSelectedIndex(index)
+    }
+
+    useEffect(() => {
+        if (hasTabs && typeof window !== 'undefined') {
+            const params = new URLSearchParams(window.location.search)
+            setSelectedIndex(tabs.indexOf(params.get('tab')))
+        }
+    }, [])
+
     return (
-        <HeadlessTab.Group as="div" className="my-4">
+        <HeadlessTab.Group selectedIndex={selectedIndex} onChange={handleChange} as="div" className="my-4">
             {children}
         </HeadlessTab.Group>
     )
