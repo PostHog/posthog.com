@@ -64,7 +64,6 @@ const Flaps = ({
     const next = numbers[index + 1]
     const topControls = useAnimation()
     const bottomControls = useAnimation()
-    const [hasAnimated, setHasAnimated] = useState(false)
 
     const animate = async () => {
         await topControls.start((i) => {
@@ -83,11 +82,10 @@ const Flaps = ({
                 bounce: false,
             },
         })
-        setHasAnimated(true)
     }
 
     useEffect(() => {
-        !hasAnimated && inView && animate()
+        inView && animate()
     }, [inView])
 
     return (
@@ -137,7 +135,7 @@ export default function SplitFlap({
     length?: number
     perspective?: string
 }): JSX.Element {
-    const { ref, inView } = useInView()
+    const { ref, inView } = useInView({ triggerOnce: true })
     const [animationComplete, setAnimationComplete] = useState(false)
     const reverse = from > to
     const numbers = reverse
