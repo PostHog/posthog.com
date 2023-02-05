@@ -1,11 +1,13 @@
-import React from 'react'
-import SplitFlap from 'components/SplitFlap'
+import React, { useState } from 'react'
+import SplitFlap, { ISplitFlap } from 'components/SplitFlap'
 const featureClasses = `m-0 font-semibold`
+import { motion } from 'framer-motion'
 
 const features = [
     {
+        from: 0,
         to: 4,
-        delay: 0.5,
+        stagger: 0.4,
         content: (
             <>
                 <p className={featureClasses}>SaaS products in one</p>
@@ -15,29 +17,50 @@ const features = [
     },
     {
         to: 1,
-        from: 1000,
-        delay: 0.08,
+        from: 20,
+        stagger: 0.08,
         randomize: true,
         length: 15,
         content: <p className={featureClasses}>Place to send user data</p>,
     },
     {
         to: 1,
-        from: 100,
-        delay: 0.08,
+        from: 10,
+        stagger: 0.08,
         randomize: true,
-        length: 15,
+        length: 10,
         content: <p className={featureClasses}> Account to provision</p>,
     },
     {
         to: 0,
-        from: 100,
-        delay: 0.08,
+        from: 500,
+        stagger: 0.08,
         randomize: true,
-        length: 15,
+        length: 10,
         content: <p className={featureClasses}>Sales people to deal with</p>,
     },
 ]
+
+const Feature = ({ index, content, ...feature }: ISplitFlap & { index: number; content: JSX.Element }) => {
+    const [showContent, setShowContent] = useState(false)
+    return (
+        <li className="text-center flex flex-col items-center justify-center space-y-2">
+            <SplitFlap
+                onAnimationEnd={() => setShowContent(true)}
+                perspective="20rem"
+                startDelay={index * 500}
+                {...feature}
+            />
+
+            <motion.div
+                initial={{ translateY: '100%', opacity: 0 }}
+                animate={showContent ? { translateY: 0, opacity: 1 } : {}}
+            >
+                {content}
+            </motion.div>
+        </li>
+    )
+}
 
 export default function AllInOne() {
     return (
@@ -54,20 +77,8 @@ export default function AllInOne() {
                 className="grid grid-cols-2 sm:grid-cols-4
              list-none p-0 m-0 items-start mt-8 md:mt-12 gap-y-8 md:gap-y-0 gap-x-4"
             >
-                {features.map(({ to, from, content, delay, randomize, length }, index) => {
-                    return (
-                        <li className="text-center flex flex-col items-center justify-center space-y-2" key={index}>
-                            <SplitFlap
-                                perspective="20rem"
-                                randomize={randomize}
-                                to={to}
-                                from={from}
-                                delay={delay}
-                                length={length}
-                            />
-                            <div>{content}</div>
-                        </li>
-                    )
+                {features.map((feature, index) => {
+                    return <Feature key={index} index={index} {...feature} />
                 })}
             </ul>
         </section>

@@ -2,6 +2,17 @@ import { useAnimation, motion, AnimationControls, MotionStyle } from 'framer-mot
 import React, { useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 
+export interface ISplitFlap {
+    stagger?: number
+    from?: number
+    to: number
+    randomize?: boolean
+    length?: number
+    perspective?: string
+    startDelay?: number
+    onAnimationEnd?: () => void
+}
+
 const wrapperClasses = `w-full flex items-center justify-center overflow-hidden bg-black before:absolute before:left-0 before:w-full before:h-full before:content-[''] before:from-white/0 after:content-[''] after:left-0 after:w-full after:bg-white/25 after:absolute`
 
 const contentClasses = `m-0 text-4xl font-bold text-yellow relative`
@@ -51,27 +62,28 @@ const Flaps = ({
     numbers,
     index,
     inView,
-    setAnimationComplete,
-    ...other
+    handleAnimationComplete,
+    stagger,
+    ready,
 }: {
     number: number
     numbers: number[]
     index: number
-    delay: number
+    stagger: number
     inView: boolean
-    setAnimationComplete: (complete: boolean) => void
-}) => {
+    ready: boolean
+    handleAnimationComplete: (complete: boolean) => void
+} & MotionStyle) => {
     const next = numbers[index + 1]
     const topControls = useAnimation()
     const bottomControls = useAnimation()
 
     const animate = async () => {
         await topControls.start((i) => {
-            const delay = i * other.delay
             return {
                 rotateX: '-90deg',
                 transition: {
-                    delay,
+                    delay: i * stagger,
                     bounce: false,
                 },
             }
@@ -85,56 +97,48 @@ const Flaps = ({
     }
 
     useEffect(() => {
-        inView && animate()
-    }, [inView])
+        ready && inView && animate()
+    }, [inView, ready])
 
-    return (
+    return next || next === 0 ? (
         <>
-            {next || next === 0 ? (
-                <>
-                    <Flap
-                        controls={topControls}
-                        index={index}
-                        style={{ transformOrigin: 'bottom', rotateX: '0deg', zIndex: numbers.length - index }}
-                        className={`${wrapperClasses} top-0 before:top-0 before:bg-gradient-to-b after:bottom-0 rounded-tl-sm rounded-tr-sm`}
-                    >
-                        <p className={`${contentClasses} translate-y-1/2`}>{number}</p>
-                    </Flap>
+            <Flap
+                controls={topControls}
+                index={index}
+                style={{ transformOrigin: 'bottom', rotateX: '0deg', zIndex: numbers.length - index }}
+                className="top-0 before:top-0 before:bg-gradient-to-b after:bottom-0 rounded-tl-sm rounded-tr-sm"
+            >
+                <p className={`${contentClasses} translate-y-1/2`}>{number}</p>
+            </Flap>
 
-                    <Flap
-                        onAnimationComplete={() => {
-                            if (index === numbers.length - 2) {
-                                setAnimationComplete(true)
-                            }
-                        }}
-                        style={{ transformOrigin: 'top', rotateX: '90deg', zIndex: numbers.length }}
-                        controls={bottomControls}
-                        index={index}
-                        className="bottom-0 before:bottom-0 before:bg-gradient-to-t after:top-0 rounded-br-sm rounded-bl-sm"
-                    >
-                        <p className={`${contentClasses} -translate-y-1/2`}>{next}</p>
-                    </Flap>
-                </>
-            ) : null}
+            <Flap
+                onAnimationComplete={() => {
+                    if (index === numbers.length - 2) {
+                        handleAnimationComplete(true)
+                    }
+                }}
+                style={{ transformOrigin: 'top', rotateX: '90deg', zIndex: numbers.length }}
+                controls={bottomControls}
+                index={index}
+                className="bottom-0 before:bottom-0 before:bg-gradient-to-t after:top-0 rounded-br-sm rounded-bl-sm"
+            >
+                <p className={`${contentClasses} -translate-y-1/2`}>{next}</p>
+            </Flap>
         </>
-    )
+    ) : null
 }
 
 export default function SplitFlap({
-    delay = 0.2,
+    stagger = 0.2,
     from = 1,
     to,
     randomize,
     length,
     perspective = '20rem',
-}: {
-    delay?: number
-    from?: number
-    to: number
-    randomize?: boolean
-    length?: number
-    perspective?: string
-}): JSX.Element {
+    startDelay,
+    onAnimationEnd,
+}: ISplitFlap): JSX.Element {
+    const [ready, setReady] = useState(!startDelay)
     const { ref, inView } = useInView({ triggerOnce: true })
     const [animationComplete, setAnimationComplete] = useState(false)
     const reverse = from > to
@@ -145,6 +149,20 @@ export default function SplitFlap({
         : (length && length > 0) || randomize
         ? randomRange(from, to, length)
         : range(from, to)
+
+    useEffect(() => {
+        if (startDelay && inView) {
+            const timer = setTimeout(() => {
+                setReady(true)
+            }, startDelay)
+            return () => clearTimeout(timer)
+        }
+    }, [inView])
+
+    const handleAnimationComplete = (complete: boolean) => {
+        setAnimationComplete(complete)
+        onAnimationEnd && onAnimationEnd()
+    }
 
     return (
         <div style={{ perspective }} ref={ref} className="relative w-20 h-20">
@@ -165,13 +183,14 @@ export default function SplitFlap({
                     {(reverse ? numbers.reverse() : numbers).map((number, index) => {
                         return (
                             <Flaps
-                                setAnimationComplete={setAnimationComplete}
+                                ready={ready}
+                                handleAnimationComplete={handleAnimationComplete}
                                 inView={inView}
                                 key={index}
                                 numbers={numbers}
                                 index={index}
                                 number={number}
-                                delay={delay}
+                                stagger={stagger}
                             />
                         )
                     })}
