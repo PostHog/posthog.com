@@ -46,7 +46,7 @@ const categories: IColumn[] = [
         className: '',
     },
     {
-        title: 'Data stack',
+        title: 'Products',
         section: products,
         className: '',
     },
