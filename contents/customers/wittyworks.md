@@ -18,7 +18,7 @@ toolsUsed:
 
 Initially, the team built their own tool for gathering product data, writing a JSON file into the file system for every event observed. Eventually, this proved unscalable. 
 
-“We crashed the production platform due to having too many files in the system,” said CTO and Co-founder Lukas Smith. “We considered switching to Google Analytics, but there were a lot of concerns around GDPR. That’s what led me to PostHog.”
+After searching for a new solution which could track data at scale, Witty Works found PostHog - and, at that point, the teams' hands-on approach and ability to create their own tools became very useful. 
 
 ## Creating apps to connect systems and protect user privacy
 Once Witty Works’ Engineering team had deployed PostHog internally, other teams began using the platform too. Marketing, for example, wanted to use PostHog to track onboarding funnels and understand when users updated [the Witty browser extension](https://chrome.google.com/webstore/detail/witty-your-inclusive-writ/meojhlodfiihbjkcnehkdcgncnhgagog?hl=en). As a result, Witty Works used [PostHog's app system](/docs/apps) to integrate with many tools in its stack. 
