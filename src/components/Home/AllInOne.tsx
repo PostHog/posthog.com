@@ -42,16 +42,9 @@ const features = [
 ]
 
 const Feature = ({ index, content, ...feature }: ISplitFlap & { index: number; content: JSX.Element }) => {
-    const [showContent, setShowContent] = useState(false)
     return (
         <li className="text-center flex flex-col items-center justify-center space-y-2">
-            <SplitFlap
-                onAnimationEnd={() => setShowContent(true)}
-                perspective="20rem"
-                startDelay={index * 500}
-                {...feature}
-            />
-
+            <SplitFlap perspective="20rem" startDelay={index * 500} {...feature} />
             <div>{content}</div>
         </li>
     )

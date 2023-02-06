@@ -1,27 +1,27 @@
 import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
 import ReactCountryFlag from 'react-country-flag'
-import ProductIcons from 'components/ProductIcons'
-import NotProductIcons from 'components/NotProductIcons'
+import { API, SelfHosting } from 'components/ProductIcons'
+import { Code, Privacy } from 'components/NotProductIcons'
 
 const features = [
     {
-        icon: NotProductIcons.privacy,
+        icon: <Privacy />,
         title: 'Privacy controls',
         description: 'Track users without cookies, anonymize users, configure a reverse proxy',
     },
     {
-        icon: ProductIcons.selfHosting,
+        icon: <SelfHosting />,
         title: 'Choose your hosting location',
         description: 'Store user data in the US or EU depending on your needs',
     },
     {
-        icon: ProductIcons.api,
+        icon: <API />,
         title: 'Full access to customer data',
         description: 'API offers total access to customer and event data',
     },
     {
-        icon: NotProductIcons.code,
+        icon: <Code />,
         title: 'Check out the source code',
         description: 'Audit the entire PostHog codebase on GitHub for compliance or just peace of mind',
     },

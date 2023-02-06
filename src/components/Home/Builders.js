@@ -1,12 +1,12 @@
 import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
-import ProductIcons from 'components/ProductIcons'
+import { API, AppLibrary, EventPipelines, SQL } from 'components/ProductIcons'
 import Link from 'components/Link'
 
 const features = [
     {
         feature: 'API',
-        icon: ProductIcons.api,
+        icon: <API />,
         description: 'Build custom apps, augment or transform data, automate actions based on customer activity',
         cta: {
             text: 'Explore the API',
@@ -15,7 +15,7 @@ const features = [
     },
     {
         feature: 'Event pipelines',
-        icon: ProductIcons.eventPipelines,
+        icon: <EventPipelines />,
         description: (
             <>
                 Connect all your data to PostHog. (And if it doesn’t exist yet,{' '}
@@ -32,7 +32,7 @@ const features = [
     },
     {
         feature: 'SQL-like syntax',
-        icon: ProductIcons.sql,
+        icon: <SQL />,
         description: 'Query your data directly if your complex data question can’t be answered in the PostHog UI',
         cta: {
             text: 'Request beta access',
@@ -41,7 +41,7 @@ const features = [
     },
     {
         feature: 'App platform',
-        icon: ProductIcons.appLibrary,
+        icon: <AppLibrary />,
         description:
             'Extend functionality with custom apps for your business or build an app for the PostHog community',
         cta: {

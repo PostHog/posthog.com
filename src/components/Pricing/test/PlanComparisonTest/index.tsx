@@ -6,8 +6,8 @@ import usePostHog from '../../../../hooks/usePostHog'
 import React, { useEffect, useState } from 'react'
 import { BillingProductV2Type, BillingV2FeatureType, BillingV2PlanType } from 'types'
 import CheckIcon from '../../../../images/check.svg'
-import { ProductIcons } from '../../../ProductIcons/ProductIcons'
-import { NotProductIcons } from '../../../NotProductIcons/NotProductIcons'
+import { Analytics, AppLibrary, Experiments, FeatureFlags, SessionRecording } from 'components/ProductIcons'
+import { Platform, Support } from 'components/NotProductIcons'
 import MinusIcon from '../../../../images/x.svg'
 import './styles/index.scss'
 import Modal from 'components/Modal'
@@ -202,13 +202,13 @@ const ProductTiers = ({ product, planKey }: { product?: BillingProductV2Type; pl
 }
 
 const icons = {
-    product_analytics: ProductIcons.analytics,
-    session_recording: ProductIcons.sessionRecording,
-    feature_flags: ProductIcons.featureFlags,
-    experiments: ProductIcons.experiments,
-    integrations: ProductIcons.appLibrary,
-    platform: NotProductIcons.platform,
-    support: NotProductIcons.support,
+    product_analytics: <Analytics />,
+    session_recording: <SessionRecording />,
+    feature_flags: <FeatureFlags />,
+    experiments: <Experiments />,
+    integrations: <AppLibrary />,
+    platform: <Platform />,
+    support: <Support />,
 }
 
 export const getProductLimit = (product?: BillingProductV2Type): JSX.Element => {
