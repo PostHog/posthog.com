@@ -6,7 +6,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: ["tim-glaser"]
-featuredImage: ../images/blog/posthog-ceo-diary-blog.png
+featuredImage: ../images/blog/k8s-sunset/posthog-bye-kubernetes.png
 featuredImageType: full
 category: PostHog news
 tags:
