@@ -25,7 +25,7 @@ In this blog post I'll explain:
 
 ## Why are we doing this?
 
-PostHog has grown incredibly fast over the last three years. Last year, [we grew revenue 6x](https://posthog.com/blog/2022-review), we're default alive and will likely be profitable in 2023.
+PostHog has grown incredibly fast over the last three years. 23,000 companies have signed up to PostHog. Last year, [we grew revenue 6x](https://posthog.com/blog/2022-review), we're default alive and will likely be profitable in 2023.
 
 One thing that hasn't grown much is the number of users using Kubernetes. We started offering our Kubernetes deployment, alongside a paid supported version, about 2 years ago. Over the last 6 months, we've realized that self-hosting a Kubernetes deployment does not serve either free users or our paid customers.
 
