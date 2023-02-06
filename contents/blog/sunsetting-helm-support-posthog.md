@@ -41,5 +41,5 @@ You can also continue using PostHog as you are now. We'll still provide security
 
 If you have smaller volumes, you can migrate to our [Docker deployment option](https://posthog.com/docs/self-host/open-source/deployment). It's much simpler to set up and manage.
 
-There will no longer be numbered releases of PostHog. Instead, we'll build a Docker image for each commit that happens in our GitHub repo. Just like on PostHog Cloud, folks using our Docker deployment can benefit immediately from new features and bugfixes. They'll also be able to pin a version or roll back where necessary.
+Finally, there will no longer be numbered releases of PostHog. Instead, we'll build a Docker image for each commit that happens in our GitHub repo. This means folks using our Docker deployment will benefit immediately from new features and bugfixes, just like those on PostHog Cloud. You'll also be able to pin a version or roll back where necessary.
 
