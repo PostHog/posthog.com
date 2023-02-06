@@ -4,12 +4,15 @@ sidebar: Docs
 showTitle: true
 ---
 
+import Sunset from "../self-host/\_snippets/sunset-disclaimer.mdx"
+
+<Sunset />
 
 ### 30.0.0
 
-Self-hosted users must run async migrations 0005-0007 before updating to PostHog version 1.42.0. 
+Self-hosted users must run async migrations 0005-0007 before updating to PostHog version 1.42.0.
 
-If you haven't run async migrations 0005-0007 yet, or if they aren't available on your current version,  we recommend upgrading to PostHog version 1.41.4 first, _then_ running the async migrations, then upgrading to 1.42.0.
+If you haven't run async migrations 0005-0007 yet, or if they aren't available on your current version, we recommend upgrading to PostHog version 1.41.4 first, _then_ running the async migrations, then upgrading to 1.42.0.
 
 Note: for async migration 0007 disable the post checks in the advanced options when kicking off the async migration (otherwise you might see them fail and need to re-run the migration with them disabled).
 
@@ -17,7 +20,7 @@ If you are not upgrading forward and staying on PostHog version 1.42 (not recomm
 
 ### 29.0.0
 
-This version upgrades PostHog version to 1.41.1, which comes with some breaking changes. The upgrade guide is [here](https://posthog.com/blog/the-posthog-array-1-41-0#1410-update-guide-for-selfhosted-users).
+This version upgrades PostHog version to 1.41, which comes with some breaking changes. The upgrade guide is [here](https://posthog.com/blog/the-posthog-array-1-41-0#1410-update-guide-for-selfhosted-users).
 
 ### 28.0.0
 
@@ -33,7 +36,7 @@ on the Loki Chart repo.
 
 #### 27.1.0
 
-If you're upgrading the chart directly to 29.0.0 (recommended) ignore this (and run the 0005 migration on top of 1.41.0 if not ran already).
+If you're upgrading the chart directly to 29.0.0 (recommended) ignore this (and run the 0005 migration on top of 1.41 if not ran already).
 This version upgrades PostHog version to 1.40, which requires async migration 0006 to be completed (if you're on version <1.38 then upgrade to 1.39.1 and run 0005 and 0006 async migrations before upgrading to 1.40).
 
 ### 26.0.0

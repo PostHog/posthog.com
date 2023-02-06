@@ -5,6 +5,7 @@ import CookieBanner from 'components/CookieBanner'
 import usePostHog from '../../hooks/usePostHog'
 import { SearchProvider } from 'components/Search/SearchContext'
 import { UserProvider } from '../../hooks/useUser'
+import Banner from '../Banner/index'
 
 import './Fonts.scss'
 import './Layout.scss'
