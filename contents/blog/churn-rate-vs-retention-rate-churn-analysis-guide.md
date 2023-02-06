@@ -24,7 +24,7 @@ In this guide to churn analysis, I'm exploring churn rate and retention rate:
 - How do you measure them? 
 - Which one would win a fight?<sup>*</sup>
 
-These and other useful questions (like [how to reduce churn](#how-to-improve-customer-retention-and-reduce-churn)) will be answered. Let's get to it.
+These and other useful questions (like [how to reduce churn](#how-to-improve-retention-and-reduce-churn) will be answered. Let's get to it.
 
 <sup>(*strictly speaking, they'd cancel each other out... read the next section to understand why)</sup>
 
@@ -40,7 +40,7 @@ Simple, right? Yes, but these definitions ignore three important points:
 1. Just knowing what they are won't help you improve them
 1. While both are important, in my view **retention rate** is more useful (most of the time)
 
-I'll explore these points further as we go.
+I'll explore these points further as we go. See [Takeaways on churn analysis](#takeaways-on-churn-analysis) for a TL;DR
 
 ## Understanding churn rate
 
@@ -56,7 +56,7 @@ You can also calculate various forms of revenue churn rate, but most people unde
 
 The majority of companies should track churn monthly and/or annually. Those interested in tracking churn daily or weekly are better off using a [cohort retention table](#how-to-read-and-use-a-cohort-retention-table). More on those later.
 
-> 🚨 **Important:** Do not confuse monthly and annual churn rates. Monthly churn compounds into annual churn – i.e. a monthly churn rate of 5% equals a massive 46% annual churn rate. You can't just multiply your monthly churn rate by 12 to get your annual number, either. See [how to convert monthly churn to annual](#how-to-calculate-annual-churn-using-your-monthly-churn-rate) in the appendix.
+> 🚨 **Important:** Do not confuse monthly and annual churn rates. Monthly churn compounds into annual churn – i.e. a monthly churn rate of 5% equals a massive 46% annual churn rate. You can't just multiply your monthly churn rate by 12 to get your annual number, either. See [how to convert monthly churn to annual](#how-to-convert-monthly-churn-into-annual-rate) in the appendix.
 
 ### What is a good churn rate?
 
@@ -244,7 +244,7 @@ Check out [our product page](/product) if this sounds interesting to you.
 
 /pitch over
 
-## Takeaways on churn and retention rate
+## Takeaways on churn analysis
 
 Phew, ok, that was lot. Hopefully you know a little more about how churn and retention rate work, interact, and impact your product now.
 
@@ -268,18 +268,22 @@ To conclude, here are five takeaways you can use to sound smart in meetings, or 
 
 - Another piece from James on [how we made something people want](/blog/making-something-people-want)
 
-You can also signup to our newsletter over there 👉. We send it every two weeks and it's full of articles like this.
+You can also sign up to our newsletter over there 👉. We send it every two weeks and it's full of articles like this.
 
 > ## Appendix
 >
-> ### How to calculate annual churn using your monthly churn rate
+> ### How to convert annual churn into monthly churn rate 
 >
-> Use this formula to convert monthly churn to annual churn: 1-(1-`[your monthly churn]`)^12
+> Use this formula to convert monthly churn to annual churn: 
+>
+> - 1-(1-[your monthly churn])^12
 >
 > Using this formula, a monthly churn rate of 1% equals an annual churn of 11.6%. So, if you started the year with 1,000 customers and had 1% churn per month, you'd have 114 churned customers you need to replace through acquisition.
 >
-> ### How to calculate monthly churn from your annual churn rate
+> ### How to convert monthly churn into annual rate
 >
-> Use this formula to convert annual churn to average monthly churn: 1-(1-`[your annual churn]`)^(1/12)
+> Use this formula to convert annual churn to average monthly churn:
+> 
+> - 1-(1-`[your annual churn]`)^(1/12)
 >
 > Using this formula, an annual churn rate of 11.6% equals an average monthly churn of 1%.
