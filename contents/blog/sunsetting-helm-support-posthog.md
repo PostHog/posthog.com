@@ -39,7 +39,6 @@ Despite our continued efforts to help customers and improve the experience, our 
 
 By not supporting Kubernetes, we will free up a lot of time to focus on our main infrastructure priorities, which are PostHog Cloud and the open source Docker Compose deployment. Ultimately, this will lead to a better experience for the vast majority of our users.
 
-
 ### What's next?
 
 Regular updates to our Helm chart will cease **after May 31, 2023**. Security updates on the last available version will continue for **at least the next 12 months**.
