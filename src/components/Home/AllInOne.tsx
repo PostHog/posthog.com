@@ -33,7 +33,7 @@ const features = [
     },
     {
         to: 0,
-        from: 500,
+        from: 10,
         stagger: 0.08,
         randomize: true,
         length: 10,
@@ -52,12 +52,7 @@ const Feature = ({ index, content, ...feature }: ISplitFlap & { index: number; c
                 {...feature}
             />
 
-            <motion.div
-                initial={{ translateY: '100%', opacity: 0 }}
-                animate={showContent ? { translateY: 0, opacity: 1 } : {}}
-            >
-                {content}
-            </motion.div>
+            <div>{content}</div>
         </li>
     )
 }

@@ -17,13 +17,13 @@ const features = [
     },
     {
         icon: ProductIcons.api,
-        title: 'Total access to customer data',
-        description: 'API provides full access to customer and event data',
+        title: 'Full access to customer data',
+        description: 'API offers total access to customer and event data',
     },
     {
         icon: NotProductIcons.code,
-        title: 'Codebase transparency',
-        description: 'Audit the entire PostHog codebase for security or compliance on GitHub',
+        title: 'Check out the source code',
+        description: 'Audit the entire PostHog codebase on GitHub for compliance or just peace of mind',
     },
 ]
 

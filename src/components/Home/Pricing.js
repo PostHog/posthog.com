@@ -7,12 +7,12 @@ import { useInView } from 'react-intersection-observer'
 const draw = {
     hidden: { pathLength: 0, opacity: 0 },
     visible: (i) => {
-        const delay = 1 + i * 0.5
+        const delay = 1 + i * 0.75
         return {
             pathLength: 1,
             opacity: 1,
             transition: {
-                pathLength: { delay, type: 'spring', duration: 1.5, bounce: 0 },
+                pathLength: { delay, type: 'spring', duration: 2, bounce: 0 },
                 opacity: { delay, duration: 0.01 },
             },
         }
@@ -47,7 +47,7 @@ export default function Pricing() {
             <div className="flex lg:flex-row flex-col items-center">
                 <div className="lg:max-w-[700px] lg:flex-shrink-0">
                     <h2 ref={ref} className="text-[9vw] md:text-7xl m-0 relative  inline-block">
-                        “Let’s jump on a call”
+                        "Let's jump on a call"
                         {inView && (
                             <div className="absolute w-full h-full flex items-center justify-center inset-0">
                                 <Squiggle />
@@ -63,7 +63,7 @@ export default function Pricing() {
                         needs.
                     </p>
                 </div>
-                <div className="lg:ml-2 lg:mt-0 mt-8">
+                <div className="lg:ml-2 lg:mt-0 mt-8 -mr-5 max-w-lg lg:max-w-none">
                     <StaticImage src="./images/busy-hog.png" />
                 </div>
             </div>
