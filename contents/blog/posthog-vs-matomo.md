@@ -19,7 +19,7 @@ PostHog and Matomo are both [open-source analytics platforms](/blog/best-open-so
 
 Matomo is primarily pitched as a Google Analytics alternative for marketing analytics, and offers useful tools for migrating GA data into Matomo for a seamless transition. Its focus on session tracking makes it ideal for running analytics on large content and e-commerce websites
 
-In contrast, PostHog is a product analytics platform designed to show you what your users do in your product. PostHog is event-based, so it tracks not just what pages users are visiting and how they got there, but also helps you detect, understand and fix user experience problems. 
+In contrast, PostHog is a comprhensive Product OS that includes product analytics, session recording, feature flags, experimentation, and much more.
 
 **Contents:**
 
@@ -32,7 +32,7 @@ In contrast, PostHog is a product analytics platform designed to show you what y
 
 ## How is PostHog different from Matomo?
 
-### 1. It's an all-in-one product analytics platform
+### 1. It's an all-in-one platform
 Matomo charges extra for product analytics features like funnel analysis, cohorts, path analysis, and session recording, and they're not tightly integrated. In PostHog, these are core features in all editions, including the open source release, while [Experimentation](/product/experimentation-suite) is [free up to 1 million events per month](/pricing).
 
 ### 2. Seamless integration with modern data stacks
@@ -43,13 +43,13 @@ PostHog is about giving engineering and product teams the tools they need to bui
 
 ## Feature comparison
 
-This table compares three self-hosted plans: Matomo On-Premise, PostHog Open Source, and PostHog Self-Host – our paid self-hosted plan. 
+This table compares three self-hosted plans: Matomo On-Premise, PostHog Open Source, and PostHog Cloud.
 
 Matomo On-Premise ships with a robust set of core web analytics features, while advanced product analytics features are available at various prices from the Matomo On-Premise Marketplace.
 
 All features in PostHog Open Source are totally free, including core product analytics tools. 
 
-PostHog Self-Hosted is a paid edition that adds [Experimentation](/product/experimentation-suite), [Group Analytics](/docs/user-guides/group-analytics), support for multiple projects, and numerous team management tools. It's priced on a per event basis and is free up to 1 million events per month.
+PostHog Cloud adds [experimentation](/product/experimentation-suite), [group analytics](/docs/user-guides/group-analytics), and support for multiple projects. It's free to use up to 1 million events per month.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -58,7 +58,7 @@ PostHog Self-Hosted is a paid edition that adds [Experimentation](/product/exper
           <td className="w-3/12"></td>
         	<td className="w-3/12 text-center"><strong>Matomo On-Premise</strong></td>
         	<td className="w-3/12 text-center"><strong>PostHog Open Source</strong></td>
-        	<td className="w-3/12 text-center"><strong>PostHog Self-Hosted</strong></td>
+        	<td className="w-3/12 text-center"><strong>PostHog Cloud</strong></td>
     	</tr>
 	</thead>
 	<tbody>
@@ -376,9 +376,9 @@ In addition to extensive selection of dedicated integrations, PostHog [offers tw
 
 ![PostHog screenshot](../images/blog/gdpr-compliant-analytics/posthog-gdpr-compliant.png)
 
-### Combining Feature Flags and product analytics
+### Combining feature flags and product analytics
 
-Feature Flags are at the core what makes PostHog a great tool for product-lead businesses. They're especially useful for gradually rolling out new features, and quickly rolling back if you detect problems, but they can be used in other creative ways. 
+Feature flags are at the core what makes PostHog a great tool for product-lead businesses. They're especially useful for gradually rolling out new features, and quickly rolling back if you detect problems, but they can be used in other creative ways. 
 
 Need feedback on a design change? Roll it out to internal users first to gather feedback. Need to optimize messaging for different regions or demographics? Use a feature flag targeted on user properties. Want to change something without the CEO noticing? Create a flag just for them. Ok, we don't actually recommend the latter, but you get the idea.
 
@@ -388,21 +388,13 @@ Feature flags also integrate with other analytics insights, so you can breakdown
 
 PostHog and Matomo both support event tracking, but PostHog goes one step further by autocapturing events so you don't have to instrument every single thing before you start tracking it. This means you start capturing useful data from the moment you deploy PostHog, but it also makes rolling out updates much easier as you don't have to define your events each time. 
 
-### Privacy compliance
-
-Self-hosting PostHog means data never leaves your infrastructure, which makes protecting user privacy a breeze. GDPR and HIPAA compliance are vastly simplified this way, and you can go one step further by [running PostHog without any cookies](/docs/integrate/client/js#persistence) and therefore without the need for cookie banners.
-
 ## Strengths of Matomo
 
 ![Matomo - open source analytics tools](../images/blog/open-source-analytics-tools/matomo-screenshot.png)
 
 ### E-commerce and marketing analytics
 
-Matomo is especially well-suited to content and e-commerce websites. Unlike Google Analytics, it doesn't employ any data sampling, and it offers a wide-range of features specifically designed to aid marketing teams. For example, Matomo's Multi Channel Conversion Attribution reports (a paid feature) allow marketing teams to understand how all their activities impacted a conversion, not just the last interaction. 
-
-### Privacy compliance and optional cookie-less tracking
-
-Like PostHog, Matomo is a good option for anyone seeking a privacy-respecting analytics platform. While by default it uses cookies, it also offers the option for cookie-less tracking, and features a built-in GDPR Manager utility to help simplify and monitor your compliance. The European Union uses a forked version of Matomo on all its websites.
+Matomo is especially well-suited to content and e-commerce websites. Unlike Google Analytics, it doesn't employ any data sampling, and it offers a wide-range of features specifically designed to aid marketing teams. For example, Matomo's Multi Channel Conversion Attribution reports (a paid feature) allow marketing teams to understand how all their activities impacted a conversion, not just the last interaction.
 
 ### Integration with popular content management systems
 
@@ -417,13 +409,9 @@ We ship weirdly fast. Here's a quick snapshot of what we're working on right now
 - See Users & Recordings linked to feature flags ([GitHub issue](https://github.com/PostHog/posthog/issues/12360))
 - Direct access to data via SQL ([GitHub issue](https://github.com/PostHog/posthog/issues/12352))
 - Universal search for people, recordings, cohorts, events, and groups ([GitHub issue](https://github.com/PostHog/posthog/issues/7963))
-
-And what we're considering working on next:
-
 - Feature flags platform for Android, iOS and Flutter
 - Mobile session recordings
 - Interlinking recordings and analytics
-- Session recording playlists
 
 You can view and vote on issues on [our public roadmap](/roadmap).
 
