@@ -287,38 +287,4 @@ Use this formula to convert annual churn to average monthly churn:
 
 > 1-(1-`[your annual churn]`)^(1/12)
 
-Using this formula, an annual churn rate of 11.6% equals an average monthly churn of 1%. 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Using this formula, an annual churn rate of 11.6% equals an average monthly churn of 1%.
