@@ -106,6 +106,19 @@ Sometimes requests are paginated. If that's the case, it'll be in the following 
 
 You can then just call the `"next"` URL to get the next set of results.
 
+## Rate Limiting
+
+All requests to PostHog, except for evaluating feature flags and sending events (i.e. the [POST-only public endpoints](/docs/api/post-only-endpoints)), are rate limited.
+
+There's separate limits for different kinds of resources.
+
+For all CRUD endpoints, the rate limits are `480/minute` and `4800/hour`. 
+
+For all analytics endpoints (like calculating insights, retrieving persons, retrieving session recordings), the rate limits are `240/minute` and `1200/hour`.
+
+Note that these limits apply to the entire team, so if you have a script requesting persons that hits the rate limit, using the PostHog UI to get persons would get rate limited as well.
+
+ 
 ## Contributing to API docs
 
 API docs are generated using [drf-spectacular](https://drf-spectacular.readthedocs.io/en/latest/readme.html). It looks at the Django models and djangorestframework serializers.
