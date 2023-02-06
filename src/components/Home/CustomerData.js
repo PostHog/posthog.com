@@ -35,11 +35,11 @@ export default function CustomerData() {
                     <span className="text-red">Full control</span> of your customer data
                 </h2>
                 <div className="flex justify-center">
-                    <ul className="m-0 p-0 list-none inline-grid sm:grid-cols-2 justify-evenly">
+                    <ul className="m-0 p-0 list-none inline-grid sm:grid-cols-2 justify-evenly relative after:border-t after:border-dashed after:border-gray-accent-light after:absolute after:w-full after:left-0 after:top-1/2 after:-translateY-1/2 before:absolute before:h-full before:top-0 before:left-1/2 after:-translateX-1/2 before:border-l before:border-dashed before:border-gray-accent-light sm:after:block after:hidden sm:before:block before:hidden">
                         {features.map(({ icon, title, description }) => {
                             return (
                                 <li
-                                    className="relative md:max-w-md py-4 md:py-8 pl-16 pr-2 md:pl-20 md:pr-6 border-t first:border-t-0 md:border-t-0 md:first:border-b md:last:border-t md:even:border-l border-dashed border-gray-accent-light"
+                                    className="relative md:max-w-md py-4 md:py-8 pl-16 pr-2 md:pl-20 md:pr-6 sm:border-b-0 border-b border-dashed border-gray-accent-light last:border-b-0"
                                     key={title}
                                 >
                                     <span className="absolute left-4 md:left-8 top-4.5 md:top-6.5 inline-block w-8 h-8 text-gray">
