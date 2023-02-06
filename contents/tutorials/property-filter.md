@@ -74,7 +74,7 @@ For example to ensure `$geoip_cityname` is _never_ stored on either events or pe
 
 * $geoip_city_name (the event property)
 * $set.$geoip_city_name (the person proprty)
-* $setonce.$initial_geoip_city_name (the initial and never updated person property)
+* $set_once.$initial_geoip_city_name (the initial and never updated person property)
 
 ## A working example
 
