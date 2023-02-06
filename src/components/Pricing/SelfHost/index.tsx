@@ -1,10 +1,7 @@
 import { CallToAction } from 'components/CallToAction'
 import { GitHub, Info } from 'components/Icons'
-import NotProductIcons from 'components/NotProductIcons'
 import Tooltip from 'components/Tooltip'
 import React from 'react'
-
-const EnterpriseIcon = () => NotProductIcons.enterprise
 
 const descriptionClassName = `list-none m-0 p-0 grid gap-y-1`
 const descriptionItemClassName = `text-sm opacity-80`
