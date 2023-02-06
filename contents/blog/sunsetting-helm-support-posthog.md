@@ -1,5 +1,5 @@
 ---
-date: 2023-01-05
+date: 2023-02-08
 title: "Sunsetting Kubernetes support for PostHog"
 rootPage: /blog
 sidebar: Blog
