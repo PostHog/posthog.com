@@ -1,6 +1,6 @@
 ---
 date: 2023-02-06
-title: "Retention vs Churn Rate: A complete guide to retention/churn analysis/analytics – Title TBD"
+title: "Retention vs Churn Rate: A complete guide to churn analysis"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
