@@ -51,7 +51,7 @@ const support: IFeature[] = [
 
 const enterpisePackage: IFeature[] = [
     { title: 'Dedicated support (email, Slack)' },
-    { title: 'SSO SAML' },
+    { title: 'SAML SSO' },
     { title: 'Advanced permissions' },
     { title: 'Team training' },
     { title: 'Dashboard configuration' },
