@@ -4,7 +4,7 @@ import Link from 'components/Link'
 import Logo from 'components/Logo'
 import React from 'react'
 import { IProps, LinkListItem } from './LinkList'
-import ProductIcons from 'components/ProductIcons'
+import { PosthogMonochrome } from 'components/ProductIcons'
 import { GitHub, LinkedIn, YouTube, SlackMonochrome, Twitter } from 'components/Icons/Icons'
 
 const linklist: IProps[] = [
@@ -322,7 +322,9 @@ export function Footer(): JSX.Element {
                         to="/"
                         className="left-[calc(50%-40px)] w-20 h-12 inline-flex justify-center items-center absolute z-10 rounded dark:!bg-primary !bg-tan hover:!bg-gray-accent-light/90 px-4 active:!bg-gray-accent-light/100 dark:!hover:gray-accent-dark border border-dashed border-gray-accent-light dark:border-gray-accent-dark hover:scale-[1.02] active:top-[1px] active:scale-[.99] transition-all"
                     >
-                        <span className="inline-block">{ProductIcons.posthogMonochrome}</span>
+                        <span className="inline-block">
+                            <PosthogMonochrome />
+                        </span>
                     </Link>
                 </div>
             </div>

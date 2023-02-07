@@ -1,12 +1,20 @@
 import Link from 'components/Link'
 import React from 'react'
 import { Wrapper } from '../Wrapper'
-import { ProductIcons } from '../../../ProductIcons/ProductIcons'
-import { NotProductIcons } from '../../../NotProductIcons/NotProductIcons'
+import {
+    AbTesting,
+    Analytics,
+    API,
+    AppLibrary,
+    FeatureFlags,
+    Projects,
+    SessionRecording,
+} from 'components/ProductIcons'
+import { HowPostHogWorks, JSSnippet, Privacy, Quickstart, SDK, Tutorials, Webhooks } from 'components/NotProductIcons'
 
 interface IFeature {
     title: string
-    icon?: React.ReactNode
+    icon: React.ReactNode
     url: string
 }
 
@@ -17,26 +25,26 @@ interface IColumn {
 }
 
 const gettingStarted: IFeature[] = [
-    { title: 'Quickstart', icon: NotProductIcons.quickstart, url: '/docs/getting-started/cloud' },
-    { title: 'JS snippet', icon: NotProductIcons.jsSnippet, url: '/docs/integrate' },
-    { title: 'SDKs', icon: NotProductIcons.sdks, url: '/docs/integrate?tab=sdks' },
+    { title: 'Quickstart', icon: <Quickstart />, url: '/docs/getting-started/cloud' },
+    { title: 'JS snippet', icon: <JSSnippet />, url: '/docs/integrate' },
+    { title: 'SDKs', icon: <SDK />, url: '/docs/integrate?tab=sdks' },
 ]
 
 const products: IFeature[] = [
-    { title: 'Product analytics', icon: ProductIcons.analytics, url: '/using-posthog#product-analytics' },
-    { title: 'Session recording', icon: ProductIcons.sessionRecording, url: '/manual/recordings' },
-    { title: 'Feature flags', icon: ProductIcons.featureFlags, url: '/manual/feature-flags' },
-    { title: 'A/B testing', icon: ProductIcons.abTesting, url: '/manual/experimentation' },
-    { title: 'Platform & data', icon: ProductIcons.projects, url: '/using-posthog#data' },
+    { title: 'Product analytics', icon: <Analytics />, url: '/using-posthog#product-analytics' },
+    { title: 'Session recording', icon: <SessionRecording />, url: '/manual/recordings' },
+    { title: 'Feature flags', icon: <FeatureFlags />, url: '/manual/feature-flags' },
+    { title: 'A/B testing', icon: <AbTesting />, url: '/manual/experimentation' },
+    { title: 'Platform & data', icon: <Projects />, url: '/using-posthog#data' },
 ]
 
 const resources: IFeature[] = [
-    { title: 'Tutorials', icon: NotProductIcons.tutorials, url: '/tutorials' },
-    { title: 'Apps', icon: ProductIcons.appLibrary, url: '/apps' },
-    { title: 'Webhooks', icon: NotProductIcons.webhooks, url: '/docs/integrate/webhooks/message-formatting' },
-    { title: 'API', icon: ProductIcons.api, url: '/docs/api' },
-    { title: 'How PostHog works', icon: NotProductIcons.howPostHogWorks, url: '/docs/how-posthog-works' },
-    { title: 'Privacy', icon: NotProductIcons.privacy, url: '/docs/privacy' },
+    { title: 'Tutorials', icon: <Tutorials />, url: '/tutorials' },
+    { title: 'Apps', icon: <AppLibrary />, url: '/apps' },
+    { title: 'Webhooks', icon: <Webhooks />, url: '/docs/integrate/webhooks/message-formatting' },
+    { title: 'API', icon: <API />, url: '/docs/api' },
+    { title: 'How PostHog works', icon: <HowPostHogWorks />, url: '/docs/how-posthog-works' },
+    { title: 'Privacy', icon: <Privacy />, url: '/docs/privacy' },
 ]
 
 const categories: IColumn[] = [
@@ -46,7 +54,7 @@ const categories: IColumn[] = [
         className: '',
     },
     {
-        title: 'Data stack',
+        title: 'Products',
         section: products,
         className: '',
     },
@@ -71,7 +79,7 @@ const Section = ({ title, section, className = '' }: IColumn) => {
                                 to={url}
                                 className="h-full font-semibold text-[14px] flex flex-col gap-2 items-center leading-tight hover:bg-gray-accent-light/50 dark:hover:bg-gray-accent-light/25 rounded p-2 text-center relative hover:scale-[1.02] active:scale-[1] active:top-[1px]"
                             >
-                                <span className="w-6 h-6 flex justify-center items-center flex-shrink-0">{icon}</span>
+                                <div className="w-6 h-6 flex justify-center items-center">{icon}</div>
                                 <span>{title}</span>
                             </Link>
                         </li>

@@ -1,5 +1,5 @@
 import React from 'react'
-import NotProductIcons from 'components/NotProductIcons'
+import { Investors } from 'components/NotProductIcons'
 
 interface InvestorProps {
     SvgLogo?: string
@@ -92,7 +92,9 @@ export const AboutInvestors = () => {
 
                 <div className="py-4 px-4 flex flex-col justify-center border-t border-l border-dashed border-gray-accent-light">
                     <figure className="mb-2 mx-auto p-[2px] rounded-full bg-gray-accent-light border border-solid border-gray w-[50px] h-[50px] flex justify-center items-center">
-                        <span className="inline-block w-8 h-8">{NotProductIcons.investors}</span>
+                        <span className="inline-block w-8 h-8">
+                            <Investors />
+                        </span>
                     </figure>
                     <h5 className="mb-0 text-center">+ many more</h5>
                     <p className="text-sm opacity-60 mb-0 text-center font-medium">

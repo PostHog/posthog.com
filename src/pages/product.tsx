@@ -8,8 +8,24 @@ import DataWarehouse from 'components/Product/DataWarehouse'
 import EventPipelines from 'components/Product/EventPipelines'
 import { IProps, FeatureWrapperCol } from 'components/Product/FeatureWrapper'
 import Hero from 'components/Product/Hero'
-import OpenSource from 'components/Product/OpenSource'
-import { ProductIcons } from 'components/ProductIcons/ProductIcons'
+import SelfHosting from 'components/Product/SelfHosting'
+import {
+    AppLibrary,
+    CorrelationAnalysis,
+    Dashboards,
+    Experiments,
+    FeatureFlags,
+    Funnels,
+    PathAnalysis,
+    PosthogMonochrome,
+    SessionRecording,
+    TopFeatures,
+    Trends,
+    DataWarehouse as DataWarehouseIcon,
+    API as APIIcon,
+    EventPipelines as EventPipelinesIcon,
+    SelfHosting as SelfHostingIcon,
+} from 'components/ProductIcons'
 import { StaticImage } from 'gatsby-plugin-image'
 import React, { useRef, useState } from 'react'
 import Scrollspy from 'react-scrollspy'
@@ -26,22 +42,22 @@ const features: IProps[] = [
         features: [
             {
                 title: 'Funnels',
-                icon: ProductIcons?.funnels,
+                icon: <Funnels />,
                 url: '/product/funnels',
             },
             {
                 title: 'Graphs & trends',
-                icon: ProductIcons?.trends,
+                icon: <Trends />,
                 url: '/product/trends',
             },
             {
                 title: 'Path analysis',
-                icon: ProductIcons?.pathAnalysis,
+                icon: <PathAnalysis />,
                 url: '/product/user-paths',
             },
             {
                 title: 'Dashboards',
-                icon: ProductIcons?.dashboards,
+                icon: <Dashboards />,
                 url: '/product/collaboration',
             },
         ],
@@ -49,7 +65,7 @@ const features: IProps[] = [
     {
         title: 'Session recording',
         cta: { title: 'Learn more', url: '/product/session-recording' },
-        icon: ProductIcons.sessionRecording,
+        icon: <SessionRecording />,
         subtitle: 'with console logs',
         image: <StaticImage src="../components/Product/images/session-recording.png" alt="Session recording" />,
         disclaimer: 'Alternative to Hotjar, Logrocket, Matomo',
@@ -61,12 +77,12 @@ const features: IProps[] = [
         features: [
             {
                 title: 'Experimentation Suite',
-                icon: ProductIcons.experiments,
+                icon: <Experiments />,
                 url: '/product/experimentation-suite',
             },
             {
                 title: 'Correlation analysis',
-                icon: ProductIcons.correlationAnalysis,
+                icon: <CorrelationAnalysis />,
                 url: '/product/correlation-analysis',
             },
         ],
@@ -74,7 +90,7 @@ const features: IProps[] = [
     {
         title: 'Feature flags',
         cta: { title: 'Learn more', url: '/product/feature-flags' },
-        icon: ProductIcons.featureFlags,
+        icon: <FeatureFlags />,
         subtitle: 'with multivariate testing',
         image: <StaticImage src="../components/Product/images/feature-flags.png" alt="Feature flags" />,
         disclaimer: 'Alternative to LaunchDarkly',
@@ -85,15 +101,15 @@ const menu = [
     {
         name: 'Overview',
         url: 'overview',
-        icon: ProductIcons.posthogMonochrome,
+        icon: <PosthogMonochrome />,
     },
-    { name: 'Top features', url: 'top-features', icon: ProductIcons.topFeatures },
-    { name: 'Apps', url: 'apps', icon: ProductIcons.appLibrary },
-    { name: 'Event pipelines', url: 'event-pipelines', icon: ProductIcons.eventPipelines },
-    { name: 'Data warehouse', url: 'data-warehouse', icon: ProductIcons.dataWarehouse },
-    { name: 'Open source', url: 'open-source', icon: ProductIcons.openSource },
-    { name: 'API', url: 'api', icon: ProductIcons.api },
-    { name: "What's next?", url: 'roadmap', icon: ProductIcons.experiments },
+    { name: 'Top features', url: 'top-features', icon: <TopFeatures /> },
+    { name: 'Apps', url: 'apps', icon: <AppLibrary /> },
+    { name: 'Event pipelines', url: 'event-pipelines', icon: <EventPipelinesIcon /> },
+    { name: 'Data warehouse', url: 'data-warehouse', icon: <DataWarehouseIcon /> },
+    { name: 'Open source', url: 'self-hosting', icon: <SelfHostingIcon /> },
+    { name: 'API', url: 'api', icon: <APIIcon /> },
+    { name: "What's next?", url: 'roadmap', icon: <Experiments /> },
 ]
 
 const Menu = () => {
