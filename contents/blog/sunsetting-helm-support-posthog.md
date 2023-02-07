@@ -33,13 +33,13 @@ When we launched our Kubernetes deploy, we were hoping we could get to a stage w
 
 Hosting PostHog at scale is complex. With our Kubernetes users, we've seen issues crop up in every part of the stack. In event ingestion, Kafka, ClickHouse, Postgres, Redis and within the application itself. Sometimes the fix is simple ("increase disk space"), but often the issue is something a couple of layers deep and very hard to debug, involving long calls with expensive engineers on both sides. Even something as simple as a full disk would cause their instance of PostHog to be down for hours or days.
 
-We also learned that the tools to do that automation just doesn't exist. We kept finding new failure modes. When onboarding a new customer we would have to vet their engineering team for Kubernetes experience so that we'd be confident they could help us debug issues in their PostHog deploy. Folks that didn't have infra experience would often be able to get something set up, only to get stuck when something went wrong.
+We also learned that the tools to do that automation just don't exist. We kept finding new failure modes. When onboarding a new customer we would have to vet their engineering team for Kubernetes experience so that we'd be confident they could help us debug issues in their PostHog deploy. Folks that didn't have infra experience would often be able to get something set up, only to get stuck when something went wrong.
 
 Despite our continued efforts to help customers and improve the experience, our small infrastructure team is spending an outsized amount of time supporting the 3.5% of users who haven't moved to PostHog Cloud or our open source Docker deployment.
 
 By not supporting Kubernetes, we will free up a lot of time to focus on our main infrastructure priorities, which are PostHog Cloud and the open source Docker Compose deployment. Ultimately, this will lead to a better experience for the vast majority of our users.
 
-### What's next?
+## What's next?
 
 Regular updates to our Helm chart will cease **after May 31, 2023**. Security updates on the last available version will continue for **at least the next 12 months**.
 
