@@ -33,6 +33,7 @@ import { Link } from 'react-scroll'
 import Slider from 'react-slick'
 import { SEO } from 'components/seo'
 import slugify from 'slugify'
+import OpenSource from 'components/Product/OpenSource'
 
 const features: IProps[] = [
     {
@@ -107,7 +108,7 @@ const menu = [
     { name: 'Apps', url: 'apps', icon: <AppLibrary /> },
     { name: 'Event pipelines', url: 'event-pipelines', icon: <EventPipelinesIcon /> },
     { name: 'Data warehouse', url: 'data-warehouse', icon: <DataWarehouseIcon /> },
-    { name: 'Open source', url: 'self-hosting', icon: <SelfHostingIcon /> },
+    { name: 'Open source', url: 'open-source', icon: <SelfHostingIcon /> },
     { name: 'API', url: 'api', icon: <APIIcon /> },
     { name: "What's next?", url: 'roadmap', icon: <Experiments /> },
 ]
