@@ -19,7 +19,7 @@ tags:
 
 You know what's cooler than gaining new customers? Retaining them.
 
-In this guide to churn analysis, I'm exploring churn rate and retention rate:
+In this guide to customer churn analysis, I'm exploring churn rate and retention rate:
 - How are they different?
 - How do you measure them? 
 - Which one would win a fight?<sup>*</sup>
@@ -32,7 +32,7 @@ These and other useful questions (like [how to reduce churn](#how-to-improve-ret
 
 Not much, really: **churn rate** is the percentage of customers who **stop using** your product during a given period of time; **retention rate** is the percentage of **existing customers** who **continue using** your product. 
 
-In other words, if you have 1,000 customers and 100 of them cancel their subscription, your monthly churn rate would be 10% and your rentention rate would be 90%. That's it.
+In other words, if you have 1,000 customers and 100 of them cancel their subscription, your monthly churn rate would be 10% and your retention rate would be 90%. That's it.
 
 Simple, right? Yes, but these definitions ignore three important points:
 
@@ -40,7 +40,7 @@ Simple, right? Yes, but these definitions ignore three important points:
 1. Just knowing what they are won't help you improve them
 1. While both are important, in my view **retention rate** is more useful (most of the time)
 
-I'll explore these points further as we go. See [Takeaways on churn analysis](#takeaways-on-churn-analysis) for a TL;DR
+I'll explore these points further as we go. See [Takeaways on churn analysis](#takeaways-on-churn-analysis) for a TL;DR.
 
 ## Understanding churn rate
 
@@ -51,8 +51,6 @@ Here's the simplest formula for churn rate:
 Where churn customers equal:
 
 > **Churned customers** = (Customers at the start of the period - Customers at the end of the period) + New customers acquired in that period
-
-You can also calculate various forms of revenue churn rate, but most people understand 'churn rate' to mean 'customer churn' so that's what I'm focusing on here.
 
 The majority of companies should track churn monthly and/or annually. Those interested in tracking churn daily or weekly are better off using a [cohort retention table](#how-to-read-and-use-a-cohort-retention-table). More on those later.
 
@@ -68,7 +66,7 @@ Benchmarking churn rate is tricky because:
 
 3. Studies investigating churn rates by industry use different methodologies and data sets. They often come to conflicting conclusions.
 
-4. Companies who self report churn rate are liable to, erm... lie. After all, who wants to admit they have a churn problem? More likely, they'll use different definitions of churn specific to their business.
+4. Companies who self report churn rate are liable to, erm... lie. After all, who wants to admit they have a churn problem? They might also define churn in their own, special way.
 
 5. What's "good" for a mature business is very different to what's good for a pre-product-market fit, early-stage startup.
 
@@ -84,15 +82,7 @@ With all that said, and having read countless studies, meta-analyses, and finger
 
 - **Monthly churn above 5%** is to be expected for any early-stage company B2B SaaS, and a good benchmark for B2C subscription products. When you're early-stage, hitting an absolute number is less important than seeing your churn rate improving.
 
-> 📖 **Further reading:** I spent many hours and read dozens of articles researching industry benchmarks and studies. These are the most useful resources I found on churn rate benchmarks:
->
-> - This [2020 meta-analysis](https://www.cobloom.com/blog/churn-rate-how-high-is-too-high) of six different studies neatly explains how methodology and data sources can distort results.
->
-> - Subscription analytics company, Baremetrics, maintains an [open benchmarks page](https://baremetrics.com/open-benchmarks) based on data from its customers – mostly mid-size SaaS products like todoist, Product Hunt and npm.
->
-> - [Recurly's 19-month study](https://recurly.com/research/churn-rate-benchmarks/) of 1,900 subscription products that use its platform. It breaks down churn for B2B and B2C products across multiple cohorts, including average revenue per customer (ARPC).
->
-> - [Lenny Rachitksy's Q&A](https://www.lennysnewsletter.com/p/monthly-churn-benchmarks) on monthly churn, in which he polls several experts, including the CEO of subscriptions platform ProfitWell.
+See [more on churn rate benchmarks](#more-on-churn-rate-benchmarks) in the appendix for some of the sources I used to reach these conclusions.
 
 ### Problems with churn rate and alternative methods
 
@@ -136,7 +126,7 @@ As you'll know if you didn't skip the intro, retention is just the inverse of ch
 
 Because you can analyze retention using a cohort retention table like this:
 
-> IMAGE HERE
+![new user retention](../images/blog/retention-vs-churn/retention-table-example-all.png)
 
 I'll explain how to read retention tables in a moment, but here's the rub... retention tables allow you to answer questions like:
 
@@ -165,23 +155,25 @@ To read it, just start on the left and work your way across:
 
 - **Week 0:** Gives you the percentage of users in the cohort who used Hedgebox in that week. As it's week 0, this number will always be 100%.
 
-- **Week 1-8:** Shows the percentage of users in that cohort who returned to the product in each subsequent week – white boxes indicate periods that 'still in progress'.
+- **Week 1-8:** Shows the percentage of users in that cohort who returned to the product in each subsequent week – white boxes indicate periods that 'still in progress', blue boxes are completed periods.
 
 In this example, we can see retention settles at ~20% from 'week 4' onwards in most cohorts. 
 
 That's a useful baseline, but what happens if we filter by just people who use Microsoft Windows?
 
-![new user retention windows](..images/blog/retention-vs-churn/new-user-retention-windows-users.png)
+![new user retention windows](..?images/blog/retention-vs-churn/new-user-retention-windows-users.png)
 
-It's obvious Windows users retain worse than the baseline, dipping as low as 15% in week 4 onwards in the 'Dec 11' cohort. Does that mean macOS users retain better than Windows users? Let's check...
+It's obvious Windows users retain worse than the baseline, dipping as low as 15% in week 4 onwards in the 'Dec 11' cohort. 
+
+Do macOS users retain better than Windows users? Let's check...
 
 ![new user retention mac os](../images/blog/retention-vs-churn/retention-table-macos.png)
 
-They do! While the exact values vary, macOS users consistently retain better than Windows users. This prompts several avenues for investigation. Is the Windows Hedgebox experience worse and, if so why? Does Hedegbox solve some fundamental problem for macOS users that makes them retain better? 
+They do! While the exact values vary, macOS users consistently retain better than Windows users. 
 
-This is just one example using demo data in PostHog, but it's small slice of how you can dive deeper into user behavior using retention tables.
+This prompts several avenues os investigation. Is the Windows Hedgebox experience worse and, if so why? Does Hedgebox solve some fundamental problem for macOS users that makes them retain better? Are Windows users demographically different to macOS users?
 
-You could, for example, filter users by:
+This is just one example using demo data in PostHog. You could also filter users by:
 
 - Their age
 - The browser they use
@@ -290,3 +282,15 @@ You can also sign up to our newsletter over there 👉. We send it every two wee
 > - 1-(1-`[your annual churn]`)^(1/12)
 >
 > Using this formula, an annual churn rate of 11.6% equals an average monthly churn of 1%.
+>
+> ### More on churn rate benchmarks 
+>
+> I read dozens of articles (some data-backed, some less so) on churn rate benchmarks to research this article. Here are some of the more useful resources on the topic:
+>
+> - This [2020 meta-analysis](https://www.cobloom.com/blog/churn-rate-how-high-is-too-high) of six different studies neatly explains how methodology and data sources can distort results.
+>
+> - Subscription analytics company, Baremetrics, maintains an [open benchmarks page](https://baremetrics.com/open-benchmarks) based on data from its customers – mostly mid-size SaaS products like todoist, Product Hunt and npm.
+>
+> - [Recurly's 19-month study](https://recurly.com/research/churn-rate-benchmarks/) of 1,900 subscription products that use its platform. It breaks down churn for B2B and B2C products across multiple cohorts, including average revenue per customer (ARPC).
+>
+> - [Lenny Rachitksy's Q&A](https://www.lennysnewsletter.com/p/monthly-churn-benchmarks) on monthly churn, in which he polls several experts, including the CEO of subscriptions platform ProfitWell.
