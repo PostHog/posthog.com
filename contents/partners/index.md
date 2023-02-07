@@ -15,10 +15,14 @@ If you've got a product or service built on PostHog, [get it listed](/partners/g
 
 ## Directory
 
-<img src="/images/partners/alinity.png" alt="Alinity" width="100" style={{float: 'right', marginTop: '1rem', marginLeft: '1rem'}} />
-
 #### [**taleno.digital**](../partners/taleno-digital)
 
 A data consultancy service for data warehousing and product analytics built on the modern data stack.
 
 **Services:** Insight and dashboard creation expertise
+
+#### [**Tagticians**](../partners/tagiticians)
+
+Specialists in the implementation, configuration, and maintanence of data stack solutions and customer data platforms.
+
+**Services:** Tracking, implementation and integration support
