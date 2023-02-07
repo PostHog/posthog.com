@@ -47,12 +47,15 @@ We've already written to paying customers on Kubernetes deployments outlining ho
 
 To ease any transition to PostHog Cloud, we are:
 - Deep into the process of acquiring SOC 2 compliance for PostHog Cloud. We expect to have completed our SOC 2 audit by the end of Q2 2023.
+
 - Making our cloud HIPAA compliant and will provide security updates for the customers requiring HIPAA until then. 
 
 If you're currently using Kubernetes to deploy PostHog, you have three options.
 
 1. **[Migrate to PostHog Cloud](/docs/migrate/migrate-between-cloud-and-self-hosted)** – PostHog Cloud means you always have the latest features and it usually works out much cheaper, too. We now offer [PostHog EU Cloud](/eu) for folks who need to keep their data in the EU.
-2. **[Migrate to our Docker Compose deployment](/docs/self-host/open-source/deployment)** – Our Docker Compose deployment is suitable for smaller event volumes and it's much simpler to set up and manage than Kubernetes. Self-hosted open-source deployment is provided under MIT license without guarantee
+
+2. **[Migrate to our Docker Compose deployment](/docs/self-host/open-source/deployment)** – Our Docker Compose deployment is suitable for smaller event volumes and it's much simpler to set up and manage than Kubernetes. Self-hosted open-source deployment is provided under MIT license without guarantee.
+
 3. **Continue on Kubernetes** – You can also continue using PostHog on Kubernetes. As noted already, we'll still provide security updates for at least the next 12 months, but you won't benefit from new features or technical support after May 31.
 
 Finally, there will no longer be numbered releases of PostHog. Instead, we'll build a Docker image for each commit that happens in our GitHub repo. This means folks using our Docker Compose deployment will benefit immediately from new features and bugfixes, just like those on PostHog Cloud. You'll also be able to pin a version or roll back where necessary.
