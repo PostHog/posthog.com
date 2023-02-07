@@ -8,9 +8,7 @@
         "type": "git",
         "url": "https://github.com/PostHog/posthog.com"
     },
-    "keywords": [
-        "gatsby"
-    ],
+    "keywords": ["gatsby"],
     "private": true,
     "scripts": {
         "build": "gatsby build",
@@ -37,7 +35,7 @@
         "@types/react-slick": "^0.23.10",
         "@typescript-eslint/eslint-plugin": "^4.20.0",
         "@uiw/react-md-editor": "^3.9.5",
-        "@vercel/gatsby-plugin-vercel-builder": "^1.1.1",
+        "@vercel/gatsby-plugin-vercel-builder": "^1.0.1",
         "algoliasearch": "^4.14.2",
         "busboy": "^1.6.0",
         "chart.js": "^2.9.4",
@@ -203,9 +201,7 @@
             "pre-commit": "node ./scripts/mdxImportGen && git add src/mdxGlobalComponents.js && lint-staged"
         }
     },
-    "workspaces": [
-        "plugins/*"
-    ],
+    "workspaces": ["plugins/*"],
     "lint-staged": {
         "*.{html,js,ts,tsx,json,yml,css,scss}": "prettier --write",
         "*.{js,ts,tsx}": "eslint"
