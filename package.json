@@ -8,7 +8,9 @@
         "type": "git",
         "url": "https://github.com/PostHog/posthog.com"
     },
-    "keywords": ["gatsby"],
+    "keywords": [
+        "gatsby"
+    ],
     "private": true,
     "scripts": {
         "build": "gatsby build",
@@ -201,7 +203,9 @@
             "pre-commit": "node ./scripts/mdxImportGen && git add src/mdxGlobalComponents.js && lint-staged"
         }
     },
-    "workspaces": ["plugins/*"],
+    "workspaces": [
+        "plugins/*"
+    ],
     "lint-staged": {
         "*.{html,js,ts,tsx,json,yml,css,scss}": "prettier --write",
         "*.{js,ts,tsx}": "eslint"

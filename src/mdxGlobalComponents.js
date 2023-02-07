@@ -126,6 +126,7 @@ import { SiteSearchCallout } from './components/SiteSearchCallout'
 import { SliderNav } from './components/SliderNav'
 import { Spacer } from './components/Spacer'
 import { Spinner } from './components/Spinner'
+import { SplitFlap } from './components/SplitFlap'
 import { StarRepoButton } from './components/StarRepoButton'
 import { StarUsBanner } from './components/StarUsBanner'
 import { Structure } from './components/Structure'
@@ -268,6 +269,7 @@ export const shortcodes = {
     SliderNav,
     Spacer,
     Spinner,
+    SplitFlap,
     StarRepoButton,
     StarUsBanner,
     Structure,

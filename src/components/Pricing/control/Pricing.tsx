@@ -19,8 +19,8 @@ import { TrackedCTA } from 'components/CallToAction'
 import Enterprise from 'components/Pricing/Modals/Enterprise'
 import { pricingSliderLogic } from 'components/Pricing/PricingSlider/pricingSliderLogic'
 import { LogSlider } from 'components/Pricing/PricingSlider/LogSlider'
-import { ProductIcons } from '../../ProductIcons/ProductIcons'
-import { NotProductIcons } from '../../NotProductIcons/NotProductIcons'
+import { Analytics, Experiments, SessionRecording } from 'components/ProductIcons'
+import { Discount } from 'components/NotProductIcons'
 import Breakdown from '../Breakdown'
 import { RenderInClient } from 'components/RenderInClient'
 import SelfHost from '../SelfHost'
@@ -154,7 +154,9 @@ const PricingControl = (): JSX.Element => {
 
                 <div className="grid lg:grid-cols-3 grid-rows-[max-content_max-content_1fr] lg:gap-x-6 mb-12">
                     <header className={`${gridCell} ${gridCellTop}`}>
-                        <span className="w-9 h-9 flex mb-1">{ProductIcons.analytics}</span>
+                        <span className="w-9 h-9 flex mb-1">
+                            <Analytics />
+                        </span>
                         <h3 className="text-lg mb-0 pb-0">Product analytics + data stack</h3>
                         <p className="text-[15px] opacity-75 leading-tight mb-0 font-semibold">
                             Trends, funnels, path analysis + more
@@ -178,7 +180,9 @@ const PricingControl = (): JSX.Element => {
                     </div>
 
                     <header className={`${gridCell} ${gridCellTop} lg:order-2`}>
-                        <span className="w-9 h-9 flex mb-1">{ProductIcons.sessionRecording}</span>
+                        <span className="w-9 h-9 flex mb-1">
+                            <SessionRecording />
+                        </span>
                         <h3 className="text-lg mb-0 pb-0">Session recording</h3>
                         <p className="text-[15px] opacity-75 leading-tight mb-0 font-semibold">
                             Watch people using your product and website
@@ -202,7 +206,9 @@ const PricingControl = (): JSX.Element => {
                     </div>
 
                     <header className={`${gridCell} ${gridCellTop} pb-4 lg:pb-0 lg:order-3`}>
-                        <span className="w-9 h-9 flex mb-1">{ProductIcons.experiments}</span>
+                        <span className="w-9 h-9 flex mb-1">
+                            <Experiments />
+                        </span>
                         <h3 className="text-lg mb-0 pb-0">
                             Experiments{' '}
                             <span className="border border-gray-accent-light text-black/75 p-0.5 text-xs font-semibold uppercase rounded-[2px]">
@@ -295,7 +301,9 @@ const PricingControl = (): JSX.Element => {
                             </div>
 
                             <div className="border-b border-dashed  border-gray-accent-light col-span-3 p-2 pl-10 relative">
-                                <span className="w-5 h-5 flex absolute top-3 left-3">{ProductIcons.analytics}</span>
+                                <span className="w-5 h-5 flex absolute top-3 left-3">
+                                    <Analytics />
+                                </span>
                                 <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center">
                                     <strong>Product analytics + data stack</strong>
                                     <span>
@@ -320,7 +328,7 @@ const PricingControl = (): JSX.Element => {
 
                             <div className="border-b border-dashed border-gray-accent-light col-span-3 p-2 pl-10 relative">
                                 <span className="w-5 h-5 flex absolute top-3 left-3">
-                                    {ProductIcons.sessionRecording}
+                                    <SessionRecording />
                                 </span>
                                 <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center">
                                     <strong>Session recording</strong>
@@ -363,14 +371,18 @@ const PricingControl = (): JSX.Element => {
                         <h4 className="border-b border-dashed border-gray-accent-light pb-2 mb-3">Discounts</h4>
 
                         <div className="pl-10 relative mb-4">
-                            <span className="w-6 h-6 absolute top-0 left-1">{NotProductIcons.discount}</span>
+                            <span className="w-6 h-6 absolute top-0 left-1">
+                                <Discount />
+                            </span>
 
                             <h5 className="text-base mb-0">B2C with millions of users?</h5>
                             <p className="text-[15px] mb-1">Get in touch for volume discounts after signing up.</p>
                         </div>
 
                         <div className="pl-10 relative mb-4">
-                            <span className="w-6 h-6 absolute top-0 left-1">{NotProductIcons.discount}</span>
+                            <span className="w-6 h-6 absolute top-0 left-1">
+                                <Discount />
+                            </span>
 
                             <h5 className="text-base mb-0">Non-profits</h5>
                             <p className="text-[15px] mb-1">50% off in most cases. Get in touch after signing up.</p>
