@@ -12,7 +12,7 @@ hideLastUpdated: true
 
 ### App
 
-taleno.digital is your analytics engineer-as-a-service, so you don't need to hire an FTE. 
+Specialists in the implementation, configuration, and maintanence of data stack solutions and customer data platforms.
 
 ### Support
 
