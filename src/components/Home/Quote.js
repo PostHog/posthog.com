@@ -15,7 +15,7 @@ export default function HomeQuote() {
                     height={100}
                     alt="James Watling - EarlyDay"
                     outputPixelDensities={[1, 2]}
-                    src="../../images/james_watling.jpg"
+                    src="../../images/james_watling.png"
                 />
             }
             quote={
