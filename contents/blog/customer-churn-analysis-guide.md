@@ -161,7 +161,7 @@ In this example, we can see retention settles at ~20% from 'week 4' onwards in m
 
 That's a useful baseline, but what happens if we filter by just people who use Microsoft Windows?
 
-![new user retention windows](..?images/blog/retention-vs-churn/new-user-retention-windows-users.png)
+![new user retention windows](../images/blog/retention-vs-churn/new-user-retention-windows-users.png)
 
 It's obvious Windows users retain worse than the baseline, dipping as low as 15% in week 4 onwards in the 'Dec 11' cohort. 
 
