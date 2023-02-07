@@ -8,7 +8,7 @@ hideLastUpdated: true
 
 <img src="https://tagticians.com/wp-content/uploads/2018/10/tagmatt-tagcians-png-square-only.png" alt="Tagticians Logo" width="100" style={{float: 'right', margin: '0 0 1rem 1rem'}} />
 
-[Tagticians](https://tagticians.com) are specialists in the implementation, configuration, and maintanence of data stack solutions and customer data platforms.
+[Tagticians](https://tagticians.com) are specialists in the implementation, configuration, and maintenance of data stack solutions and customer data platforms.
 
 1. Tracking plan design support to get you the data you need to make business decisions.
 2. Developer support during implementation phase of PostHog on all platforms and frameworks.
