@@ -8,12 +8,13 @@ We offer our team unlimited time off, but with an expectation that you take _at 
 
 The reason for this policy is that it's critical for PostHog that we hire people we can trust to be responsible with their time off - enough that they can recharge, but not so much that it means we don't get any work done. The People & Ops team will look holiday usage occasionally to encourage people who haven't taken the minimum time off to do so. The 25 days is a minimum, not a guide.
 
+As general guidance, we'd expect you to take this long off, or slightly over. However, we think it's unlikely - for example - that you'll get everything done without excessively putting pressure on the rest of the team _whilst_ taking 40+ days a year of vacation time.
 
 ## Permissionless time off
 
 We care about your results, not how long you work.
 
-You do not need to get approval for time off from your manager. Instead, we expect everyone to coordinate with their team to make sure that we're still able to move forwards in your absence. For example, having an entire Small Team off at the same time means we can't be responsive to community issues.  
+You do not need to get approval for time off from your manager. Instead, we expect everyone to coordinate with their team to make sure that we're still able to move forwards in your absence. For example, having an entire Small Team off at the same time means we can't be responsive to community issues.
 
 ### How to book time off in PTO by Roots
 
@@ -37,10 +38,6 @@ The same rules as above apply regardless of the holiday length and type. Sick le
 We operate on a trust basis and we don't count hours or days worked. We trust everyone to manage their own time. 
 
 Whether you have an appointment with your doctor, school run with your kids, or you want to finish an hour early to meet friends or family - we don't mind and you don't need to tell us. Please just add it to your calendar and, if you are doing anything that could require you to be immediately available (ie support hero / or any customer-facing role), please make sure you have cover. 
-
-### Sabbaticals
-
-As we have unlimited, permissionless time off, PostHog doesn’t offer ‘sabbaticals’ in the way that some companies do. Instead, we strongly encourage team members to use our existing policy to take a full month off every 3-4 years. We only ask that you organise this thoughtfully with your team by giving them enough notice to plan.
 
 ## When you should have time off
 
