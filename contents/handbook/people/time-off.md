@@ -8,7 +8,7 @@ We offer our team unlimited time off, but with an expectation that you take _at 
 
 The reason for this policy is that it's critical for PostHog that we hire people we can trust to be responsible with their time off - enough that they can recharge, but not so much that it means we don't get any work done. The People & Ops team will look holiday usage occasionally to encourage people who haven't taken the minimum time off to do so. The 25 days is a minimum, not a guide.
 
-As general guidance, we'd expect you to take this long off, or slightly over - we won't care about a few days here and there! If you are taking significantly more vacation time - for example, 40 days, we would be very surprised if you aren't causing a strain on the rest of your team as a result.
+As general guidance, we don't care about a few days here and there. If you are taking significantly more vacation time than most - for example, 40 days, we would be very surprised if you aren't causing a strain on the rest of your team as a result.
 
 ## Permissionless time off
 
