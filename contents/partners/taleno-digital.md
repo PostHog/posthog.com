@@ -12,7 +12,7 @@ hideLastUpdated: true
 
 ### App
 
-Specialists in the implementation, configuration, and maintanence of data stack solutions and customer data platforms.
+A data consultancy service for data warehousing and product analytics built on the modern data stack.
 
 ### Support
 
