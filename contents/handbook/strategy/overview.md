@@ -164,14 +164,16 @@ While there is value in the items on the right, we value the items on the left m
         * Makes PostHog incredibly sticky even if they move to a data warehouse
         * Our customers are already asking for it
       * How?
-        * Make imports and exports bulletproof, 1st class webhook destinations, build or integrate with key sources and destinations
+        * Make imports and exports bulletproof
+        * 1st class webhook destinations
+        * Build or integrate with key sources and destinations
   * **Non Goals:**
     * Build lots of new low-quality / partial features
     * Build everything a single enterprise customer wants just to close a deal
 
 ## Target customers for 2023
 
-We build for the **product-engineers** (full-stack engineers skewed towards the frontend) building the **most loved products** at **high-growth startups**. But it should be usable by everyone in the product team (engineers, PMs, designers).
+We build for the [product engineers](/blog/what-is-a-product-engineer) building the **most loved products** at **high-growth startups**. But it should be usable by everyone in the product team (engineers, PMs, designers).
 
 Example: PostHog anytime from their Series B to IPO
 
