@@ -74,7 +74,7 @@ PostHog Cloud is free up to 1 million captured events and 10,000 recordings per 
 
 ### Is it open source?
 
-Yes! PostHog Open Source is available under an MIT license via a Docker deploy.
+Yes! PostHog Open Source is available under an MIT license and can be deployed with Docker Compose.
 
 **Further reading:**
 - [The best free and open source A/B testing tools](/blog/best-open-source-ab-testing-tools)

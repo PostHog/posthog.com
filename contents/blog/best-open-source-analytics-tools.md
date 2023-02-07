@@ -50,7 +50,7 @@ This section is dedicated to tools that actively collect data on user behavior. 
 
 Features include a comprehensive product analytics suite (e.g. trend analysis, dashboards, funnels, path analysis, retention tracking etc.), feature flags for feature control, experimentation (A/B and multivariate testing), session recording, heatmaps and [more](/product).
 
-It’s entirely self-serve, with the ability to auto-capture event information out of the box. PostHog can also be self-hosted on your existing infrastructure using Docker, making it ideal if you don't want to share data with third parties. It's a good option if you're after an [open-source session recording tool](/blog/best-open-source-session-replay-tools), too. 
+It’s entirely self-serve, with the ability to auto-capture event information out of the box. PostHog can also be self-hosted on your existing infrastructure using Docker Compose, making it ideal if you don't want to share data with third parties. It's a good option if you're after an [open-source session recording tool](/blog/best-open-source-session-replay-tools), too. 
 
 #### Who is PostHog for?
 PostHog is useful for engineering, data science, and product teams. As an all-in-one platform, it can replace multiple tools (e.g. Mixpanel, LaunchDarkly, Hotjar) so you can simplify your tech stack. [PostHog customers](/customers) include the likes of [Hasura](/customers/hasura), [Netdata](/customers/netdata), and [Phantom](/customers/phantom).  
@@ -164,7 +164,7 @@ Plausible is intended for marketing teams and website owners who want to track t
 - No cookies required, GDPR compliant out of the box 
 
 #### Open source license and monetization
-Plausible Analytics is available under a AGPLv3 license and can be self-hosted via Docker. Pricing for its hosted version starts at €9 per month for 10,000 monthly pageviews.
+Plausible Analytics is available under a AGPLv3 license and can be self-hosted via Docker Compose. Pricing for its hosted version starts at €9 per month for 10,000 monthly pageviews.
 
 > **Also consider:** Plausible is one of a large subset of privacy-first analytics products that have proven popular in the wake of GDPR and less permissive attitudes to user tracking. [Umami](https://umami.is/) is another popular, open-source product in this space. Read our [GDPR analytics guide](/blog/best-gdpr-compliant-analytics-tools) for more options.   
 
