@@ -23,6 +23,6 @@ A data consultancy service for data warehousing and product analytics built on t
 
 #### [**Tagticians**](../partners/tagiticians)
 
-Specialists in the implementation, configuration, and maintanence of data stack solutions and customer data platforms.
+Specialists in the implementation, configuration, and maintenance of data stack solutions and customer data platforms.
 
 **Services:** Tracking, implementation and integration support
