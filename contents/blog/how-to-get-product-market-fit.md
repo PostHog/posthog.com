@@ -72,7 +72,7 @@ You need to try to get out of this role into level 2 as quickly as possible - va
 
 Work your way from top to bottom:
 
-* You aren't trying
+* You aren't moving fast enough
   * Solution: set a goal for how many meetings you want to get. I tried to get 2 meetings a day. If you live in a tech hub (which I'd encourage in the early days at least), go to all of these in person. Most communication is non verbal, so it'll make it easier to learn what people are thinking.
 * You aren't being clear what the problem is
   * Solution: make sure you can describe your product in one, very short sentence. Practise this over and over again. Similarly, a lot of people look at much larger competitors that use confusing enterprise terminology.
@@ -316,4 +316,6 @@ Once someone decides to move forward, you'll need something for people to sign. 
 
 It's normal. Since most startups fail, you're probably doing something wrong if you _don't_ pivot. The media would make you think that building a startup requires years of grinding away on the same idea. At PostHog, we pivoted six times in the first six months.
 
-Be decisive.
+Be decisive. During our YC batch, we saw a few companies have one founder work on X, whilst another worked on Y. The problem of finding product market fit is already complex, so don't add any extra variables like "just one of us was trying, not both" to make it even harder. Pick one idea and go all in. If you fail, quickly move to the other idea. We also saw instances where companies debated pivoting for several weeks - if you have tried everything in the list above, and are questioning yourself constantly, then you probably should have already made the call.
+
+_When_ you do pivot, do _not_ become a solution looking for a problem. It is very easy to become attached to your existing code or problem. Be especially wary of very fractional pivots. For example, one of our first ideas was a tool to monitor tech debt - it would insert a survey as a GitHub check asking the engineer where they encountered problems and how long was wasted. We had to pivot when it was impossible to sell it - since the insight it provided wasn't being _acted_ upon by teams, so they got little real value. When then moved into using the same surveys to monitor engineering happiness, re-using our code - the result? A week of wasted meetings.
