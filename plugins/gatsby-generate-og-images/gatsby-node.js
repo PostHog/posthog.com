@@ -141,7 +141,7 @@ exports.onPostBuild = async ({ graphql }) => {
         },
     })
     await new Promise((resolve, reject) => {
-        const fileStream = fs.createWriteStream(path.resolve(__dirname, '../fonts/matter.woff'))
+        const fileStream = fs.createWriteStream(path.resolve(__dirname, '../../fonts/matter.woff'))
         res.body.pipe(fileStream)
         res.body.on('error', (err) => {
             reject(err)
@@ -151,7 +151,7 @@ exports.onPostBuild = async ({ graphql }) => {
         })
     })
 
-    const font = fs.readFileSync(path.resolve(__dirname, '../fonts/matter.woff'), {
+    const font = fs.readFileSync(path.resolve(__dirname, '../../fonts/matter.woff'), {
         encoding: 'base64',
     })
 
