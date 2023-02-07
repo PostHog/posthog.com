@@ -8,7 +8,7 @@ showTitle: true
 
 Our mission is to increase the number of successful products in the world.
 
-We will do this by building the best developer tool for **engineers** to build better products.
+We do this by building the best developer tool for **engineers** to build better products.
 
 ## Context
 
