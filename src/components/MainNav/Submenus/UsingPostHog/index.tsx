@@ -40,6 +40,11 @@ export default function UsingPosthog({ referenceElement }: { referenceElement: H
             url: '/apps',
         },
         {
+            title: 'Partner directory',
+            description: 'Companies and products who can help with PostHog',
+            url: '/partners',
+        },
+        {
             title: 'FAQ',
             description: 'Questions, but frequently asked',
             url: '/faq',
