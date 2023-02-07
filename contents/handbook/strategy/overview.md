@@ -148,25 +148,24 @@ While there is value in the items on the right, we value the items on the left m
 
 * **Customers**
   * **Focus on product engineers at high-growth startups.** E.g. Large initial contracts ($20k-$70k/year) and smaller startups that will eventually become large
-  * **Non Goal:** Start doing outbound sales
+  * **Non Goal:** Start doing outbound sales; build products that only impact marketing/sales/CS teams
 * **Product**
   * **Goals:**
-    * Improve the core UX to work better for product engineers:
+    * 10x the core UX for product engineers:
       * PostHog 3000 UX = a design and UX uplift including dark mode
         * Why? Re-classify PostHog from a PM tool to a developer tool to better resonate with our audience. Reduce the friction in using multiple tools
       * More powerful querying
         * Why? Enable answering the long tail of questions that engineers have about their data
       * Make it easy to evaluate the success of features
-        * Why? Currently, it's manual and repetitive to do best practice rollout and evaluation of features. Or it's not possible e.g. we don't have session recordings on mobile
+        * Why? Currently, it's manual and repetitive to do best practice evaluation of features. Or it's not possible e.g. we don't have session recordings on mobile
     * Launch the CDP as a full product
       * Why?
-        * Putting PostHog at the center of the stack gives our customers all the data to answer questions their product questions
+        * Putting PostHog at the center of the stack gets all the data into PostHog, enabling our customers to ask the questions they need about their data
         * Makes PostHog incredibly sticky even if they move to a data warehouse
         * Our customers are already asking for it
       * How?
         * Make imports and exports bulletproof, 1st class webhook destinations, build or integrate with key sources and destinations
   * **Non Goals:**
-    * Build features just for marketing/sales/CS teams
     * Build lots of new low-quality / partial features
     * Build everything a single enterprise customer wants just to close a deal
 
