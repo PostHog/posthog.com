@@ -5,7 +5,6 @@ export { createPages } from './gatsby/createPages'
 export { onCreateNode } from './gatsby/onCreateNode'
 export { createSchemaCustomization } from './gatsby/createSchemaCustomization'
 export { sourceNodes } from './gatsby/sourceNodes'
-export { onPostBuild } from './gatsby/onPostBuild'
 export { createResolvers } from './gatsby/createResolvers'
 export { onPreBootstrap } from './gatsby/onPreBootstrap'
 
