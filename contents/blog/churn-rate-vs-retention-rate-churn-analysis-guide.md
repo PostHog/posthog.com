@@ -1,5 +1,5 @@
 ---
-date: 2023-02-06
+date: 2023-02-07
 title: "Retention vs Churn Rate: A complete guide to churn analysis"
 rootPage: /blog
 sidebar: Blog
@@ -112,7 +112,7 @@ Bottom line: You should **never** rely on just one number to measure success. Se
 
 > 💡**PostHog Tip:** A funnel analysis tracking signup through activation, and conversion-to-paid is a better way to investigate churn among new users. Read our guide to [building funnels in PostHog](/tutorials/funnels) for more on this.
 
-## Understand retention rate
+## Understanding retention rate
 
 So that's churn rate, but what about retention rate and why, as I claimed earlier, is it a more useful metric? (most of the time) 
 
@@ -151,7 +151,7 @@ If you can answer these questions, you're on the way the improving retention and
 
 Trust me, it's less complicated than it looks.
 
-> IMAGE EXAMPLE
+![new user retention](../images/blog/retention-vs-churn/retention-table-example-all.png)
 
 Above is a PostHog retention table for an imaginary Dropbox clone called Hedgebox. In this retention table we're looking at weekly repeat usage,  configured as:
 
@@ -165,24 +165,27 @@ To read it, just start on the left and work your way across:
 
 - **Week 0:** Gives you the percentage of users in the cohort who used Hedgebox in that week. As it's week 0, this number will always be 100%.
 
-- **Week 1-8:** Shows the percentage of users in that cohort who returned to the product in each subsequent week. In this example, we can see only half the users in the `Dec 4` cohort returned in week 2, but it was as high as 77.8% in other cohorts.
+- **Week 1-8:** Shows the percentage of users in that cohort who returned to the product in each subsequent week – white boxes indicate periods that 'still in progress'.
 
-From here you can apply all sorts of filters to compare cohorts of users to each other.
+In this example, we can see retention settles at ~20% from 'week 4' onwards in most cohorts. 
 
-> IMAGE HERE
+That's a useful baseline, but what happens if we filter by just people who use Microsoft Windows?
 
-Above shows new user retention among users referred by Google. Retention is worse than in the earlier table, which might prompt a change in marketing priorities.
+![new user retention windows](..images/blog/retention-vs-churn/new-user-retention-windows-users.png)
 
-> IMAGE
+It's obvious Windows users retain worse than the baseline, dipping as low as 15% in week 4 onwards in the 'Dec 11' cohort. Does that mean macOS users retain better than Windows users? Let's check...
 
-In contract, the above shows new users via direct traffic – i.e. by visiting the website directly. Their retention is much higher, though cohort totals are lower.
+![new user retention mac os](../images/blog/retention-vs-churn/retention-table-macos.png)
 
-These are just examples using demo data in PostHog, but it's small slice of how you can dive deeper into user behavior using retention tables.
+They do! While the exact values vary, macOS users consistently retain better than Windows users. This prompts several avenues for investigation. Is the Windows Hedgebox experience worse and, if so why? Does Hedegbox solve some fundamental problem for macOS users that makes them retain better? 
+
+This is just one example using demo data in PostHog, but it's small slice of how you can dive deeper into user behavior using retention tables.
 
 You could, for example, filter users by:
 
-- Their operating system
+- Their age
 - The browser they use
+- The email account they used to sign up 
 - The country or city they live in
 - The number of files they upload
 - The types of files they upload
