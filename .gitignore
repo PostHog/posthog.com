@@ -26,6 +26,7 @@ static/fonts/MatterSQItalicVF.woff
 static/fonts/MatterSQItalicVF.woff2
 static/fonts/MatterSQVF.woff
 static/fonts/MatterSQVF.woff2
+static/og-images/
 yarn.lock
 fonts
 src/components/Layout/Fonts.scss
