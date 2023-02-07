@@ -410,6 +410,5 @@ module.exports = {
         ...(!process.env.GATSBY_ALGOLIA_APP_ID || !process.env.ALGOLIA_API_KEY || !process.env.GATSBY_ALGOLIA_INDEX_NAME
             ? []
             : [algoliaConfig]),
-        'gatsby-generate-og-images',
     ],
 }
