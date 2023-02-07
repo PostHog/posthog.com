@@ -41,7 +41,6 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     type Frontmatter {
       authorData: [AuthorsJson] @link(by: "handle", from: "author")
       badge: String
-      hideLastUpdated: Boolean
     }
     type TeamData {
       name: String
