@@ -130,8 +130,7 @@ exports.onPostBuild = async ({ graphql }) => {
         }
     `)
 
-    console.log(__dirname)
-    const dir = path.resolve(__dirname, '../../public/og-images')
+    const dir = path.resolve(__dirname, '../../static/og-images')
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })
     const fontDir = path.resolve(__dirname, '../../fonts')
     if (!fs.existsSync(fontDir)) fs.mkdirSync(fontDir)
