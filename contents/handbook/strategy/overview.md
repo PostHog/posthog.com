@@ -8,6 +8,8 @@ showTitle: true
 
 Our mission is to increase the number of successful products in the world.
 
+We will do this by building the best developer tool for **engineers** to build better products.
+
 ## Context
 
 We started by building an open-source product operating system with many of the things you'd need to build a better product - product analytics, session recording, feature flags, experimentation, and a customer data platform to import/export and transform data. Within a year, we had thousands of customers using us and we started generating revenue.
@@ -42,7 +44,7 @@ We now add more companies each week than _any_ closed-source SaaS rival, and we'
 
 In 2026: _The leading product teams use PostHog to build the best products._
 
-*Product team = The people building the product. Normally engineers, PMs and designers.*
+_Product team = The people building the product. Normally engineers, PMs and designers._
 
 We are the first product tool that technical founders integrate into their product. We scale with them from their first user; to their first dollar; to 1000 person engineering orgs; IPO; and beyond. The best product people don't want to join a company that's not using PostHog.
 
@@ -91,7 +93,7 @@ We did this by first focusing on high-growth self-serve startups to nail (1) and
    * Customer and product data is used across the company to make data-driven decisions and directly power the product.
    * Currently, customer and product data is siloed across different applications. Teams often export everything to a warehouse and query it or send it to other products from there. Then they end up with a data engineering mess trying to set up other tools with their warehouse and / or a data platform.
    * Currently, PostHog offers an opinionated schema for storing some of their customer and product data. Users can interact with it through insights. Users don't have direct access. We have some of the key exports but are missing imports.
-   * PostHog should become an opinionated data warehouse and CDP for all their product and customer data. By being opinionated with the schema and having a large number of imports, we can consolidate all the relevant customer and product data. 
+   * PostHog should become an opinionated data warehouse and CDP for all their product and customer data. By being opinionated with the schema and having a large number of imports, we can consolidate all the relevant customer and product data.
    * Users can use our core applications to make data-driven decisions quickly and deeply. They should have full direct access as needed so they don't need another data warehouse.
    * We should build the all key imports and exports that are needed. Customers should be able to contribute any remaining connectors which we maintain to a high standard.
    * Long-term PostHog should interoperate with many different database backends meaning we can ride the wave of technological progress rather than being disrupted by it.
@@ -140,23 +142,37 @@ While there is value in the items on the right, we value the items on the left m
 
 * _Reject_: We enable our customers to ingest, store and analyze data on their infrastructure, we don't believe tons of integrations, dealing with multiple vendors and sending sensitive data to multiple cloud providers is the right approach. Providing all the apps and data platform in one place, removes the need to setup a warehouse in the first place.
 
-## Direction for 2022
+## Direction for 2023
 
- * 2 word summary: **Nail self-serve**
-    * **Customers**
-        * **Focus on high-growth startups.** E.g. Large initial contracts ($20k-$70k/year) and smaller deals in organizations that will eventually become large
-        * **Non Goal:** Start doing outbound sales
-    * **Product**
-        * **Goals:**
-            * **Quality:** Our core features (insights, recordings, feature-flags / experimentation) work like a Swiss watch
-            * **Self Service Subscription:** Customers of every size sign-up, start using and subscribe to PostHog without asking us for help
-        * **Non Goals:**
-            * Build lots of new low quality / partial features
-            * Build everything a single enterprise customer wants just to close a deal
+3-word summary: **Nail product engineering**
 
-## Target customers for 2022
+* **Customers**
+  * **Focus on product engineers at high-growth startups.** E.g. Large initial contracts ($20k-$70k/year) and smaller startups that will eventually become large
+  * **Non Goal:** Start doing outbound sales
+* **Product**
+  * **Goals:**
+    * Improve the core UX to work better for product engineers:
+      * PostHog 3000 UX = a design and UX uplift including dark mode
+        * Why? Re-classify PostHog from a PM tool to a developer tool to better resonate with our audience. Reduce the friction in using multiple tools
+      * More powerful querying
+        * Why? Enable answering the long tail of questions that engineers have about their data
+      * Make it easy to evaluate the success of features
+        * Why? Currently, it's manual and repetitive to do best practice rollout and evaluation of features. Or it's not possible e.g. we don't have session recordings on mobile
+    * Launch the CDP as a full product
+      * Why?
+        * Putting PostHog at the center of the stack gives our customers all the data to answer questions their product questions
+        * Makes PostHog incredibly sticky even if they move to a data warehouse
+        * Our customers are already asking for it
+      * How?
+        * Make imports and exports bulletproof, 1st class webhook destinations, build or integrate with key sources and destinations
+  * **Non Goals:**
+    * Build features just for marketing/sales/CS teams
+    * Build lots of new low-quality / partial features
+    * Build everything a single enterprise customer wants just to close a deal
 
-We build for the highest-performing **product teams** (engineers, PMs, designers) building the **most loved products** at **high-growth startups**. We focus specifically on the  **product-engineers** (full-stack engineers skewed towards the frontend) but it should be usable by everyone in the product team.
+## Target customers for 2023
+
+We build for the **product-engineers** (full-stack engineers skewed towards the frontend) building the **most loved products** at **high-growth startups**. But it should be usable by everyone in the product team (engineers, PMs, designers).
 
 Example: PostHog anytime from their Series B to IPO
 
