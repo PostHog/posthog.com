@@ -47,7 +47,7 @@ Parts can be `Wide` or `Compact` depending on its size. We'll be mostly dealing 
 ClickHouse also stores a sparse index for the part. A collection of rows with size equal to the `index_granularity` setting is called a **granule**. For every **granule**, the primary
 index stores a **mark** containing the value of the `ORDER BY` statement as well as a pointer to where that **mark** is located in each data file.
 
-> 💡 For better performance when running queries, it is not recommended to set `index_granularity` too low. The default value for engines in the `MergeTree` family is 8192. An implication of this is that acessing data by primary key (in this case the `ORDER BY` clause is equivalent to the primary key) will not read just one row, but rather up to `index_granularity` number of rows. This is acceptable given ClickHouse is meant to perform well with aggregations, rather than point lookups.
+> 💡 For better performance when running queries, it is not recommended to set `index_granularity` too low. The default value for engines in the `MergeTree` family is 8192. An implication of this is that accessing data by primary key (in this case the `ORDER BY` clause is equivalent to the primary key) will not read just one row, but rather up to `index_granularity` number of rows. This is acceptable given ClickHouse is meant to perform well with aggregations, rather than point lookups.
 
 <details><summary>Diving deeper into data-on-disk for a Wide part</summary>
 
