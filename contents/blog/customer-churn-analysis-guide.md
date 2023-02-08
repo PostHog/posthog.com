@@ -168,7 +168,9 @@ So, how do you improve retention and reduce churn? Talking to users is a vital c
 
 - **Ship useful new features:** If you're talking to your users, and learning about your power users, then you should be well-placed to build awesome new features your existing (and potential) customers will love. If you solve more problems for your customers, they're more likely to retain.
 
-- **Improve speed/reliability/ease of use:** Users may love your product, but find it slow, buggy or hard to use. Again, talking to users will make it obvious if you have a problem here.- **Move customers to annual contracts:** Remember how companies selling to enterprises have lower churn? It's not an accident. Consider offering discounts or incentives to existing customers to move onto annual contracts. Once they do, they're less likely to churn.
+- **Improve speed/reliability/ease of use:** Users may love your product, but find it slow, buggy or hard to use. Again, talking to users will make it obvious if you have a problem here.
+
+- **Move customers to annual contracts:** Remember how companies selling to enterprises have lower churn? It's not an accident. Consider offering discounts or incentives to existing customers to move onto annual contracts. Once they do, they're less likely to churn.
 
 - **Improve your onboarding process:** Users who don't get full value out of your product are more likely the churn, and the best time to educate them is at the start. The better your new users understand your product (and its value), the better they'll retain.
 
