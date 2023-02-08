@@ -1,5 +1,5 @@
 ---
-date: 2023-02-07
+date: 2023-02-08
 title: "Retention vs Churn Rate: A complete guide to churn analysis"
 rootPage: /blog
 sidebar: Blog
@@ -72,17 +72,13 @@ For research, I read several dozen data analyses and finger-in-the-air takes on 
 
 I've collated the better sources [in the appendix](#more-on-churn-rate-benchmarks). What follows is my own, not-quite-scientific meta-analysis:
 
-**TODO:** Re-org this section by company type, rather than bands... 
+- **B2C SaaS:** Subscription services like Netflix or Tidal typically have higher churn than those targeting businesses, so a 3 to 5% monthly churn rate is pretty good. Anything less than 3% is very good, though B2C services are more price sensitive – churn trends much lower among services that charge less than $10 per month, for example. A monthly churn rate of 5% is equivalent to annual churn of 46% – i.e. a company with 1,000 customers would lose 460 over 12 months.
 
-- **Monthly churn of 0.5% or less** is outstanding for any company, but an unrealistic expectation for B2C products. It's equivalent to an annual churn rate of 5.84% – i.e. a company with 1,000 customers would lose 58 over 12 months.
+- **Mid-Market B2B SaaS:** Anything up to 5% monthly churn is OK for a B2B SaaS that **doesn't** sell to big enterprises, but something around 3% is preferable if your average revenue per customer (ARPC) is above $250 per month. Anything below 2% is excellent. A monthly churn rate of 3% is equivalent to 30.6% annually – i.e. a company with 1,000 customers would lose 306 over 12 months.
 
-- **Monthly churn of 1.5 to 2%** is still very good, especially for mid-market B2B companies that don't sell to enterprises. It's equivalent to an annual churn rate of 16.59% – i.e. a company with 1,000 customers would lose 166 over 12 months.
+- **Early-stage B2B SaaS:** A monthly churn rate above 5% is to be expected for any early-stage company B2B SaaS, so don't worry too much if you're growing fast and you're above that benchmark. Just monitor your trend and dig deeper if you don't see it decline as you mature. A monthly churn of 5.65% is equivalent to 50.24% annually – i.e. a company with 1,000 companies would lose 502 over 12 months, more than half.
 
-- **Monthly churn of 3.5%** or 34.8% per year is pretty typical for B2B SaaS products with less than $250 average revenue per customer (ARPC). The higher your ARPC, the lower your churn rate ought to be. 
-
-- While an **annual churn of 45%** (aka 5% per month) sounds terrifying, it's not unheard of among successful mid-market B2B SaaS companies. In 2016, Buffer, a successful SaaS company with over $1 million in monthly recurring revenue at the time, reported annual churn of 46%. Multiple studies show a 5% monthly churn rate is common among smaller B2B SaaS companies.
-
-- **Monthly churn above 5%** is to be expected for any early-stage company B2B SaaS, and a good benchmark for B2C subscription products. When you're early-stage, hitting an absolute number is less important than seeing your churn rate improving.
+- **Enterprise B2B SaaS:** Products selling to large enterprises (think more than 1,000 employees) have lower churn, mainly because large companies change slowly and will generally bill annually. A monthly churn rate up to 2% is good. Anything less than 1% is excellent. A monthly churn rate of 1% is equivalent to 11.3% annually – i.e. a company with 1,000 customers will lose 114 over 12 months.
 
 ## Understanding retention rate
 
@@ -168,11 +164,17 @@ So, how do you improve retention and reduce churn? Talking to users is a vital c
 
 - **Learn about your power users:** It's great to have power users, but they're also more sensitive to product changes. It's important to identify who they are, what they do, and what they value. They're your biggest advocates, so keep them happy. See: [How to identify and analyze power users in PostHog](/tutorials/power-users).
 
-- **Improve your product:** If you're talking to your users, and learning about your power users, then you should be well-placed to build awesome new features your existing (and potential) customers will love. I'm told this is "creating value" in the official business lingo.
+- **Ship useful new features:** If you're talking to your users, and learning about your power users, then you should be well-placed to build awesome new features your existing (and potential) customers will love. If you solve more problems for your customers, they're more likely to retain.
+
+- **Improve speed/reliability/ease of use:** Users may love your product, but find it slow, buggy or hard to use. Again, talking to users will make it obvious if you have a problem here.- **Move customers to annual contracts:** Remember how companies selling to enterprises have lower churn? It's not an accident. Consider offering discounts or incentives to existing customers to move onto annual contracts. Once they do, they're less likely to churn.
+
+- **Improve your onboarding process:** Users who don't get full value out of your product are more likely the churn, and the best time to educate them is at the start. The better your new users understand your product (and its value), the better they'll retain.
 
 - **Focus on customer success:** Customer success > outbound sales a lot of the time. [Our customer success team](/handbook/small-teams/customer-success) owns all inbound contact requests, assisting new users and introducing them to the right PostHog people at the right time. If you can't afford a dedicated team, give the job to someone until you do. PostHog CEO, James Hawkins, owned this area in our early days.
 
-- **Re-engage your users:** Users who like your product can sometimes be distracted by other things. Well-timed re-engagement messages, such as showcasing an underused featured, can be extremely powerful. [Path analysis](/product/user-paths) is a useful tool for understanding where users get distracted.
+- **Re-engage your users:** Users who like your product can sometimes be distracted by other things. Well-timed outreach messages, such as showcasing an underused featured, can be extremely powerful. [Path analysis](/product/user-paths) is a useful tool for understanding where users get distracted.
+
+Tactics for reducing churn is an article in itself, but these are all good starting points. Just remember each lever you pull to reduce churn compound, so it's important to pull more than one if you can. It doesn't matter so much which one works the best, just that one or more them do.
 
 ### The things you need to improve retention
 
@@ -202,15 +204,17 @@ Check out [our product page](/product) if this sounds interesting to you.
 
 Phew, ok, that was lot. Hopefully you know a little more about how churn and retention rate work, interact, and impact your product now.
 
-To conclude, here are {CHANGE THIS} takeaways you can use to sound smart in meetings, or perhaps share on LinkedIn 😱 with a hashtag – I won't judge, not publicly at least:
+To conclude, here are {CHANGE THIS} takeaways on all things churn analysis:
 
-1. Early-stage startups shouldn't get too hung up on how high or low churn is, but you should care **which direction** it's headed. The actual rate of churn / retention is more important once you have product-market fit and care about revenue.
+1. Higher churn in an early-stage startup is fine, so long as you're growing fast and finding impactful ways to improve your product. Declining churn is a good sign you either have, or are approaching, product-market fit.
 
 1. Don't benchmark your churn rate against the wrong industry, or product type. Average revenue per customer (ARPC) is a huge factor here. A B2B SaaS with an ARPC of $200 per month should have very different expectations than an enterprise SaaS with an ARPC of $10,000 per month.
 
-1. PostHog is awesome and you should totally adopt it at your startup. "Nobody got fired for buying PostHog" said someone, probably me.
+1. Use cohort retention tables to understand what types of users, or features, positively or negatively impact churn. This will help guide product development, marketing, and areas to experiment in.
 
-- TODO: WILL PROBABLY ADD ANOTHER TWO HERE
+1. Deploy multiple tactics to reduce churn at the same time. It's faster, more effective, and the combined impact will (hopefully) be greater.
+
+1. PostHog is awesome and you should totally adopt it at your startup. "Nobody got fired for buying PostHog" said someone, probably me.
 
 ### Further reading
 
@@ -222,7 +226,7 @@ If you're interested in early-stage startups and product-led growth, you may fin
 
 - Another piece from James on [how we made something people want](/blog/making-something-people-want)
 
-You can also sign up to our newsletter over there 👉. We send it every two weeks. It's full of articles like this.
+You can also [sign up to our newsletter](/newsletter). We send it every two weeks. It's full of articles like this.
 
 > ## Appendix
 >
