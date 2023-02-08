@@ -214,7 +214,7 @@ To conclude, here are five takeaways:
 
 1. Use cohort retention tables to understand what types of users, or features, positively or negatively impact churn. This will help guide product development and marketing.
 
-1. Deploy multiple tactics to reduce churn at the same time. It's faster, more effective, and the combined impact will (hopefully) be greater.
+1. Deploy multiple tactics to reduce churn at the same time. It's faster and combined impact will (hopefully) be greater.
 
 1. PostHog is awesome and you should totally adopt it at your startup. "Nobody got fired for buying PostHog" said someone, probably me.
 
