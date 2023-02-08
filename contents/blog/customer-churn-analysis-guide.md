@@ -56,7 +56,7 @@ The majority of companies should track churn monthly and/or annually. Those inte
 
 ### Why should you care about churn?
 
-Reducing churn makes intuitive sense, but it's worth considering the practical impact of high churn and reducing it. To simplify somewhat, you can boil it down to three points:
+Reducing churn makes intuitive sense, but it's worth considering the practical impact of high churn and reducing it. You can boil it down to three points:
 
   1. High churn is a likely sign you don't have product-market fit.
 
@@ -90,7 +90,7 @@ So that's churn rate, but what about retention rate? The basic formula is very s
 
 > Retention rate = (Customers at the end of a period - Total new customers during that period) / Customers at the start of the period x 100
 
-So, if you have 100 customers at the start of a year, gain 35 new customers during the year and end the year with a total of 80 customers then your retention rate would be:
+So, if you have 100 customers at the start of a year, gain 35 new customers during the year, and end the year with a total of 80 customers then your retention rate would be:
 
 > ((80-35)/100)*100 = 45% retention
 
@@ -160,19 +160,19 @@ Cohort retention tables are also useful for tracking revenue retention, especial
 
 ## How to improve retention and reduce churn
 
-So, how do you improve retention and reduce churn? Talking to users is a vital component – we're [constantly talking to users] – but here are some tactical moves to consider:
+So, how do you improve retention and reduce churn? Talking to users is a vital component – we're [constantly talking to users](/blog/making-something-people-want) – but here are some tactical moves to consider:
 
 - **Check for involuntary churn:** Involuntary churn typically means billing problems – e.g. expired cards, out-of-date info etc. In e-commerce, abandoned baskets are a form involuntary churn.
 
-- **Target different users:** Sometimes poor retention comes from acquiring the wrong users. This could be a marketing problem, or you might have the wrong ideal customer profile for your product.
+- **Target different users:** Sometimes poor retention comes from acquiring the wrong users. This could be a marketing problem, or you might have the wrong [ideal customer profile](/blog/creating-ideal-customer-profile) for your product.
 
-- **Learn about your power users:** It's great to have power users, but they're also more sensitive to product changes. It's important to identify who they are, what they do, and what they value. They're your biggest advocated, so keep them happy. See: [How to identify and analyze power users in PostHog](/tutorials/power-users).
+- **Learn about your power users:** It's great to have power users, but they're also more sensitive to product changes. It's important to identify who they are, what they do, and what they value. They're your biggest advocates, so keep them happy. See: [How to identify and analyze power users in PostHog](/tutorials/power-users).
 
 - **Improve your product:** If you're talking to your users, and learning about your power users, then you should be well-placed to build awesome new features your existing (and potential) customers will love. I'm told this is "creating value" in the official business lingo.
 
 - **Focus on customer success:** Customer success > outbound sales a lot of the time. [Our customer success team](/handbook/small-teams/customer-success) owns all inbound contact requests, assisting new users and introducing them to the right PostHog people at the right time. If you can't afford a dedicated team, give the job to someone until you do. PostHog CEO, James Hawkins, owned this area in our early days.
 
-- Re-engage your users: Users who like your product can sometimes be distracted by other things. Well-timed re-engagement messages, such as "you left these items in your basket", can be extremely powerful. [Path analysis](/product/user-paths) is a useful tool for understanding where users get distracted.
+- **Re-engage your users:** Users who like your product can sometimes be distracted by other things. Well-timed re-engagement messages, such as showcasing an underused featured, can be extremely powerful. [Path analysis](/product/user-paths) is a useful tool for understanding where users get distracted.
 
 ### The things you need to improve retention
 
@@ -206,7 +206,7 @@ To conclude, here are {CHANGE THIS} takeaways you can use to sound smart in meet
 
 1. Early-stage startups shouldn't get too hung up on how high or low churn is, but you should care **which direction** it's headed. The actual rate of churn / retention is more important once you have product-market fit and care about revenue.
 
-1. Don't benchmark your churn rate against the wrong industry, or product type. Average revenue per customer (ARPC) is a huge factor here. A B2B SaaS with an ARPC of $200 per month should have very different expectations than one with an ARPC of $1,000 per month.
+1. Don't benchmark your churn rate against the wrong industry, or product type. Average revenue per customer (ARPC) is a huge factor here. A B2B SaaS with an ARPC of $200 per month should have very different expectations than an enterprise SaaS with an ARPC of $10,000 per month.
 
 1. PostHog is awesome and you should totally adopt it at your startup. "Nobody got fired for buying PostHog" said someone, probably me.
 
