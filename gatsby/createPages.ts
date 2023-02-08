@@ -107,7 +107,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     }
 
-    const createHandbookPages = async () => {
+    async function createHandbookPages() {
         const result = await graphql(`
             {
                 handbook: allMdx(
@@ -137,7 +137,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         )
     }
 
-    const createBlogPages = async () => {
+    async function createBlogPages() {
         const result = await graphql(`
             {
                 blogPosts: allMdx(
@@ -230,18 +230,19 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     }
 
-    const createPlainPages = async () => {
+    async function createPlainPages() {
         const result = await graphql(`
             {
                 allMdx(
                     filter: {
-                        fileAbsolutePath: { regex: "/^((?!contents/team/).)*$/" }
+                        slug: { regex: "/^(?!(docs|tutorials|product|manual|handbook|blog|customers|apps)/.*).*/" }
                         frontmatter: { title: { ne: "" } }
                     }
                     limit: 1000
                 ) {
                     nodes {
                         id
+                        fileAbsolutePath
                         slug
                     }
                 }
@@ -302,7 +303,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         createPosts(result.data.apidocs.nodes, 'docs', ApiEndpoint, { name: 'Docs', url: '/docs' })
     }
 
-    const createManualPages = async () => {
+    async function createManualPages() {
         const result = await graphql(`
             {
                 manual: allMdx(
@@ -329,7 +330,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     }
 
-    const createTutorials = async () => {
+    async function createTutorials() {
         const result = await graphql(`
             {
                 tutorials: allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }) {
@@ -390,7 +391,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     }
 
-    const createCustomers = async () => {
+    async function createCustomers() {
         const result = await graphql(`
             {
                 customers: allMdx(filter: { fields: { slug: { regex: "/^/customers/" } } }) {
@@ -422,7 +423,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     }
 
-    const createApps = async () => {
+    async function createApps() {
         const result = await graphql(`
             {
                 apps: allMdx(filter: { fields: { slug: { regex: "/^/apps/" } } }) {
@@ -465,7 +466,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     }
 
-    const createProducts = async () => {
+    async function createProducts() {
         const result = await graphql(`
             {
                 product: allMdx(filter: { fields: { slug: { regex: "/^/product/" } } }) {
@@ -508,7 +509,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     }
 
-    const createPlugins = async () => {
+    async function createPlugins() {
         const result = await graphql(`
             {
                 plugins: allPlugin(filter: { url: { regex: "/github.com/" } }) {
@@ -534,7 +535,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     }
 
-    const createHostHogPages = async () => {
+    async function createHostHogPages() {
         const result = await graphql(`
             {
                 hostHog: allMdx(filter: { fields: { slug: { regex: "/^/hosthog/" } } }) {
@@ -560,7 +561,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     }
 
-    const createJobs = async () => {
+    async function createJobs() {
         const result = await graphql(`
             {
                 jobs: allAshbyJobPosting {
@@ -627,19 +628,24 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         }
     }
 
-    await Promise.all([
-        createBlogPages(),
-        createDocsPages(),
-        createHandbookPages(),
-        createCustomers(),
-        createApps(),
-        createProducts(),
-        createPlugins(),
-        createHostHogPages(),
-        createJobs(),
-        createTutorials(),
-        createApiPages(),
-        createPlainPages(),
-        createManualPages(),
-    ])
+    await Promise.all(
+        [
+            createBlogPages,
+            createDocsPages,
+            createHandbookPages,
+            createCustomers,
+            createApps,
+            createProducts,
+            createPlugins,
+            createHostHogPages,
+            createJobs,
+            createTutorials,
+            createApiPages,
+            createPlainPages,
+            createManualPages,
+        ].map(async (func, index) => {
+            console.time(index.toString())
+            return func().then(() => console.timeEnd(index.toString()))
+        })
+    )
 }
