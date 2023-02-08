@@ -369,6 +369,10 @@
                         "url": "/handbook/engineering/databases/clickhouse-event-table-migrations"
                     },
                     {
+                        "name": "Diagnosing ClickHouse load using ClickHouse",
+                        "url": "/handbook/engineering/databases/debugging-load"
+                    },
+                    {
                         "name": "Working with ClickHouse materialized columns",
                         "url": "/handbook/engineering/databases/materialized-columns"
                     }
