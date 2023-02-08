@@ -10,7 +10,7 @@ We build for the highest-performing **product teams** (engineers, PMs, designers
 
 Example: PostHog anytime from their Series B to IPO
 
-Marketing and customer success should primarily focus on this ICP, but should also develop **high-*potential* customers** (customers that are likely to later become high-growth customers e.g. James and Tim during YC) whilst we should all just be in maintenance mode for **hobbyists** (engineers building side-projects e.g. Ben White building Mealyo). We want to be the first tool that technical founders add to their product.
+Marketing and customer success should primarily focus on this ICP, but should also develop **high-*potential* customers** (customers that are likely to later become high-growth customers e.g. James and Tim during YC). We should be in maintenance mode for **hobbyists** (engineers building side-projects e.g. Ben White building Mealyo). We want to be the first tool that technical founders add to their product.
 
 Why? We believe that the best tech companies are increasingly engineering-led. By building for the best product-engineers we'll create a positive feedback loop of being the best product for them. This is clearly differentiated from others in the space which are focused on less technical PMs. As more of the leading tech companies adopt being engineering-led and having highly technical PMs PostHog will become the clear product leader.
 
