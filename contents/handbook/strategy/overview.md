@@ -155,7 +155,7 @@ While there is value in the items on the right, we value the items on the left m
       * PostHog 3000 UX = a design and UX uplift including dark mode
         * Why? Re-classify PostHog from a PM tool to a developer tool to better resonate with our audience. Reduce the friction in using multiple tools
       * More powerful querying
-        * Why? Enable answering the long tail of questions that engineers have about their data
+        * Why? Enable answering the long tail of questions that engineers have about their data, without them needing to set up a data warehouse to do this
       * Make it easy to evaluate the success of features
         * Why? Currently, it's manual and repetitive to do best practice evaluation of features. Or it's not possible e.g. we don't have session recordings on mobile
     * Launch the CDP as a full product
