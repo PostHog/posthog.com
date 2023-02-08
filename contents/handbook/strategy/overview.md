@@ -144,7 +144,7 @@ While there is value in the items on the right, we value the items on the left m
 
 ## Direction for 2023
 
-3-word summary: **Nail product engineering**
+3-word summary: **Supercharge Product Engineers**
 
 * **Customers**
   * **Focus on product engineers at high-growth startups.** E.g. Large initial contracts ($20k-$70k/year) and smaller startups that will eventually become large
