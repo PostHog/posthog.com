@@ -212,7 +212,7 @@ To conclude, here are five takeaways:
 
 1. Don't benchmark your churn rate against the wrong industry, or product type. Average revenue per customer (ARPC) is a huge factor here. A B2B SaaS with an ARPC of $200 per month should have very different expectations than an enterprise SaaS with an ARPC of $10,000 per month.
 
-1. Use cohort retention tables to understand what types of users, or features, positively or negatively impact churn. This will help guide product development, marketing, and areas to experiment in.
+1. Use cohort retention tables to understand what types of users, or features, positively or negatively impact churn. This will help guide product development and marketing.
 
 1. Deploy multiple tactics to reduce churn at the same time. It's faster, more effective, and the combined impact will (hopefully) be greater.
 
