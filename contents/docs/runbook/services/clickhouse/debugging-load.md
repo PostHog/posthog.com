@@ -48,7 +48,7 @@ order by sum(query_duration_ms) DESC
 
 ## Advanced
 
-To diganose further, it's important to understand [ClickHouse operations](/handbook/engineering/clickhouse/operations).
+To diagnose further, it's important to understand [ClickHouse operations](/handbook/engineering/clickhouse/operations).
 
 
 PostHog app includes a lot of tags in `system.query_log` column `log_comment` to make analysis simpler.
