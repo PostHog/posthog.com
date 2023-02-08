@@ -156,8 +156,9 @@ While there is value in the items on the right, we value the items on the left m
         * Why? Re-classify PostHog from a PM tool to a developer tool to better resonate with our audience. Reduce the friction in using multiple tools
       * More powerful querying
         * Why? Enable answering the long tail of questions that engineers have about their data, without them needing to set up a data warehouse to do this
-      * Make it easy to evaluate the success of features
-        * Why? Currently, it's manual and repetitive to do best practice evaluation of features. Or it's not possible e.g. we don't have session recordings on mobile
+    * Make it easy to evaluate the success of features
+      * Why? Currently, it's manual and repetitive to do best practice evaluation of features. Or it's not possible e.g. we don't have session recordings on mobile
+      * How? _To expand on this after the completion of team experimentation's research_
     * Launch the CDP as a full product
       * Why?
         * Putting PostHog at the center of the stack gets all the data into PostHog, enabling our customers to ask the questions they need about their data
