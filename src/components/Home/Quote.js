@@ -22,8 +22,8 @@ export default function HomeQuote() {
                 <span>
                     "PostHog is the first analytics platform that's excited me! It has multiple tools, so instead of
                     using <span className="text-red">Google Analytics</span> and{' '}
-                    <span className="text-red">HotJar</span> and <span className="text-red">Intercom</span> and{' '}
-                    <span className="text-red">Mixpanel</span>, I can just use PostHog.
+                    <span className="text-red">HotJar</span> and <span className="text-red">Mixpanel</span>, I can just
+                    use PostHog.
                 </span>
             }
         />

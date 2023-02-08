@@ -19,7 +19,7 @@ Want to know how PostHog and Mixpanel are different? If you remember nothing els
 
 1. Mixpanel is a product analytics tool.
 
-2. PostHog is an all-in-one platform that _includes_ product analytics **and** a whole bunch more.
+2. PostHog is an all-in-one Product OS that _includes_ product analytics **and** a whole bunch more.
 
 In this guide, we will compare:
 
@@ -925,15 +925,9 @@ Mixpanel and PostHog both support popular messaging apps and automation platform
 - [How much does Mixpanel cost?](#how-much-does-mixpanel-cost)
 - [How do PostHog and Mixpanel compare to Amplitude?](#how-do-posthog-and-mixpanel-compare-to-amplitude)
 
-### Who should self-host PostHog?
-
-We recommend 95% of companies use [PostHog Cloud](/pricing) – it's fully-managed by us and you can choose [PostHog Cloud EU](/eu) if you need to keep data within the EU. The most common reasons for choosing to self-host PostHog are companies that handle very sensitive data, such as medical or defense information. 
-
-Enterprises looking to self-host will require an infrastructure team knowledgeable in Kubernetes and ClickHouse. See our [enterprise self-hosted docs](/docs/self-host/enterprise/overview) and [book a call](book-a-demo) to discuss your options and whether self-hosting is right for you. We also have a [partner directory](/partners) includes third-party specialists who can support self-hosted deployments.
-
 ### How long does it take to deploy PostHog?
 
-When using PostHog Cloud, mere minutes. All you need to do is include a tracking snippet in your product or website and (thanks to autocapture) you're immediately capturing events. Once up and running, you can enable session recording via your project settings. 
+Deploying PostHog Cloud takes mere minutes. All you need to do is include a tracking snippet in your product or website and (thanks to autocapture) you're immediately capturing events. Once up and running, you can enable session recording via your project settings. 
 
 See our guide to [getting started on PostHog Cloud](/docs/getting-started/cloud) for more info.
 
