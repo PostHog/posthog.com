@@ -206,7 +206,7 @@ Check out [our product page](/product) if this sounds interesting to you.
 
 Phew, ok, that was lot. Hopefully you know a little more about how churn and retention rate work, interact, and impact your product now.
 
-To conclude, here are {CHANGE THIS} takeaways on all things churn analysis:
+To conclude, here are five takeaways:
 
 1. Higher churn in an early-stage startup is fine, so long as you're growing fast and finding impactful ways to improve your product. Declining churn is a good sign you either have, or are approaching, product-market fit.
 
