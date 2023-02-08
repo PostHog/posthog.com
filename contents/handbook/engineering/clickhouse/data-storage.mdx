@@ -19,7 +19,7 @@ This document covers the answers to the following questions:
 Rather than force all possible tasks to be solved by singular tools, ClickHouse provides specialized "engines" that each solve
 specific problems.
 
-MergeTree engine family tables are intended to ingest large amounts of data, to store them efficiently and for running analytical queries on them.
+MergeTree engine family tables are intended for ingesting large amounts of data, storing that data efficientl, and running analytical queries on it.
 
 ## How MergeTree stores data
 
@@ -44,8 +44,10 @@ Parts can be `Wide` or `Compact` depending on its size. We'll be mostly dealing 
 
 `Wide` parts are large and store each column in a separate binary data file, which are sorted and compressed.
 
-ClickHouse also stores a sparse index for the part. Every `index_granularity` rows is called a **granule**. For every **granule**, the primary
+ClickHouse also stores a sparse index for the part. A collection of rows with size equal to the `index_granularity` setting is called a **granule**. For every **granule**, the primary
 index stores a **mark** containing the value of the `ORDER BY` statement as well as a pointer to where that **mark** is located in each data file.
+
+> 💡 For better performance when running queries, it is not recommended to set `index_granularity` too low. The default value for engines in the `MergeTree` family is 8192. An implication of this is that acessing data by primary key (in this case the `ORDER BY` clause is equivalent to the primary key) will not read just one row, but rather up to `index_granularity` number of rows. This is acceptable given ClickHouse is meant to perform well with aggregations, rather than point lookups.
 
 <details><summary>Diving deeper into data-on-disk for a Wide part</summary>
 
@@ -122,7 +124,7 @@ total 477M
 
 What are these files?
 
-- For every column, there's a `{column_name}.bin` file, containing the LZ4-compressed data for that column. These take up most of the space.
+- For every column, there's a `{column_name}.bin` file, containing the compressed (LZ4 compression by default) data for that column. These take up most of the space.
 - For every column, there's a `{column_name}.mrk2` file, contains an index with data to locate each granule in `{column_name}.bin` file
 - `primary.idx` contains information on ORDER BY column values for each granule. This is loaded into memory during queries.
 - `checksums.txt`, `columns.txt`, `default_compression_codec.txt` and `count.txt` contain metadata about this part.
@@ -168,7 +170,7 @@ Executing this reports:
 ```
 
 Why can it be fast? Because ClickHouse:
-1. leverages table `ORDER BY (site_id, toStartOfDay(timestamp), event, uuid)` clause to skip reading a lot of data
+1. leverages the table `ORDER BY` clause (`ORDER BY (site_id, toStartOfDay(timestamp), event, uuid)`) to skip reading a lot of data
 2. is fast and efficient about I/O and aggregation
 
 Let's dig into how the primary index for this query is used by using [`EXPLAIN`](https://clickhouse.com/docs/en/sql-reference/statements/explain/).
@@ -284,13 +286,13 @@ Executing this query reports:
 While the overall execution time of this query is not bad thanks to fast I/O, it needed to read 2200x the amount of data from disk.
 As the dataset size or column sizes increase, this performance would get dramatically worse.
 
-Why is this query slower? Because our `ORDER BY` does not support fast filtering by uuid and ClickHouse needs to read the whole
+Why is this query slower? Because our `ORDER BY` does not support fast filtering by `uuid` and ClickHouse needs to read the whole
 table to find a single record _and_ read all columns.
 
 ClickHouse provides some ways to make this faster (e.g. [Projections](https://clickhouse.com/docs/en/engines/table-engines/mergetree-family/mergetree#projections))
 but in general these require extra disk space or have other trade-offs.
 
-ClickHouse schema must be aligned with queries that are being executed.
+Thus, it's important to make sure the ClickHouse schema is aligned with queries that are being executed.
 
 ## `PARTITION BY`
 
@@ -455,13 +457,13 @@ See the following Altinity documentation for more guidance:
 
 Updating data in ClickHouse is expensive and analogous to a schema migration.
 
-For example, to update an events properties, ClickHouse frequently needs to:
+For example, to update an event's properties, ClickHouse frequently needs to:
 - Scan all the data to find what parts contain the relevant data. This isn't often covered by `ORDER BY` and thus quite expensive.
 - Rewrite the _whole_ part (including any columns) - this could be potentially up to 150GB of data rewritten for a single update.
 
 This makes things operationally hard. We mitigate this by:
 - Writing duplicated rows for new data, using other table engines (e.g. ReplacingMergeTree) and accounting for this duplication in our queries.
-- Batching up GDPR- or other data deletions and doing them on a schedule rather than immediately.
+- Batching up GDPR or other data deletions and doing them on a schedule rather than immediately.
 
 ### No query planner
 
@@ -493,10 +495,12 @@ can be read faster from disk at the cost of more CPU work for decompression.
 By default columns are compressed by the `LZ4` algorithm. We've found good success using `ZSTD(3)` for storing JSON columns - see
 [benchmarks](https://github.com/PostHog/posthog/issues/10616) for more information.
 
+Another tip is to use ClickHouse's `LowCardinality` data type modifier on schemas where a given column will store values with low cardinality i.e. the total number of values is low. An example of this would be "country name".
+
 ### Weak JOIN support
 
 ClickHouse excels at aggregating data from a single table at a time. If you however have a query with JOINs or subqueries, the right-hand-side of the
-JOIN would be loaded into memory first.
+JOIN would be loaded into memory first. Thus, you should always have the bigger table on the left side of left-hand-side!
 
 This means that at scale JOINs can kill performance. Read more on the effect of removing JOINs from our events database here:
 - https://github.com/PostHog/posthog/issues/7962
