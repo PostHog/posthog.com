@@ -29,7 +29,7 @@ select
         query = 'SELECT version()', 'version_query',
         JSONExtractString(log_comment, 'kind') = 'request' and JSONExtractString(log_comment, 'route_id') IN ('api/event/?$', 'api/projects/(?P<parent_lookup_team_id>[^/.]+)/events/?$'), '/api/event',
         log_comment != '', JSONExtractString(log_comment, 'kind'),
-        query_kind = 'Insert', 'Insert',
+        query_kind = 'Insert',
         query LIKE '%FORMAT JSON%' or (not is_initial_query and query like '%`elements_chain` FROM `posthog`.`sharded_events%') or (query like '%min(`_timestamp`) AS `min`, max(`_timestamp`)%'), 'historical-exports',
         'unknown'
     ) as query_type,
