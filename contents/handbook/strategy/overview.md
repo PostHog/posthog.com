@@ -163,6 +163,7 @@ While there is value in the items on the right, we value the items on the left m
         * Putting PostHog at the center of the stack gets all the data into PostHog, enabling our customers to ask the questions they need about their data
         * Makes PostHog incredibly sticky even if they move to a data warehouse
         * Our customers are already asking for it
+        * Reduces the need for customers to setup an additional CDP tool _and_ takes us a step closer to our customers not needing a warehouse either
       * How?
         * Make imports and exports bulletproof
         * 1st class webhook destinations
