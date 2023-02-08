@@ -52,7 +52,7 @@ Where:
 
 The majority of companies should track churn monthly and/or annually. Those interested in tracking churn daily or weekly are better off using a [cohort retention table](#how-to-read-and-use-a-cohort-retention-table). More on those later.
 
-> 🚨 **Important:** Do not confuse monthly and annual churn rates. Monthly churn compounds into annual churn – i.e. a monthly churn rate of 5% equals a massive 46% annual churn rate. You can't just multiply your monthly churn rate by 12 to get your annual number, either. See [how to convert monthly churn to annual](#converting-monthly-churn-into-annual-churn-and-vice-versa) in the appendix.
+🚨 **Important:** Do not confuse monthly and annual churn rates. Monthly churn compounds into annual churn – i.e. a monthly churn rate of 5% equals a massive 46% annual churn rate. You can't just multiply your monthly churn rate by 12 to get your annual number, either. See [how to convert monthly churn to annual](#converting-monthly-churn-into-annual-churn-and-vice-versa) in the appendix.
 
 ### Why should you care about churn?
 
@@ -78,7 +78,9 @@ I've collated the better sources [in the appendix](#more-on-churn-rate-benchmark
 
 - **Early-stage B2B SaaS:** A monthly churn rate above 5% is to be expected for any early-stage company B2B SaaS, so don't worry too much if you're growing fast and you're above that benchmark. Just monitor your trend and dig deeper if you don't see it decline as you mature. A monthly churn of 5.65% is equivalent to 50.24% annually – i.e. a company with 1,000 companies would lose 502 over 12 months, more than half.
 
-- **Enterprise B2B SaaS:** Products selling to large enterprises (think more than 1,000 employees) have lower churn, mainly because large companies change slowly and will generally bill annually. A monthly churn rate up to 2% is good. Anything less than 1% is excellent. A monthly churn rate of 1% is equivalent to 11.3% annually – i.e. a company with 1,000 customers will lose 114 over 12 months.
+- **Enterprise B2B SaaS:** Products selling to large enterprises (think more than 1,000 employees) have lower churn, mainly because large companies change slowly and are billed annually. A monthly churn rate up to 2% is good. Anything less than 1% is excellent. A monthly churn rate of 1% is equivalent to 11.3% annually – i.e. a company with 1,000 customers will lose 114 over 12 months.
+
+Good retention rates are the same, but inverted – 5% churn equals 95% retention, and so on.
 
 ## Understanding retention rate
 
