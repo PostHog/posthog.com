@@ -85,7 +85,7 @@ YouTube is hard and a much more expensive way to reach developers. Most dev-focu
 
 Don’t host your own - you do not have the budget to do this well. Do attend others though, if you have someone on your team who loves doing them and is an engineer. Sending marketing people to events only is not leveraged enough. For now, we give our entire team budget to attend events on PostHog's behalf and leave it at that. Sponsoring events is disproportionately expensive - and if your name appears on the same level as Google's, you are definitely wasting your money. 
 
-**It's ok for other commpanies to be much better than you at social media** 
+**It's ok for other companies to be much better than you at social media** 
 
 We’re seeing promising results on Twitter, but it’s too early to share concrete feedback. One thing we have learned is to not try multiple channels at the same time - you just feel like you’ve done an ‘ok’ job at everything, and you don’t truly learn what works. We’ve found posting from personal accounts 10x more effective than posting from the company account. Bear in mind that the companies that do an excellent job at social media put _a lot_ of work into making it look effortless - don't underestimate the effort required. 
 
