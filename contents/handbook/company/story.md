@@ -80,6 +80,8 @@ We've now got 2 Customer Success people dealing with all (inbound) requests. We 
 
 We had a fantastic year. Whilst the tech market crashed, we grew 6x and reached $MM in revenue, with a 2 month CAC payback period. We're now aiming to hit $10M ARR as our next goal, hitting a gross margin of 70% - both of which should mean we've got all the metrics needed for the next fundraise.
 
+We optimized revenue growth, through implementing a product-led CRM for our customer success team, through adding to our marketing team size, and through creating a small (2 person) growth engineering team. These teams all contribute significantly!
+
 We deepened all of our product areas significantly - we're frequently winning as a standalone session recording, feature flagging or experimentation tool. Session recording usage starts to match product analytics usage.
 
 Our infra is far more stable and scalable - much more of it runs as code. We can now offer EU or US based hosting for our customers' data.
