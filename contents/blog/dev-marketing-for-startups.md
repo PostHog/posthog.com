@@ -18,7 +18,6 @@ Since starting PostHog in 2020, we’ve learned a bunch about what does and does
 
 In this intro article, my intention is to share specific, actionable advice for early stage startups building devtools. I’ve bucketed advice into pre- and post-product-market fit.
 
-Longer term, I’m going to flesh out each point into its own short article for those who want to go a bit deeper.
 
 I’ve also included a couple of channels that we haven’t nailed but know other successful devtool companies consider important. We’re still learning, and definitely haven’t figured everything out!
 
