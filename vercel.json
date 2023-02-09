@@ -682,6 +682,10 @@
         {
             "source": "/docs/integrate/badge",
             "destination": "/docs/contribute/badge"
+        },
+        {
+            "source": "/blog/introduction-to-customer-retention",
+            "destination": "/blog/customer-churn-analysis-guide"
         }
     ],
     "rewrites": [
