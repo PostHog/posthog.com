@@ -5,11 +5,30 @@ import Link from '../Link'
 import Submenu from './Submenu'
 import { menuItem as menuItemClass, link } from './classes'
 import { CallToAction } from 'components/CallToAction'
-import { usePopper } from 'react-popper'
+import { RenderInClient } from 'components/RenderInClient'
+import usePostHog from '../../hooks/usePostHog'
+
+export const MenuItemLink = ({ menuItem, hovered, urlOverride }) => {
+    const breakpoints = useBreakpoint()
+    const { title, url, sub, classes = '' } = menuItem
+    console.log(menuItem)
+
+    return (
+        <Link
+            onClick={breakpoints.md && sub && handleSubClick}
+            to={urlOverride || url}
+            className={link(classes, sub && hovered)}
+        >
+            <span>{title}</span>
+            {sub && !breakpoints.md && <Chevron className="text-black/25 dark:text-white/50 mt-1 -ml-3" />}
+        </Link>
+    )
+}
 
 export default function MenuItem({ menuItem, referenceElement }) {
     const [hovered, setHovered] = useState(false)
     const { title, url, sub, hideBorder, cta, classes = '' } = menuItem
+    const posthog = usePostHog()
     const breakpoints = useBreakpoint()
     const handleSubClick = () => {
         setHovered(!hovered)
@@ -31,15 +50,21 @@ export default function MenuItem({ menuItem, referenceElement }) {
                     >
                         {title}
                     </CallToAction>
+                ) : title === 'Login' ? (
+                    <RenderInClient
+                        placeholder={<MenuItemLink menuItem={menuItem} hovered={hovered} />}
+                        render={() => (
+                            <MenuItemLink
+                                menuItem={menuItem}
+                                urlOverride={`https://${
+                                    posthog?.isFeatureEnabled('direct-to-eu-cloud') ? 'eu' : 'app'
+                                }.posthog.com/signup`}
+                                hovered={hovered}
+                            />
+                        )}
+                    />
                 ) : (
-                    <Link
-                        onClick={breakpoints.md && sub && handleSubClick}
-                        to={url}
-                        className={link(classes, sub && hovered)}
-                    >
-                        <span>{title}</span>
-                        {sub && !breakpoints.md && <Chevron className="text-black/25 dark:text-white/50 mt-1 -ml-3" />}
-                    </Link>
+                    <MenuItemLink menuItem={menuItem} hovered={hovered} />
                 )}
                 {sub && breakpoints.md && (
                     <button
