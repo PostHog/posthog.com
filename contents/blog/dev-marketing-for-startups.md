@@ -25,7 +25,7 @@ I’ve also included a couple of channels that we haven’t nailed but know othe
 
 **Compete on content depth, not breadth** 
 
-Trying to go head to head with much larger competitors on content output is a losing game, so focus on quality instead. You are not Cloudflare (yet). 1 great article >>> 25 mediocre ones. Quality is more important than hitting an arbitrary content schedule - and makes the writing process a lot more enjoyable. Our balance is approx. ⅓ SEO articles, ⅓ tutorials, ⅓ anything goes. 
+Trying to go head to head with much larger competitors on content output is a losing game, so focus on quality instead. You are not Cloudflare (yet). 1 great article >>> 25 mediocre ones. Quality is more important than hitting an arbitrary content schedule - and makes the writing process a lot more enjoyable. In terms of types of content, we write approx. ⅓ SEO articles, ⅓ tutorials, ⅓ anything goes. 
 
 High quality pieces perform better in the long run, especially SEO ones. Treat your SEO portfolio like a VC treats their investments - invest time updating your best SEO pieces, don’t just write something and forget about it. 
 
@@ -36,10 +36,6 @@ This applies to _everything_ you write. SEO articles are not exempt from this ru
 **Treat your website like a product** 
 
 This means keeping it separate from marketing, which is the opposite of what most companies do. While our marketing and website teams work closely together, the website team has the final say on what appears on posthog.com. This stops the website becoming too marketing-y and falling foul of marketing ‘best practices’ that most developers (and people in general) despise.   
-
-**Hire a developer who loves writing onto your marketing team** 
-
-You do not need a whole team of developers writing content, but have at least one to cover the more technical stuff (inc. tutorials). They’ll also help keep you connected to your users and not focused on purely top-of-funnel or general types of content. This has made a huge difference to the breadth of product content we’re able to cover. 
 
 **Be really careful about outsourcing** 
 
@@ -67,9 +63,15 @@ In your product signup flow, include an optional free text box asking people whe
 
 ### Post-product-market fit
 
+**Hire a developer who loves writing onto your marketing team** 
+
+You do not need a whole team of developers writing content, but have at least one to cover the more technical stuff (inc. tutorials). They’ll also help keep you connected to your users and not focused on purely top-of-funnel or general types of content. This has made a huge difference to the breadth of product content we’re able to cover. 
+
 **Paid ads are not all bad** 
 
-Paid ads can be a useful tool for learning quickly if you are building a consumer app, but _not_ for devtools (see ‘attribution mirage’ above), which is why I’ve put them in post-PMF. It is very easy to spend tons of money on shit, especially in Google Ads. NEVER USE THE DEFAULT SETTINGS on Google, LinkedIn, and Twitter especially. Hire a cheap agency. We aim to be 7/10 at paid ads, not amazing. Focus that energy on your content instead. 
+Paid ads can be a useful tool for learning quickly if you are building a consumer app, but _not_ for devtools (see ‘attribution mirage’ above), which is why I’ve put them in post-PMF. It is very easy to spend tons of money on shit, especially in Google Ads. NEVER USE THE DEFAULT SETTINGS on Google, LinkedIn, and Twitter especially. 
+
+Hire a cheap agency - $5k/mo is achievable, especially if they're just managing channels and creative, and not throwing in 'value add' services like landing pages and SEO strategy. Don't hire an agency based in the US - they are triple the price. We aim to be 7/10 at paid ads, not amazing. Focus that energy on your content instead. 
 
 Google is good for conversion, while LinkedIn ($$$), Twitter ($$), Reddit ($), and Quora ($) are good for general awareness. Avoid Product Hunt if you sell something that costs > $10/month (you’ll get loads of signups, but they hate spending money). Carbon Ads is very expensive and was a waste of time for us. 
 
@@ -77,7 +79,7 @@ Google is good for conversion, while LinkedIn ($$$), Twitter ($$), Reddit ($), a
 
 They are generally quite expensive, but unfortunately you need to spend money to learn here. Newsletters are the best place to start - they can be highly effective once you find the right one. Ask your engineers and users what newsletters they actually read, then sponsor those. Do bursts of activity - e.g. 3 months on, 3 months off. Switch up the copy so you don't exhaust the audience.
 
-YouTube is hard and a much more expensive way to reach developers. Most dev-focused content is for people learning to code, so beware.
+YouTube and podcasts are hard and a _much_ more expensive way to reach developers. Most dev-focused content on YouTube is for people learning to code, so beware.
 
 ### Two things we haven’t figured out yet
 
@@ -87,7 +89,7 @@ Don’t host your own - you do not have the budget to do this well. Do attend ot
 
 **It's ok for other companies to be much better than you at social media** 
 
-We’re seeing promising results on Twitter, but it’s too early to share concrete feedback. One thing we have learned is to not try multiple channels at the same time - you just feel like you’ve done an ‘ok’ job at everything, and you don’t truly learn what works. We’ve found posting from personal accounts 10x more effective than posting from the company account. Bear in mind that the companies that do an excellent job at social media put _a lot_ of work into making it look effortless - don't underestimate the effort required. 
+We’ve tried a few channels and are seeing promising results on Twitter, but it’s too early to share concrete feedback. One thing we have learned is to not try multiple channels at the same time - you just feel like you’ve done an ‘ok’ job at everything, and you don’t truly learn what works. We’ve found posting from personal accounts 10x more effective than posting from the company account. Bear in mind that the companies that do an excellent job at social media put _a lot_ of work into making it look effortless - don't underestimate the effort required. 
 
 ### What next?
 
