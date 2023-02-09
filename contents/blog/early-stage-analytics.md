@@ -1,6 +1,6 @@
 ---
 title: "The 80/20 of early-stage startup analytics"
-date: 2023-02-07
+date: 2023-02-09
 author: ["ian-vanagas"]
 showTitle: true
 rootpage: /blog
@@ -55,7 +55,7 @@ A key metrics dashboard is useful for validating that users are actually using t
 
 ![Dashboard](../images/blog/early-stage-analytics/dashboard.png)
 
-For early-stage startups, it is probably too early to start optimizing your conversion funnel or set up a [dashboard like AARRR](/blog/aarrr-pirate-funnel). This is because it encourages premature optimization that will likely change, or worse, hide bigger problems (like no one wanting your product). A key metrics dashboard strikes the balance between being useful and overanalyzing. 
+It's probably too early to start optimizing your conversion funnel or set up a [dashboard like AARRR](/blog/aarrr-pirate-funnel), though. It encourages premature optimization, or worse, hides bigger problems (like no one wanting your product). A key metrics dashboard strikes the balance between being useful and overanalyzing. 
 
 PostHog's snippet or library [autocaptures](/docs/integrate/client/js#autocapture) the metrics you want, like pageviews, button clicks, and inputs without additional setup. We then offer a template for a product analytics dashboard, and our insights make it easy to customize it to work for you. With PostHog, none of these tasks require a lot of work, and you can get back to building.
 
