@@ -35,7 +35,7 @@ This applies to _everything_ you write. SEO articles are not exempt from this ru
 
 **Treat your website like a product** 
 
-This means keeping it separate from marketing, which is the opposite of what most companies do. While our marketing and website teams work very closely together, the website team has the final say on what appears on posthog.com. This stops the website becoming too marketing-y and falling foul of marketing ‘best practices’ that most developers (and people in general) despise.   
+This means keeping it separate from marketing, which is the opposite of what most companies do. While our marketing and website teams work closely together, the website team has the final say on what appears on posthog.com. This stops the website becoming too marketing-y and falling foul of marketing ‘best practices’ that most developers (and people in general) despise.   
 
 **Hire a developer who loves writing onto your marketing team** 
 
