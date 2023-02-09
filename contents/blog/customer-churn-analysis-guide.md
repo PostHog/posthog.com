@@ -31,12 +31,12 @@ These and other questions (like [how to reduce churn](#how-to-improve-retention-
 Not much, really: 
 
 - **Churn rate** is the percentage of customers who **stop using** your product during a given period of time.
- 
+
 - **Retention rate** is the percentage of **existing customers** who **continue using** your product. 
 
 In other words, if you have 1,000 customers and 100 of them cancel their subscription, your monthly churn rate would be 10% and your retention rate would be 90%. That's it.
 
-Typically, "churn" and "customer churn" are used interchangeably, but there are numerous formulas for revenue churn/retention metrics – e.g. net revenue retention, gross revenue churn etc. I won't be covering them here, but [ADD LINK TO A GOOD SOURCE ON THE TOPIC].
+Typically, "churn" and "customer churn" are used interchangeably, but there are numerous formulas for revenue churn/retention metrics – e.g. net revenue retention, gross revenue churn etc. I won't be covering them here, but [this is a good intro](https://openviewpartners.com/blog/saas-metrics-cmrr-net-dollar-retention/) on the topic.
 
 Those are the basics, but there's more worth learning. Let's start with churn rate.
 
@@ -178,7 +178,7 @@ So, how do you improve retention and reduce churn? Talking to users is a vital c
 
 - **Re-engage your users:** Users who like your product can sometimes be distracted by other things. Well-timed outreach messages, such as showcasing an underused featured, can be extremely powerful. [Path analysis](/product/user-paths) is a useful tool for understanding where users get distracted.
 
-Tactics for reducing churn is an article in itself, but these are all good starting points. Just remember each lever you pull to reduce churn compound, so it's important to pull more than one if you can. It doesn't matter so much which one works the best, just that one or more them do.
+Tactics for reducing churn is an article in itself, but these are all good starting points. Just remember each lever you pull to reduce churn compounds, so it's important to pull more than one if you can. It doesn't matter so much which one works the best, just that one or more them do.
 
 ### The things you need to improve retention
 
@@ -216,7 +216,7 @@ To conclude, here are five takeaways:
 
 1. Use cohort retention tables to understand what types of users, or features, positively or negatively impact churn. This will help guide product development and marketing.
 
-1. Deploy multiple tactics to reduce churn at the same time. It's faster and combined impact will (hopefully) be greater.
+1. Deploy multiple tactics to reduce churn at the same time. It's faster and the combined impact will (hopefully) be greater.
 
 1. PostHog is awesome and you should totally adopt it at your startup. "Nobody got fired for buying PostHog" said someone, probably me.
 
@@ -234,11 +234,15 @@ You can also [sign up to our newsletter](/newsletter). We send it every two week
 
 > ## Appendix
 >
-> ### Converting monthly churn into annual churn (and vice versa)
+> ### Converting monthly churn into annual churn
+>
+> Use this formula to convert monthly churn into annual churn: 
 >
 > - **Annual churn** = 1-(1-[your monthly churn])^12
 >
 > Using this formula, a monthly churn rate of 1% equals an annual churn of 11.6%. So, if you started the year with 1,000 customers and had 1% churn per month, you'd have 114 churned customers you need to replace through acquisition.
+>
+> Use this formula to do the opposite:
 >
 > - **Monthly churn** = 1-(1-[your annual churn])^(1/12)
 >
