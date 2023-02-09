@@ -1,6 +1,6 @@
 ---
 date: 2023-02-09
-title: Developer marketing for early stage startups - what we’ve learned at PostHog
+title: Developer marketing for early-stage startups - what we’ve learned at PostHog
 rootPage: /blog
 sidebar: Blog
 showTitle: true
