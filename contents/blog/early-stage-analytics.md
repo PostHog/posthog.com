@@ -21,8 +21,6 @@ Our team works with a lot of high-growth startups (they are [our ideal customers
 
 ## Why do analytics matter for startups?
 
-Analytics provide insight into how your users are using your product. They are direct feedback to help you figure out what to work on. Like a flashlight, they are a light for the dark journey to product market fit.
-
 As a simple example, product analytics show you whether your users are actually using your product. Not just "oh yeah, I’ll check it out," but seeing if they are logging in, using the features you developed, and most importantly, returning to use them again. Analytics show what areas they are finding value in, what needs to improve, and what is broken.
 
 From this usage, you can begin creating insights to help you track [key product metrics](/blog/b2b-saas-product-metrics) like traction, engagement, active users, revenue, and feature usage. Without this, you rely heavily on anecdotal evidence. You simply want to see these numbers go up and to the right, there’s not a lot of deep analysis needed here. If the metrics aren’t moving in the right direction, it is a sign to change.
@@ -69,6 +67,4 @@ The analytics become a part of your business processes. PostHog helps this happe
 
 ## The balance of early-stage startup analytics
 
-Analytics at early-stage startups is a balance. You want an understanding of your product, without being bogged down by overanalysis. Startups need enough information to know what to build next, and plenty of time to build it. The analytics tools outlined here are what we found to work for early-stage startups we work with, but every case is different.
-
-Session recordings, key metric dashboards, feedback gathering, and key action monitoring strike the balance. They give early-stage startups the biggest benefit for the lowest investment. These analytics tools provide the light startups need to work their way out of the early-stage cave to product market fit. If this sounds helpful, [sign up for PostHog for free](https://app.posthog.com/signup).
+Analytics at early-stage startups is a balance. You need just enough information to know what to build next, without getting bogged down in overanalysis. Follow these steps and you'll have a built an efficient flashlight to find your way to product-market fit. If this sounds helpful, [sign up for PostHog for free](https://app.posthog.com/signup).
