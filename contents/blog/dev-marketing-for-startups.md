@@ -27,7 +27,7 @@ I’ve also included a couple of channels that we haven’t nailed but know othe
 
 Trying to go head to head with much larger competitors on content output is a losing game, so focus on quality instead. You are not Cloudflare (yet). 1 great article >>> 25 mediocre ones. Quality is more important than hitting an arbitrary content schedule - and makes the writing process a lot more enjoyable. Our balance is approx. ⅓ SEO articles, ⅓ tutorials, ⅓ anything goes. 
 
-Treat your SEO portfolio like a VC treats their investments - invest time updating your best SEO pieces, don’t just write something and forget about it. 
+High quality pieces perform better in the long run, especially SEO ones. Treat your SEO portfolio like a VC treats their investments - invest time updating your best SEO pieces, don’t just write something and forget about it. 
 
 **Ask yourself ‘is this content _genuinely useful_ to a developer?’**
 
