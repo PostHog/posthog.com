@@ -37,7 +37,7 @@ These metrics provide clear, rapid feedback on whether what we are building is v
 
 ## The 80/20 of early-stage startup analytics
 
-As much as we value analytics, we believe the best way to create a successful startup is to spend time building a better product, not analytics analysis. To ensure you have time to build, here's what we recommend to get the most benefit from analytics in the shortest time.
+As much as we value analytics, we believe the best way to create a successful startup is to spend time building a better product, not obsessing over data. To ensure you have time to build, here's what we recommend to get the most benefit from analytics in the shortest time.
 
 ### 1. Set up and watch session recordings
 
