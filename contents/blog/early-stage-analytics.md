@@ -37,7 +37,7 @@ These metrics provide clear, rapid feedback on whether what we are building is v
 
 ## The 80/20 of early-stage startup analytics
 
-As much as we value analytics, we still think building an actual product is the most important. No amount of time spent analyzing metrics is going to make them grow faster than building a better product. Because time is so valuable for startups, here’s what we recommend startups do to get the most benefit from analytics in the shortest amount of time.
+As much as we value analytics, we believe the best way to create a successful startup is to spend time building a better product, not analytics analysis. To ensure you have time to build, here's what we recommend to get the most benefit from analytics in the shortest time.
 
 ### 1. Set up and watch session recordings
 
@@ -57,7 +57,7 @@ A key metrics dashboard is useful for validating that users are actually using t
 
 For early-stage startups, it is probably too early to start optimizing your conversion funnel or set up a [dashboard like AARRR](/blog/aarrr-pirate-funnel). This is because it encourages premature optimization that will likely change, or worse, hide bigger problems (like no one wanting your product). A key metrics dashboard strikes the balance between being useful and overanalyzing. 
 
-PostHog's snippet or JavaScript library autocaptures the metrics you want, like pageviews, button clicks, and inputs. We then offer a template for a product analytics dashboard, and our insights make it easy to customize it to work for you. With PostHog, none of these tasks require a lot of work, and you can get back to building.
+PostHog's snippet or library [autocaptures](/docs/integrate/client/js#autocapture) the metrics you want, like pageviews, button clicks, and inputs without additional setup. We then offer a template for a product analytics dashboard, and our insights make it easy to customize it to work for you. With PostHog, none of these tasks require a lot of work, and you can get back to building.
 
 ### 3. Gather feedback and talk to users
 
