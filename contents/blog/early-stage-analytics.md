@@ -1,5 +1,5 @@
 ---
-title: "Early-stage startups need analytics, here’s why (and what matters most)"
+title: "The 80/20 of early-stage startup analytics"
 date: 2023-02-07
 author: ["ian-vanagas"]
 showTitle: true
@@ -17,7 +17,7 @@ Building a startup is like trying to find the exit of a dark cave. Sometimes you
 
 ![Flashlight](../images/blog/early-stage-analytics/light.png)
 
-Our team works with a lot of high-growth startups (they are [our ideal customers](/handbook/strategy/ideal-customer-persona)). We succeed when they succeed. We know from experience that understanding your users is a vital part of finding early success, and you can't do that without analytics. Here we explain and how to use analytics effectively at an early stage.
+Our team works with a lot of high-growth startups (they are [our ideal customers](/handbook/strategy/ideal-customer-persona)). We succeed when they succeed. We know from experience that understanding your users is a vital part of finding early success, and you can't do that without analytics. Here we explain how to use analytics effectively at an early stage.
 
 ## Why do analytics matter for startups?
 
@@ -26,6 +26,14 @@ As a simple example, product analytics show you whether your users are actually 
 From this usage, you can begin creating insights to help you track [key product metrics](/blog/b2b-saas-product-metrics) like traction, engagement, active users, revenue, and feature usage. Without this, you rely heavily on anecdotal evidence. You simply want to see these numbers go up and to the right, there’s not a lot of deep analysis needed here. If the metrics aren’t moving in the right direction, it is a sign to change.
 
 And startups are defined by change. They're all about testing, rapid feedback, and constant improvement. Real usage analytics is the most rapid feedback there is, so starting early is a competitive advantage you shouldn't miss.
+
+For example, we at PostHog use analytics to track OKRs, debug issues, test new features, discover opportunities, and more. To narrow in on OKRs, every team connects them to analytics:
+
+- Team session recordings have "percentage of users per organization viewing recordings"
+- Team product analytics have "top 10 US & EU clients 95th percentile of dashboard load time is under 5 seconds"
+- Team experimentation have "double the number of organizations that use feature flags"
+
+These metrics provide clear, rapid feedback on whether what we are building is valuable and making a difference. Without this, we would spend more time directionless and building features that might not matter to our users.
 
 ## The 80/20 of early-stage startup analytics
 
@@ -43,13 +51,13 @@ Session recordings replace number-crunching, database querying, and user testing
 
 ### 2. Build a key metrics dashboard
 
-A key metrics dashboard is useful for validating users are actually using the product. This keeps metrics like signups, pageviews, and key feature usage all in one place for the team.
+A key metrics dashboard is useful for validating that users are actually using the product. This keeps metrics like signups, pageviews, and key feature usage all in one place for the team.
 
 ![Dashboard](../images/blog/early-stage-analytics/dashboard.png)
 
-For early-stage startups, it is probably too early to start optimizing your conversion funnel or set up a [dashboard like AARRR](/blog/aarrr-pirate-funnel). This is because it encourages premature optimization that will likely change, or worse, hide bigger problems (like no one wanting your product).
+For early-stage startups, it is probably too early to start optimizing your conversion funnel or set up a [dashboard like AARRR](/blog/aarrr-pirate-funnel). This is because it encourages premature optimization that will likely change, or worse, hide bigger problems (like no one wanting your product). A key metrics dashboard strikes the balance between being useful and overanalyzing. 
 
-A key metrics dashboard strikes the balance between being useful and overanalyzing. PostHog has a template for a product analytics dashboard, and our insights make it easy to customize one that works best for you. 
+PostHog's snippet or JavaScript library autocaptures the metrics you want, like pageviews, button clicks, and inputs. We then offer a template for a product analytics dashboard, and our insights make it easy to customize it to work for you. With PostHog, none of these tasks require a lot of work, and you can get back to building.
 
 ### 3. Gather feedback and talk to users
 
@@ -67,4 +75,4 @@ The analytics become a part of your business processes. PostHog helps this happe
 
 ## The balance of early-stage startup analytics
 
-Analytics at early-stage startups is a balance. You need just enough information to know what to build next, without getting bogged down in overanalysis. Follow these steps and you'll have a built an efficient flashlight to find your way to product-market fit. If this sounds helpful, [sign up for PostHog for free](https://app.posthog.com/signup).
+Analytics at early-stage startups is a balance. You need just enough information to know what to build next, without getting bogged down in overanalysis. Follow these steps and you'll have built an efficient flashlight to find your way to product-market fit. If this sounds helpful, [sign up for PostHog for free](https://app.posthog.com/signup).
