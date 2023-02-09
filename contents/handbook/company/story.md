@@ -84,7 +84,7 @@ We deepened all of our product areas significantly - we're frequently winning as
 
 Our infra is far more stable and scalable - much more of it runs as code. We can now offer EU or US based hosting for our customers' data.
 
-We're 38 people in lots of countries. We're not adding lots of headcount over the next 12 months though, we're staying lean, letting revenue rise rapidly andd
+We're 38 people in lots of countries. We're not adding lots of headcount over the next 12 months though, we're staying lean, letting revenue rise rapidly and
 
 ## Feb 2022: focus on mass adoption
 
