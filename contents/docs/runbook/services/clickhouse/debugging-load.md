@@ -50,9 +50,6 @@ order by sum(query_duration_ms) DESC
 
 To diagnose further, it's important to understand [ClickHouse operations](/handbook/engineering/clickhouse/operations).
 
-
-PostHog app includes a lot of tags in `system.query_log` column `log_comment` to make analysis simpler.
-
 Useful dimensions to slice the data on:
 - `query_duration_ms` - How long the query took
 - `formatReadableSize(read_bytes)` - Total number of bytes read from all tables and table functions participated in query.
@@ -66,7 +63,21 @@ Useful dimensions to slice the data on:
 
 Other useful expressions:
 - `is_initial_query` - indicates whether this was a main query or pushed down from coordinator. Note `log_comment` is also forwarded.
+- `any(log_comment)` - shows the structure of the log comment
+- `getMacro('replica')` - What replica was this on?
+- `getMacro('shard')` - What shard was this query made on?
+- `getMacro('hostClusterType')` - What cluster was this on? Online or offline?
+
+### log_comment
+
+We make use of the log_comment column quite extensively to add metadata to queries in order to make analysis simpler.
+
+`log_comment` is set by specifying the `log_comment` setting when running a query. It then populates in the column with the same name on the query log table.
+
+Some useful things you'll find in `log_comment` include:
+
 - `JSONExtractString(log_comment, 'kind')` - What is the query from? Either `celery` or `request`
+- `JSONExtractString(log_comment, 'query_type')` - Type of query e.g. `trends_total_volume` or `funnel_conversion`
 - `JSONExtractString(log_comment, 'id')` - Request path or task name (depending on kind)
 - `JSONExtractString(log_comment, 'route_id')` - what geberic route id was responsible for the query (only set for kind=request)
 - `JSONExtractInt(log_comment, 'user_id')` - user_id
@@ -75,7 +86,6 @@ Other useful expressions:
 - `JSONExtractString(log_comment, 'http_referer')` - HTTP referer (only set for kind=request)
 - `JSONExtractString(log_comment, 'http_user_agent')` - HTTP user agent (only set for kind=request)
 - `JSONExtractString(log_comment, 'container_hostname')` - Kubernetes pod where the query was initiated from
-- `any(log_comment)` - shows the structure of the log comment
-- `getMacro('replica')` - What replica was this on?
-- `getMacro('shard')` - What shard was this query made on?
-- `getMacro('hostClusterType')` - What cluster was this on? Online or offline?
+- `JSONExtractString(log_comment, 'workload')` - Either `WORKLOAD.ONLINE` or `WORKLOAD.OFFLINE`. This determines which node on the shard we prefer to send the query to
+- `JSONExtractString(JSONExtractString(log_comment, 'query_settings'), '<setting_name>')` - Any settings passed along with the query can be found within the `query_settings` object. To get the value for a specific setting, you need to call `JSONExtractX` twice.
+-  `JSONExtractString(log_comment, 'filter')` - The `Filter` object for an insight. You'll need to use array functions and `JSONExtract` functions in order to access deeply nested filter data
