@@ -42,6 +42,17 @@ export interface MenuQueryType {
     }
 }
 
+export type MenuItemType = {
+    title: string
+    url: string
+    sub?: {
+        component?: string
+    }
+    hideBorder?: boolean
+    classes?: string
+    cta?: string
+}
+
 export interface Contributor {
     login: string
     name: string
