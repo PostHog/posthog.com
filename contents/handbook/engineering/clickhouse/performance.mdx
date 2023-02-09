@@ -3,9 +3,9 @@ title: Query performance
 ---
 
 This document goes over:
-- what tools are available to understand and measure query performance
-- importance of page cache
-- general tips and tricks for performant queries
+- What tools are available to understand and measure query performance
+- Importance of page cache
+- General tips and tricks for performant queries
 
 ## Tooling
 
@@ -27,7 +27,11 @@ It includes information on:
 - How long did it take to execute
 - How many resources did it take up: memory, rows/bytes read
 - In case of errors, exception information
-- For distributed queries, `is_initial_query` to disambiguate distributed queries
+
+Some tips for querying the `query_log`:
+- For distributed queries, filter by `is_initial_query` to disambiguate distributed queries i.e. `is_initial_query = 1` denotes the query sent to the coordinator node, whereas `is_initial_query = 0` denotes internally-generated queries sent to gather data from other shards
+- Use `clusterAllReplicas('<cluster_name>', system.query_log)` to query all nodes
+- Filter on `type = 'QueryFinish'` if you only want data on queries that completed successfully. Forgetting to do so can skew averages since the results will include `QueryStart` events, which have columns such as `query_duration_ms` set to 0.
 
 At PostHog, we also often add metadata to the query as a comment to make it easier to analyze later.
 
@@ -90,7 +94,7 @@ We've built flamegraph support into PostHog. You can find tools to generate flam
 When running queries, you might encounter an odd artifact: the first time you run a query, it's really slow but it speeds up significantly
 when run again.
 
-This behavior is due to [page cache](https://www.thomas-krenn.com/en/wiki/Linux_Page_Cache_Basics) in linux. In broad terms, the operating
+This behavior is due to the [Linux page cache](https://www.thomas-krenn.com/en/wiki/Linux_Page_Cache_Basics). In broad terms, the operating
 system caches recently read files into memory, speeding up subsequent reads of the same data.
 
 As most queries in ClickHouse are dependent on fast I/O to execute fast, this can have a significant effect on query performance. It is a reason
@@ -106,6 +110,10 @@ This means it's often important to wipe page cache on ClickHouse when doing quer
 ```bash
 sudo sh -c "/usr/bin/echo 3 > /proc/sys/vm/drop_caches"
 ```
+
+> Note that the above will only drop the cache on the given node, but distributed queries might still be affected from the page cache on nodes in the other shards. 
+
+For completely clean benchmarking, you might also want to drop [ClickHouse's internal mark cache](https://clickhouse.com/docs/en/sql-reference/statements/system#drop-mark-cache).
 
 ## Tips for achieving well-performing queries
 
@@ -128,6 +136,7 @@ This section highlights some general rules of thumb that can help speed up queri
 - [ORDER BY and LIMIT/OFFSET can be slow in sharded settings](/handbook/engineering/clickhouse/replication#example-query-limit-filter-and-aggregate).
 - Cheat: [preaggregate data](/handbook/engineering/clickhouse/schema/app-metrics) or leverage materialized columns to pull out data from large columns.
 - Leverage [query settings in special cases](https://clickhouse.com/docs/en/operations/settings/settings/).
+- Benchmark different [join algorithms](https://clickhouse.com/docs/en/operations/settings/settings#settings-join_algorithm) on queries that use JOINs. From our testing, `parallel_hash` can help speed up most types of queries with JOINs at the expense of a bit more memory and CPU usage. `grace_hash` is also a promising new algorithm introduced in ClickHouse 22.12.
 
 Also always do your benchmarking in a realistic setting: on large datasets on powerful machines.
 

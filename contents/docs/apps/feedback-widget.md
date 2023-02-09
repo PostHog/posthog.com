@@ -17,18 +17,21 @@ It looks like this...
 
 ### What are the requirements for this app?
 
-First, you need to opt in to the site apps beta. You'll need to be on PostHog 1.41.0 or later to do this, or PostHog Cloud. 
+First, you need to opt in to the site apps beta. You'll need to be on PostHog cloud or if self-hosting using PostHog 1.41.0 or later. 
 
 You can opt in to the beta by configuring your `posthog-js` initialization to include `opt_in_site_apps: true`. Please be aware you do this at your own risk.
 
-Not running 1.41.0? Find out [how to update your self-hosted PostHog deployment](/docs/runbook/upgrading-posthog)!
+Self-hosted and not running 1.41.0? Find out [how to update your self-hosted PostHog deployment](/docs/runbook/upgrading-posthog)!
 
 ### How do I install the Feedback Widget?
 
 1. Opt into the site apps beta by setting your `posthog-js` initialization to include `opt_in_site_apps: true`.  
 2. Visit the 'Apps' page in your instance of PostHog.
 3. Search for 'Feedback Widget' and select the app, press Install.
-4. Follow the on-screen steps to configure the app.
+4. Customise the text, and enable the plugin
+5. Either select "Show feedback button on the page" or add a button with a corresponding data attribute e.g. `data-attr='posthog-feedback-button'` which when clicked will open the feedback widget
+6. Each feedback from your users is now captured as a custom `Feedback Sent` event with the feedback in the `$feedback` property
+7. You can now use this event to trigger PostHog actions, or create a funnel to see how many users are giving feedback
 
 ## Can I make my own site apps?
 

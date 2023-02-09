@@ -4,19 +4,23 @@ sidebar: Docs
 showTitle: true
 ---
 
-ZooKeeper is a centralized service for maintaining configuration information, naming, 
+import Sunset from "../../../self-host/\_snippets/sunset-disclaimer.mdx"
+
+<Sunset />
+
+ZooKeeper is a centralized service for maintaining configuration information, naming,
 providing distributed synchronization, and providing group services.
 
-At PostHog we use it to store metadata information for [ClickHouse](./clickhouse) 
+At PostHog we use it to store metadata information for [ClickHouse](./clickhouse)
 and [Kafka](./kafka).
 
 ## Failure modes
 
 ### Disk space usage increases rapidly
 
-It has been observed that Zookeepers can suddenly increase it's disk usage, after 
-being in a stable state for some time. This can sometimes be resolved by ensuring 
-that old Zookeeper snapshots are cleared. If you experience this issue you can 
+It has been observed that Zookeepers can suddenly increase it's disk usage, after
+being in a stable state for some time. This can sometimes be resolved by ensuring
+that old Zookeeper snapshots are cleared. If you experience this issue you can
 validate this solution by running [zkCleanup.sh](https://github.com/apache/zookeeper/blob/master/zookeeper-docs/src/main/resources/markdown/zookeeperTools.md#zkCleanup):
 
 ```bash
@@ -25,23 +29,23 @@ kubectl exec -it -n posthog posthog-posthog-zookeeper -- /opt/bitnami/zookeeper/
 kubectl exec -it -n posthog posthog-posthog-zookeeper -- df -h /bitnami/zookeeper
 ```
 
-This will remove all snapshots aside from the last three, printing out the disk 
+This will remove all snapshots aside from the last three, printing out the disk
 usage before and after.
 
-In newer versions of our [Helm chart](https://github.com/PostHog/charts-clickhouse) we 
-run snapshot cleanups periodically every hour. If you experience Zookeeper space issues 
-and are on chart 18.2.0 or below, you can update to a later version to enable this. 
-Alternatively you can specify the Helm value `zookeeper.autopurge.purgeInterval=1` which 
+In newer versions of our [Helm chart](https://github.com/PostHog/charts-clickhouse) we
+run snapshot cleanups periodically every hour. If you experience Zookeeper space issues
+and are on chart 18.2.0 or below, you can update to a later version to enable this.
+Alternatively you can specify the Helm value `zookeeper.autopurge.purgeInterval=1` which
 will cause the clean up job to run every hour.
 
-If you wish to further debug what is being added to your cluster, you can inspect 
+If you wish to further debug what is being added to your cluster, you can inspect
 a snapshot diff by running [zhSnapshotComparer.sh](https://github.com/apache/zookeeper/blob/master/zookeeper-docs/src/main/resources/markdown/zookeeperTools.md#zkSnapshotComparer) e.g.:
 
 ```bash
 kubectl exec -it -n posthog posthog-posthog-zookeeper -- /opt/bitnami/zookeeper/bin/zkSnapshotComparer.sh -l /bitnami/zookeeper/data/version-2/snapshot.fe376 -r /bitnami/zookeeper/data/version-2/snapshot.ff8c0 -b 2 -n 1
 ```
 
-This will give you a breakdown of the number of nodes in each snapshot, as well as 
+This will give you a breakdown of the number of nodes in each snapshot, as well as
 the exact node difference between the two. For example:
 
 ```bash
@@ -90,4 +94,5 @@ Node /clickhouse/tables/0/posthog.events/blocks/202203_10072597193275699042_5516
 ```
 
 ### Useful links
-- [Official documentation](https://zookeeper.apache.org/doc/current/)
+
+-   [Official documentation](https://zookeeper.apache.org/doc/current/)

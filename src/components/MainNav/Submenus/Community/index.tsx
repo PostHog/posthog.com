@@ -53,11 +53,6 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
             url: '/roadmap',
         },
         {
-            title: 'Partner directory',
-            description: 'Companies and products who can help with PostHog',
-            url: '/partners',
-        },
-        {
             title: 'Contributors',
             description: 'Fix a bug, get credit for the merch store (and warm fuzzies)',
             url: '/contributors',

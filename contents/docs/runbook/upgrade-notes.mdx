@@ -4,12 +4,15 @@ sidebar: Docs
 showTitle: true
 ---
 
+import Sunset from "../self-host/\_snippets/sunset-disclaimer.mdx"
+
+<Sunset />
 
 ### 30.0.0
 
-Self-hosted users must run async migrations 0005-0007 before updating to PostHog version 1.42.0. 
+Self-hosted users must run async migrations 0005-0007 before updating to PostHog version 1.42.0.
 
-If you haven't run async migrations 0005-0007 yet, or if they aren't available on your current version,  we recommend upgrading to PostHog version 1.41.4 first, _then_ running the async migrations, then upgrading to 1.42.0.
+If you haven't run async migrations 0005-0007 yet, or if they aren't available on your current version, we recommend upgrading to PostHog version 1.41.4 first, _then_ running the async migrations, then upgrading to 1.42.0.
 
 Note: for async migration 0007 disable the post checks in the advanced options when kicking off the async migration (otherwise you might see them fail and need to re-run the migration with them disabled).
 
