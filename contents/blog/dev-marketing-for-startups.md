@@ -75,7 +75,7 @@ Google is good for conversion, while LinkedIn ($$$), Twitter ($$), Reddit ($), a
 
 **It’s ok to waste money on sponsorships** 
 
-They are generally quite expensive, but unfortunately you need to spend money to learn here. Newsletters are the best place to start - they can be highly effective once you find the right one. Ask your engineers and users what newsletters they like, then sponsor those. Do bursts of activity - e.g. 3 months on, 3 months off. Switch up the copy so you don't exhaust the audience.
+They are generally quite expensive, but unfortunately you need to spend money to learn here. Newsletters are the best place to start - they can be highly effective once you find the right one. Ask your engineers and users what newsletters they actually read, then sponsor those. Do bursts of activity - e.g. 3 months on, 3 months off. Switch up the copy so you don't exhaust the audience.
 
 YouTube is hard and a much more expensive way to reach developers. Most dev-focused content is for people learning to code, so beware.
 
