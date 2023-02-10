@@ -52,7 +52,7 @@ Please check [the Readme in the GitHub repo for a full list](https://github.com/
 
 ### Who created this app?
 
-We'd like to thank PostHog team member [Luke Harries](https://github.com/paolodamico/) for creating this app.
+We'd like to thank PostHog team member [Luke Harries](https://github.com/lharries) for creating this app.
 
 ### Who maintains this app?
 
