@@ -56,7 +56,6 @@ I tend to work 9am to 5pm with an hour for lunch, then I have a gap to have dinn
 ### Personal strategy as of Q1 2023
 
 - make sure every team reaches an ["Innovating" state](https://danlebrero.com/2022/07/06/an-elegant-puzzle-systems-of-engineer-management-book-summary/)
-- maintain a high month over month revenue growth rate whilst staying default alive, since this will make future fundraising and expansion easy
 - encourage the company to increase overall adoption whilst not harming revenue growth rate
 
 ### Execution todo
