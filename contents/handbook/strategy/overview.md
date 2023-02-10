@@ -8,6 +8,8 @@ showTitle: true
 
 **_“Increase the number of successful products in the world”_**
 
+We do this by **helping engineers be better at product**.
+
 ## Context
 
 PostHog helps engineers be better at product through a suite of tools that we call a “Product OS” (product analytics, session recordings, feature flags, experiments, and a lightweight CDP). We build for and sell to product engineers at high-growth startups. Our competitors provide point solutions focused on (non-technical) product managers. Focusing on engineers enables us to get in earlier and empower the engineer to own product outcomes - owning the market for product tools.
