@@ -48,7 +48,7 @@ By default the flags won't be shown to users who have seen a user interview popu
 
 ### What new properties and events does this app add?
 
-Please check [the Readme in the GitHub repo for a fiull list](https://github.com/posthog/user-interview-app#tracking-events). 
+Please check [the Readme in the GitHub repo for a full list](https://github.com/posthog/user-interview-app#tracking-events). 
 
 ### Who created this app?
 
