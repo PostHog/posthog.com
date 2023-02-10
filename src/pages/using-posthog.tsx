@@ -10,6 +10,7 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { Close } from 'components/Icons/Icons'
 import { CallToAction } from 'components/CallToAction'
 import Modal from 'components/Modal'
+import { Post } from 'components/Blog'
 
 const categories: {
     name: string
@@ -353,24 +354,24 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
                             <div className="w-full overflow-y-scroll mt-6 flex-grow">
                                 <ul className="list-none m-0 p-0 space-y-6 px-8">
                                     {currentModal &&
-                                        tutorialsByCategory[currentModal].map((tutorial) => (
-                                            <li
-                                                key={tutorial.fields.slug}
-                                                className="bg-tan dark:bg-gray-accent-dark border-2 border-solid border-tan hover:border-orange relative active:top-[0.5px] active:scale-[.99]"
-                                            >
-                                                <Link to={tutorial.fields.slug}>
-                                                    <GatsbyImage
-                                                        alt={tutorial.frontmatter.title}
-                                                        image={getImage(tutorial.frontmatter.featuredImage)}
+                                        tutorialsByCategory[currentModal].map((tutorial) => {
+                                            const {
+                                                frontmatter: { featuredImage, authors, title, date },
+                                                fields: { slug },
+                                            } = tutorial
+
+                                            return (
+                                                <li key={slug}>
+                                                    <Post
+                                                        featuredImage={featuredImage}
+                                                        authors={authors}
+                                                        title={title}
+                                                        date={date}
+                                                        slug={slug}
                                                     />
-                                                    <div className="absolute w-full h-full inset-0 from-black/75 [text-shadow:0_2px_10px_rgba(0,0,0,0.4)] bg-gradient-to-b">
-                                                        <p className="m-0 text-white p-4 text-xl font-bold">
-                                                            {tutorial.frontmatter.title}
-                                                        </p>
-                                                    </div>
-                                                </Link>
-                                            </li>
-                                        ))}
+                                                </li>
+                                            )
+                                        })}
                                 </ul>
                             </div>
 
@@ -396,14 +397,19 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-6 mt-8 max-w-sm sm:max-w-4xl">
                             {featuredTutorials.nodes.map((tutorial) => {
+                                const {
+                                    frontmatter: { featuredImage, authors, title, date },
+                                    fields: { slug },
+                                } = tutorial
                                 return (
-                                    <Link
-                                        key={tutorial.id}
-                                        to={tutorial.fields.slug}
-                                        className="bg-gray-accent-light dark:bg-gray-accent-dark rounded border-2 border-solid border-tan dark:border-transparent dark:hover:border-orange hover:border-orange relative active:top-[0.5px] active:scale-[.99]"
-                                    >
-                                        <GatsbyImage image={getImage(tutorial.frontmatter.featuredImage)} />
-                                    </Link>
+                                    <Post
+                                        key={slug}
+                                        authors={authors}
+                                        featuredImage={featuredImage}
+                                        date={date}
+                                        title={title}
+                                        slug={slug}
+                                    />
                                 )
                             })}
                         </div>
@@ -420,17 +426,7 @@ export const query = graphql`
             group(field: frontmatter___tags) {
                 category: fieldValue
                 nodes {
-                    frontmatter {
-                        title
-                        featuredImage {
-                            childImageSharp {
-                                gatsbyImageData(placeholder: NONE)
-                            }
-                        }
-                    }
-                    fields {
-                        slug
-                    }
+                    ...BlogFragment
                 }
             }
         }
@@ -447,18 +443,7 @@ export const query = graphql`
             }
         ) {
             nodes {
-                id
-                fields {
-                    slug
-                }
-                frontmatter {
-                    title
-                    featuredImage {
-                        childImageSharp {
-                            gatsbyImageData(placeholder: NONE)
-                        }
-                    }
-                }
+                ...BlogFragment
             }
         }
     }
