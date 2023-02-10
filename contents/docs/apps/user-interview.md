@@ -36,7 +36,7 @@ PostHog is open-source and so are all apps on the platform. The [source code for
 1. Create a feature flag to control who sees it. For this example, we'll use the name `user-interview`
 2. Set up the filters for the people that you want to speak to. You can create a filter based on properties, such as location or email, but not events. If you want to invite users based on them doing certain actions, you'll need to update the users' property once they've done that action.
 3. Additionally, if you want to invite users based on historical actions, create an insight for that action and then use that to create a static cohort.
-4. Set the filter `Seen User Interview Invitation - {featureFlagName}` to `is not set` so that it doesn't show to users who have seen the user interview already. (This property will be added once the user has interacted with the popup - either to close it or to book in a time)
+4. Set the filter `Seen User Interview Invitation - {FEATURE_FLAG_NAME}` to `is not set` so that it doesn't show to users who have seen the user interview already. This property is added once the user has interacted with the popup - either to close it or to book in a time.
 5. Add an autorollback based on the pageview where `Current URL` contains `bookedUserInterviewEvent={FEATURE_FLAG_NAME}`. This is where you'll redirect them after they've booked in. Set the average over last 7 days to be 1 for up to 7 interviews to be booked and 2 for up to 14 interviews to be booked.
 This requires the `auto-rollback-feature-flags` feature flag to be turned on. Please be aware this is currently in beta. 
 6. Create your calendly event and
