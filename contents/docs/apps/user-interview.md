@@ -9,7 +9,7 @@ tags:
 
 ### What does the User Interviewer app do?
 
-This app extends functionality for [the GeoIP Entricher app](/apps/geoip-enrichment), offering the ability to automatically discard unwanted information in a way which is helpful users with privacy or compliance needs.  
+This app enables you to send a popup notification to targeted users that invites them to schedule an interview to provide feedback. This app was created by PostHog's product team and is something we use regularly to collect community feedback. 
 
 ### What are the requirements for this app?
 
