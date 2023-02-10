@@ -170,11 +170,13 @@ Goal of the Support Hero person on duty is to:
 
 * Provide actionable information as _Note_ for all the items you are handing over to someone else (note that you should follow-up on most requests yourself after your shift ends rather than assigning them to the next support hero).
 
-##### How to deal with spam, marketing, partnership proposals, etc.
+##### How to deal with spam, marketing, partnership proposals, candidates etc.
 
 Like every other email address in this world, hey@ gets quite a bit of spam (and we reroute this to Zendesk). When this happens, simply mark the conversation as closed.
 
 For marketing, partnership proposals or anything like that, please post in Slack in #team-marketing before taking an action.
+
+For candidates trying to apply to PostHog, e.g. sending their CV you can simply ignore & close, team people and ops is directly handling them as they come into hey@.
 
 ### Unthread
 
