@@ -462,7 +462,7 @@ export const DataWarehouse = () => {
                 <Content>
                     <Title title={'Data warehouse'} />
                     <Subtitle className="text-[14px] md:text-[18px]" subtitle="Sync with your warehouse." />
-                    <Description description="Or keep customer data in-house by self-hosting and using PostHog’s built-in data warehouse." />
+                    <Description description="PostHog syncs easily with BigQuery, Snowflake, or Redshift via API." />
 
                     <CTA url="/docs/api" title="Explore what you can do" />
                 </Content>
