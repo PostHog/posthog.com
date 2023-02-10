@@ -47,7 +47,7 @@ But, here's the kicker, he also says:
 
 Adam goes onto explain how it took five years to reach product-market fit and, having done so, they focused on growing users rather than working out monetization simultaneously.
 
-By the time they realized their 500k users would not pay to use it and found a viable pivot, the team was too tired from seven years of grind to pursue it. The launch of Copilot (for free) can't have helped moral.
+By the time they realized their 500k users would not pay to use it and found a viable pivot, the team was too tired from seven years of grind to pursue it. The launch of Copilot (for free) can't have helped morale.
 
 Kite's source code is [now open source](https://github.com/kiteco).
 

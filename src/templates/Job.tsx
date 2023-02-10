@@ -10,7 +10,7 @@ import Apply from 'components/Job/Apply'
 import Sidebar from 'components/Job/Sidebar'
 import { sfBenchmark } from 'components/CompensationCalculator/compensation_data/sf_benchmark'
 import { benefits } from 'components/Careers/Benefits'
-import NotProductIcons from 'components/NotProductIcons'
+import { Department, Location, Timezone } from 'components/NotProductIcons'
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 
@@ -130,11 +130,9 @@ export default function Job({
                         <div>
                             <h1 className="m-0 text-5xl">{title}</h1>
                             <ul className="list-none m-0 p-0 md:items-center text-black/50 dark:text-white/50 mt-6 flex md:flex-row flex-col md:space-x-12 md:space-y-0 space-y-6">
-                                <Detail title="Department" value={departmentName} icon={NotProductIcons.department} />
-                                <Detail title="Location" value={locationName} icon={NotProductIcons.location} />
-                                {timezone && (
-                                    <Detail title="Timezone(s)" value={timezone} icon={NotProductIcons.timezone} />
-                                )}
+                                <Detail title="Department" value={departmentName} icon={<Department />} />
+                                <Detail title="Location" value={locationName} icon={<Location />} />
+                                {timezone && <Detail title="Timezone(s)" value={timezone} icon={<Timezone />} />}
                             </ul>
                             <div className="job-content mt-12 w-full flex-shrink-0 transition-all">
                                 <div

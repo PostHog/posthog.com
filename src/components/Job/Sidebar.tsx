@@ -2,7 +2,7 @@ import React from 'react'
 import Tooltip from 'components/Tooltip'
 import { kebabCase } from 'lib/utils'
 import Link from 'components/Link'
-import NotProductIcons from 'components/NotProductIcons'
+import { Pineapple, Pizza } from 'components/NotProductIcons'
 import ReactCountryFlag from 'react-country-flag'
 import { ContributorImage } from 'components/PostLayout/Contributors'
 import SidebarSection from 'components/PostLayout/SidebarSection'
@@ -123,9 +123,13 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
 
             <SidebarSection title="Pineapple on pizza?" className="-mt-2">
                 <div className="space-x-2 flex items-center mb-4 text-lg font-semibold">
-                    <span className="w-8 h-8 relative top-[-1px] -mr-1">{NotProductIcons.pineapple}</span>
+                    <span className="w-8 h-8 relative top-[-1px] -mr-1">
+                        <Pineapple />
+                    </span>
                     <span>+</span>
-                    <span className="w-7 h-7 relative top-[1px]">{NotProductIcons.pizza}</span>
+                    <span className="w-7 h-7 relative top-[1px]">
+                        <Pizza />
+                    </span>
                     <span>=</span>
                     {pineapplePercentage >= 50 ? (
                         <ThumbUp className="w-8 h-8 fill-green" />

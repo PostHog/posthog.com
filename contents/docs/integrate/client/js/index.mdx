@@ -305,6 +305,14 @@ posthog.reloadFeatureFlags()
 posthog.isFeatureEnabled('keyword', { send_event: false })
 ```
 
+#### Feature Flag Payloads
+Payloads allow you to retrieve a value that is associated with the matched flag. The value can be a
+string, boolean, number, dictionary, or array. This allows for custom configurations based on values defined in the posthog app. 
+
+```js
+posthog.getFeatureFlagPayload('keyword')
+```
+
 
 #### Bootstrapping Flags
 

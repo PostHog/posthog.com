@@ -10,7 +10,6 @@ users:
     - Engineering
 toolsUsed:
     - Experimentation
-    - Self-hosted
     - Plugins
     - Apps
 ---

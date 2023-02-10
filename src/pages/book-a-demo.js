@@ -37,7 +37,7 @@ const Editions = ({ setDemoType }) => {
                         <div className="space-y-4 w-full">
                             <Title
                                 title="Full feature set (paid)"
-                                subtitle="First million events per month free. Cloud (Saas). All of PostHog's advanced analytics tools."
+                                subtitle="First million events per month free. US or EU Cloud hosting. All of PostHog's advanced analytics tools."
                             />
                             <CallToAction
                                 width="full"
@@ -52,10 +52,9 @@ const Editions = ({ setDemoType }) => {
                     </div>
                 </div>
                 <div className="md:col-span-2 pt-6 border-t border-dashed border-gray-accent-light text-center">
-                    <h3 className="m-0">Have a few questions?</h3>
-                    <h3 className="m-0"> Want to self-host?</h3>
+                    <h3 className="m-0">Got a question?</h3>
                     <p className="m-0 mt-1 text-black/50 font-medium text-sm">
-                        Book a quick Q&A with someone from the PostHog team!
+                        Book a quick Q&A with the PostHog team!
                     </p>
                     <div className="md:max-w-[280px] w-full mx-auto">
                         <CallToAction

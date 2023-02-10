@@ -88,14 +88,10 @@ import { Pagination } from './components/Pagination'
 import { Popover } from './components/Popover'
 import { PostCard } from './components/PostCard'
 import { PostLayout } from './components/PostLayout'
-import { AllPlans } from './components/Pricing/AllPlans'
-import { AllPlansTest } from './components/Pricing/AllPlansTest'
 import { Calculator } from './components/Pricing/Calculator'
 import { CloudVsSelfHost } from './components/Pricing/CloudVsSelfHost'
 import { FAQs } from './components/Pricing/FAQs'
 import { Features } from './components/Pricing/Features'
-import { PlanComparison } from './components/Pricing/PlanComparison'
-import { PlanComparisonTest } from './components/Pricing/PlanComparisonTest'
 import { PricingHero } from './components/Pricing/PricingHero'
 import { PricingSlider } from './components/Pricing/PricingSlider'
 import { PricingTable } from './components/Pricing/PricingTable'
@@ -103,6 +99,11 @@ import { ProductPillars } from './components/Pricing/ProductPillars'
 import { Quote } from './components/Pricing/Quote'
 import { Savings } from './components/Pricing/Savings'
 import { SelfHost } from './components/Pricing/SelfHost'
+import { AllPlans } from './components/Pricing/control/AllPlans'
+import { PlanComparison } from './components/Pricing/control/PlanComparison'
+import { OtherOptions } from './components/Pricing/test/OtherOptions'
+import { PlanComparisonTest } from './components/Pricing/test/PlanComparisonTest'
+import { PricingCalculator } from './components/Pricing/test/PricingCalculator'
 import { ProductAnchorNavbar } from './components/ProductAnchorNavbar'
 import { ProductFeature } from './components/ProductFeature'
 import { ProductFeaturePlugin } from './components/ProductFeaturePlugin'
@@ -125,6 +126,7 @@ import { SiteSearchCallout } from './components/SiteSearchCallout'
 import { SliderNav } from './components/SliderNav'
 import { Spacer } from './components/Spacer'
 import { Spinner } from './components/Spinner'
+import { SplitFlap } from './components/SplitFlap'
 import { StarRepoButton } from './components/StarRepoButton'
 import { StarUsBanner } from './components/StarUsBanner'
 import { Structure } from './components/Structure'
@@ -229,14 +231,10 @@ export const shortcodes = {
     Popover,
     PostCard,
     PostLayout,
-    AllPlans,
-    AllPlansTest,
     Calculator,
     CloudVsSelfHost,
     FAQs,
     Features,
-    PlanComparison,
-    PlanComparisonTest,
     PricingHero,
     PricingSlider,
     PricingTable,
@@ -244,6 +242,11 @@ export const shortcodes = {
     Quote,
     Savings,
     SelfHost,
+    AllPlans,
+    PlanComparison,
+    OtherOptions,
+    PlanComparisonTest,
+    PricingCalculator,
     ProductAnchorNavbar,
     ProductFeature,
     ProductFeaturePlugin,
@@ -266,6 +269,7 @@ export const shortcodes = {
     SliderNav,
     Spacer,
     Spinner,
+    SplitFlap,
     StarRepoButton,
     StarUsBanner,
     Structure,

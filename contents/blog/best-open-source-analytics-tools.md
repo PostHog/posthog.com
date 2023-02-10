@@ -8,8 +8,9 @@ hideAnchor: true
 author:
   - joe-martin
   - andy-vandervell
-featuredImage: ../images/blog/product-people.png
+featuredImage: ../images/blog/posthog-company-culture-blog.png
 featuredImageType: full
+featuredVideo: https://www.youtube-nocookie.com/embed/vN-aGs5M2k4
 category: General
 tags:
   - Open source
@@ -17,7 +18,7 @@ tags:
   - Comparisons
 ---
 
-It's a truth universally acknowledged that every business reliant on a monolithic enterprise product has need of an open source alternative... probably.
+It's a truth universally acknowledged that every business reliant on an outmoded enterprise product has need of an open source alternative... probably.
 
 In this guide we're looking at open-source analytics tools, which we've split into two broad categories:
 
@@ -40,16 +41,16 @@ This section is dedicated to tools that actively collect data on user behavior. 
 ### PostHog
 ![PostHog - best open source analytics tools](../images/blog/gdpr-compliant-analytics/posthog-gdpr-compliant.png)
 
-- **GitHub Stars:** 8.9k
+- **GitHub Stars:** 10.8k
 - **Language(s):** TypeScript (53%) and Python (42%)
 - **Alternative to:** Mixpanel, Amplitude, Hotjar, FullStory, LaunchDarkly
 - [PostHog on GitHub](https://github.com/PostHog/posthog)
 
-[PostHog](https://posthog.com/) is an all-in-one analytics platform designed to give engineers, product managers and data scientists a complete view of user behavior. It's built on the highly-scalable ClickHouse OLAP database.
+[PostHog](https://posthog.com/) is an all-in-one platform designed to give engineers, product managers and data scientists a complete view of user behavior. It's built on the highly-scalable ClickHouse OLAP database.
 
 Features include a comprehensive product analytics suite (e.g. trend analysis, dashboards, funnels, path analysis, retention tracking etc.), feature flags for feature control, experimentation (A/B and multivariate testing), session recording, heatmaps and [more](/product).
 
-It’s entirely self-serve, with the ability to auto-capture event information out of the box. PostHog can also be self-hosted on your existing infrastructure, making it ideal if you don't want to share data with third parties. It's a good option if you're after an [open-source session recording tool](/blog/best-open-source-session-replay-tools), too. 
+It’s entirely self-serve, with the ability to auto-capture event information out of the box. PostHog can also be self-hosted on your existing infrastructure using Docker Compose, making it ideal if you don't want to share data with third parties. It's a good option if you're after an [open-source session recording tool](/blog/best-open-source-session-replay-tools), too. 
 
 #### Who is PostHog for?
 PostHog is useful for engineering, data science, and product teams. As an all-in-one platform, it can replace multiple tools (e.g. Mixpanel, LaunchDarkly, Hotjar) so you can simplify your tech stack. [PostHog customers](/customers) include the likes of [Hasura](/customers/hasura), [Netdata](/customers/netdata), and [Phantom](/customers/phantom).  
@@ -62,13 +63,13 @@ PostHog is useful for engineering, data science, and product teams. As an all-in
 - Multivariate experimentation suite for testing ideas
 - Session recording for gathering insights
 - Event pipelines to integrate with data warehouses
-- Built on highly-scalable ClickHouse OLAP database
+- Built on ultra-fast ClickHouse OLAP database
 
 #### Open source license and monetization
 
 [PostHog Open Source](https://github.com/PostHog/posthog) is free to use for life and is distributed under an MIT license. The open source version includes the core product analytics, feature flag, and session recording features, but has a one project limit. There's also a [FOSS edition](https://github.com/PostHog/posthog-foss) that removes all proprietary code. 
 
-Paid versions remove the project limit and add numerous paid-only features, including experimentation, correlation analysis, group analytics for tracking organizations, and advanced cohorts. All paid features are [free up to 1 million events per month](/pricing) on both self-hosted and cloud plans.
+Subscribing to PostHog Cloud removes the project limit and adds numerous paid-only features, including experimentation, correlation analysis, group analytics for tracking organizations, and advanced cohorts. PostHog Cloud is [free up to 1 million events per month](/pricing).
 
 ### Matomo
 ![Matomo - open source analytics tools](../images/blog/open-source-analytics-tools/matomo-screenshot.png)
@@ -163,7 +164,7 @@ Plausible is intended for marketing teams and website owners who want to track t
 - No cookies required, GDPR compliant out of the box 
 
 #### Open source license and monetization
-Plausible Analytics is available under a AGPLv3 license and can be self-hosted via Docker. Pricing for its hosted version starts at €9 per month for 10,000 monthly pageviews.
+Plausible Analytics is available under a AGPLv3 license and can be self-hosted via Docker Compose. Pricing for its hosted version starts at €9 per month for 10,000 monthly pageviews.
 
 > **Also consider:** Plausible is one of a large subset of privacy-first analytics products that have proven popular in the wake of GDPR and less permissive attitudes to user tracking. [Umami](https://umami.is/) is another popular, open-source product in this space. Read our [GDPR analytics guide](/blog/best-gdpr-compliant-analytics-tools) for more options.   
 

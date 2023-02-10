@@ -8,7 +8,7 @@ export default function CTA({ className = '' }) {
     return (
         <div className={`bg-black px-8 md:px-16 pt-12 pb-16 text-white ${className}`}>
             <h4 className="text-4xl leading-tight mb-8 md:mb-4">
-                Where else can you get <span className="inline-block text-yellow">self-hostable</span>{' '}
+                Where else can you get <span className="inline-block text-yellow">open source</span>{' '}
                 <span className="inline-block text-red">product analytics,</span>{' '}
                 <span className="inline-block text-blue">session recording,</span>{' '}
                 <span className="inline-block text-yellow">feature flags,</span>{' '}

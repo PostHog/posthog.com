@@ -53,7 +53,6 @@ module.exports = {
         },
         'gatsby-plugin-react-helmet',
         `gatsby-plugin-sass`,
-        `gatsby-plugin-typescript`,
         `gatsby-plugin-smoothscroll`,
         {
             resolve: `gatsby-source-filesystem`,
@@ -411,6 +410,5 @@ module.exports = {
         ...(!process.env.GATSBY_ALGOLIA_APP_ID || !process.env.ALGOLIA_API_KEY || !process.env.GATSBY_ALGOLIA_INDEX_NAME
             ? []
             : [algoliaConfig]),
-        '@vercel/gatsby-plugin-vercel-builder',
     ],
 }
