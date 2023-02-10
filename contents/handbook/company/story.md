@@ -78,20 +78,20 @@ We've now got 2 Customer Success people dealing with all (inbound) requests. We 
 
 ## Dec 2022: 6x revenue growth
 
-We had a fantastic year. Whilst the tech market crashed, we grew 6x and reached $MM in revenue, with a 2 month CAC payback period. We're now aiming to hit $10M ARR as our next goal, hitting a gross margin of 70% - both of which should mean we've got all the metrics needed for the next fundraise.
+We had a fantastic year. While the tech market crashed, we grew 6x and reached $MM in revenue, with a sub-2 month CAC payback period. We're now aiming to hit $10M ARR as our next goal, with a gross margin of 70% - both of which should mean we've got all the metrics needed for the next fundraise.
 
-We optimized revenue growth, through implementing a product-led CRM for our customer success team, through adding to our marketing team size, and through creating a small (2 person) growth engineering team. These teams all contribute significantly!
+We optimized revenue growth, through implementing a product-led CRM for our customer success team, adding to our marketing team size, and creating a 2-person growth engineering team. These teams all make a big difference!
 
-We deepened all of our product areas significantly - we're frequently winning as a standalone session recording, feature flagging or experimentation tool. Session recording usage starts to match product analytics usage.
+We deepened all of our product areas significantly - we're frequently winning as a standalone session recording, feature flagging or experimentation tool. Session recording usage started to match product analytics usage.
 
-Our infra is far more stable and scalable - much more of it runs as code. We can now offer EU or US based hosting for our customers' data.
+Our infra is far more stable and scalable - much more of it runs as code. We can now offer EU- or US-based hosting for our customers' data.
 
-We're 38 people in lots of countries. We're not adding lots of headcount over the next 12 months though, we're staying lean, letting revenue rise rapidly and
+We're 38 people in lots of countries. We're not adding lots of headcount over the next 12 months though - we're staying lean and letting revenue continue to rise rapidly. 
 
-## Feb 2022: focus on mass adoption
+## Feb 2023: focus on mass adoption
 
-We're very doing well at monetizing high growth startups due our optimization work, averaging over 15% MoM for the last 6 months. 
+We're very doing well at monetizing high-growth startups due to our optimization work, averaging over 15% MoM for the last 6 months. 
 
-We've decided to double down on mass adoption of the platform in high potential startups (instead of focusing on enterprise). Simply, this will better help us increase the number of successful products in the world. As a result, we remove support for paid self hosted deployment and double down on our open source and cloud projects. We have released a PostHog free tier.
+We've decided to double down on mass adoption of the platform in high potential startups instead of focusing on enterprise. Simply, this will better help us increase the number of successful products in the world. As a result, we've removed support for paid self-hosted deployment and are doubling down on our open source and cloud projects. We have released a PostHog free tier.
 
-In the product, we're working on making the experience slicker, and we've plans for a standlone quality CDP next quarter.
+In the product, we're working on making the experience slicker, and we have plans for a standlone quality CDP in Q2.
