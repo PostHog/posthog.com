@@ -17,7 +17,6 @@ This app requires either PostHog Cloud, or a self-hosted PostHog instance runnin
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
-You'll also need to have [the GeoIP Entricher app](/apps/geoip-enrichment) installed. 
 
 ### How do I install this app?
 
