@@ -39,7 +39,7 @@ PostHog is open-source and so are all apps on the platform. The [source code for
 4. Set the filter `Seen User Interview Invitation - {FEATURE_FLAG_NAME}` to `is not set` so that it doesn't show to users who have seen the user interview already. This property is added once the user has interacted with the popup - either to close it or to book in a time.
 5. Add an autorollback based on the pageview where `Current URL` contains `bookedUserInterviewEvent={FEATURE_FLAG_NAME}`. This is where you'll redirect them after they've booked in. Set the average over last 7 days to be 1 for up to 7 interviews to be booked and 2 for up to 14 interviews to be booked.
 This requires the `auto-rollback-feature-flags` feature flag to be turned on. Please be aware this is currently in beta. 
-6. Create your calendly event and
+6. Create your Calendly event (or other booking link) and
 set the redirect after booking to be `{Your app}?bookedUserInterviewEvent={FEATURE_FLAG_NAME}`, e.g. `https://app.posthog.com/home?bookedUserInterviewEvent=user-interview`
 7. Add the feature flag and booking link to the app config `interviewConfigs` (you can have multiple feature flags with corresponding booking links by separating them with commas e.g. `interview-high-icp=https://calendly.com/user1/book-high-icp,user-interview=https://calendly.com/user1/user-interview`).
 8. Rollout out the feature flag
