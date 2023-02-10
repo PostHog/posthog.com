@@ -14,13 +14,13 @@ Using the API directly allows for any language that can send requests to capture
 
 ## Authenticating with the project API key
 
-The first thing needed, like the basic GET request tutorial, is to authenticate ourselves in the API. Different from our GET request tutorial, we can use the project API key (the same key you use to initialize a PostHog library). This can be found in your project settings. 
+The first thing needed, like the [basic GET request tutorial](/tutorials/api-get-insights-persons), is to authenticate ourselves in the API. Unlike in the GET request tutorial, we can use the project API key (the same key you use to initialize a PostHog library). This can be found in your project settings. 
 
 The project API key is a write-only key, which works perfectly for the POST-only endpoints we want to access.
 
 ## Basic event capture request
 
-To capture event, all we need is a project API key, the data we want to send, and a way to send a request. To capture a new event, you need to send a `POST` request to [`https://app.posthog.com/capture/`](https://app.posthog.com/capture/)  (or the `/capture` endpoint for your instance) with the project API key, event name, and distinct ID.
+To capture events, all we need is a project API key, the data we want to send, and a way to send a request. To capture a new event, you need to send a `POST` request to [`https://app.posthog.com/capture/`](https://app.posthog.com/capture/)  (or the `/capture` endpoint for your instance) with the project API key, event name, and distinct ID.
 
 <MultiLanguage>
 
@@ -101,7 +101,7 @@ print(response.json()
 
 </MultiLanguage>
 
-You can also batch these requests together by sending a list of events to the `/batch/` endpoint. This is useful for limiting the number of requests you make. Events can be held then sent as a batch. Our [Node.js library](/docs/integrate/server/node) does this automatically, and we use batching to process events, it’s best practice.
+You can also batch these requests together by sending a list of events to the `/batch/` endpoint. This is useful for limiting the number of requests you make. Events can be held, then sent as a batch. Our [Node.js library](/docs/integrate/server/node) does this automatically, and we use batching to process events.
 
 <MultiLanguage>
 
@@ -208,7 +208,7 @@ print(response.json())
 
 ### Aliasing users
 
-If you have two users you’d like to combine together, you can use an `$create_alias` event. See more about this in our [identifying users documentation](/docs/integrate/identifying-users).
+If you have two users you’d like to combine together, you can use a `$create_alias` event. See more about this in our [identifying users documentation](/docs/integrate/identifying-users).
 
 <MultiLanguage>
 
