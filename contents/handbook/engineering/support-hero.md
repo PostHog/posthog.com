@@ -176,7 +176,7 @@ Like every other email address in this world, hey@ gets quite a bit of spam (and
 
 For marketing, partnership proposals or anything like that, please post in Slack in #team-marketing before taking an action.
 
-For candidates trying to apply to PostHog, e.g. sending their CV you can simply ignore & close, team people and ops is directly handling them as they come into hey@.
+For candidates trying to apply to PostHog, e.g. sending their CV you can simply ignore & close - Charles is in hey@ and will forward them directly on to careers@ to be dealt with.
 
 ### Unthread
 
