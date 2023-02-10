@@ -17,7 +17,7 @@ export const DemoLink = ({ dark = false, className = '' }: { dark?: boolean; cla
                     to={'/pricing'}
                     className={dark ? darkClasses : lightClasses}
                 >
-                    <span></span>
+                    <span>-</span>
                 </TrackedCTA>
             }
             render={() => (
