@@ -29,21 +29,6 @@ npm install --save posthog-js
 
 After that, we want to initialize the PostHog instance in `pages/_app.js`
 
-
-The first thing you want to do is to install the [posthog-js library](/docs/integrate/client/js) in your project - so add it using your package manager:
-
-```shell
-yarn add posthog-js
-```
-
-or
-
-```shell
-npm install --save posthog-js
-```
-
-After that, we want to initialize the PostHog instance in `pages/_app.js`
-
 ```jsx
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
