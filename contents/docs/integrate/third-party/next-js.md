@@ -46,8 +46,8 @@ After that, we want to initialize the PostHog instance in `pages/_app.js`
 
 ```jsx
 import { useRouter } from 'next/router';
-import posthog from 'posthog-js';
 import { useEffect } from 'react';
+import posthog from 'posthog-js';
 
 if (typeof window !== "undefined") {
   // This ensures that as long as we are client-side, posthog is always ready
@@ -71,6 +71,22 @@ function MyApp({ Component, pageProps }) {
 }
 
 export default MyApp;
+```
+
+#### Disable in development
+
+```tsx
+import posthog from 'posthog-js';
+
+if (typeof window !== "undefined") {
+  // This ensures that as long as we are client-side, posthog is always ready
+  posthog.init('<ph_project_api_key>', { 
+    api_host: '<ph_instance_address>', 
+    loaded: (posthog) => {
+      if (process.env.NODE_ENV === 'development') posthog.opt_out_capturing()
+    },
+  });
+}
 ```
 
 ### Tracking custom events
