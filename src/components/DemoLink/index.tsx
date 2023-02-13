@@ -24,15 +24,17 @@ export const DemoLink = ({ dark = false, className = '' }: { dark?: boolean; cla
                 <TrackedCTA
                     event={{
                         name: `clicked to view ${
-                            posthog?.isFeatureEnabled('web-pricing-cta') ? 'pricing' : 'demo booking page'
+                            posthog?.getFeatureFlag('web-pricing-cta') === 'test' ? 'pricing' : 'demo booking page'
                         }`,
                         type: 'homepage',
                     }}
                     type="secondary"
-                    to={posthog?.isFeatureEnabled('web-pricing-cta') ? '/pricing' : '/book-a-demo'}
+                    to={posthog?.getFeatureFlag('web-pricing-cta') === 'test' ? '/pricing' : '/book-a-demo'}
                     className={dark ? darkClasses : lightClasses}
                 >
-                    <span>{posthog?.isFeatureEnabled('web-pricing-cta') ? 'View our pricing' : 'Schedule a call'}</span>
+                    <span>
+                        {posthog?.getFeatureFlag('web-pricing-cta') === 'test' ? 'View our pricing' : 'Schedule a call'}
+                    </span>
                 </TrackedCTA>
             )}
         />
