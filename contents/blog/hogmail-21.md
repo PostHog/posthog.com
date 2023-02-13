@@ -13,70 +13,62 @@ category: HogMail
 
 > Welcome to HogMail, our newsletter featuring the best of the PostHog blog, tutorials, product guides, and curated articles on building great products and companies. We send it every two weeks. [Signup here](/newsletter) so you don't miss it.
 
-This week's theme is why startup's fail. It's a simple question to answer... not enough hedgehogs, obviously.
-
-Seriously, though, there are too many ways to count, but bad hiring is one obvious failure point. Charles (PostHog's VP of Ops & Marketing) shares some of his hiring tips on the blog this week. 
-
+In [HogMail #20](https://posthog.com/blog/hogmail-20), we looked at a failed startup with product-market fit and 500k active users. So, what comes after product-market fit? More on that soon, but first...  
+  
 Here's what's new on PostHog.com:
 
-- [Myths (and truths) I've learned from 10 years of startup hiring](https://posthog.com/blog/early-stage-startup-hiring-strategy) by Charles Cook
- 
-- [Should startups hire product engineers, product managers, or both?](https://posthog.com/blog/product-engineer-vs-product-manager) by Ian Vanagas
- 
-- [The basics of using regex in PostHog](https://posthog.com/tutorials/regex-basics) by Ian Vanagas
- 
-Words by Andy Vandervell, who just trains AIs to write now.
+*   Raquel Smith on [Why 'Product Engineer' is the most fun role I've had in tech](https://posthog.com/blog/why-product-engineering-is-so-fun)  
+    
+*   Andy Vandervell on [Retention vs Churn Rate: Your guide to churn analysis](https://posthog.com/blog/customer-churn-analysis-guide)  
+    
+*   Ian Vanagas on [How to use the PostHog API to get insights and persons](https://posthog.com/tutorials/api-get-insights-persons)  
+    
+*   Abe Basu on [Automating user journeys with PostHog and Laudspeaker](https://posthog.com/tutorials/laudspeaker-posthog)
 
-## Why do startups fail? (or why "product-market fit" doesn't guarantee success)
+Words by Andy Vandervell, whose retention is rapidly declining with age. 😢  
 
-In November, Adam Smith, the founder of AI-assisted programming startup Kite, [announced they were closing](https://www.kite.com/blog/product/kite-is-saying-farewell/) despite having reached product-market fit and 500k monthly-active developers.
+## Avoiding the "Product Death Cycle"
+  
+If product-market fit isn't enough to succeed, what do you need? In a 2017 article, [Brian Balfour](https://www.linkedin.com/in/bbalfour/) says:
 
-![kite](../images/blog/hogmail/kit-farewell.png)
+ > _"The “go-to” answer for almost every question in startups, is “build a great product.” Every time I hear that answer it feels completely unsatisfied. Building a great product is a piece of the puzzle, but it’s far from the full picture."_
 
-How does a product with **500k active users** fail? In Adam's opinion:
+He goes on to argue this mentality can lead to what he calls the Product Death Cycle:
 
-1. They were 10+ years too early to the market. The tech wasn't ready for primetime, citing the launch of GitHub Copilot, which he feels still has a long way to go.
- 
-2. As a consequence, while Kite made its users more productive, the change wasn't significant enough for engineering managers to pay for their teams to use it.
- 
-3. They were trying to solve an engineering intensive problem: "It may cost over $100 million to build a production-quality tool capable of synthesizing code reliably".
+![product death cycle](../images/blog/hogmail/death-cycle.png)
+  
+In this model, the answer to "how do we grow?" is always launch new feature, but every new launch is slightly less successful than the last, and doesn't lead to lasting growth:  
 
-But, here's the kicker, he also says:
+![product death cycle](../images/blog/hogmail/death-cycle-1.png)
+  
+Instead, he suggests successful startups ($100M+ in his reckoning) should seek four fits:
 
-![kite blog](../images/blog/hogmail/kite-blog-excerpt.png)
+*   [**Market-Product Fit**](https://brianbalfour.com/essays/market-product-fit) – A variation on product-market fit.  
+    
+*   [**Product-Channel Fit**](https://brianbalfour.com/essays/product-channel-fit-for-growth) – "Products are built to fit with channels. Channels do not mold to products."  
+    
+*   **[Channel-Model Fit](https://brianbalfour.com/essays/channel-model-fit-for-user-acquisition) –** Channels are determined by your model, i.e. how you charge and average annual revenue per user.  
+    
+*   **[Model-Market Fit](https://brianbalfour.com/essays/model-market-fit-threshold-for-growth)** – The concept that your market (and # of customers within your market) influence your model."
 
-Adam goes onto explain how it took five years to reach product-market fit and, having done so, they focused on growing users rather than working out monetization simultaneously.
+Balfour makes three final points:
 
-By the time they realized their 500k users would not pay to use it and found a viable pivot, the team was too tired from seven years of grind to pursue it. The launch of Copilot (for free) can't have helped morale.
+1.  **You need to find four fits** to grow to $100M+ company in a venture-backed time frame.
 
-Kite's source code is [now open source](https://github.com/kiteco).
+2.  Each of these **fits influence each other**, so **you can’t think about them in isolation**.  
+    
+3.  **The fits are always evolving**/changing/breaking. When that happens, **you can’t simply change one** element, you have to revisit and potentially change them all.
 
-### Some takeaways:
-
-1. Achieving product-market fit is a landmark, not the final destination. Having it won't guarantee your company is successful.
- 
-2. Once you have it, don't delay figuring out revenue. It won't just happen. Kite managed to grow to 500k users with "almost zero" marketing spend, but it feels like they didn't see the problem until too late.
- 
-3. Don't give away too much for free too long – your users will get used to it being free and converting them will be hard.
-
-### Further reading on this topic:
-
-- In contrast to Kite, read [how Docker 2.0 went from $11M to $135M in 2 years](https://sacra.com/p/docker-plg-pivot/). After pivoting and cutting headcount from ~420 to just 60 in 2019, Docker's revenue is growing by 150% per year.
- 
-- Tracy Young, once co-founder/CEO of PlanGrid, on [the failure points from $5m to $100m in ARR](https://tracy.posthaven.com/part-ii-the-failure-points-from-$5m-to-$100m-in-arr). She outlines where startups who have solved PMF and monetization can still fail.
- 
-- Kyle Poyar on nailing [free-to-paid conversion at scale](https://kylepoyar.substack.com/p/free-to-paid-conversion-at-scale) for product-led companies, and finding "concrete ways to grow faster and do more with less". 
- 
-- First Round Review: [How Product Strategy Fails in the Real World](https://review.firstround.com/how-product-strategy-fails-in-the-real-world-what-to-avoid-when-building-highly-technical-products) and what to avoid when building highly-technical products
-
+**Full article:** [Why Product Market Fit Isn't Enough](https://brianbalfour.com/essays/product-market-fit-isnt-enough)
+  
 ## More good reads
 
-- [Stay SaaSy on Management Debt](https://staysaasy.com/management/2023/01/12/management-debt.html) – Whether it's excessively junior teams, title inflation, or compensation inflation, management debt is a real problem. A great post on identifying and dealing with it.
- 
-- [If you like startups you should love anti-trust](https://alexwrites.substack.com/p/if-you-like-startups-you-should-love) – Not a traditionally popular topic in startup circles, but Alex Wilhelm makes the case for why it's good for startups. Agree or disagree?
- 
-- [What is a good SaaS churn rate? A meta-analysis of 6 studies](https://www.cobloom.com/blog/churn-rate-how-high-is-too-high) – Is it 5% per month or 5% per year!? It's a huge difference with a lot of conflicting data and opinions. This is a good dig into the numbers.
- 
-- [Corey Haines on SaaS metrics that lie](https://twitter.com/coreyhainesco/status/1612943630997819394) – Former Head of Growth at Baremetrics shares some insightful points on popular metrics that might mislead you.
+*   [Andrew Chen on The Power User Curve:](https://andrewchen.com/power-user-curve/)A16z partner, Andrew Chen, explains a powerful way to discover "if you have a hardcore, engaged segment that’s coming back every day." See also: [How to identify and analyze power users in PostHog](https://posthog.com/tutorials/power-users).  
+    
+*   [How to find customers willing to talk to you](https://franciscoraio.substack.com/p/a-detailed-execution-plan-for-building) – A useful guide about talking to users. [Part 2](https://franciscoraio.substack.com/p/detailed-execution-for-building-products-22-11-19) covers tactics for running effective user interviews.  
+    
+*   [11 Laws of Software Estimation for Complex Work](https://mdalmijn.com/p/11-laws-of-software-estimation-for-complex-work) – Wrong estimates aren’t your fault, but they are definitely your problem.  
+     
+*   [How to Measure “Hard-to-Measure” Marketing Channels](https://sparktoro.com/blog/how-to-measure-hard-to-measure-marketing-channels/) – Rand Fishkin on how to stop avoiding hard-to-measure marketing channels (e.g. native social, PR, events etc.) by learning how to measure them.
 
 > We send HogMail every two weeks. [Signup here](/newsletter) so you don't miss it.
