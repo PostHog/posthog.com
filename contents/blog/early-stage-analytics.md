@@ -65,7 +65,7 @@ Metrics give an overview of the usage of your product, but nothing beats [talkin
 
 ![User interview](../images/blog/early-stage-analytics/interview.png)
 
-This means both asking for written quantitative feedback and booking user interviews. Organizing both take can take up lots of time. Luckily, PostHog has apps for both ([user interview](https://github.com/PostHog/user-interview-app), [feedback](/apps/feedback-widget)). These apps connect to product data through feature flags and can display for a selection of users or after the use of specific features.
+This means both asking for written quantitative feedback and booking user interviews. Organizing both take can take up lots of time. Luckily, PostHog has apps for both ([user interview](https://posthog.com/apps/user-interviews), [feedback](/apps/feedback-widget)). These apps connect to product data through feature flags and can display for a selection of users or after the use of specific features.
 
 ### 4. Monitor key actions and trigger processes
 
