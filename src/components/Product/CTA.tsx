@@ -6,7 +6,7 @@ import { SignupCTA } from 'components/SignupCTA'
 
 export default function CTA({ className = '' }) {
     return (
-        <div className={`bg-black px-8 md:px-16 pt-12 pb-16 -mb-8 text-white ${className}`}>
+        <div className={`bg-black px-8 md:px-16 pt-12 pb-16 text-white ${className}`}>
             <h4 className="text-4xl leading-tight mb-8 md:mb-4">
                 Where else can you get <span className="inline-block text-yellow">open source</span>{' '}
                 <span className="inline-block text-red">product analytics,</span>{' '}
@@ -25,14 +25,14 @@ export default function CTA({ className = '' }) {
                     For all the tools you need with the modern data stack you want, just use
                 </p>
                 <span className="inline-flex items-baseline">
-                    <span className="h-[30px] relative top-1 mr-1">
+                    <span className="h-[30px] relative top-1 mx-1">
                         <Logo color="white" />
                     </span>
                     <p className="text-xl opacity-70 font-semibold mb-0">.</p>
                 </span>
             </div>
 
-            <div className="space-y-4 md:space-y-0 md:space-x-4 flex items-center">
+            <div className="space-y-4 md:space-y-0 md:space-x-4 flex items-center md:flex-row flex-col">
                 <SignupCTA className="!w-full md:!w-auto" text="Try PostHog Cloud - free" />
                 <div className="inline-flex items-center space-x-4">
                     <span>or</span>

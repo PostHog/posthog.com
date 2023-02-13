@@ -126,7 +126,7 @@ export default function Job({
                     title="careers"
                     menu={menu}
                 >
-                    <div className="mb-8 relative mt-8 lg:mt-0">
+                    <div className="relative">
                         <div>
                             <h1 className="m-0 text-5xl">{title}</h1>
                             <ul className="list-none m-0 p-0 md:items-center text-black/50 dark:text-white/50 mt-6 flex md:flex-row flex-col md:space-x-12 md:space-y-0 space-y-6">

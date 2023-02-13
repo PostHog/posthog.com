@@ -134,50 +134,40 @@ const Blog = ({
             <SEO title="Blog - PostHog" />
 
             <PostLayout article={false} title="Blog" menu={blog} hideSidebar hideSurvey>
-                <div className="pb-12">
-                    <h1 className="mb-6 lg:mt-0">Blog</h1>
-                    <Posts
-                        titleBorder
-                        title={`${capitalize(allPostsFilter)} articles`}
-                        posts={allPostsFilter === 'popular' ? allPostsPopular : allPostsRecent}
-                        action={
-                            <Link
-                                to="/blog/all"
-                                className="-mr-2 px-2 py-1.5 rounded-sm hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark relative active:top-[1px] active:scale-[.99]"
-                            >
-                                View all
-                            </Link>
-                        }
-                    />
-                    <NewsletterForm />
+                <h1 className="mb-6 mt-0">Blog</h1>
+                <Posts
+                    titleBorder
+                    title={`${capitalize(allPostsFilter)} articles`}
+                    posts={allPostsFilter === 'popular' ? allPostsPopular : allPostsRecent}
+                    action={
+                        <Link
+                            to="/blog/all"
+                            className="-mr-2 px-2 py-1.5 rounded-sm hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark relative active:top-[1px] active:scale-[.99]"
+                        >
+                            View all
+                        </Link>
+                    }
+                />
+                <NewsletterForm />
 
-                    <div className="pb-2 mb-5 border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark flex justify-between items-center">
-                        <h4 className="opacity-50 text-base m-0">Browse by topic</h4>
-                    </div>
-
-                    {homeCategories.slice(0, 4).map((categoryToShow) => {
-                        return (
-                            <CategoryPosts
-                                key={categoryToShow}
-                                categories={categories}
-                                categoryToShow={categoryToShow}
-                            />
-                        )
-                    })}
-                    <CommunityCTA />
-                    {homeCategories.slice(4).map((categoryToShow) => {
-                        return (
-                            <CategoryPosts
-                                key={categoryToShow}
-                                categories={categories}
-                                categoryToShow={categoryToShow}
-                            />
-                        )
-                    })}
-                    <CallToAction width="full" type="secondary" to="/blog/all">
-                        View all latest posts
-                    </CallToAction>
+                <div className="pb-2 mb-5 border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark flex justify-between items-center">
+                    <h4 className="opacity-50 text-base m-0">Browse by topic</h4>
                 </div>
+
+                {homeCategories.slice(0, 4).map((categoryToShow) => {
+                    return (
+                        <CategoryPosts key={categoryToShow} categories={categories} categoryToShow={categoryToShow} />
+                    )
+                })}
+                <CommunityCTA />
+                {homeCategories.slice(4).map((categoryToShow) => {
+                    return (
+                        <CategoryPosts key={categoryToShow} categories={categories} categoryToShow={categoryToShow} />
+                    )
+                })}
+                <CallToAction width="full" type="secondary" to="/blog/all">
+                    View all latest posts
+                </CallToAction>
             </PostLayout>
         </Layout>
     )

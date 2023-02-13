@@ -6,7 +6,11 @@ import { Heading } from 'components/Heading'
 import { InlineCode } from 'components/InlineCode'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
-import PostLayout, { Contributors, ShareLinks, SidebarSection, Topics } from 'components/PostLayout'
+import PostLayout from 'components/PostLayout'
+import Contributors from 'components/PostLayout/Contributors'
+import ShareLinks from 'components/PostLayout/ShareLinks'
+import SidebarSection from 'components/PostLayout/SidebarSection'
+import Topics from 'components/PostLayout/Topics'
 import { SEO } from 'components/seo'
 import { ZoomImage } from 'components/ZoomImage'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
@@ -42,9 +46,8 @@ const TutorialSidebar = ({ contributors, location, title, categories }) => {
     return (
         <>
             {contributors?.length > 0 && (
-                <SidebarSection title={`Contributor${contributors?.length > 1 ? 's' : ''}`}>
+                <SidebarSection>
                     <Contributors
-                        className="flex flex-col space-y-2"
                         contributors={contributors.map((contributor) => ({
                             ...contributor,
                         }))}
