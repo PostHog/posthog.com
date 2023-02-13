@@ -156,27 +156,15 @@ The first time you sign into Zendesk, please make sure you include your name and
 
 You’ll spend most of your time in the Views pane, where you’ll find all tickets divided into different lists depending on who they are assigned to, and whether they have been solved or not.
 
-There are a few different ways that support tickets can be created in Zendesk:
+Tips:
 
-##### Slack
-
-_User Slack_
-
-Support requests posted in #community-support are monitored by the [Support Hero](/handbook/engineering/support-hero), who then creates tickets in Zendesk using the Zendesk app. Once created, the Support Hero will triage the request in either Zendesk or directly in Slack via Help, and assign it a priority and assignee.
-
-##### Email
-
-Emails sent to [hey@posthog.com](mailto:hey@posthog.com) automatically create tickets in Zendesk, which are prioritized and delegated by the Support Hero.
-
-Goal of the Support Hero person on duty is to:
-
-* Keep the quantity of items in the _Unassigned_ view as small as possible by assigning tickets to yourself as Support Hero, or in a minority of cases, another team member who is better suited to solve the ticket
-
-* Make sure all the conversations get a response in a reasonable time (we don’t want to drop customer requests on the floor)
-
-* Provide actionable information as _Note_ for all the items you are handing over to someone else (note that you should follow-up on most requests yourself after your shift ends rather than assigning them to the next support hero).
+* If need more information from the customer to solve the issue, respond and mark as pending. 
+* If you think you solved the issue mark as solved (if they reply it will re-open and it's easier for everyone if there's less open tickets around).
+* Provide actionable information as _Note_ (e.g. links to internal slack threads, partial investigation, ...)
 
 ##### How to deal with spam, marketing, partnership proposals, candidates etc.
+
+Emails sent to [hey@posthog.com](mailto:hey@posthog.com) automatically create tickets in Zendesk, which are prioritized and delegated by the Support Hero.
 
 Like every other email address in this world, hey@ gets quite a bit of spam (and we reroute this to Zendesk). When this happens, simply mark the conversation as closed.
 
