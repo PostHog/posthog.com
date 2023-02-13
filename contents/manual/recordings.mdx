@@ -94,7 +94,7 @@ posthog.init('<ph_project_api_key>', {
     disable_session_recording: true
     // ... other options
 })
-window.posthog.onFeatureFlags((function() {
+window.posthog.onFeatureFlags(function() {
     if (window.posthog.isFeatureEnabled("your-feature-flag")) {
         window.posthog.startSessionRecording()
     }
