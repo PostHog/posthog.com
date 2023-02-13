@@ -15,55 +15,20 @@ To follow this tutorial along, you need:
 2. a running Next.js application
 
 ## Setup and tracking page views (automatically)
-The first thing you want to do is to install the [next-use-posthog library](https://github.com/Ismaaa/next-use-posthog) in your project - so add it using your package manager:
+The first thing you want to do is to install the [posthog-js](https://github.com/posthog/posthog-js) in your project - so add it using your package manager:
 
 ```shell
-yarn add next-use-posthog
+yarn add posthog-js
 ```
 
 or
 
 ```shell
-npm install --save next-use-posthog
+npm install --save posthog-js
 ```
 
 After that, we want to initialize the PostHog instance in `pages/_app.js`
 
-```tsx
-import { usePostHog } from 'next-use-posthog'
-
-function MyApp({ Component, pageProps }) {  
-  // NOTE: If set as an environment variable be sure to prefix with `NEXT_PUBLIC_`
-  // For more info see https://nextjs.org/docs/basic-features/environment-variables#exposing-environment-variables-to-the-browser
-  
-  usePostHog('<ph_project_api_key>', { api_host: '<ph_instance_address>' })
-
-  return <Component {...pageProps} />
-}
-
-export default MyApp
-```
-
-#### Disable in development
-
-```tsx
-import { usePostHog } from 'next-use-posthog'
-
-function MyApp({ Component, pageProps }) {
-  usePostHog('<ph_project_api_key>', {
-    api_host: '<ph_instance_address>',
-    loaded: (posthog) => {
-      if (process.env.NODE_ENV === 'development') posthog.opt_out_capturing()
-    },
-  })  
-
-  return <Component {...pageProps} />
-}
-
-export default MyApp
-```
-
-### Setup and tracking page views (manually)
 
 The first thing you want to do is to install the [posthog-js library](/docs/integrate/client/js) in your project - so add it using your package manager:
 
@@ -84,13 +49,15 @@ import { useRouter } from 'next/router';
 import posthog from 'posthog-js';
 import { useEffect } from 'react';
 
+if (typeof window !== "undefined") {
+  // This ensures that as long as we are client-side, posthog is always ready
+  posthog.init('<ph_project_api_key>', { api_host: '<ph_instance_address>' });
+}
+
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
 
   useEffect(() => {
-    // Init PostHog
-    posthog.init('<ph_project_api_key>', { api_host: '<ph_instance_address>' });
-
     // Track page views
     const handleRouteChange = () => posthog.capture('$pageview');
     router.events.on('routeChangeComplete', handleRouteChange);
