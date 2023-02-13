@@ -44,11 +44,11 @@ In this model, the answer to "how do we grow?" is always launch new feature, bu
 Instead, he suggests successful startups ($100M+ in his reckoning) should seek four fits:
 
 *   [**Market-Product Fit**](https://brianbalfour.com/essays/market-product-fit) – A variation on product-market fit.  
-    
+
 *   [**Product-Channel Fit**](https://brianbalfour.com/essays/product-channel-fit-for-growth) – "Products are built to fit with channels. Channels do not mold to products."  
-    
-*   **[Channel-Model Fit](https://brianbalfour.com/essays/channel-model-fit-for-user-acquisition) –** Channels are determined by your model, i.e. how you charge and average annual revenue per user.  
-    
+
+*   **[Channel-Model Fit](https://brianbalfour.com/essays/channel-model-fit-for-user-acquisition) –** Channels are determined by your model, i.e. how you charge and average annual revenue per user.
+  
 *   **[Model-Market Fit](https://brianbalfour.com/essays/model-market-fit-threshold-for-growth)** – The concept that your market (and # of customers within your market) influence your model."
 
 Balfour makes three final points:
@@ -63,12 +63,12 @@ Balfour makes three final points:
   
 ## More good reads
 
-*   [Andrew Chen on The Power User Curve:](https://andrewchen.com/power-user-curve/)A16z partner, Andrew Chen, explains a powerful way to discover "if you have a hardcore, engaged segment that’s coming back every day." See also: [How to identify and analyze power users in PostHog](https://posthog.com/tutorials/power-users).  
-    
-*   [How to find customers willing to talk to you](https://franciscoraio.substack.com/p/a-detailed-execution-plan-for-building) – A useful guide about talking to users. [Part 2](https://franciscoraio.substack.com/p/detailed-execution-for-building-products-22-11-19) covers tactics for running effective user interviews.  
-    
-*   [11 Laws of Software Estimation for Complex Work](https://mdalmijn.com/p/11-laws-of-software-estimation-for-complex-work) – Wrong estimates aren’t your fault, but they are definitely your problem.  
-     
-*   [How to Measure “Hard-to-Measure” Marketing Channels](https://sparktoro.com/blog/how-to-measure-hard-to-measure-marketing-channels/) – Rand Fishkin on how to stop avoiding hard-to-measure marketing channels (e.g. native social, PR, events etc.) by learning how to measure them.
+* [Andrew Chen on The Power User Curve:](https://andrewchen.com/power-user-curve/)A16z partner, Andrew Chen, explains a powerful way to discover "if you have a hardcore, engaged segment that’s coming back every day." See also: [How to identify and analyze power users in PostHog](https://posthog.com/tutorials/power-users).  
+
+* [How to find customers willing to talk to you](https://franciscoraio.substack.com/p/a-detailed-execution-plan-for-building) – A useful guide about talking to users. [Part 2](https://franciscoraio.substack.com/p/detailed-execution-for-building-products-22-11-19) covers tactics for running effective user interviews.  
+
+* [11 Laws of Software Estimation for Complex Work](https://mdalmijn.com/p/11-laws-of-software-estimation-for-complex-work) – Wrong estimates aren’t your fault, but they are definitely your problem.  
+
+* [How to Measure “Hard-to-Measure” Marketing Channels](https://sparktoro.com/blog/how-to-measure-hard-to-measure-marketing-channels/) – Rand Fishkin on how to stop avoiding hard-to-measure marketing channels (e.g. native social, PR, events etc.) by learning how to measure them.
 
 > We send HogMail every two weeks. [Signup here](/newsletter) so you don't miss it.
