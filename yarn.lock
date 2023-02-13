@@ -18050,19 +18050,19 @@ postcss@^8.4.18:
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
 
-posthog-js@^1.36.1:
-  version "1.36.1"
-  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.36.1.tgz#56786329e7dbce800c89920329dbafde827ef6d6"
-  integrity sha512-Uy5pWkktFjwQ8FGykwmB5daCMkAV6zZvoWD8gsyEoO2oict+x8F81RE4u7ZGYSODgXzu51aMzcoRyXysZwBTTw==
+posthog-js@^1.43.1:
+  version "1.43.1"
+  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.43.1.tgz#b6874062076bcaab72127d4f77f3a8eac58cc18b"
+  integrity sha512-X8Z09nwfVlyrLXvLN3Yj1Vc5XQuAwopsUJgkwhUSVUAplwEVUFuFv4mFcPRAEUZaiRw86/fxNJfK/ccNjmqqzA==
   dependencies:
     "@sentry/types" "7.22.0"
     fflate "^0.4.1"
     rrweb-snapshot "^1.1.14"
 
 posthog-node@^2.0.2:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/posthog-node/-/posthog-node-2.1.0.tgz#d99acda28b208cbeefed2e6cd0ddfa8cc2d79910"
-  integrity sha512-xr56mZRQo7rnL2YdwbipcxTZeyi5dcI6IM4++wIN7JLYwinrJYcQv01nan4gU4kMy33Qz5qT6boWMQRwpKZJVQ==
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/posthog-node/-/posthog-node-2.4.0.tgz#681d65dc34894427766b35e6d50bf091857a110c"
+  integrity sha512-ijenljLS49AzMskyrDsmEbuPUI641I/qUEUfsVTFZYzNcmmiwWCyJu4v51DjzcH/vAda4p44CIhzL2LkROCl2Q==
   dependencies:
     axios "^0.27.0"
 
