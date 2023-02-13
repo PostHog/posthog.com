@@ -53,9 +53,15 @@ To help manage users' expectations, you might find it useful to share a message 
 
 ### Prioritizing requests
 
-1. Any requests assigned to you in [Unthread](https://posthog.slack.com/archives/D04725CS7JR)  as they will be from a high priority customer in a dedicated Slack channel
-2. Any issue in Zendesk marked as 'high' priority (as they'll be paying customers)
-3. Any other Zendesk (including squeak and github) or community slack issues.
+As a business we need to ensure we are focusing support on our paying customers, as such this is the prioritization order you should apply as Support Hero.  At the end of your rotation you need to ensure that any items in 1-4 are resolved or passed to the next Support Hero _as a minimum_.
+
+1. Any requests where you are tagged by the Customer Success team in a dedicated slack channel as there will be some urgency needed.
+2. Any requests assigned to you in [Unthread](https://posthog.slack.com/archives/D04725CS7JR) as they will be from a high priority customer in a dedicated Slack channel.
+3. Open Zendesk tickets in the [High Priority Queue](https://posthoghelp.zendesk.com/agent/filters/7114751198491) (high-paying customers).
+4. Open Zendesk tickets in the [Normal Priority Queue](https://posthoghelp.zendesk.com/agent/filters/7114873854747) (paying customers).
+5. [Squeak!](https://posthog.com/questions/) questions.
+6. [#community-support](https://posthogusers.slack.com/archives/C01GLBKHKQT) channel on the User Slack.
+7. Open Zendesk tickets in the [Low Priority Queue](https://posthoghelp.zendesk.com/agent/filters/7115368073755) (non-paying users).
 
 ### Triaging issues to the relevant small team
 
