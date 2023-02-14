@@ -67,9 +67,9 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         const menuFlattened = flattenMenu(sidebars[menu])
 
         data.forEach((node) => {
-            const links =
+            /*const links =
                 node?.rawBody &&
-                markdownLinkExtractor(node?.rawBody)?.map((url) => url.replace(/https:\/\/posthog.com|#.*/gi, ''))
+                markdownLinkExtractor(node?.rawBody)?.map((url) => url.replace(/https:\/\/posthog.com|#.*gi, ''))*/
             const slug = node.fields?.slug || node.url
             let next = null
             let previous = null
@@ -99,7 +99,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     breadcrumbBase: breadcrumbBase || menuFlattened[0],
                     tableOfContents,
                     slug,
-                    links,
                     searchFilter: menu,
                     ...(context ? context(node) : {}),
                 },
@@ -122,7 +121,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                         fields {
                             slug
                         }
-                        rawBody
                     }
                 }
             }
@@ -278,7 +276,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                         fields {
                             slug
                         }
-                        rawBody
                     }
                 }
             }
@@ -318,7 +315,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                         fields {
                             slug
                         }
-                        rawBody
                     }
                 }
             }
