@@ -367,10 +367,6 @@ export const query = graphql`
                     hint
                     description
                 }
-                headings {
-                    depth
-                    value
-                }
                 contributors {
                     url
                     username
@@ -383,6 +379,10 @@ export const query = graphql`
                         }
                     }
                 }
+            }
+            headings {
+                depth
+                value
             }
             frontmatter {
                 title
