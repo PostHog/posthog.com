@@ -93,7 +93,7 @@ import { CloudVsSelfHost } from './components/Pricing/CloudVsSelfHost'
 import { FAQs } from './components/Pricing/FAQs'
 import { Features } from './components/Pricing/Features'
 import { OtherOptions } from './components/Pricing/OtherOptions'
-import { PlanComparisonTest } from './components/Pricing/PlanComparisonTest'
+import { PlanComparison } from './components/Pricing/PlanComparison'
 import { PricingCalculator } from './components/Pricing/PricingCalculator'
 import { PricingHero } from './components/Pricing/PricingHero'
 import { PricingSlider } from './components/Pricing/PricingSlider'
@@ -234,7 +234,7 @@ export const shortcodes = {
     FAQs,
     Features,
     OtherOptions,
-    PlanComparisonTest,
+    PlanComparison,
     PricingCalculator,
     PricingHero,
     PricingSlider,

@@ -11,7 +11,7 @@ import SelfHostOverlay from 'components/Pricing/Overlays/SelfHost'
 import EnterpriseOverlay from 'components/Pricing/Overlays/Enterprise'
 import WhyCloud from 'components/Pricing/Overlays/WhyCloud'
 import Enterprise from 'components/Pricing/Modals/Enterprise'
-import { PlanComparisonTest } from './PlanComparisonTest'
+import { PlanComparison } from './PlanComparison'
 import OtherOptions from './OtherOptions'
 import { PricingCalculator } from './PricingCalculator'
 
@@ -87,7 +87,7 @@ const Pricing = (): JSX.Element => {
                 </div>
             </section>
             <section className={`${section} mb-12 mt-12 md:px-4`}>
-                <PlanComparisonTest />
+                <PlanComparison />
             </section>
 
             <PricingCalculator />

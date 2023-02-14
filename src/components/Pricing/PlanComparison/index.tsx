@@ -223,7 +223,7 @@ export const getProductLimit = (product?: BillingProductV2Type): JSX.Element => 
     )
 }
 
-export const PlanComparisonTest = ({ className = '' }) => {
+export const PlanComparison = ({ className = '' }) => {
     const posthog = usePostHog()
     const [availablePlans, setAvailablePlans] = useState<BillingV2PlanType[]>([])
 
