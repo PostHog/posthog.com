@@ -35,7 +35,9 @@ There are a couple of channels that customer requests come in so make sure you k
 - [PostHog Users's Slack](https://posthog.com/slack), specifically `#community-support`. Users who post in `#general` or elsewhere should be instructed to post in `#community-support`
 - Sentry issues, either [directly](https://sentry.io/organizations/posthog/issues/?project=1899813) or in `#sentry` in our main Slack.
 
-Zendesk will also get populated with new issues from people outside the PostHog organization on the `posthog` and `posthog.com` repos, as well as with Squeak questions. These tickets will come with links to the issue or Squeak so you can answer them in the appropriate platform, rather than on Zendesk itself. 
+Zendesk will also get populated with new issues from people outside the PostHog organization on the `posthog` and `posthog.com` repos, and also Squeak questions. These tickets will come with links to the issue or Squeak so you can answer them in the appropriate platform, rather than on Zendesk itself.
+
+The feedback box on the PostHog app will automatically create a Zendesk ticket and lets the user know that we've create a ticket for them. If it's a feature request feel free to reply with something short like "Thanks for the feedback! We'll take a look at this and get back to you if we have any questions.". If there's not enough information it might be worth reviewing the session recording or asking them for more information.
 
 ### Communication
 
