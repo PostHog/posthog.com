@@ -203,13 +203,19 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         })
     }
 
+    const timeStep = async (func: () => Promise<void>, label: string) => {
+        console.time(label)
+        await func()
+        return console.timeEnd(label)
+    }
+
     await Promise.all([
-        process.env.POSTHOG_APP_API_KEY && createApiNodes(),
-        createIssueNodes(),
-        createPullRequestNodes(),
-        createIntegrationNodes(),
-        createPluginNodes(),
-        createGitHubStatsNode('posthog', 'posthog'),
-        createGitHubStatsNode('posthog', 'posthog.com'),
+        process.env.POSTHOG_APP_API_KEY && timeStep(createApiNodes, 'createApiNodes'),
+        timeStep(createIssueNodes, 'createIssueNodes'),
+        timeStep(createPullRequestNodes, 'createPullRequestNodes'),
+        timeStep(createIntegrationNodes, 'createIntegrationNodes'),
+        timeStep(createPluginNodes, 'createPluginNodes'),
+        timeStep(() => createGitHubStatsNode('posthog', 'posthog'), 'createGitHubStatsNode[posthog]'),
+        timeStep(() => createGitHubStatsNode('posthog', 'posthog.com'), 'createGitHubStatsNode[posthog.com]'),
     ])
 }
