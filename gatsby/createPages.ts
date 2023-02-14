@@ -86,6 +86,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     searchFilter: menu,
                     ...(context ? context(node) : {}),
                 },
+                defer: true,
             })
         })
     }
