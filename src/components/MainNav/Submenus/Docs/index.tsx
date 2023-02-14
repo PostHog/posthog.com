@@ -26,7 +26,7 @@ interface IColumn {
 
 const gettingStarted: IFeature[] = [
     { title: 'Quickstart', icon: <Quickstart />, url: '/docs/getting-started/cloud' },
-    { title: 'JS snippet', icon: <JSSnippet />, url: '/docs/integrate' },
+    { title: 'JS snippet', icon: <JSSnippet />, url: '/docs/integrate?tab=snippet' },
     { title: 'SDKs', icon: <SDK />, url: '/docs/integrate?tab=sdks' },
 ]
 

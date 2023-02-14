@@ -55,6 +55,8 @@ You can find your key in the 'Project Settings' page in PostHog.
 |        `flushInterval`        | After how many ms we should flush the queue                                                              |          `10000`           |
 |       `personalApiKey`        | An optional [personal API key](/docs/api/overview#personal-api-keys-recommended) for evaluating feature flags locally |           `null`           |
 | `featureFlagsPollingInterval` | Interval in milliseconds specifying how often feature flags should be fetched from the PostHog API       |          `300000`          |
+| `requestTimeout` | Timeout in milliseconds for any calls       |          `10000`          |
+| `maxCacheSize` | Maximum size of cache that deduplicates $feature_flag_called calls per user.       |          `50000`          |
 
 > **Note:** When using PostHog in an AWS Lambda function or a similar serverless function environment, make sure you set `flushAt` to `1` and `flushInterval` to `0`.
 

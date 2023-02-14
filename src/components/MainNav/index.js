@@ -49,12 +49,23 @@ export default function MainNav() {
         >
             <UserProvider>
                 <div className="flex justify-between items-center max-w-screen-3xl mx-auto lg:relative">
+                    <button
+                        className="active:top-[0.5px] active:scale-[.98] lg:hidden bg-gray-accent-light dark:bg-gray-accent-dark w-[36px] h-[36px] flex items-center justify-center rounded-full"
+                        onClick={() => open('mobile-header')}
+                    >
+                        <Search className="w-[16px] h-[16px]" />
+                    </button>
                     <Link
                         className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark block lg:hidden"
                         to="/"
                     >
                         <Logo />
                     </Link>
+                    <AnimatedBurger
+                        className="active:top-[0.5px] active:scale-[.98] bg-gray-accent-light dark:bg-gray-accent-dark lg:hidden w-[36px] h-[36px] flex items-center justify-center rounded-full"
+                        onClick={() => expandMenu(!expanded)}
+                        active={expanded}
+                    />
                     {(expanded || !breakpoints.md) && (
                         <motion.nav
                             className="lg:static absolute w-full left-0 top-full lg:overflow-visible overflow-hidden hidden lg:block"
@@ -103,14 +114,6 @@ export default function MainNav() {
                             </div>
                         </motion.nav>
                     )}
-
-                    <div className="flex items-center space-x-4">
-                        <button className="lg:hidden" onClick={() => open('mobile-header')}>
-                            <Search />
-                        </button>
-
-                        <AnimatedBurger className="lg:hidden" onClick={() => expandMenu(!expanded)} active={expanded} />
-                    </div>
                 </div>
             </UserProvider>
         </OrgProvider>

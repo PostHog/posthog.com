@@ -53,9 +53,15 @@ To help manage users' expectations, you might find it useful to share a message 
 
 ### Prioritizing requests
 
-1. Any requests assigned to you in [Unthread](https://posthog.slack.com/archives/D04725CS7JR)  as they will be from a high priority customer in a dedicated Slack channel
-2. Any issue in Zendesk marked as 'high' priority (as they'll be paying customers)
-3. Any other Zendesk (including squeak and github) or community slack issues.
+As a business we need to ensure we are focusing support on our paying customers, as such this is the prioritization order you should apply as Support Hero.  At the end of your rotation you need to ensure that any items in 1-4 are resolved or passed to the next Support Hero _as a minimum_.
+
+1. Any requests where you are tagged by the Customer Success team in a dedicated slack channel as there will be some urgency needed.
+2. Any requests assigned to you in [Unthread](https://posthog.slack.com/archives/D04725CS7JR) as they will be from a high priority customer in a dedicated Slack channel.
+3. Open Zendesk tickets in the [High Priority Queue](https://posthoghelp.zendesk.com/agent/filters/7114751198491) (high-paying customers).
+4. Open Zendesk tickets in the [Normal Priority Queue](https://posthoghelp.zendesk.com/agent/filters/7114873854747) (paying customers).
+5. [Squeak!](https://posthog.com/questions/) questions.
+6. [#community-support](https://posthogusers.slack.com/archives/C01GLBKHKQT) channel on the User Slack.
+7. Open Zendesk tickets in the [Low Priority Queue](https://posthoghelp.zendesk.com/agent/filters/7115368073755) (non-paying users).
 
 ### Triaging issues to the relevant small team
 
@@ -150,31 +156,21 @@ The first time you sign into Zendesk, please make sure you include your name and
 
 You’ll spend most of your time in the Views pane, where you’ll find all tickets divided into different lists depending on who they are assigned to, and whether they have been solved or not.
 
-There are a few different ways that support tickets can be created in Zendesk:
+Tips:
 
-##### Slack
+* If need more information from the customer to solve the issue, respond and mark as pending. 
+* If you think you solved the issue mark as solved (if they reply it will re-open and it's easier for everyone if there's less open tickets around).
+* Provide actionable information as _Note_ (e.g. links to internal slack threads, partial investigation, ...)
 
-_User Slack_
-
-Support requests posted in #community-support are monitored by the [Support Hero](/handbook/engineering/support-hero), who then creates tickets in Zendesk using the Zendesk app. Once created, the Support Hero will triage the request in either Zendesk or directly in Slack via Help, and assign it a priority and assignee.
-
-##### Email
+##### How to deal with spam, marketing, partnership proposals, candidates etc.
 
 Emails sent to [hey@posthog.com](mailto:hey@posthog.com) automatically create tickets in Zendesk, which are prioritized and delegated by the Support Hero.
-
-Goal of the Support Hero person on duty is to:
-
-* Keep the quantity of items in the _Unassigned_ view as small as possible by assigning tickets to yourself as Support Hero, or in a minority of cases, another team member who is better suited to solve the ticket
-
-* Make sure all the conversations get a response in a reasonable time (we don’t want to drop customer requests on the floor)
-
-* Provide actionable information as _Note_ for all the items you are handing over to someone else (note that you should follow-up on most requests yourself after your shift ends rather than assigning them to the next support hero).
-
-##### How to deal with spam, marketing, partnership proposals, etc.
 
 Like every other email address in this world, hey@ gets quite a bit of spam (and we reroute this to Zendesk). When this happens, simply mark the conversation as closed.
 
 For marketing, partnership proposals or anything like that, please post in Slack in #team-marketing before taking an action.
+
+For candidates trying to apply to PostHog, e.g. sending their CV you can simply ignore & close - Charles is in hey@ and will forward them directly on to careers@ to be dealt with.
 
 ### Unthread
 

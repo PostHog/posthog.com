@@ -86,9 +86,9 @@ const leftColMenuItems: LeftColMenuItems[] = [
                 url: '/product#apps',
             },
             {
-                title: 'Self-hosting',
+                title: 'Open source',
                 icon: <SelfHosting />,
-                url: '/product#self-hosting',
+                url: '/product#open-source',
             },
             {
                 title: 'API',

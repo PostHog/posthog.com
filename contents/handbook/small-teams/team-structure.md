@@ -27,7 +27,7 @@ Our small teams are:
 
 We maintain our full org chart in Roots, [which you can access here](https://app.tryroots.io/org-chart).
 
-Team leads do not necessarily = managers - read more about how we think about management [here]([/handbook/company/management). 
+Team leads do not necessarily = managers - read more about how we think about management [here](/handbook/company/management). 
 
 ## Organization changes
 

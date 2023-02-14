@@ -1,5 +1,5 @@
 import Layout from 'components/Layout'
-import PostLayout, { TableOfContents } from 'components/PostLayout'
+import PostLayout from 'components/PostLayout'
 import WhatsNext from 'components/Product/WhatsNext'
 import API from 'components/Product/API'
 import CTA from 'components/Product/CTA'
@@ -33,6 +33,7 @@ import { Link } from 'react-scroll'
 import Slider from 'react-slick'
 import { SEO } from 'components/seo'
 import slugify from 'slugify'
+import OpenSource from 'components/Product/OpenSource'
 
 const features: IProps[] = [
     {
@@ -107,7 +108,7 @@ const menu = [
     { name: 'Apps', url: 'apps', icon: <AppLibrary /> },
     { name: 'Event pipelines', url: 'event-pipelines', icon: <EventPipelinesIcon /> },
     { name: 'Data warehouse', url: 'data-warehouse', icon: <DataWarehouseIcon /> },
-    { name: 'Self-hosting', url: 'self-hosting', icon: <SelfHostingIcon /> },
+    { name: 'Open source', url: 'open-source', icon: <SelfHostingIcon /> },
     { name: 'API', url: 'api', icon: <APIIcon /> },
     { name: "What's next?", url: 'roadmap', icon: <Experiments /> },
 ]
@@ -165,40 +166,39 @@ export default function Product() {
                 hideSurvey
                 menu={menu}
                 article={false}
-                contentContainerClassName="w-full pb-12 md:px-12 md:-mt-8"
+                contentContainerClassName="w-full md:px-12"
                 menuType="scroll"
                 menuWidth={{ left: 350, right: 350 }}
+                mobileMenu={false}
             >
-                <div className="sticky top-0 z-10 bg-tan lg:hidden mb-6 py-2">
-                    <div className="pl-5">
-                        <Slider ref={sliderRef} {...sliderSettings}>
-                            {menu.map(({ name, icon, url }, index) => {
-                                return (
-                                    <div key={name}>
-                                        <Link
-                                            smooth
-                                            duration={300}
-                                            offset={-57}
-                                            to={url}
-                                            hashSpy
-                                            className={`mr-1 cursor-pointer flex items-center space-x-2 text-[14px] font-semibold px-3 py-2 rounded-md hover:bg-gray-accent-light text-black hover:text-black ${
-                                                activeSliderIndex === index ? 'bg-gray-accent-light' : ''
-                                            }`}
-                                            spy
-                                            onClick={() => sliderRef?.current?.slickGoTo(index)}
-                                            onSetActive={() => {
-                                                setActiveSliderIndex(index)
-                                                sliderRef?.current?.slickGoTo(index)
-                                            }}
-                                        >
-                                            <span className="w-[25px]">{icon}</span>
-                                            <span>{name}</span>
-                                        </Link>
-                                    </div>
-                                )
-                            })}
-                        </Slider>
-                    </div>
+                <div className="sticky top-0 z-10 bg-tan lg:hidden mb-8">
+                    <Slider ref={sliderRef} {...sliderSettings}>
+                        {menu.map(({ name, icon, url }, index) => {
+                            return (
+                                <div key={name}>
+                                    <Link
+                                        smooth
+                                        duration={300}
+                                        offset={-57}
+                                        to={url}
+                                        hashSpy
+                                        className={`mr-1 cursor-pointer flex items-center space-x-2 text-[14px] font-semibold px-3 py-2 rounded-md hover:bg-gray-accent-light text-black hover:text-black ${
+                                            activeSliderIndex === index ? 'bg-gray-accent-light' : ''
+                                        }`}
+                                        spy
+                                        onClick={() => sliderRef?.current?.slickGoTo(index)}
+                                        onSetActive={() => {
+                                            setActiveSliderIndex(index)
+                                            sliderRef?.current?.slickGoTo(index)
+                                        }}
+                                    >
+                                        <span className="w-[25px]">{icon}</span>
+                                        <span>{name}</span>
+                                    </Link>
+                                </div>
+                            )
+                        })}
+                    </Slider>
                 </div>
                 <div id="top-features">
                     <div className="max-w-5xl mx-auto px-5 box-content">
@@ -215,10 +215,10 @@ export default function Product() {
                 <Apps />
                 <EventPipelines />
                 <DataWarehouse />
-                <SelfHosting />
+                <OpenSource />
                 <API />
                 <WhatsNext />
-                <CTA className="mt-12 -mx-12 !px-20 !md:px-16 !-mb-12 md:!-mb-20" />
+                <CTA className="md:-mx-12" />
             </PostLayout>
         </Layout>
     )

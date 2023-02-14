@@ -376,7 +376,7 @@ const PricingControl = (): JSX.Element => {
                             </span>
 
                             <h5 className="text-base mb-0">B2C with millions of users?</h5>
-                            <p className="text-[15px] mb-1">Get in touch for volume discounts after signing up.</p>
+                            <p className="text-[15px] mb-1">Get in touch for volume discounts after sign-up.</p>
                         </div>
 
                         <div className="pl-10 relative mb-4">
@@ -385,7 +385,7 @@ const PricingControl = (): JSX.Element => {
                             </span>
 
                             <h5 className="text-base mb-0">Non-profits</h5>
-                            <p className="text-[15px] mb-1">50% off in most cases. Get in touch after signing up.</p>
+                            <p className="text-[15px] mb-1">50% off in most cases. Get in touch after sign-up.</p>
                         </div>
                     </div>
                 </div>

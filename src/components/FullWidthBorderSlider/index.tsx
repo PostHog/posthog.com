@@ -51,9 +51,19 @@ const SlideTemplate = ({ date, url, authors, title, ...other }: ISliderItem) => 
                 <Link to={url} className="no-hover">
                     <div className="block bg-gray-accent-light hover:bg-gray-accent/50 rounded relative active:top-[0.5px] active:scale-[.99]">
                         {image ? (
-                            <GatsbyImage image={image} alt={title} />
+                            <>
+                                <GatsbyImage image={image} alt={title} />
+                                <div className="rounded-md absolute p-4 top-0 left-0 w-full h-full">
+                                    <h4 className="text-2xl m-0 leading-8">{title}</h4>
+                                </div>
+                            </>
                         ) : (
-                            <img width={514} height={289} src="/banner.png" />
+                            <>
+                                <img width={514} height={289} src="/banner.png" />
+                                <div className="rounded-md absolute p-4 top-0 left-0 w-full h-full">
+                                    <h4 className="text-2xl m-0 leading-8">{title}</h4>
+                                </div>
+                            </>
                         )}
                     </div>
                 </Link>

@@ -34,31 +34,22 @@ const BlogCategory = ({
         <Layout>
             <SEO title={`${category} - PostHog`} />
 
-            <PostLayout
-                breadcrumb={[{ name: 'Blog', url: '/blog' }, { name: category }]}
-                article={false}
-                title="Blog"
-                menu={blog}
-                hideSidebar
-                hideSurvey
-            >
-                <div className="mt-6 mb-12">
-                    <Posts
-                        titleBorder
-                        title={category}
-                        posts={posts.slice(0, 4)}
-                        action={<PostToggle checked={allPostsFilter === 'popular'} onChange={handleToggleChange} />}
-                    />
-                    <NewsletterForm />
-                    <Posts posts={posts.slice(4, 12)} />
-                    {posts.length > 12 && (
-                        <>
-                            <CommunityCTA />
-                            <Posts posts={posts.slice(12)} />
-                        </>
-                    )}
-                    <Pagination currentPage={currentPage} numPages={numPages} base={base} />
-                </div>
+            <PostLayout article={false} title="Blog" menu={blog} hideSidebar hideSurvey>
+                <Posts
+                    titleBorder
+                    title={category}
+                    posts={posts.slice(0, 4)}
+                    action={<PostToggle checked={allPostsFilter === 'popular'} onChange={handleToggleChange} />}
+                />
+                <NewsletterForm />
+                <Posts posts={posts.slice(4, 12)} />
+                {posts.length > 12 && (
+                    <>
+                        <CommunityCTA />
+                        <Posts posts={posts.slice(12)} />
+                    </>
+                )}
+                <Pagination currentPage={currentPage} numPages={numPages} base={base} />
             </PostLayout>
         </Layout>
     )

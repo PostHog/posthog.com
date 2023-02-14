@@ -202,7 +202,7 @@
             },
             {
                 "name": "Open-Source",
-                "url": "/docs/self-host/open-source/deployment",
+                "url": "",
                 "children": [
                     {
                         "name": "Disclaimer",
@@ -219,50 +219,16 @@
                 ]
             },
             {
-                "name": "Enterprise",
-                "url": "/docs/self-host/enterprise/overview",
+                "name": "Upgrading PostHog",
+                "url": "",
                 "children": [
                     {
                         "name": "Overview",
-                        "url": "/docs/self-host/enterprise/overview"
+                        "url": "/docs/runbook/upgrading-posthog"
                     },
                     {
-                        "name": "Support",
-                        "url": "/docs/self-host/enterprise/support"
-                    },
-                    {
-                        "name": "Hosting Costs",
-                        "url": "/docs/self-host/enterprise/hosting-costs"
-                    },
-                    {
-                        "name": "Deployments",
-                        "url": "",
-                        "children": [
-                            {
-                                "name": "AWS",
-                                "url": "/docs/self-host/deploy/aws"
-                            },
-                            {
-                                "name": "Azure",
-                                "url": "/docs/self-host/deploy/azure"
-                            },
-                            {
-                                "name": "DigitalOcean",
-                                "url": "/docs/self-host/deploy/digital-ocean"
-                            },
-                            {
-                                "name": "Google Cloud Platform",
-                                "url": "/docs/self-host/deploy/gcp"
-                            },
-                            {
-                                "name": "EU Hosting Companies",
-                                "url": "/docs/self-host/deploy/hosting-in-eu"
-                            },
-                            {
-                                "name": "Other platforms",
-                                "url": "/docs/self-host/deploy/other"
-                            }
-                        ]
+                        "name": "Upgrade notes",
+                        "url": "/docs/runbook/upgrade-notes"
                     }
                 ]
             },
@@ -315,20 +281,6 @@
                     {
                         "name": "Overview",
                         "url": "/docs/runbook"
-                    },
-                    {
-                        "name": "Upgrading PostHog",
-                        "url": "",
-                        "children": [
-                            {
-                                "name": "Overview",
-                                "url": "/docs/runbook/upgrading-posthog"
-                            },
-                            {
-                                "name": "Upgrade notes",
-                                "url": "/docs/runbook/upgrade-notes"
-                            }
-                        ]
                     },
                     {
                         "name": "Async migrations",
@@ -470,6 +422,10 @@
         "name": "Migrate & export",
         "url": "",
         "children": [
+            {
+                "name": "Migrate to PostHog Cloud",
+                "url": "/docs/migrate/migrate-to-cloud"
+            },
             {
                 "name": "Migrate between PostHog instances",
                 "url": "/docs/migrate/migrate-between-posthog-instances"
