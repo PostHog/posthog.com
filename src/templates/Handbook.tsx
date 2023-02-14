@@ -186,7 +186,7 @@ export const AppParametersFactory: (params: AppParametersProps) => React.FC = ({
 }
 
 export default function Handbook({
-    data: { post, nextPost, glossary, mission, objectives },
+    data: { post, nextPost, mission, objectives },
     pageContext: { menu, breadcrumb = [], breadcrumbBase, searchFilter },
     location,
 }) {
@@ -222,7 +222,7 @@ export default function Handbook({
     const A = (props) => (
         <Link
             {...props}
-            glossary={glossary?.nodes?.map(formatNode)}
+            {/*glossary={glossary?.nodes?.map(formatNode)}*/}
             className="text-red hover:text-red font-semibold"
         />
     )
@@ -332,22 +332,10 @@ export default function Handbook({
 }
 
 export const query = graphql`
-    query HandbookQuery($id: String!, $nextURL: String!, $links: [String!]!, $mission: String, $objectives: String) {
+    query HandbookQuery($id: String!, $nextURL: String!, $mission: String, $objectives: String) {
         countries: allMdx(filter: { fields: { slug: { regex: "/^/team/" } } }) {
             group(field: frontmatter___country) {
                 totalCount
-            }
-        }
-        glossary: allMdx(filter: { fields: { slug: { in: $links } } }) {
-            nodes {
-                fields {
-                    slug
-                }
-                frontmatter {
-                    title
-                    featuredVideo
-                }
-                excerpt(pruneLength: 300)
             }
         }
         nextPost: mdx(fields: { slug: { eq: $nextURL } }) {
