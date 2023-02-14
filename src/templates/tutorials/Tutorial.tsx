@@ -18,14 +18,13 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { graphql } from 'gatsby'
 import React, { useEffect, useState } from 'react'
-import Slugger from 'github-slugger'
 import { animateScroll as scroll } from 'react-scroll'
 import { shortcodes } from '../../mdxGlobalComponents'
 import slugify from 'slugify'
 import { MdxCodeBlock } from 'components/CodeBlock'
 import MobileSidebar from 'components/Docs/MobileSidebar'
 import { Intro } from '../../templates/BlogPost'
-import { useToc } from 'utils'
+import { useToc } from '../../utils'
 
 const ViewButton = ({ title, view, setView }) => {
     return (

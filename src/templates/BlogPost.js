@@ -25,7 +25,7 @@ import { NewsletterForm } from 'components/NewsletterForm'
 import blogMenu from 'components/Blog/blogMenu'
 import blog from 'sidebars/blog.json'
 import slugify from 'slugify'
-import { useToc } from 'src/utils.ts'
+import { useToc } from '../utils'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
