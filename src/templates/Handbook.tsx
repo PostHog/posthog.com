@@ -219,13 +219,7 @@ export default function Handbook({
         typeof window !== 'undefined' ? Boolean(getCookie('ph_current_project_token')) : false
     )
 
-    const A = (props) => (
-        <Link
-            {...props}
-            {/*glossary={glossary?.nodes?.map(formatNode)}*/}
-            className="text-red hover:text-red font-semibold"
-        />
-    )
+    const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
     const components = {
         Team,
