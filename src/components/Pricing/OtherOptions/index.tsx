@@ -1,5 +1,5 @@
 import { CallToAction } from 'components/CallToAction'
-import { GitHub, Info } from 'components/Icons'
+import { GitHub } from 'components/Icons'
 import { Enterprise as EnterpriseIcon } from 'components/NotProductIcons'
 import React from 'react'
 
