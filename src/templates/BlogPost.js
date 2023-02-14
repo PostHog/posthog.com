@@ -25,6 +25,7 @@ import { NewsletterForm } from 'components/NewsletterForm'
 import blogMenu from 'components/Blog/blogMenu'
 import blog from 'sidebars/blog.json'
 import slugify from 'slugify'
+import { useToc } from 'src/utils.ts'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
@@ -127,7 +128,7 @@ const BlogPostSidebar = ({ contributors, date, filePath, title, tags, location, 
 
 export default function BlogPost({ data, pageContext, location }) {
     const { postData } = data
-    const { body, excerpt, fields } = postData
+    const { body, excerpt, fields, headings } = postData
     const { date, title, featuredImage, featuredVideo, featuredImageType, contributors, description, tags, category } =
         postData?.frontmatter
     const lastUpdated = postData?.parent?.fields?.gitLogLatestDate
@@ -146,7 +147,7 @@ export default function BlogPost({ data, pageContext, location }) {
         a: A,
         ...shortcodes,
     }
-    const { tableOfContents } = pageContext
+    const tableOfContents = useToc(headings)
 
     return (
         <Layout>
@@ -213,6 +214,10 @@ export const query = graphql`
             fields {
                 slug
                 pageViews
+            }
+            headings {
+                depth
+                value
             }
             frontmatter {
                 date(formatString: "MMM DD, YYYY")

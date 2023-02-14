@@ -18,12 +18,14 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { graphql } from 'gatsby'
 import React, { useEffect, useState } from 'react'
+import Slugger from 'github-slugger'
 import { animateScroll as scroll } from 'react-scroll'
 import { shortcodes } from '../../mdxGlobalComponents'
 import slugify from 'slugify'
 import { MdxCodeBlock } from 'components/CodeBlock'
 import MobileSidebar from 'components/Docs/MobileSidebar'
 import { Intro } from '../../templates/BlogPost'
+import { useToc } from 'utils'
 
 const ViewButton = ({ title, view, setView }) => {
     return (
@@ -71,7 +73,7 @@ const TutorialSidebar = ({ contributors, location, title, categories }) => {
     )
 }
 
-export default function Tutorial({ data, pageContext: { tableOfContents, menu }, location }) {
+export default function Tutorial({ data, pageContext: { menu }, location }) {
     const { pageData } = data
     const { body, excerpt, fields } = pageData
     const { title, featuredImage, description, contributors, categories, featuredVideo } = pageData?.frontmatter
@@ -93,6 +95,8 @@ export default function Tutorial({ data, pageContext: { tableOfContents, menu },
     const { hash } = useLocation()
     const breakpoints = useBreakpoint()
     const [view, setView] = useState('Article')
+
+    const tableOfContents = useToc(data.pageData.headings)
 
     useEffect(() => {
         if (hash) {
@@ -161,6 +165,10 @@ export const query = graphql`
             excerpt(pruneLength: 150)
             fields {
                 slug
+            }
+            headings {
+                depth
+                value
             }
             frontmatter {
                 title

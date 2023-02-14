@@ -1,3 +1,6 @@
+import { useMemo } from 'react'
+import GithubSlugger from 'github-slugger'
+
 export function dateToDays(date: string | Date) {
     const today = new Date()
 
@@ -18,4 +21,18 @@ export function dayFormat(days: number) {
 
 export function capitalizeFirstLetter(string: string): string {
     return string.charAt(0).toUpperCase() + string.slice(1)
+}
+
+export const useToc = (headings: { value: string; depth: number }[]) => {
+    return useMemo(() => {
+        const slugger = new GithubSlugger()
+
+        return headings.map((heading) => {
+            return {
+                ...heading,
+                depth: heading.depth - 2,
+                url: slugger.slug(heading.value),
+            }
+        })
+    }, [])
 }

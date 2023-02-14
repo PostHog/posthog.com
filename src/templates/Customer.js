@@ -60,16 +60,19 @@ const CustomerSidebar = ({ industries, users, toolsUsed, logo }) => {
     )
 }
 
-export default function Customer({ data, pageContext: { tableOfContents } }) {
+export default function Customer({ data }) {
     const {
         allCustomers,
         customerData: {
             body,
             excerpt,
             fields,
+            headings,
             frontmatter: { title, customer, logo, description, industries, users, toolsUsed, featuredImage },
         },
     } = data
+
+    const tableOfContents = useToc(headings)
 
     return (
         <>
@@ -127,6 +130,10 @@ export const query = graphql`
             nodes {
                 fields {
                     slug
+                }
+                headings {
+                    value
+                    depth
                 }
                 frontmatter {
                     customer

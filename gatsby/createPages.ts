@@ -4,8 +4,6 @@ import path from 'path'
 import slugify from 'slugify'
 import fetch from 'node-fetch'
 import sidebars from '../src/sidebars/index'
-const Slugger = require('github-slugger')
-const markdownLinkExtractor = require('markdown-link-extractor')
 
 const PlainTemplate = path.resolve(`src/templates/Plain.js`)
 
@@ -30,18 +28,6 @@ const TutorialsCategoryTemplate = path.resolve(`src/templates/tutorials/Tutorial
 // Docs
 const ApiEndpoint = path.resolve(`src/templates/ApiEndpoint.tsx`)
 const HandbookTemplate = path.resolve(`src/templates/Handbook.tsx`)
-
-function formatToc(headings) {
-    // need to use slugger for header links to match
-    const slugger = new Slugger()
-    return headings.map((heading) => {
-        return {
-            ...heading,
-            depth: heading.depth - 2,
-            url: slugger.slug(heading.value),
-        }
-    })
-}
 
 export const createPages: GatsbyNode['createPages'] = async ({ actions: { createPage }, graphql }) => {
     const createPaginatedPages = ({ postsPerPage = 20, totalCount, base, template, extraContext = {} }) => {
@@ -75,7 +61,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             let previous = null
             let breadcrumb = null
             let nextURL = ''
-            const tableOfContents = node.headings && formatToc(node.headings)
             menuFlattened.some((item, index) => {
                 if (item.url === slug) {
                     next = menuFlattened[index + 1]
@@ -97,7 +82,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     menu: sidebars[menu],
                     breadcrumb,
                     breadcrumbBase: breadcrumbBase || menuFlattened[0],
-                    tableOfContents,
                     slug,
                     searchFilter: menu,
                     ...(context ? context(node) : {}),
@@ -114,10 +98,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 ) {
                     nodes {
                         id
-                        headings {
-                            depth
-                            value
-                        }
                         fields {
                             slug
                         }
@@ -148,10 +128,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     totalCount
                     nodes {
                         id
-                        headings {
-                            depth
-                            value
-                        }
                         fields {
                             slug
                         }
@@ -215,13 +191,11 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 
         result.data.blogPosts.nodes.forEach((node) => {
             const { slug } = node.fields
-            const tableOfContents = node.headings && formatToc(node.headings)
             createPage({
                 path: replacePath(slug),
                 component: BlogPostTemplate,
                 context: {
                     id: node.id,
-                    tableOfContents,
                     slug,
                 },
             })
@@ -240,7 +214,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 ) {
                     nodes {
                         id
-                        fileAbsolutePath
                         slug
                     }
                 }
@@ -269,10 +242,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 docs: allMdx(filter: { fields: { slug: { regex: "/^/docs/" } }, frontmatter: { title: { ne: "" } } }) {
                     nodes {
                         id
-                        headings {
-                            depth
-                            value
-                        }
                         fields {
                             slug
                         }
@@ -308,10 +277,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 ) {
                     nodes {
                         id
-                        headings {
-                            depth
-                            value
-                        }
                         fields {
                             slug
                         }
@@ -333,10 +298,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     totalCount
                     nodes {
                         id
-                        headings {
-                            depth
-                            value
-                        }
                         fields {
                             slug
                         }
@@ -353,7 +314,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         `)
 
         result.data.tutorials.nodes.forEach((node) => {
-            const tableOfContents = formatToc(node.headings)
             const { slug } = node.fields
 
             createPage({
@@ -361,7 +321,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 component: TutorialTemplate,
                 context: {
                     id: node.id,
-                    tableOfContents,
                     menu: sidebars.docs,
                     slug,
                 },
@@ -393,10 +352,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 customers: allMdx(filter: { fields: { slug: { regex: "/^/customers/" } } }) {
                     nodes {
                         id
-                        headings {
-                            depth
-                            value
-                        }
                         fields {
                             slug
                         }
@@ -407,13 +362,11 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 
         result.data.customers.nodes.forEach((node) => {
             const { slug } = node.fields
-            const tableOfContents = node.headings && formatToc(node.headings)
             createPage({
                 path: slug,
                 component: CustomerTemplate,
                 context: {
                     id: node.id,
-                    tableOfContents,
                 },
             })
         })

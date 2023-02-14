@@ -34,6 +34,7 @@ import WarningIcon from '../images/warning.svg'
 import TeamRoadmap from 'components/TeamRoadmap'
 import TeamMembers from 'components/TeamMembers'
 import { CategoryData } from 'components/Blog/constants/categories'
+import { useToc } from 'utils'
 
 const renderAvailabilityIcon = (availability: 'full' | 'partial' | 'none') => {
     switch (availability) {
@@ -186,14 +187,14 @@ export const AppParametersFactory: (params: AppParametersProps) => React.FC = ({
 
 export default function Handbook({
     data: { post, nextPost, glossary, mission, objectives },
-    pageContext: { menu, breadcrumb = [], breadcrumbBase, tableOfContents, searchFilter },
+    pageContext: { menu, breadcrumb = [], breadcrumbBase, searchFilter },
     location,
 }) {
     const { hash } = useLocation()
     const {
         body,
         frontmatter,
-        fields: { slug, contributors, appConfig },
+        fields: { slug, contributors, appConfig, headings },
     } = post
     const {
         title,
@@ -209,8 +210,10 @@ export default function Handbook({
     } = frontmatter
     const { parent, excerpt } = post
     const lastUpdated = parent?.fields?.gitLogLatestDate
-    const showToc = !hideAnchor && tableOfContents?.length > 0
+    const showToc = !hideAnchor
     const filePath = post?.parent?.relativePath
+
+    const tableOfContents = useToc(headings)
 
     const [showCTA, setShowCTA] = React.useState<boolean>(
         typeof window !== 'undefined' ? Boolean(getCookie('ph_current_project_token')) : false
@@ -375,6 +378,10 @@ export const query = graphql`
                     type
                     hint
                     description
+                }
+                headings {
+                    depth
+                    value
                 }
                 contributors {
                     url
