@@ -306,9 +306,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                         totalCount
                         category: fieldValue
                     }
-                    contributors: group(field: frontmatter___authorData___name) {
-                        fieldValue
-                    }
                 }
             }
         `)
