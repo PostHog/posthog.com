@@ -194,7 +194,8 @@ export default function Handbook({
     const {
         body,
         frontmatter,
-        fields: { slug, contributors, appConfig, headings },
+        headings,
+        fields: { slug, contributors, appConfig },
     } = post
     const {
         title,
