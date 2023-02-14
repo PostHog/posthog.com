@@ -38,10 +38,10 @@ touch index.ejs
 In that `index.ejs` file, we create a basic HTML page with only a head and body for now.
 
 ```html
-<head>
-    <title>My blog</title>
-</head>
 <html>
+    <head>
+        <title>My blog</title>
+    </head>
     <body>
         <h1>My cool blog</h1>
     </body>
@@ -66,7 +66,7 @@ app.listen(port, () => {
 })
 ```
 
-This is enough for a basic HTML page. After this, you can run `npm start` in the terminal to start the server. Going to `http://localhost:3000/` gives you a basic page like this:
+This is enough for a basic HTML page. After this, you can run `node server.js` in the terminal to start the server. Going to `http://localhost:3000/` gives you a basic page like this:
 
 ![Basic page](../images/tutorials/node-express-analytics/basic.png)
 
@@ -109,10 +109,10 @@ app.listen(port, () => {
 In our `index.ejs` file, loop through the posts and display the title and content for each of them. `ejs` is nice because it can use normal JavaScript and HTML in the template.
 
 ```js
-<head>
-    <title>My blog</title>
-</head>
 <html>
+    <head>
+        <title>My blog</title>
+    </head>
     <body>
         <h1>My cool blog</h1>
         <% for (var i = 0; i < posts.length; i++) { %>
@@ -134,10 +134,10 @@ With the blog part finished, we want to add a form so people can submit their em
 In the `index.ejs` file, add a simple form that posts to `/email/`.
 
 ```js
-<head>
-    <title>My blog</title>
-</head>
 <html>
+    <head>
+        <title>My blog</title>
+    </head>
     <body>
         <h1>My cool blog</h1>
         <% for (var i = 0; i < posts.length; i++) { %>
@@ -358,13 +358,11 @@ Once done, we can copy the Node code PostHog provides and add it to our `app.get
 app.get('/', async (req, res) => { // new
 
     let enableCta = false
-    if (req.cookies[`ph_${ph_project_api_key}_posthog`]) {
-        var anonId = JSON.parse(req.cookies[`ph_${ph_project_api_key}_posthog`])['distinct_id']
-        var isCtaEnabled = await client.isFeatureEnabled('blog-cta', anonId)
-    }
+    let cookies = req.cookies[`ph_${ph_project_api_key}_posthog`];
 
-    if (isCtaEnabled) {
-        enableCta = true
+    if (cookies) {
+        const distinctId = JSON.parse(cookies)['distinct_id'];
+        enableCta = await client.isFeatureEnabled('blog-cta', distinctId);
     }
 
     res.render('index', {
