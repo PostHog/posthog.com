@@ -7,7 +7,6 @@ import PostLayout from 'components/PostLayout'
 import Link from 'components/Link'
 import { OrgProvider, UserProvider, useUser, Question } from 'squeak-react'
 import Modal from 'components/Modal'
-import EditProfile from 'components/Profiles/EditProfile'
 import { SqueakProfile } from './profiles/[id]'
 import { CallToAction } from 'components/CallToAction'
 import { Login as SqueakLogin } from 'squeak-react'
@@ -18,6 +17,8 @@ import GitHubTooltip, { Author } from 'components/GitHubTooltip'
 import QuestionsTable from 'components/Questions/QuestionsTable'
 import useSWRInfinite from 'swr/infinite'
 import SidebarSection from 'components/PostLayout/SidebarSection'
+
+const EditProfile = React.lazy(() => import('components/Profiles/EditProfile'))
 
 export const Avatar = (props: { className?: string; src?: string }) => {
     return (
