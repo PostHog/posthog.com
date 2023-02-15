@@ -19,11 +19,13 @@ This guide is based on what we learned at PostHog going first through 5 or 6 piv
 
 # The Product Market Fit Game
 
+Simply, you need to complete the title of each level as your goal. There are multiple failure modes for each level, these have been listed - go through them sequentially. Sometimes, you will find that you cannot complete a level and need to pivot your entire company - that's what you may need to do to win. 
+
 ## Level 0 - Choosing a problem to work on
 
 Start by solving a problem you've had yourself. It needs to be a big problem, that you've actually tried to solve too - if it's something you've never attempted to fix, then it isn't a big enough problem.
 
-Some people spend months or years thinking about their idea and make no actual progress as a result. You learn more by trying something out than hypothesizing. If you fail, try something else!
+Many people spend months or years attempting to validate their idea in advance and make no progress as a result. You will always get more clarity by doing something rather than hypothesizing. If you fail, try something else!
 
 The type of idea you have will greatly influence your life.
 
