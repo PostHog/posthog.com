@@ -1,4 +1,4 @@
-import chromium from 'chrome-aws-lambda'
+// import chromium from 'chrome-aws-lambda'
 import path from 'path'
 import fs from 'fs'
 import blogTemplate from '../src/templates/OG/blog.js'
@@ -13,7 +13,7 @@ import { GatsbyNode } from 'gatsby'
 import sidebars from '../src/sidebars/index'
 
 export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
-    const { data } = await graphql(`
+    /*const { data } = await graphql(`
         query {
             blog: allMdx(
                 filter: { fields: { slug: { regex: "/^/blog/" } }, frontmatter: { featuredImageType: { eq: "full" } } }
@@ -282,5 +282,5 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
         })
     }
 
-    await browser.close()
+    await browser.close()*/
 }
