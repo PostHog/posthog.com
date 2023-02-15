@@ -14,7 +14,7 @@ Like [capturing events](/tutorials/api-capture-events), feature flags get a spec
 
 The `decide` endpoint requires your project API key for authentication. To get this value, go to your project settings, and copy the value under "Project Variables." This is the same value you use to initialize a library.
 
-To get any data about a feature flag and evaluate it, you need to create the flag. To create one, in your PostHog instance, go to the "Feature Flags" tab, click "New feature flag," enter a key, set release conditions to 100% of users, and click save.
+Obviously you also need to create a flag before you can evaluate it. To create a feature flag, in your PostHog instance, go to the "Feature Flags" tab, click "New feature flag," enter a key, set release conditions to 100% of users, and click save.
 
 ## Request to evaluate a basic feature flag
 
@@ -98,7 +98,7 @@ if response.json().get('featureFlags').get('request-test'):
   runTestFunction()
 ```
 
-Our libraries abstract this functionality away and provides utilities like caching for local evaluation. If you want complete control, the API gives full access.
+Our libraries abstract this functionality away and provides utilities such as caching for local evaluation. If you want complete control, the API gives full access.
 
 ## Evaluating multi-variate flags
 
@@ -121,7 +121,7 @@ You can then use this like the boolean flag to control access or run specific co
 
 You can also use the API to get and update feature flags. To update the flags, you need their ID, and a way to get this by making an API request to get all flags, then filtering for the one matching the name or key you want.
 
-> Unlike the `POST` endpoints I detailed earlier, these endpoints are private and require a personal key. You can create this key in your profile settings (top right corner) in your PostHog instance. See the [get insights and person API tutorial](/tutorials/api-get-insights-persons#getting-your-personal-api-key) for detailed instructions.
+> Unlike the `POST` endpoints detailed earlier, these endpoints are private and require a personal key. You can create this key in your profile settings (top right corner) in your PostHog instance. See the [get insights and person API tutorial](/tutorials/api-get-insights-persons#getting-your-personal-api-key) for detailed instructions.
 
 With your personal API and your project ID, you can make a request to `api/projects/:project_id/feature_flags/` to get all your flags like this:
 
@@ -219,7 +219,9 @@ response = requests.patch(
 
 </MultiLanguage>
 
-This filter object can include available user properties, cohorts, or group properties. You also can use the `PATCH` endpoint to change the name, key, filters, deleted status, active status, and more. Be careful though, it overwrites any of your current feature flag details. See the full details in [our API docs](/docs/api/feature-flags#patch-api-projects-project_id-feature_flags-id).
+This filter object can include available user properties, cohorts, or group properties. You also can use the `PATCH` endpoint to change the name, key, filters, deleted status, active status, and more. 
+
+> Be careful when using the `PATCH` endpoint, as it overwrites any current feature flag details. Find out more in [our API docs](/docs/api/feature-flags#patch-api-projects-project_id-feature_flags-id).
 
 ## Combining our requests to update flags when evaluated
 
@@ -229,7 +231,7 @@ To combine these, we will write a Python script that:
 2. figures out the feature flag ID by finding the key in the "get all feature flags" request
 3. updates the feature flag to filter out the email of the user who saw the feature flag
 
-> The best way to do this is probably to set the release condition to not include a property you set on a person once they see the flag, but this is a tutorial about using the API so that is less fun.
+You can also do this by setting the release conditions to not include a property you set on a person that has seen the flag, if you prefer. 
 
 First, we get our evaluation request and variables sorted.
 
@@ -309,7 +311,7 @@ Once done, run this request and check the feature flag in your PostHog instance 
 
 ![Updated feature flag](../images/tutorials/api-feature-flags/update.png)
 
-Once you confirmed this, you’ve built a solid grasp of using the PostHog API to evaluate and update feature flags. You can use this skill to customize your implementation to your needs.
+Once confirmed, you're done. Congratulations, you’ve built a solid grasp of using the PostHog API to evaluate and update feature flags! You can use this skill to customize your implementation to your needs.
 
 ## Further reading
 
