@@ -6,7 +6,9 @@ import { Heading } from 'components/Heading'
 import { InlineCode } from 'components/InlineCode'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
-import PostLayout, { Contributors, ShareLinks, SidebarSection } from 'components/PostLayout'
+import PostLayout from 'components/PostLayout'
+import Contributors from 'components/PostLayout/Contributors'
+import SidebarSection from 'components/PostLayout/SidebarSection'
 import { SEO } from 'components/seo'
 import Team from 'components/Team'
 import TestimonialsTable from 'components/TestimonialsTable'
@@ -66,9 +68,8 @@ export const HandbookSidebar = ({ contributors, title, location, availability, r
     return (
         <>
             {contributors && (
-                <SidebarSection title={`Author${contributors?.length > 1 ? 's' : ''}`}>
+                <SidebarSection>
                     <Contributors
-                        className="flex flex-col space-y-2"
                         contributors={contributors.map(({ url, username, avatar, teamData }) => ({
                             url,
                             name: teamData?.name || username,
@@ -94,10 +95,6 @@ export const HandbookSidebar = ({ contributors, title, location, availability, r
                     </div>
                 </SidebarSection>
             )}
-
-            <SidebarSection title="Share">
-                <ShareLinks title={title} href={location.href} />
-            </SidebarSection>
 
             {related && (
                 <SidebarSection title="Related articles">
@@ -287,14 +284,14 @@ export default function Handbook({
                     }
                     tableOfContents={[...tableOfContents, { depth: 0, value: 'Questions?', url: 'squeak-questions' }]}
                     contentWidth="100%"
-                    breadcrumb={[breadcrumbBase, ...(breadcrumb || [])]}
+                    breadcrumb={[breadcrumbBase, ...(breadcrumb?.slice(0, breadcrumb.length - 1) || [])]}
                     hideSidebar={hideAnchor}
                     nextPost={nextPost}
                 >
                     <section>
                         <div className="mb-8 relative">
                             <div className="flex items-center mt-0 flex-wrap justify-between">
-                                <div className="flex items-center space-x-2 mt-2 mb-1">
+                                <div className="flex items-center space-x-2 mb-1">
                                     {thumbnail && <GatsbyImage image={getImage(thumbnail)} />}
                                     <h1 className="dark:text-white text-3xl sm:text-5xl m-0">{title}</h1>
                                 </div>
@@ -317,7 +314,6 @@ export default function Handbook({
                                     Last updated: <time>{lastUpdated}</time>
                                 </p>
                             )}
-                            {showToc && <MobileSidebar tableOfContents={tableOfContents} />}
                         </div>
                         {features && <LibraryFeatures availability={features} />}
                         <div className="article-content">

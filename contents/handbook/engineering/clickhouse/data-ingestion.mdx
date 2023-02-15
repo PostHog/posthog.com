@@ -4,7 +4,7 @@ title: Data ingestion
 
 This document covers:
 - Different options for ingesting data into MergeTree tables and trade-offs involved
-- How Kafka table engine works?
+- How the Kafka table engine works
 - What are materialized views?
 - Examples of a full schema setup
 
@@ -22,7 +22,6 @@ ClickHouse provides a bunch of options to make `INSERT`s still work. For example
 - [Buffer table engine](https://clickhouse.com/docs/en/engines/table-engines/special/buffer/)
 
 These come with their own trade-offs, consistency problems, and require the ClickHouse cluster to always be accessible.
-As such, PostHog instead leverages Kafka engine tables for ingestion.
 
 ## Why we ingest via Kafka tables
 
@@ -40,8 +39,10 @@ It also has minimal overhead in terms of memory used and allows us to always tem
 Kafka engine tables act as Kafka consumers in a given [consumer group](https://docs.confluent.io/platform/current/clients/consumer.html#concepts).
 Selecting from that table advances the consumer offsets.
 
-A Kafka table on it's own does nothing beyond allowing to select from Kafka - it needs to be paired with other tables for ingestion
+A Kafka table on its own does nothing beyond allowing querying data from Kafka - it needs to be paired with other tables for ingestion
 to work.
+
+> **Important note:** Given Kafka engine tables operate like consumers, querying data from them moves the offsets for the consumer group forward. Doing this while ingesting data may cause data loss, and has been disallowed by default on the latest ClickHouse versions.
 
 Example kafka engine table:
 
@@ -57,9 +58,11 @@ CREATE TABLE kafka_ingestion_warnings
 ENGINE = Kafka('kafka:9092', 'clickhouse_ingestion_warnings_test', 'group1', 'JSONEachRow')
 ```
 
-It is important to send correctly formatted messages to the topic you're selecting from.  When selecting from a kafka table,
+It is important to send correctly formatted messages to the topic you're selecting from.  When selecting from a Kafka table,
 ClickHouse assumes messages in the topic are formatted correctly. If not, this may stall the consumer depending on the value
 of `kafka_skip_broken_messages`, breaking ingestion.
+
+> Beyond just skipping broken messages, it's also possible to set up a dead letter queue system for these in ClickHouse. You can read more about doing so in [this Altinity blog post](https://kb.altinity.com/altinity-kb-integrations/altinity-kb-kafka/error-handling/).
 
 ## Materialized views
 
@@ -120,7 +123,7 @@ In this schema:
 - `sharded_ingestion_warnings` MergeTree is responsible for storing the ingested data
 - `ingestion_warnings` table is responsible for fielding queries and distributing writes to `sharded_ingestion_warnings` tables across shards
 - `ingestion_warnings_mv` regularly polls `kafka_ingestion_warnings` and pushes the data to `ingestion_warnings` distributed table
-    - **Note**: it also forwards `_timestamp`, `_offset` and `_partition` virtual columns containing Kafka message metadata so they can be stored and used during debugging.
+    - **Note**: it also forwards `_timestamp`, `_offset`, and `_partition` virtual columns containing Kafka message metadata so they can be stored and used during debugging.
 
 ### Example schema visualized
 

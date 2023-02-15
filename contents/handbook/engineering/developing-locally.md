@@ -304,7 +304,29 @@ To commit changes, create a new branch based on `master` for your intended chang
 
 For a PostHog PR to be merged, all tests must be green, and ideally you should be introducing new ones as well – that's why you must be able to run tests with ease.
 
-For backend, simply use:
+### Frontend
+
+For frontend unit tests, run:
+
+```bash
+pnpm test:unit
+```
+
+To update all visual regression test snapshots, make sure Storybook is running on your machine (you can start it with `pnpm storybook` in a separate Terminal tab), and then run:
+
+```bash
+pnpm test:visual-regression
+```
+
+To only update snapshots for stories under a specific path, run:
+
+```bash
+pnpm test:visual-regression:stories frontend/src/lib/Example.stories.tsx
+```
+
+### Backend
+
+For backend tests, run:
 
 ```bash
 pytest
@@ -313,22 +335,20 @@ pytest
 You can narrow the run down to only files under matching paths:
 
 ```bash
-pytest posthog/test/test_entity_model.py
+pytest posthog/test/test_example.py
 ```
 
 Or to only test cases with matching function names:
 
 ```bash
-pytest posthog/test/test_entity_model.py -k test_inclusion
+pytest posthog/test/test_example.py -k test_something
 ```
 
 To see debug logs (such as ClickHouse queries), add argument `--log-cli-level=DEBUG`.
 
-For Cypress end-to-end test, run `bin/e2e-test-runner`. This will temporarily install required dependencies inside the project, spin up a test instance of PostHog, and show you the Cypress interface, from which you'll manually choose tests to run.
+### End-to-end
 
-Once you're done, terminate the command with cmd + C. Be sure to wait until the command terminates gracefully so temporary dependencies are removed from `package.json` and you don't commit them accidentally.
-
-For frontend tests, all you need is `pnpm test`.
+For Cypress end-to-end tests, run `bin/e2e-test-runner`. This will spin up a test instance of PostHog and show you the Cypress interface, from which you'll manually choose tests to run. Once you're done, terminate the command with Cmd + C.
 
 ## Extra: Working with feature flags
 

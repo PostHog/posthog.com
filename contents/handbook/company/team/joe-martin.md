@@ -32,7 +32,7 @@ I live just outside of London. I'm passionate about punk music, videogame preser
 
 In Q4 2022 I focused on improving announcements, growing word of mouth and collaborating with Growth to improve onboarding. Projects in these areas included [the launch of PostHog EU](/eu), scaling up our investment in [our G2 profile](https://www.g2.com/products/posthog/reviews), creating new case studies and migrating to Customer.io to create new first onboarding flow. Results and feedback across these project has been positive. 
 
-There were also projects which I failed to focus on, or chose to deprioritize. These included launching a PostHog ambassador program and doing deeper work with [our partners](/marketplace). I also completely failed to read any of the Product Design books I bought.
+There were also projects which I failed to focus on, or chose to deprioritize. These included launching a PostHog ambassador program and doing deeper work with our partners. I also completely failed to read any of the Product Design books I bought.
 
 In the first half of 2023 I'm focusing on the same basic areas, but with new projects to support them.
 

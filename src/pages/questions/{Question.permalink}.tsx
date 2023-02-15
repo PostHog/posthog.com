@@ -33,7 +33,7 @@ export default function QuestionPage(props: QuestionPageProps) {
                 sidebar={<QuestionSidebar question={props.data.question} />}
                 hideSurvey
             >
-                <section className="max-w-5xl mx-auto">
+                <section className="max-w-5xl mx-auto pb-12">
                     <div className="mb-4">
                         <Link to="/questions" className="text-gray hover:text-gray-accent-light">
                             ← Back to Questions

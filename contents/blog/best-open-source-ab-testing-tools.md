@@ -24,11 +24,11 @@ Here, we’re sharing our guide to the best free and [open-source tools](/blog/b
 
 ![PostHog - best open source ab testing tools](../images/blog/open-source-testing-tools/img1_PostHog.png)
 
-PostHog is an [all-in-one product analytics suite](/product) that integrates all of the essential features you need to understand your users. It collects and visualizes data on how people are using your products, provides insights into trends and retention, and helps to remove bottlenecks and reduce churn.
+PostHog is an [all-in-one analytics suite](/product) that integrates all the essential features you need to understand your users. It collects and visualizes data on how people are using your products, provides insights into trends and retention, and helps to remove bottlenecks and reduce churn.
 
-Our A/B testing features, which we call our Experimentation suite, are complemented by other tools like [Feature Flags](/product/feature-flags), [Session Recording](/product/session-recording), [Heatmaps](/product/heatmaps), [User Paths](/product/user-paths) and more, making it one of the most comprehensive analytics platforms around – open source, or otherwise.
+Our A/B testing features, which we call our experimentation suite, are complemented by other tools like [feature flags](/product/feature-flags), [session recording](/product/session-recording), [heatmaps](/product/heatmaps), [user paths](/product/user-paths) and more, making it one of the most comprehensive analytics platforms around – open source, or otherwise.
 
-[PostHog’s Experimentation suite](https://posthog.com/docs/user-guides/experimentation) allows you to flexibly test your hypotheses. PostHog will automatically estimate the number of users exposed, and we use Bayesian analysis to calculate the results and ensure they're significant.
+[PostHog’s experimentation suite](https://posthog.com/docs/user-guides/experimentation) allows you to flexibly test your hypotheses. PostHog will automatically estimate the number of users exposed, and we use Bayesian analysis to calculate the results and ensure they're significant.
 
 ### Who is PostHog for?
 
@@ -46,7 +46,7 @@ PostHog is a great choice for any team that wants a complete view of how people 
 
 ### How much does it cost?
 
-While Experimentation isn't currently part open source release, it's [free to use up to 1 million events per month](/pricing) on PostHog Cloud when you enter a card. You can set billing limits so you don't get any surprise bills.
+While Experimentation isn't currently part of the open source release, it's [free to use up to 1 million events per month](/pricing) on PostHog Cloud when you enter a card. You can set billing limits to prevent surprise bills.
 
 ### Open source license
 

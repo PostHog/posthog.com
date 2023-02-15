@@ -369,6 +369,10 @@
                         "url": "/handbook/engineering/databases/clickhouse-event-table-migrations"
                     },
                     {
+                        "name": "Diagnosing ClickHouse load using ClickHouse",
+                        "url": "/handbook/engineering/databases/debugging-load"
+                    },
+                    {
                         "name": "Working with ClickHouse materialized columns",
                         "url": "/handbook/engineering/databases/materialized-columns"
                     }
@@ -509,10 +513,6 @@
                 "url": "/handbook/product/user-feedback"
             },
             {
-                "name": "Paid features",
-                "url": "/handbook/product/paid-features"
-            },
-            {
                 "name": "Releasing as beta",
                 "url": "/handbook/product/releasing-as-beta"
             }
@@ -611,6 +611,10 @@
                     {
                         "name": "Managing our CRM",
                         "url": "/handbook/growth/sales/crm"
+                    },
+                    {
+                        "name": "New customer onboarding",
+                        "url": "/handbook/growth/sales/customer-onboarding"
                     },
                     {
                         "name": "YC onboarding",

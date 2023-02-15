@@ -4,7 +4,9 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-12-15
+featuredTutorial: true
 featuredImage: ../images/tutorials/banners/django.png
+featuredVideo: https://www.youtube-nocookie.com/embed/QB-PI_ZXkwo
 tags: ["configuration", "feature flags", "persons", "events"]
 ---
 

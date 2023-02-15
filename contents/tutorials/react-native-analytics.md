@@ -4,6 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2023-01-12
+featuredTutorial: true
 featuredImage: ../images/tutorials/banners/react-native-analytics.png
 topics: ["configuration", "feature flags", "persons", "events"]
 ---

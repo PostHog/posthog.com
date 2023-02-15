@@ -16,7 +16,7 @@ Think about it: if you try to fill a bucket of water with holes in it, it doesn'
 
 Tracking retention is about measuring how big those holes are and identifying them, so you can then fix them and verify the impact of doing so. 
 
-This tutorial will introduce you to the basic concepts of retention and churn and teach you how to use PostHog's many features to track retention at various stages.
+This tutorial will introduce you to the [basic concepts of retention and churn](/blog/customer-churn-analysis-guide) and teach you how to use PostHog's many features to track retention at various stages.
 
 ### Prerequisites
 
