@@ -16,8 +16,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
 
         const menu = MenuBuilder.buildStructure({ spec: api_endpoints }, {})
         let all_endpoints = menu[menu.length - 1]['items'] // all grouped endpoints
-        all_endpoints
-        all_endpoints.forEach((endpoint) => {
+        all_endpoints?.forEach((endpoint) => {
             const node = {
                 id: createNodeId(`api_endpoint-${endpoint.name}`),
                 internal: {
@@ -51,7 +50,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         const postHogIssues = await fetch(
             'https://api.github.com/repos/posthog/posthog/issues?sort=comments&per_page=5'
         ).then((res) => res.json())
-        postHogIssues.forEach((issue) => {
+        postHogIssues?.forEach((issue) => {
             const { html_url, title, number, user, comments, reactions, labels, body, updated_at } = issue
             const data = {
                 url: html_url,
@@ -90,7 +89,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         const postHogPulls = await fetch(
             'https://api.github.com/repos/posthog/posthog/pulls?sort=popularity&per_page=5'
         ).then((res) => res.json())
-        postHogPulls.forEach((issue) => {
+        postHogPulls?.forEach((issue) => {
             const { html_url, title, number, user, labels, body, updated_at } = issue
             const data = {
                 url: html_url,
@@ -162,7 +161,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         const integrations = await fetch(
             'https://raw.githubusercontent.com/PostHog/integrations-repository/main/integrations.json'
         ).then((res) => res.json())
-        integrations.forEach((integration) => {
+        integrations?.forEach((integration) => {
             const { name, url, ...other } = integration
             const node = {
                 id: createNodeId(`integration-${name}`),
@@ -184,7 +183,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         const plugins = await fetch(
             'https://raw.githubusercontent.com/PostHog/integrations-repository/main/plugins.json'
         ).then((res) => res.json())
-        plugins.forEach((plugin) => {
+        plugins?.forEach((plugin) => {
             const { displayOnWebsiteLib, name, ...other } = plugin
             if (displayOnWebsiteLib) {
                 const node = {
