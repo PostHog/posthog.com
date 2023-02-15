@@ -59,6 +59,8 @@ In PostHog, add the name of the `data-attr` to your button configuration. If you
 
 Once saved, the icon disappears from your app, and clicking the button you set up now triggers the feedback widget.
 
+![Button](../images/docs/apps/feedback-widget/feedback-box.gif)
+
 ## Setting up the user interview app
 
 User interviews are critical to understanding how your users are using your product and how you can improve it. The process for booking these interviews can be time-intensive. They require a lot of back-and-forth, figuring out schedules, and coordination. Automating this process helps you to get the benefits of user interviews with less logistic work.
