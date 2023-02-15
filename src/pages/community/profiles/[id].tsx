@@ -10,10 +10,9 @@ import Link from 'components/Link'
 import Markdown from 'markdown-to-jsx'
 import { OrgProvider, UserProvider, useUser, Question } from 'squeak-react'
 import Modal from 'components/Modal'
+import EditProfile from 'components/Profiles/EditProfile'
 import useSWR from 'swr'
 import SidebarSection from 'components/PostLayout/SidebarSection'
-
-const EditProfile = React.lazy(() => import('components/Profiles/EditProfile'))
 
 export type SqueakProfile = {
     id: string
