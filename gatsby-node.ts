@@ -37,5 +37,6 @@ export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ sta
                 logic: path.resolve(__dirname, 'src', 'logic'),
             },
         },
+        cache: false,
     })
 }
