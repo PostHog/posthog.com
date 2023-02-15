@@ -10,11 +10,11 @@ tags: ["apps", "site-apps"]
 
 Getting feedback is critical to building a successful product. Metrics and analytics are key pieces of feedback, but at an early stage, written feedback and interviews are even better. To maximize the amount of feedback you get, you need processes, but these are often time-consuming.
 
-PostHog’s site apps help automate the process of getting feedback and booking interviews. In this tutorial, we show how to set and use both of them them.
+PostHog’s site apps help automate the process of getting feedback and booking interviews. In this tutorial, we show how to setup and use both of them.
 
 ## Getting your app ready for site apps.
 
-To add PostHog’s site apps, you need either [the snippet or the JavaScript library](/docs/integrate) set up in your app. You also must add `opt_in_site_apps: true` to the initialization of either of these. For the snippet, this looks like this:
+To add PostHog’s site apps, you need to have setup either [the snippet or the JavaScript library](/docs/integrate) in your app. You also must add `opt_in_site_apps: true` to the initialization of either of these. For the snippet, this looks like this:
 
 ```html
 <script>
@@ -33,7 +33,7 @@ Once added, your app is ready for site apps. PostHog automatically loads site ap
 
 ## Setting up the feedback app
 
-The first app we will set up is the feedback widget. To start, search for "Feedback Widget" in your PostHog instance.
+The first app we will set up is [the feedback widget](/apps/feedback-widget). To start, search for "Feedback Widget" in your PostHog instance.
 
 ![Feedback app](../images/tutorials/feedback-interviews-site-apps/feedback.png)
 
@@ -63,7 +63,7 @@ Once saved, the icon disappears from your app, and clicking the button you set u
 
 User interviews are critical to understanding how your users are using your product and how you can improve it. The process for booking these interviews can be time-intensive. They require a lot of back-and-forth, figuring out schedules, and coordination. Automating this process helps you to get the benefits of user interviews with less logistic work.
 
-To do this, we will use the user interview app. It is more complicated to set up, because it uses a feature flag. This enables customization and control of who sees the prompt to book a user interview. Here’s the process:
+To do this, we will use [the user interview app](/apps/user-interviews). It is more complicated to set up, because it uses a feature flag, but this enables customization and control of who sees the prompt to book a user interview. Here’s the process:
 
 1. Create a feature flag. Set up the filters you want, but these can only be user properties, group properties, or cohorts. As a start, we recommend filtering to show only for yourself (your email or ID).
     - If you want historical events, create an insight, use it to create a static cohort, then use that static cohort as a filter.
@@ -78,7 +78,7 @@ Once you set all this up, when you go back to your app (identified as your accou
 
 ![In app interview popup](../images/tutorials/feedback-interviews-site-apps/interview-app.png)
 
-Once confirmed it works for you, go back to the feature flag for the user interview and adjust the release conditions to match who you want to speak with. Make sure to set the filter `Seen User Interview Invitation - {FEATURE_FLAG_NAME}` to `is not set`. This ensures the prompt isn’t shown to people who already saw the user interview popup.
+Once you confirm it works, go back to the feature flag for the user interview and adjust the release conditions to match who you want to speak with. Make sure to set the filter `Seen User Interview Invitation - {FEATURE_FLAG_NAME}` to `is not set`. This ensures the prompt isn’t shown to people who already saw the user interview popup.
 
 Once you adjust your release conditions, you should start to get some interviews booked. If this isn’t happening, try to expand the release conditions or provide an incentive for users to book interviews.
 
