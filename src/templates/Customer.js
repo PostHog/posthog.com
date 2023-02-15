@@ -132,10 +132,6 @@ export const query = graphql`
                 fields {
                     slug
                 }
-                headings {
-                    value
-                    depth
-                }
                 frontmatter {
                     customer
                 }
@@ -146,6 +142,10 @@ export const query = graphql`
             excerpt(pruneLength: 150)
             fields {
                 slug
+            }
+            headings {
+                value
+                depth
             }
             frontmatter {
                 title
