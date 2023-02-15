@@ -238,7 +238,7 @@ export const PlanComparison = ({ className = '' }) => {
 
     useEffect(() => {
         const fetchPlans = async () => {
-            const planKeys: string | null = 'starter-20230117,scale-20230117'
+            const planKeys: string | boolean | null = posthog?.getFeatureFlag('available-plans') || null
             const url = `${process.env.BILLING_SERVICE_URL + '/api/plans'}${planKeys ? `?keys=${planKeys}` : ''}`
             const headers = {
                 'Content-Type': 'application/json',

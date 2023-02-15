@@ -4,7 +4,7 @@ import { Link } from 'gatsby'
 import { heading, section } from './classes'
 import Icon from './Icon'
 import Slider from './Slider'
-import { DemoLink } from 'components/DemoLink'
+import { PricingCTA } from 'components/PricingCTA'
 import { SignupCTA } from 'components/SignupCTA'
 
 export const FeatureStrip = ({ className = '' }) => {
@@ -55,7 +55,7 @@ export default function Hero() {
 
                     <div className="flex flex-col md:flex-row justify-center items-center gap-2">
                         <SignupCTA className="!w-full md:!w-44 shadow-xl !px-4" />
-                        <DemoLink />
+                        <PricingCTA />
                     </div>
                 </div>
                 <Slider />

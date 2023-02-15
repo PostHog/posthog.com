@@ -46,7 +46,6 @@ import { ContributorsChart } from './components/ContributorsChart'
 import { CookieBanner } from './components/CookieBanner'
 import { Customers } from './components/Customers'
 import { DarkModeToggle } from './components/DarkModeToggle'
-import { DemoLink } from './components/DemoLink'
 import { DemoScheduler } from './components/DemoScheduler'
 import { DeployOption } from './components/DeployOption'
 import { DocsPageSurvey } from './components/DocsPageSurvey'
@@ -102,6 +101,7 @@ import { ProductPillars } from './components/Pricing/ProductPillars'
 import { Quote } from './components/Pricing/Quote'
 import { Savings } from './components/Pricing/Savings'
 import { SelfHost } from './components/Pricing/SelfHost'
+import { PricingCTA } from './components/PricingCTA'
 import { ProductAnchorNavbar } from './components/ProductAnchorNavbar'
 import { ProductFeature } from './components/ProductFeature'
 import { ProductFeaturePlugin } from './components/ProductFeaturePlugin'
@@ -187,7 +187,6 @@ export const shortcodes = {
     CookieBanner,
     Customers,
     DarkModeToggle,
-    DemoLink,
     DemoScheduler,
     DeployOption,
     DocsPageSurvey,
@@ -243,6 +242,7 @@ export const shortcodes = {
     Quote,
     Savings,
     SelfHost,
+    PricingCTA,
     ProductAnchorNavbar,
     ProductFeature,
     ProductFeaturePlugin,
