@@ -11,7 +11,7 @@
     "keywords": ["gatsby"],
     "private": true,
     "scripts": {
-        "build": "du -hd1 .cache && gatsby build && rm -rf .cache/webpack && du -hd1 .cache",
+        "build": "du -hd1 .cache && gatsby build && rm -rf .cache/webpack .cache/query-engine && du -hd1 .cache",
         "start": "TAILWIND_MODE=watch gatsby develop -H 0.0.0.0 -p 8001",
         "format": "prettier --write \"**/*.{html,js,ts,tsx,json,yml,css,scss}\"",
         "test": "echo \"Error: no test specified\" && exit 1",
@@ -28,6 +28,7 @@
         "@headlessui/tailwindcss": "^0.1.1",
         "@heroicons/react": "^1.0.6",
         "@hubspot/api-client": "^7.1.2",
+        "@mdx-js/mdx": "^1.0.0",
         "@popperjs/core": "^2.11.2",
         "@types/lodash.groupby": "^4.6.7",
         "@types/react-slick": "^0.23.10",
