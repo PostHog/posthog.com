@@ -35,8 +35,6 @@ There are a couple of channels that customer requests come in so make sure you k
 - [PostHog Users's Slack](https://posthog.com/slack), specifically `#community-support`. Users who post in `#general` or elsewhere should be instructed to post in `#community-support`
 - Sentry issues, either [directly](https://sentry.io/organizations/posthog/issues/?project=1899813) or in `#sentry` in our main Slack.
 
-Zendesk will also get populated with new issues from people outside the PostHog organization on the `posthog` and `posthog.com` repos, as well as with Squeak questions. These tickets will come with links to the issue or Squeak so you can answer them in the appropriate platform, rather than on Zendesk itself. 
-
 ### Communication
 
 As an engineer, when a question comes in your first instinct is to give them an answer as quickly as possible. That means we often forget pleasantries, or will ignore a question until we've found the answer. Hence the following guidelines:
@@ -144,7 +142,11 @@ We use [Zendesk Support](https://zendesk.com/) as our internal platform to manag
 
 Zendesk allows us to manage all our customer conversations in one place and reply through Slack or email. We also use [Help](https://www.atlassian.com/software/halp) if you want to easily create and manage Zendesk tickets directly from inside the PostHog Users Slack. 
 
-This ensures that we don't miss anyone, especially when their request is passed from one person to another at PostHog, or if they message us over the weekend. You should have received an invite to join both Zendesk and Help as part of onboarding - if you didn't, ask Grace. 
+This ensures that we don't miss anyone, especially when their request is passed from one person to another at PostHog, or if they message us over the weekend. You should have received an invite to join both Zendesk and Help as part of onboarding - if you didn't, ask Grace.
+
+Zendesk will get populated with new issues from people outside the PostHog organization on the `posthog` and `posthog.com` repos, and also Squeak questions. These tickets will come with links to the issue or Squeak so you can answer them in the appropriate platform, rather than on Zendesk itself.
+
+The feedback box on the PostHog app will automatically create a Zendesk ticket and let the user know that we've create a ticket for them. If it's a feature request feel free to reply with something short like "Thanks for the feedback! We'll take a look at this and get back to you if we have any questions." and pass it on to the team. If there's not enough information it might be worth reviewing the session recording or asking them for more information.
 
 #### How to access Zendesk
 
