@@ -15,6 +15,7 @@ import FooterCTA from 'components/FooterCTA'
 import PostLayout from 'components/PostLayout'
 import SidebarSection from 'components/PostLayout/SidebarSection'
 import Topics from 'components/PostLayout/Topics'
+import { useToc } from '../utils'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
