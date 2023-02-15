@@ -8,10 +8,12 @@
         "type": "git",
         "url": "https://github.com/PostHog/posthog.com"
     },
-    "keywords": ["gatsby"],
+    "keywords": [
+        "gatsby"
+    ],
     "private": true,
     "scripts": {
-        "build": "gatsby clean && gatsby build && rm -rf ./.cache/webpack ./.cache/query-engine",
+        "build": "gatsby build",
         "start": "TAILWIND_MODE=watch gatsby develop -H 0.0.0.0 -p 8001",
         "format": "prettier --write \"**/*.{html,js,ts,tsx,json,yml,css,scss}\"",
         "test": "echo \"Error: no test specified\" && exit 1",
