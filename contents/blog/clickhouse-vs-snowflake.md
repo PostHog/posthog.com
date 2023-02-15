@@ -1,5 +1,5 @@
 ---
-date: 2023-01-30
+date: 2023-02-15
 title: 'In-depth: ClickHouse vs Snowflake'
 rootPage: /blog
 sidebar: Blog
@@ -41,7 +41,7 @@ This contradiction between success and adoption is because Snowflake doesn’t b
 
 To some developer evangelists, this business-first scheme is seen as heresy. But it's an excellent solution for Snowflake’s customers, each of whom pays an average of ~$170,000 a year. But why? Snowflake isn’t Louis Vuitton – people aren’t clamoring to buy its product merely because it's expensive.
 
-Instead, Snowflake is a jack of all trades. Snowflake has complex, performant architecture, but its cloud-first, fully-managed design makes scaling seamless. Snowflake can handle complex, conditional-heavy queries, but its GUI enables non-technical people to take advantage of stored data. Snowflake’s codebase, including any security flaws, is entirely closed-source, but its massive app marketplace makes third-party integrations possible.
+Instead, Snowflake is a jack of all trades. Snowflake has complex, performant architecture, but its cloud-first, fully-managed design makes scaling seamless. Snowflake can handle complex, conditional-heavy queries, but its GUI enables non-technical people to take advantage of stored data. Snowflake’s codebase, including any security flaws, is entirely closed-source, but its massive app marketplace makes third-party integrations possible. 
 
 Snowflake was built for businesses with complex, ever-changing needs with big budgets. It’s by no means the fastest horse, but it’s the only one that can prance, race, dance, and even sing.
 
