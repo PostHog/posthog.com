@@ -45,6 +45,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 path: i === 0 ? base : `${base}/${i + 1}`,
                 component: template,
                 context,
+                defer: true,
             })
         })
     }
@@ -199,6 +200,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     id: node.id,
                     slug,
                 },
+                defer: true,
             })
         })
     }
@@ -228,6 +230,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 context: {
                     id: node.id,
                 },
+                defer: true,
             })
         })
     }
@@ -322,6 +325,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     menu: sidebars.docs,
                     slug,
                 },
+                defer: true,
             })
         })
 
@@ -366,6 +370,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 context: {
                     id: node.id,
                 },
+                defer: true,
             })
         })
     }
@@ -409,6 +414,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     next,
                     previous,
                 },
+                defer: true,
             })
         })
     }
@@ -452,6 +458,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     next,
                     previous,
                 },
+                defer: true,
             })
         })
     }
@@ -477,6 +484,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     context: {
                         id,
                     },
+                    defer: true,
                 })
             }
         })
@@ -503,6 +511,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     context: {
                         id,
                     },
+                    defer: true,
                 })
             }
         })
