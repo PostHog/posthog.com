@@ -7,23 +7,22 @@ export default function HomeQuote() {
     return (
         <Quote
             className={section('text-left')}
-            name="James Watling"
-            title="Founding CTO, EarlyDay"
+            name="Cat Li"
+            title="Product & Engineering Lead, Y Combinator"
             image={
                 <StaticImage
                     width={100}
                     height={100}
-                    alt="James Watling - EarlyDay"
+                    alt="Cat Li - Y Combinator"
                     outputPixelDensities={[1, 2]}
-                    src="../../images/james_watling.png"
+                    src="../../images/cat_li.png"
                 />
             }
             quote={
                 <span>
-                    "PostHog is the first analytics platform that's excited me! It has multiple tools, so instead of
-                    using <span className="text-red">Google Analytics</span> and{' '}
-                    <span className="text-red">HotJar</span> and <span className="text-red">Mixpanel</span>, I can just
-                    use PostHog.
+                    "Building is never just one-and-done. You always need to find ways to improve.
+                    <span className="text-red"> PostHog is central to how we do that at Y Combinator</span>. It helps us
+                    try ideas, measure results and make better products.”
                 </span>
             }
         />
