@@ -175,7 +175,7 @@ const MobileMenu = ({ setOpen }: { setOpen: (open: null | string) => void }) => 
             <motion.ul
                 key={menu?.parent?.name}
                 {...motionListContainer}
-                className="list-none m-0 p-0 pl-6 h-[40vh] overflow-auto"
+                className="list-none m-0 p-0 pl-6 max-h-[40vh] overflow-auto"
             >
                 {menu?.parent?.menu && (
                     <motion.li
@@ -269,7 +269,7 @@ const MobileSidebar = ({ setOpen }: { setOpen: (open: null | string) => void }) 
     return (
         <MenuContainer className="py-0" setOpen={setOpen}>
             <div className={`flex flex-col`}>
-                {sidebar && <div className="mobile-sidebar-container h-[40vh] overflow-auto">{sidebar}</div>}
+                {sidebar && <div className="mobile-sidebar-container max-h-[40vh] overflow-auto">{sidebar}</div>}
                 <div
                     className={`mt-auto flex text-sm ${
                         sidebar
