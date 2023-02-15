@@ -28,12 +28,12 @@ Formatting all this correctly looks like this:
 curl -v -L --header "Content-Type: application/json" -d '{
   "api_key": "<PH_PROJECT_API_KEY>",
   "distinct_id": "ian@posthog.com"
-}' "https://app.posthog.com/decide/?v=2"
+}' "https://app.posthog.com/decide/?v=3"
 ```
 
 ```python
 import requests
-url = "https://app.posthog.com/decide/?v=2"
+url = "https://app.posthog.com/decide/?v=3"
 
 headers = {
   "Content-Type": "application/json",
@@ -49,14 +49,16 @@ response = requests.post(url, headers=headers, json=body).json()
 
 </MultiLanguage>
 
-The only potentially tricky part of this is the version param. Use `v=2`, as `v=1` only returns the feature flag keys, not their related values. Also, if doing a `curl` request, make sure to wrap your URL in quotes to ensure your terminal doesn’t think the `?` is a wildcard character.
+The only potentially tricky part of this is the version param. Use `v=3`, as it is the most recent. Unlike the other versions, it returns the the feature flag values, any errors that occurred when computing, and any payloads for the flags.
+
+Also, if doing a `curl` request, make sure to wrap your URL in quotes to ensure your terminal doesn’t think the `?` is a wildcard character.
 
 The response from this request looks like this:
 
 ```json
 {
   "config": {
-    "enable_collect_everything": true
+      "enable_collect_everything": true
   },
   "toolbarParams": {},
   "isAuthenticated": false,
@@ -69,6 +71,8 @@ The response from this request looks like this:
     "request-test": true
   },
   "sessionRecording": false,
+  "errorsWhileComputingFlags": false,
+  "featureFlagPayloads": {},
   "capturePerformance": false,
   "siteApps": []
 }
@@ -78,7 +82,7 @@ You can use this response with whatever language to control access or usage of f
 
 ```python
 import requests
-url = "https://app.posthog.com/decide/?v=2"
+url = "https://app.posthog.com/decide/?v=3"
 
 headers = {
   "Content-Type": "application/json",
@@ -102,7 +106,7 @@ Our libraries abstract this functionality away and provides utilities such as ca
 
 ## Evaluating multi-variate flags
 
-The `v=2` endpoint also supports multivariate flags. To test this, create a multi-variate feature flag in PostHog by selecting the "Multiple variants with rollout percentages (A/B test)" as the "Served value." 
+The `v=3` endpoint also supports multivariate flags. To test this, create a multi-variate feature flag in PostHog by selecting the "Multiple variants with rollout percentages (A/B test)" as the "Served value." 
 
 Once you do this, make the same request as above and the response includes the variant data like this:
 
@@ -117,11 +121,41 @@ Once you do this, make the same request as above and the response includes the v
 
 You can then use this like the boolean flag to control access or run specific code.
 
+## Getting evaluation reasons
+
+If you want to know why a flag is evaluated a certain way for a specific user, you can use the `/api/projects/:project_id/feature_flags/evaluation_reasons/` endpoint. This endpoint requires the distinct ID of the user as a param and a personal API key for authorization.
+
+> Unlike the `POST` endpoints detailed earlier, the rest of these endpoints are private and require a personal key. You can create this key in your profile settings (top right corner) in your PostHog instance. See the [get insights and person API tutorial](/tutorials/api-get-insights-persons#getting-your-personal-api-key) for detailed instructions.
+
+<MultiLanguage>
+
+```bash
+export POSTHOG_PERSONAL_API_KEY=<POSTHOG_PERSONAL_API_KEY>
+export POSTHOG_PROJECT_ID=<POSTHOG_PROJECT_ID>
+curl \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  https://app.posthog.com/api/projects/$POSTHOG_PROJECT_ID/feature_flags/evaluation_reasons/?distinct_id=ian@posthog.com
+```
+
+```python
+import requests
+
+POSTHOG_PERSONAL_API_KEY = <POSTHOG_PERSONAL_API_KEY>
+DISTINCT_ID = ian@posthog.com
+
+headers = {"Authorization": f"Bearer {POSTHOG_PERSONAL_API_KEY}" }
+
+response = requests.get(
+    f"https://app.posthog.com/api/projects/<POSTHOG_PROJECT_ID>/feature_flags/evaluation_reasons/?distinct_id={DISTINCT_ID}",
+    headers=headers
+).json()
+```
+
+</MultiLanguage>
+
 ## Getting feature flag data
 
 You can also use the API to get and update feature flags. To update the flags, you need their ID, and a way to get this by making an API request to get all flags, then filtering for the one matching the name or key you want.
-
-> Unlike the `POST` endpoints detailed earlier, these endpoints are private and require a personal key. You can create this key in your profile settings (top right corner) in your PostHog instance. See the [get insights and person API tutorial](/tutorials/api-get-insights-persons#getting-your-personal-api-key) for detailed instructions.
 
 With your personal API and your project ID, you can make a request to `api/projects/:project_id/feature_flags/` to get all your flags like this:
 
@@ -255,7 +289,11 @@ body = {
   "distinct_id": USER_EMAIL
 }
 
-evaluate = requests.post('https://app.posthog.com/decide/?v=2', headers=json_headers, json=body)
+evaluate = requests.post(
+  'https://app.posthog.com/decide/?v=3',
+  headers=json_headers, 
+  json=body
+)
 
 if evaluate.json().get('featureFlags').get(FLAG_KEY):
   filterUserFromFlag()
