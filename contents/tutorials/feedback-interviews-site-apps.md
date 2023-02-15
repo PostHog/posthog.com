@@ -29,7 +29,7 @@ To add PostHog’s site apps, you need to have setup either [the snippet or the 
 </script>
 ```
 
-Once added, your app is ready for site apps. PostHog automatically loads site apps into your app through the snippet or library. You don’t need any additional code.
+Once done, PostHog automatically loads site apps into your app through the snippet or library. You don’t need any additional code.
 
 ## Setting up the feedback app
 
