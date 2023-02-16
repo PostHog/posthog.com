@@ -1,5 +1,6 @@
 import path from 'path'
 import fs from 'fs'
+import { execSync } from 'child_process'
 
 import {
     S3Client,
@@ -9,6 +10,7 @@ import {
     CompletedPart,
     GetObjectCommand,
     HeadObjectCommand,
+    PutObjectCommand,
 } from '@aws-sdk/client-s3'
 import type { GatsbyNode, PluginOptions } from 'gatsby'
 import AdmZip from 'adm-zip'
@@ -76,65 +78,73 @@ const uploadDir = async (client: S3Client, bucket: string, key: string, source: 
     const sourcePath = path.join(process.cwd(), source)
 
     console.time('compressingArchive')
-    const zip = new AdmZip()
-    zip.addLocalFolder(sourcePath)
-    zip.getEntries().forEach((entry) => {
-        entry.header.method = 4
-    })
+    execSync(`tar -czf ${key}.tar.gz ${sourcePath}`)
     console.timeEnd('compressingArchive')
 
-    let numRead = 0
-    let i = 1
-    const buf = zip.toBuffer()
+    const stream = fs.createReadStream(key + '.tar.gz', { highWaterMark: CHUNK_SIZE })
 
-    console.log(buf.byteLength)
+    await client.send(
+        new PutObjectCommand({
+            Bucket: bucket,
+            Key: key,
+            Body: stream,
+        })
+    )
 
-    const upload = await client.send(
+    fs.rmSync(key + '.tar.gz')
+
+    /*const upload = await client.send(
         new CreateMultipartUploadCommand({
             Bucket: bucket,
             Key: key,
         })
     )
 
-    const parts: UploadPartCommand[] = []
+    return new Promise((resolve, reject) => {
+        const parts: UploadPartCommand[] = []
 
-    while (numRead < buf.length) {
-        const part = new UploadPartCommand({
-            Bucket: bucket,
-            Key: key,
-            Body: buf.subarray(numRead, numRead + CHUNK_SIZE),
-            PartNumber: i,
-            UploadId: upload.UploadId,
+        stream.on('error', (err) => {
+            reject(err)
         })
-        parts.push(part)
 
-        numRead += CHUNK_SIZE
-        i++
-    }
+        stream.on('data', (chunk) => {
+            const part = new UploadPartCommand({
+                Bucket: bucket,
+                Key: key,
+                Body: chunk,
+                PartNumber: i,
+                UploadId: upload.UploadId,
+            })
+            parts.push(part)
 
-    console.time('uploadParts')
-
-    const partResults: CompletedPart[] = await Promise.all(
-        parts.map(async (part) => {
-            const result = await client.send(part)
-            return {
-                PartNumber: part.input.PartNumber,
-                ETag: result.ETag,
-            }
+            i++
         })
-    )
-    console.timeEnd('uploadParts')
 
-    await client.send(
-        new CompleteMultipartUploadCommand({
-            Bucket: bucket,
-            Key: key,
-            MultipartUpload: {
-                Parts: partResults,
-            },
-            UploadId: upload.UploadId,
+        stream.on('end', async () => {
+            const partResults: CompletedPart[] = await Promise.all(
+                parts.map(async (part) => {
+                    const result = await client.send(part)
+                    return {
+                        PartNumber: part.input.PartNumber,
+                        ETag: result.ETag,
+                    }
+                })
+            )
+
+            const data = await client.send(
+                new CompleteMultipartUploadCommand({
+                    Bucket: bucket,
+                    Key: key,
+                    MultipartUpload: {
+                        Parts: partResults,
+                    },
+                    UploadId: upload.UploadId,
+                })
+            )
+
+            resolve(data)
         })
-    )
+    })*/
 }
 
 export const onPreInit: GatsbyNode['onPreInit'] = async (_, options: RemoteCacheConfigOptions) => {
