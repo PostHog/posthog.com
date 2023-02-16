@@ -11,7 +11,7 @@ featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 ---
 
-One of the things I've learned at PostHog, is the simpler a strategy, the more likely it's the right one.
+One of the things I've learned at PostHog is the simpler a strategy, the more likely it's right.
 
 We simplified [our strategy](../handbook/strategy/overview) recently. This post explains the context.
 
