@@ -28,7 +28,7 @@ exports.onPreInit = async function (_, options) {
     await createStrapiPageNodes()
 }
 
-exports.onCreateNode = async function ({ node, getNode, actions, store, cache, createNodeId }) {
+exports.onCreateNode = async function ({ node, getNode, actions, store, createNodeId }) {
     const { createNodeField, createNode } = actions
     //Create GitHub contributor nodes for handbook & docs
     if (node.internal.type === `MarkdownRemark` || node.internal.type === 'Mdx') {
@@ -48,7 +48,6 @@ exports.onCreateNode = async function ({ node, getNode, actions, store, cache, c
                                     parentNodeId: node.id,
                                     createNode,
                                     createNodeId,
-                                    cache,
                                     store,
                                 }))
                             return {
