@@ -21,7 +21,7 @@ Our mission has always been to increase the number of successful products in the
 
 The change is that we've realized that the simple way PostHog can achieve this is to help engineers be better at product.
 
-Today, the people writing the code for the products you use are so often treated as a resource. They don't get a say in what gets built, just picking up ticket after ticket. Yet, there's a reason they're engineers in the first place – they were a combination of intelligent and hard-working, which meant they built deep skills.
+Today, engineers building the products you use are too often treated as a resource. They don't get a say in what gets built, they just pick up ticket after ticket. Yet, there's a reason they're engineers in the first place. They're intelligent, hard-working, and have deep skills.
 
 Our competitors near universally focus on helping non-technical product managers, who write tickets for their developers.
 
