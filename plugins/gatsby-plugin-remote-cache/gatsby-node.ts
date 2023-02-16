@@ -49,7 +49,7 @@ const fetchAndExtract = async (client: S3Client, key: string, destination: strin
     const obj = await client.send(
         new GetObjectCommand({
             Bucket: 'posthog-com-cache',
-            Key: 'cache.zip',
+            Key: key,
         })
     )
     console.timeEnd('fetchData')
@@ -120,7 +120,7 @@ const uploadDir = async (client: S3Client, key: string, source: string) => {
     await client.send(
         new CompleteMultipartUploadCommand({
             Bucket: 'posthog-com-cache',
-            Key: 'cache.zip',
+            Key: key,
             MultipartUpload: {
                 Parts: partResults,
             },
