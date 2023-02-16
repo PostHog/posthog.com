@@ -4,9 +4,12 @@ import {
     UploadPartCommand,
     CompleteMultipartUploadCommand,
     CompletedPart,
+    GetObjectCommand,
+    HeadObjectCommand,
 } from '@aws-sdk/client-s3'
 import type { GatsbyNode, PluginOptions } from 'gatsby'
 import path from 'path'
+import fs from 'fs'
 
 import AdmZip from 'adm-zip'
 
@@ -17,10 +20,10 @@ type RemoteCacheConfigOptions = {
     secretAccessKey: string
 } & PluginOptions
 
-export const onPostBuild: GatsbyNode['onPostBuild'] = async (_, options: RemoteCacheConfigOptions) => {
+const createS3Client = (options: RemoteCacheConfigOptions) => {
     const { region, endpoint, accessKeyId, secretAccessKey } = options
 
-    const client = new S3Client({
+    return new S3Client({
         region,
         endpoint,
         credentials: {
@@ -28,13 +31,55 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async (_, options: RemoteC
             secretAccessKey,
         },
     })
+}
+
+export const onPreInit: GatsbyNode['onPreInit'] = async (_, options: RemoteCacheConfigOptions) => {
+    try {
+        const client = createS3Client(options)
+
+        const exists = await client.send(
+            new HeadObjectCommand({
+                Bucket: 'posthog-com-cache',
+                Key: 'cache.zip',
+            })
+        )
+
+        console.time('fetchCache')
+        const cache = await client.send(
+            new GetObjectCommand({
+                Bucket: 'posthog-com-cache',
+                Key: 'cache.zip',
+            })
+        )
+        console.timeEnd('fetchCache')
+
+        const data = await cache.Body.transformToByteArray()
+
+        const zip = new AdmZip(Buffer.from(data))
+
+        if (fs.existsSync(path.join(process.cwd(), '.cache'))) {
+            fs.rmSync(path.join(process.cwd(), '.cache'), {
+                recursive: true,
+                force: true,
+            })
+        }
+
+        zip.extractAllTo(path.join(process.cwd(), '.cache'))
+    } catch (error) {
+        if (error.name === 'NotFound') {
+            console.warn('No remote cache found - skipping')
+        } else {
+            console.error(error)
+        }
+    }
+}
+
+export const onPostBuild: GatsbyNode['onPostBuild'] = async (_, options: RemoteCacheConfigOptions) => {
+    const client = createS3Client(options)
 
     console.time('compressingArchive')
     const zip = new AdmZip()
     zip.addLocalFolder(path.join(process.cwd(), '.cache'))
-    zip.getEntries().forEach((entry) => {
-        entry.header.method = 10
-    })
     console.timeEnd('compressingArchive')
 
     const upload = await client.send(
