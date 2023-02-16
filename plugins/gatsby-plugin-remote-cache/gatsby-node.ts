@@ -133,7 +133,7 @@ export const onPreInit: GatsbyNode['onPreInit'] = async (_, options: RemoteCache
     try {
         const client = createS3Client(options)
 
-        await fetchAndExtract(client, 'yarn-cache.zip', '.yarn/cache')
+        // await fetchAndExtract(client, 'yarn-cache.zip', '.yarn/cache')
         await fetchAndExtract(client, 'cache.zip', '.cache')
         await fetchAndExtract(client, 'public.zip', 'public')
     } catch (error) {
@@ -149,7 +149,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async (_, options: RemoteC
     try {
         const client = createS3Client(options)
 
-        await uploadDir(client, 'yarn-cache.zip', '.yarn/cache')
+        // await uploadDir(client, 'yarn-cache.zip', '.yarn/cache')
         await uploadDir(client, 'cache.zip', '.cache')
         await uploadDir(client, 'public.zip', 'public')
     } catch (error) {
