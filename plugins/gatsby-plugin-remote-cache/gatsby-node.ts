@@ -80,18 +80,18 @@ const uploadDir = async (client: S3Client, bucket: string, key: string, source: 
     zip.addLocalFolder(sourcePath)
     console.timeEnd('compressingArchive')
 
+    let numRead = 0
+    let i = 1
+    const buf = zip.toBuffer()
+
+    console.log(buf.byteLength)
+
     const upload = await client.send(
         new CreateMultipartUploadCommand({
             Bucket: bucket,
             Key: key,
         })
     )
-
-    let numRead = 0
-    let i = 1
-    const buf = zip.toBuffer()
-
-    console.log(buf.byteLength)
 
     const parts: UploadPartCommand[] = []
 
