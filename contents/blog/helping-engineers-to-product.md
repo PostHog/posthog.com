@@ -17,7 +17,7 @@ We simplified [our strategy](../handbook/strategy/overview) recently - this post
 
 ## The change
 
-Our company mission has always been to increase the number of succesful products in the world.
+Our company mission has always been to increase the number of successful products in the world.
 
 The change is that we've realized that the simple way PostHog can achieve this is to help engineers be better at product.
 
