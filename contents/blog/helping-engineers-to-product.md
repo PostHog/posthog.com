@@ -1,6 +1,6 @@
 ---
 date: 2023-02-16
-title: "CEO diary: Helping engineers to be better at product"
+title: "Our simpler goal: Helping engineers to be better at product"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
