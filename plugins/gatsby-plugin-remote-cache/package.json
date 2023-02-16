@@ -1,0 +1,15 @@
+{
+  "name": "gatsby-plugin-remote-cache",
+  "version": "0.1.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.272.0",
+    "adm-zip": "^0.5.10",
+    "archiver": "^5.3.1"
+  },
+  "devDependencies": {
+    "@types/adm-zip": "^0.5.0",
+    "@types/archiver": "^5.3.1"
+  }
+}
