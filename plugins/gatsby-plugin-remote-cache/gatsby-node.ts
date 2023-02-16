@@ -1,3 +1,6 @@
+import path from 'path'
+import fs from 'fs'
+
 import {
     S3Client,
     CreateMultipartUploadCommand,
@@ -8,9 +11,6 @@ import {
     HeadObjectCommand,
 } from '@aws-sdk/client-s3'
 import type { GatsbyNode, PluginOptions } from 'gatsby'
-import path from 'path'
-import fs from 'fs'
-
 import AdmZip from 'adm-zip'
 
 type RemoteCacheConfigOptions = {
@@ -78,6 +78,9 @@ const uploadDir = async (client: S3Client, bucket: string, key: string, source: 
     console.time('compressingArchive')
     const zip = new AdmZip()
     zip.addLocalFolder(sourcePath)
+    zip.getEntries().forEach((entry) => {
+        entry.header.method = 4
+    })
     console.timeEnd('compressingArchive')
 
     let numRead = 0
