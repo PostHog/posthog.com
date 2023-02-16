@@ -11,9 +11,9 @@ assignees: andyvan-ph
 
 _Explain the idea in a sentence or two_
 
-## Why should we do it?
+## Who is the audience?
 
-_how it will it be useful or interesting for readers/viewers_
+_Describe the ideal reader and their needs_
 
 ## Headlines options
 
