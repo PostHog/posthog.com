@@ -24,7 +24,9 @@ type RemoteCacheConfigOptions = {
 const CHUNK_SIZE = 30 * 1024 * 1024 // 30MiB
 
 const currentBranch = () => {
-    return process.env.VERCEL_ENV === 'production' ? 'master' : process.env.VERCEL_GIT_PULL_REQUEST_ID
+    return process.env.VERCEL_ENV === 'production'
+        ? 'master'
+        : process.env.VERCEL_GIT_PULL_REQUEST_ID || execSync('git branch --show-current').toString().trim()
 }
 
 const createS3Client = (options: RemoteCacheConfigOptions) => {
