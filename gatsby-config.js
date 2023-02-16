@@ -415,6 +415,7 @@ module.exports = {
             options: {
                 region: process.env.REMOTE_CACHE_REGION,
                 endpoint: process.env.REMOTE_CACHE_ENDPOINT,
+                bucket: process.env.REMOTE_CACHE_BUCKET,
                 accessKeyId: process.env.REMOTE_CACHE_ACCESS_KEY_ID,
                 secretAccessKey: process.env.REMOTE_CACHE_SECRET_ACCESS_KEY,
             },

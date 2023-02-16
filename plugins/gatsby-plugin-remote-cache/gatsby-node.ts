@@ -16,6 +16,7 @@ import AdmZip from 'adm-zip'
 type RemoteCacheConfigOptions = {
     region: string
     endpoint: string
+    bucket: string
     accessKeyId: string
     secretAccessKey: string
 } & PluginOptions
@@ -39,12 +40,12 @@ const createS3Client = (options: RemoteCacheConfigOptions) => {
     })
 }
 
-const fetchAndExtract = async (client: S3Client, key: string, destination: string) => {
+const fetchAndExtract = async (client: S3Client, bucket: string, key: string, destination: string) => {
     const destinationPath = path.join(process.cwd(), destination)
 
     await client.send(
         new HeadObjectCommand({
-            Bucket: 'posthog-com-cache',
+            Bucket: bucket,
             Key: key,
         })
     )
@@ -52,7 +53,7 @@ const fetchAndExtract = async (client: S3Client, key: string, destination: strin
     console.time('fetchData')
     const obj = await client.send(
         new GetObjectCommand({
-            Bucket: 'posthog-com-cache',
+            Bucket: bucket,
             Key: key,
         })
     )
@@ -71,7 +72,7 @@ const fetchAndExtract = async (client: S3Client, key: string, destination: strin
     zip.extractAllTo(destinationPath)
 }
 
-const uploadDir = async (client: S3Client, key: string, source: string) => {
+const uploadDir = async (client: S3Client, bucket: string, key: string, source: string) => {
     const sourcePath = path.join(process.cwd(), source)
 
     console.time('compressingArchive')
@@ -81,7 +82,7 @@ const uploadDir = async (client: S3Client, key: string, source: string) => {
 
     const upload = await client.send(
         new CreateMultipartUploadCommand({
-            Bucket: 'posthog-com-cache',
+            Bucket: bucket,
             Key: key,
         })
     )
@@ -96,7 +97,7 @@ const uploadDir = async (client: S3Client, key: string, source: string) => {
 
     while (numRead < buf.length) {
         const part = new UploadPartCommand({
-            Bucket: 'posthog-com-cache',
+            Bucket: bucket,
             Key: key,
             Body: buf.subarray(numRead, numRead + CHUNK_SIZE),
             PartNumber: i,
@@ -123,7 +124,7 @@ const uploadDir = async (client: S3Client, key: string, source: string) => {
 
     await client.send(
         new CompleteMultipartUploadCommand({
-            Bucket: 'posthog-com-cache',
+            Bucket: bucket,
             Key: key,
             MultipartUpload: {
                 Parts: partResults,
@@ -135,6 +136,7 @@ const uploadDir = async (client: S3Client, key: string, source: string) => {
 
 export const onPreInit: GatsbyNode['onPreInit'] = async (_, options: RemoteCacheConfigOptions) => {
     try {
+        const { bucket } = options
         const branch = currentBranch()
 
         console.log(branch)
@@ -146,8 +148,8 @@ export const onPreInit: GatsbyNode['onPreInit'] = async (_, options: RemoteCache
 
         const client = createS3Client(options)
 
-        await fetchAndExtract(client, `${branch}/cache.zip`, '.cache')
-        await fetchAndExtract(client, `${branch}/public.zip`, 'public')
+        await fetchAndExtract(client, bucket, `${branch}/cache.zip`, '.cache')
+        await fetchAndExtract(client, bucket, `${branch}/public.zip`, 'public')
     } catch (error) {
         if (error.name === 'NotFound') {
             console.warn('No remote cache found - skipping')
@@ -159,6 +161,7 @@ export const onPreInit: GatsbyNode['onPreInit'] = async (_, options: RemoteCache
 
 export const onPostBuild: GatsbyNode['onPostBuild'] = async (_, options: RemoteCacheConfigOptions) => {
     try {
+        const { bucket } = options
         const branch = currentBranch()
 
         console.log(branch)
@@ -170,8 +173,8 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async (_, options: RemoteC
 
         const client = createS3Client(options)
 
-        await uploadDir(client, `${branch}/cache.zip`, '.cache')
-        await uploadDir(client, `${branch}/public.zip`, 'public')
+        await uploadDir(client, bucket, `${branch}/cache.zip`, '.cache')
+        await uploadDir(client, bucket, `${branch}/public.zip`, 'public')
     } catch (error) {
         console.error(error)
     }
