@@ -24,7 +24,7 @@ type RemoteCacheConfigOptions = {
 const CHUNK_SIZE = 30 * 1024 * 1024 // 30MiB
 
 const currentBranch = () => {
-    return execSync('git rev-parse --abbrev-ref HEAD', { encoding: 'utf-8' })
+    return process.env.VERCEL_ENV === 'production' ? 'master' : process.env.VERCEL_GIT_PULL_REQUEST_ID
 }
 
 const createS3Client = (options: RemoteCacheConfigOptions) => {
@@ -136,8 +136,14 @@ const uploadDir = async (client: S3Client, key: string, source: string) => {
 
 export const onPreInit: GatsbyNode['onPreInit'] = async (_, options: RemoteCacheConfigOptions) => {
     try {
-        const client = createS3Client(options)
         const branch = currentBranch()
+
+        if (!branch) {
+            console.warn('No branch found - skipping cache download')
+            return
+        }
+
+        const client = createS3Client(options)
 
         await fetchAndExtract(client, `${branch}/cache.zip`, '.cache')
         await fetchAndExtract(client, `${branch}/public.zip`, 'public')
@@ -152,8 +158,14 @@ export const onPreInit: GatsbyNode['onPreInit'] = async (_, options: RemoteCache
 
 export const onPostBuild: GatsbyNode['onPostBuild'] = async (_, options: RemoteCacheConfigOptions) => {
     try {
-        const client = createS3Client(options)
         const branch = currentBranch()
+
+        if (!branch) {
+            console.warn('No branch found - skipping cache upload')
+            return
+        }
+
+        const client = createS3Client(options)
 
         await uploadDir(client, `${branch}/cache.zip`, '.cache')
         await uploadDir(client, `${branch}/public.zip`, 'public')
