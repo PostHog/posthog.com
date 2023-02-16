@@ -8,7 +8,6 @@ import {
     HeadObjectCommand,
 } from '@aws-sdk/client-s3'
 import type { GatsbyNode, PluginOptions } from 'gatsby'
-import { execSync } from 'child_process'
 import path from 'path'
 import fs from 'fs'
 
@@ -24,9 +23,7 @@ type RemoteCacheConfigOptions = {
 const CHUNK_SIZE = 30 * 1024 * 1024 // 30MiB
 
 const currentBranch = () => {
-    return process.env.VERCEL_ENV === 'production'
-        ? 'master'
-        : process.env.VERCEL_GIT_PULL_REQUEST_ID || execSync('git branch --show-current').toString().trim()
+    return process.env.VERCEL_ENV === 'production' ? 'master' : process.env.VERCEL_GIT_PULL_REQUEST_ID
 }
 
 const createS3Client = (options: RemoteCacheConfigOptions) => {
@@ -140,6 +137,8 @@ export const onPreInit: GatsbyNode['onPreInit'] = async (_, options: RemoteCache
     try {
         const branch = currentBranch()
 
+        console.log(branch)
+
         if (!branch) {
             console.warn('No branch found - skipping cache download')
             return
@@ -161,6 +160,8 @@ export const onPreInit: GatsbyNode['onPreInit'] = async (_, options: RemoteCache
 export const onPostBuild: GatsbyNode['onPostBuild'] = async (_, options: RemoteCacheConfigOptions) => {
     try {
         const branch = currentBranch()
+
+        console.log(branch)
 
         if (!branch) {
             console.warn('No branch found - skipping cache upload')
