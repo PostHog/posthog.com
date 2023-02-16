@@ -76,7 +76,7 @@ export default function MenuItem({
                                 menuItem={menuItem}
                                 urlOverride={`https://${
                                     posthog?.isFeatureEnabled('direct-to-eu-cloud') ? 'eu' : 'app'
-                                }.posthog.com/signup`}
+                                }.posthog.com/login`}
                                 hovered={hovered}
                                 handleSubClick={handleSubClick}
                             />
