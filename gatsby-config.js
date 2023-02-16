@@ -407,5 +407,14 @@ module.exports = {
             ? []
             : [algoliaConfig]),
         'gatsby-plugin-webpack-bundle-analyser-v2',
+        {
+            resolve: 'gatsby-plugin-remote-cache',
+            options: {
+                region: process.env.REMOTE_CACHE_REGION,
+                endpoint: process.env.REMOTE_CACHE_ENDPOINT,
+                accessKeyId: process.env.REMOTE_CACHE_ACCESS_KEY_ID,
+                secretAccessKey: process.env.REMOTE_CACHE_SECRET_ACCESS_KEY,
+            },
+        },
     ],
 }
