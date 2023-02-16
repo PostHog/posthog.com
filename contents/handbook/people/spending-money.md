@@ -94,7 +94,7 @@ Again, Apple items for keyboards and mice should be what you default to - refurb
 
 We find that most people already have a desk and chair that are comfortable.
 
-If you do not, please suggest something to us. We aren't yet at the stage where we can afford the latest and greatest here, but we will aim to be reasonable. For example, if you would like a standing desk, buy one you consider to be good value.
+If you do not, then buy yourself one within our set budget. We aren't yet at the stage where we can afford the latest and greatest here, but we will aim to be reasonable. For example, if you would like a standing desk, buy one you consider to be good value.
 
 We would expect to spend $250 on a desk, and around the same for a chair. 
 
