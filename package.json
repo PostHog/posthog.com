@@ -11,7 +11,7 @@
     "keywords": ["gatsby"],
     "private": true,
     "scripts": {
-        "build": "git branch --show-current && gatsby build",
+        "build": "git name-rev HEAD && gatsby build",
         "start": "TAILWIND_MODE=watch gatsby develop -H 0.0.0.0 -p 8001",
         "format": "prettier --write \"**/*.{html,js,ts,tsx,json,yml,css,scss}\"",
         "test": "echo \"Error: no test specified\" && exit 1",
