@@ -8,6 +8,7 @@ import {
     HeadObjectCommand,
 } from '@aws-sdk/client-s3'
 import type { GatsbyNode, PluginOptions } from 'gatsby'
+import { execSync } from 'child_process'
 import path from 'path'
 import fs from 'fs'
 
@@ -21,6 +22,10 @@ type RemoteCacheConfigOptions = {
 } & PluginOptions
 
 const CHUNK_SIZE = 30 * 1024 * 1024 // 30MiB
+
+const currentBranch = () => {
+    return execSync('git rev-parse --abbrev-ref HEAD', { encoding: 'utf-8' })
+}
 
 const createS3Client = (options: RemoteCacheConfigOptions) => {
     const { region, endpoint, accessKeyId, secretAccessKey } = options
@@ -132,10 +137,10 @@ const uploadDir = async (client: S3Client, key: string, source: string) => {
 export const onPreInit: GatsbyNode['onPreInit'] = async (_, options: RemoteCacheConfigOptions) => {
     try {
         const client = createS3Client(options)
+        const branch = currentBranch()
 
-        // await fetchAndExtract(client, 'yarn-cache.zip', '.yarn/cache')
-        await fetchAndExtract(client, 'cache.zip', '.cache')
-        await fetchAndExtract(client, 'public.zip', 'public')
+        await fetchAndExtract(client, `${branch}/cache.zip`, '.cache')
+        await fetchAndExtract(client, `${branch}/public.zip`, 'public')
     } catch (error) {
         if (error.name === 'NotFound') {
             console.warn('No remote cache found - skipping')
@@ -148,10 +153,10 @@ export const onPreInit: GatsbyNode['onPreInit'] = async (_, options: RemoteCache
 export const onPostBuild: GatsbyNode['onPostBuild'] = async (_, options: RemoteCacheConfigOptions) => {
     try {
         const client = createS3Client(options)
+        const branch = currentBranch()
 
-        // await uploadDir(client, 'yarn-cache.zip', '.yarn/cache')
-        await uploadDir(client, 'cache.zip', '.cache')
-        await uploadDir(client, 'public.zip', 'public')
+        await uploadDir(client, `${branch}/cache.zip`, '.cache')
+        await uploadDir(client, `${branch}/public.zip`, 'public')
     } catch (error) {
         console.error(error)
     }
