@@ -238,8 +238,7 @@ export const PlanComparison = ({ className = '' }) => {
 
     useEffect(() => {
         const fetchPlans = async () => {
-            const planKeys: string | boolean | null =
-                posthog?.getFeatureFlagPayload?.('available-plans')?.planKeys?.marketingWebsite || null
+            const planKeys: string | null = 'starter-20230117,scale-20230117'
             const url = `${process.env.BILLING_SERVICE_URL + '/api/plans'}${planKeys ? `?keys=${planKeys}` : ''}`
             const headers = {
                 'Content-Type': 'application/json',
@@ -253,8 +252,8 @@ export const PlanComparison = ({ className = '' }) => {
             })
         }
 
-        posthog?.onFeatureFlags(() => fetchPlans().catch((e) => console.error(e)))
-    }, [posthog])
+        fetchPlans().catch((e) => console.error(e))
+    }, [])
 
     return availablePlans?.length > 0 ? (
         <div className={`w-full relative mb-0 space-y-4 -mt-8 md:mt-0`}>
