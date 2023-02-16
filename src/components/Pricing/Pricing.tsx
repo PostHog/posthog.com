@@ -71,7 +71,7 @@ const Pricing = (): JSX.Element => {
                     <div className="md:order-2">
                         <StaticImage
                             alt="The cutest hedgehog you've ever seen driving a red tractor"
-                            src="../images/tractor-hog.png"
+                            src={'./images/tractor-hog.png'}
                             className="max-w-screen-sm"
                             loading="eager"
                             placeholder="none"
@@ -112,7 +112,7 @@ const Pricing = (): JSX.Element => {
                             width={100}
                             height={100}
                             alt="Jonathan Hyde - Former Head of Product, Legl"
-                            src="../../../images/jonathan-hyde-plain.png"
+                            src="../../images/jonathan-hyde-plain.png"
                             placeholder="none"
                         />
                     }
@@ -127,7 +127,7 @@ const Pricing = (): JSX.Element => {
             </section>
             <section className={`${section} mb-12 mt-16`}>
                 <div className="sm:flex-row flex-col-reverse flex items-center sm:items-start justify-center">
-                    <StaticImage src="../images/vacation-hog.png" alt="Vacation Hog" width={252} placeholder="none" />
+                    <StaticImage src="./images/vacation-hog.png" alt="Vacation Hog" width={252} placeholder="none" />
                     <div className="text-center bg-[#2D2D2D] p-4 rounded-md relative sm:rotate-6 sm:-mr-8 flex-shrink-0">
                         <p className="text-white m-0 text-[18px] font-bold font-comic">
                             Looking for the signup button?
