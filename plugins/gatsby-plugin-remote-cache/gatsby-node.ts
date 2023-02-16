@@ -20,6 +20,8 @@ type RemoteCacheConfigOptions = {
     secretAccessKey: string
 } & PluginOptions
 
+const CHUNK_SIZE = 50 * 1024 * 1024 // 50MiB
+
 const createS3Client = (options: RemoteCacheConfigOptions) => {
     const { region, endpoint, accessKeyId, secretAccessKey } = options
 
@@ -33,63 +35,53 @@ const createS3Client = (options: RemoteCacheConfigOptions) => {
     })
 }
 
-export const onPreInit: GatsbyNode['onPreInit'] = async (_, options: RemoteCacheConfigOptions) => {
-    try {
-        const client = createS3Client(options)
+const fetchAndExtract = async (client: S3Client, key: string, destination: string) => {
+    const destinationPath = path.join(process.cwd(), destination)
 
-        const exists = await client.send(
-            new HeadObjectCommand({
-                Bucket: 'posthog-com-cache',
-                Key: 'cache.zip',
-            })
-        )
+    await client.send(
+        new HeadObjectCommand({
+            Bucket: 'posthog-com-cache',
+            Key: key,
+        })
+    )
 
-        console.time('fetchCache')
-        const cache = await client.send(
-            new GetObjectCommand({
-                Bucket: 'posthog-com-cache',
-                Key: 'cache.zip',
-            })
-        )
-        console.timeEnd('fetchCache')
+    console.time('fetchData')
+    const obj = await client.send(
+        new GetObjectCommand({
+            Bucket: 'posthog-com-cache',
+            Key: 'cache.zip',
+        })
+    )
+    console.timeEnd('fetchData')
 
-        const data = await cache.Body.transformToByteArray()
-
-        const zip = new AdmZip(Buffer.from(data))
-
-        if (fs.existsSync(path.join(process.cwd(), '.cache'))) {
-            fs.rmSync(path.join(process.cwd(), '.cache'), {
-                recursive: true,
-                force: true,
-            })
-        }
-
-        zip.extractAllTo(path.join(process.cwd(), '.cache'))
-    } catch (error) {
-        if (error.name === 'NotFound') {
-            console.warn('No remote cache found - skipping')
-        } else {
-            console.error(error)
-        }
+    if (fs.existsSync(destinationPath)) {
+        fs.rmSync(destinationPath, {
+            recursive: true,
+            force: true,
+        })
     }
+
+    const data = await obj.Body.transformToByteArray()
+    const zip = new AdmZip(Buffer.from(data))
+
+    zip.extractAllTo(destinationPath)
 }
 
-export const onPostBuild: GatsbyNode['onPostBuild'] = async (_, options: RemoteCacheConfigOptions) => {
-    const client = createS3Client(options)
+const uploadDir = async (client: S3Client, key: string, source: string) => {
+    const sourcePath = path.join(process.cwd(), source)
 
     console.time('compressingArchive')
     const zip = new AdmZip()
-    zip.addLocalFolder(path.join(process.cwd(), '.cache'))
+    zip.addLocalFolder(sourcePath)
     console.timeEnd('compressingArchive')
 
     const upload = await client.send(
         new CreateMultipartUploadCommand({
             Bucket: 'posthog-com-cache',
-            Key: 'cache.zip',
+            Key: key,
         })
     )
 
-    const chunkSize = 50 * 1024 * 1024 // 1MiB
     let numRead = 0
     let i = 1
     const buf = zip.toBuffer()
@@ -101,14 +93,14 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async (_, options: RemoteC
     while (numRead < buf.length) {
         const part = new UploadPartCommand({
             Bucket: 'posthog-com-cache',
-            Key: 'cache.zip',
-            Body: buf.subarray(numRead, numRead + chunkSize),
+            Key: key,
+            Body: buf.subarray(numRead, numRead + CHUNK_SIZE),
             PartNumber: i,
             UploadId: upload.UploadId,
         })
         parts.push(part)
 
-        numRead += chunkSize
+        numRead += CHUNK_SIZE
         i++
     }
 
@@ -125,18 +117,39 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async (_, options: RemoteC
     )
     console.timeEnd('uploadParts')
 
+    await client.send(
+        new CompleteMultipartUploadCommand({
+            Bucket: 'posthog-com-cache',
+            Key: 'cache.zip',
+            MultipartUpload: {
+                Parts: partResults,
+            },
+            UploadId: upload.UploadId,
+        })
+    )
+}
+
+export const onPreInit: GatsbyNode['onPreInit'] = async (_, options: RemoteCacheConfigOptions) => {
     try {
-        const data = await client.send(
-            new CompleteMultipartUploadCommand({
-                Bucket: 'posthog-com-cache',
-                Key: 'cache.zip',
-                MultipartUpload: {
-                    Parts: partResults,
-                },
-                UploadId: upload.UploadId,
-            })
-        )
-        console.log('Success', data)
+        const client = createS3Client(options)
+
+        await fetchAndExtract(client, 'cache.zip', '.cache')
+        await fetchAndExtract(client, 'public.zip', 'public')
+    } catch (error) {
+        if (error.name === 'NotFound') {
+            console.warn('No remote cache found - skipping')
+        } else {
+            console.error(error)
+        }
+    }
+}
+
+export const onPostBuild: GatsbyNode['onPostBuild'] = async (_, options: RemoteCacheConfigOptions) => {
+    try {
+        const client = createS3Client(options)
+
+        await uploadDir(client, 'cache.zip', '.cache')
+        await uploadDir(client, 'public.zip', 'public')
     } catch (error) {
         console.error(error)
     }
