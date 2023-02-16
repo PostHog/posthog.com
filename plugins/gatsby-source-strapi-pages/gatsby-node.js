@@ -38,32 +38,36 @@ exports.onCreateNode = async function ({ node, getNode, actions, getCache, cache
             if (file) {
                 const { contributors, lastUpdated } = file
                 if (contributors) {
-                    const contributorsNode = await Promise.all(
-                        contributors.map(async (contributor) => {
-                            const { avatar, url, username } = contributor
-                            const fileNode =
-                                avatar &&
-                                (await createRemoteFileNode({
-                                    url: avatar,
-                                    parentNodeId: node.id,
-                                    createNode,
-                                    cache,
-                                    getCache,
-                                    createNodeId,
-                                    store,
-                                }))
-                            return {
-                                avatar___NODE: fileNode && fileNode.id,
-                                url,
-                                username,
-                            }
+                    try {
+                        const contributorsNode = await Promise.all(
+                            contributors.map(async (contributor) => {
+                                const { avatar, url, username } = contributor
+                                const fileNode =
+                                    avatar &&
+                                    (await createRemoteFileNode({
+                                        url: avatar,
+                                        parentNodeId: node.id,
+                                        createNode,
+                                        cache,
+                                        getCache,
+                                        createNodeId,
+                                        store,
+                                    }))
+                                return {
+                                    avatar___NODE: fileNode && fileNode.id,
+                                    url,
+                                    username,
+                                }
+                            })
+                        )
+                        createNodeField({
+                            node,
+                            name: `contributors`,
+                            value: contributorsNode,
                         })
-                    )
-                    createNodeField({
-                        node,
-                        name: `contributors`,
-                        value: contributorsNode,
-                    })
+                    } catch(error) {
+                        console.error(error)
+                    }
                 }
 
                 createNodeField({
