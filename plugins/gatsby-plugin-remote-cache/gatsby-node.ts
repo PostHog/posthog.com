@@ -20,7 +20,7 @@ type RemoteCacheConfigOptions = {
     secretAccessKey: string
 } & PluginOptions
 
-const CHUNK_SIZE = 50 * 1024 * 1024 // 50MiB
+const CHUNK_SIZE = 30 * 1024 * 1024 // 30MiB
 
 const createS3Client = (options: RemoteCacheConfigOptions) => {
     const { region, endpoint, accessKeyId, secretAccessKey } = options
@@ -133,7 +133,7 @@ export const onPreInit: GatsbyNode['onPreInit'] = async (_, options: RemoteCache
     try {
         const client = createS3Client(options)
 
-        await fetchAndExtract(client, 'node_modules.zip', 'node_modules')
+        // await fetchAndExtract(client, 'node_modules.zip', 'node_modules')
         await fetchAndExtract(client, 'cache.zip', '.cache')
         await fetchAndExtract(client, 'public.zip', 'public')
     } catch (error) {
@@ -149,7 +149,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async (_, options: RemoteC
     try {
         const client = createS3Client(options)
 
-        await uploadDir(client, 'node_modules.zip', 'node_modules')
+        // await uploadDir(client, 'node_modules.zip', 'node_modules')
         await uploadDir(client, 'cache.zip', '.cache')
         await uploadDir(client, 'public.zip', 'public')
     } catch (error) {
