@@ -204,7 +204,7 @@ Check out [our product page](/product) if this sounds interesting to you.
 
 /pitch over
 
-## 💪 Takeaways
+## 👍 Takeaways
 
 Phew, ok, that was lot. Hopefully you know a little more about how churn and retention rate work, interact, and impact your product now.
 
