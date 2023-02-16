@@ -31,7 +31,7 @@ We think this is backwards. Look at the way most teams work on tickets today:
 * Endless requirements gathering
 * Endless handoffs (design/product/engineering/sales/marketing/support)
 
-If we reduce the need for PMs and help engineers go further by themselves, we reduce time lost on the above activities. Moreover, the best engineers usually want to work for companies where they get more autonomy.
+If we reduce the need for PMs and help engineers go further by themselves, we reduce time lost on the above, unproductive activities, and give great engineers the thing they crave most: autonomy.
 
 ## What's the strategy then?
 
