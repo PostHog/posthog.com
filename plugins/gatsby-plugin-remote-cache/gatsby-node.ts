@@ -77,6 +77,7 @@ const fetchAndExtract = async (client: S3Client, bucket: string, key: string, de
         const result = await reader.read()
 
         if (result.done) {
+            stream.end()
             break
         }
 
@@ -84,13 +85,17 @@ const fetchAndExtract = async (client: S3Client, bucket: string, key: string, de
     }
     console.timeEnd('writeArchive')
 
-    console.time('extractArchive')
-    execSync(`tar -xzf archive.tar.gz`)
-    console.timeEnd('extractArchive')
+    return new Promise((resolve, reject) => {
+        stream.on('finish', () => {
+            console.time('extractArchive')
+            execSync(`tar -xzf archive.tar.gz`)
+            console.timeEnd('extractArchive')
 
-    execSync('ls -la')
+            execSync('ls -la')
 
-    fs.rmSync('archive.tar.gz')
+            fs.rmSync('archive.tar.gz')
+        })
+    })
 }
 
 const uploadDir = async (client: S3Client, bucket: string, key: string, source: string) => {
