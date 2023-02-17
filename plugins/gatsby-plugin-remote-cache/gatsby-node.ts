@@ -76,11 +76,11 @@ const fetchAndExtract = async (client: S3Client, bucket: string, key: string, de
     while (true) {
         const result = await reader.read()
 
-        stream.write(result.value)
-
         if (result.done) {
             break
         }
+
+        stream.write(result.value)
     }
     console.timeEnd('writeArchive')
 
