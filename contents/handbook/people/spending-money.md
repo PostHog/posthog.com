@@ -98,7 +98,9 @@ If you do not, then buy yourself one within our set budget. We aren't yet at the
 
 We would expect to spend $250 on a desk, and around the same for a chair. 
 
-If you live in the UK, [Office Resale](https://www.officeresale.co.uk/) offer a range of like-new refurbished designer furniture, which you might find better value than buying something new but of lower quality. 
+If you live in the UK, [Office Resale](https://www.officeresale.co.uk/) offer a range of like-new refurbished designer furniture, which you might find better value than buying something new but of lower quality.
+
+If you wish, you can also switch out the chair for a walking treadmill instead. 
 
 ### Headphones
 
