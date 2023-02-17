@@ -67,11 +67,19 @@ User interviews are critical to understanding how your users are using your prod
 
 To do this, we will use [the user interview app](/apps/user-interviews). It is more complicated to set up, because it uses a feature flag, but this enables customization and control of who sees the prompt to book a user interview. Here’s the process:
 
-1. Create a feature flag. Set up the filters you want, but these can only be user properties, group properties, or cohorts. As a start, we recommend filtering to show only for yourself (your email or ID).
+1. Create a calendar scheduling link with Calendly or your preferred tool. Users go to this link when they get the user interview popup.
+    - You can also set the redirect back to your app and include `?bookedUserInterviewEvent={FEATURE_FLAG_NAME}` in the URL. This enables you to keep track of how many interviews you booked easily.
+2. Create a feature flag and add your calendar link as the payload as shown below. Set up the filters you want, but these can only be user properties, group properties, or cohorts. As a start, we recommend filtering to show only for yourself (your email or ID).
+    - Example feature flag payload:
+
+      ```json
+      {
+          "bookingLink": "https://calendly.com/posthog/30min"
+      }
+      ```
+
     - If you want historical events, create an insight, use it to create a static cohort, then use that static cohort as a filter.
     - You can configure your app to [set user properties](/docs/integrate/client/js#sending-user-information) when users do a specific action, then tie release conditions to those properties.
-2. Create a calendar scheduling link with Calendly or your preferred tool. Users go to this link when they get the user interview popup. 
-    - You can also set the redirect back to your app and include `?bookedUserInterviewEvent={FEATURE_FLAG_NAME}` in the URL. This enables you to keep track of how many interviews you booked easily.
 3. Search for the "User Interview App" in your PostHog instance. Click the blue gear to configure the domains, content, events, and properties. Make sure to include the feature flag key and scheduling link in the "Interview configs" section. Press save when you’re done and toggle the app to enable it.
 
 ![Interview config](../images/tutorials/feedback-interviews-site-apps/interview-config.png)
