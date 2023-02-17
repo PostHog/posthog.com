@@ -81,8 +81,11 @@ const uploadDir = async (client: S3Client, bucket: string, key: string, source: 
     execSync(`tar -czf archive.tar.gz ${sourcePath}`)
     console.timeEnd('compressingArchive')
 
+    console.time('createReadStream')
     const stream = fs.createReadStream('archive.tar.gz', { highWaterMark: CHUNK_SIZE })
+    console.timeEnd('createReadStream')
 
+    console.time('putObject')
     await client.send(
         new PutObjectCommand({
             Bucket: bucket,
@@ -90,8 +93,11 @@ const uploadDir = async (client: S3Client, bucket: string, key: string, source: 
             Body: stream,
         })
     )
+    console.timeEnd('putObject')
 
+    console.time('removeArchive')
     fs.rmSync('archive.tar.gz')
+    console.timeEnd('removeArchive')
 
     /*const upload = await client.send(
         new CreateMultipartUploadCommand({
