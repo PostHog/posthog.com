@@ -43,7 +43,7 @@ const createS3Client = (options: RemoteCacheConfigOptions) => {
 }
 
 const fetchAndExtract = async (client: S3Client, bucket: string, key: string, destination: string) => {
-    const destinationPath = path.join(process.cwd(), destination)
+    const destinationPath = path.resolve(process.cwd(), destination)
 
     await client.send(
         new HeadObjectCommand({
@@ -75,7 +75,7 @@ const fetchAndExtract = async (client: S3Client, bucket: string, key: string, de
 }
 
 const uploadDir = async (client: S3Client, bucket: string, key: string, source: string) => {
-    const sourcePath = path.join(process.cwd(), source)
+    const sourcePath = path.relative(process.cwd(), source)
 
     console.time('compressingArchive')
     execSync(`tar -czf archive.tar.gz ${sourcePath}`)
