@@ -52,6 +52,15 @@ const fetchAndExtract = async (client: S3Client, bucket: string, key: string, de
         })
     )
 
+    if (fs.existsSync(destinationPath)) {
+        fs.rmSync(destinationPath, {
+            recursive: true,
+            force: true,
+        })
+    }
+
+    const stream = fs.createWriteStream('archive.tar.gz')
+
     console.time('fetchData')
     const obj = await client.send(
         new GetObjectCommand({
@@ -61,17 +70,17 @@ const fetchAndExtract = async (client: S3Client, bucket: string, key: string, de
     )
     console.timeEnd('fetchData')
 
-    if (fs.existsSync(destinationPath)) {
-        fs.rmSync(destinationPath, {
-            recursive: true,
-            force: true,
-        })
-    }
+    console.time('writeArchive')
+    stream.write(obj.Body)
+    console.timeEnd('writeArchive')
 
-    const data = await obj.Body.transformToByteArray()
-    const zip = new AdmZip(Buffer.from(data))
+    console.time('extractArchive')
+    execSync(`tar -xzf archive.tar.gz`)
+    console.timeEnd('extractArchive')
 
-    zip.extractAllTo(destinationPath)
+    execSync('ls -la')
+
+    fs.rmSync('archive.tar.gz')
 }
 
 const uploadDir = async (client: S3Client, bucket: string, key: string, source: string) => {
