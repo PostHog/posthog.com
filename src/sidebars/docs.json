@@ -313,32 +313,70 @@
                                 "url": "/docs/runbook/services/clickhouse",
                                 "children": [
                                     {
-                                        "name": "Backup",
-                                        "url": "/docs/runbook/services/clickhouse/backup"
+                                        "name": "ClickHouse Manual",
+                                        "url": "/docs/runbook/services/clickhouse/manual",
+                                        "children": [
+                                            {
+                                                "name": "Backup",
+                                                "url": "/docs/runbook/services/clickhouse/backup"
+                                            },
+                                            {
+                                                "name": "Debug hanging / freezing process",
+                                                "url": "/docs/runbook/services/clickhouse/debug-hanging-freezing-process"
+                                            },
+                                            {
+                                                "name": "Horizontal scaling (Sharding & replication)",
+                                                "url": "/docs/runbook/services/clickhouse/sharding-and-replication"
+                                            },
+                                            {
+                                                "name": "Kafka Engine",
+                                                "url": "/docs/runbook/services/clickhouse/kafka-engine"
+                                            },
+                                            {
+                                                "name": "Resize disk",
+                                                "url": "/docs/runbook/services/clickhouse/resize-disk"
+                                            },
+                                            {
+                                                "name": "Restore",
+                                                "url": "/docs/runbook/services/clickhouse/restore"
+                                            },
+                                            {
+                                                "name": "Vertical scaling",
+                                                "url": "/docs/runbook/services/clickhouse/vertical-scaling"
+                                            }
+                                        ]
                                     },
                                     {
-                                        "name": "Debug hanging / freezing process",
-                                        "url": "/docs/runbook/services/clickhouse/debug-hanging-freezing-process"
+                                        "name": "Performance",
+                                        "url": "/docs/runbook/services/clickhouse/manual",
+                                        "children": [
+                                            {
+                                                "name": "Performance",
+                                                "url": "/docs/runbook/services/clickhouse/performance"
+                                            },
+                                            {
+                                                "name": "Join algorithms",
+                                                "url": "/docs/runbook/services/clickhouse/performance/join-algorithms"
+                                            }
+                                        ]
                                     },
                                     {
-                                        "name": "Horizontal scaling (Sharding & replication)",
-                                        "url": "/docs/runbook/services/clickhouse/sharding-and-replication"
-                                    },
-                                    {
-                                        "name": "Kafka Engine",
-                                        "url": "/docs/runbook/services/clickhouse/kafka-engine"
-                                    },
-                                    {
-                                        "name": "Resize disk",
-                                        "url": "/docs/runbook/services/clickhouse/resize-disk"
-                                    },
-                                    {
-                                        "name": "Restore",
-                                        "url": "/docs/runbook/services/clickhouse/restore"
-                                    },
-                                    {
-                                        "name": "Vertical scaling",
-                                        "url": "/docs/runbook/services/clickhouse/vertical-scaling"
+                                        "name": "Random",
+                                        "url": "/docs/runbook/services/clickhouse/random",
+                                        "children": [
+                                            {
+                                                "name": "Random",
+                                                "url": "/docs/runbook/services/clickhouse/random"
+                                            },
+                                            {
+                                                "name": "Detached materialized views",
+                                                "url": "/docs/runbook/services/clickhouse/random/detached-views"
+                                            },
+                                            {
+                                                "name": "Quantiles",
+                                                "url": "/docs/runbook/services/clickhouse/random/quantiles"
+                                            }
+                                        ]
                                     }
                                 ]
                             },
