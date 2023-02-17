@@ -258,7 +258,47 @@ Body:
 }
 ```
 
-### Example request & response: /decide v2
+### Example request & response: /decide v3
+`/decide` version 3 introduces support for [feature flag payloads](TODO: update link) and ...
+
+### Request
+
+```shell
+curl -v -L --header "Content-Type: application/json" -d '  {
+    "api_key": "<ph_project_api_key>",
+    "distinct_id": "1234",
+    "groups" : {
+        "<groupType>": "<groupKey>"
+    }
+}' https://app.posthog.com/decide?v=3
+```
+
+#### Response
+
+```shell
+{
+  "config": {
+    "enable_collect_everything": true
+  },
+  "editorParams": {},
+  "isAuthenticated": false,
+  "supportedCompression": [
+    "gzip",
+    "lz64"
+  ],
+  "featureFlags": {
+    "my-awesome-flag": true,
+    "my-awesome-flag-2": true,
+    "my-multivariate-flag": "some-string-value"
+  },
+  "featureFlagPayloads": {
+    "my-awesome-flag": "example-payload-string",
+    "my-awesome-flag-2": {"color": "blue", "animal": "hedgehog"}
+  }
+}
+```
+
+### Example request & response: /decide v2 (legacy)
 
 `/decide` version 2 introduces support for [multivariate feature flags](/docs/user-guides/feature-flags#multivariate-feature-flags-alpha) and has a slightly different schema for the response. `posthog-js` version 1.13 and up will use version 2 of the decide endpoint by default.
 
