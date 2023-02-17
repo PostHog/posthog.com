@@ -367,16 +367,22 @@ This command automatically turns any feature flag ending in `_EXPERIMENT` as a m
 
 With PyCharm's built in support for Django, it's fairly easy to setup debugging in the backend. This is especially useful when you want to trace and debug a network request made from the client all the way back to the server. You can set breakpoints and step through code to see exactly what the backend is doing with your request.
 
-1. Setup Django configuration as per JetBrain's [docs](https://blog.jetbrains.com/pycharm/2017/08/develop-django-under-the-debugger/).
-2. Click Edit Configuration to edit the Django Server configuration you just created.
-3. Point PyCharm to the project root (`posthog/`) and settings (`posthog/posthog/settings.py`) file.
-4. Add these environment variables
+### Setup PyCharm
 
-```
-DEBUG=1;
-KAFKA_HOSTS=kafka:9092;
-DATABASE_URL=postgres://posthog:posthog@localhost:5432/posthog
-```
+1. Open the repository folder.
+2. Setup the python interpreter (Settings… > Project: posthog > Python interpreter > Add interpreter): Select "Existing" and set it to `path_to_repo/posthog/env/bin/python`.
+3. Setup Django support (Settings… > Languages & Frameworks > Django):
+   - Django project root: `path_to_repo`
+   - Settings: `posthog/settings/__init__py`
+  
+### Start the debugging environment
+
+1. Instead of manually running `docker compose` you can open the `docker-compose.dev.yml` file and click on the double play icon next to `services`
+2. From the run configurations select:
+   - "PostHog" and click on debug
+   - "Celery" and click on debug (optional)
+   - "Frontend" and click on run
+   - "Plugin server" and click on run
 
 ## Extra: Adding an enterprise license (PostHog employees only)
 
