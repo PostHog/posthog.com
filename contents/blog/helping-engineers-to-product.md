@@ -1,6 +1,6 @@
 ---
-date: 2023-02-16
-title: "Our simpler goal: Helping engineers to be better at product"
+date: 2023-02-17
+title: "Our simpler goal: Help engineers to be better at product"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -49,9 +49,9 @@ Additionally, we can ladder our tools – session recording is used much earlier
 
 Traditionally, as companies scale their data warehouse becomes the source of truth and non-warehouse native tools (like product analytics) become less relevant. By being their core pipeline from connecting their data to their warehouses we can remain sticky for the life of our customers. And by providing this infra, we ensure the data we have remains comprehensive. We will continue pushing back the need for companies to even set up a warehouse in the first place.
 
-## So what's to come this year?
+## What's to come this year?
 
-Right now, we're working on a slicker core experience –  we've got many team members working on reliability, scalability, and data load times. We're adding power features for more technical users, like [HogQL and SQL access](https://github.com/PostHog/meta/issues/81) inside the product. We're also plugging gaps in our product, such as [iOS session recording](https://github.com/PostHog/posthog/issues/12344), [json feature flags](https://github.com/PostHog/posthog/pull/13623), [feature flag resilience](https://github.com/PostHog/posthog/issues/13601) and improved SDK coverage for feature flags. Finally, we're pushing for [PostHog 3000](https://github.com/PostHog/posthog/issues/12923) – a big UI change that will ultimately connect all our tools together better.
+Right now on [our roadmap](/roadmap), we're working on a slicker core experience –  we've got many team members working on reliability, scalability, and data load times. We're adding power features for more technical users, like [HogQL and SQL access](https://github.com/PostHog/meta/issues/81) inside the product. We're also plugging gaps in our product, such as [iOS session recording](https://github.com/PostHog/posthog/issues/12344), [json feature flags](https://github.com/PostHog/posthog/pull/13623), [feature flag resilience](https://github.com/PostHog/posthog/issues/13601) and improved SDK coverage for feature flags. Finally, we're pushing for [PostHog 3000](https://github.com/PostHog/posthog/issues/12923) – a big UI change that will ultimately connect all our tools together better.
 
 Next quarter, we'll be working on our CDP – we want to make that a first class citizen product – like our analytics or session recording. Today, we have 50+ "apps", largely community-driven, that mainly integrate PostHog with other data sources, but we want to add more integrations, deepen their functionality, improve their reliability, and make them more intuitive to use.
 
@@ -65,6 +65,8 @@ It's not all product:
 
 ## I'm excited
 
-Ali, on our board, told us "when you get bigger, you can see around corners". That turns out to be true. Now we've tried a bunch of stuff and achieved product-market fit – we have 23,000+ companies who have installed PostHog, approaching 70,000 developers in the community and $MM revenue – we can clearly see what we need to do. And, seeing the results we've had so far, increases our confidence we can make it all happen.
+Ali, on our board, told us "when you get bigger, you can see around corners". That turns out to be true. 
+
+Now we've tried a bunch of stuff and achieved product-market fit – we have 23,000+ companies who have installed PostHog, approaching 70,000 developers in the community and $MM revenue – we can clearly see what we need to do. And, seeing the results we've had so far, increases our confidence we can make it all happen.
 
 Wish us luck, and feedback (I'm james @ you can guess it . com) is more than welcome!
