@@ -94,6 +94,8 @@ const fetchAndExtract = async (client: S3Client, bucket: string, key: string, de
             execSync('ls -la')
 
             fs.rmSync('archive.tar.gz')
+
+            resolve()
         })
     })
 }
