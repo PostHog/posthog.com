@@ -259,7 +259,7 @@ Body:
 ```
 
 ### Example request & response: /decide v3
-`/decide` version 3 introduces support for [feature flag payloads](TODO: update link) and ...
+`/decide` version 3 introduces support for [feature flag payloads](TODO: update link) and a change in response structure: flags that were evaluated as false are also passed in. Further, this endpoint returns a parameter `errorComputingFlags`, which is true when we didn't manage to compute some flags, because of, say the database being down or some other reason. This allows for making partial updates to currently active flags in your clients.
 
 ### Request
 
@@ -289,7 +289,8 @@ curl -v -L --header "Content-Type: application/json" -d '  {
   "featureFlags": {
     "my-awesome-flag": true,
     "my-awesome-flag-2": true,
-    "my-multivariate-flag": "some-string-value"
+    "my-multivariate-flag": "some-string-value",
+    "flag-thats-not-on": false,
   },
   "featureFlagPayloads": {
     "my-awesome-flag": "example-payload-string",
