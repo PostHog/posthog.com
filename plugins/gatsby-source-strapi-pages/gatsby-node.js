@@ -7,7 +7,7 @@ exports.onPreInit = async function (_, options) {
     if (!strapiURL || !strapiKey) return
     const createStrapiPageNodes = async (limit = 100, page = 1) => {
         const strapiPages = await fetch(
-            `${strapiURL}/api/pages?pagination[pageSize]=${limit}&pagination[page]=${page}`,
+            `${strapiURL}/api/markdown?pagination[pageSize]=${limit}&pagination[page]=${page}`,
             {
                 headers: {
                     Authorization: `Bearer ${strapiKey}`,
@@ -65,7 +65,7 @@ exports.onCreateNode = async function ({ node, getNode, actions, getCache, cache
                             name: `contributors`,
                             value: contributorsNode,
                         })
-                    } catch(error) {
+                    } catch (error) {
                         console.error(error)
                     }
                 }
