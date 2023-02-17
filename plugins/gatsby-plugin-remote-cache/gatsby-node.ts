@@ -72,7 +72,7 @@ const fetchAndExtract = async (client: S3Client, bucket: string, key: string, de
 
     console.time('writeArchive')
     // @ts-ignore
-    obj.Body.transformToWebStream().pipeTo(stream)
+    obj.Body.pipe(stream)
     console.timeEnd('writeArchive')
 
     console.time('extractArchive')
