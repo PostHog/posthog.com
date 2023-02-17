@@ -78,20 +78,20 @@ const uploadDir = async (client: S3Client, bucket: string, key: string, source: 
     const sourcePath = path.join(process.cwd(), source)
 
     console.time('compressingArchive')
-    execSync(`tar -czf ${key}.tar.gz ${sourcePath}`)
+    execSync(`tar -czf archive.tar.gz ${sourcePath}`)
     console.timeEnd('compressingArchive')
 
-    const stream = fs.createReadStream(key + '.tar.gz', { highWaterMark: CHUNK_SIZE })
+    const stream = fs.createReadStream('archive.tar.gz', { highWaterMark: CHUNK_SIZE })
 
     await client.send(
         new PutObjectCommand({
             Bucket: bucket,
-            Key: key + '.tar.gz',
+            Key: key,
             Body: stream,
         })
     )
 
-    fs.rmSync(key + '.tar.gz')
+    fs.rmSync('archive.tar.gz')
 
     /*const upload = await client.send(
         new CreateMultipartUploadCommand({
@@ -161,8 +161,8 @@ export const onPreInit: GatsbyNode['onPreInit'] = async (_, options: RemoteCache
 
         const client = createS3Client(options)
 
-        await fetchAndExtract(client, bucket, `${branch}/cache.zip`, '.cache')
-        await fetchAndExtract(client, bucket, `${branch}/public.zip`, 'public')
+        await fetchAndExtract(client, bucket, `${branch}/cache.tar.gz`, '.cache')
+        await fetchAndExtract(client, bucket, `${branch}/public.tar.gz`, 'public')
     } catch (error) {
         if (error.name === 'NotFound') {
             console.warn('No remote cache found - skipping')
@@ -186,8 +186,8 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async (_, options: RemoteC
 
         const client = createS3Client(options)
 
-        await uploadDir(client, bucket, `${branch}/cache.zip`, '.cache')
-        await uploadDir(client, bucket, `${branch}/public.zip`, 'public')
+        await uploadDir(client, bucket, `${branch}/cache.tar.gz`, '.cache')
+        await uploadDir(client, bucket, `${branch}/public.tar.gz`, 'public')
     } catch (error) {
         console.error(error)
     }
