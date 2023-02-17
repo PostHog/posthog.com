@@ -86,7 +86,7 @@ const uploadDir = async (client: S3Client, bucket: string, key: string, source: 
     await client.send(
         new PutObjectCommand({
             Bucket: bucket,
-            Key: key,
+            Key: key + '.tar.gz',
             Body: stream,
         })
     )
