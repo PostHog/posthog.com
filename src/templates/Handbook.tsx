@@ -193,6 +193,7 @@ export default function Handbook({
     const {
         body,
         frontmatter,
+        ogImage,
         fields: { slug, contributors, appConfig },
     } = post
     const {
@@ -253,14 +254,13 @@ export default function Handbook({
             scroll.scrollMore(-50)
         }
     }, [])
-
     return (
         <>
             <SEO
                 title={`${title} - ${breadcrumbBase.name} - PostHog`}
                 description={description || excerpt}
                 article
-                image={`/og-images/${slug.replace(/\//g, '')}.jpeg`}
+                image={ogImage?.publicURL}
             />
             <Layout>
                 <PostLayout
@@ -363,6 +363,9 @@ export const query = graphql`
             body
         }
         post: mdx(id: { eq: $id }) {
+            ogImage {
+                publicURL
+            }
             id
             body
             excerpt(pruneLength: 150)

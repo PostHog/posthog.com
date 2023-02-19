@@ -118,7 +118,7 @@ const BlogPostSidebar = ({ contributors, date, filePath, title, tags, location, 
 
 export default function BlogPost({ data, pageContext, location }) {
     const { postData } = data
-    const { body, excerpt, fields } = postData
+    const { body, excerpt, fields, ogImage } = postData
     const { date, title, featuredImage, featuredVideo, featuredImageType, contributors, description, tags, category } =
         postData?.frontmatter
     const lastUpdated = postData?.parent?.fields?.gitLogLatestDate
@@ -141,16 +141,7 @@ export default function BlogPost({ data, pageContext, location }) {
 
     return (
         <Layout>
-            <SEO
-                title={title + ' - PostHog'}
-                description={description || excerpt}
-                article
-                image={
-                    featuredImageType === 'full'
-                        ? `/og-images/${fields.slug.replace(/\//g, '')}.jpeg`
-                        : featuredImage?.publicURL
-                }
-            />
+            <SEO title={title + ' - PostHog'} description={description || excerpt} article image={ogImage?.publicURL} />
             <PostLayout
                 stickySidebar
                 title={title}
@@ -199,6 +190,9 @@ export default function BlogPost({ data, pageContext, location }) {
 export const query = graphql`
     query BlogPostLayout($id: String!) {
         postData: mdx(id: { eq: $id }) {
+            ogImage {
+                publicURL
+            }
             id
             body
             excerpt(pruneLength: 150)

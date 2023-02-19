@@ -10,6 +10,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       name: String
       childMdx: Mdx
       ts: Date
+      ogImage: File @link(from: "ogImage___NODE")
     }
     type MdxFields {
       slug: String
@@ -144,6 +145,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       applicationFormDefinition: AshbyJobPostingFormDef
     }
     type AshbyJobPosting implements Node {
+      ogImage: File @link(from: "ogImage___NODE")
       fields: AshbyJobPostingFields
       externalLink: String,
       departmentName: String,

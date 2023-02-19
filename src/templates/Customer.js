@@ -67,18 +67,14 @@ export default function Customer({ data, pageContext: { tableOfContents } }) {
             body,
             excerpt,
             fields,
+            ogImage,
             frontmatter: { title, customer, logo, description, industries, users, toolsUsed, featuredImage },
         },
     } = data
 
     return (
         <>
-            <SEO
-                title={`${title} - PostHog`}
-                description={description || excerpt}
-                article
-                image={`/og-images/${fields.slug.replace(/\//g, '')}.jpeg`}
-            />
+            <SEO title={`${title} - PostHog`} description={description || excerpt} article image={ogImage?.publicURL} />
             <Layout>
                 <PostLayout
                     tableOfContents={tableOfContents}
@@ -134,6 +130,9 @@ export const query = graphql`
             }
         }
         customerData: mdx(id: { eq: $id }) {
+            ogImage {
+                publicURL
+            }
             body
             excerpt(pruneLength: 150)
             fields {

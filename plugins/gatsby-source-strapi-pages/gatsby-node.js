@@ -7,17 +7,20 @@ exports.onPreInit = async function (_, options) {
     if (!strapiURL || !strapiKey) return
     const createStrapiPageNodes = async (limit = 100, page = 1) => {
         const strapiPages = await fetch(
-            `${strapiURL}/api/pages?pagination[pageSize]=${limit}&pagination[page]=${page}`,
+            `${strapiURL}/api/markdowns?populate=*&pagination[pageSize]=${limit}&pagination[page]=${page}`,
             {
                 headers: {
                     Authorization: `Bearer ${strapiKey}`,
                 },
             }
-        ).then((res) => res.json())
+        )
+            .then((res) => res.json())
+            .catch((err) => console.error(err))
         const { data, meta } = strapiPages
         if (data) {
             data.forEach(({ id, attributes }) => {
-                files[attributes.path] = { contributors: attributes.contributors, lastUpdated: attributes.lastUpdated }
+                const { contributors, lastUpdated, ogImage } = attributes
+                files[attributes.path] = { contributors, lastUpdated, ogImage: ogImage?.data?.attributes?.url }
             })
         }
         if (meta?.pagination?.pageCount > page) {
@@ -28,7 +31,10 @@ exports.onPreInit = async function (_, options) {
     await createStrapiPageNodes()
 }
 
-exports.onCreateNode = async function ({ node, getNode, actions, getCache, cache, store, createNodeId }) {
+exports.onCreateNode = async function (
+    { node, getNode, actions, getCache, cache, store, createNodeId },
+    { strapiURL }
+) {
     const { createNodeField, createNode } = actions
     //Create GitHub contributor nodes for handbook & docs
     if (node.internal.type === `MarkdownRemark` || node.internal.type === 'Mdx') {
@@ -36,7 +42,22 @@ exports.onCreateNode = async function ({ node, getNode, actions, getCache, cache
         if (parent.internal.type === 'File') {
             const file = files[`contents/${parent.relativePath}`]
             if (file) {
-                const { contributors, lastUpdated } = file
+                const { contributors, lastUpdated, ogImage } = file
+                if (ogImage) {
+                    const url = `${strapiURL}${ogImage}`
+                    const image = await createRemoteFileNode({
+                        url,
+                        parentNodeId: node.id,
+                        createNode,
+                        cache,
+                        getCache,
+                        createNodeId,
+                        store,
+                    }).catch((err) => console.error(err))
+                    if (image) {
+                        node.ogImage___NODE = image.id
+                    }
+                }
                 if (contributors) {
                     try {
                         const contributorsNode = await Promise.all(
@@ -52,7 +73,7 @@ exports.onCreateNode = async function ({ node, getNode, actions, getCache, cache
                                         getCache,
                                         createNodeId,
                                         store,
-                                    }))
+                                    }).catch((err) => console.error(err)))
                                 return {
                                     avatar___NODE: fileNode && fileNode.id,
                                     url,
@@ -65,7 +86,7 @@ exports.onCreateNode = async function ({ node, getNode, actions, getCache, cache
                             name: `contributors`,
                             value: contributorsNode,
                         })
-                    } catch(error) {
+                    } catch (error) {
                         console.error(error)
                     }
                 }

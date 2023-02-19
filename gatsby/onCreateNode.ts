@@ -22,6 +22,7 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
     store,
     cache,
     createNodeId,
+    getCache,
 }) => {
     const { createNodeField, createNode } = actions
 
@@ -159,6 +160,34 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
     if (node.internal.type === 'AshbyJobPosting') {
         const title = node.title.replace(' (Remote)', '')
         const slug = `/careers/${slugify(title, { lower: true })}`
+        if (process.env.STRAPI_URL) {
+            const {
+                data: [strapiJobPosting],
+            } = await fetch(`${process.env.STRAPI_URL}/api/jobs?populate=*&filters[ashbyID][$eq]=${node.id}`, {
+                headers: {
+                    Authorization: `Bearer ${process.env.STRAPI_API_KEY}`,
+                },
+            }).then((res) => res.json())
+            if (strapiJobPosting) {
+                const ogImage = strapiJobPosting?.attributes?.ogImage?.data?.attributes?.url
+                if (ogImage) {
+                    const url = `${process.env.STRAPI_URL}${ogImage}`
+                    const image = await createRemoteFileNode({
+                        url,
+                        parentNodeId: node.id,
+                        createNode,
+                        cache,
+                        getCache,
+                        createNodeId,
+                        store,
+                    })
+                    if (image) {
+                        node.ogImage___NODE = image.id
+                    }
+                }
+            }
+        }
+
         createNodeField({
             node,
             name: `title`,

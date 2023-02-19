@@ -73,7 +73,7 @@ const TutorialSidebar = ({ contributors, location, title, categories }) => {
 
 export default function Tutorial({ data, pageContext: { tableOfContents, menu }, location }) {
     const { pageData } = data
-    const { body, excerpt, fields } = pageData
+    const { body, excerpt, fields, ogImage } = pageData
     const { title, featuredImage, description, contributors, categories, featuredVideo, date } = pageData?.frontmatter
     const components = {
         inlineCode: InlineCode,
@@ -102,12 +102,7 @@ export default function Tutorial({ data, pageContext: { tableOfContents, menu },
 
     return (
         <Layout>
-            <SEO
-                title={title + ' - PostHog'}
-                description={description || excerpt}
-                article
-                image={`/og-images/${fields.slug.replace(/\//g, '')}.jpeg`}
-            />
+            <SEO title={title + ' - PostHog'} description={description || excerpt} article image={ogImage?.publicURL} />
             <PostLayout
                 questions={<CommunityQuestions />}
                 body={body}
@@ -158,6 +153,9 @@ export default function Tutorial({ data, pageContext: { tableOfContents, menu },
 export const query = graphql`
     query TutorialLayout($id: String!) {
         pageData: mdx(id: { eq: $id }) {
+            ogImage {
+                publicURL
+            }
             body
             excerpt(pruneLength: 150)
             fields {
