@@ -1,5 +1,5 @@
 ---
-date: 2023-02-20
+date: 2023-02-24
 title: "What’s new in PostHog?"
 rootPage: /blog
 sidebar: Blog
