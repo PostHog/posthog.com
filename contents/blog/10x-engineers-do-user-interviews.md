@@ -15,7 +15,7 @@ tags:
   - Product engineers
 ---
 
-When it comes to becoming a 10x engineer, most people think about writing more code, buying more monitors, or using the latest framework where everything is a macro. But, in reality, leverage comes from choosing the right problem, building the right solution, and using the right tools. This can only happen when you have a deep understanding of your users. It's the only way to build something that people want.
+When it comes to becoming a 10x engineer, most people think about improving their typing speed, buying more monitors, or using the latest framework where everything is a macro. But, in reality, leverage comes from choosing the right problem, building the right solution, and using the right tools. This can only happen when you have a deep understanding of your users. It's the only way to build something that people want.
 
 ## Velocity vs. Speed
 
