@@ -68,7 +68,7 @@ Example questions:
 
 **Recommendation:** Read "The Mom Test" by Rob Fitzpatrick. It's a fantastic primer on problem exploration.
 
-### **Solution validation: 
+### 2. Solution validation 
 
 You’ve identified the hair-on-fire problem and understand it well. Now you’re validating whether your solution actually solves it. Focus on presenting the user with quick prototypes.
 
@@ -79,7 +79,7 @@ Example activities:
 
 - Create a mock-up and see if the user will commit to paying some amount if you build it
 
-*Recommendation:* The book "Don’t make me think" is great for usability testing.
+**Recommendation:** The book "Don’t make me think" is great for usability testing.
 
 ## Beware solution ideas from users, reframe them as problems
 
