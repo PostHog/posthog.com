@@ -23,13 +23,17 @@ So, where does the next 8.5x come from? By zooming out and solving for user impa
 
 Your users are real people. They have problems to overcome. They work in a team. They have hopes and dreams. But if the only information that you get is the ticket "Add a button to this page" you miss all that context. And you miss the opportunity to build a significantly better product.
 
-Let's discuss an example from PostHog: we were getting requests for setting currency symbols on charts. We could have added the most common currency symbols to the chart and called it done.
+Let's discuss an example from PostHog: we were getting requests from users for a better "person" page - showing the events for that user in a timeline.
 
-But we decided to dig deeper and speak to our users. Why did they want currency symbols on their charts in PostHog? What was the problem?
+Karl, an engineer on the team, could have put the events in a simple timeline and called it done. But decided to dig deeper and speak to our users. Why did they want the timeline? What was the problem that they were trying to solve?
 
-We learned that if a teammate created the chart it was often unclear what the axes of charts referred. This affected charts containing revenue but also other types of data such as app response times measured in milliseconds. We reframed the problem to support custom prefixes and postfixes and built it within a day. And compared to the original problem definition we solved the long-tail of use cases that we'd otherwise have to add incrementally.
+He learned that there were two main use cases: First, understanding how individual users are interacting with the product at key stages — like using a new feature. Second, for debugging. Users would get a support request from a user and want to know what they did that caused the bug. He realized it's almost impossible to understand what the user did well enough to reproduce it from the event list alone.
 
-![Custom Prefix](../images/blog/10x-engineers-do-user-interviews/custom-prefix.png)
+Karl had used session recording products before. The recordings are much more useful, but with the existing tools it was almost impossible to find sessions with specific behavior. Because he knew the details of our product analytics he realized you filter the recordings by the product analytics data. Enabling you to go from high-level trends to viewing the exact sessions that caused them.
+
+One hackathon later, we had a prototype. Session recording is now a core part of our product and a key driver in our strategy shift from a product analytics tool to a product operating-system.
+
+![Session recording](../images/blog/10x-engineers-do-user-interviews/session-recording.gif)
 
 ### Solving the information bottleneck: direct user-engineering interaction
 
