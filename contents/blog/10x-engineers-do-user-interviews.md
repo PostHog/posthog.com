@@ -29,7 +29,7 @@ Karl, an engineer on the team, could have put the events in a simple timeline an
 
 He learned that there were two main use cases: First, understanding how individual users are interacting with the product at key stages — like using a new feature. Second, for debugging. Users would get a support request from a user and want to know what they did that caused the bug. He realized it's almost impossible to understand what the user did well enough to reproduce it from the event list alone.
 
-Karl had used session recording products before. The recordings are much more useful, but with the existing tools it was almost impossible to find sessions with specific behavior. Because he knew the details of our product analytics he realized you filter the recordings by the product analytics data. Enabling you to go from high-level trends to viewing the exact sessions that caused them.
+Karl had used session recording products before. Recordings are much better for understanding individual user behavior and debugging, but with the existing tools it was almost impossible to find sessions with specific behavior. Because he knew the details of our product analytics he realized you filter the recordings by the product analytics data. Enabling you to go from high-level trends to viewing the exact sessions that caused them.
 
 One hackathon later, we had a prototype. Session recording is now a core part of our product and a key driver in our strategy shift from a product analytics tool to a product operating-system.
 
