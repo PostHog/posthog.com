@@ -20,13 +20,13 @@ In this tutorial, we will:
 
 ## Creating our Next.js app
 
-First, [install Node](https://nodejs.dev/en/learn/how-to-install-nodejs/) and then run:
+First, [install Node](https://nodejs.dev/en/learn/how-to-install-nodejs/) (14.6.0 or newer) and then run:
 
 ```bash
 npx create-next-app@latest
 ```
 
-Name your app and select the defaults for everything (this tutorial won’t use TypeScript though). Once installed and created, go into the new folder (mine is `tutorial`) and start the server:
+Press "y" to install `create-next-app` if needed, name your app (I choose `tutorial`), select "No" for using TypeScript, then press enter to select the defaults for the rest. Once installed and created, go into the new folder with the app name you chose (mine is `tutorial`) and start the server:
 
 ```bash
 cd tutorial
@@ -39,12 +39,12 @@ At your [localhost](http://localhost:3000/), you should see a basic webpage like
 
 ## Adding blog functionality to our Next.js app
 
-The structure of our blog is:
+The structure of our blog will be:
 
 - An index home page showing all the blog posts.
 - Detail pages for each of the posts
 
-The blog posts are a static JSON file that we can fetch. To do this, create a `blog.json` file and add the details of your blog. We need an `id`, `title`, `content`, and `author`. You can customize or add details to this if you want.
+The blog posts are a static JSON file that we can fetch. To do this, create a `blog.json` file in the main app (`tutorial`) folder and add the details of your blog. We need an `id`, `title`, `content`, and `author`. You can customize or add details to this if you want.
 
 ```json
 {
@@ -65,9 +65,10 @@ The blog posts are a static JSON file that we can fetch. To do this, create a `b
 }
 ```
 
-Next, remove all the boilerplate in the `index.js` file and all the CSS in the `styles` folder. In `index.js`, use the `getStaticProps()` method to get the posts from the `blog.json` file, then use `map()` to loop through, show details, and link to them. Like this:
+Next, remove all the existing code in the `page/index.js` file and all the CSS in the `styles` folder. In `pages/index.js`, use the `getStaticProps()` method that automatically Next.js provides to get the posts from the `blog.json` file, then use `map()` to loop through, show details, and link to them. Like this:
 
 ```js
+// pages/index.js
 import Head from 'next/head'
 import Link from 'next/link'
 
@@ -120,6 +121,7 @@ Our `[id].js` is similar to our `index.js` file, but we want individual blog pos
 Like this:
 
 ```js
+// pages/posts/[id].js
 export default function Post({ post }) {
   return (
     <div>
@@ -159,7 +161,9 @@ Going back to our app, clicking on the links now brings us to a page that looks 
 
 ## Adding authentication
 
-Next, we want to add user authentication with a basic login and logout. Luckily, [NextAuth](https://next-auth.js.org/) makes it easy to set up authentication with a provider like GitHub. First, install `next-auth`
+Next, we want to add user authentication with a basic login and logout. This provides us information on users so we can identify and connect events to them with PostHog later. 
+
+[NextAuth](https://next-auth.js.org/) makes it easy to set up authentication with a provider like GitHub. To do so, first, install `next-auth`:
 
 ```bash
 npm i next-auth
@@ -168,6 +172,7 @@ npm i next-auth
 Next, create an API route for `next-auth` to use. To do this, in our `pages/api` folder, create a folder named `auth`, then a file named `[...nextauth].js` inside it. Inside the file, set up the GitHub provider like this:
 
 ```js
+// pages/api/auth/[...nextauth].js
 import NextAuth from "next-auth"
 import GithubProvider from "next-auth/providers/github"
 
@@ -182,11 +187,11 @@ export default NextAuth({
 })
 ```
 
-Next, get these details from GitHub by going to [developer settings](https://github.com/settings/developers). Create a new OAuth app and get the client ID and client secret.
+Next, get these details from GitHub by going to [developer settings](https://github.com/settings/developers). Create a new OAuth app and get the client ID and client secret. Set the homepage URL to `http://localhost:3000` and the authorization callback URL to `http://localhost:3000/api/auth/callback/github`.
 
 ![GitHub](../images/tutorials/nextjs-analytics/github.png)
 
-With these, create a `.env.local` file and include the `NEXTAUTH_URL` ([`http://localhost:3000/`](http://localhost:3000/) for now) and a `NEXTAUTH_SECRET` (which you can generate on [this site](https://generate-secret.vercel.app/32) or by creating a random 32-character string).
+With these, create a `.env.local` file in the main app (`tutorial`) folder and include the `NEXTAUTH_URL` ([`http://localhost:3000/`](http://localhost:3000/) for now) and a `NEXTAUTH_SECRET` (which you can generate on [this site](https://generate-secret.vercel.app/32) or by creating a random 32-character string).
 
 ```bash
 GITHUB_ID=<github_client_id>
@@ -201,6 +206,7 @@ NEXTAUTH_SECRET=<random_32_character_string>
 With NextAuth and GitHub set up, we now have the infrastructure to authenticate users. Now we can implement user sessions to let them log in and out as well as get their details. The first step to doing this is adding a `SessionProvider` from `next-auth` to `_app.js` like this:
 
 ```js
+// pages/_app.js
 import { SessionProvider } from "next-auth/react"
 
 export default function App(
@@ -219,6 +225,7 @@ Next, add the session details, and the ability to sign in and out to our `index.
 If there is a session, show details about the user and a button to sign out. If there isn’t a session, show a button to sign in. Together, it looks like this:
 
 ```js
+// pages/index.js
 import Head from 'next/head'
 import Link from 'next/link'
 import { useSession, signIn, signOut } from "next-auth/react";
@@ -266,9 +273,12 @@ Once this is working, we have all the functionality we want in our Next.js app a
 
 ## Adding PostHog
 
-At this point, you need a PostHog instance. We use the [script snippet](/docs/integrate?tab=snippet) from PostHog which is found in getting started or your project settings. Load it in `_app.js` using `next/script`:
+At this point, you need a PostHog instance ([signup for free](https://app.posthog.com/signup)). Once created, get your [JavaScript script snippet](/docs/integrate?tab=snippet) which is found in the getting started flow or your project settings. 
+
+Copy the snippet (minus the `<script>` tags) and go to `pages/_app.js`. Import the Next.js `<Script>` component from `next/script`, then paste your snippet in the `dangerouslySetInnerHTML` property of the `<Script>` component. You can also just copy the code below and change the details of the `posthog.init` line (`project_api_key` and `api_host`) with your own.
 
 ```js
+// pages/_app.js
 import { SessionProvider } from "next-auth/react"
 import Script from "next/script"
 
@@ -306,6 +316,7 @@ When testing PostHog, you might notice pageview events aren’t captured when yo
 To solve this, we can capture a custom event when the route changes using `next/router` in `_app.js` with `useEffect`. It looks like this:
 
 ```js
+// pages/_app.js
 import { SessionProvider } from "next-auth/react"
 import Script from "next/script"
 import { useRouter } from "next/router"
@@ -339,6 +350,7 @@ You can use the same `posthog.capture` call to capture custom events in your oth
 For example, in `posts/[id].js` we can add a "like" button that includes the article details as properties. To do this, create a button and connect it to a function that captures a `post liked` event with the post title and author. This looks like this:
 
 ```js
+// pages/posts/[id].js
 export default function Post({ post }) {
   
   function likePost() {
@@ -380,6 +392,7 @@ To connect anonymous user IDs with logged in user IDs, use an `identify` call wi
 Once we implement these changes, our `index.js` file now looks like this:
 
 ```js
+// pages/index.js
 import Head from 'next/head'
 import Link from 'next/link'
 import { useSession, signIn, signOut } from "next-auth/react";
@@ -431,6 +444,7 @@ Because of how identification in PostHog works, logging out in our app does not 
 To set this up, we do something similar to what we did with user identification. We redirect to a URL with a `signedIn=False` param and then call reset if that param exists. This looks like this:
 
 ```js
+// pages/index.js
 //...
 const router = useRouter()
 const signedIn = router.query.signedIn
@@ -499,6 +513,7 @@ To make sure PostHog is loaded, we create a global state for it and provide that
 In `_app.js`, create a `PostHogStateContext`, then set up the state in our app function, and wrap our main app in a provider for that context.
 
 ```js
+// pages/_app.js
 import { SessionProvider } from "next-auth/react"
 import Script from "next/script"
 import { useRouter } from "next/router"
@@ -545,6 +560,7 @@ In our `posts/[id].js` file, we must:
 Like this:
 
 ```js
+// pages/posts/[id].js
 import { PostHogStateContext } from '../_app'
 import { useContext, useEffect, useState } from 'react'
  
@@ -607,6 +623,7 @@ Then, rewrite our post component to use `getServerSideProps` and evaluate featur
 This looks like this:
 
 ```js
+// pages/posts/[id].js
 import {PostHogStateContext} from '../_app'
 import { useContext, useEffect, useState } from 'react'
 import { getServerSession } from "next-auth/next"
