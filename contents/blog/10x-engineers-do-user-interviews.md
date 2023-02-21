@@ -17,7 +17,7 @@ tags:
 
 To become a 10x engineer, most people think about improving their typing speed, buying more monitors, or using the latest framework where everything is a macro. These hacks focus on speeding up the time from an idea to a rolled-out implementation. You'll get a 1.5x boost at most.
 
-Where you can truly get 10x results is by zooming out and solving for user impact. Here, leverage comes from choosing the right problem, building the right solution, and using the right tools. This can only happen by deeply understanding your users so can focus on their "hair-on-fire" problems and build solutions that are intuitive and effective. The best way to do this? Speak directly to your users.
+Where you can truly get 10x results is by zooming out and solving for user impact. Here, leverage comes from choosing the right problem, building the right solution, and using the right tools. This can only happen by deeply understanding your users. Enabling you to focus on their "hair-on-fire" problems and build solutions that are intuitive and effective. The best way to do this? Speak directly to your users.
 
 ## Tickets are highly lossy
 
