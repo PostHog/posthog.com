@@ -23,7 +23,7 @@ Where you can truly get 10x results is by zooming out and solving for user impac
 
 Your users are real people. They have problems to overcome. They work in a team. They have hopes and dreams. But if the only information that you get is the ticket "Add a button to this page" you miss all that context. And you miss the opportunity to build a significantly better product.
 
-Let's discuss an example from PostHog: we were getting requests for handling revenue in PostHog. If taken at face value, we might work on "Adding revenue support to PostHog" - and have added a custom database field and display support for the common currencies.
+Let's discuss an example from PostHog: we were getting requests for handling revenue in PostHog. If taken at face value, we might work on "Adding revenue support to PostHog" - and have added a custom database field and display options for the common currencies.
 
 Instead, we went deeper - asking them why did they want revenue data in PostHog? We learned that if a teammate created the chart it was often unclear what the axes of charts was referring to. This affected charts containing revenue data but also other types of data such as app response times measured in milliseconds. We refined the problem to support custom prefixes and postfixes and built it within a day. And compared to the original problem definition we improved support for much more than just revenue data.
 
