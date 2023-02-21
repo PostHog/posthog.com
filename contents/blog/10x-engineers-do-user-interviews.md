@@ -15,9 +15,9 @@ tags:
   - Product engineers
 ---
 
-To become a 10x engineer, most people think about improving their typing speed, buying more monitors, or using the latest framework where everything is a macro. These hacks focus on speeding up the time from an idea to a rolled-out implementation. You'll get a 1.5x boost at most.
+Most people think becoming a 10x engineer means improving their typing speed, buying more monitors, or using the latest framework where everything is a macro. These hacks might speed up the time from an idea to a rolled-out implementation, but you'll get a 1.5x boost at most.
 
-Where you can truly get 10x results is by zooming out and solving for user impact. Here, leverage comes from choosing the right problem, building the right solution, and using the right tools. This can only happen by deeply understanding your users. Enabling you to focus on their "hair-on-fire" problems and build solutions that are intuitive and effective. The best way to do this? Speak directly to your users.
+So, where does the next 8.5x come from? By zooming out and solving for user impact. You, as an engineer, need to deeply understand (and care) about your users. In doing so, you'll generate true leverage by choosing the right problem, building the right solution, and solving their "hair-on-fire" problems. The best way to do this? Speak directly to them.
 
 ## Tickets are highly lossy
 
@@ -31,15 +31,19 @@ Instead, we went deeper - asking them why did they want revenue data in PostHog?
 
 ### Solving the information bottleneck: direct user-engineering interaction
 
+In traditional tech companies, information flows from the user to the product manager (PM) by an interview, and then from the PM to the engineer through a bunch of tickets:
+
 ![PM to engineer](../images/blog/10x-engineers-do-user-interviews/pm-to-engineer.png)
+
+At each stage, important context is lost. Information flows one way, so you can’t go deeper on the important areas, and engineers lose agency in what they're building and why. In such an environment, speed is the only logical optimization.
+
+Here's what that looks like when engineers talk directly to users:
 
 ![Direct user-Engineer Interaction](../images/blog/10x-engineers-do-user-interviews/direct-interaction.png)
 
-Traditionally, information flows from the user to the product manager (PM) by an interview and then from the PM to the engineer through a bunch of tickets. At each stage, important context is lost. It’s one way, so you can’t go deeper on the important areas.
+Information moves quickly and in both directions, boosting the signal. By increasing the signal you can quickly cut scope, realize you’re tackling the wrong problem, or come up with a more elegant solution – something engineers can do most effectively because they have the background on the existing architecture and components. 
 
-Direct two-way interaction gives you this context. By significantly increasing the signal you can quickly cut scope, realize you’re tackling the wrong problem, or come up with a more elegant solution.
-
-And it's the engineers who can most effectively cut scope and reframe solutions, as they have the background on the existing architecture and components. PM interviews are still useful to highlight important problem areas and bring in additional context. But they are not a replacement.
+Companies still need product managers (I'm the Head of Product at PostHog after all 😅), but we ship faster and better because our engineers are actively engaged in user research. And, consequently, our product team has more time to think big and add clarity to [our broader vision](/blog/helping-engineers-to-product). 
 
 ## Booking user interviews: Defining segments and automating the process
 
