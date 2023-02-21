@@ -21,7 +21,7 @@ Where you can truly get 10x results is by zooming out and solving for user impac
 
 ## Tickets are highly lossy
 
-Your users are real people. They have problems to overcome. They work in a team. They have hopes and dreams. But if all that gets to you is the ticket "Add a button to this page" you miss that context. And you miss the opportunity to build a significantly better product.
+Your users are real people. They have problems to overcome. They work in a team. They have hopes and dreams. But if the only information that you get is the ticket "Add a button to this page" you miss all that context. And you miss the opportunity to build a significantly better product.
 
 Let's discuss an example from PostHog: we were getting requests for handling revenue in PostHog. If taken at face value, we might work on "Adding revenue support to PostHog" - and have added a custom database field and display support for the common currencies.
 
