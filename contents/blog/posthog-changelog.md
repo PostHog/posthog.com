@@ -15,7 +15,7 @@ featuredImageType: full
 
 Interested about what new features, fixes and updates have just launched on PostHog Cloud? Every Friday we update this page with a look back over the last seven days, so you can get a fresh look at what’s launched and launching right now. We also feature notable additions to the blog and docs. 
 
-> Some new features you read about below may still be in beta, behind a feature flag. Want to see which betas are currently available? [Check the roadmap](/roadmap)!
+> Some new features you read about below may still be in beta, behind a feature flag, or only available to paying users. Want to see which betas are currently available? [Check the roadmap](/roadmap)!
 
 ## February 24, 2023
 
