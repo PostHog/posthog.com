@@ -125,7 +125,7 @@ Here's an email Paul sent 3 hours after a customer interview with 3 PRs shipped 
 
 Across PostHog’s engineering teams we see the benefits of engineers speaking directly to users: more important problems being solved and better products being shipped. But chances are you won’t actually believe me until you’ve done a few interviews yourself and realized what someone wrote on a ticket is completely different from reality.
 
-So here’s the challenge: **book your first user interview this week next time you’re on your computer**. *Add a reminder on your phone now*
+So here’s the challenge: **book your first user interview this week next time you’re on the computer**. *Add a reminder on your phone now*
 
 It will take less than 15 minutes to set up. How? Create a Calendly link and connect it to your Google Meet and Google Calendar. Grab a list of 30-50 customer emails and send out the following message via bcc:
 
