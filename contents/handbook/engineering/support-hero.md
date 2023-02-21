@@ -140,7 +140,7 @@ From time to time, customers will request to get their apps added to PostHog Clo
 
 1. Open a PR against our forked version of the plugin with the new changes (syncing from the main repo).
 2. Verify the code changes are sane and merge the PR.
-3. Update the app in our internal Cloud instance on the [Apps page](https://app.posthog.com/project/apps?tab=installed). 
+3. Update the app in our Cloud instances via the `Browse Apps` page, both on [prod-eu](https://eu.posthog.com/project/apps?tab=installed) and [prod-us](https://app.posthog.com/project/apps?tab=installed). You need instance staff permissions to do this.
 
 ### Zendesk
 
