@@ -24,8 +24,8 @@ export default function Blog() {
     } = useStaticQuery(query)
 
     const {
-        fields: { slug },
-        frontmatter: { featuredImage, date, title },
+        fields: { slug, featuredImage },
+        frontmatter: { date, title },
     } = blogPosts.nodes[0]
 
     const image = getImage(featuredImage)
@@ -54,6 +54,7 @@ export default function Blog() {
                     >
                         {image && (
                             <GatsbyImage
+                                style={{ maxWidth: 250 }}
                                 alt="Blog featured image"
                                 image={image}
                                 className="rounded-sm pointer-events-none"
@@ -122,17 +123,14 @@ const query = graphql`
                 id
                 fields {
                     slug
+                    featuredImage {
+                        ...ImageFragment
+                    }
                 }
                 frontmatter {
                     category
                     date(formatString: "MMMM DD, YYYY")
                     title
-                    featuredImage {
-                        id
-                        childImageSharp {
-                            gatsbyImageData(width: 350)
-                        }
-                    }
                 }
             }
         }

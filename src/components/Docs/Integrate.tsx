@@ -7,12 +7,13 @@ import XIcon from '../../images/x.svg'
 type LibraryNode = {
     fields: {
         slug: string
-    }
-    frontmatter: {
-        title: string
         icon: {
             publicURL: string
         }
+    }
+    frontmatter: {
+        title: string
+
         features: LibraryFeatures | null
     }
 }
@@ -20,12 +21,12 @@ type LibraryNode = {
 type FrameworkNode = {
     fields: {
         slug: string
-    }
-    frontmatter: {
-        title: string
         icon: {
             publicURL: string
         }
+    }
+    frontmatter: {
+        title: string
     }
 }
 
@@ -57,7 +58,7 @@ const IntegrateOption = (props: LibraryNode | FrameworkNode) => (
     >
         <div className="px-4 !py-3 flex items-center relative rounded hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark active:top-[0.5px] active:scale-[.99]">
             <span className="w-8 h-8 rounded flex items-center justify-center mr-1.5">
-                <img src={props.frontmatter.icon?.publicURL} className="w-6 h-6" />
+                <img src={props.fields.icon?.publicURL} className="w-6 h-6" />
             </span>
             <h4 className="!text-base font-semibold !m-0 p-0 whitespace-nowrap">{props.frontmatter.title}</h4>
         </div>
@@ -131,24 +132,25 @@ const query = graphql`
     fragment framework on Mdx {
         fields {
             slug
-        }
-        frontmatter {
-            title
             icon {
                 publicURL
             }
+        }
+        frontmatter {
+            title
         }
     }
 
     fragment sdk on Mdx {
         fields {
             slug
-        }
-        frontmatter {
-            title
             icon {
                 publicURL
             }
+        }
+        frontmatter {
+            title
+
             features {
                 eventCapture
                 userIdentification

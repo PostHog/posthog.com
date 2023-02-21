@@ -95,11 +95,6 @@ export const query = graphql`
             frontmatter {
                 title
                 description
-                featuredImage {
-                    childImageSharp {
-                        gatsbyImageData
-                    }
-                }
             }
         }
         documentation: mdx(fields: { slug: { eq: $documentation } }) {

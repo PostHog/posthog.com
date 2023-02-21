@@ -66,6 +66,7 @@ module.exports = {
             options: {
                 name: `contents`,
                 path: `${__dirname}/contents`,
+                ignore: ['**/**/*.{jpg,jpeg,png,svg,gif}'],
             },
         },
         {
@@ -345,8 +346,8 @@ module.exports = {
 
                             let allMdxs = allMdx.edges.map((edge) => {
                                 let { node } = edge
-                                let { frontmatter, excerpt, slug, id, body } = node
-                                let { date, title, authors, featuredImage } = frontmatter
+                                let { frontmatter, excerpt, slug, id, body, fields } = node
+                                let { date, title, authors } = frontmatter
                                 return {
                                     description: excerpt,
                                     date,
@@ -356,7 +357,9 @@ module.exports = {
                                     author: authors && authors[0].name,
                                     custom_elements: [{ 'content:encoded': body }],
                                     enclosure: {
-                                        url: featuredImage ? `${siteUrl}${featuredImage.publicURL}` : null,
+                                        url: fields?.featuredImage
+                                            ? `${siteUrl}${fields?.featuredImage.publicURL}`
+                                            : null,
                                     },
                                 }
                             })
@@ -374,13 +377,16 @@ module.exports = {
                                   id
                                   slug
                                   body
+                                  fields {
+                                    featuredImage {
+                                        publicURL
+                                      }
+                                  }
                                   excerpt(pruneLength: 150)
                                   frontmatter {
                                     date(formatString: "MMMM DD, YYYY")
                                     title
-                                    featuredImage {
-                                      publicURL
-                                    }
+                                    
                                     authors: authorData {
                                         handle
                                         name

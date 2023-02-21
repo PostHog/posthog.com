@@ -194,20 +194,10 @@ export default function Handbook({
         body,
         frontmatter,
         ogImage,
-        fields: { slug, contributors, appConfig },
+        fields: { slug, contributors, appConfig, thumbnail },
     } = post
-    const {
-        title,
-        hideAnchor,
-        description,
-        hideLastUpdated,
-        features,
-        github,
-        availability,
-        installUrl,
-        thumbnail,
-        related,
-    } = frontmatter
+    const { title, hideAnchor, description, hideLastUpdated, features, github, availability, installUrl, related } =
+        frontmatter
     const { parent, excerpt } = post
     const lastUpdated = parent?.fields?.gitLogLatestDate
     const showToc = !hideAnchor && tableOfContents?.length > 0
@@ -254,6 +244,7 @@ export default function Handbook({
             scroll.scrollMore(-50)
         }
     }, [])
+    console.log(thumbnail)
     return (
         <>
             <SEO
@@ -371,6 +362,23 @@ export const query = graphql`
             excerpt(pruneLength: 150)
             fields {
                 slug
+                thumbnail {
+                    layout
+                    width
+                    height
+                    images {
+                        fallback {
+                            src
+                            srcSet
+                            sizes
+                        }
+                        sources {
+                            srcSet
+                            sizes
+                            type
+                        }
+                    }
+                }
                 appConfig {
                     key
                     name
@@ -385,11 +393,7 @@ export const query = graphql`
                     teamData {
                         name
                     }
-                    avatar {
-                        childImageSharp {
-                            gatsbyImageData(width: 38, height: 38)
-                        }
-                    }
+                    avatar
                 }
             }
             frontmatter {
@@ -411,11 +415,6 @@ export const query = graphql`
                     selfServe
                     enterprise
                 }
-                thumbnail {
-                    childImageSharp {
-                        gatsbyImageData(placeholder: NONE, width: 36)
-                    }
-                }
                 related {
                     childMdx {
                         fields {
@@ -427,9 +426,6 @@ export const query = graphql`
                     }
                 }
                 installUrl
-                featuredImage {
-                    publicURL
-                }
             }
             parent {
                 ... on File {

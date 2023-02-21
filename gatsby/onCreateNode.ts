@@ -161,14 +161,16 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
         const title = node.title.replace(' (Remote)', '')
         const slug = `/careers/${slugify(title, { lower: true })}`
         if (process.env.STRAPI_URL) {
-            const {
-                data: [strapiJobPosting],
-            } = await fetch(`${process.env.STRAPI_URL}/api/jobs?populate=*&filters[ashbyID][$eq]=${node.id}`, {
-                headers: {
-                    Authorization: `Bearer ${process.env.STRAPI_API_KEY}`,
-                },
-            }).then((res) => res.json())
-            if (strapiJobPosting) {
+            const { data } = await fetch(
+                `${process.env.STRAPI_URL}/api/jobs?populate=*&filters[ashbyID][$eq]=${node.id}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${process.env.STRAPI_API_KEY}`,
+                    },
+                }
+            ).then((res) => res.json())
+            if (data && data?.length > 0) {
+                const [strapiJobPosting] = data
                 const ogImage = strapiJobPosting?.attributes?.ogImage?.data?.attributes?.url
                 if (ogImage) {
                     const url = `${process.env.STRAPI_URL}${ogImage}`

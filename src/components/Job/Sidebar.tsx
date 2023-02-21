@@ -10,8 +10,10 @@ import SidebarSection from 'components/PostLayout/SidebarSection'
 import { ThumbDown, ThumbUp } from 'components/Icons/Icons'
 
 interface ITeam {
+    fields: {
+        headshot: any
+    }
     frontmatter: {
-        headshot: string
         name: string
         country: string
         jobTitle: string
@@ -61,7 +63,7 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
                     </Link>
                 </h3>
                 <ul className="list-none m-0 p-0 flex flex-wrap">
-                    {team.map(({ frontmatter: { headshot, name, country, jobTitle } }) => {
+                    {team.map(({ fields: { headshot }, frontmatter: { name, country, jobTitle } }) => {
                         return (
                             <li
                                 key={name}
@@ -113,7 +115,7 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
                 >
                     <ContributorImage
                         className="w-[40px] h-[40px] bg-orange border-2 border-white dark:border-primary border-solid"
-                        image={teamLead?.frontmatter?.headshot}
+                        image={teamLead?.fields?.headshot}
                         name={teamLead?.frontmatter?.name}
                     />
                     <p className="author text-base font-semibold m-0 text-[15px]">{teamLead?.frontmatter?.name}</p>

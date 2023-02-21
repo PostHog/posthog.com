@@ -27,8 +27,8 @@ export default function AppsList({ apps, hideBuildYourOwn }) {
             {apps.map((app) => {
                 const {
                     id,
-                    fields: { slug },
-                    frontmatter: { thumbnail, title, badge, price },
+                    fields: { slug, thumbnail },
+                    frontmatter: { title, badge, price },
                 } = app
                 return (
                     <Listing

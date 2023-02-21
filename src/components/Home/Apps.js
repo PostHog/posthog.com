@@ -46,12 +46,11 @@ const query = graphql`
                 id
                 fields {
                     slug
-                }
-                frontmatter {
                     thumbnail {
-                        id
                         publicURL
                     }
+                }
+                frontmatter {
                     title
                     badge
                     price

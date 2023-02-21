@@ -33,7 +33,8 @@ export default function HostHog({ data }) {
         id,
         body,
         excerpt,
-        frontmatter: { date, venue, from, to, city, agenda, speakers, description, featuredImage, ogImage },
+        fields: { featuredImage },
+        frontmatter: { date, venue, from, to, city, agenda, speakers, description, ogImage },
     } = data.mdx
 
     const WhereWhen = () => {
@@ -162,7 +163,7 @@ export default function HostHog({ data }) {
 
     return (
         <Layout>
-            <SEO title={`HostHog ${city} - PostHog`} description={description || excerpt} image={ogImage.publicURL} />
+            <SEO title={`HostHog ${city} - PostHog`} description={description || excerpt} />
             <div className="max-w-[1070px] mx-auto mt-14 px-5">
                 <article>
                     <p className="text-[20px] font-semibold opacity-50 text-black m-0">HostHog: {city} 2022</p>
@@ -191,15 +192,14 @@ export const query = graphql`
             id
             body
             excerpt(pruneLength: 150)
-            frontmatter {
-                description
-                date(formatString: "dddd, Do MMMM")
-                ogImage {
-                    publicURL
-                }
+            fields {
                 featuredImage {
                     publicURL
                 }
+            }
+            frontmatter {
+                description
+                date(formatString: "dddd, Do MMMM")
                 venue {
                     name
                     address
@@ -215,11 +215,7 @@ export const query = graphql`
                     title
                     company
                     linkedIn
-                    image {
-                        childImageSharp {
-                            gatsbyImageData(width: 100, height: 124)
-                        }
-                    }
+                    image
                 }
                 city
                 from

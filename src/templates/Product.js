@@ -113,9 +113,9 @@ export default function Product({ data, location }) {
     const {
         body,
         excerpt,
-        fields: { slug },
+        fields: { slug, featuredImage },
     } = pageData
-    const { title, subtitle, featuredImage, description } = pageData?.frontmatter
+    const { title, subtitle, description } = pageData?.frontmatter
     const slugger = new GithubSlugger()
     let feature
     let next
@@ -236,16 +236,14 @@ export const query = graphql`
             excerpt(pruneLength: 150)
             fields {
                 slug
+                featuredImage {
+                    ...ImageFragment
+                }
             }
             frontmatter {
                 title
                 subtitle
                 description
-                featuredImage {
-                    childImageSharp {
-                        gatsbyImageData
-                    }
-                }
             }
         }
         documentation: mdx(fields: { slug: { eq: $documentation } }) {

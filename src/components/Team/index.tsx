@@ -18,7 +18,8 @@ export default function Team() {
                 const {
                     id,
                     body,
-                    frontmatter: { headshot, jobTitle, name, pronouns, country, github },
+                    fields: { headshot },
+                    frontmatter: { jobTitle, name, pronouns, country, github },
                 } = teamMember
                 const nameAndPronouns = pronouns ? `${name} (${pronouns})` : name
                 const title = `${nameAndPronouns}, ${jobTitle}`
@@ -64,12 +65,12 @@ const query = graphql`
             teamMembers: nodes {
                 id
                 body
-                frontmatter {
+                fields {
                     headshot {
-                        childImageSharp {
-                            gatsbyImageData
-                        }
+                        ...ImageFragment
                     }
+                }
+                frontmatter {
                     jobTitle
                     name
                     pronouns

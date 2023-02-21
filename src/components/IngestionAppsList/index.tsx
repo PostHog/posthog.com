@@ -17,7 +17,7 @@ export const IngestionAppsList = () => {
                     >
                         <Link to={app.frontmatter.documentation} className="flex p-2 !bg-none">
                             <div className="shrink-0 grow-0 basis-[84px] flex justify-center pt-1">
-                                <img className="icon w-8 h-8" src={app.frontmatter.thumbnail.publicURL} />
+                                <img className="icon w-8 h-8" src={app.fields.thumbnail.publicURL} />
                             </div>
 
                             <div className="flex-1">
@@ -40,14 +40,15 @@ type QueryResult = {
     apps: {
         nodes: {
             id: string
+            fields: {
+                thumbnail: {
+                    publicURL: string
+                }
+            }
             frontmatter: {
                 title: string
                 description: string | null
                 documentation: string
-                thumbnail: {
-                    thumbnail: string
-                    publicURL: string
-                }
             }
         }[]
     }
@@ -63,14 +64,15 @@ const query = graphql`
         ) {
             nodes {
                 id
+                fields {
+                    thumbnail {
+                        publicURL
+                    }
+                }
                 frontmatter {
                     title
                     description
                     documentation
-                    thumbnail {
-                        id
-                        publicURL
-                    }
                 }
             }
         }

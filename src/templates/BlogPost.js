@@ -119,10 +119,11 @@ const BlogPostSidebar = ({ contributors, date, filePath, title, tags, location, 
 export default function BlogPost({ data, pageContext, location }) {
     const { postData } = data
     const { body, excerpt, fields, ogImage } = postData
-    const { date, title, featuredImage, featuredVideo, featuredImageType, contributors, description, tags, category } =
+    const { date, title, featuredVideo, featuredImageType, contributors, description, tags, category } =
         postData?.frontmatter
     const lastUpdated = postData?.parent?.fields?.gitLogLatestDate
     const filePath = postData?.parent?.relativePath
+    const { featuredImage } = fields
     const components = {
         h1: H1,
         h2: H2,
@@ -187,6 +188,26 @@ export default function BlogPost({ data, pageContext, location }) {
     )
 }
 
+export const ImageFragment = graphql`
+    fragment ImageFragment on ImageField {
+        layout
+        width
+        height
+        images {
+            fallback {
+                src
+                srcSet
+                sizes
+            }
+            sources {
+                srcSet
+                sizes
+                type
+            }
+        }
+    }
+`
+
 export const query = graphql`
     query BlogPostLayout($id: String!) {
         postData: mdx(id: { eq: $id }) {
@@ -199,6 +220,9 @@ export const query = graphql`
             fields {
                 slug
                 pageViews
+                featuredImage {
+                    ...ImageFragment
+                }
             }
             frontmatter {
                 date(formatString: "MMM DD, YYYY")
@@ -211,12 +235,6 @@ export const query = graphql`
                 description
                 featuredImageType
                 featuredVideo
-                featuredImage {
-                    publicURL
-                    childImageSharp {
-                        gatsbyImageData
-                    }
-                }
                 contributors: authorData {
                     id
                     image {

@@ -26,9 +26,6 @@ const query = graphql`
                         date(formatString: "MMMM DD, YYYY")
                         title
                         rootPage
-                        featuredImage {
-                            publicURL
-                        }
                     }
                 }
             }

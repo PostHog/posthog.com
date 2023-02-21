@@ -17,7 +17,8 @@ export default function Tutorials({ title, subtitle, cta }) {
                 {nodes.map((tutorial, index) => {
                     const {
                         slug,
-                        frontmatter: { featuredImage, title },
+                        fields: { featuredImage },
+                        frontmatter: { title },
                     } = tutorial
                     const image = getImage(featuredImage)
                     return (
@@ -48,13 +49,13 @@ const query = graphql`
         tutorials: allMdx(filter: { frontmatter: { featuredTutorial: { eq: true } } }) {
             nodes {
                 slug
+                fields {
+                    featuredImage {
+                        ...ImageFragment
+                    }
+                }
                 frontmatter {
                     title
-                    featuredImage {
-                        childImageSharp {
-                            gatsbyImageData(placeholder: NONE)
-                        }
-                    }
                 }
             }
         }

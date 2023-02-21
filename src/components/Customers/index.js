@@ -22,8 +22,10 @@ const Card = ({ children, url, className = '' }) => {
 const FeaturedCustomer = ({ customer }) => {
     const {
         slug,
-        frontmatter: { title, featuredImage, logo },
+        fields: { featuredImage, logo },
+        frontmatter: { title },
     } = customer
+
     return (
         <Card
             url={slug}
@@ -83,7 +85,8 @@ export default function Customers() {
                         {customers.map((customer, index) => {
                             const {
                                 slug,
-                                frontmatter: { title, logo, featuredImage },
+                                fields: { featuredImage, logo },
+                                frontmatter: { title },
                             } = customer
                             return (
                                 <li key={index}>
@@ -139,32 +142,36 @@ const query = graphql`
                 body
                 excerpt(pruneLength: 150)
                 slug
-                frontmatter {
-                    title
-                    customer
+                fields {
+                    featuredImage {
+                        publicURL
+                    }
                     logo {
                         publicURL
                     }
+                }
+                frontmatter {
+                    title
+                    customer
                     description
                     industries
                     users
                     toolsUsed
-                    featuredImage {
-                        publicURL
-                    }
                 }
             }
         }
         featuredCustomer: mdx(frontmatter: { featuredCustomer: { eq: true } }) {
             slug
-            frontmatter {
-                title
-                logo {
-                    publicURL
-                }
+            fields {
                 featuredImage {
                     publicURL
                 }
+                logo {
+                    publicURL
+                }
+            }
+            frontmatter {
+                title
             }
         }
     }

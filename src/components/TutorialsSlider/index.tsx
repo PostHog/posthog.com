@@ -18,12 +18,12 @@ export default function TutorialsSlider({ topic }: { topic: string }): any {
             activeSlide={activeSlide}
             slides={tutorials?.map((tutorial) => {
                 const {
-                    frontmatter: { featuredImage, authors, title },
+                    frontmatter: { authors, title },
                     parent: {
                         fields: { date },
                     },
                     id,
-                    fields: { slug },
+                    fields: { slug, featuredImage },
                 } = tutorial
                 return {
                     image: featuredImage,
@@ -45,6 +45,9 @@ export const query = graphql`
                 id
                 fields {
                     slug
+                    featuredImage {
+                        ...ImageFragment
+                    }
                 }
                 frontmatter {
                     title
@@ -57,11 +60,6 @@ export const query = graphql`
                             }
                         }
                         name
-                    }
-                    featuredImage {
-                        childImageSharp {
-                            gatsbyImageData(width: 514, height: 289)
-                        }
                     }
                 }
                 parent {

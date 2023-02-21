@@ -206,9 +206,6 @@ const query = graphql`
                     slug
                 }
                 frontmatter {
-                    logo {
-                        publicURL
-                    }
                     title
                 }
             }

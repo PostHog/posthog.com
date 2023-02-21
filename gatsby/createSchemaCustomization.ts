@@ -16,6 +16,11 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       slug: String
       contributors: [Contributors]
       appConfig: [AppConfig]
+      featuredImage: ImageField
+      headshot: ImageField
+      icon: ImageField
+      logo: ImageField
+      thumbnail: ImageField
     }
     type AshbyJobPostingTableOfContents {
       value: String,
@@ -34,7 +39,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       description: String
     }
     type Contributors {
-      avatar: File @link(from: "avatar___NODE")
+      avatar: String
       url: String
       username: String
       teamData: TeamData
@@ -180,6 +185,26 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       url: String
       title: String
       number: Int
+    }
+    type ImageFieldFallback {
+      src: String
+      srcSet: String
+      sizes: String
+    }
+    type ImageFieldSources {
+      srcSet: String
+      sizes: String
+      type: String
+    }
+    type ImageFieldImages {
+      fallback: ImageFieldFallback
+      sources: [ImageFieldSources]
+    }
+    type ImageField {
+      layout: String
+      width: Int
+      height: Int
+      images: ImageFieldImages
     }
   `)
     createTypes([

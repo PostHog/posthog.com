@@ -66,9 +66,9 @@ export default function Customer({ data, pageContext: { tableOfContents } }) {
         customerData: {
             body,
             excerpt,
-            fields,
+            fields: { logo },
             ogImage,
-            frontmatter: { title, customer, logo, description, industries, users, toolsUsed, featuredImage },
+            frontmatter: { title, customer, description, industries, users, toolsUsed, featuredImage },
         },
     } = data
 
@@ -137,20 +137,17 @@ export const query = graphql`
             excerpt(pruneLength: 150)
             fields {
                 slug
+                logo {
+                    publicURL
+                }
             }
             frontmatter {
                 title
                 customer
-                logo {
-                    publicURL
-                }
                 description
                 industries
                 users
                 toolsUsed
-                featuredImage {
-                    publicURL
-                }
             }
         }
     }

@@ -18,7 +18,16 @@ interface ISliderItem {
 }
 
 const SlideTemplate = ({ date, url, authors, title, image }: ISliderItem) => {
-    return <Post authors={authors} title={title} date={date} slug={url} featuredImage={image} />
+    return (
+        <Post
+            imageStyle={{ width: 514, height: 289 }}
+            authors={authors}
+            title={title}
+            date={date}
+            slug={url}
+            featuredImage={image}
+        />
+    )
 }
 
 const Slide = ({ children }: { children: React.ReactNode }) => {

@@ -261,32 +261,30 @@ export const query = graphql`
     query JobQuery($id: String!, $teamName: String!, $teamNameInfo: String!, $objectives: String!, $mission: String!) {
         teamLead: mdx(frontmatter: { team: { in: [$teamName] }, teamLead: { eq: true } }) {
             id
+            fields {
+                headshot {
+                    ...ImageFragment
+                }
+            }
             frontmatter {
                 name
                 country
                 jobTitle
-                headshot {
-                    id
-                    childImageSharp {
-                        gatsbyImageData
-                    }
-                }
             }
         }
         team: allMdx(filter: { frontmatter: { team: { in: [$teamName] } } }) {
             nodes {
                 id
+                fields {
+                    headshot {
+                        ...ImageFragment
+                    }
+                }
                 frontmatter {
                     name
                     country
                     jobTitle
                     pineappleOnPizza
-                    headshot {
-                        id
-                        childImageSharp {
-                            gatsbyImageData
-                        }
-                    }
                 }
             }
         }

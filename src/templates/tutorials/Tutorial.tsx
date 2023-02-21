@@ -73,8 +73,13 @@ const TutorialSidebar = ({ contributors, location, title, categories }) => {
 
 export default function Tutorial({ data, pageContext: { tableOfContents, menu }, location }) {
     const { pageData } = data
-    const { body, excerpt, fields, ogImage } = pageData
-    const { title, featuredImage, description, contributors, categories, featuredVideo, date } = pageData?.frontmatter
+    const {
+        body,
+        excerpt,
+        fields: { featuredImage },
+        ogImage,
+    } = pageData
+    const { title, description, contributors, categories, featuredVideo, date } = pageData?.frontmatter
     const components = {
         inlineCode: InlineCode,
         blockquote: Blockquote,
@@ -160,6 +165,10 @@ export const query = graphql`
             excerpt(pruneLength: 150)
             fields {
                 slug
+                featuredImage {
+                    publicURL
+                    ...ImageFragment
+                }
             }
             frontmatter {
                 title
@@ -176,12 +185,6 @@ export const query = graphql`
                     name
                 }
                 featuredVideo
-                featuredImage {
-                    publicURL
-                    childImageSharp {
-                        gatsbyImageData(placeholder: NONE)
-                    }
-                }
             }
         }
     }

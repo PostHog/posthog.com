@@ -69,11 +69,6 @@ export const tutorialsFragment = graphql`
                 }
                 name
             }
-            featuredImage {
-                childImageSharp {
-                    gatsbyImageData(placeholder: NONE)
-                }
-            }
         }
     }
 `

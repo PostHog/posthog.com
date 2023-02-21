@@ -48,12 +48,6 @@ export const query = graphql`
                     html
                 }
             }
-            logo {
-                publicURL
-                childImageSharp {
-                    gatsbyImageData
-                }
-            }
         }
     }
 `

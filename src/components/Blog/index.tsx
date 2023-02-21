@@ -21,21 +21,27 @@ interface IPost {
     title: string
     category?: string
     date: string
+    imageStyle?: React.CSSProperties
     authors: {
         name: string
         image: ImageDataLike
     }[]
 }
 
-export const Post = ({ featuredImage, slug, title, category, date, authors }: IPost) => {
+export const Post = ({ featuredImage, slug, title, category, date, authors, imageStyle = {} }: IPost) => {
     const image = featuredImage && getImage(featuredImage)
     return (
         <div className="relative rounded-md overflow-hidden z-10 h-full w-full">
             <Link className="!text-white !hover:text-white cta" to={slug}>
                 {image ? (
-                    <GatsbyImage alt={title} className="md:w-auto w-full" image={image} />
+                    <GatsbyImage style={imageStyle} alt={title} className="md:w-auto w-full" image={image} />
                 ) : (
-                    <StaticImage className="md:w-auto w-full" alt={title} src="./images/default.jpg" />
+                    <StaticImage
+                        style={imageStyle}
+                        className="md:w-auto w-full"
+                        alt={title}
+                        src="./images/default.jpg"
+                    />
                 )}
                 <div className="bg-gradient-to-b from-black/50 via-black/20  to-black/50 absolute inset-0 p-5 flex flex-col h-full w-full">
                     {category && <p className="m-0 text-sm opacity-80">{category}</p>}
@@ -79,8 +85,8 @@ export const Posts = ({ posts, title, action, titleBorder }) => {
                     const {
                         node: {
                             id,
-                            frontmatter: { date, title, featuredImage, authors, category },
-                            fields: { slug },
+                            frontmatter: { date, title, authors, category },
+                            fields: { slug, featuredImage },
                         },
                     } = post
 
@@ -197,6 +203,9 @@ export const BlogFragment = graphql`
     fragment BlogFragment on Mdx {
         fields {
             slug
+            featuredImage {
+                ...ImageFragment
+            }
         }
         id
         excerpt(pruneLength: 250)
@@ -205,12 +214,6 @@ export const BlogFragment = graphql`
             title
             rootPage
             category
-            featuredImage {
-                publicURL
-                childImageSharp {
-                    gatsbyImageData(width: 480, height: 270)
-                }
-            }
             authors: authorData {
                 handle
                 name

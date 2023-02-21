@@ -2,15 +2,14 @@ import fs from 'fs'
 import path from 'path'
 import { GatsbyNode } from 'gatsby'
 
-export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
-    const {
-        data: [careersPage],
-    } = await fetch(`${process.env.STRAPI_URL}/api/pages?populate=*&filters[slug][$eq]=/careers`, {
+export const onPostBuild: GatsbyNode['onPostBuild'] = async () => {
+    const { data } = await fetch(`${process.env.STRAPI_URL}/api/pages?populate=*&filters[slug][$eq]=/careers`, {
         headers: {
             Authorization: `Bearer ${process.env.STRAPI_API_KEY}`,
         },
     }).then((res) => res.json())
-    if (careersPage) {
+    if (data && data?.careersPage?.length > 0) {
+        const [careersPage] = data
         const url = careersPage?.attributes?.ogImage?.data?.attributes?.url
         if (!url) return
         const dir = path.resolve(__dirname, '../public/og-images')

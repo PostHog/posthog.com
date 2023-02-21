@@ -1,6 +1,7 @@
 const fetch = require('node-fetch')
 const { createRemoteFileNode } = require(`gatsby-source-filesystem`)
 const files = {}
+const frontmatterImages = ['featuredImage', 'headshot', 'icon', 'logo', 'thumbnail']
 
 exports.onPreInit = async function (_, options) {
     const { strapiURL, strapiKey } = options
@@ -19,8 +20,11 @@ exports.onPreInit = async function (_, options) {
         const { data, meta } = strapiPages
         if (data) {
             data.forEach(({ id, attributes }) => {
-                const { contributors, lastUpdated, ogImage } = attributes
-                files[attributes.path] = { contributors, lastUpdated, ogImage: ogImage?.data?.attributes?.url }
+                const { ogImage, ...other } = attributes
+                files[attributes.path] = {
+                    ogImage: ogImage?.data?.attributes?.url,
+                    ...other,
+                }
             })
         }
         if (meta?.pagination?.pageCount > page) {
@@ -42,7 +46,59 @@ exports.onCreateNode = async function (
         if (parent.internal.type === 'File') {
             const file = files[`contents/${parent.relativePath}`]
             if (file) {
-                const { contributors, lastUpdated, ogImage } = file
+                const { contributors, lastUpdated, ogImage, frontmatter, ...other } = file
+                if (frontmatter) {
+                    createNodeField({
+                        node,
+                        name: `frontmatter`,
+                        value: frontmatter,
+                    })
+                    for (const key of frontmatterImages) {
+                        if (other[key]?.data) {
+                            const {
+                                attributes: { url, formats, width, height, mime },
+                            } = other[key]?.data
+                            const publicURL = `${strapiURL}${url}`
+                            const srcSet = formats
+                                ? Object.keys(formats)
+                                      .map((format) => {
+                                          if (formats[format]) {
+                                              const { url, width } = formats[format]
+                                              return `${strapiURL + url} ${width}w`
+                                          } else {
+                                              return ''
+                                          }
+                                      })
+                                      .join(',\n')
+                                : ''
+                            const data = {
+                                publicURL,
+                                layout: 'constrained',
+                                width,
+                                height,
+                                images: {
+                                    fallback: {
+                                        src: publicURL,
+                                        srcSet,
+                                        sizes: '(min-width: 1000px) 1000px, 100vw',
+                                    },
+                                    sources: [
+                                        {
+                                            type: mime,
+                                            srcSet,
+                                            sizes: '(min-width: 1000px) 1000px, 100vw',
+                                        },
+                                    ],
+                                },
+                            }
+                            createNodeField({
+                                node,
+                                name: key,
+                                value: data,
+                            })
+                        }
+                    }
+                }
                 if (ogImage) {
                     const url = `${strapiURL}${ogImage}`
                     const image = await createRemoteFileNode({
@@ -63,19 +119,9 @@ exports.onCreateNode = async function (
                         const contributorsNode = await Promise.all(
                             contributors.map(async (contributor) => {
                                 const { avatar, url, username } = contributor
-                                const fileNode =
-                                    avatar &&
-                                    (await createRemoteFileNode({
-                                        url: avatar,
-                                        parentNodeId: node.id,
-                                        createNode,
-                                        cache,
-                                        getCache,
-                                        createNodeId,
-                                        store,
-                                    }).catch((err) => console.error(err)))
+
                                 return {
-                                    avatar___NODE: fileNode && fileNode.id,
+                                    avatar,
                                     url,
                                     username,
                                 }
