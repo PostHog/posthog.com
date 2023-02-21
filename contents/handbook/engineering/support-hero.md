@@ -136,6 +136,12 @@ From time to time, customers will request to get their apps added to PostHog Clo
 5. Tell the marketing team about this new integration
 6. Install it on Cloud, and make it global
 
+#### Updating existing apps
+
+1. Open a PR against our forked version of the plugin with the new changes (syncing from the main repo).
+2. Verify the code changes are sane and merge the PR.
+3. Update the app in our internal Cloud instance on the [Apps page](https://app.posthog.com/project/apps?tab=installed). 
+
 ### Zendesk
 
 We use [Zendesk Support](https://zendesk.com/) as our internal platform to manage support tickets. This ensures that we don't miss anyone, especially when their request is passed from one person to another at PostHog, or if they message us over the weekend.
