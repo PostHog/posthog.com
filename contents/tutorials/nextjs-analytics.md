@@ -10,17 +10,17 @@ topics: ["configuration", "feature flags", "persons", "events"]
 
 Next.js is a popular web framework built on React. It provides optimizations and abstractions to help developers build fast and performant apps and sites.
 
-In this tutorial, we:
+In this tutorial, we will:
 
 1. build a basic Next.js blog with user authentication
 2. add PostHog to it
 3. set up the features of PostHog like custom event capture, user identification, and feature flags
 
-> Already know how to build a Next.js app? [Click here to skip to the PostHog installation.](#adding-posthog)
+> Already know how to build a Next.js app? [Click here to skip to the PostHog installation](#adding-posthog).
 
 ## Creating our Next.js app
 
-First, make sure you have Node installed, then run:
+First, [install Node](https://nodejs.dev/en/learn/how-to-install-nodejs/) and then run:
 
 ```bash
 npx create-next-app@latest
@@ -65,7 +65,7 @@ The blog posts are a static JSON file that we can fetch. To do this, create a `b
 }
 ```
 
-Next, remove all the boilerplate in the `index.js` file and all the CSS in the `styles` folder. In `index.js`, use the `getStaticProps()` method to get the posts from the `blog.json` file, then use `map()` to loop through, show details, and link to them. This looks like this:
+Next, remove all the boilerplate in the `index.js` file and all the CSS in the `styles` folder. In `index.js`, use the `getStaticProps()` method to get the posts from the `blog.json` file, then use `map()` to loop through, show details, and link to them. Like this:
 
 ```js
 import Head from 'next/head'
@@ -117,7 +117,7 @@ Our `[id].js` is similar to our `index.js` file, but we want individual blog pos
 2. pass the ID as a string to `getStaticProps()` to get the right blog for the route
 3. pass the post data to the component and render the data in HTML
 
-This looks like this:
+Like this:
 
 ```js
 export default function Post({ post }) {
@@ -216,7 +216,7 @@ export default function App(
 
 Next, add the session details, and the ability to sign in and out to our `index.js` page. We can do this with the `next-auth` `useSession()` hook. `next-auth` also provides methods for signing in and out. 
 
- If there is a session, show details about the user and a button to sign out. If there isn’t a session, show a button to sign in. Together, this looks like this:
+If there is a session, show details about the user and a button to sign out. If there isn’t a session, show a button to sign in. Together, it looks like this:
 
 ```js
 import Head from 'next/head'
@@ -542,7 +542,7 @@ In our `posts/[id].js` file, we must:
 3. when the feature flags load, check the `blog-cta` flag we created earlier
 4. set the state for the CTA component
 
-This looks like this:
+Like this:
 
 ```js
 import { PostHogStateContext } from '../_app'
