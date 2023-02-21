@@ -244,7 +244,7 @@ export default function Handbook({
             scroll.scrollMore(-50)
         }
     }, [])
-    console.log(thumbnail)
+
     return (
         <>
             <SEO
