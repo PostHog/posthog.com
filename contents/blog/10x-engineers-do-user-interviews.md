@@ -23,9 +23,11 @@ So, where does the next 8.5x come from? By zooming out and solving for user impa
 
 Your users are real people. They have problems to overcome. They work in a team. They have hopes and dreams. But if the only information that you get is the ticket "Add a button to this page" you miss all that context. And you miss the opportunity to build a significantly better product.
 
-Let's discuss an example from PostHog: we were getting requests for handling revenue in PostHog. If taken at face value, we might work on "Adding revenue support to PostHog" - and have added a custom database field and display options for the common currencies.
+Let's discuss an example from PostHog: we were getting requests for setting currency symbols on charts. We could have added the most common currency symbols to the chart and called it done.
 
-Instead, we went deeper - asking them why did they want revenue data in PostHog? We learned that if a teammate created the chart it was often unclear what the axes of charts was referring to. This affected charts containing revenue data but also other types of data such as app response times measured in milliseconds. We refined the problem to support custom prefixes and postfixes and built it within a day. And compared to the original problem definition we improved support for much more than just revenue data.
+But we decided to dig deeper and speak to our users. Why did they want currency symbols on their charts in PostHog? What was the problem?
+
+We learned that if a teammate created the chart it was often unclear what the axes of charts referred. This affected charts containing revenue but also other types of data such as app response times measured in milliseconds. We reframed the problem to support custom prefixes and postfixes and built it within a day. And compared to the original problem definition we solved the long-tail of use cases that we'd otherwise have to add incrementally.
 
 ![Custom Prefix](../images/blog/10x-engineers-do-user-interviews/custom-prefix.png)
 
@@ -43,7 +45,7 @@ Here's what that looks like when engineers talk directly to users:
 
 Information moves quickly and in both directions, boosting the signal. By increasing the signal you can quickly cut scope, realize you’re tackling the wrong problem, or come up with a more elegant solution – something engineers can do most effectively because they have the background on the existing architecture and components. 
 
-Companies still need product managers (I'm the Head of Product at PostHog after all 😅), but we ship faster and better because our engineers are actively engaged in user research. And, consequently, our product team has more time to think big and add clarity to [our broader vision](/blog/helping-engineers-to-product). 
+Companies still need product managers (I'm the Head of Product at PostHog after all 😅), but we ship faster and better because our engineers are actively speaking to users. And because our product managers aren't spending all their time on tickets, they have time to surface new opportunities or build out [our bigger vision](/blog/helping-engineers-to-product).
 
 ## Booking user interviews: Defining segments and automating the process
 
@@ -51,9 +53,9 @@ To build with users, it’s crucial to develop a system to quickly speak with cu
 
 The first step to speaking to your users is to find them. You can define your segment using company traits, user traits, and behavioral information. A data warehouse or a product analytics tool like PostHog can be helpful here.
 
-Then you need to can contact them and book a time. The simplest way is to email out a Calendly link in batches via bcc’ed. But quickly you should move to an in-app prompt. We’ve seen an increase in conversion from outreach to booking by ~5x (from 3% to 16%), a reduction in email spam, and more fine-grained control of the number of bookings a week. A reward like a $30 merchandise voucher helps. 
+Then you need to can contact them and book a time. The simplest way is to email out a Calendly link in batches via bcc’ed. But quickly you should move to an in-app prompt. We’ve seen an increase in conversion from outreach to booking by ~5x (from 3% to 16%), a reduction in email spam, and more fine-grained control of the number of bookings a week. A reward like a $30 merchandise voucher helps.
 
-Checkout PostHog’s [user interview app](https://posthog.com/tutorials/feedback-interviews-site-apps#setting-up-the-user-interview-app) for a quick way of showing prompts to segments of users or our [open-source set of components](https://github.com/PostHog/posthog-prompts/tree/luke/react-demo) for building your own.
+Check out PostHog’s [user interview app](https://posthog.com/tutorials/feedback-interviews-site-apps#setting-up-the-user-interview-app) for a quick way of showing prompts to segments of users or our [open-source set of components](https://github.com/PostHog/posthog-prompts/tree/luke/react-demo) for building your own.
 
 ![User interview app](../images/blog/10x-engineers-do-user-interviews/user-interview-app.png)
 
@@ -91,7 +93,7 @@ Example activities:
 
 User interviews are high-bandwidth: you can quickly narrow down the most important problem and gather all the parameters. But it normally takes a few days to get on the call.
 
-After the initial discussion, get your user on Slack for B2B or Whatsapp for B2B. This will enable you to quickly follow up with mockups or further questions during the solution validation phase.
+After the initial discussion, get your user on Slack for B2B or iMessage for B2C. This will enable you to quickly follow up with mockups or further questions during the solution validation phase.
 
 Check out this example from Li when building out our feature flag permissions. She received the response 3 minutes (!!) later.
 
