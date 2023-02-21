@@ -1,6 +1,6 @@
 ---
 date: 2023-02-24
-title: "What’s new in PostHog?"
+title: "The PostHog Changelog"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -41,7 +41,6 @@ The ability to send arbitrary data is especially powerful, as you can use this t
 
 ### UX and insight updates
 ![flag overrides](../images/blog/array/bubble_pie_chart.gif)
-
 
 We’ve released a small trilogy of minor UX and UI improvements this week…
 
