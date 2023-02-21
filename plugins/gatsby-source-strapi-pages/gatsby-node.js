@@ -105,10 +105,7 @@ exports.onCreateNode = async function (
                         url,
                         parentNodeId: node.id,
                         createNode,
-                        cache,
-                        getCache,
                         createNodeId,
-                        store,
                     }).catch((err) => console.error(err))
                     if (image) {
                         node.ogImage___NODE = image.id
