@@ -121,7 +121,7 @@ Creating a new Deal is quite intuitive, but here are a few tips:
 
 Also, if a customer is signed up/evaluating make sure deals have an amount - this isn't a hard commitment but a ballpark figure we calculate based on the customer's event volume and situation.  The amount will automatically be populated if we generate a quote (see below).
 
-We currently maintain three pipelines, for Inbound Hands-on, Inbound Self-serve and Product Qualified Lead (PQL) hands-on customers.
+We currently maintain three new business pipelines, for Inbound Hands-on, Inbound Self-serve and Product Qualified Lead (PQL) hands-on customers.  In addition, we have a renewals pipeline to manage the renewals of our annual contracts.
 
 ### Inbound Hands-on pipeline
 
@@ -204,6 +204,23 @@ We also have a deal pipeline for any high-value PQLs:
 7. Closed lost (Lost) - At some point in the pipeline they decided not to use us.  We should make a note as to the reasons why and optionally set a reminder task to follow up with them if we have improvements that could change their mind on our roadmap.
 8. Closed admin (Lost) - Deal was created in error (e.g. a duplicate) but we still want to keep a record of it.
 
+### Renewal pipeline
+
+When a deal in either of the **hands-on** pipelines above is Closed Won, if the `Billing Term` is not monthly, a HubSpot [workflow](https://app.hubspot.com/workflows/6958578/platform/flow/326853180/edit) will create a deal associated with the contact and company from the original deal.  The following fields will also be set:
+
+* **Amount** - Copied over from the original deal
+* **ARR up for renewal** - Copied over from the original deal amount; so that we can track expansion/churn
+* **Close date** - 365 days in the future (may need adjusting if the deal record isn't closed on the contract start date)
+
+The renewal pipeline stages are:
+
+1. Onboarding (40%) - They have just became a PostHog customer and we're helping them getting set up.
+2. Onboarded (50%) - They have reached a steady state where we consider them self-sufficient with PostHog.
+3. Churn Risk (20%) - We're concerned that the renewal might not happen.
+4. Verbal Confirmation (80%) - We've asked whether they intend to renew and they have said yes.
+5. Commercial & Legal Review (90%) - We are now working with them on contractual items such as custom pricing, MSAs etc.
+6. Closed won (Won) - They have signed the contract.
+7. Closed lost (Lost) - At some point in the pipeline they decided not to renew.  We should make a note as to the reasons why and optionally set a reminder task to follow up with them if we have improvements that could change their mind on our roadmap.
 
 ## All done - now what?
 
