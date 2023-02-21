@@ -31,7 +31,7 @@ He learned that there were two main use cases: First, understanding how individu
 
 Karl had used session recording products before. Recordings are much better for understanding individual user behavior and debugging, but with the existing tools it was almost impossible to find sessions with specific behavior. Because he knew our system architecture he realized you filter the recordings by the product analytics data. Enabling you to go from high-level trends to viewing the exact sessions that caused them.
 
-One hackathon later, we had a prototype. Session recording is now a core part of our product and a key driver in our strategy shift from a product analytics tool to a product operating-system.
+One hackathon later, we had a prototype. Session recording is now a core part of our product and was a key driver in our strategy shift from a product analytics tool to a product operating-system.
 
 ![Session recording](../images/blog/10x-engineers-do-user-interviews/session-recording.gif)
 
