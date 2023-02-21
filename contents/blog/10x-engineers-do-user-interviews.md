@@ -15,19 +15,21 @@ tags:
   - Product engineers
 ---
 
-When it comes to becoming a 10x engineer, most people think about improving their typing speed, buying more monitors, or using the latest framework where everything is a macro. But, in reality, leverage comes from choosing the right problem, building the right solution, and using the right tools. This can only happen when you have a deep understanding of your users. It's the only way to build something that people want.
+To become a 10x engineer, most people think about improving their typing speed, buying more monitors, or using the latest framework where everything is a macro. These hacks focus on speeding up the time from an idea to a rolled-out implementation. You'll get a 1.5x boost at most.
 
-## Velocity vs. Speed
+Where you can truly get 10x results is by zooming out and solving for user impact. Here, leverage comes from choosing the right problem, building the right solution, and using the right tools. This can only happen by deeply understanding your users so can focus on their "hair-on-fire" problems and build solutions that are intuitive and effective. The best way to do this? Speak directly to your users.
 
-```jsx
-Speed = how quickly you can go from an idea to a rolled-out implementation.
+## Tickets are highly lossy
 
-Velocity = how quickly and how large an impact you can have on your users.
-```
+Your users are real people. They have problems to overcome. They work in a team. They have hopes and dreams. But if all that gets to you is the ticket "Add a button to this page" you miss that context. And you miss the opportunity to build a significantly better product.
 
-It's easy to fall into the trap of optimizing only for speed. But you might rush to implement a feature only to find no one uses it. That's why it's crucial to speak directly with your users. By understanding their pain points and needs, you can design solutions that are intuitive and effective, addressing their "hair-on-fire" problems. Moving quickly is important, but it's even more important to move quickly in the right direction.
+Let's discuss an example from PostHog: we were getting requests for handling revenue in PostHog. If taken at face value, we might work on "Adding revenue support to PostHog" - and have added a custom database field and display support for the common currencies.
 
-## Reducing Information Bottlenecks: Why direct user-Engineer Interaction is Key
+Instead, we went deeper - asking them why did they want revenue data in PostHog? We learned that if a teammate created the chart it was often unclear what the axes of charts was referring to. This affected charts containing revenue data but also other types of data such as app response times measured in milliseconds. We refined the problem to support custom prefixes and postfixes and built it within a day. And compared to the original problem definition we improved support for much more than just revenue data.
+
+![Custom Prefix](../images/blog/10x-engineers-do-user-interviews/custom-prefix.png)
+
+### Solving the information bottleneck: direct user-engineering interaction
 
 ![PM to engineer](../images/blog/10x-engineers-do-user-interviews/pm-to-engineer.png)
 
@@ -35,15 +37,15 @@ It's easy to fall into the trap of optimizing only for speed. But you might rush
 
 Traditionally, information flows from the user to the product manager (PM) by an interview and then from the PM to the engineer through a bunch of tickets. At each stage, important context is lost. It’s one way, so you can’t go deeper on the important areas.
 
-Direct two-way interaction significantly increases the signal, enabling you to quickly cut scope, realize you’re tackling the wrong problem, or come up with a more elegant solution. PM interviews are still useful to highlight important problem areas and bring in additional context. But they are not a replacement. 
+Direct two-way interaction gives you this context. By significantly increasing the signal you can quickly cut scope, realize you’re tackling the wrong problem, or come up with a more elegant solution.
 
-Compliment your sync interviews with async platforms like Slack for B2B or Whatsapp for B2C particularly for the solution validation phase.
+And it's the engineers who can most effectively cut scope and reframe solutions, as they have the background on the existing architecture and components. PM interviews are still useful to highlight important problem areas and bring in additional context. But they are not a replacement.
 
 ## Booking user interviews: Defining segments and automating the process
 
 To build with users, it’s crucial to develop a system to quickly speak with customers. If the friction is too high, you’ll ride an initial burst of motivation followed by regression to the old way of heads-down coding.
 
-The first step to speaking to your users is to find them. You can define your segment using company traits, user traits, and behavioral information. A data warehouse or a product analytics tool like PostHog can be helpful here. 
+The first step to speaking to your users is to find them. You can define your segment using company traits, user traits, and behavioral information. A data warehouse or a product analytics tool like PostHog can be helpful here.
 
 Then you need to can contact them and book a time. The simplest way is to email out a Calendly link in batches via bcc’ed. But quickly you should move to an in-app prompt. We’ve seen an increase in conversion from outreach to booking by ~5x (from 3% to 16%), a reduction in email spam, and more fine-grained control of the number of bookings a week. A reward like a $30 merchandise voucher helps. 
 
@@ -60,15 +62,15 @@ To get the most out of the interview, you should know the goal. The goal normall
 Find the biggest hair-on-fire problem and then deeply understand the parameters. Focus on the concrete times they’ve experienced the problem.
 
 Example questions:
-- How have they tried to solve it before? 
-- What do they think of the other solutions on the market? 
-- Would they pay for it? 
-- Can you talk me through the last time you experienced this problem? 
+- How have they tried to solve it before?
+- What do they think of the other solutions on the market?
+- Would they pay for it?
+- Can you talk me through the last time you experienced this problem?
 - Is this actually a problem for you?
 
 **Recommendation:** Read "The Mom Test" by Rob Fitzpatrick. It's a fantastic primer on problem exploration.
 
-### 2. Solution validation 
+### 2. Solution validation
 
 You’ve identified the hair-on-fire problem and understand it well. Now you’re validating whether your solution actually solves it. Focus on presenting the user with quick prototypes.
 
@@ -77,15 +79,39 @@ Example activities:
 
 - Send a few mockups of the solutions over Slack to the user from the problem exploration interview and ask if it solves the problem.
 
-- Create a mock-up and see if the user will commit to paying some amount if you build it
+- Create a mock-up and have a call with the user to see if they will commit to paying some amount if you build it.
 
 **Recommendation:** The book "Don’t make me think" is great for usability testing.
+
+## Build a quick feedback loop by combining sync and async communication
+
+User interviews are high-bandwidth: you can quickly narrow down the most important problem and gather all the parameters. But it normally takes a few days to get on the call.
+
+After the initial discussion, get your user on Slack for B2B or Whatsapp for B2B. This will enable you to quickly follow up with mockups or further questions during the solution validation phase.
+
+Check out this example from Li when building out our feature flag permissions. She received the response 3 minutes (!!) later.
+
+![Slack feedback on feature flags](../images/blog/10x-engineers-do-user-interviews/feature-flags-feedback.png)
+
+The more important the problem for the user, the quicker they'll respond.
 
 ## Beware solution ideas from users, reframe them as problems
 
 During interviews, users will often suggest an idea for the solution of what they want. It’s crucial to not accept this at face value and instead ask “Why?” until you can reframe it as a problem with the appropriate context. 
 
 Often the solution they propose doesn’t actually solve the problem they experienced, or there’s a much better solution that you can build instead. But most times it's not even a problem they are facing at all! Treat the solution idea as an ember and get curious about it.
+
+*There's an entire [wikipedia page](https://en.wikipedia.org/wiki/XY_problem) dedicated to this.*
+
+## Sometimes it's better to just ship what the user is asking for
+
+But be careful not to go too far the other way and generalize every problem. The art of product is using your judgment.
+
+![XKCD: The general problem](../images/blog/10x-engineers-do-user-interviews/the-general-problem.png)
+
+Particularly for small usability improvements or where you already have a strong thesis it's better to move faster. It's a great way to build a better product, drive word-of-mouth growth and encourage more relevant feedback.
+
+![Paul email](../images/blog/10x-engineers-do-user-interviews/paul-email.png)
 
 ## The challenge: Book a user interview this week
 
