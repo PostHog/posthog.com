@@ -30,7 +30,7 @@ Armed with this information, you can now get a better understanding of where you
 
 Curious how we gather user feedback at PostHog? We've automated it using the [User Interviewer app](/apps/user-interviews). The app enables us to target users based on their actions, cohort or properties, who we then invite to schedule an interview with our Product team via Calendly.
 
-We find this works a lot better than trying to identify and schedule calls individually, so we’ve now made it available in [the PostHog app directory](/apps). 
+We find this works a lot better than trying to identify and schedule calls individually – we increased booking conversion from 3% to 16% using this app – so we’ve now made it available in [the PostHog app directory](/apps).
 
 ### JSON feature flags released
 ![flag overrides](../images/blog/array/json_flags.gif)
