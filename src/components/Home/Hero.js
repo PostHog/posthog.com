@@ -45,7 +45,7 @@ export default function Hero() {
     return (
         <section className="flex flex-col justify-center items-center">
             <div className="relative w-full z-10">
-                <div className={section('z-10 relative !mb-8')}>
+                <div className={section('z-10 relative md:!mb-8')}>
                     <h1 className={heading()}>
                         The <span className="text-red inline-block">open source</span>{' '}
                         <span className="inline-block">Product OS</span>
