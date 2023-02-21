@@ -26,7 +26,7 @@ First, [install Node](https://nodejs.dev/en/learn/how-to-install-nodejs/) (14.6.
 npx create-next-app@latest
 ```
 
-Press "y" to install `create-next-app` if needed, name your app (I choose `tutorial`), select "No" for using TypeScript, then press enter to select the defaults for the rest. Once installed and created, go into the new folder with the app name you chose (mine is `tutorial`) and start the server:
+Press "y" to install `create-next-app` if needed, name your app (I chose `tutorial`), select "No" for using TypeScript using the arrow keys, then press enter to select the defaults for the rest. Once installed and created, use the terminal go into the new folder with the app name you chose (mine is `tutorial`) and start the server:
 
 ```bash
 cd tutorial
@@ -65,7 +65,7 @@ The blog posts are a static JSON file that we can fetch. To do this, create a `b
 }
 ```
 
-Next, remove all the existing code in the `page/index.js` file and all the CSS in the `styles` folder. In `pages/index.js`, use the `getStaticProps()` method that automatically Next.js provides to get the posts from the `blog.json` file, then use `map()` to loop through, show details, and link to them. Like this:
+Next, the main app (`tutorial`) folder, remove all the existing code in the `page/index.js` file and all the CSS in the `styles` folder. In `pages/index.js`, use the `getStaticProps()` method that Next.js automatically provides to get the posts from the `blog.json` file, then use `map()` to loop through, show details, and link to them. Like this:
 
 ```js
 // pages/index.js
@@ -336,7 +336,7 @@ export default function App(
       })
     }
   }, [router.events])
-//...
+//... the rest of the code you wrote earlier
 ```
 
 Once you set this up, navigating between pages captures pageviews for each. The routes show up in the `URL/Screen` column in PostHog as well.
