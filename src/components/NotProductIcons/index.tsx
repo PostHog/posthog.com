@@ -81,6 +81,28 @@ export const Close = ({ className = '', ...other }: { className?: string }): JSX
         />
     </svg>
 )
+export const Demo = ({ className = '', ...other }: { className?: string }): JSX.Element => (
+    <svg
+        width="100%"
+        className={`fill-current ${className}`}
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        {...other}
+    >
+        <g clipPath="url(#a)">
+            <path
+                fill="#000"
+                d="M3.105 4.5c-.886 0-1.605.72-1.605 1.605V18H0v1.456C0 20.308.692 21 1.544 21h20.774c.93 0 1.682-.753 1.682-1.682V18h-1.5V6.052c0-.855-.697-1.552-1.552-1.552H3.105Zm0 1.5L21 6.053V18h-7.526a1.516 1.516 0 0 1-1.509 1.5 1.512 1.512 0 0 1-1.508-1.5H3V6.105C3 6.047 3.047 6 3.105 6Zm8.93 1.5c-1.66 0-3.012 1.364-3.012 3.044 0 1.404.95 2.58 2.227 2.93a7.508 7.508 0 0 0-5.291 3.018h4.057c.267-.005.541-.006.82 0h2.485c.183-.003.364-.002.542 0h4.154a7.502 7.502 0 0 0-5.218-3.015 3.035 3.035 0 0 0 2.244-2.933c.001-1.68-1.347-3.044-3.007-3.044h-.001Z"
+            />
+        </g>
+        <defs>
+            <clipPath id="a">
+                <path fill="#fff" d="M0 0h24v24H0z" />
+            </clipPath>
+        </defs>
+    </svg>
+)
 export const Department = ({ className = '', ...other }: { className?: string }): JSX.Element => (
     <svg
         width="100%"
