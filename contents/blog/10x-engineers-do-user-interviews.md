@@ -111,6 +111,8 @@ But be careful not to go too far the other way and generalize every problem. The
 
 Particularly for small usability improvements or where you already have a strong thesis it's better to move faster. It's a great way to build a better product, drive word-of-mouth growth and encourage more relevant feedback.
 
+Here's an email Paul sent 3 hours after a customer interview with 3 PRs shipped to production.
+
 ![Paul email](../images/blog/10x-engineers-do-user-interviews/paul-email.png)
 
 ## The challenge: Book a user interview this week
