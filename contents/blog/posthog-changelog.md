@@ -20,6 +20,7 @@ Interested about what new features, fixes and updates have just launched on Post
 ## February 24, 2023
 
 ### Performance monitoring in session recordings
+**Paid feature**
 ![flag overrides](../images/blog/array/perf_monitoring.gif)
 
 Thanks to Team Session Recording, you can now track network performance across a user session. Now you'll be able to see not only what your users are doing, but also how long each action takes, and if there were any issues that may have impacted their experience. 
