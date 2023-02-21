@@ -42,7 +42,7 @@ The ability to send arbitrary data is especially powerful, as you can use this t
 ### UX and insight updates
 ![flag overrides](../images/blog/array/bubble_pie_chart.gif)
 
-We’ve released a small trilogy of minor UX and UI improvements this week…
+We’ve released a small trilogy of minor UX and UI improvements this week...
 
 - We now [show pie chart values against segments](https://github.com/PostHog/posthog/pull/14216)
 - We now [automatically resize insight legends to be more readable](https://github.com/PostHog/posthog/pull/14210)
