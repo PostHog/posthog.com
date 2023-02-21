@@ -39,7 +39,7 @@ In traditional tech companies, information flows from the user to the product ma
 
 At each stage, important context is lost. Information flows one way, so you can’t go deeper on the important areas, and engineers lose agency in what they're building and why. In such an environment, speed is the only logical optimization.
 
-Here's what that looks like when engineers talk directly to users:
+Here's what it looks like when engineers talk directly to users:
 
 ![Direct user-Engineer Interaction](../images/blog/10x-engineers-do-user-interviews/direct-interaction.png)
 
