@@ -348,7 +348,7 @@
                                     },
                                     {
                                         "name": "Performance",
-                                        "url": "/docs/runbook/services/clickhouse/manual",
+                                        "url": "",
                                         "children": [
                                             {
                                                 "name": "Performance",
