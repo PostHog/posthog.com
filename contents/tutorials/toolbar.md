@@ -198,7 +198,7 @@ Additionally, by clicking a specific action on an element, you can update or del
 
 ## Editing the selector for an action
 
-When you select an element to create an action, PostHog will automatically generate a selector for that element. Computers are good at choosing unique selectors, but sometimes you might want to change it to something more meaningful. 
+When you select an element to create an action, PostHog automatically generates a selector for that element. Computers are good at choosing unique selectors, but sometimes you might want to change it to something more meaningful. 
 
 You can type a selector into the "Selector" field in the action creation modal to do this.
 
