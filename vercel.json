@@ -686,6 +686,10 @@
         {
             "source": "/blog/introduction-to-customer-retention",
             "destination": "/blog/customer-churn-analysis-guide"
+        },
+        {
+            "source": "/enterprise",
+            "destination": "/signup/cloud/enterprise"
         }
     ],
     "rewrites": [
