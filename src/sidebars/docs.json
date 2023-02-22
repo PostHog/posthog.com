@@ -310,7 +310,7 @@
                         "children": [
                             {
                                 "name": "ClickHouse",
-                                "url": "/docs/runbook/services/clickhouse",
+                                "url": "",
                                 "children": [
                                     {
                                         "name": "ClickHouse Manual",
