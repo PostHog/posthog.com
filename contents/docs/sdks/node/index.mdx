@@ -48,15 +48,15 @@ You can find your key in the 'Project Settings' page in PostHog.
 
 ### Options
 
-|           Variable            | Description                                                                                              |       Default value        |
-| :--------------------------- | :------------------------------------------------------------------------------------------------------- | :------------------------ |
-|            `host`             | Your PostHog host                                                                                        | `https://app.posthog.com/` |
-|           `flushAt`           | After how many capture calls we should flush the queue (in one batch)                                    |            `20`            |
-|        `flushInterval`        | After how many ms we should flush the queue                                                              |          `10000`           |
-|       `personalApiKey`        | An optional [personal API key](/docs/api/overview#personal-api-keys-recommended) for evaluating feature flags locally |           `null`           |
-| `featureFlagsPollingInterval` | Interval in milliseconds specifying how often feature flags should be fetched from the PostHog API       |          `300000`          |
-| `requestTimeout` | Timeout in milliseconds for any calls       |          `10000`          |
-| `maxCacheSize` | Maximum size of cache that deduplicates $feature_flag_called calls per user.       |          `50000`          |
+| Variable                      | Description                                                                                                           | Default value              |
+| :---------------------------- | :-------------------------------------------------------------------------------------------------------------------- | :------------------------- |
+| `host`                        | Your PostHog host                                                                                                     | `https://app.posthog.com/` |
+| `flushAt`                     | After how many capture calls we should flush the queue (in one batch)                                                 | `20`                       |
+| `flushInterval`               | After how many ms we should flush the queue                                                                           | `10000`                    |
+| `personalApiKey`              | An optional [personal API key](/docs/api/overview#personal-api-keys-recommended) for evaluating feature flags locally | `null`                     |
+| `featureFlagsPollingInterval` | Interval in milliseconds specifying how often feature flags should be fetched from the PostHog API                    | `300000`                   |
+| `requestTimeout`              | Timeout in milliseconds for any calls                                                                                 | `10000`                    |
+| `maxCacheSize`                | Maximum size of cache that deduplicates $feature_flag_called calls per user.                                          | `50000`                    |
 
 > **Note:** When using PostHog in an AWS Lambda function or a similar serverless function environment, make sure you set `flushAt` to `1` and `flushInterval` to `0`.
 
@@ -219,11 +219,11 @@ const flagValue = await client.getFeatureFlag('flag-key', 'user distinct id')
 
 **Get a flag payload**
 
-Posthog Node v2.3.0 introduces feature flag payloads. Feature flags can be returned with matching payloads which are JSONType (string, number, boolean, dictionary, array) values. 
-This allows for custom configurations based on values defined in the posthog app. 
+Posthog Node v2.3.0 introduces feature flag payloads. Feature flags can be returned with matching payloads which are JSONType (string, number, boolean, dictionary, array) values.
+This allows for custom configurations based on values defined in the posthog app.
 
-> **Note:** `getFeatureFlag` does not need to be called prior to `getFeatureFlagPayload`. `getFeatureFlagPayload` will implicitly perform 
-getFeatureFlag to determine the matching flag and return the corresponding payload.
+> **Note:** `getFeatureFlag` does not need to be called prior to `getFeatureFlagPayload`. `getFeatureFlagPayload` will implicitly perform
+> getFeatureFlag to determine the matching flag and return the corresponding payload.
 
 ```node
 // getFeatureFlagPayload(key: string, distinctId: string, matchValue?: string | boolean, options: {}): Promise<JsonType | undefined>
@@ -347,7 +347,7 @@ You should call `shutdown` on your program's exit to exit cleanly:
 ```node
 // Stop pending pollers and flush any remaining events
 client.shutdown()
-// or 
+// or
 await client.shutdownAsync()
 ```
 
@@ -372,7 +372,7 @@ export const handler() {
   // So far 2 events are queued but not sent
 
   // Calling shutdown, flushed the queue but batched into 1 API call for maximum efficiency
-  await posthog.shutdownAsync() 
+  await posthog.shutdownAsync()
 }
 ```
 
