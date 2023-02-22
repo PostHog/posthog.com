@@ -1,6 +1,7 @@
 import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import Link from 'components/Link'
+import docs from 'sidebars/docs.json'
 import CheckIcon from '../../images/check.svg'
 import XIcon from '../../images/x.svg'
 
@@ -47,6 +48,8 @@ type LibraryData = {
     }
 }
 
+const sdkSidebar = docs.find((item) => item.name === 'SDKs')?.children || []
+
 const IntegrateOption = (props: LibraryNode | FrameworkNode) => (
     <Link
         to={props.fields.slug}
@@ -63,6 +66,11 @@ const IntegrateOption = (props: LibraryNode | FrameworkNode) => (
 
 export const SDKs = () => {
     const { sdks } = useStaticQuery<LibraryData>(query)
+
+    sdks.nodes.sort(
+        (a, b) =>
+            sdkSidebar.findIndex((c) => c.url === a.fields.slug) - sdkSidebar.findIndex((c) => c.url === b.fields.slug)
+    )
 
     return (
         <div className="grid grid-cols-3 -mt-2 mb-6 border-t border-l border-dashed border-gray-accent-light dark:border-gray-accent-dark">
