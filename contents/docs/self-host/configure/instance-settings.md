@@ -4,6 +4,10 @@ sidebar: Docs
 showTitle: true
 ---
 
+import Sunset from "../\_snippets/sunset-disclaimer.mdx"
+
+<Sunset />
+
 When self-hosting PostHog there are several instance settings that can be adjusted according to your needs. These settings are available as of [PostHog 1.33.0](/blog/the-posthog-array-1-33-0), if you're running an older version, settings can only be set using [Environment variables][env-vars].
 
 Instance settings can be managed by [staff users](#staff-users) by visiting the _Instance settings_ page (`/instance/status/configuration`). Some setting configurations cannot be managed this way, and in particular, settings that determine how PostHog should behave at runtime must be set using [Environment variables][env-vars]. Please review the [Environment variables][env-vars] list for further details.
@@ -26,12 +30,12 @@ If you don't have any staff users (e.g. if you deployed PostHog before version 1
 
 > To connect to your pod, follow [these instructions](https://posthog.com/docs/self-host/deploy/troubleshooting#how-do-i-connect-to-the-web-servers-shell)
 
-
 ```bash
 python manage.py shell_plus
 ```
 
 Once you access the Django interactive shell,
+
 ```python
 user = User.objects.get(email="email_of_the_user_to_add@example.com")
 user.is_staff = True

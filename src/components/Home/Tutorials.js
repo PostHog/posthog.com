@@ -21,14 +21,12 @@ export default function Tutorials({ title, subtitle, cta }) {
                     } = tutorial
                     const image = getImage(featuredImage)
                     return (
-                        <li key={index} className="lg:p-10 py-10">
-                            <Link to={slug}>
-                                <GatsbyImage
-                                    className="bg-[#E5E7E0] dark:bg-[#2C2C2C] rounded-md"
-                                    image={image}
-                                    alt={title}
-                                />
-                                <h4 className="leading-snug">{title}</h4>
+                        <li key={index} className="py-10 lg:px-10 lg:py-0">
+                            <Link to={slug} className="relative block">
+                                <GatsbyImage className="bg-[#E5E7E0] dark:bg-[#2C2C2C]" image={image} alt={title} />
+                                <div className="rounded-md absolute p-4 top-0 left-0 w-full h-full">
+                                    <h4 className="text-2xl m-0 leading-8">{title}</h4>
+                                </div>
                             </Link>
                         </li>
                     )

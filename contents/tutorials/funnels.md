@@ -3,7 +3,7 @@ title: How to build, analyze and optimize conversion funnels in PostHog
 sidebar: Docs
 showTitle: true
 featuredImage: ../images/tutorials/banners/tutorial-16.png
-featuredTutorial: true
+featuredVideo: https://www.youtube-nocookie.com/embed/cMFz_xFlHaE
 author: ["yakko-majuri", "andy-vandervell"]
 tags: ["funnels", "correlation analysis", "paths", "session recording", "experimentation"]
 date: 2022-04-20

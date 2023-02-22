@@ -23,7 +23,7 @@ export const QuestionsTable = ({
     className = '',
 }: QuestionsTableProps) => {
     return (
-        <ul className="m-0 -my-4 p-0">
+        <ul className="m-0 p-0">
             <li className="divide-y divide-gray-accent-light divide-dashed dark:divide-gray-accent-dark list-none">
                 {questions.length > 0
                     ? questions.map((question) => {

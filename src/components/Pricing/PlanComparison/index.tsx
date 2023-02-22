@@ -1,906 +1,456 @@
-import { CallToAction } from 'components/CallToAction'
-import React, { Fragment, useState } from 'react'
+import { TrackedCTA } from 'components/CallToAction'
+import Link from 'components/Link'
+import Spinner from 'components/Spinner'
+import Tooltip from 'components/Tooltip'
+import usePostHog from '../../../hooks/usePostHog'
+import React, { useEffect, useState } from 'react'
+import { BillingProductV2Type, BillingV2FeatureType, BillingV2PlanType } from 'types'
 import CheckIcon from '../../../images/check.svg'
+import { Analytics, AppLibrary, Experiments, FeatureFlags, SessionRecording } from 'components/ProductIcons'
+import { Platform, Support } from 'components/NotProductIcons'
 import MinusIcon from '../../../images/x.svg'
 import './styles/index.scss'
+import Modal from 'components/Modal'
+import { capitalizeFirstLetter } from '../../../utils'
 
-const tiers = [
-    {
-        name: 'PostHog Cloud',
-        href: '#',
-        priceMonthly: 9,
-        description: 'Quis suspendisse ut fermentum neque vivamus non tellus.',
-    },
-    {
-        name: '+ Enterprise Cloud package',
-        href: '#',
-        priceMonthly: 9,
-        description: 'Quis suspendisse ut fermentum neque vivamus non tellus.',
-    },
-    {
-        name: '+ Enterprise package',
-        href: '#',
-        priceMonthly: 59,
-        description: 'Orci volutpat ut sed sed neque, dui eget. Quis tristique non.',
-    },
-]
-const sections = [
-    {
-        features: [
-            {
-                name: 'Plan benefits',
-                tiers: {
-                    'PostHog Cloud': 'Scales as needed, no infrastructure to manage',
-                    '+ Enterprise Cloud package': '+ SSO, advanced permissions, priority support',
-                    'Open Source': 'Great for small teams',
-                    'Self-Hosted': 'Data never has to leave your infrastructure',
-                    '+ Enterprise package': '+ SSO, advanced permissions, priority support',
-                },
-            },
-        ],
-    },
-    {
-        name: 'Event pricing breakdown',
-        features: [
-            {
-                name: 'First 1 million events/mo',
-                tiers: {
-                    'Open Source': 'Free',
-                    'PostHog Cloud': 'Free – every month',
-                    '+ Enterprise Cloud package': '$450 (flat fee)',
-                    'Self-Hosted': 'Free – every month',
-                    '+ Enterprise package': '$5000 (flat fee)',
-                },
-            },
-            {
-                name: '1-2 million',
-                tiers: {
-                    'Open Source': 'Free',
-                    'PostHog Cloud': '$0.000450',
-                    '+ Enterprise Cloud package': '$0.00056260',
-                    'Self-Hosted': '$0.000450',
-                    '+ Enterprise package': 'Included',
-                },
-            },
-            {
-                name: '2-10 million',
-                tiers: {
-                    'Open Source': 'Free',
-                    'PostHog Cloud': '$0.000225',
-                    '+ Enterprise Cloud package': '$0.00028125',
-                    'Self-Hosted': '$0.000225',
-                    '+ Enterprise package': 'Included',
-                },
-            },
-            {
-                name: '10-100 million',
-                tiers: {
-                    'Open Source': 'Free',
-                    'PostHog Cloud': '$0.000075',
-                    '+ Enterprise Cloud package': '$0.00009375',
-                    'Self-Hosted': '$0.000075',
-                    '+ Enterprise package': '$0.00009375 after 40m events',
-                },
-            },
-            {
-                name: '100 million - 1 billion',
-                tiers: {
-                    'Open Source': 'Free',
-                    'PostHog Cloud': '$0.000025',
-                    '+ Enterprise Cloud package': '$0.00003125',
-                    'Self-Hosted': '$0.000025',
-                    '+ Enterprise package': '$0.00003125',
-                },
-            },
-        ],
-    },
-    {
-        name: 'Session recording pricing breakdown',
-        features: [
-            {
-                name: 'First 15,000 recordings/mo',
-                tiers: {
-                    'Open Source': 'Free',
-                    'PostHog Cloud': 'Free – every month',
-                    '+ Enterprise Cloud package': 'Free – every month',
-                    'Self-Hosted': 'Free – every month',
-                    '+ Enterprise package': 'Free – every month',
-                },
-            },
-            {
-                name: '15,001 - 50,000',
-                tiers: {
-                    'Open Source': 'Free',
-                    'PostHog Cloud': '$0.0050',
-                    '+ Enterprise Cloud package': '$0.00625',
-                    'Self-Hosted': '---',
-                    '+ Enterprise package': 'Included',
-                },
-            },
-            {
-                name: '50,001 - 150,000',
-                tiers: {
-                    'Open Source': 'Free',
-                    'PostHog Cloud': '$0.0045',
-                    '+ Enterprise Cloud package': '$0.005625',
-                    'Self-Hosted': '---',
-                    '+ Enterprise package': '$0.005625 after 80k recordings',
-                },
-            },
-            {
-                name: '150,001 to 500,000',
-                tiers: {
-                    'Open Source': 'Free',
-                    'PostHog Cloud': '$0.0040',
-                    '+ Enterprise Cloud package': '$0.00500',
-                    'Self-Hosted': '---',
-                    '+ Enterprise package': '$0.00500',
-                },
-            },
-            {
-                name: '500,000 +',
-                tiers: {
-                    'Open Source': 'Free',
-                    'PostHog Cloud': '$0.0035',
-                    '+ Enterprise Cloud package': '$0.004375',
-                    'Self-Hosted': '---',
-                    '+ Enterprise package': '$0.004375',
-                },
-            },
-        ],
-    },
-    {
-        name: 'Instance & deployment',
-        features: [
-            {
-                name: 'Hosting',
-                tiers: {
-                    'PostHog Cloud': true,
-                    'Open Source': false,
-                    'Self-Hosted': false,
-                    '+ Enterprise package': false,
-                    '+ Enterprise Cloud package': true,
-                },
-            },
-            {
-                name: 'User data stays on your infrastructure',
-                tiers: {
-                    'PostHog Cloud': false,
-                    'Open Source': true,
-                    'Self-Hosted': true,
-                    '+ Enterprise package': true,
-                    '+ Enterprise Cloud package': false,
-                },
-            },
-            {
-                name: 'Initial setup',
-                tiers: {
-                    'PostHog Cloud': 'Instant',
-                    'Open Source': 'Instant',
-                    'Self-Hosted': '1-3 days',
-                    '+ Enterprise package': '1-3 days',
-                    '+ Enterprise Cloud package': 'Instant',
-                },
-            },
-            {
-                name: 'Server management',
-                tiers: {
-                    'PostHog Cloud': 'Managed by PostHog',
-                    'Open Source': 'Managed by you',
-                    'Self-Hosted': 'Third-party support available',
-                    '+ Enterprise package': 'Third-party support available',
-                    '+ Enterprise Cloud package': 'Managed by PostHog',
-                },
-            },
-            {
-                name: 'Operate in air gapped environment',
-                tiers: {
-                    'PostHog Cloud': false,
-                    'Open Source': true,
-                    'Self-Hosted': false,
-                    '+ Enterprise package': true,
-                },
-            },
-        ],
-    },
-    {
-        name: 'Plan allowances',
-        features: [
-            {
-                name: 'Events',
-                tiers: {
-                    'PostHog Cloud': 'Unlimited',
-                    'Open Source': 'Unlimited',
-                    'Self-Hosted': 'Unlimited',
-                    '+ Enterprise package': 'Unlimited',
-                    '+ Enterprise Cloud package': 'Unlimited',
-                },
-            },
-            {
-                name: 'Tracked users',
-                tiers: {
-                    'PostHog Cloud': 'Unlimited',
-                    'Open Source': '~1m (with default config)',
-                    'Self-Hosted': 'Unlimited',
-                    '+ Enterprise package': 'Unlimited',
-                    '+ Enterprise Cloud package': 'Unlimited',
-                },
-            },
-            {
-                name: 'Projects',
-                tiers: {
-                    'PostHog Cloud': 'Multiple',
-                    'Open Source': '1',
-                    'Self-Hosted': 'Multiple',
-                    '+ Enterprise package': 'Multiple',
-                    '+ Enterprise Cloud package': 'Multiple',
-                },
-            },
-            {
-                name: 'Data retention',
-                tiers: {
-                    'PostHog Cloud': '7 years',
-                    'Open Source': 'Unlimited',
-                    'Self-Hosted': 'Unlimited',
-                    '+ Enterprise package': 'Unlimited',
-                    '+ Enterprise Cloud package': '7 years',
-                },
-            },
-        ],
-    },
-    {
-        name: 'Product',
-        features: [
-            {
-                name: 'Analytics suite',
-                tiers: {
-                    'PostHog Cloud': true,
-                    'Open Source': true,
-                    'Self-Hosted': true,
-                    '+ Enterprise package': true,
-                    '+ Enterprise Cloud package': true,
-                },
-            },
-            {
-                name: 'Recordings',
-                docsLink: 'docs/user-guides/recordings',
-                tiers: {
-                    'PostHog Cloud': true,
-                    'Open Source': true,
-                    'Self-Hosted': true,
-                    '+ Enterprise package': true,
-                    '+ Enterprise Cloud package': true,
-                },
-            },
-            {
-                name: 'Feature Flags',
-                docsLink: 'docs/user-guides/feature-flags',
-                tiers: {
-                    'PostHog Cloud': true,
-                    'Open Source': true,
-                    'Self-Hosted': true,
-                    '+ Enterprise package': true,
-                    '+ Enterprise Cloud package': true,
-                },
-            },
-            {
-                name: 'Experimentation',
-                docsLink: 'docs/user-guides/experimentation',
-                tiers: {
-                    'PostHog Cloud': true,
-                    'Open Source': false,
-                    'Self-Hosted': true,
-                    '+ Enterprise package': true,
-                    '+ Enterprise Cloud package': true,
-                },
-            },
-            {
-                name: 'Apps',
-                docsLink: 'docs/apps',
-                tiers: {
-                    'PostHog Cloud': true,
-                    'Open Source': true,
-                    'Self-Hosted': true,
-                    '+ Enterprise package': true,
-                    '+ Enterprise Cloud package': true,
-                },
-            },
-        ],
-    },
-    {
-        name: 'Advanced features',
-        features: [
-            {
-                name: 'Correlation Analysis',
-                docsLink: 'docs/user-guides/correlation',
-                tiers: {
-                    'PostHog Cloud': true,
-                    'Open Source': false,
-                    'Self-Hosted': true,
-                    '+ Enterprise package': true,
-                    '+ Enterprise Cloud package': true,
-                },
-            },
-            {
-                name: 'Group Analytics',
-                docsLink: 'docs/user-guides/group-analytics',
-                tiers: {
-                    'PostHog Cloud': true,
-                    'Open Source': false,
-                    'Self-Hosted': true,
-                    '+ Enterprise package': true,
-                    '+ Enterprise Cloud package': true,
-                },
-            },
-            {
-                name: 'Multivariate testing',
-                docsLink: 'docs/user-guides/feature-flags#multivariate-feature-flags',
-                tiers: {
-                    'PostHog Cloud': true,
-                    'Open Source': false,
-                    'Self-Hosted': true,
-                    '+ Enterprise package': true,
-                    '+ Enterprise Cloud package': true,
-                },
-            },
-            {
-                name: 'Advanced Paths',
-                docsLink: 'docs/user-guides/paths',
-                tiers: {
-                    'PostHog Cloud': true,
-                    'Open Source': false,
-                    'Self-Hosted': true,
-                    '+ Enterprise package': true,
-                    '+ Enterprise Cloud package': true,
-                },
-            },
-            {
-                name: 'Event & properties taxonomy',
-                tiers: {
-                    'PostHog Cloud': true,
-                    'Open Source': false,
-                    'Self-Hosted': true,
-                    '+ Enterprise package': true,
-                    '+ Enterprise Cloud package': true,
-                },
-            },
-            {
-                name: 'Dashboard tagging',
-                tiers: {
-                    'PostHog Cloud': true,
-                    'Open Source': false,
-                    'Self-Hosted': true,
-                    '+ Enterprise package': true,
-                    '+ Enterprise Cloud package': true,
-                },
-            },
-        ],
-    },
-    {
-        name: 'Platform',
-        features: [
-            {
-                name: 'Team members',
-                tiers: {
-                    'PostHog Cloud': 'Unlimited',
-                    'Open Source': 'Unlimited',
-                    'Self-Hosted': 'Unlimited',
-                    '+ Enterprise package': 'Unlimited',
-                    '+ Enterprise Cloud package': 'Unlimited',
-                },
-            },
-            {
-                name: 'SSO/SAML',
-                docsLink: 'docs/user-guides/sso',
-                tiers: {
-                    'PostHog Cloud': false,
-                    'Open Source': false,
-                    'Self-Hosted': false,
-                    '+ Enterprise package': true,
-                    '+ Enterprise Cloud package': true,
-                },
-            },
-            {
-                name: 'API access',
-                docsLink: 'docs/api',
-                tiers: {
-                    'PostHog Cloud': true,
-                    'Open Source': true,
-                    'Self-Hosted': true,
-                    '+ Enterprise package': true,
-                    '+ Enterprise Cloud package': true,
-                },
-            },
-            {
-                name: 'User permissions',
-                docsLink: 'docs/user-guides/organizations-and-projects#permissions',
-                tiers: {
-                    'PostHog Cloud': true,
-                    'Open Source': false,
-                    'Self-Hosted': true,
-                    '+ Enterprise package': true,
-                    '+ Enterprise Cloud package': true,
-                },
-            },
-            {
-                name: 'Advanced user permissions',
-                tiers: {
-                    'PostHog Cloud': false,
-                    'Open Source': false,
-                    'Self-Hosted': false,
-                    '+ Enterprise package': true,
-                    '+ Enterprise Cloud package': true,
-                },
-            },
-            {
-                name: 'Private projects',
-                docsLink: 'docs/user-guides/organizations-and-projects#private-projects',
-                tiers: {
-                    'PostHog Cloud': false,
-                    'Open Source': false,
-                    'Self-Hosted': false,
-                    '+ Enterprise package': true,
-                    '+ Enterprise Cloud package': true,
-                },
-            },
-            {
-                name: 'Backup configuration',
-                tiers: {
-                    'PostHog Cloud': false,
-                    'Open Source': false,
-                    'Self-Hosted': false,
-                    '+ Enterprise package': true,
-                    '+ Enterprise Cloud package': false,
-                },
-            },
-        ],
-    },
-    {
-        name: 'Integrations',
-        features: [
-            {
-                name: 'Slack',
-                docsLink: 'docs/integrate/webhooks/slack#4-add-to-action',
-                tiers: {
-                    'PostHog Cloud': true,
-                    'Open Source': true,
-                    'Self-Hosted': true,
-                    '+ Enterprise package': true,
-                    '+ Enterprise Cloud package': true,
-                },
-            },
-            {
-                name: 'Microsoft Teams',
-                docsLink: 'docs/integrate/webhooks/microsoft-teams',
-                tiers: {
-                    'PostHog Cloud': true,
-                    'Open Source': true,
-                    'Self-Hosted': true,
-                    '+ Enterprise package': true,
-                    '+ Enterprise Cloud package': true,
-                },
-            },
-            {
-                name: 'Discord',
-                docsLink: 'docs/integrate/webhooks/discord',
-                tiers: {
-                    'PostHog Cloud': true,
-                    'Open Source': true,
-                    'Self-Hosted': true,
-                    '+ Enterprise package': true,
-                    '+ Enterprise Cloud package': true,
-                },
-            },
-            {
-                name: 'Zapier',
-                docsLink: 'https://zapier.com/apps/posthog/integrations',
-                tiers: {
-                    'PostHog Cloud': true,
-                    'Open Source': false,
-                    'Self-Hosted': true,
-                    '+ Enterprise package': true,
-                    '+ Enterprise Cloud package': true,
-                },
-            },
-        ],
-    },
-    {
-        name: 'Support',
-        features: [
-            {
-                name: 'Slack (community)',
-                docsLink: 'slack',
-                tiers: {
-                    'PostHog Cloud': true,
-                    'Open Source': true,
-                    'Self-Hosted': true,
-                    '+ Enterprise package': true,
-                    '+ Enterprise Cloud package': true,
-                },
-            },
-            {
-                name: 'Slack (dedicated channel)',
-                tiers: {
-                    'PostHog Cloud': '$10k/month spend or above',
-                    'Open Source': false,
-                    'Self-Hosted': '$10k/month spend or above',
-                    '+ Enterprise package': true,
-                    '+ Enterprise Cloud package': true,
-                },
-            },
-            {
-                name: 'Email',
-                tiers: {
-                    'PostHog Cloud': '$10k/month spend or above',
-                    'Open Source': false,
-                    'Self-Hosted': '$10k/month spend or above',
-                    '+ Enterprise package': true,
-                    '+ Enterprise Cloud package': true,
-                },
-            },
-            {
-                name: 'Account manager',
-                tiers: {
-                    'PostHog Cloud': false,
-                    'Open Source': false,
-                    'Self-Hosted': false,
-                    '+ Enterprise package': true,
-                    '+ Enterprise Cloud package': true,
-                },
-            },
-            {
-                name: 'Training sessions',
-                tiers: {
-                    'PostHog Cloud': false,
-                    'Open Source': false,
-                    'Self-Hosted': false,
-                    '+ Enterprise package': true,
-                    '+ Enterprise Cloud package': true,
-                },
-            },
-            {
-                name: 'Dashboard configuration support',
-                tiers: {
-                    'PostHog Cloud': false,
-                    'Open Source': false,
-                    'Self-Hosted': false,
-                    '+ Enterprise package': true,
-                    '+ Enterprise Cloud package': true,
-                },
-            },
-            {
-                name: 'Remote monitoring',
-                tiers: {
-                    'PostHog Cloud': false,
-                    'Open Source': false,
-                    'Self-Hosted': false,
-                    '+ Enterprise package': true,
-                    '+ Enterprise Cloud package': false,
-                },
-            },
-            {
-                name: 'Terms and conditions',
-                tiers: {
-                    'PostHog Cloud': 'Standard',
-                    'Open Source': 'MIT Licence',
-                    'Self-Hosted': 'Standard',
-                    '+ Enterprise package': 'Bespoke',
-                    '+ Enterprise Cloud package': 'Bespoke',
-                },
-            },
-            {
-                name: 'Security assessment',
-                tiers: {
-                    'PostHog Cloud': 'Standard assessment provided',
-                    'Open Source': 'Standard assessment provided',
-                    'Self-Hosted': 'Standard assessment provided',
-                    '+ Enterprise package': true,
-                    '+ Enterprise Cloud package': 'Standard assessment provided',
-                },
-            },
-            {
-                name: 'Bespoke pricing',
-                tiers: {
-                    'PostHog Cloud': false,
-                    'Open Source': false,
-                    'Self-Hosted': false,
-                    '+ Enterprise package': true,
-                    '+ Enterprise Cloud package': true,
-                },
-            },
-            {
-                name: 'Payment via invoicing',
-                tiers: {
-                    'PostHog Cloud': false,
-                    'Open Source': false,
-                    'Self-Hosted': '$2k/month spend or above',
-                    '+ Enterprise package': true,
-                    '+ Enterprise Cloud package': true,
-                },
-            },
-            {
-                name: 'Support SLAs',
-                tiers: {
-                    'PostHog Cloud': false,
-                    'Open Source': false,
-                    'Self-Hosted': false,
-                    '+ Enterprise package': true,
-                    '+ Enterprise Cloud package': true,
-                },
-            },
-        ],
-    },
-]
+const convertLargeNumberToWords = (
+    // The number to convert
+    num: number | null,
+    // The previous tier's number
+    previousNum?: number | null,
+    // Whether we will be showing multiple tiers (to denote the first tier with 'first')
+    multipleTiers = false,
+    // The product type (to denote the unit)
+    productType: BillingProductV2Type['type'] | null = null
+): string => {
+    if (!num && previousNum) {
+        return `${convertLargeNumberToWords(previousNum, null)} +`
+    }
+    if (!num) {
+        return ''
+    }
 
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
+    let denominator = 1
+
+    if (num >= 1000000) {
+        denominator = 1000000
+    } else if (num >= 1000) {
+        denominator = 1000
+    }
+
+    return `${previousNum ? `${(previousNum / denominator).toFixed(0)}-` : multipleTiers ? 'first ' : ''}${(
+        num / denominator
+    ).toFixed(0)}${denominator === 1000000 ? ' million' : denominator === 1000 ? 'k' : ''}${
+        !previousNum && multipleTiers ? ` ${productType}/mo` : ''
+    }`
+}
+
+export function PlanIcon({
+    feature,
+    timeDenominator,
+}: {
+    feature?: BillingV2FeatureType
+    timeDenominator?: string
+}): JSX.Element {
+    return (
+        <div className="flex items-center text-[15px]">
+            {!feature ? (
+                <>
+                    <img src={MinusIcon} alt="Checked" className="h-5 w-5 text-red-500" aria-hidden="true" />
+                    <span className="sr-only">Not included</span>
+                </>
+            ) : feature.limit ? (
+                <>
+                    {feature.limit &&
+                        `${convertLargeNumberToWords(feature.limit, null)} ${feature.unit && feature.unit}${
+                            timeDenominator ? `/${timeDenominator}` : ''
+                        }`}
+                    {feature.note}
+                </>
+            ) : (
+                <>
+                    {feature.note ? (
+                        <>{feature.note}</>
+                    ) : (
+                        <>
+                            <img src={CheckIcon} alt="Checked" className="h-5 w-5 text-green-500" aria-hidden="true" />
+                            <span className="sr-only">Included in {feature.name}</span>
+                        </>
+                    )}
+                </>
+            )}
+        </div>
+    )
+}
+
+const ProductTiersModal = ({
+    product,
+    modalOpen,
+    setModalOpen,
+}: {
+    product: BillingProductV2Type
+    modalOpen: boolean
+    setModalOpen: (open: boolean) => void
+}): JSX.Element | null => {
+    const tiers = product?.tiers
+
+    if (!product || !tiers) {
+        return null
+    }
+    const isFirstTierFree = parseFloat(tiers[0].unit_amount_usd) === 0
+    const numberOfSigFigs = tiers.map((tier) => tier.unit_amount_usd.split('.')[1]?.length).sort((a, b) => b - a)[0]
+
+    return (
+        <Modal open={modalOpen} setOpen={setModalOpen}>
+            <div className="flex items-center w-full h-full justify-center">
+                <div className="text-left max-w-xl bg-white rounded-md relative w-full p-8 m-8">
+                    <p className="text-gray mb-1">{capitalizeFirstLetter(product.type)} pricing</p>
+                    <p className="mb-1">
+                        <span className="font-bold text-base">
+                            $
+                            {parseFloat(
+                                isFirstTierFree ? tiers?.[1]?.unit_amount_usd : tiers?.[0]?.unit_amount_usd
+                            ).toFixed(numberOfSigFigs)}
+                        </span>
+                        {/* the product types we have are plural, so we need to singularlize them and this works for now */}
+                        <span className="text-gray">/{product.type.replace(/s$/, '')}</span>
+                    </p>
+                    {isFirstTierFree && (
+                        <p className="text-gray">
+                            First {convertLargeNumberToWords(tiers[0].up_to)} {product.type}/mo free
+                        </p>
+                    )}
+                    <div>
+                        <p className="text-gray">Volume discounts</p>
+                        <div className="grid grid-cols-2">
+                            {tiers.map((tier, i) => {
+                                return (
+                                    <React.Fragment key={`tiers-modal-${product.name}-tier-${i}`}>
+                                        <p className="col-span-1 mb-0 border-b border-gray-accent-light border-dashed py-1">
+                                            {convertLargeNumberToWords(
+                                                tier.up_to,
+                                                tiers[i - 1]?.up_to,
+                                                true,
+                                                product.type
+                                            )}
+                                        </p>
+                                        <p className="font-bold col-span-1 mb-0 border-b border-gray-accent-light border-dashed py-1">
+                                            {isFirstTierFree && i === 0
+                                                ? 'Free'
+                                                : `$${parseFloat(tier.unit_amount_usd).toFixed(numberOfSigFigs)}`}
+                                        </p>
+                                    </React.Fragment>
+                                )
+                            })}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </Modal>
+    )
+}
+
+const ProductTiers = ({ product, planKey }: { product?: BillingProductV2Type; planKey: string }): JSX.Element => {
+    const tiers = product?.tiers
+    const [modalOpen, setModalOpen] = useState(false)
+
+    if (!product || !tiers) {
+        return (
+            <>
+                <span className="font-bold text-base">Free</span>
+            </>
+        )
+    }
+    return (
+        <div>
+            {tiers.map((tier, i) => {
+                if ((parseFloat(tiers[0]?.unit_amount_usd) !== 0 && i > 0) || i > 1) {
+                    return <React.Fragment key={product.name + '-tiers-' + i}></React.Fragment>
+                }
+
+                return (
+                    <div key={product.name + '-tiers-' + i} className="pr-4">
+                        {parseFloat(tier.unit_amount_usd) === 0 ? (
+                            <div>
+                                <span className="font-bold text-base">Free</span> up to{' '}
+                                {convertLargeNumberToWords(tier.up_to, null, true, product.type)}, then
+                            </div>
+                        ) : (
+                            <>
+                                <span className="font-bold text-base">${parseFloat(tier.unit_amount_usd)}</span>
+                                {/* the product types we have are plural, so we need to singularlize them and this works for now */}
+                                <span className="text-gray">/{product.type.replace(/s$/, '')}</span>
+                                <p className="text-sm mb-0">
+                                    <Link to="" onClick={() => setModalOpen(true)} className="text-red font-bold">
+                                        Volume discounts
+                                    </Link>{' '}
+                                    after {convertLargeNumberToWords(tier.up_to)}/mo
+                                    <ProductTiersModal
+                                        modalOpen={modalOpen}
+                                        setModalOpen={setModalOpen}
+                                        product={product}
+                                    />
+                                </p>
+                            </>
+                        )}
+                    </div>
+                )
+            })}
+        </div>
+    )
+}
+
+const icons = {
+    product_analytics: <Analytics />,
+    session_recording: <SessionRecording />,
+    feature_flags: <FeatureFlags />,
+    experiments: <Experiments />,
+    integrations: <AppLibrary />,
+    platform: <Platform />,
+    support: <Support />,
+}
+
+export const getProductLimit = (product?: BillingProductV2Type): JSX.Element => {
+    if (!product) return <></>
+    if (!product.free_allocation) {
+        return <span className="font-bold">Unlimited</span>
+    }
+    return (
+        <span className="font-bold">
+            {convertLargeNumberToWords(product.free_allocation)} {product.type}
+            <span className="font-normal text-black/50">/mo</span>
+        </span>
+    )
 }
 
 export const PlanComparison = ({ className = '' }) => {
-    const [expanded] = useState(true)
+    const posthog = usePostHog()
+    const [availablePlans, setAvailablePlans] = useState<BillingV2PlanType[]>([])
 
-    const displaySections = expanded ? sections : sections.slice(0, 1)
+    const excludedFeatures = [
+        'dashboard_collaboration',
+        'ingestion_taxonomy',
+        'terms_and_conditions',
+        'security_assessment',
+        'app_metrics',
+        'paths_advanced',
+    ]
 
-    return (
-        <section className={className}>
-            <div className="plans-comparison-table max-w-7xl mx-auto pt-2 md:pt-0 relative ">
-                {/* xs to lg */}
-                <div className="max-w-2xl mx-auto space-y-16 lg:hidden">
-                    {tiers.map((tier, tierIdx) => (
-                        <section key={tier.name}>
-                            <div className="px-3 mb-2 lg:hidden">
-                                <div className="text-lg pt-2 leading-6 text-almost-black text-large font-bold text-opacity-50">
-                                    {tier.name}
+    useEffect(() => {
+        const fetchPlans = async () => {
+            const planKeys: string | null = 'starter-20230117,scale-20230117'
+            const url = `${process.env.BILLING_SERVICE_URL + '/api/plans'}${planKeys ? `?keys=${planKeys}` : ''}`
+            const headers = {
+                'Content-Type': 'application/json',
+            }
+            const response = await fetch(url, {
+                method: 'GET',
+                headers: headers,
+            })
+            response.json().then((data) => {
+                setAvailablePlans(data.plans)
+            })
+        }
+
+        fetchPlans().catch((e) => console.error(e))
+    }, [])
+
+    return availablePlans?.length > 0 ? (
+        <div className={`w-full relative mb-0 space-y-4 -mt-8 md:mt-0`}>
+            {/* PLAN HEADERS */}
+            <div className="flex flex-wrap sticky top-0 z-10 -mx-4 md:mx-0">
+                <div
+                    className={`basis-[100%] md:basis-0 flex-1 py-2 pr-6 text-[14px] font-medium text-almost-black bg-opacity-95 bg-tan border-b border-gray-accent-light pb-4 pl-4 md:pl-0`}
+                >
+                    <p className="font-bold mb-0">PostHog OS ships with all products</p>
+                    <p className="text-black/50 text-sm mb-0">
+                        You can set billing limits for each, so you only pay for what you want and never receive an
+                        unexpected bill.
+                    </p>
+                </div>
+
+                <div className="w-full bg-tan/90 md:flex-[0_0_60%] flex border-b border-gray-accent-light px-4 md:gap-4">
+                    {availablePlans.map((plan) => (
+                        <div
+                            key={`${plan.name}-header`}
+                            className={`py-2 px-2 text-sm text-almost-black leading-tight w-full pb-4  border-l border-gray-accent-light/50 first:border-l-0 md:pr-0 md:pl-0 md:border-0`}
+                        >
+                            <div className="flex-1 flex flex-col h-full justify-between">
+                                <div>
+                                    <p className="font-bold mb-0 text-center md:text-left">{plan.name}</p>
+                                    <p className="hidden md:block text-black/50 text-sm mb-3">{plan.description}</p>
                                 </div>
-                                <p className="mt-4 hidden">
-                                    <span className="text-4xl font-extrabold text-almost-black text-opacity-50">
-                                        ${tier.priceMonthly}
-                                    </span>{' '}
-                                    <span className="text-lg font-medium text-gray-500">/mo</span>
-                                </p>
-                                <p className="mt-4 text-sm text-gray-500 hidden">{tier.description}</p>
-                                <a
-                                    href={tier.href}
-                                    className="mt-6 block border border-gray-800 rounded-md bg-gray-800 w-full py-2 text-sm font-semibold text-almost-black hover:bg-gray-900 hidden"
+                                <TrackedCTA
+                                    event={{
+                                        name: `clicked Get started - free`,
+                                        type: 'cloud',
+                                    }}
+                                    type="primary"
+                                    size="sm"
+                                    className="shadow-md !w-auto"
+                                    to={`https://${
+                                        posthog?.isFeatureEnabled && posthog?.isFeatureEnabled('direct-to-eu-cloud')
+                                            ? 'eu'
+                                            : 'app'
+                                    }.posthog.com/signup`}
                                 >
-                                    Buy {tier.name}
-                                </a>
+                                    Get started - free
+                                </TrackedCTA>
                             </div>
-
-                            {sections.map((section) => (
-                                <table key={section.name} className="w-full mb-0">
-                                    <caption
-                                        style={{ captionSide: 'top' }}
-                                        className="p-3 mt-4 text-sm font-medium text-almost-black font-bold"
-                                    >
-                                        {section.name}
-                                    </caption>
-                                    <thead>
-                                        <tr>
-                                            <th className="sr-only" scope="col">
-                                                Feature
-                                            </th>
-                                            <th className="sr-only" scope="col">
-                                                Included
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody className="divide-y divide-gray-200">
-                                        {section.features.map((feature) => (
-                                            <tr key={feature.name} className="border-white/10">
-                                                <th
-                                                    className="py-5 px-4 text-sm font-normal text-gray-500 border-white/10 w-1/2"
-                                                    scope="row"
-                                                >
-                                                    {feature.name}
-                                                </th>
-                                                <td className="py-5 pr-4">
-                                                    {typeof feature.tiers[tier.name] === 'string' ? (
-                                                        <span className="block text-sm text-almost-black">
-                                                            {feature.tiers[tier.name]}
-                                                        </span>
-                                                    ) : (
-                                                        <>
-                                                            {feature.tiers[tier.name] === true ? (
-                                                                <img
-                                                                    src={CheckIcon}
-                                                                    alt="Checked"
-                                                                    width="18"
-                                                                    height="18"
-                                                                    className="m-auto h-5 w-5 text-green-500"
-                                                                    aria-hidden="true"
-                                                                />
-                                                            ) : (
-                                                                <img
-                                                                    src={MinusIcon}
-                                                                    alt="Checked"
-                                                                    width="18"
-                                                                    height="18"
-                                                                    className="m-auto h-5 w-5 text-red-500"
-                                                                    aria-hidden="true"
-                                                                />
-                                                            )}
-
-                                                            <span className="sr-only">
-                                                                {feature.tiers[tier.name] === true ? 'Yes' : 'No'}
-                                                            </span>
-                                                        </>
-                                                    )}
-                                                </td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            ))}
-
-                            <div
-                                className={classNames(
-                                    tierIdx < tiers.length - 1 ? 'py-5 border-b' : 'pt-5',
-                                    'border-gray-200 px-4 hidden'
-                                )}
-                            >
-                                <a
-                                    href={tier.href}
-                                    className="block w-full bg-gray-800 border border-gray-800 rounded-md py-2 text-sm font-semibold text-almost-black hover:bg-gray-900"
-                                >
-                                    Buy {tier.name}
-                                </a>
-                            </div>
-                        </section>
+                        </div>
                     ))}
                 </div>
-
-                {/* lg+ */}
-                <div className="hidden lg:block">
-                    <table
-                        className={`w-full h-px table-fixed relative mb-0 rounded-lg ${
-                            expanded ? 'pricing-table-expanded' : 'pricing-table-collapsed'
-                        }`}
-                    >
-                        <caption className="sr-only">Pricing plan comparison</caption>
-                        <thead>
-                            <tr>
-                                <th
-                                    className="py-2 px-3 text-[14px] font-medium text-almost-black border-white/10 sticky top-0 w-[200px] z-10 bg-opacity-50"
-                                    scope="col"
+            </div>
+            {/* PRODUCTS */}
+            {availablePlans?.[availablePlans.length - 1]?.products?.map((product) => (
+                <React.Fragment key={`product-${product.type}`}>
+                    {product.feature_groups?.map((feature_group) => (
+                        <div key={`product-${product.type}-feature-group-${feature_group.name}`}>
+                            <div className="flex flex-wrap">
+                                <div
+                                    key={`${feature_group.name}-group`}
+                                    className={`flex-1 basis-[100%] md:basis-0 text-center text-primary pt-6 md:pb-2 md:text-left justify-center -mx-4 md:mx-0`}
                                 >
-                                    <span className="sr-only">Feature by</span>
-                                    <span className="sr-only">Plans</span>
-                                </th>
-                                {tiers.map((tier) => (
-                                    <th
-                                        key={tier.name}
-                                        className="py-2 px-3 text-sm text-left font-bold text-almost-black leading-tight border-white/10 sticky top-0  z-10 bg-opacity-75 bg-tan w-full"
-                                        scope="col"
-                                    >
-                                        {tier.name}
-                                    </th>
-                                ))}
-                            </tr>
-                        </thead>
-                        <tbody className="">
-                            {/* 
-                            <tr>
-                                <th
-                                    className="py-8 px-6 text-sm font-medium text-almost-black text-left align-top border-white/10"
-                                    scope="row"
-                                >
-                                    Pricing
-                                </th>
-                                {tiers.map((tier) => (
-                                    <td
-                                        key={tier.name}
-                                        className="h-full py-8 px-6 align-top border-white/10"
-                                    >
-                                        <div className="relative h-full table">
-                                            <p>
-                                                <span className="text-4xl font-extrabold text-almost-black text-opacity-50">
-                                                    ${tier.priceMonthly}
-                                                </span>{' '}
-                                                <span className="text-lg font-medium text-gray-500">/mo</span>
-                                            </p>
-                                            <p className="mt-4 mb-16 text-sm text-gray-500">{tier.description}</p>
-                                            <a
-                                                href={tier.href}
-                                                className="absolute bottom-0 flex-grow block w-full bg-gray-800 border border-gray-800 rounded-md 5 py-2 text-sm font-semibold text-almost-black hover:bg-gray-900"
+                                    <h4 className="mb-0 flex items-center gap-2 w-full justify-center md:justify-start bg-gray-accent-light md:bg-transparent py-4 md:py-0 border-y border-gray-accent-light md:border-0">
+                                        <span className="inline-block h-6 w-6">{icons[feature_group.group]}</span>{' '}
+                                        {feature_group.name}
+                                    </h4>
+                                </div>
+                                <div className="w-full md:flex-[0_0_60%] px-4 flex divide-x md:divide-x-0 divide-gray-accent-light/50 md:gap-4">
+                                    {product.tiered
+                                        ? availablePlans.map((plan) => (
+                                              <div
+                                                  className={`flex-1 text-center py-4 md:text-left md:pt-6 justify-center`}
+                                                  key={`${plan.key}-${product.name}-free-allocation-or-limit`}
+                                              >
+                                                  <div>
+                                                      {getProductLimit(
+                                                          plan.products?.find((p) => p.type === product.type)
+                                                      )}
+                                                  </div>
+                                              </div>
+                                          ))
+                                        : null}
+                                </div>
+                            </div>
+                            {/* SUB-FEATURES */}
+                            <div className="bg-gray-accent-light/80 p-1 rounded md:ml-6">
+                                {feature_group.features
+                                    // don't include features that are in the excluded features list
+                                    ?.filter((f) => !excludedFeatures.includes(f.key))
+                                    ?.map((feature) => (
+                                        <div
+                                            className="md:p-2 rounded md:hover:bg-gray-accent/50 md:flex"
+                                            key={`${feature_group.name}-subfeature-${feature.name}`}
+                                        >
+                                            <div
+                                                className={`flex-1 bg-gray-accent/25 rounded py-2 text-center md:py-0 md:bg-transparent md:text-left`}
+                                                key={`comparison-row-key-${feature.name}`}
                                             >
-                                                Buy {tier.name}
-                                            </a>
+                                                <Tooltip
+                                                    content={
+                                                        <div className="p-2">
+                                                            <p className="font-bold text-[15px] mb-1">{feature.name}</p>
+                                                            <p className="mb-0 text-sm">{feature.description}</p>
+                                                        </div>
+                                                    }
+                                                    tooltipClassName="max-w-xs m-4"
+                                                    placement={window.innerWidth > 767 ? 'right' : 'bottom'}
+                                                >
+                                                    <span
+                                                        className={`pb-0.5 cursor-default font-bold text-[15px] border-b border-dashed border-gray-accent-light`}
+                                                    >
+                                                        {feature.name}
+                                                    </span>
+                                                </Tooltip>
+                                            </div>
+                                            <div className="divide-x md:divide-x-0 divide-gray-accent-light/50 w-full md:flex-[0_0_60%] flex md:gap-4">
+                                                {availablePlans.map((plan, i) => (
+                                                    <div
+                                                        className={`flex-1 flex justify-center py-4 md:py-0 md:text-left md:justify-start md:border-none`}
+                                                        key={`${plan.name}-${feature.name}-value`}
+                                                    >
+                                                        <PlanIcon
+                                                            feature={plan.products
+                                                                .find((p) => p.type === product.type)
+                                                                ?.feature_groups?.find(
+                                                                    (fg) => fg.name === feature_group.name
+                                                                )
+                                                                ?.features?.find((f) => f.name === feature.name)}
+                                                        />
+                                                    </div>
+                                                ))}
+                                            </div>
                                         </div>
-                                    </td>
-                                ))}
-                            </tr>
-                            */}
-                            {displaySections.map((section) => (
-                                <Fragment key={section.name}>
-                                    {section.name && (
-                                        <tr>
-                                            <th
-                                                className="bg-transparent pt-6 pb-3 pl-3 text-lg font-bold text-left text-almost-black border-white/10"
-                                                colSpan={5}
-                                                scope="colgroup"
-                                                style={{
-                                                    borderLeftColor: 'transparent',
-                                                    borderRightColor: 'transparent',
-                                                }}
+                                    ))}
+                            </div>
+                            {/* PRODUCT PRICING */}
+                            {product.tiers && (
+                                <div className="flex flex-wrap md:pl-8 px-2">
+                                    <div
+                                        className={`hidden md:block basis-[100%] md:basis-0 flex-1 pt-4 text-center md:text-left font-bold md:bg-transparent`}
+                                    >
+                                        {feature_group.name} pricing
+                                    </div>
+                                    <div className="w-full md:flex-[0_0_60%] flex">
+                                        {availablePlans.map((plan, i) => (
+                                            <div
+                                                key={plan.name + '-' + product.name + '-' + 'pricing'}
+                                                className={`flex-1 pl-2 first:pl-0 text-sm font-medium text-almost-black pt-4 md:border-none`}
                                             >
-                                                {section.name}
-                                            </th>
-                                        </tr>
-                                    )}
-                                    {section.features.map((feature) => (
-                                        <tr className="align-top" key={feature.name}>
-                                            <th
-                                                className="py-2 px-3 text-sm font-medium text-almost-black text-left border-white/10 w-[180px]"
-                                                scope="row"
-                                            >
-                                                {typeof feature.docsLink === 'string' ? (
-                                                    <a href={feature.docsLink}>{feature.name}</a>
-                                                ) : (
-                                                    feature.name
-                                                )}
-                                            </th>
-                                            {tiers.map((tier) => (
-                                                <td key={tier.name} className="py-2 px-3 border-white/10 text-sm">
-                                                    {typeof feature.tiers[tier.name] === 'string' ? (
-                                                        <span className="block text-sm text-almost-black text-opacity-75">
-                                                            {feature.tiers[tier.name]}
-                                                        </span>
-                                                    ) : (
-                                                        <>
-                                                            {feature.tiers[tier.name] === true ? (
-                                                                <img
-                                                                    src={CheckIcon}
-                                                                    alt="Checked"
-                                                                    className="h-4 w-4 text-green-500"
-                                                                    aria-hidden="true"
-                                                                />
-                                                            ) : (
-                                                                <img
-                                                                    src={MinusIcon}
-                                                                    alt="Checked"
-                                                                    className="h-4 w-4 text-red-500"
-                                                                    aria-hidden="true"
-                                                                />
-                                                            )}
+                                                <ProductTiers
+                                                    product={plan.products.find((p) => p.type === product.type)}
+                                                    planKey={plan.key}
+                                                />
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    ))}
+                </React.Fragment>
+            ))}
+            <div className="flex flex-wrap z-10 -mx-4 md:mx-0 pb-6">
+                <div
+                    className={`basis-[100%] md:basis-0 flex-1 py-2 pr-6 text-[14px] font-medium text-almost-black bg-opacity-95 bg-tan pb-4`}
+                ></div>
 
-                                                            <span className="sr-only">
-                                                                {feature.tiers[tier.name] === true
-                                                                    ? 'Included'
-                                                                    : 'Not included'}{' '}
-                                                                in {tier.name}
-                                                            </span>
-                                                        </>
-                                                    )}
-                                                </td>
-                                            ))}
-                                        </tr>
-                                    ))}
-                                </Fragment>
-                            ))}
-                        </tbody>
-                        {expanded ? (
-                            <tfoot className="hidden">
-                                <tr className="border-t border-white/10">
-                                    <th className="sr-only" scope="row">
-                                        Choose your plan
-                                    </th>
-                                    {tiers.map((tier) => (
-                                        <td key={tier.name} className="pt-5 px-6 border-white/10">
-                                            <a
-                                                href={tier.href}
-                                                className="block w-full bg-gray-800 border border-gray-800 rounded-md py-2 text-sm font-semibold text-almost-black hover:bg-gray-900"
-                                            >
-                                                Buy {tier.name}
-                                            </a>
-                                        </td>
-                                    ))}
-                                </tr>
-                            </tfoot>
-                        ) : null}
-                    </table>
+                <div className="w-full bg-tan/90 md:flex-[0_0_60%] flex px-4 md:gap-4">
+                    {availablePlans.map((plan) => (
+                        <div
+                            key={`${plan.name}-header`}
+                            className={`py-2 px-2 text-sm text-almost-black leading-tight w-full pb-4 border-l border-gray-accent-light/50 first:border-l-0 md:pr-0 md:pl-0 md:border-0`}
+                        >
+                            <div className="flex-1 flex flex-col h-full justify-between">
+                                <div>
+                                    <p className="font-bold mb-2 text-center md:text-left">{plan.name}</p>
+                                </div>
+                                <TrackedCTA
+                                    event={{
+                                        name: `clicked Get started - free`,
+                                        type: 'cloud',
+                                    }}
+                                    type="primary"
+                                    size="sm"
+                                    className="shadow-md !w-auto"
+                                    to={`https://${
+                                        posthog?.isFeatureEnabled && posthog?.isFeatureEnabled('direct-to-eu-cloud')
+                                            ? 'eu'
+                                            : 'app'
+                                    }.posthog.com/signup`}
+                                >
+                                    Get started - free
+                                </TrackedCTA>
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </div>
-        </section>
+        </div>
+    ) : (
+        <div className="bg-gray-accent-light p-12 rounded flex justify-center">
+            <Spinner />
+        </div>
     )
 }

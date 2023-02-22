@@ -26,20 +26,18 @@ const Tutorials = ({
                 hideSidebar
                 hideSurvey
             >
-                <div className="mt-6 mb-12">
-                    <Posts
-                        title="All tutorials"
-                        action={
-                            <p className="m-0 leading-none font-semibold">
-                                Page {currentPage} of {numPages}
-                            </p>
-                        }
-                        posts={allPostsRecent.slice(0, 4)}
-                    />
-                    <NewsletterForm />
-                    <Posts posts={allPostsRecent.slice(4)} />
-                    <Pagination currentPage={currentPage} numPages={numPages} base={base} />
-                </div>
+                <Posts
+                    title="All tutorials"
+                    action={
+                        <p className="m-0 leading-none font-semibold">
+                            Page {currentPage} of {numPages}
+                        </p>
+                    }
+                    posts={allPostsRecent.slice(0, 4)}
+                />
+                <NewsletterForm />
+                <Posts posts={allPostsRecent.slice(4)} />
+                <Pagination currentPage={currentPage} numPages={numPages} base={base} />
             </PostLayout>
         </Layout>
     )

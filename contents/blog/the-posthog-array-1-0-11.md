@@ -78,7 +78,7 @@ You will also see the below message – as with next week’s release you will n
 
 ![workers added to PostHog message](../images/04/Posthog-5.png)
 
-###[ Precalculate Events that match Actions](https://github.com/PostHog/posthog/pull/420)
+###[ Precalculate Events that match Actions](https://github.com/PostHog/posthog/pull/420)
 
 This is one of the most impactful updates to PostHog so far –  whenever we did a query involving actions in the frontend, the database had to do a lot of heavy lifting to calculate which events match the action. 
 
@@ -100,7 +100,7 @@ For a full breakdown of the changes and updates, please see our [changelog](http
 
 ### [Filtering by date and events in funnels](https://github.com/PostHog/posthog/issues/444)
 
-This was one of 4 issues raised by [jeremynevans](https://github.com/jeremynevans) at Savvy – it was raised in the [PostHog slack channel](https://join.slack.com/t/posthogusers/shared_invite/zt-1ghutt7jr-jRj0_iYDRS7R~uKeZLIbdQ) and resulted in an excellent conversation with Tim resulting in more feature requests which is amazing.
+This was one of 4 issues raised by [jeremynevans](https://github.com/jeremynevans) at Savvy – it was raised in the [PostHog slack channel](https://join.slack.com/t/posthogusers/shared_invite/zt-1ou84aphe-R3H5OE9Uu6i8Fq4EHCWzbg) and resulted in an excellent conversation with Tim resulting in more feature requests which is amazing.
 
 He is also using PostHog for analytics on [Crowd Cure](https://crowd-cure.com/) to help build the largest clinical trial dataset to yet to help with the Coronavirus crisis – check it out on [Producthunt](https://www.producthunt.com/posts/crowdcure-covid-19).
 
@@ -115,6 +115,12 @@ As mentioned above this was a long standing issue and big gap. Excellent and qui
 * [Excalidraw](https://github.com/excalidraw/excalidraw) (if you miss whiteboards at the office this is a good replacement.)
 * [dns-over-wikipedia](https://github.com/aaronjanse/dns-over-wikipedia) (redirects idk domains using the official link in wikipedia.)
 * [bungholio](https://github.com/johntitus/bungholio) (Get text alerts when products become available on Amazon – useful if resistance bands are as sparse in your location as they are in Aaron’s.)
+
+## Share your feedback
+We'd love to hear anything you have to say about PostHog, good or bad. As a thank you, we'll share some awesome [PostHog merch](https://merch.posthog.com).
+
+Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog.com) with one of our teams to help us make PostHog even better!
+
 
 ## PostHog news
 

@@ -281,11 +281,27 @@
         "link_url": "https://twitter.com/IanVanagas"
     },
     {
+        "handle": "laudspeaker",
+        "name": "Abe Basu",
+        "role": "CEO of Laudspeaker",
+        "image": "../../contents/apps/thumbnails/laudspeaker-connector.png",
+        "link_type": "twitter",
+        "link_url": "https://twitter.com/laudspeaker"
+    },
+    {
         "handle": "luke-harries",
         "name": "Luke Harries",
         "role": "Head of Product",
         "image": "../../static/images/authors/luke.png",
         "link_type": "twitter",
         "link_url": "https://twitter.com/lukeharries_"
+    },
+    {
+        "handle": "raquel-m-smith",
+        "name": "Raquel M Smith",
+        "role": "Product Engineer - Growth",
+        "image": "../../static/images/authors/raquel-m-smith-posthog.png",
+        "link_type": "twitter",
+        "link_url": "https://twitter.com/raquel_m_smith"
     }
 ]

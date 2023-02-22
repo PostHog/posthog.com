@@ -1,5 +1,5 @@
 import Layout from 'components/Layout'
-import PostLayout, { TableOfContents } from 'components/PostLayout'
+import PostLayout from 'components/PostLayout'
 import WhatsNext from 'components/Product/WhatsNext'
 import API from 'components/Product/API'
 import CTA from 'components/Product/CTA'
@@ -9,7 +9,23 @@ import EventPipelines from 'components/Product/EventPipelines'
 import { IProps, FeatureWrapperCol } from 'components/Product/FeatureWrapper'
 import Hero from 'components/Product/Hero'
 import SelfHosting from 'components/Product/SelfHosting'
-import { ProductIcons } from 'components/ProductIcons/ProductIcons'
+import {
+    AppLibrary,
+    CorrelationAnalysis,
+    Dashboards,
+    Experiments,
+    FeatureFlags,
+    Funnels,
+    PathAnalysis,
+    PosthogMonochrome,
+    SessionRecording,
+    TopFeatures,
+    Trends,
+    DataWarehouse as DataWarehouseIcon,
+    API as APIIcon,
+    EventPipelines as EventPipelinesIcon,
+    SelfHosting as SelfHostingIcon,
+} from 'components/ProductIcons'
 import { StaticImage } from 'gatsby-plugin-image'
 import React, { useRef, useState } from 'react'
 import Scrollspy from 'react-scrollspy'
@@ -17,6 +33,7 @@ import { Link } from 'react-scroll'
 import Slider from 'react-slick'
 import { SEO } from 'components/seo'
 import slugify from 'slugify'
+import OpenSource from 'components/Product/OpenSource'
 
 const features: IProps[] = [
     {
@@ -26,22 +43,22 @@ const features: IProps[] = [
         features: [
             {
                 title: 'Funnels',
-                icon: ProductIcons?.funnels,
+                icon: <Funnels />,
                 url: '/product/funnels',
             },
             {
                 title: 'Graphs & trends',
-                icon: ProductIcons?.trends,
+                icon: <Trends />,
                 url: '/product/trends',
             },
             {
                 title: 'Path analysis',
-                icon: ProductIcons?.pathAnalysis,
+                icon: <PathAnalysis />,
                 url: '/product/user-paths',
             },
             {
-                title: 'Dashboards & collaboration',
-                icon: ProductIcons?.dashboards,
+                title: 'Dashboards',
+                icon: <Dashboards />,
                 url: '/product/collaboration',
             },
         ],
@@ -49,7 +66,7 @@ const features: IProps[] = [
     {
         title: 'Session recording',
         cta: { title: 'Learn more', url: '/product/session-recording' },
-        icon: ProductIcons.sessionRecording,
+        icon: <SessionRecording />,
         subtitle: 'with console logs',
         image: <StaticImage src="../components/Product/images/session-recording.png" alt="Session recording" />,
         disclaimer: 'Alternative to Hotjar, Logrocket, Matomo',
@@ -61,12 +78,12 @@ const features: IProps[] = [
         features: [
             {
                 title: 'Experimentation Suite',
-                icon: ProductIcons.experiments,
+                icon: <Experiments />,
                 url: '/product/experimentation-suite',
             },
             {
                 title: 'Correlation analysis',
-                icon: ProductIcons.correlationAnalysis,
+                icon: <CorrelationAnalysis />,
                 url: '/product/correlation-analysis',
             },
         ],
@@ -74,7 +91,7 @@ const features: IProps[] = [
     {
         title: 'Feature flags',
         cta: { title: 'Learn more', url: '/product/feature-flags' },
-        icon: ProductIcons.featureFlags,
+        icon: <FeatureFlags />,
         subtitle: 'with multivariate testing',
         image: <StaticImage src="../components/Product/images/feature-flags.png" alt="Feature flags" />,
         disclaimer: 'Alternative to LaunchDarkly',
@@ -85,15 +102,15 @@ const menu = [
     {
         name: 'Overview',
         url: 'overview',
-        icon: ProductIcons.posthogMonochrome,
+        icon: <PosthogMonochrome />,
     },
-    { name: 'Top features', url: 'top-features', icon: ProductIcons.topFeatures },
-    { name: 'Apps', url: 'apps', icon: ProductIcons.appLibrary },
-    { name: 'Event pipelines', url: 'event-pipelines', icon: ProductIcons.eventPipelines },
-    { name: 'Data warehouse', url: 'data-warehouse', icon: ProductIcons.dataWarehouse },
-    { name: 'Self-hosting', url: 'self-hosting', icon: ProductIcons.selfHosting },
-    { name: 'API', url: 'api', icon: ProductIcons.api },
-    { name: "What's next?", url: 'roadmap', icon: ProductIcons.experiments },
+    { name: 'Top features', url: 'top-features', icon: <TopFeatures /> },
+    { name: 'Apps', url: 'apps', icon: <AppLibrary /> },
+    { name: 'Event pipelines', url: 'event-pipelines', icon: <EventPipelinesIcon /> },
+    { name: 'Data warehouse', url: 'data-warehouse', icon: <DataWarehouseIcon /> },
+    { name: 'Open source', url: 'open-source', icon: <SelfHostingIcon /> },
+    { name: 'API', url: 'api', icon: <APIIcon /> },
+    { name: "What's next?", url: 'roadmap', icon: <Experiments /> },
 ]
 
 const Menu = () => {
@@ -149,40 +166,39 @@ export default function Product() {
                 hideSurvey
                 menu={menu}
                 article={false}
-                contentContainerClassName="w-full pb-12 md:px-12 md:-mt-8"
+                contentContainerClassName="w-full md:px-12"
                 menuType="scroll"
                 menuWidth={{ left: 350, right: 350 }}
+                mobileMenu={false}
             >
-                <div className="sticky top-0 z-10 bg-tan lg:hidden mb-6 py-2">
-                    <div className="pl-5">
-                        <Slider ref={sliderRef} {...sliderSettings}>
-                            {menu.map(({ name, icon, url }, index) => {
-                                return (
-                                    <div key={name}>
-                                        <Link
-                                            smooth
-                                            duration={300}
-                                            offset={-57}
-                                            to={url}
-                                            hashSpy
-                                            className={`mr-1 cursor-pointer flex items-center space-x-2 text-[14px] font-semibold px-3 py-2 rounded-md hover:bg-gray-accent-light text-black hover:text-black ${
-                                                activeSliderIndex === index ? 'bg-gray-accent-light' : ''
-                                            }`}
-                                            spy
-                                            onClick={() => sliderRef?.current?.slickGoTo(index)}
-                                            onSetActive={() => {
-                                                setActiveSliderIndex(index)
-                                                sliderRef?.current?.slickGoTo(index)
-                                            }}
-                                        >
-                                            <span className="w-[25px]">{icon}</span>
-                                            <span>{name}</span>
-                                        </Link>
-                                    </div>
-                                )
-                            })}
-                        </Slider>
-                    </div>
+                <div className="sticky top-0 z-10 bg-tan lg:hidden mb-8">
+                    <Slider ref={sliderRef} {...sliderSettings}>
+                        {menu.map(({ name, icon, url }, index) => {
+                            return (
+                                <div key={name}>
+                                    <Link
+                                        smooth
+                                        duration={300}
+                                        offset={-57}
+                                        to={url}
+                                        hashSpy
+                                        className={`mr-1 cursor-pointer flex items-center space-x-2 text-[14px] font-semibold px-3 py-2 rounded-md hover:bg-gray-accent-light text-black hover:text-black ${
+                                            activeSliderIndex === index ? 'bg-gray-accent-light' : ''
+                                        }`}
+                                        spy
+                                        onClick={() => sliderRef?.current?.slickGoTo(index)}
+                                        onSetActive={() => {
+                                            setActiveSliderIndex(index)
+                                            sliderRef?.current?.slickGoTo(index)
+                                        }}
+                                    >
+                                        <span className="w-[25px]">{icon}</span>
+                                        <span>{name}</span>
+                                    </Link>
+                                </div>
+                            )
+                        })}
+                    </Slider>
                 </div>
                 <div id="top-features">
                     <div className="max-w-5xl mx-auto px-5 box-content">
@@ -199,10 +215,10 @@ export default function Product() {
                 <Apps />
                 <EventPipelines />
                 <DataWarehouse />
-                <SelfHosting />
+                <OpenSource />
                 <API />
                 <WhatsNext />
-                <CTA className="mt-12 -mx-12 !px-20 !md:px-16 !-mb-12 md:!-mb-20" />
+                <CTA className="md:-mx-12" />
             </PostLayout>
         </Layout>
     )

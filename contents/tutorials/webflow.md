@@ -5,6 +5,7 @@ showTitle: true
 author: ["ian-vanagas"]
 date: 2023-01-12
 featuredImage: ../images/tutorials/banners/webflow.png
+featuredVideo: https://www.youtube-nocookie.com/embed/2dNSr93N5Ns
 topics: ["configuration"]
 ---
 

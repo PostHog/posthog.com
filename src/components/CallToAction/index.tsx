@@ -65,7 +65,29 @@ export const button = (type = 'primary', width = 'auto', className = '', size = 
     ${className}
 `
 
-export const TrackedCTA = ({ event: { name: eventName, ...event }, ...props }) => {
+export type CTAPropsType = {
+    type?: string
+    width?: string
+    size?: string
+    href?: string
+    to?: string
+    onClick?: () => void
+    children?: JSX.Element | string
+    className?: string
+    external?: boolean
+    externalNoIcon?: boolean
+    state?: any
+    event?: any
+}
+
+export interface TrackedCTAPropsType extends CTAPropsType {
+    event: {
+        name: string
+        [key: string]: any
+    }
+}
+
+export const TrackedCTA = ({ event: { name: eventName, ...event }, ...props }: TrackedCTAPropsType): JSX.Element => {
     const posthog = usePostHog()
 
     return (
@@ -92,20 +114,7 @@ export const CallToAction = ({
     externalNoIcon,
     state = {},
     event,
-}: {
-    type?: string
-    width?: string
-    size?: string
-    href?: string
-    to?: string
-    onClick?: () => void
-    children?: JSX.Element | string
-    className?: string
-    external?: boolean
-    externalNoIcon?: boolean
-    state?: any
-    event?: any
-}): JSX.Element => {
+}: CTAPropsType): JSX.Element => {
     const url = to || href
     return (
         <Link

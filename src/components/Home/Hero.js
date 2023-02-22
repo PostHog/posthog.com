@@ -1,10 +1,10 @@
 import React from 'react'
-import { CallToAction } from '../CallToAction'
+import { CallToAction, TrackedCTA } from '../CallToAction'
 import { Link } from 'gatsby'
 import { heading, section } from './classes'
 import Icon from './Icon'
 import Slider from './Slider'
-import { DemoLink } from 'components/DemoLink'
+import { PricingCTA } from 'components/PricingCTA'
 import { SignupCTA } from 'components/SignupCTA'
 
 export const FeatureStrip = ({ className = '' }) => {
@@ -55,7 +55,19 @@ export default function Hero() {
 
                     <div className="flex flex-col md:flex-row justify-center items-center gap-2">
                         <SignupCTA className="!w-full md:!w-44 shadow-xl !px-4" />
-                        <DemoLink />
+                        <PricingCTA />
+                    </div>
+                    <div className="justify-center mt-6 flex">
+                        <TrackedCTA
+                            event={{ name: `clicked Get a demo` }}
+                            type="custom"
+                            className={`shadow-none font-normal border-b rounded-none border-dashed
+                                    border-black/20 hover:border-black/40 pb-0 px-2 opacity-70 hover:opacity-80
+                                    text-almost-black hover:text-almost-black`}
+                            href="/book-a-demo"
+                        >
+                            Get a demo
+                        </TrackedCTA>
                     </div>
                 </div>
                 <Slider />

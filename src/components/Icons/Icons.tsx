@@ -67,7 +67,7 @@ export const CircleArrow = ({ className }: { className: string }): JSX.Element =
     )
 }
 
-export const Edit = ({ className }: { className: string }): JSX.Element => {
+export const Edit = ({ className = '' }: { className?: string }): JSX.Element => {
     return (
         <svg
             className={className}
@@ -82,7 +82,7 @@ export const Edit = ({ className }: { className: string }): JSX.Element => {
     )
 }
 
-export const Issue = ({ className }: { className: string }): JSX.Element => {
+export const Issue = ({ className = '' }: { className?: string }): JSX.Element => {
     return (
         <svg
             className={className}
@@ -1598,7 +1598,7 @@ export const Facebook = (props): JSX.Element => {
 
 export const Mail = (props): JSX.Element => {
     return (
-        <svg {...props} width="30" height="20" viewBox="0 0 30 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg {...props} viewBox="0 0 30 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
                 d="M2.51992 0.719971C1.64991 0.719971 0.919922 1.44995 0.919922 2.31997V17.68C0.919922 18.55 1.64991 19.28 2.51992 19.28H27.4799C28.3499 19.28 29.0799 18.55 29.0799 17.68V2.31997C29.0799 1.44995 28.3499 0.719971 27.4799 0.719971H2.51992ZM4.35992 2.63997H25.6399L15.3398 11.84C15.1998 11.965 14.7998 11.965 14.6598 11.84L4.35992 2.63997ZM2.83992 3.84996L10.03 10.28L2.83992 16.2301V3.84996ZM27.1599 3.84996V16.2301L19.9698 10.28L27.1599 3.84996ZM11.4799 11.57L13.3799 13.27C14.3124 14.1025 15.6874 14.1025 16.6199 13.27L18.5199 11.57L25.5199 17.36H4.47992L11.4799 11.57Z"
                 fill="currentColor"
@@ -1871,7 +1871,7 @@ export const DarkMode = (props: any): JSX.Element => {
     )
 }
 
-export const ExpandDocument = ({ expanded, ...props }: { expanded: boolean }) => {
+export const ExpandDocument = ({ expanded, ...props }: { expanded: boolean | undefined }) => {
     return (
         <svg {...props} width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -2192,6 +2192,59 @@ export const OpenIssue = (props: any) => {
                     <rect width="16" height="16" fill="white" transform="translate(0.0214844 0.220337)" />
                 </clipPath>
             </defs>
+        </svg>
+    )
+}
+
+export const LinkIcon = (props: any) => {
+    return (
+        <svg {...props} width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M13.5722 10.4647L15.8532 8.18299C17.5175 6.51939 17.5175 3.81169 15.8532 2.14813C14.1896 0.483828 11.4819 0.483828 9.81759 2.14813L6.52557 5.44015C4.86127 7.10374 4.86127 9.81145 6.52557 11.475C6.77096 11.7211 7.04026 11.9292 7.32502 12.1022L9.08706 10.3395C8.75166 10.2593 8.43315 10.0899 8.1716 9.8283C7.41504 9.07174 7.41504 7.84128 8.1716 7.08474L11.4636 3.79271C12.2202 3.03616 13.4506 3.03616 14.2072 3.79271C14.9637 4.54927 14.9637 5.77974 14.2072 6.53627L13.2404 7.50378C13.639 8.44244 13.7487 9.4746 13.5723 10.4646L13.5722 10.4647Z"
+                fill="currentColor"
+            />
+            <path
+                d="M4.42957 7.53536L2.14861 9.81632C0.484316 11.4799 0.484316 14.1876 2.14861 15.8519C3.81221 17.5162 6.51991 17.5162 8.18419 15.8519L11.4762 12.5599C13.1405 10.8963 13.1398 8.18858 11.4762 6.52502C11.2308 6.27892 10.9615 6.07081 10.6775 5.89783L8.91543 7.66057C9.25082 7.74072 9.56933 7.91017 9.83089 8.17173C10.5874 8.92829 10.5874 10.1588 9.83089 10.9153L6.53887 14.2073C5.78231 14.9639 4.55185 14.9639 3.79531 14.2073C3.03875 13.4508 3.03875 12.2203 3.79531 11.4638L4.76281 10.497C4.36272 9.55757 4.25305 8.52541 4.42952 7.53541L4.42957 7.53536Z"
+                fill="currentColor"
+            />
+        </svg>
+    )
+}
+
+export const Bookmark = (props: any) => {
+    return (
+        <svg {...props} width="12" height="16" viewBox="0 0 12 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M9.88692 0.12504H2.0625C1.13086 0.12504 0.375 0.880896 0.375 1.81254V15.3125C0.375703 15.52 0.490312 15.7098 0.673116 15.8075C0.852412 15.8996 1.06687 15.8884 1.23562 15.7794L6.00004 12.6125L10.7531 15.7794C10.9254 15.8926 11.1462 15.9032 11.3283 15.8054C11.5097 15.7084 11.6236 15.5185 11.625 15.3125V1.86312C11.625 0.903356 10.8467 0.12504 9.88692 0.12504ZM10.5 14.2606L6.30946 11.4481C6.12172 11.3244 5.87845 11.3244 5.69071 11.4481L1.50013 14.2606V1.81254C1.50013 1.50175 1.75184 1.25004 2.06263 1.25004H9.88147C10.0453 1.24863 10.2028 1.31262 10.3188 1.42793C10.4348 1.54254 10.5002 1.69933 10.5002 1.86317L10.5 14.2606Z"
+                fill="currentColor"
+            />
+        </svg>
+    )
+}
+
+export const TableOfContents = (props: any) => {
+    return (
+        <svg {...props} width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M2.13295 1.06697C2.13295 2.48894 0 2.48894 0 1.06697C0 -0.355005 2.13295 -0.355005 2.13295 1.06697Z"
+                fill="currentColor"
+            />
+            <path d="M4.26562 0H15.9984V2.13294H4.26562V0Z" fill="currentColor" />
+            <path
+                d="M2.13295 5.33383C2.13295 6.7558 0 6.7558 0 5.33383C0 3.91086 2.13295 3.91086 2.13295 5.33383Z"
+                fill="currentColor"
+            />
+            <path d="M4.26562 4.26685H15.9984V6.39979H4.26562V4.26685Z" fill="currentColor" />
+            <path
+                d="M2.13295 9.59968C2.13295 11.0227 0 11.0227 0 9.59968C0 8.17771 2.13295 8.17771 2.13295 9.59968Z"
+                fill="currentColor"
+            />
+            <path d="M4.26562 8.53394H15.9984V10.6669H4.26562V8.53394Z" fill="currentColor" />
+            <path
+                d="M2.13295 13.8668C2.13295 15.2887 0 15.2887 0 13.8668C0 12.4448 2.13295 12.4448 2.13295 13.8668Z"
+                fill="currentColor"
+            />
+            <path d="M4.26562 12.7996H15.9984V14.9325H4.26562V12.7996Z" fill="currentColor" />
         </svg>
     )
 }

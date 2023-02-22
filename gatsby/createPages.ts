@@ -348,20 +348,9 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     createPosts(result.data.apidocs.nodes, 'docs', ApiEndpoint, { name: 'Docs', url: '/docs' })
     createPosts(result.data.manual.nodes, 'docs', HandbookTemplate, { name: 'Using PostHog', url: '/using-posthog' })
 
-    const tutorialsPageViewExport = await fetch(
-        'https://app.posthog.com/shared/4lYoM6fa3Sa8KgmljIIHbVG042Bd7Q.json'
-    ).then((res) => res.json())
-
     result.data.tutorials.nodes.forEach((node) => {
         const tableOfContents = formatToc(node.headings)
         const { slug } = node.fields
-        let pageViews
-        tutorialsPageViewExport.dashboard.items[0].result.some((insight) => {
-            if (insight.breakdown_value.includes(slug)) {
-                pageViews = insight.aggregated_value
-                return true
-            }
-        })
 
         createPage({
             path: replacePath(node.fields.slug),
@@ -370,7 +359,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 id: node.id,
                 tableOfContents,
                 menu: sidebars.docs,
-                pageViews,
                 slug,
             },
         })
@@ -504,6 +492,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             let gitHubIssues = []
             if (issues) {
                 for (const issue of issues) {
+                    if (!issue) continue
                     const { html_url, number, title, labels } = await fetch(
                         `https://api.github.com/repos/${repo}/issues/${issue.trim()}`,
                         {

@@ -5,11 +5,42 @@ import Link from 'components/Link'
 import PostLayout from 'components/PostLayout'
 import docs from 'sidebars/docs.json'
 import { graphql } from 'gatsby'
-import ProductIcons from 'components/ProductIcons'
+import {
+    Analytics,
+    Dashboards,
+    Funnels,
+    GroupAnalytics,
+    Trends,
+    Lifecycle,
+    PathAnalysis,
+    Stickiness,
+    Retention,
+    Sessions,
+    Heatmaps,
+    FeatureFlags,
+    Experiments,
+    CorrelationAnalysis,
+    Actions,
+    Annotations,
+    Cohorts,
+    Events,
+    DataManagement,
+    Persons,
+    SessionRecording,
+    UTM,
+    TeamCollaboration,
+    SSO,
+    Projects,
+    UserPermissions,
+    Settings,
+    Toolbar,
+    Notifications,
+} from 'components/ProductIcons'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { Close } from 'components/Icons/Icons'
 import { CallToAction } from 'components/CallToAction'
 import Modal from 'components/Modal'
+import { Post } from 'components/Blog'
 
 const categories: {
     name: string
@@ -24,70 +55,70 @@ const categories: {
 }[] = [
     {
         name: '1. Product analytics',
-        anchor: 'produt-analytics',
+        anchor: 'product-analytics',
         manuals: [
             {
                 name: 'Insights',
                 url: '/manual/insights',
                 category: 'insights',
                 description: 'Visualize your events and actions',
-                icon: ProductIcons.analytics,
+                icon: <Analytics />,
             },
             {
                 name: 'Group analytics',
                 url: '/manual/group-analytics',
                 category: 'group analytics',
                 description: 'Track and analyze objects other than users',
-                icon: ProductIcons.groupAnalytics,
+                icon: <GroupAnalytics />,
             },
             {
                 name: 'Graphs & trends',
                 url: '/manual/trends',
                 category: 'trends',
                 description: 'Plot data from people, events, and properties',
-                icon: ProductIcons.trends,
+                icon: <Trends />,
             },
             {
                 name: 'Dashboards',
                 url: '/manual/dashboards',
                 category: 'dashboards',
                 description: 'Group and track important metrics',
-                icon: ProductIcons.dashboards,
+                icon: <Dashboards />,
             },
             {
                 name: 'Funnels',
                 url: '/manual/funnels',
                 category: 'funnels',
                 description: 'Inspect the journey of a user through your app',
-                icon: ProductIcons.funnels,
+                icon: <Funnels />,
             },
             {
                 name: 'Lifecycle',
                 url: '/manual/lifecycle',
                 category: 'lifecycle',
                 description: 'Understand when users drop-off',
-                icon: ProductIcons.lifecycle,
+                icon: <Lifecycle />,
             },
             {
                 name: 'Path analysis',
                 url: '/manual/paths',
                 category: 'paths',
                 description: 'Inspect how users journey through your product',
-                icon: ProductIcons.pathAnalysis,
+                icon: <PathAnalysis />,
             },
             {
                 name: 'Stickiness',
                 url: '/manual/stickiness',
                 category: 'stickiness',
                 description: 'See your most engaged users',
-                icon: ProductIcons.stickiness,
+                icon: <Stickiness />,
             },
             {
                 name: 'Retention',
                 url: '/manual/retention',
                 category: 'retention',
                 description: 'Track how many of your users return',
-                icon: ProductIcons.retention,
+                icon: <Retention />,
             },
         ],
     },
@@ -100,14 +131,14 @@ const categories: {
                 url: '/manual/recordings',
                 category: 'session recording',
                 description: 'Playback sessions from your users',
-                icon: ProductIcons.sessionRecording,
+                icon: <SessionRecording />,
             },
             {
                 name: 'Heatmaps',
                 url: '/manual/toolbar',
                 category: 'heatmaps',
                 description: 'Find the most popular areas within your app',
-                icon: ProductIcons.heatmaps,
+                icon: <Heatmaps />,
             },
         ],
     },
@@ -120,21 +151,21 @@ const categories: {
                 url: '/manual/feature-flags',
                 category: 'feature flags',
                 description: 'Safely deploy and rollback new features',
-                icon: ProductIcons.featureFlags,
+                icon: <FeatureFlags />,
             },
             {
                 name: 'Experimentation',
                 url: '/manual/experimentation',
                 category: 'experimentation',
                 description: 'A/B test new changes to your product',
-                icon: ProductIcons.experiments,
+                icon: <Experiments />,
             },
             {
                 name: 'Correlation analysis',
                 url: '/manual/correlation',
                 category: 'correlation analysis',
                 description: 'Automatically highlight factors that affect conversion',
-                icon: ProductIcons.correlationAnalysis,
+                icon: <CorrelationAnalysis />,
             },
         ],
     },
@@ -147,56 +178,56 @@ const categories: {
                 url: '/manual/actions',
                 category: 'actions',
                 description: 'Combine multiple events into one',
-                icon: ProductIcons.actions,
+                icon: <Actions />,
             },
             {
                 name: 'Annotations',
                 url: '/manual/annotations',
                 category: 'annotations',
                 description: 'Leave notes on your charts for significant events and releases',
-                icon: ProductIcons.annotations,
+                icon: <Annotations />,
             },
             {
                 name: 'Cohorts',
                 url: '/manual/cohorts',
                 category: 'cohorts',
                 description: 'Create a list of users who have something in common',
-                icon: ProductIcons.cohorts,
+                icon: <Cohorts />,
             },
             {
                 name: 'Events',
                 url: '/manual/events',
                 category: 'events',
                 description: 'An events is any action a users takes in your product',
-                icon: ProductIcons.events,
+                icon: <Events />,
             },
             {
                 name: 'Data management',
                 url: '/manual/data-management',
                 category: 'data management',
                 description: 'Keep events and properties organized',
-                icon: ProductIcons.dataManagement,
+                icon: <DataManagement />,
             },
             {
                 name: 'Persons',
                 url: '/manual/persons',
                 category: 'persons',
                 description: 'Track and segment individual users',
-                icon: ProductIcons.persons,
+                icon: <Persons />,
             },
             {
                 name: 'Sessions',
                 url: '/manual/sessions',
                 category: 'sessions',
                 description: 'View all events a user performed across their visit',
-                icon: ProductIcons.sessions,
+                icon: <Sessions />,
             },
             {
                 name: 'UTM segmentation',
                 url: '/manual/utm-segmentation',
                 category: 'utm segmentation',
                 description: 'Track the effectiveness of campaigns',
-                icon: ProductIcons.utm,
+                icon: <UTM />,
             },
         ],
     },
@@ -209,49 +240,49 @@ const categories: {
                 url: '/manual/team-collaboration',
                 category: 'team collaboration',
                 description: 'Tools for working together',
-                icon: ProductIcons.teamCollaboration,
+                icon: <TeamCollaboration />,
             },
             {
                 name: 'SSO (SAML)',
                 url: '/manual/sso',
                 category: 'sso',
                 description: 'One-click login with single sign-on (SSO)',
-                icon: ProductIcons.sso,
+                icon: <SSO />,
             },
             {
                 name: 'Organizations & projects',
                 url: '/manual/organizations-and-projects',
                 category: 'organizations and projects',
                 description: 'Organize your data and control access',
-                icon: ProductIcons.projects,
+                icon: <Projects />,
             },
             {
                 name: 'Role based access',
                 url: '/manual/role-based-access',
                 category: 'role based access',
                 description: 'Create roles to group team members and control access for features',
-                icon: ProductIcons.userPermissions,
+                icon: <UserPermissions />,
             },
             {
                 name: 'Settings',
                 url: '/manual/application-settings',
                 category: 'settings',
                 description: 'Organization controls, billing, and project configuration',
-                icon: ProductIcons.settings,
+                icon: <Settings />,
             },
             {
                 name: 'Toolbar',
                 url: '/manual/toolbar',
                 category: 'toolbar',
                 description: "Like 'Inspect Element' but for user behavior",
-                icon: ProductIcons.toolbar,
+                icon: <Toolbar />,
             },
             {
                 name: 'Notifications & alerts',
                 url: '/manual/subscriptions',
                 category: 'notifications and alerts',
                 description: 'Receive updates from your insights an dashboards',
-                icon: ProductIcons.notifications,
+                icon: <Notifications />,
             },
         ],
     },
@@ -276,7 +307,7 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
             <PostLayout article={false} survey={false} title={'Docs'} menu={docs} hideSidebar>
                 <div className="space-y-12">
                     <section className="px-1">
-                        <h1 className="text-5xl mb-4">Using PostHog</h1>
+                        <h1 className="text-5xl mt-0 mb-4">Using PostHog</h1>
                         <p className="max-w-2xl">
                             This section covers everything you need to know about using PostHog. If you're looking for
                             help tracking events or deploying a self-host version of PostHog,{' '}
@@ -353,24 +384,24 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
                             <div className="w-full overflow-y-scroll mt-6 flex-grow">
                                 <ul className="list-none m-0 p-0 space-y-6 px-8">
                                     {currentModal &&
-                                        tutorialsByCategory[currentModal].map((tutorial) => (
-                                            <li
-                                                key={tutorial.fields.slug}
-                                                className="bg-tan dark:bg-gray-accent-dark border-2 border-solid border-tan hover:border-orange relative active:top-[0.5px] active:scale-[.99]"
-                                            >
-                                                <Link to={tutorial.fields.slug}>
-                                                    <GatsbyImage
-                                                        alt={tutorial.frontmatter.title}
-                                                        image={getImage(tutorial.frontmatter.featuredImage)}
+                                        tutorialsByCategory[currentModal].map((tutorial) => {
+                                            const {
+                                                frontmatter: { featuredImage, authors, title, date },
+                                                fields: { slug },
+                                            } = tutorial
+
+                                            return (
+                                                <li key={slug}>
+                                                    <Post
+                                                        featuredImage={featuredImage}
+                                                        authors={authors}
+                                                        title={title}
+                                                        date={date}
+                                                        slug={slug}
                                                     />
-                                                    <div className="absolute w-full h-full inset-0 from-black/75 [text-shadow:0_2px_10px_rgba(0,0,0,0.4)] bg-gradient-to-b">
-                                                        <p className="m-0 text-white p-4 text-xl font-bold">
-                                                            {tutorial.frontmatter.title}
-                                                        </p>
-                                                    </div>
-                                                </Link>
-                                            </li>
-                                        ))}
+                                                </li>
+                                            )
+                                        })}
                                 </ul>
                             </div>
 
@@ -396,14 +427,19 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-6 mt-8 max-w-sm sm:max-w-4xl">
                             {featuredTutorials.nodes.map((tutorial) => {
+                                const {
+                                    frontmatter: { featuredImage, authors, title, date },
+                                    fields: { slug },
+                                } = tutorial
                                 return (
-                                    <Link
-                                        key={tutorial.id}
-                                        to={tutorial.fields.slug}
-                                        className="bg-gray-accent-light dark:bg-gray-accent-dark rounded border-2 border-solid border-tan dark:border-transparent dark:hover:border-orange hover:border-orange relative active:top-[0.5px] active:scale-[.99]"
-                                    >
-                                        <GatsbyImage image={getImage(tutorial.frontmatter.featuredImage)} />
-                                    </Link>
+                                    <Post
+                                        key={slug}
+                                        authors={authors}
+                                        featuredImage={featuredImage}
+                                        date={date}
+                                        title={title}
+                                        slug={slug}
+                                    />
                                 )
                             })}
                         </div>
@@ -420,17 +456,7 @@ export const query = graphql`
             group(field: frontmatter___tags) {
                 category: fieldValue
                 nodes {
-                    frontmatter {
-                        title
-                        featuredImage {
-                            childImageSharp {
-                                gatsbyImageData(placeholder: NONE)
-                            }
-                        }
-                    }
-                    fields {
-                        slug
-                    }
+                    ...BlogFragment
                 }
             }
         }
@@ -447,18 +473,7 @@ export const query = graphql`
             }
         ) {
             nodes {
-                id
-                fields {
-                    slug
-                }
-                frontmatter {
-                    title
-                    featuredImage {
-                        childImageSharp {
-                            gatsbyImageData(placeholder: NONE)
-                        }
-                    }
-                }
+                ...BlogFragment
             }
         }
     }

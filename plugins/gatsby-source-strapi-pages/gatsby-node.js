@@ -28,7 +28,7 @@ exports.onPreInit = async function (_, options) {
     await createStrapiPageNodes()
 }
 
-exports.onCreateNode = async function ({ node, getNode, actions, store, cache, createNodeId }) {
+exports.onCreateNode = async function ({ node, getNode, actions, getCache, cache, store, createNodeId }) {
     const { createNodeField, createNode } = actions
     //Create GitHub contributor nodes for handbook & docs
     if (node.internal.type === `MarkdownRemark` || node.internal.type === 'Mdx') {
@@ -38,31 +38,36 @@ exports.onCreateNode = async function ({ node, getNode, actions, store, cache, c
             if (file) {
                 const { contributors, lastUpdated } = file
                 if (contributors) {
-                    const contributorsNode = await Promise.all(
-                        contributors.map(async (contributor) => {
-                            const { avatar, url, username } = contributor
-                            const fileNode =
-                                avatar &&
-                                (await createRemoteFileNode({
-                                    url: avatar,
-                                    parentNodeId: node.id,
-                                    createNode,
-                                    createNodeId,
-                                    cache,
-                                    store,
-                                }))
-                            return {
-                                avatar___NODE: fileNode && fileNode.id,
-                                url,
-                                username,
-                            }
+                    try {
+                        const contributorsNode = await Promise.all(
+                            contributors.map(async (contributor) => {
+                                const { avatar, url, username } = contributor
+                                const fileNode =
+                                    avatar &&
+                                    (await createRemoteFileNode({
+                                        url: avatar,
+                                        parentNodeId: node.id,
+                                        createNode,
+                                        cache,
+                                        getCache,
+                                        createNodeId,
+                                        store,
+                                    }))
+                                return {
+                                    avatar___NODE: fileNode && fileNode.id,
+                                    url,
+                                    username,
+                                }
+                            })
+                        )
+                        createNodeField({
+                            node,
+                            name: `contributors`,
+                            value: contributorsNode,
                         })
-                    )
-                    createNodeField({
-                        node,
-                        name: `contributors`,
-                        value: contributorsNode,
-                    })
+                    } catch(error) {
+                        console.error(error)
+                    }
                 }
 
                 createNodeField({

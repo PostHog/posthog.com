@@ -40,25 +40,25 @@ import PostHog from 'posthog-react-native'
 
 export let posthog: PostHog | undefined = undefined
 
-export const posthogPromise: Promise<PostHog> = PostHog.initAsync('<ph_project_api_key>', {
+export const posthogAsync: Promise<PostHog> = PostHog.initAsync('<ph_project_api_key>', {
   // PostHog API host (https://app.posthog.com by default)
   host: '<ph_instance_address>'
 })
 
-posthogPromise.then(client => {
+posthogAsync.then(client => {
   posthog = client
 })
 
 
 // app.ts
-import { posthog, posthogPromise} from './posthog'
+import { posthog, posthogAsync} from './posthog'
 
 export function MyApp1() {
-    useEffect(() => {
+    useEffect(async () => {
         // Use posthog optionally with the possibility that it may still be loading
         posthog?.capture('MyApp1 loaded')
         // OR use posthog via the promise
-        posthogPromise.then(ph => ph.capture('MyApp1 loaded')
+        (await posthogAsync).capture('MyApp1 loaded')
     }, [])
 
     return <View>Your app code</View>
@@ -67,7 +67,7 @@ export function MyApp1() {
 
 // You can even use this instance with the PostHogProvider
 export function MyApp2() {
-  return <PostHogProvider client={posthog}>{/* Your app code */}</PostHogProvider>
+  return <PostHogProvider client={posthogAsync}>{/* Your app code */}</PostHogProvider>
 }
 ```
 
