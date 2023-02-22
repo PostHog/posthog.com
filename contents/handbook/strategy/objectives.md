@@ -4,23 +4,13 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Our mission is to
-
-> "Increase the number of successful products in the world."
-
-Our vision for 2023 is:
-
-> “Everyone building a product has a clear path to making it successful without losing control of their data.”
-
-Our Q4 2022 company wide objective:
-> Average 11% Month Over Month revenue growth through Q4 2022.
-
 For the OKRs of each team please see the team pages e.g. [Team Experimentation](/handbook/small-teams/experimentation).
 
-We discuss the OKRs in every all hands meeting - the team leads explain progress against each key result.
+We discuss the OKRs in every sprint planning meeting - the team leads explain progress against each key result.
 
 ## The basics
 
+* All goals align to [strategy](overview)
 * Everyone has goals they can remember
 * Everyone can control their goals
 * Focus on things with short feedback cycles

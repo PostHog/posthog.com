@@ -34,16 +34,17 @@ export const SignupCTA = ({
                     {text}
                 </CallToAction>
             }
-        >
-            <CallToAction
-                type={type}
-                className={className}
-                width={width}
-                to={`https://${posthog?.isFeatureEnabled('direct-to-eu-cloud') ? 'eu' : 'app'}.posthog.com/signup`}
-                event={event}
-            >
-                {text}
-            </CallToAction>
-        </RenderInClient>
+            render={() => (
+                <CallToAction
+                    type={type}
+                    className={className}
+                    width={width}
+                    to={`https://${posthog?.isFeatureEnabled('direct-to-eu-cloud') ? 'eu' : 'app'}.posthog.com/signup`}
+                    event={event}
+                >
+                    {text}
+                </CallToAction>
+            )}
+        />
     )
 }

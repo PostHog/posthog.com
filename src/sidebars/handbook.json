@@ -231,6 +231,10 @@
                 ]
             },
             {
+                "name": "Finance",
+                "url": "/handbook/people/finance"
+            },
+            {
                 "name": "Merch store",
                 "url": "/handbook/company/merch-store"
             },
@@ -367,6 +371,10 @@
                     {
                         "name": "How to run migrations on PostHog Cloud",
                         "url": "/handbook/engineering/databases/clickhouse-event-table-migrations"
+                    },
+                    {
+                        "name": "Diagnosing ClickHouse load using ClickHouse",
+                        "url": "/handbook/engineering/databases/debugging-load"
                     },
                     {
                         "name": "Working with ClickHouse materialized columns",
@@ -509,10 +517,6 @@
                 "url": "/handbook/product/user-feedback"
             },
             {
-                "name": "Paid features",
-                "url": "/handbook/product/paid-features"
-            },
-            {
                 "name": "Releasing as beta",
                 "url": "/handbook/product/releasing-as-beta"
             }
@@ -613,12 +617,20 @@
                         "url": "/handbook/growth/sales/crm"
                     },
                     {
+                        "name": "New customer onboarding",
+                        "url": "/handbook/growth/sales/customer-onboarding"
+                    },
+                    {
                         "name": "YC onboarding",
                         "url": "/handbook/growth/sales/yc-onboarding"
                     },
                     {
                         "name": "Demos",
                         "url": "/handbook/growth/sales/demos"
+                    },
+                    {
+                        "name": "Contracts",
+                        "url": "/handbook/growth/sales/contracts"
                     },
                     {
                         "name": "Billing",

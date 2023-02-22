@@ -50,6 +50,7 @@ import diagram from '../../images/docs/cloud/cloudfront-proxy/cache-policy.png'
 
 5. Choose the appropriate price class for your use
 6. Once the distribution is deployed set its URL as the API host in your JS snippet or SDK config
+7. [Create a lambda@edge](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-at-the-edge.html) to set the Host header ([example](https://gist.github.com/htnosm/2c51a70f0e361056d1fd63321afba4fa)).
 
 You can view [AWS CDK code for creating a reverse proxy here](https://gist.github.com/pauldambra/9af02d9ea42ffafcfc7c01dc38039958) (originally shared by CJ Enright in our Slack community, 100 🦔 points for them 💖!).
 

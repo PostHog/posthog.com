@@ -4,7 +4,6 @@ sidebar: Docs
 showTitle: true
 featuredImage: ../images/tutorials/banners/tutorial-16.png
 featuredVideo: https://www.youtube-nocookie.com/embed/cMFz_xFlHaE
-featuredTutorial: true
 author: ["yakko-majuri", "andy-vandervell"]
 tags: ["funnels", "correlation analysis", "paths", "session recording", "experimentation"]
 date: 2022-04-20

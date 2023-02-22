@@ -42,22 +42,3 @@ Follow the instructions on the [PostHog migrate metadata repo](https://github.co
     ```
 
 For more information on the options see the [repo's readme](https://github.com/PostHog/posthog-migrate-meta)
-
-## Migrating your custom apps if you are moving from self-hosted to cloud
-
-If the app was previously extracting events using the [scheduled tasks api](/docs/apps/build/reference#scheduled-tasks):
-1. (fastest option) you could move this logic from the app into scheduled tasks on your server potentially using a cron job
-2. If you can make your app generalizable enough that others can benefit then [submit your app](https://posthog.com/docs/apps/build/tutorial#submitting-your-app) to the store.
-   - To make it generalizable you'll want to convert anything specific to your configuration into a plugin.json config value
-
-If the app was transforming events before ingestion:
-1. (fastest option) you could move this logic from the app into your client before you send the event
-2. If you can make your app generalizable enough that others can benefit then [submit your app](https://posthog.com/docs/apps/build/tutorial#submitting-your-app) to the store.
-   - To make it generalizable you'll want to convert anything specific to your configuration into a plugin.json config value
-
-If the app was used to send events to a custom destination:
-1. (fastest option) Convert your app to work as a webhook. We are soon releasing a webhook destination. You can subscribe for updates on the [roadmap](https://github.com/PostHog/posthog/issues/13989)
-2. If you can make your app generalizable enough that others can benefit then [submit your app](https://posthog.com/docs/apps/build/tutorial#submitting-your-app) to the store.
-   - To make it generalizable you'll want to convert anything specific to your configuration into a plugin.json config value
-
-   If the options above don't work and you were previously paying a substantial amount self-hosting then email us at [hey@posthog.com](mailto:hey@posthog.com) with a link to the public github repo and we can see if it's appropriate as a private cloud app.
