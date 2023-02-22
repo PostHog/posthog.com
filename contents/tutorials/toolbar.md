@@ -204,7 +204,7 @@ You can type a selector into the "Selector" field in the action creation modal t
 
 ![The create action modal showing the selector text box being used to edit the selector](../images/tutorials/toolbar/type-it.gif)
 
-Or in the same modal click "Edit the selector" to use our CSS Selector picker to build the selector you want.
+Or in the same modal, click "Edit the selector" to use our element picker to build the selector you want.
 
 ![The selector modal being used to discover the more meaningful selector](../images/tutorials/toolbar/toolbar-selector-edit.gif)
 
