@@ -21,6 +21,14 @@
         "url": "",
         "children": [
             {
+                "name": "JavaScript",
+                "url": "/docs/sdks/js",
+                "badge": {
+                    "title": "Popular",
+                    "className": "!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50"
+                }
+            },
+            {
                 "name": "Android",
                 "url": "/docs/sdks/android",
                 "badge": {
@@ -51,14 +59,6 @@
             {
                 "name": "Java",
                 "url": "/docs/sdks/java"
-            },
-            {
-                "name": "JavaScript",
-                "url": "/docs/sdks/js",
-                "badge": {
-                    "title": "Popular",
-                    "className": "!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50"
-                }
             },
             {
                 "name": "Node.js",
