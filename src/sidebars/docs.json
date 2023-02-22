@@ -314,7 +314,7 @@
                                 "children": [
                                     {
                                         "name": "ClickHouse Manual",
-                                        "url": "/docs/runbook/services/clickhouse/manual",
+                                        "url": "",
                                         "children": [
                                             {
                                                 "name": "Backup",
