@@ -7,12 +7,12 @@ showTitle: true
 ## In an ideal world, Posthog’s pricing enables users and organizations to:
 
 - Use PostHog for free if they are hobbyists or pre-PMF
-- Consider PostHog as a candidate amongst the array of alternate options
 - Experience the product before paying for it
 - Start paying when they are ready, on their own, with few hurdles
 - Transparently pay for the value they receive
   - Eg. Usage-based pricing on events, recordings
   - Eg. Paying per product so they only pay for what they use
+- Make it a no brainer to pick PostHog over other competitors
 
 
 ## Our goals with these principles are to: 
@@ -29,6 +29,8 @@ It's important that every time we create a new feature or shift our pricing plan
 
 Sometimes these principles still leave room for questioning - what, if any, should be available in the free tier? What about enterprise customers? For these types of questions, we've defined a runbook for deciding which plans and at what limits features should generally be assigned to.
 
+- In general we should match the pricing of the cheapest big competitor for that product to make it a no brainer to use PostHog
+  - We can do this because we can upsell customers multiple of our other products as well.
 - For each feature that is released, we should always ask ourselves how it should be priced. A default behavior is good, but it shouldn't be used as a replacement for critically thinking about where something fits into our pricing scheme.
 - Default assumption for new features is that full usage is only available on the paid plans.
 - Features that need to be experienced in order to demonstrate value should be available on the free plan but with a reasonable limit
