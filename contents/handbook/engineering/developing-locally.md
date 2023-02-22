@@ -197,8 +197,7 @@ We'll run the plugin server in a later step.
 
 ### 4. Prepare the Django server
 
-1. Install a few dependencies for SAML to work. If you're on macOS, run the command below, otherwise check the official [xmlsec repo](https://github.com/mehcode/
--xmlsec) for more details.
+1. Install a few dependencies for SAML to work. If you're on macOS, run the command below, otherwise check the official [xmlsec repo](https://github.com/mehcode/python-xmlsec) for more details.
 
     - On macOS:
         ```bash
