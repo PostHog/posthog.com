@@ -422,7 +422,7 @@ export default function Home({ posts }) {
 //...
 ```
 
-This triggers an `identify` event in our PostHog instance and now events from the anonymous user connect with the identified person.
+Now, when you sign in, this triggers an `identify` event in PostHog and events from the anonymous user connect with the identified person.
 
 ![Identify](../images/tutorials/nextjs-analytics/identify.png)
 
