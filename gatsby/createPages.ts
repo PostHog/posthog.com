@@ -28,7 +28,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     // Docs
     const ApiEndpoint = path.resolve(`src/templates/ApiEndpoint.tsx`)
     const HandbookTemplate = path.resolve(`src/templates/Handbook.tsx`)
-    const GettingStarted = path.resolve(`src/templates/GettingStarted.tsx`)
 
     const result = await graphql(`
         {
@@ -66,12 +65,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     url
                 }
             }
-            docs: allMdx(
-                filter: {
-                    fields: { slug: { regex: "/^/docs/(?!getting-started)/" } }
-                    frontmatter: { title: { ne: "" } }
-                }
-            ) {
+            docs: allMdx(filter: { fields: { slug: { regex: "/^/docs/" } }, frontmatter: { title: { ne: "" } } }) {
                 nodes {
                     id
                     headings {
@@ -367,8 +361,8 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         { name: 'Handbook', url: '/handbook' },
         createTeamContext
     )
-    // createPosts(result.data.docs.nodes, 'docs', HandbookTemplate, { name: 'Docs', url: '/docs' })
-    createPosts(result.data.gettingStarted.nodes, 'docs', GettingStarted, { name: 'Docs', url: '/docs' })
+    createPosts(result.data.docs.nodes, 'docs', HandbookTemplate, { name: 'Docs', url: '/docs' })
+    // createPosts(result.data.gettingStarted.nodes, 'docs', GettingStarted, { name: 'Docs', url: '/docs' })
     createPosts(result.data.apidocs.nodes, 'docs', ApiEndpoint, { name: 'Docs', url: '/docs' })
     createPosts(result.data.manual.nodes, 'docs', HandbookTemplate, { name: 'Using PostHog', url: '/using-posthog' })
 
