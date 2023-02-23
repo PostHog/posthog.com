@@ -65,7 +65,9 @@ The blog posts are a static JSON file that we can fetch. To do this, create a `b
 }
 ```
 
-Next, the main app (`tutorial`) folder, remove all the existing code in the `page/index.js` file and all the CSS in the `styles` folder. In `pages/index.js`, use the `getStaticProps()` method that Next.js automatically provides to get the posts from the `blog.json` file, then use `map()` to loop through, show details, and link to them. Like this:
+Next, the main app (`tutorial`) folder, remove all the existing code in the `page/index.js` file, all the CSS in the `styles` folder, and the `styles/globals.css` import in `_app.js`. 
+
+In `pages/index.js`, use the `getStaticProps()` method that Next.js automatically provides to get the posts from the `blog.json` file, then use `map()` to loop through, show details, and link to them. Like this:
 
 ```js
 // pages/index.js
@@ -249,20 +251,7 @@ export default function Home({ posts }) {
             <button onClick={() => signOut()}>Sign out</button>
           </div>
         )}
-        <ul>
-          {posts.map((post) => (
-            <li key={post.id}>
-              <Link href={`/posts/${post.id}`}>
-                <p>{post.title}</p>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </main>
-    </>
-  )
-}
-//...
+//... posts map and getStaticProps
 ```
 
 When you click sign in, you go through the sign in flow with GitHub, and get redirected back to the app with an active session.
