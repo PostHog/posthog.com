@@ -15,16 +15,16 @@
                 "url": "/docs/getting-started/start-here"
             },
             {
-                "name": "Integrate PostHog",
-                "url": "/docs/getting-started/integrate"
+                "name": "Install PostHog",
+                "url": "/docs/getting-started/install"
             },
             {
-                "name": "Sending events",
-                "url": "/docs/getting-started/sending-events"
+                "name": "Send events",
+                "url": "/docs/getting-started/send-events"
             },
             {
-                "name": "Identifying users",
-                "url": "/docs/getting-started/identifying-users"
+                "name": "Identify users",
+                "url": "/docs/getting-started/identify-users"
             },
             {
                 "name": "Actions and insights",

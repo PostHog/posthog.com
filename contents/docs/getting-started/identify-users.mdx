@@ -50,7 +50,7 @@ PostHog also has a few built-in protections stopping the most common threats to 
     -   `none`
     -   `null`
     -   `0`
--   We do not allow identifying users with empty space strings of any length (`' '`, `'       '`, etc.)
+-   We do not allow identifying users with empty space strings of any length (`' '`, `' '`, etc.)
 -   We do not allow merging from an already identified user (`distinct_id` user can be previously identified, but `anon_distinct_id` and `alias` user cannot).
 
 If we encounter an `$identify` or `$create_alias` event with one of the above problems, the following will happen:
