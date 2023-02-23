@@ -11,8 +11,8 @@
         "url": "",
         "children": [
             {
-                "name": "Quickstart",
-                "url": "/docs/getting-started/quickstart"
+                "name": "Start here",
+                "url": "/docs/getting-started/start-here"
             },
             {
                 "name": "Integrate PostHog",
@@ -31,20 +31,12 @@
                 "url": "/docs/getting-started/actions-and-insights"
             },
             {
-                "name": "Session recording",
-                "url": "/docs/getting-started/session-recording"
-            },
-            {
-                "name": "Feature flags",
-                "url": "/docs/getting-started/feature-flags"
-            },
-            {
-                "name": "Experimentation",
-                "url": "/docs/getting-started/experimentation"
-            },
-            {
                 "name": "Group analytics",
                 "url": "/docs/getting-started/group-analytics"
+            },
+            {
+                "name": "Next steps",
+                "url": "/docs/getting-started/next-steps"
             }
         ]
     },
