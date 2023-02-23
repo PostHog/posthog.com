@@ -74,7 +74,7 @@ const TutorialSidebar = ({ contributors, location, title, categories }) => {
 export default function Tutorial({ data, pageContext: { tableOfContents, menu }, location }) {
     const { pageData } = data
     const { body, excerpt, fields } = pageData
-    const { title, featuredImage, description, contributors, categories, featuredVideo } = pageData?.frontmatter
+    const { title, featuredImage, description, contributors, categories, featuredVideo, date } = pageData?.frontmatter
     const components = {
         inlineCode: InlineCode,
         blockquote: Blockquote,
@@ -131,6 +131,7 @@ export default function Tutorial({ data, pageContext: { tableOfContents, menu },
                     title={title}
                     featuredImageType="full"
                     titlePosition="top"
+                    date={date}
                 />
 
                 {featuredVideo && (
@@ -164,6 +165,7 @@ export const query = graphql`
             }
             frontmatter {
                 title
+                date(formatString: "MMM DD, YYYY")
                 description
                 categories: tags
                 contributors: authorData {

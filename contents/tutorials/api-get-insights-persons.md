@@ -291,6 +291,6 @@ Also, check out our [our API documentation](/docs/api) for all the information a
 
 ## Further reading
 
-- [The basics of using regex in PostHog](/tutorials/regex-basics)
+- [Using the PostHog API to capture events](/tutorials/api-capture-events)
 - [A non-technical guide to understanding data in PostHog](/tutorials/non-technical-guide-to-data)
-- [Adding product data in new tab with Momentum Dash](/tutorials/product-data-in-new-tab)
+- [How to evaluate and update feature flags with the PostHog API](/tutorials/api-feature-flags)

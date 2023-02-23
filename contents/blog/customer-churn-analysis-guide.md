@@ -26,7 +26,7 @@ In this guide to customer churn analysis, I'm exploring churn rate and retention
 
 These and other questions (like [how to reduce churn](#how-to-improve-retention-and-reduce-churn)) will be answered. Let's get to it.
 
-## What's the difference between retention rate and churn rate?
+## ❓What's the difference between retention rate and churn rate?
 
 Not much, really: 
 
@@ -40,7 +40,7 @@ Typically, "churn" and "customer churn" are used interchangeably, but there are 
 
 Those are the basics, but there's more worth learning. Let's start with churn rate.
 
-## Understanding churn rate
+## 🧐 Understanding churn rate
 
 Here's the simplest formula for churn rate:
 
@@ -82,7 +82,7 @@ I've collated the better sources [in the appendix](#more-on-churn-rate-benchmark
 
 Good retention rates are the same, but inverted – 5% churn equals 95% retention, and so on.
 
-## Understanding retention rate
+## 🤔 Understanding retention rate
 
 So that's churn rate, but what about retention rate? The basic formula is very similar:
 
@@ -156,7 +156,7 @@ This is just one example using demo data in PostHog. You could also filter users
 
 Cohort retention tables are also useful for tracking revenue retention, especially if you charge based on usage. Positive revenue retention (i.e. more than 100%) indicates users increase their spend over time. Needless to say, this is a good thing.
 
-## How to improve retention and reduce churn
+## 🚀 How to improve retention and reduce churn
 
 So, how do you improve retention and reduce churn? Talking to users is a vital component – we're [constantly talking to users](/blog/making-something-people-want) – but here are some tactical moves to consider:
 
@@ -204,7 +204,7 @@ Check out [our product page](/product) if this sounds interesting to you.
 
 /pitch over
 
-## Takeaways
+## 👍 Takeaways
 
 Phew, ok, that was lot. Hopefully you know a little more about how churn and retention rate work, interact, and impact your product now.
 

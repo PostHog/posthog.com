@@ -231,6 +231,10 @@
                 ]
             },
             {
+                "name": "Finance",
+                "url": "/handbook/people/finance"
+            },
+            {
                 "name": "Merch store",
                 "url": "/handbook/company/merch-store"
             },
@@ -623,6 +627,10 @@
                     {
                         "name": "Demos",
                         "url": "/handbook/growth/sales/demos"
+                    },
+                    {
+                        "name": "Contracts",
+                        "url": "/handbook/growth/sales/contracts"
                     },
                     {
                         "name": "Billing",

@@ -66,22 +66,6 @@ export default function MenuItem({
                     >
                         {title}
                     </CallToAction>
-                ) : title === 'Login' ? (
-                    <RenderInClient
-                        placeholder={
-                            <MenuItemLink menuItem={menuItem} hovered={hovered} handleSubClick={handleSubClick} />
-                        }
-                        render={() => (
-                            <MenuItemLink
-                                menuItem={menuItem}
-                                urlOverride={`https://${
-                                    posthog?.isFeatureEnabled('direct-to-eu-cloud') ? 'eu' : 'app'
-                                }.posthog.com/signup`}
-                                hovered={hovered}
-                                handleSubClick={handleSubClick}
-                            />
-                        )}
-                    />
                 ) : (
                     <MenuItemLink menuItem={menuItem} hovered={hovered} handleSubClick={handleSubClick} />
                 )}

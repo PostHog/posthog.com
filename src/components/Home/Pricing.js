@@ -60,7 +60,7 @@ export default function Pricing() {
                     <p className="sm:text-lg m-0">
                         Watch a <Link to="/book-a-demo">recorded demo</Link> at your own pace, or{' '}
                         <Link to="/book-a-demo#contact">request a personalized demo</Link> if your business has bespoke
-                        needs.
+                        needs - or just <Link to="app.posthog.com/signup">get started for free</Link>.
                     </p>
                 </div>
                 <div className="lg:ml-2 lg:mt-0 mt-8 -mr-5 max-w-lg lg:max-w-none">
