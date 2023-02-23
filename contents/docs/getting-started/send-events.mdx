@@ -6,6 +6,7 @@ nextURL: /docs/getting-started/send-events
 > Want to follow along? Check out the [Getting started](https://github.com/PostHog/getting-started) repo for sample apps!
 
 import { Badge } from "./\_snippets/badge.mdx"
+import SendEventBackend from "./_snippets/send-event-backend.mdx"
 
 Once your PostHog instance is up and running, the next step is to start sending events.
 
@@ -122,39 +123,7 @@ There are a number of reasons why it's often preferable to send certain custom e
 
 Our [SDK pages](/docs/integrate?tab=sdks) contain information on installing PostHog on your specific platform. Once you have the library installed, you can send a capture event using the exact same `capture` method as in `posthog-js`.
 
-<MultiLanguage selector="tabs">
-
-```node
-client.capture({
-    distinctId: 'distinct_id',
-    event: 'Order created',
-    properties: {
-        orderId: '#0054'
-        subtotal: 3599,
-        name: 'Max Hedgehog',
-        customer: {
-            isReturning: true
-        }
-    },
-})
-```
-
-```python
-posthog.capture(
-    'distinct_id',
-    'Order created',
-    {
-        'orderId': '#0054'
-        'subtotal': 3599,
-        'name': 'Max Hedgehog',
-        'customer': {
-            'isReturning': True
-        }
-    }
-)
-```
-
-</MultiLanguage>
+<SendEventBackend />
 
 The only thing major difference when sending events from the server side is we must include a `distinct_id` with every event, which corresponds to the id of whichever user performed the specific action.
 Often, this will come in the form of a unique user idea and can be pulled from a session cookie when requests are sent.

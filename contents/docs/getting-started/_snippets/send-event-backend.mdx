@@ -1,0 +1,76 @@
+<MultiLanguage selector="tabs">
+
+```node
+client.capture({
+    distinctId: 'distinct_id',
+    event: 'Order created',
+    properties: {
+        orderId: '#0054'
+        subtotal: 3599,
+        customerName: 'Max Hedgehog',
+    },
+})
+```
+
+```python
+posthog.capture(
+    'distinct_id',
+    'Order created',
+    {
+        'orderId': '#0054'
+        'subtotal': 3599,
+        'customerName': 'Max Hedgehog',
+    }
+)
+```
+
+```php
+PostHog::capture(array(
+  'distinctId' => 'distinct_id',
+  'event' => 'Order created',
+  'properties' => array(
+    'orderId' => '#0054'
+    'subtotal' => 3599,
+    'customerName' => 'Max Hedgehog'
+  )
+));
+```
+
+```ruby
+posthog.capture({
+    distinct_id: 'distinct_id',
+    event: 'Order created',
+    properties: {
+        orderId: '#0054',
+        subtotal: 3599,
+        customerName: 'Max Hedgehog'
+    }
+})
+```
+
+```go
+client.Enqueue(posthog.Capture{
+  DistinctId: "distinct_id",
+  Event:      "Order created",
+  Properties: posthog.NewProperties().
+    Set("orderId", "#0054").
+    Set("subtotal", 3599).
+    Set("customerName", "Max Hedgehog"),
+})
+```
+
+```java
+posthog.capture(
+  "distinct id",
+  "movie played",
+  new HashMap<String, Object>() {
+    {
+      put("orderId", "#0054");
+      put("subtotal", 3599);
+      put("customerName", "Max Hedgehog");
+    }
+  }
+);
+```
+
+</MultiLanguage>
