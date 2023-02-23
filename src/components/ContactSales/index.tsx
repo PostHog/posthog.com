@@ -25,7 +25,13 @@ export default function ContactSales() {
             <div className="lg:py-12 py-4 px-5">
                 <section className="mb-12">
                     <div className="text-center">
-                        <StaticImage width={750} alt="Sales hedgehogs" src="./images/sales-hogs.png" />
+                        <StaticImage
+                            loading="eager"
+                            placeholder="none"
+                            width={750}
+                            alt="Sales hedgehogs"
+                            src="./images/sales-hogs.png"
+                        />
                         <h1 className="text-3xl md:text-5xl mt-4 mb-2">Let's chat</h1>
                         <p className="m-0">
                             PostHog Cloud is self-serve (
