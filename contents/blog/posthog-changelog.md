@@ -1,11 +1,13 @@
 ---
-date: 2023-02-24
+date: 2023-02-23
 title: "The PostHog Changelog"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 category: PostHog news
+author:
+  - joe-martin
 tags:
   - Product updates
   - Release notes
