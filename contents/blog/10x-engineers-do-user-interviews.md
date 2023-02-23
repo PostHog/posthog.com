@@ -1,6 +1,6 @@
 ---
-date: 2023-02-19
-title: True 10x engineers do user interviews
+date: 2023-02-23
+title: "True 10x engineers talk to users"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
