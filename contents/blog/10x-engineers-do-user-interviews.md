@@ -1,6 +1,6 @@
 ---
 date: 2023-02-19
-title: Becoming a 10x engineer - why user interviews are key
+title: True 10x engineers do user interviews
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -35,11 +35,9 @@ Here's what it looks like when engineers talk directly to users:
 
 Information moves quickly and in both directions, boosting the signal. By increasing the signal you can quickly cut scope, realize you’re tackling the wrong problem, or come up with a more elegant solution – something engineers can do most effectively because they have the background on the existing architecture and components. 
 
-Companies still need product managers (I'm the Head of Product at PostHog after all 😅), but we ship faster and better because our engineers are actively speaking to users. 
+Companies still need product managers (I'm the Head of Product at PostHog after all 😅), but we ship faster and better because our [product engineers](/blog/what-is-a-product-engineer) speak directly to users. And, because our product managers aren't spending all their time on tickets, they have time to surface new opportunities or build out [our bigger vision](/blog/helping-engineers-to-product).
 
-And, because our product managers aren't spending all their time on tickets, they have time to surface new opportunities or build out [our bigger vision](/blog/helping-engineers-to-product).
-
-> **Sidenote:** PostHog's session recording feature came about because Karl, one our engineers, took the time to talk to a user and realized the best solution was integrating recordings with our existing product analytics product. One hackathon later, we had a prototype. Session recording is now a core part of our product and was a key driver in our strategy shift from a product analytics tool to a product operating-system.
+> 💬 **Sidenote:** PostHog's session recording feature came about because Karl, one our engineers, took the time to talk to a user and realized the best solution was integrating recordings with our existing product analytics tool. One hackathon later, we had a prototype. Session recording is now a core part of our product and was a key driver in our strategy shift from a pure, self-hosted product analytics tool to an all-in-one product OS.
 
 ## How to talk to users (as an engineer)
 
@@ -53,15 +51,15 @@ Next, it's time to bulk email your segment. The simplest way is to email out a C
 Hi! I’m {YOUR NAME}, a software engineer at {YOUR COMPANY}. I’m currently working on {FEATURE / PROBLEM} and would love your input on it. Free for a quick call at any of these times? {INSERT CALENDLY LINK} 
 ```
 
-This is a good start, but you should move to an in-app prompt as soon as you can. We’ve seen an increase in conversion from outreach to booking by ~5x (from 3% to 16%), a reduction in email spam, and better organization by doing so. A reward like a $30 merchandise voucher helps.
-
-Check out PostHog’s [user interview app](https://posthog.com/tutorials/feedback-interviews-site-apps#setting-up-the-user-interview-app) for a quick way of showing prompts to segments of users or our [open-source set of components](https://github.com/PostHog/posthog-prompts/tree/luke/react-demo) for building your own.
+This is a good start, but you should move to an in-app prompt as soon as you can – we built PostHog's [user interview app](https://posthog.com/tutorials/feedback-interviews-site-apps#setting-up-the-user-interview-app) (picture below) just for this.  
 
 ![User interview app](../images/blog/10x-engineers-do-user-interviews/user-interview-app.png)
 
-## The two types of user interview
+We’ve seen an increase in conversion from outreach to booking by ~5x (from 3% to 16%) since we started using in-app prompts, a reduction in email spam, and better organization by doing so. A reward like a $30 merchandise voucher helps.
 
-To get the most out of the interview, you should know the goal. The goal normally fits into two buckets:
+## The two basic types of user interview
+
+Effective user interviews need a goal, and they typically fall into one of two buckets: 
 
 ### 1. Problem exploration
 
@@ -121,9 +119,7 @@ Paul on our [Product Analytics Team](/handbook/small-teams/product-analytics) re
 
 ## The challenge: Book a user interview this week
 
-We see the benefits of engineers speaking directly to users every day at PostHog – important problems being solved, and better products being shipped. 
-
-But you probably won't believe me until you’ve done a few interviews yourself and realized what someone wrote on a ticket is completely different from reality.
+We see the benefits of engineers speaking directly to users every day at PostHog – important problems being solved, and better products being shipped. But you probably won't believe me until you’ve done a few interviews yourself and realized what someone wrote on a ticket is completely different from reality.
 
 So here’s the challenge: **book your first user interview this week**. *Add a reminder on your phone now*
 
