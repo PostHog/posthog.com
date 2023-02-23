@@ -746,6 +746,10 @@
                     {
                         "name": "Trends",
                         "url": "/manual/trends"
+                    },
+                    {
+                        "name": "Sampling (Alpha)",
+                        "url": "/manual/sampling"
                     }
                 ]
             },

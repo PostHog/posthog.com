@@ -7,7 +7,7 @@ showTitle: true
 ## Bio
 
 
-Often on the move, sometimes by choice, and sometimes by chance, I'm a Brazilian-Finn who has lived in 6 countries across 4 continents.
+Often on the move, sometimes by choice, and sometimes by chance, I'm a Brazilian-Finn who has lived in 6 countries across 4 continents. I currently live in Brazil.
 
 <details>
 
@@ -15,7 +15,7 @@ Often on the move, sometimes by choice, and sometimes by chance, I'm a Brazilian
 
 Passionate about teaching (but far from an academic), I taught an official high school course before graduating high school, became a Visiting Scholar before joining university, and presented my first paper at the European Central Bank during my freshman year (anonymous submission - they thought I had a PhD).
 
-Prior to PostHog, I was a technical consultant for clients which included a Fortune 500 company. A fan of building useful things, I'm a self-taught developer who has worked on an a wide variety of projects, from a travel app, to multiple websites and browser extensions, and even some white-hat hacking. For the past three years, I developed a nice habit of writing about my projects, which led me to a [Medium page](https://yakkomajuri.medium.com) that once surpassed 250k views in just 30 days. These days I mostly write less structured content at [https://yakkomajuri.github.io](yakkomajuri.github.io).
+Prior to PostHog, I was a technical consultant for clients which included a Fortune 500 company. A fan of building useful things, I'm a self-taught developer who has worked on an a wide variety of projects - from a travel app to multiple websites and browser extensions, and even some white-hat hacking. For the past three years, I developed a nice habit of writing about my projects, which led me to a [Medium page](https://yakkomajuri.medium.com) that once surpassed 250k views in just 30 days. These days I mostly write less structured content at [https://yakkomajuri.github.io](yakkomajuri.github.io).
 
 When I'm not working, I have been found hitchhiking in foreign lands, taking pictures of political demonstrations, and trying to learn Korean after one too many beers. I'll pick playing cards with my grandmother over the club on any Friday night, and my favorite place to spend the Saturday is on top of a mountain.
 
@@ -27,16 +27,24 @@ Oh, and I'm also part of the select group of software developers who have won a 
 
 ### Primary
 
-* Ingestion pipeline
-* Async migrations (our long-running data migrations system)
-* Data integrity
-* Data exports and imports 
-* Plugin server / App server
+* Query performance
+* Data integrity (on the read path)
+* ClickHouse
 
 ### Secondary
 
-* Deployments
-* Libraries
+* Async migrations (our long-running data migrations system)
+* New features for core PostHog insights
+* Query engine
+
+### Things I used to own
+
+I used to have a lot of responsibility over the following as well, but no longer work with them. I might be able to provide context, but shouldn't be the primary person you talk to about it:
+
+* Ingestion pipeline
+* Data integrity (on the write path)
+* Data exports and imports 
+* Plugin server / App server
 
 ## Quirks
 
@@ -60,11 +68,11 @@ Oh, and I'm also part of the select group of software developers who have won a 
 ## How I can help you
 
 * I can help you onboard into PostHog. I'm probably one of the people with the most end-to-end context about the company, given how long I've been here and the breadth of roles I've covered. I'm more than happy to share everything I know.
-* I can help you debug data issues
+* I can help you write queries
+* I can help you in speeding up queries
 * I can help you write migrations (particularly async migrations!)
-* I can help you write a plugin
-* I can help build tooling to enable you to write a plugin or app
-* I can help you learn how to use PostHog effectively
+* I can help you use/understand ClickHouse better
+
 
 ## How you can help me
 
