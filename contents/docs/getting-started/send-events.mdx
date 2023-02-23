@@ -1,6 +1,11 @@
 ---
-title: Sending events
+title: Send events
+nextURL: /docs/getting-started/send-events
 ---
+
+import { Badge } from "./\_snippets/badge.mdx"
+
+Once your PostHog instance is up and running, the next step is to start sending events.
 
 PostHog enables you to analyze data in real-time, as events come in. Make full use of this power by ingesting live data with our analytics integrations: [client libraries](/docs/integrate/overview#client-libraries), [server libraries](/docs/integrate/overview#server-libraries), as well as [third-party platforms](/docs/integrate/overview#integrations).
 
@@ -8,63 +13,29 @@ The purpose of this guide is to help you understand some key concepts with a goa
 
 The guide covers the following:
 
--   [Installing and initializing a PostHog library](#install-a-library)
 -   [How autocapture works with the JavaScript library](#use-autocapture)
 -   [How to capture user events with PostHog](#capture-user-events)
--   [How to identify and associate users with events](#identify-users)
 
 If you prefer to learn by doing, you can get started on the web with the [JavaScript snippet](/docs/integrate/client/snippet-installation).
 
 > Note that some events with a never-before-seen distinct ID are deliberately delayed by around a minute.
 > [More on that in the "Event ingestion nuances" section.](#event-ingestion-nuances)
 
-## Install a library
+<h2 class="flex items-center space-x-2">
+    1. Initialize PostHog <Badge>Client</Badge>
+</h2>
 
-Install the library for the platform you are building your application for.
+<MultiLanguage selector="tabs">
 
-import JSInstall from '../integrate/client/js/snippets/install.mdx'
-import AndroidInstall from '../integrate/client/android/snippets/install.mdx'
-import AndroidConfigure from '../integrate/client/android/snippets/configure.mdx'
-import IOSInstall from '../integrate/client/ios/snippets/install.mdx'
-import IOSConfigure from '../integrate/client/ios/snippets/configure.mdx'
-import FlutterPackage from '../integrate/client/flutter/snippets/package.mdx'
-import FlutterInstall from '../integrate/client/flutter/snippets/install.mdx'
-import ReactNativeInstall from '../integrate/client/react-native/snippets/install.mdx'
-import ReactNativeConfigure from '../integrate/client/react-native/snippets/configure.mdx'
+<!-- prettier-ignore -->
+```html label="Snippet"
+<script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('<ph_project_api_key>', {api_host: '<ph_instance_address>'})
+</script>
+```
 
-import Tab from "components/Tab"
-
-<Tab.Group>
-<Tab.List>
-<Tab>JavaScript</Tab>
-<Tab>Android</Tab>
-<Tab>iOS</Tab>
-<Tab>Flutter</Tab>
-<Tab>React Native</Tab>
-</Tab.List>
-
-<Tab.Panels>
-<Tab.Panel>
-<JSInstall />
-</Tab.Panel>
-<Tab.Panel>
-<AndroidInstall />
-<AndroidConfigure />
-</Tab.Panel>
-<Tab.Panel>
-<IOSInstall />
-<IOSConfigure />
-</Tab.Panel>
-<Tab.Panel>
-<FlutterPackage />
-<FlutterInstall />
-</Tab.Panel>
-<Tab.Panel>
-<ReactNativeInstall />
-<ReactNativeConfigure />
-</Tab.Panel>
-</Tab.Panels>
-</Tab.Group>
+</MultiLanguage>
 
 ## Use autocapture
 
@@ -118,32 +89,3 @@ A `capture` call requires:
 Optionally you can submit:
 
 -   `properties`, which is an object with any information you'd like to add
-
-## Event ingestion nuances
-
-It's a priority for us that events are fully processed and saved as soon as possible. However, there is a class of events which we _deliberately_ process with a slight delay. Specifically, an event is delayed by around a minute if it fits **all** of the following three conditions:
-
--   isn't from an anonymous user (anonymous users are recognized by having the `distinct_id` the same as the `$device_id` property)
--   isn't an `$identify` event (e.g. from `posthog.identify()`)
--   its `distinct_id` cannot be matched to an existing person
-
-This delay mechanism is called the **event buffer**, and it materially improves handling of an edge case which could otherwise inflate unique user counts.
-
-<details>
-
-  <summary>How does the event buffer help?</summary>
-
-Starting with version 1.38.0, PostHog stores the person associated with an event inline with the event record. This greatly improves query performance, but because events are immutable, it also means that persons can't be merged retroactively. See this scenario where that's problematic:
-
-1. User visits signup page, in turn frontend captures anonymous `$pageview` for distinct ID `XYZ` (anonymous distinct ID = device ID).  
-   This event gets person ID `A`.
-2. User click signup button, initiating in a backend request, in turn frontend captures anonymous `$autocapture` (click) for distinct ID `XYZ`.  
-   This event gets person ID `A`.
-3. Signup request is processed in the backend, in turn backend captures identified signup for distinct ID `alice@example`.com.  
-   OOPS! We haven't seen `alice@example.com` before, so this event gets person ID `B`.
-4. Signup request finishes successfully, in turn frontend captures identified $identify aliasing distinct ID `XYZ` to `alice@example.com`.  
-   This event gets person ID `A`.
-
-Here, the event from step 3 got a new person ID `B`, impacting unique users counts. If it were delayed just a bit and processed after the event from step 4, all events would get the expected person ID `A`. This is exactly what the event buffer achieves.
-
-</details>
