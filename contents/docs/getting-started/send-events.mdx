@@ -115,7 +115,7 @@ While it is possible to combine these two events using [Actions](/manual/actions
 We've now covered sending events using both autocapture and custom tracking, but so far we've only been sending events from our frontend website.
 While in most cases this might be all you'll need to set up, if you are building a webapp and have a backend set up, we also highly recommend setting up tracking from your server as well as your frontend.
 
-There are a number of reasons why it's often preferrable to send certain custom events from the server-side:
+There are a number of reasons why it's often preferable to send certain custom events from the server-side:
 
 1. **More reliable delivery**: As these events originate from your server, there's no way for them to get accidentally blocked by client-side ad-blockers
 2. **More reliable context**: Typically, it's easier to include certain properties on events when they are sent from the server, as up-to-date data can be fetched directly from your database or other services
@@ -166,5 +166,5 @@ Often, this will come in the form of a unique user idea and can be pulled from a
 While our general guidance is to track on both the client and server side, there are certain types of events that lend themselves more to being send on the server side:
 
 1. **Sign up events**: Given that these events are both highly-valuable and also almost certainly need some logic to run server side, these should nearly always be sent from the server side when possible
-2. **C(R)UD events**: This is a broad class of events, but generally speaking whenever you receieve an API request to create or update a specific item within your application, it's useful to send these to PostHog. It's also often important to include context about the request itself in the event (latency, errors, any properties passed in the request payload, etc.)
+2. **C(R)UD events**: This is a broad class of events, but generally speaking whenever you receive an API request to create or update a specific item within your application, it's useful to send these to PostHog. It's also often important to include context about the request itself in the event (latency, errors, any properties passed in the request payload, etc.)
 3. **Backend jobs**: PostHog isn't just for monitoring your users! It can often be useful to send events whenever backend jobs or workflows are kicked off to be able to analyze them within PostHog
