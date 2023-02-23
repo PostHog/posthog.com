@@ -352,8 +352,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         objectives: `${node.fields?.slug || node.url}/objectives`,
     })
 
-    console.log(result.data.gettingStarted.nodes)
-
     createPosts(
         result.data.handbook.nodes,
         'handbook',

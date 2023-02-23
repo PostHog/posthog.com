@@ -3,6 +3,8 @@ title: Send events
 nextURL: /docs/getting-started/send-events
 ---
 
+> Want to follow along? Check out the [Getting started](https://github.com/PostHog/getting-started) repo for sample apps!
+
 import { Badge } from "./\_snippets/badge.mdx"
 
 Once your PostHog instance is up and running, the next step is to start sending events.
@@ -21,14 +23,12 @@ If you prefer to learn by doing, you can get started on the web with the [JavaSc
 > Note that some events with a never-before-seen distinct ID are deliberately delayed by around a minute.
 > [More on that in the "Event ingestion nuances" section.](#event-ingestion-nuances)
 
-<h2 class="flex items-center space-x-2">
-    1. Initialize PostHog <Badge>Client</Badge>
-</h2>
+## 1. Initialize PostHog <Badge>Client</Badge>
 
 <MultiLanguage selector="tabs">
 
 <!-- prettier-ignore -->
-```html label="Snippet"
+```html label=Snippet
 <script>
     !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
     posthog.init('<ph_project_api_key>', {api_host: '<ph_instance_address>'})
@@ -37,55 +37,134 @@ If you prefer to learn by doing, you can get started on the web with the [JavaSc
 
 </MultiLanguage>
 
-## Use autocapture
+Paste this snippet within the `<head>` tags of your website - ideally just inside the closing `</head>` tag - on all pages that you wish to track.
 
-import JSAutoCapture from '../integrate/client/js/snippets/autocapture.mdx'
-import JSCaptureIgnoreElements from '../integrate/client/js/snippets/capture-ignore-elements.mdx'
+## 2. Setup autocapture <Badge>Client</Badge>
 
-> Autocapture is presently only available in the web browser using the JavaScript library. For non-browser platforms and for situations where you wish to manually capture events, see the [capture user events](#capture-user-events) section.
+When you call `posthog.init` the PostHog JS library begins automatically capturing user events:
 
-<JSAutoCapture />
-<JSCaptureIgnoreElements />
+- **pageviews**, including the URL
+- **autocaptured events**, such as any click, change of input, or submission associated with `a`, `button`, `form`, `input`, `select`, `textarea`, and `label` tags
 
-## Capture user events
+### Hiding certain elements
 
-This allows you to send more context than the default event info that PostHog captures whenever a user does something. In that case, you can send an event with any metadata you may wish to add.
+PostHog puts a great amount of effort into making sure it doesn't capture any sensitive data from your website.
+If there are other elements you don't want to be captured, you can add the `ph-no-capture` class name.
+
+```html
+<input class='ph-no-capture'><!-- Input with sensitive user info --></input>
+```
+
+### Tuning autocapture
+
+Oftentimes, you don't want to automatically capture every single user interaction. This can be easily remedied by passing some options when we initialize posthog.
+
+## 3. Capture custom events <Badge>Client</Badge>
+
+Setting up autocapture is a great way to get started, but typically when integrating tracking into your product you'll want to send additional events for when specific things occur.
+
+This can be done on the client-side by calling the `capture` method, with the first argument being the name of the event you want to track.
 
 <MultiLanguage selector="tabs">
 
 ```js
-posthog.capture('[event-name]', { property1: 'value', property2: 'another value' })
-```
-
-```android
-PostHog.with(this)
-       .capture("Button B Clicked", new Properties()
-                                        .putValue("color", "blue")
-                                        .putValue("icon", "new2-final"));
-```
-
-```ios
-// In swift
-posthog.capture("Signed Up", properties: ["plan": "Pro++"])
-
-// In objective-c
-[[PHGPostHog sharedPostHog] capture:@"Signed Up" properties:@{ @"plan": @"Pro++" }];
-```
-
-```react-native
-posthog.capture('Button B Clicked', {
-    color: "blue",
-    icon: "new2-final"
-})
+posthog.capture('Sign-up button clicked')
 ```
 
 </MultiLanguage>
 
-A `capture` call requires:
+> While you can name your events however you'd like, we typically recommend using a '[object] [verb]' format, where '[object]' is whatever entity the action relates to, and the '[verb]' is the action itself.
+> Some examples of this could include: 'Project created', 'User signed up', or 'Invite sent'.
 
--   `event` to specify the event name
-    -   We recommend naming events with "[noun] [verb]", such as `movie played` or `movie updated`, in order to easily identify what your events mean later on (we know this from experience).
+At first, you may ask why it's at all necessary to send custom events if I already have autocapture enabled? While at first it might seem redundant, these custom events are important for two main reasons:
 
-Optionally you can submit:
+1. Sending custom metadata on an event
+2. Keeping events consistent even if your UI changes
 
--   `properties`, which is an object with any information you'd like to add
+### Sending custom properties
+
+Let's imagine you're building an e-commerce store and you want to track whenever a user adds an item to their cart.
+With autocapture set up, you'll already see `Clicked button with text 'Add to cart'` events, but these won't have any information on which item the user actually added!
+
+This is easy to add by including a second parameter in our capture call which contains a map of properties to include on the event.
+
+<MultiLanguage selector="tabs">
+
+```js
+posthog.capture(
+    'Item added to cart',
+    {
+        sku: 'XYZ12345',
+        price: 1599,
+        item: 'Blue Hedgehog shirt'
+    }
+)
+```
+
+</MultiLanguage>
+
+### Keeping events consistent
+
+When elements of your frontend change, this can affect how autocapture events show up in PostHog.
+Continuing with the example above, if we changed the text for our add to cart button to instead just say 'Add', our autocapure events would being showing up as `Clicked button with text 'Add'` instead of what they had previously been.
+
+While it is possible to combine these two events using [Actions](/manual/actions) to fix this drift, it's oftentimes much less simpler to just track these high-value actions using custom events.
+
+## 4. Capture backend events <Badge>Optional</Badge> <Badge>Server</Badge>
+
+We've now covered sending events using both autocapture and custom tracking, but so far we've only been sending events from our frontend website.
+While in most cases this might be all you'll need to set up, if you are building a webapp and have a backend set up, we also highly recommend setting up tracking from your server as well as your frontend.
+
+There are a number of reasons why it's often preferrable to send certain custom events from the server-side:
+
+1. **More reliable delivery**: As these events originate from your server, there's no way for them to get accidentally blocked by client-side ad-blockers
+2. **More reliable context**: Typically, it's easier to include certain properties on events when they are sent from the server, as up-to-date data can be fetched directly from your database or other services
+
+Our [SDK pages](/docs/integrate?tab=sdks) contain information on installing PostHog on your specific platform. Once you have the library installed, you can send a capture event using the exact same `capture` method as in `posthog-js`.
+
+<MultiLanguage selector="tabs">
+
+```node
+client.capture({
+    distinctId: 'distinct_id',
+    event: 'Order created',
+    properties: {
+        orderId: '#0054'
+        subtotal: 3599,
+        name: 'Max Hedgehog',
+        customer: {
+            isReturning: true
+        }
+    },
+})
+```
+
+```python
+posthog.capture(
+    'distinct_id',
+    'Order created',
+    {
+        'orderId': '#0054'
+        'subtotal': 3599,
+        'name': 'Max Hedgehog',
+        'customer': {
+            'isReturning': True
+        }
+    }
+)
+```
+
+</MultiLanguage>
+
+The only thing major difference when sending events from the server side is we must include a `distinct_id` with every event, which corresponds to the id of whichever user performed the specific action.
+Often, this will come in the form of a unique user idea and can be pulled from a session cookie when requests are sent.
+
+> TODO: Warning about using the same distinct_id across all backend requests
+
+### When should I send events from the server vs. the client?
+
+While our general guidance is to track on both the client and server side, there are certain types of events that lend themselves more to being send on the server side:
+
+1. **Sign up events**: Given that these events are both highly-valuable and also almost certainly need some logic to run server side, these should nearly always be sent from the server side when possible
+2. **C(R)UD events**: This is a broad class of events, but generally speaking whenever you receieve an API request to create or update a specific item within your application, it's useful to send these to PostHog. It's also often important to include context about the request itself in the event (latency, errors, any properties passed in the request payload, etc.)
+3. **Backend jobs**: PostHog isn't just for monitoring your users! It can often be useful to send events whenever backend jobs or workflows are kicked off to be able to analyze them within PostHog
