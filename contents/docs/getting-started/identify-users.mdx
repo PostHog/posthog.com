@@ -69,7 +69,7 @@ posthog.identify('distinct_id')
 You'll usually want to call `identify` every time a user first visits your application, or directly after they log in if they first landed on your website while logged out.
 Typically you'll want this to be the first call you make to PostHog - before sending any events with `capture` - so making the call _as soon as you have access to the user session_ is best.
 
-There's no gotcha's with calling `identify` multiple times for the same user **as long as you continue to pass the same `distinct_id`**, so feel free to call it multiple times througout the course of a session.
+There's no gotcha's with calling `identify` multiple times for the same user **as long as you continue to pass the same `distinct_id`**, so feel free to call it multiple times throughout the course of a session.
 
 ## 4. Setting user properties <Badge>Client</Badge> <Badge>Server</Badge>
 
@@ -78,7 +78,7 @@ This becomes incredibly powerful when creating insights in PostHog, which we'll 
 
 In PostHog, there are special `$set` and `$set_once` properties that we can include on events to set properties on whichever user the event is connected to.
 
-### What is the difference betwen `$set` and `$set_once`?
+### What is the difference between `$set` and `$set_once`?
 
 The `$set` and `$set_once` properties behave nearly identical - except for the fact that `$set` will replace any value that may have already been set on a person, while `$set_once` will only set the property if it has never been set before.
 
