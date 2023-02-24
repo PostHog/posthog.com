@@ -16,7 +16,6 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
 
         const menu = MenuBuilder.buildStructure({ spec: api_endpoints }, {})
         let all_endpoints = menu[menu.length - 1]['items'] // all grouped endpoints
-        all_endpoints
         all_endpoints.forEach((endpoint) => {
             const node = {
                 id: createNodeId(`api_endpoint-${endpoint.name}`),

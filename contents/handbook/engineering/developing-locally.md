@@ -208,18 +208,18 @@ We'll run the plugin server in a later step.
         sudo apt install -y libxml2 libxmlsec1-dev pkg-config
         ```
 
-1. Install Python 3.8.
+1. Install Python 3.10.
 
-    - On macOS, you can do so with Homebrew: `brew install python@3.8`.
+    - On macOS, you can do so with Homebrew: `brew install python@3.10`.
 
     - On Debian-based Linux:
         ```bash
         sudo add-apt-repository ppa:deadsnakes/ppa -y
         sudo apt update
-        sudo apt install python3.8 python3.8-venv python3.8-dev -y
+        sudo apt install python3.10 python3.10-venv python3.10-dev -y
         ```
 
-Make sure when outside of `venv` to always use `python3` instead of `python`, as the latter may point to Python 2.x on some systems. If installing multiple versions of Python 3, such as by using the `deadsnakes` PPA, use `python3.8` instead of `python3`.
+Make sure when outside of `venv` to always use `python3` instead of `python`, as the latter may point to Python 2.x on some systems. If installing multiple versions of Python 3, such as by using the `deadsnakes` PPA, use `python3.10` instead of `python3`.
 
 You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage multiple versions of Python 3 on the same machine.
 
@@ -251,7 +251,7 @@ You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage m
 
     ```bash
     brew install openssl
-    CFLAGS="-I /opt/homebrew/opt/openssl/include $(python3.8-config --includes)" LDFLAGS="-L /opt/homebrew/opt/openssl/lib" GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1 GRPC_PYTHON_BUILD_SYSTEM_ZLIB=1 pip install -r requirements.txt
+    CFLAGS="-I /opt/homebrew/opt/openssl/include $(python3.10-config --includes)" LDFLAGS="-L /opt/homebrew/opt/openssl/lib" GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1 GRPC_PYTHON_BUILD_SYSTEM_ZLIB=1 pip install -r requirements.txt
     ```
 
     These will be used when installing `grpcio` and `psycopg2`. After doing this once, and assuming nothing changed with these two packages, next time simply run:

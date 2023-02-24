@@ -18,8 +18,77 @@
     },
     {
         "name": "SDKs",
-        "url": "/docs/sdks",
-        "children": []
+        "url": "",
+        "children": [
+            {
+                "name": "JavaScript",
+                "url": "/docs/sdks/js",
+                "badge": {
+                    "title": "Popular",
+                    "className": "!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50"
+                }
+            },
+            {
+                "name": "Android",
+                "url": "/docs/sdks/android",
+                "badge": {
+                    "title": "Popular",
+                    "className": "!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50"
+                }
+            },
+            {
+                "name": "Elixir",
+                "url": "/docs/sdks/elixir"
+            },
+            {
+                "name": "Flutter",
+                "url": "/docs/sdks/flutter"
+            },
+            {
+                "name": "Go",
+                "url": "/docs/sdks/go"
+            },
+            {
+                "name": "iOS",
+                "url": "/docs/sdks/ios",
+                "badge": {
+                    "title": "Popular",
+                    "className": "!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50"
+                }
+            },
+            {
+                "name": "Java",
+                "url": "/docs/sdks/java"
+            },
+            {
+                "name": "Node.js",
+                "url": "/docs/sdks/node"
+            },
+            {
+                "name": "PHP",
+                "url": "/docs/sdks/php"
+            },
+            {
+                "name": "Python",
+                "url": "/docs/sdks/python"
+            },
+            {
+                "name": "React Native",
+                "url": "/docs/sdks/react-native",
+                "badge": {
+                    "title": "Popular",
+                    "className": "!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50"
+                }
+            },
+            {
+                "name": "Ruby",
+                "url": "/docs/sdks/ruby"
+            },
+            {
+                "name": "Rust",
+                "url": "/docs/sdks/rust"
+            }
+        ]
     },
     {
         "name": "Integrations",
