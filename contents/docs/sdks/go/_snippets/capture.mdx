@@ -1,0 +1,9 @@
+```go
+client.Enqueue(posthog.Capture{
+  DistinctId: "test-user",
+  Event:      "test-snippet",
+  Properties: posthog.NewProperties().
+    Set("plan", "Enterprise").
+    Set("friends", 42),
+})
+```
