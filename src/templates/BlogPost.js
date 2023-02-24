@@ -30,7 +30,7 @@ const A = (props) => <Link {...props} className="text-red hover:text-red font-se
 
 const Title = ({ children, className = '' }) => {
     return (
-        <h1 className={`text-3xl md:text-4xl lg:text-4xl mb-1 mt-6 lg:mt-1 lg:text-white text-primary ${className}`}>
+        <h1 className={`text-3xl md:text-4xl lg:text-4xl mb-1 mt-6 lg:mt-1 text-primary dark:text-primary-dark ${className}`}>
             {children}
         </h1>
     )
