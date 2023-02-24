@@ -55,13 +55,6 @@ The biggest difference is in Clickhouse’s strength. Let’s return to the anal
 
 ClickHouse accomplishes this by optimizing the database for reading large swaths of data. ClickHouse isn’t designed to be utilized like a stock PostgreSQL or mySQL database; it’s particularly good at write-heavy, mutation-low, read-and-reduce-heavy operations. It's perfect solution for analytics providers, like [PostHog](https://posthog.com/).
 
-However, self-hosted ClickHouse by itself lacks a lot of features that Snowflake likely considers table-stakes: 
-
-- A dedicated non-technical-friendly GUI for exploring and visualizing data
-- The ability to scale architecture without resharding (unless you are using Zero Copy Replication or S3 backed MergeTree tables)
-
-Luckily there are a number of hosted ClickHouse solutions that provide top tier solutions to address this.
-
 ### Hosted ClickHouse
 
 It is slightly silly to compare Snowflake and ClickHouse without mentioning ClickHouse Cloud, Altinity Cloud, Firebolt, or TinyBird. Each solution simplifies deploying and maintaining a ClickHouse instance. This helps address the final bullet in the previous section; they make scaling architecture seamless without complex data migrations.
@@ -89,7 +82,7 @@ Meanwhile, CPU, memory, and storage are encapsulated under Shared-Nothing Archit
 
 More importantly, Snowflake’s middle layer – virtual warehouses – can be scaled easily, coming in T-shirt sizes (S/M/L/XL). Snowflake makes it easy to add parallel nodes or re-size existing nodes, made possible by Snowflake's virtualized architecture.
 
-ClickHouse utilizes Shared-Nothing Architecture by default (which is why we chose it originally!). We wanted something that was going to be fast and reliable. ClickHouse is a great fit for this. The great part here is...ClickHouse also supports Shared-Disk Architecture! This is useful if you want to scale disk and compute separately, something we are very excited about for the future of PostHog. You literally can have the best of both worlds depending on your use case and tune it to fit.
+ClickHouse utilizes Shared-Nothing Architecture by default (which is why we chose it originally!). We wanted something that was going to be fast and reliable. ClickHouse is a great fit for this. The great part here is...ClickHouse also [supports Shared-Disk Architecture](https://clickhouse.com/docs/en/faq/operations/deploy-separate-storage-and-compute/)! This is useful if you want to scale disk and compute separately, something we are very excited about for the future of PostHog. You literally can have the best of both worlds depending on your use case and tune it to fit. You can do this by leveraging Zero Copy Replication and [S3/GCS Backed MergeTrees](https://clickhouse.com/docs/en/guides/sre/s3-multi-region)... or even HDFS if that is your thing!
 
 ### Differences in query optimization & speed
 
