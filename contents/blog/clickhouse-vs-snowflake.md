@@ -135,4 +135,8 @@ Consider the following resources if you want to learn more about ClickHouse and 
 
 - [Why we chose ClickHouse](https://youtu.be/6IwLWEx_mg4)
 
-- [Andy Pavlo - Vectorized Query Execution](https://www.youtube.com/watch?v=FrspnYbFSxQ) <--- this is a great video that explains vectorized query execution and you should check out all of Andy's videos 
+- [Andy Pavlo - Vectorized Query Execution](https://www.youtube.com/watch?v=FrspnYbFSxQ) <--- this is a great video that explains vectorized query execution and you should check out all of Andy's videos
+
+- [ClickHouse Separate Storage & Compute](https://clickhouse.com/docs/en/faq/operations/deploy-separate-storage-and-compute/)
+
+- [S3 Backed MergeTrees](https://clickhouse.com/docs/en/integrations/s3/s3-merge-tree/)
