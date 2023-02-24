@@ -4,7 +4,7 @@ sidebarTitle: JavaScript
 sidebar: Docs
 showTitle: true
 github: https://github.com/PostHog/posthog-js
-icon: ../../../../images/docs/integrate/js.svg
+icon: ../../../images/docs/integrate/js.svg
 features:
     eventCapture: true
     userIdentification: true
@@ -24,7 +24,7 @@ The reason this exists is that whilst the default snippet captures every click o
 
 ## Installation
 
-import JSInstall from './snippets/install.mdx'
+import JSInstall from './\_snippets/install.mdx'
 
 <JSInstall />
 
@@ -32,8 +32,8 @@ import JSInstall from './snippets/install.mdx'
 
 ### Autocapture
 
-import JSAutoCapture from './snippets/autocapture.mdx'
-import JSCaptureIgnoreElements from './snippets/capture-ignore-elements.mdx'
+import JSAutoCapture from './\_snippets/autocapture.mdx'
+import JSCaptureIgnoreElements from './\_snippets/capture-ignore-elements.mdx'
 
 <JSAutoCapture />
 
@@ -44,17 +44,15 @@ You can configure autocapture using allowlists. If an array is passed for an all
 For example, to only capture clicks on buttons on the docs section of the website that contain the data attribute `ph-autocapture` you can do:
 
 ```js
-posthog.init('<ph_project_api_key>',
-    {
-        api_host: '<ph_instance_address>',
-        autocapture: {
-                event_allowlist: ['click'], // DOM events from this list ['click', 'change', 'submit']
-                url_allowlist: ['posthog.com\.\/docs\/.*'], // strings or RegExps
-                element_allowlist: ['button'], // DOM elements from this list ['a', 'button', 'form', 'input', 'select', 'textarea', 'label']
-                css_selector_allowlist: ['[ph-autocapture]'] // List of CSS selectors
-            }
-    }
-)
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_instance_address>',
+    autocapture: {
+        event_allowlist: ['click'], // DOM events from this list ['click', 'change', 'submit']
+        url_allowlist: ['posthog.com./docs/.*'], // strings or RegExps
+        element_allowlist: ['button'], // DOM elements from this list ['a', 'button', 'form', 'input', 'select', 'textarea', 'label']
+        css_selector_allowlist: ['[ph-autocapture]'], // List of CSS selectors
+    },
+})
 ```
 
 The allowlists only filter autocapture events, they won't affect the data collected by session recordings.
@@ -85,7 +83,7 @@ You can also configure "permitted domains" in your 'Project Settings'. These are
 
 ### Send custom events with `posthog.capture`
 
-import JSCapture from './snippets/capture.mdx'
+import JSCapture from './\_snippets/capture.mdx'
 
 <JSCapture />
 
@@ -127,7 +125,7 @@ This works the same way as `posthog.people.set_once`.
 
 > We highly recommend reading our section on [Identifying users](/docs/integrate/identifying-users) to better understand how to correctly use this method.
 
-import JSIdentify from './snippets/identify.mdx'
+import JSIdentify from './\_snippets/identify.mdx'
 
 <JSIdentify />
 
@@ -306,13 +304,13 @@ posthog.isFeatureEnabled('keyword', { send_event: false })
 ```
 
 #### Feature Flag Payloads
+
 Payloads allow you to retrieve a value that is associated with the matched flag. The value can be a
-string, boolean, number, dictionary, or array. This allows for custom configurations based on values defined in the posthog app. 
+string, boolean, number, dictionary, or array. This allows for custom configurations based on values defined in the posthog app.
 
 ```js
 posthog.getFeatureFlagPayload('keyword')
 ```
-
 
 #### Bootstrapping Flags
 
@@ -330,16 +328,15 @@ posthog.init('<ph_project_api_key>', {
         featureFlags: {
             'flag-1': true,
             'variant-flag': 'control',
-            'other-flag': false
-        }
-    }
+            'other-flag': false,
+        },
+    },
 })
 ```
 
 To compute these flag values, use the corresponding `getAllFlags` method in your server-side library. Note that bootstrapping flags requires server-side initialisation.
 
 If the ID you're passing in is an identified ID (that is, an ID with which you've called `posthog.identify()` elsewhere), you can also pass in the `isIdentifiedID` bootstrap option, which ensures that this ID is treated as an identified ID in the library. This is helpful as it warns you when you try to do something wrong with this ID, like calling `identify` again.
-
 
 ```js
 posthog.init('<ph_project_api_key>', {
@@ -350,12 +347,11 @@ posthog.init('<ph_project_api_key>', {
         featureFlags: {
             'flag-1': true,
             'variant-flag': 'control',
-            'other-flag': false
-        }
-    }
+            'other-flag': false,
+        },
+    },
 })
 ```
-
 
 > **Note:** Passing in a distinctID to bootstrap replaces any existing IDs, which means you may fail to connect any old anonymous user events with the logged in person, if your logic calls identify in the frontend immediately on login. In this case, you can omit passing in the distinctID.
 
@@ -365,15 +361,15 @@ Group analytics allows you to associate the events for that person's session wit
 
 > **Note: ** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
 
--  Associate the events for this session with a group
+-   Associate the events for this session with a group
 
 ```js
 posthog.group('company', '42dlsfj23f')
 
-posthog.capture("upgraded plan") // this event is associated with company ID `42dlsfj23f`
+posthog.capture('upgraded plan') // this event is associated with company ID `42dlsfj23f`
 ```
 
--  Associate the events for this session with a group AND update the properties of that group
+-   Associate the events for this session with a group AND update the properties of that group
 
 ```js
 posthog.group('company', '42dlsfj23f', {

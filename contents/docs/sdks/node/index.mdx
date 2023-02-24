@@ -14,7 +14,7 @@ features:
     groupAnalytics: true
 ---
 
-import CohortExpansionSnippet from './snippets/cohort-expansion'
+import CohortExpansionSnippet from '../\_snippets/cohort-expansion'
 
 If you're working with Node.js, the official `posthog-node` library is the simple way to integrate your software with PostHog. This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance. And in addition to event capture, [feature flags](https://posthog.com/docs/user-guides/feature-flags) are supported as well.
 
@@ -48,15 +48,15 @@ You can find your key in the 'Project Settings' page in PostHog.
 
 ### Options
 
-|           Variable            | Description                                                                                              |       Default value        |
-| :--------------------------- | :------------------------------------------------------------------------------------------------------- | :------------------------ |
-|            `host`             | Your PostHog host                                                                                        | `https://app.posthog.com/` |
-|           `flushAt`           | After how many capture calls we should flush the queue (in one batch)                                    |            `20`            |
-|        `flushInterval`        | After how many ms we should flush the queue                                                              |          `10000`           |
-|       `personalApiKey`        | An optional [personal API key](/docs/api/overview#personal-api-keys-recommended) for evaluating feature flags locally |           `null`           |
-| `featureFlagsPollingInterval` | Interval in milliseconds specifying how often feature flags should be fetched from the PostHog API       |          `300000`          |
-| `requestTimeout` | Timeout in milliseconds for any calls       |          `10000`          |
-| `maxCacheSize` | Maximum size of cache that deduplicates $feature_flag_called calls per user.       |          `50000`          |
+| Variable                      | Description                                                                                                           | Default value              |
+| :---------------------------- | :-------------------------------------------------------------------------------------------------------------------- | :------------------------- |
+| `host`                        | Your PostHog host                                                                                                     | `https://app.posthog.com/` |
+| `flushAt`                     | After how many capture calls we should flush the queue (in one batch)                                                 | `20`                       |
+| `flushInterval`               | After how many ms we should flush the queue                                                                           | `10000`                    |
+| `personalApiKey`              | An optional [personal API key](/docs/api/overview#personal-api-keys-recommended) for evaluating feature flags locally | `null`                     |
+| `featureFlagsPollingInterval` | Interval in milliseconds specifying how often feature flags should be fetched from the PostHog API                    | `300000`                   |
+| `requestTimeout`              | Timeout in milliseconds for any calls                                                                                 | `10000`                    |
+| `maxCacheSize`                | Maximum size of cache that deduplicates $feature_flag_called calls per user.                                          | `50000`                    |
 
 > **Note:** When using PostHog in an AWS Lambda function or a similar serverless function environment, make sure you set `flushAt` to `1` and `flushInterval` to `0`.
 
@@ -77,7 +77,6 @@ Optionally you can submit:
 
 -   `properties`, which is an object with any information you'd like to add
 -   `sendFeatureFlags`, a boolean that determines whether to send current known feature flags with this event. This is useful when running experiments which depends on this event. However, this makes things slow. [Read this tutorial for manually computing this information and speeding things up](/tutorials/experiments#step-2-sending-the-right-events)
-
 
 For example:
 
@@ -188,7 +187,6 @@ client.capture({
 })
 ```
 
-
 ### Feature flags
 
 PostHog's [feature flags](/docs/user-guides/feature-flags) enable you to safely deploy and roll back new features.
@@ -198,7 +196,6 @@ When using them with one of libraries, you should check if a feature flag is ena
 **How to check if a flag is enabled**
 
 > **Note:** Whenever we face an error computing the flag, the library returns `undefined`, instead of `true`, `false`, or a string variant value.
-
 
 ```node
 // isFeatureEnabled(key: string, distinctId: string, options: {}): Promise<boolean | undefined>
@@ -211,10 +208,9 @@ if (isMyFlagEnabledForUser) {
 
 **Get a flag value**
 
-If you're using multivariate feature flags, you can also get the value of the flag, as well as whether or not it is enabled. 
+If you're using multivariate feature flags, you can also get the value of the flag, as well as whether or not it is enabled.
 
 > **Note:** Whenever we face an error computing the flag, the library returns `None`, instead of `true` or `false` or a string variant value.
-
 
 ```node
 // getFeatureFlag(key: string, distinctId: string, options: {}): Promise<string | boolean | undefined>
@@ -223,11 +219,11 @@ const flagValue = await client.getFeatureFlag('flag-key', 'user distinct id')
 
 **Get a flag payload**
 
-Posthog Node v2.3.0 introduces feature flag payloads. Feature flags can be returned with matching payloads which are JSONType (string, number, boolean, dictionary, array) values. 
-This allows for custom configurations based on values defined in the posthog app. 
+Posthog Node v2.3.0 introduces feature flag payloads. Feature flags can be returned with matching payloads which are JSONType (string, number, boolean, dictionary, array) values.
+This allows for custom configurations based on values defined in the posthog app.
 
-> **Note:** `getFeatureFlag` does not need to be called prior to `getFeatureFlagPayload`. `getFeatureFlagPayload` will implicitly perform 
-getFeatureFlag to determine the matching flag and return the corresponding payload.
+> **Note:** `getFeatureFlag` does not need to be called prior to `getFeatureFlagPayload`. `getFeatureFlagPayload` will implicitly perform
+> getFeatureFlag to determine the matching flag and return the corresponding payload.
 
 ```node
 // getFeatureFlagPayload(key: string, distinctId: string, matchValue?: string | boolean, options: {}): Promise<JsonType | undefined>
@@ -239,7 +235,6 @@ const flagPayload = await client.getFeatureFlagPayload('flag-key', 'user distinc
 Sometimes, you might want to evaluate feature flags using properties that haven't been ingested yet, or were set incorrectly earlier. You can do so by setting properties the flag depends on with these calls.
 
 For example, if the `beta-feature` depends on the `is_authorized` property, and you know the value of the property, you can tell PostHog to use this property, like so:
-
 
 ```node
 // getFeatureFlag(
@@ -253,11 +248,12 @@ For example, if the `beta-feature` depends on the `is_authorized` property, and 
 //      sendFeatureFlagEvents?: boolean
 //    }
 //  ): Promise<string | boolean | undefined>
-const flagValue = await client.getFeatureFlag('flag-key', 'user distinct id', {personProperties: {is_authorized: true}})
+const flagValue = await client.getFeatureFlag('flag-key', 'user distinct id', {
+    personProperties: { is_authorized: true },
+})
 ```
 
 The same holds for [groups](/manual/group-analytics). If you have a group named `organisation`, you can add properties like so:
-
 
 ```node
 const flagValue = await client.getFeatureFlag('flag-key', 'user distinct id', {groups:{'organisation': 'google'}, groupProperties:{'organisation': {'is_authorized': True}})
@@ -268,7 +264,7 @@ const flagValue = await client.getFeatureFlag('flag-key', 'user distinct id', {g
 You can also get all known flag values as well. This is useful when you want to seed a frontend client with initial known flags. Like all methods above, this also takes optional person and group properties, if known.
 
 ```node
-await client.getAllFlags('distinct id', {groups: {}, personProperties: {'is_authorized': True}, groupProperties: {}})
+await client.getAllFlags('distinct id', { groups: {}, personProperties: { is_authorized: True }, groupProperties: {} })
 // returns dict of flag key and value pairs.
 ```
 
@@ -286,7 +282,7 @@ All feature flag evaluation requires an API request to your PostHog servers to g
 Then, the flag can be evaluated locally. The method signature looks exactly like above.
 
 ```node
-await client.getFeatureFlag('beta-feature', 'distinct id', {personProperties: {'is_authorized': True}})
+await client.getFeatureFlag('beta-feature', 'distinct id', { personProperties: { is_authorized: True } })
 // returns string or None
 ```
 
@@ -295,8 +291,8 @@ await client.getFeatureFlag('beta-feature', 'distinct id', {personProperties: {'
 This works for `getAllFlags` as well. It evaluates all flags locally if possible. If even one flag isn't locally evaluable, it falls back to decide.
 
 ```node
-await client.getAllFlags('distinct id', {groups: {}, personProperties: {'is_authorized': True}, groupProperties: {}})
-// returns dict of flag key and value pairs. 
+await client.getAllFlags('distinct id', { groups: {}, personProperties: { is_authorized: True }, groupProperties: {} })
+// returns dict of flag key and value pairs.
 ```
 
 **Restricting evaluation to local only**
@@ -351,7 +347,7 @@ You should call `shutdown` on your program's exit to exit cleanly:
 ```node
 // Stop pending pollers and flush any remaining events
 client.shutdown()
-// or 
+// or
 await client.shutdownAsync()
 ```
 
@@ -376,10 +372,9 @@ export const handler() {
   // So far 2 events are queued but not sent
 
   // Calling shutdown, flushed the queue but batched into 1 API call for maximum efficiency
-  await posthog.shutdownAsync() 
+  await posthog.shutdownAsync()
 }
 ```
-
 
 ## Upgrading from V1 to V2
 
@@ -389,5 +384,5 @@ With the release of V2, the API was kept mostly the same but with some small cha
 
 1. The minimum PostHog version requirement is 1.38
 2. The `callback` parameter passed as an optional last argument to most of the methods is no longer supported
-2. The method signature for `isFeatureEnabled` and `getFeatureFlag` is slightly modified. See the above documentation for each method for more details.
-3. For specific changes, [see the CHANGELOG](https://github.com/PostHog/posthog-js-lite/blob/master/posthog-node/CHANGELOG.md)
+3. The method signature for `isFeatureEnabled` and `getFeatureFlag` is slightly modified. See the above documentation for each method for more details.
+4. For specific changes, [see the CHANGELOG](https://github.com/PostHog/posthog-js-lite/blob/master/posthog-node/CHANGELOG.md)
