@@ -5,7 +5,7 @@ nextURL: /docs/getting-started/send-events
 
 > Want to follow along? Check out the [Getting started](https://github.com/PostHog/getting-started) repo for sample apps!
 
-import { Badge } from "./\_snippets/badge.mdx"
+import Badge from "./\_snippets/badge.mdx"
 import SendEventBackend from "./\_snippets/send-event-backend.mdx"
 
 Once your PostHog instance is up and running, the next step is to start sending events.
@@ -13,16 +13,6 @@ Once your PostHog instance is up and running, the next step is to start sending 
 PostHog enables you to analyze data in real-time, as events come in. Make full use of this power by ingesting live data with our analytics integrations: [client libraries](/docs/integrate/overview#client-libraries), [server libraries](/docs/integrate/overview#server-libraries), as well as [third-party platforms](/docs/integrate/overview#integrations).
 
 The purpose of this guide is to help you understand some key concepts with a goal of ingesting live data into PostHog. For simplicity, we'll focus on _client_ libraries as a means of data ingestion.
-
-The guide covers the following:
-
--   [How autocapture works with the JavaScript library](#use-autocapture)
--   [How to capture user events with PostHog](#capture-user-events)
-
-If you prefer to learn by doing, you can get started on the web with the [JavaScript snippet](/docs/integrate/client/snippet-installation).
-
-> Note that some events with a never-before-seen distinct ID are deliberately delayed by around a minute.
-> [More on that in the "Event ingestion nuances" section.](#event-ingestion-nuances)
 
 ## 1. Initialize PostHog <Badge>Client</Badge>
 
