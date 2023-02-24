@@ -275,8 +275,11 @@ export default function Contact() {
     return submitted ? (
         <div className="bg-gray-accent-light p-4 rounded-md">
             <p>
-                Thanks for getting in touch! A member of the PostHog team will get back to you as soon as we've had a
-                chance to review your information.&nbsp;
+                ✅ <strong>Message received!</strong>
+            </p>
+            <p>
+                A member of the PostHog team will get back to you as soon as we've had a chance to review your
+                information.&nbsp;
             </p>
             <p className="mb-0">
                 In the mean time, why not join <Link to="/slack">our Slack community</Link>?
