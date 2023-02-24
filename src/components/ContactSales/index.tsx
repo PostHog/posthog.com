@@ -41,10 +41,8 @@ export default function ContactSales() {
                     </div>
                 </section>
                 <section className="grid md:grid-cols-2 max-w-5xl mx-auto md:gap-x-16 gap-y-12">
-                    <div>
-                        <p className="m-0">
-                            Here are some things we can offer that don’t come with PostHog Cloud Self-Serve.
-                        </p>
+                    <div className="order-2 md:order-1">
+                        <h3 className="text-lg my-6">Benefits of a PostHog Enterprise plan:</h3>
                         <ul className="list-none m-0 p-0 mt-2 grid sm:grid-flow-col sm:grid-rows-3">
                             {features.map((feature) => {
                                 return (
@@ -55,12 +53,12 @@ export default function ContactSales() {
                                 )
                             })}
                         </ul>
-                        <h3 className="text-lg mt-14 mb-12">Who’s using PostHog’s Enterprise Cloud?</h3>
+                        <h3 className="text-lg mt-14 mb-12">Who's using PostHog Cloud?</h3>
 
                         <div className="grid sm:grid-cols-2 sm:gap-x-12 gap-y-12">
                             <div>
                                 <div className="text-center bg-[#2D2D2D] p-2 sm:p-4 rounded-md relative sm:rotate-6 sm:-mr-8 flex-shrink-0 sm:max-w-full max-w-[200px]">
-                                    <p className="text-white m-0 text-xs sm:text-[18px] font-bold font-comic">
+                                    <p className="text-white leading-tight m-0 text-xs sm:text-base font-bold font-comic">
                                         Whoa, industry leaders!
                                     </p>
                                     <svg
@@ -84,14 +82,14 @@ export default function ContactSales() {
                                     placeholder="none"
                                 />
                             </div>
-                            <div className="flex flex-col space-y-12 sm:order-last order-first">
-                                <img src={airbus} />
-                                <img src={ing} />
-                                <img src={phantom} />
+                            <div className="flex flex-wrap md:flex-col gap-4 md:gap-0  md:space-y-12 justify-center md:justify-start sm:order-last order-first">
+                                <img src={airbus} className="max-w-[150px] md:max-w-auto" />
+                                <img src={phantom} className="max-w-[150px] md:max-w-auto" />
+                                <img src={ing} className="max-w-[150px] md:max-w-auto" />
                             </div>
                         </div>
                     </div>
-                    <div>
+                    <div className="order-1 md:order-2">
                         <h3>Contact sales</h3>
                         <Contact />
                     </div>
