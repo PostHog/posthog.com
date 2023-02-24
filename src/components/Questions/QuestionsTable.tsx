@@ -124,7 +124,7 @@ export const QuestionsTable = ({
                                           to={`/questions/${question.permalink}`}
                                           className="whitespace-nowrap text-sm font-semibold"
                                       >
-                                          {question.replies.length === 1 ? (
+                                          {question.replies.length === 1 || question.replies.length > 2 ? (
                                               <>{question.replies.length - 1} replies</>
                                           ) : (
                                               <>{question.replies.length - 1} reply</>
