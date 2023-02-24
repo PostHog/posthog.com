@@ -1,3 +1,54 @@
 ---
 title: Actions and insights
+nextURL: /docs/getting-started/group-analytics
 ---
+
+Actions and insights are two of the simplest, yet most powerful analysis tools within PostHog.
+They're easy to get started with, tricky to fully master, but getting a good idea of all the features they offer will make analysis feel much, much smoother.
+
+## 1. Creating a new action from autocapture events
+
+Before we start, it's worth covering what an action actually is and what it's useful for. Concretely, an action is simply a way of either combining multiple different events together into one, or to track separate events based on specific properties.
+Actions are generally used as a way of cleaning up your analytics to make it easier to create insights, which may not sound very important, but becomes critical as you start sending more, different events.
+
+Actions are perhaps most powerful when paired with autocapture events, and offer an extremely quick way of setting up customizable tracking for your entire product in minutes.
+
+To start, let's create an action from an autocaptured event when a user clicks a 'Sign up' button. Navigate to the 'Data management' section in your PostHog dashboard, and then to the 'Actions' tab, where you should then see a 'New action' button that we'll click.
+
+![modal with two buttons: 'Inspect element on your site' and 'From event or pageview'](./images/create-new-action.png)
+
+In our case, we'll be using the second option to create an action from an existing event. We'll then fill out the name of the new Action we want to create - in this case, something along the lines of 'Sign up button clicked'.
+
+![form to create a new action, with 'Sign up button clicked' set as the name](./images/naming-the-action.png)
+
+> **Tip**: Make sure to set a description for all your actions - your team members and your future-self will thank you!
+
+Next, we'll describe which raw autocapture events we'd like to include under this action. We'll start by selecting 'Autocapture' as our event type and then filling out the 'Link target equals' and 'Text equals' fields.
+
+![form with the field 'Link taget equals' and 'Text equals' set to '/sign-up' and 'Sign up' respectively](./images/match-group.png)
+
+This means we'll only include autocapture elements where the user clicked on a link pointing to `/sign-up` with the text 'Sign up', which is exactly what we want!
+
+> **Tip**: There are typically many different ways of specifying which autocapture events should be part of an action, and even in this case this isn't the _only_ correct way of doing so.
+> You can also use the Toolbar to do this, which can sometimes work better if you have a large number of elements on a specific page.
+
+Now click 'Save', and we'll have created our first Action! This action behaves in almost the exact same way as any other custom event and can be used in all the same places - we'll look at how to use our new action in an insight in the [funnels section](#4-creating-a-new-funnel)
+
+## 2. Creating a new trends insight
+
+We're now getting into some really fun stuff - finally answering all the burning questions you have about your product and your users!
+Insights are at the core of the PostHog analytics platform, offering an easy way for anyone to answer questions about how users are actually using your product.
+
+PostHog has 5 basic insight types:
+
+-   [Trends](/manual/trends): Analyze how your core metrics change over time (_hopefully up and to the right_)
+-   [Funnels](/manual/funnels): Identify conversion between key steps and reduce drop-off
+-   [Retention](/manual/retention): Track how many of your users come back to your product again, and again
+-   [User paths](/manual/paths): Find out the steps your users take to get from A to B, and where they go from there
+-   [Stickiness](/manual/stickiness): See which features are used most frequently, and which users like them the most
+
+In this guide we'll be covering both Trends and Funnels, which are the two most-core insight types and generally are the ones you'll be reaching for the most when you have a question.
+
+## 3. Filtering events in our insight
+
+## 4. Creating a new funnel
