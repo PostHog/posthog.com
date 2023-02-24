@@ -15,7 +15,7 @@ export interface IContributor {
 }
 
 export interface IMenu {
-    icon?: React.ReactNode
+    icon?: string
     name: string
     url?: string
     children?: IMenu[]
@@ -81,7 +81,7 @@ export interface IProps {
     mobileMenu?: boolean
     darkMode?: boolean
     fullWidthContent?: boolean
-    setFullWidthContent: (fullWidth: boolean) => void
+    setFullWidthContent?: (fullWidth: boolean) => void
     contentContainerClasses?: string
     stickySidebar?: boolean
 }

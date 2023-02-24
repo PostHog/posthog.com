@@ -183,10 +183,6 @@
                 "url": "/docs/integrate/browser-extension"
             },
             {
-                "name": "Library comparison",
-                "url": "/docs/integrate/libraries"
-            },
-            {
                 "name": "Dashboards",
                 "url": "/manual/dashboards"
             },
@@ -248,7 +244,7 @@
     },
     {
         "name": "Feature flags",
-        "url": "/docs/experiments",
+        "url": "/docs/feature-flags",
         "icon": "/images/product-icons/feature-flags.svg",
         "children": [
             {
