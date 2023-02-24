@@ -252,6 +252,53 @@ const RecentQuestions = () => {
     )
 }
 
+const ActiveUsers = () => {
+    const [profiles, setProfiles] = useState([])
+
+    useEffect(() => {
+        fetch(
+            `${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/leaderboard?organizationId=${process.env.GATSBY_SQUEAK_ORG_ID}`
+        )
+            .then((res) => res.json())
+            .then((profiles) => setProfiles(profiles))
+    })
+
+    return (
+        <div id="active-users" className="mb-12">
+            <SectionTitle>Most active users</SectionTitle>
+            <ul className="m-0 p-0 list-none mb-6">
+                {profiles.map((profile) => {
+                    return (
+                        <ListItem key={profile?.id}>
+                            <Link
+                                className="flex items-center space-x-2 group text-ellipsis overflow-hidden whitespace-nowrap flex-grow text-red"
+                                to={`/community/profiles/${profile?.id}`}
+                            >
+                                <Avatar className="w-[50px] h-[50px] flex-shrink-0" src={profile.avatar} />
+                                <p className="m-0 font-semibold">
+                                    {profile.first_name} {profile.last_name}
+                                </p>
+                            </Link>
+                            <div className="flex-shrink-0">
+                                <div>
+                                    <p className="m-0 flex-shrink-0 font-semibold opacity-60">
+                                        {profile.replies} repl{profile.replies?.length === 1 ? 'y' : 'ies'}
+                                    </p>
+                                </div>
+                                <div>
+                                    <p className="m-0 flex-shrink-0 font-semibold opacity-60">
+                                        {profile.resolutions} resolution{profile.resolutions?.length === 1 ? '' : 's'}
+                                    </p>
+                                </div>
+                            </div>
+                        </ListItem>
+                    )
+                })}
+            </ul>
+        </div>
+    )
+}
+
 const ActivePulls = ({ pulls }) => {
     return (
         <div id="active-pulls" className="mb-12">
@@ -357,6 +404,7 @@ export default function CommunityPage({ params }: PageProps) {
                                 { url: 'recent-questions', value: 'Recent questions', depth: 0 },
                                 { url: 'active-issues', value: 'Most active issues', depth: 0 },
                                 { url: 'active-pulls', value: 'Most active PRs', depth: 0 },
+                                { url: 'active-users', value: 'Most active users', depth: 0 },
                             ]}
                             hideSurvey
                         >
@@ -364,6 +412,7 @@ export default function CommunityPage({ params }: PageProps) {
                             <RecentQuestions />
                             <ActiveIssues issues={issues.nodes} />
                             <ActivePulls pulls={pulls.nodes} />
+                            <ActiveUsers />
                         </PostLayout>
                     </UserProvider>
                 </Layout>
