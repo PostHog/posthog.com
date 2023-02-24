@@ -47,8 +47,27 @@ PostHog has 5 basic insight types:
 -   [User paths](/manual/paths): Find out the steps your users take to get from A to B, and where they go from there
 -   [Stickiness](/manual/stickiness): See which features are used most frequently, and which users like them the most
 
-In this guide we'll be covering both Trends and Funnels, which are the two most-core insight types and generally are the ones you'll be reaching for the most when you have a question.
+In this guide we'll be covering both Trends and Funnels, which are the two most-core insight types and generally the ones you'll be reaching for the most when you have a question.
+
+To start, let's create a new trends insight from the "Insights" section in our PostHog dashboard. Newly created insights will default to 'Trends'.
+
+![newly created trends insight with the 'Sign up button clicked' event](./images/new-insight.png)
+
+In this case, we'll use the 'Sign up button clicked' action we just created, but feel free to substitute this for whichever event you'd like.
 
 ## 3. Filtering events in our insight
 
-## 4. Creating a new funnel
+Now that we have our insight set up, let's start drilling down a bit more.
+
+First, let's start by seeing which browsers our users are using and how that correlates with our number of sign ups.
+
+![filter group for only direct referrers and breaking down by the browser](./images/filter-referrer-and-breakdown.png)
+
+We can do this with a [Breakdown](/manual/trends#breaking-down-by-properties), which splits our graph based on the value of an event or person property, in this case the 'Browser' property.
+Let's also add a [Filter Group](/manual/trends#filter-groups) so we're only at users who visited our site from a direct URL.
+
+This works well, but let's try changing the display of our graph to make it a bit easier to analyze.
+
+![filter group for only direct referrers and breaking down by the browser](./images/broken-down-trend-bar.png)
+
+Great, we now have our insight all set up! There are still tons of powerful features within trends insights, but with actions, filtering, and breakdowns you'll be able to answer loads of product questions.
