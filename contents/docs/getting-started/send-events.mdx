@@ -6,7 +6,7 @@ nextURL: /docs/getting-started/send-events
 > Want to follow along? Check out the [Getting started](https://github.com/PostHog/getting-started) repo for sample apps!
 
 import { Badge } from "./\_snippets/badge.mdx"
-import SendEventBackend from "./_snippets/send-event-backend.mdx"
+import SendEventBackend from "./\_snippets/send-event-backend.mdx"
 
 Once your PostHog instance is up and running, the next step is to start sending events.
 
@@ -44,8 +44,8 @@ Paste this snippet within the `<head>` tags of your website - ideally just insid
 
 When you call `posthog.init` the PostHog JS library begins automatically capturing user events:
 
-- **pageviews**, including the URL
-- **autocaptured events**, such as any click, change of input, or submission associated with `a`, `button`, `form`, `input`, `select`, `textarea`, and `label` tags
+-   **pageviews**, including the URL
+-   **autocaptured events**, such as any click, change of input, or submission associated with `a`, `button`, `form`, `input`, `select`, `textarea`, and `label` tags
 
 ### Hiding certain elements
 
@@ -92,14 +92,11 @@ This is easy to add by including a second parameter in our capture call which co
 <MultiLanguage selector="tabs">
 
 ```js
-posthog.capture(
-    'Item added to cart',
-    {
-        sku: 'XYZ12345',
-        price: 1599,
-        item: 'Blue Hedgehog shirt'
-    }
-)
+posthog.capture('Item added to cart', {
+    sku: 'XYZ12345',
+    price: 1599,
+    item: 'Blue Hedgehog shirt',
+})
 ```
 
 </MultiLanguage>
