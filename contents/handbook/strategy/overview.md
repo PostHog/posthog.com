@@ -24,7 +24,7 @@ _Provide every tool needed for evaluating feature success._ The best use of an e
 
 _Get in first._ By already being used by our customers, we’re the default for each additional tool they add. It’s the technical co-founder and early engineers building the MVP and integrating the first product tools, not PMs. By focusing on engineers we can be their preferred choice and get in first. Additionally, we can ladder our tools - for example, session recording is used much earlier in the life cycle of the product than others like the CDPs helping us get in earlier than competing products.
 
-_Be the source of truth for data._ Traditionally, as companies scale their data warehouse becomes the source of truth and non-warehouse native tools (like product analytics) become less relevant as people lose trust in the data in them. However, by providing the data and data-intense tools in one place, we can enhance the power of applications (like product analytics), provide increased trust, _and_ enable companies to build on top of the warehouse itself as they see fit, all _without_ them having to setup a complex stack.
+_Be the source of truth for data._ Traditionally, as companies scale their data warehouse becomes the source of truth and non-warehouse native tools (like product analytics) become less relevant as people lose trust in the data in them. However, by providing the data and data-intense tools in one place, we can enhance the power of our products (like product analytics), provide increased trust, _and_ enable companies to build on top of the warehouse itself as they see fit, all _without_ them having to setup a complex stack.
 
 ## 2026 vision
 
