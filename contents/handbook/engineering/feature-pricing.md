@@ -29,7 +29,7 @@ It's important that every time we create a new feature or shift our pricing plan
 
 Sometimes these principles still leave room for questioning - what, if any, should be available in the free tier? What about enterprise customers? For these types of questions, we've defined a runbook for deciding which plans and at what limits features should generally be assigned to.
 
-- In general, we should match the pricing of the cheapest big competitor for that product, so long as the unit economics make sense, to make it a no-brainer to use PostHog.
+- In general, we should roughly match the pricing of the cheapest big competitor for that product, so long as the unit economics make sense, to make it a no-brainer to use PostHog.
   - We can do this because we can upsell customers multiple of our other products. The total ACV is higher even if the per-product ACV is lower. It's better for customers as they get all these tools that are well integrated for the cheapest possible price.
 - For each feature that is released, we should always ask ourselves how it should be priced. A default behavior is good, but it shouldn't be used as a replacement for critically thinking about where something fits into our pricing scheme.
 - Default assumption for new features is that full usage is only available on the paid plans.
