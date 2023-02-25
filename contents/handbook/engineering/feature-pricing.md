@@ -12,7 +12,7 @@ showTitle: true
 - Transparently pay for the value they receive
   - Eg. Usage-based pricing on events, recordings
   - Eg. Paying per product so they only pay for what they use
-- Make it a no brainer to pick PostHog over other competitors
+- Make it a no-brainer to pick PostHog over other competitors
 
 
 ## Our goals with these principles are to: 
