@@ -5,7 +5,7 @@ import CallToAction from '../CallToAction'
 import { Wrapper } from '../Wrapper'
 import SearchIconButton from 'components/Search/SearchIconButton'
 import { graphql, useStaticQuery } from 'gatsby'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import { GatsbyImage, getImage, ImageDataLike } from 'gatsby-plugin-image'
 
 interface ColMenuItems {
     title: string
@@ -17,9 +17,9 @@ interface Tutorial {
     fields: {
         slug: string
     }
+    featuredImageImgix: ImageDataLike
     frontmatter: {
         title: string
-        featuredImage: any
     }
 }
 
@@ -130,19 +130,21 @@ export default function UsingPosthog({ referenceElement }: { referenceElement: H
                                 <h3 className="text-[18px] font-bold m-0 text-black ">Latest tutorials</h3>
                             </div>
                             <ul className="m-0 list-none p-0 mt-2 grid grid-cols-1 gap-y-2">
-                                {nodes.map(({ fields: { slug }, frontmatter: { title, featuredImage } }: Tutorial) => {
-                                    const image = featuredImage && getImage(featuredImage)
-                                    return (
-                                        <li key={slug}>
-                                            <Link
-                                                className="inline-block text-sm leading-tight m-0 text-red font-semibold"
-                                                to={slug}
-                                            >
-                                                {title}
-                                            </Link>
-                                        </li>
-                                    )
-                                })}
+                                {nodes.map(
+                                    ({ fields: { slug }, featuredImageImgix, frontmatter: { title } }: Tutorial) => {
+                                        const image = featuredImageImgix && getImage(featuredImageImgix)
+                                        return (
+                                            <li key={slug}>
+                                                <Link
+                                                    className="inline-block text-sm leading-tight m-0 text-red font-semibold"
+                                                    to={slug}
+                                                >
+                                                    {title}
+                                                </Link>
+                                            </li>
+                                        )
+                                    }
+                                )}
                             </ul>
                             <CallToAction className="inline-block mt-4 !w-full" to="/tutorials">
                                 Visit tutorials
@@ -185,13 +187,9 @@ const query = graphql`
                 fields {
                     slug
                 }
+                featuredImageImgix
                 frontmatter {
                     title
-                    featuredImage {
-                        childImageSharp {
-                            gatsbyImageData(placeholder: NONE)
-                        }
-                    }
                 }
             }
         }

@@ -18,7 +18,8 @@ export default function TutorialsSlider({ topic }: { topic: string }): any {
             activeSlide={activeSlide}
             slides={tutorials?.map((tutorial) => {
                 const {
-                    frontmatter: { featuredImage, authors, title },
+                    featuredImageImgix,
+                    frontmatter: { authors, title },
                     parent: {
                         fields: { date },
                     },
@@ -26,12 +27,13 @@ export default function TutorialsSlider({ topic }: { topic: string }): any {
                     fields: { slug },
                 } = tutorial
                 return {
-                    image: featuredImage,
+                    image: featuredImageImgix,
                     authors,
                     title,
                     date,
                     url: slug,
                     id,
+                    maxWidth: 514,
                 }
             })}
         />
@@ -46,6 +48,7 @@ export const query = graphql`
                 fields {
                     slug
                 }
+                featuredImageImgix
                 frontmatter {
                     title
                     tags
@@ -57,11 +60,6 @@ export const query = graphql`
                             }
                         }
                         name
-                    }
-                    featuredImage {
-                        childImageSharp {
-                            gatsbyImageData(width: 514, height: 289)
-                        }
                     }
                 }
                 parent {

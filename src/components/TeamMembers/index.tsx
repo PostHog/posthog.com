@@ -18,11 +18,11 @@ export default function TeamMembers({ team }: { team: string }) {
             <h4>Team members</h4>
             <ul className="list-none m-0 p-0 grid sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
                 {teamMembers.map((member) => {
-                    const { name, headshot, jobTitle, teamLead, country } = member?.frontmatter
+                    const { name, jobTitle, teamLead, country } = member?.frontmatter
                     return (
                         <li className="!m-0 flex space-x-4 items-center py-4" key={name}>
                             <figure className="mb-0">
-                                <ContributorImage image={getImage(headshot)} />
+                                <ContributorImage image={getImage(member?.headshotImgix)} />
                             </figure>
                             <div>
                                 <span className="flex items-center md:flex-row space-x-2">
@@ -56,12 +56,8 @@ const query = graphql`
     query {
         team: allMdx(filter: { fields: { slug: { regex: "/^/team/" } } }, sort: { fields: frontmatter___startDate }) {
             nodes {
+                headshotImgix
                 frontmatter {
-                    headshot {
-                        childImageSharp {
-                            gatsbyImageData
-                        }
-                    }
                     team
                     jobTitle
                     name

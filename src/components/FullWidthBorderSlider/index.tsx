@@ -10,6 +10,7 @@ interface ISliderItem {
     image: IGatsbyImageData
     date: string
     url: string
+    maxWidth?: number
     authors?: {
         image: ImageDataLike
         name: string
@@ -17,8 +18,12 @@ interface ISliderItem {
     }[]
 }
 
-const SlideTemplate = ({ date, url, authors, title, image }: ISliderItem) => {
-    return <Post authors={authors} title={title} date={date} slug={url} featuredImage={image} />
+const SlideTemplate = ({ date, url, authors, title, image, maxWidth }: ISliderItem) => {
+    return (
+        <div style={maxWidth ? { maxWidth } : {}}>
+            <Post authors={authors} title={title} date={date} slug={url} featuredImage={image} />
+        </div>
+    )
 }
 
 const Slide = ({ children }: { children: React.ReactNode }) => {

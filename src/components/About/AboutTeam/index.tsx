@@ -51,7 +51,7 @@ export const AboutTeam = () => {
 
             <div className="relative text-center py-14 md:py-28">
                 <div className="absolute inset-1/2 scale-[.4] sm:scale-[.6] md:scale-100">
-                    {teamMembers.nodes.map(({ frontmatter: { name, country, headshot } }, index) => {
+                    {teamMembers.nodes.map(({ headshotImgix, frontmatter: { name, country } }, index) => {
                         const styles = avatarStyles[index]
                         return (
                             <Avatar
@@ -59,7 +59,7 @@ export const AboutTeam = () => {
                                 size={styles.size}
                                 className={styles.className}
                                 color={styles.color}
-                                image={headshot}
+                                image={headshotImgix}
                                 name={name}
                                 country={country}
                             />
@@ -98,14 +98,10 @@ const query = graphql`
             sort: { fields: frontmatter___startDate }
         ) {
             nodes {
+                headshotImgix
                 frontmatter {
                     country
                     name
-                    headshot {
-                        childImageSharp {
-                            gatsbyImageData(placeholder: NONE)
-                        }
-                    }
                 }
             }
         }

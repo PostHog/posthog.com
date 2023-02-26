@@ -18,11 +18,12 @@ export default function Team() {
                 const {
                     id,
                     body,
-                    frontmatter: { headshot, jobTitle, name, pronouns, country, github },
+                    headshotImgix,
+                    frontmatter: { jobTitle, name, pronouns, country, github },
                 } = teamMember
                 const nameAndPronouns = pronouns ? `${name} (${pronouns})` : name
                 const title = `${nameAndPronouns}, ${jobTitle}`
-                const image = getImage(headshot)
+                const image = getImage(headshotImgix)
                 return (
                     <li key={id}>
                         <div className="team-row">
@@ -64,12 +65,8 @@ const query = graphql`
             teamMembers: nodes {
                 id
                 body
+                headshotImgix
                 frontmatter {
-                    headshot {
-                        childImageSharp {
-                            gatsbyImageData
-                        }
-                    }
                     jobTitle
                     name
                     pronouns

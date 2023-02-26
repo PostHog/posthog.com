@@ -52,16 +52,6 @@ export const query = graphql`
                 }
                 frontmatter {
                     title
-                    thumbnail {
-                        childImageSharp {
-                            gatsbyImageData(width: 32, height: 32)
-                        }
-                    }
-                    featuredImage {
-                        childImageSharp {
-                            gatsbyImageData(width: 514, height: 289)
-                        }
-                    }
                 }
             }
         }

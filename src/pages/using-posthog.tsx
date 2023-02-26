@@ -386,14 +386,15 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
                                     {currentModal &&
                                         tutorialsByCategory[currentModal].map((tutorial) => {
                                             const {
-                                                frontmatter: { featuredImage, authors, title, date },
+                                                featuredImageImgix,
+                                                frontmatter: { authors, title, date },
                                                 fields: { slug },
                                             } = tutorial
 
                                             return (
                                                 <li key={slug}>
                                                     <Post
-                                                        featuredImage={featuredImage}
+                                                        featuredImage={featuredImageImgix}
                                                         authors={authors}
                                                         title={title}
                                                         date={date}
@@ -428,14 +429,15 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-6 mt-8 max-w-sm sm:max-w-4xl">
                             {featuredTutorials.nodes.map((tutorial) => {
                                 const {
-                                    frontmatter: { featuredImage, authors, title, date },
+                                    featuredImageImgix,
+                                    frontmatter: { authors, title, date },
                                     fields: { slug },
                                 } = tutorial
                                 return (
                                     <Post
                                         key={slug}
                                         authors={authors}
-                                        featuredImage={featuredImage}
+                                        featuredImage={featuredImageImgix}
                                         date={date}
                                         title={title}
                                         slug={slug}

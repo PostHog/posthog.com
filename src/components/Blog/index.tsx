@@ -79,7 +79,8 @@ export const Posts = ({ posts, title, action, titleBorder }) => {
                     const {
                         node: {
                             id,
-                            frontmatter: { date, title, featuredImage, authors, category },
+                            featuredImageImgix,
+                            frontmatter: { date, title, authors, category },
                             fields: { slug },
                         },
                     } = post
@@ -92,7 +93,7 @@ export const Posts = ({ posts, title, action, titleBorder }) => {
                             <Post
                                 date={date}
                                 title={title}
-                                featuredImage={featuredImage}
+                                featuredImage={featuredImageImgix}
                                 authors={authors}
                                 category={category}
                                 slug={slug}
@@ -199,18 +200,13 @@ export const BlogFragment = graphql`
             slug
         }
         id
+        featuredImageImgix
         excerpt(pruneLength: 250)
         frontmatter {
             date(formatString: "MMM D, YYYY")
             title
             rootPage
             category
-            featuredImage {
-                publicURL
-                childImageSharp {
-                    gatsbyImageData(width: 480, height: 270)
-                }
-            }
             authors: authorData {
                 handle
                 name

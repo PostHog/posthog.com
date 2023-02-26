@@ -56,6 +56,7 @@ export const tutorialsFragment = graphql`
         fields {
             slug
         }
+        featuredImageImgix
         frontmatter {
             title
             date(formatString: "MMM 'YY")
@@ -68,11 +69,6 @@ export const tutorialsFragment = graphql`
                     }
                 }
                 name
-            }
-            featuredImage {
-                childImageSharp {
-                    gatsbyImageData(placeholder: NONE)
-                }
             }
         }
     }

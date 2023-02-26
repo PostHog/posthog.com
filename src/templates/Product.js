@@ -113,9 +113,10 @@ export default function Product({ data, location }) {
     const {
         body,
         excerpt,
+        featuredImageImgix,
         fields: { slug },
     } = pageData
-    const { title, subtitle, featuredImage, description } = pageData?.frontmatter
+    const { title, subtitle, description } = pageData?.frontmatter
     const slugger = new GithubSlugger()
     let feature
     let next
@@ -205,7 +206,7 @@ export default function Product({ data, location }) {
                             <h1 className="m-0 text-lg text-black/70">{title}</h1>
                         </div>
                         <h2 className="text-5xl m-0 mb-5">{subtitle}</h2>
-                        <GatsbyImage image={getImage(featuredImage)} />
+                        <GatsbyImage image={getImage(featuredImageImgix)} />
                     </Container>
                     <div className="article-content">
                         <MDXProvider
@@ -237,15 +238,11 @@ export const query = graphql`
             fields {
                 slug
             }
+            featuredImageImgix
             frontmatter {
                 title
                 subtitle
                 description
-                featuredImage {
-                    childImageSharp {
-                        gatsbyImageData
-                    }
-                }
             }
         }
         documentation: mdx(fields: { slug: { eq: $documentation } }) {

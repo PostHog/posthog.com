@@ -33,7 +33,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       description: String
     }
     type Contributors {
-      avatar: File @link(from: "avatar___NODE")
+      avatar: String
       url: String
       username: String
       teamData: TeamData

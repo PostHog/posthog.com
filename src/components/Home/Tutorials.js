@@ -17,9 +17,10 @@ export default function Tutorials({ title, subtitle, cta }) {
                 {nodes.map((tutorial, index) => {
                     const {
                         slug,
-                        frontmatter: { featuredImage, title },
+                        featuredImageImgix,
+                        frontmatter: { title },
                     } = tutorial
-                    const image = getImage(featuredImage)
+                    const image = getImage(featuredImageImgix)
                     return (
                         <li key={index} className="py-10 lg:px-10 lg:py-0">
                             <Link to={slug} className="relative block">
@@ -48,13 +49,9 @@ const query = graphql`
         tutorials: allMdx(filter: { frontmatter: { featuredTutorial: { eq: true } } }) {
             nodes {
                 slug
+                featuredImageImgix
                 frontmatter {
                     title
-                    featuredImage {
-                        childImageSharp {
-                            gatsbyImageData(placeholder: NONE)
-                        }
-                    }
                 }
             }
         }

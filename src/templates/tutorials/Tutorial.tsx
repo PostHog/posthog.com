@@ -73,8 +73,8 @@ const TutorialSidebar = ({ contributors, location, title, categories }) => {
 
 export default function Tutorial({ data, pageContext: { tableOfContents, menu }, location }) {
     const { pageData } = data
-    const { body, excerpt, fields } = pageData
-    const { title, featuredImage, description, contributors, categories, featuredVideo, date } = pageData?.frontmatter
+    const { body, excerpt, fields, featuredImageImgix } = pageData
+    const { title, description, contributors, categories, featuredVideo, date } = pageData?.frontmatter
     const components = {
         inlineCode: InlineCode,
         blockquote: Blockquote,
@@ -111,7 +111,7 @@ export default function Tutorial({ data, pageContext: { tableOfContents, menu },
             <PostLayout
                 questions={<CommunityQuestions />}
                 body={body}
-                featuredImage={featuredImage}
+                featuredImage={featuredImageImgix}
                 featuredVideo={featuredVideo}
                 tableOfContents={tableOfContents}
                 title={title}
@@ -127,7 +127,7 @@ export default function Tutorial({ data, pageContext: { tableOfContents, menu },
             >
                 <Intro
                     contributors={contributors}
-                    featuredImage={featuredImage}
+                    featuredImage={featuredImageImgix}
                     title={title}
                     featuredImageType="full"
                     titlePosition="top"
@@ -163,6 +163,7 @@ export const query = graphql`
             fields {
                 slug
             }
+            featuredImageImgix
             frontmatter {
                 title
                 date(formatString: "MMM DD, YYYY")
@@ -178,12 +179,6 @@ export const query = graphql`
                     name
                 }
                 featuredVideo
-                featuredImage {
-                    publicURL
-                    childImageSharp {
-                        gatsbyImageData(placeholder: NONE)
-                    }
-                }
             }
         }
     }

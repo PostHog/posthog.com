@@ -22,13 +22,11 @@ const query = graphql`
                     }
                     id
                     excerpt(pruneLength: 250)
+                    featuredImageImgix
                     frontmatter {
                         date(formatString: "MMMM DD, YYYY")
                         title
                         rootPage
-                        featuredImage {
-                            publicURL
-                        }
                     }
                 }
             }

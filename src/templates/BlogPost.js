@@ -30,7 +30,9 @@ const A = (props) => <Link {...props} className="text-red hover:text-red font-se
 
 const Title = ({ children, className = '' }) => {
     return (
-        <h1 className={`text-3xl md:text-4xl lg:text-4xl mb-1 mt-6 lg:mt-1 text-primary dark:text-primary-dark ${className}`}>
+        <h1
+            className={`text-3xl md:text-4xl lg:text-4xl mb-1 mt-6 lg:mt-1 text-primary dark:text-primary-dark ${className}`}
+        >
             {children}
         </h1>
     )
@@ -118,8 +120,8 @@ const BlogPostSidebar = ({ contributors, date, filePath, title, tags, location, 
 
 export default function BlogPost({ data, pageContext, location }) {
     const { postData } = data
-    const { body, excerpt, fields } = postData
-    const { date, title, featuredImage, featuredVideo, featuredImageType, contributors, description, tags, category } =
+    const { body, excerpt, fields, featuredImageImgix } = postData
+    const { date, title, featuredVideo, featuredImageType, contributors, description, tags, category } =
         postData?.frontmatter
     const lastUpdated = postData?.parent?.fields?.gitLogLatestDate
     const filePath = postData?.parent?.relativePath
@@ -148,7 +150,7 @@ export default function BlogPost({ data, pageContext, location }) {
                 image={
                     featuredImageType === 'full'
                         ? `/og-images/${fields.slug.replace(/\//g, '')}.jpeg`
-                        : featuredImage?.publicURL
+                        : featuredImageImgix?.images?.fallback?.src
                 }
             />
             <PostLayout
@@ -179,7 +181,7 @@ export default function BlogPost({ data, pageContext, location }) {
             >
                 <Intro
                     title={title}
-                    featuredImage={featuredImage}
+                    featuredImage={featuredImageImgix}
                     featuredVideo={featuredVideo}
                     featuredImageType={featuredImageType}
                     contributors={contributors}
@@ -206,6 +208,7 @@ export const query = graphql`
                 slug
                 pageViews
             }
+            featuredImageImgix
             frontmatter {
                 date(formatString: "MMM DD, YYYY")
                 title
@@ -217,12 +220,6 @@ export const query = graphql`
                 description
                 featuredImageType
                 featuredVideo
-                featuredImage {
-                    publicURL
-                    childImageSharp {
-                        gatsbyImageData
-                    }
-                }
                 contributors: authorData {
                     id
                     image {

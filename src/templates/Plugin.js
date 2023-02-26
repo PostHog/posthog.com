@@ -43,16 +43,8 @@ export const query = graphql`
             category: type
             maintainer
             description
-            markdown {
-                childMarkdownRemark {
-                    html
-                }
-            }
             logo {
                 publicURL
-                childImageSharp {
-                    gatsbyImageData
-                }
             }
         }
     }

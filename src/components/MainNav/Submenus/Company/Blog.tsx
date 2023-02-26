@@ -25,10 +25,11 @@ export default function Blog() {
 
     const {
         fields: { slug },
-        frontmatter: { featuredImage, date, title },
+        featuredImageImgix,
+        frontmatter: { date, title },
     } = blogPosts.nodes[0]
 
-    const image = getImage(featuredImage)
+    const image = getImage(featuredImageImgix)
     const categories = group.sort((a: Category, b: Category) => {
         return b.totalCount - a.totalCount
     })
@@ -56,7 +57,7 @@ export default function Blog() {
                             <GatsbyImage
                                 alt="Blog featured image"
                                 image={image}
-                                className="rounded-sm pointer-events-none"
+                                className="rounded-sm pointer-events-none max-w-[350px]"
                             />
                         )}
                         <h4 className="text-lg font-bold m-0 text-black/70 mt-2 leading-tight">{title}</h4>
@@ -123,16 +124,11 @@ const query = graphql`
                 fields {
                     slug
                 }
+                featuredImageImgix
                 frontmatter {
                     category
                     date(formatString: "MMMM DD, YYYY")
                     title
-                    featuredImage {
-                        id
-                        childImageSharp {
-                            gatsbyImageData(width: 350)
-                        }
-                    }
                 }
             }
         }

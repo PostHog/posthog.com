@@ -48,7 +48,7 @@ export const AboutBlog = () => {
             </div>
             <div className="col-span-2 relative">
                 <Link to={latestBlogPost.fields.slug}>
-                    <GatsbyImage image={getImage(latestBlogPost.frontmatter.featuredImage)} />
+                    <GatsbyImage image={getImage(latestBlogPost.featuredImageImgix)} />
                     <h4 className="text-white text-center lg:text-left mt-2">{latestBlogPost.frontmatter.title}</h4>
                 </Link>
                 <div className="w-[170px] h-[64px] absolute bottom-[-20px] left-[-190px] hidden lg:block">
@@ -74,13 +74,9 @@ const query = graphql`
                 fields {
                     slug
                 }
+                featuredImageImgix
                 frontmatter {
                     date
-                    featuredImage {
-                        childImageSharp {
-                            gatsbyImageData
-                        }
-                    }
                     title
                 }
             }

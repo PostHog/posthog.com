@@ -22,7 +22,8 @@ const Card = ({ children, url, className = '' }) => {
 const FeaturedCustomer = ({ customer }) => {
     const {
         slug,
-        frontmatter: { title, featuredImage, logo },
+        featuredImageImgix,
+        frontmatter: { title, logo },
     } = customer
     return (
         <Card
@@ -32,7 +33,7 @@ const FeaturedCustomer = ({ customer }) => {
             <div className="max-w-full md:max-w-[364px] w-full absolute md:relative inset-0 md:before:bg-transparent before:absolute before:inset-0 before:w-full before:h-full before:bg-white/80 before:z-10">
                 <img
                     className="object-cover md:object-contain absolute w-full h-full object-bottom"
-                    src={featuredImage?.publicURL}
+                    src={featuredImageImgix?.images?.fallback?.src}
                 />
             </div>
             <div className="px-8 pb-9 relative z-20">
@@ -83,14 +84,15 @@ export default function Customers() {
                         {customers.map((customer, index) => {
                             const {
                                 slug,
-                                frontmatter: { title, logo, featuredImage },
+                                featuredImageImgix,
+                                frontmatter: { title, logo },
                             } = customer
                             return (
                                 <li key={index}>
                                     <Card className="inline-block relative h-full" url={slug}>
                                         <span className="absolute inset-0 w-full h-full z-0 before:absolute before:inset-0 before:w-full before:h-full before:bg-white/80">
                                             <img
-                                                src={featuredImage?.publicURL}
+                                                src={featuredImageImgix?.images?.fallback?.src}
                                                 className="w-full h-full object-cover"
                                             />
                                         </span>
@@ -139,6 +141,7 @@ const query = graphql`
                 body
                 excerpt(pruneLength: 150)
                 slug
+                featuredImageImgix
                 frontmatter {
                     title
                     customer
@@ -149,20 +152,15 @@ const query = graphql`
                     industries
                     users
                     toolsUsed
-                    featuredImage {
-                        publicURL
-                    }
                 }
             }
         }
         featuredCustomer: mdx(frontmatter: { featuredCustomer: { eq: true } }) {
             slug
+            featuredImageImgix
             frontmatter {
                 title
                 logo {
-                    publicURL
-                }
-                featuredImage {
                     publicURL
                 }
             }

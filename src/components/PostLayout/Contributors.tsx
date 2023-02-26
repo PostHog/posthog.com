@@ -5,7 +5,7 @@ import React from 'react'
 import { IContributor } from './types'
 
 export const ContributorImage = ({ image, name, className = '', imgClassName = '' }) => {
-    const gatsbyImage = image && getImage(image)
+    const gatsbyImage = typeof image !== 'string' && image && getImage(image)
     return (
         <div
             className={`w-[32px] h-[32px] relative rounded-full overflow-hidden border-2 border-tan dark:border-primary transition-all ${className}`}
@@ -17,6 +17,8 @@ export const ContributorImage = ({ image, name, className = '', imgClassName = '
                     alt={name}
                     className="bg-gray-accent dark:bg-gray-accent-dark"
                 />
+            ) : image ? (
+                <img className={`bg-gray-accent dark:bg-gray-accent-dark rounded-full ${imgClassName}`} src={image} />
             ) : (
                 <svg width="38" height="38" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
