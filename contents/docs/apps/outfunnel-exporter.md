@@ -1,15 +1,15 @@
 ---
 title: Outfunnel Exporter
 github: https://github.com/PostHog/outfunnel-export-plugin
-installUrl: https://app.posthog.com/project/apps?name=Outfunnel 
+installUrl: https://app.posthog.com/project/apps?name=Outfunnel
 thumbnail: ../../apps/thumbnails/outfunnel-logo.png
 tags:
     - outfunnel-export
 ---
 
-### What does the Outfunnel Exporter do?
+### What does ProductSync by Outfunnel do?
 
-The Outfunnel Exporter sends events from PostHog to Outfunnel as they are ingested. Outfunnel is a platform for connecting sales and marketing tools with the data you need to prioritize leads. 
+ProductSync by Outfunnel sends events from PostHog to Outfunnel as they are ingested. Outfunnel is a platform for prioritizing leads based on product, marketing and sales engagements.
 
 ### How do I install the GitHub Release Tracker for PostHog?
 
@@ -21,11 +21,11 @@ The Outfunnel Exporter sends events from PostHog to Outfunnel as they are ingest
 
 ### What are the requirements for this app?
 
-The Outfunnel Exporter requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+ProductSync by Outfunnel requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 ### Is the source code for this app available?
 
-PostHog is open-source and so are all apps on the platform. The [source code for the Outfunnel Exporter](https://github.com/PostHog/outfunnel-export-pluginn) is available on GitHub.
+PostHog is open-source and so are all apps on the platform. The [source code for the ProductSync by Outfunnel](https://github.com/PostHog/outfunnel-export-plugin) is available on GitHub.
 
 ### Who created this app?
 
