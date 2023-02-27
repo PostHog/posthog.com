@@ -341,10 +341,6 @@
                     {
                         "name": "Bug prioritization",
                         "url": "/handbook/engineering/bug-prioritization"
-                    },
-                    {
-                        "name": "Pricing principles",
-                        "url": "/handbook/engineering/feature-pricing"
                     }
                 ]
             },
@@ -645,12 +641,16 @@
         ]
     },
     {
-        "name": "Growth engineering",
+        "name": "Growth",
         "url": "",
         "children": [
             {
                 "name": "Growth reviews",
                 "url": "/handbook/growth/growth-engineering/growth-sessions"
+            },
+            {
+                "name": "Pricing principles",
+                "url": "/handbook/engineering/feature-pricing"
             }
         ]
     }
