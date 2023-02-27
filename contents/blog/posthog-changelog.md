@@ -1,5 +1,5 @@
 ---
-date: 2023-02-23
+date: 2023-03-03
 title: "The PostHog Changelog"
 rootPage: /blog
 sidebar: Blog
@@ -18,6 +18,33 @@ featuredImageType: full
 Interested about what new features, fixes and updates have just launched on PostHog Cloud? Every Friday we update this page with a look back over the last seven days, so you can get a fresh look at what’s launched and launching right now. We also feature notable additions to the blog and docs. 
 
 > Some new features you read about below may still be in beta, behind a feature flag, or only available to paying users. Want to see which betas are currently available? [Check the roadmap](/roadmap)!
+
+## March 3, 2023
+
+### Hedgehog Mode
+![hog mode](../images/blog/array/hog_walk.gif)
+
+Let's get the biggest and most important updates out of the way first. We've updated our hedgehog mode, which you can access via the help menu in the app, to include some extra features. 
+
+You can now control Max ([that's his name](/handbook/company/team)) using the WASD keys, and we've also added a physics engine to give him a proper sense of gravity and inertia. You can make him jump with `W`, or spin with `S`. 
+
+### Dashboard templates
+![templates](../images/blog/array/templates.png)
+
+Just getting started with PostHog? We've added dashboard templates to help you get basic information out of your product, faster. Head to the Templates section and install the dashboard you want first, then select the template when creating a dashboard. 
+
+We're planning several improvements to this system soon, but right now you can choose templates for advertising, research, content and product usecases. 
+
+### Outfunnel app
+The folks at [Outfunnel](https://outfunnel.com/) have contributed a new app which enables you to [export data from PostHog to Outfunnel](/apps/outfunnel-exporter). This is mainly useful for scoring leads based on their behaviour, or using them as triggers for automations. 
+
+### New toolbar element selector 
+![element selector](../images/blog/array/type-it.gif)
+
+We've added a new element selector to [the PostHog toolbar](/manual/toolbar) so that it's easier to create actions and events in some circumstances. 
+
+The new modal shows the element wrapping a selected element, so that subsequent clicks build up a selection. Want to give it a go? We've updated [our toolbar tutorial](/tutorials/toolbar) with instructions.
+
 
 ## February 24, 2023
 
