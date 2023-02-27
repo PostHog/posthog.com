@@ -133,11 +133,8 @@ Traditionally, Snowflake can be considered more of a standard data warehouse or 
 
 While ClickHouse didn't start life as a business-first data warehouse like Snowflake, the lines between the two are increasingly blurred. While it has some work to do, ClickHouse is quickly developing features that make it look more and more like a data warehouse.
 
-ClickHouse is a fantastic solution for teams looking to built data intensive applications, such as analytics or a data-backed CRM. If you grow that business to the point where you need a data warehouse, ClickHouse will grow with you.
+ClickHouse is a fantastic solution for teams looking to built data intensive applications, such as analytics or a data-backed CRM. If you grow that business to the point where you need a data warehouse, ClickHouse will grow with you. However, if you are looking for a product that has deep integrations with a long list of tools and the majority of your data is schemaless JSON, Snowflake may be for you.
 
-However, if you are looking for a product that has deep integrations with a long list of tools and the majority of your data is schemaless JSON, Snowflake may be for you.
-
-For teams looking to implement an OLAP database with enormous performance gains and not much else, ClickHouse is a fantastic solution. Snowflake may be best for businesses that need a more extended, broad product, but they should be ready for a hefty invoice.
 
 ### Further reading
 
