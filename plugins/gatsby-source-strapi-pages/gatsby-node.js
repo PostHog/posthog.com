@@ -33,7 +33,7 @@ exports.onPreInit = async function (_, options) {
 
 exports.onCreateNode = async function (
     { node, getNode, actions, getCache, cache, store, createNodeId },
-    { strapiURL }
+    { strapiURL, cdnURL }
 ) {
     const { createNodeField, createNode } = actions
     //Create GitHub contributor nodes for handbook & docs
@@ -44,7 +44,7 @@ exports.onCreateNode = async function (
             if (file) {
                 const { contributors, lastUpdated, ogImage } = file
                 if (ogImage) {
-                    const url = `${strapiURL}${ogImage}`
+                    const url = `${cdnURL || strapiURL}${ogImage}`
                     const image = await createRemoteFileNode({
                         url,
                         parentNodeId: node.id,

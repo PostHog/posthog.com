@@ -132,6 +132,7 @@ module.exports = {
         {
             resolve: `gatsby-source-strapi-pages`,
             options: {
+                cdnURL: process.env.STRAPI_CDN_URL,
                 strapiURL: process.env.STRAPI_URL,
                 strapiKey: process.env.STRAPI_API_KEY,
             },
