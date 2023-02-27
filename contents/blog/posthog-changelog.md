@@ -39,7 +39,7 @@ We're planning several improvements to this system soon, but right now you can c
 The folks at [Outfunnel](https://outfunnel.com/) have contributed a new app which enables you to [export data from PostHog to Outfunnel](/apps/outfunnel-exporter). This is mainly useful for scoring leads based on their behaviour, or using them as triggers for automations. 
 
 ### New toolbar element selector 
-![element selector](../images/blog/array/type-it.gif)
+![The selector modal being used to discover the more meaningful selector](../images/tutorials/toolbar/toolbar-selector-edit.gif)
 
 We've added a new element selector to [the PostHog toolbar](/manual/toolbar) so that it's easier to create actions and events in some circumstances. 
 
