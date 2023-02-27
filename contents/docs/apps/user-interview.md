@@ -1,7 +1,7 @@
 ---
 title: User Interviewer
 github: https://github.com/PostHog/user-interview-app
-installUrl: https://app.posthog.com/project/apps?name=user-interview
+installUrl: https://app.posthog.com/project/apps?name=interview
 thumbnail: ../../apps/thumbnails/user-interview.png
 tags:
     - user-interview
