@@ -91,6 +91,17 @@ export default function ContactSales() {
                     </div>
                     <div className="order-1 md:order-2">
                         <h3>Contact sales</h3>
+                        <p>
+                            <strong>Tip:</strong> Press{' '}
+                            <kbd
+                                role="button"
+                                className="text-xs border border-b-2 border-gray-accent-light/50 dark:border-gray-accent-dark/50 rounded-sm px-1.5 py-0.5 text-black/40 dark:text-white/40 font-sans"
+                                style={{ fontSize: '10px' }}
+                            >
+                                TAB
+                            </kbd>{' '}
+                            to advance through the form at a breakneck pace!
+                        </p>
                         <Contact />
                     </div>
                 </section>
