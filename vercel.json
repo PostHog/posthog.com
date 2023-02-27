@@ -698,6 +698,6 @@
         { "source": "/question/(.*)", "destination": "/question" },
         { "source": "/careers/(.*)", "destination": "/careers" },
         { "source": "/api", "destination": "/docs/api" },
-        { "source": "/productforengineers/:path", "destination": "https://productforengineers.substack.com/:path" }
+        { "source": "/productforengineers/:path", "destination": "https://newsletter.posthog.cc/:path" }
     ]
 }
