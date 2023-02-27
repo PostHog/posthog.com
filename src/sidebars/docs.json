@@ -1122,6 +1122,10 @@
                     {
                         "url": "/docs/apps/pineapple-mode",
                         "name": "Pineapple Mode"
+                    },
+                    {
+                        "url": "/docs/apps/user-interview",
+                        "name": "User Interviewer"
                     }
                 ]
             }
