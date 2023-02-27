@@ -1,4 +1,4 @@
-import { graphql, useStaticQuery } from 'gatsby'
+import { useStaticQuery } from 'gatsby'
 import slugify from 'slugify'
 
 export default function blogMenu() {
@@ -19,21 +19,3 @@ export default function blogMenu() {
         }),
     ]
 }
-
-export const query = graphql`
-    {
-        blogPosts: allMdx(filter: { isFuture: { eq: false }, fields: { slug: { regex: "/^/blog/" } } }) {
-            categories: group(field: frontmatter___category) {
-                category: fieldValue
-                posts: nodes {
-                    fields {
-                        slug
-                    }
-                    frontmatter {
-                        title
-                    }
-                }
-            }
-        }
-    }
-`

@@ -13,7 +13,6 @@ import { Posts } from 'components/Blog'
 const Tutorials = ({
     data: {
         allPostsRecent: { edges: allPostsRecent },
-        allPostsPopular: { edges: allPostsPopular },
         categories,
     },
 }) => {
@@ -27,7 +26,7 @@ const Tutorials = ({
                 <h1 className="mb-6 mt-0">Tutorials</h1>
                 <Posts
                     title={`Most ${allPostsFilter} tutorials`}
-                    posts={allPostsFilter === 'popular' ? allPostsPopular : allPostsRecent}
+                    posts={allPostsRecent}
                     action={<Link to="/tutorials/all">View all</Link>}
                 />
                 <NewsletterForm />

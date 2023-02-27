@@ -13,7 +13,6 @@ import { capitalize } from 'instantsearch.js/es/lib/utils'
 const BlogTag = ({
     data: {
         allPostsRecent: { edges: allPostsRecent },
-        allPostsPopular: { edges: allPostsPopular },
     },
     pageContext: { tag, numPages, currentPage, base },
 }) => {
@@ -28,7 +27,7 @@ const BlogTag = ({
         setAllPostsFilter(localStorage.getItem('postsFilter') || 'latest')
     }, [])
 
-    const posts = allPostsFilter === 'popular' ? allPostsPopular : allPostsRecent
+    const posts = allPostsRecent
 
     return (
         <Layout>
@@ -39,7 +38,11 @@ const BlogTag = ({
                     titleBorder
                     title={tag}
                     posts={posts.slice(0, 4)}
-                    action={<PostToggle checked={allPostsFilter === 'popular'} onChange={handleToggleChange} />}
+                    action={
+                        <p className="m-0 leading-none font-semibold text-sm opacity-50">
+                            Page {currentPage} of {numPages}
+                        </p>
+                    }
                 />
                 <NewsletterForm />
                 <Posts posts={posts.slice(4, 12)} />
@@ -63,18 +66,6 @@ export const pageQuery = graphql`
             limit: $limit
             skip: $skip
             sort: { order: DESC, fields: [frontmatter___date] }
-            filter: { isFuture: { eq: false }, frontmatter: { tags: { in: [$tag] }, date: { ne: null } } }
-        ) {
-            edges {
-                node {
-                    ...BlogFragment
-                }
-            }
-        }
-        allPostsPopular: allMdx(
-            limit: $limit
-            skip: $skip
-            sort: { order: DESC, fields: [fields___pageViews] }
             filter: { isFuture: { eq: false }, frontmatter: { tags: { in: [$tag] }, date: { ne: null } } }
         ) {
             edges {

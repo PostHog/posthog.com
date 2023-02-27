@@ -143,7 +143,6 @@ const CategoryPosts = ({ categoryToShow, categories }) => {
 const Blog = ({
     data: {
         allPostsRecent: { edges: allPostsRecent },
-        allPostsPopular: { edges: allPostsPopular },
         categories,
     },
 }) => {
@@ -157,7 +156,7 @@ const Blog = ({
                 <Posts
                     titleBorder
                     title={`${capitalize(allPostsFilter)} articles`}
-                    posts={allPostsFilter === 'popular' ? allPostsPopular : allPostsRecent}
+                    posts={allPostsRecent}
                     action={
                         <Link
                             to="/blog/all"

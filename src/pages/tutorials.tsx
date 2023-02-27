@@ -16,17 +16,6 @@ export const pageQuery = graphql`
                 }
             }
         }
-        allPostsPopular: allMdx(
-            sort: { order: DESC, fields: [fields___pageViews] }
-            filter: { fields: { slug: { regex: "/^/tutorials/" } } }
-            limit: 4
-        ) {
-            edges {
-                node {
-                    ...BlogFragment
-                }
-            }
-        }
         categories: allMdx(
             sort: { order: DESC, fields: [frontmatter___date] }
             filter: { fields: { slug: { regex: "/^/tutorials/" } } }

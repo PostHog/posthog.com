@@ -19,7 +19,6 @@ import { Banner } from './components/Banner'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BlockQuote } from './components/BlockQuote'
 import { Blog } from './components/Blog'
-import { BlogFooter } from './components/BlogFooter'
 import { BorderWrapper } from './components/BorderWrapper'
 import { Breadcrumbs } from './components/Breadcrumbs'
 import { CallToAction } from './components/CallToAction'
@@ -85,7 +84,6 @@ import { NotProductIcons } from './components/NotProductIcons'
 import { OverflowXSection } from './components/OverflowXSection'
 import { Pagination } from './components/Pagination'
 import { Popover } from './components/Popover'
-import { PostCard } from './components/PostCard'
 import { PostLayout } from './components/PostLayout'
 import { Calculator } from './components/Pricing/Calculator'
 import { CloudVsSelfHost } from './components/Pricing/CloudVsSelfHost'
@@ -160,7 +158,6 @@ export const shortcodes = {
     BasicHedgehogImage,
     BlockQuote,
     Blog,
-    BlogFooter,
     BorderWrapper,
     Breadcrumbs,
     CallToAction,
@@ -226,7 +223,6 @@ export const shortcodes = {
     OverflowXSection,
     Pagination,
     Popover,
-    PostCard,
     PostLayout,
     Calculator,
     CloudVsSelfHost,

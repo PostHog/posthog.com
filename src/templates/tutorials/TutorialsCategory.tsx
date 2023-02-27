@@ -12,7 +12,6 @@ import { capitalize } from 'instantsearch.js/es/lib/utils'
 const TutorialsCategory = ({
     data: {
         allPostsRecent: { edges: allPostsRecent },
-        allPostsPopular: { edges: allPostsPopular },
     },
     pageContext: { activeFilter, numPages, currentPage, base },
 }) => {
@@ -44,7 +43,11 @@ const TutorialsCategory = ({
                 <Posts
                     title={capitalize(activeFilter)}
                     posts={posts.slice(0, 4)}
-                    action={<PostToggle checked={allPostsFilter === 'popular'} onChange={handleToggleChange} />}
+                    action={
+                        <p className="m-0 leading-none font-semibold text-sm opacity-50">
+                            Page {currentPage} of {numPages}
+                        </p>
+                    }
                 />
                 <NewsletterForm />
                 <Posts posts={posts.slice(4)} />
@@ -62,18 +65,6 @@ export const pageQuery = graphql`
             limit: $limit
             skip: $skip
             sort: { order: DESC, fields: [frontmatter___date] }
-            filter: { frontmatter: { tags: { in: [$activeFilter] } }, fields: { slug: { regex: "/^/tutorials/" } } }
-        ) {
-            edges {
-                node {
-                    ...BlogFragment
-                }
-            }
-        }
-        allPostsPopular: allMdx(
-            limit: $limit
-            skip: $skip
-            sort: { order: DESC, fields: [fields___pageViews] }
             filter: { frontmatter: { tags: { in: [$activeFilter] } }, fields: { slug: { regex: "/^/tutorials/" } } }
         ) {
             edges {

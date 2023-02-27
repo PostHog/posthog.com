@@ -21,21 +21,6 @@ export const pageQuery = graphql`
                 }
             }
         }
-        allPostsPopular: allMdx(
-            sort: { order: DESC, fields: [fields___pageViews] }
-            filter: {
-                isFuture: { eq: false }
-                fields: { slug: { regex: "/^/blog/" } }
-                frontmatter: { date: { ne: null } }
-            }
-            limit: 4
-        ) {
-            edges {
-                node {
-                    ...BlogFragment
-                }
-            }
-        }
         categories: allMdx(
             sort: { order: DESC, fields: [frontmatter___date] }
             filter: {

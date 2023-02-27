@@ -22,7 +22,6 @@ import React from 'react'
 import { MdxCodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
 import { NewsletterForm } from 'components/NewsletterForm'
-import blogMenu from 'components/Blog/blogMenu'
 import blog from 'sidebars/blog.json'
 import slugify from 'slugify'
 

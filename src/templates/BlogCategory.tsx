@@ -8,12 +8,9 @@ import Pagination from 'components/Pagination'
 import { NewsletterForm } from 'components/NewsletterForm'
 import blog from 'sidebars/blog.json'
 import CommunityCTA from 'components/CommunityCTA'
-import { capitalize } from 'instantsearch.js/es/lib/utils'
-
 const BlogCategory = ({
     data: {
         allPostsRecent: { edges: allPostsRecent },
-        allPostsPopular: { edges: allPostsPopular },
     },
     pageContext: { category, numPages, currentPage, base },
 }) => {
@@ -28,7 +25,7 @@ const BlogCategory = ({
         setAllPostsFilter(localStorage.getItem('postsFilter') || 'latest')
     }, [])
 
-    const posts = allPostsFilter === 'popular' ? allPostsPopular : allPostsRecent
+    const posts = allPostsRecent
 
     return (
         <Layout>
@@ -39,7 +36,11 @@ const BlogCategory = ({
                     titleBorder
                     title={category}
                     posts={posts.slice(0, 4)}
-                    action={<PostToggle checked={allPostsFilter === 'popular'} onChange={handleToggleChange} />}
+                    action={
+                        <p className="m-0 leading-none font-semibold text-sm opacity-50">
+                            Page {currentPage} of {numPages}
+                        </p>
+                    }
                 />
                 <NewsletterForm />
                 <Posts posts={posts.slice(4, 12)} />
@@ -63,19 +64,6 @@ export const pageQuery = graphql`
             limit: $limit
             skip: $skip
             sort: { order: DESC, fields: [frontmatter___date] }
-            filter: { isFuture: { eq: false }, frontmatter: { category: { eq: $category }, date: { ne: null } } }
-        ) {
-            totalCount
-            edges {
-                node {
-                    ...BlogFragment
-                }
-            }
-        }
-        allPostsPopular: allMdx(
-            limit: $limit
-            skip: $skip
-            sort: { order: DESC, fields: [fields___pageViews] }
             filter: { isFuture: { eq: false }, frontmatter: { category: { eq: $category }, date: { ne: null } } }
         ) {
             totalCount
