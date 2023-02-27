@@ -6,7 +6,6 @@ import Layout from 'components/Layout'
 import Link from 'components/Link'
 import { Section } from 'components/Section'
 import { SEO } from 'components/seo'
-import Subscribe from 'components/Subscribe'
 import { graphql } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
@@ -173,14 +172,6 @@ export default function HostHog({ data }) {
                         </MDXProvider>
                     </section>
                 </article>
-                <div className="border-t border-gray-accent-light border-dashed pt-10">
-                    <h3 className="m-0">Can’t make it to {city}?</h3>
-                    <p className="mt-1 mb-16 sm:mb-8 text-lg">
-                        Our mailing list subscribers are the first to find out when we're planning a HostHog event
-                        closer to you.
-                    </p>
-                    <Subscribe />
-                </div>
             </div>
         </Layout>
     )

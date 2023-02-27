@@ -28,8 +28,11 @@ export default function Team() {
                     <li key={id}>
                         <div className="team-row">
                             <div className="team-left-text">
-                                <h3 id={kebabCase(name) + '-' + kebabCase(jobTitle)}>{title}</h3>
-                                <GithubIcon username={github} />
+                                <span className="flex space-x-2 items-center">
+                                    <h3 id={kebabCase(name) + '-' + kebabCase(jobTitle)}>{title}</h3>
+                                    <GithubIcon username={github} />
+                                </span>
+
                                 <div className="team-left-bio">
                                     <MDXProvider components={shortcodes}>
                                         <MDXRenderer>{body}</MDXRenderer>

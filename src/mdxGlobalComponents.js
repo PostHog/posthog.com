@@ -126,7 +126,6 @@ import { SplitFlap } from './components/SplitFlap'
 import { StarRepoButton } from './components/StarRepoButton'
 import { StarUsBanner } from './components/StarUsBanner'
 import { Structure } from './components/Structure'
-import { Subscribe } from './components/Subscribe'
 import { Tab } from './components/Tab'
 import { TeamQuote } from './components/TeamQuote'
 import { Toast } from './components/Toast'
@@ -265,7 +264,6 @@ export const shortcodes = {
     StarRepoButton,
     StarUsBanner,
     Structure,
-    Subscribe,
     Tab,
     TeamQuote,
     Toast,
