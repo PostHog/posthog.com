@@ -36,7 +36,7 @@ PostHog is open-source and so are all apps on the platform. The [source code for
 After installing the app, you'll need to create a feature flag starting with `interview-` and then add the feature flag name and booking link to the app config.
 
 - Name
-  - By default any feature flag starting with `interview-` will trigger the popup. You can change this by adding the name of the feature flag to the app config.
+  - By default, any feature flag starting with `interview-` will trigger the popup. You can change this by adding the name of the feature flag to the app config.
 - Payload
   - Add your booking link as a JSON payload as follows:
 
@@ -51,7 +51,7 @@ After installing the app, you'll need to create a feature flag starting with `in
   - You can create a filter based on properties, such as location or email, but not events.
   - If you want to invite users based on them doing certain actions, you'll need to update the users' property once they've done that action or create a static cohort from an insight.
 
-By default the flags won't be shown to users who have seen a user interview popup within the last 90 days. You can override this with with `minDaysSinceLastSeenPopUp`
+By default, the flags won't be shown to users who have seen a user interview popup within the last 90 days. You can override this with `minDaysSinceLastSeenPopUp`
 
 Example feature flag that targets Luke Harries:
 ![Example feature flag config](../../images/tutorials/feedback-interviews-site-apps/feature-flag.png)
