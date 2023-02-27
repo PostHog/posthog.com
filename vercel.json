@@ -697,6 +697,7 @@
         { "source": "/next-steps/(.*)", "destination": "/next-steps" },
         { "source": "/question/(.*)", "destination": "/question" },
         { "source": "/careers/(.*)", "destination": "/careers" },
-        { "source": "/api", "destination": "/docs/api" }
+        { "source": "/api", "destination": "/docs/api" },
+        { "source": "/newsletter/:path", "destination": "https://productforengineers.substack.com/:path" }
     ]
 }
