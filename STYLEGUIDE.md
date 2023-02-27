@@ -76,3 +76,12 @@ Remember to use backticks around inline code snippets, and triple backticks arou
 **Do not fear the copyeditor**
 
 Whatever documentation improvement you submit, we are grateful for it. Don't worry if you think it may fall short of any of these recommendations. We are happy to have your assistance in improving our docs, and we will work with you to copyedit your contributions.
+
+**Use analytics platform**
+
+When talking about PostHog in content, substitute references to “product analytics” or “product analytics tool” with the phrase “analytics platform”.
+
+Example: “A data warehouse or product analytics tool like PostHog can be helpful here.” would become “A data warehouse or analytics platform like PostHog can be helpful here.
+
+Exception would be specific references to our product analytics suite (e.g. when comparing rival product analytics tools to our product analytics product).
+

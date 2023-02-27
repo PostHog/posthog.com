@@ -23,7 +23,7 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 1. Make sure you have enabled `opt_in_site_apps: true` in your posthog-js config.
 2. Install the app from the PostHog App Repository
 3. Customize the text and theme using the app config
-4. Configure the app by creating a feature flag (see below)
+4. Create a feature flag starting with `interview-` (see below)
 
 That's it!
 
@@ -31,20 +31,30 @@ That's it!
 
 PostHog is open-source and so are all apps on the platform. The [source code for this app](https://github.com/posthog/user-interview-app) is available on GitHub.
 
-### How do I configure the app?
+### How do I create the feature flag to invite users to interview?
 
-1. Create a feature flag in your PostHog account to control who sees the interview request pop-up. For this example, we'll use the name `user-interview`
-2. Set up the filters for the people that you want to speak to. You can create a filter based on properties, such as location or email, but not events. If you want to invite users based on them doing certain actions, you'll need to update the users' property once they've done that action.
-3. Additionally, if you want to invite users based on historical actions, create an insight for that action and then use that to create a static cohort.
-4. Set the filter `Seen User Interview Invitation - {FEATURE_FLAG_NAME}` to `is not set` so that it doesn't show to users who have seen the user interview already. This property is added once the user has interacted with the popup - either to close it or to book in a time.
-5. Add an autorollback based on the pageview where `Current URL` contains `bookedUserInterviewEvent={FEATURE_FLAG_NAME}`. This is where you'll redirect them after they've booked in. Set the average over last 7 days to be 1 for up to 7 interviews to be booked and 2 for up to 14 interviews to be booked.
-This requires the `auto-rollback-feature-flags` feature flag to be turned on. Please be aware this is currently in beta. 
-6. Create your Calendly event (or other booking link) and
-set the redirect after booking to be `{Your app}?bookedUserInterviewEvent={FEATURE_FLAG_NAME}`, e.g. `https://app.posthog.com/home?bookedUserInterviewEvent=user-interview`
-7. Add the feature flag and booking link to the app config `interviewConfigs` (you can have multiple feature flags with corresponding booking links by separating them with commas e.g. `interview-high-icp=https://calendly.com/user1/book-high-icp,user-interview=https://calendly.com/user1/user-interview`).
-8. Rollout out the feature flag
+After installing the app, you'll need to create a feature flag starting with `interview-` and then add the feature flag name and booking link to the app config.
 
-By default the flags won't be shown to users who have seen a user interview popup within the last 90 days. You can override this with with `minDaysSinceLastSeenPopUp`
+- Name
+  - By default, any feature flag starting with `interview-` will trigger the popup. You can change this by adding the name of the feature flag to the app config.
+- Payload
+  - Add your booking link as a JSON payload as follows:
+
+    ```json
+    {
+        "bookingLink": "https://calendly.com/posthog-luke-harries/test"
+    }
+    ```
+
+- Filters (who you invite to the interview)
+  - (Required) Set the filter `Seen User Interview Invitation - {FEATURE_FLAG_NAME}` to `is not set` so that it doesn't show to users who have seen the user interview already. This property is added once the user has interacted with the popup - either to close it or to book in a time.
+  - You can create a filter based on properties, such as location or email, but not events.
+  - If you want to invite users based on them doing certain actions, you'll need to update the users' property once they've done that action or create a static cohort from an insight.
+
+By default, the flags won't be shown to users who have seen a user interview popup within the last 90 days. You can override this with `minDaysSinceLastSeenPopUp`
+
+Example feature flag that targets Luke Harries:
+![Example feature flag config](../../images/tutorials/feedback-interviews-site-apps/feature-flag.png)
 
 ### What new properties and events does this app add?
 
