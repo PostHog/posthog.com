@@ -2,3 +2,37 @@
 title: Group analytics
 nextPage: ./next-steps.mdx
 ---
+
+Group analytics is a powerful feature in PostHog that allows you to perform analytics on entities other than single users.
+This feature is somewhat more advanced, but opens up completely new avenues for analytics and is essential for most B2B use-cases.
+
+Group analytics can sometimes feel slightly confusing to new users, and often times this comes from skipping too quickly over the basic concepts.
+We'll start with an overview of how Group analytics works, and then jump into creating our own group types and viewing them within PostHog.
+
+## 1. What is a group?
+
+It's best to start by clarifying what exactly we mean when we talk about a 'Group'?
+In PostHog, a 'Group' is an entity that we can associate events and properties with that _is not_ a user.
+Typically, every event we send will be connected to a single user through the `distinct_id` we use in our `identify` call, as we covered in the [Identifying users](/docs/getting-started/identify-users) guide.
+Often times this is all you'll need, but for many use cases we also want to be able to analyze entities beyond just single users.
+
+To get a more concrete idea of just how powerful groups can be, here are a couple examples of common entities that we can model using groups:
+
+1. **Organizations/Teams**: It's very common in B2B apps to have multiple users under the same 'Team' account, in which case groups allow us to perform analytics on individual teams exactly as if they were users.
+2. **Threads/Chats/Posts**: If you're creating a social app, you might want to track events that are connected with specific conversations such as replies
+
+Looking at these examples, it might be tempting to think that 'Groups' work directly on Users. However, groups actually work by events, and only indirectly on users.
+We'll see this later, but the basic idea is that **events are connected to groups directly, and any user who sent one of those events will also be linked indirectly**.
+In this way, there isn't a way to directly 'assign' a user to a group - instead, this user would send **an event** with a special property linking it to a group, which would then associate the user with said group.
+This may seem slightly confusing now, but it will become much clearer as we dig in to some code samples.
+
+### Groups vs Group types
+
+One more piece of terminology that's important to distinguish before we get started is the different between a **Group** and a **Group type**.
+At a high level, a **Group type** is the abstract type of what our group represents (e.g. Teams, Group chats, Posts, etc.) whereas a **Group** is a specific instance of one of these types (e.g. a specific team or a specific group chat).
+
+## 2. Creating a Group type
+
+## 3. Sending events to our Group
+
+## 4. Setting group properties
