@@ -35,26 +35,10 @@ const Chapter: React.FC<ChapterProps> = ({ num, title, description, headings, ch
     )
 }
 
-export const DeployChapter: React.FC = () => {
-    return (
-        <Chapter
-            num={1}
-            title="Deploy"
-            description="Get PostHog up and running in seconds with Cloud, or deploy your own open-source Hobby instance to play around."
-            headings={[
-                { title: 'Get started with PostHog Cloud', link: '/docs/getting-started/deploy#posthog-cloud' },
-                { title: 'Get started with Docker Compose', link: '/docs/getting-started/deploy#docker-compose' },
-            ]}
-        >
-            <p>Deploy your app</p>
-        </Chapter>
-    )
-}
-
 export const InstallChapter: React.FC = () => {
     return (
         <Chapter
-            num={2}
+            num={1}
             title="Install PostHog"
             description="Add PostHog to your site with our plug-and-play snippet. Or use our custom SDKs for your favorite language."
             headings={[
@@ -72,7 +56,7 @@ export const InstallChapter: React.FC = () => {
 export const SendEventsChapter: React.FC = () => {
     return (
         <Chapter
-            num={3}
+            num={2}
             title="Send events"
             description="Send events to PostHog from your app, website, or server. We'll automatically capture pageviews, clicks, and more."
             headings={[
@@ -83,6 +67,64 @@ export const SendEventsChapter: React.FC = () => {
             ]}
         >
             <p>Send events</p>
+        </Chapter>
+    )
+}
+
+export const IdentifyUsersChapter: React.FC = () => {
+    return (
+        <Chapter
+            num={3}
+            title="Identify users"
+            description="Connect events with users to better understand how people are using your product."
+            headings={[
+                { title: 'Anonymous users', link: '/docs/getting-started/identify-users' },
+                { title: 'Idenitify a users when they sign-up', link: '/docs/getting-started/identify-users' },
+                { title: 'Identify logged in users', link: '/docs/getting-started/identify-users' },
+                { title: 'Setting user properties', link: '/docs/getting-started/identify-users' },
+            ]}
+        >
+            <p>Identify users</p>
+        </Chapter>
+    )
+}
+
+export const ActionsAndInsightsChapter: React.FC = () => {
+    return (
+        <Chapter
+            num={4}
+            title="Actions and insights"
+            description="Now that we have some events, let's take a look at how we can analyze and explore our data."
+            headings={[
+                {
+                    title: 'Creating a new action from autocapture events',
+                    link: '/docs/getting-started/actions-and-insights',
+                },
+                { title: 'Creating a new trends insight', link: '/docs/getting-started/actions-and-insights' },
+                { title: 'Filtering events in our insight', link: '/docs/getting-started/actions-and-insights' },
+            ]}
+        >
+            <p>Identify users</p>
+        </Chapter>
+    )
+}
+
+export const GroupAnalyticsChapter: React.FC = () => {
+    return (
+        <Chapter
+            num={5}
+            title="Group analytics"
+            description="Learn how to track teams, groups, threads, and almost anything else with group analytics. "
+            headings={[
+                {
+                    title: 'Creating a new action from autocapture events',
+                    link: '/docs/getting-started/group-analytics',
+                },
+                { title: 'Creating a new trends insight', link: '/docs/getting-started/group-analytics' },
+                { title: 'Filtering events in our insight', link: '/docs/getting-started/group-analytics' },
+            ]}
+        >
+            <p>Identify users</p>
         </Chapter>
     )
 }

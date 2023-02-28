@@ -19,7 +19,7 @@ This anonymous ID is created using the user's device ID, and will typically look
 This works fairly well for keeping track of users across a single session, but becomes far less effective as time goes on and also suffers from not being able to unify users across multiple devices.
 For these reasons, we will be using the `identify` method to associate events with a real, logged in user rather than simply the device they are viewing your app on.
 
-## 2. Identifying a user when they first sign up <Badge>Client</Badge> <Badge>Server</Badge>
+## 2. Identifying a user when they sign up <Badge>Client</Badge> <Badge>Server</Badge>
 
 To start off, let's walkthrough the flow of identifying a user as they are signing up for our service for the first time.
 This is typically the most complex part of integrating analytics, and is also one of the most important to ensure is setup correctly.

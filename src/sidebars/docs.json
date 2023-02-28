@@ -15,10 +15,6 @@
                 "url": "/docs/getting-started/start-here"
             },
             {
-                "name": "Deploy PostHog",
-                "url": "/docs/getting-started/deploy"
-            },
-            {
                 "name": "Install PostHog",
                 "url": "/docs/getting-started/install"
             },
