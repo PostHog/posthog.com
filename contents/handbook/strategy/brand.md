@@ -45,6 +45,9 @@ The graph that brand teams at our competitors will hate. It's important to remem
 
 <img width="798" alt="Screenshot 2021-12-03 at 11 26 30" src="https://user-images.githubusercontent.com/70321811/144595074-39e2bd0c-1934-40bc-beec-a6eeef389b41.png" />
 
+## Karma
+
+Be helpful to other companies - we are here to increase the number of successful companies in the world. Especially those with high potential that are putting in the work, like YC current batch ones. For example, if a YC company reaches out, take them seriously and buy their product (if it's genuinely valuable and safe to do so) or give direct feedback if not.
 
 ## Brand assets
 
