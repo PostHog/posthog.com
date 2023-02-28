@@ -265,53 +265,46 @@ With the required config in place we can install the PostHog JavaScript SDK:
 npm i -S posthog-js
 ```
 
-Create a new file, `utils/initPostHog.js`, and within it add code to initialize the PostHog JavaScript client:
-
-```js
-import posthog from 'posthog-js'
-
-export const initPostHog = () => {
-    if (typeof window !== 'undefined') {
-        posthog.init(process.env.NEXT_PUBLIC_POSTHOG_API_KEY, {
-            api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
-        })
-    }
-
-    return posthog
-}
-```
-
-The file exports a single function, `initPostHog`, that checks to ensure that the current runtime is the browser and, if so, initializes the PostHog JavaScript client with the config we've just stored. It also returns the `posthog` client instance so we can use within our app.
-
-PostHog JS has an [autocapture](/docs/integrate/client/js#autocapture) feature that automatically captures browser events (this can be disabled). However, it won't capture navigation events in Next.js where the window doesn't reload, so we need to add some custom code to capture navigations.
-
 Open up `pages/_app.js` and add this code within the `MyApp` function:
 
-```js
+```jsx
 import { useEffect } from 'react'
+import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
-import { initPostHog } from '../utils/initPostHog'
 
-export default function MyApp({ Component, pageProps }) {
+import posthog from 'posthog-js'
+import { PostHogProvider } from 'posthog-js/react'
 
-  const router = useRouter()
+// Check that PostHog is client-side
+if (typeof window !== 'undefined') {
+    posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+        api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://app.posthog.com',
+        // Disable in development
+        loaded: (posthog) => {
+          if (process.env.NODE_ENV === 'development') posthog.opt_out_capturing()
+        }
+    })
+}
 
-  useEffect(() => {
-    // Init for auto capturing
-    const posthog = initPostHog()
+export default function App({ Component, pageProps }: AppProps) {
+    const router = useRouter()
 
-    const handleRouteChange = () => {
-      if(typeof window !== 'undefined') {
-        posthog.capture('$pageview')
-      }
-    }
+    useEffect(() => {
+        // Track page views
+        const handleRouteChange = () => posthog.capture('$pageview')
+        router.events.on('routeChangeComplete', handleRouteChange)
 
-    router.events.on("routeChangeComplete", handleRouteChange)
+        return () => {
+            router.events.off('routeChangeComplete', handleRouteChange)
+        }
+    }, [])
 
-    return () => {
-      router.events.off("routeChangeComplete", handleRouteChange)
-    };
-  }, [router.events])
+    return (
+        <PostHogProvider client={posthog}>
+            <Component {...pageProps} />
+        </PostHogProvider>
+    )
+}
 ```
 
 Here, we import the [React `useEffect`](https://reactjs.org/docs/hooks-effect.html) and [Next.js Router](https://nextjs.org/docs/api-reference/next/router) hooks. Within the `useEffect` hook we initialize the PostHog JS client using the function we've just created and bind to a `routeChangeComplete` on the Next.js router, handling the event within the `handleRouteChange` function. When this function is called, we manually trigger a `$pageview` event using PostHog JS with `posthog.capture('$pageview')`.
@@ -334,21 +327,18 @@ From the above table, you can see that we can track everything up until the sign
 
 It is theoretically possible to track the step 4, email verification, if the email provider exposes an email sent notification mechanism via something like as a webhook. So, if Supabase offered a webhook when auth emails were sent we could track this from the server.
 
-However, we need and should be able to track step 5, when the user has successfully signed up. We know that the user lands on `/auth` when they are logged in. If we look at the code for that page there is a `user` variable that is set if the user is logged in. So, let's update `/pages/auth.js` so we can track a logged in user. First, include the `initPostHog` utility:
+However, we need and should be able to track step 5, when the user has successfully signed up. We know that the user lands on `/auth` when they are logged in. If we look at the code for that page there is a `user` variable that is set if the user is logged in. So, let's update `/pages/auth.js` so we can track a logged in user.
+
+To do this, update the `Index` definition:
 
 ```js
-import { initPostHog } from '../utils/initPostHog'
-```
+import { usePostHog } from 'posthog-js/react'
 
-Next, update the `Index` definition:
-
-```js
 const Index = () => {
+  const posthog = usePostHog()
   const { user, session } = useUser()
   const { data, error } = useSWR(session ? ['/api/getUser', session.access_token] : null, fetcher)
   const [authView, setAuthView] = useState('sign_up')
-
-  const posthog = initPostHog()
 
   if(user) {
     posthog.identify(user.email, user)
@@ -357,7 +347,7 @@ const Index = () => {
 
 ```
 
-In the above code we utilize the `initPostHog` function again to reference an initialized PostHog JS instance. We then make two function calls:
+In the above code we utilize the `usePostHog` function again to reference an initialized PostHog JS instance. We then make two function calls:
 
 1. `posthog.identify(user.email, user)` - since the user is logged in we can identify them. We pass in `user.email`, their email address, as a distinct identifier. We also pass in the Supabase `user` variable so PostHog has access to additional user data.
 2. `posthog.capture('loggedIn')` - this triggers a simple `loggedIn` event that we can use to identify the user as successfully having logged in.
