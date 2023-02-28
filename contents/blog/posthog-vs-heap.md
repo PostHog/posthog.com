@@ -45,6 +45,8 @@ Anyone can use PostHog – just [ask our marketing team](/blog/posthog-marketing
 
 Signing up to PostHog is as simple as creating an account and [adding our JavaScript snippet](/docs/integrate). That's it. Want more features? Just put in a card and pay for what you use. We have a [generous free tier](/pricing), so you may not pay anything at all. No sales calls. No optional add-ons. No confusing product tiers. Just sign up and start building.
 
+<ArrayCTA />
+
 ## Feature comparison
 
 PostHog has two plans (Free and Scale) to Heap's four (Free, Growth, Pro and Premier). In this guide, we'll be comparing PostHog's Scale plan to Heap Pro.
@@ -226,7 +228,7 @@ Neither currently offers an SQL editor for writing custom queries, but it's in p
 
 <ArrayCTA />
 
-## Session recording
+### Session recording
 
 Session recording is an essential tool for understanding how people use your product, especially for [early-stage companies](/blog/early-stage-analytics) searching for product-market fit. Both Heap and PostHog offer session recording, though Heap's version is quite limited at present.
 
