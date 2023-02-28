@@ -20,24 +20,87 @@ This guide will walk you through an example integration of PostHog using React a
 
 ## Installation
 
-import ReactInstallSnippet from "../_snippets/install"
+import ReactInstall from "./\_snippets/install.mdx"
+
+<ReactInstall />
 
 ## Usage
+
+### PostHog Provider
+
+We provide a React context provider that makes it easy to access the posthog-js library in your app.
+
+The provider can either take an initialized client instance OR an API key and an optional config object.
+
+With an initialized client instance:
+
+```jsx
+import { PostHogProvider } from 'posthog-js/react'
+import posthog from 'posthog-js'
+
+posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, config)
+
+export default function App({ Component, pageProps }: AppProps) {
+    const router = useRouter()
+
+    // posthog is accessible here and can be used to track router events, as shown in the installation above
+
+    return (
+        <PostHogProvider client={posthog}>
+            <Component {...pageProps} />
+        </PostHogProvider>
+    )
+}
+
+```
+
+or
+
+With an API key and optional config object:
+
+```jsx
+import { PostHogProvider } from 'posthog-js/react'
+
+export default function App({ Component, pageProps }: AppProps) {
+    const router = useRouter()
+
+    return (
+        <PostHogProvider
+            apiKey={process.env.NEXT_PUBLIC_POSTHOG_KEY}
+            config={config}
+        >
+            <Component {...pageProps} />
+        </PostHogProvider>
+    )
+}
+```
 
 ### Using posthog-js functions
 
 By default, the posthog-js library will automatically capture pageviews and clicks on elements.
 
-If you want to use the library to identify users, capture events, or use other features, you can access the posthog-js library using the `usePostHog` hook.
+If you want to use the library to identify users, capture events, or use other features, you can access the initialized posthog-js library using the `usePostHog` hook.
+
+**Do not directly import `posthog` apart from installation** as shown above. This will likely cause errors as the library might not be initialized yet. This is handled automatically when you use the `PostHogProvider` and hook.
 
 All the methods of the library are available and can be used as described in the [posthog-js documentation](/docs/sdks/js).
 
 ```jsx
 import Head from 'next/head'
 import { usePostHog } from 'posthog-js/react'
+import { useUser } from '../lib/user'
 
 export default function Home() {
     const posthog = usePostHog()
+    const user = useUser()
+
+    const login = () => {
+        posthog?.identify(user.id, {
+            email: user.email
+        })
+
+        posthog?.group('company', user.company_id)
+    }
 
     return (
         <>
@@ -48,6 +111,7 @@ export default function Home() {
                     <button data-attr="autocapture-button">Autocapture buttons</button>
                     { /* This button click event is not autocaptured */ }
                     <button className="ph-no-capture">Ignore certain elements</button>
+                    <button onClick={login}>Login</button>
                 </div>
         </>
     )
@@ -56,7 +120,7 @@ export default function Home() {
 
 ### Feature Flags
 
-We provider hooks to access feature flags in your React app.
+We provide several hooks to make it easy to use feature flags in your React app.
 
 | Hook | Description |
 | --- | --- |
@@ -84,7 +148,71 @@ export default function Home() {
                             <p>This is a feature flag.</p>
                         </div>
                     ) : <div>
-                        <h2>Not welcome message</h2>
+                        <h2>No welcome message</h2>
+                        <p>Because the feature flag evaluated to false.</p>
+                    </div>
+                }
+        </>
+    )
+}
+```
+
+To show a different message depending on the variant key:
+
+```jsx
+import Head from 'next/head'
+import { useFeatureFlagVariantKey } from 'posthog-js/react'
+
+export default function Home() {
+    // variantKey is the variant key of the feature flag
+    const variantKey = useFeatureFlagVariantKey('show-welcome-message') 
+    const [welcomeMessage, setWelcomeMessage] = useState('')
+
+    useEffect(() => {
+        // variantKey is undefined if the feature flag is not enabled
+        if (variantKey === 'variant-a') {
+            setWelcomeMessage('Welcome to the alpha!')
+        } else if (variantKey === 'variant-b') {
+            setWelcomeMessage('Welcome to the beta!')
+        }
+
+    return (
+                <>
+                {
+                    welcomeMessage ? (
+                        <div className="welcome-message">
+                            <h2>{welcomeMessage}</h2>
+                            <p>This is a feature flag.</p>
+                        </div>
+                    ) : <div>
+                        <h2>No welcome message</h2>
+                        <p>Because the feature flag evaluated to false.</p>
+                    </div>
+                }
+        </>
+    )
+}
+```
+
+To load the message and title from the feature flag payload:
+
+```jsx
+import Head from 'next/head'
+import { useFeatureFlagPayload } from 'posthog-js/react'
+
+export default function Home() {
+    const payload = useFeatureFlagPayload('show-welcome-message')
+
+    return (
+                <>
+                {
+                    welcomeMessage ? (
+                        <div className="welcome-message">
+                            <h2>{payload.welcomeTitle}</h2>
+                            <p>{payload.welcomeMessage}</p>
+                        </div>
+                    ) : <div>
+                        <h2>No welcome message</h2>
                         <p>Because the feature flag evaluated to false.</p>
                     </div>
                 }

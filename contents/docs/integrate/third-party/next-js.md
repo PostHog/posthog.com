@@ -18,70 +18,9 @@ To follow this tutorial along, you need:
 
 ## Install posthog-js
 
-1. Install [posthog-js](https://github.com/posthog/posthog-js) using your package manager:
+import ReactInstall from "../../sdks/react/\_snippets/install.mdx"
 
-<MultiLanguage selector="tabs">
-
-```shell file=Yarn
-yarn add posthog-js
-```
-
-or
-
-```shell file=NPM
-npm install --save posthog-js
-```
-
-</MultiLanguage>
-
-2. Add your environment variables to your `.env.local` file and to your NextJS environment variables. You can find your project API key in the PostHog app under Project Settings > API Keys.
-
-```shell file=.env.local
-NEXT_PUBLIC_POSTHOG_KEY=<ph_project_api_key>
-NEXT_PUBLIC_POSTHOG_HOST=<ph_instance_address>
-```
-
-3. Integrate PostHog to your `pages/_app.js` file. This is the top-level component that will be common across all the different pages in your application.
-
-```jsx
-import { useEffect } from 'react'
-import type { AppProps } from 'next/app'
-import { useRouter } from 'next/router'
-
-import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
-
-// Check that PostHog is client-side
-if (typeof window !== 'undefined') {
-    posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
-        api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://app.posthog.com',
-        // Disable in development
-        loaded: (posthog) => {
-          if (process.env.NODE_ENV === 'development') posthog.opt_out_capturing()
-        }
-    })
-}
-
-export default function App({ Component, pageProps }: AppProps) {
-    const router = useRouter()
-
-    useEffect(() => {
-        // Track page views
-        const handleRouteChange = () => posthog.capture('$pageview')
-        router.events.on('routeChangeComplete', handleRouteChange)
-
-        return () => {
-            router.events.off('routeChangeComplete', handleRouteChange)
-        }
-    }, [])
-
-    return (
-        <PostHogProvider client={posthog}>
-            <Component {...pageProps} />
-        </PostHogProvider>
-    )
-}
-```
+<ReactInstall />
 
 ### Tracking custom events
 

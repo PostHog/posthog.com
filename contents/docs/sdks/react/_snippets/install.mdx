@@ -1,4 +1,4 @@
-1. Install [posthog-js](https://github.com/posthog/posthog-js) using your package manager:
+1. Install [posthog-js](https://github.com/posthog/posthog-js) using your package manager
 
 <MultiLanguage selector="tabs">
 
@@ -14,14 +14,14 @@ npm install --save posthog-js
 
 </MultiLanguage>
 
-2. Add your environment variables to your `.env.local` file and to your NextJS environment variables. You can find your project API key in the PostHog app under Project Settings > API Keys.
+2. Add your environment variables to your `.env.local` file and to your hosting provider (e.g. NextJS). You can find your project API key in the PostHog app under Project Settings > API Keys.
 
 ```shell file=.env.local
 NEXT_PUBLIC_POSTHOG_KEY=<ph_project_api_key>
 NEXT_PUBLIC_POSTHOG_HOST=<ph_instance_address>
 ```
 
-1. Integrate PostHog at the root of your app (`pages/_app.js` for NextJS).
+3. Integrate PostHog at the root of your app (`pages/_app.js` for NextJS).
 
 ```jsx
 import { useEffect } from 'react'
