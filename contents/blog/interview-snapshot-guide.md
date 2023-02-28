@@ -14,13 +14,11 @@ tags:
   - Guides
 ---
 
-You have recently interviewed a user? Congratulations! You have done a big step towards building a user-centric product. Once you’ve gotten into a habit of continuously interviewing users, you will benefit from a steady stream of user insights that help to inform your product strategy and roadmap.
+Regularly talking to users is an important habit for any team, but you also need an efficient way to share what you learn. Traditional scientific methods areeffective but too time consuming, especially for a fast-moving startup. This is why, at PostHog, we use interview snapshots to share insights from interviews with the team. 
 
-To turn interviews into insights, a lot of techniques exist, often driven by traditional scientific methods that involve coding your data, sorting cards and generating themes. While these techniques result in well-grounded insights, they are also time consuming. In fast-moving startups, it’s often more practical to have a 80/20 approach for your research, generate quick insights, build an MVP, measure its success and iterate.
+Championed by Teresa Torres in the book [Continuous Discovery Habits](https://www.amazon.co.uk/Continuous-Discovery-Habits-Discover-Products/dp/1736633309), interview snapshots are great conversation starters you can create with minimal effort – an 80/20 method that allows us to gather feedback, generate quick insights, build MVPs, measure their success and iterate. 
 
-This is why at PostHog, we use interview snapshots to share insights from interviews with the team. They can be created in a very short amount of time and are a great conversation starter. The method was championed by Teresa Torres in the book [Continuous Discovery Habits](https://www.amazon.co.uk/Continuous-Discovery-Habits-Discover-Products/dp/1736633309). It’s a great book if you are looking for a practical approach to user research, whether you are a product engineer, a product manager or a designer. 
-
-In the spirit of the Pareto principle, we are going to give you our own quick summary of how we do user interview snapshots at PostHog. We’ve created the following template that you can download and fill out, or you can recreate the structure in Google Docs, Figma or any other tool of your choice.
+In this guide, I'll share how we create user interview snapshots at PostHog – including the following template that you can download and fill out, or recreate in Google Docs, Figma or any other tool of your choice.
 
 ## Interview snapshots explained
 
