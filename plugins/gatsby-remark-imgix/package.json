@@ -1,5 +1,5 @@
 {
-    "name": "gatsby-remark-lazy-imgix",
+    "name": "gatsby-remark-imgix",
     "version": "0.1.0",
     "main": "index.js"
 }

@@ -21,10 +21,11 @@ function getImageData(...args) {
             const { width, height } = sizeOf(imagePath) ?? {}
             let data
 
-            if (process.env.IMGIX_DOMAIN && process.env.IMGIX_TOKEN) {
-                const gitHubURL = `https://raw.githubusercontent.com/PostHog/posthog.com/master/contents/${
-                    imagePath.split('contents/')[1]
-                }`
+            if (process.env.IMGIX_DOMAIN && process.env.IMGIX_TOKEN && process.env.VERCEL_GIT_COMMIT_REF) {
+                // create imgix image
+                const gitHubURL = `https://raw.githubusercontent.com/PostHog/posthog.com/${
+                    process.env.VERCEL_GIT_COMMIT_REF
+                }/contents/${imagePath.split('contents/')[1]}`
                 const gatsbyImageData = buildGatsbyImageDataObject({
                     url: gitHubURL,
                     imgixClientOptions: {
@@ -40,6 +41,7 @@ function getImageData(...args) {
                 })
                 return gatsbyImageData
             } else {
+                // create local image
                 const imageName = imagePath.replaceAll('/', '-') + path.basename(imagePath)
                 const publicPath = path.join(process.cwd(), `public`, `static`, imageName)
                 fs.copyFileSync(imagePath, publicPath)

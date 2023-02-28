@@ -70,7 +70,14 @@ module.exports = {
                     node.url.includes('https://raw.githubusercontent.com/'),
                 extensions: ['.mdx', '.md'],
                 gatsbyRemarkPlugins: [
-                    `gatsby-remark-static-images`,
+                    {
+                        resolve: require.resolve(`./plugins/gatsby-remark-imgix`),
+                        options: {
+                            imgixDomain: process.env.IMGIX_DOMAIN,
+                            imgixToken: process.env.IMGIX_TOKEN,
+                            branch: process.env.VERCEL_GIT_COMMIT_REF,
+                        },
+                    },
                     { resolve: 'gatsby-remark-autolink-headers', options: { icon: false } },
                     {
                         resolve: require.resolve(`./plugins/gatsby-remark-mermaid`),
