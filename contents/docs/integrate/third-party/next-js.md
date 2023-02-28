@@ -5,7 +5,9 @@ icon: ../../../images/docs/integrate/frameworks/nextjs.svg
 
 PostHog makes it easy to get data about traffic and usage of your [Next.js](https://nextjs.org/) app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
 
-This guide will walk you through an example integration of PostHog using Next.js and the [posthog-js library](/docs/integrate/client/js). 
+This guide will walk you through an example integration of PostHog using Next.js and the [posthog-js library](/docs/integrate/client/js).
+
+You can see a working example of this integration in our [Next.js demo app](https://github.com/PostHog/posthog-js/tree/master/playground/nextjs)
 
 ## Prerequisites
 
