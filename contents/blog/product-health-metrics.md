@@ -34,7 +34,7 @@ Because they are constantly measured and steadily improved, product health metri
 
 Another similarity to your body’s health is that mature products generally care more about them. Early-stage companies are searching for product fit. This often requires product changes or pivots that lead to radical changes in product health metrics. It doesn’t mean the product is "sick," it means they haven’t figured out what "healthy" means yet.
 
-## What makes a good health metric?
+## What makes a good product health metric?
 
 A good health metric is one you monitor regularly and makes a difference if it changes significantly. It must be a metric that matters, and is likely to change if something goes wrong. It is a summary of a product, so it must be abstract enough to remove unnecessary details, but detailed enough to provide actionable information.
 
