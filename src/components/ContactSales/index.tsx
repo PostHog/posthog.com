@@ -42,8 +42,8 @@ export default function ContactSales() {
                 </section>
                 <section className="grid md:grid-cols-2 max-w-5xl mx-auto md:gap-x-16 gap-y-12">
                     <div className="order-2 md:order-1">
-                        <h3 className="text-lg my-6">Benefits of a PostHog Enterprise plan:</h3>
-                        <ul className="list-none m-0 p-0 mt-2 grid sm:grid-flow-col sm:grid-rows-3">
+                        <h3 className="text-lg mt-1 mb-4">Benefits of a PostHog Enterprise plan:</h3>
+                        <ul className="list-none m-0 p-0 mt-2 grid sm:grid-flow-col sm:grid-rows-3 space-y-1">
                             {features.map((feature) => {
                                 return (
                                     <li key={feature} className="flex space-x-2">
@@ -90,18 +90,7 @@ export default function ContactSales() {
                         </div>
                     </div>
                     <div className="order-1 md:order-2">
-                        <h3>Contact sales</h3>
-                        <p>
-                            <strong>Tip:</strong> Press{' '}
-                            <kbd
-                                role="button"
-                                className="text-xs border border-b-2 border-gray-accent-light/50 dark:border-gray-accent-dark/50 rounded-sm px-1.5 py-0.5 text-black/40 dark:text-white/40 font-sans"
-                                style={{ fontSize: '10px' }}
-                            >
-                                TAB
-                            </kbd>{' '}
-                            to advance through the form at a breakneck pace!
-                        </p>
+                        <h3 className="mb-1">Contact sales</h3>
                         <Contact />
                     </div>
                 </section>

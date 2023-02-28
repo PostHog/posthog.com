@@ -256,10 +256,16 @@ function RadioGroup(props: InputHTMLAttributes<HTMLInputElement> & IInputProps) 
                 <p className="m-0 mt-1 mb-4 text-xs">
                     <strong>Tip:</strong> Use{' '}
                     <kbd
+                        className="text-xs border border-b-2 border-gray-accent-light/50 dark:border-gray-accent-dark/50 rounded-sm px-1.5 py-0.5 text-black/40 dark:text-white/40 font-sans mr-1"
+                        style={{ fontSize: '10px' }}
+                    >
+                        ←
+                    </kbd>
+                    <kbd
                         className="text-xs border border-b-2 border-gray-accent-light/50 dark:border-gray-accent-dark/50 rounded-sm px-1.5 py-0.5 text-black/40 dark:text-white/40 font-sans"
                         style={{ fontSize: '10px' }}
                     >
-                        ← →
+                        →
                     </kbd>{' '}
                     to advance through options
                 </p>
@@ -343,10 +349,10 @@ export default function Contact() {
                     <Confetti onConfettiComplete={() => setConfetti(false)} recycle={false} numberOfPieces={1000} />
                 </div>
             )}
-            <div className="bg-gray-accent-light p-4 rounded-md">
-                <p>
+            <div className="bg-gray-accent-light px-6 py-8 rounded-md mt-4">
+                <h4>
                     ✅ <strong>Message received!</strong>
-                </p>
+                </h4>
                 <p>
                     A member of the PostHog team will get back to you as soon as we've had a chance to review your
                     information.&nbsp;
@@ -358,6 +364,17 @@ export default function Contact() {
         </>
     ) : (
         <form onSubmit={handleSubmit}>
+            <p>
+                <strong>Tip:</strong> Press{' '}
+                <kbd
+                    role="button"
+                    className="text-xs border border-b-2 border-gray-accent-light/50 dark:border-gray-accent-dark/50 rounded-sm px-1.5 py-0.5 text-black/40 dark:text-white/40 font-sans"
+                    style={{ fontSize: '10px' }}
+                >
+                    TAB
+                </kbd>{' '}
+                to advance through the form at a breakneck pace!
+            </p>
             <div className="grid divide-y divide-dashed divide-gray-accent-light border border-gray-accent-light border-dashed">
                 {fields.map(({ Component, name, placeHolder, type = 'text', options = [] }, index) => {
                     return (
