@@ -73,6 +73,14 @@
                 "url": "/docs/sdks/python"
             },
             {
+                "name": "React",
+                "url": "/docs/sdks/react",
+                "badge": {
+                    "title": "Popular",
+                    "className": "!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50"
+                }
+            },
+            {
                 "name": "React Native",
                 "url": "/docs/sdks/react-native",
                 "badge": {
