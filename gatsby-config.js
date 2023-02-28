@@ -76,7 +76,6 @@ module.exports = {
                         resolve: require.resolve(`./plugins/gatsby-remark-mermaid`),
                     },
                 ],
-                plugins: [`gatsby-remark-static-images`],
             },
         },
         `gatsby-transformer-json`,
