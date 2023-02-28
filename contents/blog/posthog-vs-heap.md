@@ -22,18 +22,20 @@ Want to know how PostHog and Heap are different? If you remember nothing else, r
 
 2. PostHog is an all-in-one platform for product analytics, session recording, feature management, and more, built for engineers and product teams.
 
-In this guide, we will compare:
+In this guide, we'll cover:
 
 - Heap and PostHog's [core features](#core-features)
-- [Product analytics](#product-analytics) features and insights types
+- [Product analytics](#product-analytics) features and insight types
 - [Session recording](#session-recording) capability 
-- [Third-party integrations](#integrations), including data in and data out options
+- [Third-party integrations](#integrations), including data export and data import options
+- [Privacy](#privacy-compliance) and [security](#admin--security)
+- [Frequently asked questions](#frequently-asked-questions)
 
 ## How is PostHog different to Heap?
 
 ### 1. PostHog is your single source of truth
 
-Heap, like Amplitude and Mixpanel, focuses mainly on product analytics. That means you need to adopt multiple tools for things like session recording, feature management, and A/B testing. PostHog integrates all these features into one platform, so it becomes your single source of truth. We believe your should own your data, so exporting to data warehouses is free on all tiers.
+Heap, like Amplitude and Mixpanel, focuses mainly on product analytics. That means you need to adopt multiple tools for things like session recording, feature management, and A/B testing. PostHog integrates all these features into one platform, so it becomes your single source of truth. We believe you should own your data, so exporting to data warehouses is free on all tiers.
 
 ### 2. It's built for engineers
 
@@ -41,7 +43,7 @@ Anyone can use PostHog – just [ask our marketing team](/blog/posthog-marketing
 
 ### 3. Transparent pricing. No forced sales calls.
 
-Signing up to PostHog is as simple as creating an account and [adding our Javascript snippet](/docs/integrate). That's it. Want more features? Just put in a card and pay for what you use. We have a [generous free tier](/pricing), so you may not pay anything at all. No sales calls. No optional add-ons. No complicated product tiers. Just sign up and start building.
+Signing up to PostHog is as simple as creating an account and [adding our JavaScript snippet](/docs/integrate). That's it. Want more features? Just put in a card and pay for what you use. We have a [generous free tier](/pricing), so you may not pay anything at all. No sales calls. No optional add-ons. No confusing product tiers. Just sign up and start building.
 
 ## Feature comparison
 
@@ -110,9 +112,9 @@ PostHog includes product analytics, but also integrates session recording, featu
 </table>
 </div>
 
-- **Session recording:** Heap offers basic session recording in addition to its core product analytics product, but it's a bolt-on option on all plans. Session recording is built-in to PostHog and you get 15,000 free recordings every month.
+- **Session recording:** Heap offers basic session recording in addition to its core product analytics product, but it's a bolt-on option on all plans. Session recording is built-in to PostHog and you get 15,000 free recordings every month. **Jump to:** [Session recording comparison](#session-recording)
 
-- **Sync to data warehouse:** The ability to sync with your data warehouse is part of Heap Connect, a paid add-on on to Heap's Pro plan – it's included on its Premier plan. Data warehouse sync is available in PostHog at no additional cost because we believe companies should own their data.
+- **Sync to data warehouse:** The ability to sync with your data warehouse is part of Heap Connect, a paid add-on on to Heap's Pro plan – it's included on Heap's Premier plan. Data warehouse sync is available in PostHog at no additional cost because we believe companies should own their data.
 
 - **Experiments:** Heap doesn't have a built-in testing feature, though it does integrate with a number of popular A/B testing tools, such as AB Tasty and Optimizely. PostHog has a [built-in experimentation suite](/product/experimentation-suite) for running A/B and multivariate experiments.
 
@@ -212,7 +214,7 @@ Neither currently offers an SQL editor for writing custom queries, but it's in p
 </div>
 
 > ### Why autocapture?
-> Heap and PostHog are both built around event autocapture. This means you can just deploy a snippet and events (e.g. user clicked button, user viewed paged, etc.) are captured automatically, regardless of whether an event has been manually defined. This allows teams to ship new features faster as you don't need update your event tracking every time you ship a change.
+> Heap and PostHog are both autocapture events. This means you can just deploy a snippet and events (e.g. user clicked button, user viewed paged, etc.) are captured automatically, regardless of whether an event has been manually defined. This allows teams to ship new features faster as you don't need to update your event tracking every time you ship a change.
 >
 > Alternative tools, like Amplitude and Mixpanel, force you to manually instrument every event you want to track. This means you can only create queries based on events you've chosen to track in advance. Every time you think of something new to track, you need to instrument an event and then wait for the data.
 >
@@ -220,13 +222,13 @@ Neither currently offers an SQL editor for writing custom queries, but it's in p
 >
 > To quote Tony Stark: “An intelligence agency which fears intelligence is, historically, not awesome.”
 >
-> See: See our integration docs for [more on configuring autocapture](/docs/integrate/ingest-live-data) 
+> That said, you can turn off, or fine-tine, autocapture if you are concerned about capturing too many events. See: See our integration docs for [more on configuring autocapture](/docs/integrate/ingest-live-data) 
 
 <ArrayCTA />
 
 ## Session recording
 
-Session recording is an essential tool for understanding how people use your product. Both Heap and PostHog offer session recording, though Heap's version is quite limited at present.
+Session recording is an essential tool for understanding how people use your product, especially for [early-stage companies](/blog/early-stage-analytics) searching for product-market fit. Both Heap and PostHog offer session recording, though Heap's version is quite limited at present.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -303,7 +305,9 @@ Session recording is an essential tool for understanding how people use your pro
 
 ## Integrations
 
-This section includes a curated summary of the most popular integrations in PostHog and Heap, organised by category.
+This section includes a curated summary of the most popular integrations in PostHog and Heap, organized by category.
+
+See the [PostHog Apps](/apps) and [Heap integrations](https://help.heap.io/category/integrations/) pages for complete lists of all available integrations.
 
 **Categories:**
 
@@ -311,8 +315,6 @@ This section includes a curated summary of the most popular integrations in Post
 - [Data in](#data-in)
 - [Dev tools & support](#dev-tools--support) 
 - [Marketing & sales](#marketing--sales)
-
-See the [PostHog Apps](/apps) and [Heap integrations](https://help.heap.io/category/integrations/) pages for complete lists of all available integrations.
 
 ### Data out
 
