@@ -6,86 +6,83 @@ nextPage: ./actions-and-insights.mdx
 import Badge from "./\_snippets/badge.mdx"
 import IdentifyUserBackend from "./\_snippets/identify-user-backend.mdx"
 
-PostHog allows you to identify your users with an ID of your choice so you can associate events with specific users, track users across platforms, and connect events from before and after users log in for the first time.
-All events within PostHog are associated with a specific person, which can either be an **Anonymous person** or an **Identified person**, typically based on whether a user is logged in to your application or not.
+PostHog allows you to identify your users with an ID of your choice, which enables PostHog to associate events with specific users, track them on different platforms, and connect events from before and after users log in for the first time.
+All events within PostHog are associated with a specific person, either an **Anonymous person** or an **Identified person**, typically based on whether they're logged in to your application or not.
 
 Identifying users is done using the `identify` method in one of our SDKs.
 
 ## 1. Anonymous users <Badge>Client</Badge>
 
 When a user starts browsing on your website or app, they'll be automatically assigned an **anonymous ID**, which is then stored locally and allows us to track anonymous users even across different sessions.
-This anonymous ID is created using the user's device ID, and will typically look like `17b845b08de74-033c497ed2753c-35667c03-1fa400-17b845b08dfd55`.
+This anonymous ID is created using the user's device ID and will typically look like `17b845b08de74-033c497ed2753c-35667c03-1fa400-17b845b08dfd55`.
 
-This works fairly well for keeping track of users across a single session, but becomes far less effective as time goes on and also suffers from not being able to unify users across multiple devices.
-For these reasons, we will be using the `identify` method to associate events with a real, logged in user rather than simply the device they are viewing your app on.
+Leveraging the device ID works very well for keeping track of users across a single session but becomes far less effective as time goes on. More importantly, it only works when a user accesses your app from a single device, which is rarely the case.
+For these reasons, we will use the `identify` method to associate events with a logged-in user rather than simply the device they are using.
 
 ## 2. Identifying a user when they sign up <Badge>Client</Badge> <Badge>Server</Badge>
 
-To start off, let's walkthrough the flow of identifying a user as they are signing up for our service for the first time.
-This is typically the most complex part of integrating analytics, and is also one of the most important to ensure is setup correctly.
+To start, let's walk through the flow of identifying a user as they are signing up for our service for the first time.
+This is one of the most important areas to get right when setting up analytics, but it can sometimes feel daunting when setting it up for the first time.
 
-We'll start by following a user who is viewing your website for the first time; as we mentioned above, this user is assigned a unique anonymous ID which we can start sending events from.
-
-<!-- Image of anonymous events -->
+We'll start by following a user viewing your website for the first time; as mentioned above, this user is first assigned a unique anonymous ID, which we start using to send events.
 
 ### Identifying our newly created user <Badge>Server</Badge>
 
-Let's say now that this user navigates to your login flow, and goes through the process of creating an account.
-After whatever logic you have that handles creating this actual user account in your DB, you'll then want to call `identify` to create a person within PostHog to mirror this user within your application.
+Now, this user navigates to your login flow and goes through the process of creating an account.
+After your backend logic handles creating an account, you'll then want to call `identify` to create a person within PostHog.
 
 <IdentifyUserBackend />
 
-For the `distinct_id`, you'll typically want to use whatever unique ID was assigned to this user within your database, or to use some unique piece of user information such as their `email`.
+For the `distinct_id`, you'll typically want to use whatever unique ID was assigned to the user within your database or a unique piece of information such as their `email`.
 
 ### Linking past events with our new user <Badge>Client</Badge>
 
-Now that we've created our new user, the next step is to associate any past that may have been sent using the old anonymous ID with this new user.
+Now that we've created our new user, the next step is to associate any past events that were sent with the old anonymous ID with this new user.
 
-On the client side, this is done by calling `identify` with the **exact same** `distinct_id` that we just used in our backend `identify` call.
+On the client side, this is done by calling `identify` with the same `distinct_id` that we just used in our backend `identify` call.
 
 ```js
 // Using the 'distinct_id' returned to us from the server
 posthog.identify('distinct_id')
 ```
 
-This will do two things:
+Calling `identify` will do two things:
 
 1. PostHog will merge all the previous events from our anonymous user into our new user (`distinct_id`)
-2. All future events will be associated with this new user (`distinct_id`)
+2. All future events will be associated with this new user (`distinct_id`), even if we still use their anonymous ID
 
-Effectively, these two users have been merged together into one.
-By combining our anonymous user into our newly created user, we're able to answer important questions about our onboarding and conversion, so it's key to setting up reliable analytics.
+Effectively, these two users have been merged into one.
+By combining our anonymous user with our newly created user, we can answer important questions about our onboarding flow such as conversion rate and total unique users.
 
-## 3. Identifying logged in users <Badge>Client</Badge>
+## 3. Identifying logged-in users <Badge>Client</Badge>
 
-Now that we've covered the process of handling a user first signing up, the only major question left is what to do when this user returns?
+Now that we've covered the process of handling a user first signing up, the next question is what to do when this user returns.
 
-In general, this is as simple as calling `identify` with whatever `distinct_id` we previously used!
+In most cases, all we need to do is call `identify` whenever they return back to our site with whatever `distinct_id` we previously used!
 
 ```js
 // The same 'distinct_id' as before
 posthog.identify('distinct_id')
 ```
 
-You'll usually want to call `identify` every time a user first visits your application, or directly after they log in if they first landed on your website while logged out.
-Typically you'll want this to be the first call you make to PostHog - before sending any events with `capture` - so making the call _as soon as you have access to the user session_ is best.
+You'll usually want to call `identify` every time your application initially loads, or directly after log in if a user first landed on your website while logged out.
+Typically you'll want this to be the first call you make to PostHog - before sending any events with `capture` - so making the call _as soon as you can determine the `distinct_id` of the user_ is best.
 
-There's no gotcha's with calling `identify` multiple times for the same user **as long as you continue to pass the same `distinct_id`**, so feel free to call it multiple times throughout the course of a session.
+There's no gotcha's with calling `identify` multiple times for the same user **as long as you continue to pass the same `distinct_id`**, so feel free to call it multiple times throughout a session.
 
 ## 4. Setting user properties <Badge>Client</Badge> <Badge>Server</Badge>
 
-In addition to adding extra data to specific events as we discussed earlier, it's very common to want to also set properties on users as well.
-This becomes incredibly powerful when creating insights in PostHog, which we'll cover in the next guide, and allows you to easily filter your users
+In addition to adding extra data to specific events like we discussed earlier, it's also very common to want to also set properties on users as well.
+Tracking properties on users becomes incredibly crucial when we start creating insights, which we'll cover in the next guide.
 
-In PostHog, there are special `$set` and `$set_once` properties that we can include on events to set properties on whichever user the event is connected to.
+In PostHog, we can include special `$set` and `$set_once` properties on events to set properties for whichever user is sending the event.
 
 ### What is the difference between `$set` and `$set_once`?
 
-The `$set` and `$set_once` properties behave nearly identical - except for the fact that `$set` will replace any value that may have already been set on a person, while `$set_once` will only set the property if it has never been set before.
+If a `$set` property is included on an event, it will replace whatever value may have already been set on a person for a specific property.
+In contrast, `$set_once` will only set the property if it has never been set before.
 
-Use `set` when we want the value to be the most recently sent value. For example, to update the email for a user.
-
-Use `set_once` when we want to set the first value and it to never be updated afterwards, e.g. the first URL that referred a user to the site.
+`$set` is typically used for properties that you always want up-to-date information for (email, current plan, etc.), while `$set_once` is typically only used for information related to when a user first is seen (first URL they viewed, first time they logged in). 
 
 In summary: `set` always overrides, `set_once` only writes when the property doesn't already exist on the user.
 
