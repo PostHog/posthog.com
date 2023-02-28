@@ -22,7 +22,7 @@ This is why at PostHog, we use interview snapshots to share insights from interv
 
 In the spirit of the Pareto principle, we are going to give you our own quick summary of how we do user interview snapshots at PostHog. We’ve created the following template that you can download and fill out, or you can recreate the structure in Google Docs, Figma or any other tool of your choice.
 
-Here is how to fill out the interview snapshot template:
+## Interview snapshots explained
 
 // Annika to create this
 
