@@ -61,7 +61,7 @@ export const LibraryComparison = () => {
     }
 
     return (
-        <div className="overflow-x-scroll">
+        <div className="overflow-x-scroll mb-4">
             <table>
                 <thead>
                     <tr>
