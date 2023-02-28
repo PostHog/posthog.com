@@ -11,7 +11,6 @@ author: ["andy-vandervell"]
 category: General
 tags:
   - Comparisons
-  - Guides
   - Product analytics
   - Session recording
 ---
