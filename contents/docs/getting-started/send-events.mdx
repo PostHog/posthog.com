@@ -113,8 +113,6 @@ Our [SDK pages](/docs/integrate?tab=sdks) contain information on installing Post
 The only thing major difference when sending events from the server side is we must include a `distinct_id` with every event, which corresponds to the id of whichever user performed the specific action.
 Often, this will come in the form of a unique user idea and can be pulled from a session cookie when requests are sent.
 
-> TODO: Warning about using the same distinct_id across all backend requests
-
 ### When should I send events from the server vs. the client?
 
 While our general guidance is to track on both the client and server side, there are certain types of events that lend themselves more to being send on the server side:
