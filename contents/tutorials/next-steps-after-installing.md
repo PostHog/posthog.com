@@ -167,6 +167,8 @@ Read more about setting up and using experiments in [our product manual](/manual
 
 ## Further reading
 
+- [Full Next.js tutorial](/tutorials/nextjs-analytics)
+- [PostHog javascript docs](/docs/integrate/client/js)
 - Capture more events by [deploying a reverse proxy to PostHog Cloud](/docs/integrate/proxy)
 - [Complete guide to event tracking](/tutorials/event-tracking-guide)
 - [Calculating average session duration, time on site, and other session-based metrics](/tutorials/session-metrics)

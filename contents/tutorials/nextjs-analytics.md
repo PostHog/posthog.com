@@ -262,31 +262,59 @@ Once this is working, we have all the functionality we want in our Next.js app a
 
 ## Adding PostHog
 
-At this point, you need a PostHog instance ([signup for free](https://app.posthog.com/signup)). Once created, get your [JavaScript script snippet](/docs/integrate?tab=snippet) which is found in the getting started flow or your project settings. 
+At this point, you need a PostHog instance ([signup for free](https://app.posthog.com/signup)). Once created, get your PostHog API key which is found in the getting started flow or your project settings and add it to your `.env.local` file and NextJS environment variables.
 
-Copy the snippet (minus the `<script>` tags) and go to `pages/_app.js`. Import the Next.js `<Script>` component from `next/script`, then paste your snippet in the `dangerouslySetInnerHTML` property of the `<Script>` component. You can also just copy the code below and change the details of the `posthog.init` line (`project_api_key` and `api_host`) with your own.
+```bash
+NEXT_PUBLIC_POSTHOG_KEY=<ph_project_api_key>
+NEXT_PUBLIC_POSTHOG_HOST=<ph_instance_address>
+```
+
+Then install [posthog-js](https://github.com/posthog/posthog-js) using your package manager:
+
+<MultiLanguage selector="tabs">
+
+```shell file=Yarn
+yarn add posthog-js
+```
+
+or
+
+```shell file=NPM
+npm install --save posthog-js
+```
+
+</MultiLanguage>
+
+And finally add the PostHog provider to your app
 
 ```js
 // pages/_app.js
 import { SessionProvider } from "next-auth/react"
 import Script from "next/script"
+import posthog from "posthog-js"
+import { PostHogProvider } from 'posthog-js/react'
+
+// Check that PostHog is client-side
+if (typeof window !== 'undefined') {
+    posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+        api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://app.posthog.com',
+        // Disable in development
+        loaded: (posthog) => {
+          if (process.env.NODE_ENV === 'development') posthog.opt_out_capturing()
+        }
+    })
+}
 
 export default function App(
   { Component, pageProps: { session, ...pageProps } }
 ) {
   return (
     <>
-      <Script
-        dangerouslySetInnerHTML={{
-          __html: `
-            !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-            posthog.init('<ph_project_api_key>',{api_host:'<ph_instance_address>'})
-            `
-        }}
-      />
-      <SessionProvider session={session}>
-        <Component {...pageProps} />
-      </SessionProvider>
+      <PostHogProvider client={posthog}>
+        <SessionProvider session={session}>
+          <Component {...pageProps} />
+        </SessionProvider>
+      </PostHogProvider>
     </>
   )
 }
@@ -310,21 +338,22 @@ import { SessionProvider } from "next-auth/react"
 import Script from "next/script"
 import { useRouter } from "next/router"
 import { useEffect } from "react"
+import posthog from "posthog-js"
+import { PostHogProvider } from 'posthog-js/react'
 
 export default function App(
   { Component, pageProps: { session, ...pageProps } }
 ) {
   const router = useRouter()
   useEffect(() => {
-    router.events.on("routeChangeComplete", () => {
-      posthog.capture('$pageview');
-    })
+    // Track page views
+    const handleRouteChange = () => posthog.capture('$pageview')
+    router.events.on('routeChangeComplete', handleRouteChange)
+
     return () => {
-      router.events.off("routeChangeComplete", () => {
-        posthog.capture('$pageview');
-      })
+        router.events.off('routeChangeComplete', handleRouteChange)
     }
-  }, [router.events])
+}, [])
 //... the rest of the code you wrote earlier
 ```
 
@@ -334,13 +363,16 @@ Once you set this up, navigating between pages captures pageviews for each. The 
 
 ## Capturing custom events
 
-You can use the same `posthog.capture` call to capture custom events in your other components. 
+You can use the same `posthog.capture` call to capture custom events in your other components.
 
 For example, in `posts/[id].js` we can add a "like" button that includes the article details as properties. To do this, create a button and connect it to a function that captures a `post liked` event with the post title and author. This looks like this:
 
 ```js
 // pages/posts/[id].js
+import { usePostHog } from 'posthog-js/react'
+
 export default function Post({ post }) {
+  const posthog = usePostHog()
   
   function likePost() {
     posthog.capture(
@@ -386,9 +418,11 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useRouter } from 'next/router';
+import { usePostHog } from 'posthog-js/react'
 
 export default function Home({ posts }) {
   const { data: session } = useSession();
+  const posthog = usePostHog()
 
   const router = useRouter()
   const signedIn = router.query.signedIn
@@ -436,6 +470,8 @@ To set this up, we do something similar to what we did with user identification.
 // pages/index.js
 //...
 const router = useRouter()
+const posthog = usePostHog()
+
 const signedIn = router.query.signedIn
 if (signedIn == 'True' && session) {
   posthog.identify(session.user.email);
@@ -493,79 +529,16 @@ This gives us a basic flag to add to our app.
 
 ### Client-side rendering feature flags
 
-To implement this flag in our app, start with client-side rendering. 
-
-The key to client-side rendering is waiting for PostHog to load and then waiting for the flags to load. If you try to get a flag before PostHog loads, it won’t work. If you try to call a flag before they evaluate, it won’t work either.
-
-To make sure PostHog is loaded, we create a global state for it and provide that state to the rest of the app. We then check the `PostHogState` in our posts, and request feature flags once available. Finally, once the evaluated feature flags return, we update the client to add the CTA (if the flag is true).
-
-In `_app.js`, create a `PostHogStateContext`, then set up the state in our app function, and wrap our main app in a provider for that context.
-
-```js
-// pages/_app.js
-import { SessionProvider } from "next-auth/react"
-import Script from "next/script"
-import { useRouter } from "next/router"
-import { useEffect, createContext, useState } from "react"
-
-export const PostHogStateContext = createContext();
-
-export default function App({ Component, pageProps: { session, ...pageProps } }) {
-
-  const [PostHogState, setPostHogState] = useState(false);
-  
-	//...
-
-  return (
-    <>
-      <Script
-        dangerouslySetInnerHTML={{
-          __html: `
-            !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-            posthog.init('<ph_project_api_key>',{api_host:'<ph_instance_address>'})
-            `
-        }}
-        onReady={() => {
-          setPostHogState(true)
-        }}
-      />
-      <SessionProvider session={session}>
-        <PostHogStateContext.Provider value={{ PostHogState, setPostHogState }}>
-          <Component {...pageProps} />
-        </PostHogStateContext.Provider>
-      </SessionProvider>
-    </>
-  )
-}
-```
-
-In our `posts/[id].js` file, we must:
-
-1. get the `PostHogState` context
-2. set up a callback for when feature flags load with `posthog.onFeatureFlags` 
-3. when the feature flags load, check the `blog-cta` flag we created earlier
-4. set the state for the CTA component
-
-Like this:
+The PostHog provider gives you hooks to work with feature flags in your client side app. Here's an example of how to use them:
 
 ```js
 // pages/posts/[id].js
-import { PostHogStateContext } from '../_app'
 import { useContext, useEffect, useState } from 'react'
+import { useFeatureFlagEnabled } from 'posthog-js/react'
  
 export default function Post({ post }) {
 
-  const { PostHogState, setPostHogState } = useContext(PostHogStateContext)
-  const [ ctaState, setCtaState ] = useState(false)
-	//...
-
-  useEffect(() => {
-    if (PostHogState) {
-      posthog.onFeatureFlags(() => {
-        setCtaState(posthog.isFeatureEnabled('blog-cta'))
-      })
-    }
-  }, [PostHogState])
+  const ctaState = useFeatureFlagEnabled('blog-cta')
 
   return (
     <div>
@@ -582,7 +555,9 @@ export default function Post({ post }) {
 //...
 ```
 
-Once done, you should see a call to action on your blog page.
+Then create a feature flag called `blog-cta` and set it to 100% of users.
+
+You should see a call to action on your blog page.
 
 ![CTA](../images/tutorials/nextjs-analytics/cta.png)
 
@@ -613,7 +588,6 @@ This looks like this:
 
 ```js
 // pages/posts/[id].js
-import {PostHogStateContext} from '../_app'
 import { useContext, useEffect, useState } from 'react'
 import { getServerSession } from "next-auth/next"
 import { PostHog } from 'posthog-node'
