@@ -70,11 +70,13 @@ module.exports = {
                     node.url.includes('https://raw.githubusercontent.com/'),
                 extensions: ['.mdx', '.md'],
                 gatsbyRemarkPlugins: [
+                    `gatsby-remark-static-images`,
                     { resolve: 'gatsby-remark-autolink-headers', options: { icon: false } },
                     {
                         resolve: require.resolve(`./plugins/gatsby-remark-mermaid`),
                     },
                 ],
+                plugins: [`gatsby-remark-static-images`],
             },
         },
         `gatsby-transformer-json`,
@@ -323,6 +325,5 @@ module.exports = {
         ...(!process.env.GATSBY_ALGOLIA_APP_ID || !process.env.ALGOLIA_API_KEY || !process.env.GATSBY_ALGOLIA_INDEX_NAME
             ? []
             : [algoliaConfig]),
-        '@vercel/gatsby-plugin-vercel-builder',
     ],
 }
