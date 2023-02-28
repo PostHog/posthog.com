@@ -480,7 +480,7 @@ In Heap, data warehouse integrations are only available on Heap Premier, or as a
             <td><strong>Zapier</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Conenct to services using Zapier</td>
+            <td>Connect to services using Zapier</td>
         </tr>
         <tr>
             <td><strong>n8n</strong></td>
@@ -800,7 +800,7 @@ Deploying PostHog takes mere minutes. Just [include our tracking snippet](/docs/
 
 ### How much do Heap and PostHog cost?
 
-Unlike PostHog, Heap doesn't share its pricing publically, but its free tier is less generous.
+Unlike PostHog, Heap doesn't share its pricing publicly, but its free tier is less generous.
 
 Heap's free tier allows for only 10,000 sessions per month, "limited analysis", six months of data history, and limited access to data sources and integrations.
 
