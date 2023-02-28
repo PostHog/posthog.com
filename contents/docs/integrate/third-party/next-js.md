@@ -9,6 +9,8 @@ This guide will walk you through an example integration of PostHog using Next.js
 
 You can see a working example of this integration in our [Next.js demo app](https://github.com/PostHog/posthog-js/tree/master/playground/nextjs)
 
+Next.js has both client and server side rendering. We'll cover both in this tutorial.
+
 ## Prerequisites
 
 To follow this tutorial along, you need:
@@ -16,65 +18,80 @@ To follow this tutorial along, you need:
 1. a PostHog account (either [Cloud](/docs/getting-started/cloud) or [self-hosted](/docs/self-host))
 2. a running Next.js application
 
-## Install posthog-js
+## Client side analytics
 
-import ReactInstall from "../../sdks/react/\_snippets/install.mdx"
+To integrate PostHog into your Next.js for client side analytics you should use the [React SDK](/docs/sdks/react). See the [installation instructions](/docs/sdks/react#Installation) to get setup.
 
-<ReactInstall />
+You can see a working example of this integration in our [Next.js demo app](https://github.com/PostHog/posthog-js/tree/master/playground/nextjs)
 
-### Tracking custom events
+## Server side analytics
 
-Now that PostHog is setup and initialized PostHog, you can use it to capture events where you want to track user behavior. For example, if you want to track when a user clicks a button, you can do it like this:
+Sever side rendering is a Next.js feature that allows you to render pages on the server instead of the client. This can be useful for SEO and has faster performance.
 
-```jsx
-import Head from 'next/head'
-import { usePostHog } from 'posthog-js/react'
+To integrate PostHog into your Next.js for server side analytics you should use the [Node SDK](/docs/sdks/node).
 
-export default function Home() {
-    const posthog = usePostHog()
+First, install the `posthog-node` library:
 
-    return (
-        <>
-              <div className="buttons">
-                    { /* Fire a custom event when the button is clicked */ }
-                    <button onClick={() => posthog?.capture('Clicked button')}>Capture event</button>
-                    { /* This button click event is autocaptured by default */ }
-                    <button data-attr="autocapture-button">Autocapture buttons</button>
-                    { /* This button click event is not autocaptured */ }
-                    <button className="ph-no-capture">Ignore certain elements</button>
-                </div>
-        </>
-    )
-}
+```bash
+npm install --save posthog-node
 ```
 
-## Feature flags
+We can then use the `getServerSideProps` function to send events and pass the feature flags to the component.
 
-Feature flags are a powerful way to test new features and roll them out to a subset of your users. You can use feature flags to enable/disable features, change the behavior of a feature, or even change the UI of a feature.
+This looks like this:
 
-```jsx
-import Head from 'next/head'
-import { useFeatureFlagEnabled } from 'posthog-js/react'
+```js
+// pages/posts/[id].js
+import { useContext, useEffect, useState } from 'react'
+import { getServerSession } from "next-auth/next"
+import { PostHog } from 'posthog-node'
 
-export default function Home() {
-    // showWelcomeMessage is true if the feature flag is enabled
-    const showWelcomeMessage = useFeatureFlagEnabled('show-welcome-message') 
+export default function Post({ post, flags }) {
+  const [ctaState, setCtaState] = useState()
 
-    return (
-                <>
-                {
-                    showWelcomeMessage ? (
-                        <div className="welcome-message">
-                            <h2>Welcome!</h2>
-                            <p>This is a feature flag.</p>
-                        </div>
-                    ) : <div>
-                        <h2>Not welcome message</h2>
-                        <p>Because the feature flag evaluated to false.</p>
-                    </div>
-                }
-        </>
+  useEffect(() => {
+    if (flags) {
+      setCtaState(flags['blog-cta'])
+    }
+  })
+
+  return (
+    <div>
+      <h1>{post.title}</h1>
+      <p>By: {post.author}</p>
+      <p>{post.content}</p>
+      {ctaState && 
+        <p><a href="/">Go to PostHog</a></p>
+      }
+      <button onClick={likePost}>Like</button>
+    </div>
+  )
+}
+
+export async function getServerSideProps(ctx) {
+
+  const session = await getServerSession(ctx.req, ctx.res)
+  let flags = null
+
+  if (session) {
+    const client = new PostHog(
+      '<ph_project_api_key>',
+      {
+        api_host: '<ph_instance_address>',
+      }
     )
+    flags = await client.getAllFlags(session.user.email);
+    client.capture(session.user.email, 'loaded blog article', { url: ctx.req.url })
+  }
+  
+  const { posts } = await import('../../blog.json')
+  const post = posts.find((post) => post.id.toString() === ctx.params.id)
+  return {
+    props: {
+      post,
+      flags
+    },
+  }
 }
 ```
 
