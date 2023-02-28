@@ -3,53 +3,56 @@ title: Actions and insights
 nextPage: ./group-analytics.mdx
 ---
 
-Actions and insights are two of the simplest, yet most powerful analysis tools within PostHog.
-They're easy to get started with, tricky to fully master, but getting a good idea of all the features they offer will make analysis feel much, much smoother.
+Actions and insights are the two most-core analysis tools within PostHog.
+They're easy to get started with, and tricky to fully master, but getting a good idea of all the features they offer will make analysis feel much, much smoother.
 
 ## 1. Creating a new action from autocapture events
 
-Before we start, it's worth covering what an action actually is and what it's useful for. Concretely, an action is simply a way of either combining multiple different events together into one, or to track separate events based on specific properties.
-Actions are generally used as a way of cleaning up your analytics to make it easier to create insights, which may not sound very important, but becomes critical as you start sending more, different events.
+Before we start, it's worth covering what actions are and what they're useful for. In practice, an action is simply a way to create a new event by filtering and combining one or more events together.
+Actions can be used to clean up your analytics and make it easier to create insights.
+This may not sound very important at first, but it becomes critical as you start sending more events with different types and properties.
 
 Actions are perhaps most powerful when paired with autocapture events, and offer an extremely quick way of setting up customizable tracking for your entire product in minutes.
 
-To start, let's create an action from an autocaptured event when a user clicks a 'Sign up' button. Navigate to the 'Data management' section in your PostHog dashboard, and then to the 'Actions' tab, where you should then see a 'New action' button that we'll click.
+Let's create an action from an autocaptured event for when a user clicks a 'Sign up' button like we talked about in the [Sending events](/docs/getting-started/send-events) guide.
+First, navigate to the 'Data management' section in your PostHog dashboard and then to the 'Actions' tab, where you should then see a 'New action' button that we'll click.
 
 ![modal with two buttons: 'Inspect element on your site' and 'From event or pageview'](./images/create-new-action.png)
 
-In our case, we'll be using the second option to create an action from an existing event. We'll then fill out the name of the new Action we want to create - in this case, something along the lines of 'Sign up button clicked'.
+In our case, we'll use the second option to create an action from an existing event. We'll then fill out the name of the new action we want to create - in this case, something like 'Sign up button clicked'.
 
 ![form to create a new action, with 'Sign up button clicked' set as the name](./images/naming-the-action.png)
 
-> **Tip**: Make sure to set a description for all your actions - your team members and your future-self will thank you!
+> **Tip**: Make sure to set a description for all your actions so you don't forget what they refer to - your team members and your future self will thank you!
 
-Next, we'll describe which raw autocapture events we'd like to include under this action. We'll start by selecting 'Autocapture' as our event type and then filling out the 'Link target equals' and 'Text equals' fields.
+Next, we'll describe which raw autocapture events we want to include in this action.
+We'll select 'Autocapture' as our event type and then fill out the 'Link target equals' and 'Text equals' fields.
 
 ![form with the field 'Link target equals' and 'Text equals' set to '/sign-up' and 'Sign up' respectively](./images/match-group.png)
 
-This means we'll only include autocapture elements where the user clicked on a link pointing to `/sign-up` with the text 'Sign up', which is exactly what we want!
+With these filters, we'll only include autocapture elements where the user clicked on a link pointing to `/sign-up` that also contained the text 'Sign up'.
 
-> **Tip**: There are typically many different ways of specifying which autocapture events should be part of an action, and even in this case this isn't the _only_ correct way of doing so.
-> You can also use the Toolbar to do this, which can sometimes work better if you have a large number of elements on a specific page.
+> **Tip**: There are typically many different ways of specifying which autocapture events should be part of an action, and even in this case, there are other ways we could have filtered our events.
+> You can also use the [Toolbar](/manual/toolbar) to do this, which makes it much easier to visualize which elements are included in an action.
 
-Now click 'Save', and we'll have created our first Action! This action behaves in almost the exact same way as any other custom event and can be used in all the same places - we'll look at how to use our new action in an insight in the [funnels section](#4-creating-a-new-funnel)
+Now click 'Save', and we'll have created our first action! This action behaves in nearly the same way as any other custom event; we'll look at how to use our new action in an insight in the next section.
 
 ## 2. Creating a new trends insight
 
-We're now getting into some really fun stuff - finally answering all the burning questions you have about your product and your users!
-Insights are at the core of the PostHog analytics platform, offering an easy way for anyone to answer questions about how users are actually using your product.
+We're now getting into the fun stuff - finally answering all your burning questions about your product and your users!
+Insights are at the core of the PostHog analytics platform, offering an easy way for anyone to answer questions about your product.
 
 PostHog has 5 basic insight types:
 
 -   [Trends](/manual/trends): Analyze how your core metrics change over time (_hopefully up and to the right_)
 -   [Funnels](/manual/funnels): Identify conversion between key steps and reduce drop-off
--   [Retention](/manual/retention): Track how many of your users come back to your product again, and again
--   [User paths](/manual/paths): Find out the steps your users take to get from A to B, and where they go from there
--   [Stickiness](/manual/stickiness): See which features are used most frequently, and which users like them the most
+-   [Retention](/manual/retention): Track how many of your users come back to your product again and again
+-   [User paths](/manual/paths): Find out the steps your users take to get from A to B and where they go from there
+-   [Stickiness](/manual/stickiness): See which features are used most frequently and which users like them the most
 
-In this guide we'll be covering both Trends and Funnels, which are the two most-core insight types and generally the ones you'll be reaching for the most when you have a question.
+In this guide, we'll be covering just the Trends insight, which is one of the most powerful and generally the one you'll be reaching for the most when you have a question.
 
-To start, let's create a new trends insight from the "Insights" section in our PostHog dashboard. Newly created insights will default to 'Trends'.
+To start, let's create a new trends insight from the "Insights" section in our PostHog dashboard using the 'New insight' button.
 
 ![newly created trends insight with the 'Sign up button clicked' event](./images/new-insight.png)
 
@@ -57,17 +60,18 @@ In this case, we'll use the 'Sign up button clicked' action we just created, but
 
 ## 3. Filtering events in our insight
 
-Now that we have our insight set up, let's start drilling down a bit more.
+Now that we have our insight, let's start drilling down a bit more.
 
-First, let's start by seeing which browsers our users are using and how that correlates with our number of sign ups.
+First, let's start by seeing which browsers our users are using and how that correlates with our number of sign-ups.
 
 ![filter group for only direct referrers and breaking down by the browser](./images/filter-referrer-and-breakdown.png)
 
-We can do this with a [Breakdown](/manual/trends#breaking-down-by-properties), which splits our graph based on the value of an event or person property, in this case the 'Browser' property.
+We can do this with a [Breakdown](/manual/trends#breaking-down-by-properties), which splits our graph based on the value of an event or person property, in this case, the 'Browser' property.
 Let's also add a [Filter Group](/manual/trends#filter-groups) so we're only at users who visited our site from a direct URL.
 
-This works well, but let's try changing the display of our graph to make it a bit easier to analyze.
+This works well, but let's try changing the display of our graph to make it easier to analyze.
 
 ![filter group for only direct referrers and breaking down by the browser](./images/broken-down-trend-bar.png)
 
-Great, we now have our insight all set up! There are still tons of powerful features within trends insights, but with actions, filtering, and breakdowns you'll be able to answer loads of product questions.
+Great, we now have our insight all set up!
+Of course, there are still tons of powerful features within trends and other insight types, but even with just actions, filtering, and breakdowns you'll be able to answer a lot.
