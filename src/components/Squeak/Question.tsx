@@ -2,29 +2,10 @@ import React from 'react'
 import useSWR from 'swr'
 import { useSqueak } from './SqueakProvider'
 
-type StrapiResult<T> = StrapiData<T> & StrapiMeta
+import type { StrapiResult, StrapiData, StrapiRecord } from './utils'
+import { type ReplyData, Replies } from './Replies'
 
-type StrapiMeta = {
-    meta: {
-        pagination: {
-            page: number
-            pageSize: number
-            pageCount: number
-            total: number
-        }
-    }
-}
-
-type StrapiData<T> = {
-    data: T extends Array<any> ? StrapiRecord<T>[] : StrapiRecord<T>
-}
-
-type StrapiRecord<T> = {
-    id: number
-    attributes: T
-}
-
-type Profile = {
+type ProfileData = {
     firstName: string | null
     lastName: string | null
     biography: string | null
@@ -40,15 +21,7 @@ type Profile = {
     publishedAt: string | null
 }
 
-type Reply = {
-    // TODO: Populate profile data
-    body: string
-    createdAt: string
-    updatedAt: string
-    publishedAt: string
-}
-
-type Question = {
+type QuestionData = {
     subject: string
     permalink: string
     resolved: boolean
@@ -56,21 +29,26 @@ type Question = {
     createdAt: string
     updatedAt: string
     publishedAt: string
-    profile?: StrapiData<Profile>
-    replies?: StrapiData<Reply[]>
+    profile?: StrapiData<ProfileData>
+    replies?: StrapiData<ReplyData[]>
 }
 
 type QuestionProps = {
+    // TODO: Deal with id possibly being undefined at first
     id: number
-    question?: StrapiRecord<Question>
+    question?: StrapiRecord<QuestionData>
 }
 
+// TODO: Allow passing in permalink instead of id
 export const useQuestion = (id: number) => {
     const { apiHost } = useSqueak()
-    const { data, error } = useSWR<StrapiResult<Question>>(`${apiHost}/api/questions/${id}?populate=*`, async (url) => {
-        const res = await fetch(url)
-        return res.json()
-    })
+    const { data, error } = useSWR<StrapiResult<QuestionData>>(
+        `${apiHost}/api/questions/${id}?populate=*`,
+        async (url) => {
+            const res = await fetch(url)
+            return res.json()
+        }
+    )
 
     return {
         question: data?.data,
@@ -91,5 +69,15 @@ export const Question: React.FC<QuestionProps> = ({ id, question }) => {
         return <div>Error: {JSON.stringify(error)}</div>
     }
 
-    return <pre>{JSON.stringify(questionData)}</pre>
+    if (!questionData) {
+        return <div>Question not found</div>
+    }
+
+    return (
+        <div>
+            <h1>{questionData.attributes.subject}</h1>
+            <p>{questionData.attributes.body}</p>
+            <Replies replies={questionData.attributes.replies} />
+        </div>
+    )
 }
