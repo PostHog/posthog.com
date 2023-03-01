@@ -18,7 +18,7 @@ Our [Balsamiq project](https://balsamiq.cloud/sd0i9zq/poenphz/rADB6) contains ma
 
 *Note: Balsamiq uses its own Comic Sans-style font. Don't get hung up on this!*
 
-<img width="1434" alt="image" src="https://user-images.githubusercontent.com/154479/221651322-56a69559-7e68-4fd8-92ac-c1068cd202eb.png">
+<img width="1434" alt="image" src="https://user-images.githubusercontent.com/154479/221651322-56a69559-7e68-4fd8-92ac-c1068cd202eb.png" />
 
 ## Step 2: Hi-fi designs [Figma]
 
