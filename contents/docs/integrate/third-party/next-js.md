@@ -18,11 +18,71 @@ To follow this guide along, you need:
 1. a PostHog account (either [Cloud](/docs/getting-started/cloud) or [self-hosted](/docs/self-host))
 2. a running Next.js application
 
-## Client-side analytics
+## Client-side usage
 
-import ReactInstall from "../../sdks/react/_snippets/install.mdx"
+Install posthog-js using your package manager:
 
-<ReactInstall />
+```shell
+yarn add posthog-js
+# or
+npm install --save posthog-js
+```
+
+Add your environment variables to your .env.local file and to your hosting provider (e.g. Vercel, Netlify, AWS). You can find your project API key in the PostHog app under Project Settings > API Keys.
+
+```shell file=.env.local
+NEXT_PUBLIC_POSTHOG_KEY=<ph_project_api_key>
+NEXT_PUBLIC_POSTHOG_HOST=<ph_instance_address>
+```
+
+3. Integrate PostHog at the root of your app (`pages/_app.js` for Next.js).
+
+```react
+// pages/_app.js
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
+
+import posthog from 'posthog-js'
+import { PostHogProvider } from 'posthog-js/react'
+
+// Check that PostHog is client-side (used to handle Next.js SSR)
+if (typeof window !== 'undefined') {
+  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://app.posthog.com',
+    // Disable in development
+    loaded: (posthog) => {
+      if (process.env.NODE_ENV === 'development') posthog.opt_out_capturing()
+    }
+  })
+}
+
+export default function App({ Component, pageProps }) {
+  const router = useRouter()
+
+  useEffect(() => {
+    // Track page views
+    const handleRouteChange = () => posthog.capture('$pageview')
+    router.events.on('routeChangeComplete', handleRouteChange)
+
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange)
+    }
+  }, [])
+
+  return (
+    <PostHogProvider client={posthog}>
+      <Component {...pageProps} />
+    </PostHogProvider>
+  )
+}
+```
+
+PostHog can then be accessed throughout your Next.js app by using the `usePostHog` hook. See the [React SDK docs](/docs/sdks/react) for examples of how to use:
+
+- [posthog-js functions like custom event capture, user identification, and more.](/docs/sdks/react#using-posthog-js-functions)
+- [Feature flags including variants and payloads.](/docs/sdks/react#feature-flags)
+
+You can also read [the full posthog-js documentation](/docs/sdks/js) for all the usable functions.
 
 ## Server-side analytics
 
