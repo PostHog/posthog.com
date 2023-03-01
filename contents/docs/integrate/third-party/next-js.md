@@ -20,10 +20,9 @@ To follow this guide along, you need:
 
 ## Client-side analytics
 
-import ReactInstall from "./\_snippets/install.mdx"
+import ReactInstall from "../../sdks/react/_snippets/install.mdx"
 
 <ReactInstall />
-
 
 ## Server-side analytics
 
