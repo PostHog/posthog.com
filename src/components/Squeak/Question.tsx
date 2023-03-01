@@ -1,9 +1,10 @@
 import React from 'react'
 import useSWR from 'swr'
 import { useSqueak } from './SqueakProvider'
-
 import type { StrapiResult, StrapiData, StrapiRecord } from './utils'
+
 import { type ReplyData, Replies } from './Replies'
+import { Avatar } from './Avatar'
 
 type ProfileData = {
     firstName: string | null
@@ -75,8 +76,13 @@ export const Question: React.FC<QuestionProps> = ({ id, question }) => {
 
     return (
         <div>
-            <h1>{questionData.attributes.subject}</h1>
-            <p>{questionData.attributes.body}</p>
+            <div className="flex space-x-2">
+                <Avatar url={`/community/profiles/${questionData.attributes.profile?.data.id}`} />
+                <div>
+                    <h1>{questionData.attributes.subject}</h1>
+                    <p>{questionData.attributes.body}</p>
+                </div>
+            </div>
             <Replies replies={questionData.attributes.replies} />
         </div>
     )
