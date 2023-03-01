@@ -264,7 +264,7 @@ Once this is working, we have all the functionality we want in our Next.js app a
 
 At this point, you need a PostHog instance ([signup for free](https://app.posthog.com/signup)). Once created, get your PostHog API key which is found in the getting started flow or your project settings and add it to your `.env.local` file and Next.js environment variables.
 
-```bash
+```shell file=.env.local
 NEXT_PUBLIC_POSTHOG_KEY=<ph_project_api_key>
 NEXT_PUBLIC_POSTHOG_HOST=<ph_instance_address>
 ```

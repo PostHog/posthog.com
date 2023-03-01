@@ -5,7 +5,7 @@ icon: ../../../images/docs/integrate/frameworks/nextjs.svg
 
 PostHog makes it easy to get data about traffic and usage of your [Next.js](https://nextjs.org/) app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
 
-This guide will walk you through an example integration of PostHog using Next.js and the [posthog-js library](/docs/integrate/client/js).
+This guide walks you through integrating PostHog into your Next.js app using the [React](/docs/sdks/react) and the [Node.js](/docs/sdks/node) SDKs.
 
 You can see a working example of this integration in our [Next.js demo app](https://github.com/PostHog/posthog-js/tree/master/playground/nextjs)
 
@@ -20,9 +20,10 @@ To follow this guide along, you need:
 
 ## Client-side analytics
 
-To integrate PostHog into your Next.js for client-side analytics you should use the [React SDK](/docs/sdks/react). See the [installation instructions](/docs/sdks/react#Installation) to get set up.
+import ReactInstall from "./\_snippets/install.mdx"
 
-You can see a working example of this integration in our [Next.js demo app](https://github.com/PostHog/posthog-js/tree/master/playground/nextjs)
+<ReactInstall />
+
 
 ## Server-side analytics
 
