@@ -1,3 +1,4 @@
+// Old v1 components
 import { Form } from './components/main/Form'
 import { Question } from './components/main/Question'
 import { FullQuestion } from './components/FullQuestion'
@@ -13,19 +14,5 @@ import { useOrg } from './hooks/useOrg'
 import { useUser } from './hooks/useUser'
 import { useQuestion } from './hooks/useQuestion'
 
-export {
-    Authentication,
-    Squeak,
-    FullQuestion,
-    Questions,
-    Question,
-    Form,
-    Login,
-    Avatar,
-    Days,
-    OrgProvider,
-    UserProvider,
-    useOrg,
-    useUser,
-    useQuestion,
-}
+// New v2 components
+export { SqueakProvider, useSqueak } from './SqueakProvider'
