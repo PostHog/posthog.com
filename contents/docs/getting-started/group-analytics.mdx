@@ -6,49 +6,47 @@ nextPage: ./next-steps.mdx
 import CreateGroupType from "./\_snippets/group-type-create.mdx"
 import SetGroupProperties from "./\_snippets/set-group-properties.mdx"
 
-Group analytics is a powerful feature in PostHog that allows you to perform analytics on entities other than single users.
-This feature is somewhat more advanced, but opens up completely new avenues for analytics and is essential for most B2B use-cases.
+> **Note: ** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
 
-Group analytics can sometimes feel slightly confusing to new users, and often times this comes from skipping too quickly over the basic concepts.
-We'll start with an overview of how Group analytics works, and then jump into creating our own group types and viewing them within PostHog.
+Group analytics is a powerful feature in PostHog that allows you to perform analytics on entities other than single users.
+This feature is slightly more advanced, but opens up entirely new avenues for analytics which are essential for most B2B use cases.
+
+Group analytics can sometimes feel confusing to new users, and this often times comes from skipping over the basic concepts too quickly.
+We'll start with an overview of how Group analytics works, and then jump into creating new groups and viewing them within PostHog.
 
 ## 1. What is a group?
 
-It's best to start by clarifying what exactly we mean when we talk about a 'Group'?
-In PostHog, a 'Group' is an entity that we can associate events and properties with that _is not_ a user.
-Typically, every event we send will be connected to a single user through the `distinct_id` we use in our `identify` call, as we covered in the [Identifying users](/docs/getting-started/identify-users) guide.
-Often times this is all you'll need, but for many use cases we also want to be able to analyze entities beyond just single users.
+In PostHog, a 'Group' is an entity that we can send events and hold properties that is beyond a single user.
 
-To get a more concrete idea of just how powerful groups can be, here are a couple examples of common entities that we can model using groups:
+To get a more concrete idea of what this looks like in practice, here are a couple examples of common entities that we can model using groups:
 
 1. **Organizations/Teams**: It's very common in B2B apps to have multiple users under the same 'Team' account, in which case groups allow us to perform analytics on individual teams exactly as if they were users.
 2. **Threads/Chats/Posts**: If you're creating a social app, you might want to track events that are connected with specific conversations such as replies
 
-Looking at these examples, it might be tempting to think that 'Groups' work directly on Users. However, groups actually work by events, and only indirectly on users.
-We'll see this later, but the basic idea is that **events are connected to groups directly, and any user who sent one of those events will also be linked indirectly**.
-In this way, there isn't a way to directly 'assign' a user to a group - instead, this user would send **an event** with a special property linking it to a group, which would then associate the user with said group.
-This may seem slightly confusing now, but it will become much clearer as we dig in to some code samples.
+Looking at these examples, it might be tempting to think that a group is just a group of users; however, this is not exactly the case.
+We'll see this later, but the basic idea is that **only events are connected to groups directly, and any user who sent one of those events will also be linked indirectly**.
+In this way, there isn't a way to directly 'assign' a user to a group - instead, this user would send an event with a special property linking the event to a group.
 
 ### Groups vs. group types
 
-One more piece of terminology that's important to distinguish before we get started is the different between a **Group** and a **Group type**.
-At a high level, a **Group type** is the abstract type of what our group represents (e.g. Teams, Group chats, Posts, etc.) whereas a **Group** is a specific instance of one of these types (e.g. a specific team or a specific group chat).
+Another important distinction is between a **Group** and a **Group type**.
+At a high level, a **Group type** is the abstract type of whatever our group represents (e.g. Teams, Group chats, Posts, etc.), whereas a **Group** is a specific instance of one of these types (e.g. a specific team or a specific group chat).
 
 ## 2. Creating a group type
 
-Now that we're a little bit familiar with how Group analytics works, let's start by creating our first group type.
+Now that we're familiar with how Group analytics works, let's start by creating our first group type.
 In this example, let's imagine that we're creating a simple group chat app.
 
 <CreateGroupType />
 
 To associate an event with a specific group, we provide two pieces of information the group type (`chat`) and the ID of the specific group (`84359520`).
-This will both create a new `chat` Group type in PostHog and will also associate the `Message sent` event with the ID of the group we specified.
-This ID is meant to uniquely identify the group that an event is related to, and is typically whatever unique ID you're using in your database.
+This will create a new `chat` group type in PostHog and associate the `Message sent` event with the ID of the group we specified.
+This ID behaves similar to the `distinct_id` for users we saw before, and best practice is to use the unique ID of the object within your database.
 
 ## 3. Setting group properties
 
-In addition to associating events with Groups, it's also common to want to set properties on them, which can be done in almost the exact same way as with individual users.
-Let's try including the name of the group chat to our group.
+In addition to associating events with Groups, it's also common to want to set properties on them.
+Continuing our example, let's try adding the name of the group chat to our group.
 
 <SetGroupProperties />
 
@@ -56,13 +54,11 @@ In `posthog-js`, we can use the same `group` method we saw above, while in the b
 
 ## 4. Using groups in PostHog
 
-Our app is now fully set up to track events for each of our group chats!
-We now have the ability to do analytics on chats, as well as being able to view which group chats a user is a member of directly in PostHog.
+Our app is now fully set up to track events for each of our group chats and we can now see all the chats that a user is a member of directly in PostHog!
 
-Here's an idea of the ways you can use groups within PostHog:
+Furthermore, we can also use groups now in the following places:
 
-1. **Creating insights**: Groups can be used in insights in exactly the same way as people - we can analyze the total number of active groups, along with filtering events based on group properties
-2. **Feature flags**: Roll out features to entire teams without worrying about different users seeing different things
-3. **Related groups**: See all the different groups a specific user is related to
-
-Groups offer a powerful way to extend PostHog to better fit your specific app.
+1. **Creating insights**: Groups can be used in insights exactly the same as people - we can analyze the total number of active groups and filter events based on group properties.
+2. **Related groups**: See all the different groups a specific user is related to.
+3. **Feature flags**: Roll out features to entire teams without worrying about different users seeing different things.
+3. **Experiments**: Run A/B tests on entire groups instead of individual users.
