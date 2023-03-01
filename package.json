@@ -45,6 +45,7 @@
         "cntl": "^1.0.0",
         "core-js": "^3.21.1",
         "country-code-emoji": "^2.3.0",
+        "dayjs": "^1.11.7",
         "dotenv": "^10.0.0",
         "eslint-plugin-flowtype": "^2.50.3",
         "form-data": "^4.0.0",

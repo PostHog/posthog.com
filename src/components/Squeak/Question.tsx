@@ -4,23 +4,8 @@ import { useSqueak } from './SqueakProvider'
 import type { StrapiResult, StrapiData, StrapiRecord } from './utils'
 
 import { type ReplyData, Replies } from './Replies'
-import { Avatar } from './Avatar'
-
-type ProfileData = {
-    firstName: string | null
-    lastName: string | null
-    biography: string | null
-    company: string | null
-    companyRole: string | null
-    github: string | null
-    linkedin: string | null
-    location: string | null
-    twitter: string | null
-    website: string | null
-    createdAt: string
-    updatedAt: string | null
-    publishedAt: string | null
-}
+import { type ProfileData, Profile } from './Profile'
+import { Days } from './Days'
 
 type QuestionData = {
     subject: string
@@ -76,9 +61,10 @@ export const Question: React.FC<QuestionProps> = ({ id, question }) => {
 
     return (
         <div>
-            <div className="flex space-x-2">
-                <Avatar url={`/community/profiles/${questionData.attributes.profile?.data.id}`} />
+            <div className="flex flex-col items-start space-y-2">
+                <Profile profile={questionData.attributes.profile?.data} />
                 <div>
+                    <Days createdAt={questionData.attributes.createdAt} />
                     <h1>{questionData.attributes.subject}</h1>
                     <p>{questionData.attributes.body}</p>
                 </div>
