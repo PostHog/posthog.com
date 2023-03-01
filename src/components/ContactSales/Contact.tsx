@@ -206,16 +206,17 @@ function Radio(props: InputHTMLAttributes<HTMLInputElement> & IInputProps & { la
     const handleClick = () => {
         const nextIndex = fields.findIndex((field) => field.name === other.name) + 1
         const nextField = fields[nextIndex]
-        if (nextField && nextField?.options && typeof window !== 'undefined') {
+        if (nextField && typeof window !== 'undefined') {
             const nextName = nextField?.name
-            const nextValue = nextField?.options[0]?.value || nextField?.options[0]?.hubspotValue
-            const nextID = `${nextName}-${nextValue}`
+            const nextValue =
+                nextField?.options && (nextField?.options[0]?.value || nextField?.options[0]?.hubspotValue)
+            const nextID = `${nextName}${nextValue ? '-' + nextValue : ''}`
             !openOptions.includes(nextName) && setOpenOptions([...openOptions, nextName])
             const nextEl = document.getElementById(nextID)
             if (!values[nextName]) {
                 setTimeout(() => {
                     nextEl?.focus()
-                    setFieldValue(nextName, nextValue)
+                    setFieldValue(nextName, nextValue || '')
                 }, 0)
             }
         }
