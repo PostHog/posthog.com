@@ -18,7 +18,7 @@ To follow this guide along, you need:
 1. a PostHog account (either [Cloud](/docs/getting-started/cloud) or [self-hosted](/docs/self-host))
 2. a running Next.js application
 
-## Client-side usage
+## Client-side analytics
 
 Install posthog-js using your package manager:
 
