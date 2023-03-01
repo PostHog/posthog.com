@@ -18,17 +18,18 @@ As a result of doing this, we can provide an answer much faster, so you don't ha
 
 ## FAQ
 
-### What is the current sampling rate?
-
-We currently set the sampling rate at 0.1 for all insights. This is unchangeable at the moment, but might be configurable in the future. We've found 0.1 to be a good rate for significant speed gains while maintaining sampled results within a few percentage points of actual results.
-
 ### Will the sampled results be consistent across calculations?
 
 Provided you do not send us events in the past, yes. For a given sampling rate, the analysis will always run on the same set of data, so you don't have to worry about sampled results changing once you hit 'Refresh'.
 
+
+### Does sampling work when calculating conversions?
+
+Yes. Our sampling doesn't just take a random set of events, rather it takes a sample based on a sampling variable (see below). Currently, we use distinct IDs for this, meaning all of a given ID's events will either be taken into the sample or out, so you don't run the risk of an event at the first step of your funnel being in the sample while the subsequent events aren't, for example.
+
 ### What variable do you sample by?
 
-We are currently sampling by distinct ID, meaning sampling will work best for PostHog users that track only anonymous or only identified end users. In other words, if you make use of `posthog.identify` and users have events before and after the `posthog.identify` call, sampling will currently not work very well.
+We are currently sampling by distinct ID, meaning sampling will work best for PostHog users that track/analyze only anonymous or only identified end users. In other words, if you make use of `posthog.identify` and users have events before and after the `posthog.identify` call, sampling will currently not work very well.
 
 We're working on providing sampling by person IDs in the future, which will unlock sampling for those dealing with both anonymous and identified users.
 
