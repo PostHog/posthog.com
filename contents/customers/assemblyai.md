@@ -23,7 +23,7 @@ To enable this, AssemblyAI had previously used Mixpanel, but as the company grew
 
 ### Unthrottled ingestion for millions of events each day
 
-The central challenge for AssemblyAI was the sheer volume of events the team needed to track — millions of events, easily. This requirement made Mixpanel prohibitively expensive and led the team to throttle how many events were sent to the platform to limit costs. 
+When AssemblyAI switched to PostHog, they were able to start tracking a much greater volume of events - millions per day - without the need to throttle ingestion. As a result, analysis in PostHog was much more reliable and the team was able to make decisions and test ideas faster.```
 
 <BorderWrapper>
     <Quote
