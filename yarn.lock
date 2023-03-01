@@ -24365,6 +24365,13 @@ sprintf-js@~1.0.2:
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
   integrity sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==
 
+squeak-react@^4.3.8:
+  version "4.3.8"
+  resolved "https://registry.yarnpkg.com/squeak-react/-/squeak-react-4.3.8.tgz#a2589b5ceba1969d2668ddccc0b8a0faf858034f"
+  integrity sha512-aLo31qU78KEdrPYAknPKY9AHLC8sYtAhwcqs311P+V8cnzH8Jd9cvEpeGIJwEyJNds69ziELNg3DcC9E82Nzvg==
+  dependencies:
+    rehype-sanitize "^5.0.1"
+
 sshpk@^1.7.0:
   version "1.17.0"
   resolved "https://registry.yarnpkg.com/sshpk/-/sshpk-1.17.0.tgz#578082d92d4fe612b13007496e543fa0fbcbe4c5"
