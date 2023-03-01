@@ -63,7 +63,7 @@ export default function Post({ post, flags }) {
       <h1>{post.title}</h1>
       <p>By: {post.author}</p>
       <p>{post.content}</p>
-      {ctaState && 
+      {ctaState &&
         <p><a href="/">Go to PostHog</a></p>
       }
       <button onClick={likePost}>Like</button>
@@ -83,10 +83,13 @@ export async function getServerSideProps(ctx) {
         api_host: '<ph_instance_address>',
       }
     )
+
     flags = await client.getAllFlags(session.user.email);
     client.capture(session.user.email, 'loaded blog article', { url: ctx.req.url })
+
+    await client.shutdownAsync()
   }
-  
+
   const { posts } = await import('../../blog.json')
   const post = posts.find((post) => post.id.toString() === ctx.params.id)
   return {
