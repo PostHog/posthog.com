@@ -16,3 +16,4 @@ import { useQuestion } from './hooks/useQuestion'
 
 // New v2 components
 export { SqueakProvider, useSqueak } from './SqueakProvider'
+export { Question } from './Question'
