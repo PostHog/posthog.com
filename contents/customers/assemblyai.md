@@ -15,7 +15,7 @@ toolsUsed:
     - Insights
 ---
 
-[AssemblyAI](https://www.assemblyai.com/?utm_source=posthog&utm_campaign=case_study) is an API platform which provides powerful AI models to transcribe and understand speech. As a young company in the cutting-edge field of AI modeling, AssemblyAI enjoys an all-hands-on-deck environment where teams wear many hats and have wide remits. In such a fast-moving culture, having immediate access to reliable data is essential for decision-making about the future of the product. 
+[AssemblyAI](https://www.assemblyai.com/?utm_source=posthog&utm_campaign=case_study) is an API platform which provides powerful AI models to transcribe and understand speech. As a young company in the cutting-edge field of AI modeling, AssemblyAI requires teams to wear many hats and move fast, making immediate access to reliable data for decision-making a must.
 
 To enable this, AssemblyAI had previously used Mixpanel, but as the company grew and users flooded in, Mixpanel’s pricing model made it increasingly expensive. 
 
