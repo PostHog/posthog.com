@@ -22,7 +22,7 @@ const Layout = ({ children, className = '' }: { children: React.ReactNode; class
 
     return (
         <SearchProvider>
-            <SqueakProvider>
+            <SqueakProvider apiHost="https://squeak.posthog.cc">
                 <div className={className}>
                     <Header />
                     <main>{children}</main>
