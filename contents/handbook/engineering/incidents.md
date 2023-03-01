@@ -59,7 +59,7 @@ Examples
 - Event ingestion totally failing - we are losing events
 
 
-## What happens during an incident
+## What happens during an incident
 
 The person who raised the incident is the incident lead. It’s their responsibility to:
 - Make sure the right people join the zoom. This includes [the current on call person](https://posthog.pagerduty.com/service-directory/P43Y0E8). Optionally, add people from Infra and [the feature owner](https://posthog.com/handbook/engineering/feature-ownership) if relevant. Also ping Tim and James G so they're aware.
