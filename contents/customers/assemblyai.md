@@ -1,5 +1,5 @@
 ---
-title: Why AssemblyAI moved from Mixpanel to PostHog
+title: Why AssemblyAI switched from Mixpanel to PostHog
 customer: AssemblyAI
 logo: ../images/customers/assemblyai/logo.png
 featuredImage: ../images/customers/assemblyai/featured.png
