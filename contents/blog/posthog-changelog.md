@@ -41,7 +41,6 @@ We've added a new element selector to [the PostHog toolbar](/manual/toolbar) so 
 The new modal shows the element wrapping a selected element, so that subsequent clicks build up a selection. Want to give it a go? We've updated [our toolbar tutorial](/tutorials/toolbar) with instructions.
 
 
-
 ### Outfunnel app
 The folks at [Outfunnel](https://outfunnel.com/) have contributed a new app which enables you to [export data from PostHog to Outfunnel](/apps/outfunnel-exporter). This is mainly useful for scoring leads based on their behaviour, or using them as triggers for automations. 
 
