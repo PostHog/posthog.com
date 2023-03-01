@@ -15,7 +15,7 @@ toolsUsed:
     - Insights
 ---
 
-[AssemblyAI](https://www.assemblyai.com/) is an API platform which provides AI-powered transcription and speech recognition services. As a young company in the cutting edge field of AI modeling, AssemblyAI enjoys an all-hands-on-deck environment where teams wear many hats and have wide remits. In such a fast-moving culture, having immediate access to reliable data is essential for decision-making about the future of the product. 
+[AssemblyAI](https://www.assemblyai.com/?utm_source=posthog&utm_campaign=case_study) is an API platform which provides powerful AI models to transcribe and understand speech. As a young company in the cutting-edge field of AI modeling, AssemblyAI enjoys an all-hands-on-deck environment where teams wear many hats and have wide remits. In such a fast-moving culture, having immediate access to reliable data is essential for decision-making about the future of the product. 
 
 To enable this, AssemblyAI had previously used Mixpanel, but as the company grew and users flooded in, Mixpanel’s pricing model made it increasingly expensive. 
 
@@ -57,4 +57,4 @@ Now that the team finally has access to all their data, they’ve been able to d
 
 “I feel like, every single week, we discover something new that is making a difference,” said Alberto. “We’re an API company, so a lot of our users just come to the site, grab their token, and leave.”
 
-“PostHog really helps us optimize that journey to help our users — and, for us, having visibility of all the data at scale is just magical. Mixpanel can’t even compare.”
+“PostHog really helps us optimize that journey to help our users — and, for us, having visibility of all the data at scale in PostHog is just magical.”
