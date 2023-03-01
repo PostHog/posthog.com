@@ -1,41 +1,41 @@
 <MultiLanguage>
 
 ```js
-posthog.group('chat', '84359520', {
-    name: 'Hedgehog enthusiasts',
+posthog.group('company', '84359520', {
+    name: 'Hedgehog corporation limited',
 })
 ```
 
 ```python
-posthog.group_identify('chat', '84359520', {
-    'name': 'Hedgehog enthusiasts',
+posthog.group_identify('company', '84359520', {
+    'name': 'Hedgehog corporation limited',
 })
 ```
 
 ```node
 posthog.groupIdentify({
-    groupType: 'chat',
+    groupType: 'company',
     groupKey: '',
     properties: {
-        name: 'Hedgehog enthusiasts',
+        name: 'Hedgehog corporation limited',
     },
 })
 ```
 
 ```go
 client.Enqueue(posthog.GroupIdentify{
-    Type: "chat",
+    Type: "company",
     Key:  "84359520",
     Properties: posthog.NewProperties().
-        Set("name", "Hedgehog enthusiasts"),
+        Set("name", "Hedgehog corporation limited"),
 })
 ```
 
 ```php
 PostHog::groupIdentify(array(
-    'groupType' => 'chat',
+    'groupType' => 'company',
     'groupKey' => '84359520',
-    'properties' => array("name" => "Hedgehog enthusiasts")
+    'properties' => array("name" => "Hedgehog corporation limited")
 ));
 ```
 

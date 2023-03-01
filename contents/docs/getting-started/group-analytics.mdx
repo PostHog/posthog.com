@@ -4,6 +4,7 @@ nextPage: ./next-steps.mdx
 ---
 
 import CreateGroupType from "./\_snippets/group-type-create.mdx"
+import ChatGroupType from "./\_snippets/group-type-create-chat.mdx"
 import SetGroupProperties from "./\_snippets/set-group-properties.mdx"
 
 > **Note: ** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
@@ -35,13 +36,17 @@ At a high level, a **Group type** is the abstract type of whatever our group rep
 ## 2. Creating a group type
 
 Now that we're familiar with how Group analytics works, let's start by creating our first group type.
-In this example, let's imagine that we're creating a simple group chat app.
+In this example, let's imagine that we have a B2B app and want to track when a user join a new team.
 
 <CreateGroupType />
 
-To associate an event with a specific group, we provide two pieces of information the group type (`chat`) and the ID of the specific group (`84359520`).
-This will create a new `chat` group type in PostHog and associate the `Message sent` event with the ID of the group we specified.
+To associate an event with a specific group, we provide two pieces of information the group type (`company`) and the ID of the specific group (`84359520`).
+This will create a new `company` group type in PostHog and associate the `User joined company` event with the ID of the group we specified.
 This ID behaves similar to the `distinct_id` for users we saw before, and best practice is to use the unique ID of the object within your database.
+
+We can also use groups to associate events with other entities. Let's imagine our B2B app has a chat feature, and we want to track when a user sends a message in a group chat.
+
+<ChatGroupType />
 
 ## 3. Setting group properties
 
@@ -54,11 +59,11 @@ In `posthog-js`, we can use the same `group` method we saw above, while in the b
 
 ## 4. Using groups in PostHog
 
-Our app is now fully set up to track events for each of our group chats and we can now see all the chats that a user is a member of directly in PostHog!
+Our app is now fully set up to track events for each of our companies and view the groups that a user is related to.
 
-Furthermore, we can also use groups now in the following places:
+Furthermore, we can use groups now in the following places:
 
 1. **Creating insights**: Groups can be used in insights exactly the same as people - we can analyze the total number of active groups and filter events based on group properties.
 2. **Related groups**: See all the different groups a specific user is related to.
 3. **Feature flags**: Roll out features to entire teams without worrying about different users seeing different things.
-3. **Experiments**: Run A/B tests on entire groups instead of individual users.
+4. **Experiments**: Run A/B tests on entire groups instead of individual users.
