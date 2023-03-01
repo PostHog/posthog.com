@@ -1,5 +1,5 @@
 import { FormikErrors } from 'formik'
-import React, { Dispatch, InputHTMLAttributes, SetStateAction, useState } from 'react'
+import React, { Dispatch, InputHTMLAttributes, SetStateAction, useRef, useState } from 'react'
 import { useFormik } from 'formik'
 import { button } from 'components/CallToAction'
 import * as Yup from 'yup'
@@ -205,13 +205,25 @@ function Radio(props: InputHTMLAttributes<HTMLInputElement> & IInputProps & { la
 
     const handleClick = () => {
         const nextIndex = fields.findIndex((field) => field.name === other.name) + 1
-        const nextName = fields[nextIndex]?.name
-        !openOptions.includes(nextName) && setOpenOptions([...openOptions, nextName])
+        const nextField = fields[nextIndex]
+        if (nextField && nextField?.options && typeof window !== 'undefined') {
+            const nextName = nextField?.name
+            const nextValue = nextField?.options[0]?.value || nextField?.options[0]?.hubspotValue
+            const nextID = `${nextName}-${nextValue}`
+            !openOptions.includes(nextName) && setOpenOptions([...openOptions, nextName])
+            const nextEl = document.getElementById(nextID)
+            if (!values[nextName]) {
+                setTimeout(() => {
+                    nextEl?.focus()
+                    setFieldValue(nextName, nextValue)
+                }, 0)
+            }
+        }
     }
 
     return (
         <label
-            onMouseDown={handleClick}
+            onMouseUp={handleClick}
             className="relative w-full text-center cursor-pointer"
             htmlFor={`${other.name}-${other.value}`}
         >
@@ -233,16 +245,21 @@ function Radio(props: InputHTMLAttributes<HTMLInputElement> & IInputProps & { la
 }
 
 function RadioGroup(props: InputHTMLAttributes<HTMLInputElement> & IInputProps) {
-    const { options, errors, validateField, openOptions, setOpenOptions, values, ...other } = props
+    const { options, errors, validateField, openOptions, setOpenOptions, values, setFieldValue, ...other } = props
     const error = errors[props.name]
     const open = openOptions.includes(props.name)
+    const ref = useRef()
     return (
         <div
             onFocus={() => {
                 !openOptions.includes(other.name) && setOpenOptions([...openOptions, other.name])
             }}
             onClick={() => {
-                !openOptions.includes(other.name) && setOpenOptions([...openOptions, other.name])
+                if (options && !openOptions.includes(other.name)) {
+                    setOpenOptions([...openOptions, other.name])
+                    ref.current?.focus()
+                    setFieldValue(other.name, options[0]?.value || options[0]?.hubspotValue)
+                }
             }}
             className={`${inputContainerClasses} ${error ? 'pb-8' : ''} cursor-pointer`}
         >
@@ -276,7 +293,15 @@ function RadioGroup(props: InputHTMLAttributes<HTMLInputElement> & IInputProps) 
                 >
                     {options?.map((option, index) => {
                         const { value, hubspotValue, label } = option
-                        return <Radio key={value} {...props} value={value || hubspotValue} label={label || value} />
+                        return (
+                            <Radio
+                                reference={index === 0 && ref}
+                                key={value}
+                                {...props}
+                                value={value || hubspotValue}
+                                label={label || value}
+                            />
+                        )
                     })}
                 </div>
             </motion.div>
@@ -288,7 +313,7 @@ function RadioGroup(props: InputHTMLAttributes<HTMLInputElement> & IInputProps) 
 const ValidationSchema = Yup.object().shape({
     firstName: Yup.string().required('Please enter your first name'),
     lastName: Yup.string(),
-    workEmail: Yup.string().email().required('Please enter a valid email address'),
+    workEmail: Yup.string().email('Please enter a valid email address').required('Please enter a valid email address'),
     companyName: Yup.string().required('Please enter your company name'),
     role: Yup.string().required('Please select your role'),
     monthlyActiveUsers: Yup.number().required('Please select a value'),
