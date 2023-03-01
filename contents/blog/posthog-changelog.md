@@ -31,17 +31,7 @@ You can now control Max ([that's his name](/handbook/company/team)) using the WA
 ### React library
 Our Head of Product, Luke, decided to stretch his engineering skills this week and added a new React library which makes it easy to get data about traffic and product usage from React apps, into PostHog.
 
-Even better, Luke also started testing his writing skills by updating [the React docs](/docs/sdks/react) to include everything you need to get started with the full PostHog suite, including feature flags! 
-
-### Dashboard templates
-![templates](../images/blog/array/templates.png)
-
-Just getting started with PostHog? We've added dashboard templates to help you get basic information out of your product, faster. Head to the Templates section and install the dashboard you want first, then select the template when creating a dashboard. 
-
-We're planning several improvements to this system soon, but right now you can choose templates for advertising, research, content and product usecases. 
-
-### Outfunnel app
-The folks at [Outfunnel](https://outfunnel.com/) have contributed a new app which enables you to [export data from PostHog to Outfunnel](/apps/outfunnel-exporter). This is mainly useful for scoring leads based on their behaviour, or using them as triggers for automations. 
+Even better, Luke also started testing his writing skills by updating [the React docs](/docs/sdks/react) to include everything you need to get started with the full PostHog suite, including feature flags!
 
 ### New toolbar element selector 
 ![The selector modal being used to discover the more meaningful selector](../images/tutorials/toolbar/toolbar-selector-edit.gif)
@@ -49,6 +39,12 @@ The folks at [Outfunnel](https://outfunnel.com/) have contributed a new app whic
 We've added a new element selector to [the PostHog toolbar](/manual/toolbar) so that it's easier to create actions and events in some circumstances. 
 
 The new modal shows the element wrapping a selected element, so that subsequent clicks build up a selection. Want to give it a go? We've updated [our toolbar tutorial](/tutorials/toolbar) with instructions.
+
+
+
+### Outfunnel app
+The folks at [Outfunnel](https://outfunnel.com/) have contributed a new app which enables you to [export data from PostHog to Outfunnel](/apps/outfunnel-exporter). This is mainly useful for scoring leads based on their behaviour, or using them as triggers for automations. 
+
 
 ## February 24, 2023
 
