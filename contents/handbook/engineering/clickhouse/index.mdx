@@ -27,15 +27,15 @@ To solve this problem we looked at a wide range of OLAP solutions, including [Pi
 [Presto](https://prestodb.io/), [Druid](https://druid.apache.org/), [TimescaleDB](https://www.timescale.com/), CitusDB, and
 ClickHouse. Some of our team had used these tools before at other companies, such as Uber where Pinot and Presto are both used extensively.
 
-While assessing each tool, we looked at on three main factors:
+While assessing each tool, we looked at three main factors:
 
 -   _Speed:_ Our users want results in real-time, so our new database needed to scale well and give fast results. Ideally, it wouldn’t be too expensive either.
 -   _Complexity:_ PostHog users can self-host and install our product themselves, so we didn’t want it to be too complicated for users to manage or deploy. We didn’t want users to have to install an entire Hadoop stack, for example.
--   _Query interface:_ We like standardised tools. We eliminated tools such as Druid because, while it does have a SQL wrap around it, it’s not _exactly_ SQL. That can get messy.
+-   _Query interface:_ We like standardized tools. We eliminated tools such as Druid because, while it does have a SQL wrapper around it, it’s not _exactly_ SQL. That can get messy.
 
 ClickHouse was a good fit for all of these factors, so we started doing a more thorough investigation. We read up on benchmarks and researched the experience of companies such as [Cloudflare that uses ClickHouse to process 6m requests per second](https://blog.cloudflare.com/http-analytics-for-6m-requests-per-second-using-clickhouse/). Eventually, we set up a test cluster to run our own benchmarks.
 
-ClickHouse repeatedly performed an order of magnitude better than other tools we considered. We also discovered other perks, such as the fact that it is column-orientated and written in C++. We found these to be the key benefits of ClickHouse:
+ClickHouse repeatedly performed an order of magnitude better than other tools we considered. We also discovered other perks, such as the fact that it is column-oriented and written in C++. We found these to be the key benefits of ClickHouse:
 
 -   _Compression:_ ClickHouse has _excellent_ compression and the size-on-disk was incredible. ClickHouse even beat out serialization formats such as ORC and Parquet.
 -   _Process from disk:_ Some OLAP solutions, like Presto, require data to live in memory. That’s fast, but you need to have a _lot_ of memory for big datasets. ClickHouse processes from disk, which is better for smaller instances too.

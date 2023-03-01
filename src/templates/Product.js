@@ -16,7 +16,24 @@ import React from 'react'
 import { shortcodes } from '../mdxGlobalComponents'
 import SectionLinks from 'components/SectionLinks'
 import PostLayout from 'components/PostLayout'
-import { ProductIcons } from 'components/ProductIcons/ProductIcons'
+import {
+    API,
+    AppLibrary,
+    CorrelationAnalysis,
+    DataWarehouse,
+    EventPipelines,
+    Experiments,
+    FeatureFlags,
+    Funnels,
+    Heatmaps,
+    PathAnalysis,
+    PosthogMonochrome,
+    SelfHosting,
+    SessionRecording,
+    TeamCollaboration,
+    TopFeatures,
+    Trends,
+} from 'components/ProductIcons'
 import { Check } from 'components/Icons/Icons'
 
 const features = [
@@ -24,49 +41,49 @@ const features = [
     {
         name: 'Funnels',
         url: '/product/funnels',
-        icon: ProductIcons.funnels,
+        icon: <Funnels />,
     },
     {
         name: 'Graphs & trends',
         url: '/product/trends',
-        icon: ProductIcons.trends,
+        icon: <Trends />,
     },
     {
         name: 'Path analysis',
         url: '/product/user-paths',
-        icon: ProductIcons.pathAnalysis,
+        icon: <PathAnalysis />,
     },
     {
         name: 'Team collaboration',
         url: '/product/collaboration',
-        icon: ProductIcons.teamCollaboration,
+        icon: <TeamCollaboration />,
     },
     { name: 'Visualization' },
     {
         name: 'Session recording',
         url: '/product/session-recording',
-        icon: ProductIcons.sessionRecording,
+        icon: <SessionRecording />,
     },
     {
         name: 'Heatmaps',
         url: '/product/heatmaps',
-        icon: ProductIcons.heatmaps,
+        icon: <Heatmaps />,
     },
     { name: 'Experimentation' },
     {
         name: 'Feature flags',
         url: '/product/feature-flags',
-        icon: ProductIcons.featureFlags,
+        icon: <FeatureFlags />,
     },
     {
         name: 'Experiments',
         url: '/product/experimentation-suite',
-        icon: ProductIcons.experiments,
+        icon: <Experiments />,
     },
     {
         name: 'Correlation analysis',
         url: '/product/correlation-analysis',
-        icon: ProductIcons.correlationAnalysis,
+        icon: <CorrelationAnalysis />,
     },
 ]
 
@@ -74,22 +91,22 @@ const menu = [
     {
         name: 'Overview',
         url: '/product#overview',
-        icon: ProductIcons.posthogMonochrome,
+        icon: <PosthogMonochrome />,
     },
     {
         name: 'Top features',
         url: '/product#top-features',
-        icon: ProductIcons.topFeatures,
+        icon: <TopFeatures />,
         children: features.map(({ name, url }) => ({ name, url })),
     },
-    { name: 'Apps', url: '/product#apps', icon: ProductIcons.appLibrary },
-    { name: 'Event pipelines', url: '/product#event-pipelines', icon: ProductIcons.eventPipelines },
-    { name: 'Data warehouse', url: '/product#data-warehouse', icon: ProductIcons.dataWarehouse },
-    { name: 'Self-hosting', url: '/product#self-hosting', icon: ProductIcons.selfHosting },
-    { name: 'API', url: '/product#api', icon: ProductIcons.api },
+    { name: 'Apps', url: '/product#apps', icon: <AppLibrary /> },
+    { name: 'Event pipelines', url: '/product#event-pipelines', icon: <EventPipelines /> },
+    { name: 'Data warehouse', url: '/product#data-warehouse', icon: <DataWarehouse /> },
+    { name: 'Self-hosting', url: '/product#self-hosting', icon: <SelfHosting /> },
+    { name: 'API', url: '/product#api', icon: <API /> },
 ]
 
-const Container = ({ children }) => <div className="max-w-5xl mx-auto px-12">{children}</div>
+const Container = ({ children }) => <div className="max-w-5xl mx-auto px-5 lg:px-6 xl:px-12">{children}</div>
 
 export default function Product({ data, location }) {
     const { pageData, documentation } = data
@@ -150,8 +167,9 @@ export default function Product({ data, location }) {
                 hideSidebar
                 contentContainerClassName="w-full"
                 article={false}
+                darkMode={false}
             >
-                <div className="border-b border-gray-accent-light border-dashed py-3 lg:-mt-12">
+                <div className="border-b border-gray-accent-light border-dashed py-3 -mt-4 lg:-mt-12">
                     <div className="flex justify-between items-center max-w-5xl mx-auto px-5">
                         <div className="md:flex-1">
                             {previous?.url && (

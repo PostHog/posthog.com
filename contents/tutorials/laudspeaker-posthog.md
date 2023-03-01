@@ -1,5 +1,5 @@
 ---
-title: Automating users journeys with PostHog with Laudspeaker
+title: Automating user journeys with PostHog and Laudspeaker
 sidebar: Docs
 showTitle: true
 author: ['laudspeaker']

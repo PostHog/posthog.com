@@ -36,13 +36,13 @@ If you want to run experiments as well, we recommend reading our guide to the [b
 
 ![PostHog](../images/blog/open-source-feature-flags/posthog-feature-flags.png)
 
-PostHog is an all-in-one [product analytics platform](https://posthog.com/product) that captures and visualizes all of the data your team needs in one place. Complete with Session Recording, Heatmaps, Path analysis, Funnels and more, it’s a great choice if you want to build a comprehensive, data-driven product strategy, fast.
+PostHog is an all-in-one [Product OS](https://posthog.com/product) that captures and visualizes all of the data your team needs in one place. Complete with product analytics, feature flags, session recording, heatmaps, funnels and more, it’s a great choice if you want to build a comprehensive, data-driven product strategy, fast.
 
-As well as [Feature Flags](https://posthog.com/docs/user-guides/feature-flags), you can take advantage of the toggles in the [Experimentation suite](https://posthog.com/docs/user-guides/experimentation) to test hypotheses on product changes with A/B tests or define user segments for feature access. [Multivariate flags](https://posthog.com/docs/user-guides/feature-flags#multivariate-feature-flags-beta) allow you to test several variants of the same interchangeable content.
+PostHog's [feature flags](https://posthog.com/docs/user-guides/feature-flags) also power its [experimentation suite](https://posthog.com/docs/user-guides/experimentation), so you can test product changes with A/B tests or define user segments for feature access. [Multivariate flags](https://posthog.com/docs/user-guides/feature-flags#multivariate-feature-flags-beta) allow you to test several variants of the same interchangeable elements.
 
 ### Who is PostHog for?
 
-PostHog is built primarily for engineers and other product-minded teams. With all of your analytics in one place, everyone in the organization is empowered to examine and act on user data. You can also self-host PostHog, which is ideal for any company with stringent data privacy needs.
+PostHog is built primarily for engineers and other product-minded teams. With all of your analytics in one place, everyone in the organization is empowered to examine and act on user data. You can also self-host PostHog Open Source, which is ideal for any company with stringent data privacy needs.
 
 ### Strengths
 
@@ -57,11 +57,11 @@ PostHog is built primarily for engineers and other product-minded teams. With al
 
 ### How much does it cost?
 
-Feature flags are a core feature of all editions, including the open source release. While multivariate feature flags are limited to paid plans, PostHog's paid plans are [free up to 1 million events every month](/pricing).
+Feature flags are a core feature of all editions, including the open source release. While multivariate feature flags are limited to paid plans, PostHog Cloud is [free up to 1 million events every month](/pricing).
 
 ### Open source license
 
-PostHog open source is available under an MIT license. Read more about [self-hosting PostHog](https://posthog.com/docs/self-host) in our docs.
+PostHog Open Source is available under an MIT license.
 
 <ArrayCTA />
 

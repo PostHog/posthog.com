@@ -1,6 +1,6 @@
 ---
 date: 2023-02-02
-title: Why 'Product Engineer' is most the fun role I've had in tech
+title: Why 'Product Engineer' is the most fun role I've had in tech
 rootPage: /blog
 sidebar: Blog
 showTitle: true

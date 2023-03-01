@@ -28,26 +28,24 @@ const BlogCategory = ({
                 hideSidebar
                 hideSurvey
             >
-                <div className="mt-6 mb-12">
-                    <Posts
-                        title="All posts"
-                        action={
-                            <p className="m-0 leading-none font-semibold text-sm opacity-50">
-                                Page {currentPage} of {numPages}
-                            </p>
-                        }
-                        posts={allPostsRecent.slice(0, 4)}
-                    />
-                    <NewsletterForm />
-                    <Posts posts={allPostsRecent.slice(4, 12)} />
-                    {allPostsRecent.length > 12 && (
-                        <>
-                            <CommunityCTA />
-                            <Posts posts={allPostsRecent.slice(12)} />
-                        </>
-                    )}
-                    <Pagination currentPage={currentPage} numPages={numPages} base={base} />
-                </div>
+                <Posts
+                    title="All posts"
+                    action={
+                        <p className="m-0 leading-none font-semibold text-sm opacity-50">
+                            Page {currentPage} of {numPages}
+                        </p>
+                    }
+                    posts={allPostsRecent.slice(0, 4)}
+                />
+                <NewsletterForm />
+                <Posts posts={allPostsRecent.slice(4, 12)} />
+                {allPostsRecent.length > 12 && (
+                    <>
+                        <CommunityCTA />
+                        <Posts posts={allPostsRecent.slice(12)} />
+                    </>
+                )}
+                <Pagination currentPage={currentPage} numPages={numPages} base={base} />
             </PostLayout>
         </Layout>
     )
