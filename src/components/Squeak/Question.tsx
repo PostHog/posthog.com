@@ -65,9 +65,9 @@ type QuestionProps = {
     question?: StrapiRecord<Question>
 }
 
-const useQuestion = (id: number) => {
+export const useQuestion = (id: number) => {
     const { apiHost } = useSqueak()
-    const { data, error } = useSWR<StrapiResult<Question>>(`${apiHost}/questions/${id}?populate=*`, async (url) => {
+    const { data, error } = useSWR<StrapiResult<Question>>(`${apiHost}/api/questions/${id}?populate=*`, async (url) => {
         const res = await fetch(url)
         return res.json()
     })
