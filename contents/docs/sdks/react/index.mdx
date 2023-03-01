@@ -38,7 +38,7 @@ With an initialized client instance:
 import { PostHogProvider } from 'posthog-js/react'
 import posthog from 'posthog-js'
 
-posthog.init(process.env.PUBLIC_POSTHOG_KEY, config)
+posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, config)
 
 export default function App({ Component, pageProps }: AppProps) {
     const router = useRouter()
@@ -66,7 +66,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
     return (
         <PostHogProvider
-            apiKey={process.env.PUBLIC_POSTHOG_KEY}
+            apiKey={process.env.NEXT_PUBLIC_POSTHOG_KEY}
             config={config}
         >
             <Component {...pageProps} />
@@ -174,6 +174,7 @@ export default function Home() {
         } else if (variantKey === 'variant-b') {
             setWelcomeMessage('Welcome to the beta!')
         }
+    }, [variantKey])
 
     return (
                 <>
@@ -206,8 +207,8 @@ export default function Home() {
                 {
                     welcomeMessage ? (
                         <div className="welcome-message">
-                            <h2>{payload.welcomeTitle}</h2>
-                            <p>{payload.welcomeMessage}</p>
+                            <h2>{payload?.welcomeTitle}</h2>
+                            <p>{payload?.welcomeMessage}</p>
                         </div>
                     ) : <div>
                         <h2>No welcome message</h2>
