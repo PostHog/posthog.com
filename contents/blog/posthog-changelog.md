@@ -29,6 +29,8 @@ Let's get the biggest and most important updates out of the way first. We've upd
 You can now control Max ([that's his name](/handbook/company/team)) using the WASD keys, and we've also added a physics engine to give him a proper sense of gravity and inertia. You can make him jump with `W`, or spin with `S`. 
 
 ### React library
+![react posthog](../images/blog/array/react_posthog.png)
+
 Our Head of Product, Luke, decided to stretch his engineering skills this week and added a new React library which makes it easy to use product analytics and feature flags with React and Next.js apps, into PostHog. This is available in `posthog-js` from version 1.50.
 
 You can now integrate PostHog using the `PostHogProvider`. PostHog then provides a bunch of hooks include `usePostHog` to access the initialized client, and `useFeatureEnabled` and `useFeaturePayload` for using feature flags. Checkout [the React docs](/docs/sdks/react) or [the Next.js docs][docs/integrate/third-party/next-js] for more information.
