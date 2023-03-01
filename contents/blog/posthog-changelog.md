@@ -28,6 +28,11 @@ Let's get the biggest and most important updates out of the way first. We've upd
 
 You can now control Max ([that's his name](/handbook/company/team)) using the WASD keys, and we've also added a physics engine to give him a proper sense of gravity and inertia. You can make him jump with `W`, or spin with `S`. 
 
+### React library
+Our Head of Product, Luke, decided to stretch his engineering skills this week and added a new React library which makes it easy to get data about traffic and product usage from React apps, into PostHog.
+
+Even better, Luke also started testing his writing skills by updating [the React docs](/docs/sdks/react) to include everything you need to get started with the full PostHog suite, including feature flags! 
+
 ### Dashboard templates
 ![templates](../images/blog/array/templates.png)
 
@@ -44,7 +49,6 @@ The folks at [Outfunnel](https://outfunnel.com/) have contributed a new app whic
 We've added a new element selector to [the PostHog toolbar](/manual/toolbar) so that it's easier to create actions and events in some circumstances. 
 
 The new modal shows the element wrapping a selected element, so that subsequent clicks build up a selection. Want to give it a go? We've updated [our toolbar tutorial](/tutorials/toolbar) with instructions.
-
 
 ## February 24, 2023
 
