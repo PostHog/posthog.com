@@ -34,27 +34,27 @@ In this guide, we'll cover:
 
 ### 1. PostHog is your single source of truth
 
-Heap, like Amplitude and Mixpanel, focuses mainly on product analytics. That means you need to adopt multiple tools for things like session recording, feature management, and A/B testing. PostHog integrates all these features into one platform, so it becomes your single source of truth. We believe you should own your data, so exporting to data warehouses is free on all tiers.
+Heap, like Amplitude and Mixpanel, focuses mainly on product analytics. That means you need to adopt multiple tools for things like session recording, feature management, and A/B testing. PostHog integrates all these features into one platform, so it becomes your single source of truth. We believe you should own your data, so data exports are free on all tiers.
 
-### 2. It's built for engineers
+### 2. PostHog's built for engineers
 
 Anyone can use PostHog – just [ask our marketing team](/blog/posthog-marketing) – but our goal is to [help engineers be better at product](/blog/helping-engineers-to-product), so they spend less time shipping tickets, and more time shipping impactful features. 
 
 ### 3. Transparent pricing. No forced sales calls.
 
-Signing up to PostHog is as simple as creating an account and [adding our JavaScript snippet](/docs/integrate). That's it. Want more features? Just put in a card and pay for what you use. We have a [generous free tier](/pricing), so you may not pay anything at all. No sales calls. No optional add-ons. No confusing product tiers. Just sign up and start building.
+Signing up to PostHog is as simple as creating an account and [adding our JavaScript snippet](/docs/integrate) to your site or app. That's it. Want more features? Just put in a card and pay for what you use. We have a [generous free tier](/pricing), so you may not pay anything at all. No sales calls. No paid add-ons. No confusing product tiers. Just sign up and start building.
 
 <ArrayCTA />
 
 ## Feature comparison
 
-PostHog has two plans (Free and Scale) to Heap's four (Free, Growth, Pro and Premier). In this guide, we'll be comparing PostHog's Scale plan to Heap Pro.
+PostHog has two plans (Free and Scale) to Heap's four (Free, Growth, Pro and Premier). In this guide, we'll compare PostHog's Scale plan to Heap Pro.
 
 ### Core features
 
 While it recently added a basic session recording feature, Heap is best-known as a pure product analytics tool like Mixpanel or Amplitude.
 
-PostHog includes product analytics, but also integrates session recording, feature flagging, A/B testing, and more into its all-in-one platform. This removes the need to run multiple different tools, saving money and implementation time.
+PostHog includes product analytics, but also integrates session recording, feature flagging, A/B testing, and more into its all-in-one platform. This removes the need to run multiple tools, saving money and implementation time.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -119,7 +119,7 @@ PostHog includes product analytics, but also integrates session recording, featu
 
 - **Experiments:** Heap doesn't have a built-in testing feature, though it does integrate with a number of popular A/B testing tools, such as AB Tasty and Optimizely. PostHog has a [built-in experimentation suite](/product/experimentation-suite) for running A/B and multivariate experiments.
 
-- **Feature flagging:** [Feature flag benefits](/blog/feature-flag-benefits-use-cases) include the ability to stagger new feature releases, ship new features to test groups or specific cohorts, manage feature access, and more. PostHog's feature flag product is built-in and tightly integrated with all other products.
+- **Feature flagging:** The [benefits of feature flags](/blog/feature-flag-benefits-use-cases) include the ability to stagger new feature releases, ship to test groups or specific cohorts, manage feature access, and more. PostHog's feature flag product is built-in and tightly integrated with all other products.
 
 ### Product analytics
 
@@ -215,7 +215,7 @@ Neither currently offers an SQL editor for writing custom queries, but it's in p
 </div>
 
 > ### Why autocapture?
-> Heap and PostHog are both autocapture events. This means you can just deploy a snippet and events (e.g. user clicked button, user viewed paged, etc.) are captured automatically, regardless of whether an event has been manually defined. This allows teams to ship new features faster as you don't need to update your event tracking every time you ship a change.
+> Heap and PostHog both autocapture events. This means you can just deploy a snippet and events (e.g. user clicked button, user viewed paged, etc.) are captured automatically, regardless of whether an event has been manually defined. Teams don't need to update your event tracking every time they ship a change.
 >
 > Alternative tools, like Amplitude and Mixpanel, force you to manually instrument every event you want to track. This means you can only create queries based on events you've chosen to track in advance. Every time you think of something new to track, you need to instrument an event and then wait for the data.
 >
@@ -223,7 +223,7 @@ Neither currently offers an SQL editor for writing custom queries, but it's in p
 >
 > To quote Tony Stark: “An intelligence agency which fears intelligence is, historically, not awesome.”
 >
-> That said, you can turn off, or fine-tine, autocapture if you are concerned about capturing too many events. See: See our integration docs for [more on configuring autocapture](/docs/integrate/ingest-live-data) 
+> That said, you can turn off, or fine-tune, autocapture if you are concerned about capturing too many events. See our integration docs for [more on configuring autocapture](/docs/integrate/ingest-live-data) 
 
 <ArrayCTA />
 
@@ -249,7 +249,7 @@ Session recording is an essential tool for understanding how people use your pro
             <td>Free recordings before being charged</td>
         </tr>
         <tr>
-            <td><strong>Desktop app recording</strong></td>
+            <td><strong>Browser app recording</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Watch real users use your product; diagnose bugs</td>
@@ -300,7 +300,7 @@ Session recording is an essential tool for understanding how people use your pro
 </table>
 </div>
 
-- **Recording retention:** Heap keeps all recordings for 90 days, but retains any **viewed recordings** for 10 years. PostHog retains all recordings for three weeks, but retains recordings saved to a playlist forever. PostHog also allows you to download recordings to your computer as a `.json` file for safe keeping.
+- **Recording retention:** Heap keeps all recordings for 90 days, but retains any **viewed recordings** for 10 years. PostHog retains all recordings for three weeks, but retains recordings saved to a playlist forever. PostHog also allows you to download recordings as a `.json` file for safe keeping.
 
 <ArrayCTA />
 
@@ -308,7 +308,7 @@ Session recording is an essential tool for understanding how people use your pro
 
 This section includes a curated summary of the most popular integrations in PostHog and Heap, organized by category.
 
-See the [PostHog Apps](/apps) and [Heap integrations](https://help.heap.io/category/integrations/) pages for complete lists of all available integrations.
+See the [PostHog Apps](/apps) and [Heap integrations](https://help.heap.io/category/integrations/) pages for complete lists of available integrations.
 
 **Categories:**
 
@@ -416,7 +416,7 @@ In Heap, data warehouse integrations are only available on Heap Premier, or as a
 </table>
 </div>
 
-- **Exporting events in PostHog:** PostHog provides numerous methods for exporting event data, including via the PostHog UI (for small volumes), the Events API (with rate limits), via dedicated export apps (no limits). See our [data export documentation](/docs/migrate/export-events) for more information.
+- **Exporting events in PostHog:** PostHog provides numerous methods for exporting event data, including via the PostHog UI (for small volumes), the Events API (with rate limits), or via dedicated export apps (no limits). See our [data export documentation](/docs/migrate/export-events) for more information.
 
 ### Data in
 
