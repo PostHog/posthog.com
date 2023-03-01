@@ -9,11 +9,11 @@ This guide will walk you through an example integration of PostHog using Next.js
 
 You can see a working example of this integration in our [Next.js demo app](https://github.com/PostHog/posthog-js/tree/master/playground/nextjs)
 
-Next.js has both client and server-side rendering. We'll cover both in this tutorial.
+Next.js has both client and server-side rendering. We'll cover both in this guide.
 
 ## Prerequisites
 
-To follow this tutorial along, you need:
+To follow this guide along, you need:
 
 1. a PostHog account (either [Cloud](/docs/getting-started/cloud) or [self-hosted](/docs/self-host))
 2. a running Next.js application
@@ -26,7 +26,7 @@ You can see a working example of this integration in our [Next.js demo app](http
 
 ## Server-side analytics
 
-Sever-side rendering is a Next.js feature that allows you to render pages on the server instead of the client. This can be useful for SEO and has faster performance.
+Server-side rendering is a Next.js feature that enables you to render pages on the server instead of the client. This can be useful for SEO, performance, and user experience.
 
 To integrate PostHog into your Next.js for server-side analytics you should use the [Node SDK](/docs/sdks/node).
 
@@ -97,6 +97,6 @@ export async function getServerSideProps(ctx) {
 
 ## Further reading
 
-- [Complete guide to event tracking](/tutorials/event-tracking-guide)
+- [How to set up Next.js analytics, feature flags, and more](/tutorials/nextjs-analytics)
 - [Tracking pageviews in single page apps (SPA)](/tutorials/spa)
 - [How (and why) our marketing team uses PostHog](/blog/posthog-marketing)

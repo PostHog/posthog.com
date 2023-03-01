@@ -14,16 +14,16 @@ npm install --save posthog-js
 
 </MultiLanguage>
 
-2. Add your environment variables to your `.env.local` file and to your hosting provider (e.g. NextJS). You can find your project API key in the PostHog app under Project Settings > API Keys.
+2. Add your environment variables to your `.env.local` file and to your hosting provider (e.g. Vercel, Netlify, AWS). You can find your project API key in the PostHog app under Project Settings > API Keys.
 
 ```shell file=.env.local
-NEXT_PUBLIC_POSTHOG_KEY=<ph_project_api_key>
-NEXT_PUBLIC_POSTHOG_HOST=<ph_instance_address>
+PUBLIC_POSTHOG_KEY=<ph_project_api_key>
+PUBLIC_POSTHOG_HOST=<ph_instance_address>
 ```
 
-3. Integrate PostHog at the root of your app (`pages/_app.js` for NextJS).
+3. Integrate PostHog at the root of your app (`pages/_app.js` for Next.js).
 
-```jsx
+```js
 import { useEffect } from 'react'
 import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
@@ -33,8 +33,8 @@ import { PostHogProvider } from 'posthog-js/react'
 
 // Check that PostHog is client-side (used to handle Next.js SSR)
 if (typeof window !== 'undefined') {
-    posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
-        api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://app.posthog.com',
+    posthog.init(process.env.PUBLIC_POSTHOG_KEY, {
+        api_host: process.env.PUBLIC_POSTHOG_HOST || 'https://app.posthog.com',
         // Disable in development
         loaded: (posthog) => {
           if (process.env.NODE_ENV === 'development') posthog.opt_out_capturing()

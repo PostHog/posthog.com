@@ -28,17 +28,17 @@ import ReactInstall from "./\_snippets/install.mdx"
 
 ### PostHog Provider
 
-We provide a React context provider that makes it easy to access the posthog-js library in your app.
+We provide a React context provider that makes it easy to access the `posthog-js` library in your app.
 
 The provider can either take an initialized client instance OR an API key and an optional config object.
 
 With an initialized client instance:
 
-```jsx
+```js
 import { PostHogProvider } from 'posthog-js/react'
 import posthog from 'posthog-js'
 
-posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, config)
+posthog.init(process.env.PUBLIC_POSTHOG_KEY, config)
 
 export default function App({ Component, pageProps }: AppProps) {
     const router = useRouter()
@@ -58,7 +58,7 @@ or
 
 With an API key and optional config object:
 
-```jsx
+```js
 import { PostHogProvider } from 'posthog-js/react'
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -66,7 +66,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
     return (
         <PostHogProvider
-            apiKey={process.env.NEXT_PUBLIC_POSTHOG_KEY}
+            apiKey={process.env.PUBLIC_POSTHOG_KEY}
             config={config}
         >
             <Component {...pageProps} />
@@ -77,7 +77,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
 ### Using posthog-js functions
 
-By default, the posthog-js library will automatically capture pageviews and clicks on elements.
+By default, the posthog-js library automatically captures pageviews, clicks on elements, inputs, and more.
 
 If you want to use the library to identify users, capture events, or use other features, you can access the initialized posthog-js library using the `usePostHog` hook.
 
@@ -85,7 +85,7 @@ If you want to use the library to identify users, capture events, or use other f
 
 All the methods of the library are available and can be used as described in the [posthog-js documentation](/docs/sdks/js).
 
-```jsx
+```js
 import Head from 'next/head'
 import { usePostHog } from 'posthog-js/react'
 import { useUser } from '../lib/user'
@@ -118,11 +118,11 @@ export default function Home() {
 }
 ```
 
-### Feature Flags
+### Feature flags
 
 Feature flags are a powerful way to test new features and roll them out to a subset of your users. You can use feature flags to enable/disable features, change the behavior of a feature, or even change the UI of a feature.
 
-We provide several hooks to make it easy to use feature flags in your React app.
+PostHog provides several hooks to make it easy to use feature flags in your React app.
 
 | Hook | Description |
 | --- | --- |
@@ -133,7 +133,7 @@ We provide several hooks to make it easy to use feature flags in your React app.
 
 For example, to show a welcome message if the feature flag is enabled:
 
-```jsx
+```js
 import Head from 'next/head'
 import { useFeatureFlagEnabled } from 'posthog-js/react'
 
@@ -161,7 +161,7 @@ export default function Home() {
 
 To show a different message depending on the variant key:
 
-```jsx
+```js
 import Head from 'next/head'
 import { useFeatureFlagVariantKey } from 'posthog-js/react'
 
@@ -198,7 +198,7 @@ export default function Home() {
 
 To load the message and title from the feature flag payload:
 
-```jsx
+```js
 import Head from 'next/head'
 import { useFeatureFlagPayload } from 'posthog-js/react'
 
