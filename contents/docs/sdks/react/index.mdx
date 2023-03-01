@@ -34,7 +34,7 @@ The provider can either take an initialized client instance OR an API key and an
 
 With an initialized client instance:
 
-```js
+```react
 import { PostHogProvider } from 'posthog-js/react'
 import posthog from 'posthog-js'
 
@@ -58,7 +58,7 @@ or
 
 With an API key and optional config object:
 
-```js
+```react
 import { PostHogProvider } from 'posthog-js/react'
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -85,7 +85,7 @@ If you want to use the library to identify users, capture events, or use other f
 
 All the methods of the library are available and can be used as described in the [posthog-js documentation](/docs/sdks/js).
 
-```js
+```react
 import Head from 'next/head'
 import { usePostHog } from 'posthog-js/react'
 import { useUser } from '../lib/user'
@@ -133,7 +133,7 @@ PostHog provides several hooks to make it easy to use feature flags in your Reac
 
 For example, to show a welcome message if the feature flag is enabled:
 
-```js
+```react
 import Head from 'next/head'
 import { useFeatureFlagEnabled } from 'posthog-js/react'
 
@@ -161,7 +161,7 @@ export default function Home() {
 
 To show a different message depending on the variant key:
 
-```js
+```react
 import Head from 'next/head'
 import { useFeatureFlagVariantKey } from 'posthog-js/react'
 
@@ -198,7 +198,7 @@ export default function Home() {
 
 To load the message and title from the feature flag payload:
 
-```js
+```react
 import Head from 'next/head'
 import { useFeatureFlagPayload } from 'posthog-js/react'
 

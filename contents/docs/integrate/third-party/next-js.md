@@ -43,7 +43,7 @@ We can then use the `getServerSideProps` function to send events and pass the fe
 
 This looks like this:
 
-```js
+```react
 // pages/posts/[id].js
 import { useContext, useEffect, useState } from 'react'
 import { getServerSession } from "next-auth/next"
