@@ -31,7 +31,7 @@ The central challenge for AssemblyAI was the sheer volume of events the team nee
         size="md"
         name="Alberto Santos"
         title="Web & Brand Lead, AssemblyAI"
-        quote={`“PostHog helps us debug support issues, because we push errors to PostHog as event. It may not be exactly what PostHog was intended for, but it is really useful and shows how adaptable PostHog is.”`}
+        quote={`“PostHog helps us debug support issues, because we push errors to PostHog as events. It may not be exactly what PostHog was intended for, but it is really useful and shows how adaptable PostHog is.”`}
     />
 </BorderWrapper>
 
