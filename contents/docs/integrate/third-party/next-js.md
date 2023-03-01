@@ -101,6 +101,9 @@ export async function getServerSideProps(ctx) {
 }
 ```
 
+> **Note**: Make sure to _always_ call `client.shutdownAsync()` after sending events from the server-side.
+> PostHog queues events into larger batches, and this call will force all batched events to be flushed immediately.
+
 ## Further reading
 
 - [How to set up Next.js analytics, feature flags, and more](/tutorials/nextjs-analytics)
