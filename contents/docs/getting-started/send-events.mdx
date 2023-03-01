@@ -8,28 +8,16 @@ import SendEventBackend from "./\_snippets/send-event-backend.mdx"
 
 Once your PostHog instance is up and running, the next step is to start sending events.
 
-## 1. Initialize PostHog <Badge>Client</Badge>
+We recommend starting with autocapture for your web app as it's the quickest way to get set up, gives you full coverage, and avoids manually adding custom events. On top you can add custom events to track the most important events.
 
-<MultiLanguage selector="tabs">
+> **Tip**: Autocapture sends lots of events. We provide a generous free tier but as you scale you might switch to mainly using [custom events](#3-capture-custom-events-client) on the areas of the product that are more stable and [tune autocapture](/docs/sdks/js#tuning-autocapture) to your needs.
 
-<!-- prettier-ignore -->
-```html label=Snippet
-<script>
-    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-    posthog.init('<ph_project_api_key>', {api_host: '<ph_instance_address>'})
-</script>
-```
-
-</MultiLanguage>
-
-Paste this snippet within your website's `<head>` tags - ideally just inside the closing `</head>` tag - on all pages you want to track.
-
-## 2. Setup autocapture <Badge>Client</Badge>
+## 1. Setup autocapture <Badge>Client</Badge>
 
 When you call `posthog.init` the PostHog JS library begins automatically capturing user events:
 
--   **Page views**, including the URL
--   **Autocaptured events**, such as any click, change of input, or submission associated with `a`, `button`, `form`, `input`, `select`, `textarea`, and `label` tags
+- **Page views**, including the URL
+- **Autocaptured events**, such as any click, change of input, or submission associated with `a`, `button`, `form`, `input`, `select`, `textarea`, and `label` tags
 
 ### Hiding certain elements
 
@@ -42,7 +30,7 @@ However, if there are specific elements you want to ensure aren't captured, you 
 
 > **Tip**: Including the `ph-no-capture` class will also exclude elements from being shown in session recordings.
 
-## 3. Capture custom events <Badge>Client</Badge>
+## 2. Capture custom events <Badge>Client</Badge>
 
 Setting up autocapture is a great way to get started, but typically when integrating tracking into your product, you'll want to send additional events for when specific things occur.
 
@@ -51,11 +39,12 @@ On the client-side, we can use the `capture` method, with the first argument bei
 <MultiLanguage selector="tabs">
 
 ```js
-posthog.capture('Sign-up button clicked')
+posthog.capture('User signed up')
 ```
 
 </MultiLanguage>
 
+> **Tip**: We recommend adding custom events for the most important actions in your product that are unlikely to change, such as user sign-ups, purchases, and when features are used.
 > While you can name your events however you'd like, we typically recommend using a '[object] [verb]' format, where '[object]' is whatever entity the action relates to, and the '[verb]' is the action itself.
 > Some examples of this could include: `Project created`, `User signed up`, or `Invite sent`.
 
@@ -64,26 +53,30 @@ At first, it may seem somewhat unnecessary to send these custom events when we a
 1. Sending custom properties on an event
 2. Keeping events consistent over time
 
-### Sending custom properties
+### Sending custom properties on an event
 
-Suppose you're building an e-commerce store and want to track whenever a user adds an item to their cart.
-With autocapture, you'll already see `Clicked button with text 'Add to cart'` events, but these won't have any information on the items the user added!
+Suppose you're building an Saas app and want to track when a user purchases a plan. With autocapture, you'll already see `Clicked button with text 'Purchase'` events, but these won't have any information on which plan the user purchased!
 
 We include extra information on events by adding a second parameter in our capture call, which contains a map of custom property names and values.
 
 <MultiLanguage selector="tabs">
 
 ```js
-posthog.capture('Item added to cart', {
-    sku: 'XYZ12345',
+posthog.capture('Plan purchased', {
     price: 1599,
-    item: 'Blue Hedgehog shirt',
+    planId: 'XYZ12345',
+    frequency: 'monthly',
+    features: {
+        'SSO': true,
+        'Custom branding': true,
+        'Custom domains': false,
+    }
 })
 ```
 
 </MultiLanguage>
 
-Later, we can use these properties to filter events based on a particular property value, or to calculate the aggregate values of a property over time.
+Later, we can use these properties to filter events based on a particular planId, or to calculate the aggregate values of a property over time.
 
 > **Tip**: Always include more properties than you might need at first!
 > There's no limit to the number of properties an event can have, and your future self will thank you once again when you need to access a property that you may not have thought you needed.
@@ -96,7 +89,7 @@ Continuing with the example above, if we changed the text for our add to cart bu
 
 While combining these two events using [Actions](/manual/actions) to fix this drift is possible, manually track these high-value actions with custom events is far more reliable.
 
-## 4. Capture backend events <Badge>Optional</Badge> <Badge>Server</Badge>
+## 3. Capture backend events <Badge>Optional</Badge> <Badge>Server</Badge>
 
 We've now covered sending events using autocapture and custom tracking, but up until now we've only been sending events from our frontend website.
 While for simple websites this is all you'll need to set up, if you're building a web or mobile app with a backend, we also highly recommend setting up tracking from your server in addition to your frontend.
@@ -119,6 +112,8 @@ In general, our guidance is to track events on both the frontend and backend whe
 
 That being said, there are certain events that we highly recommend tracking from the server-side specifically:
 
-1. **Sign-up events**: Given how high value these events are, they should always be sent from the server-side whenever possible.
+1. **Sign-up events**: Given how high value these events are, you should also send a server-side even whenever possible
 2. **C(R)UD events**: This is a broad class of events, but generally speaking, whenever you receive an API request to create or update a specific resource within your application, it's useful to forward these to PostHog. We also recommend including context about the request itself in the event (latency, errors, any properties passed in the request payload, etc.)
 3. **Backend jobs**: PostHog is for more than just optimizing your frontend! It can often be useful to send events whenever backend jobs or workflows are kicked off, which allows you to analyze them within PostHog.
+
+> **Tip**: We recommend using different event names for your backend and frontend events to avoid the chance of duplicate counting. Often these should be the CRUD events themselves e.g. `User created` for the backend and `User signed up` for the frontend. Additionally, you can use the `source` property to filter for events from a specific source.

@@ -6,7 +6,8 @@ nextPage: ./actions-and-insights.mdx
 import Badge from "./\_snippets/badge.mdx"
 import IdentifyUserBackend from "./\_snippets/identify-user-backend.mdx"
 
-PostHog allows you to identify your users with an ID of your choice, which enables PostHog to associate events with specific users, track them on different platforms, and connect events from before and after users log in for the first time.
+PostHog allows you to identify your users with an ID of your choice. This enables PostHog to associate events with specific users, track them on different platforms, and connect events from before and after users log in for the first time.
+
 All events within PostHog are associated with a specific person, either an **Anonymous person** or an **Identified person**, typically based on whether they're logged in to your application or not.
 
 Identifying users is done using the `identify` method in one of our SDKs.
@@ -16,8 +17,7 @@ Identifying users is done using the `identify` method in one of our SDKs.
 When a user starts browsing on your website or app, they'll be automatically assigned an **anonymous ID**, which is then stored locally and allows us to track anonymous users even across different sessions.
 This anonymous ID is created using the user's device ID and will typically look like `17b845b08de74-033c497ed2753c-35667c03-1fa400-17b845b08dfd55`.
 
-Leveraging the device ID works very well for keeping track of users across a single session but becomes far less effective as time goes on. More importantly, it only works when a user accesses your app from a single device, which is rarely the case.
-For these reasons, we will use the `identify` method to associate events with a logged-in user rather than simply the device they are using.
+In order to track users across different devices, we will use the `identify` method to associate events with a logged-in user rather than simply the device they are using.
 
 ## 2. Identifying a user when they sign up <Badge>Client</Badge> <Badge>Server</Badge>
 
@@ -46,7 +46,7 @@ On the client side, this is done by calling `identify` with the same `distinct_i
 posthog.identify('distinct_id')
 ```
 
-Calling `identify` will do two things:
+Calling `identify` from the frontend will do two things:
 
 1. PostHog will merge all the previous events from our anonymous user into our new user (`distinct_id`)
 2. All future events will be associated with this new user (`distinct_id`), even if we still use their anonymous ID
@@ -62,7 +62,11 @@ In most cases, all we need to do is call `identify` whenever they return back to
 
 ```js
 // The same 'distinct_id' as before
-posthog.identify('distinct_id')
+posthog.identify('distinct_id', {
+    name: 'Max Hedgehog',
+    email: 'max@hedgehogmail.com',
+    // ... any other user properties
+}
 ```
 
 You'll usually want to call `identify` every time your application initially loads, or directly after log in if a user first landed on your website while logged out.
@@ -73,9 +77,12 @@ There's no gotcha's with calling `identify` multiple times for the same user **a
 ## 4. Setting user properties <Badge>Client</Badge> <Badge>Server</Badge>
 
 In addition to adding extra data to specific events like we discussed earlier, it's also very common to want to also set properties on users as well.
-Tracking properties on users becomes incredibly crucial when we start creating insights, which we'll cover in the next guide.
 
-In PostHog, we can include special `$set` and `$set_once` properties on events to set properties for whichever user is sending the event.
+As shown above, each time you call `identify`, you can pass in a `properties` object which will be set on the user. We suggest passing in all the user properties you have available each time they login, as this will ensure that their user profile on PostHog is up to date.
+
+Tracking properties on users becomes incredibly useful when we start creating insights, which we'll cover in the next guide.
+
+In PostHog, we can also include special `$set` and `$set_once` properties on events to set properties for whichever user is sending the event.
 
 ### What is the difference between `$set` and `$set_once`?
 
@@ -89,13 +96,13 @@ In summary: `set` always overrides, `set_once` only writes when the property doe
 For example:
 
 ```js
-posthog.people.set({ location: 'London' })
-posthog.people.set({ location: 'Rome' })
+posthog.people.set({ plan: 'free_trail' })
+posthog.people.set({ plan: 'premium' })
 
-// { location: 'Rome' }
+// { plan: 'premium' }
 
-posthog.people.set_once({ initial_location: 'London' })
+posthog.people.set_once({ initial_location: 'London })
 posthog.people.set_once({ initial_location: 'Rome' })
 
-// { location: 'London' }
+// { initial_location: 'London' }
 ```

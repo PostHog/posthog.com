@@ -7,6 +7,20 @@ hideAnchor: true
 
 import { InstallChapter, SendEventsChapter, IdentifyUsersChapter, ActionsAndInsightsChapter, GroupAnalyticsChapter } from "components/GettingStarted"
 
+Welcome 👋! This guide will get you set up with PostHog for your web app and backend.
+
+We recommend going in order (it takes about **30 minutes**) or you can jump to the sections you're most interested in.
+
+Requirements:
+- Create a PostHog account (you can do this for free <a href={`https://${posthog?.isFeatureEnabled &&posthog?.isFeatureEnabled('direct-to-eu-cloud')
+                                            ? 'eu'
+                                            : 'app'
+                                    }.posthog.com/signup`}>here</a>)
+- Have a web app and backend you want to track
+- Some basic knowledge of Javascript
+
+<div className="mb-6"></div>
+
 <InstallChapter />
 
 <SendEventsChapter />
