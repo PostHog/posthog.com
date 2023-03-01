@@ -271,19 +271,11 @@ NEXT_PUBLIC_POSTHOG_HOST=<ph_instance_address>
 
 Then install [posthog-js](https://github.com/posthog/posthog-js) using your package manager:
 
-<MultiLanguage selector="tabs">
-
-```shell file=Yarn
+```shell
 yarn add posthog-js
-```
-
-or
-
-```shell file=NPM
+# or
 npm install --save posthog-js
 ```
-
-</MultiLanguage>
 
 And finally add the PostHog provider to your app
 

@@ -33,7 +33,9 @@ To integrate PostHog into your Next.js for server-side analytics you should use 
 
 First, install the `posthog-node` library:
 
-```bash
+```shell
+yarn add posthog-node
+# or
 npm install --save posthog-node
 ```
 
