@@ -1,4 +1,44 @@
+import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
+import Slugger from 'github-slugger'
+
+const slugger = new Slugger()
+
+const query = graphql`
+    query Chapters {
+        allMdx(filter: { fileAbsolutePath: { regex: "/docs/getting-started/" } }) {
+            nodes {
+                fields {
+                    slug
+                }
+                frontmatter {
+                    title
+                    description
+                }
+                headings {
+                    depth
+                    value
+                }
+            }
+        }
+    }
+`
+
+const filterHeadings = (slug: string, headings: any[]) => {
+    return headings
+        .filter((heading: any) => heading.depth === 2)
+        .map((heading: any) => {
+            const cleanHeading = heading.value
+                .replace(/^[0-9]+\.\s/, '')
+                .replace(/<[^>]*>[\w\d\s]*<\/[^>]*>/gm, '')
+                .trim()
+
+            return {
+                title: cleanHeading,
+                link: `${slug}#${slugger.slug(heading.value)}`,
+            }
+        })
+}
 
 type ChapterProps = {
     num: number
@@ -8,7 +48,7 @@ type ChapterProps = {
         title: string
         link: string
     }[]
-    children: React.ReactNode
+    children?: React.ReactNode
 }
 
 const Chapter: React.FC<ChapterProps> = ({ num, title, description, headings, children }) => {
@@ -36,94 +76,80 @@ const Chapter: React.FC<ChapterProps> = ({ num, title, description, headings, ch
 }
 
 export const InstallChapter: React.FC = () => {
+    const data = useStaticQuery(query)
+
+    const {
+        frontmatter: { title, description },
+    } = data.allMdx.nodes.find((node: any) => node.fields.slug === '/docs/getting-started/install')
+
     return (
         <Chapter
             num={1}
-            title="Install PostHog"
-            description="Add PostHog to your site with our plug-and-play snippet. Or use our custom SDKs for your favorite language."
+            title={title}
+            description={description}
             headings={[
                 { title: 'Snippet', link: '/docs/getting-started/install?tab=snippet' },
                 { title: 'SDKs', link: '/docs/getting-started/install?tab=sdks' },
                 { title: 'Integrations', link: '/docs/getting-started/install?tab=integrations' },
                 { title: 'API', link: '/docs/getting-started/install?tab=api' },
             ]}
-        >
-            <p>Install PostHog</p>
-        </Chapter>
+        ></Chapter>
     )
 }
 
 export const SendEventsChapter: React.FC = () => {
-    return (
-        <Chapter
-            num={2}
-            title="Send events"
-            description="Send events to PostHog from your app, website, or server. We'll automatically capture pageviews, clicks, and more."
-            headings={[
-                { title: 'Initialize PostHog', link: '/docs/getting-started/send-events#initialize-posthog' },
-                { title: 'Setup autocapture', link: '/docs/getting-started/send-events#setup-autocapture' },
-                { title: 'Capture custom events', link: '/docs/getting-started/send-events#capture-custom-events' },
-                { title: 'Capture backend events', link: '/docs/getting-started/send-events#capture-backend-events' },
-            ]}
-        >
-            <p>Send events</p>
-        </Chapter>
-    )
+    const data = useStaticQuery(query)
+    const node = data.allMdx.nodes.find((node: any) => node.fields.slug === '/docs/getting-started/send-events')
+    const {
+        frontmatter: { title, description },
+        headings,
+    } = node
+
+    const filteredHeadings = filterHeadings(node.fields.slug, headings)
+
+    return <Chapter num={2} title={title} description={description} headings={filteredHeadings}></Chapter>
 }
 
 export const IdentifyUsersChapter: React.FC = () => {
-    return (
-        <Chapter
-            num={3}
-            title="Identify users"
-            description="Connect events with users to better understand how people are using your product."
-            headings={[
-                { title: 'Anonymous users', link: '/docs/getting-started/identify-users' },
-                { title: 'Idenitify a users when they sign-up', link: '/docs/getting-started/identify-users' },
-                { title: 'Identify logged in users', link: '/docs/getting-started/identify-users' },
-                { title: 'Setting user properties', link: '/docs/getting-started/identify-users' },
-            ]}
-        >
-            <p>Identify users</p>
-        </Chapter>
-    )
+    const data = useStaticQuery(query)
+    const node = data.allMdx.nodes.find((node: any) => node.fields.slug === '/docs/getting-started/identify-users')
+    const {
+        frontmatter: { title, description },
+        headings,
+    } = node
+
+    const filteredHeadings = filterHeadings(node.fields.slug, headings)
+
+    return <Chapter num={3} title={title} description={description} headings={filteredHeadings}></Chapter>
 }
 
 export const ActionsAndInsightsChapter: React.FC = () => {
-    return (
-        <Chapter
-            num={4}
-            title="Actions and insights"
-            description="Now that we have some events, let's take a look at how we can analyze and explore our data."
-            headings={[
-                {
-                    title: 'Creating a new action from autocapture events',
-                    link: '/docs/getting-started/actions-and-insights',
-                },
-                { title: 'Creating a new trends insight', link: '/docs/getting-started/actions-and-insights' },
-                { title: 'Filtering events in our insight', link: '/docs/getting-started/actions-and-insights' },
-            ]}
-        >
-            <p>Identify users</p>
-        </Chapter>
+    const data = useStaticQuery(query)
+    const node = data.allMdx.nodes.find(
+        (node: any) => node.fields.slug === '/docs/getting-started/actions-and-insights'
     )
+    const {
+        frontmatter: { title, description },
+        headings,
+    } = node
+
+    const filteredHeadings = filterHeadings(node.fields.slug, headings)
+
+    return <Chapter num={4} title={title} description={description} headings={filteredHeadings}></Chapter>
 }
 
 export const GroupAnalyticsChapter: React.FC = () => {
+    const data = useStaticQuery(query)
+    const node = data.allMdx.nodes.find((node: any) => node.fields.slug === '/docs/getting-started/group-analytics')
+    const {
+        frontmatter: { title, description },
+        headings,
+    } = node
+
+    const filteredHeadings = filterHeadings(node.fields.slug, headings)
+
     return (
-        <Chapter
-            num={5}
-            title="Group analytics"
-            description="Learn how to track teams, groups, threads, and almost anything else with group analytics. "
-            headings={[
-                {
-                    title: 'Creating a new action from autocapture events',
-                    link: '/docs/getting-started/group-analytics',
-                },
-                { title: 'Creating a new trends insight', link: '/docs/getting-started/group-analytics' },
-                { title: 'Filtering events in our insight', link: '/docs/getting-started/group-analytics' },
-            ]}
-        >
+        <Chapter num={5} title={title} description={description} headings={filteredHeadings}>
             <p>Identify users</p>
         </Chapter>
     )
