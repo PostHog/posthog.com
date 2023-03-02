@@ -49,6 +49,6 @@ The combination of feature flags and session recordings has been especially powe
 
 After noticing the issue, the team made a change and saw an immediate, massive improvement in conversion. Today, 30% of waitlist sign-ups are attributed to this new and improved flow. 
 
-“Adoption has even come at the encouragement of our CEO and co-founder,” said Allison. “We now have cross-functional meetings where we engineers, product managers and designers look at successful and unsuccessful sessions together to identify patterns — and they’re all familiar with the same tool.”
+“Adoption has also come at the encouragement of our CEO and co-founder,” said Allison. “We have cross-functional meetings where engineers, product managers, and designers 'watch the tapes' to observe successful and unsuccessful sessions and identify patterns. Everyone at Contra is familiar with PostHog.”
 
 “That ability to consolidate platforms, to not have to onboard teams to six different platforms, to be able to easily connect events and funnels to recordings? It was a real a-ha moment for me!”
