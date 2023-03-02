@@ -351,8 +351,20 @@
         "icon": "/images/product-icons/session-recording.svg",
         "children": [
             {
-                "name": "Session Recording",
-                "url": "/manual/recordings"
+                "name": "Start here",
+                "url": "/docs/session-recording/start-here"
+            },
+            {
+                "name": "Configure",
+                "url": "/docs/session-recording/configure"
+            },
+            {
+                "name": "Data retention",
+                "url": "/docs/session-recording/data-retention"
+            },
+            {
+                "name": "Troubleshooting and FAQs",
+                "url": "/docs/session-recording/troubleshooting"
             }
         ]
     },

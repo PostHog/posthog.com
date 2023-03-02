@@ -687,6 +687,10 @@
         {
             "source": "/blog/introduction-to-customer-retention",
             "destination": "/blog/customer-churn-analysis-guide"
+        },
+        {
+            "source": "/manual/recordings",
+            "destination": "/docs/session-recording"
         }
     ],
     "rewrites": [
