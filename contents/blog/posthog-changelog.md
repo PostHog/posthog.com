@@ -40,7 +40,7 @@ You can now integrate PostHog using the `PostHogProvider`. PostHog then provides
 
 We've added a new element selector to [the PostHog toolbar](/manual/toolbar) so that it's easier to create actions in some circumstances. 
 
-The new modal shows the element wrapping a selected element, so that subsequent clicks build up a selection. Want to give it a go? We've updated [our toolbar tutorial](/tutorials/toolbar) with instructions.
+The new modal shows the HTML elements wrapping the selected element, so that your clicks build up a selection. Want to give it a go? We've updated [our toolbar tutorial](/tutorials/toolbar) with instructions.
 
 ### URL query parameter converter app
 ![outfunnel app](../images/blog/array/outfunnel-app.gif)
