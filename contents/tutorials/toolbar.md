@@ -2,7 +2,6 @@
 title: "Using the PostHog Toolbar to visualize behavior and create actions"
 sidebar: Docs
 showTitle: true
-featuredTutorial: true
 featuredImage: ../images/tutorials/banners/toolbar.png
 author: ['yakko-majuri', 'andy-vandervell']
 tags:
@@ -196,6 +195,18 @@ By toggling on 'Actions' (yellow target icon), you'll see a view of all actions 
 Here, you can click an element and see all actions that use it. This is a great way of making sure the relevant elements to you have an action associated with them. 
 
 Additionally, by clicking a specific action on an element, you can update or delete it.
+
+## Editing the selector for an action
+
+When you select an element to create an action, PostHog automatically generates a selector for that element. Computers are good at choosing unique selectors, but sometimes you might want to change it to something more meaningful. 
+
+You can type a selector into the "Selector" field in the action creation modal to do this.
+
+![The create action modal showing the selector text box being used to edit the selector](../images/tutorials/toolbar/type-it.gif)
+
+Or in the same modal, click "Edit the selector" to use our element picker to build the selector you want.
+
+![The selector modal being used to discover the more meaningful selector](../images/tutorials/toolbar/toolbar-selector-edit.gif)
 
 ## Further reading
 

@@ -1,9 +1,9 @@
 ---
-title: Automating users journeys with PostHog with Laudspeaker
+title: Automating user journeys with PostHog and Laudspeaker
 sidebar: Docs
 showTitle: true
 author: ['laudspeaker']
-date: 2023-26-01
+date: 2023-01-26
 featuredImage: ../images/tutorials/banners/tutorial-1.png
 tags: ["apps", "site-apps"]
 ---

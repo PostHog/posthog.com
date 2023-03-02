@@ -19,13 +19,6 @@
             }
         },
         {
-            "title": "Using PostHog",
-            "url": "/using-posthog",
-            "sub": {
-                "component": "UsingPostHog"
-            }
-        },
-        {
             "title": "Community",
             "url": "/community",
             "sub": {

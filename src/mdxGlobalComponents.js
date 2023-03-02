@@ -39,6 +39,7 @@ import { CommunityCTA } from './components/CommunityCTA'
 import { CommunityQuestions } from './components/CommunityQuestions'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { Contact } from './components/Contact'
+import { ContactSales } from './components/ContactSales'
 import { Container } from './components/Container'
 import { ContributorCard } from './components/ContributorCard'
 import { ContributorSearch } from './components/ContributorSearch'
@@ -46,7 +47,6 @@ import { ContributorsChart } from './components/ContributorsChart'
 import { CookieBanner } from './components/CookieBanner'
 import { Customers } from './components/Customers'
 import { DarkModeToggle } from './components/DarkModeToggle'
-import { DemoLink } from './components/DemoLink'
 import { DemoScheduler } from './components/DemoScheduler'
 import { DeployOption } from './components/DeployOption'
 import { DocsPageSurvey } from './components/DocsPageSurvey'
@@ -88,14 +88,13 @@ import { Pagination } from './components/Pagination'
 import { Popover } from './components/Popover'
 import { PostCard } from './components/PostCard'
 import { PostLayout } from './components/PostLayout'
-import { AllPlans } from './components/Pricing/AllPlans'
-import { AllPlansTest } from './components/Pricing/AllPlansTest'
 import { Calculator } from './components/Pricing/Calculator'
 import { CloudVsSelfHost } from './components/Pricing/CloudVsSelfHost'
 import { FAQs } from './components/Pricing/FAQs'
 import { Features } from './components/Pricing/Features'
+import { OtherOptions } from './components/Pricing/OtherOptions'
 import { PlanComparison } from './components/Pricing/PlanComparison'
-import { PlanComparisonTest } from './components/Pricing/PlanComparisonTest'
+import { PricingCalculator } from './components/Pricing/PricingCalculator'
 import { PricingHero } from './components/Pricing/PricingHero'
 import { PricingSlider } from './components/Pricing/PricingSlider'
 import { PricingTable } from './components/Pricing/PricingTable'
@@ -103,6 +102,7 @@ import { ProductPillars } from './components/Pricing/ProductPillars'
 import { Quote } from './components/Pricing/Quote'
 import { Savings } from './components/Pricing/Savings'
 import { SelfHost } from './components/Pricing/SelfHost'
+import { PricingCTA } from './components/PricingCTA'
 import { ProductAnchorNavbar } from './components/ProductAnchorNavbar'
 import { ProductFeature } from './components/ProductFeature'
 import { ProductFeaturePlugin } from './components/ProductFeaturePlugin'
@@ -125,6 +125,7 @@ import { SiteSearchCallout } from './components/SiteSearchCallout'
 import { SliderNav } from './components/SliderNav'
 import { Spacer } from './components/Spacer'
 import { Spinner } from './components/Spinner'
+import { SplitFlap } from './components/SplitFlap'
 import { StarRepoButton } from './components/StarRepoButton'
 import { StarUsBanner } from './components/StarUsBanner'
 import { Structure } from './components/Structure'
@@ -180,6 +181,7 @@ export const shortcodes = {
     CommunityQuestions,
     CompensationCalculator,
     Contact,
+    ContactSales,
     Container,
     ContributorCard,
     ContributorSearch,
@@ -187,7 +189,6 @@ export const shortcodes = {
     CookieBanner,
     Customers,
     DarkModeToggle,
-    DemoLink,
     DemoScheduler,
     DeployOption,
     DocsPageSurvey,
@@ -229,14 +230,13 @@ export const shortcodes = {
     Popover,
     PostCard,
     PostLayout,
-    AllPlans,
-    AllPlansTest,
     Calculator,
     CloudVsSelfHost,
     FAQs,
     Features,
+    OtherOptions,
     PlanComparison,
-    PlanComparisonTest,
+    PricingCalculator,
     PricingHero,
     PricingSlider,
     PricingTable,
@@ -244,6 +244,7 @@ export const shortcodes = {
     Quote,
     Savings,
     SelfHost,
+    PricingCTA,
     ProductAnchorNavbar,
     ProductFeature,
     ProductFeaturePlugin,
@@ -266,6 +267,7 @@ export const shortcodes = {
     SliderNav,
     Spacer,
     Spinner,
+    SplitFlap,
     StarRepoButton,
     StarUsBanner,
     Structure,

@@ -5,125 +5,106 @@ icon: ../../../images/docs/integrate/frameworks/nextjs.svg
 
 PostHog makes it easy to get data about traffic and usage of your [Next.js](https://nextjs.org/) app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
 
-This guide will walk you through an example integration of PostHog using Next.js and the [posthog-js library](/docs/integrate/client/js). 
+This guide walks you through integrating PostHog into your Next.js app using the [React](/docs/sdks/react) and the [Node.js](/docs/sdks/node) SDKs.
+
+You can see a working example of this integration in our [Next.js demo app](https://github.com/PostHog/posthog-js/tree/master/playground/nextjs)
+
+Next.js has both client and server-side rendering. We'll cover both in this guide.
 
 ## Prerequisites
 
-To follow this tutorial along, you need:
+To follow this guide along, you need:
 
-1. a [self-hosted instance of PostHog](/docs/self-host) or use [PostHog Cloud](/docs/getting-started/cloud).
+1. a PostHog account (either [Cloud](/docs/getting-started/cloud) or [self-hosted](/docs/self-host))
 2. a running Next.js application
 
-## Setup and tracking page views (automatically)
-The first thing you want to do is to install the [next-use-posthog library](https://github.com/Ismaaa/next-use-posthog) in your project - so add it using your package manager:
+## Client-side analytics
+
+import ReactInstall from "../../sdks/react/_snippets/install.mdx"
+
+<ReactInstall />
+
+## Server-side analytics
+
+Server-side rendering is a Next.js feature that enables you to render pages on the server instead of the client. This can be useful for SEO, performance, and user experience.
+
+To integrate PostHog into your Next.js for server-side analytics you should use the [Node SDK](/docs/sdks/node).
+
+First, install the `posthog-node` library:
 
 ```shell
-yarn add next-use-posthog
+yarn add posthog-node
+# or
+npm install --save posthog-node
 ```
 
-or
+We can then use the `getServerSideProps` function to send events and pass the feature flags to the component.
 
-```shell
-npm install --save next-use-posthog
-```
+This looks like this:
 
-After that, we want to initialize the PostHog instance in `pages/_app.js`
+```react
+// pages/posts/[id].js
+import { useContext, useEffect, useState } from 'react'
+import { getServerSession } from "next-auth/next"
+import { PostHog } from 'posthog-node'
 
-```tsx
-import { usePostHog } from 'next-use-posthog'
-
-function MyApp({ Component, pageProps }) {  
-  // NOTE: If set as an environment variable be sure to prefix with `NEXT_PUBLIC_`
-  // For more info see https://nextjs.org/docs/basic-features/environment-variables#exposing-environment-variables-to-the-browser
-  
-  usePostHog('<ph_project_api_key>', { api_host: '<ph_instance_address>' })
-
-  return <Component {...pageProps} />
-}
-
-export default MyApp
-```
-
-#### Disable in development
-
-```tsx
-import { usePostHog } from 'next-use-posthog'
-
-function MyApp({ Component, pageProps }) {
-  usePostHog('<ph_project_api_key>', {
-    api_host: '<ph_instance_address>',
-    loaded: (posthog) => {
-      if (process.env.NODE_ENV === 'development') posthog.opt_out_capturing()
-    },
-  })  
-
-  return <Component {...pageProps} />
-}
-
-export default MyApp
-```
-
-### Setup and tracking page views (manually)
-
-The first thing you want to do is to install the [posthog-js library](/docs/integrate/client/js) in your project - so add it using your package manager:
-
-```shell
-yarn add posthog-js
-```
-
-or
-
-```shell
-npm install --save posthog-js
-```
-
-After that, we want to initialize the PostHog instance in `pages/_app.js`
-
-```jsx
-import { useRouter } from 'next/router';
-import posthog from 'posthog-js';
-import { useEffect } from 'react';
-
-function MyApp({ Component, pageProps }) {
-  const router = useRouter();
+export default function Post({ post, flags }) {
+  const [ctaState, setCtaState] = useState()
 
   useEffect(() => {
-    // Init PostHog
-    posthog.init('<ph_project_api_key>', { api_host: '<ph_instance_address>' });
+    if (flags) {
+      setCtaState(flags['blog-cta'])
+    }
+  })
 
-    // Track page views
-    const handleRouteChange = () => posthog.capture('$pageview');
-    router.events.on('routeChangeComplete', handleRouteChange);
-
-    return () => {
-      router.events.off('routeChangeComplete', handleRouteChange);
-    };
-  }, []);
-
-  return <Component {...pageProps} />;
+  return (
+    <div>
+      <h1>{post.title}</h1>
+      <p>By: {post.author}</p>
+      <p>{post.content}</p>
+      {ctaState &&
+        <p><a href="/">Go to PostHog</a></p>
+      }
+      <button onClick={likePost}>Like</button>
+    </div>
+  )
 }
 
-export default MyApp;
+export async function getServerSideProps(ctx) {
+
+  const session = await getServerSession(ctx.req, ctx.res)
+  let flags = null
+
+  if (session) {
+    const client = new PostHog(
+      '<ph_project_api_key>',
+      {
+        api_host: '<ph_instance_address>',
+      }
+    )
+
+    flags = await client.getAllFlags(session.user.email);
+    client.capture(session.user.email, 'loaded blog article', { url: ctx.req.url })
+
+    await client.shutdownAsync()
+  }
+
+  const { posts } = await import('../../blog.json')
+  const post = posts.find((post) => post.id.toString() === ctx.params.id)
+  return {
+    props: {
+      post,
+      flags
+    },
+  }
+}
 ```
 
-### Tracking custom events
-
-Now that PostHog is setup and initialized PostHog, you can use it to capture events where you want to track user behavior. For example, if you want to track when a user clicks a button, you can do it like this:
-
-```jsx
-const handleOnBuy = () => {
-  posthog.capture('purchase', { price: 5900, currency: 'USD' });
-};
-
-return (
-  <main>
-    <h1>Store</h1>
-    <button onClick={handleOnBuy}>Buy</button>
-  </main>
-);
-```
+> **Note**: Make sure to _always_ call `client.shutdownAsync()` after sending events from the server-side.
+> PostHog queues events into larger batches, and this call will force all batched events to be flushed immediately.
 
 ## Further reading
-- [Complete guide to event tracking](/tutorials/event-tracking-guide)
+
+- [How to set up Next.js analytics, feature flags, and more](/tutorials/nextjs-analytics)
 - [Tracking pageviews in single page apps (SPA)](/tutorials/spa)
 - [How (and why) our marketing team uses PostHog](/blog/posthog-marketing)

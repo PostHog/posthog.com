@@ -2,7 +2,7 @@ import { graphql, useStaticQuery } from 'gatsby'
 import { getImage } from 'gatsby-plugin-image'
 import React from 'react'
 import ReactCountryFlag from 'react-country-flag'
-import { ContributorImage } from '../PostLayout/index'
+import { ContributorImage } from 'components/PostLayout/Contributors'
 
 export default function TeamMembers({ team }: { team: string }) {
     const {

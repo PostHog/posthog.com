@@ -11,6 +11,7 @@ featuredImageType: full
 category: Engineering
 tags: 
     - Explainers
+    - Product engineers
 ---
 
 Are [product engineers](/blog/what-is-a-product-engineer) a better choice for your startup than product managers are, or do you need both? To answer that, this post compares the approaches they take to product development, like we recently did with [product engineers and software engineers](/blog/product-engineer-vs-software-engineer), if you're interested.

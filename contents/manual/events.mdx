@@ -116,6 +116,25 @@ If PostHog does not detect a type for an event property. You can choose any of t
 
 PostHog can capture all front-end events automatically using a small [JavaScript snippet](/docs/integrate). This means you do not need to add tracking to individual buttons, or parts of your product to get started at analyzing user behavior.
 
+### Capturing additional properties onto autocapture events
+
+If you add a data attribute onto an element in the format `data-ph-capture-attribute-some-key={someValue}`, then any autocapture event from that element or one of its children will have the property `some-key: 'someValue'` added to it. This can be useful when you want to add information about autocaptured events without needing to instrument a custom event. 
+
+For example, with a notification bell:
+
+![a notification bell showing 1 unread notification](../images/manual/events/notification-bell.png)
+
+You can template the HTML for it to include the unread count.
+
+```HTML
+<div
+    onClick={toggleNotificationsPopover}
+    data-ph-capture-attribute-unread-notifications-count={unreadCount}
+>
+```
+
+And the autocapture event for clicks on the bell will include the unread count.
+
 #### Limitations of autocapture
 
 While autocapture allows you to track the majority of general events on your website right out of the gate, it is important to note that, for security reasons, PostHog is very conservative regarding `input` tags. In order to prevent passwords or other sensitive data from being collected, very little data is collected from inputs with autocapture.

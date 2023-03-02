@@ -3,6 +3,7 @@
         { "source": "/plugins/:path*", "destination": "/apps/:path*" },
         { "source": "/integrations/:path*", "destination": "/apps/:path*" },
         { "source": "/docs/user-guides/:path*", "destination": "/manual/:path*" },
+        { "source": "/docs/integrate/(client|server)/:path*", "destination": "/docs/sdks/:path*" },
         { "source": "/docs/integrations/android-integration", "destination": "/docs/libraries/android" },
         { "source": "/docs/integrations/community", "destination": "/docs/libraries/community" },
         { "source": "/docs/integrations/docusaurus-integration", "destination": "/docs/libraries/docusaurus" },
@@ -60,21 +61,21 @@
             "source": "/docs/contributing/updating-documentation",
             "destination": "/docs/contribute/updating-documentation"
         },
-        { "source": "/docs/libraries/android", "destination": "/docs/integrate/client/android" },
-        { "source": "/docs/libraries/flutter", "destination": "/docs/integrate/client/flutter" },
-        { "source": "/docs/libraries/ios", "destination": "/docs/integrate/client/ios" },
-        { "source": "/docs/libraries/js", "destination": "/docs/integrate/client/js" },
-        { "source": "/docs/libraries/react-native", "destination": "/docs/integrate/client/react-native" },
+        { "source": "/docs/libraries/android", "destination": "/docs/sdks/android" },
+        { "source": "/docs/libraries/flutter", "destination": "/docs/sdks/flutter" },
+        { "source": "/docs/libraries/ios", "destination": "/docs/sdks/ios" },
+        { "source": "/docs/libraries/js", "destination": "/docs/sdks/js" },
+        { "source": "/docs/libraries/react-native", "destination": "/docs/sdks/react-native" },
         {
             "source": "/docs/deployment/snippet-installation",
             "destination": "/docs/integrate/client/snippet-installation"
         },
-        { "source": "/docs/libraries/elixir", "destination": "/docs/integrate/server/elixir" },
-        { "source": "/docs/libraries/go", "destination": "/docs/integrate/server/go" },
-        { "source": "/docs/libraries/node", "destination": "/docs/integrate/server/node" },
-        { "source": "/docs/libraries/php", "destination": "/docs/integrate/server/php" },
-        { "source": "/docs/libraries/python", "destination": "/docs/integrate/server/python" },
-        { "source": "/docs/libraries/ruby", "destination": "/docs/integrate/server/ruby" },
+        { "source": "/docs/libraries/elixir", "destination": "/docs/sdks/elixir" },
+        { "source": "/docs/libraries/go", "destination": "/docs/sdks/go" },
+        { "source": "/docs/libraries/node", "destination": "/docs/sdks/node" },
+        { "source": "/docs/libraries/php", "destination": "/docs/sdks/php" },
+        { "source": "/docs/libraries/python", "destination": "/docs/sdks/python" },
+        { "source": "/docs/libraries/ruby", "destination": "/docs/sdks/ruby" },
         { "source": "/docs/libraries/docusaurus", "destination": "/docs/integrate/third-party/docusaurus" },
         { "source": "/docs/libraries/gatsby", "destination": "/docs/integrate/third-party/gatsby" },
         {
@@ -678,6 +679,14 @@
         {
             "source": "/blog/tags/startups",
             "destination": "/blog/categories/startups"
+        },
+        {
+            "source": "/docs/integrate/badge",
+            "destination": "/docs/contribute/badge"
+        },
+        {
+            "source": "/blog/introduction-to-customer-retention",
+            "destination": "/blog/customer-churn-analysis-guide"
         }
     ],
     "rewrites": [

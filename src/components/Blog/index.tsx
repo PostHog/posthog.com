@@ -3,7 +3,7 @@ import Link from 'components/Link'
 import PostLayout from 'components/PostLayout'
 import Toggle from 'components/Toggle'
 import { graphql } from 'gatsby'
-import { GatsbyImage, getImage, StaticImage } from 'gatsby-plugin-image'
+import { GatsbyImage, getImage, ImageDataLike, StaticImage } from 'gatsby-plugin-image'
 import React, { useState } from 'react'
 import Layout from '../Layout'
 import { SEO } from '../seo'
@@ -14,6 +14,50 @@ import { homeCategories } from './constants/categories'
 import { capitalize } from 'instantsearch.js/es/lib/utils'
 import CommunityCTA from 'components/CommunityCTA'
 import { CallToAction } from 'components/CallToAction'
+
+interface IPost {
+    featuredImage?: ImageDataLike
+    slug: string
+    title: string
+    category?: string
+    date: string
+    authors: {
+        name: string
+        image: ImageDataLike
+    }[]
+}
+
+export const Post = ({ featuredImage, slug, title, category, date, authors }: IPost) => {
+    const image = featuredImage && getImage(featuredImage)
+    return (
+        <div className="relative rounded-md overflow-hidden z-10 h-full w-full">
+            <Link className="!text-white !hover:text-white cta" to={slug}>
+                {image ? (
+                    <GatsbyImage alt={title} className="md:w-auto w-full" image={image} />
+                ) : (
+                    <StaticImage className="md:w-auto w-full" alt={title} src="./images/default.jpg" />
+                )}
+                <div className="bg-gradient-to-b from-black/50 via-black/20  to-black/50 absolute inset-0 p-5 flex flex-col h-full w-full">
+                    {category && <p className="m-0 text-sm opacity-80">{category}</p>}
+                    <h3 className="text-2xl m-0 leading-7 [text-shadow:0_2px_10px_rgba(0,0,0,0.4)] line-clamp-3">
+                        {title}
+                    </h3>
+                    <p className="m-0 text-sm font-light mt-1">{date}</p>
+                    <ul className="list-none m-0 p-0 mt-auto flex space-x-4">
+                        {authors?.slice(0, 2).map(({ name, image }) => {
+                            return (
+                                <li className="flex space-x-2 items-center" key={name}>
+                                    <Avatar image={image} />
+                                    <span>{name}</span>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                </div>
+            </Link>
+        </div>
+    )
+}
 
 export const Posts = ({ posts, title, action, titleBorder }) => {
     return (
@@ -45,40 +89,14 @@ export const Posts = ({ posts, title, action, titleBorder }) => {
                             className="relative active:top-[1px] active:scale-[.99] shadow-lg after:border-0 hover:after:border-1 after:border-black/25 after:rounded-md after:-inset-1.5 after:absolute"
                             key={id}
                         >
-                            <div className="relative rounded-md overflow-hidden z-10 h-full w-full">
-                                <Link className="text-white hover:text-white" to={slug}>
-                                    {featuredImage ? (
-                                        <GatsbyImage
-                                            alt={title}
-                                            className="md:w-auto w-full"
-                                            image={getImage(featuredImage)}
-                                        />
-                                    ) : (
-                                        <StaticImage
-                                            className="md:w-auto w-full"
-                                            alt={title}
-                                            src="./images/default.jpg"
-                                        />
-                                    )}
-                                    <div className="bg-gradient-to-b from-black/50 via-black/20  to-black/50 absolute inset-0 p-5 flex flex-col h-full w-full">
-                                        {category && <p className="m-0 text-sm opacity-80">{category}</p>}
-                                        <h3 className="text-2xl m-0 leading-7 [text-shadow:0_2px_10px_rgba(0,0,0,0.4)] line-clamp-3">
-                                            {title}
-                                        </h3>
-                                        <p className="m-0 text-sm font-light mt-1">{date}</p>
-                                        <ul className="list-none m-0 p-0 mt-auto flex space-x-4">
-                                            {authors?.slice(0, 2).map(({ name, image }) => {
-                                                return (
-                                                    <li className="flex space-x-2 items-center" key={name}>
-                                                        <Avatar image={image} />
-                                                        <span>{name}</span>
-                                                    </li>
-                                                )
-                                            })}
-                                        </ul>
-                                    </div>
-                                </Link>
-                            </div>
+                            <Post
+                                date={date}
+                                title={title}
+                                featuredImage={featuredImage}
+                                authors={authors}
+                                category={category}
+                                slug={slug}
+                            />
                         </li>
                     )
                 })}
@@ -134,50 +152,40 @@ const Blog = ({
             <SEO title="Blog - PostHog" />
 
             <PostLayout article={false} title="Blog" menu={blog} hideSidebar hideSurvey>
-                <div className="pb-12">
-                    <h1 className="mb-6 lg:mt-0">Blog</h1>
-                    <Posts
-                        titleBorder
-                        title={`${capitalize(allPostsFilter)} articles`}
-                        posts={allPostsFilter === 'popular' ? allPostsPopular : allPostsRecent}
-                        action={
-                            <Link
-                                to="/blog/all"
-                                className="-mr-2 px-2 py-1.5 rounded-sm hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark relative active:top-[1px] active:scale-[.99]"
-                            >
-                                View all
-                            </Link>
-                        }
-                    />
-                    <NewsletterForm />
+                <h1 className="mb-6 mt-0">Blog</h1>
+                <Posts
+                    titleBorder
+                    title={`${capitalize(allPostsFilter)} articles`}
+                    posts={allPostsFilter === 'popular' ? allPostsPopular : allPostsRecent}
+                    action={
+                        <Link
+                            to="/blog/all"
+                            className="-mr-2 px-2 py-1.5 rounded-sm hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark relative active:top-[1px] active:scale-[.99]"
+                        >
+                            View all
+                        </Link>
+                    }
+                />
+                <NewsletterForm />
 
-                    <div className="pb-2 mb-5 border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark flex justify-between items-center">
-                        <h4 className="opacity-50 text-base m-0">Browse by topic</h4>
-                    </div>
-
-                    {homeCategories.slice(0, 4).map((categoryToShow) => {
-                        return (
-                            <CategoryPosts
-                                key={categoryToShow}
-                                categories={categories}
-                                categoryToShow={categoryToShow}
-                            />
-                        )
-                    })}
-                    <CommunityCTA />
-                    {homeCategories.slice(4).map((categoryToShow) => {
-                        return (
-                            <CategoryPosts
-                                key={categoryToShow}
-                                categories={categories}
-                                categoryToShow={categoryToShow}
-                            />
-                        )
-                    })}
-                    <CallToAction width="full" type="secondary" to="/blog/all">
-                        View all latest posts
-                    </CallToAction>
+                <div className="pb-2 mb-5 border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark flex justify-between items-center">
+                    <h4 className="opacity-50 text-base m-0">Browse by topic</h4>
                 </div>
+
+                {homeCategories.slice(0, 4).map((categoryToShow) => {
+                    return (
+                        <CategoryPosts key={categoryToShow} categories={categories} categoryToShow={categoryToShow} />
+                    )
+                })}
+                <CommunityCTA />
+                {homeCategories.slice(4).map((categoryToShow) => {
+                    return (
+                        <CategoryPosts key={categoryToShow} categories={categories} categoryToShow={categoryToShow} />
+                    )
+                })}
+                <CallToAction width="full" type="secondary" to="/blog/all">
+                    View all latest posts
+                </CallToAction>
             </PostLayout>
         </Layout>
     )

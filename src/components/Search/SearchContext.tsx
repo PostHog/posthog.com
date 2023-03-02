@@ -45,6 +45,8 @@ export const SearchProvider: React.FC = ({ children }) => {
 
     React.useEffect(() => {
         const handler = (event: KeyboardEvent) => {
+            if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA' || event.target.shadowRoot)
+                return
             if (event.key === '/' && !isVisible) {
                 event.preventDefault()
                 open('slash')

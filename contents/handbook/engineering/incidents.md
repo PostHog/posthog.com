@@ -24,6 +24,9 @@ Things that _shouldn’t_ be an incident
 - Insights returning incorrect data
 - Events being < 5 minutes behind
 - Unable to save insights, create feature flags
+- Expected disruption which happens as part of scheduled maintenance
+
+> Planning some maintenance? Check the [announcements](/handbook/growth/marketing/product-announcements) section instead.
 
 ### Incident severity
 Please refer to the following guidance when choosing the severity for your incident. If you are unsure, it's usually better to over-estimate than under-estimate!
@@ -56,7 +59,7 @@ Examples
 - Event ingestion totally failing - we are losing events
 
 
-## What happens during an incident
+## What happens during an incident
 
 The person who raised the incident is the incident lead. It’s their responsibility to:
 - Make sure the right people join the zoom. This includes [the current on call person](https://posthog.pagerduty.com/service-directory/P43Y0E8). Optionally, add people from Infra and [the feature owner](https://posthog.com/handbook/engineering/feature-ownership) if relevant. Also ping Tim and James G so they're aware.
