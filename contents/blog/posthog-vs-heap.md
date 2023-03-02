@@ -829,6 +829,10 @@ The PostHog Property Filter app also allows you to further limit the types of in
 
 If you user privacy is a primary concern for you, consider our [open source Docker Compose deployment](/docs/self-host/open-source/deployment) option.
 
+### Can you use PostHog on e-commerce websites?
+
+Absolutely. PostHog is [easy to integrate with Shopify](/docs/integrate/third-party/shopify), and we have [Shopify](/apps/shopify) and [Stripe Connector](/apps/stripe-connector) apps for importing order and revenue data into PostHog for analysis. You can easily install PostHog on other e-commerce platforms [using our Javascript snippet](/docs/integrate) – see our guides to [setting up Webflow analytics](/tutorials/webflow) and [Wordpress](/docs/integrate/third-party/wordpress). 
+
 ### Can PostHog replace Google Analytics?
 
 Yes, depending on your use case, PostHog could replace Google Analytics. [Our marketing team uses PostHog](/blog/posthog-marketing) effectively, but it isn't primarily designed for marketing use cases. See our [GA4 alternatives guide](/blog/ga4-alternatives) guide for more.
