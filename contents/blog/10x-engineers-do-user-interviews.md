@@ -37,7 +37,7 @@ Information moves quickly and in both directions, boosting the signal. By increa
 
 Companies still need product managers (I'm the Head of Product at PostHog after all 😅), but we ship faster and better because our [product engineers](/blog/what-is-a-product-engineer) speak directly to users. And, because our product managers aren't spending all their time on tickets, they have time to surface new opportunities or build out [our bigger vision](/blog/helping-engineers-to-product).
 
-> 💬 **Sidenote:** PostHog's session recording feature came about because Karl, one our engineers, took the time to talk to a user and realized the best solution was integrating recordings with our existing product analytics tool. One hackathon later, we had a prototype. Session recording is now a core part of our product and was a key driver in our strategy shift from a pure, self-hosted product analytics tool to an all-in-one product OS.
+> 💬 **Sidenote:** PostHog's session recording feature came about because Karl, one of our engineers, took the time to talk to a user and realized the best solution was integrating recordings with our existing product analytics tool. One hackathon later, we had a prototype. Session recording is now a core part of our product and was a key driver in our strategy shift from a pure, self-hosted product analytics tool to an all-in-one product OS.
 
 ## How to talk to users (as an engineer)
 
@@ -51,15 +51,15 @@ Next, it's time to bulk email your segment. The simplest way is to email out a C
 Hi! I’m {YOUR NAME}, a software engineer at {YOUR COMPANY}. I’m currently working on {FEATURE / PROBLEM} and would love your input on it. Free for a quick call at any of these times? {INSERT CALENDLY LINK} 
 ```
 
-This is a good start, but you should move to an in-app prompt as soon as you can – we built PostHog's [user interview app](https://posthog.com/tutorials/feedback-interviews-site-apps#setting-up-the-user-interview-app) (picture below) just for this.  
+This is a good start, but you should move to an in-app prompt as soon as you can to save time and increase conversion – we built PostHog's [user interview app](https://posthog.com/tutorials/feedback-interviews-site-apps#setting-up-the-user-interview-app) (picture below) just for this.  
 
 ![User interview app](../images/blog/10x-engineers-do-user-interviews/user-interview-app.png)
 
-We’ve seen an increase in conversion from outreach to booking by ~5x (from 3% to 16%) since we started using in-app prompts, a reduction in email spam, and better organization by doing so. A reward like a $30 merchandise voucher helps.
+We’ve seen an increase in conversion from outreach to booking by ~5x (from 3% to 16%) since we started using in-app prompts, a reduction in email spam, and better organization by doing so. A reward like a $30 merch voucher helps.
 
 ## The two basic types of user interview
 
-Effective user interviews need a goal, and they typically fall into one of two buckets: 
+Effective user interviews need a goal and you have two basic options:
 
 ### 1. Problem exploration
 
@@ -72,7 +72,6 @@ Example questions:
 - Can you talk me through the last time you experienced this problem?
 - Is this actually a problem for you?
 
-**Recommendation:** Read "The Mom Test" by Rob Fitzpatrick. It's a fantastic primer on problem exploration.
 
 ### 2. Solution validation
 
@@ -85,7 +84,6 @@ Example activities:
 
 - Create a mock-up and have a call with the user to see if they will commit to paying some amount if you build it.
 
-**Recommendation:** The book "Don’t make me think" is great for usability testing.
 
 ## Building async feedback loops
 
@@ -113,11 +111,8 @@ That said, be careful not to go too far the other way and generalize every probl
 
 For example, quickly shipping small usability improvements based on feedback is a great way to delight users, generate goodwill, and encourage more relevant feedback. 
 
-Paul on our [Product Analytics Team](/handbook/small-teams/product-analytics) recently shipped three PRs mere hours after feedback from a customer interview.
 
-![Paul email](../images/blog/10x-engineers-do-user-interviews/paul-email.png)
-
-## The challenge: Book a user interview this week
+## My challenge to you: Book a user interview this week
 
 We see the benefits of engineers speaking directly to users every day at PostHog – important problems being solved, and better products being shipped. But you probably won't believe me until you’ve done a few interviews yourself and realized what someone wrote on a ticket is completely different from reality.
 
@@ -132,3 +127,13 @@ Hi! I’m {YOUR NAME}, a software engineer at {YOUR COMPANY}. I’m currently wo
 Alternatively, if there’s already a sales call or customer interview organized, then ask to join, and add your own questions at the end.
 
 Have any questions, feel free to email me at {firstName}@posthog.com or DM me on [Twitter](https://twitter.com/lukeharries_).
+
+## Further reading:
+
+I have a couple of book recommendations if you want to go even deeper into this topic:
+
+- **"The Mom Test" by Rob Fitzpatrick:** Generally considered the bible of "talking to users". It's a fantastic primer on problem exploration.
+
+- **[Don’t Make Me Think](https://www.amazon.co.uk/Dont-Make-Me-Think-Usability/dp/0321344758) by Steven Krug:** A foundational text on usability testing.
+
+ <iframe src="https://newsletter.posthog.cc/embed" width="480" height="320" style="border:1px solid #EEE; background:white;" frameborder="0" scrolling="no"></iframe> 
