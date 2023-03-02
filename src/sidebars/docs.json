@@ -374,8 +374,20 @@
         "icon": "/images/product-icons/feature-flags.svg",
         "children": [
             {
-                "name": "Experimentation",
-                "url": "/manual/experimentation"
+                "name": "Start here",
+                "url": "/docs/feature-flags/start-here"
+            },
+            {
+                "name": "Local evaluation",
+                "url": "/docs/feature-flags/local-evaluation"
+            },
+            {
+                "name": "Rollout strategies",
+                "url": "/docs/feature-flags/rollout-strategies"
+            },
+            {
+                "name": "Multivariate feature flags",
+                "url": "/docs/feature-flags/multivariate-flags"
             }
         ]
     },
