@@ -38,7 +38,7 @@ Heap, like Amplitude and Mixpanel, focuses mainly on product analytics. That mea
 
 ### 2. PostHog's built for engineers
 
-Anyone can use PostHog – just [ask our marketing team](/blog/posthog-marketing) – but our goal is to [help engineers be better at product](/blog/helping-engineers-to-product), so they spend less time shipping tickets, and more time shipping impactful features. 
+Anyone can use PostHog – just [ask our marketing team](/blog/posthog-marketing) – but our goal is to [help engineers be better at product](/blog/helping-engineers-to-product) by giving them the insights and tools they need to ship impactful features at pace. 
 
 ### 3. Transparent pricing. No forced sales calls.
 
