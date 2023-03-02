@@ -8,6 +8,7 @@ import { SEO } from 'components/seo'
 import PostLayout from 'components/PostLayout'
 import { Tutorials } from 'components/Docs/Tutorials'
 import { LinkGrid } from 'components/Docs/LinkGrid'
+import { GettingStarted } from 'components/Docs/GettingStarted'
 
 const quickLinks = [
     {
@@ -73,27 +74,21 @@ const ProductAnalytics: React.FC<ProductAnalyticsProps> = ({ data }) => {
                 </h3>
 
                 {/* Get started section */}
-                <section className="relative flex items-center py-12">
-                    <div>
-                        <div className="flex flex-col md:flex-row items-center opacity-40 space-x-1 mb-2">
-                            <img src="/images/product-icons/product-analytics.svg" alt="Product analytics" />
-                            <span className="text-xs uppercase font-bold">Product analytics</span>
-                        </div>
-                        <h3 className="mb-2 mt-0">Start sending events</h3>
-                        <p className="max-w-md">
-                            Use our custom SDKs and integrations to send events from your favorite language or platform.
-                        </p>
-
-                        <a href="#">Get Started &rarr;</a>
-                    </div>
-
-                    <StaticImage
-                        alt=""
-                        placeholder="none"
-                        quality={100}
-                        className="absolute right-0 bottom-0 w-[400px]"
-                        src="../../components/Home/Slider/images/product-analytics-hog.png"
-                    />
+                <section className="py-12">
+                    <GettingStarted
+                        product="Product analytics"
+                        title="Start sending events"
+                        description="Use our custom SDKs and integrations to send events from your favorite language or platform."
+                        link="/docs/product-analytics/start-here"
+                    >
+                        <StaticImage
+                            alt=""
+                            placeholder="none"
+                            quality={100}
+                            className="absolute right-0 bottom-0 w-[400px]"
+                            src="../../components/Home/Slider/images/product-analytics-hog.png"
+                        />
+                    </GettingStarted>
                 </section>
 
                 {/* Quick links */}
