@@ -1,0 +1,108 @@
+---
+title: HogQL
+sidebar: Docs
+showTitle: true
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
+
+---
+
+HogQL is the name of our take on SQL. It's effeectively a wrapper around ClickHouse SQL, with a few tweaks, such as simplified event and person property access.
+
+## HogQL Expressions (BETA)
+
+Right now we have released HogQL Expressions (BETA), which can be used inside insights as filters and/or breakdown values.
+
+![HogQL trends breakdown filter](../images/features/hogql/trends-breakdown.png)
+
+### Supported ClickHouse functions
+
+The following functions have been enabled. This list is [ever expanding](https://github.com/posthog/posthog/blob/master/posthog/hogql/constants.py). Please submit a Pull Request if we're missing something obvious.
+
+#### Arithmetic
+- `abs`
+- `max2`
+- `min2`
+
+#### Type conversions
+
+All properties are currently accessed as strings. To compare numeric properties, you will need to wrap them with a function like `toInt`. For example: `toInt(properties.$screen_width)`. This will be automatic [soon](https://github.com/PostHog/meta/issues/81).
+
+- `toInt`
+- `toFloat`
+- `toDecimal`
+- `toDate`
+- `toDateTime`
+- `toIntervalSecond`
+- `toIntervalMinute`
+- `toIntervalHour`
+- `toIntervalDay`
+- `toIntervalWeek`
+- `toIntervalMonth`
+- `toIntervalQuarter`
+- `toIntervalYear`
+- `toString`
+
+#### Date functions
+- `INTERVAL 1 MONTH` keyword
+- `now()`
+- `toMonday`
+- `toStartOfYear`
+- `toStartOfQuarter`
+- `toStartOfMonth`
+- `toStartOfWeek`
+- `toStartOfDay`
+- `toStartOfHour`
+- `toStartOfMinute`
+- `toStartOfSecond`
+- `toStartOfFiveMinutes`
+- `toStartOfTenMinutes`
+- `toStartOfFifteenMinutes`
+- `toTimezone`
+- `age`
+- `dateDiff`
+- `dateTrunc`
+- `formatDateTime`
+
+#### String functions
+- `length`
+- `empty`
+- `notEmpty`
+- `leftPad`
+- `rightPad`
+- `lower`
+- `upper`
+- `repeat`
+- `format`
+- `concat`
+- `coalesce`
+- `substring`
+- `appendTrailingCharIfAbsent`
+- `endsWith`
+- `startsWith`
+- `trim`
+- `trimLeft`
+- `trimRight`
+- `extractTextFromHTML`
+- `match`
+- `like`
+- `ilike`
+- `notLike`
+- `replace`
+- `replaceOne`
+
+#### Array functions
+- `tuple`
+
+#### Conditional
+- `if`
+- `not`
+- `multiIf`
+
+#### Rounding
+- `round`
+- `floor`
+- `ceil`
+- `trunc`

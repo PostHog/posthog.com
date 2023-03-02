@@ -39,6 +39,7 @@ import { CommunityCTA } from './components/CommunityCTA'
 import { CommunityQuestions } from './components/CommunityQuestions'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { Contact } from './components/Contact'
+import { ContactSales } from './components/ContactSales'
 import { Container } from './components/Container'
 import { ContributorCard } from './components/ContributorCard'
 import { ContributorSearch } from './components/ContributorSearch'
@@ -120,6 +121,7 @@ import { FeaturedSectionTextLeft } from './components/Sections/FeaturedSectionTe
 import { FeaturedSectionTextRight } from './components/Sections/FeaturedSectionTextRight'
 import { FeaturedSectionTripleImage } from './components/Sections/FeaturedSectionTripleImage'
 import { SignupCTA } from './components/SignupCTA'
+import { SignupLink } from './components/SignupLink'
 import { SiteSearchCallout } from './components/SiteSearchCallout'
 import { SliderNav } from './components/SliderNav'
 import { Spacer } from './components/Spacer'
@@ -180,6 +182,7 @@ export const shortcodes = {
 	CommunityQuestions,
 	CompensationCalculator,
 	Contact,
+	ContactSales,
 	Container,
 	ContributorCard,
 	ContributorSearch,
@@ -261,6 +264,7 @@ export const shortcodes = {
 	FeaturedSectionTextRight,
 	FeaturedSectionTripleImage,
 	SignupCTA,
+	SignupLink,
 	SiteSearchCallout,
 	SliderNav,
 	Spacer,
