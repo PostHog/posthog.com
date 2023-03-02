@@ -72,8 +72,8 @@ const Experiments: React.FC<ExperimentsProps> = ({ data }) => {
                             alt=""
                             placeholder="none"
                             quality={100}
-                            className="absolute right-0 bottom-0 w-[400px]"
-                            src="../../components/Home/Slider/images/experiments-hog.png"
+                            className="w-[400px]"
+                            src="../../components/Home/Slider/images/ab-testing-hog.png"
                         />
                     </GettingStarted>
                 </section>

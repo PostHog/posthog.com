@@ -71,7 +71,7 @@ const SessionRecording: React.FC<SessionRecordingProps> = ({ data }) => {
                             alt=""
                             placeholder="none"
                             quality={100}
-                            className="absolute right-0 bottom-0 w-[400px]"
+                            className="w-[400px]"
                             src="../../components/Home/Slider/images/session-recording-hog.png"
                         />
                     </GettingStarted>

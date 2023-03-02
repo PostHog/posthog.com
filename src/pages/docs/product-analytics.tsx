@@ -85,7 +85,7 @@ const ProductAnalytics: React.FC<ProductAnalyticsProps> = ({ data }) => {
                             alt=""
                             placeholder="none"
                             quality={100}
-                            className="absolute right-0 bottom-0 w-[400px]"
+                            className="w-[400px]"
                             src="../../components/Home/Slider/images/product-analytics-hog.png"
                         />
                     </GettingStarted>

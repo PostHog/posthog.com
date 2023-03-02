@@ -69,7 +69,7 @@ const Data: React.FC<DataProps> = ({ data }) => {
                             alt=""
                             placeholder="none"
                             quality={100}
-                            className="absolute right-0 bottom-0 w-[400px]"
+                            className="w-[400px]"
                             src="../../components/Product/images/hogs/data-warehouse.png"
                         />
                     </GettingStarted>
