@@ -15,7 +15,7 @@ HogQL is the name of our take on SQL. It's effeectively a wrapper around ClickHo
 
 Right now we have released HogQL Expressions (BETA), which can be used inside insights as filters and/or breakdown values.
 
-![Events table](../images/features/hogql/trends-breakdown.png)
+![HogQL trends breakdown filter](../images/features/hogql/trends-breakdown.png)
 
 ### Supported ClickHouse functions
 
@@ -28,7 +28,7 @@ The following functions have been enabled. This list is [ever expanding](https:/
 
 #### Type conversions
 
-All properties are currently accessed as strings. To compare numeric properties, you will need to wrap them with a function like `toInt`. For example: `toInt(properties.$screen_width)`. This will 
+All properties are currently accessed as strings. To compare numeric properties, you will need to wrap them with a function like `toInt`. For example: `toInt(properties.$screen_width)`. This will be automatic [soon](https://github.com/PostHog/meta/issues/81).
 
 - `toInt`
 - `toFloat`
