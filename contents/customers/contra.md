@@ -18,7 +18,7 @@ Contra is a freelance marketplace for independent creatives and engineers. It em
 
 “Originally we were using multiple platforms,” said Allison Nulty, Head of Product at Contra. “That meant Mixpanel for analytics, LaunchDarkly for feature flags, Segment for front-end tracking and FullStory for recordings. In isolation they could work well, but they were costly even then.”
 
-As a result of spreading functionality across multiple tools, Contra also faced data inconsistencies. Tools such as Segment were helpful for forwarding data between platforms, but also added to the costs and upkeep required. Eventually, Contra decided to consolidate the stack as much as possible — and that’s where PostHog came in. 
+As a result of spreading functionality across multiple tools, Contra also faced data inconsistencies. Tools such as Segment were helpful tracking for forwarding data between platforms, but also added to the costs and upkeep required. Eventually, Contra decided to consolidate the stack as much as possible — and that’s where PostHog came in. 
 
 ### Using feature flags for a ‘slow roll-out’ strategy
 
