@@ -45,7 +45,7 @@ The combination of feature flags and session recordings has been especially powe
 ![Contra screenshot](../images/customers/contra/contra_session.gif)
 <Caption>Using PostHog session recording to analyze user sign-ups</Caption>
 
-“We had a waitlist for one feature,” said Allison. “We weren’t seeing expected results, so we used PostHog to look at the funnel and where people were dropping off. We could jump from there straight to the session recordings and that’s when we saw there was a button missing. That meant we were missing a huge number of sign-ups.”
+“We used PostHog to look at our funnel for a waitlist in the insights tool,” said Allison. “From there, we could easily jump to session recordings to see the drop-off point. With this analysis, we identified one path where users were not seeing a reminder modal and therefore we were missing out on a large number of waitlist entries.”
 
 After noticing the issue, the team made a change and saw an immediate, massive improvement in conversion. Today, 30% of waitlist sign-ups are attributed to this new and improved flow. 
 
