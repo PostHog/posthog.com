@@ -50,7 +50,7 @@ Line edits are easy and less useful feedback to give. Instead, start big picture
 
 ### Hacker News is a double-edged sword
 
-We’ve found that hitting the front page results in a giant, ego-boosting traffic boost, with a noticeable but small signup boost. It’s not dependable though – even if you’re great at it, you’ll have a 1 in 10 hit rate. You need to graduate to repeatable marketing at some point. 
+We’ve found that hitting the front page results is a giant, ego-boosting traffic boost, with a noticeable but small signup boost. It’s not dependable though – even if you’re great at it, you’ll have a 1 in 10 hit rate. You need to graduate to repeatable marketing at some point. 
 
 Don’t upvote your own content, and don’t ask other people to – post it and pray. There are no secret tricks.
 
