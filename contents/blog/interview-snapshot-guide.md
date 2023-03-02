@@ -20,9 +20,17 @@ Championed by Teresa Torres in the book [Continuous Discovery Habits](https://ww
 
 In this guide, I'll share how we create user interview snapshots at PostHog – including the following template that you can download and fill out, or recreate in Google Docs, Figma or any other tool of your choice.
 
+// Annika to create this
+
 ## Interview snapshots explained
 
-// Annika to create this
+To create a user interview snapshot, you need a list of insights from a user interview. Ideally you take those notes during the interview, or you can ask one of your colleagues to do so. 
+
+While taking notes, focus on how the user is using your product, and how they feel while using it. What makes them excited? What frustrates them? Those are the insights that later go into your interview snapshot.
+
+Another approach is to record the conversation, transcribe and summarise it. This approach is more time consuming, so we don’t recommend it. Though you might want to record the conversation in addition to taking notes, if later on you are looking for word-by-word quotes.
+
+Once you have your insights available, you can open up your interview snapshot template and start filling it out. From experience, we recommend blocking 30 minutes after your interview to review your notes and fill out the user interview snapshot. Here is a step by step guide on how to fill it out:
 
 ### 1. Note high-level information of your user**
 
