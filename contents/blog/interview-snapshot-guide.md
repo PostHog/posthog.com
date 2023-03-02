@@ -32,27 +32,27 @@ Another approach is to record the conversation, transcribe and summarise it. Thi
 
 Once you have your insights available, you can open up your interview snapshot template and start filling it out. From experience, we recommend blocking 30 minutes after your interview to review your notes and fill out the user interview snapshot. Here is a step by step guide on how to fill it out:
 
-### 1. Note high-level information of your user**
+### 1. Note high-level information of your user
 
 To set the scene, add the user’s name at the top of the interview snapshot. For B2B companies, we also recommend adding the job role and company name. It’s also handy to add the date of the interview and a high-level summary what the interview was about. If available, add a picture of the user and the company logo, if the context is B2B. Believe us, this will spur your memory if you revisit the interview in a couple weeks’ time.
 
-### 2. Add any relevant background information**
+### 2. Add any relevant background information
 
 What information about your user is relevant to your company and product? Their age? Their responsibilities in their job role? How their morning routine looks like? Write this information down in the “quick facts” column. We also recommend writing down any previous experience the user has with your product.
 
-### 3. List the opportunities you’ve identified**
+### 3. List the opportunities you’ve identified
 
 Did the user express any pain points or desires in relation to your product or problem area? Write these down in the “Opportunities” column. During the interview, make sure you really get to the bottom of the user’s needs, and avoid the [XY problem](https://xyproblem.info/). Make sure to list problems here, and not feature ideas. 
 
-### 4. Note any other interesting insights**
+### 4. Note any other interesting insights
 
 If the user mentioned anything interesting that doesn’t fit in the “Opportunities” column, you can add it to “Insights”. This can include anything that isn’t a pain point, a need or a desire. Did the user show any uncommon behaviour? Did they share anything about why they chose your product (or not)? If there is anything you want your colleagues to know about without reading the whole interview transcript, this is the place to put it.
 
-### 5. Add 1-2 memorable quotes**
+### 5. Add 1-2 memorable quotes
 
 At the top of the template, there is space to add 1-2 memorable quotes from the interview. This is useful for example if the user shared a particular emotion in the interview you want to relay word by word, and you want to create empathy in your team for this particular issue.
 
-### 6. Share the interview snapshot with your team**
+### 6. Share the interview snapshot with your team
 
 Take a screenshot of your completed interview snapshot and share it on Slack (or any other messenger platform you use)! At PostHog, we have a #posthog-feedback channel everyone in the company has access to. Sharing the snapshot in such a way is bound to create a conversation, follow up questions or ideas. This is exactly what you want.
 
