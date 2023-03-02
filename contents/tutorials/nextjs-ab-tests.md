@@ -57,25 +57,31 @@ After doing this, delete the default CSS in the `styles` folder and run `npm run
 
 ## Adding PostHog
 
-Now, we can add PostHog (if you don't have a PostHog instance, you can [sign up for free here](https://app.posthog.com/signup)). To do this, get the code from your [JavaScript snippet](/docs/integrate?tab=snippet) (minus the script tags) and add it `_app.js` using the Next.js `Script` tag.
+Now, we can add PostHog (if you don't have a PostHog instance, you can [sign up for free here](https://app.posthog.com/signup)). To do this, first, install `posthog-js` .
+
+```bash
+npm install posthog-js
+```
+
+In `_app.js`, we can then initialize PostHog and set up a provider that provides access to PostHog through out our app. 
 
 ```js
 // pages/_app.js
-import Script from 'next/script'
+import { PostHogProvider } from 'posthog-js/react'
+import posthog from 'posthog-js'
+
+if (typeof window !== 'undefined') {
+  posthog.init('<ph_project_api_key>', 
+  { 
+    api_host: '<ph_instance_address>'
+  })
+}
 
 export default function App({ Component, pageProps }) {
   return (
-    <>
-      <Script
-        dangerouslySetInnerHTML={{
-          __html: `
-            !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-            posthog.init(<ph_project_api_key>,{api_host:'<ph_instance_address>'})
-          `
-        }}
-      />
+    <PostHogProvider client={posthog}>
       <Component {...pageProps} />
-    </>
+    </PostHogProvider>
   )
 }
 ```
@@ -121,73 +127,38 @@ When it comes to implementing our experiment and its associated feature flags, t
 
 1. Bootstrap feature flags by using [`getInitialProps`](https://nextjs.org/docs/api-reference/data-fetching/get-initial-props) in `_app.js`
 2. Server-side render feature flags in `index.js` using `posthog-node`.
-3. Client-side render feature flags in `index.js` after waiting for the PostHog script to load.
+3. Client-side render feature flags in `index.js`.
 
 Because `getInitialProps` disables [Automatic Static Optimization](https://nextjs.org/docs/advanced-features/automatic-static-optimization) for the entire app (one of the main benefits of Next.js), we aren’t going to bootstrap feature flags (option 1). Instead, we use a combination of server-side and client-side rendering. This ensures flags' accuracy and speed while still leveraging the unique benefits of Next.js.
 
 ### Client-side rendering feature flags
 
-To client-side render the experiment using feature flags, we first must know when PostHog is loaded. If we try calling PostHog before loading it, we get an error.
+To client-side render the experiment using feature flags, we can use the `PostHogProvider` we set up earlier. This ensures PostHog is loaded when we check the flags.
 
-To do this, create a PostHog state context that is initially set to `false`, then gets set to `true` once the script loads. Use a provider to add this state context to the rest of the app so we can access it everywhere.
+In `index.js`, set up a state for the call to action button and a `useEffect()` to check the flag when the page loads.
 
-```js
-// pages/_app.js
-import Script from 'next/script'
-import { createContext, useState } from "react"
-
-export const PostHogStateContext = createContext()
-
-export default function App({ Component, pageProps }) {
-
-  const [PostHogState, setPostHogState] = useState(false);
-
-  return (
-    <>
-      <Script
-        dangerouslySetInnerHTML={{
-          __html: `
-            !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-            posthog.init('phc_bkGVRyzJswgnxAfUwmnu83xtzSyGyqbWx0h6tQhhv3',{api_host:'https://app.posthog.com'})
-          `
-        }}
-        onReady={() => {
-          setPostHogState(true)
-        }}
-      />
-      <PostHogStateContext.Provider value={PostHogState}>
-        <Component {...pageProps} />
-      </PostHogStateContext.Provider>
-    </>
-  )
-}
-```
-
-Once done, set up `index.js` to use the `PostHogState` context and check for it to be ready with `useEffect()`. Once the state is ready, we then must wait for feature flags to load with the `posthog.onFeatureFlags()`. Once the feature flags are ready, we can check our `main-cta` flag for the `"test"` value and change the call to action if so.
+To check the flag, import `useFeatureFlagEnabled` from `posthog-js/react`, use it to call the flag name (`main-cta`), and change the state of the button text to "Learn more" if `true`.
 
 > Use `posthog.feature_flags.override({'main-cta': 'test'})` to make sure it is working, but remove it when we go to release.
 
 ```js
 // pages/index.js
 import Head from 'next/head'
-import { PostHogStateContext } from './_app'
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { usePostHog, useFeatureFlagEnabled } from 'posthog-js/react'
 
 export default function Home() {
 
-  const PostHogState = useContext(PostHogStateContext)
   const [ ctaState, setCtaState ] = useState('Click me')
+  const posthog = usePostHog()
+  posthog.feature_flags.override({'main-cta': 'test'})
+  const ctaVariant = useFeatureFlagVariantKey('main-cta')
 
   useEffect(() => {
-    if (PostHogState) {
-      posthog.onFeatureFlags(() => {
-        posthog.feature_flags.override({'main-cta': 'test'})
-        if (posthog.isFeatureEnabled('main-cta')) {
-          setCtaState('Learn more')
-        }
-      })
+    if (ctaVariant === 'test') {
+      setCtaState('Learn more')
     }
-  }, [PostHogState])
+  }, [ctaVariant])
 
   return (
     <>
@@ -213,7 +184,7 @@ With this you’re ready to launch your experiment, but make sure to remove your
 
 ### Server-side rendering
 
-Notice when you refresh the call to action flickers between "Click me" and "Learn more." This is because it takes time for React, the PostHog script, and feature flags to load. 
+Notice when you refresh the call to action flickers between "Click me" and "Learn more." This is because it takes time for React and PostHog to load. 
 
 Server-side rendering the feature flag is a way to limit this. This is getting the data about the feature flag before the client loads, so the call to action only requires React to load on the client-side.
 
@@ -245,14 +216,14 @@ export async function getServerSideProps(ctx) {
     }
   }
 
-  const ph_project_api_key = 'phc_bkGVRyzJswgnxAfUwmnu83xtzSyGyqbWx0h6tQhhv3'
+  const ph_project_api_key = '<ph_project_api_key>'
 
   const user_id = JSON.parse(ctx.req.cookies[`ph_${ph_project_api_key}_posthog`]).distinct_id
 
   const client = new PostHog(
     ph_project_api_key,
     {
-      api_host: 'https://app.posthog.com',
+      api_host: '<ph_instance_address>',
     }
   )
   const flags = await client.getAllFlags(user_id);
@@ -265,7 +236,9 @@ export async function getServerSideProps(ctx) {
 }
 ```
 
-We then use the `flags` props to set the `ctaState` in the `Home` component if they are available and the `main-cta` flag is set to `test`.
+If the `flags` props is available and the `main-cta` flag is set to `test`, we set the `ctaState` to "Learn more." 
+
+Make sure to keep the other `useEffect()` call for client-side rendering to ensure flags are accurate and work on the first visit.
 
 ```js
 // pages/index.js
@@ -273,13 +246,13 @@ We then use the `flags` props to set the `ctaState` in the `Home` component if t
 
 export default function Home({ flags }) {
 
-  const PostHogState = useContext(PostHogStateContext)
   const [ ctaState, setCtaState ] = useState('Click me')
+  const ctaVariant = useFeatureFlagVariantKey('main-cta')
 
-	useEffect(() => {
-	    if (flags && flags['main-cta'] === 'test') {
-	      setCtaState('Learn more')
-	    }
+  useEffect(() => {
+    if (flags && flags['main-cta'] === 'test') {
+      setCtaState('Learn more')
+    }
   }, [])
 
 //... rest of Home() and getServerSideProps()
