@@ -32,7 +32,7 @@ In this guide, we'll cover:
 
 ## How is PostHog different to Heap?
 
-### 1. PostHog is your single source of truth
+### 1. PostHog is an all-in-one platform
 
 Heap, like Amplitude and Mixpanel, focuses mainly on product analytics. That means you need to adopt multiple tools for things like session recording, feature management, and A/B testing. PostHog integrates all these features into one platform, so it becomes your single source of truth. We believe you should own your data, so data exports are free on all tiers.
 
@@ -800,6 +800,12 @@ As an open source platform designed for technical teams, PostHog integrates with
 ### How long does it take to deploy PostHog?
 
 Deploying PostHog takes mere minutes. Just [include our tracking snippet](/docs/integrate?tab=snippet) in your product or website and (thanks to autocapture) you're immediately capturing events. Once up and running, you can enable session recording via your project settings. See our guide to [getting started on PostHog Cloud](/docs/getting-started/cloud) for more info.
+
+### How scaleable is PostHog?
+
+PostHog is built on ClickHouse, the world’s fastest column-based database. It’s used by the likes of Uber, Spotify and Cloudflare, and allows us to handle billion-scale event volumes with ease.
+
+Are you a company with more than 1 billion events per month? [Get in touch](/signup/cloud/enterprise) so we can discuss your needs and offer a volume discount.
 
 ### How much do Heap and PostHog cost?
 
