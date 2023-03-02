@@ -1,0 +1,114 @@
+---
+title: HogQL
+sidebar: Docs
+showTitle: true
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
+
+---
+
+HogQL is our Direct SQL layer. You can consider it a wrapper around ClickHouse SQL, with a few niceties added.
+
+## HogQL Expressions
+
+![Events table](../images/features/hogql/trends-breakdown.png)
+
+To see your live events table, click 'Events' on the left sidebar. Here you will see a live feed of Events as they are happening.
+
+### Supported ClickHouse functions
+
+Currently the following functions have been enabled. This list is ever expanding.
+In case of discrepencies, the version [directly on GitHub](https://github.com/posthog/posthog/blob/master/posthog/hogql/constants.py) has the final say.
+
+#### Arithmetic
+- `abs`
+- `max2`
+- `min2`
+
+#### Type conversions
+
+All properties are currently accessed as strings. To compare numeric properties, you will need to wrap them with a function like `toInt`. For example: `toInt(properties.$screen_width)`
+
+- `toInt`
+- `toFloat`
+- `toDecimal`
+- `toDate`
+- `toDateTime`
+- `toIntervalSecond`
+- `toIntervalMinute`
+- `toIntervalHour`
+- `toIntervalDay`
+- `toIntervalWeek`
+- `toIntervalMonth`
+- `toIntervalQuarter`
+- `toIntervalYear`
+- `toString`
+
+#### Date functions
+- `INTERVAL 1 MONTH` keyword
+- `now()`
+- `toMonday`
+- `toStartOfYear`
+- `toStartOfQuarter`
+- `toStartOfMonth`
+- `toStartOfWeek`
+- `toStartOfDay`
+- `toStartOfHour`
+- `toStartOfMinute`
+- `toStartOfSecond`
+- `toStartOfFiveMinutes`
+- `toStartOfTenMinutes`
+- `toStartOfFifteenMinutes`
+- `toTimezone`
+- `age`
+- `dateDiff`
+- `dateTrunc`
+- `formatDateTime`
+
+#### String functions
+- `length`
+- `empty`
+- `notEmpty`
+- `leftPad`
+- `rightPad`
+- `lower`
+- `upper`
+- `repeat`
+- `format`
+- `concat`
+- `coalesce`
+- `substring`
+- `appendTrailingCharIfAbsent`
+- `endsWith`
+- `startsWith`
+- `trim`
+- `trimLeft`
+- `trimRight`
+- `extractTextFromHTML`
+- `match`
+- `like`
+- `ilike`
+- `notLike`
+- `replace`
+- `replaceOne`
+
+#### Array functions
+- `tuple`
+
+#### Conditional
+- `if`
+- `not`
+- `multiIf`
+
+#### Rounding
+- `round`
+- `floor`
+- `ceil`
+- `trunc`
+
+
+## HogQL Queries
+
+We are working on adding full SQL query support to PostHog. Follow along [in this issue](https://github.com/PostHog/meta/issues/81).
