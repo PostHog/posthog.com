@@ -136,4 +136,20 @@ I have a couple of book recommendations if you want to go even deeper into this 
 
 - **[Don’t Make Me Think](https://www.amazon.co.uk/Dont-Make-Me-Think-Usability/dp/0321344758) by Steven Krug:** A foundational text on usability testing.
 
- <iframe src="https://newsletter.posthog.cc/embed" width="480" height="320" style="border:1px solid #EEE; background:white;" frameborder="0" scrolling="no"></iframe> 
+<div id="custom-substack-embed"></div>
+
+<script>
+  window.CustomSubstackWidget = {
+    substackUrl: "http://newsletter.posthog.cc",
+    placeholder: "example@gmail.com",
+    buttonText: "Subscribe",
+    theme: "custom",
+    colors: {
+      primary: "#F54E00",
+      input: "#EEEFE9",
+      email: "#000000",
+      text: "#FFFFFF",
+    }
+  };
+</script>
+<script src="https://substackapi.com/widget.js" async></script>
