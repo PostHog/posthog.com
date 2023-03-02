@@ -801,7 +801,7 @@ As an open source platform designed for technical teams, PostHog integrates with
 
 Deploying PostHog takes mere minutes. Just [include our tracking snippet](/docs/integrate?tab=snippet) in your product or website and (thanks to autocapture) you're immediately capturing events. Once up and running, you can enable session recording via your project settings. See our guide to [getting started on PostHog Cloud](/docs/getting-started/cloud) for more info.
 
-### How scaleable is PostHog?
+### How scalable is PostHog?
 
 PostHog is built on ClickHouse, the world’s fastest column-based database. It’s used by the likes of Uber, Spotify and Cloudflare, and allows us to handle billion-scale event volumes with ease.
 
