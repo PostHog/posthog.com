@@ -117,7 +117,7 @@ In your PostHog instance, go to the experiments tab, click create a new experime
 
 ![Experiment](../images/tutorials/nextjs-ab-tests/experiment.gif)
 
-> There must be at least one occurrence of the action for it to show as a goal, so make sure to click the button after creating the action.
+> **Note:** There must be at least one occurrence of the action for it to show as a goal, so make sure to click the button after creating the action.
 
 Once we create the experiment, we can start to implement it. Come back and launch it later.
 
@@ -139,7 +139,7 @@ In `index.js`, set up a state for the call to action button and a `useEffect()` 
 
 To check the flag, import `useFeatureFlagEnabled` from `posthog-js/react`, use it to call the flag name (`main-cta`), and change the state of the button text to "Learn more" if `true`.
 
-> Use `posthog.feature_flags.override({'main-cta': 'test'})` to make sure it is working, but remove it when we go to release.
+> **Note:** Use `posthog.feature_flags.override({'main-cta': 'test'})` to make sure it is working, but remove it when we go to release.
 
 ```js
 // pages/index.js
