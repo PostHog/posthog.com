@@ -520,14 +520,6 @@ export const SelfHosting = () => {
                     <CTA url="/docs/self-host" title="Learn more about self-hosting" />
                 </Content>
                 <div className="flex items-end mt-auto w-full">
-                    <div className="hidden md:block mb-3">
-                        <hr className="w-[20px] h-[3px] rounded-full" />
-                        <div className="text-primary/80 inline-block leading-tight text-[12px]">
-                            Spin up a hobby deployment with <Link to="/docs/self-host/deploy/aws">AWS</Link>,{' '}
-                            <Link to="/docs/self-host/deploy/gcp">Google Cloud</Link>, or{' '}
-                            <Link to="/docs/self-host/deploy/digital-ocean">DigitalOcean</Link>.
-                        </div>
-                    </div>
                     <div className="md:relative w-3/4">
                         <motion.div
                             transition={{ delay: 0.5 }}
