@@ -1,6 +1,6 @@
 ---
 title: The most useful product health metrics
-date: 2023-02-28
+date: 2023-03-02
 author: ["ian-vanagas"]
 showTitle: true
 rootpage: /blog
@@ -18,29 +18,19 @@ A product is a complicated system you want to keep healthy. Measuring product he
 
 This post goes over:
 
-1. what makes a good health metric
-2. common product health metrics
-3. how to choose the right product health metrics
+1. What is a product health metric?
+2. Common product health metrics
+3. How to choose the right product health metrics
 
 ## What is a product health metric?
 
-If you think of a product like a human body, then product health metrics are like the vital signs. They are the body temperature, blood pressure, pulse rate, and respiration rate of a product. They are a way to constantly judge how your product is doing. They show how changes, updates, and the environment are impacting it.
+If you think of a product like a human body, then product health metrics are like the vital signs. They are the body temperature, blood pressure, pulse rate, and respiration rate of a product. They help you constantly judge how your product is doing and show the impact of changes, updates, and the environment.
 
-Product health metrics are usually steady. Radical changes are a bad sign. Having your temperature way above average means you are sick and need medicine. If a product health metric sees a radical change, it needs intervention.
+Product health metrics are usually steady. Dramatic changes are a bad sign. Just like a spike in your body temperature means you are sick, a spike in a product health metrics means there's a problem. If a dramatic change doesn't prompt a change in your development or strategy, your health metric isn't good. A doctor is useless if you never listen to them. A good product health metric is a summary of a product, so it must be abstract enough to remove unnecessary details, but detailed enough to provide actionable information.
 
-Companies aim to improve product health metrics steadily over the long term. Like how exercise improves your pulse and respiration rates, adding enhancements and fixing bugs improve your product health metrics.
-
-Because they are constantly measured and steadily improved, product health metrics generally update in real-time and changes are measured over a length of time. For example, a product health metric might be down for the week, which triggers a minor adjustment in focus for next week. It can at the same time be up for the month, which is an encouraging sign. 
+Companies aim to improve product health metrics over the long term. Like how consistently exercising improves your pulse and respiration rates, adding enhancements and fixing bugs improve your product health metrics. Because of this, these metrics update in real-time with changes measured over days, weeks, or months. For example, a metric might be down for the week, which triggers a minor adjustment in focus for next week. It can at the same time be up for the month, which means your product is improving. 
 
 Another similarity to your body’s health is that mature products generally care more about them. [Early-stage companies](/blog/early-stage-analytics) are searching for product fit. This often requires product changes or pivots that lead to radical changes in product health metrics. It doesn’t mean the product is "sick," it means they haven’t figured out what "healthy" means yet.
-
-## What makes a good product health metric?
-
-A good health metric is one you monitor regularly and makes a difference if it changes significantly. It must be a metric that matters, and is likely to change if something goes wrong. It is a summary of a product, so it must be abstract enough to remove unnecessary details, but detailed enough to provide actionable information.
-
-The key to actionable information is that you must act on it. If a change in your product health metrics doesn’t prompt a change in your development or strategy, the product health metrics aren’t good. A doctor is useless if you never listen to them. 
-
-For example, if you see a drop in session duration, it might mean your product isn’t engaging enough and you must focus on improving engagement. This should lead you to figure out ways to improve engagement and prioritize that work over other work. If the drop in session duration doesn’t inspire change, it isn’t a good health metric.
 
 ## Common product health metrics
 
@@ -118,11 +108,11 @@ Picking the right product health metric goes back to what makes a good one. It m
 
 As examples, let's go over some types of products and look at what a good health metric might be for them:
 
-- Subscription B2C: New user growth, churn rate and cohort retention, extreme session duration, daily and weekly active users.
-- Ad-based B2C: Average session duration, DAU/MAU intensity, daily and weekly active users.
-- Marketplaces: Feature usage (listing, buying), supplier and buyer lifecycle (check both reoccur and return), new supply growth.
-- B2B SaaS: New organization growth, feature usage, organization churn rate.
-- B2B Usage/User-based: Feature usage, average session duration, daily and weekly active users.
+- **Subscription B2C:** New user growth, churn rate and cohort retention, extreme session duration, daily and weekly active users.
+- **Ad-based B2C:** Average session duration, DAU/MAU intensity, daily and weekly active users.
+- **Marketplaces:** Feature usage (listing, buying), supplier and buyer lifecycle (check both reoccur and return), new supply growth.
+- **B2B SaaS:** New organization growth, feature usage, organization churn rate.
+- **B2B Usage/User-based:** Feature usage, average session duration, daily and weekly active users.
 
 Choosing the right level of detail is also important. Being too specific causes the metric to not be representative of the product’s health. Being too broad means the metric isn’t actionable and makes it unclear what interventions you can do to improve an issue.
 
