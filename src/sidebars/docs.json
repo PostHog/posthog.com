@@ -273,10 +273,6 @@
         "icon": "/images/product-icons/product-analytics.svg",
         "children": [
             {
-                "name": "Library comparison",
-                "url": "/docs/integrate/libraries"
-            },
-            {
                 "name": "Identify users",
                 "url": "/docs/integrate/identifying-users"
             },
@@ -1223,6 +1219,10 @@
     {
         "name": "Support",
         "url": "/manual/support"
+    },
+    {
+        "name": "Library comparison",
+        "url": "/docs/integrate/libraries"
     },
     {
         "name": "Glossary",
