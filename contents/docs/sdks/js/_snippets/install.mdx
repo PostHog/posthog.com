@@ -8,15 +8,17 @@ Place the snippet in the `<head>` tags of your website, ideally just above the c
 
 Or you can include it using npm, by doing either:
 
-```bash
+<MultiLanguage>
+
+```bash file=Yarn
 yarn add posthog-js
 ```
 
-or:
-
-```bash
+```bash file=NPM
 npm install --save posthog-js
 ```
+
+</MultiLanguage>
 
 And then include it in your files:
 
@@ -32,3 +34,5 @@ if (!window.location.host.includes('127.0.0.1') && !window.location.host.include
     posthog.init('<ph_project_api_key>', { api_host: '<ph_instance_address>' })
 }
 ```
+
+If you're using React or Next.js, checkout our [React SDK](/docs/sdks/react) or [Next.js integration](/docs/integrate/third-party/next-js).

@@ -39,6 +39,7 @@ import { CommunityCTA } from './components/CommunityCTA'
 import { CommunityQuestions } from './components/CommunityQuestions'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { Contact } from './components/Contact'
+import { ContactSales } from './components/ContactSales'
 import { Container } from './components/Container'
 import { ContributorCard } from './components/ContributorCard'
 import { ContributorSearch } from './components/ContributorSearch'
@@ -180,6 +181,7 @@ export const shortcodes = {
     CommunityQuestions,
     CompensationCalculator,
     Contact,
+    ContactSales,
     Container,
     ContributorCard,
     ContributorSearch,
