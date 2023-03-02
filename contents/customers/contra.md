@@ -40,7 +40,9 @@ Feature flags in particular are important because the engineering team deploys a
 
 ### Using session recordings to improve a product
 
-The combination of feature flags and session recordings has been especially powerful for Contra, as it enables product managers to directly observe how user behavior changes between variants. In other instances, session recording alone enables the team to identify where to make improvements. 
+The combination of feature flags and session recordings has been especially powerful for Contra, as it enables product managers and designers to directly observe how user behavior changes between variants. In other instances, session recording alone enables the team to identify where to make improvements.
+
+"For example," said Allison, "if we have a notification that a user failed to setup payments, we can view their recordings in PostHog and identify the issue ourselves, enabling us to proactively engage with the user. This means faster debugging and a better user experience. Our support team can also leverage recordings in a similar way."
 
 ![Contra screenshot](../images/customers/contra/contra_session.gif)
 <Caption>Using PostHog session recording to analyze user sign-ups</Caption>
