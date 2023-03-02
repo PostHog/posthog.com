@@ -14,7 +14,7 @@ tags:
  - Product metrics
 ---
 
-Like the human body, a product is a complicated system you want to keep healthy. Measuring product health with metrics helps this happen. They help you understand what parts of your product are working as expected and what parts need interventions to make them healthy.
+A product is a complicated system you want to keep healthy. Measuring product health with metrics helps this happen. They help you understand what parts of your product are working as expected and what parts need interventions to make them healthy.
 
 This post goes over:
 
@@ -32,7 +32,7 @@ Companies aim to improve product health metrics steadily over the long term. Lik
 
 Because they are constantly measured and steadily improved, product health metrics generally update in real-time and changes are measured over a length of time. For example, a product health metric might be down for the week, which triggers a minor adjustment in focus for next week. It can at the same time be up for the month, which is an encouraging sign. 
 
-Another similarity to your body’s health is that mature products generally care more about them. Early-stage companies are searching for product fit. This often requires product changes or pivots that lead to radical changes in product health metrics. It doesn’t mean the product is "sick," it means they haven’t figured out what "healthy" means yet.
+Another similarity to your body’s health is that mature products generally care more about them. [Early-stage companies](/blog/early-stage-analytics) are searching for product fit. This often requires product changes or pivots that lead to radical changes in product health metrics. It doesn’t mean the product is "sick," it means they haven’t figured out what "healthy" means yet.
 
 ## What makes a good product health metric?
 
@@ -54,17 +54,15 @@ Each of these categories has metrics within, which we go over below.
 
 ### New user growth
 
-A healthy product grows consistently. What "consistent" means depends on the industry. For example, a consumer app expects more users to signup than a complicated B2B SaaS platform. What’s true about both of them is they want the growth to continue. Like a body, if new cells stop being created, that has consequences for your health. 
+A healthy product grows consistently. What "consistent" means depends on the industry. For example, a consumer app expects more users to signup than a complicated B2B SaaS platform. What’s true about both of them is they want the growth to continue. Like a body, if new cells stop being created, that has consequences for your health.
+
+![New user growth](../images/blog/product-health-metrics/growth.png)
 
 If growth is slowing, your product, positioning, or strategy might need to change. It is a sign:
 
 - your product isn’t appealing enough to your target users
 - you have the wrong features for your users
 - you aren’t targeting the right users
-
-Using this new user growth as a product metric helps you monitor and improve this.
-
-![New user growth](../images/blog/product-health-metrics/growth.png)
 
 ### Churn rate
 
@@ -86,35 +84,45 @@ Consistent growth in active users means:
 - you are keeping users engaged
 - users aren’t leaving
 
-Active users are the lifeblood of your product, so seeing them continue to grow means a product is healthy. Blood must continue to flow for your body to work, the same is true with your product.
-
-Doing a ratio of these values such as DAU/MAU can also be useful. This helps you understand how frequently people are engaging with the product. You can use PostHog’s formula mode to calculate this. 
+Doing a ratio of these values such as DAU/MAU can also be useful. This helps you understand how frequently people are engaging with the product, and the "intensity" this usage. You can use PostHog’s formula mode to calculate this. 
 
 ![DAU/MAU ratio](../images/blog/product-health-metrics/daumau.png)
 
 ### Feature usage
 
-Having users is great, but you want them to actually use your product. Measuring feature usage helps you do this. This is tracking the usage of parts of your product, such as creating, analyzing, or sharing content.
+Having users is great, but you want them to actually use your product. Measuring feature usage helps you do this. This is tracking the usage of parts of your product, such as creating, analyzing, or sharing content. Feature usage is a more specific health metric than new user growth or churn rate. It shows the health of specific features, which enables it to be more actionable.
+
+A way to do this is with the lifecycle insight. It enables you to see new, returning, and resurrected usage of the feature as well as how many users have gone dormant.
+
+![Lifecycle](../images/blog/product-health-metrics/lifecycle.png)
 
 Feature usage helps you understand the health of individual parts of your product. Like the body, if you heal the "sick" parts, the whole is healthier. Feature usage improves prioritization by aligning development time with usage.
 
-Feature usage is a more specific health metric than new user growth or churn rate. It shows the health of specific features, which enables it to be more actionable.
-
 ### Session duration
 
-Depending on the product, session duration, or its average, are useful product health metrics. It is a general measurement of user engagement. This is because it shows if users are spending significant time in your product. If this was to change significantly, something fundamentally shifted in your app.
+Depending on the product, session duration, or its average, are useful product health metrics. It is a general measurement of user engagement. It shows if users are spending significant time in your product. If this changed significantly, something shifted in your app to cause users to spend less time there.
 
-For some products, the extremes of session duration might be more important. This enables you to monitor the health of your product for power users, which could be different, but more important, than average users.
+For products reliant on power users, the extremes of session duration can be more important. As average users are not your target users, the average session duration can be misleading. Improving power user session duration shows there is high demand for your product, people are reliant on it, and that can lead to more success.
+
+For utilities, seeing average session duration _go down_ can be a good sign. This is because your product is becoming more efficient at doing what users want it to do. Saving people time is worth money, and if this is your goal, then making sure your health metrics align helps make it happen.
 
 ![Session duration](../images/blog/product-health-metrics/duration.png)
 
 ## How to choose the right product health metrics
 
-The "right" product health metric depends on your product, company, stage, industry, and infinitely more variables. Picking one goes back to what makes a good product health metric. It must be something you want to:
+Picking the right product health metric goes back to what makes a good one. It must be something you want to:
 
 - improve slowly, but a dramatic change would cause concern and intervention.
 - monitor in the short run (daily, weekly) and improve in the long run.
 - know and track because it makes a difference in the quality of the product and experience for users.
+
+As examples, let's go over some types of products and look at what a good health metric might be for them:
+
+- Subscription B2C: New user growth, churn rate and cohort retention, extreme session duration, daily and weekly active users.
+- Ad-based B2C: Average session duration, DAU/MAU intensity, daily and weekly active users.
+- Marketplaces: Feature usage (listing, buying), supplier and buyer lifecycle (check both reoccur and return), new supply growth.
+- B2B SaaS: New organization growth, feature usage, organization churn rate.
+- B2B Usage/User-based: Feature usage, average session duration, daily and weekly active users.
 
 Choosing the right level of detail is also important. Being too specific causes the metric to not be representative of the product’s health. Being too broad means the metric isn’t actionable and makes it unclear what interventions you can do to improve an issue.
 
