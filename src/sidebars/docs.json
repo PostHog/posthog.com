@@ -397,8 +397,16 @@
         "icon": "/images/product-icons/experiments.svg",
         "children": [
             {
-                "name": "Experimentation",
-                "url": "/manual/experimentation"
+                "name": "Start here",
+                "url": "/docs/experiments/start-here"
+            },
+            {
+                "name": "Statistical significance",
+                "url": "/docs/experiments/significance"
+            },
+            {
+                "name": "Under the hood",
+                "url": "/docs/experiments/under-the-hood"
             }
         ]
     },
