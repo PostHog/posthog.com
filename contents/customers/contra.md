@@ -14,7 +14,7 @@ toolsUsed:
     - Product Analytics
 ---
 
-Contra is a freelance marketplace for service independent creatives and engineers. It empowers its community to find work that fits the way they want to live. Since 2022 [Contra](http://www.contra.com), has used PostHog Cloud to power many of its engineering and product decisions, though previously the stack was a lot more complex.
+Contra is a freelance marketplace for independent creatives and engineers. It empowers its community to find work that fits the way they want to live. Since 2022 [Contra](http://www.contra.com), has used PostHog Cloud to power many of its engineering and product decisions, though previously the stack was a lot more complex.
 
 “Originally we were using multiple platforms,” said Allison Nulty, Head of Product at Contra. “That meant Mixpanel for analytics, LaunchDarkly for feature flags, Segment for front-end tracking and FullStory for recordings. In isolation they could work well, but they were costly even then.”
 
