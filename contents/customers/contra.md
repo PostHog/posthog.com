@@ -20,7 +20,7 @@ Contra is a freelance marketplace for independent creatives and engineers. It em
 
 As a result of spreading functionality across multiple tools, Contra also faced data inconsistencies. Tools such as Segment were helpful tracking for forwarding data between platforms, but also added to the costs and upkeep required. Eventually, Contra decided to consolidate the stack as much as possible — and that’s where PostHog came in. 
 
-### Using feature flags for a ‘slow roll-out’ strategy
+### Using feature flags for a ‘slow rollout’ strategy
 
 Switching to PostHog enabled Contra to consolidate feature flags, session recordings, product analytics and more into a single tool — but it also enabled the company to come together around a single platform as well. Instead of each team in the company relying on a different software, everyone was able to look at a single source of truth.
 
@@ -36,7 +36,7 @@ Switching to PostHog enabled Contra to consolidate feature flags, session record
 
 “Previously the teams all used different tools,” said Allison. “That led to a lot of confusion, because our feature flag platform didn't integrate with our analytics platform, or our session recording tool. That made it difficult to use feature flag data to build better user journeys or understand drop-offs.”
 
-Feature flags in particular are important because the engineering team deploys all new product features behind flags and follows a careful ‘slow roll-out’ strategy. All features are first deployed to beta users, then 20% of all users, followed by 50% of all users and finally 100% of all users. Switching feature flags to PostHog enables Contra to continue testing with this method, while also analyzing feature adoption and performance in the same tool. 
+Feature flags in particular are important because the engineering team deploys all new product features behind flags and follows a careful ‘slow rollout’ strategy. All features are first deployed to beta users, then 20% of all users, followed by 50% of all users and finally 100% of all users. Switching feature flags to PostHog enables Contra to continue testing with this method, while also analyzing feature adoption and performance in the same tool. 
 
 ### Using session recordings to improve a product
 
