@@ -51,4 +51,4 @@ After noticing the issue, the team made a change and saw an immediate, massive i
 
 “Adoption has also come at the encouragement of our CEO and co-founder,” said Allison. “We have cross-functional meetings where engineers, product managers, and designers 'watch the tapes' to observe successful and unsuccessful sessions and identify patterns. Everyone at Contra is familiar with PostHog.”
 
-“That ability to consolidate platforms, to not have to onboard teams to six different platforms, to be able to easily connect events and funnels to recordings? It was a real a-ha moment for me!”
+“That ability to consolidate platforms, to simplify team onboarding, to be able to easily connect events and funnels to recordings? It was a real a-ha moment for me!”
