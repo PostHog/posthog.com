@@ -38,7 +38,7 @@ You can now integrate PostHog using the `PostHogProvider`. PostHog then provides
 ### New toolbar element selector 
 ![The selector modal being used to discover the more meaningful selector](../images/tutorials/toolbar/toolbar-selector-edit.gif)
 
-We've added a new element selector to [the PostHog toolbar](/manual/toolbar) so that it's easier to create actions and events in some circumstances. 
+We've added a new element selector to [the PostHog toolbar](/manual/toolbar) so that it's easier to create actions in some circumstances. 
 
 The new modal shows the element wrapping a selected element, so that subsequent clicks build up a selection. Want to give it a go? We've updated [our toolbar tutorial](/tutorials/toolbar) with instructions.
 
