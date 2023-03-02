@@ -35,7 +35,9 @@ export const onRouteUpdate = ({ location, prevLocation }: RouteUpdateArgs) => {
         window?.posthog?.capture('$pageview')
     }
 }
-export const wrapPageElement = ({ element, props }) => {
+
+// TODO: Is this needed?
+/*export const wrapPageElement = ({ element, props }) => {
     const slug = props.location.pathname.substring(1)
     return props.custom404 || !props.data ? (
         element
@@ -49,4 +51,4 @@ export const wrapPageElement = ({ element, props }) => {
     ) : (
         element
     )
-}
+}*/
