@@ -30,7 +30,7 @@ Switching to PostHog enabled Contra to consolidate feature flags, session record
         size="md"
         name="Allison Nulty"
         title="Head of Product, Contra "
-        quote={`“A real positive has been the ability to talk to the PostHog engineers, to share feedback with them and have it received well. I think how rewarding that open line of communication is when I engage with our users too.”`}
+        quote={`“A huge competitive advantage has been the ability to talk directly with PostHog engineers over Slack. We share feedback, ask questions, and make requests and always see a quick response time and thoughtful suggestions. At Contra, we apply these same principles of collaborating with our community to build our product.”`}
     />
 </BorderWrapper>
 
