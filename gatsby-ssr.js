@@ -16,19 +16,7 @@ export const wrapPageElement = ({ element, props }) => {
     const slug = props.location.pathname.substring(1)
     initKea(true, props.location)
     return wrapElement({
-        element:
-            props.custom404 || !props.data ? (
-                element
-            ) : /^handbook|^docs\/(?!api|product-analytics)|^manual/.test(slug) &&
-              !['docs/api/post-only-endpoints', 'docs/api/user'].includes(slug) ? (
-                <HandbookLayout {...props} />
-            ) : /^product\//.test(slug) ? (
-                <Product {...props} />
-            ) : /^careers\//.test(slug) ? (
-                <Job {...props} />
-            ) : (
-                element
-            ),
+        element: element,
     })
 }
 
