@@ -1,5 +1,5 @@
 import { useLocation } from '@reach/router'
-import React, { useEffect } from 'react'
+import React, { RefObject, useEffect, useRef, useState } from 'react'
 import { usePost } from './hooks'
 import { animateScroll as scroll, Link as ScrollLink } from 'react-scroll'
 import { defaultMenuWidth } from './context'
@@ -40,9 +40,31 @@ export default function Post({ children }: { children: React.ReactNode }) {
     } = usePost()
     const { hash, href } = useLocation()
 
+    const sidebarRef = useRef<HTMLDivElement>(null)
+    const actionsRef = useRef<HTMLUListElement>(null)
+    const [tocHeight, setTocHeight] = useState<string | number>('auto')
+
     useEffect(() => {
         if (hash && !hideSearch) {
             scroll.scrollMore(-50)
+        }
+        if (stickySidebar && typeof window !== 'undefined') {
+            const adjustTocHeight = () => {
+                const sidebar = sidebarRef?.current?.getBoundingClientRect()
+                const actions = actionsRef?.current?.getBoundingClientRect()
+                if (sidebar && actions) {
+                    const height = Math.min(window.innerHeight, actions?.bottom) - sidebar?.bottom - actions?.height
+                    setTocHeight(height)
+                }
+            }
+            adjustTocHeight()
+            window.addEventListener('scroll', adjustTocHeight)
+            window.addEventListener('resize', adjustTocHeight)
+
+            return () => {
+                window.removeEventListener('scroll', adjustTocHeight)
+                window.removeEventListener('resize', adjustTocHeight)
+            }
         }
     }, [])
 
@@ -133,36 +155,47 @@ export default function Post({ children }: { children: React.ReactNode }) {
                                 key={`${title}-sidebar`}
                                 className="flex-shrink-0 w-full justify-self-end my-10 lg:my-0 mr-auto h-full lg:px-0 px-4 box-border lg:flex hidden flex-col"
                             >
-                                <div className={`${stickySidebar ? 'sticky top-0' : ''} bg-tan dark:bg-primary z-10`}>
+                                <div
+                                    ref={sidebarRef}
+                                    className={`${stickySidebar ? 'sticky top-0' : ''} bg-tan dark:bg-primary z-10`}
+                                >
                                     {sidebar}
                                 </div>
                                 <div className="flex flex-grow items-end">
-                                    <div className="lg:pt-6 !border-t-0 sticky bottom-0 w-full">
+                                    <div className="!border-t-0 sticky bottom-0 w-full">
                                         {tableOfContents && tableOfContents?.length > 1 && (
-                                            <div className="px-4 lg:px-8 lg:pb-4 lg:block hidden">
-                                                <h4 className="text-black dark:text-white font-semibold opacity-25 m-0 mb-1 text-sm">
-                                                    Jump to:
-                                                </h4>
-                                                <Scrollspy
-                                                    offset={-50}
-                                                    className="list-none m-0 p-0 flex flex-col"
-                                                    items={tableOfContents?.map((navItem) => navItem.url)}
-                                                    currentClassName="active-product"
-                                                >
-                                                    {tableOfContents.map((navItem, index) => (
-                                                        <li className="relative leading-none m-0" key={navItem.url}>
-                                                            <InternalSidebarLink
-                                                                url={navItem.url}
-                                                                name={navItem.value}
-                                                                depth={navItem.depth}
-                                                                className="hover:opacity-100 opacity-60 text-[14px] py-1 block relative active:top-[0.5px] active:scale-[.99]"
-                                                            />
-                                                        </li>
-                                                    ))}
-                                                </Scrollspy>
+                                            <div
+                                                style={{ height: tocHeight }}
+                                                className="lg:pt-6 px-4 lg:px-8 lg:pb-4 lg:flex hidden overflow-auto"
+                                            >
+                                                <div className="mt-auto">
+                                                    <h4 className="text-black dark:text-white font-semibold opacity-25 m-0 mb-1 text-sm">
+                                                        Jump to:
+                                                    </h4>
+                                                    <Scrollspy
+                                                        offset={-50}
+                                                        className="list-none m-0 p-0 flex flex-col"
+                                                        items={tableOfContents?.map((navItem) => navItem.url)}
+                                                        currentClassName="active-product"
+                                                    >
+                                                        {tableOfContents.map((navItem, index) => (
+                                                            <li className="relative leading-none m-0" key={navItem.url}>
+                                                                <InternalSidebarLink
+                                                                    url={navItem.url}
+                                                                    name={navItem.value}
+                                                                    depth={navItem.depth}
+                                                                    className="hover:opacity-100 opacity-60 text-[14px] py-1 block relative active:top-[0.5px] active:scale-[.99]"
+                                                                />
+                                                            </li>
+                                                        ))}
+                                                    </Scrollspy>
+                                                </div>
                                             </div>
                                         )}
-                                        <ul className="list-none p-0 flex mt-0 mb-10 lg:mb-0 border-t border-gray-accent-light border-dashed dark:border-gray-accent-dark items-center bg-tan/40 dark:bg-primary/40 backdrop-blur">
+                                        <ul
+                                            ref={actionsRef}
+                                            className="list-none p-0 flex mt-0 mb-10 lg:mb-0 border-t border-gray-accent-light border-dashed dark:border-gray-accent-dark items-center bg-tan/40 dark:bg-primary/40 backdrop-blur"
+                                        >
                                             {filePath && (
                                                 <div className="flex divide-x divide-dashed divide-gray-accent-light dark:divide-gray-accent-dark border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark">
                                                     <SidebarAction
