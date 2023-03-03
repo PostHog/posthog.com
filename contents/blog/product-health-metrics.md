@@ -14,9 +14,9 @@ tags:
  - Product metrics
 ---
 
-A product is a complicated system you want to keep healthy. Measuring product health with metrics helps this happen. They help you understand what parts of your product are working as expected and what parts need interventions to make them healthy.
+A product is a complicated system you want to keep healthy. Product health metrics help you understand what parts of your product are working as expected and what parts need interventions to make them healthy.
 
-This post goes over:
+In this guide, I'll cover:
 
 1. What is a product health metric?
 2. Common product health metrics
@@ -24,23 +24,21 @@ This post goes over:
 
 ## What is a product health metric?
 
-If you think of a product like a human body, then product health metrics are like the vital signs. They are the body temperature, blood pressure, pulse rate, and respiration rate of a product. They help you constantly judge how your product is doing and show the impact of changes, updates, and the environment.
+If you think of a product like a human body, then product health metrics are the vital signs. They are the body temperature, blood pressure, pulse rate, and respiration rate of a product. They help you constantly judge how your product is doing and show the impact of changes, updates, and the environment.
 
 Product health metrics are usually steady. Dramatic changes are a bad sign. Just like a spike in your body temperature means you are sick, a spike in a product health metrics means there's a problem. If a dramatic change doesn't prompt a change in your development or strategy, your health metric isn't good. A doctor is useless if you never listen to them. A good product health metric is a summary of a product, so it must be abstract enough to remove unnecessary details, but detailed enough to provide actionable information.
 
 Companies aim to improve product health metrics over the long term. Like how consistently exercising improves your pulse and respiration rates, adding enhancements and fixing bugs improve your product health metrics. Because of this, these metrics update in real-time with changes measured over days, weeks, or months. For example, a metric might be down for the week, which triggers a minor adjustment in focus for next week. It can at the same time be up for the month, which means your product is improving. 
 
-Another similarity to your body’s health is that mature products generally care more about them. [Early-stage companies](/blog/early-stage-analytics) are searching for product fit. This often requires product changes or pivots that lead to radical changes in product health metrics. It doesn’t mean the product is "sick," it means they haven’t figured out what "healthy" means yet.
+Mature products generally care more about health metrics. [Early-stage companies](/blog/early-stage-analytics) are searching for product fit, which often necessitates big changes or pivots that require radically different product health metrics. It doesn’t mean the product is "sick," it means they haven’t figured out what "healthy" means yet.
 
 ## Common product health metrics
 
-Common product health metrics are largely split into three categories:
+Product health metrics largely fit into three categories:
 
 1. Adoption
 2. Engagement
 3. Retention
-
-Each of these categories has metrics within, which we go over below.
 
 ### New user growth
 
