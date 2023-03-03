@@ -40,7 +40,7 @@ You can now control Max ([that's his name](/handbook/company/team)) using the WA
 
 Our Head of Product, Luke, decided to stretch his engineering skills this week and added a new React library which makes it easy to use product analytics and feature flags with React and Next.js apps. This is available in `posthog-js` from version 1.50.
 
-You can now integrate PostHog using the `PostHogProvider`. PostHog then provides a bunch of hooks including `usePostHog` to access the initialized client, and the feature flag hooks `useFeatureEnabled` and `useFeaturePayload`. Checkout [the React docs](/docs/sdks/react) or [the Next.js docs](docs/integrate/third-party/next-js) for more information.
+You can now integrate PostHog using the `PostHogProvider`. PostHog then provides a bunch of hooks including `usePostHog` to access the initialized client, and the feature flag hooks `useFeatureEnabled` and `useFeaturePayload`. Checkout [the React docs](/docs/sdks/react) or [the Next.js docs](/docs/integrate/third-party/next-js) for more information.
 
 ### New toolbar element selector 
 ![The selector modal being used to discover the more meaningful selector](../images/tutorials/toolbar/toolbar-selector-edit.gif)
