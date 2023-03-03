@@ -57,7 +57,7 @@ export default function ContactSales() {
 
                         <div className="grid sm:grid-cols-2 sm:gap-x-12 gap-y-12">
                             <div>
-                                <div className="text-center bg-[#2D2D2D] p-2 sm:p-4 rounded-md relative sm:rotate-6 sm:-mr-8 flex-shrink-0 sm:max-w-full max-w-[200px]">
+                                <div className="text-center bg-[#2D2D2D] p-2 sm:p-3 rounded-md relative sm:rotate-6 sm:-mr-8 flex-shrink-0 sm:max-w-full max-w-[200px]">
                                     <p className="text-white leading-tight m-0 text-xs sm:text-base font-bold font-comic">
                                         Whoa, industry leaders!
                                     </p>
