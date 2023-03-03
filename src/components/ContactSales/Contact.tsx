@@ -51,7 +51,7 @@ const fields: {
         options: [
             { value: 'Product Management', hubspotValue: 'product' },
             { value: 'Engineering', hubspotValue: 'engineering' },
-            { value: 'Executive', hubspotValue: 'leadership' },
+            { value: 'Leadership', hubspotValue: 'leadership' },
             { value: 'Marketing', hubspotValue: 'marketing' },
             { value: 'Sales', hubspotValue: 'sales' },
             { value: 'Other', hubspotValue: 'other' },
