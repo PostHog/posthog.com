@@ -110,6 +110,8 @@ You can then just call the `"next"` URL to get the next set of results.
 
 All requests to PostHog, except for evaluating feature flags and sending events (i.e. the [POST-only public endpoints](/docs/api/post-only-endpoints)), are rate limited.
 
+In practice, a rule of thumb for whether rate limits apply or not is to check if a personal API key is used for auth. Everything using a personal API key for auth is rate limited.
+
 There's separate limits for different kinds of resources.
 
 For all CRUD endpoints, the rate limits are `480/minute` and `4800/hour`. 
