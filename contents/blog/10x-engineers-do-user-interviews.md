@@ -15,11 +15,9 @@ tags:
   - Product engineers
 ---
 
-Most people think becoming a 10x engineer means improving their typing speed, buying more monitors, or using the latest framework where everything is a macro. These hacks might improve efficiency somewhat, but you'll get a 1.5x boost at most.
+I believe the best way to become a 10x engineer is to zoom out and solve for user impact. Engineers and founders need to deeply understand (and care) about users. In doing so, you generate true leverage by choosing the right problem, building the right solution, and solving their "hair-on-fire" problems. 
 
-So, where does the next 8.5x come from? By zooming out and solving for user impact. You, as an engineer, need to deeply understand (and care) about your users. In doing so, you'll generate true leverage by choosing the right problem, building the right solution, and solving their "hair-on-fire" problems. 
-
-The best way to do this? Speak directly to users.
+The best way to do this? Speak directly to them.
 
 ## Solving the information bottleneck
 
