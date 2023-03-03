@@ -15,7 +15,7 @@ tags:
   - Product engineers
 ---
 
-I believe the best way to become a 10x engineer is to zoom out and solve for user impact. Engineers and founders need to deeply understand (and care) about users. In doing so, you generate true leverage by choosing the right problem, building the right solution, and solving their "hair-on-fire" problems. 
+I believe the best way to become a 10x engineer is to zoom out and solve for user impact. Engineers and founders need to deeply understand (and care) their users. In doing so, you generate true leverage by choosing the right problem, building the right solution, and solving their "hair-on-fire" problems. 
 
 The best way to do this? Speak directly to them.
 
@@ -25,7 +25,7 @@ In traditional tech companies, information flows from the user to the product ma
 
 ![PM to engineer](../images/blog/10x-engineers-do-user-interviews/pm-to-engineer.png)
 
-At each stage, important context is lost. Information flows one way, so you can’t go deeper on the important areas, and engineers lose agency in what they're building and why. In such an environment, speed is the only logical optimization for an engineer.
+At each stage, important context is lost. Information flows one way, so you can’t go deeper on the important areas, and engineers lose agency in what they're building and why.
 
 Here's what it looks like when engineers talk directly to users:
 
@@ -85,9 +85,9 @@ Example activities:
 
 ## Building async feedback loops
 
-User interviews are powerful, but high-bandwidth. You can quickly narrow down the most important problem and gather all the parameters, but it normally takes a few days to get on the call.
+User interviews are powerful but slow. You can quickly narrow down the most important problem and gather all the parameters, but it normally takes a few days to get on the call.
 
-After the initial discussion, get your user on Slack for B2B or iMessage for B2C – or whatever IM works best for them. This will enable you to quickly follow up with mockups or further questions during the solution validation phase.
+After the initial discussion, get your user on Slack for B2B or iMessage for B2C – or whatever messaging tool works best for them. This will enable you to quickly follow up with mockups or further questions during the solution validation phase.
 
 Here's an example from Li on our [Experimentation Team](/handbook/small-teams/experimentation) seeking feedback on our feature flag permissioning. She received a response 3 minutes (!!) later.
 
