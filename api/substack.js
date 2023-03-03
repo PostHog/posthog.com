@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const subscriptionURL = 'https://newsletter.posthog.cc'
+const subscriptionURL = process.env.SUBSTACK_URL
 
 export const subscribe = async (url, email) => {
     try {
