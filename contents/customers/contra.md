@@ -45,7 +45,7 @@ The combination of feature flags and session recordings has been especially powe
 "For example," said Allison, "if we have a notification that a user failed to setup payments, we can view their recordings in PostHog and identify the issue ourselves, enabling us to proactively engage with the user. This means faster debugging and a better user experience. Our support team can also leverage recordings in a similar way."
 
 ![Contra screenshot](../images/customers/contra/contra_session.gif)
-<Caption>Using PostHog session recording to analyze user sign-ups</Caption>
+<Caption>Using PostHog session recording to analyze waitlist joins</Caption>
 
 “We used PostHog to look at our funnel for a waitlist in the insights tool,” said Allison. “From there, we could easily jump to session recordings to see the drop-off point. With this analysis, we identified one path where users were not seeing a reminder modal and therefore we were missing out on a large number of waitlist entries.”
 
