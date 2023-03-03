@@ -30,7 +30,7 @@ Just note that the insight will then have the sampling filter, which will persis
 
 ### Fast mode
 
-Fast mode is an experimental feature where users can flip a switch on the right side of the navbar to enable 10% sampling for all new insights. Old insights will not be affected, but while you are building your graphs we'll immediately apply 10% sampling, making insights load faster. You can override the 10% rate or disable it before saving the insight if you like.
+Fast mode is an experimental feature where users can flip a switch on the right side of the navbar to enable 10% sampling for all **new** insights. Saved insights will **not be affected**, but while you are building your graphs we'll immediately apply 10% sampling, making insights load faster. You can override the 10% rate or disable it before saving the insight if you like.
 
 Fast mode is particularly useful for when you are doing exploratory analysis and deciding what metrics to track and what insights are relevant to you. It speeds up the iteration process and you can then turn sampling off when you've settled on the insights you care about and are saving them to a dashboard.
 
