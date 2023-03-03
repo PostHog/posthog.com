@@ -15,11 +15,18 @@ featuredImage: ../images/blog/posthog-array-blog.png
 featuredImageType: full
 ---
 
-Interested about what new features, fixes and updates have just launched on PostHog Cloud? Every Friday we update this page with a look back over the last seven days, so you can get a fresh look at what’s launched and launching right now. We also feature notable additions to the blog and docs. 
+Interested in what new features, fixes and updates have just launched on PostHog Cloud? Every Friday we update this page with a look back over the last seven days, so you can get a fresh look at what’s launched and launching right now. We also feature notable additions to the blog and docs. 
 
 > Some new features you read about below may still be in beta, behind a feature flag, or only available to paying users. Want to see which betas are currently available? [Check the roadmap](/roadmap)!
 
 ## March 3, 2023
+
+### 2FA authentication
+![2fa support](../images/blog/array/2fa_posthog.png)
+
+Security is a big focus for us right now, as we work towards full SOC2 authentication - and two-factor authentication is the latest element of that. 
+
+Want to enable 2FA? Head to your Project Settings to get started. You'll then get your own QR code like the one above (which, don't worry, is for a test environment) to set it up with apps such as Google Authenticator. 
 
 ### Hedgehog Mode
 ![hog mode](../images/blog/array/hog_walk.gif)
