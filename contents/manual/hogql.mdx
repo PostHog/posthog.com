@@ -17,9 +17,20 @@ Right now we have released HogQL Expressions (BETA), which can be used inside in
 
 ![HogQL trends breakdown filter](../images/features/hogql/trends-breakdown.png)
 
+### Is HogQL real SQL?
+
+HogQL is real SQL. It's a translation layer over ClickHouse SQL, with the features we have enabled. 
+
+### Strings and quotes
+
+Quotation symbols work the same way they would work with ClickHouse.
+
+- Use `'single quotes'` for text strings.
+- Use `\`backticks\`` or `"double quotes"` for columns, properties and aliases with spaces.
+
 ### Supported ClickHouse functions
 
-The following functions have been enabled. This list is [ever expanding](https://github.com/posthog/posthog/blob/master/posthog/hogql/constants.py). Please submit a Pull Request if we're missing something obvious.
+The following [ClickHouse functions](https://clickhouse.com/docs/en/sql-reference/functions/) have been enabled. This list is [ever expanding](https://github.com/posthog/posthog/blob/master/posthog/hogql/constants.py). Please submit a Pull Request if we're missing something obvious.
 
 #### Arithmetic
 - `abs`
