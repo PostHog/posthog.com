@@ -14,7 +14,7 @@ tags:
   - Guides
 ---
 
-Regularly talking to users is an important habit for any team, but you also need an efficient way to share what you learn. Traditional scientific methods areeffective but too time consuming, especially for a fast-moving startup. This is why, at PostHog, we use interview snapshots to share insights from interviews with the team. 
+Regularly talking to users is an important habit for any team, but it's wasted if you don't develop an efficient way to share what you learn. Traditional scientific methods are effective but too time consuming, especially for a fast-moving startup. Interview snapshots are our solution.
 
 Championed by Teresa Torres in the book [Continuous Discovery Habits](https://www.amazon.co.uk/Continuous-Discovery-Habits-Discover-Products/dp/1736633309), interview snapshots are great conversation starters you can create with minimal effort – an 80/20 method that allows us to gather feedback, generate quick insights, build MVPs, measure their success and iterate. 
 
