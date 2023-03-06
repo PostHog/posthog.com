@@ -29,26 +29,26 @@ We want to make it easier and faster for users to find useful information in Pos
 We’ve added a few simple templates to start with, for getting insights into areas such as online advertising, website traffic and user research. Got other ideas? Let us know in [the PostHog Slack](/slack)!
 
 ### Hedgehog Mode collisions
-![hedgehog mode collisions](../images/blog/array/when-hogs-collide.png)
+![hedgehog mode collisions](../images/blog/array/when-hogs-collide.gif)
 
 Hedgehog mode has had a frankly startling amount of improvements in recent weeks, but the latest is one of the most fun yet. We’ve now added collision detection, so that you can make Max ([that’s his name](/handbook/company/team) jump around all over the PostHog UI. 
 
 Is this important? Is it our defining feature? Is it the foundation for even crazier projects to come at our next hackathon? The answer to all of these questions is, yes, probably - and you can turn on Hedgehog Mode via the in-app drop down menu. 
 
 ### Memphis Export app
-![memphis export](../images/blog/array/memphis-app.png)
+![memphis export](../images/blog/array/memphis-app.gif)
 
 Memphis is an alternative to traditional message brokers, enabling you to build modern, queue-based applications. The team there recently created their own PostHog app, which enables you to publish events from PostHog to a Memphis station upon ingestion, so you use them as triggers. [Check the docs for more info](apps/memphis-exporter)!
 
 ### Notification Bar app
-![posthog site apps](../images/blog/array/notification_bar.png)
+![posthog site apps](../images/blog/array/notification_bar.gif)
 
 The notification app has actually been available for a while, but somehow missed getting an announcement at the time. It’s part of the site apps beta, which enable you to add features to your site via the PostHog JavaScript library — in this case, adding a notification bar for delivering important messages. [Check the docs for more info](apps/notification-bar)!
 
 ## March 3, 2023
 
 ### 2FA authentication
-![2fa support](../images/blog/array/2fa_posthog.png)
+![2fa support](../images/blog/array/2fa_posthog.gif)
 
 Security is a big focus for us right now, as we work towards full SOC2 authentication - and two-factor authentication is the latest element of that. 
 
