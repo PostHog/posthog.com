@@ -1,5 +1,5 @@
 ---
-date: 2023-03-03
+date: 2023-05-03
 title: "The PostHog Changelog"
 rootPage: /blog
 sidebar: Blog
@@ -18,6 +18,32 @@ featuredImageType: full
 Interested in what new features, fixes and updates have just launched on PostHog Cloud? Every Friday we update this page with a look back over the last seven days, so you can get a fresh look at what’s launched and launching right now. We also feature notable additions to the blog and docs. 
 
 > Some new features you read about below may still be in beta, behind a feature flag, or only available to paying users. Want to see which betas are currently available? [Check the roadmap](/roadmap)!
+
+## March 10, 2023 
+
+### Dashboard templates
+![dashboard templates](../images/blog/array/dashboard-template-wizard.png)
+
+We want to make it easier and faster for users to find useful information in PostHog — and dashboards are a key part of that because they’re often one of the first things that users build. So, we’ve added a new selection of dashboard templates, as well as a new wizard that’s a little easier on the eye. 
+
+We’ve added a few simple templates to start with, for getting insights into areas such as online advertising, website traffic and user research. Got other ideas? Let us know in [the PostHog Slack](/slack)!
+
+### Hedgehog Mode collisions
+![hedgehog mode collisions](../images/blog/array/when-hogs-collide.png)
+
+Hedgehog mode has had a frankly startling amount of improvements in recent weeks, but the latest is one of the most fun yet. We’ve now added collision detection, so that you can make Max ([that’s his name](/handbook/company/team) jump around all over the PostHog UI. 
+
+Is this important? Is it our defining feature? Is it the foundation for even crazier projects to come at our next hackathon? The answer to all of these questions is, yes, probably - and you can turn on Hedgehog Mode via the in-app drop down menu. 
+
+### Memphis Export app
+![memphis export](../images/blog/array/memphis-app.png)
+
+Memphis is an alternative to traditional message brokers, enabling you to build modern, queue-based applications. The team there recently created their own PostHog app, which enables you to publish events from PostHog to a Memphis station upon ingestion, so you use them as triggers. [Check the docs for more info](apps/memphis-exporter)!
+
+### Notification Bar app
+![posthog site apps](../images/blog/array/notification_bar.png)
+
+The notification app has actually been available for a while, but somehow missed getting an announcement at the time. It’s part of the site apps beta, which enable you to add features to your site via the PostHog JavaScript library — in this case, adding a notification bar for delivering important messages. [Check the docs for more info](apps/notification-bar)!
 
 ## March 3, 2023
 
