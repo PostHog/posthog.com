@@ -8,7 +8,9 @@ featuredImage: ../images/tutorials/banners/tutorial-1.png
 topics: ["configuration", "events"]
 ---
 
-The need to migrate from a product analytics platform like Mixpanel to a fully-featured platform like PostHog is a common one. In this tutorial, we'll walk through how to pull, format, and ingest data from Mixpanel into PostHog. 
+The need to migrate from a product analytics platform like Mixpanel to a fully-featured platform like PostHog is a common one. In this tutorial, we'll walk through how to pull, format, and ingest data from Mixpanel into PostHog.
+
+> Curious about the similarities and differences between the two platforms? Read our comparison of [PostHog vs Mixpanel](/blog/posthog-vs-mixpanel).
 
 To get started, you'll need both a Mixpanel account with data and a PostHog instance. We will use [a tool](https://github.com/stablecog/mixpanel-to-posthog), built by the team at [Stablecog](https://stablecog.com/), to migrate the data and users over.
 
@@ -31,6 +33,8 @@ Next, get the details for PostHog.
 With all this, we are ready to set up the migration tool.
 
 ## Setting up the script
+
+> **Note:** The Mixpanel to PostHog migration tool is a community-built tool. Test for yourself and use at your own risk.
 
 Go to the [Mixpanel to Posthog Data Migrator repository](https://github.com/stablecog/mixpanel-to-posthog) and [clone the repo](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository). Once done, go to the newly created `mixpanel-to-posthog` folder, create a `.env` file, and add the details you collected.
 
@@ -57,6 +61,16 @@ This triggers some prompts about Mixpanel’s API URL, dates (to avoid rate limi
 Once successful, you can find your new data in your PostHog instance.
 
 ![PostHog](../images/tutorials/mixpanel-to-posthog/posthog.png)
+
+## What the tool is doing
+
+If you are interested in writing your own script, or just want to learn more about how Mixpanel and PostHog work, here is what the tool is doing:
+
+1. Load the details from the `.env` file and prompt for any missing details (like date range).
+2. Make `GET` requests to the Mixpanel API using the details. 
+3. Decode and format the response data from Mixpanel to one for PostHog. For example, change `Pageview` to `$pageview` and parse the properties. 
+4. Return a "[slice](https://go.dev/tour/moretypes/7)" of formatted `MixpanelDataLine` instances. Basically, a list of formatted event objects ready to import into PostHog.
+5. Loop through the "slice" of formatted `MixpanelDataLine` instances and use the PostHog Client (set up with the `.env` details) to capture events. 
 
 ## Further reading
 
