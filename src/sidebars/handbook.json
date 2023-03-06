@@ -339,6 +339,10 @@
                         "url": "/handbook/engineering/incidents"
                     },
                     {
+                        "name": "On-call rotation",
+                        "url": "/handbook/engineering/oncall-rotation"
+                    },
+                    {
                         "name": "Bug prioritization",
                         "url": "/handbook/engineering/bug-prioritization"
                     },
