@@ -8,13 +8,13 @@ featuredImage: ../images/tutorials/banners/tutorial-1.png
 topics: ["configuration", "events"]
 ---
 
-Mixpanel is a product analytics tool, if you’re looking to migrate to PostHog, this is the tutorial for you.
+The need to migrate from a product analytics platform like Mixpanel to a fully-featured platform like PostHog is a common one. In this tutorial, we'll walk through how to pull, format, and ingest data from Mixpanel into PostHog. 
 
-You need both a Mixpanel account with data and a PostHog instance. We will use [a tool](https://github.com/stablecog/mixpanel-to-posthog), built by the team at [Stablecog](https://stablecog.com/), to migrate the data and users over.
+To get started, you'll need both a Mixpanel account with data and a PostHog instance. We will use [a tool](https://github.com/stablecog/mixpanel-to-posthog), built by the team at [Stablecog](https://stablecog.com/), to migrate the data and users over.
 
 ## Gathering details
 
-In Mixpanel, go to the project with the data you want to migrate. 
+To start with, log in to Mixpanel and go to the project with the data you want to migrate. 
 
 1. Create a service account. Go to "Organization Settings," click the "Service Accounts" tab, click the "Add Service Account" button, enter a name, then click "Create."
 2. Hold on to the **username** and **secret** for now. 
@@ -34,6 +34,7 @@ With all this, we are ready to set up the migration tool.
 
 Go to the [Mixpanel to Posthog Data Migrator repository](https://github.com/stablecog/mixpanel-to-posthog) and [clone the repo](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository). Once done, go to the newly created `mixpanel-to-posthog` folder, create a `.env` file, and add the details you collected.
 
+In our example, that is:
 ```
 MIXPANEL_USERNAME=ian.a2b789.mp-service-account
 MIXPANEL_PASSWORD=fCPFrpZYdzB9nlZ9kqabZcXuxSLKhjld
