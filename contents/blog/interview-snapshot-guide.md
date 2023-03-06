@@ -36,7 +36,7 @@ Here is a step by step guide on how to fill out your snapshot:
 
 ### 1. Note high-level information of your user
 
-To set the scene, add the user’s name at the top of the interview snapshot. For B2B companies, we also recommend adding the job role and company name. It’s also handy to add the date of the interview and a high-level summary what the interview was about. If available, add a picture of the user and the company logo, if the context is B2B. Believe us, this will spur your memory if you revisit the interview in a couple weeks’ time.
+To set the scene, add the user’s name at the top of the interview snapshot. For B2B companies, I also recommend adding the job role and company name for context. It’s also handy to add the date of the interview and a high-level summary what the interview was about. If available, add a picture of the user and the company logo, if the context is B2B. This may seem superfluous, but I find it helps trigger my memory when I revisit interviews a few weeks after the fact.
 
 ### 2. Add any relevant background information
 
