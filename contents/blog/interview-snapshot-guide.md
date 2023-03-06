@@ -40,7 +40,7 @@ To set the scene, add the user’s name at the top of the interview snapshot. Fo
 
 ### 2. Add any relevant background information
 
-What information about your user is relevant to your company and product? Their age? Their responsibilities in their job role? How their morning routine looks like? Write this information down in the “quick facts” column. We also recommend writing down any previous experience the user has with your product.
+What information about your user is relevant to your company and product? Their age? Their responsibilities in their job role? How their morning routine looks like? Write this information down in the “quick facts” column. I also recommend writing down any previous experience the user has with your product here.
 
 ### 3. List the opportunities you’ve identified
 
