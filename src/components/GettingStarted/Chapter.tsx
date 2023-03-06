@@ -1,6 +1,7 @@
-import { graphql, useStaticQuery } from 'gatsby'
+import { graphql, Link, useStaticQuery } from 'gatsby'
 import React from 'react'
 import Slugger from 'github-slugger'
+import { CallToAction } from 'components/CallToAction'
 
 const slugger = new Slugger()
 
@@ -53,20 +54,33 @@ type ChapterProps = {
 
 const Chapter: React.FC<ChapterProps> = ({ num, title, description, headings, children }) => {
     return (
-        <div className="grid grid-cols-3 gap-x-6 pb-6 mb-6 border-b border-gray/20">
-            <div className="w-full bg-gray-accent-light"></div>
-            <div className="col-span-2 py-6 space-y-8">
-                <div className="space-y-3">
-                    <h1 className="flex items-center my-0">
-                        <span className="w-8 text-black/20 text-[24px] mt-1">{num}.</span> <span>{title}</span>
-                    </h1>
-                    <p className="ml-8 !text-sm text-gray">{description}</p>
+        <div className="grid grid-cols-3 gap-x-6 pb-6 mb-6">
+            <div className="w-full bg-gray-accent-light dark:bg-gray-accent-dark rounded"></div>
+            <div className="col-span-2 pt-2 pb-6 space-y-8">
+                <div className="flex items-center justify-between border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark pb-6">
+                    <div className="">
+                        <span className="text-black/20 dark:text-white/60 font-semibold">Chapter {num}</span>
+                        <h3 className="flex items-center !my-0">
+                            <span>{title}</span>
+                        </h3>
+                    </div>
+                    <CallToAction type="secondary" size="sm">
+                        Visit section
+                    </CallToAction>
                 </div>
 
-                <ol className="list-decimal list-inside marker:text-black/20">
+                <span className="block text-sm text-black/40 dark:text-white/60 font-semibold mt-6 !mb-3">
+                    Jump to:
+                </span>
+                <ol className="list-none !m-0 font-semibold space-y-4">
                     {headings.map((heading) => (
-                        <li key={heading.link} className="px-3 py-2 hover:bg-gray-accent-light">
-                            <a href={heading.link}>{heading.title}</a>
+                        <li key={heading.link} className="pl-6 jumpTo group flex items-center leading-none">
+                            <Link
+                                to={heading.link}
+                                className="text-black/80 dark:text-white/60 group-hover:text-black/90 dark:group-hover:text-white/90"
+                            >
+                                <span className="">{heading.title}</span>
+                            </Link>
                         </li>
                     ))}
                 </ol>
