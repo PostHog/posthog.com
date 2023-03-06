@@ -1,5 +1,5 @@
 ---
-date: 2023-02-23
+date: 2023-03-06
 title: "An 80/20 approach for sharing user interview insights with your team"
 rootPage: /blog
 sidebar: Blog
@@ -50,9 +50,9 @@ Did the user express any pain points or desires in relation to your product or p
 
 If the user mentioned anything interesting that doesn’t fit in the “Opportunities” column, you can add it to “Insights”. This can include anything that isn’t a pain point, a need or a desire. Did the user show any uncommon behaviour? Did they share anything about why they chose your product (or not)? If there is anything you want your colleagues to know about without reading the whole interview transcript, this is the place to put it.
 
-### 5. Add 1-2 memorable quotes
+### 5. Add one or two memorable quotes
 
-At the top of the template, there is space to add 1-2 memorable quotes from the interview. This is useful, for example, if the user shared a particular emotion in the interview you want to relay word by word, and you want to create empathy in your team for this particular issue.
+At the top of the template, there is space to add one or two memorable quotes from the interview. This is useful, for example, if the user shared a particular emotion in the interview you want to relay word by word, and you want to create empathy in your team for this particular issue.
 
 ### 6. Share the interview snapshot with your team
 
@@ -66,6 +66,4 @@ Take a screenshot of your completed interview snapshot and share it with your te
 
 - If you’ve done a round of interviews around a certain topic, aside from user snapshots, summarise what you’ve learned. This allows you to highlight opportunity areas that have been mentioned several times or are a bigger problem then others, thus guiding your prioritisation.
 
-In short, creating user interview snapshots is a great way of capturing the gist of a user interview and sharing insights in an accessible way. While they won’t replace more scientific qualitative analysis methods, in many cases they are enough to hit the ground running.
-
-Now it’s your turn to create your first user interview snapshot. And if you haven’t done a user interview recently, check out our blog post on how to 10x your role through interviewing users: // add link to Luke's post
+To conclude, interview snapshots are a great way of quickly capturing the gist of a user interview and sharing those insights with your team. Remember, this is just how **we** do them – you can adapt this template however you want to suit your needs. And, if you're new to doing user interviews, read our [guide to talking to users as an engineer](/blog/10x-engineers-do-user-interviews) for more tips.
