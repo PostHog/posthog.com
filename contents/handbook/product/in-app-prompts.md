@@ -38,13 +38,13 @@ If you have any questions message Luke
 
 Shows in the middle of the screen. It's more intrusive than a popup.
 
-![Modal promt](../../images/handbook/prompt-modal.png)
+![Modal prompt](../../images/handbook/prompt-modal.png)
 
 ### Popup prompt
 
 Shows in the bottom right corner. It's less intrusive than a modal.
 
-![Popup promt](../../images/handbook/prompt-popup.png)
+![Popup prompt](../../images/handbook/prompt-popup.png)
 
 
 
