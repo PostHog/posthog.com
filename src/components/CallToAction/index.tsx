@@ -48,7 +48,12 @@ const buttonTypes = {
     custom: '',
 }
 
-export const button = (type = 'primary', width = 'auto', className = '', size = 'lg') => cntl`
+export const button = (
+    type: keyof typeof buttonTypes = 'primary',
+    width = 'auto',
+    className = '',
+    size: keyof typeof sizes = 'lg'
+) => cntl`
     text-center
     select-none
     rounded-sm
@@ -66,9 +71,9 @@ export const button = (type = 'primary', width = 'auto', className = '', size = 
 `
 
 export type CTAPropsType = {
-    type?: string
+    type?: keyof typeof buttonTypes
     width?: string
-    size?: string
+    size?: keyof typeof sizes
     href?: string
     to?: string
     onClick?: () => void
