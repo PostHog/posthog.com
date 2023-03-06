@@ -44,7 +44,9 @@ What information about your user is relevant to your company and product? Their 
 
 ### 3. List the opportunities you’ve identified
 
-Did the user express any pain points or desires in relation to your product or problem area? Write these down in the “Opportunities” column. During the interview, make sure you really get to the bottom of the user’s needs, and avoid the [XY problem](https://xyproblem.info/). Make sure to list problems here, and not feature ideas. 
+Did the user express any pain points or desires in relation to your product or problem area? Write these down in the “Opportunities” column. During the interview, make sure you really get to the bottom of the user’s needs, and avoid the **XY problem**. Make sure to list problems here, and not feature ideas.
+
+> The [**XY problem**](https://xyproblem.info/) describes when you ask a user for a solution Y to their problem X. If you build Y without understanding X, you are missing important context that would allow you to build a solution that actually solves the problem.
 
 ### 4. Note any other interesting insights
 
