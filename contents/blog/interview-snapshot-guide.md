@@ -30,7 +30,9 @@ While taking notes, focus on how the user is using your product, and how they fe
 
 Another approach is to record the conversation, transcribe and summarise it. I don't recommend this approach as it's less efficient, though a recording is useful as a reference for your notes, or for extracting word-by-word quotes later.
 
-Once you have your insights available, you can open up your interview snapshot template and start filling it out. From experience, we recommend blocking 30 minutes after your interview to review your notes and fill out the user interview snapshot. Here is a step by step guide on how to fill it out:
+Once you have your insights available, you can open up your interview snapshot template and start filling it out. I recommend blocking 30 minutes after your interview to review your notes and fill out the user interview snapshot while it's fresh in your mind. 
+
+Here is a step by step guide on how to fill out your snapshot:
 
 ### 1. Note high-level information of your user
 
