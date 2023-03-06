@@ -40,7 +40,7 @@ export const wrapPageElement = ({ element, props }) => {
     return props.custom404 || !props.data ? (
         element
     ) : /^handbook|^docs\/(?!api)|^manual/.test(slug) &&
-      !['docs/api/post-only-endpoints', 'docs/api/user'].includes(slug) ? (
+      !['docs/api/post-only-endpoints', 'docs/api/user', 'docs/getting-started'].includes(slug) ? (
         <HandbookLayout {...props} />
     ) : /^product\//.test(slug) ? (
         <Product {...props} />
