@@ -1,5 +1,5 @@
 ---
-date: 2023-02-27
+date: 2023-03-06
 title: "10x engineers talk to users"
 rootPage: /blog
 sidebar: Blog
@@ -15,7 +15,7 @@ tags:
   - Product engineers
 ---
 
-I believe the best way to become a 10x engineer is to zoom out and solve for user impact. Engineers and founders need to deeply understand (and care) their users. In doing so, you generate true leverage by choosing the right problem, building the right solution, and solving their "hair-on-fire" problems. 
+I believe the best way to become a 10x engineer is to zoom out and solve for user impact. Engineers and founders need to deeply understand and care about their users. In doing so, you generate true leverage by choosing the right problem, building the right solution, and solving their "hair-on-fire" problems.
 
 The best way to do this? Speak directly to them.
 
@@ -35,7 +35,7 @@ Information moves quickly and in both directions, boosting the signal. By increa
 
 Companies still need product managers, but it's easier to ship faster and better work when engineers behave like [product engineers](/blog/what-is-a-product-engineer) and talk to users. And in doing so, product managers are freed from writing tickets to spend more time exploring bigger opportunities.
 
-> 💬 **Sidenote:** PostHog's session recording feature came about because Karl, one of our engineers, took the time to talk to a user and realized the best solution was integrating recordings with our existing product analytics tool. One hackathon later, we had a prototype. Session recording is now a core part of our product and was a key driver in our strategy shift from a pure, self-hosted product analytics tool to an all-in-one product OS.
+> 💬 **Sidenote:** PostHog's session recording feature came about because one of our engineers took the time to talk to a user and realized the best solution was integrating recordings with our existing product analytics tool. One hackathon later, we had a prototype. Session recording is now a core part of our product and was a key driver in our strategy shift from a pure, self-hosted product analytics tool to an all-in-one product OS.
 
 ## How to talk to users (as an engineer)
 
@@ -49,7 +49,7 @@ Next, it's time to bulk email your segment. The simplest way is to email out a C
 Hi! I’m {YOUR NAME}, a software engineer at {YOUR COMPANY}. I’m currently working on {FEATURE / PROBLEM} and would love your input on it. Free for a quick call at any of these times? {INSERT CALENDLY LINK} 
 ```
 
-This is a good start, but you should move to an in-app prompt as soon as you can to save time and increase conversion – we built PostHog's [user interview app](https://posthog.com/tutorials/feedback-interviews-site-apps#setting-up-the-user-interview-app) (picture below) just for this.  
+This is a good start, but you should move to an in-app prompt as soon as you can to save time and increase conversion – we built PostHog's [user interview app](https://posthog.com/tutorials/feedback-interviews-site-apps#setting-up-the-user-interview-app) (pictured below) just for this.  
 
 ![User interview app](../images/blog/10x-engineers-do-user-interviews/user-interview-app.png)
 
@@ -70,18 +70,17 @@ Example questions:
 - Can you talk me through the last time you experienced this problem?
 - Is this actually a problem for you?
 
-
 ### 2. Solution validation
 
 You’ve identified the hair-on-fire problem and understand it well. Now you’re validating whether your solution actually solves it. Focus on presenting the user with quick prototypes.
 
 Example activities:
+
  - Have the user click through a Figma prototype and think out-loud. Ask them to complete the high-level goal and see where they get stuck. Ask what they think the text means.
 
 - Send a few mockups of the solutions over Slack to the user from the problem exploration interview and ask if it solves the problem.
 
 - Create a mock-up and have a call with the user to see if they will commit to paying some amount if you build it.
-
 
 ## Building async feedback loops
 
@@ -108,7 +107,6 @@ That said, be careful not to go too far the other way and generalize every probl
 ![XKCD: The general problem](../images/blog/10x-engineers-do-user-interviews/the-general-problem.png)
 
 For example, quickly shipping small usability improvements based on feedback is a great way to delight users, generate goodwill, and encourage more relevant feedback. 
-
 
 ## My challenge to you: Book a user interview this week
 
