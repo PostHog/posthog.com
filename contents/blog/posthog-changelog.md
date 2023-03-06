@@ -35,6 +35,9 @@ Hedgehog mode has had a frankly startling amount of improvements in recent weeks
 
 Is this important? Is it our defining feature? Is it the foundation for even crazier projects to come at our next hackathon? The answer to all of these questions is, yes, probably - and you can turn on Hedgehog Mode via the in-app drop down menu. 
 
+### Feature flags for Flutter
+We always love adding user contributions into PostHog, especially when they have such a storied past as this one. In June 2021, we [asked for contributions](https://github.com/PostHog/posthog-flutter/issues/14) to our Flutter library, to extend feature flag support there. In August 2022, [Etienne Théodore](https://github.com/Kiruel) stepped up to the plate and took on the task. We were admittedly slow getting this PR approved, but can now happily say that our Flutter library includes feature flag support. 
+
 ### Memphis Export app
 ![memphis export](../images/blog/array/memphis-app.gif)
 
@@ -44,6 +47,8 @@ Memphis is an alternative to traditional message brokers, enabling you to build 
 ![posthog site apps](../images/blog/array/notification_bar.gif)
 
 The notification app has actually been available for a while, but somehow missed getting an announcement at the time. It’s part of the site apps beta, which enable you to add features to your site via the PostHog JavaScript library — in this case, adding a notification bar for delivering important messages. [Check the docs for more info](apps/notification-bar)!
+
+> Want to make your own PostHog apps? Check the docs for tips on [how to use PostHog's in-app source editor](/tutorials/build-your-own-posthog-app). 
 
 ## March 3, 2023
 
