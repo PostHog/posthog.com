@@ -28,7 +28,7 @@ Snapshots are an easy-to-digest summary of the insights you glean from interview
 
 While taking notes, focus on how the user is using your product, and how they feel while using it. What makes them excited? What frustrates them? Those are the insights that later go into your interview snapshot.
 
-Another approach is to record the conversation, transcribe and summarise it. This approach is more time consuming, so we don’t recommend it. Though you might want to record the conversation in addition to taking notes, if later on you are looking for word-by-word quotes.
+Another approach is to record the conversation, transcribe and summarise it. I don't recommend this approach as it's less efficient, though a recording is useful as a reference for your notes, or for extracting word-by-word quotes later.
 
 Once you have your insights available, you can open up your interview snapshot template and start filling it out. From experience, we recommend blocking 30 minutes after your interview to review your notes and fill out the user interview snapshot. Here is a step by step guide on how to fill it out:
 
