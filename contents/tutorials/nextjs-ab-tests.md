@@ -10,7 +10,7 @@ topics: ['experimentation', 'feature flags', 'actions']
 
 Many of the features of Next.js optimize for creating the best possible user experience. It automates and abstracts functionality like static page generation, image loading optimization, and optional server-side rendering, allowing you to focus on the content of your app.
 
-A/B tests are a way to make sure this content is as good as possible. A/B tests are comparing two or more variations of content on an audience against a goal. The winner is the one who achieves the goal the best and then used to improve everyone's experience.
+A/B tests are a way to make sure this content performs as well as possible. A/B tests involve comparing two or more variations against a goal. The winner is the one which achieves the goal best and is then used to improve everyone's experience.
 
 PostHog’s experimentation tool makes this entire process simple. This tutorial shows you how to build a basic Next.js app, add PostHog to it, and finally set up and run an A/B test experiment.
 
@@ -63,7 +63,7 @@ Now, we can add PostHog (if you don't have a PostHog instance, you can [sign up 
 npm install posthog-js
 ```
 
-In `_app.js`, we can then initialize PostHog and set up a provider that provides access to PostHog through out our app. 
+In `_app.js`, we can then initialize PostHog and set up a provider that provides access to PostHog throughout our app. 
 
 ```js
 // pages/_app.js
@@ -86,7 +86,7 @@ export default function App({ Component, pageProps }) {
 }
 ```
 
-Once you’ve done this, reload your app and click the button a few times. You should see captured in PostHog.
+Once you’ve done this, reload your app and click the button a few times. You should see this being captured in PostHog.
 
 ![Events](../images/tutorials/nextjs-ab-tests/events.png)
 
@@ -94,7 +94,7 @@ Once you’ve done this, reload your app and click the button a few times. You s
 
 The first part of setting up our experiment in PostHog is setting up the goal. In this case, it is clicks of the main call to action button which has varying content.
 
-To measure this, we can set up an [action](/manual/actions). We can use the PostHog toolbar to create this. To enable and launch the toolbar, go to the "Launch Toolbar" tab in PostHog, add `http://localhost:3000/` as an authorized URL, then click launch. This brings you to your app with a PostHog icon hovering on your screen.
+To measure this, we can set up an [action](/manual/actions) using the PostHog toolbar. To enable and launch the toolbar, go to the "Launch Toolbar" tab in PostHog, add `http://localhost:3000/` as an authorized URL, then click launch. This brings you to your app with a PostHog icon hovering on your screen.
 
 To create an action with the toolbar, click:
 
@@ -111,7 +111,7 @@ Name the action "Clicked Main CTA" and unselect the text match (because it chang
 
 With our Next.js app, PostHog, and our experiment goal set up, we can go into PostHog, and create a new experiment.
 
-> Experiments are a paid feature, but if you are under 1M events and 15k session recordings per month, they are free.
+> Experimentation is a paid feature in PostHog, but is free to use up to 1M events and 15k session recordings per month.
 
 In your PostHog instance, go to the experiments tab, click create a new experiment, and enter a name and key. We keep the defaults for variants and not use any filters (which means 100% of users see the experiment). Use the action we created earlier as our experiment goal. 
 
@@ -129,7 +129,7 @@ When it comes to implementing our experiment and its associated feature flags, t
 2. Server-side render feature flags in `index.js` using `posthog-node`.
 3. Client-side render feature flags in `index.js`.
 
-Because `getInitialProps` disables [Automatic Static Optimization](https://nextjs.org/docs/advanced-features/automatic-static-optimization) for the entire app (one of the main benefits of Next.js), we aren’t going to bootstrap feature flags (option 1). Instead, we use a combination of server-side and client-side rendering. This ensures flags' accuracy and speed while still leveraging the unique benefits of Next.js.
+Because `getInitialProps` disables [Automatic Static Optimization](https://nextjs.org/docs/advanced-features/automatic-static-optimization) for the entire app (one of the main benefits of Next.js), we aren’t going to bootstrap feature flags (option 1). Instead, we use a combination of server-side and client-side rendering. This ensures the flags' accuracy and speed while still leveraging the unique benefits of Next.js.
 
 ### Client-side rendering feature flags
 
@@ -184,9 +184,9 @@ With this you’re ready to launch your experiment, but make sure to remove your
 
 ### Server-side rendering
 
-Notice when you refresh the call to action flickers between "Click me" and "Learn more." This is because it takes time for React and PostHog to load. 
+Notice when you refresh the call to action that it flickers between "Click me" and "Learn more." This is because it takes time for React and PostHog to load. 
 
-Server-side rendering the feature flag is a way to limit this. This is getting the data about the feature flag before the client loads, so the call to action only requires React to load on the client-side.
+Server-side rendering the feature flag is a way to limit this. This gets the data about the feature flag before the client loads, so the call to action only requires React to load on the client-side.
 
 To set this up, first, we must install and use PostHog’s Node library (because we are making server-side requests).
 
