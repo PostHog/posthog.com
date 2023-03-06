@@ -14,25 +14,23 @@ tags:
   - Guides
 ---
 
-Regularly talking to users is an important habit for any team, but it's wasted if you don't develop an efficient way to share what you learn. Traditional scientific methods are effective but too time consuming, especially for a fast-moving startup. Interview snapshots are our solution.
+Regularly talking to users is an important habit for any team, but it's wasted without an efficient way to share what you learn. Traditional scientific methods are effective but too time consuming, especially for a fast-moving startup. Interview snapshots are our solution.
 
 Championed by Teresa Torres in the book [Continuous Discovery Habits](https://www.amazon.co.uk/Continuous-Discovery-Habits-Discover-Products/dp/1736633309), interview snapshots are great conversation starters you can create with minimal effort.
 
-In this guide, I'll share how we create user interview snapshots at PostHog – including the following template that you can download and fill out, or recreate in Google Docs, Figma or any other tool of your choice.
+In this guide, I'll share how we create user interview snapshots at PostHog – including the following template that you can download and fill out, or recreate in Google Docs, Figma, etc.
 
 // Annika to create this
 
-## Interview snapshots explained
+## How to create interview snapshots
 
 Snapshots are an easy-to-digest summary of the insights you glean from interviews. Ideally you take those notes during the interview, or you can ask one of your colleagues to do so – sometimes it's easier if one person talks and the other takes notes. 
 
 While taking notes, focus on how the user is using your product, and how they feel while using it. What makes them excited? What frustrates them? Those are the insights that later go into your interview snapshot.
 
-Another approach is to record the conversation, transcribe and summarise it. I don't recommend this approach as it's less efficient, though a recording is useful as a reference for your notes, or for extracting word-by-word quotes later.
+Another approach is to record the conversation then transcribe and summarise it later. This might seem easier, but I don't recommend it because it's more time consuming – remember we're optimizing for efficiency here. You can, of course, still record interviews as a useful reference for your notes, or for extracting direct quotes later.
 
-Once you have your insights available, you can open up your interview snapshot template and start filling it out. I recommend blocking 30 minutes after your interview to review your notes and fill out the user interview snapshot while it's fresh in your mind. 
-
-Here is a step by step guide on how to fill out your snapshot:
+Instead, I recommend blocking 30 minutes after your interview to review your notes and fill out the user interview snapshot while it's fresh in your mind. This way, each interview becomes a simple 60-minute block – 30 mintues for your interview, and 30 minutes for review. Once you've reviewed your notes, you can open up your interview snapshot template and start filling it out as follows:
 
 ### 1. Note high-level information of your user
 
@@ -40,7 +38,7 @@ To set the scene, add the user’s name at the top of the interview snapshot. Fo
 
 ### 2. Add any relevant background information
 
-What information about your user is relevant to your company and product? Their age? Their responsibilities in their job role? How their morning routine looks like? Write this information down in the “quick facts” column. I also recommend writing down any previous experience the user has with your product here.
+What information about your user is relevant to your company and product? Their age? Their responsibilities in their job role? What does their morning routine looks like? Write this information down in the “quick facts” column. I also recommend writing down any previous experience the user has with your product here.
 
 ### 3. List the opportunities you’ve identified
 
@@ -58,7 +56,7 @@ At the top of the template, there is space to add 1-2 memorable quotes from the 
 
 ### 6. Share the interview snapshot with your team
 
-Take a screenshot of your completed interview snapshot and share it on Slack – we have a dedicated channel for them. Sharing the snapshot in such a way is bound to create a conversation, follow up questions or ideas. This is exactly what you want.
+Take a screenshot of your completed interview snapshot and share it with your team – we have a dedicated Slack channel for them. Snapshots are bound to create a conversation, follow up questions or ideas. This is exactly what you want.
 
 ## More tips for successful interviews
 
