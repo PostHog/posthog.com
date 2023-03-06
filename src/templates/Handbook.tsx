@@ -202,6 +202,7 @@ export default function Handbook({
         hideLastUpdated,
         features,
         github,
+        isArticle = true,
         availability,
         installUrl,
         thumbnail,
@@ -316,7 +317,7 @@ export default function Handbook({
                             )}
                         </div>
                         {features && <LibraryFeatures availability={features} />}
-                        <div className="article-content">
+                        <div className={isArticle && 'article-content'}>
                             <MDXProvider components={components}>
                                 <MDXRenderer>{body}</MDXRenderer>
                             </MDXProvider>
@@ -395,6 +396,7 @@ export const query = graphql`
                 description
                 hideLastUpdated
                 github
+                isArticle
                 features {
                     eventCapture
                     userIdentification
