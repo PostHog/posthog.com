@@ -19,7 +19,7 @@ export const NextStep: React.FC<NextStepProps> = ({ title, links, children }) =>
                 <div className="w-36">{children}</div>
             </div>
 
-            <ul className="grid grid-cols-2 list-none p-0 m-0">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 list-none p-0 m-0">
                 {links.map((link) => (
                     <li key={link.title} className="relative w-full py-2 flex items-center">
                         <Link className="leading-none" to={link.url}>
