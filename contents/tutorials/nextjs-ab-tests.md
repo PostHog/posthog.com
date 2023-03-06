@@ -1,6 +1,6 @@
 ---
 title: How to set up Next.js A/B tests
-date: 2023-02-28
+date: 2023-03-06
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
