@@ -7,7 +7,7 @@ showTitle: true
 hideAnchor: true
 author:
   - luke-harries
-featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImage: ../images/blog/super-hog-pink.png
 featuredImageType: full
 category: Engineering
 tags:
