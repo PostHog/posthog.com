@@ -56,7 +56,7 @@ At the top of the template, there is space to add 1-2 memorable quotes from the 
 
 ### 6. Share the interview snapshot with your team
 
-Take a screenshot of your completed interview snapshot and share it on Slack (or any other messenger platform you use)! At PostHog, we have a #posthog-feedback channel everyone in the company has access to. Sharing the snapshot in such a way is bound to create a conversation, follow up questions or ideas. This is exactly what you want.
+Take a screenshot of your completed interview snapshot and share it on Slack – we have a dedicated channel for them. Sharing the snapshot in such a way is bound to create a conversation, follow up questions or ideas. This is exactly what you want.
 
 ## More tips for successful interviews
 
