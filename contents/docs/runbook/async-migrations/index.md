@@ -115,14 +115,13 @@ The table below lists out recommended PostHog app and chart versions to use for 
 | 0006            | 1.41.4          | 29.0.11       |        |
 | 0007            | 1.41.4          | 29.0.11       | Completing this migration enables person on events. Further information: https://posthog.com/blog/persons-on-events |
 
-#### Upgrading hobby deployment to a specific version
-
-Before following the normal upgrading procedure update the `.env` file to have `POSTHOG_APP_TAG` match `release-<desired version>`. For example run
-```
-echo "POSTHOG_APP_TAG=release-1.33.0" >>.env
-```
-
 #### Upgrading helm chart to a specific version
+
+To upgrade to a specific PostHog app version specify the desired version in your `values.yaml`
+```
+image:
+  tag: release-1.36.1
+```
 
 To upgrade to a specific chart version you can use `--version <desired version>` flag, e.g.
 ```
