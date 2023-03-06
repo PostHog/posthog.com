@@ -24,7 +24,7 @@ In this guide, I'll share how we create user interview snapshots at PostHog – 
 
 ## Interview snapshots explained
 
-To create a user interview snapshot, you need a list of insights from a user interview. Ideally you take those notes during the interview, or you can ask one of your colleagues to do so. 
+Snapshots are an easy-to-digest summary of the insights you glean from interviews. Ideally you take those notes during the interview, or you can ask one of your colleagues to do so – sometimes it's easier if one person talks and the other takes notes. 
 
 While taking notes, focus on how the user is using your product, and how they feel while using it. What makes them excited? What frustrates them? Those are the insights that later go into your interview snapshot.
 
