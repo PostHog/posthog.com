@@ -55,8 +55,8 @@ type ChapterProps = {
 const Chapter: React.FC<ChapterProps> = ({ num, title, description, headings, children }) => {
     return (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-x-6 pb-6 mb-6">
-            <div className="w-full h-48 md:h-auto bg-gray-accent-light dark:bg-gray-accent-dark rounded"></div>
-            <div className="md:col-span-2 pt-2 pb-6 space-y-8">
+            {/*<div className="w-full h-48 md:h-auto bg-gray-accent-light dark:bg-gray-accent-dark rounded"></div>*/}
+            <div className="md:col-span-3 pt-2 pb-6 space-y-8">
                 <div className="flex items-center justify-between border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark pb-6">
                     <div className="">
                         <span className="text-black/20 dark:text-white/60 font-semibold">Chapter {num}</span>
