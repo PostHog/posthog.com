@@ -14,7 +14,7 @@ type NextStepProps = {
 export const NextStep: React.FC<NextStepProps> = ({ title, links, children }) => {
     return (
         <div className="space-y-6 pb-8">
-            <div className="flex items-end justify-between border-b border-dashed border-gray-accent-light">
+            <div className="flex items-end justify-between border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark">
                 <h3>{title}</h3>
                 <div className="w-36">{children}</div>
             </div>

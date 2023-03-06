@@ -202,7 +202,6 @@ export default function Handbook({
         hideLastUpdated,
         features,
         github,
-        isArticle = true,
         availability,
         installUrl,
         thumbnail,
@@ -212,6 +211,8 @@ export default function Handbook({
     const lastUpdated = parent?.fields?.gitLogLatestDate
     const showToc = !hideAnchor && tableOfContents?.length > 0
     const filePath = post?.parent?.relativePath
+
+    let isArticle = frontmatter.isArticle !== false
 
     const [showCTA, setShowCTA] = React.useState<boolean>(
         typeof window !== 'undefined' ? Boolean(getCookie('ph_current_project_token')) : false
