@@ -30,6 +30,10 @@ In-app prompts are powered by JSON feature flags.
    - If you want to show a prompt based on events, you should create a dynamic cohort based on the event, then export the cohort and use it to create a static feature flag.
 4. **Important** Add the release condition that the user property `${feature_flag_name}` **is not set**. This ensures that the prompt is only shown once.
 
+It will only show one prompt a day, no matter how many prompt feature flags are enabled.
+
+It's recommended to run the prompt for yourself first to make sure it works as expected. If you need to test it again the easiest way is to change the feature flag name (make sure to keep the user property `${feature_flag_name}` up to date).
+
 If you have any questions message Luke
 
 ## Examples
@@ -45,6 +49,3 @@ Shows in the middle of the screen. It's more intrusive than a popup.
 Shows in the bottom right corner. It's less intrusive than a modal.
 
 ![Popup prompt](../../images/handbook/prompt-popup.png)
-
-
-
