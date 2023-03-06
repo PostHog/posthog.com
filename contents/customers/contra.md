@@ -1,5 +1,5 @@
 ---
-title: How Contra used session recordings to improve registrations by 30%
+title: How Contra used session recordings to increase registrations by 30%
 customer: Contra
 logo: ../images/customers/contra/contra_logo.png
 featuredImage: ../images/customers/contra/contra_featured.png
