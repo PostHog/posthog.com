@@ -78,21 +78,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     rawBody
                 }
             }
-            gettingStarted: allMdx(
-                filter: { fields: { slug: { regex: "/^/docs/getting-started/" } }, frontmatter: { title: { ne: "" } } }
-            ) {
-                nodes {
-                    id
-                    headings {
-                        depth
-                        value
-                    }
-                    fields {
-                        slug
-                    }
-                    rawBody
-                }
-            }
             manual: allMdx(filter: { fields: { slug: { regex: "/^/manual/" } }, frontmatter: { title: { ne: "" } } }) {
                 nodes {
                     id
@@ -360,7 +345,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         createTeamContext
     )
     createPosts(result.data.docs.nodes, 'docs', HandbookTemplate, { name: 'Docs', url: '/docs' })
-    createPosts(result.data.gettingStarted.nodes, 'docs', GettingStarted, { name: 'Docs', url: '/docs' })
     createPosts(result.data.apidocs.nodes, 'docs', ApiEndpoint, { name: 'Docs', url: '/docs' })
     createPosts(result.data.manual.nodes, 'docs', HandbookTemplate, { name: 'Using PostHog', url: '/using-posthog' })
 
