@@ -52,7 +52,7 @@ If the user mentioned anything interesting that doesn’t fit in the “Opportun
 
 ### 5. Add 1-2 memorable quotes
 
-At the top of the template, there is space to add 1-2 memorable quotes from the interview. This is useful for example if the user shared a particular emotion in the interview you want to relay word by word, and you want to create empathy in your team for this particular issue.
+At the top of the template, there is space to add 1-2 memorable quotes from the interview. This is useful, for example, if the user shared a particular emotion in the interview you want to relay word by word, and you want to create empathy in your team for this particular issue.
 
 ### 6. Share the interview snapshot with your team
 
