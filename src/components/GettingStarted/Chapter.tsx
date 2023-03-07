@@ -44,7 +44,7 @@ const filterHeadings = (slug: string, headings: any[]) => {
 type ChapterProps = {
     num: number
     title: string
-    description: string
+    url: string
     headings: {
         title: string
         link: string
@@ -52,7 +52,7 @@ type ChapterProps = {
     children?: React.ReactNode
 }
 
-const Chapter: React.FC<ChapterProps> = ({ num, title, description, headings, children }) => {
+const Chapter: React.FC<ChapterProps> = ({ num, title, url, headings, children }) => {
     return (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-x-6 pb-6 mb-6">
             {/*<div className="w-full h-48 md:h-auto bg-gray-accent-light dark:bg-gray-accent-dark rounded"></div>*/}
@@ -64,7 +64,7 @@ const Chapter: React.FC<ChapterProps> = ({ num, title, description, headings, ch
                             <span>{title}</span>
                         </h3>
                     </div>
-                    <CallToAction type="secondary" size="sm">
+                    <CallToAction type="secondary" size="sm" to={url}>
                         Visit section
                     </CallToAction>
                 </div>
@@ -100,7 +100,7 @@ export const InstallChapter: React.FC = () => {
         <Chapter
             num={1}
             title={title}
-            description={description}
+            url="/docs/getting-started/install"
             headings={[
                 { title: 'Snippet', link: '/docs/getting-started/install?tab=snippet' },
                 { title: 'SDKs', link: '/docs/getting-started/install?tab=sdks' },
@@ -121,7 +121,7 @@ export const SendEventsChapter: React.FC = () => {
 
     const filteredHeadings = filterHeadings(node.fields.slug, headings)
 
-    return <Chapter num={2} title={title} description={description} headings={filteredHeadings}></Chapter>
+    return <Chapter num={2} title={title} url={node.fields.slug} headings={filteredHeadings}></Chapter>
 }
 
 export const IdentifyUsersChapter: React.FC = () => {
@@ -134,7 +134,7 @@ export const IdentifyUsersChapter: React.FC = () => {
 
     const filteredHeadings = filterHeadings(node.fields.slug, headings)
 
-    return <Chapter num={3} title={title} description={description} headings={filteredHeadings}></Chapter>
+    return <Chapter num={3} title={title} url={node.fields.slug} headings={filteredHeadings}></Chapter>
 }
 
 export const ActionsAndInsightsChapter: React.FC = () => {
@@ -149,7 +149,7 @@ export const ActionsAndInsightsChapter: React.FC = () => {
 
     const filteredHeadings = filterHeadings(node.fields.slug, headings)
 
-    return <Chapter num={4} title={title} description={description} headings={filteredHeadings}></Chapter>
+    return <Chapter num={4} title={title} url={node.fields.slug} headings={filteredHeadings}></Chapter>
 }
 
 export const GroupAnalyticsChapter: React.FC = () => {
@@ -163,7 +163,7 @@ export const GroupAnalyticsChapter: React.FC = () => {
     const filteredHeadings = filterHeadings(node.fields.slug, headings)
 
     return (
-        <Chapter num={5} title={title} description={description} headings={filteredHeadings}>
+        <Chapter num={5} title={title} url={node.fields.slug} headings={filteredHeadings}>
             <p>Identify users</p>
         </Chapter>
     )
