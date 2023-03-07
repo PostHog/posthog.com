@@ -3,8 +3,6 @@ import React from 'react'
 import Slugger from 'github-slugger'
 import { CallToAction } from 'components/CallToAction'
 
-const slugger = new Slugger()
-
 const query = graphql`
     query Chapters {
         allMdx(filter: { fileAbsolutePath: { regex: "/docs/getting-started/" } }) {
@@ -29,6 +27,7 @@ const filterHeadings = (slug: string, headings: any[]) => {
     return headings
         .filter((heading: any) => heading.depth === 2)
         .map((heading: any) => {
+            const slugger = new Slugger()
             const cleanHeading = heading.value
                 .replace(/^[0-9]+\.\s/, '')
                 .replace(/<[^>]*>[\w\d\s]*<\/[^>]*>/gm, '')
