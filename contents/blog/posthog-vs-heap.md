@@ -40,7 +40,7 @@ Heap, like Amplitude and Mixpanel, focuses mainly on product analytics. That mea
 
 Anyone can use PostHog – just [ask our marketing team](/blog/posthog-marketing) – but our goal is to [help engineers be better at product](/blog/helping-engineers-to-product) by giving them the insights and tools they need to ship impactful features at pace. 
 
-### 3. Transparent pricing. No forced sales calls.
+### 3. Self-serve vs talk to sales
 
 Signing up to PostHog is as simple as creating an account and [adding our JavaScript snippet](/docs/integrate) to your site or app. That's it. Want more features? Just put in a card and pay for what you use. We have a [generous free tier](/pricing), so you may not pay anything at all. No sales calls. No paid add-ons. No confusing product tiers. Just sign up and start building.
 
@@ -48,13 +48,11 @@ Signing up to PostHog is as simple as creating an account and [adding our JavaSc
 
 ## Feature comparison
 
-PostHog has two plans (Free and Scale) to Heap's four (Free, Growth, Pro and Premier). In this guide, we'll compare PostHog's Scale plan to Heap Pro.
+PostHog has three plans (Free, Scale and Enterprise) to Heap's four (Free, Growth, Pro and Premier). In this guide, we'll compare PostHog's Scale plan to Heap Pro as they're the most comparable plans for a typical, mid-market business.
 
 ### Core features
 
-While it recently added a basic session recording feature, Heap is best-known as a pure product analytics tool like Mixpanel or Amplitude.
-
-PostHog includes product analytics, but also integrates session recording, feature flagging, A/B testing, and more into its all-in-one platform. This removes the need to run multiple tools, saving money and implementation time.
+PostHog integrates several normally separate tools, such as product analytics, session recording, and feature flags, into one platform. While it recently added a basic session recording feature, Heap is best known as a pure product analytics tool like Mixpanel or Amplitude.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -120,6 +118,8 @@ PostHog includes product analytics, but also integrates session recording, featu
 - **Experiments:** Heap doesn't have a built-in testing feature, though it does integrate with a number of popular A/B testing tools, such as AB Tasty and Optimizely. PostHog has a [built-in experimentation suite](/product/experimentation-suite) for running A/B and multivariate experiments.
 
 - **Feature flagging:** The [benefits of feature flags](/blog/feature-flag-benefits-use-cases) include the ability to stagger new feature releases, ship to test groups or specific cohorts, manage feature access, and more. PostHog's feature flag product is built-in and tightly integrated with all other products.
+
+- **Open source:** PostHog is open source and self-hostable via Docker Compose for small event volumes ~ 100k events per month. See our [open source deployment docs](/docs/self-host/open-source/deployment) for more.
 
 ### Product analytics
 
@@ -213,19 +213,6 @@ Neither currently offers an SQL editor for writing custom queries, but it's in p
     </tbody>
 </table>
 </div>
-
-> ### Why autocapture?
-> Heap and PostHog both autocapture events. This means you can just deploy a snippet and events (e.g. user clicked button, user viewed paged, etc.) are captured automatically, regardless of whether an event has been manually defined. Teams don't need to update your event tracking every time they ship a change.
->
-> Alternative tools, like Amplitude and Mixpanel, force you to manually instrument every event you want to track. This means you can only create queries based on events you've chosen to track in advance. Every time you think of something new to track, you need to instrument an event and then wait for the data.
->
-> Some would have you believe that autocapture generates "too much data" that's hard to deal with. Our answer?
->
-> To quote Tony Stark: “An intelligence agency which fears intelligence is, historically, not awesome.”
->
-> That said, you can turn off, or fine-tune, autocapture if you are concerned about capturing too many events. See our integration docs for [more on configuring autocapture](/docs/integrate/ingest-live-data) 
-
-<ArrayCTA />
 
 ### Session recording
 
