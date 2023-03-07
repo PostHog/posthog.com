@@ -1,6 +1,6 @@
 ---
 date: 2023-03-06
-title: "An 80/20 approach for sharing user interview insights with your team"
+title: "Interview Snapshots: Our 80/20 approach to sharing user insights"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -9,36 +9,43 @@ author:
   - annika-schmid
 featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
-category: Engineering
+category: Inside PostHog
 tags:
   - Guides
+  - Product engineers
 ---
 
 Regularly talking to users is an important habit for any team, but it's wasted without an efficient way to share what you learn. Traditional scientific methods are effective but too time consuming, especially for a fast-moving startup. Interview snapshots are our solution.
 
-Championed by Teresa Torres in the book [Continuous Discovery Habits](https://www.amazon.co.uk/Continuous-Discovery-Habits-Discover-Products/dp/1736633309), interview snapshots are great conversation starters you can create with minimal effort.
-
-In this guide, I'll share how we create user interview snapshots at PostHog – including the following template that you can download and fill out, or recreate in Google Docs, Figma, etc.
-
-![interview-snapshot](../images/interview-snapshots/interview-snapshot.jpg)
+Championed by Teresa Torres in the book [Continuous Discovery Habits](https://www.amazon.co.uk/Continuous-Discovery-Habits-Discover-Products/dp/1736633309), interview snapshots are great conversation starters you can create with minimal effort. In this guide, I'll share how we create user interview snapshots at PostHog.
 
 ## How to create interview snapshots
 
 Snapshots are an easy-to-digest summary of the insights you glean from interviews. Ideally you take those notes during the interview, or you can ask one of your colleagues to do so – sometimes it's easier if one person talks and the other takes notes. 
 
+Here's what a completed snapshot looks like:
+
+![interview-snapshot](../images/interview-snapshots/interview-snapshot-filled-out.jpg)
+
 While taking notes, focus on how the user is using your product, and how they feel while using it. What makes them excited? What frustrates them? Those are the insights that later go into your interview snapshot.
 
 Another approach is to record the conversation then transcribe and summarise it later. This might seem easier, but I don't recommend it because it's more time consuming – remember we're optimizing for efficiency here. You can, of course, still record interviews as a useful reference for your notes, or for extracting direct quotes later.
 
-Instead, I recommend blocking 30 minutes after your interview to review your notes and fill out the user interview snapshot while it's fresh in your mind. This way, each interview becomes a simple 60-minute block – 30 mintues for your interview, and 30 minutes for review. Once you've reviewed your notes, you can open up your interview snapshot template and start filling it out as follows:
+Instead, I recommend blocking 30 minutes after your interview to review your notes and fill out the user interview snapshot while it's fresh in your mind. This way, each interview becomes a simple 60-minute block – 30 mintues for your interview, and 30 minutes for review.
+
+## Filling out your interview snapshot
+
+Once you've reviewed your notes, you're ready to start filling out your snapshot. You can use the temaplate below, or recreate it in Google Docs, Figma etc.
+
+![interview-snapshot](../images/interview-snapshots/interview-snapshot.jpg)
 
 ### 1. Note high-level information of your user
 
-To set the scene, add the user’s name at the top of the interview snapshot. For B2B companies, I also recommend adding the job role and company name for context. It’s also handy to add the date of the interview and a high-level summary what the interview was about. If available, add a picture of the user and the company logo, if the context is B2B. This may seem superfluous, but I find it helps trigger my memory when I revisit interviews a few weeks after the fact.
+To set the scene, add the user’s name at the top of the interview snapshot – add the job role and company name for B2B companies for extra for context. It’s also handy to add the date of the interview and a high-level summary what the interview was about. If available, add a picture of the user and the company logo, if the context is B2B. This is optional, but I find it helps trigger my memory when I revisit interviews a few weeks after the fact.
 
 ### 2. Add any relevant background information
 
-What information about your user is relevant to your company and product? Their age? Their responsibilities in their job role? What does their morning routine looks like? Write this information down in the “quick facts” column. I also recommend writing down any previous experience the user has with your product here.
+What information about your user is relevant to your company and product? Their age? Their responsibilities in their job role? What does their morning routine looks like? Write this information down in the “quick facts” column. I also recommend writing down any previous experience the user has with your product here – i.e. are they a long-term user, or have they recently started using your product?
 
 ### 3. List the opportunities you’ve identified
 
@@ -56,9 +63,7 @@ At the top of the template, there is space to add one or two memorable quotes fr
 
 ### 6. Share the interview snapshot with your team
 
-Take a screenshot of your completed interview snapshot and share it with your team – we have a dedicated Slack channel for them. Snapshots are bound to create a conversation, follow up questions or ideas. This is exactly what you want. Here is an example of a filled out interview snapshot:
-
-![interview-snapshot](../images/interview-snapshots/interview-snapshot-filled-out.jpg)
+Take a screenshot of your completed interview snapshot and share it with your team – we have a dedicated Slack channel for them. Snapshots are bound to create a conversation, follow up questions or ideas. This is exactly what you want.
 
 ## More tips for successful interviews
 
