@@ -269,10 +269,22 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         // need to use slugger for header links to match
         const slugger = new Slugger()
         return headings.map((heading) => {
+            // Remove HTML tags from the name and trim
+            const cleanName = heading.value.replace(/<[^>]*>[\w\d\s]*<\/[^>]*>/gm, '').trim()
+
+            console.log(cleanName)
+
+            if (cleanName !== name) {
+                console.warn(
+                    'Sidebar link name contains HTML tags. These will be stripped from the final heading.',
+                    heading
+                )
+            }
+
             return {
                 ...heading,
                 depth: heading.depth - 2,
-                url: slugger.slug(heading.value),
+                url: slugger.slug(cleanName),
             }
         })
     }
