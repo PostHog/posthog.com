@@ -3,7 +3,6 @@ title: Send events
 nextPage: ./identify-users.mdx
 ---
 
-import Badge from "./\_snippets/badge.mdx"
 import SendEventBackend from "./\_snippets/send-event-backend.mdx"
 
 Once your PostHog instance is up and running, the next step is to start sending events.
@@ -12,7 +11,7 @@ We recommend starting with autocapture for your web app as it's the quickest way
 
 > **Tip**: Autocapture sends lots of events. We provide a generous free tier but as you scale you might switch to mainly using [custom events](#3-capture-custom-events-client) on the areas of the product that are more stable and [tune autocapture](/docs/sdks/js#tuning-autocapture) to your needs.
 
-## 1. Setup autocapture <Badge>Client</Badge>
+## 1. Setup autocapture
 
 When you call `posthog.init` the PostHog JS library begins automatically capturing user events:
 
@@ -30,7 +29,7 @@ However, if there are specific elements you want to ensure aren't captured, you 
 
 > **Tip**: Including the `ph-no-capture` class will also exclude elements from being shown in session recordings.
 
-## 2. Capture custom events <Badge>Client</Badge>
+## 2. Capture custom events
 
 Setting up autocapture is a great way to get started, but typically when integrating tracking into your product, you'll want to send additional events for when specific things occur.
 
@@ -89,7 +88,7 @@ Continuing with the example above, if we changed the text for our add to cart bu
 
 While combining these two events using [Actions](/manual/actions) to fix this drift is possible, manually track these high-value actions with custom events is far more reliable.
 
-## 3. Capture backend events <Badge>Optional</Badge> <Badge>Server</Badge>
+## 3. Capture backend events
 
 We've now covered sending events using autocapture and custom tracking, but up until now we've only been sending events from our frontend website.
 While for simple websites this is all you'll need to set up, if you're building a web or mobile app with a backend, we also highly recommend setting up tracking from your server in addition to your frontend.
