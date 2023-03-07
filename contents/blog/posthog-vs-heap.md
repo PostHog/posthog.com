@@ -780,7 +780,6 @@ As an open source platform designed for technical teams, PostHog integrates with
 </table>
 </div>
 
-<ArrayCTA />
 
 ## Frequently asked questions
 
