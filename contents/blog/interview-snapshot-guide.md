@@ -20,7 +20,7 @@ Championed by Teresa Torres in the book [Continuous Discovery Habits](https://ww
 
 In this guide, I'll share how we create user interview snapshots at PostHog – including the following template that you can download and fill out, or recreate in Google Docs, Figma, etc.
 
-[interview-snapshot](../images/interview-snapshots/interview-snapshot.jpg)
+![interview-snapshot](../images/interview-snapshots/interview-snapshot.jpg)
 
 ## How to create interview snapshots
 
@@ -58,7 +58,7 @@ At the top of the template, there is space to add one or two memorable quotes fr
 
 Take a screenshot of your completed interview snapshot and share it with your team – we have a dedicated Slack channel for them. Snapshots are bound to create a conversation, follow up questions or ideas. This is exactly what you want. Here is an example of a filled out interview snapshot:
 
-[interview-snapshot](../images/interview-snapshots/interview-snapshot-filled-out.jpg)
+![interview-snapshot](../images/interview-snapshots/interview-snapshot-filled-out.jpg)
 
 ## More tips for successful interviews
 
