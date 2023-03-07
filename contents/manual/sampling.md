@@ -16,6 +16,25 @@ For instance, say you have set up a funnel looking at the conversion from a 'Pag
 
 As a result of doing this, we can provide an answer much faster, so you don't have to sit around waiting for the insight to load. The tradeoff is that the result you get is not 100% accurate, but the higher the sampling rate and the more events you have, the closer the sampled result will be to the actual result, thus minimizing the tradeoff.
 
+## Features
+
+### Insight sampling
+
+Insight configuration allows you to pick between different sampling rates for your insight. These sampling rates will persist when the insight is saved, meaning if you set an insight to 10% sampling and save it to a dashboard, the results for that insight on the dashboard will be sampled. We flag sampled insights with an icon and a helpful tooltip.
+
+### Speed up slow queries
+
+If a certain insight is taking long to load, we display a notice with some recommendations for speeding it up, but also a button you can click to immediately speed up insight calculation. The button will suggest you sample the results, and provide an appropriate sampling rate suggestion. Clicking the button is likely to speed up the query by many orders of magnitude. 
+
+Just note that the insight will then have the sampling filter, which will persist if you save the insight.
+
+### Fast mode
+
+Fast mode is an experimental feature where users can flip a switch on the right side of the navbar to enable 10% sampling for all **new** insights. Saved insights will **not be affected**, but while you are building your graphs we'll immediately apply 10% sampling, making insights load faster. You can override the 10% rate or disable it before saving the insight if you like.
+
+Fast mode is particularly useful for when you are doing exploratory analysis and deciding what metrics to track and what insights are relevant to you. It speeds up the iteration process and you can then turn sampling off when you've settled on the insights you care about and are saving them to a dashboard.
+
+
 ## FAQ
 
 ### Will the sampled results be consistent across calculations?

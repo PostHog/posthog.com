@@ -372,7 +372,6 @@
             "destination": "/docs/migrate/migrate-between-posthog-instances"
         },
         { "source": "/tutorials/categories/plugins", "destination": "/tutorials/categories/apps" },
-        { "source": "/startups", "destination": "/pricing" },
         { "source": "/trial", "destination": "/pricing" },
         { "source": "/schedule-demo", "destination": "/book-a-demo" },
         { "source": "/apps/airbyte-export/docs", "destination": "/docs/apps/airbyte-export" },
@@ -703,6 +702,10 @@
         {
             "source": "/docs/integrate/user-properties",
             "destination": "/docs/getting-started/identify-users"
+        },
+        {
+            "source": "/enterprise",
+            "destination": "/signup/cloud/enterprise"
         }
     ],
     "rewrites": [

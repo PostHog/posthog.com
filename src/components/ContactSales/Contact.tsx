@@ -51,7 +51,7 @@ const fields: {
         options: [
             { value: 'Product Management', hubspotValue: 'product' },
             { value: 'Engineering', hubspotValue: 'engineering' },
-            { value: 'Executive', hubspotValue: 'leadership' },
+            { value: 'Leadership', hubspotValue: 'leadership' },
             { value: 'Marketing', hubspotValue: 'marketing' },
             { value: 'Sales', hubspotValue: 'sales' },
             { value: 'Other', hubspotValue: 'other' },
@@ -105,14 +105,14 @@ const fields: {
         placeHolder: 'Would you like a personalized demo of PostHog?',
         Component: RadioGroup,
         options: [
-            { value: 'Yes', hubspotValue: 'Yes' },
-            { value: 'No', hubspotValue: 'No' },
+            { value: 'Yes, please!', hubspotValue: 'Yes' },
+            { value: 'No, I just have questions', hubspotValue: 'No' },
         ],
         hubspotField: 'personalizedDemo',
     },
     {
         name: 'details',
-        placeHolder: 'Details',
+        placeHolder: 'Tell us more...',
         Component: TextArea,
         hubspotField: 'message',
     },
@@ -384,7 +384,7 @@ export default function Contact() {
                     information.&nbsp;
                 </p>
                 <p className="mb-0">
-                    In the mean time, why not join <Link to="/slack">our Slack community</Link>?
+                    In the meantime, why not join <Link to="/slack">our Slack community</Link>?
                 </p>
             </div>
         </>

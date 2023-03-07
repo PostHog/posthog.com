@@ -28,6 +28,7 @@ module.exports = {
             'max-w-3xl',
             'max-w-4xl',
             'max-w-5xl',
+            'max-w-screen-md',
             'w-full',
             'w-2/12',
             'w-4/12',

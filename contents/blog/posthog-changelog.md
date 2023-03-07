@@ -1,5 +1,5 @@
 ---
-date: 2023-02-23
+date: 2023-03-03
 title: "The PostHog Changelog"
 rootPage: /blog
 sidebar: Blog
@@ -15,9 +15,51 @@ featuredImage: ../images/blog/posthog-array-blog.png
 featuredImageType: full
 ---
 
-Interested about what new features, fixes and updates have just launched on PostHog Cloud? Every Friday we update this page with a look back over the last seven days, so you can get a fresh look at what’s launched and launching right now. We also feature notable additions to the blog and docs. 
+Interested in what new features, fixes and updates have just launched on PostHog Cloud? Every Friday we update this page with a look back over the last seven days, so you can get a fresh look at what’s launched and launching right now. We also feature notable additions to the blog and docs. 
 
 > Some new features you read about below may still be in beta, behind a feature flag, or only available to paying users. Want to see which betas are currently available? [Check the roadmap](/roadmap)!
+
+## March 3, 2023
+
+### 2FA authentication
+![2fa support](../images/blog/array/2fa_posthog.png)
+
+Security is a big focus for us right now, as we work towards full SOC2 authentication - and two-factor authentication is the latest element of that. 
+
+Want to enable 2FA? Head to your Project Settings to get started. You'll then get your own QR code like the one above (which, don't worry, is for a test environment) to set it up with apps such as Google Authenticator. 
+
+### Hedgehog Mode
+![hog mode](../images/blog/array/hog_walk.gif)
+
+Let's get the biggest and most important updates out of the way first. We've updated our hedgehog mode, which you can access via the help menu in the app, to include some extra features. 
+
+You can now control Max ([that's his name](/handbook/company/team)) using the WASD keys, and we've also added a physics engine to give him a proper sense of gravity and inertia. You can make him jump with `W`, or spin with `S`. 
+
+### React library
+![react posthog](../images/blog/array/react_posthog.png)
+
+Our Head of Product, Luke, decided to stretch his engineering skills this week and added a new React library which makes it easy to use product analytics and feature flags with React and Next.js apps. This is available in `posthog-js` from version 1.50.
+
+You can now integrate PostHog using the `PostHogProvider`. PostHog then provides a bunch of hooks including `usePostHog` to access the initialized client, and the feature flag hooks `useFeatureEnabled` and `useFeaturePayload`. Checkout [the React docs](/docs/sdks/react) or [the Next.js docs](/docs/integrate/third-party/next-js) for more information.
+
+### New toolbar element selector 
+![The selector modal being used to discover the more meaningful selector](../images/tutorials/toolbar/toolbar-selector-edit.gif)
+
+We've added a new element selector to [the PostHog toolbar](/manual/toolbar) so that it's easier to create actions in some circumstances. 
+
+The new modal shows the HTML elements wrapping the selected element, so that your clicks build up a selection. Want to give it a go? We've updated [our toolbar tutorial](/tutorials/toolbar) with instructions.
+
+### URL query parameter converter app
+![outfunnel app](../images/blog/array/outfunnel-app.gif)
+
+Community member [Benjamin Werker](https://github.com/everald) has contributed a new app which [automatically converts URL query parameters into PostHog event properties](/apps/url-query). It's especially useful for analysing content and search performance in PostHog, and our marketing team are big fans of it. Thanks, Benjamin!
+
+### Outfunnel app
+![url query app](../images/blog/array/query-url.gif)
+
+The folks at [Outfunnel](https://outfunnel.com/) have contributed a new app which enables you to [export data from PostHog to Outfunnel](/apps/outfunnel-exporter). This is mainly useful for scoring leads based on their behaviour, or using them as triggers for automations. 
+
+> Want to make your own PostHog apps? Check the docs for tips on [how to use PostHog's in-app source editor](/tutorials/build-your-own-posthog-app). 
 
 ## February 24, 2023
 
