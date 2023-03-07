@@ -45,7 +45,7 @@ This app is maintained by PostHog. If you have issues with the app not functioni
 
 ### What if I have feedback on this app?
 
-We love feature requests and feedback! Please [create an issue](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&template=feature_request.md) to tell us what you think.
+We love feature requests and feedback! Please [create an issue](https://github.com/PostHog/notification-bar-app/issues/new) to tell us what you think.
 
 ### What if my question isn't answered above?
 
