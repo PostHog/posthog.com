@@ -5,6 +5,7 @@ import { pricingSliderLogic } from 'components/Pricing/PricingSlider/pricingSlid
 import { Analytics, SessionRecording } from 'components/ProductIcons'
 import { useActions, useValues } from 'kea'
 import React, { useEffect } from 'react'
+import Link from 'components/Link'
 
 export const section = cntl`
     max-w-6xl
@@ -123,6 +124,18 @@ export const PricingCalculator = () => {
 
                         <h5 className="text-base mb-0">Non-profits</h5>
                         <p className="text-[15px] mb-1">50% off in most cases. Get in touch after signing up.</p>
+                    </div>
+
+                    <div className="pl-10 relative mb-4">
+                        <span className="w-6 h-6 absolute top-0 left-1">
+                            <Discount />
+                        </span>
+
+                        <h5 className="text-base mb-0">Startups</h5>
+                        <p className="text-[15px] mb-1">
+                            If your startup is under two years old and has raised less than $5m, check out our{' '}
+                            <Link to="/startups">startup program</Link>.
+                        </p>
                     </div>
                 </div>
             </div>
