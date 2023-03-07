@@ -7,7 +7,7 @@ hideAnchor: false
 
 ## Small teams
 
-We've organised the team into small teams that are multi-disciplinary and as self-sufficient as possible. [You can read about why we've done it this way](/handbook/company/small-teams).
+We've organized the team into small teams that are multi-disciplinary and as self-sufficient as possible. [You can read about why we've done it this way](/handbook/company/small-teams).
 
 Our small teams are:
 
@@ -17,7 +17,7 @@ Our small teams are:
 - [Infrastructure](/handbook/small-teams/infrastructure)
 - [Pipeline](/handbook/small-teams/pipeline)
 - [Marketing](/handbook/small-teams/marketing)
-- [Website and Docs](/handbook/small-teams/website-docs)
+- [Website & Docs](/handbook/small-teams/website-docs)
 - [Growth](/handbook/small-teams/growth)
 - [People & Ops](/handbook/small-teams/people)
 - [Customer Success](/handbook/small-teams/customer-success)
