@@ -19,7 +19,7 @@ Regularly talking to users is an important habit for any team, but it's wasted w
 
 Championed by Teresa Torres in the book [Continuous Discovery Habits](https://www.amazon.co.uk/Continuous-Discovery-Habits-Discover-Products/dp/1736633309), interview snapshots are great conversation starters you can create with minimal effort. In this guide, I'll share how we create user interview snapshots at PostHog.
 
-## How to create interview snapshots
+## Interview snapshots explained
 
 Snapshots are an easy-to-digest summary of the insights you glean from interviews. Ideally you take those notes during the interview, or you can ask one of your colleagues to do so – sometimes it's easier if one person talks and the other takes notes. 
 
@@ -31,9 +31,9 @@ While taking notes, focus on how the user is using your product, and how they fe
 
 Another approach is to record the conversation then transcribe and summarise it later. This might seem easier, but I don't recommend it because it's more time consuming – remember we're optimizing for efficiency here. You can, of course, still record interviews as a useful reference for your notes, or for extracting direct quotes later.
 
-Instead, I recommend blocking 30 minutes after your interview to review your notes and fill out the user interview snapshot while it's fresh in your mind. This way, each interview becomes a simple 60-minute block – 30 mintues for your interview, and 30 minutes for review.
+Instead, I recommend blocking 30 minutes after your interview to review your notes and fill out the user interview snapshot while it's fresh in your mind. This way, each interview becomes a simple 60-minute block – 30 minutes for your interview, and 30 minutes for review.
 
-## Filling out your interview snapshot
+## Creating your interview snapshot
 
 Once you've reviewed your notes, you're ready to start filling out your snapshot. You can use the template below, or recreate it in Google Docs, Figma etc.
 
@@ -41,7 +41,7 @@ Once you've reviewed your notes, you're ready to start filling out your snapshot
 
 ### 1. Note high-level information of your user
 
-To set the scene, add the user’s name at the top of the interview snapshot – add the job role and company name for B2B companies for extra for context. It’s also handy to add the date of the interview and a high-level summary what the interview was about. If available, add a picture of the user and the company logo, if the context is B2B. This is optional, but I find it helps trigger my memory when I revisit interviews a few weeks after the fact.
+Don't forget to add the job role and company name if you're a B2B company – it's vital context. If easily available, add a picture of the user and the company logo. This is optional, but I find it helps trigger my memory when I revisit interviews a few weeks after the fact.
 
 ### 2. Add any relevant background information
 
@@ -55,11 +55,11 @@ Did the user express any pain points or desires in relation to your product or p
 
 ### 4. Note any other interesting insights
 
-If the user mentioned anything interesting that doesn’t fit in the “Opportunities” column, you can add it to “Insights”. This can include anything that isn’t a pain point, a need or a desire. Did the user show any uncommon behaviour? Did they share anything about why they chose your product (or not)? If there is anything you want your colleagues to know about without reading the whole interview transcript, this is the place to put it.
+If the user mentioned anything interesting that doesn’t fit in the “Opportunities” column, you can add it to “Insights”. This can include anything that isn’t a pain point, a need or a desire. Did the they use the product in an unexpected way? Did they share anything about why they chose your product (or not)? If there is anything you want your colleagues to know about without reading the whole interview transcript, this is the place to put it.
 
 ### 5. Add one or two memorable quotes
 
-At the top of the template, there is space to add one or two memorable quotes from the interview. This is useful, for example, if the user shared a particular emotion in the interview you want to relay word by word, and you want to create empathy in your team for this particular issue.
+At the top of the template, there is space to add one or two memorable quotes from the interview. This is useful, for example, if the user shared a particular emotion in the interview you want to relay word for word, and you want to create empathy in your team for this particular issue.
 
 ### 6. Share the interview snapshot with your team
 
@@ -73,4 +73,6 @@ Take a screenshot of your completed interview snapshot and share it with your te
 
 - If you’ve done a round of interviews around a certain topic, aside from user snapshots, summarise what you’ve learned. This allows you to highlight opportunity areas that have been mentioned several times or are a bigger problem then others, thus guiding your prioritisation.
 
-To conclude, interview snapshots are a great way of quickly capturing the gist of a user interview and sharing those insights with your team. Remember, this is just how **we** do them – you can adapt this template however you want to suit your needs. And, if you're new to doing user interviews, read our [guide to talking to users as an engineer](/blog/10x-engineers-do-user-interviews) for more tips.
+To conclude, interview snapshots are a great way of quickly capturing the gist of a user interview and sharing those insights with your team. Remember, this is just how **we** do them – you can adapt this template however you want to suit your needs. 
+
+If you're new to doing user interviews, read our [guide to talking to users as an engineer](/blog/10x-engineers-do-user-interviews) for more tips on how to plan your interviews and find people to talk to.
