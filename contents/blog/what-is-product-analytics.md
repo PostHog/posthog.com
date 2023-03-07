@@ -67,7 +67,7 @@ Individuals will often employ product analytics on a particular area, depending 
 
 ## What product metrics should I track?
 
-It’s important when using product analytics tools to look at metrics relevant to specific decisions. Metrics such as the number of customers, can give you a good sense of your overall product health but won't help you plan a roadmap.
+It’s important when using product analytics tools to look at metrics relevant to specific decisions. Metrics such as the number of customers, can give you a good sense of your overall [product health](/blog/product-health-metrics) but won't help you plan a roadmap.
 
 One simple set of metrics which can help all teams to focus their efforts is the so-called pirate funnel, which was created by Dave McClure and tracks AARRR. That stands for:
 

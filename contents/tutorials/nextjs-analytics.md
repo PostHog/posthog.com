@@ -269,15 +269,13 @@ NEXT_PUBLIC_POSTHOG_KEY=<ph_project_api_key>
 NEXT_PUBLIC_POSTHOG_HOST=<ph_instance_address>
 ```
 
-Then install [posthog-js](https://github.com/posthog/posthog-js) using your package manager:
+Next, install [posthog-js](https://github.com/posthog/posthog-js):
 
 ```shell
-yarn add posthog-js
-# or
 npm install --save posthog-js
 ```
 
-And finally add the PostHog provider to your app
+Now we will set up the `PostHogProvider` for our app. This enables you to access PostHog and its methods from anywhere in your app.
 
 ```js
 // pages/_app.js
@@ -288,13 +286,13 @@ import { PostHogProvider } from 'posthog-js/react'
 
 // Check that PostHog is client-side
 if (typeof window !== 'undefined') {
-    posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
-        api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://app.posthog.com',
-        // Disable in development
-        loaded: (posthog) => {
-          if (process.env.NODE_ENV === 'development') posthog.opt_out_capturing()
-        }
-    })
+  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://app.posthog.com',
+    // Disable in development
+    loaded: (posthog) => {
+      if (process.env.NODE_ENV === 'development') posthog.opt_out_capturing()
+    }
+  })
 }
 
 export default function App(
@@ -316,11 +314,11 @@ Once saved, go back to your app and click around, you should see events start to
 
 ![Events](../images/tutorials/nextjs-analytics/events.png)
 
-The snippet autocaptures clicks, inputs, session recordings (if enabled), pageviews*, and more. It also provides access to the `posthog-js` [library](/docs/integrate/client/js) which we use to set up the rest of the features.
+The library autocaptures clicks, inputs, session recordings (if enabled), pageviews (for single pages, we'll fix this next) and more. It also provides access to the all the features of [`posthog-js`](/docs/integrate/client/js) which we will set up during the rest of this tutorial.
 
 ## Capturing pageviews in Next.js
 
-When testing PostHog, you might notice pageview events aren’t captured when you move between pages. This is because Next acts as a [single page app](/tutorials/single-page-app-pageviews). The app does not reload when moving between pageviews which does not trigger PostHog to capture a pageview.
+When testing PostHog, you might notice pageview events aren’t captured when you move between pages. This is because Next.js acts as a [single page app](/tutorials/single-page-app-pageviews). The app does not reload when moving between pageviews which does not trigger PostHog to capture a pageview.
 
 To solve this, we can capture a custom event when the route changes using `next/router` in `_app.js` with `useEffect`. It looks like this:
 

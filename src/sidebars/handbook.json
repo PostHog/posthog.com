@@ -339,6 +339,10 @@
                         "url": "/handbook/engineering/incidents"
                     },
                     {
+                        "name": "On-call rotation",
+                        "url": "/handbook/engineering/oncall-rotation"
+                    },
+                    {
                         "name": "Bug prioritization",
                         "url": "/handbook/engineering/bug-prioritization"
                     },
@@ -519,6 +523,10 @@
             {
                 "name": "Releasing as beta",
                 "url": "/handbook/product/releasing-as-beta"
+            },
+            {
+                "name": "In-app prompts",
+                "url": "/handbook/product/in-app-prompts"
             }
         ]
     },
