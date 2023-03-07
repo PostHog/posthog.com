@@ -35,7 +35,7 @@ Instead, I recommend blocking 30 minutes after your interview to review your not
 
 ## Filling out your interview snapshot
 
-Once you've reviewed your notes, you're ready to start filling out your snapshot. You can use the temaplate below, or recreate it in Google Docs, Figma etc.
+Once you've reviewed your notes, you're ready to start filling out your snapshot. You can use the template below, or recreate it in Google Docs, Figma etc.
 
 ![interview-snapshot](../images/interview-snapshots/interview-snapshot.jpg)
 
