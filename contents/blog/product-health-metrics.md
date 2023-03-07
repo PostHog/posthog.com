@@ -1,6 +1,6 @@
 ---
 title: The most useful product health metrics
-date: 2023-03-02
+date: 2023-03-07
 author: ["ian-vanagas"]
 showTitle: true
 rootpage: /blog
