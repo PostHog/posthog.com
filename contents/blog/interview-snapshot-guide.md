@@ -1,6 +1,6 @@
 ---
 date: 2023-03-08
-title: "How to turn user interviews into actionable interview snapshots"
+title: "How to turn user interviews into actionable snapshots"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -21,7 +21,7 @@ Regularly talking to users is an important habit for any product team, but it's 
  2. They're easy to digest – no scrolling necessary, just drop a screenshot into Slack.
  3. They're conversation starters – each individual snapshot triggers lively debate and ideas.
 
-In this guide, I'll share how we create user interview snapshots at PostHog.
+In this guide, I'll share how we create user interview snapshots at PostHog – template available as a [JPG], [Figma file](https://www.figma.com/file/iO6kIZ8kXdMudLtu7kSyc5/PostHog-Interview-Snapshot-Template?node-id=0%3A1&t=LDU8ALaROQyfh6JL-1), or on [Google Sheets](https://docs.google.com/presentation/d/1JnewtJmeRHrXPloJzT5nGmXYrBUbaKnN7-k4kYjbo9M/edit?usp=sharing).
 
 ## Interview snapshots explained
 
