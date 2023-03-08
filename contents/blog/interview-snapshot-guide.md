@@ -7,7 +7,7 @@ showTitle: true
 hideAnchor: true
 author:
   - annika-schmid
-featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImage: ../images/blog/posthog-blog-at-desk.png
 featuredImageType: full
 category: Inside PostHog
 tags:
