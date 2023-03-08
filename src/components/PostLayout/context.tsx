@@ -26,7 +26,9 @@ export const PostProvider: React.FC<ProviderProps> = ({
     children,
 }) => {
     const [fullWidthContent, setFullWidthContent] = useState<boolean>(
-        hideSidebar || !sidebar || localStorage.getItem('full-width-content') === 'true'
+        hideSidebar ||
+            !sidebar ||
+            (typeof window !== 'undefined' && localStorage.getItem('full-width-content') === 'true')
     )
     const tableOfContents = other.tableOfContents?.filter((item) => item.depth > -1 && item.depth < 2)
     const contentContainerClasses =
