@@ -15,9 +15,13 @@ tags:
   - Product engineers
 ---
 
-Regularly talking to users is an important habit for any team, but it's wasted without an efficient way to share what you learn. Traditional scientific methods are effective but too time consuming, especially for a fast-moving startup. Interview snapshots are our solution.
+Regularly talking to users is an important habit for any product team, but it's wasted without an efficient way to share what you learn. At PostHog, we favor interview snapshots. Championed by Teresa Torres in the book [Continuous Discovery Habits](https://www.amazon.co.uk/Continuous-Discovery-Habits-Discover-Products/dp/1736633309), we like snapshots because:
 
-Championed by Teresa Torres in the book [Continuous Discovery Habits](https://www.amazon.co.uk/Continuous-Discovery-Habits-Discover-Products/dp/1736633309), interview snapshots are great conversation starters you can create with minimal effort. In this guide, I'll share how we create user interview snapshots at PostHog.
+ 1. They're easy to create – 30 minutes maximum if you do them right after an interview.
+ 2. They're easy to digest – no scrolling necessary, just drop a screenshot into Slack.
+ 3. They're conversation starters – each individual snapshot triggers lively debate and ideas.
+
+In this guide, I'll share how we create user interview snapshots at PostHog.
 
 ## Interview snapshots explained
 
