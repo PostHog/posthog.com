@@ -339,12 +339,12 @@
                         "url": "/handbook/engineering/incidents"
                     },
                     {
-                        "name": "Bug prioritization",
-                        "url": "/handbook/engineering/bug-prioritization"
+                        "name": "On-call rotation",
+                        "url": "/handbook/engineering/oncall-rotation"
                     },
                     {
-                        "name": "Pricing principles",
-                        "url": "/handbook/engineering/feature-pricing"
+                        "name": "Bug prioritization",
+                        "url": "/handbook/engineering/bug-prioritization"
                     }
                 ]
             },
@@ -519,6 +519,10 @@
             {
                 "name": "Releasing as beta",
                 "url": "/handbook/product/releasing-as-beta"
+            },
+            {
+                "name": "In-app prompts",
+                "url": "/handbook/product/in-app-prompts"
             }
         ]
     },
@@ -645,12 +649,16 @@
         ]
     },
     {
-        "name": "Growth engineering",
+        "name": "Growth",
         "url": "",
         "children": [
             {
                 "name": "Growth reviews",
                 "url": "/handbook/growth/growth-engineering/growth-sessions"
+            },
+            {
+                "name": "Pricing principles",
+                "url": "/handbook/engineering/feature-pricing"
             }
         ]
     }

@@ -99,7 +99,6 @@ import { PricingHero } from './components/Pricing/PricingHero'
 import { PricingSlider } from './components/Pricing/PricingSlider'
 import { PricingTable } from './components/Pricing/PricingTable'
 import { ProductPillars } from './components/Pricing/ProductPillars'
-import { Quote } from './components/Pricing/Quote'
 import { Savings } from './components/Pricing/Savings'
 import { SelfHost } from './components/Pricing/SelfHost'
 import { PricingCTA } from './components/PricingCTA'
@@ -121,6 +120,7 @@ import { FeaturedSectionTextLeft } from './components/Sections/FeaturedSectionTe
 import { FeaturedSectionTextRight } from './components/Sections/FeaturedSectionTextRight'
 import { FeaturedSectionTripleImage } from './components/Sections/FeaturedSectionTripleImage'
 import { SignupCTA } from './components/SignupCTA'
+import { SignupLink } from './components/SignupLink'
 import { SiteSearchCallout } from './components/SiteSearchCallout'
 import { SliderNav } from './components/SliderNav'
 import { Spacer } from './components/Spacer'
@@ -242,7 +242,6 @@ export const shortcodes = {
     PricingSlider,
     PricingTable,
     ProductPillars,
-    Quote,
     Savings,
     SelfHost,
     PricingCTA,
@@ -264,6 +263,7 @@ export const shortcodes = {
     FeaturedSectionTextRight,
     FeaturedSectionTripleImage,
     SignupCTA,
+    SignupLink,
     SiteSearchCallout,
     SliderNav,
     Spacer,

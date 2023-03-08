@@ -12,7 +12,7 @@ featuredImageType: full
 category: Engineering
 tags:
   - Explainers
-  - Product engineer
+  - Product engineers
 ---
 
 Software companies are changing. Where once product managers and software engineers dominated, now a new role is emerging: the [product engineer](/blog/what-is-a-product-engineer).

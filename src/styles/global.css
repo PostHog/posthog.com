@@ -345,7 +345,7 @@ div[class^='feature-'].text-center {
 
 /* When used in article on-page nav, only show on mobile viewports... */
 
-#content-menu-wrapper .jumpTo:before {
+.article-content .jumpTo:before {
     @apply xl:hidden;
 }
 

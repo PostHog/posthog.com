@@ -18,6 +18,8 @@ CPU was used.
 
 ![clickhouse-client progress reporting](../../../images/handbook/clickhouse-client-progress.gif)
 
+You can get additional logging from ClickHouse by setting `SET send_logs_level = 'trace'` before running a query.
+
 ### `system.query_log`
 
 ClickHouse saves all queries it runs into [`system.query_log`](https://clickhouse.com/docs/en/operations/system-tables/query_log/) table.

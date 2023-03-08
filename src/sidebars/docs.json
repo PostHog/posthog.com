@@ -11,8 +11,32 @@
         "url": "",
         "children": [
             {
-                "name": "Quickstart with PostHog Cloud",
-                "url": "/docs/getting-started/cloud"
+                "name": "Start here",
+                "url": "/docs/getting-started/start-here"
+            },
+            {
+                "name": "Install PostHog",
+                "url": "/docs/getting-started/install"
+            },
+            {
+                "name": "Send events",
+                "url": "/docs/getting-started/send-events"
+            },
+            {
+                "name": "Identify users",
+                "url": "/docs/getting-started/identify-users"
+            },
+            {
+                "name": "Actions and insights",
+                "url": "/docs/getting-started/actions-and-insights"
+            },
+            {
+                "name": "Group analytics",
+                "url": "/docs/getting-started/group-analytics"
+            },
+            {
+                "name": "Next steps",
+                "url": "/docs/getting-started/next-steps"
             }
         ]
     },
@@ -171,20 +195,8 @@
                 ]
             },
             {
-                "name": "Ingest live data",
-                "url": "/docs/integrate/ingest-live-data"
-            },
-            {
                 "name": "Ingest historical data",
                 "url": "/docs/integrate/ingest-historic-data"
-            },
-            {
-                "name": "Identify users",
-                "url": "/docs/integrate/identifying-users"
-            },
-            {
-                "name": "User properties",
-                "url": "/docs/integrate/user-properties"
             },
             {
                 "name": "Using a CDP",

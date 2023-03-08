@@ -212,6 +212,8 @@ export default function Handbook({
     const showToc = !hideAnchor && tableOfContents?.length > 0
     const filePath = post?.parent?.relativePath
 
+    const isArticle = frontmatter.isArticle !== false
+
     const [showCTA, setShowCTA] = React.useState<boolean>(
         typeof window !== 'undefined' ? Boolean(getCookie('ph_current_project_token')) : false
     )
@@ -316,7 +318,7 @@ export default function Handbook({
                             )}
                         </div>
                         {features && <LibraryFeatures availability={features} />}
-                        <div className="article-content">
+                        <div className={isArticle && 'article-content'}>
                             <MDXProvider components={components}>
                                 <MDXRenderer>{body}</MDXRenderer>
                             </MDXProvider>
@@ -395,6 +397,7 @@ export const query = graphql`
                 description
                 hideLastUpdated
                 github
+                isArticle
                 features {
                     eventCapture
                     userIdentification
