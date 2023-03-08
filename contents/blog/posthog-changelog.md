@@ -50,12 +50,12 @@ We've added a new element selector to [the PostHog toolbar](/manual/toolbar) so 
 The new modal shows the HTML elements wrapping the selected element, so that your clicks build up a selection. Want to give it a go? We've updated [our toolbar tutorial](/tutorials/toolbar) with instructions.
 
 ### URL query parameter converter app
-![outfunnel app](../images/blog/array/outfunnel-app.gif)
+![url query app](../images/blog/array/query-url.gif)
 
 Community member [Benjamin Werker](https://github.com/everald) has contributed a new app which [automatically converts URL query parameters into PostHog event properties](/apps/url-query). It's especially useful for analysing content and search performance in PostHog, and our marketing team are big fans of it. Thanks, Benjamin!
 
 ### Outfunnel app
-![url query app](../images/blog/array/query-url.gif)
+![outfunnel app](../images/blog/array/outfunnel-app.gif)
 
 The folks at [Outfunnel](https://outfunnel.com/) have contributed a new app which enables you to [export data from PostHog to Outfunnel](/apps/outfunnel-exporter). This is mainly useful for scoring leads based on their behaviour, or using them as triggers for automations. 
 
