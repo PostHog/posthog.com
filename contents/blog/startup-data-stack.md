@@ -61,18 +61,18 @@ The goal of the stack at this stage is insights into how the product and specifi
 
 ## The series A data stack
 
-Series A is where data begins to get serious, and by serious, I mean the startup brings in people responsible for owning the data stack. This person, often a head of data, comes in and implements the "modern data stack." This contains four tools:
+Series A is where data begins to get serious, and by serious, I mean the startup makes someone responsible for owning the data stack. This person is often a head of data, data engineer, or backend engineer focused on data. They come in and implements the "modern data stack." This contains four tools:
 
 1. A data warehouse stores all the data and act as a single source of truth. Options include Snowflake, BigQuery, and RedShift.
 2. An ETL pipeline to extract data from different sources, transform it, and load it into the warehouse. Options include Fivetran, Integrate.io, and Airbyte.
-3. A data transformation tool to model data and make it usable. dbt is basically the only option.
+3. A data transformation tool to model data, clean it up, and make it usable. dbt is basically the only option.
 4. A business intelligence or visualization tool to get insights from the data you’ve collected. Options include Metabase, Looker, and Hex.
 
 ![Series A](../images/blog/startup-data-stack/series-a.png)
 
 Startups need this because managing and accessing individual sources of data becomes unsustainable. Teams need a single source of truth, and the modern data stack gives them that. This creates trust in the data and greater accuracy.
 
-The downside of this stage is that engineers start to get further away from the data important to them. They must learn the modern data stack tools or rely on the data team for insights. This becomes a much larger issue in the next stage.
+The downside of this stage is that engineers start to get further away from the data important to them. They must learn the modern data stack tools or rely on the data team for insights. The analytics tools set up earlier become inaccurate, and are used less. This becomes a much larger issue in the next stage.
 
 ## The series B and beyond data stack
 
