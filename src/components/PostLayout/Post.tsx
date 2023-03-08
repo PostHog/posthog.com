@@ -38,13 +38,6 @@ export default function Post({ children }: { children: React.ReactNode }) {
         contentContainerClasses,
         stickySidebar,
     } = usePost()
-    const { hash, href } = useLocation()
-
-    useEffect(() => {
-        if (hash && !hideSearch) {
-            scroll.scrollMore(-50)
-        }
-    }, [])
 
     const handleFullWidthContentChange = () => {
         localStorage.setItem('full-width-content', !fullWidthContent + '')
