@@ -88,7 +88,9 @@ In PostHog, we can also include special `$set` and `$set_once` properties on eve
 If a `$set` property is included on an event, it will replace whatever value may have already been set on a person for a specific property.
 In contrast, `$set_once` will only set the property if it has never been set before.
 
-`$set` is typically used for properties that you always want up-to-date information for (email, current plan, etc.), while `$set_once` is typically only used for information related to when a user first is seen (first URL they viewed, first time they logged in). 
+`$set` is typically used for properties that you always want up-to-date information for (email, current plan, etc.), while `$set_once` is typically only used for information related to when a user first is seen (first URL they viewed, first time they logged in).
+
+Note: that we ignore the event timestamps and just process everything at ingestion time.
 
 In summary: `set` always overrides, `set_once` only writes when the property doesn't already exist on the user.
 
@@ -104,4 +106,18 @@ posthog.people.set_once({ initial_location: 'London })
 posthog.people.set_once({ initial_location: 'Rome' })
 
 // { initial_location: 'London' }
+```
+
+## 5. Merging users
+
+Sometimes you need to merge users (typically in the backend), there are two options:
+1. alias, which is safeguarded to not merging already identified users into others
+2. merge, with no safeguards
+
+For example using the posthog python library:
+
+```py
+posthog.alias('user-id', 'non-identified-id')
+
+posthog.capture('user-id', '$merge_dangerously', {'alias': 'second-user-id'})
 ```
