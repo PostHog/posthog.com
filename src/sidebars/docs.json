@@ -297,14 +297,6 @@
         "icon": "/images/product-icons/product-analytics.svg",
         "children": [
             {
-                "name": "Identify users",
-                "url": "/docs/integrate/identifying-users"
-            },
-            {
-                "name": "User properties",
-                "url": "/docs/integrate/user-properties"
-            },
-            {
                 "name": "Ingest historical data",
                 "url": "/docs/integrate/ingest-historic-data"
             },
