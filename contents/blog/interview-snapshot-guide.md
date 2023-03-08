@@ -1,6 +1,6 @@
 ---
 date: 2023-03-08
-title: "How to turn user interviews into actionable interview snapshots"
+title: "How to turn user interviews into actionable snapshots"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -17,11 +17,11 @@ tags:
 
 Regularly talking to users is an important habit for any product team, but it's wasted without an efficient way to share what you learn. At PostHog, we favor interview snapshots. Championed by Teresa Torres in the book [Continuous Discovery Habits](https://www.amazon.com/Continuous-Discovery-Habits-Discover-Products/dp/1736633309), we like snapshots because:
 
- 1. They're easy to create – 30 minutes maximum if you do them right after an interview.
+ 1. They're easy to create – 30 minutes if you do them right after an interview.
  2. They're easy to digest – no scrolling necessary, just drop a screenshot into Slack.
- 3. They're conversation starters – each individual snapshot triggers lively debate and ideas.
+ 3. They're conversation starters – each snapshot triggers lively debate and ideas.
 
-In this guide, I'll share how we create user interview snapshots at PostHog.
+In this guide, I'll share how we create user interview snapshots at PostHog – template available as a [JPEG](../images/interview-snapshots/interview-snapshot.jpg), [Figma file](https://www.figma.com/file/iO6kIZ8kXdMudLtu7kSyc5/PostHog-Interview-Snapshot-Template?node-id=0%3A1&t=LDU8ALaROQyfh6JL-1), or on [Google Sheets](https://docs.google.com/presentation/d/1JnewtJmeRHrXPloJzT5nGmXYrBUbaKnN7-k4kYjbo9M/edit?usp=sharing).
 
 ## Interview snapshots explained
 
@@ -39,7 +39,7 @@ Instead, I recommend blocking 30 minutes after your interview to review your not
 
 ## Creating your interview snapshot
 
-Once you've reviewed your notes, you're ready to start filling out your snapshot. You can save and edit the snapshot below, or make a copy of a version on [Figma](https://www.figma.com/file/iO6kIZ8kXdMudLtu7kSyc5/PostHog-Interview-Snapshot-Template?node-id=0%3A1&t=LDU8ALaROQyfh6JL-1) and [Google Sheets](https://docs.google.com/presentation/d/1JnewtJmeRHrXPloJzT5nGmXYrBUbaKnN7-k4kYjbo9M/edit?usp=sharing).
+Once you've reviewed your notes, you're ready to start filling out your snapshot. You can save and edit the snapshot below, or make a copy on [Figma](https://www.figma.com/file/iO6kIZ8kXdMudLtu7kSyc5/PostHog-Interview-Snapshot-Template?node-id=0%3A1&t=LDU8ALaROQyfh6JL-1) and [Google Sheets](https://docs.google.com/presentation/d/1JnewtJmeRHrXPloJzT5nGmXYrBUbaKnN7-k4kYjbo9M/edit?usp=sharing).
 
 ![interview-snapshot](../images/interview-snapshots/interview-snapshot.jpg)
 
@@ -67,7 +67,7 @@ At the top of the template, there is space to add one or two memorable quotes fr
 
 ### 6. Share the interview snapshot with your team
 
-Take a screenshot of your completed interview snapshot and share it with your team – we have a dedicated Slack channel for them. Snapshots are bound to create a conversation, follow-up questions or ideas. This is exactly what you want. At PostHog, interview snapshots frequently convince people we should invest in a certain feature, or remind us of older issues that have escaped our attention..
+Take a screenshot of your completed interview snapshot and share it with your team – we have a dedicated Slack channel for them. Snapshots are bound to create a conversation, follow-up questions or ideas. This is exactly what you want. At PostHog, interview snapshots frequently convince people we should invest in a certain feature, or remind us of older issues that have escaped our attention.
 
 ## More tips for successful interviews
 
