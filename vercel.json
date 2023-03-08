@@ -696,7 +696,7 @@
             "destination": "/docs/getting-started/send-events"
         },
         {
-            "source": "/docs/integrate/identify-users",
+            "source": "/docs/integrate/identifying-users",
             "destination": "/docs/getting-started/identify-users"
         },
         {
