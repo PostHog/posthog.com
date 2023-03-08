@@ -212,7 +212,7 @@ export default function Handbook({
     const showToc = !hideAnchor && tableOfContents?.length > 0
     const filePath = post?.parent?.relativePath
 
-    let isArticle = frontmatter.isArticle !== false
+    const isArticle = frontmatter.isArticle !== false
 
     const [showCTA, setShowCTA] = React.useState<boolean>(
         typeof window !== 'undefined' ? Boolean(getCookie('ph_current_project_token')) : false
