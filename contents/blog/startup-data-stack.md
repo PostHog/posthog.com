@@ -14,11 +14,14 @@ tags:
  - Explainers
 ---
 
-The startup data stack is the products and technology teams use to understand what they are building. It is data about usage and performance used to understand how they are doing and prioritize what to do next.
+The goal of the data is to help startups build a better product. To help them with this, startups use all sorts of tools, known as the startup data stack. 
 
-The startup data stack starts small. [Early stage startups](/blog/early-stage-analytics) want quick insights telling them if the product is working. As they grow, their needs become more complicated, and what they use to fulfill these needs does too.
+To help you understand the startup data stack, and be better able leverage it, this post will go over:
+- What the startup data stack looks like from MVP to series B and beyond
+- Examples of tools used and the problems they solve
+- PostHog's vision of the future for the startup data stack
 
-This post goes over what we’ve found the startup data stack looks like, and how it evolves from MVP to series B and beyond. This comes from working with startups at all stages, conducting user interviews, researching the data stack landscape, and being part of the data stack ourselves.
+This comes from working with startups at all stages, conducting user interviews, researching the data stack landscape, and being part of the data stack ourselves.
 
 ## The MVP data stack
 
@@ -37,16 +40,16 @@ To do this, they need:
 
 ![MVP](../images/blog/startup-data-stack/mvp.png)
 
-To choose these products, they usually go with the "popular" choice, as they are [boring technologies](https://mcfunley.com/choose-boring-technology) that work for other people. The goal of the data stack at the MVP stage is to get basic data into if what you are building is working. Complicated solutions aren’t needed for this.
+To choose these products, they usually go with the "popular" choice, as they are [boring technologies](https://mcfunley.com/choose-boring-technology) that work for other people. The goal of the data stack at the MVP stage is to get basic data into if [what you are building is working](/blog/early-stage-analytics). Complicated solutions aren’t needed for this.
 
 ## The seed stage data stack
 
 Once the MVP has traction and enters the seed stage, the data needs become more advanced. This is because what to work on become less obvious. Startups need data to figure out how to spend their time and resources. Some questions asked at this stage include:
 
-- what features should we prioritize developing?
-- how do we best serve our [ideal customer](/blog/creating-ideal-customer-profile)?
-- how do we optimize our [conversion funnel](/tutorials/funnels)?
-- what channels should we [be advertising on](/blog/dev-marketing-for-startups)?
+- What features should we prioritize developing?
+- How do we best serve our [ideal customer](/blog/creating-ideal-customer-profile)?
+- How do we optimize our [conversion funnel](/tutorials/funnels)?
+- What channels should we [be advertising on](/blog/dev-marketing-for-startups)?
 
 To answer these questions, teams pull data from a growing number of sources like product analytics, CRM, help desk, and ad platform. They also utilize more of the features of these platforms, such as customer engagement and session recordings, generating more data.
 
@@ -93,9 +96,9 @@ Being a part of this evolution, we have thoughts on where PostHog fits into this
 
 To make this happen, we are improving the ability to use PostHog as a [customer data platform (CDP)](https://github.com/PostHog/posthog/issues/13126). We have built the key functionality, such as the ability to:
 
-- receive data from your app(s) and site(s) with our [SDKs](/docs/integrate?tab=sdks)
-- receive data from sources like [Stripe](/apps/stripe-connector), [Hubspot](/apps/hubspot-connector), [Intercom](/apps/intercom)
-- export to destinations such as [Snowflake](/apps/snowflake-export), [BigQuery](/apps/bigquery-export), or [RedShift](/apps/redshift-export)
+- Receive data from your app(s) and site(s) with our [SDKs](/docs/integrate?tab=sdks)
+- Receive data from sources like [Stripe](/apps/stripe-connector), [Hubspot](/apps/hubspot-connector), [Intercom](/apps/intercom)
+- Export to destinations such as [Snowflake](/apps/snowflake-export), [BigQuery](/apps/bigquery-export), or [RedShift](/apps/redshift-export)
 
 Improving reliability, integrations, and UX is critical for success here. Being a CDP enables startups to have more of their data and tools in one place with PostHog. More data also improves the depth of insights engineers can get from PostHog.
 
