@@ -15,7 +15,7 @@ tags:
   - Product engineers
 ---
 
-Regularly talking to users is an important habit for any product team, but it's wasted without an efficient way to share what you learn. At PostHog, we favor interview snapshots. Championed by Teresa Torres in the book [Continuous Discovery Habits](https://www.amazon.co.uk/Continuous-Discovery-Habits-Discover-Products/dp/1736633309), we like snapshots because:
+Regularly talking to users is an important habit for any product team, but it's wasted without an efficient way to share what you learn. At PostHog, we favor interview snapshots. Championed by Teresa Torres in the book [Continuous Discovery Habits](https://www.amazon.com/Continuous-Discovery-Habits-Discover-Products/dp/1736633309), we like snapshots because:
 
  1. They're easy to create – 30 minutes maximum if you do them right after an interview.
  2. They're easy to digest – no scrolling necessary, just drop a screenshot into Slack.
