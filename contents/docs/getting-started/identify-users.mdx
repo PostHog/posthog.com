@@ -112,7 +112,7 @@ posthog.people.set_once({ initial_location: 'Rome' })
 
 Sometimes you need to merge users (typically in the backend), there are two options:
 1. alias, which is safeguarded to not merging already identified users into others
-2. merge, with no safeguards
+2. merge, with no safeguards. We don't recommend using this in your code, but rather as a one-off manually for recovering from implementation problems. Note that a common error is merging users together who shouldn't be and that's not reversible.
 
 For example using the posthog python library:
 
