@@ -51,14 +51,6 @@ export default function Post({ children }: { children: React.ReactNode }) {
         setFullWidthContent(!fullWidthContent)
     }
 
-    useEffect(() => {
-        if (!hideSidebar && sidebar) {
-            setFullWidthContent(localStorage.getItem('full-width-content') === 'true')
-        } else {
-            setFullWidthContent(true)
-        }
-    }, [sidebar, hideSidebar])
-
     return (
         <div className="sm:border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark">
             <div
