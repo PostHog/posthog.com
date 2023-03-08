@@ -696,14 +696,6 @@
             "destination": "/docs/getting-started/send-events"
         },
         {
-            "source": "/docs/integrate/identifying-users",
-            "destination": "/docs/getting-started/identify-users"
-        },
-        {
-            "source": "/docs/integrate/user-properties",
-            "destination": "/docs/getting-started/identify-users"
-        },
-        {
             "source": "/enterprise",
             "destination": "/signup/cloud/enterprise"
         }

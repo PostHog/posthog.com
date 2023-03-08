@@ -199,6 +199,14 @@
                 "url": "/docs/integrate/ingest-historic-data"
             },
             {
+                "name": "Identifying users",
+                "url": "/docs/integrate/identifying-users"
+            },
+            {
+                "name": "User properties",
+                "url": "/docs/integrate/user-properties"
+            },
+            {
                 "name": "Using a CDP",
                 "url": "/docs/integrate/cdp"
             },
