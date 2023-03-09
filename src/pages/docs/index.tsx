@@ -7,6 +7,7 @@ import { SEO } from 'components/seo'
 import Link from 'components/Link'
 import PostLayout from 'components/PostLayout'
 import { LinkGrid } from 'components/Docs/LinkGrid'
+import { graphql, PageProps } from 'gatsby'
 
 const quickLinks = [
     {
@@ -54,24 +55,6 @@ const gettingStarted: ImportantLinkProps[] = [
     { title: 'DigitalOcean', to: '/docs/self-host/deploy/digital-ocean', icon: 'digital ocean', badge: undefined },
     { title: 'Azure', to: '/docs/self-host/deploy/azure', icon: 'azure', badge: 'beta' },
     { title: 'Hobby', to: '/docs/self-host/deploy/hobby', icon: 'docker', badge: undefined },
-]
-
-const sdks = [
-    { name: 'JavaScript', to: '/docs/sdks/js', icon: 'js' },
-    { name: 'NodeJS', to: '/docs/sdks/node', icon: 'nodejs' },
-    { name: 'Python', to: '/docs/sdks/python', icon: 'python' },
-    { name: 'React', to: '/docs/sdks/react', icon: 'react' },
-    { name: 'iOS', to: '/docs/sdks/ios', icon: 'ios' },
-    { name: 'Android', to: '/docs/sdks/android', icon: 'android' },
-]
-
-const apps = [
-    { name: 'Segment', to: '/docs/integrate/third-party/segment', icon: 'segment' },
-    { name: 'Sentry', to: '/docs/integrate/third-party/sentry', icon: 'sentry' },
-    { name: 'Slack', to: '/docs/integrate/webhooks/slack', icon: 'slack' },
-    { name: 'Shopify', to: '/docs/integrate/third-party/shopify', icon: 'shopify' },
-    { name: 'WordPress', to: '/docs/integrate/third-party/wordpress', icon: 'wordpress' },
-    { name: 'Zapier', to: '/apps/zapier-connector', icon: 'zapier' },
 ]
 
 const otherLinks = [
@@ -138,7 +121,7 @@ const otherLinks = [
 
 type ImportantLinkProps = {
     to: string
-    icon?: React.ReactNode
+    icon?: string
     title: string
     badge?: 'new' | 'beta' | undefined
 }
@@ -151,14 +134,45 @@ const ImportantLink: React.FC<ImportantLinkProps> = ({ to, icon, title, badge })
             className="text-almost-black hover:text-almost-black dark:text-white dark:hover:text-white font-semibold p-2 hover:bg-gray-accent/40 active:hover:bg-gray-accent/60 dark:hover:bg-gray-accent/10 dark:active:bg-gray-accent/5 rounded flex items-center space-x-2 text-[14px]"
             to={to}
         >
-            {icon}
+            <img src={icon} className="w-5 h-5" />
             <span>{title}</span>
             {badge && <span className={`lemon-tag ${badgeClass}`}>{badge}</span>}
         </Link>
     )
 }
 
-export const DocsIndex: React.FC = () => {
+type DocsData = {
+    sdks: {
+        nodes: {
+            fields: {
+                slug: string
+            }
+            frontmatter: {
+                title: string
+                icon?: {
+                    publicURL: string
+                }
+            }
+        }[]
+    }
+    apps: {
+        nodes: {
+            fields: {
+                slug: string
+            }
+            frontmatter: {
+                title: string
+                thumbnail?: {
+                    publicURL: string
+                }
+            }
+        }[]
+    }
+}
+
+export const DocsIndex = ({ data }: PageProps<DocsData>) => {
+    const { sdks, apps } = data
+
     return (
         <Layout>
             <SEO title="Documentation - PostHog" />
@@ -231,13 +245,13 @@ export const DocsIndex: React.FC = () => {
                                     <p className="text-base text-gray">Start tracking events and users</p>
                                 </div>
                                 <ul className="grid grid-cols-2 xl:grid-cols-1 w-full list-none m-0 p-0 space-y-1">
-                                    {sdks.map((sdk) => {
+                                    {sdks.nodes.map((sdk) => {
                                         return (
-                                            <li className="flex-grow" key={sdk.name}>
+                                            <li className="flex-grow" key={sdk.fields.slug}>
                                                 <ImportantLink
-                                                    to={sdk.to}
-                                                    title={sdk.name}
-                                                    icon={sdk.icon}
+                                                    to={sdk.fields.slug}
+                                                    title={sdk.frontmatter.title}
+                                                    icon={sdk.frontmatter.icon?.publicURL}
                                                     badge={undefined}
                                                 />
                                             </li>
@@ -252,13 +266,13 @@ export const DocsIndex: React.FC = () => {
                                 </h4>
                                 <p className="text-base text-gray">Customize your installation</p>
                                 <ul className="grid grid-cols-2 xl:grid-cols-1 w-full list-none m-0 p-0 space-y-1">
-                                    {apps.map((app) => {
+                                    {apps.nodes.map((app) => {
                                         return (
-                                            <li className="flex-grow" key={app.name}>
+                                            <li className="flex-grow" key={app.fields.slug}>
                                                 <ImportantLink
-                                                    to={app.to}
-                                                    title={app.name}
-                                                    icon={app.icon}
+                                                    to={app.fields.slug}
+                                                    title={app.frontmatter.title}
+                                                    icon={app.frontmatter.thumbnail?.publicURL}
                                                     badge={undefined}
                                                 />
                                             </li>
@@ -301,5 +315,43 @@ export const DocsIndex: React.FC = () => {
         </Layout>
     )
 }
+
+export const query = graphql`
+    query PopularLinks {
+        sdks: allMdx(
+            filter: { slug: { regex: "/^docs/sdks/(js|node|python|react|ios|android)/$/" } }
+            sort: { fields: fields___pageViews, order: DESC }
+        ) {
+            nodes {
+                fields {
+                    slug
+                }
+                frontmatter {
+                    title
+                    icon {
+                        publicURL
+                    }
+                }
+            }
+        }
+        apps: allMdx(
+            filter: { slug: { regex: "/^docs/apps/" } }
+            sort: { fields: fields___pageViews, order: DESC }
+            limit: 6
+        ) {
+            nodes {
+                fields {
+                    slug
+                }
+                frontmatter {
+                    title
+                    thumbnail {
+                        publicURL
+                    }
+                }
+            }
+        }
+    }
+`
 
 export default DocsIndex

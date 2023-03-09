@@ -480,7 +480,7 @@ const ProfileSidebar = ({
     )
 }
 
-export const query = graphql`
+const query = graphql`
     {
         issues: allPostHogIssue {
             nodes {
