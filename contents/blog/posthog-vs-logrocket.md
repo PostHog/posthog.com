@@ -727,11 +727,11 @@ Regulatory compliance can be make-or-break for many teams, especially those oper
 
 ## Frequently asked questions
 
-How much does LogRocket cost?
-How much does PostHog cost?
-How do LogRocket and PostHog compare?
-Do LogRocket and PostHog offer free trials?
-Is PostHog or LogRocket more popular?
+- How much does LogRocket cost?
+- How much does PostHog cost?
+- How do LogRocket and PostHog compare?
+- Do LogRocket and PostHog offer free trials?
+- Is PostHog or LogRocket more popular?
 
 Got another question? You can [ask the PostHog team anything you want](/questions)!
 
