@@ -11,40 +11,40 @@ import { LinkGrid } from 'components/Docs/LinkGrid'
 
 const quickLinks = [
     {
-        icon: 'selfHost',
-        name: 'Deploy',
-        to: '/docs/self-host',
-        description: 'Detailed information on getting PostHog running.',
+        icon: 'insights',
+        name: 'Product analytics',
+        to: '/docs/product-analytics',
+        description: 'Better understand your users and build better products',
     },
     {
-        icon: 'api',
-        name: 'Integrate',
-        to: '/docs/integrate',
-        description: 'Connect PostHog to your website, app, or backend.',
+        icon: 'session-recording',
+        name: 'Session recording',
+        to: '/docs/session-recording',
+        description: 'Play back sessions to diagnose UI issues and get inspired',
+    },
+    {
+        icon: 'feature-flags',
+        name: 'Feature flags',
+        to: '/docs/feature-flags',
+        description: 'Toggle features to test the impact before rolling out',
+    },
+    {
+        icon: 'experimentation',
+        name: 'Experiments',
+        to: '/docs/experiments',
+        description: 'A/B test UI changes and new features',
+    },
+    {
+        icon: 'selfHost',
+        name: 'Data',
+        to: '/docs/data',
+        description: 'Get a complete picture of all your data',
     },
     {
         icon: 'apps',
         name: 'Apps',
         to: '/docs/apps',
-        description: 'Extend PostHog by adding your own functionality.',
-    },
-    {
-        icon: 'partners',
-        name: 'Tutorials',
-        to: '/tutorials',
-        description: 'Step-by-step guides on how to use every feature.',
-    },
-    {
-        icon: 'feature-flags',
-        name: 'API',
-        to: '/docs/api',
-        description: 'Interact with PostHog programmatically.',
-    },
-    {
-        icon: 'faq2',
-        name: 'Ask a question',
-        to: '/questions',
-        description: "Can't find what you're looking for? Ask a question here.",
+        description: 'Extend PostHog by adding your own functionality',
     },
 ]
 
