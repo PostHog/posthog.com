@@ -385,7 +385,7 @@ export default function Apply({ id, info }) {
                                     <h5 className="text-base mb-0">Self-hosted</h5>
                                     <p className="text-sm opacity-60 mb-2">Install on your private cloud</p>
                                     <TrackedCTA
-                                        to="/signup/self-host"
+                                        to="/docs/self-host"
                                         className="mt-auto"
                                         size="sm"
                                         event={{ name: `clicked Continue`, type: 'self-hosted' }}
