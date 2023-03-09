@@ -7,20 +7,16 @@ showTitle: true
 
 import Disclaimer from './\_snippets/disclaimer.mdx'
 
-The core of PostHog is open-source and always will be.
+If you're a large company looking for a proof-of-concept, or an engineer looking to use the open-source version in a funky non-production way, then you're in the right place!
+Our Docker compose deployment let's you spin up a fresh PostHog instance in minutes.
 
-# TODO: Message around other benefits of open-source beyond self-hosting
-
-The fastest and most reliable way to get started with PostHog is to use [PostHog Cloud](/docs/getting-started/cloud).
-
-However, if you're a large company with the need to self-host or an engineer looking to use the open-source version in a funky non-production way then you're in the right place!
+Want more reliability? The easiest way to get started with PostHog is to use [PostHog Cloud](https://app.posthog.com/signup).
 
 <Disclaimer />
 
 ## Requirements
 
 -   You have deployed a Linux Ubuntu Virtual Machine.
-    -   An instance with 2GB of RAM can handle approximately 100k events spread over a month
     -   We highly recommend an instance with at least 4GB of RAM to handle any surges in event volume
 -   You have set up an `A` record to connect a custom domain to your instance.
     -   PostHog will automatically create an SSL certificate for your domain using LetsEncrypt
