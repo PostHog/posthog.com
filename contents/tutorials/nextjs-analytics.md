@@ -280,7 +280,6 @@ Now we will set up the `PostHogProvider` for our app. This enables you to access
 ```js
 // pages/_app.js
 import { SessionProvider } from "next-auth/react"
-import Script from "next/script"
 import posthog from "posthog-js"
 import { PostHogProvider } from 'posthog-js/react'
 
@@ -325,7 +324,6 @@ To solve this, we can capture a custom event when the route changes using `next/
 ```js
 // pages/_app.js
 import { SessionProvider } from "next-auth/react"
-import Script from "next/script"
 import { useRouter } from "next/router"
 import { useEffect } from "react"
 import posthog from "posthog-js"
@@ -523,7 +521,6 @@ The PostHog provider gives you hooks to work with feature flags in your client s
 
 ```js
 // pages/posts/[id].js
-import { useContext, useEffect, useState } from 'react'
 import { useFeatureFlagEnabled } from 'posthog-js/react'
  
 export default function Post({ post }) {
@@ -536,7 +533,7 @@ export default function Post({ post }) {
       <p>By: {post.author}</p>
       <p>{post.content}</p>
       {ctaState && 
-        <p><a href="/">Go to PostHog</a></p>
+        <p><a href="http://posthog.com/">Go to PostHog</a></p>
       }
       <button onClick={likePost}>Like</button>
     </div>
@@ -578,12 +575,12 @@ This looks like this:
 
 ```js
 // pages/posts/[id].js
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { getServerSession } from "next-auth/next"
 import { PostHog } from 'posthog-node'
 
 export default function Post({ post, flags }) {
-	//...
+  const [ctaState, setCtaState] = useState(false);
 
   useEffect(() => {
     if (flags) {
@@ -597,7 +594,7 @@ export default function Post({ post, flags }) {
       <p>By: {post.author}</p>
       <p>{post.content}</p>
       {ctaState && 
-        <p><a href="/">Go to PostHog</a></p>
+        <p><a href="http://posthog.com/">Go to PostHog</a></p>
       }
       <button onClick={likePost}>Like</button>
     </div>
@@ -611,9 +608,9 @@ export async function getServerSideProps(ctx) {
 
   if (session) {
     const client = new PostHog(
-      '<ph_project_api_key>',
+      process.env.NEXT_PUBLIC_POSTHOG_KEY,
       {
-        api_host: '<ph_instance_address>',
+        host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
       }
     )
     flags = await client.getAllFlags(session.user.email);
