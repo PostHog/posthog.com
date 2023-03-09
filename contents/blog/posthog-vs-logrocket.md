@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/posthog-vs-mixpanel/posthog-vs-mixpanel.jpeg
+featuredImage: ../images/blog/posthog-vs-logrocket/posthog-vs-mixpanel.jpeg
 featuredImageType: full
 author: 
   - joe-martin
@@ -32,7 +32,7 @@ In this article we’ll dive deeper into these differences and will:
 
 ### 1. PostHog does more than frontend monitoring
 
-LogRocket is a frontend performance monitoring platform, but PostHog goes well beyond that to include features which are useful in a greater number of roles and teams. So, while LogRocket offers tools such as session recording, product analytics and performance monitoring, PostHog offers all these and more. 
+LogRocket is a frontend performance monitoring platform, but PostHog goes well beyond that to include features which are useful in a greater number of roles and teams. PostHog offers all of the major features available in LogRocket, such as session recording and product analytics, as well as tools such as feature flags, A/B experimentation and SQL querying. 
 
 LogRocket’s focus on frontend issues means it does offer a few specialist features which PostHog doesn’t currently replicate. However, for the vast majority of teams and organizations, PostHog offers greater value overall and is more widely useful. 
 
@@ -44,7 +44,7 @@ This approach offers several advantages that closed-source products such as LogR
 
 ### 3. PostHog constantly ships new features
 
-Sure, LogRocket releases new features once a month (though you’ll need to subscribe to the newsletter to find out what they are), but at PostHog we ship new features _constantly_. Every week we update [our changelog](/blog/posthog-changelog) with a recap of what’s launched in the last few days, but often there’s even more that’s being tested in beta. And that’s without counting all the apps and integrations submitted by our community!
+At PostHog, we ship new features _constantly_. Every week we update [our changelog](/blog/posthog-changelog) with a recap of what’s launched in the last few days, but often there’s even more that’s being tested in beta. And that’s without counting all the apps and integrations submitted by our community!
 
 In short, we work hard to keep PostHog on the cutting edge and we’re transparent about the ways we do that. We ship weirdly fast. 
 
@@ -152,7 +152,7 @@ While LogRocket contains some product analytics tools, it isn’t primarily inte
         </tr>
         <tr>
             <td><strong>Cohorts</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Combine users based on properties and events for group analysis</td>
         </tr>
@@ -202,13 +202,9 @@ While LogRocket contains some product analytics tools, it isn’t primarily inte
 </table>
 </div>
 
-**Cohorts:** In PostHog, [the cohorts tool](/manual/cohorts) enables you to easily create lists of users who have something in common — such as a behaviour, event, or property. Once you have this list, you can export it from PostHog, or use it within your insights. LogRocket doesn’t offer the ability to create such cohorts, although filters can be applied to charts. 
+- **Correlation analysis:** This feature enables you to [automatically find correlated events or properties](/manual/correlation) which affect the conversion rate of users within a funnel. LogRocket doesn’t offer any such automated correlation discovery, meaning users must search for correlating factors manually and without assistance.
 
-
- **Correlation analysis:** This feature enables you to [automatically find correlated events or properties](/manual/correlation) which affect the conversion rate of users within a funnel. LogRocket doesn’t offer any such automated correlation discovery, meaning users must search for correlating factors manually and without assistance.
-
-
-**Query editor:** LogRocket doesn’t currently support any way for users to interrogate data directly, either through SQL or other, abstracted query language. PostHog also doesn’t offer SQL queries…but [we’re actively working on it](/roadmap).  
+- **Query editor:** LogRocket doesn’t currently support any way for users to interrogate data directly, either through SQL or other, abstracted query language. PostHog also doesn’t offer SQL queries…but [we’re actively working on it](/roadmap).  
 
 ### Session recording
 
@@ -652,7 +648,7 @@ LogRocket does not offer as many ways to share information with external parties
         </tr>
         <tr>
             <td><strong>Slack</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Receive notifications about new data</td>
         </tr>
@@ -681,7 +677,7 @@ Regulatory compliance can be make-or-break for many teams, especially those oper
     <thead>
         <tr>
             <td className="w-3/12"></td>
-            <td><strong>Mixpanel</strong></td>
+            <td><strong>LogRocket</strong></td>
             <td><strong>PostHog</strong></td>
             <td></td>
         </tr>
@@ -727,9 +723,7 @@ Regulatory compliance can be make-or-break for many teams, especially those oper
 
 - How much does LogRocket cost?
 - How much does PostHog cost?
-- How do LogRocket and PostHog compare?
 - Do LogRocket and PostHog offer free trials?
-- Is PostHog or LogRocket more popular?
 
 Got another question? You can [ask the PostHog team anything you want](/questions)!
 
@@ -745,26 +739,10 @@ PostHog has transparent pricing which is based only around the amount of usage. 
 
 After this free monthly allowance, PostHog charges $0.00045/event and $0.005/recording. Volume, non-profit and [startup discounts](/startups) are available upon request, and we recommend trying [our pricing calculator](/pricing) to estimate your pricing. 
 
-### How do LogRocket and PostHog compare?
-
-PostHog and LogRocket contain some similar features, but are ultimately intended for very different needs and types of users. 
-
-LogRocket is built primarily for front-end developers who need to monitor performance and gather usage information. It has robust session recording and error monitoring tools to accomplish this. 
-
-PostHog is built for engineers and developers in a more general capacity and offers a wider range of tools, which are also suitable for product and growth teams. It also offers robust session recording tools and the ability to track errors, but also includes feature flagging, experimentation and more. 
-
 ### Do LogRocket and PostHog offer free trials?
 
 LogRocket offers a free version of its basic product, which is limited to only 1,000 session captures per month. 14-day free trials are also available for other product tiers, after which users must pay to continue usage. 
 
 With PostHog, it’s free to get started and all users get their first 1 million events and 15,000 sessions for free, every month. Billing limits can be used to keep usage beneath this allowance, enabling you to use PostHog for free indefinitely. 
-
-### Is PostHog or LogRocket more popular?
-
-Both PostHog and LogRocket are popular products used by thousands of teams, and both are [highly rated by users on platforms such as G2](https://www.g2.com/products/posthog/reviews).
-
-LogRocket is used by several large, well-established organizations, such as Brex, Ikea, MGM Resorts and Cisco. 
-
-Alternatively, PostHog is used by over 10,000 teams and has been adopted by fast-growing companies and start-ups, including [Y Combinator](/customers/ycombinator), [Hasura](/customers/hasura), [AssemblyAI](/customers/assemblyai), [Netdata](/customers/netdata), and [others](/customers/). 
 
 <ArrayCTA />
