@@ -119,7 +119,7 @@ PostHog offers a much wider selection of tools than LogRocket, including several
 
 ### Product analytics
 
-While LogRocket contains some product analytics tools, it isn’t primarily intended as a analytics platform and lacks many features which analysts and engineers may require. PostHog is a more capable product analytics platform, offering advanced features such as correlation analysis.
+While LogRocket contains some product analytics tools, it isn’t primarily intended as a analytics platform and lacks many features that product managers and engineers may require. PostHog is a more capable product analytics platform, offering advanced features such as correlation analysis.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
