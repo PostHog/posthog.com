@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/posthog-vs-mixpanel/posthog-vs-mixpanel.jpeg
 featuredImageType: full
-author: ["joe-martin"]
+author: 
+  - joe-martin
 category: General
 tags:
   - Comparisons
