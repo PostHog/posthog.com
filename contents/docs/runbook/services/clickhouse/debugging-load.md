@@ -61,6 +61,8 @@ Useful dimensions to slice the data on:
 - `ProfileEvents['NetworkReceiveBytes'])` - How much time was spent reading data over network
 - `ProfileEvents['NetworkSendBytes'])` - How much data was sent over the network
 
+Full list of all valid measurements can be found in [ClickHouse source code](https://github.com/ClickHouse/ClickHouse/blob/master/src/Common/ProfileEvents.cpp).
+
 Other useful expressions:
 - `is_initial_query` - indicates whether this was a main query or pushed down from coordinator. Note `log_comment` is also forwarded.
 - `any(log_comment)` - shows the structure of the log comment
