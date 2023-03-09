@@ -301,7 +301,7 @@ export default function Apply({ id, info }) {
                                         )}
                                     </AnimatePresence>
                                     {copied ? (
-                                        <Check2 className="w-[18px] h-[18px[ text-green" />
+                                        <Check2 className="w-[18px] h-[18px] text-green" />
                                     ) : (
                                         <svg
                                             width="18"
