@@ -1,5 +1,5 @@
 ---
-date: 2023-03-03
+date: 2023-12-03
 title: PostHog vs Logrocket
 rootPage: /blog
 sidebar: Blog
@@ -15,19 +15,18 @@ tags:
   - Guides
 ---
 
-LogRocket is a frontend monitoring platform which, like PostHog, combines multiple tools into one platform. In this article we’ll explain what some of the biggest similarities and differences are between PostHog and LogRocket, but if you’re in a rush then here’s the short version:
+LogRocket is a frontend monitoring platform which, like PostHog, combines multiple tools into one platform. In this article we’ll explain some of the biggest similarities and differences between PostHog and LogRocket, but here’s the short version:
 
-LogRocket focuses heavily on helping frontend developers to detect and solve issues. It offers tools such as session recording, analytics and performance monitoring.
+- LogRocket focuses heavily on helping frontend developers to detect and solve issues. It offers tools such as session recording, analytics and performance monitoring.
 
+- PostHog is an all-in-one platform that helps teams build better products. It includes many of the same tools as LogRocket, including session recording, analytics and performance monitoring — but also extends to feature flags, A/B experiments and more.
 
-PostHog is an all-in-one platform for helping teams to build better products. It includes many of the same tools as LogRocket, including session recording, analytics and performance monitoring — but also extends to feature flags, A/B experiments and more.
+In this article we’ll dive deeper into these differences and will:
 
-In this article we’ll dive deeper into these differences and will…
-
-Compare PostHog and LogRocket’s core features
-Examine PostHog and LogRocket’s library support
-Discuss what integrations are available with other tools
-Explore other frequently asked questions about PostHog and LogRocket
+- Compare PostHog and LogRocket’s core features
+- Examine PostHog and LogRocket’s library support
+- Discuss what integrations are available with other tools
+- Explore other frequently asked questions about PostHog and LogRocket
 
 ## How do PostHog and LogRocket differ?
 
@@ -110,19 +109,17 @@ PostHog offers a much wider selection of tools than LogRocket, including several
 </table>
 </div>
 
-**Feature flags:** PostHog offers robust, multivariate feature flags which support JSON payloads. This enables you to push real-time changes to your product without needing to redeploy. Visit [our feature flag page](/product/feature-flags) for more information. LogRocket doesn’t have any in-built feature flag functions.
+- **Feature flags:** PostHog offers robust, multivariate feature flags which support JSON payloads. This enables you to push real-time changes to your product without needing to redeploy. Visit [our feature flag page](/product/feature-flags) for more information. LogRocket doesn’t have any in-built feature flag functions.
 
+- **Experiments:** PostHog offers multivariate experimentation, which enable you to test changes and find statistically relevant insights. Visit [the experimentation page](/product/experimentation-suite) for more information. LogRocket doesn’t have any in-built experimentation features. 
 
-**Experiments:** PostHog offers multivariate experimentation which enable you to test changes and find statistically relevant insights. Visit [the experimentation page](/product/experimentation-suite) for more information. LogRocket doesn’t have any in-built experimentation features. 
-
-
-**Open source:** PostHog is entirely open source, under a permissive MIT license. The biggest advantage for users is the ability to build on top of PostHog and to access the source code directly. [Our team also works in the open](/handbook/company/culture). LogRocket is not an open source company, nor is the product available under an open source license.  
+- **Open source:** PostHog is entirely open source, under a permissive MIT license. The biggest advantage for users is the ability to build on top of PostHog and to access the source code directly. [Our team also works in the open](/handbook/company/culture). LogRocket is not an open source company, nor is the product available under an open source license.  
 
 <ArrayCTA />
 
 ### Product analytics
 
-While LogRocket contains some product analytics tools, it isn’t primarily intended as a analytics platform and lacks many features which analysts and engineers may require. PostHog is a more capable product analytics platform, offering advanced features such as correlation analysis.
+While LogRocket contains some product analytics tools, it isn’t primarily intended as a analytics platform and lacks many features that product managers and engineers may require. PostHog is a more capable product analytics platform, offering advanced features such as correlation analysis.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -730,11 +727,11 @@ Regulatory compliance can be make-or-break for many teams, especially those oper
 
 ## Frequently asked questions
 
-How much does LogRocket cost?
-How much does PostHog cost?
-How do LogRocket and PostHog compare?
-Do LogRocket and PostHog offer free trials?
-Is PostHog or LogRocket more popular?
+- How much does LogRocket cost?
+- How much does PostHog cost?
+- How do LogRocket and PostHog compare?
+- Do LogRocket and PostHog offer free trials?
+- Is PostHog or LogRocket more popular?
 
 Got another question? You can [ask the PostHog team anything you want](/questions)!
 
@@ -748,7 +745,7 @@ More feature-rich product tiers begin at $550 USD per month, but increase depend
 
 PostHog has transparent pricing which is based only around the amount of usage. It’s free to get started and completely free for the first 1 million events and 15,000 sessions captured every month.
 
-After this free monthly allowance, PostHog charges $0.00045/event and $0.005/recording, Volume, non-profit and [startup discounts](/startups) are available upon request, and we recommend trying [our pricing calculator](/pricing) to estimate your pricing. 
+After this free monthly allowance, PostHog charges $0.00045/event and $0.005/recording. Volume, non-profit and [startup discounts](/startups) are available upon request, and we recommend trying [our pricing calculator](/pricing) to estimate your pricing. 
 
 ### How do LogRocket and PostHog compare?
 
