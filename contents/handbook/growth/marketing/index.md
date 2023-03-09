@@ -113,6 +113,15 @@ The Marketing team's main focus is acquisition of [high quality signups](https:/
 #### [Paid ads](/handbook/growth/marketing/paid)
 
 We advertise on Google Search for _conversion_, and Twitter, LinkedIn, Reddit, and Quora for _awareness_. We use paid ads as a cheat code to accelerate learning, e.g. which SEO keywords work, testing out product positioning, as well as to ensure we are easily discoverable when people search for PostHog specifically ('branded keywords'). However, paids ads are expensive so our focus is always on organic growth first unless we find a paid channel that's wildly profitable. Generally, we split our spend 2/3 awareness vs. 1/3 conversion.
+
+#### Startups
+
+We run two startup plans:
+
+- [YC deal](/handbook/growth/sales/yc-onboarding)
+- [PostHog for Startups](/handbook/growth/marketing/startups)
+
+We create the ad copy and run the office hours, while the CS team handle billing and onboarding. 
  
 #### [Sponsorships](/handbook/growth/marketing/open-source-sponsorship)
 
