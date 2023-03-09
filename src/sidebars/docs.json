@@ -950,6 +950,10 @@
                                     {
                                         "name": "Vertical scaling",
                                         "url": "/docs/runbook/services/clickhouse/vertical-scaling"
+                                    },
+                                    {
+                                        "name": "Debugging load",
+                                        "url": "/docs/runbook/services/clickhouse/debugging-load"
                                     }
                                 ]
                             },
