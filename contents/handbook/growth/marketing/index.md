@@ -26,11 +26,9 @@ PostHog's [vision](https://posthog.com/handbook/strategy/overview#long-term-visi
  
 - **Incentivised campaigns** - e.g. GitHub stars campaign. It's not clear how these can be repeatable sources of successful word of mouth growth for us, but they will occasionally be useful.
 
-### Things we might want to be good at but are still testing
+- - **Social media:** This is different from 'being cool and interesting people in online communities'. We don't get high quality traction (yet) on places like LinkedIn/Twitter, and we're not spending any time at all on Facebook/Instagram/TikTok. We are currently trying out Twitter. 
 
--  **Developer influencers (maybe):** A small but growing trend in the industry, we could be one of the first to capitalize on this, especially as they are relevant to word of mouth.
-
-- **Social media:** This is different from 'being cool and interesting people in online communities'. We don't get high quality traction (yet) on places like LinkedIn/Twitter, and we're not spending any time at all on Facebook/Instagram/TikTok. We are currently trying out Twitter. 
+### Things we might want to be good at but haven't tested yet
 
 - **Highly visible at industry events:** We could become known for giving good talks at events, because this enhances word of mouth and is a natural extension of being good at creating good content.
  
@@ -41,6 +39,8 @@ PostHog's [vision](https://posthog.com/handbook/strategy/overview#long-term-visi
 - **Big, highly coordinated marketing campaigns:** We can do them, but our reactive, short turnaround campaigns have been far more successful. 
 
 - **PR:** If we do word of mouth well, our community will be far more valuable/credible than an appearance in TechCrunch. 
+
+- **Developer influencers:** A small but growing trend in the industry, most of these are very expensive and overwhelmingly focused on teaching people how to code (ie. not our target audience). 
 
 ## How marketing works
 
@@ -108,7 +108,7 @@ The Marketing team's main focus is acquisition of [high quality signups](https:/
  
 - **Shareable content** is stuff we think users and audiences outside PostHog will just find interesting. These may be technical deep dives or articles that give an insight into how PostHog works. We don't expect these to turn directly into signups, but they help us to build our unique and distinctive brand in the open source community. We may post this content on sites like Hacker News and Reddit, but only when we think it will be of genuine interest to those communities (and sometimes people outside PostHog beat us to it, which is great).
  
-- **Email content:** We send out [HogMail](/handbook/growth/marketing/newsletter) every 2 weeks. The format is evolving, but it's a combination of PostHog News, tutorials and generally interesting content we've seen online that we think our users will like.
+- **Email content:** We send out [Product for Engineers](/handbook/growth/marketing/newsletter) every 2-3 weeks. We run this on Substack. 
  
 #### [Paid ads](/handbook/growth/marketing/paid)
 
@@ -116,9 +116,7 @@ We advertise on Google Search for _conversion_, and Twitter, LinkedIn, Reddit, a
  
 #### [Sponsorships](/handbook/growth/marketing/open-source-sponsorship)
 
-We're currently experimenting with a view different approaches:
-
-- **Developer influencers:** Sponsoring YouTube creators who create quality content for developers, either through a regular shoutout or a more in-depth piece of content creation that is about PostHog. 
+We periodically run sponsorship campaigns:
 
 - **Commercial sponsorship:** Sponsoring newsletters, podcasts, and events that are likely to reach our target audience. We try to keep a relatively narrow focus here. Newsletters have worked best for us so far.
  
@@ -126,7 +124,7 @@ We're currently experimenting with a view different approaches:
 
 #### Twitter
 
-We're investing more effort in Twitter in Q4 2022 to figure out if this is a channel we want to consistently invest a lot of time in. If the answer is yes, we'll add more to the Handbook about how we use Twitter effectively. Our hypothesis is that it is the best social media platform for us to reach our target user with frequently shared pieces of engaging, transparent content about PostHog. 
+We're investing more effort in Twitter in Q1 2023 to figure out if this is a channel we want to consistently invest a lot of time in. If the answer is yes, we'll add more to the Handbook about how we use Twitter effectively. Our hypothesis is that it is the best social media platform for us to reach our target user with frequently shared pieces of engaging, transparent content about PostHog. 
  
 #### [Press](/handbook/growth/marketing/press)
 
@@ -134,7 +132,7 @@ While we don't actively do PR, we occasionally put out press releases ourselves 
 
 ### Marketing quarterly goals
 
-The latest goals for marketing can be found on the [Marketing Small Team page](https://posthog.com/handbook/small-teams/marketing#q4-2022-goals).
+The latest goals for marketing can be found on the [Marketing Small Team page](https://posthog.com/handbook/small-teams/marketing).
 
 ## Target customer and messaging
 
@@ -144,7 +142,7 @@ See our [customer personas page](/handbook/growth/marketing/customer-personas) f
 
 ## Competitors
 
-We closely follow other companies which are active in the product analytics space. Sometimes we summarise our findings into internal reports to help us stay informed and understand how other products are developing. Our collection of summaries isn't exhaustive and cannot be shared publicly as it often includes details of the experiences of individual user experiences whose privacy we don't want to sacrifice. However, PostHog team members can find our competitor summaries in [the relevant folder of the Marketing shared drive](https://drive.google.com/drive/folders/1RdzCKhGjJ3f7RbzvBkVjKfPXZ0lbBefY?usp=sharing). 
+Sometimes we summarise our findings into internal reports to help us stay informed and understand how other products are developing. Our collection of summaries isn't exhaustive and cannot be shared publicly as it often includes details of the experiences of individual user experiences whose privacy we don't want to sacrifice. However, PostHog team members can find our competitor summaries in [the relevant folder of the Marketing shared drive](https://drive.google.com/drive/folders/1RdzCKhGjJ3f7RbzvBkVjKfPXZ0lbBefY?usp=sharing). 
 
 ## Who we are
 
