@@ -1,6 +1,13 @@
 import Link from 'components/Link'
 import React from 'react'
-import { ProductIcons } from '../../ProductIcons/ProductIcons'
+import {
+    AbTesting,
+    Analytics,
+    DataWarehouse,
+    EventPipelines,
+    FeatureFlags,
+    SessionRecording,
+} from 'components/ProductIcons'
 
 interface IFeature {
     title: string
@@ -16,12 +23,12 @@ interface IColumn {
 }
 
 const features: IFeature[] = [
-    { title: 'Product analytics', icon: ProductIcons.analytics },
-    { title: 'Session recording', icon: ProductIcons.sessionRecording },
-    { title: 'Feature flags', icon: ProductIcons.featureFlags },
-    { title: 'A/B testing', icon: ProductIcons.abTesting },
-    { title: 'Event pipelines', icon: ProductIcons.eventPipelines },
-    { title: 'Data warehouse', icon: ProductIcons.dataWarehouse },
+    { title: 'Product analytics', icon: <Analytics /> },
+    { title: 'Session recording', icon: <SessionRecording /> },
+    { title: 'Feature flags', icon: <FeatureFlags /> },
+    { title: 'A/B testing', icon: <AbTesting /> },
+    { title: 'Event pipelines', icon: <EventPipelines /> },
+    { title: 'Data warehouse', icon: <DataWarehouse /> },
 ]
 
 const productPillars: IColumn[] = [{ title: 'Features', section: features, className: 'md:row-span-2' }]

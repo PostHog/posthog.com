@@ -1,8 +1,6 @@
 ---
-title: Tracking Nuxt.js apps
-sidebarTitle: Nuxt.js
-sidebar: Docs
-showTitle: true
+title: Nuxt.js
+icon: ../../../images/docs/integrate/frameworks/nuxt.svg
 ---
 
 If you are using Nuxt.js and want to track your application using PostHog this tutorial might help you out. 

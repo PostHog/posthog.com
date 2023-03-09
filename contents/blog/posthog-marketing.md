@@ -1,14 +1,19 @@
 ---
 date: 2022-09-28
-title: "How (and why) our marketing team uses PostHog"
+title: How (and why) our marketing team uses PostHog
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Inside PostHog", "Guides", "Using PostHog"]
-author: ["andy-vandervell"]
+author:
+  - andy-vandervell
 featuredImage: ../images/blog/posthog-marketing/marketing-hog.jpg
 featuredImageType: full
+category: Using PostHog
+tags:
+  - Guides
+  - Product analytics
+  - Marketing
 ---
 
 We learned an interesting fact recently: only 20% of our users track their marketing website **and** their product using PostHog. This is our fault. We market to engineers at PostHog, so it's not a surprise we're less used for marketing.
@@ -101,7 +106,7 @@ As the below graphic from Google Trends shows, we've seen a consistent increase 
 
 ![brand trend](../images/blog/posthog-marketing/brand-trend.png)
 
-(For those interested, the trend line is generated using the [Glimpse Chrome extension](https://chrome.google.com/webstore/detail/google-trends-supercharge/ocmojhiloccgbpjnkeiooioedaklapap). I highlight recommend it!)
+(For those interested, the trend line is generated using the [Glimpse Chrome extension](https://chrome.google.com/webstore/detail/google-trends-supercharge/ocmojhiloccgbpjnkeiooioedaklapap). I highly recommend it!)
 
 We use insights to help isolate the impact of our SEO content efforts from this organic word of mouth growth. For example, the insight below shows the weekly cumulative growth of all our SEO content since the beginning of the year.
 

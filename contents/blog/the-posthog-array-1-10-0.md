@@ -5,9 +5,12 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Release notes", "Product updates"]
 featuredImage: ../images/blog/array/default.png
 featuredImageType: standard
+category: PostHog news
+tags:
+  - Product updates
+  - Release notes
 ---
 
 This is our most exciting release to date. Here we go: 🎉
@@ -144,6 +147,12 @@ Another thing we fixed in `posthog-js` this week! It was actually fixed a fortni
 
 * [Traffic simulator](https://github.com/dabreegster/abstreet)
 * [Cyclops lamb born](https://www.mirror.co.uk/news/weird-news/farmer-baffled-after-sheep-gave-22251344)
+
+## Share your feedback
+We'd love to hear anything you have to say about PostHog, good or bad. As a thank you, we'll share some awesome [PostHog merch](https://merch.posthog.com).
+
+Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog.com) with one of our teams to help us make PostHog even better!
+
 
 ## PostHog news
 

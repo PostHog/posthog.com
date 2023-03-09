@@ -5,10 +5,14 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Engineering", "Guides"]
-author: ["karl-aksel-puulmann"]
-featuredImage: ../images/blog/blog-generic-2.png
+author:
+  - karl-aksel-puulmann
+featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
+category: Engineering
+tags:
+  - Guides
+  - ClickHouse
 ---
 
 ClickHouse supports speeding up queries using materialized columns to create new columns on the fly from existing data. In this post, I’ll walk through a query optimization example that's well-suited to this rarely-used feature.

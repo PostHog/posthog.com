@@ -67,7 +67,7 @@ export const CircleArrow = ({ className }: { className: string }): JSX.Element =
     )
 }
 
-export const Edit = ({ className }: { className: string }): JSX.Element => {
+export const Edit = ({ className = '' }: { className?: string }): JSX.Element => {
     return (
         <svg
             className={className}
@@ -82,7 +82,7 @@ export const Edit = ({ className }: { className: string }): JSX.Element => {
     )
 }
 
-export const Issue = ({ className }: { className: string }): JSX.Element => {
+export const Issue = ({ className = '' }: { className?: string }): JSX.Element => {
     return (
         <svg
             className={className}
@@ -1598,7 +1598,7 @@ export const Facebook = (props): JSX.Element => {
 
 export const Mail = (props): JSX.Element => {
     return (
-        <svg {...props} width="30" height="20" viewBox="0 0 30 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg {...props} viewBox="0 0 30 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
                 d="M2.51992 0.719971C1.64991 0.719971 0.919922 1.44995 0.919922 2.31997V17.68C0.919922 18.55 1.64991 19.28 2.51992 19.28H27.4799C28.3499 19.28 29.0799 18.55 29.0799 17.68V2.31997C29.0799 1.44995 28.3499 0.719971 27.4799 0.719971H2.51992ZM4.35992 2.63997H25.6399L15.3398 11.84C15.1998 11.965 14.7998 11.965 14.6598 11.84L4.35992 2.63997ZM2.83992 3.84996L10.03 10.28L2.83992 16.2301V3.84996ZM27.1599 3.84996V16.2301L19.9698 10.28L27.1599 3.84996ZM11.4799 11.57L13.3799 13.27C14.3124 14.1025 15.6874 14.1025 16.6199 13.27L18.5199 11.57L25.5199 17.36H4.47992L11.4799 11.57Z"
                 fill="currentColor"
@@ -1733,18 +1733,20 @@ export const Retention = (props): JSX.Element => {
 
 export const Search = (props): JSX.Element => {
     return (
-        <svg {...props} width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g clipPath="url(#clip0_4712_115760)">
-                <path
-                    d="M11.4436 1.97175C8.83542 -0.636415 4.5799 -0.636415 1.97174 1.97175C-0.636415 4.57991 -0.636415 8.83543 1.97174 11.4436C4.30806 13.7799 7.9399 14.0354 10.5481 12.1955L14.0362 15.6836C14.4843 16.1317 15.22 16.1317 15.6681 15.6836C16.1162 15.2355 16.1162 14.4999 15.6681 14.0518L12.1799 10.5475C14.0199 7.93994 13.7799 4.30746 11.4436 1.97178L11.4436 1.97175ZM9.93984 9.93991C8.148 11.7317 5.25168 11.7317 3.47616 9.93991C1.68432 8.14807 1.68432 5.25175 3.47616 3.47623C5.268 1.69991 8.16432 1.68439 9.93984 3.47623C11.7155 5.25191 11.7155 8.14743 9.93984 9.93991Z"
-                    fill="#D0D1C9"
-                />
-            </g>
-            <defs>
-                <clipPath id="clip0_4712_115760">
-                    <rect width="16" height="16" fill="white" />
-                </clipPath>
-            </defs>
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            {...props}
+        >
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
         </svg>
     )
 }
@@ -1869,7 +1871,7 @@ export const DarkMode = (props: any): JSX.Element => {
     )
 }
 
-export const ExpandDocument = ({ expanded, ...props }: { expanded: boolean }) => {
+export const ExpandDocument = ({ expanded, ...props }: { expanded: boolean | undefined }) => {
     return (
         <svg {...props} width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -1981,6 +1983,38 @@ export const Location = (props: any) => {
     )
 }
 
+export const CmdK = (props: any) => {
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="9" fill="currentColor" {...props}>
+            <g>
+                <path d="M3.437 3.545v1.717l-.756.006C1.697 5.268.9 6.04.9 7.03a1.78 1.78 0 1 0 3.562 0v-.75h1.7v.75c0 .979.802 1.782 1.78 1.782A1.78 1.78 0 0 0 9.725 7.03c0-.99-.797-1.763-1.781-1.763l-.762-.006V3.545h.762c.984-.006 1.781-.774 1.781-1.764a1.78 1.78 0 1 0-3.562 0v.75h-1.7v-.75C4.462.803 3.66 0 2.682 0A1.78 1.78 0 0 0 .9 1.781c0 .99.797 1.758 1.781 1.764h.756Zm-.732-1.002a.763.763 0 0 1-.774-.762c0-.416.34-.75.75-.75s.756.34.756.774v.738h-.732Zm5.214 0h-.732v-.738c0-.434.346-.774.756-.774.41 0 .75.334.75.75a.767.767 0 0 1-.774.762Zm-3.457 2.73V3.54h1.7v1.734h-1.7Zm-1.757.997h.732v.732a.77.77 0 0 1-.756.78c-.41 0-.75-.34-.75-.757 0-.416.34-.755.774-.755Zm5.214 0c.428 0 .774.34.774.755 0 .416-.34.756-.75.756a.77.77 0 0 1-.756-.779V6.27h.732ZM14.52 8.63V5.716l.924-.948L18.06 8.63h2.04l-3.54-5.04L19.8.23h-2.148L14.52 3.555V.23h-1.632v8.4h1.632Z" />
+            </g>
+        </svg>
+    )
+}
+
+export const Ctrl = (props: any) => {
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg" width="29" height="9" fill="currentColor" {...props}>
+            <g>
+                <path d="M4.515 8.137c1.788 0 3.072-1.036 3.276-2.589v-.037H6.432l-.005.027c-.199.854-.93 1.401-1.912 1.401-1.321 0-2.143-1.1-2.143-2.868v-.01c0-1.762.822-2.863 2.137-2.863.978 0 1.72.607 1.918 1.525l.005.022h1.36v-.043C7.608 1.117 6.271 0 4.508 0 2.313 0 .954 1.552.954 4.066v.01c0 2.504 1.364 4.061 3.56 4.061ZM10.842 7.944h1.386V1.359h2.39V.193h-6.16V1.36h2.384v6.585ZM15.848 7.944h1.386V5.027h1.536l1.52 2.917h1.585l-1.692-3.126c.918-.333 1.46-1.182 1.46-2.208V2.6c0-1.477-.998-2.407-2.663-2.407h-3.132v7.75Zm1.386-3.98V1.316h1.574c.88 0 1.412.505 1.412 1.316v.01c0 .833-.51 1.322-1.385 1.322h-1.601ZM23.105 7.944h4.941V6.778h-3.555V.193h-1.386v7.75Z" />
+            </g>
+        </svg>
+    )
+}
+
+export const K = (props: any) => {
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg" width="7" height="9" fill="currentColor" {...props}>
+            <path
+                fill="#000"
+                d="M1.496 8.7V6.027l.847-.869L4.741 8.7h1.87L3.366 4.08 6.336 1H4.367L1.496 4.047V1H0v7.7h1.496Z"
+                opacity=".25"
+            />
+        </svg>
+    )
+}
+
 export const Clock = (props: any) => {
     return (
         <svg
@@ -1993,6 +2027,30 @@ export const Clock = (props: any) => {
             {...props}
         >
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+    )
+}
+
+export const Markdown = (props: any) => {
+    return (
+        <svg
+            stroke="currentColor"
+            className="w-6 h-6"
+            fill="none"
+            height="128"
+            viewBox="0 0 208 128"
+            width="208"
+            xmlns="http://www.w3.org/2000/svg"
+            {...props}
+        >
+            <g fill="#000">
+                <path
+                    clipRule="evenodd"
+                    d="m15 10c-2.7614 0-5 2.2386-5 5v98c0 2.761 2.2386 5 5 5h178c2.761 0 5-2.239 5-5v-98c0-2.7614-2.239-5-5-5zm-15 5c0-8.28427 6.71573-15 15-15h178c8.284 0 15 6.71573 15 15v98c0 8.284-6.716 15-15 15h-178c-8.28427 0-15-6.716-15-15z"
+                    fillRule="evenodd"
+                />
+                <path d="m30 98v-68h20l20 25 20-25h20v68h-20v-39l-20 25-20-25v39zm125 0-30-33h20v-35h20v35h20z" />
+            </g>
         </svg>
     )
 }
@@ -2134,6 +2192,59 @@ export const OpenIssue = (props: any) => {
                     <rect width="16" height="16" fill="white" transform="translate(0.0214844 0.220337)" />
                 </clipPath>
             </defs>
+        </svg>
+    )
+}
+
+export const LinkIcon = (props: any) => {
+    return (
+        <svg {...props} width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M13.5722 10.4647L15.8532 8.18299C17.5175 6.51939 17.5175 3.81169 15.8532 2.14813C14.1896 0.483828 11.4819 0.483828 9.81759 2.14813L6.52557 5.44015C4.86127 7.10374 4.86127 9.81145 6.52557 11.475C6.77096 11.7211 7.04026 11.9292 7.32502 12.1022L9.08706 10.3395C8.75166 10.2593 8.43315 10.0899 8.1716 9.8283C7.41504 9.07174 7.41504 7.84128 8.1716 7.08474L11.4636 3.79271C12.2202 3.03616 13.4506 3.03616 14.2072 3.79271C14.9637 4.54927 14.9637 5.77974 14.2072 6.53627L13.2404 7.50378C13.639 8.44244 13.7487 9.4746 13.5723 10.4646L13.5722 10.4647Z"
+                fill="currentColor"
+            />
+            <path
+                d="M4.42957 7.53536L2.14861 9.81632C0.484316 11.4799 0.484316 14.1876 2.14861 15.8519C3.81221 17.5162 6.51991 17.5162 8.18419 15.8519L11.4762 12.5599C13.1405 10.8963 13.1398 8.18858 11.4762 6.52502C11.2308 6.27892 10.9615 6.07081 10.6775 5.89783L8.91543 7.66057C9.25082 7.74072 9.56933 7.91017 9.83089 8.17173C10.5874 8.92829 10.5874 10.1588 9.83089 10.9153L6.53887 14.2073C5.78231 14.9639 4.55185 14.9639 3.79531 14.2073C3.03875 13.4508 3.03875 12.2203 3.79531 11.4638L4.76281 10.497C4.36272 9.55757 4.25305 8.52541 4.42952 7.53541L4.42957 7.53536Z"
+                fill="currentColor"
+            />
+        </svg>
+    )
+}
+
+export const Bookmark = (props: any) => {
+    return (
+        <svg {...props} width="12" height="16" viewBox="0 0 12 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M9.88692 0.12504H2.0625C1.13086 0.12504 0.375 0.880896 0.375 1.81254V15.3125C0.375703 15.52 0.490312 15.7098 0.673116 15.8075C0.852412 15.8996 1.06687 15.8884 1.23562 15.7794L6.00004 12.6125L10.7531 15.7794C10.9254 15.8926 11.1462 15.9032 11.3283 15.8054C11.5097 15.7084 11.6236 15.5185 11.625 15.3125V1.86312C11.625 0.903356 10.8467 0.12504 9.88692 0.12504ZM10.5 14.2606L6.30946 11.4481C6.12172 11.3244 5.87845 11.3244 5.69071 11.4481L1.50013 14.2606V1.81254C1.50013 1.50175 1.75184 1.25004 2.06263 1.25004H9.88147C10.0453 1.24863 10.2028 1.31262 10.3188 1.42793C10.4348 1.54254 10.5002 1.69933 10.5002 1.86317L10.5 14.2606Z"
+                fill="currentColor"
+            />
+        </svg>
+    )
+}
+
+export const TableOfContents = (props: any) => {
+    return (
+        <svg {...props} width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M2.13295 1.06697C2.13295 2.48894 0 2.48894 0 1.06697C0 -0.355005 2.13295 -0.355005 2.13295 1.06697Z"
+                fill="currentColor"
+            />
+            <path d="M4.26562 0H15.9984V2.13294H4.26562V0Z" fill="currentColor" />
+            <path
+                d="M2.13295 5.33383C2.13295 6.7558 0 6.7558 0 5.33383C0 3.91086 2.13295 3.91086 2.13295 5.33383Z"
+                fill="currentColor"
+            />
+            <path d="M4.26562 4.26685H15.9984V6.39979H4.26562V4.26685Z" fill="currentColor" />
+            <path
+                d="M2.13295 9.59968C2.13295 11.0227 0 11.0227 0 9.59968C0 8.17771 2.13295 8.17771 2.13295 9.59968Z"
+                fill="currentColor"
+            />
+            <path d="M4.26562 8.53394H15.9984V10.6669H4.26562V8.53394Z" fill="currentColor" />
+            <path
+                d="M2.13295 13.8668C2.13295 15.2887 0 15.2887 0 13.8668C0 12.4448 2.13295 12.4448 2.13295 13.8668Z"
+                fill="currentColor"
+            />
+            <path d="M4.26562 12.7996H15.9984V14.9325H4.26562V12.7996Z" fill="currentColor" />
         </svg>
     )
 }

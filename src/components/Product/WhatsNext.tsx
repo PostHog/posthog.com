@@ -23,10 +23,13 @@ export default function WhatsNext() {
                     </figure>
 
                     <p>We build features based on community input.</p>
-                    <p>Our product roadmap is public. It's where you can share your thoughts on what we're thinking about building, and get early access on new features.</p>
+                    <p>
+                        Our product roadmap is public. It's where you can share your thoughts on what we're thinking
+                        about building, and get early access on new features.
+                    </p>
 
                     <p>We'd love to get your feedback!</p>
-                    
+
                     <CallToAction type="secondary" size="sm" to="/roadmap" className="mb-6 md:mb-12">
                         Visit our product roadmap
                     </CallToAction>

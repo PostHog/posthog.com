@@ -5,15 +5,21 @@ import { classNames } from 'lib/utils'
 export default function Toggle({
     checked,
     onChange,
-    icon,
+    iconLeft,
+    iconRight,
 }: {
     checked: boolean
     onChange: (checked: boolean) => void
-    icon?: React.ReactNode
+    iconLeft?: React.ReactNode
+    iconRight?: React.ReactNode
 }) {
     return (
         <span className="flex space-x-1.5 items-center">
-            <span className="opacity-50">{icon}</span>
+            {iconLeft && (
+                <span className={`${checked ? 'opacity-50' : 'opacity-80'} font-semibold transition-opacity`}>
+                    {iconLeft}
+                </span>
+            )}
             <Switch
                 checked={checked}
                 onChange={onChange}
@@ -28,10 +34,15 @@ export default function Toggle({
                     aria-hidden="true"
                     className={classNames(
                         checked ? 'translate-x-5' : 'translate-x-0',
-                        'pointer-events-none absolute left-0 inline-block h-4 w-4 rounded-full bg-[#0e0e0e] dark:bg-[#999] shadow transform ring-0 transition-transform ease-in-out duration-200'
+                        'pointer-events-none absolute left-0 inline-block h-4 w-4 rounded-full bg-[#0e0e0e] dark:bg-[#999] transform ring-0 transition-transform ease-in-out duration-200'
                     )}
                 />
             </Switch>
+            {iconRight && (
+                <span className={`${!checked ? 'opacity-50' : 'opacity-80'} font-semibold transition-opacity`}>
+                    {iconRight}
+                </span>
+            )}
         </span>
     )
 }

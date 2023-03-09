@@ -2,11 +2,11 @@
 title: How to correlate errors with product performance using Sentry
 sidebar: Docs
 showTitle: true
-featuredImage: ../images/tutorials/banners/sentry-tutorial-banner.png
+featuredImage: ../images/tutorials/banners/sentry-connector.png
 featuredTutorial: false
 date: 2022-05-04
 author: ['joe-martin']
-topics: ['apps', 'sentry']
+tags: ['apps', 'sentry']
 ---
 
 - *Level:* Easy 🦔

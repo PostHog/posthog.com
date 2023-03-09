@@ -1,0 +1,53 @@
+---
+title: Scheduled tasks not executing
+sidebar: Docs
+showTitle: true
+---
+
+> **Important:** Please ensure you [have access to production](/handbook/engineering/how-to-access-posthog-cloud-infra) so that you are able to handle incidents!
+
+## Background
+
+The term "scheduled tasks" refers to the plugin functions `runEveryMinute`, `runEveryHour`, and `runEveryDay`. 
+
+These functions are used for a variety of use cases that are essential to the plugins that use them. For instance, the Snowflake Export plugin uses a scheduled task to insert batches of data from the external stage into Snowflake. Another very common use case for them is data importing, where plugins hit an external service to pull some data based on the schedule.
+
+We use Graphile Worker (the same tool that's used for jobs) to run scheduled tasks. It runs a "cron" service at runtime, but keeps track of tasks in the database. When it's time for a task to execute, Graphile Worker looks up and updates the `graphile_worker.known_crontabs` table and then enqueues a job to execute the task.
+
+Currently, our approach to scheduled tasks is not optimal, as we have one overarching task per cadence that executes all the tasks from plugins that use the function i.e. one task that runs every minute and executes in sequence all the `runEveryMinute` functions from enables plugins. Ideally, we'd have one task per `runEveryX:pluginConfigId`, so that these could be better distributed across the fleet, but a past attempt to do so put way too much load in the database. This is something we should revisit. It's worth being aware of this as a potential cause for issues is a given server being overloaded. 
+
+It's important to note that it's not very important that a given plugin's `runEveryMinute` function runs **every** minute (despite the name). Given another task is bound to run soon enough, it's ok for these to be delayed by a couple of minutes. This is why at the moment you'll see fluctuations in the number of tasks we actually run per minute if you look at the metrics. It is more important that `runEveryHour` and `runEveryDay` don't actually skip slots.
+
+Scheduled tasks only run in plugin servers with the `scheduledTasks` capability.
+
+## Debugging
+
+If scheduled tasks aren't working, there are a few places to look in for issues:
+
+1. The Graphile Worker database: The database could be down or under a lot of load. A solution may be to scale it up.
+2. The `plugins-scheduler` pods: The pods could be under a lot of load and should be scaled up, we may have shipped a bug affecting scheduled task execution, or we may have misconfigured the Graphile Worker.
+3. Individual plugins: Ideally an individual plugin with a bug would never affect other plugins, but it's possible we may not have covered all ways in which plugins can interfere. One example is that since we currently run tasks in sequence, a few tasks reaching the 30s timeout would cause delays for the subsequent tasks
+
+## Actions
+
+### Restarting scheduler pods
+
+With scheduled taks in particular, it's unlikely that a restart would fix things, but it's a safe operation that might be worth trying.
+
+
+```shell
+kubectl rollout restart deployment/plugins-scheduler -n posthog
+```
+
+### Scaling up the Graphile Worker database
+
+If you've determined that the Graphile Worker database is the bottleneck, you should be able to safely scale it up by [changing the instance type in the `posthog-cloud-infra` repo](https://github.com/PostHog/posthog-cloud-infra/blob/b00dc23df4944506ab104eb4e180b963e026d57c/terraform/environments/aws-accnt-prod/us-east-1/graphile_worker.tf#L29).
+
+### Disabling a plugin
+
+If you need to disable a given plugin config after you've established it's problematic, you can do so by:
+
+a) Logging in as the user and disabling it
+b) Updating the `posthog_pluginconfig` table and setting `enabled=false` for the appropriate column
+
+If you do _b_, you must remember that the plugin server won't automatically apply the change. You need to trigger a restart, deploy, or simply update the config of another plugin via the UI to send the signal to the plugin server to reload plugins.

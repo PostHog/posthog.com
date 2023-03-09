@@ -6,7 +6,9 @@ import { Heading } from 'components/Heading'
 import { InlineCode } from 'components/InlineCode'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
-import PostLayout, { Contributors, ShareLinks, SidebarSection } from 'components/PostLayout'
+import PostLayout from 'components/PostLayout'
+import Contributors from 'components/PostLayout/Contributors'
+import SidebarSection from 'components/PostLayout/SidebarSection'
 import { SEO } from 'components/seo'
 import Team from 'components/Team'
 import TestimonialsTable from 'components/TestimonialsTable'
@@ -24,30 +26,32 @@ import { CallToAction } from 'components/CallToAction'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import Tooltip from 'components/Tooltip'
 import CommunityQuestions from 'components/CommunityQuestions'
+import { formatNode } from 'components/GlossaryElement'
 import Markdown from 'markdown-to-jsx'
 import CheckIcon from '../images/check.svg'
 import XIcon from '../images/x.svg'
 import WarningIcon from '../images/warning.svg'
 import TeamRoadmap from 'components/TeamRoadmap'
 import TeamMembers from 'components/TeamMembers'
+import { CategoryData } from 'components/Blog/constants/categories'
 
 const renderAvailabilityIcon = (availability: 'full' | 'partial' | 'none') => {
     switch (availability) {
         case 'full':
             return (
-                <Tooltip title="This plan has full access to this feature">
+                <Tooltip content="This plan has full access to this feature">
                     <img src={CheckIcon} alt="Available" className="h-4 w-4" aria-hidden="true" />
                 </Tooltip>
             )
         case 'partial':
             return (
-                <Tooltip title="Some parts of this feature are not available on this plan">
+                <Tooltip content="Some parts of this feature are not available on this plan">
                     <img src={WarningIcon} alt="Partially available" className="h-4 w-4" aria-hidden="true" />
                 </Tooltip>
             )
         case 'none':
             return (
-                <Tooltip title="This feature is not available on this plan">
+                <Tooltip content="This feature is not available on this plan">
                     <img src={XIcon} alt="Not available" className="h-4 w-4" aria-hidden="true" />
                 </Tooltip>
             )
@@ -64,9 +68,8 @@ export const HandbookSidebar = ({ contributors, title, location, availability, r
     return (
         <>
             {contributors && (
-                <SidebarSection title={`Author${contributors?.length > 1 ? 's' : ''}`}>
+                <SidebarSection>
                     <Contributors
-                        className="flex flex-col space-y-2"
                         contributors={contributors.map(({ url, username, avatar, teamData }) => ({
                             url,
                             name: teamData?.name || username,
@@ -92,10 +95,6 @@ export const HandbookSidebar = ({ contributors, title, location, availability, r
                     </div>
                 </SidebarSection>
             )}
-
-            <SidebarSection title="Share">
-                <ShareLinks title={title} href={location.href} />
-            </SidebarSection>
 
             {related && (
                 <SidebarSection title="Related articles">
@@ -171,7 +170,7 @@ export const AppParametersFactory: (params: AppParametersProps) => React.FC = ({
 
                                 <td>
                                     {option.description || option.hint ? (
-                                        <Markdown>{option.description || option.hint}</Markdown>
+                                        <Markdown>{option.description || option.hint || ''}</Markdown>
                                     ) : null}
                                 </td>
                             </tr>
@@ -186,7 +185,7 @@ export const AppParametersFactory: (params: AppParametersProps) => React.FC = ({
 }
 
 export default function Handbook({
-    data: { post, nextPost, mission, objectives },
+    data: { post, nextPost, glossary, mission, objectives },
     pageContext: { menu, breadcrumb = [], breadcrumbBase, tableOfContents, searchFilter },
     location,
 }) {
@@ -213,11 +212,19 @@ export default function Handbook({
     const showToc = !hideAnchor && tableOfContents?.length > 0
     const filePath = post?.parent?.relativePath
 
+    const isArticle = frontmatter.isArticle !== false
+
     const [showCTA, setShowCTA] = React.useState<boolean>(
         typeof window !== 'undefined' ? Boolean(getCookie('ph_current_project_token')) : false
     )
 
-    const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
+    const A = (props) => (
+        <Link
+            {...props}
+            glossary={glossary?.nodes?.map(formatNode)}
+            className="text-red hover:text-red font-semibold"
+        />
+    )
 
     const components = {
         Team,
@@ -239,6 +246,7 @@ export default function Handbook({
         Objectives: (_props) => (objectives?.body ? MDX({ body: objectives.body }) : null),
         TeamRoadmap: (props) => TeamRoadmap({ team: title?.replace(/team/gi, '').trim(), ...props }),
         TeamMembers: (props) => TeamMembers({ team: title?.replace(/team/gi, '').trim(), ...props }),
+        CategoryData,
         ...shortcodes,
     }
 
@@ -278,14 +286,14 @@ export default function Handbook({
                     }
                     tableOfContents={[...tableOfContents, { depth: 0, value: 'Questions?', url: 'squeak-questions' }]}
                     contentWidth="100%"
-                    breadcrumb={[breadcrumbBase, ...(breadcrumb || [])]}
+                    breadcrumb={[breadcrumbBase, ...(breadcrumb?.slice(0, breadcrumb.length - 1) || [])]}
                     hideSidebar={hideAnchor}
                     nextPost={nextPost}
                 >
                     <section>
                         <div className="mb-8 relative">
                             <div className="flex items-center mt-0 flex-wrap justify-between">
-                                <div className="flex items-center space-x-2 mt-2 mb-1">
+                                <div className="flex items-center space-x-2 mb-1">
                                     {thumbnail && <GatsbyImage image={getImage(thumbnail)} />}
                                     <h1 className="dark:text-white text-3xl sm:text-5xl m-0">{title}</h1>
                                 </div>
@@ -308,10 +316,9 @@ export default function Handbook({
                                     Last updated: <time>{lastUpdated}</time>
                                 </p>
                             )}
-                            {showToc && <MobileSidebar tableOfContents={tableOfContents} />}
                         </div>
                         {features && <LibraryFeatures availability={features} />}
-                        <div className="article-content">
+                        <div className={isArticle && 'article-content'}>
                             <MDXProvider components={components}>
                                 <MDXRenderer>{body}</MDXRenderer>
                             </MDXProvider>
@@ -324,7 +331,24 @@ export default function Handbook({
 }
 
 export const query = graphql`
-    query HandbookQuery($id: String!, $nextURL: String!, $mission: String, $objectives: String) {
+    query HandbookQuery($id: String!, $nextURL: String!, $links: [String!]!, $mission: String, $objectives: String) {
+        countries: allMdx(filter: { fields: { slug: { regex: "/^/team/" } } }) {
+            group(field: frontmatter___country) {
+                totalCount
+            }
+        }
+        glossary: allMdx(filter: { fields: { slug: { in: $links } } }) {
+            nodes {
+                fields {
+                    slug
+                }
+                frontmatter {
+                    title
+                    featuredVideo
+                }
+                excerpt(pruneLength: 300)
+            }
+        }
         nextPost: mdx(fields: { slug: { eq: $nextURL } }) {
             excerpt(pruneLength: 500)
             frontmatter {
@@ -373,6 +397,7 @@ export const query = graphql`
                 description
                 hideLastUpdated
                 github
+                isArticle
                 features {
                     eventCapture
                     userIdentification

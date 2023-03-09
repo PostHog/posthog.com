@@ -5,9 +5,12 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Release notes", "Product updates"]
 featuredImage: ../images/blog/array/default.png
 featuredImageType: standard
+category: PostHog news
+tags:
+  - Product updates
+  - Release notes
 ---
 
 This week's update brings a React Native integration, time comparisons, easy access to user data from graphs, better user friendliness, and much stronger frontend testing.
@@ -99,6 +102,12 @@ We also have a few backlog bugs to tackle - we will work through these.
 * Make a new [open source best friend](https://github.com/olivia-ai/olivia), powered by a neural network.
 * Get reading [free programming books](https://github.com/EbookFoundation/free-programming-books).
 * Also - [don't miss the rocket launch](https://www.kennedyspacecenter.com/launches-and-events/events-calendar/see-a-rocket-launch) later today!
+
+## Share your feedback
+We'd love to hear anything you have to say about PostHog, good or bad. As a thank you, we'll share some awesome [PostHog merch](https://merch.posthog.com).
+
+Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog.com) with one of our teams to help us make PostHog even better!
+
 
 ## PostHog news
 

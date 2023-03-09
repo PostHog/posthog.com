@@ -72,6 +72,17 @@ If you're confused at any point, take a look at an existing product to ensure yo
 
 > Warning: If you have something with different sizes, it's a little more complex, so make sure you read the documentation carefully.
 
+## Troubleshooting customer orders
+
+Sometimes customers get in touch with us because their order hasn't arrived. There are a couple of things you can do:
+
+1. Log into Shopify and [check that an order was actually created for them](https://posthog.myshopify.com/admin/orders?inContextTimeframe=last_30_days). If it was, and it has shown as dispatched, use your judgement to determine whether it is probably lost in the post. Cancel that order and issue them a new gift card for the value of that order so they can place it again. 
+2. Sometimes [the Zap connecting Printfection to Shopify fails](https://zapier.com/app/history?status=error%2Chalted%2Cdelayed&end_datetime=2022-12-22&start_datetime=2022-01-01&root_id=146890498), usually because the customer hasn't entered their address details completely (e.g. no postal/zip code). In this case, cancel their order in Shopify and ask them to place it again with full address details. 
+
+If for some reason their second order attempt doesn't make it through, refund their money and apologetically let them know that unfortunately our supplier is having issues shipping to their address. It's better to stop the back-and-forth at that point, rather than having a frustrated customer placing multiple orders that don't work. We aren't an e-commerce business, so ensuring a flawless merch store experience for a handful of edge case orders is not a priority!
+
+If the customer was given a merch code to thank them for submitting a PR, you can offer to make a donation on their behalf for the equivalent amount to a company of their choice on [Open Collective](https://opencollective.com/search?q=&type=COLLECTIVE) instead. 
+
 ## Legacy setups
 
 We have integrations with many other providers from Printify to Printful and Gelato. For the most part you can ignore anything that references these as these are legacy settings from previous fulfillment channels that are no longer used. 

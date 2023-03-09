@@ -65,6 +65,12 @@ Additionally, the product managers should pay particular attention to cross-team
 
 Similar to product, designers support small teams. [Read our guide](/handbook/engineering/product-design) for engineers on how to work with design.
 
+## Managing larger cross-team projects
+
+Each project should be owned by an individual within a single small team. However, some projects affect multiple other teams and require their support. For example, the performance work owned by Karl in product analytics requires support from the pipeline and infrastructure team.
+
+For these projects, we recommend the individual owning it write a "Status update" every 2 weeks on slack and add a link to this update in the "Updates on bigger projects that affect multiple teams" section of the all hands doc. These status updates might include: what's been done since the last update, any blockers, and what are the next steps.
+
 ## Small Teams list
 
 See [team structure](/handbook/small-teams/team-structure).

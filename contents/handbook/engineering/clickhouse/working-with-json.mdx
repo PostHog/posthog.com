@@ -7,7 +7,7 @@ we do a good job at storing and analyzing this data.
 
 This document covers:
 - Storing JSON in `String`s and operations on them
-- How and why to compress this data
+- Why and how to compress this data
 - Materialized columns
 - Alternative solutions: JSON data type, arrays
 
@@ -15,11 +15,11 @@ This document covers:
 
 At PostHog, we store JSON data as `VARCHAR` (or `String`) columns.
 
-Relevant properties are then parsed out from query-time using [`JSONExtract` functions](https://clickhouse.com/docs/en/sql-reference/functions/json-functions/#jsonhasjson-indices_or_keys).
+Relevant properties are then parsed out from the `String` columns at query-time using [`JSONExtract` functions](https://clickhouse.com/docs/en/sql-reference/functions/json-functions/#jsonhasjson-indices_or_keys).
 
 This has the following problems:
 1. These columns end up really large even after compression, meaning slow I/O
-2. It requires CPU parse properties
+2. It requires CPU to parse properties
 3. Data is not stored optimally. As an example, JSON keys are frequently repeated and numbers are stored as strings.
 
 ### Compressing JSON
@@ -66,7 +66,7 @@ However after testing we encountered several fundamental problems which make thi
 [1](https://github.com/ClickHouse/ClickHouse/issues/38530),
 [2](https://github.com/ClickHouse/ClickHouse/issues/38522),
 [3](https://github.com/ClickHouse/ClickHouse/issues/38517),
-[4](https://github.com/ClickHouse/ClickHouse/issues/38554) and
+[4](https://github.com/ClickHouse/ClickHouse/issues/38554), and
 [5](https://github.com/ClickHouse/ClickHouse/issues/38478)
 
 Next in the ClickHouse manual: [Query performance](/handbook/engineering/clickhouse/performance)

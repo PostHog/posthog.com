@@ -1,5 +1,5 @@
 import cntl from 'cntl'
-import { CallToAction } from 'components/CallToAction/index.js' // TEMP fix because of duplicate files
+import { CallToAction } from 'components/CallToAction/index.tsx' // TEMP fix because of duplicate files
 import React from 'react'
 
 const chip = (className = '') => cntl`

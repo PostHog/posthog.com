@@ -1,25 +1,8 @@
-import Control from 'components/Pricing/Control'
-import React, { useEffect, useState } from 'react'
-import Test from 'components/Pricing/Test'
+import Pricing from 'components/Pricing/Pricing'
+import React from 'react'
 
-import { useValues } from 'kea'
-
-import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
-
-const PricingNew = () => {
-    const { posthog } = useValues(posthogAnalyticsLogic)
-    const [loading, setLoading] = useState(true)
-
-    const [featureFlagEnabled, setFeatureFlagEnabled] = useState(false)
-
-    useEffect(() => {
-        if (posthog && posthog.getFeatureFlag && posthog.getFeatureFlag('highlight-open-source') === 'test') {
-            setFeatureFlagEnabled(true)
-        }
-        setLoading(false)
-    }, [])
-
-    return loading ? null : featureFlagEnabled ? <Test /> : <Control />
+const PricingPage = (): JSX.Element => {
+    return <Pricing />
 }
 
-export default PricingNew
+export default PricingPage

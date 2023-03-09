@@ -10,7 +10,6 @@ const React = require('react')
 import { initKea, wrapElement } from './kea'
 import HandbookLayout from './src/templates/Handbook'
 import Product from './src/templates/Product'
-import SqueakTopic from './src/templates/SqueakTopic'
 import Job from './src/templates/Job'
 
 export const wrapPageElement = ({ element, props }) => {
@@ -25,8 +24,6 @@ export const wrapPageElement = ({ element, props }) => {
                 <HandbookLayout {...props} />
             ) : /^product\//.test(slug) ? (
                 <Product {...props} />
-            ) : /^questions\//.test(slug) ? (
-                <SqueakTopic {...props} />
             ) : /^careers\//.test(slug) ? (
                 <Job {...props} />
             ) : (
@@ -57,7 +54,7 @@ export const onRenderBody = function ({ setPreBodyComponents }) {
     })
     try {
         preferredTheme =
-            (/^handbook|^docs|^blog|^integrations|^tutorials|^questions|^using-posthog|^manual/.test(slug) &&
+            (/^handbook|^docs|^blog|^integrations|^tutorials|^questions|^using-posthog|^manual|^community/.test(slug) &&
                 (localStorage.getItem('theme') || (darkQuery.matches ? 'dark' : 'light'))) ||
             'light'
     } catch (err) {}

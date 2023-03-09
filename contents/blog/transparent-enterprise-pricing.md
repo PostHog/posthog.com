@@ -7,8 +7,9 @@ showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/hog-in-a-room-generic.jpg
 featuredImageType: full
-categories: ["Inside PostHog"]
-author: ["simon-fisher"]
+author:
+  - simon-fisher
+category: Inside PostHog
 ---
 
 > "I wonder how much this SaaS product costs to..."

@@ -36,6 +36,8 @@ The release manager is ultimately responsible for the timeline of the release. T
 
 ### Pre-release (Wednesday before the release)
 
+> If you have a PR which you want to be included in marketing announcements, which requires user action, or is otherwise notable, add the highlight tag to the PR.
+
 1. [ ] Post in #dev about the upcoming release (replace `<version>` and `<array draft pr>` from Joe)
 ```
 Release is happening next Monday. Which means 
@@ -89,9 +91,9 @@ Release is happening next Monday. Which means
     1. Update the `playground.yaml` for `image: -> tag:` value to `release-[version]-unstable` with the new version.
     1. Follow the upgrade instructions [here](https://posthog.com/docs/self-host/deploy/digital-ocean#upgrading-the-chart). Replace `values.yaml` in the last upgrade command with `playground.yaml`.
       > ⚠️ Note that you might need to follow major upgrade notes as mentioned in the [upgrade guide](https://posthog.com/docs/self-host/deploy/digital-ocean#upgrading-the-chart), the same way our users would be required to. If so, make any additional changes to the `playground.yaml` file as needed.
+      > ⚠️ Make sure you're not in a working directory containing `posthog` folder, this could lead to the upgrade command looking for the chart locally rather than using the helm repo installed and seeing an error like `Chart.yaml not found`.
     1. Optional: Keep an eye on the progress of the upgrade in `k9s`
     1. If the `helm upgrade` command fails or if in the end the output for `kubectl get pods -n posthog` doesn't show everything as running, then ask `team-platform` for guidance.
-      > ⚠️ Make sure you're not in a working directory containing `posthog` folder, this could lead to the upgrade command looking for the chart locally rather than using the helm repo installed and seeing an error like `Chart.yaml not found`.
     1. Optional: Verify playground is running the latest image by running `kubectl get pod --namespace posthog`. In the output of that command, you should see a row like `posthog-web-6447ff5fdf-gs664`. Copy this row (the numbers after `posthog-web-` will be different), and then run `kubectl  describe pod --namespace posthog posthog-web-6447ff5fdf-gs664`. If you scroll up in that output, you should see a line like `Image: posthog/posthog@sha256:daf43a4a4cd06658e41273bb8fe4a74f17b295d67c6f1e16c17243b5d09af7ee`. This is the sha of the image that is running. You can compare this to the sha in Docker Hub to verify that the image is the latest.
     1. Go to the [playground](https://playground.posthog.net/) and test that everything is working as expected. Check that the version running is the same as the one we're releasing.
     1. Commit the changes to the [`playground.yaml` file in the `vpc` repo](https://github.com/PostHog/vpc/blob/main/client_values/posthog/playground.yaml) - have someone from Infrastructure team review.
@@ -101,8 +103,7 @@ Release is happening next Monday. Which means
   git checkout release-[version]
   git log --pretty=format:"%s %ae" origin/release-[old-version]..head | sort -t ':' -k 1,1 -s > changelog.txt
   ```
-1. [ ] Write up the [PostHog Array blog post](/handbook/growth/marketing/blog#posthog-array). Please tag Joe Martin for review, as this helps Marketing coordinate other announcements. Do not release the post until the day of release.
-1. [ ] Share the PostHog Array blog post with all partners listed in the [PostHog partner directory](/partners) via the dedicated Slack channels. Don't have access to them all? Please ask Joe Martin to do this instead. 
+1. [ ] If you haven't already done so, either add the highlight tag to any notable PRs, or otherwise inform marketing (usually Joe) about them.
 
 ### Launch (day of the release)
 1. [ ] Tag the version in GitHub. This will also build and push the `release-[version]`, `latest-release` (for both PostHog base & FOSS) Docker images to Docker Hub. **Please do this once the release branch is finalized, some users may see the image on Docker Hub and update immediately.**
@@ -111,8 +112,9 @@ Release is happening next Monday. Which means
   git push --follow-tags
   ```
 1. [ ] Update the PR in [charts-clickhouse](https://github.com/PostHog/charts-clickhouse/pulls) and change the image from `release-1.x.y-unstable` to `release-1.x.y`.
-1. [ ] Publish the [PostHog Array blog post](/handbook/growth/marketing/blog#posthog-array).
 1. [ ] Create a new main repo (`posthog`) branch named `sync-[version]`. Cherry-pick the `release-[version]` commits updating `version.py` and `versions.json` into `sync-[version]` and create a PR to get them into `master`. **Merging this to master will notify users that an update is available.** The Array post should be out at this point so that the "Release notes" link isn't a 404.
 1. [ ] Go to the [EWXT9O7BVDC2O](https://us-east-1.console.aws.amazon.com/cloudfront/v3/home?region=us-east-2#/distributions/EWXT9O7BVDC2O) CloudFront distribution to the "Invalidations" tab and add a new one with `/*` value. This will refresh the CloudFront cache so that users can see the new version. You can check this by visiting https://update.posthog.com/
-1. [ ] Send a message on the PostHog Users Slack (community) in [#announcements](https://posthogusers.slack.com/archives/CT7HXDEG3) to let everyone know the release has shipped.
-1. [ ] Send the newsletter with the PostHog Array. The Marketing Team will arrange this, provided Joe Martin has been tagged for review in the PostHog Array blog post. 
+1. [ ] Inform the marketing team that a new release is available.
+
+### After release
+1. [ ] 48-72 hours after the release, disable the site banner. Marketing will arrange this. 

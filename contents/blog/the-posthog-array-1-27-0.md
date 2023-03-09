@@ -5,9 +5,15 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Release notes", "Product updates"]
 featuredImage: ../images/blog/array/1-27-0.png
-excerpt: PostHog 1.27.0 is here! Completely redesigned funnels experience will help you dive deeper to understand why your users aren't converting. Plus 400+ improvements & fixes.
+excerpt: >-
+  PostHog 1.27.0 is here! Completely redesigned funnels experience will help you
+  dive deeper to understand why your users aren't converting. Plus 400+
+  improvements & fixes.
+category: PostHog news
+tags:
+  - Product updates
+  - Release notes
 ---
 
 PostHog 1.27.0 is here! 
@@ -119,6 +125,11 @@ In addition to the highlights listed above, we also merged a bunch of PRs to imp
 Welcome Chris Clark! Chris joined our Core Experience Team to help us level up our product experience! You can already see a ton of his work in our new funnels feature. Chris is pro-pinneaple on pizza (🍍 on 🍕) "but generally accepting of all pizza views and requirements". 
 
 > I once impulse-purchased a baby goose.
+
+## Share your feedback
+We'd love to hear anything you have to say about PostHog, good or bad. As a thank you, we'll share some awesome [PostHog merch](https://merch.posthog.com).
+
+Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog.com) with one of our teams to help us make PostHog even better!
 
 ## Community Shoutouts
 

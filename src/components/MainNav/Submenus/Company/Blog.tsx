@@ -124,7 +124,7 @@ const query = graphql`
                     slug
                 }
                 frontmatter {
-                    categories
+                    category
                     date(formatString: "MMMM DD, YYYY")
                     title
                     featuredImage {
@@ -143,7 +143,7 @@ const query = graphql`
                 frontmatter: { date: { ne: null } }
             }
         ) {
-            group(field: frontmatter___categories) {
+            group(field: frontmatter___category) {
                 fieldValue
                 totalCount
             }

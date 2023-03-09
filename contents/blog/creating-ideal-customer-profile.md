@@ -1,14 +1,19 @@
 ---
 date: 2022-11-14
-title: "How we found our Ideal Customer Profile"
+title: How we found our Ideal Customer Profile
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["CEO diaries", "Inside PostHog", "Startups"]
-author: ["james-hawkins"]
+author:
+  - james-hawkins
 featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
+category: Product growth
+tags:
+  - Guides
+  - Product metrics
+
 ---
 
 Creating an Ideal Customer Profile is one of the most important things we've ever done at PostHog.
@@ -47,7 +52,7 @@ These are all example decisions we've taken because of having a clear ICP:
 - We've found technical users have a higher bug tolerance _if_ we are very fast and communicative when a user finds one
 
 **Which new features do we prioritize?**
-- We're shipping features stechnical people want, like SQL access rather than tools for marketing reporting
+- We're shipping features technical people want, like SQL access rather than tools for marketing reporting
 - We focus on companies that have product market fit, which means scalability and data accuracy matter
 
 ## How we did it

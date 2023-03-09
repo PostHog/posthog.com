@@ -1,6 +1,5 @@
 import React from 'react'
 import MainNav from '../MainNav'
-import './style.scss'
 
 export const Header = (): JSX.Element => {
     return (

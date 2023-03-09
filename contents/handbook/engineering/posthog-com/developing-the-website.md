@@ -163,8 +163,11 @@ date: 2021-11-16
 title: The state of plugins on PostHog
 rootPage: /blog
 author: ["yakko-majuri"]
+featuredVideo: https://www.youtube-nocookie.com/embed/TCyCryTiTbQ
 featuredImage: ../images/blog/running-content.png
 featuredImageType: full
+category: Guides
+tags: ["Using PostHog", "Privacy"]
 ---
 ```
 
@@ -172,8 +175,15 @@ featuredImageType: full
 - `title`: the title that appears at the top of the blog post and on the blog listing page
 - `rootPage`: necessary for listing all blog posts on /blog. should always be set to `/blog`
 - `author`: the author(s) of the post. correlates to your handle located in /src/data/authors.json
+- `featuredVideo`: the iframe src of the video that appears at the top of the post. replaces the featured image on post pages.
 - `featuredImage`: the URL of the image that appears at the top of the post and on the blog listing page
 - `featuredImageType`: `standard` | `full` - determines the width of the featured image on the blog post
+- `category`: the broader category the post belongs to. one of the following:
+  - <CategoryData />
+- `tags`: the more specific tag(s) the post belongs to. an array containing any number of the following:
+  - <CategoryData type="tags" />
+
+
 
 ##### Docs & Handbook
 
@@ -359,30 +369,23 @@ For most images, this plugin will automatically generate a range of sizes to opt
 
 Once you've made a new markdown file, you should link to it from the sidebar where appropriate.
 
-The sidebar is generated from `/src/sidebars/sidebars.json`.
+The sidebar is generated from each of the files in `/src/sidebars`.
 
 #### Redirects
 
-Redirects are managed in `netlify.toml` which is located in the root folder.
+Redirects are managed in `vercel.json` which is located in the root folder.
 
-To declare a new redirect, open `netlify.toml` and add an entry with the `[[redirects]]` heading:
-
-```
-[[redirects]]
-    from = "/docs/integrations/android-integration"
-    to = "/docs/libraries/android"
-```
-
-The default HTTP status code is 301, but if you need to define a different status code, it can be changed like this:
+To declare a new redirect, open `vercel.json` and add an entry to the `redirects` list:
 
 ```
-[[redirects]]
-    from = "/docs/integrations/android-integration"
-    to = "/docs/libraries/android"
-    status = 302
+{ "source": "/docs/contributing/stack", "destination": "/docs/contribute/stack" }
 ```
 
->  If you ever need to rename a file to get a different slug, a redirect is automatically created with the Safe Redirects action
+The default HTTP status code is 308 (permanent), but if the redirect should be temporary (307), it can be updated like this:
+
+```
+{ "source": "/docs/contributing/stack", "destination": "/docs/contribute/stack", "permanent": false }
+```
 
 ## Committing changes
 
@@ -500,7 +503,7 @@ If you know who you would like to review the pull request, select them in the **
 
 ## Preview branch
 
-After a series of checks are run (to ensure nothing in your pull request breaks the website), Netlify will generate a preview link available on the `netlify/posthog/deploy-preview` line. This includes all of your changes so you can preview before your pull request is merged.
+After a series of checks are run (to ensure nothing in your pull request breaks the website), Vercel will generate a preview link available in the Vercel bot comment. This includes all of your changes so you can preview before your pull request is merged.
 
 ![Preview branch](../../../images/docs/contribute/preview-branch.png)
 
@@ -512,4 +515,4 @@ To get changes into production, the website deploys automatically from `master`.
 
 #### Acknowledgements
 
-This website is based on [Gatsby](https://gatsbyjs.org) and is hosted with [Netlify](https://www.netlify.com/).
+This website is based on [Gatsby](https://gatsbyjs.org) and is hosted with [Vercel](https://vercel.com).

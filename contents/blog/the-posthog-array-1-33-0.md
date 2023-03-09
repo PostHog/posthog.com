@@ -5,10 +5,16 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ['Release notes', 'Product updates']
 featuredImage: ../images/blog/posthog-array-blog.png
 featuredImageType: full
-excerpt: Introducing a full multivariate Experimentation suite, granular permissions on dashboards, Altinity Cloud support for ClickHouse, configuring your instance from the PostHog UI and 290+ improvements/fixes.
+excerpt: >-
+  Introducing a full multivariate Experimentation suite, granular permissions on
+  dashboards, Altinity Cloud support for ClickHouse, configuring your instance
+  from the PostHog UI and 290+ improvements/fixes.
+category: PostHog news
+tags:
+  - Product updates
+  - Release notes
 ---
 
 PostHog 1.33.0 introduces a full Experimentation suite, enabling you to run multivariate experiments to ensure you maximize value for your end users. Introducing also support for a managed ClickHouse infrastructure through Altinity Cloud, insight legends and insight permalinks. Plus, there are over 290+ improvements and bugfixes included!
@@ -95,11 +101,10 @@ We're making it much more straightforward to manage your PostHog instance, with 
 
 -   Please make sure to run all [async migrations](/docs/runbook/async-migrations) after upgrading to this version (1.33.0) and before upgrading to the next version (1.34.0, March 2022).
 
-### Talk to us about how we can improve
+## Share your feedback
+We'd love to hear anything you have to say about PostHog, good or bad. As a thank you, we'll share some awesome [PostHog merch](https://merch.posthog.com).
 
-We’re always working on improving the product experience and would love to talk to you! Please join one of our Product, Engineering, or Marketing team members on a quick 30-min call to help us understand how to improve. Schedule directly [on Calendly](https://calendly.com/posthog-feedback).
-
-As a small thank you for your time, we're giving away awesome [PostHog merch](https://merch.posthog.com)!
+Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog.com) with one of our teams to help us make PostHog even better!
 
 ## PostHog News
 
@@ -107,9 +112,11 @@ Welcome Grace McKenzie! Grace joined PostHog as an Ops Manager to help keep the 
 
 > I once lead a self-researched and organized pub crawl for 30 strangers in Prague after having only been in the city for 6 hours!
 
-## Community
+## Share your feedback
+We'd love to hear anything you have to say about PostHog, good or bad. As a thank you, we'll share some awesome [PostHog merch](https://merch.posthog.com).
 
-Want to help improve PostHog? We always welcome contributions from our community! Check out our [contributing resources](/docs/contribute) to get started.
+Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog.com) with one of our teams to help us make PostHog even better!
+
 
 ### Community shoutouts
 

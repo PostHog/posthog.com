@@ -6,14 +6,15 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/hacktoberfest/hacktoberfest.png
-categories: ["Engineering", "Open Source"]
+category: Engineering
+tags:
+  - Open source
 ---
 ### Let the pull requests come in!
 
 We're happy to announce that PostHog has joined [Hacktoberfest 2020](https://hacktoberfest.digitalocean.com/).
 
-For those who don't know, Hacktoberfest is an initiative led by DigitalOcean to promote open source projects and foster the overall open 
-source community. 
+For those who don't know, Hacktoberfest is an initiative led by DigitalOcean to promote open source projects and foster the overall open source community. 
 
 It encourages developers to contribute to public repositories on GitHub via pull requests by offering to ship a t-shirt to developers who have successfully submitted 4 valid PRs in the month of October ([Official Rules](https://hacktoberfest.digitalocean.com/#rules)).
 

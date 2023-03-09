@@ -8,7 +8,9 @@ import React, { useRef, useState } from 'react'
 import Confetti from 'react-confetti'
 import GitHubButton from 'react-github-btn'
 import { NewsletterForm } from 'components/NewsletterForm'
-import NotProductIcons from 'components/NotProductIcons'
+import { Close } from 'components/NotProductIcons'
+import usePostHog from '../../hooks/usePostHog'
+import { RenderInClient } from 'components/RenderInClient'
 const allowedFileTypes = ['application/pdf']
 
 interface IResumeComponentProps {
@@ -19,11 +21,30 @@ interface IResumeComponentProps {
 }
 
 const components = {
+    valueselect: ({ title, required, path, options }) => (
+        <select
+            name={title}
+            data-path={path}
+            required={required}
+            className="flex-grow w-full block !bg-white dark:!bg-white/10 box-border px-3 py-2 rounded-sm focus:shadow-xl border border-black/20 text-[17px] font-medium dark:bg-white box-border/10 dark:text-white"
+        >
+            <option disabled selected value="">
+                Select an option
+            </option>
+            {options.map(({ label, value }) => {
+                return (
+                    <option key={value} value={value}>
+                        {label}
+                    </option>
+                )
+            })}
+        </select>
+    ),
     string: ({ title, required, path, placeholder }: IResumeComponentProps) => (
         <input
             data-path={path}
             required={required}
-            className="w-full block !bg-white dark:!bg-white/10 box-border px-3 py-2 rounded-sm focus:shadow-xl border border-black/20 text-[17px] font-medium dark:bg-white box-border/10 dark:text-white"
+            className="flex-grow w-full block !bg-white dark:!bg-white/10 box-border px-3 py-2 rounded-sm focus:shadow-xl border border-black/20 text-[17px] font-medium dark:bg-white box-border/10 dark:text-white"
             placeholder={placeholder || title}
             name={title}
         />
@@ -32,7 +53,7 @@ const components = {
         <input
             data-path={path}
             required={required}
-            className="w-full block !bg-white dark:!bg-white/10 box-border px-3 py-2 rounded-sm focus:shadow-xl border border-black/20 text-[17px] font-medium dark:bg-white box-border/10 dark:text-white"
+            className="flex-grow w-full block !bg-white dark:!bg-white/10 box-border px-3 py-2 rounded-sm focus:shadow-xl border border-black/20 text-[17px] font-medium dark:bg-white box-border/10 dark:text-white"
             type="email"
             placeholder={placeholder || title}
             name={title}
@@ -135,11 +156,12 @@ const Form = ({ setSubmitted, info, id }) => {
                         return fields.map(({ field, isRequired, descriptionPlain }) => {
                             const required = isRequired
                             const type = field?.type?.toLowerCase()
+
                             return (
                                 <div
                                     className={
-                                        type === 'string' || type === 'email'
-                                            ? 'sm:col-span-1 col-span-2'
+                                        type === 'string' || type === 'email' || type === 'valueselect'
+                                            ? 'sm:col-span-1 col-span-2 flex flex-col'
                                             : 'col-span-2'
                                     }
                                     key={field?.path}
@@ -156,6 +178,7 @@ const Form = ({ setSubmitted, info, id }) => {
                                             required,
                                             path: field?.path,
                                             placeholder: descriptionPlain,
+                                            options: field?.selectableValues,
                                         })}
                                 </div>
                             )
@@ -172,6 +195,7 @@ const Form = ({ setSubmitted, info, id }) => {
 const code = 'X7DABDB33723'
 
 export default function Apply({ id, info }) {
+    const posthog = usePostHog()
     const [submitted, setSubmitted] = useState(false)
     const [copyTooltip, setCopyTooltip] = useState(false)
     const [copied, setCopied] = useState(false)
@@ -204,7 +228,7 @@ export default function Apply({ id, info }) {
                             className="absolute right-4 top-4 bg-tan rounded-full w-8 h-8 text-black flex items-center justify-center group active:scale-[.90] focus:ring-0"
                         >
                             <span className="inline-block w-4 h-4 opacity-30 group-hover:opacity-50">
-                                {NotProductIcons.close}
+                                <Close />
                             </span>
                         </button>
                         <div className="px-8 text-center">
@@ -329,15 +353,33 @@ export default function Apply({ id, info }) {
                                 <div>
                                     <h5 className="text-base mb-0">Try PostHog Cloud</h5>
                                     <p className="text-sm opacity-60 mb-2">Easiest, fastest, cheapest</p>
-
-                                    <TrackedCTA
-                                        className="mt-auto"
-                                        href="https://app.posthog.com/signup"
-                                        size="sm"
-                                        event={{ name: `clicked Continue`, type: 'cloud' }}
-                                    >
-                                        Get started - free
-                                    </TrackedCTA>
+                                    <RenderInClient
+                                        placeholder={
+                                            <TrackedCTA
+                                                className="mt-auto"
+                                                to={`https://app.posthog.com/signup`}
+                                                size="sm"
+                                                event={{ name: `clicked Continue`, type: 'cloud' }}
+                                            >
+                                                Get started - free
+                                            </TrackedCTA>
+                                        }
+                                        render={() => (
+                                            <TrackedCTA
+                                                className="mt-auto"
+                                                to={`https://${
+                                                    posthog?.isFeatureEnabled &&
+                                                    posthog?.isFeatureEnabled('direct-to-eu-cloud')
+                                                        ? 'eu'
+                                                        : 'app'
+                                                }.posthog.com/signup`}
+                                                size="sm"
+                                                event={{ name: `clicked Continue`, type: 'cloud' }}
+                                            >
+                                                Get started - free
+                                            </TrackedCTA>
+                                        )}
+                                    />
                                 </div>
                                 <div>
                                     <h5 className="text-base mb-0">Self-hosted</h5>

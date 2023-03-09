@@ -5,9 +5,9 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Inside PostHog"]
 featuredImage: ../images/blog/migrating-hog.png
 featuredImageType: full
+category: Inside PostHog
 ---
 
 One of PostHog’s values is that everybody codes. That doesn’t mean everyone needs to be a developer, but we do encourage everyone to practice the basics of shipping, no matter their role. Even site updates require GitHub and some basic knowledge of coding, for example. 

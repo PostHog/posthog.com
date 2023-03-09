@@ -3,7 +3,7 @@ title: Unduplicator
 github: https://github.com/paolodamico/posthog-app-unduplicates
 installUrl: https://app.posthog.com/project/apps?name=Unduplicates
 thumbnail: ../../apps/thumbnails/unduplicator.png
-topics:
+tags:
     - unduplicator
 ---
 

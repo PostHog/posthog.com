@@ -1,5 +1,4 @@
 import { kea, key, actions, reducers, listeners, connect, events } from 'kea'
-import { posthogAnalyticsLogic } from './posthogAnalyticsLogic'
 
 export const scrollspyCaptureLogic = kea([
     key((props) => props.key as string),
@@ -8,10 +7,6 @@ export const scrollspyCaptureLogic = kea([
         reportScrollUpdated: (elementId) => ({ elementId }),
         setLastUpdatedAt: (lastUpdatedAt) => ({ lastUpdatedAt }),
         setLastElementViewed: (elementId) => ({ elementId }),
-    }),
-
-    connect({
-        values: [posthogAnalyticsLogic, ['posthog']],
     }),
 
     reducers(() => ({
@@ -37,10 +32,11 @@ export const scrollspyCaptureLogic = kea([
             const secondsElapsed = (now - lastUpdatedAt) / 1000
             if (values.lastElementViewed) {
                 // Send an event upon completion of viewing the last element.
-                values.posthog?.capture('section heading viewed', {
-                    element_id: elementId,
-                    seconds_elapsed: secondsElapsed,
-                })
+                typeof window !== 'undefined' &&
+                    window.posthog?.capture('section heading viewed', {
+                        element_id: elementId,
+                        seconds_elapsed: secondsElapsed,
+                    })
             }
             actions.setLastUpdatedAt(now)
             actions.setLastElementViewed(elementId)

@@ -1,20 +1,9 @@
 const fs = require('fs')
+const path = require('path')
 
 const baseDir = './src/components'
-const componentsToIgnore = new Set([
-    'Layout',
-    'SidebarContents',
-    'Header',
-    'Menu',
-    'UserLogosCarousel',
-    'Section',
-    'Hero',
-    'FeatureSnapshot',
-    'Team',
-    'TestimonialsTable',
-    'TeamRoadmap',
-    'TeamMembers',
-])
+const mdxIgnore = fs.readFileSync(path.join(baseDir, './.mdxignore'), 'utf8')
+const componentsToIgnore = new Set(mdxIgnore.split('\n'))
 
 const getComponentsInDir = (dir, components = []) => {
     const dirContents = fs.readdirSync(dir)

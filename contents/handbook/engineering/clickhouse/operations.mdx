@@ -5,6 +5,24 @@ title: Operations
 This document gives an overview of the kitchen side of ClickHouse: how various operations work,
 what tricky migrations we have experience with as well as various settings and tips.
 
+## System tables
+
+ClickHouse exposes a **lot** of information about its internals in [`system` tables](https://clickhouse.com/docs/en/operations/system-tables/).
+
+Some stand-out tables:
+- [`system.query_log`](https://clickhouse.com/docs/en/operations/system-tables/query_log) and [`system.processes`](https://clickhouse.com/docs/en/operations/system-tables/processes) contain information on queries executed on the server
+- [`system.tables`](https://clickhouse.com/docs/en/operations/system-tables/tables/) and [`system.columns`](https://clickhouse.com/docs/en/operations/system-tables/columns) 
+  contain metadata about tables and columns
+- [`system.merges`](https://clickhouse.com/docs/en/operations/system-tables/merges) and [`system.mutations`](https://clickhouse.com/docs/en/operations/system-tables/mutations)
+  contain information about ongoing operations
+- [`system.replicated_fetches`](https://clickhouse.com/docs/en/operations/system-tables/replicated_fetches) and 
+  [`system.replication_queue`](https://clickhouse.com/docs/en/operations/system-tables/replication_queue) contain information about data replication
+- [`system.errors`](https://clickhouse.com/docs/en/operations/system-tables/errors) and [`system.crash_log`](https://clickhouse.com/docs/en/operations/system-tables/crash-log)
+  contain information about errors and crashes respectively
+- [`system.distributed_ddl_queue`](https://clickhouse.com/docs/en/operations/system-tables/distributed_ddl_queue) shows information to help diagnose progress of `ON CLUSTER` commands
+
+For examples of usage and tips, check out [this ClickHouse blog article](https://clickhouse.com/blog/clickhouse-debugging-issues-with-system-tables)
+
 ## Settings
 
 ClickHouse provides daunting amounts of configuration on all levels. This section provides
@@ -148,7 +166,7 @@ The difference often comes down to [how data is stored on disk](/handbook/engine
 
 At PostHog, we've developed Async Migrations for executing these long-running operations in the background without affecting availability.
 
-You can learn more about Async Migrations in our [blog](/blog/async-migrations), [handbook](/handbook/engineering/databases/async-migrations) and
+You can learn more about Async Migrations in our [blog](/blog/async-migrations), [handbook](/handbook/engineering/databases/async-migrations), and
 [runbook](/docs/runbook/async-migrations).
 
 ### Pausing ingestion
@@ -160,6 +178,8 @@ If you're using [Kafka engine tables for ingestion](/handbook/engineering/clickh
 ingestion by dropping materialized view(s) attached to Kafka engine tables.
 
 To restart ingestion, recreate the dropped table(s).
+
+> Note that you can also detach the materialized views instead of dropping them (`DETACH TABLE my_mv`), but be aware that detached views have some weird behaviors, such as being re-attached on node restarts, "existing in a limbo" (they do not show up on `system.tables` and cannot be dropped but `SHOW CREATE TABLE my_mv` will return results), as well as potentially causing naming clashes. 
 
 ### Changing table engines
 
@@ -177,6 +197,8 @@ PostHog needed to implement this kind of operation to move to a sharded schema:
 ### Changing `ORDER BY` or `PARTITION BY`
 
 Changing `ORDER BY` and `PARTITION BY` affects how data is stored on disk and requires rewriting this data.
+
+> In the case of `ORDER BY`, you can modify it with `ALTER TABLE my_table MODIFY ORDER BY`, but only to add a new column expression. Other changes require using the approaches below.
 
 Suggested procedure if using `ReplacingMergeTree`:
 1. Create a new table with correct `ORDER BY`

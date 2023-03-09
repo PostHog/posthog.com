@@ -5,9 +5,12 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Release notes", "Product updates"]
 featuredImage: ../images/blog/array/default.png
 featuredImageType: standard
+category: PostHog news
+tags:
+  - Product updates
+  - Release notes
 ---
 
 Big new integration - PostHog now has a library for iOS!
@@ -61,6 +64,12 @@ We are very keen to see enhancements that are not part of our parity project, pl
 ### [Removing drf-yasg in favor of new docs website](https://github.com/PostHog/posthog/pull/596)
 
 Thank you to [SanketDG](https://github.com/sanketdg) for another pr that has helped ensure we fixed an [issue](https://github.com/PostHog/posthog/issues/574) raised by another user [maximmarakov](https://github.com/maximmarakov), it’s great to see the community fix ad hoc issues especially ones that might not directly be related to new features but ensuring our docs and instructions are up to date for other users.
+
+## Share your feedback
+We'd love to hear anything you have to say about PostHog, good or bad. As a thank you, we'll share some awesome [PostHog merch](https://merch.posthog.com).
+
+Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog.com) with one of our teams to help us make PostHog even better!
+
 
 ## Repo round up
 

@@ -12,11 +12,11 @@ hideLastUpdated: true
 
 ### App
 
-taleno.digital is your analytics engineer-as-a-service, so you don't need to hire an FTE. 
+A data consultancy service for data warehousing and product analytics built on the modern data stack.
 
 ### Support
 
-- Setup PostHog Cloud & Deployment
+- Setup PostHog Cloud
 - Handle issues / inconsistencies encountered with PostHog Cloud
 - Creation of actions, insights & dashboards
 

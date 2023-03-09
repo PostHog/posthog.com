@@ -5,9 +5,12 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Release notes", "Product updates"]
 featuredImage: ../images/blog/array/default.png
 featuredImageType: standard
+category: PostHog news
+tags:
+  - Product updates
+  - Release notes
 ---
 
 Major update time (hence the change to 1.*1*.0) - push-based integrations have been introduced!
@@ -134,6 +137,12 @@ We’re very excited to be growing the group and this is the first of what we ho
 * [Covid Safe Paths](https://github.com/tripleblindmarket/covid-safe-paths) (With a lot of focus on contact tracing by governments, we were intrigued by a project that also focuses on the privacy issues with large scale data collection)
 * [Delivery Slot Finder](https://github.com/ahertel/Amazon-Fresh-Whole-Foods-delivery-slot-finder) (We keep seeing repos appear that make it easier to stay at home and this was our favorite this week)
 * [EbookFoundation Free programming books](https://github.com/EbookFoundation/free-programming-books) (If you are looking for things to do at home other than contribute to open source Aaron has been looking at this) 
+
+## Share your feedback
+We'd love to hear anything you have to say about PostHog, good or bad. As a thank you, we'll share some awesome [PostHog merch](https://merch.posthog.com).
+
+Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog.com) with one of our teams to help us make PostHog even better!
+
 
 ## PostHog news
 

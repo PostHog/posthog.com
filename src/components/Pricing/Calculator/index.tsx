@@ -1,4 +1,3 @@
-import { TrackedCTA } from 'components/CallToAction'
 import { useActions, useValues } from 'kea'
 import React, { useEffect, useState } from 'react'
 import {
@@ -10,13 +9,12 @@ import {
     pricingLabels,
 } from '../constants'
 import { PricingSlider } from '../PricingSlider'
-import { prettyInt, sliderCurve } from '../PricingSlider/LogSlider'
 import { pricingSliderLogic } from '../PricingSlider/pricingSliderLogic'
 import { motion } from 'framer-motion'
 import Link from 'components/Link'
 import Toggle from 'components/Toggle'
 import { Info } from 'components/Icons/Icons'
-import { posthogAnalyticsLogic } from '../../../logic/posthogAnalyticsLogic'
+import usePostHog from '../../../hooks/usePostHog'
 
 interface IPricingOptions {
     minimumPrice: number
@@ -173,7 +171,7 @@ export default function Calculator({
     handleEnterpriseModeChange: (checked: boolean) => void
     setCurrentModal: (currentModal: string) => void
 }) {
-    const { posthog } = useValues(posthogAnalyticsLogic)
+    const posthog = usePostHog()
     const { finalMonthlyCost, sliderValue, pricingOption } = useValues(pricingSliderLogic)
     const [showSlider, setShowSlider] = useState(false)
     const [optionDetails, setOptionDetails] = useState<IPricingOptions | undefined>(cloudOptions)

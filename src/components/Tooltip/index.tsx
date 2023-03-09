@@ -1,20 +1,24 @@
 import { Placement } from '@popperjs/core'
 import React, { useState } from 'react'
 import { usePopper } from 'react-popper'
+import { createPortal } from 'react-dom'
 
 export default function Tooltip({
     children,
-    title,
-    offset,
+    content,
+    offset = [0, 10],
     className = '',
+    tooltipClassName = '',
     placement = 'bottom',
 }: {
     children: JSX.Element
-    title: string
+    content: string | React.ReactNode
     offset?: [number, number]
     className?: string
+    tooltipClassName?: string
     placement?: Placement
 }) {
+    const [open, setOpen] = useState(false)
     const [referenceElement, setReferenceElement] = useState(null)
     const [popperElement, setPopperElement] = useState(null)
     const { styles, attributes } = usePopper(referenceElement, popperElement, {
@@ -22,27 +26,32 @@ export default function Tooltip({
         modifiers: [
             {
                 name: 'offset',
-                options: {
-                    offset: offset ? offset : [0, 10],
-                },
             },
         ],
     })
 
     return (
-        <span className={`group ${className}`}>
+        <span onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)} className={className}>
             {React.cloneElement(children, {
                 ref: setReferenceElement,
             })}
-            <span
-                role="tooltip"
-                className="bg-primary dark:bg-gray-accent-light text-white dark:text-black rounded-md px-2 py-1 group-hover:visible invisible text-sm z-20"
-                ref={setPopperElement}
-                style={styles.popper}
-                {...attributes.popper}
-            >
-                {title}
-            </span>
+            {open &&
+                createPortal(
+                    <div
+                        className="z-[10000]"
+                        role="tooltip"
+                        ref={setPopperElement}
+                        style={{ ...styles.popper, paddingTop: offset[1], paddingBottom: offset[1] }}
+                        {...attributes.popper}
+                    >
+                        <div
+                            className={`bg-white dark:bg-[#484848] text-black dark:text-white rounded-md px-2 py-1 text-sm z-20 shadow-lg ${tooltipClassName}`}
+                        >
+                            {content}
+                        </div>
+                    </div>,
+                    document.body
+                )}
         </span>
     )
 }

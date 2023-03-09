@@ -3,9 +3,11 @@ title: Event Replicator
 github: https://github.com/posthog/posthog-plugin-replicator
 installUrl: https://app.posthog.com/project/apps?name=Replicator
 thumbnail: ../../apps/thumbnails/replicator.png
-topics:
+tags:
     - replicator
 ---
+
+import MigratingEvents from "../migrate/snippets/migrating-events.mdx"
 
 ### What does the Replicator app do?
 
@@ -21,7 +23,9 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 Both versions of PostHog should ideally be running the same version.
 
-### How do I install the PostHog Replicator app?
+### How do I use the Replicator app?
+
+<MigratingEvents/>
 
 1. Log in to your PostHog instance
 2. Click 'Apps' on the left-hand tool bar

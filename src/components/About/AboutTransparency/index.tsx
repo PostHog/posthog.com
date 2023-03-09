@@ -2,10 +2,10 @@ import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 import CallToAction from 'components/MainNav/Submenus/CallToAction'
 import { Link } from 'gatsby'
-import NotProductIcons from 'components/NotProductIcons'
+import { BusinessModel, Compensation, Strategy } from 'components/NotProductIcons'
 
 interface PopularPageProps {
-    icon: string
+    icon: JSX.Element
     label: string
     url: string
 }
@@ -80,22 +80,19 @@ export const AboutTransparency = () => {
                 <div className="flex-1 mdlg:pb-16">
                     <h3 className="text-4xl mb-2">Why we're different</h3>
                     <h4 className="font-semibold text-white/70 leading-tight">
-                        Being open source, we operate in public as much as we can – including our <Link to="/roadmap">product roadmap</Link>.
+                        Being open source, we operate in public as much as we can – including our{' '}
+                        <Link to="/roadmap">product roadmap</Link>.
                     </h4>
                     <p className="opacity-70">Here are some popular pages from our company handbook:</p>
                     <ul className="p-0 m-0 mb-2 gap-x-1 grid grid-cols-3">
                         <PopularPage
-                            icon={NotProductIcons.compensation}
+                            icon={<Compensation />}
                             label="Compensation calculator"
                             url="/handbook/people/compensation"
                         />
+                        <PopularPage icon={<Strategy />} label="Company strategy" url="/handbook/strategy/overview" />
                         <PopularPage
-                            icon={NotProductIcons.strategy}
-                            label="Company strategy"
-                            url="/handbook/strategy/overview"
-                        />
-                        <PopularPage
-                            icon={NotProductIcons.businessModel}
+                            icon={<BusinessModel />}
                             label="Business model"
                             url="/handbook/strategy/business-model"
                         />

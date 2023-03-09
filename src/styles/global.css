@@ -72,7 +72,7 @@ h1 {
 }
 
 h2 {
-    @apply text-3xl font-bold leading-normal;
+    @apply text-3xl font-bold leading-tight;
     letter-spacing: -0.03em;
 
     code {
@@ -81,7 +81,7 @@ h2 {
 }
 
 h3 {
-    @apply text-2xl leading-normal;
+    @apply text-2xl leading-tight;
 
     code {
         @apply !font-bold !text-2xl;
@@ -103,7 +103,7 @@ h4 {
     h4,
     h5,
     h6 {
-        @apply mt-8;
+        @apply mt-4;
         letter-spacing: -0.015em;
 
         a:not(.cta) {
@@ -131,6 +131,15 @@ h4 {
 
     li {
         @apply mb-0.5;
+    }
+
+    .caption + * {
+        @apply mt-6;
+    }
+
+    .caption + div,
+    .caption + h2 {
+        @apply mt-4;
     }
 
     code {
@@ -239,6 +248,28 @@ h4 {
     }
 }
 
+#recent-questions {
+    container-type: inline-size;
+}
+
+@container (min-width: 583px) and (max-width: 650px) {
+    #recent-questions ul li .grid {
+        @apply block;
+
+        > div {
+            @apply mb-2;
+        }
+    }
+}
+
+/* scope to left nav */
+.z-20 {
+    /* make active nav item full strength */
+    .active span.opacity-50 {
+        @apply opacity-100;
+    }
+}
+
 /* animated underlined links */
 .article-content a:not(.cta) {
     background: linear-gradient(to right, rgba(191, 191, 188, 0), rgba(191, 191, 188, 0)),
@@ -305,12 +336,30 @@ div[class^='feature-'].text-center {
         position: absolute;
         top: 0;
         width: 18px;
-
-        @apply xl:hidden;
     }
 
     &:hover:before {
         opacity: 1;
+    }
+}
+
+/* When used in article on-page nav, only show on mobile viewports... */
+
+.article-content .jumpTo:before {
+    @apply xl:hidden;
+}
+
+/* ... but show on desktop in search results (and rotate) */
+
+.search-results {
+    .jumpTo {
+        &:before {
+            @apply -rotate-90 top-0.5;
+        }
+
+        &:hover:before {
+            @apply opacity-50;
+        }
     }
 }
 
@@ -527,34 +576,36 @@ ul {
     transform: translate3d(0, 0, 0);
 }
 
-.slick-track {
-    position: relative;
-    top: 0;
-    left: 0;
+.about-nav {
+    .slick-track {
+        position: relative;
+        top: 0;
+        left: 0;
 
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
 
-    > div:first-child {
-        @apply pl-4;
+        > div:first-child {
+            @apply pl-4;
+        }
+
+        > div:last-child {
+            @apply pr-4;
+        }
     }
+    .slick-track:before,
+    .slick-track:after {
+        display: table;
 
-    > div:last-child {
-        @apply pr-4;
+        content: '';
     }
-}
-.slick-track:before,
-.slick-track:after {
-    display: table;
-
-    content: '';
-}
-.slick-track:after {
-    clear: both;
-}
-.slick-loading .slick-track {
-    visibility: hidden;
+    .slick-track:after {
+        clear: both;
+    }
+    .slick-loading .slick-track {
+        visibility: hidden;
+    }
 }
 
 .slick-slide {
@@ -825,7 +876,7 @@ ul {
 }
 
 .heart-pulse {
-    animation: pulse 5s linear infinite;
+    animation: heart-pulse 5s linear infinite;
 }
 
 .heart-fade {
@@ -852,7 +903,7 @@ ul {
     }
 }
 
-@keyframes pulse {
+@keyframes heart-pulse {
     0% {
         transform: scale(1);
     }
@@ -1127,4 +1178,22 @@ iframe[src*='youtube-nocookie.com'] {
 
 .eu-cloud header {
     @apply bg-[#DFDFCD];
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.mobile-sidebar-container {
+    .dark\:border-gray-accent-dark {
+        @apply dark:border-gray-accent-light/20;
+    }
+    > div:last-of-type {
+        @apply border-b-0;
+    }
 }

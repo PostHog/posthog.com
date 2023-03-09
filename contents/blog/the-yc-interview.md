@@ -5,8 +5,11 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["james-hawkins"]
-categories: ["CEO diaries", "Inside PostHog"]
+author:
+  - james-hawkins
+category: CEO diaries
+tags:
+  - Y Combinator
 ---
 
 We submitted the application, then got back to work. We couldn't work out how long it'd take to hear back, but then we did.

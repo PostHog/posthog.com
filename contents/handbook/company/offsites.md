@@ -61,6 +61,12 @@ PostHog runs the Hedge House, in Cambridge, UK. It's a place designed for small 
 
 Anyone at PostHog is welcome to use it as much as they like. See the [full Hedge House docs](https://docs.google.com/document/d/1HS1LPT5fNzAus6TZr_KjZfbQkMfjaGlUYOEZe3fNn_c/edit).
 
+## Travel insurance
+
+Many of our company offsites involve team members traveling abroad, and although we hope that these trips are uneventful and safe for all, in the event of an accident or medical emergency, we carry travel insurance through as well as general & auto liability policies through our partner [Embroker](https://www.embroker.com). 
+
+In the event of an emergency, please cover any related expenses (ideally on your company card) and keep receipts, and then reach out to either Charles or Grace as soon as possible. We will assist with making a claim based on our [policy binders](https://drive.google.com/drive/folders/1nMoHL_W9sW5IqAsILGzQ8Tuz0RgDRXOj?usp=share_link).
+
 ## How to plan an offsite in 8 weeks - a checklist
 
 Below is a rough timeline for planning your next offsite, as well as links to templates and resources that you can repurpose and customize as needed. To use any of the templates, create a copy to your own drive and edit as you see fit.

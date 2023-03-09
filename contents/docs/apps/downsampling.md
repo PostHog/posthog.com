@@ -3,7 +3,7 @@ title: Downsampler
 github: https://github.com/PostHog/downsampling-plugin
 installUrl: https://app.posthog.com/project/apps?name=Downsampling
 thumbnail: ../../apps/thumbnails/downsampling.png
-topics:
+tags:
     - downsampler
 ---
 

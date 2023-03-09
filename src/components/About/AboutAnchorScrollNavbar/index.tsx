@@ -1,28 +1,28 @@
 import React from 'react'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
-import NotProductIcons from 'components/NotProductIcons'
+import { CoreTeam, Investors, Story, Transparency } from 'components/NotProductIcons'
 import AnchorScrollNavbar from 'components/AnchorScrollNavbar'
 
 const menu = [
     {
         name: 'Our story',
         url: 'our-story',
-        icon: NotProductIcons.story,
+        icon: <Story />,
     },
     {
         name: "Why we're different",
         url: 'transparency',
-        icon: NotProductIcons.transparency,
+        icon: <Transparency />,
     },
     {
         name: 'Core team',
         url: 'team',
-        icon: NotProductIcons.coreTeam,
+        icon: <CoreTeam />,
     },
     {
         name: 'Investors',
         url: 'investors',
-        icon: NotProductIcons.investors,
+        icon: <Investors />,
     },
 ]
 

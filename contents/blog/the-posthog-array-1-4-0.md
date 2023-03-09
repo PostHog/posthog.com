@@ -5,9 +5,12 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Release notes", "Product updates"]
 featuredImage: ../images/blog/array/default.png
 featuredImageType: standard
+category: PostHog news
+tags:
+  - Product updates
+  - Release notes
 ---
 
 Session times are here! They're a great way to help understand how engaged users are. The Array 1.4.0 brings plenty of improvements to our core functionality.
@@ -70,6 +73,12 @@ You can now restrict access to your instance by IP for extra security. [See docs
 Thanks to [Paolo](https://github.com/PaoloC68) for raising this issue. It’d be great to have the ability to compare certain timeframes against each other.
 
 Feel free to comment on the issue if you have any other ideas about this!
+
+## Share your feedback
+We'd love to hear anything you have to say about PostHog, good or bad. As a thank you, we'll share some awesome [PostHog merch](https://merch.posthog.com).
+
+Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog.com) with one of our teams to help us make PostHog even better!
+
 
 ## Weekly round up
 

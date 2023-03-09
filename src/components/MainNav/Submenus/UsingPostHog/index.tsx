@@ -3,7 +3,7 @@ import React from 'react'
 import RightCol from '../RightCol'
 import CallToAction from '../CallToAction'
 import { Wrapper } from '../Wrapper'
-import SearchBar from 'components/Docs/SearchBar'
+import SearchIconButton from 'components/Search/SearchIconButton'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 
@@ -14,11 +14,11 @@ interface ColMenuItems {
 }
 
 interface Tutorial {
-    title: string
     fields: {
         slug: string
     }
     frontmatter: {
+        title: string
         featuredImage: any
     }
 }
@@ -35,14 +35,14 @@ export default function UsingPosthog({ referenceElement }: { referenceElement: H
             url: '/customers',
         },
         {
-            title: 'Partner directory',
-            description: 'Companies and products who can help with PostHog',
-            url: '/partners',
-        },
-        {
             title: 'Apps',
             description: 'Browse 50ish apps that help you get more out of PostHog',
             url: '/apps',
+        },
+        {
+            title: 'Partner directory',
+            description: 'Companies and products who can help with PostHog',
+            url: '/partners',
         },
         {
             title: 'FAQ',
@@ -97,11 +97,7 @@ export default function UsingPosthog({ referenceElement }: { referenceElement: H
                         <div className="md:p-6 md:mb-0 mb-4">
                             <div className="flex items-center w-full justify-between opacity-70">
                                 <h3 className="text-[18px] font-bold m-0 text-black pl-2">Product manual</h3>
-                                <SearchBar
-                                    label={false}
-                                    className="flex-grow-0 !p-0 w-auto dark:text-white"
-                                    base={'docs'}
-                                />
+                                <SearchIconButton location="using-ph-dropdown" initialFilter="manual" />
                             </div>
                             <ol className="m-0 list-none p-0 mt-2">
                                 {userGuides.map(({ title, description, url }: ColMenuItems, index) => {
@@ -133,20 +129,16 @@ export default function UsingPosthog({ referenceElement }: { referenceElement: H
                             <div className="opacity-70">
                                 <h3 className="text-[18px] font-bold m-0 text-black ">Latest tutorials</h3>
                             </div>
-                            <ul className="m-0 list-none p-0 mt-2 grid grid-cols-2 gap-4">
-                                {nodes.map(({ fields: { slug }, title, frontmatter: { featuredImage } }: Tutorial) => {
+                            <ul className="m-0 list-none p-0 mt-2 grid grid-cols-1 gap-y-2">
+                                {nodes.map(({ fields: { slug }, frontmatter: { title, featuredImage } }: Tutorial) => {
                                     const image = featuredImage && getImage(featuredImage)
                                     return (
                                         <li key={slug}>
                                             <Link
-                                                className="inline-block relative active:top-[1px] active:scale-[.99]"
+                                                className="inline-block text-sm leading-tight m-0 text-red font-semibold"
                                                 to={slug}
                                             >
-                                                <GatsbyImage
-                                                    className="rounded bg-tan dark:bg-[#444] pointer-events-none"
-                                                    image={image}
-                                                    alt={title}
-                                                />
+                                                {title}
                                             </Link>
                                         </li>
                                     )
@@ -186,7 +178,7 @@ const query = graphql`
     {
         tutorials: allMdx(
             filter: { fields: { slug: { regex: "/^/tutorials/" } } }
-            limit: 2
+            limit: 3
             sort: { fields: frontmatter___date, order: DESC }
         ) {
             nodes {
@@ -194,6 +186,7 @@ const query = graphql`
                     slug
                 }
                 frontmatter {
+                    title
                     featuredImage {
                         childImageSharp {
                             gatsbyImageData(placeholder: NONE)

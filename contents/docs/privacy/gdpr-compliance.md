@@ -61,7 +61,7 @@ If you have a data breach, you have 72 hours to tell the data subjects or face p
 
 If you are self-hosting PostHog on a server outside the EU and are collecting EU user data, you should anonymize any of those users' personal data. 
 
-If you are using PostHog Cloud in any country, we also recommend you anonymize any EU user data, as PostHog Cloud is hosted in the US. 
+If you are using PostHog Cloud US, we also recommend you anonymize any EU user data. 
 
 The PostHog [Property Filter app](https://posthog.com/apps/property-filter) allows you to anonymize user data to ensure you stay compliant with GDPR in both cases. 
 
@@ -80,13 +80,13 @@ If you are self-hosting PostHog then you are both the Data Processor and the Dat
 
 ### Step 1: Choose a hosting provider
 
-We recommend using PostHog Cloud EU for GDPR compliance, though you can use PostHog Cloud (US) if you follow additional steps to protect user data. If self-hosting, the steps will depend on where you're hosting your data. 
+We recommend using PostHog Cloud EU for GDPR compliance, though you can use PostHog Cloud US if you follow additional steps to protect user data. If self-hosting, the steps will depend on where you're hosting your data. 
 
 ### Step 2: Deploy PostHog
 
 If using PostHog Cloud EU, simply follow the steps in the onboarding process to start sending events. Read our [integration documentation](/docs/integrate) for more information on sending events to PostHog. 
 
-Deploying PostHog onto your own infrastructure is straightforward and we provide support to help with any issues you encounter. You can follow our [standard deployment guides](https://posthog.com/docs/self-host) to get started, or [arrange a demo](https://posthog.com/book-a-demo) to see it in action first.
+Deploying PostHog onto your own infrastructure is straightforward and we provide support to help with any issues you encounter. You can follow our [standard deployment guides](https://posthog.com/docs/self-host) to get started.
 
 ### Step 3: Security configuration
 
@@ -119,7 +119,7 @@ If a user **opts out** then you must stop data capturing and processing. Here ar
 
 ### Step 5: Enable the Property Filter app (optional)
 
-If you are self-hosting PostHog outside the EU, or are using PostHog Cloud, and are capturing EU users' data, you should enable the [Property Filter app](https://posthog.com/apps/property-filter). This will allow you to anonymize user data. 
+If you are self-hosting PostHog outside the EU, or are using PostHog Cloud US, and are capturing EU users' data, you should enable the [Property Filter app](https://posthog.com/apps/property-filter). This will allow you to anonymize user data. 
 
 ## Complying with 'right to be forgotten' requests
 

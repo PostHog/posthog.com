@@ -5,10 +5,16 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Release notes", "Product updates"]
 featuredImage: ../images/blog/array/1-28-0.png
 featuredImageType: full
-excerpt: Fully revamped Paths experience enables you to better explore what actions your users take. New features include multivariate feature flags, private projects and DAU/WAU/MAU graphs.
+excerpt: >-
+  Fully revamped Paths experience enables you to better explore what actions
+  your users take. New features include multivariate feature flags, private
+  projects and DAU/WAU/MAU graphs.
+category: PostHog news
+tags:
+  - Product updates
+  - Release notes
 ---
 
 
@@ -100,11 +106,11 @@ If you're interested in better measuring your user engagement, DAU/WAU, WAU/MAU 
 
 In a future PostHog version the deprecated paths will be removed. At the same time we will also have to remove the special `project_id` value `@current` (representing the currently selected project).
 
-### Help us improve PostHog
+## Share your feedback
+We'd love to hear anything you have to say about PostHog, good or bad. As a thank you, we'll share some awesome [PostHog merch](https://merch.posthog.com).
 
-We’re working hard to improve the PostHog experience and would love to talk to you! Please join one of our Product, Engineering, or Marketing team members on a quick 30-min call to help us understand how to improve. Schedule directly [on Calendly](https://calendly.com/posthog-feedback).
+Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog.com) with one of our teams to help us make PostHog even better!
 
-As a small thank you for your time, we're giving away awesome [PostHog merch](https://merch.posthog.com)!
 
 ## PostHog News
 

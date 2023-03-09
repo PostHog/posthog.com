@@ -1,13 +1,8 @@
-import { Check } from 'components/Icons/Icons'
 import Modal from 'components/Modal'
 import React from 'react'
-import { TrackedCTA } from 'components/CallToAction/index.js' // TEMP
-import { Browser, Cloud, Lightning, Prohibited, ServerLocked, WebCode } from 'components/Icons/Icons'
+import { TrackedCTA } from 'components/CallToAction' // TEMP
 import { Plan } from 'components/Pricing/PricingTable/Plan'
-import { SEO } from 'components/seo'
 import Intro from 'components/SignUp/Intro'
-import Layout from 'components/SignUp/Layout'
-import Link from 'components/Link'
 import { CloudIcon, SelfHostIcon } from 'components/Pricing/Calculator'
 import { Access, Automatic, Bypass, EasyDeploy, Feature, Scales, Tracking } from '../../../pages/signup'
 

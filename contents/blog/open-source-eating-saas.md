@@ -5,7 +5,9 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Open source"]
+category: General
+tags:
+  - Open source
 ---
 
 Software-as-a-Service (SaaS) fatigue is real.

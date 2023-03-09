@@ -1,16 +1,24 @@
 import CallToAction from '../CallToAction'
 import Link from 'components/Link'
 import React from 'react'
-import SearchBar from 'components/Docs/SearchBar'
 import { Wrapper } from '../Wrapper'
-import ProductIcons from 'components/ProductIcons'
+import {
+    AbTesting,
+    API,
+    AppLibrary,
+    CorrelationAnalysis,
+    DataWarehouse,
+    EventPipelines,
+    FeatureFlags,
+    Funnels,
+    Heatmaps,
+    SelfHosting,
+    SessionRecording,
+} from 'components/ProductIcons'
 import { graphql, useStaticQuery } from 'gatsby'
-import LogoVendasta from './vendasta.svg'
-import LogoHasura from './hasura.svg'
-import LogoPhantom from './phantom.svg'
 import { Link as ScrollLink } from 'react-scroll'
 import { useLocation } from '@reach/router'
-import { Hasura, Phantom, Vendasta } from './Icons'
+import { Hasura, Phantom, Ycombinator } from './Icons'
 
 interface Features {
     title: string
@@ -29,32 +37,32 @@ const leftColMenuItems: LeftColMenuItems[] = [
         features: [
             {
                 title: 'Product analytics',
-                icon: ProductIcons.funnels,
+                icon: <Funnels />,
                 url: '/product#product-analytics',
             },
             {
                 title: 'Session recording',
-                icon: ProductIcons.sessionRecording,
+                icon: <SessionRecording />,
                 url: '/product/session-recording',
             },
             {
                 title: 'Heatmaps',
-                icon: ProductIcons.heatmaps,
+                icon: <Heatmaps />,
                 url: '/product/heatmaps',
             },
             {
                 title: 'Feature flags',
-                icon: ProductIcons.featureFlags,
+                icon: <FeatureFlags />,
                 url: '/product/feature-flags',
             },
             {
                 title: 'A/B testing',
-                icon: ProductIcons.abTesting,
+                icon: <AbTesting />,
                 url: '/product/experimentation-suite',
             },
             {
                 title: 'Correlation analysis',
-                icon: ProductIcons.correlationAnalysis,
+                icon: <CorrelationAnalysis />,
                 url: '/product/correlation-analysis',
             },
         ],
@@ -64,27 +72,27 @@ const leftColMenuItems: LeftColMenuItems[] = [
         features: [
             {
                 title: 'Event pipelines',
-                icon: ProductIcons.eventPipelines,
+                icon: <EventPipelines />,
                 url: '/product#event-pipelines',
             },
             {
                 title: 'Data warehouse',
-                icon: ProductIcons.dataWarehouse,
+                icon: <DataWarehouse />,
                 url: '/product#data-warehouse',
             },
             {
                 title: 'App library',
-                icon: ProductIcons.appLibrary,
+                icon: <AppLibrary />,
                 url: '/product#apps',
             },
             {
-                title: 'Self-hosting',
-                icon: ProductIcons.selfHosting,
-                url: '/product#self-hosting',
+                title: 'Open source',
+                icon: <SelfHosting />,
+                url: '/product#open-source',
             },
             {
                 title: 'API',
-                icon: ProductIcons.api,
+                icon: <API />,
                 url: '/product#api',
             },
         ],
@@ -148,11 +156,11 @@ export default function Product({ referenceElement }: { referenceElement: HTMLDi
                     <ol className="m-0 list-none p-0 max-w-[250px] mt-2">
                         <Link
                             className="rounded-sm py-2 mb-1 px-3 block hover:bg-tan hover:bg-opacity-50 relative active:top-[1px] active:scale-[.99]"
-                            to="/customers/vendasta"
+                            to="/customers/ycombinator"
                         >
-                            <Vendasta className={iconClasses} />
+                            <Ycombinator className={iconClasses} />
                             <p className="text-sm opacity-50 m-0 text-black font-medium dark:text-white mt-1 leading-tight">
-                                How Vendesta replaced Snowplow and cut onboarding drop-off by 50%
+                                Used PostHog experiments to boost engagement by 40%
                             </p>
                         </Link>
                         <Link
@@ -161,7 +169,7 @@ export default function Product({ referenceElement }: { referenceElement: HTMLDi
                         >
                             <Hasura className={iconClasses} />
                             <p className="text-sm opacity-50 m-0 text-black font-medium dark:text-white mt-1 leading-tight">
-                                How Hasura improved conversion rates by 10-20% with PostHog
+                                Used PostHog insights to increase conversion rates by 20%
                             </p>
                         </Link>
                         <Link
@@ -170,7 +178,7 @@ export default function Product({ referenceElement }: { referenceElement: HTMLDi
                         >
                             <Phantom className={iconClasses} />
                             <p className="text-sm opacity-50 m-0 text-black font-medium dark:text-white mt-1 leading-tight">
-                                How Phantom enhanced its product and cut failure rates by 90%
+                                Used PostHog feature flags to cut failure rates by 90%
                             </p>
                         </Link>
                     </ol>

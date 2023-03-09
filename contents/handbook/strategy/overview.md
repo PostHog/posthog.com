@@ -4,103 +4,67 @@ sidebar: Handbook
 showTitle: true
 ---
 
-## TL;DR
-Our mission is to increase the number of successful products in the world.
-
-## Context
-
-We started by building an open-source product operating system with many of the things you'd need to build a better product - product analytics, session recording, feature flags, experimentation, and a customer data platform to import/export and transform data. Within a year, we had thousands of customers using us and we started generating revenue.
-
-We focused on our paid product in the Summer, 2021. We quickly hit a milestone for the first 5 reference customers. In 2022, we have figured out how to accelerate our top of funnel growth, and we realized we should focus on nailing Self Serve Mid-market ($20-70K ARR deals), whilst deepening the core product.
-
-Today, we're optimizing conversion to paid revenue, and carefully expanding the platform again, into adjacent use cases that will meet the needs for our _existing_ user profiles.
-
-We now add more companies each week than _any_ closed source SaaS rival, and we're the open source standard for all our applications.
-
-## General principles
-
-* For any company, nothing matters more than product market fit. If we get that right, it’ll be much easier for customer success, marketing or sales teams to succeed. As a result, we're 100% inbound. We invest in product, not cold-calling people that don't want to buy from us.
-
-* We are a _late mover_. All the products we build into the platform have product-market fit. This makes it faster to ship.
-
-* A wide strategy is winner takes all. The wider we get, the faster we grow, so the wider we can get. We are here to be ambitious.
-
-* Our company is engineering-led - a wide strategy demands it. We have small teams that operate like their own startups for this reason. We optimize for autonomy (thus, speed), not control.
-
-* Talent compounds. We hire a smaller number of stronger people that flourish with autonomy. See the point above.
-
-* We are open source - we work in the open to build trust and community. We haven't built our defining feature yet - the whole company is a continuous work in progress on the internet that anyone can take part in. This keeps us close to users and builds a unique brand.
-
 ## Mission
 
 **_“Increase the number of successful products in the world”_**
 
-## Long-term vision (for 2026)
+We do this by **helping engineers be better at product**.
+
+## Context
+
+PostHog helps engineers be better at product through a suite of tools that we call a “Product OS” (product analytics, session recordings, feature flags, experiments, and a lightweight CDP). We build for and sell to product engineers at high-growth startups. Our competitors provide point solutions focused on (non-technical) product managers. Focusing on engineers enables us to get in earlier and empower the engineer to own product outcomes - owning the market for product tools.
+
+We now add more companies each week than _any_ closed-source SaaS rival, and we're the open-source standard for all our applications. Financially, we're in a great position - default alive, and profitable within the next 12 months.
+
+## Strategy
+
+Our strategy is to focus on these three things:
+
+_Provide every tool needed for evaluating feature success._ The best use of an engineer's time is to ship features that have an impact on customers. Currently, this requires a large number of tools and product managers to pull all the insights together. By integrating all these tools we can make this easy - no integration needed, no extra vendors, no extra javascript, and workflows to guide engineers through feature development.
+
+_Get in first._ By already being used by our customers, we’re the default for each additional tool they add. It’s the technical co-founder and early engineers building the MVP and integrating the first product tools, not PMs. By focusing on engineers we can be their preferred choice and get in first. Additionally, we can ladder our tools - for example, session recording is used much earlier in the life cycle of the product than others like the CDPs helping us get in earlier than competing products.
+
+_Be the source of truth for customer and product data._ Traditionally, as companies scale their data warehouse becomes the source of truth and non-warehouse native tools (like product analytics) become less relevant as people lose trust in the data in them. However, by providing the data and data-intense tools in one place, we can enhance the power of our products (like product analytics), provide increased trust, _and_ enable companies to build on top of the warehouse itself as they see fit, all _without_ them having to setup a complex stack.
+
+## 2026 vision
 
 **Where do we want to get to?**
 
-In 2026 we will _go public with $100M ARR._ To achieve this, PostHog will need to be _the standard devtool for building better products._
+In 2026: _The leading product teams use PostHog to build the best products._
 
-**How do we get there?**
+*Product team = The people building the product. Normally engineers, PMs and designers.*
 
-* Build for developers
-* Make every developer want to tell others about us
-* Our biggest users self-serve to paying customers 
-* Go broad and develop all the tools our customers need to build better products
-* Empower developers to build on top of PostHog
+We are the first product tool that technical founders integrate into their product. We scale with them from their first user; to their first dollar; to 1000 person engineering orgs; IPO; and beyond. The best product people don't want to join a company that's not using PostHog.
 
-### What should we be working on today?
+We become the customer's data warehouse and pipelines. We enable other users throughout the org to use customer and product data with our applications that come out of the box.
 
-**The mechanics of success**
+We could go public with $100M ARR from the following:
+
+1) 1,000 companies building successful products with us, paying $25K each
+2) 500 companies building successful products with us, paying $50K each
+3) 50 companies building successful products with us, paying $1M each
+
+We did this by first focusing on high-growth self-serve startups to nail (1) and (2). This gave us the strong brand, product, and financial position to win (3).
+
+## 2023 vision
+
+* Creating workflows around evaluating features to automate a lot of traditional Product Management work
+  * We are the only company that can do this because we provide all the tools in one
+* Improve the core UX to be more focused on product engineers:
+  * A slick experience
+  * More powerful querying than our competitors can offer (for example, SQL access) that answers the long tail of questions
+  * PostHog 3000 UX = a design uplift including dark mode to encourage more word of mouth
+* Launching our CDP solution as a full product
+  * We already are this for lots of users, and we’ve even had ~45 community-built data connectors or transformations
+  * However, our CDP lacks integrations, reliability and has a low-quality UX - so we will work on these next quarter
+* Become known as the first tool that engineers add to their product
+  * Work on top-of-funnel growth in high potential startups (whereas last year we primarily focused on monetization of high growth startups)
+  * Create a more precise approach to this (growth model / CS focus / marketing focus)
+
+### This quarter - OKRs
 
 We set [quarterly OKRs](/handbook/strategy/objectives) to keep us on track.
 
-### How should we prioritize between competing directions?
+## Target customers for 2023
 
-While there is value in the items on the right, we value the items on the left more.
-
-**Breadth vs. depth of capabilities**
-
-* _Breadth_: build basic versions of every feature needed rather than a small set of sophisticated ones, so our customers can consolidate.
-
-**MidMarket vs. Enterprise**
-
-* _Mid-market_: focus on acquiring more high quality Mid-market customers (who may start using for free) over big ticket contracts, so we can get better feedback and learn faster.
-
-**Integrations vs one-stop-shop**
-
-* _One-stop-shop_: build all the things directly into PostHog if possible. This means customers don't have to buy another product or integrate with anything else. We are wide enough now to pull this off.
-
-**Self-hosted vs. Cloud**
-
-* _Cloud_: If customers can use cloud, encourage them to use cloud. Maintain a self-hosted version and migration path, but don't push it. We are the most flexible solution, which enables growth. We offer a generous free cloud tier so we can become ubiquitous without the cost/hassle of self-hosting.
-
-**Reject the [“modern data stack”](https://www.analytics8.com/blog/what-is-the-modern-data-stack-and-why-should-you-be-excited-about-it/) vs. adapt to it**
-
-* _Reject_: We enable our customers to ingest, store and analyze data on their infrastructure, we don't believe tons of integrations, dealing with multiple vendors and sending sensitive data to multiple cloud providers is the right approach.
-
-## Direction for 2022
-
- * 2 word summary: **Nail self-serve**
-    * **Customers**
-        * **Focus on large-mid-market.** E.g. Large initial contracts ($20k-$70k/year) and smaller deals in organizations that will eventually become large
-        * **Non Goal:** Start doing outbound sales
-    * **Product**
-        * **Goals:**
-            * **Quality:** Our core features (insights, recordings, feature-flags / experimentation) work like a Swiss watch
-            * **Self Service Subscription:** Customers of every size sign-up, start using and subscribe to PostHog without asking us for help
-        * **Non Goals:**
-            * Build lots of new low quality / partial features
-            * Build everything a single enterprise customer wants just to close a deal
-
-## Target customers for 2022
-
-Our ideal customer is a large-mid-market (~$20k-70k) who meets as many of these criteria as possible:
-
-* _Needs_
-  * Cares about user data
-  * Need to excel at product led growth
-* _Haves_
-  * Have budget and savvy engineers are the decision makers
-  * Have a central analytics or devops function
-  * Have a product aimed at businesses
+See our [ideal customer persona](/handbook/strategy/ideal-customer-persona).

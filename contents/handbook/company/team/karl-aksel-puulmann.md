@@ -20,11 +20,11 @@ This background gives me a uniquely powerful perspective on what we need and how
 
  Some of my past and ongoing projects here include:
 
-- Building out session recording
-- Modernizing posthog-js
-- Speeding up data ingestion
-- Getting our clickhouse helm charts production-ready
+- Building out session recording and group analytics initial versions
+- Speeding up data ingestion and fixing data consistency issues
 - Improving query performance
+- Modernizing posthog-js and getting tricky areas of code under test
+- Getting our clickhouse helm charts production-ready
 
 As an engineer, I'm a generalist - I enjoy throwing myself at impactful and difficult core issues and chewing through them in a systematic way from first principles.
 
@@ -52,10 +52,20 @@ Goal-wise, I am focused in becoming a better IC/engineer by:
 - I use a well-oiled Linux machine and stay well away from Apple hardware and software.
 - I have a small child and try to set clear and strict boundaries between work and personal life. Meetings with US-based I'll try to schedule to be early in your day (e.g. 9 or 10am East Coast).
 - I care deeply about the well-being of people in our team - take care of yourself, this is a marathon not a sprint.
+- I work best in a team, having someone cover my weaknesses and someone to bounce off of.
+
+
+## Weaknesses
+
+- UI/UX/tricky product decisions are areas where I'm less confident in and need support with
+- When problems don't have a high impact, I am less excited about them, making me often less inclined to pick up specific-customer type problems. 
+- I'm a jack of all trades, master of none
+- Multi-tasking is something I try to avoid as I tend to become really unproductive. Specifically mixing in-the-trenches work and high-level work is something I struggle with when working alone.
 
 
 ## How I can help you
 
+- ClickHouse knowledge
 - I have broad context into everything to do with engineering and product.
 - Happy to provide input into why and what we're building product-wise, help scope projects and talk about prioritization.
 - I can provide guidance around how to get quickly started with any unfamiliar codebase, around tricky refactors, testing and minimizing risk shipping huge changes.

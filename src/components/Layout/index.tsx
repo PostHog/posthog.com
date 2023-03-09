@@ -1,18 +1,19 @@
 import React, { useEffect } from 'react'
 import { Header } from '../Header/Header'
-import Banner from '../Banner/index'
 import { Footer } from '../Footer/Footer'
-import { useValues } from 'kea'
+import CookieBanner from 'components/CookieBanner'
+import usePostHog from '../../hooks/usePostHog'
+import { SearchProvider } from 'components/Search/SearchContext'
+import { UserProvider } from '../../hooks/useUser'
+import Banner from '../Banner/index'
+
 import './Fonts.scss'
 import './Layout.scss'
 import './SkeletonLoading.css'
 import './DarkMode.scss'
-import { PosthogAnnouncement } from '../PosthogAnnouncement/PosthogAnnouncement'
-import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
-import CookieBanner from 'components/CookieBanner'
 
 const Layout = ({ children, className = '' }: { children: React.ReactNode; className?: string }): JSX.Element => {
-    const { posthog } = useValues(posthogAnalyticsLogic)
+    const posthog = usePostHog()
 
     useEffect(() => {
         if (window && posthog) {
@@ -21,13 +22,19 @@ const Layout = ({ children, className = '' }: { children: React.ReactNode; class
     }, [])
 
     return (
-        <div className={className}>
-            <Header />
-            <main>{children}</main>
-            <Footer />
-            <PosthogAnnouncement />
-            <CookieBanner />
-        </div>
+        <SearchProvider>
+            <UserProvider
+                apiHost={process.env.GATSBY_SQUEAK_API_HOST as string}
+                organizationId={process.env.GATSBY_SQUEAK_ORG_ID as string}
+            >
+                <div className={className}>
+                    <Header />
+                    <main>{children}</main>
+                    <Footer />
+                    <CookieBanner />
+                </div>
+            </UserProvider>
+        </SearchProvider>
     )
 }
 

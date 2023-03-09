@@ -1,4 +1,4 @@
-import { TrackedCTA } from 'components/CallToAction/index.js'
+import { TrackedCTA } from 'components/CallToAction/index.tsx'
 import DeployOption from 'components/DeployOption'
 import { Slack } from 'components/Icons/Icons'
 import { Plan } from 'components/Pricing/PricingTable/Plan'

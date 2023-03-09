@@ -1,20 +1,21 @@
 ---
-title: Building a tracking cookies opt out banner in React
+title: Building a tracking cookies consent banner in React
 sidebar: Docs
 showTitle: true
-featuredImage: ../images/tutorials/banners/react-cookie-banner.png
+featuredImage: ../images/tutorials/banners/tutorial-3.png
+featuredVideo: https://www.youtube-nocookie.com/embed/KRW5jxZ4H-I
 featuredTutorial: false
 date: 2022-10-03
 author: ['ian-vanagas']
-topics: ['configuration']
+tags: ['configuration']
 ---
 
 - **Level:** Medium 🦔🦔
 - **Estimated reading time:** 12 minutes ☕️☕️
 
-If you’ve spent any time online, you’ve seen a cookie banner. Because of GDPR and other worldwide internet privacy regulations, some sites need to get consent to track users and use cookies. Providing visitors an easy way to opt in or out of tracking and cookies is often required.
+If you’ve spent any time online, you’ve seen a cookie consent banner. Because of GDPR and other worldwide internet privacy regulations, some sites need to get consent to track users and use cookies. Providing visitors an easy way to opt in or out of tracking and cookies is often required.
 
-PostHog uses cookies to identify and track users as well as manage user and application information. They allow us to provide more information to about your products and help you build better experiences for your users. 
+PostHog uses cookies to identify and track users as well as manage user and application information across sessions. They enable us to provide more information to about your products and help you build better experiences for your users. 
 
 PostHog provides a simple way to implement tracking and cookies opt out (or in). In this tutorial, we are going to build a simple banner with React, JavaScript, and HTML for users to opt out of (or allow) PostHog’s tracking and cookies.
 
@@ -143,7 +144,7 @@ When we head back to the local site, we’ll see our cookie banner at the bottom
 
 ![Tutorial banner](../images/tutorials/react-cookie-banner/final-banner.png)
 
-> 💯: For bonus points, you can click each of the buttons and go view the associated events in your PostHog instance.
+> 💯: For bonus points, you can click each of the buttons and go view the associated events in your PostHog instance.
 
 ## Step 4: Adding the opt out (or in) logic
 
@@ -287,9 +288,9 @@ To make sure everything works, try the following steps:
 - Reload the page.
 - Check that the banner doesn’t load.
 
-If all that works, you’ve done it. You’ve set up a basic tracking cookies opt out banner in React. From here, you can customize it to your needs (such as adding other cookies) and the rest of your site’s design.
+If all that works, you’ve done it. You’ve set up a basic tracking cookies consent banner in React. From here, you can customize it to your needs (such as adding other cookies) and the rest of your site’s design.
 
-## Beyond opt out banners
+## Beyond cookie consent banners
 
 If you’re interested in going further into tracking, data management, and cookies, check out these other resources:
 

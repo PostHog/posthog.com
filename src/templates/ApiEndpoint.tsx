@@ -385,7 +385,7 @@ response = requests.${item.httpVerb}(
                     <code className="min-w-0 break-words">
                         {path.split('/').map((token) => {
                             if (token === '') {
-                                return <wbr />
+                                return <wbr key={token} />
                             } else {
                                 return (
                                     <>

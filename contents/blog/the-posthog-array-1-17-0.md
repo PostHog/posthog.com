@@ -5,9 +5,12 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Release notes", "Product updates"]
 featuredImage: ../images/blog/array/default.png
 featuredImageType: standard
+category: PostHog news
+tags:
+  - Product updates
+  - Release notes
 ---
 
 Having launched **major** features in our [previous release](/blog/the-posthog-array-1-16-0) such as [Session Recording](/docs/user-guides/recordings) and [apps](/apps), over the past two weeks we worked extremely hard to improve PostHog's UX, enhance the new Beta features, and fix a bunch of bugs.  
@@ -82,19 +85,18 @@ Following a lot of great user feedback, we have now significantly improved our [
 
 We have now added configuration for relevant alerts and RDS disk size, as well as improved the setup flow and added automatic `SECRET_KEY` generation. If you're happy with the standard config, deploying with AWS is now just a matter of "click, click, click", as described by Karl, one of our engineers.
 
-### [User Interviews](https://calendly.com/posthog-feedback)
+## Share your feedback
+We'd love to hear anything you have to say about PostHog, good or bad. As a thank you, we'll share some awesome [PostHog merch](https://merch.posthog.com).
 
-We’re working hard to improve PostHog and would love to talk to you about your experience with the product. 
+Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog.com) with one of our teams to help us make PostHog even better!
 
-If you're interested in helping us out, you can schedule a quick 30-min call with us [on Calendly](https://calendly.com/posthog-feedback). 
-
-Oh, and we're giving away some awesome [PostHog merch](https://merch.posthog.com) as a thank you!
 
 ## Favorite Issue
 
 ### [EPIC: Retention](https://github.com/PostHog/posthog/issues/2228)
 
 A roadmap for various retention improvements that will significantly increase the power of PostHog's retention functionality.
+
 
 ## PostHog News
 

@@ -110,22 +110,25 @@ The table below lists out recommended PostHog app and chart versions to use for 
 | 0001            | 1.33.0          | 16.1.0        |        |
 | 0002            | 1.33.0          | 16.1.0        |        |
 | 0003            | 1.33.0          | 16.1.0        |        |
-| 0004            | 1.36.1          | 26.0.0        | Run the async migration right after upgrading as there could be problems with ingestion otherwise | 
-| 0005            | 1.41.4          | 29.0.4        |        |
-| 0006            | 1.41.4          | 29.0.4        |        |
-| 0007            | 1.41.4          | 29.0.4        | Completing this migration enables person on events. Further information: https://posthog.com/blog/persons-on-events |
-
-#### Upgrading hobby deployment to a specific version
-
-Before following the normal upgrading procedure update the `.env` file to have `POSTHOG_APP_TAG` match `release-<desired version>`. For example run
-```
-echo "POSTHOG_APP_TAG=release-1.33.0" >>.env
-```
+| 0004            | 1.36.1          | 26.0.0        | This NOT the default PostHog version for v26 Chart version, see upgrade instructions below. Run the async migration right after upgrading as there could be problems with ingestion otherwise | 
+| 0005            | 1.41.4          | 29.0.11       |        |
+| 0006            | 1.41.4          | 29.0.11       |        |
+| 0007            | 1.41.4          | 29.0.11       | Completing this migration enables person on events. Further information: https://posthog.com/blog/persons-on-events |
 
 #### Upgrading helm chart to a specific version
+
+To upgrade to a specific PostHog app version specify the desired version in your `values.yaml`
+```
+image:
+  tag: release-1.36.1
+```
 
 To upgrade to a specific chart version you can use `--version <desired version>` flag, e.g.
 ```
 helm upgrade -f values.yaml --timeout 30m --namespace posthog posthog posthog/posthog --atomic --wait --wait-for-jobs --debug --version 16.1.0
 ```
 Make sure you have followed the [upgrade instructions](https://posthog.com/docs/runbook/upgrading-posthog) for your platform (specifically major upgrade notes as needed).
+
+### Error Upgrading: Async migration is currently running 
+
+If your pods are crashlooping and you just want the app to be up the fastest way possible, then mark the running migration as error state in Postgres. You'll likely want to follow-up to rollback the async migration in the UI as soon as possible to clear the state and then plan for upgrading.

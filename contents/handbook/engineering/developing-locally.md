@@ -78,6 +78,8 @@ In case some steps here have fallen out of date, please tell us about it – fee
 
     ClickHouse and Kafka won't be able to talk to each other without these mapped hosts.
 
+    > If you are using a newer (>=4.1) version of Podman instead of Docker, the host machine's `/etc/hosts` is used as the base hosts file for containers by default, instead of container's `/etc/hosts` like in Docker. This can make hostname resolution fail in the ClickHouse container, and can be mended by setting `base_hosts_file="none"` in [`containers.conf`](https://github.com/containers/common/blob/main/docs/containers.conf.5.md#containers-table).
+
 2. Clone the [PostHog repository](https://github.com/posthog/posthog). All future commands assume you're inside the `posthog/` folder.
 
     ```bash
@@ -100,7 +102,7 @@ docker compose -f docker-compose.dev.yml up
 
 > **Friendly tip 2:** If you see "Exit Code 137" anywhere, it means that the container has run out of memory. In this case you need to allocate more RAM in Docker Desktop settings.
 
-> **Friendly tip 3:** You _might_ need `sudo` – see [Docker docs on managing Docker as a non-root user](https://docs.docker.com/engine/install/linux-postinstall).
+> **Friendly tip 3:** You _might_ need `sudo` – see [Docker docs on managing Docker as a non-root user](https://docs.docker.com/engine/install/linux-postinstall). Or look into [Podman](https://podman.io/getting-started/installation) as an alternative that supports rootless containers.
 
 >**Friendly tip 4:** If you see `Error: (HTTP code 500) server error - Ports are not available: exposing port TCP 0.0.0.0:5432 -> 0.0.0.0:0: listen tcp 0.0.0.0:5432: bind: address already in use`,  - refer to this [stackoverflow answer](https://stackoverflow.com/questions/38249434/docker-postgres-failed-to-bind-tcp-0-0-0-05432-address-already-in-use). In most cases, you can solve this by stopping the `postgresql` service.
 ```bash
@@ -127,6 +129,10 @@ d2d00eae3fc0   redis:6.2.7-alpine                  "docker-entrypoint.s…"   3 
 
 # docker logs posthog-clickhouse-1 -n 1
 Saved preprocessed configuration to '/var/lib/clickhouse/preprocessed_configs/users.xml'.
+
+# ClickHouse writes logs to `/var/log/clickhouse-server/clickhouse-server.log` and error logs to `/var/log/clickhouse-server/clickhouse-server.err.log` instead of stdout/stsderr. It can be useful to `cat` these files if there are any issues:
+# docker exec posthog-clickhouse-1 cat /var/log/clickhouse-server/clickhouse-server.log
+# docker exec posthog-clickhouse-1 cat /var/log/clickhouse-server/clickhouse-server.err.log
 
 # docker logs posthog-kafka-1
 [2021-12-06 13:47:23,814] INFO [KafkaServer id=1001] started (kafka.server.KafkaServer)
@@ -157,26 +163,26 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
 
 ### 2. Prepare the frontend
 
-1. Install nvm: https://github.com/nvm-sh/nvm. If using fish, you may instead prefer https://github.com/jorgebucaran/nvm.fish.
+1. Install nvm, with `brew install nvm` or by following the instructions at https://github.com/nvm-sh/nvm. If using fish, you may instead prefer https://github.com/jorgebucaran/nvm.fish.
 
 <blockquote class="warning-note">
     After installation, make sure to follow the instructions printed in your terminal to add NVM to your{' '}
     <code>$PATH</code>. Otherwise the command line will use your system Node.js version instead.
 </blockquote>
 
-2. Install the latest Node.js 16 (the version used by PostHog in production) with `nvm install 16`. You can start using it in the current shell with `nvm use 16`.
+2. Install the latest Node.js 18 (the version used by PostHog in production) with `nvm install 18`. You can start using it in the current shell with `nvm use 18`.
 
-3. Install yarn with `npm install -g yarn@1`.
+3. Install pnpm with `npm install -g pnpm`.
 
-4. Install Node packages by running `yarn`.
+4. Install Node packages by running `pnpm i`.
 
-5. Run `yarn typegen:write` to generate types for [Kea](https://keajs.org/) state management logics used all over the frontend.
+5. Run `pnpm typegen:write` to generate types for [Kea](https://keajs.org/) state management logics used all over the frontend.
 
-> The first time you run typegen, it may get stuck in a loop. If so, cancel the process (`Ctrl+C`), discard all changes in the working directory (`git reset --hard`), and run `yarn typegen:write` again. You may need to discard all changes once more when the second round of type generation completes.
+> The first time you run typegen, it may get stuck in a loop. If so, cancel the process (`Ctrl+C`), discard all changes in the working directory (`git reset --hard`), and run `pnpm typegen:write` again. You may need to discard all changes once more when the second round of type generation completes.
 
 ### 3. Prepare plugin server
 
-Assuming Node.js is installed, run `yarn --cwd plugin-server` to install all required packages. You'll also need to install the `brotli` compression library:
+Assuming Node.js is installed, run `pnpm i --dir plugin-server` to install all required packages. You'll also need to install the `brotli` compression library:
 
 - On macOS:
     ```bash
@@ -202,18 +208,18 @@ We'll run the plugin server in a later step.
         sudo apt install -y libxml2 libxmlsec1-dev pkg-config
         ```
 
-1. Install Python 3.8.
+1. Install Python 3.10.
 
-    - On macOS, you can do so with Homebrew: `brew install python@3.8`.
+    - On macOS, you can do so with Homebrew: `brew install python@3.10`.
 
     - On Debian-based Linux:
         ```bash
         sudo add-apt-repository ppa:deadsnakes/ppa -y
         sudo apt update
-        sudo apt install python3.8 python3.8-venv python3.8-dev -y
+        sudo apt install python3.10 python3.10-venv python3.10-dev -y
         ```
 
-Make sure when outside of `venv` to always use `python3` instead of `python`, as the latter may point to Python 2.x on some systems. If installing multiple versions of Python 3, such as by using the `deadsnakes` PPA, use `python3.8` instead of `python3`.
+Make sure when outside of `venv` to always use `python3` instead of `python`, as the latter may point to Python 2.x on some systems. If installing multiple versions of Python 3, such as by using the `deadsnakes` PPA, use `python3.10` instead of `python3`.
 
 You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage multiple versions of Python 3 on the same machine.
 
@@ -245,7 +251,7 @@ You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage m
 
     ```bash
     brew install openssl
-    CFLAGS="-I /opt/homebrew/opt/openssl/include $(python3.8-config --includes)" LDFLAGS="-L /opt/homebrew/opt/openssl/lib" GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1 GRPC_PYTHON_BUILD_SYSTEM_ZLIB=1 pip install -r requirements.txt
+    CFLAGS="-I /opt/homebrew/opt/openssl/include $(python3.10-config --includes)" LDFLAGS="-L /opt/homebrew/opt/openssl/lib" GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1 GRPC_PYTHON_BUILD_SYSTEM_ZLIB=1 pip install -r requirements.txt
     ```
 
     These will be used when installing `grpcio` and `psycopg2`. After doing this once, and assuming nothing changed with these two packages, next time simply run:
@@ -298,7 +304,29 @@ To commit changes, create a new branch based on `master` for your intended chang
 
 For a PostHog PR to be merged, all tests must be green, and ideally you should be introducing new ones as well – that's why you must be able to run tests with ease.
 
-For backend, simply use:
+### Frontend
+
+For frontend unit tests, run:
+
+```bash
+pnpm test:unit
+```
+
+To update all visual regression test snapshots, make sure Storybook is running on your machine (you can start it with `pnpm storybook` in a separate Terminal tab), and then run:
+
+```bash
+pnpm test:visual-regression
+```
+
+To only update snapshots for stories under a specific path, run:
+
+```bash
+pnpm test:visual-regression:stories frontend/src/lib/Example.stories.tsx
+```
+
+### Backend
+
+For backend tests, run:
 
 ```bash
 pytest
@@ -307,22 +335,20 @@ pytest
 You can narrow the run down to only files under matching paths:
 
 ```bash
-pytest posthog/test/test_entity_model.py
+pytest posthog/test/test_example.py
 ```
 
 Or to only test cases with matching function names:
 
 ```bash
-pytest posthog/test/test_entity_model.py -k test_inclusion
+pytest posthog/test/test_example.py -k test_something
 ```
 
 To see debug logs (such as ClickHouse queries), add argument `--log-cli-level=DEBUG`.
 
-For Cypress end-to-end test, run `bin/e2e-test-runner`. This will temporarily install required dependencies inside the project, spin up a test instance of PostHog, and show you the Cypress interface, from which you'll manually choose tests to run.
+### End-to-end
 
-Once you're done, terminate the command with cmd + C. Be sure to wait until the command terminates gracefully so temporary dependencies are removed from `package.json` and you don't commit them accidentally.
-
-For frontend tests, all you need is `yarn test`.
+For Cypress end-to-end tests, run `bin/e2e-test-runner`. This will spin up a test instance of PostHog and show you the Cypress interface, from which you'll manually choose tests to run. Once you're done, terminate the command with Cmd + C.
 
 ## Extra: Working with feature flags
 
@@ -333,7 +359,7 @@ This means that your activity is immediately reflected in the current project, w
 
 So, when working with a feature based on feature flag `foo-bar`, [add a feature flag with this key to your local instance](http://localhost:8000/feature_flags/new) and release it there.
 
-If you'd like to have ALL feature flags that exist in PostHog at your disposal right away, run `python3 manage.py sync_feature_flags` – they will be added to each project in the instance, fully rolled out by default.
+If you'd like to have ALL feature flags that exist in PostHog at your disposal right away, run `DEBUG=1 python3 manage.py sync_feature_flags` – they will be added to each project in the instance, fully rolled out by default.
 
 This command automatically turns any feature flag ending in `_EXPERIMENT` as a multivariate flag with `control` and `test` variants.
 
@@ -341,13 +367,23 @@ This command automatically turns any feature flag ending in `_EXPERIMENT` as a m
 
 With PyCharm's built in support for Django, it's fairly easy to setup debugging in the backend. This is especially useful when you want to trace and debug a network request made from the client all the way back to the server. You can set breakpoints and step through code to see exactly what the backend is doing with your request.
 
-1. Setup Django configuration as per JetBrain's [docs](https://blog.jetbrains.com/pycharm/2017/08/develop-django-under-the-debugger/).
-2. Click Edit Configuration to edit the Django Server configuration you just created.
-3. Point PyCharm to the project root (`posthog/`) and settings (`posthog/posthog/settings.py`) file.
-4. Add these environment variables
+### Setup PyCharm
 
-```
-DEBUG=1;
-KAFKA_HOSTS=kafka:9092;
-DATABASE_URL=postgres://posthog:posthog@localhost:5432/posthog
-```
+1. Open the repository folder.
+2. Setup the python interpreter (Settings… > Project: posthog > Python interpreter > Add interpreter): Select "Existing" and set it to `path_to_repo/posthog/env/bin/python`.
+3. Setup Django support (Settings… > Languages & Frameworks > Django):
+   - Django project root: `path_to_repo`
+   - Settings: `posthog/settings/__init__py`
+  
+### Start the debugging environment
+
+1. Instead of manually running `docker compose` you can open the `docker-compose.dev.yml` file and click on the double play icon next to `services`
+2. From the run configurations select:
+   - "PostHog" and click on debug
+   - "Celery" and click on debug (optional)
+   - "Frontend" and click on run
+   - "Plugin server" and click on run
+
+## Extra: Adding an enterprise license (PostHog employees only)
+
+If you're a PostHog employee, you can add an enterprise license to your local instance by following this [internal guide](https://github.com/PostHog/billing/blob/main/docs/running-posthog-with-billing.md). This is particularly useful if developing enterprise features or testing billing-related functionality.

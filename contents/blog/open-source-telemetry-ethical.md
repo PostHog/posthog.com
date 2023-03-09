@@ -5,7 +5,9 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Open source", "Startups"]
+category: General
+tags:
+  - Open source
 ---
 
 Many open source projects now track their usage in some way, shape, or form.

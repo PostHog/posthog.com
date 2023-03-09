@@ -12,7 +12,7 @@ Our frontend webapp is written with [Kea](https://keajs.org/) and [React](https:
 
 We try to be very explicit about this separation, and avoid local React state wherever possible, with exceptions for the `lib/` folder. Having all our data in one layer makes for code that's easier to [test](https://keajs.org/docs/intro/testing), and observe. Basically, getting your [data layer](https://keajs.org/blog/data-first-frontend-revolution) right is hard enough. We aim to not make it harder by constraining your data to a DOM-style hierarchy.
 
-Hence the explicitly in keeping the layers separate.
+Hence the explicit separation between the data and view layers.
 
 #### General tips
 
@@ -43,4 +43,4 @@ Hence the explicitly in keeping the layers separate.
 - Testing
   - Write [logic tests](https://keajs.org/docs/intro/testing) for all logic files. 
   - If your component is in the `lib/` folder, and has some interactivity, write a [react testing library](https://testing-library.com/docs/react-testing-library/intro/) test for it.
-  - Add all new presentational elements and scenes to [our storybook](https://storybook.posthog.net/). Run `yarn storybook` locally.
+  - Add all new presentational elements and scenes to [our storybook](https://storybook.posthog.net/). Run `pnpm storybook` locally.

@@ -1,8 +1,6 @@
 ---
-title: Integrate PostHog with Retool
-sidebarTitle: Retool
-sidebar: Docs
-showTitle: true
+title: Retool
+icon: ../../../images/docs/integrate/frameworks/retool.svg
 ---
 
 ## Objective

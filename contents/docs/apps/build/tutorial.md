@@ -1,5 +1,5 @@
 ---
-title: Tutorial
+title: How to build PostHog apps
 sidebar: Docs
 showTitle: true
 ---

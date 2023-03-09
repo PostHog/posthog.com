@@ -1,14 +1,20 @@
 ---
 date: 2021-09-13
-title: The importance of dogfooding - Why product managers should use their product as much as their users
+title: >-
+  The importance of dogfooding - Why product managers should use their product
+  as much as their users
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["marcus-hyett"]
+author:
+  - marcus-hyett
 featuredImage: ../images/blog/dogfooding.png
 featuredImageType: full
-categories: ["Inside PostHog"]
+category: Product growth
+tags:
+  - Guides
+  
 ---
 
 Product testing is essential, but your testing won’t always pick up the small sources of friction which build up over time and frustrate your users. This is where ‘dogfooding’ comes in - regularly using your product to get the full picture and build empathy with your users.

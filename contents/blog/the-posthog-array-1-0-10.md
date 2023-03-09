@@ -5,9 +5,12 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Release notes", "Product updates"]
 featuredImage: ../images/blog/array/default.png
 featuredImageType: standard
+category: PostHog news
+tags:
+  - Product updates
+  - Release notes
 ---
 
 Like what you see and self-hosting? [Update](/docs/runbook/upgrading-posthog) your instance.
@@ -63,6 +66,12 @@ We obviously prioritize bug fixing but what was cool was that the issue created 
 * [Zoom redirector](https://github.com/arkadiyt/zoom-redirector#whats-it-for) (When joining a Zoom meeting, the “join from your browser” link is intentionally hidden. This browser extension solves this.)
 * [Intro to Python](https://news.ycombinator.com/item?id=22669084) (Aaron mainly found this cool as it’s an angle for people who haven’t studied CS)
 * [Dolt](https://github.com/liquidata-inc/dolt) (It’s Git for data, although there have been a fair few options in this space we thought this was interesting.)
+
+## Share your feedback
+We'd love to hear anything you have to say about PostHog, good or bad. As a thank you, we'll share some awesome [PostHog merch](https://merch.posthog.com).
+
+Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog.com) with one of our teams to help us make PostHog even better!
+
 
 ## PostHog news
 

@@ -5,9 +5,12 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Release notes", "Product updates"]
 featuredImage: ../images/blog/array/default.png
 featuredImageType: standard
+category: PostHog news
+tags:
+  - Product updates
+  - Release notes
 ---
 
 Another week, another PostHog Array. We're steadily working towards parity with other tools. This week's highlights include a new website, multiple dashboards, a sleek new design and breaking down by cohorts.
@@ -57,6 +60,12 @@ You were already able to create cohorts, but now you can use them in trends to f
 ### [Dev toolbar ideas](https://github.com/PostHog/posthog/issues/741)
 
 The PostHog team is busy working out how to present all the information in PostHog while you're developing. Feel free to add your own ideas here!
+
+## Share your feedback
+We'd love to hear anything you have to say about PostHog, good or bad. As a thank you, we'll share some awesome [PostHog merch](https://merch.posthog.com).
+
+Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog.com) with one of our teams to help us make PostHog even better!
+
 
 ## Weekly round up
 

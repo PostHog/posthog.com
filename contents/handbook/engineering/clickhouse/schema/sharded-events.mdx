@@ -79,7 +79,7 @@ Evaluation: 🤷 It's reasonably good, but there are some potential improvements
 ## Sharding by `cityHash64(distinct_id)`
 
 Sharding by distinct_id means that many queries such as unique person counts or funnels
-[cannot be evaluated on individual replicas and a data must be sent to coordinator node](/handbook/engineering/clickhouse/replication#example-query-limit-filter-and-aggregate).
+[cannot be evaluated on individual replicas and data must be sent to coordinator node](/handbook/engineering/clickhouse/replication#example-query-limit-filter-and-aggregate).
 
 Luckily, this isn't the worst bottleneck in our production environments due to fast networking.
 

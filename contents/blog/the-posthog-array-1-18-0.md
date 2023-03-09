@@ -5,9 +5,12 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Release notes", "Product updates"]
 featuredImage: ../images/blog/array/default.png
 featuredImageType: standard
+category: PostHog news
+tags:
+  - Product updates
+  - Release notes
 ---
 
 Our primary goals for this release were to iron out bugs and improve the user experience of our Beta features.
@@ -60,13 +63,10 @@ As described by Michael, one of our engineers:
 
 _"They don't do anything, yet we thank them for their existence."_
 
-### [User Interviews](https://calendly.com/posthog-feedback)
+## Share your feedback
+We'd love to hear anything you have to say about PostHog, good or bad. As a thank you, we'll share some awesome [PostHog merch](https://merch.posthog.com).
 
-We’re working hard to improve PostHog and would love to talk to you about your experience with the product. 
-
-If you're interested in helping us out, you can schedule a quick 30-min call with us [on Calendly](https://calendly.com/posthog-feedback). 
-
-Oh, and we're giving away some awesome [PostHog merch](https://merch.posthog.com) as a thank you!
+Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog.com) with one of our teams to help us make PostHog even better!
 
 ## Favorite Issue
 

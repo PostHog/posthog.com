@@ -1,14 +1,15 @@
 ---
 date: 2022-06-10
-title: "Our new objective: Nail Self Serve"
+title: 'Our new objective: Nail Self Serve'
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["CEO diaries", "Inside PostHog"]
-author: ["james-hawkins"]
+author:
+  - james-hawkins
 featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
+category: CEO diaries
 ---
 
 The longer your strategy gets, the more useless it becomes.

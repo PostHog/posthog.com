@@ -44,7 +44,7 @@ ngrok start --all
 export WEBPACK_HOT_RELOAD_HOST=0.0.0.0
 export LOCAL_HTTPS=1
 export JS_URL=https://68f83839843a.ngrok.io
-yarn start
+pnpm start
 ```
 
 6. Use the same URL as the value for `JS_URL` again and start the Django server

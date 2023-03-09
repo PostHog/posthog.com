@@ -5,9 +5,12 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Release notes", "Product updates"]
 featuredImage: ../images/blog/array/default.png
 featuredImageType: standard
+category: PostHog news
+tags:
+  - Product updates
+  - Release notes
 ---
 
 What's box-fresh in PostHog? Cumulative graphs, better paths, and an upgrade to our actions.
@@ -72,6 +75,12 @@ This toy just got shinier. When you create an action, you can now filter events 
 Thank you to [PaoloC68](https://github.com/PaoloC68) for this one.
 
 The goal is to be able to see all the specific sessions that have taken place, their respective users, the time, activity, and much more. It was really cool to see a mockup design for this to help explain the context!
+
+## Share your feedback
+We'd love to hear anything you have to say about PostHog, good or bad. As a thank you, we'll share some awesome [PostHog merch](https://merch.posthog.com).
+
+Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog.com) with one of our teams to help us make PostHog even better!
+
 
 ## Weekly round up
 

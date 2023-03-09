@@ -5,6 +5,10 @@ sidebar: Docs
 showTitle: true
 ---
 
+import Sunset from '../\_snippets/sunset-disclaimer.mdx'
+
+<Sunset />
+
 This document outlines the most important configuration options available in the chart.
 
 ## Dependencies

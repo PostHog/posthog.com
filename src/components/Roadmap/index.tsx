@@ -8,7 +8,8 @@ import PostLayout from 'components/PostLayout'
 import { UnderConsideration } from './UnderConsideration'
 import { InProgress } from './InProgress'
 import { OrgProvider, UserProvider } from 'squeak-react'
-import { StaticImage } from 'gatsby-plugin-image'
+import { ImageDataLike, StaticImage } from 'gatsby-plugin-image'
+import community from 'sidebars/community.json'
 
 interface IGitHubPage {
     title: string
@@ -36,6 +37,8 @@ export interface IRoadmap {
     team: ITeam
     githubPages: IGitHubPage[]
     projected_completion_date: string
+    roadmapId: BigInt
+    thumbnail: ImageDataLike
 }
 
 const Complete = (props: { title: string; githubPages: IGitHubPage[]; otherLinks: string[] }) => {
@@ -69,7 +72,7 @@ export const Section = ({
     className?: string
 }) => {
     return (
-        <div className={`xl:px-7 2xl:px-8 xl:pt-2 first:pl-0 last:pr-0 pb-6 xl:pb-12 ${className}`}>
+        <div className={`xl:px-7 2xl:px-8 px-5 py-8 ${className ?? ''}`}>
             <h3 className="text-xl m-0">{title}</h3>
             <p className="text-[15px] m-0 text-black/60 mb-4">{description}</p>
             {children}
@@ -125,7 +128,10 @@ export default function Roadmap() {
         <Layout>
             <SEO title="PostHog Roadmap" />
             <OrgProvider
-                value={{ organizationId: 'a898bcf2-c5b9-4039-82a0-a00220a8c626', apiHost: 'https://squeak.cloud' }}
+                value={{
+                    organizationId: process.env.GATSBY_SQUEAK_ORG_ID as string,
+                    apiHost: process.env.GATSBY_SQUEAK_API_HOST as string,
+                }}
             >
                 <UserProvider>
                     <div className="border-t border-dashed border-gray-accent-light">
@@ -133,19 +139,16 @@ export default function Roadmap() {
                             contentWidth={'100%'}
                             article={false}
                             title={'Roadmap'}
-                            hideSearch
                             hideSurvey
-                            menu={[
-                                { name: 'Questions', url: '/questions' },
-                                { name: 'Roadmap', url: '/roadmap' },
-                                { name: 'Contributors', url: '/contributors' },
-                                { name: 'Core team', url: '/handbook/company/team' },
-                            ]}
+                            menu={community}
+                            darkMode={false}
+                            contentContainerClassName="lg:-mb-12 -mb-8"
                         >
                             <div className="relative">
-                                <h1 className="font-bold text-5xl mb-8 lg:-mt-8 xl:-mt-0">Roadmap</h1>
-                                <figure className="-mx-5 -mt-8 sm:-mt-20 lg:-mx-12 xl:-mt-32">
+                                <h1 className="font-bold text-5xl mx-8 lg:-mt-8 xl:-mt-0">Roadmap</h1>
+                                <figure className="-mt-8 sm:-mt-20 xl:-mt-32 mb-0">
                                     <StaticImage
+                                        className="w-full"
                                         imgClassName="w-full aspect-auto"
                                         placeholder="blurred"
                                         alt={`Look at those views!'`}
@@ -153,7 +156,7 @@ export default function Roadmap() {
                                     />
                                 </figure>
                             </div>
-                            <div className="grid grid-cols-1 xl:grid-cols-3 xl:divide-x xl:gap-y-0 gap-y-6 divide-gray-accent-light divide-dashed xl:-mb-8">
+                            <div className="grid grid-cols-1 xl:grid-cols-3 xl:divide-x xl:gap-y-0 gap-y-6 divide-gray-accent-light divide-dashed">
                                 <Section
                                     title="Under consideration"
                                     description="The top features we might build next. Your feedback is requested."
@@ -246,6 +249,7 @@ const query = graphql`
     {
         allSqueakRoadmap {
             nodes {
+                roadmapId
                 beta_available
                 complete
                 date_completed

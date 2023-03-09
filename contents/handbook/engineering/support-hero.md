@@ -31,10 +31,9 @@ You can view the Support Hero rotation [in PagerDuty here](https://posthog.pager
 
 There are a couple of channels that customer requests come in so make sure you keep an eye on all of them, but **most support tickets will come into [Zendesk](#Zendesk)**. Beyond Zendesk, you should keep an eye on:
 
+- [Unthread](https://posthog.slack.com/archives/D04725CS7JR) is used by the CS team to track issues with our high priority customers in dedicated Slack Connect channels.
 - [PostHog Users's Slack](https://posthog.com/slack), specifically `#community-support`. Users who post in `#general` or elsewhere should be instructed to post in `#community-support`
 - Sentry issues, either [directly](https://sentry.io/organizations/posthog/issues/?project=1899813) or in `#sentry` in our main Slack.
-
-Zendesk will also get populated with new issues from people outside the PostHog organization on the `posthog` and `posthog.com` repos, as well as with Squeak questions. These tickets will come with links to the issue or Squeak so you can answer them in the appropriate platform, rather than on Zendesk itself. 
 
 ### Communication
 
@@ -46,22 +45,33 @@ As an engineer, when a question comes in your first instinct is to give them an 
 - Start your response with `Hey [insert name], ...` and make sure you're polite, not everyone you talk to is an engineer and as accepting of terse messages
   - If it's an email, make sure you format your message as an email and only send a single message, not multiple
 - Follow up!
-- Housekeeping. Once a customer issue/question has been addressed, close the ticket on [Zendesk](#zendesk) to make it easy to identify outstanding conversations.
+- Housekeeping. Once a customer issue/question has been addressed, close the ticket on [Zendesk](#zendesk) or [Unthread](#unthread) to make it easy to identify outstanding conversations.
 
 To help manage users' expectations, you might find it useful to share a message in #community-support when you are signing on and off for the day.
 
 ### Prioritizing requests
 
-(To figure out how much a customer is paying, go to [revenue.posthog.net](https://revenue.posthog.net) (internal), click on the most recent month and command + F for the company name)
+As a business we need to ensure we are focusing support on our paying customers, as such this is the prioritization order you should apply as Support Hero.  At the end of your rotation you need to ensure that any items in 1-4 are resolved or passed to the next Support Hero _as a minimum_.
 
-1. Respond to and debug issues for _Priority_ customers (customers on Scale and Enterprise, either current or in our sales process, plus any high-paying Cloud customers)
-2. Respond to and debug issues for _Subscriber_ customers (paying subscribers on Cloud, usually paying $1-500/month)
-3. Respond to and debug issues for _Community_ users (all other free Open Source or free Cloud users)
-4. Fix issues, create PRs
+1. Any requests where you are tagged by the Customer Success team in a dedicated slack channel as there will be some urgency needed.
+2. Any requests assigned to you in [Unthread](https://posthog.slack.com/archives/D04725CS7JR) as they will be from a high priority customer in a dedicated Slack channel.
+3. Open Zendesk tickets in the [High Priority Queue](https://posthoghelp.zendesk.com/agent/filters/7114751198491) (high-paying customers).
+4. Open Zendesk tickets in the [Normal Priority Queue](https://posthoghelp.zendesk.com/agent/filters/7114873854747) (paying customers).
+5. [Squeak!](https://posthog.com/questions/) questions.
+6. [#community-support](https://posthogusers.slack.com/archives/C01GLBKHKQT) channel on the User Slack.
+7. Open Zendesk tickets in the [Low Priority Queue](https://posthoghelp.zendesk.com/agent/filters/7115368073755) (non-paying users).
 
 ### Triaging issues to the relevant small team
 
 As the support hero you should triage any bugs/feature requests that you don't deal with to the relevant small team. They are ultimately responsible for handling bugs and feature requests for their area of the product.
+
+### Support for self-hosted users
+
+Supporting self-hosted users can be particularly tricky/time-consuming!
+
+If the messages are from a dedicated slack, a tag from the CS team or 'high' priority zendesk then these are high-priority and **do prioritize** them accordingly. You'll likely find [these docs useful](https://posthog.com/docs/self-host/deploy/troubleshooting).
+
+However, if it's in the community slack then these are low priority. If you don't have the time to solve it then it's fine to politely point them to the docs for [self-serve open-source support](/docs/self-host/open-source/support#support-for-open-source-deployments-of-posthog) and ask them to file a github issue if they believe something is broken in the docs or deployment setup.
 
 ## Categorizing requests
 
@@ -126,13 +136,27 @@ From time to time, customers will request to get their apps added to PostHog Clo
 5. Tell the marketing team about this new integration
 6. Install it on Cloud, and make it global
 
+#### Updating existing apps
+
+1. Open a PR against our forked version of the plugin with the new changes (syncing from the main repo).
+2. Review the code changes and merge the PR. Look out for:
+  - Proper error handling (plugin emits [RetryError](https://posthog.com/docs/apps/build/reference#maximizing-reliability-with-retryerror) when relevant, instead of throwing unhandled exceptions)
+  - Proper use of resources (bounded memory and CPU usage, external requests kept to a minimum)
+  - Good security practices (the plugin cannot be used to DDoS some server) 
+  - Unit testing coverage when possible
+3. Update the app in our Cloud instances via the `Browse Apps` page, both on [prod-eu](https://eu.posthog.com/project/apps?tab=installed) and [prod-us](https://app.posthog.com/project/apps?tab=installed). You need instance staff permissions to do this.
+
 ### Zendesk
 
 We use [Zendesk Support](https://zendesk.com/) as our internal platform to manage support tickets. This ensures that we don't miss anyone, especially when their request is passed from one person to another at PostHog, or if they message us over the weekend.
 
 Zendesk allows us to manage all our customer conversations in one place and reply through Slack or email. We also use [Help](https://www.atlassian.com/software/halp) if you want to easily create and manage Zendesk tickets directly from inside the PostHog Users Slack. 
 
-This ensures that we don't miss anyone, especially when their request is passed from one person to another at PostHog, or if they message us over the weekend. You should have received an invite to join both Zendesk and Help as part of onboarding - if you didn't, ask Grace. 
+This ensures that we don't miss anyone, especially when their request is passed from one person to another at PostHog, or if they message us over the weekend. You should have received an invite to join both Zendesk and Help as part of onboarding - if you didn't, ask Grace.
+
+Zendesk will get populated with new issues from people outside the PostHog organization on the `posthog` and `posthog.com` repos, and also Squeak questions. These tickets will come with links to the issue or Squeak so you can answer them in the appropriate platform, rather than on Zendesk itself.
+
+The feedback box on the PostHog app will automatically create a Zendesk ticket and let the user know that we've create a ticket for them. If it's a feature request feel free to reply with something short like "Thanks for the feedback! We'll take a look at this and get back to you if we have any questions." and pass it on to the team. If there's not enough information it might be worth reviewing the session recording or asking them for more information.
 
 #### How to access Zendesk
 
@@ -144,35 +168,39 @@ The first time you sign into Zendesk, please make sure you include your name and
 
 You’ll spend most of your time in the Views pane, where you’ll find all tickets divided into different lists depending on who they are assigned to, and whether they have been solved or not.
 
-There are a few different ways that support tickets can be created in Zendesk:
+Tips:
 
-##### Slack
+* If need more information from the customer to solve the issue, respond and mark as pending. 
+* If you think you solved the issue mark as solved (if they reply it will re-open and it's easier for everyone if there's less open tickets around).
+* Provide actionable information as _Note_ (e.g. links to internal slack threads, partial investigation, ...)
 
-_User Slack_
-
-Support requests posted in #community-support are monitored by the [Support Hero](/handbook/engineering/support-hero), who then creates tickets in Zendesk using the Zendesk app. Once created, the Support Hero will triage the request in either Zendesk or directly in Slack via Help, and assign it a priority and assignee.
-
-_Dedicated Support Channels_
-
-Our Customer Success team monitors these channels and creates tickets in Zendesk via a direct Slack integration, and will prioritize and assign them accordingly.
-
-##### Email
+##### How to deal with spam, marketing, partnership proposals, candidates etc.
 
 Emails sent to [hey@posthog.com](mailto:hey@posthog.com) automatically create tickets in Zendesk, which are prioritized and delegated by the Support Hero.
-
-Goal of the Support Hero person on duty is to:
-
-* Keep the quantity of items in the _Unassigned_ view as small as possible by assigning tickets to yourself as Support Hero, or in a minority of cases, another team member who is better suited to solve the ticket
-
-* Make sure all the conversations get a response in a reasonable time (we don’t want to drop customer requests on the floor)
-
-* Provide actionable information as _Note_ for all the items you are handing over to someone else (note that you should follow-up on most requests yourself after your shift ends rather than assigning them to the next support hero).
-
-##### How to deal with spam, marketing, partnership proposals, etc.
 
 Like every other email address in this world, hey@ gets quite a bit of spam (and we reroute this to Zendesk). When this happens, simply mark the conversation as closed.
 
 For marketing, partnership proposals or anything like that, please post in Slack in #team-marketing before taking an action.
+
+For candidates trying to apply to PostHog, e.g. sending their CV you can simply ignore & close - Charles is in hey@ and will forward them directly on to careers@ to be dealt with.
+
+### Unthread
+
+Our Customer Success team uses Unthread to track the resolution of threads in Slack connect channels with our high priority customers.  By default, threads are assigned to the CS person who owns the relationship with the customer.  If they need Support Hero assistance they will re-assign the thread accordingly.
+
+#### Using Unthread
+
+* The [Slack Unthread app](https://posthog.slack.com/archives/D04725CS7JR) will notify you if a conversation is assigned to you with a link to the relevant Slack thread.
+
+* You can also see conversations which have been assigned to you in the Unthread app Home page.
+
+* You can close a conversation by using the context menu either in the Unthread app Home page or the More Actions context menu in the Slack thread itself.  Adding a ✅ reaction to a thread will also mark it as closed (👀 will move it to in progress)
+
+* You can also re-assign the conversation in the same way if you need (for example) a secondary person to take over.
+
+* If you want to have an internal discussion about the thread away from the customer channel you can post a thread to the triage channel (currently #team-customer-success).
+
+* Try and close conversations once resolved, so we can track MTTR for our high priority customers.
 
 ### Squeak!
 
@@ -182,11 +210,11 @@ Squeak! is a community curation toolkit created by the [Website & Docs team](/ha
 
 At the end of every page in the docs and handbook is a form where visitors can ask questions about the content of that page. (It also appears on the pricing page, and will be used in other places in the future.) This is an embedded JavaScript snippet we call [Q&A.js](https://squeak.posthog.com/toolkit/qna.js), powered by Squeak!
 
-Q&A.js should help reduce the load of the support hero, but you'll need to make sure questions are getting answered accurately – and in a timely manner.
+Squeak questions appear in Zendesk.
 
 #### Answering questions using Squeak!
 
-When a question is posted, a notification is sent to the [#squeak-ping](https://posthog.slack.com/archives/C03B04XGLAZ) channel in Slack. You can answer a question directly on the page where it was asked. When a reply is posted, the person who asked the question will receive an email notification.
+When a question is posted, it'll appear in Zendesk with a link to Squeak. A notification is also sent to the [#squeak-ping](https://posthog.slack.com/archives/C03B04XGLAZ) channel in Slack. You can answer a question directly on the page where it was asked. When a reply is posted, the person who asked the question will receive an email notification.
 
 The first time you answer a question, you'll need to create a Squeak! account. (You'll be prompted to do this after answering a question, as posting/responding requires authentication.)
 
@@ -202,9 +230,10 @@ Every team has a Secondary on-call rotation. Unlike support hero, you are still 
 
 ### Schedules
 
-- [Secondary - App East](https://posthog.pagerduty.com/schedules#PXUZ9XL)
-- [Secondary - App West](https://posthog.pagerduty.com/schedules#P04FUTJ)
-- [Secondary – Platform Ingestion](https://posthog.pagerduty.com/schedules#PM8YSH8)
-- [Secondary - Platform Infrastructure](https://posthog.pagerduty.com/schedules#P78OOWZ)
+- [Secondary - Product Analytics](https://posthog.pagerduty.com/schedules#PXUZ9XL)
+- [Secondary - Experimentation](https://posthog.pagerduty.com/schedules#P04FUTJ)
+- [Secondary - Session recordings](https://posthog.pagerduty.com/schedules#PUPERAV)
+- [Secondary – Pipeline](https://posthog.pagerduty.com/schedules#PM8YSH8)
+- [Secondary - Infrastructure](https://posthog.pagerduty.com/schedules#P78OOWZ)
 
 PagerDuty doesn't let us have a rotation that automatically selects the person that is support hero to also be the secondary on-call for their team. This means we'll occasionally need to manually shuffle the schedule around.

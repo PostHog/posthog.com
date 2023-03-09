@@ -5,10 +5,11 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Inside PostHog"]
-author: ["tim-glaser"]
+author:
+  - tim-glaser
 featuredImage: ../images/blog/migrating-hog.png
 featuredImageType: full
+category: Inside PostHog
 ---
 
 We're hiring [Site Reliability Engineers](https://apply.workable.com/posthog/j/071DD5C05A/) (SREs). I'm biased of course, but I think it's worth explaining why we think PostHog is the most exciting place to be an SRE right now. 

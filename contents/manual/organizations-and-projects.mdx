@@ -35,9 +35,9 @@ To switch between organizations, to open the current organization's settings, or
 
 ### Multiple organizations
 
-<FeatureAvailability availability={_frontmatter.availability.features.multipleOrgs} />
-
 As a PostHog Cloud user, you can create, manage, and join organizations without limits. For self-hosted see details below.
+
+<FeatureAvailability availability={_frontmatter.availability.features.multipleOrgs} />
 
 ### Notifications
 
@@ -62,21 +62,24 @@ Every project has its own distinct write-only token, which you can use to initia
 
 Every new organization (including the one created for you on account creation) comes with a fresh project named "Default Project". You can rename or delete it as you see fit.
 
-To switch between projects, navigate to project settings, or to create new projects, use the project switcher in the middle of the top bar. You can also quickly go to the current project's settings from the sidebar.
+To switch between projects, navigate to project settings, or create new projects, use the project switcher in the middle of the top bar. You can also quickly go to the current project's settings from the sidebar.
+
+### Ways of organizing projects
+
+For most companies, we recommend creating **three projects**:
+1. Local Development - when you're running the app on your own device
+2. Staging - when you're running your app on a staging server
+3. Production - for all your production data (e.g. your live website/app)
+
+This way you can test out analytics in development and staging environments, while keeping that test data separate from production.
+
+Even if you have multiple customer-facing products e.g. a marketing website + iOS app + web app, it works best to have them share the same production project. This way you can track the user journey holistically (e.g. how many blog readers convert to paid product users) and see all the relevant events for a person in one place. 
+
+However, if have products that are fully siloed with unliked authentication systems you will likely want to create separate projects for them. For example, if you have an admin app that should be a separate project from your customer-facing products.
 
 ### Multiple projects
 
 <FeatureAvailability availability={_frontmatter.availability.features.multipleProjects} />
-
-### Ways of organizing projects
-
-There are several practical ways of using projects:
-
--   A project per environment – you may want to test out analytics instrumentation in development or staging environments, while keeping that test data separate from production.
--   A project per product – if you have several unlinked products, it makes sense to reflect that separation in PostHog too.
--   A project per multiple products or the whole company – if your offering is interlinked or you want to track the user journey holistically (e.g. how many company blog readers convert to paid product users), you can use a single project for all digital assets.
-
-Which way is the best fit for you depends on the characteristics of your product and business.
 
 ## Permissions
 

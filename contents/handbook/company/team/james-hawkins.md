@@ -16,7 +16,7 @@ I tend to work 9am to 5pm with an hour for lunch, then I have a gap to have dinn
 
 - Make sure we've always enough money to think long term
 - Make sure we have exceptional people working here
-- Make sure we have a clear direction
+- Make sure we have a clear, rational direction
 
 ## Quirks
 
@@ -49,30 +49,32 @@ I tend to work 9am to 5pm with an hour for lunch, then I have a gap to have dinn
 
 ## How you can help me
 
-- Come to 1:1s with an agenda and clear things I can help with.
+- Come to 1:1s with an agenda, energy and things I can help with.
 - Ship :) Lots of things will be on fire in a startup all the time. Make sure you're moving the needle every week.
 - Due to my role, it's easy for me to accidentally steer you. Sometimes this means your team will get confused. Be communicative back to your team if I've changed your direction. And you don't have to listen to me.
 
-## My goals until end December 2022
+### Personal strategy as of Q1 2023
 
-We hit product market fit and are now seeing accelerating adoption in high quality companies.
-
-I need to make sure we maintain a high month over month revenue growth rate whilst staying default alive, since this will make future fundraising and expansion easy.
-
-### Personal strategy
-
-- Make sure every team reaches an ["Innovating" state](https://danlebrero.com/2022/07/06/an-elegant-puzzle-systems-of-engineer-management-book-summary/)
-- Support the marketing team with my individual work 
+- make sure every team reaches an ["Innovating" state](https://danlebrero.com/2022/07/06/an-elegant-puzzle-systems-of-engineer-management-book-summary/)
+- encourage the company to increase overall adoption whilst not harming revenue growth rate
 
 ### Execution todo
 
-- Validate a new marketing channel
+- Clarify product strategy better over the next year
+  - This will make the next round of OKRs smoother and will reduce micromanagement
+  - Get us on the path to overtake our competitors, not to follow them
+- Make sure all teams that report to me reach an innovating state
+  - Encourage better Focus (vision, strategy, all hands, OKRs)
+  - More speed (encourage shipping early and iteration over huge PRs)
+  - Higher quality (design and marketing especially)
 - Personal
-  - 2 strength sessions a week
+  - 4 exercise (strength or cardio) sessions a week
+  - make sure planting is planned so I grow lots of my own food in the spring and summer
   
 ### Archived todo
 
 It makes me feel better crossing stuff out, rather than deleting it, thus:
+- ~~2 strength sessions a week~~ did more like 3-4
 - ~~1 bike ride a week. Note: solved this by commuting to pick up my daughter from nursery every week. Double win!~~
 - ~~Experiment with larger order values as opportunities arise. Note: hired someone to do this.~~
 - ~~Set clear input-focussed goals for teams, that will optimize for [_long term_ revenue](/blog/ceo-diary-1)~~

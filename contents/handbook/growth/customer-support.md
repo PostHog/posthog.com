@@ -17,7 +17,7 @@ We have a few different routes for users to contact us. As an open source compan
 These are the ways in which customers can currently reach us:
 
 - **Questions** - this offers users the best possible experience, as they can search [previously answered questions](/questions) that have been asked anywhere on posthog.com in our Docs!
-- **Slack** - our active [PostHog Users Slack](https://posthog.com/slack) community frequently post questions, and for [Self-hosted](/pricing) and [Enterprise](/pricing#enterprise) customers, through a dedicated channel on our main company Slack
+- **Slack** - our active [PostHog Users Slack](https://posthog.com/slack) community frequently post questions, and for higher-paying (or potential higher-paying) customers, through a dedicated channel on our main company Slack
 - **Email** - a user may email hey@posthog.com with a specific support query
 - **GitHub** - sometimes users ask about the progress of [certain issues](https://github.com/PostHog/posthog) that are important to them
 
@@ -27,15 +27,13 @@ We intentionally have not hired a single person dedicated to customer support. T
 
 Providing support is a responsibility shared across our engineering teams - we expect everyone to jump in and help a user if you see they have a question or problem (though obviously not at the same time!) Once you have made the initial contact or response, it is your responsibility to see it through or explicitly hand over to someone else if they are better-equipped to help.
 
-One person takes on the **[Support Hero](/handbook/engineering/support-hero)** role each two week sprint. This is a rotating responsibility, where the person involved spends a significant chunk of their time responding to support queries across Slack, email and Zendesk, and sharing that feedback with the team and/or building features and fixes in response. We have found that each stint as Support Hero has thrown up a lot of really valuable feedback. 
+One person takes on the **[Support Hero](/handbook/engineering/support-hero)** role each week. This is a rotating responsibility, where the person involved spends a significant chunk of their time responding to support queries across Slack, email and Zendesk, and sharing that feedback with the team and/or building features and fixes in response. We have found that each stint as Support Hero has thrown up a lot of really valuable feedback. 
 
 ### Tutorial content and workshops
 
 We want to help teams of all sizes learn how to ask the right product analytics questions to grow their product. To help, we create content in the form of [tutorials](https://posthog.com/docs/tutorials), [blog posts](https://posthog.com/blog), and [videos](https://www.youtube.com/channel/UCn4mJ4kK5KVSvozJre645LA).
 
-We've also created a [Product Metrics Worksheet](https://docs.google.com/document/d/1mXKS08ngcJlbJdaYihikHO7RDY8dbxyChmsUneOwrfw/edit?usp=sharing) that systematically lays out how to define, implement, and track core product and business metrics (Acquisition, Activation, Retention, Referral, Revenue) all within PostHog. Anyone can copy this - even if they're not using PostHog (yet)!
-
-For [Self-hosted](/pricing) customers, we include a complimentary workshop where we work with all the stakeholders to go through this worksheet, define these metrics, and create dashboards in PostHog. [Enterprise](/pricing#enterprise) customers have customized onboarding depending on the nature of the agreement. 
+We've also created a [AARRR Pirate Metrics Worksheet](https://docs.google.com/spreadsheets/d/12uV5aKAhU_wygUQl3YXZU2J_QN_AZi4nPFj-9WIKhlY/edit#gid=0) that systematically lays out how to define, implement, and track core product and business metrics (Acquisition, Activation, Retention, Referral, Revenue) all within PostHog. Anyone can copy this - even if they're not using PostHog (yet)!
 
 ## Customer support runbook
 

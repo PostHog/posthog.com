@@ -5,7 +5,9 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Startups", "Inside PostHog"]
+category: Inside PostHog
+tags:
+  - Guides
 ---
 
 ![Remote Work Banner](../images/posthogers-map.png) 

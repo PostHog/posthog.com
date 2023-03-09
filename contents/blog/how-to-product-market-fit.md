@@ -5,10 +5,14 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["marcus-hyett"]
+author:
+  - marcus-hyett
 featuredImage: ../images/blog/Collaboration.png
 featuredImageType: full
-categories: ["Guides", "Product analytics", "PostHog Academy"]
+category: Product growth
+tags:
+  - Product analytics
+  - Guides
 ---
 
 Validating B2B product market fit is a common problem and the bad news is that there's no universal standard for validating product market fit. 

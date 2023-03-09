@@ -1,22 +1,21 @@
 import Chip from 'components/Chip'
-import { useValues } from 'kea'
 import React, { useEffect, useState } from 'react'
-import { posthogAnalyticsLogic } from '../../logic/posthogAnalyticsLogic'
-import { BasicHedgehogImage } from '../BasicHedgehogImage'
+import usePostHog from '../../hooks/usePostHog'
 import { CallToAction } from '../CallToAction'
 import Layout from '../Layout'
 import Lottie from 'react-lottie'
-import pizzaFight from '../../lotties/pizza-fight.json'
+import { StaticImage } from 'gatsby-plugin-image'
+import SearchBox from 'components/Search/SearchBox'
 
 export default function NotFoundPage(): JSX.Element {
-    const { posthog } = useValues(posthogAnalyticsLogic)
+    const posthog = usePostHog()
+    const [hogData, setHogData] = useState<any | null>(null)
     const [submittedPreference, setSubmittedPreference] = useState(false)
 
     useEffect(() => {
-        if (posthog) {
-            // Allows us to identify which pages are triggering 404s
-            posthog.capture('page_404')
-        }
+        import('../../../static/lotties/pizza-fight.json').then((data) => setHogData(data.default))
+
+        posthog?.capture('page_404')
     }, [])
 
     const capturePineapplePreference = (userLikesPineappleOnPizzaAkaTheyreCorrect = false) => {
@@ -39,32 +38,47 @@ export default function NotFoundPage(): JSX.Element {
                         fix it!
                     </p>
 
-                    <p>
-                        <strong>But while you're here,</strong> we have an important question...
-                    </p>
+                    <div className="m-4 pt-8 pb-4 flex flex-col items-center gap-2">
+                        <h3>You might have better luck searching.</h3>
+                        <SearchBox placeholder="Search..." location="404" />
+                        <p className="text-sm max-w-lg mx-auto px-4 pt-2 text-center opacity-75">
+                            This searches our docs, API, product manual, tutorials, blog, community questions, and
+                            company handbook – <em>and it's actually pretty good!</em>
+                        </p>
+                    </div>
 
-                    <h4>Does pineapple belong on pizza?</h4>
+                    <div className="border-t border-dashed border-gray-accent-light max-w-2xl mx-auto my-8 pt-8">
+                        <p>
+                            <strong>By the way – while you're here,</strong> we have an important question...
+                        </p>
 
-                    <div style={{ paddingBottom: 10 }}>
-                        {submittedPreference ? (
-                            <p>Thanks for letting us know!</p>
-                        ) : (
-                            <div className="flex justify-center space-x-2">
-                                <Chip onClick={() => capturePineapplePreference(true)} text="Yes" />
-                                <Chip onClick={() => capturePineapplePreference(false)} text="No" />
-                            </div>
-                        )}
+                        <h4>Does pineapple belong on pizza?</h4>
+
+                        <div style={{ paddingBottom: 10 }}>
+                            {submittedPreference ? (
+                                <p>Thanks for letting us know!</p>
+                            ) : (
+                                <div className="flex justify-center space-x-2">
+                                    <Chip onClick={() => capturePineapplePreference(true)} text="Yes" />
+                                    <Chip onClick={() => capturePineapplePreference(false)} text="No" />
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
                 <div className="-mt-20 sm:-mt-32 max-w-2xl w-full mx-auto relative h-[378px]">
                     <span className="w-full h-[2px] bg-black absolute left-0 bottom-[20%] rounded-md" />
-                    <Lottie
-                        options={{
-                            loop: true,
-                            autoplay: true,
-                            animationData: pizzaFight,
-                        }}
-                    />
+                    {hogData ? (
+                        <Lottie
+                            options={{
+                                loop: true,
+                                autoplay: true,
+                                animationData: hogData,
+                            }}
+                        />
+                    ) : (
+                        <StaticImage src="../../images/pizza-fight.svg" alt="Pizza fight" placeholder="blurred" />
+                    )}
                 </div>
                 <CallToAction type="primary" width="84" to="/">
                     Take me back to the homepage

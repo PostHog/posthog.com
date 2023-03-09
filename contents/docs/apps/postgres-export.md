@@ -3,7 +3,7 @@ title: PostgreSQL Export
 github: https://github.com/PostHog/postgres-plugin
 installUrl: https://app.posthog.com/project/apps?name=PostgreSQL
 thumbnail: ../../apps/thumbnails/postgresql-export.png
-topics:
+tags:
     - postgres-export
 ---
 

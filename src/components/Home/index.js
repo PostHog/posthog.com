@@ -1,24 +1,24 @@
 import StarUsBanner from 'components/StarUsBanner'
-import { useValues } from 'kea'
-import { posthogAnalyticsLogic } from 'logic/posthogAnalyticsLogic'
 import React from 'react'
 import Layout from '../Layout'
 import { SEO } from '../seo'
-import BeforeAndAfter from './BeforeAndAfter'
 import Community from './Community'
 import CTA from './CTA'
 import Customers from './Customers'
-import Features from './Features'
 import Hero from './Hero'
-import Apps from './Apps'
 import Pipelines from './Pipelines'
 import Timeline from './Timeline'
 import Roadmap from './Roadmap'
 import Quote from './Quote'
 import Tutorials from './Tutorials'
+import usePostHog from '../../hooks/usePostHog'
+import AllInOne from './AllInOne'
+import Builders from './Builders'
+import Pricing from './Pricing'
+import CustomerData from './CustomerData'
 
 const Home = () => {
-    useValues(posthogAnalyticsLogic) // mount this logic
+    usePostHog()
 
     return (
         <>
@@ -31,9 +31,10 @@ const Home = () => {
                 />
                 <Hero />
                 <Customers />
-                <BeforeAndAfter />
-                <Apps />
-                <Pipelines />
+                <AllInOne />
+                <Builders />
+                <Pricing />
+                <CustomerData />
                 <Timeline />
                 <Roadmap />
                 <Quote />

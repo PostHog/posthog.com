@@ -1,13 +1,16 @@
 ---
 date: 2022-11-02
-title: "Array 1.41.0: Improving performance by up to 400%"
+title: 'Array 1.41.0: Improving performance by up to 400%'
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ['Release notes', 'Product updates']
 featuredImage: ../images/blog/posthog-array-blog.png
 featuredImageType: full
+category: PostHog news
+tags:
+  - Product updates
+  - Release notes
 ---
 
 Want to know more about what we're up to? [Subscribe to HogMail, our newsletter](/newsletter), which we send every two weeks!
@@ -144,8 +147,10 @@ You think that's it? Not by a long shot! Version 1.41 also adds hundreds of othe
 
 View the commit log in GitHub for a full history of changes: [`release-1.40.0...release-1.41.0`](https://github.com/PostHog/posthog/compare/release-1.40.0...release-1.41.0).
 
-## Give us your feedback
-We’re always working on improving PostHog and would love to talk to you! Please [schedule a 30 minute call](https://calendly.com/posthog-feedback) with one of our Product, Engineering, or Marketing team members to help us understand how to improve. As a thank you for your time, we'll be giving away awesome [PostHog merch](https://merch.posthog.com)!
+## Share your feedback
+We'd love to hear anything you have to say about PostHog, good or bad. As a thank you, we'll share some awesome [PostHog merch](https://merch.posthog.com).
+
+Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog.com) with one of our teams to help us make PostHog even better!
 
 ## Contributions from the community
 We always welcome contributions from our community and this time we want to thank the following people...

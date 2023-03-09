@@ -1,10 +1,12 @@
 import React from 'react'
-import { CallToAction } from '../CallToAction'
+import { CallToAction, TrackedCTA } from '../CallToAction'
 import { Link } from 'gatsby'
 import { heading, section } from './classes'
 import Icon from './Icon'
 import Slider from './Slider'
-import { DemoLink } from 'components/DemoLink'
+import { PricingCTA } from 'components/PricingCTA'
+import { SignupCTA } from 'components/SignupCTA'
+import { Demo } from 'components/NotProductIcons'
 
 export const FeatureStrip = ({ className = '' }) => {
     return (
@@ -43,7 +45,7 @@ export default function Hero() {
     return (
         <section className="flex flex-col justify-center items-center">
             <div className="relative w-full z-10">
-                <div className={section('z-10 relative')}>
+                <div className={section('z-10 relative md:!mb-8')}>
                     <h1 className={heading()}>
                         The <span className="text-red inline-block">open source</span>{' '}
                         <span className="inline-block">Product OS</span>
@@ -53,14 +55,21 @@ export default function Hero() {
                     </h2>
 
                     <div className="flex flex-col md:flex-row justify-center items-center gap-2">
-                        <CallToAction
-                            type="primary"
-                            className="!w-full md:!w-44 shadow-xl"
-                            to="https://app.posthog.com/signup"
+                        <SignupCTA className="!w-full md:!w-44 shadow-xl !px-4" />
+                        <PricingCTA />
+                    </div>
+                    <div className="justify-center mt-6 flex">
+                        <TrackedCTA
+                            event={{ name: `clicked Get a demo` }}
+                            type="custom"
+                            className={`shadow-none !text-sm !font-bold flex items-center text-blue hover:text-blue space-x-1 !px-3 !py-2 hover:bg-gray-accent-light rounded`}
+                            href="/book-a-demo"
                         >
-                            Get started
-                        </CallToAction>
-                        <DemoLink />
+                            <span className="inline-block w-6 h-6 opacity-30 group-hover:opacity-50">
+                                <Demo />
+                            </span>
+                            <span>Get a demo</span>
+                        </TrackedCTA>
                     </div>
                 </div>
                 <Slider />

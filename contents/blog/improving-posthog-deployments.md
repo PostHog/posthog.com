@@ -1,14 +1,19 @@
 ---
 date: 2022-03-22
-title: "How we’re making PostHog deployments easier"
+title: How we’re making PostHog deployments easier
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/simpler-self-deployments.png
 featuredImageType: full
-categories: ["Engineering", "Product updates", "Launch week"]
-author: ["harry-waye", "guido-iaquinti"]
+author:
+  - harry-waye
+  - guido-iaquinti
+category: Engineering
+tags:
+  - Product updates
+  - Launch week
 ---
 
 When PostHog was born in 2020, it was a simple Python application (Django + Celery) backed by a PostgreSQL datastore. Troubleshooting was easy, while the low barrier of entry meant fast adoption and more feedback on where to take the product.

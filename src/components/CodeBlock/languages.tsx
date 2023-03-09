@@ -169,6 +169,10 @@ const languageMap: LanguageMap = {
         language: 'jsx',
         label: 'React Native',
     },
+    react: {
+        language: 'jsx',
+        label: 'React',
+    },
 }
 
 export default languageMap

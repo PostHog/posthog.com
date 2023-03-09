@@ -3,7 +3,7 @@ title: Amazon Kinesis Import
 github: https://github.com/posthog/posthog-kinesis-plugin
 installUrl: https://app.posthog.com/project/apps?name=Kinesis
 thumbnail: ../../apps/thumbnails/kinesis.png
-topics:
+tags:
     - amazon-kinesis
 ---
 

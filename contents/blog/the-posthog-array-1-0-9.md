@@ -5,9 +5,12 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-categories: ["Release notes", "Product updates"]
 featuredImage: ../images/blog/array/default.png
 featuredImageType: standard
+category: PostHog news
+tags:
+  - Product updates
+  - Release notes
 ---
 
 We’re in the thick of our release schedule this week!
@@ -76,6 +79,12 @@ Here is what we thought was cool and interesting in the last week:
 * [Universal Data Tool](https://github.com/UniversalDataTool/universal-data-tool)  (a user shared their project with us and we thought it looked really cool)
 * [Opensource.builders](https://github.com/junaid33/opensource.builders) (this is a really cool way to find and request open-source alternatives to popular software)
 * [Jitsi](https://github.com/jitsi/jitsi-meet) (this is a great project with simple and scalable video conferencing, something I’m sure everyone is beginning to use a lot more of.)
+
+## Share your feedback
+We'd love to hear anything you have to say about PostHog, good or bad. As a thank you, we'll share some awesome [PostHog merch](https://merch.posthog.com).
+
+Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog.com) with one of our teams to help us make PostHog even better!
+
 
 ## PostHog news
 
