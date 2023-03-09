@@ -12,7 +12,7 @@ Content & SEO is a long-term strategy. We are focused on generating a sustained 
 
 > We win on depth, not breadth, of content. We believe a small number of high quality pieces > a larger number of medium quality pieces. 
 
-We use [SEMRush](https://www.semrush.com/) to track and optimize our ranking for the keywords that we think are target customers are using to search for solutions like PostHog online. If you need access, please ask Andy. 
+We use Ahrefs to track and optimize our ranking for the keywords that we think are target customers are using to search for solutions like PostHog online. If you need access, please ask Andy. 
 
 The top keywords are then used as the basis of our content strategy. We bucket our content into three buckets:
 
@@ -22,7 +22,7 @@ The top keywords are then used as the basis of our content strategy. We bucket o
 
 - **Brand building and community engagement**, written by anyone on the team, with the Marketing team acting as editors. These can be about anything, and their purpose is to drive one-off spikes in awareness through virality on sites like Hacker News and Reddit.
 
-Andy and Ian are currently the main people responsible for our regular content output. James H and Joe are also frequent contributors. 
+Andy and Ian are currently the main people responsible for our regular content output. James H, Joe, and Charles are also frequent contributors. 
 
 You can view planned content on the [Marketing project board](https://github.com/orgs/PostHog/projects/8?card_filter_query=label%3Acontent) using the "content" label filter.
 
@@ -35,15 +35,12 @@ Join our [#content-ideas Slack channel](https://posthog.slack.com/archives/C015C
 As we have a few different places where content lives on our site, follow these guidelines to figure out where your content fits best. Sometimes you will find that the content you've created fits better in Docs rather than on the Blog. 
 
 1. [Blog post](/blog) = Virtually all SEO-specific content (e.g. 7 best open source analytics solutions); brand building content (e.g. CEO diaries, news).
-2. [Docs - Tutorial](/tutorials) = Anything that basically explains 'how to do X'. This includes content created for SEO purposes that explains how do something in PostHog (e.g. how to build an AARRR funnel).
-3. [Docs - Manual](/using-posthog) = Reference guides to PostHog features (e.g. Actions, Funnels).
-4. [Docs - Everything else](/docs) = Everything else product-specific that isn't covered above (e.g. deployment documentation). 
+2. [Tutorials](/tutorials) = Anything that basically explains 'how to do X'. This includes content created for SEO purposes that explains how do something in PostHog (e.g. how to build an AARRR funnel).
+3. [Docs](/docs) = Reference documentation for PostHog. 
 
-The Marketing team is responsible for 1. and 2. generally, while 3. and 4. usually sit with the Website & Docs team. We do encourage teams to step on toes, however.
+The Marketing team is responsible for 1. and 2., while 3. sits with the Website & Docs team. Feel free to step on toes though if you see something that could be improved in our Docs - just don't merge it without approval from that team. 
 
 ## Production workflow
-
-Our content production workflow is as follows:
 
 * **Create a GitHub issue**: Create [a new blog post issue in the posthog.com repo](https://github.com/PostHog/posthog.com/issues/new?assignees=&labels=Marketing&template=blog-post-idea-template.md&title=Blog+post%3A+%7Btitle%7D). Use the **New blog post idea** issue template. Fill in the required information as well as adding any additional information that you feel is beneficial to someone reviewing the issue. Add this issue to [the Marketing GitHub project](https://github.com/orgs/PostHog/projects/8).
 
@@ -112,23 +109,20 @@ categories: ["Product analytics", "Guides"]
 
 ## Distribution
 
-As of Q4 2022, we are distributing content in a mixture of channels - those we want to be good at, and those we put minimal effort into out of habit and good practice. We use freelancers to outsource manual work such as reformatting existing written content to fit a Twitter thread format (for example). 
+We repurpose and distribute content in a mixture of channels - those we want to be good at, and those we put minimal effort into out of habit and good practice.
 
-### Let's get (or stay) good at this in Q4
+### High effort
 
 - SEO - _Andy_
-- HogMail - _Andy_
-- PostHog LinkedIn - _Andy_
-- James' personal Twitter - _James H (outsourced)_
-- James' personal LinkedIn - _James H (outsourced)_
-- TikTok - _James H (editing and posting outsourced)_
+- Newsletter - _Andy_
+- PostHog LinkedIn - _Andy (but other people post here as well)_
+- PostHog Twitter - _Charles (but other people post here as well)_
+- James' personal Twitter - _James H_
 - YouTube - _Ian_
 
-### Let's post here out of habit/hygiene factor
+### Low effort/hygiene
 
-- PostHog Twitter - _Andy (just retweeting and link sharing)_
 - User Slack - _whoever wrote the content_
-- Hacker News - _only for Show HN announcements, otherwise default is to not post here and hope others do it outside PostHog_
+- Hacker News - _only for Show HN announcements, otherwise do not post here and hope others do it outside PostHog_
 - LinkedIn paid ads - _Charles (outsourced)_
 - Twitter paid ads - _Andy (outsourced)_
-- Dev.to - _Charles_
