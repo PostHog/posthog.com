@@ -1,5 +1,5 @@
 ---
-date: 2023-12-03
+date: 2023-03-03
 title: PostHog vs Logrocket
 rootPage: /blog
 sidebar: Blog
