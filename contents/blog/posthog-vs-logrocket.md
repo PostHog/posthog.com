@@ -208,7 +208,7 @@ While LogRocket contains some product analytics tools, it isn’t primarily inte
 
 ### Session recording
 
-LogRocket and PostHog both offer robust, full featured session recording tools which outperform even dedicated tools, such as HotJar. LogRocket’s session recording offers a handful of extra features, such as mobile recording, yet PostHog is actively working on developing these. 
+LogRocket and PostHog both offer robust, full-featured session recording tools which outperform even dedicated tools, such as HotJar. LogRocket’s session recording offers a handful of extra features, such as mobile recording, though PostHog is actively working on developing these. 
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -279,7 +279,7 @@ LogRocket and PostHog both offer robust, full featured session recording tools w
 </table>
 </div>
 
-**Mobile app recordings:** PostHog does not currently offer recordings for mobile apps, but it is something we’re actively working on. Check [our roadmap](/roadmap) for more info! 
+- **Mobile app recordings:** PostHog does not currently offer recordings for mobile apps, but it is something we’re actively working on. Check [our roadmap](/roadmap) for more info! 
 
 ### Heatmaps and click tracking
 
@@ -600,10 +600,13 @@ PostHog’s extensions also include [site apps](/tutorials/build-site-app), whic
 
 Some examples of PostHog’s site apps include:
 
-**[User Notifications](/apps/notification-bar):** Display a site banner to alert users about important information.
-**[Schedule interviews](/apps/user-interviews):** Target different types of users to receive Calendly notification, so you can arrange feedback calls. 
-**[In-app prompts](/apps/feedback-widget):** Display in-app prompts which ask for written feedback, or bug reports. 
-**[Raining Pineapples](/apps/pineapple-mode):** Sometimes you just want it to rain Pineapples. You’re welcome. 
+- **[User Notifications](/apps/notification-bar):** Display a site banner to alert users about important information.
+
+- **[Schedule interviews](/apps/user-interviews):** Target different types of users to receive Calendly notification, so you can arrange feedback calls. 
+
+- **[In-app prompts](/apps/feedback-widget):** Display in-app prompts which ask for written feedback, or bug reports. 
+
+- **[Raining Pineapples](/apps/pineapple-mode):** Sometimes you just want it to rain Pineapples. You’re welcome. 
 
 ## Collaboration 
 
