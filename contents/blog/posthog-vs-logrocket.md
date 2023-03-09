@@ -283,7 +283,7 @@ LogRocket and PostHog both offer robust, full-featured session recording tools w
 </table>
 </div>
 
-**Mobile app recordings:** PostHog does not currently offer recordings for mobile apps, but it is something we’re actively working on. Check [our roadmap](/roadmap) for more info! 
+- **Mobile app recordings:** PostHog does not currently offer recordings for mobile apps, but it is something we’re actively working on. Check [our roadmap](/roadmap) for more info! 
 
 ### Heatmaps and click tracking
 
