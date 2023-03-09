@@ -15,12 +15,11 @@ tags:
   - Guides
 ---
 
-LogRocket is a frontend monitoring platform which, like PostHog, combines multiple tools into one platform. In this article we’ll explain what some of the biggest similarities and differences are between PostHog and LogRocket, but if you’re in a rush then here’s the short version:
+LogRocket is a frontend monitoring platform which, like PostHog, combines multiple tools into one platform. In this article we’ll explain some of the biggest similarities and differences between PostHog and LogRocket, but here’s the short version:
 
-LogRocket focuses heavily on helping frontend developers to detect and solve issues. It offers tools such as session recording, analytics and performance monitoring.
+- LogRocket focuses heavily on helping frontend developers to detect and solve issues. It offers tools such as session recording, analytics and performance monitoring.
 
-
-PostHog is an all-in-one platform for helping teams to build better products. It includes many of the same tools as LogRocket, including session recording, analytics and performance monitoring — but also extends to feature flags, A/B experiments and more.
+- PostHog is an all-in-one platform that helps teams build better products. It includes many of the same tools as LogRocket, including session recording, analytics and performance monitoring — but also extends to feature flags, A/B experiments and more.
 
 In this article we’ll dive deeper into these differences and will…
 
