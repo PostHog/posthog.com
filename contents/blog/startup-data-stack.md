@@ -14,18 +14,18 @@ tags:
  - Explainers
 ---
 
-The goal of the data is to help startups build a better product. To help them with this, startups use all sorts of tools, known as the startup data stack. 
+The goal of data is to help startups build a better product. To help them with this, startups use all sorts of tools, known as the startup data stack. 
 
 To help you understand the startup data stack, and be better able leverage it, this post will go over:
-- What the startup data stack looks like from MVP to series B and beyond
+- What the startup data stack looks like from MVP to Series B and beyond
 - Examples of tools used and the problems they solve
 - PostHog's vision of the future for the startup data stack
 
-This comes from working with startups at all stages, conducting user interviews, researching the data stack landscape, and being part of the data stack ourselves.
+This comes from working with hundreds of startups at all stages, conducting user interviews, researching the data stack landscape, and being part of the data stack ourselves.
 
 ## The MVP data stack
 
-The goal of the MVP data stack is a signal if what you are building is working. This early, teams don’t want to spend time setting up complicated products because their data needs aren’t large. They want something quick and proven to give them data like:
+The goal of the MVP data stack is to get a signal if what you are building is working. Teams don’t want to spend time setting up complicated products this early, because their data needs aren’t large. They want something quick and proven to give them data like:
 
 - Site visitors
 - Leads, signups
@@ -34,17 +34,17 @@ The goal of the MVP data stack is a signal if what you are building is working. 
 
 To do this, they need:
 
-- Site and product analytics
+- Website and product analytics
 - Customer relationship manager (CRM)
 - Revenue, payments, subscription tracking
 
 ![MVP](../images/blog/startup-data-stack/mvp.png)
 
-To choose these products, they usually go with the "popular" choice, as they are [boring technologies](https://mcfunley.com/choose-boring-technology) that work for other people. The goal of the data stack at the MVP stage is to get basic data into if [what you are building is working](/blog/early-stage-analytics). Complicated solutions aren’t needed for this.
+To choose these products, they usually go with the "popular" choice, as they are [boring technologies](https://mcfunley.com/choose-boring-technology) that work for other people. The goal of the data stack at the MVP stage is to get basic data to find out if [what you are building is working](/blog/early-stage-analytics). Complicated solutions aren’t needed for this.
 
-## The seed stage data stack
+## The Seed stage data stack
 
-Once the MVP has traction and enters the seed stage, the data needs become more advanced. This is because what to work on become less obvious. Startups need data to figure out how to spend their time and resources. Some questions asked at this stage include:
+Once the MVP has initial traction and you enter the Seed stage, the data needs become more advanced. This is because what to work on become less obvious. Startups need data to figure out how to spend their time and resources. Some questions asked at this stage include:
 
 - What features should we prioritize developing?
 - How do we best serve our [ideal customer](/blog/creating-ideal-customer-profile)?
@@ -57,11 +57,11 @@ Bringing all this data together and managing it often requires a [customer data 
 
 ![Seed](../images/blog/startup-data-stack/seed.png)
 
-The goal of the stack at this stage is insights into how the product and specific features are doing. Teams want the ability to answer questions about the product and get basic KPI reporting. Although the team may not entirely trust the data coming in, it is good enough. It strikes the balance of giving engineers enough data to know what to prioritize while giving them plenty of time to build it.
+The goal of the stack at this stage is to give insights into how the product and specific features are doing. Teams want the ability to answer questions about the product and get basic KPI reporting. The data coming in just needs to be good enough, it doesn't need to be 100% perfect. This strikes the balance of giving engineers enough data to know what to prioritize while giving them plenty of time to build it.
 
-## The series A data stack
+## The Series A data stack
 
-Series A is where data begins to get serious, and by serious, I mean the startup makes someone responsible for owning the data stack. This person is often a head of data, data engineer, or backend engineer focused on data. They come in and implements the "modern data stack." This contains four tools:
+Series A is where data begins to get serious, and by serious, I mean the startup makes someone responsible for owning the data stack. This person is often a head of data, data engineer, or backend engineer focused on data. They will implement the "modern data stack" at this point, which contains four tools:
 
 1. A data warehouse stores all the data and act as a single source of truth. Options include Snowflake, BigQuery, and RedShift.
 2. An ETL pipeline to extract data from different sources, transform it, and load it into the warehouse. Options include Fivetran, Integrate.io, and Airbyte.
@@ -74,7 +74,7 @@ Startups need this because managing and accessing individual sources of data bec
 
 The downside of this stage is that engineers start to get further away from the data important to them. They must learn the modern data stack tools or rely on the data team for insights. The analytics tools set up earlier become inaccurate, and are used less. This becomes a much larger issue in the next stage.
 
-## The series B and beyond data stack
+## The Series B and beyond data stack
 
 With a data team led by the head of data squarely in place, their goal is to empower engineers to evaluate the success of what they are building. They attempt to use their data stack to make this happen.
 
