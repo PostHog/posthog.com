@@ -24,7 +24,7 @@ Interested in what new features, fixes and updates have just launched on PostHog
 ### Dashboard templates
 ![dashboard templates](../images/blog/array/dashboard-template-wizard.png)
 
-We want to make it easier and faster for users to find useful information in PostHog — and dashboards are a key part of that because they’re often one of the first things that users build. So, we’ve added a new selection of dashboard templates, as well as a new wizard that’s a little easier on the eye. 
+We want to make it easier and faster for users to find useful information in PostHog — dashboards are a key part of that because they’re often one of the first things users build. So, we’ve added a new selection of dashboard templates, as well as a new wizard that’s a little easier on the eye. 
 
 We’ve added a few simple templates to start with, for getting insights into areas such as online advertising, website traffic and user research. Got other ideas? Let us know in [the PostHog Slack](/slack)!
 
