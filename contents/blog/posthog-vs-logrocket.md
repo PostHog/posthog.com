@@ -1,14 +1,13 @@
 ---
-date: 2023-12-03
+date: 2023-03-03
 title: PostHog vs Logrocket
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/posthog-vs-logrocket/posthog-vs-logrocket.png
+featuredImage: ../images/blog/posthog-vs-mixpanel/posthog-vs-mixpanel.jpeg
 featuredImageType: full
-author:
-  - joe-martin
+author: ["joe-martin"]
 category: General
 tags:
   - Comparisons
