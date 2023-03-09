@@ -335,7 +335,7 @@ export const query = graphql`
             }
         }
         apps: allMdx(
-            filter: { slug: { regex: "/^docs/apps/" } }
+            filter: { slug: { regex: "/^docs/apps/(?!build)\\w+" } }
             sort: { fields: fields___pageViews, order: DESC }
             limit: 6
         ) {
