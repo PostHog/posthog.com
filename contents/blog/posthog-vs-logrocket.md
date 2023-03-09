@@ -212,7 +212,7 @@ While LogRocket contains some product analytics tools, it isn’t primarily inte
 
 ### Session recording
 
-LogRocket and PostHog both offer robust, full featured session recording tools which outperform even dedicated tools, such as HotJar. LogRocket’s session recording offers a handful of extra features, such as mobile recording, yet PostHog is actively working on developing these. 
+LogRocket and PostHog both offer robust, full-featured session recording tools which outperform even dedicated tools, such as HotJar. LogRocket’s session recording offers a handful of extra features, such as mobile recording, though PostHog is actively working on developing these. 
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
