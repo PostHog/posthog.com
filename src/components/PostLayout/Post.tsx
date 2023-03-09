@@ -36,6 +36,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
         fullWidthContent,
         setFullWidthContent,
         contentContainerClasses,
+        stickySidebar,
     } = usePost()
     const { hash, href } = useLocation()
 
@@ -132,7 +133,9 @@ export default function Post({ children }: { children: React.ReactNode }) {
                                 key={`${title}-sidebar`}
                                 className="flex-shrink-0 w-full justify-self-end my-10 lg:my-0 mr-auto h-full lg:px-0 px-4 box-border lg:flex hidden flex-col"
                             >
-                                <div>{sidebar}</div>
+                                <div className={`${stickySidebar ? 'sticky top-0' : ''} bg-tan dark:bg-primary z-10`}>
+                                    {sidebar}
+                                </div>
                                 <div className="flex flex-grow items-end">
                                     <div className="lg:pt-6 !border-t-0 sticky bottom-0 w-full">
                                         {tableOfContents && tableOfContents?.length > 1 && (

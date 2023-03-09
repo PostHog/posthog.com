@@ -28,8 +28,9 @@ This has resulted in the highest number of qualified and motivated candidates re
 
 | **Position title**        | **Location we're happy to hire in** | **Small Team**        | **Manager** | **Interview Process**                                                                                                                          | **SuperDay Task**              |
 |---------------------------|----------------------------------------|-----------------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|
-| Full Stack Engineer       | GMT -5:00 to +2:00                   | Experimentation  | Eric | 1) Culture Screen - Coua<br/> 2) Technical Screen - Eric<br/> 3) Engineering Culture Screen - James H.<br/> 4) SuperDay Assessment - Eric, Li, Neil, Tim & James H. | Live Task (link not available) |
-| Full Stack Engineer       | GMT 0:00 to +2:00                   | Product Analytics  | Marius | 1) Culture Screen - Coua<br/> 2) Technical Screen - Marius<br/> 3) Engineering Culture Screen - James H.<br/> 4) SuperDay Assessment - Marius, Paul, Michael, Karl, Luke, Tim & James H. | Live Task (link not available) |
+| Full Stack Engineer       | GMT -5:00 to +2:00                   | Experimentation  | Eric | 1) Culture Screen - Coua<br/> 2) Technical Screen - Eric<br/> 3) Small Team Culture Screen - James H.<br/> 4) SuperDay Assessment - Eric, Li, Neil, Tim & James H. | Live Task (link not available) |
+| Full Stack Engineer       | GMT 0:00 to +2:00                   | Product Analytics  | Marius | 1) Culture Screen - Coua<br/> 2) Technical Screen - Marius<br/> 3) Small Team Culture Screen - James H.<br/> 4) SuperDay Assessment - Marius, Paul, Michael, Karl, Luke, Tim & James H. | Live Task (link not available) |
+| Technical Content Marketer      | GMT -8:00 to +2:00                   | Marketing  | Charles | 1) Culture Screen - Coua<br/> 2) Technical Screen - Charles & Andy<br/> 3) Small Team Culture Screen - James H.<br/> 4) Super Week Assessment - Charles, Andy, Ian, Joe, Tim & James H. | Live Task (link not available) |
 
 Tasks are only available internally - please do not share these publicly. 
 

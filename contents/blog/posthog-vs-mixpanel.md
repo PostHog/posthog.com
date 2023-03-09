@@ -331,7 +331,7 @@ PostHog and Mixpanel both support a broad range of tracking options and librarie
 </table>
 </div>
 
-- **JavaScript snippet:** All client libraries support event tracking and user identification for product analytics, but we recommend using PostHog's JavaScript snippet to enjoy all our features. See our [client library documentation](/docs/integrate/client/snippet-installation) for more information.
+- **JavaScript snippet:** All client libraries support event tracking and user identification for product analytics, but we recommend using PostHog's JavaScript snippet to enjoy all our features. See our [client library documentation](/docs/integrate?tab=snippet) for more information.
 
 - **Mobile app session recordings:** We don't currently support session recording in mobile apps, but it's currently under consideration as a project for our session recording team. See our [public roadmap](/roadmap) for more info.
 
@@ -917,7 +917,6 @@ Mixpanel and PostHog both support popular messaging apps and automation platform
 
 ## Frequently asked questions
 
-- [Who should self-host PostHog?](#who-should-self-host-posthog)
 - [How long does it take to deploy PostHog?](#how-long-does-it-take-to-deploy-posthog)
 - [How long does it take to deploy Mixpanel](#how-long-does-it-take-to-deploy-mixpanel)
 - [Does PostHog user cookies?](#does-posthog-use-cookies)

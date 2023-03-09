@@ -60,7 +60,9 @@ This version is what the funnel might look like for our product, PostHog, an all
 | Referral     | Recommends to a friend                               | 1%             |
 | Referral     | Reviews product                                      | 1%             |
 
-Applying conversion rates is optional – the real value comes from forming an understanding your potential customer journey, and the metrics you need to track to monitor it effectively. 
+Applying conversion rates is optional – the real value comes from forming an understanding your potential customer journey, and the metrics you need to track to monitor it effectively.
+
+> 📖 **Further reading:** How healthy is your product? Pirate metrics are useful for understanding the efficiency of your conversion funnel, but you may also want to track some product health metrics. They're like the vital signs of a product – i.e. metrics that should remain steady and improve slowly over time. See: [The most useful product health metrics](/blog/product-health-metrics) for more on how to choose your health metrics.
 
 ## Why should you use AARRR
 

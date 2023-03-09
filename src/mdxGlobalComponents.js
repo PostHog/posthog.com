@@ -39,6 +39,7 @@ import { CommunityCTA } from './components/CommunityCTA'
 import { CommunityQuestions } from './components/CommunityQuestions'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { Contact } from './components/Contact'
+import { ContactSales } from './components/ContactSales'
 import { Container } from './components/Container'
 import { ContributorCard } from './components/ContributorCard'
 import { ContributorSearch } from './components/ContributorSearch'
@@ -98,7 +99,6 @@ import { PricingHero } from './components/Pricing/PricingHero'
 import { PricingSlider } from './components/Pricing/PricingSlider'
 import { PricingTable } from './components/Pricing/PricingTable'
 import { ProductPillars } from './components/Pricing/ProductPillars'
-import { Quote } from './components/Pricing/Quote'
 import { Savings } from './components/Pricing/Savings'
 import { SelfHost } from './components/Pricing/SelfHost'
 import { PricingCTA } from './components/PricingCTA'
@@ -120,6 +120,7 @@ import { FeaturedSectionTextLeft } from './components/Sections/FeaturedSectionTe
 import { FeaturedSectionTextRight } from './components/Sections/FeaturedSectionTextRight'
 import { FeaturedSectionTripleImage } from './components/Sections/FeaturedSectionTripleImage'
 import { SignupCTA } from './components/SignupCTA'
+import { SignupLink } from './components/SignupLink'
 import { SiteSearchCallout } from './components/SiteSearchCallout'
 import { SliderNav } from './components/SliderNav'
 import { Spacer } from './components/Spacer'
@@ -129,6 +130,7 @@ import { StarRepoButton } from './components/StarRepoButton'
 import { StarUsBanner } from './components/StarUsBanner'
 import { Structure } from './components/Structure'
 import { Subscribe } from './components/Subscribe'
+import { SubstackForm } from './components/SubstackForm'
 import { Tab } from './components/Tab'
 import { TeamQuote } from './components/TeamQuote'
 import { Toast } from './components/Toast'
@@ -180,6 +182,7 @@ export const shortcodes = {
     CommunityQuestions,
     CompensationCalculator,
     Contact,
+    ContactSales,
     Container,
     ContributorCard,
     ContributorSearch,
@@ -239,7 +242,6 @@ export const shortcodes = {
     PricingSlider,
     PricingTable,
     ProductPillars,
-    Quote,
     Savings,
     SelfHost,
     PricingCTA,
@@ -261,6 +263,7 @@ export const shortcodes = {
     FeaturedSectionTextRight,
     FeaturedSectionTripleImage,
     SignupCTA,
+    SignupLink,
     SiteSearchCallout,
     SliderNav,
     Spacer,
@@ -270,6 +273,7 @@ export const shortcodes = {
     StarUsBanner,
     Structure,
     Subscribe,
+    SubstackForm,
     Tab,
     TeamQuote,
     Toast,

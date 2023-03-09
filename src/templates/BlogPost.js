@@ -29,11 +29,7 @@ import slugify from 'slugify'
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
 const Title = ({ children, className = '' }) => {
-    return (
-        <h1 className={`text-3xl md:text-4xl lg:text-4xl mb-1 mt-6 lg:mt-1 lg:text-white text-primary ${className}`}>
-            {children}
-        </h1>
-    )
+    return <h1 className={`text-3xl md:text-4xl lg:text-4xl mb-1 mt-6 lg:mt-1 ${className}`}>{children}</h1>
 }
 
 export const Intro = ({
@@ -50,7 +46,7 @@ export const Intro = ({
         <div className="lg:mb-7 mb-4 overflow-hidden">
             {featuredVideo && <iframe src={featuredVideo} />}
             {!featuredVideo && featuredImage && (
-                <div className="relative">
+                <div className="relative flex flex-col">
                     <GatsbyImage
                         className={`rounded-md z-0 relative ${
                             featuredImageType === 'full'
@@ -65,29 +61,13 @@ export const Intro = ({
                     />
                     {featuredImageType === 'full' && (
                         <>
-                            {tags?.length > 0 && (
-                                <ul className="m-0 p-0 flex space-x-2 absolute top-4 right-4 list-none">
-                                    {tags.map((tag) => {
-                                        return (
-                                            <li key={tag}>
-                                                <Link
-                                                    className="bg-white/80 rounded-full px-2 py-1"
-                                                    to={`/blog/tags/${slugify(tag, { lower: true })}`}
-                                                >
-                                                    {tag}
-                                                </Link>
-                                            </li>
-                                        )
-                                    })}
-                                </ul>
-                            )}
                             <div
                                 className={`lg:absolute flex flex-col lg:px-8 lg:py-4 ${
                                     titlePosition === 'bottom' ? 'bottom-0' : 'top-0'
                                 }`}
                             >
-                                <p className="m-0 opacity-70 order-last lg:order-first">{date}</p>
-                                <Title>{title}</Title>
+                                <p className="m-0 opacity-70 order-last lg:order-first lg:text-white">{date}</p>
+                                <Title className="lg:text-white text-primary">{title}</Title>
                             </div>
                         </>
                     )}
@@ -116,6 +96,13 @@ const BlogPostSidebar = ({ contributors, date, filePath, title, tags, location, 
             {pageViews?.length > 0 && (
                 <SidebarSection>
                     <PageViews pageViews={pageViews.toLocaleString()} />
+                </SidebarSection>
+            )}
+            {tags?.length > 0 && (
+                <SidebarSection title={`Tag${tags?.length === 1 ? '' : 's'}`}>
+                    <Topics
+                        topics={tags.map((tag) => ({ name: tag, url: `/blog/tags/${slugify(tag, { lower: true })}` }))}
+                    />
                 </SidebarSection>
             )}
             <SidebarSection>
@@ -161,6 +148,7 @@ export default function BlogPost({ data, pageContext, location }) {
                 }
             />
             <PostLayout
+                stickySidebar
                 title={title}
                 contentWidth={790}
                 filePath={filePath}

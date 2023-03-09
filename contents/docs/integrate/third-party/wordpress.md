@@ -11,7 +11,7 @@ In this guide, we'll walk you through how to set up PostHog on your WordPress si
 
 1. [Deploy PostHog](/docs/deployment) or [signup for PostHog Cloud](https://app.posthog.com/signup).
 
-2. Get your [PostHog snippet](/docs/integrate/client/snippet-installation) from your 'Project Settings' or the initial PostHog setup.
+2. Get your [PostHog snippet](/docs/integrate?tab=snippet) from your 'Project Settings' or the initial PostHog setup.
 
 3. Add the PostHog snippet before the closing `</head>` tag in your `header.php` template file. This can be done in two ways:
     1. Access WordPress admin, navigate to 'Appearance' -> 'Theme Editor', select your theme, and select 'Theme Header'.

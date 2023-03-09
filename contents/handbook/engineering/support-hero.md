@@ -136,6 +136,16 @@ From time to time, customers will request to get their apps added to PostHog Clo
 5. Tell the marketing team about this new integration
 6. Install it on Cloud, and make it global
 
+#### Updating existing apps
+
+1. Open a PR against our forked version of the plugin with the new changes (syncing from the main repo).
+2. Review the code changes and merge the PR. Look out for:
+  - Proper error handling (plugin emits [RetryError](https://posthog.com/docs/apps/build/reference#maximizing-reliability-with-retryerror) when relevant, instead of throwing unhandled exceptions)
+  - Proper use of resources (bounded memory and CPU usage, external requests kept to a minimum)
+  - Good security practices (the plugin cannot be used to DDoS some server) 
+  - Unit testing coverage when possible
+3. Update the app in our Cloud instances via the `Browse Apps` page, both on [prod-eu](https://eu.posthog.com/project/apps?tab=installed) and [prod-us](https://app.posthog.com/project/apps?tab=installed). You need instance staff permissions to do this.
+
 ### Zendesk
 
 We use [Zendesk Support](https://zendesk.com/) as our internal platform to manage support tickets. This ensures that we don't miss anyone, especially when their request is passed from one person to another at PostHog, or if they message us over the weekend.

@@ -212,7 +212,7 @@ export default function SignUp() {
                                     </Feature>
                                 </ul>
                                 <TrackedCTA
-                                    to="/signup/self-host"
+                                    to="/docs/self-host"
                                     className="mt-auto"
                                     size="md"
                                     event={{ name: `clicked Continue`, type: 'self-hosted' }}

@@ -182,7 +182,10 @@ export const CodeBlock = ({
                                         `cursor-pointer text-sm py-0.5 ${selected ? 'font-semibold text-white/70' : ''}`
                                     }
                                 >
-                                    {option.label || languageMap[option.language]?.label || option.language}
+                                    {option.file ||
+                                        option.label ||
+                                        languageMap[option.language]?.label ||
+                                        option.language}
                                 </Tab>
                             ))}
                         </Tab.List>

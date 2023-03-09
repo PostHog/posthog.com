@@ -83,4 +83,5 @@ export interface IProps {
     fullWidthContent?: boolean
     setFullWidthContent: (fullWidth: boolean) => void
     contentContainerClasses?: string
+    stickySidebar?: boolean
 }

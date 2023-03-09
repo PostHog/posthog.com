@@ -15,7 +15,7 @@ export const PricingCTA = ({ dark = false, className = '' }: { dark?: boolean; c
             to={'/pricing'}
             className={dark ? darkClasses : lightClasses}
         >
-            <span>View our pricing</span>
+            <span>View pricing</span>
         </TrackedCTA>
     )
 }

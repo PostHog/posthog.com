@@ -11,8 +11,114 @@
         "url": "",
         "children": [
             {
-                "name": "Quickstart with PostHog Cloud",
-                "url": "/docs/getting-started/cloud"
+                "name": "Start here",
+                "url": "/docs/getting-started/start-here"
+            },
+            {
+                "name": "Install PostHog",
+                "url": "/docs/getting-started/install"
+            },
+            {
+                "name": "Send events",
+                "url": "/docs/getting-started/send-events"
+            },
+            {
+                "name": "Identify users",
+                "url": "/docs/getting-started/identify-users"
+            },
+            {
+                "name": "Actions and insights",
+                "url": "/docs/getting-started/actions-and-insights"
+            },
+            {
+                "name": "Group analytics",
+                "url": "/docs/getting-started/group-analytics"
+            },
+            {
+                "name": "Next steps",
+                "url": "/docs/getting-started/next-steps"
+            }
+        ]
+    },
+    {
+        "name": "SDKs",
+        "url": "",
+        "children": [
+            {
+                "name": "JavaScript",
+                "url": "/docs/sdks/js",
+                "badge": {
+                    "title": "Popular",
+                    "className": "!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50"
+                }
+            },
+            {
+                "name": "Android",
+                "url": "/docs/sdks/android",
+                "badge": {
+                    "title": "Popular",
+                    "className": "!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50"
+                }
+            },
+            {
+                "name": "Elixir",
+                "url": "/docs/sdks/elixir"
+            },
+            {
+                "name": "Flutter",
+                "url": "/docs/sdks/flutter"
+            },
+            {
+                "name": "Go",
+                "url": "/docs/sdks/go"
+            },
+            {
+                "name": "iOS",
+                "url": "/docs/sdks/ios",
+                "badge": {
+                    "title": "Popular",
+                    "className": "!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50"
+                }
+            },
+            {
+                "name": "Java",
+                "url": "/docs/sdks/java"
+            },
+            {
+                "name": "Node.js",
+                "url": "/docs/sdks/node"
+            },
+            {
+                "name": "PHP",
+                "url": "/docs/sdks/php"
+            },
+            {
+                "name": "Python",
+                "url": "/docs/sdks/python"
+            },
+            {
+                "name": "React",
+                "url": "/docs/sdks/react",
+                "badge": {
+                    "title": "Popular",
+                    "className": "!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50"
+                }
+            },
+            {
+                "name": "React Native",
+                "url": "/docs/sdks/react-native",
+                "badge": {
+                    "title": "Popular",
+                    "className": "!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50"
+                }
+            },
+            {
+                "name": "Ruby",
+                "url": "/docs/sdks/ruby"
+            },
+            {
+                "name": "Rust",
+                "url": "/docs/sdks/rust"
             }
         ]
     },
@@ -23,80 +129,6 @@
             {
                 "name": "Overview",
                 "url": "/docs/integrate"
-            },
-            {
-                "name": "Libraries",
-                "url": "",
-                "children": [
-                    {
-                        "name": "Android",
-                        "url": "/docs/integrate/client/android",
-                        "badge": {
-                            "title": "Popular",
-                            "className": "!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50"
-                        }
-                    },
-                    {
-                        "name": "Elixir",
-                        "url": "/docs/integrate/server/elixir"
-                    },
-                    {
-                        "name": "Flutter",
-                        "url": "/docs/integrate/client/flutter"
-                    },
-                    {
-                        "name": "Go",
-                        "url": "/docs/integrate/server/go"
-                    },
-                    {
-                        "name": "iOS",
-                        "url": "/docs/integrate/client/ios",
-                        "badge": {
-                            "title": "Popular",
-                            "className": "!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50"
-                        }
-                    },
-                    {
-                        "name": "Java",
-                        "url": "/docs/integrate/server/java"
-                    },
-                    {
-                        "name": "JavaScript",
-                        "url": "/docs/integrate/client/js",
-                        "badge": {
-                            "title": "Popular",
-                            "className": "!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50"
-                        }
-                    },
-                    {
-                        "name": "Node.js",
-                        "url": "/docs/integrate/server/node"
-                    },
-                    {
-                        "name": "PHP",
-                        "url": "/docs/integrate/server/php"
-                    },
-                    {
-                        "name": "Python",
-                        "url": "/docs/integrate/server/python"
-                    },
-                    {
-                        "name": "React Native",
-                        "url": "/docs/integrate/client/react-native",
-                        "badge": {
-                            "title": "Popular",
-                            "className": "!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50"
-                        }
-                    },
-                    {
-                        "name": "Ruby",
-                        "url": "/docs/integrate/server/ruby"
-                    },
-                    {
-                        "name": "Rust",
-                        "url": "/docs/integrate/server/rust"
-                    }
-                ]
             },
             {
                 "name": "Library comparison",
@@ -163,15 +195,11 @@
                 ]
             },
             {
-                "name": "Ingest live data",
-                "url": "/docs/integrate/ingest-live-data"
-            },
-            {
                 "name": "Ingest historical data",
                 "url": "/docs/integrate/ingest-historic-data"
             },
             {
-                "name": "Identify users",
+                "name": "Identifying users",
                 "url": "/docs/integrate/identifying-users"
             },
             {
@@ -199,24 +227,6 @@
             {
                 "name": "Overview",
                 "url": "/docs/self-host"
-            },
-            {
-                "name": "Open-Source",
-                "url": "",
-                "children": [
-                    {
-                        "name": "Disclaimer",
-                        "url": "/docs/self-host/open-source/disclaimer"
-                    },
-                    {
-                        "name": "Deployment",
-                        "url": "/docs/self-host/open-source/deployment"
-                    },
-                    {
-                        "name": "Support",
-                        "url": "/docs/self-host/open-source/support"
-                    }
-                ]
             },
             {
                 "name": "Upgrading PostHog",
@@ -339,6 +349,10 @@
                                     {
                                         "name": "Vertical scaling",
                                         "url": "/docs/runbook/services/clickhouse/vertical-scaling"
+                                    },
+                                    {
+                                        "name": "Debugging load",
+                                        "url": "/docs/runbook/services/clickhouse/debugging-load"
                                     }
                                 ]
                             },
@@ -415,6 +429,14 @@
             {
                 "name": "Troubleshooting and FAQs",
                 "url": "/docs/self-host/deploy/troubleshooting"
+            },
+            {
+                "name": "Support",
+                "url": "/docs/self-host/open-source/support"
+            },
+            {
+                "name": "Disclaimer",
+                "url": "/docs/self-host/open-source/disclaimer"
             }
         ]
     },
@@ -746,6 +768,10 @@
                     {
                         "name": "Trends",
                         "url": "/manual/trends"
+                    },
+                    {
+                        "name": "Sampling (Alpha)",
+                        "url": "/manual/sampling"
                     }
                 ]
             },
@@ -1118,6 +1144,10 @@
                     {
                         "url": "/docs/apps/pineapple-mode",
                         "name": "Pineapple Mode"
+                    },
+                    {
+                        "url": "/docs/apps/user-interview",
+                        "name": "User Interviewer"
                     }
                 ]
             }

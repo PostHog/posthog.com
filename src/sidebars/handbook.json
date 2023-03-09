@@ -231,6 +231,10 @@
                 ]
             },
             {
+                "name": "Finance",
+                "url": "/handbook/people/finance"
+            },
+            {
                 "name": "Merch store",
                 "url": "/handbook/company/merch-store"
             },
@@ -335,12 +339,12 @@
                         "url": "/handbook/engineering/incidents"
                     },
                     {
-                        "name": "Bug prioritization",
-                        "url": "/handbook/engineering/bug-prioritization"
+                        "name": "On-call rotation",
+                        "url": "/handbook/engineering/oncall-rotation"
                     },
                     {
-                        "name": "Pricing principles",
-                        "url": "/handbook/engineering/feature-pricing"
+                        "name": "Bug prioritization",
+                        "url": "/handbook/engineering/bug-prioritization"
                     }
                 ]
             },
@@ -367,10 +371,6 @@
                     {
                         "name": "How to run migrations on PostHog Cloud",
                         "url": "/handbook/engineering/databases/clickhouse-event-table-migrations"
-                    },
-                    {
-                        "name": "Diagnosing ClickHouse load using ClickHouse",
-                        "url": "/handbook/engineering/databases/debugging-load"
                     },
                     {
                         "name": "Working with ClickHouse materialized columns",
@@ -515,6 +515,10 @@
             {
                 "name": "Releasing as beta",
                 "url": "/handbook/product/releasing-as-beta"
+            },
+            {
+                "name": "In-app prompts",
+                "url": "/handbook/product/in-app-prompts"
             }
         ]
     },
@@ -577,6 +581,10 @@
                         "url": "/handbook/growth/marketing/newsletter"
                     },
                     {
+                        "name": "Startups",
+                        "url": "/handbook/growth/marketing/startups"
+                    },
+                    {
                         "name": "Press",
                         "url": "/handbook/growth/marketing/press"
                     },
@@ -625,6 +633,10 @@
                         "url": "/handbook/growth/sales/demos"
                     },
                     {
+                        "name": "Contracts",
+                        "url": "/handbook/growth/sales/contracts"
+                    },
+                    {
                         "name": "Billing",
                         "url": "/handbook/growth/sales/billing"
                     },
@@ -637,12 +649,16 @@
         ]
     },
     {
-        "name": "Growth engineering",
+        "name": "Growth",
         "url": "",
         "children": [
             {
                 "name": "Growth reviews",
                 "url": "/handbook/growth/growth-engineering/growth-sessions"
+            },
+            {
+                "name": "Pricing principles",
+                "url": "/handbook/engineering/feature-pricing"
             }
         ]
     }

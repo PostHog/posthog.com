@@ -492,6 +492,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             let gitHubIssues = []
             if (issues) {
                 for (const issue of issues) {
+                    if (!issue) continue
                     const { html_url, number, title, labels } = await fetch(
                         `https://api.github.com/repos/${repo}/issues/${issue.trim()}`,
                         {
