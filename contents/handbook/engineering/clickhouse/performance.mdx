@@ -34,8 +34,10 @@ Some tips for querying the `query_log`:
 - For distributed queries, filter by `is_initial_query` to disambiguate distributed queries i.e. `is_initial_query = 1` denotes the query sent to the coordinator node, whereas `is_initial_query = 0` denotes internally-generated queries sent to gather data from other shards
 - Use `clusterAllReplicas('<cluster_name>', system.query_log)` to query all nodes
 - Filter on `type = 'QueryFinish'` if you only want data on queries that completed successfully. Forgetting to do so can skew averages since the results will include `QueryStart` events, which have columns such as `query_duration_ms` set to 0.
+- `ProfileEvents` column contains a lot of useful performance data on each query, not all of which is documented. [Check the source](https://github.com/ClickHouse/ClickHouse/blob/master/src/Common/ProfileEvents.cpp) for a full list all measurements.
 
-At PostHog, we also often add metadata to the query as a comment to make it easier to analyze later.
+At PostHog, we also add metadata to each query via the `log_comment` setting to make results easier to analyze. This includes
+information on the source of the query and how it was constructed. See this [runbook](/docs/runbook/services/clickhouse/debugging-load) for more details.
 
 An example query to get recent slow queries:
 
@@ -55,8 +57,11 @@ FROM system.query_log
 WHERE
     query NOT LIKE '%query_log%'
     AND type = 'QueryFinish'
-    AND event_time > now() - interval 3 day
+    AND event_time > now() - toIntervalDay(3)
     AND query_duration_ms > 30000
+    /* If using log_comment, consider including something like:
+    AND JSONExtract(log_comment, 'kind') = 'request'
+    */
 ORDER BY query_duration_ms desc
 LIMIT 10
 ```
