@@ -441,7 +441,6 @@ LogRocket’s heatmap and click tracking functionality exceeds PostHog’s and e
             <td><strong>Ruby</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td></td>
         </tr>
     </tbody>
 </table>
@@ -637,7 +636,6 @@ LogRocket does not offer as many ways to share information with external parties
             <td><strong>Public dashboards</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center">Self-host only</td>
             <td>Make dashboards available without login</td>
         </tr>
         <tr>
