@@ -229,24 +229,6 @@
                 "url": "/docs/self-host"
             },
             {
-                "name": "Open-Source",
-                "url": "",
-                "children": [
-                    {
-                        "name": "Disclaimer",
-                        "url": "/docs/self-host/open-source/disclaimer"
-                    },
-                    {
-                        "name": "Deployment",
-                        "url": "/docs/self-host/open-source/deployment"
-                    },
-                    {
-                        "name": "Support",
-                        "url": "/docs/self-host/open-source/support"
-                    }
-                ]
-            },
-            {
                 "name": "Upgrading PostHog",
                 "url": "",
                 "children": [
@@ -447,6 +429,14 @@
             {
                 "name": "Troubleshooting and FAQs",
                 "url": "/docs/self-host/deploy/troubleshooting"
+            },
+            {
+                "name": "Support",
+                "url": "/docs/self-host/open-source/support"
+            },
+            {
+                "name": "Disclaimer",
+                "url": "/docs/self-host/open-source/disclaimer"
             }
         ]
     },
