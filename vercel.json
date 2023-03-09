@@ -698,6 +698,10 @@
         {
             "source": "/enterprise",
             "destination": "/signup/cloud/enterprise"
+        },
+        {
+            "source": "/docs/self-host/open-source/deployment",
+            "destination": "/docs/self-host"
         }
     ],
     "rewrites": [
