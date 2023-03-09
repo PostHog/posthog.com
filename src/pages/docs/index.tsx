@@ -4,7 +4,6 @@ import docs from 'sidebars/docs.json'
 
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
-import DeployOption from 'components/DeployOption'
 import Link from 'components/Link'
 import PostLayout from 'components/PostLayout'
 import { LinkGrid } from 'components/Docs/LinkGrid'
@@ -48,22 +47,22 @@ const quickLinks = [
     },
 ]
 
-const deployment = [
-    { name: 'PostHog Cloud', to: '/signup', icon: 'posthog', badge: undefined },
-    { name: 'AWS', to: '/docs/self-host/deploy/aws', icon: 'aws', badge: undefined },
-    { name: 'Google Cloud', to: '/docs/self-host/deploy/gcp', icon: 'gcs', badge: undefined },
-    { name: 'DigitalOcean', to: '/docs/self-host/deploy/digital-ocean', icon: 'digital ocean', badge: undefined },
-    { name: 'Azure', to: '/docs/self-host/deploy/azure', icon: 'azure', badge: 'beta' },
-    { name: 'Hobby', to: '/docs/self-host/deploy/hobby', icon: 'docker', badge: undefined },
+const gettingStarted: ImportantLinkProps[] = [
+    { title: 'PostHog Cloud', to: '/signup', icon: 'posthog', badge: undefined },
+    { title: 'AWS', to: '/docs/self-host/deploy/aws', icon: 'aws', badge: undefined },
+    { title: 'Google Cloud', to: '/docs/self-host/deploy/gcp', icon: 'gcs', badge: undefined },
+    { title: 'DigitalOcean', to: '/docs/self-host/deploy/digital-ocean', icon: 'digital ocean', badge: undefined },
+    { title: 'Azure', to: '/docs/self-host/deploy/azure', icon: 'azure', badge: 'beta' },
+    { title: 'Hobby', to: '/docs/self-host/deploy/hobby', icon: 'docker', badge: undefined },
 ]
 
-const libraries = [
-    { name: 'JavaScript', to: '/docs/integrate/client/js', icon: 'js' },
-    { name: 'NodeJS', to: '/docs/integrate/server/node', icon: 'nodejs' },
-    { name: 'Ruby', to: '/docs/integrate/server/ruby', icon: 'ruby' },
-    { name: 'React Native', to: '/docs/integrate/client/react-native', icon: 'react' },
-    { name: 'iOS', to: '/docs/integrate/client/ios', icon: 'ios' },
-    { name: 'Android', to: '/docs/integrate/client/android', icon: 'android' },
+const sdks = [
+    { name: 'JavaScript', to: '/docs/sdks/js', icon: 'js' },
+    { name: 'NodeJS', to: '/docs/sdks/node', icon: 'nodejs' },
+    { name: 'Python', to: '/docs/sdks/python', icon: 'python' },
+    { name: 'React', to: '/docs/sdks/react', icon: 'react' },
+    { name: 'iOS', to: '/docs/sdks/ios', icon: 'ios' },
+    { name: 'Android', to: '/docs/sdks/android', icon: 'android' },
 ]
 
 const apps = [
@@ -137,6 +136,28 @@ const otherLinks = [
     },
 ]
 
+type ImportantLinkProps = {
+    to: string
+    icon?: React.ReactNode
+    title: string
+    badge?: 'new' | 'beta' | undefined
+}
+
+const ImportantLink: React.FC<ImportantLinkProps> = ({ to, icon, title, badge }) => {
+    const badgeClass = badge === 'new' ? 'success' : badge === 'beta' ? 'warning' : null
+
+    return (
+        <Link
+            className="text-almost-black hover:text-almost-black dark:text-white dark:hover:text-white font-semibold p-2 hover:bg-gray-accent/40 active:hover:bg-gray-accent/60 dark:hover:bg-gray-accent/10 dark:active:bg-gray-accent/5 rounded flex items-center space-x-2 text-[14px]"
+            to={to}
+        >
+            {icon}
+            <span>{title}</span>
+            {badge && <span className={`lemon-tag ${badgeClass}`}>{badge}</span>}
+        </Link>
+    )
+}
+
 export const DocsIndex: React.FC = () => {
     return (
         <Layout>
@@ -171,29 +192,30 @@ export const DocsIndex: React.FC = () => {
 
                     <section className="space-y-8">
                         <div className="text-center">
-                            <h2 className="font-bold mb-1">Get started</h2>
-                            <p className="text-gray font-medium">Information on how to get PostHog up and running</p>
+                            <h2 className="font-bold mb-1">Quick links</h2>
+                            <p className="text-gray font-medium">
+                                Information on how to get up and running with PostHog
+                            </p>
                         </div>
 
                         <div className="grid grid-cols-1 xl:grid-cols-3 gap-x-4 rounded xl:rounded-none overflow-hidden">
                             <div className="bg-gray-accent-light dark:bg-gray-accent-dark lg:rounded px-6 py-4">
                                 <div>
                                     <h4 className="font-bold mb-0">
-                                        <span className="text-gray text-lg">1.</span> Deploy
+                                        <span className="text-gray text-lg"></span> Getting started
                                     </h4>
                                     <p className="text-base text-gray">Spin up your PostHog instance</p>
                                 </div>
 
                                 <ul className="grid grid-cols-2 xl:grid-cols-1 w-full list-none m-0 p-0 space-y-1">
-                                    {deployment.map((deploy) => {
+                                    {gettingStarted.map((step) => {
                                         return (
-                                            <li className="flex-grow" key={deploy.name}>
-                                                <DeployOption
-                                                    url={deploy.to}
-                                                    title={deploy.name}
-                                                    icon={deploy.icon}
-                                                    disablePrefetch
-                                                    badge={deploy.badge}
+                                            <li className="flex-grow" key={step.to}>
+                                                <ImportantLink
+                                                    to={step.to}
+                                                    title={step.title}
+                                                    icon={step.icon}
+                                                    badge={step.badge}
                                                 />
                                             </li>
                                         )
@@ -204,19 +226,18 @@ export const DocsIndex: React.FC = () => {
                             <div className="bg-gray-accent-light dark:bg-gray-accent-dark xl:rounded px-6 py-4">
                                 <div>
                                     <h4 className="font-bold mb-0">
-                                        <span className="text-gray text-lg">2.</span> Integrate
+                                        <span className="text-gray text-lg"></span> Popular SDKs
                                     </h4>
                                     <p className="text-base text-gray">Start tracking events and users</p>
                                 </div>
                                 <ul className="grid grid-cols-2 xl:grid-cols-1 w-full list-none m-0 p-0 space-y-1">
-                                    {libraries.map((library) => {
+                                    {sdks.map((sdk) => {
                                         return (
-                                            <li className="flex-grow" key={library.name}>
-                                                <DeployOption
-                                                    url={library.to}
-                                                    title={library.name}
-                                                    icon={library.icon}
-                                                    disablePrefetch
+                                            <li className="flex-grow" key={sdk.name}>
+                                                <ImportantLink
+                                                    to={sdk.to}
+                                                    title={sdk.name}
+                                                    icon={sdk.icon}
                                                     badge={undefined}
                                                 />
                                             </li>
@@ -227,18 +248,17 @@ export const DocsIndex: React.FC = () => {
 
                             <div className="bg-gray-accent-light dark:bg-gray-accent-dark xl:rounded px-6 py-4">
                                 <h4 className="font-bold mb-0">
-                                    <span className="text-gray text-lg">3.</span> Customize
+                                    <span className="text-gray text-lg"></span> Popular apps
                                 </h4>
                                 <p className="text-base text-gray">Customize your installation</p>
                                 <ul className="grid grid-cols-2 xl:grid-cols-1 w-full list-none m-0 p-0 space-y-1">
                                     {apps.map((app) => {
                                         return (
                                             <li className="flex-grow" key={app.name}>
-                                                <DeployOption
-                                                    url={app.to}
+                                                <ImportantLink
+                                                    to={app.to}
                                                     title={app.name}
                                                     icon={app.icon}
-                                                    disablePrefetch
                                                     badge={undefined}
                                                 />
                                             </li>
