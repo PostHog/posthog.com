@@ -48,15 +48,6 @@ const quickLinks = [
     },
 ]
 
-const gettingStarted: ImportantLinkProps[] = [
-    { title: 'PostHog Cloud', to: '/signup', icon: 'posthog', badge: undefined },
-    { title: 'AWS', to: '/docs/self-host/deploy/aws', icon: 'aws', badge: undefined },
-    { title: 'Google Cloud', to: '/docs/self-host/deploy/gcp', icon: 'gcs', badge: undefined },
-    { title: 'DigitalOcean', to: '/docs/self-host/deploy/digital-ocean', icon: 'digital ocean', badge: undefined },
-    { title: 'Azure', to: '/docs/self-host/deploy/azure', icon: 'azure', badge: 'beta' },
-    { title: 'Hobby', to: '/docs/self-host/deploy/hobby', icon: 'docker', badge: undefined },
-]
-
 const otherLinks = [
     {
         name: 'Integrate PostHog',
@@ -124,9 +115,10 @@ type ImportantLinkProps = {
     icon?: string
     title: string
     badge?: 'new' | 'beta' | undefined
+    children?: React.ReactNode
 }
 
-const ImportantLink: React.FC<ImportantLinkProps> = ({ to, icon, title, badge }) => {
+const ImportantLink: React.FC<ImportantLinkProps> = ({ to, icon, title, badge, children }) => {
     const badgeClass = badge === 'new' ? 'success' : badge === 'beta' ? 'warning' : null
 
     return (
@@ -134,7 +126,7 @@ const ImportantLink: React.FC<ImportantLinkProps> = ({ to, icon, title, badge })
             className="text-almost-black hover:text-almost-black dark:text-white dark:hover:text-white font-semibold p-2 hover:bg-gray-accent/40 active:hover:bg-gray-accent/60 dark:hover:bg-gray-accent/10 dark:active:bg-gray-accent/5 rounded flex items-center space-x-2 text-[14px]"
             to={to}
         >
-            <img src={icon} className="w-5 h-5" />
+            {icon ? <img src={icon} className="w-5 h-5" /> : children || null}
             <span>{title}</span>
             {badge && <span className={`lemon-tag ${badgeClass}`}>{badge}</span>}
         </Link>
@@ -142,6 +134,19 @@ const ImportantLink: React.FC<ImportantLinkProps> = ({ to, icon, title, badge })
 }
 
 type DocsData = {
+    gettingStarted: {
+        nodes: {
+            fields: {
+                slug: string
+            }
+            frontmatter: {
+                title: string
+                icon?: {
+                    publicURL: string
+                }
+            }
+        }[]
+    }
     sdks: {
         nodes: {
             fields: {
@@ -171,7 +176,16 @@ type DocsData = {
 }
 
 export const DocsIndex = ({ data }: PageProps<DocsData>) => {
-    const { sdks, apps } = data
+    const { gettingStarted, sdks, apps } = data
+
+    const gettingStartedLinks = React.useMemo(() => {
+        const gettingStartedSection = docs.find((section) => section.name === 'Getting started')?.children || []
+        return gettingStarted.nodes.sort(
+            (a, b) =>
+                gettingStartedSection?.findIndex((link) => link.url === a.fields.slug) -
+                gettingStartedSection?.findIndex((link) => link.url === b.fields.slug)
+        )
+    }, [])
 
     return (
         <Layout>
@@ -208,7 +222,7 @@ export const DocsIndex = ({ data }: PageProps<DocsData>) => {
                         <div className="text-center">
                             <h2 className="font-bold mb-1">Quick links</h2>
                             <p className="text-gray font-medium">
-                                Information on how to get up and running with PostHog
+                                Get up and running <i>fast</i>
                             </p>
                         </div>
 
@@ -218,19 +232,18 @@ export const DocsIndex = ({ data }: PageProps<DocsData>) => {
                                     <h4 className="font-bold mb-0">
                                         <span className="text-gray text-lg"></span> Getting started
                                     </h4>
-                                    <p className="text-base text-gray">Spin up your PostHog instance</p>
+                                    <p className="text-sm text-gray">Complete guide to getting set-up</p>
                                 </div>
 
                                 <ul className="grid grid-cols-2 xl:grid-cols-1 w-full list-none m-0 p-0 space-y-1">
-                                    {gettingStarted.map((step) => {
+                                    {gettingStartedLinks.map((step, index) => {
                                         return (
-                                            <li className="flex-grow" key={step.to}>
-                                                <ImportantLink
-                                                    to={step.to}
-                                                    title={step.title}
-                                                    icon={step.icon}
-                                                    badge={step.badge}
-                                                />
+                                            <li className="flex-grow" key={step.fields.slug}>
+                                                <ImportantLink to={step.fields.slug} title={step.frontmatter.title}>
+                                                    <div className="bg-red text-white w-5 h-5 flex items-center justify-center rounded opacity-60 text-xs">
+                                                        <span>{index + 1}</span>
+                                                    </div>
+                                                </ImportantLink>
                                             </li>
                                         )
                                     })}
@@ -242,7 +255,7 @@ export const DocsIndex = ({ data }: PageProps<DocsData>) => {
                                     <h4 className="font-bold mb-0">
                                         <span className="text-gray text-lg"></span> Popular SDKs
                                     </h4>
-                                    <p className="text-base text-gray">Start tracking events and users</p>
+                                    <p className="text-sm text-gray">Integrate with your favoriate language</p>
                                 </div>
                                 <ul className="grid grid-cols-2 xl:grid-cols-1 w-full list-none m-0 p-0 space-y-1">
                                     {sdks.nodes.map((sdk) => {
@@ -264,7 +277,7 @@ export const DocsIndex = ({ data }: PageProps<DocsData>) => {
                                 <h4 className="font-bold mb-0">
                                     <span className="text-gray text-lg"></span> Popular apps
                                 </h4>
-                                <p className="text-base text-gray">Customize your installation</p>
+                                <p className="text-sm text-gray">Import, transform, and export data</p>
                                 <ul className="grid grid-cols-2 xl:grid-cols-1 w-full list-none m-0 p-0 space-y-1">
                                     {apps.nodes.map((app) => {
                                         return (
@@ -318,6 +331,21 @@ export const DocsIndex = ({ data }: PageProps<DocsData>) => {
 
 export const query = graphql`
     query PopularLinks {
+        gettingStarted: allMdx(
+            filter: { slug: { regex: "/^docs/getting-started/(?!start-here)[\\w\\-]+$/" } }
+        ) {
+            nodes {
+                fields {
+                    slug
+                }
+                frontmatter {
+                    title
+                    icon {
+                        publicURL
+                    }
+                }
+            }
+        }
         sdks: allMdx(
             filter: { slug: { regex: "/^docs/sdks/(js|node|python|react|ios|android)/$/" } }
             sort: { fields: fields___pageViews, order: DESC }
@@ -335,7 +363,7 @@ export const query = graphql`
             }
         }
         apps: allMdx(
-            filter: { slug: { regex: "/^docs/apps/(?!build)\\w+" } }
+            filter: { slug: { regex: "/^docs/apps/(?!build)\\w+/" } }
             sort: { fields: fields___pageViews, order: DESC }
             limit: 6
         ) {
