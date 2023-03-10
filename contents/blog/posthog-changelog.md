@@ -1,5 +1,5 @@
 ---
-date: 2023-05-03
+date: 2023-03-10
 title: "The PostHog Changelog"
 rootPage: /blog
 sidebar: Blog
@@ -53,7 +53,7 @@ The notification app has actually been available for a while, but somehow missed
 ## March 3, 2023
 
 ### 2FA authentication
-![2fa support](../images/blog/array/2fa_posthog.gif)
+![2fa support](../images/blog/array/2fa_posthog.png)
 
 Security is a big focus for us right now, as we work towards full SOC2 authentication - and two-factor authentication is the latest element of that. 
 
