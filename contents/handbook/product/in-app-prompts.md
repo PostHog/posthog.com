@@ -13,7 +13,7 @@ In-app prompts are powered by JSON feature flags.
 1. Create a new feature flag with the name starting with `prompt-`
 2. Add the payload (delete the comments such as `// optional`)
 
-   ```
+   ```json
    {
       "title": "title of the prompt",
       "body": "body of the prompt, can be HTML including links",
