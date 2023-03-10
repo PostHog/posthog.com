@@ -55,7 +55,7 @@ const Data: React.FC<DataProps> = ({ data }) => {
                         product="Data management"
                         title="Get started with data management"
                         description="Learn how to get started with PostHog's data management features. Create cohorts, actions, and more."
-                        link="/docs/data/start-here"
+                        link="/docs/manual/data-management"
                     >
                         <StaticImage
                             alt=""
