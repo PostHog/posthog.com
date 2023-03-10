@@ -1,5 +1,5 @@
 ---
-date: 2023-02-28
+date: 2023-03-10
 title: PostHog vs Heap
 rootPage: /blog
 sidebar: Blog
