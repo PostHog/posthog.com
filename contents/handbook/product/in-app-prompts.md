@@ -11,18 +11,18 @@ If you want to announce a new feature, invite a customer to a slack channel or d
 In-app prompts are powered by JSON feature flags.
 
 1. Create a new feature flag with the name starting with `prompt-`
-2. Add the payload
+2. Add the payload (delete the comments such as `// optional`)
 
    ```
    {
-      title: string // title of the prompt
-      body: string // body of the prompt, can be HTML including links
-      type: PromptType // type of the prompt - either 'modal' or 'popup'
-      image?: string // url of the image
-      url_match?: string // regex to match url against e.g. '.*feature_flags.*'
-      primaryButtonText?: string // text for the primary button
-      secondaryButtonText?: string // text for the secondary button
-      primaryButtonURL?: string // url for the primary button (opens in a new window)
+      "title": "title of the prompt",
+      "body": "body of the prompt, can be HTML including links",
+      "type": "popup", // can be "modal" or "prompt"
+      "image": "url of the image", // optional
+      "url_match": "regex to match url against e.g. '.*feature_flags.*'", // optional
+      "primaryButtonText": "text for the primary button", // optional
+      "secondaryButtonText": "text for the secondary button", // optional
+      "primaryButtonURL": "url for the primary button (opens in a new window)" // optional
    }
    ```
 
@@ -32,7 +32,7 @@ In-app prompts are powered by JSON feature flags.
 
 It will only show one prompt a day, no matter how many prompt feature flags are enabled.
 
-It's recommended to run the prompt for yourself first to make sure it works as expected. If you need to test it again the easiest way is to change the feature flag name (make sure to keep the user property `${feature_flag_name}` up to date).
+It's recommended to run the prompt for yourself first to make sure it works as expected. You can keep changing the text and refreshing. When you click one of the buttons, it won't show you the popup again. The easiest way to retest it is to change the feature flag name (make sure to keep the user property `${feature_flag_name}` up to date) and run this in your [javascript console](https://developer.chrome.com/docs/devtools/console/javascript/) `localStorage.removeItem("prompt-last-seen")`.
 
 If you have any questions message Luke
 
