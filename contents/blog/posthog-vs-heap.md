@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/posthog-vs-mixpanel/posthog-vs-mixpanel.jpeg
+featuredImage: ../images/blog/posthog-vs-heap/posthog-vs-heap.jpeg
 featuredImageType: full
 author: ["andy-vandervell"]
 category: General
@@ -34,7 +34,7 @@ In this guide, we'll cover:
 
 ### 1. PostHog is an all-in-one platform
 
-Heap, like Amplitude and Mixpanel, focuses mainly on product analytics. That means you need to adopt multiple tools for things like session recording, feature management, and A/B testing. PostHog integrates all these features into one platform, so it becomes your single source of truth. We believe you should own your data, so data exports are free on all tiers.
+Heap, like Amplitude and Mixpanel, focuses mainly on product analytics. That means you need to adopt additional tools for things like session recording, feature management, and A/B testing. PostHog integrates all these features into one platform. PostHog is like mission control for your product.
 
 ### 2. PostHog's built for engineers
 
@@ -119,7 +119,7 @@ PostHog integrates several normally separate tools, such as product analytics, s
 
 - **Feature flagging:** The [benefits of feature flags](/blog/feature-flag-benefits-use-cases) include the ability to stagger new feature releases, ship to test groups or specific cohorts, manage feature access, and more. PostHog's feature flag product is built-in and tightly integrated with all other products.
 
-- **Open source:** PostHog is open source and self-hostable via Docker Compose for small event volumes ~ 100k events per month. See our [open source deployment docs](/docs/self-host/open-source/deployment) for more.
+- **Open source:** PostHog is open source and self-hostable via Docker Compose for small event volumes of ~100k events per month. See our [open source deployment docs](/docs/self-host/open-source/deployment) for more.
 
 ### Product analytics
 
