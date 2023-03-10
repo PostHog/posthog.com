@@ -9,6 +9,8 @@ import PostLayout from 'components/PostLayout'
 import { Tutorials } from 'components/Docs/Tutorials'
 import { LinkGrid } from 'components/Docs/LinkGrid'
 import { GettingStarted } from 'components/Docs/GettingStarted'
+import Link from 'components/Link'
+import { Posts } from 'components/Blog'
 
 const quickLinks = [
     {
@@ -46,16 +48,8 @@ const quickLinks = [
 type ProductAnalyticsProps = {
     data: {
         tutorials: {
-            nodes: {
-                slug: string
-                frontmatter: {
-                    title: string
-                    featuredImage: {
-                        childImageSharp: {
-                            gatsbyImageData: IGatsbyImageData
-                        }
-                    }
-                }
+            edges: {
+                node: any
             }[]
         }
     }
@@ -97,10 +91,7 @@ const ProductAnalytics: React.FC<ProductAnalyticsProps> = ({ data }) => {
                     <LinkGrid links={quickLinks} />
                 </section>
 
-                <section className="my-12">
-                    <h3 className="mb-6">Tutorials</h3>
-                    <Tutorials tutorials={tutorials.nodes} />
-                </section>
+                <Tutorials tutorials={tutorials} />
             </PostLayout>
         </Layout>
     )
@@ -110,14 +101,51 @@ export default ProductAnalytics
 
 export const query = graphql`
     query ProductAnalytics {
-        tutorials: allMdx(filter: { frontmatter: { featuredTutorial: { eq: true } } }) {
-            nodes {
-                slug
-                frontmatter {
-                    title
-                    featuredImage {
-                        childImageSharp {
-                            gatsbyImageData(placeholder: NONE)
+        tutorials: allMdx(
+            limit: 6
+            sort: { order: DESC, fields: [frontmatter___date] }
+            filter: {
+                frontmatter: {
+                    tags: {
+                        in: [
+                            "cohorts"
+                            "actions"
+                            "funnels"
+                            "group-analytics"
+                            "insights"
+                            "retention"
+                            "user-paths"
+                            "toolbar"
+                            "trends"
+                        ]
+                    }
+                }
+                fields: { slug: { regex: "/^/tutorials/" } }
+            }
+        ) {
+            edges {
+                node {
+                    id
+                    fields {
+                        slug
+                    }
+                    frontmatter {
+                        title
+                        date(formatString: "MMM 'YY")
+                        Category: tags
+                        Contributor: authorData {
+                            id
+                            image {
+                                childImageSharp {
+                                    gatsbyImageData(width: 36, height: 36)
+                                }
+                            }
+                            name
+                        }
+                        featuredImage {
+                            childImageSharp {
+                                gatsbyImageData(placeholder: NONE)
+                            }
                         }
                     }
                 }

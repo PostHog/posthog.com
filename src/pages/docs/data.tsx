@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import { IGatsbyImageData, StaticImage } from 'gatsby-plugin-image'
+import { StaticImage } from 'gatsby-plugin-image'
 
 import docs from 'sidebars/docs.json'
 import Layout from 'components/Layout'
@@ -31,16 +31,8 @@ const quickLinks = [
 type DataProps = {
     data: {
         tutorials: {
-            nodes: {
-                slug: string
-                frontmatter: {
-                    title: string
-                    featuredImage: {
-                        childImageSharp: {
-                            gatsbyImageData: IGatsbyImageData
-                        }
-                    }
-                }
+            edges: {
+                node: any
             }[]
         }
     }
@@ -81,10 +73,7 @@ const Data: React.FC<DataProps> = ({ data }) => {
                     <LinkGrid links={quickLinks} />
                 </section>
 
-                <section className="my-12">
-                    <h3 className="mb-6">Tutorials</h3>
-                    <Tutorials tutorials={tutorials.nodes} />
-                </section>
+                <Tutorials tutorials={tutorials} />
             </PostLayout>
         </Layout>
     )
@@ -94,14 +83,34 @@ export default Data
 
 export const query = graphql`
     query Data {
-        tutorials: allMdx(filter: { frontmatter: { featuredTutorial: { eq: true } } }) {
-            nodes {
-                slug
-                frontmatter {
-                    title
-                    featuredImage {
-                        childImageSharp {
-                            gatsbyImageData(placeholder: NONE)
+        tutorials: allMdx(
+            limit: 6
+            sort: { order: DESC, fields: [frontmatter___date] }
+            filter: { frontmatter: { tags: { in: ["data management"] } }, fields: { slug: { regex: "/^/tutorials/" } } }
+        ) {
+            edges {
+                node {
+                    id
+                    fields {
+                        slug
+                    }
+                    frontmatter {
+                        title
+                        date(formatString: "MMM 'YY")
+                        Category: tags
+                        Contributor: authorData {
+                            id
+                            image {
+                                childImageSharp {
+                                    gatsbyImageData(width: 36, height: 36)
+                                }
+                            }
+                            name
+                        }
+                        featuredImage {
+                            childImageSharp {
+                                gatsbyImageData(placeholder: NONE)
+                            }
                         }
                     }
                 }
