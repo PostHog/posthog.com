@@ -53,7 +53,7 @@ const FeatureFlags: React.FC<FeatureFlagsProps> = ({ data }) => {
         <Layout>
             <SEO title="Feature flags - Docs - PostHog" />
 
-            <PostLayout title={'Feature flags'} menu={docs} hideSurvey fullWidthContent>
+            <PostLayout title={'Feature flags'} menu={docs} hideSurvey hideSidebar>
                 <h1 className="text-4xl mb-2 mt-6">Feature flags</h1>
                 <h3 className="text-lg text-gray">
                     Toggle features for cohorts or individuals to test the impact before rolling out to everyone.

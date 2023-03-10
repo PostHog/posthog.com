@@ -65,9 +65,9 @@ const ProductAnalytics: React.FC<ProductAnalyticsProps> = ({ data }) => {
     const { tutorials } = data
     return (
         <Layout>
-            <SEO title="Documentation - PostHog" />
+            <SEO title="Product analytics - Documentation - PostHog" />
 
-            <PostLayout title={'Product Analytics'} menu={docs} hideSurvey fullWidthContent={true}>
+            <PostLayout title={'Product Analytics'} menu={docs} hideSurvey hideSidebar>
                 <h1 className="text-4xl mb-2 mt-6">Product analytics</h1>
                 <h3 className="text-lg text-gray">
                     Learn how to use PostHog to understand your users and build better products.

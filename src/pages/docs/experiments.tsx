@@ -53,7 +53,7 @@ const Experiments: React.FC<ExperimentsProps> = ({ data }) => {
         <Layout>
             <SEO title="Experiments - Docs - PostHog" />
 
-            <PostLayout title={'Experiments'} menu={docs} hideSurvey fullWidthContent>
+            <PostLayout title={'Experiments'} menu={docs} hideSurvey hideSidebar>
                 <h1 className="text-4xl mb-2 mt-6">Experiments</h1>
                 <h3 className="text-lg text-gray">
                     Test changes in production with an experimentation suite that makes it easy to get the results you

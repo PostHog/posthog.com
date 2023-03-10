@@ -22,7 +22,7 @@ export const GettingStarted: React.FC<ProductAnalyticsProps> = ({ product, title
                 <a href={link}>Get Started &rarr;</a>
             </div>
 
-            <div className="absolute right-0 top-0 w-1/2 h-full">{children}</div>
+            <div className="absolute right-0 top-0 max-w-1/2 h-full">{children}</div>
         </div>
     )
 }

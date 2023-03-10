@@ -53,7 +53,7 @@ const Data: React.FC<DataProps> = ({ data }) => {
         <Layout>
             <SEO title="Data - Docs - PostHog" />
 
-            <PostLayout title={'Data'} menu={docs} hideSurvey fullWidthContent>
+            <PostLayout title={'Data'} menu={docs} hideSurvey hideSidebar>
                 <h1 className="text-4xl mb-2 mt-6">Data management</h1>
                 <h3 className="text-lg text-gray">Get a complete picture of your users and events.</h3>
 

@@ -53,7 +53,7 @@ const SessionRecording: React.FC<SessionRecordingProps> = ({ data }) => {
         <Layout>
             <SEO title="Session recording - Docs - PostHog" />
 
-            <PostLayout title={'Session recording'} menu={docs} hideSurvey fullWidthContent>
+            <PostLayout title={'Session recording'} menu={docs} hideSurvey hideSidebar>
                 <h1 className="text-4xl mb-2 mt-6">Session recording</h1>
                 <h3 className="text-lg text-gray">
                     Play back sessions to diagnose UI issues, improve support and get inspired.
