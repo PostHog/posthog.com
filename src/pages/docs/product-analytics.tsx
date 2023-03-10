@@ -18,12 +18,12 @@ const quickLinks = [
     },
     {
         name: 'Identify users',
-        to: '/docs/product-analytics/identify-users',
+        to: '/docs/integrate/identifying-users',
         description: 'Learn how to identify users in PostHog.',
     },
     {
         name: 'User properties',
-        to: '/docs/product-analytics/user-properties',
+        to: '/docs/integrate/user-properties',
         description: 'Learn how to use user properties in PostHog.',
     },
     {
@@ -79,7 +79,7 @@ const ProductAnalytics: React.FC<ProductAnalyticsProps> = ({ data }) => {
                         product="Product analytics"
                         title="Start sending events"
                         description="Use our custom SDKs and integrations to send events from your favorite language or platform."
-                        link="/docs/product-analytics/start-here"
+                        link="/docs/getting-started/start-here"
                     >
                         <StaticImage
                             alt=""

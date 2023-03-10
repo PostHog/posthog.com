@@ -52,22 +52,11 @@ const otherLinks = [
     {
         name: 'Integrate PostHog',
         links: [
-            { name: 'Live events', to: '/docs/integrate/ingest-live-data' },
+            { name: 'Send events', to: '/docs/getting-started/send-events' },
             { name: 'Historical events', to: '/docs/integrate/ingest-historic-data' },
             { name: 'Identifying users', to: '/docs/integrate/identifying-users' },
             { name: 'Libraries', to: '/docs/integrate/libraries' },
             { name: 'Proxying events', to: '/docs/integrate/proxy' },
-        ],
-    },
-    {
-        name: 'Product manual',
-        links: [
-            { name: 'Trends', to: '/manual/trends' },
-            { name: 'Funnels', to: '/manual/funnels' },
-            { name: 'Retention', to: '/manual/retention' },
-            { name: 'Session recording', to: '/manual/recordings' },
-            { name: 'Feature flags', to: '/manual/feature-flags' },
-            { name: 'Experimentation', to: '/manual/experimentation' },
         ],
     },
     {
@@ -88,6 +77,16 @@ const otherLinks = [
             { name: 'Use cases', to: '/docs/apps' },
             { name: 'Building an app', to: '/docs/apps/build' },
             { name: 'Developer reference', to: '/docs/apps/build/reference' },
+        ],
+    },
+    {
+        name: 'Data management',
+        links: [
+            { name: 'Organizations & projects', to: '/manual/organizations-and-projects' },
+            { name: 'UTM parameters', to: '/manual/utm-segmentation' },
+            { name: 'Notifications & alerts', to: '/manual/notifications-and-alerts' },
+            { name: 'Events', to: '/manual/events' },
+            { name: 'Annotations', to: '/manual/annotations' },
         ],
     },
     {
