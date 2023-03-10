@@ -12,7 +12,7 @@ export const GettingStarted: React.FC<ProductAnalyticsProps> = ({ product, title
     return (
         <div className="relative flex items-center">
             <div>
-                <div className="flex flex-col md:flex-row items-center opacity-40 space-x-1 mb-2">
+                <div className="flex flex-row items-center opacity-40 space-x-1 mb-2">
                     <img src="/images/product-icons/product-analytics.svg" alt="Product analytics" />
                     <span className="text-xs uppercase font-bold">{product}</span>
                 </div>
@@ -22,7 +22,7 @@ export const GettingStarted: React.FC<ProductAnalyticsProps> = ({ product, title
                 <a href={link}>Get Started &rarr;</a>
             </div>
 
-            <div className="absolute right-0 top-0 max-w-1/2 h-full">{children}</div>
+            <div className="hidden md:block absolute right-0 top-0 max-w-1/2 h-full">{children}</div>
         </div>
     )
 }
