@@ -206,7 +206,7 @@ export const DocsIndex = ({ data }: PageProps<DocsData>) => {
                             <div className="absolute hidden md:block overflow-hidden inset-y-0 right-0 h-full w-full z-10">
                                 <span className="absolute right-0 bottom-0">
                                     <StaticImage
-                                        src="../../contents/images/search-hog-3.png"
+                                        src="../../../contents/images/search-hog-3.png"
                                         alt="This hog has an answer"
                                         width={400}
                                         placeholder="blurred"
