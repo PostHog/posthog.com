@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import { IGatsbyImageData, StaticImage } from 'gatsby-plugin-image'
+import { StaticImage } from 'gatsby-plugin-image'
 
 import docs from 'sidebars/docs.json'
 import Layout from 'components/Layout'
@@ -9,24 +9,22 @@ import PostLayout from 'components/PostLayout'
 import { Tutorials } from 'components/Docs/Tutorials'
 import { LinkGrid } from 'components/Docs/LinkGrid'
 import { GettingStarted } from 'components/Docs/GettingStarted'
-import { Posts } from 'components/Blog'
-import Link from 'components/Link'
 
 const quickLinks = [
     {
-        name: 'Insights',
-        to: '/docs/product-analytics/insights',
-        description: 'Learn how to use PostHog to understand your users and product.',
+        name: 'Local evaluation',
+        to: '/docs/feature-flags/local-evaluation',
+        description: 'Evaluate flags locally when you need an immediate response.',
     },
     {
-        name: 'Identify users',
-        to: '/docs/product-analytics/identify-users',
-        description: 'Learn how to identify users in PostHog.',
+        name: 'Rollout strategies',
+        to: '/docs/feature-flags/rollout-strategies',
+        description: 'Control how your feature flags are rolled out to your users.',
     },
     {
-        name: 'User properties',
-        to: '/docs/product-analytics/user-properties',
-        description: 'Learn how to use user properties in PostHog.',
+        name: 'Multivariate flags',
+        to: '/docs/feature-flags/multivariate-flags',
+        description: 'Test features with multiple variants.',
     },
 ]
 

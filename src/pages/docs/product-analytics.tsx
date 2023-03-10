@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import { IGatsbyImageData, StaticImage } from 'gatsby-plugin-image'
+import { StaticImage } from 'gatsby-plugin-image'
 
 import docs from 'sidebars/docs.json'
 import Layout from 'components/Layout'
@@ -9,8 +9,6 @@ import PostLayout from 'components/PostLayout'
 import { Tutorials } from 'components/Docs/Tutorials'
 import { LinkGrid } from 'components/Docs/LinkGrid'
 import { GettingStarted } from 'components/Docs/GettingStarted'
-import Link from 'components/Link'
-import { Posts } from 'components/Blog'
 
 const quickLinks = [
     {

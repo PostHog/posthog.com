@@ -12,19 +12,19 @@ import { GettingStarted } from 'components/Docs/GettingStarted'
 
 const quickLinks = [
     {
-        name: 'Insights',
-        to: '/docs/product-analytics/insights',
-        description: 'Learn how to use PostHog to understand your users and product.',
+        name: 'Creating an experiment',
+        to: '/docs/experiments/start-here#creating-an-experiment',
+        description: 'Create an experiment to test a hypothesis.',
     },
     {
-        name: 'Identify users',
-        to: '/docs/product-analytics/identify-users',
-        description: 'Learn how to identify users in PostHog.',
+        name: 'Statistical significance',
+        to: '/docs/experiments/significance',
+        description: 'Notes on how to interpret statistical significance.',
     },
     {
-        name: 'User properties',
-        to: '/docs/product-analytics/user-properties',
-        description: 'Learn how to use user properties in PostHog.',
+        name: 'Under the hood',
+        to: '/docs/experiments/under-the-hood',
+        description: 'Detailed information on how experiments work',
     },
 ]
 

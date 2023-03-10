@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import { IGatsbyImageData, StaticImage } from 'gatsby-plugin-image'
+import { StaticImage } from 'gatsby-plugin-image'
 
 import docs from 'sidebars/docs.json'
 import Layout from 'components/Layout'
@@ -9,24 +9,22 @@ import PostLayout from 'components/PostLayout'
 import { Tutorials } from 'components/Docs/Tutorials'
 import { LinkGrid } from 'components/Docs/LinkGrid'
 import { GettingStarted } from 'components/Docs/GettingStarted'
-import Link from 'components/Link'
-import { Posts } from 'components/Blog'
 
 const quickLinks = [
     {
-        name: 'Insights',
-        to: '/docs/product-analytics/insights',
-        description: 'Learn how to use PostHog to understand your users and product.',
+        name: 'Configuration',
+        to: '/docs/session-recording/configure',
+        description: 'Settings for customizing session recording capture.',
     },
     {
-        name: 'Identify users',
-        to: '/docs/product-analytics/identify-users',
-        description: 'Learn how to identify users in PostHog.',
+        name: 'Data retention',
+        to: '/docs/session-recording/data-retention',
+        description: 'Adjust how long session recordings are stored when self-hosting.',
     },
     {
-        name: 'User properties',
-        to: '/docs/product-analytics/user-properties',
-        description: 'Learn how to use user properties in PostHog.',
+        name: 'Troublehsooting & FAQs',
+        to: '/docs/session-recording/troublehsooting',
+        description: 'Common issues and how to resolve them.',
     },
 ]
 
@@ -42,8 +40,6 @@ type SessionRecordingProps = {
 
 const SessionRecording: React.FC<SessionRecordingProps> = ({ data }) => {
     const { tutorials } = data
-
-    console.log(tutorials)
 
     return (
         <Layout>

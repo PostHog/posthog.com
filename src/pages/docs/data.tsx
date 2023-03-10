@@ -12,19 +12,34 @@ import { GettingStarted } from 'components/Docs/GettingStarted'
 
 const quickLinks = [
     {
-        name: 'Insights',
-        to: '/docs/product-analytics/insights',
-        description: 'Learn how to use PostHog to understand your users and product.',
+        name: 'Actions',
+        to: '/manual/actions',
+        description: 'Combine and filter events to create custom actions.',
     },
     {
-        name: 'Identify users',
-        to: '/docs/product-analytics/identify-users',
-        description: 'Learn how to identify users in PostHog.',
+        name: 'Cohorts',
+        to: '/manual/cohorts',
+        description: 'Create groups of users based on their behavior or properties.',
     },
     {
-        name: 'User properties',
-        to: '/docs/product-analytics/user-properties',
-        description: 'Learn how to use user properties in PostHog.',
+        name: 'Events',
+        to: '/manual/events',
+        description: 'Core information on events and event properties.',
+    },
+    {
+        name: 'Persons',
+        to: '/manual/persons',
+        description: 'Identify your users and their properties.',
+    },
+    {
+        name: 'Organizations & projects',
+        to: '/manual/organizations-and-projects',
+        description: 'Organize your data into projects and manage access to them.',
+    },
+    {
+        name: 'Notifications & alerts',
+        to: '/manual/notification-and-alerts',
+        description: 'Set up notifications for when specific actions occur',
     },
 ]
 
