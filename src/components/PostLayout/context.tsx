@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import { IProps } from './types'
 
 export const Context = createContext<IProps | undefined>(undefined)
@@ -36,6 +36,16 @@ export const PostProvider: React.FC<ProviderProps> = ({
         `px-5 lg:px-6 xl:px-12 w-full transition-all ${
             hideSidebar ? 'lg:max-w-5xl' : !fullWidthContent ? 'lg:max-w-3xl' : 'lg:max-w-full'
         } ${menu ? 'mx-auto' : 'lg:ml-auto'}`
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const lsFullWidthContent = localStorage.getItem('full-width-content') === 'true'
+            if (lsFullWidthContent !== fullWidthContent) {
+                setFullWidthContent(lsFullWidthContent)
+            }
+        }
+    }, [])
+
     return (
         <Context.Provider
             value={{

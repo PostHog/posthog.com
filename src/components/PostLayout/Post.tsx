@@ -1,5 +1,5 @@
 import { useLocation } from '@reach/router'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { usePost } from './hooks'
 import { animateScroll as scroll, Link as ScrollLink } from 'react-scroll'
 import { defaultMenuWidth } from './context'
@@ -42,6 +42,13 @@ export default function Post({ children }: { children: React.ReactNode }) {
     const handleFullWidthContentChange = () => {
         localStorage.setItem('full-width-content', !fullWidthContent + '')
         setFullWidthContent(!fullWidthContent)
+    }
+
+    const handleArticleTransitionEnd = (e) => {
+        const hash = window?.location?.hash
+        if (e?.propertyName === 'max-width' && hash) {
+            document.getElementById(hash?.replace('#', ''))?.scrollIntoView()
+        }
     }
 
     return (
@@ -105,7 +112,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
                             id="content-menu-wrapper"
                             className="lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:py-12 py-4 ml-auto w-full h-full box-border lg:overflow-auto"
                         >
-                            <div className={contentContainerClasses}>
+                            <div onTransitionEnd={handleArticleTransitionEnd} className={contentContainerClasses}>
                                 <div>{children}</div>
                                 {questions}
                             </div>
