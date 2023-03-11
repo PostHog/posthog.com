@@ -3,7 +3,7 @@ import PostLayout from 'components/PostLayout'
 import { SEO } from 'components/seo'
 import { createHubSpotContact } from 'lib/utils'
 import React from 'react'
-import { FullQuestion } from 'squeak-react'
+import { FullQuestion } from 'components/Squeak'
 import useSWR from 'swr'
 import community from 'sidebars/community.json'
 

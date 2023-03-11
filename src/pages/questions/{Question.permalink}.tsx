@@ -4,7 +4,7 @@ import { SEO } from 'components/seo'
 import { graphql } from 'gatsby'
 import { createHubSpotContact } from 'lib/utils'
 import React from 'react'
-import { FullQuestion } from 'squeak-react'
+import { FullQuestion } from 'components/Squeak'
 import community from 'sidebars/community.json'
 
 import type { Question } from 'components/Questions'

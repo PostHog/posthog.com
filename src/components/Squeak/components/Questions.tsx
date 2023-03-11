@@ -49,15 +49,7 @@ type QuestionsProps = {
     topic: any
 }
 
-export default function Questions({
-    slug,
-    limit = 100,
-    onSubmit,
-    onLoad,
-    topics,
-    onSignUp,
-    topic,
-}: QuestionsProps) {
+export default function Questions({ slug, limit = 100, onSubmit, onLoad, topics, onSignUp, topic }: QuestionsProps) {
     const [activeTopic, setActiveTopic] = useState(topic)
     const { organizationId, apiHost } = useOrg()
     const [questions, setQuestions] = useState<any[]>([])

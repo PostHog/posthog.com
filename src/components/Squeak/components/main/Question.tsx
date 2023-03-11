@@ -7,32 +7,32 @@ import { Theme } from '../Theme'
 import ErrorBoundary from '../ErrorBoundary'
 
 export const Question: React.FC<QuestionProps & { organizationId: string }> = ({
-  apiHost,
-  organizationId,
-  onResolve,
-  onSubmit,
-  question
+    apiHost,
+    organizationId,
+    onResolve,
+    onSubmit,
+    question,
 }) => {
-  const containerRef = useRef<HTMLDivElement>(null)
+    const containerRef = useRef<HTMLDivElement>(null)
 
-  return (
-    <ErrorBoundary>
-      {/* @ts-ignore */}
-      <root.div ref={containerRef}>
-        <OrgProvider value={{ organizationId, apiHost }}>
-          <UserProvider>
-            <Theme containerRef={containerRef} />
-            <div className='squeak'>
-              <SingleQuestion
-                apiHost={apiHost}
-                question={question}
-                onSubmit={onSubmit}
-                onResolve={onResolve}
-              />
-            </div>
-          </UserProvider>
-        </OrgProvider>
-      </root.div>
-    </ErrorBoundary>
-  )
+    return (
+        <ErrorBoundary>
+            {/* @ts-ignore */}
+            <root.div ref={containerRef}>
+                <OrgProvider value={{ organizationId, apiHost }}>
+                    <UserProvider>
+                        <Theme containerRef={containerRef} />
+                        <div className="squeak">
+                            <SingleQuestion
+                                apiHost={apiHost}
+                                question={question}
+                                onSubmit={onSubmit}
+                                onResolve={onResolve}
+                            />
+                        </div>
+                    </UserProvider>
+                </OrgProvider>
+            </root.div>
+        </ErrorBoundary>
+    )
 }

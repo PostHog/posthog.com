@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { createGlobalStyle } from 'styled-components'
 import getBackgroundColor from '../util/getBackgroundColor'
 import lightOrDark from '../util/lightOrDark'
@@ -6,9 +6,9 @@ import lightOrDark from '../util/lightOrDark'
 const Style = createGlobalStyle`
 :host {
     --primary-color: var(--squeak-primary-color, ${(props: any) =>
-      props.dark ? '255, 255, 255' : '0, 0, 0'}); // rgb triplets, no hex
+        props.dark ? '255, 255, 255' : '0, 0, 0'}); // rgb triplets, no hex
     --default-avatar-fill: var(--squeak-default-avatar-fill, ${(props) =>
-      props.dark ? '0, 0, 0' : '255, 255, 255'}); // rgb triplets, no hex
+        props.dark ? '0, 0, 0' : '255, 255, 255'}); // rgb triplets, no hex
     --button-color: var(--squeak-button-color, 29, 74, 255); // rgb triplet, no hex
     --button-weight: bold; // normal | bold | 600 | etc
     --border-radius: var(--squeak-border-radius, .25rem); // adjusts all radii
@@ -891,13 +891,13 @@ const Style = createGlobalStyle`
 `
 
 export const Theme = ({ containerRef }: any) => {
-  const [dark, setDark] = useState<boolean | null>(null)
+    const [dark, setDark] = useState<boolean | null>(null)
 
-  useEffect(() => {
-    if (containerRef.current) {
-      const color = getBackgroundColor(containerRef.current)
-      setDark(lightOrDark(color) === 'dark')
-    }
-  }, [])
-  return <Style dark={dark} />
+    useEffect(() => {
+        if (containerRef.current) {
+            const color = getBackgroundColor(containerRef.current)
+            setDark(lightOrDark(color) === 'dark')
+        }
+    }, [])
+    return <Style dark={dark} />
 }

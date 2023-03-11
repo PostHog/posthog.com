@@ -1,6 +1,6 @@
 import { createHubSpotContact, squeakProfileLink } from 'lib/utils'
 import React from 'react'
-import { Squeak } from 'squeak-react'
+import { Squeak } from 'components/Squeak'
 
 export default function CommunityQuestions() {
     return (

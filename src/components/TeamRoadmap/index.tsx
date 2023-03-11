@@ -2,7 +2,7 @@ import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { CardContainer, IRoadmap } from 'components/Roadmap'
 import { InProgress } from 'components/Roadmap/InProgress'
-import { OrgProvider, UserProvider } from 'squeak-react'
+import { OrgProvider, UserProvider } from 'components/Squeak'
 import Link from 'components/Link'
 
 export default function TeamRoadmap({ team }: { team?: string }) {
