@@ -5,6 +5,8 @@ import React, { useEffect, useState } from 'react'
 import Link from 'components/Link'
 import { Link as ScrollLink } from 'react-scroll'
 import { AnimatePresence, motion } from 'framer-motion'
+import * as ProductIcons from '../ProductIcons'
+import * as NotProductIcons from '../NotProductIcons'
 
 const Chevron = ({ open, className = '' }: { open: boolean; className?: string }) => {
     return (
@@ -29,6 +31,14 @@ const Chevron = ({ open, className = '' }: { open: boolean; className?: string }
             </svg>
         </div>
     )
+}
+
+const getIcon = (name: string) => {
+    return ProductIcons[name]
+        ? ProductIcons[name]({ className: 'w-5' })
+        : NotProductIcons[name]
+        ? NotProductIcons[name]({ className: 'w-5' })
+        : null
 }
 
 export default function Menu({
@@ -119,17 +129,10 @@ export default function Menu({
                             )}
                         </AnimatePresence>
                         {icon ? (
-                            typeof icon === 'string' ? (
-                                <span className="cursor-pointer flex items-center space-x-2 text-black dark:text-white">
-                                    <img className="w-5 h-5 opacity-40 dark:invert" src={icon} />
-                                    <span>{name}</span>
-                                </span>
-                            ) : (
-                                <span className="cursor-pointer flex items-center space-x-2 text-[17px] font-semibold text-black hover:text-black">
-                                    <span className="w-[25px]">{icon}</span>
-                                    <span>{name}</span>
-                                </span>
-                            )
+                            <span className="cursor-pointer flex items-center space-x-2 text-[17px] font-semibold text-black hover:text-black">
+                                <span className="w-[25px]">{typeof icon === 'string' ? getIcon(icon) : icon}</span>
+                                <span>{name}</span>
+                            </span>
                         ) : (
                             <>
                                 <span>
