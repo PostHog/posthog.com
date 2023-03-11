@@ -35,14 +35,20 @@ export const onRouteUpdate = ({ location, prevLocation }: RouteUpdateArgs) => {
         window?.posthog?.capture('$pageview')
     }
 }
-
-// TODO: Is this needed?
-/*export const wrapPageElement = ({ element, props }) => {
+export const wrapPageElement = ({ element, props }) => {
     const slug = props.location.pathname.substring(1)
     return props.custom404 || !props.data ? (
         element
-    ) : /^handbook|^docs\/(?!api|product-analytics)|^manual/.test(slug) &&
-      !['docs/api/post-only-endpoints', 'docs/api/user'].includes(slug) ? (
+    ) : /^handbook|^docs\/(?!api)|^manual/.test(slug) &&
+      ![
+          'docs/api/post-only-endpoints',
+          'docs/api/user',
+          'docs/product-analytics',
+          'docs/session-recording',
+          'docs/feature-flags',
+          'docs/experiments',
+          'docs/data',
+      ].includes(slug) ? (
         <HandbookLayout {...props} />
     ) : /^product\//.test(slug) ? (
         <Product {...props} />
@@ -51,4 +57,4 @@ export const onRouteUpdate = ({ location, prevLocation }: RouteUpdateArgs) => {
     ) : (
         element
     )
-}*/
+}
