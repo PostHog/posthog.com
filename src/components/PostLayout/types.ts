@@ -15,7 +15,7 @@ export interface IContributor {
 }
 
 export interface IMenu {
-    icon?: string
+    icon?: string | React.ReactNode
     name: string
     url?: string
     children?: IMenu[]
