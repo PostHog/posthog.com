@@ -65,6 +65,7 @@ module.exports = {
             retrievePages('tutorial', '/^tutorials/'),
             retrievePages('blog', '/^blog/'),
             retrievePages('customers', '/^customers/'),
+            retrievePages('apps', '/^apps/'),
             {
                 query: `
                             {
