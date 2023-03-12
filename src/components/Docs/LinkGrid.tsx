@@ -8,25 +8,25 @@ type LinkGridProps = {
 
 export const LinkGrid: React.FC<LinkGridProps> = ({ links }) => {
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 border-l border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark">
+        <ul className="p-0 m-0 grid md:grid-cols-2 gap-[1px]">
             {links.map((link) => {
                 return (
-                    <Link
-                        to={link.to}
-                        key={link.name}
-                        disablePrefetch
-                        className="border-b border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark px-8 py-4 flex items-start space-x-3 hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark"
-                    >
-                        {link.icon && <Icon className="w-6 h-6 text-gray mt-1 lg:mt-0.5 shrink-0" name={link.icon} />}
-                        <div>
-                            <h3 className="text-lg font-bold text-red mb-0.5">{link.name}</h3>
-                            <p className="text-black dark:text-white font-medium mb-2 text-gray-accent-dark text-sm">
-                                {link.description}
-                            </p>
-                        </div>
-                    </Link>
+                    <li className="list-none">
+                        <Link
+                            to={link.to}
+                            key={link.name}
+                            disablePrefetch
+                            className="group -mx-2 px-2 py-2 my-1 rounded-sm flex items-center space-x-3 hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark"
+                        >
+                            {link.icon && <Icon className="w-8 h-8 text-gray bg-gray-accent-light group-hover:bg-gray-accent/50 rounded-sm mt-1 lg:mt-0.5 shrink-0" name={link.icon} />}
+                            <div>
+                                <h3 className="text-base font-semibold text-red m-0">{link.name}</h3>
+                                {/* {link.description} */}
+                            </div>
+                        </Link>
+                    </li>
                 )
             })}
-        </div>
+        </ul>
     )
 }

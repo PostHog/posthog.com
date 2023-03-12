@@ -1,4 +1,5 @@
 import React from 'react'
+import { Analytics } from 'components/ProductIcons'
 
 type ProductAnalyticsProps = {
     product: string
@@ -12,8 +13,10 @@ export const GettingStarted: React.FC<ProductAnalyticsProps> = ({ product, title
     return (
         <div className="relative flex items-center">
             <div>
-                <div className="flex flex-row items-center opacity-40 space-x-1 mb-2">
-                    <img src="/images/product-icons/product-analytics.svg" alt="Product analytics" />
+                <div className="flex flex-row items-center opacity-70 space-x-1 mb-2">
+                    <span className="inline-block w-6 h-6">
+                        <Analytics />
+                    </span>
                     <span className="text-xs uppercase font-bold">{product}</span>
                 </div>
                 <h3 className="mb-2 mt-0">{title}</h3>

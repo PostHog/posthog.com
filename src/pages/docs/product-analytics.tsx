@@ -12,34 +12,54 @@ import { GettingStarted } from 'components/Docs/GettingStarted'
 
 const quickLinks = [
     {
-        name: 'Insights',
-        to: '/docs/product-analytics/insights',
-        description: 'Learn how to use PostHog to understand your users and product.',
+        "icon": "Trends",
+        name: 'Graphs & trends',
+        to: '/manual/trends',
     },
     {
-        name: 'Identify users',
-        to: '/docs/integrate/identifying-users',
-        description: 'Learn how to identify users in PostHog.',
+        "icon": "Funnels",
+        name: 'Funnels',
+        to: '/manual/funnels',
     },
     {
-        name: 'User properties',
-        to: '/docs/integrate/user-properties',
-        description: 'Learn how to use user properties in PostHog.',
+        "icon": "PathAnalysis",
+        name: 'User paths',
+        to: '/manual/user-paths',
     },
     {
-        name: 'Group analytics',
-        to: '/docs/product-analytics/group-analytics',
-        description: 'Learn how to use PostHog to understand your users and product.',
-    },
-    {
-        name: 'Toolbar',
-        to: '/docs/product-analytics/toolbar',
-        description: "Learn how to use PostHog's toolbar to understand your users and product.",
-    },
-    {
+        "icon": "Dashboards",
         name: 'Dashboards',
-        to: '/docs/product-analytics/dashboards',
-        description: 'Learn how to use PostHog to understand your users and product.',
+        to: '/manual/dashboards',
+    },
+    {
+        "icon": "Retention",
+        name: 'Retention',
+        to: '/manual/retention',
+    },
+    {
+        "icon": "Stickiness",
+        name: 'Stickiness',
+        to: '/manual/stickiness',
+    },
+    {
+        "icon": "Lifecycle",
+        name: 'Lifecycle',
+        to: '/manual/lifecycle',
+    },
+    {
+        "icon": "CorrelationAnalysis",
+        name: 'Correlation analysis',
+        to: '/manual/correlation',
+    },
+    {
+        "icon": "GroupAnalytics",
+        name: 'Groups',
+        to: '/manual/group-analytics',
+    },
+    {
+        "icon": "Toolbar",
+        name: 'Toolbar',
+        to: '/manual/toolbar',
     },
 ]
 
@@ -85,7 +105,7 @@ const ProductAnalytics: React.FC<ProductAnalyticsProps> = ({ data }) => {
 
                 {/* Quick links */}
                 <section className="my-12">
-                    <h3 className="mb-6 mt-0">Quick links</h3>
+                    <h3 className="mb-6 mt-0">Pages</h3>
                     <LinkGrid links={quickLinks} />
                 </section>
 
