@@ -289,24 +289,12 @@
         ]
     },
     {
-        "name": "Products"
-    },
-    {
-        "name": "Product analytics",
-        "url": "/docs/product-analytics",
-        "icon": "Analytics",
+        "name": "Import & advanced",
+        "url": "",
         "children": [
             {
                 "name": "Ingest historical data",
                 "url": "/docs/integrate/ingest-historic-data"
-            },
-            {
-                "name": "Identifying users",
-                "url": "/docs/integrate/identifying-users"
-            },
-            {
-                "name": "User properties",
-                "url": "/docs/integrate/user-properties"
             },
             {
                 "name": "Using a CDP",
@@ -319,53 +307,60 @@
             {
                 "name": "Browser extensions",
                 "url": "/docs/integrate/browser-extension"
+            }
+        ]
+    },
+    {
+        "name": "Products"
+    },
+    {
+        "name": "Product analytics",
+        "url": "/docs/product-analytics",
+        "icon": "Analytics",
+        "children": [
+            {
+                "name": "Overview",
+                "url": "/docs/product-analytics"
+            },
+            {
+                "name": "Correlation Analysis",
+                "url": "/manual/correlation"
             },
             {
                 "name": "Dashboards",
                 "url": "/manual/dashboards"
             },
             {
-                "name": "Insights",
-                "url": "/manual/insights",
-                "children": [
-                    {
-                        "name": "Trends",
-                        "url": "/manual/trends"
-                    },
-
-                    {
-                        "name": "Funnels",
-                        "url": "/manual/funnels"
-                    },
-                    {
-                        "name": "Lifecycle",
-                        "url": "/manual/lifecycle"
-                    },
-                    {
-                        "name": "Path analysis",
-                        "url": "/manual/paths"
-                    },
-                    {
-                        "name": "Retention",
-                        "url": "/manual/retention"
-                    },
-                    {
-                        "name": "Stickiness",
-                        "url": "/manual/stickiness"
-                    }
-                ]
+                "name": "Funnels",
+                "url": "/manual/funnels"
             },
             {
                 "name": "Group Analytics",
                 "url": "/manual/group-analytics"
             },
             {
+                "name": "Lifecycle",
+                "url": "/manual/lifecycle"
+            },
+            {
+                "name": "Retention",
+                "url": "/manual/retention"
+            },
+            {
+                "name": "Stickiness",
+                "url": "/manual/stickiness"
+            },
+            {
                 "name": "Toolbar",
                 "url": "/manual/toolbar"
             },
             {
-                "name": "Correlation Analysis",
-                "url": "/manual/correlation"
+                "name": "Trends",
+                "url": "/manual/trends"
+            },
+            {
+                "name": "User paths",
+                "url": "/manual/paths"
             }
         ]
     },

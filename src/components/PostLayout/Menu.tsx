@@ -129,8 +129,10 @@ export default function Menu({
                             )}
                         </AnimatePresence>
                         {icon ? (
-                            <span className="cursor-pointer flex items-center space-x-2 text-[17px] font-semibold text-black hover:text-black">
-                                <span className="w-[25px]">{typeof icon === 'string' ? getIcon(icon) : icon}</span>
+                            <span className="cursor-pointer flex items-center space-x-2 font-semibold text-black hover:text-black">
+                                <span className="w-[25px] opacity-70">
+                                    {typeof icon === 'string' ? getIcon(icon) : icon}
+                                </span>
                                 <span>{name}</span>
                             </span>
                         ) : (
