@@ -105,7 +105,7 @@ const ProductAnalytics: React.FC<ProductAnalyticsProps> = ({ data }) => {
 
                 {/* Quick links */}
                 <section className="my-12">
-                    <h3 className="mb-6 mt-0">Pages</h3>
+                    <h3 className="mb-6 mt-0">Chapters</h3>
                     <LinkGrid links={quickLinks} />
                 </section>
 

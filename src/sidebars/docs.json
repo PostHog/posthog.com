@@ -370,8 +370,8 @@
         "icon": "SessionRecording",
         "children": [
             {
-                "name": "Start here",
-                "url": "/docs/session-recording/start-here"
+                "name": "Product manual",
+                "url": "/docs/session-recording/manual"
             },
             {
                 "name": "Configure",
@@ -393,8 +393,8 @@
         "icon": "FeatureFlags",
         "children": [
             {
-                "name": "Start here",
-                "url": "/docs/feature-flags/start-here"
+                "name": "Product manual",
+                "url": "/docs/feature-flags/manual"
             },
             {
                 "name": "Local evaluation",
@@ -416,8 +416,8 @@
         "icon": "Experiments",
         "children": [
             {
-                "name": "Start here",
-                "url": "/docs/experiments/start-here"
+                "name": "Product manual",
+                "url": "/docs/experiments/manual"
             },
             {
                 "name": "Statistical significance",
