@@ -37,8 +37,8 @@ const getIcon = (name: string) => {
     return ProductIcons[name]
         ? ProductIcons[name]({ className: 'w-5' })
         : NotProductIcons[name]
-            ? NotProductIcons[name]({ className: 'w-5' })
-            : null
+        ? NotProductIcons[name]({ className: 'w-5' })
+        : null
 }
 
 export default function Menu({
@@ -56,10 +56,11 @@ export default function Menu({
     const pathname = replacePath(location?.pathname)
     const [isActive, setIsActive] = useState(false)
     const [open, setOpen] = useState<boolean | undefined>(false)
-    const buttonClasses = `mb-[1px] text-left flex justify-between items-center relative text-primary hover:text-primary dark:text-white dark:hover:text-white pl-3 pr-2 py-1.5 inline-block w-full rounded-sm text-[15px] leading-tight relative active:top-[0.5px] active:scale-[.99] cursor-pointer ${children || topLevel
-        ? 'hover:bg-gray-accent-light active:bg-[#DBDCD6] dark:hover:bg-gray-accent-dark transition min-h-[36px]'
-        : ''
-        } ${children && open ? 'bg-gray-accent-light dark:bg-gray-accent-dark font-bold' : ''}`
+    const buttonClasses = `mb-[1px] text-left flex justify-between items-center relative text-primary hover:text-primary dark:text-white dark:hover:text-white pl-3 pr-2 py-1.5 inline-block w-full rounded-sm text-[15px] leading-tight relative active:top-[0.5px] active:scale-[.99] cursor-pointer ${
+        children || topLevel
+            ? 'hover:bg-gray-accent-light active:bg-[#DBDCD6] dark:hover:bg-gray-accent-dark transition min-h-[36px]'
+            : ''
+    } ${children && open ? 'bg-gray-accent-light dark:bg-gray-accent-dark font-bold' : ''}`
     const badgeClasses = `bg-gray-accent/50 text-primary/75 dark:text-primary-dark/60 dark:bg-gray-accent-dark text-xs m-[-2px] font-medium rounded-sm px-1 py-0.5 inline-block`
 
     useEffect(() => {
@@ -110,8 +111,9 @@ export default function Menu({
                                 setOpen(!open)
                             }
                         }}
-                        className={`${buttonClasses} ${!topLevel ? 'group' : ''} ${isActive || isWithChild ? 'active' : ''
-                            }`}
+                        className={`${buttonClasses} ${!topLevel ? 'group' : ''} ${
+                            isActive || isWithChild ? 'active' : ''
+                        }`}
                         to={url}
                         {...menuLinkProps}
                     >
@@ -127,8 +129,10 @@ export default function Menu({
                             )}
                         </AnimatePresence>
                         {icon ? (
-                            <span className="cursor-pointer flex items-center space-x-2 font-semibold text-black hover:text-black">
-                                <span className="w-[25px] opacity-70">{typeof icon === 'string' ? getIcon(icon) : icon}</span>
+                            <span className="cursor-pointer flex items-center space-x-2 font-semibold text-primary hover:text-primary dark:text-primary-dark hover:text-primary-dark">
+                                <span className="w-[25px] opacity-70">
+                                    {typeof icon === 'string' ? getIcon(icon) : icon}
+                                </span>
                                 <span>{name}</span>
                             </span>
                         ) : (

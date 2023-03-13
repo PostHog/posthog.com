@@ -21,7 +21,7 @@ export const LinkGrid: React.FC<LinkGridProps> = ({ links }) => {
                             hover:scale-[1.01] hover:top-[-.5px] active:top-[0.25px] active:scale-[.99]"
                         >
                             {Icon && (
-                                <Icon className="w-10 h-10 p-2 text-primary dark:text-primary-dark bg-gray-accent-light group-hover:bg-gray-accent/50 rounded-sm mt-1 lg:mt-0.5 shrink-0" />
+                                <Icon className="w-10 h-10 p-2 text-primary dark:text-primary-dark bg-gray-accent-light group-hover:bg-gray-accent/50 dark:bg-gray-accent-dark grou-hover:bg-gray-accent/50 rounded-sm mt-1 lg:mt-0.5 shrink-0" />
                             )}
                             <div>
                                 <h3 className="text-base font-semibold text-red m-0">{link.name}</h3>
