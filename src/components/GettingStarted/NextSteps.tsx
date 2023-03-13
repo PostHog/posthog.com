@@ -88,7 +88,7 @@ export const FeatureFlags = () => {
 
 export const Experiments = () => {
     return (
-        <NextStep title="A/B testing" url="/docs/exerpiments" links={experimentsLinks}>
+        <NextStep title="A/B testing" url="/docs/experiments" links={experimentsLinks}>
             <StaticImage
                 alt=""
                 placeholder="none"

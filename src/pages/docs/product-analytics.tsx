@@ -24,7 +24,7 @@ export const quickLinks = [
     {
         icon: 'PathAnalysis',
         name: 'User paths',
-        to: '/manual/user-paths',
+        to: '/manual/paths',
     },
     {
         icon: 'Dashboards',

@@ -11,37 +11,37 @@ import { graphql, PageProps } from 'gatsby'
 
 const quickLinks = [
     {
-        icon: 'insights',
+        icon: 'Analytics',
         name: 'Product analytics',
         to: '/docs/product-analytics',
         description: 'Better understand your users and build better products',
     },
     {
-        icon: 'session-recording',
+        icon: 'SessionRecording',
         name: 'Session recording',
         to: '/docs/session-recording',
         description: 'Play back sessions to diagnose UI issues and get inspired',
     },
     {
-        icon: 'feature-flags',
+        icon: 'FeatureFlags',
         name: 'Feature flags',
         to: '/docs/feature-flags',
         description: 'Toggle features to test the impact before rolling out',
     },
     {
-        icon: 'experimentation',
-        name: 'Experiments',
+        icon: 'AbTesting',
+        name: 'A/B testing',
         to: '/docs/experiments',
         description: 'A/B test UI changes and new features',
     },
     {
-        icon: 'selfHost',
+        icon: 'DataManagement',
         name: 'Data',
         to: '/docs/data',
         description: 'Get a complete picture of all your data',
     },
     {
-        icon: 'apps',
+        icon: 'AppLibrary',
         name: 'Apps',
         to: '/docs/apps',
         description: 'Extend PostHog by adding your own functionality',
@@ -192,7 +192,7 @@ export const DocsIndex = ({ data }: PageProps<DocsData>) => {
 
             <PostLayout article={false} title={'Docs'} menu={docs} hideSidebar hideSurvey>
                 <div className="space-y-16 lg:space-y-20 lg:mt-0 mt-8 mb-8">
-                    <section>
+                    <section className="border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark pb-8">
                         <div className="w-full z-20">
                             <StaticImage
                                 objectFit="contain"
@@ -205,9 +205,12 @@ export const DocsIndex = ({ data }: PageProps<DocsData>) => {
                             <h1 className="font-bold text-3xl md:text-4xl lg:text-5xl mb-2 whitespace-nowrap">
                                 Documentation
                             </h1>
-                            <h5 className="opacity-60 font-semibold leading-tight mb-8">
-                                In-depth tutorials, references, and <br className="hidden md:block xl:hidden" />
-                                examples for everything PostHog
+                            <h5 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tighttext-lg text-gray pb-8">
+                                New to PostHog? Visit the{' '}
+                                <Link to="/docs/getting-started/start-here" className="font-semibold">
+                                    getting started guide
+                                </Link>
+                                .
                             </h5>
                         </div>
 
@@ -217,9 +220,6 @@ export const DocsIndex = ({ data }: PageProps<DocsData>) => {
                     <section className="space-y-8">
                         <div className="text-center">
                             <h2 className="font-bold mb-1 inline-block w-full">Quick links</h2>
-                            <p className="text-gray font-medium">
-                                Get up and running <i>fast</i>
-                            </p>
                         </div>
 
                         <div className="grid grid-cols-1 xl:grid-cols-3 gap-x-4 rounded xl:rounded-none overflow-hidden">
@@ -231,7 +231,7 @@ export const DocsIndex = ({ data }: PageProps<DocsData>) => {
                                     <p className="text-sm text-gray">Complete guide to getting set-up</p>
                                 </div>
 
-                                <ul className="grid grid-cols-2 xl:grid-cols-1 w-full list-none m-0 p-0 space-y-1">
+                                <ul className="grid sm:grid-cols-2 xl:grid-cols-1 w-full list-none m-0 p-0 space-y-1">
                                     {gettingStartedLinks.map((step, index) => {
                                         return (
                                             <li className="flex-grow" key={step.fields.slug}>
@@ -274,7 +274,7 @@ export const DocsIndex = ({ data }: PageProps<DocsData>) => {
                                     <span className="text-gray text-lg"></span> Popular apps
                                 </h4>
                                 <p className="text-sm text-gray">Import, transform, and export data</p>
-                                <ul className="grid grid-cols-2 xl:grid-cols-1 w-full list-none m-0 p-0 space-y-1">
+                                <ul className="grid sm:grid-cols-2 xl:grid-cols-1 w-full list-none m-0 p-0 space-y-1">
                                     {apps.nodes.map((app) => {
                                         return (
                                             <li className="flex-grow" key={app.fields.slug}>
@@ -294,7 +294,7 @@ export const DocsIndex = ({ data }: PageProps<DocsData>) => {
 
                     <section className="space-y-8">
                         <div className="text-center">
-                            <h2 className="font-bold mb-1">Important links</h2>
+                            <h2 className="font-bold mb-1">More handy links</h2>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-l border-dashed border-gray-accent-light dark:border-gray-accent-dark">
