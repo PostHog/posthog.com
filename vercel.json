@@ -706,6 +706,10 @@
         {
             "source": "/docs/self-host/open-source/deployment",
             "destination": "/docs/self-host"
+        },
+        {
+            "source": "/docs/integrate/identifying-users",
+            "destination": "/docs/getting-started/identify-users"
         }
     ],
     "rewrites": [
