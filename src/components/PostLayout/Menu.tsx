@@ -180,7 +180,11 @@ export default function Menu({
                     </button>
                 )}
                 {isWithChild && (
-                    <motion.div initial={{ height: 0 }} animate={{ height: open ? 'auto' : 0 }}>
+                    <motion.div
+                        className={icon ? 'pl-[25px] -ml-2' : ''}
+                        initial={{ height: 0 }}
+                        animate={{ height: open ? 'auto' : 0 }}
+                    >
                         {children.map((child) => {
                             return <Menu handleLinkClick={handleLinkClick} key={child.name} {...child} />
                         })}
