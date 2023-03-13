@@ -31,7 +31,7 @@ We’ve added a few simple templates to start with, for getting insights into ar
 ### Hedgehog Mode collisions
 ![hedgehog mode collisions](../images/blog/array/when-hogs-collide.gif)
 
-Hedgehog mode has had a frankly startling amount of improvements in recent weeks, but the latest is one of the most fun yet. We’ve now added collision detection, so that you can make Max ([that’s his name](/handbook/company/team) jump around all over the PostHog UI. 
+Hedgehog mode has had a frankly startling amount of improvements in recent weeks, but the latest is one of the most fun yet. We’ve now added collision detection, so that you can make Max ([that’s his name](/handbook/company/team)) jump around all over the PostHog UI. 
 
 Is this important? Is it our defining feature? Is it the foundation for even crazier projects to come at our next hackathon? The answer to all of these questions is, yes, probably - and you can turn on Hedgehog Mode via the in-app drop down menu. 
 
@@ -41,12 +41,12 @@ We always love adding user contributions into PostHog, especially when they have
 ### Memphis Export app
 ![memphis export](../images/blog/array/memphis-app.gif)
 
-Memphis is an alternative to traditional message brokers, enabling you to build modern, queue-based applications. The team there recently created their own PostHog app, which enables you to publish events from PostHog to a Memphis station upon ingestion, so you use them as triggers. [Check the docs for more info](apps/memphis-exporter)!
+Memphis is an alternative to traditional message brokers, enabling you to build modern, queue-based applications. The team there recently created their own PostHog app, which enables you to publish events from PostHog to a Memphis station upon ingestion, so you use them as triggers. [Check the docs for more info](/apps/memphis-exporter)
 
 ### Notification Bar app
 ![posthog site apps](../images/blog/array/notification_bar.gif)
 
-The notification app has actually been available for a while, but somehow missed getting an announcement at the time. It’s part of the site apps beta, which enable you to add features to your site via the PostHog JavaScript library — in this case, adding a notification bar for delivering important messages. [Check the docs for more info](apps/notification-bar)!
+The notification app has actually been available for a while, but somehow missed getting an announcement at the time. It’s part of the site apps beta, which enable you to add features to your site via the PostHog JavaScript library — in this case, adding a notification bar for delivering important messages. [Check the docs for more info](/apps/notification-bar)!
 
 > Want to make your own PostHog apps? Check the docs for tips on [how to use PostHog's in-app source editor](/tutorials/build-your-own-posthog-app). 
 
