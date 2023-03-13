@@ -50,16 +50,16 @@ const FeatureFlags: React.FC<FeatureFlagsProps> = ({ data }) => {
                     alt=""
                     placeholder="none"
                     quality={100}
-                    className="w-[400px] float-right ml-8 -mt-8 mb-8"
+                    className="w-full sm:w-[400px] sm:float-right sm:ml-8 sm:-mt-8 sm:mb-8"
                     src="../../components/Home/Slider/images/feature-flags-hog.png"
                 />
                 <h1 className="text-4xl mb-2 mt-6">Feature flags</h1>
-                <h3 className="text-lg text-gray">
+                <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
                     Toggle features for cohorts or individuals to test the impact before rolling out to everyone.
                 </h3>
 
                 {/* Get started section */}
-                <section className="py-12">
+                <section className="py-6 sm:py-12">
                     <GettingStarted
                         product="Feature flags"
                         title="Roll out your first feature"
@@ -69,7 +69,7 @@ const FeatureFlags: React.FC<FeatureFlagsProps> = ({ data }) => {
                 </section>
 
                 {/* Quick links */}
-                <section className="my-12">
+                <section className="my-6">
                     <h3 className="mb-6 mt-0">Quick links</h3>
                     <LinkGrid links={quickLinks} />
                 </section>

@@ -89,11 +89,11 @@ const ProductAnalytics: React.FC<ProductAnalyticsProps> = ({ data }) => {
                     alt=""
                     placeholder="none"
                     quality={100}
-                    className="w-[400px] float-right ml-8 -mt-8 mb-8"
+                    className="w-full sm:w-[400px] sm:float-right sm:ml-8 sm:-mt-8 sm:mb-8"
                     src="../../components/Home/Slider/images/product-analytics-hog.png"
                 />
                 <h1 className="text-4xl mb-2 mt-6">Product analytics</h1>
-                <h3 className="text-lg text-gray font-medium">
+                <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
                     Learn how to use product analytics to understand your users.
                 </h3>
 

@@ -61,25 +61,26 @@ const Data: React.FC<DataProps> = ({ data }) => {
             <SEO title="Data - Docs - PostHog" />
 
             <PostLayout title={'Data'} menu={docs} hideSurvey hideSidebar>
+                <StaticImage
+                    alt=""
+                    placeholder="none"
+                    quality={100}
+                    className="w-full sm:w-[400px] sm:float-right sm:ml-8 sm:-mt-8 sm:mb-8"
+                    src="../../components/Product/images/hogs/data-warehouse.png"
+                />
                 <h1 className="text-4xl mb-2 mt-6">Data management</h1>
-                <h3 className="text-lg text-gray">Get a complete picture of your users and events.</h3>
+                <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75">
+                    Manage the data used throughout the PostHog suite.
+                </h3>
 
                 {/* Get started section */}
-                <section className="py-12">
+                <section className="py-6 sm:py-12">
                     <GettingStarted
                         product="Data management"
                         title="Get started with data management"
                         description="Learn how to get started with PostHog's data management features. Create cohorts, actions, and more."
                         link="/docs/manual/data-management"
-                    >
-                        <StaticImage
-                            alt=""
-                            placeholder="none"
-                            quality={100}
-                            className="w-[400px]"
-                            src="../../components/Product/images/hogs/data-warehouse.png"
-                        />
-                    </GettingStarted>
+                    ></GettingStarted>
                 </section>
 
                 {/* Quick links */}

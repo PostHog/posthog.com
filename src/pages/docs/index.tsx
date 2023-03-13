@@ -193,21 +193,19 @@ export const DocsIndex = ({ data }: PageProps<DocsData>) => {
             <PostLayout article={false} title={'Docs'} menu={docs} hideSidebar hideSurvey>
                 <div className="space-y-16 lg:space-y-20 lg:-mt-12 mb-8">
                     <section>
-                        <div className="flex justify-start relative pb-12 md:pt-12 md:pb-20 lg:pt-16 lg:pb-16 items-center -mx-px h-80">
-                            <div className="w-full z-20">
-                                <StaticImage
-                                    src="../../../contents/images/search-hog-3.png"
-                                    alt="This hog has an answer"
-                                    width={400}
-                                    placeholder="blurred"
-                                    className="float-right ml-8 -mt-8 mb-8"
-                                />
-                                <h1 className="font-bold text-5xl mb-2">Documentation</h1>
-                                <h5 className="opacity-60 font-semibold leading-tight mb-8">
-                                    In-depth tutorials, references, and <br className="hidden md:block xl:hidden" />
-                                    examples for everything PostHog
-                                </h5>
-                            </div>
+                        <div className="w-full z-20">
+                            <StaticImage
+                                src="../../../contents/images/search-hog-3.png"
+                                alt="This hog has an answer"
+                                width={400}
+                                placeholder="blurred"
+                                className="w-full sm:w-[400px] sm:float-right sm:ml-8 sm:-mt-8 sm:mb-8"
+                            />
+                            <h1 className="font-bold text-5xl mb-2">Documentation</h1>
+                            <h5 className="opacity-60 font-semibold leading-tight mb-8">
+                                In-depth tutorials, references, and <br className="hidden md:block xl:hidden" />
+                                examples for everything PostHog
+                            </h5>
                         </div>
 
                         <LinkGrid links={quickLinks} />

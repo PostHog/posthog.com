@@ -289,7 +289,7 @@
         ]
     },
     {
-        "name": "More...",
+        "name": "Advanced",
         "url": "",
         "children": [
             {
@@ -454,6 +454,10 @@
         "url": "/docs/data",
         "icon": "DataManagement",
         "children": [
+            {
+                "name": "Overview",
+                "url": "/docs/data"
+            },
             {
                 "name": "Actions",
                 "url": "/manual/actions"

@@ -50,12 +50,13 @@ const SessionRecording: React.FC<SessionRecordingProps> = ({ data }) => {
                     alt=""
                     placeholder="none"
                     quality={100}
-                    className="w-full sm:w-[400px] float-right ml-8 -mt-8 mb-8"
+                    className="w-full sm:w-[400px] sm:float-right sm:ml-8 sm:-mt-8 sm:mb-8"
                     src="../../components/Home/Slider/images/session-recording-hog.png"
                 />
                 <h1 className="text-4xl mb-2 mt-6">Session recording</h1>
-                <h3 className="text-lg text-gray">
-                    Play back sessions to diagnose UI issues, improve support and get inspired.
+                <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
+                    Play back sessions to diagnose UI issues, improve support, and get context for nuanced user
+                    behavior.
                 </h3>
 
                 {/* Get started section */}

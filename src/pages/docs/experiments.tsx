@@ -13,7 +13,7 @@ import { GettingStarted } from 'components/Docs/GettingStarted'
 const quickLinks = [
     {
         name: 'Creating an experiment',
-        to: '/docs/experiments/start-here#creating-an-experiment',
+        to: '/docs/experiments/manual#creating-an-experiment',
         description: 'Create an experiment to test a hypothesis.',
     },
     {
@@ -50,27 +50,27 @@ const Experiments: React.FC<ExperimentsProps> = ({ data }) => {
                     alt=""
                     placeholder="none"
                     quality={100}
-                    className="w-[400px] float-right ml-8 -mt-8 mb-8"
+                    className="w-full sm:w-[400px] sm:float-right sm:ml-8 sm:-mt-8 sm:mb-8"
                     src="../../components/Home/Slider/images/ab-testing-hog.png"
                 />
                 <h1 className="text-4xl mb-2 mt-6">Experiments</h1>
-                <h3 className="text-lg text-gray">
+                <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tighttext-lg text-gray">
                     Test changes in production with an experimentation suite that makes it easy to get the results you
                     want.
                 </h3>
 
                 {/* Get started section */}
-                <section className="py-12">
+                <section className="py-6 sm:py-12">
                     <GettingStarted
                         product="Experiments"
                         title="Roll out your first feature"
                         description="Start A/B testing your features in minutes."
-                        link="/docs/experiments/start-here"
+                        link="/docs/experiments/manual#creating-an-experiment"
                     ></GettingStarted>
                 </section>
 
                 {/* Quick links */}
-                <section className="my-12">
+                <section className="my-6">
                     <h3 className="mb-6 mt-0">Quick links</h3>
                     <LinkGrid links={quickLinks} />
                 </section>
