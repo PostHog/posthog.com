@@ -41,7 +41,7 @@ We always love adding user contributions into PostHog, especially when they have
 ### Memphis Export app
 ![memphis export](../images/blog/array/memphis-app.gif)
 
-Memphis is an alternative to traditional message brokers, enabling you to build modern, queue-based applications. The team there recently created their own PostHog app, which enables you to publish events from PostHog to a Memphis station upon ingestion, so you use them as triggers. [Check the docs for more info](apps/memphis-exporter)!
+Memphis is an alternative to traditional message brokers, enabling you to build modern, queue-based applications. The team there recently created their own PostHog app, which enables you to publish events from PostHog to a Memphis station upon ingestion, so you use them as triggers. [Check the docs for more info](/apps/memphis-exporter)
 
 ### Notification Bar app
 ![posthog site apps](../images/blog/array/notification_bar.gif)
