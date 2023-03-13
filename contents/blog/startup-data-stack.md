@@ -57,9 +57,9 @@ Bringing all this data together and managing it often requires a [customer data 
 
 ![Seed](../images/blog/startup-data-stack/seed.png)
 
-The goal of the stack at this stage is to give insights into how the product and specific features are doing. Teams want the ability to answer questions about the product and get basic KPI reporting. 
+The goal of the stack at this stage is to give insights into how the product and specific features are doing. Teams want the ability to answer questions about the product and get basic KPI reporting. This enables them to make decisions about what to work on and measure progress towards goals.
 
-Moving from individual sources to a CDP enables this to happen fast, but starts to create a web of integrations and mainteinance. It is a challenge to know if data is accurate, luckily at this stage, it doesn't need to be. The Seed stage strikes the balance of giving engineers enough data to know what to prioritize with having plenty of time to build it.
+Moving from individual sources to a CDP makes gathering data faster, but starts to create a web of integrations and mainteinance. It is a challenge to know if data is accurate, luckily at this stage, it doesn't need to be. The Seed stage strikes the balance of giving engineers enough data to know what to prioritize with having plenty of time to build it.
 
 ## The Series A data stack
 
