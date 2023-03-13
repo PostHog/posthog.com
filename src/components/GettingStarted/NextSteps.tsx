@@ -1,12 +1,17 @@
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 import { Link } from 'gatsby'
+import { quickLinks as productAnalyticsLinks } from '../../pages/docs/product-analytics'
+import { quickLinks as featureFlagsLinks } from '../../pages/docs/feature-flags'
+import { quickLinks as experimentsLinks } from '../../pages/docs/experiments'
+import { quickLinks as sessionRecordingLinks } from '../../pages/docs/session-recording'
+import { quickLinks as dataLinks } from '../../pages/docs/data'
 
 type NextStepProps = {
     title: string
     links: {
-        title: string
-        url: string
+        name: string
+        to: string
     }[]
     children: React.ReactNode
 }
@@ -21,9 +26,9 @@ export const NextStep: React.FC<NextStepProps> = ({ title, links, children }) =>
 
             <ul className="grid grid-cols-1 sm:grid-cols-2 list-none p-0 m-0">
                 {links.map((link) => (
-                    <li key={link.title} className="relative w-full py-2 flex items-center">
-                        <Link className="leading-none" to={link.url}>
-                            <span className="jumpTo pl-6">{link.title}</span>
+                    <li key={link.name} className="relative w-full py-2 flex items-center">
+                        <Link className="leading-none" to={link.to}>
+                            <span className="jumpTo pl-6">{link.name}</span>
                         </Link>
                     </li>
                 ))}
@@ -34,15 +39,7 @@ export const NextStep: React.FC<NextStepProps> = ({ title, links, children }) =>
 
 export const ProductAnalytics = () => {
     return (
-        <NextStep
-            title="Product Analytics"
-            links={[
-                { title: 'Deploy a reverse proxy', url: '/docs/integrate/proxy' },
-                { title: 'Ingest historical data', url: '/docs/integrate/ingest-historic-data' },
-                { title: 'Find your power users', url: '/tutorials/power-users' },
-                { title: '5 things to do after installing PostHog', url: '/tutorials/next-steps-after-installing' },
-            ]}
-        >
+        <NextStep title="Product Analytics" links={productAnalyticsLinks}>
             <StaticImage
                 alt=""
                 placeholder="none"
@@ -56,18 +53,7 @@ export const ProductAnalytics = () => {
 
 export const FeatureFlags = () => {
     return (
-        <NextStep
-            title="Feature flags"
-            links={[
-                { title: 'Create your first feature flag', url: '/manual/feature-flags#creating-feature-flags' },
-                { title: 'Roll out a feature flag', url: '/manual/feature-flags#roll-out-the-feature-flag' },
-                { title: 'Set up a canary release', url: '/tutorials/canary-release' },
-                {
-                    title: 'Feature flags with multiple variants',
-                    url: '/manual/feature-flags#multivariate-feature-flags',
-                },
-            ]}
-        >
+        <NextStep title="Feature flags" links={featureFlagsLinks}>
             <StaticImage
                 alt=""
                 placeholder="none"
@@ -81,17 +67,7 @@ export const FeatureFlags = () => {
 
 export const Experiments = () => {
     return (
-        <NextStep
-            title="Experiments"
-            links={[
-                { title: 'Create your first experiment', url: '/manual/experimentation#how-to-use-experimentation' },
-                { title: 'Run an experiment on new users', url: '/tutorials/new-user-experiments' },
-                {
-                    title: 'Experimentation under the hood',
-                    url: '/manual/experimentation#advanced-whats-under-the-hood',
-                },
-            ]}
-        >
+        <NextStep title="Experiments" links={experimentsLinks}>
             <StaticImage
                 alt=""
                 placeholder="none"
@@ -103,15 +79,43 @@ export const Experiments = () => {
     )
 }
 
+export const SessionRecording = () => {
+    return (
+        <NextStep title="Session recording" links={sessionRecordingLinks}>
+            <StaticImage
+                alt=""
+                placeholder="none"
+                quality={100}
+                className="w-full"
+                src="../Home/Slider/images/session-recording-hog.png"
+            />
+        </NextStep>
+    )
+}
+
+export const Data = () => {
+    return (
+        <NextStep title="Data" links={dataLinks}>
+            <StaticImage
+                alt=""
+                placeholder="none"
+                quality={100}
+                className="w-full"
+                src="../Product/images/hogs/data-warehouse.png"
+            />
+        </NextStep>
+    )
+}
+
 export const Apps = () => {
     return (
         <NextStep
             title="Apps"
             links={[
-                { title: 'Browse apps', url: '/apps' },
-                { title: 'Import Stripe data into PostHog', url: '/tutorials/stripe-payment-data' },
-                { title: 'Filter out unwanted events', url: '/tutorials/fewer-unwanted-events' },
-                { title: 'Build your own app', url: '/docs/apps/build' },
+                { name: 'Browse apps', to: '/apps' },
+                { name: 'Import Stripe data into PostHog', to: '/tutorials/stripe-payment-data' },
+                { name: 'Filter out unwanted events', to: '/tutorials/fewer-unwanted-events' },
+                { name: 'Build your own app', to: '/docs/apps/build' },
             ]}
         >
             <StaticImage

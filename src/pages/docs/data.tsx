@@ -10,7 +10,7 @@ import { Tutorials } from 'components/Docs/Tutorials'
 import { LinkGrid } from 'components/Docs/LinkGrid'
 import { GettingStarted } from 'components/Docs/GettingStarted'
 
-const quickLinks = [
+export const quickLinks = [
     {
         name: 'Actions',
         to: '/manual/actions',
