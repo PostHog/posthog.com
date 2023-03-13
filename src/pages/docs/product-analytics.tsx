@@ -85,27 +85,26 @@ const ProductAnalytics: React.FC<ProductAnalyticsProps> = ({ data }) => {
             <SEO title="Product analytics - Documentation - PostHog" />
 
             <PostLayout title={'Product Analytics'} menu={docs} hideSurvey hideSidebar>
+                <StaticImage
+                    alt=""
+                    placeholder="none"
+                    quality={100}
+                    className="w-[400px] float-right ml-8 -mt-8"
+                    src="../../components/Home/Slider/images/product-analytics-hog.png"
+                />
                 <h1 className="text-4xl mb-2 mt-6">Product analytics</h1>
                 <h3 className="text-lg text-gray font-medium">
                     Learn how to use product analytics to understand your users.
                 </h3>
 
                 {/* Get started section */}
-                <section className="py-12">
+                <section className="pt-4 pb-0">
                     <GettingStarted
-                        product="Product analytics"
+                        articleType="Pinned"
                         title="Start sending events"
                         description="Use our custom SDKs and integrations to send events from your favorite language or platform."
                         link="/docs/getting-started/start-here"
-                    >
-                        <StaticImage
-                            alt=""
-                            placeholder="none"
-                            quality={100}
-                            className="w-[400px]"
-                            src="../../components/Home/Slider/images/product-analytics-hog.png"
-                        />
-                    </GettingStarted>
+                    ></GettingStarted>
                 </section>
 
                 {/* Quick links */}

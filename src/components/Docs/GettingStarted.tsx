@@ -1,28 +1,36 @@
 import React from 'react'
 import { Analytics } from 'components/ProductIcons'
+import { CallToAction } from 'components/CallToAction'
 
 type ProductAnalyticsProps = {
-    product: string
+    articleType: string
     title: string
     description: string
     link: string
     children: React.ReactNode
 }
 
-export const GettingStarted: React.FC<ProductAnalyticsProps> = ({ product, title, description, link, children }) => {
+export const GettingStarted: React.FC<ProductAnalyticsProps> = ({
+    articleType,
+    title,
+    description,
+    link,
+    children,
+}) => {
     return (
-        <div className="relative flex items-center">
-            <div>
-                <div className="flex flex-row items-center opacity-70 space-x-1 mb-2">
-                    <span className="inline-block w-6 h-6">
-                        <Analytics />
-                    </span>
-                    <span className="text-xs uppercase font-bold">{product}</span>
+        <div className="clear-both relative flex items-center border-y border-dashed border-gray-accent-light dark:border-gray-accent-dark py-4">
+            <div className="flex gap-4 w-full items-center">
+                <div className="flex-1">
+                    <div className="flex flex-row items-center opacity-70 space-x-1 mb-2">
+                        <span className="text-xs uppercase font-semibold">{articleType}</span>
+                    </div>
+                    <h3 className="mb-2 mt-0">{title}</h3>
+                    <p className="max-w-md">{description}</p>
                 </div>
-                <h3 className="mb-2 mt-0">{title}</h3>
-                <p className="max-w-md">{description}</p>
 
-                <a href={link}>Get Started &rarr;</a>
+                <aside className="flex-shrink">
+                    <CallToAction to={link}>Get started &rarr;</CallToAction>
+                </aside>
             </div>
 
             <div className="hidden md:block absolute right-0 top-0 max-w-1/2 h-full">{children}</div>
