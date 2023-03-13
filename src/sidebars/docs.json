@@ -27,7 +27,11 @@
                 "url": "/docs/getting-started/identify-users"
             },
             {
-                "name": "Actions and insights",
+                "name": "User properties",
+                "url": "/docs/getting-started/user-properties"
+            },
+            {
+                "name": "Actions & insights",
                 "url": "/docs/getting-started/actions-and-insights"
             },
             {
@@ -123,388 +127,62 @@
         ]
     },
     {
-        "name": "Integrate PostHog",
+        "name": "Integrations",
         "url": "",
         "children": [
             {
-                "name": "Overview",
-                "url": "/docs/integrate"
+                "name": "Docusaurus v2",
+                "url": "/docs/integrate/third-party/docusaurus",
+                "badge": {
+                    "title": "3rd party"
+                }
             },
             {
-                "name": "Library comparison",
-                "url": "/docs/integrate/libraries"
+                "name": "Gatsby",
+                "url": "/docs/integrate/third-party/gatsby",
+                "badge": {
+                    "title": "3rd party"
+                }
             },
             {
-                "name": "Integrations",
-                "url": "",
-                "children": [
-                    {
-                        "name": "Docusaurus v2",
-                        "url": "/docs/integrate/third-party/docusaurus",
-                        "badge": {
-                            "title": "3rd party"
-                        }
-                    },
-                    {
-                        "name": "Gatsby",
-                        "url": "/docs/integrate/third-party/gatsby",
-                        "badge": {
-                            "title": "3rd party"
-                        }
-                    },
-                    {
-                        "name": "Google Tag Manager",
-                        "url": "/docs/integrate/third-party/google-tag-manager"
-                    },
-                    {
-                        "name": "Next.js",
-                        "url": "/docs/integrate/third-party/next-js"
-                    },
-                    {
-                        "name": "Nuxt.js",
-                        "url": "/docs/integrate/third-party/nuxt-js"
-                    },
-                    {
-                        "name": "Retool",
-                        "url": "/docs/integrate/third-party/retool"
-                    },
-                    {
-                        "name": "RudderStack",
-                        "url": "/docs/integrate/third-party/rudderstack"
-                    },
-                    {
-                        "name": "Segment",
-                        "url": "/docs/integrate/third-party/segment"
-                    },
-                    {
-                        "name": "Sentry",
-                        "url": "/docs/integrate/third-party/sentry"
-                    },
-                    {
-                        "name": "Slack",
-                        "url": "/docs/integrate/third-party/slack"
-                    },
-                    {
-                        "name": "Shopify",
-                        "url": "/docs/integrate/third-party/shopify"
-                    },
-                    {
-                        "name": "WordPress",
-                        "url": "/docs/integrate/third-party/wordpress"
-                    }
-                ]
+                "name": "Google Tag Manager",
+                "url": "/docs/integrate/third-party/google-tag-manager"
             },
             {
-                "name": "Ingest historical data",
-                "url": "/docs/integrate/ingest-historic-data"
+                "name": "Next.js",
+                "url": "/docs/integrate/third-party/next-js"
             },
             {
-                "name": "Identifying users",
-                "url": "/docs/integrate/identifying-users"
+                "name": "Nuxt.js",
+                "url": "/docs/integrate/third-party/nuxt-js"
             },
             {
-                "name": "User properties",
-                "url": "/docs/integrate/user-properties"
+                "name": "Retool",
+                "url": "/docs/integrate/third-party/retool"
             },
             {
-                "name": "Using a CDP",
-                "url": "/docs/integrate/cdp"
+                "name": "RudderStack",
+                "url": "/docs/integrate/third-party/rudderstack"
             },
             {
-                "name": "Deploying a reverse proxy",
-                "url": "/docs/integrate/proxy"
+                "name": "Segment",
+                "url": "/docs/integrate/third-party/segment"
             },
             {
-                "name": "Browser extensions",
-                "url": "/docs/integrate/browser-extension"
-            }
-        ]
-    },
-    {
-        "name": "Self-host",
-        "url": "",
-        "children": [
-            {
-                "name": "Overview",
-                "url": "/docs/self-host"
+                "name": "Sentry",
+                "url": "/docs/integrate/third-party/sentry"
             },
             {
-                "name": "Upgrading PostHog",
-                "url": "",
-                "children": [
-                    {
-                        "name": "Overview",
-                        "url": "/docs/runbook/upgrading-posthog"
-                    },
-                    {
-                        "name": "Upgrade notes",
-                        "url": "/docs/runbook/upgrade-notes"
-                    }
-                ]
+                "name": "Slack",
+                "url": "/docs/integrate/third-party/slack"
             },
             {
-                "name": "Configure",
-                "url": "",
-                "children": [
-                    {
-                        "name": "Instance settings",
-                        "url": "/docs/self-host/configure/instance-settings"
-                    },
-                    {
-                        "name": "Environment variables",
-                        "url": "/docs/self-host/configure/environment-variables"
-                    },
-                    {
-                        "name": "Securing PostHog",
-                        "url": "/docs/self-host/configure/securing-posthog"
-                    },
-                    {
-                        "name": "Monitoring with Grafana",
-                        "url": "/docs/self-host/configure/monitoring-with-grafana"
-                    },
-                    {
-                        "name": "Running behind a proxy",
-                        "url": "/docs/self-host/configure/running-behind-proxy"
-                    },
-                    {
-                        "name": "Configuring email",
-                        "url": "/docs/self-host/configure/email"
-                    },
-                    {
-                        "name": "Helm chart configuration",
-                        "url": "/docs/self-host/deploy/configuration"
-                    },
-                    {
-                        "name": "Deploying ClickHouse using Altinity.Cloud",
-                        "url": "/docs/self-host/configure/using-altinity-cloud"
-                    },
-                    {
-                        "name": "Configuring Slack",
-                        "url": "/docs/self-host/configure/slack"
-                    }
-                ]
+                "name": "Shopify",
+                "url": "/docs/integrate/third-party/shopify"
             },
             {
-                "name": "Runbook",
-                "url": "",
-                "children": [
-                    {
-                        "name": "Overview",
-                        "url": "/docs/runbook"
-                    },
-                    {
-                        "name": "Async migrations",
-                        "url": "",
-                        "children": [
-                            {
-                                "name": "Overview",
-                                "url": "/docs/runbook/async-migrations"
-                            },
-                            {
-                                "name": "0001-events-sample-by",
-                                "url": "/docs/runbook/async-migrations/0001-events-sample-by"
-                            },
-                            {
-                                "name": "0002_events_sample_by",
-                                "url": "/docs/runbook/async-migrations/0002-events-sample-by"
-                            },
-                            {
-                                "name": "0003_fill_person_distinct_id2",
-                                "url": "/docs/runbook/async-migrations/0003-fill-person-distinct-id2"
-                            }
-                        ]
-                    },
-                    {
-                        "name": "Services",
-                        "url": "",
-                        "children": [
-                            {
-                                "name": "ClickHouse",
-                                "url": "/docs/runbook/services/clickhouse",
-                                "children": [
-                                    {
-                                        "name": "Backup",
-                                        "url": "/docs/runbook/services/clickhouse/backup"
-                                    },
-                                    {
-                                        "name": "Debug hanging / freezing process",
-                                        "url": "/docs/runbook/services/clickhouse/debug-hanging-freezing-process"
-                                    },
-                                    {
-                                        "name": "Horizontal scaling (Sharding & replication)",
-                                        "url": "/docs/runbook/services/clickhouse/sharding-and-replication"
-                                    },
-                                    {
-                                        "name": "Kafka Engine",
-                                        "url": "/docs/runbook/services/clickhouse/kafka-engine"
-                                    },
-                                    {
-                                        "name": "Resize disk",
-                                        "url": "/docs/runbook/services/clickhouse/resize-disk"
-                                    },
-                                    {
-                                        "name": "Restore",
-                                        "url": "/docs/runbook/services/clickhouse/restore"
-                                    },
-                                    {
-                                        "name": "Vertical scaling",
-                                        "url": "/docs/runbook/services/clickhouse/vertical-scaling"
-                                    },
-                                    {
-                                        "name": "Debugging load",
-                                        "url": "/docs/runbook/services/clickhouse/debugging-load"
-                                    }
-                                ]
-                            },
-                            {
-                                "name": "Kafka",
-                                "url": "/docs/runbook/services/kafka",
-                                "children": [
-                                    {
-                                        "name": "Resize disk",
-                                        "url": "/docs/runbook/services/kafka/resize-disk"
-                                    },
-                                    {
-                                        "name": "Log retention",
-                                        "url": "/docs/runbook/services/kafka/log-retention"
-                                    }
-                                ]
-                            },
-                            {
-                                "name": "PostgreSQL",
-                                "url": "/docs/runbook/services/postgresql",
-                                "children": [
-                                    {
-                                        "name": "Resize disk",
-                                        "url": "/docs/runbook/services/postgresql/resize-disk"
-                                    },
-                                    {
-                                        "name": "Troubleshooting long-running migrations",
-                                        "url": "/docs/runbook/services/postgresql/long-migrations"
-                                    }
-                                ]
-                            },
-                            {
-                                "name": "Plugin server",
-                                "url": "/docs/runbook/services/plugin-server",
-                                "children": [
-                                    {
-                                        "name": "Overview",
-                                        "url": "/docs/runbook/services/plugin-server"
-                                    },
-                                    {
-                                        "name": "Ingestion lag",
-                                        "url": "/docs/runbook/services/plugin-server/ingestion-lag"
-                                    },
-                                    {
-                                        "name": "Jobs not executing",
-                                        "url": "/docs/runbook/services/plugin-server/jobs"
-                                    },
-                                    {
-                                        "name": "Scheduled tasks not executing",
-                                        "url": "/docs/runbook/services/plugin-server/scheduled-tasks"
-                                    }
-                                ]
-                            },
-                            {
-                                "name": "MinIO",
-                                "url": "/docs/runbook/services/minio"
-                            },
-                            {
-                                "name": "Redis",
-                                "url": "/docs/runbook/services/redis"
-                            },
-                            {
-                                "name": "Zookeeper",
-                                "url": "/docs/runbook/services/zookeeper"
-                            }
-                        ]
-                    },
-                    {
-                        "name": "Disaster recovery",
-                        "url": "/docs/runbook/disaster-recovery"
-                    }
-                ]
-            },
-            {
-                "name": "Troubleshooting and FAQs",
-                "url": "/docs/self-host/deploy/troubleshooting"
-            },
-            {
-                "name": "Support",
-                "url": "/docs/self-host/open-source/support"
-            },
-            {
-                "name": "Disclaimer",
-                "url": "/docs/self-host/open-source/disclaimer"
-            }
-        ]
-    },
-    {
-        "name": "Migrate & export",
-        "url": "",
-        "children": [
-            {
-                "name": "Migrate to PostHog Cloud",
-                "url": "/docs/migrate/migrate-to-cloud"
-            },
-            {
-                "name": "Migrate between PostHog instances",
-                "url": "/docs/migrate/migrate-between-posthog-instances"
-            },
-            {
-                "name": "Migrate from Amplitude",
-                "url": "/docs/migrate/migrate-from-amplitude"
-            },
-            {
-                "name": "Migrate to PostHog Cloud EU",
-                "url": "/tutorials/migrate-eu-cloud"
-            },
-            {
-                "name": "Migrate from a broken self-hosted instance",
-                "url": "/docs/migrate/migrate-broken-self-hosted"
-            },
-            {
-                "name": "Export your events",
-                "url": "/docs/migrate/export-events"
-            }
-        ]
-    },
-    {
-        "name": "Building apps",
-        "url": "",
-        "children": [
-            {
-                "name": "Overview",
-                "url": "/docs/apps/build"
-            },
-            {
-                "name": "Tutorial",
-                "url": "/docs/apps/build/tutorial"
-            },
-            {
-                "name": "Troubleshooting",
-                "url": "/docs/apps/enabling"
-            },
-            {
-                "name": "Developer reference",
-                "url": "/docs/apps/build/reference"
-            },
-            {
-                "name": "Using the PostHog API",
-                "url": "/docs/apps/build/api"
-            },
-            {
-                "name": "Jobs",
-                "url": "/docs/apps/build/jobs"
-            },
-            {
-                "name": "Testing",
-                "url": "/docs/apps/build/testing"
-            },
-            {
-                "name": "TypeScript types",
-                "url": "/docs/apps/build/types"
+                "name": "WordPress",
+                "url": "/docs/integrate/third-party/wordpress"
             }
         ]
     },
@@ -637,258 +315,238 @@
         ]
     },
     {
-        "name": "How PostHog works",
+        "name": "Advanced",
         "url": "",
         "children": [
             {
-                "name": "Overview",
-                "url": "/docs/how-posthog-works"
+                "name": "Ingest historical data",
+                "url": "/docs/integrate/ingest-historic-data"
             },
             {
-                "name": "Data model",
-                "url": "/docs/how-posthog-works/data-model"
+                "name": "Using a CDP",
+                "url": "/docs/integrate/cdp"
             },
             {
-                "name": "Ingestion pipeline",
-                "url": "/docs/how-posthog-works/ingestion-pipeline"
+                "name": "Deploying a reverse proxy",
+                "url": "/docs/integrate/proxy"
             },
             {
-                "name": "ClickHouse",
-                "url": "/docs/how-posthog-works/clickhouse"
-            },
-            {
-                "name": "Querying data",
-                "url": "/docs/how-posthog-works/queries"
+                "name": "Browser extensions",
+                "url": "/docs/integrate/browser-extension"
             }
         ]
     },
     {
-        "name": "Privacy",
-        "url": "",
+        "name": "Products"
+    },
+    {
+        "name": "Product analytics",
+        "url": "/docs/product-analytics",
+        "icon": "Analytics",
         "children": [
             {
                 "name": "Overview",
-                "url": "/docs/privacy"
+                "url": "/docs/product-analytics"
             },
             {
-                "name": "GDPR guidance",
-                "url": "/docs/privacy/gdpr-compliance"
+                "name": "Correlation Analysis",
+                "url": "/manual/correlation"
             },
             {
-                "name": "HIPAA guidance",
-                "url": "/docs/privacy/hipaa-compliance"
+                "name": "Dashboards",
+                "url": "/manual/dashboards"
             },
             {
-                "name": "CCPA guidance",
-                "url": "/docs/privacy/ccpa-compliance"
+                "name": "Funnels",
+                "url": "/manual/funnels"
             },
             {
-                "name": "SOC 2",
-                "url": "/handbook/company/security#soc-2"
+                "name": "Group Analytics",
+                "url": "/manual/group-analytics"
             },
             {
-                "name": "Data egress & compliance",
-                "url": "/docs/privacy/egress"
+                "name": "Lifecycle",
+                "url": "/manual/lifecycle"
             },
             {
-                "name": "Data deletion",
-                "url": "/docs/privacy/data-deletion"
+                "name": "Retention",
+                "url": "/manual/retention"
+            },
+            {
+                "name": "Sampling",
+                "url": "/manual/sampling",
+                "badge": {
+                    "title": "Alpha",
+                    "className": "uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50"
+                }
+            },
+            {
+                "name": "Stickiness",
+                "url": "/manual/stickiness"
+            },
+            {
+                "name": "Toolbar",
+                "url": "/manual/toolbar"
+            },
+            {
+                "name": "Trends",
+                "url": "/manual/trends"
+            },
+            {
+                "name": "User paths",
+                "url": "/manual/paths"
             }
         ]
     },
     {
-        "name": "Contribute",
-        "url": "",
+        "name": "Session recording",
+        "url": "/docs/session-recording",
+        "icon": "SessionRecording",
         "children": [
             {
                 "name": "Overview",
-                "url": "/docs/contribute"
+                "url": "/docs/session-recording"
             },
             {
-                "name": "Code of conduct",
-                "url": "/docs/contribute/code-of-conduct"
+                "name": "Product manual",
+                "url": "/docs/session-recording/manual"
             },
             {
-                "name": "Recognizing contributions",
-                "url": "/docs/contribute/recognizing-contributions"
+                "name": "Configure",
+                "url": "/docs/session-recording/configure"
             },
             {
-                "name": "Badge",
-                "url": "/docs/contribute/badge"
+                "name": "Data retention",
+                "url": "/docs/session-recording/data-retention"
+            },
+            {
+                "name": "Troubleshooting and FAQs",
+                "url": "/docs/session-recording/troubleshooting"
             }
         ]
     },
     {
-        "name": "Using PostHog"
-    },
-    {
-        "name": "Table of contents",
-        "url": "/using-posthog"
-    },
-    {
-        "name": "Product manual",
-        "url": "",
+        "name": "Feature flags",
+        "url": "/docs/feature-flags",
+        "icon": "FeatureFlags",
         "children": [
             {
-                "name": "Product analytics",
-                "url": "",
-                "children": [
-                    {
-                        "name": "Dashboards",
-                        "url": "/manual/dashboards"
-                    },
-                    {
-                        "name": "Funnels",
-                        "url": "/manual/funnels"
-                    },
-                    {
-                        "name": "Group Analytics",
-                        "url": "/manual/group-analytics"
-                    },
-                    {
-                        "name": "Insights",
-                        "url": "/manual/insights"
-                    },
-                    {
-                        "name": "Lifecycle",
-                        "url": "/manual/lifecycle"
-                    },
-                    {
-                        "name": "Path analysis",
-                        "url": "/manual/paths"
-                    },
-                    {
-                        "name": "Retention",
-                        "url": "/manual/retention"
-                    },
-                    {
-                        "name": "Stickiness",
-                        "url": "/manual/stickiness"
-                    },
-                    {
-                        "name": "Trends",
-                        "url": "/manual/trends"
-                    },
-                    {
-                        "name": "Sampling (Alpha)",
-                        "url": "/manual/sampling"
-                    }
-                ]
+                "name": "Overview",
+                "url": "/docs/feature-flags"
             },
             {
-                "name": "Visualization",
-                "url": "",
-                "children": [
-                    {
-                        "name": "Heatmaps",
-                        "url": "/manual/toolbar"
-                    },
-                    {
-                        "name": "Session Recording",
-                        "url": "/manual/recordings"
-                    }
-                ]
+                "name": "Product manual",
+                "url": "/docs/feature-flags/manual"
             },
             {
-                "name": "Optimization",
-                "url": "",
-                "children": [
-                    {
-                        "name": "Correlation Analysis",
-                        "url": "/manual/correlation"
-                    },
-                    {
-                        "name": "Experimentation",
-                        "url": "/manual/experimentation"
-                    },
-                    {
-                        "name": "Feature Flags",
-                        "url": "/manual/feature-flags"
-                    }
-                ]
+                "name": "Local evaluation",
+                "url": "/docs/feature-flags/local-evaluation"
             },
             {
-                "name": "Data",
-                "url": "",
-                "children": [
-                    {
-                        "name": "Actions",
-                        "url": "/manual/actions"
-                    },
-                    {
-                        "name": "Annotations",
-                        "url": "/manual/annotations"
-                    },
-                    {
-                        "name": "Cohorts",
-                        "url": "/manual/cohorts"
-                    },
-                    {
-                        "name": "Data Management",
-                        "url": "/manual/data-management"
-                    },
-                    {
-                        "name": "Events",
-                        "url": "/manual/events"
-                    },
-                    {
-                        "name": "Persons",
-                        "url": "/manual/persons"
-                    },
-                    {
-                        "name": "Sessions",
-                        "url": "/manual/sessions"
-                    },
-                    {
-                        "name": "UTM segmentation",
-                        "url": "/manual/utm-segmentation"
-                    }
-                ]
+                "name": "Rollout strategies",
+                "url": "/docs/feature-flags/rollout-strategies"
             },
             {
-                "name": "Project settings",
-                "url": "",
-                "children": [
-                    {
-                        "name": "Team collaboration",
-                        "url": "/manual/team-collaboration"
-                    },
-                    {
-                        "name": "Organizations & projects",
-                        "url": "/manual/organizations-and-projects"
-                    },
-                    {
-                        "name": "Settings",
-                        "url": "/manual/application-settings"
-                    },
-                    {
-                        "name": "SSO & SAML",
-                        "url": "/manual/sso"
-                    },
-                    {
-                        "name": "Toolbar",
-                        "url": "/manual/toolbar"
-                    },
-                    {
-                        "name": "Notifications & alerts",
-                        "url": "/manual/notifications-and-alerts"
-                    },
-                    {
-                        "name": "Role based access",
-                        "url": "/manual/role-based-access"
-                    }
-                ]
+                "name": "Multivariate feature flags",
+                "url": "/docs/feature-flags/multivariate-flags"
+            }
+        ]
+    },
+    {
+        "name": "A/B testing",
+        "url": "/docs/experiments",
+        "icon": "Experiments",
+        "children": [
+            {
+                "name": "Overview",
+                "url": "/docs/experiments"
+            },
+            {
+                "name": "Product manual",
+                "url": "/docs/experiments/manual"
+            },
+            {
+                "name": "Statistical significance",
+                "url": "/docs/experiments/significance"
+            },
+            {
+                "name": "Under the hood",
+                "url": "/docs/experiments/under-the-hood"
+            }
+        ]
+    },
+    {
+        "name": "Data",
+        "url": "/docs/data",
+        "icon": "DataManagement",
+        "children": [
+            {
+                "name": "Overview",
+                "url": "/docs/data"
+            },
+            {
+                "name": "Actions",
+                "url": "/manual/actions"
+            },
+            {
+                "name": "Annotations",
+                "url": "/manual/annotations"
+            },
+            {
+                "name": "Cohorts",
+                "url": "/manual/cohorts"
+            },
+            {
+                "name": "Data management",
+                "url": "/manual/data-management"
+            },
+            {
+                "name": "Events",
+                "url": "/manual/events"
+            },
+            {
+                "name": "Persons",
+                "url": "/manual/persons"
+            },
+            {
+                "name": "Sessions",
+                "url": "/manual/sessions"
+            },
+            {
+                "name": "UTM segmentation",
+                "url": "/manual/utm-segmentation"
+            },
+            {
+                "name": "Notifications & alerts",
+                "url": "/manual/notifications-and-alerts"
+            },
+            {
+                "name": "Role based access",
+                "url": "/manual/role-based-access"
+            },
+            {
+                "name": "Team collaboration",
+                "url": "/manual/team-collaboration"
+            },
+            {
+                "name": "Organizations & projects",
+                "url": "/manual/organizations-and-projects"
+            },
+            {
+                "name": "Settings",
+                "url": "/manual/application-settings"
+            },
+            {
+                "name": "SSO & SAML",
+                "url": "/manual/sso"
             }
         ]
     },
     {
         "name": "Apps",
-        "url": "",
+        "url": "/docs/apps",
+        "icon": "AppLibrary",
         "children": [
-            {
-                "name": "Overview",
-                "url": "/docs/apps"
-            },
             {
                 "name": "Import",
                 "url": "",
@@ -1144,12 +802,362 @@
                     {
                         "url": "/docs/apps/pineapple-mode",
                         "name": "Pineapple Mode"
-                    },
-                    {
-                        "url": "/docs/apps/user-interview",
-                        "name": "User Interviewer"
                     }
                 ]
+            },
+            {
+                "name": "Building apps",
+                "url": "",
+                "children": [
+                    {
+                        "name": "Overview",
+                        "url": "/docs/apps/build"
+                    },
+                    {
+                        "name": "Tutorial",
+                        "url": "/docs/apps/build/tutorial"
+                    },
+                    {
+                        "name": "Troubleshooting",
+                        "url": "/docs/apps/enabling"
+                    },
+                    {
+                        "name": "Developer reference",
+                        "url": "/docs/apps/build/reference"
+                    },
+                    {
+                        "name": "Using the PostHog API",
+                        "url": "/docs/apps/build/api"
+                    },
+                    {
+                        "name": "Jobs",
+                        "url": "/docs/apps/build/jobs"
+                    },
+                    {
+                        "name": "Testing",
+                        "url": "/docs/apps/build/testing"
+                    },
+                    {
+                        "name": "TypeScript types",
+                        "url": "/docs/apps/build/types"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Host & migrate"
+    },
+    {
+        "name": "Self-host",
+        "url": "",
+        "children": [
+            {
+                "name": "Overview",
+                "url": "/docs/self-host"
+            },
+            {
+                "name": "Upgrading PostHog",
+                "url": "",
+                "children": [
+                    {
+                        "name": "Overview",
+                        "url": "/docs/runbook/upgrading-posthog"
+                    },
+                    {
+                        "name": "Upgrade notes",
+                        "url": "/docs/runbook/upgrade-notes"
+                    }
+                ]
+            },
+            {
+                "name": "Configure",
+                "url": "",
+                "children": [
+                    {
+                        "name": "Instance settings",
+                        "url": "/docs/self-host/configure/instance-settings"
+                    },
+                    {
+                        "name": "Environment variables",
+                        "url": "/docs/self-host/configure/environment-variables"
+                    },
+                    {
+                        "name": "Securing PostHog",
+                        "url": "/docs/self-host/configure/securing-posthog"
+                    },
+                    {
+                        "name": "Monitoring with Grafana",
+                        "url": "/docs/self-host/configure/monitoring-with-grafana"
+                    },
+                    {
+                        "name": "Running behind a proxy",
+                        "url": "/docs/self-host/configure/running-behind-proxy"
+                    },
+                    {
+                        "name": "Configuring email",
+                        "url": "/docs/self-host/configure/email"
+                    },
+                    {
+                        "name": "Helm chart configuration",
+                        "url": "/docs/self-host/deploy/configuration"
+                    },
+                    {
+                        "name": "Deploying ClickHouse using Altinity.Cloud",
+                        "url": "/docs/self-host/configure/using-altinity-cloud"
+                    },
+                    {
+                        "name": "Configuring Slack",
+                        "url": "/docs/self-host/configure/slack"
+                    }
+                ]
+            },
+            {
+                "name": "Runbook",
+                "url": "",
+                "children": [
+                    {
+                        "name": "Overview",
+                        "url": "/docs/runbook"
+                    },
+                    {
+                        "name": "Async migrations",
+                        "url": "",
+                        "children": [
+                            {
+                                "name": "Overview",
+                                "url": "/docs/runbook/async-migrations"
+                            },
+                            {
+                                "name": "0001-events-sample-by",
+                                "url": "/docs/runbook/async-migrations/0001-events-sample-by"
+                            },
+                            {
+                                "name": "0002_events_sample_by",
+                                "url": "/docs/runbook/async-migrations/0002-events-sample-by"
+                            },
+                            {
+                                "name": "0003_fill_person_distinct_id2",
+                                "url": "/docs/runbook/async-migrations/0003-fill-person-distinct-id2"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Services",
+                        "url": "",
+                        "children": [
+                            {
+                                "name": "ClickHouse",
+                                "url": "/docs/runbook/services/clickhouse",
+                                "children": [
+                                    {
+                                        "name": "Backup",
+                                        "url": "/docs/runbook/services/clickhouse/backup"
+                                    },
+                                    {
+                                        "name": "Debug hanging / freezing process",
+                                        "url": "/docs/runbook/services/clickhouse/debug-hanging-freezing-process"
+                                    },
+                                    {
+                                        "name": "Horizontal scaling (Sharding & replication)",
+                                        "url": "/docs/runbook/services/clickhouse/sharding-and-replication"
+                                    },
+                                    {
+                                        "name": "Kafka Engine",
+                                        "url": "/docs/runbook/services/clickhouse/kafka-engine"
+                                    },
+                                    {
+                                        "name": "Resize disk",
+                                        "url": "/docs/runbook/services/clickhouse/resize-disk"
+                                    },
+                                    {
+                                        "name": "Restore",
+                                        "url": "/docs/runbook/services/clickhouse/restore"
+                                    },
+                                    {
+                                        "name": "Vertical scaling",
+                                        "url": "/docs/runbook/services/clickhouse/vertical-scaling"
+                                    },
+                                    {
+                                        "name": "Debugging load",
+                                        "url": "/docs/runbook/services/clickhouse/debugging-load"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Kafka",
+                                "url": "/docs/runbook/services/kafka",
+                                "children": [
+                                    {
+                                        "name": "Resize disk",
+                                        "url": "/docs/runbook/services/kafka/resize-disk"
+                                    },
+                                    {
+                                        "name": "Log retention",
+                                        "url": "/docs/runbook/services/kafka/log-retention"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "PostgreSQL",
+                                "url": "/docs/runbook/services/postgresql",
+                                "children": [
+                                    {
+                                        "name": "Resize disk",
+                                        "url": "/docs/runbook/services/postgresql/resize-disk"
+                                    },
+                                    {
+                                        "name": "Troubleshooting long-running migrations",
+                                        "url": "/docs/runbook/services/postgresql/long-migrations"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Plugin server",
+                                "url": "/docs/runbook/services/plugin-server",
+                                "children": [
+                                    {
+                                        "name": "Overview",
+                                        "url": "/docs/runbook/services/plugin-server"
+                                    },
+                                    {
+                                        "name": "Ingestion lag",
+                                        "url": "/docs/runbook/services/plugin-server/ingestion-lag"
+                                    },
+                                    {
+                                        "name": "Jobs not executing",
+                                        "url": "/docs/runbook/services/plugin-server/jobs"
+                                    },
+                                    {
+                                        "name": "Scheduled tasks not executing",
+                                        "url": "/docs/runbook/services/plugin-server/scheduled-tasks"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "MinIO",
+                                "url": "/docs/runbook/services/minio"
+                            },
+                            {
+                                "name": "Redis",
+                                "url": "/docs/runbook/services/redis"
+                            },
+                            {
+                                "name": "Zookeeper",
+                                "url": "/docs/runbook/services/zookeeper"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Disaster recovery",
+                        "url": "/docs/runbook/disaster-recovery"
+                    }
+                ]
+            },
+            {
+                "name": "Troubleshooting and FAQs",
+                "url": "/docs/self-host/deploy/troubleshooting"
+            },
+            {
+                "name": "Support",
+                "url": "/docs/self-host/open-source/support"
+            },
+            {
+                "name": "Disclaimer",
+                "url": "/docs/self-host/open-source/disclaimer"
+            }
+        ]
+    },
+    {
+        "name": "Migrate & export",
+        "url": "",
+        "children": [
+            {
+                "name": "Migrate to PostHog Cloud",
+                "url": "/docs/migrate/migrate-to-cloud"
+            },
+            {
+                "name": "Migrate between PostHog instances",
+                "url": "/docs/migrate/migrate-between-posthog-instances"
+            },
+            {
+                "name": "Migrate from Amplitude",
+                "url": "/docs/migrate/migrate-from-amplitude"
+            },
+            {
+                "name": "Migrate to PostHog Cloud EU",
+                "url": "/tutorials/migrate-eu-cloud"
+            },
+            {
+                "name": "Migrate from a broken self-hosted instance",
+                "url": "/docs/migrate/migrate-broken-self-hosted"
+            },
+            {
+                "name": "Export your events",
+                "url": "/docs/migrate/export-events"
+            }
+        ]
+    },
+    {
+        "name": "Resources"
+    },
+    {
+        "name": "How PostHog works",
+        "url": "",
+        "children": [
+            {
+                "name": "Overview",
+                "url": "/docs/how-posthog-works"
+            },
+            {
+                "name": "Data model",
+                "url": "/docs/how-posthog-works/data-model"
+            },
+            {
+                "name": "Ingestion pipeline",
+                "url": "/docs/how-posthog-works/ingestion-pipeline"
+            },
+            {
+                "name": "ClickHouse",
+                "url": "/docs/how-posthog-works/clickhouse"
+            },
+            {
+                "name": "Querying data",
+                "url": "/docs/how-posthog-works/queries"
+            }
+        ]
+    },
+    {
+        "name": "Privacy",
+        "url": "",
+        "children": [
+            {
+                "name": "Overview",
+                "url": "/docs/privacy"
+            },
+            {
+                "name": "GDPR guidance",
+                "url": "/docs/privacy/gdpr-compliance"
+            },
+            {
+                "name": "HIPAA guidance",
+                "url": "/docs/privacy/hipaa-compliance"
+            },
+            {
+                "name": "CCPA guidance",
+                "url": "/docs/privacy/ccpa-compliance"
+            },
+            {
+                "name": "SOC 2",
+                "url": "/handbook/company/security#soc-2"
+            },
+            {
+                "name": "Data egress & compliance",
+                "url": "/docs/privacy/egress"
+            },
+            {
+                "name": "Data deletion",
+                "url": "/docs/privacy/data-deletion"
             }
         ]
     },
@@ -1232,8 +1240,34 @@
         ]
     },
     {
-        "name": "Support",
+        "name": "Contribute",
+        "url": "",
+        "children": [
+            {
+                "name": "Overview",
+                "url": "/docs/contribute"
+            },
+            {
+                "name": "Code of conduct",
+                "url": "/docs/contribute/code-of-conduct"
+            },
+            {
+                "name": "Recognizing contributions",
+                "url": "/docs/contribute/recognizing-contributions"
+            },
+            {
+                "name": "Badge",
+                "url": "/docs/integrate/badge"
+            }
+        ]
+    },
+    {
+        "name": "Support options",
         "url": "/manual/support"
+    },
+    {
+        "name": "Library comparison",
+        "url": "/docs/integrate/libraries"
     },
     {
         "name": "Glossary",

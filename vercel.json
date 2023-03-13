@@ -688,6 +688,10 @@
             "destination": "/blog/customer-churn-analysis-guide"
         },
         {
+            "source": "/manual/recordings",
+            "destination": "/docs/session-recording"
+        },
+        {
             "source": "/docs/getting-started/cloud",
             "destination": "/docs/getting-started/start-here"
         },
@@ -702,6 +706,18 @@
         {
             "source": "/docs/self-host/open-source/deployment",
             "destination": "/docs/self-host"
+        },
+        {
+            "source": "/docs/integrate/identifying-users",
+            "destination": "/docs/getting-started/identify-users"
+        },
+        {
+            "source": "/docs/integrate/user-properties",
+            "destination": "/docs/getting-started/user-properties"
+        },
+        {
+            "source": "/docs/integrate",
+            "destination": "/docs/getting-started/install"
         }
     ],
     "rewrites": [

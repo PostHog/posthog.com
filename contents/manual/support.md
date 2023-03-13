@@ -1,5 +1,5 @@
 ---
-title: Support
+title: Support options
 sidebar: Docs
 showTitle: true
 ---

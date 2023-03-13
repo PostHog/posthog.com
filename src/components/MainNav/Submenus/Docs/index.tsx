@@ -31,11 +31,11 @@ const gettingStarted: IFeature[] = [
 ]
 
 const products: IFeature[] = [
-    { title: 'Product analytics', icon: <Analytics />, url: '/using-posthog#product-analytics' },
-    { title: 'Session recording', icon: <SessionRecording />, url: '/manual/recordings' },
-    { title: 'Feature flags', icon: <FeatureFlags />, url: '/manual/feature-flags' },
-    { title: 'A/B testing', icon: <AbTesting />, url: '/manual/experimentation' },
-    { title: 'Platform & data', icon: <Projects />, url: '/using-posthog#data' },
+    { title: 'Product analytics', icon: <Analytics />, url: '/docs/product-analytics' },
+    { title: 'Session recording', icon: <SessionRecording />, url: '/docs/session-recording' },
+    { title: 'Feature flags', icon: <FeatureFlags />, url: '/docs/feature-flags' },
+    { title: 'A/B testing', icon: <AbTesting />, url: '/docs/experiments' },
+    { title: 'Platform & data', icon: <Projects />, url: '/docs/data' },
 ]
 
 const resources: IFeature[] = [
