@@ -95,7 +95,7 @@ Improving reliability, integrations, and UX is critical for success here. Being 
 
 ![PostHog CDP](../images/blog/startup-data-stack/posthog-cdp.png)
 
-We are also figuring out what PostHog looks like as [a data warehouse](https://github.com/PostHog/posthog/issues/14406). Data accuracy and reporting flexibility matter at scale. Being a warehouse enables PostHog to provide this to startups, and integrate it with tools they are already using PostHog for. With PostHog as a warehouse, startups don’t need to migrate or set up many of the modern data stack tools.
+We are also figuring out what PostHog looks like as [a data warehouse](https://github.com/PostHog/posthog/issues/14406) utilizing [ClickHouse](/docs/how-posthog-works/clickhouse). Data accuracy and reporting flexibility matter at scale. Being a warehouse enables PostHog to provide this to startups, and integrate it with tools they are already using PostHog for. With PostHog as a warehouse, startups don’t need to migrate or set up many of the modern data stack tools.
 
 PostHog wants to make it quick to evaluate whether products are working or not. The ability for engineers to find and analyze the metrics they want, along with tools like experiments and session recordings, is key to this. The modern data stack creates complexity and silos that make figuring out what to work on and what’s working difficult.
 
