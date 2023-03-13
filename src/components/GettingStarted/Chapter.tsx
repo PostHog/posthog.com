@@ -55,7 +55,7 @@ type ChapterProps = {
 const Chapter: React.FC<ChapterProps> = ({ num, title, url, headings, children }) => {
     return (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-x-6 pb-6 mb-6">
-            <div className="w-full h-48 md:h-auto bg-gray-accent-light dark:bg-gray-accent-dark rounded">
+            <div className="max-w-[150px] md:max-w-full h-auto bg-gray-accent-light dark:bg-gray-accent-dark rounded">
                 <StaticImage src="images/docs-install.png" alt="Install" className="" />
             </div>
             <div className="md:col-span-2 pt-2 pb-6 space-y-8">
