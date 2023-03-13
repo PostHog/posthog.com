@@ -1,10 +1,10 @@
 ---
-title: Sampling (Alpha)
+title: Sampling (Beta)
 sidebar: Docs
 showTitle: true
 ---
 
-> Note: Sampling is a feature currently under development. If you'd like to be one of the first to try it out, contact us at `hey@posthog.com`.
+> Note: Sampling is a feature currently under development. If you'd like to try it out, contact us at `hey@posthog.com`. We're also  proactively rolling this out to test users at the moment, so do let us know if you have any feedback!
 
 ## Introduction
 
@@ -30,17 +30,15 @@ Just note that the insight will then have the sampling filter, which will persis
 
 ### Fast mode
 
-Fast mode is an experimental feature where users can flip a switch on the right side of the navbar to enable 10% sampling for all **new** insights. Saved insights will **not be affected**, but while you are building your graphs we'll immediately apply 10% sampling, making insights load faster. You can override the 10% rate or disable it before saving the insight if you like.
+Fast mode is an experimental feature where users can flip a switch on the top right just above the insight view to enable 10% sampling for all **new** insights. Saved insights will **not be affected**, but while you are building your graphs we'll immediately apply 10% sampling, making insights load faster. You can override the 10% rate per insight or disable it before saving the insight if you like.
 
 Fast mode is particularly useful for when you are doing exploratory analysis and deciding what metrics to track and what insights are relevant to you. It speeds up the iteration process and you can then turn sampling off when you've settled on the insights you care about and are saving them to a dashboard.
-
 
 ## FAQ
 
 ### Will the sampled results be consistent across calculations?
 
 Provided you do not send us events in the past, yes. For a given sampling rate, the analysis will always run on the same set of data, so you don't have to worry about sampled results changing once you hit 'Refresh'.
-
 
 ### Does sampling work when calculating conversions?
 

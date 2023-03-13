@@ -32,7 +32,7 @@ import ReactInstall from "./\_snippets/install.mdx"
 
 The React context provider makes it easy to access the `posthog-js` library in your app.
 
-The provider can either take an initialized client instance OR an API key and an optional config object.
+The provider can either take an initialized client instance OR an API key and an optional `options` object.
 
 With an initialized client instance:
 
@@ -58,13 +58,13 @@ root.render(
 );
 ```
 
-or with an API key and optional config object:
+or with an API key and optional `options` object:
 
 ```react
 // src/index.js
 import { PostHogProvider} from 'posthog-js/react'
 
-const config = {
+const options = {
   api_host: process.env.REACT_APP_PUBLIC_POSTHOG_HOST,
 }
 
@@ -73,7 +73,7 @@ root.render(
   <React.StrictMode>
     <PostHogProvider 
       apiKey={process.env.REACT_APP_PUBLIC_POSTHOG_KEY}
-      config={config}
+      options={options}
     >
       <App />
     </PostHogProvider>
