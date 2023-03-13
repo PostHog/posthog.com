@@ -46,6 +46,13 @@ const FeatureFlags: React.FC<FeatureFlagsProps> = ({ data }) => {
             <SEO title="Feature flags - Docs - PostHog" />
 
             <PostLayout title={'Feature flags'} menu={docs} hideSurvey hideSidebar>
+                <StaticImage
+                    alt=""
+                    placeholder="none"
+                    quality={100}
+                    className="w-[400px] float-right ml-8 -mt-8 mb-8"
+                    src="../../components/Home/Slider/images/feature-flags-hog.png"
+                />
                 <h1 className="text-4xl mb-2 mt-6">Feature flags</h1>
                 <h3 className="text-lg text-gray">
                     Toggle features for cohorts or individuals to test the impact before rolling out to everyone.
@@ -58,15 +65,7 @@ const FeatureFlags: React.FC<FeatureFlagsProps> = ({ data }) => {
                         title="Roll out your first feature"
                         description="Learn how to create a feature flag and toggle it on and off for different users."
                         link="/docs/feature-flags/start-here"
-                    >
-                        <StaticImage
-                            alt=""
-                            placeholder="none"
-                            quality={100}
-                            className="w-[400px]"
-                            src="../../components/Home/Slider/images/feature-flags-hog.png"
-                        />
-                    </GettingStarted>
+                    ></GettingStarted>
                 </section>
 
                 {/* Quick links */}

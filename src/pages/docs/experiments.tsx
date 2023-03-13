@@ -46,6 +46,13 @@ const Experiments: React.FC<ExperimentsProps> = ({ data }) => {
             <SEO title="Experiments - Docs - PostHog" />
 
             <PostLayout title={'Experiments'} menu={docs} hideSurvey hideSidebar>
+                <StaticImage
+                    alt=""
+                    placeholder="none"
+                    quality={100}
+                    className="w-[400px] float-right ml-8 -mt-8 mb-8"
+                    src="../../components/Home/Slider/images/ab-testing-hog.png"
+                />
                 <h1 className="text-4xl mb-2 mt-6">Experiments</h1>
                 <h3 className="text-lg text-gray">
                     Test changes in production with an experimentation suite that makes it easy to get the results you
@@ -59,15 +66,7 @@ const Experiments: React.FC<ExperimentsProps> = ({ data }) => {
                         title="Roll out your first feature"
                         description="Start A/B testing your features in minutes."
                         link="/docs/experiments/start-here"
-                    >
-                        <StaticImage
-                            alt=""
-                            placeholder="none"
-                            quality={100}
-                            className="w-[400px]"
-                            src="../../components/Home/Slider/images/ab-testing-hog.png"
-                        />
-                    </GettingStarted>
+                    ></GettingStarted>
                 </section>
 
                 {/* Quick links */}

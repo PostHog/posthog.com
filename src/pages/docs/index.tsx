@@ -195,22 +195,18 @@ export const DocsIndex = ({ data }: PageProps<DocsData>) => {
                     <section>
                         <div className="flex justify-start relative pb-12 md:pt-12 md:pb-20 lg:pt-16 lg:pb-16 items-center -mx-px h-80">
                             <div className="w-full z-20">
+                                <StaticImage
+                                    src="../../../contents/images/search-hog-3.png"
+                                    alt="This hog has an answer"
+                                    width={400}
+                                    placeholder="blurred"
+                                    className="float-right ml-8 -mt-8 mb-8"
+                                />
                                 <h1 className="font-bold text-5xl mb-2">Documentation</h1>
                                 <h5 className="opacity-60 font-semibold leading-tight mb-8">
                                     In-depth tutorials, references, and <br className="hidden md:block xl:hidden" />
                                     examples for everything PostHog
                                 </h5>
-                            </div>
-
-                            <div className="absolute hidden md:block overflow-hidden inset-y-0 right-0 h-full w-full z-10">
-                                <span className="absolute right-0 bottom-0">
-                                    <StaticImage
-                                        src="../../../contents/images/search-hog-3.png"
-                                        alt="This hog has an answer"
-                                        width={400}
-                                        placeholder="blurred"
-                                    />
-                                </span>
                             </div>
                         </div>
 

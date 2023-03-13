@@ -46,27 +46,26 @@ const SessionRecording: React.FC<SessionRecordingProps> = ({ data }) => {
             <SEO title="Session recording - Docs - PostHog" />
 
             <PostLayout title={'Session recording'} menu={docs} hideSurvey hideSidebar>
+                <StaticImage
+                    alt=""
+                    placeholder="none"
+                    quality={100}
+                    className="w-full sm:w-[400px] float-right ml-8 -mt-8 mb-8"
+                    src="../../components/Home/Slider/images/session-recording-hog.png"
+                />
                 <h1 className="text-4xl mb-2 mt-6">Session recording</h1>
                 <h3 className="text-lg text-gray">
                     Play back sessions to diagnose UI issues, improve support and get inspired.
                 </h3>
 
                 {/* Get started section */}
-                <section className="py-12">
+                <section className="pt-4 pb-0">
                     <GettingStarted
-                        product="Session recording"
+                        articleType="Pinned"
                         title="Record your first session"
                         description="Flip a switch to start capturing session recordings in minutes."
                         link="/docs/session-recording/start-here"
-                    >
-                        <StaticImage
-                            alt=""
-                            placeholder="none"
-                            quality={100}
-                            className="w-[400px]"
-                            src="../../components/Home/Slider/images/session-recording-hog.png"
-                        />
-                    </GettingStarted>
+                    ></GettingStarted>
                 </section>
 
                 {/* Quick links */}

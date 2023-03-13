@@ -19,7 +19,7 @@ export const GettingStarted: React.FC<ProductAnalyticsProps> = ({
 }) => {
     return (
         <div className="clear-both relative flex items-center border-y border-dashed border-gray-accent-light dark:border-gray-accent-dark py-4">
-            <div className="flex gap-4 w-full items-center">
+            <div className="flex flex-col sm:flex-row gap-4 w-full items-center">
                 <div className="flex-1">
                     <div className="flex flex-row items-center opacity-70 space-x-1 mb-2">
                         <span className="text-xs uppercase font-semibold">{articleType}</span>
@@ -28,7 +28,7 @@ export const GettingStarted: React.FC<ProductAnalyticsProps> = ({
                     <p className="max-w-md">{description}</p>
                 </div>
 
-                <aside className="flex-shrink">
+                <aside className="w-full sm:w-auto sm:flex-shrink">
                     <CallToAction to={link}>Get started &rarr;</CallToAction>
                 </aside>
             </div>

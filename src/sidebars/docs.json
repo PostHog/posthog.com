@@ -378,6 +378,10 @@
         "icon": "SessionRecording",
         "children": [
             {
+                "name": "Overview",
+                "url": "/docs/session-recording"
+            },
+            {
                 "name": "Product manual",
                 "url": "/docs/session-recording/manual"
             },
@@ -401,6 +405,10 @@
         "icon": "FeatureFlags",
         "children": [
             {
+                "name": "Overview",
+                "url": "/docs/feature-flags"
+            },
+            {
                 "name": "Product manual",
                 "url": "/docs/feature-flags/manual"
             },
@@ -423,6 +431,10 @@
         "url": "/docs/experiments",
         "icon": "Experiments",
         "children": [
+            {
+                "name": "Overview",
+                "url": "/docs/experiments"
+            },
             {
                 "name": "Product manual",
                 "url": "/docs/experiments/manual"

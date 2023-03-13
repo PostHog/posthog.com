@@ -89,7 +89,7 @@ const ProductAnalytics: React.FC<ProductAnalyticsProps> = ({ data }) => {
                     alt=""
                     placeholder="none"
                     quality={100}
-                    className="w-[400px] float-right ml-8 -mt-8"
+                    className="w-[400px] float-right ml-8 -mt-8 mb-8"
                     src="../../components/Home/Slider/images/product-analytics-hog.png"
                 />
                 <h1 className="text-4xl mb-2 mt-6">Product analytics</h1>
@@ -97,18 +97,8 @@ const ProductAnalytics: React.FC<ProductAnalyticsProps> = ({ data }) => {
                     Learn how to use product analytics to understand your users.
                 </h3>
 
-                {/* Get started section */}
-                <section className="pt-4 pb-0">
-                    <GettingStarted
-                        articleType="Pinned"
-                        title="Start sending events"
-                        description="Use our custom SDKs and integrations to send events from your favorite language or platform."
-                        link="/docs/getting-started/start-here"
-                    ></GettingStarted>
-                </section>
-
                 {/* Quick links */}
-                <section className="my-12">
+                <section className="my-12 clear-both">
                     <h3 className="mb-6 mt-0">Chapters</h3>
                     <LinkGrid links={quickLinks} />
                 </section>
