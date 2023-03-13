@@ -191,17 +191,20 @@ export const DocsIndex = ({ data }: PageProps<DocsData>) => {
             <SEO title="Documentation - PostHog" />
 
             <PostLayout article={false} title={'Docs'} menu={docs} hideSidebar hideSurvey>
-                <div className="space-y-16 lg:space-y-20 lg:-mt-12 mb-8">
+                <div className="space-y-16 lg:space-y-20 lg:mt-0 mt-8 mb-8">
                     <section>
                         <div className="w-full z-20">
                             <StaticImage
+                                objectFit="contain"
                                 src="../../../contents/images/search-hog-3.png"
                                 alt="This hog has an answer"
                                 width={400}
                                 placeholder="blurred"
-                                className="w-full sm:w-[400px] sm:float-right sm:ml-8 sm:-mt-8 sm:mb-8"
+                                className="w-full sm:w-[400px] sm:float-right sm:ml-8 sm:-mt-8 mb-8"
                             />
-                            <h1 className="font-bold text-5xl mb-2">Documentation</h1>
+                            <h1 className="font-bold text-3xl md:text-4xl lg:text-5xl mb-2 whitespace-nowrap">
+                                Documentation
+                            </h1>
                             <h5 className="opacity-60 font-semibold leading-tight mb-8">
                                 In-depth tutorials, references, and <br className="hidden md:block xl:hidden" />
                                 examples for everything PostHog
@@ -213,7 +216,7 @@ export const DocsIndex = ({ data }: PageProps<DocsData>) => {
 
                     <section className="space-y-8">
                         <div className="text-center">
-                            <h2 className="font-bold mb-1">Quick links</h2>
+                            <h2 className="font-bold mb-1 inline-block w-full">Quick links</h2>
                             <p className="text-gray font-medium">
                                 Get up and running <i>fast</i>
                             </p>
