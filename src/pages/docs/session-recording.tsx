@@ -65,7 +65,7 @@ const SessionRecording: React.FC<SessionRecordingProps> = ({ data }) => {
                         articleType="Pinned"
                         title="Record your first session"
                         description="Flip a switch to start capturing session recordings in minutes."
-                        link="/docs/session-recording/start-here"
+                        link="/docs/session-recording/manual#enabling-session-recording"
                     ></GettingStarted>
                 </section>
 

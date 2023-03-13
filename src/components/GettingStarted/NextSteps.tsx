@@ -6,9 +6,11 @@ import { quickLinks as featureFlagsLinks } from '../../pages/docs/feature-flags'
 import { quickLinks as experimentsLinks } from '../../pages/docs/experiments'
 import { quickLinks as sessionRecordingLinks } from '../../pages/docs/session-recording'
 import { quickLinks as dataLinks } from '../../pages/docs/data'
+import { CallToAction } from 'components/CallToAction'
 
 type NextStepProps = {
     title: string
+    url?: string
     links: {
         name: string
         to: string
@@ -16,15 +18,20 @@ type NextStepProps = {
     children: React.ReactNode
 }
 
-export const NextStep: React.FC<NextStepProps> = ({ title, links, children }) => {
+export const NextStep: React.FC<NextStepProps> = ({ title, url, links, children }) => {
     return (
         <div className="space-y-6 pb-8">
-            <div className="flex items-end justify-between border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark">
-                <h3>{title}</h3>
-                <div className="w-36">{children}</div>
+            <div className="flex items-end justify-between">
+                <div>
+                    <h3>{title}</h3>
+                    <CallToAction href={url} type="secondary" size="sm">
+                        Visit section
+                    </CallToAction>
+                </div>
+                <div className="w-72">{children}</div>
             </div>
 
-            <ul className="grid grid-cols-1 sm:grid-cols-2 list-none p-0 m-0">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 list-none p-0 m-0 py-4 border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark">
                 {links.map((link) => (
                     <li key={link.name} className="relative w-full py-2 flex items-center">
                         <Link className="leading-none" to={link.to}>
@@ -39,7 +46,7 @@ export const NextStep: React.FC<NextStepProps> = ({ title, links, children }) =>
 
 export const ProductAnalytics = () => {
     return (
-        <NextStep title="Product Analytics" links={productAnalyticsLinks}>
+        <NextStep title="Product Analytics" url="/docs/product-analytics" links={productAnalyticsLinks}>
             <StaticImage
                 alt=""
                 placeholder="none"
@@ -51,9 +58,23 @@ export const ProductAnalytics = () => {
     )
 }
 
+export const SessionRecording = () => {
+    return (
+        <NextStep title="Session recording" url="/docs/session-recording" links={sessionRecordingLinks}>
+            <StaticImage
+                alt=""
+                placeholder="none"
+                quality={100}
+                className="w-full"
+                src="../Home/Slider/images/session-recording-hog.png"
+            />
+        </NextStep>
+    )
+}
+
 export const FeatureFlags = () => {
     return (
-        <NextStep title="Feature flags" links={featureFlagsLinks}>
+        <NextStep title="Feature flags" url="/docs/feature-flags" links={featureFlagsLinks}>
             <StaticImage
                 alt=""
                 placeholder="none"
@@ -67,7 +88,7 @@ export const FeatureFlags = () => {
 
 export const Experiments = () => {
     return (
-        <NextStep title="Experiments" links={experimentsLinks}>
+        <NextStep title="A/B testing" url="/docs/exerpiments" links={experimentsLinks}>
             <StaticImage
                 alt=""
                 placeholder="none"
@@ -79,23 +100,9 @@ export const Experiments = () => {
     )
 }
 
-export const SessionRecording = () => {
-    return (
-        <NextStep title="Session recording" links={sessionRecordingLinks}>
-            <StaticImage
-                alt=""
-                placeholder="none"
-                quality={100}
-                className="w-full"
-                src="../Home/Slider/images/session-recording-hog.png"
-            />
-        </NextStep>
-    )
-}
-
 export const Data = () => {
     return (
-        <NextStep title="Data" links={dataLinks}>
+        <NextStep title="Data" url="/docs/data" links={dataLinks}>
             <StaticImage
                 alt=""
                 placeholder="none"
@@ -111,6 +118,7 @@ export const Apps = () => {
     return (
         <NextStep
             title="Apps"
+            url="/docs/apps"
             links={[
                 { name: 'Browse apps', to: '/apps' },
                 { name: 'Import Stripe data into PostHog', to: '/tutorials/stripe-payment-data' },

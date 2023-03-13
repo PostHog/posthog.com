@@ -63,7 +63,7 @@ const Chapter: React.FC<ChapterProps> = ({ num, title, url, headings, children, 
     return (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-x-6 pb-6 mb-6">
             {gatsbyImage && (
-                <div className="max-w-[150px] aspect-square md:max-w-full h-auto bg-gray-accent-light dark:bg-gray-accent-dark rounded">
+                <div className="hidden sm:block max-w-[150px] aspect-square md:max-w-full h-auto bg-gray-accent-light dark:bg-gray-accent-dark rounded">
                     <GatsbyImage alt={title} image={gatsbyImage} />
                 </div>
             )}
@@ -83,7 +83,7 @@ const Chapter: React.FC<ChapterProps> = ({ num, title, url, headings, children, 
                 <span className="block text-sm text-black/40 dark:text-white/60 font-semibold mt-6 !mb-3">
                     Jump to:
                 </span>
-                <ol className="list-none !m-0 font-semibold space-y-4">
+                <ol className="list-none !m-0 font-semibold space-y-4 pl-0">
                     {headings.map((heading) => (
                         <li key={heading.link} className="pl-6 jumpTo group flex items-center leading-none">
                             <Link

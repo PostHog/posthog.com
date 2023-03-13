@@ -70,16 +70,16 @@ const Data: React.FC<DataProps> = ({ data }) => {
                 />
                 <h1 className="text-4xl mb-2 mt-6">Data management</h1>
                 <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75">
-                    Manage the data used throughout the PostHog suite.
+                    Manage event and customer data used throughout the PostHog suite.
                 </h3>
 
                 {/* Get started section */}
                 <section className="py-6 sm:py-12">
                     <GettingStarted
                         product="Data management"
-                        title="Get started with data management"
-                        description="Learn how to get started with PostHog's data management features. Create cohorts, actions, and more."
-                        link="/docs/manual/data-management"
+                        title="Data management primer"
+                        description="Learn how to manage event data in PostHog."
+                        link="/manual/data-management"
                     ></GettingStarted>
                 </section>
 

@@ -62,9 +62,9 @@ const FeatureFlags: React.FC<FeatureFlagsProps> = ({ data }) => {
                 <section className="py-6 sm:py-12">
                     <GettingStarted
                         product="Feature flags"
-                        title="Roll out your first feature"
+                        title="Create your first feature flag"
                         description="Learn how to create a feature flag and toggle it on and off for different users."
-                        link="/docs/feature-flags/start-here"
+                        link="/docs/feature-flags/manual#creating-feature-flags"
                     ></GettingStarted>
                 </section>
 

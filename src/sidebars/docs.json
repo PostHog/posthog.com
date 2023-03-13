@@ -31,7 +31,7 @@
                 "url": "/docs/getting-started/user-properties"
             },
             {
-                "name": "Actions and insights",
+                "name": "Actions & insights",
                 "url": "/docs/getting-started/actions-and-insights"
             },
             {
@@ -293,6 +293,28 @@
         ]
     },
     {
+        "name": "Webhooks",
+        "url": "",
+        "children": [
+            {
+                "name": "Message formatting",
+                "url": "/docs/integrate/webhooks/message-formatting"
+            },
+            {
+                "name": "Microsoft Teams",
+                "url": "/docs/integrate/webhooks/microsoft-teams"
+            },
+            {
+                "name": "Slack",
+                "url": "/docs/integrate/webhooks/slack"
+            },
+            {
+                "name": "Discord",
+                "url": "/docs/integrate/webhooks/discord"
+            }
+        ]
+    },
+    {
         "name": "Advanced",
         "url": "",
         "children": [
@@ -475,7 +497,7 @@
                 "url": "/manual/cohorts"
             },
             {
-                "name": "Data Management",
+                "name": "Data management",
                 "url": "/manual/data-management"
             },
             {
@@ -1077,28 +1099,6 @@
         ]
     },
     {
-        "name": "Webhooks",
-        "url": "",
-        "children": [
-            {
-                "name": "Message formatting",
-                "url": "/docs/integrate/webhooks/message-formatting"
-            },
-            {
-                "name": "Microsoft Teams",
-                "url": "/docs/integrate/webhooks/microsoft-teams"
-            },
-            {
-                "name": "Slack",
-                "url": "/docs/integrate/webhooks/slack"
-            },
-            {
-                "name": "Discord",
-                "url": "/docs/integrate/webhooks/discord"
-            }
-        ]
-    },
-    {
         "name": "Resources"
     },
     {
@@ -1262,7 +1262,7 @@
         ]
     },
     {
-        "name": "Support",
+        "name": "Support options",
         "url": "/manual/support"
     },
     {
