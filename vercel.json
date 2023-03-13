@@ -714,6 +714,10 @@
         {
             "source": "/docs/integrate/user-properties",
             "destination": "/docs/getting-started/user-properties"
+        },
+        {
+            "source": "/docs/integrate",
+            "destination": "/docs/getting-started/install"
         }
     ],
     "rewrites": [
