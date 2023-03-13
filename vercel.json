@@ -710,6 +710,10 @@
         {
             "source": "/docs/integrate/identifying-users",
             "destination": "/docs/getting-started/identify-users"
+        },
+        {
+            "source": "/docs/integrate/user-properties",
+            "destination": "/docs/getting-started/user-properties"
         }
     ],
     "rewrites": [
