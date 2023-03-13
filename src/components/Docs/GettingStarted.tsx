@@ -25,7 +25,7 @@ export const GettingStarted: React.FC<ProductAnalyticsProps> = ({
                         <span className="text-xs uppercase font-semibold">{articleType}</span>
                     </div>
                     <h3 className="mb-2 mt-0">{title}</h3>
-                    <p className="max-w-md">{description}</p>
+                    <p className="max-w-md mb-0">{description}</p>
                 </div>
 
                 <aside className="w-full sm:w-auto sm:flex-shrink">
