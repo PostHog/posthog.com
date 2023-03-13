@@ -2,7 +2,7 @@ import { graphql, Link, useStaticQuery } from 'gatsby'
 import React from 'react'
 import Slugger from 'github-slugger'
 import { CallToAction } from 'components/CallToAction'
-import { StaticImage } from 'gatsby-plugin-image'
+import { GatsbyImage, getImage, ImageDataLike, StaticImage } from 'gatsby-plugin-image'
 
 const query = graphql`
     query Chapters {
@@ -14,6 +14,11 @@ const query = graphql`
                 frontmatter {
                     title
                     description
+                    featuredImage {
+                        childImageSharp {
+                            gatsbyImageData(placeholder: NONE)
+                        }
+                    }
                 }
                 headings {
                     depth
@@ -50,14 +55,18 @@ type ChapterProps = {
         link: string
     }[]
     children?: React.ReactNode
+    image?: ImageDataLike
 }
 
-const Chapter: React.FC<ChapterProps> = ({ num, title, url, headings, children }) => {
+const Chapter: React.FC<ChapterProps> = ({ num, title, url, headings, children, image }) => {
+    const gatsbyImage = image && getImage(image)
     return (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-x-6 pb-6 mb-6">
-            <div className="max-w-[150px] md:max-w-full h-auto bg-gray-accent-light dark:bg-gray-accent-dark rounded">
-                <StaticImage src="images/docs-install.png" alt="Install" className="" />
-            </div>
+            {gatsbyImage && (
+                <div className="max-w-[150px] md:max-w-full h-auto bg-gray-accent-light dark:bg-gray-accent-dark rounded">
+                    <GatsbyImage alt={title} image={gatsbyImage} />
+                </div>
+            )}
             <div className="md:col-span-2 pt-2 pb-6 space-y-8">
                 <div className="flex items-center justify-between border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark pb-6">
                     <div className="">
@@ -95,11 +104,12 @@ export const InstallChapter: React.FC = () => {
     const data = useStaticQuery(query)
 
     const {
-        frontmatter: { title, description },
+        frontmatter: { title, description, featuredImage },
     } = data.allMdx.nodes.find((node: any) => node.fields.slug === '/docs/getting-started/install')
 
     return (
         <Chapter
+            image={featuredImage}
             num={1}
             title={title}
             url="/docs/getting-started/install"
@@ -117,26 +127,42 @@ export const SendEventsChapter: React.FC = () => {
     const data = useStaticQuery(query)
     const node = data.allMdx.nodes.find((node: any) => node.fields.slug === '/docs/getting-started/send-events')
     const {
-        frontmatter: { title, description },
+        frontmatter: { title, description, featuredImage },
         headings,
     } = node
 
     const filteredHeadings = filterHeadings(node.fields.slug, headings)
 
-    return <Chapter num={2} title={title} url={node.fields.slug} headings={filteredHeadings}></Chapter>
+    return (
+        <Chapter
+            image={featuredImage}
+            num={2}
+            title={title}
+            url={node.fields.slug}
+            headings={filteredHeadings}
+        ></Chapter>
+    )
 }
 
 export const IdentifyUsersChapter: React.FC = () => {
     const data = useStaticQuery(query)
     const node = data.allMdx.nodes.find((node: any) => node.fields.slug === '/docs/getting-started/identify-users')
     const {
-        frontmatter: { title, description },
+        frontmatter: { title, description, featuredImage },
         headings,
     } = node
 
     const filteredHeadings = filterHeadings(node.fields.slug, headings)
 
-    return <Chapter num={3} title={title} url={node.fields.slug} headings={filteredHeadings}></Chapter>
+    return (
+        <Chapter
+            image={featuredImage}
+            num={3}
+            title={title}
+            url={node.fields.slug}
+            headings={filteredHeadings}
+        ></Chapter>
+    )
 }
 
 export const ActionsAndInsightsChapter: React.FC = () => {
@@ -145,27 +171,35 @@ export const ActionsAndInsightsChapter: React.FC = () => {
         (node: any) => node.fields.slug === '/docs/getting-started/actions-and-insights'
     )
     const {
-        frontmatter: { title, description },
-        headings,
-    } = node
-
-    const filteredHeadings = filterHeadings(node.fields.slug, headings)
-
-    return <Chapter num={4} title={title} url={node.fields.slug} headings={filteredHeadings}></Chapter>
-}
-
-export const GroupAnalyticsChapter: React.FC = () => {
-    const data = useStaticQuery(query)
-    const node = data.allMdx.nodes.find((node: any) => node.fields.slug === '/docs/getting-started/group-analytics')
-    const {
-        frontmatter: { title, description },
+        frontmatter: { title, description, featuredImage },
         headings,
     } = node
 
     const filteredHeadings = filterHeadings(node.fields.slug, headings)
 
     return (
-        <Chapter num={5} title={title} url={node.fields.slug} headings={filteredHeadings}>
+        <Chapter
+            image={featuredImage}
+            num={4}
+            title={title}
+            url={node.fields.slug}
+            headings={filteredHeadings}
+        ></Chapter>
+    )
+}
+
+export const GroupAnalyticsChapter: React.FC = () => {
+    const data = useStaticQuery(query)
+    const node = data.allMdx.nodes.find((node: any) => node.fields.slug === '/docs/getting-started/group-analytics')
+    const {
+        frontmatter: { title, description, featuredImage },
+        headings,
+    } = node
+
+    const filteredHeadings = filterHeadings(node.fields.slug, headings)
+
+    return (
+        <Chapter image={featuredImage} num={5} title={title} url={node.fields.slug} headings={filteredHeadings}>
             <p>Identify users</p>
         </Chapter>
     )
