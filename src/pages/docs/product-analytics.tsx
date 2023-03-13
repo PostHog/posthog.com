@@ -12,54 +12,59 @@ import { GettingStarted } from 'components/Docs/GettingStarted'
 
 const quickLinks = [
     {
-        "icon": "Trends",
+        icon: 'Trends',
         name: 'Graphs & trends',
         to: '/manual/trends',
     },
     {
-        "icon": "Funnels",
+        icon: 'Funnels',
         name: 'Funnels',
         to: '/manual/funnels',
     },
     {
-        "icon": "PathAnalysis",
+        icon: 'PathAnalysis',
         name: 'User paths',
         to: '/manual/user-paths',
     },
     {
-        "icon": "Dashboards",
+        icon: 'Dashboards',
         name: 'Dashboards',
         to: '/manual/dashboards',
     },
     {
-        "icon": "Retention",
+        icon: 'Retention',
         name: 'Retention',
         to: '/manual/retention',
     },
     {
-        "icon": "Stickiness",
+        icon: 'Stickiness',
         name: 'Stickiness',
         to: '/manual/stickiness',
     },
     {
-        "icon": "Lifecycle",
+        icon: 'Lifecycle',
         name: 'Lifecycle',
         to: '/manual/lifecycle',
     },
     {
-        "icon": "CorrelationAnalysis",
+        icon: 'CorrelationAnalysis',
         name: 'Correlation analysis',
         to: '/manual/correlation',
     },
     {
-        "icon": "GroupAnalytics",
+        icon: 'GroupAnalytics',
         name: 'Groups',
         to: '/manual/group-analytics',
     },
     {
-        "icon": "Toolbar",
+        icon: 'Toolbar',
         name: 'Toolbar',
         to: '/manual/toolbar',
+    },
+    {
+        icon: 'Sampling',
+        name: 'Sampling',
+        to: '/manual/sampling',
     },
 ]
 
