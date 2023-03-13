@@ -341,7 +341,7 @@
     },
     {
         "name": "Product analytics",
-        "url": "",
+        "url": "/docs/product-analytics",
         "icon": "Analytics",
         "children": [
             {
