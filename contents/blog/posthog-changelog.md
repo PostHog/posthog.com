@@ -19,6 +19,36 @@ Interested in what new features, fixes and updates have just launched on PostHog
 
 > Some new features you read about below may still be in beta, behind a feature flag, or only available to paying users. Want to see which betas are currently available? [Check the roadmap](/roadmap)!
 
+## March 17, 2023
+
+## Beta: Lightning mode
+![posthog lightning mode](../images/blog/array/lightning_mode.gif)
+
+As [teased on Twitter last week](https://twitter.com/posthog/status/1633061945598148608), we’re currently trialing a new speed setting for PostHog which we call Lightning Mode. When enabled, insights will sample only 10% of your data, so you can get results faster when interrogating very large data sets. 
+
+Lightning mode is currently in beta. Want to give it a go? Let us know in [the community Slack](/slack)!
+
+## Beta: Sampling selector
+![posthog sampling](../images/blog/array/sampling.gif)
+
+In addition to lightning mode, we’ve also added a more detailed sampling selector which works only at the per-insight level. The idea is that, while lightning mode is useful for when you need answers in a hurry, there are other times when you may want to choose a more delicate balance between speed and accuracy. That’s where the sampling selector comes in. 
+
+Like lightning mode, sampling is currently available as an opt-in beta. [Raise your hand in the Slack if you want to try it out](/slack).
+
+## PostHog for Startups
+![PostHog for Startups](../images/startup-hogs.png)
+
+When we launched PostHog we benefitted tremendously from the advice of other founders and teams in the Y Combinator programme. Now, we’ve launched our own programme to share our knowledge and help other startups grow. 
+
+[PostHog for Startups](/startups) is now open to companies which are less than two years old and which have raised less than $5 million in funding. In addition to a $50k PostHog credit, you’ll also get access to exclusive ‘Office Hours’ events, promotion opportunities and free PostHog merch. 
+
+## What’s New?
+![posthog changelog](../images/blog/array/whats_new.gif)
+
+To make it easier for you to keep up to date on what’s happening in PostHog, and to stay informed about our latest releases, we’ve added a new button to the help navigation. It’s called ‘What’s new?’ and it brings you here, to the changelog, so you can find out what’s new. 
+
+You can log into PostHog now to try it out, and be bought right back to this very paragraph!
+
 ## March 10, 2023 
 
 ### Dashboard templates
