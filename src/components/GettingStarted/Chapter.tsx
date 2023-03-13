@@ -63,7 +63,7 @@ const Chapter: React.FC<ChapterProps> = ({ num, title, url, headings, children, 
     return (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-x-6 pb-6 mb-6">
             {gatsbyImage && (
-                <div className="max-w-[150px] md:max-w-full h-auto bg-gray-accent-light dark:bg-gray-accent-dark rounded">
+                <div className="max-w-[150px] aspect-square md:max-w-full h-auto bg-gray-accent-light dark:bg-gray-accent-dark rounded">
                     <GatsbyImage alt={title} image={gatsbyImage} />
                 </div>
             )}
@@ -165,11 +165,9 @@ export const IdentifyUsersChapter: React.FC = () => {
     )
 }
 
-export const ActionsAndInsightsChapter: React.FC = () => {
+export const UserPropertiesChapter: React.FC = () => {
     const data = useStaticQuery(query)
-    const node = data.allMdx.nodes.find(
-        (node: any) => node.fields.slug === '/docs/getting-started/actions-and-insights'
-    )
+    const node = data.allMdx.nodes.find((node: any) => node.fields.slug === '/docs/getting-started/user-properties')
     const {
         frontmatter: { title, description, featuredImage },
         headings,
@@ -188,6 +186,29 @@ export const ActionsAndInsightsChapter: React.FC = () => {
     )
 }
 
+export const ActionsAndInsightsChapter: React.FC = () => {
+    const data = useStaticQuery(query)
+    const node = data.allMdx.nodes.find(
+        (node: any) => node.fields.slug === '/docs/getting-started/actions-and-insights'
+    )
+    const {
+        frontmatter: { title, description, featuredImage },
+        headings,
+    } = node
+
+    const filteredHeadings = filterHeadings(node.fields.slug, headings)
+
+    return (
+        <Chapter
+            image={featuredImage}
+            num={5}
+            title={title}
+            url={node.fields.slug}
+            headings={filteredHeadings}
+        ></Chapter>
+    )
+}
+
 export const GroupAnalyticsChapter: React.FC = () => {
     const data = useStaticQuery(query)
     const node = data.allMdx.nodes.find((node: any) => node.fields.slug === '/docs/getting-started/group-analytics')
@@ -199,7 +220,7 @@ export const GroupAnalyticsChapter: React.FC = () => {
     const filteredHeadings = filterHeadings(node.fields.slug, headings)
 
     return (
-        <Chapter image={featuredImage} num={5} title={title} url={node.fields.slug} headings={filteredHeadings}>
+        <Chapter image={featuredImage} num={6} title={title} url={node.fields.slug} headings={filteredHeadings}>
             <p>Identify users</p>
         </Chapter>
     )
