@@ -224,10 +224,8 @@ export const DocsIndex = ({ data }: PageProps<DocsData>) => {
 
                         <div className="grid grid-cols-1 xl:grid-cols-3 gap-x-4 rounded xl:rounded-none overflow-hidden">
                             <div className="bg-gray-accent-light dark:bg-gray-accent-dark lg:rounded px-6 py-4">
-                                <div>
-                                    <h4 className="font-bold mb-0">
-                                        <span className="text-gray text-lg"></span> Getting started
-                                    </h4>
+                                <div className="mb-3">
+                                    <h4 className="font-bold mb-0">Getting started</h4>
                                     <p className="text-sm text-gray">Complete guide to getting set-up</p>
                                 </div>
 
@@ -247,10 +245,8 @@ export const DocsIndex = ({ data }: PageProps<DocsData>) => {
                             </div>
 
                             <div className="bg-gray-accent-light dark:bg-gray-accent-dark xl:rounded px-6 py-4">
-                                <div>
-                                    <h4 className="font-bold mb-0">
-                                        <span className="text-gray text-lg"></span> Popular SDKs
-                                    </h4>
+                                <div className="mb-3">
+                                    <h4 className="font-bold mb-0">Popular SDKs</h4>
                                     <p className="text-sm text-gray">Integrate with your favoriate language</p>
                                 </div>
                                 <ul className="grid grid-cols-2 xl:grid-cols-1 w-full list-none m-0 p-0 space-y-1">
@@ -270,10 +266,10 @@ export const DocsIndex = ({ data }: PageProps<DocsData>) => {
                             </div>
 
                             <div className="bg-gray-accent-light dark:bg-gray-accent-dark xl:rounded px-6 py-4">
-                                <h4 className="font-bold mb-0">
-                                    <span className="text-gray text-lg"></span> Popular apps
-                                </h4>
-                                <p className="text-sm text-gray">Import, transform, and export data</p>
+                                <div className="mb-3">
+                                    <h4 className="font-bold mb-0">Popular apps</h4>
+                                    <p className="text-sm text-gray">Import, transform, and export data</p>
+                                </div>
                                 <ul className="grid sm:grid-cols-2 xl:grid-cols-1 w-full list-none m-0 p-0 space-y-1">
                                     {apps.nodes.map((app) => {
                                         return (
