@@ -124,11 +124,11 @@ const MenuContainer = ({
                     dragControls={dragControls}
                     drag="y"
                     dragListener={false}
-                    className={`bg-white dark:bg-gray-accent-dark pb-4 pt-6 px-6 rounded-tr-md rounded-tl-md shadow ${className}`}
+                    className={`bg-white dark:bg-gray-accent-dark pb-4 pt-2 px-6 rounded-tr-md rounded-tl-md shadow ${className}`}
                 >
                     <div
                         onPointerDown={startDrag}
-                        className="absolute left-0 top-0 w-full h-12 flex justify-center items-center space-x-1 group"
+                        className=" w-full h-8 mb-2 flex justify-center items-center space-x-1 group"
                     >
                         <div className="w-1 h-1 bg-black dark:bg-white rounded-full group-active:opacity-80 transition-all opacity-30" />
                         <div className="w-1 h-1 bg-black dark:bg-white rounded-full group-active:opacity-80 transition-all opacity-30" />
