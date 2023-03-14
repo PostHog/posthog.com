@@ -6,12 +6,18 @@ import {
     Analytics,
     API,
     AppLibrary,
+    DataManagement,
+    EventPipelines,
     FeatureFlags,
+    GroupAnalytics,
+    Integrations,
     Projects,
     SessionRecording,
+    UserPermissions,
 } from 'components/ProductIcons'
 import {
     HowPostHogWorks,
+    IdentifyUsers,
     Migrate,
     JSSnippet,
     Privacy,
@@ -36,11 +42,11 @@ interface IColumn {
 const gettingStarted: IFeature[] = [
     { title: 'Start here', icon: <Quickstart />, url: '/docs/getting-started/cloud' },
     { title: 'Install PostHog', icon: <JSSnippet />, url: '/docs/getting-started/install?tab=snippet' },
-    { title: 'Send events', icon: <SDK />, url: '/docs/getting-started/send-events' },
-    { title: 'Identify users', icon: <SDK />, url: '/docs/getting-started/identify-users' },
-    { title: 'User properties', icon: <SDK />, url: '/docs/getting-started/user-properties' },
-    { title: 'Actions & insights', icon: <SDK />, url: '/docs/getting-started/actions-and-insights' },
-    { title: 'Group analytics', icon: <SDK />, url: '/docs/getting-started/group-analytics' },
+    { title: 'Send events', icon: <EventPipelines />, url: '/docs/getting-started/send-events' },
+    { title: 'Identify users', icon: <IdentifyUsers />, url: '/docs/getting-started/identify-users' },
+    { title: 'User properties', icon: <UserPermissions />, url: '/docs/getting-started/user-properties' },
+    { title: 'Actions & insights', icon: <DataManagement />, url: '/docs/getting-started/actions-and-insights' },
+    { title: 'Group analytics', icon: <GroupAnalytics />, url: '/docs/getting-started/group-analytics' },
 ]
 
 const products: IFeature[] = [
@@ -54,7 +60,7 @@ const products: IFeature[] = [
 
 const resources: IFeature[] = [
     { title: 'Tutorials', icon: <Tutorials />, url: '/tutorials' },
-    { title: 'Integrations', icon: <API />, url: '/docs/integrations' },
+    { title: 'Integrations', icon: <Integrations />, url: '/docs/integrations' },
     { title: 'API', icon: <API />, url: '/docs/api' },
     { title: 'Webhooks', icon: <Webhooks />, url: '/docs/integrate/webhooks/message-formatting' },
     { title: 'How PostHog works', icon: <HowPostHogWorks />, url: '/docs/how-posthog-works' },
@@ -86,7 +92,7 @@ const Section = ({ title, section, className = '' }: IColumn) => {
             <h5 className="text-[15px] font-semibold opacity-40 m-0 border-b border-dashed border-gray-accent-light pb-1">
                 {title}
             </h5>
-            <ul className="list-none p-0 m-0 grid grid-cols-4 md:grid-cols-7 gap-2 dark:text-primary-dark">
+            <ul className="list-none p-0 m-0 grid grid-cols-3 md:grid-cols-7 gap-2 dark:text-primary-dark">
                 {section.map(({ title, icon, url }) => {
                     return (
                         <li key={title} className="w-[6.5rem]">

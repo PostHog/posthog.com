@@ -379,6 +379,18 @@ export const Heatmaps = ({ className = '', ...other }: { className?: string }): 
         <path d="M2.456 2.456V21.16h19.16V2.456H2.456Zm0-.456h19.16a.456.456 0 0 1 .457.456V21.16a.456.456 0 0 1-.457.456H2.456A.456.456 0 0 1 2 21.16V2.456A.456.456 0 0 1 2.456 2Z" />
     </svg>
 )
+export const Integrations = ({ className = '', ...other }: { className?: string }): JSX.Element => (
+    <svg
+        width="100%"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        className={`fill-current ${className}`}
+        {...other}
+    >
+        <path d="M13.093 2a2.558 2.558 0 0 0-2.558 2.558c0 .618.216 1.186.581 1.628h-5.93v5.93a2.547 2.547 0 0 0-1.628-.581 2.558 2.558 0 1 0 1.628 4.535V22h6.439a2.558 2.558 0 1 1 2.936 0H21v-6.439a2.558 2.558 0 1 1 0-2.936V6.186h-5.93c.365-.442.581-1.01.581-1.628A2.558 2.558 0 0 0 13.093 2Z" />
+    </svg>
+)
 export const Lifecycle = ({ className = '', ...other }: { className?: string }): JSX.Element => (
     <svg
         width="100%"
