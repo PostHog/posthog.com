@@ -13,33 +13,26 @@ tags:
  - Marketing
 ---
 
-As the amount of content you create grows, inevitably you need some way to manage this. Content management systems, or CMS, are the go-to software solution for this. Examples include WordPress, Drupal, Wix, Ghost, and many more. 
+As the amount of content you create grows, inevitably you need some way to manage it. A content management system, or CMS, is the go-to software solution for this. Examples include WordPress, Drupal, Wix, Ghost, and many more.
 
 One that doesn’t get thought of as a CMS is GitHub. We use GitHub and love it for three main reasons:
 
-1. Stores content and code together
+1. Enables transparency and open contributions
 2. Provides the necessary content creation workflow tools
 3. Keeps us engineering-focused
 
-## Content and code together
+## Enables transparency and open contributions
 
-Content management systems often disconnect content from code. Content lives in the CMS, and code somewhere else. Often, the code is somewhere the marketing team can’t even access it. For example, millions of people use WordPress without ever seeing (or changing) a single line of code.
+[Being open source](https://github.com/PostHog/posthog.com) is core to PostHog. It creates the transparency, context, and trust needed to be a high-performing, remote software startup.
 
-This disconnects the content from the site, and the user experience is worse because of it. The development of the site and content should align to create a great user experience. Content disconnected from code causes issues. Using GitHub to store everything together prevents this disconnection.
+As the home of open source, GitHub makes this easy. Having our level of transparency might not be possible with another CMS. Anyone can see what we're working on, give feedback, and even make changes to the content and code. This happens all the time, for example:
 
-Keeping our content with our code forces both to work together. This prevents content from causing issues on the site. If a piece of content needs a new type of page, work on both to happen simultaneously and for them to launch at the same time. Launches can contain multiple pages, components, and pieces of content seamlessly. As a recent example, see the addition of our [PostHog for startups landing page](https://github.com/PostHog/posthog.com/pull/5451).
+- Engineers contribute to site documentation and review content.
+- Marketers fix layout or template issues.
+- Readers fix typos and content issues, this makes up ~5% of merged pull requests on our [posthog.com repo](https://github.com/PostHog/posthog.com).
+- Users provide feedback on [our roadmap](/roadmap) which displays data from GitHub issues on our site.
 
-![Startup landing page](../images/blog/github-cms/startups.png)
-
-With GitHub as a CMS, we can use code, frameworks, and packages directly without having to rely on integrations with a CMS. We can get the latest updates and innovations from the tools we use to help our website improve. Instead of the effort going into maintaining a CMS connection, it goes into making the site better.
-
-Having code and content in one place enables us to open source. This is a [key value for us](/handbook/company/values#we-are-open-source). Among other things, it forces us to "work with the door open" and allow anyone to contribute. For example:
-
-- Engineers can contribute to site documentation.
-- Marketers can fix layout or template issues.
-- Readers can fix typos and make suggestions, this makes up ~5% of merged pull requests on our [posthog.com repo](https://github.com/PostHog/posthog.com).
-
-Every time one of these changes happens, it makes our site a bit better in a way that wouldn’t be possible if we weren’t using GitHub. 
+Every time one of these happens, it makes our site a bit better in a way that wouldn’t be possible if we weren’t using GitHub. It empowers people to make changes to code and content themselves, rather than rely on others to do it. This enables us to move fast and have a high impact while maintaining quality.
 
 ## All the necessary tools for your content workflow
 
@@ -58,7 +51,9 @@ GitHub is built for software development, but many of the features work just as 
 GitHub and a text editor are all we need to go from idea to published content. The features of GitHub provide many benefits to our workflow such as:
 
 - Automation for templates, checklists, spellcheck, review notifications, and site previews.
+
 - Central location for ideas, drafts, team comments, finished content, and revisions.
+
 - Tools for feedback including suggestions, full markdown comments, and comment history.
 
 > The piece that is missing is a content calendar. The solution is to ship content as soon as it is ready. If the content relates to a launch, create a branch with all the changes and merge it as soon as the feature launches.
