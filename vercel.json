@@ -718,6 +718,10 @@
         {
             "source": "/docs/integrate",
             "destination": "/docs/getting-started/install"
+        },
+        {
+            "source": "/blog/categories/hogmail",
+            "destination": "/blog/categories/newsletter"
         }
     ],
     "rewrites": [
