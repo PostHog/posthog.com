@@ -238,13 +238,14 @@ const MobileMenu = ({ setOpen }: { setOpen: (open: null | string) => void }) => 
                                     <button
                                         className={`${
                                             url === pathname ? 'active-product opacity-90' : 'opacity-50'
-                                        } hover:opacity-100 font-semibold`}
+                                        } hover:opacity-100 font-semibold flex space-x-1 items-center`}
                                         onClick={() => {
                                             setAnimationDirection('forward')
                                             handleClick({ url, menu: children })
                                         }}
                                     >
                                         <span className="text-left">{name}</span>
+                                        {children && <RightArrow className="w-3" />}
                                     </button>
                                 )}
                             </div>
