@@ -46,9 +46,13 @@ Every time one of these changes happens, it makes our site a bit better in a way
 GitHub is built for software development, but many of the features work just as well for content development. Take our workflow for example:
 
 1. Create content ideas as issues with a [template](https://github.com/PostHog/posthog.com/issues/new?assignees=andyvan-ph&labels=content&template=blog-post-idea-template.md&title=%7BContent+type%7D+-+%7Btitle%7D). Fill out a strapline, reasoning, and outline. Each issue has an owner.
+
 2. Issues go into a content [project board](https://docs.github.com/en/issues/tracking-your-work-with-issues/planning-and-tracking-work-for-your-team-or-project#adding-issues-to-a-project-board) with columns for the backlog, coming soon (in priority order), in progress, in review, and done.
+
 3. Content gets worked on. When done, the creator opens a pull request (with a [checklist](https://github.com/PostHog/posthog.com/blob/master/.github/pull_request_template.md)), and asks for reviews. [GitHub Actions](/blog/automating-a-software-company-with-github-actions) run for spellcheck and Vercel site previews.
+
 4. Reviewers comment and make suggestions. Creator updates until approved.
+
 5. Content gets merged and changes publish to the production site automatically.
 
 GitHub and a text editor are all we need to go from idea to published content. The features of GitHub provide many benefits to our workflow such as:
