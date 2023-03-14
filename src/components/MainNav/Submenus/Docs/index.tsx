@@ -45,7 +45,7 @@ const products: IFeature[] = [
 
 const resources: IFeature[] = [
     { title: 'Tutorials', icon: <Tutorials />, url: '/tutorials' },
-    { title: 'Integrations', icon: <API />, url: '/docs/third-party/integrations' },
+    { title: 'Integrations', icon: <API />, url: '/docs/integrations' },
     { title: 'API', icon: <API />, url: '/docs/api' },
     { title: 'Webhooks', icon: <Webhooks />, url: '/docs/integrate/webhooks/message-formatting' },
     { title: 'How PostHog works', icon: <HowPostHogWorks />, url: '/docs/how-posthog-works' },

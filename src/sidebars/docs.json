@@ -131,6 +131,10 @@
         "url": "",
         "children": [
             {
+                "name": "Overview",
+                "url": "/docs/integrations"
+            },
+            {
                 "name": "Docusaurus v2",
                 "url": "/docs/libraries/docusaurus",
                 "badge": {
