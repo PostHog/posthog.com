@@ -1,5 +1,5 @@
 ---
-title: Why we love GitHub as our CMS
+title: Why we use GitHub as our CMS
 date: 2023-03-10
 author: ["ian-vanagas"]
 showTitle: true
