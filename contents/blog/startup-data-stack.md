@@ -1,6 +1,6 @@
 ---
 title: "How the startup data stack evolves, what we’ve found"
-date: 2023-03-07
+date: 2023-03-14
 author: ["ian-vanagas"]
 showTitle: true
 rootpage: /blog
@@ -57,7 +57,7 @@ Bringing all this data together and managing it often requires a [customer data 
 
 ![Seed](../images/blog/startup-data-stack/seed.png)
 
-The goal of the stack at this stage is to give insights into how the product and specific features are doing. Teams want the ability to answer questions about the product and get basic KPI reporting. This enables them to make decisions about what to work on and measure progress towards goals.
+The goal of the stack at this stage is to give insights into how the product and specific features are doing. Teams want to answer questions about the product and get basic KPI reporting. This enables them to make decisions about what to work on and measure progress towards goals.
 
 Moving from individual sources to a CDP makes gathering data faster, but starts to create a web of integrations and mainteinance. It is a challenge to know if data is accurate, luckily at this stage, it doesn't need to be. The Seed stage strikes the balance of giving engineers enough data to know what to prioritize with having plenty of time to build it.
 
@@ -83,9 +83,9 @@ For example, engineers might need to write optimized SQL queries to understand c
 
 ## PostHog’s vision for the future of the startup data stack
 
-Being a part of this evolution, we have thoughts on where PostHog fits into this. [Our mission](/handbook/strategy/overview) is to increase the number of successful products in the world, and we do this by helping engineers be better at product. This means helping them gather and analyze data at the earliest stage of their product, and integrating more of the parts of the startup data stack as they scale up.
+PostHog is not content with the "modern data stack." The gaps and complexity it creates limits the ability to [build successful products](/handbook/strategy/overview). To change this, we are improving how startups gather and analyze data at the earliest stages and consolidating more of the stack as they scale.
 
-To make this happen, we are improving the ability to use PostHog as a [customer data platform (CDP)](https://github.com/PostHog/posthog/issues/13126). We have built the key functionality, such as the ability to:
+To make this happen, we are improving PostHog as a [customer data platform (CDP)](https://github.com/PostHog/posthog/issues/13126). We have built the key functionality, such as the ability to:
 
 - Receive data from your app(s) and site(s) with our [SDKs](/docs/integrate?tab=sdks)
 - Receive data from sources like [Stripe](/apps/stripe-connector), [Hubspot](/apps/hubspot-connector), [Intercom](/apps/intercom)
