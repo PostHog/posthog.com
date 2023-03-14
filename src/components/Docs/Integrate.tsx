@@ -93,6 +93,8 @@ export const Frameworks = () => {
     )
 }
 
+{
+    /*
 const query = graphql`
     {
         sdks: allMdx(
@@ -145,3 +147,5 @@ const query = graphql`
         }
     }
 `
+*/
+}
