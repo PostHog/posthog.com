@@ -23,7 +23,7 @@ export const quickLinks = [
     },
     {
         name: 'Troublehsooting & FAQs',
-        to: '/docs/session-recording/troublehsooting',
+        to: '/docs/session-recording/troubleshooting',
         description: 'Common issues and how to resolve them.',
     },
 ]
