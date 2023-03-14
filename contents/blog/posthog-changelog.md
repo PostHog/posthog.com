@@ -40,7 +40,12 @@ Like lightning mode, sampling is currently available as an opt-in beta. [Raise y
 
 When we launched PostHog we benefitted tremendously from the advice of other founders and teams in the Y Combinator programme. Now, we’ve launched our own programme to share our knowledge and help other startups grow. 
 
-[PostHog for Startups](/startups) is now open to companies which are less than two years old and which have raised less than $5 million in funding. In addition to a $50k PostHog credit, you’ll also get access to exclusive ‘Office Hours’ events, promotion opportunities and free PostHog merch. 
+[PostHog for Startups](/startups) is now open to companies which are less than two years old and which have raised less than $2 million in funding. In addition to a $50k PostHog credit, you’ll also get access to exclusive ‘Office Hours’ events, promotion opportunities and free PostHog merch. 
+
+## New docs navigation
+![posthog docs](../images/blog/array/docs_nav.gif)
+
+We've fully overhauled the PostHog navigation to make it easier to find the help you need, and especially make it easier to find feature-specific information and help for getting started. Every part of PostHog now has it's own feature-specific hub page, and we've pinned important content such as [how to get started with session recording](/docs/session-recording/manual#enabling-session-recording). 
 
 ## What’s New?
 ![posthog changelog](../images/blog/array/whats_new.gif)
