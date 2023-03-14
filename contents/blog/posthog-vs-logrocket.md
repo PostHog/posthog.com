@@ -1,6 +1,6 @@
 ---
 date: 2023-03-03
-title: PostHog vs Logrocket
+title: PostHog vs LogRocket
 rootPage: /blog
 sidebar: Blog
 showTitle: true
