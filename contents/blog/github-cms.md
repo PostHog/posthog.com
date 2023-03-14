@@ -1,6 +1,6 @@
 ---
 title: Why we use GitHub as our CMS
-date: 2023-03-10
+date: 2023-03-14
 author: ["ian-vanagas"]
 showTitle: true
 rootpage: /blog
@@ -56,7 +56,7 @@ GitHub and a text editor are all we need to go from idea to published content. T
 
 - Tools for feedback including suggestions, full markdown comments, and comment history.
 
-> The piece that is missing is a content calendar. The solution is to ship content as soon as it is ready. If the content relates to a launch, create a branch with all the changes and merge it as soon as the feature launches.
+The piece that is missing is a content calendar. The solution is to ship content as soon as it is ready. If the content relates to a launch, create a branch with all the changes and merge it as soon as the feature launches.
 
 ## Keeps us engineering-focused
 
