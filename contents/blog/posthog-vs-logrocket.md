@@ -19,9 +19,9 @@ LogRocket is a frontend monitoring platform which, like PostHog, combines multip
 
 -   LogRocket focuses heavily on helping frontend developers to detect and solve issues. It offers tools such as session recording, analytics and performance monitoring.
 
--   PostHog is an all-in-one platform that helps teams build better products. It includes many of the same tools as LogRocket, including session recording, analytics and performance monitoring — but also extends to feature flags, A/B experiments and more.
+-   PostHog is an all-in-one platform that helps teams build better products. It includes many of the same tools as LogRocket, including session recording, analytics and performance monitoring — but also extends to feature flags, A/B testing and more.
 
-In this article we’ll dive deeper into these differences and will:
+In this article, we will:
 
 -   Compare PostHog and LogRocket’s core features
 -   Examine PostHog and LogRocket’s library support
@@ -111,7 +111,7 @@ PostHog offers a much wider selection of tools than LogRocket, including several
 
 -   **Feature flags:** PostHog offers robust, multivariate feature flags which support JSON payloads. This enables you to push real-time changes to your product without needing to redeploy. Visit [our feature flag page](/product/feature-flags) for more information. LogRocket doesn’t have any in-built feature flag functions.
 
--   **Experiments:** PostHog offers multivariate experimentation, which enable you to test changes and find statistically relevant insights. Visit [the experimentation page](/product/experimentation-suite) for more information. LogRocket doesn’t have any in-built experimentation features.
+-   **Experiments:** PostHog offers multivariate experimentation, which enables you to test changes and discover statistically relevant insights. Visit [the experimentation page](/product/experimentation-suite) for more information. LogRocket doesn’t have any in-built experimentation features.
 
 -   **Open source:** PostHog is entirely open source, under a permissive MIT license. The biggest advantage for users is the ability to build on top of PostHog and to access the source code directly. [Our team also works in the open](/handbook/company/culture). LogRocket is not an open source company, nor is the product available under an open source license.
 
@@ -119,7 +119,7 @@ PostHog offers a much wider selection of tools than LogRocket, including several
 
 ### Product analytics
 
-While LogRocket contains some product analytics tools, it isn’t primarily intended as a analytics platform and lacks many features that product managers and engineers may require. PostHog is a more capable product analytics platform, offering advanced features such as correlation analysis.
+While LogRocket contains some product analytics features, it isn’t primarily intended as an analytics platform and lacks many features that product managers and engineers may require. PostHog is a more capable product analytics platform, offering advanced features such as correlation analysis.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -208,7 +208,7 @@ While LogRocket contains some product analytics tools, it isn’t primarily inte
 
 ### Session recording
 
-LogRocket and PostHog both offer robust, full-featured session recording tools which outperform even dedicated tools, such as HotJar. LogRocket’s session recording offers a handful of extra features, such as mobile recording, though PostHog is actively working on developing these.
+LogRocket and PostHog both offer robust, full-featured session recording tools that outperform even dedicated tools, such as HotJar. LogRocket’s session recording offers a handful of extra features, such as mobile recording, though PostHog is actively working on developing these.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -595,7 +595,7 @@ As an open source software, PostHog welcomes contributions from the community. I
 
 ### Site apps
 
-PostHog’s extensions also include [site apps](/tutorials/build-site-app), which enable you to inject arbitrary code into your website — something which isn’t possible with LogRocket.
+PostHog’s extensions also include [site apps](/tutorials/build-site-app), which enable you to inject arbitrary code into your website — something that isn’t possible with LogRocket.
 
 Some examples of PostHog’s site apps include:
 
