@@ -11,23 +11,40 @@ author:
 tags:
   - Product updates
   - Release notes
-featuredImage: ../images/blog/posthog-array-blog.png
+featuredImage: ../images/blog/hog_ql.png
 featuredImageType: full
 ---
 
-Today, we're excited to announce a new major PostHog feature which we're making available to all users as a public beta on PostHog Cloud. It's called HogQL and it's a new query language which makes it easier to interrogate your data directly, for all those edge cases where pre-existing insights just don't fit the bill.
+Today, we're excited to announce a major new feature which we're making available to all users as a public beta on PostHog Cloud. It's called HogQL and it's a new query language which makes it easier to interrogate your data directly.
 
-Speaking of bills, HogQL is free for all users while it's in public beta - all we ask is that you share any feedback you have with it either via the PostHog Slack, or by [filing an issue on our repo](https://github.com/PostHog/). 
+Not only that, but the introduction of HogQL brings with it other updates, including a new event explorer (previously the Live Events view), and the ability to use HogQL expressions within insights. We think that PostHog's existing insights will remain valuable for the vast majority of queries, but HogQL is an alternative when they just don't fit the bill.
 
-HogQL is basically our take on SQL (technically, a transition layer over ClickHouse SQL) and we've created it to empower a wide range of users, from technical product managers who need multi-property breakdowns, to engineers and analysts who need to dissect data in more nuanced ways. It's designed to be as intuitive and user-friendly as possible for teams who are familiar with SQL, but offers a few extra advantages and features.
+Speaking of bills, HogQL is free for all users while it's in public beta - all we ask is that you share any feedback you have with it either via the PostHog Slack, or by [filing an issue on our repo](https://github.com/PostHog/).
 
+## What is HogQL?
+
+HogQL is basically our take on SQL. 
+
+Less basically, it's a transition layer over ClickHouse SQL that we've created to empower a wide range of users, from technical product managers who need multi-property breakdowns, to engineers who need to dissect data in more nuanced ways. It's intuitive for teams who are familiar with SQL, but offers a few extra advantages and features.
+
+Unique features to HogQL include simplified access to event and person properties, as well as the ability to run subqueries and database joins. You can also use aggregations, such as `count`, `min`, `minIf`, `max`, `maxIf`, `sum`, `sumIf`, `avg`, `any`, and `anyIf`.
+
+We recommend checking the docs for a more detailed [explanation of ClickHouse SQL functions which are supported in HogQL](/manual/hogql).
+
+## HogQL expressions
 ![HogQL trends breakdown filter](../images/features/hogql/trends-breakdown.png)
 
-Unique features to HogQL include simplified access to event and person properties, as well as the ability to run subqueries and database joins. You can also use aggregations such as `count`, `min`, `minIf`, `max`, `maxIf`, `sum`, `sumIf`, `avg`, `any`, and `anyIf`.
+A frequent request from teams using PostHog has been the ability to breakdown insight results across multiple properties. To accomodate this, we've added the ability to use HogQL expressions within an insight breakdown - so you can breakdown results however you like. 
 
-We recommend checking the docs for a more detailed [explanation of supported ClickHouse SQL functions which are supported in HogQL](/manual/hogql) - or here's an example query which calculates which countries prefer pineapple on pizza based on responses on [our 404 page](/joeisthebest).
+Using HogQL expressions enables you to combine the speed of PostHog's existing insights, with the flexibility of HogQL - the best of both worlds!
 
-```HogQL
+## The PostHog event explorer 
+
+In addition to introducing HogQL, we've also upgraded the event explorer (previously known as the Live events tab) to give you more ways to filter events and analyze your data.
+
+The new event explorer view also enables you to view source behind queries, then use HogQL to create custom views. Below, for example, you can see a query we wrote using HogQL which summarizes [votes from our 404 page](/hedgehogsgalore).
+
+```
 {
   "kind": "DataTableNode",
   "full": true,
@@ -51,14 +68,6 @@ We recommend checking the docs for a more detailed [explanation of supported Cli
   "propertiesViaUrl": true
 }
 ```
-
-## The PostHog event explorer 
-
-In addition to introducing HogQL, we've also upgraded the event explorer to give you more ways to filter events and analyze your data - including by using HogQL.
-
-Here, you can see us running the query above to generate results with the event explorer. 
-
-![HogQL animated example](../images/features/hogql/hogql.gif)
 
 ## The history and future of HogQL
 
