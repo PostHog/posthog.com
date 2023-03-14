@@ -10,7 +10,16 @@ import {
     Projects,
     SessionRecording,
 } from 'components/ProductIcons'
-import { HowPostHogWorks, JSSnippet, Privacy, Quickstart, SDK, Tutorials, Webhooks } from 'components/NotProductIcons'
+import {
+    HowPostHogWorks,
+    Migrate,
+    JSSnippet,
+    Privacy,
+    Quickstart,
+    SDK,
+    Tutorials,
+    Webhooks,
+} from 'components/NotProductIcons'
 
 interface IFeature {
     title: string
@@ -49,6 +58,7 @@ const resources: IFeature[] = [
     { title: 'API', icon: <API />, url: '/docs/api' },
     { title: 'Webhooks', icon: <Webhooks />, url: '/docs/integrate/webhooks/message-formatting' },
     { title: 'How PostHog works', icon: <HowPostHogWorks />, url: '/docs/how-posthog-works' },
+    { title: 'Migrate to PostHog', icon: <Migrate />, url: '/docs/migrate/ingest-historic-data' },
     { title: 'Privacy', icon: <Privacy />, url: '/docs/privacy' },
 ]
 
