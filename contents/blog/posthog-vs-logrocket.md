@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/posthog-vs-logrocket/posthog-vs-mixpanel.jpeg
+featuredImage: ../images/blog/posthog-vs-logrocket/posthog-vs-logrocket.jpg
 featuredImageType: full
 author:
     - joe-martin
@@ -450,6 +450,8 @@ Both PostHog and LogRocket are capable of integrating with third-party tools in 
 
 As an open source software, PostHog welcomes contributions from the community. If an integration you need isn’t available, [it’s possible to create it](/docs/apps/build)!
 
+### Data warehouse integrations
+
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
     <thead>
@@ -521,6 +523,28 @@ As an open source software, PostHog welcomes contributions from the community. I
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Extract and load data to external platforms</td>
         </tr>
+    </tbody>
+</table>
+</div>
+
+> **Want more?** For a full list of PostHog’s available integrations, please [check the app directory](/apps).
+
+### Popular integrations 
+
+Below, we've listed a few of the most popualr integrations used across PostHog and LogRocket. 
+
+<div className="overflow-x-auto -mx-5 px-5">
+<table className="w-full mt-4" style="min-width: 600px;">
+    <thead>
+        <tr>
+            <td className="w-3/12"></td>
+            <td><strong>LogRocket</strong></td>
+            <td><strong>PostHog</strong></td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
         <tr>
             <td><strong>Hubspot</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
