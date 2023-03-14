@@ -34,7 +34,7 @@ We recommend checking the docs for a more detailed [explanation of ClickHouse SQ
 ## HogQL expressions
 ![HogQL trends breakdown filter](../images/features/hogql/trends-breakdown.png)
 
-A frequent request from teams using PostHog has been the ability to breakdown insight results across multiple properties. To accomodate this, we've added the ability to use HogQL expressions within an insight breakdown - so you can breakdown results however you like. 
+A frequent request from teams using PostHog has been the ability to breakdown insight results across multiple properties. To accommodate this, we've added the ability to use HogQL expressions within an insight breakdown - so you can breakdown results however you like. 
 
 Using HogQL expressions enables you to combine the speed of PostHog's existing insights, with the flexibility of HogQL - the best of both worlds!
 
