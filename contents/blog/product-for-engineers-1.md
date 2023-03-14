@@ -6,7 +6,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: ["andy-vandervell"]
-featuredImage: ../images/blog/hogmail.png
+featuredImage: ../images/blog/newsletter-hog.png
 featuredImageType: full
 category: Newsletter
 tags:
