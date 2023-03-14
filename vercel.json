@@ -3,7 +3,7 @@
         { "source": "/plugins/:path*", "destination": "/apps/:path*" },
         { "source": "/integrations/:path*", "destination": "/apps/:path*" },
         { "source": "/docs/user-guides/:path*", "destination": "/manual/:path*" },
-        { "source": "/docs/integrate/(client|server)/:path*", "destination": "/docs/sdks/:path*" },
+        { "source": "/docs/integrate/(client|server)/:path*", "destination": "/docs/integrate/:path*" },
         { "source": "/docs/integrations/android-integration", "destination": "/docs/libraries/android" },
         { "source": "/docs/integrations/community", "destination": "/docs/libraries/community" },
         { "source": "/docs/integrations/docusaurus-integration", "destination": "/docs/libraries/docusaurus" },
@@ -61,49 +61,36 @@
             "source": "/docs/contributing/updating-documentation",
             "destination": "/docs/contribute/updating-documentation"
         },
-        { "source": "/docs/libraries/android", "destination": "/docs/sdks/android" },
-        { "source": "/docs/libraries/flutter", "destination": "/docs/sdks/flutter" },
-        { "source": "/docs/libraries/ios", "destination": "/docs/sdks/ios" },
-        { "source": "/docs/libraries/js", "destination": "/docs/sdks/js" },
-        { "source": "/docs/libraries/react-native", "destination": "/docs/sdks/react-native" },
         {
             "source": "/docs/deployment/snippet-installation",
             "destination": "/docs/integrate/client/snippet-installation"
         },
-        { "source": "/docs/libraries/elixir", "destination": "/docs/sdks/elixir" },
-        { "source": "/docs/libraries/go", "destination": "/docs/sdks/go" },
-        { "source": "/docs/libraries/node", "destination": "/docs/sdks/node" },
-        { "source": "/docs/libraries/php", "destination": "/docs/sdks/php" },
-        { "source": "/docs/libraries/python", "destination": "/docs/sdks/python" },
-        { "source": "/docs/libraries/ruby", "destination": "/docs/sdks/ruby" },
-        { "source": "/docs/libraries/docusaurus", "destination": "/docs/integrate/third-party/docusaurus" },
-        { "source": "/docs/libraries/gatsby", "destination": "/docs/integrate/third-party/gatsby" },
         {
             "source": "/docs/tutorials/1-minute/integrate-with-gtm",
-            "destination": "/docs/integrate/third-party/google-tag-manager"
+            "destination": "/docs/integrate/google-tag-manager"
         },
         {
             "source": "/docs/tutorials/1-minute/integrate-with-metabase",
-            "destination": "/docs/integrate/third-party/metabase"
+            "destination": "/docs/integrate/metabase"
         },
         {
             "source": "/docs/tutorials/1-minute/integrate-with-nuxt-js",
-            "destination": "/docs/integrate/third-party/nuxt-js"
+            "destination": "/docs/integrate/nuxt-js"
         },
         {
             "source": "/docs/tutorials/1-minute/integrate-with-retool",
-            "destination": "/docs/integrate/third-party/retool"
+            "destination": "/docs/integrate/retool"
         },
-        { "source": "/docs/libraries/rudderstack", "destination": "/docs/integrate/third-party/rudderstack" },
-        { "source": "/docs/libraries/segment", "destination": "/docs/integrate/third-party/segment" },
-        { "source": "/docs/libraries/sentry", "destination": "/docs/integrate/third-party/sentry" },
+        { "source": "/docs/libraries/rudderstack", "destination": "/docs/integrate/rudderstack" },
+        { "source": "/docs/libraries/segment", "destination": "/docs/integrate/segment" },
+        { "source": "/docs/libraries/sentry", "destination": "/docs/integrate/sentry" },
         {
             "source": "/docs/tutorials/1-minute/integrate-with-shopify",
-            "destination": "/docs/integrate/third-party/shopify"
+            "destination": "/docs/integrate/shopify"
         },
         {
             "source": "/docs/tutorials/1-minute/integrate-with-wordpress",
-            "destination": "/docs/integrate/third-party/wordpress"
+            "destination": "/docs/integrate/wordpress"
         },
         {
             "source": "/docs/libraries/message-formatting",
@@ -632,7 +619,7 @@
             "destination": "/blog/using-posthog"
         },
         {
-            "source": "/docs/integrate/third-party/slack",
+            "source": "/docs/libraries/slack",
             "destination": "/manual/subscriptions"
         },
         {

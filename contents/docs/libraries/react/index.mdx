@@ -83,13 +83,13 @@ root.render(
 
 ### Using posthog-js functions
 
-By default, the `posthog-js` library automatically captures pageviews, element clicks, inputs, and more. Autocapture can be tuned in with [the configuration options](/docs/sdks/js#tuning-autocapture).
+By default, the `posthog-js` library automatically captures pageviews, element clicks, inputs, and more. Autocapture can be tuned in with [the configuration options](/docs/libraries/js#tuning-autocapture).
 
 If you want to use the library to identify users, capture events, use feature flags, or use other features, you can access the initialized `posthog-js` library using the `usePostHog` hook.
 
 **Do not directly import `posthog` apart from installation** as shown above. This will likely cause errors as the library might not be initialized yet. Initialization is handled automatically when you use the `PostHogProvider` and hook.
 
-All the methods of the library are available and can be used as described in the [posthog-js documentation](/docs/sdks/js).
+All the methods of the library are available and can be used as described in the [posthog-js documentation](/docs/libraries/js).
 
 ```react
 import { usePostHog } from 'posthog-js/react'
