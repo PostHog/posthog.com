@@ -32,21 +32,15 @@ In this article, we will:
 
 ### 1. PostHog does more than frontend monitoring
 
-LogRocket is a frontend performance monitoring platform, but PostHog goes well beyond that to include features which are useful in a greater number of roles and teams. PostHog offers all of the major features available in LogRocket, such as session recording and product analytics, as well as tools such as feature flags, A/B experimentation and SQL querying.
-
-LogRocket’s focus on frontend issues means it does offer a few specialist features which PostHog doesn’t currently replicate. However, for the vast majority of teams and organizations, PostHog offers greater value overall and is more widely useful.
+PostHog goes beyond frontend monitoring by augmenting product analytics and session recording with powerful product and data tools, such as feature flags, A/B testing, and SQL querying. While LogRocket’s narrow focus on frontend issues means it offers a few specialist features, PostHog offers greater value and is more widely useful for the vast majority of teams and organizations
 
 ### 2. PostHog is open source and transparent
 
-PostHog is built with transparency at its core. Not only do we work in the open and gives full access to [our source code](https://github.com/PostHog/posthog), we also enable others to [build integrations](/docs/apps/build) or [other services on top of PostHog](/how-we-built-an-app-server) and to raise their own PRs, or feedback on [our roadmap](/roadmap).
-
-This approach offers several advantages that closed-source products such as LogRocket can’t offer. For example, if you have internal tools you need to integrate then PostHog’s app framework makes that a breeze — and you can always find out exactly what we’re working on.
+PostHog is built with transparency at its core. Not only do we work in the open and give full access to [our source code](https://github.com/PostHog/posthog), we also enable others to [build integrations](/docs/apps/build) or [other services on top of PostHog](/how-we-built-an-app-server), raise their own PRs, or feed back on [our roadmap](/roadmap). PostHog's open app framework makes it easy to integrate internal tools, an advantage closed-source products like LogRocket can't offer.
 
 ### 3. PostHog constantly ships new features
 
-At PostHog, we ship new features _constantly_. Every week we update [our changelog](/blog/posthog-changelog) with a recap of what’s launched in the last few days, but often there’s even more that’s being tested in beta. And that’s without counting all the apps and integrations submitted by our community!
-
-In short, we work hard to keep PostHog on the cutting edge and we’re transparent about the ways we do that. We ship weirdly fast.
+At PostHog, we ship weirdly fast. We update [our changelog](/blog/posthog-changelog) with a recap of new features every week, and often there’s even more in beta testing. And that’s without counting all the apps and integrations submitted by our community! We work hard to keep PostHog on the cutting edge and we’re transparent about the ways we do that.
 
 ## PostHog and LogRocket feature comparison
 
@@ -204,7 +198,7 @@ While LogRocket contains some product analytics features, it isn’t primarily i
 
 -   **Correlation analysis:** This feature enables you to [automatically find correlated events or properties](/manual/correlation) which affect the conversion rate of users within a funnel. LogRocket doesn’t offer any such automated correlation discovery, meaning users must search for correlating factors manually and without assistance.
 
--   **Query editor:** LogRocket doesn’t currently support any way for users to interrogate data directly, either through SQL or other, abstracted query language. PostHog also doesn’t offer SQL queries…but [we’re actively working on it](/roadmap).
+-   **Query editor:** LogRocket doesn’t currently support any way for users to interrogate data directly, either through SQL or other, abstracted query language. PostHog also doesn’t offer SQL queries... but [we’re actively working on it](/roadmap).
 
 ### Session recording
 
@@ -231,7 +225,7 @@ LogRocket and PostHog both offer robust, full-featured session recording tools t
             <td><strong>Mobile app recordings</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Capture recordings from mobile devices</td>
+            <td>Capture recordings in iOS and Android apps</td>
         </tr>
         <tr>
             <td><strong>Identity detection</strong></td>
@@ -737,9 +731,9 @@ More feature-rich product tiers begin at $550 USD per month, but increase depend
 
 ### How much does PostHog cost?
 
-PostHog has transparent pricing which is based only around the amount of usage. It’s free to get started and completely free for the first 1 million events and 15,000 sessions captured every month.
+PostHog has transparent pricing based on usage. It’s free to get started and completely free for the first 1 million events and 15,000 sessions captured every month.
 
-After this free monthly allowance, PostHog charges $0.00045/event and $0.005/recording. Volume, non-profit and [startup discounts](/startups) are available upon request, and we recommend trying [our pricing calculator](/pricing) to estimate your pricing.
+After this free monthly allowance you'll pay $0.00045/event and $0.005/recording, and PostHog charges progressively less the more you use. Volume, non-profit and [startup discounts](/startups) are available upon request, and we recommend trying [our pricing calculator](/pricing) to estimate your pricing.
 
 ### Do LogRocket and PostHog offer free trials?
 
