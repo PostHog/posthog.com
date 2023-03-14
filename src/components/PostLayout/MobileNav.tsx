@@ -38,21 +38,23 @@ interface IGetActiveMenu {
 
 const getActiveMenu = ({
     menu,
-    url = window?.location.pathname,
+    url,
     ...other
 }: {
     menu: IMenu[]
+    menuItem?: IMenu
     url?: string
     parent?: { menu: IMenu[]; name: string }
 }): IGetActiveMenu | undefined => {
     let parent = other.parent
     for (const menuItem of menu) {
-        if (menuItem.url === url) return { menu, parent }
+        if (url ? menuItem.url === url : menuItem === other.menuItem) return { menu, parent }
         if (menuItem.children) parent = { menu, name: menuItem.name }
         const activeMenu =
             menuItem?.children &&
             getActiveMenu({
                 menu: menuItem?.children,
+                menuItem: other.menuItem,
                 url,
                 parent,
             })
@@ -143,12 +145,14 @@ const MobileMenu = ({ setOpen }: { setOpen: (open: null | string) => void }) => 
     if (!postMenu) return null
     const { pathname } = useLocation()
     const [animationDirection, setAnimationDirection] = useState<'forward' | 'backward'>('forward')
-    const [menu, setMenu] = useState<IGetActiveMenu>(getActiveMenu({ menu: postMenu }) || { menu: postMenu })
+    const [menu, setMenu] = useState<IGetActiveMenu>(
+        getActiveMenu({ menu: postMenu, url: pathname }) || { menu: postMenu }
+    )
     const handleClick = ({ url, menu }: { url?: string; menu?: IMenu[] }) => {
         if (menu) {
             const newMenu = getActiveMenu({
                 menu: postMenu,
-                url: menu.find((menuItem) => !!menuItem.url)?.url,
+                menuItem: menu[0],
             })
             newMenu && setMenu(newMenu)
         } else if (url) {
