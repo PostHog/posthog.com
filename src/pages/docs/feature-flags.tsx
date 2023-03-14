@@ -12,9 +12,9 @@ import { GettingStarted } from 'components/Docs/GettingStarted'
 
 export const quickLinks = [
     {
-        name: 'Local evaluation',
-        to: '/docs/feature-flags/local-evaluation',
-        description: 'Evaluate flags locally when you need an immediate response.',
+        name: 'Bootstrapping & local evaluation',
+        to: '/docs/feature-flags/bootstrapping-and-local-evaluation',
+        description: 'Bootstrap and evaluate flags locally when you need an immediate response.',
     },
     {
         name: 'Rollout strategies',
