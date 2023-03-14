@@ -4,8 +4,6 @@ sidebar: Handbook
 showTitle: true
 ---
 
-# Writing HogQL queries in Python
-
 > ❗️ This guide is intended only for development of PostHog itself. 
 > If you're looking for documentation on writing HogQL queries, go to [HogQL](/manual/hogql).
 
