@@ -450,7 +450,7 @@ Both PostHog and LogRocket are capable of integrating with third-party tools in 
 
 As an open source software, PostHog welcomes contributions from the community. If an integration you need isn’t available, [it’s possible to create it](/docs/apps/build)!
 
-### Data warehouse integrations
+### Data pipelines
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -531,7 +531,7 @@ As an open source software, PostHog welcomes contributions from the community. I
 
 ### Popular integrations 
 
-Below, we've listed a few of the most popualr integrations used across PostHog and LogRocket. 
+Below, we've listed a few of the most popular integrations used across PostHog and LogRocket. 
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -699,7 +699,6 @@ Regulatory compliance can be make-or-break for many teams, especially those oper
             <td className="w-3/12"></td>
             <td><strong>LogRocket</strong></td>
             <td><strong>PostHog</strong></td>
-            <td></td>
         </tr>
     </thead>
     <tbody>
