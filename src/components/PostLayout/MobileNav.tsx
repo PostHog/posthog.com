@@ -1,13 +1,14 @@
 import { DarkModeToggle } from 'components/DarkModeToggle'
 import { Bookmark, InfoOutlined, RightArrow, TableOfContents } from 'components/Icons'
 import { AnimatePresence, useDragControls, useMotionValue, useTransform, motion } from 'framer-motion'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { usePost } from './hooks'
 import { IMenu } from './types'
 import { useLocation } from '@reach/router'
 import { navigate } from 'gatsby'
 import { Crumbs } from './Breadcrumb'
 import InternalSidebarLink from 'components/Docs/InternalSidebarLink'
+import slugify from 'slugify'
 
 const menuButtonClasses = `bg-white flex space-x-2 items-center font-semibold active:top-[0.5px]
 active:scale-[.98] transition-transform text-black shadow-md`
@@ -48,7 +49,7 @@ const getActiveMenu = ({
 }): IGetActiveMenu | undefined => {
     let parent = other.parent
     for (const menuItem of menu) {
-        if (url ? menuItem.url === url : menuItem === other.menuItem) return { menu, parent }
+        if (url && !menuItem.children ? menuItem.url === url : menuItem === other.menuItem) return { menu, parent }
         if (menuItem.children) parent = { menu, name: menuItem.name }
         const activeMenu =
             menuItem?.children &&
@@ -145,20 +146,40 @@ const MobileMenu = ({ setOpen }: { setOpen: (open: null | string) => void }) => 
     if (!postMenu) return null
     const { pathname } = useLocation()
     const [animationDirection, setAnimationDirection] = useState<'forward' | 'backward'>('forward')
+    const previousMenu = useRef<IGetActiveMenu>()
     const [menu, setMenu] = useState<IGetActiveMenu>(
         getActiveMenu({ menu: postMenu, url: pathname }) || { menu: postMenu }
     )
-    const handleClick = ({ url, menu }: { url?: string; menu?: IMenu[] }) => {
-        if (menu) {
+    const handleClick = ({ url, ...other }: { url?: string; menu?: IMenu[] }) => {
+        if (other.menu) {
             const newMenu = getActiveMenu({
                 menu: postMenu,
-                menuItem: menu[0],
+                menuItem: other.menu[0],
             })
-            newMenu && setMenu(newMenu)
+            if (newMenu) {
+                previousMenu.current = menu
+                setMenu(newMenu)
+            }
         } else if (url) {
             navigate(url)
         }
     }
+
+    useEffect(() => {
+        const menuReversed = [...menu.menu].reverse()
+        for (const menuItem of menuReversed.slice(
+            menuReversed.findIndex(
+                (menuItem) =>
+                    (menuItem.children && menuItem.children === previousMenu.current?.menu) || menuItem.url === pathname
+            )
+        )) {
+            if (menuItem.url === undefined) {
+                const id = `mobile-nav-${slugify(menuItem.name, { lower: true })}`
+                document.getElementById(id)?.scrollIntoView()
+                break
+            }
+        }
+    }, [menu])
 
     const item = {
         hidden: {
@@ -210,7 +231,9 @@ const MobileMenu = ({ setOpen }: { setOpen: (open: null | string) => void }) => 
                         >
                             <div className={`text-base`}>
                                 {url === undefined ? (
-                                    <h5 className="m-0 text-base">{name}</h5>
+                                    <h5 id={`mobile-nav-${slugify(name, { lower: true })}`} className="m-0 text-base">
+                                        {name}
+                                    </h5>
                                 ) : (
                                     <button
                                         className={`${
