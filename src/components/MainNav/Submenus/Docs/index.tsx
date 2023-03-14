@@ -25,9 +25,13 @@ interface IColumn {
 }
 
 const gettingStarted: IFeature[] = [
-    { title: 'Quickstart', icon: <Quickstart />, url: '/docs/getting-started/cloud' },
-    { title: 'JS snippet', icon: <JSSnippet />, url: '/docs/integrate?tab=snippet' },
-    { title: 'SDKs', icon: <SDK />, url: '/docs/integrate?tab=sdks' },
+    { title: 'Start here', icon: <Quickstart />, url: '/docs/getting-started/cloud' },
+    { title: 'Install PostHog', icon: <JSSnippet />, url: '/docs/getting-started/install?tab=snippet' },
+    { title: 'Send events', icon: <SDK />, url: '/docs/getting-started/send-events' },
+    { title: 'Identify users', icon: <SDK />, url: '/docs/getting-started/identify-users' },
+    { title: 'User properties', icon: <SDK />, url: '/docs/getting-started/user-properties' },
+    { title: 'Actions & insights', icon: <SDK />, url: '/docs/getting-started/actions-and-insights' },
+    { title: 'Group analytics', icon: <SDK />, url: '/docs/getting-started/group-analytics' },
 ]
 
 const products: IFeature[] = [
@@ -35,14 +39,15 @@ const products: IFeature[] = [
     { title: 'Session recording', icon: <SessionRecording />, url: '/docs/session-recording' },
     { title: 'Feature flags', icon: <FeatureFlags />, url: '/docs/feature-flags' },
     { title: 'A/B testing', icon: <AbTesting />, url: '/docs/experiments' },
-    { title: 'Platform & data', icon: <Projects />, url: '/docs/data' },
+    { title: 'Data', icon: <Projects />, url: '/docs/data' },
+    { title: 'Apps', icon: <AppLibrary />, url: '/docs/apps' },
 ]
 
 const resources: IFeature[] = [
     { title: 'Tutorials', icon: <Tutorials />, url: '/tutorials' },
-    { title: 'Apps', icon: <AppLibrary />, url: '/apps' },
-    { title: 'Webhooks', icon: <Webhooks />, url: '/docs/integrate/webhooks/message-formatting' },
+    { title: 'Integrations', icon: <API />, url: '/docs/third-party/integrations' },
     { title: 'API', icon: <API />, url: '/docs/api' },
+    { title: 'Webhooks', icon: <Webhooks />, url: '/docs/integrate/webhooks/message-formatting' },
     { title: 'How PostHog works', icon: <HowPostHogWorks />, url: '/docs/how-posthog-works' },
     { title: 'Privacy', icon: <Privacy />, url: '/docs/privacy' },
 ]
@@ -71,7 +76,7 @@ const Section = ({ title, section, className = '' }: IColumn) => {
             <h5 className="text-[15px] font-semibold opacity-40 m-0 border-b border-dashed border-gray-accent-light pb-1">
                 {title}
             </h5>
-            <ul className="list-none p-0 m-0 grid grid-cols-3 md:grid-cols-6 gap-2 dark:text-primary-dark">
+            <ul className="list-none p-0 m-0 grid grid-cols-4 md:grid-cols-7 gap-2 dark:text-primary-dark">
                 {section.map(({ title, icon, url }) => {
                     return (
                         <li key={title} className="w-[6.5rem]">
