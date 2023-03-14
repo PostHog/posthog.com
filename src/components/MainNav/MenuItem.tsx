@@ -30,7 +30,7 @@ export const MenuItemLink = ({
             className={link(classes, sub && hovered)}
         >
             <span>{title}</span>
-            {sub && !breakpoints.md && <Chevron className="text-black/25 dark:text-white/50 mt-1 -ml-3" />}
+            {sub && !breakpoints.md && <Chevron className="text-black/25 dark:text-white/50 mt-1 -ml-3 w-[10px]" />}
         </Link>
     )
 }
