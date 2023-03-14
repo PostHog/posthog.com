@@ -44,7 +44,7 @@ At PostHog, we ship weirdly fast. We update [our changelog](/blog/posthog-change
 
 ## PostHog and LogRocket feature comparison
 
-PostHog offers a much wider selection of tools than LogRocket, including several tools which will be helpful to frontend developers — such as feature flags, and experimentation. PostHog is also entirely open source, meaning that it offers far greater extensibility than LogRocket.
+PostHog offers a much wider selection of tools than LogRocket, including several tools that are helpful to frontend developers — such as feature flags, and experimentation. PostHog is also entirely open source, meaning that it offers far greater extensibility than LogRocket.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
