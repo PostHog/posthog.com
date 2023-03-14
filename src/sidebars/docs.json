@@ -323,10 +323,6 @@
         "url": "",
         "children": [
             {
-                "name": "Ingest historical data",
-                "url": "/docs/integrate/ingest-historic-data"
-            },
-            {
                 "name": "Using a CDP",
                 "url": "/docs/integrate/cdp"
             },
@@ -1076,6 +1072,10 @@
         "name": "Migrate & export",
         "url": "",
         "children": [
+            {
+                "name": "Ingest historical data",
+                "url": "/docs/migrate/ingest-historic-data"
+            },
             {
                 "name": "Migrate to PostHog Cloud",
                 "url": "/docs/migrate/migrate-to-cloud"

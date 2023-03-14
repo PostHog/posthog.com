@@ -705,6 +705,10 @@
         {
             "source": "/docs/integrate",
             "destination": "/docs/getting-started/install"
+        },
+        {
+            "source": "/docs/integrate/ingest-historic-data",
+            "destination": "/docs/migrate/ingest-historic-data"
         }
     ],
     "rewrites": [
