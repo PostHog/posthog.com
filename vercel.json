@@ -763,7 +763,14 @@
         { "source": "/manual/utm-segmentation", "destination": "/docs/data/utm-segmentation" },
 
         { "source": "/manual/support", "destination": "/docs/support-options" },
-        { "source": "/manual/glossary", "destination": "/docs/glossary" }
+        { "source": "/manual/glossary", "destination": "/docs/glossary" },
+
+        { "source": "/docs/integrate/browser-extension", "destination": "/docs/advanced/browser-extension" },
+        { "source": "/docs/integrate/cdp", "destination": "/docs/advanced/cdp" },
+        { "source": "/docs/integrate/proxy", "destination": "/docs/advanced/proxy" },
+
+        { "source": "/docs/integrate/badge", "destination": "/docs/contribute/badge" },
+        { "source": "/docs/integrate/libraries", "destination": "/docs/libraries" }
     ],
     "rewrites": [
         {

@@ -1265,7 +1265,7 @@
             },
             {
                 "name": "Badge",
-                "url": "/docs/integrate/badge"
+                "url": "/docs/contribute/badge"
             }
         ]
     },
@@ -1275,7 +1275,7 @@
     },
     {
         "name": "Library comparison",
-        "url": "/docs/integrate/libraries"
+        "url": "/docs/libraries"
     },
     {
         "name": "Glossary",
