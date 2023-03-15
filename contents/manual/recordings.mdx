@@ -195,3 +195,15 @@ To report a specific problem, you can open a [GitHub issue](https://github.com/P
 * Details about the specific issue with your recording (e.g. how it looks and how it should look)
 * If you're on posthog-cloud, a link to the specific recording
 * Any unique details about your website (e.g. the frameworks that you're using etc.)
+
+
+### Recording Limitations
+
+Due to the complex nature of the w eb, there are some limitations to what we can capture. Below are some of the most common ones.
+
+* **Canvas** - Recording of canvas elements is technically possible but due to browser limitations we cannot currently support playback without introducing security issues. 
+* **WebGL**
+* **Iframes** 
+  - iframes from the _same origin_ **can** be recorded and played back as long as posthog-js is installed and recording on both the parent and the child iframe
+  - iframes from a _different origin_ (e.g. `posthog.com` -> `app.posthog.com`)
+  - iframes from an origin _not under your control_ cannot be recorded as the parent is unable to control the child.
