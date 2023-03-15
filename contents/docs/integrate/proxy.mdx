@@ -42,23 +42,21 @@ CloudFront doesn't forward headers, cookies, or query parameters received from t
 3. Allow all HTTP methods
 4. Create and attach to the distribution, [an "origin request policy"](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy) that forwards all query parameters
     * In "Cache key settings" for the "Cache policy" set "Query strings" to "All".
-    * You may also need to set any headers your application needs as part of the cache key. For example the `Authorization` or `Content-Type` headers.
+    * You also need to include the `Authorization`, and `Origin` headers.
 
 import diagram from '../../images/docs/cloud/cloudfront-proxy/cache-policy.png'
 
 <img src={diagram} alt="a screenshot of the cloudfront cache policy settings" />
 
-5. Choose the appropriate price class for your use
-6. Once the distribution is deployed set its URL as the API host in your JS snippet or SDK config
-7. [Create a lambda@edge](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-at-the-edge.html) to set the Host header ([example](https://gist.github.com/htnosm/2c51a70f0e361056d1fd63321afba4fa)).
-
-You can view [AWS CDK code for creating a reverse proxy here](https://gist.github.com/pauldambra/9af02d9ea42ffafcfc7c01dc38039958) (originally shared by CJ Enright in our Slack community, 100 🦔 points for them 💖!).
+5. Set the `Origin request policy` to `CORS-CustomOrigin`
+6. Set the `Response headers policy` to `CORS-with-preflight-and-SecurityHeadersPolicy`
+7. Once the distribution is deployed set its URL as the API host in your JS snippet or SDK config
 
 You can find out about [CloudFront pricing on the AWS website](https://aws.amazon.com/cloudfront/pricing/)
 
 #### CloudFront distribution setup video
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/NvdidHJU-Hk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe src="https://www.loom.com/embed/cf7a06b7b93d4492a1f9f9fc8d8473e0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
 
 ### Using Cloudflare
 
