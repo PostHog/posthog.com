@@ -106,7 +106,7 @@ Our [SDK pages](/docs/integrate?tab=sdks) contain information on installing Post
 The only major difference on the server side is that we must include a `distinct_id` with every event.
 Often, this will come in the form of a unique user ID and can be pulled from a session cookie when requests arrive from the client.
 
-### When should I send events from the server vs. the client?
+## When should I send events from the server vs. the client?
 
 In general, our guidance is to track events on both the frontend and backend whenever possible, to ensure maximum reliability and the most flexibility when analyzing your data.
 
@@ -117,3 +117,32 @@ That being said, there are certain events that we highly recommend tracking from
 3. **Backend jobs**: PostHog is for more than just optimizing your frontend! It can often be useful to send events whenever backend jobs or workflows are kicked off, which allows you to analyze them within PostHog.
 
 > **Tip**: We recommend using different event names for your backend and frontend events to avoid the chance of duplicate counting. Often these should be the CRUD events themselves e.g. `User created` for the backend and `User signed up` for the frontend. Additionally, you can use the `source` property to filter for events from a specific source.
+
+## Event ingestion nuances
+
+It's a priority for us that events are fully processed and saved as soon as possible. However, there is a class of events which we _deliberately_ process with a slight delay. Specifically, an event is delayed by around a minute if it fits **all** of the following three conditions:
+
+-   isn't from an anonymous user (anonymous users are recognized by having the `distinct_id` the same as the `$device_id` property)
+-   isn't an `$identify` event (e.g. from `posthog.identify()`)
+-   its `distinct_id` cannot be matched to an existing person
+
+This delay mechanism is called the **event buffer**, and it materially improves handling of an edge case which could otherwise inflate unique user counts.
+
+<details>
+
+  <summary>How does the event buffer help?</summary>
+
+Starting with version 1.38.0, PostHog stores the person associated with an event inline with the event record. This greatly improves query performance, but because events are immutable, it also means that persons can't be merged retroactively. See this scenario where that's problematic:
+
+1. User visits signup page, in turn frontend captures anonymous `$pageview` for distinct ID `XYZ` (anonymous distinct ID = device ID).  
+   This event gets person ID `A`.
+2. User click signup button, initiating in a backend request, in turn frontend captures anonymous `$autocapture` (click) for distinct ID `XYZ`.  
+   This event gets person ID `A`.
+3. Signup request is processed in the backend, in turn backend captures identified signup for distinct ID `alice@example`.com.  
+   OOPS! We haven't seen `alice@example.com` before, so this event gets person ID `B`.
+4. Signup request finishes successfully, in turn frontend captures identified $identify aliasing distinct ID `XYZ` to `alice@example.com`.  
+   This event gets person ID `A`.
+
+Here, the event from step 3 got a new person ID `B`, impacting unique users counts. If it were delayed just a bit and processed after the event from step 4, all events would get the expected person ID `A`. This is exactly what the event buffer achieves.
+
+</details>
