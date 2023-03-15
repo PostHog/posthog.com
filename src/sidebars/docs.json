@@ -324,15 +324,15 @@
         "children": [
             {
                 "name": "Using a CDP",
-                "url": "/docs/integrate/cdp"
+                "url": "/docs/advanced/cdp"
             },
             {
                 "name": "Deploying a reverse proxy",
-                "url": "/docs/integrate/proxy"
+                "url": "/docs/advanced/proxy"
             },
             {
                 "name": "Browser extensions",
-                "url": "/docs/integrate/browser-extension"
+                "url": "/docs/advanced/browser-extension"
             }
         ]
     },
