@@ -793,6 +793,8 @@
         { "source": "/next-steps/(.*)", "destination": "/next-steps" },
         { "source": "/question/(.*)", "destination": "/question" },
         { "source": "/careers/(.*)", "destination": "/careers" },
-        { "source": "/api", "destination": "/docs/api" }
+        { "source": "/api", "destination": "/docs/api" },
+        { "source": "/docs/data/subscriptions", "destination": "/docs/data/notifications-and-alerts" },
+        { "source": "/handbook/engineering/oncall-rotation", "destination": "/handbook/engineering/oncall" }
     ]
 }
