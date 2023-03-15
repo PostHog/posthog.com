@@ -709,6 +709,10 @@
         {
             "source": "/docs/integrate/ingest-historic-data",
             "destination": "/docs/migrate/ingest-historic-data"
+        },
+        {
+            "source": "/blog/categories/hogmail",
+            "destination": "/blog/categories/newsletter"
         }
     ],
     "rewrites": [

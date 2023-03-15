@@ -439,8 +439,8 @@
                 "url": "/docs/feature-flags/manual"
             },
             {
-                "name": "Local evaluation",
-                "url": "/docs/feature-flags/local-evaluation"
+                "name": "Bootstrapping & Local evaluation",
+                "url": "/docs/feature-flags/bootstrapping-and-local-evaluation"
             },
             {
                 "name": "Rollout strategies",
