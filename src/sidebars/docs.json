@@ -302,19 +302,19 @@
         "children": [
             {
                 "name": "Message formatting",
-                "url": "/docs/integrate/webhooks/message-formatting"
+                "url": "/docs/webhooks/message-formatting"
             },
             {
                 "name": "Microsoft Teams",
-                "url": "/docs/integrate/webhooks/microsoft-teams"
+                "url": "/docs/webhooks/microsoft-teams"
             },
             {
                 "name": "Slack",
-                "url": "/docs/integrate/webhooks/slack"
+                "url": "/docs/webhooks/slack"
             },
             {
                 "name": "Discord",
-                "url": "/docs/integrate/webhooks/discord"
+                "url": "/docs/webhooks/discord"
             }
         ]
     },

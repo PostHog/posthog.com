@@ -16,7 +16,14 @@
         { "source": "/docs/integrations/ios-integration", "destination": "/docs/libraries/ios" },
         { "source": "/docs/integrations/javascript-integration", "destination": "/docs/libraries/js" },
         { "source": "/docs/integrations/js-integration", "destination": "/docs/libraries/js" },
-        { "source": "/docs/integrations/message-formatting", "destination": "/docs/libraries/message-formatting" },
+        { "source": "/docs/integrations/message-formatting", "destination": "/docs/webhooks/message-formatting" },
+        { "source": "/docs/libraries/message-formatting", "destination": "/docs/webhooks/message-formatting" },
+        { "source": "/docs/libraries/microsoft-teams", "destination": "/docs/integrate/webhooks/microsoft-teams" },
+        { "source": "/docs/libraries/slack", "destination": "/docs/integrate/webhooks/slack" },
+        { "source": "/docs/integrate/webhooks/message-formatting", "destination": "/docs/webhooks/message-formatting" },
+        { "source": "/docs/integrate/webhooks/microsoft-teams", "destination": "/docs/webhooks/microsoft-teams" },
+        { "source": "/docs/integrate/webhooks/discord", "destination": "/docs/webhooks/discord" },
+        { "source": "/docs/integrate/webhooks/slack", "destination": "/docs/webhooks/slack" },
         { "source": "/docs/integrations/microsoft-teams", "destination": "/docs/libraries/microsoft-teams" },
         { "source": "/docs/integrations/node-integration", "destination": "/docs/libraries/node" },
         { "source": "/docs/integrations/php-integration", "destination": "/docs/libraries/php" },
@@ -94,12 +101,6 @@
             "source": "/docs/tutorials/1-minute/integrate-with-wordpress",
             "destination": "/docs/integrate/wordpress"
         },
-        {
-            "source": "/docs/libraries/message-formatting",
-            "destination": "/docs/integrate/webhooks/message-formatting"
-        },
-        { "source": "/docs/libraries/microsoft-teams", "destination": "/docs/integrate/webhooks/microsoft-teams" },
-        { "source": "/docs/libraries/slack", "destination": "/docs/integrate/webhooks/slack" },
         { "source": "/docs/configuring-posthog/email", "destination": "/docs/self-host/configure/email" },
         {
             "source": "/docs/configuring-posthog/environment-variables",
