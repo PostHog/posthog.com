@@ -24,7 +24,7 @@ Hightouch is an alternative to Customer Data Platforms (CDP) like Segment, thoug
 
 Because it makes your data warehouse the single source of truth, ensuring all your tools are using the same up-to-date data. It effectively turns your data warehouse into a CDP, removing the need for a third-party platform that owns your data or introduces latency into your data pipeline.
 
-It's worth pointing out that you can send customer data directly to PostHog from CDPs to like [Rudderstack](/docs/integrate/third-party/rudderstack) and [Segment](/docs/integrate/third-party/segment) with [existing PostHog integrations](/integrations). However, CDPs will send raw data, whereas a reverse ETL from your data warehouse gives data scientists the opportunity to model data before it's synced. 
+It's worth pointing out that you can send customer data directly to PostHog from CDPs to like [Rudderstack](/docs/libraries/rudderstack) and [Segment](/docs/libraries/segment) with [existing PostHog integrations](/integrations). However, CDPs will send raw data, whereas a reverse ETL from your data warehouse gives data scientists the opportunity to model data before it's synced. 
 
 Ultimately, the pros and cons of CDPs vs data warehouses is an article in itself, but the most useful thing to know is that, in most organizations, a data warehouse will be owned by a data science team, whereas a marketing team will own a CDP.
 

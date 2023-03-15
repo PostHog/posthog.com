@@ -1,6 +1,6 @@
 ---
 title: Shopify
-icon: ../../../images/docs/integrate/frameworks/shopify.svg
+icon: ../../images/docs/integrate/frameworks/shopify.svg
 ---
 
 ## Objective
@@ -26,7 +26,7 @@ To follow this tutorial along, you should:
 
     <br />
 
-    ![Shopify Dashboard](../../../images/tutorials/shopify/shopify-dashboard.png)
+    ![Shopify Dashboard](../../images/tutorials/shopify/shopify-dashboard.png)
 
     <br />
 
@@ -35,7 +35,7 @@ To follow this tutorial along, you should:
 
     <br />
 
-    ![Shopify Dashboard](../../../images/tutorials/shopify/snippet.png)
+    ![Shopify Dashboard](../../images/tutorials/shopify/snippet.png)
     
     <br />
 

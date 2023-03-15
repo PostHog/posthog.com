@@ -49,9 +49,9 @@ What's new? We:
 * [Cached PostHog's yarn builds](https://github.com/PostHog/posthog/pull/927), which took e2e tests down by around 30%.
 * Finally, we now [wait for PostHog to start serving requests](https://github.com/PostHog/posthog/pull/920) rather than the 60 second sleep when running Cypress.
 
-### [Docusaurus integration](/docs/integrate/third-party/docusaurus)
+### [Docusaurus integration](/docs/libraries/docusaurus)
 
-If you're using Docusaurus for your own docs, there's now a [PostHog Docusaurus integration](/docs/integrate/third-party/docusaurus) for that!
+If you're using Docusaurus for your own docs, there's now a [PostHog Docusaurus integration](/docs/libraries/docusaurus) for that!
 
 ### [AWS marketplace - 1-click install](https://aws.amazon.com/marketplace/pp/B089QN5DZM)
 

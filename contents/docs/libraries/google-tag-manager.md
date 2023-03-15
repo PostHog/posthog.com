@@ -1,6 +1,6 @@
 ---
 title: Google Tag Manager
-icon: ../../../images/docs/integrate/frameworks/gtm.svg
+icon: ../../images/docs/integrate/frameworks/gtm.svg
 ---
 
 ## Objective

@@ -23,6 +23,7 @@ export const wrapPageElement = ({ element, props }) => {
               ![
                   'docs/api/post-only-endpoints',
                   'docs/api/user',
+                  'docs/integrations',
                   'docs/product-analytics',
                   'docs/session-recording',
                   'docs/feature-flags',

@@ -118,7 +118,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
                         <article
                             key={`${title}-article`}
                             id="content-menu-wrapper"
-                            className="lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:py-12 py-4 ml-auto w-full h-full box-border lg:overflow-auto"
+                            className="lg:py-12 py-4 ml-auto w-full h-full box-border lg:overflow-auto"
                         >
                             <div className={contentContainerClasses}>
                                 <div>{children}</div>
@@ -131,7 +131,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
                         {!hideSidebar && sidebar && (
                             <aside
                                 key={`${title}-sidebar`}
-                                className="flex-shrink-0 w-full justify-self-end my-10 lg:my-0 mr-auto h-full lg:px-0 px-4 box-border lg:flex hidden flex-col"
+                                className="lg:border-l border-dashed border-gray-accent-light dark:border-gray-accent-dark flex-shrink-0 w-full justify-self-end my-10 lg:my-0 mr-auto h-full lg:px-0 px-4 box-border lg:flex hidden flex-col"
                             >
                                 <div className={`${stickySidebar ? 'sticky top-0' : ''} bg-tan dark:bg-primary z-10`}>
                                     {sidebar}

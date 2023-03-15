@@ -1,11 +1,11 @@
 ---
 title: Next.js
-icon: ../../../images/docs/integrate/frameworks/nextjs.svg
+icon: ../../images/docs/integrate/frameworks/nextjs.svg
 ---
 
 PostHog makes it easy to get data about traffic and usage of your [Next.js](https://nextjs.org/) app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
 
-This guide walks you through integrating PostHog into your Next.js app using the [React](/docs/sdks/react) and the [Node.js](/docs/sdks/node) SDKs.
+This guide walks you through integrating PostHog into your Next.js app using the [React](/docs/libraries/react) and the [Node.js](/docs/libraries/node) SDKs.
 
 You can see a working example of this integration in our [Next.js demo app](https://github.com/PostHog/posthog-js/tree/master/playground/nextjs)
 
@@ -77,18 +77,18 @@ export default function App({ Component, pageProps }) {
 }
 ```
 
-PostHog can then be accessed throughout your Next.js app by using the `usePostHog` hook. See the [React SDK docs](/docs/sdks/react) for examples of how to use:
+PostHog can then be accessed throughout your Next.js app by using the `usePostHog` hook. See the [React SDK docs](/docs/libraries/react) for examples of how to use:
 
-- [posthog-js functions like custom event capture, user identification, and more.](/docs/sdks/react#using-posthog-js-functions)
-- [Feature flags including variants and payloads.](/docs/sdks/react#feature-flags)
+- [posthog-js functions like custom event capture, user identification, and more.](/docs/libraries/react#using-posthog-js-functions)
+- [Feature flags including variants and payloads.](/docs/libraries/react#feature-flags)
 
-You can also read [the full posthog-js documentation](/docs/sdks/js) for all the usable functions.
+You can also read [the full posthog-js documentation](/docs/libraries/js) for all the usable functions.
 
 ## Server-side analytics
 
 Server-side rendering is a Next.js feature that enables you to render pages on the server instead of the client. This can be useful for SEO, performance, and user experience.
 
-To integrate PostHog into your Next.js for server-side analytics you should use the [Node SDK](/docs/sdks/node).
+To integrate PostHog into your Next.js for server-side analytics you should use the [Node SDK](/docs/libraries/node).
 
 First, install the `posthog-node` library:
 

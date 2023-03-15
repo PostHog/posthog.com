@@ -50,7 +50,7 @@
         "children": [
             {
                 "name": "JavaScript",
-                "url": "/docs/sdks/js",
+                "url": "/docs/libraries/js",
                 "badge": {
                     "title": "Popular",
                     "className": "!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50"
@@ -58,7 +58,7 @@
             },
             {
                 "name": "Android",
-                "url": "/docs/sdks/android",
+                "url": "/docs/libraries/android",
                 "badge": {
                     "title": "Popular",
                     "className": "!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50"
@@ -66,19 +66,19 @@
             },
             {
                 "name": "Elixir",
-                "url": "/docs/sdks/elixir"
+                "url": "/docs/libraries/elixir"
             },
             {
                 "name": "Flutter",
-                "url": "/docs/sdks/flutter"
+                "url": "/docs/libraries/flutter"
             },
             {
                 "name": "Go",
-                "url": "/docs/sdks/go"
+                "url": "/docs/libraries/go"
             },
             {
                 "name": "iOS",
-                "url": "/docs/sdks/ios",
+                "url": "/docs/libraries/ios",
                 "badge": {
                     "title": "Popular",
                     "className": "!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50"
@@ -86,23 +86,23 @@
             },
             {
                 "name": "Java",
-                "url": "/docs/sdks/java"
+                "url": "/docs/libraries/java"
             },
             {
                 "name": "Node.js",
-                "url": "/docs/sdks/node"
+                "url": "/docs/libraries/node"
             },
             {
                 "name": "PHP",
-                "url": "/docs/sdks/php"
+                "url": "/docs/libraries/php"
             },
             {
                 "name": "Python",
-                "url": "/docs/sdks/python"
+                "url": "/docs/libraries/python"
             },
             {
                 "name": "React",
-                "url": "/docs/sdks/react",
+                "url": "/docs/libraries/react",
                 "badge": {
                     "title": "Popular",
                     "className": "!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50"
@@ -110,7 +110,7 @@
             },
             {
                 "name": "React Native",
-                "url": "/docs/sdks/react-native",
+                "url": "/docs/libraries/react-native",
                 "badge": {
                     "title": "Popular",
                     "className": "!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50"
@@ -118,11 +118,11 @@
             },
             {
                 "name": "Ruby",
-                "url": "/docs/sdks/ruby"
+                "url": "/docs/libraries/ruby"
             },
             {
                 "name": "Rust",
-                "url": "/docs/sdks/rust"
+                "url": "/docs/libraries/rust"
             }
         ]
     },
@@ -131,58 +131,62 @@
         "url": "",
         "children": [
             {
+                "name": "Overview",
+                "url": "/docs/integrations"
+            },
+            {
                 "name": "Docusaurus v2",
-                "url": "/docs/integrate/third-party/docusaurus",
+                "url": "/docs/libraries/docusaurus",
                 "badge": {
                     "title": "3rd party"
                 }
             },
             {
                 "name": "Gatsby",
-                "url": "/docs/integrate/third-party/gatsby",
+                "url": "/docs/libraries/gatsby",
                 "badge": {
                     "title": "3rd party"
                 }
             },
             {
                 "name": "Google Tag Manager",
-                "url": "/docs/integrate/third-party/google-tag-manager"
+                "url": "/docs/libraries/google-tag-manager"
             },
             {
                 "name": "Next.js",
-                "url": "/docs/integrate/third-party/next-js"
+                "url": "/docs/libraries/next-js"
             },
             {
                 "name": "Nuxt.js",
-                "url": "/docs/integrate/third-party/nuxt-js"
+                "url": "/docs/libraries/nuxt-js"
             },
             {
                 "name": "Retool",
-                "url": "/docs/integrate/third-party/retool"
+                "url": "/docs/libraries/retool"
             },
             {
                 "name": "RudderStack",
-                "url": "/docs/integrate/third-party/rudderstack"
+                "url": "/docs/libraries/rudderstack"
             },
             {
                 "name": "Segment",
-                "url": "/docs/integrate/third-party/segment"
+                "url": "/docs/libraries/segment"
             },
             {
                 "name": "Sentry",
-                "url": "/docs/integrate/third-party/sentry"
+                "url": "/docs/libraries/sentry"
             },
             {
                 "name": "Slack",
-                "url": "/docs/integrate/third-party/slack"
+                "url": "/docs/libraries/slack"
             },
             {
                 "name": "Shopify",
-                "url": "/docs/integrate/third-party/shopify"
+                "url": "/docs/libraries/shopify"
             },
             {
                 "name": "WordPress",
-                "url": "/docs/integrate/third-party/wordpress"
+                "url": "/docs/libraries/wordpress"
             }
         ]
     },
@@ -318,10 +322,6 @@
         "name": "Advanced",
         "url": "",
         "children": [
-            {
-                "name": "Ingest historical data",
-                "url": "/docs/integrate/ingest-historic-data"
-            },
             {
                 "name": "Using a CDP",
                 "url": "/docs/integrate/cdp"
@@ -1072,6 +1072,10 @@
         "name": "Migrate & export",
         "url": "",
         "children": [
+            {
+                "name": "Ingest historical data",
+                "url": "/docs/migrate/ingest-historic-data"
+            },
             {
                 "name": "Migrate to PostHog Cloud",
                 "url": "/docs/migrate/migrate-to-cloud"

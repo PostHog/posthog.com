@@ -95,13 +95,16 @@ export const Frameworks = () => {
 
 const query = graphql`
     {
-        sdks: allMdx(filter: { slug: { glob: "docs/sdks/*" } }, sort: { fields: fields___pageViews, order: DESC }) {
+        sdks: allMdx(
+            filter: { slug: { glob: "docs/libraries/*" } }
+            sort: { fields: fields___pageViews, order: DESC }
+        ) {
             nodes {
                 ...sdk
             }
         }
         frameworks: allMdx(
-            filter: { slug: { glob: "docs/integrate/third-party/*" } }
+            filter: { slug: { glob: "docs/libraries/*" } }
             sort: { fields: fields___pageViews, order: DESC }
         ) {
             nodes {
