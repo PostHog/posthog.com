@@ -38,7 +38,7 @@ Authentication domains need to be verified if you are on PostHog Cloud. If you a
 
 To add an Authentication domain, go to your Organization settings (`/organization/settings#authentication-domains`).
 
-![Screenshot: Authentication domains](../images/features/sso/authentication-domains.png)
+![Screenshot: Authentication domains](../../images/features/sso/authentication-domains.png)
 
 For security purposes and to prevent misuse, Authentication domains must be verified in PostHog Cloud. We do this through DNS verification. You will have to add a `TXT` record to your DNS zone with a specific value so you can prove you have authority over the domain. Verification only needs to be done once, but **the record must be kept at all times,** as we do periodic DNS verification.
 
@@ -205,7 +205,7 @@ For SAML to work your IdP and PostHog (SP) need to exchange information. To do t
     - **SAML ACS URL**: The endpoint to which the SAML requests are posted. It's usually called SAML endpoint or IdP sign-on URL.
     - **SAML X.509 certificate**: The public certificate used to validate SAML assertions from your IdP. It must be in X509 (almost all providers will provide it in this format). If your provider gives you the certificate as a file (usually `.pem`), just open it with a text editor to get the contents. When setting this certificate be sure to **keep any spaces and new lines** (don't format it). The first and last line of the certificate (e.g. `-----BEGIN CERTIFICATE-----`) are optional.
 
-    ![Screenshot: SAML configuration](../images/features/sso/saml-configuration.png)
+    ![Screenshot: SAML configuration](../../images/features/sso/saml-configuration.png)
 
 4. Once you've configured all the settings above, you can now log out and attempt logging in using SAML (you just need to enter your email address).
 
