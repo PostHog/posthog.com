@@ -1,5 +1,5 @@
 ---
-date: 2023-03-03
+date: 2023-03-14
 title: PostHog vs LogRocket
 rootPage: /blog
 sidebar: Blog
@@ -17,26 +17,26 @@ tags:
 
 LogRocket is a frontend monitoring platform which, like PostHog, combines multiple tools into one platform. In this article we’ll explain some of the biggest similarities and differences between PostHog and LogRocket, but here’s the short version:
 
--   LogRocket focuses heavily on helping frontend developers to detect and solve issues. It offers tools such as session recording, analytics and performance monitoring.
+- LogRocket focuses on helping frontend developers detect and solve issues. It offers tools such as session recording, analytics, and performance monitoring.
 
--   PostHog is an all-in-one platform that helps teams build better products. It includes many of the same tools as LogRocket, including session recording, analytics and performance monitoring — but also extends to feature flags, A/B testing and more.
+- PostHog is an all-in-one platform that helps teams build better products. It includes many of the same tools as LogRocket, including session recording, analytics and performance monitoring — but also extends to feature flags, A/B testing and more.
 
 In this article, we will:
 
--   Compare PostHog and LogRocket’s core features
--   Examine PostHog and LogRocket’s library support
--   Discuss what integrations are available with other tools
--   Explore other frequently asked questions about PostHog and LogRocket
+- Compare PostHog and LogRocket’s core features
+- Examine PostHog and LogRocket’s library support
+- Discuss what integrations are available with other tools
+- Explore other frequently asked questions about PostHog and LogRocket
 
 ## How do PostHog and LogRocket differ?
 
 ### 1. PostHog does more than frontend monitoring
 
-PostHog goes beyond frontend monitoring by augmenting product analytics and session recording with powerful product and data tools, such as feature flags, A/B testing, and SQL querying. While LogRocket’s narrow focus on frontend issues means it offers a few specialist features, PostHog offers greater value and is more widely useful for the vast majority of teams and organizations
+PostHog goes beyond frontend monitoring by augmenting product analytics and session recording with powerful product and data tools, such as feature flags, A/B testing, and SQL querying. While LogRocket’s focus on the frontend means it offers a few specialist features, PostHog offers greater value and is more widely useful for the majority of teams and organizations
 
 ### 2. PostHog is open source and transparent
 
-PostHog is built with transparency at its core. Not only do we work in the open and give full access to [our source code](https://github.com/PostHog/posthog), we also enable others to [build integrations](/docs/apps/build) or [other services on top of PostHog](/how-we-built-an-app-server), raise their own PRs, or feed back on [our roadmap](/roadmap). PostHog's open app framework makes it easy to integrate internal tools, an advantage closed-source products like LogRocket can't offer.
+PostHog is built with transparency at its core. Not only do we work in the open and give full access to [our source code](https://github.com/PostHog/posthog), we also enable others to [build integrations](/docs/apps/build) or [other services on top of PostHog](/how-we-built-an-app-server), open their own PRs, or give feedback on [our roadmap](/roadmap). PostHog's open app framework makes it easy to integrate internal tools, an advantage closed-source products like LogRocket can't offer.
 
 ### 3. PostHog constantly ships new features
 
@@ -44,7 +44,7 @@ At PostHog, we ship weirdly fast. We update [our changelog](/blog/posthog-change
 
 ## PostHog and LogRocket feature comparison
 
-PostHog offers a much wider selection of tools than LogRocket, including several tools that are helpful to frontend developers — such as feature flags, and experimentation. PostHog is also entirely open source, meaning that it offers far greater extensibility than LogRocket.
+PostHog offers a much wider selection of tools than LogRocket, including several tools that are helpful to frontend developers — such as feature flags, and experimentation. PostHog is also entirely open source, meaning that it offers far greater transparency than LogRocket. You can even develop your own PostHog apps!
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -198,11 +198,11 @@ While LogRocket contains some product analytics features, it isn’t primarily i
 
 -   **Correlation analysis:** This feature enables you to [automatically find correlated events or properties](/manual/correlation) which affect the conversion rate of users within a funnel. LogRocket doesn’t offer any such automated correlation discovery, meaning users must search for correlating factors manually and without assistance.
 
--   **Query editor:** LogRocket doesn’t currently support any way for users to interrogate data directly, either through SQL or other, abstracted query language. PostHog also doesn’t offer SQL queries... but [we’re actively working on it](/roadmap).
+-   **Query editor:** LogRocket doesn’t currently support any way for users to interrogate data directly, either through SQL or other, abstracted query language. PostHog also doesn’t offer SQL queries... but [we’re actively working on it](/manual/hogql).
 
 ### Session recording
 
-LogRocket and PostHog both offer robust, full-featured session recording tools that outperform even dedicated tools, such as HotJar. LogRocket’s session recording offers a handful of extra features, such as mobile recording, though PostHog is actively working on developing these.
+LogRocket and PostHog both offer robust, full-featured session recording tools that outperform even dedicated tools, such as [Hotjar](/blog/best-open-source-session-replay-tools). LogRocket’s session recording offers a handful of extra features, such as mobile recording, though PostHog is actively working on developing these.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -446,7 +446,7 @@ LogRocket’s heatmap and click tracking functionality exceeds PostHog’s and e
 
 Both PostHog and LogRocket are capable of integrating with third-party tools in a variety of ways. This enables you to accomplish tasks such as exporting data to another platform, importing data for analysis, or enabling two-way communication between the tools.
 
-[PostHog offers more than 50 integrations and apps](/apps), while [LogRocket offers slightly less](https://logrocket.com/features/integrations).
+[PostHog offers more than 50 integrations and apps](/apps), while [LogRocket offers slightly fewer](https://logrocket.com/features/integrations).
 
 As an open source software, PostHog welcomes contributions from the community. If an integration you need isn’t available, [it’s possible to create it](/docs/apps/build)!
 
@@ -545,7 +545,6 @@ Below, we've listed a few of the most popular integrations used across PostHog a
     </thead>
     <tbody>
         <tr>
-        <tr>
             <td><strong>Hubspot</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
@@ -613,7 +612,7 @@ Below, we've listed a few of the most popular integrations used across PostHog a
 
 ### Site apps
 
-PostHog’s extensions also include [site apps](/tutorials/build-site-app), which enable you to inject arbitrary code into your website — something that isn’t possible with LogRocket.
+PostHog’s extensions also include [site apps](/tutorials/build-site-app), which enable you to easily add frontend components to your site — something that isn’t possible with LogRocket.
 
 Some examples of PostHog’s site apps include:
 
