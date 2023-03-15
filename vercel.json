@@ -1,5 +1,7 @@
 {
     "redirects": [
+        { "source": "/docs/sdks/:path*", "destination": "/docs/libraries/:path*" },
+        { "source": "/docs/integrate/third-party/:path*", "destination": "/docs/libraries/:path*" },
         { "source": "/plugins/:path*", "destination": "/apps/:path*" },
         { "source": "/integrations/:path*", "destination": "/apps/:path*" },
         { "source": "/docs/user-guides/:path*", "destination": "/manual/:path*" },
