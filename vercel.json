@@ -695,10 +695,22 @@
             "source": "/docs/self-host/open-source/deployment",
             "destination": "/docs/self-host"
         },
-        {
-            "source": "/docs/integrate/js",
-            "destination": "/docs/getting-started/install"
-        },
+        { "source": "/docs/integrate/android", "destination": "/docs/libraries/android" },
+        { "source": "/docs/integrate/api", "destination": "/docs/libraries/api" },
+        { "source": "/docs/integrate/curl", "destination": "/docs/libraries/curl" },
+        { "source": "/docs/integrate/elixir", "destination": "/docs/libraries/elixir" },
+        { "source": "/docs/integrate/flutter", "destination": "/docs/libraries/flutter" },
+        { "source": "/docs/integrate/go", "destination": "/docs/libraries/go" },
+        { "source": "/docs/integrate/ios", "destination": "/docs/libraries/ios" },
+        { "source": "/docs/integrate/java", "destination": "/docs/libraries/java" },
+        { "source": "/docs/integrate/js", "destination": "/docs/libraries/js" },
+        { "source": "/docs/integrate/node", "destination": "/docs/libraries/node" },
+        { "source": "/docs/integrate/php", "destination": "/docs/libraries/php" },
+        { "source": "/docs/integrate/python", "destination": "/docs/libraries/python" },
+        { "source": "/docs/integrate/react", "destination": "/docs/libraries/react" },
+        { "source": "/docs/integrate/react-native", "destination": "/docs/libraries/react-native" },
+        { "source": "/docs/integrate/ruby", "destination": "/docs/libraries/ruby" },
+        { "source": "/docs/integrate/rust", "destination": "/docs/libraries/rust" },
         {
             "source": "/docs/integrate/identifying-users",
             "destination": "/docs/getting-started/identify-users"
