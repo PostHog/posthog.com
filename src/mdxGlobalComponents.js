@@ -107,6 +107,7 @@ import { ProductFeature } from './components/ProductFeature'
 import { ProductFeaturePlugin } from './components/ProductFeaturePlugin'
 import { ProductFooter } from './components/ProductFooter'
 import { ProductIcons } from './components/ProductIcons'
+import { ProductLayout } from './components/ProductLayout'
 import { ProductPage } from './components/ProductPage'
 import { ProductSectionHeader } from './components/ProductSectionHeader'
 import { Questions } from './components/Questions'
@@ -250,6 +251,7 @@ export const shortcodes = {
     ProductFeaturePlugin,
     ProductFooter,
     ProductIcons,
+    ProductLayout,
     ProductPage,
     ProductSectionHeader,
     Questions,

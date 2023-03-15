@@ -16,7 +16,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const CustomerTemplate = path.resolve(`src/templates/Customer.js`)
     const PluginTemplate = path.resolve(`src/templates/Plugin.js`)
     const AppTemplate = path.resolve(`src/templates/App.js`)
-    const ProductTemplate = path.resolve(`src/templates/Product.js`)
     const HostHogTemplate = path.resolve(`src/templates/HostHog.js`)
     const Job = path.resolve(`src/templates/Job.tsx`)
 
@@ -112,17 +111,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 }
             }
             apps: allMdx(filter: { fields: { slug: { regex: "/^/apps/" } } }) {
-                nodes {
-                    id
-                    fields {
-                        slug
-                    }
-                    frontmatter {
-                        documentation
-                    }
-                }
-            }
-            product: allMdx(filter: { fields: { slug: { regex: "/^/product/" } } }) {
                 nodes {
                     id
                     fields {
@@ -425,30 +413,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         createPage({
             path: slug,
             component: AppTemplate,
-            context: {
-                id: node.id,
-                documentation: documentation || '',
-                next,
-                previous,
-            },
-        })
-    })
-    result.data.product.nodes.forEach((node) => {
-        const { slug } = node.fields
-        const { documentation } = node.frontmatter
-        let next = null
-        let previous = null
-        const sidebar = sidebars.product
-        sidebar.some((item, index) => {
-            if (item.url === slug) {
-                next = sidebar[index + 1]
-                previous = sidebar[index - 1]
-                return true
-            }
-        })
-        createPage({
-            path: slug,
-            component: ProductTemplate,
             context: {
                 id: node.id,
                 documentation: documentation || '',
