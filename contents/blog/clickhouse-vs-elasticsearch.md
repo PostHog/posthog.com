@@ -96,14 +96,14 @@ The three major core components of Elasticsearch’s infrastructure are **indice
 A **shard**, meanwhile, is the intersection of a specific *node* and a specific **index**. A **shard** is also a single instance of Apache Lucene. It is a collection of documents, such as two hundred user profiles of a total set of forty thousand. 
 
 ![Elasticsearch effectively creates a cartesian layout of physical and virtual coordinates. ](../images/blog/clickhouse-vs-elastic/elasticsearch-structure.png)
-<caption>Elasticsearch effectively creates a cartesian layout of physical and virtual coordinates.</caption>
+<Caption>Elasticsearch effectively creates a cartesian layout of physical and virtual coordinates.</Caption>
 
 #### Inverted Index
 
 In each shard (or Apache Lucene instance) is an inverted index. An inverted index is like a glossary – it stores a map of string components (such as words, numbers, or prefixes) mapped to all the documents they are located in. 
 
 ![Inverted indexes dramatically improve search time.](../images/blog/clickhouse-vs-elastic/inverted-index.png)
-<caption>Inverted indexes dramatically improve search time.</caption>
+<Caption>Inverted indexes dramatically improve search time.</Caption>
 
 Inverted indexes dramatically speed up most queries. If a user queries for all the `Reviews` that use the word “outstanding”, Elasticsearch can return that collection extraordinarily fast because each shard in the `Reviews` index leverages an inverted index to find relevant `Reviews`, and Elasticsearch bundles `Reviews` into a single collection for the end user. 
 
@@ -130,7 +130,7 @@ Elasticsearch nodes and shards aren’t just used to distribute data, but also r
 Elasticsearch has two types of shards – **primary shards** and **replica shards**. Replica shards are an **exact** copy of a primary shard should a primary shard become unavailable. A primary shard and a respective replica shard reference the same set of data. Therefore, they should never be located on the same node. 
 
 ![Elasticsearch can replicate data at scale without having to replicate the entire database.](../images/blog/clickhouse-vs-elastic/elasticsearch-structure.png)
-<caption>Elasticsearch can replicate data at scale without having to replicate the entire database.</caption>
+<Caption>Elasticsearch can replicate data at scale without having to replicate the entire database.</Caption>
 
 Replica shards help database operations in two distinct ways. First, they protect users against data loss in case a node – which is a physical machine – fails. Second, replicas are *actively* used for querying, so if multiple queries are targeting the same data, replica nodes can help distribute the reads, expediting results. 
 
@@ -149,7 +149,7 @@ There are three major components that enable ClickHouse to return aggregations, 
 ClickHouse’s columnar layout – which flips rows and columns in storage relative to a MySQL database – makes aggregations efficient. 
 
 ![ClickHouse’s biggest magic trick really comes down to swapping rows and columns ](../images/blog/clickhouse-vs-elastic/row-vs-column-database.png)
-<caption>ClickHouse’s biggest magic trick really comes down to swapping rows and columns</caption> 
+<Caption>ClickHouse’s biggest magic trick really comes down to swapping rows and columns</Caption> 
 
 When databases physically access data, they scan data row-by-row. By extension, if an analyst is trying to calculate the average value of bank account balances in a PostgreSQL database, they would need to access **every** bank account row. Alone, that would probably blow out memory. But in ClickHouse, the same analyst would only need to access **one** (physical) row of data – the bank balance one – and collapse it into an average. 
 
