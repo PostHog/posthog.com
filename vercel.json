@@ -763,6 +763,7 @@
 
         { "source": "/manual/support", "destination": "/docs/support-options" },
         { "source": "/manual/glossary", "destination": "/docs/glossary" }
+
     ],
     "rewrites": [
         {
