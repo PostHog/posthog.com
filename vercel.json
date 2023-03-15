@@ -679,10 +679,6 @@
             "destination": "/blog/customer-churn-analysis-guide"
         },
         {
-            "source": "/manual/recordings",
-            "destination": "/docs/session-recording"
-        },
-        {
             "source": "/docs/getting-started/cloud",
             "destination": "/docs/getting-started/start-here"
         },
@@ -697,6 +693,10 @@
         {
             "source": "/docs/self-host/open-source/deployment",
             "destination": "/docs/self-host"
+        },
+        {
+            "source": "/docs/integrate/js",
+            "destination": "/docs/getting-started/install"
         },
         {
             "source": "/docs/integrate/identifying-users",
@@ -726,8 +726,43 @@
             "destination": "/docs/libraries/google-tag-manager"
         },
 
+        { "source": "/manual/recordings", "destination": "/docs/session-recording" },
         { "source": "/manual/feature-flags", "destination": "/docs/feature-flags/manual" },
-        { "source": "/manual/experimentation", "destination": "/docs/experiments/manual" }
+        { "source": "/manual/experimentation", "destination": "/docs/experiments/manual" },
+
+        { "source": "/manual/", "destination": "/docs/product-analytics/" },
+        { "source": "/manual/correlation", "destination": "/docs/product-analytics/correlation" },
+        { "source": "/manual/dashboards", "destination": "/docs/product-analytics/dashboards" },
+        { "source": "/manual/funnels", "destination": "/docs/product-analytics/funnels" },
+        { "source": "/manual/group-analytics", "destination": "/docs/product-analytics/group-analytics" },
+        { "source": "/manual/hogql", "destination": "/docs/product-analytics/hogql" },
+        { "source": "/manual/insights", "destination": "/docs/product-analytics/insights" },
+        { "source": "/manual/lifecycle", "destination": "/docs/product-analytics/lifecycle" },
+        { "source": "/manual/paths", "destination": "/docs/product-analytics/paths" },
+        { "source": "/manual/retention", "destination": "/docs/product-analytics/retention" },
+        { "source": "/manual/sampling.md", "destination": "/docs/product-analytics/sampling.md" },
+        { "source": "/manual/stickiness", "destination": "/docs/product-analytics/stickiness" },
+        { "source": "/manual/toolbar", "destination": "/docs/product-analytics/toolbar" },
+        { "source": "/manual/trends", "destination": "/docs/product-analytics/trends" },
+
+        { "source": "/manual/actions", "destination": "/docs/data/actions" },
+        { "source": "/manual/annotations", "destination": "/docs/data/annotations" },
+        { "source": "/manual/application-settings", "destination": "/docs/data/application-settings" },
+        { "source": "/manual/cohorts", "destination": "/docs/data/cohorts" },
+        { "source": "/manual/data-management", "destination": "/docs/data/data-management" },
+        { "source": "/manual/events", "destination": "/docs/data/events" },
+        { "source": "/manual/notifications-and-alerts", "destination": "/docs/data/notifications-and-alerts" },
+        { "source": "/manual/organizations-and-projects", "destination": "/docs/data/organizations-and-projects" },
+        { "source": "/manual/persons", "destination": "/docs/data/persons" },
+        { "source": "/manual/role-based-access", "destination": "/docs/data/role-based-access" },
+        { "source": "/manual/sessions", "destination": "/docs/data/sessions" },
+        { "source": "/manual/sso", "destination": "/docs/data/sso" },
+        { "source": "/manual/subscriptions", "destination": "/docs/data/notifications-and-alerts" },
+        { "source": "/manual/team-collaboration", "destination": "/docs/data/team-collaboration" },
+        { "source": "/manual/utm-segmentation", "destination": "/docs/data/utm-segmentation" },
+
+        { "source": "/manual/support", "destination": "/docs/support-options" },
+        { "source": "/manual/glossary", "destination": "/docs/glossary" }
     ],
     "rewrites": [
         {
