@@ -1,5 +1,5 @@
 ---
-date: 2023-01-13
+date: 2023-03-15
 title: "In-depth: ClickHouse vs Elasticsearch"
 rootPage: /blog
 sidebar: Blog
@@ -38,13 +38,11 @@ Elasticsearch was originally released in 2010 under an open-source license. The 
 
 Elasticsearch is often considered a NoSQL database because it uses Apache Lucene – and by extension, JSON documents – as a primary store of data. However, Elasticsearch is specifically a Document-Store NoSQL database with a focus on searching and retrieving data. It is never used as the primary store of data, and sometimes data stores in Elasticsearch may be redundantly available in a more traditional database like postgresql as Elasticsearch is only leveraged to improve search results. 
 
-In 2021, Elasticsearch abandoned its traditional Apache Open Source license in favor of a new license known as an Elastic license. It was a controversial move motivated by Elastic’s irritation with Amazon profiting off of Elasticsearch by operating a managed service without ever contributing to the codebase. 
+In 2021, Elasticsearch abandoned its traditional Apache Open Source license in favor of a new license known as an Elastic license. It was a controversial move motivated by Elastic’s irritation with Amazon profiting off of Elasticsearch by operating a managed service without ever contributing to the codebase. Amazon forked the last version of open-source Elasticsearch into a new open-source project, OpenSearch. Similar to Elastic (and ClickHouse Inc.), Amazon launched a managed version of OpenSearch, titled OpenSearch Service.
 
-Elasticsearch’s new license allows developers to implement Elasticsearch themselves, but forbids cloud distributors from running a for-profit, managed Elasticsearch service. Most open-source advocates consider Elastic’s Elastic License not open-source; however, it would be unfair to Elastic to equate their solution’s transparency with a purely closed-source solution like Snowflake.  
+Elasticsearch’s new license allows developers to implement Elasticsearch themselves, but forbids cloud distributors from running a for-profit, managed Elasticsearch service. Most open-source advocates consider Elastic’s Elastic License not open-source; however, it would be unfair to Elastic to equate their solution’s transparency with a purely closed-source solution like Snowflake.
 
-### What is Kibana?
-
-Kibana is a visualization program that plugs into Elasticsearch. Like Elasticsearch, it used to be developed under an open-source license until shifting to an Elastic License in 2021. Kibana provides an interface for designing a dashboard that showcases Elasticsearch data. 
+Elastic also develops Kibana, a visualization program that plugs into Elasticsearch. Like Elasticsearch, it used to be developed under an open-source license until shifting to an Elastic License in 2021. Kibana provides an interface for designing a dashboard that showcases Elasticsearch data. 
 
 ### What is Clickhouse?
 
@@ -54,11 +52,7 @@ ClickHouse was designed to return aggregate values of big data at millisecond sp
 
 Similar to Elastic Cloud, ClickHouse can be (optionally) deployed through various managed, closed-source solutions. ClickHouse Inc. offers a managed service known as ClickHouse Cloud. ClickHouse Cloud includes a GUI, similar to Kibana, for querying and visualizing data. Separately, Altinity Inc offers a managed service known as Altinity Cloud that specializes in deploying ClickHouse on Kubernetes.
 
-### What is OpenSearch?
-
-After Elastic discontinued its Apache License, Amazon forked the last version of open-source Elasticsearch into a new open-source project, OpenSearch. Similar to Elastic (and ClickHouse Inc.), Amazon launched a managed version of OpenSearch, titled OpenSearch Service. OpenSearch will foreseeably remain open-source as it was created in response to Elastic’s decision to walk back from an Apache license.
-
-## Comparing data and Infrastructure
+## Data and infrastructure
 
 The biggest, defining difference between Elasticsearch and ClickHouse is their respective techniques for storing and organizing data. 
 
@@ -66,7 +60,7 @@ ClickHouse is a columnar database; it stores data in a table, just with an inver
 
 Elasticsearch isn’t columnar – it isn’t even a table-based database. It stores data as documents, grouping sets of documents into shards, which are part of physical and virtual collections respectively known as nodes and indices. 
 
-### Understanding Elasticsearch’s Structure
+### Elasticsearch’s structure explained
 
 Elasticsearch is best understood by separating the **virtual** structures from the **physical** structures. 
 
@@ -111,9 +105,11 @@ In each shard (or Apache Lucene instance) is an inverted index. An inverted inde
 ![Inverted indexes dramatically improve search time.](../images/blog/clickhouse-vs-elastic/inverted-index.png)
 <caption>Inverted indexes dramatically improve search time.</caption>
 
-Inverted indexes dramatically speed up most queries; if a user queries for all the `Reviews` that use the word “outstanding”, Elasticsearch can return that collection extraordinarily fast because each shard in the `Reviews` index leverages an inverted index to find relevant `Reviews`, and Elasticsearch bundles `Reviews` into a single collection for the end user. 
+Inverted indexes dramatically speed up most queries. If a user queries for all the `Reviews` that use the word “outstanding”, Elasticsearch can return that collection extraordinarily fast because each shard in the `Reviews` index leverages an inverted index to find relevant `Reviews`, and Elasticsearch bundles `Reviews` into a single collection for the end user. 
 
-Inverted indices do not only index words and numbers, but derivatives of words. This helps with accounting for human error. For instance, Elasticsearch (or rather, Apache Lucene) will convert each word into its phonetical form and store that in an inverted index as well. That way, users can find documents with “bear” spelled “bare” with a single query. Likewise, Elasticsearch will store prefixes, suffixes, and n-grams. ***And***, given each word is also stored in an inverted index, Elasticsearch can leverage simple word-likeness algorithms like Levenshtein Distance to account for typos. 
+Inverted indices do not only index words and numbers, but derivatives of words. This helps with accounting for human error. For instance, Elasticsearch (or rather, Apache Lucene) will convert each word into its phonetical form and store that in an inverted index as well. That way, users can find documents with “bear” spelled “bare” with a single query. 
+
+Likewise, Elasticsearch will store prefixes, suffixes, and n-grams. And, given each word is also stored in an inverted index, Elasticsearch can leverage simple word-likeness algorithms like Levenshtein Distance to account for typos. 
 
 In short, Elasticsearch extended Apache Lucene’s inverted index into a scalable, distributed system that leverages its benefits via parallelization.   
 
@@ -129,7 +125,9 @@ Simply, “divide and conquer” is Elasticsearch’s middle name and trademark 
 
 #### Replica Shards
 
-Elasticsearch nodes and shards aren’t just used to distribute data, but also replicate it. Elasticsearch has two types of shards – **primary shards** and **replica shards**. Replica shards are an **exact** copy of a primary shard should a primary shard become unavailable. A primary shard and a respective replica shard reference the same set of data. Therefore, they wouldn’t ever be located on the same node. 
+Elasticsearch nodes and shards aren’t just used to distribute data, but also replicate it. 
+
+Elasticsearch has two types of shards – **primary shards** and **replica shards**. Replica shards are an **exact** copy of a primary shard should a primary shard become unavailable. A primary shard and a respective replica shard reference the same set of data. Therefore, they should never be located on the same node. 
 
 ![Elasticsearch can replicate data at scale without having to replicate the entire database.](../images/blog/clickhouse-vs-elastic/elasticsearch-structure.png)
 <caption>Elasticsearch can replicate data at scale without having to replicate the entire database.</caption>
@@ -138,13 +136,9 @@ Replica shards help database operations in two distinct ways. First, they protec
 
 #### Clusters
 
-A cluster is a group of nodes. Many applications only have one cluster, though some may have multiple clusters spread over different geographies to serve clients with lower latency. Each Elasticsearch cluster has a single master node that helps delegate and manage other nodes. 
+A cluster is a group of nodes. Many applications only have one cluster, though some may have multiple clusters spread over different geographies to serve clients with lower latency. Each Elasticsearch cluster has a single master node that helps delegate and manage other nodes.
 
-#### Elasticsearch summary
-
-Elasticsearch extends Apache Lucene’s inverted index, providing structure and scalability to handle massive amounts of data. Elasticsearch’s system allows for robust replication, search, and distribution of data. 
-
-### Zooming into Clickhouse’s Structure
+### Clickhouse’s structure explained
 
 ClickHouse is engineered to process data in a massive, consolidated place. Unlike Elasticsearch, ClickHouse’s optimizations don’t happen through distributing data, but by efficiently pre-processing it in anticipation of queries. 
 
@@ -161,7 +155,7 @@ When databases physically access data, they scan data row-by-row. By extension, 
 
 Again, this is a **physical** row of data. As far as ClickHouse’s interface goes, data is still stored in a traditional format. ClickHouse’s syntax still treats individual entries as rows and attributes as columns. But under the hood, ClickHouse stores the data in an inverted arrangement, optimized for merging attribute data into single values. 
 
-#### **Component 2: Materialized Views
+#### Component 2: Materialized Views
 
 ClickHouse’s second superpower is **dynamic** materialized views. 
 
@@ -179,11 +173,7 @@ ClickHouse has a series of specialized engines that enable developers to take ad
 
 ClickHouse has some overlap with Elasticsearch’s sharding features. ClickHouse extends Apache Zookeeper to manage multiple instances of ClickHouse should data need to be split across machines. However, this concept of sharding is closer to Elasticsearch’s support for multiple clusters – it is more a big data distribution problem, not a smaller optimization for speeding up queries. 
 
-#### ClickHouse Summary
-
-Paraphrasing Robert Hodges from Altinity, ClickHouse is like a drag-racer. It is missing some core features available in other products, but it is very, very fast at one main thing. And for a lot of analytics services, aggregating data is the one thing they need. 
-
-### Summary: ClickHouse and Elasticsearch’s Structures
+### Architecture summary
 
 At a high level, ClickHouse and Elasticsearch’s differences showcase how they are designed to fit their own purposes. ClickHouse consolidates data so it can constantly update materialized views to serve number-hungry queries. Meanwhile, Elasticsearch is designed to find *specific* items, treating search queries as a group project where every node does its part. 
 
@@ -201,7 +191,7 @@ Conversely, ClickHouse’s users use ClickHouse to return aggregations of data. 
 
 Others, like us, also use ClickHouse to power an user-facing feature – [Rokt](http://rokt.com), an e-commerce platform, uses ClickHouse to power its analytics panels. However, some companies leverage ClickHouse for internal use cases, such as the Washington Post, which uses ClickHouse to power its in-house analytics suite. 
 
-## Comparing Analytics Performance
+## Analytics performance comparison
 
 ClickHouse was built to perform aggregations, but it’s naive to say that Elasticsearch doesn’t have the structure to compete with ClickHouse on *some* aggregations. 
 
@@ -215,19 +205,24 @@ While both Elasticsearch and ClickHouse are fundamentally backend products, we c
 
 In a nutshell, comparing the analytics efficiency of ClickHouse and Elasticsearch has the same sort-of, not-really awkwardness of other comparisons – they both excel in their respective categories using radically different methods, just catering to a different type of need. However, Elastic’s Kibana product is more mature than ClickHouse Cloud’s competitive offering. 
 
-## Comparing Developers
+## Comparing developers
 
-One of the reasons that Elasticsearch has been able to grow so quickly is because of the fast-paced development by its parent company, Elastic. Elastic has spearheaded the development of Elasticsearch, Kibana, and other accessory products like Beats, a data shipper. For many enterprise customers, Elastic being a psuedo-closed-source solution is balanced by the fact that it can leverage its enterprise revenue to foster a massive engineering effort to improve Elastic.
+One of the reasons that Elasticsearch grew quickly thanks to fast-paced development by its parent company, Elastic. Elastic has spearheaded the development of Elasticsearch, Kibana, and other accessory products like Beats, a data shipper. For many enterprise customers, Elastic being a psuedo-closed-source solution is balanced by the fact that it can leverage its enterprise revenue to foster a massive engineering effort to improve Elastic.
 
 Conversely, the teams behind ClickHouse are a lot smaller. However, ClickHouse has a very avid developer community, with contributors existing outside of the two major ClickHouse developers – ClickHouse Inc and Altinity Inc. And one of the reasons that ClickHouse is starting to really grow in the last few years is because of its open-source, pro-community brand. 
 
-## Conclusion
+## Final thoughts
 
-ClickHouse and Elasticsearch are both fantastic solutions for data aggregation and fast search respectively. Sometimes, Elasticsearch may be the better solution if data aggregation involves searching text. Elasticsearch is a more mature project with an entire suite dedicated to interfacing with Elasticsearch data; however, it is no longer a true open-source product like ClickHouse is. 
+ClickHouse and Elasticsearch are both fantastic solutions for data aggregation and fast search respectively. 
 
-## Further Readings
+Elasticsearch grew quickly thanks to fast-paced development by its parent company, Elastic. Elastic has spearheaded the development of Elasticsearch, Kibana, and other accessory products like Beats, a data shipper. For many enterprise customers, Elastic being a psuedo-closed-source solution is balanced by the fact that it can leverage its enterprise revenue to foster a massive engineering effort to improve Elastic.
+
+Conversely, while the team behind ClickHouse is smaller, ClickHouse has an avid developer community, with contributors existing outside of the two major ClickHouse developers – ClickHouse Inc and Altinity Inc. And one of the reasons that ClickHouse is starting to grow in the last few years is because of its open-source, pro-community brand, and it's blistering performance.
+
+Overll, sometimes Elasticsearch may be the better solution if data aggregation involves searching text. Elasticsearch is a more mature project with an entire suite dedicated to interfacing with Elasticsearch data; however, it is no longer a true open-source product like ClickHouse is. 
+
+### Further reading
 
 - Lisa Jung’s [talk](https://www.youtube.com/watch?v=gS_nHTWZEJ8) on Elasticsearch
 - Robert Hodges’s CMU [talk](https://www.youtube.com/watch?v=fGG9dApIhDU) on ClickHouse
-- My [comparison](https://posthog.com/blog/clickhouse-vs-postgres) between ClickHouse and traditional Postgres, which expands on ClickHouse’s optimizations
-- Shay Banon’s [reasoning](https://www.elastic.co/blog/licensing-change) for switching from Apache Open Source
+- Our [comparison of between ClickHouse and Postgres]((https://posthog.com/blog/clickhouse-vs-postgres)) which expands on ClickHouse’s optimizations
