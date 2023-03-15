@@ -1,5 +1,7 @@
 {
     "redirects": [
+        { "source": "/docs/sdks/:path*", "destination": "/docs/libraries/:path*" },
+        { "source": "/docs/integrate/third-party/:path*", "destination": "/docs/libraries/:path*" },
         { "source": "/plugins/:path*", "destination": "/apps/:path*" },
         { "source": "/integrations/:path*", "destination": "/apps/:path*" },
         { "source": "/docs/user-guides/:path*", "destination": "/manual/:path*" },
@@ -716,20 +718,6 @@
             "source": "/blog/categories/hogmail",
             "destination": "/blog/categories/newsletter"
         },
-        { "source": "/docs/sdks/js", "destination": "/docs/libraries/js" },
-        { "source": "/docs/sdks/android", "destination": "/docs/libraries/android" },
-        { "source": "/docs/sdks/elixir", "destination": "/docs/libraries/elixir" },
-        { "source": "/docs/sdks/flutter", "destination": "/docs/libraries/flutter" },
-        { "source": "/docs/sdks/go", "destination": "/docs/libraries/go" },
-        { "source": "/docs/sdks/ios", "destination": "/docs/libraries/ios" },
-        { "source": "/docs/sdks/java", "destination": "/docs/libraries/java" },
-        { "source": "/docs/sdks/node", "destination": "/docs/libraries/node" },
-        { "source": "/docs/sdks/php", "destination": "/docs/libraries/php" },
-        { "source": "/docs/sdks/python", "destination": "/docs/libraries/python" },
-        { "source": "/docs/sdks/react", "destination": "/docs/libraries/react" },
-        { "source": "/docs/sdks/react-native", "destination": "/docs/libraries/react-native" },
-        { "source": "/docs/sdks/ruby", "destination": "/docs/libraries/ruby" },
-        { "source": "/docs/sdks/rust", "destination": "/docs/libraries/rust" },
 
         { "source": "/docs/integrate/third-party/docusaurus", "destination": "/docs/libraries/docusaurus" },
         { "source": "/docs/integrate/third-party/gatsby", "destination": "/docs/libraries/gatsby" },
@@ -737,15 +725,9 @@
             "source": "/docs/integrate/third-party/google-tag-manager",
             "destination": "/docs/libraries/google-tag-manager"
         },
-        { "source": "/docs/integrate/third-party/next-js", "destination": "/docs/libraries/next-js" },
-        { "source": "/docs/integrate/third-party/nuxt-js", "destination": "/docs/libraries/nuxt-js" },
-        { "source": "/docs/integrate/third-party/retool", "destination": "/docs/libraries/retool" },
-        { "source": "/docs/integrate/third-party/rudderstack", "destination": "/docs/libraries/rudderstack" },
-        { "source": "/docs/integrate/third-party/segment", "destination": "/docs/libraries/segment" },
-        { "source": "/docs/integrate/third-party/sentry", "destination": "/docs/libraries/sentry" },
-        { "source": "/docs/integrate/third-party/slack", "destination": "/docs/libraries/slack" },
-        { "source": "/docs/integrate/third-party/shopify", "destination": "/docs/libraries/shopify" },
-        { "source": "/docs/integrate/third-party/wordpress", "destination": "/docs/libraries/wordpress" }
+
+        { "source": "/manual/feature-flags", "destination": "/docs/feature-flags/manual" },
+        { "source": "/manual/experimentation", "destination": "/docs/experiments/manual" }
     ],
     "rewrites": [
         {
