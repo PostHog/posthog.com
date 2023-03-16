@@ -38,7 +38,7 @@ export const quickLinks = [
     },
     {
         name: 'Notifications & alerts',
-        to: '/docs/data/notification-and-alerts',
+        to: '/docs/data/notifications-and-alerts',
         description: 'Set up notifications for when specific actions occur',
     },
 ]
