@@ -33,12 +33,11 @@ In order to use the full feature set of PostHog (**autocapture**, **session reco
     analytics.ready(() => {
         window.posthog.init("<your-posthog-key>", {
             api_host: 'https://app.posthog.com', // Use eu.posthog.com for EU instances
+            segment: window.analytics,
             capture_pageview: false, // You want this false if you are going to use segment's `analytics.page()` for pageviews
+            // When the posthog library has loaded, call `analytics.page()` explicitly.
+            loaded: () => window.analytics.page(),
         });
-        window.analytics.register(posthog.segmentIntegration()).then(() => {
-            // Make sure to send the first pageview _after_ posthog is initialised to get all the correct properties linked
-            window.analytics.page();
-        })
     })
     ```
 
