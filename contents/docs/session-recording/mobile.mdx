@@ -7,7 +7,17 @@ title: Mobile Recording
 
 # Installation
 
-### Objective C
+## Via Swift Package Manager
+
+Currently the only way to install the `beta` of the PostHog Recording iOS SDK is via Swift Package Manager. To do so, follow these steps:
+
+1. In Xcode, select File > Add Packages.
+2. Enter `https://github.com/posthog/posthog-ios` in the search bar.
+3. Select the dependency rule `branch` and enter `feat/mobile-recordings` as the value.
+4. Select the your project to add it to and click **Add Package**
+
+
+### Setup with Objective C
 
 
 In your AppDelegate file add the following:
@@ -40,7 +50,7 @@ In your AppDelegate file add the following:
 
 ```
 
-### Swift
+### Setup with Swift
 
 
 ```swift
@@ -76,8 +86,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 
 #### SwiftUI
-
-
 If you haven't already, crate the `AppDelegate.swift` file mentioned above and then in your `App` file add the following:
 
 ```swift
