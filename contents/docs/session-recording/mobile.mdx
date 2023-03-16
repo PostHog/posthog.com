@@ -76,8 +76,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 
         PostHog.shared.setup(config: config)
-        PostHog.shared.debug()
-        PostHog.shared.capture("App started!")
 
         return true
     }
@@ -107,25 +105,25 @@ struct AboutMeApp: App {
 # Recoridng specific configuration
 
 ```swift
-    // The values shown are the defaults
-    let config = PostHogRecorderConfig(
-        // Whether to enable recording. If false, all other options are ignored
-        screenRecordingEnabled: true,
-        // Whether to enable log recording. Logs with OSLog will be automatically recorded or you can log directly with PostHog.shared.recorder.log()
-        logRecordingEnabled: true,
-        // Records network requests via swizzling of NsUrlSession.
-        networkRecordingEnabled: true,
-        // Automatic redaction. None will 
-        // -> .none = only redact views with an accessibilityId matching what is specified in `redactionTags`. 
-        // -> .automatic = redact all views with the name matching `redactionViews` and all classes matching `redactionClasses`
-        // -> .wireframe = renders a "wireframe" of the view, without any text or images
-        redactionMode: .none,
-        redactionTags: ["ph-no-capture"],
-        redactionViews: PostHogRecorderConfig.DefaultRedactionViews,
-        redactionClasses: PostHogRecorderConfig.DefaultRedactionClasses,
-        // Hosts to ignore when recording network requests. By default the PostHog API host is ignored
-        ignoreNetworkHosts: []
-    )
+// The values shown are the defaults
+let config = PostHogRecorderConfig(
+    // Whether to enable recording. If false, all other options are ignored
+    screenRecordingEnabled: true,
+    // Whether to enable log recording. Logs with OSLog will be automatically recorded or you can log directly with PostHog.shared.recorder.log()
+    logRecordingEnabled: true,
+    // Records network requests via swizzling of NsUrlSession.
+    networkRecordingEnabled: true,
+    // What level of redcaction to perform
+    // -> .none = only redact manually specified views with an accessibilityId matching what is specified in `redactionTags`.
+    // -> .automatic = redact all views with the name matching `redactionViews` and all classes matching `redactionClasses`
+    // -> .wireframe = renders a "wireframe" of the view, without any text or images
+    redactionMode: .none,
+    redactionTags: ["ph-no-capture"],
+    redactionViews: PostHogRecorderConfig.DefaultRedactionViews,
+    redactionClasses: PostHogRecorderConfig.DefaultRedactionClasses,
+    // Hosts to ignore when recording network requests. By default the PostHog API host is ignored
+    ignoreNetworkHosts: []
+)
 ```
 
 
