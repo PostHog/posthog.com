@@ -21,7 +21,7 @@ Also known as split testing or multivariate testing, A/B testing is the practice
 
 Product review website G2 lists 120 products in the A/B testing category, but what they offer varies widely. Many products on G2, for example, lean toward marketing uses cases (i.e. testing website landing pages) and aren't useful for product feature testing, or focus on a narrow subset of companies.
 
-In this guide, we're looking at the best free and open-source A/B testing tools. Open-source tools are mainly built for developers, so if you're marketer we recommend reading our guide to the best [alternatives to Google Optimize](/blog/google-optimize-alternatives).
+In this guide, we're looking at the best free and open-source A/B testing tools. Open-source tools are mainly built for developers, so we recommend marketers read our guide to the best [alternatives to Google Optimize](/blog/google-optimize-alternatives).
 
 > **Changelog:**
 
