@@ -1,0 +1,123 @@
+---
+title: Mobile Recording
+---
+
+> NOTE: This is current in beta and is not publicly available.
+
+
+# Installation
+
+### Objective C
+
+
+In your AppDelegate file add the following:
+
+```objc
+#import "AppDelegate.h"
+// ...
+
+@import PostHog; // Add this import
+
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    // ...other code
+
+    PHGPostHogConfiguration *configuration = [PHGPostHogConfiguration configurationWithApiKey:@"YOUR_API_KEY" host:@"https://app.posthog.com"];
+
+    // Any standard PostHog config options
+    configuration.captureApplicationLifecycleEvents = YES; // Record certain application events automatically!
+    configuration.captureScreenViews = YES; // Capture screen views automatically!
+    
+    // Any Recording specific config options
+    configuration.recording.screenRecordingEnabled = YES; // Record the screen
+    configuration.recording.networkRecordingEnabled = YES; // Record network requests
+    configuration.recording.redactionMode = ScreenRecorderMaskingModeAutomatic; // Mask screen recordings automatically
+
+    [PHGPostHog setupWithConfiguration:configuration];
+}
+
+
+```
+
+### Swift
+
+
+```swift
+// AppDelegate.swift
+import Foundation
+import PostHogRecorder
+import UIKit
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        let config = PostHogConfig(
+            apiKey: "YOUR_API_KEY"
+        )
+        // NOTE: If you are not on app.posthog.com 
+        // config.host = URL(string: "https://eu.posthog.com")
+
+        config.recording = PostHogRecorderConfig(
+            screenRecordingEnabled: true,
+            logRecordingEnabled: true,
+            networkRecordingEnabled: true,
+            redactionMode: .automatic
+        )
+
+
+        PostHog.shared.setup(config: config)
+        PostHog.shared.debug()
+        PostHog.shared.capture("App started!")
+
+        return true
+    }
+}
+```
+
+
+#### SwiftUI
+
+
+If you haven't already, crate the `AppDelegate.swift` file mentioned above and then in your `App` file add the following:
+
+```swift
+import SwiftUI
+
+@main
+struct AboutMeApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate // Add this if not already there
+    
+    var body: some Scene {
+        WindowGroup {
+            ...
+        }
+    }
+}
+```
+
+
+# Recoridng specific configuration
+
+```swift
+    // The values shown are the defaults
+    let config = PostHogRecorderConfig(
+        // Whether to enable recording. If false, all other options are ignored
+        screenRecordingEnabled: true,
+        // Whether to enable log recording. Logs with OSLog will be automatically recorded or you can log directly with PostHog.shared.recorder.log()
+        logRecordingEnabled: true,
+        // Records network requests via swizzling of NsUrlSession.
+        networkRecordingEnabled: true,
+        // Automatic redaction. None will 
+        // -> .none = only redact views with an accessibilityId matching what is specified in `redactionTags`. 
+        // -> .automatic = redact all views with the name matching `redactionViews` and all classes matching `redactionClasses`
+        // -> .wireframe = renders a "wireframe" of the view, without any text or images
+        redactionMode: .none,
+        redactionTags: ["ph-no-capture"],
+        redactionViews: PostHogRecorderConfig.DefaultRedactionViews,
+        redactionClasses: PostHogRecorderConfig.DefaultRedactionClasses,
+        // Hosts to ignore when recording network requests. By default the PostHog API host is ignored
+        ignoreNetworkHosts: []
+    )
+```
+
+
