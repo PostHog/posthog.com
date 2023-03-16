@@ -52,7 +52,7 @@ Half results are better than no results.
 
 Handle partial updates with the API.
 
-Specialness: Flags that affect the most people will almost never go down. Flags affecting a small % (property based) can be unavilable more often.
+Specialness: Flags that affect the most people will almost never go down. Flags affecting a small % (property based) can be unavailable more often.
 
 ## Different ways pgbouncer can fail
 
