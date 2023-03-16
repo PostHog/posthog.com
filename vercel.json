@@ -780,7 +780,15 @@
         { "source": "/docs/integrate/proxy", "destination": "/docs/advanced/proxy" },
 
         { "source": "/docs/integrate/badge", "destination": "/docs/contribute/badge" },
-        { "source": "/docs/integrate/libraries", "destination": "/docs/libraries" }
+        { "source": "/docs/integrate/libraries", "destination": "/docs/libraries" },
+
+        { "source": "/docs/data/subscriptions", "destination": "/docs/data/notifications-and-alerts" },
+        { "source": "/handbook/engineering/oncall-rotation", "destination": "/handbook/engineering/oncall" },
+        { "source": "/docs/integrate/next-js", "destination": "/docs/libraries/next-js" },
+        { "source": "/docs/integrate/sentry", "destination": "/docs/libraries/sentry" },
+        { "source": "/docs/integrate/rudderstack", "destination": "/docs/libraries/rudderstack" },
+        { "source": "/docs/integrate/segment", "destination": "/docs/libraries/segment" },
+        { "source": "/docs/sdks/ios", "destination": "/docs/libraries/ios" }
     ],
     "rewrites": [
         {
@@ -790,12 +798,6 @@
         { "source": "/next-steps/(.*)", "destination": "/next-steps" },
         { "source": "/question/(.*)", "destination": "/question" },
         { "source": "/careers/(.*)", "destination": "/careers" },
-        { "source": "/api", "destination": "/docs/api" },
-        { "source": "/docs/data/subscriptions", "destination": "/docs/data/notifications-and-alerts" },
-        { "source": "/handbook/engineering/oncall-rotation", "destination": "/handbook/engineering/oncall" },
-        { "source": "/docs/integrate/next-js", "destination": "/docs/libraries/next-js" },
-        { "source": "/docs/integrate/sentry", "destination": "/docs/libraries/sentry" },
-        { "source": "/docs/integrate/rudderstack", "destination": "/docs/libraries/rudderstack" },
-        { "source": "/docs/integrate/segment", "destination": "/docs/libraries/segment" }
+        { "source": "/api", "destination": "/docs/api" }
     ]
 }
