@@ -114,10 +114,10 @@ let config = PostHogRecorderConfig(
     // Records network requests via swizzling of NsUrlSession.
     networkRecordingEnabled: true,
     // What level of redcaction to perform
-    // -> .none = only redact manually specified views with an accessibilityId matching what is specified in `redactionTags`.
+    // -> .selective = only redact manually specified views with an accessibilityId matching what is specified in `redactionTags`.
     // -> .automatic = redact all views with the name matching `redactionViews` and all classes matching `redactionClasses`
     // -> .wireframe = renders a "wireframe" of the view, without any text or images
-    redactionMode: .none,
+    redactionMode: .selective,
     redactionTags: ["ph-no-capture"],
     redactionViews: PostHogRecorderConfig.DefaultRedactionViews,
     redactionClasses: PostHogRecorderConfig.DefaultRedactionClasses,
