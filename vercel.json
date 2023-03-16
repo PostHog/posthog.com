@@ -751,7 +751,7 @@
         { "source": "/manual/lifecycle", "destination": "/docs/product-analytics/lifecycle" },
         { "source": "/manual/paths", "destination": "/docs/product-analytics/paths" },
         { "source": "/manual/retention", "destination": "/docs/product-analytics/retention" },
-        { "source": "/manual/sampling.md", "destination": "/docs/product-analytics/sampling.md" },
+        { "source": "/manual/sampling", "destination": "/docs/product-analytics/sampling" },
         { "source": "/manual/stickiness", "destination": "/docs/product-analytics/stickiness" },
         { "source": "/manual/toolbar", "destination": "/docs/product-analytics/toolbar" },
         { "source": "/manual/trends", "destination": "/docs/product-analytics/trends" },
@@ -788,7 +788,14 @@
         { "source": "/docs/integrate/sentry", "destination": "/docs/libraries/sentry" },
         { "source": "/docs/integrate/rudderstack", "destination": "/docs/libraries/rudderstack" },
         { "source": "/docs/integrate/segment", "destination": "/docs/libraries/segment" },
-        { "source": "/docs/sdks/ios", "destination": "/docs/libraries/ios" }
+        { "source": "/docs/sdks/ios", "destination": "/docs/libraries/ios" },
+        
+        { "source": "/docs/self-host/deploy/aws", "destination": "/docs/self-host" },
+        { "source": "/docs/self-host/deploy/azure", "destination": "/docs/self-host" },
+        { "source": "/docs/self-host/deploy/digital-ocean", "destination": "/docs/self-host" },
+        { "source": "/docs/self-host/deploy/gcp", "destination": "/docs/self-host" },
+        { "source": "/docs/self-host/deploy/other", "destination": "/docs/self-host" }
+        
     ],
     "rewrites": [
         {
