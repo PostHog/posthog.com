@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-> For message formatting instructions, see [this dedicated page](/docs/integrate/webhooks/message-formatting).
+> For message formatting instructions, see [this dedicated page](/docs/webhooks/message-formatting).
 
 ## 1. Create an incoming webhook in Discord 
 
@@ -18,7 +18,7 @@ showTitle: true
 
 It would look something like this. 
 
-![Discord Webhook setup](../../../images/discord-webhook.png)
+![Discord Webhook setup](../../images/discord-webhook.png)
 
 For more information see the [Discord webhook docs](https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks).
 
@@ -26,7 +26,7 @@ For more information see the [Discord webhook docs](https://support.discord.com/
 
 1. Copy the Webhook URL into the PostHog Setup page:
 
-    ![PostHog add webhook](../../../images/discord-add-webhook.png)
+    ![PostHog add webhook](../../images/discord-add-webhook.png)
 
 1. Click "Test & Save" and you should receive a message on Discord. 
 
@@ -34,8 +34,8 @@ For more information see the [Discord webhook docs](https://support.discord.com/
 
 For each Action that should be posted to Discord, select "Post to webhook when this action is triggered":
 
-![PostHog edit action](../../../images/post-action-slack.png)
+![PostHog edit action](../../images/post-action-slack.png)
 
 ## 4. Celebrate
-![](../../../images/discord-message.png)
+![](../../images/discord-message.png)
 
