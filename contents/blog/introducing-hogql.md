@@ -17,7 +17,7 @@ featuredImageType: full
 
 Today, we're excited to announce a major new feature which we're making available to all users as a public beta on PostHog Cloud. It's called HogQL and it's a new query language which makes it easier to interrogate your data directly.
 
-Not only that, but the introduction of HogQL brings with it other updates, including a new event explorer (previously the Live Events view), and the ability to use HogQL expressions within insights. We think that PostHog's existing insights will remain valuable for the vast majority of queries, but HogQL is an alternative when they just don't fit the bill.
+Not only that, but the introduction of HogQL brings with it other updates, including a new event explorer (previously the Live Events view), and the ability to use HogQL expressions within insights. We think that PostHog's existing insights will remain valuable for the vast majority of queries, but HogQL gives them a massive upgrade when it comes to detailed analysis, and provides an alternative when off-the-shelf insights don't fit the bill. 
 
 Speaking of bills, HogQL is free for all users while it's in public beta - all we ask is that you share any feedback you have with it either via the PostHog Slack, or by [filing an issue on our repo](https://github.com/PostHog/).
 
@@ -36,13 +36,13 @@ We recommend checking the docs for a more detailed [explanation of ClickHouse SQ
 
 A frequent request from teams using PostHog has been the ability to breakdown insight results across multiple properties. To accommodate this, we've added the ability to use HogQL expressions within an insight breakdown - so you can breakdown results however you like. 
 
-Using HogQL expressions enables you to combine the speed of PostHog's existing insights, with the flexibility of HogQL - the best of both worlds!
+HogQL expressions in insights enables you to combines the speed of PostHog's existing insights with the flexibility of HogQL - so you can do things such as plotting the signup sources by email domain, or breaking down signups by both pricing tier and overall usage.
 
 ## The PostHog event explorer 
 
 In addition to introducing HogQL, we've also upgraded the event explorer (previously known as the Live events tab) to give you more ways to filter events and analyze your data.
 
-The new event explorer view also enables you to view source behind queries, then use HogQL to create custom views. Below, for example, you can see a query we wrote using HogQL which summarizes [votes from our 404 page](/hedgehogsgalore).
+The new event explorer enables you to view source behind queries, then use HogQL to create custom views. Below, for example, you can see a query we wrote using HogQL which summarizes [votes from our 404 page](/hedgehogsgalore).
 
 ```
 {
@@ -68,6 +68,9 @@ The new event explorer view also enables you to view source behind queries, then
   "propertiesViaUrl": true
 }
 ```
+
+We've also upgraded the Event explorer in other ways, including adding the ability to add custom columns and filter them using HogQL. This is helpful not just for generating tables which summarize person and event information according to your needs, but also for exploring the data in new and totally custom ways. You could, for example, use HogQL to run currency conversions and normalize data into a single currency in its own column - or even extrapolate and project revenue and usage figures into the future. 
+
 
 ## The history and future of HogQL
 
