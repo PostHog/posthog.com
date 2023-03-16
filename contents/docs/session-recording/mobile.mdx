@@ -64,8 +64,11 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         let config = PostHogConfig(
             apiKey: "YOUR_API_KEY"
         )
-        // NOTE: If you are not on app.posthog.com 
+        // > NOTE: If you are not on app.posthog.com 
         // config.host = URL(string: "https://eu.posthog.com")
+
+        // > By default recordings will only be uploaded over wifi. You can decide to also upload over cellular with.
+        // config.dataMode = .any 
 
         config.recording = PostHogRecorderConfig(
             screenRecordingEnabled: true,
