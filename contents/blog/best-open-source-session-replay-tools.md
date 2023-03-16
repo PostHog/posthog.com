@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/posthog-company-culture-blog.png
+featuredImage: ../images/blog/open-source-hotjar-alternatives/replayhog.png
 featuredImageType: full
 author:
   - hanna-crombie
