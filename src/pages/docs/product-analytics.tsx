@@ -14,57 +14,57 @@ export const quickLinks = [
     {
         icon: 'Trends',
         name: 'Graphs & trends',
-        to: '/manual/trends',
+        to: '/docs/product-analytics/trends',
     },
     {
         icon: 'Funnels',
         name: 'Funnels',
-        to: '/manual/funnels',
+        to: '/docs/product-analytics/funnels',
     },
     {
         icon: 'PathAnalysis',
         name: 'User paths',
-        to: '/manual/paths',
+        to: '/docs/product-analytics/paths',
     },
     {
         icon: 'Dashboards',
         name: 'Dashboards',
-        to: '/manual/dashboards',
+        to: '/docs/product-analytics/dashboards',
     },
     {
         icon: 'Retention',
         name: 'Retention',
-        to: '/manual/retention',
+        to: '/docs/product-analytics/retention',
     },
     {
         icon: 'Stickiness',
         name: 'Stickiness',
-        to: '/manual/stickiness',
+        to: '/docs/product-analytics/stickiness',
     },
     {
         icon: 'Lifecycle',
         name: 'Lifecycle',
-        to: '/manual/lifecycle',
+        to: '/docs/product-analytics/lifecycle',
     },
     {
         icon: 'CorrelationAnalysis',
         name: 'Correlation analysis',
-        to: '/manual/correlation',
+        to: '/docs/product-analytics/correlation',
     },
     {
         icon: 'GroupAnalytics',
         name: 'Groups',
-        to: '/manual/group-analytics',
+        to: '/docs/product-analytics/group-analytics',
     },
     {
         icon: 'Toolbar',
         name: 'Toolbar',
-        to: '/manual/toolbar',
+        to: '/docs/product-analytics/toolbar',
     },
     {
         icon: 'Sampling',
         name: 'Sampling',
-        to: '/manual/sampling',
+        to: '/docs/product-analytics/sampling',
     },
 ]
 

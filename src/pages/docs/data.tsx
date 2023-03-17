@@ -13,32 +13,32 @@ import { GettingStarted } from 'components/Docs/GettingStarted'
 export const quickLinks = [
     {
         name: 'Actions',
-        to: '/manual/actions',
+        to: '/docs/data/actions',
         description: 'Combine and filter events to create custom actions.',
     },
     {
         name: 'Cohorts',
-        to: '/manual/cohorts',
+        to: '/docs/data/cohorts',
         description: 'Create groups of users based on their behavior or properties.',
     },
     {
         name: 'Events',
-        to: '/manual/events',
+        to: '/docs/data/events',
         description: 'Core information on events and event properties.',
     },
     {
         name: 'Persons',
-        to: '/manual/persons',
+        to: '/docs/data/persons',
         description: 'Identify your users and their properties.',
     },
     {
         name: 'Organizations & projects',
-        to: '/manual/organizations-and-projects',
+        to: '/docs/data/organizations-and-projects',
         description: 'Organize your data into projects and manage access to them.',
     },
     {
         name: 'Notifications & alerts',
-        to: '/manual/notification-and-alerts',
+        to: '/docs/data/notifications-and-alerts',
         description: 'Set up notifications for when specific actions occur',
     },
 ]
@@ -73,20 +73,20 @@ const Data: React.FC<DataProps> = ({ data }) => {
                     Manage event and customer data used throughout the PostHog suite.
                 </h3>
 
+                {/* Quick links */}
+                <section className="mt-12 mb-4">
+                    <h3 className="mb-6 mt-0">Quick links</h3>
+                    <LinkGrid links={quickLinks} />
+                </section>
+
                 {/* Get started section */}
-                <section className="py-6 sm:py-12">
+                <section className="py-6 sm:pb-12">
                     <GettingStarted
                         product="Data management"
                         title="Data management primer"
                         description="Learn how to manage event data in PostHog."
-                        link="/manual/data-management"
+                        link="/docs/data/data-management"
                     ></GettingStarted>
-                </section>
-
-                {/* Quick links */}
-                <section className="my-12">
-                    <h3 className="mb-6 mt-0">Quick links</h3>
-                    <LinkGrid links={quickLinks} />
                 </section>
 
                 <Tutorials tutorials={tutorials} />

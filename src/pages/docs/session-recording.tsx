@@ -12,6 +12,11 @@ import { GettingStarted } from 'components/Docs/GettingStarted'
 
 export const quickLinks = [
     {
+        name: 'Product manual',
+        to: '/docs/session-recording/manual',
+        description: 'How to use session recording.',
+    },
+    {
         name: 'Configuration',
         to: '/docs/session-recording/configure',
         description: 'Settings for customizing session recording capture.',
@@ -59,6 +64,12 @@ const SessionRecording: React.FC<SessionRecordingProps> = ({ data }) => {
                     behavior.
                 </h3>
 
+                {/* Quick links */}
+                <section className="my-12">
+                    <h3 className="mb-6 mt-0">Pages</h3>
+                    <LinkGrid links={quickLinks} />
+                </section>
+
                 {/* Get started section */}
                 <section className="pt-4 pb-0">
                     <GettingStarted
@@ -67,12 +78,6 @@ const SessionRecording: React.FC<SessionRecordingProps> = ({ data }) => {
                         description="Flip a switch to start capturing session recordings in minutes."
                         link="/docs/session-recording/manual#enabling-session-recording"
                     ></GettingStarted>
-                </section>
-
-                {/* Quick links */}
-                <section className="my-12">
-                    <h3 className="mb-6 mt-0">Quick links</h3>
-                    <LinkGrid links={quickLinks} />
                 </section>
 
                 <Tutorials tutorials={tutorials} />

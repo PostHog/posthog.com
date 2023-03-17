@@ -21,4 +21,4 @@ Insights allow you to visualize your Events and Actions in several different way
 
 To create a new Insight, click on `+` next to Insights in the left hand sidebar. You can also click on 'Insights' itself to view and search through your current list of Insights.
 
-You can then create [Dashboards](/docs/user-guides/dashboards) to collect and present multiple Insights in one place.
+You can then create [Dashboards](/docs/product-analytics/dashboards) to collect and present multiple Insights in one place.
