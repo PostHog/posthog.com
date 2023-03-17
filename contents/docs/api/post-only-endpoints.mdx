@@ -83,8 +83,6 @@ curl -v -L --header "Content-Type: application/json" -d '{
         "alias": "456"
     },
     "timestamp": "2020-08-16 09:03:11.913767",
-    "context": "{}",
-    "type": "alias",
     "event": "$create_alias"
 }' https://app.posthog.com/capture/
 ```
@@ -96,11 +94,8 @@ curl -v -L --header "Content-Type: application/json" -d '{
     "api_key": "<ph_project_api_key>",
     "properties": {},
     "timestamp": "2020-08-16 09:03:11.913767",
-    "context": {},
     "distinct_id": "1234",
-    "type": "capture",
-    "event": "$event",
-    "messageId": "1234"
+    "event": "$event"
 }' https://app.posthog.com/capture/
 ```
 
@@ -111,45 +106,33 @@ curl -v -L --header "Content-Type: application/json" -d '{
     "api_key": "<ph_project_api_key>",
     "timestamp": "2020-08-16 09:03:11.913767",
     "context": {},
-    "type": "screen",
     "distinct_id": "1234",
     "$set": {},
-    "event": "$identify",
-    "messageId": "123"
+    "event": "$identify"
 }' https://app.posthog.com/capture/
 ```
 
-### Page
+### Page view
 
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
     "api_key": "<ph_project_api_key>",
     "properties": {},
-    "timestamp": "2020-08-16 09:03:11.913767",
-    "category": "some category",
-    "context": {},
+    "timestamp": "2020-08-16T09:03:11.913767",
     "distinct_id": "1234",
-    "type": "page",
-    "event": "$page",
-    "name": "a page",
-    "messageId": "123"
+    "event": "$pageview"
 }' https://app.posthog.com/capture/
 ```
 
-### Screen
+### Screen view
 
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
     "api_key": "<ph_project_api_key>",
     "properties": {},
-    "timestamp": "2020-08-16 09:03:11.913767",
-    "category": "some category",
-    "context": {},
+    "timestamp": "2020-08-16T09:03:11.913767",
     "distinct_id": "1234",
-    "type": "screen",
-    "event": "$screen",
-    "name": "a page",
-    "messageId": "123"
+    "event": "$screen"
 }' https://app.posthog.com/capture/
 ```
 
@@ -267,7 +250,10 @@ Body:
 ```shell
 curl -v -L --header "Content-Type: application/json" -d '  {
     "api_key": "<ph_project_api_key>",
-    "distinct_id": "1234"
+    "distinct_id": "1234",
+    "groups" : { 
+        "<groupType>": "<groupKey>"
+    }
 }' https://app.posthog.com/decide?v=2
 ```
 

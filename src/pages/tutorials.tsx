@@ -5,19 +5,39 @@ export default Tutorials
 
 export const pageQuery = graphql`
     query TutorialsQuery {
-        tutorials: allMdx(
+        allPostsRecent: allMdx(
+            sort: { order: DESC, fields: [frontmatter___date] }
             filter: { fields: { slug: { regex: "/^/tutorials/" } } }
-            limit: 1000
-            sort: { fields: frontmatter___date, order: DESC }
+            limit: 4
         ) {
-            nodes {
-                ...TutorialsFragment
+            edges {
+                node {
+                    ...BlogFragment
+                }
             }
-            categories: group(field: frontmatter___tags) {
-                fieldValue
+        }
+        allPostsPopular: allMdx(
+            sort: { order: DESC, fields: [fields___pageViews] }
+            filter: { fields: { slug: { regex: "/^/tutorials/" } } }
+            limit: 4
+        ) {
+            edges {
+                node {
+                    ...BlogFragment
+                }
             }
-            contributors: group(field: frontmatter___authorData___name) {
-                fieldValue
+        }
+        categories: allMdx(
+            sort: { order: DESC, fields: [frontmatter___date] }
+            filter: { fields: { slug: { regex: "/^/tutorials/" } } }
+        ) {
+            group(field: frontmatter___tags, limit: 2) {
+                category: fieldValue
+                edges {
+                    node {
+                        ...BlogFragment
+                    }
+                }
             }
         }
     }

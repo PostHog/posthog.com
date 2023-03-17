@@ -84,9 +84,7 @@ export const Enterprise = ({ setOpen, hideActions, hideBadge, hideCalculator, cl
                         </span>
                     </p>
 
-                    <p className="text-blue font-semibold mb-0 text-[14px]">
-                        First 1 million events included every month
-                    </p>
+                    <p className="text-blue font-semibold mb-0 text-[14px]">First 1 million events free every month</p>
                 </div>
                 <p className="text-[13px] text-black/50 mb-2">Self-Serve benefits plus...</p>
                 <ul className="list-none p-0 m-0 grid gap-y-3 mb-6">

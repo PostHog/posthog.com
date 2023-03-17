@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-12-08
-featuredImage: ../images/tutorials/banners/performance-marketing.png
+featuredImage: ../images/tutorials/banners/tutorial-18.png
 tags: ['funnels', 'insights']
 --- 
 

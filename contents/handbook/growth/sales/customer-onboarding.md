@@ -1,37 +1,116 @@
 ---
-title: Customer onboarding
+title: New customer onboarding
 sidebar: Handbook
 showTitle: true
 ---
+## Day -1 - Session: Initial demo
 
-So, you just sold a deal. How do you onboard the customer so they can make their product(s) more successful?
+Our moat is that we have a fully-integrated tool that allows customers to go across Analytics, Recordings and Experimentation easily.  We want new customers to see the value of this as quickly as possible when evaluating us against other solutions.
 
-- If they paid via license.posthog.com, billing will be set up automatically. If not, manually add the client to our billing system (check with Kunal how to do this)
-- Ask if you can be added to their team in the app to do account reviews
-  - If so, set up recurring task to do this (base on the size of the account)
-- Create a private channel for them in Slack (so it's easy to get hold of each other).
-  - If they work at a small company, add them to our internal Slack. The advantage of this is that they're going to be logged into it all day, so are likely to be more responsive.
-  - If they work at a huge company, they are unlikely to get a channel approved - so use PostHog Community Slack. Check with them if this is likely to be the case.
-  - If they don't want to use Slack at all, then you should get them to email hey@posthog.com with any issues.
-- Add the Papercups app to the private Slack channel
-- Book a setup call and ask the client to invite product/engineering stakeholders
-  - Cover how to do product led growth (AARRRR) so they get their events in properly
-  - Make sure everyone has seen a demo of the main functionality
-  - Get a sense of how quick/slow the implementation will be - so you know what to expect
-  - Check how the deployment is going and if any help needed
-- Expand the account
-  - If they're a large client, they may have multiple product teams. Book Quarterly Business Reviews with the customer - this is a run through of their setup, and our roadmap. You should encourage stakeholders from other products or wider parts of their business to attend too - they may be interested in rolling PostHog out.
-  - Work with the client to make sure they:
-    - (i) track product performance (they've got events coming in, they are measuring AARRR and they've got a dashboard that breaks down each high level metric)
-    - (ii) diagnose performance
-    - (iii) release changes with our platform. Often customers may be using just one of the three areas at first.
-    - file issues for feature requests if we're missing something / talk to our product team about these
+For high-touch prospective customers the following process will get them onboarded quickly so that they can experience the value we provide using their own product data.
 
-There are regular checks you should do in bulk across all paying accounts:
+The process should run for 2 weeks by default, but can be extended if we think it's worth the additional effort.
 
-- Weekly check of usage/invoice amounts
-  - do any paying customers have unexpectedly large or small usage?
-  - any issues collecting payments?
-  - any cancellations? (gulp)
-- Every two weeks do a check of latest features - share cool stuff 1/1 with every customer in Slack.
-- Every month, get our product team to discuss potentially relevant roadmap features with them, or consider if our product marketing team should run a case study with our clients (free or paid). This helps deepen the relationships we have with them.
+The aim at the end of the evaluation is to have them:
+1. Sending in auto or custom captured event data
+2. Enabled session recordings
+3. Created a trend chart tracking User Acquisition
+4. Created a funnel tracking Activation
+5. Added the above to a dashboard
+
+### At the end of the demo call
+
+If at the end of a demo call we think a customer qualifies for high-touch onboarding we should outline our suggested evaluation approach.  If they aren't quite ready to kick the evaluation off then we should follow up with a templated email reminding them of the process, then check in with them after they've had some time to regroup.
+
+#### High touch criteria
+
+As a small team we have limited bandwidth to run customer evaluations so we need to focus on potential customers who:
+1. Are likely to contract above $20k with us.
+   (Ideally we qualify this by giving indicative pricing in the demo)
+2. Are likely to enter into an annual contract.
+   (This is quite a high-effort process for people just going month to month)
+3. Are ready to get hands-on with PostHog and will make a decision in weeks, not months.
+
+### Expectations of the customer
+
+We'll need them to be able to demo their product to us, as well as attend two or more zoom calls where we scope out the data and help them get set up.
+
+Ideally we will also have them in Slack Connect channel so that we can provide responsive support and expose them to the wider PostHog team.
+
+## Day 0 - Session: Kick off
+
+At the start of the evaluation, we want to review their product to understand and advise on the best approach to tracking, as well as address any privacy concerns associated with session recordings.
+
+By the end of the call we should have a plan for event capture/opt-out capture and an agreed timeline to get that set up.
+
+### Prerequisites
+
+The customer should come prepared to demo their product to us, where we can help figure out the key tracking events needed for the evaluation to be successful.
+
+If they don't already know about AARRR we should share our [AARRR blog post](https://posthog.com/blog/aarrr-pirate-funnel) and [Tracking Plan](https://docs.google.com/spreadsheets/d/12uV5aKAhU_wygUQl3YXZU2J_QN_AZi4nPFj-9WIKhlY/edit#gid=0) and ask them to review it before the call.
+
+### Structure
+
+1. Review goals and structure of this session 
+2. Review key concepts:
+   * Acquisition
+   * Activation
+   * User Identification
+   * Cohorts
+   * Groups
+   * Privacy / opt out capture
+3. Have customer demo their app to you, focusing on where the above information is captured
+   * During the demo agree where Acquisition/Activation/Identification take place
+   * Get the CSS selectors and pages of any items to opt-out of capture
+   * Agree any additional properties that need to be captured
+4. Recap and agree the tracking and other implementation details
+5. Agree the timeline to have tracking implemented and set up the following call (ideally 3 days after capture is implemented)
+
+### Deliverables
+
+1. A partially filled-in tracking plan detailing Activation and Acquisition
+2. A code snippet showing them how to implement tracking for their product (including Identification and Groups if applicable)
+3. Elements and pages to add opt-out-capture to
+
+## Day 3 - Session: Using PostHog
+
+The aim of this call is to get the customer familiar with navigating PostHog as well as:
+
+* Defining Actions
+* Defining Cohorts
+* Creating Insights
+* Creating Dashboards
+* Finding Recordings
+
+As much as possible the customer should be sharing their screen and driving the session, by teaching them to fish they become comfortable and self-sufficient with PostHog.
+
+### Prerequisites
+
+Tracking should be set up in line with what was shared after the previous call.
+
+### Structure
+
+1. Review goals/agenda
+2. Have them share screen and guide them through:
+
+   1. Live events
+   2. Creating actions
+   3. (Optionally if using Autocapture) the toolbar
+   4. Creating cohorts
+   5. Creating their Acquisiton trend insight
+   6. Creating their Activation funnel
+   7. Adding insights to a dashboard
+   8. Navigate from dashboard to insight to recordings 
+3. Note any inconsistencies or missing tracking information and plan to follow-up to help get that set up 4
+4. Show them the billing page and their projected usage (pricing discussion)
+
+### Deliverables
+
+1. Updated tracking guidance based on issues discovered in the guided demo
+2. Updated pricing quote based on volume
+
+## Next Steps
+
+Every trial should have an end date by which time we expect the customer to make a decision on whether PostHog is right for them.  If they need more time we first need to understand what they've not seen so we can proactively help them see everything they need to do make a decision (within reason).
+
+If they do become a customer (yay!) then we should agree a regular check in call cadence with them from the start (it's much harder to do after they are in the steady state).

@@ -39,9 +39,9 @@ Sharding also requires care given in the schema - queries touching data should i
 When creating a replicated table, configuring whether a table is sharded or not is done via varying the parameters to a ReplicatedMergeTree engine:
 
 - Example sharded engine: `ReplicatedMergeTree('/zk/some/path/{shard}/tablename', '{replica}')`
-- Example not sharded table engine: `ReplicatedMergeTree('/zk/some/path/tablename', '{replica}-{shard}')`
+- Example unsharded table engine: `ReplicatedMergeTree('/zk/some/path/tablename', '{replica}-{shard}')`
 
-Note that resharding large tables is currently relatively painful and bespoke operation - be careful choosing a good sharding key.
+Note that resharding large tables is currently a relatively painful and bespoke operation - be careful choosing a good sharding key.
 
 ### Monitoring replication
 
@@ -50,7 +50,7 @@ When doing larger cluster operations, it's often important to keep an eye on rep
 ## `Distributed` table engine
 
 [`Distributed` table engine](https://clickhouse.com/docs/en/engines/table-engines/special/distributed/) tables
-are used to query and write to sharded tables. Note that Distributed engine tables do not store any data on its own
+are used to query and write to sharded tables. Note that Distributed engine tables do not store any data on their own
 but rather always fan out to `ReplicatedMergeTree` tables on the cluster.
 
 ## How writes against `Distributed` tables work
@@ -127,7 +127,7 @@ SELECT hostName(), sum(metric_value) FROM distributed_sensor_values GROUP BY hos
 -- └──────────────┴───────────────────┘
 ```
 
-[`hostname` is a clickhouse helper function](https://clickhouse.com/docs/en/sql-reference/functions/other-functions/#hostname) which
+[`hostName` is a clickhouse helper function](https://clickhouse.com/docs/en/sql-reference/functions/other-functions/#hostname) which
 returns the hostname query is executed on.
 
 In this case `clickhouse01` was the coordinator node. It:
@@ -174,7 +174,7 @@ Header: hostname() String
  
 </details>
 
-### Example query: LIMIT, filter and aggregate
+### Example query: LIMIT, filter, and aggregate
 
 Consider this query:
 

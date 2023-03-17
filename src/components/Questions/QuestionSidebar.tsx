@@ -1,10 +1,12 @@
-import { SidebarSection } from 'components/PostLayout'
+import SidebarSection from 'components/PostLayout/SidebarSection'
 import slugify from 'slugify'
 import React from 'react'
 import Link from 'components/Link'
 import { Question } from './index'
+import { useUser } from '../../hooks/useUser'
 
 export const QuestionSidebar = ({ question }: { question: Question | undefined }) => {
+    const { user } = useUser()
     return question ? (
         <div>
             <SidebarSection title="Posted by">
@@ -47,6 +49,11 @@ export const QuestionSidebar = ({ question }: { question: Question | undefined }
                             </Link>
                         ))}
                     </div>
+                </SidebarSection>
+            )}
+            {user?.isModerator && (
+                <SidebarSection>
+                    <Link to={`https://squeak.cloud/question/${question.id}`}>View in Squeak!</Link>
                 </SidebarSection>
             )}
         </div>

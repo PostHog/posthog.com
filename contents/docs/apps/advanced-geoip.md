@@ -19,7 +19,7 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 You'll also need to have [the GeoIP Entricher app](/apps/geoip-enrichment) installed. 
 
-### How do I install the Customer.io Connector app?
+### How do I install the this app?
 
 1. Visit the 'Apps' page in your instance of PostHog.
 2. Search for 'Advanced GeoIP' and select the app, press Install.

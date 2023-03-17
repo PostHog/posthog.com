@@ -208,18 +208,18 @@ We'll run the plugin server in a later step.
         sudo apt install -y libxml2 libxmlsec1-dev pkg-config
         ```
 
-1. Install Python 3.8.
+1. Install Python 3.10.
 
-    - On macOS, you can do so with Homebrew: `brew install python@3.8`.
+    - On macOS, you can do so with Homebrew: `brew install python@3.10`.
 
     - On Debian-based Linux:
         ```bash
         sudo add-apt-repository ppa:deadsnakes/ppa -y
         sudo apt update
-        sudo apt install python3.8 python3.8-venv python3.8-dev -y
+        sudo apt install python3.10 python3.10-venv python3.10-dev -y
         ```
 
-Make sure when outside of `venv` to always use `python3` instead of `python`, as the latter may point to Python 2.x on some systems. If installing multiple versions of Python 3, such as by using the `deadsnakes` PPA, use `python3.8` instead of `python3`.
+Make sure when outside of `venv` to always use `python3` instead of `python`, as the latter may point to Python 2.x on some systems. If installing multiple versions of Python 3, such as by using the `deadsnakes` PPA, use `python3.10` instead of `python3`.
 
 You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage multiple versions of Python 3 on the same machine.
 
@@ -251,7 +251,7 @@ You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage m
 
     ```bash
     brew install openssl
-    CFLAGS="-I /opt/homebrew/opt/openssl/include $(python3.8-config --includes)" LDFLAGS="-L /opt/homebrew/opt/openssl/lib" GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1 GRPC_PYTHON_BUILD_SYSTEM_ZLIB=1 pip install -r requirements.txt
+    CFLAGS="-I /opt/homebrew/opt/openssl/include $(python3.10-config --includes)" LDFLAGS="-L /opt/homebrew/opt/openssl/lib" GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1 GRPC_PYTHON_BUILD_SYSTEM_ZLIB=1 pip install -r requirements.txt
     ```
 
     These will be used when installing `grpcio` and `psycopg2`. After doing this once, and assuming nothing changed with these two packages, next time simply run:
@@ -304,7 +304,29 @@ To commit changes, create a new branch based on `master` for your intended chang
 
 For a PostHog PR to be merged, all tests must be green, and ideally you should be introducing new ones as well – that's why you must be able to run tests with ease.
 
-For backend, simply use:
+### Frontend
+
+For frontend unit tests, run:
+
+```bash
+pnpm test:unit
+```
+
+To update all visual regression test snapshots, make sure Storybook is running on your machine (you can start it with `pnpm storybook` in a separate Terminal tab), and then run:
+
+```bash
+pnpm test:visual-regression
+```
+
+To only update snapshots for stories under a specific path, run:
+
+```bash
+pnpm test:visual-regression:stories frontend/src/lib/Example.stories.tsx
+```
+
+### Backend
+
+For backend tests, run:
 
 ```bash
 pytest
@@ -313,22 +335,20 @@ pytest
 You can narrow the run down to only files under matching paths:
 
 ```bash
-pytest posthog/test/test_entity_model.py
+pytest posthog/test/test_example.py
 ```
 
 Or to only test cases with matching function names:
 
 ```bash
-pytest posthog/test/test_entity_model.py -k test_inclusion
+pytest posthog/test/test_example.py -k test_something
 ```
 
 To see debug logs (such as ClickHouse queries), add argument `--log-cli-level=DEBUG`.
 
-For Cypress end-to-end test, run `bin/e2e-test-runner`. This will temporarily install required dependencies inside the project, spin up a test instance of PostHog, and show you the Cypress interface, from which you'll manually choose tests to run.
+### End-to-end
 
-Once you're done, terminate the command with cmd + C. Be sure to wait until the command terminates gracefully so temporary dependencies are removed from `package.json` and you don't commit them accidentally.
-
-For frontend tests, all you need is `pnpm test`.
+For Cypress end-to-end tests, run `bin/e2e-test-runner`. This will spin up a test instance of PostHog and show you the Cypress interface, from which you'll manually choose tests to run. Once you're done, terminate the command with Cmd + C.
 
 ## Extra: Working with feature flags
 
@@ -347,16 +367,22 @@ This command automatically turns any feature flag ending in `_EXPERIMENT` as a m
 
 With PyCharm's built in support for Django, it's fairly easy to setup debugging in the backend. This is especially useful when you want to trace and debug a network request made from the client all the way back to the server. You can set breakpoints and step through code to see exactly what the backend is doing with your request.
 
-1. Setup Django configuration as per JetBrain's [docs](https://blog.jetbrains.com/pycharm/2017/08/develop-django-under-the-debugger/).
-2. Click Edit Configuration to edit the Django Server configuration you just created.
-3. Point PyCharm to the project root (`posthog/`) and settings (`posthog/posthog/settings.py`) file.
-4. Add these environment variables
+### Setup PyCharm
 
-```
-DEBUG=1;
-KAFKA_HOSTS=kafka:9092;
-DATABASE_URL=postgres://posthog:posthog@localhost:5432/posthog
-```
+1. Open the repository folder.
+2. Setup the python interpreter (Settings… > Project: posthog > Python interpreter > Add interpreter): Select "Existing" and set it to `path_to_repo/posthog/env/bin/python`.
+3. Setup Django support (Settings… > Languages & Frameworks > Django):
+   - Django project root: `path_to_repo`
+   - Settings: `posthog/settings/__init__py`
+  
+### Start the debugging environment
+
+1. Instead of manually running `docker compose` you can open the `docker-compose.dev.yml` file and click on the double play icon next to `services`
+2. From the run configurations select:
+   - "PostHog" and click on debug
+   - "Celery" and click on debug (optional)
+   - "Frontend" and click on run
+   - "Plugin server" and click on run
 
 ## Extra: Adding an enterprise license (PostHog employees only)
 

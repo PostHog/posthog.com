@@ -22,9 +22,9 @@ Today, I will cover implementing PostHog in Vue, tracing over both **Vue 3.x** a
 First, I will install PostHog using either npm or yarn. 
 
 ```bash
-npm install posthog #for team npm! 
+npm install posthog-js #for team npm! 
 #or 
-yarn install posthog #for team yarn! 
+yarn install posthog-js #for team yarn! 
 ```
 
 ## Initializing PostHog
@@ -63,11 +63,11 @@ Next, I will create a plugin and assign PostHog to Vue’s global properties. Th
 import posthog from "posthog-js";
 
 export default {
-  install(app, options) {
+  install(app) {
     app.config.globalProperties.$posthog = posthog.init(
-      "<YOUR POSTHOG PUBLIC KEY>",
+      "<ph_project_api_key>",
       {
-        api_host: "<YOUR POSTHOG HOST>",
+        api_host: "<ph_instance_address>",
       }
     );
   },
@@ -83,9 +83,9 @@ import posthog from "posthog-js";
 export default {
   install(Vue, options) {
     Vue.prototype.$posthog = posthog.init(
-      "<YOUR POSTHOG PUBLIC KEY>",
+      "<ph_project_api_key>",
       {
-        api_host: "<YOUR POSTHOG HOST>"
+        api_host: "<ph_instance_address>"
       }
     );
   }
@@ -101,12 +101,15 @@ Here, I will add the following lines of code:
 **Vue 3.x:** 
 
 ```js
-//index.js
-
+//main.js
+import { createApp } from 'vue'
+import App from './App.vue'
 import posthogPlugin from "./plugins/posthog"; //import the plugin. 
 
-/* ... */
+const app = createApp(App);
+
 app.use(posthogPlugin); //install the plugin
+app.mount('#app')
 ```
 
 **Vue 2.x:** 
@@ -159,8 +162,8 @@ Prior to mounting my app, I will (i) import PostHog, (ii) initialize it, and (ii
 import posthog from "posthog-js";
 
 const app = createApp(App);
-posthog.init("<YOUR POSTHOG PUBLIC KEY>", {
-  api_host: "<YOUR POSTHOG HOST>",
+posthog.init("<ph_project_api_key>", {
+  api_host: "<ph_instance_addressT>",
 });
 app.provide("posthog", posthog);
 ```

@@ -5,7 +5,7 @@ showTitle: true
 featuredTutorial: false
 author: ['neil-kakkar']
 tags: ['experimentation', 'feature flags']
-featuredImage: ../images/tutorials/banners/experiments.png
+featuredImage: ../images/tutorials/banners/tutorial-2.png
 date: 2022-05-26
 ---
 

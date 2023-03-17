@@ -7,6 +7,7 @@ showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/posthog-company-culture-blog.png
 featuredImageType: full
+featuredVideo: https://www.youtube-nocookie.com/embed/NWHv1HMS9_Q
 author:
   - hanna-crombie
 category: General
@@ -19,7 +20,7 @@ tags:
 
 Feature flags, aka feature toggles, turn specific functions on and off during runtime. Rather than maintaining multiple feature branches in your source code, feature flags hide code or behaviors and allow you to enable or disable features on demand and without deploying new code.
 
-They're useful for:
+[Feature flag benefits](/blog/feature-flag-benefits-use-cases) include the ability to:
 
 - **Safely releasing features** by eliminating complex branching and gradually rolling out feature access so you can [react quickly if issues arise](https://posthog.com/customers/phantom).
 
@@ -35,13 +36,13 @@ If you want to run experiments as well, we recommend reading our guide to the [b
 
 ![PostHog](../images/blog/open-source-feature-flags/posthog-feature-flags.png)
 
-PostHog is an all-in-one [product analytics platform](https://posthog.com/product) that captures and visualizes all of the data your team needs in one place. Complete with Session Recording, Heatmaps, Path analysis, Funnels and more, it’s a great choice if you want to build a comprehensive, data-driven product strategy, fast.
+PostHog is an all-in-one [Product OS](https://posthog.com/product) that captures and visualizes all of the data your team needs in one place. Complete with product analytics, feature flags, session recording, heatmaps, funnels and more, it’s a great choice if you want to build a comprehensive, data-driven product strategy, fast.
 
-As well as [Feature Flags](https://posthog.com/docs/user-guides/feature-flags), you can take advantage of the toggles in the [Experimentation suite](https://posthog.com/docs/user-guides/experimentation) to test hypotheses on product changes with A/B tests or define user segments for feature access. [Multivariate flags](https://posthog.com/docs/user-guides/feature-flags#multivariate-feature-flags-beta) allow you to test several variants of the same interchangeable content.
+PostHog's [feature flags](https://posthog.com/docs/user-guides/feature-flags) also power its [experimentation suite](https://posthog.com/docs/user-guides/experimentation), so you can test product changes with A/B tests or define user segments for feature access. [Multivariate flags](https://posthog.com/docs/user-guides/feature-flags#multivariate-feature-flags-beta) allow you to test several variants of the same interchangeable elements.
 
 ### Who is PostHog for?
 
-PostHog is built primarily for engineers and other product-minded teams. With all of your analytics in one place, everyone in the organization is empowered to examine and act on user data. You can also self-host PostHog, which is ideal for any company with stringent data privacy needs.
+PostHog is built primarily for engineers and other product-minded teams. With all of your analytics in one place, everyone in the organization is empowered to examine and act on user data. You can also self-host PostHog Open Source, which is ideal for any company with stringent data privacy needs.
 
 ### Strengths
 
@@ -56,11 +57,11 @@ PostHog is built primarily for engineers and other product-minded teams. With al
 
 ### How much does it cost?
 
-Feature flags are a core feature of all editions, including the open source release. While multivariate feature flags are limited to paid plans, PostHog's paid plans are [free up to 1 million events every month](/pricing).
+Feature flags are a core feature of all editions, including the open source release. While multivariate feature flags are limited to paid plans, PostHog Cloud is [free up to 1 million events every month](/pricing).
 
 ### Open source license
 
-PostHog open source is available under an MIT license. Read more about [self-hosting PostHog](https://posthog.com/docs/self-host) in our docs.
+PostHog Open Source is available under an MIT license.
 
 <ArrayCTA />
 
@@ -118,7 +119,7 @@ Harness’s feature flags module is free with unlimited flags and environments f
 
 ### Open source license
 
-Harness has several open source options depending on company size and the level of support required. A free, team-maintained edition is available to certain businesses under the Polyform Small Business License, and there are community editions under Apache 2.0 and PolyForm Sheild. Learn more on [GitHub](https://github.com/harness).
+Harness has several open source options depending on company size and the level of support required. A free, team-maintained edition is available to certain businesses under the Polyform Small Business License, and there are community editions under Apache 2.0 and PolyForm Shield. Learn more on [GitHub](https://github.com/harness).
 
 ## 4. [Unleash](https://www.getunleash.io/)
 

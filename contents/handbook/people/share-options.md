@@ -45,26 +45,29 @@ You can use [this handy calculator](https://docs.google.com/spreadsheets/d/1mj-5
 
 ### What if I leave PostHog before this exit event happens?
  
-Happily, we have set up terms that are industry-leading in their friendliness to team members! If you leave PostHog, you will have 10 years to exercise them from the date you were granted them. 
+Happily, we have set up terms that are industry-leading in their friendliness to team members! If you leave PostHog, you will have 10 years from when they were granted to exercise them. Note that the exact deadline you have for exercise is whatever is written on your share options agreement under 'Expiration Date'.
 
 The industry standard is to only give you 90 days to exercise after leaving, which we think is bogus.
 
 
-### Does anything happen after 90 days then?
+### Are there any drawbacks at all to not exercising within 90 days then?
 
-Yes - we usually grant share options as ISOs, which are tax-advantaged in the US. If you do not exercise these within 90 days of leaving, you still keep the share options, but they legally have to convert into NSOs, which do not have the same tax treatment. 
+There is one potentially, which you should consider if you live in the US or UK. 
 
-This means that US taxpayers may choose to exercise their share options within 90 days of leaving, in order to retain the tax benefits, but of course this comes at the cost of exercising the shares. If you are considering doing this, talk to an accountant first to make sure you fully understand the tax implications here!
+We usually grant share options as ISOs, which are tax-advantaged in the US. If you do not exercise these within 90 days of leaving, you still keep the share options, but they legally have to convert into NSOs, which do not have the same tax treatment. This means that US taxpayers may choose to exercise their share options within 90 days of leaving, in order to retain the tax benefits, but of course this comes at the cost of exercising the shares. If you are considering doing this, talk to an accountant first to make sure you fully understand the tax implications here!
 
 (If you are not a US taxpayer, the conversion from ISO to NSO doesn't make any practical difference.)
- 
+
+If you are a UK taxpayer, you will be granted shares under the EMI scheme. These are similar in that they are tax-advantaged in the UK, but also lose their tax treatment 90 days after you leave PostHog. 
+
+In practical terms, this means you _may_ want to place a bet and exercise your shares within 90 days in order to retain a tax advantage, but if you'd prefer to wait and see what happens to PostHog, you have up to 10 years, minus tax advantage.  
 
 ### Does it make any difference how I leave PostHog - what if I am fired or made redundant?
  
 Again, we have taken a very broad and team-friendly approach to what are called 'good leaver' and 'bad leaver' provisions:
  
-* If you decide to leave, ie. resign, your share options stop vesting and you have until 2031 to exercise them. You are classified as a 'good leaver'. 
-* If unfortunately you are let go due to performance issues, you still keep your vested share options, and you have until 2031 to exercise them. You are classified as a 'good leaver'. 
+* If you decide to leave, ie. resign, your share options stop vesting and you have 10 years to exercise them. You are classified as a 'good leaver'. 
+* If unfortunately you are let go due to performance issues, you still keep your vested share options, and you have 10 years to exercise them. You are classified as a 'good leaver'. 
 * Only in the unlikely event you are let go due to gross misconduct would you forfeit your share options. You are classified as a 'bad leaver'.
  
 For context, the standard in a lot of startups is to class everyone as a bad leaver unless they basically died while working at the company. 

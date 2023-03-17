@@ -6,7 +6,13 @@ import { InlineCode } from 'components/InlineCode'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
 import { H1, H2, H3, H4, H5, H6 } from 'components/MdxAnchorHeaders'
-import PostLayout, { Contributors, PageViews, ShareLinks, SidebarSection, Text, Topics } from 'components/PostLayout'
+import PostLayout from 'components/PostLayout'
+import Text from 'components/PostLayout/Text'
+import Topics from 'components/PostLayout/Topics'
+import ShareLinks from 'components/PostLayout/ShareLinks'
+import SidebarSection from 'components/PostLayout/SidebarSection'
+import PageViews from 'components/PostLayout/PageViews'
+import Contributors, { Contributor } from 'components/PostLayout/Contributors'
 import { SEO } from 'components/seo'
 import { ZoomImage } from 'components/ZoomImage'
 import { graphql } from 'gatsby'
@@ -23,33 +29,57 @@ import slugify from 'slugify'
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
 const Title = ({ children, className = '' }) => {
-    return <h1 className={`text-3xl md:text-4xl lg:text-4xl mt-3 mb-0 lg:mb-5 lg:mt-0 ${className}`}>{children}</h1>
+    return <h1 className={`text-3xl md:text-4xl lg:text-4xl mb-1 mt-6 lg:mt-1 ${className}`}>{children}</h1>
 }
 
-const Intro = ({ featuredImage, title, featuredImageType, contributors }) => {
+export const Intro = ({
+    featuredImage,
+    featuredVideo,
+    title,
+    featuredImageType,
+    contributors,
+    titlePosition = 'bottom',
+    date,
+    tags,
+}) => {
     return (
-        <div className="mt-4 lg:mb-7 mb-4 overflow-hidden">
-            {featuredImage && (
-                <div className="relative">
+        <div className="lg:mb-7 mb-4 overflow-hidden">
+            {featuredVideo && <iframe src={featuredVideo} />}
+            {!featuredVideo && featuredImage && (
+                <div className="relative flex flex-col">
                     <GatsbyImage
                         className={`rounded-md z-0 relative ${
                             featuredImageType === 'full'
-                                ? 'before:h-3/4 before:left-0 before:right-0 before:bottom-0 before:z-[1] before:absolute before:bg-gradient-to-t before:from-black/75 [text-shadow:0_2px_10px_rgba(0,0,0,0.4)]'
+                                ? `before:h-3/4 before:left-0 before:right-0 ${
+                                      titlePosition === 'bottom' ? 'before:bottom-0' : 'before:top-0'
+                                  } before:z-[1] before:absolute ${
+                                      titlePosition === 'bottom' ? 'before:bg-gradient-to-t' : 'before:bg-gradient-to-b'
+                                  } before:from-black/75 [text-shadow:0_2px_10px_rgba(0,0,0,0.4)] lg:before:block before:hidden`
                                 : ''
                         }`}
                         image={getImage(featuredImage)}
                     />
                     {featuredImageType === 'full' && (
-                        <Title className="lg:absolute bottom-0 lg:text-white text-primary lg:px-8">{title}</Title>
+                        <>
+                            <div
+                                className={`lg:absolute flex flex-col lg:px-8 lg:py-4 ${
+                                    titlePosition === 'bottom' ? 'bottom-0' : 'top-0'
+                                }`}
+                            >
+                                <p className="m-0 opacity-70 order-last lg:order-first lg:text-white">{date}</p>
+                                <Title className="lg:text-white text-primary">{title}</Title>
+                            </div>
+                        </>
                     )}
                 </div>
             )}
-            {featuredImageType !== 'full' && <Title className="lg:mt-7 mt-4">{title}</Title>}
+            {(featuredVideo || featuredImageType !== 'full') && <Title className="lg:mt-7 mt-4">{title}</Title>}
             {contributors && (
-                <Contributors
-                    contributors={contributors}
-                    className="flex lg:hidden flex-row space-y-0 space-x-4 my-3"
-                />
+                <div className="lg:hidden my-3">
+                    {contributors.map((contributor) => (
+                        <Contributor image={contributor.image} name={contributor.name} key={contributor.name} text />
+                    ))}
+                </div>
             )}
         </div>
     )
@@ -59,34 +89,24 @@ const BlogPostSidebar = ({ contributors, date, filePath, title, tags, location, 
     return (
         <>
             {contributors && (
-                <SidebarSection className="lg:block hidden" title={`Author${contributors?.length > 1 ? 's' : ''}`}>
-                    <Contributors className="flex flex-col space-y-2" contributors={contributors} />
+                <SidebarSection>
+                    <Contributors contributors={contributors} />
                 </SidebarSection>
             )}
-            <SidebarSection title="Share">
-                <ShareLinks title={title} href={location.href} />
-            </SidebarSection>
             {pageViews?.length > 0 && (
                 <SidebarSection>
                     <PageViews pageViews={pageViews.toLocaleString()} />
                 </SidebarSection>
             )}
-            {tags && (
-                <SidebarSection title="Tag(s)">
+            {tags?.length > 0 && (
+                <SidebarSection title={`Tag${tags?.length === 1 ? '' : 's'}`}>
                     <Topics
                         topics={tags.map((tag) => ({ name: tag, url: `/blog/tags/${slugify(tag, { lower: true })}` }))}
                     />
                 </SidebarSection>
             )}
             <SidebarSection>
-                <Text>
-                    <Calendar className="h-[20px] w-[20px]" /> <time>{date}</time>
-                </Text>
-            </SidebarSection>
-            <SidebarSection>
-                <div className="bg-gray-accent-light dark:bg-gray-accent-dark rounded max-w-xs">
-                    <NewsletterForm sidebar />
-                </div>
+                <NewsletterForm sidebar />
             </SidebarSection>
         </>
     )
@@ -95,7 +115,7 @@ const BlogPostSidebar = ({ contributors, date, filePath, title, tags, location, 
 export default function BlogPost({ data, pageContext, location }) {
     const { postData } = data
     const { body, excerpt, fields } = postData
-    const { date, title, featuredImage, featuredImageType, contributors, description, tags, category } =
+    const { date, title, featuredImage, featuredVideo, featuredImageType, contributors, description, tags, category } =
         postData?.frontmatter
     const lastUpdated = postData?.parent?.fields?.gitLogLatestDate
     const filePath = postData?.parent?.relativePath
@@ -128,6 +148,7 @@ export default function BlogPost({ data, pageContext, location }) {
                 }
             />
             <PostLayout
+                stickySidebar
                 title={title}
                 contentWidth={790}
                 filePath={filePath}
@@ -155,8 +176,11 @@ export default function BlogPost({ data, pageContext, location }) {
                 <Intro
                     title={title}
                     featuredImage={featuredImage}
+                    featuredVideo={featuredVideo}
                     featuredImageType={featuredImageType}
                     contributors={contributors}
+                    date={date}
+                    tags={tags}
                 />
                 <div className="article-content">
                     <MDXProvider components={components}>
@@ -188,6 +212,7 @@ export const query = graphql`
                 hideAnchor
                 description
                 featuredImageType
+                featuredVideo
                 featuredImage {
                     publicURL
                     childImageSharp {

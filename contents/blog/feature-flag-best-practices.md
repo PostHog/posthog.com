@@ -14,7 +14,7 @@ tags:
   - Feature flags
 ---
 
-Feature flags, aka feature toggles, are awesome. New feature for your beta test group? Use a feature flag. Testing multiple variants of a new UX? Use a feature flag. Kill switch to prevent performance problems? Yup, feature flag. We could go on, but safe to say they are many benefits to feature flags.
+Feature flags, aka feature toggles, are awesome. New feature for your beta test group? Use a feature flag. Testing multiple variants of a new UX? Use a feature flag. Kill switch to prevent performance problems? Yup, feature flag. We could go on, but safe to say they are [many benefits to feature flags](/blog/feature-flag-benefits-use-cases).
 
 This post explores feature flag best practices for areas like implementation, usage, naming, and removal. Some are specific to [feature flags in PostHog](/product/feature-flags), but the principles apply no matter what [feature flag tool](/blog/best-open-source-feature-flag-tools) you use.
 

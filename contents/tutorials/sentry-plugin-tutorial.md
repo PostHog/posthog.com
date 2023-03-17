@@ -2,7 +2,7 @@
 title: How to correlate errors with product performance using Sentry
 sidebar: Docs
 showTitle: true
-featuredImage: ../images/tutorials/banners/sentry-tutorial-banner.png
+featuredImage: ../images/tutorials/banners/sentry-connector.png
 featuredTutorial: false
 date: 2022-05-04
 author: ['joe-martin']
@@ -20,7 +20,7 @@ In this tutorial, we’ll demonstrate how connecting PostHog and Sentry enables 
 
 ## Step 1: Connect PostHog with Sentry
 
-First, we need to connect Sentry and PostHog via a two-way integration so that they can share data directly. PostHog offers [Sentry integrations via Javascript](/docs/integrate/third-party/sentry#installation) and [Python](/docs/integrate/server/python#sentry) — though note that the Javascript integration requires that both PostHog and Sentry are using JS modules. 
+First, we need to connect Sentry and PostHog via a two-way integration so that they can share data directly. PostHog offers [Sentry integrations via Javascript](/docs/libraries/sentry#installation) and [Python](/docs/integrate/server/python#sentry) — though note that the Javascript integration requires that both PostHog and Sentry are using JS modules. 
 
 ## Step 2: Track Sentry errors in PostHog
 

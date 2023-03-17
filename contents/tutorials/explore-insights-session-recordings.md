@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-12-23
-featuredImage: ../images/tutorials/banners/explore-insights-session-recordings.png
+featuredImage: ../images/tutorials/banners/deep-dive.png
 topics: ['insights', 'session recording']
 --- 
 

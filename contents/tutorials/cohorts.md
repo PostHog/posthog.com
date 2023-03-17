@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['yakko-majuri']
 date: 2020-11-02
-featuredImage: ../images/tutorials/banners/cohorts.png
+featuredImage: ../images/tutorials/banners/tutorial-11.png
 tags: ["cohorts", "feature flags", "insights", "configuration", "persons"]
 ---
 

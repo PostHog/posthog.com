@@ -74,6 +74,12 @@ Thanks to [Paolo](https://github.com/PaoloC68) for raising this issue. It’d be
 
 Feel free to comment on the issue if you have any other ideas about this!
 
+## Share your feedback
+We'd love to hear anything you have to say about PostHog, good or bad. As a thank you, we'll share some awesome [PostHog merch](https://merch.posthog.com).
+
+Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog.com) with one of our teams to help us make PostHog even better!
+
+
 ## Weekly round up
 
 * [How Sustainable is a Solar Powered Website?](https://www.lowtechmagazine.com/2020/01/how-sustainable-is-a-solar-powered-website.html)

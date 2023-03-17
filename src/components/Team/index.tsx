@@ -18,9 +18,10 @@ export default function Team() {
                 const {
                     id,
                     body,
-                    frontmatter: { headshot, jobTitle, name, country, github },
+                    frontmatter: { headshot, jobTitle, name, pronouns, country, github },
                 } = teamMember
-                const title = `${name}, ${jobTitle}`
+                const nameAndPronouns = pronouns ? `${name} (${pronouns})` : name
+                const title = `${nameAndPronouns}, ${jobTitle}`
                 const image = getImage(headshot)
                 return (
                     <li key={id}>
@@ -71,6 +72,7 @@ const query = graphql`
                     }
                     jobTitle
                     name
+                    pronouns
                     country
                     github
                 }

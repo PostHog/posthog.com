@@ -35,7 +35,7 @@ This context can help you to optimize user experience, build user-led products a
 **Bottom line:** session recording is an essential tool for making better products.
 
 ### Why self-host your session recording?
-Most popular session recording tools, such as  Hotjar, FullStory and LogRocket, are exclusively cloud-based. This is convenient, but comes with several drawbacks:
+Most popular session recording tools, such as Hotjar, FullStory and LogRocket, are exclusively cloud-based. This is convenient, but comes with several drawbacks:
 
 1. They're expensive
 2. You don't control your user data
@@ -47,23 +47,20 @@ Self-hosting your session recording eliminates these drawbacks and allows you to
 
 If that sounds good to you, coming up are the best open source (or self-hosted) session recording tools right now.
 
-> Think we've missed a good open source session recording tool? Open an issue on [our website repo](https://github.com/PostHog/posthog.com) to make a suggestion.
-
 ## 1. [PostHog](https://posthog.com/)
 ![PostHog - open source product analytics replay](../images/blog/open-source-hotjar-alternatives/img1_PostHog.png)
 
-PostHog is an all-in-one, [open-source product analytics](/blog/best-open-source-analytics-tools) platform that offers all the tools required to build better products, including but not limited to [Session Recording](/product/session-recording). Other features include [Feature Flags](/product/feature-flags), [Funnels](/product/funnels), [Heatmaps](/product/heatmaps), [Experimentation](/product/experimentation-suite), [Trends](/product/trends) and [much more](/product). All of PostHog’s tools work together natively, offering extensive, actionable user insights beyond what's possible with standalone session replay tools.
+PostHog is an all-in-one, [open-source Product OS](/blog/best-open-source-analytics-tools) that offers all the tools required to build better products, including but not limited to [session recording](/product/session-recording). Other features include product analytics, [feature flags](/product/feature-flags), [funnels](/product/funnels), [heatmaps](/product/heatmaps), [experimentation](/product/experimentation-suite), [trends](/product/trends) and [much more](/product). All of PostHog’s tools work together natively, offering extensive, actionable user insights beyond what's possible with standalone session replay tools.
 
 ### Who is PostHog for?
 
-We think PostHog is the best tool for product-minded developers, data engineers and product teams. The fully comprehensive suite of analytics tools make it an ideal choice for any company that wants to gain wide-ranging insights into their usage and engagement metrics, while keeping all of their data in one manageable platform. 
+We think PostHog is the best tool for product-minded developers, data engineers and product teams. The comprehensive suite of analytics tools make it an ideal choice for any company that wants to gain wide-ranging insights into their usage and engagement metrics, while keeping all of their data in one manageable platform. 
 
-Are we biased here? Yes. Are we wrong? We'll let you be the judge. As we're open source, you can [self-host PostHog for free](/pricing) to find out for yourself.
+Are we biased here? Yes. Are we wrong? We'll let you be the judge. As we're open source, you can [self-host PostHog](/docs/self-host) to find out for yourself.
 
 ### Strengths
 
 - Fully-featured product analytics suite
-- Unlimited scaling
 - Front-end events captured out of the box
 - CSS selectors block sensitive data to protect user privacy
 - Customisable data retention
@@ -73,15 +70,11 @@ Are we biased here? Yes. Are we wrong? We'll let you be the judge. As we're open
 
 ### How much does it cost?
 
-PostHog (self-hosted and cloud) is free up to 1 million captured events each month when you enter card details.
-
-[Session recording](/docs/user-guides/recordings) is **included at no extra cost** in all plans.
+PostHog Cloud is free up to 1 million captured events and 10,000 recordings per month when you enter a card. You can set billing limits to avoid surprise bills.
 
 ### Is it open source?
 
-Yes! PostHog’s open source plans are available under an MIT license. Find out more about [PostHog’s self-hosting plans](/pricing).
-
-<ArrayCTA />
+Yes! PostHog Open Source is available under an MIT license and can be deployed with Docker Compose.
 
 **Further reading:**
 - [The best free and open source A/B testing tools](/blog/best-open-source-ab-testing-tools)

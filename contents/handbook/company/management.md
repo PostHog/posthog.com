@@ -46,12 +46,9 @@ Decisions aren't just about buying a piece of software or choosing a color for a
 
 Again, we've hired the best people and have high talent density, so we trust everyone to make these kinds of decisions.
 
-As a manager, it's tempting to see yourself as the sole owner of all the information, and give it out sparingly.
-People will come to you often with questions (because they don't have the context) and when they do you'll get more validation that holding all the context yourself makes you an Important Person.
+As a manager, it's tempting to see yourself as the sole owner of all the information, and give it out sparingly. People will come to you often with questions (because they don't have the context) and when they do you'll get more validation that holding all the context yourself makes you an Important Person.
 
 What managers should aim for at PostHog is to make themselves obsolete. Share as much context as possible, in written form and in a public channel. That way everyone will be able to do their best work.
-
-Managers also use 1-1s as a useful tool for helping to set context - we've written [some FAQs](/handbook/company/1-1s) on how to make sure you get the most out of these. 
 
 ### Part-time managers
 
@@ -72,7 +69,7 @@ There are teams at PostHog that need to work across functions, so we have an ant
 That means:
 * Task setting happens transparently in [Small Teams](/handbook/company/small-teams). Anyone can read notes from or show up to any of the sprint planning meetings.
 * Anyone can give feedback to anyone else on their priorities, and it's our expectation they do so.
-* Every [Small Team](structure) has complete control over what they ship.
+* Every [Small Team](/structure) has complete control over what they ship.
 
 This has the added benefit of cross functional teams forming as needed, whilst people having a specialist manager (i.e. an engineer managing engineers) as far as we are able. 
 
@@ -81,9 +78,9 @@ This has the added benefit of cross functional teams forming as needed, whilst p
 Schedule [regular 1:1s](https://github.com/PostHog/meta/tree/main/.github/1-1-TEMPLATES). There are three types:
   - First 1-1 when a team member starts
   - Weekly 1-1s as a regular check in
-  - Quarterly 1-1s to talk about longer term career plans (make sure you put these in the calendar!)
+  - Bi-annual 1-1s to talk about longer term career plans (make sure you put these in the calendar!)
 
-Talking about long-term career plans every now and again is really important but easy to let slip when things get busy. If you can help people achieve long term plans (whilst hitting PostHog's short term needs) - whether at PostHog or not, you'll get people's best work!
+Talking about long-term career plans every now and again is really important but easy to let slip when things get busy. If you can help people achieve long term plans while hitting PostHog's short term needs - whether at PostHog or not - you'll get people's best work!
 
 ### 1-1s and team member growth
 
@@ -93,29 +90,24 @@ Most people do a weekly or bi-weekly 1-1 with their manager, with a 30min minimu
 
 Separately, you should take time once every 6 months to zoom out and talk about your team's growth path at PostHog and how you can support them. Again, the template has some useful questions you can ask. 
 
-> There is no formal structure for a growth path at PostHog - it will be unique to the needs and experience of each person.
+> There is no formal structure for a growth path at PostHog - it will be unique to the needs and experience of each person. You can read more about how we think about individual career progression at PostHog here. 
 
 If you want to learn more, check out First Round Review for at least [another 6 articles](https://review.firstround.com/managers-take-your-1-1s-to-the-next-level-with-these-6-must-reads) on how to have great 1-1s! 
 
 ## Management training
 
-We provide PostHog managers with training, because:
+We provide PostHog managers with (light) training, because:
 
 a) Some of those people have never managed before
 b) Some of those people may have managed, but never had any support or training
 c) Those who have managed and had training will benefit because PostHog has a very particular culture and approach to management
 
-Our approach is discussion-based and informal. We do everything internally as we believe this will result in a more relevant and useful experience.
+Our approach is discussion-based and informal. We do everything internally as we believe this will result in a more relevant and useful experience. This will keep evolving as we scale - managing at a 40 person startup is very different to managing at a 500 person scaleup. 
 
 We have held three sessions and plan to do one more:
 
 - _Part 1: The basics_ - [deck here](https://docs.google.com/presentation/d/1TLMHx-w1zLjZTXoP8rxWYHkAzenS0g9LKRbvQ4jGsX0/edit#slide=id.p)
-- _Part 2: Supporting team member growth_ - no deck. We discussed:
-  - What are people doing today around team member growth?
-  - Why does growth matter to your team members?
-  - Example growth conversations & plans (good and bad)
-  - What does a good growth conversation & plan look like at PostHog?
-  - The output of this session was the [section above](https://posthog.com/handbook/company/management#how-do-i-make-sure-my-direct-reports-are-happy-and-productive), which includes new 1-1 templates to help guide growth conversations
+- _Part 2: Supporting team member growth_ - [deck here](https://docs.google.com/presentation/d/1XFxuj6eiW82v_RZfrzGtIyZZ5V0uRLvy8sKPiMy7l8Y/edit?usp=sharing)
 - _Part 3: Difficult conversations - [deck here](https://docs.google.com/presentation/d/10nRDDpfaZKOToqP6l2aqKVkXd8k1gu-lOU7Ts4eehAM/edit?userstoinvite=james.g%40posthog.com&actionButton=1#slide=id.p)_
 
 ### Ongoing support for managers

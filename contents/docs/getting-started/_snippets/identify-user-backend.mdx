@@ -1,0 +1,64 @@
+<MultiLanguage selector="tabs">
+
+```node
+client.identify({
+    distinctId: 'distinct_id',
+    properties: {
+        name: 'Max Hedgehog',
+        email: 'max@hedgehogmail.com',
+    },
+})
+```
+
+```python
+posthog.identify(
+    'distinct_id',
+    {
+        'name': 'Max Hedgehog',
+        'email': 'max@hedgehogmail.com'
+    }
+)
+```
+
+```php
+PostHog::identify(array(
+  'distinctId' => 'distinct_id',
+  'properties' => array(
+    'name' => 'Max Hedgehog'
+    'email' => 'max@hedgehogmail.com',
+  )
+));
+```
+
+```ruby
+posthog.identify({
+  distinct_id: "distinct_id",
+  properties: {
+    name: "Max Hedgehog",
+    email: "max@hedgehogmail.com"
+  }
+})
+```
+
+```go
+client.Enqueue(posthog.Identify{
+  DistinctId: "distinct_id",
+  Properties: posthog.NewProperties().
+    Set("name", "Max Hedgehog").
+    Set("email", "max@hedgehogmail.com"),
+})
+```
+
+```java
+posthog.identify(
+  "distinct_id",
+  new HashMap<String, Object>() {
+    {
+      put("name", "Max Hedgehog");
+      put("email", "max@hedgehogmail.com");
+    }
+  }
+);
+```
+
+</MultiLanguage>

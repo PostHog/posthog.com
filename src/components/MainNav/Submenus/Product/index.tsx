@@ -2,7 +2,19 @@ import CallToAction from '../CallToAction'
 import Link from 'components/Link'
 import React from 'react'
 import { Wrapper } from '../Wrapper'
-import ProductIcons from 'components/ProductIcons'
+import {
+    AbTesting,
+    API,
+    AppLibrary,
+    CorrelationAnalysis,
+    DataWarehouse,
+    EventPipelines,
+    FeatureFlags,
+    Funnels,
+    Heatmaps,
+    SelfHosting,
+    SessionRecording,
+} from 'components/ProductIcons'
 import { graphql, useStaticQuery } from 'gatsby'
 import { Link as ScrollLink } from 'react-scroll'
 import { useLocation } from '@reach/router'
@@ -25,32 +37,32 @@ const leftColMenuItems: LeftColMenuItems[] = [
         features: [
             {
                 title: 'Product analytics',
-                icon: ProductIcons.funnels,
+                icon: <Funnels />,
                 url: '/product#product-analytics',
             },
             {
                 title: 'Session recording',
-                icon: ProductIcons.sessionRecording,
+                icon: <SessionRecording />,
                 url: '/product/session-recording',
             },
             {
                 title: 'Heatmaps',
-                icon: ProductIcons.heatmaps,
+                icon: <Heatmaps />,
                 url: '/product/heatmaps',
             },
             {
                 title: 'Feature flags',
-                icon: ProductIcons.featureFlags,
+                icon: <FeatureFlags />,
                 url: '/product/feature-flags',
             },
             {
                 title: 'A/B testing',
-                icon: ProductIcons.abTesting,
+                icon: <AbTesting />,
                 url: '/product/experimentation-suite',
             },
             {
                 title: 'Correlation analysis',
-                icon: ProductIcons.correlationAnalysis,
+                icon: <CorrelationAnalysis />,
                 url: '/product/correlation-analysis',
             },
         ],
@@ -60,27 +72,27 @@ const leftColMenuItems: LeftColMenuItems[] = [
         features: [
             {
                 title: 'Event pipelines',
-                icon: ProductIcons.eventPipelines,
+                icon: <EventPipelines />,
                 url: '/product#event-pipelines',
             },
             {
                 title: 'Data warehouse',
-                icon: ProductIcons.dataWarehouse,
+                icon: <DataWarehouse />,
                 url: '/product#data-warehouse',
             },
             {
                 title: 'App library',
-                icon: ProductIcons.appLibrary,
+                icon: <AppLibrary />,
                 url: '/product#apps',
             },
             {
-                title: 'Self-hosting',
-                icon: ProductIcons.selfHosting,
-                url: '/product#self-hosting',
+                title: 'Open source',
+                icon: <SelfHosting />,
+                url: '/product#open-source',
             },
             {
                 title: 'API',
-                icon: ProductIcons.api,
+                icon: <API />,
                 url: '/product#api',
             },
         ],

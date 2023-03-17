@@ -83,7 +83,7 @@ export function Wrapper({
             <div className="z-10 lg:block text-almost-black relative top-0">
                 <motion.div
                     style={{ borderRadius }}
-                    className="lg:bg-white lg:shadow-lg lg:dark:bg-gray-accent-dark overflow-hidden lg:my-0 md:mt-6"
+                    className="bg-white lg:shadow-lg dark:bg-gray-accent-dark overflow-hidden lg:my-0 md:mt-6"
                     variants={variants}
                     initial="hidden"
                     animate="shown"

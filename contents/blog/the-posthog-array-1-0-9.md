@@ -80,6 +80,12 @@ Here is what we thought was cool and interesting in the last week:
 * [Opensource.builders](https://github.com/junaid33/opensource.builders) (this is a really cool way to find and request open-source alternatives to popular software)
 * [Jitsi](https://github.com/jitsi/jitsi-meet) (this is a great project with simple and scalable video conferencing, something I’m sure everyone is beginning to use a lot more of.)
 
+## Share your feedback
+We'd love to hear anything you have to say about PostHog, good or bad. As a thank you, we'll share some awesome [PostHog merch](https://merch.posthog.com).
+
+Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog.com) with one of our teams to help us make PostHog even better!
+
+
 ## PostHog news
 
 All of PostHog will be back in the UK in light of the border closures that have been happening but will aiming to cover support queries through most of US time as well as now Europe and GMT.

@@ -27,7 +27,7 @@ In addition to the work Marius put into the iOS integration, this week you can a
 
 Check out our [Android docs](/docs/integrate/client/android) on how to install it on your app.
 
-### [Gatsby App](/docs/integrate/third-party/gatsby)
+### [Gatsby App](/docs/libraries/gatsby)
 
 ![](../images/04/gatsbyplugin.gif)
 
@@ -70,6 +70,12 @@ This is another PR this week that we have the community to thank for, [solnsubug
 * [Eric](https://github.com/eLRuLL) added a [strict flake8](https://github.com/PostHog/posthog/pull/660) setup as well as improvements, laying the ground work for code linting and likely more prs regarding darker.
 * [Upgraded](https://github.com/PostHog/posthog/pull/663) Kea to 2.0.0-beta.5.
 * We continue to implement AntD as above in [Setup](https://github.com/PostHog/posthog/pull/621).
+
+## Share your feedback
+We'd love to hear anything you have to say about PostHog, good or bad. As a thank you, we'll share some awesome [PostHog merch](https://merch.posthog.com).
+
+Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog.com) with one of our teams to help us make PostHog even better!
+
 
 ## Favorite issue
 

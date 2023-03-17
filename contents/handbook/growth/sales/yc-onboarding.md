@@ -86,7 +86,10 @@ Then you should:
 
 Customers have the following giveaway options. Our default are a choice of AirPods or Timbuk2 rucksack for folks in the US or Canada - if they live outside these countries, you should offer them a choice between $150 merch credit or Open Collective donation. 
 
-Please do _not_ send Airpods or Timbuk2 outside of the US and Canada, no matter how much someone asks - this creates big customs headaches for us and is a bad experience for the user. 
+Please do _not_ send Airpods or Timbuk2 outside of the US and Canada - this creates big customs headaches for us and is a bad experience for the user. If a user outside those countries is desperate for them, then either:
+
+- Suggest they give us a US/Canada postal address they can forward or collect from
+- Send them the item but at their own risk for paying customs fees etc.
 
 <table>
 <thead>
@@ -120,7 +123,7 @@ AirPods or Timbuk2 backpack
 </td>
 <td valign="top">
 
-US and Canada only
+US and Canada addresses only*
 
 </td>
 <td valign="top">

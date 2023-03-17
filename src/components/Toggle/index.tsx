@@ -34,7 +34,7 @@ export default function Toggle({
                     aria-hidden="true"
                     className={classNames(
                         checked ? 'translate-x-5' : 'translate-x-0',
-                        'pointer-events-none absolute left-0 inline-block h-4 w-4 rounded-full bg-[#0e0e0e] dark:bg-[#999] shadow transform ring-0 transition-transform ease-in-out duration-200'
+                        'pointer-events-none absolute left-0 inline-block h-4 w-4 rounded-full bg-[#0e0e0e] dark:bg-[#999] transform ring-0 transition-transform ease-in-out duration-200'
                     )}
                 />
             </Switch>

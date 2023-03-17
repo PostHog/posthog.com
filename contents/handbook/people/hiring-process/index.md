@@ -10,7 +10,7 @@ hideAnchor: true
 
 Our goal is to build a [diverse](/handbook/company/diversity), world-class team that allows us to act and iterate fast, with a high level of [autonomy and innovation](/handbook/company/small-teams).
 
-Our recruitment strategy is to run:
+Our [recruitment strategy](/blog/early-stage-startup-hiring-strategy) is to run:
 - **100% inbound by default** - effectively a word of mouth strategy, like our marketing and sales model.
 - Supplement this with **occasional, targeted sourcing** to increase the pool of diverse candidates (if needed).
 
@@ -28,9 +28,9 @@ This has resulted in the highest number of qualified and motivated candidates re
 
 | **Position title**        | **Location we're happy to hire in** | **Small Team**        | **Manager** | **Interview Process**                                                                                                                          | **SuperDay Task**              |
 |---------------------------|----------------------------------------|-----------------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|
-| Full Stack Engineer       | GMT -5:00 to +2:00                   | Experimentation  | Eric | 1) Culture Screen - Coua<br/> 2) Technical Screen - Eric<br/> 3) Engineering Culture Screen - Tim<br/> 4) SuperDay Assessment - Eric, Li, Neil, Tim & James H. | Live Task (link not available) |
-| Full Stack Engineer       | GMT 0:00 to +2:00                   | Product Analytics  | Marius | 1) Culture Screen - Coua<br/> 2) Technical Screen - Marius<br/> 3) Engineering Culture Screen - Tim<br/> 4) SuperDay Assessment - Marius, Paul, Michael, Karl, Luke, Tim & James H. | Live Task (link not available) |
-| Site Reliability Engineer       | GMT -8:00 to +2:00                   | Infrastructure  | Ellie | 1) Culture Screen - Coua<br/> 2) Technical Screen - Ellie<br/> 3) Engineering Culture Screen - Tim<br/> 4) SuperDay Assessment - Ellie, Daniel, Harry, James G., Tim & James H. | Live Task (link not available) |
+| Full Stack Engineer       | GMT -5:00 to +2:00                   | Experimentation  | Eric | 1) Culture Screen - Coua<br/> 2) Technical Screen - Eric<br/> 3) Small Team Culture Screen - James H.<br/> 4) SuperDay Assessment - Eric, Li, Neil, Tim & James H. | Live Task (link not available) |
+| Full Stack Engineer       | GMT 0:00 to +2:00                   | Product Analytics  | Marius | 1) Culture Screen - Coua<br/> 2) Technical Screen - Marius<br/> 3) Small Team Culture Screen - James H.<br/> 4) SuperDay Assessment - Marius, Paul, Michael, Karl, Luke, Tim & James H. | Live Task (link not available) |
+| Technical Content Marketer      | GMT -8:00 to +2:00                   | Marketing  | Charles | 1) Culture Screen - Coua<br/> 2) Technical Screen - Charles & Andy<br/> 3) Small Team Culture Screen - James H.<br/> 4) Super Week Assessment - Charles, Andy, Ian, Joe, Tim & James H. | Live Task (link not available) |
 
 Tasks are only available internally - please do not share these publicly. 
 

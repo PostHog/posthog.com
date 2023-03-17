@@ -118,6 +118,12 @@ On the team side, we welcomed Yakko as a Technical Writer and Developer - you'll
 
 Lottie, our legendary designer, is moving to Senegal from Guildford in the UK. She'll start packing soon as she leaves this weekend.
 
+## Share your feedback
+We'd love to hear anything you have to say about PostHog, good or bad. As a thank you, we'll share some awesome [PostHog merch](https://merch.posthog.com).
+
+Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog.com) with one of our teams to help us make PostHog even better!
+
+
 ### Open roles
 
 Full stack engineers that love hedgehogs - [we want you!](https://posthog.com/careers)

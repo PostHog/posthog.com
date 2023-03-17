@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-11-22
-featuredImage: ../images/tutorials/banners/feature-retention.png
+featuredImage: ../images/tutorials/banners/tutorial-10.png
 tags: ["stickiness", "dashboards", "retention"]
 ---
 
@@ -77,4 +77,4 @@ Now you have a better idea of the features that drive user retention and keep th
 ## Further reading
 
 - [How to calculate and lower churn rate with PostHog](/tutorials/churn-rate)
-- [Measuring retention and tracking churn](/tutorials/retention)
+- [Our complete guide to churn analysis](/blog/customer-churn-analysis-guide)

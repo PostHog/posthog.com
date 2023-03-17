@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-11-28
-featuredImage: ../images/tutorials/banners/non-technical-guide-to-data.png
+featuredImage: ../images/tutorials/banners/tutorial-9.png
 tags: ["data management"]
 ---
 

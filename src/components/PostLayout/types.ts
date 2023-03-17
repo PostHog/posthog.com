@@ -1,4 +1,5 @@
 import { IGatsbyImageData } from 'gatsby-plugin-image'
+import React from 'react'
 
 export interface ITopic {
     name: string
@@ -14,6 +15,7 @@ export interface IContributor {
 }
 
 export interface IMenu {
+    icon?: string | React.ReactNode
     name: string
     url?: string
     children?: IMenu[]
@@ -21,6 +23,10 @@ export interface IMenu {
     handleLinkClick?: () => void
     topLevel?: boolean
     menuType?: 'scroll' | 'standard'
+    badge?: {
+        title: string
+        className?: string
+    }
 }
 
 export interface ICrumb {
@@ -54,12 +60,10 @@ export interface IProps {
         value: string
         depth: number
     }[]
-    children: React.ReactNode
     sidebar?: React.ReactNode
     contentWidth?: number | string
     questions?: React.ReactNode
     menu?: IMenu[]
-    article?: boolean
     title: string
     filePath?: string
     breadcrumb?: ICrumb[]
@@ -74,4 +78,10 @@ export interface IProps {
         right?: number
     }
     searchFilter?: string
+    mobileMenu?: boolean
+    darkMode?: boolean
+    fullWidthContent?: boolean
+    setFullWidthContent?: (fullWidth: boolean) => void
+    contentContainerClasses?: string
+    stickySidebar?: boolean
 }

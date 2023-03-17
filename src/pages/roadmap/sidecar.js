@@ -30,6 +30,7 @@ export default function RoadmapPage() {
                 <UserProvider>
                     <div className="border-t border-dashed border-gray-accent-light">
                         <PostLayout
+                            darkMode={false}
                             contentWidth={'100%'}
                             article={false}
                             title={'Roadmap'}

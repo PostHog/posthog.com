@@ -1,6 +1,7 @@
 import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import Link from 'components/Link'
+import docs from 'sidebars/docs.json'
 import CheckIcon from '../../images/check.svg'
 import XIcon from '../../images/x.svg'
 
@@ -39,16 +40,15 @@ type LibraryFeatures = {
 }
 
 type LibraryData = {
-    clientLibs: {
-        nodes: LibraryNode[]
-    }
-    serverLibs: {
+    sdks: {
         nodes: LibraryNode[]
     }
     frameworks: {
         nodes: FrameworkNode[]
     }
 }
+
+const sdkSidebar = docs.find((item) => item.name === 'SDKs')?.children || []
 
 const IntegrateOption = (props: LibraryNode | FrameworkNode) => (
     <Link
@@ -64,24 +64,17 @@ const IntegrateOption = (props: LibraryNode | FrameworkNode) => (
     </Link>
 )
 
-export const Client = () => {
-    const { clientLibs } = useStaticQuery<LibraryData>(query)
+export const SDKs = () => {
+    const { sdks } = useStaticQuery<LibraryData>(query)
 
-    return (
-        <div className="grid grid-cols-3 -mt-2 mb-6 border-t border-l border-dashed border-gray-accent-light dark:border-gray-accent-dark">
-            {clientLibs.nodes.map((node) => (
-                <IntegrateOption key={node.frontmatter.title} {...node} />
-            ))}
-        </div>
+    sdks.nodes.sort(
+        (a, b) =>
+            sdkSidebar.findIndex((c) => c.url === a.fields.slug) - sdkSidebar.findIndex((c) => c.url === b.fields.slug)
     )
-}
-
-export const Server = () => {
-    const { serverLibs } = useStaticQuery<LibraryData>(query)
 
     return (
         <div className="grid grid-cols-3 -mt-2 mb-6 border-t border-l border-dashed border-gray-accent-light dark:border-gray-accent-dark">
-            {serverLibs.nodes.map((node) => (
+            {sdks.nodes.map((node) => (
                 <IntegrateOption key={node.frontmatter.title} {...node} />
             ))}
         </div>
@@ -102,16 +95,8 @@ export const Frameworks = () => {
 
 const query = graphql`
     {
-        clientLibs: allMdx(
-            filter: { slug: { glob: "docs/integrate/client/*" } }
-            sort: { fields: fields___pageViews, order: DESC }
-        ) {
-            nodes {
-                ...sdk
-            }
-        }
-        serverLibs: allMdx(
-            filter: { slug: { glob: "docs/integrate/server/*" } }
+        sdks: allMdx(
+            filter: { slug: { glob: "docs/libraries/*" } }
             sort: { fields: fields___pageViews, order: DESC }
         ) {
             nodes {
@@ -119,7 +104,7 @@ const query = graphql`
             }
         }
         frameworks: allMdx(
-            filter: { slug: { glob: "docs/integrate/third-party/*" } }
+            filter: { slug: { glob: "docs/libraries/*" } }
             sort: { fields: fields___pageViews, order: DESC }
         ) {
             nodes {
@@ -160,8 +145,3 @@ const query = graphql`
         }
     }
 `
-
-export const SDKs = {
-    Client,
-    Server,
-}

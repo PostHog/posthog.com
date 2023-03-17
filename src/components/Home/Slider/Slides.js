@@ -462,7 +462,7 @@ export const DataWarehouse = () => {
                 <Content>
                     <Title title={'Data warehouse'} />
                     <Subtitle className="text-[14px] md:text-[18px]" subtitle="Sync with your warehouse." />
-                    <Description description="Or keep customer data in-house by self-hosting and using PostHog’s built-in data warehouse." />
+                    <Description description="PostHog syncs easily with BigQuery, Snowflake, or Redshift via API." />
 
                     <CTA url="/docs/api" title="Explore what you can do" />
                 </Content>
@@ -499,32 +499,27 @@ export const SelfHosting = () => {
                     animate={{ translateY: 0 }}
                 >
                     <StaticImage
-                        alt="A hedgehog dressed as a professor pointing at a chalkboard with a complex SQL statement written on it"
+                        alt="A hedgehog working on a laptop while standing, using some sort of internet link that connects to the stars..."
                         placeholder="none"
                         quality={100}
                         objectFit="contain"
                         className="w-full h-full"
-                        src="./images/self-hosting.png"
+                        src="./images/open-source.png"
                     />
                 </motion.div>
             </ImageContainer>
             <ContentContainer>
                 <Content>
-                    <Title title={'Self-hosting'} />
-                    <Subtitle className="text-[14px] md:text-[18px]" subtitle="Plus get full SQL access." />
-                    <Description description="Hosting on-prem or private cloud means customer data never has to leave your infrastructure." />
+                    <Title title={'Open source'} />
+                    <Subtitle className="text-[14px] md:text-[18px]" subtitle="Get full access to source code." />
+                    <p className="text-[16px] m-0 leading-tight text-primary/70">
+                        Audit the entire PostHog codebase for security or compliance on{' '}
+                        <a href="https://github.com/posthog/posthog">GitHub</a>. Or host your own hobby deployment.
+                    </p>
 
-                    <CTA url="/docs/self-host" title="Learn more" />
+                    <CTA url="/docs/self-host" title="Learn more about self-hosting" />
                 </Content>
                 <div className="flex items-end mt-auto w-full">
-                    <div className="hidden md:block mb-3">
-                        <hr className="w-[20px] h-[3px] rounded-full" />
-                        <div className="text-primary/80 inline-block leading-tight text-[12px]">
-                            Deploy with <Link to="/docs/self-host/deploy/aws">AWS</Link>,{' '}
-                            <Link to="/docs/self-host/deploy/gcp">Google Cloud</Link>,{' '}
-                            <Link to="/docs/self-host/deploy/digital-ocean">DigitalOcean</Link>, and more.
-                        </div>
-                    </div>
                     <div className="md:relative w-3/4">
                         <motion.div
                             transition={{ delay: 0.5 }}

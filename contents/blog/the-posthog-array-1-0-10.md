@@ -67,6 +67,12 @@ We obviously prioritize bug fixing but what was cool was that the issue created 
 * [Intro to Python](https://news.ycombinator.com/item?id=22669084) (Aaron mainly found this cool as it’s an angle for people who haven’t studied CS)
 * [Dolt](https://github.com/liquidata-inc/dolt) (It’s Git for data, although there have been a fair few options in this space we thought this was interesting.)
 
+## Share your feedback
+We'd love to hear anything you have to say about PostHog, good or bad. As a thank you, we'll share some awesome [PostHog merch](https://merch.posthog.com).
+
+Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog.com) with one of our teams to help us make PostHog even better!
+
+
 ## PostHog news
 
 If you follow [our Twitter](https://twitter.com/PostHog), you may have seen us posting about hiring – we are keen on growing the PostHog team so we can build new features even faster – if you’re an engineer who is interested (or knows someone who maybe is) you can find out more on our [careers](/careers) page.

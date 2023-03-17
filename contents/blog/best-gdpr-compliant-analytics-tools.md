@@ -65,7 +65,7 @@ PostHog is especially helpful for product teams that want to understand how user
 - **EU Cloud Hosting:** <span className="text-green text-lg">✔</span>
 - **Cookieless Tracking:** <span className="text-green text-lg">✔</span>
 
-PostHog can be deployed onto your own infrastructure, so you retain full control over who your data is shared with and where it is hosted. Alternatively, you can use [PostHog Cloud EU](/eu), a fully-managed service with servers hosted in Frankfurt, Germany.
+Smaller projects can self-host PostHog Open Source using Docker Compose, but [PostHog Cloud EU](/eu), a fully-managed service with servers hosted in Frankfurt, Germany, is the best option for most users.
 
 While PostHog uses cookies by default, it can be [configured not to use cookies](/tutorials/cookieless-tracking). To use PostHog without cookies, data is stored in a Javascript object in `memory` that only lasts the duration of the pageview.
 
@@ -105,7 +105,7 @@ Plausible is made and hosted in the EU. It collects no personally identifiable i
 
 #### How much does Plausible cost?
 
-Plausible charges by pageview with 1 million pageviews costing €69 per month – approx. $71. Paying annually grants you two free months per year – i.e. €69 per month becomes €690 per year. The open source version is free to self-host via Docker.
+Plausible charges by pageview with 1 million pageviews costing €69 per month – approx. $71. Paying annually grants you two free months per year – i.e. €69 per month becomes €690 per year. The open source version is free to self-host via Docker Compose.
 
 ### 3. Fathom
 

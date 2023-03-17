@@ -67,10 +67,27 @@ The performance review process centres on a single person for one hour, involves
 
 ## Quarterly team surveys
 
-We introduced quarterly team surveys in Q1 2021 to give everyone the opportunity to share their honest opinion of how things are going. While we all give feedback regularly, we wanted to gather the feedback in a way that allows us to track it over time and see how we progress.
+We run quarterly surveys using the _Pulse Surveys by Deel_ Slack app. These are set up to run automatically, including reminder messages in Slack, so you don't need to chase people manually. Charles, Grace, and Coua have admin access to the surveys in Slack. 
 
-The questions are based on the ones used by [Culture Amp](https://www.cultureamp.com/) and adjusted for our needs. The questions cover categories such as Company Confidence, Culture, Growth and Development etc.
+The questions are based on the ones used by [Culture Amp](https://www.cultureamp.com/) and cover categories such as Company Confidence, Culture, Growth etc. on a 1 ('strongly disagree') to 5 ('strongly agree') scale. The benchmark used is against Culture Amp’s ‘new tech’ companies with less than 200 people. We then take the average score out of 5 and multiple it by 20 to get a % number. A bit rough, but close enough so we can compare with the benchmark.
 
-The questions follow a simple linear scale ranging from 1 (strongly disagree) to 5 (strongly agree). We also added an optional comment field, in case there you have more detailed feedback. In line with our values, we have decided to _not_ make this anonymous.
+Only the People & Ops and Exec teams have access to the full list of responses, which are not anonymous. 
 
-We run the survey at the end of each quarter and share the results with the team afterwards. We also share some high level results on the [people page.](https://posthog.com/handbook/small-teams/people)
+We follow a template to report a summary of the results in an Issue. [You can view the latest survey results here](https://github.com/PostHog/company-internal/issues/960) - just copy the formatting ever.  
+
+### Current list of questions
+
+- I understand PostHog's goals and can see how my work contributes to them. (1 to 5)
+- At PostHog, we have open and honest two-way communication. (1 to 5)
+- I receive appropriate recognition for my work at PostHog. (1 to 5)
+- I believe that my total compensation (salary + equity + benefits) is fair, relative to similar roles at other companies. (1 to 5)
+- The leaders at PostHog keep people informed about what is happening. (1 to 5)
+- If you were to leave PostHog, what would be the reason? (Free text field)
+- PostHog is in a position to really succeed over the next three years. (1 to 5)
+- What motivates you right now? (Free text field)
+- My manager and team around me genuinely care about my wellbeing. (1 to 5)
+- I feel like I am learning and growing at PostHog. (1 to 5)
+- Generally, I believe my workload is reasonable for my role and I am able to arrange time out from work when I need it. (1 to 5)
+- The support I am receiving and processes we have in place allow me to do my best possible work. (1 to 5)
+- I would recommend PostHog as a great place to work. (1 to 5)
+- I see myself still working at PostHog in two years' time. (1 to 5)

@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-11-21
-featuredImage: ../images/tutorials/banners/identifying-users-guide.png
+featuredImage: ../images/tutorials/banners/tutorial-5.png
 tags: ["configuration", "persons"]
 ---
 

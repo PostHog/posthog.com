@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-11-15
-featuredImage: ../images/tutorials/banners/next-steps-after-installing.png
+featuredImage: ../images/tutorials/banners/tutorial-4.png
 tags: ["configuration", "events", "dashboards", "team collaboration", "notifications and alerts", "experimentation"]
 ---
 
@@ -147,7 +147,7 @@ If there are key events or actions you want to track, such as a potential custom
 
 ![Webhook](../images/tutorials/next-steps-after-installing/hook.png)
 
-You can also subscribe to dashboards in Slack or via email. Just go to your dashboard, click the three dots to the left of share, click “subscribe,” and “new subscription.” If you want to send dashboards to Slack, you’ll need to configure our [Slack integration](/docs/integrate/third-party/slack). If you want dashboards by email, just fill in the details like the name, email, and recurrence, then click “create subscription.” 
+You can also subscribe to dashboards in Slack or via email. Just go to your dashboard, click the three dots to the left of share, click “subscribe,” and “new subscription.” If you want to send dashboards to Slack, you’ll need to configure our [Slack integration](/docs/libraries/slack). If you want dashboards by email, just fill in the details like the name, email, and recurrence, then click “create subscription.” 
 
 Finally, if you want your data backed up or sent to an external service such as [BigQuery](/apps/bigquery-export), [S3](/apps/s3-export), or [Snowflake](/apps/snowflake-export), you can use one of our many [“data-out” apps](/apps). Just go to “browse apps,” search for the one you want, configure it, and start sending the data to the other places you want it.
 
@@ -167,6 +167,7 @@ Read more about setting up and using experiments in [our product manual](/manual
 
 ## Further reading
 
-- Capture more events by [deploying a reverse proxy to PostHog Cloud](/docs/integrate/proxy)
+- [The full documentation on the PostHog JavaScript SDK](/docs/integrate/client/js)
+- [How to set up Next.js analytics, feature flags, and more](/tutorials/nextjs-analytics)
 - [Complete guide to event tracking](/tutorials/event-tracking-guide)
 - [Calculating average session duration, time on site, and other session-based metrics](/tutorials/session-metrics)

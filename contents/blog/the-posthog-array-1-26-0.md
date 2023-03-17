@@ -163,6 +163,10 @@ If you'd love to help us build PostHog, we're currently hiring for the following
 
 Check out our [Careers page](https://posthog.com/careers) for more info.
 
+## Share your feedback
+We'd love to hear anything you have to say about PostHog, good or bad. As a thank you, we'll share some awesome [PostHog merch](https://merch.posthog.com).
+
+Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog.com) with one of our teams to help us make PostHog even better!
 
 ## Bug Fixes and Performance Improvements
 

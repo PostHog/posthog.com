@@ -2,13 +2,14 @@ import React from 'react'
 import { CallToAction } from 'components/CallToAction'
 import { Slack } from 'components/Icons/Icons'
 import Layout from 'components/Layout'
-import PostLayout, { SidebarSection } from 'components/PostLayout'
+import PostLayout from 'components/PostLayout'
 import { SEO } from 'components/seo'
 import { squeakProfileLink } from 'lib/utils'
 import { Squeak } from 'squeak-react'
 import { graphql } from 'gatsby'
 import Link from 'components/Link'
 import community from 'sidebars/community.json'
+import SidebarSection from 'components/PostLayout/SidebarSection'
 
 interface ITopic {
     label: string
@@ -52,7 +53,7 @@ export default function SqueakTopics({ data }: IProps) {
             <SEO title={`${data.squeakTopic.label} - PostHog`} />
             <Layout>
                 <PostLayout title={data.squeakTopic.label} menu={community} sidebar={<TopicSidebar />} hideSurvey>
-                    <section className="my-8 lg:my-0">
+                    <section className="pb-12">
                         <div className="mb-4">
                             <Link to="/questions" className="text-gray">
                                 &larr; Back to questions

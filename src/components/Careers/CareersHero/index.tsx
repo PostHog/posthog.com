@@ -11,8 +11,8 @@ export const CareersHero = () => {
 
     return (
         <div className="careers-hero lg:pt-12 pb-12 md:pb-18">
-            <div className="relative z-10 rounded">
-                <div className="md:absolute -top-8 xl:-top-6 2xl:-top-8 right-0 md:w-1/2 lg:w-[45%] 2xl:w-[45%]">
+            <div className="relative rounded">
+                <div className="md:absolute -top-8 xl:-top-6 2xl:-top-8 right-0 md:w-1/2 lg:w-[45%] 2xl:w-[45%] max-w-5xl">
                     <StaticImage
                         src="../../../images/construction-hogs-with-text.png"
                         alt="Construction hogs taking a lunch break"

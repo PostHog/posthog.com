@@ -81,7 +81,7 @@ function AppsPage({ location }) {
                 image={`/og-images/apps.jpeg`}
             />
             <header className="py-12">
-                <h2 className="m-0 text-center text-[2.75rem] leading-[2.75rem]  md:text-6xl text-primary">
+                <h2 className="m-0 text-center text-[2.75rem] leading-none  md:text-6xl text-primary">
                     Do more with your data with <br className="hidden lg:block" />
                     <span className="text-blue">PostHog Apps</span>
                 </h2>

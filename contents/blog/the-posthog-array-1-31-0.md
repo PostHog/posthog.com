@@ -20,7 +20,7 @@ tags:
 Happy holidays from PostHog! PostHog 1.31.0 is our last release of the year, introducing Group Analytics, improved Correlation Analysis, a revamped user experience on Insights and 350+ more improvements and fixes. Please note that Postgres-based installations are no longer supported for PostHog 1.31.0.
 
 <blockquote class='warning-note'>
-<b>IMPORTANT!</b> Do not upgrade to this version if you have deployed PostHog using Postgres. PostHog no longer supports Postgres as of v1.30.0 and you must <a href="/docs/migrate/migrate-to-another-self-hosted-instance" target="_blank">upgrade to ClickHouse</a> first.
+<b>IMPORTANT!</b> Do not upgrade to this version if you have deployed PostHog using Postgres. PostHog no longer supports Postgres as of v1.30.0 and you must <a href="/docs/migrate/migrate-between-posthog-instances" target="_blank">upgrade to ClickHouse</a> first.
 </blockquote>
 
 ## PostHog 1.31.0 release notes
@@ -92,14 +92,14 @@ The sidebar has been made more graceful: it adjusts to the screen size in a smar
 
 ### Deprecation & removal notices
 
-1. This version (1.31.0) no longer supports a Postgres-only deployment of PostHog. Read [our migration guide](/docs/migrate/migrate-to-another-self-hosted-instance) for instructions on moving over to a ClickHouse version. ClickHouse provides faster queries and is optimized for very large volumes of data, and you will also get a new lot of features.
+1. This version (1.31.0) no longer supports a Postgres-only deployment of PostHog. Read [our migration guide](/docs/migrate/migrate-between-posthog-instances) for instructions on moving over to a ClickHouse version. ClickHouse provides faster queries and is optimized for very large volumes of data, and you will also get a new lot of features.
 2. We're [deprecating the **Sessions** insight](/blog/sessions-removal) (distribution of session length). Please [reach out](/support) if you have any feedback on this.
 
-### Talk to us about how we can improve
+## Share your feedback
+We'd love to hear anything you have to say about PostHog, good or bad. As a thank you, we'll share some awesome [PostHog merch](https://merch.posthog.com).
 
-We’re always working on improving the product experience and would love to talk to you! Please join one of our Product, Engineering, or Marketing team members on a quick 30-min call to help us understand how to improve. Schedule directly [on Calendly](https://calendly.com/posthog-feedback).
+Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog.com) with one of our teams to help us make PostHog even better!
 
-As a small thank you for your time, we're giving away awesome [PostHog merch](https://merch.posthog.com)!
 
 ## PostHog News
 

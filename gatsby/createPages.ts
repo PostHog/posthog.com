@@ -21,9 +21,9 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const Job = path.resolve(`src/templates/Job.tsx`)
 
     // Tutorials
+    const TutorialsTemplate = path.resolve(`src/templates/tutorials/index.tsx`)
     const TutorialTemplate = path.resolve(`src/templates/tutorials/Tutorial.tsx`)
     const TutorialsCategoryTemplate = path.resolve(`src/templates/tutorials/TutorialsCategory.tsx`)
-    const TutorialsAuthorTemplate = path.resolve(`src/templates/tutorials/TutorialsAuthor.tsx`)
 
     // Docs
     const ApiEndpoint = path.resolve(`src/templates/ApiEndpoint.tsx`)
@@ -92,6 +92,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 }
             }
             tutorials: allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }) {
+                totalCount
                 nodes {
                     id
                     headings {
@@ -103,7 +104,8 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     }
                 }
                 categories: group(field: frontmatter___tags) {
-                    fieldValue
+                    totalCount
+                    category: fieldValue
                 }
                 contributors: group(field: frontmatter___authorData___name) {
                     fieldValue
@@ -346,20 +348,9 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     createPosts(result.data.apidocs.nodes, 'docs', ApiEndpoint, { name: 'Docs', url: '/docs' })
     createPosts(result.data.manual.nodes, 'docs', HandbookTemplate, { name: 'Using PostHog', url: '/using-posthog' })
 
-    const tutorialsPageViewExport = await fetch(
-        'https://app.posthog.com/shared/4lYoM6fa3Sa8KgmljIIHbVG042Bd7Q.json'
-    ).then((res) => res.json())
-
     result.data.tutorials.nodes.forEach((node) => {
         const tableOfContents = formatToc(node.headings)
         const { slug } = node.fields
-        let pageViews
-        tutorialsPageViewExport.dashboard.items[0].result.some((insight) => {
-            if (insight.breakdown_value.includes(slug)) {
-                pageViews = insight.aggregated_value
-                return true
-            }
-        })
 
         createPage({
             path: replacePath(node.fields.slug),
@@ -368,32 +359,27 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 id: node.id,
                 tableOfContents,
                 menu: sidebars.docs,
-                pageViews,
                 slug,
             },
         })
     })
 
-    result.data.tutorials.categories.forEach(({ fieldValue }) => {
-        const slug = `/tutorials/categories/${slugify(fieldValue, { lower: true })}`
-        createPage({
-            path: slug,
-            component: TutorialsCategoryTemplate,
-            context: {
-                activeFilter: fieldValue,
-            },
+    result.data.tutorials.categories.forEach(({ category, totalCount }) => {
+        const slug = slugify(category, { lower: true })
+        const base = `/tutorials/categories/${slug}`
+
+        createPaginatedPages({
+            totalCount,
+            base,
+            template: TutorialsCategoryTemplate,
+            extraContext: { activeFilter: category, slug },
         })
     })
 
-    result.data.tutorials.contributors.forEach(({ fieldValue }) => {
-        const slug = `/tutorials/contributors/${slugify(fieldValue, { lower: true })}`
-        createPage({
-            path: slug,
-            component: TutorialsAuthorTemplate,
-            context: {
-                activeFilter: fieldValue,
-            },
-        })
+    createPaginatedPages({
+        totalCount: result.data.tutorials.totalCount,
+        base: '/tutorials/all',
+        template: TutorialsTemplate,
     })
 
     result.data.blogPosts.nodes.forEach((node) => {
@@ -506,6 +492,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             let gitHubIssues = []
             if (issues) {
                 for (const issue of issues) {
+                    if (!issue) continue
                     const { html_url, number, title, labels } = await fetch(
                         `https://api.github.com/repos/${repo}/issues/${issue.trim()}`,
                         {

@@ -231,6 +231,10 @@
                 ]
             },
             {
+                "name": "Finance",
+                "url": "/handbook/people/finance"
+            },
+            {
                 "name": "Merch store",
                 "url": "/handbook/company/merch-store"
             },
@@ -333,6 +337,10 @@
                     {
                         "name": "Handling incidents",
                         "url": "/handbook/engineering/incidents"
+                    },
+                    {
+                        "name": "On-call rotation",
+                        "url": "/handbook/engineering/oncall-rotation"
                     },
                     {
                         "name": "Bug prioritization",
@@ -505,12 +513,12 @@
                 "url": "/handbook/product/user-feedback"
             },
             {
-                "name": "Paid features",
-                "url": "/handbook/product/paid-features"
-            },
-            {
                 "name": "Releasing as beta",
                 "url": "/handbook/product/releasing-as-beta"
+            },
+            {
+                "name": "In-app prompts",
+                "url": "/handbook/product/in-app-prompts"
             }
         ]
     },
@@ -573,6 +581,10 @@
                         "url": "/handbook/growth/marketing/newsletter"
                     },
                     {
+                        "name": "Startups",
+                        "url": "/handbook/growth/marketing/startups"
+                    },
+                    {
                         "name": "Press",
                         "url": "/handbook/growth/marketing/press"
                     },
@@ -609,12 +621,20 @@
                         "url": "/handbook/growth/sales/crm"
                     },
                     {
+                        "name": "New customer onboarding",
+                        "url": "/handbook/growth/sales/customer-onboarding"
+                    },
+                    {
                         "name": "YC onboarding",
                         "url": "/handbook/growth/sales/yc-onboarding"
                     },
                     {
                         "name": "Demos",
                         "url": "/handbook/growth/sales/demos"
+                    },
+                    {
+                        "name": "Contracts",
+                        "url": "/handbook/growth/sales/contracts"
                     },
                     {
                         "name": "Billing",
@@ -629,12 +649,16 @@
         ]
     },
     {
-        "name": "Growth engineering",
+        "name": "Growth",
         "url": "",
         "children": [
             {
                 "name": "Growth reviews",
                 "url": "/handbook/growth/growth-engineering/growth-sessions"
+            },
+            {
+                "name": "Pricing principles",
+                "url": "/handbook/engineering/feature-pricing"
             }
         ]
     }

@@ -15,3 +15,7 @@ export function dateToDays(date: string | Date) {
 export function dayFormat(days: number) {
     return days <= 0 ? 'Today' : `${days} day${days === 1 ? '' : 's'} ago`
 }
+
+export function capitalizeFirstLetter(string: string): string {
+    return string.charAt(0).toUpperCase() + string.slice(1)
+}

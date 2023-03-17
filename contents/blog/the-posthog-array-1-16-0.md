@@ -100,13 +100,11 @@ We have been working hard to improve our product documentation and had a few big
 
 If you have any suggestions for new tutorials or improvements to our documentation, [do not hesitate to let us know!](https://github.com/PostHog/posthog.com/issues)
 
-### [User Interviews](https://calendly.com/posthog-feedback)
+## Share your feedback
+We'd love to hear anything you have to say about PostHog, good or bad. As a thank you, we'll share some awesome [PostHog merch](https://merch.posthog.com).
 
-We’re working hard to improve PostHog and would love to talk to you about your experience with the product. 
+Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog.com) with one of our teams to help us make PostHog even better!
 
-If you're interested in helping us out, you can schedule a quick 30-min call with us [on Calendly](https://calendly.com/posthog-feedback). 
-
-Oh, and we're giving away some awesome [PostHog merch](https://merch.posthog.com) as a thank you!
 
 ## Bug Fixes and Performance Improvements
 

@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-10-10
-featuredImage: ../images/tutorials/banners/new-user-experiments.png
+featuredImage: ../images/tutorials/banners/tutorial-2.png
 tags: ['experimentation', 'feature flags']
 ---
 

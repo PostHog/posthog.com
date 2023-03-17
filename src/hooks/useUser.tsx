@@ -5,6 +5,7 @@ type User = {
     id: string
     email: string
     isMember: boolean
+    isModerator: boolean
     profile: {
         avatar: string
         first_name: string

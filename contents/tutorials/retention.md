@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['yakko-majuri']
 date: 2020-11-04
-featuredImage: ../images/tutorials/banners/retention.png
+featuredImage: ../images/tutorials/banners/tutorial-15.png
 tags: ['retention', 'stickiness']
 ---
 
@@ -16,7 +16,7 @@ Think about it: if you try to fill a bucket of water with holes in it, it doesn'
 
 Tracking retention is about measuring how big those holes are and identifying them, so you can then fix them and verify the impact of doing so. 
 
-This tutorial will introduce you to the basic concepts of retention and churn and teach you how to use PostHog's many features to track retention at various stages.
+This tutorial will introduce you to the [basic concepts of retention and churn](/blog/customer-churn-analysis-guide) and teach you how to use PostHog's many features to track retention at various stages.
 
 ### Prerequisites
 

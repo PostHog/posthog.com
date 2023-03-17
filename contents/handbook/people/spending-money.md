@@ -94,11 +94,11 @@ Again, Apple items for keyboards and mice should be what you default to - refurb
 
 We find that most people already have a desk and chair that are comfortable.
 
-If you do not, please suggest something to us. We aren't yet at the stage where we can afford the latest and greatest here, but we will aim to be reasonable. For example, if you would like a standing desk, buy one you consider to be good value.
+If you do not, then buy yourself one within our set budget. We aren't yet at the stage where we can afford the latest and greatest here, but we will aim to be reasonable. For example, if you would like a standing desk, buy one you consider to be good value.
 
-We would expect to spend $250 on a desk, and around the same for a chair. 
+We would expect to spend $250 on a desk, and around the same for a chair. If you wish, you can switch out the chair for a walking treadmill instead. 
 
-If you live in the UK, [Office Resale](https://www.officeresale.co.uk/) offer a range of like-new refurbished designer furniture, which you might find better value than buying something new but of lower quality. 
+If you live in the UK, [Office Resale](https://www.officeresale.co.uk/) offer a range of like-new refurbished designer furniture, which you might find better value than buying something new but of lower quality.
 
 ### Headphones
 
@@ -147,9 +147,9 @@ We care about you being healthy, happy and productive.
 
 While PostHog will use the money saved from not having office space for real life meetups, we are happy to cover some expenses related to where you work. Most people do most of their work from home, but we understand that getting out of the house from time to time can help you escape cabin fever!
 
-You can spend up to $200/month to work in cafés or coworking spaces. You must provide receipts if applicable, and in this case, they must only be for yourself.
+You can spend up to $250/month to work in cafés or coworking spaces. You must provide receipts if applicable, and in this case, they must only be for yourself.
 
-We have a company WeWork All Access account that allows you to book desks in any of their worldwide locations. If you wish to take advantage of this, post in #team-people-and-ops and Grace or Tim will add you. This membership costs $150 and is deducted from your monthly budget.
+We have a company WeWork All Access account that allows you to book desks in any of their worldwide locations. If you wish to take advantage of this, post in #team-people-and-ops and Grace or Tim will add you. This membership costs the full budget per month, so please keep that in mind when opting in.
 
 ## Travel
 
@@ -165,9 +165,11 @@ If you have any questions about this stuff, or are unsure what is reasonable her
 
 As a global, all-remote team, we don't get many regular opportunities to socialize with each other outside of offsites.
 
-We encourage team members to try and meet up with each other when practical, and provide everyone with an $300 monthly budget to cover the cost of travel and meals. Beyond staying within the spending limit, please just spend the money in the best interests of the company. Any unused budget does not roll over each month. 
+We strongly encourage team members to try and meet up with each other in person when practical, and provide everyone with an $1500 quarterly budget to cover the cost of travel, accommodation, and meals. Beyond staying within the spending limit, please just spend the money in the best interests of the company (ie. not spending $500/night for 3 nights in a fancy hotel!).
 
 We find that team members use this to visit each other when they live in geographically similar locations (e.g. a train journey or short flight away) or to go out for dinner when they happen to be passing through the same city. However there are no specific constraints on this. Feel free to post any upcoming travel plans in the #whereintheworld channel in Slack and see who is available to meet up!
+
+This budget is _in addition_ to things like in-person onboarding and team offsites. Any unused budget does not roll over into the next quarter. 
 
 ### Carbon offsetting
 

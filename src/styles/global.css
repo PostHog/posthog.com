@@ -262,6 +262,14 @@ h4 {
     }
 }
 
+/* scope to left nav */
+.z-20 {
+    /* make active nav item full strength */
+    .active span.opacity-50 {
+        @apply opacity-100;
+    }
+}
+
 /* animated underlined links */
 .article-content a:not(.cta) {
     background: linear-gradient(to right, rgba(191, 191, 188, 0), rgba(191, 191, 188, 0)),
@@ -337,7 +345,7 @@ div[class^='feature-'].text-center {
 
 /* When used in article on-page nav, only show on mobile viewports... */
 
-#content-menu-wrapper .jumpTo:before {
+.article-content .jumpTo:before {
     @apply xl:hidden;
 }
 
@@ -568,34 +576,36 @@ ul {
     transform: translate3d(0, 0, 0);
 }
 
-.slick-track {
-    position: relative;
-    top: 0;
-    left: 0;
+.about-nav {
+    .slick-track {
+        position: relative;
+        top: 0;
+        left: 0;
 
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
 
-    > div:first-child {
-        @apply pl-4;
+        > div:first-child {
+            @apply pl-4;
+        }
+
+        > div:last-child {
+            @apply pr-4;
+        }
     }
+    .slick-track:before,
+    .slick-track:after {
+        display: table;
 
-    > div:last-child {
-        @apply pr-4;
+        content: '';
     }
-}
-.slick-track:before,
-.slick-track:after {
-    display: table;
-
-    content: '';
-}
-.slick-track:after {
-    clear: both;
-}
-.slick-loading .slick-track {
-    visibility: hidden;
+    .slick-track:after {
+        clear: both;
+    }
+    .slick-loading .slick-track {
+        visibility: hidden;
+    }
 }
 
 .slick-slide {
@@ -1194,5 +1204,14 @@ body .unthread-widget-holder {
         background: white;
         position: absolute;
         top: 0;
+    }
+}
+
+.mobile-sidebar-container {
+    .dark\:border-gray-accent-dark {
+        @apply dark:border-gray-accent-light/20;
+    }
+    > div:last-of-type {
+        @apply border-b-0;
     }
 }
