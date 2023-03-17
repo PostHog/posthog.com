@@ -61,7 +61,7 @@ export default function App({ Component, pageProps }) {
 
   useEffect(() => {
     // Track page views
-    const handleRouteChange = () => posthog.capture('$pageview')
+    const handleRouteChange = () => posthog?.capture('$pageview')
     router.events.on('routeChangeComplete', handleRouteChange)
 
     return () => {
