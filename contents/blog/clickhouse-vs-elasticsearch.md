@@ -20,7 +20,7 @@ Elasticsearch is the bedrock product for Elastic. It sells Elastic Cloud, a mana
 
 ![Elasticsearch Development.png](../images/blog/clickhouse-vs-elastic/elasticsearch-development.png)
 
-ClickHouse isn’t too different. While the database, ClickHouse, remains open source, it is managed by the for-profit ClickHouse Inc. ClickHouse Inc’s main offering is ClickHouse Cloud, a managed service similar to Elastic Cloud, just for deploying ClickHouse instead. However, ClickHouse also merges notable contributions by Altinity, a separate company that sells Altinity.Cloud, a managed service for deploying ClickHouse in Kubernetes. 
+ClickHouse isn’t too different. While the database, ClickHouse, remains open source, it is managed by the for-profit ClickHouse Inc. ClickHouse Inc.’s main offering is ClickHouse Cloud, a managed service similar to Elastic Cloud, just for deploying ClickHouse instead. However, ClickHouse also merges notable contributions by Altinity, a separate company that sells Altinity.Cloud, a managed service for deploying ClickHouse in Kubernetes. 
 
 ![ClickHouse Development.png](../images/blog/clickhouse-vs-elastic/clickhouse-development.png)
 
