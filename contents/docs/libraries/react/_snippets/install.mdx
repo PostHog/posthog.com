@@ -23,7 +23,7 @@ import App from './App';
 
 import { PostHogProvider} from 'posthog-js/react'
 
-const config = {
+const options = {
   api_host: process.env.REACT_APP_PUBLIC_POSTHOG_HOST,
 }
 
@@ -32,7 +32,7 @@ root.render(
   <React.StrictMode>
     <PostHogProvider 
       apiKey={process.env.REACT_APP_PUBLIC_POSTHOG_KEY}
-      config={config}
+      options={options}
     >
       <App />
     </PostHogProvider>
