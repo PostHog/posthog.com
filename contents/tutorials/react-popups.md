@@ -1,18 +1,18 @@
 ---
 title: How to add popups to your React app with PostHog
-date: 2023-03-10
+date: 2023-03-17
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
 featuredImage: ../images/tutorials/banners/tutorial-3.png
-topics: ['experimentation', 'feature flags']
+topics: ['feature flags', 'experimentation']
 ---
 
-Popups are ways to highlight features in your app. We recently created a way to add popups to your React app and control them using feature flags and payloads. The use of payloads enables easy customization and control of popups. This tutorial shows how to set this all up.
+Popups are a way to highlight features in your app. This tutorial shows how to add them to a React app and control them using feature flags and JSON payloads. The use of feature flag payloads enables easy customization and control of popups.
 
 ## Creating a React app
 
-We need a React app to start. Make sure you [installed Node](https://nodejs.dev/en/learn/how-to-install-nodejs/), then create one using the `create-react-app` command in your terminal named "popups":
+We need a React app to start. Make sure you [installed Node](https://nodejs.dev/en/learn/how-to-install-nodejs/), then use the `create-react-app` command in your terminal to create an app named "popups":
 
 ```bash
 npx create-react-app popups
@@ -71,12 +71,16 @@ After restarting your app and going to your app, you should see events captured 
 
 Next, add the control that displays the popups and control when and where they display. 
 
-Go to the [PostHog popup repository](https://github.com/PostHog/posthog-prompts) and clone the code. From this newly cloned code, copy the `Popup.js` `Popup.css` and `popup-location.js` files from the `react/src` folder over to our `popups/src` folder.
+Clone the code from [PostHog prompts repository](https://github.com/PostHog/posthog-prompts). 
 
-> **Note:** this isn't the case yet, but ideally we would tell users to install
-`npm i @posthog/popups`
+```bash
+git clone https://github.com/PostHog/posthog-prompts
+```
+In the newly cloned `posthog-prompts` folder, go to `react/src`, then copy the `Popup.js` `Popup.css` and `popup-location.js` files over to our `popups/src` folder.
 
-In `index.js`, import the popup code and add the `<Popup />` component to the app.
+> You could also create the files yourself and manually copy the code from the [popup](https://github.com/PostHog/posthog-prompts/blob/main/react/src/Popup.js), [CSS](https://github.com/PostHog/posthog-prompts/blob/main/react/src/Popup.css), and [location](https://github.com/PostHog/posthog-prompts/blob/main/react/src/popup-location.js) files.
+
+In `index.js`, import the popup code you just added and add the `<Popup />` component to the app.
 
 ```js
 // src/index.js
@@ -96,14 +100,14 @@ root.render(
 );
 ```
 
-After you’ve done this, you’re ready to set up the feature flag to control your popup.
+After doing this, you’re ready to set up the feature flag to control your popup.
 
 ## Create your popup feature flag
 
 The next step is to create a feature flag with a payload to control the content. In PostHog, go to the feature flag tab and click the "New feature flag" button.
 
 1. Name your flag something starting with `popup-`
-2. Add an extra filter to exclude users with the property `$popup-{unique name}` is not set so that the popup is only shown once for each user
+2. Add an extra filter to exclude users with the property "`$popup-{unique name}` is not set" so that the popup is only shown once for each user
 3. Set the rollout to 100%
 4. Add your content in JSON as the payload like:
 
@@ -140,19 +144,21 @@ To set this up, change the location to `relative-bottom` and add a `locationCSSS
 }
 ```
 
-This sets the popup to the relative right of the element you selected. You can then use this to set up product tours across multiple features in your app. It is also useful if you only want the popup to show on specific pages.
+This sets the popup to the relative right of the element you selected. 
 
 ![Relative popup](../images/tutorials/react-popups/relative.png)
 
-## Creating your popup as an experiment
+You can then use this to set up product tours across multiple pages and features in your app. Just create a flag for each page and feature you want to show off, and set the `primaryButtonURL` to the next page on the tour. Using the CSS selector also enables you to only show the popup on specific pages which include that specific element.
+
+## Running your popup as an experiment
 
 You can also set up an experiment to test that popups drive usage of the features you are showcasing. To do this:
 
 1. Go to the "Experiments" tab, click "Create experiment"
-2. Fill in the details including your desired goal, but make sure your feature flag key starts with `popup-`.
+2. Fill in the details including your desired goal, but **make sure your feature flag key starts with `popup-`**.
 3. Save and launch your experiment.
 4. Go to the "Feature flags" tab, and choose your newly created flag. Click the "Edit" button for the flag.
-5. Add your payload to the `test` variant key and click "Save."
+5. Add your JSON payload to the `test` variant key and click "Save."
 6. Your experiment is live and is testing the popup on users. You can see it’s results and impact on the goal back in the experiment details.
 
 ## Further reading
