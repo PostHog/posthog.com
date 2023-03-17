@@ -16,12 +16,31 @@ import React from 'react'
 import testimonials from '../../data/testimonials.json'
 import { Section } from 'components/ProductLayout'
 import Link from 'components/Link'
+import { BlogPosts, CTA, PostHogVS, Questions, Roadmap } from '../../components/ProductLayout'
+import { Check as CheckIcon, Close as CloseIcon } from '../../components/Icons'
+import { graphql, useStaticQuery } from 'gatsby'
+import { Squeak } from 'squeak-react'
+
+const Check = () => <CheckIcon className="w-5" />
+const Close = () => <CloseIcon className="w-5" />
 
 const testimonial = testimonials.find(
     ({ featuresUsed, author }) => featuresUsed.includes('session recording') && author.name === 'Anubhuti Mishra'
 )
 
 export default function SessionRecording() {
+    const { blogPosts } = useStaticQuery(graphql`
+        query {
+            blogPosts: allMdx(filter: { frontmatter: { tags: { in: "Session recording" } } }) {
+                edges {
+                    node {
+                        ...BlogFragment
+                    }
+                }
+            }
+        }
+    `)
+
     return (
         <Layout>
             <SEO title="Session recording - PostHog" />
@@ -77,7 +96,7 @@ export default function SessionRecording() {
                         </div>
                     </TwoCol>
                 </Section>
-                <Section border className="max-w-5xl">
+                <Section className="max-w-5xl">
                     <TwoCol className="items-center">
                         <div>
                             <SectionHeading
@@ -128,7 +147,7 @@ export default function SessionRecording() {
                         </div>
                     </TwoCol>
                 </Section>
-                <Section border className="max-w-5xl">
+                <Section className="max-w-5xl">
                     <TwoCol className="items-center">
                         <div>
                             <SectionHeading title="Network tab" subtitle="Track network calls and performance." />
@@ -148,8 +167,396 @@ export default function SessionRecording() {
                         </div>
                     </TwoCol>
                 </Section>
-                <Section>
-                    <PairsWith products={[]} />
+                <Section className="max-w-full">
+                    <PairsWith
+                        products={[
+                            {
+                                title: 'Product analytics',
+                                description:
+                                    'Jump into a playlist of session recordings directly from any time series in a graph',
+                            },
+                            {
+                                title: 'Feature flags',
+                                description: "See which feature flags are enabled for a user's session",
+                            },
+                            {
+                                title: 'A/B testing',
+                                description:
+                                    'Generate a playlist of recordings limited to an A/B test or specific group within a multivariate experiment.',
+                            },
+                        ]}
+                    />
+                </Section>
+                <Section className="max-w-5xl">
+                    <PostHogVS description="How does PostHog session recording compare?">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td className="w-3/12"></td>
+                                    <td className="w-2/12 text-center">Hotjar</td>
+                                    <td className="w-2/12 text-center">Logrocket</td>
+                                    <td className="w-2/12 text-center">Matomo</td>
+                                    <td className="w-3/12 text-center bg-gray-accent bg-opacity-50">
+                                        <strong>PostHog</strong>
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <strong>Platform</strong>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td className="bg-gray-accent bg-opacity-50">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>Free plan</td>
+                                    <td className="text-center">
+                                        <span className="text-green text-lg">
+                                            <Check />
+                                        </span>
+                                    </td>
+                                    <td className="text-center">
+                                        <span className="text-green text-lg">
+                                            <Check />
+                                        </span>
+                                    </td>
+                                    <td className="text-center">
+                                        <span className="text-green text-lg">
+                                            <Check />
+                                        </span>
+                                    </td>
+                                    <td className="bg-gray-accent bg-opacity-50 text-center">
+                                        <span className="text-green text-lg">
+                                            <Check />
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Open source</td>
+                                    <td className="text-center">
+                                        <span className="text-red text-lg">
+                                            <Close />
+                                        </span>
+                                    </td>
+                                    <td className="text-center">
+                                        <span className="text-red text-lg">
+                                            <Close />
+                                        </span>
+                                    </td>
+                                    <td className="text-center">
+                                        <span className="text-green text-lg">
+                                            <Check />
+                                        </span>
+                                    </td>
+                                    <td className="bg-gray-accent bg-opacity-50 text-center">
+                                        <span className="text-green text-lg">
+                                            <Check />
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Cloud hosting</td>
+                                    <td className="text-center">
+                                        <span className="text-green text-lg">
+                                            <Check />
+                                        </span>
+                                    </td>
+                                    <td className="text-center">
+                                        <span className="text-green text-lg">
+                                            <Check />
+                                        </span>
+                                    </td>
+                                    <td className="text-center">
+                                        <span className="text-green text-lg">
+                                            <Check />
+                                        </span>
+                                    </td>
+                                    <td className="bg-gray-accent bg-opacity-50 text-center">
+                                        <span className="text-green text-lg">
+                                            <Check />
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Product analytics</td>
+                                    <td className="text-center">
+                                        <span className="text-red text-lg">
+                                            <Close />
+                                        </span>
+                                    </td>
+                                    <td className="text-center">
+                                        <span className="text-green text-lg">
+                                            <Check />
+                                        </span>
+                                    </td>
+                                    <td className="text-center">
+                                        <span className="text-green text-lg">
+                                            <Check />
+                                        </span>
+                                    </td>
+                                    <td className="bg-gray-accent bg-opacity-50 text-center">
+                                        <span className="text-green text-lg">
+                                            <Check />
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>Session Recording</strong>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td className="bg-gray-accent bg-opacity-50">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>Single-page app support</td>
+                                    <td className="text-center">
+                                        <span className="text-green text-lg">
+                                            <Check />
+                                        </span>
+                                    </td>
+                                    <td className="text-center">
+                                        <span className="text-green text-lg">
+                                            <Check />
+                                        </span>
+                                    </td>
+                                    <td className="text-center">
+                                        <span className="text-green text-lg">
+                                            <Check />
+                                        </span>
+                                    </td>
+                                    <td className="bg-gray-accent bg-opacity-50 text-center">
+                                        <span className="text-green text-lg">
+                                            <Check />
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Mobile app recordings</td>
+                                    <td className="text-center">
+                                        <span className="text-red text-lg">
+                                            <Close />
+                                        </span>
+                                    </td>
+                                    <td className="text-center">
+                                        <span className="text-green text-lg">
+                                            <Check />
+                                        </span>
+                                    </td>
+                                    <td className="text-center">
+                                        <span className="text-red text-lg">
+                                            <Close />
+                                        </span>
+                                    </td>
+                                    <td className="bg-gray-accent bg-opacity-50 text-center">
+                                        <span className="text-red text-lg">
+                                            <Close />
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Identity detection</td>
+                                    <td className="text-center">
+                                        <span className="text-red text-lg">
+                                            <Close />
+                                        </span>
+                                    </td>
+                                    <td className="text-center">
+                                        <span className="text-green text-lg">
+                                            <Check />
+                                        </span>
+                                    </td>
+                                    <td className="text-center">
+                                        <span className="text-green text-lg">
+                                            <Check />
+                                        </span>
+                                    </td>
+                                    <td className="bg-gray-accent bg-opacity-50 text-center">
+                                        <span className="text-green text-lg">
+                                            <Check />
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Target recordings by URL</td>
+                                    <td className="text-center">
+                                        <span className="text-green text-lg">
+                                            <Check />
+                                        </span>
+                                    </td>
+                                    <td className="text-center">
+                                        <span className="text-green text-lg">
+                                            <Check />
+                                        </span>
+                                    </td>
+                                    <td className="text-center">
+                                        <span className="text-green text-lg">
+                                            <Check />
+                                        </span>
+                                    </td>
+                                    <td className="bg-gray-accent bg-opacity-50 text-center">
+                                        <span className="text-green text-lg">
+                                            <Check />
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Target by sample size</td>
+                                    <td className="text-center">
+                                        <span className="text-green text-lg">
+                                            <Check />
+                                        </span>
+                                    </td>
+                                    <td className="text-center">
+                                        <span className="text-red text-lg">
+                                            <Close />
+                                        </span>
+                                    </td>
+                                    <td className="text-center">
+                                        <span className="text-green text-lg">
+                                            <Check />
+                                        </span>
+                                    </td>
+                                    <td className="bg-gray-accent bg-opacity-50 text-center">
+                                        <span className="text-green text-lg">
+                                            <Check />
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Filter recordings by user or event</td>
+                                    <td className="text-center">
+                                        <span className="text-green text-lg">
+                                            <Check />
+                                        </span>
+                                    </td>
+                                    <td className="text-center">
+                                        <span className="text-green text-lg">
+                                            <Check />
+                                        </span>
+                                    </td>
+                                    <td className="text-center">
+                                        <span className="text-green text-lg">
+                                            <Check />
+                                        </span>
+                                    </td>
+                                    <td className="bg-gray-accent bg-opacity-50 text-center">
+                                        <span className="text-green text-lg">
+                                            <Check />
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Rage-click detection</td>
+                                    <td className="text-center">
+                                        <span className="text-green text-lg">
+                                            <Check />
+                                        </span>
+                                    </td>
+                                    <td className="text-center">
+                                        <span className="text-green text-lg">
+                                            <Check />
+                                        </span>
+                                    </td>
+                                    <td className="text-center">
+                                        <span className="text-red text-lg">
+                                            <Close />
+                                        </span>
+                                    </td>
+                                    <td className="bg-gray-accent bg-opacity-50 text-center">
+                                        <span className="text-green text-lg">
+                                            <Check />
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Privacy masking for sensitive content</td>
+                                    <td className="text-center">
+                                        <span className="text-green text-lg">
+                                            <Check />
+                                        </span>
+                                    </td>
+                                    <td className="text-center">
+                                        <span className="text-green text-lg">
+                                            <Check />
+                                        </span>
+                                    </td>
+                                    <td className="text-center">
+                                        <span className="text-green text-lg">
+                                            <Check />
+                                        </span>
+                                    </td>
+                                    <td className="bg-gray-accent bg-opacity-50 text-center">
+                                        <span className="text-green text-lg">
+                                            <Check />
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Export recordings</td>
+                                    <td className="text-center">
+                                        <span className="text-green text-lg">
+                                            <Check />
+                                        </span>
+                                    </td>
+                                    <td className="text-center">
+                                        <span className="text-red text-lg">
+                                            <Close />
+                                        </span>
+                                    </td>
+                                    <td className="text-center">
+                                        <span className="text-green text-lg">
+                                            <Check />
+                                        </span>
+                                    </td>
+                                    <td className="bg-gray-accent bg-opacity-50 text-center">
+                                        <span className="text-green text-lg">
+                                            <Check />
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Retention policy for recordings</td>
+                                    <td className="text-center">1 year</td>
+                                    <td className="text-center">1 month</td>
+                                    <td className="text-center">24 months</td>
+                                    <td className="bg-gray-accent bg-opacity-50 text-center">
+                                        <strong>PostHog Cloud:</strong> 3 weeks
+                                        <br />
+                                        <strong>Self-hosted:</strong> No limit
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </PostHogVS>
+                </Section>
+                <Section className="max-w-5xl">
+                    <BlogPosts posts={blogPosts?.edges} title="Blog posts that mention session recording" />
+                </Section>
+                <Section className="max-w-5xl">
+                    <Roadmap
+                        team={'Session Recording'}
+                        subtitle="Here's what the Session Recording Team is building next."
+                    />
+                </Section>
+                <Section className="max-w-5xl">
+                    <Questions />
+                </Section>
+                <Section className="max-w-5xl">
+                    <CTA
+                        title="Try session recording"
+                        subtitle="First 15,000 sessions/mo are free."
+                        image={
+                            <StaticImage
+                                alt="Session recording"
+                                src="../../components/Home/Slider/images/session-recording-hog.png"
+                            />
+                        }
+                    />
                 </Section>
             </ProductLayout>
         </Layout>

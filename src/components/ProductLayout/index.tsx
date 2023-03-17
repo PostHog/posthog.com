@@ -4,6 +4,15 @@ import React from 'react'
 import { SessionRecording, FeatureFlags, AbTesting } from 'components/ProductIcons'
 import Layout from 'components/Layout'
 import { BusinessModel } from 'components/NotProductIcons'
+import { getImage, StaticImage } from 'gatsby-plugin-image'
+import { Post, Posts } from '../Blog'
+import TeamRoadmap from 'components/TeamRoadmap'
+import TeamMembers from 'components/TeamMembers'
+import ReactCountryFlag from 'react-country-flag'
+import { ContributorImage } from 'components/PostLayout/Contributors'
+import { graphql, useStaticQuery } from 'gatsby'
+import { CallToAction } from '../CallToAction'
+import { Squeak } from 'squeak-react'
 
 const nav = [
     {
@@ -140,14 +149,16 @@ export const TwoCol = ({ children, className = '' }: { children: React.ReactNode
 export const PairsWith = ({ products }: { products: IFeature[] }) => {
     return (
         <div>
-            <h2 className="text-center">Pairs with...</h2>
-            <p className="text-center">PostHog products are natively designed to be interoperable.</p>
-            <FeatureGrid>
-                {products.map((product) => {
-                    const { title, description } = product
-                    return <Feature key={title} title={title} description={description} />
-                })}
-            </FeatureGrid>
+            <h2 className="text-center m-0">Pairs with...</h2>
+            <p className="text-center m-0">PostHog products are natively designed to be interoperable.</p>
+            <div className="border-y border-dashed border-gray-accent-light mt-12">
+                <FeatureGrid>
+                    {products.map((product) => {
+                        const { title, description } = product
+                        return <Feature key={title} title={title} description={description} />
+                    })}
+                </FeatureGrid>
+            </div>
         </div>
     )
 }
@@ -170,6 +181,182 @@ export const Section = ({
             } my-14`}
         >
             <section className={`mx-auto ${className}`}>{children}</section>
+        </div>
+    )
+}
+
+export const PostHogVS = ({ description, children }: { description: string; children: React.ReactNode }) => {
+    return (
+        <div className="max-w-5xl mx-auto">
+            <div className="flex justify-between items-end">
+                <div>
+                    <h2 className="m-0">PostHog vs...</h2>
+                    <p className="m-0">{description}</p>
+                </div>
+                <div>
+                    <StaticImage className="max-w-[530px]" alt="PostHog vs..." src="./images/vs.png" />
+                </div>
+            </div>
+            <div className="overflow-x-auto article-content mt-12">{children}</div>
+        </div>
+    )
+}
+
+export const BlogPosts = ({ posts, title }) => {
+    return (
+        <div>
+            <h3>{title}</h3>
+            <ul className="list-none m-0 p-0 grid grid-cols-2 gap-4">
+                {posts.map((post) => {
+                    const {
+                        node: {
+                            id,
+                            frontmatter: { date, title, featuredImage, authors, category },
+                            fields: { slug },
+                        },
+                    } = post
+
+                    return (
+                        <li
+                            className="relative active:top-[1px] active:scale-[.99] shadow-lg after:border-0 hover:after:border-1 after:border-black/25 after:rounded-md after:-inset-1.5 after:absolute"
+                            key={id}
+                        >
+                            <Post
+                                date={date}
+                                title={title}
+                                featuredImage={featuredImage}
+                                authors={authors}
+                                category={category}
+                                slug={slug}
+                                imgClassName="w-full"
+                            />
+                        </li>
+                    )
+                })}
+            </ul>
+        </div>
+    )
+}
+
+export const Questions = () => {
+    return (
+        <div className="max-w-5xl">
+            <h2>Questions?</h2>
+            <Squeak
+                apiHost={process.env.GATSBY_SQUEAK_API_HOST as string}
+                organizationId={process.env.GATSBY_SQUEAK_ORG_ID as string}
+            />
+        </div>
+    )
+}
+
+export const Roadmap = ({ subtitle, team }) => {
+    const {
+        team: { nodes },
+    } = useStaticQuery(graphql`
+        query {
+            team: allMdx(
+                filter: { fields: { slug: { regex: "/^/team/" } } }
+                sort: { fields: frontmatter___startDate }
+            ) {
+                nodes {
+                    frontmatter {
+                        headshot {
+                            childImageSharp {
+                                gatsbyImageData
+                            }
+                        }
+                        team
+                        jobTitle
+                        name
+                        country
+                        github
+                        teamLead
+                        pineappleOnPizza
+                    }
+                }
+            }
+        }
+    `)
+    const teamMembers = nodes
+        .filter((node) => node?.frontmatter?.team?.some((teamName) => teamName === team))
+        .sort((l, r) => (l.frontmatter.teamLead ? -1 : r.frontmatter.teamLead ? 1 : 0))
+    const teamLength = teamMembers?.length
+    if (!teamMembers || !teamLength) return null
+    const pineapplePercentage =
+        teamLength &&
+        teamLength > 0 &&
+        Math.round(
+            (teamMembers.filter(({ frontmatter: { pineappleOnPizza } }) => pineappleOnPizza).length / teamLength) * 100
+        )
+    const teamURL = `/handbook/small-teams/${team.toLowerCase()}`
+    return (
+        <div>
+            <h3 className="m-0">Roadmap</h3>
+            <p className="m-0">{subtitle}</p>
+            <div className="mt-8 flex items-center space-x-8">
+                <div>
+                    <TeamRoadmap team={team} />
+                </div>
+                <div className="flex-shrink-0">
+                    <p className="mb-4">
+                        Here are the people who bring you
+                        <br />
+                        <strong>PostHog {team.toLowerCase()}</strong>
+                    </p>
+                    <ul className="list-none m-0 p-0">
+                        {teamMembers.map((member) => {
+                            const { name, headshot, jobTitle, teamLead, country } = member?.frontmatter
+                            return (
+                                <li className="!m-0 flex space-x-4 items-center py-2" key={name}>
+                                    <figure className="mb-0">
+                                        <ContributorImage className="w-[50px] h-[50px] " image={getImage(headshot)} />
+                                    </figure>
+                                    <div>
+                                        <span className="flex items-center md:flex-row space-x-2">
+                                            <p className="!text-lg !font-bold !m-0 !leading-none">{name}</p>
+                                            {country && (
+                                                <span className="!leading-none">
+                                                    {country === 'world' ? (
+                                                        '🌎'
+                                                    ) : (
+                                                        <ReactCountryFlag svg countryCode={country} />
+                                                    )}
+                                                </span>
+                                            )}
+                                            {teamLead && (
+                                                <span className="inline-block border-2 border-red/50 rounded-sm text-[12px] px-2 py-1 !leading-none font-semibold text-red bg-white">
+                                                    Team lead
+                                                </span>
+                                            )}
+                                        </span>
+                                        <p className="!text-sm !mb-0 opacity-50 !leading-none !mt-1">{jobTitle}</p>
+                                    </div>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                    <p className="mt-4">
+                        <strong>{pineapplePercentage}%</strong> of this team prefer pineapple on pizza
+                    </p>
+                    <CallToAction size="md" to={teamURL} type="outline">
+                        Learn more about this team
+                    </CallToAction>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export const CTA = ({ title, subtitle, image }) => {
+    return (
+        <div className="flex space-x-4 justify-between p-12 bg-gray-accent-light rounded-lg items-center">
+            <div>
+                <h2 className="m-0">{title}</h2>
+                <p className="m-0 mb-6">{subtitle}</p>
+                <CallToAction to="https://app.posthog.com/signup">Get started - free</CallToAction>
+            </div>
+            <div className="max-w-[400px]">{image}</div>
         </div>
     )
 }
