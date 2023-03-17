@@ -14,9 +14,9 @@ tags:
   - ClickHouse
 ---
 
-Pitting Elasticsearch against ClickHouse is a sort-of, not-really awkward comparison to make. On one hand, both are open-source frameworks with advantages over conventional databases like [PostgreSQL](/blog/clickhouse-vs-postgres) for performing tasks over *lots* of data. 
+Elasticsearch and ClickHouse are both open-source frameworks with advantages over conventional databases like [PostgreSQL](/blog/clickhouse-vs-postgres) for performing tasks over *lots* of data, but they serve very different needs.
 
-On the other, Elasticsearch and ClickHouse are built by very different organizations for fairly different purposes. Elasticsearch was the bedrock product for Elastic, which is a for-profit company that sells Elastic Cloud, a managed solution that bundles Elasticsearch with other data products. 
+Elasticsearch is the bedrock product for Elastic. It sells Elastic Cloud, a managed solution that bundles Elasticsearch with other data products. 
 
 ![Elasticsearch Development.png](../images/blog/clickhouse-vs-elastic/elasticsearch-development.png)
 
@@ -24,13 +24,13 @@ ClickHouse isn’t too different. While the database, ClickHouse, remains open s
 
 ![ClickHouse Development.png](../images/blog/clickhouse-vs-elastic/clickhouse-development.png)
 
-Elasticsearch and ClickHouse were built to target different needs. Elasticsearch, as the name implies, was designed to power better search. It can efficiently return search results, such as grocery items on a grocer’s website, accounting for things such as spelling mistakes. ClickHouse, meanwhile, would stumble with the same task, but it excels at aggregating data for uses like business analytics or financial statistics. 
+Elasticsearch, as the name implies, was designed to power better search. It can efficiently return search results, such as grocery items on a grocer’s website, accounting for things such as spelling mistakes. ClickHouse, meanwhile, would stumble with the same task, but it excels at aggregating data for uses like business analytics or financial statistics. 
 
-So why even compare them? Amid their differences, Elasticsearch and ClickHouse draw an interesting comparison because of their vastly different architecture, optimized for each of their respective goals. Comparing them is a good meditation on how various physical and virtual layouts can dramatically improve efficiency toward a specific efficiency goal. 
+Elasticsearch and ClickHouse are interesting to compare because of their vastly different architecture, optimized for each of their respective goals. Comparing them is a good meditation on physical and virtual layouts can improve efficiency toward a specific efficiency goal. 
 
 ## Background
 
-Sometimes, the relationship between an open-source tool and its lead developer is complicated; with ClickHouse, the relationship is straightforward and fundamentally no different from PostHog’s relationship with its open-source product. Elastic, meanwhile, has a complex history with open-source. 
+Sometimes, the relationship between an open-source tool and its lead developer is complicated. ClickHouse's relationship is straightforward, but Elastic has a complex history with open source. 
 
 ### What is Elasticsearch?
 
@@ -38,7 +38,7 @@ Elasticsearch was originally released in 2010 under an open-source license. The 
 
 Elasticsearch is considered a NoSQL database because it uses Apache Lucene – and by extension, JSON documents – as a primary store of data. Specifically, it is a Document-Store NoSQL database with a focus on searching and retrieving data. It is never used as the primary store of data. Sometimes Elasticsearch data stores are redundantly available in a more traditional database like PostgreSQL as Elasticsearch is only leveraged to improve search results. 
 
-In 2021, Elasticsearch abandoned its traditional Apache Open Source license in favor of a new license known as an Elastic license. It was a controversial move motivated by Elastic’s irritation with Amazon profiting off of Elasticsearch by operating a managed service without ever contributing to the codebase. Amazon forked the last version of open-source Elasticsearch into a new open-source project, OpenSearch. Similar to Elastic (and ClickHouse Inc.), Amazon launched a managed version of OpenSearch, titled OpenSearch Service.
+In 2021, Elasticsearch abandoned its traditional Apache Open Source license in favor of a new license known as an Elastic license. It was a controversial move motivated by Elastic’s irritation with Amazon profiting off of Elasticsearch by operating a managed service without ever contributing to the codebase. Amazon forked the last version of open-source Elasticsearch into a new open-source project, OpenSearch. Similar to Elastic (and ClickHouse Inc.), Amazon launched a managed version of OpenSearch.
 
 Elasticsearch’s new license allows developers to implement Elasticsearch themselves, but forbids cloud distributors from running a for-profit, managed Elasticsearch service. Most open-source advocates consider Elastic’s Elastic License not open-source; however, it would be unfair to Elastic to equate their solution’s transparency with a purely closed-source solution like Snowflake.
 
@@ -46,7 +46,7 @@ Elastic also develops Kibana, a visualization program that plugs into Elasticsea
 
 ### What is Clickhouse?
 
-ClickHouse is a traditional open-source project, but like many, it started as a proprietary application. ClickHouse was originally built by Yandex for Yandex.Metrica, a massive analytics tool popular in Russia. Eventually, ClickHouse spun out into an independent, open-source project. Today, it is managed by ClickHouse Inc with notable contributions by a separate organization, Altinity Inc.  
+ClickHouse is a traditional open-source project, but it started as a proprietary application. ClickHouse was originally built by Yandex for Yandex.Metrica, a massive analytics tool popular in Russia. Eventually, ClickHouse spun out into an independent, open-source project. Today, it is managed by ClickHouse Inc. with notable contributions by a separate organization, Altinity Inc.  
 
 ClickHouse was designed to return aggregate values of big data at millisecond speeds. ClickHouse accomplishes this through a series of clever techniques, including using a columnar store, dynamic materialized views, and specialized engines that take advantage of multiple cores.
 
@@ -213,12 +213,6 @@ While both Elasticsearch and ClickHouse are fundamentally backend products, we c
 
 In a nutshell, comparing the analytics efficiency of ClickHouse and Elasticsearch has the same sort-of, not-really awkwardness of other comparisons – they both excel in their respective categories using radically different methods to cater to a different type of need. However, Elastic’s Kibana product is more mature than ClickHouse Cloud’s competitive offering. 
 
-## Comparing developers
-
-One of the reasons that Elasticsearch grew quickly thanks to fast-paced development by its parent company, Elastic. Elastic has spearheaded the development of Elasticsearch, Kibana, and other accessory products like Beats, a data shipper. For many enterprise customers, Elasticsearch being a psuedo-closed-source solution is balanced by the fact that it can leverage its enterprise revenue to foster a massive engineering effort to improve it.
-
-Conversely, the teams behind ClickHouse are a lot smaller. However, ClickHouse has a very avid developer community, with contributors existing outside of the two major ClickHouse developers – ClickHouse Inc and Altinity Inc And one of the reasons that ClickHouse is starting to really grow in the last few years is because of its open-source, pro-community brand. 
-
 ## Final thoughts
 
 ClickHouse and Elasticsearch are both fantastic solutions for data aggregation and fast search respectively. 
@@ -227,7 +221,7 @@ Elasticsearch grew quickly thanks to fast-paced development by its parent compan
 
 Conversely, while the team behind ClickHouse is smaller, ClickHouse has an avid developer community, with contributors existing outside of the two major ClickHouse developers – ClickHouse Inc and Altinity Inc. And one of the reasons that ClickHouse is starting to grow in the last few years is because of its open-source, pro-community brand, and it's blistering performance.
 
-Overll, sometimes Elasticsearch may be the better solution if data aggregation involves searching text. Elasticsearch is a more mature project with an entire suite dedicated to interfacing with Elasticsearch data; however, it is no longer a true open-source product like ClickHouse is. 
+Overall, Elasticsearch may be the better solution if data aggregation involves searching text. It is a more mature project with an entire suite dedicated to interfacing with Elasticsearch data; however, it is no longer a true open-source product like ClickHouse is. 
 
 ### Further reading
 
