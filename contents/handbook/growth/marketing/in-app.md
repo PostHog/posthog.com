@@ -28,8 +28,7 @@ We use each of the three channels above for different purposes, guided by the ne
 
 In-app prompts are intrusive to users, but can be used for a wide variety of reasons. Therefore, if you create one we ask that you...
 
-1. Raise an issue in [the meta repo](https://github.com/PostHog/meta) describing your in-app prompt and how it will be used. Please explain what content it will show, and how it will be targeted.  
-2. Add the `Marketing` tag to the feature flag used to power your in-app prompt
+- Add the `Marketing` tag to the feature flag used to power your in-app prompt
 
 This will enable others in the team to more easily keep track of what in-app messages are being shown, and what their content is. As a reminder:
 
