@@ -13,15 +13,11 @@ tags:
  - Marketing
 ---
 
-As the amount of content you create grows, inevitably you need some way to manage it. A content management system, or CMS, is the go-to software solution for this. Examples include WordPress, Drupal, Wix, Ghost, and many more.
+As the amount of content you create grows, inevitably you need a way to manage it. A content management system, or CMS, is the go-to software solution for this. Examples include WordPress, Drupal, Wix, Ghost, and many more. 
 
-One that doesn’t get thought of as a CMS is GitHub. We use GitHub and love it for three main reasons:
+But there's left field option that doesn’t get thought of as a CMS: GitHub. In this post, I'll explain the three reasons we use GitHub as a CMS (and love doing so). 
 
-1. Enables transparency and open contributions
-2. Provides the necessary content creation workflow tools
-3. Keeps us engineering-focused
-
-## Enables transparency and open contributions
+## 1. GitHub enables transparency and open contributions
 
 [Being open source](https://github.com/PostHog/posthog.com) is core to PostHog. It creates the transparency, context, and trust needed to be a high-performing, remote software startup.
 
@@ -34,7 +30,7 @@ As the home of open source, GitHub makes this easy. Having our level of transpar
 
 Every time one of these happens, it makes our site a bit better in a way that wouldn’t be possible if we weren’t using GitHub. It empowers people to make changes to code and content themselves, rather than rely on others to do it. This enables us to move fast and have a high impact while maintaining quality.
 
-## All the necessary tools for your content workflow
+## GitHub has most of the necessary tools for your content workflow
 
 GitHub is built for software development, but many of the features work just as well for content development. Take our workflow for example:
 
@@ -46,7 +42,7 @@ GitHub is built for software development, but many of the features work just as 
 
 4. Reviewers comment and make suggestions. Creator updates until approved.
 
-5. Content gets merged and changes publish to the production site automatically.
+5. Content gets merged and changes publish to the production site automatically. PRs are connected to the issues, which are automatically closed when merged.
 
 GitHub and a text editor are all we need to go from idea to published content. The features of GitHub provide many benefits to our workflow such as:
 
@@ -56,9 +52,9 @@ GitHub and a text editor are all we need to go from idea to published content. T
 
 - Tools for feedback including suggestions, full markdown comments, and comment history.
 
-The piece that is missing is a content calendar. The solution is to ship content as soon as it is ready. If the content relates to a launch, create a branch with all the changes and merge it as soon as the feature launches.
+The one thing it lacks is a content calendar, but it's not something we miss much. Most content can be published as soon as it's ready. If the content relates to a launch, we create a branch with all the changes (including documentation and landing page updates) and merge it as soon as the feature launches.
 
-## Keeps us engineering-focused
+## 3. GitHub keeps us engineering-focused
 
 At PostHog, [everybody codes](/handbook/company/values#everyone-codes), and our [ideal customers](/blog/creating-ideal-customer-profile) are developers. Using GitHub and combining content and code keeps this top of mind. GitHub is the ideal CMS for engineers and developers because they already use it, and it encourages non-technical people to be more technical.
 
