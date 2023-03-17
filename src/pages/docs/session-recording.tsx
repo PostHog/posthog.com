@@ -12,6 +12,11 @@ import { GettingStarted } from 'components/Docs/GettingStarted'
 
 export const quickLinks = [
     {
+        name: 'Product Manual',
+        to: '/docs/session-recording/product-manual',
+        description: 'Getting started with session recording.',
+    },
+    {
         name: 'Configuration',
         to: '/docs/session-recording/configure',
         description: 'Settings for customizing session recording capture.',
