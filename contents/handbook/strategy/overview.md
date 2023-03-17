@@ -58,6 +58,7 @@ We did this by first focusing on high-growth self-serve startups to nail (1) and
   * Enables us to sell each product individually to get in early and then land and expand rather than needing to sell the full bundle.
   * Charging for each product separately helps us understand which products to double down on and which user feedback to prioritize.
   * Builds trust in the individual products as being 1st class.
+  * They should still have optional deep integrations with the other tools to promote cross-activation and push us further than what the competing standalone products can do.
 * Become known as the first tool that engineers add to their product
   * Work on top-of-funnel growth in high potential startups (whereas last year we primarily focused on monetization of high growth startups)
   * Create a more precise approach to this (growth model / CS focus / marketing focus)
