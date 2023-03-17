@@ -63,9 +63,9 @@ We did this by first focusing on high-growth self-serve startups to nail (1) and
   * Work on top-of-funnel growth in high potential startups (whereas last year we primarily focused on monetization of high growth startups)
   * Create a more precise approach to this (growth model / CS focus / marketing focus)
 
-### This quarter - OKRs
+### This quarter - quarterly goals
 
-We set [quarterly OKRs](/handbook/strategy/objectives) to keep us on track.
+We set small team [quarterly goals](/handbook/strategy/objectives) to keep us on track.
 
 ## Target customers for 2023
 
