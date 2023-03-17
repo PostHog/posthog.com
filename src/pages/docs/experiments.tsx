@@ -12,6 +12,11 @@ import { GettingStarted } from 'components/Docs/GettingStarted'
 
 export const quickLinks = [
     {
+        name: 'Product manual',
+        to: '/docs/experiments/manual',
+        description: 'How to run A/B tests with PostHog.',
+    },
+    {
         name: 'Creating an experiment',
         to: '/docs/experiments/manual#creating-an-experiment',
         description: 'Create an experiment to test a hypothesis.',
@@ -59,6 +64,12 @@ const Experiments: React.FC<ExperimentsProps> = ({ data }) => {
                     want.
                 </h3>
 
+                {/* Quick links */}
+                <section className="my-6">
+                    <h3 className="mb-6 mt-0">Pages</h3>
+                    <LinkGrid links={quickLinks} />
+                </section>
+
                 {/* Get started section */}
                 <section className="py-6 sm:py-12">
                     <GettingStarted
@@ -67,12 +78,6 @@ const Experiments: React.FC<ExperimentsProps> = ({ data }) => {
                         description="Start A/B testing your features in minutes."
                         link="/docs/experiments/manual#creating-an-experiment"
                     ></GettingStarted>
-                </section>
-
-                {/* Quick links */}
-                <section className="my-6">
-                    <h3 className="mb-6 mt-0">Quick links</h3>
-                    <LinkGrid links={quickLinks} />
                 </section>
 
                 <Tutorials tutorials={tutorials} />

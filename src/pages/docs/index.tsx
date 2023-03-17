@@ -339,7 +339,7 @@ export const query = graphql`
             }
         }
         sdks: allMdx(
-            filter: { slug: { regex: "/^docs/sdks/(js|node|python|react|ios|android)/$/" } }
+            filter: { slug: { regex: "/^docs/libraries/(js|node|python|react|ios|android)/$/" } }
             sort: { fields: fields___pageViews, order: DESC }
         ) {
             nodes {

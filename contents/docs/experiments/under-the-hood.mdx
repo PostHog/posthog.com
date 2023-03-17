@@ -56,7 +56,7 @@ Then, for each variant, we can sample from their distributions and get a count v
 
 The probability of a variant being the best is given by:
 
-![Probability](../images/docs/user-guides/experimentation/count_data_probability.png)
+![Probability](../../images/docs/user-guides/experimentation/count_data_probability.png)
 
 For calculating significance, we currently measure p-values using a poisson means test. [Here's a good primer of the formula](https://www.evanmiller.org/statistical-formulas-for-programmers.html#count_test). Results are significant when the p-value is less than 0.05
 
@@ -76,13 +76,13 @@ Then, for each variant, we can sample from their distributions and get a convers
 
 The probability of a variant being the best is given by:
 
-![Probability](../images/docs/user-guides/experimentation/conversion_probability.png)
+![Probability](../../images/docs/user-guides/experimentation/conversion_probability.png)
 
 To calculate significance, we calculate the expected loss, as first mentioned in [VWO's SmartStats whitepaper](https://vwo.com/downloads/VWO_SmartStats_technical_whitepaper.pdf).
 
 To do this, we again run a monte carlo simulation, and calculate loss as:
 
-![Loss](../images/docs/user-guides/experimentation/loss-calculation.png)
+![Loss](../../images/docs/user-guides/experimentation/loss-calculation.png)
 
 This represents the expected loss in conversion rate if you chose any other variant. If this is below 1%, we declare results as significant.
 

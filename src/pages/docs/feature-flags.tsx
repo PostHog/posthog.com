@@ -12,6 +12,11 @@ import { GettingStarted } from 'components/Docs/GettingStarted'
 
 export const quickLinks = [
     {
+        name: 'Product manual',
+        to: '/docs/feature-flags/manual',
+        description: 'Learn how to use feature flags.',
+    },
+    {
         name: 'Bootstrapping & local evaluation',
         to: '/docs/feature-flags/bootstrapping-and-local-evaluation',
         description: 'Bootstrap and evaluate flags locally when you need an immediate response.',
@@ -58,6 +63,12 @@ const FeatureFlags: React.FC<FeatureFlagsProps> = ({ data }) => {
                     Toggle features for cohorts or individuals to test the impact before rolling out to everyone.
                 </h3>
 
+                {/* Quick links */}
+                <section className="my-6">
+                    <h3 className="mb-6 mt-0">Pages</h3>
+                    <LinkGrid links={quickLinks} />
+                </section>
+
                 {/* Get started section */}
                 <section className="py-6 sm:py-12">
                     <GettingStarted
@@ -66,12 +77,6 @@ const FeatureFlags: React.FC<FeatureFlagsProps> = ({ data }) => {
                         description="Learn how to create a feature flag and toggle it on and off for different users."
                         link="/docs/feature-flags/manual#creating-feature-flags"
                     ></GettingStarted>
-                </section>
-
-                {/* Quick links */}
-                <section className="my-6">
-                    <h3 className="mb-6 mt-0">Quick links</h3>
-                    <LinkGrid links={quickLinks} />
                 </section>
 
                 <Tutorials tutorials={tutorials} />
