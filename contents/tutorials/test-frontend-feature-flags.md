@@ -14,7 +14,7 @@ To do this, you need to mock the flags to access the other variations. This tuto
 
 ## Creating a React app
 
-First, create a basic React app. Make sure [Node is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) then run `npx create-react-app` with the name of your app. We name ours `flag-test`.
+First, create a basic React app. Make sure [Node is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) then run `npx create-react-app` with the name of your app. We named ours `flag-test`.
 
 ```bash
 npx create-react-app flag-test
@@ -45,7 +45,7 @@ npm test
 
 ## Adding PostHog
 
-If we’ve created our React app and run our first test, we want to add PostHog. First, we need a PostHog instance ([sign up for free](https://app.posthog.com/signup)). From it, we need our project API key and instance address. Once we have them, in our React app, install `posthog-js`:
+If we’ve created our React app and run our first test, we want to add PostHog. First, we need a PostHog instance ([sign up for free](https://app.posthog.com/signup)). We then need our project API key and instance address from it. Once we have them, in our React app, install `posthog-js`:
 
 ```bash
 npm i posthog-js
