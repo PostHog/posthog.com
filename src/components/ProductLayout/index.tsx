@@ -1,43 +1,43 @@
 import Link from 'components/Link'
-import SEO from 'components/seo'
-import React from 'react'
+import React, { useState } from 'react'
 import { SessionRecording, FeatureFlags, AbTesting } from 'components/ProductIcons'
 import Layout from 'components/Layout'
 import { BusinessModel } from 'components/NotProductIcons'
 import { getImage, StaticImage } from 'gatsby-plugin-image'
-import { Post, Posts } from '../Blog'
+import { Post } from '../Blog'
 import TeamRoadmap from 'components/TeamRoadmap'
-import TeamMembers from 'components/TeamMembers'
 import ReactCountryFlag from 'react-country-flag'
 import { ContributorImage } from 'components/PostLayout/Contributors'
 import { graphql, useStaticQuery } from 'gatsby'
 import { CallToAction } from '../CallToAction'
 import { Squeak } from 'squeak-react'
+import Slider from 'react-slick'
+import { useLocation } from '@reach/router'
 
 const nav = [
     {
         label: 'Product analytics',
-        url: '/product-analytics',
+        url: '/product/product-analytics',
         icon: <SessionRecording className="w-5" />,
     },
     {
         label: 'Session recording',
-        url: '/session-recording',
+        url: '/product/session-recording',
         icon: <SessionRecording className="w-5" />,
     },
     {
         label: 'Feature flags',
-        url: '/feature-flags',
+        url: '/product/feature-flags',
         icon: <FeatureFlags className="w-5" />,
     },
     {
         label: 'A/B testing',
-        url: 'ab-testing',
+        url: '/product/ab-testing',
         icon: <AbTesting className="w-5" />,
     },
     {
         label: 'CDP',
-        url: '/cdp',
+        url: '/product/cdp',
         icon: <SessionRecording className="w-5" />,
     },
 ]
@@ -163,9 +163,215 @@ export const PairsWith = ({ products }: { products: IFeature[] }) => {
     )
 }
 
+const Slide = ({ image, label }) => {
+    return (
+        <div className="relative group">
+            <div className="hover:scale-[1.1] transition-transform relative active:scale-[1.09]">{image}</div>
+            <div className="absolute left-0 bottom-4 right-0 group-hover:visible invisible flex justify-center">
+                <span className="text-black bg-tan/75 backdrop-blur shadow-xl text-lg rounded-md px-3">{label}</span>
+            </div>
+        </div>
+    )
+}
+const slides = [
+    {
+        label: 'Product analytics',
+        url: 'product-analytics',
+        image: (
+            <StaticImage
+                placeholder="none"
+                loading="eager"
+                quality={100}
+                objectFit="contain"
+                alt=""
+                src="./images/hogs/product-analytics.png"
+            />
+        ),
+    },
+    {
+        label: 'Session recording',
+        url: 'session-recording',
+        image: (
+            <StaticImage
+                placeholder="none"
+                loading="eager"
+                quality={100}
+                objectFit="contain"
+                alt=""
+                src="./images/hogs/session-recording.png"
+            />
+        ),
+    },
+    {
+        label: 'Feature flags',
+        url: 'feature-flags',
+        image: (
+            <StaticImage
+                placeholder="none"
+                loading="eager"
+                quality={100}
+                objectFit="contain"
+                alt=""
+                src="./images/hogs/feature-flags.png"
+            />
+        ),
+    },
+    {
+        label: 'A/B testing and experiments',
+        url: 'ab-tests-and-experiments',
+        image: (
+            <StaticImage
+                placeholder="none"
+                loading="eager"
+                quality={100}
+                objectFit="contain"
+                alt=""
+                src="./images/hogs/experimentation.png"
+            />
+        ),
+    },
+    {
+        label: 'Data warehouse',
+        url: 'data-warehouse',
+        image: (
+            <StaticImage
+                placeholder="none"
+                loading="eager"
+                quality={100}
+                objectFit="contain"
+                alt=""
+                src="./images/hogs/sql.png"
+            />
+        ),
+    },
+    {
+        label: 'Event pipelines',
+        url: 'event-pipelines',
+        image: (
+            <StaticImage
+                placeholder="none"
+                loading="eager"
+                quality={100}
+                objectFit="contain"
+                alt=""
+                src="./images/hogs/event-pipelines.png"
+            />
+        ),
+    },
+    {
+        label: 'API',
+        url: 'api',
+        image: (
+            <StaticImage
+                placeholder="none"
+                loading="eager"
+                quality={100}
+                objectFit="contain"
+                alt=""
+                src="./images/hogs/api.png"
+            />
+        ),
+    },
+    {
+        label: 'Data warehouse',
+        url: 'data-warehouse',
+        image: (
+            <StaticImage
+                placeholder="none"
+                loading="eager"
+                quality={100}
+                objectFit="contain"
+                alt=""
+                src="./images/hogs/data-tree.png"
+            />
+        ),
+    },
+    {
+        label: 'Data warehouse',
+        url: 'data-warehouse',
+        image: (
+            <StaticImage
+                placeholder="none"
+                loading="eager"
+                quality={100}
+                objectFit="contain"
+                alt=""
+                src="./images/hogs/data-tractor.png"
+            />
+        ),
+    },
+    {
+        label: 'Data warehouse',
+        url: 'data-warehouse',
+        image: (
+            <StaticImage
+                placeholder="none"
+                loading="eager"
+                quality={100}
+                objectFit="contain"
+                alt=""
+                src="./images/hogs/data-warehouse.png"
+            />
+        ),
+    },
+    {
+        label: 'Data warehouse',
+        url: 'data-warehouse',
+        image: (
+            <StaticImage
+                placeholder="none"
+                loading="eager"
+                quality={100}
+                objectFit="contain"
+                alt=""
+                src="./images/hogs/warehouse-sync.png"
+            />
+        ),
+    },
+]
+
+const sliderSettings = {
+    dots: false,
+    infinite: true,
+    arrows: false,
+    slidesToScroll: 11,
+    autoplay: true,
+    variableWidth: true,
+    autoplaySpeed: 0,
+    speed: 100000,
+    cssEase: 'linear',
+}
+
+export const Footer = ({ title }) => {
+    const [activeSlide, setActiveSlide] = useState(0)
+
+    return (
+        <section className="text-center my-14">
+            <h2 className="text-6xl m-0">PostHog does that.</h2>
+            <p className="mt-2 mb-12">
+                Now that you know PostHog does {title.toLowerCase()}, check out what else PostHog can do.
+            </p>
+            <Nav />
+            <Slider
+                beforeChange={(_oldIndex, newIndex) => setActiveSlide(newIndex)}
+                className="product-hogs-slider"
+                {...sliderSettings}
+            >
+                {slides.map((slide, index) => {
+                    return (
+                        <Link key={index} className="cursor-pointer" smooth duration={300} offset={-57} to={slide.url}>
+                            <Slide {...slide} />
+                        </Link>
+                    )
+                })}
+            </Slider>
+        </section>
+    )
+}
+
 export const Section = ({
     children,
-    className = 'max-w-screen-2xl',
+    className = 'max-w-5xl',
     border = false,
     borderPadding = true,
 }: {
@@ -373,30 +579,44 @@ interface IProps {
     children: React.ReactNode
 }
 
+const Nav = () => {
+    const { pathname } = useLocation()
+    return (
+        <nav className="border-b border-gray-accent-light border-dashed relative z-10">
+            <ul className="list-none m-0 flex items-center space-x-4 justify-center max-w-screen-2xl mx-auto">
+                {nav.map((navItem) => {
+                    const { label, url, icon } = navItem
+                    console.log(url, pathname)
+                    return (
+                        <ke key={label}>
+                            <Link
+                                className={`py-4 px-2 flex space-x-2 items-center !text-black ${
+                                    pathname === url ? 'border-b border-red' : ''
+                                }`}
+                                to={url}
+                            >
+                                <span>{icon}</span>
+                                <span>{label}</span>
+                            </Link>
+                        </ke>
+                    )
+                })}
+            </ul>
+        </nav>
+    )
+}
+
 export default function ProductLayout({ title, description, image, children }: IProps): JSX.Element {
     return (
         <div className="px-5 py-12">
-            <nav className="border-b border-gray-accent-light border-dashed">
-                <ul className="list-none m-0 flex items-center space-x-4 justify-center max-w-screen-2xl mx-auto">
-                    {nav.map((navItem) => {
-                        const { label, url, icon } = navItem
-                        return (
-                            <li key={label}>
-                                <Link className="py-4 px-2 flex space-x-2 items-center !text-black" to={url}>
-                                    <span>{icon}</span>
-                                    <span>{label}</span>
-                                </Link>
-                            </li>
-                        )
-                    })}
-                </ul>
-            </nav>
+            <Nav />
             <section>
                 <h1 className="text-center text-5xl mb-0 mt-14">{title}? PostHog does that.</h1>
                 <div className="text-center mt-4">{description}</div>
                 <div className="max-w-screen-xl mx-auto my-14">{image}</div>
-                <div>{children}</div>
             </section>
+            <div>{children}</div>
+            <Footer title={title} />
         </div>
     )
 }
