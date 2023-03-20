@@ -44,6 +44,8 @@ HogQL expressions in insights enables you to combines the speed of PostHog's exi
 
 In addition to introducing HogQL, we've also upgraded the event explorer (previously known as the Live events tab) to give you more ways to filter events and analyze your data.
 
+Unlike the old "Live events" view, the event explorer lets you use HogQL expressions (`properties.$screen_width * $properties.screen_height`) and aggregations (`sum(properties.price)`) as columns.
+
 The event explorer also lets you view and edit the JSON source behind the table. Below, for example, you can see a query we wrote using HogQL which summarizes [votes from our 404 page](/hedgehogsgalore).
 
 ```
