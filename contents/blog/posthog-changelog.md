@@ -1,5 +1,5 @@
 ---
-date: 2023-03-10
+date: 2023-03-24
 title: "The PostHog Changelog"
 rootPage: /blog
 sidebar: Blog
@@ -18,6 +18,35 @@ featuredImageType: full
 Interested in what new features, fixes and updates have just launched on PostHog Cloud? Every Friday we update this page with a look back over the last seven days, so you can get a fresh look at what’s launched and launching right now. We also feature notable additions to the blog and docs. 
 
 > Some new features you read about below may still be in beta, behind a feature flag, or only available to paying users. Want to see which betas are currently available? [Check the roadmap](/roadmap)!
+
+## March 24, 2023 
+
+### HogQL
+![HogQL trends breakdown filter](../images/features/hogql/trends-breakdown.png)
+
+HogQL is a massive new feature which we've been quietly rolling out of the the last few weeks. It's essentially a new query language (based on ClickHouse SQL) which enables you to interrogate your data directly - and it's free for all users as part of a public beta. 
+
+There are multiple ways to use HogQL in PostHog - check [our full announcement](/blog/introducing-hogql) or [the docs](/manual/hogql) for more info - but one of the main ways is by using HogL within breakdowns. Simply select HogQL when choosing an insight breakdown, and you can doing things such as plotting signup sources by email domain, or breaking usage down by a pricing tier. 
+
+### Event explorer
+To support the introduction of HogQL, we've renamed and revamped the old Live Events view. It's now called the Event Explorer, and it offers a variety of new ways to filter incoming events and analyse data. 
+
+You can, for example, now use custom columns to a view and filter or transform results using HogQL - which is handy if you want to do things like converting currencies on the fly. But that's not all, so we recommend checking out [our full HogQL announcement](/blog/introducing-hogql) for more info. 
+
+### Autocapture toggle
+![autocapture toggle](../images/blog/array/autocapture.png)
+
+We very strongly believe that [autocapturing events is a good idea](/blog/is-autocapture-still-bad), but there are definitely situations when you may want to toggle it on/off - such as if you only want to ingest specific events.
+
+In the past, if you wanted to toggle autocapture on/off, you'd need to access our JS snippet directly. That could be a bit of a pain, so we've added a new option for it in your Project Settings. 
+
+### Product for Engineers
+![posthog newsletter](../images/blog/array/posthog_newsletter.png)
+
+You may remember our old newsletter, HogMail. Well, now it's grown up and moved to Substack, renamed as Product for Engineers. It's a twice-monthly newsletter about helping engineers to build better products. You can [subscribe for free](https://newsletter.posthog.com/?triedSigningIn=true), today.  
+
+Every issue of Product for Engineers has a theme which we explore through curated links, original commentary, tutorials and advice about the way _we_ work. The theme for the first issue? [Talking to users](https://newsletter.posthog.com/p/what-weve-learned-about-talking-to).
+
 
 ## March 10, 2023 
 
