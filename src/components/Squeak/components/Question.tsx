@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 
-import { Provider as QuestionProvider } from '../context/question'
 import { useOrg } from '../hooks/useOrg'
-import { useQuestion } from '../hooks/useQuestion'
+import { useQuestion, Provider as QuestionProvider } from '../hooks/useQuestion'
 import Avatar from './Avatar'
 import QuestionForm from './QuestionForm'
 import Reply from './Reply'

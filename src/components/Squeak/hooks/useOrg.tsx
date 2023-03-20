@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 import { get } from '../lib/api'
 
 type OrgContextValue = {
@@ -30,4 +30,12 @@ export const Provider: React.FC<ProviderProps> = ({ value: { apiHost, organizati
     }, [])
 
     return <Context.Provider value={{ apiHost, organizationId, config, profileLink }}>{children}</Context.Provider>
+}
+
+export const useOrg = () => {
+    const org = useContext(Context)
+    if (org === undefined) {
+        throw Error('No org has been specified using Provider')
+    }
+    return org
 }

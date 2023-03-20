@@ -1,8 +1,7 @@
 import React from 'react'
-import { Provider as QuestionProvider } from '../context/question'
+import { Provider as QuestionProvider } from '../hooks/useQuestion'
 import { useQuestion } from '../hooks/useQuestion'
-import { Provider as OrgProvider } from '../context/org'
-import { Provider as UserProvider } from '../context/user'
+import { Provider as OrgProvider } from '../hooks/useOrg'
 import root from 'react-shadow/styled-components'
 import { Theme } from './Theme'
 
@@ -134,21 +133,19 @@ export const FullQuestion = ({ onSubmit, onResolve, apiHost, organizationId, que
             <root.div ref={containerRef}>
                 <OrgProvider value={{ organizationId, apiHost }}>
                     <Theme containerRef={containerRef} />
-                    <UserProvider>
-                        <div className="squeak">
-                            <div className="squeak-question-container">
-                                <Reply className="squeak-post" subject={question.subject} {...firstReply} />
-                                <QuestionProvider
-                                    onSubmit={onSubmit}
-                                    question={question}
-                                    replies={question.replies}
-                                    onResolve={onResolve}
-                                >
-                                    <Replies question={question} />
-                                </QuestionProvider>
-                            </div>
+                    <div className="squeak">
+                        <div className="squeak-question-container">
+                            <Reply className="squeak-post" subject={question.subject} {...firstReply} />
+                            <QuestionProvider
+                                onSubmit={onSubmit}
+                                question={question}
+                                replies={question.replies}
+                                onResolve={onResolve}
+                            >
+                                <Replies question={question} />
+                            </QuestionProvider>
                         </div>
-                    </UserProvider>
+                    </div>
                 </OrgProvider>
             </root.div>
         </ErrorBoundary>

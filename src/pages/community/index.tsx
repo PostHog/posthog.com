@@ -5,7 +5,8 @@ import SEO from 'components/seo'
 import Layout from 'components/Layout'
 import PostLayout from 'components/PostLayout'
 import Link from 'components/Link'
-import { OrgProvider, UserProvider, useUser, Login as SqueakLogin } from 'components/Squeak'
+import { OrgProvider, Login as SqueakLogin } from 'components/Squeak'
+import { useUser } from 'hooks/useUser'
 import Modal from 'components/Modal'
 import EditProfile from 'components/Profiles/EditProfile'
 import { SqueakProfile } from './profiles/[id]'
@@ -324,47 +325,45 @@ export default function CommunityPage({ params }: PageProps) {
                 value={{ organizationId: 'a898bcf2-c5b9-4039-82a0-a00220a8c626', apiHost: 'https://squeak.cloud' }}
             >
                 <Layout>
-                    <UserProvider>
-                        <Modal setOpen={setEditModalOpen} open={editModalOpen}>
-                            <div
-                                onClick={() => setEditModalOpen(false)}
-                                className="flex flex-start justify-center absolute w-full p-4"
-                            >
-                                <div
-                                    className="max-w-xl bg-white dark:bg-black rounded-md relative w-full p-5"
-                                    onClick={(e) => e.stopPropagation()}
-                                >
-                                    <EditProfile onSubmit={handleEditProfile} profile={profile} />
-                                </div>
-                            </div>
-                        </Modal>
-                        <PostLayout
-                            menuWidth={{ right: 320 }}
-                            title="Profile"
-                            menu={community}
-                            sidebar={
-                                <ProfileSidebar
-                                    setProfile={setProfile}
-                                    setEditModalOpen={setEditModalOpen}
-                                    profile={profile}
-                                    postHogStats={postHogStats}
-                                    postHogComStats={postHogComStats}
-                                />
-                            }
-                            tableOfContents={[
-                                ...(profile ? [{ url: 'my-activity', value: 'My activity', depth: 0 }] : []),
-                                { url: 'recent-questions', value: 'Recent questions', depth: 0 },
-                                { url: 'active-issues', value: 'Most active issues', depth: 0 },
-                                { url: 'active-pulls', value: 'Most active PRs', depth: 0 },
-                            ]}
-                            hideSurvey
+                    <Modal setOpen={setEditModalOpen} open={editModalOpen}>
+                        <div
+                            onClick={() => setEditModalOpen(false)}
+                            className="flex flex-start justify-center absolute w-full p-4"
                         >
-                            {profile && <Activity questionsLoading={questionsLoading} questions={questions} />}
-                            <RecentQuestions />
-                            <ActiveIssues issues={issues.nodes} />
-                            <ActivePulls pulls={pulls.nodes} />
-                        </PostLayout>
-                    </UserProvider>
+                            <div
+                                className="max-w-xl bg-white dark:bg-black rounded-md relative w-full p-5"
+                                onClick={(e) => e.stopPropagation()}
+                            >
+                                <EditProfile onSubmit={handleEditProfile} profile={profile} />
+                            </div>
+                        </div>
+                    </Modal>
+                    <PostLayout
+                        menuWidth={{ right: 320 }}
+                        title="Profile"
+                        menu={community}
+                        sidebar={
+                            <ProfileSidebar
+                                setProfile={setProfile}
+                                setEditModalOpen={setEditModalOpen}
+                                profile={profile}
+                                postHogStats={postHogStats}
+                                postHogComStats={postHogComStats}
+                            />
+                        }
+                        tableOfContents={[
+                            ...(profile ? [{ url: 'my-activity', value: 'My activity', depth: 0 }] : []),
+                            { url: 'recent-questions', value: 'Recent questions', depth: 0 },
+                            { url: 'active-issues', value: 'Most active issues', depth: 0 },
+                            { url: 'active-pulls', value: 'Most active PRs', depth: 0 },
+                        ]}
+                        hideSurvey
+                    >
+                        {profile && <Activity questionsLoading={questionsLoading} questions={questions} />}
+                        <RecentQuestions />
+                        <ActiveIssues issues={issues.nodes} />
+                        <ActivePulls pulls={pulls.nodes} />
+                    </PostLayout>
                 </Layout>
             </OrgProvider>
         </>

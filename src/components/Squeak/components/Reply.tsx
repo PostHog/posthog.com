@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useQuestion } from '../hooks/useQuestion'
-import { useUser } from '../hooks/useUser'
+import { useUser } from 'hooks/useUser'
 import { useOrg } from '../hooks/useOrg'
 import Avatar from './Avatar'
 import Days from './Days'
@@ -38,7 +38,7 @@ export default function Reply({
     const { user } = useUser()
     const { profileLink } = useOrg()
     const isModerator = user?.isModerator
-    const isAuthor = user?.profile?.id === questionAuthorId
+    const isAuthor = user?.id === questionAuthorId
     const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation()
         if (confirmDelete) {
