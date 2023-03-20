@@ -148,7 +148,6 @@
         "yup": "^0.32.11",
         "@types/gravatar": "^1.8.3",
         "@types/styled-components": "^5.1.26",
-        "@vitejs/plugin-react": "^2.2.0",
         "react-shadow": "^19.0.3"
     },
     "devDependencies": {
