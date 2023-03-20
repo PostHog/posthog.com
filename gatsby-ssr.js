@@ -84,7 +84,7 @@ export const onRenderBody = function ({ setPreBodyComponents }) {
                 __html: `
 (function (w, d, t) {
     w.$unthreadSettings = {
-    baseUrl: 'https://posthog.unthread.io',
+    baseUrl: 'https://ph-chat.unthread.io',
     widgetId: '82bbc8b4-485f-4c15-9ada-e69f0e54c6bd'
     };
 
