@@ -27,7 +27,7 @@ Replays (aka session recordings) are a great way to understand:
 - Hesitation at different stages of your funnel.
 - How your users are interacting with individual elements of your product.
 
-Hotjar and Fullstory are popular products in this segment, but they're expensive, inflexible, and primarily designed with marketing teams. In this guide, we're looking at the best free and open-source session replay tools, which often offer the same features (or more) for less.
+Hotjar and Fullstory are popular session replay products, but they're expensive, inflexible, and primarily designed with marketing teams. In this guide, we're looking at the best free and open-source session replay tools, which often offer the same features (or more) for less.
 
 > **Changelog:**
 >
@@ -46,7 +46,7 @@ All PostHog’s tools work together natively, offering extensive, actionable use
 
 ### Who is PostHog for?
 
-PostHog is ideal for [product-minded developers](/blog/what-is-a-product-engineer) and product teams. Unlike Hotjar and Fullstory, it's designed for technical users. Its broad range of features means you can replace several discrete tools.
+PostHog is ideal for [product-minded developers](/blog/what-is-a-product-engineer) and product teams. Unlike Hotjar and Fullstory, it's designed for technical users. Its broad range of features means PostHog can replace several tools.
 
 ### Features and benefits
 
@@ -112,7 +112,7 @@ You can self-host for free – Highlight.io recommends an upper limit of 10k ses
 
 It offers a lightweight version of session recording that only stores the URL of the page and the user actions. This is designed to optimize your data storage and remove the manual maintenance otherwise required by UXWizz.
 
-UXwizz is maintained by a single developer.
+UXWizz is maintained by a single developer.
 
 ### Who is UXWizz for?
 
