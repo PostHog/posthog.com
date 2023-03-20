@@ -71,7 +71,7 @@ After restarting and opening your app, you should see events captured in your Po
 
 Next, add the control that displays the popups and control when and where they display. 
 
-Clone the code from [PostHog prompts repository](https://github.com/PostHog/posthog-prompts). 
+Clone the code from the [PostHog prompts repository](https://github.com/PostHog/posthog-prompts). 
 
 ```bash
 git clone https://github.com/PostHog/posthog-prompts
