@@ -96,11 +96,11 @@ export const FeatureList = ({ features }: { features: { title: string; descripti
     )
 }
 
-export const SectionHeading = ({ title, subtitle }: { title: string; subtitle: string }) => {
+export const SectionHeading = ({ title, subtitle }: { title: string; subtitle?: string }) => {
     return (
         <div className="mb-6">
             <h2 className="text-xl m-0">{title}</h2>
-            <p className="text-base m-0">{subtitle}</p>
+            {subtitle && <p className="text-base m-0">{subtitle}</p>}
         </div>
     )
 }
@@ -500,7 +500,7 @@ export const Roadmap = ({ subtitle, team }) => {
         <div>
             <h3 className="m-0">Roadmap</h3>
             <p className="m-0">{subtitle}</p>
-            <div className="mt-8 flex items-center space-x-8">
+            <div className="mt-8 flex items-start space-x-8">
                 <div>
                     <TeamRoadmap team={team} />
                 </div>

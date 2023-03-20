@@ -1,11 +1,8 @@
 import Layout from 'components/Layout'
 import ProductLayout, {
     Feature,
-    FeatureDescription,
     FeatureGrid,
     FeatureList,
-    FeatureTitle,
-    Footer,
     PairsWith,
     SectionHeading,
     Testimonial,
@@ -16,11 +13,9 @@ import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
 import testimonials from '../../data/testimonials.json'
 import { Section } from 'components/ProductLayout'
-import Link from 'components/Link'
 import { BlogPosts, CTA, PostHogVS, Questions, Roadmap } from '../../components/ProductLayout'
 import { Check as CheckIcon, Close as CloseIcon } from '../../components/Icons'
 import { graphql, useStaticQuery } from 'gatsby'
-import { Squeak } from 'squeak-react'
 
 const Check = () => <CheckIcon className="w-5" />
 const Close = () => <CloseIcon className="w-5" />

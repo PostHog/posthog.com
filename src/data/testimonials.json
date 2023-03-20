@@ -179,7 +179,12 @@
     },
     {
         "featuresUsed": ["funnels"],
-        "author": { "name": "Tiffany Wong", "role": "Co-founder", "company": { "name": "Pry" } },
+        "author": {
+            "name": "Tiffany Wong",
+            "role": "Co-founder",
+            "company": { "name": "Pry", "image": "/images/customers/pry.svg" },
+            "image": "/images/customers/tiffany.png"
+        },
         "quote": "We’re tracking how users engage with our platform, where they fall out of our funnels and what the overall trends in behavior are. The data we’ve gathered has helped us make several important decisions about where to improve our platform."
     },
     {
