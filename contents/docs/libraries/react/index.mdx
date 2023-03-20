@@ -93,38 +93,61 @@ All the methods of the library are available and can be used as described in the
 
 ```react
 import { usePostHog } from 'posthog-js/react'
-import { useUser } from '../lib/user'
+import { useEffect } from 'react'
+import { useUser, useLogin } from '../lib/user'
 
 function App() {
-  const posthog = usePostHog()
-  const user = useUser()
-  
-  const login = () => {
-    posthog.identify(user.email, {
-      email: user.email
-    })
-    posthog.group('company', user.company_id)
-  }
+    const posthog = usePostHog()
+    const login = useLogin()
+    const user = useUser()
 
-  return (
-    <div className="App">
-      { /* Fire a custom event when the button is clicked */ }
-      <button onClick={() => posthog.capture('button clicked')}>
-        Click me
-      </button>
-      { /* This button click event is autocaptured by default */ }
-      <button data-attr="autocapture-button">Autocapture buttons</button>
-      { /* This button click event is not autocaptured */ }
-      <button className="ph-no-capture">Ignore certain elements</button>
-      <button onClick={login}>
-        Login
-      </button>
-    </div>
-  );
+    useEffect(() => {
+        if (user) {
+            posthog?.identify(user, {
+                email: user.email,
+            })
+            posthog?.group('company', user.company_id)
+        }
+    }, [posthog, user])
+
+    const loginClicked = () => {
+        posthog?.capture('Clicked Log In')
+        login()
+    }
+
+    return (
+        <div className="App">
+            {/* Fire a custom event when the button is clicked */}
+            <button onClick={() => posthog?.capture('button clicked')}>Click me</button>
+            {/* This button click event is autocaptured by default */}
+            <button data-attr="autocapture-button">Autocapture buttons</button>
+            {/* This button click event is not autocaptured */}
+            <button className="ph-no-capture">Ignore certain elements</button>
+            <button onClick={loginClicked}>Login</button>
+        </div>
+    )
 }
 
-export default App;
+export default App
 ```
+
+#### TypeError: Cannot read properties of undefined
+
+If you see the error `TypeError: Cannot read properties of undefined (reading '...')` this is likely because you tried to call a posthog function when posthog was not initialized (such as during the initial render). On purpose, we still render the children even if PostHog is not initialized so that your app still loads even if PostHog can't load.
+
+To fix this error, add a check that posthog has been initialized such as:
+
+```js
+useEffect(() => {
+  posthog?.capture('Test') // using optional chaining (recommended)
+
+  if (posthog) {
+    posthog.capture('Test') // using an if statement
+  }
+}, [posthog])
+```
+
+Typescript helps protect against these errors.
 
 ### Feature flags
 

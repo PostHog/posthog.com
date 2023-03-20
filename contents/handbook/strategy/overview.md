@@ -55,6 +55,7 @@ We did this by first focusing on high-growth self-serve startups to nail (1) and
   * More powerful querying than our competitors can offer (for example, SQL access) that answers the long tail of questions
   * PostHog 3000 UX = a design uplift including dark mode to encourage more word of mouth
 * Launch product analytics, session recordings, feature flags, experiments, and the CDP each as full standalone products
+
   * Enables us to sell each product individually at the best rate in the market then expand to generate a higher order value overall. This means no one can outcompete.
   * Individual product pricing helps us understand where to double down and which feedback to prioritize.
   * Builds trust in the individual products as being 1st class.
@@ -63,9 +64,9 @@ We did this by first focusing on high-growth self-serve startups to nail (1) and
   * Work on top-of-funnel growth in high potential startups (whereas last year we primarily focused on monetization of high growth startups)
   * Create a more precise approach to this (growth model / CS focus / marketing focus)
 
-### This quarter - OKRs
+### This quarter - quarterly goals
 
-We set [quarterly OKRs](/handbook/strategy/objectives) to keep us on track.
+We set small team [quarterly goals](/handbook/strategy/objectives) to keep us on track.
 
 ## Target customers for 2023
 
