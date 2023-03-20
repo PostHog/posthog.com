@@ -125,7 +125,7 @@ posthog.init(
   )
 ```
 
-This method enables you to run whatever checks you want, making it useful for changing PostHog's behavior between environments. You can see the full list of config options in [our JavaScript docs](/docs/integrate/client/js#config).
+The `loaded` method enables you to run whatever checks you want, making it useful for changing PostHog's behavior between environments. If you wanted to make opting in conditional, call `opt_in_capturing()` instead. You can see the full list of config options in [our JavaScript docs](/docs/integrate/client/js#config).
 
 ### Opt-out of capturing based on URL
 

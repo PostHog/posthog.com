@@ -6,12 +6,12 @@ isArticle: false
 hideAnchor: true
 ---
 
-import { InstallChapter, SendEventsChapter, IdentifyUsersChapter, ActionsAndInsightsChapter, GroupAnalyticsChapter } from "components/GettingStarted"
+import { InstallChapter, SendEventsChapter, IdentifyUsersChapter, UserPropertiesChapter, ActionsAndInsightsChapter, GroupAnalyticsChapter } from "components/GettingStarted"
 import SignupLink from "components/SignupLink"
 
-<p class="text-black/70 dark:text-white/90 font-bold">👋 Welcome! This guide will get you set up with PostHog for your web app and backend.</p>
-
-<p class="text-black/70 dark:text-white/90">We recommend going in order (it takes about 30 minutes) or you can jump to the sections you're most interested in.</p>
+<blockquote>
+  <p class="text-black/70 dark:text-white/90"><span className="text-xl">👋</span> <strong>Welcome!</strong> This guide will get you set up with PostHog for your web app and backend.</p>
+</blockquote>
 
 <div className="py-6"></div>
 
@@ -20,6 +20,8 @@ import SignupLink from "components/SignupLink"
 <SendEventsChapter />
 
 <IdentifyUsersChapter />
+
+<UserPropertiesChapter />
 
 <ActionsAndInsightsChapter />
 

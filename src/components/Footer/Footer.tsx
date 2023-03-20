@@ -55,19 +55,23 @@ const linklist: IProps[] = [
         url: '/docs',
         items: [
             {
-                title: 'Quickstart guide',
-                url: '/docs/getting-started/cloud',
+                title: 'Start here',
+                url: '/docs/getting-started/start-here',
             },
             {
-                title: 'Self-hosting',
-                url: '/docs/self-host',
+                title: 'Install PostHog',
+                url: '/docs/getting-started/install',
             },
             {
-                title: 'Installing PostHog',
-                url: '/docs/integrate',
+                title: 'Send events',
+                url: '/docs/getting-started/send-events',
             },
             {
-                title: 'Building an app',
+                title: 'Integrations',
+                url: '/docs/integrations',
+            },
+            {
+                title: 'Build an app',
                 url: '/docs/apps/build',
             },
             {
@@ -78,14 +82,6 @@ const linklist: IProps[] = [
                 title: 'Webhooks',
                 url: '/docs/integrate/webhooks/message-formatting',
             },
-            {
-                title: 'How PostHog works',
-                url: '/docs/how-posthog-works',
-            },
-            {
-                title: 'Data privacy',
-                url: '/docs/privacy',
-            },
         ],
     },
     {
@@ -93,11 +89,27 @@ const linklist: IProps[] = [
         url: '/using-posthog',
         items: [
             {
-                title: 'Product manual',
-                url: '/using-posthog/',
+                title: 'Product analytics',
+                url: '/docs/product-analytics/',
             },
             {
-                title: 'Apps manuals',
+                title: 'Session recording',
+                url: '/docs/session-recording',
+            },
+            {
+                title: 'Feature flags',
+                url: '/docs/feature-flags',
+            },
+            {
+                title: 'A/B testing',
+                url: '/docs/experiments',
+            },
+            {
+                title: 'Data',
+                url: '/docs/data',
+            },
+            {
+                title: 'Apps',
                 url: '/docs/apps',
             },
             {

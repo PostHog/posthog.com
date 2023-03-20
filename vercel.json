@@ -1,9 +1,11 @@
 {
     "redirects": [
+        { "source": "/docs/sdks/:path*", "destination": "/docs/libraries/:path*" },
+        { "source": "/docs/integrate/third-party/:path*", "destination": "/docs/libraries/:path*" },
         { "source": "/plugins/:path*", "destination": "/apps/:path*" },
         { "source": "/integrations/:path*", "destination": "/apps/:path*" },
         { "source": "/docs/user-guides/:path*", "destination": "/manual/:path*" },
-        { "source": "/docs/integrate/(client|server)/:path*", "destination": "/docs/sdks/:path*" },
+        { "source": "/docs/integrate/(client|server)/:path*", "destination": "/docs/integrate/:path*" },
         { "source": "/docs/integrations/android-integration", "destination": "/docs/libraries/android" },
         { "source": "/docs/integrations/community", "destination": "/docs/libraries/community" },
         { "source": "/docs/integrations/docusaurus-integration", "destination": "/docs/libraries/docusaurus" },
@@ -14,7 +16,14 @@
         { "source": "/docs/integrations/ios-integration", "destination": "/docs/libraries/ios" },
         { "source": "/docs/integrations/javascript-integration", "destination": "/docs/libraries/js" },
         { "source": "/docs/integrations/js-integration", "destination": "/docs/libraries/js" },
-        { "source": "/docs/integrations/message-formatting", "destination": "/docs/libraries/message-formatting" },
+        { "source": "/docs/integrations/message-formatting", "destination": "/docs/webhooks/message-formatting" },
+        { "source": "/docs/libraries/message-formatting", "destination": "/docs/webhooks/message-formatting" },
+        { "source": "/docs/libraries/microsoft-teams", "destination": "/docs/integrate/webhooks/microsoft-teams" },
+        { "source": "/docs/libraries/slack", "destination": "/docs/integrate/webhooks/slack" },
+        { "source": "/docs/integrate/webhooks/message-formatting", "destination": "/docs/webhooks/message-formatting" },
+        { "source": "/docs/integrate/webhooks/microsoft-teams", "destination": "/docs/webhooks/microsoft-teams" },
+        { "source": "/docs/integrate/webhooks/discord", "destination": "/docs/webhooks/discord" },
+        { "source": "/docs/integrate/webhooks/slack", "destination": "/docs/webhooks/slack" },
         { "source": "/docs/integrations/microsoft-teams", "destination": "/docs/libraries/microsoft-teams" },
         { "source": "/docs/integrations/node-integration", "destination": "/docs/libraries/node" },
         { "source": "/docs/integrations/php-integration", "destination": "/docs/libraries/php" },
@@ -61,56 +70,34 @@
             "source": "/docs/contributing/updating-documentation",
             "destination": "/docs/contribute/updating-documentation"
         },
-        { "source": "/docs/libraries/android", "destination": "/docs/sdks/android" },
-        { "source": "/docs/libraries/flutter", "destination": "/docs/sdks/flutter" },
-        { "source": "/docs/libraries/ios", "destination": "/docs/sdks/ios" },
-        { "source": "/docs/libraries/js", "destination": "/docs/sdks/js" },
-        { "source": "/docs/libraries/react-native", "destination": "/docs/sdks/react-native" },
         {
             "source": "/docs/deployment/snippet-installation",
             "destination": "/docs/integrate/client/snippet-installation"
         },
-        { "source": "/docs/libraries/elixir", "destination": "/docs/sdks/elixir" },
-        { "source": "/docs/libraries/go", "destination": "/docs/sdks/go" },
-        { "source": "/docs/libraries/node", "destination": "/docs/sdks/node" },
-        { "source": "/docs/libraries/php", "destination": "/docs/sdks/php" },
-        { "source": "/docs/libraries/python", "destination": "/docs/sdks/python" },
-        { "source": "/docs/libraries/ruby", "destination": "/docs/sdks/ruby" },
-        { "source": "/docs/libraries/docusaurus", "destination": "/docs/integrate/third-party/docusaurus" },
-        { "source": "/docs/libraries/gatsby", "destination": "/docs/integrate/third-party/gatsby" },
         {
             "source": "/docs/tutorials/1-minute/integrate-with-gtm",
-            "destination": "/docs/integrate/third-party/google-tag-manager"
+            "destination": "/docs/integrate/google-tag-manager"
         },
         {
             "source": "/docs/tutorials/1-minute/integrate-with-metabase",
-            "destination": "/docs/integrate/third-party/metabase"
+            "destination": "/docs/integrate/metabase"
         },
         {
             "source": "/docs/tutorials/1-minute/integrate-with-nuxt-js",
-            "destination": "/docs/integrate/third-party/nuxt-js"
+            "destination": "/docs/integrate/nuxt-js"
         },
         {
             "source": "/docs/tutorials/1-minute/integrate-with-retool",
-            "destination": "/docs/integrate/third-party/retool"
+            "destination": "/docs/integrate/retool"
         },
-        { "source": "/docs/libraries/rudderstack", "destination": "/docs/integrate/third-party/rudderstack" },
-        { "source": "/docs/libraries/segment", "destination": "/docs/integrate/third-party/segment" },
-        { "source": "/docs/libraries/sentry", "destination": "/docs/integrate/third-party/sentry" },
         {
             "source": "/docs/tutorials/1-minute/integrate-with-shopify",
-            "destination": "/docs/integrate/third-party/shopify"
+            "destination": "/docs/integrate/shopify"
         },
         {
             "source": "/docs/tutorials/1-minute/integrate-with-wordpress",
-            "destination": "/docs/integrate/third-party/wordpress"
+            "destination": "/docs/integrate/wordpress"
         },
-        {
-            "source": "/docs/libraries/message-formatting",
-            "destination": "/docs/integrate/webhooks/message-formatting"
-        },
-        { "source": "/docs/libraries/microsoft-teams", "destination": "/docs/integrate/webhooks/microsoft-teams" },
-        { "source": "/docs/libraries/slack", "destination": "/docs/integrate/webhooks/slack" },
         { "source": "/docs/configuring-posthog/email", "destination": "/docs/self-host/configure/email" },
         {
             "source": "/docs/configuring-posthog/environment-variables",
@@ -189,8 +176,10 @@
             "source": "/handbook/people/hiring-process/hiring-process",
             "destination": "/handbook/people/hiring-process"
         },
-        { "source": "/docs/integrate/client/ios/index", "destination": "/docs/integrate/client/ios" },
-        { "source": "/docs/integrate/client/js/index", "destination": "/docs/integrate/client/js" },
+        { "source": "/docs/integrate/client/ios/index", "destination": "/docs/libraries/ios" },
+        { "source": "/docs/integrate/client/ios", "destination": "/docs/libraries/ios" },
+        { "source": "/docs/integrate/client/js/index", "destination": "/docs/libraries/js" },
+        { "source": "/docs/integrate/client/js", "destination": "/docs/libraries/js" },
         {
             "source": "/handbook/people/hiring-process/index",
             "destination": "/handbook/people/hiring-process/hiring-process"
@@ -632,7 +621,7 @@
             "destination": "/blog/using-posthog"
         },
         {
-            "source": "/docs/integrate/third-party/slack",
+            "source": "/docs/libraries/slack",
             "destination": "/manual/subscriptions"
         },
         {
@@ -702,7 +691,111 @@
         {
             "source": "/docs/self-host/open-source/deployment",
             "destination": "/docs/self-host"
-        }
+        },
+        { "source": "/docs/integrate/android", "destination": "/docs/libraries/android" },
+        { "source": "/docs/integrate/api", "destination": "/docs/libraries/api" },
+        { "source": "/docs/integrate/curl", "destination": "/docs/libraries/curl" },
+        { "source": "/docs/integrate/elixir", "destination": "/docs/libraries/elixir" },
+        { "source": "/docs/integrate/flutter", "destination": "/docs/libraries/flutter" },
+        { "source": "/docs/integrate/go", "destination": "/docs/libraries/go" },
+        { "source": "/docs/integrate/ios", "destination": "/docs/libraries/ios" },
+        { "source": "/docs/integrate/java", "destination": "/docs/libraries/java" },
+        { "source": "/docs/integrate/js", "destination": "/docs/libraries/js" },
+        { "source": "/docs/integrate/node", "destination": "/docs/libraries/node" },
+        { "source": "/docs/integrate/php", "destination": "/docs/libraries/php" },
+        { "source": "/docs/integrate/python", "destination": "/docs/libraries/python" },
+        { "source": "/docs/integrate/react", "destination": "/docs/libraries/react" },
+        { "source": "/docs/integrate/react-native", "destination": "/docs/libraries/react-native" },
+        { "source": "/docs/integrate/ruby", "destination": "/docs/libraries/ruby" },
+        { "source": "/docs/integrate/rust", "destination": "/docs/libraries/rust" },
+        {
+            "source": "/docs/integrate/identifying-users",
+            "destination": "/docs/getting-started/identify-users"
+        },
+        {
+            "source": "/docs/integrate/user-properties",
+            "destination": "/docs/getting-started/user-properties"
+        },
+        {
+            "source": "/docs/integrate",
+            "destination": "/docs/getting-started/install"
+        },
+        {
+            "source": "/docs/integrate/ingest-historic-data",
+            "destination": "/docs/migrate/ingest-historic-data"
+        },
+        {
+            "source": "/blog/categories/hogmail",
+            "destination": "/blog/categories/newsletter"
+        },
+
+        { "source": "/docs/integrate/third-party/docusaurus", "destination": "/docs/libraries/docusaurus" },
+        { "source": "/docs/integrate/third-party/gatsby", "destination": "/docs/libraries/gatsby" },
+        {
+            "source": "/docs/integrate/third-party/google-tag-manager",
+            "destination": "/docs/libraries/google-tag-manager"
+        },
+
+        { "source": "/manual/recordings", "destination": "/docs/session-recording" },
+        { "source": "/manual/feature-flags", "destination": "/docs/feature-flags/manual" },
+        { "source": "/manual/experimentation", "destination": "/docs/experiments/manual" },
+        { "source": "/docs/user-guides/feature-flags", "destination": "/docs/feature-flags/manual" },
+
+        { "source": "/manual/", "destination": "/docs/product-analytics/" },
+        { "source": "/manual/correlation", "destination": "/docs/product-analytics/correlation" },
+        { "source": "/manual/dashboards", "destination": "/docs/product-analytics/dashboards" },
+        { "source": "/manual/funnels", "destination": "/docs/product-analytics/funnels" },
+        { "source": "/manual/group-analytics", "destination": "/docs/product-analytics/group-analytics" },
+        { "source": "/manual/hogql", "destination": "/docs/product-analytics/hogql" },
+        { "source": "/manual/insights", "destination": "/docs/product-analytics/insights" },
+        { "source": "/manual/lifecycle", "destination": "/docs/product-analytics/lifecycle" },
+        { "source": "/manual/paths", "destination": "/docs/product-analytics/paths" },
+        { "source": "/manual/retention", "destination": "/docs/product-analytics/retention" },
+        { "source": "/manual/sampling", "destination": "/docs/product-analytics/sampling" },
+        { "source": "/manual/stickiness", "destination": "/docs/product-analytics/stickiness" },
+        { "source": "/manual/toolbar", "destination": "/docs/product-analytics/toolbar" },
+        { "source": "/manual/trends", "destination": "/docs/product-analytics/trends" },
+
+        { "source": "/manual/actions", "destination": "/docs/data/actions" },
+        { "source": "/manual/annotations", "destination": "/docs/data/annotations" },
+        { "source": "/manual/application-settings", "destination": "/docs/data/application-settings" },
+        { "source": "/manual/cohorts", "destination": "/docs/data/cohorts" },
+        { "source": "/manual/data-management", "destination": "/docs/data/data-management" },
+        { "source": "/manual/events", "destination": "/docs/data/events" },
+        { "source": "/manual/notifications-and-alerts", "destination": "/docs/data/notifications-and-alerts" },
+        { "source": "/manual/organizations-and-projects", "destination": "/docs/data/organizations-and-projects" },
+        { "source": "/manual/persons", "destination": "/docs/data/persons" },
+        { "source": "/manual/role-based-access", "destination": "/docs/data/role-based-access" },
+        { "source": "/manual/sessions", "destination": "/docs/data/sessions" },
+        { "source": "/manual/sso", "destination": "/docs/data/sso" },
+        { "source": "/manual/subscriptions", "destination": "/docs/data/notifications-and-alerts" },
+        { "source": "/manual/team-collaboration", "destination": "/docs/data/team-collaboration" },
+        { "source": "/manual/utm-segmentation", "destination": "/docs/data/utm-segmentation" },
+
+        { "source": "/manual/support", "destination": "/docs/support-options" },
+        { "source": "/manual/glossary", "destination": "/docs/glossary" },
+
+        { "source": "/docs/integrate/browser-extension", "destination": "/docs/advanced/browser-extension" },
+        { "source": "/docs/integrate/cdp", "destination": "/docs/advanced/cdp" },
+        { "source": "/docs/integrate/proxy", "destination": "/docs/advanced/proxy" },
+
+        { "source": "/docs/integrate/badge", "destination": "/docs/contribute/badge" },
+        { "source": "/docs/integrate/libraries", "destination": "/docs/libraries" },
+
+        { "source": "/docs/data/subscriptions", "destination": "/docs/data/notifications-and-alerts" },
+        { "source": "/handbook/engineering/oncall-rotation", "destination": "/handbook/engineering/oncall" },
+        { "source": "/docs/integrate/next-js", "destination": "/docs/libraries/next-js" },
+        { "source": "/docs/integrate/sentry", "destination": "/docs/libraries/sentry" },
+        { "source": "/docs/integrate/rudderstack", "destination": "/docs/libraries/rudderstack" },
+        { "source": "/docs/integrate/segment", "destination": "/docs/libraries/segment" },
+        { "source": "/docs/sdks/ios", "destination": "/docs/libraries/ios" },
+        
+        { "source": "/docs/self-host/deploy/aws", "destination": "/docs/self-host" },
+        { "source": "/docs/self-host/deploy/azure", "destination": "/docs/self-host" },
+        { "source": "/docs/self-host/deploy/digital-ocean", "destination": "/docs/self-host" },
+        { "source": "/docs/self-host/deploy/gcp", "destination": "/docs/self-host" },
+        { "source": "/docs/self-host/deploy/other", "destination": "/docs/self-host" }
+        
     ],
     "rewrites": [
         {
