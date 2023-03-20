@@ -16,15 +16,14 @@ tags:
 
 Elasticsearch and ClickHouse are both open-source frameworks with advantages over conventional databases like [PostgreSQL](/blog/clickhouse-vs-postgres) for performing tasks over *lots* of data, but they serve very different needs.
 
-Elasticsearch is the bedrock product for Elastic. It sells Elastic Cloud, a managed solution that bundles Elasticsearch with other data products. 
+Elasticsearch, as the name implies, was designed to power better search. It can efficiently return search results, such as grocery items on a grocer’s website, accounting for things such as spelling mistakes. It's the bedrock product for Elastic, which sells Elastic Cloud – a managed solution that bundles Elasticsearch with other data products. 
 
 ![Elasticsearch Development.png](../images/blog/clickhouse-vs-elastic/elasticsearch-development.png)
 
-ClickHouse isn’t too different. While the database, ClickHouse, remains open source, it is managed by the for-profit ClickHouse Inc. ClickHouse Inc.’s main offering is ClickHouse Cloud, a managed service similar to Elastic Cloud, just for deploying ClickHouse instead. However, ClickHouse also merges notable contributions by Altinity, a separate company that sells Altinity.Cloud, a managed service for deploying ClickHouse in Kubernetes. 
+ClickHouse, meanwhile, excels at aggregating data for uses like business analytics or financial statistics. While the database, ClickHouse, remains open source, it is managed by the for-profit ClickHouse Inc. ClickHouse Inc.’s main offering is ClickHouse Cloud, a managed service similar to Elastic Cloud, just for deploying ClickHouse instead. However, ClickHouse also merges notable contributions by Altinity, a separate company that sells Altinity.Cloud, a managed service for deploying ClickHouse in Kubernetes. 
 
 ![ClickHouse Development.png](../images/blog/clickhouse-vs-elastic/clickhouse-development.png)
 
-Elasticsearch, as the name implies, was designed to power better search. It can efficiently return search results, such as grocery items on a grocer’s website, accounting for things such as spelling mistakes. ClickHouse, meanwhile, would stumble with the same task, but it excels at aggregating data for uses like business analytics or financial statistics. 
 
 Elasticsearch and ClickHouse are interesting to compare because of their vastly different architecture, optimized for each of their respective goals. Comparing them is a good meditation on physical and virtual layouts can improve efficiency toward a specific efficiency goal. 
 
