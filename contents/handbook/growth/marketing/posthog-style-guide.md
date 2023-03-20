@@ -106,7 +106,7 @@ Open source should be hyphenated when it appears before a noun.
 
 > - **Example:** "The open-source community is awesome"
 
-But should be written without a hypen in other contexts.
+But should be written without a hyphen in other contexts.
 
 > - **Example:** "PostHog loves being open source."
 
