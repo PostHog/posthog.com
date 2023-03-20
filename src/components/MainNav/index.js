@@ -8,7 +8,7 @@ import { graphql, useStaticQuery } from 'gatsby'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import React, { useState } from 'react'
 import MenuItem from './MenuItem'
-import { OrgProvider, UserProvider } from 'squeak-react'
+import { OrgProvider, UserProvider } from 'components/Squeak'
 
 export default function MainNav() {
     const data = useStaticQuery(graphql`

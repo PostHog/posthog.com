@@ -7,7 +7,7 @@ import { SEO } from 'components/seo'
 import PostLayout from 'components/PostLayout'
 import { UnderConsideration } from './UnderConsideration'
 import { InProgress } from './InProgress'
-import { OrgProvider, UserProvider } from 'squeak-react'
+import { OrgProvider, UserProvider } from 'components/Squeak'
 import { ImageDataLike, StaticImage } from 'gatsby-plugin-image'
 import community from 'sidebars/community.json'
 
