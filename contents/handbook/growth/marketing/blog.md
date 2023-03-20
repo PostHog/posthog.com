@@ -6,11 +6,15 @@ showTitle: true
 
 Content is the main pillar of our marketing strategy. As our products are quite technical in nature, we believe that frequent and regular content output helps improve acquisition and ongoing product engagement. The [blog](/blog) is where we publish interesting product content, share feature updates, and tell PostHog stories.
 
+**Other useful links:**
+- [PostHog style guide](../handbook/growth/marketing/posthog-style-guide)
+- [Exporting a blog post image](../handbook/growth/marketing/exporting-blog-post-image)
+
 ## Content strategy
 
 Content is a long-term strategy and we'e focused on high-quality content that's genuinely valuable to users. Our strategy is to go _deeper_ and create better content as we grow, not simply push out more articles for its own sake. For this reason, we never set ourselves specific content output targets.
 
-We win on **depth**, not breadth – a few high-quality pieces > a larger number of medium quality pieces. We have four content buckets:
+We **win on depth**, not breadth – a few high-quality pieces > a larger number of medium quality pieces. We have four content buckets:
 
 1. **Top-of-funnel SEO content:** Our goals with this content is to improve our topical authority and generate inbound demand and brand awareness. This content includes list articles like the [best GA4 alternatives for apps and websites](/blog/ga4-alternatives), comparisons like [PostHog vs LogRocket](/blog/posthog-vs-logrocket), in-depth technical deep dives like [ClickHouse vs Snowflake](/blog/clickhouse-vs-snowflake), and explainers like [What is a product engineer (and why they're awesome)](/blog/what-is-a-product-engineer). It's mostly written by the marketing team and posted on the blog.
 
