@@ -11,11 +11,15 @@ Segment is a Customer Data Platform (CDP) that allows you to easily manage data 
 
 Make sure you have a [Segment account](https://segment.com/docs/#getting-started) **and** a PostHog account, using [PostHog Cloud](https://app.posthog.com/signup) or self-hosting.
 
-1. For each source that you want to send data to PostHog:
-2. If it's a website or web app - follow [Setting up Segment with your website](#setting-up-segment-with-your-website-all-features-supported)
-3. For all other sources, follow the instructions for [Adding PostHog as a simple Segment destination](#adding-posthog-as-a-simple-segment-destination-minimal-feature-support)
+1. In the Segment workspace, create a new project and enable PostHog as an integration. We are listed as a 'Destination' on Segment
+2. Grab the PostHog API key from the 'Project Settings' page in PostHog
+3. Use one of Segment's libraries to send events
+4. See the events coming into PostHog
 
-### Setting up Segment with your website (all features supported)
+
+### Enabling all features via Segment with your website
+
+The simple Segment destination only supports tracking of **pageviews**, **custom events** and **identifying users**.
 
 In order to use the full feature set of PostHog (**autocapture**, **session recording**, **feature flags**, **heatmaps** or the **toolbar**) we need to load our own Javascript snippet directly.
 
@@ -41,16 +45,6 @@ In order to use the full feature set of PostHog (**autocapture**, **session reco
     })
     ```
 
-Note: It's possible to use PostHog as a simple Segment destination as mentioned below for your website, but you will lose out on the full feature set of PostHog.
-
-### Adding PostHog as a simple Segment destination (minimal feature support)
-
-The simple Segment destination only supports tracking of **pageviews**, **custom events** and **identifying users** - it does not support **autocapture**, **session recording**, **feature flags**, **heatmaps** or the **toolbar**. As such, we only recommend this method for basic tracking of events that are not using the client sidce javascript library e.g. sending your server-side events to PostHog.
-
-1. In the Segment workspace, create a new project and enable PostHog as an integration. We are listed as a 'Destination' on Segment
-2. Grab the PostHog API key from the 'Project Settings' page in PostHog
-3. Use one of Segment's libraries to send events
-4. See the events coming into PostHog
 
 ## Sending events to PostHog
 
