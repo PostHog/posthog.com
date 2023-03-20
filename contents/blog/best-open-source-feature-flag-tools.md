@@ -27,9 +27,10 @@ Feature flags, aka feature toggles, turn specific functions on and off during ru
 
 - **Controlling access** to certain features based on user criteria, such as location, device type or subscription level.
 
-In this guide, we’ll explore some of the best open source feature flag tools, all of which are either totally free or offer generous free plans.
+In this guide, we’ll explore some of the best open source feature flag tools, all of which are either totally free or offer generous free plans. If you want to run experiments as well, we recommend reading our guide to the [best open-source A/B testing tools](/blog/best-open-source-ab-testing-tools).
 
-If you want to run experiments as well, we recommend reading our guide to the [best open-source A/B testing tools](/blog/best-open-source-ab-testing-tools).
+> **Changelog:**
+> - **Mar 15, 2023:** Removed DevCycle, added Flipt. Updated copy and screenshots. 
 
 ## 1. PostHog
 
@@ -188,30 +189,5 @@ Flipt is ideal for anyone who wants a pure open source solution with no potentia
 ### How much does it cost?
 
 Nothing. There is no paid version of Flipt. It's distributed under a GPL-3.0 license.
-
-## 7. DevCycle
-
-![devcycle](../images/blog/open-source-feature-flags/devcycle.png)
-
-[DevCycle](https://devcycle.com/) is a progressive feature delivery solution focused on improving development team workflows and reporting. Its feature flag platform comes with full SDK coverage for all major languages, customized workflows that integrate with the existing PR environment, and status reports which make your work transparent for all stakeholders.
-
-### Who is DevCycle for?
-
-DevCycle is designed for developers who want strong project management tools for their feature flags in order to stay aligned with product stakeholders. Their concise release activity monitoring allows for easy reporting and keeps code clean.
-
-### Features and benefits
-
-- Feature experimentation
-- Full SDK and API coverage
-- Workflow customization
-- Powerful dashboard with global feature flag view for simple reporting
-
-### How much does it cost?
-
-DevCycle has a 14 day free plan with up to 1,000 client-side monthly active users and 25,000 experimentation events. If you’re happy after your time is up, it’s $12 per seat per month to upgrade to pro.
-
-### Open source license
-
-DevCycle is open source and available under an MIT license. You can [find them on GitHub here](https://github.com/DevCycleHQ).
 
 

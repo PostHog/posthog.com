@@ -24,8 +24,8 @@ Product review website G2 lists 120 products in the A/B testing category, but wh
 In this guide, we're looking at the best free and open-source A/B testing tools. Open-source tools are mainly built for developers, so we recommend marketers read our guide to the best [alternatives to Google Optimize](/blog/google-optimize-alternatives).
 
 > **Changelog:**
-
-- **Mar 16, 2023:** Added VWO, updated images. Various copy updates and improvements.
+>
+> - **Mar 16, 2023:** Added VWO, updated images. Various copy updates and improvements.
 
 ## 1. PostHog
 
