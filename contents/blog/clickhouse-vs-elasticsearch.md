@@ -36,9 +36,9 @@ Sometimes, the relationship between an open-source tool and its lead developer i
 
 Elasticsearch was originally released in 2010 under an open-source license. The premise behind Elasticsearch was that Apache Lucene, an open-source product designed to efficiently search JSON documents, needed better infrastructure for scaling. Apache Lucene made it easy to organize and search a series of JSON documents – such as human profiles; Elasticsearch made it easy to distribute those human profiles, which might be in the billions, across multiple locations, indexed both physically and virtually.
 
-Elasticsearch is considered a NoSQL database because it uses Apache Lucene – and by extension, JSON documents – as a primary store of data. Specifically, it is a Document-Store NoSQL database with a focus on searching and retrieving data. It is never used as the primary store of data. Sometimes Elasticsearch data stores are redundantly available in a more traditional database like PostgreSQL as Elasticsearch is only leveraged to improve search results. 
+Elasticsearch is considered a NoSQL database because it uses Apache Lucene – and by extension, JSON documents – as a primary store of data. Specifically, it is a Document-Store NoSQL database with a focus on searching and retrieving data. It is never used as the primary store of data. Elasticsearch data stores are often redundantly available in a more traditional database like PostgreSQL as Elasticsearch is only leveraged to improve search results. 
 
-In 2021, Elasticsearch abandoned its traditional Apache Open Source license in favor of a new license known as an Elastic license. It was a controversial move motivated by Elastic’s irritation with Amazon profiting off of Elasticsearch by operating a managed service without ever contributing to the codebase. Amazon forked the last version of open-source Elasticsearch into a new open-source project, OpenSearch. Similar to Elastic (and ClickHouse Inc.), Amazon launched a managed version of OpenSearch.
+In 2021, Elasticsearch abandoned its traditional Apache Open Source license in favor of a new license known as an Elastic license. It was a controversial move motivated by Elastic’s irritation with [Amazon profiting off of Elasticsearch](https://www.elastic.co/blog/licensing-change) by operating a managed service without ever contributing to the codebase. Amazon forked the last version of open-source Elasticsearch into a new open-source project, OpenSearch. Similar to Elastic (and ClickHouse Inc.), Amazon launched a managed version of OpenSearch.
 
 Elasticsearch’s new license allows developers to implement Elasticsearch themselves, but forbids cloud distributors from running a for-profit, managed Elasticsearch service. Most open-source advocates consider Elastic’s Elastic License not open-source; however, it would be unfair to Elastic to equate their solution’s transparency with a purely closed-source solution like Snowflake.
 
@@ -97,7 +97,7 @@ The three major core components of Elasticsearch’s infrastructure are **indice
 
 2. An **index**, a virtual collection that defines what type of data it is. Akin to a table in MySQL, like a collection of bank accounts, student profiles, or property listings. 
 
-A **shard**, meanwhile, is the intersection of a specific *node* and a specific **index**. A **shard** is also a single instance of Apache Lucene. It is a collection of documents, such as two hundred user profiles of a total set of forty thousand. 
+3. A **shard**, meanwhile, is the intersection of a specific *node* and a specific **index**. A **shard** is also a single instance of Apache Lucene. It is a collection of documents, such as two hundred user profiles of a total set of forty thousand. 
 
 ![Elasticsearch effectively creates a cartesian layout of physical and virtual coordinates. ](../images/blog/clickhouse-vs-elastic/elasticsearch-structure.png)
 <Caption>Elasticsearch effectively creates a cartesian layout of physical and virtual coordinates.</Caption>
@@ -173,7 +173,7 @@ Materialized views are not a new concept – in MySQL or PostgreSQL, a materiali
 
 But ClickHouse truly makes materialized views **dynamic**. ClickHouse doesn’t only accomplish this because of the columnar layout of its data. It also leverages incremental data structures that merges data strategically. 
 
-#### Component 3: Specialized Engines
+#### Component 3: Specialized engines
 
 ClickHouse has a series of specialized engines that enable developers to take advantage of multiple CPUs in parallel on the **same** machine. For instance, there is an engine for summing data (`SummingMergeTree`) and removing duplicates (`ReplacingMergeTree`). This technique has some resemblance to Elasticsearch’s parallelization across multiple **machines** to expedite search; ClickHouse is does it at a more granular, per-machine level.
 
@@ -191,13 +191,13 @@ While ClickHouse supports multiple instances, managed by Apache Zookeeper, it do
 
 Elasticsearch and ClickHouse both have small, medium, and enterprise customers.
 
-Elasticsearch’s customers utilize it to return a specific chunk of data quickly to users. For instance, [Uber](http://uber.com) uses Elastic to return data relevant to calculating surge pricing on a minute-by-minute basis. [Tinder](http://tinder.com) uses Elastic to fetch potential matches that might fit a user’s profile. [T-Mobile](http://tmobile.com) uses Elasticsearch to delivery specific user profiles to customer support reps to promote better NPS scores. 
+Elasticsearch’s customers utilize it to return a specific chunk of data quickly to users. For instance, [Uber](https://www.elastic.co/elasticon/conf/2017/sf/powering-uber-marketplace-real-time-data-needs-with-elasticsearch) uses Elastic to return data relevant to calculating surge pricing on a minute-by-minute basis. [Tinder](https://www.elastic.co/elasticon/conf/2017/sf/tinder-using-the-elastic-stack-to-make-connections-around-the-world) uses Elastic to fetch potential matches that might fit a user’s profile. [T-Mobile](https://www.elastic.co/elasticon/tour/2019/seattle/t-mobile) uses Elasticsearch to delivery specific user profiles to customer support reps to promote better NPS scores. 
 
 In all of these examples, Elastic fetches something specific very efficiently. 
 
 Conversely, ClickHouse is used to return aggregations of data. The most obvious example would be **us**. We use ClickHouse to power PostHog, an open-source analytics suite that involves hundreds of aggregate values. Previously, Posthog was powered by PostgreSQL, which quickly spiraled [out of control](/blog/clickhouse-vs-postgres) as we grew. 
 
-Others, like us, also use ClickHouse to power user-facing features – [Rokt](http://rokt.com), an e-commerce platform, uses ClickHouse to power its analytics panels. However, some companies leverage ClickHouse for internal use cases, such as the Washington Post, which uses ClickHouse to power its in-house analytics suite. 
+Others, like us, also use ClickHouse to power user-facing features – [Rokt](https://clickhouse.com/blog/nyc-meetup-report-real-time-slicing-and-dicing-reporting-with-clickhouse), an e-commerce platform, uses ClickHouse to power its analytics panels. However, some companies leverage ClickHouse for internal use cases, such as the Washington Post, which uses ClickHouse to power its in-house analytics suite. 
 
 ## Analytics performance comparison
 
