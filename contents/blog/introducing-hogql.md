@@ -44,7 +44,7 @@ HogQL expressions in insights enables you to combines the speed of PostHog's exi
 
 In addition to introducing HogQL, we've also upgraded the event explorer (previously known as the Live events tab) to give you more ways to filter events and analyze your data.
 
-The new event explorer enables you to view source behind queries, then use HogQL to create custom views. Below, for example, you can see a query we wrote using HogQL which summarizes [votes from our 404 page](/hedgehogsgalore).
+The event explorer also lets you view and edit the JSON source behind the table. Below, for example, you can see a query we wrote using HogQL which summarizes [votes from our 404 page](/hedgehogsgalore).
 
 ```
 {
