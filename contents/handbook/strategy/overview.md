@@ -55,7 +55,7 @@ We did this by first focusing on high-growth self-serve startups to nail (1) and
   * More powerful querying than our competitors can offer (for example, SQL access) that answers the long tail of questions
   * PostHog 3000 UX = a design uplift including dark mode to encourage more word of mouth
 * Launch product analytics, session recordings, feature flags, experiments, and the CDP each as full standalone products
-  * Enables us to sell each product individually then land and expand.
+  * Enables us to sell each product individually at the best rate in the market then expand to generate a higher order value overall. This means no one can outcompete.
   * Individual product pricing helps us understand where to double down and which feedback to prioritize.
   * Builds trust in the individual products as being 1st class.
   * The product should have optional deep integrations with the other tools to promote cross-activation and push the capabilities past competing standalone products.
