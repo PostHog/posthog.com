@@ -1,7 +1,6 @@
 import React, { useRef } from 'react'
 import root from 'react-shadow/styled-components'
 import { Provider as OrgProvider } from '../../hooks/useOrg'
-import { Provider as UserProvider } from '../../hooks/useUser'
 import QuestionForm from '../QuestionForm'
 import { Theme } from '../Theme'
 import ErrorBoundary from '../ErrorBoundary'
@@ -21,13 +20,11 @@ export const Form: React.FC<FormProps> = ({ apiHost, organizationId, initialView
             {/* @ts-ignore */}
             <root.div ref={containerRef}>
                 <OrgProvider value={{ organizationId, apiHost }}>
-                    <UserProvider>
-                        <Theme containerRef={containerRef} />
-                        <div className="squeak">
-                            {/* @ts-ignore */}
-                            <QuestionForm onSubmit={onSubmit} initialView={initialView} />
-                        </div>
-                    </UserProvider>
+                    <Theme containerRef={containerRef} />
+                    <div className="squeak">
+                        {/* @ts-ignore */}
+                        <QuestionForm onSubmit={onSubmit} initialView={initialView} />
+                    </div>
                 </OrgProvider>
             </root.div>
         </ErrorBoundary>
