@@ -220,7 +220,7 @@ Elasticsearch grew quickly thanks to fast-paced development by its parent compan
 
 Conversely, while the team behind ClickHouse is smaller, ClickHouse has an avid developer community, with contributors existing outside of the two major ClickHouse developers – ClickHouse Inc and Altinity Inc. And one of the reasons that ClickHouse is starting to grow in the last few years is because of its open-source, pro-community brand, and it's blistering performance.
 
-Overall, Elasticsearch may be the better solution if data aggregation involves searching text. It is a more mature project with an entire suite dedicated to interfacing with Elasticsearch data; however, it is no longer a true open-source product like ClickHouse is. 
+Overall, Elasticsearch remains a good solution if data aggregation involves searching text. It is a more mature project with an entire suite dedicated to interfacing with Elasticsearch data. However, it is no longer a true open-source product like ClickHouse is, and isn't designed to support the kind of high-performance use cases ClickHouse excels in.
 
 ### Further reading
 
