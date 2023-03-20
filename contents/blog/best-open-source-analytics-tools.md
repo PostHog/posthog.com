@@ -49,7 +49,7 @@ This section is dedicated to tools that actively collect data on user behavior. 
 
 Features include a comprehensive product analytics suite (e.g. trend analysis, dashboards, funnels, path analysis, retention tracking etc.), feature flags for feature control, experimentation (A/B and multivariate testing), session recording, heatmaps and [more](/product).
 
-It’s entirely self-serve, with the ability to auto-capture event information out of the box. PostHog can also be self-hosted on your existing infrastructure using Docker Compose, making it ideal if you don't want to share data with third parties. 
+It’s entirely self-serve, with the ability to autocapture event information out of the box. PostHog can also be self-hosted on your existing infrastructure using Docker Compose, making it ideal if you don't want to share data with third parties. 
 
 It's a good option if you're after an [open-source session recording tool](/blog/best-open-source-session-replay-tools), too. 
 
@@ -177,7 +177,7 @@ Plausible Analytics is available under a AGPLv3 license and can be self-hosted v
 - **Alternative to:** Google Analytics
 - [Umami on GitHub](https://github.com/umami-software/umami)
 
-[Umami](https://umami.is/) is another popular privacy-first website analytics tool. Like Plausible, it only tracks basic website analytics, but it doesn't collect any person information and is extremely fast. You can also track basic events, such button clicks, using CSS classes or JavaScript. Unlike Plausible, it doesn't currently offer a cloud-hosted option, though one is in development. 
+[Umami](https://umami.is/) is another popular privacy-first website analytics tool. Like Plausible, it tracks basic website analytics, doesn't collect any personal information, and is extremely fast. You can also track basic events, such button clicks, using CSS classes or JavaScript. Unlike Plausible, it doesn't currently offer a cloud-hosted option, though one is in beta. 
 
 #### Who is Umami for?
 
@@ -279,7 +279,7 @@ Metabase is available under a AGPL license. A limited version of the product is 
 - **Alternative to:** Datadog, Dynatrace 
 - [Grafana on Github](https://github.com/grafana/grafana)
 
-[Grafana](https://grafana.com/products/cloud/) is an open-source data observability. It focuses on interactive visualization, providing a wide variety of charts, graphs and alerts that can be connected to a wide range of online data sources. As a result, it’s a powerful system for monitoring and analyzing data in real-time.  
+[Grafana](https://grafana.com/products/cloud/) is an open-source data observability platform. It focuses on interactive visualization, providing a wide variety of charts, graphs and alerts that can be connected to a wide range of online data sources. As a result, it’s a powerful system for monitoring and analyzing data in real-time.  
 
 #### Who is Grafana for?
 Grafana is an ideal choice for engineering, dev ops or data scientists in businesses or teams of any size, including enterprise, who need to observe and monitor data.

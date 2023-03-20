@@ -39,7 +39,7 @@ If you want to run experiments as well, we recommend reading our guide to the [b
 
 PostHog's [feature flags](https://posthog.com/docs/user-guides/feature-flags) also power its [experimentation suite](https://posthog.com/docs/user-guides/experimentation), so you can test product changes with A/B tests or define user segments for feature access. [Multivariate flags](https://posthog.com/docs/user-guides/feature-flags#multivariate-feature-flags-beta) allow you to test several variants of the same interchangeable elements.
 
-Recent additions to PostHog's feature flag product include support for JSON feature flags and the addition of feature flag support for Flutter.
+Recent additions to PostHog's feature flag product include support for JSON feature flag payloads and  support for Flutter.
 
 ### Who is PostHog for?
 
@@ -57,7 +57,7 @@ PostHog is built primarily for engineers and other product-minded teams. With al
 
 ### How much does it cost?
 
-Feature flags are a core feature of all editions, including the open source release. While multivariate feature flags are limited to paid plans, PostHog Cloud is [free up to 1 million events every month](/pricing) and feature flags are included at no additional cost.
+Feature flags are a core feature of all editions, including the open source release. While multivariate feature flags are limited to paid plans, PostHog Cloud is [free up to 1 million events every month](/pricing) and unlimited feature flags are included at no additional cost.
 
 ### Open source license
 
@@ -94,7 +94,7 @@ Flagsmith is covered by a BSD 3-clause open source license. You can [take a look
 
 ![Harness](../images/blog/open-source-feature-flags/harness.png)
 
-[Harness](https://harness.io/) is a Software Delivery Platform which uses AI to help development teams take their delivery pipeline to the next level. The feature flag module benefits from succinct user targeting and offers basic analytics to track the usage and impact of your features.
+[Harness](https://harness.io/) is a software delivery platform which uses AI to help development teams take their delivery pipeline to the next level. The feature flag module benefits from succinct user targeting and offers basic analytics to track the usage and impact of your features.
 
 Harness feature flags include a significant level of control when it comes to governance with an automated policy engine powered by Open Policy Agent. You can also integrate with a number of popular workflow tools like Jira and Slack.
 

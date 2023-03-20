@@ -115,24 +115,24 @@ Plausible charges by pageview with 1 million pageviews costing €69 per month �
 
 [Umami](https://umami.is/) is an increasingly popular open-source analytics tool designed for privacy. Like Plausible, it's easy to self-host and collects no personal information (such as IP addresses) making GDPR compliance easy. The downside, as usual with privacy-first analytics tools, is it only collects basic analytics data, so it's best used for website analytics where you're less concerned with understanding user behavior.
 
-### Who is Umami for?
+#### Who is Umami for?
 
 Privacy-conscious website owners who want a no frills solution that doesn't impact website performance.
 
-### Features and benefits
+#### Features and benefits
 
 - Self-hosting cookieless tracking
 - Lightweight script with no performance impact
 - Basic event tracking for buttons and other UI elements
 
-### Umami and GDPR compliance
+#### Umami and GDPR compliance
 
 - **Open Source:** <span className="text-green text-lg">✔</span>
 - **Self Hosting:** <span className="text-green text-lg">✔</span>
 - **EU Cloud Hosting:** <span className="text-red text-lg">✖</span>
 - **Cookieless Tracking:** <span className="text-green text-lg">✔</span>
 
-### How much does Umami cost?
+#### How much does Umami cost?
 
 Umami has no paid tier at present, so it's totally free provided you can self-host it. A managed cloud service is currently in private beta, however.
 
