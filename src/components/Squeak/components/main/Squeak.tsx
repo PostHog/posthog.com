@@ -1,8 +1,8 @@
 import React, { useRef } from 'react'
 import root from 'react-shadow/styled-components'
 
-import { Provider as OrgProvider } from '../../context/org'
-import { Provider as UserProvider } from '../../context/user'
+import { Provider as OrgProvider } from '../../hooks/useOrg'
+import { Provider as UserProvider } from '../../hooks/useUser'
 import Questions from '../Questions'
 import { Theme } from '../Theme'
 import ErrorBoundary from '../ErrorBoundary'

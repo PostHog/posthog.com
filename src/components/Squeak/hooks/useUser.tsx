@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 import { useOrg } from '../hooks/useOrg'
 import { get } from '../lib/api'
 
@@ -37,4 +37,9 @@ export const Provider: React.FC<{ children: React.ReactNode }> = ({ children }) 
     }, [user?.id])
 
     return <Context.Provider value={{ user, setUser }}>{children}</Context.Provider>
+}
+
+export const useUser = () => {
+    const user = useContext(Context)
+    return user
 }

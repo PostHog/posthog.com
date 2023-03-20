@@ -1,8 +1,8 @@
 import React from 'react'
-import { Provider as QuestionProvider } from '../context/question'
+import { Provider as QuestionProvider } from '../hooks/useQuestion'
 import { useQuestion } from '../hooks/useQuestion'
-import { Provider as OrgProvider } from '../context/org'
-import { Provider as UserProvider } from '../context/user'
+import { Provider as OrgProvider } from '../hooks/useOrg'
+import { Provider as UserProvider } from '../hooks/useUser'
 import root from 'react-shadow/styled-components'
 import { Theme } from './Theme'
 
