@@ -1,6 +1,6 @@
 ---
 date: 2023-03-15
-title: The 7 best free and open-source feature flag tools
+title: The 6 best free and open-source feature flag tools
 rootPage: /blog
 sidebar: Blog
 showTitle: true
