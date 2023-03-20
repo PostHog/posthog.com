@@ -24,8 +24,7 @@ ClickHouse, meanwhile, excels at aggregating data for uses like business analyti
 
 ![ClickHouse Development.png](../images/blog/clickhouse-vs-elastic/clickhouse-development.png)
 
-
-Elasticsearch and ClickHouse are interesting to compare because of their vastly different architecture, optimized for each of their respective goals. Comparing them is a good meditation on physical and virtual layouts can improve efficiency toward a specific efficiency goal. 
+Elasticsearch and ClickHouse are interesting to compare because of their vastly different architecture, optimized for each of their respective goals. Comparing them is a good meditation on how physical and virtual layouts can improve efficiency toward a specific efficiency goal. 
 
 ## Background
 
