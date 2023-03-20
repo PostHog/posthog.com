@@ -3,7 +3,7 @@ import { Field, Form, Formik } from 'formik'
 
 import { useOrg } from '../hooks/useOrg'
 import { useQuestion } from '../hooks/useQuestion'
-import { useUser } from '../hooks/useUser'
+import { useUser } from 'hooks/useUser'
 import { post } from '../lib/api'
 import { Approval } from './Approval'
 import Authentication from './Authentication'

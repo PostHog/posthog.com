@@ -8,7 +8,7 @@ import PostLayout from 'components/PostLayout'
 import { GitHub, LinkedIn, Twitter } from 'components/Icons'
 import Link from 'components/Link'
 import Markdown from 'markdown-to-jsx'
-import { OrgProvider, UserProvider, useUser, Question } from 'components/Squeak'
+import { OrgProvider, useUser, Question } from 'components/Squeak'
 import Modal from 'components/Modal'
 import EditProfile from 'components/Profiles/EditProfile'
 import useSWR from 'swr'
@@ -97,72 +97,68 @@ export default function ProfilePage({ params }: PageProps) {
                 }}
             >
                 <Layout>
-                    <UserProvider>
-                        <Modal setOpen={setEditModalOpen} open={editModalOpen}>
-                            <div
-                                onClick={() => setEditModalOpen(false)}
-                                className="flex flex-start justify-center absolute w-full p-4"
-                            >
-                                <div
-                                    className="max-w-xl bg-white dark:bg-black rounded-md relative w-full p-5"
-                                    onClick={(e) => e.stopPropagation()}
-                                >
-                                    <EditProfile onSubmit={handleEditProfile} profile={profile} />
-                                </div>
-                            </div>
-                        </Modal>
-                        <PostLayout
-                            title="Profile"
-                            breadcrumb={[
-                                { name: 'Community', url: '/questions' },
-                                { name: 'Profile', url: `/community/profiles/${id}` },
-                            ]}
-                            menu={community}
-                            sidebar={<ProfileSidebar setEditModalOpen={setEditModalOpen} profile={profile} />}
-                            hideSurvey
+                    <Modal setOpen={setEditModalOpen} open={editModalOpen}>
+                        <div
+                            onClick={() => setEditModalOpen(false)}
+                            className="flex flex-start justify-center absolute w-full p-4"
                         >
-                            {profile ? (
-                                <div className="space-y-8 my-8">
-                                    <section className="">
-                                        <Avatar
-                                            className="w-24 h-24 float-right bg-gray-accent dark:gray-accent-dark"
-                                            src={profile.avatar}
+                            <div
+                                className="max-w-xl bg-white dark:bg-black rounded-md relative w-full p-5"
+                                onClick={(e) => e.stopPropagation()}
+                            >
+                                <EditProfile onSubmit={handleEditProfile} profile={profile} />
+                            </div>
+                        </div>
+                    </Modal>
+                    <PostLayout
+                        title="Profile"
+                        breadcrumb={[
+                            { name: 'Community', url: '/questions' },
+                            { name: 'Profile', url: `/community/profiles/${id}` },
+                        ]}
+                        menu={community}
+                        sidebar={<ProfileSidebar setEditModalOpen={setEditModalOpen} profile={profile} />}
+                        hideSurvey
+                    >
+                        {profile ? (
+                            <div className="space-y-8 my-8">
+                                <section className="">
+                                    <Avatar
+                                        className="w-24 h-24 float-right bg-gray-accent dark:gray-accent-dark"
+                                        src={profile.avatar}
+                                    />
+
+                                    <div className="space-y-3">
+                                        <h1 className="m-0 mb-8">{name || 'Anonymous'}</h1>
+                                        {profile.company_role && <p className="text-gray">{profile?.company_role}</p>}
+                                    </div>
+
+                                    {profile?.biography && (
+                                        <section>
+                                            <h3>Biography</h3>
+
+                                            <Markdown>{profile.biography}</Markdown>
+                                        </section>
+                                    )}
+                                </section>
+                            </div>
+                        ) : null}
+                        {questions && questions.length >= 1 && (
+                            <div className="mt-12">
+                                <h3>Discussions</h3>
+                                {questions.map((question) => {
+                                    return (
+                                        <Question
+                                            key={question.id}
+                                            question={question}
+                                            apiHost={process.env.GATSBY_SQUEAK_API_HOST as string}
+                                            organizationId={process.env.GATSBY_SQUEAK_ORG_ID as string}
                                         />
-
-                                        <div className="space-y-3">
-                                            <h1 className="m-0 mb-8">{name || 'Anonymous'}</h1>
-                                            {profile.company_role && (
-                                                <p className="text-gray">{profile?.company_role}</p>
-                                            )}
-                                        </div>
-
-                                        {profile?.biography && (
-                                            <section>
-                                                <h3>Biography</h3>
-
-                                                <Markdown>{profile.biography}</Markdown>
-                                            </section>
-                                        )}
-                                    </section>
-                                </div>
-                            ) : null}
-                            {questions && questions.length >= 1 && (
-                                <div className="mt-12">
-                                    <h3>Discussions</h3>
-                                    {questions.map((question) => {
-                                        return (
-                                            <Question
-                                                key={question.id}
-                                                question={question}
-                                                apiHost={process.env.GATSBY_SQUEAK_API_HOST as string}
-                                                organizationId={process.env.GATSBY_SQUEAK_ORG_ID as string}
-                                            />
-                                        )
-                                    })}
-                                </div>
-                            )}
-                        </PostLayout>
-                    </UserProvider>
+                                    )
+                                })}
+                            </div>
+                        )}
+                    </PostLayout>
                 </Layout>
             </OrgProvider>
         </>

@@ -1,7 +1,7 @@
 import { Field, Form, Formik } from 'formik'
 import getGravatar from 'gravatar'
+import { useUser } from 'hooks/useUser'
 import React from 'react'
-import { useUser } from '../../hooks/useUser'
 import { post } from '../../lib/api'
 
 type SignUpProps = {

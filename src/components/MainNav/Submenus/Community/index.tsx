@@ -8,7 +8,7 @@ import { TwoCol, Wrapper } from '../Wrapper'
 import { graphql, navigate, useStaticQuery } from 'gatsby'
 import slugify from 'slugify'
 import { Avatar, Login } from '../../../../pages/community'
-import { useUser } from 'components/Squeak'
+import { useUser } from 'hooks/useUser'
 
 interface ColMenuItems {
     title: string

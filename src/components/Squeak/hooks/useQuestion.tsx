@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import { useOrg } from '../hooks/useOrg'
-import { useUser } from '../hooks/useUser'
+import { useUser } from 'hooks/useUser'
 import { doDelete, patch, post } from '../lib/api'
 
 type QuestionContextValue = {

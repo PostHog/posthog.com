@@ -8,7 +8,6 @@ import { Avatar } from './components/Avatar'
 import { Login } from './components/main/Login'
 import { Questions } from './components/main/Questions'
 import { useOrg, Provider as OrgProvider } from './hooks/useOrg'
-import { useUser, Provider as UserProvider } from './hooks/useUser'
 import { useQuestion } from './hooks/useQuestion'
 
 export {
@@ -22,8 +21,6 @@ export {
     Avatar,
     Days,
     OrgProvider,
-    UserProvider,
     useOrg,
-    useUser,
     useQuestion,
 }
