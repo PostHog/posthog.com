@@ -8,7 +8,7 @@ featuredImage: ../images/tutorials/banners/tutorial-3.png
 topics: ['feature flags', 'experimentation']
 ---
 
-Popups are a way to highlight features in your app. This tutorial shows how to add them to a React app and control them using feature flags and JSON payloads. The use of feature flag payloads enables easy customization and control of popups.
+Popups are a way to highlight features in your app. This tutorial shows how to add them to a React app and control them using feature flags and JSON payloads. Feature flag payloads are an ideal tool for this because they enable you to send arbitrary data that controls the popup location and content without needing to redeploy. 
 
 ## Creating a React app
 
@@ -18,14 +18,14 @@ We need a React app to start. Make sure you [installed Node](https://nodejs.dev/
 npx create-react-app popups
 ```
 
-Next, go into the newly created popups folder and run the app to make sure everyone installed correctly.
+Next, go into the newly created popups folder and run the app to make sure everything installed correctly.
 
 ```bash
 cd popups
 npm start
 ```
 
-If that worked, we now have a running React app where we can add popups and prompts.
+We now have a running React app where we can add popups and prompts.
 
 ![React app](../images/tutorials/react-popups/app.png)
 
@@ -63,7 +63,7 @@ root.render(
 );
 ```
 
-After restarting your app and going to your app, you should see events captured in your PostHog instance.
+After restarting and opening your app, you should see events captured in your PostHog instance.
 
 ![Events](../images/tutorials/react-popups/events.png)
 
@@ -100,7 +100,7 @@ root.render(
 );
 ```
 
-After doing this, you’re ready to set up the feature flag to control your popup.
+After this, you’re ready to set up the feature flag to control your popup.
 
 ## Create your popup feature flag
 
@@ -122,7 +122,7 @@ The next step is to create a feature flag with a payload to control the content.
 }
 ```
 
-Save the flag, head back to your app, and you see a popup in the bottom right corner.
+Save the flag, head back to your app, and you should see a popup in the bottom right corner.
 
 ![Popup](../images/tutorials/react-popups/popup.png)
 
