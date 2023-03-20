@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Field, Form, Formik } from 'formik'
 import { useUser } from 'hooks/useUser'
-import { post } from '../../lib/api'
 
 type SignInProps = {
     setMessage: any
@@ -12,31 +11,18 @@ type SignInProps = {
     organizationId: string
 }
 
-const SignIn: React.FC<SignInProps> = ({
-    setMessage,
-    handleMessageSubmit,
-    formValues,
-    apiHost,
-    buttonText,
-    organizationId,
-}) => {
-    const [loading, setLoading] = useState(false)
-    const { setUser } = useUser()
+const SignIn: React.FC<SignInProps> = ({ setMessage, handleMessageSubmit, formValues, buttonText }) => {
+    const { isLoading, login } = useUser()
 
     const handleSubmit = async (values: any) => {
-        setLoading(true)
-        const { data, error } =
-            (await post(apiHost, '/api/login', {
-                email: values.email,
-                password: values.password,
-                organizationId,
-            })) || {}
+        let user = await login({
+            email: values.email,
+            password: values.password,
+        })
 
-        if (error) {
+        if (!user) {
             setMessage('Incorrect email/password. Please try again.')
-            setLoading(false)
         } else {
-            setUser({ id: data.id })
             await handleMessageSubmit(formValues || { email: values.email })
         }
     }
@@ -67,7 +53,7 @@ const SignIn: React.FC<SignInProps> = ({
                         <Field required id="email" name="email" type="email" placeholder="Email address..." />
                         <label htmlFor="password">Password</label>
                         <Field required id="password" name="password" type="password" placeholder="Password..." />
-                        <button style={loading || !isValid ? { opacity: '.5' } : {}} type="submit">
+                        <button style={isLoading || !isValid ? { opacity: '.5' } : {}} type="submit">
                             {buttonText}
                         </button>
                     </Form>
