@@ -28,7 +28,7 @@ function QuestionFormMain({
     initialValues,
     formType,
 }: QuestionFormMainProps) {
-    const { user } = useUser()
+    const { user, logout } = useUser()
     const { profileLink } = useOrg()
     const handleSubmit = async (values: any) => {
         onSubmit &&
@@ -133,7 +133,7 @@ export default function QuestionForm({
     onSignUp,
 }: QuestionFormProps) {
     const { organizationId, apiHost, profileLink } = useOrg()
-    const { user, setUser } = useUser()
+    const { user, logout } = useUser()
     const [formValues, setFormValues] = useState(null)
     const [view, setView] = useState<string | null>(initialView || null)
     const [loading, setLoading] = useState(false)
@@ -207,12 +207,6 @@ export default function QuestionForm({
         }
     }
 
-    const doLogout = async () => {
-        // @ts-ignore
-        await post(apiHost, '/api/logout')
-        setUser(null)
-    }
-
     return view ? (
         {
             'question-form': (
@@ -262,7 +256,7 @@ export default function QuestionForm({
                 <button
                     onClick={() => {
                         if (user) {
-                            doLogout()
+                            logout()
                         } else {
                             setView('login')
                         }

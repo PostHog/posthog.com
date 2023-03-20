@@ -24,6 +24,7 @@ type UserContextValue = {
 
     getSession: () => Promise<User | null>
     login: (args: { email: string; password: string }) => Promise<User | null>
+    logout: () => Promise<void>
 }
 
 export const UserContext = createContext<UserContextValue>({
@@ -37,6 +38,9 @@ export const UserContext = createContext<UserContextValue>({
 
     getSession: async () => null,
     login: async () => null,
+    logout: async () => {
+        // noop
+    },
 })
 
 type UserProviderProps = {
@@ -111,8 +115,13 @@ export const UserProvider: React.FC<UserProviderProps> = ({ apiHost, organizatio
         }
     }
 
+    const logout = async (): Promise<void> => {
+        await post(apiHost, '/api/logout')
+        setUser(null)
+    }
+
     return (
-        <UserContext.Provider value={{ organizationId, apiHost, user, setUser, isLoading, getSession, login }}>
+        <UserContext.Provider value={{ organizationId, apiHost, user, setUser, isLoading, getSession, login, logout }}>
             {children}
         </UserContext.Provider>
     )
