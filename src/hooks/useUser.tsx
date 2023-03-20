@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import React, { createContext, useEffect, useState } from 'react'
+import getGravatar from 'gravatar'
 import { post } from 'components/Squeak/lib/api'
 
 type User = {
@@ -25,6 +26,7 @@ type UserContextValue = {
     getSession: () => Promise<User | null>
     login: (args: { email: string; password: string }) => Promise<User | null>
     logout: () => Promise<void>
+    signUp: (args: { email: string; password: string; firstName: string; lastName: string }) => Promise<User | null>
 }
 
 export const UserContext = createContext<UserContextValue>({
@@ -41,6 +43,7 @@ export const UserContext = createContext<UserContextValue>({
     logout: async () => {
         // noop
     },
+    signUp: async () => null,
 })
 
 type UserProviderProps = {
@@ -120,8 +123,47 @@ export const UserProvider: React.FC<UserProviderProps> = ({ apiHost, organizatio
         setUser(null)
     }
 
+    const signUp = async ({
+        email,
+        password,
+        firstName,
+        lastName,
+    }: {
+        email: string
+        password: string
+        firstName: string
+        lastName: string
+    }): Promise<User | null> => {
+        const gravatar = getGravatar.url(email)
+        const avatar = await fetch(`https:${gravatar}?d=404`).then((res) => (res.ok && `https:${gravatar}`) || '')
+
+        // FIXME: This doesn't seem to return the right format
+        const { error, data } =
+            (await post(apiHost, '/api/register', {
+                email,
+                password,
+                firstName,
+                lastName,
+                avatar,
+                organizationId,
+            })) || {}
+
+        if (error) {
+            // setMessage(error.message)
+            // TODO: Should probably throw here
+            return null
+        } else {
+            // setUser(data)
+            let user = await getSession()
+
+            return user
+        }
+    }
+
     return (
-        <UserContext.Provider value={{ organizationId, apiHost, user, setUser, isLoading, getSession, login, logout }}>
+        <UserContext.Provider
+            value={{ organizationId, apiHost, user, setUser, isLoading, getSession, login, logout, signUp }}
+        >
             {children}
         </UserContext.Provider>
     )
