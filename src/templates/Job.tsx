@@ -259,7 +259,7 @@ export default function Job({
 
 export const query = graphql`
     query JobQuery($id: String!, $teamName: String!, $teamNameInfo: String!, $objectives: String!, $mission: String!) {
-        teamLead: mdx(frontmatter: { team: { in: [$teamName] }, teamLead: { eq: true } }) {
+        teamLead: mdx(frontmatter: { team: { in: [$teamName] }, teamLead: { in: [$teamName] } }) {
             id
             frontmatter {
                 name
