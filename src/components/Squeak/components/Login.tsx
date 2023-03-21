@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import root from 'react-shadow/styled-components'
-import Authentication from '../Authentication'
-import { Theme } from '../Theme'
+import Authentication from './Authentication'
+import { Theme } from './Theme'
 import { createGlobalStyle } from 'styled-components'
 
 const Style = createGlobalStyle`
