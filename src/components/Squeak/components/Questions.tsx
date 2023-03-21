@@ -4,8 +4,8 @@ import root from 'react-shadow/styled-components'
 import { useOrg } from '../hooks/useOrg'
 import { post } from '../lib/api'
 
-import Question from './Question'
-import QuestionForm from './QuestionForm'
+import { Question } from './Question'
+import { QuestionForm } from './QuestionForm'
 import { Theme } from './Theme'
 import ErrorBoundary from './ErrorBoundary'
 
@@ -54,7 +54,7 @@ type QuestionsProps = {
     topic: any
 }
 
-export default function Questions({ slug, limit = 100, onSubmit, onLoad, topics, onSignUp, topic }: QuestionsProps) {
+export const Questions = ({ slug, limit = 100, onSubmit, onLoad, topics, onSignUp, topic }: QuestionsProps) => {
     const [activeTopic, setActiveTopic] = useState(topic)
     const { organizationId, apiHost } = useOrg()
     const [questions, setQuestions] = useState<any[]>([])

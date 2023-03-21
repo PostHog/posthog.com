@@ -129,13 +129,13 @@ type QuestionFormProps = {
     initialView?: string
 }
 
-export default function QuestionForm({
+export const QuestionForm = ({
     formType = 'question',
     messageID,
     initialView,
     onSubmit,
     onSignUp,
-}: QuestionFormProps) {
+}: QuestionFormProps) => {
     const { organizationId, apiHost, profileLink } = useOrg()
     const { user, logout } = useUser()
     const [formValues, setFormValues] = useState(null)

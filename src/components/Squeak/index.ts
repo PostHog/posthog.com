@@ -1,12 +1,11 @@
-import { Form } from './components/main/Form'
-import { Question } from './components/main/Question'
+import { QuestionForm } from './components/QuestionForm'
+import { Question } from './components/Question'
 import { FullQuestion } from './components/FullQuestion'
-import { Authentication } from './components/main/Authentication'
-import { Squeak } from './components/main/Squeak'
-import { Days } from './components/Days'
+import { Authentication } from './components/Authentication'
+import { Squeak } from './components/Squeak'
 import { Avatar } from './components/Avatar'
-import { Login } from './components/main/Login'
-import { Questions } from './components/main/Questions'
+import { Login } from './components/Login'
+import { Questions } from './components/Questions'
 import { useOrg, Provider as OrgProvider } from './hooks/useOrg'
 import { useQuestion } from './hooks/useQuestion'
 
@@ -16,10 +15,9 @@ export {
     FullQuestion,
     Questions,
     Question,
-    Form,
+    QuestionForm,
     Login,
     Avatar,
-    Days,
     OrgProvider,
     useOrg,
     useQuestion,

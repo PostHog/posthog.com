@@ -150,7 +150,7 @@ export type QuestionProps = {
     question?: Question
 }
 
-export default function Question({ onSubmit, onResolve, apiHost, ...other }: QuestionProps) {
+export const Question = ({ onSubmit, onResolve, apiHost, ...other }: QuestionProps) => {
     const [expanded, setExpanded] = useState(false)
     const [question, setQuestion] = useState(other?.question)
     const [replies, setReplies] = useState(other?.question?.replies || [])
