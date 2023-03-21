@@ -1,3 +1,18 @@
+## Objectives: Q2 2023
+
+- Objective: CDP - Owner @fuziontech
+    - Key Result: Rock solid webhooks - Owner @hazzadous
+    - Key Result: Rock solid batch processing (exports) - Owner @tomasfarias
+- Objective: Pipeline unblocks query performance and ensures data quality - Owner @tiina303
+    - Key Result: Persons on Events write path and squash shipped with monitoring and alerting
+    - Key Result: Backfills are complete for all teams
+    - Key Result: Guaranteed deduplication of UUIDs in events table within 7 days (with docs explaining it)
+    - Key Result: Query time deduplication of events to cover until ClickHouse deduplication is complete
+- Objective: Pipeline Robustness and Reliability - Owner @xvello
+    - Key Result: Errors cause kafka lag instead of DLQ production e.g. person creation failures cause kafka lag not go to DLQ
+    - Key Result: Plugin server scales elastically and deploys do not create more than 2 minutes of lag
+
+
 ## Objectives: Q1 2023
 
 - Objective: Performance
