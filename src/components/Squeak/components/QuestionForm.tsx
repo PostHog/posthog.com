@@ -1,18 +1,22 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { Field, Form, Formik } from 'formik'
-
-import { useOrg } from '../hooks/useOrg'
-import { useQuestion } from '../hooks/useQuestion'
-import { useUser } from 'hooks/useUser'
+import root from 'react-shadow/styled-components'
 import { post } from '../lib/api'
+import { useOrg } from '../hooks/useOrg'
+import { useUser } from 'hooks/useUser'
+import { useQuestion } from '../hooks/useQuestion'
+
 import { Approval } from './Approval'
 import Authentication from './Authentication'
 import Avatar from './Avatar'
 import Logo from './Logo'
 import RichText from './RichText'
+import { Theme } from './Theme'
+import ErrorBoundary from './ErrorBoundary'
 
 type QuestionFormMainProps = {
     title?: string
+    // TODO: Add type for onSubmit
     onSubmit: any
     subject: boolean
     loading: boolean
@@ -138,6 +142,8 @@ export default function QuestionForm({
     const [view, setView] = useState<string | null>(initialView || null)
     const [loading, setLoading] = useState(false)
     const { handleReply } = useQuestion()
+    const containerRef = useRef<HTMLDivElement>(null)
+
     const buttonText =
         formType === 'question' ? (
             <span>Ask a question</span>
@@ -207,65 +213,74 @@ export default function QuestionForm({
         }
     }
 
-    return view ? (
-        {
-            'question-form': (
-                <QuestionFormMain
-                    subject={formType === 'question'}
-                    initialValues={formValues}
-                    loading={loading}
-                    onSubmit={handleMessageSubmit}
-                />
-            ),
-            auth: (
-                <Authentication
-                    banner={{
-                        title: 'Please signup to post.',
-                        body: 'Create an account to ask questions & help others.',
-                    }}
-                    buttonText={{
-                        login: 'Login & post question',
-                        signUp: 'Sign up & post question',
-                    }}
-                    setParentView={setView}
-                    formValues={formValues}
-                    handleMessageSubmit={handleMessageSubmit}
-                    onSignUp={onSignUp}
-                />
-            ),
-            login: (
-                <Authentication
-                    setParentView={setView}
-                    formValues={formValues}
-                    handleMessageSubmit={() => setView(null)}
-                    onSignUp={onSignUp}
-                />
-            ),
-            approval: <Approval handleConfirm={() => setView(null)} />,
-        }[view]
-    ) : (
-        <div className="squeak-reply-buttons">
-            <Avatar url={user?.profile && profileLink && profileLink(user?.profile)} image={user?.profile?.avatar} />
-            <button
-                className={formType === 'reply' ? 'squeak-reply-skeleton' : 'squeak-ask-button'}
-                onClick={() => setView('question-form')}
-            >
-                {buttonText}
-            </button>
-            {formType === 'question' && (
-                <button
-                    onClick={() => {
-                        if (user) {
-                            logout()
-                        } else {
-                            setView('login')
-                        }
-                    }}
-                    className="squeak-auth-button"
-                >
-                    {user ? 'Logout' : 'Login'}
-                </button>
-            )}
-        </div>
+    return (
+        <ErrorBoundary>
+            {/* @ts-ignore */}
+            <root.div ref={containerRef}>
+                <Theme containerRef={containerRef} />
+                <div className="squeak">
+                    {view ? (
+                        {
+                            'question-form': (
+                                <QuestionFormMain
+                                    subject={formType === 'question'}
+                                    initialValues={formValues}
+                                    loading={loading}
+                                    onSubmit={handleMessageSubmit}
+                                />
+                            ),
+                            auth: (
+                                <Authentication
+                                    buttonText={{
+                                        login: 'Login & post question',
+                                        signUp: 'Sign up & post question',
+                                    }}
+                                    setParentView={setView}
+                                    formValues={formValues}
+                                    handleMessageSubmit={handleMessageSubmit}
+                                    onSignUp={onSignUp}
+                                />
+                            ),
+                            login: (
+                                <Authentication
+                                    setParentView={setView}
+                                    formValues={formValues}
+                                    handleMessageSubmit={() => setView(null)}
+                                    onSignUp={onSignUp}
+                                />
+                            ),
+                            approval: <Approval handleConfirm={() => setView(null)} />,
+                        }[view]
+                    ) : (
+                        <div className="squeak-reply-buttons">
+                            <Avatar
+                                url={user?.profile && profileLink && profileLink(user?.profile)}
+                                image={user?.profile?.avatar}
+                            />
+                            <button
+                                className={formType === 'reply' ? 'squeak-reply-skeleton' : 'squeak-ask-button'}
+                                onClick={() => setView('question-form')}
+                            >
+                                {buttonText}
+                            </button>
+                            {formType === 'question' && (
+                                <button
+                                    onClick={() => {
+                                        if (user) {
+                                            logout()
+                                        } else {
+                                            setView('login')
+                                        }
+                                    }}
+                                    className="squeak-auth-button"
+                                >
+                                    {user ? 'Logout' : 'Login'}
+                                </button>
+                            )}
+                        </div>
+                    )}
+                </div>
+            </root.div>
+        </ErrorBoundary>
     )
 }
