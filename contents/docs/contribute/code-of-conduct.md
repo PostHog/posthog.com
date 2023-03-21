@@ -45,6 +45,7 @@ The following are not allowed within any community space without prior permissio
 from the community moderators:
 
 - Pitching of a business, product, or service (outside of the introductions channel). Keep it non spammy!
+- Trying to hire the PostHog core team to work on your thing. We need them to build our thing.
 - Market or competitor research. This is just annoying.
 - Encouraging a fork of the main PostHog project or promoting / soliciting people to build a service that competes directly with us. You may be able to do some of this legally, but if it's successful it would harm our project's performance. So, it's not in the project's interest to provide a place to promote something like this. If you want to partner, email sales at our company.com so we can work something out.
 
