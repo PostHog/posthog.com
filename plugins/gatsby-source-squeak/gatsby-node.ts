@@ -7,15 +7,23 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, cache
     const { createNode, createParentChildLink } = actions
 
     const getQuestions = async () => {
-        const response = await fetch(
-            `${apiHost}/api/v1/questions?organizationId=${organizationId}&perPage=1000&published=true`,
+        const query = qs.stringify(
             {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
+                pagination: {
+                    page: 1,
+                    pageSize: 10,
                 },
+            },
+            {
+                encodeValuesOnly: true, // prettify URL
             }
         )
+        const response = await fetch(`${apiHost}/api/v1/questions?perPage=1000&published=true`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
 
         if (response.status !== 200) {
             return []
