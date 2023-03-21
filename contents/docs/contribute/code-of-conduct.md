@@ -50,7 +50,7 @@ from the community moderators:
 
 Sometimes it's feasible a community member may do something outside of the list above that we've not foreseen, which isn't in the project's interest. We will handle these cases carefully as/if they come up and will edit this guidelines appropriately.
 
-If unsure, contact the community moderators via hey@posthog.com.
+If you're unsure, contact the community moderators via hey@posthog.com.
 
 ## Enforcement responsibilities
 
