@@ -14,7 +14,7 @@ category: Inside PostHog
 
 While PostHog is a fully-remote startup, we're constantly meeting up in-person. We have an annual company offsite and each small team will have at least one off-site each year, sometimes two. We also have budgets for impromptu visits.
 
-Recently, the session recording team met up in Munich 🇩🇪 🍻 for their first ever get-to-know-you offsite. Inevitably they did a hackathon and (inevitably) they built something **really** cool. 
+Recently, the session recording team met up in Munich 🇩🇪 🍻 for their first ever get-to-know-you offsite. Inevitably they ran a hackathon and (inevitably) they built something **really** cool. 
 
 ## How it started
 
@@ -29,7 +29,7 @@ Weirdly, the team shared lots of photos of them drinking beer and eating nice fo
 Here's some pizza they ate with truly industrial volumes of cheese and ham on it, but (thankfully) no pineapple. 
 
 ![pizza in munich](../images/blog/munich-hackathon/pizza.jpg)
-<caption>🍍 + 🍕 = 😰</caption>
+<caption>🍍 + 🍕 = 😰 (YMMV)</caption>
 
 Anyway, Ben and Alex have worked in other PostHog teams in the past – product analytics and experiments respectively. Annika works across more than one product, too. This gave them a unique view on how insights, experiments, feature flags, and session recordings could come together.
 
