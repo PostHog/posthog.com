@@ -1,14 +1,12 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Provider as QuestionProvider } from '../hooks/useQuestion'
 import { useQuestion } from '../hooks/useQuestion'
-import { Provider as OrgProvider } from '../hooks/useOrg'
 import root from 'react-shadow/styled-components'
 import { Theme } from './Theme'
 
 import ErrorBoundary from './ErrorBoundary'
 import QuestionForm from './QuestionForm'
 import Reply from './Reply'
-import { useRef } from 'react'
 
 const getBadge = (questionAuthorId: string, replyAuthorId: string, replyAuthorRole: string) => {
     if (replyAuthorRole === 'admin' || replyAuthorRole === 'moderator') {
@@ -57,6 +55,7 @@ const Replies = ({ question }: RepliesProps) => {
                     })}
                 </ul>
             )}
+
             {resolved ? (
                 <div className="squeak-locked-message">
                     <p>This thread has been closed</p>
@@ -131,22 +130,20 @@ export const FullQuestion = ({ onSubmit, onResolve, apiHost, organizationId, que
         <ErrorBoundary>
             {/* @ts-ignore */}
             <root.div ref={containerRef}>
-                <OrgProvider value={{ organizationId, apiHost }}>
-                    <Theme containerRef={containerRef} />
-                    <div className="squeak">
-                        <div className="squeak-question-container">
-                            <Reply className="squeak-post" subject={question.subject} {...firstReply} />
-                            <QuestionProvider
-                                onSubmit={onSubmit}
-                                question={question}
-                                replies={question.replies}
-                                onResolve={onResolve}
-                            >
-                                <Replies question={question} />
-                            </QuestionProvider>
-                        </div>
+                <Theme containerRef={containerRef} />
+                <div className="squeak">
+                    <div className="squeak-question-container">
+                        <Reply className="squeak-post" subject={question.subject} {...firstReply} />
+                        <QuestionProvider
+                            onSubmit={onSubmit}
+                            question={question}
+                            replies={question.replies}
+                            onResolve={onResolve}
+                        >
+                            <Replies question={question} />
+                        </QuestionProvider>
                     </div>
-                </OrgProvider>
+                </div>
             </root.div>
         </ErrorBoundary>
     )
