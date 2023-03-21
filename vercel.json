@@ -686,7 +686,7 @@
         },
         {
             "source": "/enterprise",
-            "destination": "/signup/cloud/enterprise"
+            "destination": "/contact-sales?edition=enterprise"
         },
         {
             "source": "/docs/self-host/open-source/deployment",
@@ -789,13 +789,13 @@
         { "source": "/docs/integrate/rudderstack", "destination": "/docs/libraries/rudderstack" },
         { "source": "/docs/integrate/segment", "destination": "/docs/libraries/segment" },
         { "source": "/docs/sdks/ios", "destination": "/docs/libraries/ios" },
-        
+
         { "source": "/docs/self-host/deploy/aws", "destination": "/docs/self-host" },
         { "source": "/docs/self-host/deploy/azure", "destination": "/docs/self-host" },
         { "source": "/docs/self-host/deploy/digital-ocean", "destination": "/docs/self-host" },
         { "source": "/docs/self-host/deploy/gcp", "destination": "/docs/self-host" },
-        { "source": "/docs/self-host/deploy/other", "destination": "/docs/self-host" }
-        
+        { "source": "/docs/self-host/deploy/other", "destination": "/docs/self-host" },
+        { "source": "/signup/cloud/enterprise", "destination": "/contact-sales?edition=enterprise" }
     ],
     "rewrites": [
         {

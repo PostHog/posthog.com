@@ -182,7 +182,7 @@ export default function SignUp() {
                                 <p className="text-[13px] text-center mt-4 mb-0 min-h-[40px]">
                                     <span className="font-semibold">Enterprise plan available</span> with advanced
                                     permissioning, proactive support, training, SSO/SAML.{' '}
-                                    <Link to="/signup/cloud/enterprise">Contact sales</Link>
+                                    <Link to="/contact-sales?edition=enterprise">Contact sales</Link>
                                 </p>
                             </div>
                         </Plan>
