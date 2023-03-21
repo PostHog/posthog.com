@@ -1,8 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
+import root from 'react-shadow/styled-components'
+
 import { useOrg } from '../hooks/useOrg'
 import { post } from '../lib/api'
+
 import Question from './Question'
 import QuestionForm from './QuestionForm'
+import { Theme } from './Theme'
+import ErrorBoundary from './ErrorBoundary'
 
 const Topics = ({
     handleTopicChange,
@@ -57,6 +62,7 @@ export default function Questions({ slug, limit = 100, onSubmit, onLoad, topics,
     const [availableTopics, setAvailableTopics] = useState<any[]>([])
     const [count, setCount] = useState(0)
     const [start, setStart] = useState(0)
+    const containerRef = useRef<HTMLDivElement>(null)
 
     const getQuestions = async ({ limit, start, topic }: { limit: number; start: number; topic?: string }) => {
         // @ts-ignore
@@ -127,33 +133,47 @@ export default function Questions({ slug, limit = 100, onSubmit, onLoad, topics,
     }
 
     return (
-        <>
-            {topics && (
-                <Topics topics={availableTopics} handleTopicChange={handleTopicChange} activeTopic={activeTopic} />
-            )}
-
-            {questions && questions.length > 0 && (
-                <>
-                    <ul className="squeak-questions">
-                        {questions.map((question) => {
-                            return (
-                                <li key={question.question.id}>
-                                    <Question onSubmit={handleSubmit} {...question} />
-                                </li>
-                            )
-                        })}
-                    </ul>
-                </>
-            )}
-
-            {start + limit < count && (
-                <button disabled={loading} className="squeak-show-more-questions-button" onClick={handleShowMore}>
-                    Show more
-                </button>
-            )}
-
+        <ErrorBoundary>
             {/* @ts-ignore */}
-            <QuestionForm onSignUp={onSignUp} onSubmit={handleSubmit} formType="question" />
-        </>
+            <root.div ref={containerRef}>
+                <Theme containerRef={containerRef} />
+                <div className="squeak">
+                    {topics && (
+                        <Topics
+                            topics={availableTopics}
+                            handleTopicChange={handleTopicChange}
+                            activeTopic={activeTopic}
+                        />
+                    )}
+
+                    {questions && questions.length > 0 && (
+                        <>
+                            <ul className="squeak-questions">
+                                {questions.map((question) => {
+                                    return (
+                                        <li key={question.question.id}>
+                                            <Question onSubmit={handleSubmit} {...question} />
+                                        </li>
+                                    )
+                                })}
+                            </ul>
+                        </>
+                    )}
+
+                    {start + limit < count && (
+                        <button
+                            disabled={loading}
+                            className="squeak-show-more-questions-button"
+                            onClick={handleShowMore}
+                        >
+                            Show more
+                        </button>
+                    )}
+
+                    {/* @ts-ignore */}
+                    <QuestionForm onSignUp={onSignUp} onSubmit={handleSubmit} formType="question" />
+                </div>
+            </root.div>
+        </ErrorBoundary>
     )
 }
