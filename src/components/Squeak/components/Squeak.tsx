@@ -1,9 +1,9 @@
 import React, { useRef } from 'react'
 import root from 'react-shadow/styled-components'
 
-import Questions from '../Questions'
-import { Theme } from '../Theme'
-import ErrorBoundary from '../ErrorBoundary'
+import Questions from './Questions'
+import { Theme } from './Theme'
+import ErrorBoundary from './ErrorBoundary'
 
 type SqueakProps = {
     slug?: string
