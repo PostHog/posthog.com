@@ -89,12 +89,10 @@ type Question = {
 export type QuestionProps = {
     onSubmit: (question: any) => void
     onResolve: (resolved: boolean, replyId: string | null) => void
-    apiHost: string
-    organizationId: string
     question: Question
 }
 
-export const FullQuestion = ({ onSubmit, onResolve, apiHost, organizationId, question }: QuestionProps) => {
+export const FullQuestion = ({ onSubmit, onResolve, question }: QuestionProps) => {
     const [firstReply] = question?.replies || []
 
     /*const getQuestion = async () => {

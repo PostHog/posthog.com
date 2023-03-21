@@ -1,8 +1,13 @@
-const { createRemoteFileNode } = require(`gatsby-source-filesystem`)
-const fetch = require('node-fetch')
-const slugify = require('slugify')
+import { GatsbyNode } from 'gatsby'
+import { createRemoteFileNode } from 'gatsby-source-filesystem'
+import fetch from 'node-fetch'
+import qs from 'qs'
+import slugify from 'slugify'
 
-exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, cache, store }, pluginOptions) => {
+export const sourceNodes: GatsbyNode['sourceNodes'] = async (
+    { actions, createContentDigest, createNodeId, cache, store },
+    pluginOptions
+) => {
     const { apiHost, organizationId } = pluginOptions
     const { createNode, createParentChildLink } = actions
 
@@ -11,14 +16,15 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, cache
             {
                 pagination: {
                     page: 1,
-                    pageSize: 10,
+                    pageSize: 1000,
                 },
             },
             {
                 encodeValuesOnly: true, // prettify URL
             }
         )
-        const response = await fetch(`${apiHost}/api/v1/questions?perPage=1000&published=true`, {
+
+        const response = await fetch(`${apiHost}/api/questions?${query}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -69,19 +75,23 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, cache
                 type: `Question`,
                 contentDigest: createContentDigest(question),
             },
-            ...question,
+            ...question.attributes,
         }
 
         createNode(node)
         createReplies(node, question.replies)
     })
 
-    const topics = await fetch(`${apiHost}/api/topics?organizationId=${organizationId}`).then((res) => res.json())
+    const topics = await fetch(`${apiHost}/api/topics`).then((res) => res.json())
 
-    topics.forEach((topic) => {
-        const { label, id } = topic
+    topics.data.forEach((topic) => {
+        const {
+            id,
+            attributes: { label },
+        } = topic
+
         const node = {
-            id: createNodeId(`squeak-topic-${label}`),
+            id: createNodeId(`squeak-topic-${id}`),
             parent: null,
             children: [],
             internal: {
@@ -95,38 +105,41 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, cache
         createNode(node)
     })
 
-    const topicGroups = await fetch(`${apiHost}/api/topic-groups?organizationId=${organizationId}`).then((res) =>
-        res.json()
-    )
+    let query = qs.stringify({
+        populate: ['topics'],
+    })
 
-    topicGroups.forEach((topicGroup) => {
-        const { label, id, topic } = topicGroup
+    const topicGroups = await fetch(`${apiHost}/api/topic-groups?${query}`).then((res) => res.json())
+
+    topicGroups.data.forEach((topicGroup) => {
+        const {
+            id,
+            attributes: { label, topics },
+        } = topicGroup
 
         const node = {
-            id: createNodeId(`squeak-topic-group-${label}`),
+            id: createNodeId(`squeak-topic-group-${id}`),
             parent: null,
-            children: [],
+            children: topics.data.map((topic) => createNodeId(`squeak-topic-${topic.id}`)),
             internal: {
                 type: `SqueakTopicGroup`,
                 contentDigest: createContentDigest(topicGroup),
             },
             label: label,
-            topicId: id,
-            topics: topic.map((topic) => {
-                return {
-                    ...topic,
-                    slug: slugify(topic.label, { lower: true }),
-                }
-            }),
             slug: slugify(label, { lower: true }),
         }
         createNode(node)
     })
 
-    const roadmap = await fetch(`${apiHost}/api/roadmap?organizationId=${organizationId}`).then((res) => res.json())
+    const roadmap = await fetch(`${apiHost}/api/roadmaps`).then((res) => res.json())
 
-    for (const roadmapItem of roadmap) {
-        const { title, github_urls, image, id } = roadmapItem
+    console.log(roadmap)
+
+    for await (const roadmapItem of roadmap.data) {
+        const {
+            id,
+            attributes: { title, githubUrls, image },
+        } = roadmapItem
 
         const node = {
             ...roadmapItem,
@@ -149,16 +162,15 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, cache
                 createNode,
                 createNodeId,
                 cache,
-                store,
             })
             node.thumbnail___NODE = fileNode?.id
         }
 
-        const otherLinks = github_urls.filter((url) => !url.includes('github.com'))
+        const otherLinks = githubUrls.filter((url) => !url.includes('github.com'))
         node.otherLinks = otherLinks
-        if (github_urls.length > 0 && process.env.GITHUB_API_KEY) {
+        if (githubUrls.length > 0 && process.env.GITHUB_API_KEY) {
             node.githubPages = await Promise.all(
-                github_urls
+                githubUrls
                     .filter((url) => url.includes('github.com'))
                     .map((url) => {
                         const split = url.split('/')
@@ -189,10 +201,10 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, cache
     }
 }
 
-exports.onCreateNode = async ({ node, actions, store, cache, createNodeId }) => {
+export const onCreateNode: GatsbyNode['onCreateNode'] = async ({ node, actions, store, cache, createNodeId }) => {
     const { createNode } = actions
     if (node.internal.type === 'Reply') {
-        async function createImageNode(imageURL) {
+        /*async function createImageNode(imageURL) {
             return createRemoteFileNode({
                 url: imageURL,
                 parentNodeId: node.id,
@@ -205,11 +217,11 @@ exports.onCreateNode = async ({ node, actions, store, cache, createNodeId }) => 
         if (node.imageURL) {
             const imageNode = await createImageNode(node.imageURL)
             node.avatar___NODE = imageNode && imageNode.id
-        }
+        }*/
     }
 }
 
-exports.createSchemaCustomization = async ({ actions }) => {
+export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] = async ({ actions }) => {
     const { createTypes } = actions
 
     createTypes(`

@@ -11,23 +11,38 @@ import PostLayout from 'components/PostLayout'
 import SidebarSearchBox from 'components/Search/SidebarSearchBox'
 import QuestionsTable from 'components/Questions/QuestionsTable'
 import QuestionForm from 'components/Questions/QuestionForm'
+import qs from 'qs'
+import { QuestionData, StrapiResult, StrapiRecord } from 'lib/strapi'
 
 export default function Questions() {
     const [sortBy, setSortBy] = useState<'newest' | 'activity' | 'popular'>('newest')
 
-    const { data, size, setSize, isLoading, mutate } = useSWRInfinite<any[]>(
-        (offset) =>
-            `${process.env.GATSBY_SQUEAK_API_HOST}/api/v1/questions?organizationId=${
-                process.env.GATSBY_SQUEAK_ORG_ID
-            }&start=${offset * 20}&perPage=20&published=true&sortBy=${sortBy}`,
-        (url: string) =>
-            fetch(url)
-                .then((r) => r.json())
-                .then((r) => r.questions)
+    const query = (offset: number) =>
+        qs.stringify(
+            {
+                pagination: {
+                    start: offset * 20,
+                    limit: 20,
+                },
+                sort: 'createdAt:desc',
+                populate: ['profile', 'replies'],
+            },
+            {
+                encodeValuesOnly: true, // prettify URL
+            }
+        )
+
+    const { data, size, setSize, isLoading, mutate } = useSWRInfinite<StrapiResult<QuestionData[]>>(
+        (offset) => `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(offset)}`,
+        (url: string) => fetch(url).then((r) => r.json())
     )
 
-    const questions = React.useMemo(() => {
-        return data?.flat() || []
+    // @ts-ignore
+    const questions: StrapiResult<QuestionData[]> = React.useMemo(() => {
+        return {
+            data: data?.reduce((acc, cur) => [...acc, ...cur.data], [] as StrapiRecord<QuestionData>[]) ?? [],
+            meta: data?.[0]?.meta,
+        }
     }, [size, data])
 
     return (

@@ -40,12 +40,7 @@ export default function QuestionPage(props: QuestionPageProps) {
                         </Link>
                     </div>
 
-                    <FullQuestion
-                        apiHost={process.env.GATSBY_SQUEAK_API_HOST as string}
-                        organizationId={process.env.GATSBY_SQUEAK_ORG_ID as string}
-                        onSignUp={(user) => createHubSpotContact(user)}
-                        question={props.data.question}
-                    />
+                    <FullQuestion question={props.data.question} />
                 </section>
             </PostLayout>
         </Layout>
@@ -62,8 +57,8 @@ export const query = graphql`
             profile {
                 id
                 avatar
-                first_name
-                last_name
+                firstName
+                lastName
             }
             topics {
                 topic {
@@ -76,11 +71,11 @@ export const query = graphql`
                 profile {
                     id
                     avatar
-                    first_name
-                    last_name
+                    firstName
+                    lastName
                 }
                 body
-                created_at
+                createdAt
             }
         }
     }

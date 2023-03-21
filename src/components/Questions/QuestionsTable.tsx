@@ -4,10 +4,10 @@ import { dayFormat, dateToDays } from '../../utils'
 import slugify from 'slugify'
 
 import Link from 'components/Link'
-import { Question } from './index'
+import { QuestionData, StrapiRecord, StrapiResult } from 'lib/strapi'
 
 type QuestionsTableProps = {
-    questions: Question[]
+    questions: StrapiResult<QuestionData[]>
     isLoading: boolean
     size: number
     setSize: (size: number | ((_size: number) => number)) => any
@@ -25,20 +25,26 @@ export const QuestionsTable = ({
     return (
         <ul className="m-0 p-0">
             <li className="divide-y divide-gray-accent-light divide-dashed dark:divide-gray-accent-dark list-none">
-                {questions.length > 0
-                    ? questions.filter(Boolean).map((question) => {
-                          const latestReply = question.replies[question.replies.length - 1]
+                {questions.data.length > 0
+                    ? questions.data.filter(Boolean).map((question) => {
+                          const {
+                              attributes: { profile, subject, permalink, body, replies },
+                          } = question
 
-                          return (
+                          const numReplies = replies?.data?.length || 0
+
+                          console.log(profile)
+
+                          return profile ? (
                               <div key={question.id} className={`grid xl:grid-cols-4 sm:gap-2 py-4 ${className}`}>
                                   <div className="hidden sm:block">
                                       <a
-                                          href={`/community/profiles/${question.profile.id}`}
+                                          href={`/community/profiles/${profile.data.id}`}
                                           className="flex items-center text-sm mt-0.5 space-x-1 text-primary group"
                                       >
                                           <div className={`w-5 h-5 overflow-hidden rounded-full flex-shrink-0`}>
-                                              {question.profile.avatar ? (
-                                                  <img className="w-full h-full" alt="" src={question.profile.avatar} />
+                                              {/*{profile.avatar ? (
+                                                  <img className="w-full h-full" alt="" src={profile.avatar} />
                                               ) : (
                                                   <svg
                                                       viewBox="0 0 40 40"
@@ -55,26 +61,26 @@ export const QuestionsTable = ({
                                                           fill="#BFBFBC"
                                                       ></path>
                                                   </svg>
-                                              )}
+                                              )}*/}
                                           </div>
                                           <span className="text-primary dark:text-primary-dark font-medium opacity-60 group-hover:opacity-100 line-clamp-1">
-                                              {question.profile.first_name} {question.profile.last_name}
+                                              {profile.data.attributes.firstName} {profile.data.attributes.lastName}
                                           </span>
                                       </a>
                                   </div>
                                   <div className="sm:col-span-3">
                                       <Link
-                                          to={`/questions/${question.permalink}`}
+                                          to={`/questions/${permalink}`}
                                           className="block font-bold whitespace-normal leading-snug"
                                       >
-                                          {question.subject}
+                                          {subject}
                                       </Link>
                                       <a
-                                          href={`/community/profiles/${question.profile.id}`}
+                                          href={`/community/profiles/${profile.data.id}`}
                                           className="flex items-center text-sm mt-0.5 space-x-1 text-primary group sm:hidden"
                                       >
                                           <div className={`w-5 h-5 overflow-hidden rounded-full flex-shrink-0`}>
-                                              {question.profile.avatar ? (
+                                              {/*profile.avatar ? (
                                                   <img className="w-full h-full" alt="" src={question.profile.avatar} />
                                               ) : (
                                                   <svg
@@ -92,10 +98,10 @@ export const QuestionsTable = ({
                                                           fill="#BFBFBC"
                                                       ></path>
                                                   </svg>
-                                              )}
+                                              )}*/}
                                           </div>
                                           <div className="text-primary dark:text-primary-dark font-medium opacity-60 group-hover:opacity-100 line-clamp-1 my-1">
-                                              {question.profile.first_name} {question.profile.last_name}
+                                              {profile.data.attributes.firstName} {profile.data.attributes.lastName}
                                           </div>
                                       </a>
                                       {/*
@@ -104,7 +110,7 @@ export const QuestionsTable = ({
                                                 {dayFormat(dateToDays(latestReply.created_at))}
                                             </span>
                                         */}
-                                      {question.topics.map(({ topic }: { topic: { id: string; label: string } }) => {
+                                      {/*{question.topics.map(({ topic }: { topic: { id: string; label: string } }) => {
                                           return (
                                               <Link
                                                   key={topic.id}
@@ -116,23 +122,23 @@ export const QuestionsTable = ({
                                                   {topic.label}
                                               </Link>
                                           )
-                                      })}
+                                      })}*/}
                                       <p className="break-words whitespace-normal line-clamp-2 text-sm m-0 mt-1">
-                                          {question.replies[0].body}
+                                          {body}
                                       </p>
                                       <Link
-                                          to={`/questions/${question.permalink}`}
+                                          to={`/questions/${permalink}`}
                                           className="whitespace-nowrap text-sm font-semibold"
                                       >
-                                          {question.replies.length === 1 || question.replies.length > 2 ? (
-                                              <>{question.replies.length - 1} replies</>
+                                          {numReplies === 0 || numReplies > 2 ? (
+                                              <>{numReplies} replies</>
                                           ) : (
-                                              <>{question.replies.length - 1} reply</>
+                                              <>{numReplies} reply</>
                                           )}
                                       </Link>
                                   </div>
                               </div>
-                          )
+                          ) : null
                       })
                     : new Array(10).fill(0).map((_, i) => (
                           <li key={i} className="">
