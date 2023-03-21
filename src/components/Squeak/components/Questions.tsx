@@ -147,17 +147,15 @@ export const Questions = ({ slug, limit = 100, onSubmit, onLoad, topics, onSignU
                     )}
 
                     {questions && questions.length > 0 && (
-                        <>
-                            <ul className="squeak-questions">
-                                {questions.map((question) => {
-                                    return (
-                                        <li key={question.question.id}>
-                                            <Question onSubmit={handleSubmit} {...question} />
-                                        </li>
-                                    )
-                                })}
-                            </ul>
-                        </>
+                        <ul className="squeak-questions">
+                            {questions.map((question) => {
+                                return (
+                                    <li key={question.question.id}>
+                                        <Question onSubmit={handleSubmit} {...question} />
+                                    </li>
+                                )
+                            })}
+                        </ul>
                     )}
 
                     {start + limit < count && (

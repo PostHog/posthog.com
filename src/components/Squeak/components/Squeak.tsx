@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import root from 'react-shadow/styled-components'
 
-import Questions from './Questions'
+import { Questions } from './Questions'
 import { Theme } from './Theme'
 import ErrorBoundary from './ErrorBoundary'
 
