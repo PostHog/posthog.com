@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
-
+import React, { useState, useRef } from 'react'
+import root from 'react-shadow/styled-components'
 import { useOrg } from '../hooks/useOrg'
 import { useQuestion, Provider as QuestionProvider } from '../hooks/useQuestion'
+
 import Avatar from './Avatar'
 import QuestionForm from './QuestionForm'
 import Reply from './Reply'
+import { Theme } from './Theme'
+import ErrorBoundary from './ErrorBoundary'
 
 const getBadge = (questionAuthorId: string, replyAuthorId: string, replyAuthorRole: string) => {
     if (replyAuthorRole === 'admin' || replyAuthorRole === 'moderator') {
@@ -152,9 +155,9 @@ export default function Question({ onSubmit, onResolve, apiHost, ...other }: Que
     const [question, setQuestion] = useState(other?.question)
     const [replies, setReplies] = useState(other?.question?.replies || [])
     const [firstReply] = replies
+    const containerRef = useRef<HTMLDivElement>(null)
 
     const {
-        organizationId,
         config: { permalink_base, permalinks_enabled },
     } = useOrg()
 
@@ -186,16 +189,24 @@ export default function Question({ onSubmit, onResolve, apiHost, ...other }: Que
   }, [other?.question])*/
 
     return question ? (
-        <div className="squeak-question-container">
-            <Reply
-                permalink={permalinks_enabled && question?.permalink && `/${permalink_base}/${question?.permalink}`}
-                className="squeak-post"
-                subject={question.subject}
-                {...firstReply}
-            />
-            <QuestionProvider onSubmit={onSubmit} question={question} replies={replies} onResolve={onResolve}>
-                <Replies expanded={expanded} setExpanded={setExpanded} />
-            </QuestionProvider>
-        </div>
+        <ErrorBoundary>
+            {/* @ts-ignore */}
+            <root.div ref={containerRef}>
+                <Theme containerRef={containerRef} />
+                <div className="squeak squeak-question-container">
+                    <Reply
+                        permalink={
+                            permalinks_enabled && question?.permalink && `/${permalink_base}/${question?.permalink}`
+                        }
+                        className="squeak-post"
+                        subject={question.subject}
+                        {...firstReply}
+                    />
+                    <QuestionProvider onSubmit={onSubmit} question={question} replies={replies} onResolve={onResolve}>
+                        <Replies expanded={expanded} setExpanded={setExpanded} />
+                    </QuestionProvider>
+                </div>
+            </root.div>
+        </ErrorBoundary>
     ) : null
 }
