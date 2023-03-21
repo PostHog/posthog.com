@@ -1,9 +1,10 @@
 import React from 'react'
 import { useQuestion } from '../hooks/useQuestion'
+import { StrapiData } from '../util/types'
 
 import Avatar from './Avatar'
 import { QuestionForm } from './QuestionForm'
-import Reply from './Reply'
+import Reply, { ReplyData } from './Reply'
 
 const getBadge = (questionAuthorId: string, replyAuthorId: string, replyAuthorRole: string) => {
     if (replyAuthorRole === 'admin' || replyAuthorRole === 'moderator') {
@@ -17,23 +18,20 @@ const getBadge = (questionAuthorId: string, replyAuthorId: string, replyAuthorRo
     return questionAuthorId === replyAuthorId ? 'Author' : null
 }
 
-type Reply = {
-    id: string
-    profile: Record<string, any>
-    created_at: string
-    body: string
-    badgeText: string
-    published: boolean
+type RepliesProps = {
+    expanded: boolean
+    setExpanded: (expanded: boolean) => void
+    replies?: StrapiData<ReplyData[]>
 }
 
-export const Replies = ({ expanded, setExpanded }: { expanded: boolean; setExpanded: (expanded: boolean) => void }) => {
-    const { resolved, replies, onSubmit, question } = useQuestion()
+export const Replies = ({ replies, expanded, setExpanded }: RepliesProps) => {
+    const { resolved, onSubmit, question } = useQuestion()
 
-    return (
+    return replies ? (
         <>
-            {replies && replies.length - 1 > 0 && (
+            {replies.data.length > 0 && (
                 <ul className={`squeak-replies ${resolved ? 'squeak-thread-resolved' : ''}`}>
-                    {expanded || replies.length <= 2 ? <Expanded /> : <Collapsed setExpanded={setExpanded} />}
+                    {expanded || replies.data.length <= 3 ? <Expanded /> : <Collapsed setExpanded={setExpanded} />}
                 </ul>
             )}
             {resolved ? (
@@ -47,7 +45,7 @@ export const Replies = ({ expanded, setExpanded }: { expanded: boolean; setExpan
                 </div>
             )}
         </>
-    )
+    ) : null
 }
 
 const Collapsed = ({ setExpanded }: { setExpanded: (expanded: boolean) => void }) => {

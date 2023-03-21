@@ -4,33 +4,26 @@ import { useUser } from 'hooks/useUser'
 import { useOrg } from '../hooks/useOrg'
 import Avatar from './Avatar'
 import Days from './Days'
+import Markdown from './Markdown'
+import { StrapiData } from '../util/types'
 
-const Markdown = React.lazy(() => import('./Markdown'))
+export type ReplyData = {
+    // TODO: Populate profile data
+    body: string
+    createdAt: string
+    updatedAt: string
+    publishedAt: string
+}
 
 type ReplyProps = {
-    id: string
-    profile: Record<string, any>
-    created_at: string
-    body: string
-    subject?: string
+    reply: StrapiData<ReplyData>
     badgeText?: string | null
-    published: boolean
-    permalink?: string
     className?: string
 }
 
-export default function Reply({
-    profile,
-    created_at,
-    body,
-    subject,
-    badgeText,
-    id,
-    published,
-    permalink,
-    ...other
-}: ReplyProps) {
-    const isSSR = typeof window === 'undefined'
+export default function Reply({ reply, badgeText }: ReplyProps) {
+    const { id } = reply.data
+    const { body, createdAt } = reply.data.attributes
 
     const question = useQuestion()
     const { questionAuthorId, resolved, resolvedBy, handleResolve, handlePublish, handleReplyDelete } = question
@@ -53,22 +46,16 @@ export default function Reply({
     }
 
     return (
-        <div {...other} onClick={handleContainerClick}>
+        <div onClick={handleContainerClick}>
             <div className="squeak-post-author">
-                {profileLink ? (
-                    <a className="squeak-profile-link" href={profileLink(profile)}>
-                        <Avatar image={profile?.avatar} />
-                        <strong className="squeak-author-name">{profile?.first_name || 'Anonymous'}</strong>
-                    </a>
-                ) : (
-                    <>
-                        <Avatar image={profile?.avatar} />
-                        <strong className="squeak-author-name">{profile?.first_name || 'Anonymous'}</strong>
-                    </>
-                )}
+                {/* TODO: Add link to profile */}
+                {/*<a className="squeak-profile-link" href={`/community/profiles/${profile.id}`}>
+                    <Avatar image={profile?.avatar} />
+                    <strong className="squeak-author-name">{profile?.first_name || 'Anonymous'}</strong>
+                </a>*/}
 
                 {badgeText && <span className="squeak-author-badge">{badgeText}</span>}
-                <Days created={created_at} />
+                <Days created={createdAt} />
                 {resolved && resolvedBy === id && (
                     <>
                         <span className="squeak-resolved-badge">Solution</span>
@@ -81,17 +68,13 @@ export default function Reply({
                 )}
             </div>
             <div className="squeak-post-content">
-                {subject && (
+                {/*{subject && (
                     <h3 className="squeak-subject">{permalink ? <a href={permalink}>{subject}</a> : subject}</h3>
-                )}
+                )}*/}
 
-                {!isSSR && (
-                    <React.Suspense fallback={<div />}>
-                        <Markdown>{body}</Markdown>
-                    </React.Suspense>
-                )}
+                <Markdown>{body}</Markdown>
 
-                {!subject && (
+                {/*{!subject && (
                     <div className="squeak-reply-action-buttons">
                         {!resolved && (isAuthor || isModerator) && (
                             <button onClick={() => handleResolve(true, id)} className="squeak-resolve-button">
@@ -109,7 +92,7 @@ export default function Reply({
                             </button>
                         )}
                     </div>
-                )}
+                )}*/}
             </div>
         </div>
     )

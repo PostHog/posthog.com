@@ -1,47 +1,87 @@
 import React, { useState, useRef } from 'react'
 import root from 'react-shadow/styled-components'
-import { useOrg } from '../hooks/useOrg'
-import { Provider as QuestionProvider } from '../hooks/useQuestion'
+import useSWR from 'swr'
 
-import Reply from './Reply'
+import { ReplyData } from './Reply'
 import { Theme } from './Theme'
 import ErrorBoundary from './ErrorBoundary'
 import { Replies } from './Replies'
+import { Profile, ProfileData } from './Profile'
+import { StrapiData, StrapiRecord, StrapiResult } from '../util/types'
+import Days from './Days'
+import Markdown from 'markdown-to-jsx'
 
-type Reply = {
-    id: string
-    profile: Record<string, any>
-    created_at: string
-    body: string
-    badgeText: string
-    published: boolean
+// TODO: Allow passing in permalink instead of id
+export const useQuestion = (id: number) => {
+    const { data, error } = useSWR<StrapiResult<QuestionData>>(
+        `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${id}?populate=*`,
+        async (url) => {
+            const res = await fetch(url)
+            return res.json()
+        }
+    )
+
+    return {
+        question: data?.data,
+        error,
+        isLoading: !error && !data,
+        isError: error,
+    }
 }
 
-type Question = {
-    id: string
+type QuestionData = {
     subject: string
-    permalink: string | null
-    published: boolean
-    replies: Reply[]
+    permalink: string
+    resolved: boolean
+    body: string
+    createdAt: string
+    updatedAt: string
+    publishedAt: string
+    profile?: StrapiData<ProfileData>
+    replies?: StrapiData<ReplyData[]>
 }
 
-export type QuestionProps = {
+type QuestionProps = {
+    // TODO: Deal with id possibly being undefined at first
+    id: number
+    question?: StrapiRecord<QuestionData>
     onSubmit: (question: any) => void
     onResolve: (resolved: boolean, replyId: string | null) => void
-    apiHost: string
-    question?: Question
 }
 
-export const Question = ({ onSubmit, onResolve, apiHost, ...other }: QuestionProps) => {
+export const Question = ({ id, onSubmit, onResolve, question }: QuestionProps) => {
     const [expanded, setExpanded] = useState(false)
-    const [question, setQuestion] = useState(other?.question)
-    const [replies, setReplies] = useState(other?.question?.replies || [])
-    const [firstReply] = replies
     const containerRef = useRef<HTMLDivElement>(null)
+    const { question: questionData, isLoading, isError, error } = useQuestion(id)
 
-    const {
-        config: { permalink_base, permalinks_enabled },
-    } = useOrg()
+    if (isLoading) {
+        return <div>Loading...</div>
+    }
+
+    if (isError) {
+        return <div>Error: {JSON.stringify(error)}</div>
+    }
+
+    if (!questionData) {
+        return <div>Question not found</div>
+    }
+
+    const handleContainerClick = (e: React.MouseEvent) => {}
+
+    /*const { questionAuthorId, resolved, resolvedBy, handleResolve, handlePublish, handleReplyDelete } = question
+    const [confirmDelete, setConfirmDelete] = useState(false)
+    const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.stopPropagation()
+        if (confirmDelete) {
+            handleReplyDelete(id)
+        } else {
+            setConfirmDelete(true)
+        }
+    }
+
+    const handleContainerClick = () => {
+        setConfirmDelete(false)
+    }*/
 
     /*const getQuestion = async () => {
     const permalink = window.location.pathname
@@ -76,17 +116,23 @@ export const Question = ({ onSubmit, onResolve, apiHost, ...other }: QuestionPro
             <root.div ref={containerRef}>
                 <Theme containerRef={containerRef} />
                 <div className="squeak squeak-question-container">
-                    <Reply
-                        permalink={
-                            permalinks_enabled && question?.permalink && `/${permalink_base}/${question?.permalink}`
-                        }
-                        className="squeak-post"
-                        subject={question.subject}
-                        {...firstReply}
-                    />
-                    <QuestionProvider onSubmit={onSubmit} question={question} replies={replies} onResolve={onResolve}>
-                        <Replies expanded={expanded} setExpanded={setExpanded} />
-                    </QuestionProvider>
+                    <div onClick={handleContainerClick}>
+                        <div className="squeak-post-author">
+                            <Profile profile={questionData.attributes.profile?.data} />
+
+                            <Days created={questionData.attributes.createdAt} />
+                        </div>
+                        <div className="squeak-post-content">
+                            <h3 className="squeak-subject">
+                                <a href={`/questions/${questionData.id}`}>{questionData.attributes.subject}</a>
+                            </h3>
+
+                            <Markdown>{questionData.attributes.body}</Markdown>
+                        </div>
+                    </div>
+                    {/*<QuestionProvider onSubmit={onSubmit} question={question} replies={replies} onResolve={onResolve}>*/}
+                    <Replies expanded={expanded} setExpanded={setExpanded} />
+                    {/*</QuestionProvider>*/}
                 </div>
             </root.div>
         </ErrorBoundary>
