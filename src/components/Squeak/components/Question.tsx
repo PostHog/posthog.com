@@ -10,22 +10,54 @@ import { Profile, ProfileData } from './Profile'
 import { StrapiData, StrapiRecord, StrapiResult } from '../util/types'
 import Days from './Days'
 import Markdown from 'markdown-to-jsx'
+import qs from 'qs'
 
 // TODO: Allow passing in permalink instead of id
-export const useQuestion = (id: number) => {
-    const { data, error } = useSWR<StrapiResult<QuestionData>>(
-        `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${id}?populate=*`,
-        async (url) => {
-            const res = await fetch(url)
-            return res.json()
-        }
-    )
+export const useQuestion = (id: number | string) => {
+    if (typeof id === 'string') {
+        const query = qs.stringify(
+            {
+                filters: {
+                    permalink: {
+                        $eq: id,
+                    },
+                },
+                populate: '*',
+            },
+            {
+                encodeValuesOnly: true, // prettify URL
+            }
+        )
 
-    return {
-        question: data?.data,
-        error,
-        isLoading: !error && !data,
-        isError: error,
+        const { data, error } = useSWR<StrapiResult<QuestionData[]>>(
+            `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${id}?${query}`,
+            async (url) => {
+                const res = await fetch(url)
+                return res.json()
+            }
+        )
+
+        return {
+            question: data?.data?.[0],
+            error,
+            isLoading: !error && !data,
+            isError: error,
+        }
+    } else {
+        const { data, error } = useSWR<StrapiResult<QuestionData>>(
+            `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${id}?populate=*`,
+            async (url) => {
+                const res = await fetch(url)
+                return res.json()
+            }
+        )
+
+        return {
+            question: data?.data,
+            error,
+            isLoading: !error && !data,
+            isError: error,
+        }
     }
 }
 
@@ -43,7 +75,7 @@ type QuestionData = {
 
 type QuestionProps = {
     // TODO: Deal with id possibly being undefined at first
-    id: number
+    id: number | string
     question?: StrapiRecord<QuestionData>
     onSubmit: (question: any) => void
     onResolve: (resolved: boolean, replyId: string | null) => void
