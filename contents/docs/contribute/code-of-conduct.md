@@ -48,7 +48,7 @@ from the community moderators:
 - Market or competitor research. This is just annoying.
 - Encouraging a fork of the main PostHog project or promoting / soliciting people to build a service that competes directly with us. You may be able to do some of this legally, but if successful would harm our project's performance, so it's not in the project's interest to provide a place to promote something like this. If you want to partner, email sales at our company.com, we can work something out.
 
-Sometimes it's feasible a communtiy member may do something outside of the list above that we've not foreseen, which isn't in the project's interest. We will handle these cases carefully as/if they come up and will edit this guidelines appropriately.
+Sometimes it's feasible a community member may do something outside of the list above that we've not foreseen, which isn't in the project's interest. We will handle these cases carefully as/if they come up and will edit this guidelines appropriately.
 
 If unsure, contact the community moderators via hey@posthog.com.
 
