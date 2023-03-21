@@ -66,7 +66,7 @@ It's also worth noting that there's no such thing as reliable-no-matter-what-hap
 
 Thankfully, asteroids don't hit us every week. Pgbouncer issues though are indeed a weekly annoyance.
 
-So, when thinking about reliability, we want to prioritise defending against things that happen frequently, or have a high chance of occuring over time. This includes things like redis, postgres, or pgbouncer going down. Then, if we have the resources and nothing better to prioritise, we can focus on defending against asteroids.
+So, when thinking about reliability, we want to prioritise defending against things that happen frequently, or have a high chance of occurring over time. This includes things like redis, postgres, or pgbouncer going down. Then, if we have the resources and nothing better to prioritise, we can focus on defending against asteroids.
 
 Today, we can't yet defend against asteroids, nor the entire infrastructure going down, but for other things, like postgres, we've found ways to defend against this, leveraging our special problem constraints.
 
@@ -76,7 +76,7 @@ Since flags are evaluated multiple times in a session, sending a partial respons
 
 So, we enable partial updates on our client side SDKs. Whenever there's an error computing all flags, we do a partial update: keep the old values for flags we failed to compute, and use the new value for flags we didn't fail to compute.
 
-As we've noted before, the only flags that can fail evaluation are ones that depend on specific properties. Further, if a property change is trigerring flag evaluation, the client SDK can send these new properties alongside the request, and we use these properties as overrides for flag evaluation.
+As we've noted before, the only flags that can fail evaluation are ones that depend on specific properties. Further, if a property change is triggering flag evaluation, the client SDK can send these new properties alongside the request, and we use these properties as overrides for flag evaluation.
 
 TK: rephrase - Specialness: Flags that affect the most people will almost never go down. Flags affecting a small % (property based) can be unavailable more often.
 
