@@ -51,7 +51,7 @@ This optimisation is great because it cuts out all network I/O and makes evaluat
 
 One thing to note though is that this only works on server-side libraries. Flag definitions can have PII, like user email IDs, and require auth to download them, which means we can't expose these on the client-side libraries.
 
-As a result, our client still has not-great latency. To combat this issue, we introduced bootstrapped feature flags: You can pass in a user ID and flags to initialise a client-side PostHog SDK with. This ensures flags are instantly available, and unlocks creating cool features like redirecting on pageload based on feature flags.
+As a result, our client still has not-great latency. To combat this issue, we introduced bootstrapped feature flags: You can initialize a client-side PostHog SDK by passing in a client ID and flags. This ensures flags are instantly available, and unlocks creating cool features like redirecting on pageload based on feature flags.
 
 However, how do you get the flags to pass in to the client SDK? If you have to call PostHog's servers manually to do this, it defeats the purpose. This is where _synergy_ between local evaluation and bootstrapping comes in: You use your server-side SDK to evaluate flags locally, then pass these along to your frontend to bootstrap flags.
 
