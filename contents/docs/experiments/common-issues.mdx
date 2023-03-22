@@ -17,6 +17,9 @@ Deleting the flag is equivalent to it being disabled, so it will be off for howe
 
 The same caveats as above apply. If you want to re-run an experiment, but also want to preserve the previous experiment results, and also don't want to create a new feature flag; you can do so by deleting the existing feature flag (not the experiment) and using the same key in the new experiment.
 
+---
+
+
 ## I want to run experiments in PostHog with my custom feature flag setup, how can I do this?
 
 Broadly, a few things to be aware of:
@@ -27,9 +30,13 @@ Broadly, a few things to be aware of:
 
 If you are not sure if you've handled the above three things, [read an in-depth guide here](/tutorials/experiments)
 
+---
+
 ## How do I assign a specific person to control/test variant in an experiment?
 
 Once you create the experiment, go to the feature flag, scroll down to "Release Conditions", and for each condition you'll see an "Optional Override". This allows you to choose a release condition and force all people in this release condition to have the variant chosen in the optional override.
+
+---
 
 ## My feature flags are sending a lot of events, how can I manage this?
 
