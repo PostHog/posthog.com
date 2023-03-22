@@ -105,7 +105,7 @@ export const SectionHeading = ({ title, subtitle }: { title: string; subtitle?: 
     )
 }
 
-interface ITestimonial {
+export interface ITestimonial {
     featuresUsed: string[]
     author: {
         name: string
@@ -577,6 +577,8 @@ interface IProps {
     description: string | React.ReactNode
     image: React.ReactNode
     children: React.ReactNode
+    showNav?: boolean
+    showFooter?: boolean
 }
 
 const Nav = () => {
@@ -606,17 +608,24 @@ const Nav = () => {
     )
 }
 
-export default function ProductLayout({ title, description, image, children }: IProps): JSX.Element {
+export default function ProductLayout({
+    title,
+    description,
+    image,
+    children,
+    showNav = true,
+    showFooter = true,
+}: IProps): JSX.Element {
     return (
         <div className="px-5 py-12">
-            <Nav />
+            {showNav && <Nav />}
             <section>
                 <h1 className="text-center text-5xl mb-0 mt-14">{title}? PostHog does that.</h1>
                 <div className="text-center mt-4">{description}</div>
                 <div className="max-w-screen-xl mx-auto my-14">{image}</div>
             </section>
             <div>{children}</div>
-            <Footer title={title} />
+            {showFooter && <Footer title={title} />}
         </div>
     )
 }
