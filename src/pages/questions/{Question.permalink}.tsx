@@ -2,12 +2,10 @@ import Layout from 'components/Layout'
 import PostLayout from 'components/PostLayout'
 import { SEO } from 'components/seo'
 import { graphql } from 'gatsby'
-import { createHubSpotContact } from 'lib/utils'
 import React from 'react'
-import { FullQuestion } from 'components/Squeak'
+import { Question } from 'components/Squeak'
 import community from 'sidebars/community.json'
 
-import type { Question } from 'components/Questions'
 import QuestionSidebar from 'components/Questions/QuestionSidebar'
 import Link from 'components/Link'
 
@@ -16,7 +14,10 @@ type QuestionPageProps = {
         id: string
     }
     data: {
-        question: Question
+        question: {
+            subject: string
+            squeakId: string
+        }
     }
     params: {
         permalink: string
@@ -40,7 +41,7 @@ export default function QuestionPage(props: QuestionPageProps) {
                         </Link>
                     </div>
 
-                    <FullQuestion question={props.data.question} />
+                    <Question id={props.data.question.squeakId} question={props.data.question} />
                 </section>
             </PostLayout>
         </Layout>
@@ -49,14 +50,16 @@ export default function QuestionPage(props: QuestionPageProps) {
 
 export const query = graphql`
     query ($id: String!) {
-        question(id: { eq: $id }) {
+        squeakQuestion(id: { eq: $id }) {
             id
+            squeakId
             subject
-            published
             permalink
             profile {
                 id
-                avatar
+                avatar {
+                    url
+                }
                 firstName
                 lastName
             }
@@ -67,10 +70,11 @@ export const query = graphql`
             }
             replies {
                 id
-                published
                 profile {
                     id
-                    avatar
+                    avatar {
+                        url
+                    }
                     firstName
                     lastName
                 }

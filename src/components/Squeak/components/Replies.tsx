@@ -1,10 +1,10 @@
 import React from 'react'
 import { useQuestion } from '../hooks/useQuestion'
-import { StrapiData } from '../util/types'
+import { StrapiData, ReplyData } from 'lib/strapi'
 
 import Avatar from './Avatar'
 import { QuestionForm } from './QuestionForm'
-import Reply, { ReplyData } from './Reply'
+import Reply from './Reply'
 
 const getBadge = (questionAuthorId: string, replyAuthorId: string, replyAuthorRole: string) => {
     if (replyAuthorRole === 'admin' || replyAuthorRole === 'moderator') {
@@ -21,67 +21,62 @@ const getBadge = (questionAuthorId: string, replyAuthorId: string, replyAuthorRo
 type RepliesProps = {
     expanded: boolean
     setExpanded: (expanded: boolean) => void
-    replies?: StrapiData<ReplyData[]>
+    resolved?: boolean
+    replies: StrapiData<ReplyData[]> | undefined
 }
 
-export const Replies = ({ replies, expanded, setExpanded }: RepliesProps) => {
-    const { resolved, onSubmit, question } = useQuestion()
-
-    return replies ? (
-        <>
-            {replies.data.length > 0 && (
-                <ul className={`squeak-replies ${resolved ? 'squeak-thread-resolved' : ''}`}>
-                    {expanded || replies.data.length <= 3 ? <Expanded /> : <Collapsed setExpanded={setExpanded} />}
-                </ul>
-            )}
-            {resolved ? (
-                <div className="squeak-locked-message">
-                    <p>This thread has been closed</p>
-                </div>
+export const Replies = ({ replies, resolved, expanded, setExpanded }: RepliesProps) => {
+    return replies && replies.data.length > 0 ? (
+        <ul className={`squeak-replies ${resolved ? 'squeak-thread-resolved' : ''}`}>
+            {expanded || replies.data.length <= 3 ? (
+                <Expanded replies={replies} />
             ) : (
-                <div className="squeak-reply-form-container">
-                    {/* @ts-ignore */}
-                    <QuestionForm onSubmit={onSubmit} messageID={question.id} formType="reply" />
-                </div>
+                <Collapsed replies={replies} setExpanded={setExpanded} />
             )}
-        </>
+        </ul>
     ) : null
 }
 
-const Collapsed = ({ setExpanded }: { setExpanded: (expanded: boolean) => void }) => {
-    const { replies, resolvedBy, questionAuthorId } = useQuestion()
-    const reply = replies[replies.findIndex((reply: any) => reply?.id === resolvedBy)] || replies[replies.length - 1]
-    const replyCount = replies.length - 2
-    const maxAvatars = Math.min(replyCount, 3)
-    const replyAuthorMetadata = reply?.profile?.profiles_readonly?.[0] || reply?.profile?.metadata?.[0]
+type CollapsedProps = {
+    setExpanded: (expanded: boolean) => void
+    replies: StrapiData<ReplyData[]>
+}
 
-    const badgeText = getBadge(questionAuthorId, reply?.profile?.id, replyAuthorMetadata?.role)
+const Collapsed = ({ setExpanded, replies }: CollapsedProps) => {
+    const reply =
+        /*replies.data[replies.data.findIndex((reply) => reply?.id === resolvedBy)] ||*/ replies.data[
+            replies.data.length - 1
+        ]
+    const replyCount = replies.data.length - 2
+    const maxAvatars = Math.min(replyCount, 3)
+
+    // const badgeText = getBadge(questionAuthorId, reply?.profile?.id, replyAuthorMetadata?.role)
+    const badgeText = 'Author'
 
     const avatars: any[] = []
 
-    for (let reply of replies.slice(1)) {
+    /*for (let reply of replies) {
         if (avatars.length >= maxAvatars) break
         const avatar = reply?.profile?.avatar
         if (avatar && !avatars.includes(avatar)) {
             avatars.push(avatar)
         }
-    }
+    }*/
 
     if (avatars.length < maxAvatars) {
         avatars.push(...Array(maxAvatars - avatars.length))
     }
+
+    let resolvedBy = 0
+
+    console.log(reply)
 
     return (
         <>
             <li>
                 <div className="squeak-other-replies-container">
                     {avatars.map((avatar) => {
-                        return (
-                            <Avatar
-                                key={`${reply?.message_id}-${reply?.id}-${reply?.profile?.id}-${avatar}`}
-                                image={avatar}
-                            />
-                        )
+                        return <Avatar image={avatar} />
                     })}
 
                     <button className="squeak-other-replies" onClick={() => setExpanded(true)}>
@@ -90,38 +85,31 @@ const Collapsed = ({ setExpanded }: { setExpanded: (expanded: boolean) => void }
                 </div>
             </li>
 
-            <li
-                key={reply?.id}
-                className={`${resolvedBy === reply?.id ? 'squeak-solution' : ''} ${
-                    !reply?.published ? 'squeak-reply-unpublished' : ''
-                }`}
-            >
-                <Reply className="squeak-post-reply" {...reply} badgeText={badgeText} />
+            <li key={reply?.id} className={`${resolvedBy === reply?.id ? 'squeak-solution' : ''}`}>
+                <Reply className="squeak-post-reply" reply={reply} badgeText={badgeText} />
             </li>
         </>
     )
 }
 
-const Expanded = () => {
-    const question = useQuestion()
-    const replies = question.replies?.slice(1)
-    const { resolvedBy, questionAuthorId } = question
+type ExpandedProps = {
+    replies: StrapiData<ReplyData[]>
+}
+
+const Expanded = ({ replies }: ExpandedProps) => {
+    // const { resolvedBy, questionAuthorId } = question
 
     return (
         <>
-            {replies.map((reply: any) => {
-                const replyAuthorMetadata = reply?.profile?.profiles_readonly?.[0] || reply?.profile?.metadata?.[0]
+            {replies.data.map((reply) => {
+                const resolvedBy = 12
+                // const replyAuthorMetadata = reply?.profile?.profiles_readonly?.[0] || reply?.profile?.metadata?.[0]
 
-                const badgeText = getBadge(questionAuthorId, reply?.profile?.id, replyAuthorMetadata?.role)
+                const badgeText = '' // getBadge(questionAuthorId, reply?.profile?.id, replyAuthorMetadata?.role)
 
                 return (
-                    <li
-                        key={reply.id}
-                        className={`${resolvedBy === reply.id ? 'squeak-solution' : ''} ${
-                            !reply.published ? 'squeak-reply-unpublished' : ''
-                        }`}
-                    >
-                        <Reply className="squeak-post-reply" {...reply} badgeText={badgeText} />
+                    <li key={reply.id} className={`${resolvedBy === reply.id ? 'squeak-solution' : ''}`}>
+                        <Reply className="squeak-post-reply" reply={reply} badgeText={badgeText} />
                     </li>
                 )
             })}

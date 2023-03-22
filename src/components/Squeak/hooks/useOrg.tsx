@@ -18,7 +18,7 @@ type ProviderProps = {
 export const Provider: React.FC<ProviderProps> = ({ value: { apiHost, organizationId, profileLink }, children }) => {
     const [config, setConfig] = useState({})
 
-    const getConfig = async () => {
+    /*const getConfig = async () => {
         const { data } = (await get(apiHost, '/api/config', { organizationId })) || {}
         return data
     }
@@ -27,15 +27,15 @@ export const Provider: React.FC<ProviderProps> = ({ value: { apiHost, organizati
         getConfig().then((config) => {
             setConfig(config)
         })
-    }, [])
+    }, [])*/
 
     return <Context.Provider value={{ apiHost, organizationId, config, profileLink }}>{children}</Context.Provider>
 }
 
 export const useOrg = () => {
-    const org = useContext(Context)
+    /*const org = useContext(Context)
     if (org === undefined) {
         throw Error('No org has been specified using Provider')
-    }
-    return org
+    }*/
+    return {}
 }

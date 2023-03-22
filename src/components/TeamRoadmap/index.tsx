@@ -6,9 +6,11 @@ import { OrgProvider } from 'components/Squeak'
 import Link from 'components/Link'
 
 export default function TeamRoadmap({ team }: { team?: string }) {
-    const {
-        allSqueakRoadmap: { nodes },
-    } = useStaticQuery(query)
+    return null
+
+    //const {
+    //    allSqueakRoadmap: { nodes },
+    //} = useStaticQuery(query)
 
     const roadmap = team ? nodes.filter((node: IRoadmap) => node?.team?.name === team) : nodes
     return (
@@ -40,9 +42,9 @@ export default function TeamRoadmap({ team }: { team?: string }) {
     )
 }
 
-const query = graphql`
+/*const query = graphql`
     {
-        allSqueakRoadmap(filter: { complete: { ne: true }, projected_completion_date: { ne: null } }) {
+        allSqueakRoadmap(filter: { complete: { ne: true }, projectedCompletion: { ne: null } }) {
             nodes {
                 beta_available
                 complete
@@ -70,8 +72,8 @@ const query = graphql`
                         _1
                     }
                 }
-                projected_completion_date
+                projectedCompletion
             }
         }
     }
-`
+`*/

@@ -123,7 +123,7 @@ function QuestionFormMain({
 
 type QuestionFormProps = {
     formType: string
-    messageID?: string
+    questionId?: number
     onSubmit: (values: any, formType: string) => void
     onSignUp?: () => void
     initialView?: string
@@ -131,7 +131,7 @@ type QuestionFormProps = {
 
 export const QuestionForm = ({
     formType = 'question',
-    messageID,
+    questionId,
     initialView,
     onSubmit,
     onSignUp,
@@ -153,12 +153,12 @@ export const QuestionForm = ({
             </span>
         )
 
-    const insertReply = async ({ body, messageID }: { body: string; messageID: string }) => {
+    const insertReply = async ({ body, questionId }: { body: string; questionId: string }) => {
         // @ts-ignore
         const { data } = await post(apiHost, '/api/reply', {
             body,
             organizationId,
-            messageId: messageID,
+            questionId: questionId,
         })
         return data
     }
@@ -189,10 +189,10 @@ export const QuestionForm = ({
                 }
             }
 
-            if (formType === 'reply' && messageID) {
+            if (formType === 'reply' && questionId) {
                 const data = await insertReply({
                     body: values.question,
-                    messageID,
+                    questionId,
                 })
                 handleReply(data)
                 if (!data.published) {

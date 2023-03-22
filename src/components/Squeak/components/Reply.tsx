@@ -1,62 +1,51 @@
 import React, { useState } from 'react'
-import { useQuestion } from '../hooks/useQuestion'
 import { useUser } from 'hooks/useUser'
-import { useOrg } from '../hooks/useOrg'
-import Avatar from './Avatar'
 import Days from './Days'
 import Markdown from './Markdown'
-import { StrapiData } from '../util/types'
-
-export type ReplyData = {
-    // TODO: Populate profile data
-    body: string
-    createdAt: string
-    updatedAt: string
-    publishedAt: string
-}
+import { StrapiRecord, ReplyData } from 'lib/strapi'
+import Avatar from './Avatar'
 
 type ReplyProps = {
-    reply: StrapiData<ReplyData>
+    reply: StrapiRecord<ReplyData>
     badgeText?: string | null
     className?: string
 }
 
 export default function Reply({ reply, badgeText }: ReplyProps) {
-    const { id } = reply.data
-    const { body, createdAt } = reply.data.attributes
+    const {
+        id,
+        attributes: { body, createdAt, profile },
+    } = reply
 
-    const question = useQuestion()
-    const { questionAuthorId, resolved, resolvedBy, handleResolve, handlePublish, handleReplyDelete } = question
     const [confirmDelete, setConfirmDelete] = useState(false)
     const { user } = useUser()
-    const { profileLink } = useOrg()
-    const isModerator = user?.isModerator
-    const isAuthor = user?.id === questionAuthorId
-    const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
+    //const isModerator = user?.isModerator
+    //const isAuthor = user?.id === questionAuthorId
+    /*const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation()
         if (confirmDelete) {
             handleReplyDelete(id)
         } else {
             setConfirmDelete(true)
         }
-    }
+    }*/
 
     const handleContainerClick = () => {
         setConfirmDelete(false)
     }
 
-    return (
+    return profile?.data ? (
         <div onClick={handleContainerClick}>
             <div className="squeak-post-author">
                 {/* TODO: Add link to profile */}
-                {/*<a className="squeak-profile-link" href={`/community/profiles/${profile.id}`}>
-                    <Avatar image={profile?.avatar} />
-                    <strong className="squeak-author-name">{profile?.first_name || 'Anonymous'}</strong>
-                </a>*/}
+                <a className="squeak-profile-link" href={`/community/profiles/${profile.data.id}`}>
+                    <Avatar image={profile.data.attributes.avatar?.data?.attributes?.url} />
+                    <strong className="squeak-author-name">{profile.data.attributes.firstName || 'Anonymous'}</strong>
+                </a>
 
                 {badgeText && <span className="squeak-author-badge">{badgeText}</span>}
                 <Days created={createdAt} />
-                {resolved && resolvedBy === id && (
+                {/*resolved && resolvedBy === id && (
                     <>
                         <span className="squeak-resolved-badge">Solution</span>
                         {(isAuthor || isModerator) && (
@@ -65,7 +54,7 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                             </button>
                         )}
                     </>
-                )}
+                )*/}
             </div>
             <div className="squeak-post-content">
                 {/*{subject && (
@@ -95,5 +84,5 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                 )}*/}
             </div>
         </div>
-    )
+    ) : null
 }

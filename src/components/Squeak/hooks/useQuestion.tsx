@@ -1,32 +1,86 @@
-import React, { createContext, useContext, useEffect, useState } from 'react'
-import { useOrg } from '../hooks/useOrg'
-import { useUser } from 'hooks/useUser'
-import { doDelete, patch, post } from '../lib/api'
+import qs from 'qs'
+import { ProfileData, ReplyData, StrapiData, StrapiRecord, StrapiResult } from 'lib/strapi'
+import useSWR from 'swr'
 
-type QuestionContextValue = {
-    [key: string]: any
+type QuestionData = {
+    subject: string
+    permalink: string
+    resolved: boolean
+    body: string
+    createdAt: string
+    updatedAt: string
+    publishedAt: string
+    profile?: StrapiData<ProfileData>
+    replies?: StrapiData<ReplyData[]>
 }
 
-export const Context = createContext<QuestionContextValue>({})
+export const useQuestion = (id: number | string) => {
+    const isPermalink = typeof id === 'string'
 
-type QuestionProviderProps = {
-    children: React.ReactNode
-    question: Record<string, any> // TODO: Real question type
-    onResolve: (resolved: boolean, replyId: string | null) => void
-    onSubmit: React.FormEventHandler
-    [key: string]: any
-}
+    const query = qs.stringify(
+        {
+            filters: {
+                ...(isPermalink
+                    ? {
+                          permalink: {
+                              $eq: id,
+                          },
+                      }
+                    : {
+                          id: {
+                              $eq: id,
+                          },
+                      }),
+            },
+            populate: {
+                profile: {
+                    select: ['id', 'firstName', 'lastName'],
+                    populate: {
+                        avatar: {
+                            select: ['id', 'url'],
+                        },
+                    },
+                },
+                replies: {
+                    populate: {
+                        profile: {
+                            fields: ['id', 'firstName', 'lastName'],
+                            populate: {
+                                avatar: {
+                                    fields: ['id', 'url'],
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+        },
+        {
+            encodeValuesOnly: true, // prettify URL
+        }
+    )
 
-export const Provider: React.FC<QuestionProviderProps> = ({ children, question, onResolve, onSubmit, ...other }) => {
-    const { organizationId, apiHost } = useOrg()
-    const { user } = useUser()
-    const [replies, setReplies] = useState<any[]>([])
-    const [resolvedBy, setResolvedBy] = useState(question?.resolved_reply_id)
-    const [resolved, setResolved] = useState<boolean>(question?.resolved)
-    const [firstReply] = replies
-    const questionAuthorId = firstReply?.profile?.id || null
+    const {
+        data: question,
+        error,
+        isLoading,
+    } = useSWR<StrapiRecord<QuestionData>>(
+        `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query}`,
+        async (url) => {
+            const res = await fetch(url)
+            const { data } = await res.json()
+            return data?.[0]
+        }
+    )
 
-    const handleResolve = async (resolved: boolean, replyId: string | null = null) => {
+    return {
+        question,
+        error,
+        isLoading,
+        isError: error,
+    }
+
+    /*const handleResolve = async (resolved: boolean, replyId: string | null = null) => {
         await post(apiHost, '/api/question/resolve', {
             messageId: question?.id,
             replyId,
@@ -62,37 +116,5 @@ export const Provider: React.FC<QuestionProviderProps> = ({ children, question, 
             }
         })
         setReplies(newReplies)
-    }
-
-    useEffect(() => {
-        setReplies(other.replies.filter((reply: any) => reply.published || (!reply.published && user?.isModerator)))
-    }, [other.replies, user?.id])
-
-    useEffect(() => {
-        setResolved(question.resolved)
-    }, [question.resolved])
-
-    useEffect(() => {
-        setResolvedBy(question.resolved_reply_id)
-    }, [question.resolved_reply_id])
-
-    const value = {
-        replies,
-        resolvedBy,
-        resolved,
-        questionAuthorId,
-        question,
-        onSubmit,
-        handleReply,
-        handleResolve,
-        handleReplyDelete,
-        handlePublish,
-    }
-
-    return <Context.Provider value={value}>{children}</Context.Provider>
-}
-
-export const useQuestion = () => {
-    const question = useContext(Context)
-    return question
+    }*/
 }

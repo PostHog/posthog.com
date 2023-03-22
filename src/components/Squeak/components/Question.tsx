@@ -1,77 +1,14 @@
 import React, { useState, useRef } from 'react'
 import root from 'react-shadow/styled-components'
-import useSWR from 'swr'
 
-import { ReplyData } from './Reply'
 import { Theme } from './Theme'
-import ErrorBoundary from './ErrorBoundary'
 import { Replies } from './Replies'
-import { Profile, ProfileData } from './Profile'
-import { StrapiData, StrapiRecord, StrapiResult } from '../util/types'
+import { Profile } from './Profile'
+import { QuestionData, StrapiRecord } from 'lib/strapi'
 import Days from './Days'
 import Markdown from 'markdown-to-jsx'
-import qs from 'qs'
-
-// TODO: Allow passing in permalink instead of id
-export const useQuestion = (id: number | string) => {
-    if (typeof id === 'string') {
-        const query = qs.stringify(
-            {
-                filters: {
-                    permalink: {
-                        $eq: id,
-                    },
-                },
-                populate: '*',
-            },
-            {
-                encodeValuesOnly: true, // prettify URL
-            }
-        )
-
-        const { data, error } = useSWR<StrapiResult<QuestionData[]>>(
-            `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${id}?${query}`,
-            async (url) => {
-                const res = await fetch(url)
-                return res.json()
-            }
-        )
-
-        return {
-            question: data?.data?.[0],
-            error,
-            isLoading: !error && !data,
-            isError: error,
-        }
-    } else {
-        const { data, error } = useSWR<StrapiResult<QuestionData>>(
-            `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${id}?populate=*`,
-            async (url) => {
-                const res = await fetch(url)
-                return res.json()
-            }
-        )
-
-        return {
-            question: data?.data,
-            error,
-            isLoading: !error && !data,
-            isError: error,
-        }
-    }
-}
-
-type QuestionData = {
-    subject: string
-    permalink: string
-    resolved: boolean
-    body: string
-    createdAt: string
-    updatedAt: string
-    publishedAt: string
-    profile?: StrapiData<ProfileData>
-    replies?: StrapiData<ReplyData[]>
-}
+import { QuestionForm } from './QuestionForm'
+import { useQuestion } from '../hooks/useQuestion'
 
 type QuestionProps = {
     // TODO: Deal with id possibly being undefined at first
@@ -82,6 +19,7 @@ type QuestionProps = {
 }
 
 export const Question = ({ id, onSubmit, onResolve, question }: QuestionProps) => {
+    console.log(id)
     const [expanded, setExpanded] = useState(false)
     const containerRef = useRef<HTMLDivElement>(null)
     const { question: questionData, isLoading, isError, error } = useQuestion(id)
@@ -101,72 +39,83 @@ export const Question = ({ id, onSubmit, onResolve, question }: QuestionProps) =
     const handleContainerClick = (e: React.MouseEvent) => {}
 
     /*const { questionAuthorId, resolved, resolvedBy, handleResolve, handlePublish, handleReplyDelete } = question
-    const [confirmDelete, setConfirmDelete] = useState(false)
-    const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.stopPropagation()
-        if (confirmDelete) {
-            handleReplyDelete(id)
-        } else {
-            setConfirmDelete(true)
+        const [confirmDelete, setConfirmDelete] = useState(false)
+        const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
+            e.stopPropagation()
+            if (confirmDelete) {
+                handleReplyDelete(id)
+            } else {
+                setConfirmDelete(true)
+            }
         }
-    }
 
-    const handleContainerClick = () => {
-        setConfirmDelete(false)
-    }*/
+        const handleContainerClick = () => {
+            setConfirmDelete(false)
+        }*/
 
     /*const getQuestion = async () => {
-    const permalink = window.location.pathname
-    // @ts-ignore
-    const { response, data: question } =
-      (await get(apiHost, '/api/question', {
-        organizationId,
-        permalink
-      })) || {}
+        const permalink = window.location.pathname
+        // @ts-ignore
+        const { response, data: question } =
+          (await get(apiHost, '/api/question', {
+            organizationId,
+            permalink
+          })) || {}
 
-    if (response?.status !== 200) return null
+        if (response?.status !== 200) return null
 
-    return question
-  }
+        return question
+      }
 
-  useEffect(() => {
-    if (!question && permalink_base) {
-      getQuestion().then((question) => {
-        setQuestion(question?.question)
-        setReplies(question?.replies || [])
-      })
-    }
-  }, [organizationId, question, permalink_base])
+      useEffect(() => {
+        if (!question && permalink_base) {
+          getQuestion().then((question) => {
+            setQuestion(question?.question)
+            setReplies(question?.replies || [])
+          })
+        }
+      }, [organizationId, question, permalink_base])
 
-  useEffect(() => {
-    setQuestion(other?.question)
-  }, [other?.question])*/
+      useEffect(() => {
+        setQuestion(other?.question)
+      }, [other?.question])*/
 
-    return question ? (
-        <ErrorBoundary>
-            {/* @ts-ignore */}
-            <root.div ref={containerRef}>
-                <Theme containerRef={containerRef} />
-                <div className="squeak squeak-question-container">
-                    <div onClick={handleContainerClick}>
-                        <div className="squeak-post-author">
-                            <Profile profile={questionData.attributes.profile?.data} />
+    return (
+        <root.div ref={containerRef}>
+            <Theme containerRef={containerRef} />
+            <div className="squeak squeak-question-container">
+                <div onClick={handleContainerClick}>
+                    <div className="squeak-post-author">
+                        <Profile profile={questionData.attributes.profile?.data} />
 
-                            <Days created={questionData.attributes.createdAt} />
-                        </div>
-                        <div className="squeak-post-content">
-                            <h3 className="squeak-subject">
-                                <a href={`/questions/${questionData.id}`}>{questionData.attributes.subject}</a>
-                            </h3>
-
-                            <Markdown>{questionData.attributes.body}</Markdown>
-                        </div>
+                        <Days created={questionData.attributes.createdAt} />
                     </div>
-                    {/*<QuestionProvider onSubmit={onSubmit} question={question} replies={replies} onResolve={onResolve}>*/}
-                    <Replies expanded={expanded} setExpanded={setExpanded} />
-                    {/*</QuestionProvider>*/}
+                    <div className="squeak-post-content">
+                        <h3 className="squeak-subject">
+                            <a href={`/questions/${questionData.id}`}>{questionData.attributes.subject}</a>
+                        </h3>
+
+                        <Markdown>{questionData.attributes.body}</Markdown>
+                    </div>
                 </div>
-            </root.div>
-        </ErrorBoundary>
-    ) : null
+
+                <Replies
+                    expanded={expanded}
+                    setExpanded={setExpanded}
+                    resolved={questionData.attributes.resolved}
+                    replies={questionData.attributes.replies}
+                />
+
+                {questionData.attributes.resolved ? (
+                    <div className="squeak-locked-message">
+                        <p>This thread has been closed</p>
+                    </div>
+                ) : (
+                    <div className="squeak-reply-form-container">
+                        <QuestionForm onSubmit={onSubmit} questionId={questionData.id} formType="reply" />
+                    </div>
+                )}
+            </div>
+        </root.div>
+    )
 }

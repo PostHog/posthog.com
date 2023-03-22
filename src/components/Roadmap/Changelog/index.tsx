@@ -28,25 +28,27 @@ interface ITeam {
 
 export interface IRoadmap {
     complete: boolean
-    date_completed: string
+    dateCompleted: string
     title: string
     description: string
     team: ITeam
     githubPages: IGitHubPage[]
-    projected_completion_date: string
+    projectedCompletion: string
 }
 
 function group(nodes) {
     return groupBy(
         nodes
-            .filter((node: IRoadmap) => node.date_completed)
-            .sort((a, b) => new Date(b.date_completed) > new Date(a.date_completed)),
+            .filter((node: IRoadmap) => node.dateCompleted)
+            .sort((a, b) => new Date(b.dateCompleted) > new Date(a.dateCompleted)),
         (node) =>
-            `${months[new Date(node.date_completed).getUTCMonth()]} ${new Date(node.date_completed).getUTCFullYear()}`
+            `${months[new Date(node.dateCompleted).getUTCMonth()]} ${new Date(node.dateCompleted).getUTCFullYear()}`
     )
 }
 
 export default function Changelog() {
+    return null
+
     const {
         allSqueakRoadmap: { nodes, teams, categories },
     } = useStaticQuery(query)
@@ -171,13 +173,13 @@ export default function Changelog() {
     )
 }
 
-const query = graphql`
+/*const query = graphql`
     {
-        allSqueakRoadmap(sort: { fields: date_completed }, filter: { date_completed: { ne: null } }) {
+        allSqueakRoadmap(sort: { fields: dateCompleted }, filter: { dateCompleted: { ne: null } }) {
             nodes {
                 category
                 complete
-                date_completed
+                dateCompleted
                 title
                 description
                 team {
@@ -194,7 +196,7 @@ const query = graphql`
                         eyes
                     }
                 }
-                projected_completion_date
+                projectedCompletion
             }
             teams: group(field: team___name) {
                 fieldValue
@@ -204,4 +206,4 @@ const query = graphql`
             }
         }
     }
-`
+`*/

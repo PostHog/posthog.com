@@ -34,6 +34,10 @@ export type QuestionData = {
     replies?: StrapiData<ReplyData[]>
 }
 
+export type AvatarData = {
+    url: string
+}
+
 export type ProfileData = {
     firstName: string | null
     lastName: string | null
@@ -48,12 +52,13 @@ export type ProfileData = {
     createdAt: string
     updatedAt: string | null
     publishedAt: string | null
+    avatar?: StrapiData<AvatarData>
 }
 
 export type ReplyData = {
-    // TODO: Populate profile data
     body: string
     createdAt: string
     updatedAt: string
     publishedAt: string
+    profile?: StrapiData<Pick<ProfileData, 'firstName' | 'lastName' | 'avatar'>>
 }

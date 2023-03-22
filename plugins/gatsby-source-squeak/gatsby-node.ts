@@ -5,105 +5,164 @@ import qs from 'qs'
 import slugify from 'slugify'
 
 export const sourceNodes: GatsbyNode['sourceNodes'] = async (
-    { actions, createContentDigest, createNodeId, cache, store },
+    { actions, createContentDigest, createNodeId, cache },
     pluginOptions
 ) => {
-    const { apiHost, organizationId } = pluginOptions
+    const { apiHost } = pluginOptions
     const { createNode, createParentChildLink } = actions
 
-    const getQuestions = async () => {
-        const query = qs.stringify(
+    // Fetch all profiles
+    let page = 1
+    while (true) {
+        let profileQuery = qs.stringify(
             {
                 pagination: {
-                    page: 1,
+                    page,
                     pageSize: 1000,
                 },
+                populate: ['avatar'],
             },
             {
                 encodeValuesOnly: true, // prettify URL
             }
         )
 
-        const response = await fetch(`${apiHost}/api/questions?${query}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
+        const profiles = await fetch(`${apiHost}/api/profiles?${profileQuery}`).then((res) => res.json())
+
+        for (const profile of profiles.data) {
+            const { avatar, ...profileData } = profile.attributes
+
+            createNode({
+                type: `SqueakProfile`,
+                id: createNodeId(`squeak-profile-${profile.id}`),
+                squeakId: profile.id,
+                internal: {
+                    contentDigest: createContentDigest(profileData),
+                    type: `SqueakProfile`,
+                },
+                avatar: avatar.data?.attributes,
+                ...profileData,
+            })
+
+            /*async function createImageNode(imageURL) {
+                return createRemoteFileNode({
+                    url: imageURL,
+                    parentNodeId: node.id,
+                    createNode,
+                    createNodeId,
+                    cache,
+                    store,
+                }).catch((e) => console.error(e))
+            }
+            if (node.imageURL) {
+                const imageNode = await createImageNode(node.imageURL)
+                node.avatar___NODE = imageNode && imageNode.id
+            }*/
+        }
+
+        if (profiles.meta.pagination.page >= profiles.meta.pagination.pageCount) {
+            break
+        }
+        page++
+    }
+
+    // Fetch all questions
+    page = 1
+    while (true) {
+        let questionQuery = qs.stringify({
+            pagination: {
+                page,
+                pageSize: 100,
+            },
+            populate: {
+                profile: {
+                    fields: ['id'],
+                },
+                replies: {
+                    populate: {
+                        profile: {
+                            fields: ['id'],
+                        },
+                    },
+                },
+                topics: {
+                    fields: ['id'],
+                },
             },
         })
 
-        if (response.status !== 200) {
-            return []
-        }
+        const questions = await fetch(`${apiHost}/api/questions?${questionQuery}`).then((res) => res.json())
 
-        const { questions } = await response.json()
+        for (let question of questions.data) {
+            const { topics, replies, profile, ...rest } = question.attributes
 
-        return questions
-    }
-
-    const createReplies = (node, replies) => {
-        for (const reply of replies) {
-            const { body, profile: user, id, subject, created_at } = reply
-            const replyId = createNodeId(`reply-${id}`)
-            const replyNode = {
-                id: replyId,
-                parent: null,
-                children: [],
+            createNode({
+                type: `SqueakQuestion`,
+                id: createNodeId(`squeak-question-${question.id}`),
                 internal: {
-                    type: `Reply`,
-                    contentDigest: createContentDigest(body),
-                    content: body,
-                    mediaType: 'text/markdown',
+                    contentDigest: createContentDigest(question),
+                    type: `SqueakQuestion`,
                 },
-                name: user?.first_name || 'Anonymous',
-                imageURL: user?.avatar,
-                subject,
-                created_at: new Date(created_at),
+                squeakId: question.id,
+                ...(profile.data && { profile: { id: createNodeId(`squeak-profile-${profile.data.id}`) } }),
+                replies: replies.data.map((reply) => ({
+                    id: createNodeId(`squeak-reply-${reply.id}`),
+                })),
+                ...rest,
+            })
+
+            for (let reply of replies.data) {
+                const { profile, ...replyData } = reply.attributes
+
+                createNode({
+                    type: `SqueakReply`,
+                    id: createNodeId(`squeak-reply-${reply.id}`),
+                    squeakId: reply.id,
+                    internal: {
+                        contentDigest: createContentDigest(replyData.body),
+                        type: `SqueakReply`,
+                        content: replyData.body,
+                        mediaType: 'text/markdown',
+                    },
+                    ...(profile.data && { profile: { id: createNodeId(`squeak-profile-${profile.data.id}`) } }),
+                    ...replyData,
+                })
             }
-            createNode(replyNode)
-            createParentChildLink({ parent: node, child: replyNode })
         }
+
+        if (questions.meta.pagination.page >= questions.meta.pagination.pageCount) {
+            break
+        }
+        page++
     }
 
-    const questions = await getQuestions()
-
-    questions.forEach((question) => {
-        const node = {
-            id: createNodeId(`question-${question.id}`),
-            parent: null,
-            children: [],
-            internal: {
-                type: `Question`,
-                contentDigest: createContentDigest(question),
+    // Fetch all topics
+    let topicQuery = qs.stringify(
+        {
+            pagination: {
+                page: 1,
+                pageSize: 1000,
             },
-            ...question.attributes,
+        },
+        {
+            encodeValuesOnly: true, // prettify URL
         }
+    )
 
-        createNode(node)
-        createReplies(node, question.replies)
-    })
+    const topics = await fetch(`${apiHost}/api/topics?${topicQuery}`).then((res) => res.json())
 
-    const topics = await fetch(`${apiHost}/api/topics`).then((res) => res.json())
-
-    topics.data.forEach((topic) => {
-        const {
-            id,
-            attributes: { label },
-        } = topic
-
-        const node = {
-            id: createNodeId(`squeak-topic-${id}`),
-            parent: null,
-            children: [],
+    for (const topic of topics.data) {
+        createNode({
+            id: createNodeId(`squeak-topic-${topic.id}`),
+            slug: slugify(topic.attributes.label, { lower: true }),
+            squeakId: topic.id,
             internal: {
                 type: `SqueakTopic`,
                 contentDigest: createContentDigest(topic),
             },
-            label: label,
-            topicId: id,
-            slug: slugify(label, { lower: true }),
-        }
-        createNode(node)
-    })
+            ...topic.atributes,
+        })
+    }
 
     let query = qs.stringify({
         populate: ['topics'],
@@ -131,29 +190,25 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
         createNode(node)
     })
 
-    const roadmap = await fetch(`${apiHost}/api/roadmaps`).then((res) => res.json())
+    const roadmaps = await fetch(`${apiHost}/api/roadmaps`).then((res) => res.json())
 
-    console.log(roadmap)
-
-    for await (const roadmapItem of roadmap.data) {
+    for (const roadmap of roadmaps.data) {
         const {
-            id,
-            attributes: { title, githubUrls, image },
-        } = roadmapItem
+            attributes: { githubUrls },
+        } = roadmap
 
         const node = {
-            ...roadmapItem,
-            roadmapId: id,
-            id: createNodeId(`squeak-roadmap-${title}`),
+            id: createNodeId(`squeak-roadmap-${roadmap.id}`),
             parent: null,
             children: [],
             internal: {
                 type: `SqueakRoadmap`,
-                contentDigest: createContentDigest(roadmapItem),
+                contentDigest: createContentDigest(roadmap.attributes),
             },
+            ...roadmap.attributes,
         }
 
-        if (image) {
+        /*if (image) {
             const url = `https://res.cloudinary.com/${image.cloud_name}/v${image.version}/${image.publicId}.${image.format}`
 
             const fileNode = await createRemoteFileNode({
@@ -164,7 +219,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                 cache,
             })
             node.thumbnail___NODE = fileNode?.id
-        }
+        }*/
 
         const otherLinks = githubUrls.filter((url) => !url.includes('github.com'))
         node.otherLinks = otherLinks
@@ -201,76 +256,41 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
     }
 }
 
-export const onCreateNode: GatsbyNode['onCreateNode'] = async ({ node, actions, store, cache, createNodeId }) => {
-    const { createNode } = actions
-    if (node.internal.type === 'Reply') {
-        /*async function createImageNode(imageURL) {
-            return createRemoteFileNode({
-                url: imageURL,
-                parentNodeId: node.id,
-                createNode,
-                createNodeId,
-                cache,
-                store,
-            }).catch((e) => console.error(e))
-        }
-        if (node.imageURL) {
-            const imageNode = await createImageNode(node.imageURL)
-            node.avatar___NODE = imageNode && imageNode.id
-        }*/
-    }
-}
-
 export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] = async ({ actions }) => {
     const { createTypes } = actions
 
     createTypes(`
-        type Question implements Node {
-            subject: String
-            slug: [String]
-            imageURL: String
-            replies: [Reply]
-            avatar: File @link(from: "avatar___NODE")
+        type SqueakProfile implements Node {
+            id: ID!
+            squeakId: String!
+            firstName: String
+            lastName: String
         }
 
-        type Reply implements Node {
-            avatar: File @link(from: "avatar___NODE")
-            fullName: String
-            subject: String
+        type SqueakQuestion implements Node {
+            id: ID!
+            squeakId: String!
+            body: String!
+            createdAt: Date! @dateformat
+            updatedAt: Date! @dateformat
+            profile: SqueakProfile
+            replies: [SqueakReply!] @link(by: "id", from: "replies.id")
         }
 
-        type SqueakTeam {
-            name: String,
+        type SqueakReply implements Node {
+            id: ID!
+            squeakId: String!
+            body: String!
+            createdAt: Date! @dateformat
+            updatedAt: Date! @dateformat
+            profile: SqueakProfile
+            question: SqueakQuestion! @link(from: "id", to: "question")
         }
 
-        type SqueakGitHubReactions {
-          hooray: Int,
-          heart: Int,
-          eyes: Int,
-          _1: Int,
-          plus1: Int,
-          minus1: Int
-        }
-
-        type SqueakGitHubPage {
-            title: String,
-            html_url: String,
-            number: Int,
-            closed_at: Date,
-            reactions: SqueakGitHubReactions,
-        }
-
-        type SqueakRoadmap implements Node {
-          title: String,
-          category: String
-          beta_available: Boolean,
-          complete: Boolean,
-          description: String,
-          team: SqueakTeam,
-          otherLinks: [String],
-          githubPages: [SqueakGitHubPage],
-          milestone: Boolean,
-          thumbnail: File @link(from: "thumbnail___NODE")
+        type SqueakTopic implements Node {
+            id: ID!
+            squeakId: String!
+            label: String!
         }
     `)
 }

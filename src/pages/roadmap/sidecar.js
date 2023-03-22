@@ -166,7 +166,7 @@ const query = graphql`
             nodes {
                 beta_available
                 complete
-                date_completed
+                dateCompleted
                 title
                 description
                 team {
@@ -185,7 +185,6 @@ const query = graphql`
                         _1
                     }
                 }
-                projected_completion_date
             }
         }
     }

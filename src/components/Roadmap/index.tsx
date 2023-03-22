@@ -31,12 +31,12 @@ interface ITeam {
 export interface IRoadmap {
     beta_available: boolean
     complete: boolean
-    date_completed: string
+    dateCompleted: string
     title: string
     description: string
     team: ITeam
     githubPages: IGitHubPage[]
-    projected_completion_date: string
+    projectedCompletion: string
     roadmapId: BigInt
     thumbnail: ImageDataLike
 }
@@ -94,6 +94,7 @@ export const CardContainer = ({ children }: { children: React.ReactNode }) => {
 }
 
 export default function Roadmap() {
+    return null
     const {
         allSqueakRoadmap: { nodes },
     } = useStaticQuery(query)
@@ -101,20 +102,17 @@ export default function Roadmap() {
     const underConsideration = groupBy(
         nodes.filter(
             (node: IRoadmap) =>
-                !node.date_completed &&
-                !node.projected_completion_date &&
-                node.githubPages &&
-                node.githubPages.length > 0
+                !node.dateCompleted && !node.projectedCompletion && node.githubPages && node.githubPages.length > 0
         ),
         ({ team }: { team: ITeam }) => team?.name
     )
     const inProgress = groupBy(
-        nodes.filter((node: IRoadmap) => !node.date_completed && node.projected_completion_date),
+        nodes.filter((node: IRoadmap) => !node.dateCompleted && node.projectedCompletion),
         ({ team }: { team: ITeam }) => team?.name
     )
     const complete = groupBy(
         nodes.filter((node: IRoadmap) => {
-            const goalDate = node.date_completed && new Date(node.date_completed)
+            const goalDate = node.dateCompleted && new Date(node.dateCompleted)
             const currentDate = new Date()
             const currentQuarter = Math.floor(currentDate.getMonth() / 3 + 1)
             const goalQuarter = goalDate && Math.floor(goalDate.getMonth() / 3 + 1)
@@ -243,14 +241,14 @@ export default function Roadmap() {
     )
 }
 
-const query = graphql`
+/*const query = graphql`
     {
         allSqueakRoadmap {
             nodes {
                 roadmapId
                 beta_available
                 complete
-                date_completed
+                dateCompleted
                 title
                 description
                 team {
@@ -274,8 +272,8 @@ const query = graphql`
                         plus1
                     }
                 }
-                projected_completion_date
+                projectedCompletion
             }
         }
     }
-`
+`*/

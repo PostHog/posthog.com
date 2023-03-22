@@ -13,38 +13,40 @@ const categories = {
 }
 
 export default function Timeline() {
-    const {
+    return null
+
+    /*const {
         allSqueakRoadmap: { nodes },
     } = useStaticQuery(graphql`
         query {
-            allSqueakRoadmap(filter: { milestone: { eq: true } }, sort: { fields: date_completed }) {
+            allSqueakRoadmap(filter: { milestone: { eq: true } }, sort: { fields: dateCompleted }) {
                 nodes {
-                    date_completed(formatString: "YYYY-MM-DD")
+                    dateCompleted(formatString: "YYYY-MM-DD")
                     title
-                    projected_completion_date(formatString: "YYYY-MM-DD")
+                    projectedCompletion(formatString: "YYYY-MM-DD")
                     category
                 }
             }
         }
-    `)
+    `)*/
 
     const pastEvents = groupBy(
         nodes.filter((node) => {
-            const date = node.date_completed || node.projected_completion_date
+            const date = node.dateCompleted || node.projectedCompletion
             return date && new Date(date) < new Date()
         }),
         (node) => {
-            const date = new Date(node.date_completed || node.projected_completion_date)
+            const date = new Date(node.dateCompleted || node.projectedCompletion)
             return date.getUTCFullYear()
         }
     )
     const futureEvents = groupBy(
         nodes.filter((node) => {
-            const date = node.date_completed || node.projected_completion_date
+            const date = node.dateCompleted || node.projectedCompletion
             return date && new Date(date) > new Date()
         }),
         (node) => {
-            const date = new Date(node.date_completed || node.projected_completion_date)
+            const date = new Date(node.dateCompleted || node.projectedCompletion)
             return date.getUTCFullYear()
         }
     )
@@ -77,11 +79,11 @@ export default function Timeline() {
             <div className="max-w-screen-2xl mx-auto mdlg:grid grid-cols-3 shadow-xl">
                 {Object.keys(pastEvents).map((year) => {
                     const pastMonths = groupBy(pastEvents[year], (node) => {
-                        const date = new Date(node.date_completed || node.projected_completion_date)
+                        const date = new Date(node.dateCompleted || node.projectedCompletion)
                         return months[date.getUTCMonth()]
                     })
                     const futureQuarters = groupBy(futureEvents[year], (node) => {
-                        const date = node.date_completed || node.projected_completion_date
+                        const date = node.dateCompleted || node.projectedCompletion
                         return Math.floor(new Date(date).getUTCMonth() / 3 + 1)
                     })
                     return (

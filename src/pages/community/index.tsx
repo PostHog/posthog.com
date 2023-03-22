@@ -274,6 +274,8 @@ const ActivePulls = ({ pulls }) => {
 }
 
 export default function CommunityPage({ params }: PageProps) {
+    return null
+
     const [profile, setProfile] = useState<SqueakProfile | undefined>(undefined)
     const [editModalOpen, setEditModalOpen] = useState(false)
     const [questions, setQuestions] = useState([])
@@ -478,7 +480,7 @@ const ProfileSidebar = ({
     )
 }
 
-const query = graphql`
+/*const query = graphql`
     {
         issues: allPostHogIssue {
             nodes {
@@ -533,4 +535,4 @@ const query = graphql`
             stars
         }
     }
-`
+`*/

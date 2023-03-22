@@ -41,6 +41,7 @@ const Profile = () => {
 }
 
 export default function Docs({ referenceElement }: { referenceElement: HTMLDivElement }) {
+    return null
     const {
         topicGroups,
         questions: { allTopics },
@@ -256,7 +257,7 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
     )
 }
 
-const query = graphql`
+/*const query = graphql`
     {
         topicGroups: allSqueakTopicGroup {
             nodes {
@@ -274,4 +275,4 @@ const query = graphql`
             }
         }
     }
-`
+`*/
