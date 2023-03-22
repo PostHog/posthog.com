@@ -25,7 +25,19 @@ export default function Questions() {
                     limit: 20,
                 },
                 sort: 'createdAt:desc',
-                populate: ['profile', 'replies'],
+                populate: {
+                    profile: {
+                        fields: ['firstName', 'lastName'],
+                        populate: {
+                            avatar: {
+                                fields: ['url'],
+                            },
+                        },
+                    },
+                    replies: {
+                        fields: ['id', 'createdAt', 'updatedAt'],
+                    },
+                },
             },
             {
                 encodeValuesOnly: true, // prettify URL

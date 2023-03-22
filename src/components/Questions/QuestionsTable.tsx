@@ -33,8 +33,6 @@ export const QuestionsTable = ({
 
                           const numReplies = replies?.data?.length || 0
 
-                          console.log(profile)
-
                           return profile ? (
                               <div key={question.id} className={`grid xl:grid-cols-4 sm:gap-2 py-4 ${className}`}>
                                   <div className="hidden sm:block">
@@ -43,8 +41,12 @@ export const QuestionsTable = ({
                                           className="flex items-center text-sm mt-0.5 space-x-1 text-primary group"
                                       >
                                           <div className={`w-5 h-5 overflow-hidden rounded-full flex-shrink-0`}>
-                                              {/*{profile.avatar ? (
-                                                  <img className="w-full h-full" alt="" src={profile.avatar} />
+                                              {profile.data.attributes.avatar?.data ? (
+                                                  <img
+                                                      className="w-full h-full"
+                                                      alt=""
+                                                      src={profile.data.attributes.avatar?.data?.attributes?.url}
+                                                  />
                                               ) : (
                                                   <svg
                                                       viewBox="0 0 40 40"
@@ -61,7 +63,7 @@ export const QuestionsTable = ({
                                                           fill="#BFBFBC"
                                                       ></path>
                                                   </svg>
-                                              )}*/}
+                                              )}
                                           </div>
                                           <span className="text-primary dark:text-primary-dark font-medium opacity-60 group-hover:opacity-100 line-clamp-1">
                                               {profile.data.attributes.firstName} {profile.data.attributes.lastName}
