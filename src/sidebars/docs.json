@@ -453,7 +453,7 @@
         ]
     },
     {
-        "name": "A/B testing",
+        "name": "Experiments",
         "url": "/docs/experiments",
         "icon": "Experiments",
         "children": [
