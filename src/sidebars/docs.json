@@ -472,6 +472,10 @@
             {
                 "name": "Under the hood",
                 "url": "/docs/experiments/under-the-hood"
+            },
+            {
+                "name": "Common issues and how to solve them",
+                "url": "/docs/experiments/common-issues"
             }
         ]
     },
