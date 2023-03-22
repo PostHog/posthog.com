@@ -13,6 +13,7 @@ category: Inside PostHog
 tags:
   - Guides
   - Product engineers
+hideLastUpdated: false
 ---
 
 Regularly talking to users is an important habit for any product team, but it's wasted without an efficient way to share what you learn. At PostHog, we favor interview snapshots. Championed by Teresa Torres in the book [Continuous Discovery Habits](https://www.amazon.com/Continuous-Discovery-Habits-Discover-Products/dp/1736633309), we like snapshots because:
@@ -21,7 +22,7 @@ Regularly talking to users is an important habit for any product team, but it's 
  2. They're easy to digest – no scrolling necessary, just drop a screenshot into Slack.
  3. They're conversation starters – each snapshot triggers lively debate and ideas.
 
-In this guide, I'll share how we create user interview snapshots at PostHog – template available as a [JPEG](../images/interview-snapshots/interview-snapshot.jpg), [Figma file](https://www.figma.com/file/iO6kIZ8kXdMudLtu7kSyc5/PostHog-Interview-Snapshot-Template?node-id=0%3A1&t=LDU8ALaROQyfh6JL-1), or on [Google Sheets](https://docs.google.com/presentation/d/1JnewtJmeRHrXPloJzT5nGmXYrBUbaKnN7-k4kYjbo9M/edit?usp=sharing).
+In this guide, I'll share how we create user interview snapshots at PostHog – template available as a [JPEG](https://posthog.com/images/interview-snapshot.jpg), [Figma file](https://www.figma.com/file/iO6kIZ8kXdMudLtu7kSyc5/PostHog-Interview-Snapshot-Template?node-id=0%3A1&t=LDU8ALaROQyfh6JL-1), or on [Google Sheets](https://docs.google.com/presentation/d/1JnewtJmeRHrXPloJzT5nGmXYrBUbaKnN7-k4kYjbo9M/edit?usp=sharing).
 
 ## Interview snapshots explained
 
