@@ -1,8 +1,6 @@
 import { GatsbyNode } from 'gatsby'
-import { createRemoteFileNode } from 'gatsby-source-filesystem'
 import fetch from 'node-fetch'
 import qs from 'qs'
-import slugify from 'slugify'
 
 export const sourceNodes: GatsbyNode['sourceNodes'] = async (
     { actions, createContentDigest, createNodeId, cache },
@@ -18,7 +16,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
             {
                 pagination: {
                     page,
-                    pageSize: 1000,
+                    pageSize: 100,
                 },
                 populate: ['avatar'],
             },
@@ -108,6 +106,9 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                 replies: replies.data.map((reply) => ({
                     id: createNodeId(`squeak-reply-${reply.id}`),
                 })),
+                topics: topics.data.map((topic) => ({
+                    id: createNodeId(`squeak-topic-${topic.id}`),
+                })),
                 ...rest,
             })
 
@@ -141,7 +142,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
         {
             pagination: {
                 page: 1,
-                pageSize: 1000,
+                pageSize: 100,
             },
         },
         {
@@ -154,18 +155,22 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
     for (const topic of topics.data) {
         createNode({
             id: createNodeId(`squeak-topic-${topic.id}`),
-            slug: slugify(topic.attributes.label, { lower: true }),
             squeakId: topic.id,
             internal: {
                 type: `SqueakTopic`,
                 contentDigest: createContentDigest(topic),
             },
-            ...topic.atributes,
+            ...topic.attributes,
         })
     }
 
+    // Fetch all topic groups
     let query = qs.stringify({
-        populate: ['topics'],
+        populate: {
+            topics: {
+                fields: ['id'],
+            },
+        },
     })
 
     const topicGroups = await fetch(`${apiHost}/api/topic-groups?${query}`).then((res) => res.json())
@@ -173,19 +178,19 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
     topicGroups.data.forEach((topicGroup) => {
         const {
             id,
-            attributes: { label, topics },
+            attributes: { topics },
         } = topicGroup
 
         const node = {
             id: createNodeId(`squeak-topic-group-${id}`),
-            parent: null,
-            children: topics.data.map((topic) => createNodeId(`squeak-topic-${topic.id}`)),
             internal: {
                 type: `SqueakTopicGroup`,
                 contentDigest: createContentDigest(topicGroup),
             },
-            label: label,
-            slug: slugify(label, { lower: true }),
+            ...topicGroup.attributes,
+            topics: topics.data.map((topic) => ({
+                id: createNodeId(`squeak-topic-${topic.id}`),
+            })),
         }
         createNode(node)
     })
@@ -275,6 +280,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             updatedAt: Date! @dateformat
             profile: SqueakProfile
             replies: [SqueakReply!] @link(by: "id", from: "replies.id")
+            topics: [SqueakTopic!] @link(by: "id", from: "topics.id")
         }
 
         type SqueakReply implements Node {
@@ -290,7 +296,16 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         type SqueakTopic implements Node {
             id: ID!
             squeakId: String!
+            slug: String!
             label: String!
+        }
+
+        type SqueakTopicGroup implements Node {
+            id: ID!
+            squeakId: String!
+            slug: String!
+            label: String!
+            topics: [SqueakTopic!] @link(by: "id", from: "topics.id")
         }
     `)
 }

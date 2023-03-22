@@ -4,7 +4,6 @@ import { Slack } from 'components/Icons/Icons'
 import Layout from 'components/Layout'
 import PostLayout from 'components/PostLayout'
 import { SEO } from 'components/seo'
-import { squeakProfileLink } from 'lib/utils'
 import { Squeak } from 'components/Squeak'
 import { graphql } from 'gatsby'
 import Link from 'components/Link'
@@ -20,7 +19,7 @@ interface IProps {
     data: {
         squeakTopic: {
             id: string
-            topicId: string
+            squeakId: number
             label: string
         }
     }
@@ -62,15 +61,7 @@ export default function SqueakTopics({ data }: IProps) {
 
                         <h2>Questions tagged with "{data.squeakTopic.label}"</h2>
 
-                        <Squeak
-                            profileLink={squeakProfileLink}
-                            limit={5}
-                            topics={false}
-                            slug={null}
-                            apiHost={process.env.GATSBY_SQUEAK_API_HOST as string}
-                            organizationId={process.env.GATSBY_SQUEAK_ORG_ID as string}
-                            topic={data.squeakTopic.topicId}
-                        />
+                        <Squeak limit={5} slug={undefined} topicId={data.squeakTopic.squeakId} />
                     </section>
                 </PostLayout>
             </Layout>
@@ -82,7 +73,7 @@ export const query = graphql`
     query ($id: String!) {
         squeakTopic(id: { eq: $id }) {
             id
-            topicId
+            squeakId
             label
         }
     }

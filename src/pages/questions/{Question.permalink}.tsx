@@ -64,9 +64,7 @@ export const query = graphql`
                 lastName
             }
             topics {
-                topic {
-                    label
-                }
+                label
             }
             replies {
                 id

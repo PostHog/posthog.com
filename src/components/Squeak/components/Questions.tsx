@@ -2,12 +2,12 @@ import React, { useEffect, useState, useRef } from 'react'
 import root from 'react-shadow/styled-components'
 
 import { useOrg } from '../hooks/useOrg'
-import { post } from '../lib/api'
 
 import { Question } from './Question'
 import { QuestionForm } from './QuestionForm'
 import { Theme } from './Theme'
-import ErrorBoundary from './ErrorBoundary'
+import { StrapiResult, QuestionData, StrapiRecord } from 'lib/strapi'
+import qs from 'qs'
 
 const Topics = ({
     handleTopicChange,
@@ -51,34 +51,40 @@ type QuestionsProps = {
     onLoad: () => void
     topics: boolean
     onSignUp: () => void
-    topic: any
+    topicId?: number
 }
 
-export const Questions = ({ slug, limit = 100, onSubmit, onLoad, topics, onSignUp, topic }: QuestionsProps) => {
-    const [activeTopic, setActiveTopic] = useState(topic)
-    const { organizationId, apiHost } = useOrg()
-    const [questions, setQuestions] = useState<any[]>([])
+export const Questions = ({ slug, limit = 100, onSubmit, onLoad, topics, onSignUp, topicId }: QuestionsProps) => {
+    const [questions, setQuestions] = useState<StrapiRecord<QuestionData>[]>([])
     const [loading, setLoading] = useState(false)
     const [availableTopics, setAvailableTopics] = useState<any[]>([])
     const [count, setCount] = useState(0)
     const [start, setStart] = useState(0)
     const containerRef = useRef<HTMLDivElement>(null)
 
-    const getQuestions = async ({ limit, start, topic }: { limit: number; start: number; topic?: string }) => {
-        // @ts-ignore
-        const { response, data } =
-            (await post(apiHost, `/api/questions`, {
-                organizationId,
-                slug,
-                published: true,
-                perPage: limit,
-                start,
-                topic,
-            })) || {}
+    const getQuestions = async ({ limit, start, topicId }: { limit: number; start: number; topicId?: number }) => {
+        console.log(topicId)
+        const query = qs.stringify(
+            {
+                pagination: {
+                    start,
+                    limit,
+                },
+                fields: ['id'],
+                filters: topicId ? { topics: { id: { $eq: topicId } } } : {},
+            },
+            {
+                encodeValuesOnly: true,
+            }
+        )
 
-        if (response.status !== 200) {
-            return { questions: [], count: 0 }
+        const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query}`)
+
+        if (!response.ok) {
+            return []
         }
+
+        const { data } = (await response.json()) as StrapiResult<QuestionData[]>
 
         // returns a structure that looks like: {questions: [{id: 123}], count: 123}
         return data
@@ -95,11 +101,11 @@ export const Questions = ({ slug, limit = 100, onSubmit, onLoad, topics, onSignU
     }
 
     useEffect(() => {
-        getQuestions({ limit, start, topic: activeTopic }).then((data) => {
-            setQuestions([...questions, ...data.questions])
-            setCount(data.count)
-            setAvailableTopics(getAvailableTopics([...questions, ...data.questions]))
-            onLoad?.()
+        getQuestions({ limit, start, topicId }).then((data) => {
+            setQuestions(data)
+            setCount(data.length)
+            // setAvailableTopics(getAvailableTopics([...questions, ...data.questions]))
+            // onLoad?.()
         })
     }, [])
 
@@ -114,7 +120,7 @@ export const Questions = ({ slug, limit = 100, onSubmit, onLoad, topics, onSignU
     }
 
     const handleShowMore = () => {
-        getQuestions({ limit, start: start + limit, topic: activeTopic }).then((data) => {
+        getQuestions({ limit, start: start + limit, topicId }).then((data) => {
             setQuestions([...questions, ...data.questions])
             setCount(data.count)
             setStart(start + limit)
@@ -122,56 +128,30 @@ export const Questions = ({ slug, limit = 100, onSubmit, onLoad, topics, onSignU
         })
     }
 
-    const handleTopicChange = (topic: any) => {
-        if (topic === activeTopic) return
-        getQuestions({ limit, start: 0, topic }).then((data) => {
-            setStart(0)
-            setQuestions(data.questions)
-            setCount(data.count)
-            setActiveTopic(topic)
-        })
-    }
-
     return (
-        <ErrorBoundary>
-            {/* @ts-ignore */}
-            <root.div ref={containerRef}>
-                <Theme containerRef={containerRef} />
-                <div className="squeak">
-                    {topics && (
-                        <Topics
-                            topics={availableTopics}
-                            handleTopicChange={handleTopicChange}
-                            activeTopic={activeTopic}
-                        />
-                    )}
+        <root.div ref={containerRef}>
+            <Theme containerRef={containerRef} />
+            <div className="squeak">
+                {questions && questions.length > 0 && (
+                    <ul className="squeak-questions">
+                        {questions.map((question) => {
+                            return (
+                                <li key={question.id}>
+                                    <Question onSubmit={handleSubmit} id={question.id} />
+                                </li>
+                            )
+                        })}
+                    </ul>
+                )}
 
-                    {questions && questions.length > 0 && (
-                        <ul className="squeak-questions">
-                            {questions.map((question) => {
-                                return (
-                                    <li key={question.question.id}>
-                                        <Question onSubmit={handleSubmit} {...question} />
-                                    </li>
-                                )
-                            })}
-                        </ul>
-                    )}
+                {start + limit < count && (
+                    <button disabled={loading} className="squeak-show-more-questions-button" onClick={handleShowMore}>
+                        Show more
+                    </button>
+                )}
 
-                    {start + limit < count && (
-                        <button
-                            disabled={loading}
-                            className="squeak-show-more-questions-button"
-                            onClick={handleShowMore}
-                        >
-                            Show more
-                        </button>
-                    )}
-
-                    {/* @ts-ignore */}
-                    <QuestionForm onSignUp={onSignUp} onSubmit={handleSubmit} formType="question" />
-                </div>
-            </root.div>
-        </ErrorBoundary>
+                <QuestionForm onSignUp={onSignUp} onSubmit={handleSubmit} formType="question" />
+            </div>
+        </root.div>
     )
 }
