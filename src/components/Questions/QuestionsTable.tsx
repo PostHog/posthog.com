@@ -1,13 +1,10 @@
 import React from 'react'
 
-import { dayFormat, dateToDays } from '../../utils'
-import slugify from 'slugify'
-
 import Link from 'components/Link'
-import { QuestionData, StrapiRecord, StrapiResult } from 'lib/strapi'
+import { QuestionData, StrapiResult } from 'lib/strapi'
 
 type QuestionsTableProps = {
-    questions: StrapiResult<QuestionData[]>
+    questions: Omit<StrapiResult<QuestionData[]>, 'meta'>
     isLoading: boolean
     size: number
     setSize: (size: number | ((_size: number) => number)) => any

@@ -49,11 +49,9 @@ export default function Questions() {
         (url: string) => fetch(url).then((r) => r.json())
     )
 
-    // @ts-ignore
-    const questions: StrapiResult<QuestionData[]> = React.useMemo(() => {
+    const questions: Omit<StrapiResult<QuestionData[]>, 'meta'> = React.useMemo(() => {
         return {
             data: data?.reduce((acc, cur) => [...acc, ...cur.data], [] as StrapiRecord<QuestionData>[]) ?? [],
-            meta: data?.[0]?.meta,
         }
     }, [size, data])
 

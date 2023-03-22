@@ -73,6 +73,19 @@ export const useQuestion = (id: number | string) => {
         }
     )
 
+    const reply = async (body: string) => {
+        const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/replies`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                body,
+                question: question?.id,
+            }),
+        })
+    }
+
     return {
         question,
         error,

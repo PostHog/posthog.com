@@ -2,16 +2,23 @@ import { useContext } from 'react'
 import React, { createContext, useEffect, useState } from 'react'
 import getGravatar from 'gravatar'
 import { post } from 'components/Squeak/lib/api'
+import qs from 'qs'
+import { ProfileData, StrapiResult } from 'lib/strapi'
 
 type User = {
-    id: string
+    id: number
     email: string
     isMember: boolean
     isModerator: boolean
+    blocked: boolean
+    confirmed: boolean
+    createdAt: string
+    provider: 'email' | 'github' | 'google'
+    username: string
     profile: {
         avatar: string
-        first_name: string
-        last_name: string
+        firstName: string
+        lastName: string
     }
 }
 
@@ -53,7 +60,7 @@ type UserProviderProps = {
 }
 
 export const UserProvider: React.FC<UserProviderProps> = ({ apiHost, organizationId, children }) => {
-    const [isLoading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(false)
     const [user, setUser] = useState<User | null>(null)
 
     useEffect(() => {
@@ -99,22 +106,64 @@ export const UserProvider: React.FC<UserProviderProps> = ({ apiHost, organizatio
     const login = async ({ email, password }: { email: string; password: string }): Promise<User | null> => {
         setIsLoading(true)
 
-        const { data, error } =
-            (await post(apiHost, '/api/login', {
-                email,
-                password,
-                organizationId,
-            })) || {}
+        try {
+            const userRes = await fetch(`${apiHost}/api/auth/local`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                method: 'POST',
+                body: JSON.stringify({
+                    identifier: email,
+                    password,
+                }),
+            })
 
-        if (error) {
-            setIsLoading(false)
+            if (!userRes.ok) {
+                return null
+            }
 
-            // TODO: Should probably throw here
+            const userData = await userRes.json()
+
+            const profileQuery = qs.stringify(
+                {
+                    filters: {
+                        user: {
+                            id: {
+                                $eq: userData.user.id,
+                            },
+                        },
+                    },
+                },
+                {
+                    encodeValuesOnly: true,
+                }
+            )
+            const profileRes = await fetch(`${apiHost}/api/profiles?${profileQuery}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                method: 'GET',
+            })
+
+            if (!profileRes.ok) {
+                return null
+            }
+
+            const profileData: StrapiResult<ProfileData[]> = await profileRes.json()
+
+            const user = {
+                ...userData.user,
+                profile: profileData.data[0],
+            }
+
+            console.log(user)
+
+            return user
+        } catch (error) {
+            console.error(error)
             return null
-        } else {
-            setUser(data)
-
-            return data
+        } finally {
+            setIsLoading(false)
         }
     }
 

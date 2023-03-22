@@ -5,7 +5,7 @@ import SEO from 'components/seo'
 import Layout from 'components/Layout'
 import PostLayout from 'components/PostLayout'
 import Link from 'components/Link'
-import { OrgProvider, Login as SqueakLogin } from 'components/Squeak'
+import { OrgProvider, Authentication } from 'components/Squeak'
 import { useUser } from 'hooks/useUser'
 import Modal from 'components/Modal'
 import EditProfile from 'components/Profiles/EditProfile'
@@ -50,7 +50,11 @@ export const Login = ({ onSubmit = () => undefined }: { onSubmit?: () => void })
             <p className="text-sm mt-2 dark:text-white">
                 We suggest signing up with your personal email. Soon you'll be able to link your PostHog app account.
             </p>
-            <SqueakLogin onSubmit={onSubmit} />
+            <Authentication
+                showBanner={false}
+                showProfile={false}
+                //onSubmit={onSubmit}
+            />
         </>
     ) : (
         <>
@@ -244,7 +248,7 @@ const RecentQuestions = () => {
     return (
         <div id="recent-questions" className="mb-12">
             <SectionTitle>Recent questions</SectionTitle>
-            <QuestionsTable hideLoadMore questions={questions} size={size} setSize={setSize} isLoading={isLoading} />
+            {/*<QuestionsTable hideLoadMore questions={questions} size={size} setSize={setSize} isLoading={isLoading} />*/}
             <CallToAction className="mt-4" type="secondary" width="full" to="/questions">
                 Browse all questions
             </CallToAction>
@@ -274,8 +278,6 @@ const ActivePulls = ({ pulls }) => {
 }
 
 export default function CommunityPage({ params }: PageProps) {
-    return null
-
     const [profile, setProfile] = useState<SqueakProfile | undefined>(undefined)
     const [editModalOpen, setEditModalOpen] = useState(false)
     const [questions, setQuestions] = useState([])
@@ -428,22 +430,11 @@ const ProfileSidebar = ({
     postHogStats: IGitHubStats
     postHogComStats: IGitHubStats
 }) => {
-    const { user, setUser } = useUser()
-    useEffect(() => {
+    const { user, setUser, logout } = useUser()
+    console.log(user)
+    /*useEffect(() => {
         setProfile(user?.profile)
-    }, [user])
-
-    const handleSignOut = async () => {
-        await fetch('https://squeak.cloud/api/logout', {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-        })
-        setUser(null)
-    }
+    }, [user])*/
 
     return (
         <>
@@ -451,7 +442,7 @@ const ProfileSidebar = ({
                 <div className="mb-2 flex items-baseline justify-between">
                     <h4 className="m-0">My profile</h4>
                     {profile && (
-                        <button onClick={handleSignOut} className="text-red font-bold text-sm">
+                        <button onClick={logout} className="text-red font-bold text-sm">
                             Logout
                         </button>
                     )}
@@ -480,7 +471,7 @@ const ProfileSidebar = ({
     )
 }
 
-/*const query = graphql`
+const query = graphql`
     {
         issues: allPostHogIssue {
             nodes {
@@ -535,4 +526,4 @@ const ProfileSidebar = ({
             stars
         }
     }
-`*/
+`

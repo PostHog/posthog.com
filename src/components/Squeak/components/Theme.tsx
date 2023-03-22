@@ -69,7 +69,6 @@ const Style = createGlobalStyle`
     }
 
     .squeak-authentication-form-container {
-        margin-left: 50px;
         max-width: 600px;
 
         .squeak-authentication-form-message {
