@@ -6,6 +6,7 @@ import { BorderWrapper } from './components/BorderWrapper'
 import { CallToAction } from './components/CallToAction'
 import { Caption } from './components/Caption'
 import { CompensationCalculator } from './components/CompensationCalculator'
+import { pages } from './components/Docs/pages'
 import { FeatureAvailability } from './components/FeatureAvailability'
 import { GDPRForm } from './components/GDPRForm'
 import { HiddenSection } from './components/HiddenSection'
@@ -24,6 +25,7 @@ export const shortcodes = {
     CallToAction,
     Caption,
     CompensationCalculator,
+    pages,
     FeatureAvailability,
     GDPRForm,
     HiddenSection,

@@ -1,11 +1,6 @@
 import React from 'react'
-import { graphql } from 'gatsby'
+import { graphql, useStaticQuery } from 'gatsby'
 import { StaticImage } from 'gatsby-plugin-image'
-
-import docs from 'sidebars/docs.json'
-import Layout from 'components/Layout'
-import { SEO } from 'components/seo'
-import PostLayout from 'components/PostLayout'
 import { Tutorials } from 'components/Docs/Tutorials'
 import { LinkGrid } from 'components/Docs/LinkGrid'
 import { GettingStarted } from 'components/Docs/GettingStarted'
@@ -43,51 +38,48 @@ type FeatureFlagsProps = {
     }
 }
 
-const FeatureFlags: React.FC<FeatureFlagsProps> = ({ data }) => {
+const FeatureFlags: React.FC = () => {
+    const data = useStaticQuery(query)
     const { tutorials } = data
 
     return (
-        <Layout>
-            <SEO title="Feature flags - Docs - PostHog" />
+        <>
+            <StaticImage
+                alt=""
+                placeholder="none"
+                quality={100}
+                className="w-full sm:w-[400px] sm:float-right sm:ml-8 sm:-mt-8 sm:mb-8"
+                src="../../Home/Slider/images/feature-flags-hog.png"
+            />
+            <h1 className="text-4xl mb-2 mt-6">Feature flags</h1>
+            <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
+                Toggle features for cohorts or individuals to test the impact before rolling out to everyone.
+            </h3>
 
-            <PostLayout title={'Feature flags'} menu={docs} hideSurvey hideSidebar>
-                <StaticImage
-                    alt=""
-                    placeholder="none"
-                    quality={100}
-                    className="w-full sm:w-[400px] sm:float-right sm:ml-8 sm:-mt-8 sm:mb-8"
-                    src="../../components/Home/Slider/images/feature-flags-hog.png"
-                />
-                <h1 className="text-4xl mb-2 mt-6">Feature flags</h1>
-                <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
-                    Toggle features for cohorts or individuals to test the impact before rolling out to everyone.
-                </h3>
+            {/* Quick links */}
+            <section className="my-6">
+                <h3 className="mb-6 mt-0">Pages</h3>
+                <LinkGrid links={quickLinks} />
+            </section>
 
-                {/* Quick links */}
-                <section className="my-6">
-                    <h3 className="mb-6 mt-0">Pages</h3>
-                    <LinkGrid links={quickLinks} />
-                </section>
+            {/* Get started section */}
+            <section className="py-6 sm:py-12">
+                <GettingStarted
+                    product="Feature flags"
+                    title="Create your first feature flag"
+                    description="Learn how to create a feature flag and toggle it on and off for different users."
+                    link="/docs/feature-flags/manual#creating-feature-flags"
+                ></GettingStarted>
+            </section>
 
-                {/* Get started section */}
-                <section className="py-6 sm:py-12">
-                    <GettingStarted
-                        product="Feature flags"
-                        title="Create your first feature flag"
-                        description="Learn how to create a feature flag and toggle it on and off for different users."
-                        link="/docs/feature-flags/manual#creating-feature-flags"
-                    ></GettingStarted>
-                </section>
-
-                <Tutorials tutorials={tutorials} />
-            </PostLayout>
-        </Layout>
+            <Tutorials tutorials={tutorials} />
+        </>
     )
 }
 
 export default FeatureFlags
 
-export const query = graphql`
+const query = graphql`
     query FeatureFlags {
         tutorials: allMdx(
             limit: 6

@@ -206,6 +206,11 @@ export default function Handbook({
         installUrl,
         thumbnail,
         related,
+        hideSurvey,
+        hideQuestions,
+        hideNextPost,
+        hideTitle,
+        hideBreadcrumb,
     } = frontmatter
     const { parent, excerpt } = post
     const lastUpdated = parent?.fields?.gitLogLatestDate
@@ -266,13 +271,16 @@ export default function Handbook({
             />
             <Layout>
                 <PostLayout
+                    hideSurvey={hideSurvey}
                     searchFilter={searchFilter}
                     title={title}
                     filePath={filePath}
                     questions={
-                        <div id="squeak-questions" className="pb-8">
-                            <CommunityQuestions />
-                        </div>
+                        !hideQuestions && (
+                            <div id="squeak-questions" className="pb-8">
+                                <CommunityQuestions />
+                            </div>
+                        )
                     }
                     menu={menu}
                     sidebar={
@@ -286,37 +294,43 @@ export default function Handbook({
                     }
                     tableOfContents={[...tableOfContents, { depth: 0, value: 'Questions?', url: 'squeak-questions' }]}
                     contentWidth="100%"
-                    breadcrumb={[breadcrumbBase, ...(breadcrumb?.slice(0, breadcrumb.length - 1) || [])]}
+                    breadcrumb={
+                        !hideBreadcrumb && [breadcrumbBase, ...(breadcrumb?.slice(0, breadcrumb.length - 1) || [])]
+                    }
                     hideSidebar={hideAnchor}
-                    nextPost={nextPost}
+                    nextPost={!hideNextPost && nextPost}
                 >
                     <section>
-                        <div className="mb-8 relative">
-                            <div className="flex items-center mt-0 flex-wrap justify-between">
-                                <div className="flex items-center space-x-2 mb-1">
-                                    {thumbnail && <GatsbyImage image={getImage(thumbnail)} />}
-                                    <h1 className="dark:text-white text-3xl sm:text-5xl m-0">{title}</h1>
-                                </div>
-                                <div className="flex items-center space-x-2">
-                                    {github && (
-                                        <Link to={github}>
-                                            <GitHub className="w-8 h-8 text-black/80 hover:text-black/60 dark:text-white/80 hover:dark:text-white/60 transition-colors" />
-                                        </Link>
-                                    )}
-                                    {installUrl && showCTA && (
-                                        <CallToAction size="sm" to={installUrl}>
-                                            <span className="text-[17px] md:px-1 md:py-0.5">Install</span>
-                                        </CallToAction>
-                                    )}
-                                </div>
-                            </div>
+                        {(!hideTitle || !hideBreadcrumb) && (
+                            <div className="mb-8 relative">
+                                {!hideTitle && (
+                                    <div className="flex items-center mt-0 flex-wrap justify-between">
+                                        <div className="flex items-center space-x-2 mb-1">
+                                            {thumbnail && <GatsbyImage image={getImage(thumbnail)} />}
+                                            <h1 className="dark:text-white text-3xl sm:text-5xl m-0">{title}</h1>
+                                        </div>
+                                        <div className="flex items-center space-x-2">
+                                            {github && (
+                                                <Link to={github}>
+                                                    <GitHub className="w-8 h-8 text-black/80 hover:text-black/60 dark:text-white/80 hover:dark:text-white/60 transition-colors" />
+                                                </Link>
+                                            )}
+                                            {installUrl && showCTA && (
+                                                <CallToAction size="sm" to={installUrl}>
+                                                    <span className="text-[17px] md:px-1 md:py-0.5">Install</span>
+                                                </CallToAction>
+                                            )}
+                                        </div>
+                                    </div>
+                                )}
 
-                            {!hideLastUpdated && (
-                                <p className="mt-0 mb-4 md:mt-1 md:mb-0 !opacity-30 text-black dark:text-white font-semibold">
-                                    Last updated: <time>{lastUpdated}</time>
-                                </p>
-                            )}
-                        </div>
+                                {!hideLastUpdated && (
+                                    <p className="mt-0 mb-4 md:mt-1 md:mb-0 !opacity-30 text-black dark:text-white font-semibold">
+                                        Last updated: <time>{lastUpdated}</time>
+                                    </p>
+                                )}
+                            </div>
+                        )}
                         {features && <LibraryFeatures availability={features} />}
                         <div className={isArticle && 'article-content'}>
                             <MDXProvider components={components}>
@@ -398,6 +412,11 @@ export const query = graphql`
                 hideLastUpdated
                 github
                 isArticle
+                hideSurvey
+                hideQuestions
+                hideNextPost
+                hideTitle
+                hideBreadcrumb
                 features {
                     eventCapture
                     userIdentification

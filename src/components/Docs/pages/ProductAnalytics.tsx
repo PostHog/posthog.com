@@ -1,14 +1,8 @@
 import React from 'react'
-import { graphql } from 'gatsby'
+import { graphql, useStaticQuery } from 'gatsby'
 import { StaticImage } from 'gatsby-plugin-image'
-
-import docs from 'sidebars/docs.json'
-import Layout from 'components/Layout'
-import { SEO } from 'components/seo'
-import PostLayout from 'components/PostLayout'
 import { Tutorials } from 'components/Docs/Tutorials'
 import { LinkGrid } from 'components/Docs/LinkGrid'
-import { GettingStarted } from 'components/Docs/GettingStarted'
 
 export const quickLinks = [
     {
@@ -78,40 +72,37 @@ type ProductAnalyticsProps = {
     }
 }
 
-const ProductAnalytics: React.FC<ProductAnalyticsProps> = ({ data }) => {
+const ProductAnalytics: React.FC = () => {
+    const data = useStaticQuery(query)
     const { tutorials } = data
     return (
-        <Layout>
-            <SEO title="Product analytics - Documentation - PostHog" />
+        <>
+            <StaticImage
+                alt=""
+                placeholder="none"
+                quality={100}
+                className="w-full sm:w-[400px] sm:float-right sm:ml-8 sm:-mt-8 sm:mb-8"
+                src="../../Home/Slider/images/product-analytics-hog.png"
+            />
+            <h1 className="text-4xl mb-2 mt-6">Product analytics</h1>
+            <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
+                Learn how to use product analytics to understand your users.
+            </h3>
 
-            <PostLayout title={'Product Analytics'} menu={docs} hideSurvey hideSidebar>
-                <StaticImage
-                    alt=""
-                    placeholder="none"
-                    quality={100}
-                    className="w-full sm:w-[400px] sm:float-right sm:ml-8 sm:-mt-8 sm:mb-8"
-                    src="../../components/Home/Slider/images/product-analytics-hog.png"
-                />
-                <h1 className="text-4xl mb-2 mt-6">Product analytics</h1>
-                <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
-                    Learn how to use product analytics to understand your users.
-                </h3>
+            {/* Quick links */}
+            <section className="my-12 clear-both">
+                <h3 className="mb-6 mt-0">Chapters</h3>
+                <LinkGrid links={quickLinks} />
+            </section>
 
-                {/* Quick links */}
-                <section className="my-12 clear-both">
-                    <h3 className="mb-6 mt-0">Chapters</h3>
-                    <LinkGrid links={quickLinks} />
-                </section>
-
-                <Tutorials tutorials={tutorials} />
-            </PostLayout>
-        </Layout>
+            <Tutorials tutorials={tutorials} />
+        </>
     )
 }
 
 export default ProductAnalytics
 
-export const query = graphql`
+const query = graphql`
     query ProductAnalytics {
         tutorials: allMdx(
             limit: 6

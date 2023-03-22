@@ -1,11 +1,11 @@
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 import { Link } from 'gatsby'
-import { quickLinks as productAnalyticsLinks } from '../../pages/docs/product-analytics'
-import { quickLinks as featureFlagsLinks } from '../../pages/docs/feature-flags'
-import { quickLinks as experimentsLinks } from '../../pages/docs/experiments'
-import { quickLinks as sessionRecordingLinks } from '../../pages/docs/session-recording'
-import { quickLinks as dataLinks } from '../../pages/docs/data'
+import { quickLinks as productAnalyticsLinks } from '../Docs/pages/ProductAnalytics'
+import { quickLinks as featureFlagsLinks } from '../Docs/pages/FeatureFlags'
+import { quickLinks as experimentsLinks } from '../Docs/pages/Experiments'
+import { quickLinks as sessionRecordingLinks } from '../Docs/pages/SessionRecording'
+import { quickLinks as dataLinks } from '../Docs/pages/Data'
 import { CallToAction } from 'components/CallToAction'
 
 type NextStepProps = {
