@@ -1,0 +1,33 @@
+---
+title: Common issues with experiments and how to solve them
+---
+
+
+# How do I use an existing feature flag in an experiment?
+
+You generally don't want this, because experiments expect flags to be in a specific format. And if your flag isn't in the precisely correct format, you'll need to change your code anyway, so it's better to use a fresh flag.
+
+However, if you know what you're doing, you can delete your existing flag and use the same key when creating the experiment. This will work.
+
+## But I've already created the flag to roll the feature out and just want to run an experiment on it
+
+Deleting the flag is equivalent to it being disabled, so it will be off for however long it takes you to create the draft experiment. The flag is enabled as soon as the experiment is created (not launched), so this shouldn't disrupt your process too much.
+
+# How do I run a second experiment using the same feature flag as the first experiment? I don't want to delete experiment #1.
+
+The same caveats as above apply. If you want to re-run an experiment, but also want to preserve the previous experiment results, and also don't want to create a new feature flag; you can do so by deleting the existing feature flag (not the experiment) and using the same key in the new experiment.
+
+# I want to run experiments in PostHog with my custom feature flag setup, how can I do this?
+
+Broadly, a few things to be aware of:
+
+1. Events need to be enriched with feature flag information for them to work in experiments.
+2. If you're running experiments with a trend goal, you also need to send a `$feature_flag_called` event.
+3. For funnel experiments, having atleast one event with flag information is sufficient. So, if you have backend events in your experiment, you don't have to wrangle to figure out how to add flag information to them, you can just use a frontend event that automatically gets this information.
+
+If you are not sure if you've handled the above three things, [read an in-depth guide here](/tutorials/experiments)
+
+# How do I assign a specific person to control/test variant in an experiment?
+
+Once you create the experiment, go to the feature flag, scroll down to "Release Conditions", and for each condition you'll see an "Optional Override". This allows you to choose a release condition and force all people in this release condition to have the variant chosen in the optional override.
+
