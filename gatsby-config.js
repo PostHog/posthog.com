@@ -28,7 +28,6 @@ module.exports = {
             resolve: `gatsby-source-squeak`,
             options: {
                 apiHost: process.env.GATSBY_SQUEAK_API_HOST,
-                organizationId: process.env.GATSBY_SQUEAK_ORG_ID,
             },
         },
         {

@@ -151,8 +151,6 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
     topicGroups.data.forEach((topicGroup) => {
         const { topics, ...rest } = topicGroup.attributes
 
-        console.log(topics)
-
         const node = {
             id: createNodeId(`squeak-topic-group-${topicGroup.id}`),
             internal: {
