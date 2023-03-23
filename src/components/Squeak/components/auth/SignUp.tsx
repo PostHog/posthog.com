@@ -6,8 +6,6 @@ type SignUpProps = {
     setMessage: (message: any) => void
     handleMessageSubmit: (message: any) => Promise<void> | void
     formValues: any
-    organizationId: string
-    apiHost: string
     buttonText: string
     onSignUp?: (values: any) => void
 }

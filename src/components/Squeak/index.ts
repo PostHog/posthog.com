@@ -5,7 +5,6 @@ import { SignIn } from './components/auth/SignIn'
 import { Squeak } from './components/Squeak'
 import { Avatar } from './components/Avatar'
 import { Questions } from './components/Questions'
-import { useOrg, Provider as OrgProvider } from './hooks/useOrg'
 import { useQuestion } from './hooks/useQuestion'
 
-export { Authentication, Squeak, Questions, Question, QuestionForm, Avatar, OrgProvider, useOrg, useQuestion, SignIn }
+export { Authentication, Squeak, Questions, Question, QuestionForm, Avatar, useQuestion, SignIn }

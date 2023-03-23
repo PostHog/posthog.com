@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Field, Form, Formik } from 'formik'
-import { useOrg } from '../../hooks/useOrg'
 import { post } from '../../lib/api'
 
 type ForgotPasswordProps = {
@@ -12,7 +11,6 @@ type ForgotPasswordProps = {
 const ForgotPassword: React.FC<ForgotPasswordProps> = ({ setMessage, setParentView, apiHost }) => {
     const [loading, setLoading] = useState(false)
     const [emailSent, setEmailSent] = useState(false)
-    const { organizationId } = useOrg()
 
     const handleSubmit = async (values: any) => {
         setLoading(true)
@@ -20,7 +18,6 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = ({ setMessage, setParentVi
             (await post(apiHost, '/api/password/forgot', {
                 email: values.email,
                 redirect: window.location.href,
-                organizationId,
             })) || {}
 
         if (error) {

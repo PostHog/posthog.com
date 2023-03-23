@@ -10,7 +10,7 @@ type SqueakProps = {
     onSubmit: () => void
     onLoad: () => void
     topics?: boolean
-    onSignUp: () => void
+    onSignUp: (() => any) | (() => Promise<any>)
     topicId?: number
     profileLink?: (profile: any) => string
 }

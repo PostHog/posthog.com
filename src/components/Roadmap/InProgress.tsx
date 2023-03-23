@@ -2,7 +2,7 @@ import { Check, ClosedIssue, OpenIssue, Plus } from 'components/Icons/Icons'
 import Link from 'components/Link'
 import React, { useEffect, useState } from 'react'
 import { IRoadmap } from '.'
-import { Login } from 'components/Squeak'
+import { SignIn } from 'components/Squeak'
 import { useUser } from 'hooks/useUser'
 import Spinner from 'components/Spinner'
 import { useToast } from '../../hooks/toast'
@@ -147,11 +147,7 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
                                 </p>
                             </div>
 
-                            <Login
-                                onSubmit={(data: { email: string }) => subscribe(data?.email)}
-                                apiHost={process.env.GATSBY_SQUEAK_API_HOST}
-                                organizationId={process.env.GATSBY_SQUEAK_ORG_ID}
-                            />
+                            <SignIn onSubmit={(data: { email: string }) => subscribe(data?.email)} />
                         </>
                     ) : (
                         <button

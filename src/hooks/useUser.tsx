@@ -42,7 +42,6 @@ export const UserContext = createContext<UserContextValue>({
 })
 
 type UserProviderProps = {
-    organizationId: string
     children: React.ReactNode
 }
 
@@ -171,7 +170,6 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                 firstName,
                 lastName,
                 avatar,
-                organizationId,
             })) || {}
 
         if (error) {

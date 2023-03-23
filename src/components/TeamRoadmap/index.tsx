@@ -2,47 +2,35 @@ import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { CardContainer, IRoadmap } from 'components/Roadmap'
 import { InProgress } from 'components/Roadmap/InProgress'
-import { OrgProvider } from 'components/Squeak'
 import Link from 'components/Link'
 
 export default function TeamRoadmap({ team }: { team?: string }) {
-    return null
-
-    //const {
-    //    allSqueakRoadmap: { nodes },
-    //} = useStaticQuery(query)
+    const {
+        allSqueakRoadmap: { nodes },
+    } = useStaticQuery(query)
 
     const roadmap = team ? nodes.filter((node: IRoadmap) => node?.team?.name === team) : nodes
-    return (
-        <OrgProvider
-            value={{
-                organizationId: process.env.GATSBY_SQUEAK_ORG_ID as string,
-                apiHost: process.env.GATSBY_SQUEAK_API_HOST as string,
-            }}
-        >
-            {roadmap?.length <= 0 ? (
-                <p className="!m-0 py-4 px-6 border border-dashed border-gray-accent-light dark:border-gray-accent-dark rounded-md">
-                    Check out the <Link to="/roadmap">company roadmap</Link> to see what we're working on next!
-                </p>
-            ) : (
-                <CardContainer>
-                    {roadmap?.map((node: IRoadmap) => {
-                        return (
-                            <InProgress
-                                more
-                                className="bg-opacity-0 shadow-none border border-dashed border-gray-accent-light dark:border-gray-accent-dark rounded-md !border-t !mb-4"
-                                key={node.title}
-                                {...node}
-                            />
-                        )
-                    })}
-                </CardContainer>
-            )}
-        </OrgProvider>
+    return roadmap?.length <= 0 ? (
+        <p className="!m-0 py-4 px-6 border border-dashed border-gray-accent-light dark:border-gray-accent-dark rounded-md">
+            Check out the <Link to="/roadmap">company roadmap</Link> to see what we're working on next!
+        </p>
+    ) : (
+        <CardContainer>
+            {roadmap?.map((node: IRoadmap) => {
+                return (
+                    <InProgress
+                        more
+                        className="bg-opacity-0 shadow-none border border-dashed border-gray-accent-light dark:border-gray-accent-dark rounded-md !border-t !mb-4"
+                        key={node.title}
+                        {...node}
+                    />
+                )
+            })}
+        </CardContainer>
     )
 }
 
-/*const query = graphql`
+const query = graphql`
     {
         allSqueakRoadmap(filter: { complete: { ne: true }, projectedCompletion: { ne: null } }) {
             nodes {
@@ -76,4 +64,4 @@ export default function TeamRoadmap({ team }: { team?: string }) {
             }
         }
     }
-`*/
+`
