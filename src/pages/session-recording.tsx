@@ -12,10 +12,10 @@ import ProductLayout, {
 import SEO from 'components/seo'
 import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
-import testimonials from '../../data/testimonials.json'
+import testimonials from '../data/testimonials.json'
 import { Section } from 'components/ProductLayout'
-import { BlogPosts, CTA, PostHogVS, Questions, Roadmap } from '../../components/ProductLayout'
-import { Check as CheckIcon, Close as CloseIcon } from '../../components/Icons'
+import { BlogPosts, CTA, PostHogVS, Questions, Roadmap } from '../components/ProductLayout'
+import { Check as CheckIcon, Close as CloseIcon } from '../components/Icons'
 import { graphql, useStaticQuery } from 'gatsby'
 
 const Check = () => <CheckIcon className="w-5" />

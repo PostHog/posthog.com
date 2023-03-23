@@ -96,11 +96,11 @@ export const FeatureList = ({ features }: { features: { title: string; descripti
     )
 }
 
-export const SectionHeading = ({ title, subtitle }: { title: string; subtitle?: string }) => {
+export const SectionHeading = ({ title, subtitle }: { title: string; subtitle?: string | React.ReactNode }) => {
     return (
         <div className="mb-6">
             <h2 className="text-xl m-0">{title}</h2>
-            {subtitle && <p className="text-base m-0">{subtitle}</p>}
+            {subtitle && typeof subtitle === 'string' ? <p className="text-base m-0">{subtitle}</p> : subtitle}
         </div>
     )
 }

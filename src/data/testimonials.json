@@ -257,7 +257,12 @@
     },
     {
         "featuresUsed": ["feature flags", "competitor"],
-        "author": { "name": "Francesco Agosti", "role": "CTO & Co-founder", "company": { "name": "Phantom" } },
+        "author": {
+            "name": "Francesco Agosti",
+            "role": "CTO & Co-founder",
+            "image": "/images/customers/francesco.jpg",
+            "company": { "name": "Phantom", "image": "/images/customers/phantom.svg" }
+        },
         "quote": "Feature flags are really, really critical for us and you don’t see them as a feature in other analytics tools. They very valuable though, because you can often use feature flag data to make other product decisions."
     },
     {
@@ -299,5 +304,15 @@
         "featuresUsed": ["collaboration"],
         "author": { "name": "Taric Santos de Andrade", "role": "Product Manager", "company": { "name": "Vendasta" } },
         "quote": "“I use PostHog on a daily basis. My team has four engineers, as well as designers, and we need to collaborate closely across areas of the product we own, such as our onboarding flow.”"
+    },
+    {
+        "featuresUsed": ["a/b testing"],
+        "author": {
+            "name": "Taric Santos de Andrade",
+            "image": "/images/customers/taric.jpg",
+            "role": "Product Manager",
+            "company": { "name": "Vendasta", "image": "/images/customers/vendasta.svg" }
+        },
+        "quote": "I'm always trying to find the next experiment to run with PostHog. Every day, I'm checking reports and trying to push the boundaries by testing new hypotheses."
     }
 ]
