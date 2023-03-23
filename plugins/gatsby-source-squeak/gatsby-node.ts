@@ -137,6 +137,36 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
         page++
     }
 
+    // Fetch all topic groups
+    let query = qs.stringify({
+        populate: {
+            topics: {
+                fields: ['id'],
+            },
+        },
+    })
+
+    const topicGroups = await fetch(`${apiHost}/api/topic-groups?${query}`).then((res) => res.json())
+
+    topicGroups.data.forEach((topicGroup) => {
+        const { topics, ...rest } = topicGroup.attributes
+
+        console.log(topics)
+
+        const node = {
+            id: createNodeId(`squeak-topic-group-${topicGroup.id}`),
+            internal: {
+                type: `SqueakTopicGroup`,
+                contentDigest: createContentDigest(topicGroup),
+            },
+            ...rest,
+            topics: topics.data.map((topic) => ({
+                id: createNodeId(`squeak-topic-${topic.id}`),
+            })),
+        }
+        createNode(node)
+    })
+
     // Fetch all topics
     let topicQuery = qs.stringify(
         {
@@ -163,37 +193,6 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
             ...topic.attributes,
         })
     }
-
-    // Fetch all topic groups
-    let query = qs.stringify({
-        populate: {
-            topics: {
-                fields: ['id'],
-            },
-        },
-    })
-
-    const topicGroups = await fetch(`${apiHost}/api/topic-groups?${query}`).then((res) => res.json())
-
-    topicGroups.data.forEach((topicGroup) => {
-        const {
-            id,
-            attributes: { topics },
-        } = topicGroup
-
-        const node = {
-            id: createNodeId(`squeak-topic-group-${id}`),
-            internal: {
-                type: `SqueakTopicGroup`,
-                contentDigest: createContentDigest(topicGroup),
-            },
-            ...topicGroup.attributes,
-            topics: topics.data.map((topic) => ({
-                id: createNodeId(`squeak-topic-${topic.id}`),
-            })),
-        }
-        createNode(node)
-    })
 
     const roadmaps = await fetch(`${apiHost}/api/roadmaps`).then((res) => res.json())
 

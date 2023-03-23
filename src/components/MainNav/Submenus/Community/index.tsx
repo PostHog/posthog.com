@@ -26,7 +26,7 @@ const Profile = () => {
                 <div>
                     {
                         <p className="m-0 font-semibold dark:text-white">
-                            {[profile?.first_name, profile?.last_name].filter(Boolean).join(' ')}
+                            {[profile?.firstName, profile?.lastName].filter(Boolean).join(' ')}
                         </p>
                     }
                 </div>
@@ -42,6 +42,7 @@ const Profile = () => {
 
 export default function Docs({ referenceElement }: { referenceElement: HTMLDivElement }) {
     return null
+
     const {
         topicGroups,
         questions: { allTopics },
@@ -268,8 +269,8 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                 }
             }
         }
-        questions: allQuestion {
-            allTopics: group(field: topics___topic___label) {
+        questions: allSqueakQuestion {
+            allTopics: group(field: topics___label) {
                 topic: fieldValue
                 count: totalCount
             }
