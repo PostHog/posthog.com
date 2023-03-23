@@ -86,16 +86,11 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
         configuration.captureApplicationLifecycleEvents = true; // Record certain application events automatically!
         configuration.captureScreenViews = true; // Capture screen views automatically!
-
-        configuration.recording = PostHogRecorderConfig(
-            screenRecordingEnabled: true,
-            logRecordingEnabled: true,
-            networkRecordingEnabled: true,
-            redactionMode: .automatic
-        )
-
-        PHGPostHog.setup(with: configuration)
-        let posthog = PHGPostHog.shared()
+        
+        configuration.recording.screenRecordingEnabled = true
+        configuration.recording.logRecordingEnabled = true
+        configuration.recording.networkRecordingEnabled = true
+        configuration.recording.redactionMode = .automatic
 
         return true
     }
