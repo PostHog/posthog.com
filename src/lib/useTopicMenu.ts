@@ -16,9 +16,7 @@ type TopicMenuData = {
 }
 
 export const useTopicMenu = (): IMenu[] => {
-    return []
-
-    /*const data: TopicMenuData = useStaticQuery(graphql`
+    const data: TopicMenuData = useStaticQuery(graphql`
         query SqueakTopicMenu {
             squeakTopicGroups: allSqueakTopicGroup {
                 nodes {
@@ -47,5 +45,5 @@ export const useTopicMenu = (): IMenu[] => {
         })
     }, [data])
 
-    return menu*/
+    return menu
 }
