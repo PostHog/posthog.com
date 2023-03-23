@@ -28,21 +28,24 @@ interface ITeam {
 }
 
 export interface IRoadmap {
-    beta_available: boolean
-    complete: boolean
-    dateCompleted: string
+    squeakId: BigInt
     title: string
     description: string
+    betaAvailable: boolean
+    complete: boolean
+    dateCompleted: string
     team: ITeam
-    githubPages: IGitHubPage[]
+    image?: {
+        url: string
+    }
     projectedCompletion: string
-    roadmapId: BigInt
-    thumbnail: ImageDataLike
+    githubPages: IGitHubPage[]
 }
 
-const Complete = (props: { title: string; githubPages: IGitHubPage[]; otherLinks: string[] }) => {
-    const { title, githubPages, otherLinks } = props
-    const url = (githubPages?.length > 0 && githubPages[0]?.html_url) || (otherLinks?.length > 0 && otherLinks[0])
+const Complete = (props: { title: string; githubPages: IGitHubPage[] }) => {
+    const { title, githubPages } = props
+    const url = githubPages?.length > 0 && githubPages[0]?.html_url
+
     return (
         <li className="text-base font-semibold">
             {url ? (
@@ -179,9 +182,9 @@ export default function Roadmap() {
                             <CardContainer>
                                 {Object.keys(inProgress)
                                     .sort((a, b) =>
-                                        inProgress[a].some((goal) => goal.beta_available)
+                                        inProgress[a].some((goal) => goal.betaAvailable)
                                             ? -1
-                                            : inProgress[b].some((goal) => goal.beta_available)
+                                            : inProgress[b].some((goal) => goal.betaAvailable)
                                             ? 1
                                             : 0
                                     )
@@ -237,8 +240,8 @@ const query = graphql`
     {
         allSqueakRoadmap {
             nodes {
-                roadmapId
-                beta_available
+                squeakId
+                betaAvailable
                 complete
                 dateCompleted
                 title
@@ -246,12 +249,9 @@ const query = graphql`
                 team {
                     name
                 }
-                thumbnail {
-                    childImageSharp {
-                        gatsbyImageData(width: 75, placeholder: NONE, quality: 100)
-                    }
+                image {
+                    url
                 }
-                otherLinks
                 githubPages {
                     title
                     html_url

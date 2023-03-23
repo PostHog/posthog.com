@@ -192,22 +192,66 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
         })
     }
 
-    const roadmaps = await fetch(`${apiHost}/api/roadmaps`).then((res) => res.json())
+    // Fetch all teams
+    let teamQuery = qs.stringify(
+        {
+            pagination: {
+                page: 1,
+                pageSize: 100,
+            },
+        },
+        {
+            encodeValuesOnly: true, // prettify URL
+        }
+    )
+
+    const teams = await fetch(`${apiHost}/api/teams?${teamQuery}`).then((res) => res.json())
+
+    for (const team of teams.data) {
+        createNode({
+            id: createNodeId(`squeak-team-${team.id}`),
+            squeakId: team.id,
+            internal: {
+                type: `SqueakTeam`,
+                contentDigest: createContentDigest(team),
+            },
+            ...team.attributes,
+        })
+    }
+
+    // Fetch all roadmaps
+    let roadmapQuery = qs.stringify({
+        pagination: {
+            page: 1,
+            pageSize: 100,
+        },
+        populate: {
+            teams: {
+                fields: ['id'],
+            },
+            image: {
+                fields: ['id', 'url'],
+            },
+        },
+    })
+
+    const roadmaps = await fetch(`${apiHost}/api/roadmaps?${roadmapQuery}`).then((res) => res.json())
 
     for (const roadmap of roadmaps.data) {
-        const {
-            attributes: { githubUrls },
-        } = roadmap
+        const { teams, githubUrls, image, ...rest } = roadmap.attributes
 
         const node = {
             id: createNodeId(`squeak-roadmap-${roadmap.id}`),
-            parent: null,
-            children: [],
+            squeakId: roadmap.id,
             internal: {
                 type: `SqueakRoadmap`,
                 contentDigest: createContentDigest(roadmap.attributes),
             },
-            ...roadmap.attributes,
+            ...rest,
+            ...(image.data && { id: createNodeId(`squeak-image-${image.data.id}`), url: image.data.attributes.url }),
+            teams: roadmap.attributes.teams.data.map((team) => ({
+                id: createNodeId(`squeak-team-${team.id}`),
+            })),
         }
 
         /*if (image) {
@@ -223,19 +267,16 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
             node.thumbnail___NODE = fileNode?.id
         }*/
 
-        const otherLinks = githubUrls.filter((url) => !url.includes('github.com'))
-        node.otherLinks = otherLinks
         if (githubUrls.length > 0 && process.env.GITHUB_API_KEY) {
             node.githubPages = await Promise.all(
                 githubUrls
                     .filter((url) => url.includes('github.com'))
                     .map((url) => {
-                        const split = url.split('/')
-                        const type = split[5]
-                        const number = split[6]
-                        const org = split[3]
-                        const repo = split[4]
-                        const ghURL = `https://api.github.com/repos/${org}/${repo}/issues/${number}`
+                        const [owner, repo, type, issueNum] = url.split('/').slice(3)
+                        const ghURL = `https://api.github.com/repos/${owner}/${repo}/issues/${issueNum}`
+
+                        console.log(ghURL)
+
                         return fetch(ghURL, {
                             headers: {
                                 Authorization: `token ${process.env.GITHUB_API_KEY}`,
@@ -248,12 +289,17 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                                     data.reactions.minus1 = data.reactions['-1']
                                 }
 
+                                console.log(data)
+
                                 return data
                             })
                             .catch((err) => console.log(err))
                     })
             )
+        } else {
+            node.githubPages = []
         }
+
         createNode(node)
     }
 }
@@ -262,16 +308,21 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     const { createTypes } = actions
 
     createTypes(`
+        type StrapiImage implements Node {
+            id: ID!
+            url: String!
+        }
+
         type SqueakProfile implements Node {
             id: ID!
-            squeakId: String!
+            squeakId: Int!
             firstName: String
             lastName: String
         }
 
         type SqueakQuestion implements Node {
             id: ID!
-            squeakId: String!
+            squeakId: Int!
             body: String!
             createdAt: Date! @dateformat
             updatedAt: Date! @dateformat
@@ -282,7 +333,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
 
         type SqueakReply implements Node {
             id: ID!
-            squeakId: String!
+            squeakId: Int!
             body: String!
             createdAt: Date! @dateformat
             updatedAt: Date! @dateformat
@@ -292,7 +343,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
 
         type SqueakTopicGroup implements Node {
             id: ID!
-            squeakId: String!
+            squeakId: Int!
             slug: String!
             label: String!
             topics: [SqueakTopic!] @link(by: "id", from: "topics.id")
@@ -300,9 +351,52 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
 
         type SqueakTopic implements Node {
             id: ID!
-            squeakId: String!
+            squeakId: Int!
             slug: String!
             label: String!
         }
+
+        type SqueakTeam implements Node {
+            id: ID!
+            squeakId: Int!
+            name: String!
+            profiles: [SqueakProfile!] @link(by: "id", from: "profiles.id")
+            roadmaps: [SqueakRoadmap!] @link(by: "id", from: "roadmaps.id")
+        }
+
+        type SqueakRoadmap implements Node {
+            id: ID!
+            squeakId: Int!
+            title: String!
+            description: String!
+            image: StrapiImage
+            slug: String!
+            dateCompleted: Date @dateformat
+            projectedCompletion: Date @dateformat
+            category: String!
+            milestone: Boolean!
+            completed: Boolean!
+            betaAvailable: Boolean!
+            githubUrls: [String!]!
+            githubPages: [GithubPage!]!
+            teams: [SqueakTeam!] @link(by: "id", from: "teams.id")
+        }
+
+        type GithubPage {
+            title: String!
+            html_url: String!
+            number: String!
+            closed_at: String!
+            reactions: GithubReactions!
+        }
+
+        type GithubReactions {
+            hooray: Int!
+            heart: Int!
+            eyes: Int!
+            plus1: Int!
+            minus1: Int!
+        }
+
     `)
 }

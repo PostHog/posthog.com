@@ -2,7 +2,6 @@ import React, { useState, useRef } from 'react'
 import { Field, Form, Formik } from 'formik'
 import root from 'react-shadow/styled-components'
 import { post } from '../lib/api'
-import { useOrg } from '../hooks/useOrg'
 import { useUser } from 'hooks/useUser'
 import { useQuestion } from '../hooks/useQuestion'
 
@@ -33,7 +32,6 @@ function QuestionFormMain({
     formType,
 }: QuestionFormMainProps) {
     const { user, logout } = useUser()
-    const { profileLink } = useOrg()
     const handleSubmit = async (values: any) => {
         onSubmit &&
             (await onSubmit(
@@ -136,7 +134,6 @@ export const QuestionForm = ({
     onSubmit,
     onSignUp,
 }: QuestionFormProps) => {
-    const { organizationId, apiHost, profileLink } = useOrg()
     const { user, logout } = useUser()
     const [formValues, setFormValues] = useState(null)
     const [view, setView] = useState<string | null>(initialView || null)

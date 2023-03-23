@@ -6,7 +6,6 @@ import { SignIn } from 'components/Squeak'
 import { useUser } from 'hooks/useUser'
 import Spinner from 'components/Spinner'
 import { useToast } from '../../hooks/toast'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 
 export function InProgress(props: IRoadmap & { className?: string; more?: boolean; stacked?: boolean }) {
     const { addToast } = useToast()
@@ -15,7 +14,7 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
     const [showAuth, setShowAuth] = useState(false)
     const [subscribed, setSubscribed] = useState(false)
     const [loading, setLoading] = useState(false)
-    const { title, githubPages, description, beta_available, thumbnail, roadmapId } = props
+    const { title, githubPages, description, betaAvailable, image, squeakId } = props
     const completedIssues = githubPages && githubPages?.filter((page) => page.closed_at)
     const percentageComplete = githubPages && Math.round((completedIssues.length / githubPages?.length) * 100)
 
@@ -24,7 +23,7 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
         if (email) {
             const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmap/subscribe`, {
                 method: 'POST',
-                body: JSON.stringify({ id: roadmapId, organizationId: process.env.GATSBY_SQUEAK_ORG_ID }),
+                body: JSON.stringify({ id: squeakId, organizationId: process.env.GATSBY_SQUEAK_ORG_ID }),
                 credentials: 'include',
                 headers: {
                     Accept: 'application/json',
@@ -50,7 +49,7 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
         if (email) {
             const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmap/unsubscribe`, {
                 method: 'POST',
-                body: JSON.stringify({ id: roadmapId, organizationId: process.env.GATSBY_SQUEAK_ORG_ID }),
+                body: JSON.stringify({ id: squeakId, organizationId: process.env.GATSBY_SQUEAK_ORG_ID }),
                 credentials: 'include',
                 headers: {
                     Accept: 'application/json',
@@ -73,7 +72,7 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
 
     useEffect(() => {
         if (user) {
-            setSubscribed(user?.profile?.subscriptions?.some((sub) => sub?.id === roadmapId))
+            setSubscribed(user?.profile?.subscriptions?.some((sub) => sub?.id === squeakId))
         }
     }, [user])
 
@@ -95,9 +94,10 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
                         </button>
                     )}
                 </div>
-                {thumbnail && (
+                {image && (
                     <div className="sm:flex-shrink-0">
-                        <GatsbyImage className="shadow-md" image={getImage(thumbnail)} alt="" />
+                        <img src={image.url} className="shadow-md" alt="" />
+                        {/*<GatsbyImage className="shadow-md" image={getImage(thumbnail)} alt="" />*/}
                     </div>
                 )}
             </div>
@@ -167,7 +167,7 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
                             <span>
                                 {subscribed
                                     ? 'Unsubscribe'
-                                    : beta_available
+                                    : betaAvailable
                                     ? 'Get early access'
                                     : 'Subscribe for updates'}
                             </span>

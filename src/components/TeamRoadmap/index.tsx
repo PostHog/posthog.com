@@ -34,20 +34,17 @@ const query = graphql`
     {
         allSqueakRoadmap(filter: { complete: { ne: true }, projectedCompletion: { ne: null } }) {
             nodes {
-                beta_available
+                betaAvailable
                 complete
-                date_completed
+                dateCompleted
                 title
                 description
-                team {
+                teams {
                     name
                 }
-                thumbnail {
-                    childImageSharp {
-                        gatsbyImageData(width: 200, placeholder: NONE, quality: 100)
-                    }
+                image {
+                    url
                 }
-                otherLinks
                 githubPages {
                     title
                     html_url
@@ -57,7 +54,8 @@ const query = graphql`
                         hooray
                         heart
                         eyes
-                        _1
+                        plus1
+                        minus1
                     }
                 }
                 projectedCompletion
