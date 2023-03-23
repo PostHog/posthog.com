@@ -187,7 +187,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     }
 
     return (
-        <UserContext.Provider value={{ organizationId, apiHost, user, isLoading, getJwt, login, logout, signUp }}>
+        <UserContext.Provider value={{ user, isLoading, getJwt, login, logout, signUp }}>
             {children}
         </UserContext.Provider>
     )
