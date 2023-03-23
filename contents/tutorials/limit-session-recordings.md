@@ -8,13 +8,13 @@ featuredImage: ../images/tutorials/banners/tutorial-17.png
 topics: ["session recordings", "configuration"]
 ---
 
-Session recordings help you get a deep understanding of how users are using your product. They are our top recommendation for [early-stage startups](/blog/early-stage-analytics), but as you scale the number of recordings can go beyond what you need.
+Session recordings help you get a deep understanding of how users are using your product. We strongly recommend them for [early-stage startups](/blog/early-stage-analytics), but as you scale the number of recordings can go beyond what you need.
 
-Instead of turning session recordings off entirely, you can use PostHog’s configuration options to only record the sessions you want. This tutorial shows you how.
+Instead of turning session recordings off entirely, you can use PostHog’s configuration options to only record the sessions you want. This tutorial shows you three ways to do this. 
 
 ## Configuration and basic session recording controls
 
-The following ways to limit the number of sessions recorded require that `disable_session_recording` is set to `true` in the initialization of PostHog. For example, in a Next.js app, this looks like this:
+In order to follow this tutorial, you need to set `disable_session_recording` to `true` in PostHog's initialization. For example, in a Next.js app, this looks like this:
 
 ```js
 // pages/_app.js
@@ -57,14 +57,14 @@ if (typeof window !== 'undefined') {
 
 ## Control recordings with feature flags
 
-You can use feature flags to control what sessions you record. This enables you to control the recording of sessions with: 
+Alternatively, you can use feature flags to control what sessions you record. This enables you to control the recording of sessions based on: 
 
 - people properties
 - group properties
 - cohorts
 - percentages of each of these (or all users)
 
-For example, if you only wanted to record 50% of North American users’ sessions, set up a feature flag where the continent code equals "NA" and roll it out to 50% of matching users like this:
+For example, if you only want to record 50% of sessions for North American users, set up a feature flag where the continent code equals "NA" and roll it out to 50% of matching users like this:
 
 ![Flag](../images/tutorials/limit-session-recordings/flag.png)
 
@@ -117,7 +117,7 @@ export default function About() {
 
 ## Record after specific user behavior
 
-You can have recordings start on any user action, such as button clicks, inputs, hovers, and even scrolling. This is as simple as calling `startSessionRecording()` when a user completes those actions.
+Finally, you can have recordings start on any user action, such as button clicks, inputs, hovers, and even scrolling. This is as simple as calling `startSessionRecording()` when a user completes those actions.
 
 ```js
 import { usePostHog } from 'posthog-js/react'
