@@ -4,13 +4,13 @@ import React from 'react'
 import { Wrapper } from '../Wrapper'
 import {
     AbTesting,
+    Analytics,
     API,
     AppLibrary,
     CorrelationAnalysis,
     DataWarehouse,
     EventPipelines,
     FeatureFlags,
-    Funnels,
     Heatmaps,
     SelfHosting,
     SessionRecording,
@@ -33,22 +33,17 @@ interface LeftColMenuItems {
 
 const leftColMenuItems: LeftColMenuItems[] = [
     {
-        title: 'Features',
+        title: 'Products',
         features: [
             {
                 title: 'Product analytics',
-                icon: <Funnels />,
-                url: '/product#product-analytics',
+                icon: <Analytics />,
+                url: '/product/product-analytics',
             },
             {
                 title: 'Session recording',
                 icon: <SessionRecording />,
                 url: '/product/session-recording',
-            },
-            {
-                title: 'Heatmaps',
-                icon: <Heatmaps />,
-                url: '/product/heatmaps',
             },
             {
                 title: 'Feature flags',
@@ -58,42 +53,7 @@ const leftColMenuItems: LeftColMenuItems[] = [
             {
                 title: 'A/B testing',
                 icon: <AbTesting />,
-                url: '/product/experimentation-suite',
-            },
-            {
-                title: 'Correlation analysis',
-                icon: <CorrelationAnalysis />,
-                url: '/product/correlation-analysis',
-            },
-        ],
-    },
-    {
-        title: 'Data stack',
-        features: [
-            {
-                title: 'Event pipelines',
-                icon: <EventPipelines />,
-                url: '/product#event-pipelines',
-            },
-            {
-                title: 'Data warehouse',
-                icon: <DataWarehouse />,
-                url: '/product#data-warehouse',
-            },
-            {
-                title: 'App library',
-                icon: <AppLibrary />,
-                url: '/product#apps',
-            },
-            {
-                title: 'Open source',
-                icon: <SelfHosting />,
-                url: '/product#open-source',
-            },
-            {
-                title: 'API',
-                icon: <API />,
-                url: '/product#api',
+                url: '/product/ab-testing',
             },
         ],
     },
@@ -112,43 +72,38 @@ export default function Product({ referenceElement }: { referenceElement: HTMLDi
         <Wrapper borderRadius="0px 0.375rem 0.375rem" referenceElement={referenceElement} placement="bottom-start">
             <div className="rounded-md md:flex">
                 <section className="p-6 border-r border-gray-accent-light border-dashed flex flex-col">
-                    <div className="grid grid-cols-2 gap-x-6">
-                        {leftColMenuItems.map(({ title, features }) => {
-                            return (
-                                <div key={title}>
-                                    <div className="flex items-center w-full justify-between opacity-70">
-                                        <h3 className="text-[18px] font-bold m-0 text-black pl-2">{title}</h3>
-                                    </div>
-                                    <ol className="m-0 list-none p-0 mt-2">
-                                        {features.map(({ title, icon, ...other }: Features) => {
-                                            const anchor = pathname?.startsWith('/product') && other.url?.includes('#')
-                                            const MenuLink = anchor ? ScrollLink : Link
-                                            const url: string | undefined = anchor
-                                                ? other.url?.split('#')[1]
-                                                : other.url
-
-                                            return (
-                                                <li key={title}>
-                                                    <MenuLink
-                                                        smooth
-                                                        className="cursor-pointer rounded-sm md:px-2 py-2 hover:bg-tan hover:bg-opacity-50 flex items-center space-x-2 relative active:top-[1px] active:scale-[.99]"
-                                                        to={url}
-                                                    >
-                                                        <span className="w-5 h-5 text-black dark:text-white">
-                                                            {icon}
-                                                        </span>
-                                                        <h3 className="text-base m-0 opacity-70">{title}</h3>
-                                                    </MenuLink>
-                                                </li>
-                                            )
-                                        })}
-                                    </ol>
+                    {leftColMenuItems.map(({ title, features }) => {
+                        return (
+                            <div key={title}>
+                                <div className="flex items-center w-full justify-between opacity-70">
+                                    <h3 className="text-[18px] font-bold m-0 text-black pl-2">{title}</h3>
                                 </div>
-                            )
-                        })}
-                    </div>
-                    <CallToAction className="inline-block mt-auto !w-full" to="/product">
-                        Product overview
+                                <ol className="grid grid-cols-2 md:grid-cols-4 space-x-4 m-0 list-none p-0 mt-2">
+                                    {features.map(({ title, icon, ...other }: Features) => {
+                                        const anchor = pathname?.startsWith('/product') && other.url?.includes('#')
+                                        const MenuLink = anchor ? ScrollLink : Link
+                                        const url: string | undefined = anchor ? other.url?.split('#')[1] : other.url
+
+                                        return (
+                                            <li key={title}>
+                                                <MenuLink
+                                                    smooth
+                                                    className="cursor-pointer rounded-sm md:px-2 py-2 hover:bg-tan hover:bg-opacity-50 flex flex-col justify-center items-center space-x-2 relative active:top-[1px] active:scale-[.99]"
+                                                    to={url}
+                                                >
+                                                    <span className="w-5 h-5 text-black dark:text-white">{icon}</span>
+                                                    <h3 className="text-base m-0 opacity-70">{title}</h3>
+                                                </MenuLink>
+                                            </li>
+                                        )
+                                    })}
+                                </ol>
+                            </div>
+                        )
+                    })}
+
+                    <CallToAction className="inline-block mt-auto !w-full" to="/product-os">
+                        Learn more
                     </CallToAction>
                 </section>
                 <section className="bg-gray-accent-light bg-opacity-10 py-6 px-3">
