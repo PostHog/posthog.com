@@ -25,6 +25,7 @@ interface IGitHubPage {
 
 interface ITeam {
     name: string
+    roadmaps: IRoadmap[]
 }
 
 export interface IRoadmap {
@@ -34,7 +35,6 @@ export interface IRoadmap {
     betaAvailable: boolean
     complete: boolean
     dateCompleted: string
-    team: ITeam
     image?: {
         url: string
     }
@@ -68,15 +68,15 @@ export const Section = ({
     children,
     className,
 }: {
-    title: string | React.ReactNode
-    description: string | React.ReactNode
+    title: React.ReactNode
+    description?: React.ReactNode
     children: React.ReactNode
     className?: string
 }) => {
     return (
         <div className={`xl:px-7 2xl:px-8 px-5 py-8 ${className ?? ''}`}>
             <h3 className="text-xl m-0">{title}</h3>
-            <p className="text-[15px] m-0 text-black/60 mb-4">{description}</p>
+            {description && <p className="text-[15px] m-0 text-black/60 mb-4">{description}</p>}
             {children}
         </div>
     )
@@ -96,22 +96,35 @@ export const CardContainer = ({ children }: { children: React.ReactNode }) => {
 }
 
 export default function Roadmap() {
-    const {
-        allSqueakRoadmap: { nodes },
-    } = useStaticQuery(query)
+    const queryData = useStaticQuery(query)
 
-    const underConsideration = groupBy(
-        nodes.filter(
-            (node: IRoadmap) =>
-                !node.dateCompleted && !node.projectedCompletion && node.githubPages && node.githubPages.length > 0
-        ),
-        ({ team }: { team: ITeam }) => team?.name
-    )
-    const inProgress = groupBy(
-        nodes.filter((node: IRoadmap) => !node.dateCompleted && node.projectedCompletion),
-        ({ team }: { team: ITeam }) => team?.name
-    )
-    const complete = groupBy(
+    const teams: ITeam[] = queryData.allSqueakTeam.nodes
+
+    const underConsideration: ITeam[] = teams
+        .map((team) => {
+            return {
+                ...team,
+                roadmaps: team.roadmaps.filter(
+                    (roadmap) =>
+                        !roadmap.dateCompleted &&
+                        !roadmap.projectedCompletion &&
+                        roadmap.githubPages &&
+                        roadmap.githubPages.length > 0
+                ),
+            }
+        })
+        .filter((team) => team.roadmaps.length > 0)
+
+    const inProgress: ITeam[] = teams
+        .map((team) => {
+            return {
+                ...team,
+                roadmaps: team.roadmaps.filter((roadmap) => !roadmap.complete && roadmap.projectedCompletion),
+            }
+        })
+        .filter((team) => team.roadmaps.length > 0)
+
+    /*const complete = groupBy(
         nodes.filter((node: IRoadmap) => {
             const goalDate = node.dateCompleted && new Date(node.dateCompleted)
             const currentDate = new Date()
@@ -122,7 +135,7 @@ export default function Roadmap() {
             )
         }),
         ({ team }: { team: ITeam }) => team?.name
-    )
+    )*/
 
     return (
         <Layout>
@@ -155,21 +168,20 @@ export default function Roadmap() {
                             description="The top features we might build next. Your feedback is requested."
                         >
                             <CardContainer>
-                                {Object.keys(underConsideration)
-                                    .sort()
-                                    .map((key) => {
-                                        return (
-                                            <Card key={key} team={key}>
-                                                <CardContainer>
-                                                    {underConsideration[key]?.map((node: IRoadmap) => {
-                                                        return <UnderConsideration key={node.title} {...node} />
-                                                    })}
-                                                </CardContainer>
-                                            </Card>
-                                        )
-                                    })}
+                                {underConsideration.sort().map((team) => {
+                                    return (
+                                        <Card key={team.name} team={team.name}>
+                                            <CardContainer>
+                                                {team.roadmaps.map((node) => {
+                                                    return <UnderConsideration key={node.title} {...node} />
+                                                })}
+                                            </CardContainer>
+                                        </Card>
+                                    )
+                                })}
                             </CardContainer>
                         </Section>
+
                         <Section
                             title="In progress"
                             description={
@@ -180,19 +192,19 @@ export default function Roadmap() {
                             }
                         >
                             <CardContainer>
-                                {Object.keys(inProgress)
+                                {inProgress
                                     .sort((a, b) =>
-                                        inProgress[a].some((goal) => goal.betaAvailable)
+                                        a.roadmaps.some((goal) => goal.betaAvailable)
                                             ? -1
-                                            : inProgress[b].some((goal) => goal.betaAvailable)
+                                            : b.roadmaps.some((goal) => goal.betaAvailable)
                                             ? 1
                                             : 0
                                     )
-                                    .map((key) => {
+                                    .map((team) => {
                                         return (
-                                            <Card key={key} team={key}>
+                                            <Card key={team.name} team={team.name}>
                                                 <CardContainer>
-                                                    {inProgress[key]?.map((node: IRoadmap) => {
+                                                    {team.roadmaps.map((node) => {
                                                         return <InProgress stacked key={node.title} {...node} />
                                                     })}
                                                 </CardContainer>
@@ -201,6 +213,7 @@ export default function Roadmap() {
                                     })}
                             </CardContainer>
                         </Section>
+
                         <Section
                             title="Recently shipped"
                             // description="Here's what was included in our last array."
@@ -237,35 +250,39 @@ export default function Roadmap() {
 }
 
 const query = graphql`
-    {
-        allSqueakRoadmap {
+    query RoadmapQuery {
+        allSqueakTeam {
             nodes {
-                squeakId
-                betaAvailable
-                complete
-                dateCompleted
-                title
-                description
-                team {
-                    name
+                name
+                roadmaps {
+                    ...roadmap
                 }
-                image {
-                    url
-                }
-                githubPages {
-                    title
-                    html_url
-                    number
-                    closed_at
-                    reactions {
-                        hooray
-                        heart
-                        eyes
-                        plus1
-                    }
-                }
-                projectedCompletion
             }
         }
+    }
+
+    fragment roadmap on SqueakRoadmap {
+        squeakId
+        betaAvailable
+        complete
+        dateCompleted
+        title
+        description
+        image {
+            url
+        }
+        githubPages {
+            title
+            html_url
+            number
+            closed_at
+            reactions {
+                hooray
+                heart
+                eyes
+                plus1
+            }
+        }
+        projectedCompletion
     }
 `

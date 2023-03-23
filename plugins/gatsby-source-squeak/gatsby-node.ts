@@ -199,6 +199,11 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                 page: 1,
                 pageSize: 100,
             },
+            populate: {
+                roadmaps: {
+                    fields: ['id'],
+                },
+            },
         },
         {
             encodeValuesOnly: true, // prettify URL
@@ -208,6 +213,8 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
     const teams = await fetch(`${apiHost}/api/teams?${teamQuery}`).then((res) => res.json())
 
     for (const team of teams.data) {
+        const { roadmaps, ...rest } = team.attributes
+
         createNode({
             id: createNodeId(`squeak-team-${team.id}`),
             squeakId: team.id,
@@ -215,7 +222,10 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                 type: `SqueakTeam`,
                 contentDigest: createContentDigest(team),
             },
-            ...team.attributes,
+            ...rest,
+            roadmaps: roadmaps.data.map((roadmap) => ({
+                id: createNodeId(`squeak-roadmap-${roadmap.id}`),
+            })),
         })
     }
 
@@ -275,8 +285,6 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                         const [owner, repo, type, issueNum] = url.split('/').slice(3)
                         const ghURL = `https://api.github.com/repos/${owner}/${repo}/issues/${issueNum}`
 
-                        console.log(ghURL)
-
                         return fetch(ghURL, {
                             headers: {
                                 Authorization: `token ${process.env.GITHUB_API_KEY}`,
@@ -289,8 +297,6 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                                     data.reactions.minus1 = data.reactions['-1']
                                 }
 
-                                console.log(data)
-
                                 return data
                             })
                             .catch((err) => console.log(err))
@@ -299,6 +305,8 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
         } else {
             node.githubPages = []
         }
+
+        console.log(node)
 
         createNode(node)
     }
@@ -383,19 +391,19 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         }
 
         type GithubPage {
-            title: String!
-            html_url: String!
-            number: String!
-            closed_at: String!
-            reactions: GithubReactions!
+            title: String
+            html_url: String
+            number: String
+            closed_at: String
+            reactions: GithubReactions
         }
 
         type GithubReactions {
-            hooray: Int!
-            heart: Int!
-            eyes: Int!
-            plus1: Int!
-            minus1: Int!
+            hooray: Int
+            heart: Int
+            eyes: Int
+            plus1: Int
+            minus1: Int
         }
 
     `)

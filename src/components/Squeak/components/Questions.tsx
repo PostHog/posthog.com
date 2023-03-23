@@ -1,48 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react'
 import root from 'react-shadow/styled-components'
 
-import { useOrg } from '../hooks/useOrg'
-
 import { Question } from './Question'
 import { QuestionForm } from './QuestionForm'
 import { Theme } from './Theme'
 import { StrapiResult, QuestionData, StrapiRecord } from 'lib/strapi'
 import qs from 'qs'
-
-const Topics = ({
-    handleTopicChange,
-    activeTopic,
-    topics,
-}: {
-    handleTopicChange: (topic: null) => void
-    activeTopic: any
-    topics: any[]
-}) => {
-    return topics && topics.length > 0 ? (
-        <ul className="squeak-topics-container">
-            <li>
-                <button
-                    className={activeTopic === null ? 'squeak-active-topic' : ''}
-                    onClick={() => handleTopicChange(null)}
-                >
-                    All
-                </button>
-            </li>
-            {topics.map((topic) => {
-                return (
-                    <li key={topic.label}>
-                        <button
-                            className={activeTopic.label === topic.label ? 'squeak-active-topic' : ''}
-                            onClick={() => handleTopicChange(topic.label)}
-                        >
-                            {topic.label}
-                        </button>
-                    </li>
-                )
-            })}
-        </ul>
-    ) : null
-}
 
 type QuestionsProps = {
     slug?: string
