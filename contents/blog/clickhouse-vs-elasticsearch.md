@@ -225,4 +225,4 @@ Overall, Elasticsearch remains a good solution if data aggregation involves sear
 
 - Lisa Jung’s [talk](https://www.youtube.com/watch?v=gS_nHTWZEJ8) on Elasticsearch
 - Robert Hodges’s CMU [talk](https://www.youtube.com/watch?v=fGG9dApIhDU) on ClickHouse
-- Our [comparison of between ClickHouse and Postgres](blog/clickhouse-vs-postgres) which expands on ClickHouse’s optimizations
+- Our [comparison of between ClickHouse and Postgres](/clickhouse-vs-postgres) which expands on ClickHouse’s optimizations
