@@ -14,46 +14,70 @@ import {
     Heatmaps,
     SelfHosting,
     SessionRecording,
+    SQL,
 } from 'components/ProductIcons'
 import { graphql, useStaticQuery } from 'gatsby'
 import { Link as ScrollLink } from 'react-scroll'
 import { useLocation } from '@reach/router'
 import { Hasura, Phantom, Ycombinator } from './Icons'
+import { Webhooks } from 'components/NotProductIcons'
 
 interface Features {
     title: string
+    description?: string
     icon?: React.ReactNode
     url?: string
 }
 
-interface LeftColMenuItems {
+interface productOSItem {
     title: string
     features: Features[]
 }
 
-const leftColMenuItems: LeftColMenuItems[] = [
+const ProductItem = ({ title, icon, url }) => {
+    return (
+        <li className="md:max-w-[100px]">
+            <Link
+                className="group h-full cursor-pointer rounded-sm md:px-2 py-2 hover:bg-tan hover:bg-opacity-50 flex flex-col justify-start items-center space-y-2 relative hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99]"
+                to={url}
+            >
+                <span className="w-7 h-7 text-black dark:text-white opacity-60 group-hover:opacity-100">{icon}</span>
+                <h3 className="text-sm m-0 opacity-70 font-bold text-center leading-none">{title}</h3>
+            </Link>
+        </li>
+    )
+}
+
+const productOSItem: productOSItem[] = [
     {
-        title: 'Products',
+        title: 'Build on Product OS',
         features: [
             {
-                title: 'Product analytics',
-                icon: <Analytics />,
-                url: '/product/product-analytics',
+                title: 'Event pipelines',
+                description: 'with autocapture',
+                icon: <EventPipelines />,
             },
             {
-                title: 'Session recording',
-                icon: <SessionRecording />,
-                url: '/product/session-recording',
+                title: 'Data warehouse',
+                description: 'powered by ClickHouse',
+                icon: <DataWarehouse />,
             },
             {
-                title: 'Feature flags',
-                icon: <FeatureFlags />,
-                url: '/product/feature-flags',
+                title: 'SQL access',
+                icon: <SQL />,
             },
             {
-                title: 'A/B testing',
-                icon: <AbTesting />,
-                url: '/product/ab-testing',
+                title: 'Warehouse sync',
+                description: 'works with Segment, Rudderstack',
+                icon: <SelfHosting />,
+            },
+            {
+                title: 'Webhooks',
+                icon: <Webhooks />,
+            },
+            {
+                title: 'API',
+                icon: <API />,
             },
         ],
     },
@@ -72,28 +96,45 @@ export default function Product({ referenceElement }: { referenceElement: HTMLDi
         <Wrapper borderRadius="0px 0.375rem 0.375rem" referenceElement={referenceElement} placement="bottom-start">
             <div className="rounded-md md:flex">
                 <section className="p-6 border-r border-gray-accent-light border-dashed flex flex-col">
-                    {leftColMenuItems.map(({ title, features }) => {
+                    <h3 className="text-[18px] font-bold m-0 text-black pl-2">Products</h3>
+                    <ol className="grid grid-cols-2 md:grid-cols-4 space-x-[1px] list-none p-0 pb-4 border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-2 mb-6 -mx-6 px-6">
+                        <ProductItem title="Product analytics" icon={<Analytics />} url="/product/product-analytics" />
+                        <ProductItem title="Session replay" icon={<SessionRecording />} url="/product/session-replay" />
+                        <ProductItem title="Feature flags" icon={<FeatureFlags />} url="/product/feature-flags" />
+                        <ProductItem title="A/B testing" icon={<AbTesting />} url="/product/ab-testing" />
+                    </ol>
+
+                    {productOSItem.map(({ title, features }) => {
                         return (
                             <div key={title}>
                                 <div className="flex items-center w-full justify-between opacity-70">
                                     <h3 className="text-[18px] font-bold m-0 text-black pl-2">{title}</h3>
                                 </div>
-                                <ol className="grid grid-cols-2 md:grid-cols-4 space-x-4 m-0 list-none p-0 mt-2">
-                                    {features.map(({ title, icon, ...other }: Features) => {
+                                <p className="pl-2 text-75 text-sm">
+                                    Our customer &amp; event data platform that ships (free) with all products
+                                </p>
+                                <ol className="grid grid-cols-2 space-x-[1px] list-none p-0 mx-0 mt-2 mb-6">
+                                    {features.map(({ title, icon, description, ...other }: Features) => {
                                         const anchor = pathname?.startsWith('/product') && other.url?.includes('#')
                                         const MenuLink = anchor ? ScrollLink : Link
                                         const url: string | undefined = anchor ? other.url?.split('#')[1] : other.url
 
                                         return (
-                                            <li key={title}>
-                                                <MenuLink
-                                                    smooth
-                                                    className="cursor-pointer rounded-sm md:px-2 py-2 hover:bg-tan hover:bg-opacity-50 flex flex-col justify-center items-center space-x-2 relative active:top-[1px] active:scale-[.99]"
-                                                    to={url}
-                                                >
-                                                    <span className="w-5 h-5 text-black dark:text-white">{icon}</span>
-                                                    <h3 className="text-base m-0 opacity-70">{title}</h3>
-                                                </MenuLink>
+                                            <li
+                                                key={title}
+                                                className="h-full max-w-[235px] rounded-sm md:px-2 py-2 flex items-start space-x-2"
+                                            >
+                                                <div className="shrink-0 grow-0 basis-[24px]">
+                                                    <span className="w-7 h-7 text-black dark:text-white opacity-60">
+                                                        {icon}
+                                                    </span>
+                                                </div>
+                                                <div className="flex-1 mt-1">
+                                                    <h3 className="text-[15px] m-0 opacity-70 font-bold leading-none">
+                                                        {title}
+                                                    </h3>
+                                                    <p className="text-xs opacity-60 mt-1 mb-0">{description}</p>
+                                                </div>
                                             </li>
                                         )
                                     })}
