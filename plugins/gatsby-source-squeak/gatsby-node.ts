@@ -306,8 +306,6 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
             node.githubPages = []
         }
 
-        console.log(node)
-
         createNode(node)
     }
 }
