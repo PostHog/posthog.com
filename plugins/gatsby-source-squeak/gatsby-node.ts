@@ -292,19 +292,19 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             question: SqueakQuestion! @link(from: "id", to: "question")
         }
 
-        type SqueakTopic implements Node {
-            id: ID!
-            squeakId: String!
-            slug: String!
-            label: String!
-        }
-
         type SqueakTopicGroup implements Node {
             id: ID!
             squeakId: String!
             slug: String!
             label: String!
             topics: [SqueakTopic!] @link(by: "id", from: "topics.id")
+        }
+
+        type SqueakTopic implements Node {
+            id: ID!
+            squeakId: String!
+            slug: String!
+            label: String!
         }
     `)
 }
