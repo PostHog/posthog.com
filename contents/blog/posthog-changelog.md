@@ -26,7 +26,7 @@ Every Friday we update this page with the latest new features, fixes, and update
 
 HogQL is a massive new feature which we've been quietly rolling out of the the last few weeks. It's essentially a new query language (based on ClickHouse SQL) which enables you to interrogate your data directly - and it's free for all users as part of a public beta. 
 
-There are multiple ways to use HogQL in PostHog - check [our full announcement](/blog/introducing-hogql) or [the docs](/manual/hogql) for more info - but one of the main ways is by using HogL within breakdowns. Simply select HogQL when choosing an insight breakdown, and you can doing things such as plotting signup sources by email domain, or breaking usage down by a pricing tier. 
+There are multiple ways to use HogQL in PostHog – check [our full announcement](/blog/introducing-hogql) or [the docs](/manual/hogql) for more info – but one of the main ways is by using HogQL within breakdowns. Simply select HogQL when choosing an insight breakdown, and you can do things such as plotting signup sources by email domain, or breaking usage down by a pricing tier. 
 
 #### Event explorer
 To support the introduction of HogQL, we've renamed and revamped the old Live Events view. It's now called the Event Explorer, and it offers a variety of new ways to filter incoming events and analyse data. 
