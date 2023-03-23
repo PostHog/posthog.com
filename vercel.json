@@ -293,7 +293,7 @@
         { "source": "/product/collaboration", "destination": "/product-analytics#dashboards" },
         { "source": "/product/session-recording", "destination": "/session-recording" },
         { "source": "/product/feature-flags", "destination": "/feature-flags" },
-        { "source": "/product/experimentation-suite", "destination": "/feature-testing" },
+        { "source": "/product/experimentation-suite", "destination": "/ab-testing" },
         { "source": "/product/heatmaps", "destination": "/tutorials/toolbar", "statusCode": 301 },
         { "source": "/heatmaps", "destination": "/tutorials/toolbar" },
 
