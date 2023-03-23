@@ -56,7 +56,7 @@ Thankfully, asteroids don't hit us every week. PgBouncer[^1] issues though are i
 So, when thinking about reliability, we want to prioritize defending against things that happen frequently, or have a high chance of occurring over time. This includes things like Redis, Postgres, or PgBouncer going down. Then, if we have the resources and nothing better to prioritize, we can focus on defending against asteroids.
 
 
-### Partial flag evaluation
+### Client-side handling: Partial flag evaluation
 
 Since flags are evaluated multiple times in a session, sending a partial response when we can't access the database is much more preferable to retrying and not sending a response at all. Further, if a client is waiting for flag evaluation before loading their content, we do not want to slow this down. We want to return results as soon as possible.
 
@@ -69,7 +69,7 @@ This solution is special because flags that affect the most people will almost n
 Since the server-side SDKs are stateless, this partial evaluation model doesn't really work. Local evaluation is the best way to maintain reliability, or sending known properties alongside requests to make evaluation of property based flags reliable.
 
 
-### Flag evaluation when databases are down
+### Server side handling: Flag evaluation when databases are down
 
 Now we can dig deeper into how exactly evaluation works when the database is down. One thing I've overlooked so far is that we need the database for multiple parts of flag evaluation:
 	1. to get person properties
