@@ -450,7 +450,7 @@
                 "name": "Multivariate feature flags",
                 "url": "/docs/feature-flags/multivariate-flags"
             },
-            ,
+           
             {
                 "name": "Common questions about feature flags",
                 "url": "/docs/feature-flags/common-questions"
