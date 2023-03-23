@@ -36,7 +36,7 @@ You can, for example, now use custom columns to a view and filter or transform r
 #### Autocapture toggle
 ![autocapture toggle](../images/blog/array/autocapture.png)
 
-We very strongly believe that [autocapturing events is a good idea](/blog/is-autocapture-still-bad), but there are definitely situations when you may want to toggle it on/off - such as if you only want to ingest specific events.
+We very strongly believe that [autocapturing events is a good idea](/blog/is-autocapture-still-bad), but there are definitely situations when you may want to toggle it on/off – such as if you only want to ingest specific events.
 
 In the past, if you wanted to toggle autocapture on/off, you'd need to access our JS snippet directly. That could be a bit of a pain, so we've added a new option for it in your Project Settings. 
 
