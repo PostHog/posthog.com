@@ -5,7 +5,7 @@ import SEO from 'components/seo'
 import Layout from 'components/Layout'
 import PostLayout from 'components/PostLayout'
 import Link from 'components/Link'
-import { OrgProvider, Authentication } from 'components/Squeak'
+import { OrgProvider, Authentication, SignIn } from 'components/Squeak'
 import { useUser } from 'hooks/useUser'
 import Modal from 'components/Modal'
 import EditProfile from 'components/Profiles/EditProfile'
@@ -18,6 +18,7 @@ import GitHubTooltip, { Author } from 'components/GitHubTooltip'
 import QuestionsTable from 'components/Questions/QuestionsTable'
 import useSWRInfinite from 'swr/infinite'
 import SidebarSection from 'components/PostLayout/SidebarSection'
+import { ProfileData, StrapiRecord } from 'lib/strapi'
 
 export const Avatar = (props: { className?: string; src?: string }) => {
     return (
@@ -41,8 +42,9 @@ export const Avatar = (props: { className?: string; src?: string }) => {
 }
 
 export const Login = ({ onSubmit = () => undefined }: { onSubmit?: () => void }) => {
-    const [login, setLogin] = useState<null | { type: 'login' | 'signup' }>(null)
-    return login ? (
+    const [state, setState] = useState<null | 'login' | 'signup'>(null)
+
+    return state === 'login' ? (
         <>
             <p className="m-0 text-sm font-bold dark:text-white">
                 Note: PostHog.com authentication is separate from your PostHog app.
@@ -50,12 +52,10 @@ export const Login = ({ onSubmit = () => undefined }: { onSubmit?: () => void })
             <p className="text-sm mt-2 dark:text-white">
                 We suggest signing up with your personal email. Soon you'll be able to link your PostHog app account.
             </p>
-            <Authentication
-                showBanner={false}
-                showProfile={false}
-                //onSubmit={onSubmit}
-            />
+            <SignIn onSuccess={onSubmit} />
         </>
+    ) : state === 'signup' ? (
+        <div></div>
     ) : (
         <>
             <p className="m-0 text-sm dark:text-white">
@@ -64,16 +64,10 @@ export const Login = ({ onSubmit = () => undefined }: { onSubmit?: () => void })
             <p className="text-[13px] mt-2 dark:text-white p-2 bg-gray-accent-light dark:bg-gray-accent-dark rounded">
                 <strong>Tip:</strong> If you've ever asked a question on PostHog.com, you already have an account!
             </p>
-            <CallToAction onClick={() => setLogin({ type: 'login' })} width="full" size="sm">
+            <CallToAction onClick={() => setState('login')} width="full" size="sm">
                 Login to posthog.com
             </CallToAction>
-            <CallToAction
-                onClick={() => setLogin({ type: 'signup' })}
-                width="full"
-                type="secondary"
-                size="sm"
-                className="mt-2"
-            >
+            <CallToAction onClick={() => setState('signup')} width="full" type="secondary" size="sm" className="mt-2">
                 Create an account
             </CallToAction>
         </>
@@ -84,18 +78,22 @@ export const Profile = ({
     profile,
     setEditModalOpen,
 }: {
-    profile: SqueakProfile
+    profile: StrapiRecord<ProfileData>
     setEditModalOpen: (open: boolean) => void
 }) => {
-    const { avatar, id } = profile
-    const name = [profile?.first_name, profile?.last_name].filter(Boolean).join(' ')
+    const {
+        id,
+        attributes: { avatar },
+    } = profile
+    const name = [profile.attributes.firstName, profile.attributes.lastName].filter(Boolean).join(' ')
+
     return (
         <div>
             <Link
                 to={`/community/profiles/${id}`}
                 className="flex items-center space-x-2 mt-2 mb-1 -mx-2 relative active:top-[1px] active:scale-[.99] hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark rounded p-2"
             >
-                <Avatar src={avatar} className="w-[40px] h-[40px]" />
+                <Avatar src={avatar?.data?.attributes?.url} className="w-[40px] h-[40px]" />
                 <div>{name && <p className="m-0 font-bold">{name}</p>}</div>
             </Link>
 
@@ -126,6 +124,7 @@ const ListItem = ({ children }: { children: React.ReactNode }) => {
 
 const Activity = ({ questions, questionsLoading }) => {
     const { user } = useUser()
+
     return (
         <div id="my-activity" className="mb-12">
             <SectionTitle>My activity</SectionTitle>
@@ -418,20 +417,15 @@ const Stats = ({
 }
 
 const ProfileSidebar = ({
-    profile,
-    setProfile,
     setEditModalOpen,
     postHogStats,
     postHogComStats,
 }: {
-    profile?: SqueakProfile
-    setProfile: (profile: SqueakProfile) => void
     setEditModalOpen: (open: boolean) => void
     postHogStats: IGitHubStats
     postHogComStats: IGitHubStats
 }) => {
-    const { user, setUser, logout } = useUser()
-    console.log(user)
+    const { user, logout } = useUser()
     /*useEffect(() => {
         setProfile(user?.profile)
     }, [user])*/
@@ -441,13 +435,13 @@ const ProfileSidebar = ({
             <SidebarSection>
                 <div className="mb-2 flex items-baseline justify-between">
                     <h4 className="m-0">My profile</h4>
-                    {profile && (
+                    {user?.profile && (
                         <button onClick={logout} className="text-red font-bold text-sm">
                             Logout
                         </button>
                     )}
                 </div>
-                {profile ? <Profile setEditModalOpen={setEditModalOpen} profile={profile} /> : <Login />}
+                {user?.profile ? <Profile setEditModalOpen={setEditModalOpen} profile={user.profile} /> : <Login />}
             </SidebarSection>
             <SidebarSection title="Stats for our popular repos">
                 <Stats

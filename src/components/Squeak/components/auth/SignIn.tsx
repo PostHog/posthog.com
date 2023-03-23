@@ -3,15 +3,11 @@ import { Field, Form, Formik } from 'formik'
 import { useUser } from 'hooks/useUser'
 
 type SignInProps = {
-    setMessage: any
-    handleMessageSubmit: (message: any) => Promise<void> | void
-    formValues: any
-    apiHost: string
-    buttonText: string
-    organizationId: string
+    buttonText?: string
+    onSuccess?: () => void
 }
 
-const SignIn: React.FC<SignInProps> = ({ setMessage, handleMessageSubmit, formValues, buttonText }) => {
+export const SignIn: React.FC<SignInProps> = ({ buttonText = 'Login', onSuccess }) => {
     const { isLoading, login } = useUser()
 
     const handleSubmit = async (values: any) => {
@@ -21,9 +17,10 @@ const SignIn: React.FC<SignInProps> = ({ setMessage, handleMessageSubmit, formVa
         })
 
         if (!user) {
-            setMessage('Incorrect email/password. Please try again.')
+            // TODO: Handle error in the useUser hook
         } else {
-            await handleMessageSubmit(formValues || { email: values.email })
+            // await handleMessageSubmit(formValues || { email: values.email })
+            onSuccess?.()
         }
     }
 

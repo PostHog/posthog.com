@@ -3,7 +3,7 @@ import React, { createContext, useEffect, useState } from 'react'
 import getGravatar from 'gravatar'
 import { post } from 'components/Squeak/lib/api'
 import qs from 'qs'
-import { ProfileData, StrapiResult } from 'lib/strapi'
+import { ProfileData, StrapiRecord, StrapiResult } from 'lib/strapi'
 
 type User = {
     id: number
@@ -15,11 +15,7 @@ type User = {
     createdAt: string
     provider: 'email' | 'github' | 'google'
     username: string
-    profile: {
-        avatar: string
-        firstName: string
-        lastName: string
-    }
+    profile: StrapiRecord<ProfileData>
 }
 
 type UserContextValue = {
@@ -28,9 +24,8 @@ type UserContextValue = {
     isLoading: boolean
 
     user: User | null
-    setUser: React.Dispatch<React.SetStateAction<User | null>>
 
-    getSession: () => Promise<User | null>
+    getJwt: () => Promise<string | null>
     login: (args: { email: string; password: string }) => Promise<User | null>
     logout: () => Promise<void>
     signUp: (args: { email: string; password: string; firstName: string; lastName: string }) => Promise<User | null>
@@ -41,11 +36,8 @@ export const UserContext = createContext<UserContextValue>({
     apiHost: '',
     isLoading: true,
     user: null,
-    setUser: () => {
-        // noop
-    },
 
-    getSession: async () => null,
+    getJwt: async () => null,
     login: async () => null,
     logout: async () => {
         // noop
@@ -62,45 +54,27 @@ type UserProviderProps = {
 export const UserProvider: React.FC<UserProviderProps> = ({ apiHost, organizationId, children }) => {
     const [isLoading, setIsLoading] = useState(false)
     const [user, setUser] = useState<User | null>(null)
+    const [jwt, setJwt] = useState<string | null>(null)
 
     useEffect(() => {
-        getSession()
+        const jwt = localStorage.getItem('jwt')
+        const user = localStorage.getItem('user')
+
+        if (jwt && user) {
+            setJwt(jwt)
+            setUser(JSON.parse(user))
+        } else {
+            // We shouldn't have a jwt without a user or vice versa. If we do, clear both and reset.
+            setJwt(null)
+            setUser(null)
+
+            localStorage.removeItem('jwt')
+            localStorage.removeItem('user')
+        }
     }, [])
 
-    const getSession = async (): Promise<User | null> => {
-        setIsLoading(true)
-
-        if (user) {
-            return user
-        }
-
-        try {
-            const res = await fetch(`${apiHost}/api/user?organizationId=${organizationId}`, {
-                method: 'GET',
-                credentials: 'include',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
-
-            if (!res.ok) {
-                return null
-            }
-
-            const data = await res.json()
-
-            if (data.error) {
-                return null
-            } else {
-                setUser(data)
-                return data as User
-            }
-        } catch (error) {
-            console.error(error)
-            return null
-        } finally {
-            setIsLoading(false)
-        }
+    const getJwt = async () => {
+        return jwt
     }
 
     const login = async ({ email, password }: { email: string; password: string }): Promise<User | null> => {
@@ -133,6 +107,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ apiHost, organizatio
                             },
                         },
                     },
+                    populate: ['avatar'],
                 },
                 {
                     encodeValuesOnly: true,
@@ -151,12 +126,16 @@ export const UserProvider: React.FC<UserProviderProps> = ({ apiHost, organizatio
 
             const profileData: StrapiResult<ProfileData[]> = await profileRes.json()
 
-            const user = {
+            const user: User = {
                 ...userData.user,
                 profile: profileData.data[0],
             }
 
-            console.log(user)
+            localStorage.setItem('user', JSON.stringify(user))
+            localStorage.setItem('jwt', userData.jwt)
+
+            setUser(user)
+            setJwt(userData.jwt)
 
             return user
         } catch (error) {
@@ -203,16 +182,14 @@ export const UserProvider: React.FC<UserProviderProps> = ({ apiHost, organizatio
             return null
         } else {
             // setUser(data)
-            let user = await getSession()
+            // let user = await getSession()
 
-            return user
+            return null
         }
     }
 
     return (
-        <UserContext.Provider
-            value={{ organizationId, apiHost, user, setUser, isLoading, getSession, login, logout, signUp }}
-        >
+        <UserContext.Provider value={{ organizationId, apiHost, user, isLoading, getJwt, login, logout, signUp }}>
             {children}
         </UserContext.Provider>
     )
