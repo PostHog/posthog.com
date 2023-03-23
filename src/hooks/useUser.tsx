@@ -19,8 +19,6 @@ type User = {
 }
 
 type UserContextValue = {
-    organizationId: string
-    apiHost: string
     isLoading: boolean
 
     user: User | null
@@ -32,8 +30,6 @@ type UserContextValue = {
 }
 
 export const UserContext = createContext<UserContextValue>({
-    organizationId: '',
-    apiHost: '',
     isLoading: true,
     user: null,
 
@@ -47,11 +43,10 @@ export const UserContext = createContext<UserContextValue>({
 
 type UserProviderProps = {
     organizationId: string
-    apiHost: string
     children: React.ReactNode
 }
 
-export const UserProvider: React.FC<UserProviderProps> = ({ apiHost, organizationId, children }) => {
+export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false)
     const [user, setUser] = useState<User | null>(null)
     const [jwt, setJwt] = useState<string | null>(null)
@@ -81,7 +76,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ apiHost, organizatio
         setIsLoading(true)
 
         try {
-            const userRes = await fetch(`${apiHost}/api/auth/local`, {
+            const userRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/auth/local`, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -113,7 +108,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ apiHost, organizatio
                     encodeValuesOnly: true,
                 }
             )
-            const profileRes = await fetch(`${apiHost}/api/profiles?${profileQuery}`, {
+            const profileRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles?${profileQuery}`, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -147,8 +142,11 @@ export const UserProvider: React.FC<UserProviderProps> = ({ apiHost, organizatio
     }
 
     const logout = async (): Promise<void> => {
-        await post(apiHost, '/api/logout')
+        localStorage.removeItem('jwt')
+        localStorage.removeItem('user')
+
         setUser(null)
+        setJwt(null)
     }
 
     const signUp = async ({
