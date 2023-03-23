@@ -472,6 +472,10 @@
             {
                 "name": "Under the hood",
                 "url": "/docs/experiments/under-the-hood"
+            },
+            {
+                "name": "Common questions about experiments",
+                "url": "/docs/experiments/common-questions"
             }
         ]
     },

@@ -31,6 +31,11 @@ export const quickLinks = [
         to: '/docs/experiments/under-the-hood',
         description: 'Detailed information on how experiments work',
     },
+    {
+        name: 'Common questions',
+        to: '/docs/experiments/common-issues',
+        description: 'Common issues when setting up experiments and how to solve them',
+    }
 ]
 
 type ExperimentsProps = {
