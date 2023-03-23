@@ -33,8 +33,8 @@ export const quickLinks = [
     },
     {
         name: 'Common questions',
-        to: '/docs/experiments/common-issues',
-        description: 'Common issues when setting up experiments and how to solve them',
+        to: '/docs/experiments/common-questions',
+        description: 'Common questions when setting up experiments and how to solve them',
     }
 ]
 
