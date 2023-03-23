@@ -4,14 +4,14 @@ title: Common questions about feature flags
 
 ## Why is my feature flag not working?
 
-There can be a few reasons. Here's a good list to go through:
+Here's a list of suggestions to troubleshoot your flag:
 
 1. [ ] Check the feature flags tab on [the persons page](https://app.posthog.com/persons) for your specific person.
-    1. If the flag is showing up as disabled here, check the evaluation reason to know the reason why.
-    2. If the flag is showing up as enabled here, the problem lies somewhere in the SDK implementation.
-2. [ ] Check if you're calling `identify()` to get to the right person on your website.
+    1. If the flag is showing up as disabled here, check the "match evaluation" column to know the reason why.
+    2. If the flag is showing up as enabled here, the problem lies somewhere in the implementation (your code).
+2. [ ] Check if you're calling `identify()` before the flag is called to get to the right person on your website.
 3. [ ] Check if an ad-blocker is blocking calls. If yes, you can fix this by [deploying a reverse proxy](/docs/advanced/proxy).
-4. [ ] If none of the above, ask us in [the Users Slack](https://posthog.com/slack), we'll help debug.
+4. [ ] If none of the above, ask us in [the User Slack](/slack), we'll help debug.
 
 
 ---
