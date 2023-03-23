@@ -1,0 +1,43 @@
+---
+title: Common questions about feature flags
+---
+
+## Why is my feature flag not working?
+
+There can be a few reasons. Here's a good list to go through:
+
+1. [ ] Check the feature flags tab on [the persons page](https://app.posthog.com/persons) for your specific person
+    1. If the flag is showing up as disabled here, check the evaluation reason to know the reason why.
+    2. If the flag is showing up as enabled here, the problem lies somewhere in the SDK implementation.
+2. [ ] Check if you're calling `identify()` to get to the right person on your website.
+3. [ ] Check if an ad-blocker is blocking calls. If yes, you can fix this by [deploying a reverse proxy](/docs/advanced/proxy).
+4. [ ] If none of the above, ask us in [the Users Slack](https://posthog.com/slack), we'll help debug.
+
+
+---
+
+
+## On my website, why does the feature flag sometimes flicker?
+
+By default, flags are loaded from our servers which takes about 100-500ms. During this time, the flag is disabled, which can be the reason why you see things look differently for the first 500ms.
+
+To fix this, you can [bootstrap feature flags](/docs/feature-flags/bootstrapping-and-local-evaluation).
+
+---
+
+## I care about latency a lot, and 500ms delays are unacceptable on my servers. Can I do something about this?
+
+Yes, use [local evaluation](/docs/feature-flags/bootstrapping-and-local-evaluation#server-side-local-evaluation). This downloads flag definitions on your servers and evaluates them locally.
+
+---
+
+## My feature flags are sending a lot of events, how can I manage this?
+
+Every library has the option to disable sending these events. Just check the relevant docs for the library for the `send_events` parameter in your `posthog.isFeatureEnabled()` or `posthog.getFeatureFlag()` calls.
+
+However, note that this has a few consequences:
+
+1. The usage tab on the flag will stop showing events since we can't track them anymore.
+2. Experiments that depend on trend goals won't work since we use this event to calculate relative exposure. Convert your trend experiments to funnel experiments instead to make this work.
+
+---
