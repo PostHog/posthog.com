@@ -795,7 +795,7 @@ export const Hero = ({
     return (
         <>
             <h1 id="overview" className="text-center text-5xl mb-0 mt-14">
-                {title}
+                {title}? PostHog does that.
             </h1>
             <div className="text-center mt-4" dangerouslySetInnerHTML={{ __html: subtitle }} />
             {pricingCTA && mainCTA && (
