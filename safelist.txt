@@ -24,6 +24,7 @@ max-w-2xl
 max-w-3xl
 max-w-4xl
 max-w-5xl
+max-w-screen-md
 w-full
 w-56
 w-64
@@ -85,3 +86,4 @@ text-primary-dark
 text-green
 sm:hidden
 col-span-7
+bg-yellow/10

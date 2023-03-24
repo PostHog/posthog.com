@@ -846,10 +846,13 @@ export const Hero = ({
     const image = featuredImage && getImage(featuredImage)
     return (
         <>
-            <h1 id="overview" className="text-center text-5xl mb-0 mt-14">
+            <h1 id="overview" className="text-center text-5xl lg:text-6xl 2xl:text-7xl mb-0 mt-14">
                 {title}? PostHog does that.
             </h1>
-            <div className="text-center mt-4" dangerouslySetInnerHTML={{ __html: subtitle }} />
+            <p
+                className="text-center text-lg font-semibold text-black/70 mt-4"
+                dangerouslySetInnerHTML={{ __html: subtitle }}
+            />
             {pricingCTA && mainCTA && (
                 <div className="flex space-x-4 items-center justify-center">
                     <CallToAction to={mainCTA.url}>{mainCTA.title}</CallToAction>

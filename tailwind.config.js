@@ -43,6 +43,7 @@ module.exports = {
             'opacity-100',
             'border-opacity-75',
             'border-opacity-100',
+            'bg-opacity-25',
             'bg-opacity-50',
             'text-green',
         ],
