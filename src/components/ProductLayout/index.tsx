@@ -50,9 +50,9 @@ const nav = [
 
 export const MainFeatures = (props: IFeatureGridProps) => {
     return (
-        <div id="features">
+        <ul className="p-0" id="features">
             <FeatureGrid {...props} />
-        </div>
+        </ul>
     )
 }
 
@@ -69,9 +69,7 @@ export const FeatureGrid = ({ features, className = '' }: IFeatureGridProps) => 
     return (
         <SectionWrapper className="max-w-full">
             <ul
-                className={`grid list-none m-0 max-w-screen-2xl mx-auto border-l border-gray-accent-light border-dashed p-0 border-t ${getTailwindGridCol(
-                    length
-                )} ${className}`}
+                className={`grid list-none m-0 max-w-screen-4xl mx-auto p-0 ${getTailwindGridCol(length)} ${className}`}
             >
                 {features.map((feature) => {
                     return <Feature key={feature.title} {...feature} />
@@ -81,12 +79,34 @@ export const FeatureGrid = ({ features, className = '' }: IFeatureGridProps) => 
     )
 }
 
+interface IPairGridProps {
+    features: IFeature[]
+    className?: string
+}
+
+export const PairGrid = ({ features, className = '' }: IPairGridProps) => {
+    const length = features?.length ?? 1
+    return (
+        <SectionWrapper className="max-w-full">
+            <ul
+                className={`md:grid list-none m-0 max-w-screen-4xl mx-auto p-0 divide-y md:divide-x md:divide-y-0 divide-dashed divide-gray-accent-light ${getTailwindGridCol(
+                    length
+                )} ${className}`}
+            >
+                {features.map((feature) => {
+                    return <PairItem key={feature.title} {...feature} />
+                })}
+            </ul>
+        </SectionWrapper>
+    )
+}
+
 export const FeatureTitle = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
-    <h3 className={`text-base m-0 ${className}`}>{children}</h3>
+    <h3 className={`text-[17px] mb-1 leading-tight ${className}`}>{children}</h3>
 )
 
 export const FeatureDescription = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
-    <p className={`m-0 text-sm ${className}`}>{children}</p>
+    <p className={`m-0 text-[15px] ${className}`}>{children}</p>
 )
 
 interface ISection {
@@ -111,13 +131,10 @@ export const Section = ({ title, subtitle, features, image, content }: ISection)
 
 export const Sections = ({ sections }: { sections: ISection[][] }) => {
     return (
-        <div>
+        <>
             {sections.map((section, index) => {
                 return (
-                    <SectionWrapper
-                        className="py-12 md:py-14 border-dashed border-gray-accent-light odd:border-y last:border-b md:my-auto !my-0"
-                        key={index}
-                    >
+                    <SectionWrapper className="py-12 md:py-14 md:my-auto !my-0" key={index}>
                         {section.length > 1 ? (
                             <TwoCol>
                                 {section.map((section, index) => (
@@ -130,7 +147,7 @@ export const Sections = ({ sections }: { sections: ISection[][] }) => {
                     </SectionWrapper>
                 )
             })}
-        </div>
+        </>
     )
 }
 
@@ -144,8 +161,26 @@ interface IFeature {
 export const Feature = ({ title, description, className = '', icon }: IFeature) => {
     const Icon = ProductIcons[icon] || NotProductIcons[icon]
     return (
-        <li className={`p-6 pb-8 border-r border-b border-gray-accent-light border-dashed ${className}`}>
-            {Icon && <Icon className="w-5 h-5 mb-2" />}
+        <li className={`p-6 pb-8  ${className}`}>
+            {Icon && <Icon className="w-10 h-10 mb-2" />}
+            <FeatureTitle>{title}</FeatureTitle>
+            <FeatureDescription>{description}</FeatureDescription>
+        </li>
+    )
+}
+
+interface IPairItem {
+    title: string
+    description: string
+    icon?: React.ReactNode
+    className?: string
+}
+
+export const PairItem = ({ title, description, className = '', icon }: IPairItem) => {
+    const Icon = ProductIcons[icon] || NotProductIcons[icon]
+    return (
+        <li className={`p-6 pb-8 ${className}`}>
+            {Icon && <Icon className="w-10 h-10 mb-2" />}
             <FeatureTitle>{title}</FeatureTitle>
             <FeatureDescription>{description}</FeatureDescription>
         </li>
@@ -154,7 +189,7 @@ export const Feature = ({ title, description, className = '', icon }: IFeature) 
 
 export const FeatureList = ({ features }: { features: IFeature[] }) => {
     return (
-        <ul className="list-none m-0 p-0 space-y-4">
+        <ul className="list-none m-0 p-0 space-y-6">
             {features.map(({ title, description }) => {
                 return (
                     <li key={title}>
@@ -170,8 +205,12 @@ export const FeatureList = ({ features }: { features: IFeature[] }) => {
 export const SectionHeading = ({ title, subtitle }: { title?: string; subtitle?: string | React.ReactNode }) => {
     return (
         <div className="mb-6">
-            {title && <h2 className="text-xl m-0">{title}</h2>}
-            {subtitle && typeof subtitle === 'string' ? <p className="text-base m-0">{subtitle}</p> : subtitle}
+            {title && <h2 className="text-3xl m-0">{title}</h2>}
+            {subtitle && typeof subtitle === 'string' ? (
+                <p className="text-base font-semibold opacity-70 m-0">{subtitle}</p>
+            ) : (
+                subtitle
+            )}
         </div>
     )
 }
@@ -193,7 +232,7 @@ export const Testimonial = ({ author, image, quote }: ITestimonial & { image: Im
     const gatsbyImage = image && getImage(image)
     return (
         <SectionWrapper>
-            <TwoCol className="items-end">
+            <Quote className="items-end">
                 <div>
                     <img className="text-black max-w-[200px]" src={author.company.image} />
                     <p className="my-6">{quote}</p>
@@ -208,7 +247,7 @@ export const Testimonial = ({ author, image, quote }: ITestimonial & { image: Im
                     </div>
                 </div>
                 <div>{gatsbyImage && <GatsbyImage alt="" image={gatsbyImage} />}</div>
-            </TwoCol>
+            </Quote>
         </SectionWrapper>
     )
 }
@@ -222,6 +261,17 @@ export const TwoCol = ({ children, className = '' }: { children: React.ReactNode
     )
 }
 
+export const Quote = ({ children, className = '' }: { children: React.ReactNode[]; className?: string }) => {
+    return (
+        <div
+            className={`grid py-10 px-16 -mx-12 bg-gray-accent-light md:grid-cols-2 md:gap-y-0 gap-y-4 md:gap-x-6 ${className}`}
+        >
+            <div>{children[0]}</div>
+            <div>{children[1]}</div>
+        </div>
+    )
+}
+
 export const PairsWith = ({ products }: { products: IFeature[] }) => {
     return (
         <div id="pairs-with">
@@ -229,7 +279,7 @@ export const PairsWith = ({ products }: { products: IFeature[] }) => {
                 <h2 className="text-center m-0">Pairs with...</h2>
                 <p className="text-center m-0">PostHog products are natively designed to be interoperable.</p>
                 <div className="mt-12">
-                    <FeatureGrid features={products} />
+                    <PairGrid features={products} />
                 </div>
             </SectionWrapper>
         </div>
@@ -444,9 +494,9 @@ export const Footer = ({ title }) => {
 
 export const SectionWrapper = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => {
     return (
-        <div className={`max-w-5xl mx-auto my-14 ${className}`}>
-            <section className={`mx-auto`}>{children}</section>
-        </div>
+        <section className={`list-none my-1 py-4 md:py-12 ${className}`}>
+            <div className={`max-w-7xl mx-auto`}>{children}</div>
+        </section>
     )
 }
 
