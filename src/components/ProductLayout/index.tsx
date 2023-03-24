@@ -44,18 +44,10 @@ const nav = [
 
 const getTailwindGridCol = (length: number) => `grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-${length}`
 
-export const FeatureGrid = ({
-    features,
-    className = '',
-    border = true,
-}: {
-    features: IFeature[]
-    className?: string
-    border?: boolean
-}) => {
+export const FeatureGrid = ({ features, className = '' }: { features: IFeature[]; className?: string }) => {
     const length = features?.length ?? 1
     return (
-        <SectionWrapper className="max-w-screen-2xl" border={border} borderPadding={false}>
+        <SectionWrapper className="max-w-full border-y border-dashed border-gray-accent-light">
             <ul
                 className={`grid list-none m-0 max-w-screen-2xl mx-auto border-l border-gray-accent-light border-dashed  ${getTailwindGridCol(
                     length
@@ -99,21 +91,28 @@ export const Section = ({ title, subtitle, features, image, content }: ISection)
 }
 
 export const Sections = ({ sections }: { sections: ISection[][] }) => {
-    return sections.map((section, index) => {
-        return (
-            <SectionWrapper key={index}>
-                {section.length > 1 ? (
-                    <TwoCol>
-                        {section.map((section, index) => (
-                            <Section key={index} {...section} />
-                        ))}
-                    </TwoCol>
-                ) : (
-                    <Section {...section[0]} />
-                )}
-            </SectionWrapper>
-        )
-    })
+    return (
+        <div>
+            {sections.map((section, index) => {
+                return (
+                    <SectionWrapper
+                        className="py-14 border-dashed border-gray-accent-light odd:border-y last:border-b"
+                        key={index}
+                    >
+                        {section.length > 1 ? (
+                            <TwoCol>
+                                {section.map((section, index) => (
+                                    <Section key={index} {...section} />
+                                ))}
+                            </TwoCol>
+                        ) : (
+                            <Section {...section[0]} />
+                        )}
+                    </SectionWrapper>
+                )
+            })}
+        </div>
+    )
 }
 
 interface IFeature {
@@ -204,11 +203,11 @@ export const TwoCol = ({ children, className = '' }: { children: React.ReactNode
 
 export const PairsWith = ({ products }: { products: IFeature[] }) => {
     return (
-        <SectionWrapper>
+        <SectionWrapper className="max-w-full">
             <h2 className="text-center m-0">Pairs with...</h2>
             <p className="text-center m-0">PostHog products are natively designed to be interoperable.</p>
             <div className="mt-12">
-                <FeatureGrid border={false} features={products} />
+                <FeatureGrid features={products} />
             </div>
         </SectionWrapper>
     )
@@ -420,24 +419,10 @@ export const Footer = ({ title }) => {
     )
 }
 
-export const SectionWrapper = ({
-    children,
-    className = 'max-w-5xl',
-    border = false,
-    borderPadding = true,
-}: {
-    children: React.ReactNode
-    className?: string
-    border?: boolean
-    borderPadding?: boolean
-}) => {
+export const SectionWrapper = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => {
     return (
-        <div
-            className={`${
-                border ? `${borderPadding ? 'py-14' : ''} border-y border-gray-accent-light border-dashed` : ''
-            } my-14`}
-        >
-            <section className={`mx-auto ${className}`}>{children}</section>
+        <div className={`max-w-5xl mx-auto my-14 ${className}`}>
+            <section className={`mx-auto`}>{children}</section>
         </div>
     )
 }

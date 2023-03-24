@@ -148,7 +148,7 @@ export const query = graphql`
                 }
             }
         }
-        blogPosts: allMdx(filter: { frontmatter: { tags: { in: [$blogTags] } } }) {
+        blogPosts: allMdx(filter: { frontmatter: { tags: { in: [$blogTags] } } }, limit: 6) {
             edges {
                 node {
                     ...BlogFragment
