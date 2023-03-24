@@ -89,7 +89,7 @@ export const PairGrid = ({ features, className = '' }: IPairGridProps) => {
     return (
         <SectionWrapper className="max-w-full">
             <ul
-                className={`md:grid list-none m-0 max-w-screen-4xl mx-auto p-0 divide-y md:divide-x md:divide-y-0 divide-dashed divide-gray-accent-light ${getTailwindGridCol(
+                className={`md:grid list-none m-0 max-w-screen-4xl mx-auto p-0  ${getTailwindGridCol(
                     length
                 )} ${className}`}
             >
@@ -162,7 +162,7 @@ export const Feature = ({ title, description, className = '', icon }: IFeature) 
     const Icon = ProductIcons[icon] || NotProductIcons[icon]
     return (
         <li className={`p-6 pb-8  ${className}`}>
-            {Icon && <Icon className="w-10 h-10 mb-2" />}
+            {Icon && <Icon className="w-10 h-10 mb-4 opacity-50" />}
             <FeatureTitle>{title}</FeatureTitle>
             <FeatureDescription>{description}</FeatureDescription>
         </li>
@@ -179,7 +179,7 @@ interface IPairItem {
 export const PairItem = ({ title, description, className = '', icon }: IPairItem) => {
     const Icon = ProductIcons[icon] || NotProductIcons[icon]
     return (
-        <li className={`p-6 pb-8 ${className}`}>
+        <li className={`p-6 pb-8 bg-white rounded-md mx-4 shadow ${className}`}>
             {Icon && <Icon className="w-10 h-10 mb-2" />}
             <FeatureTitle>{title}</FeatureTitle>
             <FeatureDescription>{description}</FeatureDescription>
@@ -276,8 +276,10 @@ export const PairsWith = ({ products }: { products: IFeature[] }) => {
     return (
         <div id="pairs-with">
             <SectionWrapper className="max-w-full">
-                <h2 className="text-center m-0">Pairs with...</h2>
-                <p className="text-center m-0">PostHog products are natively designed to be interoperable.</p>
+                <h2 className="text-center text-4xl mb-2">Pairs with...</h2>
+                <p className="text-center text-lg font-semibold text-black/70">
+                    PostHog products are natively designed to be interoperable.
+                </p>
                 <div className="mt-12">
                     <PairGrid features={products} />
                 </div>
