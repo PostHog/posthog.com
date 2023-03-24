@@ -312,6 +312,12 @@ For frontend unit tests, run:
 pnpm test:unit
 ```
 
+You can narrow the run down to only files under matching paths:
+
+```bash
+pnpm jest --testPathPattern=frontend/src/lib/components/IntervalFilter/intervalFilterLogic.test.ts
+```
+
 To update all visual regression test snapshots, make sure Storybook is running on your machine (you can start it with `pnpm storybook` in a separate Terminal tab), and then run:
 
 ```bash

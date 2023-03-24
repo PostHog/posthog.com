@@ -3,7 +3,7 @@ import slugify from 'slugify'
 import React from 'react'
 import Link from 'components/Link'
 import { Question } from './index'
-import { useUser } from '../../hooks/useUser'
+import { useUser } from 'hooks/useUser'
 
 export const QuestionSidebar = ({ question }: { question: Question | undefined }) => {
     const { user } = useUser()

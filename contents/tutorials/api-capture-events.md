@@ -20,17 +20,17 @@ The project API key is a write-only key, which works perfectly for the POST-only
 
 ## Basic event capture request
 
-To capture events, all we need is a project API key, the data we want to send, and a way to send a request. To capture a new event, you need to send a `POST` request to [`https://app.posthog.com/capture/`](https://app.posthog.com/capture/)  (or the `/capture` endpoint for your instance) with the project API key, event name, and distinct ID.
+To capture events, all we need is a project API key, the data we want to send, and a way to send a request. To capture a new event, you need to send a `POST` request to [`<ph_instance_address>/capture/`](<ph_instance_address>/capture/)  (or the `/capture` endpoint for your instance) with the project API key, event name, and distinct ID.
 
 <MultiLanguage>
 
 ```bash
 # curl
 curl -v -L --header "Content-Type: application/json" -d '{
-    "api_key": "phc_yv5gInhFa1SIb14lc02e9rHfGb22dqfaN1fc4xv5Fzw",
+    "api_key": "<ph_project_api_key>",
     "event": "Request",
     "distinct_id": "ian@posthog.com"
-}' https://app.posthog.com/capture/
+}' <ph_instance_address>/capture/
 ```
 
 ```python
@@ -66,7 +66,7 @@ You can also add properties and a timestamp in [ISO 8601 format](https://en.wiki
 
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
-    "api_key": "phc_yv5gInhFa1SIb14lc02e9rHfGb22dqfaN1fc4xv5Fzw",
+    "api_key": "<ph_project_api_key>",
     "properties": {
 			"request_size": "big",
 			"api_request": true
@@ -74,7 +74,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
     "timestamp": "2022-09-21 09:03:11.913767",
     "distinct_id": "ian@posthog.com",
     "event": "big request"
-}' https://app.posthog.com/capture/
+}' <ph_instance_address>/capture/
 ```
     
 ```python
@@ -107,7 +107,7 @@ You can also batch these requests together by sending a list of events to the `/
 
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
-    "api_key": "phc_yv5gInhFa1SIb14lc02e9rHfGb22dqfaN1fc4xv5Fzw",
+    "api_key": "<ph_project_api_key>",
     "batch": [
         {
             "event": "batched event",
@@ -124,19 +124,19 @@ curl -v -L --header "Content-Type: application/json" -d '{
             }
         }
     ]
-}' https://app.posthog.com/batch/
+}' <ph_instance_address>/batch/
 ```
 
 ```python
 import requests
-url = "https://app.posthog.com/batch/"
+url = "<ph_instance_address>/batch/"
 
 headers = {
     "Content-Type": "application/json",
 }
 
 body = {
-    "api_key": "phc_yv5gInhFa1SIb14lc02e9rHfGb22dqfaN1fc4xv5Fzw",
+    "api_key": "<ph_project_api_key>",
     "batch": [
         {
             "event": "batched event",
@@ -172,25 +172,25 @@ You still send identify events to the `/capture/` endpoint. Use `$set` to set th
 
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
-    "api_key": "phc_yv5gInhFa1SIb14lc02e9rHfGb22dqfaN1fc4xv5Fzw",
+    "api_key": "<ph_project_api_key>",
     "distinct_id": "ian@posthog.com",
     "$set": {
 			"email": "ian@posthog.com",
 			"is_cool": true
 		},
     "event": "$identify"
-}' https://app.posthog.com/capture/
+}' <ph_instance_address>/capture/
 ```
 ```python
 import requests
-url = 'https://app.posthog.com/capture/'
+url = '<ph_instance_address>/capture/'
 
 headers = {
     "Content-Type": "application/json",
 }
 
 body = {
-    "api_key": "phc_yv5gInhFa1SIb14lc02e9rHfGb22dqfaN1fc4xv5Fzw",
+    "api_key": "<ph_project_api_key>",
     "distinct_id": "ian@posthog.com",
     "$set": {
 			"email": "ian@posthog.com",
@@ -214,25 +214,25 @@ If you have two users you’d like to combine together, you can use a `$create_a
 
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
-    "api_key": "phc_yv5gInhFa1SIb14lc02e9rHfGb22dqfaN1fc4xv5Fzw",
+    "api_key": "<ph_project_api_key>",
     "properties": {
         "distinct_id": "ian@posthog.com",
         "alias": "ian2@posthog.com"
     },
     "event": "$create_alias"
-}' https://app.posthog.com/capture/
+}' <ph_instance_address>/capture/
 ```
 
 ```python
 import requests
-url = 'https://app.posthog.com/capture/'
+url = '<ph_instance_address>/capture/'
 
 headers = {
     "Content-Type": "application/json",
 }
 
 body = {
-    "api_key": "phc_yv5gInhFa1SIb14lc02e9rHfGb22dqfaN1fc4xv5Fzw",
+    "api_key": "<ph_project_api_key>",
     "properties": {
         "distinct_id": "ian@posthog.com",
         "alias": "ian2@posthog.com"

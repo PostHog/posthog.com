@@ -12,12 +12,12 @@
         "url": "/blog/categories/engineering"
     },
     {
-        "name": "HogMail",
-        "url": "/blog/categories/hogmail"
-    },
-    {
         "name": "Inside PostHog",
         "url": "/blog/categories/inside-posthog"
+    },
+    {
+        "name": "Newsletter",
+        "url": "/blog/categories/newsletter"
     },
     {
         "name": "PostHog news",

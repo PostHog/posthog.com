@@ -26,7 +26,7 @@ export const QuestionsTable = ({
         <ul className="m-0 p-0">
             <li className="divide-y divide-gray-accent-light divide-dashed dark:divide-gray-accent-dark list-none">
                 {questions.length > 0
-                    ? questions.map((question) => {
+                    ? questions.filter(Boolean).map((question) => {
                           const latestReply = question.replies[question.replies.length - 1]
 
                           return (
@@ -135,20 +135,20 @@ export const QuestionsTable = ({
                           )
                       })
                     : new Array(10).fill(0).map((_, i) => (
-                          <tr key={i} className="">
-                              <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 space-y-2">
+                          <li key={i} className="">
+                              <div className="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 space-y-2">
                                   <div className="w-96 w-3/4 h-4 bg-gray-accent-light dark:bg-gray-accent-dark rounded-sm animate-pulse"></div>
                                   <div className="w-60 w-3/4 h-4 bg-gray-accent-light dark:bg-gray-accent-dark rounded-sm animate-pulse"></div>
                                   <div className="w-36 w-3/4 h-4 bg-gray-accent-light dark:bg-gray-accent-dark rounded-sm animate-pulse"></div>
-                              </td>
+                              </div>
 
-                              <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 font-semibold animate-pulse">
+                              <div className="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 font-semibold animate-pulse">
                                   <div className="w-3/4 h-4 bg-gray-accent-light dark:bg-gray-accent-dark rounded-sm animate-pulse"></div>
-                              </td>
-                              <td className="whitespace-nowrap p-4 text-sm text-gray-500 text-gray font-semibold animate-pulse">
+                              </div>
+                              <div className="whitespace-nowrap p-4 text-sm text-gray-500 text-gray font-semibold animate-pulse">
                                   <div className="w-3/4 h-4 bg-gray-accent-light dark:bg-gray-accent-dark rounded-sm animate-pulse"></div>
-                              </td>
-                          </tr>
+                              </div>
+                          </li>
                       ))}
             </li>
 

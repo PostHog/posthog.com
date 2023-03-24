@@ -2,7 +2,7 @@ import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { CardContainer, IRoadmap } from 'components/Roadmap'
 import { InProgress } from 'components/Roadmap/InProgress'
-import { OrgProvider, UserProvider } from 'squeak-react'
+import { OrgProvider } from 'components/Squeak'
 import Link from 'components/Link'
 
 export default function TeamRoadmap({ team }: { team?: string }) {
@@ -18,26 +18,24 @@ export default function TeamRoadmap({ team }: { team?: string }) {
                 apiHost: process.env.GATSBY_SQUEAK_API_HOST as string,
             }}
         >
-            <UserProvider>
-                {roadmap?.length <= 0 ? (
-                    <p className="!m-0 py-4 px-6 border border-dashed border-gray-accent-light dark:border-gray-accent-dark rounded-md">
-                        Check out the <Link to="/roadmap">company roadmap</Link> to see what we're working on next!
-                    </p>
-                ) : (
-                    <CardContainer>
-                        {roadmap?.map((node: IRoadmap) => {
-                            return (
-                                <InProgress
-                                    more
-                                    className="bg-opacity-0 shadow-none border border-dashed border-gray-accent-light dark:border-gray-accent-dark rounded-md !border-t !mb-4"
-                                    key={node.title}
-                                    {...node}
-                                />
-                            )
-                        })}
-                    </CardContainer>
-                )}
-            </UserProvider>
+            {roadmap?.length <= 0 ? (
+                <p className="!m-0 py-4 px-6 border border-dashed border-gray-accent-light dark:border-gray-accent-dark rounded-md">
+                    Check out the <Link to="/roadmap">company roadmap</Link> to see what we're working on next!
+                </p>
+            ) : (
+                <CardContainer>
+                    {roadmap?.map((node: IRoadmap) => {
+                        return (
+                            <InProgress
+                                more
+                                className="bg-opacity-0 shadow-none border border-dashed border-gray-accent-light dark:border-gray-accent-dark rounded-md !border-t !mb-4"
+                                key={node.title}
+                                {...node}
+                            />
+                        )
+                    })}
+                </CardContainer>
+            )}
         </OrgProvider>
     )
 }

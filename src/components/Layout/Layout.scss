@@ -440,6 +440,9 @@ ul li {
 blockquote *:last-child {
     margin-bottom: 0;
 }
+.article-content blockquote *:last-child {
+    margin-bottom: 0;
+}
 p *:last-child {
     margin-bottom: 0;
 }

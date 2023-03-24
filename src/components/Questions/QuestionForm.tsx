@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import { Close } from 'components/Icons/Icons'
 
-import { Form } from 'squeak-react'
+import { Form } from 'components/Squeak'
 
 type QuestionFormProps = {
     onSubmit: () => void

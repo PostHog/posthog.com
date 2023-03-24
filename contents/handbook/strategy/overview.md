@@ -24,7 +24,7 @@ _Provide every tool needed for evaluating feature success._ The best use of an e
 
 _Get in first._ By already being used by our customers, we’re the default for each additional tool they add. It’s the technical co-founder and early engineers building the MVP and integrating the first product tools, not PMs. By focusing on engineers we can be their preferred choice and get in first. Additionally, we can ladder our tools - for example, session recording is used much earlier in the life cycle of the product than others like the CDPs helping us get in earlier than competing products.
 
-_Be the pipeline for product and customer data._ Traditionally, as companies scale their data warehouse becomes the source of truth and non-warehouse native tools (like product analytics) become less relevant. By being their core pipeline from connecting their data to their warehouses we can remain sticky for the life of our customers. And by providing this infra, we ensure the data we have remains comprehensive.
+_Be the source of truth for customer and product data._ Traditionally, as companies scale their data warehouse becomes the source of truth and non-warehouse native tools (like product analytics) become less relevant as people lose trust in the data in them. However, by providing the data and data-intense tools in one place, we can enhance the power of our products (like product analytics), provide increased trust, _and_ enable companies to build on top of the warehouse itself as they see fit, all _without_ them having to setup a complex stack.
 
 ## 2026 vision
 
@@ -36,7 +36,7 @@ In 2026: _The leading product teams use PostHog to build the best products._
 
 We are the first product tool that technical founders integrate into their product. We scale with them from their first user; to their first dollar; to 1000 person engineering orgs; IPO; and beyond. The best product people don't want to join a company that's not using PostHog.
 
-We become the customer's data platform for customer and product data. We enable other users throughout the org to use customer and product data initially by building tools for the data engineers. Overall, we replace the data warehouse and CDP.
+We become the customer's data warehouse and pipelines. We enable other users throughout the org to use customer and product data with our applications that come out of the box.
 
 We could go public with $100M ARR from the following:
 
@@ -54,16 +54,19 @@ We did this by first focusing on high-growth self-serve startups to nail (1) and
   * A slick experience
   * More powerful querying than our competitors can offer (for example, SQL access) that answers the long tail of questions
   * PostHog 3000 UX = a design uplift including dark mode to encourage more word of mouth
-* Launching our CDP solution as a full product
-  * We already are this for lots of users, and we’ve even had ~45 community-built data connectors or transformations
-  * However, our CDP lacks integrations, reliability and has a low-quality UX - so we will work on these next quarter
+* Launch product analytics, session recordings, feature flags, experiments, and the CDP each as full standalone products
+
+  * Enables us to sell each product individually at the best rate in the market then expand to generate a higher order value overall. This means no one can outcompete.
+  * Individual product pricing helps us understand where to double down and which feedback to prioritize.
+  * Builds trust in the individual products as being 1st class.
+  * The product should have optional deep integrations with the other tools to promote cross-activation and push the capabilities past competing standalone products.
 * Become known as the first tool that engineers add to their product
   * Work on top-of-funnel growth in high potential startups (whereas last year we primarily focused on monetization of high growth startups)
   * Create a more precise approach to this (growth model / CS focus / marketing focus)
 
-### This quarter - OKRs
+### This quarter - quarterly goals
 
-We set [quarterly OKRs](/handbook/strategy/objectives) to keep us on track.
+We set small team [quarterly goals](/handbook/strategy/objectives) to keep us on track.
 
 ## Target customers for 2023
 
