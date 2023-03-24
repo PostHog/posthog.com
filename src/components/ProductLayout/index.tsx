@@ -42,14 +42,15 @@ const nav = [
     },
 ]
 
-const getTailwindGridCol = (length: number) => `grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-${length}`
+const getTailwindGridCol = (length: number) =>
+    `grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-${length > 6 ? length / 2 : length}`
 
 export const FeatureGrid = ({ features, className = '' }: { features: IFeature[]; className?: string }) => {
     const length = features?.length ?? 1
     return (
-        <SectionWrapper className="max-w-full border-y border-dashed border-gray-accent-light">
+        <SectionWrapper className="max-w-full">
             <ul
-                className={`grid list-none m-0 max-w-screen-2xl mx-auto border-l border-gray-accent-light border-dashed  ${getTailwindGridCol(
+                className={`grid list-none m-0 max-w-screen-2xl mx-auto border-l border-gray-accent-light border-dashed p-0 border-t ${getTailwindGridCol(
                     length
                 )} ${className}`}
             >
@@ -119,11 +120,12 @@ interface IFeature {
     title: string
     description: string
     icon?: React.ReactNode
+    className?: string
 }
 
-export const Feature = ({ title, description, icon }: IFeature) => {
+export const Feature = ({ title, description, className = '', icon }: IFeature) => {
     return (
-        <li className="p-6 pb-8 border-r border-gray-accent-light border-dashed">
+        <li className={`p-6 pb-8 border-r border-b border-gray-accent-light border-dashed ${className}`}>
             <BusinessModel className="w-5 h-5 mb-2" />
             <FeatureTitle>{title}</FeatureTitle>
             <FeatureDescription>{description}</FeatureDescription>
