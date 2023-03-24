@@ -1,8 +1,8 @@
 import Link from 'components/Link'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { SessionRecording, FeatureFlags, AbTesting } from 'components/ProductIcons'
+import { Analytics, SessionRecording, FeatureFlags, AbTesting } from 'components/ProductIcons'
+import { Platform } from 'components/NotProductIcons'
 import Layout from 'components/Layout'
-import { BusinessModel } from 'components/NotProductIcons'
 import { GatsbyImage, getImage, ImageDataLike, StaticImage } from 'gatsby-plugin-image'
 import { Post } from '../Blog'
 import TeamRoadmap from 'components/TeamRoadmap'
@@ -23,7 +23,7 @@ const nav = [
     {
         label: 'Product analytics',
         url: '/product-analytics',
-        icon: <SessionRecording className="w-5" />,
+        icon: <Analytics className="w-5" />,
     },
     {
         label: 'Session replay',
@@ -41,9 +41,9 @@ const nav = [
         icon: <AbTesting className="w-5" />,
     },
     {
-        label: 'CDP',
+        label: 'Product OS',
         url: '/product-os',
-        icon: <SessionRecording className="w-5" />,
+        icon: <Platform className="w-5" />,
     },
 ]
 
@@ -88,7 +88,7 @@ export const PairGrid = ({ features, className = '' }: IPairGridProps) => {
     return (
         <SectionWrapper className="max-w-full">
             <ul
-                className={`md:grid list-none m-0 max-w-screen-4xl mx-auto p-0 divide-y md:divide-x md:divide-y-0 divide-dashed divide-gray-accent-light ${getTailwindGridCol(
+                className={`md:grid list-none m-0 max-w-screen-4xl mx-auto p-0  ${getTailwindGridCol(
                     length
                 )} ${className}`}
             >
@@ -161,7 +161,7 @@ export const Feature = ({ title, description, className = '', icon }: IFeature) 
     const Icon = ProductIcons[icon] || NotProductIcons[icon]
     return (
         <li className={`p-6 pb-8  ${className}`}>
-            {Icon && <Icon className="w-10 h-10 mb-2" />}
+            {Icon && <Icon className="w-10 h-10 mb-4 opacity-50" />}
             <FeatureTitle>{title}</FeatureTitle>
             <FeatureDescription>{description}</FeatureDescription>
         </li>
@@ -178,7 +178,7 @@ interface IPairItem {
 export const PairItem = ({ title, description, className = '', icon }: IPairItem) => {
     const Icon = ProductIcons[icon] || NotProductIcons[icon]
     return (
-        <li className={`p-6 pb-8 ${className}`}>
+        <li className={`p-6 pb-8 bg-white rounded-md mx-4 shadow ${className}`}>
             {Icon && <Icon className="w-10 h-10 mb-2" />}
             <FeatureTitle>{title}</FeatureTitle>
             <FeatureDescription>{description}</FeatureDescription>
@@ -275,8 +275,10 @@ export const PairsWith = ({ products }: { products: IFeature[] }) => {
     return (
         <div id="pairs-with">
             <SectionWrapper className="max-w-full">
-                <h2 className="text-center m-0">Pairs with...</h2>
-                <p className="text-center m-0">PostHog products are natively designed to be interoperable.</p>
+                <h2 className="text-center text-4xl mb-2">Pairs with...</h2>
+                <p className="text-center text-lg font-semibold text-black/70">
+                    PostHog products are natively designed to be interoperable.
+                </p>
                 <div className="mt-12">
                     <PairGrid features={products} />
                 </div>
@@ -781,9 +783,9 @@ const Nav = () => {
     }, [pathname])
 
     return (
-        <nav className="relative z-10 overflow-auto">
-            <div className="relative max-w-screen-2xl mx-auto">
-                <ul className="list-none m-0 flex items-center space-x-4 justify-center whitespace-nowrap">
+        <nav className="relative z-10 -mx-5 overflow-x-auto">
+            <div className="relative flex max-w-screen-2xl mx-auto md:border-b md:border-gray-accent-light md:border-dashed px-4 pb-2.5 md:pb-0">
+                <ul className="list-none flex p-0 m-auto space-x-1 md:space-x-4  whitespace-nowrap">
                     {nav.map((navItem) => {
                         const { label, url, icon } = navItem
                         const active = pathname === url
@@ -792,16 +794,19 @@ const Nav = () => {
                                 ref={active ? activeItem : null}
                                 id={`product-nav-${slugify(url, { lower: true })}`}
                                 key={label}
+                                className="first:ml-auto last:mr-auto"
                             >
                                 <Link
-                                    className={`flex space-x-2 items-center  ${
+                                    className={`flex space-x-2 items-center ${
                                         active
-                                            ? '!text-red font-bold'
+                                            ? '!text-red !font-bold'
                                             : '!text-primary/75 hover:border-gray-accent-light hover:bg-gray-accent-light'
-                                    } px-3 py-1.5 mb-1.5 text-sm font-semibold whitespace-nowrap rounded relative hover:scale-[1.01] active:scale-[.99] group`}
+                                    } px-3 py-1.5 mb-1.5 text-sm [font-variation-settings:_'wght'_700] whitespace-nowrap rounded relative hover:scale-[1.01] active:scale-[.99] tracking-[-.1px] group`}
                                     to={url}
                                 >
-                                    <span>{icon}</span>
+                                    <span className={`text-black ${active ? 'opacity-100' : 'opacity-70'} `}>
+                                        {icon}
+                                    </span>
                                     <span>{label}</span>
                                 </Link>
                             </li>
@@ -810,10 +815,9 @@ const Nav = () => {
                 </ul>
                 <div
                     style={activeStyles}
-                    className="h-[2px] bg-red rounded-md absolute bottom-0 z-10 transition-all duration-500"
+                    className="h-[3px] md:h-[2px] bg-red rounded-md absolute bottom-3 md:bottom-[-1px] z-10 transition-all duration-500"
                 />
             </div>
-            <hr className="border-b-0 border-gray-accent-light border-dashed bg-transparent m-0 p-0 relative top-[-2px] w-full" />
         </nav>
     )
 }
@@ -842,10 +846,13 @@ export const Hero = ({
     const image = featuredImage && getImage(featuredImage)
     return (
         <>
-            <h1 id="overview" className="text-center text-5xl mb-0 mt-14">
+            <h1 id="overview" className="text-center text-5xl lg:text-6xl 2xl:text-7xl mb-0 mt-14">
                 {title}? PostHog does that.
             </h1>
-            <div className="text-center my-4" dangerouslySetInnerHTML={{ __html: subtitle }} />
+            <p
+                className="text-center text-lg font-semibold text-black/70 mt-4"
+                dangerouslySetInnerHTML={{ __html: subtitle }}
+            />
             {pricingCTA && mainCTA && (
                 <div className="flex space-x-4 items-center justify-center">
                     <CallToAction to={mainCTA.url}>{mainCTA.title}</CallToAction>
