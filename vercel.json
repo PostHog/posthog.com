@@ -228,6 +228,7 @@
         { "source": "/request_demo", "destination": "/schedule-demo" },
         { "source": "/handbook/strategy/investor-updates", "destination": "/handbook/strategy/investors" },
         { "source": "/handbook/engineering/feature-parity", "destination": "/handbook/strategy/overview" },
+        { "source": "/handbook/strategy/strategy", "destination": "/handbook/strategy/overview" },
         { "source": "/docs/contribute/updating-documentation", "destination": "/docs/contribute" },
         { "source": "/handbook/growth/marketing/messaging_framework", "destination": "/handbook/growth/marketing" },
         {
