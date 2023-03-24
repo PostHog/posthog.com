@@ -6,23 +6,23 @@ width: lg
 noindex: true
 documentation: /manual/funnels
 images:
-    - './images/professor-hog.png'
+    - './images/startup-hogs.png'
 ---
 
 import { StaticImage } from 'gatsby-plugin-image'
 import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 import CommunityCTA from 'components/CommunityCTA'
-import { StaticImage } from 'gatsby-plugin-image'
 
 <Hero
     title="PostHog Academy"
     subtitle="Curated lesson tracks from our engineers and users, to help you get even more from PostHog"
 />
 
-Some basic content goes here to introduce it all. Some basic content goes here to introduce it all. Some basic content goes here to introduce it all. Some basic content goes here to introduce it all. Some basic content goes here to introduce it all. Some basic content goes here to introduce it all. Some basic content goes here to introduce it all. Some basic content goes here to introduce it all. Some basic content goes here to introduce it all. 
+PostHog Academy helps Engineering and Product teams understand how to make the most of PostHog, and build better products. It's a curated track of tutorials and other lessons which cover common use-cases for particular roles, as well as general advice for all users - and it's constantly expanding!
 
 <p class="text-center p-4">
-  Got a question about PostHog? <a href="/questions">Ask our engineers!</a>
+<CallToAction href="/tutorials">Browse all lessons</CallToAction> 
+<CallToAction href="/questions" type="outline">Ask a question</CallToAction>
 </p>
 
 ### PostHog 101
@@ -52,10 +52,6 @@ Some basic content goes here to introduce it all. Some basic content goes here t
 - [How to get feedback and book user interviews with site apps](/tutorials/feedback-interviews-site-apps)
 - [How to track revenue data in PostHog](/tutorials/stripe-payment-data)
 - [How to use session recordings to understand user behaviour](/tutorials/explore-insights-session-recordings)
-
-<div className="lg:ml-2 lg:mt-0 mt-8 -mr-5 max-w-lg lg:max-w-none">
-  <StaticImage src="./images/busy-hog.png" />
-</div>
 
 <CommunityCTA />
 
