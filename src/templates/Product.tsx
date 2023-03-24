@@ -120,6 +120,8 @@ export const query = graphql`
                 productPairsWith {
                     title
                     description
+                    icon
+                    url
                 }
                 productMainCTA {
                     title
