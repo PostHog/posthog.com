@@ -15,6 +15,7 @@ import ProductLayout, {
     Roadmap,
     Sections,
     SectionWrapper,
+    StickyNav,
     Testimonial,
 } from 'components/ProductLayout'
 import GithubSlugger from 'github-slugger'
@@ -31,6 +32,7 @@ const menuItemIDs = {
     'Pairs with': 'pairs-with',
     'PostHog vs...': 'comparison',
     Roadmap: 'roadmap',
+    Documentation: 'documentation',
 }
 
 export default function Product({ data, location }) {
@@ -89,9 +91,6 @@ export default function Product({ data, location }) {
                 title={title}
                 subtitle={subtitle}
                 featuredImage={featuredImage}
-                menuItems={productMenuItems?.map((title) => {
-                    return { title, id: menuItemIDs[title] }
-                })}
             />
         ),
         MainFeatures: (props) => <MainFeatures {...props} features={productFeatures} />,
@@ -113,9 +112,11 @@ export default function Product({ data, location }) {
         ),
         PairsWith: (props) => <PairsWith {...props} products={productPairsWith} />,
         Documentation: (props) => (
-            <SectionWrapper {...props}>
-                <Documentation />
-            </SectionWrapper>
+            <div id="documentation">
+                <SectionWrapper {...props}>
+                    <Documentation />
+                </SectionWrapper>
+            </div>
         ),
     }
 

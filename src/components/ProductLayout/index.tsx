@@ -711,7 +711,7 @@ interface IMenuItem {
 export const StickyNav = ({ menuItems }: { menuItems: IMenuItem[] }) => {
     const [activeItem, setActiveItem] = useState(menuItems[0].title)
     return (
-        <div className="z-[9999999] sticky top-0 text-center mt-12 pt-2">
+        <div className="z-[9999999] sticky bottom-0 text-center mt-12 pb-2">
             <Menu>
                 {({ open }) => (
                     <>
@@ -726,7 +726,7 @@ export const StickyNav = ({ menuItems }: { menuItems: IMenuItem[] }) => {
                         <Menu.Items
                             static
                             as="ul"
-                            className={`list-none m-0 bg-white p-4 rounded-md absolute left-1/2 -translate-x-1/2 shadow-md mt-2 ${
+                            className={`list-none m-0 bg-white p-4 rounded-md absolute -top-2 left-1/2 -translate-x-1/2 -translate-y-full shadow-md ${
                                 open ? 'visible' : 'invisible'
                             }`}
                         >
@@ -833,7 +833,6 @@ export const Hero = ({
     featuredImage,
     mainCTA,
     pricingCTA,
-    menuItems,
 }: {
     title: string
     subtitle: string
@@ -846,7 +845,6 @@ export const Hero = ({
         title: string
         url: string
     }
-    menuItems: IMenuItem[]
 }) => {
     const image = featuredImage && getImage(featuredImage)
     return (
@@ -866,7 +864,6 @@ export const Hero = ({
                     </CallToAction>
                 </div>
             )}
-            <StickyNav menuItems={menuItems} />
             {image && (
                 <div className="max-w-screen-xl mx-auto mt-8 mb-14 text-center">
                     <GatsbyImage alt={title} image={image} className="w-1/2" />
