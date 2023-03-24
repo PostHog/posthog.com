@@ -172,16 +172,22 @@ interface IPairItem {
     title: string
     description: string
     icon?: React.ReactNode
+    url?: string
     className?: string
 }
 
-export const PairItem = ({ title, description, className = '', icon }: IPairItem) => {
+export const PairItem = ({ title, description, className = '', icon, url }: IPairItem) => {
     const Icon = ProductIcons[icon] || NotProductIcons[icon]
     return (
-        <li className={`p-6 pb-8 bg-white rounded-md mx-4 shadow ${className}`}>
-            {Icon && <Icon className="w-10 h-10 mb-2" />}
-            <FeatureTitle>{title}</FeatureTitle>
-            <FeatureDescription>{description}</FeatureDescription>
+        <li className={` ${className}`}>
+            <Link
+                to={url}
+                className="block h-full text-primary hover:text-primary p-6 pb-8 bg-white rounded-md mx-4 shadow relative hover:scale-[1.02] hover:top-[-.25px] active:top-[.5px] active:scale-[1]"
+            >
+                {Icon && <Icon className="w-8 h-8 mb-4 opacity-75" />}
+                <FeatureTitle className="text-red">{title}</FeatureTitle>
+                <FeatureDescription className="text-primary/75">{description}</FeatureDescription>
+            </Link>
         </li>
     )
 }
@@ -276,12 +282,11 @@ export const PairsWith = ({ products }: { products: IFeature[] }) => {
         <div id="pairs-with">
             <SectionWrapper className="max-w-full">
                 <h2 className="text-center text-4xl mb-2">Pairs with...</h2>
-                <p className="text-center text-lg font-semibold text-black/70">
-                    PostHog products are natively designed to be interoperable.
+                <p className="text-center text-lg font-semibold text-black/70 mb-0">
+                    PostHog products are natively designed to be interoperable using{' '}
+                    <Link to="/product-os">Product OS</Link>.
                 </p>
-                <div className="mt-12">
-                    <PairGrid features={products} />
-                </div>
+                <PairGrid features={products} />
             </SectionWrapper>
         </div>
     )
