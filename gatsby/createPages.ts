@@ -512,7 +512,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     context: {
                         id: node.id,
                         blogTags: node?.frontmatter?.productBlogTags,
-                        documentation: node?.frontmatter?.productDocumentation,
+                        documentation: node?.frontmatter?.productDocumentation || '',
                     },
                 })
                 res()
