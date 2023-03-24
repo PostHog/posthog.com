@@ -15,7 +15,7 @@ tags:
 
 As you publish more content, inevitably you need a way to manage it. A content management system, or CMS, is the go-to software solution for this. Examples include WordPress, Drupal, Wix, Ghost, and many more. 
 
-But there's another left-field option: GitHub. In this post, I'll explain the three reasons we use GitHub as a CMS (and love doing so). 
+But there's another left-field option: GitHub. In this post, I'll explain the three reasons we use GitHub as a CMS (and why we love doing so). 
 
 ## 1. GitHub enables transparency and open contributions
 
