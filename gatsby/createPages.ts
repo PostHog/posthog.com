@@ -18,6 +18,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const AppTemplate = path.resolve(`src/templates/App.js`)
     const HostHogTemplate = path.resolve(`src/templates/HostHog.js`)
     const Job = path.resolve(`src/templates/Job.tsx`)
+    const ProductTemplate = path.resolve(`src/templates/Product.tsx`)
 
     // Tutorials
     const TutorialsTemplate = path.resolve(`src/templates/tutorials/index.tsx`)
@@ -127,6 +128,17 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     headings {
                         depth
                         value
+                    }
+                    fields {
+                        slug
+                    }
+                }
+            }
+            product: allMdx(filter: { frontmatter: { template: { eq: "product" } } }) {
+                nodes {
+                    id
+                    frontmatter {
+                        productBlogTags
                     }
                     fields {
                         slug
@@ -488,4 +500,21 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             })
         }
     }
+
+    await Promise.all(
+        result.data.product.nodes.map((node) => {
+            return new Promise<void>((res) => {
+                const { slug } = node.fields
+                createPage({
+                    path: slug,
+                    component: ProductTemplate,
+                    context: {
+                        id: node.id,
+                        blogTags: node?.frontmatter?.productBlogTags,
+                    },
+                })
+                res()
+            })
+        })
+    )
 }

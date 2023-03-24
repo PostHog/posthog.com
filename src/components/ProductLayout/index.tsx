@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { SessionRecording, FeatureFlags, AbTesting } from 'components/ProductIcons'
 import Layout from 'components/Layout'
 import { BusinessModel } from 'components/NotProductIcons'
-import { getImage, StaticImage } from 'gatsby-plugin-image'
+import { GatsbyImage, getImage, ImageDataLike, StaticImage } from 'gatsby-plugin-image'
 import { Post } from '../Blog'
 import TeamRoadmap from 'components/TeamRoadmap'
 import ReactCountryFlag from 'react-country-flag'
@@ -44,16 +44,22 @@ const nav = [
 
 const getTailwindGridCol = (length: number) => `grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-${length}`
 
-export const FeatureGrid = ({ children, className = '' }: { children: React.ReactNode[]; className?: string }) => {
-    const length = children?.length ?? 1
+export const FeatureGrid = ({ features, className = '' }: { features: IFeature[]; className?: string }) => {
+    console.log(features)
+    const length = features?.length ?? 1
     return (
-        <ul
-            className={`grid list-none m-0 max-w-screen-2xl mx-auto border-l border-gray-accent-light border-dashed  ${getTailwindGridCol(
-                length
-            )} ${className}`}
-        >
-            {children}
-        </ul>
+        <SectionWrapper className="max-w-screen-2xl" border borderPadding={false}>
+            <ul
+                className={`grid list-none m-0 max-w-screen-2xl mx-auto border-l border-gray-accent-light border-dashed  ${getTailwindGridCol(
+                    length
+                )} ${className}`}
+            >
+                {features.map((feature) => {
+                    const { title, description } = feature
+                    return <Feature key={title} title={title} description={description} />
+                })}
+            </ul>
+        </SectionWrapper>
     )
 }
 
@@ -64,6 +70,44 @@ export const FeatureTitle = ({ children, className = '' }: { children: React.Rea
 export const FeatureDescription = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
     <p className={`m-0 text-sm ${className}`}>{children}</p>
 )
+
+interface ISection {
+    title?: string
+    subtitle?: string
+    features?: IFeature[]
+    image?: ImageDataLike
+    content?: string
+}
+
+export const Section = ({ title, subtitle, features, image, content }: ISection) => {
+    const gatsbImage = image && getImage(image)
+    return (
+        <div>
+            {(title || subtitle) && <SectionHeading title={title} subtitle={subtitle} />}
+            {content && <div dangerouslySetInnerHTML={{ __html: content }} />}
+            {features && features?.length > 0 && <FeatureList features={features} />}
+            {gatsbImage && <GatsbyImage alt={title || ''} image={gatsbImage} />}
+        </div>
+    )
+}
+
+export const Sections = ({ sections }: { sections: ISection[][] }) => {
+    return sections.map((section, index) => {
+        return (
+            <SectionWrapper key={index}>
+                {section.length > 1 ? (
+                    <TwoCol>
+                        {section.map((section, index) => (
+                            <Section key={index} {...section} />
+                        ))}
+                    </TwoCol>
+                ) : (
+                    <Section {...section[0]} />
+                )}
+            </SectionWrapper>
+        )
+    })
+}
 
 interface IFeature {
     title: string
@@ -81,7 +125,7 @@ export const Feature = ({ title, description, icon }: IFeature) => {
     )
 }
 
-export const FeatureList = ({ features }: { features: { title: string; description: string }[] }) => {
+export const FeatureList = ({ features }: { features: IFeature[] }) => {
     return (
         <ul className="list-none m-0 p-0 space-y-4">
             {features.map(({ title, description }) => {
@@ -96,17 +140,16 @@ export const FeatureList = ({ features }: { features: { title: string; descripti
     )
 }
 
-export const SectionHeading = ({ title, subtitle }: { title: string; subtitle?: string | React.ReactNode }) => {
+export const SectionHeading = ({ title, subtitle }: { title?: string; subtitle?: string | React.ReactNode }) => {
     return (
         <div className="mb-6">
-            <h2 className="text-xl m-0">{title}</h2>
+            {title && <h2 className="text-xl m-0">{title}</h2>}
             {subtitle && typeof subtitle === 'string' ? <p className="text-base m-0">{subtitle}</p> : subtitle}
         </div>
     )
 }
 
 export interface ITestimonial {
-    featuresUsed: string[]
     author: {
         name: string
         role: string
@@ -119,21 +162,27 @@ export interface ITestimonial {
     quote: string
 }
 
-export const Testimonial = ({ featuresUsed, author, quote }: ITestimonial) => {
+export const Testimonial = ({ author, image, quote }: ITestimonial & { image: ImageDataLike }) => {
+    const gatsbyImage = image && getImage(image)
     return (
-        <div>
-            <img className="text-black max-w-[200px]" src={author.company.image} />
-            <p className="my-6">{quote}</p>
-            <div className="flex space-x-4 items-center">
-                <img className="rounded-full max-w-[50px]" src={author.image} />
+        <SectionWrapper>
+            <TwoCol className="items-end">
                 <div>
-                    <p className="m-0 font-bold">{author.name}</p>
-                    <p className="m-0 opacity-70">
-                        {author.role}, {author.company.name}
-                    </p>
+                    <img className="text-black max-w-[200px]" src={author.company.image} />
+                    <p className="my-6">{quote}</p>
+                    <div className="flex space-x-4 items-center">
+                        <img className="rounded-full max-w-[50px]" src={author.image} />
+                        <div>
+                            <p className="m-0 font-bold">{author.name}</p>
+                            <p className="m-0 opacity-70">
+                                {author.role}, {author.company.name}
+                            </p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+                <div>{gatsbyImage && <GatsbyImage alt="" image={gatsbyImage} />}</div>
+            </TwoCol>
+        </SectionWrapper>
     )
 }
 
@@ -369,7 +418,7 @@ export const Footer = ({ title }) => {
     )
 }
 
-export const Section = ({
+export const SectionWrapper = ({
     children,
     className = 'max-w-5xl',
     border = false,
@@ -391,7 +440,7 @@ export const Section = ({
     )
 }
 
-export const PostHogVS = ({ description, children }: { description: string; children: React.ReactNode }) => {
+export const Comparison = ({ description, children }: { description: string; children: React.ReactNode }) => {
     return (
         <div className="max-w-5xl mx-auto">
             <div className="flex justify-between items-end">
@@ -410,7 +459,7 @@ export const PostHogVS = ({ description, children }: { description: string; chil
 
 export const BlogPosts = ({ posts, title }) => {
     return (
-        <div>
+        <SectionWrapper>
             <h3>{title}</h3>
             <ul className="list-none m-0 p-0 grid grid-cols-2 gap-4">
                 {posts.map((post) => {
@@ -440,7 +489,7 @@ export const BlogPosts = ({ posts, title }) => {
                     )
                 })}
             </ul>
-        </div>
+        </SectionWrapper>
     )
 }
 
@@ -497,7 +546,7 @@ export const Roadmap = ({ subtitle, team }) => {
         )
     const teamURL = `/handbook/small-teams/${team.toLowerCase()}`
     return (
-        <div>
+        <SectionWrapper>
             <h3 className="m-0">Roadmap</h3>
             <p className="m-0">{subtitle}</p>
             <div className="mt-8 flex items-start space-x-8">
@@ -550,20 +599,25 @@ export const Roadmap = ({ subtitle, team }) => {
                     </CallToAction>
                 </div>
             </div>
-        </div>
+        </SectionWrapper>
     )
 }
 
 export const CTA = ({ title, subtitle, image }) => {
+    const gatsbyImage = image && getImage(image)
     return (
-        <div className="flex space-x-4 justify-between p-12 bg-gray-accent-light rounded-lg items-center">
-            <div>
-                <h2 className="m-0">{title}</h2>
-                <p className="m-0 mb-6">{subtitle}</p>
-                <CallToAction to="https://app.posthog.com/signup">Get started - free</CallToAction>
+        <SectionWrapper>
+            <div className="flex space-x-4 justify-between p-12 bg-gray-accent-light rounded-lg items-center">
+                <div>
+                    <h2 className="m-0">{title}</h2>
+                    <p className="m-0 mb-6">{subtitle}</p>
+                    <CallToAction to="https://app.posthog.com/signup">Get started - free</CallToAction>
+                </div>
+                <div className="max-w-[400px]">
+                    <GatsbyImage alt={title} image={gatsbyImage} />
+                </div>
             </div>
-            <div className="max-w-[400px]">{image}</div>
-        </div>
+        </SectionWrapper>
     )
 }
 
@@ -574,8 +628,6 @@ interface IFeature {
 
 interface IProps {
     title: string
-    description: string | React.ReactNode
-    image: React.ReactNode
     children: React.ReactNode
     showNav?: boolean
     showFooter?: boolean
@@ -590,7 +642,7 @@ const Nav = () => {
                     const { label, url, icon } = navItem
                     console.log(url, pathname)
                     return (
-                        <ke key={label}>
+                        <li key={label}>
                             <Link
                                 className={`py-4 px-2 flex space-x-2 items-center !text-black ${
                                     pathname === url ? 'border-b border-red' : ''
@@ -600,7 +652,7 @@ const Nav = () => {
                                 <span>{icon}</span>
                                 <span>{label}</span>
                             </Link>
-                        </ke>
+                        </li>
                     )
                 })}
             </ul>
@@ -608,22 +660,33 @@ const Nav = () => {
     )
 }
 
-export default function ProductLayout({
+export const Hero = ({
     title,
-    description,
-    image,
-    children,
-    showNav = true,
-    showFooter = true,
-}: IProps): JSX.Element {
+    subtitle,
+    featuredImage,
+}: {
+    title: string
+    subtitle: string
+    featuredImage: ImageDataLike
+}) => {
+    const image = featuredImage && getImage(featuredImage)
+    return (
+        <section>
+            <h1 className="text-center text-5xl mb-0 mt-14">{title}</h1>
+            <div className="text-center mt-4" dangerouslySetInnerHTML={{ __html: subtitle }} />
+            {image && (
+                <div className="max-w-screen-xl mx-auto my-14">
+                    <GatsbyImage alt={title} image={image} />
+                </div>
+            )}
+        </section>
+    )
+}
+
+export default function ProductLayout({ title, children, showNav = true, showFooter = true }: IProps): JSX.Element {
     return (
         <div className="px-5 py-12">
             {showNav && <Nav />}
-            <section>
-                <h1 className="text-center text-5xl mb-0 mt-14">{title}? PostHog does that.</h1>
-                <div className="text-center mt-4">{description}</div>
-                <div className="max-w-screen-xl mx-auto my-14">{image}</div>
-            </section>
             <div>{children}</div>
             {showFooter && <Footer title={title} />}
         </div>

@@ -1,0 +1,107 @@
+---
+title: A/B testing
+subtitle: <p>A/B testing, multivariate testing, and statistical significance</p>
+featuredImage: ./images/apps/session-recording.png
+template: product
+productFeatures: [
+    {
+        title: 'Built on Feature Flags',
+        description:
+            'All the benefits of feature flags with added functionality around stat-sig experiments',
+    },
+    {
+        title: 'JSON payloads',
+        description: 'Modify website content per-variant without additional deployments',
+    },
+    {
+        title: 'Split testing',
+        description: 'Automatically split traffic between variants',
+    },
+    {
+        title: 'Multivariate testing',
+        description: 'Test up to 9 variants against a control',
+    },
+    {
+        title: 'Dynamic cohort support',
+        description: 'Add new users to an experiment automatically by setting a user property',
+    },
+]
+productSections: [
+  [
+    {
+      title: "Customizable goals",
+      subtitle: "Set the intended outcome that indicates a successful experiment",
+      features: [
+            {
+                title: 'Goal types',
+                description:
+                    'Choose your preferred outcome between a trend or conversion funnel',
+            },
+            {
+                title: 'Secondary metrics',
+                description:
+                    'Track multiple goals or check that your experiment doesn’t have unintended effects elsewhere',
+            },
+            {
+                title: 'Statistical significance',
+                description:
+                    'Set the minimum acceptable threshold required to declare a winning variant',
+            },
+        ]
+    },
+    {
+      image: ./images/apps/session-recording.png
+    }
+  ],
+  [
+    {
+      image: ./images/apps/session-recording.png
+    },
+    {
+      title: "Targeting & exclusion rules",
+      subtitle: "Run tests based on user location, user property, cohort, or group. You can also set exclusions to prevent groups of users from being shown an experiment.",
+     
+    },
+  ],
+  [
+    {
+      title: "Recommendations",
+      subtitle: "Based on your intended goal and level of statistical significance, PostHog can suggest an experiment’s duration, sample size, and confidence in a winning variant during a test.",
+    },
+    {
+      image: ./images/apps/session-recording.png
+    }
+  ],
+]
+productTestimonial: {
+    "author": {
+        "name": "Taric Santos de Andrade",
+        "image": "/images/customers/taric.jpg",
+        "role": "Product Manager",
+        "company": { "name": "Vendasta", "image": "/images/customers/vendasta.svg" }
+    },
+    "quote": "I'm always trying to find the next experiment to run with PostHog. Every day, I'm checking reports and trying to push the boundaries by testing new hypotheses.",
+    image: ./images/apps/session-recording.png
+}
+productBlogTags: Experimentation
+productTeam: Experimentation
+productCTA: {
+  title: Try PostHog,
+  subtitle: "First 1,000,000 events/mo are free.",
+  image: ./images/apps/session-recording.png
+}
+---
+
+<Hero />
+
+<FeatureGrid />
+
+<Testimonial />
+
+<Sections />
+
+<BlogPosts />
+
+<Roadmap />
+
+<CTA />

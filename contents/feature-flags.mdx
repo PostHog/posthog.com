@@ -1,0 +1,120 @@
+---
+title: Feature flags
+subtitle: <p>Safely roll out features to select users or cohorts</p>
+featuredImage: ./images/apps/session-recording.png
+template: product
+productFeatures: [
+    {
+        title: 'History & activity feed',
+        description:
+            'See who hit a feature flag, the flag’s value, and which page they were on',
+    },
+    {
+        title: 'Local evaluation',
+        description: 'Improves speed by caching a flag’s value on initial load',
+    },
+    {
+        title: 'Instant rollbacks',
+        description: 'Disable a feature without touching your codebase',
+    },
+    {
+        title: 'Bootstrappings',
+        description: 'Get flags and values to trigger changes immediately on page load',
+    },
+    {
+        title: 'Persist flags across authentication steps',
+        description: 'Make sure users have a consistent experience after login',
+    },
+    {
+        title: 'Flag administration',
+        description:
+            'See the history of a feature flag or control who can modify flags with user roles',
+    },
+    {
+        title: 'SDKs or API',
+        description:
+            'Copy code snippets for your library of choice, or implement yourself with the API',
+    },
+    {
+        title: 'Multi-environment support',
+        description:
+            'Test flags in local development or staging by using the same flag key across PostHog projects',
+    },
+]
+productSections: [
+  [
+    {
+      title: "Choose who gets access to features",
+      subtitle: "Customize your release strategy based on your goals with release conditions.",
+      features: [
+            {
+                title: 'By percentage of traffic',
+                description: 'Roll out a feature to a percentage of all visitors',
+            },
+            {
+                title: 'By user or group properties',
+                description:
+                    'Choose specific people, or allow access by user or group property (like organization or multi-seat account)',
+            },
+            {
+                title: 'By cohort',
+                description: 'Cohorts can dynamically update with user properties',
+            },
+        ]
+    },
+    {
+      image: ./images/apps/session-recording.png
+    }
+  ],
+  [
+    {
+      image: ./images/apps/session-recording.png
+    },
+    {
+      title: "Multivariate feature flags",
+      content: "<p>After a feature flag is installed, JSON payloads let you make changes to your product or website without subsequent deployments.</p><p>This includes text, visuals, or even entire blocks of code.</p>",
+     
+    },
+  ],
+  [
+    {
+      title: "Automated usage reports",
+      subtitle: "Insights are automatically created for each feature flag, including overall flag usage and usage by specific users",
+    },
+    {
+      image: ./images/apps/session-recording.png
+    }
+  ],
+]
+productTestimonial: {
+    "author": {
+        "name": "Francesco Agosti",
+        "role": "CTO & Co-founder",
+        "image": "/images/customers/francesco.jpg",
+        "company": { "name": "Phantom", "image": "/images/customers/phantom.svg" }
+    },
+    "quote": "Feature flags are really, really critical for us and you don’t see them as a feature in other analytics tools. They very valuable though, because you can often use feature flag data to make other product decisions.",
+    image: ./images/apps/session-recording.png
+}
+productBlogTags: Feature flags
+productTeam: Experimentation
+productCTA: {
+  title: Try PostHog,
+  subtitle: "First 1,000,000 events/mo are free.",
+  image: ./images/apps/session-recording.png
+}
+---
+
+<Hero />
+
+<FeatureGrid />
+
+<Testimonial />
+
+<Sections />
+
+<BlogPosts />
+
+<Roadmap />
+
+<CTA />
