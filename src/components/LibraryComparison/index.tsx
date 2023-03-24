@@ -31,7 +31,7 @@ export const LibraryComparison = () => {
         }
     } = useStaticQuery(graphql`
         {
-            sdks: allMdx(filter: { slug: { glob: "docs/sdks/*" } }) {
+            sdks: allMdx(filter: { slug: { glob: "docs/libraries/*" } }) {
                 nodes {
                     ...Library
                 }

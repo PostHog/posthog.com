@@ -1,13 +1,14 @@
 import { DarkModeToggle } from 'components/DarkModeToggle'
-import { Bookmark, InfoOutlined, RightArrow, TableOfContents } from 'components/Icons'
+import { Bookmark, InfoOutlined, Chevron, RightArrow, TableOfContents } from 'components/Icons'
 import { AnimatePresence, useDragControls, useMotionValue, useTransform, motion } from 'framer-motion'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { usePost } from './hooks'
 import { IMenu } from './types'
 import { useLocation } from '@reach/router'
 import { navigate } from 'gatsby'
 import { Crumbs } from './Breadcrumb'
 import InternalSidebarLink from 'components/Docs/InternalSidebarLink'
+import slugify from 'slugify'
 
 const menuButtonClasses = `bg-white flex space-x-2 items-center font-semibold active:top-[0.5px]
 active:scale-[.98] transition-transform text-black shadow-md`
@@ -38,21 +39,23 @@ interface IGetActiveMenu {
 
 const getActiveMenu = ({
     menu,
-    url = window?.location.pathname,
+    url,
     ...other
 }: {
     menu: IMenu[]
+    menuItem?: IMenu
     url?: string
     parent?: { menu: IMenu[]; name: string }
 }): IGetActiveMenu | undefined => {
     let parent = other.parent
     for (const menuItem of menu) {
-        if (menuItem.url === url) return { menu, parent }
+        if (url && !menuItem.children ? menuItem.url === url : menuItem === other.menuItem) return { menu, parent }
         if (menuItem.children) parent = { menu, name: menuItem.name }
         const activeMenu =
             menuItem?.children &&
             getActiveMenu({
                 menu: menuItem?.children,
+                menuItem: other.menuItem,
                 url,
                 parent,
             })
@@ -105,7 +108,7 @@ const MenuContainer = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed w-full h-full bg-white/70 dark:bg-black/70 top-0 left-0"
+            className="fixed w-full h-full bg-black/70 dark:bg-black/70 top-0 left-0"
         >
             <motion.div
                 onClick={(e) => e.stopPropagation()}
@@ -121,11 +124,11 @@ const MenuContainer = ({
                     dragControls={dragControls}
                     drag="y"
                     dragListener={false}
-                    className={`bg-white dark:bg-gray-accent-dark pb-4 pt-8 px-4 rounded-tr-md rounded-tl-md shadow-lg ${className}`}
+                    className={`bg-white dark:bg-gray-accent-dark pb-4 pt-2 px-6 rounded-tr-md rounded-tl-md shadow ${className}`}
                 >
                     <div
                         onPointerDown={startDrag}
-                        className="absolute left-0 top-0 w-full h-8 flex justify-center items-center space-x-1 group"
+                        className=" w-full h-8 mb-2 flex justify-center items-center space-x-1 group"
                     >
                         <div className="w-1 h-1 bg-black dark:bg-white rounded-full group-active:opacity-80 transition-all opacity-30" />
                         <div className="w-1 h-1 bg-black dark:bg-white rounded-full group-active:opacity-80 transition-all opacity-30" />
@@ -143,18 +146,40 @@ const MobileMenu = ({ setOpen }: { setOpen: (open: null | string) => void }) => 
     if (!postMenu) return null
     const { pathname } = useLocation()
     const [animationDirection, setAnimationDirection] = useState<'forward' | 'backward'>('forward')
-    const [menu, setMenu] = useState<IGetActiveMenu>(getActiveMenu({ menu: postMenu }) || { menu: postMenu })
-    const handleClick = ({ url, menu }: { url?: string; menu?: IMenu[] }) => {
-        if (menu) {
+    const previousMenu = useRef<IGetActiveMenu>()
+    const [menu, setMenu] = useState<IGetActiveMenu>(
+        getActiveMenu({ menu: postMenu, url: pathname }) || { menu: postMenu }
+    )
+    const handleClick = ({ url, ...other }: { url?: string; menu?: IMenu[] }) => {
+        if (other.menu) {
             const newMenu = getActiveMenu({
                 menu: postMenu,
-                url: menu.find((menuItem) => !!menuItem.url)?.url,
+                menuItem: other.menu[0],
             })
-            newMenu && setMenu(newMenu)
+            if (newMenu) {
+                previousMenu.current = menu
+                setMenu(newMenu)
+            }
         } else if (url) {
             navigate(url)
         }
     }
+
+    useEffect(() => {
+        const menuReversed = [...menu.menu].reverse()
+        for (const menuItem of menuReversed.slice(
+            menuReversed.findIndex(
+                (menuItem) =>
+                    (menuItem.children && menuItem.children === previousMenu.current?.menu) || menuItem.url === pathname
+            )
+        )) {
+            if (menuItem.url === undefined) {
+                const id = `mobile-nav-${slugify(menuItem.name, { lower: true })}`
+                document.getElementById(id)?.scrollIntoView()
+                break
+            }
+        }
+    }, [menu])
 
     const item = {
         hidden: {
@@ -175,25 +200,25 @@ const MobileMenu = ({ setOpen }: { setOpen: (open: null | string) => void }) => 
             <motion.ul
                 key={menu?.parent?.name}
                 {...motionListContainer}
-                className="list-none m-0 p-0 pl-6 max-h-[40vh] overflow-auto"
+                className="list-none m-0 p-0 max-h-[40vh] overflow-auto"
             >
                 {menu?.parent?.menu && (
                     <motion.li
                         initial={{ translateX: '100%', opacity: 0 }}
                         animate={{ translateX: 0, opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="mb-3 flex items-center relative"
+                        className="pb-1 mb-2 flex flex-start items-center relative"
                     >
                         <button
-                            className="transform -scale-x-1 text-red -translate-x-full absolute"
+                            className="inline-block font-bold bg-gray-accent-light dark:bg-gray-accent-dark mr-2 rounded-sm p-1"
                             onClick={() => {
                                 setAnimationDirection('backward')
                                 handleClick({ menu: menu?.parent?.menu })
                             }}
                         >
-                            <RightArrow className="w-6 h-6" />
+                            <RightArrow className="w-6 rotate-180" />
                         </button>
-                        <h5 className="m-0 text-base font-semibold opacity-40">{menu?.parent?.name}</h5>
+                        <h5 className="m-0 text-base font-bold">{menu?.parent?.name}</h5>
                     </motion.li>
                 )}
                 {menu?.menu?.map(({ name, url, children }, index) => {
@@ -201,23 +226,29 @@ const MobileMenu = ({ setOpen }: { setOpen: (open: null | string) => void }) => 
                         <motion.li
                             variants={item}
                             exit={{ opacity: 0 }}
-                            className={`${url === undefined ? 'mt-5' : ''} relative last:mb-0 mb-3 first:mt-0`}
+                            className={`${url === undefined ? 'mt-5' : ''} relative`}
                             key={name + index + url}
                         >
                             <div className={`text-base`}>
                                 {url === undefined ? (
-                                    <h5 className="m-0 text-base">{name}</h5>
+                                    <h5
+                                        id={`mobile-nav-${slugify(name, { lower: true })}`}
+                                        className="m-0 text-lg pb-2"
+                                    >
+                                        {name}
+                                    </h5>
                                 ) : (
                                     <button
                                         className={`${
                                             url === pathname ? 'active-product opacity-90' : 'opacity-50'
-                                        } hover:opacity-100 font-semibold`}
+                                        } hover:opacity-100 border-b border-gray-accent-light/50 dark:border-gray-accent-dark border-solid font-semibold flex w-full justify-between space-x-1 items-center py-2`}
                                         onClick={() => {
                                             setAnimationDirection('forward')
                                             handleClick({ url, menu: children })
                                         }}
                                     >
                                         <span className="text-left">{name}</span>
+                                        {children && <Chevron className="w-3 opacity-75 -rotate-90" />}
                                     </button>
                                 )}
                             </div>
@@ -244,7 +275,7 @@ const MobileTOC = ({ setOpen }: { setOpen: (open: null | string) => void }) => {
             <p className="opacity-40 text-base mt-0 mb-3 font-semibold">On this page</p>
             <motion.ul
                 {...motionListContainer}
-                className="list-none m-0 p-0 flex flex-col space-y-1 max-h-[40vh] overflow-auto"
+                className="list-none m-0 p-0 flex flex-col space-y-1 px-6 max-h-[40vh] overflow-auto"
             >
                 {tableOfContents?.map((navItem, index) => {
                     return (
