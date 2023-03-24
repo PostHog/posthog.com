@@ -42,7 +42,7 @@ export const wrapPageElement = ({ element, props }) => {
     ) : /^handbook|^docs\/(?!api)|^manual/.test(slug) &&
       !['docs/api/post-only-endpoints', 'docs/api/user'].includes(slug) ? (
         <HandbookLayout {...props} />
-    ) : /^product\//.test(slug) ? (
+    ) : /^session-replay|^product-analytics|^feature-flags|^ab-testing|^product-os/.test(slug) ? (
         <Product {...props} />
     ) : /^careers\//.test(slug) ? (
         <Job {...props} />

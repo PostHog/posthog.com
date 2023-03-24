@@ -10,6 +10,7 @@ import ProductLayout, {
     CTA,
     FeatureGrid,
     Hero,
+    MainFeatures,
     PairsWith,
     Roadmap,
     Sections,
@@ -20,6 +21,14 @@ import { Check as CheckIcon, Close as CloseIcon } from '../components/Icons'
 
 const Check = (props) => <CheckIcon {...props} className="w-5" />
 const Close = (props) => <CloseIcon {...props} className="w-5" />
+
+const menuItemIDs = {
+    Overview: 'overview',
+    Features: 'features',
+    'Pairs with': 'pairs-with',
+    'PostHog vs...': 'comparison',
+    Roadmap: 'roadmap',
+}
 
 export default function Product({ data, location }) {
     const { pageData, blogPosts, documentation } = data
@@ -40,9 +49,8 @@ export default function Product({ data, location }) {
         productMainCTA,
         productPricingCTA,
         productPairsWith,
+        productMenuItems,
     } = pageData?.frontmatter
-
-    console.log(productPairsWith)
 
     const components = {
         Hero: (props) => (
@@ -53,9 +61,12 @@ export default function Product({ data, location }) {
                 title={title}
                 subtitle={subtitle}
                 featuredImage={featuredImage}
+                menuItems={productMenuItems?.map((title) => {
+                    return { title, id: menuItemIDs[title] }
+                })}
             />
         ),
-        FeatureGrid: (props) => <FeatureGrid {...props} features={productFeatures} />,
+        MainFeatures: (props) => <MainFeatures {...props} features={productFeatures} />,
         Sections: (props) => <Sections {...props} sections={productSections} />,
         Testimonial: (props) => <Testimonial {...props} {...productTestimonial} />,
         Check,
@@ -105,6 +116,7 @@ export const query = graphql`
                 subtitle
                 description
                 productTeam
+                productMenuItems
                 productPairsWith {
                     title
                     description

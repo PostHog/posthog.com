@@ -1,5 +1,5 @@
 import Link from 'components/Link'
-import React, { useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { SessionRecording, FeatureFlags, AbTesting } from 'components/ProductIcons'
 import Layout from 'components/Layout'
 import { BusinessModel } from 'components/NotProductIcons'
@@ -13,6 +13,10 @@ import { CallToAction } from '../CallToAction'
 import { Squeak } from 'squeak-react'
 import Slider from 'react-slick'
 import { useLocation } from '@reach/router'
+import { Menu } from '@headlessui/react'
+import { Link as ScrollLink } from 'react-scroll'
+import { Chevron } from 'components/Icons'
+import slugify from 'slugify'
 
 const nav = [
     {
@@ -42,10 +46,23 @@ const nav = [
     },
 ]
 
+export const MainFeatures = (props: IFeatureGridProps) => {
+    return (
+        <div id="features">
+            <FeatureGrid {...props} />
+        </div>
+    )
+}
+
 const getTailwindGridCol = (length: number) =>
     `grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-${length > 6 ? length / 2 : length}`
 
-export const FeatureGrid = ({ features, className = '' }: { features: IFeature[]; className?: string }) => {
+interface IFeatureGridProps {
+    features: IFeature[]
+    className?: string
+}
+
+export const FeatureGrid = ({ features, className = '' }: IFeatureGridProps) => {
     const length = features?.length ?? 1
     return (
         <SectionWrapper className="max-w-full">
@@ -205,13 +222,15 @@ export const TwoCol = ({ children, className = '' }: { children: React.ReactNode
 
 export const PairsWith = ({ products }: { products: IFeature[] }) => {
     return (
-        <SectionWrapper className="max-w-full">
-            <h2 className="text-center m-0">Pairs with...</h2>
-            <p className="text-center m-0">PostHog products are natively designed to be interoperable.</p>
-            <div className="mt-12">
-                <FeatureGrid features={products} />
-            </div>
-        </SectionWrapper>
+        <div id="pairs-with">
+            <SectionWrapper className="max-w-full">
+                <h2 className="text-center m-0">Pairs with...</h2>
+                <p className="text-center m-0">PostHog products are natively designed to be interoperable.</p>
+                <div className="mt-12">
+                    <FeatureGrid features={products} />
+                </div>
+            </SectionWrapper>
+        </div>
     )
 }
 
@@ -431,7 +450,7 @@ export const SectionWrapper = ({ children, className = '' }: { children: React.R
 
 export const Comparison = ({ description, children }: { description: string; children: React.ReactNode }) => {
     return (
-        <div className="max-w-5xl mx-auto">
+        <div id="comparison" className="max-w-5xl mx-auto">
             <div className="flex justify-between items-end">
                 <div>
                     <h2 className="m-0">PostHog vs...</h2>
@@ -484,7 +503,7 @@ export const BlogPosts = ({ posts, title }) => {
 
 export const Questions = () => {
     return (
-        <div className="max-w-5xl">
+        <div id="questions" className="max-w-5xl">
             <h2>Questions?</h2>
             <Squeak
                 apiHost={process.env.GATSBY_SQUEAK_API_HOST as string}
@@ -535,60 +554,65 @@ export const Roadmap = ({ subtitle, team }) => {
         )
     const teamURL = `/handbook/small-teams/${team.toLowerCase()}`
     return (
-        <SectionWrapper>
-            <h3 className="m-0">Roadmap</h3>
-            <p className="m-0">{subtitle}</p>
-            <div className="mt-8 flex items-start space-x-8">
-                <div>
-                    <TeamRoadmap team={team} />
+        <div id="roadmap">
+            <SectionWrapper>
+                <h3 className="m-0">Roadmap</h3>
+                <p className="m-0">{subtitle}</p>
+                <div className="mt-8 flex items-start space-x-8">
+                    <div>
+                        <TeamRoadmap team={team} />
+                    </div>
+                    <div className="flex-shrink-0">
+                        <p className="mb-4">
+                            Here are the people who bring you
+                            <br />
+                            <strong>PostHog {team.toLowerCase()}</strong>
+                        </p>
+                        <ul className="list-none m-0 p-0">
+                            {teamMembers.map((member) => {
+                                const { name, headshot, jobTitle, teamLead, country } = member?.frontmatter
+                                return (
+                                    <li className="!m-0 flex space-x-4 items-center py-2" key={name}>
+                                        <figure className="mb-0">
+                                            <ContributorImage
+                                                className="w-[50px] h-[50px] "
+                                                image={getImage(headshot)}
+                                            />
+                                        </figure>
+                                        <div>
+                                            <span className="flex items-center md:flex-row space-x-2">
+                                                <p className="!text-lg !font-bold !m-0 !leading-none">{name}</p>
+                                                {country && (
+                                                    <span className="!leading-none">
+                                                        {country === 'world' ? (
+                                                            '🌎'
+                                                        ) : (
+                                                            <ReactCountryFlag svg countryCode={country} />
+                                                        )}
+                                                    </span>
+                                                )}
+                                                {teamLead && (
+                                                    <span className="inline-block border-2 border-red/50 rounded-sm text-[12px] px-2 py-1 !leading-none font-semibold text-red bg-white">
+                                                        Team lead
+                                                    </span>
+                                                )}
+                                            </span>
+                                            <p className="!text-sm !mb-0 opacity-50 !leading-none !mt-1">{jobTitle}</p>
+                                        </div>
+                                    </li>
+                                )
+                            })}
+                        </ul>
+                        <p className="mt-4">
+                            <strong>{pineapplePercentage}%</strong> of this team prefer pineapple on pizza
+                        </p>
+                        <CallToAction size="md" to={teamURL} type="outline">
+                            Learn more about this team
+                        </CallToAction>
+                    </div>
                 </div>
-                <div className="flex-shrink-0">
-                    <p className="mb-4">
-                        Here are the people who bring you
-                        <br />
-                        <strong>PostHog {team.toLowerCase()}</strong>
-                    </p>
-                    <ul className="list-none m-0 p-0">
-                        {teamMembers.map((member) => {
-                            const { name, headshot, jobTitle, teamLead, country } = member?.frontmatter
-                            return (
-                                <li className="!m-0 flex space-x-4 items-center py-2" key={name}>
-                                    <figure className="mb-0">
-                                        <ContributorImage className="w-[50px] h-[50px] " image={getImage(headshot)} />
-                                    </figure>
-                                    <div>
-                                        <span className="flex items-center md:flex-row space-x-2">
-                                            <p className="!text-lg !font-bold !m-0 !leading-none">{name}</p>
-                                            {country && (
-                                                <span className="!leading-none">
-                                                    {country === 'world' ? (
-                                                        '🌎'
-                                                    ) : (
-                                                        <ReactCountryFlag svg countryCode={country} />
-                                                    )}
-                                                </span>
-                                            )}
-                                            {teamLead && (
-                                                <span className="inline-block border-2 border-red/50 rounded-sm text-[12px] px-2 py-1 !leading-none font-semibold text-red bg-white">
-                                                    Team lead
-                                                </span>
-                                            )}
-                                        </span>
-                                        <p className="!text-sm !mb-0 opacity-50 !leading-none !mt-1">{jobTitle}</p>
-                                    </div>
-                                </li>
-                            )
-                        })}
-                    </ul>
-                    <p className="mt-4">
-                        <strong>{pineapplePercentage}%</strong> of this team prefer pineapple on pizza
-                    </p>
-                    <CallToAction size="md" to={teamURL} type="outline">
-                        Learn more about this team
-                    </CallToAction>
-                </div>
-            </div>
-        </SectionWrapper>
+            </SectionWrapper>
+        </div>
     )
 }
 
@@ -622,28 +646,124 @@ interface IProps {
     showFooter?: boolean
 }
 
+interface IMenuItem {
+    title: string
+    id: string
+}
+
+export const StickyNav = ({ menuItems }: { menuItems: IMenuItem[] }) => {
+    const [activeItem, setActiveItem] = useState(menuItems[0].title)
+    return (
+        <div className="z-[9999999] sticky top-0 text-center mt-12 pt-2">
+            <Menu>
+                {({ open }) => (
+                    <>
+                        <Menu.Button className="px-4 py-2 bg-white rounded-md shadow-md font-semibold">
+                            <div className="flex space-x-2 justify-center items-baseline">
+                                <span>{activeItem}</span>
+                                <span>
+                                    <Chevron />
+                                </span>
+                            </div>
+                        </Menu.Button>
+                        <Menu.Items
+                            static
+                            as="ul"
+                            className={`list-none m-0 bg-white p-4 rounded-md absolute left-1/2 -translate-x-1/2 shadow-md mt-2 ${
+                                open ? 'visible' : 'invisible'
+                            }`}
+                        >
+                            {menuItems.map(({ title, id }) => {
+                                return (
+                                    <Menu.Item key={id} as="li" className="cursor-pointer mt-3 first:mt-0">
+                                        {({ active, close }) => {
+                                            return (
+                                                <ScrollLink
+                                                    onClick={() => {
+                                                        close()
+                                                        setActiveItem(title)
+                                                    }}
+                                                    offset={-50}
+                                                    spy
+                                                    smooth
+                                                    onSetActive={() => setActiveItem(title)}
+                                                    to={id}
+                                                    className={`py-2 px-4 rounded-md font-semibold transition-all text-black hover:text-black ${
+                                                        activeItem === title ? 'bg-gray-accent-light/80' : ''
+                                                    } ${active ? 'bg-gray-accent-light/40' : ''}`}
+                                                >
+                                                    {title}
+                                                </ScrollLink>
+                                            )
+                                        }}
+                                    </Menu.Item>
+                                )
+                            })}
+                        </Menu.Items>
+                    </>
+                )}
+            </Menu>
+        </div>
+    )
+}
+
 const Nav = () => {
     const { pathname } = useLocation()
+    const [activeStyles, setActiveStyles] = useState({})
+    const activeItem = useRef(null)
+
+    const setStyles = useCallback(() => {
+        if (activeItem?.current) {
+            const bounding = activeItem.current.getBoundingClientRect()
+            setActiveStyles({ width: bounding?.width, left: activeItem.current.offsetLeft })
+        }
+    }, [])
+
+    useEffect(() => {
+        window.addEventListener('resize', setStyles)
+        return () => {
+            window.removeEventListener('resize', setStyles)
+        }
+    }, [])
+
+    useEffect(() => {
+        setStyles()
+    }, [pathname])
+
     return (
-        <nav className="border-b border-gray-accent-light border-dashed relative z-10">
-            <ul className="list-none m-0 flex items-center space-x-4 justify-center max-w-screen-2xl mx-auto">
-                {nav.map((navItem) => {
-                    const { label, url, icon } = navItem
-                    return (
-                        <li key={label}>
-                            <Link
-                                className={`py-4 px-2 flex space-x-2 items-center !text-black ${
-                                    pathname === url ? 'border-b border-red' : ''
-                                }`}
-                                to={url}
+        <nav className="relative z-10 overflow-auto">
+            <div className="relative max-w-screen-2xl mx-auto">
+                <ul className="list-none m-0 flex items-center space-x-4 justify-center whitespace-nowrap">
+                    {nav.map((navItem) => {
+                        const { label, url, icon } = navItem
+                        const active = pathname === url
+                        return (
+                            <li
+                                ref={active ? activeItem : null}
+                                id={`product-nav-${slugify(url, { lower: true })}`}
+                                key={label}
                             >
-                                <span>{icon}</span>
-                                <span>{label}</span>
-                            </Link>
-                        </li>
-                    )
-                })}
-            </ul>
+                                <Link
+                                    className={`flex space-x-2 items-center  ${
+                                        active
+                                            ? '!text-red font-bold'
+                                            : '!text-primary/75 hover:border-gray-accent-light hover:bg-gray-accent-light'
+                                    } px-3 py-1.5 mb-1.5 text-sm font-semibold whitespace-nowrap rounded relative hover:scale-[1.01] active:scale-[.99] group`}
+                                    to={url}
+                                >
+                                    <span>{icon}</span>
+                                    <span>{label}</span>
+                                </Link>
+                            </li>
+                        )
+                    })}
+                </ul>
+                <div
+                    style={activeStyles}
+                    className="h-[2px] bg-red rounded-md absolute bottom-0 z-10 transition-all duration-500"
+                />
+            </div>
+            <hr className="border-b-0 border-gray-accent-light border-dashed bg-transparent m-0 p-0 relative top-[-2px] w-full" />
         </nav>
     )
 }
@@ -654,6 +774,7 @@ export const Hero = ({
     featuredImage,
     mainCTA,
     pricingCTA,
+    menuItems,
 }: {
     title: string
     subtitle: string
@@ -666,11 +787,14 @@ export const Hero = ({
         title: string
         url: string
     }
+    menuItems: IMenuItem[]
 }) => {
     const image = featuredImage && getImage(featuredImage)
     return (
-        <section>
-            <h1 className="text-center text-5xl mb-0 mt-14">{title}</h1>
+        <>
+            <h1 id="overview" className="text-center text-5xl mb-0 mt-14">
+                {title}
+            </h1>
             <div className="text-center mt-4" dangerouslySetInnerHTML={{ __html: subtitle }} />
             {pricingCTA && mainCTA && (
                 <div className="flex space-x-4 items-center justify-center">
@@ -680,12 +804,13 @@ export const Hero = ({
                     </CallToAction>
                 </div>
             )}
+            <StickyNav menuItems={menuItems} />
             {image && (
-                <div className="max-w-screen-xl mx-auto my-14">
+                <div className="max-w-screen-xl mx-auto mt-8 mb-14">
                     <GatsbyImage alt={title} image={image} />
                 </div>
             )}
-        </section>
+        </>
     )
 }
 
