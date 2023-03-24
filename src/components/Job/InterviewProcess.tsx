@@ -21,7 +21,7 @@ const defaultInterviewProcess: IInterviewProcess[] = [
     },
     {
         title: 'Technical interview',
-        description: `You'll meet the Team Lead who will evaluate skills needed to be successful in your role. No live coding. If you are applying for an engineering role, this is usually followed by a 30min call with our CTO, Tim.`,
+        description: `You'll meet the Team Lead who will evaluate skills needed to be successful in your role. No live coding. If you are applying for an engineering role, this is usually followed by a 30min call with our CEO, James.`,
         badge: '60-min video call, varies by role',
     },
     {
