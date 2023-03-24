@@ -868,8 +868,8 @@ export const Hero = ({
             )}
             <StickyNav menuItems={menuItems} />
             {image && (
-                <div className="max-w-screen-xl mx-auto mt-8 mb-14">
-                    <GatsbyImage alt={title} image={image} />
+                <div className="max-w-screen-xl mx-auto mt-8 mb-14 text-center">
+                    <GatsbyImage alt={title} image={image} className="w-1/2" />
                 </div>
             )}
         </>
