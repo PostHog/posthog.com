@@ -17,38 +17,45 @@ import { useLocation } from '@reach/router'
 const nav = [
     {
         label: 'Product analytics',
-        url: '/product/product-analytics',
+        url: '/product-analytics',
         icon: <SessionRecording className="w-5" />,
     },
     {
-        label: 'Session recording',
-        url: '/product/session-recording',
+        label: 'Session replay',
+        url: '/session-replay',
         icon: <SessionRecording className="w-5" />,
     },
     {
         label: 'Feature flags',
-        url: '/product/feature-flags',
+        url: '/feature-flags',
         icon: <FeatureFlags className="w-5" />,
     },
     {
         label: 'A/B testing',
-        url: '/product/ab-testing',
+        url: '/ab-testing',
         icon: <AbTesting className="w-5" />,
     },
     {
         label: 'CDP',
-        url: '/product/cdp',
+        url: '/product-os',
         icon: <SessionRecording className="w-5" />,
     },
 ]
 
 const getTailwindGridCol = (length: number) => `grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-${length}`
 
-export const FeatureGrid = ({ features, className = '' }: { features: IFeature[]; className?: string }) => {
-    console.log(features)
+export const FeatureGrid = ({
+    features,
+    className = '',
+    border = true,
+}: {
+    features: IFeature[]
+    className?: string
+    border?: boolean
+}) => {
     const length = features?.length ?? 1
     return (
-        <SectionWrapper className="max-w-screen-2xl" border borderPadding={false}>
+        <SectionWrapper className="max-w-screen-2xl" border={border} borderPadding={false}>
             <ul
                 className={`grid list-none m-0 max-w-screen-2xl mx-auto border-l border-gray-accent-light border-dashed  ${getTailwindGridCol(
                     length
@@ -197,18 +204,13 @@ export const TwoCol = ({ children, className = '' }: { children: React.ReactNode
 
 export const PairsWith = ({ products }: { products: IFeature[] }) => {
     return (
-        <div>
+        <SectionWrapper>
             <h2 className="text-center m-0">Pairs with...</h2>
             <p className="text-center m-0">PostHog products are natively designed to be interoperable.</p>
-            <div className="border-y border-dashed border-gray-accent-light mt-12">
-                <FeatureGrid>
-                    {products.map((product) => {
-                        const { title, description } = product
-                        return <Feature key={title} title={title} description={description} />
-                    })}
-                </FeatureGrid>
+            <div className="mt-12">
+                <FeatureGrid border={false} features={products} />
             </div>
-        </div>
+        </SectionWrapper>
     )
 }
 
@@ -640,7 +642,6 @@ const Nav = () => {
             <ul className="list-none m-0 flex items-center space-x-4 justify-center max-w-screen-2xl mx-auto">
                 {nav.map((navItem) => {
                     const { label, url, icon } = navItem
-                    console.log(url, pathname)
                     return (
                         <li key={label}>
                             <Link

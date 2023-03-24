@@ -10,6 +10,7 @@ import ProductLayout, {
     CTA,
     FeatureGrid,
     Hero,
+    PairsWith,
     Roadmap,
     Sections,
     Testimonial,
@@ -37,7 +38,10 @@ export default function Product({ data, location }) {
         productTestimonial,
         productTeam,
         productCTA,
+        productPairsWith,
     } = pageData?.frontmatter
+
+    console.log(productPairsWith)
 
     const components = {
         Hero: (props) => <Hero {...props} title={title} subtitle={subtitle} featuredImage={featuredImage} />,
@@ -56,6 +60,7 @@ export default function Product({ data, location }) {
             <Roadmap {...props} team={productTeam} subtitle={`Here's what the ${productTeam} Team is building next.`} />
         ),
         CTA: (props) => <CTA title={productCTA?.title} subtitle={productCTA?.subtitle} image={productCTA?.image} />,
+        PairsWith: (props) => <PairsWith {...props} products={productPairsWith} />,
     }
 
     return (
@@ -88,6 +93,10 @@ export const query = graphql`
                 subtitle
                 description
                 productTeam
+                productPairsWith {
+                    title
+                    description
+                }
                 productCTA {
                     title
                     subtitle
