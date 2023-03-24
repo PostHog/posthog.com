@@ -114,7 +114,7 @@ export const Sections = ({ sections }: { sections: ISection[][] }) => {
             {sections.map((section, index) => {
                 return (
                     <SectionWrapper
-                        className="py-14 border-dashed border-gray-accent-light odd:border-y last:border-b"
+                        className="py-12 md:py-14 border-dashed border-gray-accent-light odd:border-y last:border-b md:my-auto !my-0"
                         key={index}
                     >
                         {section.length > 1 ? (
@@ -213,7 +213,7 @@ export const Testimonial = ({ author, image, quote }: ITestimonial & { image: Im
 
 export const TwoCol = ({ children, className = '' }: { children: React.ReactNode[]; className?: string }) => {
     return (
-        <div className={`grid grid-cols-2 gap-x-6 ${className}`}>
+        <div className={`grid md:grid-cols-2 md:gap-y-0 gap-y-4 md:gap-x-6 ${className}`}>
             <div>{children[0]}</div>
             <div>{children[1]}</div>
         </div>
@@ -558,7 +558,7 @@ export const Roadmap = ({ subtitle, team }) => {
             <SectionWrapper>
                 <h3 className="m-0">Roadmap</h3>
                 <p className="m-0">{subtitle}</p>
-                <div className="mt-8 flex items-start space-x-8">
+                <div className="mt-8 flex items-start md:space-y-0 space-y-4 md:space-x-8 md:flex-row flex-col">
                     <div>
                         <TeamRoadmap team={team} />
                     </div>
@@ -620,13 +620,13 @@ export const CTA = ({ title, subtitle, image }) => {
     const gatsbyImage = image && getImage(image)
     return (
         <SectionWrapper>
-            <div className="flex space-x-4 justify-between p-12 bg-gray-accent-light rounded-lg items-center">
+            <div className="flex md:space-y-0 space-y-4 md:flex-row flex-col md:space-x-4 justify-between p-12 bg-gray-accent-light rounded-lg md:items-center">
                 <div>
                     <h2 className="m-0">{title}</h2>
                     <p className="m-0 mb-6">{subtitle}</p>
                     <CallToAction to="https://app.posthog.com/signup">Get started - free</CallToAction>
                 </div>
-                <div className="max-w-[400px]">
+                <div className="md:max-w-[400px]">
                     <GatsbyImage alt={title} image={gatsbyImage} />
                 </div>
             </div>
