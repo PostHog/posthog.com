@@ -98,10 +98,10 @@ export default function Product({ referenceElement }: { referenceElement: HTMLDi
                 <section className="p-6 border-r border-gray-accent-light border-dashed flex flex-col">
                     <h3 className="text-[18px] font-bold m-0 text-black pl-2">Products</h3>
                     <ol className="grid grid-cols-2 md:grid-cols-4 space-x-[1px] list-none p-0 pb-4 border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark mt-2 mb-6 -mx-6 px-6">
-                        <ProductItem title="Product analytics" icon={<Analytics />} url="/product/product-analytics" />
-                        <ProductItem title="Session replay" icon={<SessionRecording />} url="/product/session-replay" />
-                        <ProductItem title="Feature flags" icon={<FeatureFlags />} url="/product/feature-flags" />
-                        <ProductItem title="A/B testing" icon={<AbTesting />} url="/product/ab-testing" />
+                        <ProductItem title="Product analytics" icon={<Analytics />} url="/product-analytics" />
+                        <ProductItem title="Session replay" icon={<SessionRecording />} url="/session-replay" />
+                        <ProductItem title="Feature flags" icon={<FeatureFlags />} url="/feature-flags" />
+                        <ProductItem title="A/B testing" icon={<AbTesting />} url="/ab-testing" />
                     </ol>
 
                     {productOSItem.map(({ title, features }) => {
