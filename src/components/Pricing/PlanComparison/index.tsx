@@ -204,7 +204,7 @@ const icons = {
     product_analytics: <Analytics />,
     session_recording: <SessionRecording />,
     feature_flags: <FeatureFlags />,
-    experiments: <Experiments />,
+    experimentation: <Experiments />,
     integrations: <AppLibrary />,
     platform: <Platform />,
     support: <Support />,

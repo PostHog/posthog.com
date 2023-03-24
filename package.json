@@ -8,7 +8,9 @@
         "type": "git",
         "url": "https://github.com/PostHog/posthog.com"
     },
-    "keywords": ["gatsby"],
+    "keywords": [
+        "gatsby"
+    ],
     "private": true,
     "scripts": {
         "build": "gatsby build",
@@ -32,8 +34,10 @@
         "@popperjs/core": "^2.11.2",
         "@slack/bolt": "^3.8.1",
         "@supabase/supabase-js": "^1.29.4",
+        "@types/gravatar": "^1.8.3",
         "@types/lodash.groupby": "^4.6.7",
         "@types/react-slick": "^0.23.10",
+        "@types/styled-components": "^5.1.26",
         "@typescript-eslint/eslint-plugin": "^4.20.0",
         "@uiw/react-md-editor": "^3.9.5",
         "algoliasearch": "^4.14.2",
@@ -129,6 +133,7 @@
         "react-responsive": "^8.2.0",
         "react-scroll": "^1.8.3",
         "react-scrollspy": "^3.4.3",
+        "react-shadow": "^19.0.3",
         "react-simple-maps": "^3.0.0",
         "react-slick": "^0.28.1",
         "react-string-replace": "^1.1.0",
@@ -141,7 +146,6 @@
         "sass": "^1.43.2",
         "sharp": "^0.30.7",
         "slugify": "^1.6.0",
-        "squeak-react": "^4.3.7",
         "styled-components": "^5.3.3",
         "svg-sprite": "^1.5.0",
         "swr": "^2.0.0",
@@ -199,7 +203,9 @@
             "pre-commit": "node ./scripts/mdxImportGen && git add src/mdxGlobalComponents.js && lint-staged"
         }
     },
-    "workspaces": ["plugins/*"],
+    "workspaces": [
+        "plugins/*"
+    ],
     "lint-staged": {
         "*.{html,js,ts,tsx,json,yml,css,scss}": "prettier --write",
         "*.{js,ts,tsx}": "eslint"

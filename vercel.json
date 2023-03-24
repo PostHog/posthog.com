@@ -751,7 +751,7 @@
         { "source": "/manual/lifecycle", "destination": "/docs/product-analytics/lifecycle" },
         { "source": "/manual/paths", "destination": "/docs/product-analytics/paths" },
         { "source": "/manual/retention", "destination": "/docs/product-analytics/retention" },
-        { "source": "/manual/sampling.md", "destination": "/docs/product-analytics/sampling.md" },
+        { "source": "/manual/sampling", "destination": "/docs/product-analytics/sampling" },
         { "source": "/manual/stickiness", "destination": "/docs/product-analytics/stickiness" },
         { "source": "/manual/toolbar", "destination": "/docs/product-analytics/toolbar" },
         { "source": "/manual/trends", "destination": "/docs/product-analytics/trends" },
@@ -780,7 +780,26 @@
         { "source": "/docs/integrate/proxy", "destination": "/docs/advanced/proxy" },
 
         { "source": "/docs/integrate/badge", "destination": "/docs/contribute/badge" },
-        { "source": "/docs/integrate/libraries", "destination": "/docs/libraries" }
+        { "source": "/docs/integrate/libraries", "destination": "/docs/libraries" },
+
+        { "source": "/docs/data/subscriptions", "destination": "/docs/data/notifications-and-alerts" },
+        { "source": "/handbook/engineering/oncall-rotation", "destination": "/handbook/engineering/oncall" },
+        { "source": "/docs/integrate/next-js", "destination": "/docs/libraries/next-js" },
+        { "source": "/docs/integrate/sentry", "destination": "/docs/libraries/sentry" },
+        { "source": "/docs/integrate/rudderstack", "destination": "/docs/libraries/rudderstack" },
+        { "source": "/docs/integrate/segment", "destination": "/docs/libraries/segment" },
+        { "source": "/docs/sdks/ios", "destination": "/docs/libraries/ios" },
+        
+        { "source": "/docs/self-host/deploy/aws", "destination": "/docs/self-host" },
+        { "source": "/docs/self-host/deploy/azure", "destination": "/docs/self-host" },
+        { "source": "/docs/self-host/deploy/digital-ocean", "destination": "/docs/self-host" },
+        { "source": "/docs/self-host/deploy/gcp", "destination": "/docs/self-host" },
+        { "source": "/docs/self-host/deploy/other", "destination": "/docs/self-host" },
+
+        { "source": "/docs/feature-flags/local-evaluation", "destination": "/docs/feature-flags/bootstrapping-and-local-evaluation" }
+
+        
+        
     ],
     "rewrites": [
         {
@@ -790,12 +809,6 @@
         { "source": "/next-steps/(.*)", "destination": "/next-steps" },
         { "source": "/question/(.*)", "destination": "/question" },
         { "source": "/careers/(.*)", "destination": "/careers" },
-        { "source": "/api", "destination": "/docs/api" },
-        { "source": "/docs/data/subscriptions", "destination": "/docs/data/notifications-and-alerts" },
-        { "source": "/handbook/engineering/oncall-rotation", "destination": "/handbook/engineering/oncall" },
-        { "source": "/docs/integrate/next-js", "destination": "/docs/libraries/next-js" },
-        { "source": "/docs/integrate/sentry", "destination": "/docs/libraries/sentry" },
-        { "source": "/docs/integrate/rudderstack", "destination": "/docs/libraries/rudderstack" },
-        { "source": "/docs/integrate/segment", "destination": "/docs/libraries/segment" }
+        { "source": "/api", "destination": "/docs/api" }
     ]
 }

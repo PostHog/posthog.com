@@ -31,7 +31,7 @@ You can view the Support Hero rotation [in PagerDuty here](https://posthog.pager
 
 There are a couple of channels that customer requests come in so make sure you keep an eye on all of them, but **most support tickets will come into [Zendesk](#Zendesk)**. Beyond Zendesk, you should keep an eye on:
 
-- [Unthread](https://posthog.slack.com/archives/D04725CS7JR) is used by the CS team to track issues with our high priority customers in dedicated Slack Connect channels.
+- [Unthread](https://posthog.slack.com/app_redirect?app=A03U6F0P6KG) is used by the CS team to track issues with our high priority customers in dedicated Slack Connect channels.
 - [PostHog Users's Slack](https://posthog.com/slack), specifically `#community-support`. Users who post in `#general` or elsewhere should be instructed to post in `#community-support`
 - Sentry issues, either [directly](https://sentry.io/organizations/posthog/issues/?project=1899813) or in `#sentry` in our main Slack.
 
@@ -54,7 +54,7 @@ To help manage users' expectations, you might find it useful to share a message 
 As a business we need to ensure we are focusing support on our paying customers, as such this is the prioritization order you should apply as Support Hero.  At the end of your rotation you need to ensure that any items in 1-4 are resolved or passed to the next Support Hero _as a minimum_.
 
 1. Any requests where you are tagged by the Customer Success team in a dedicated slack channel as there will be some urgency needed.
-2. Any requests assigned to you in [Unthread](https://posthog.slack.com/archives/D04725CS7JR) as they will be from a high priority customer in a dedicated Slack channel.
+2. Any requests assigned to you in [Unthread](https://posthog.slack.com/app_redirect?app=A03U6F0P6KG) as they will be from a high priority customer in a dedicated Slack channel.
 3. Open Zendesk tickets in the [High Priority Queue](https://posthoghelp.zendesk.com/agent/filters/7114751198491) (high-paying customers).
 4. Open Zendesk tickets in the [Normal Priority Queue](https://posthoghelp.zendesk.com/agent/filters/7114873854747) (paying customers).
 5. [Squeak!](https://posthog.com/questions/) questions.
@@ -190,7 +190,7 @@ Our Customer Success team uses Unthread to track the resolution of threads in Sl
 
 #### Using Unthread
 
-* The [Slack Unthread app](https://posthog.slack.com/archives/D04725CS7JR) will notify you if a conversation is assigned to you with a link to the relevant Slack thread.
+* The [Slack Unthread app](https://posthog.slack.com/app_redirect?app=A03U6F0P6KG) will notify you if a conversation is assigned to you with a link to the relevant Slack thread.
 
 * You can also see conversations which have been assigned to you in the Unthread app Home page.
 

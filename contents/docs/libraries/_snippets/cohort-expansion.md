@@ -10,4 +10,4 @@ However, there are a few constraints here and we don't support doing this for ar
 3. The cohort in the feature flag is in the same group as another condition.
 4. The cohort has nested AND-OR filters. Only simple cohorts that have a top level OR group, and inner level ANDs will be evaluated locally.
 
-Note that this restriction is for local evaluation only. If you're hitting PostHog's servers, all of these cohorts will be evaluated as expected.
+Note that this restriction is for local evaluation only. If you're hitting PostHog's servers, all of these cohorts will be evaluated as expected. <b>Further, posthog-node v2.6.0 onwards, and posthog-python v2.4.0 onwards do not face this issue and can evaluate all cohorts locally. </b>
