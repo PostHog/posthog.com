@@ -139,6 +139,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     id
                     frontmatter {
                         productBlogTags
+                        productDocumentation
                     }
                     fields {
                         slug
@@ -511,6 +512,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     context: {
                         id: node.id,
                         blogTags: node?.frontmatter?.productBlogTags,
+                        documentation: node?.frontmatter?.productDocumentation,
                     },
                 })
                 res()

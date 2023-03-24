@@ -10,7 +10,6 @@ import ReactCountryFlag from 'react-country-flag'
 import { ContributorImage } from 'components/PostLayout/Contributors'
 import { graphql, useStaticQuery } from 'gatsby'
 import { CallToAction } from '../CallToAction'
-import { Squeak } from 'squeak-react'
 import Slider from 'react-slick'
 import { useLocation } from '@reach/router'
 import { Menu } from '@headlessui/react'
@@ -519,37 +518,40 @@ export const Comparison = ({ description, children }: { description: string; chi
 
 export const BlogPosts = ({ posts, title }) => {
     return (
-        <SectionWrapper>
-            <h3>{title}</h3>
-            <ul className="list-none m-0 p-0 grid grid-cols-2 gap-4">
-                {posts.map((post) => {
-                    const {
-                        node: {
-                            id,
-                            frontmatter: { date, title, featuredImage, authors, category },
-                            fields: { slug },
-                        },
-                    } = post
+        posts &&
+        posts?.length > 0 && (
+            <SectionWrapper>
+                <h3>{title}</h3>
+                <ul className="list-none m-0 p-0 grid grid-cols-2 gap-4">
+                    {posts.map((post) => {
+                        const {
+                            node: {
+                                id,
+                                frontmatter: { date, title, featuredImage, authors, category },
+                                fields: { slug },
+                            },
+                        } = post
 
-                    return (
-                        <li
-                            className="relative active:top-[1px] active:scale-[.99] shadow-lg after:border-0 hover:after:border-1 after:border-black/25 after:rounded-md after:-inset-1.5 after:absolute"
-                            key={id}
-                        >
-                            <Post
-                                date={date}
-                                title={title}
-                                featuredImage={featuredImage}
-                                authors={authors}
-                                category={category}
-                                slug={slug}
-                                imgClassName="w-full"
-                            />
-                        </li>
-                    )
-                })}
-            </ul>
-        </SectionWrapper>
+                        return (
+                            <li
+                                className="relative active:top-[1px] active:scale-[.99] shadow-lg after:border-0 hover:after:border-1 after:border-black/25 after:rounded-md after:-inset-1.5 after:absolute"
+                                key={id}
+                            >
+                                <Post
+                                    date={date}
+                                    title={title}
+                                    featuredImage={featuredImage}
+                                    authors={authors}
+                                    category={category}
+                                    slug={slug}
+                                    imgClassName="w-full"
+                                />
+                            </li>
+                        )
+                    })}
+                </ul>
+            </SectionWrapper>
+        )
     )
 }
 
@@ -557,10 +559,6 @@ export const Questions = () => {
     return (
         <div id="questions" className="max-w-5xl">
             <h2>Questions?</h2>
-            <Squeak
-                apiHost={process.env.GATSBY_SQUEAK_API_HOST as string}
-                organizationId={process.env.GATSBY_SQUEAK_ORG_ID as string}
-            />
         </div>
     )
 }
@@ -847,7 +845,7 @@ export const Hero = ({
             <h1 id="overview" className="text-center text-5xl mb-0 mt-14">
                 {title}? PostHog does that.
             </h1>
-            <div className="text-center mt-4" dangerouslySetInnerHTML={{ __html: subtitle }} />
+            <div className="text-center my-4" dangerouslySetInnerHTML={{ __html: subtitle }} />
             {pricingCTA && mainCTA && (
                 <div className="flex space-x-4 items-center justify-center">
                     <CallToAction to={mainCTA.url}>{mainCTA.title}</CallToAction>
