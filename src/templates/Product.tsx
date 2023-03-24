@@ -37,14 +37,24 @@ export default function Product({ data, location }) {
         productSections,
         productTestimonial,
         productTeam,
-        productCTA,
+        productMainCTA,
+        productPricingCTA,
         productPairsWith,
     } = pageData?.frontmatter
 
     console.log(productPairsWith)
 
     const components = {
-        Hero: (props) => <Hero {...props} title={title} subtitle={subtitle} featuredImage={featuredImage} />,
+        Hero: (props) => (
+            <Hero
+                {...props}
+                mainCTA={productMainCTA}
+                pricingCTA={productPricingCTA}
+                title={title}
+                subtitle={subtitle}
+                featuredImage={featuredImage}
+            />
+        ),
         FeatureGrid: (props) => <FeatureGrid {...props} features={productFeatures} />,
         Sections: (props) => <Sections {...props} sections={productSections} />,
         Testimonial: (props) => <Testimonial {...props} {...productTestimonial} />,
@@ -59,7 +69,9 @@ export default function Product({ data, location }) {
         Roadmap: (props) => (
             <Roadmap {...props} team={productTeam} subtitle={`Here's what the ${productTeam} Team is building next.`} />
         ),
-        CTA: (props) => <CTA title={productCTA?.title} subtitle={productCTA?.subtitle} image={productCTA?.image} />,
+        CTA: (props) => (
+            <CTA title={productMainCTA?.title} subtitle={productMainCTA?.subtitle} image={productMainCTA?.image} />
+        ),
         PairsWith: (props) => <PairsWith {...props} products={productPairsWith} />,
     }
 
@@ -97,14 +109,19 @@ export const query = graphql`
                     title
                     description
                 }
-                productCTA {
+                productMainCTA {
                     title
                     subtitle
+                    url
                     image {
                         childImageSharp {
                             gatsbyImageData
                         }
                     }
+                }
+                productPricingCTA {
+                    title
+                    url
                 }
                 productTestimonial {
                     author {

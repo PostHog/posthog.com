@@ -652,16 +652,34 @@ export const Hero = ({
     title,
     subtitle,
     featuredImage,
+    mainCTA,
+    pricingCTA,
 }: {
     title: string
     subtitle: string
     featuredImage: ImageDataLike
+    mainCTA: {
+        title: string
+        url: string
+    }
+    pricingCTA: {
+        title: string
+        url: string
+    }
 }) => {
     const image = featuredImage && getImage(featuredImage)
     return (
         <section>
             <h1 className="text-center text-5xl mb-0 mt-14">{title}</h1>
             <div className="text-center mt-4" dangerouslySetInnerHTML={{ __html: subtitle }} />
+            {pricingCTA && mainCTA && (
+                <div className="flex space-x-4 items-center justify-center">
+                    <CallToAction to={mainCTA.url}>{mainCTA.title}</CallToAction>
+                    <CallToAction type="secondary" to={pricingCTA.url}>
+                        {pricingCTA.title}
+                    </CallToAction>
+                </div>
+            )}
             {image && (
                 <div className="max-w-screen-xl mx-auto my-14">
                     <GatsbyImage alt={title} image={image} />
