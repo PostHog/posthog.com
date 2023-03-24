@@ -155,6 +155,7 @@ export const query = graphql`
                 productFeatures {
                     title
                     description
+                    icon
                 }
                 productSections {
                     title

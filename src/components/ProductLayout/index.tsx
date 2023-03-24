@@ -17,6 +17,8 @@ import { Menu } from '@headlessui/react'
 import { Link as ScrollLink } from 'react-scroll'
 import { Chevron } from 'components/Icons'
 import slugify from 'slugify'
+import * as ProductIcons from 'components/ProductIcons'
+import * as NotProductIcons from 'components/NotProductIcons'
 
 const nav = [
     {
@@ -72,8 +74,7 @@ export const FeatureGrid = ({ features, className = '' }: IFeatureGridProps) => 
                 )} ${className}`}
             >
                 {features.map((feature) => {
-                    const { title, description } = feature
-                    return <Feature key={title} title={title} description={description} />
+                    return <Feature key={feature.title} {...feature} />
                 })}
             </ul>
         </SectionWrapper>
@@ -141,9 +142,10 @@ interface IFeature {
 }
 
 export const Feature = ({ title, description, className = '', icon }: IFeature) => {
+    const Icon = ProductIcons[icon] || NotProductIcons[icon]
     return (
         <li className={`p-6 pb-8 border-r border-b border-gray-accent-light border-dashed ${className}`}>
-            <BusinessModel className="w-5 h-5 mb-2" />
+            {Icon && <Icon className="w-5 h-5 mb-2" />}
             <FeatureTitle>{title}</FeatureTitle>
             <FeatureDescription>{description}</FeatureDescription>
         </li>
