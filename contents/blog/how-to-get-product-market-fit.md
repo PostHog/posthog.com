@@ -189,7 +189,7 @@ You will also need some pricing. You are likely to change this a bunch of times.
 
 Now it's to get your first reference customer. This means a customer that pays full list price, is using the product as you expect, and would happily recommend you to others.
 
-# Designing your company to do the above as easily as possible
+# Company Design (to get this done as easily as possible)
 
 ## Deciding to work with a cofounder
 
