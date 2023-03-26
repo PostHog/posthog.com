@@ -51,6 +51,10 @@ productFeatures: [
 ]
 productSections: [
   [
+
+    {
+      image: ./images/products/feature-flags/release-conditions.png
+    },
     {
       title: "Choose who gets access to features",
       subtitle: "Customize your release strategy based on your goals with release conditions.",
@@ -69,20 +73,26 @@ productSections: [
                 description: 'Cohorts can dynamically update with user properties',
             },
         ]
-    },
-    {
-      image: ./images/products/session-recording.png
     }
   ],
   [
     {
-      image: ./images/products/session-recording.png
-    },
-    {
       title: "Multivariate feature flags",
-      content: "<p>After a feature flag is installed, JSON payloads let you make changes to your product or website without subsequent deployments.</p><p>This includes text, visuals, or even entire blocks of code.</p>",
+      content: "<p>Simultaneously test multiple versions against a control group.</p>",
      
     },
+    {
+      image: ./images/products/feature-flags/multivariate.png
+    }
+  ],
+  [
+    {
+      image: ./images/products/feature-flags/payloads.png
+    },
+    {
+      title: "Test changes without touching your codebase",
+      content: "<p>After a feature flag is installed, JSON payloads let you make changes to your product or website without subsequent deployments.</p><p>This includes text, visuals, or even entire blocks of code.</p>",
+    }
   ],
   [
     {
@@ -90,7 +100,7 @@ productSections: [
       subtitle: "Insights are automatically created for each feature flag, including overall flag usage and usage by specific users",
     },
     {
-      image: ./images/products/session-recording.png
+      image: ./images/products/feature-flags/reports.png
     }
   ],
 ]
@@ -101,7 +111,7 @@ productTestimonial: {
         "image": "/images/customers/francesco.jpg",
         "company": { "name": "Phantom", "image": "/images/customers/phantom.svg" }
     },
-    "quote": "Feature flags are really, really critical for us and you don’t see them as a feature in other analytics tools. They very valuable though, because you can often use feature flag data to make other product decisions.",
+    "quote": "<strong>Feature flags are really, really critical for us and you don’t see them as a feature in other analytics tools.</strong> They very valuable though, because you can often use feature flag data to make other product decisions.",
     image: ./images/products/session-recording.png
 }
 productBlogTag: Feature flags
@@ -122,20 +132,20 @@ productPairsWith: [
         title: 'Product analytics',
         description:
             'Run any insight filtered by a flag’s value, or group by flag to see usage across a flag’s variants',
-            url: '/product-analytics'.
+            url: '/product-analytics'
     },
     {
         icon: 'UserPaths',
         title: 'Product analytics: User paths',
         description: 'See how a flag’s value influenced an intended outcome',
-        url: '/product-analytics/#user-paths'.
+        url: '/product-analytics/#user-paths'
     },
     {
         icon: 'SessionRecording',
         title: 'Session replay',
         description:
             'Filter recordings down to only when a feature flag was called, or to a specific value of a flag',
-      url: '/session-replay'.
+      url: '/session-replay'
     },
 ]
 productMenuItems: [

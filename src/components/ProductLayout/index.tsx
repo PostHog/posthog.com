@@ -126,7 +126,9 @@ export const Section = ({ title, subtitle, features, image, content }: ISection)
             {(title || subtitle) && <SectionHeading title={title} subtitle={subtitle} />}
             {content && <div dangerouslySetInnerHTML={{ __html: content }} />}
             {features && features?.length > 0 && <FeatureList features={features} />}
-            {gatsbImage && <GatsbyImage alt={title || ''} image={gatsbImage} />}
+            {gatsbImage && (
+                <GatsbyImage alt={title || ''} image={gatsbImage} className="rounded overflow-hidden shadow-xl" />
+            )}
         </div>
     )
 }
