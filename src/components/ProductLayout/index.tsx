@@ -708,7 +708,9 @@ export const Roadmap = ({ subtitle, team }) => {
                 <div className="mt-8 flex items-start md:space-y-0 space-y-4 md:space-x-8 md:flex-row flex-col">
                     <div className="flex-1">
                         <h3 className="m-0">Roadmap</h3>
-                        <p className="">{subtitle}</p>
+                        <p className="">
+                            <span dangerouslySetInnerHTML={{ __html: subtitle }} />
+                        </p>
                         <TeamRoadmap team={team} />
                     </div>
                     <div className="basis-[350px]">
