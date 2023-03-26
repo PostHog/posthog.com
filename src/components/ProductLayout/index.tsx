@@ -932,7 +932,7 @@ export const Hero = ({
                 </div>
             )}
             {image && (
-                <div className="max-w-screen-xl leading-0 mx-auto mt-8 -mb-12 text-center relative after:absolute after:bottom-0 after:left-0 after:w-full after:content-[''] after:h-36 after:bg-gradient-to-b after:from-tan/0 after:via-tan/60 after:to-tan/100">
+                <div className="max-w-screen-xl leading-0 mx-auto mt-8 -mb-12 text-center relative after:absolute after:bottom-12 after:left-0 after:w-full after:content-[''] after:h-36 after:bg-gradient-to-b after:from-tan/0 after:via-tan/60 after:to-tan/100">
                     <GatsbyImage alt={title} image={image} className="max-w-4xl" />
                 </div>
             )}
