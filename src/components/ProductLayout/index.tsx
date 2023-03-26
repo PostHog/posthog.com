@@ -233,9 +233,11 @@ export const Documentation = ({ documentation, title, image, tutorials }) => {
                     </ul>
                 </div>
                 <div>
-                    <figure className="m-0 p-4 rounded bg-gray-accent-light">
-                        {gatsbyImage && <GatsbyImage alt={title} image={gatsbyImage} />}
-                    </figure>
+                    {gatsbyImage && (
+                        <figure className="m-0 p-4 rounded bg-gray-accent-light">
+                            {gatsbyImage && <GatsbyImage alt={title} image={gatsbyImage} />}
+                        </figure>
+                    )}
                     <h4 className="m-0 opacity-60 mt-6 md:mt-12">Tutorials</h4>
                     <ul className="m-0 p-0 list-none grid divide-y-1 divide-dashed divide-gray-accent-light">
                         {tutorials.map(({ frontmatter, fields }) => {
