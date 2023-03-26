@@ -339,7 +339,7 @@ export const Testimonial = ({ author, image, quote }: ITestimonial & { image: Im
 
 export const TwoCol = ({ children, className = '' }: { children: React.ReactNode[]; className?: string }) => {
     return (
-        <div className={`grid md:grid-cols-2 md:gap-y-0 gap-y-4 md:gap-x-6 ${className}`}>
+        <div className={`grid md:grid-cols-2 md:gap-y-0 gap-y-4 md:gap-x-8 lg:gap-x-12 xl:gap-x-16 ${className}`}>
             <div>{children[0]}</div>
             <div>{children[1]}</div>
         </div>
