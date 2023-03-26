@@ -138,7 +138,8 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 nodes {
                     id
                     frontmatter {
-                        productBlogTags
+                        productBlogTag
+                        productTutorialTag
                         productDocumentation
                     }
                     fields {
@@ -502,6 +503,16 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         }
     }
 
+    const productDocumentationMenuNames = {
+        '/session-replay': 'Session recording',
+        '/product-analytics': 'Product analytics',
+        '/feature-flags': 'Feature flags',
+        '/ab-testing': 'A/B testing',
+        '/product-os': 'Data',
+    }
+
+    const docsMenu = sidebars.docs
+
     await Promise.all(
         result.data.product.nodes.map((node) => {
             return new Promise<void>((res) => {
@@ -511,8 +522,11 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     component: ProductTemplate,
                     context: {
                         id: node.id,
-                        blogTags: node?.frontmatter?.productBlogTags,
-                        documentation: node?.frontmatter?.productDocumentation || '',
+                        blogTag: node?.frontmatter?.productBlogTag,
+                        tutorialTag: node?.frontmatter?.productTutorialTag,
+                        documentationPages: docsMenu
+                            .find((menuItem) => menuItem.name === productDocumentationMenuNames[slug])
+                            ?.children?.map((child) => child.url),
                     },
                 })
                 res()

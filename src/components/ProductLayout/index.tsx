@@ -176,6 +176,72 @@ interface IPairItem {
     className?: string
 }
 
+export const Documentation = ({ documentation, title, image, tutorials }) => {
+    const slugger = new GithubSlugger()
+    const gatsbyImage = image && getImage(image)
+    return (
+        <>
+            <div className="pb-4 mb-4 border-b border-dashed border-gray-accent-light flex justify-between items-end">
+                <h2 className="m-0">Docs & resources</h2>
+                <CallToAction size="md" type="secondary" to="/docs">
+                    Visit docs
+                </CallToAction>
+            </div>
+            <div className="grid md:grid-cols-2 gap-x-0 md:gap-y-0 gap-y-4 md:gap-x-8">
+                <div>
+                    <h4 className="m-0 opacity-60">{title} docs</h4>
+                    <ul className="m-0 p-0 list-none grid divide-y-1 divide-dashed divide-gray-accent-light">
+                        {documentation.map(({ frontmatter, fields, headings }, index) => {
+                            const slug = fields?.slug
+                            return (
+                                <li key={slug} className="py-4 flex space-x-4">
+                                    <span className="font-semibold opacity-60">{index + 1}.</span>
+                                    <span>
+                                        <Link to={slug}>
+                                            <h5 className="mb-2">{frontmatter.title}</h5>
+                                        </Link>
+                                        <ul className="m-0 p-0 list-none">
+                                            {headings
+                                                .filter(({ depth }) => depth <= 3)
+                                                .map(({ value }) => {
+                                                    const id = slugger.slug(value)
+                                                    return (
+                                                        <li key={id} className="mb-2 last:mb-0">
+                                                            <Link to={`${slug}#${id}`} className="text-black ">
+                                                                {value}
+                                                            </Link>
+                                                        </li>
+                                                    )
+                                                })}
+                                        </ul>
+                                    </span>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                </div>
+                <div>
+                    {gatsbyImage && <GatsbyImage alt={title} image={gatsbyImage} />}
+                    <h4 className="m-0 opacity-60 mt-6 md:mt-12">Tutorials</h4>
+                    <ul className="m-0 p-0 list-none grid divide-y-1 divide-dashed divide-gray-accent-light">
+                        {tutorials.map(({ frontmatter, fields }) => {
+                            const title = frontmatter?.title
+                            const slug = fields?.slug
+                            return (
+                                <li className="py-2" key={slug}>
+                                    <Link className="font-semibold" to={slug}>
+                                        {title}
+                                    </Link>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                </div>
+            </div>
+        </>
+    )
+}
+
 export const PairItem = ({ title, description, className = '', icon, url }: IPairItem) => {
     const Icon = ProductIcons[icon] || NotProductIcons[icon]
     return (

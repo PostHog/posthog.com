@@ -8,6 +8,7 @@ import ProductLayout, {
     BlogPosts,
     Comparison,
     CTA,
+    Documentation,
     FeatureGrid,
     Hero,
     MainFeatures,
@@ -22,6 +23,8 @@ import GithubSlugger from 'github-slugger'
 
 import { Check as CheckIcon, Close as CloseIcon, RightArrow } from '../components/Icons'
 import Link from 'components/Link'
+import { CallToAction } from 'components/CallToAction'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 
 const Check = (props) => <CheckIcon {...props} className="w-5" />
 const Close = (props) => <CloseIcon {...props} className="w-5" />
@@ -36,7 +39,7 @@ const menuItemIDs = {
 }
 
 export default function Product({ data, location }) {
-    const { pageData, blogPosts, documentation } = data
+    const { pageData, blogPosts, documentation, tutorials } = data
     const {
         body,
         excerpt,
@@ -56,31 +59,6 @@ export default function Product({ data, location }) {
         productPairsWith,
         productMenuItems,
     } = pageData?.frontmatter
-    const slugger = new GithubSlugger()
-
-    const Documentation = () => {
-        return (
-            <>
-                <h4 className="m-0 mb-9">{title} documentation</h4>
-                <ul className="m-0 p-0 list-none">
-                    {documentation?.headings?.map((heading) => {
-                        const id = slugger.slug(heading.value)
-                        return (
-                            <li key={id}>
-                                <Link
-                                    className="text-[18px] group font-semibold pb-3 mb-3 border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark flex justify-between items-center"
-                                    to={`${documentation.fields?.slug}#${id}`}
-                                >
-                                    <span>{heading.value}</span>
-                                    <RightArrow className="w-6 h-6 text-gray bounce" />
-                                </Link>
-                            </li>
-                        )
-                    })}
-                </ul>
-            </>
-        )
-    }
 
     const components = {
         Hero: (props) => (
@@ -114,7 +92,12 @@ export default function Product({ data, location }) {
         Documentation: (props) => (
             <div id="documentation">
                 <SectionWrapper {...props}>
-                    <Documentation />
+                    <Documentation
+                        documentation={documentation?.nodes}
+                        title={title}
+                        image={productMainCTA?.image}
+                        tutorials={tutorials?.nodes}
+                    />
                 </SectionWrapper>
             </div>
         ),
@@ -138,7 +121,7 @@ export default function Product({ data, location }) {
 }
 
 export const query = graphql`
-    query Product($id: String!, $blogTags: String!, $documentation: String!) {
+    query Product($id: String!, $blogTag: String!, $tutorialTag: String!, $documentationPages: [String!]!) {
         pageData: mdx(id: { eq: $id }) {
             body
             excerpt(pruneLength: 150)
@@ -214,20 +197,35 @@ export const query = graphql`
                 }
             }
         }
-        blogPosts: allMdx(filter: { frontmatter: { tags: { in: [$blogTags] } } }, limit: 6) {
+        blogPosts: allMdx(filter: { frontmatter: { tags: { in: [$blogTag] } } }, limit: 6) {
             edges {
                 node {
                     ...BlogFragment
                 }
             }
         }
-        documentation: mdx(fields: { slug: { eq: $documentation } }) {
-            fields {
-                slug
+        tutorials: allMdx(filter: { frontmatter: { tags: { in: [$tutorialTag] } } }, limit: 6) {
+            nodes {
+                fields {
+                    slug
+                }
+                frontmatter {
+                    title
+                }
             }
-            headings {
-                depth
-                value
+        }
+        documentation: allMdx(filter: { fields: { slug: { in: $documentationPages } } }) {
+            nodes {
+                fields {
+                    slug
+                }
+                frontmatter {
+                    title
+                }
+                headings {
+                    depth
+                    value
+                }
             }
         }
     }
