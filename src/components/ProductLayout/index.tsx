@@ -117,12 +117,13 @@ interface ISection {
     features?: IFeature[]
     image?: ImageDataLike
     content?: string
+    align?: string
 }
 
-export const Section = ({ title, subtitle, features, image, content }: ISection) => {
+export const Section = ({ title, subtitle, features, image, content, align }: ISection) => {
     const gatsbImage = image && getImage(image)
     return (
-        <div>
+        <div style={{ alignSelf: align }}>
             {(title || subtitle) && <SectionHeading title={title} subtitle={subtitle} />}
             {content && <div dangerouslySetInnerHTML={{ __html: content }} />}
             {features && features?.length > 0 && <FeatureList features={features} />}
@@ -142,7 +143,7 @@ export const Sections = ({ sections }: { sections: ISection[][] }) => {
                         {section.length > 1 ? (
                             <TwoCol>
                                 {section.map((section, index) => (
-                                    <Section key={index} {...section} />
+                                    <Section align={section?.align} key={index} {...section} />
                                 ))}
                             </TwoCol>
                         ) : (
@@ -340,8 +341,8 @@ export const Testimonial = ({ author, image, quote }: ITestimonial & { image: Im
 export const TwoCol = ({ children, className = '' }: { children: React.ReactNode[]; className?: string }) => {
     return (
         <div className={`grid md:grid-cols-2 md:gap-y-0 gap-y-4 md:gap-x-8 lg:gap-x-12 xl:gap-x-16 ${className}`}>
-            <div>{children[0]}</div>
-            <div>{children[1]}</div>
+            {children[0]}
+            {children[1]}
         </div>
     )
 }

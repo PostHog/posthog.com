@@ -188,6 +188,7 @@ export const query = graphql`
                     title
                     subtitle
                     content
+                    align
                     features {
                         title
                         description
