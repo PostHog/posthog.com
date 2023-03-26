@@ -189,7 +189,7 @@ export const Documentation = ({ documentation, title, image, tutorials }) => {
         <>
             <div className="pb-4 mb-4 border-b border-dashed border-gray-accent-light flex justify-between items-end">
                 <h2 className="m-0">Docs & resources</h2>
-                <CallToAction size="sm" type="secondary" to="/docs">
+                <CallToAction size="sm" type="secondary" to={documentation?.indexURL}>
                     Visit docs
                 </CallToAction>
             </div>
@@ -197,7 +197,7 @@ export const Documentation = ({ documentation, title, image, tutorials }) => {
                 <div>
                     <h4 className="m-0 opacity-60">{title} docs</h4>
                     <ul className="m-0 p-0 list-none grid divide-y-1 divide-dashed divide-gray-accent-light">
-                        {documentation.map(({ frontmatter, fields, headings }, index) => {
+                        {documentation?.pages?.map(({ frontmatter, fields, headings }, index) => {
                             const slug = fields?.slug
                             return (
                                 <li key={slug} className="py-4 flex space-x-4">
@@ -212,6 +212,7 @@ export const Documentation = ({ documentation, title, image, tutorials }) => {
                                         <ul className="m-0 p-0 list-none">
                                             {headings
                                                 .filter(({ depth }) => depth <= 3)
+                                                .slice(0, 3)
                                                 .map(({ value }) => {
                                                     const id = slugger.slug(value)
                                                     return (

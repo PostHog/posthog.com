@@ -38,7 +38,7 @@ const menuItemIDs = {
     Documentation: 'documentation',
 }
 
-export default function Product({ data, location }) {
+export default function Product({ data, location, pageContext }) {
     const { pageData, blogPosts, documentation, tutorials } = data
     const {
         body,
@@ -58,7 +58,10 @@ export default function Product({ data, location }) {
         productPairsWith,
         productHero,
         productDocumentation,
+        productBlog,
     } = pageData?.frontmatter
+
+    console.log(documentation)
 
     const components = {
         Hero: (props) => (
@@ -79,9 +82,7 @@ export default function Product({ data, location }) {
         Comparison: (props) => (
             <Comparison {...props} description={`How does PostHog ${title.toLowerCase()} compare?`} />
         ),
-        BlogPosts: (props) => (
-            <BlogPosts {...props} title={`Blog posts that mention ${title}`} posts={blogPosts?.edges} />
-        ),
+        BlogPosts: (props) => <BlogPosts {...props} title={productBlog?.title} posts={blogPosts?.edges} />,
         Roadmap: (props) => (
             <Roadmap {...props} team={productTeam} subtitle={`Here's what the ${productTeam} Team is building next.`} />
         ),
@@ -93,7 +94,10 @@ export default function Product({ data, location }) {
             <div id="documentation">
                 <SectionWrapper {...props}>
                     <Documentation
-                        documentation={documentation?.nodes}
+                        documentation={{
+                            indexURL: pageContext?.documentationNav?.url,
+                            pages: documentation?.nodes,
+                        }}
                         title={title}
                         image={productDocumentation?.image}
                         tutorials={tutorials?.nodes}
@@ -121,7 +125,7 @@ export default function Product({ data, location }) {
 }
 
 export const query = graphql`
-    query Product($id: String!, $blogTag: String!, $tutorialTag: String!, $documentationPages: [String!]!) {
+    query Product($id: String!, $blogTags: [String!]!, $tutorialTags: [String!]!, $documentationURLs: [String!]!) {
         pageData: mdx(id: { eq: $id }) {
             body
             excerpt(pruneLength: 150)
@@ -133,6 +137,9 @@ export const query = graphql`
                 subtitle
                 description
                 productTeam
+                productBlog {
+                    title
+                }
                 productMenuItems
                 productHero {
                     image {
@@ -209,14 +216,14 @@ export const query = graphql`
                 }
             }
         }
-        blogPosts: allMdx(filter: { frontmatter: { tags: { in: [$blogTag] } } }, limit: 6) {
+        blogPosts: allMdx(filter: { frontmatter: { tags: { in: $blogTags } } }, limit: 6) {
             edges {
                 node {
                     ...BlogFragment
                 }
             }
         }
-        tutorials: allMdx(filter: { frontmatter: { tags: { in: [$tutorialTag] } } }, limit: 6) {
+        tutorials: allMdx(filter: { frontmatter: { tags: { in: $tutorialTags } } }, limit: 6) {
             nodes {
                 fields {
                     slug
@@ -226,7 +233,7 @@ export const query = graphql`
                 }
             }
         }
-        documentation: allMdx(filter: { fields: { slug: { in: $documentationPages } } }) {
+        documentation: allMdx(filter: { fields: { slug: { in: $documentationURLs } } }) {
             nodes {
                 fields {
                     slug

@@ -138,8 +138,10 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 nodes {
                     id
                     frontmatter {
-                        productBlogTag
-                        productTutorialTag
+                        productBlog {
+                            tags
+                        }
+                        productTutorialTags
                     }
                     fields {
                         slug
@@ -516,16 +518,18 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         result.data.product.nodes.map((node) => {
             return new Promise<void>((res) => {
                 const { slug } = node.fields
+                const documentationNav = docsMenu.find(
+                    (menuItem) => menuItem.name === productDocumentationMenuNames[slug]
+                )
                 createPage({
                     path: slug,
                     component: ProductTemplate,
                     context: {
                         id: node.id,
-                        blogTag: node?.frontmatter?.productBlogTag,
-                        tutorialTag: node?.frontmatter?.productTutorialTag,
-                        documentationPages: docsMenu
-                            .find((menuItem) => menuItem.name === productDocumentationMenuNames[slug])
-                            ?.children?.map((child) => child.url),
+                        blogTags: node?.frontmatter?.productBlog?.tags,
+                        tutorialTags: node?.frontmatter?.productTutorialTags,
+                        documentationNav,
+                        documentationURLs: documentationNav?.children?.map((child) => child.url),
                     },
                 })
                 res()
