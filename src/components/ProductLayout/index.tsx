@@ -117,12 +117,13 @@ interface ISection {
     features?: IFeature[]
     image?: ImageDataLike
     content?: string
+    align?: string
 }
 
-export const Section = ({ title, subtitle, features, image, content }: ISection) => {
+export const Section = ({ title, subtitle, features, image, content, align }: ISection) => {
     const gatsbImage = image && getImage(image)
     return (
-        <div>
+        <div style={{ alignSelf: align }}>
             {(title || subtitle) && <SectionHeading title={title} subtitle={subtitle} />}
             {content && <div dangerouslySetInnerHTML={{ __html: content }} />}
             {features && features?.length > 0 && <FeatureList features={features} />}
@@ -142,7 +143,7 @@ export const Sections = ({ sections }: { sections: ISection[][] }) => {
                         {section.length > 1 ? (
                             <TwoCol>
                                 {section.map((section, index) => (
-                                    <Section key={index} {...section} />
+                                    <Section align={section?.align} key={index} {...section} />
                                 ))}
                             </TwoCol>
                         ) : (
@@ -232,9 +233,11 @@ export const Documentation = ({ documentation, title, image, tutorials }) => {
                     </ul>
                 </div>
                 <div>
-                    <figure className="m-0 p-4 rounded bg-gray-accent-light">
-                        {gatsbyImage && <GatsbyImage alt={title} image={gatsbyImage} />}
-                    </figure>
+                    {gatsbyImage && (
+                        <figure className="m-0 p-4 rounded bg-gray-accent-light">
+                            {gatsbyImage && <GatsbyImage alt={title} image={gatsbyImage} />}
+                        </figure>
+                    )}
                     <h4 className="m-0 opacity-60 mt-6 md:mt-12">Tutorials</h4>
                     <ul className="m-0 p-0 list-none grid divide-y-1 divide-dashed divide-gray-accent-light">
                         {tutorials.map(({ frontmatter, fields }) => {
@@ -340,8 +343,8 @@ export const Testimonial = ({ author, image, quote }: ITestimonial & { image: Im
 export const TwoCol = ({ children, className = '' }: { children: React.ReactNode[]; className?: string }) => {
     return (
         <div className={`grid md:grid-cols-2 md:gap-y-0 gap-y-4 md:gap-x-8 lg:gap-x-12 xl:gap-x-16 ${className}`}>
-            <div>{children[0]}</div>
-            <div>{children[1]}</div>
+            {children[0]}
+            {children[1]}
         </div>
     )
 }
@@ -705,7 +708,9 @@ export const Roadmap = ({ subtitle, team }) => {
                 <div className="mt-8 flex items-start md:space-y-0 space-y-4 md:space-x-8 md:flex-row flex-col">
                     <div className="flex-1">
                         <h3 className="m-0">Roadmap</h3>
-                        <p className="">{subtitle}</p>
+                        <p className="">
+                            <span dangerouslySetInnerHTML={{ __html: subtitle }} />
+                        </p>
                         <TeamRoadmap team={team} />
                     </div>
                     <div className="basis-[350px]">

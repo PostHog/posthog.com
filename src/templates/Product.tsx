@@ -57,6 +57,7 @@ export default function Product({ data, location }) {
         productPricingCTA,
         productPairsWith,
         productHero,
+        productDocumentation,
     } = pageData?.frontmatter
 
     const components = {
@@ -94,7 +95,7 @@ export default function Product({ data, location }) {
                     <Documentation
                         documentation={documentation?.nodes}
                         title={title}
-                        image={productMainCTA?.image}
+                        image={productDocumentation?.image}
                         tutorials={tutorials?.nodes}
                     />
                 </SectionWrapper>
@@ -184,10 +185,18 @@ export const query = graphql`
                     description
                     icon
                 }
+                productDocumentation {
+                    image {
+                        childImageSharp {
+                            gatsbyImageData
+                        }
+                    }
+                }
                 productSections {
                     title
                     subtitle
                     content
+                    align
                     features {
                         title
                         description
