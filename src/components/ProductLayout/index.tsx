@@ -119,9 +119,19 @@ interface ISection {
     content?: string
     align?: string
     sections?: ISection[]
+    imageFrame?: boolean
 }
 
-export const Section = ({ title, subtitle, features, image, content, align, sections }: ISection) => {
+export const Section = ({
+    title,
+    subtitle,
+    features,
+    image,
+    content,
+    align,
+    sections,
+    imageFrame = true,
+}: ISection) => {
     const gatsbImage = image && getImage(image)
     return (
         <div style={{ alignSelf: align }}>
@@ -129,7 +139,11 @@ export const Section = ({ title, subtitle, features, image, content, align, sect
             {content && <div dangerouslySetInnerHTML={{ __html: content }} />}
             {features && features?.length > 0 && <FeatureList features={features} />}
             {gatsbImage && (
-                <GatsbyImage alt={title || ''} image={gatsbImage} className="rounded overflow-hidden shadow-xl" />
+                <GatsbyImage
+                    alt={title || ''}
+                    image={gatsbImage}
+                    className={imageFrame ? 'rounded overflow-hidden shadow-xl' : ''}
+                />
             )}
             {sections &&
                 (sections?.length > 1 ? (

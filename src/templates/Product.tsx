@@ -61,8 +61,6 @@ export default function Product({ data, location, pageContext }) {
         productBlog,
     } = pageData?.frontmatter
 
-    console.log(documentation)
-
     const components = {
         Hero: (props) => (
             <Hero
@@ -214,6 +212,7 @@ export const query = graphql`
                         title
                         description
                     }
+                    imageFrame
                     image {
                         childImageSharp {
                             gatsbyImageData
