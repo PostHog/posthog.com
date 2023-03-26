@@ -14,7 +14,7 @@ type QuestionPageProps = {
         id: string
     }
     data: {
-        question: {
+        squeakQuestion: {
             subject: string
             squeakId: string
         }
@@ -25,13 +25,19 @@ type QuestionPageProps = {
 }
 
 export default function QuestionPage(props: QuestionPageProps) {
+    console.log(props)
+
+    if (!props?.data?.squeakQuestion) {
+        return null
+    }
+
     return (
         <Layout>
-            <SEO title={`${props.data.question.subject} - PostHog`} />
+            <SEO title={`${props.data.squeakQuestion.subject} - PostHog`} />
             <PostLayout
-                title={props.data.question.subject}
+                title={props.data.squeakQuestion.subject}
                 menu={community}
-                sidebar={<QuestionSidebar question={props.data.question} />}
+                sidebar={<QuestionSidebar question={props.data.squeakQuestion} />}
                 hideSurvey
             >
                 <section className="max-w-5xl mx-auto pb-12">
@@ -41,7 +47,7 @@ export default function QuestionPage(props: QuestionPageProps) {
                         </Link>
                     </div>
 
-                    <Question id={props.data.question.squeakId} question={props.data.question} />
+                    <Question id={props.data.squeakQuestion.squeakId} question={props.data.squeakQuestion} />
                 </section>
             </PostLayout>
         </Layout>
