@@ -396,8 +396,8 @@ const slides = [
         ),
     },
     {
-        label: 'Session recording',
-        url: 'session-recording',
+        label: 'Session replay',
+        url: 'session-replay',
         image: (
             <StaticImage
                 placeholder="none"
@@ -425,7 +425,7 @@ const slides = [
     },
     {
         label: 'A/B testing and experiments',
-        url: 'ab-tests-and-experiments',
+        url: 'ab-testing',
         image: (
             <StaticImage
                 placeholder="none"
@@ -439,7 +439,7 @@ const slides = [
     },
     {
         label: 'Data warehouse',
-        url: 'data-warehouse',
+        url: 'product-os',
         image: (
             <StaticImage
                 placeholder="none"
@@ -453,7 +453,7 @@ const slides = [
     },
     {
         label: 'Event pipelines',
-        url: 'event-pipelines',
+        url: 'product-os',
         image: (
             <StaticImage
                 placeholder="none"
@@ -467,7 +467,7 @@ const slides = [
     },
     {
         label: 'API',
-        url: 'api',
+        url: 'product-os',
         image: (
             <StaticImage
                 placeholder="none"
@@ -481,7 +481,7 @@ const slides = [
     },
     {
         label: 'Data warehouse',
-        url: 'data-warehouse',
+        url: 'product-os',
         image: (
             <StaticImage
                 placeholder="none"
@@ -495,7 +495,7 @@ const slides = [
     },
     {
         label: 'Data warehouse',
-        url: 'data-warehouse',
+        url: 'product-os',
         image: (
             <StaticImage
                 placeholder="none"
@@ -509,7 +509,7 @@ const slides = [
     },
     {
         label: 'Data warehouse',
-        url: 'data-warehouse',
+        url: 'product-os',
         image: (
             <StaticImage
                 placeholder="none"
@@ -523,7 +523,7 @@ const slides = [
     },
     {
         label: 'Data warehouse',
-        url: 'data-warehouse',
+        url: 'product-os',
         image: (
             <StaticImage
                 placeholder="none"
@@ -554,7 +554,7 @@ export const Footer = ({ title }) => {
 
     return (
         <section className="text-center my-14">
-            <h2 className="text-4xl md:text-6xl m-0">PostHog does that.</h2>
+            <h2 className="text-4xl md:text-6xl">PostHog does that.</h2>
             <p className="mt-2 mb-12">
                 Now that you know PostHog does {title.toLowerCase()}, check out what else PostHog can do.
             </p>
@@ -945,7 +945,7 @@ export const Hero = ({
     return (
         <>
             <h1 id="overview" className="text-center text-5xl lg:text-6xl 2xl:text-7xl mb-0 mt-8 md:mt-14">
-                <span className="text-red">{title}?</span> PostHog does that.
+                <span className="text-red">{title}?</span> <span className="inline-block">PostHog does that.</span>
             </h1>
             <p
                 className="text-center text-lg font-semibold text-black/70 mt-4"
