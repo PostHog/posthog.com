@@ -345,7 +345,7 @@ export const TwoCol = ({ children, className = '' }: { children: React.ReactNode
 export const Quote = ({ children, className = '' }: { children: React.ReactNode[]; className?: string }) => {
     return (
         <div
-            className={`grid py-10 px-16 -mx-12 bg-gray-accent-light md:grid-cols-2 md:gap-y-0 gap-y-4 md:gap-x-6 ${className}`}
+            className={`grid py-10 px-16 -mx-12 bg-gray-accent-light md:grid-cols-2 md:gap-y-0 gap-y-4 md:gap-x-8 lg:gap-x-12 xl:gap-x-16 ${className}`}
         >
             <div>{children[0]}</div>
             <div>{children[1]}</div>
@@ -689,32 +689,42 @@ export const Roadmap = ({ subtitle, team }) => {
     return (
         <div id="roadmap">
             <SectionWrapper>
-                <h3 className="m-0">Roadmap</h3>
-                <p className="m-0">{subtitle}</p>
                 <div className="mt-8 flex items-start md:space-y-0 space-y-4 md:space-x-8 md:flex-row flex-col">
-                    <div>
+                    <div className="flex-1">
+                        <h3 className="m-0">Roadmap</h3>
+                        <p className="">{subtitle}</p>
                         <TeamRoadmap team={team} />
                     </div>
-                    <div className="flex-shrink-0">
-                        <p className="mb-4">
-                            Here are the people who bring you
-                            <br />
-                            <strong>PostHog {team.toLowerCase()}</strong>
+                    <div className="basis-[350px]">
+                        <h4 className="m-0">The {team.toLowerCase()} team</h4>
+
+                        <p className="text-sm mb-2">Here are the people bringing you {team.toLowerCase()}. </p>
+
+                        <p className="text-xs mb-4 opacity-75">
+                            (
+                            {pineapplePercentage > 50
+                                ? '<strong>' +
+                                  pineapplePercentage +
+                                  '%</strong> of this team prefer pineapple on pizza. (As it should be.)'
+                                : pineapplePercentage == 50
+                                ? 'This team is split even if pineapple belongs on pizza.'
+                                : 'Shockingly, only ' + pineapplePercentage + '% of them prefer pineapple on pizza.'}
+                            )
                         </p>
-                        <ul className="list-none m-0 p-0">
+                        <ul className="list-none m-0 mb-4 p-0">
                             {teamMembers.map((member) => {
                                 const { name, headshot, jobTitle, teamLead, country } = member?.frontmatter
                                 return (
-                                    <li className="!m-0 flex space-x-4 items-center py-2" key={name}>
+                                    <li className="!m-0 flex space-x-2 items-center py-1" key={name}>
                                         <figure className="mb-0">
                                             <ContributorImage
-                                                className="w-[50px] h-[50px] "
+                                                className="w-[45px] h-[45px]"
                                                 image={getImage(headshot)}
                                             />
                                         </figure>
                                         <div>
                                             <span className="flex items-center md:flex-row space-x-2">
-                                                <p className="!text-lg !font-bold !m-0 !leading-none">{name}</p>
+                                                <p className="text-base font-bold m-0 leading-none">{name}</p>
                                                 {country && (
                                                     <span className="!leading-none">
                                                         {country === 'world' ? (
@@ -736,10 +746,8 @@ export const Roadmap = ({ subtitle, team }) => {
                                 )
                             })}
                         </ul>
-                        <p className="mt-4">
-                            <strong>{pineapplePercentage}%</strong> of this team prefer pineapple on pizza
-                        </p>
-                        <CallToAction size="md" to={teamURL} type="outline">
+
+                        <CallToAction size="sm" to={teamURL} type="outline">
                             Learn more about this team
                         </CallToAction>
                     </div>
