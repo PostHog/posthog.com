@@ -69,7 +69,9 @@ export const FeatureGrid = ({ features, className = '' }: IFeatureGridProps) => 
     return (
         <SectionWrapper className="max-w-full">
             <ul
-                className={`grid list-none m-0 max-w-screen-4xl mx-auto p-0 ${getTailwindGridCol(length)} ${className}`}
+                className={`grid list-none m-0 max-w-screen-4xl space-y-8 md:space-y-0 mx-auto p-0 ${getTailwindGridCol(
+                    length
+                )} ${className}`}
             >
                 {features.map((feature) => {
                     return <Feature key={feature.title} {...feature} />
@@ -161,7 +163,7 @@ interface IFeature {
 export const Feature = ({ title, description, className = '', icon }: IFeature) => {
     const Icon = ProductIcons[icon] || NotProductIcons[icon]
     return (
-        <li className={`p-6 pb-8  ${className}`}>
+        <li className={`sm:p-6 sm:pb-8  ${className}`}>
             {Icon && <Icon className="w-10 h-10 mb-4 opacity-50" />}
             <FeatureTitle>{title}</FeatureTitle>
             <FeatureDescription>{description}</FeatureDescription>
@@ -345,7 +347,7 @@ export const TwoCol = ({ children, className = '' }: { children: React.ReactNode
 export const Quote = ({ children, className = '' }: { children: React.ReactNode[]; className?: string }) => {
     return (
         <div
-            className={`grid py-10 px-16 -mx-12 bg-gray-accent-light md:grid-cols-2 md:gap-y-0 gap-y-4 md:gap-x-8 lg:gap-x-12 xl:gap-x-16 ${className}`}
+            className={`grid py-10 px-5 md:px-16 -mx-5 md:-mx-12 bg-gray-accent-light md:grid-cols-2 gap-y-8 md:gap-y-0 md:gap-x-8 lg:gap-x-12 xl:gap-x-16 ${className}`}
         >
             <div>{children[0]}</div>
             <div>{children[1]}</div>
@@ -552,24 +554,33 @@ export const Footer = ({ title }) => {
 
     return (
         <section className="text-center my-14">
-            <h2 className="text-6xl m-0">PostHog does that.</h2>
+            <h2 className="text-4xl md:text-6xl m-0">PostHog does that.</h2>
             <p className="mt-2 mb-12">
                 Now that you know PostHog does {title.toLowerCase()}, check out what else PostHog can do.
             </p>
             <Nav />
-            <Slider
-                beforeChange={(_oldIndex, newIndex) => setActiveSlide(newIndex)}
-                className="product-hogs-slider"
-                {...sliderSettings}
-            >
-                {slides.map((slide, index) => {
-                    return (
-                        <Link key={index} className="cursor-pointer" smooth duration={300} offset={-57} to={slide.url}>
-                            <Slide {...slide} />
-                        </Link>
-                    )
-                })}
-            </Slider>
+            <div className="-mx-5">
+                <Slider
+                    beforeChange={(_oldIndex, newIndex) => setActiveSlide(newIndex)}
+                    className="product-hogs-slider"
+                    {...sliderSettings}
+                >
+                    {slides.map((slide, index) => {
+                        return (
+                            <Link
+                                key={index}
+                                className="cursor-pointer"
+                                smooth
+                                duration={300}
+                                offset={-57}
+                                to={slide.url}
+                            >
+                                <Slide {...slide} />
+                            </Link>
+                        )
+                    })}
+                </Slider>
+            </div>
         </section>
     )
 }
@@ -605,7 +616,7 @@ export const BlogPosts = ({ posts, title }) => {
         posts?.length > 0 && (
             <SectionWrapper>
                 <h3>{title}</h3>
-                <ul className="list-none m-0 p-0 grid grid-cols-2 gap-4">
+                <ul className="list-none m-0 p-0 grid sm:grid-cols-2 gap-4">
                     {posts.map((post) => {
                         const {
                             node: {
@@ -711,11 +722,11 @@ export const Roadmap = ({ subtitle, team }) => {
                                 : 'Shockingly, only ' + pineapplePercentage + '% of them prefer pineapple on pizza.'}
                             )
                         </p>
-                        <ul className="list-none m-0 mb-4 p-0">
+                        <ul className="list-none m-0 mb-4 p-0 space-y-2 md:space-y-0">
                             {teamMembers.map((member) => {
                                 const { name, headshot, jobTitle, teamLead, country } = member?.frontmatter
                                 return (
-                                    <li className="!m-0 flex space-x-2 items-center py-1" key={name}>
+                                    <li className="flex space-x-2 items-center py-1" key={name}>
                                         <figure className="mb-0">
                                             <ContributorImage
                                                 className="w-[45px] h-[45px]"
@@ -933,15 +944,15 @@ export const Hero = ({
     const image = featuredImage && getImage(featuredImage)
     return (
         <>
-            <h1 id="overview" className="text-center text-5xl lg:text-6xl 2xl:text-7xl mb-0 mt-14">
-                {title}? PostHog does that.
+            <h1 id="overview" className="text-center text-5xl lg:text-6xl 2xl:text-7xl mb-0 mt-8 md:mt-14">
+                <span className="text-red">{title}?</span> PostHog does that.
             </h1>
             <p
                 className="text-center text-lg font-semibold text-black/70 mt-4"
                 dangerouslySetInnerHTML={{ __html: subtitle }}
             />
             {pricingCTA && mainCTA && (
-                <div className="flex space-x-4 items-center justify-center">
+                <div className="flex flex-col space-y-3 md:space-y-0 md:flex-row md:space-x-4 md:items-center justify-center">
                     <CallToAction to={mainCTA.url}>{mainCTA.title}</CallToAction>
                     <CallToAction type="secondary" to={pricingCTA.url}>
                         {pricingCTA.title}
