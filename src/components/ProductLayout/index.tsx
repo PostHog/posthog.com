@@ -18,6 +18,7 @@ import { Chevron } from 'components/Icons'
 import slugify from 'slugify'
 import * as ProductIcons from 'components/ProductIcons'
 import * as NotProductIcons from 'components/NotProductIcons'
+import GithubSlugger from 'github-slugger'
 
 const nav = [
     {
@@ -302,7 +303,7 @@ export interface ITestimonial {
 export const Testimonial = ({ author, image, quote }: ITestimonial & { image: ImageDataLike }) => {
     const gatsbyImage = image && getImage(image)
     return (
-        <SectionWrapper>
+        <SectionWrapper className="!pt-0 mt-0 relative">
             <Quote className="items-end">
                 <div>
                     <img className="text-black max-w-[200px]" src={author.company.image} />
@@ -931,8 +932,8 @@ export const Hero = ({
                 </div>
             )}
             {image && (
-                <div className="max-w-screen-xl mx-auto mt-8 mb-14 text-center">
-                    <GatsbyImage alt={title} image={image} className="w-1/2" />
+                <div className="max-w-screen-xl leading-0 mx-auto mt-8 -mb-12 text-center relative after:absolute after:bottom-0 after:left-0 after:w-full after:content-[''] after:h-36 after:bg-gradient-to-b after:from-tan/0 after:via-tan/60 after:to-tan/100">
+                    <GatsbyImage alt={title} image={image} className="max-w-4xl" />
                 </div>
             )}
         </>
