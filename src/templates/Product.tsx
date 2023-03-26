@@ -48,7 +48,6 @@ export default function Product({ data, location }) {
     const {
         title,
         subtitle,
-        featuredImage,
         description,
         productFeatures,
         productSections,
@@ -57,7 +56,7 @@ export default function Product({ data, location }) {
         productMainCTA,
         productPricingCTA,
         productPairsWith,
-        productMenuItems,
+        productHero,
     } = pageData?.frontmatter
 
     const components = {
@@ -68,7 +67,7 @@ export default function Product({ data, location }) {
                 pricingCTA={productPricingCTA}
                 title={title}
                 subtitle={subtitle}
-                featuredImage={featuredImage}
+                image={productHero}
             />
         ),
         MainFeatures: (props) => <MainFeatures {...props} features={productFeatures} />,
@@ -134,6 +133,15 @@ export const query = graphql`
                 description
                 productTeam
                 productMenuItems
+                productHero {
+                    image {
+                        childImageSharp {
+                            gatsbyImageData
+                        }
+                    }
+                    width
+                    height
+                }
                 productPairsWith {
                     title
                     description
@@ -188,11 +196,6 @@ export const query = graphql`
                         childImageSharp {
                             gatsbyImageData
                         }
-                    }
-                }
-                featuredImage {
-                    childImageSharp {
-                        gatsbyImageData
                     }
                 }
             }

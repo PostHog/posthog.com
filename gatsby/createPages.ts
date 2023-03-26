@@ -140,7 +140,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     frontmatter {
                         productBlogTag
                         productTutorialTag
-                        productDocumentation
                     }
                     fields {
                         slug
