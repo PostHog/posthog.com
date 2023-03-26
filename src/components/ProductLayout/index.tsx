@@ -91,7 +91,7 @@ export const PairGrid = ({ features, className = '' }: IPairGridProps) => {
     return (
         <SectionWrapper className="max-w-full">
             <ul
-                className={`md:grid list-none m-0 max-w-screen-4xl mx-auto p-0  ${getTailwindGridCol(
+                className={`md:grid list-none m-0 max-w-screen-4xl mx-auto p-0 space-y-4 md:space-y-0 ${getTailwindGridCol(
                     length
                 )} ${className}`}
             >
@@ -259,7 +259,7 @@ export const PairItem = ({ title, description, className = '', icon, url }: IPai
         <li className={` ${className}`}>
             <Link
                 to={url}
-                className="block h-full text-primary hover:text-primary p-6 pb-8 bg-white rounded-md mx-4 shadow relative hover:scale-[1.02] hover:top-[-.25px] active:top-[.5px] active:scale-[1]"
+                className="block h-full text-primary hover:text-primary p-6 pb-8 bg-white rounded-md md:mx-4 shadow relative hover:scale-[1.02] hover:top-[-.25px] active:top-[.5px] active:scale-[1]"
             >
                 {Icon && <Icon className="w-8 h-8 mb-4 opacity-75" />}
                 <FeatureTitle className="text-red">{title}</FeatureTitle>
@@ -716,7 +716,7 @@ export const Roadmap = ({ subtitle, team }) => {
                             {pineapplePercentage > 50
                                 ? '<strong>' +
                                   pineapplePercentage +
-                                  '%</strong> of this team prefer pineapple on pizza. (As it should be.)'
+                                  '%</strong> of this team prefer pineapple on pizza. As it should be.'
                                 : pineapplePercentage == 50
                                 ? 'This team is split even if pineapple belongs on pizza.'
                                 : 'Shockingly, only ' + pineapplePercentage + '% of them prefer pineapple on pizza.'}
