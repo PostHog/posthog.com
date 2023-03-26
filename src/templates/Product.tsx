@@ -204,6 +204,12 @@ export const query = graphql`
                     subtitle
                     content
                     align
+                    sections {
+                        features {
+                            title
+                            description
+                        }
+                    }
                     features {
                         title
                         description

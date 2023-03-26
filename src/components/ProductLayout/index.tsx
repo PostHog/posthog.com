@@ -118,9 +118,10 @@ interface ISection {
     image?: ImageDataLike
     content?: string
     align?: string
+    sections?: ISection[]
 }
 
-export const Section = ({ title, subtitle, features, image, content, align }: ISection) => {
+export const Section = ({ title, subtitle, features, image, content, align, sections }: ISection) => {
     const gatsbImage = image && getImage(image)
     return (
         <div style={{ alignSelf: align }}>
@@ -130,6 +131,16 @@ export const Section = ({ title, subtitle, features, image, content, align }: IS
             {gatsbImage && (
                 <GatsbyImage alt={title || ''} image={gatsbImage} className="rounded overflow-hidden shadow-xl" />
             )}
+            {sections &&
+                (sections?.length > 1 ? (
+                    <TwoCol>
+                        {sections.map((section, index) => (
+                            <Section align={section?.align} key={index} {...section} />
+                        ))}
+                    </TwoCol>
+                ) : (
+                    <Section {...sections[0]} />
+                ))}
         </div>
     )
 }

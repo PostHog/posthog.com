@@ -67,30 +67,31 @@ productSections: [
     {
       title: "API",
       subtitle: "Build custom functionality or create bespoke views specific to your business needs",
-      features: [
-            {
-                title: 'Data transformations',
-                description:
-                    'Capture the live event stream and do something with it - like munge PII or add geolocation.',
-            },
-            {
-                title: 'Data out',
-                description: 'Access data from dashboards or metrics from saved insights.',
-            },
-            {
-                title: 'Data augmentation',
-                description:
-                    'Augment event data coming into PostHog with more context and detail',
-            },
-            {
-                title: 'Reverse ETL',
-                description:
-                    'Update and feed context to external products like Hubspot or Salesforce',
-            },
-        ]
-    },
-    {
-      align: "end",
+      sections: [
+        {
+          features: [
+                      {
+                          title: 'Data transformations',
+                          description:
+                              'Capture the live event stream and do something with it - like munge PII or add geolocation.',
+                      },
+                      {
+                          title: 'Data out',
+                          description: 'Access data from dashboards or metrics from saved insights.',
+                      },
+                      {
+                          title: 'Data augmentation',
+                          description:
+                              'Augment event data coming into PostHog with more context and detail',
+                      },
+                      {
+                          title: 'Reverse ETL',
+                          description:
+                              'Update and feed context to external products like Hubspot or Salesforce',
+                      },
+                  ]
+        },
+        {
       features: [
             {
                 title: 'Build apps',
@@ -113,6 +114,8 @@ productSections: [
             },
         ]
     }
+      ]
+    },
   ],
 ]
 productTestimonial: {
