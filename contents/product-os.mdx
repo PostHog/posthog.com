@@ -1,7 +1,6 @@
 ---
 title: Customer data infrastructure
 subtitle: Product OS is the foundation that all PostHog products are built on.
-featuredImage: ./images/products/session-recording.png
 template: product
 productFeatures: [
     {
@@ -115,14 +114,14 @@ productSections: [
 ]
 productTestimonial: {
     "author": { 
-      "image": "/images/customers/nick-booth.png",
+      "image": "/images/customers/nick-booth.jpg",
       "name": "Nick Booth",
       "role": "Former CTO",
       "company": { "name": "Feedr", "image": "/images/customers/feedr.svg" } 
     },
     
-    "quote": "We have been using PostHog for a number of months now and found it very easy to implement. Its toolbar feature means in some cases we can get metrics on specific areas without needing to instrument our code. We use Redshift for our Datawarehouse and the posted posthog instance supports pushing the data into this so we have all of our product analytics in one place. All in all a spectacular product.",
-    image: ./images/products/session-recording.png
+    "quote": "We have found PostHog very easy to implement. Its toolbar feature means in some cases <strong>we can get metrics on specific areas without needing to instrument our code.</strong> We use Redshift for our data warehouse and PostHog supports pushing the data into this so we have all of our product analytics in one place. <strong>All in all a spectacular product.</strong>",
+    image: ./images/products/hogs/data-warehouse.png
 }
 productBlogTag: Product analytics
 productTutorialTag: product analytics
@@ -147,11 +146,11 @@ productMenuItems: [
 
 <Hero />
 
+<Sections />
+
 <MainFeatures />
 
-<Testimonial />
-
-<Sections />
+<Testimonial className="bg-red" />
 
 <BlogPosts />
 
