@@ -19,6 +19,7 @@ import slugify from 'slugify'
 import * as ProductIcons from 'components/ProductIcons'
 import * as NotProductIcons from 'components/NotProductIcons'
 import GithubSlugger from 'github-slugger'
+import { pineappleText } from 'components/Job/Sidebar'
 
 const nav = [
     {
@@ -734,9 +735,7 @@ export const Roadmap = ({ subtitle, team }) => {
                 <div className="mt-8 flex items-start md:space-y-0 space-y-4 md:space-x-8 md:flex-row flex-col">
                     <div className="flex-1">
                         <h3 className="m-0">Roadmap</h3>
-                        <p className="">
-                            <span dangerouslySetInnerHTML={{ __html: subtitle }} />
-                        </p>
+                        <p className="">{subtitle}</p>
                         <TeamRoadmap team={team} />
                     </div>
                     <div className="basis-[350px]">
@@ -744,17 +743,7 @@ export const Roadmap = ({ subtitle, team }) => {
 
                         <p className="text-sm mb-2">Here are the people bringing you {team.toLowerCase()}. </p>
 
-                        <p className="text-xs mb-4 opacity-75">
-                            (
-                            {pineapplePercentage > 50
-                                ? '<strong>' +
-                                  pineapplePercentage +
-                                  '%</strong> of this team prefer pineapple on pizza. As it should be.'
-                                : pineapplePercentage == 50
-                                ? 'This team is split even if pineapple belongs on pizza.'
-                                : 'Shockingly, only ' + pineapplePercentage + '% of them prefer pineapple on pizza.'}
-                            )
-                        </p>
+                        <p className="text-xs mb-4 opacity-75">{pineappleText(pineapplePercentage)}</p>
                         <ul className="list-none m-0 mb-4 p-0 space-y-2 md:space-y-0">
                             {teamMembers.map((member) => {
                                 const { name, headshot, jobTitle, teamLead, country } = member?.frontmatter
