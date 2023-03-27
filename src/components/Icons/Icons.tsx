@@ -30,7 +30,7 @@ export const Minus = (): JSX.Element => {
     )
 }
 
-export const Chevron = ({ className }: { className: string }): JSX.Element => {
+export const Chevron = ({ className = '' }: { className?: string }): JSX.Element => {
     return (
         <svg className={className} viewBox="0 0 10 7" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path

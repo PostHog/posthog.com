@@ -25,17 +25,22 @@ interface IPost {
         name: string
         image: ImageDataLike
     }[]
+    imgClassName?: string
 }
 
-export const Post = ({ featuredImage, slug, title, category, date, authors }: IPost) => {
+export const Post = ({ featuredImage, slug, title, category, date, authors, imgClassName }: IPost) => {
     const image = featuredImage && getImage(featuredImage)
     return (
         <div className="relative rounded-md overflow-hidden z-10 h-full w-full">
             <Link className="!text-white !hover:text-white cta" to={slug}>
                 {image ? (
-                    <GatsbyImage alt={title} className="md:w-auto w-full" image={image} />
+                    <GatsbyImage alt={title} className={imgClassName ?? 'md:w-auto w-full'} image={image} />
                 ) : (
-                    <StaticImage className="md:w-auto w-full" alt={title} src="./images/default.jpg" />
+                    <StaticImage
+                        className={imgClassName ?? 'md:w-auto w-full'}
+                        alt={title}
+                        src="./images/default.jpg"
+                    />
                 )}
                 <div className="bg-gradient-to-b from-black/50 via-black/20  to-black/50 absolute inset-0 p-5 flex flex-col h-full w-full">
                     {category && <p className="m-0 text-sm opacity-80">{category}</p>}

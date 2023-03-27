@@ -51,7 +51,7 @@ export const wrapPageElement = ({ element, props }) => {
           'docs/data',
       ].includes(slug) ? (
         <HandbookLayout {...props} />
-    ) : /^product\//.test(slug) ? (
+    ) : /^session-replay|^product-analytics|^feature-flags|^ab-testing|^product-os/.test(slug) ? (
         <Product {...props} />
     ) : /^careers\//.test(slug) ? (
         <Job {...props} />
