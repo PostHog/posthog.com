@@ -4,39 +4,21 @@ import { SEO } from 'components/seo'
 import { graphql } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
-import ProductLayout, {
-    BlogPosts,
-    Comparison,
-    CTA,
-    Documentation,
-    FeatureGrid,
-    Hero,
-    MainFeatures,
-    PairsWith,
-    Roadmap,
-    Sections,
-    SectionWrapper,
-    StickyNav,
-    Testimonial,
-} from 'components/ProductLayout'
-import GithubSlugger from 'github-slugger'
+import { Check as CheckIcon, Close as CloseIcon } from '../components/Icons'
+import Hero from 'components/ProductLayout/Hero'
+import { MainFeatures } from 'components/ProductLayout/Feature'
+import { Sections, SectionWrapper } from 'components/ProductLayout/Section'
+import Testimonial from 'components/ProductLayout/Testimonial'
+import Comparison from 'components/ProductLayout/Comparison'
+import BlogPosts from 'components/ProductLayout/BlogPosts'
+import Roadmap from 'components/ProductLayout/Roadmap'
+import CTA from 'components/ProductLayout/CTA'
+import PairsWith from 'components/ProductLayout/PairsWith'
+import Documentation from 'components/ProductLayout/Documentation'
+import ProductLayout from 'components/ProductLayout'
 
-import { Check as CheckIcon, Close as CloseIcon, RightArrow } from '../components/Icons'
-import Link from 'components/Link'
-import { CallToAction } from 'components/CallToAction'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-
-const Check = (props) => <CheckIcon {...props} className="w-5" />
-const Close = (props) => <CloseIcon {...props} className="w-5" />
-
-const menuItemIDs = {
-    Overview: 'overview',
-    Features: 'features',
-    'Pairs with': 'pairs-with',
-    'PostHog vs...': 'comparison',
-    Roadmap: 'roadmap',
-    Documentation: 'documentation',
-}
+const Check = (props: any) => <CheckIcon {...props} className="w-5" />
+const Close = (props: any) => <CloseIcon {...props} className="w-5" />
 
 export default function Product({ data, location, pageContext }) {
     const { pageData, blogPosts, documentation, tutorials } = data
@@ -62,7 +44,7 @@ export default function Product({ data, location, pageContext }) {
     } = pageData?.frontmatter
 
     const components = {
-        Hero: (props) => (
+        Hero: (props: any) => (
             <Hero
                 {...props}
                 mainCTA={productMainCTA}
@@ -72,23 +54,28 @@ export default function Product({ data, location, pageContext }) {
                 image={productHero}
             />
         ),
-        MainFeatures: (props) => <MainFeatures {...props} features={productFeatures} />,
-        Sections: (props) => <Sections {...props} sections={productSections} />,
-        Testimonial: (props) => <Testimonial {...props} {...productTestimonial} />,
+        MainFeatures: (props: any) => <MainFeatures {...props} features={productFeatures} />,
+        Sections: (props: any) => <Sections {...props} sections={productSections} />,
+        Testimonial: (props: any) => <Testimonial {...props} {...productTestimonial} />,
         Check,
         Close,
-        Comparison: (props) => (
+        Comparison: (props: any) => (
             <Comparison {...props} description={`How does PostHog ${title.toLowerCase()} compare?`} />
         ),
-        BlogPosts: (props) => <BlogPosts {...props} title={productBlog?.title} posts={blogPosts?.edges} />,
-        Roadmap: (props) => (
+        BlogPosts: (props: any) => <BlogPosts {...props} title={productBlog?.title} posts={blogPosts?.edges} />,
+        Roadmap: (props: any) => (
             <Roadmap {...props} team={productTeam} subtitle={`Here's what the ${productTeam} Team is building next.`} />
         ),
-        CTA: (props) => (
-            <CTA title={productMainCTA?.title} subtitle={productMainCTA?.subtitle} image={productMainCTA?.image} />
+        CTA: (props: any) => (
+            <CTA
+                {...props}
+                title={productMainCTA?.title}
+                subtitle={productMainCTA?.subtitle}
+                image={productMainCTA?.image}
+            />
         ),
-        PairsWith: (props) => <PairsWith {...props} products={productPairsWith} />,
-        Documentation: (props) => (
+        PairsWith: (props: any) => <PairsWith {...props} products={productPairsWith} />,
+        Documentation: (props: any) => (
             <div id="documentation">
                 <SectionWrapper {...props}>
                     <Documentation
