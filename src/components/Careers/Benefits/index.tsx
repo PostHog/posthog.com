@@ -89,7 +89,7 @@ export const benefits = [
     },
     {
         title: 'Pension & 401k contributions',
-        details: 'Because one day you'll need it.',
+        details: `Because one day you'll need it.`,
         image: retirementImg,
     },
     {
@@ -99,8 +99,7 @@ export const benefits = [
     },
     {
         title: 'Company offsites',
-        details:
-            'Each year we organize fully paid company offsites - this year it's Aruba! Sometimes it’s good to speak face to face.',
+        details: `Each year we organize fully paid company offsites - this year it's Aruba! Sometimes it’s good to speak face to face.`,
         image: companyOffsitesImg,
     },
 ]
