@@ -19,7 +19,7 @@ const quickLinks = [
     {
         icon: 'SessionRecording',
         name: 'Session recording',
-        to: '/docs/session-recording',
+        to: '/docs/session-replay',
         description: 'Play back sessions to diagnose UI issues and get inspired',
     },
     {

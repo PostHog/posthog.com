@@ -750,7 +750,6 @@
             "destination": "/docs/libraries/google-tag-manager"
         },
 
-        { "source": "/manual/recordings", "destination": "/docs/session-recording" },
         { "source": "/manual/feature-flags", "destination": "/docs/feature-flags/manual" },
         { "source": "/manual/experimentation", "destination": "/docs/experiments/manual" },
         { "source": "/docs/user-guides/feature-flags", "destination": "/docs/feature-flags/manual" },
@@ -781,8 +780,8 @@
         { "source": "/manual/persons", "destination": "/docs/data/persons" },
         { "source": "/manual/role-based-access", "destination": "/docs/data/role-based-access" },
         { "source": "/manual/sessions", "destination": "/docs/data/sessions" },
-        { "source": "/manual/session-recording", "destination": "/docs/session-recording" },
-        { "source": "/manual/session-recordings", "destination": "/docs/session-recording" },
+        { "source": "/manual/session-recording", "destination": "/docs/session-replay" },
+        { "source": "/manual/session-recordings", "destination": "/docs/session-replay" },
         { "source": "/manual/sso", "destination": "/docs/data/sso" },
         { "source": "/manual/subscriptions", "destination": "/docs/data/notifications-and-alerts" },
         { "source": "/manual/team-collaboration", "destination": "/docs/data/team-collaboration" },

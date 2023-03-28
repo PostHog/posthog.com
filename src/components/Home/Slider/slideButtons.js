@@ -14,7 +14,7 @@ export const slideButtons = [
         Icon: Analytics,
     },
     {
-        title: 'Session recording',
+        title: 'Session replay',
         Icon: SessionRecording,
     },
     {
