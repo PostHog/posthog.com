@@ -9,7 +9,7 @@ function Quote({ children, className = '' }: { children: React.ReactNode[]; clas
             className={`grid py-10 px-5 md:px-16 -mx-5 md:-mx-12 bg-gray-accent-light md:grid-cols-2 gap-y-8 md:gap-y-0 md:gap-x-8 lg:gap-x-12 xl:gap-x-16 ${className}`}
         >
             <div>{children[0]}</div>
-            <div>{children[1]}</div>
+            <div className="-mt-16">{children[1]}</div>
         </div>
     )
 }

@@ -157,6 +157,7 @@ const slides = [
                 objectFit="contain"
                 alt=""
                 src="./images/hogs/warehouse-sync.png"
+                className="max-h-[300px]"
             />
         ),
     },
@@ -195,7 +196,7 @@ export default function Footer({ title }: IFooter) {
                 Now that you know PostHog does {title.toLowerCase()}, check out what else PostHog can do.
             </p>
             <Nav />
-            <div className="-mx-5">
+            <div className="-mx-5 pt-28 -mb-20">
                 <Slider
                     beforeChange={(_oldIndex, newIndex) => setActiveSlide(newIndex)}
                     className="product-hogs-slider"
