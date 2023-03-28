@@ -89,6 +89,7 @@ export interface ISection {
     align?: string
     sections?: ISection[]
     imageFrame?: boolean
+    className?: string
 }
 
 export interface ISectionHeading {
