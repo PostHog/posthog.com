@@ -267,7 +267,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     }
 
-    const createPaginatedPages = ({ postsPerPage = 20, totalCount, base, template, extraContext = {} }) => {
+    /*const createPaginatedPages = ({ postsPerPage = 20, totalCount, base, template, extraContext = {} }) => {
         const numPages = Math.ceil(totalCount / postsPerPage)
         Array.from({ length: numPages }).forEach((_, i) => {
             const context = {
@@ -333,11 +333,12 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         HandbookTemplate,
         { name: 'Handbook', url: '/handbook' },
         createTeamContext
-    )
+    )*/
+
     createPosts(result.data.docs.nodes, 'docs', HandbookTemplate, { name: 'Docs', url: '/docs' })
     createPosts(result.data.apidocs.nodes, 'docs', ApiEndpoint, { name: 'Docs', url: '/docs' })
 
-    result.data.tutorials.nodes.forEach((node) => {
+    /*result.data.tutorials.nodes.forEach((node) => {
         const tableOfContents = formatToc(node.headings)
         const { slug } = node.fields
 
@@ -521,5 +522,5 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 res()
             })
         })
-    )
+    )*/
 }
