@@ -84,7 +84,6 @@ export default function Product({ data, location, pageContext }) {
                             pages: documentation?.nodes,
                         }}
                         title={title}
-                        image={productDocumentation?.image}
                         tutorials={tutorials?.nodes}
                     />
                 </SectionWrapper>
@@ -176,13 +175,6 @@ export const query = graphql`
                     title
                     description
                     icon
-                }
-                productDocumentation {
-                    image {
-                        childImageSharp {
-                            gatsbyImageData
-                        }
-                    }
                 }
                 productSections {
                     title
