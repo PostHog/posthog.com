@@ -4,7 +4,7 @@ import React from 'react'
 import { SectionWrapper } from './Section'
 import { ICTA } from './types'
 
-export default function CTA({ title, subtitle, image }: ICTA) {
+export default function CTA({ title, subtitle, image, mainCTA, pricingCTA }: ICTA) {
     const gatsbyImage = image && getImage(image)
     return (
         <SectionWrapper>
@@ -12,7 +12,12 @@ export default function CTA({ title, subtitle, image }: ICTA) {
                 <div>
                     <h2 className="m-0">{title}</h2>
                     <p className="m-0 mb-6">{subtitle}</p>
-                    <CallToAction to="https://app.posthog.com/signup">Get started - free</CallToAction>
+                    <div className="flex space-x-2 items-center">
+                        <CallToAction to={mainCTA.url}>{mainCTA.title}</CallToAction>
+                        <CallToAction type="secondary" to={pricingCTA.url}>
+                            {pricingCTA.title}
+                        </CallToAction>
+                    </div>
                 </div>
                 {gatsbyImage && (
                     <div className="md:max-w-[400px]">

@@ -72,6 +72,8 @@ export default function Product({ data, location, pageContext }) {
                 title={productMainCTA?.title}
                 subtitle={productMainCTA?.subtitle}
                 image={productMainCTA?.image}
+                mainCTA={productMainCTA}
+                pricingCTA={productPricingCTA}
             />
         ),
         PairsWith: (props: any) => <PairsWith {...props} products={productPairsWith} />,
