@@ -21,6 +21,14 @@ export interface ICTA {
     title: string
     subtitle: string
     image: ImageDataLike
+    mainCTA: {
+        title: string
+        url: string
+    }
+    pricingCTA: {
+        title: string
+        url: string
+    }
 }
 
 export interface IRoadmap {
