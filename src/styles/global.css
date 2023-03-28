@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+p {
+    margin-bottom: 1.45rem;
+}
+
 @layer utilities {
     .text-shadow-none {
         text-shadow: none;

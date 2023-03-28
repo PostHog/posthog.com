@@ -26,7 +26,7 @@ interface ISidebarProps {
     teamSlug: string
 }
 
-const pineappleText = (percentage: number) => {
+export const pineappleText = (percentage: number) => {
     if (percentage === 50) return 'This team is evenly split on whether pineapple belongs on pizza'
     if (percentage < 50) return 'Shockingly, this team prefers their pizza without pineapple'
     return (

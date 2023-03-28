@@ -72,7 +72,7 @@ Our revenue has quickly risen as a result, now we need to optimize it.
 
 We're 30 people in 12 countries.
 
-## Jan 2022: Sales comes from our team, not our founders
+## Jan 2022: Sales comes from our team, not our founders
 
 We've now got 2 Customer Success people dealing with all (inbound) requests. We hired two engineers since most questions customers have are quite technical.
 

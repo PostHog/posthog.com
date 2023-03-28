@@ -228,6 +228,7 @@
         { "source": "/request_demo", "destination": "/schedule-demo" },
         { "source": "/handbook/strategy/investor-updates", "destination": "/handbook/strategy/investors" },
         { "source": "/handbook/engineering/feature-parity", "destination": "/handbook/strategy/overview" },
+        { "source": "/handbook/strategy/strategy", "destination": "/handbook/strategy/overview" },
         { "source": "/docs/contribute/updating-documentation", "destination": "/docs/contribute" },
         { "source": "/handbook/growth/marketing/messaging_framework", "destination": "/handbook/growth/marketing" },
         {
@@ -261,15 +262,31 @@
         { "source": "/blog/the-posthog-array-1-15-1", "destination": "/blog/the-posthog-array-1-15-0" },
         { "source": "/handbook/people/team-structure/design", "destination": "/handbook/design/philosophy" },
         { "source": "/handbook/design/about-design", "destination": "/handbook/design/philosophy" },
-        { "source": "/product-features/self-hosted", "destination": "/product" },
-        { "source": "/product-features/event-autocapture", "destination": "/product" },
-        { "source": "/product-features/trends", "destination": "/product/trends" },
-        { "source": "/product-features/funnels", "destination": "/apps/funnels" },
-        { "source": "/product-features/retention", "destination": "/product" },
-        { "source": "/product-features/feature-flags", "destination": "/apps/feature-flags" },
-        { "source": "/product-features/session-recording", "destination": "/apps/session-recording" },
+
+        { "source": "/product-features/self-hosted", "destination": "/product-os" },
+        { "source": "/product-features/event-autocapture", "destination": "/product-os" },
+        { "source": "/product-features/trends", "destination": "/product-analytics" },
+        { "source": "/product-features/funnels", "destination": "/product-analytics" },
+        { "source": "/product-features/retention", "destination": "/product-analytics" },
+        { "source": "/product-features/feature-flags", "destination": "/feature-flags" },
+        { "source": "/product-features/session-recording", "destination": "/session-replay" },
         { "source": "/product-features/plugins", "destination": "/apps", "statusCode": 301 },
-        { "source": "/heatmaps", "destination": "/apps/heatmaps" },
+        { "source": "/product/user-paths", "destination": "/product-analytics" },
+        { "source": "/product/quantitative-analysis", "destination": "/product-analytics" },
+        { "source": "/product/correlation-analysis", "destination": "/product-analytics" },
+        { "source": "/product-features", "destination": "/product-analytics" },
+
+        { "source": "/product", "destination": "/product-analytics", "statusCode": 301 },
+        { "source": "/product/funnels", "destination": "/product-analytics#funnels" },
+        { "source": "/product/trends", "destination": "/product-analytics#trends" },
+        { "source": "/product/user-paths", "destination": "/product-analytics#user-paths" },
+        { "source": "/product/collaboration", "destination": "/product-analytics#dashboards" },
+        { "source": "/product/session-recording", "destination": "/session-replay" },
+        { "source": "/product/feature-flags", "destination": "/feature-flags" },
+        { "source": "/product/experimentation-suite", "destination": "/ab-testing" },
+        { "source": "/product/heatmaps", "destination": "/tutorials/toolbar", "statusCode": 301 },
+        { "source": "/heatmaps", "destination": "/tutorials/toolbar" },
+
         { "source": "/docs/tutorials/aarrr-framework", "destination": "/tutorials/aarrr-framework" },
         {
             "source": "/docs/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog",
@@ -327,13 +344,11 @@
         { "source": "/sso", "destination": "/docs/user-guides/sso" },
         { "source": "/docs/api/people", "destination": "/docs/api/persons" },
         { "source": "/handbook/engineering/k8s-overview", "destination": "/docs/self-host/architecture" },
-        { "source": "/product/user-paths", "destination": "/manual/paths" },
         {
             "source": "/tutorials/free-hotjar-alternative",
             "destination": "/blog/best-open-source-session-replay-tools"
         },
         { "source": "/docs/privacy/hipaa-compliance", "destination": "/blog/hipaa-compliant-analytics" },
-        { "source": "/product/quantitative-analysis", "destination": "/product/correlation-analysis" },
         { "source": "/docs/plugins/build/reference", "destination": "/docs/apps/build/reference" },
         { "source": "/docs/plugins/build/types", "destination": "/docs/apps/build/types" },
         { "source": "/docs/plugins/enabling", "destination": "/docs/apps/enabling" },
@@ -341,7 +356,6 @@
         { "source": "/integrations", "destination": "/apps" },
         { "source": "/integrations/:path*", "destination": "/apps/:path*" },
         { "source": "/docs/user-guides/plugins", "destination": "/docs/apps" },
-        { "source": "/product-features", "destination": "/blog/posthog-vs-amplitude" },
         { "source": "/support", "destination": "/questions" },
         {
             "source": "/customers/why-i-ditched-mixpanel-for-posthog",
@@ -767,6 +781,8 @@
         { "source": "/manual/persons", "destination": "/docs/data/persons" },
         { "source": "/manual/role-based-access", "destination": "/docs/data/role-based-access" },
         { "source": "/manual/sessions", "destination": "/docs/data/sessions" },
+        { "source": "/manual/session-recording", "destination": "/docs/session-recording" },
+        { "source": "/manual/session-recordings", "destination": "/docs/session-recording" },
         { "source": "/manual/sso", "destination": "/docs/data/sso" },
         { "source": "/manual/subscriptions", "destination": "/docs/data/notifications-and-alerts" },
         { "source": "/manual/team-collaboration", "destination": "/docs/data/team-collaboration" },
@@ -789,13 +805,22 @@
         { "source": "/docs/integrate/rudderstack", "destination": "/docs/libraries/rudderstack" },
         { "source": "/docs/integrate/segment", "destination": "/docs/libraries/segment" },
         { "source": "/docs/sdks/ios", "destination": "/docs/libraries/ios" },
-        
+
         { "source": "/docs/self-host/deploy/aws", "destination": "/docs/self-host" },
         { "source": "/docs/self-host/deploy/azure", "destination": "/docs/self-host" },
         { "source": "/docs/self-host/deploy/digital-ocean", "destination": "/docs/self-host" },
         { "source": "/docs/self-host/deploy/gcp", "destination": "/docs/self-host" },
-        { "source": "/docs/self-host/deploy/other", "destination": "/docs/self-host" }
-        
+        { "source": "/docs/self-host/deploy/other", "destination": "/docs/self-host" },
+        {
+            "source": "/docs/feature-flags/local-evaluation",
+            "destination": "/docs/feature-flags/bootstrapping-and-local-evaluation"
+        },
+        {
+            "source": "/docs/feature-flags/local-evaluation",
+            "destination": "/docs/feature-flags/bootstrapping-and-local-evaluation"
+        },
+        { "source": "/products/product-analytics", "destination": "/product-analytics" },
+        { "source": "/session-recording", "destination": "/session-replay" }
     ],
     "rewrites": [
         {
