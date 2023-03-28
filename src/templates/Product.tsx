@@ -4,7 +4,7 @@ import { SEO } from 'components/seo'
 import { graphql } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
-import { Check as CheckIcon, Close as CloseIcon } from '../components/Icons'
+import { Check as CheckIcon, Close2 as CloseIcon } from '../components/Icons'
 import Hero from 'components/ProductLayout/Hero'
 import { MainFeatures } from 'components/ProductLayout/Feature'
 import { Sections, SectionWrapper } from 'components/ProductLayout/Section'
@@ -18,7 +18,7 @@ import Documentation from 'components/ProductLayout/Documentation'
 import ProductLayout from 'components/ProductLayout'
 
 const Check = (props: any) => <CheckIcon {...props} className="w-5" />
-const Close = (props: any) => <CloseIcon {...props} className="w-5" />
+const Close2 = (props: any) => <CloseIcon {...props} className="w-5" />
 
 export default function Product({ data, location, pageContext }) {
     const { pageData, blogPosts, documentation, tutorials } = data
@@ -58,7 +58,7 @@ export default function Product({ data, location, pageContext }) {
         Sections: (props: any) => <Sections {...props} sections={productSections} />,
         Testimonial: (props: any) => <Testimonial {...props} {...productTestimonial} />,
         Check,
-        Close,
+        Close2,
         Comparison: (props: any) => (
             <Comparison {...props} description={`How does PostHog ${title.toLowerCase()} compare?`} />
         ),
