@@ -78,19 +78,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     rawBody
                 }
             }
-            manual: allMdx(filter: { fields: { slug: { regex: "/^/manual/" } }, frontmatter: { title: { ne: "" } } }) {
-                nodes {
-                    id
-                    headings {
-                        depth
-                        value
-                    }
-                    fields {
-                        slug
-                    }
-                    rawBody
-                }
-            }
             tutorials: allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }) {
                 totalCount
                 nodes {
@@ -349,7 +336,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     )
     createPosts(result.data.docs.nodes, 'docs', HandbookTemplate, { name: 'Docs', url: '/docs' })
     createPosts(result.data.apidocs.nodes, 'docs', ApiEndpoint, { name: 'Docs', url: '/docs' })
-    createPosts(result.data.manual.nodes, 'docs', HandbookTemplate, { name: 'Using PostHog', url: '/using-posthog' })
 
     result.data.tutorials.nodes.forEach((node) => {
         const tableOfContents = formatToc(node.headings)
