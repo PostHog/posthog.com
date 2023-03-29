@@ -6,6 +6,7 @@ import { graphql, useStaticQuery } from 'gatsby'
 import { getImage } from 'gatsby-plugin-image'
 import React from 'react'
 import ReactCountryFlag from 'react-country-flag'
+import slugify from 'slugify'
 import { SectionWrapper } from './Section'
 import { IRoadmap } from './types'
 
@@ -49,7 +50,7 @@ export default function Roadmap({ subtitle, team }: IRoadmap) {
             (teamMembers.filter(({ frontmatter: { pineappleOnPizza } }: any) => pineappleOnPizza).length / teamLength) *
                 100
         )
-    const teamURL = `/handbook/small-teams/${team.toLowerCase()}`
+    const teamURL = `/handbook/small-teams/${slugify(team, { lower: true })}`
     return (
         <div id="roadmap">
             <SectionWrapper>
