@@ -129,9 +129,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     fields {
                         slug
                     }
-                    frontmatter {
-                        documentation
-                    }
                 }
             }
             customers: allMdx(filter: { fields: { slug: { regex: "/^/customers/" } } }) {
@@ -450,7 +447,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     })
     result.data.templates.nodes.forEach((node) => {
         const { slug } = node.fields
-        const { documentation } = node.frontmatter // we don't need this
         let next = null
         let previous = null
         const sidebar = sidebars.apps // also need to figure out what to do with sidebar
@@ -466,7 +462,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             component: DashboardTemplate,
             context: {
                 id: node.id,
-                documentation: documentation || '', // we don't need this
                 next,
                 previous,
             },

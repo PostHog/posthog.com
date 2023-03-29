@@ -28,33 +28,33 @@ const filters = [
 
 function TemplatesPage({ location }) {
     const {
-        apps: { nodes }, // should rename all of this to be templates
+        templates: { nodes },
     } = useStaticQuery(query)
-    const [apps, setApps] = useState(nodes)
-    const [filteredApps, setFilteredApps] = useState(null)
+    const [templates, setTemplates] = useState(nodes)
+    const [filteredTemplates, setFilteredTemplates] = useState(null)
     const [currentFilter, setCurrentFilter] = useState('all')
 
-    const filter = (filter) => apps.filter(filter)
+    const filter = (filter) => templates.filter(filter)
 
-    const filterApps = (type, name) => {
-        let filteredApps = []
+    const filterTemplates = (type, name) => {
+        let filteredTemplates = []
         if (type === 'type') {
-            filteredApps = filter((app) => app.frontmatter.filters?.type.includes(name))
+            filteredTemplates = filter((template) => template.frontmatter.filters?.type.includes(name))
         }
         if (type === 'maintainer') {
-            filteredApps = filter((app) => app.frontmatter.filters?.maintainer === name)
+            filteredTemplates = filter((template) => template.frontmatter.filters?.maintainer === name)
         }
         if (type === 'builtIn') {
-            filteredApps = filter((app) => app.frontmatter.filters?.builtIn)
+            filteredTemplates = filter((template) => template.frontmatter.filters?.builtIn)
         }
         setCurrentFilter(name)
-        setFilteredApps(filteredApps)
+        setFilteredTemplates(filteredTemplates)
     }
 
     const resetFilters = () => {
         navigate('?')
         setCurrentFilter('all')
-        setFilteredApps(apps)
+        setFilteredTemplates(templates)
     }
 
     useEffect(() => {
@@ -62,7 +62,7 @@ function TemplatesPage({ location }) {
         const filter = params.get('filter')
         const value = params.get('value')
 
-        if (filter && value) filterApps(filter, value)
+        if (filter && value) filterTemplates(filter, value)
     }, [location])
 
     return (
@@ -92,7 +92,7 @@ function TemplatesPage({ location }) {
                     />
                 ))}
             </div>
-            <TemplatesList templates={filteredApps || apps} />
+            <TemplatesList templates={filteredTemplates || templates} />
 
             <div className="my-12 md:my-24 px-5 max-w-[960px] mx-auto">
                 <FooterCTA />
@@ -103,7 +103,7 @@ function TemplatesPage({ location }) {
 
 const query = graphql`
     query {
-        apps: allMdx(filter: { fields: { slug: { regex: "/^/templates/(?!.*/docs).*/" } } }) {
+        templates: allMdx(filter: { fields: { slug: { regex: "/^/templates/(?!.*/docs).*/" } } }) {
             nodes {
                 id
                 fields {
