@@ -78,7 +78,7 @@ function TemplatesPage({ location }) {
                     <span className="text-blue">PostHog Templates</span>
                 </h2>
                 <p className="my-6 mx-auto text-center text-lg md:text-lg font-semibold mt-2 lg:mt-4 text-primary max-w-2xl opacity-75">
-                    10-ish templates available
+                    Start collecting insights instantly
                 </p>
             </header>
             <div className="flex justify-start px-4 md:justify-center items-center mb-6 space-x-2 overflow-auto whitespace-nowrap">
