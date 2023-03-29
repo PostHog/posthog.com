@@ -16,6 +16,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const CustomerTemplate = path.resolve(`src/templates/Customer.js`)
     const PluginTemplate = path.resolve(`src/templates/Plugin.js`)
     const AppTemplate = path.resolve(`src/templates/App.js`)
+    const DashboardTemplate = path.resolve(`src/templates/Template.js`)
     const HostHogTemplate = path.resolve(`src/templates/HostHog.js`)
     const Job = path.resolve(`src/templates/Job.tsx`)
     const ProductTemplate = path.resolve(`src/templates/Product.tsx`)
@@ -112,6 +113,17 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 }
             }
             apps: allMdx(filter: { fields: { slug: { regex: "/^/apps/" } } }) {
+                nodes {
+                    id
+                    fields {
+                        slug
+                    }
+                    frontmatter {
+                        documentation
+                    }
+                }
+            }
+            templates: allMdx(filter: { fields: { slug: { regex: "/^/templates/" } } }) {
                 nodes {
                     id
                     fields {
@@ -431,6 +443,30 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             context: {
                 id: node.id,
                 documentation: documentation || '',
+                next,
+                previous,
+            },
+        })
+    })
+    result.data.templates.nodes.forEach((node) => {
+        const { slug } = node.fields
+        const { documentation } = node.frontmatter // we don't need this
+        let next = null
+        let previous = null
+        const sidebar = sidebars.apps // also need to figure out what to do with sidebar
+        sidebar.some((item, index) => {
+            if (item.url === slug) {
+                next = sidebar[index + 1]
+                previous = sidebar[index - 1]
+                return true
+            }
+        })
+        createPage({
+            path: slug,
+            component: DashboardTemplate,
+            context: {
+                id: node.id,
+                documentation: documentation || '', // we don't need this
                 next,
                 previous,
             },
