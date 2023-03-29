@@ -43,7 +43,7 @@ export default function Template({ data, pageContext: { next, previous } }) {
             >
                 <section>
                     <div className="lg:max-w-[880px] lg:pr-5 px-5 lg:px-0 mx-auto">
-                        <h1 className="text-center mt-0 mb-12 hidden lg:block">{title} dashboard</h1>
+                        <h1 className="text-center mt-0 mb-12 hidden lg:block">{title}</h1>
                         <h2 className="text-center mt-0 mb-6">{subtitle}</h2>
                         <GatsbyImage image={getImage(featuredImage)} alt="" />
                         <article>
