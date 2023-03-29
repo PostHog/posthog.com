@@ -1,14 +1,16 @@
-// AUTO GENERATED FILE 
+// AUTO GENERATED FILE
 
 import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BorderWrapper } from './components/BorderWrapper'
 import { CallToAction } from './components/CallToAction'
 import { Caption } from './components/Caption'
+import { ChatHog } from './components/ChatHog'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { FeatureAvailability } from './components/FeatureAvailability'
 import { GDPRForm } from './components/GDPRForm'
 import { HiddenSection } from './components/HiddenSection'
+import { Input } from './components/Input'
 import { LPCTA } from './components/LPCTA'
 import { NewsletterTutorial } from './components/NewsletterTutorial'
 import { OverflowXSection } from './components/OverflowXSection'
@@ -19,21 +21,23 @@ import { Squeak } from './components/Squeak'
 import { StarRepoButton } from './components/StarRepoButton'
 
 export const shortcodes = {
-	ArrayCTA,
-	BasicHedgehogImage,
-	BorderWrapper,
-	CallToAction,
-	Caption,
-	CompensationCalculator,
-	FeatureAvailability,
-	GDPRForm,
-	HiddenSection,
-	LPCTA,
-	NewsletterTutorial,
-	OverflowXSection,
-	Quote,
-	ProductLayout,
-	Quote2,
-	Squeak,
-	StarRepoButton
+    ArrayCTA,
+    BasicHedgehogImage,
+    BorderWrapper,
+    CallToAction,
+    Caption,
+    ChatHog,
+    CompensationCalculator,
+    FeatureAvailability,
+    GDPRForm,
+    HiddenSection,
+    Input,
+    LPCTA,
+    NewsletterTutorial,
+    OverflowXSection,
+    Quote,
+    ProductLayout,
+    Quote2,
+    Squeak,
+    StarRepoButton,
 }

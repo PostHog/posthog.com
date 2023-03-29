@@ -14,6 +14,7 @@ import Enterprise from 'components/Pricing/Modals/Enterprise'
 import { PlanComparison } from './PlanComparison'
 import OtherOptions from './OtherOptions'
 import { PricingCalculator } from './PricingCalculator'
+import ChatHog from 'components/ChatHog'
 
 export const section = cntl`
     max-w-6xl
@@ -172,6 +173,7 @@ const Pricing = (): JSX.Element => {
                     </div>
                 </div>
             </section>
+            <ChatHog />
         </Layout>
     )
 }
