@@ -33,13 +33,18 @@ export const SectionWrapper = ({ children, className = '' }: ISectionWrapper) =>
 export const Sections = ({ sections }: { sections: ISection[][] }) => {
     return (
         <>
-            {sections.map((section, index) => {
+            {sections.map((section, sectionIndex) => {
                 return (
-                    <SectionWrapper className="py-12 md:py-14 md:my-auto !my-0" key={index}>
+                    <SectionWrapper className="py-12 md:py-14 md:my-auto !my-0" key={sectionIndex}>
                         {section.length > 1 ? (
                             <TwoCol>
                                 {section.map((section, index) => (
-                                    <Section align={section?.align} key={index} {...section} />
+                                    <Section
+                                        align={section?.align}
+                                        key={index}
+                                        {...section}
+                                        className={sectionIndex % 2 && index % 2 ? 'md:-order-1' : ''}
+                                    />
                                 ))}
                             </TwoCol>
                         ) : (
@@ -61,10 +66,11 @@ export default function Section({
     align,
     sections,
     imageFrame = true,
+    className = '',
 }: ISection) {
     const gatsbImage = image && getImage(image)
     return (
-        <div style={{ alignSelf: align }}>
+        <div className={className} style={{ alignSelf: align }}>
             {(title || subtitle) && <SectionHeading title={title} subtitle={subtitle} />}
             {content && <div dangerouslySetInnerHTML={{ __html: content }} />}
             {features && features?.length > 0 && <FeatureList features={features} />}
