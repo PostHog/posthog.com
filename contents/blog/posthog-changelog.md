@@ -60,7 +60,7 @@ When we launched PostHog, we benefitted tremendously from the advice of other fo
 ## New docs navigation
 ![posthog docs](../images/blog/array/docs_nav.gif)
 
-We've fully overhauled the PostHog navigation to make it easier to find the help you need, and especially make it easier to find feature-specific information and help for getting started. Every part of PostHog now has it's own feature-specific hub page, and we've pinned important content such as [how to get started with session recording](/docs/session-recording/manual#enabling-session-recording). 
+We've fully overhauled the PostHog navigation to make it easier to find the help you need, and especially make it easier to find feature-specific information and help for getting started. Every part of PostHog now has it's own feature-specific hub page, and we've pinned important content such as [how to get started with session recording](/docs/session-replay/manual#enabling-session-recording). 
 
 ## What’s New?
 ![posthog changelog](../images/blog/array/whats_new.gif)

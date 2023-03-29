@@ -3,11 +3,16 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { ISection, ISectionHeading, ISectionWrapper } from './types'
 import { FeatureList } from './Feature'
 import TwoCol from './TwoCol'
+import slugify from 'slugify'
 
 export const SectionHeading = ({ title, subtitle }: ISectionHeading) => {
     return (
         <div className="mb-6">
-            {title && <h2 className="text-3xl m-0">{title}</h2>}
+            {title && (
+                <h2 className="text-3xl pt-4 m-0 -mt-4" id={slugify(title.replace('&-', ''), { lower: true })}>
+                    {title}
+                </h2>
+            )}
             {subtitle && typeof subtitle === 'string' ? (
                 <p className="text-base font-semibold opacity-70 m-0">{subtitle}</p>
             ) : (
