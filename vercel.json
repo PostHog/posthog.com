@@ -820,7 +820,8 @@
         },
         { "source": "/products/product-analytics", "destination": "/product-analytics" },
         { "source": "/session-recording", "destination": "/session-replay" },
-        { "source": "/manual/recordings", "destination": "/docs/session-replay/manual" }
+        { "source": "/manual/recordings", "destination": "/docs/session-replay/manual" },
+        { "source": "/docs/session-recording", "destination": "/docs/session-replay" }
     ],
     "rewrites": [
         {
