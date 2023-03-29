@@ -819,7 +819,8 @@
             "destination": "/docs/feature-flags/bootstrapping-and-local-evaluation"
         },
         { "source": "/products/product-analytics", "destination": "/product-analytics" },
-        { "source": "/session-recording", "destination": "/session-replay" }
+        { "source": "/session-recording", "destination": "/session-replay" },
+        { "source": "/manual/recordings", "destination": "/docs/session-replay/manual" }
     ],
     "rewrites": [
         {
