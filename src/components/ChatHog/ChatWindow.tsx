@@ -106,8 +106,8 @@ export const ChatWindow = ({
                 </motion.button>
             </div>
             <div className="h-8 mr-3 bg-gradient-to-b from-white to-transparent z-10" />
-            <div className="-mt-8 overflow-y-scroll overflow-x-hidden">
-                <div className="pt-8 pb-4 px-4">
+            <div className="-mt-8 overflow-y-scroll overflow-x-hidden flex-grow flex flex-col">
+                <div className="pt-8 pb-4 px-4 flex-grow flex flex-col justify-end">
                     {messages?.map((message, index) => (
                         <ChatMessage key={`message-${index}`} role={message.role} content={message.content} />
                     ))}
