@@ -1,7 +1,7 @@
 import { Close } from 'components/Icons'
 import { Input } from 'components/Input'
 import { motion } from 'framer-motion'
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { ChatMessage } from './ChatMessage'
 
 export const ChatWindow = ({
@@ -10,6 +10,14 @@ export const ChatWindow = ({
     setIsChatActive: (isChatActive: boolean) => void | undefined
 }): JSX.Element => {
     const [messages, setMessages] = React.useState<ChatMessage[]>()
+    const divRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        // Scroll to the bottom of the div on mount and whenever its content changes
+        if (divRef.current) {
+            divRef.current.scrollTop = divRef?.current?.scrollHeight
+        }
+    }, [divRef.current?.innerHTML])
 
     const getMessagesFromStorage = () => {
         const messagesInStorage = localStorage.getItem('max-ai-messages')
@@ -106,8 +114,8 @@ export const ChatWindow = ({
                 </motion.button>
             </div>
             <div className="h-8 mr-3 bg-gradient-to-b from-white to-transparent z-10" />
-            <div className="-mt-8 overflow-y-scroll overflow-x-hidden flex-grow flex flex-col">
-                <div className="pt-8 pb-4 px-4 flex-grow flex flex-col justify-end">
+            <div className="-mt-8 overflow-y-scroll overflow-x-hidden flex-grow flex flex-col" ref={divRef}>
+                <div className="pt-8 pb-2 px-4 flex-grow flex flex-col justify-end">
                     {messages?.map((message, index) => (
                         <ChatMessage key={`message-${index}`} role={message.role} content={message.content} />
                     ))}
