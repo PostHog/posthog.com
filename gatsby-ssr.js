@@ -27,7 +27,6 @@ export const wrapPageElement = ({ element, props }) => {
                   'docs/product-analytics',
                   'docs/session-replay',
                   'docs/feature-flags',
-                  'docs/feature-management',
                   'docs/experiments',
                   'docs/data',
               ].includes(slug) ? (

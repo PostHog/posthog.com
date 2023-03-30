@@ -1,0 +1,151 @@
+---
+title: Feature Management
+subtitle: <span class="text-red font-semibold bg-yellow/10">Manage features</span> from concept to general availability.
+productHero: {
+  image: ./images/products/feature-flags.png
+}
+template: product
+productFeatures: [
+]
+productSections: [
+  [
+    {
+      title: "Create a public roadmap",
+      subtitle: "List features on a public roadmap to show your users what you are working on.",
+      align: 'center',
+      features: [
+        {
+            title: 'Custom UX',
+            description:
+                'Create the UX and let our API handle the content',
+        },
+        {
+            title: 'Group features by stage',
+            description:
+                'In Consideration, Alpha, Beta? Show your users in what stage your feature is.',
+        },
+    ]
+    },
+    {
+      image: ./images/products/feature-flags/release-conditions.png
+    },
+    
+  ],
+  [
+    {
+      title: "Manage waitlists",
+      content: "Allow users to sign up to a feature waitlist to register interest.",
+      align: 'center',
+    },
+    {
+      image: ./images/products/feature-flags/release-conditions.png
+    },
+    
+  ],
+  [
+    
+    {
+      title: "Choose who gets access to features",
+      subtitle: "Release Alpha features to internal or selected external testers.",
+      align: 'center',
+      features: [
+        {
+            title: 'Granular rollout conditions',
+            description:
+                'Use release conditions to choose who gets access to a feature, e.g. targeting by user ID, email address or cohort.',
+        },
+      ]
+    },
+    {
+      image: ./images/products/feature-flags/multivariate.png
+    },
+    
+  ],
+
+  [
+
+    {
+      title: "Allow users to turn on feature previews",
+      content: "Let users opt in and opt out of Beta features. Create your own custom UX so users can enable a new feature from anywhere in your product.",
+      align: 'center',
+    },
+    {
+      image: ./images/products/feature-flags/multivariate.png
+    },
+
+  ],
+]
+productTestimonial: {
+    "author": {
+        "name": "Joe Saunderson",
+        "role": "Software Engineer, Mention Me",
+        "image": "/images/customers/joe.png",
+        "company": { "name": "Mention Me", "image": "/images/customers/mention-logo.svg"}
+    },
+    "quote": "<strong>We have a bunch of of closed and open feature Betas coming up this year.</strong> It’s awesome that we can use PostHog’s Feature Management to enable features for our users, and give users the option to opt in themselves.",
+    image: ./images/products/hogs/feature-flags.png
+}
+productBlog: {
+  title: Blog posts that mention Feature flags,
+  tags: ["Feature flags"]
+}
+productTutorialTags: ["feature flags"]
+productTeam: Experimentation
+productMainCTA: {
+  title: Try PostHog,
+  subtitle: "First 1,000,000 events/mo are free.",
+  image: ./images/products/hogs/feature-flags.png,
+  url: https://app.posthog.com/signup
+}
+productPricingCTA: {
+    title: View pricing,
+    url: /pricing
+}
+productPairsWith: [
+    {
+        icon: 'Analytics',
+        title: 'Product analytics',
+        description:
+            'Run any insight filtered by a flag’s value, or group by flag to see usage across a flag’s variants',
+            url: '/product-analytics'
+    },
+    {
+        icon: 'PathAnalysis',
+        title: 'Product analytics: User paths',
+        description: 'See how a flag’s value influenced an intended outcome',
+        url: '/product-analytics/#user-paths'
+    },
+    {
+        icon: 'SessionRecording',
+        title: 'Session replay',
+        description:
+            'Filter recordings down to only when a feature flag was called, or to a specific value of a flag',
+      url: '/session-replay'
+    },
+]
+productMenuItems: [
+  "Overview",
+  "Features",
+  "Pairs with",
+  "Documentation",
+  "Roadmap"
+]
+---
+
+<Hero />
+
+<Testimonial />
+
+<Sections />
+
+<MainFeatures />
+
+<PairsWith />
+
+<Documentation />
+
+<BlogPosts />
+
+<Roadmap />
+
+<CTA />

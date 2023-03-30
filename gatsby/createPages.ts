@@ -530,7 +530,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                         blogTags: node?.frontmatter?.productBlog?.tags,
                         tutorialTags: node?.frontmatter?.productTutorialTags,
                         documentationNav,
-                        documentationURLs: documentationNav?.children?.map((child) => child.url),
+                        documentationURLs: documentationNav?.children?.map((child) => child.url) || [''],
                     },
                 })
                 res()
