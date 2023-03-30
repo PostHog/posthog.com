@@ -21,10 +21,18 @@ images:
 import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 
 <div class="w-[calc(100%_+_4rem)] relative -mx-4 px-8 md:-mx-16 pt-32 pb-48 -mt-32 md:-mt-44">
-  <GatsbyImage image={getImage(props?.images[0])} alt="PostHog for startups" objectFit="cover" className="md:hidden absolute top-0 left-0 w-full bottom-0 opacity-40" />
-  <GatsbyImage image={getImage(props?.images[1])} alt="PostHog for startups" objectFit="cover" className="hidden md:block absolute top-0 left-0 w-full bottom-0" />
-  <GatsbyImage image={getImage(props?.images[2])} alt="PostHog for startups" objectFit="contain" className="absolute bottom-0 left-4 w-24 md:left-16 md:w-48" />
-  <GatsbyImage image={getImage(props?.images[3])} alt="PostHog for startups" objectFit="contain" className="absolute bottom-0 -right-4 w-28 md:right-16 md:w-60" />
+  <div class="md:hidden absolute top-0 left-0 w-full bottom-0 opacity-40">
+    <GatsbyImage image={getImage(props?.images[0])} alt="PostHog for startups" objectFit="cover" className="" />
+  </div>
+  <div class="hidden md:block absolute top-0 left-0 w-full bottom-0">
+    <GatsbyImage image={getImage(props?.images[1])} alt="PostHog for startups" objectFit="cover" className="" />
+  </div>
+  <div class="absolute bottom-0 left-4 w-24 md:left-16 md:w-48">
+    <GatsbyImage image={getImage(props?.images[2])} alt="PostHog for startups" objectFit="contain" className="" />
+  </div>
+  <div class="absolute bottom-0 -right-4 w-28 md:right-16 md:w-60">
+    <GatsbyImage image={getImage(props?.images[3])} alt="PostHog for startups" objectFit="contain" className="" />
+  </div>
 
   <div class="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-tan/100 via-tan/85 to-tan/0"></div>
 
