@@ -510,6 +510,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         '/feature-flags': 'Feature flags',
         '/ab-testing': 'A/B testing',
         '/product-os': 'Data',
+        '/feature-management': 'Feature management',
     }
 
     const docsMenu = sidebars.docs
