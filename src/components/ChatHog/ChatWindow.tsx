@@ -77,16 +77,25 @@ export const ChatWindow = ({
                 .then((res) => {
                     setMaxResponseLoading(false)
                     // add the response to the messages
-                    setMessages([
-                        ...messages,
-                        {
-                            role: 'assistant',
-                            content: res,
-                        },
-                    ])
+                    messages &&
+                        setMessages([
+                            ...messages,
+                            {
+                                role: 'assistant',
+                                content: res,
+                            },
+                        ])
                 })
         }
-        if (messages?.[messages.length - 1]?.role === 'user') {
+        const lastMessage = messages?.[messages.length - 1]
+        if (
+            // the last message was from the user
+            lastMessage?.role === 'user' ||
+            // or the last message was from the assistant and was a bad rating
+            (lastMessage?.role === 'assistant' &&
+                lastMessage?.responseTo === 'rating' &&
+                lastMessage.ratingValue === 'bad')
+        ) {
             setMaxResponseLoading(true)
             getResponse()
         }
@@ -101,6 +110,32 @@ export const ChatWindow = ({
     useEffect(() => {
         getMessagesFromStorage()
     }, [])
+
+    const handleOnClickRating = (rating: 'good' | 'bad') => {
+        messages && rating === 'bad'
+            ? setMessages([
+                  ...messages,
+                  {
+                      role: 'assistant',
+                      content: `Whoops, sorry my response wasn't what you were looking for. 
+                        I will pass this feedback on to the team and will attempt to 
+                        re-generate a better response for you.`,
+                      responseTo: 'rating',
+                      ratingValue: 'bad',
+                  },
+              ])
+            : messages &&
+              rating === 'good' &&
+              setMessages([
+                  ...messages,
+                  {
+                      role: 'assistant',
+                      content: `Happy to help! If you have any other questions just let me know.`,
+                      responseTo: 'rating',
+                      ratingValue: 'good',
+                  },
+              ])
+    }
 
     return (
         <div className="bg-white rounded h-[600px] max-h-screen w-[350px] flex flex-col overflow-hidden">
@@ -121,7 +156,12 @@ export const ChatWindow = ({
             <div className="-mt-8 overflow-y-scroll overflow-x-hidden flex-grow flex flex-col" ref={divRef}>
                 <div className="pt-8 pb-2 px-4 flex-grow flex flex-col justify-end">
                     {messages?.map((message, index) => (
-                        <ChatMessage key={`message-${index}`} role={message.role} content={message.content} />
+                        <ChatMessage
+                            key={`message-${index}`}
+                            role={message.role}
+                            content={message.content}
+                            onClickRating={handleOnClickRating}
+                        />
                     ))}
                     {maxResponseLoading && <ChatMessage role="assistant" loading />}
                 </div>
