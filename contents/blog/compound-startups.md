@@ -1,5 +1,5 @@
 ---
-date: 2023-03-28
+date: 2023-03-30
 title: "PFE #2: The conformist startup rule you can ignore"
 rootPage: /blog
 sidebar: Blog
@@ -18,7 +18,7 @@ tags:
 
 Focus is important, right? Building a single great product and monetizing it is the path to startup success. Everyone knows this. It _feels_ intuitively correct. 
 
-Parker Conrad, founder and CEO of the workforce management platform Rippling, disagrees. Speaking to Startup Grind in 2021, he said:
+Parker Conrad, founder and CEO of the workforce management platform Rippling, disagrees. [Speaking to Startup Grind in 2021](https://www.youtube.com/watch?v=BbSNA64TQ7s), he said:
 
 > “One of the most common tropes of startups, and how to do them well, is that it’s really important to focus. I think it’s advice that is largely wrong and has held back the industry.”
 >
@@ -48,7 +48,7 @@ My first instinct was Stripe. It’s big, has loads of products. It must fit.
 
 But, when you dig down, it’s not even close:
 
-
+![compound startups](../images/blog/compound-startups.png)
 
 Yes, it has lots of products and most revolve around payment data in some way, but integration isn’t the product. It’s more like a hydra – Adobe for payments, if you will. Hubspot, however, totally does. 
 
@@ -82,7 +82,7 @@ But here’s the big bet... If the idea is good enough and clearly better than w
 
 So, next time you’re considering what bets to take with your startup, consider following Parker Conrad’s advice and think bigger.
 
-LINK HERE
+- [Watch Parker Conrad's full talk on YouTube](https://www.youtube.com/watch?v=BbSNA64TQ7s)
 
 ## More good reads 🤔
 
