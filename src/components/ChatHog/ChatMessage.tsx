@@ -34,7 +34,7 @@ export const ChatMessage = ({ role, content }: ChatMessage): JSX.Element => {
         <div className="flex gap-x-2 items-end mb-4">
             {role === 'assistant' && <ChatAvatar role={'assistant'} />}
             <div
-                className={`bg-${
+                className={`w-20 bg-${
                     role === 'assistant' ? 'tan' : 'gray-accent'
                 } rounded-t rounded-b${offsetSide} p-4 flex-grow`}
             >

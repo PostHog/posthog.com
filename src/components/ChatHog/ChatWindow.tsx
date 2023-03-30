@@ -9,14 +9,22 @@ export const ChatWindow = ({
 }: {
     setIsChatActive: (isChatActive: boolean) => void | undefined
 }): JSX.Element => {
-    const [messages, setMessages] = React.useState<ChatMessage[]>([])
+    const [messages, setMessages] = React.useState<ChatMessage[]>()
 
     const getMessagesFromStorage = () => {
-        const messagesInStorage = JSON.parse(localStorage.getItem('max-ai-messages') || '[]')
-        console.log(messagesInStorage, 'messages from storage')
-        if (messagesInStorage || messagesInStorage.length < 1) {
-            console.log('this thinks i has messages')
-            setMessages(messagesInStorage)
+        const messagesInStorage = localStorage.getItem('max-ai-messages')
+        if (messagesInStorage) {
+            const messagesInStorageJSON = JSON.parse(messagesInStorage)
+            if (messagesInStorageJSON || messagesInStorageJSON.length > 1) {
+                setMessages(messagesInStorageJSON)
+            } else {
+                setMessages([
+                    {
+                        role: 'assistant',
+                        content: "Hi there! I'm Max, your friendly AI hedgehog. How can I help you today?",
+                    },
+                ])
+            }
         } else {
             setMessages([
                 {
@@ -43,7 +51,6 @@ export const ChatWindow = ({
     }
 
     useEffect(() => {
-        console.log(messages, 'messages')
         const getResponse = async () => {
             const res = await fetch('https://max.posthog.cc/chat', {
                 method: 'POST',
@@ -68,12 +75,14 @@ export const ChatWindow = ({
             getResponse()
         }
         // save the messages to local storage with a key and expiration date or 24 hours
-        // if the user comes back, load the messages from local storage
-        // localStorage.setItem('max-ai-messages', JSON.stringify(messages))
-        if (!messages || messages.length === 0) {
-            // getMessagesFromStorage()
+        if (messages?.length && messages.length > 1) {
+            localStorage.setItem('max-ai-messages', JSON.stringify(messages))
         }
     }, [messages])
+
+    useEffect(() => {
+        getMessagesFromStorage()
+    }, [])
 
     return (
         <div className="bg-white rounded h-[600px] max-h-screen w-[350px] flex flex-col overflow-hidden">
