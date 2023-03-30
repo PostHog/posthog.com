@@ -76,8 +76,8 @@ export const ChatWindow = ({
     }, [messages])
 
     return (
-        <div className="bg-white rounded h-[600px] max-h-screen w-[350px] flex flex-col">
-            <div className="flex rounded-t w-full bg-red justify-between items-center p-4">
+        <div className="bg-white rounded h-[600px] max-h-screen w-[350px] flex flex-col overflow-hidden">
+            <div className="flex rounded-t w-full bg-red justify-between items-center p-4 z-20">
                 <div>
                     <h3 className="font-bold text-base text-white m-0">Max AI</h3>
                     <p className="text-xs opacity-80 text-white mb-0">PostHog's AI support assistant</p>
@@ -90,14 +90,16 @@ export const ChatWindow = ({
                     <Close className="text-white opacity-70 hover:opacity-90 transition-opacity h-4 w-4" opacity="1" />
                 </motion.button>
             </div>
-            <div className="flex flex-col flex-grow overflow-hidden mb-2">
-                <div className="h-8 mr-3 bg-gradient-to-b from-white to-transparent z-10" />
-                <div className="overflow-y-scroll overflow-x-hidden p-4 -mt-6 flex-grow flex flex-col justify-end">
+            <div className="h-8 mr-3 bg-gradient-to-b from-white to-transparent z-10" />
+            <div className="-mt-8 overflow-y-scroll overflow-x-hidden">
+                <div className="pt-8 pb-4 px-4">
                     {messages?.map((message, index) => (
                         <ChatMessage key={`message-${index}`} role={message.role} content={message.content} />
                     ))}
                 </div>
-                <div className="h-8 -mt-6 mr-3 bg-gradient-to-t from-white to-transparent" />
+            </div>
+            <div className="h-8 -mt-6 mr-3 bg-gradient-to-t from-white to-transparent" />
+            <div className="bg-white z-20">
                 <Input name="htyy" showSubmit onSubmit={handleSubmit} />
             </div>
         </div>
