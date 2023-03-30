@@ -39,7 +39,7 @@ export default function ChatHog(): JSX.Element {
                         </div>
                     )}
                     <svg
-                        style={{ transform: 'translate(70%)', left: '50%' }}
+                        style={{ transform: 'translate(70%)', left: '65%' }}
                         className="absolute"
                         width="18"
                         height="12"

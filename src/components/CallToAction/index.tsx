@@ -52,15 +52,16 @@ export const button = (
     type: keyof typeof buttonTypes = 'primary',
     width = 'auto',
     className = '',
-    size: keyof typeof sizes = 'lg'
-) => cntl`
+    size: keyof typeof sizes = 'lg',
+    shadow = true
+): string => cntl`
     text-center
     select-none
     rounded-sm
     inline-block
     cta
     button-shadow
-    shadow-xl
+    ${shadow && 'shadow-xl'}
     relative
     active:top-[0.5px]
     active:scale-[.98]
@@ -83,6 +84,7 @@ export type CTAPropsType = {
     externalNoIcon?: boolean
     state?: any
     event?: any
+    shadow?: boolean
 }
 
 export interface TrackedCTAPropsType extends CTAPropsType {
@@ -119,6 +121,7 @@ export const CallToAction = ({
     externalNoIcon,
     state = {},
     event,
+    shadow = true,
 }: CTAPropsType): JSX.Element => {
     const url = to || href
     return (
@@ -126,7 +129,7 @@ export const CallToAction = ({
             state={state}
             external={external}
             externalNoIcon={externalNoIcon}
-            className={button(type, width, className, size)}
+            className={button(type, width, className, size, shadow)}
             onClick={onClick}
             to={url}
             event={event}

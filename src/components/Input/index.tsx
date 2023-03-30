@@ -5,9 +5,12 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     label?: string
     showSubmit?: boolean
     inputFieldClassName?: string
+    onSubmit?: (inputContent: string) => void
 }
 
-export const Input = ({ label, showSubmit, inputFieldClassName, ...props }: InputProps): JSX.Element => {
+export const Input = ({ label, showSubmit, inputFieldClassName, onSubmit, ...props }: InputProps): JSX.Element => {
+    const inputRef = React.useRef<HTMLInputElement>(null)
+    const [inputValue, setInputValue] = React.useState<string>('')
     return (
         <div className={`w-full px-4 py-2`}>
             {label && (
@@ -20,11 +23,16 @@ export const Input = ({ label, showSubmit, inputFieldClassName, ...props }: Inpu
             )}
             <div className="flex w-full gap-x-2">
                 <input
+                    ref={inputRef}
+                    value={inputValue}
                     name={props.name}
-                    className={`py-[12px] block px-[13px] text-[15px] rounded-sm border border-gray-accent-light mt-1 flex-grow ${inputFieldClassName}`}
+                    className={`py-[12px] block px-[13px] text-[15px] rounded-sm border border-gray-accent-light flex-grow ${inputFieldClassName}`}
                     type={props.type}
                     required={props.required}
                     placeholder={props.placeholder}
+                    onChange={(e) => {
+                        setInputValue(e.target.value)
+                    }}
                     {...props}
                 />
                 {showSubmit && (
@@ -33,6 +41,11 @@ export const Input = ({ label, showSubmit, inputFieldClassName, ...props }: Inpu
                             name: 'submit quesiton to max ai',
                         }}
                         size="xs"
+                        onClick={() => {
+                            onSubmit && onSubmit(inputValue)
+                            setInputValue('')
+                        }}
+                        shadow={false}
                     >
                         Submit
                     </TrackedCTA>

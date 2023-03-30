@@ -1,7 +1,7 @@
 import { Close } from 'components/Icons'
 import { Input } from 'components/Input'
 import { motion } from 'framer-motion'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { ChatMessage } from './ChatMessage'
 
 export const ChatWindow = ({
@@ -9,20 +9,71 @@ export const ChatWindow = ({
 }: {
     setIsChatActive: (isChatActive: boolean) => void | undefined
 }): JSX.Element => {
-    const [messages, setMessages] = React.useState<ChatMessage[]>([
-        {
-            role: 'assistant',
-            content: "Hey! I'm Max AI, your helpful hedgehog assistant.",
-        },
-        {
-            role: 'user',
-            content: 'Does PostHog feature flags have multivariant flags?',
-        },
-    ])
+    const [messages, setMessages] = React.useState<ChatMessage[]>([])
+
+    const getMessagesFromStorage = () => {
+        const messagesInStorage = JSON.parse(localStorage.getItem('max-ai-messages') || '[]')
+        console.log(messagesInStorage, 'messages from storage')
+        if (messagesInStorage || messagesInStorage.length < 1) {
+            console.log('this thinks i has messages')
+            setMessages(messagesInStorage)
+        } else {
+            setMessages([
+                {
+                    role: 'assistant',
+                    content: "Hi there! I'm Max, your friendly AI hedgehog. How can I help you today?",
+                },
+            ])
+        }
+    }
 
     const handleCloseClick = () => {
         setIsChatActive(false)
     }
+
+    const handleSubmit = async (inputContent?: string) => {
+        console.log('setting submit', inputContent)
+        setMessages([
+            ...messages,
+            {
+                role: 'user',
+                content: inputContent || 'yo',
+            },
+        ])
+    }
+
+    useEffect(() => {
+        console.log(messages, 'messages')
+        const getResponse = async () => {
+            const res = await fetch('https://max.posthog.cc/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(messages),
+            })
+                .then((res) => res.json())
+                .then((res) => {
+                    // add the response to the messages
+                    setMessages([
+                        ...messages,
+                        {
+                            role: 'assistant',
+                            content: res,
+                        },
+                    ])
+                })
+        }
+        if (messages?.[messages.length - 1]?.role === 'user') {
+            getResponse()
+        }
+        // save the messages to local storage with a key and expiration date or 24 hours
+        // if the user comes back, load the messages from local storage
+        // localStorage.setItem('max-ai-messages', JSON.stringify(messages))
+        if (!messages || messages.length === 0) {
+            // getMessagesFromStorage()
+        }
+    }, [messages])
 
     return (
         <div className="bg-white rounded h-[600px] max-h-screen w-[350px] flex flex-col">
@@ -39,7 +90,7 @@ export const ChatWindow = ({
                     <Close className="text-white opacity-70 hover:opacity-90 transition-opacity h-4 w-4" opacity="1" />
                 </motion.button>
             </div>
-            <div className="flex flex-col flex-grow justify-end overflow-hidden mb-2">
+            <div className="flex flex-col flex-grow overflow-hidden mb-2">
                 <div className="h-8 mr-3 bg-gradient-to-b from-white to-transparent z-10" />
                 <div className="overflow-y-scroll overflow-x-hidden p-4 -mt-6 flex-grow flex flex-col justify-end">
                     {messages?.map((message, index) => (
@@ -47,7 +98,7 @@ export const ChatWindow = ({
                     ))}
                 </div>
                 <div className="h-8 -mt-6 mr-3 bg-gradient-to-t from-white to-transparent" />
-                <Input name="htyy" showSubmit />
+                <Input name="htyy" showSubmit onSubmit={handleSubmit} />
             </div>
         </div>
     )
