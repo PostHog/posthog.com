@@ -15,8 +15,12 @@ export const ChatWindow = ({
         const messagesInStorage = localStorage.getItem('max-ai-messages')
         if (messagesInStorage) {
             const messagesInStorageJSON = JSON.parse(messagesInStorage)
-            if (messagesInStorageJSON || messagesInStorageJSON.length > 1) {
-                setMessages(messagesInStorageJSON)
+            if (
+                messagesInStorageJSON &&
+                messagesInStorageJSON.messages.length > 1 &&
+                messagesInStorageJSON.expiration > Date.now()
+            ) {
+                setMessages(messagesInStorageJSON.messages)
             } else {
                 setMessages([
                     {
@@ -74,9 +78,11 @@ export const ChatWindow = ({
         if (messages?.[messages.length - 1]?.role === 'user') {
             getResponse()
         }
-        // save the messages to local storage with a key and expiration date or 24 hours
+        // save the messages to local storage with a key and expiration date for 1 day
         if (messages?.length && messages.length > 1) {
-            localStorage.setItem('max-ai-messages', JSON.stringify(messages))
+            const expirationDate = new Date()
+            expirationDate.setDate(expirationDate.getDate() + 1) // Expires in 1 day
+            localStorage.setItem('max-ai-messages', JSON.stringify({ messages, expiration: expirationDate.getTime() }))
         }
     }, [messages])
 
