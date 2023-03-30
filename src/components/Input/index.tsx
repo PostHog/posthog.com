@@ -12,7 +12,7 @@ export const Input = ({ label, showSubmit, inputFieldClassName, onSubmit, ...pro
     const inputRef = React.useRef<HTMLInputElement>(null)
     const [inputValue, setInputValue] = React.useState<string>('')
     return (
-        <div className={`w-full px-4 py-2`}>
+        <div className={`w-full px-4 py-4`}>
             {label && (
                 <label
                     className={`opacity-70 mb-1 inline-block ${props.required ? 'font-bold' : ''}`}
@@ -26,7 +26,7 @@ export const Input = ({ label, showSubmit, inputFieldClassName, onSubmit, ...pro
                     ref={inputRef}
                     value={inputValue}
                     name={props.name}
-                    className={`py-[12px] block px-[13px] text-[15px] rounded-sm border border-gray-accent-light flex-grow ${inputFieldClassName}`}
+                    className={`py-2 block px-3 text-[15px] rounded-sm border border-gray-accent-light flex-grow ${inputFieldClassName}`}
                     type={props.type}
                     required={props.required}
                     placeholder={props.placeholder}

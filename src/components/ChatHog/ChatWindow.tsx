@@ -3,6 +3,7 @@ import { Input } from 'components/Input'
 import { motion } from 'framer-motion'
 import React, { useEffect, useRef } from 'react'
 import { ChatMessage } from './ChatMessage'
+import './ChatHog.scss'
 
 export const ChatWindow = ({
     setIsChatActive,
@@ -11,6 +12,7 @@ export const ChatWindow = ({
 }): JSX.Element => {
     const [messages, setMessages] = React.useState<ChatMessage[]>()
     const divRef = useRef<HTMLDivElement>(null)
+    const [maxResponseLoading, setMaxResponseLoading] = React.useState<boolean>(false)
 
     useEffect(() => {
         // Scroll to the bottom of the div on mount and whenever its content changes
@@ -73,6 +75,7 @@ export const ChatWindow = ({
             })
                 .then((res) => res.json())
                 .then((res) => {
+                    setMaxResponseLoading(false)
                     // add the response to the messages
                     setMessages([
                         ...messages,
@@ -84,6 +87,7 @@ export const ChatWindow = ({
                 })
         }
         if (messages?.[messages.length - 1]?.role === 'user') {
+            setMaxResponseLoading(true)
             getResponse()
         }
         // save the messages to local storage with a key and expiration date for 1 day
@@ -119,6 +123,7 @@ export const ChatWindow = ({
                     {messages?.map((message, index) => (
                         <ChatMessage key={`message-${index}`} role={message.role} content={message.content} />
                     ))}
+                    {maxResponseLoading && <ChatMessage role="assistant" loading />}
                 </div>
             </div>
             <div className="h-8 -mt-6 mr-3 bg-gradient-to-t from-white to-transparent" />
