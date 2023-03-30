@@ -5,17 +5,24 @@ showSidebar: true
 width: lg
 noindex: true
 images:
-    - './images/startup-hogs.png'
+    - './images/rockwall-mobile.png'
+    - './images/rockwall.png'
+    - './images/on-belay.png'
+    - './images/belay-on.png'
 ---
 
 import { StaticImage } from 'gatsby-plugin-image'
 import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 
-<div className="text-center relative mb-8">
-  <GatsbyImage image={getImage(props?.images[0])} alt="PostHog for startups" objectFit="contain" className="h-48" style={{ maxHeight: "14rem", marginTop: "-3rem" }} />
-</div>
+<div className="w-[calc(100%_+_4rem)] relative -mx-4 px-8 md:-mx-16 pt-32 pb-48 -mt-32 md:-mt-44">
+  <GatsbyImage image={getImage(props?.images[0])} alt="PostHog for startups" objectFit="cover" className="md:hidden absolute top-0 left-0 w-full bottom-0 opacity-40" />
+  <GatsbyImage image={getImage(props?.images[1])} alt="PostHog for startups" objectFit="cover" className="hidden md:block absolute top-0 left-0 w-full bottom-0" />
+  <GatsbyImage image={getImage(props?.images[2])} alt="PostHog for startups" objectFit="contain" className="absolute bottom-0 left-4 w-24 md:left-16 md:w-48" />
+  <GatsbyImage image={getImage(props?.images[3])} alt="PostHog for startups" objectFit="contain" className="absolute bottom-0 -right-4 w-28 md:right-16 md:w-60" />
 
-<Hero
+  <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-tan/100 via-tan/85 to-tan/0"></div>
+
+  <Hero
     title="PostHog for startups"
     subtitle="$50k in credits (plus extras you'll actually use) to help you get to product-market fit"
     ctas={[
@@ -26,6 +33,8 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 <p class="text-center italic text-xs p-4">
   Email <a href="mailto:startups@posthog.com?subject=Startup%20program">startups@posthog.com</a> to get your credit
 </p>
+</div>
+
 
 
 <Section title="Here's what you get:" titleSize="sm" cols={3}>
