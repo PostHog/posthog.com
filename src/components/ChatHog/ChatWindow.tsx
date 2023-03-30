@@ -21,6 +21,13 @@ export const ChatWindow = ({
         }
     }, [divRef.current?.innerHTML])
 
+    const defaultMessage: ChatMessage[] = [
+        {
+            role: 'assistant',
+            content: "Hi there! I'm Max, your friendly AI hedgehog. How can I help you today?",
+        },
+    ]
+
     const getMessagesFromStorage = () => {
         const messagesInStorage = localStorage.getItem('max-ai-messages')
         if (messagesInStorage) {
@@ -32,20 +39,10 @@ export const ChatWindow = ({
             ) {
                 setMessages(messagesInStorageJSON.messages)
             } else {
-                setMessages([
-                    {
-                        role: 'assistant',
-                        content: "Hi there! I'm Max, your friendly AI hedgehog. How can I help you today?",
-                    },
-                ])
+                setMessages(defaultMessage)
             }
         } else {
-            setMessages([
-                {
-                    role: 'assistant',
-                    content: "Hi there! I'm Max, your friendly AI hedgehog. How can I help you today?",
-                },
-            ])
+            setMessages(defaultMessage)
         }
     }
 
@@ -53,15 +50,15 @@ export const ChatWindow = ({
         setIsChatActive(false)
     }
 
-    const handleSubmit = async (inputContent?: string) => {
-        console.log('setting submit', inputContent)
-        setMessages([
-            ...messages,
-            {
-                role: 'user',
-                content: inputContent || 'yo',
-            },
-        ])
+    const handleSubmit = async (inputContent: string) => {
+        messages &&
+            setMessages([
+                ...messages,
+                {
+                    role: 'user',
+                    content: inputContent,
+                },
+            ])
     }
 
     useEffect(() => {
