@@ -1,7 +1,6 @@
 import { MDXProvider } from '@mdx-js/react'
 import Breadcrumbs from 'components/Breadcrumbs'
 import FooterCTA from 'components/FooterCTA'
-import { RightArrow } from 'components/Icons/Icons'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
 import { Section } from 'components/Section'
@@ -11,9 +10,8 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { graphql } from 'gatsby'
 import React from 'react'
 import { shortcodes } from '../mdxGlobalComponents'
-import SectionLinks from 'components/SectionLinks'
 
-export default function Template({ data, pageContext: { next, previous } }) {
+export default function Template({ data }) {
     const { pageData } = data
     const {
         body,
@@ -22,14 +20,11 @@ export default function Template({ data, pageContext: { next, previous } }) {
     } = pageData
     const { title, subtitle, featuredImage, description } = pageData?.frontmatter
 
-    // we don't use the next, previous section links but we should?
-    // depending on what we do with the sidebar
-
     return (
         <Layout>
             <SEO
                 image={`/images/templates/${slug.split('/')[2]}.png`}
-                title={`${title} - PostHog`}
+                title={`${title} template - PostHog`}
                 description={description || excerpt}
             />
             <Breadcrumbs
@@ -51,9 +46,16 @@ export default function Template({ data, pageContext: { next, previous } }) {
                                 <MDXRenderer>{body}</MDXRenderer>
                             </MDXProvider>
                         </article>
-                        <div className="mt-12">
-                            <SectionLinks next={next} previous={previous} />
-                        </div>
+                        <article>
+                            <div className="m-6">
+                                <p className="m-0 text-[15px]">
+                                    To use this template,{' '}
+                                    <Link to="https://app.posthog.com/signup">signup for PostHog</Link>, go to the
+                                    Dashboards tab, click the "New dashboard" button, and select "{title}" from the
+                                    modal.
+                                </p>
+                            </div>
+                        </article>
                         <FooterCTA />
                     </div>
                 </section>
