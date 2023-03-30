@@ -15,7 +15,7 @@ We understand organizing travel can be a challenge when you have personal/family
 
 ## All-company offsites
 
-Once a year, the entire company will get together somewhere in the world for a week. Usually we'll all fly on Sunday, have an opening dinner, spend the week doing a mix of hard work, strategy, culture and fun activities and we then all fly back home on Friday. Our past offsites have been in Italy, Portugal and Iceland.
+Once a year, the entire company will get together somewhere in the world for a week. Usually we'll all fly on Sunday, have an opening dinner, spend the week doing a mix of hard work, strategy, culture and fun activities and we then all fly back home on Friday. Our past offsites have been in Italy, Portugal, Iceland and Aruba. As of 2023, we only travel to places with an average temperature of 81 degrees (27 celcius) for inclusivity of those with less body fat.
 
 These are organized by the Ops & People team, and we budget up to $3,000 per person in total for these. 
 
