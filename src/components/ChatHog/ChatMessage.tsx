@@ -2,12 +2,26 @@ import Avatar from 'components/CommunityQuestions/Avatar'
 import { ThumbDown, ThumbUp } from 'components/Icons'
 import { StaticImage } from 'gatsby-plugin-image'
 import { useUser } from 'hooks/useUser'
-import React, { useEffect } from 'react'
+import React from 'react'
 
 export const ChatAvatar = ({ role }: { role: 'system' | 'assistant' | 'user' }): JSX.Element => {
     const { user } = useUser()
     return role === 'user' ? (
-        <Avatar image={user?.profile?.avatar} />
+        user?.profile?.avatar ? (
+            <Avatar image={user?.profile?.avatar} />
+        ) : (
+            <div>
+                <div className="h-8 w-8 rounded-full bg-tan flex justify-center items-center">
+                    <StaticImage
+                        placeholder="none"
+                        loading="eager"
+                        alt="Analymous avatar"
+                        src="./images/star-hog-grayscale.png"
+                        width={20}
+                    />
+                </div>
+            </div>
+        )
     ) : (
         <div>
             <div className="h-8 w-8 rounded-full bg-orange">

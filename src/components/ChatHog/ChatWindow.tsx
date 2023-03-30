@@ -114,9 +114,7 @@ export const ChatWindow = ({
                   ...messages,
                   {
                       role: 'assistant',
-                      content: `Whoops, sorry my response wasn't what you were looking for. 
-                        I will pass this feedback on to the team and will attempt to 
-                        re-generate a better response for you.`,
+                      content: `Whoops, sorry my response wasn't what you were looking for. I will pass this feedback on to the team and will attempt to re-generate a better response for you.\n\nYou can also send an email to hey@posthog.com to get in touch with a human.`,
                       responseTo: 'rating',
                       ratingValue: 'bad',
                   },
@@ -135,7 +133,7 @@ export const ChatWindow = ({
     }
 
     return (
-        <div className="bg-white rounded h-[600px] max-h-screen w-[350px] flex flex-col overflow-hidden">
+        <div className="bg-white rounded-md shadow-lg h-full w-full flex flex-col overflow-hidden">
             <div className="flex rounded-t w-full bg-red justify-between items-center p-4 z-20">
                 <div>
                     <h3 className="font-bold text-base text-white m-0">Max AI</h3>
