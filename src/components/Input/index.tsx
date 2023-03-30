@@ -33,6 +33,12 @@ export const Input = ({ label, showSubmit, inputFieldClassName, onSubmit, ...pro
                     onChange={(e) => {
                         setInputValue(e.target.value)
                     }}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            onSubmit && onSubmit(inputValue)
+                            setInputValue('')
+                        }
+                    }}
                     {...props}
                 />
                 {showSubmit && (
