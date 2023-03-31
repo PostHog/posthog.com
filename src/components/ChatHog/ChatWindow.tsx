@@ -24,7 +24,7 @@ export const ChatWindow = ({
     const defaultMessage: ChatMessage[] = [
         {
             role: 'assistant',
-            content: "Hi there! I'm Max, your friendly AI hedgehog. How can I help you today?",
+            content: "Hi there! I'm Max, your friendly AI support assistant. How can I help you today?",
         },
     ]
 
