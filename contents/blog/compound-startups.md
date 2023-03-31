@@ -1,6 +1,6 @@
 ---
 date: 2023-03-30
-title: "PFE #2: The conformist startup rule you can ignore"
+title: "The conformist startup rule you can ignore"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
