@@ -175,6 +175,31 @@ Below is a rough timeline for planning your next offsite, as well as links to te
 - [ ] Collect post-mortem feedback from the team
   - We generally do this as an open GitHub issue, but you can also create a Google form to facilitate this
 
+
+## All company offsite hackathon
+
+The hackathon is always a highlight of the offsite. We tend to run them like this:
+
+**Session 1: ideation dinner**
+The day before the start of the hackathon we do a casual 'ideation' dinner where we encourage people to chat about ideas
+
+**Session 2: hackathon kick-off**
+The hackathon kick off is 1.5 hours at the end of the day. Ideally we do this in a conference room with beers and wine.
+
+- Everyone writes down their ideas on multiple post-it notes in about 10 minutes.
+- People come up to the front one-by-one, and they get 30 seconds to pitch all their ideas.
+- Everyone gets three votes to put on whichever ideas they like most. Just do this as a tally. You can't vote on your own idea
+- We dismiss all ideas with zero votes, and sort all the other ideas from top to bottom based on the number of votes.
+- Everyone writes their name on the other side of the sticky bit of a small piece of post-it note, then add their name to the idea they want to work on. Every group should have at least two people in it, and ideally 3.
+- Once groups are formed, everyone can go off and ideate or hack.
+
+**Session 3: presentations**
+
+This should be the last work related session of the offsite. Again ideally in a conference center with beer and wine provided.
+
+Each group gets 5 minutes to demo and present their idea.
+
+
 **2 weeks after**
 - [ ] Compile post-mortem feedback and share with team
 - [ ] Host post-mortem meeting to discuss any outstanding issues (optional)
