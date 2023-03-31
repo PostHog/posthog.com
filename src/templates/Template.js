@@ -1,6 +1,5 @@
 import { MDXProvider } from '@mdx-js/react'
 import Breadcrumbs from 'components/Breadcrumbs'
-import FooterCTA from 'components/FooterCTA'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
 import { Section } from 'components/Section'
@@ -10,6 +9,7 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { graphql } from 'gatsby'
 import React from 'react'
 import { shortcodes } from '../mdxGlobalComponents'
+import CreateDashboardImage from '../../contents/images/templates/create-dashboard.png'
 
 export default function Template({ data }) {
     const { pageData } = data
@@ -47,16 +47,15 @@ export default function Template({ data }) {
                             </MDXProvider>
                         </article>
                         <article>
-                            <div className="m-6">
+                            <div className="m-6 mb-12">
                                 <p className="m-0 text-[15px]">
                                     To use this template,{' '}
-                                    <Link to="https://app.posthog.com/signup">signup for PostHog</Link>, go to the
-                                    Dashboards tab, click the "New dashboard" button, and select "{title}" from the
-                                    modal.
+                                    <Link to="https://app.posthog.com/dashboard"> go to the Dashboards tab</Link>, click
+                                    the "New dashboard" button, and select "{title}" from the modal.
                                 </p>
+                                <img className="w-full mt-6" src={CreateDashboardImage} alt="" />
                             </div>
                         </article>
-                        <FooterCTA />
                     </div>
                 </section>
             </div>

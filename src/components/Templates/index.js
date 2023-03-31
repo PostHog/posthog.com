@@ -93,10 +93,6 @@ function TemplatesPage({ location }) {
                 ))}
             </div>
             <TemplatesList templates={filteredTemplates || templates} />
-
-            <div className="my-12 md:my-24 px-5 max-w-[960px] mx-auto">
-                <FooterCTA />
-            </div>
         </Layout>
     )
 }
