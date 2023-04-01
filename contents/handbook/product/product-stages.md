@@ -20,13 +20,13 @@ Our products fall under three main categories within the product development spe
 
 ### 1. Minimum Viable Product (MVP)
 
-- Core features are in production; internal rollout has started
+- Core features are in production; external rollout has started
 - Some rough edges may be present
 - Initially free to gather feedback and validate demand
 
 To reach the MVP stage:
 
-- Conduct early customer conversations to validate demand and identify crucial features
+- Validate demand and identify crucial features through early customer conversations
 - Move fast, things might break, but fix issues quickly
 - Ruthlessly cut scope
 - Work with a small team (about 2 people)
@@ -84,6 +84,6 @@ When should a product try to go from PMF to standalone best-in-class:
 
 ## What does it look like for an individual team?
 
-- Could be working on multiple products at different stages.
-- Different people will take products through different stages; people will excel at different stages.
-- Even when a product is at PMF stage we should most likely continue to invest in it to improve it for existing customers and drive adoption
+- Teams may work on multiple products at different stages
+- Different people will excel at different stages
+- Continue investing in products even at the PMF stage to improve them for existing customers and drive adoption
