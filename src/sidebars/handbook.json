@@ -509,6 +509,10 @@
                 "url": "/handbook/product/product-team"
             },
             {
+                "name": "Product stages",
+                "url": "/handbook/product/product-stages"
+            },
+            {
                 "name": "Product metrics",
                 "url": "/handbook/product/metrics"
             },
