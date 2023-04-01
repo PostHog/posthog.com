@@ -287,17 +287,21 @@ posthog.onFeatureFlags(callback)
 posthog.isFeatureEnabled('keyword')
 ```
 
+-   By default, this function will send a `$feature_flag_called` event to your instance every time it's called so you're able to do analytics. You can disable this by passing the send_event property:
+
+```js
+posthog.isFeatureEnabled('keyword', { send_event: false })
+```
+
+
 -   Trigger a reload of the feature flags:
 
 ```js
 posthog.reloadFeatureFlags()
 ```
 
--   By default, this function will send a `$feature_flag_called` event to your instance every time it's called so you're able to do analytics. You can disable this by passing the send_event property:
-
-```js
-posthog.isFeatureEnabled('keyword', { send_event: false })
-```
+Note that `reloadFeatureFlags()` does not send `$feature_flag_called` events. These events are only sent when you query for a feature flag
+using the `getFeatureFlag()` or `isFeatureEnabled()` functions.
 
 #### Feature Flag Payloads
 
