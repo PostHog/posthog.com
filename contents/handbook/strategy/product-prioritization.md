@@ -1,5 +1,5 @@
 ---
-title: Ideal Customer Persona
+title: Product Prioritization
 sidebar: Handbook
 showTitle: true
 ---
@@ -8,9 +8,27 @@ PostHog aims to provide all the tools that our ICP needs in one platform. This i
 
 ## How do we prioritize?
 
-Tools should either 
+Products we build into the platform should:
 
-We must be able to get in first for any of our tools.
+* be recognizable/positioned as products that our ICP already uses
+* use or add to customer or product data
+* improve our other products
+* be designed to enable us to get in first with that product (even if in practise we often rip and replace an existing product)
+* help customers build more successful products (this doesn't _just_ mean writing code, it means commercial stuff too)
+* ideally work with our snippet
+
+Whilst it's possible for others to build on our platform, our priorties are:
+
+* build major new products ourselves, and improve our own ability to ship each new product (ie standard ways to launch, bill, market them and so on)
+* make our existing products headless/with good APIs, where relevant - this helps us to reuse existing work and to reduce technical debt _and_ they help the community achieve the following:
+* enable the community to build hacky internal tools or small bootstrapped products via API
+
+What we want to avoid:
+
+* We should avoid hosting other people's products for them. We tried this with apps/plugins and it was painful from a security perspective. We should instead encourage API building.
+* We shouldn't expect VC backed startups to build huge products on our infra over the next year or two. This may / may not come much later on when we have the distribution to support this.
+
+We must be able to get in first for any of our tools. We don't want to have to replace a complex stack, we should be first in, and should therefore be the default for choice for any new tool.
 
 ## What makes a tool in-scope or out-of-scope?
 
@@ -18,97 +36,23 @@ The earlier stage a company is, the more likely that they don't have specialist 
 
 The more engineering-led the organization, the stronger a fit PostHog is for the customer, and the more likely it is that product engineers are driving all of the above areas. For example, a YC backed startup will typically have two technical cofounders, who will handle every role in the company.
 
-Therefore, any of the above are possible for us to build. Here is a non-exhaustive list, sorted by stack:
+Therefore, any of the above are possible for us to build. Here is a non-exhaustive list, sorted by stack, of tools that could fit our criteria:
 
 Product stack = product tours, feedback and surveys, analytics, recordings, roadmap, beta management (self-serve feature flags), user interviewing, alerting
 Engineering stack = feature flags, error handling, APM
 Growth stack = experimentation, session recordings, funnels, lead scoring, revenue (and integration)
 Data stack = warehouse, CDP / etl / reverse etl, transformations, monitoring and observability, data governance, ML and DS tooling, headless analytics
 BI stack = notebooks, querying, visalizations, forecasting
-Marketing stack = heatmaps, scrollmaps, ...
+Marketing stack = heatmaps, scrollmaps, attribution and performance, messaging, community and referral
 
-## Prioritizing within the range of in-scope tools
-
+The stronger the above tools fit our prioritization, the sooner we can build them.
 
 ## Being able to build all of this stuff
 
 From what we've seen so far, very approximately, simpler products take a team of 2 engineers around 3 months to get into an MVP, 3 more months to get to PMF (ie charging with happy customers), and 3 more months to get profitable. Complex ones (those involving a higher infrastructure workload or much bigger feature set) we imagine will take longer but may be more profitable with higher order values once built.
 
-Once a product hits MVP, we should hire enough that we can either maintain _or_ innovate depending on if we believe the product is a growth engine for us and the feature's success.
+Once a product hits MVP, we should hire enough that we can either maintain _or_ innovate depending on if we believe the product is a growth engine for us and the feature's success. We should avoid having lots of MVP but non-product market fit tools in our platform, as this will create a low quality experience.
 
-## TO DELETE - Rough notes
+We simply do not need the same _depth_ of features any of our individual products have. Instead, we can usually provide a better experience by integrating our products together, providing APIs and extensibility or otherwise adapting them to a more technical audience.
 
-Other apps
-What’s the goal of more apps?
-How far do we want to go with the tools?
-Get to 80% and then start charging
-For products that have PMF, keep investing so they are best-in-class
-Stages of product:
-MVP = It works
-PMF = Charging for it, making money, profitable (feature parity)
-Best-in-class/integrated = Best product for ICP, stability matters (does stuff that others can't do, headless
-TODO - talk about stages further
-Ideally integration is differentation
-What's the principles of what we build?
-Builds on/enhances product and customer data
-Distribute via the SDKs
-Has to improve our other products
-Selling to our ICP
-Give API access to everything
-Antiprinciples:
-Shouldn't host stuff on behalf of customers
-Data warehouse as a focus
-Should we start with airbyte and fivetran integrations + dbt
-Sequencing of data warehouse, then 20% of airbyte then gives all the value (only imports and tools our ICP would use)
-There's a few product for observability and monitoring, but want to get the warehouse successful first
-Product stack = product tours, feedback and surveys, analytics, recordings, roadmap, beta management (self-serve feature flags), user interviewing, alerting
-Engineering stack = feature flags, error handling, APM
-Growth stack = experimentation, session recordings, funnels, lead scoring, revenue (and integration)
-Data stack = warehouse, CDP / etl / reverse etl, transformations, monitoring and observability, data governance, ML and DS tooling, headless analytics
-BI stack = notebooks, querying, visalizations, forecasting
-Marketing stack = heatmaps, scrollmaps, ...
-Headless everything? Headless session recording, headless feature flags
-Shouldn't build:
-CI/CD
-Hosting
-Product tools
-Data tools stack
-Under 100m focus on stuff which rolls up to CTO
-Extensibility - visualization apps, templates for notebooks/dashboards
-Tinybird branding - landing page, copy as curl etc.
-Are there tools that are build for different ICPs that will be come under engineering?
-Data stream
-Product stream
-Which ICPs/teams could we expand to?
-Product engineer, Growth engineer, Data engineer and analytics engineer, CS, Marketing, Sales
-If it goes up to the CTO
-By stage of company
-Ability to help them build better products vs build better companies
-CDP is very wide. Etl, reverse etl, event stream out, people and cohort syncing between tools
-Sprig - feedback and user interview scheduling
-Metabase and Snowflake. bI tools
-Dbt. Metaplane big eye
-Data side
-Metabase, snowflake,
-Snowflake is shipping a transactional database too
-Alerting and threshold
-Avo analytics
-Feedback tools (Sprig). Much depeer integrations. Viable.fit
-CS use case - CRM, support
-Zapier, N8N, automation tools
-Hosting - heroku, fly.io etc.
-ML tools?
-ChatGPT
-BI tools / data workspace
-B2B2C, both hogql layer giving real-time analytics and embedded stuff
-Getting to 80% quickly, charging for it, then double down on it when it's working
-Development tools
-https://files.slack.com/files-tmb/TSS5W8YQZ-F0501L55TFF-16dee448cb/screenshot_2023-03-24_at_11.23.39_720.png
-Visualization apps
-Marketing - customer.io
-Error monitoring
-June - really guided dashboards, actions etc.
-Google analytics style dashboards
-Pocus, CRM, Zendesk, Intercom, Customer.io
-Unclear - matrix of devtools,
-How does Shopify not seen as competitive with the apps?
+Finally, and perhaps most importantly, we should always start by building approximately what hte market expects of each tool. This avoids all the early iteration needed (which can be several years) and means we'll get demand nearly immediately - others have validated that these products are useful for us. We can innovate once one of our products hits product market fit - often by integrating it with our other tools or otherwise adapting it more tightly to our ICP.
