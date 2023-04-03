@@ -17,7 +17,7 @@ Products we build into the platform should:
 * help customers build more successful products (this doesn't _just_ mean writing code, it means commercial stuff too)
 * ideally work with our snippet
 
-Whilst it's possible for others to build on our platform, our priorties are:
+Whilst it's possible for others to build on our platform, our priorities are:
 
 * build major new products ourselves, and improve our own ability to ship each new product (ie standard ways to launch, bill, market them and so on)
 * make our existing products headless/with good APIs, where relevant - this helps us to reuse existing work and to reduce technical debt _and_ they help the community achieve the following:
