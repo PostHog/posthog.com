@@ -20,13 +20,27 @@ type QuestionsProps = {
 export const Questions = ({ slug, limit = 100, onSubmit, onLoad, topics, onSignUp, topicId }: QuestionsProps) => {
     const [questions, setQuestions] = useState<StrapiRecord<QuestionData>[]>([])
     const [loading, setLoading] = useState(false)
-    const [availableTopics, setAvailableTopics] = useState<any[]>([])
     const [count, setCount] = useState(0)
     const [start, setStart] = useState(0)
     const containerRef = useRef<HTMLDivElement>(null)
 
     const getQuestions = async ({ limit, start, topicId }: { limit: number; start: number; topicId?: number }) => {
-        console.log(topicId)
+        let filters = {}
+
+        if (topicId) {
+            filters = {
+                ...filters,
+                topics: { id: { $eq: topicId } },
+            }
+        }
+
+        if (slug) {
+            filters = {
+                ...filters,
+                page: { $eq: slug },
+            }
+        }
+
         const query = qs.stringify(
             {
                 pagination: {
@@ -34,7 +48,7 @@ export const Questions = ({ slug, limit = 100, onSubmit, onLoad, topics, onSignU
                     limit,
                 },
                 fields: ['id'],
-                filters: topicId ? { topics: { id: { $eq: topicId } } } : {},
+                filters,
             },
             {
                 encodeValuesOnly: true,
@@ -53,21 +67,10 @@ export const Questions = ({ slug, limit = 100, onSubmit, onLoad, topics, onSignU
         return data
     }
 
-    const getAvailableTopics = (questions: any[]) => {
-        const availableTopics: any[] = []
-        questions.forEach(({ question: { topics } }) => {
-            topics?.forEach((topic: any) => {
-                if (!availableTopics.includes(topic)) availableTopics.push(topic)
-            })
-        })
-        return availableTopics
-    }
-
     useEffect(() => {
         getQuestions({ limit, start, topicId }).then((data) => {
             setQuestions(data)
             setCount(data.length)
-            // setAvailableTopics(getAvailableTopics([...questions, ...data.questions]))
             // onLoad?.()
         })
     }, [])
@@ -77,7 +80,6 @@ export const Questions = ({ slug, limit = 100, onSubmit, onLoad, topics, onSignU
             setQuestions([...data.questions, ...questions])
             setCount(data.count)
             setStart(start + 1)
-            setAvailableTopics(getAvailableTopics([...questions, ...data.questions]))
             onSubmit?.(values, formType)
         })
     }
@@ -87,7 +89,6 @@ export const Questions = ({ slug, limit = 100, onSubmit, onLoad, topics, onSignU
             setQuestions([...questions, ...data.questions])
             setCount(data.count)
             setStart(start + limit)
-            setAvailableTopics(getAvailableTopics([...questions, ...data.questions]))
         })
     }
 

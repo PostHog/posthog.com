@@ -27,6 +27,7 @@ export type QuestionData = {
     permalink: string
     resolved: boolean
     body: string
+    page: string | null
     createdAt: string
     updatedAt: string
     publishedAt: string
