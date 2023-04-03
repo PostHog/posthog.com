@@ -6,7 +6,7 @@ import { Replies } from './Replies'
 import { Profile } from './Profile'
 import { QuestionData, StrapiRecord } from 'lib/strapi'
 import Days from './Days'
-import Markdown from 'markdown-to-jsx'
+import Markdown from './Markdown'
 import { QuestionForm } from './QuestionForm'
 import { useQuestion } from '../hooks/useQuestion'
 
