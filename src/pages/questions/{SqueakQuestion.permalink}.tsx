@@ -25,8 +25,6 @@ type QuestionPageProps = {
 }
 
 export default function QuestionPage(props: QuestionPageProps) {
-    console.log(props)
-
     if (!props?.data?.squeakQuestion) {
         return null
     }

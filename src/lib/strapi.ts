@@ -33,6 +33,7 @@ export type QuestionData = {
     publishedAt: string
     profile?: StrapiData<ProfileData>
     replies?: StrapiData<ReplyData[]>
+    topics?: StrapiData<TopicData[]>
 }
 
 export type AvatarData = {
@@ -62,4 +63,9 @@ export type ReplyData = {
     updatedAt: string
     publishedAt: string
     profile?: StrapiData<Pick<ProfileData, 'firstName' | 'lastName' | 'avatar'>>
+}
+
+export type TopicData = {
+    label: string
+    slug: string
 }
