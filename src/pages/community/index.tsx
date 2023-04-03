@@ -16,9 +16,9 @@ import { useStaticQuery } from 'gatsby'
 import Tooltip from 'components/Tooltip'
 import GitHubTooltip, { Author } from 'components/GitHubTooltip'
 import QuestionsTable from 'components/Questions/QuestionsTable'
-import useSWRInfinite from 'swr/infinite'
 import SidebarSection from 'components/PostLayout/SidebarSection'
 import { ProfileData, StrapiRecord } from 'lib/strapi'
+import { useQuestions } from 'hooks/useQuestions'
 
 export const Avatar = (props: { className?: string; src?: string }) => {
     return (
@@ -228,26 +228,14 @@ const ActiveIssues = ({ issues }) => {
 }
 
 const RecentQuestions = () => {
-    const [sortBy, setSortBy] = useState<'newest' | 'activity' | 'popular'>('newest')
+    // const [sortBy, setSortBy] = useState<'newest' | 'activity' | 'popular'>('newest')
 
-    const { data, size, setSize, isLoading, mutate } = useSWRInfinite<any[]>(
-        (offset) =>
-            `${process.env.GATSBY_SQUEAK_API_HOST}/api/v1/questions?organizationId=${
-                process.env.GATSBY_SQUEAK_ORG_ID
-            }&start=${offset * 5}&perPage=5&published=true&sortBy=${sortBy}`,
-        (url: string) =>
-            fetch(url)
-                .then((r) => r.json())
-                .then((r) => r.questions)
-    )
+    const { questions, fetchMore, isLoading } = useQuestions({ limit: 3 })
 
-    const questions = React.useMemo(() => {
-        return data?.flat() || []
-    }, [size, data])
     return (
         <div id="recent-questions" className="mb-12">
             <SectionTitle>Recent questions</SectionTitle>
-            {/*<QuestionsTable hideLoadMore questions={questions} size={size} setSize={setSize} isLoading={isLoading} />*/}
+            <QuestionsTable hideLoadMore questions={questions} fetchMore={fetchMore} isLoading={isLoading} />
             <CallToAction className="mt-4" type="secondary" width="full" to="/questions">
                 Browse all questions
             </CallToAction>

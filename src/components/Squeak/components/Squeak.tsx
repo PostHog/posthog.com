@@ -7,15 +7,10 @@ import { Theme } from './Theme'
 type SqueakProps = {
     slug?: string
     limit?: number
-    onSubmit: () => void
-    onLoad: () => void
-    topics?: boolean
-    onSignUp: (() => any) | (() => Promise<any>)
     topicId?: number
-    profileLink?: (profile: any) => string
 }
 
-export const Squeak = ({ slug, limit, onSubmit, onLoad, topics = true, onSignUp, topicId }: SqueakProps) => {
+export const Squeak = ({ slug, limit, topicId }: SqueakProps) => {
     const containerRef = useRef<HTMLDivElement>(null)
 
     const currentSlug = topicId
@@ -24,19 +19,13 @@ export const Squeak = ({ slug, limit, onSubmit, onLoad, topics = true, onSignUp,
         ? window.location.pathname
         : undefined
 
+    // TODO: Create hubspot contact on sign-up
+
     return (
         <root.div ref={containerRef}>
             <Theme containerRef={containerRef} />
             <div className="squeak">
-                <Questions
-                    onSignUp={onSignUp}
-                    onLoad={onLoad}
-                    topics={topics}
-                    onSubmit={onSubmit}
-                    limit={limit}
-                    slug={currentSlug}
-                    topicId={topicId}
-                />
+                <Questions limit={limit} slug={currentSlug} topicId={topicId} />
             </div>
         </root.div>
     )

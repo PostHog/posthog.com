@@ -8,7 +8,7 @@ export default function CommunityQuestions() {
             <h3 id="squeak-questions" className="mb-4">
                 Questions?
             </h3>
-            <Squeak onSignUp={(user) => createHubSpotContact(user)} />
+            <Squeak />
         </div>
     )
 }

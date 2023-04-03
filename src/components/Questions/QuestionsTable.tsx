@@ -6,8 +6,7 @@ import { QuestionData, StrapiResult } from 'lib/strapi'
 type QuestionsTableProps = {
     questions: Omit<StrapiResult<QuestionData[]>, 'meta'>
     isLoading: boolean
-    size: number
-    setSize: (size: number | ((_size: number) => number)) => any
+    fetchMore: () => void
     hideLoadMore?: boolean
     className?: string
 }
@@ -15,7 +14,7 @@ type QuestionsTableProps = {
 export const QuestionsTable = ({
     questions,
     isLoading,
-    setSize,
+    fetchMore,
     hideLoadMore,
     className = '',
 }: QuestionsTableProps) => {
@@ -161,7 +160,7 @@ export const QuestionsTable = ({
                 <li className="py-2 list-none">
                     <button
                         className="p-3 block w-full hover:bg-gray-accent-light text-primary/75 dark:text-primary-dark/75 hover:text-red rounded text-[15px] font-bold bg-gray-accent-light dark:bg-gray-accent-dark relative active:top-[0.5px] active:scale-[.99]"
-                        onClick={() => setSize((size) => size + 1)}
+                        onClick={fetchMore}
                         disabled={isLoading}
                     >
                         Load more

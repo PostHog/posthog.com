@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 
 import { Listbox } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/outline'
-import useSWRInfinite from 'swr/infinite'
 
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
@@ -11,49 +10,12 @@ import PostLayout from 'components/PostLayout'
 import SidebarSearchBox from 'components/Search/SidebarSearchBox'
 import QuestionsTable from 'components/Questions/QuestionsTable'
 import QuestionForm from 'components/Questions/QuestionForm'
-import qs from 'qs'
-import { QuestionData, StrapiResult, StrapiRecord } from 'lib/strapi'
+import { useQuestions } from 'hooks/useQuestions'
 
 export default function Questions() {
     const [sortBy, setSortBy] = useState<'newest' | 'activity' | 'popular'>('newest')
 
-    const query = (offset: number) =>
-        qs.stringify(
-            {
-                pagination: {
-                    start: offset * 20,
-                    limit: 20,
-                },
-                sort: 'createdAt:desc',
-                populate: {
-                    profile: {
-                        fields: ['firstName', 'lastName'],
-                        populate: {
-                            avatar: {
-                                fields: ['url'],
-                            },
-                        },
-                    },
-                    replies: {
-                        fields: ['id', 'createdAt', 'updatedAt'],
-                    },
-                },
-            },
-            {
-                encodeValuesOnly: true, // prettify URL
-            }
-        )
-
-    const { data, size, setSize, isLoading, mutate } = useSWRInfinite<StrapiResult<QuestionData[]>>(
-        (offset) => `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(offset)}`,
-        (url: string) => fetch(url).then((r) => r.json())
-    )
-
-    const questions: Omit<StrapiResult<QuestionData[]>, 'meta'> = React.useMemo(() => {
-        return {
-            data: data?.reduce((acc, cur) => [...acc, ...cur.data], [] as StrapiRecord<QuestionData>[]) ?? [],
-        }
-    }, [size, data])
+    const { questions, isLoading, refresh, fetchMore } = useQuestions({ limit: 20 })
 
     return (
         <Layout>
@@ -101,16 +63,15 @@ export default function Questions() {
                                     </Listbox.Options>
                                 </Listbox>
 
-                                <QuestionForm onSubmit={() => mutate()} />
+                                <QuestionForm onSubmit={refresh} />
                             </div>
                         </div>
                         <div className="mt-8 flex flex-col">
                             <QuestionsTable
                                 className="sm:grid-cols-4"
                                 questions={questions}
-                                size={size}
-                                setSize={setSize}
                                 isLoading={isLoading}
+                                fetchMore={fetchMore}
                             />
                         </div>
                     </section>

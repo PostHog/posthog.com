@@ -15,13 +15,12 @@ type QuestionProps = {
     id: number | string
     question?: StrapiRecord<QuestionData>
     onSubmit: (question: any) => void
-    onResolve: (resolved: boolean, replyId: string | null) => void
 }
 
-export const Question = ({ id, onSubmit, onResolve, question }: QuestionProps) => {
-    console.log(id)
+export const Question = ({ id, onSubmit, question }: QuestionProps) => {
     const [expanded, setExpanded] = useState(false)
     const containerRef = useRef<HTMLDivElement>(null)
+    // TODO: Default to question data if passed in
     const { question: questionData, isLoading, isError, error } = useQuestion(id)
 
     if (isLoading) {
