@@ -16,9 +16,9 @@ This page covers SOC 2, GDPR, CCPA and HIPAA compliance.
 
 ## SOC 2
 
-We have all controls and systems in place ready to obtain our SOC 2 Type 1 certification, and expect this to be granted in Q1 2023. We monitor compliance via Drata. 
+We have all controls and systems in place ready to obtain our SOC 2 Type 1 certification, and expect this to be granted in April 2023. We monitor compliance via Drata. 
 
-Our latest [security report](https://app.drata.com/security-report/805315dd-8452-461b-850d-fb1957ecb803/f665f462-0677-46cd-b183-36ebdeec8a30) is publicly available (last updated February 2023). 
+Our latest [security report](https://app.drata.com/security-report/805315dd-8452-461b-850d-fb1957ecb803/f665f462-0677-46cd-b183-36ebdeec8a30) is publicly available (last updated March 2023). 
 
 ### Policies
 
