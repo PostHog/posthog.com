@@ -26,7 +26,7 @@ Whilst it's possible for others to build on our platform, our priorities are:
 What we want to avoid:
 
 * We should avoid hosting other people's products for them. We tried this with apps/plugins and it was painful from a security perspective. We should instead encourage API building.
-* We shouldn't expect VC backed startups to build huge products on our infra over the next year or two. This may / may not come much later on when we have the distribution to support this.
+* We shouldn't expect VC backed startups to build huge products on our platform for a very long time. This may / may not come much later on when we have the distribution to support this.
 
 We must be able to get in first for any of our tools. We don't want to have to replace a complex stack, we should be first in, and should therefore be the default for choice for any new tool.
 
