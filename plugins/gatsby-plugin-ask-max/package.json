@@ -2,5 +2,9 @@
   "name": "gatsby-plugin-ask-max",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "node-fetch": "^3.3.1",
+    "uuid-by-string": "^4.0.0"
+  }
 }

@@ -274,100 +274,106 @@ const ActivePulls = ({ pulls }) => {
 }
 
 export default function CommunityPage({ params }: PageProps) {
-    const [profile, setProfile] = useState<SqueakProfile | undefined>(undefined)
-    const [editModalOpen, setEditModalOpen] = useState(false)
-    const [questions, setQuestions] = useState([])
-    const [questionsLoading, setQuestionsLoading] = useState(true)
-    const { issues, pulls, postHogStats, postHogComStats } = useStaticQuery(query)
+    return null
 
-    useEffect(() => {
-        if (profile) {
-            setQuestionsLoading(true)
-            fetch(`https://squeak.cloud/api/questions`, {
-                method: 'POST',
-                body: JSON.stringify({
-                    organizationId: 'a898bcf2-c5b9-4039-82a0-a00220a8c626',
-                    profileId: profile?.id,
-                    published: true,
-                    perPage: 5,
-                }),
-                headers: {
-                    'content-type': 'application/json',
-                },
-            })
-                .then((res) => {
-                    if (res.status === 404) {
-                        throw new Error('not found')
-                    }
+    // collection.add(
+    //     documents=headings,
+    //     ids=[f"{entry.id}-{i}" for i in range(len(headings))],
+    // )
+    // onst [profile, setProfile] = useState<SqueakProfile | undefined>(undefined)
+    // const [editModalOpen, setEditModalOpen] = useState(false)
+    // const [questions, setQuestions] = useState([])
+    // const [questionsLoading, setQuestionsLoading] = useState(true)
+    // const { issues, pulls, postHogStats, postHogComStats } = useStaticQuery(query)
 
-                    return res.json()
-                })
-                .then((questions) => {
-                    setQuestions(questions?.questions)
-                    setQuestionsLoading(false)
-                })
-                .catch((err) => {
-                    console.error(err)
-                    setQuestionsLoading(false)
-                })
-        }
-    }, [profile])
+    // useEffect(() => {
+    //     if (profile) {
+    //         setQuestionsLoading(true)
+    //         fetch(`https://squeak.cloud/api/questions`, {
+    //             method: 'POST',
+    //             body: JSON.stringify({
+    //                 organizationId: 'a898bcf2-c5b9-4039-82a0-a00220a8c626',
+    //                 profileId: profile?.id,
+    //                 published: true,
+    //                 perPage: 5,
+    //             }),
+    //             headers: {
+    //                 'content-type': 'application/json',
+    //             },
+    //         })
+    //             .then((res) => {
+    //                 if (res.status === 404) {
+    //                     throw new Error('not found')
+    //                 }
 
-    const handleEditProfile = (updatedProfile: SqueakProfile) => {
-        setProfile({ ...profile, ...updatedProfile })
-        setEditModalOpen(false)
-    }
+    //                 return res.json()
+    //             })
+    //             .then((questions) => {
+    //                 setQuestions(questions?.questions)
+    //                 setQuestionsLoading(false)
+    //             })
+    //             .catch((err) => {
+    //                 console.error(err)
+    //                 setQuestionsLoading(false)
+    //             })
+    //     }
+    // }, [profile])
 
-    return (
-        <>
-            <SEO title={`Community - PostHog`} />
-            <OrgProvider
-                value={{ organizationId: 'a898bcf2-c5b9-4039-82a0-a00220a8c626', apiHost: 'https://squeak.cloud' }}
-            >
-                <Layout>
-                    <Modal setOpen={setEditModalOpen} open={editModalOpen}>
-                        <div
-                            onClick={() => setEditModalOpen(false)}
-                            className="flex flex-start justify-center absolute w-full p-4"
-                        >
-                            <div
-                                className="max-w-xl bg-white dark:bg-black rounded-md relative w-full p-5"
-                                onClick={(e) => e.stopPropagation()}
-                            >
-                                <EditProfile onSubmit={handleEditProfile} profile={profile} />
-                            </div>
-                        </div>
-                    </Modal>
-                    <PostLayout
-                        menuWidth={{ right: 320 }}
-                        title="Profile"
-                        menu={community}
-                        sidebar={
-                            <ProfileSidebar
-                                setProfile={setProfile}
-                                setEditModalOpen={setEditModalOpen}
-                                profile={profile}
-                                postHogStats={postHogStats}
-                                postHogComStats={postHogComStats}
-                            />
-                        }
-                        tableOfContents={[
-                            ...(profile ? [{ url: 'my-activity', value: 'My activity', depth: 0 }] : []),
-                            { url: 'recent-questions', value: 'Recent questions', depth: 0 },
-                            { url: 'active-issues', value: 'Most active issues', depth: 0 },
-                            { url: 'active-pulls', value: 'Most active PRs', depth: 0 },
-                        ]}
-                        hideSurvey
-                    >
-                        {profile && <Activity questionsLoading={questionsLoading} questions={questions} />}
-                        <RecentQuestions />
-                        <ActiveIssues issues={issues.nodes} />
-                        <ActivePulls pulls={pulls.nodes} />
-                    </PostLayout>
-                </Layout>
-            </OrgProvider>
-        </>
-    )
+    // const handleEditProfile = (updatedProfile: SqueakProfile) => {
+    //     setProfile({ ...profile, ...updatedProfile })
+    //     setEditModalOpen(false)
+    // }
+
+    // return (
+    //     <>
+    //         <SEO title={`Community - PostHog`} />
+    //         <OrgProvider
+    //             value={{ organizationId: 'a898bcf2-c5b9-4039-82a0-a00220a8c626', apiHost: 'https://squeak.cloud' }}
+    //         >
+    //             <Layout>
+    //                 <Modal setOpen={setEditModalOpen} open={editModalOpen}>
+    //                     <div
+    //                         onClick={() => setEditModalOpen(false)}
+    //                         className="flex flex-start justify-center absolute w-full p-4"
+    //                     >
+    //                         <div
+    //                             className="max-w-xl bg-white dark:bg-black rounded-md relative w-full p-5"
+    //                             onClick={(e) => e.stopPropagation()}
+    //                         >
+    //                             <EditProfile onSubmit={handleEditProfile} profile={profile} />
+    //                         </div>
+    //                     </div>
+    //                 </Modal>
+    //                 <PostLayout
+    //                     menuWidth={{ right: 320 }}
+    //                     title="Profile"
+    //                     menu={community}
+    //                     sidebar={
+    //                         <ProfileSidebar
+    //                             setProfile={setProfile}
+    //                             setEditModalOpen={setEditModalOpen}
+    //                             profile={profile}
+    //                             postHogStats={postHogStats}
+    //                             postHogComStats={postHogComStats}
+    //                         />
+    //                     }
+    //                     tableOfContents={[
+    //                         ...(profile ? [{ url: 'my-activity', value: 'My activity', depth: 0 }] : []),
+    //                         { url: 'recent-questions', value: 'Recent questions', depth: 0 },
+    //                         { url: 'active-issues', value: 'Most active issues', depth: 0 },
+    //                         { url: 'active-pulls', value: 'Most active PRs', depth: 0 },
+    //                     ]}
+    //                     hideSurvey
+    //                 >
+    //                     {profile && <Activity questionsLoading={questionsLoading} questions={questions} />}
+    //                     <RecentQuestions />
+    //                     <ActiveIssues issues={issues.nodes} />
+    //                     <ActivePulls pulls={pulls.nodes} />
+    //                 </PostLayout>
+    //             </Layout>
+    //         </OrgProvider>
+    //     </>
+    // )
 }
 
 interface IGitHubStats {
