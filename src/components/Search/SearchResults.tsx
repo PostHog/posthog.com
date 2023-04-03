@@ -318,7 +318,7 @@ const Hits: React.FC<HitsProps> = ({ activeOption, close }) => {
         <div className="grid md:grid-cols-2 min-h-0 flex-grow border-b border-gray-accent-light dark:border-gray-accent-dark">
             <section className="overscroll-none bg-white dark:bg-gray-accent-dark text-left overflow-y-auto border-r border-gray-accent-light/50 dark:border-gray-accent-dark/50">
                 {!initialLoad || status === 'stalled' ? (
-                    <ol className="list-none m-0 dark:bg-black">
+                    <ol className="list-none !p-0 !m-0 dark:bg-black">
                         {new Array(5).fill({}).map((_, index) => (
                             <li
                                 key={index}
