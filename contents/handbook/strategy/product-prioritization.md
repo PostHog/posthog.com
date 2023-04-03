@@ -36,7 +36,7 @@ The earlier stage a company is, the more likely that they don't have specialist 
 
 The more engineering-led the organization, the stronger a fit PostHog is for the customer, and the more likely it is that product engineers are driving all of the above areas. For example, a YC backed startup will typically have two technical cofounders, who will handle every role in the company.
 
-Therefore, any of the above are possible for us to build. Here is a non-exhaustive list, sorted by stack, of tools that could fit our criteria:
+Therefore, any of the above are possible for us to build if the scope within them is strictly limited to what our ICP needs. Here is a non-exhaustive and rough list, sorted by stack, of tools that could fit our criteria:
 
 Product stack = product tours, feedback and surveys, analytics, recordings, roadmap, beta management (self-serve feature flags), user interviewing, alerting
 Engineering stack = feature flags, error handling, APM
