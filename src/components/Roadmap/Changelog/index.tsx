@@ -173,7 +173,7 @@ export default function Changelog() {
     )
 }
 
-/*const query = graphql`
+const query = graphql`
     {
         allSqueakRoadmap(sort: { fields: dateCompleted }, filter: { dateCompleted: { ne: null } }) {
             nodes {
@@ -206,4 +206,4 @@ export default function Changelog() {
             }
         }
     }
-`*/
+`
