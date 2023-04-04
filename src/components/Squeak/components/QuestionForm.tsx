@@ -68,10 +68,7 @@ function QuestionFormMain({
                 {({ setFieldValue, isValid }) => {
                     return (
                         <Form className="squeak-form">
-                            <Avatar
-                                url={user?.profile && profileLink && profileLink(user?.profile)}
-                                image={user?.profile?.avatar}
-                            />
+                            <Avatar url={user?.profile} image={user?.profile?.avatar} />
 
                             <div className="">
                                 <div className="squeak-inputs-wrapper">
@@ -122,6 +119,7 @@ function QuestionFormMain({
 type QuestionFormProps = {
     formType: string
     questionId?: number
+    reply: (body: string) => Promise<void>
     onSubmit: (values: any, formType: string) => void
     onSignUp?: () => void
     initialView?: string
@@ -131,6 +129,7 @@ export const QuestionForm = ({
     formType = 'question',
     questionId,
     initialView,
+    reply,
     onSubmit,
     onSignUp,
 }: QuestionFormProps) => {
@@ -138,7 +137,6 @@ export const QuestionForm = ({
     const [formValues, setFormValues] = useState(null)
     const [view, setView] = useState<string | null>(initialView || null)
     const [loading, setLoading] = useState(false)
-    const { handleReply } = useQuestion()
     const containerRef = useRef<HTMLDivElement>(null)
 
     const buttonText =
@@ -149,16 +147,6 @@ export const QuestionForm = ({
                 <strong>Reply</strong> to question
             </span>
         )
-
-    const insertReply = async ({ body, questionId }: { body: string; questionId: string }) => {
-        // @ts-ignore
-        const { data } = await post(apiHost, '/api/reply', {
-            body,
-            organizationId,
-            questionId: questionId,
-        })
-        return data
-    }
 
     const insertMessage = async ({ subject, body, userID }: any) => {
         // @ts-ignore
@@ -187,14 +175,11 @@ export const QuestionForm = ({
             }
 
             if (formType === 'reply' && questionId) {
-                const data = await insertReply({
-                    body: values.question,
-                    questionId,
-                })
-                handleReply(data)
-                if (!data.published) {
+                reply(values.question)
+
+                /*if (!data.published) {
                     view = 'approval'
-                }
+                }*/
             }
 
             if (onSubmit) {
@@ -250,10 +235,7 @@ export const QuestionForm = ({
                         }[view]
                     ) : (
                         <div className="squeak-reply-buttons">
-                            <Avatar
-                                url={user?.profile && profileLink && profileLink(user?.profile)}
-                                image={user?.profile?.avatar}
-                            />
+                            <Avatar url={user?.profile} image={user?.profile?.avatar} />
                             <button
                                 className={formType === 'reply' ? 'squeak-reply-skeleton' : 'squeak-ask-button'}
                                 onClick={() => setView('question-form')}

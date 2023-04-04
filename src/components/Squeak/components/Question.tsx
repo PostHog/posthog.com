@@ -21,7 +21,7 @@ export const Question = ({ id, onSubmit, question }: QuestionProps) => {
     const [expanded, setExpanded] = useState(false)
     const containerRef = useRef<HTMLDivElement>(null)
     // TODO: Default to question data if passed in
-    const { question: questionData, isLoading, isError, error } = useQuestion(id)
+    const { question: questionData, isLoading, isError, error, reply } = useQuestion(id, { data: question })
 
     if (isLoading) {
         return <div>Loading...</div>
@@ -72,7 +72,12 @@ export const Question = ({ id, onSubmit, question }: QuestionProps) => {
                         </div>
                     ) : (
                         <div className="squeak-reply-form-container">
-                            <QuestionForm onSubmit={onSubmit} questionId={questionData.id} formType="reply" />
+                            <QuestionForm
+                                onSubmit={onSubmit}
+                                questionId={questionData.id}
+                                formType="reply"
+                                reply={reply}
+                            />
                         </div>
                     )}
                 </div>

@@ -1,20 +1,13 @@
 import qs from 'qs'
-import { ProfileData, ReplyData, StrapiData, StrapiRecord, StrapiResult } from 'lib/strapi'
+import { QuestionData, StrapiRecord } from 'lib/strapi'
 import useSWR from 'swr'
+import { useUser } from 'hooks/useUser'
 
-type QuestionData = {
-    subject: string
-    permalink: string
-    resolved: boolean
-    body: string
-    createdAt: string
-    updatedAt: string
-    publishedAt: string
-    profile?: StrapiData<ProfileData>
-    replies?: StrapiData<ReplyData[]>
+type UseQuestionOptions = {
+    data?: StrapiRecord<QuestionData>
 }
 
-export const useQuestion = (id: number | string) => {
+export const useQuestion = (id: number | string, options?: UseQuestionOptions) => {
     const isPermalink = typeof id === 'string'
 
     const query = qs.stringify(
@@ -42,6 +35,7 @@ export const useQuestion = (id: number | string) => {
                     },
                 },
                 replies: {
+                    sort: ['createdAt:asc'],
                     populate: {
                         profile: {
                             fields: ['id', 'firstName', 'lastName'],
@@ -64,6 +58,7 @@ export const useQuestion = (id: number | string) => {
         data: question,
         error,
         isLoading,
+        mutate,
     } = useSWR<StrapiRecord<QuestionData>>(
         `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query}`,
         async (url) => {
@@ -73,21 +68,47 @@ export const useQuestion = (id: number | string) => {
         }
     )
 
+    const { getJwt } = useUser()
+
     const reply = async (body: string) => {
+        const token = await getJwt()
+
         const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/replies`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
             },
             body: JSON.stringify({
-                body,
-                question: question?.id,
+                data: {
+                    body,
+                    question: question?.id,
+                },
+                populate: {
+                    profile: {
+                        fields: ['id', 'firstName', 'lastName'],
+                        populate: {
+                            avatar: {
+                                fields: ['id', 'url'],
+                            },
+                        },
+                    },
+                },
             }),
         })
+
+        const data = await res.json()
+
+        console.log(data)
+
+        mutate()
     }
 
+    let questionData: StrapiRecord<QuestionData> | undefined = question || options?.data
+
     return {
-        question,
+        question: questionData,
+        reply,
         error,
         isLoading,
         isError: error,
