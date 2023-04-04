@@ -1,11 +1,6 @@
 import React from 'react'
-import { graphql } from 'gatsby'
+import { graphql, useStaticQuery } from 'gatsby'
 import { StaticImage } from 'gatsby-plugin-image'
-
-import docs from 'sidebars/docs.json'
-import Layout from 'components/Layout'
-import { SEO } from 'components/seo'
-import PostLayout from 'components/PostLayout'
 import { Tutorials } from 'components/Docs/Tutorials'
 import { LinkGrid } from 'components/Docs/LinkGrid'
 import { GettingStarted } from 'components/Docs/GettingStarted'
@@ -48,52 +43,48 @@ type ExperimentsProps = {
     }
 }
 
-const Experiments: React.FC<ExperimentsProps> = ({ data }) => {
+const Experiments: React.FC<ExperimentsProps> = () => {
+    const data = useStaticQuery(query)
     const { tutorials } = data
 
     return (
-        <Layout>
-            <SEO title="Experiments - Docs - PostHog" />
+        <>
+            <StaticImage
+                alt=""
+                placeholder="none"
+                quality={100}
+                className="w-full sm:w-[400px] sm:float-right sm:ml-8 sm:-mt-8 sm:mb-8"
+                src="../../Home/Slider/images/ab-testing-hog.png"
+            />
+            <h1 className="text-4xl mb-2 mt-6">Experiments</h1>
+            <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tighttext-lg text-gray">
+                Test changes in production with an experimentation suite that makes it easy to get the results you want.
+            </h3>
 
-            <PostLayout title={'Experiments'} menu={docs} hideSurvey hideSidebar>
-                <StaticImage
-                    alt=""
-                    placeholder="none"
-                    quality={100}
-                    className="w-full sm:w-[400px] sm:float-right sm:ml-8 sm:-mt-8 sm:mb-8"
-                    src="../../components/Home/Slider/images/ab-testing-hog.png"
-                />
-                <h1 className="text-4xl mb-2 mt-6">Experiments</h1>
-                <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tighttext-lg text-gray">
-                    Test changes in production with an experimentation suite that makes it easy to get the results you
-                    want.
-                </h3>
+            {/* Quick links */}
+            <section className="my-6">
+                <h3 className="mb-6 mt-0">Pages</h3>
+                <LinkGrid links={quickLinks} />
+            </section>
 
-                {/* Quick links */}
-                <section className="my-6">
-                    <h3 className="mb-6 mt-0">Pages</h3>
-                    <LinkGrid links={quickLinks} />
-                </section>
+            {/* Get started section */}
+            <section className="py-6 sm:py-12">
+                <GettingStarted
+                    product="Experiments"
+                    title="Roll out your first feature"
+                    description="Start A/B testing your features in minutes."
+                    link="/docs/experiments/manual#creating-an-experiment"
+                ></GettingStarted>
+            </section>
 
-                {/* Get started section */}
-                <section className="py-6 sm:py-12">
-                    <GettingStarted
-                        product="Experiments"
-                        title="Roll out your first feature"
-                        description="Start A/B testing your features in minutes."
-                        link="/docs/experiments/manual#creating-an-experiment"
-                    ></GettingStarted>
-                </section>
-
-                <Tutorials tutorials={tutorials} />
-            </PostLayout>
-        </Layout>
+            <Tutorials tutorials={tutorials} />
+        </>
     )
 }
 
 export default Experiments
 
-export const query = graphql`
+const query = graphql`
     query Experiments {
         tutorials: allMdx(
             limit: 6

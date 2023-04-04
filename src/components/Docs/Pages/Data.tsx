@@ -1,11 +1,6 @@
 import React from 'react'
-import { graphql } from 'gatsby'
+import { graphql, useStaticQuery } from 'gatsby'
 import { StaticImage } from 'gatsby-plugin-image'
-
-import docs from 'sidebars/docs.json'
-import Layout from 'components/Layout'
-import { SEO } from 'components/seo'
-import PostLayout from 'components/PostLayout'
 import { Tutorials } from 'components/Docs/Tutorials'
 import { LinkGrid } from 'components/Docs/LinkGrid'
 import { GettingStarted } from 'components/Docs/GettingStarted'
@@ -53,51 +48,48 @@ type DataProps = {
     }
 }
 
-const Data: React.FC<DataProps> = ({ data }) => {
+const Data: React.FC<DataProps> = () => {
+    const data = useStaticQuery(query)
     const { tutorials } = data
 
     return (
-        <Layout>
-            <SEO title="Data - Docs - PostHog" />
+        <>
+            <StaticImage
+                alt=""
+                placeholder="none"
+                quality={100}
+                className="w-full sm:w-[400px] sm:float-right sm:ml-8 sm:-mt-8 sm:mb-8"
+                src="../../Product/images/hogs/data-warehouse.png"
+            />
+            <h1 className="text-4xl mb-2 mt-6">Data management</h1>
+            <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75">
+                Manage event and customer data used throughout the PostHog suite.
+            </h3>
 
-            <PostLayout title={'Data'} menu={docs} hideSurvey hideSidebar>
-                <StaticImage
-                    alt=""
-                    placeholder="none"
-                    quality={100}
-                    className="w-full sm:w-[400px] sm:float-right sm:ml-8 sm:-mt-8 sm:mb-8"
-                    src="../../components/Product/images/hogs/data-warehouse.png"
-                />
-                <h1 className="text-4xl mb-2 mt-6">Data management</h1>
-                <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75">
-                    Manage event and customer data used throughout the PostHog suite.
-                </h3>
+            {/* Quick links */}
+            <section className="mt-12 mb-4">
+                <h3 className="mb-6 mt-0">Quick links</h3>
+                <LinkGrid links={quickLinks} />
+            </section>
 
-                {/* Quick links */}
-                <section className="mt-12 mb-4">
-                    <h3 className="mb-6 mt-0">Quick links</h3>
-                    <LinkGrid links={quickLinks} />
-                </section>
+            {/* Get started section */}
+            <section className="py-6 sm:pb-12">
+                <GettingStarted
+                    product="Data management"
+                    title="Data management primer"
+                    description="Learn how to manage event data in PostHog."
+                    link="/docs/data/data-management"
+                ></GettingStarted>
+            </section>
 
-                {/* Get started section */}
-                <section className="py-6 sm:pb-12">
-                    <GettingStarted
-                        product="Data management"
-                        title="Data management primer"
-                        description="Learn how to manage event data in PostHog."
-                        link="/docs/data/data-management"
-                    ></GettingStarted>
-                </section>
-
-                <Tutorials tutorials={tutorials} />
-            </PostLayout>
-        </Layout>
+            <Tutorials tutorials={tutorials} />
+        </>
     )
 }
 
 export default Data
 
-export const query = graphql`
+const query = graphql`
     query Data {
         tutorials: allMdx(
             limit: 6

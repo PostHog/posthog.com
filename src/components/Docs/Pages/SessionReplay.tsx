@@ -1,5 +1,5 @@
 import React from 'react'
-import { graphql } from 'gatsby'
+import { graphql, useStaticQuery } from 'gatsby'
 import { StaticImage } from 'gatsby-plugin-image'
 
 import docs from 'sidebars/docs.json'
@@ -43,52 +43,48 @@ type SessionRecordingProps = {
     }
 }
 
-const SessionRecording: React.FC<SessionRecordingProps> = ({ data }) => {
+const SessionRecording: React.FC<SessionRecordingProps> = () => {
+    const data = useStaticQuery(query)
     const { tutorials } = data
 
     return (
-        <Layout>
-            <SEO title="Session replay - Docs - PostHog" />
+        <>
+            <StaticImage
+                alt=""
+                placeholder="none"
+                quality={100}
+                className="w-full sm:w-[400px] sm:float-right sm:ml-8 sm:-mt-8 sm:mb-8"
+                src="../../Home/Slider/images/session-recording-hog.png"
+            />
+            <h1 className="text-4xl mb-2 mt-6">Session replay</h1>
+            <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
+                Play back sessions to diagnose UI issues, improve support, and get context for nuanced user behavior.
+            </h3>
 
-            <PostLayout title={'Session replay'} menu={docs} hideSurvey hideSidebar>
-                <StaticImage
-                    alt=""
-                    placeholder="none"
-                    quality={100}
-                    className="w-full sm:w-[400px] sm:float-right sm:ml-8 sm:-mt-8 sm:mb-8"
-                    src="../../components/Home/Slider/images/session-recording-hog.png"
-                />
-                <h1 className="text-4xl mb-2 mt-6">Session replay</h1>
-                <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
-                    Play back sessions to diagnose UI issues, improve support, and get context for nuanced user
-                    behavior.
-                </h3>
+            {/* Quick links */}
+            <section className="my-12">
+                <h3 className="mb-6 mt-0">Pages</h3>
+                <LinkGrid links={quickLinks} />
+            </section>
 
-                {/* Quick links */}
-                <section className="my-12">
-                    <h3 className="mb-6 mt-0">Pages</h3>
-                    <LinkGrid links={quickLinks} />
-                </section>
+            {/* Get started section */}
+            <section className="pt-4 pb-0">
+                <GettingStarted
+                    articleType="Pinned"
+                    title="Record your first session"
+                    description="Flip a switch to start capturing session replays in minutes."
+                    link="/docs/session-replay/manual#enabling-session-recording"
+                ></GettingStarted>
+            </section>
 
-                {/* Get started section */}
-                <section className="pt-4 pb-0">
-                    <GettingStarted
-                        articleType="Pinned"
-                        title="Record your first session"
-                        description="Flip a switch to start capturing session replays in minutes."
-                        link="/docs/session-replay/manual#enabling-session-recording"
-                    ></GettingStarted>
-                </section>
-
-                <Tutorials tutorials={tutorials} />
-            </PostLayout>
-        </Layout>
+            <Tutorials tutorials={tutorials} />
+        </>
     )
 }
 
 export default SessionRecording
 
-export const query = graphql`
+const query = graphql`
     query SessionRecording {
         tutorials: allMdx(
             limit: 6
