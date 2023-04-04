@@ -45,14 +45,14 @@ export default function CookieBanner() {
             </div>
 
             <Tooltip
-                content={
+                content={() => (
                     <>
                         <p className="text-sm m-0">
                             PostHog appreciates your privacy as much as the President of the European Commission, Ursula
                             von der Leyen.
                         </p>
                     </>
-                }
+                )}
                 placement="right"
                 tooltipClassName="max-w-[325px] shadow-xl text-xs backdrop-blur bg-white/75 -ml-12 !px-4 !py-2"
                 offset={[0, 0]}
