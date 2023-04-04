@@ -1,4 +1,4 @@
-// AUTO GENERATED FILE 
+// AUTO GENERATED FILE
 
 import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'

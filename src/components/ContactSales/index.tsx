@@ -18,7 +18,9 @@ const features = [
     'Custom data retention',
 ]
 
-export default function ContactSales() {
+export default function ContactSales({ location }) {
+    const search = location?.search
+    const params = new URLSearchParams(search)
     return (
         <Layout>
             <SEO title="Contact Sales - PostHog" />
@@ -91,7 +93,13 @@ export default function ContactSales() {
                     </div>
                     <div className="order-1 md:order-2">
                         <h3 className="mb-1">Contact sales</h3>
-                        <Contact />
+                        <Contact
+                            initialValues={{
+                                product: params.has('edition')
+                                    ? params.get('edition') === 'enterprise' && 'PostHog Cloud Enterprise'
+                                    : undefined,
+                            }}
+                        />
                     </div>
                 </section>
             </div>
