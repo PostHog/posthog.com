@@ -16,9 +16,9 @@ Content is a long-term strategy and we'e focused on high-quality content that's 
 
 We **win on depth**, not breadth – a few high-quality pieces > a larger number of medium quality pieces. We have four content buckets:
 
-1. **Top-of-funnel SEO content:** Our goals with this content is to improve our topical authority and generate inbound demand and brand awareness. This content includes list articles like the [best GA4 alternatives for apps and websites](/blog/ga4-alternatives), comparisons like [PostHog vs LogRocket](/blog/posthog-vs-logrocket), in-depth technical deep dives like [ClickHouse vs Snowflake](/blog/clickhouse-vs-snowflake), and explainers like [What is a product engineer (and why they're awesome)](/blog/what-is-a-product-engineer). It's mostly written by the marketing team and posted on the blog.
+1. **Top-of-funnel SEO content:** Our goals with this content is to improve our topical authority, generate inbound demand, and create brand awareness. This content includes list articles like the [best GA4 alternatives for apps and websites](/blog/ga4-alternatives), comparisons like [PostHog vs LogRocket](/blog/posthog-vs-logrocket), in-depth technical deep dives like [ClickHouse vs Snowflake](/blog/clickhouse-vs-snowflake), and explainers like [What is a product engineer (and why they're awesome)](/blog/what-is-a-product-engineer). It's mostly written by the marketing team and posted on the blog.
 
-2. **Tutorials:** The purpose of tutorials is to encourage new signups (because we show potential users how to solve their problems using PostHog), and help customers. Some tutorials are also SEO-optimized, especially when they cover general topics, such as [How to set up Next.js analytics, feature flags, and more](/tutorials/nextjs-analytics). It's mostly written by the marketing team and published in tutorials section.
+2. **Tutorials:** The purpose of tutorials is to encourage new signups (because we show potential users how to solve their problems using PostHog), and help customers expand usage. Some tutorials are also SEO-optimized, especially when they cover general topics, such as [How to set up Next.js analytics, feature flags, and more](/tutorials/nextjs-analytics). It's mostly written by the marketing team and published in the tutorials section.
 
 3. **Brand building:** Can be written by anyone on the team, with the marketing team acting as editors. The purpose is to drive one-off spikes in awareness through virality on sites like Hacker News and Reddit, share our culture / vision / philosophy. Examples include [10x engineers talk to users](/blog/10x-engineers-do-user-interviews), [What we've learned about developer marketing](/blog/dev-marketing-for-startups), and [Raising money is less stressful than bootstrapping](/blog/vc-or-bootstrap). This content is posted on the blog.
 
@@ -26,9 +26,8 @@ We **win on depth**, not breadth – a few high-quality pieces > a larger number
 
 ### Good to knows
 
-- The marketing team is responsible for all the above – mostly Andy and Ian, but James Hawkins, Joe and Charles also contribute. The Website & Docs team owns our reference documentation.
+- The marketing team is responsible for all the above – mostly Andy and Ian, but James Hawkins, Joe and Charles also contribute. The Website & Docs team owns our [reference documentation](/docs). 
 
-- Andy and Ian are currently the main people responsible for our regular content output. James H, Joe, and Charles are also frequent contributors.
 
 - You can view planned content on the [Marketing project board](https://github.com/orgs/PostHog/projects/8?card_filter_query=label%3Acontent) using the "content" label filter. All planned content should have an issue.
 

@@ -14,9 +14,12 @@ As you gain mastery of a product or feature, some things become second nature, b
 
 Make it easy for your reader to implement their feature or solve their issue, whether they are an expert or just starting out with PostHog. 
 
-### "It's complicated" is not a useful observation
+### Avoid hedging
 
-When writing about complex topics, avoid simply explaining why it's complicated. It's frustrating for the reader and doesn't add value.
+We are opinionated at PostHog. That means avoiding hedging like saying "it's complicated" or "it depends." This is frustrating for the reader and doesn't add value. Instead:
+1. Have an opinion.
+2. Provide an example.
+3. Do the research until you can do 1. or 2.
 
 ### Avoid overly long intros
 
@@ -58,7 +61,7 @@ While we default to American English in most things, we prefer using the British
 
 > - **Example:** "Don’t up vote your own content, and don’t ask other people to – post it and pray."
 
-Please don't use a hyphen instead of en dash. On Macs, holding down `Option` and the hyphen key will give you and en dash.
+Please don't use a hyphen instead of en dash. On Macs, holding down `Option` and the hyphen key will give you an en dash.
 
 ### Use "enable", not "allow"
 

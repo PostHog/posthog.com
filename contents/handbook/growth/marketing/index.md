@@ -124,6 +124,8 @@ Here are the channels we use, in _rough_ order of priority:
  
 - **Email content:** We send out [Product for Engineers](/handbook/growth/marketing/newsletter) every 2-3 weeks. We run this on Substack.
  
+ - **YouTube content** is tutorials or informative videos (usually based on blogs) targeting our ICP on [YouTube](https://www.youtube.com/@PostHog) to expand awareness of PostHog and provide an alternative to written content.
+ 
 #### [Paid ads](/handbook/growth/marketing/paid)
 
 We advertise on Google Search for _conversion_, and Twitter, LinkedIn, Reddit, and Quora for _awareness_. We use paid ads as a cheat code to accelerate learning, e.g. which SEO keywords work, testing out product positioning, as well as to ensure we are easily discoverable when people search for PostHog specifically ('branded keywords'). However, paids ads are expensive so our focus is always on organic growth first unless we find a paid channel that's wildly profitable. Generally, we split our spend 2/3 awareness vs. 1/3 conversion.
