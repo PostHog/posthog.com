@@ -14,14 +14,14 @@ type QuestionProps = {
     // TODO: Deal with id possibly being undefined at first
     id: number | string
     question?: StrapiRecord<QuestionData>
-    onSubmit: (question: any) => void
     expanded?: boolean
 }
 
 export const Question = (props: QuestionProps) => {
-    const { id, onSubmit, question } = props
+    const { id, question } = props
     const [expanded, setExpanded] = useState(props.expanded || false)
     const containerRef = useRef<HTMLDivElement>(null)
+
     // TODO: Default to question data if passed in
     const { question: questionData, isLoading, isError, error, reply } = useQuestion(id, { data: question })
 
@@ -74,12 +74,7 @@ export const Question = (props: QuestionProps) => {
                         </div>
                     ) : (
                         <div className="squeak-reply-form-container">
-                            <QuestionForm
-                                onSubmit={onSubmit}
-                                questionId={questionData.id}
-                                formType="reply"
-                                reply={reply}
-                            />
+                            <QuestionForm questionId={questionData.id} formType="reply" reply={reply} />
                         </div>
                     )}
                 </div>

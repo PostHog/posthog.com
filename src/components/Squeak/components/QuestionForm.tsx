@@ -120,7 +120,7 @@ type QuestionFormProps = {
     formType: string
     questionId?: number
     reply: (body: string) => Promise<void>
-    onSubmit: (values: any, formType: string) => void
+    onSubmit?: (values: any, formType: string) => void
     onSignUp?: () => void
     initialView?: string
 }

@@ -5,19 +5,19 @@ import { QuestionData, StrapiRecord } from 'lib/strapi'
 import { useUser } from 'hooks/useUser'
 
 type QuestionSidebarProps = {
-    question: StrapiRecord<QuestionData>
+    question: StrapiRecord<QuestionData> | undefined
 }
 
 export const QuestionSidebar = (props: QuestionSidebarProps) => {
     const { user } = useUser()
 
-    const { id, attributes: question } = props.question
+    const { id, attributes: question } = props.question || {}
 
     return question ? (
         <div>
             <SidebarSection title="Posted by">
                 <div className="flex items-center space-x-2">
-                    {question.profile?.data?.attributes?.avatar ? (
+                    {question.profile?.data?.attributes?.avatar?.data?.attributes?.url ? (
                         <img
                             className="w-8 h-8 rounded-full"
                             src={question.profile.data.attributes.avatar.data.attributes.url}
@@ -60,7 +60,6 @@ export const QuestionSidebar = (props: QuestionSidebarProps) => {
 
             {user?.isModerator && (
                 <SidebarSection>
-                    {/* TODO: Update this URL */}
                     <Link
                         to={`https://squeak.posthog.cc/admin/content-manager/collectionType/api::question.question/${id}`}
                     >
