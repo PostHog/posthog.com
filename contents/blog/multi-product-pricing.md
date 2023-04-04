@@ -12,7 +12,7 @@ featuredImageType: full
 category: CEO diaries
 ---
 
-PostHog started as a single product company. We just sold product analytics with a bunch of large extra features thrown in - session replay, feature flagging, experimentation, and a Customer Data Platform thrown in.
+PostHog started as a single product company. We just sold product analytics with a bunch of large extra features thrown in - session replay, feature flagging, experimentation, and even a Customer Data Platform.
 
 We charged by event ingested. Obviously, we wound up with abuse - a handful of high volume users would send zero events, but would use our Javascript snippet to do just session replay, to store _millions_ of recordings.
 
