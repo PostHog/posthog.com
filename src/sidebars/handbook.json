@@ -375,6 +375,10 @@
                     {
                         "name": "Working with ClickHouse materialized columns",
                         "url": "/handbook/engineering/databases/materialized-columns"
+                    },
+                    {
+                        "name": "Writing HogQL queries in Python",
+                        "url": "/handbook/engineering/databases/hogql-python"
                     }
                 ]
             },

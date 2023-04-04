@@ -31,6 +31,11 @@ export const quickLinks = [
         to: '/docs/feature-flags/multivariate-flags',
         description: 'Test features with multiple variants.',
     },
+    {
+        name: 'Common questions',
+        to: '/docs/feature-flags/common-questions',
+        description: 'Common questions about feature flags and how to solve them.',
+    },
 ]
 
 type FeatureFlagsProps = {

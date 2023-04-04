@@ -60,12 +60,12 @@ export async function get(host: string, url: string, params: Record<string, stri
  * @param  {string} url
  * @param  {any} body body is serialized as json
  */
-export async function post(host: string, url: string, body: Record<string, any>) {
+export async function post(host: string, url: string, body?: Record<string, any>) {
     try {
         const res = await fetch(buildUrl(host, url), {
             ...FETCH_DEFAULTS,
             method: 'POST',
-            body: JSON.stringify(body),
+            ...(body && { body: JSON.stringify(body) }),
         })
         return processResponse(res)
     } catch (e) {

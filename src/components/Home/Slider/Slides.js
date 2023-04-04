@@ -57,12 +57,12 @@ const ImageContainer = ({ children, className = '' }) => {
 
 export const ProductAnalytics = () => {
     const features = [
-        { title: 'Funnels', Icon: Funnels, url: '/product/funnels' },
-        { title: 'User paths', Icon: PathAnalysis, url: '/product/user-paths' },
-        { title: 'Lifecycle', Icon: Lifecycle, url: '/product/correlation-analysis' },
-        { title: 'Trends', Icon: Trends, url: '/product/trends' },
-        { title: 'Stickiness', Icon: Stickiness, url: '/product/correlation-analysis' },
-        { title: 'Retention', Icon: Retention, url: '/product/correlation-analysis' },
+        { title: 'Funnels', Icon: Funnels, url: '/product-analytics#funnels' },
+        { title: 'User paths', Icon: PathAnalysis, url: '/product-analytics#user-paths' },
+        { title: 'Lifecycle', Icon: Lifecycle, url: '/product-analytics#more-insight-types' },
+        { title: 'Trends', Icon: Trends, url: '/product-analytics#graphs-and-trends' },
+        { title: 'Stickiness', Icon: Stickiness, url: '/product-analytics#more-insight-types' },
+        { title: 'Retention', Icon: Retention, url: '/product-analytics#more-insight-types' },
     ]
     return (
         <div className="relative grid grid-cols-4 lg:grid-cols-5 lg:gap-5 pt-5">
@@ -104,7 +104,7 @@ export const ProductAnalytics = () => {
                             )
                         })}
                     </ul>
-                    <CTA url="/product" title="Explore" />
+                    <CTA url="/product-analytics" title="Explore" />
                 </Content>
                 <div className="flex items-end mt-auto w-full">
                     <div className="hidden md:block mb-3">
@@ -161,11 +161,11 @@ export const SessionRecording = () => {
             </ImageContainer>
             <ContentContainer>
                 <Content>
-                    <Title title={'Session recording'} />
+                    <Title title={'Session replay'} />
                     <Subtitle subtitle="with console logs" />
                     <Description description="Watch a group of sessions for users in a cohort." />
 
-                    <CTA url="/product/session-recording" title="Explore" />
+                    <CTA url="/session-replay" title="Explore" />
                 </Content>
                 <div className="flex items-end mt-auto w-full">
                     <div className="mb-3 flex-grow md:px-0 px-5">
@@ -236,7 +236,7 @@ export const FeatureFlags = () => {
                     <Subtitle className="text-[14px] md:text-[18px]" subtitle="with multivariate testing" />
                     <Description description="Roll out features to groups or specific users." />
 
-                    <CTA url="/product/feature-flags" title="See how it works" />
+                    <CTA url="/feature-flags" title="See how it works" />
                 </Content>
                 <div className="flex items-end mt-auto w-full">
                     <div className="md:px-0 px-5 mb-3 flex-grow w-full md:w-auto">
@@ -329,7 +329,7 @@ export const ABTesting = () => {
                             )
                         })}
                     </ul>
-                    <CTA url="/product/experimentation-suite" title="See how it works" />
+                    <CTA url="/ab-testing" title="See how it works" />
                 </Content>
                 <div className="flex items-end mt-auto w-full">
                     <div className="hidden md:block mb-3 flex-grow">
@@ -394,18 +394,7 @@ export const EventPipelines = () => {
                 <Content>
                     <Title title={'Event pipelines'} />
                     <Subtitle subtitle="Enrich customer profiles in sales and marketing clouds with event data you send to PostHog." />
-                    <ul className="list-none m-0 p-0 mt-5 md:mt-0 grid grid-cols-3 md:flex md:space-x-3 space-y-2 md:space-y-0 items-center justify-center md:justify-start">
-                        {data.map(({ Icon, url }, index) => {
-                            return (
-                                <li key={index} className="m-0 mr-2 md:mr-0 p-0">
-                                    <Link className="text-primary hover:text-primary" to={url}>
-                                        <Icon className="w-[22px]" />
-                                    </Link>
-                                </li>
-                            )
-                        })}
-                    </ul>
-                    <CTA url="/docs/integrate" title="Browse all libraries" />
+                    <CTA url="/docs/integrations" title="Browse destinations" />
                 </Content>
                 <div className="flex items-end mt-auto w-full">
                     <div className="hidden md:block mb-3 flex-grow">

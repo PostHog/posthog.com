@@ -400,28 +400,28 @@
     },
     {
         "name": "Session recording",
-        "url": "/docs/session-recording",
+        "url": "/docs/session-replay",
         "icon": "SessionRecording",
         "children": [
             {
                 "name": "Overview",
-                "url": "/docs/session-recording"
+                "url": "/docs/session-replay"
             },
             {
                 "name": "Product manual",
-                "url": "/docs/session-recording/manual"
+                "url": "/docs/session-replay/manual"
             },
             {
                 "name": "Configure",
-                "url": "/docs/session-recording/configure"
+                "url": "/docs/session-replay/configure"
             },
             {
                 "name": "Data retention",
-                "url": "/docs/session-recording/data-retention"
+                "url": "/docs/session-replay/data-retention"
             },
             {
                 "name": "Troubleshooting and FAQs",
-                "url": "/docs/session-recording/troubleshooting"
+                "url": "/docs/session-replay/troubleshooting"
             }
         ]
     },
@@ -439,7 +439,7 @@
                 "url": "/docs/feature-flags/manual"
             },
             {
-                "name": "Bootstrapping & Local evaluation",
+                "name": "Bootstrapping & local evaluation",
                 "url": "/docs/feature-flags/bootstrapping-and-local-evaluation"
             },
             {
@@ -449,6 +449,11 @@
             {
                 "name": "Multivariate feature flags",
                 "url": "/docs/feature-flags/multivariate-flags"
+            },
+
+            {
+                "name": "Common questions about feature flags",
+                "url": "/docs/feature-flags/common-questions"
             }
         ]
     },
@@ -472,6 +477,10 @@
             {
                 "name": "Under the hood",
                 "url": "/docs/experiments/under-the-hood"
+            },
+            {
+                "name": "Common questions about experiments",
+                "url": "/docs/experiments/common-questions"
             }
         ]
     },

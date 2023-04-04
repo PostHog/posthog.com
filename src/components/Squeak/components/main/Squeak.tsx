@@ -1,8 +1,7 @@
 import React, { useRef } from 'react'
 import root from 'react-shadow/styled-components'
 
-import { Provider as OrgProvider } from '../../context/org'
-import { Provider as UserProvider } from '../../context/user'
+import { Provider as OrgProvider } from '../../hooks/useOrg'
 import Questions from '../Questions'
 import { Theme } from '../Theme'
 import ErrorBoundary from '../ErrorBoundary'
@@ -41,20 +40,18 @@ export const Squeak = ({
             {/* @ts-ignore */}
             <root.div ref={containerRef}>
                 <OrgProvider value={{ organizationId, apiHost, profileLink }}>
-                    <UserProvider>
-                        <Theme containerRef={containerRef} />
-                        <div className="squeak">
-                            <Questions
-                                onSignUp={onSignUp}
-                                onLoad={onLoad}
-                                topics={topics}
-                                onSubmit={onSubmit}
-                                limit={limit}
-                                slug={currentSlug}
-                                topic={topic}
-                            />
-                        </div>
-                    </UserProvider>
+                    <Theme containerRef={containerRef} />
+                    <div className="squeak">
+                        <Questions
+                            onSignUp={onSignUp}
+                            onLoad={onLoad}
+                            topics={topics}
+                            onSubmit={onSubmit}
+                            limit={limit}
+                            slug={currentSlug}
+                            topic={topic}
+                        />
+                    </div>
                 </OrgProvider>
             </root.div>
         </ErrorBoundary>

@@ -4,9 +4,9 @@ import Link from 'components/Link'
 import SEO from 'components/seo'
 import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
-import ing from '../Home/images/ing.svg'
 import airbus from '../Home/images/airbus.svg'
 import phantom from '../Home/images/phantom.svg'
+import landmark from '../Home/images/landmark.svg'
 import Contact from './Contact'
 
 const features = [
@@ -87,7 +87,7 @@ export default function ContactSales({ location }) {
                             <div className="flex flex-wrap md:flex-col gap-4 md:gap-0  md:space-y-12 justify-center md:justify-start sm:order-last order-first">
                                 <img src={airbus} className="max-w-[150px] md:max-w-auto" />
                                 <img src={phantom} className="max-w-[150px] md:max-w-auto" />
-                                <img src={ing} className="max-w-[150px] md:max-w-auto" />
+                                <img src={landmark} className="max-w-[150px] md:max-w-auto" />
                             </div>
                         </div>
                     </div>
