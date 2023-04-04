@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-[PostHog for Startups](https://posthog.com/startups) is our program to support early stage companies. We offer generous credits together with a bunch of extra goodies. This page covers how we run the programme. 
+[PostHog for Startups](https://posthog.com/startups) is our program to support early stage companies. We offer generous credits together with a bunch of extra goodies. This page covers how we run the program.
 
 > The YC Deal is a separate deal that we do for the latest batch of YC companies and has [its own page here](/handbook/growth/sales/yc-onboarding). 
 
@@ -19,3 +19,5 @@ Any company that is <2 years old and has raised $5m in funding or less is eligib
 5. Once a month, we schedule office hours with James/Luke (business & product) and Charles/Simon (ops & commercial) - Charles will send out an email to gauge interest then we can just send a Zoom invite if enough people are interested. If too many people start showing up, we can do this differently at a later date. 
 6. Once a month, Charles will go through the list of startups who have signed up and pick one to spotlight. He'll interview them following a standard format and post it to our blog. 
 7. If a startup lets us know they have a launch coming up, we'll support them ad hoc on Twitter, Slack etc. 
+
+> The PostHog for Startups deal is also posted on our profile at [F6S here](https://www.f6s.com/company-deals/posthog/50k-in-credits-extras-13984). They still follow the same process as above. 
