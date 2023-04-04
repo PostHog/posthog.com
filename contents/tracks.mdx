@@ -1,5 +1,5 @@
 ---
-title: PostHog Academy
+title: PostHog Tracks
 showTitle: false
 showSidebar: true
 width: md
@@ -13,11 +13,11 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 import CommunityCTA from 'components/CommunityCTA'
 
 <Hero
-    title="PostHog Academy"
+    title="PostHog Tracks"
     subtitle="Curated lesson tracks from our engineers and users, to help you get even more from PostHog"
 />
 
-PostHog Academy helps Engineering and Product teams understand how to make the most of PostHog, and build better products. It's a curated track of tutorials and other lessons which cover common use-cases for particular roles, as well as general advice for all users - and it's constantly expanding!
+PostHog Tracks is a curated course of tutorials and other lessons which cover common use-cases for particular roles, as well as general advice for all users - and it's constantly expanding!
 
 <p class="my-4 flex space-x-2 items-center justify-center">
 <CallToAction href="/tutorials">Browse all tutorials</CallToAction> 
@@ -72,6 +72,18 @@ Sometimes, you just need to talk to your users. We'll help you find the right on
   "/tutorials/explore-insights-session-recordings"
 ]} />
 
+### PostHog academy series
+
+Want to understand the fundamentals of using data, talking to users and building products? We've got you covered. 
+
+<TutorialsSlider slugs={[
+  "/blog/what-is-product-analytics",
+  "/blog/how-to-do-user-segmentation",
+  "/blog/how-to-product-market-fit",
+  "/blog/how-to-measure-product-engagement",
+  "/blog/how-to-work-out-what-users-need"
+]} />
+
 <CommunityCTA />
 
 <section class="my-24 px-5">
@@ -89,9 +101,3 @@ Sometimes, you just need to talk to your users. We'll help you find the right on
     </ul>
   </div>
 </section>
-<p class="text-center p-4">
-Building your own product? Apply to our startup programme!
-</p>
-<p class="text-center p-4">
-<CallToAction href="/startups" type="outline">Apply now</CallToAction>
-</p>
