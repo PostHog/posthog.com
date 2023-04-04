@@ -19,6 +19,17 @@ Every Friday we update this page with the latest new features, fixes, and update
 
 > Some new features you read about below may still be in beta, behind a feature flag, or only available to paying users. Want to see which betas are currently available? [Check the roadmap](/roadmap)!
 
+## April 7, 2023
+
+> There was no Changelog update last week because the team was away at our annual company offsite. We'll have some info on what we got up to on [the blog](/blog) soon!
+
+### Dashboard template library
+![posthog dashboard templates](../images/blog/array/template-library.png)
+
+We've not only created a wealth of new dashboard templates to help you get started, we've also created [a public library](/templates) to help you navigate and understand them. You can now effortlessly [build an AARRR dashboard in PostHog](/templates/aarrr-dashboard), as well as use dashboard templates for other typical use-cases. There are now more than 10 templates to choose from!
+
+These improvements came out of our company hackathon, which took place at our offsite in Aruba. Every year, we challenge everyone to pitch ideas and then develop them over a short period and present to the rest of the company. This idea was proposed by our technical content marketer, [Ian Vanagas](/handbook/company/team) - so be sure to let him know what you think of it in [the Slack](/slack)!
+
 ## March 24, 2023 
 
 #### Autocapture toggle
