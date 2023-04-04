@@ -97,10 +97,6 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
             }),
         })
 
-        const data = await res.json()
-
-        console.log(data)
-
         mutate()
     }
 
@@ -110,7 +106,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         question: questionData,
         reply,
         error,
-        isLoading,
+        isLoading: isLoading && !questionData,
         isError: error,
     }
 
