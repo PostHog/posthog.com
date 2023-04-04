@@ -1,6 +1,6 @@
 ---
-date: 2023-03-25
-title: Our journey with multi product pricing 
+date: 2023-04-04
+title: What we've learned so far about multi product pricing, and our future plans
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -16,7 +16,7 @@ PostHog started as a single product company. We just sold product analytics with
 
 We charged by event ingested. Obviously, we wound up with abuse - a handful of high volume users would send zero events, but would use our Javascript snippet to do just session replay, to store _millions_ of recordings.
 
-We decided a multi product pricing strategy had long term advantages  , and - to be frank - we had to stop people abusing recording, and we didn't want to limit it for users already paying us a healthy amount.
+We decided a multi product pricing strategy had long term advantages, and - to be frank - we had to stop people abusing recording, and we didn't want to limit it for users already paying us a healthy amount.
 
 ## It's a way to take extra products seriously
 
@@ -32,28 +32,42 @@ We put a small team on it, who quickly iterated with customers and improved the 
 
 Growth of session replay took off - it now has similar daily usage to product analytics.
 
-## Outcompete on price, sustainably
+## Focusing on paying customers can improve the free product
+
+Intuitively, if someone is paying, they will have a higher expectation.
+
+However, the secondary effect we didn't anticipate is that fixing the smaller issues can lead to much more usage from both paid and free users. It turns out that in 2021, a lot of UX weirdness and buginess we had was affecting all users of our platform, but our free users weren't complaining that loudly.
+
+As context, PostHog spent the first year and a half prioritizing our open source project - we wanted to build an inbound sales model, so we could double down on product rather than investing in cold calling. Leverage, baby. This meant we'd need a great free product and a reasonably large community. After 18 months, we were ready to focus on our first paid product - product analytics.
+
+Our only company goal at this point was to get 5 reference, paying customers. By going really deep with this handful, we realized that we needed to improve our funnel experience - a core part of our product. We '[nailed funnels](new-vp-nailing-funnels)', and revenue started climbing as a result. However, delightfully, our _free_ user numbers also started growing much faster.
+
+This journey has since repeated itself with session recording. We have a small team of 2 working on this product, and we set them the goal in Q4 last year of charging for their product and getting their first paying customers. Since the free and paid session recording products are the same, except for a usage limit with the free product, focusing on more-demanding, paid users led to similar quality improvements. 
+
+And, better yet, it's very easy to justify making improvements for paying customers, since it's long-term sustainable.
+
+## Our current thining - outcompeting on price, sustainably
 
 Do you want to buy 5 individual products at $10 each, or all 5 for $20?
 
 Charging by product means you can outcompete all of your competitors on price.
 
-We don't actually do this yet - we don't think we've enough data on cross-selling to know that we'd get it right, so we'll figure that out over the next year and hopefully will be able to lower prices as a result.
+To get to this point, we're starting to build data on cross-selling to know that we'd get it right, so we'll figure that out over the next year and hopefully will be able to lower prices as a result.
 
-Disclaimer: this also depends where in the market you focus and how price sensitive it is.
+If you're thinking about applying this concept to your business, success depends on where in the market you focus (you need to be able to sell more to the same users, ideally - to avoid a complex sales motion) and how price sensitive they are. If people don't care about price in your market, there's no point either.
 
 ## More autonomy for small teams
 
-We have a small team for each of our products - from 2 to 6 people. The concept is a small team should be able to ship into production with as little outside interference as possible. Each team is designed to work like a startup. Our reasoning? If we want a wide product, we need to optimize for speed over control... and startups get the most functionality built per person.
+One of the core learnings we've already had is that a small team structure suits a multi product approach really well. The concept is a small, multi-disciplinary team should be able to ship into production with as little outside interference as possible. Each team is designed to work like a startup. Our reasoning? If we want a wide product, we need to optimize for speed over control... and startups get the most functionality built per person. You won't manage to compete on both _polish_ via controlling a team more tightly _and_ being wider at the same time, which requires autonomy.
 
-In the long run, we want each small team to have control over their pricing - they've got all the user context after all, and they can get some coaching on how to do this from others in the company if needed.
+Our pricing plans feed into this. In the long run, we want each small team to have control over their pricing - they've got all the user context after all, and they can get some coaching on how to do this from others in the company if needed.
 
 ## Long term it's a clever way to scale exponentially, we think
 
-We charged for session recording in December. By March, it's 10% of our revenue. Most of the users paying are new.
+We charged for session recording in December. By March, it was 10% of our revenue. Most of the users paying are new.
 
 That sounds good, but in absolute terms - we'd get double the revenue from it with the same engineering input if we were twice the size when we launched it. As we get bigger and we ship more products, each one will get more traction with the same cost to deliver it. And, in fact, each new product brings us more top-of funnel growth - since it means there are more reasons for people to find PostHog in the first place.
 
 ## What's the catch
 
-We have the world's most complex internal billing and reporting system. We knew it'd need to be hyperflexible to cope with a wide range of differently-structured pricing mechanisms. We keep adding more functionality into it. Send help! We'd love any recommendations you may have.
+We have a hideously complex internal billing and reporting system. We knew it'd need to be hyperflexible to cope with a wide range of differently-structured pricing mechanisms hence the decision to build it. We keep adding more functionality into it. Send help! We'd love any recommendations you may have. We know usage based pricing is becoming much more normal, thankfully.
