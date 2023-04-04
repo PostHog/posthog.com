@@ -5,7 +5,7 @@ import SEO from 'components/seo'
 import Layout from 'components/Layout'
 import PostLayout from 'components/PostLayout'
 import Link from 'components/Link'
-import { Authentication, SignIn } from 'components/Squeak'
+import { Authentication, SignIn, SignUp } from 'components/Squeak'
 import { useUser } from 'hooks/useUser'
 import Modal from 'components/Modal'
 import EditProfile from 'components/Profiles/EditProfile'
@@ -55,7 +55,15 @@ export const Login = ({ onSubmit = () => undefined }: { onSubmit?: () => void })
             <SignIn onSuccess={onSubmit} />
         </>
     ) : state === 'signup' ? (
-        <div></div>
+        <>
+            <p className="m-0 text-sm font-bold dark:text-white">
+                Note: PostHog.com authentication is separate from your PostHog app.
+            </p>
+            <p className="text-sm mt-2 dark:text-white">
+                We suggest signing up with your personal email. Soon you'll be able to link your PostHog app account.
+            </p>
+            <SignUp onSuccess={onSubmit} />
+        </>
     ) : (
         <>
             <p className="m-0 text-sm dark:text-white">

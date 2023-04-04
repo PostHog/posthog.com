@@ -1,7 +1,6 @@
 import { useContext } from 'react'
 import React, { createContext, useEffect, useState } from 'react'
 import getGravatar from 'gravatar'
-import { post } from 'components/Squeak/lib/api'
 import qs from 'qs'
 import { ProfileData, StrapiRecord, StrapiResult } from 'lib/strapi'
 
@@ -107,6 +106,8 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                     encodeValuesOnly: true,
                 }
             )
+
+            // TODO: Abstract this so signUp can share
             const profileRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles?${profileQuery}`, {
                 headers: {
                     'Content-Type': 'application/json',
@@ -159,27 +160,72 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         firstName: string
         lastName: string
     }): Promise<User | null> => {
-        const gravatar = getGravatar.url(email)
-        const avatar = await fetch(`https:${gravatar}?d=404`).then((res) => (res.ok && `https:${gravatar}`) || '')
+        try {
+            const gravatar = getGravatar.url(email)
+            const avatar = await fetch(`https:${gravatar}?d=404`).then((res) => (res.ok && `https:${gravatar}`) || '')
 
-        // FIXME: This doesn't seem to return the right format
-        const { error, data } =
-            (await post(apiHost, '/api/register', {
-                email,
-                password,
-                firstName,
-                lastName,
-                avatar,
-            })) || {}
+            const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/auth/local/register`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: email,
+                    email,
+                    password,
+                    firstName,
+                    lastName,
+                }),
+            })
 
-        if (error) {
-            // setMessage(error.message)
-            // TODO: Should probably throw here
-            return null
-        } else {
-            // setUser(data)
-            // let user = await getSession()
+            if (!res.ok) {
+                return null
+            }
 
+            const userData = await res.json()
+
+            const profileRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    data: {
+                        user: userData.user.id,
+                        firstName,
+                        lastName,
+                    },
+                    populate: ['avatar'],
+                }),
+            })
+
+            if (!profileRes.ok) {
+                return null
+            }
+
+            const { data: profileData }: { data: StrapiRecord<ProfileData> } = await profileRes.json()
+
+            console.log(profileData)
+
+            const user: User = {
+                ...userData.user,
+                profile: {
+                    ...profileData,
+                    avatar: {
+                        url: avatar,
+                    },
+                },
+            }
+
+            localStorage.setItem('user', JSON.stringify(user))
+            localStorage.setItem('jwt', userData.jwt)
+
+            setUser(user)
+            setJwt(userData.jwt)
+
+            return user
+        } catch (error) {
+            console.error(error)
             return null
         }
     }
