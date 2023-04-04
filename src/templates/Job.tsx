@@ -62,7 +62,8 @@ export default function Job({
 }) {
     const timezone = parent?.customFields?.find(({ title }) => title === 'Timezone(s)')?.value
     const salaryRole = parent?.customFields?.find(({ title }) => title === 'Salary')?.value || title
-
+    const missionAndObjectives = parent?.customFields?.find(({ title }) => title === 'Mission & objectives')?.value
+    const showObjectives = missionAndObjectives !== 'false'
     const menu = [
         {
             name: 'Work at PostHog',
@@ -106,7 +107,7 @@ export default function Job({
                                 : {}),
                         },
                         {
-                            ...(objectives
+                            ...(showObjectives && objectives
                                 ? { value: "Your team's mission and objectives", url: 'mission-objectives', depth: 0 }
                                 : {}),
                         },
@@ -226,7 +227,7 @@ export default function Job({
                                         </div>
                                     </Accordion>
                                 )}
-                                {objectives && (
+                                {showObjectives && objectives && (
                                     <Accordion title="Your team's mission and objectives" id="mission-objectives">
                                         <div className="mb-6">
                                             <MDXProvider components={{ HideFromJobPosting: () => null }}>
