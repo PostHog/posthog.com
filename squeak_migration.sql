@@ -3,7 +3,8 @@
 -- Import users
 SELECT
     DISTINCT users.email,
-    sp.first_name || ' ' || sp.last_name AS username,
+    -- sp.first_name || ' ' || sp.last_name AS username,
+    users.email AS username,
     'local' AS provider,
     users.encrypted_password AS password,
     users.confirmed_at IS NULL AS confirmed,
