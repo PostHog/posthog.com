@@ -35,7 +35,7 @@ export const quickLinks = [
         name: 'Common questions',
         to: '/docs/experiments/common-questions',
         description: 'Common questions when setting up experiments and how to solve them.',
-    }
+    },
 ]
 
 type ExperimentsProps = {

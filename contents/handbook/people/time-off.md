@@ -90,7 +90,7 @@ The birthday gift usually arrives on the day of or 1-3 days prior to the birthda
 
 ### Anniversaries
 
-On your first-year anniversary with PostHog, you will receive a giftcard from [Giftogram](https://giftogram.com/) which can be used on a wide selection of brands. On your second-year anniversary you'll be gifted a [customized Lego minifig](https://minifig.fab-bricks.com/) in a display case, and on your third-year anniversary, you'll receive a personalized gift from [Batch](batchusa.com). 
+On your first-year anniversary with PostHog, you will receive a giftcard from [Giftogram](https://giftogram.com/) which can be used on a wide selection of brands. On your second-year anniversary you'll be gifted a [customized Lego minifig](https://minifig.fab-bricks.com/) in a display case, and on your third-year anniversary, you'll receive a personalized gift from [Batch](https://batchusa.com). 
 
 1st year anniversary - $50 for US gift cards/$55 for for all other countries gift cards to cover service fees:
 

@@ -135,10 +135,6 @@ const linklist: IProps[] = [
                 url: '/contributors',
             },
             {
-                title: 'Partners',
-                url: '/partners',
-            },
-            {
                 title: 'Newsletter',
                 url: '/newsletter',
             },
