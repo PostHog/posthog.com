@@ -32,7 +32,7 @@ export default function QuestionPage(props: QuestionPageProps) {
                         </Link>
                     </div>
 
-                    <Question id={props.params.permalink} />
+                    <Question id={props.params.permalink} expanded={true} />
                 </section>
             </PostLayout>
         </Layout>

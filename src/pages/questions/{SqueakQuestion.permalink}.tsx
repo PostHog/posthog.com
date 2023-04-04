@@ -45,7 +45,11 @@ export default function QuestionPage(props: QuestionPageProps) {
                         </Link>
                     </div>
 
-                    <Question id={props.data.squeakQuestion.squeakId} question={props.data.squeakQuestion} />
+                    <Question
+                        id={props.data.squeakQuestion.squeakId}
+                        question={props.data.squeakQuestion}
+                        expanded={true}
+                    />
                 </section>
             </PostLayout>
         </Layout>
