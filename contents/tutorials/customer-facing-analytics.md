@@ -8,7 +8,7 @@ featuredImage: ../images/tutorials/banners/tutorial-9.png
 topics: ['insights']
 ---
 
-If your users have their own users, sometimes your users want analytics about their users. For example, if you are a host, content platform, or some other type of B2B2C product, your users might want to know their traffic or usage metrics. Customer-facing analytics are analytics you capture and display to your users to fulfill this need.
+If you are a host, content platform, or some other type of B2B2C product, your users might want to know their traffic or usage metrics. To put it another way: if your users have their own users, sometimes your users want analytics about their users. Customer-facing analytics are analytics you capture and display to your users to fulfill this need.
 
 This tutorial shows you how to set up customer-facing analytics using PostHog and its API, Next.js, and Tremor (a React visualization library). You need a PostHog instance ([sign up for free](https://app.posthog.com/signup)) as well as a way to filter your analytics for an individual user, such as a user or group property (like name, domain, ID).
 
@@ -23,7 +23,7 @@ First, create insights to act as a reference for your customer-facing dashboard.
 - form submissions
 - button clicks
 
-These all must be filterable by a group or person property so you can show each user the insights relevant to them. As an example, we will create two insights, a pageview line graph and an "insights created" number. We filter them for the group named "PostHog" as an example of a filter. 
+These must all be filterable by a group or person property so you can show each user the insights relevant to them. As an example, we will create two insights, a pageview line graph and an "insights created" number. We filter them for the group named "PostHog" as an example of a filter. 
 
 ![Insight](../images/tutorials/customer-facing-analytics/insight.png)
 
@@ -39,7 +39,7 @@ These sample insights help us figure out the params to make API requests to filt
 
 Next, we need to set up the API requests to get the data from PostHog for our customer-facing insights. To do this, we will use the `<ph_instance_address>/api/projects/<project_id>/insights/trend` endpoint with `events`, `display`, and `properties` params, but we need to figure out these params first.
 
-To quickly figure out the params for our request, we can make a different request to each of the insights individually. To do this, get the "short ID" from the URL of each of the insights, it is an eight character value like `HmKFweHR`:
+To quickly figure out the params for our request, we can make a different request to each of the insights individually. To do this, get the "short ID" from the URL of each of the insights. It is an eight character value like `HmKFweHR`:
 
 ![Short ID](../images/tutorials/customer-facing-analytics/short-id.png)
 
@@ -65,7 +65,7 @@ The objects and arrays we want are under `results` → `filters` → `events`, `
 
 ## Creating our customer-facing analytics Next.js app
 
-You will likely build customer-facing analytics into your app, but for this tutorial, we build ours as a [Next.js app](/tutorials/nextjs-analytics). The first step is to create a basic Next.js app:
+You will likely build customer-facing analytics into your app, but for this tutorial, we'll build ours as a [Next.js app](/tutorials/nextjs-analytics). The first step is to create a basic Next.js app:
 
 ```bash
 npx create-next-app@latest
