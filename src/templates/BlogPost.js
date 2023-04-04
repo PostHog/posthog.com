@@ -25,6 +25,7 @@ import { NewsletterForm } from 'components/NewsletterForm'
 import blogMenu from 'components/Blog/blogMenu'
 import blog from 'sidebars/blog.json'
 import slugify from 'slugify'
+import TutorialsSlider from 'components/TutorialsSlider'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
@@ -131,6 +132,7 @@ export default function BlogPost({ data, pageContext, location }) {
         blockquote: Blockquote,
         img: ZoomImage,
         a: A,
+        TutorialsSlider,
         ...shortcodes,
     }
     const { tableOfContents } = pageContext
