@@ -4,7 +4,7 @@ import { Link } from 'gatsby'
 import { quickLinks as productAnalyticsLinks } from '../../pages/docs/product-analytics'
 import { quickLinks as featureFlagsLinks } from '../../pages/docs/feature-flags'
 import { quickLinks as experimentsLinks } from '../../pages/docs/experiments'
-import { quickLinks as sessionRecordingLinks } from '../../pages/docs/session-recording'
+import { quickLinks as sessionRecordingLinks } from '../../pages/docs/session-replay'
 import { quickLinks as dataLinks } from '../../pages/docs/data'
 import { CallToAction } from 'components/CallToAction'
 
@@ -60,7 +60,7 @@ export const ProductAnalytics = () => {
 
 export const SessionRecording = () => {
     return (
-        <NextStep title="Session recording" url="/docs/session-recording" links={sessionRecordingLinks}>
+        <NextStep title="Session recording" url="/docs/session-replay" links={sessionRecordingLinks}>
             <StaticImage
                 alt=""
                 placeholder="none"

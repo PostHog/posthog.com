@@ -44,10 +44,14 @@ Examples of unacceptable behavior include:
 The following are not allowed within any community space without prior permission 
 from the community moderators:
 
-- Pitching of a business, product, or service
-- Market or competitor research
+- Pitching of a business, product, or service (outside of the introductions channel). Keep it non spammy!
+- Trying to hire the PostHog core team to work on your thing. We need them to build our thing.
+- Market or competitor research. This is just annoying.
+- Encouraging a fork of the main PostHog project or promoting / soliciting people to build a service that competes directly with us. You may be able to do some of this legally, but if it's successful it would harm our project's performance. So, it's not in the project's interest to provide a place to promote something like this. If you want to partner, email sales at our company.com so we can work something out.
 
-Contact the community moderators via hey@posthog.com.
+It's feasible that a community member may do something outside of the list above that we've not foreseen which isn't in the project's best interest. We will handle these cases carefully when they come up and will edit these guidelines accordingly.
+
+If you're unsure, contact the community moderators via hey@posthog.com.
 
 ## Enforcement responsibilities
 

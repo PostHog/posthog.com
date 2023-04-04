@@ -189,7 +189,6 @@ export default function Handbook({
     pageContext: { menu, breadcrumb = [], breadcrumbBase, tableOfContents, searchFilter },
     location,
 }) {
-    const { hash } = useLocation()
     const {
         body,
         frontmatter,
@@ -249,12 +248,6 @@ export default function Handbook({
         CategoryData,
         ...shortcodes,
     }
-
-    useEffect(() => {
-        if (hash) {
-            scroll.scrollMore(-50)
-        }
-    }, [])
 
     return (
         <>

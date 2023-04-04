@@ -73,11 +73,11 @@ We are aware that there are local laws around time off for new parents in every 
 
 ## Birthday and anniversaries
 
-We celebrate all the big and little milestones at PostHog, including birthdays and work anniversaries. We celebrate each team member as a reminder of how much we appreciate them. Coua is currently responsible for organizing these. 
+We celebrate all the big and little milestones at PostHog, including birthdays and work anniversaries. We celebrate each team member as a reminder of how much we appreciate them. Kendal is currently responsible for organizing these. 
 
 ### Birthdays
 
-We have partnered with [Batch](https://batchusa.com/pages/about-us) to send all team members a personalized giftset for their birthday. All gifts are to arrive 1-3 business days prior to the actual day. 
+We have partnered with [Batch](https://batchusa.com/pages/about-us) to send all team members a personalized giftset for their birthday.
 
 These are the steps for making an order:
 
@@ -85,14 +85,14 @@ These are the steps for making an order:
 2. Bri will send an invoice to be paid with steps on how to make the purchase payment
 3. All set! 
 
-Birthday gifts will usually arrive on the day of or 1-3 days prior to the actual birthday. US shipping is free, while EU will have additional fees.
+The birthday gift usually arrives on the day of or 1-3 days prior to the birthday. Shipping fees: US shipping is free while all other countries will have shipping fees. 
 
 
 ### Anniversaries
 
 On your first-year anniversary with PostHog, you will receive a giftcard from [Giftogram](https://giftogram.com/) which can be used on a wide selection of brands. On your second-year anniversary you'll be gifted a [customized Lego minifig](https://minifig.fab-bricks.com/) in a display case, and on your third-year anniversary, you'll receive a personalized gift from [Batch](https://batchusa.com). 
 
-1st year anniversary - $50 for US gift cards/$55 for EU gift cards to cover service fees):
+1st year anniversary - $50 for US gift cards/$55 for for all other countries gift cards to cover service fees:
 
 1. Login into [Giftogram](https://app.giftogram.com/sign-in) by using your gmail credentials
 2. Two ways to create a new Giftogram, on the tool bar above where it says “Create and Send'' or you can click on the right hand side on the blue button “Send a Giftogram''. 
@@ -116,4 +116,4 @@ On your first-year anniversary with PostHog, you will receive a giftcard from [G
 1. Complete all necessary information on the “Third Anniversary tab” with the [customer order sheet](https://docs.google.com/spreadsheets/d/1OhYz-ws20VKtQ0NnoCEzw1i4V4XAiz3e/edit?usp=sharing&ouid=109235309101749414478&rtpof=true&sd=true) and send to Bri Nightingale, CSM at bri@batchusa.com 
 2. Bri will send an invoice to be paid with steps on how to make the purchase payment
 
-Gift(s) will usually arrive on the day of or 1-3 days prior to the actual anniversary date. Shipping fees: US shipping is free while EU will have additional fees for shipping.
+The gift will usually arrive on the day of or 1-3 days prior to the anniversary date. Shipping fees: US shipping is free while all other countries will have shipping fees. 

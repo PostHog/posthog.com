@@ -13,6 +13,7 @@ import { LPCTA } from './components/LPCTA'
 import { NewsletterTutorial } from './components/NewsletterTutorial'
 import { OverflowXSection } from './components/OverflowXSection'
 import { Quote } from './components/Pricing/Quote'
+import { ProductLayout } from './components/ProductLayout'
 import { Quote2 } from './components/Quote2'
 import { Squeak } from './components/Squeak'
 import { StarRepoButton } from './components/StarRepoButton'
@@ -31,6 +32,7 @@ export const shortcodes = {
     NewsletterTutorial,
     OverflowXSection,
     Quote,
+    ProductLayout,
     Quote2,
     Squeak,
     StarRepoButton,

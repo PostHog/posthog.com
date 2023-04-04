@@ -49,7 +49,7 @@ export const benefits = [
     {
         title: 'Unlimited vacation (with a minimum!)',
         details:
-            'Time away from work is important, so we’ve got unlimited time off (25 days per year minimum required!), sick leave and generous parental leave.',
+            'Time away from work is important, so we’ve got unlimited time off (25 days per year minimum required!), plus sick leave and generous parental leave.',
         image: ptoImg,
     },
     {
@@ -59,22 +59,22 @@ export const benefits = [
     },
     {
         title: 'Home office',
-        details: 'We provide all equipment needed have an ergonomic setup at home to be as productive as possible',
+        details: 'We provide all equipment needed have an ergonomic setup at home to be as productive as possible.',
         image: homeOfficeImg,
     },
     {
-        title: 'Coworking Credit',
-        details: '$200/month budget towards co-working or café working',
+        title: 'Coworking credit',
+        details: 'Generous budget towards co-working or café working.',
         image: coworkingCreditImg,
     },
     {
-        title: 'Medical, Dental and Vision Insurance',
-        details: 'US & UK only',
+        title: 'Private health, dental, and vision insurance.',
+        details: 'US, Canada, & UK only',
         image: insuranceImg,
     },
     {
         title: 'Training budget',
-        details: 'Free books and Audible subscription',
+        details: 'Generous annual budget, plus free books and Audible subscription.',
         image: trainingBudgetImg,
     },
     {
@@ -88,19 +88,18 @@ export const benefits = [
         image: carbonOffsettingImg,
     },
     {
-        title: '401k/pension contributions',
-        details: 'We care about you, so investing in your future is important to us.',
+        title: 'Pension & 401k contributions',
+        details: `Because one day you'll need it.`,
         image: retirementImg,
     },
     {
-        title: 'Spill mental health chat',
-        details: 'Sometimes it’s good to chat to someone if you aren’t feeling yourself.',
+        title: 'We hire and pay locally',
+        details: 'Get hired through a local subsidiary in most countries via Deel EOR.',
         image: spillMentalHealthImg,
     },
     {
         title: 'Company offsites',
-        details:
-            'Each year we organise fully paid company offsites - last year we went to Iceland! Sometimes it’s good to speak face to face.',
+        details: `Each year we organize fully paid company offsites - this year it's Aruba! Sometimes it’s good to speak face to face.`,
         image: companyOffsitesImg,
     },
 ]

@@ -51,7 +51,7 @@ const gettingStarted: IFeature[] = [
 
 const products: IFeature[] = [
     { title: 'Product analytics', icon: <Analytics />, url: '/docs/product-analytics' },
-    { title: 'Session recording', icon: <SessionRecording />, url: '/docs/session-recording' },
+    { title: 'Session recording', icon: <SessionRecording />, url: '/docs/session-replay' },
     { title: 'Feature flags', icon: <FeatureFlags />, url: '/docs/feature-flags' },
     { title: 'A/B testing', icon: <AbTesting />, url: '/docs/experiments' },
     { title: 'Data', icon: <Projects />, url: '/docs/data' },

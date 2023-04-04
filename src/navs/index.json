@@ -1,10 +1,10 @@
 {
     "main": [
         {
-            "title": "Product",
-            "url": "/product",
+            "title": "Products",
+            "url": "/product-analytics",
             "sub": {
-                "component": "Product"
+                "component": "Products"
             }
         },
         {

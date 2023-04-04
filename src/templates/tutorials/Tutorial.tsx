@@ -90,15 +90,8 @@ export default function Tutorial({ data, pageContext: { tableOfContents, menu },
         a: A,
         ...shortcodes,
     }
-    const { hash } = useLocation()
     const breakpoints = useBreakpoint()
     const [view, setView] = useState('Article')
-
-    useEffect(() => {
-        if (hash) {
-            scroll.scrollMore(-50)
-        }
-    }, [])
 
     return (
         <Layout>
