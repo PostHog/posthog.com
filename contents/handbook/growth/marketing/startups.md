@@ -53,7 +53,7 @@ Charles
 
 ### Startup of the month
 
-Each month, we'll pick a startup to highlight. Charles will interview them and then write up the responses as a blog post which we'll also publish on Twitter, LinkedIn and User Slack.
+Each month, we'll pick a startup to highlight. Charles will interview them and then write up the responses as a blog post which we'll also publish on Twitter, LinkedIn and user Slack.
 
 The questions follow a standard format:
 
