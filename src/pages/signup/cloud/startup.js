@@ -1,11 +1,8 @@
-import Contact from 'components/Contact'
 import { SEO } from 'components/seo'
 import Intro from 'components/SignUp/Intro'
 import Layout from 'components/SignUp/Layout'
 import React, { useEffect, useState } from 'react'
 import HubspotForm from 'react-hubspot-form'
-import { Plan } from 'components/Pricing/PricingTable/Plan'
-import { CallToAction } from 'components/CallToAction'
 
 export default function SelfHost() {
     const [submitted, setSubmitted] = useState(false)
@@ -49,12 +46,13 @@ export default function SelfHost() {
                     <div className="max-w-xl mx-auto mt-12">
                         <h2>Apply for the PostHog for startups program</h2>
                         {submitted ? (
-                            <p className="pt-2 pb-4">Thanks for applying - we will be in touch soon.</p>
+                            <p className="pt-2 pb-4">Thanks for applying - we will be in touch within 48 hours.</p>
                         ) : (
                             <>
                                 <p className="pt-2 pb-4">
-                                    Just fill out this painless form once you've subscribed to PostHog and we will be in
-                                    touch.
+                                    Once you've{' '}
+                                    <a href="https://app.posthog.com/signup">subscribed to the Scale billing plan</a> in
+                                    PostHog, fill this form in and we will review your application.
                                 </p>
                                 <HubspotForm
                                     portalId="6958578"
