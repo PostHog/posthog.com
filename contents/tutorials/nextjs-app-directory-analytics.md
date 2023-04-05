@@ -1,6 +1,6 @@
 ---
 title: How to set up Next.js 13 app directory analytics, feature flags, and more
-date: 2023-04-04
+date: 2023-04-05
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
