@@ -7,7 +7,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
     pluginOptions
 ) => {
     const { apiHost } = pluginOptions
-    const { createNode, createParentChildLink } = actions
+    const { createNode } = actions
 
     // Fetch all profiles
     let page = 1
@@ -94,14 +94,19 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
         for (let question of questions.data) {
             const { topics, replies, profile, ...rest } = question.attributes
 
+            if (!profile.data?.id) {
+                console.warn(`Question ${question.id} has no profile`)
+                continue
+            }
+
             createNode({
                 type: `SqueakQuestion`,
                 id: createNodeId(`squeak-question-${question.id}`),
+                squeakId: question.id,
                 internal: {
                     contentDigest: createContentDigest(question),
                     type: `SqueakQuestion`,
                 },
-                squeakId: question.id,
                 ...(profile.data && { profile: { id: createNodeId(`squeak-profile-${profile.data.id}`) } }),
                 replies: replies.data.map((reply) => ({
                     id: createNodeId(`squeak-reply-${reply.id}`),
@@ -331,7 +336,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             squeakId: Int!
             body: String!
             createdAt: Date! @dateformat
-            profile: SqueakProfile
+            profile: SqueakProfile! @link(by: "id", from: "profile.id")
             replies: [SqueakReply!] @link(by: "id", from: "replies.id")
             topics: [SqueakTopic!] @link(by: "id", from: "topics.id")
         }
@@ -341,7 +346,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             squeakId: Int!
             body: String!
             createdAt: Date! @dateformat
-            profile: SqueakProfile
+            profile: SqueakProfile! @link(by: "id", from: "profile.id")
             question: SqueakQuestion! @link(from: "id", to: "question")
         }
 

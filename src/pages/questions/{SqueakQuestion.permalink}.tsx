@@ -22,7 +22,7 @@ type QuestionPageProps = {
             permalink: string
             resolved: boolean
             profile: {
-                id: number
+                squeakId: number
                 avatar: {
                     url: string
                 }
@@ -36,7 +36,7 @@ type QuestionPageProps = {
                 id: number
                 publishedAt: string
                 profile: {
-                    id: number
+                    squeakId: number
                     avatar: {
                         url: string
                     }
@@ -55,11 +55,11 @@ type QuestionPageProps = {
 }
 
 export default function QuestionPage(props: QuestionPageProps) {
-    if (!props?.data?.squeakQuestion) {
+    const { squeakQuestion } = props.data
+
+    if (!squeakQuestion || !squeakQuestion?.profile) {
         return null
     }
-
-    const { squeakQuestion } = props.data
 
     // Remap the data to match the Strapi format
     const question: StrapiRecord<QuestionData> = {
@@ -70,13 +70,13 @@ export default function QuestionPage(props: QuestionPageProps) {
             resolved: squeakQuestion.resolved,
             profile: {
                 data: {
-                    id: squeakQuestion.profile.id,
+                    id: squeakQuestion.profile.squeakId,
                     attributes: {
                         avatar: {
                             data: {
                                 id: 0,
                                 attributes: {
-                                    url: squeakQuestion.profile.avatar.url,
+                                    url: squeakQuestion.profile.avatar?.url,
                                 },
                             },
                         },
@@ -95,13 +95,13 @@ export default function QuestionPage(props: QuestionPageProps) {
                         publishedAt: reply.publishedAt,
                         profile: {
                             data: {
-                                id: reply.profile.id,
+                                id: reply.profile.squeakId,
                                 attributes: {
                                     avatar: {
                                         data: {
                                             id: 0,
                                             attributes: {
-                                                url: reply.profile?.avatar?.url,
+                                                url: reply.profile.avatar?.url,
                                             },
                                         },
                                     },
@@ -146,7 +146,7 @@ export const query = graphql`
             permalink
             resolved
             profile {
-                id
+                squeakId
                 avatar {
                     url
                 }
@@ -157,9 +157,9 @@ export const query = graphql`
                 label
             }
             replies {
-                id
+                squeakId
                 profile {
-                    id
+                    squeakId
                     avatar {
                         url
                     }
