@@ -101,7 +101,7 @@ export default function QuestionPage(props: QuestionPageProps) {
                                         data: {
                                             id: 0,
                                             attributes: {
-                                                url: reply.profile.avatar.url,
+                                                url: reply.profile?.avatar?.url,
                                             },
                                         },
                                     },
