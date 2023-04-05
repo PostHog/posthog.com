@@ -12,7 +12,7 @@ We've organized the team into small teams that are multi-disciplinary and as sel
 Our small teams are:
 
 - [Product Analytics](/handbook/small-teams/product-analytics)
-- [Experimentation](/handbook/small-teams/experimentation)
+- [Feature success](/handbook/small-teams/feature-success)
 - [Session Recording](/handbook/small-teams/session-recording)
 - [Infrastructure](/handbook/small-teams/infrastructure)
 - [Pipeline](/handbook/small-teams/pipeline)
