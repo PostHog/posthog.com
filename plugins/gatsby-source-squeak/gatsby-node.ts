@@ -331,7 +331,6 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             squeakId: Int!
             body: String!
             createdAt: Date! @dateformat
-            updatedAt: Date! @dateformat
             profile: SqueakProfile
             replies: [SqueakReply!] @link(by: "id", from: "replies.id")
             topics: [SqueakTopic!] @link(by: "id", from: "topics.id")
@@ -342,7 +341,6 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             squeakId: Int!
             body: String!
             createdAt: Date! @dateformat
-            updatedAt: Date! @dateformat
             profile: SqueakProfile
             question: SqueakQuestion! @link(from: "id", to: "question")
         }
