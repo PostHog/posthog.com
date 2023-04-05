@@ -21,13 +21,13 @@ Mintlify is a docs startup used by teams at [Y Combinator](/customers/ycombinato
 
 Mintlify has used PostHog internally since launch, making regular use of both the product analytics and session recording tools to help it build better products. 
 
-“We use the product analytics tools, such as funnels, a lot,” says Han Wong, Mintlify’s CEO and Founder. “We also use session recordings too. I actually had to use it last night, to investigate errors on a particular setup. We’ve found recordings particularly useful for support issues like that, but we’re constantly tracking things… Is this CTA engaging? How popular is this page? We monitor everything in PostHog to help us decide where to focus.”
+“We use the product analytics tools, such as funnels, a lot,” says Han Wang, Mintlify’s CEO and Founder. “We also use session recordings too. I actually had to use it last night, to investigate errors on a particular setup. We’ve found recordings particularly useful for support issues like that, but we’re constantly tracking things… Is this CTA engaging? How popular is this page? We monitor everything in PostHog to help us decide where to focus.”
 
 <BorderWrapper>
     <Quote
         imageSource="/images/customers/han.png"
         size="md"
-        name="Han Wong"
+        name="Han Wang"
         title="Founder & CEO, Mintlify"
         quote={`“You can quote me on this: PostHog is awesome. It’s a great tool. I’ve used a bunch of different analytics platforms in the past and PostHog stands out for it’s developer friendliness and user experience. I really, really love it.”`}
     />
