@@ -31,7 +31,7 @@ export interface IRoadmap {
     dateCompleted: string
     title: string
     description: string
-    team: ITeam
+    teams: ITeam[]
     githubPages: IGitHubPage[]
     projectedCompletion: string
 }
@@ -47,10 +47,9 @@ function group(nodes) {
 }
 
 export default function Changelog() {
-    return null
-
     const {
-        allSqueakRoadmap: { nodes, teams, categories },
+        allSqueakRoadmap: { nodes, categories },
+        allSqueakTeam,
     } = useStaticQuery(query)
     const [roadmap, setRoadmap] = useState(group(nodes))
     const [filters, setFilters] = useState({})
@@ -58,6 +57,7 @@ export default function Changelog() {
     const handleCategoryChange = (e, type, checked) => {
         const newFilters = { ...filters }
         const { value } = e.target
+
         if (checked) {
             if (newFilters[type]) {
                 newFilters[type].push(value)
@@ -115,15 +115,16 @@ export default function Changelog() {
                     <div>
                         <h5 className="m-0 mb-2">Team</h5>
                         <ul className="list-none m-0 p-0 flex space-x-4">
-                            {teams.map(({ fieldValue }, index) => {
-                                const checked = filters?.team?.includes(fieldValue) || false
+                            {allSqueakTeam.nodes.map(({ name }, index) => {
+                                const checked = filters?.teams?.includes(name) || false
+
                                 return (
-                                    <li key={fieldValue}>
+                                    <li key={name}>
                                         <Checkbox
                                             className="!text-sm"
                                             checked={checked}
-                                            onChange={(e) => handleCategoryChange(e, 'team', !checked)}
-                                            value={fieldValue}
+                                            onChange={(e) => handleCategoryChange(e, 'teams', !checked)}
+                                            value={name}
                                             id={`team-${index}`}
                                         />
                                     </li>
@@ -149,16 +150,19 @@ export default function Changelog() {
                                         </p>
                                     </div>
                                     <ul className="list-none p-0 m-0 grid gap-y-1 pb-8 ">
-                                        {roadmap[date].map(({ title, githubPages, otherLinks, team }: IRoadmap) => {
+                                        {roadmap[date].map(({ title, githubPages, otherLinks, teams }: IRoadmap) => {
                                             const url =
                                                 (githubPages?.length > 0 && githubPages[0]?.html_url) ||
                                                 (otherLinks?.length > 0 && otherLinks[0])
+
                                             return (
                                                 <li key={title} className="flex items-center space-x-2">
                                                     <span className="font-semibold">
                                                         {url ? <Link to={url}>{title}</Link> : title}
                                                     </span>
-                                                    {team && <span className="text-black/50">{team.name}</span>}
+                                                    {teams.map((team) => (
+                                                        <span className="text-black/50">{team.name}</span>
+                                                    ))}
                                                 </li>
                                             )
                                         })}
@@ -182,7 +186,7 @@ const query = graphql`
                 dateCompleted
                 title
                 description
-                team {
+                teams {
                     name
                 }
                 githubPages {
@@ -198,11 +202,13 @@ const query = graphql`
                 }
                 projectedCompletion
             }
-            teams: group(field: team___name) {
-                fieldValue
-            }
             categories: group(field: category) {
                 fieldValue
+            }
+        }
+        allSqueakTeam {
+            nodes {
+                name
             }
         }
     }
