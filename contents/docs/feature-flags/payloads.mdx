@@ -1,0 +1,36 @@
+---
+title: Feature Flag payloads
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
+---
+
+## Payloads
+
+A feature flag payload is an additional pieces of information that is sent along to your app when a flag is matched for a user. The returned value can be any valid JSON type (object, array, number, string, Boolean or null).
+For boolean based feature flags, you can specify a payload to be returned when the flag is true. For multviariate flags, you can define a payload for each of the variants of the flag. 
+
+## Use cases
+
+Payloads give you the ability to configure functionality related to your flag right inside PostHog without limits. For example, if you wanted to flag the color and size of a button, you now can specify a payload that provides 
+a size value and a color value. Without payloads, you would have to have used the feature flag key as the value that determines the configuration of the button or write in your code a dictionary/switch of options based on the flag values. 
+
+## Using payloads in your code
+
+To illustrate how feature flag payloads can be used, the javascript implementation will be demonstrated.
+
+```js
+// payload for 'checkout-button-color' defined as:
+// {
+//    color: 'black',
+//    size: 50
+// }
+
+if (posthog.getFeatureFlag('checkout-button-color') === 'black') {
+    const buttonConfig = posthog.getFeatureFlagPayload('keyword')
+    // do something
+}
+```
+
+The feature flag payload retrieval function is a separate function that can be called to obtain the payload associated with the flag
