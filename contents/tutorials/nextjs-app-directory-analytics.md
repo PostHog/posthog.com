@@ -8,7 +8,7 @@ featuredImage: ../images/tutorials/banners/nextjs-analytics.png
 tags: ["configuration", "feature flags", "events"]
 ---
 
-The latest Next.js release 13 added many improvements including its Turbopack bundler, an improved `next/image` component, changes to the `Link` component, and more. One of the big ones was the move from the `pages` to the `app` directory.
+Next.js release 13 added many improvements including the Turbopack bundler, an improved `next/image` component, changes to the `Link` component, and more. One of the big ones was the move from the `pages` to the `app` directory.
 
 The `app` directory includes support for layouts, server components, streaming, and component-level data fetching. These are all upgrades to the Next.js `pages` directory, but change the implementation of a Next.js app, including setting up PostHog. This tutorial goes over how to implement PostHog on the client and server side when using the Next.js 13 app directory. 
 
@@ -92,7 +92,7 @@ After setting this up, events start being autocaptured into your PostHog instanc
 
 ## Capturing pageviews on the client side
 
-Next.js 13 with the app directory replaces `next/router` with `next/navigation.` This means we need a new implementation for capturing pageviews beyond the first-page load (because Next.js acts as a [single-page app](/tutorials/single-page-app-pageviews)). Luckily, we can add the code to handle this into our `provider.js` file.
+When used with the app directory, Next.js 13 replaces `next/router` with `next/navigation.` This means we need a new implementation for capturing pageviews beyond the first-page load because Next.js acts as a [single-page app](/tutorials/single-page-app-pageviews). Luckily, we can add the code to handle this into our `provider.js` file.
 
 To start, we need another page to navigate to. In the app folder, create a new folder named `about` and create a `page.js` file inside with a basic component.
 
